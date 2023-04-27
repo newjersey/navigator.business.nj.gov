@@ -1,7 +1,6 @@
 import { RegisteredForTaxesModal } from "@/components/RegisteredForTaxesModal";
 import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
-import { generateProfileData, generateUserData } from "@/test/factories";
 import { fillText, selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import {
@@ -10,8 +9,13 @@ import {
   triggerQueueUpdate,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { LegalStructures, LookupOwnershipTypeById, UserData } from "@businessnjgovnavigator/shared";
-import { generateMunicipality } from "@businessnjgovnavigator/shared/test";
+import {
+  generateProfileData,
+  LegalStructures,
+  LookupOwnershipTypeById,
+  UserData,
+} from "@businessnjgovnavigator/shared";
+import { generateMunicipality, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 
 const Config = getMergedConfig();

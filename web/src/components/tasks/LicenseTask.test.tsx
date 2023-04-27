@@ -1,15 +1,14 @@
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import * as api from "@/lib/api-client/apiClient";
-import {
-  generateLicenseData,
-  generateLicenseStatusItem,
-  generateNameAndAddress,
-  generateProfileData,
-  generateTask,
-  generateUserData,
-} from "@/test/factories";
+import { generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { generateLicenseData, generateProfileData } from "@businessnjgovnavigator/shared";
+import {
+  generateLicenseStatusItem,
+  generateNameAndAddress,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 

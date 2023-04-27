@@ -1,14 +1,6 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { templateEval } from "@/lib/utils/helpers";
-import {
-  generatePreferences,
-  generateProfileData,
-  generateTaxFilingData,
-  generateUser,
-  generateUserData,
-  randomLegalStructure,
-} from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
@@ -17,7 +9,19 @@ import {
   renderPage,
   runSelfRegPageTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
-import { createEmptyUserData, generateMunicipality, ProfileData } from "@businessnjgovnavigator/shared/";
+import {
+  createEmptyUserData,
+  generateMunicipality,
+  generateProfileData,
+  generateTaxFilingData,
+  ProfileData,
+} from "@businessnjgovnavigator/shared/";
+import {
+  generatePreferences,
+  generateUser,
+  generateUserData,
+  randomLegalStructure,
+} from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, screen, waitFor, within } from "@testing-library/react";
 
@@ -255,6 +259,7 @@ describe("onboarding - owning a business", () => {
         legalStructureId: "c-corporation",
         businessPersona: "OWNING",
       }),
+      onboardingFormProgress: "COMPLETED",
     });
     const { page } = renderPage({ userData: initialUserData });
     expect(page.getRadioButton("Business Status - Owning")).toBeChecked();
@@ -278,6 +283,7 @@ describe("onboarding - owning a business", () => {
       preferences: generatePreferences({
         visibleSidebarCards: ["welcome"],
       }),
+      onboardingFormProgress: "COMPLETED",
     });
     const { page } = renderPage({ userData: initialUserData });
     expect(page.getRadioButton("Business Status - Owning")).toBeChecked();

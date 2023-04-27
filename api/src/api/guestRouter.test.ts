@@ -2,18 +2,16 @@ import { NameAvailability } from "@shared/businessNameSearch";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import {
   generateBusinessNameAvailability,
+  generateProfileData,
+  generateTaxFilingData,
+  generateUser,
+  generateUserData,
   getFirstAnnualFiling,
   getSecondAnnualFiling,
   getThirdAnnualFiling,
 } from "@shared/test";
 import { Express } from "express";
 import request from "supertest";
-import {
-  generateProfileData,
-  generateTaxFilingData,
-  generateUser,
-  generateUserData,
-} from "../../test/factories";
 import { generateAnnualFilings } from "../../test/helpers";
 import { TimeStampBusinessSearch } from "../domain/types";
 import { setupExpress } from "../libs/express";

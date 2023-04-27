@@ -1,4 +1,4 @@
-import { generateUser, generateUserData } from "../../../test/factories";
+import { generateUser, generateUserData } from "@shared/test";
 import { AddNewsletter, NewsletterClient } from "../types";
 import { addNewsletterFactory } from "./addNewsletterFactory";
 

@@ -1,12 +1,12 @@
 import { TaxFiling, TaxFilingLookupState, TaxFilingState } from "@shared/taxFiling";
-import { UserData } from "@shared/userData";
 import {
   generatePreferences,
   generateTaxFiling,
   generateTaxFilingData,
   generateTaxIdAndBusinessName,
   generateUserData,
-} from "../../../test/factories";
+} from "@shared/test";
+import { UserData } from "@shared/userData";
 import { TaxFilingClient, TaxFilingInterface } from "../types";
 import { taxFilingsInterfaceFactory } from "./taxFilingsInterfaceFactory";
 

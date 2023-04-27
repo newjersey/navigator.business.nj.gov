@@ -1,5 +1,6 @@
 import { LicenseEntity, LicenseStatusResult } from "@shared/license";
-import { generateLicenseEntity, generateNameAndAddress } from "../../../test/factories";
+import { generateNameAndAddress } from "@shared/test";
+import { generateLicenseEntity } from "../../../test/factories";
 import { LicenseStatusClient, SearchLicenseStatus } from "../types";
 import { determineLicenseStatus, searchLicenseStatusFactory } from "./searchLicenseStatusFactory";
 

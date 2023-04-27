@@ -3,14 +3,6 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-import {
-  generateFormationData,
-  generateGetFilingResponse,
-  generateProfileData,
-  generateTaxFilingData,
-  generateUserData,
-  randomLegalStructure,
-} from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -26,10 +18,18 @@ import {
   createEmptyFormationFormData,
   FormationData,
   FormationLegalType,
+  generateUserData,
   getCurrentDateISOString,
   OperatingPhases,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import {
+  generateFormationData,
+  generateGetFilingResponse,
+  generateProfileData,
+  generateTaxFilingData,
+  randomLegalStructure,
+} from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
@@ -70,7 +70,7 @@ const renderUnauthenticatedFilingsCalendarTaxAccess = (initialUserData?: UserDat
 describe("<FilingsCalendarTaxAccess />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockUserData({});
+    useMockUserData({ onboardingFormProgress: "COMPLETED" });
     setRegistrationModalIsVisible = jest.fn();
     setupStatefulUserDataContext();
     useMockRouter({});
@@ -229,6 +229,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
         taxFilingData: generateTaxFilingData({
           state: "FAILED",
           businessName: userDataWithPrefilledFields.profileData.businessName,
+          errorField: undefined,
         }),
       });
       openModal();
@@ -315,7 +316,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       mockApi.postTaxFilingsOnboarding.mockImplementation(() => {
         return Promise.resolve({
           ...userDataWithPrefilledFields,
-          taxFilingData: generateTaxFilingData({ state: "FAILED" }),
+          taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: undefined }),
         });
       });
       openModal();
@@ -528,7 +529,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       mockApi.postTaxFilingsOnboarding.mockImplementation(() => {
         return Promise.resolve({
           ...userDataWithPrefilledFields,
-          taxFilingData: generateTaxFilingData({ state: "FAILED" }),
+          taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: undefined }),
         });
       });
       openModal();
@@ -730,6 +731,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
           taxFilingData: generateTaxFilingData({
             state: "FAILED",
             registeredISO: undefined,
+            errorField: undefined,
           }),
         });
         expect(mockApi.postTaxFilingsLookup).not.toHaveBeenCalled();

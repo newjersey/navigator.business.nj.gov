@@ -1,6 +1,6 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { defaultDisplayDateFormat } from "@/lib/types/types";
-import { generateFormationDbaContent, generateUserData } from "@/test/factories";
+import { generateFormationDbaContent } from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -16,6 +16,7 @@ import {
   FormationFormData,
   generateFormationFormData,
   generateMunicipality,
+  generateUserData,
   getCurrentDate,
   getCurrentDateFormatted,
   Municipality,

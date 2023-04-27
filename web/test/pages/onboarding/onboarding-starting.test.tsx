@@ -1,7 +1,6 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-import { generateProfileData, generateUser, generateUserData } from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
@@ -15,6 +14,9 @@ import {
   createEmptyUser,
   createEmptyUserData,
   generateMunicipality,
+  generateProfileData,
+  generateUser,
+  generateUserData,
   LookupIndustryById,
   ProfileData,
   UserData,

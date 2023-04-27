@@ -5,10 +5,10 @@ import { useUserData, UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
-import { generateRoadmap, generateUser, generateUserData } from "@/test/factories";
+import { generateRoadmap } from "@/test/factories";
 import { withAuth, withUserDataError } from "@/test/helpers/helpers-renderers";
 import { generateUseUserDataResponse } from "@/test/mock/mockUseUserData";
-import { BusinessUser } from "@businessnjgovnavigator/shared/";
+import { BusinessUser, generateUser, generateUserData } from "@businessnjgovnavigator/shared/";
 import { act, render, waitFor } from "@testing-library/react";
 import { SWRConfig } from "swr";
 

@@ -1,10 +1,10 @@
+import { generateInputFile } from "@/test/factories";
 import {
-  generateInputFile,
   generateNameAndAddress,
   generateTaxIdAndBusinessName,
   generateUser,
   generateUserData,
-} from "@/test/factories";
+} from "@businessnjgovnavigator/shared/test";
 import axios from "axios";
 import {
   checkLicenseStatus,

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { generateUserData } from "@shared/test";
 import * as Airtable from "airtable";
-import { generateFeedbackRequest, generateIssueRequest, generateUserData } from "../../test/factories";
+import { generateFeedbackRequest, generateIssueRequest } from "../../test/factories";
 import { FeedbackClient } from "../domain/types";
 import { LogWriter, LogWriterType } from "../libs/logWriter";
 import { AirtableFeedbackClient } from "./AirtableFeedbackClient";

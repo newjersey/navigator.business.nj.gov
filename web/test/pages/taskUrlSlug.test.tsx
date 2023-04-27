@@ -1,14 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { createEmptyTaskDisplayContent, Task } from "@/lib/types/types";
 import TaskPage from "@/pages/tasks/[taskUrlSlug]";
-import {
-  generateProfileData,
-  generateStep,
-  generateTask,
-  generateTaskLink,
-  generateUserData,
-  randomPublicFilingLegalType,
-} from "@/test/factories";
+import { generateStep, generateTask, generateTaskLink, randomPublicFilingLegalType } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
@@ -16,7 +9,12 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { formationTaskId, UserData } from "@businessnjgovnavigator/shared";
+import {
+  formationTaskId,
+  generateProfileData,
+  generateUserData,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";

@@ -1,7 +1,6 @@
 import { FormationDateModal } from "@/components/FormationDateModal";
 import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
-import { generateProfileData, generateUserData } from "@/test/factories";
 import { selectDate, selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
 import {
   currentUserData,
@@ -12,6 +11,8 @@ import {
 import {
   defaultDateFormat,
   generateMunicipality,
+  generateProfileData,
+  generateUserData,
   getCurrentDate,
   UserData,
 } from "@businessnjgovnavigator/shared";

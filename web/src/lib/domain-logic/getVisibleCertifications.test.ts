@@ -1,4 +1,5 @@
-import { generateCertification, generatePreferences, generateUserData } from "@/test/factories";
+import { generateCertification } from "@/test/factories";
+import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { getVisibleCertifications } from "./getVisibleCertifications";
 
 describe("getVisibleCertifications", () => {

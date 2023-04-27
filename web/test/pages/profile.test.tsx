@@ -10,14 +10,7 @@ import { templateEval } from "@/lib/utils/helpers";
 import Profile from "@/pages/profile";
 import {
   allLegalStructuresOfType,
-  generateFormationData,
-  generateGetFilingResponse,
-  generateProfileData,
-  generateTaxFilingData,
-  generateUser,
-  generateUserData as _generateUserData,
   randomHomeBasedIndustry,
-  randomLegalStructure,
   randomNonHomeBasedIndustry,
   randomPublicFilingLegalStructure,
   randomTradeNameLegalStructure,
@@ -50,6 +43,7 @@ import {
   FormationData,
   formationTaskId,
   generateMunicipality,
+  generateProfileData,
   getCurrentDate,
   getCurrentDateFormatted,
   LookupIndustryById,
@@ -65,6 +59,14 @@ import {
   TaskProgress,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import {
+  generateFormationData,
+  generateGetFilingResponse,
+  generateTaxFilingData,
+  generateUser,
+  generateUserData as _generateUserData,
+  randomLegalStructure,
+} from "@businessnjgovnavigator/shared/test";
 
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -964,6 +966,7 @@ describe("profile", () => {
             sectorId: undefined,
             ...emptyIndustrySpecificData,
           }),
+          onboardingFormProgress: "COMPLETED",
         });
         renderPage({
           userData,
@@ -1109,6 +1112,7 @@ describe("profile", () => {
           industryId: "generic",
           legalStructureId: randomPublicFilingLegalStructure(),
         }),
+        onboardingFormProgress: "COMPLETED",
       });
       const newark = generateMunicipality({ displayName: "Newark" });
 

@@ -21,8 +21,18 @@ import {
   publicFilingLegalTypes,
 } from "../formationData";
 import { randomInt, randomIntFromInterval } from "../intHelpers";
+import { Municipality } from "../municipality";
 import { arrayOfStateObjects as states } from "../states";
-import { generateMunicipality } from "./factories";
+
+export const generateMunicipality = (overrides: Partial<Municipality>): Municipality => {
+  return {
+    displayName: `some-display-name-${randomInt()}`,
+    name: `some-name-${randomInt()}`,
+    county: `some-county-${randomInt()}`,
+    id: `some-id-${randomInt()}`,
+    ...overrides,
+  };
+};
 
 export const generateFormationUSAddress = (overrides: Partial<FormationAddress>): FormationAddress => {
   return {

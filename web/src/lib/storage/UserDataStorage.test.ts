@@ -1,5 +1,5 @@
 import { swrPrefixToIgnore, userDataPrefix, UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
-import { generateUserData } from "@/test/factories";
+import { generateUserData } from "@businessnjgovnavigator/shared";
 
 describe("userDataStorage", () => {
   const storage = UserDataStorageFactory();

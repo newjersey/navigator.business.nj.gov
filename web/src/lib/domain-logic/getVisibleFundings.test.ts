@@ -1,4 +1,5 @@
-import { generateFunding, generatePreferences, generateUserData } from "@/test/factories";
+import { generateFunding } from "@/test/factories";
+import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { getVisibleFundings } from "./getVisibleFundings";
 
 describe("getVisibleFundings", () => {

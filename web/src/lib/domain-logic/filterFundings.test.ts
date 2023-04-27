@@ -1,7 +1,11 @@
 import { filterFundings } from "@/lib/domain-logic/filterFundings";
 import { SMALL_BUSINESS_MAX_EMPLOYEE_COUNT } from "@/lib/domain-logic/smallBusinessEnterprise";
-import { generateFunding, generateProfileData, generateUserData } from "@/test/factories";
-import { generateMunicipality } from "@businessnjgovnavigator/shared/test";
+import { generateFunding } from "@/test/factories";
+import {
+  generateMunicipality,
+  generateProfileData,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
 
 describe("filterFundings", () => {
   it("shows home-based-business yes or unknown when user home-based-business is true", () => {

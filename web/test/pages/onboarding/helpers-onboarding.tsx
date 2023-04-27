@@ -9,7 +9,6 @@ import {
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
 import Onboarding from "@/pages/onboarding";
-import { generateProfileData, generateUser, generateUserData, randomLegalStructure } from "@/test/factories";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
@@ -19,8 +18,12 @@ import {
   createEmptyUser,
   createEmptyUserData,
   DateObject,
+  generateProfileData,
+  generateUser,
+  generateUserData,
   Industries,
   Municipality,
+  randomLegalStructure,
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import {
