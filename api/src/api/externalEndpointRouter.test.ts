@@ -1,12 +1,8 @@
+import { generateUser, generateUserData } from "@shared/test";
 import { Express } from "express";
 import jwt from "jsonwebtoken";
 import request from "supertest";
-import {
-  generateFeedbackRequest,
-  generateIssueRequest,
-  generateUser,
-  generateUserData,
-} from "../../test/factories";
+import { generateFeedbackRequest, generateIssueRequest } from "../../test/factories";
 import { AddNewsletter, AddToUserTesting, FeedbackClient, UserDataClient } from "../domain/types";
 import { setupExpress } from "../libs/express";
 import { externalEndpointRouterFactory } from "./externalEndpointRouter";

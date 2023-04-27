@@ -1,12 +1,16 @@
 import { TaskHeader } from "@/components/TaskHeader";
 import { getMergedConfig } from "@/contexts/configContext";
 import { Task } from "@/lib/types/types";
-import { generateStep, generateTask, generateUserData } from "@/test/factories";
+import { generateStep, generateTask } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { formationTaskId, TaskProgress, UserData } from "@businessnjgovnavigator/shared";
-import { generateFormationData, generateGetFilingResponse } from "@businessnjgovnavigator/shared/test";
+import {
+  generateFormationData,
+  generateGetFilingResponse,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 

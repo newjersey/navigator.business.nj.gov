@@ -5,10 +5,12 @@ import {
   generateFormationData,
   generateFormationSubmitResponse,
   generateGetFilingResponse,
+  generateProfileData,
+  generateUserData,
 } from "@shared/test";
 import { Express } from "express";
 import request from "supertest";
-import { generateInputFile, generateProfileData, generateUserData } from "../../test/factories";
+import { generateInputFile } from "../../test/factories";
 import { saveFileFromUrl } from "../domain/s3Writer";
 import { FormationClient, UserDataClient } from "../domain/types";
 import { setupExpress } from "../libs/express";

@@ -1,4 +1,4 @@
-import { generateProfileData, generateUserData } from "../../../test/factories";
+import { generateProfileData, generateUserData } from "@shared/test";
 import { EncryptionDecryptionClient, EncryptTaxId } from "../types";
 import { encryptTaxIdFactory } from "./encryptTaxIdFactory";
 

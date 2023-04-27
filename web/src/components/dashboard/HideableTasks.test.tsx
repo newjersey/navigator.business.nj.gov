@@ -1,10 +1,10 @@
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
-import { generateStep, generateTask, generateUserData } from "@/test/factories";
+import { generateStep, generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import { generatePreferences } from "@businessnjgovnavigator/shared/test";
+import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 

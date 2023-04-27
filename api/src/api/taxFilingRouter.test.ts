@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { generateTaxIdAndBusinessName } from "@shared/test";
+import { generateTaxFilingData, generateTaxIdAndBusinessName, generateUserData } from "@shared/test";
 import { Express } from "express";
 import request from "supertest";
-import { generateTaxFilingData, generateUserData } from "../../test/factories";
 import { EncryptionDecryptionClient, TaxFilingInterface, UserDataClient } from "../domain/types";
 import { setupExpress } from "../libs/express";
 import { taxFilingRouterFactory } from "./taxFilingRouter";

@@ -1,8 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { generateLicenseStatusItem, generateNameAndAddress } from "@shared/test";
+import {
+  generateLicenseData,
+  generateLicenseStatusItem,
+  generateNameAndAddress,
+  generateUserData,
+} from "@shared/test";
 import { Express } from "express";
 import request from "supertest";
-import { generateLicenseData, generateUserData } from "../../test/factories";
 import { setupExpress } from "../libs/express";
 import { licenseStatusRouterFactory } from "./licenseStatusRouter";
 import { getSignedInUserId } from "./userRouter";

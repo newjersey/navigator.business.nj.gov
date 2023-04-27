@@ -4,11 +4,7 @@ import { OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   generateOperateReference,
-  generateProfileData,
-  generateTaxFilingData,
-  generateUserData,
   publicFilingLegalStructures,
-  randomLegalStructure,
   tradeNameLegalStructures,
 } from "@/test/factories";
 import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
@@ -28,7 +24,14 @@ import {
   TaxFiling,
   UserData,
 } from "@businessnjgovnavigator/shared/index";
-import { generatePreferences, generateTaxFiling } from "@businessnjgovnavigator/shared/test";
+import {
+  generatePreferences,
+  generateProfileData,
+  generateTaxFiling,
+  generateTaxFilingData,
+  generateUserData,
+  randomLegalStructure,
+} from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, within } from "@testing-library/react";

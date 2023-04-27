@@ -1,5 +1,5 @@
 import { SectionAccordion } from "@/components/dashboard/SectionAccordion";
-import { generateRoadmap, generateStep, generateUserData } from "@/test/factories";
+import { generateRoadmap, generateStep } from "@/test/factories";
 import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,
@@ -7,7 +7,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { SectionType, UserData } from "@businessnjgovnavigator/shared/";
-import { generatePreferences } from "@businessnjgovnavigator/shared/test";
+import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

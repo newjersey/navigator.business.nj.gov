@@ -4,10 +4,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { Task } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import {
-  generateProfileData,
   generateTask,
-  generateTaxFilingData,
-  generateUserData,
   randomPublicFilingLegalStructure,
   randomTradeNameLegalStructure,
 } from "@/test/factories";
@@ -21,7 +18,13 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData as _WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { randomInt, UserData } from "@businessnjgovnavigator/shared";
+import {
+  generateProfileData,
+  generateTaxFilingData,
+  generateUserData,
+  randomInt,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { ReactElement, ReactNode } from "react";
 

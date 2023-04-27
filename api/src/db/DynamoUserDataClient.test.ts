@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-import { generateUser, generateUserData } from "../../test/factories";
+import { generateUser, generateUserData } from "@shared/test";
 import { UserDataClient } from "../domain/types";
 import { dynamoDbTranslateConfig, DynamoUserDataClient } from "./DynamoUserDataClient";
 

@@ -2,13 +2,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { Task } from "@/lib/types/types";
 import { getDollarValue } from "@/lib/utils/formatters";
-import {
-  generateEmptyFormationData,
-  generateFormationDbaContent,
-  generateProfileData,
-  generateTask,
-  generateUserData,
-} from "@/test/factories";
+import { generateEmptyFormationData, generateFormationDbaContent, generateTask } from "@/test/factories";
 import {
   generateFormationProfileData,
   preparePage,
@@ -29,6 +23,8 @@ import {
   generateFormationData,
   generateFormationSubmitResponse,
   generateGetFilingResponse,
+  generateProfileData,
+  generateUserData,
 } from "@businessnjgovnavigator/shared/test/";
 
 import { Content } from "@/components/Content";

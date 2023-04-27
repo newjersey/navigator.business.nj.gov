@@ -3,7 +3,8 @@ import {
   getIncompleteTaskCount,
   getTotalTaskCount,
 } from "@/lib/domain-logic/roadmapTaskCounters";
-import { generateRoadmap, generateTask, generateUserData } from "@/test/factories";
+import { generateRoadmap, generateTask } from "@/test/factories";
+import { generateUserData } from "@businessnjgovnavigator/shared";
 
 describe("Roadmap Task Counters", () => {
   describe("getTotalTaskCount", () => {

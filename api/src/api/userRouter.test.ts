@@ -5,6 +5,11 @@ import {
   generateFormationData,
   generateFormationSubmitResponse,
   generateGetFilingResponse,
+  generateLicenseData,
+  generateProfileData,
+  generateTaxFilingData,
+  generateUser,
+  generateUserData,
   getFirstAnnualFiling,
   getSecondAnnualFiling,
   getThirdAnnualFiling,
@@ -13,13 +18,6 @@ import dayjs from "dayjs";
 import { Express } from "express";
 import jwt from "jsonwebtoken";
 import request from "supertest";
-import {
-  generateLicenseData,
-  generateProfileData,
-  generateTaxFilingData,
-  generateUser,
-  generateUserData,
-} from "../../test/factories";
 
 import { generateAnnualFilings, getLastCalledWith } from "../../test/helpers";
 import { EncryptionDecryptionClient, TimeStampBusinessSearch, UserDataClient } from "../domain/types";

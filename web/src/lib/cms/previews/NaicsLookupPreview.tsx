@@ -5,7 +5,8 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
+import { generateTask } from "@/test/factories";
+import { generateProfileData, generateUserData } from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 
 const NaicsLookupPreview = (props: PreviewProps): ReactElement => {

@@ -1,7 +1,6 @@
 import analytics from "@/lib/utils/analytics";
-import { generateProfileData } from "@/test/factories";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
-import { Industries } from "@businessnjgovnavigator/shared/";
+import { generateProfileData, Industries } from "@businessnjgovnavigator/shared/";
 import { sendOnboardingOnSubmitEvents } from "./analytics-helpers";
 
 jest.mock("@/lib/utils/analytics");

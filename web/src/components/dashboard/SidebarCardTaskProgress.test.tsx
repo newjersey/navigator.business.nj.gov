@@ -1,15 +1,10 @@
 import { SidebarCardTaskProgress } from "@/components/dashboard/SidebarCardTaskProgress";
 import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
-import {
-  generateRoadmap,
-  generateSidebarCardContent,
-  generateStep,
-  generateTask,
-  generateUserData,
-} from "@/test/factories";
+import { generateRoadmap, generateSidebarCardContent, generateStep, generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { generateUserData } from "@businessnjgovnavigator/shared";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

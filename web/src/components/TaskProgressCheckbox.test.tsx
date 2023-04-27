@@ -3,7 +3,6 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { generateProfileData, generateUserData } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { selectDate } from "@/test/helpers/helpers-testing-library-selectors";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -17,6 +16,8 @@ import {
 import {
   defaultDateFormat,
   formationTaskId,
+  generateProfileData,
+  generateUserData,
   getCurrentDate,
   randomInt,
   TaskProgress,

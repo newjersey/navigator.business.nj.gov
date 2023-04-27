@@ -11,14 +11,11 @@ import {
   generateFormationNJAddress,
   generateFormationSigner,
   generateFormationUSAddress,
-} from "@shared/test";
-import axios from "axios";
-import {
-  generateFormationUserData,
-  generateInputFile,
   generateProfileData,
   generateUserData,
-} from "../../test/factories";
+} from "@shared/test";
+import axios from "axios";
+import { generateFormationUserData, generateInputFile } from "../../test/factories";
 import { FormationClient } from "../domain/types";
 import { LogWriter, LogWriterType } from "../libs/logWriter";
 import {

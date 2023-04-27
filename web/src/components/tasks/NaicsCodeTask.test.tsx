@@ -4,7 +4,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
 import { NaicsCodeObject, Task } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
+import { generateTask } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
@@ -13,7 +13,12 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { LookupIndustryById, UserData } from "@businessnjgovnavigator/shared";
+import {
+  generateProfileData,
+  generateUserData,
+  LookupIndustryById,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));

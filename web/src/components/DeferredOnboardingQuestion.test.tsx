@@ -1,7 +1,6 @@
 import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuestion";
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { getMergedConfig } from "@/contexts/configContext";
-import { generateProfileData, generateUserData } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentUserData,
@@ -9,6 +8,7 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { generateProfileData, generateUserData } from "@businessnjgovnavigator/shared";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";

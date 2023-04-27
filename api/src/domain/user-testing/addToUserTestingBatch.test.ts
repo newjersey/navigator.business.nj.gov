@@ -1,5 +1,5 @@
+import { generateUser, generateUserData } from "@shared/test";
 import { UserData } from "@shared/userData";
-import { generateUser, generateUserData } from "../../../test/factories";
 import { AddToUserTesting, UserDataClient, UserTestingClient } from "../types";
 import { addToUserTestingBatch } from "./addToUserTestingBatch";
 import { addToUserTestingFactory } from "./addToUserTestingFactory";

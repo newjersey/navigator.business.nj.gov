@@ -1,8 +1,12 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { OperateReference } from "@/lib/types/types";
-import { generateTaxFilingData, generateUserData } from "@/test/factories";
 import * as shared from "@businessnjgovnavigator/shared";
-import { defaultDateFormat, parseDateWithFormat } from "@businessnjgovnavigator/shared";
+import {
+  defaultDateFormat,
+  generateTaxFilingData,
+  generateUserData,
+  parseDateWithFormat,
+} from "@businessnjgovnavigator/shared";
 import { generateTaxFiling } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Dayjs } from "dayjs";

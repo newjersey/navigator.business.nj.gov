@@ -4,14 +4,13 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
 import { capitalizeFirstLetter, kebabSnakeSentenceToCamelCase } from "@/lib/utils/cases-helpers";
 import {
-  randomFilteredIndustry,
   randomHomeBasedIndustry,
-  randomIndustry,
   randomNegativeFilteredIndustry,
   randomNonHomeBasedIndustry,
 } from "@/test/factories";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
+import { randomFilteredIndustry, randomIndustry } from "@businessnjgovnavigator/shared";
 import {
   createEmptyProfileData,
   emptyIndustrySpecificData,

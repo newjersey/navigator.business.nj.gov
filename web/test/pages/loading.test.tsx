@@ -5,7 +5,6 @@ import * as signinHelper from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import LoadingPage, { signInSamlError } from "@/pages/loading";
-import { generateProfileData, generateUserData } from "@/test/factories";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
@@ -19,7 +18,11 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generatePreferences } from "@businessnjgovnavigator/shared/test";
+import {
+  generatePreferences,
+  generateProfileData,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 function setupMockAnalytics(): typeof analytics {
@@ -87,6 +90,7 @@ describe("loading page", () => {
     const userData = generateUserData({
       profileData: generateProfileData({ businessPersona: "STARTING" }),
       preferences: generatePreferences({ returnToLink: "/tasks/some-task" }),
+      onboardingFormProgress: "COMPLETED",
     });
     setupStatefulUserDataContext();
     render(
