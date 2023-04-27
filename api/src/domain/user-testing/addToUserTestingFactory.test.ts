@@ -1,4 +1,4 @@
-import { generateUser, generateUserData } from "../../../test/factories";
+import { generateUser, generateUserData } from "@shared/test";
 import { AddToUserTesting, UserTestingClient } from "../types";
 import { addToUserTestingFactory } from "./addToUserTestingFactory";
 

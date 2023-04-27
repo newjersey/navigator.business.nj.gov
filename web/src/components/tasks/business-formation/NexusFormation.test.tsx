@@ -6,12 +6,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { TasksDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import {
-  generateEmptyFormationData,
-  generateFormationDbaContent,
-  generateFormationSubmitResponse,
-  generateUserData,
-} from "@/test/factories";
+import { generateEmptyFormationData, generateFormationDbaContent } from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -24,6 +19,8 @@ import { currentUserData } from "@/test/mock/withStatefulUserData";
 import {
   defaultDateFormat,
   generateFormationFormData,
+  generateFormationSubmitResponse,
+  generateUserData,
   getCurrentDate,
   UserData,
 } from "@businessnjgovnavigator/shared";

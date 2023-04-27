@@ -22,179 +22,37 @@ import {
 } from "@/lib/types/types";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import {
-  AllBusinessSuffixes,
-  allFormationLegalTypes,
   arrayOfFundingAgencies,
   arrayOfOwnershipTypes as ownershipTypes,
-  arrayOfSectors as sectors,
   arrayOfStateObjects as states,
-  BusinessSuffix,
-  BusinessSuffixMap,
-  BusinessUser,
   createEmptyFormationFormData,
-  CURRENT_VERSION,
-  defaultDateFormat,
-  FormationData,
-  FormationLegalType,
   FormationSubmitError,
-  FormationSubmitResponse,
   FundingAgency,
-  generateFormationFormData,
-  generateMunicipality,
-  getCurrentDate,
-  getCurrentDateFormatted,
+  generateProfileData,
   getCurrentDateISOString,
-  GetFilingResponse,
-  Industries,
   Industry,
-  IndustrySpecificData,
   InputFile,
   LegalStructure,
   LegalStructures,
-  LicenseData,
-  LicenseStatusItem,
-  LicenseStatusResult,
   MunicipalityDetail,
-  NameAndAddress,
+  NameAvailability,
   OperatingPhaseId,
   OperatingPhases,
   OwnershipType,
-  Preferences,
   ProfileData,
   PublicFilingLegalType,
   publicFilingLegalTypes,
   randomInt,
   SectionType,
-  SectorType,
   StateObject,
-  TaxFiling,
-  TaxFilingData,
-  TaxFilingLookUpRequest,
-  UserData,
 } from "@businessnjgovnavigator/shared";
+import { FormationData } from "@businessnjgovnavigator/shared/formationData";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+import { randomFilteredIndustry, randomIndustry, randomSector } from "@businessnjgovnavigator/shared/test";
 
 export const generateSectionType = (): SectionType => {
   const num = randomInt();
   return num % 2 ? "PLAN" : "START";
-};
-
-export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => {
-  return {
-    name: `some-name-${randomInt()}`,
-    email: `some-email-${randomInt()}@example.com`,
-    id: `some-id-${randomInt()}`,
-    externalStatus: {},
-    receiveNewsletter: true,
-    userTesting: true,
-    abExperience: randomInt() % 2 === 0 ? "ExperienceA" : "ExperienceB",
-    ...overrides,
-  };
-};
-
-export const generateUserData = (overrides: Partial<UserData>): UserData => {
-  return {
-    version: CURRENT_VERSION,
-    versionWhenCreated: -1,
-    dateCreatedISO: undefined,
-    user: generateUser({}),
-    profileData: generateProfileData({}),
-    onboardingFormProgress: "COMPLETED",
-    taskProgress: {},
-    taskItemChecklist: {},
-    licenseData: generateLicenseData({}),
-    preferences: generatePreferences({}),
-    taxFilingData: generateTaxFilingData({}),
-    formationData: generateFormationData({}),
-    lastUpdatedISO: getCurrentDateISOString(),
-    ...overrides,
-  };
-};
-
-export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFilingData => {
-  return {
-    state: undefined,
-    businessName: undefined,
-    lastUpdatedISO: overrides.state ? getCurrentDateISOString() : undefined,
-    registeredISO: ["SUCCESS", "PENDING"].includes(overrides.state ?? "")
-      ? getCurrentDateISOString()
-      : undefined,
-    filings: [generateTaxFiling({})],
-    ...overrides,
-  };
-};
-
-export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
-  return {
-    identifier: `some-identifier-${randomInt()}`,
-    dueDate: getCurrentDate().format(defaultDateFormat),
-    ...overrides,
-  };
-};
-
-export const generateIndustrySpecificData = (
-  overrides: Partial<IndustrySpecificData>
-): IndustrySpecificData => {
-  return {
-    liquorLicense: !(randomInt() % 2),
-    requiresCpa: !(randomInt() % 2),
-    homeBasedBusiness: !(randomInt() % 2),
-    cannabisLicenseType: randomElementFromArray(["CONDITIONAL", "ANNUAL"]),
-    cannabisMicrobusiness: !(randomInt() % 2),
-    constructionRenovationPlan: !(randomInt() % 2),
-    providesStaffingService: !(randomInt() % 2),
-    certifiedInteriorDesigner: !(randomInt() % 2),
-    realEstateAppraisalManagement: !(randomInt() % 2),
-    carService: randomElementFromArray(["STANDARD", "HIGH_CAPACITY", "BOTH"]),
-    interstateLogistics: !(randomInt() % 2),
-    interstateMoving: !(randomInt() % 2),
-    isChildcareForSixOrMore: !(randomInt() % 2),
-    petCareHousing: !(randomInt() % 2),
-    willSellPetCareItems: !(randomInt() % 2),
-    ...overrides,
-  };
-};
-
-export const generateProfileData = (
-  overrides: Partial<ProfileData>,
-  canHavePermanentLocation?: boolean
-): ProfileData => {
-  const id = `some-id-${randomInt()}`;
-  const persona = randomInt() % 2 ? "STARTING" : "OWNING";
-  const industry = randomIndustry(canHavePermanentLocation);
-
-  return {
-    ...generateIndustrySpecificData({}),
-    businessPersona: persona,
-    businessName: `some-business-name-${randomInt()}`,
-    responsibleOwnerName: `some-responsible-owner-name-${randomInt()}`,
-    industryId: industry.id,
-    legalStructureId: randomLegalStructure().id,
-    municipality: generateMunicipality({}),
-    dateOfFormation: getCurrentDateFormatted(defaultDateFormat),
-    entityId: randomInt(10).toString(),
-    employerId: randomInt(9).toString(),
-    taxId: randomInt(12).toString(),
-    encryptedTaxId: undefined,
-    notes: `some-notes-${randomInt()}`,
-    ownershipTypeIds: [],
-    documents: {
-      certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
-      formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
-      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
-    },
-    existingEmployees: randomInt(7).toString(),
-    taxPin: randomInt(4).toString(),
-    sectorId: randomSector().id,
-    naicsCode: randomInt(6).toString(),
-    foreignBusinessType: undefined,
-    foreignBusinessTypeIds: [],
-    nexusLocationInNewJersey: undefined,
-    nexusDbaName: "",
-    needsNexusDbaName: false,
-    operatingPhase: "NEEDS_TO_FORM",
-    ...overrides,
-  };
 };
 
 export const getProfileDataForUnfilteredOpportunities = (): ProfileData => {
@@ -236,21 +94,6 @@ export const generateMunicipalityDetail = (overrides: Partial<MunicipalityDetail
     countyClerkPhone: `some-phone-${randomInt()}`,
     countyClerkWebsite: `some-clerk-webpage-${randomInt()}`,
     countyWebsite: `some-county-website-${randomInt()}`,
-    ...overrides,
-  };
-};
-
-export const generatePreferences = (overrides: Partial<Preferences>): Preferences => {
-  return {
-    roadmapOpenSections: ["PLAN", "START"],
-    roadmapOpenSteps: [randomInt()],
-    hiddenFundingIds: [],
-    hiddenCertificationIds: [],
-    visibleSidebarCards: ["welcome"],
-    returnToLink: "",
-    isCalendarFullView: !(randomInt() % 2),
-    isHideableRoadmapOpen: !(randomInt() % 2),
-    phaseNewlyChanged: false,
     ...overrides,
   };
 };
@@ -320,50 +163,11 @@ export const generateTaskLink = (overrides: Partial<TaskLink>): TaskLink => {
   };
 };
 
-export const generateNameAndAddress = (overrides: Partial<NameAndAddress>): NameAndAddress => {
+export const generateNameAvailability = (overrides: Partial<NameAvailability>): NameAvailability => {
   return {
-    name: `some-name-${randomInt()}`,
-    addressLine1: `some-address-1-${randomInt()}`,
-    addressLine2: `some-address-2-${randomInt()}`,
-    zipCode: `some-zipcode-${randomInt()}`,
-    ...overrides,
-  };
-};
-
-export const generateTaxIdAndBusinessName = (
-  overrides: Partial<TaxFilingLookUpRequest>
-): TaxFilingLookUpRequest => {
-  return {
-    businessName: `some-name-${randomInt()}`,
-    taxId: `${randomInt(12)}`,
-    encryptedTaxId: "random-encrypted-value",
-    ...overrides,
-  };
-};
-
-export const generateLicenseStatusItem = (overrides: Partial<LicenseStatusItem>): LicenseStatusItem => {
-  return {
-    title: `some-title-${randomInt()}`,
-    status: "ACTIVE",
-    ...overrides,
-  };
-};
-
-export const generateLicenseStatusResult = (overrides: Partial<LicenseStatusResult>): LicenseStatusResult => {
-  return {
-    status: "PENDING",
-    checklistItems: [generateLicenseStatusItem({})],
-    ...overrides,
-  };
-};
-
-export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseData => {
-  return {
-    nameAndAddress: generateNameAndAddress({}),
-    completedSearch: false,
-    items: [generateLicenseStatusItem({})],
-    status: "PENDING",
-    lastUpdatedISO: getCurrentDateISOString(),
+    status: "UNAVAILABLE",
+    similarNames: [`some-name-${randomInt()}`],
+    lastUpdatedTimeStamp: "2023-04-03T20:08:58Z",
     ...overrides,
   };
 };
@@ -402,21 +206,6 @@ export const generateStateItem = (): StateObject => {
   return randomElementFromArray(states);
 };
 
-export const generateFormationData = (
-  overrides: Partial<FormationData>,
-  legalStructureId?: FormationLegalType
-): FormationData => {
-  return {
-    formationFormData: generateFormationFormData({}, { legalStructureId }),
-    businessNameAvailability: undefined,
-    formationResponse: undefined,
-    getFilingResponse: undefined,
-    completedFilingPayment: false,
-    lastVisitedPageIndex: 0,
-    ...overrides,
-  };
-};
-
 export const generateEmptyFormationData = (): FormationData => {
   return {
     formationFormData: createEmptyFormationFormData(),
@@ -428,20 +217,6 @@ export const generateEmptyFormationData = (): FormationData => {
   };
 };
 
-export const generateFormationSubmitResponse = (
-  overrides: Partial<FormationSubmitResponse>
-): FormationSubmitResponse => {
-  return {
-    success: !!(randomInt() % 2),
-    token: `some-token-${randomInt()}`,
-    formationId: `some-id-${randomInt()}`,
-    redirect: `some-redirect-${randomInt()}`,
-    errors: [],
-    lastUpdatedISO: getCurrentDateISOString(),
-    ...overrides,
-  };
-};
-
 export const generateFormationSubmitError = (
   overrides: Partial<FormationSubmitError>
 ): FormationSubmitError => {
@@ -449,19 +224,6 @@ export const generateFormationSubmitError = (
     field: `some-field-${randomInt()}`,
     message: `some-message-${randomInt()}`,
     type: randomInt() % 2 ? "UNKNOWN" : "RESPONSE",
-    ...overrides,
-  };
-};
-
-export const generateGetFilingResponse = (overrides: Partial<GetFilingResponse>): GetFilingResponse => {
-  return {
-    success: true,
-    entityId: `some-entity-${randomInt()}`,
-    transactionDate: getCurrentDateISOString(),
-    confirmationNumber: `some-confirmation-number-${randomInt()}`,
-    formationDoc: `some-formation-doc-${randomInt()}`,
-    standingDoc: `some-standing-doc-${randomInt()}`,
-    certifiedDoc: `some-certified-doc-${randomInt()}`,
     ...overrides,
   };
 };
@@ -561,17 +323,6 @@ export const randomPublicFilingLegalType = (): PublicFilingLegalType => {
   return randomElementFromArray(publicFilingLegalTypes as unknown as string[]) as PublicFilingLegalType;
 };
 
-export const randomFormationLegalType = (): FormationLegalType => {
-  return randomElementFromArray(allFormationLegalTypes as unknown as string[]) as FormationLegalType;
-};
-
-export const randomBusinessSuffix = (legalStructureId?: FormationLegalType): BusinessSuffix => {
-  const legalSuffix = legalStructureId ? BusinessSuffixMap[legalStructureId] : undefined;
-  const suffixes = legalSuffix ?? AllBusinessSuffixes;
-  const randomIndex = Math.floor(Math.random() * suffixes.length);
-  return suffixes[randomIndex] as BusinessSuffix;
-};
-
 export const randomFundingStatus = (): FundingStatus => {
   const all = ["rolling application", "deadline", "first come, first serve", "closed"];
   const randomIndex = Math.floor(Math.random() * all.length);
@@ -631,17 +382,6 @@ export const randomCounty = (): County => {
   return AllCounties[randomIndex] as County;
 };
 
-export const randomLegalStructure = (publicFiling?: {
-  requiresPublicFiling: boolean | undefined;
-}): LegalStructure => {
-  const _requiresPublicFiling = publicFiling?.requiresPublicFiling ?? Boolean(randomInt() % 2);
-  const LegalPublicFilings = LegalStructures.filter((item) => {
-    return item.requiresPublicFiling === _requiresPublicFiling;
-  });
-  const randomIndex = Math.floor(Math.random() * LegalPublicFilings.length);
-  return LegalPublicFilings[randomIndex];
-};
-
 export const allLegalStructuresOfType = ({
   type,
 }: {
@@ -662,11 +402,6 @@ export const allLegalStructuresOfType = ({
   return [];
 };
 
-export const randomSector = (): SectorType => {
-  const randomIndex = Math.floor(Math.random() * sectors.length);
-  return sectors[randomIndex];
-};
-
 export const randomOperatingPhaseId = (): OperatingPhaseId => {
   const randomIndex = Math.floor(Math.random() * OperatingPhases.length);
   return OperatingPhases[randomIndex].id;
@@ -677,17 +412,6 @@ export const randomOwnershipType = (): OwnershipType => {
   return ownershipTypes[randomIndex];
 };
 
-export const randomFilteredIndustry = (
-  func: (industry: Industry) => boolean,
-  { isEnabled = true }
-): Industry => {
-  const filteredIndustries = Industries.filter((x: Industry) => {
-    return func(x) && x.isEnabled === isEnabled;
-  });
-  const randomIndex = Math.floor(Math.random() * filteredIndustries.length);
-  return filteredIndustries[randomIndex];
-};
-
 export const randomNegativeFilteredIndustry = (func: (industry: Industry) => boolean): Industry => {
   return randomFilteredIndustry(
     (industry: Industry) => {
@@ -695,13 +419,6 @@ export const randomNegativeFilteredIndustry = (func: (industry: Industry) => boo
     },
     { isEnabled: true }
   );
-};
-
-export const randomIndustry = (canHavePermanentLocation = false): Industry => {
-  const filter = (x: Industry): boolean => {
-    return x.canHavePermanentLocation === canHavePermanentLocation;
-  };
-  return randomFilteredIndustry(filter, { isEnabled: true });
 };
 
 export const randomHomeBasedIndustry = (): string => {

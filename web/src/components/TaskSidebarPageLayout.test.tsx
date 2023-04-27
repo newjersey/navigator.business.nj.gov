@@ -1,9 +1,10 @@
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
-import { generateStep, generateUserData } from "@/test/factories";
+import { generateStep } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { generateUserData } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { render, screen } from "@testing-library/react";

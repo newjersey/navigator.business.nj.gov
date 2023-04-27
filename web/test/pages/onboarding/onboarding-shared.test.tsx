@@ -3,7 +3,6 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { templateEval } from "@/lib/utils/helpers";
-import { generateProfileData, generateUser, generateUserData } from "@/test/factories";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -17,7 +16,12 @@ import {
   industriesWithOutEssentialQuestion,
   renderPage,
 } from "@/test/pages/onboarding/helpers-onboarding";
-import { createEmptyProfileData } from "@businessnjgovnavigator/shared/";
+import {
+  createEmptyProfileData,
+  generateProfileData,
+  generateUser,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/";
 import { screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));

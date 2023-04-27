@@ -1,5 +1,5 @@
+import { generateUser, generateUserData } from "@shared/test";
 import { UserData } from "@shared/userData";
-import { generateUser, generateUserData } from "../../../test/factories";
 import { AddNewsletter, NewsletterClient, UserDataClient } from "../types";
 import { addNewsletterBatch } from "./addNewsletterBatch";
 import { addNewsletterFactory } from "./addNewsletterFactory";

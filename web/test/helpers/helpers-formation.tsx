@@ -11,13 +11,7 @@ import {
   Task,
   TasksDisplayContent,
 } from "@/lib/types/types";
-import {
-  generateFormationData,
-  generateProfileData,
-  generateTask,
-  generateUserData,
-  randomPublicFilingLegalType,
-} from "@/test/factories";
+import { generateTask, randomPublicFilingLegalType } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockDocuments } from "@/test/mock/mockUseDocuments";
@@ -39,6 +33,11 @@ import {
   randomInt,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import {
+  generateFormationData,
+  generateProfileData,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 

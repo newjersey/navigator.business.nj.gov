@@ -2,8 +2,8 @@ import { ProfileNaicsCode } from "@/components/profile/ProfileNaicsCode";
 import { getMergedConfig } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { getFlow } from "@/lib/utils/helpers";
-import { generateProfileData } from "@/test/factories";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
+import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { render, screen } from "@testing-library/react";
 

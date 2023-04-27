@@ -1,12 +1,7 @@
 import { SidebarCardFundingNudge } from "@/components/dashboard/SidebarCardFundingNudge";
 import { getMergedConfig } from "@/contexts/configContext";
 import { SidebarCardContent } from "@/lib/types/types";
-import {
-  generatePreferences,
-  generateProfileData,
-  generateSidebarCardContent,
-  generateUserData,
-} from "@/test/factories";
+import { generateSidebarCardContent } from "@/test/factories";
 import { selectDropdownByValue } from "@/test/helpers/helpers-testing-library-selectors";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import {
@@ -15,6 +10,11 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import {
+  generatePreferences,
+  generateProfileData,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen } from "@testing-library/react";
 

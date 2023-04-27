@@ -1,5 +1,4 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import { generateUserData } from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -12,7 +11,7 @@ import {
   FormationFormData,
   PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared/formationData";
-import { generateFormationFormData } from "@businessnjgovnavigator/shared/test";
+import { generateFormationFormData, generateUserData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen } from "@testing-library/react";
 import { displayContent } from "../contacts/testHelpers";

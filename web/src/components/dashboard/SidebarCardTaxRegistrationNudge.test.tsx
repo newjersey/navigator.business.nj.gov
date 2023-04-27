@@ -2,15 +2,7 @@ import { SidebarCardRegisteredForTaxesNudge } from "@/components/dashboard/Sideb
 import { getMergedConfig } from "@/contexts/configContext";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import { SidebarCardContent } from "@/lib/types/types";
-import {
-  generatePreferences,
-  generateProfileData,
-  generateRoadmap,
-  generateSidebarCardContent,
-  generateTaxFiling,
-  generateTaxFilingData,
-  generateUserData,
-} from "@/test/factories";
+import { generateRoadmap, generateSidebarCardContent } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentUserData,
@@ -20,6 +12,13 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { getCurrentDateISOString } from "@businessnjgovnavigator/shared/dateHelpers";
 import { taxTaskId } from "@businessnjgovnavigator/shared/index";
+import {
+  generatePreferences,
+  generateProfileData,
+  generateTaxFiling,
+  generateTaxFilingData,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 

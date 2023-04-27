@@ -10,13 +10,9 @@ import { FormationStepNames, TasksDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   generateEmptyFormationData,
-  generateFormationData,
   generateFormationDbaContent,
   generateFormationSubmitError,
-  generateFormationSubmitResponse,
-  generateProfileData,
   generateTask,
-  generateUserData,
 } from "@/test/factories";
 import {
   FormationPageHelpers,
@@ -37,12 +33,19 @@ import {
   defaultDateFormat,
   FormationFormData,
   FormationSubmitResponse,
+  generateFormationData,
   generateFormationForeignAddress,
   generateFormationUSAddress,
+  generateProfileData,
+  generateUserData,
   getCurrentDate,
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
-import { generateFormationFormData, generateMunicipality } from "@businessnjgovnavigator/shared/test";
+import {
+  generateFormationFormData,
+  generateFormationSubmitResponse,
+  generateMunicipality,
+} from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";

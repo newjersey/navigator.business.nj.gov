@@ -2,7 +2,7 @@ import { DeferredLocationQuestion } from "@/components/DeferredLocationQuestion"
 import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import analytics from "@/lib/utils/analytics";
-import { generateProfileData, generateRoadmap, generateUserData } from "@/test/factories";
+import { generateRoadmap } from "@/test/factories";
 import { withRoadmap } from "@/test/helpers/helpers-renderers";
 import { selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
 import {
@@ -11,7 +11,11 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
-import { generateMunicipality } from "@businessnjgovnavigator/shared/test";
+import {
+  generateMunicipality,
+  generateProfileData,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen } from "@testing-library/react";
 

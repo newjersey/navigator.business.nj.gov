@@ -1,10 +1,16 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { Filing, taxFilingMethod } from "@/lib/types/types";
 import FilingPage from "@/pages/filings/[filingUrlSlug]";
-import { generateProfileData, generateTaxFiling, generateTaxFilingData } from "@/test/factories";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { defaultDateFormat, getCurrentDate, randomInt } from "@businessnjgovnavigator/shared";
+import {
+  defaultDateFormat,
+  generateProfileData,
+  generateTaxFilingData,
+  getCurrentDate,
+  randomInt,
+} from "@businessnjgovnavigator/shared";
+import { generateTaxFiling } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 import dayjs from "dayjs";

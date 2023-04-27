@@ -6,7 +6,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { Task } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import { generateTask, generateTaskLink, generateUserData } from "@/test/factories";
+import { generateTask, generateTaskLink } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
@@ -15,7 +15,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { UserData } from "@businessnjgovnavigator/shared/";
+import { generateUserData, UserData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

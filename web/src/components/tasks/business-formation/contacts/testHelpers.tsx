@@ -1,4 +1,4 @@
-import { generateFormationDbaContent, generateUser } from "@/test/factories";
+import { generateFormationDbaContent } from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -9,6 +9,7 @@ import {
   castPublicFilingLegalTypeToFormationType,
   FormationFormData,
   generateFormationFormData,
+  generateUser,
   ProfileData,
   PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";

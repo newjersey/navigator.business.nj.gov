@@ -1,8 +1,9 @@
+import { generateUser, generateUserData } from "@shared/test";
 import { UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { Express } from "express";
 import request, { Response } from "supertest";
-import { generateSelfRegResponse, generateUser, generateUserData } from "../../test/factories";
+import { generateSelfRegResponse } from "../../test/factories";
 import { generateHashedKey, getLastCalledWith } from "../../test/helpers";
 import { SelfRegClient, UserDataClient } from "../domain/types";
 import { setupExpress } from "../libs/express";

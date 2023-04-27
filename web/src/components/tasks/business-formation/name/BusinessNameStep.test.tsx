@@ -1,5 +1,5 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import { generateEmptyFormationData, generateFormationDbaContent, generateUserData } from "@/test/factories";
+import { generateEmptyFormationData, generateFormationDbaContent } from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -12,8 +12,9 @@ import {
   FormationLegalType,
   generateBusinessNameAvailability,
   generateFormationFormData,
+  generateUserData,
+  NameAvailability,
 } from "@businessnjgovnavigator/shared";
-import { NameAvailability } from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
 import { screen, within } from "@testing-library/react";
 

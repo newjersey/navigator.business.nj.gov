@@ -1,9 +1,10 @@
 import { useRoadmap, UseRoadmapReturnValue } from "@/lib/data-hooks/useRoadmap";
 import * as buildUserRoadmapModule from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap } from "@/lib/types/types";
-import { generateProfileData, generateRoadmap, generateStep, generateTask } from "@/test/factories";
+import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { withRoadmap } from "@/test/helpers/helpers-renderers";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { render } from "@testing-library/react";
 

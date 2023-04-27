@@ -1,5 +1,4 @@
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
-import { UserData } from "@shared/userData";
 import {
   generateLicenseData,
   generateLicenseStatusItem,
@@ -7,7 +6,8 @@ import {
   generateNameAndAddress,
   generateProfileData,
   generateUserData,
-} from "../../../test/factories";
+} from "@shared/test";
+import { UserData } from "@shared/userData";
 import { UpdateLicenseStatus, UserDataClient } from "../types";
 import { updateLicenseStatusFactory } from "./updateLicenseStatusFactory";
 

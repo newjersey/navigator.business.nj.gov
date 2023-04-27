@@ -3,7 +3,11 @@ import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { generateFormationData, generateGetFilingResponse, generateUserData } from "@/test/factories";
+import {
+  generateFormationData,
+  generateGetFilingResponse,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
 import { ReactElement } from "react";
 
 const FormationSuccessPreview = (props: PreviewProps): ReactElement => {

@@ -1,5 +1,5 @@
+import { generateProfileData, generateUserData } from "@shared/test";
 import { UserData } from "@shared/userData";
-import { generateProfileData, generateUserData } from "../../../test/factories";
 import { EncryptionDecryptionClient, EncryptTaxId, UserDataClient } from "../types";
 import { encryptTaxIdBatch } from "./encryptTaxIdBatch";
 import { encryptTaxIdFactory } from "./encryptTaxIdFactory";
