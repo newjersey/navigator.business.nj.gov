@@ -1,10 +1,10 @@
 ---
 urlSlug: nonprofit-charity-registration
 filename: nonprofit-charity-registration
-name: Register My Charity, if Applicable
+name: Register Your Charity, if Applicable
 id: nonprofit-charity-registration
 callToActionLink: https://njconsumeraffairs.state.nj.us/create-user/
-callToActionText: Register Your Charity
+callToActionText: Register My Charity
 ---
 If your business is a charity or non-profit organization in New Jersey that receives $10,000 or more in public funding and/or uses a professional fundraiser to raise money, you need to register as a charity with the State. 
 
