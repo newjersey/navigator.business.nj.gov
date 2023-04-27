@@ -13,10 +13,10 @@ To find an insurance broker, speak to your network, local Chamber of Commerce, o
 
 ### Common Types of Commercial Insurance
 
-- **Bodily Damage Liability:** Moving companies are required to carry a minimum of 25,000 in liability insurance for 1 person and 100,000 for more than 1 person
-- **Property Damage Liability:** Moving companies are required to carry a minimum of 10,000 in liability insurance
-- **Commercial General Liability Insurance:** Research coverage and pricing options for your industry and business size
-- **Workmen’s Compensation Insurance:** Find a `workers' comp insurance|workers-comp` plan if you have employees. The State of New Jersey requires that you obtain this insurance if you have employees or stockholders in a corporation
+- **Bodily damage liability:** Moving companies are required to carry a minimum of 25,000 in liability insurance for 1 person and 100,000 for more than 1 person
+- **Property damage liability:** Moving companies are required to carry a minimum of 10,000 in liability insurance
+- **Commercial general liability insurance:** Research coverage and pricing options for your industry and business size
+- **Workmen’s compensation insurance:** Find a `workers' comp insurance|workers-comp` plan if you have employees. The State of New Jersey requires that you obtain this insurance if you have employees or stockholders in a corporation
 
 > **Once completed, you will have:**
 >
