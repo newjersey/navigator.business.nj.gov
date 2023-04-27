@@ -1,9 +1,8 @@
 import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
-import { generateProfileData } from "@/test/factories";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { ProfileData } from "@businessnjgovnavigator/shared";
+import { generateProfileData, ProfileData } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";

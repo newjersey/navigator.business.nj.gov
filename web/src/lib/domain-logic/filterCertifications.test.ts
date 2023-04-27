@@ -1,7 +1,12 @@
 import { filterCertifications } from "@/lib/domain-logic/filterCertifications";
 import { SMALL_BUSINESS_MAX_EMPLOYEE_COUNT } from "@/lib/domain-logic/smallBusinessEnterprise";
-import { generateCertification, generateProfileData, generateUserData } from "@/test/factories";
-import { ProfileData, UserData } from "@businessnjgovnavigator/shared/";
+import { generateCertification } from "@/test/factories";
+import {
+  generateProfileData,
+  generateUserData,
+  ProfileData,
+  UserData,
+} from "@businessnjgovnavigator/shared/";
 
 describe("filterCertifications", () => {
   const defaultProfileData = (overrides: Partial<ProfileData>): UserData => {

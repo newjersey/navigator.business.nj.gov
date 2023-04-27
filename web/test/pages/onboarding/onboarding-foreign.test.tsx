@@ -1,7 +1,6 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
-import { generateProfileData, generateUserData } from "@/test/factories";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
@@ -15,7 +14,7 @@ import {
   renderPage,
   runSelfRegPageTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
-import { ProfileData } from "@businessnjgovnavigator/shared/";
+import { generateProfileData, generateUserData, ProfileData } from "@businessnjgovnavigator/shared/";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, screen, waitFor } from "@testing-library/react";

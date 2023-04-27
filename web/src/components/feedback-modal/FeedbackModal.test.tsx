@@ -1,9 +1,10 @@
 import { FeedbackModal } from "@/components/feedback-modal/FeedbackModal";
 import * as api from "@/lib/api-client/apiClient";
-import { generateParsedUserAgent, generateProfileData, generateUserData } from "@/test/factories";
+import { generateParsedUserAgent } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData, useUndefinedUserData } from "@/test/mock/mockUseUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { generateProfileData, generateUserData } from "@businessnjgovnavigator/shared";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
@@ -28,7 +29,7 @@ const originalInnerWidth = global.innerWidth;
 describe("<feedbackModal />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockUserData({});
+    useMockUserData({ onboardingFormProgress: "COMPLETED" });
     useMockRouter({ asPath: "roadmap/test" });
     mockApi.postFeedback.mockReturnValue(Promise.resolve());
     mockApi.postIssue.mockReturnValue(Promise.resolve());
@@ -142,7 +143,7 @@ describe("<feedbackModal />", () => {
       };
       getResult.mockReturnValue(generateParsedUserAgent(userAgent));
 
-      const userData = generateUserData({});
+      const userData = generateUserData({ onboardingFormProgress: "COMPLETED" });
       useMockUserData(userData);
 
       const feedback = {
@@ -289,7 +290,7 @@ describe("<feedbackModal />", () => {
       };
       getResult.mockReturnValue(generateParsedUserAgent(userAgent));
 
-      const userData = generateUserData({});
+      const userData = generateUserData({ onboardingFormProgress: "COMPLETED" });
       useMockUserData(userData);
 
       const issue = {

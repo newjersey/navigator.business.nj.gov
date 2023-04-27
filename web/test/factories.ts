@@ -25,22 +25,15 @@ import {
   arrayOfFundingAgencies,
   arrayOfOwnershipTypes as ownershipTypes,
   arrayOfStateObjects as states,
-  BusinessUser,
   createEmptyFormationFormData,
-  CURRENT_VERSION,
-  defaultDateFormat,
   FormationSubmitError,
   FundingAgency,
-  generateMunicipality,
-  getCurrentDateFormatted,
+  generateProfileData,
   getCurrentDateISOString,
-  Industries,
   Industry,
-  IndustrySpecificData,
   InputFile,
   LegalStructure,
   LegalStructures,
-  LicenseData,
   MunicipalityDetail,
   NameAvailability,
   OperatingPhaseId,
@@ -52,132 +45,14 @@ import {
   randomInt,
   SectionType,
   StateObject,
-  TaxFilingData,
-  UserData,
 } from "@businessnjgovnavigator/shared";
+import { FormationData } from "@businessnjgovnavigator/shared/formationData";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
-import {
-  generateFormationData,
-  generateLicenseStatusItem,
-  generateNameAndAddress,
-  generatePreferences,
-  generateTaxFiling,
-  randomSector,
-} from "@businessnjgovnavigator/shared/test";
+import { randomFilteredIndustry, randomIndustry, randomSector } from "@businessnjgovnavigator/shared/test";
 
 export const generateSectionType = (): SectionType => {
   const num = randomInt();
   return num % 2 ? "PLAN" : "START";
-};
-
-export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => {
-  return {
-    name: `some-name-${randomInt()}`,
-    email: `some-email-${randomInt()}@example.com`,
-    id: `some-id-${randomInt()}`,
-    externalStatus: {},
-    receiveNewsletter: true,
-    userTesting: true,
-    abExperience: randomInt() % 2 === 0 ? "ExperienceA" : "ExperienceB",
-    ...overrides,
-  };
-};
-
-export const generateUserData = (overrides: Partial<UserData>): UserData => {
-  return {
-    version: CURRENT_VERSION,
-    versionWhenCreated: -1,
-    dateCreatedISO: undefined,
-    user: generateUser({}),
-    profileData: generateProfileData({}),
-    onboardingFormProgress: "COMPLETED",
-    taskProgress: {},
-    taskItemChecklist: {},
-    licenseData: generateLicenseData({}),
-    preferences: generatePreferences({}),
-    taxFilingData: generateTaxFilingData({}),
-    formationData: generateFormationData({}),
-    lastUpdatedISO: getCurrentDateISOString(),
-    ...overrides,
-  };
-};
-
-export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFilingData => {
-  return {
-    state: undefined,
-    businessName: undefined,
-    lastUpdatedISO: overrides.state ? getCurrentDateISOString() : undefined,
-    registeredISO: ["SUCCESS", "PENDING"].includes(overrides.state ?? "")
-      ? getCurrentDateISOString()
-      : undefined,
-    filings: [generateTaxFiling({})],
-    ...overrides,
-  };
-};
-
-export const generateIndustrySpecificData = (
-  overrides: Partial<IndustrySpecificData>
-): IndustrySpecificData => {
-  return {
-    liquorLicense: !(randomInt() % 2),
-    requiresCpa: !(randomInt() % 2),
-    homeBasedBusiness: !(randomInt() % 2),
-    cannabisLicenseType: randomElementFromArray(["CONDITIONAL", "ANNUAL"]),
-    cannabisMicrobusiness: !(randomInt() % 2),
-    constructionRenovationPlan: !(randomInt() % 2),
-    providesStaffingService: !(randomInt() % 2),
-    certifiedInteriorDesigner: !(randomInt() % 2),
-    realEstateAppraisalManagement: !(randomInt() % 2),
-    carService: randomElementFromArray(["STANDARD", "HIGH_CAPACITY", "BOTH"]),
-    interstateLogistics: !(randomInt() % 2),
-    interstateMoving: !(randomInt() % 2),
-    isChildcareForSixOrMore: !(randomInt() % 2),
-    petCareHousing: !(randomInt() % 2),
-    willSellPetCareItems: !(randomInt() % 2),
-    ...overrides,
-  };
-};
-
-export const generateProfileData = (
-  overrides: Partial<ProfileData>,
-  canHavePermanentLocation?: boolean
-): ProfileData => {
-  const id = `some-id-${randomInt()}`;
-  const persona = randomInt() % 2 ? "STARTING" : "OWNING";
-  const industry = randomIndustry(canHavePermanentLocation);
-
-  return {
-    ...generateIndustrySpecificData({}),
-    businessPersona: persona,
-    businessName: `some-business-name-${randomInt()}`,
-    responsibleOwnerName: `some-responsible-owner-name-${randomInt()}`,
-    industryId: industry.id,
-    legalStructureId: randomLegalStructure().id,
-    municipality: generateMunicipality({}),
-    dateOfFormation: getCurrentDateFormatted(defaultDateFormat),
-    entityId: randomInt(10).toString(),
-    employerId: randomInt(9).toString(),
-    taxId: randomInt(12).toString(),
-    encryptedTaxId: undefined,
-    notes: `some-notes-${randomInt()}`,
-    ownershipTypeIds: [],
-    documents: {
-      certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
-      formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
-      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
-    },
-    existingEmployees: randomInt(7).toString(),
-    taxPin: randomInt(4).toString(),
-    sectorId: randomSector().id,
-    naicsCode: randomInt(6).toString(),
-    foreignBusinessType: undefined,
-    foreignBusinessTypeIds: [],
-    nexusLocationInNewJersey: undefined,
-    nexusDbaName: "",
-    needsNexusDbaName: false,
-    operatingPhase: "NEEDS_TO_FORM",
-    ...overrides,
-  };
 };
 
 export const getProfileDataForUnfilteredOpportunities = (): ProfileData => {
@@ -292,17 +167,7 @@ export const generateNameAvailability = (overrides: Partial<NameAvailability>): 
   return {
     status: "UNAVAILABLE",
     similarNames: [`some-name-${randomInt()}`],
-    ...overrides,
-  };
-};
-
-export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseData => {
-  return {
-    nameAndAddress: generateNameAndAddress({}),
-    completedSearch: false,
-    items: [generateLicenseStatusItem({})],
-    status: "PENDING",
-    lastUpdatedISO: getCurrentDateISOString(),
+    lastUpdatedTimeStamp: "2023-04-03T20:08:58Z",
     ...overrides,
   };
 };
@@ -517,17 +382,6 @@ export const randomCounty = (): County => {
   return AllCounties[randomIndex] as County;
 };
 
-export const randomLegalStructure = (publicFiling?: {
-  requiresPublicFiling: boolean | undefined;
-}): LegalStructure => {
-  const _requiresPublicFiling = publicFiling?.requiresPublicFiling ?? Boolean(randomInt() % 2);
-  const LegalPublicFilings = LegalStructures.filter((item) => {
-    return item.requiresPublicFiling === _requiresPublicFiling;
-  });
-  const randomIndex = Math.floor(Math.random() * LegalPublicFilings.length);
-  return LegalPublicFilings[randomIndex];
-};
-
 export const allLegalStructuresOfType = ({
   type,
 }: {
@@ -558,17 +412,6 @@ export const randomOwnershipType = (): OwnershipType => {
   return ownershipTypes[randomIndex];
 };
 
-export const randomFilteredIndustry = (
-  func: (industry: Industry) => boolean,
-  { isEnabled = true }
-): Industry => {
-  const filteredIndustries = Industries.filter((x: Industry) => {
-    return func(x) && x.isEnabled === isEnabled;
-  });
-  const randomIndex = Math.floor(Math.random() * filteredIndustries.length);
-  return filteredIndustries[randomIndex];
-};
-
 export const randomNegativeFilteredIndustry = (func: (industry: Industry) => boolean): Industry => {
   return randomFilteredIndustry(
     (industry: Industry) => {
@@ -576,13 +419,6 @@ export const randomNegativeFilteredIndustry = (func: (industry: Industry) => boo
     },
     { isEnabled: true }
   );
-};
-
-export const randomIndustry = (canHavePermanentLocation = false): Industry => {
-  const filter = (x: Industry): boolean => {
-    return x.canHavePermanentLocation === canHavePermanentLocation;
-  };
-  return randomFilteredIndustry(filter, { isEnabled: true });
 };
 
 export const randomHomeBasedIndustry = (): string => {

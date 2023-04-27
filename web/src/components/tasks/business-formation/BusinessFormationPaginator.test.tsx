@@ -10,12 +10,9 @@ import { FormationStepNames, TasksDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   generateEmptyFormationData,
-  generateFormationData,
   generateFormationDbaContent,
   generateFormationSubmitError,
-  generateProfileData,
   generateTask,
-  generateUserData,
 } from "@/test/factories";
 import {
   FormationPageHelpers,
@@ -36,8 +33,11 @@ import {
   defaultDateFormat,
   FormationFormData,
   FormationSubmitResponse,
+  generateFormationData,
   generateFormationForeignAddress,
   generateFormationUSAddress,
+  generateProfileData,
+  generateUserData,
   getCurrentDate,
   ProfileData,
 } from "@businessnjgovnavigator/shared/";

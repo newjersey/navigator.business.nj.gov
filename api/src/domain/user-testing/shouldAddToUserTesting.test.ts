@@ -1,9 +1,5 @@
-import {
-  generateExternalStatus,
-  generateUser,
-  generateUserData,
-  generateUserTestingResponse,
-} from "../../../test/factories";
+import { generateUser, generateUserData } from "@shared/test";
+import { generateExternalStatus, generateUserTestingResponse } from "../../../test/factories";
 import { shouldAddToUserTesting } from "./shouldAddToUserTesting";
 
 describe("shouldAddToUserTesting", () => {

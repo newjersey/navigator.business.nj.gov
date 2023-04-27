@@ -1,9 +1,5 @@
-import {
-  generateExternalStatus,
-  generateNewsletterResponse,
-  generateUser,
-  generateUserData,
-} from "../../../test/factories";
+import { generateUser, generateUserData } from "@shared/test";
+import { generateExternalStatus, generateNewsletterResponse } from "../../../test/factories";
 import { shouldAddToNewsletter } from "./shouldAddToNewsletter";
 
 describe("shouldAddToNewsletter", () => {

@@ -2,12 +2,7 @@ import { SidebarCardFormationNudge } from "@/components/dashboard/SidebarCardFor
 import { getMergedConfig } from "@/contexts/configContext";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import { SidebarCardContent } from "@/lib/types/types";
-import {
-  generateProfileData,
-  generateRoadmap,
-  generateSidebarCardContent,
-  generateUserData,
-} from "@/test/factories";
+import { generateRoadmap, generateSidebarCardContent } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentUserData,
@@ -15,8 +10,8 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { formationTaskId } from "@businessnjgovnavigator/shared/";
-import { generatePreferences } from "@businessnjgovnavigator/shared/test";
+import { formationTaskId, generateProfileData } from "@businessnjgovnavigator/shared/";
+import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 

@@ -1,13 +1,12 @@
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { generateUserData } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import {
   currentUserData,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { UserData } from "@businessnjgovnavigator/shared/";
+import { generateUserData, UserData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

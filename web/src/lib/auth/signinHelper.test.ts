@@ -2,7 +2,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { onGuestSignIn, onSelfRegister, onSignIn, onSignOut, SelfRegRouter } from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import * as UserDataStorage from "@/lib/storage/UserDataStorage";
-import { generateUser, generateUserData } from "@/test/factories";
+import { generateUser, generateUserData } from "@businessnjgovnavigator/shared/";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { waitFor } from "@testing-library/react";
 import * as session from "./sessionHelper";

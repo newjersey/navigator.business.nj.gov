@@ -1,10 +1,12 @@
-import { getFirstAnnualFiling, getSecondAnnualFiling, getThirdAnnualFiling } from "@shared/test";
 import {
   generateProfileData,
   generateTaxFilingData,
   generateUser,
   generateUserData,
-} from "../../../test/factories";
+  getFirstAnnualFiling,
+  getSecondAnnualFiling,
+  getThirdAnnualFiling,
+} from "@shared/test";
 import { generateAnnualFilings } from "../../../test/helpers";
 import { getAnnualFilings } from "./getAnnualFilings";
 

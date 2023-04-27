@@ -2,7 +2,7 @@
 
 import { getMergedConfig } from "@/contexts/configContext";
 import { TasksDisplayContent } from "@/lib/types/types";
-import { generateFormationDbaContent, generateUser, generateUserData } from "@/test/factories";
+import { generateFormationDbaContent } from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -14,6 +14,8 @@ import {
   FormationFormData,
   FormationLegalType,
   generateFormationFormData,
+  generateUser,
+  generateUserData,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";

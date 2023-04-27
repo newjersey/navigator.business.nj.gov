@@ -2,14 +2,9 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as fetchMunicipality from "@/lib/async-content-fetchers/fetchMunicipalities";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import * as roadmapBuilderModule from "@/lib/roadmap/roadmapBuilder";
-import {
-  generateMunicipalityDetail,
-  generateProfileData,
-  generateRoadmap,
-  generateTask,
-} from "@/test/factories";
+import { generateMunicipalityDetail, generateRoadmap, generateTask } from "@/test/factories";
 import { getLastCalledWith } from "@/test/helpers/helpers-utilities";
-import { generateMunicipality, Industries } from "@businessnjgovnavigator/shared/";
+import { generateMunicipality, generateProfileData, Industries } from "@businessnjgovnavigator/shared/";
 import {
   createEmptyProfileData,
   emptyIndustrySpecificData,

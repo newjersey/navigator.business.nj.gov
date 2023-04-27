@@ -12,12 +12,9 @@ import {
 import DashboardPage from "@/pages/dashboard";
 import {
   generateBusinessPersona,
-  generateProfileData,
   generateSidebarCardContent,
   generateStep,
   generateTask,
-  generateTaxFilingData,
-  generateUserData,
   randomHomeBasedIndustry,
   randomNonHomeBasedIndustry,
 } from "@/test/factories";
@@ -34,6 +31,9 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   defaultDateFormat,
+  generateProfileData,
+  generateTaxFilingData,
+  generateUserData,
   getCurrentDate,
   OperatingPhases,
   parseDateWithFormat,
@@ -78,7 +78,7 @@ const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>): Roa
 describe("dashboard page", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockUserData({});
+    useMockUserData({ onboardingFormProgress: "COMPLETED" });
     useMockRoadmap({});
     useMockRouter({});
     setDesktopScreen(true);
@@ -109,7 +109,9 @@ describe("dashboard page", () => {
     setupStatefulUserDataContext();
 
     render(
-      <WithStatefulUserData initialUserData={userData || generateUserData({})}>
+      <WithStatefulUserData
+        initialUserData={userData || generateUserData({ onboardingFormProgress: "COMPLETED" })}
+      >
         <ThemeProvider theme={createTheme()}>
           <DashboardPage
             operateReferences={{}}
@@ -146,7 +148,9 @@ describe("dashboard page", () => {
 
     render(
       withAuthAlert(
-        <WithStatefulUserData initialUserData={userData || generateUserData({})}>
+        <WithStatefulUserData
+          initialUserData={userData || generateUserData({ onboardingFormProgress: "COMPLETED" })}
+        >
           <ThemeProvider theme={createTheme()}>
             <SignUpSnackbar />
             <DashboardPage
@@ -236,6 +240,7 @@ describe("dashboard page", () => {
 
     useMockUserData({
       taskProgress: { task1: "IN_PROGRESS", task2: "COMPLETED" },
+      onboardingFormProgress: "COMPLETED",
     });
 
     renderDashboardPage({});
@@ -285,6 +290,7 @@ describe("dashboard page", () => {
         roadmapOpenSections: ["PLAN", "START"],
       }),
       taxFilingData: generateTaxFilingData({}),
+      onboardingFormProgress: "COMPLETED",
     });
 
     renderDashboardPage({});
@@ -366,6 +372,7 @@ describe("dashboard page", () => {
     useMockUserData({
       profileData: generateProfileData({ operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES" }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
+      onboardingFormProgress: "COMPLETED",
     });
     const operateReferences: Record<string, OperateReference> = {
       "annual-report": {
@@ -447,7 +454,10 @@ describe("dashboard page", () => {
       })
     );
 
-    useMockUserData({ profileData: generateProfileData({ operatingPhase: randomOperatingPhase.id }) });
+    useMockUserData({
+      profileData: generateProfileData({ operatingPhase: randomOperatingPhase.id }),
+      onboardingFormProgress: "COMPLETED",
+    });
     renderDashboardPage({});
 
     expect(screen.getByText(Config.dashboardDefaults.upAndRunningTaskHeader)).toBeInTheDocument();
@@ -482,6 +492,7 @@ describe("dashboard page", () => {
           businessPersona: generateBusinessPersona(),
           operatingPhase: randomElementFromArray(defaultDescOperatingPhases as OperatingPhase[]).id,
         }),
+        onboardingFormProgress: "COMPLETED",
       });
       useMockUserData(userData);
 
@@ -539,6 +550,7 @@ describe("dashboard page", () => {
           businessPersona: generateBusinessPersona(),
           operatingPhase: randomElementFromArray(altDescOperatingPhases as OperatingPhase[]).id,
         }),
+        onboardingFormProgress: "COMPLETED",
       });
       useMockUserData(userData);
 
@@ -557,6 +569,7 @@ describe("dashboard page", () => {
           industryId: randomHomeBasedIndustry(),
           homeBasedBusiness: undefined,
         }),
+        onboardingFormProgress: "COMPLETED",
       });
       useMockUserData(userData);
       renderStatefulPage(userData);
@@ -577,6 +590,7 @@ describe("dashboard page", () => {
           industryId: randomHomeBasedIndustry(),
           homeBasedBusiness: undefined,
         }),
+        onboardingFormProgress: "COMPLETED",
       });
       useMockUserData(userData);
       renderStatefulPage(userData);
@@ -601,7 +615,12 @@ describe("dashboard page", () => {
   describe("phase newly changed indicator", () => {
     it("immediately sets phaseNewlyChanged to false when in desktop mode", async () => {
       setDesktopScreen(true);
-      renderStatefulPage(generateUserData({ preferences: generatePreferences({ phaseNewlyChanged: true }) }));
+      renderStatefulPage(
+        generateUserData({
+          preferences: generatePreferences({ phaseNewlyChanged: true }),
+          onboardingFormProgress: "COMPLETED",
+        })
+      );
       await waitFor(() => {
         return expect(currentUserData().preferences.phaseNewlyChanged).toBe(false);
       });
@@ -617,7 +636,12 @@ describe("dashboard page", () => {
 
     it("sets phaseNewlyChanged to false on mobile when visiting For You tab", async () => {
       setDesktopScreen(false);
-      renderStatefulPage(generateUserData({ preferences: generatePreferences({ phaseNewlyChanged: true }) }));
+      renderStatefulPage(
+        generateUserData({
+          preferences: generatePreferences({ phaseNewlyChanged: true }),
+          onboardingFormProgress: "COMPLETED",
+        })
+      );
 
       expect(userDataWasNotUpdated()).toBe(true);
 
@@ -630,7 +654,12 @@ describe("dashboard page", () => {
 
     it("shows indicator next to For You tab when phaseNewlyChanged is true on mobile", async () => {
       setDesktopScreen(false);
-      renderStatefulPage(generateUserData({ preferences: generatePreferences({ phaseNewlyChanged: true }) }));
+      renderStatefulPage(
+        generateUserData({
+          preferences: generatePreferences({ phaseNewlyChanged: true }),
+          onboardingFormProgress: "COMPLETED",
+        })
+      );
 
       expect(screen.getByTestId("for-you-indicator")).toBeInTheDocument();
 

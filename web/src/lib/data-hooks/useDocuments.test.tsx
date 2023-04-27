@@ -1,8 +1,7 @@
 import * as sessionHelper from "@/lib/auth/sessionHelper";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
-import { generateProfileData } from "@/test/factories";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { ProfileDocuments } from "@businessnjgovnavigator/shared/";
+import { generateProfileData, ProfileDocuments } from "@businessnjgovnavigator/shared/";
 import { act, render, waitFor } from "@testing-library/react";
 
 const mockGetSignedS3Link = (sessionHelper as jest.Mocked<typeof sessionHelper>).getSignedS3Link;

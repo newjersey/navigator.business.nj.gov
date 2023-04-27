@@ -3,11 +3,15 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
-import { generateProfileData, generateUser } from "@/test/factories";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
-import { getCurrentDateInNewJersey, randomInt } from "@businessnjgovnavigator/shared/";
+import {
+  generateProfileData,
+  generateUser,
+  getCurrentDateInNewJersey,
+  randomInt,
+} from "@businessnjgovnavigator/shared/";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 

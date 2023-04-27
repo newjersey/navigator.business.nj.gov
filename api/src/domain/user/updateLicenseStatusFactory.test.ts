@@ -1,7 +1,13 @@
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
-import { generateLicenseStatusItem, generateLicenseStatusResult, generateNameAndAddress } from "@shared/test";
+import {
+  generateLicenseData,
+  generateLicenseStatusItem,
+  generateLicenseStatusResult,
+  generateNameAndAddress,
+  generateProfileData,
+  generateUserData,
+} from "@shared/test";
 import { UserData } from "@shared/userData";
-import { generateLicenseData, generateProfileData, generateUserData } from "../../../test/factories";
 import { UpdateLicenseStatus, UserDataClient } from "../types";
 import { updateLicenseStatusFactory } from "./updateLicenseStatusFactory";
 
