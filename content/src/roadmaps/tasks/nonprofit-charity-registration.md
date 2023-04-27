@@ -18,7 +18,7 @@ The charity registration is a two-part online registration process. In part 1, y
 
 The following charities are not required to register:
 
-* Religious, charitable, scientific, testing for public safety, literary, or educational organizations may not need this license. Learn more on the [IRS Exempt Organizations](https://www.irs.gov/charities-and-nonprofits) or the [IRS 501(c)(3) Exemptions organizations](https://www.irs.gov/charities-non-profits/charitable-organizations/exemption-requirements-501c3-organizations).
+* Religious, charitable, scientific, testing for public safety, literary, or educational organizations may not need this license.  [IRS Exempt Organizations](https://www.irs.gov/charities-and-nonprofits) and [IRS 501(c)(3) Exemptions organizations](https://www.irs.gov/charities-non-profits/charitable-organizations/exemption-requirements-501c3-organizations) provides more in-depth information about exemptions.
 * Libraries registered by the State’s Department of Education that meet their prescribed financial reporting requirements
 
 ### Application Requirements
@@ -35,6 +35,7 @@ The following charities are not required to register:
 >
 > * A charity registration number
 >
+
 > **What if I don’t register my business as a charity?** 
 >
 > Your business will be considered an unregistered practice and unable to legally conduct fundraising activities.
