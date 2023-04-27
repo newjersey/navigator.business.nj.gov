@@ -1,7 +1,7 @@
 ---
 urlSlug: nonprofit-charity-registration
 filename: nonprofit-charity-registration
-name: Register Your Charity, if Applicable
+name: Register My Charity, if Applicable
 id: nonprofit-charity-registration
 callToActionLink: https://njconsumeraffairs.state.nj.us/create-user/
 callToActionText: Register Your Charity
