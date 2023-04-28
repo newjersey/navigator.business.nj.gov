@@ -1,9 +1,10 @@
 ---
-urlSlug: register-for-taxes
-name: Register for State Taxes and Employer Purposes
+urlSlug: tax-registration
+filename: tax-registration
+name: Register Your Business for State Taxes and Employer Purposes
 id: register-for-taxes
-callToActionLink: ""
-callToActionText: ""
+callToActionLink: https://www.state.nj.us/treasury/revenue/gettingregistered.shtml
+callToActionText: Register My Business for State Taxes
 issuingAgency: New Jersey Division of Revenue and Enterprise Services
 formName: NJ-Reg
 ---
@@ -23,14 +24,14 @@ It's time to register your business for State taxes. Doing so will tell the Stat
 * Information on if and when you expect to report and collect sales tax
 * Owner information
 * Mail to address and business location(s)
-* Other taxes you may collect (i.e. motor fuels and cigarette/tobacco taxes), a list will be provided
+* Other taxes you may collect (e.g., motor fuels and cigarette/tobacco taxes), a list will be provided
 
 - - -
 
 ### Next Steps
 
 1. [Register for State Taxes](https://www.njportal.com/DOR/BusinessRegistration)
-2. **Save your New Jersey Tax ID (xxx-xxx-xxx/xxx)**
+2. Save your New Jersey Tax ID (xxx-xxx-xxx/xxx)
 
 ${taxInputComponent}
 
