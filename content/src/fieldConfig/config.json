@@ -136,7 +136,7 @@
   "taxCalendar": {
     "snackbarSuccessBody": "Your businesses tax deadlines are now in your calendar.",
     "modalResponsibleOwnerFieldErrorName": "Responsible Owner Name",
-    "accessBody": "Get access to your tax calendar. ",
+    "accessBody": "Get access to your tax calendar.  ",
     "modalTaxIdHeader": " `#### New Jersey Tax ID|tax-id`",
     "modalBusinessFieldErrorName": "Business Name",
     "modalErrorHeader": "Review the fields below for errors or omissions",
