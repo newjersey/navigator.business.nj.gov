@@ -307,7 +307,7 @@
     "linkTwoText": "Terms & Privacy Policy"
   },
   "registeredForTaxesModal": {
-    "title": "You're All Done with Tax Registration!",
+    "title": "Find Certifications For Your Business",
     "subtitle": "Now we can see what certifications you're eligible for, tell us your...",
     "saveButtonText": "Save",
     "cancelButtonText": "Cancel",
@@ -329,6 +329,7 @@
     "successTextBody": "Your information was saved successfully.",
     "essentialQuestionAlertText": "Complete all required fields.",
     "formationDocFileTitle": "Official Formation Document",
+    "profileCompletionAlert": "Complete the information below to customize your certifications, funding opportunities, and annual report deadline:",
     "errorTextBody": "Review your information in the fields marked below.",
     "escapeModalHeader": "Are you sure you want to continue?",
     "profileTabNoteTitle": "Notes",
@@ -337,8 +338,7 @@
     "escapeModalReturn": "Continue without saving.",
     "successTextHeader": "Profile Updated",
     "certificationDocFileTitle": "Certified Copy of Formation",
-    "profileTabInfoTitle": "Business Information",
-    "profileCompletionAlert": "Complete the information below to customize your certifications, funding opportunities, and annual report deadline:"
+    "profileTabInfoTitle": "Business Information"
   },
   "unsupportedNavigatorUserPage": {
     "title": "Chat with a New Jersey Business Representative",
