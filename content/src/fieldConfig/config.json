@@ -190,7 +190,7 @@
     "fieldDescription": "Find your effective date on your `Certificate of Formation|certificate-formation` .",
     "areYouSureModalCancelButtonText": "Cancel",
     "dateOfFormationErrorText": "Your effective date must be formatted as MM/YYYY.",
-    "header": "Congratulations!",
+    "header": "Find Your Annual Report Deadline",
     "areYouSureModalBody": "If you change your task status, you will need to resubmit your Business `Effective Date|effective-date` and will lose access to your calendar.",
     "areYouSureModalContinueButtonText": "Continue",
     "lockedStatusTooltipText": "You have successfully completed forming your business in this task.",
@@ -329,6 +329,7 @@
     "successTextBody": "Your information was saved successfully.",
     "essentialQuestionAlertText": "Complete all required fields.",
     "formationDocFileTitle": "Official Formation Document",
+    "profileCompletionAlert": "Complete the information below to customize your certifications, funding opportunities, and annual report deadline:",
     "errorTextBody": "Review your information in the fields marked below.",
     "escapeModalHeader": "Are you sure you want to continue?",
     "profileTabNoteTitle": "Notes",
@@ -337,8 +338,7 @@
     "escapeModalReturn": "Continue without saving.",
     "successTextHeader": "Profile Updated",
     "certificationDocFileTitle": "Certified Copy of Formation",
-    "profileTabInfoTitle": "Business Information",
-    "profileCompletionAlert": "Complete the information below to customize your certifications, funding opportunities, and annual report deadline:"
+    "profileTabInfoTitle": "Business Information"
   },
   "unsupportedNavigatorUserPage": {
     "title": "Chat with a New Jersey Business Representative",
