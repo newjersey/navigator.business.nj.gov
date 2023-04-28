@@ -1,14 +1,14 @@
 ---
 id: formation-nudge
-header: See Your Reporting Deadline
+header: Know Your Annual Report Deadline?
+hasCloseButton: false
+ctaText: Show Me My Deadline
+weight: 1
 imgPath: /img/nudge-icon.svg
-ctaText: "I've Formed My Business"
 color: accent-cool-darker
 headerBackgroundColor: accent-cool-lighter
 borderColor: accent-cool-light
-hasCloseButton: false
-weight: 1
-section: "below-opportunities"
+section: below-opportunities
 ---
 
-[Form Your Business](/tasks/form-business-entity) to see your annual reporting due date. Annual reports are required and keeps your business formation information up to date.
+If you [formed your business](/tasks/form-business-entity), view your annual reporting deadline.
