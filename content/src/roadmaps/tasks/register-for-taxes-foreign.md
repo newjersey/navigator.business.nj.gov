@@ -1,10 +1,10 @@
 ---
 urlSlug: register-for-taxes
 filename: register-for-taxes-foreign
-name: Register for Tax and/or Employer Purposes
+name: Register Your Business for Tax and/or Employer Purposes
 id: register-for-taxes
-callToActionLink: ""
-callToActionText: ""
+callToActionLink: https://www.state.nj.us/treasury/revenue/gettingregistered.shtml
+callToActionText: Register My Business for State Taxes
 issuingAgency: New Jersey Division of Revenue and Enterprise Services
 formName: NJ-Reg
 ---
@@ -25,9 +25,9 @@ You are seeing this task because your business either has a `nexus|nexus-busines
 * Anticipated first payroll withholding date for employees (if applicable)
 * Information on if and when you expect to report and collect sales tax
 * Owner information
-* Mailing Address
-* Business Addresses
-* Other taxes you may collect (i.e. motor fuels and cigarette/tobacco taxes), a list will be provided
+* Mailing address
+* Business addresses
+* Other taxes you may collect (e.g., motor fuels and cigarette/tobacco taxes). A list will be provided
 
 > **Once completed, you will have:**
 >
