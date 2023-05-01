@@ -3,12 +3,12 @@ urlSlug: verify-license-massage-therapy
 filename: verify-license-massage-therapy
 name: Apply for Your License and Ensure Your Staff is Licensed
 id: verify-license-massage-therapy
-callToActionLink: https://www.njconsumeraffairs.gov/mbt/Pages/applications.aspx
+callToActionLink: https://newjersey.mylicense.com/verification/
 callToActionText: Apply for or Verify a License
 issuingAgency: New Jersey Division of Consumer Affairs Board of Massage and Bodywork Therapy
 ---
 
-You or any of your staff providing massage therapy services will need to have individual massage therapy licenses. It is the responsibility of the business owner to ensure all staff providing massage therapy services have a current license.
+You or any of your staff providing massage therapy services need to have **individual** massage therapy licenses. It is the responsibility of the business owner to ensure all staff providing massage therapy services have a current license.
 
 ---
 
@@ -24,11 +24,11 @@ You or any of your staff providing massage therapy services will need to have in
 
 ### License Verification Requirements
 
-To verify your employees are licensed, you will need the following:
+To verify your employees are licensed, you need the following:
 
-- Your employee's full name
-- Their license number
-- The city used in their license application
+- Employee's full name
+- Employee's license number
+- The city used in employee's license application
 
 > **Once completed, you will have:**
 >
