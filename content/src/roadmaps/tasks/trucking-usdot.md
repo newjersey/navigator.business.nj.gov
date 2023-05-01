@@ -1,29 +1,33 @@
 ---
 urlSlug: trucking-usdot
 filename: trucking-usdot
-name: Register with the US Department of Transportation
+name: Register Your Vehicle with the U.S. Department of Transportation
 id: trucking-usdot
 callToActionLink: https://portal.fmcsa.dot.gov/UrsRegistrationWizard/
-callToActionText: Register with USDoT
-issuingAgency: US Department of Transportation
+callToActionText: Register My Vehicle with USDoT
+issuingAgency: U.S. Department of Transportation
 ---
 
-Any commercial vehicle crossing state lines must register with the US Department of Transportation (USDoT) and obtain a registration number.
+Any commercial vehicle crossing state lines must register with the U.S. Department of Transportation (USDoT) and obtain a registration number.
 
 ---
 
 ### Eligibility Criteria
 
-- Your vehicle will haul hazardous materials, or
-- Your vehicle weighs 10,000 pounds or more, and
-- Your vehicle will transport loads inside the State, interstate, or internationally
+You must meeting one of the following:
+
+- Your vehicle will haul hazardous materials
+- Your vehicle weighs 10,000 pounds or more, and will transport loads inside the State, interstate, or internationally
 
 ### Application Requirements
 
-- `EIN|ein` or SSN
+- `Employer Identification Number (EIN)|ein` or Social Security Number (SSN)
 - `Dun and Bradstreet (DUNS) number|duns` , if your company has one
-- Names and Titles of the company officers
-- A `process agent|process-agent` , already filed with Federal Motor Carrier Safety Administration (FMCSA)
+- Names and titles of the company officers
+- A `process agent|process-agent`, already filed with the Federal Motor Carrier Safety Administration (FMCSA)
+
+
+
 
 :::infoAlert
 
