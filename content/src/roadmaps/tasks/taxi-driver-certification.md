@@ -27,13 +27,14 @@ All drivers need to have a letter of certification before they can legally opera
 - Driver’s name
 - Driver’s address
 - Driver’s license number
-- Driver’s SSN
+- Driver’s Social Security Number (SSN)
 
 > **Once completed, you will have:**
 >
 > - A letter of qualification or disqualification for the driver\
->   (The letter will only be mailed to the employer. The process takes about 2 weeks after the application is received)
+>   (The letter will only be mailed to the employer. The process takes about two weeks after the application is received)
 >
+
 > **What if don’t complete this task?**
 >
 > - You, as the employer, can be fined up to $500 for each uncertified driver operating your vehicles
