@@ -11,7 +11,7 @@ Some banks may request other documentation in addition to what is listed below. 
 ---
 ### Business Bank Account Requirements
 
-* `EIN|ein` 
+* `Employer Identification Number (EIN)|ein` 
 
 * `Certificate of Formation|certificate-formation` 
 
