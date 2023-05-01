@@ -7,9 +7,10 @@ callToActionLink: ""
 callToActionText: ""
 issuingAgency: ""
 ---
-Cosmetology businesses will have their site inspected to ensure they meet New Jersey's shop requirements. When you look for a location, make sure it can meet the state's requirements among your other business considerations.
+Cosmetology businesses will have their site inspected to ensure they meet New Jersey's shop requirements. When you look for a location, make sure it can meet the State's requirements among your other business considerations.
 
----
+- - -
+
 ### Site Selection Considerations
 
 * **Board of Cosmetology's licensing guidelines:** Ensure your shop can meet the New Jersey Division of Consumer Affairs' [licensing guidelines](https://www.njconsumeraffairs.gov/regulations/Chapter-28-Board-of-Cosmetology-and-Hairstyling.pdf) 
@@ -17,7 +18,6 @@ Cosmetology businesses will have their site inspected to ensure they meet New Je
 * **Zoning:** Consult with your local government's zoning office to determine if the site is suitable for your business. Find out [how zoning may impact your site](https://business.nj.gov/pages/select-a-location) selection
 * **Tenant improvements:** Identify any repairs, renovations, or construction the site may need. Make sure to consider federal requirements for `ADA compliance|ada` and other [site considerations](https://business.nj.gov/pages/leasing-tips)
 
-
->**Once completed, you will have:**
+> **Once completed, you will have:**
 >
->* Found a viable shop location
+> * Found a viable shop location
