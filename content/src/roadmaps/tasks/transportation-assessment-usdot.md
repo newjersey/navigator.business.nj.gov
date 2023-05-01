@@ -1,7 +1,7 @@
 ---
 urlSlug: transportation-assessment-usdot
 filename: transportation-assessment-usdot
-name: Get a USDoT Number, if Applicable
+name: Get Your USDoT Number, if Applicable
 id: transportation-assessment-usdot
 callToActionLink: https://portal.fmcsa.dot.gov/UrsRegistrationWizard/
 callToActionText: Get My USDoT Number
@@ -14,9 +14,9 @@ You may be required to get a USDoT number for your commercial vehicle if you are
 
 ### Application Requirements
 
-- `EIN|ein` or SSN
+- `Employer Identification Number (EIN)|ein` or Social Security Number (SSN)
 - `Dun and Bradstreet (DUNS) number|duns` , if your company has one
-- Names and Titles of the company officers
+- Names and titles of the company officers
 - A `process agent|process-agent` , already filed with Federal Motor Carrier Safety Administration (FMCSA)
 
 :::infoAlert
