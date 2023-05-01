@@ -1,10 +1,10 @@
 ---
 urlSlug: transportation-entity-id
 filename: transportation-entity-id
-name: Apply for an Motor Vehicle Entity ID
+name: Apply for Your Motor Vehicle Entity ID
 id: transportation-entity-id
 callToActionLink: https://www.state.nj.us/mvc/pdf/business/BA-8.pdf
-callToActionText: Apply for an Entity ID with MVC
+callToActionText: Apply for My Entity ID with MVC
 issuingAgency: New Jersey Motor Vehicle Commission
 formName: BA-8
 ---
@@ -15,7 +15,7 @@ You will need an `Entity ID Number|mvc-entity-id` from the New Jersey Motor Vehi
 
 ### Application Requirements
 
-- `EIN|ein`
+- `Employer Identification Number (EIN)|ein`
 - Copy of the registration confirmation received when you registered your business for taxes with the IRS. The document must show your business name and address.
 - Copy of your `Certificate of Formation|certificate-formation`
 
