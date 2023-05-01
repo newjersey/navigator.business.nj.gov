@@ -6,7 +6,7 @@ webflowName: "Agricultural Crew Leader (Bringing Seasonal Farm Labor into NJ to 
 callToActionLink: "http://nj.gov/labor/wagehour/lawregs/agriculture_law.html"
 callToActionText: ""
 issuingAgency: "Department of Labor and Workforce Development"
-issuingDivision: "undefined"
+issuingDivision: ""
 divisionPhone: "(609) 292-2515"
 webflowIndustry: "Agricultural Crew"
 licenseCertificationClassification: "REGISTRATION"

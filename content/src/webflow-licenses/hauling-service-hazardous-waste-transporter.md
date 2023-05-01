@@ -9,5 +9,5 @@ issuingAgency: "Department of Environmental Protection"
 issuingDivision: "Division of Waste Management Water and Hazardous Waste Enforcement"
 divisionPhone: "(212) 292-7081"
 webflowIndustry: "Hazardous Hauling"
-licenseCertificationClassification: "undefined"
+licenseCertificationClassification: ""
 ---

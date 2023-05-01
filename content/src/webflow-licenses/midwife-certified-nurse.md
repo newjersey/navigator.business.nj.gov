@@ -7,7 +7,7 @@ callToActionLink: "https://www.njconsumeraffairs.gov/mid/Pages/default.aspx"
 callToActionText: ""
 issuingAgency: "Division of Consumer Affairs"
 issuingDivision: "Midwifery Liaison Committee"
-divisionPhone: "undefined"
+divisionPhone: ""
 webflowIndustry: "Midwife"
 licenseCertificationClassification: "LICENSE/REGISTRATION"
 ---
