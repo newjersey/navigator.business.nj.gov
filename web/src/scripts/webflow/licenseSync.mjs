@@ -9,7 +9,8 @@ import {
   writeMarkdownString,
 } from "../licenseLoader.mjs";
 import { argsInclude, contentToStrings, getHtml, wait } from "./helpers.mjs";
-import { createItem, getAllItems, modifyItem } from "./methods.mjs";
+import {createItem, getAllItems, getCollection, modifyItem} from "./methods.mjs";
+import {LicenseClassificationLookup} from "./licenseClassifications.mjs";
 
 const licenseCollectionId = "5e31b06cb76b830c0c358aa8";
 
@@ -32,14 +33,16 @@ const getLicenseFromMd = (licenseMd) => {
     slug: licenseMd.urlSlug,
     website: removeValueWithSpecialChars(licenseMd.callToActionLink),
     "call-to-action-text": licenseMd.callToActionText,
-    "department-3": licenseMd.issuingAgency,
-    division: licenseMd.issuingDivision,
+    "department-3": licenseMd.industryIntegration, // state agency aka industryIntegration
+    "local-agency": licenseMd.localLevelTask, // local agency aka localLevelTask
+    division: licenseMd.issuingAgency, // agency additional context aka issuingAgency
     "department-phone-2": licenseMd.divisionPhone,
     "license-certification-classification": licenseMd.licenseCertificationClassification,
     "form-name": licenseMd.formName,
     "primary-industry": licenseMd.industryId ?? licenseMd.webflowIndustry,
     content: getHtml(contentToStrings(licenseMd.contentMd)),
     "last-updated": new Date(Date.now()).toISOString(),
+    "license-classification": licenseMd.webflowType ? LicenseClassificationLookup[licenseMd.webflowType] : undefined,
   };
 };
 
@@ -62,9 +65,10 @@ const getNewLicenses = async () => {
   const currentLicensesInNavigator = loadAllLicenses();
   const currentLicensesInWebflowIds = (await getAllLicensesFromWebflow()).map((it) => it._id);
 
+  // right now only syncs license-tasks, not yet webflow-licenses also
   return currentLicensesInNavigator.filter(
     (it) => it.webflowId === undefined || !currentLicensesInWebflowIds.includes(it.webflowId)
-  ); // change
+  );
 };
 
 const updateLicenses = async () => {
