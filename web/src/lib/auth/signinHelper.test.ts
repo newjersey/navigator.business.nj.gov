@@ -180,6 +180,17 @@ describe("SigninHelper", () => {
       await onGuestSignIn(mockPush, ROUTES.onboarding, mockDispatch);
       expect(mockPush).not.toHaveBeenCalledWith(ROUTES.landing);
     });
+
+    it("does not redirect user when at /welcome", async () => {
+      mockGetCurrentUserData.mockImplementation(() => {
+        return undefined;
+      });
+      mockSession.getCurrentUser.mockImplementation(() => {
+        throw new Error("New");
+      });
+      await onGuestSignIn(mockPush, ROUTES.welcome, mockDispatch);
+      expect(mockPush).not.toHaveBeenCalledWith(ROUTES.landing);
+    });
   });
 
   describe("onSignOut", () => {

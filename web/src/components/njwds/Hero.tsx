@@ -9,7 +9,11 @@ import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
-export const Hero = (): ReactElement => {
+interface Props {
+  isWelcomePage?: boolean;
+}
+
+export const Hero = (props: Props): ReactElement => {
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const router = useRouter();
@@ -58,7 +62,7 @@ export const Hero = (): ReactElement => {
             </div>
           </div>
         </div>
-        <LandingPageTiles />
+        <LandingPageTiles isWelcomePage={props.isWelcomePage} />
       </div>
       <div className={`${isDesktopAndUp ? "hero-gradient-bg-bottom" : "bg-primary-extra-light"}`}>
         <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100">

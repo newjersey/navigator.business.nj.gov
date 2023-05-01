@@ -1,17 +1,12 @@
 import { MediaQueries } from "@/lib/PageSizes";
+import { ActionTile } from "@/lib/types/types";
 import { useMediaQuery } from "@mui/material";
 import { MutableRefObject, ReactElement, ReactNode } from "react";
 
-interface Props {
+interface Props extends ActionTile {
   className: string;
-  imgPath: string;
-  tileText: string;
-  tileText2?: string;
-  isPrimary?: boolean;
   isActive?: boolean;
-  dataTestId: string;
   reference?: MutableRefObject<null | HTMLDivElement>;
-  onClick: () => void;
 }
 
 const setTileText = (props: Props, isMobile: boolean): ReactNode => {
