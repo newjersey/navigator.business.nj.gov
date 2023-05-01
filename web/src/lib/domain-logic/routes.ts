@@ -7,6 +7,7 @@ export const ROUTES = {
   dashboard: "/dashboard",
   onboarding: "/onboarding",
   unsupported: "/unsupported",
+  welcome: "/welcome",
 };
 
 export interface QUERY_PARAMS_VALUES {

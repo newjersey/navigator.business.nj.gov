@@ -490,3 +490,12 @@ export type StepperStep = { name: string; hasError: boolean; isComplete: boolean
 export interface ContextualInfoFile extends ContextualInfo {
   filename: string;
 }
+
+export interface ActionTile {
+  imgPath: string;
+  tileText: string;
+  tileText2?: string;
+  dataTestId: string;
+  onClick: () => void;
+  isPrimary?: boolean;
+}

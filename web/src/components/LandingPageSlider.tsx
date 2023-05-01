@@ -1,10 +1,7 @@
 import { LandingPageActionTile } from "@/components/LandingPageActionTile";
 import { Icon } from "@/components/njwds/Icon";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
-import analytics from "@/lib/utils/analytics";
+import { ActionTile } from "@/lib/types/types";
 import { useMountEffect } from "@/lib/utils/helpers";
-import { useRouter } from "next/router";
 import { ReactElement, useRef, useState } from "react";
 import Slider, { CustomArrowProps } from "react-slick";
 
@@ -23,9 +20,11 @@ function PrevArrow(props: CustomArrowProps): ReactElement {
   );
 }
 
-export const LandingPageSlider = (): ReactElement => {
-  const router = useRouter();
-  const { Config } = useConfig();
+interface Props {
+  actionTiles: ActionTile[];
+}
+
+export const LandingPageSlider = (props: Props): ReactElement => {
   const [activeTile, setActiveTile] = useState(0);
   const [slideBreakPoint, setSlideBreakPoint] = useState(7);
   const cardRef = useRef<null | HTMLDivElement>(null);
@@ -53,18 +52,6 @@ export const LandingPageSlider = (): ReactElement => {
       window.removeEventListener("resize", handleResize);
     };
   });
-
-  const routeToOnboarding = (): void => {
-    router.push(ROUTES.onboarding);
-    analytics.event.landing_page_hero_get_started.click.go_to_onboarding();
-  };
-
-  const setFlowAndRouteUser = (flow: "starting" | "out-of-state" | "up-and-running"): void => {
-    routeWithQuery(router, {
-      path: ROUTES.onboarding,
-      queries: { [QUERIES.flow]: flow },
-    });
-  };
 
   const settings = {
     className: "slider variable-width",
@@ -99,65 +86,16 @@ export const LandingPageSlider = (): ReactElement => {
   return (
     <div className="slider" ref={sliderRef} style={{ marginLeft: "25px", marginRight: "25px" }}>
       <Slider {...settings}>
-        <LandingPageActionTile
-          className={"landing-page-slide"}
-          imgPath={"/img/getStarted-icon.svg"}
-          tileText={Config.landingPage.landingPageTile1Line1Text}
-          tileText2={Config.landingPage.landingPageTile1Line2Text}
-          dataTestId={"get-started-tile"}
-          reference={cardRef}
-          onClick={routeToOnboarding}
-          isActive={activeTile === 0}
-          isPrimary
-        />
-        <LandingPageActionTile
-          className={"landing-page-slide"}
-          imgPath={"/img/briefcase-icon.svg"}
-          dataTestId={"register-biz-tile"}
-          tileText={Config.landingPage.landingPageTile2Text}
-          onClick={(): void => setFlowAndRouteUser("starting")}
-          isActive={activeTile === 1}
-        />
-        <LandingPageActionTile
-          className={"landing-page-slide"}
-          imgPath={"/img/payTaxes-icon.svg"}
-          dataTestId={"pay-taxes-tile"}
-          tileText={Config.landingPage.landingPageTile3Text}
-          onClick={(): void => setFlowAndRouteUser("up-and-running")}
-          isActive={activeTile === 2}
-        />
-        <LandingPageActionTile
-          className={"landing-page-slide"}
-          imgPath={"/img/outOfState-icon.svg"}
-          dataTestId={"out-of-state-tile"}
-          tileText={Config.landingPage.landingPageTile4Text}
-          onClick={(): void => setFlowAndRouteUser("out-of-state")}
-          isActive={activeTile === 3}
-        />
-        <LandingPageActionTile
-          className={"landing-page-slide"}
-          imgPath={"/img/eligibleFunding-icon.svg"}
-          dataTestId={"eligible-funding-tile"}
-          tileText={Config.landingPage.landingPageTile5Text}
-          onClick={(): void => setFlowAndRouteUser("up-and-running")}
-          isActive={activeTile === 4}
-        />
-        <LandingPageActionTile
-          className={"landing-page-slide"}
-          imgPath={"/img/startBusiness-icon.svg"}
-          tileText={Config.landingPage.landingPageTile6Text}
-          dataTestId={"start-biz-tile"}
-          onClick={(): void => setFlowAndRouteUser("starting")}
-          isActive={activeTile === 5}
-        />
-        <LandingPageActionTile
-          className={"landing-page-slide"}
-          imgPath={"/img/runBusiness-icon.svg"}
-          tileText={Config.landingPage.landingPageTile7Text}
-          dataTestId={"run-biz-tile"}
-          onClick={(): void => setFlowAndRouteUser("up-and-running")}
-          isActive={activeTile === 6}
-        />
+        {props.actionTiles.map((actionTile, index) => {
+          const actionTileObj = {
+            ...actionTile,
+            key: `landing-page-slider-key-${index}`,
+            className: "landing-page-slide",
+            isActive: activeTile === index,
+            reference: index === 0 ? cardRef : undefined,
+          };
+          return <LandingPageActionTile {...actionTileObj} key={actionTileObj.key} />;
+        })}
       </Slider>
     </div>
   );

@@ -18,7 +18,11 @@ import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
-const Home = (): ReactElement => {
+interface Props {
+  isWelcomePage?: boolean;
+}
+
+const Home = (props: Props): ReactElement => {
   const { userData, error } = useUserData();
   const { state } = useContext(AuthContext);
   const router = useRouter();
@@ -145,7 +149,7 @@ const Home = (): ReactElement => {
     <PageSkeleton landingPage={true}>
       <NavBar landingPage={true} />
       <main data-testid="main">
-        <Hero />
+        <Hero isWelcomePage={props.isWelcomePage} />
         <section ref={sectionHowItWorks} aria-label="How it works">
           <div className="minh-mobile margin-top-2 desktop:margin-top-neg-205  padding-bottom-6 text-center bg-base-extra-light">
             <h2 className="text-accent-cool-darker h1-styling margin-bottom-6 padding-top-6">
