@@ -14,7 +14,7 @@ The process to apply for an `S corporation|s-corp` designation starts at the fed
 
 ### Application Requirements
 
-*  `EIN|ein` 
+*  `Employer Identification Number (EIN)|ein` 
 *  `Registered agent|registered-agent` 
 * Shareholder information (name, address, social security number, signature, number of shares, and date acquired)
 
