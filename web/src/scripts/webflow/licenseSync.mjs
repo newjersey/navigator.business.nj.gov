@@ -5,12 +5,13 @@ import fs from "fs";
 import {
   loadAllLicenses,
   loadAllNavigatorLicenses,
+  loadAllNavigatorWebflowLicenses,
   loadNavigatorLicense,
   writeMarkdownString,
 } from "../licenseLoader.mjs";
 import { argsInclude, contentToStrings, getHtml, wait } from "./helpers.mjs";
-import {createItem, getAllItems, getCollection, modifyItem} from "./methods.mjs";
-import {LicenseClassificationLookup} from "./licenseClassifications.mjs";
+import { LicenseClassificationLookup } from "./licenseClassifications.mjs";
+import { createItem, getAllItems, modifyItem } from "./methods.mjs";
 
 const licenseCollectionId = "5e31b06cb76b830c0c358aa8";
 
@@ -42,7 +43,9 @@ const getLicenseFromMd = (licenseMd) => {
     "primary-industry": licenseMd.industryId ?? licenseMd.webflowIndustry,
     content: getHtml(contentToStrings(licenseMd.contentMd)),
     "last-updated": new Date(Date.now()).toISOString(),
-    "license-classification": licenseMd.webflowType ? LicenseClassificationLookup[licenseMd.webflowType] : undefined,
+    "license-classification": licenseMd.webflowType
+      ? LicenseClassificationLookup[licenseMd.webflowType]
+      : undefined,
   };
 };
 
@@ -60,6 +63,16 @@ const getLicensesAlreadyInWebflow = async () => {
   );
 };
 
+//  returns list of License MD loaded from navigator webflow-licenses folder
+const getWebflowLicensesAlreadyInWebflow = async () => {
+  const currentLicensesInWebflowIds = (await getAllLicensesFromWebflow()).map((it) => it._id);
+  const currentWebflowLicensesInNavigator = loadAllNavigatorWebflowLicenses();
+
+  return currentWebflowLicensesInNavigator.filter(
+    (it) => it.webflowId !== undefined && currentLicensesInWebflowIds.includes(it.webflowId)
+  );
+};
+
 // returns a list of license MD objects that don't yet exist in webflow
 const getNewLicenses = async () => {
   const currentLicensesInNavigator = loadAllLicenses();
@@ -71,9 +84,7 @@ const getNewLicenses = async () => {
   );
 };
 
-const updateLicenses = async () => {
-  const licensesAlreadyInWebflow = await getLicensesAlreadyInWebflow();
-
+const updateLicenses = async (licenseMarkdowns) => {
   const modify = async (licenseMd) => {
     console.info(`Attempting to modify ${licenseMd.urlSlug}`);
     try {
@@ -86,12 +97,12 @@ const updateLicenses = async () => {
   };
 
   await Promise.all(
-    licensesAlreadyInWebflow.map(async (item) => {
+    licenseMarkdowns.map(async (item) => {
       return await modify(item);
     })
   );
 
-  console.info(`Modified a total of ${licensesAlreadyInWebflow.length} licenses`);
+  console.info(`Modified a total of ${licenseMarkdowns.length} licenses`);
 };
 
 const updateLicenseWithWebflowId = (webflowId, filename) => {
@@ -144,7 +155,8 @@ const createNewLicenses = async () => {
 const syncLicenses = async () => {
   console.log("updating licenses");
   await wait();
-  await updateLicenses();
+  const licensesAlreadyInWebflow = await getLicensesAlreadyInWebflow();
+  await updateLicenses(licensesAlreadyInWebflow);
   console.log("creating new licenses");
   await wait();
   await createNewLicenses();
@@ -159,12 +171,25 @@ if (process.env.NODE_ENV === "test") {
     await syncLicenses();
     process.exit(0);
   })();
+} else if (argsInclude("--legacy-sync")) {
+  await (async () => {
+    const webflowLicensesToUpdate = await getWebflowLicensesAlreadyInWebflow();
+    const x = webflowLicensesToUpdate.slice(600, 700);
+    await updateLicenses(x);
+    process.exit(0);
+  })();
 } else if (argsInclude("--preview")) {
   await (async () => {
     console.info("---- To be created: -----");
     console.info((await getNewLicenses()).map((it) => it.filename));
     console.info("---- To be updated: -----");
     console.info((await getLicensesAlreadyInWebflow()).map((it) => it.filename));
+    process.exit(0);
+  })();
+} else if (argsInclude("--legacy-preview")) {
+  await (async () => {
+    console.info("---- To be updated: -----");
+    console.info((await getWebflowLicensesAlreadyInWebflow()).map((it) => it.filename));
     process.exit(0);
   })();
 } else {

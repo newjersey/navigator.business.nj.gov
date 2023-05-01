@@ -7,7 +7,7 @@ callToActionLink: "http://nj.gov/dep/fgw/shelhome.htm"
 callToActionText: ""
 issuingAgency: "Department of Environmental Protection"
 issuingDivision: "Bureau of Marine Water Classification and Analysis"
-divisionPhone: "undefined"
+divisionPhone: ""
 webflowIndustry: "Shellfish Program"
 licenseCertificationClassification: "PERMIT"
 ---
