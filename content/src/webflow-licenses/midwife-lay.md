@@ -7,7 +7,7 @@ callToActionLink: "https://www.njconsumeraffairs.gov/bme/Pages/applications.aspx
 callToActionText: ""
 issuingAgency: "Division of Consumer Affairs"
 issuingDivision: "Board of Medical Examiners"
-divisionPhone: "undefined"
+divisionPhone: ""
 webflowIndustry: "Midwife"
 licenseCertificationClassification: "LICENSE"
 ---

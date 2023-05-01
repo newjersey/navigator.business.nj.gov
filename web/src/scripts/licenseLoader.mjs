@@ -23,13 +23,13 @@ const convertLicenseMd = (mdContents, filename) => {
 };
 
 export const loadAllLicenses = () => {
-  const webflowLicenses = loadAllWebflowLicenses();
+  const webflowLicenses = loadAllNavigatorWebflowLicenses();
   const navigatorLicenses = loadAllNavigatorLicenses();
 
   return [...navigatorLicenses, ...webflowLicenses];
 };
 
-const loadAllWebflowLicenses = () => {
+export const loadAllNavigatorWebflowLicenses = () => {
   const webflowFileNames = fs.readdirSync(webflowLicenseDir);
 
   return webflowFileNames.map((fileName) => {

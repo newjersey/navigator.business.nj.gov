@@ -7,7 +7,7 @@ callToActionLink: "http://nj.gov/dca/divisions/codes/"
 callToActionText: ""
 issuingAgency: "Department of Community Affairs"
 issuingDivision: "Construction Code Element, Planned real Estate Development (PRED)"
-divisionPhone: "undefined"
+divisionPhone: ""
 webflowIndustry: "Planned Unit"
 licenseCertificationClassification: "REGISTRATION"
 ---

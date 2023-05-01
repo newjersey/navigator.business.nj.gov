@@ -6,7 +6,7 @@ webflowName: "Health Benefit"
 filename: "health-benefit"
 callToActionLink: "https://www.njconsumeraffairs.gov/bme/Pages/applications.aspx"
 issuingAgency: "Division of Consumer Affairs"
-divisionPhone: "undefined"
+divisionPhone: ""
 webflowIndustry: "Health Benefit"
 licenseCertificationClassification: "CONTACT"
 ---
