@@ -186,7 +186,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         data-testid="change-task-progress-checkbox"
         aria-label="update task status"
         onClick={isDisabled ? undefined : (): void => setToNextStatus()}
-        className={`cursor-pointer margin-neg-105 padding-105 usa-button--unstyled`}
+        className={`cursor-pointer margin-neg-105 padding-105 usa-button--unstyled task-checkbox-base margin-right-05`}
       >
         <span
           className={
@@ -214,7 +214,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         <>{Checkbox()}</>
       )}
 
-      <span className="margin-left-105">{TaskProgressTagLookup[currentTaskProgress]}</span>
+      <span>{TaskProgressTagLookup[currentTaskProgress]}</span>
 
       <SnackbarAlert
         variant="success"
