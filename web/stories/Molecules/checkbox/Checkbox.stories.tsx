@@ -1,8 +1,8 @@
-import { Checkbox, FormControlLabel, FormGroup, Radio } from "@mui/material";
+import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 export default {
-  title: "Molecules/checkbox",
+  title: "Molecules/Checkbox",
   component: Checkbox,
   decorators: [(Story) => <div className="width-mobile">{Story()}</div>],
   parameters: {
@@ -13,7 +13,7 @@ export default {
   },
 } as ComponentMeta<typeof Checkbox>;
 
-const DefaultCheckboxStory: ComponentStory<typeof Radio> = (args) => {
+const DefaultCheckboxStory: ComponentStory<typeof Checkbox> = (args) => {
   return (
     <FormGroup>
       <FormControlLabel control={<Checkbox onChange={() => {}} />} label={"Unselected"} />
