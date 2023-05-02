@@ -22,6 +22,7 @@ import { ReactElement, ReactNode, useContext, useState } from "react";
 interface Props {
   taskId: string;
   disabledTooltipText: string | undefined;
+  STORYBOOK_ONLY_currentTaskProgress?: TaskProgress;
 }
 
 type ModalTypes = "formation" | "formation-unset" | "registered-for-taxes" | "registered-for-taxes-unset";
@@ -35,7 +36,8 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const router = useRouter();
   const { Config } = useConfig();
 
-  const currentTaskProgress: TaskProgress = userData?.taskProgress[props.taskId] || "NOT_STARTED";
+  const currentTaskProgress: TaskProgress =
+    props.STORYBOOK_ONLY_currentTaskProgress || userData?.taskProgress[props.taskId] || "NOT_STARTED";
   const isDisabled = !!props.disabledTooltipText;
 
   const getNextStatus = (): TaskProgress => {
@@ -121,7 +123,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
     }
   };
 
-  const getStyles = (): { border: string; bg: string; textColor: string } => {
+  const getStyles = (): { border: string; bg: string; textColor: string; hover: string } => {
     switch (currentTaskProgress) {
       case "NOT_STARTED":
         if (isDisabled) {
@@ -129,12 +131,14 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
             border: "border-base-light",
             bg: "bg-base-lightest",
             textColor: "",
+            hover: "",
           };
         } else {
           return {
             border: "border-base",
             bg: "bg-white",
             textColor: "",
+            hover: "task-checkbox-base-lighter",
           };
         }
       case "IN_PROGRESS":
@@ -143,12 +147,14 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
             border: "border-accent-cool-light",
             bg: "bg-accent-cool-lightest",
             textColor: "text-accent-cool-dark",
+            hover: "",
           };
         } else {
           return {
             border: "border-accent-cool-dark",
             bg: "bg-white",
             textColor: "text-accent-cool-dark",
+            hover: "task-checkbox-accent-cool-lighter",
           };
         }
       case "COMPLETED":
@@ -157,12 +163,14 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
             border: "border-primary-more-light",
             bg: "bg-primary-more-light",
             textColor: "text-white",
+            hover: "",
           };
         } else {
           return {
             border: "border-primary-light",
             bg: "bg-primary-light",
             textColor: "text-white",
+            hover: "task-checkbox-primary-lightest",
           };
         }
     }
@@ -186,7 +194,8 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         data-testid="change-task-progress-checkbox"
         aria-label="update task status"
         onClick={isDisabled ? undefined : (): void => setToNextStatus()}
-        className={`cursor-pointer margin-neg-105 padding-105 usa-button--unstyled`}
+        className={`cursor-pointer margin-neg-105 padding-105 usa-button--unstyled task-checkbox-base margin-right-05 ${styles.hover}`}
+        {...(isDisabled ? { disabled: true } : {})}
       >
         <span
           className={
@@ -203,18 +212,20 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   };
 
   return (
-    <>
+    <div className={"flex flex-align-center"}>
       <>{congratulatoryModal}</>
 
       {isDisabled ? (
         <ArrowTooltip title={props.disabledTooltipText || ""}>
-          <div data-testid="status-info-tooltip">{Checkbox()}</div>
+          <div data-testid="status-info-tooltip" className={"line-height-100"}>
+            {Checkbox()}
+          </div>
         </ArrowTooltip>
       ) : (
         <>{Checkbox()}</>
       )}
 
-      <span className="margin-left-105">{TaskProgressTagLookup[currentTaskProgress]}</span>
+      <span className="flex flex-align-center">{TaskProgressTagLookup[currentTaskProgress]}</span>
 
       <SnackbarAlert
         variant="success"
@@ -257,6 +268,6 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
       >
         <Content>{Config.formationDateModal.areYouSureModalBody}</Content>
       </ModalTwoButton>
-    </>
+    </div>
   );
 };

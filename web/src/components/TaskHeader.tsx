@@ -65,7 +65,7 @@ export const TaskHeader = (props: Props): ReactElement => {
           className="flex flex-align-center flex-wrap margin-top-0 margin-bottom-2"
           data-testid="taskProgress"
         >
-          <div className="margin-right-105 flex flex-align-center margin-bottom-1">
+          <div className="margin-right-105 margin-bottom-1">
             <TaskProgressCheckbox taskId={props.task.id} disabledTooltipText={getDisabledText()} />
           </div>
           {getModifiedTaskBooleanUndefined(roadmap, props.task, "required") === true && (
