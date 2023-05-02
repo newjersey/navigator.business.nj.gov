@@ -12,6 +12,7 @@ import {
   castPublicFilingLegalTypeToFormationType,
   defaultDateFormat,
   FormationFormData,
+  FormationLegalType,
   generateFormationFormData,
   generateFormationIncorporator,
   generateFormationSigner,
@@ -96,6 +97,50 @@ describe("Formation - ReviewStep", () => {
     expect(designatorSection.queryByText("name in profile", { exact: false })).not.toBeInTheDocument();
   });
 
+  it("displays not entered on the business designator line if suffix is undefined", async () => {
+    const formationFormData = { businessName: "business name", businessSuffix: undefined };
+    await renderStep({}, formationFormData);
+    const designatorSection = within(screen.getByTestId("review-suffix-and-start-date"));
+    expect(designatorSection.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
+  });
+
+  it("displays not entered on the business designator line if name is empty", async () => {
+    const initialProfileData: Partial<ProfileData> = {
+      businessName: "",
+    };
+    const formationFormData = { businessName: "" };
+    await renderStep(initialProfileData, formationFormData);
+    const designatorSection = within(screen.getByTestId("review-suffix-and-start-date"));
+    expect(designatorSection.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
+  });
+
+  it("displays the total share of stock if legal type is corporation", async () => {
+    const initialProfileData: Partial<ProfileData> = {
+      legalStructureId: "c-corporation",
+    };
+    const formationFormData = {
+      businessTotalStock: undefined,
+      legalType: "c-corporation" as FormationLegalType,
+    };
+    await renderStep(initialProfileData, formationFormData);
+    expect(screen.getByText(`${Config.formation.fields.businessTotalStock.label}:`)).toBeInTheDocument();
+    expect(screen.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
+  });
+
+  it("doesn't display the total share of stock if legal type is not corporation", async () => {
+    const initialProfileData: Partial<ProfileData> = {
+      legalStructureId: "limited-liability-company",
+    };
+    const formationFormData = {
+      businessTotalStock: undefined,
+      legalType: "limited-liability-company" as FormationLegalType,
+    };
+    await renderStep(initialProfileData, formationFormData);
+    expect(
+      screen.queryByText(`${Config.formation.fields.businessTotalStock.label}:`)
+    ).not.toBeInTheDocument();
+  });
+
   it("displays the business step when the edit button in the main business section is clicked", async () => {
     await renderStep({}, {});
     fireEvent.click(screen.getByTestId("edit-business-name-step"));
@@ -123,6 +168,11 @@ describe("Formation - ReviewStep", () => {
   it("does not display members section within review step when members do not exist", async () => {
     await renderStep({ legalStructureId: "limited-liability-company" }, { members: [] });
     expect(screen.queryByTestId("members-step")).not.toBeInTheDocument();
+  });
+
+  it("displays empty directors section within review step when legal type is corporation", async () => {
+    await renderStep({ legalStructureId: "c-corporation" }, { members: [] });
+    expect(screen.getByTestId("empty-members-section")).toBeInTheDocument();
   });
 
   it("displays business purpose on review step", async () => {
@@ -179,16 +229,24 @@ describe("Formation - ReviewStep", () => {
     expect(screen.queryByTestId("provisions")).not.toBeInTheDocument();
   });
 
-  it("does not display incorporators label within review step when incorporators are empty", async () => {
+  it("displays the empty incorporators section within review step when incorporators are empty", async () => {
     await renderStep({ legalStructureId: "c-corporation" }, { incorporators: [] });
-    expect(
-      screen.queryByText(markdownToText(Config.formation.fields.incorporators.label))
-    ).not.toBeInTheDocument();
+    expect(screen.getByTestId("review-incorporators-not-entered")).toBeInTheDocument();
   });
 
-  it("does not display signers label within review step when signers are empty", async () => {
+  it("displays the empty incorporators section within review step when incorporators are undefined", async () => {
+    await renderStep({ legalStructureId: "c-corporation" }, { incorporators: undefined });
+    expect(screen.getByTestId("review-incorporators-not-entered")).toBeInTheDocument();
+  });
+
+  it("displays the empty signers section within review step when signers are empty", async () => {
     await renderStep({ legalStructureId: "limited-liability-company" }, { signers: [] });
-    expect(screen.queryByText(markdownToText(Config.formation.fields.signers.label))).not.toBeInTheDocument();
+    expect(screen.getByTestId("review-signers-not-entered")).toBeInTheDocument();
+  });
+
+  it("displays the empty signers section within review step when signers are undefined", async () => {
+    await renderStep({ legalStructureId: "limited-liability-company" }, { signers: undefined });
+    expect(screen.getByTestId("review-signers-not-entered")).toBeInTheDocument();
   });
 
   it("displays different titles when legalStructure is a ForProfit Corporation", async () => {
@@ -454,7 +512,7 @@ describe("Formation - ReviewStep", () => {
         { contactFirstName: "Namey", contactLastName: "McNameFace", contactPhoneNumber: "" }
       );
       const phoneNumberField = within(screen.getByTestId("contact-phone-number-field"));
-      expect(phoneNumberField.getByText("Not set")).toBeInTheDocument();
+      expect(phoneNumberField.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
     });
   });
 });

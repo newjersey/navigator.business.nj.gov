@@ -8,39 +8,33 @@ import { ReactElement, useContext } from "react";
 export const ReviewMainBusinessLocation = (): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
-
-  const italicNotEnteredText = `*${Config.formation.general.notEntered}*`;
   const businessLocationType = state.formationFormData.businessLocationType;
 
-  const getAddressCity = (): string => {
-    return (
-      (businessLocationType === "NJ"
-        ? state.formationFormData.addressMunicipality?.displayName
-        : state.formationFormData.addressCity) || italicNotEnteredText
-    );
+  const getAddressCity = (): string | undefined => {
+    return businessLocationType === "NJ"
+      ? state.formationFormData.addressMunicipality?.displayName
+      : state.formationFormData.addressCity;
   };
 
-  const getAddressState = (): string => {
-    return (
-      (businessLocationType === "INTL"
-        ? state.formationFormData.addressProvince
-        : state.formationFormData.addressState?.name) || italicNotEnteredText
-    );
+  const getAddressState = (): string | undefined => {
+    return businessLocationType === "INTL"
+      ? state.formationFormData.addressProvince
+      : state.formationFormData.addressState?.name;
   };
 
-  const getAddressCountry = (): string => {
+  const getAddressCountry = (): string | undefined => {
     return businessLocationType === "INTL"
       ? arrayOfCountriesObjects.find(
           (country) => country.shortCode === state.formationFormData.addressCountry
-        )?.name ?? italicNotEnteredText
-      : "";
+        )?.name
+      : undefined;
   };
 
   return (
     <ReviewSubSection header={Config.formation.sections.addressHeader} marginOverride="margin-top-0">
       <ReviewLineItem
         label={Config.formation.fields.addressLine1.label}
-        value={state.formationFormData.addressLine1 || italicNotEnteredText}
+        value={state.formationFormData.addressLine1}
       />
       {state.formationFormData.addressLine2 && (
         <ReviewLineItem
@@ -53,7 +47,7 @@ export const ReviewMainBusinessLocation = (): ReactElement => {
       <ReviewLineItem label={Config.formation.fields.addressState.label} value={getAddressState()} />
       <ReviewLineItem
         label={Config.formation.fields.addressZipCode.label}
-        value={state.formationFormData.addressZipCode || italicNotEnteredText}
+        value={state.formationFormData.addressZipCode}
       />
       {businessLocationType === "INTL" && (
         <ReviewLineItem label={Config.formation.fields.addressCountry.label} value={getAddressCountry()} />

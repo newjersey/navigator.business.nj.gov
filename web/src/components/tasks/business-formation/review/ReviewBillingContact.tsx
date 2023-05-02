@@ -8,7 +8,6 @@ import { ReactElement, useContext } from "react";
 export const ReviewBillingContact = (): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
-  const italicNotEnteredText = `*${Config.formation.general.notEntered}*`;
 
   return (
     <ReviewSubSection
@@ -17,15 +16,15 @@ export const ReviewBillingContact = (): ReactElement => {
     >
       <ReviewLineItem
         label={Config.formation.fields.contactFirstName.label}
-        value={state.formationFormData.contactFirstName || italicNotEnteredText}
+        value={state.formationFormData.contactFirstName}
       />
       <ReviewLineItem
         label={Config.formation.fields.contactLastName.label}
-        value={state.formationFormData.contactLastName || italicNotEnteredText}
+        value={state.formationFormData.contactLastName}
       />
       <ReviewLineItem
         label={Config.formation.fields.contactPhoneNumber.label}
-        value={state.formationFormData.contactPhoneNumber || italicNotEnteredText}
+        value={state.formationFormData.contactPhoneNumber}
         dataTestId="contact-phone-number-field"
         formatter={state.formationFormData.contactPhoneNumber ? getPhoneNumberFormat : undefined}
       />

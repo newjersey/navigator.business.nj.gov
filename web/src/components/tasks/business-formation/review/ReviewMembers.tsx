@@ -12,7 +12,7 @@ export const ReviewMembers = (): ReactElement => {
   const isCorp = userData?.profileData.legalStructureId
     ? corpLegalStructures.includes(userData?.profileData.legalStructureId as FormationLegalType)
     : false;
-  const italicNotEnteredText = `*${Config.formation.general.notEntered}*`;
+  const hasMembers = (userData?.formationData.formationFormData.members?.length ?? 0) > 0;
 
   const getConfig = (): { header: string; label: string } => {
     const field = isCorp ? "directors" : "members";
@@ -22,45 +22,73 @@ export const ReviewMembers = (): ReactElement => {
     };
   };
 
-  return (
-    <ReviewSubSection header={getConfig().header}>
-      {userData?.formationData.formationFormData.members?.map((member, index) => {
-        return (
-          <div key={`${member.name}-${index}`}>
-            <ReviewLineItem
-              label={getConfig().label}
-              value={member.name}
-              marginOverride={index === 0 ? "margin-top-0" : "margin-top-2"}
-            />
-            {isCorp && (
-              <>
-                <ReviewLineItem
-                  label={Config.formation.addressModal.addressLine1.label}
-                  value={member.addressLine1 || italicNotEnteredText}
-                />
-                {member.addressLine2 && (
+  const displayMembers = (): ReactElement => {
+    return (
+      <>
+        {userData?.formationData.formationFormData.members?.map((member, index) => {
+          return (
+            <div key={`${member.name}-${index}`}>
+              <ReviewLineItem
+                label={getConfig().label}
+                value={member.name}
+                marginOverride={index === 0 ? "margin-top-0" : "margin-top-2"}
+              />
+              {isCorp && (
+                <>
                   <ReviewLineItem
-                    label={Config.formation.addressModal.addressLine2.label}
-                    value={member.addressLine2 || italicNotEnteredText}
+                    label={Config.formation.addressModal.addressLine1.label}
+                    value={member.addressLine1}
                   />
-                )}
-                <ReviewLineItem
-                  label={Config.formation.addressModal.addressCity.label}
-                  value={member.addressCity || italicNotEnteredText}
-                />
-                <ReviewLineItem
-                  label={Config.formation.addressModal.addressState.label}
-                  value={member.addressState?.name ?? italicNotEnteredText}
-                />
-                <ReviewLineItem
-                  label={Config.formation.addressModal.addressZipCode.label}
-                  value={member.addressZipCode || italicNotEnteredText}
-                />
-              </>
-            )}
-          </div>
-        );
-      })}
-    </ReviewSubSection>
-  );
+                  {member.addressLine2 && (
+                    <ReviewLineItem
+                      label={Config.formation.addressModal.addressLine2.label}
+                      value={member.addressLine2}
+                    />
+                  )}
+                  <ReviewLineItem
+                    label={Config.formation.addressModal.addressCity.label}
+                    value={member.addressCity}
+                  />
+                  <ReviewLineItem
+                    label={Config.formation.addressModal.addressState.label}
+                    value={member.addressState?.name}
+                  />
+                  <ReviewLineItem
+                    label={Config.formation.addressModal.addressZipCode.label}
+                    value={member.addressZipCode}
+                  />
+                </>
+              )}
+            </div>
+          );
+        })}
+      </>
+    );
+  };
+
+  const displayEmptyMembers = (): ReactElement => {
+    return (
+      <div data-testid="empty-members-section">
+        <ReviewLineItem label={getConfig().label} value={undefined} marginOverride={"margin-top-0"} />
+        {isCorp && (
+          <>
+            <ReviewLineItem label={Config.formation.addressModal.addressLine1.label} value={undefined} />
+            <ReviewLineItem label={Config.formation.addressModal.addressCity.label} value={undefined} />
+            <ReviewLineItem label={Config.formation.addressModal.addressState.label} value={undefined} />
+            <ReviewLineItem label={Config.formation.addressModal.addressZipCode.label} value={undefined} />
+          </>
+        )}
+      </div>
+    );
+  };
+
+  const members = (): ReactElement => {
+    if (hasMembers) {
+      return displayMembers();
+    } else {
+      return displayEmptyMembers();
+    }
+  };
+
+  return <ReviewSubSection header={getConfig().header}>{members()}</ReviewSubSection>;
 };

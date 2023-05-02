@@ -9,11 +9,16 @@ import { ReactElement, useContext } from "react";
 export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
-  const italicNotEnteredText = `*${Config.formation.general.notEntered}*`;
+  const isCorp =
+    state.formationFormData.legalType === "c-corporation" ||
+    state.formationFormData.legalType === "s-corporation";
 
-  const getBusinessNameDisplay = (): string => {
-    const name = state.formationFormData.businessName || italicNotEnteredText;
-    const suffix = state.formationFormData.businessSuffix || italicNotEnteredText;
+  const getBusinessNameDisplay = (): string | undefined => {
+    const name = state.formationFormData.businessName;
+    const suffix = state.formationFormData.businessSuffix;
+    if (!name || !suffix) {
+      return undefined;
+    }
     return `${name} ${suffix}`;
   };
 
@@ -36,7 +41,7 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
           <ReviewLineItem
             dataTestId="foreign-state-of-formation"
             label={Config.formation.fields.foreignStateOfFormation.label}
-            value={state.formationFormData.foreignStateOfFormation ?? italicNotEnteredText}
+            value={state.formationFormData.foreignStateOfFormation}
           />
           <ReviewLineItem
             dataTestId="foreign-date-of-formation"
@@ -47,12 +52,12 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
                     state.formationFormData.foreignDateOfFormation,
                     defaultDateFormat
                   ).format(defaultDisplayDateFormat)
-                : italicNotEnteredText
+                : undefined
             }
           />
         </>
       )}
-      {state.formationFormData.businessTotalStock.length > 0 && (
+      {isCorp && (
         <ReviewLineItem
           label={Config.formation.fields.businessTotalStock.label}
           value={state.formationFormData.businessTotalStock}

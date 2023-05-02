@@ -7,14 +7,13 @@ import { ReactElement, useContext } from "react";
 export const ReviewRegisteredAgent = (): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
-  const italicNotEnteredText = `*${Config.formation.general.notEntered}*`;
 
   return (
     <ReviewSubSection header={Config.formation.registeredAgent.label} marginOverride="margin-top-0">
       {state.formationFormData.agentNumberOrManual === "NUMBER" && (
         <ReviewLineItem
           label={Config.formation.fields.agentNumber.label}
-          value={state.formationFormData.agentNumber || italicNotEnteredText}
+          value={state.formationFormData.agentNumber}
           marginOverride="margin-top-0"
           dataTestId="agent-number"
         />
@@ -23,33 +22,33 @@ export const ReviewRegisteredAgent = (): ReactElement => {
         <div data-testid="agent-manual-entry">
           <ReviewLineItem
             label={Config.formation.fields.agentName.label}
-            value={state.formationFormData.agentName || italicNotEnteredText}
+            value={state.formationFormData.agentName}
             marginOverride="margin-top-0"
           />
 
           <ReviewLineItem
             label={Config.formation.fields.agentEmail.label}
-            value={state.formationFormData.agentEmail || italicNotEnteredText}
+            value={state.formationFormData.agentEmail}
           />
 
           <ReviewLineItem
             label={Config.formation.fields.agentOfficeAddressLine1.label}
-            value={state.formationFormData.agentOfficeAddressLine1 || italicNotEnteredText}
+            value={state.formationFormData.agentOfficeAddressLine1}
           />
           {state.formationFormData.addressLine2 && (
             <ReviewLineItem
               label={Config.formation.fields.agentOfficeAddressLine2.label}
-              value={state.formationFormData.agentOfficeAddressLine2 || italicNotEnteredText}
+              value={state.formationFormData.agentOfficeAddressLine2}
             />
           )}
           <ReviewLineItem
             label={Config.formation.fields.agentOfficeAddressMunicipality.label}
-            value={state.formationFormData.agentOfficeAddressMunicipality?.name || italicNotEnteredText}
+            value={state.formationFormData.agentOfficeAddressMunicipality?.name}
           />
           <ReviewLineItem label={Config.formation.fields.agentOfficeAddressState.label} value={"NJ"} />
           <ReviewLineItem
             label={Config.formation.fields.agentOfficeAddressZipCode.label}
-            value={state.formationFormData.agentOfficeAddressZipCode || italicNotEnteredText}
+            value={state.formationFormData.agentOfficeAddressZipCode}
           />
         </div>
       )}
