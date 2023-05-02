@@ -45,6 +45,21 @@
   border: 2px solid;
 }
 
+.task-checkbox-base-lighter:hover,
+.task-checkbox-base-lighter:focus {
+  background-color: $base-lighter;
+}
+
+.task-checkbox-accent-cool-lighter:hover,
+.task-checkbox-accent-cool-lighter:focus {
+  background-color: $accent-cool-lighter;
+}
+
+.task-checkbox-primary-lightest:hover,
+.task-checkbox-primary-lightest:focus {
+  background-color: $primary-lightest;
+}
+
 .btn-accent-cool-darker {
   background-color: $accent-cool-darker !important;
   &:hover {

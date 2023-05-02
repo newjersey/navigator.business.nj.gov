@@ -27,6 +27,7 @@ module.exports = {
       "@/styles": path.resolve(__dirname, "../src/styles"),
       "@/pages": path.resolve(__dirname, "../src/pages"),
       "@businessnjgovnavigator/content": path.resolve(__dirname, "../../content/src"),
+      "@businessnjgovnavigator/shared": path.resolve(__dirname, "../../shared/lib/shared/src"),
     };
     return config;
   },
