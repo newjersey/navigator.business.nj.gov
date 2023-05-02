@@ -1,4 +1,5 @@
 import { ExpandCollapseString } from "@/components/ExpandCollapseString";
+import { ReviewNotEntered } from "@/components/tasks/business-formation/review/section/ReviewNotEntered";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -32,9 +33,7 @@ export const ReviewText = (props: Props): ReactElement => {
           className={`${isTabletAndUp ? "display-flex" : "display-block"}`}
           data-testid={kebabCaseFieldName}
         >
-          <div>
-            {state.formationFormData[props.fieldName] || <em>{Config.formation.general.notEntered}</em>}
-          </div>
+          <div>{state.formationFormData[props.fieldName] || <ReviewNotEntered />}</div>
         </div>
       )}
     </>

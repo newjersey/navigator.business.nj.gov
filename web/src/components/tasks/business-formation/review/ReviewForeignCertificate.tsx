@@ -1,3 +1,4 @@
+import { ReviewNotEntered } from "@/components/tasks/business-formation/review/section/ReviewNotEntered";
 import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { InputFile } from "@businessnjgovnavigator/shared/formationData";
@@ -25,7 +26,7 @@ export const ReviewForeignCertificate = (props: Props): ReactElement => {
         </div>
       ) : (
         <div className="margin-bottom-4">
-          <i>{Config.formation.general.notEntered}</i>
+          <ReviewNotEntered />
         </div>
       )}
     </ReviewSubSection>

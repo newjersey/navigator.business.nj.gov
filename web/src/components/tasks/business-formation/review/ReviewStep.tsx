@@ -19,6 +19,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { isForeignCorporation } from "@/lib/utils/helpers";
+import { corpLegalStructures } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useContext } from "react";
 
 export const ReviewStep = (): ReactElement => {
@@ -29,9 +30,7 @@ export const ReviewStep = (): ReactElement => {
   const hasProvisions = (state.formationFormData.provisions?.length ?? 0) > 0;
   const hasPurpose = !!state.formationFormData.businessPurpose;
   const hasMembers = (state.formationFormData.members?.length ?? 0) > 0;
-  const hasSigners = (state.formationFormData.signers?.length ?? 0) > 0;
-  const hasIncorporators = (state.formationFormData.incorporators?.length ?? 0) > 0;
-
+  const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
   return (
     <>
       <div data-testid="review-step">
@@ -69,8 +68,8 @@ export const ReviewStep = (): ReactElement => {
         </ReviewSection>
         <ReviewSection stepName={"Contacts"} testId="edit-contacts-step">
           <ReviewRegisteredAgent />
-          {hasMembers && !isLP && <ReviewMembers />}
-          {(hasSigners || hasIncorporators) && <ReviewSignatures />}
+          {(isCorp || (!isLP && hasMembers)) && <ReviewMembers />}
+          {<ReviewSignatures />}
         </ReviewSection>
         <ReviewSection stepName={"Billing"} testId="edit-billing-step">
           <ReviewBillingContact />

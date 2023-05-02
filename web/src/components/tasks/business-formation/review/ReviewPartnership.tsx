@@ -12,9 +12,10 @@ export const ReviewPartnership = (): ReactElement => {
   const notEnteredText = (question: string): ReactElement => {
     return (
       <>
-        <div>
-          <em>{Config.formation.general.notEntered}</em> - {question}
-        </div>
+        <span className={"bg-accent-warm-extra-light text-italic"}>
+          {Config.formation.general.notEntered}
+        </span>
+        <span>{`- ${question}`}</span>
       </>
     );
   };

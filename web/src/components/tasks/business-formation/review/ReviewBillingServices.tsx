@@ -7,9 +7,8 @@ import { ReactElement, useContext } from "react";
 export const ReviewBillingServices = (): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
-  const italicNotEnteredText = `*${Config.formation.general.notEntered}*`;
 
-  const getDocumentsList = (): string => {
+  const getDocumentsList = (): string | undefined => {
     const docs = [];
     if (state.formationFormData.officialFormationDocument) {
       docs.push(Config.formation.fields.officialFormationDocument.label);
@@ -21,20 +20,20 @@ export const ReviewBillingServices = (): ReactElement => {
       docs.push(Config.formation.fields.certifiedCopyOfFormationDocument.label);
     }
     if (docs.length === 0) {
-      return italicNotEnteredText;
+      return undefined;
     }
 
     return docs.join(", ");
   };
 
-  const getPaymentTypeLabel = (): string => {
+  const getPaymentTypeLabel = (): string | undefined => {
     switch (state.formationFormData.paymentType) {
       case "CC":
         return Config.formation.fields.paymentType.creditCardLabel;
       case "ACH":
         return Config.formation.fields.paymentType.achLabel;
       default:
-        return italicNotEnteredText;
+        return undefined;
     }
   };
 

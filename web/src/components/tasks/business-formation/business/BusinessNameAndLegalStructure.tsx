@@ -4,6 +4,7 @@ import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
+import { ReviewNotEntered } from "@/components/tasks/business-formation/review/section/ReviewNotEntered";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -62,6 +63,14 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
     return isReviewStep ? `${label}:` : label;
   };
 
+  const notEnteredBusinessName = (): ReactElement => {
+    if (isReviewStep) {
+      return <ReviewNotEntered />;
+    } else {
+      return <span className="text-accent-cool-darker">{Config.formation.general.notEntered}</span>;
+    }
+  };
+
   return (
     <>
       <div className="flex space-between margin-bottom-2 flex-align-center">
@@ -81,20 +90,26 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
               <ModifiedContent>{businessName()}</ModifiedContent>
             </strong>
           </div>
-          <span className="text-accent-cool-darker">
-            {state.formationFormData.businessName || Config.formation.general.notEntered} {""}
-          </span>
-          {!isReviewStep && (
-            <UnStyledButton
-              style="tertiary"
-              widthAutoOnMobile
-              onClick={(): void => setStepIndex(LookupStepIndexByName("Name"))}
-              underline
-              dataTestid="edit-business-name"
-            >
-              {Config.formation.general.editButtonText}
-            </UnStyledButton>
-          )}
+          <div className="flex">
+            <div className="margin-right-05">
+              {state.formationFormData.businessName ? (
+                <span className="text-accent-cool-darker">{state.formationFormData.businessName}</span>
+              ) : (
+                notEnteredBusinessName()
+              )}
+            </div>
+            {!isReviewStep && (
+              <UnStyledButton
+                style="tertiary"
+                widthAutoOnMobile
+                onClick={(): void => setStepIndex(LookupStepIndexByName("Name"))}
+                underline
+                dataTestid="edit-business-name"
+              >
+                {Config.formation.general.editButtonText}
+              </UnStyledButton>
+            )}
+          </div>
         </div>
         <div
           className="padding-bottom-205 padding-x-205 tablet:padding-205 flex-half"

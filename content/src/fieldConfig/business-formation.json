@@ -11,7 +11,7 @@
     "general": {
       "paymentDisclaimer": "You will be brought to a secure payment platform operated by New Jersey's partner NICUSA Inc. to process your payment.",
       "partialAddressErrorText": "Address must be complete.",
-      "notEntered": "Not set",
+      "notEntered": "Not Entered",
       "backButtonText": "Cancel",
       "initialNextNexusButtonText": "Continue Authorizing My Business",
       "editButtonText": "Edit",

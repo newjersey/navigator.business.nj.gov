@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { ContextualInfoButton } from "@/components/ContextualInfoButton";
+import { ReviewNotEntered } from "@/components/tasks/business-formation/review/section/ReviewNotEntered";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
@@ -7,7 +8,7 @@ import { ReactElement } from "react";
 interface Props {
   label: string;
   labelContextualInfo?: string;
-  value: string;
+  value: string | undefined;
   dataTestId?: string;
   marginOverride?: string;
   formatter?: (value: string) => string;
@@ -15,7 +16,6 @@ interface Props {
 
 export const ReviewLineItem = (props: Props): ReactElement => {
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
-
   return (
     <div
       className={`${isTabletAndUp ? "grid-row" : "display-block"} ${props.marginOverride || "margin-top-1"}`}
@@ -28,9 +28,15 @@ export const ReviewLineItem = (props: Props): ReactElement => {
           `${props.label}:`
         )}
       </div>
-      <Content className={"grid-col flex-8"}>
-        {props.formatter ? props.formatter(props.value) : props.value}
-      </Content>
+      {props.value ? (
+        <Content className={"grid-col flex-8 text-italic"}>
+          {props.formatter ? props.formatter(props.value) : props.value}
+        </Content>
+      ) : (
+        <div className={"grid-col flex-8"}>
+          <ReviewNotEntered />
+        </div>
+      )}
     </div>
   );
 };
