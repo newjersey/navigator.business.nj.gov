@@ -92,6 +92,9 @@ export default createTheme({
       styleOverrides: {
         root: {
           marginRight: "4px",
+          "&:hover": {
+            backgroundColor: "#f0f0f0",
+          },
         },
       },
       variants: [
@@ -115,6 +118,9 @@ export default createTheme({
           marginRight: "4px",
           "&.Mui-disabled": {
             color: "#adadad",
+          },
+          "&:hover": {
+            backgroundColor: "#f0f0f0",
           },
         },
       },
