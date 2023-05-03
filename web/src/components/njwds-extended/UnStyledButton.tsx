@@ -1,7 +1,7 @@
 import { CircularProgress } from "@mui/material";
 import React, { forwardRef, ReactElement, useEffect, useRef, useState } from "react";
 interface Props {
-  style: "tertiary" | "light" | "narrow-light";
+  style: "tertiary" | "light" | "narrow-light" | "unstyled";
   children: React.ReactNode;
   onClick?: (() => void) | ((event: React.MouseEvent) => Promise<void>) | ((event: React.MouseEvent) => void);
   dataTestid?: string;
@@ -41,6 +41,9 @@ export const UnStyledButton = forwardRef(
         style =
           "usa-button usa-tag bg-transparent text-normal text-base border-1px border-base-light hide-unhide-button";
         break;
+      case "unstyled":
+        style = "usa-button bg-transparent";
+        break;
     }
     const showDisabledClass = props.loading ? disabledClass : "";
 
@@ -67,8 +70,8 @@ export const UnStyledButton = forwardRef(
     const fullWidth = props.fullWidth ? "width-100" : "";
 
     const className = [
-      style,
       props.className,
+      style,
       heightAutoOnMobile,
       widthAutoOnMobile,
       noRightMargin,

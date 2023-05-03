@@ -833,6 +833,7 @@ collections:
                   - { label: "Submit Button Text", name: "submitButtonText", widget: "string" }
                   - { label: "Next Button Text", name: "nextButtonText", widget: "string" }
                   - { label: "Previous Button Text", name: "previousButtonText", widget: "string" }
+                  - { label: "Help Button Text", name: "helpButtonText", widget: "string" }
                   - { label: "Characters label", name: "charactersLabel", widget: "string" }
                   - { label: "Payment disclaimer", name: "paymentDisclaimer", widget: "text" }
                   - { label: "Optional field label", name: "optionalLabel", widget: "string" }

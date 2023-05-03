@@ -145,6 +145,20 @@ describe("<BusinessFormationPaginator />", () => {
       expect(screen.getByText(Config.formation.general.submitButtonText)).toBeInTheDocument();
       expect(screen.queryByText(Config.formation.general.nextButtonText)).not.toBeInTheDocument();
     });
+
+    it("shows the help button on every formation page", async () => {
+      const page = preparePage(initialUserData, displayContent);
+      await page.stepperClickToContactsStep();
+      expect(screen.getByTestId("help-button")).toBeInTheDocument();
+      await page.stepperClickToBusinessStep();
+      expect(screen.getByTestId("help-button")).toBeInTheDocument();
+      await page.stepperClickToReviewStep();
+      expect(screen.getByTestId("help-button")).toBeInTheDocument();
+      await page.stepperClickToBusinessNameStep();
+      expect(screen.getByTestId("help-button")).toBeInTheDocument();
+      await page.stepperClickToBillingStep();
+      expect(screen.getByTestId("help-button")).toBeInTheDocument();
+    });
   });
 
   describe("when in guest mode", () => {
