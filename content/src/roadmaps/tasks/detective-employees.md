@@ -21,7 +21,7 @@ All New Jersey (NJ) private detective agencies are required to mail in employee 
 - Applicable fees paid
 
 :::infoAlert
-You must also complete, sign, and notarize an [Employee Statement form](https://www.nj.gov/njsp/private-detective/pdf/pd-agency-statement.pdf) for each of your employees. The form must be kept with your business records.
+You must also complete, sign, and notarize an [Employee Statement Form](https://www.nj.gov/njsp/private-detective/pdf/pd-agency-statement.pdf) for each of your employees. The form must be kept with your business records.
 :::
 
 > **Once completed, you will have:**
