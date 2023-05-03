@@ -1,3 +1,4 @@
+import { ReviewNotEntered } from "@/components/tasks/business-formation/review/section/ReviewNotEntered";
 import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement } from "rehype-react/lib";
@@ -11,7 +12,7 @@ export const ReviewWillPracticeLaw = (props: Props): ReactElement => {
 
   const displayResponse = (): ReactElement => {
     if (props.willPracticeLaw === undefined) {
-      return <i>{Config.formation.general.notEntered}</i>;
+      return <ReviewNotEntered />;
     } else {
       return <>{props.willPracticeLaw ? "Yes" : "No"}</>;
     }
