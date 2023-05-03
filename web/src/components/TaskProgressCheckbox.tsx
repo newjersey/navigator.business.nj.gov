@@ -2,10 +2,10 @@ import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
 import { FormationDateModal } from "@/components/FormationDateModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
-import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { RegisteredForTaxesModal } from "@/components/RegisteredForTaxesModal";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
+import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -37,7 +37,10 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const currentTaskProgress: TaskProgress =
-    props.STORYBOOK_ONLY_currentTaskProgress || userData?.taskProgress[props.taskId] || "NOT_STARTED";
+    props.STORYBOOK_ONLY_currentTaskProgress ??
+    updateQueue?.current().taskProgress[props.taskId] ??
+    userData?.taskProgress[props.taskId] ??
+    "NOT_STARTED";
   const isDisabled = !!props.disabledTooltipText;
 
   const getNextStatus = (): TaskProgress => {
@@ -227,13 +230,10 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
 
       <span className="flex flex-align-center">{TaskProgressTagLookup[currentTaskProgress]}</span>
 
-      <SnackbarAlert
-        variant="success"
+      <TaskStatusChangeSnackbar
         isOpen={successSnackbarIsOpen}
         close={(): void => setSuccessSnackbarIsOpen(false)}
-      >
-        {Config.taskDefaults.taskProgressSuccessSnackbarBody}
-      </SnackbarAlert>
+      />
 
       <FormationDateModal
         isOpen={currentOpenModal === "formation"}

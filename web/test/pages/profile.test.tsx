@@ -35,6 +35,7 @@ import {
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   businessPersonas,
+  businessStructureTaskId,
   createEmptyUserData,
   defaultDateFormat,
   einTaskId,
@@ -479,7 +480,11 @@ describe("profile", () => {
           employerId: "023456780",
           notes: "whats appppppp",
         },
-        taskProgress: { [einTaskId]: "COMPLETED", "determine-naics-code": "NOT_STARTED" },
+        taskProgress: {
+          [businessStructureTaskId]: "COMPLETED",
+          [einTaskId]: "COMPLETED",
+          [naicsCodeTaskId]: "NOT_STARTED",
+        },
         taskItemChecklist: {},
       });
     });

@@ -11,6 +11,7 @@ export const isTaxTask = (id: string): boolean => {
 };
 
 export const einTaskId = "register-for-ein";
+export const businessStructureTaskId = "business-structure";
 
 export const isEinTask = (id: string): boolean => {
   return id === einTaskId;

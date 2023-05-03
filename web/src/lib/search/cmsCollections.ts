@@ -27,6 +27,7 @@ export const cmsCollections = [
       "Tasks - EIN",
       "Tasks - Tax ID",
       "Tasks - NAICS Code",
+      "Tasks - Business Structure",
       "Tasks - Nexus",
     ],
   },
