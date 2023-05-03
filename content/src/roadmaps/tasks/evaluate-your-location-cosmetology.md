@@ -7,7 +7,7 @@ callToActionLink: ""
 callToActionText: ""
 issuingAgency: ""
 ---
-Cosmetology businesses will have their site inspected to ensure they meet New Jersey's shop requirements. When you look for a location, make sure it can meet the State's requirements among your other business considerations.
+Your cosmetology business needs to be inspected to ensure it meets New Jersey's shop requirements. When you look for a location, make sure it can meet the State's requirements, among your other business considerations.
 
 - - -
 
