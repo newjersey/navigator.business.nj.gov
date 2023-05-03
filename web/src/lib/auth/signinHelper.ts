@@ -99,14 +99,28 @@ export const onGuestSignIn = async (
       setRegistrationDimension("Onboarded Guest");
     }
   } else {
-    if (pathname === ROUTES.onboarding) {
-      setRegistrationDimension("Began Onboarding");
-    } else if (pathname === ROUTES.loading) {
-      setRegistrationDimension("Began Onboarding");
-      push(ROUTES.onboarding);
-    } else {
-      setRegistrationDimension("Not Started");
-      push(ROUTES.landing);
+    switch (pathname) {
+      case ROUTES.welcome: {
+        setRegistrationDimension("Not Started");
+        push(ROUTES.welcome);
+
+        break;
+      }
+      case ROUTES.onboarding: {
+        setRegistrationDimension("Began Onboarding");
+
+        break;
+      }
+      case ROUTES.loading: {
+        setRegistrationDimension("Began Onboarding");
+        push(ROUTES.onboarding);
+
+        break;
+      }
+      default: {
+        setRegistrationDimension("Not Started");
+        push(ROUTES.landing);
+      }
     }
   }
 };

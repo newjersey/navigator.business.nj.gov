@@ -3,12 +3,17 @@ import { LandingPageSlider } from "@/components/LandingPageSlider";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
+import { ActionTile } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
-export const LandingPageTiles = (): ReactElement => {
+interface Props {
+  isWelcomePage?: boolean;
+}
+
+export const LandingPageTiles = (props: Props): ReactElement => {
   const router = useRouter();
   const istabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { Config } = useConfig();
@@ -25,67 +30,80 @@ export const LandingPageTiles = (): ReactElement => {
     });
   };
 
+  const actionTiles: ActionTile[] = [
+    {
+      imgPath: "/img/getStarted-icon.svg",
+      tileText: Config.landingPage.landingPageTile1Line1Text,
+      tileText2: Config.landingPage.landingPageTile1Line2Text,
+      dataTestId: "get-started-tile",
+      onClick: routeToOnboarding,
+      isPrimary: true,
+    },
+    {
+      imgPath: "/img/briefcase-icon.svg",
+      tileText: Config.landingPage.landingPageTile2Text,
+      dataTestId: "register-biz-tile",
+      onClick: (): void => setFlowAndRouteUser("starting"),
+    },
+    {
+      imgPath: "/img/payTaxes-icon.svg",
+      tileText: Config.landingPage.landingPageTile3Text,
+      dataTestId: "pay-taxes-tile",
+      onClick: (): void => setFlowAndRouteUser("up-and-running"),
+    },
+    {
+      imgPath: "/img/outOfState-icon.svg",
+      dataTestId: "out-of-state-tile",
+      tileText: Config.landingPage.landingPageTile4Text,
+      onClick: (): void => setFlowAndRouteUser("out-of-state"),
+    },
+    {
+      imgPath: "/img/eligibleFunding-icon.svg",
+      dataTestId: "eligible-funding-tile",
+      tileText: Config.landingPage.landingPageTile5Text,
+      onClick: (): void => setFlowAndRouteUser("up-and-running"),
+    },
+    {
+      imgPath: "/img/startBusiness-icon.svg",
+      dataTestId: "start-biz-tile",
+      tileText: Config.landingPage.landingPageTile6Text,
+      onClick: (): void => setFlowAndRouteUser("starting"),
+    },
+    {
+      imgPath: "/img/runBusiness-icon.svg",
+      dataTestId: "run-biz-tile",
+      tileText: Config.landingPage.landingPageTile7Text,
+      onClick: (): void => setFlowAndRouteUser("up-and-running"),
+    },
+  ];
+
+  const filterActionTiles = (actionTiles: ActionTile[]): ActionTile[] =>
+    actionTiles.filter((actionTile): boolean => {
+      if (props.isWelcomePage) {
+        const welcomePageTiles = ["get-started-tile", "pay-taxes-tile"];
+        return welcomePageTiles.includes(actionTile.dataTestId);
+      }
+      return true;
+    });
+
   return (
     <>
-      {istabletAndUp ? (
+      {istabletAndUp && !props.isWelcomePage ? (
         <div className="desktop:grid-container-widescreen desktop:width-100">
           <div>
-            <LandingPageSlider />
+            <LandingPageSlider actionTiles={actionTiles} />
           </div>
         </div>
       ) : (
-        <div className={"fdc fjc fac"}>
-          <LandingPageActionTile
-            className={"landing-page-slide"}
-            imgPath={"/img/getStarted-icon.svg"}
-            tileText={Config.landingPage.landingPageTile1Line1Text}
-            tileText2={Config.landingPage.landingPageTile1Line2Text}
-            dataTestId={"get-started-tile"}
-            onClick={routeToOnboarding}
-            isPrimary
-          />
-          <LandingPageActionTile
-            className={"landing-page-slide"}
-            imgPath={"/img/startBusiness-icon.svg"}
-            tileText={Config.landingPage.landingPageTile2Text}
-            dataTestId={"start-biz-tile"}
-            onClick={(): void => setFlowAndRouteUser("starting")}
-          />
-          <LandingPageActionTile
-            className={"landing-page-slide"}
-            imgPath={"/img/runBusiness-icon.svg"}
-            tileText={Config.landingPage.landingPageTile3Text}
-            dataTestId={"run-biz-tile"}
-            onClick={(): void => setFlowAndRouteUser("up-and-running")}
-          />
-          <LandingPageActionTile
-            className={"landing-page-slide"}
-            imgPath={"/img/outOfState-icon.svg"}
-            dataTestId={"out-of-state-tile"}
-            tileText={Config.landingPage.landingPageTile4Text}
-            onClick={(): void => setFlowAndRouteUser("out-of-state")}
-          />
-          <LandingPageActionTile
-            className={"landing-page-slide"}
-            imgPath={"/img/briefcase-icon.svg"}
-            dataTestId={"register-biz-tile"}
-            tileText={Config.landingPage.landingPageTile5Text}
-            onClick={(): void => setFlowAndRouteUser("starting")}
-          />
-          <LandingPageActionTile
-            className={"landing-page-slide"}
-            imgPath={"/img/payTaxes-icon.svg"}
-            dataTestId={"pay-taxes-tile"}
-            tileText={Config.landingPage.landingPageTile6Text}
-            onClick={(): void => setFlowAndRouteUser("up-and-running")}
-          />
-          <LandingPageActionTile
-            className={"landing-page-slide"}
-            imgPath={"/img/eligibleFunding-icon.svg"}
-            dataTestId={"eligible-funding-tile"}
-            tileText={Config.landingPage.landingPageTile7Text}
-            onClick={(): void => setFlowAndRouteUser("up-and-running")}
-          />
+        <div className={`fjc fac ${istabletAndUp ? "fdr" : "fdc"}`}>
+          {filterActionTiles(actionTiles).map((actionTile, index) => {
+            const actionTileObj = {
+              ...actionTile,
+              key: `landing-page-tiles-key-${index}`,
+              className: "landing-page-tiles",
+            };
+            return <LandingPageActionTile {...actionTileObj} key={actionTileObj.key} />;
+          })}
         </div>
       )}
     </>
