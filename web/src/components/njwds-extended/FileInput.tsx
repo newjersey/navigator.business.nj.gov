@@ -27,6 +27,22 @@ const InputStringToFileType = flipObject(FileTypeToInputString) as Record<string
 
 const BYTES_IN_A_MB = 1048576;
 
+const base64ToFile = (params: { base64Contents: string; type: string; filename: string }): File => {
+  const imageContent = atob(params.base64Contents);
+  const buffer = new ArrayBuffer(imageContent.length);
+  const view = new Uint8Array(buffer);
+
+  for (let n = 0; n < imageContent.length; n++) {
+    const charCode = imageContent.codePointAt(n);
+    if (charCode) {
+      view[n] = charCode;
+    }
+  }
+
+  const blob = new Blob([buffer], { type: params.type });
+  return new File([blob], params.filename, { type: params.type });
+};
+
 export const FileInput = ({
   acceptedFileTypes,
   errorMessageRequired,
@@ -123,7 +139,9 @@ export const FileInput = ({
   const addPreviouslyUploadedFile = (): void => {
     const fileInputElement = fileInputRef.current;
     if (value && fileInputElement?.files?.length === 0) {
-      const file = new File([Buffer.from(value.base64Contents, "base64").toString("utf8")], value.filename, {
+      const file = base64ToFile({
+        base64Contents: value.base64Contents,
+        filename: value.filename,
         type: FileTypeToInputString[value.fileType],
       });
 
