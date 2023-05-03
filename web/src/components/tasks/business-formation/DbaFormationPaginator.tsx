@@ -1,8 +1,10 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
+import { HelpButton } from "@/components/njwds-extended/HelpButton";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+
 import { TaskCTA } from "@/components/TaskCTA";
 import { DbaFormationSteps } from "@/components/tasks/business-formation/DbaFormationSteps";
 import { DbaFormationStepsConfiguration } from "@/components/tasks/business-formation/DbaFormationStepsConfiguration";
@@ -121,30 +123,37 @@ export const DbaFormationPaginator = (): ReactElement => {
     };
 
     return (
-      <PrimaryButton
-        isColor="primary"
-        onClick={(): void => {
-          onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" });
-        }}
-        isNotFullWidthOnMobile={true}
-        isRightMarginRemoved={true}
-        dataTestId="next-button"
-      >
-        {getForwardButtonText()}
-      </PrimaryButton>
+      <div className={"mobile-lg:margin-top-0 margin-top-1 width-full mobile-lg:width-auto"}>
+        <PrimaryButton
+          isColor="primary"
+          onClick={(): void => {
+            onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" });
+          }}
+          isRightMarginRemoved={true}
+          dataTestId="next-button"
+        >
+          {getForwardButtonText()}
+        </PrimaryButton>
+      </div>
     );
   };
 
   const BackButton = (): ReactElement => (
-    <SecondaryButton isColor="primary" isNotFullWidthOnMobile={true} onClick={onPreviousButtonClick}>
-      {Config.formation.general.previousButtonText}
-    </SecondaryButton>
+    <div
+      className={
+        " margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-105 width-full mobile-lg:width-auto"
+      }
+    >
+      <SecondaryButton isColor="primary" onClick={onPreviousButtonClick} isRightMarginRemoved={true}>
+        {Config.formation.general.previousButtonText}
+      </SecondaryButton>
+    </div>
   );
 
   const ButtonWrapper = (props: { children: ReactNode }): ReactElement => {
     return (
-      <div className="margin-top-2">
-        <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
+      <div className="margin-top-2 width-100">
+        <div className="flex fac flex-justify-end flex-column-reverse mobile-lg:flex-row bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
           {props.children}
         </div>
       </div>
@@ -155,12 +164,14 @@ export const DbaFormationPaginator = (): ReactElement => {
     if (state.stepIndex === 0 && state.businessNameAvailability?.status === "AVAILABLE") {
       return (
         <ButtonWrapper>
+          <HelpButton />
           <ForwardButton />
         </ButtonWrapper>
       );
     } else if (state.stepIndex === 1) {
       return (
         <ButtonWrapper>
+          <HelpButton />
           <BackButton />
           <ForwardButton />
         </ButtonWrapper>
@@ -172,6 +183,7 @@ export const DbaFormationPaginator = (): ReactElement => {
           text={state.dbaContent.Authorize.callToActionText}
           onClick={(): void => setShowCtaModal(true)}
         >
+          <HelpButton />
           <BackButton />
         </TaskCTA>
       );

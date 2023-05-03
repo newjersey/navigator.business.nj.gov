@@ -1,5 +1,6 @@
 import { AutosaveSpinner } from "@/components/AutosaveSpinner";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { HelpButton } from "@/components/njwds-extended/HelpButton";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
@@ -371,19 +372,23 @@ export const BusinessFormationPaginator = (): ReactElement => {
               }}
             />
           </div>
-          <div className="flex flex-column-reverse mobile-lg:flex-row mobile-lg:margin-left-auto width-100">
+          <div className="flex mobile-lg:fac flex-column-reverse mobile-lg:flex-row flex-justify-end width-100">
+            <HelpButton />
+
             {shouldDisplayPreviousButton() && (
-              <div className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-1 mobile-lg:margin-left-auto">
+              <div className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-105">
                 <SecondaryButton
                   isColor="primary"
                   onClick={onPreviousButtonClick}
                   dataTestId="previous-button"
+                  isRightMarginRemoved={true}
                 >
                   {Config.formation.general.previousButtonText}
                 </SecondaryButton>
               </div>
             )}
-            <div className={shouldDisplayPreviousButton() ? "" : "mobile-lg:margin-left-auto"}>
+
+            <div>
               <PrimaryButton
                 isColor="primary"
                 onClick={(): void => {

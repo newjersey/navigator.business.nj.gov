@@ -14,7 +14,7 @@ interface Props {
 export const TaskCTA = (props: Props): ReactElement => {
   if (props.onClick) {
     return (
-      <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg">
+      <div className="flex flex-justify-end flex-column-reverse mobile-lg:flex-row bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg">
         {props.children}
         <PrimaryButton isColor="primary" isRightMarginRemoved={true} onClick={props.onClick}>
           {props.text || Config.taskDefaults.defaultCallToActionText}
