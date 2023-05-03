@@ -1,0 +1,10 @@
+{
+  "businessStructureTask": {
+    "uncompletedTooltip": "Select and then save to complete this task.",
+    "completedTooltip": "This task is complete. You can edit your business structure selection below.",
+    "saveButton": "Save Business Structure",
+    "radioQuestionHeader": "Select a business structure",
+    "completedHeader": "Your business structure:",
+    "successMessage": "${legalStructure} was saved."
+  }
+}

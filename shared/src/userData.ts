@@ -28,7 +28,9 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
     user: user,
     profileData: createEmptyProfileData(),
     onboardingFormProgress: "UNSTARTED",
-    taskProgress: {},
+    taskProgress: {
+      "business-structure": "COMPLETED",
+    },
     taskItemChecklist: {},
     licenseData: undefined,
     lastUpdatedISO: undefined,

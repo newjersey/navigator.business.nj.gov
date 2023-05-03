@@ -31,6 +31,7 @@ import TaskPreview from "@/lib/cms/previews/TaskPreview";
 import TaxInputPreview from "@/lib/cms/previews/TaxInputPreview";
 import { useMountEffect } from "@/lib/utils/helpers";
 
+import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
 import { ReactElement } from "react";
@@ -97,6 +98,9 @@ const CMS = dynamic(
 
       registerPreview(CMS, "tax-task-metadata", TaskPreview);
       registerPreview(CMS, "tax-input-section", TaxInputPreview);
+
+      registerPreview(CMS, "business-structure-task", TaskPreview);
+      registerPreview(CMS, "business-structure-selection", BusinessStructurePreview);
 
       // ----- Cannabis License -----
       registerPreview(CMS, "cannabis-eligibility-modal", CannabisEligibilityModalPreview);

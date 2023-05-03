@@ -2351,6 +2351,55 @@ collections:
                   widget: string,
                 }
               - { label: NAICS Description External URL, name: naicsDescriptionURL, widget: string }
+  - name: "business-structure-section"
+    label: "Tasks - Business Structure"
+    delete: false
+    create: false
+    files:
+      - label: "Select Your Business Structure - Task Metadata"
+        name: "business-structure-task"
+        file: "content/src/roadmaps/tasks/business-structure.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+          - { label: "Filename", name: "filename", widget: "nospace", required: false }
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Id", name: "id", widget: "nospace" }
+          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+          - label: Industry
+            name: industryId
+            widget: "relation"
+            collection: "roadmaps"
+            search_fields: ["{{id}}"]
+            value_field: "{{id}}"
+            display_fields: ["{{id}}"]
+            required: false
+            options_length: 500
+          - { label: "Required", name: "required", widget: "boolean", required: false }
+          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+          - { label: "Form Name", name: "formName", widget: "string", required: false }
+      - label: "Business Structure Selection Component"
+        name: "business-structure-selection"
+        file: content/src/fieldConfig/business-structure-task.json
+        editor:
+          preview: true
+        fields:
+          - label: Business Structure Config
+            name: businessStructureTask
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Tooltip - Not Complete, name: uncompletedTooltip, widget: text }
+              - { label: Header - Not Complete, name: radioQuestionHeader, widget: string }
+              - { label: Tooltip - Completed, name: completedTooltip, widget: text }
+              - { label: Header - Complete, name: completedHeader, widget: string }
+              - { label: Save Button, name: saveButton, widget: string }
+              - { label: SuccessMessage, name: successMessage, widget: string }
   - name: nexus
     label: "Tasks - Nexus"
     delete: false

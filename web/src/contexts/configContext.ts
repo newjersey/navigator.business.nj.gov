@@ -1,4 +1,5 @@
 import * as BusinessFormation from "@businessnjgovnavigator/content/fieldConfig/business-formation.json";
+import * as BusinessStructureTask from "@businessnjgovnavigator/content/fieldConfig/business-structure-task.json";
 import * as CannabisLicenseAnnualTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-license-annual-tab2.json";
 import * as CannabisLicenseConditionalTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-license-conditional-tab2.json";
 import * as CannabisLicenseEligibilityModal from "@businessnjgovnavigator/content/fieldConfig/cannabis-license-eligibility-modal.json";
@@ -48,7 +49,8 @@ const merged = JSON.parse(
       DashboardCalendar,
       DashboardTabs,
       DashboardModals,
-      BusinessFormation
+      BusinessFormation,
+      BusinessStructureTask
     )
   )
 );
@@ -74,6 +76,7 @@ export type ConfigType = typeof ConfigOriginal &
   typeof DashboardModals &
   typeof DashboardTabs &
   typeof BusinessFormation &
+  typeof BusinessStructureTask &
   typeof DashboardSnackbars;
 
 export const getMergedConfig = (): ConfigType => {
@@ -99,7 +102,8 @@ export const getMergedConfig = (): ConfigType => {
     DashboardModals,
     DashboardTabs,
     DashboardCalendar,
-    BusinessFormation
+    BusinessFormation,
+    BusinessStructureTask
   );
 };
 

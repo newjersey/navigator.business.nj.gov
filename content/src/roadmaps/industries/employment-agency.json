@@ -20,6 +20,12 @@
     },
     {
       "step": 1,
+      "weight": 100,
+      "task": "business-structure",
+      "required": true
+    },
+    {
+      "step": 1,
       "weight": 5,
       "task": "determine-naics-code",
       "required": true

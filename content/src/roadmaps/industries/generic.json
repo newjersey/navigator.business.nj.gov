@@ -19,6 +19,12 @@
       "required": true
     },
     {
+      "step": 1,
+      "weight": 100,
+      "task": "business-structure",
+      "required": true
+    },
+    {
       "step": 2,
       "weight": 20,
       "task": "register-for-ein",
