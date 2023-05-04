@@ -141,6 +141,56 @@ describe("Formation - ReviewStep", () => {
     ).not.toBeInTheDocument();
   });
 
+  it("doesn't display the primary business address if user has not inputted anything", async () => {
+    const initialProfileData: Partial<ProfileData> = {
+      legalStructureId: "limited-liability-company",
+      municipality: undefined,
+    };
+    const formationFormData = {
+      addressMunicipality: undefined,
+      addressZipCode: "",
+      addressCountry: undefined,
+      addressLine1: "",
+      addressLine2: "",
+    };
+    await renderStep(initialProfileData, formationFormData);
+    expect(screen.queryByText(Config.formation.sections.addressHeader)).not.toBeInTheDocument();
+  });
+
+  it("displays the primary business address if user has inputted any address field", async () => {
+    const initialProfileData: Partial<ProfileData> = {
+      legalStructureId: "limited-liability-company",
+      municipality: undefined,
+    };
+    const formationFormData = {
+      addressMunicipality: undefined,
+      addressZipCode: "",
+      addressCountry: undefined,
+      addressLine1: "address-line-1",
+      addressLine2: "",
+    };
+    await renderStep(initialProfileData, formationFormData);
+    expect(screen.getByText(Config.formation.sections.addressHeader)).toBeInTheDocument();
+  });
+
+  it("displays the primary business address section for foreign corporations even when no address input has been made", async () => {
+    const initialProfileData: Partial<ProfileData> = {
+      businessPersona: "FOREIGN",
+      legalStructureId: "c-corporation",
+    };
+    const formationData: Partial<FormationFormData> = {
+      businessName: "nexus-business",
+      legalType: "foreign-c-corporation",
+      addressCity: undefined,
+      addressZipCode: "",
+      addressCountry: "US",
+      addressLine2: "",
+      addressLine1: "",
+    };
+    await renderStep(initialProfileData, formationData);
+    expect(screen.getByText(Config.formation.sections.addressHeader)).toBeInTheDocument();
+  });
+
   it("displays the business step when the edit button in the main business section is clicked", async () => {
     await renderStep({}, {});
     fireEvent.click(screen.getByTestId("edit-business-name-step"));

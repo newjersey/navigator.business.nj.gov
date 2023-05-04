@@ -1,0 +1,32 @@
+import { arrayOfCountriesObjects } from "@businessnjgovnavigator/shared";
+import { FormationFormData } from "@businessnjgovnavigator/shared/";
+import { foreignCorpLegalStructures } from "@businessnjgovnavigator/shared/index";
+
+export const getAddressCity = (formationFormData: FormationFormData): string | undefined => {
+  return formationFormData.businessLocationType === "NJ"
+    ? formationFormData.addressMunicipality?.displayName
+    : formationFormData.addressCity;
+};
+
+export const getAddressState = (formationFormData: FormationFormData): string | undefined => {
+  return formationFormData.businessLocationType === "INTL"
+    ? formationFormData.addressProvince
+    : formationFormData.addressState?.name;
+};
+
+export const getAddressCountry = (formationFormData: FormationFormData): string | undefined => {
+  return formationFormData.businessLocationType === "INTL"
+    ? arrayOfCountriesObjects.find((country) => country.shortCode === formationFormData.addressCountry)?.name
+    : undefined;
+};
+
+export const shouldDisplayAddressSection = (formationFormData: FormationFormData): boolean => {
+  return (
+    foreignCorpLegalStructures.includes(formationFormData.legalType) ||
+    !!formationFormData.addressLine1 ||
+    !!formationFormData.addressLine2 ||
+    !!getAddressCity(formationFormData) ||
+    !!formationFormData.addressZipCode ||
+    !!getAddressCountry(formationFormData)
+  );
+};
