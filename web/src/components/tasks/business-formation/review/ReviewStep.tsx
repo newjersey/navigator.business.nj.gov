@@ -18,6 +18,7 @@ import { ReviewText } from "@/components/tasks/business-formation/review/section
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
+import { shouldDisplayAddressSection } from "@/lib/utils/formation-helpers";
 import { isForeignCorporation } from "@/lib/utils/helpers";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useContext } from "react";
@@ -43,8 +44,7 @@ export const ReviewStep = (): ReactElement => {
               <ReviewForeignCertificate foreignGoodStandingFile={state.foreignGoodStandingFile} />
             </>
           )}
-          <ReviewMainBusinessLocation />
-
+          {shouldDisplayAddressSection(state.formationFormData) && <ReviewMainBusinessLocation />}
           {isLP && (
             <>
               <ReviewSubSection header={Config.formation.fields.combinedInvestment.label}>
