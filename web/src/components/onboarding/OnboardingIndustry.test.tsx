@@ -10,7 +10,7 @@ import {
 } from "@/test/factories";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { randomFilteredIndustry, randomIndustry } from "@businessnjgovnavigator/shared";
+import { generateProfileData, randomFilteredIndustry, randomIndustry } from "@businessnjgovnavigator/shared";
 import {
   createEmptyProfileData,
   emptyIndustrySpecificData,
@@ -163,6 +163,12 @@ describe("<OnboardingIndustry />", () => {
         });
       });
     });
+  });
+
+  it("resets NAICs code in userdata when industry is changed", () => {
+    renderComponent(generateProfileData({ industryId: "home-contractor", naicsCode: "111111" }));
+    selectIndustry("e-commerce");
+    expect(currentProfileData().naicsCode).toEqual("");
   });
 
   const selectIndustry = (value: string): void => {

@@ -15,3 +15,5 @@ export const einTaskId = "register-for-ein";
 export const isEinTask = (id: string): boolean => {
   return id === einTaskId;
 };
+
+export const naicsCodeTaskId = "determine-naics-code";

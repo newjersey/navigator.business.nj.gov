@@ -77,6 +77,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       cannabisLicenseType,
       industryId: industryId,
       sectorId: newSector,
+      naicsCode: state.profileData.industryId === industryId ? state.profileData.naicsCode : "",
     });
   };
 
