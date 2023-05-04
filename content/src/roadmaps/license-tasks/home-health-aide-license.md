@@ -16,18 +16,16 @@ webflowId: 641370d2139a73fe804e07b5
 ---
 You need to register as a health care service firm if you are employing individuals to provide health care, personal care, or companion services. This applies to both in-home and facility care.
 
-
 - - -
 
 ### Application Requirements
 
-*  `Employer Identification Number (EIN)|ein` 
+*  `EIN|ein` 
 * Copy of health care practitioner supervisor's registered nursing license
 * Copy of application for employment of all registered nurses
 * Copy of health care practitioner supervisor's certificate of malpractice insurance
-* Copy of insurance certificate
 * Proof of business net worth
-*  `Registered agent's|registered-agent` contact information (if firm is a corporation or out-of-state corporation) 
+*  `Registered agent's|registered-agent` contact information (if firm is a corporation or out-of-state corporation)
 * Notarized application submission statement called "Affidavit for Health Care Services Firm"
 * Applicable fees paid
 
