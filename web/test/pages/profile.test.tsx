@@ -51,6 +51,7 @@ import {
   LookupOwnershipTypeById,
   LookupSectorTypeById,
   Municipality,
+  naicsCodeTaskId,
   OperatingPhase,
   OperatingPhaseId,
   OperatingPhases,
@@ -478,7 +479,7 @@ describe("profile", () => {
           employerId: "023456780",
           notes: "whats appppppp",
         },
-        taskProgress: { [einTaskId]: "COMPLETED" },
+        taskProgress: { [einTaskId]: "COMPLETED", "determine-naics-code": "NOT_STARTED" },
       });
     });
 
@@ -993,6 +994,11 @@ describe("profile", () => {
             industryId: newIndustry,
             sectorId: LookupIndustryById(newIndustry).defaultSectorId,
             homeBasedBusiness: isHomeBasedBusinessApplicable(newIndustry) ? undefined : false,
+            naicsCode: "",
+          },
+          taskProgress: {
+            ...userData.taskProgress,
+            [naicsCodeTaskId]: "NOT_STARTED",
           },
         });
       }
@@ -1813,6 +1819,23 @@ describe("profile", () => {
     });
   });
 
+  it("resets naicsCode task and data when the industry is changed and page is saved", async () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({ industryId: "cosmetology", businessPersona: "STARTING" }),
+      taskProgress: {
+        [naicsCodeTaskId]: "COMPLETED",
+      },
+    });
+    renderPage({ userData });
+    selectByValue("Industry", "e-commerce");
+    clickSave();
+
+    await waitFor(() => {
+      expect(currentUserData().taskProgress[naicsCodeTaskId]).toEqual("NOT_STARTED");
+    });
+    expect(currentUserData().profileData.naicsCode).toEqual("");
+  });
+
   describe("Essential Question", () => {
     it.each(industryIdsWithRequiredEssentialQuestion)(
       "prevents Starting user from saving when %s is selected as industry, but essential question is not answered",
@@ -2203,6 +2226,7 @@ describe("profile", () => {
   };
 
   const selectByValue = (label: string, value: string): void => {
+    expect(screen.getByLabelText(label)).toBeInTheDocument();
     fireEvent.mouseDown(screen.getByLabelText(label));
     const listbox = within(screen.getByRole("listbox"));
     fireEvent.click(listbox.getByTestId(value));

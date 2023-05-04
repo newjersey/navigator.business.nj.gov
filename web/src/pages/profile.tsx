@@ -62,6 +62,7 @@ import {
   LookupLegalStructureById,
   LookupOperatingPhaseById,
   Municipality,
+  naicsCodeTaskId,
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared";
@@ -99,7 +100,6 @@ const ProfilePage = (props: Props): ReactElement => {
   const businessPersona: BusinessPersona = props.CMS_ONLY_businessPersona ?? profileData.businessPersona;
   const foreignBusinessType: ForeignBusinessType =
     props.CMS_ONLY_foreignBusinessType ?? profileData.foreignBusinessType;
-
   const {
     FormFuncWrapper,
     onSubmit,
@@ -196,6 +196,10 @@ const ProfilePage = (props: Props): ReactElement => {
 
       if (updateQueue.current().profileData.taxId !== profileData.taxId) {
         updateQueue.queueTaxFilingData({ state: undefined, registeredISO: undefined, filings: [] });
+      }
+
+      if (updateQueue.current().profileData.industryId !== profileData.industryId) {
+        updateQueue.queueTaskProgress({ [naicsCodeTaskId]: "NOT_STARTED" });
       }
 
       updateQueue.queueProfileData(profileData);
