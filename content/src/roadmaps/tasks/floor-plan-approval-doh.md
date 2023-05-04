@@ -6,7 +6,11 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-Contact your local department of health to have your floor plan and kitchen approved. You will need to schedule periodic follow-ups.
+Your floor plan has to be designed by an architect or structural engineer.
+   
+Contact your local department of health to have your floor plan and kitchen approved. 
+
+You will need to schedule periodic follow-ups.
 
 ---
 
