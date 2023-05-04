@@ -59,7 +59,7 @@
       },
       "taxId": {
         "default": {
-          "header": "New Jersey Tax ID",
+          "header": "What is your New Jersey Tax ID?",
           "headerContextualInfo": "tax-id",
           "description": "",
           "errorTextRequired": "Enter a 12-digit Tax ID",
@@ -312,7 +312,7 @@
           "errorTextRequired": "Select a industry.",
           "searchAffirmation": "_\"**${searchText}**\" falls under the industries below:_"
         },
-        "onboarding" : {
+        "onboarding": {
           "default": {
             "description": "Which industry best describes your ${oos} business? "
           }
