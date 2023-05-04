@@ -270,7 +270,13 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
               hasError={!!formContextState.fieldStates.responsibleOwnerName?.invalid}
               type="ALWAYS"
             >
-              <FieldLabelModal fieldName="responsibleOwnerName" />
+              <FieldLabelModal
+                fieldName="responsibleOwnerName"
+                overrides={{
+                  header: Config.taxCalendar.modalBusinessOwnerName,
+                  description: Config.taxCalendar.modalBusinessOwnerDescription,
+                }}
+              />
               <ProfileResponsibleOwnerName
                 validationText={Config.taxCalendar.failedResponsibleOwnerFieldHelper}
                 required
