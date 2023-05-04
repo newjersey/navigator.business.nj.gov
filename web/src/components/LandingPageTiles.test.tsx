@@ -1,5 +1,5 @@
 import { LandingPageTiles } from "@/components/LandingPageTiles";
-import { getMergedConfig } from "@/contexts/configContext";
+import { ConfigContext, getMergedConfig } from "@/contexts/configContext";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { fireEvent, render, screen } from "@testing-library/react";
 
@@ -35,6 +35,20 @@ describe("<LandingPageTiles />", () => {
     fireEvent.click(screen.getByText(Config.landingPage.landingPageTile3Text));
 
     expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "up-and-running" } });
+  });
+
+  it('overrides the "Pay Taxes" tile text when visiting welcome page URL', () => {
+    render(
+      <ConfigContext.Provider
+        value={{
+          config: { ...Config, landingPageExperienceWelcome: { landingPageTile3Text: "lol" } },
+          setOverrides: (): undefined => void {},
+        }}
+      >
+        <LandingPageTiles isWelcomePage={true} />
+      </ConfigContext.Provider>
+    );
+    expect(screen.getByText("lol")).toBeInTheDocument();
   });
 
   it("shows only 'Get Started' and 'Pay Taxes' tiles when visiting welcome page URL", () => {

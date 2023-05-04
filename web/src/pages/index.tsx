@@ -5,6 +5,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { SupportExploreSignUpChatCards } from "@/components/SupportExploreSignUpChatCards";
 import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -12,7 +13,6 @@ import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import analytics from "@/lib/utils/analytics";
 import { setABExperienceDimension } from "@/lib/utils/analytics-helpers";
 import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ABExperience, decideABExperience } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
@@ -25,6 +25,7 @@ interface Props {
 const Home = (props: Props): ReactElement => {
   const { userData, error } = useUserData();
   const { state } = useContext(AuthContext);
+  const { Config } = useConfig();
   const router = useRouter();
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const sectionHowItWorks = useRef(null);
@@ -67,7 +68,12 @@ const Home = (props: Props): ReactElement => {
       };
     }
   }
-
+  if (props.isWelcomePage) {
+    landingPageConfig = {
+      ...landingPageConfig,
+      ...Config.landingPageExperienceWelcome,
+    };
+  }
   useEffect(() => {
     const landingPageAlternateUrl = process.env.ALTERNATE_LANDING_PAGE_URL || ROUTES.landing;
     const alternateLandingPageEnabled = process.env.FEATURE_LANDING_PAGE_REDIRECT === "true";
