@@ -1,7 +1,7 @@
 ---
 urlSlug: car-rental-vehicle-registration
 filename: car-rental-vehicle-registration
-name: Register Your Fleet with NJ Motor Vehicle Commission
+name: Register Your Fleet with New Jersey Motor Vehicle Commission
 id: car-rental-vehicle-registration
 callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm
 callToActionText: Make an Appointment
