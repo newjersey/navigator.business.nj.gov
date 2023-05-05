@@ -147,7 +147,7 @@
     "snackbarSuccessHeader": "Tax Calendar Added!",
     "failedResponsibleOwnerFieldHelper": "Enter the responsible owner listed in your tax confirmation email.",
     "modalBody": "To access your tax records, we need to verify your information and get you access to New Jersey Department of Treasury's `Gov2Go|gov2go` platform.",
-    "modalBusinessOwnerName": "What is the name of the responsible owner?",
+    "modalBusinessOwnerName": "What is your name?",
     "modalNextButton": "Save",
     "accessButton": "Get Access",
     "modalBusinessOwnerDescription": "Enter your Last Name, First Name and Middle Initial. The name must match exactly the name listed on your tax confirmation email.",
