@@ -16,7 +16,7 @@ describe("<LandingPageTiles />", () => {
   it("routes user to industry selection when the starting a business button is clicked", async () => {
     render(<LandingPageTiles isWelcomePage={false} />);
 
-    fireEvent.click(screen.getByText(Config.landingPage.landingPageTile2Text));
+    fireEvent.click(screen.getByText(Config.landingPage.landingPageRegisterBizTile));
 
     expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "starting" } });
   });
@@ -24,7 +24,7 @@ describe("<LandingPageTiles />", () => {
   it("routes user to out-of-state business section when the out-of-state business button is clicked", async () => {
     render(<LandingPageTiles isWelcomePage={false} />);
 
-    fireEvent.click(screen.getByText(Config.landingPage.landingPageTile4Text));
+    fireEvent.click(screen.getByText(Config.landingPage.landingPageOutOfStateTile));
 
     expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "out-of-state" } });
   });
@@ -32,7 +32,7 @@ describe("<LandingPageTiles />", () => {
   it("routes user to business status section when the running a business button is clicked", async () => {
     render(<LandingPageTiles isWelcomePage={false} />);
 
-    fireEvent.click(screen.getByText(Config.landingPage.landingPageTile3Text));
+    fireEvent.click(screen.getByText(Config.landingPage.landingPageTaxesTile));
 
     expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "up-and-running" } });
   });
@@ -41,7 +41,7 @@ describe("<LandingPageTiles />", () => {
     render(
       <ConfigContext.Provider
         value={{
-          config: { ...Config, landingPageExperienceWelcome: { landingPageTile3Text: "lol" } },
+          config: { ...Config, landingPageExperienceWelcome: { landingPageTaxesTile: "lol" } },
           setOverrides: (): undefined => void {},
         }}
       >

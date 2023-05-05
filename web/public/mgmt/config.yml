@@ -3031,14 +3031,22 @@ collections:
               - { label: Card 3 - Header Line 3, name: card3HeaderLine2, widget: string }
               - { label: Card 3 - Supporting Text, name: card3SupportingText, widget: text }
               - { label: Card 3 - Button Text, name: card3Button, widget: string }
-              - { label: Landing Page - Tile 1 Line 1 Text, name: landingPageTile1Line1Text, widget: string }
-              - { label: Landing Page - Tile 1 Line 2 Text, name: landingPageTile1Line2Text, widget: string }
-              - { label: Landing Page - Tile 2 Text, name: landingPageTile2Text, widget: string }
-              - { label: Landing Page - Tile 3 Text, name: landingPageTile3Text, widget: string }
-              - { label: Landing Page - Tile 4 Text, name: landingPageTile4Text, widget: string }
-              - { label: Landing Page - Tile 5 Text, name: landingPageTile5Text, widget: string }
-              - { label: Landing Page - Tile 6 Text, name: landingPageTile6Text, widget: string }
-              - { label: Landing Page - Tile 7 Text, name: landingPageTile7Text, widget: string }
+              - {
+                  label: Landing Page - Get Started Tile Line 1,
+                  name: landingPageGetStartedTileLine1,
+                  widget: string,
+                }
+              - {
+                  label: Landing Page - Get Started Tile Line 2,
+                  name: landingPageGetStartedTileLine2,
+                  widget: string,
+                }
+              - { label: Landing Page - Register Biz Tile, name: landingPageRegisterBizTile, widget: string }
+              - { label: Landing Page - Taxes Tile, name: landingPageTaxesTile, widget: string }
+              - { label: Landing Page - Out Of State Tile, name: landingPageOutOfStateTile, widget: string }
+              - { label: Landing Page - Funding Tile, name: landingPageFundingTile, widget: string }
+              - { label: Landing Page - Start Biz Tile, name: landingPageStartBizTile, widget: string }
+              - { label: Landing Page - Run Biz Tile, name: landingPageTileRunBizTile, widget: string }
           - label: Landing Page Experience B
             name: landingPageExperienceB
             collapsed: true
@@ -3165,50 +3173,50 @@ collections:
               - { label: Card 3 - Supporting Text, name: card3SupportingText, widget: text, required: false }
               - { label: Card 3 - Button Text, name: card3Button, widget: string, required: false }
               - {
-                  label: Landing Page - Tile 1 Line 1 Text,
-                  name: landingPageTile1Line1Text,
+                  label: Landing Page - Get Started Tile Line 1,
+                  name: landingPageGetStartedTileLine1,
                   widget: string,
                   required: false,
                 }
               - {
-                  label: Landing Page - Tile 1 Line 2 Text,
-                  name: landingPageTile1Line2Text,
+                  label: Landing Page - Get Started Tile Line 2,
+                  name: landingPageGetStartedTileLine2,
                   widget: string,
                   required: false,
                 }
               - {
-                  label: Landing Page - Tile 2 Text,
-                  name: landingPageTile2Text,
+                  label: Landing Page - Register Biz Tile,
+                  name: landingPageRegisterBizTile,
                   widget: string,
                   required: false,
                 }
               - {
-                  label: Landing Page - Tile 3 Text,
-                  name: landingPageTile3Text,
+                  label: Landing Page - Taxes Tile,
+                  name: landingPageTaxesTile,
                   widget: string,
                   required: false,
                 }
               - {
-                  label: Landing Page - Tile 4 Text,
-                  name: landingPageTile4Text,
+                  label: Landing Page - Out Of State Tile,
+                  name: landingPageOutOfStateTile,
                   widget: string,
                   required: false,
                 }
               - {
-                  label: Landing Page - Tile 5 Text,
-                  name: landingPageTile5Text,
+                  label: Landing Page - Funding Tile,
+                  name: landingPageFundingTile,
                   widget: string,
                   required: false,
                 }
               - {
-                  label: Landing Page - Tile 6 Text,
-                  name: landingPageTile6Text,
+                  label: Landing Page - Start Biz Tile,
+                  name: landingPageStartBizTile,
                   widget: string,
                   required: false,
                 }
               - {
-                  label: Landing Page - Tile 7 Text,
-                  name: landingPageTile7Text,
+                  label: Landing Page - Run Biz Tile,
+                  name: landingPageTileRunBizTile,
                   widget: string,
                   required: false,
                 }
