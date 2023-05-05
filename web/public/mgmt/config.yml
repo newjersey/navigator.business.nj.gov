@@ -2780,6 +2780,8 @@ collections:
                   name: modalResponsibleOwnerFieldErrorName,
                   widget: text,
                 }
+              - { label: Responsible Owner Header, name: modalBusinessOwnerName, widget: text }
+              - { label: Responsible Owner Description, name: modalBusinessOwnerDescription, widget: text }
               - { label: TaxId Field Header, name: modalTaxIdHeader, widget: markdown }
               - { label: TaxId Field Text, name: modalTaxIdMarkdown, widget: markdown }
               - { label: Failed Alert Text, name: failedErrorMessageHeader, widget: text }
