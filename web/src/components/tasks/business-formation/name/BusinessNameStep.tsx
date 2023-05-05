@@ -12,7 +12,8 @@ import { BusinessNameUnavailable } from "./BusinessNameUnavailable";
 export const BusinessNameStep = (): ReactElement => {
   const FIELD_NAME = "businessName";
   const { Config } = useConfig();
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+  const { state, setDbaBusinessNameAvailability, setFormationFormData, setFieldsInteracted } =
+    useContext(BusinessFormationContext);
   const { userData } = useUserData();
   const { updateCurrentName, onBlurNameField } = useBusinessNameSearch({
     isBusinessFormation: true,
@@ -65,6 +66,8 @@ export const BusinessNameStep = (): ReactElement => {
         }}
         onSubmit={onSubmit}
         unavailable={BusinessNameUnavailable}
+        businessName={""}
+        setNameAvailability={setDbaBusinessNameAvailability}
       />
     </div>
   );

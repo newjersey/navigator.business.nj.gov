@@ -10,7 +10,7 @@ import { SearchBusinessNameError } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { NameAvailability } from "@businessnjgovnavigator/shared/";
 import { FormControl, TextField } from "@mui/material";
-import { FormEvent, ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { FormEvent, ReactElement, useCallback, useEffect, useRef } from "react";
 
 type SearchBusinessNameFormConfig = {
   availableAlertText: string;
@@ -22,11 +22,14 @@ type SearchBusinessNameFormConfig = {
 
 interface Props {
   unavailable: (props: UnavailableProps) => ReactElement;
+  businessName: string;
   config: SearchBusinessNameFormConfig;
   className?: string;
   hasError?: boolean;
   hideTextFieldWhenUnavailable?: boolean;
   isBusinessFormation?: boolean;
+  nameAvailability?: NameAvailability;
+  setNameAvailability: (nameAvailability: NameAvailability | undefined) => void;
   isDba?: boolean;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onChange?: (nameAvailability: NameAvailability | undefined) => void;
@@ -45,18 +48,13 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const didInitialSearch = useRef<boolean>(false);
   const { userData } = useUserData();
-  const [nameAvailability, setNameAvailability] = useState<NameAvailability | undefined>(undefined);
-  const [submittedName, setSubmittedName] = useState<string>("");
 
+  // TODO: Use business formation context over local state variable
+  // Once in biz context, add auto-save
   const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
     BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,
     SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
   };
-
-  useEffect(() => {
-    props.onChange && props.onChange(nameAvailability);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nameAvailability]);
 
   const Unavailable = props.unavailable;
   const onSubmit = props.onSubmit;
@@ -68,14 +66,14 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     ): Promise<void> => {
       searchBusinessName(event)
         .then(({ nameAvailability, submittedName }) => {
-          setNameAvailability(nameAvailability);
-          setSubmittedName(submittedName);
+          props.setNameAvailability(nameAvailability);
           if (onSubmit) {
             onSubmit(submittedName, nameAvailability, isInitialSubmit);
           }
         })
         .catch(() => {});
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [onSubmit, searchBusinessName]
   );
 
@@ -97,7 +95,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
 
   const shouldShowTextField = (): boolean => {
     if (props.hideTextFieldWhenUnavailable) {
-      return nameAvailability?.status !== "UNAVAILABLE";
+      return props.nameAvailability?.status !== "UNAVAILABLE";
     }
 
     return true;
@@ -110,6 +108,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
           {SearchBusinessNameErrorLookup[error]}
         </Alert>
       )}
+      {`shouldShowTextField: ${shouldShowTextField()}`}
       {shouldShowTextField() && (
         <WithErrorBar hasError={error === "BAD_INPUT"} type="ALWAYS">
           {props.config.inputLabel && (
@@ -139,7 +138,6 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
                   margin="dense"
                   onBlur={props.onBlur}
                   onChange={(event): void => {
-                    setNameAvailability(undefined);
                     updateCurrentName(event.target.value);
                   }}
                   value={currentName}
@@ -170,45 +168,46 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
         </WithErrorBar>
       )}
       <div className="margin-top-2">
-        {nameAvailability?.status === "AVAILABLE" && (
+        {props.nameAvailability?.status === "AVAILABLE" && (
           <Alert variant="success" dataTestid="available-text">
             <span className="font-sans-xs">
               {templateEval(props.config.availableAlertText, {
-                name: submittedName,
+                name: props.businessName,
               })}
             </span>
           </Alert>
         )}
-        {nameAvailability?.status === "UNAVAILABLE" && (
+        <>{(props.isDba ? "DBA" : "Nexus")} {(props.nameAvailability?.status ?? "")}</>
+        {props.nameAvailability?.status === "UNAVAILABLE" && (
           <Unavailable
             resetSearch={(): void => {
-              resetSearch();
-              setNameAvailability(undefined);
+              // resetSearch()
+              // props.setNameAvailability(undefined);
             }}
-            submittedName={submittedName}
-            nameAvailability={nameAvailability}
+            submittedName={props.businessName}
+            nameAvailability={props.nameAvailability}
           />
         )}
-        {nameAvailability?.status === "DESIGNATOR_ERROR" && (
+        {props.nameAvailability?.status === "DESIGNATOR_ERROR" && (
           <Alert variant="error" dataTestid="designator-error-text">
             <p className="font-sans-xs">{Config.searchBusinessNameTask.designatorText}</p>
           </Alert>
         )}
-        {nameAvailability?.status === "SPECIAL_CHARACTER_ERROR" && (
+        {props.nameAvailability?.status === "SPECIAL_CHARACTER_ERROR" && (
           <Alert variant="error" dataTestid="special-character-error-text">
             <Content className="font-sans-xs">
               {templateEval(Config.formation.fields.businessName.alertSpecialCharacters, {
-                name: submittedName,
+                name: props.businessName,
               })}
             </Content>
           </Alert>
         )}
-        {nameAvailability?.status === "RESTRICTED_ERROR" && (
+        {props.nameAvailability?.status === "RESTRICTED_ERROR" && (
           <Alert variant="error" dataTestid="restricted-word-error-text">
             <Content className="font-sans-xs">
               {templateEval(Config.formation.fields.businessName.alertRestrictedWord, {
-                name: submittedName,
-                word: nameAvailability.invalidWord ?? "*unknown*",
+                name: props.businessName,
+                word: props.nameAvailability.invalidWord ?? "*unknown*",
               })}
             </Content>
           </Alert>

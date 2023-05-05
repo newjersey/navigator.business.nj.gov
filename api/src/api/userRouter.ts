@@ -41,7 +41,8 @@ type CognitoIdentityPayload = {
 };
 
 const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean => {
-  return parseDate(lastCheckedDate).isBefore(getCurrentDate().subtract(1, "hour"));
+  // return parseDate(lastCheckedDate).isBefore(getCurrentDate().subtract(1, "hour"));
+  return parseDate(lastCheckedDate).isBefore(getCurrentDate().subtract(1, "second")); // TODO: Revert to 1 HOUR
 };
 
 const clearTaskItemChecklists = (userData: UserData): UserData => {
@@ -198,6 +199,7 @@ export const userRouterFactory = (
               completedFilingPayment: false,
               formationFormData: createEmptyFormationFormData(),
               businessNameAvailability: undefined,
+              dbaBusinessNameAvailability: undefined,
               lastVisitedPageIndex: 0,
             },
           };

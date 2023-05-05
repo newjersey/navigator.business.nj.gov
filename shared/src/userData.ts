@@ -58,6 +58,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
       getFilingResponse: undefined,
       completedFilingPayment: false,
       businessNameAvailability: undefined,
+      dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     },
   };

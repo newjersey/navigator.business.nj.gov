@@ -71,6 +71,7 @@ export interface FormationData {
   readonly getFilingResponse: GetFilingResponse | undefined;
   readonly completedFilingPayment: boolean;
   readonly businessNameAvailability: NameAvailability | undefined;
+  readonly dbaBusinessNameAvailability: NameAvailability | undefined;
   readonly lastVisitedPageIndex: number;
 }
 
@@ -86,7 +87,6 @@ export interface FormationAddress {
   readonly addressCountry: CountriesShortCodes | undefined;
   readonly businessLocationType: FormationBusinessLocationType | undefined;
 }
-
 export interface FormationSigner {
   readonly name: string;
   readonly signature: boolean;

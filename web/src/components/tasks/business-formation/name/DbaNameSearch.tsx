@@ -12,22 +12,20 @@ import { ReactElement, useContext } from "react";
 export const DbaNameSearch = (): ReactElement => {
   const { Config } = useConfig();
   const { userData, update } = useUserData();
-  const { setBusinessNameAvailability } = useContext(BusinessFormationContext);
+  const { setDbaBusinessNameAvailability, state } = useContext(BusinessFormationContext);
 
   useMountEffect(() => {
     analytics.event.business_formation_dba_name_search_field.appears.dba_name_search_field_appears();
   });
 
-  const _setBusinessNameAvailability = (nameAvailability: NameAvailability | undefined): void => {
-    setBusinessNameAvailability(nameAvailability);
-  };
-
-  const onSubmit = async (submittedName: string, nameAvailability: NameAvailability): Promise<void> => {
-    if (!nameAvailability || !userData) {
+  const onSubmit = async (submittedName: string, dbaNameAvailability: NameAvailability): Promise<void> => {
+    if (!dbaNameAvailability || !userData) {
       return;
     }
-    setBusinessNameAvailability(nameAvailability);
-    if (nameAvailability.status === "AVAILABLE") {
+    setDbaBusinessNameAvailability(dbaNameAvailability);
+    console.log({dbaNameAvailability})
+    console.log({state})
+    if (dbaNameAvailability.status === "AVAILABLE") {
       await update({
         ...userData,
         profileData: {
@@ -38,6 +36,7 @@ export const DbaNameSearch = (): ReactElement => {
     }
   };
 
+  
   return (
     <>
       <Content>{`${Config.nexusNameSearch.dbaNameHeader}\n\n${Config.nexusNameSearch.dbaNameDescription}`}</Content>
@@ -48,9 +47,12 @@ export const DbaNameSearch = (): ReactElement => {
           searchButtonTestId: "search-dba-availability",
           searchButtonText: Config.nexusNameSearch.dbaNameSearchSubmitButton,
         }}
+        nameAvailability={state.dbaBusinessNameAvailability}
+        setNameAvailability={setDbaBusinessNameAvailability}
+        businessName={userData?.profileData.nexusDbaName ?? ""}
         isBusinessFormation
         isDba
-        onChange={_setBusinessNameAvailability}
+        onChange={setDbaBusinessNameAvailability}
         onSubmit={onSubmit}
         unavailable={DbaUnavailable}
       />

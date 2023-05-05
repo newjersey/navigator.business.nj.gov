@@ -10,15 +10,13 @@ import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useContext } from "react";
 
 export const NexusSearchBusinessNameStep = (): ReactElement => {
-  const { setFormationFormData, setFieldsInteracted, setBusinessNameAvailability } =
+  const { state, setFormationFormData, setFieldsInteracted, setBusinessNameAvailability } =
     useContext(BusinessFormationContext);
+
+  console.log({"NexusSearchBusinessNameStep": state})
   const { userData, update } = useUserData();
   const { Config } = useConfig();
   const FIELD_NAME = "businessName";
-
-  const _setBusinessNameAvailability = (nameAvailability: NameAvailability | undefined): void => {
-    setBusinessNameAvailability(nameAvailability);
-  };
 
   const onSubmit = async (
     submittedName: string,
@@ -85,6 +83,9 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
       <h3>{Config.formation.fields.businessName.overrides.foreign.header}</h3>
       <Content>{Config.formation.fields.businessName.overrides.foreign.description}</Content>
       <SearchBusinessNameForm
+        businessName={state.formationFormData.businessName}
+        nameAvailability={state.businessNameAvailability}
+        setNameAvailability={setBusinessNameAvailability}
         className="grid-col-12"
         config={{
           availableAlertText: Config.nexusNameSearch.availableText,
@@ -93,7 +94,7 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
         }}
         hideTextFieldWhenUnavailable={true}
         isBusinessFormation={true}
-        onChange={_setBusinessNameAvailability}
+        onChange={setBusinessNameAvailability}
         onSubmit={onSubmit}
         unavailable={NexusUnavailable}
       />

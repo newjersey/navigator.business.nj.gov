@@ -91,6 +91,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       getFilingResponse: undefined,
       completedFilingPayment: false,
       businessNameAvailability: undefined,
+      dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     };
 

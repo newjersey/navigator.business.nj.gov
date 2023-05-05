@@ -33,6 +33,7 @@ export const getPageHelper = async (
       ),
     }),
     businessNameAvailability: undefined,
+    dbaBusinessNameAvailability: undefined,
     formationResponse: undefined,
     getFilingResponse: undefined,
     completedFilingPayment: false,
