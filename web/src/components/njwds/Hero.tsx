@@ -1,10 +1,10 @@
 import { LandingPageTiles } from "@/components/LandingPageTiles";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import analytics from "@/lib/utils/analytics";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
@@ -17,12 +17,20 @@ export const Hero = (props: Props): ReactElement => {
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const router = useRouter();
+  const { Config } = useConfig();
 
   let landingPageConfig = Config.landingPage;
   if (ABStorageFactory().getExperience() === "ExperienceB") {
     landingPageConfig = {
       ...Config.landingPage,
       ...Config.landingPageExperienceB,
+    };
+  }
+
+  if (props.isWelcomePage) {
+    landingPageConfig = {
+      ...landingPageConfig,
+      ...Config.landingPageExperienceWelcome,
     };
   }
 

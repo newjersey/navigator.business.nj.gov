@@ -18,6 +18,15 @@ export const LandingPageTiles = (props: Props): ReactElement => {
   const istabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { Config } = useConfig();
 
+  let landingPageConfig = Config.landingPage;
+
+  if (props.isWelcomePage) {
+    landingPageConfig = {
+      ...landingPageConfig,
+      ...Config.landingPageExperienceWelcome,
+    };
+  }
+
   const routeToOnboarding = (): void => {
     router.push(ROUTES.onboarding);
     analytics.event.landing_page_hero_get_started.click.go_to_onboarding();
@@ -33,46 +42,46 @@ export const LandingPageTiles = (props: Props): ReactElement => {
   const actionTiles: ActionTile[] = [
     {
       imgPath: "/img/getStarted-icon.svg",
-      tileText: Config.landingPage.landingPageTile1Line1Text,
-      tileText2: Config.landingPage.landingPageTile1Line2Text,
+      tileText: landingPageConfig.landingPageTile1Line1Text,
+      tileText2: landingPageConfig.landingPageTile1Line2Text,
       dataTestId: "get-started-tile",
       onClick: routeToOnboarding,
       isPrimary: true,
     },
     {
       imgPath: "/img/briefcase-icon.svg",
-      tileText: Config.landingPage.landingPageTile2Text,
+      tileText: landingPageConfig.landingPageTile2Text,
       dataTestId: "register-biz-tile",
       onClick: (): void => setFlowAndRouteUser("starting"),
     },
     {
       imgPath: "/img/payTaxes-icon.svg",
-      tileText: Config.landingPage.landingPageTile3Text,
+      tileText: landingPageConfig.landingPageTile3Text,
       dataTestId: "pay-taxes-tile",
       onClick: (): void => setFlowAndRouteUser("up-and-running"),
     },
     {
       imgPath: "/img/outOfState-icon.svg",
       dataTestId: "out-of-state-tile",
-      tileText: Config.landingPage.landingPageTile4Text,
+      tileText: landingPageConfig.landingPageTile4Text,
       onClick: (): void => setFlowAndRouteUser("out-of-state"),
     },
     {
       imgPath: "/img/eligibleFunding-icon.svg",
       dataTestId: "eligible-funding-tile",
-      tileText: Config.landingPage.landingPageTile5Text,
+      tileText: landingPageConfig.landingPageTile5Text,
       onClick: (): void => setFlowAndRouteUser("up-and-running"),
     },
     {
       imgPath: "/img/startBusiness-icon.svg",
       dataTestId: "start-biz-tile",
-      tileText: Config.landingPage.landingPageTile6Text,
+      tileText: landingPageConfig.landingPageTile6Text,
       onClick: (): void => setFlowAndRouteUser("starting"),
     },
     {
       imgPath: "/img/runBusiness-icon.svg",
       dataTestId: "run-biz-tile",
-      tileText: Config.landingPage.landingPageTile7Text,
+      tileText: landingPageConfig.landingPageTile7Text,
       onClick: (): void => setFlowAndRouteUser("up-and-running"),
     },
   ];

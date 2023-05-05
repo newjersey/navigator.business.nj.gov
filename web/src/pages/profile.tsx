@@ -15,6 +15,7 @@ import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { DisabledTaxId } from "@/components/onboarding/taxId/DisabledTaxId";
 import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
 import { PageSkeleton } from "@/components/PageSkeleton";
+import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
 import { Documents } from "@/components/profile/Documents";
 import { EscapeModal } from "@/components/profile/EscapeModal";
 import { ProfileBusinessName } from "@/components/profile/ProfileBusinessName";
@@ -694,25 +695,27 @@ const ProfilePage = (props: Props): ReactElement => {
                         {displayOpportunityAlert() && <ProfileOpportunitiesAlert />}
                         <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
                           {getElements()}
-
-                          <div className="float-right fdr margin-top-2">
-                            <SecondaryButton
-                              isColor="primary"
-                              onClick={(): Promise<void> => onBack()}
-                              dataTestId="back"
-                            >
-                              {Config.profileDefaults.backButtonText}
-                            </SecondaryButton>
-                            <PrimaryButton
-                              isColor="primary"
-                              isSubmitButton={true}
-                              onClick={(): void => {}}
-                              isRightMarginRemoved={true}
-                              dataTestId="save"
-                              isLoading={isLoading}
-                            >
-                              {Config.profileDefaults.saveButtonText}
-                            </PrimaryButton>
+                          <div className="margin-top-2">
+                            <DevOnlyResetUserDataButton />
+                            <div className="float-right fdr">
+                              <SecondaryButton
+                                isColor="primary"
+                                onClick={(): Promise<void> => onBack()}
+                                dataTestId="back"
+                              >
+                                {Config.profileDefaults.backButtonText}
+                              </SecondaryButton>
+                              <PrimaryButton
+                                isColor="primary"
+                                isSubmitButton={true}
+                                onClick={(): void => {}}
+                                isRightMarginRemoved={true}
+                                dataTestId="save"
+                                isLoading={isLoading}
+                              >
+                                {Config.profileDefaults.saveButtonText}
+                              </PrimaryButton>
+                            </div>
                           </div>
                         </form>
                       </>
