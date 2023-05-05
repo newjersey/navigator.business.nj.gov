@@ -1,7 +1,7 @@
 ---
 urlSlug: scorp-state
 filename: scorp-state
-name: Apply for Your S Corporation Status with the State
+name: "Archived: Apply for Your S Corporation Status with the State"
 id: apply-scorp-state
 callToActionLink: https://www.njportal.com/dor/scorp
 callToActionText: Apply for My S Corporation Status
