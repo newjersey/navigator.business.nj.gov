@@ -284,7 +284,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
             </WithErrorBar>
           )}
 
-          <WithErrorBar hasError={!!formContextState.fieldStates.responsibleOwnerName?.invalid} type="ALWAYS">
+          <WithErrorBar hasError={!!formContextState.fieldStates.taxId?.invalid} type="ALWAYS">
             <div data-testid="taxIdInput">
               <FieldLabelModal
                 fieldName="taxId"
