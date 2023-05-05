@@ -1,5 +1,6 @@
 import { MainBusinessIntl } from "@/components/tasks/business-formation/business/MainBusinessAddressIntl";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useMountEffect } from "@/lib/utils/helpers";
 import {
   createEmptyFormationAddress,
@@ -13,6 +14,7 @@ import { MainBusinessUs } from "./MainBusinessAddressUs";
 export const MainBusinessForeignAddressFlow = (): ReactElement => {
   const { state, setFieldsInteracted, setFormationFormData } = useContext(BusinessFormationContext);
   type FlowBusinessLocationType = Exclude<FormationBusinessLocationType, "NJ">;
+  const { Config } = useConfig();
 
   useMountEffect(() => {
     if (state.formationFormData.businessLocationType === "US") {
@@ -46,6 +48,9 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
 
   return (
     <>
+      <h3 className="margin-bottom-3" data-testid="main-business-address-container-header">
+        {Config.formation.sections.addressHeader}
+      </h3>
       <FormControl variant="outlined" fullWidth className="padding-bottom-2">
         <RadioGroup
           aria-label={"Foreign address type"}

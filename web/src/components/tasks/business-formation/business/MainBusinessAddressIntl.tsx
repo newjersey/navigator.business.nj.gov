@@ -15,9 +15,6 @@ export const MainBusinessIntl = (): ReactElement => {
 
   return (
     <>
-      <h3 className="margin-bottom-2" data-testid="main-business-address-container-header">
-        {Config.formation.sections.addressHeader}
-      </h3>
       <BusinessFormationTextField
         label={Config.formation.fields.addressLine1.label}
         fieldName="addressLine1"

@@ -97,7 +97,7 @@ export const MainBusiness = (): ReactElement => {
           <div className="grid-col-6" />
         </div>
       )}
-      <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
+      <hr className="margin-bottom-4 margin-top-0" aria-hidden={true} />
       {isForeign ? <MainBusinessForeignAddressFlow /> : <MainBusinessAddressNj />}
     </>
   );
