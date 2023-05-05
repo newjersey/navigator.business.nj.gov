@@ -1,5 +1,7 @@
+import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { Icon } from "@/components/njwds/Icon";
 import { DisabledTaxId } from "@/components/onboarding/taxId/DisabledTaxId";
 import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
@@ -95,6 +97,11 @@ export const TaxInput = (props: Props): ReactElement => {
       <div className={`${isTabletAndUp ? "padding-right-1" : ""}`}>{Config.tax.lockedPreText}</div>
       <div>{props.children}</div>
       <div className={`${isTabletAndUp ? "padding-left-1" : ""}`}>{Config.tax.lockedPostText}</div>
+      <ArrowTooltip title={Config.profileDefaults.lockedFieldTooltipText}>
+        <div className="fdr fac margin-left-1 margin-bottom-1 font-body-lg">
+          <Icon>help_outline</Icon>
+        </div>
+      </ArrowTooltip>
       {isTabletAndUp ? <div className="margin-x-2">|</div> : <></>}
     </div>
   );

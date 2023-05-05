@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { ArrowTooltip } from "@/components/ArrowTooltip";
+import { Icon } from "@/components/njwds/Icon";
 import { EncryptionStatus, TaxIdDisplayStatus } from "@/components/onboarding/taxId/OnboardingTaxIdHelpers";
 import { ShowHideToggleButton } from "@/components/ShowHideToggleButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -98,7 +100,16 @@ export const DisabledTaxId = (props: Props): ReactElement => {
     toggleTaxIdDisplay();
   };
 
-  const SimpleDiv = (props: { children: ReactNode }): ReactElement => <div>{props.children}</div>;
+  const SimpleDiv = (props: { children: ReactNode }): ReactElement => (
+    <div className="flex">
+      <div>{props.children}</div>
+      <ArrowTooltip title={Config.profileDefaults.lockedFieldTooltipText}>
+        <div className="fdr fac margin-left-1 margin-bottom-1 font-body-lg">
+          <Icon>help_outline</Icon>
+        </div>
+      </ArrowTooltip>
+    </div>
+  );
   const Element = props.template ?? SimpleDiv;
   const value = useMemo(() => {
     return formatTaxId(taxIdValue + locationValue);

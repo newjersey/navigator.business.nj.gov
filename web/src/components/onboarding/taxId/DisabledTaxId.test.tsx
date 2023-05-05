@@ -4,7 +4,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { generateProfileData, ProfileData } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
-import { useMediaQuery } from "@mui/material";
+import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@mui/material", () => mockMaterialUI());
@@ -32,7 +32,9 @@ const setLargeScreen = (value: boolean): void => {
 const renderComponent = (profileData: ProfileData): void => {
   render(
     <WithStatefulProfileData initialData={profileData}>
-      <DisabledTaxId />
+      <ThemeProvider theme={createTheme()}>
+        <DisabledTaxId />
+      </ThemeProvider>
     </WithStatefulProfileData>
   );
 };
