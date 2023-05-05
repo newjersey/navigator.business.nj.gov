@@ -25,6 +25,7 @@ import {
   randomInt,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { ReactElement, ReactNode } from "react";
 
@@ -86,7 +87,9 @@ describe("<TaxTask />", () => {
     });
     render(
       <WithStatefulUserData initialUserData={userData}>
-        <TaxTask task={task} />
+        <ThemeProvider theme={createTheme()}>
+          <TaxTask task={task} />
+        </ThemeProvider>
       </WithStatefulUserData>
     );
     expect(screen.queryByLabelText("Tax id")).not.toBeInTheDocument();
