@@ -25,7 +25,7 @@ export const ModalZeroButton = (props: Props): ReactElement => {
       disableEnforceFocus={contextualInfo.isVisible}
     >
       <DialogTitle id="modal" className="display-flex flex-row flex-align-center margin-top-1 break-word">
-        <div className="h2-styling padding-x-1 margin-bottom-0">{props.title}</div>
+        <div className="h2-styling padding-x-1 margin-0-override">{props.title}</div>
         {!props.uncloseable && (
           <IconButton
             aria-label="close"

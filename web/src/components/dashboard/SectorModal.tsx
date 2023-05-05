@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { FieldStateActionKind } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { profileFormContext } from "@/contexts/profileFormContext";
@@ -68,12 +69,13 @@ export const SectorModal = (props: Props): ReactElement => {
         >
           <div data-testid="sector-modal" className="padding-top-4">
             <Content>{Config.dashboardDefaults.sectorModalBody}</Content>
-            <FormControl fullWidth={true}>
-              <div className="margin-top-2">
+            <div className="margin-top-2" />
+            <WithErrorBar hasError={formContextState.fieldStates.sectorId.invalid} type="ALWAYS">
+              <FormControl fullWidth={true}>
                 <FieldLabelModal fieldName="sectorId" />
                 <OnboardingSectors />
-              </div>
-            </FormControl>
+              </FormControl>
+            </WithErrorBar>
           </div>
         </ModalTwoButton>
       </ProfileDataContext.Provider>
