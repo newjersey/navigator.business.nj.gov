@@ -119,8 +119,8 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
           props.addressData.map((it, index) => {
             return (
               <tr className="margin-bottom-1" key={index} data-testid={`${props.fieldName}-${index}`}>
-                <td>{it.name}</td>
-                <td>{formatAddress(it)}</td>
+                <td className="break-word">{it.name}</td>
+                <td className="break-word">{formatAddress(it)}</td>
                 {"signature" in it ? (
                   <td className="padding-y-0">
                     {" "}
