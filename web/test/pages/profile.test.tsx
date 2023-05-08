@@ -480,6 +480,7 @@ describe("profile", () => {
           notes: "whats appppppp",
         },
         taskProgress: { [einTaskId]: "COMPLETED", "determine-naics-code": "NOT_STARTED" },
+        taskItemChecklist: {},
       });
     });
 
@@ -1000,6 +1001,7 @@ describe("profile", () => {
             ...userData.taskProgress,
             [naicsCodeTaskId]: "NOT_STARTED",
           },
+          taskItemChecklist: {},
         });
       }
     );
@@ -1834,6 +1836,23 @@ describe("profile", () => {
       expect(currentUserData().taskProgress[naicsCodeTaskId]).toEqual("NOT_STARTED");
     });
     expect(currentUserData().profileData.naicsCode).toEqual("");
+  });
+
+  it("resets all task checkbox data data when the industry is changed and page is saved", async () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({ industryId: "cosmetology", businessPersona: "STARTING" }),
+      taskProgress: {
+        [naicsCodeTaskId]: "COMPLETED",
+      },
+      taskItemChecklist: { key1: true },
+    });
+    renderPage({ userData });
+    selectByValue("Industry", "e-commerce");
+    clickSave();
+
+    await waitFor(() => {
+      expect(currentUserData().taskItemChecklist).toEqual({});
+    });
   });
 
   describe("Essential Question", () => {
