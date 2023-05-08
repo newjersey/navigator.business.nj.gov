@@ -1,5 +1,4 @@
 import { Content } from "@/components/Content";
-import { NexusAvailable } from "@/components/tasks/business-formation/name/NexusAvailable";
 import { NexusUnavailable } from "@/components/tasks/business-formation/name/NexusUnavailable";
 import { SearchBusinessNameForm } from "@/components/tasks/search-business-name/SearchBusinessNameForm";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -87,7 +86,7 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
       <Content>{Config.formation.fields.businessName.overrides.foreign.description}</Content>
       <SearchBusinessNameForm
         unavailable={NexusUnavailable}
-        available={NexusAvailable}
+        availableAlertText={Config.nexusNameSearch.availableText}
         hideTextFieldWhenUnavailable={true}
         onSubmit={onSubmit}
         isBusinessFormation={true}

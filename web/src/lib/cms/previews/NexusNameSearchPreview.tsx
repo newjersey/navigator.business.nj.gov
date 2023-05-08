@@ -1,12 +1,12 @@
-import { DbaAvailable } from "@/components/tasks/business-formation/name/DbaAvailable";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { DbaUnavailable } from "@/components/tasks/business-formation/name/DbaUnavailable";
-import { NexusAvailable } from "@/components/tasks/business-formation/name/NexusAvailable";
 import { NexusSearchBusinessNameStep } from "@/components/tasks/business-formation/name/NexusSearchBusinessNameStep";
 import { NexusUnavailable } from "@/components/tasks/business-formation/name/NexusUnavailable";
 import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
+import { templateEval } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 
 const NexusNameSearchPreview = (props: PreviewProps): ReactElement => {
@@ -17,7 +17,7 @@ const NexusNameSearchPreview = (props: PreviewProps): ReactElement => {
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         <NexusSearchBusinessNameStep />
-        <NexusAvailable submittedName="some name" updateButtonClicked={false} />
+        <Available availableAlertText={config.nexusNameSearch.availableText} />
         <NexusUnavailable
           submittedName="some name"
           nameAvailability={{
@@ -27,7 +27,7 @@ const NexusNameSearchPreview = (props: PreviewProps): ReactElement => {
           }}
           resetSearch={(): void => {}}
         />
-        <DbaAvailable submittedName="some name" updateButtonClicked={false} />
+        <Available availableAlertText={config.nexusNameSearch.dbaAvailableText} />
         <DbaUnavailable
           submittedName="some name"
           nameAvailability={{
@@ -39,6 +39,18 @@ const NexusNameSearchPreview = (props: PreviewProps): ReactElement => {
         />
       </div>
     </ConfigContext.Provider>
+  );
+};
+
+const Available = (props: { availableAlertText: string }): ReactElement => {
+  return (
+    <Alert variant="success" dataTestid="available-text">
+      <span className="font-sans-xs">
+        {templateEval(props.availableAlertText, {
+          name: "some name",
+        })}
+      </span>
+    </Alert>
   );
 };
 

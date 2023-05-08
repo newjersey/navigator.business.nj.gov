@@ -1,5 +1,4 @@
 import { Content } from "@/components/Content";
-import { DbaAvailable } from "@/components/tasks/business-formation/name/DbaAvailable";
 import { DbaUnavailable } from "@/components/tasks/business-formation/name/DbaUnavailable";
 import { SearchBusinessNameForm } from "@/components/tasks/search-business-name/SearchBusinessNameForm";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -44,7 +43,7 @@ export const DbaNameSearch = (): ReactElement => {
       <Content>{`${Config.nexusNameSearch.dbaNameHeader}\n\n${Config.nexusNameSearch.dbaNameDescription}`}</Content>
       <SearchBusinessNameForm
         unavailable={DbaUnavailable}
-        available={DbaAvailable}
+        availableAlertText={Config.nexusNameSearch.dbaAvailableText}
         onChange={_setBusinessNameAvailability}
         isBusinessFormation
         isDba
