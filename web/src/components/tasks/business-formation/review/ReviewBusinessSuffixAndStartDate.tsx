@@ -61,6 +61,7 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
         <ReviewLineItem
           label={Config.formation.fields.businessTotalStock.label}
           value={state.formationFormData.businessTotalStock}
+          dataTestId={"review-total-business-stock"}
         />
       )}
     </div>

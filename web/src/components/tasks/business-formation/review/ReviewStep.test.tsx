@@ -114,7 +114,7 @@ describe("Formation - ReviewStep", () => {
     expect(designatorSection.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
   });
 
-  it("displays the total share of stock if legal type is corporation", async () => {
+  it("always displays the total share of stock if legal type is corporation", async () => {
     const initialProfileData: Partial<ProfileData> = {
       legalStructureId: "c-corporation",
     };
@@ -123,8 +123,11 @@ describe("Formation - ReviewStep", () => {
       legalType: "c-corporation" as FormationLegalType,
     };
     await renderStep(initialProfileData, formationFormData);
-    expect(screen.getByText(`${Config.formation.fields.businessTotalStock.label}:`)).toBeInTheDocument();
-    expect(screen.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
+    const legalStockSection = screen.getByTestId("review-total-business-stock");
+    expect(
+      within(legalStockSection).getByText(`${Config.formation.fields.businessTotalStock.label}:`)
+    ).toBeInTheDocument();
+    expect(within(legalStockSection).getByText(Config.formation.general.notEntered)).toBeInTheDocument();
   });
 
   it("doesn't display the total share of stock if legal type is not corporation", async () => {
