@@ -10,7 +10,7 @@ Cannabis is not legal at the federal level. For this reason, Federal Deposit Ins
 
 - - -
 
-### Information Often Needed for Opening a Bank Account
+### Information Often Needed to Open a Bank Account
 
 - `EIN|ein` 
 
