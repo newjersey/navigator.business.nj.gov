@@ -63,7 +63,6 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
           value={state.formationFormData.businessTotalStock}
         />
       )}
-      <hr className="margin-y-205" />
     </div>
   );
 };

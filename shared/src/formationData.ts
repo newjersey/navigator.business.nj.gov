@@ -346,6 +346,11 @@ export const BusinessSuffixMap: Record<
 };
 
 export const corpLegalStructures: FormationLegalType[] = ["s-corporation", "c-corporation"];
+
+export const foreignCorpLegalStructures: FormationLegalType[] = [
+  "foreign-c-corporation",
+  "foreign-s-corporation",
+];
 export const incorporationLegalStructures: FormationLegalType[] = [
   ...corpLegalStructures,
   "limited-partnership",
