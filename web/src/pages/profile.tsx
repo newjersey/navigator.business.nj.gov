@@ -201,6 +201,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
       if (updateQueue.current().profileData.industryId !== profileData.industryId) {
         updateQueue.queueTaskProgress({ [naicsCodeTaskId]: "NOT_STARTED" });
+        updateQueue.queue({ ...updateQueue.current(), taskItemChecklist: {} } as UserData);
       }
 
       updateQueue.queueProfileData(profileData);
