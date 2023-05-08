@@ -9,17 +9,16 @@ issuingAgency: New Jersey Motor Vehicle Commission
 formName: ""
 ---
 
-Your commercial vehicles need to be inspected by the Motor Vehicle Commission’s School Bus Inspection Unit **before** obtaining registration and license plates for them. You can contact the School Bus Inspection Unit at (609) 633-9473.
+Your commercial buses need to be inspected by the Motor Vehicle Commission’s School Bus Inspection Unit **before** obtaining registration and license plates for them. 
 
+:::infoAlert
+Your vehicle will need to be inspected twice a year.
+:::
 ---
 
 ### Inspection Requirements:
 
 - Vehicle title
-
-:::infoAlert
-Your vehicle will need to be inspected twice a year.
-:::
 
 ### Registration Requirements
 
