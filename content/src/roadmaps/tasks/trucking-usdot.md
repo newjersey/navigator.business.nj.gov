@@ -12,9 +12,7 @@ Any commercial vehicle crossing state lines must register with the U.S. Departme
 
 ---
 
-### Eligibility Criteria
-
-You must meeting one of the following:
+### You Need This If
 
 - Your vehicle will haul hazardous materials
 - Your vehicle weighs 10,000 pounds or more, and will transport loads inside the State, interstate, or internationally
