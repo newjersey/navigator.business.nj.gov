@@ -13,7 +13,7 @@ If you would like to use a consumer-facing business name other than your persona
 
 ---
 
-### Actions to Take
+
 
 ${beginLocationDependentSection}
 
