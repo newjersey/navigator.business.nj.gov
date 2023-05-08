@@ -1,13 +1,13 @@
 ---
 urlSlug: haul-waste
 filename: haul-waste
-name: Register Your Vehicles That Will Haul Waste
+name: Obtain Waste Hauling Decal, if Applicable
 id: haul-waste-hic
 callToActionLink: https://www.wastedecals.nj.gov/sg2.html
 callToActionText: Apply for My Waste Hauling Decal
 issuingAgency: New Jersey Department of Environmental Protection (DEP)
 ---
-Waste facilities will **only** allow registered vehicles or items to discard waste. You need to register online and submit payment after you receive an e-mail with payment information.
+Waste facilities will **only** allow registered vehicles with a decal to discard waste.
 
 If you collect or haul waste for other companies, you need to be a [commercial waste hauler](https://www.wastedecals.nj.gov/swt2.html), which is a more time-intensive process.
 
@@ -21,6 +21,7 @@ If you collect or haul waste for other companies, you need to be a [commercial w
 * Lease agreement and certification (for leased vehicles, if applicable)
 * Home improvement contractor official registration document (also known as a registration card)
 * Copy of your certificate of liability insurance
+
 
 > **Once completed, you will have:**
 >
