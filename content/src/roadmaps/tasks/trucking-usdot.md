@@ -8,7 +8,7 @@ callToActionText: Register My Vehicle with USDoT
 issuingAgency: U.S. Department of Transportation
 ---
 
-Any commercial vehicle crossing state lines must register with the U.S. Department of Transportation (USDoT) and obtain a registration number.
+Any commercial vehicle crossing state lines must register with the U.S. Department of Transportation (USDoT) to obtain a registration number.
 
 ---
 
