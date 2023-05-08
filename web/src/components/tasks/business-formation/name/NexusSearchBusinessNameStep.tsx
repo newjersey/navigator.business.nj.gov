@@ -1,5 +1,4 @@
 import { Content } from "@/components/Content";
-import { NexusAvailable } from "@/components/tasks/business-formation/name/NexusAvailable";
 import { NexusUnavailable } from "@/components/tasks/business-formation/name/NexusUnavailable";
 import { SearchBusinessNameForm } from "@/components/tasks/search-business-name/SearchBusinessNameForm";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -86,17 +85,17 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
       <h3>{Config.formation.fields.businessName.overrides.foreign.header}</h3>
       <Content>{Config.formation.fields.businessName.overrides.foreign.description}</Content>
       <SearchBusinessNameForm
-        unavailable={NexusUnavailable}
-        available={NexusAvailable}
-        hideTextFieldWhenUnavailable={true}
-        onSubmit={onSubmit}
-        isBusinessFormation={true}
-        onChange={_setBusinessNameAvailability}
         className="grid-col-12"
         config={{
-          searchButtonText: Config.searchBusinessNameTask.searchButtonText,
+          availableAlertText: Config.nexusNameSearch.availableText,
           searchButtonTestId: "search-availability",
+          searchButtonText: Config.searchBusinessNameTask.searchButtonText,
         }}
+        hideTextFieldWhenUnavailable={true}
+        isBusinessFormation={true}
+        onChange={_setBusinessNameAvailability}
+        onSubmit={onSubmit}
+        unavailable={NexusUnavailable}
       />
     </div>
   );

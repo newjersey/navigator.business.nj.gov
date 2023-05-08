@@ -1,7 +1,6 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { AvailableProps } from "@/components/tasks/search-business-name/AvailableProps";
 import { UnavailableProps } from "@/components/tasks/search-business-name/UnavailableProps";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
@@ -14,40 +13,34 @@ import { FormControl, TextField } from "@mui/material";
 import { FormEvent, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 
 type SearchBusinessNameFormConfig = {
-  searchButtonText: string;
-  searchButtonTestId: string;
+  availableAlertText: string;
+  helperText?: string;
   inputLabel?: string;
+  searchButtonTestId: string;
+  searchButtonText: string;
 };
 
 interface Props {
   unavailable: (props: UnavailableProps) => ReactElement;
-  available: (props: AvailableProps) => ReactElement;
   config: SearchBusinessNameFormConfig;
   className?: string;
-  isBusinessFormation?: boolean;
+  hasError?: boolean;
   hideTextFieldWhenUnavailable?: boolean;
-  onChange?: (nameAvailability: NameAvailability | undefined) => void;
-  onSubmit?: (
-    submittedName: string,
-    nameAvailability: NameAvailability,
-    isInitialSubmit: boolean
-  ) => Promise<void>;
+  isBusinessFormation?: boolean;
   isDba?: boolean;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (nameAvailability: NameAvailability | undefined) => void;
+  onSubmit:
+    | ((submittedName: string, nameAvailability: NameAvailability, isInitialSubmit: boolean) => Promise<void>)
+    | (() => void);
 }
 
 export const SearchBusinessNameForm = (props: Props): ReactElement => {
-  const {
-    currentName,
-    isLoading,
-    error,
-    updateButtonClicked,
-    updateCurrentName,
-    searchBusinessName,
-    resetSearch,
-  } = useBusinessNameSearch({
-    isBusinessFormation: !!props.isBusinessFormation,
-    isDba: props.isDba || false,
-  });
+  const { currentName, isLoading, error, updateCurrentName, searchBusinessName, resetSearch } =
+    useBusinessNameSearch({
+      isBusinessFormation: !!props.isBusinessFormation,
+      isDba: props.isDba || false,
+    });
 
   const { Config } = useConfig();
   const didInitialSearch = useRef<boolean>(false);
@@ -66,7 +59,6 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
   }, [nameAvailability]);
 
   const Unavailable = props.unavailable;
-  const Available = props.available;
   const onSubmit = props.onSubmit;
 
   const doSearch = useCallback(
@@ -136,22 +128,26 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
             <div className="grid-row grid-gap-1">
               <div className="tablet:grid-col-8">
                 <TextField
-                  id="name-input"
+                  autoComplete="no"
                   className="fg1 width-100"
+                  error={props.hasError}
+                  helperText={props.config.helperText}
+                  id="name-input"
+                  inputProps={{
+                    "aria-label": props.config.inputLabel ?? "Search business name",
+                  }}
                   margin="dense"
-                  value={currentName}
+                  onBlur={props.onBlur}
                   onChange={(event): void => {
                     setNameAvailability(undefined);
                     updateCurrentName(event.target.value);
                   }}
+                  value={currentName}
                   variant="outlined"
-                  inputProps={{
-                    "aria-label": props.config.inputLabel ?? "Search business name",
-                  }}
                 />
               </div>
               <div className="tablet:grid-col-4">
-                <FormControl margin="dense" className="">
+                <FormControl margin="dense">
                   <SecondaryButton
                     isColor="primary"
                     onClick={(): void => {}}
@@ -166,16 +162,32 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
               </div>
             </div>
           </form>
-          {error === "BAD_INPUT" && (
-            <div data-testid={`error-alert-${error}`} className="text-error-dark">
+          {error && (
+            <Alert variant="error" dataTestid={`error-alert-${error}`} className="text-error-dark">
               {SearchBusinessNameErrorLookup[error]}
-            </div>
+            </Alert>
           )}
         </WithErrorBar>
       )}
       <div className="margin-top-2">
         {nameAvailability?.status === "AVAILABLE" && (
-          <Available submittedName={submittedName} updateButtonClicked={updateButtonClicked} />
+          <Alert variant="success" dataTestid="available-text">
+            <span className="font-sans-xs">
+              {templateEval(props.config.availableAlertText, {
+                name: submittedName,
+              })}
+            </span>
+          </Alert>
+        )}
+        {nameAvailability?.status === "UNAVAILABLE" && (
+          <Unavailable
+            resetSearch={(): void => {
+              resetSearch();
+              setNameAvailability(undefined);
+            }}
+            submittedName={submittedName}
+            nameAvailability={nameAvailability}
+          />
         )}
         {nameAvailability?.status === "DESIGNATOR_ERROR" && (
           <Alert variant="error" dataTestid="designator-error-text">
@@ -200,17 +212,6 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
               })}
             </Content>
           </Alert>
-        )}
-
-        {nameAvailability?.status === "UNAVAILABLE" && (
-          <Unavailable
-            resetSearch={(): void => {
-              resetSearch();
-              setNameAvailability(undefined);
-            }}
-            submittedName={submittedName}
-            nameAvailability={nameAvailability}
-          />
         )}
       </div>
     </>
