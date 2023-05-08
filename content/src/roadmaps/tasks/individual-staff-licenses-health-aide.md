@@ -7,7 +7,7 @@ callToActionText: Verify a CHHA License
 issuingAgency: New Jersey Division of Consumer Affairs Board of Nursing
 ---
 
-Certified Home Health Aide (CHHA) licenses are required for any of your staff offering caregiving services. The State keeps a registry of all individuals who have completed their [education and training programs.](https://www.njconsumeraffairs.gov/nur/Pages/default.aspx)
+Certified Home Health Aide (CHHA) licenses are required for any of your staff offering caregiving services. The State keeps a registry of all individuals who have completed their [education and training programs](https://www.njconsumeraffairs.gov/nur/Pages/default.aspx).
 
 ---
 
