@@ -6,7 +6,7 @@ id: expand-insurance-policy-foreign
 callToActionLink: ""
 callToActionText: ""
 ---
-It may be time to update your insurance policy to ensure it protects your business assets should you be held liable for an incident in New Jersey.
+It may be time to update your insurance policy. Make sure your insurance protects your business assets should you be held liable for an incident in New Jersey.
 
 - - -
 
