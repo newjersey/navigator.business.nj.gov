@@ -3,7 +3,7 @@ urlSlug: register-vehicle
 name: "Register Your Vehicle "
 id: register-vehicle
 callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm
-callToActionText: Obtain or Renew Your Vehicle Registration
+callToActionText: Obtain Your Vehicle Registration
 issuingAgency: New Jersey Motor Vehicle Commission
 formName: BA-49
 ---
