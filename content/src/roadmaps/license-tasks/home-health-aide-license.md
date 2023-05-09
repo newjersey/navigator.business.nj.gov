@@ -23,7 +23,7 @@ You need to register as a health care service firm if you are employing individu
 *  `Employer Identification Number (EIN)|ein` 
 * Copy of health care practitioner supervisor's registered nursing license
 * Copy of application for employment of all registered nurses
-* Copy of health care practitioner supervisor's certificate of malpractice insurance
+* Copy of health care practitioner supervisor's  malpractice insurance certificate
 * Insurance certificate 
 * Proof of business net worth
 *  `Registered agent's|registered-agent` contact information (if firm is a corporation or out-of-state corporation)
