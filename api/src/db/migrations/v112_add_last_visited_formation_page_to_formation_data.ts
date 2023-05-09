@@ -1,3 +1,4 @@
+import { randomInt } from "@shared/intHelpers";
 import { v111UserData } from "./v111_add_date_created_and_initial_version";
 
 export interface v112UserData {
@@ -400,4 +401,230 @@ type v112GetFilingResponse = {
   formationDoc: string;
   standingDoc: string;
   certifiedDoc: string;
+};
+
+// ---------------- v112 Factories ----------------
+export const generateV112User = (overrides: Partial<v112BusinessUser>): v112BusinessUser => {
+  return {
+    name: `some-name-${randomInt()}`,
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    receiveNewsletter: false,
+    userTesting: false,
+    externalStatus: {},
+    myNJUserKey: undefined,
+    intercomHash: undefined,
+    abExperience: "ExperienceA",
+    ...overrides,
+  };
+};
+
+export const generateV112FormationMember = (overrides: Partial<v112FormationMember>): v112FormationMember => {
+  return {
+    name: `some-name`,
+    addressLine1: `some-members-address-1-${randomInt()}`,
+    addressLine2: `some-members-address-2-${randomInt()}`,
+    addressCity: `some-members-address-city-${randomInt()}`,
+    addressState: { shortCode: "123", name: "new-jersey" },
+    addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
+    addressCountry: `some-county`,
+    ...overrides,
+  };
+};
+
+export const generateV112Municipality = (overrides: Partial<v112Municipality>): v112Municipality => {
+  return {
+    displayName: `some-display-name-${randomInt()}`,
+    name: `some-name-${randomInt()}`,
+    county: `some-county-${randomInt()}`,
+    id: `some-id-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const allFormationLegalTypes = [
+  "limited-liability-partnership",
+  "limited-liability-company",
+  "limited-partnership",
+  "c-corporation",
+  "s-corporation",
+];
+
+export const generateV112FormationFormData = (
+  overrides: Partial<v112FormationFormData>,
+  legalStructureId: string
+): v112FormationFormData => {
+  const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
+
+  return {
+    businessName: `some-business-name-${randomInt()}`,
+    businessSuffix: `some-suffix-${randomInt()}`,
+    businessStartDate: new Date(Date.now()).toISOString().split("T")[0],
+    businessAddressCity: generateV112Municipality({}),
+    businessAddressLine1: `some-address-1-${randomInt()}`,
+    businessAddressLine2: `some-address-2-${randomInt()}`,
+    businessAddressState: "NJ",
+    businessAddressZipCode: `some-zipcode-${randomInt()}`,
+    businessTotalStock: isCorp ? randomInt().toString() : "",
+    businessPurpose: `some-purpose-${randomInt()}`,
+    provisions: [`some-provision-${randomInt()}`],
+    agentNumberOrManual: randomInt() % 2 ? "NUMBER" : "MANUAL_ENTRY",
+    agentNumber: `some-agent-number-${randomInt()}`,
+    agentName: `some-agent-name-${randomInt()}`,
+    agentEmail: `some-agent-email-${randomInt()}`,
+    agentOfficeAddressLine1: `some-agent-office-address-1-${randomInt()}`,
+    agentOfficeAddressLine2: `some-agent-office-address-2-${randomInt()}`,
+    agentOfficeAddressCity: `some-agent-office-address-city-${randomInt()}`,
+    agentOfficeAddressState: "NJ",
+    agentOfficeAddressZipCode: `some-agent-office-zipcode-${randomInt()}`,
+    agentUseAccountInfo: !!(randomInt() % 2),
+    agentUseBusinessAddress: !!(randomInt() % 2),
+    signers: [{ name: "some-name", signature: "some-signature", title: "some-title" }],
+    members: legalStructureId === "limited-liability-partnership" ? [] : [generateV112FormationMember({})],
+    paymentType: randomInt() % 2 ? "ACH" : "CC",
+    annualReportNotification: !!(randomInt() % 2),
+    corpWatchNotification: !!(randomInt() % 2),
+    officialFormationDocument: !!(randomInt() % 2),
+    certificateOfStanding: !!(randomInt() % 2),
+    certifiedCopyOfFormationDocument: !!(randomInt() % 2),
+    contactFirstName: `some-contact-first-name-${randomInt()}`,
+    contactLastName: `some-contact-last-name-${randomInt()}`,
+    contactPhoneNumber: `some-contact-phone-number-${randomInt()}`,
+    withdrawals: `some-withdrawals-text-${randomInt()}`,
+    dissolution: `some-dissolution-text-${randomInt()}`,
+    combinedInvestment: `some-combinedInvestment-text-${randomInt()}`,
+    canCreateLimitedPartner: !!(randomInt() % 2),
+    createLimitedPartnerTerms: `some-createLimitedPartnerTerms-text-${randomInt()}`,
+    canGetDistribution: !!(randomInt() % 2),
+    getDistributionTerms: `some-getDistributionTerms-text-${randomInt()}`,
+    canMakeDistribution: !!(randomInt() % 2),
+    makeDistributionTerms: `some-makeDistributionTerms-text-${randomInt()}`,
+    ...overrides,
+  } as v112FormationFormData;
+};
+
+export const generateV112IndustrySpecificData = (
+  overrides: Partial<v112IndustrySpecificData>
+): v112IndustrySpecificData => {
+  return {
+    liquorLicense: false,
+    requiresCpa: false,
+    homeBasedBusiness: false,
+    cannabisLicenseType: undefined,
+    cannabisMicrobusiness: undefined,
+    constructionRenovationPlan: undefined,
+    providesStaffingService: false,
+    certifiedInteriorDesigner: false,
+    realEstateAppraisalManagement: false,
+    carService: undefined,
+    interstateTransport: false,
+    isChildcareForSixOrMore: undefined,
+    willSellPetCareItems: undefined,
+    petCareHousing: undefined,
+    isInterstateLogisticsApplicable: undefined,
+    isInterstateMovingApplicable: undefined,
+    ...overrides,
+  };
+};
+
+export const generateV112ProfileData = (overrides: Partial<v112ProfileData>): v112ProfileData => {
+  const id = `some-id-${randomInt()}`;
+  const persona = randomInt() % 2 ? "STARTING" : "OWNING";
+  return {
+    ...generateV112IndustrySpecificData({}),
+    businessPersona: persona,
+    businessName: `some-business-name-${randomInt()}`,
+    industryId: "restaurant",
+    legalStructureId: "limited-liability-partnership",
+    municipality: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    dateOfFormation: undefined,
+    entityId: randomInt(10).toString(),
+    employerId: randomInt(9).toString(),
+    taxId: randomInt() % 2 ? randomInt(9).toString() : randomInt(12).toString(),
+    encryptedTaxId: `some-encrypted-value`,
+    notes: `some-notes-${randomInt()}`,
+    ownershipTypeIds: [],
+    documents: {
+      certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
+      formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
+      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
+    },
+    existingEmployees: randomInt(7).toString(),
+    taxPin: randomInt(4).toString(),
+    sectorId: undefined,
+    naicsCode: randomInt(6).toString(),
+    foreignBusinessType: undefined,
+    foreignBusinessTypeIds: [],
+    nexusDbaName: "undefined",
+    needsNexusDbaName: true,
+    nexusLocationInNewJersey: undefined,
+    operatingPhase: "NEEDS_TO_FORM",
+    ...overrides,
+  };
+};
+
+export const generateV112TaxFilingData = (overrides: Partial<v112TaxFilingData>): v112TaxFilingData => {
+  return {
+    state: undefined,
+    businessName: undefined,
+    errorField: undefined,
+    lastUpdatedISO: undefined,
+    registeredISO: undefined,
+    filings: [],
+    ...overrides,
+  };
+};
+
+export const generateV112FormationData = (
+  overrides: Partial<v112FormationData>,
+  legalStructureId: string
+): v112FormationData => {
+  return {
+    formationFormData: generateV112FormationFormData({}, legalStructureId),
+    formationResponse: undefined,
+    getFilingResponse: undefined,
+    completedFilingPayment: false,
+    businessNameAvailability: undefined,
+    lastVisitedPageIndex: 0,
+    ...overrides,
+  };
+};
+
+export const generateV112UserData = (overrides: Partial<v112UserData>): v112UserData => {
+  const profileData = generateV112ProfileData({});
+  return {
+    version: 102,
+    dateCreatedISO: undefined,
+    versionWhenCreated: -1,
+    user: generateV112User({}),
+    profileData: generateV112ProfileData({}),
+    onboardingFormProgress: "UNSTARTED",
+    taskProgress: {},
+    taskItemChecklist: {},
+    licenseData: undefined,
+    preferences: generateV112Preferences({}),
+    lastUpdatedISO: "",
+    taxFilingData: generateV112TaxFilingData({}),
+    formationData: generateV112FormationData({}, profileData.legalStructureId ?? ""),
+    ...overrides,
+  };
+};
+
+export const generateV112Preferences = (overrides: Partial<v112Preferences>): v112Preferences => {
+  return {
+    roadmapOpenSections: ["PLAN", "START"],
+    roadmapOpenSteps: [],
+    hiddenCertificationIds: [],
+    hiddenFundingIds: [],
+    visibleSidebarCards: ["welcome"],
+    returnToLink: "",
+    isCalendarFullView: true,
+    isHideableRoadmapOpen: false,
+    ...overrides,
+  };
 };
