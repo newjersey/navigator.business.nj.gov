@@ -8,6 +8,7 @@ import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
+import { BusinessStructureTask } from "@/components/tasks/BusinessStructureTask";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { EinTask } from "@/components/tasks/EinTask";
@@ -134,6 +135,9 @@ const TaskPage = (props: Props): ReactElement => {
             "annual-license-cannabis": <CannabisApplyForLicenseTask task={props.task} />,
             "register-for-ein": <EinTask task={props.task} />,
             "register-for-taxes": <TaxTask task={getTaskFromRoadmap(roadmap, props.task.id) ?? props.task} />,
+            "business-structure": (
+              <BusinessStructureTask task={getTaskFromRoadmap(roadmap, props.task.id) ?? props.task} />
+            ),
             [formationTaskId]: renderFormationTask(),
             default: getTaskBody(),
           })}
