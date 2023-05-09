@@ -5,6 +5,6 @@
     "saveButton": "Save Business Structure",
     "radioQuestionHeader": "Select a business structure",
     "completedHeader": "Your business structure:",
-    "successMessage": "${legalStructure} was saved."
+    "successMessage": "**${legalStructure}** was saved."
   }
 }

@@ -136,9 +136,11 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
           <h3>{Config.businessStructureTask.completedHeader}</h3>
           <Alert variant="success">
             <div className="flex flex-row">
-              {templateEval(Config.businessStructureTask.successMessage, {
-                legalStructure: LookupLegalStructureById(userData.profileData.legalStructureId).name,
-              })}
+              <Content>
+                {templateEval(Config.businessStructureTask.successMessage, {
+                  legalStructure: LookupLegalStructureById(userData.profileData.legalStructureId).name,
+                })}
+              </Content>
               {canEdit() ? (
                 <UnStyledButton
                   className="margin-left-2"
