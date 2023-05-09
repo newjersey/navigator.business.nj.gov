@@ -30,7 +30,7 @@
     "typecheck": "tsc --noemit",
     "typecheck:cypress": "tsc --noemit --project cypress/tsconfig.json",
     "webflow:fundings-sync": "node ./src/scripts/webflow/fundingSync.mjs --sync",
-    "webflow:licenses-sync": "node ./src/scripts/webflow/licensesSync.mjs --sync"
+    "webflow:licenses-sync": "node ./src/scripts/webflow/licenseSync.mjs --sync"
   },
   "prettier": {
     "printWidth": 110,
