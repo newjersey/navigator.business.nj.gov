@@ -17,6 +17,7 @@ import {
   createNewSectors,
   deleteSectors,
   getNewSectors,
+  getSectors,
   getSortedSectors,
   getUnUsedSectors,
   getUpdatedSectorNames,
@@ -277,6 +278,15 @@ describe("webflow syncing", () => {
   });
 
   describe("sectors", () => {
+    it("reads the sectors json file", async () => {
+      fs.readFileSync.mockImplementation((e) => {
+        const original = jest.requireActual("fs");
+        return original.readFileSync(e);
+      });
+      const newSectors = getSectors();
+      expect(newSectors.length > 0).toBeTruthy();
+    });
+
     it("gets sectors to create", async () => {
       axios.mockImplementation((request) => {
         if (request.url.includes("61c21253f7640b5f5ce829a4") && request.method === "get") {

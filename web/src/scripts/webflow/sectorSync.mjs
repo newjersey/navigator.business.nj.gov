@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 import { createItem, deleteItem, getAllItems, modifyItem } from "./methods.mjs";
 
 const sectorDir = path.resolve(
-  `${path.dirname(fileURLToPath(import.meta.url))}/../../../../content/src/dashboard`
+  `${path.dirname(fileURLToPath(import.meta.url))}/../../../../content/src/mappings`
 );
 const getSectors = () => {
   return JSON.parse(fs.readFileSync(path.join(sectorDir, "sectors.json"), "utf8")).arrayOfSectors;
@@ -144,6 +144,7 @@ export {
   createNewSectors,
   updateSectorNames,
   deleteSectors,
+  getSectors,
   getSortedSectors,
   getUpdatedSectorNames,
   getUnUsedSectors,
