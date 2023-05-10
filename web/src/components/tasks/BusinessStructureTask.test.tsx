@@ -1,8 +1,10 @@
+import { Content } from "@/components/Content";
 import { BusinessStructureTask } from "@/components/tasks/BusinessStructureTask";
 import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -19,6 +21,7 @@ import {
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { renderToStaticMarkup } from "react-dom/server";
 
 const Config = getMergedConfig();
 
@@ -93,7 +96,10 @@ describe("<BusinessStructureTask />", () => {
     const successMessage = templateEval(Config.businessStructureTask.successMessage, {
       legalStructure: legalStructure.name,
     });
-    expect(screen.getByText(successMessage)).toBeInTheDocument();
+    useMockUserData(generateUserData({})); // necessary for renderToStaticMarkup for Content
+    expect(screen.getByTestId("success-alert")).toContainHTML(
+      renderToStaticMarkup(Content({ children: successMessage }))
+    );
   });
 
   it("shows radio question when edit button is clicked in alter", () => {
@@ -129,11 +135,8 @@ describe("<BusinessStructureTask />", () => {
 
     expect(currentUserData().profileData.legalStructureId).toEqual("limited-liability-company");
     const name = LookupLegalStructureById("limited-liability-company").name;
-    const successMessage = templateEval(Config.businessStructureTask.successMessage, {
-      legalStructure: name,
-    });
     await waitFor(() => {
-      expect(screen.getByText(successMessage)).toBeInTheDocument();
+      expect(screen.getByTestId("success-alert")).toHaveTextContent(name);
     });
     expect(screen.queryByLabelText("Business structure")).not.toBeInTheDocument();
     expect(screen.getByText(Config.businessStructureTask.completedHeader)).toBeInTheDocument();
