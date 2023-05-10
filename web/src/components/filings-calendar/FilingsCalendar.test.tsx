@@ -49,9 +49,9 @@ function setupMockAnalytics(): typeof analytics {
     ...jest.requireActual("@/lib/utils/analytics").default,
     event: {
       ...jest.requireActual("@/lib/utils/analytics").default.event,
-      tax_calendar_feedback_button: {
+      share_calendar_feedback: {
         click: {
-          show_feedback_modal: jest.fn(),
+          open_live_chat: jest.fn(),
         },
       },
     },
@@ -480,7 +480,7 @@ describe("<FilingsCalendar />", () => {
     ).toBeInTheDocument();
   });
 
-  it("sends analytics when feedback modal link is clicked and opens feedback modal", () => {
+  it("sends analytics when feedback modal link is clicked", () => {
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
       dueDate: getCurrentDate().format(defaultDateFormat),
@@ -506,8 +506,7 @@ describe("<FilingsCalendar />", () => {
     };
     renderFilingsCalendar(operateReferences, userData);
     fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarFeedbackButtonText));
-    expect(mockAnalytics.event.tax_calendar_feedback_button.click.show_feedback_modal).toHaveBeenCalled();
-    expect(screen.getByText(Config.feedbackModal.feedbackModalTitle)).toBeInTheDocument();
+    expect(mockAnalytics.event.share_calendar_feedback.click.open_live_chat).toHaveBeenCalled();
   });
 
   describe("tax calendar access button", () => {

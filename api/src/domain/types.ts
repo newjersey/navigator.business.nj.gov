@@ -1,6 +1,5 @@
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
-import { UserFeedbackRequest, UserIssueRequest } from "@shared/feedbackRequest";
 import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
 import { LicenseEntity, LicenseStatusResult, NameAndAddress } from "@shared/license";
 import { ProfileData } from "@shared/profileData";
@@ -68,11 +67,6 @@ export interface LicenseStatusClient {
 
 export interface UserTestingClient {
   add: (user: BusinessUser, profileData: ProfileData) => Promise<UserTestingResponse>;
-}
-
-export interface FeedbackClient {
-  createUserFeedback: (feedbackRequest: UserFeedbackRequest, userData: UserData) => Promise<boolean>;
-  createUserIssue: (issueRequest: UserIssueRequest, userData: UserData) => Promise<boolean>;
 }
 
 export interface SelfRegClient {

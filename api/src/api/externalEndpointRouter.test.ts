@@ -2,8 +2,7 @@ import { generateUser, generateUserData } from "@shared/test";
 import { Express } from "express";
 import jwt from "jsonwebtoken";
 import request from "supertest";
-import { generateFeedbackRequest, generateIssueRequest } from "../../test/factories";
-import { AddNewsletter, AddToUserTesting, FeedbackClient, UserDataClient } from "../domain/types";
+import { AddNewsletter, AddToUserTesting, UserDataClient } from "../domain/types";
 import { setupExpress } from "../libs/express";
 import { externalEndpointRouterFactory } from "./externalEndpointRouter";
 
@@ -37,7 +36,6 @@ describe("externalEndpointRouter", () => {
   let app: Express;
 
   let stubUserDataClient: jest.Mocked<UserDataClient>;
-  let stubFeedbackClient: jest.Mocked<FeedbackClient>;
   let stubAddNewsletter: jest.MockedFunction<AddNewsletter>;
   let stubAddToUserTesting: jest.MockedFunction<AddToUserTesting>;
 
@@ -50,21 +48,10 @@ describe("externalEndpointRouter", () => {
       getNeedToAddToUserTestingUsers: jest.fn(),
       getNeedTaxIdEncryptionUsers: jest.fn(),
     };
-    stubFeedbackClient = {
-      createUserFeedback: jest.fn(),
-      createUserIssue: jest.fn(),
-    };
     stubAddNewsletter = jest.fn();
     stubAddToUserTesting = jest.fn();
     app = setupExpress(false);
-    app.use(
-      externalEndpointRouterFactory(
-        stubUserDataClient,
-        stubAddNewsletter,
-        stubAddToUserTesting,
-        stubFeedbackClient
-      )
-    );
+    app.use(externalEndpointRouterFactory(stubUserDataClient, stubAddNewsletter, stubAddToUserTesting));
   });
 
   afterAll(async () => {
@@ -159,22 +146,6 @@ describe("externalEndpointRouter", () => {
         await request(app).post(`/userTesting`).send(userData).set("Authorization", "Bearer user-123-token");
         expect(stubAddToUserTesting).toHaveBeenCalled();
         expect(stubUserDataClient.put).toHaveBeenCalled();
-      });
-    });
-
-    describe("feedback request", () => {
-      it("sends feedback request to Feedback Client", async () => {
-        const userData = generateUserData({});
-        const feedbackRequest = generateFeedbackRequest({});
-        await request(app).post("/feedback").send({ feedbackRequest, userData });
-        expect(stubFeedbackClient.createUserFeedback).toHaveBeenCalledWith(feedbackRequest, userData);
-      });
-
-      it("sends issue request to Feedback Client", async () => {
-        const userData = generateUserData({});
-        const issueRequest = generateIssueRequest({});
-        await request(app).post("/issue").send({ issueRequest, userData });
-        expect(stubFeedbackClient.createUserIssue).toHaveBeenCalledWith(issueRequest, userData);
       });
     });
   });

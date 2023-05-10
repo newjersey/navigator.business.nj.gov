@@ -1,9 +1,9 @@
 import { BetaBar } from "@/components/BetaBar";
-import { ReportAnIssueBar } from "@/components/feedback-modal/ReportAnIssueBar";
 import { InnovFooter } from "@/components/InnovFooter";
 import { LegalMessage } from "@/components/LegalMessage";
 import { Banner } from "@/components/njwds/Banner";
 import { OutageAlertBar } from "@/components/OutageAlertBar";
+import { ReportAnIssueBar } from "@/components/ReportAnIssueBar";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import React, { ReactElement } from "react";
 

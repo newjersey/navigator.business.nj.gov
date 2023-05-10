@@ -6,7 +6,6 @@ import {
   UserTestingResponse,
 } from "@shared/businessUser";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
-import { UserFeedbackRequest, UserIssueRequest } from "@shared/feedbackRequest";
 import {
   castPublicFilingLegalTypeToFormationType,
   FormationData,
@@ -167,29 +166,6 @@ export const generateUserTestingResponse = (overrides: Partial<UserTestingRespon
   return {
     success: !failed,
     status: failed ? "CONNECTION_ERROR" : "SUCCESS",
-    ...overrides,
-  };
-};
-
-export const generateFeedbackRequest = (overrides: Partial<UserFeedbackRequest>): UserFeedbackRequest => {
-  return {
-    detail: `some-detail-${randomInt()}`,
-    pageOfRequest: `some-page-of-request-${randomInt()}`,
-    device: `some-device-${randomInt()}`,
-    browser: `some-browser-${randomInt()}`,
-    screenWidth: `some-screen-width-${randomInt()}`,
-    ...overrides,
-  };
-};
-
-export const generateIssueRequest = (overrides: Partial<UserIssueRequest>): UserIssueRequest => {
-  return {
-    context: `some-summary-${randomInt()}`,
-    detail: `some-detail-${randomInt()}`,
-    pageOfRequest: `some-page-of-request-${randomInt()}`,
-    device: `some-device-${randomInt()}`,
-    browser: `some-browser-${randomInt()}`,
-    screenWidth: `some-screen-width-${randomInt()}`,
     ...overrides,
   };
 };

@@ -354,23 +354,6 @@ export const randomFundingType = (): FundingType => {
   return all[randomIndex] as FundingType;
 };
 
-export const generateParsedUserAgent = (overrides: Partial<UAParser.IResult>): Partial<UAParser.IResult> => {
-  return {
-    os: { name: `some-os-name-${randomInt()}`, version: `some-os-version-${randomInt()}` },
-    device: {
-      vendor: `some-device-vendor-${randomInt()}`,
-      model: `some-device-model--${randomInt()}`,
-      type: `some-device-type--${randomInt()}`,
-    },
-    browser: {
-      name: `some-browser-name--${randomInt()}`,
-      version: `some-browser-version--${randomInt()}`,
-      major: `some-browser-major--${randomInt()}`,
-    },
-    ...overrides,
-  };
-};
-
 export const randomFundingHomeBased = (): FundingHomeBased => {
   const all = ["yes", "no", "unknown"];
   const randomIndex = Math.floor(Math.random() * all.length);

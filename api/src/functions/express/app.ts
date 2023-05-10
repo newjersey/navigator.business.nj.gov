@@ -7,7 +7,6 @@ import serverless from "serverless-http";
 import { externalEndpointRouterFactory } from "src/api/externalEndpointRouter";
 import { guestRouterFactory } from "src/api/guestRouter";
 import { taxFilingRouterFactory } from "src/api/taxFilingRouter";
-import { AirtableFeedbackClient } from "src/client/AirtableFeedbackClient";
 import { ApiTaxFilingClient } from "src/client/ApiTaxFilingClient";
 import { AWSEncryptionDecryptionFactory } from "src/client/AwsEncryptionDecryptionFactory";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
@@ -79,9 +78,6 @@ const GOV_DELIVERY_URL_QUESTION_ID = process.env.GOV_DELIVERY_URL_QUESTION_ID;
 
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY || "AIRTABLE_API_KEY";
 const AIRTABLE_USER_RESEARCH_BASE_ID = process.env.AIRTABLE_USER_RESEARCH_BASE_ID || "TEST_BASE_ID";
-const AIRTABLE_FEEDBACK_BASE_ID = process.env.AIRTABLE_FEEDBACK_BASE_ID || "TEST_BASE_ID";
-const AIRTABLE_FEEDBACK_TABLE = process.env.AIRTABLE_FEEDBACK_TABLE || "User Feature Requests - DEV";
-const AIRTABLE_ISSUES_TABLE = process.env.AIRTABLE_ISSUES_TABLE || "Navigator Bugs - DEV";
 const AIRTABLE_USERS_TABLE = process.env.AIRTABLE_USERS_TABLE || "Users Dev";
 const AIRTABLE_BASE_URL =
   process.env.AIRTABLE_BASE_URL ||
@@ -132,17 +128,6 @@ const airtableUserTestingClient = AirtableUserTestingClient(
   logger
 );
 
-const airtableFeedbackClient = AirtableFeedbackClient(
-  {
-    apiKey: AIRTABLE_API_KEY,
-    baseId: AIRTABLE_FEEDBACK_BASE_ID,
-    baseUrl: AIRTABLE_BASE_URL,
-    feedbackTableName: AIRTABLE_FEEDBACK_TABLE,
-    issuesTableName: AIRTABLE_ISSUES_TABLE,
-  },
-  logger
-);
-
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE);
 
@@ -189,12 +174,7 @@ app.use(
 );
 app.use(
   "/api/external",
-  externalEndpointRouterFactory(
-    userDataClient,
-    addGovDeliveryNewsletter,
-    addToAirtableUserTesting,
-    airtableFeedbackClient
-  )
+  externalEndpointRouterFactory(userDataClient, addGovDeliveryNewsletter, addToAirtableUserTesting)
 );
 app.use("/api/guest", guestRouterFactory(timeStampToBusinessSearch));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));
