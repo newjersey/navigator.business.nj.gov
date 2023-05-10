@@ -192,9 +192,9 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                 <tr key={index}>
                   <td className="flex-column">
                     <div className="flex-column">
-                      <div className="margin-bottom-2">{it.name}</div>
-                      <div>{it.addressLine1}</div>
-                      <div>{it.addressLine2}</div>
+                      <div className="margin-bottom-2 break-word">{it.name}</div>
+                      <div className="break-word">{it.addressLine1}</div>
+                      <div className="break-word">{it.addressLine2}</div>
                       <div className="margin-bottom-2">
                         {it.addressCity}, {it.addressState?.name} {it.addressZipCode}
                       </div>
