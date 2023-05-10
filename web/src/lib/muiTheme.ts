@@ -93,7 +93,7 @@ export default createTheme({
         root: {
           marginRight: "4px",
           "&:hover": {
-            backgroundColor: "#adadad",
+            backgroundColor: "#e6e6e6",
           },
         },
       },
@@ -120,7 +120,7 @@ export default createTheme({
             color: "#adadad",
           },
           "&:hover": {
-            backgroundColor: "#adadad",
+            backgroundColor: "#e6e6e6",
           },
         },
       },
