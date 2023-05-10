@@ -64,6 +64,7 @@ const CMS = dynamic(
 
       registerPreview(CMS, "tasks", TaskPreview);
       registerPreview(CMS, "license-tasks", TaskPreview);
+      registerPreview(CMS, "webflow-licenses", TaskPreview);
       registerPreview(CMS, "funding-opportunities", FundingsPreview);
       registerPreview(CMS, "post-onboarding-content", ContentPreview);
       registerPreview(CMS, "archived-funding-opportunities", FundingsPreview);
