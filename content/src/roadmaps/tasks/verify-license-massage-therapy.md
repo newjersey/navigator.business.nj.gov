@@ -3,12 +3,12 @@ urlSlug: verify-license-massage-therapy
 filename: verify-license-massage-therapy
 name: Apply for Your License and Ensure Your Staff is Licensed
 id: verify-license-massage-therapy
-callToActionLink: https://www.njconsumeraffairs.gov/mbt/Pages/applications.aspx
+callToActionLink: https://newjersey.mylicense.com/verification/
 callToActionText: Apply for or Verify a License
 issuingAgency: New Jersey Division of Consumer Affairs Board of Massage and Bodywork Therapy
 ---
 
-You or any of your staff providing massage therapy services will need to have individual massage therapy licenses. It is the responsibility of the business owner to ensure all staff providing massage therapy services have a current license.
+You or any of your staff providing massage therapy services need to have **individual** massage therapy licenses. It is the responsibility of the business owner to ensure all staff providing massage therapy services have a current license.
 
 ---
 
@@ -20,15 +20,15 @@ You or any of your staff providing massage therapy services will need to have in
 
 - An official transcript sent by your school in a sealed envelope
 - A [Supervision Certification](https://www.njconsumeraffairs.gov/mbt/Applications/Supervising-Faculty-Member-Certification.pdf) form completed by a licensed massage and bodywork therapist who has supervised the required 100 hours of clinical practice
-- Official exam scores sent directly to the Board in a sealed envelope (scores must be from either the `National Certification Board for Therapeutic Massage and Bodywork|national-certification-board-massage` , or the `Federation of State Massage Therapy Board|state-board-massage` )
+- Official exam scores sent directly to the Board in a sealed envelope (scores must be from either the `National Certification Board for Therapeutic Massage and Bodywork|national-certification-board-massage` , or the `Federation of State Massage Therapy Board|state-board-massage`)
 
 ### License Verification Requirements
 
-To verify your employees are licensed, you will need the following:
+To verify your employees are licensed, you need the following:
 
-- Your employee's full name
-- Their license number
-- The city used in their license application
+- Employee's full name
+- Employee's license number
+- The city used in employee's license application
 
 > **Once completed, you will have:**
 >
