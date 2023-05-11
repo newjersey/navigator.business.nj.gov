@@ -14,7 +14,7 @@ Cosmetology businesses need to obtain and show site safety permits, such as a Fi
 ### Safety Permits
 
 - **Fire Prevention Permits:** Obtain any fire prevention or burglar alarm permits from your local fire department
-- **Certificate of Occupancy/Approval:** If you've completed site construction/renovations, obtain a Certificate of Occupancy or Approval from your local buildings/onstruction department
+- **Certificate of Occupancy/Approval:** If you've completed site construction/renovations, obtain a Certificate of Occupancy or Approval from your local buildings/construction department
 
 > **Once completed, you will have:**
 >
