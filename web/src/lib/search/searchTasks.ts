@@ -16,8 +16,9 @@ export const searchTasks = (tasks: Task[], term: string): Match[] => {
     const cta = task.callToActionText?.toLowerCase();
     const agency = task.issuingAgency?.toLowerCase();
     const formName = task.formName?.toLowerCase();
+    const summary = task.summaryDescriptionMd?.toLowerCase();
 
-    const blockTexts = [content];
+    const blockTexts = [content, summary];
     const labelledTexts = [
       { content: cta, label: "CTA Text" },
       { content: name, label: "Task name" },
