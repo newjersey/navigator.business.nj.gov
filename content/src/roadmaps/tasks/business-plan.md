@@ -21,8 +21,8 @@ Your business plan guides your business and helps you make decisions around oper
 
 >**Once completed, you will have:**
 >
->- A business plan to help you make informed decisions for this roadmap
+>- A business plan 
 
 >**What if I don't make a business plan?**
 >
->Data shows that businesses with a plan are more successful. In addition, some State licenses may require you to have a business plan.
+>Data shows that businesses with a plan are more successful. In addition, some state licenses may require you to have a business plan.
