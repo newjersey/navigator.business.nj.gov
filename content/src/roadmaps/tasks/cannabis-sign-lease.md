@@ -1,27 +1,23 @@
 ---
 urlSlug: cannabis-sign-lease
 filename: cannabis-sign-lease
-name: Sign Your Lease
+name: Sign a Lease for Your Cannabis Business
 id: cannabis-sign-lease
 callToActionLink: ""
 callToActionText: ""
 ---
+It's important that you and your attorney review your lease (or letter of intent to lease) thoroughly to confirm that you're in agreement with all the clauses. Signing your lease under your registered business name may protect you from liabilities and costs associated with your new commercial or industrial location.  
 
-It's important that you and your attorney review your lease (or letter of intent to lease) thoroughly to confirm that you're in agreement with all the clauses. Beware of any language that requires you to surrender any of your business ownership or equity to a landlord as a condition of leasing your space. 
-
-Signing your lease under your registered business name may protect you from liabilities and costs associated with your new commercial or industrial location.  
-
-
----
 
 ### Contract Considerations
 
-- **FDIC-backed mortgage:** Cannabis is not legal at a federal level. For this reason, properties with federally insured mortgages cannot be used for cannabis businesses
+* **Federal Deposit Insurance Corporation- backed (FDIC) mortgage:** Cannabis is not legal at a federal level. For this reason, properties with federally insured mortgages cannot be used for cannabis businesses
+* **Lease start date:** Identify a start date for your lease that considers potential delays due to renovations, industry licenses, or other activities that are out of your control like getting local government approvals
+* **Lease length:** Determine your ideal lease length by analyzing a few `lease considerations|lease-considerations` 
+* **Tenant improvements:** Identify the entity responsible and write out expectations for `tenant improvements|tenant-improvements` in your lease
+* **Undesirable agreements:** Beware of any language that requires you to surrender any of your business ownership or equity to a landlord as a condition of leasing your space
 
-* **Lease Start Date:** Identify a start date for your lease that considers potential delays due to renovations, industry licenses, or other activities that are out of your control like getting local government approvals
-* **Lease length:** Determine your ideal lease length by analyzing a few `lease considerations|lease-considerations`
-* **Tenant Improvements:** Identify the entity responsible and write out expectations for `tenant improvements|tenant-improvements` in your lease
 
 > **Once completed, you will have:**
 >
-> - A signed lease or letter of intent to lease for your business site
+> * A signed lease or letter of intent to lease for your business site
