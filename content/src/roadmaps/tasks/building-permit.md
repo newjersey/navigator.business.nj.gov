@@ -1,6 +1,6 @@
 ---
 urlSlug: building-permit
-name: Prepare for Site Renovation if Applicable
+name: Prepare for Site Renovation, if Applicable
 id: building-permit
 callToActionLink: ""
 callToActionText: ""
