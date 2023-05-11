@@ -104,7 +104,11 @@ export const LandingPageTiles = (props: Props): ReactElement => {
           </div>
         </div>
       ) : (
-        <div className={`fjc fac ${istabletAndUp ? "fdr" : "fdc"}`}>
+        <div
+          className={`fac desktop:padding-x-7 desktop:grid-container-widescreen ${
+            istabletAndUp ? "fdr padding-x-2" : "fdc"
+          }`}
+        >
           {filterActionTiles(actionTiles).map((actionTile, index) => {
             const actionTileObj = {
               ...actionTile,
