@@ -144,6 +144,7 @@ type TaskGrayMatter = {
   requiresLocation?: boolean;
   industryId?: string;
   licenseCertificationClassification?: string;
+  summaryDescriptionMd: string;
 };
 
 type FundingGrayMatter = {

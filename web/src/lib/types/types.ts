@@ -301,6 +301,7 @@ export interface Task {
   callToActionLink: string;
   callToActionText: string;
   contentMd: string;
+  summaryDescriptionMd?: string;
   postOnboardingQuestion?: string;
   unlockedBy: TaskLink[];
   required?: boolean;
@@ -330,6 +331,7 @@ export interface WebflowLicense {
   issuingDivision: string;
   divisionPhone: string;
   licenseCertificationClassification: string;
+  summaryDescriptionMd?: string;
   industryId?: string;
   contentMd: string;
 }

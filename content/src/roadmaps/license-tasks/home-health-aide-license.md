@@ -9,9 +9,8 @@ callToActionLink: "https://www.njconsumeraffairs.gov/epservices"
 callToActionText: "Contact the Division of Consumer Affairs"
 issuingAgency: "New Jersey’s Division of Consumer Affairs Employment and Personnel Services"
 licenseCertificationClassification: "LICENSE"
+summaryDescriptionMd: "You may need to apply for an Employment Agency License prior to offering caregiving services. You will need to speak with a New Jersey Employment and Personnel Services representative to determine if this license is necessary."
 ---
-
-You may need to apply for an Employment Agency License prior to offering caregiving services. You will need to speak with a New Jersey Employment and Personnel Services representative to determine if this license is necessary.
 
 ---
 

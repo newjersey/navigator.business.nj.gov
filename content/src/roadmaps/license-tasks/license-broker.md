@@ -12,27 +12,27 @@ issuingAgency: State of New Jersey Department of Banking and Insurance Real Esta
 callToActionText: Submit a Real Estate Broker License Application
 webflowId: 5f77292da6bfb58d9402edff
 licenseCertificationClassification: ""
+summaryDescriptionMd: "If you own or plan to own a real estate agency, you need a real estate broker license."
 ---
-If you own or plan to own a real estate agency, you need a real estate broker license.
 
-- - -
+---
 
 ### Eligibility Criteria
 
-* A real estate agent license
-* A high school education or equivalency
-* A minimum of three years of full-time work experience (40 hours per week) as a real estate agent under a licensed broker
-* Completed 150-hour prelicensure education
-* Completed two 30-hour courses on agency/ethics and office management
-* Passing grades on the broker license exam
+- A real estate agent license
+- A high school education or equivalency
+- A minimum of three years of full-time work experience (40 hours per week) as a real estate agent under a licensed broker
+- Completed 150-hour prelicensure education
+- Completed two 30-hour courses on agency/ethics and office management
+- Passing grades on the broker license exam
 
 ### Application Requirements
 
-* A written statement from the supervising broker verifying full-time employment for the applicant for the past three years
-* An applicant ID (found in the licensure exam results form)
-* A criminal background check, and pass
-* Applicable fees paid
+- A written statement from the supervising broker verifying full-time employment for the applicant for the past three years
+- An applicant ID (found in the licensure exam results form)
+- A criminal background check, and pass
+- Applicable fees paid
 
 > **Once approved, you will have:**
 >
-> * A real estate broker license
+> - A real estate broker license
