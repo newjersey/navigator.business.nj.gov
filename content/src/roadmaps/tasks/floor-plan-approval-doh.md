@@ -6,7 +6,7 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-Contact your local Department of Health to have your floor plan and kitchen approved. You will need to schedule periodic follow-ups.
+Your local department of health may need approve your floor plan and/or kitchen.  
 
 ---
 
@@ -16,4 +16,4 @@ Contact your local Department of Health to have your floor plan and kitchen appr
 
 > **Once completed, you will have:**
 >
-> - Approval from your local Department of Health
+> - Approval from your local department of health
