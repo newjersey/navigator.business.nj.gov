@@ -15,7 +15,7 @@ It's important that you and your attorney review your lease (or letter of intent
 * **Lease start date:** Identify a start date for your lease that considers potential delays due to renovations, industry licenses, or other activities that are out of your control like getting local government approvals
 * **Lease length:** Determine your ideal lease length by analyzing a few `lease considerations|lease-considerations` 
 * **Tenant improvements:** Identify the entity responsible and write out expectations for `tenant improvements|tenant-improvements` in your lease
-* **Undesireable agreements:** Beware of any language that requires you to surrender any of your business ownership or equity to a landlord as a condition of leasing your space
+* **Undesirable agreements:** Beware of any language that requires you to surrender any of your business ownership or equity to a landlord as a condition of leasing your space
 
 
 > **Once completed, you will have:**
