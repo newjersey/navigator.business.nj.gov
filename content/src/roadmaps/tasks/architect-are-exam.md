@@ -4,7 +4,7 @@ filename: architect-are-exam
 name: "Take Your Architect’s Registration Exam "
 id: architect-are-exam
 callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
-callToActionText: Apply for Your ARE
+callToActionText: Apply for My ARE
 issuingAgency: New Jersey Division of Consumer Affairs Board of Architects
 ---
 
