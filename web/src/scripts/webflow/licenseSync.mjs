@@ -46,6 +46,7 @@ const getLicenseFromMd = (licenseMd) => {
     "license-classification": licenseMd.webflowType
       ? LicenseClassificationLookup[licenseMd.webflowType]
       : undefined,
+    "summary-description": getHtml(contentToStrings(licenseMd.summaryDescriptionMd)),
   };
 };
 

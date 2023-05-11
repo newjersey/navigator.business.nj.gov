@@ -222,7 +222,10 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
         )}
 
         {!hasPostOnboardingQuestion && !hasDeferredLocationQuestion && (
-          <Content>{props.task.contentMd}</Content>
+          <>
+            <Content>{props.task.summaryDescriptionMd || ""}</Content>
+            <Content>{props.task.contentMd}</Content>
+          </>
         )}
 
         {props.task.issuingAgency || props.task.formName ? (
