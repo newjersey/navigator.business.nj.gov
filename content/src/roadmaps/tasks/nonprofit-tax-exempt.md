@@ -17,20 +17,18 @@ See the IRS [guide on tax-exempt organizations](https://www.irs.gov/charities-no
 ### Common Types of Tax-Exempt Organizations
 
 * Charities 
-* Churches and Religious Groups
-* Educational Organizations
-* Social Welfare Organizations
+* Churches and religious groups
+* Educational organizations
+* Social welfare organizations
 
 ### Application Requirements
 
-* Certificate of Formation
-*  `EIN|ein` number
-
+*  `Certificate of Formation|certificate-formation` 
+*  `EIN|ein` 
 
 Charitable, religious, and educational organizations that qualify for tax exemption under section 501(c)(3) of the IRS code should complete [tax exemption application Form 1023](https://www.irs.gov/forms-pubs/about-form-1023).
 
 Social welfare organizations that qualify for tax exemption under section 501(c)(4) of the IRS code should complete [tax exemption application Form 1024-A](https://www.irs.gov/forms-pubs/about-form-1024-a).
-
 
 > **Once completed, you will have:**
 >
