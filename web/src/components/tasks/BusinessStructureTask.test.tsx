@@ -145,7 +145,7 @@ describe("<BusinessStructureTask />", () => {
     expect(currentUserData().profileData.legalStructureId).toEqual("limited-liability-company");
   });
 
-  it("updates task progress to in-progress when editing", async () => {
+  it("updates task progress to in-progress and updates tooltip when editing", async () => {
     const legalStructure = randomLegalStructure();
     const userData = generateUserData({
       profileData: generateProfileData({ legalStructureId: legalStructure.id }),
@@ -153,10 +153,15 @@ describe("<BusinessStructureTask />", () => {
     });
     renderTask(userData);
     fireEvent.click(screen.getByText(Config.taskDefaults.editText));
+
     triggerQueueUpdate();
     await waitFor(() => {
       expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
     });
+
+    fireEvent.mouseOver(screen.getByTestId("status-info-tooltip"));
+    expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
+    await screen.findByText(Config.businessStructureTask.uncompletedTooltip);
   });
 
   it("updates task progress to completed when saving", async () => {
