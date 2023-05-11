@@ -72,10 +72,6 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     if (!updateQueue || !userData) {
       return;
     }
-    const profileDataHasNotChanged = JSON.stringify(profileData) === JSON.stringify(userData.profileData);
-    if (profileDataHasNotChanged) {
-      return;
-    }
 
     queueUpdateTaskProgress(props.task.id, "COMPLETED");
     await updateQueue.queueProfileData(profileData).update();
