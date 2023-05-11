@@ -145,6 +145,22 @@ describe("<BusinessStructureTask />", () => {
     expect(currentUserData().profileData.legalStructureId).toEqual("limited-liability-company");
   });
 
+  it("allows saving without changes", async () => {
+    const legalStructure = randomLegalStructure();
+    const userData = generateUserData({
+      profileData: generateProfileData({ legalStructureId: legalStructure.id }),
+    });
+    renderTask(userData);
+
+    fireEvent.click(screen.getByText(Config.taskDefaults.editText));
+    fireEvent.click(screen.getByText(Config.businessStructureTask.saveButton));
+
+    await waitFor(() => {
+      expect(screen.getByTestId("success-alert")).toHaveTextContent(legalStructure.name);
+    });
+    expect(currentUserData().profileData.legalStructureId).toEqual(legalStructure.id);
+  });
+
   it("updates task progress to in-progress and updates tooltip when editing", async () => {
     const legalStructure = randomLegalStructure();
     const userData = generateUserData({
