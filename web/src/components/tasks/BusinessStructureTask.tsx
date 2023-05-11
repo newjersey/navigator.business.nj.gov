@@ -49,6 +49,18 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     setProfileData(userData.profileData);
   }, [userData]);
 
+  useEffect(() => {
+    const current = updateQueue?.current();
+    return () => {
+      if (current?.profileData.legalStructureId) {
+        queueUpdateTaskProgress(props.task.id, "COMPLETED");
+      } else if (!current?.profileData.legalStructureId) {
+        queueUpdateTaskProgress(props.task.id, "NOT_STARTED");
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [updateQueue]);
+
   useMountEffectWhenDefined(() => {
     if (!userData) {
       return;
@@ -83,8 +95,8 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   const postLookupContent = props.task.contentMd.split("${businessStructureSelectionComponent}")[1];
 
   const isCompleted = (): boolean => {
-    if (!userData) return false;
-    return userData.taskProgress[props.task.id] === "COMPLETED";
+    if (!updateQueue) return false;
+    return updateQueue.current().taskProgress[props.task.id] === "COMPLETED";
   };
 
   const canEdit = (): boolean => {
