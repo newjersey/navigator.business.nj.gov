@@ -1,19 +1,34 @@
 ---
-id: "home-health-aide-license"
-webflowId: "641370d2139a73fe804e07b5"
-urlSlug: "home-health-aide-license"
-name: "Apply for an Employment Agency License if Applicable"
-webflowName: "Employment Agency (Home Health Aid)"
-filename: "home-health-aide-license"
-callToActionLink: "https://www.njconsumeraffairs.gov/epservices"
-callToActionText: "Contact the Division of Consumer Affairs"
-issuingAgency: "New Jersey’s Division of Consumer Affairs Employment and Personnel Services"
-licenseCertificationClassification: "LICENSE"
+filename: health-care-services-firm-license
+urlSlug: health-care-reg
+name: Apply for Your Health Care Service Firm Registration, if Applicable
+webflowName: "Home Health Aide: Health Care Services Firm License"
+industryIntegration: New Jersey Division of Consumer Affairs
+issuingAgency: New Jersey’s Division of Consumer Affairs Regulated Business Section
+formName: ""
+industryId: homemaker-home-health-aide
+callToActionText: Register as a Health Care Service Firm
+callToActionLink: https://www.njconsumeraffairs.gov/hcservice
+licenseCertificationClassification: ""
+divisionPhone: (973) 504-6370
+id: home-health-aide-license
+webflowId: 641370d2139a73fe804e07b5
 ---
+You need to register as a health care service firm if you are employing individuals to provide health care, personal care, or companion services. This applies to both in-home and facility care.
 
-You may need to apply for an Employment Agency License prior to offering caregiving services. You will need to speak with a New Jersey Employment and Personnel Services representative to determine if this license is necessary.
+- - -
 
----
+### Application Requirements
+
+*  `Employer Identification Number (EIN)|ein` 
+* Copy of health care practitioner supervisor's registered nursing license
+* Copy of application for employment of all registered nurses
+* Copy of health care practitioner supervisor's  malpractice insurance certificate
+* Insurance certificate 
+* Proof of business net worth
+*  `Registered agent's|registered-agent` contact information (if firm is a corporation or out-of-state corporation)
+* Notarized application submission statement called "Affidavit for Health Care Services Firm"
+* Applicable fees paid
 
 > **What if I don't get this license?**
 >
