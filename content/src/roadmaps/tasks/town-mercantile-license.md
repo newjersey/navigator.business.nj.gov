@@ -6,11 +6,10 @@ callToActionLink: ${municipalityWebsite}
 callToActionText: Visit the ${municipality} Website
 requiresLocation: true
 ---
-Prior to opening, you may need to get a mercantile license. Some local governments require businesses with commercial locations to get a mercantile license. Each municipality will have its own application process for the mercantile license.
+Prior to opening, you may need to get a mercantile license. Some local governments require businesses with physical locations to get a mercantile license. Each municipality will have its own application process for the mercantile license.
 
 - - -
 
-### Actions to Take
 
 ${beginLocationDependentSection}
 
