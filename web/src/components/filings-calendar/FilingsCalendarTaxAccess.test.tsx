@@ -218,7 +218,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
       renderFilingsCalendarTaxAccess(userDataWithNavigatorFormation);
       openModal();
 
-      expect(screen.getByText(Config.profileDefaults.fields.businessName.default.header)).toBeInTheDocument();
+      expect(
+        screen.getByText(markdownToText(Config.taxCalendar.modalBusinessFieldHeader))
+      ).toBeInTheDocument();
       fireEvent.change(screen.getByTestId("businessName"), { target: { value: "MrFakesHotDogBonanza" } });
     });
 
