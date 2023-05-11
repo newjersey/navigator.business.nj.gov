@@ -1,14 +1,7 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { SelfRegResponse } from "@/lib/types/types";
 import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
-import {
-  InputFile,
-  NameAndAddress,
-  NameAvailability,
-  UserData,
-  UserFeedbackRequest,
-  UserIssueRequest,
-} from "@businessnjgovnavigator/shared/";
+import { InputFile, NameAndAddress, NameAvailability, UserData } from "@businessnjgovnavigator/shared/";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
@@ -77,14 +70,6 @@ export const postGetAnnualFilings = (userData: UserData): Promise<UserData> => {
 
 export const searchBusinessName = (name: string): Promise<NameAvailability> => {
   return get(`/guest/business-name-availability?query=${encodeURIComponent(name)}`, false);
-};
-
-export const postFeedback = (feedbackRequest: UserFeedbackRequest, userData: UserData): Promise<void> => {
-  return post("/external/feedback", { feedbackRequest, userData }, false);
-};
-
-export const postIssue = (issueRequest: UserIssueRequest, userData: UserData): Promise<void> => {
-  return post("/external/issue", { issueRequest, userData }, false);
 };
 
 export const postSelfReg = (userData: UserData): Promise<SelfRegResponse> => {

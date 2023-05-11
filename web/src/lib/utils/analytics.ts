@@ -1657,21 +1657,6 @@ export default {
       },
     },
 
-    tax_calendar_feedback_button: {
-      click: {
-        show_feedback_modal: () => {
-          eventRunner.track({
-            event: "link_clicks",
-            legacy_event_action: "click",
-            legacy_event_category: "tax_calendar_feedback_button",
-            legacy_event_label: "show_feedback_modal",
-            click_text: "show_tax_calendar_feedback_modal",
-            clicked_to: "tax_calendar_feedback_modal",
-          });
-        },
-      },
-    },
-
     tax_calendar_banner_button: {
       click: {
         show_tax_calendar_modal: () => {
@@ -1905,6 +1890,20 @@ export default {
             on_tab_name: "business_step",
             form_name: "business_formation",
             questions: { location: "first_time" },
+          });
+        },
+      },
+    },
+    share_calendar_feedback: {
+      click: {
+        open_live_chat: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "share_calendar_feedback",
+            legacy_event_label: "open_live_chat",
+            click_text: "share_calendar_feedback",
+            clicked_to: "live_chat",
           });
         },
       },

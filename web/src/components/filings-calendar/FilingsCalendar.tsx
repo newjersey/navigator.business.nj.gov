@@ -1,6 +1,5 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
-import { FeedbackModal } from "@/components/feedback-modal/FeedbackModal";
 import { EmptyCalendar } from "@/components/filings-calendar/EmptyCalendar";
 import { FilingsCalendarAsList } from "@/components/filings-calendar/FilingsCalendarAsList";
 import { FilingsCalendarGrid } from "@/components/filings-calendar/FilingsCalendarGrid";
@@ -32,7 +31,6 @@ export const FilingsCalendar = (props: Props): ReactElement => {
   const userDataFromHook = useUserData();
   const update = userDataFromHook.update;
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
-  const [showModal, setShowModal] = useState<boolean>(false);
 
   const currentDate = getCurrentDate();
   const currentYear = getCurrentDate().year().toString();
@@ -183,9 +181,9 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                 <UnStyledButton
                   style="tertiary"
                   underline
+                  intercomButton
                   onClick={(): void => {
-                    analytics.event.tax_calendar_feedback_button.click.show_feedback_modal();
-                    setShowModal(true);
+                    analytics.event.share_calendar_feedback.click.open_live_chat();
                   }}
                 >
                   <span>{Config.dashboardDefaults.calendarFeedbackButtonText}</span>
@@ -204,7 +202,6 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           </>
         )}
       </div>
-      {showModal && <FeedbackModal isOpen={showModal} handleClose={(): void => setShowModal(false)} />}
     </>
   );
 };

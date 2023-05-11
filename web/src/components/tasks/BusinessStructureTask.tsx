@@ -135,7 +135,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
         <>
           <h3>{Config.businessStructureTask.completedHeader}</h3>
           <Alert variant="success">
-            <div className="flex flex-row">
+            <div className="flex flex-row" data-testid="success-alert">
               <Content>
                 {templateEval(Config.businessStructureTask.successMessage, {
                   legalStructure: LookupLegalStructureById(userData.profileData.legalStructureId).name,

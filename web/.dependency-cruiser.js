@@ -331,10 +331,6 @@ module.exports = {
       to: { path: "lib" },
     },
     {
-      from: {},
-      to: { path: "ua-parser-js" },
-    },
-    {
       from: { path: "../shared/src" },
       to: { path: "../shared/src" },
     },

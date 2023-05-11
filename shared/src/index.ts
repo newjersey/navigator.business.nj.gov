@@ -8,7 +8,6 @@ export * from "./domain-logic/hasCompletedFormation";
 export * from "./domain-logic/onboarding";
 export * from "./domain-logic/opportunityFields";
 export * from "./domain-logic/taskIds";
-export * from "./feedbackRequest";
 export * from "./formationData";
 export * from "./fundingAgency";
 export * from "./industry";
