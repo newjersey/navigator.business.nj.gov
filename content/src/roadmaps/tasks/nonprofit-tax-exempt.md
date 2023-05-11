@@ -24,7 +24,7 @@ See the IRS [guide on tax-exempt organizations](https://www.irs.gov/charities-no
 ### Application Requirements
 
 *  `Certificate of Formation|certificate-formation` 
-*  `Employer Identification Number (EIN)|ein` 
+*  `EIN|ein` 
 
 Charitable, religious, and educational organizations that qualify for tax exemption under section 501(c)(3) of the IRS code should complete [tax exemption application Form 1023](https://www.irs.gov/forms-pubs/about-form-1023).
 
