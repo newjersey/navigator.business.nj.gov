@@ -11,15 +11,16 @@ export const searchWebflowLicenses = (licenses: WebflowLicense[], term: string):
       snippets: [],
     };
 
-    const content = license.contentMd.toLowerCase();
-    const name = license.name.toLowerCase();
+    const content = license.contentMd?.toLowerCase();
+    const name = license.webflowName?.toLowerCase();
     const cta = license.callToActionText?.toLowerCase();
     const agency = license.issuingAgency?.toLowerCase();
     const division = license.issuingDivision?.toLowerCase();
     const classification = license.licenseCertificationClassification?.toLowerCase();
-    const industry = license.industryId?.toLowerCase();
+    const industry = license.webflowIndustry?.toLowerCase();
+    const summary = license.summaryDescriptionMd?.toLowerCase();
 
-    const blockTexts = [content];
+    const blockTexts = [content, summary];
     const labelledTexts = [
       { content: cta, label: "CTA Text" },
       { content: name, label: "Task name" },

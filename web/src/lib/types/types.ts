@@ -324,16 +324,16 @@ export interface WebflowLicense {
   webflowId: string;
   filename: string;
   urlSlug: string;
-  name: string;
-  callToActionLink: string;
-  callToActionText: string;
+  webflowName?: string;
+  callToActionLink?: string;
+  callToActionText?: string;
   issuingAgency?: string;
-  issuingDivision: string;
-  divisionPhone: string;
-  licenseCertificationClassification: string;
+  issuingDivision?: string;
+  divisionPhone?: string;
+  licenseCertificationClassification?: string;
+  webflowIndustry?: string;
+  contentMd?: string;
   summaryDescriptionMd?: string;
-  industryId?: string;
-  contentMd: string;
 }
 
 export interface TaskLink {

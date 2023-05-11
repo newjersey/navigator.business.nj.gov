@@ -1,8 +1,8 @@
 import { LabelledContent, LabelledContentList, Match } from "@/lib/search/typesForSearch";
 
-export const findMatchInBlock = (blockTexts: string[], term: string, match: Match): Match => {
+export const findMatchInBlock = (blockTexts: (string | undefined)[], term: string, match: Match): Match => {
   for (const blockText of blockTexts) {
-    if (blockText.includes(term)) {
+    if (blockText?.includes(term)) {
       match.snippets.push(makeSnippet(blockText, term));
     }
   }
