@@ -7,7 +7,8 @@ formName: CFO-1
 industryId: home-baker
 callToActionLink: https://www.nj.gov/health/ceohs/phfpp/retailfood/cottagefood.shtml
 id: home-baker-license
-issuingAgency: New Jersey Department of Health
+issuingAgency: NJ Department of Health
+licenseAgency: nj-health
 callToActionText: Apply for Your Permit
 webflowType: business-license
 webflowId: 6414793b7e0fbe2794b95bfe

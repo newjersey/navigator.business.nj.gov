@@ -10,7 +10,8 @@ issuingDivision: Board of Examiners of Heating, Ventilation, Air Conditioning
   and Refrigeration Contracts
 divisionPhone: (973) 504-6250
 id: hvac-license
-issuingAgency: New Jersey Department of Consumer Affairs
+issuingAgency: NJ Division of Consumer Affairs
+licenseAgency: nj-consumer-affairs
 callToActionText: Apply for My HVACR License
 webflowType: individual-license
 webflowId: 5f772993a195c8849e15b18f

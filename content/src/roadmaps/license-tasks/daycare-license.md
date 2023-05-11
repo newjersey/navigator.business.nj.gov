@@ -9,7 +9,8 @@ webflowIndustry: Child Care
 issuingDivision: Office of Licensing
 divisionPhone: (609) 826-3999
 id: daycare-license
-issuingAgency: New Jersey Department of Children and Families
+issuingAgency: NJ Department of Children and Families
+licenseAgency: nj-children-families
 callToActionText: Apply for My License
 webflowId: 5f7728f5e8bf507c5e317899
 licenseCertificationClassification: LICENSE

@@ -3,8 +3,10 @@ filename: appraiser-company-registration
 urlSlug: appraiser-company-registration
 name: Register Your Appraisal Management Company
 webflowName: "Real Estate Appraisal: Management Company Registration"
-industryIntegration: New Jersey Division of Consumer Affairs
-issuingAgency: New Jersey Division of Consumer Affairs Real Estate Appraiser Board
+stateAgency: NJ Division of Consumer Affairs
+issuingAgency: NJ Division of Consumer Affairs
+additionalAgencyContext: Real Estate Appraiser Board
+licenseAgency: nj-consumer-affairs
 industryId: real-estate-appraisals
 callToActionText: Register My Company
 callToActionLink: https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx

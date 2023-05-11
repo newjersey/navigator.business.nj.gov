@@ -1671,21 +1671,21 @@ collections:
       - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
       - { label: "Form Name", name: "formName", widget: "string", required: false }
       - {
-          label: "Industry Integration",
-          name: "industryIntegration",
+          label: "State Agency",
+          name: "stateAgency",
           widget: "select",
           required: false,
           options:
             [
-              "NJ Department of Consumer Affairs",
+              "NJ Division of Consumer Affairs",
               "NJ Department of Taxation",
               "NJ Department of Revenue and Enterprise Services",
               "NJ Department of Community Affairs",
             ],
         }
       - {
-          label: "Local Level Task",
-          name: "localLevelTask",
+          label: "Local Agency",
+          name: "localAgency",
           widget: "select",
           required: false,
           options: ["Department of Health", "County Clerk", "Municipal Clerk"],
@@ -1724,7 +1724,7 @@ collections:
       - { label: "Detailed Description (Navigator)", name: "body", widget: "markdown" }
       - {
           label: "State Agency (Webflow & Navigator)",
-          name: "industryIntegration",
+          name: "stateAgency",
           widget: "select",
           required: false,
           options:
@@ -1739,7 +1739,7 @@ collections:
         }
       - {
           label: "Local agency (Webflow & Navigator)",
-          name: "localLevelTask",
+          name: "localAgency",
           widget: "select",
           required: false,
           options: ["Local Department of Health", "County Clerk", "Municipal Clerk"],
@@ -1779,6 +1779,18 @@ collections:
           required: false,
         }
       - { label: "Webflow Issuing Division", name: "issuingDivision", widget: "string", required: false }
+      - {
+          label: "Agency",
+          name: "licenseAgency",
+          widget: "relation",
+          multiple: true,
+          required: false,
+          default: [],
+          collection: "mappings",
+          search_fields: ["arrayOfLicenseAgencies.*.name"],
+          value_field: "arrayOfLicenseAgencies.*.id",
+          display_fields: ["arrayOfLicenseAgencies.*.name"],
+        }
       - { label: "Division Phone", name: "divisionPhone", widget: "string", required: false }
       - label: "Type (Webflow)"
         name: "webflowType"
@@ -1813,28 +1825,6 @@ collections:
           required: false,
         }
       - { label: "Detailed Description (Navigator)", name: "body", widget: "markdown", required: false }
-      - {
-          label: "State Agency (Webflow & Navigator)",
-          name: "industryIntegration",
-          widget: "select",
-          required: false,
-          options:
-            [
-              "New Jersey Division of Consumer Affairs",
-              "New Jersey Department of Taxation",
-              "New Jersey Department of Revenue and Enterprise Services",
-              "New Jersey Department of Community Affairs",
-              "New Jersey Department of Banking and Insurance",
-              "New Jersey Department of Health",
-            ],
-        }
-      - {
-          label: "Local agency (Webflow & Navigator)",
-          name: "localLevelTask",
-          widget: "select",
-          required: false,
-          options: ["Local Department of Health", "County Clerk", "Municipal Clerk"],
-        }
       - {
           label: "Agency additional context (Webflow & Navigator)",
           name: "issuingAgency",
@@ -2777,6 +2767,9 @@ collections:
       - label: "Ownership Types"
         name: "arrayOfOwnershipTypes"
         file: "content/src/mappings/ownershipTypes.json"
+      - label: "Licensing Agencies"
+        name: "arrayOfLicenseAgencies"
+        file: "content/src/mappings/licenseAgency.json"
         fields:
           - label: Ownership Types
             name: arrayOfOwnershipTypes

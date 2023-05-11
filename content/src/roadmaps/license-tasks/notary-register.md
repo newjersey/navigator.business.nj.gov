@@ -3,14 +3,15 @@ filename: notary-certificate
 urlSlug: notary-certificate
 name: Register as a Notary Public
 webflowName: "Notary Public: Notary Public Certificate"
-industryIntegration: New Jersey Department of Revenue and Enterprise Services
+stateAgency: NJ Department of Revenue and Enterprise Services
+licenseAgency: nj-revenue-enterprise-services
 industryId: notary-public
 callToActionLink: https://www.njportal.com/DOR/Notary
 webflowIndustry: ""
 issuingDivision: Bureau of Corporate Records
 divisionPhone: (609) 292-9292
 id: notary-register
-issuingAgency: New Jersey Department of Treasury
+issuingAgency: NJ Department of Treasury
 callToActionText: Apply for My Notary Public Certificate
 webflowType: individual-license
 webflowId: 5f77296c2edc674c7cb4a708

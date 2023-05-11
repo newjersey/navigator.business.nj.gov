@@ -34,9 +34,9 @@ const getLicenseFromMd = (licenseMd) => {
     slug: licenseMd.urlSlug,
     website: removeValueWithSpecialChars(licenseMd.callToActionLink),
     "call-to-action-text": licenseMd.callToActionText,
-    "department-3": licenseMd.industryIntegration, // state agency aka industryIntegration
-    "local-agency": licenseMd.localLevelTask, // local agency aka localLevelTask
-    division: licenseMd.issuingAgency, // agency additional context aka issuingAgency
+    "department-3": licenseMd.stateAgency,
+    "local-agency": licenseMd.localAgency,
+    division: licenseMd.issuingAgency,
     "department-phone-2": licenseMd.divisionPhone,
     "license-certification-classification": licenseMd.licenseCertificationClassification,
     "form-name": licenseMd.formName,

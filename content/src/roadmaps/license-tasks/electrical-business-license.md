@@ -3,12 +3,14 @@ filename: electrical-business-license
 urlSlug: electrical-business-license
 name: Get Your Electrical Contracting Business Permit
 webflowName: "Electrical Contractor: Business Permit"
-industryIntegration: New Jersey Division of Consumer Affairs
+stateAgency: NJ Division of Consumer Affairs
 industryId: electrical-contractor
 callToActionLink: https://www.njconsumeraffairs.gov/elec/Pages/applications.aspx
 divisionPhone: 973-504-6410
 id: electrical-business-license
-issuingAgency: New Jersey Division of Consumer Affairs Board of Electrical Contractors
+issuingAgency: NJ Division of Consumer Affairs
+additionalAgencyContext: Board of Electrical Contractors
+licenseAgency: nj-consumer-affairs
 callToActionText: Apply for My Business Permit
 webflowType: business-license
 webflowId: 6414793c685ea9e0d858aa8f

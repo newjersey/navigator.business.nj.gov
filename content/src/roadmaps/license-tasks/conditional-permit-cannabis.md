@@ -6,7 +6,8 @@ webflowName: "Cannabis: Conditional License"
 industryId: cannabis
 callToActionLink: https://www.nj.gov/cannabis/businesses/
 id: conditional-permit-cannabis
-issuingAgency: Cannabis Regulatory Commission
+issuingAgency: NJ Cannabis Regulatory Commission
+licenseAgency: nj-cannabis-commission
 callToActionText: Apply for My Conditional Cannabis License
 webflowId: 6414793bde13b38246c4dfb3
 licenseCertificationClassification: LICENSE

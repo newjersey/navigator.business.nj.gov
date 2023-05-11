@@ -8,7 +8,8 @@ callToActionLink: ""
 id: check-local-requirements
 callToActionText: ""
 webflowId: 64147a42689e2308a6b2252a
-localLevelTask: Municipal Clerk
+localAgency: Municipal Clerk
+licenseAgency: municipal-clerk
 licenseCertificationClassification: ""
 requiresLocation: true
 summaryDescriptionMd: "Prior to opening your physical location, you may need to get a mercantile license. The mercantile license provides your local government with information on how to reach you in an emergency.

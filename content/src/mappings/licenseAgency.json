@@ -1,0 +1,56 @@
+{
+  "arrayOfLicenseAgencies": [
+    {
+      "id": "nj-consumer-affairs",
+      "name": "NJ Division of Consumer Affairs"
+    },
+    {
+      "id": "nj-taxation",
+      "name": "NJ Department of Taxation"
+    },
+    {
+      "id": "nj-revenue-enterprise-services",
+      "name": "NJ Department of Revenue and Enterprise Services"
+    },
+    {
+      "id": "nj-community-affairs",
+      "name": "NJ Department of Community Affairs"
+    },
+    {
+      "id": "nj-banking-insurance",
+      "name": "NJ Department of Banking and Insurance"
+    },
+    {
+      "id": "nj-health",
+      "name": "NJ Department of Health"
+    },
+    {
+      "id": "nj-state-police",
+      "name": "NJ State Police Private Detective Unit"
+    },
+    {
+      "id": "nj-children-families",
+      "name": "NJ Department of Children and Families"
+    },
+    {
+      "id": "nj-motor-vehicle",
+      "name": "NJ Motor Vehicle Commission"
+    },
+    {
+      "id": "cannabis-commission",
+      "name": "Cannabis Regulatory Commission"
+    },
+    {
+      "id": "county-clerk",
+      "name": "County Clerk"
+    },
+    {
+      "id": "local-health",
+      "name": "Local Department of Health"
+    },
+    {
+      "id": "municipal-clerk",
+      "name": "Municipal Clerk"
+    }
+  ]
+}

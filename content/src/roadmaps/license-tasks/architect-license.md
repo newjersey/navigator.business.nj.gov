@@ -3,13 +3,15 @@ filename: architect-license
 urlSlug: architect-license
 name: Apply for Your Architect License
 webflowName: "Architecture: Architect License"
-industryIntegration: New Jersey Division of Consumer Affairs
+stateAgency: NJ Division of Consumer Affairs
 industryId: architecture
 callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
 webflowIndustry: Architect
 divisionPhone: (973) 504-6385
 id: architect-license
-issuingAgency: New Jersey Division of Consumer Affairs Board of Architects
+issuingAgency: NJ Division of Consumer Affairs
+additionalAgencyContext: Board of Architects
+licenseAgency: nj-consumer-affairs
 callToActionText: Apply for My Architect License
 webflowType: individual-license
 webflowId: 5f772971b0544fd3d536617b
