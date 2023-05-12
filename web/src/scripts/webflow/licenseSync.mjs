@@ -2,7 +2,6 @@
 /* eslint-disable no-undef */
 
 import fs from "fs";
-import { LookupIndustryById } from "../../../../shared/lib/shared/src/industry.js";
 import {
   loadAllLicenses,
   loadAllNavigatorLicenses,
@@ -13,6 +12,7 @@ import {
 import { argsInclude, contentToStrings, getHtml, wait } from "./helpers.mjs";
 import { LicenseClassificationLookup } from "./licenseClassifications.mjs";
 import { createItem, getAllItems, modifyItem } from "./methods.mjs";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared";
 
 const licenseCollectionId = "5e31b06cb76b830c0c358aa8";
 
