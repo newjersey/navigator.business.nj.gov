@@ -8,7 +8,8 @@ callToActionLink: https://www.state.nj.us/dobi/division_rec/brokeroriginalapplic
 webflowIndustry: ""
 divisionPhone: (609) 292-7272
 id: license-broker
-issuingAgency: State of New Jersey Department of Banking and Insurance Real Estate Commission
+agencyId: nj-banking-insurance
+agencyAdditionalContext: Real Estate Commission
 callToActionText: Submit a Real Estate Broker License Application
 webflowId: 5f77292da6bfb58d9402edff
 licenseCertificationClassification: ""

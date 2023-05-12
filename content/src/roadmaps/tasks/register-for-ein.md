@@ -5,7 +5,7 @@ name: Get Your EIN from the IRS
 id: register-for-ein
 callToActionLink: https://www.irs.gov/pub/irs-pdf/fss4.pdf
 callToActionText: Apply for My EIN
-issuingAgency: Internal Revenue Service
+agencyAdditionalContext: Internal Revenue Service
 formName: SS-4
 ---
 

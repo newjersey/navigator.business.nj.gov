@@ -4,7 +4,7 @@ name: Check Available Names and Form Your Business
 id: form-business-entity
 callToActionLink: https://www.njportal.com/DOR/BusinessFormation/CompanyInformation/BusinessName
 callToActionText: Form My Business
-issuingAgency: New Jersey Department of Treasury's Division of Revenue and Enterprise Services
+agencyId: nj-revenue-enterprise-services
 ---
 You must register your business name and form your `business structure|business-structure-learn-more` with the State.
 

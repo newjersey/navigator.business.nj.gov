@@ -5,7 +5,7 @@ urlSlug: "kosher-foods"
 webflowName: "Kosher Foods"
 filename: "kosher-foods"
 callToActionLink: "https://www.njconsumeraffairs.gov/kosher"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 273-8028"
 webflowIndustry: "Kosher Foods"
 licenseCertificationClassification: "REGULATION"

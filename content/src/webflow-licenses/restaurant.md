@@ -5,7 +5,7 @@ urlSlug: "restaurant"
 webflowName: "Restaurant"
 filename: "restaurant"
 callToActionLink: ""
-issuingAgency: "Contact Your Local Health Department"
+agencyId: local-health
 divisionPhone: ""
 webflowIndustry: "Restaurant"
 licenseCertificationClassification: "CONTACT"

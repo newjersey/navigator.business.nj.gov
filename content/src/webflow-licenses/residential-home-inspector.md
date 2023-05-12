@@ -5,7 +5,7 @@ urlSlug: "residential-home-inspector"
 webflowName: "Residential Home Inspector"
 filename: "residential-home-inspector"
 callToActionLink: "http://njconsumeraffairs.gov/hom/Pages/regulations.aspx"
-issuingAgency: "Department of Law and Public Safety"
+agencyId: law-public-safety
 divisionPhone: "(973) 504-6460"
 webflowIndustry: "Residential Home Inspector"
 licenseCertificationClassification: "LICENSE"

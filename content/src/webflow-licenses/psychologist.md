@@ -5,7 +5,7 @@ urlSlug: "psychologist"
 webflowName: "Psychologist"
 filename: "psychologist"
 callToActionLink: "http://njconsumeraffairs.gov/psy/"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6470"
 webflowIndustry: "Psychologist"
 licenseCertificationClassification: "REGISTERED/LICENSE"

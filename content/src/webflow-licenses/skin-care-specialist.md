@@ -5,7 +5,7 @@ urlSlug: "skin-care-specialist"
 webflowName: "Skin Care Specialist"
 filename: "skin-care-specialist"
 callToActionLink: "https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6400"
 webflowIndustry: "Skin Care Specialist"
 licenseCertificationClassification: "LICENSE/REGISTRATION"

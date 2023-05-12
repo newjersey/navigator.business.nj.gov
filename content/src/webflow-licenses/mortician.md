@@ -5,7 +5,7 @@ urlSlug: "mortician"
 webflowName: "Mortician"
 filename: "mortician"
 callToActionLink: "https://www.njconsumeraffairs.gov/mor/Pages/applications.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6425"
 webflowIndustry: "Mortician"
 licenseCertificationClassification: "LICENSE"

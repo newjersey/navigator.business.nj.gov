@@ -5,7 +5,7 @@ urlSlug: "vending-machines"
 name: "Vending Machines"
 filename: "vending-machines"
 callToActionLink: ""
-issuingAgency: "Check with Local Municipality"
+agencyId: municipal-clerk
 divisionPhone: ""
 industryId: "Vending Machine"
 licenseCertificationClassification: "CONTACT"

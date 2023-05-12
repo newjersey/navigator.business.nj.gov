@@ -5,7 +5,7 @@ urlSlug: "marketing-consultant"
 webflowName: "Marketing Consultant"
 filename: "marketing-consultant"
 callToActionLink: "http://njconsumeraffairs.gov/"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6370"
 webflowIndustry: "Marketing Consultant"
 licenseCertificationClassification: "REGISTRATION"

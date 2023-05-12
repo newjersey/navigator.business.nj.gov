@@ -5,7 +5,7 @@ name: Register Your Business for Tax and/or Employer Purposes
 id: register-for-taxes
 callToActionLink: ""
 callToActionText: ""
-issuingAgency: New Jersey Division of Revenue and Enterprise Services
+agencyId: nj-revenue-enterprise-services
 formName: NJ-Reg
 ---
 Out-of-state businesses doing business in New Jersey must register for State taxes.

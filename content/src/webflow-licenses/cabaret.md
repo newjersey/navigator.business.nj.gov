@@ -5,7 +5,7 @@ urlSlug: "cabaret"
 webflowName: "Cabaret"
 filename: "cabaret"
 callToActionLink: ""
-issuingAgency: "Check with Local Municipality"
+agencyId: municipal-clerk
 divisionPhone: ""
 webflowIndustry: "Cabaret"
 licenseCertificationClassification: "MERCANTILE LICENSE"

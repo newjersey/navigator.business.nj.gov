@@ -5,7 +5,7 @@ urlSlug: "nurses-registry"
 webflowName: "Nurses Registry"
 filename: "nurses-registry"
 callToActionLink: "http://njconsumeraffairs.gov/epservices/Pages/default.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6370"
 webflowIndustry: "Nurses Registry"
 licenseCertificationClassification: "LICENSE"

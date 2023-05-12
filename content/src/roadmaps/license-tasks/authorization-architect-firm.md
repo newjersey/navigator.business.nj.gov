@@ -3,13 +3,13 @@ filename: authorization-architect-firm
 urlSlug: authorization-architect-firm
 name: Obtain a Certificate of Authorization for Your Firm
 webflowName: "Architecture: Certificate of Authorization for Your Firm"
-industryIntegration: New Jersey Division of Consumer Affairs
 industryId: architecture
 callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
 webflowIndustry: Architect
 divisionPhone: (973) 504-6385
 id: authorization-architect-firm
-issuingAgency: New Jersey Division of Consumer Affairs, Board of Architects
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Board of Architects
 callToActionText: Apply for My Certificate of Authorization
 webflowType: business-license
 webflowId: 5f772971eb55580500feb5a2

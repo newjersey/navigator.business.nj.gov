@@ -5,7 +5,7 @@ urlSlug: "veterinarian-hospital"
 name: "Veterinarian Hospital"
 filename: "veterinarian-hospital"
 callToActionLink: "http://njconsumeraffairs.gov/vet"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973)504-6500"
 industryId: "Veterinarian Hospital"
 licenseCertificationClassification: "REGISTRATION/LICENSE"

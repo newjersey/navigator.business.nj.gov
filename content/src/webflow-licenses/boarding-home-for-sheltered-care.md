@@ -5,7 +5,7 @@ urlSlug: "boarding-home-for-sheltered-care"
 webflowName: "Boarding Home for Sheltered Care"
 filename: "boarding-home-for-sheltered-care"
 callToActionLink: "http://nj.gov/dca/divisions/codes/offices/roomingboarding.html"
-issuingAgency: "Department of Community Affairs"
+agencyId: nj-community-affairs
 divisionPhone: "(609) -633-6251"
 webflowIndustry: "Boarding Home"
 licenseCertificationClassification: "LICENSE"

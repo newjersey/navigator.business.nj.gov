@@ -71,10 +71,15 @@ export const writeMarkdownString = (license) => {
     (license.filename ? `filename: "${license.filename}"\n` : "") +
     (license.callToActionLink ? `callToActionLink: "${license.callToActionLink}"\n` : "") +
     (license.callToActionText ? `callToActionText: "${license.callToActionText}"\n` : "") +
-    (license.issuingAgency ? `issuingAgency: "${license.issuingAgency}"\n` : "") +
+    (license.agencyId ? `agencyId: "${license.agencyId}"\n` : "") +
+    (license.agencyAdditionalContext
+      ? `agencyAdditionalContext: "${license.agencyAdditionalContext}"\n`
+      : "") +
     (license.divisionPhone ? `divisionPhone: "${license.divisionPhone}"\n` : "") +
     (license.industryId ? `industryId: "${license.industryId}"\n` : "") +
+    (license.webflowType ? `webflowType: "${license.webflowType}"\n` : "") +
     `licenseCertificationClassification: "${license.licenseCertificationClassification}"\n` +
+    (license.summaryDescriptionMd ? `summaryDescriptionMd: "${license.summaryDescriptionMd}"\n` : "") +
     `---\n` +
     `${license.contentMd}`
   );

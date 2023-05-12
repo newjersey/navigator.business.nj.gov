@@ -5,7 +5,7 @@ urlSlug: "sponsors-of-low-middle-income-housing"
 webflowName: "Sponsors of Low/Middle Income Housing"
 filename: "sponsors-of-low-middle-income-housing"
 callToActionLink: "http://state.nj.us/dca/divisions/codes/offices/housinginspection.html"
-issuingAgency: "Department of Community Affairs"
+agencyId: nj-community-affairs
 divisionPhone: "(609) 633-6216"
 webflowIndustry: "Low or Middle Income Housing"
 licenseCertificationClassification: "CERTIFICATION & APPROVAL"

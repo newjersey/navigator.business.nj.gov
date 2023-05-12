@@ -3,14 +3,13 @@ filename: engineer-license
 urlSlug: engineer-license
 name: Apply for an Engineer License, if Applicable
 webflowName: "Engineering: Engineer License"
-industryIntegration: New Jersey Division of Consumer Affairs
 industryId: engineering
 callToActionLink: https://www.njconsumeraffairs.gov/pels/Pages/applications.aspx
 webflowIndustry: ""
 divisionPhone: (973) 504-6460
 id: license-engineer
-issuingAgency: New Jersey Division of Consumer Affairs Board of Professional
-  Engineers and Land Surveyors
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Board of Professional Engineers and Land Surveyors
 callToActionText: Apply for My Engineer License
 webflowType: individual-license
 webflowId: 640b84674c4b70b5b2420c3b

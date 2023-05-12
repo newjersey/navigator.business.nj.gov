@@ -5,7 +5,7 @@ urlSlug: "locksmith"
 webflowName: "Locksmith"
 filename: "locksmith"
 callToActionLink: "https://www.njconsumeraffairs.gov/fbl/Pages/applications.aspx"
-issuingAgency: "Department of Law and Public Safety"
+agencyId: law-public-safety
 divisionPhone: "(973) 504-6245"
 webflowIndustry: "Locksmith"
 licenseCertificationClassification: "LICENSE"

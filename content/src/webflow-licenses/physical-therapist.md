@@ -5,7 +5,7 @@ urlSlug: "physical-therapist"
 webflowName: "Physical Therapist"
 filename: "physical-therapist"
 callToActionLink: "http://njconsumeraffairs.gov/pt/Pages/applications.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973)504-6455"
 webflowIndustry: "Physical Therapist"
 licenseCertificationClassification: "REGISTRATION/LICENSE"

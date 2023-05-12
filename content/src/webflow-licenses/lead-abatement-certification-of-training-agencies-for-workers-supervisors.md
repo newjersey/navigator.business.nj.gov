@@ -5,8 +5,8 @@ urlSlug: "lead-abatement-certification-of-training-agencies-for-workers-supervis
 webflowName: "Lead Abatement-Certification of Training Agencies for Workers & Supervisors"
 callToActionLink: "http://nj.gov/health/ceohs/lead/lead-training-cert/"
 callToActionText: ""
-issuingAgency: "Department of Health"
-issuingDivision: "Consumer and Environmental Health Services"
+agencyId: nj-health
+agencyAdditionalContext: "Consumer and Environmental Health Services"
 divisionPhone: "(609) 826-4950"
 webflowIndustry: "Lead"
 licenseCertificationClassification: "CERTIFICATION"

@@ -5,7 +5,7 @@ urlSlug: "social-worker-certified-clinical"
 webflowName: "Social Worker-Certified Clinical"
 filename: "social-worker-certified-clinical"
 callToActionLink: "http://njconsumeraffairs.gov/sw/Pages/applications.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6495"
 webflowIndustry: "Social Worker"
 licenseCertificationClassification: "REGISTRATION/LICENSE"

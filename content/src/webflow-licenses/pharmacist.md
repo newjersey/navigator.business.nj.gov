@@ -5,7 +5,7 @@ urlSlug: "pharmacist"
 webflowName: "Pharmacist"
 filename: "pharmacist"
 callToActionLink: "http://njconsumeraffairs.gov/phar"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6450"
 webflowIndustry: "Pharmacist"
 licenseCertificationClassification: "REGISTRATION/LICENSE"

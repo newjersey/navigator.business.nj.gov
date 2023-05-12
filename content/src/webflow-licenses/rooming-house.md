@@ -5,7 +5,7 @@ urlSlug: "rooming-house"
 webflowName: "Rooming House"
 filename: "rooming-house"
 callToActionLink: "http://state.nj.us/dca/divisions/codes/offices/roomingboarding.html"
-issuingAgency: "Department of Community Affairs"
+agencyId: nj-community-affairs
 divisionPhone: "(609) 984-1706"
 webflowIndustry: "Rooming House"
 licenseCertificationClassification: "LICENSE"

@@ -5,7 +5,7 @@ urlSlug: "farm-stand"
 webflowName: "Farm Stand"
 filename: "farm-stand"
 callToActionLink: ""
-issuingAgency: "Contact Your Local Health Department"
+agencyId: local-health
 divisionPhone: ""
 webflowIndustry: "Farm Stand"
 licenseCertificationClassification: "LICENSE"

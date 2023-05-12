@@ -5,7 +5,7 @@ urlSlug: "fruit-vegetable-stand"
 webflowName: "Fruit & Vegetable Stand"
 filename: "fruit-vegetable-stand"
 callToActionLink: ""
-issuingAgency: "Contact Your Local Health Department"
+agencyId: local-health
 divisionPhone: ""
 webflowIndustry: "Fruit Stand"
 licenseCertificationClassification: "LICENSE"

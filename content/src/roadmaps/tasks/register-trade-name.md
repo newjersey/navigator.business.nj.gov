@@ -1,19 +1,17 @@
 ---
-requiresLocation: true
 urlSlug: trade-name-registration
 filename: trade-name-registration
 name: Register Your Trade Name
 id: register-trade-name
 callToActionLink: ${countyClerkWebsite}
 callToActionText: Visit My County Clerk's Website
-issuingAgency: County Clerk's Office
+agencyId: county-clerk
+requiresLocation: true
 ---
 
 If you would like to use a consumer-facing business name other than your personal name, you can register a trade name with the county clerk. You must register your name with every county you plan to work in.
 
 ---
-
-
 
 ${beginLocationDependentSection}
 

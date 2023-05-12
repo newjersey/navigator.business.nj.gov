@@ -5,7 +5,8 @@ name: Register Your Employees with NJ State Police
 id: detective-employees
 callToActionLink: ""
 callToActionText: ""
-issuingAgency: New Jersey State Police Private Detective Unit
+agencyId: nj-state-police
+agencyAdditionalContext: Private Detective Unit
 ---
 
 All staff working in your Detective Agency must be registered before they can be scheduled for work.

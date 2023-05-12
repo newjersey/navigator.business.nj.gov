@@ -5,7 +5,7 @@ urlSlug: "plumber-inspector-ucc"
 webflowName: "Plumber Inspector (UCC)"
 filename: "plumber-inspector-ucc"
 callToActionLink: "http://nj.gov/dca/divisions/codes/offices/licensing_cont_ed.html"
-issuingAgency: "Department of Community Affairs"
+agencyId: nj-community-affairs
 divisionPhone: "(609) 984-7834"
 webflowIndustry: "Plumber Inspector"
 licenseCertificationClassification: "LICENSE"

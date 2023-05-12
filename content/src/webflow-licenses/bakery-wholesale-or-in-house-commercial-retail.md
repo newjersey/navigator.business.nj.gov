@@ -5,7 +5,7 @@ urlSlug: "bakery-wholesale-or-in-house-commercial-retail"
 webflowName: "Bakery Wholesale or In-House (Commercial & Retail)"
 filename: "bakery-wholesale-or-in-house-commercial-retail"
 callToActionLink: ""
-issuingAgency: "Check with Local Municipality"
+agencyId: municipal-clerk
 divisionPhone: ""
 webflowIndustry: "Bakery Wholesale"
 licenseCertificationClassification: "CONTACT"

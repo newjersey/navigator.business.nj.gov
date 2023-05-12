@@ -5,7 +5,7 @@ name: Register Your Truck
 id: trucking-vehicle-registration
 callToActionLink: https://telegov.njportal.com/njmvc/AppointmentWizard/8
 callToActionText: Register My Truck
-issuingAgency: "New Jersey Motor Vehicle Commission "
+agencyId: nj-motor-vehicle
 ---
 
 You need to get a commercial vehicle registration before you can legally operate your business.

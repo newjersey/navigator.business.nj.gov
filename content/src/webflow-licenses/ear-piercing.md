@@ -5,7 +5,7 @@ urlSlug: "ear-piercing"
 webflowName: "Ear Piercing"
 filename: "ear-piercing"
 callToActionLink: ""
-issuingAgency: "Check with Local Municipality"
+agencyId: municipal-clerk
 divisionPhone: ""
 webflowIndustry: "Ear"
 licenseCertificationClassification: "CONTACT"

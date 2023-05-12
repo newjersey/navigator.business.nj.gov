@@ -5,7 +5,7 @@ urlSlug: "weighing-measuring-equipment-repairer"
 webflowName: "Weighing & Measuring Equipment Repairer"
 filename: "weighing-measuring-equipment-repairer"
 callToActionLink: "https://www.njconsumeraffairs.gov/OWM"
-issuingAgency: "Department of Law and Public Safety"
+agencyId: law-public-safety
 divisionPhone: "(732) 815-4840"
 webflowIndustry: "Weighing and Measuring"
 licenseCertificationClassification: "LICENSE"

@@ -5,7 +5,7 @@ urlSlug: "summer-camp"
 webflowName: "Summer Camp"
 filename: "summer-camp"
 callToActionLink: ""
-issuingAgency: "Check with Local Municipality"
+agencyId: municipal-clerk
 divisionPhone: ""
 webflowIndustry: "Summer Camp"
 licenseCertificationClassification: "CONTACT/REGULATIONS"

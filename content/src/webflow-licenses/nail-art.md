@@ -5,7 +5,7 @@ urlSlug: "nail-art"
 webflowName: "Nail Art"
 filename: "nail-art"
 callToActionLink: "http://cosmetology-license.com/new-jersey/new-jersey-nail-technician/"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6400"
 webflowIndustry: "Nail Art"
 licenseCertificationClassification: "LICENSE"

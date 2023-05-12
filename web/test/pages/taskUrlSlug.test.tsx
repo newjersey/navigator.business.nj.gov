@@ -13,6 +13,7 @@ import {
   formationTaskId,
   generateProfileData,
   generateUserData,
+  LookupTaskAgencyById,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
@@ -129,37 +130,44 @@ describe("task page", () => {
     expect(screen.queryAllByText("a whole brand new name")).toHaveLength(2);
   });
 
-  it("displays issuing form and agency in task footer when they are defined values", () => {
-    const issuingAgency = "NJ Dept of Treasury";
+  it("displays form in task footer when defined value", () => {
     const formName = "xY39";
-    renderPage(generateTask({ issuingAgency, formName }));
-
-    expect(screen.getByText(`${Config.taskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
-    expect(screen.getByText(issuingAgency)).toBeInTheDocument();
-
+    renderPage(generateTask({ formName }));
     expect(screen.getByText(`${Config.taskDefaults.formNameText}:`)).toBeInTheDocument();
     expect(screen.getByText(formName)).toBeInTheDocument();
   });
 
-  it("does not display issuing agency in task footer when it is undefined value", () => {
-    renderPage(generateTask({ issuingAgency: undefined }));
-
-    expect(screen.getByText(`${Config.taskDefaults.formNameText}:`)).toBeInTheDocument();
+  it("does not display agency in task footer when agencyId and agencyAdditionalContext are undefined", () => {
+    renderPage(generateTask({ agencyId: undefined, agencyAdditionalContext: undefined }));
     expect(screen.queryByText(`${Config.taskDefaults.issuingAgencyText}:`)).not.toBeInTheDocument();
   });
 
   it("does not display form name in task footer when it is undefined value", () => {
     renderPage(generateTask({ formName: undefined }));
-
-    expect(screen.getByText(`${Config.taskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
     expect(screen.queryByText(`${Config.taskDefaults.formNameText}:`)).not.toBeInTheDocument();
   });
 
-  it("does not display form name or agency in task footer when both are undefined", () => {
-    renderPage(generateTask({ formName: undefined, issuingAgency: undefined }));
+  it("displays agencyId as its name when it is defined", () => {
+    renderPage(generateTask({ agencyId: "nj-consumer-affairs", agencyAdditionalContext: undefined }));
+    expect(screen.getByText(`${Config.taskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
+    expect(screen.getByText(LookupTaskAgencyById("nj-consumer-affairs").name)).toBeInTheDocument();
+    expect(screen.queryByText("nj-consumer-affairs")).not.toBeInTheDocument();
+  });
 
-    expect(screen.queryByText(`${Config.taskDefaults.issuingAgencyText}:`)).not.toBeInTheDocument();
-    expect(screen.queryByText(`${Config.taskDefaults.formNameText}:`)).not.toBeInTheDocument();
+  it("displays agencyAdditionalContext when it is defined", () => {
+    renderPage(generateTask({ agencyId: undefined, agencyAdditionalContext: "Board of Something" }));
+    expect(screen.getByText(`${Config.taskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
+    expect(screen.getByText("Board of Something")).toBeInTheDocument();
+  });
+
+  it("displays agencyId as its name and agencyAdditionalContext comma separated when both defined", () => {
+    renderPage(
+      generateTask({ agencyId: "nj-consumer-affairs", agencyAdditionalContext: "Board of Something" })
+    );
+    expect(screen.getByText(`${Config.taskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
+    const agencyName = LookupTaskAgencyById("nj-consumer-affairs").name;
+    const expectedText = `${agencyName}, Board of Something`;
+    expect(screen.getByText(expectedText)).toBeInTheDocument();
   });
 
   it("loads License task screen for apply-for-shop-license", () => {

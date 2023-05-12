@@ -3,6 +3,7 @@
 
 import fs from "fs";
 import industryJson from "../../../../content/lib/industry.json" assert { type: "json" };
+import taskAgenciesJSON from "../../../../content/src/mappings/taskAgency.json" assert { type: "json" };
 import {
   loadAllLicenses,
   loadAllNavigatorLicenses,
@@ -15,6 +16,17 @@ import { LicenseClassificationLookup } from "./licenseClassifications.mjs";
 import { createItem, getAllItems, modifyItem } from "./methods.mjs";
 
 const licenseCollectionId = "5e31b06cb76b830c0c358aa8";
+
+export const LookupTaskAgencyById = (id) => {
+  return (
+    taskAgenciesJSON.arrayOfTaskAgencies.find((x) => {
+      return x.id === id;
+    }) ?? {
+      id: "",
+      name: "",
+    }
+  );
+};
 
 const LookupIndustryById = (id) => {
   return (
@@ -67,9 +79,8 @@ const getLicenseFromMd = (licenseMd) => {
     slug: licenseMd.urlSlug,
     website: removeValueWithSpecialChars(licenseMd.callToActionLink),
     "call-to-action-text": licenseMd.callToActionText,
-    "department-3": licenseMd.industryIntegration, // state agency aka industryIntegration
-    "local-agency": licenseMd.localLevelTask, // local agency aka localLevelTask
-    division: licenseMd.issuingAgency, // agency additional context aka issuingAgency
+    "department-3": LookupTaskAgencyById(licenseMd.agencyId).name,
+    division: licenseMd.agencyAdditionalContext,
     "department-phone-2": licenseMd.divisionPhone,
     "license-certification-classification": licenseMd.licenseCertificationClassification,
     "form-name": licenseMd.formName,

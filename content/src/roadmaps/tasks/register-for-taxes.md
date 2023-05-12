@@ -5,9 +5,10 @@ name: Register Your Business for State Taxes and Employer Purposes
 id: register-for-taxes
 callToActionLink: ""
 callToActionText: ""
-issuingAgency: New Jersey Division of Revenue and Enterprise Services
+agencyId: nj-revenue-enterprise-services
 formName: NJ-Reg
 ---
+
 It's time to register your business for State taxes. Doing so will tell the State more about your business and determine the taxes and employer contributions you're responsible for.
 
 - - -

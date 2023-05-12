@@ -5,8 +5,8 @@ urlSlug: "community-residence-for-developmentally-disabled-group-home-supervised
 webflowName: "Community Residence for Developmentally Disabled (Group Home, Supervised Apartment)"
 callToActionLink: "http://nj.gov/humanservices/clients/family/"
 callToActionText: ""
-issuingAgency: "Department of Human Services"
-issuingDivision: "Division of Developmental Disabilities, Office of Licensing and Inspection"
+agencyId: nj-human-services
+agencyAdditionalContext: "Division of Developmental Disabilities, Office of Licensing and Inspection"
 divisionPhone: "(609) 984-5321"
 webflowIndustry: "Community Residence"
 licenseCertificationClassification: "LICENSE TO OPERATE"

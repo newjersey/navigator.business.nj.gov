@@ -5,8 +5,8 @@ urlSlug: "cigarettes-cigar-distribution-vending-machine-manufacture-representati
 webflowName: "Cigarettes, Cigar Distribution, Vending Machine, Manufacture, Representative"
 callToActionLink: "http://nj.gov/treasury/taxation/prnttobacco.shtml"
 callToActionText: ""
-issuingAgency: "Department of Treasury"
-issuingDivision: "Division of Revenue, Business Tax Registration (Cigarettes Only)"
+agencyId: nj-revenue-enterprise-services
+agencyAdditionalContext: "Business Tax Registration (Cigarettes Only)"
 divisionPhone: "(609) 292-9292"
 webflowIndustry: "Vending Machine"
 licenseCertificationClassification: "LICENSE"

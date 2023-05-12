@@ -5,7 +5,7 @@ name: Apply for a Commercial Driver's License and Ensure Your Drivers are Licens
 id: trucking-cdl
 callToActionLink: https://telegov.njportal.com/njmvc/AppointmentWizard
 callToActionText: Apply for My CDL
-issuingAgency: New Jersey Motor Vehicle Commission
+agencyId: nj-motor-vehicle
 ---
 Any employee driving a truck with a Gross Weight Rating Scale (GWRS) of 26,000lbs or more needs a Commercial Driver's License (CDL). 
 

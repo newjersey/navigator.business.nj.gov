@@ -40,7 +40,14 @@ collections:
       - { label: "Id", name: "id", widget: "nospace" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+      - label: Agency
+        name: agencyId
+        widget: relation
+        required: false
+        collection: "mappings"
+        search_fields: ["arrayOfTaskAgencies.*.name"]
+        value_field: "arrayOfTaskAgencies.*.id"
+        display_fields: ["arrayOfTaskAgencies.*.name"]
   - name: "business-formation-config"
     label: "Biz Form - Config"
     delete: false
@@ -1668,28 +1675,21 @@ collections:
         display_fields: ["{{id}}"]
         required: false
         options_length: 500
-      - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+      - label: Agency
+        name: agencyId
+        widget: relation
+        required: false
+        collection: "mappings"
+        search_fields: ["arrayOfTaskAgencies.*.name"]
+        value_field: "arrayOfTaskAgencies.*.id"
+        display_fields: ["arrayOfTaskAgencies.*.name"]
+      - {
+          label: "Additional Agency Context",
+          name: "agencyAdditionalContext",
+          widget: "string",
+          required: false,
+        }
       - { label: "Form Name", name: "formName", widget: "string", required: false }
-      - {
-          label: "Industry Integration",
-          name: "industryIntegration",
-          widget: "select",
-          required: false,
-          options:
-            [
-              "NJ Department of Consumer Affairs",
-              "NJ Department of Taxation",
-              "NJ Department of Revenue and Enterprise Services",
-              "NJ Department of Community Affairs",
-            ],
-        }
-      - {
-          label: "Local Level Task",
-          name: "localLevelTask",
-          widget: "select",
-          required: false,
-          options: ["Department of Health", "County Clerk", "Municipal Clerk"],
-        }
       - label: "Type (Webflow)"
         name: "webflowType"
         widget: "select"
@@ -1722,34 +1722,6 @@ collections:
           widget: "markdown",
         }
       - { label: "Detailed Description (Navigator)", name: "body", widget: "markdown" }
-      - {
-          label: "State Agency (Webflow & Navigator)",
-          name: "industryIntegration",
-          widget: "select",
-          required: false,
-          options:
-            [
-              "New Jersey Division of Consumer Affairs",
-              "New Jersey Department of Taxation",
-              "New Jersey Department of Revenue and Enterprise Services",
-              "New Jersey Department of Community Affairs",
-              "New Jersey Department of Banking and Insurance",
-              "New Jersey Department of Health",
-            ],
-        }
-      - {
-          label: "Local agency (Webflow & Navigator)",
-          name: "localLevelTask",
-          widget: "select",
-          required: false,
-          options: ["Local Department of Health", "County Clerk", "Municipal Clerk"],
-        }
-      - {
-          label: "Agency additional context (Webflow & Navigator)",
-          name: "issuingAgency",
-          widget: "string",
-          required: false,
-        }
       - { label: "Form Name (Webflow & Navigator)", name: "formName", widget: "string", required: false }
       - label: "Industry (Webflow & Navigator)"
         name: industryId
@@ -1778,7 +1750,20 @@ collections:
           widget: "string",
           required: false,
         }
-      - { label: "Webflow Issuing Division", name: "issuingDivision", widget: "string", required: false }
+      - label: Licensing Agency (Webflow & Navigator)
+        name: agencyId
+        widget: relation
+        required: false
+        collection: "mappings"
+        search_fields: ["arrayOfTaskAgencies.*.name"]
+        value_field: "arrayOfTaskAgencies.*.id"
+        display_fields: ["arrayOfTaskAgencies.*.name"]
+      - {
+          label: "Agency additional context (Webflow & Navigator)",
+          name: "agencyAdditionalContext",
+          widget: "string",
+          required: false,
+        }
       - { label: "Division Phone", name: "divisionPhone", widget: "string", required: false }
       - label: "Type (Webflow)"
         name: "webflowType"
@@ -1813,31 +1798,17 @@ collections:
           required: false,
         }
       - { label: "Detailed Description (Navigator)", name: "body", widget: "markdown", required: false }
-      - {
-          label: "State Agency (Webflow & Navigator)",
-          name: "industryIntegration",
-          widget: "select",
-          required: false,
-          options:
-            [
-              "New Jersey Division of Consumer Affairs",
-              "New Jersey Department of Taxation",
-              "New Jersey Department of Revenue and Enterprise Services",
-              "New Jersey Department of Community Affairs",
-              "New Jersey Department of Banking and Insurance",
-              "New Jersey Department of Health",
-            ],
-        }
-      - {
-          label: "Local agency (Webflow & Navigator)",
-          name: "localLevelTask",
-          widget: "select",
-          required: false,
-          options: ["Local Department of Health", "County Clerk", "Municipal Clerk"],
-        }
+      - label: Licensing Agency (Webflow & Navigator)
+        name: agencyId
+        widget: relation
+        required: false
+        collection: "mappings"
+        search_fields: ["arrayOfTaskAgencies.*.name"]
+        value_field: "arrayOfTaskAgencies.*.id"
+        display_fields: ["arrayOfTaskAgencies.*.name"]
       - {
           label: "Agency additional context (Webflow & Navigator)",
-          name: "issuingAgency",
+          name: "agencyAdditionalContext",
           widget: "string",
           required: false,
         }
@@ -1870,7 +1841,6 @@ collections:
           widget: "string",
           required: false,
         }
-      - { label: "Webflow Issuing Division", name: "issuingDivision", widget: "string", required: false }
       - { label: "Division Phone", name: "divisionPhone", widget: "string", required: false }
       - label: "Type (Webflow)"
         name: "webflowType"
@@ -1933,7 +1903,6 @@ collections:
             required: false
             options_length: 500
           - { label: "Required", name: "required", widget: "boolean", required: false }
-          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
           - { label: "Form Name", name: "formName", widget: "string", required: false }
       - label: "Annual License Task Metadata"
         name: "applyForAnnualLicense-task"
@@ -1960,7 +1929,6 @@ collections:
             required: false
             options_length: 500
           - { label: "Required", name: "required", widget: "boolean", required: false }
-          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
           - { label: "Form Name", name: "formName", widget: "string", required: false }
 
       - label: "Tab 1 (Business Size and Priority Status)"
@@ -2109,7 +2077,6 @@ collections:
             required: false
             options_length: 500
           - { label: "Required", name: "required", widget: "boolean", required: false }
-          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
           - { label: "Form Name", name: "formName", widget: "string", required: false }
 
       - label: "Tab 1 (Statuses)"
@@ -2225,7 +2192,6 @@ collections:
             required: false
             options_length: 500
           - { label: "Required", name: "required", widget: "boolean", required: false }
-          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
           - { label: "Form Name", name: "formName", widget: "string", required: false }
       - label: "EIN Input Section"
         name: "ein-input-section"
@@ -2266,7 +2232,6 @@ collections:
           - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
           - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
           - { label: "Required", name: "required", widget: "boolean", required: false }
-          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
           - { label: "Form Name", name: "formName", widget: "string", required: false }
       - label: "Tax ID Input Section"
         name: "tax-input-section"
@@ -2318,7 +2283,6 @@ collections:
             required: false
             options_length: 500
           - { label: "Required", name: "required", widget: "boolean", required: false }
-          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
           - { label: "Form Name", name: "formName", widget: "string", required: false }
       - label: "NAICS Code Lookup Section"
         name: naics-code-lookup
@@ -2392,7 +2356,6 @@ collections:
             required: false
             options_length: 500
           - { label: "Required", name: "required", widget: "boolean", required: false }
-          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
           - { label: "Form Name", name: "formName", widget: "string", required: false }
       - label: "Business Structure Selection Component"
         name: "business-structure-selection"
@@ -2467,7 +2430,6 @@ collections:
             required: false
             options_length: 500
           - { label: "Required", name: "required", widget: "boolean", required: false }
-          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
           - { label: "Form Name", name: "formName", widget: "string", required: false }
       - label: DBA Formation
         name: nexus-dba-formation
@@ -2780,6 +2742,22 @@ collections:
         fields:
           - label: Ownership Types
             name: arrayOfOwnershipTypes
+            widget: list
+            allow_add: false
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Id
+                name: id
+                widget: hidden
+      - label: "Licensing and Task Agencies"
+        name: "arrayOfTaskAgencies"
+        file: "content/src/mappings/taskAgency.json"
+        fields:
+          - label: Licensing and Task Agencies
+            name: arrayOfTaskAgencies
             widget: list
             allow_add: false
             summary: "{{name}}"

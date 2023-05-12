@@ -5,7 +5,7 @@ urlSlug: "temporary-help-services"
 webflowName: "Temporary Help Services"
 filename: "temporary-help-services"
 callToActionLink: "http://njconsumeraffairs.gov/epservices/Pages/default.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6370"
 webflowIndustry: "Temporary Help"
 licenseCertificationClassification: "LICENSE"

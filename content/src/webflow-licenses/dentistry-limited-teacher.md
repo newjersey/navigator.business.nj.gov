@@ -5,7 +5,7 @@ urlSlug: "dentistry-limited-teacher"
 webflowName: "Dentistry-Limited Teacher"
 filename: "dentistry-limited-teacher"
 callToActionLink: "http://njconsumeraffairs.gov/den/Pages/default.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6405"
 webflowIndustry: "Dentistry Teacher"
 licenseCertificationClassification: "CERTIFICATE"

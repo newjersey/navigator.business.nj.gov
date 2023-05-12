@@ -5,7 +5,7 @@ name: Obtain Waste Hauling Decal, if Applicable
 id: haul-waste-hic
 callToActionLink: https://www.wastedecals.nj.gov/sg2.html
 callToActionText: Apply for My Waste Hauling Decal
-issuingAgency: New Jersey Department of Environmental Protection (DEP)
+agencyId: njdep
 ---
 Waste facilities will **only** allow registered vehicles with a decal to discard waste.
 

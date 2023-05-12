@@ -5,7 +5,7 @@ urlSlug: "prosthesis"
 webflowName: "Prosthesis"
 filename: "prosthesis"
 callToActionLink: "http://njconsumeraffairs.gov/orth/Pages/applications.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6445"
 webflowIndustry: "Prosthesis"
 licenseCertificationClassification: "REGISTRATION/LICENSE"
