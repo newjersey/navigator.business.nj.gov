@@ -30,10 +30,8 @@ All drivers (limo, taxi, rental car chauffeur) need to have a letter of certific
 
 > **Once completed, you will have:**
 >
-> * A letter of qualification or disqualification for the driver. The letter will only be mailed to the employer. The process takes about two weeks after the application is received
-
-
-
+> * A letter of qualification or disqualification for the driver. The letter will only be mailed to the employer. The process takes about two weeks after the application is received.
+>
 > **What if don’t complete this task?**
 >
 > * You, as the employer, can be fined up to $500 for each uncertified driver operating your vehicles
