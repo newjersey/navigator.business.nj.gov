@@ -705,33 +705,26 @@ workflows:
       - production-hold:
           type: approval
           filters:
-            tags:
-              only: /^env-update.*/
             branches:
               only:
                 - /^release-.*/
           requires:
             - staging-deploy
       - prepare-release:
-          filters:
-            tags:
-              ignore: /^env-update.*/
-            branches:
-              only:
-                - /^release-.*/
           requires:
             - production-hold
       - deploy-production:
           name: production-deploy
-          filters:
-            tags:
-              only: /^env-update.*/
-            branches:
-              only:
-                - /^release-.*/
           requires:
             - prepare-release
-            - production-hold
+      - sync-fundings:
+          name: webflow-fundings-sync
+          requires:
+            - production-deploy
+      - sync-licenses:
+          name: webflow-licenses-sync
+          requires:
+            - production-deploy
 
   webflow-fundings-sync:
     jobs:
