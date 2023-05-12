@@ -9,8 +9,7 @@ issuingAgency: New Jersey Motor Vehicle Commission
 ---
 All drivers (limo, taxi, rental car chauffeur) need to have a letter of certification before they can legally operate company vehicles. It’s the employer’s responsibility to file an application for a driver's certification if the driver doesn't already have one.
 
-Only drivers holding a Commercial Driver’s License (CDL) with a Passenger (P) endorsement are exempt from this requirement.
-
+(Only drivers holding a Commercial Driver’s License (CDL) with a Passenger (P) endorsement are exempt from this requirement.)
 
 - - -
 
@@ -32,7 +31,8 @@ Only drivers holding a Commercial Driver’s License (CDL) with a Passenger (P) 
 > **Once completed, you will have:**
 >
 > * A letter of qualification or disqualification for the driver. The letter will only be mailed to the employer. The process takes about two weeks after the application is received
->
+
+
 
 > **What if don’t complete this task?**
 >
