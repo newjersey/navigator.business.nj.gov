@@ -1,17 +1,18 @@
+import { PrimaryButton, PrimaryButtonColors } from "@/components/njwds-extended/PrimaryButton";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import { ReactElement } from "react";
 
 interface Props {
-  color: string;
+  borderColor: string;
   headerLine1: string;
   headerLine2: string;
   supportingText: string;
   buttonLink: string;
   buttonText: string;
-  buttonStyleProp: string;
-  intercom?: boolean;
+  primaryButtonColor: PrimaryButtonColors;
+  isIntercomEnabled?: boolean;
   isLast?: boolean;
 }
 
@@ -20,7 +21,7 @@ export const UserSupportActionCard = (props: Props): ReactElement => {
 
   return (
     <div
-      className={`landing-card border-${props.color} border-top-105 ${
+      className={`landing-card border-${props.borderColor} border-top-105 ${
         isDesktopAndUp && !props.isLast ? "margin-right-3" : ""
       } ${!isDesktopAndUp && !props.isLast ? "margin-bottom-2" : ""}`}
     >
@@ -31,14 +32,16 @@ export const UserSupportActionCard = (props: Props): ReactElement => {
           <div>{props.supportingText}</div>
         </div>
         <div>
-          <Link href={props.buttonLink} passHref>
-            <button
-              className={`usa-button usa-button margin-right-0 btn-${props.buttonStyleProp} ${
-                props.intercom ? "intercom-button" : ""
-              }`}
-            >
-              {props.buttonText}
-            </button>
+          <Link href={props.buttonLink}>
+            <div>
+              <PrimaryButton
+                isColor={props.primaryButtonColor}
+                isRightMarginRemoved={true}
+                isIntercomEnabled={props.isIntercomEnabled}
+              >
+                {props.buttonText}
+              </PrimaryButton>
+            </div>
           </Link>
         </div>
       </div>

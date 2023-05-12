@@ -44,3 +44,17 @@ AccentCoolDarkerColor.args = {
   isColor: "accent-cool-darker",
   children: "button",
 };
+
+export const AccentCoolerColor = Template.bind({});
+
+AccentCoolerColor.args = {
+  isColor: "accent-cooler",
+  children: "button",
+};
+
+export const InfoColor = Template.bind({});
+
+InfoColor.args = {
+  isColor: "info",
+  children: "button",
+};
