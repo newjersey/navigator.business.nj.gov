@@ -674,6 +674,8 @@ jobs:
           name: Node Funding Sync
           command: |
             echo 'export WEBFLOW_API_TOKEN=$WEBFLOW_API_TOKEN' >> $BASH_ENV
+            yarn workspace @businessnjgovnavigator/shared build
+            yarn workspace @businessnjgovnavigator/content build
             yarn workspace @businessnjgovnavigator/web webflow:fundings-sync
 
   sync-licenses:
@@ -688,6 +690,8 @@ jobs:
           name: Node License Sync
           command: |
             echo 'export WEBFLOW_API_TOKEN=$WEBFLOW_API_TOKEN' >> $BASH_ENV
+            yarn workspace @businessnjgovnavigator/shared build
+            yarn workspace @businessnjgovnavigator/content build
             yarn workspace @businessnjgovnavigator/web webflow:licenses-sync
 
 workflows:
