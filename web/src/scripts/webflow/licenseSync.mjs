@@ -1,8 +1,8 @@
 /* eslint-disable unicorn/no-process-exit */
 /* eslint-disable no-undef */
 
-import { LookupIndustryById } from "@businessnjgovnavigator/shared";
 import fs from "fs";
+import { LookupIndustryById } from "../../../../shared";
 import {
   loadAllLicenses,
   loadAllNavigatorLicenses,
