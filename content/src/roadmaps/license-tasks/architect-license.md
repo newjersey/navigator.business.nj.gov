@@ -14,7 +14,8 @@ callToActionText: Apply for My Architect License
 webflowType: individual-license
 webflowId: 5f772971b0544fd3d536617b
 licenseCertificationClassification: LICENSE
-summaryDescriptionMd: "You or any staff providing architectural services need an architect license."
+summaryDescriptionMd: >
+  You or any staff providing architectural services need an architect license.
 ---
 
 ---

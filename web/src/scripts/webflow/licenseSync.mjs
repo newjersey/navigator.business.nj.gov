@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 
 import fs from "fs";
-import * as industryHelpers from "../../../../shared/lib/shared/src/industry.js";
+import industryJson from "../../../../content/lib/industry.json" assert { type: "json" };
 import {
   loadAllLicenses,
   loadAllNavigatorLicenses,
@@ -14,8 +14,39 @@ import { argsInclude, contentToStrings, getHtml, wait } from "./helpers.mjs";
 import { LicenseClassificationLookup } from "./licenseClassifications.mjs";
 import { createItem, getAllItems, modifyItem } from "./methods.mjs";
 
-const { LookupIndustryById } = industryHelpers;
 const licenseCollectionId = "5e31b06cb76b830c0c358aa8";
+
+const LookupIndustryById = (id) => {
+  return (
+    industryJson.industries.find((x) => {
+      return x.id === id;
+    }) ?? {
+      id: "",
+      name: "",
+      description: "",
+      canHavePermanentLocation: true,
+      roadmapSteps: [],
+      naicsCodes: "",
+      isEnabled: false,
+      industryOnboardingQuestions: {
+        isProvidesStaffingServicesApplicable: undefined,
+        isCertifiedInteriorDesignerApplicable: undefined,
+        isRealEstateAppraisalManagementApplicable: undefined,
+        canBeReseller: undefined,
+        canBeHomeBased: undefined,
+        isLiquorLicenseApplicable: undefined,
+        isCpaRequiredApplicable: undefined,
+        isTransportation: undefined,
+        isCarServiceApplicable: undefined,
+        isInterstateLogisticsApplicable: undefined,
+        isInterstateMovingApplicable: undefined,
+        isChildcareForSixOrMore: undefined,
+        willSellPetCareItems: undefined,
+        isPetCareHousingApplicable: undefined,
+      },
+    }
+  );
+};
 
 const getLicenseFromMd = (licenseMd) => {
   let name = licenseMd.name;

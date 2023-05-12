@@ -11,7 +11,8 @@ callToActionLink: https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx
 id: appraiser-company-register
 webflowId: 64147a42c6eb18daf545d290
 licenseCertificationClassification: REGISTRATION
-summaryDescriptionMd: "Your appraisal management company must be registered with the state before offering professional services."
+summaryDescriptionMd: >
+  Your appraisal management company must be registered with the state before offering professional services.
 ---
 
 ---

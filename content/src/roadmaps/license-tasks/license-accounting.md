@@ -14,7 +14,8 @@ issuingDivision: NJ State Board of Accountancy
 divisionPhone: (973) 504-6380
 id: license-accounting
 webflowId: 5f7729d28aa6e3de76f1e60c
-summaryDescriptionMd: "New accounting firms must register and obtain certification."
+summaryDescriptionMd: >
+  New accounting firms must register and obtain certification.
 ---
 
 ---

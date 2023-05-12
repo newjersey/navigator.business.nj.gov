@@ -3,7 +3,6 @@ filename: hvac-license
 urlSlug: hvac-license
 name: Get an HVACR License
 webflowName: "HVAC Contractor: HVACR License"
-summaryDescriptionMd: You need an HVACR license to offer HVACR services.
 issuingAgency: New Jersey Division of Consumer Affairs
 industryId: hvac-contractor
 callToActionText: Apply for My HVACR License
@@ -12,12 +11,12 @@ webflowIndustry: ""
 issuingDivision: Board of Examiners of Heating, Ventilation, Air Conditioning
   and Refrigeration Contracts
 divisionPhone: (973) 504-6250
-summaryDescription: You or any staff providing HVACR services must be licensed
-  as an HVACR contractor.
 id: hvac-license
 licenseCertificationClassification: ""
 webflowType: individual-license
 webflowId: 5f772993a195c8849e15b18f
+summaryDescriptionMd: >
+  You or any staff providing HVACR services must be licensed as an HVACR contractor.
 ---
 
 ---

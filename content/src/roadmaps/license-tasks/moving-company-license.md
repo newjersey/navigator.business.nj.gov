@@ -14,7 +14,8 @@ issuingAgency: New Jersey Division of Consumer Affairs,  Office of Consumer
 callToActionText: Apply for My Public Movers License
 webflowId: 640b84670945bdf4cfd63f2c
 licenseCertificationClassification: ""
-summaryDescriptionMd: "If you transport household goods or special commodities by motor vehicle for compensation within New Jersey you need a public movers license."
+summaryDescriptionMd: >
+  If you transport household goods or special commodities by motor vehicle for compensation within New Jersey you need a public movers license.
 ---
 
 ---

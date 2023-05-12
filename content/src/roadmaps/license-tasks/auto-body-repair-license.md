@@ -13,7 +13,8 @@ callToActionText: Apply for My Auto-Body Repair License
 webflowType: business-license
 webflowId: 5f7729541a08097ccbbb2ecb
 licenseCertificationClassification: LICENSE
-summaryDescriptionMd: "You need a license to open an auto-body repair business."
+summaryDescriptionMd: >
+  You need a license to open an auto-body repair business."
 ---
 
 ---

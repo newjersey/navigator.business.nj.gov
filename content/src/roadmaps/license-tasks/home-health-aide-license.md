@@ -13,7 +13,8 @@ licenseCertificationClassification: ""
 divisionPhone: (973) 504-6370
 id: home-health-aide-license
 webflowId: 641370d2139a73fe804e07b5
-summaryDescriptionMd: "You need to register as a health care service firm if you are employing individuals to provide health care, personal care, or companion services. This applies to both in-home and facility care."
+summaryDescriptionMd: >
+  You need to register as a health care service firm if you are employing individuals to provide health care, personal care, or companion services. This applies to both in-home and facility care.
 ---
 
 ---

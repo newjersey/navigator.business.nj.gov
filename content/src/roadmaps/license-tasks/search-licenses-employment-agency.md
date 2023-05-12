@@ -10,10 +10,9 @@ webflowName: "Employment Agency"
 issuingDivision: "Regulated Business Unit"
 divisionPhone: "(973) 504-6370"
 webflowIndustry: "Employment Agency"
-licenseCertificationClassification: "LICENSE"
-summaryDescriptionMd: "
+summaryDescriptionMd: >
   You will need to obtain an employment agency license prior to offering staffing services. To do this, you must speak with a representative from New Jersey's Employment and Personnel Services.
-"
+licenseCertificationClassification: "LICENSE"
 ---
 
 ---
