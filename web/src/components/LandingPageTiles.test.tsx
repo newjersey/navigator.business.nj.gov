@@ -41,7 +41,12 @@ describe("<LandingPageTiles />", () => {
     render(
       <ConfigContext.Provider
         value={{
-          config: { ...Config, landingPageExperienceWelcome: { landingPageTaxesTile: "lol" } },
+          config: {
+            ...Config,
+            landingPageExperienceWelcome: {
+              landingPageTaxesTile: "lol",
+            } as unknown as typeof Config.landingPageExperienceWelcome,
+          },
           setOverrides: (): undefined => void {},
         }}
       >
