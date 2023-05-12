@@ -1,14 +1,14 @@
 {
   "dashboardDefaults": {
     "fundingSnackbarHeading": "Funding programs added!",
-    "certificationsSnackbarBody": "Certification programs you may be eligible for are now listed in the “For You” section on the right side of the screen.",
-    "deferredOnboardingSnackbarBody": "You can update it anytime in your [profile](/profile).",
-    "certificationsSnackbarHeading": "Certifications added!",
-    "fundingSnackbarBody": "Funding programs you may be eligible for are now listed in the “For You” section on the right side of the screen.",
-    "calendarSnackbarBody": "You can see your next reporting due date at the bottom of this page.",
-    "hiddenTasksSnackbarBody": "As an up-and-running business, we have streamlined your experience.",
+    "certificationsSnackbarBody": "Find certification programs you may be eligible for in the “For You” section on this page.",
+    "deferredOnboardingSnackbarBody": "Update your [business profile](/profile) anytime.",
+    "certificationsSnackbarHeading": "Your certification opportunities were added!",
+    "fundingSnackbarBody": "Update your [business profile](/profile) to get personalized funding recommendations in the “For You” section on this page.",
+    "calendarSnackbarBody": "Find your next reporting due date at the bottom of this page.",
+    "hiddenTasksSnackbarBody": "Click \"Show\" next to \"My Registration Tasks\" to show your tasks again.",
     "deferredOnboardingSnackbarHeader": "Your answer was saved",
     "hiddenTasksSnackbarHeading": "Your tasks are hidden",
-    "calendarSnackbarHeading": "Calendar added!"
+    "calendarSnackbarHeading": "Your annual reporting deadline was added"
   }
 }

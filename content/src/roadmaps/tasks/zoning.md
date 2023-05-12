@@ -1,6 +1,7 @@
 ---
-urlSlug: zoning
-name: Obtain Zoning and Sign Permits if Required
+urlSlug: zoning-permit-approval
+filename: zoning-permit-approval
+name: Obtain Zoning and Sign Permits, if Required
 id: zoning
 callToActionLink: ""
 callToActionText: ""
@@ -11,8 +12,8 @@ Not all businesses need zoning or sign permits. If you are changing the use of y
 ---
 ### Necessary Permits
 
-* **Zoning Permits/Approval:** Obtain zoning approval from your local Zoning Office
-* **Sign Permits:** Obtain signage approvals from your local Building/ Construction Department or Zoning Office
+* **Zoning permits/approval:** Obtain zoning approval from your local zoning office
+* **Sign permits:** Obtain signage approvals from your local building/ construction department or zoning office
 
 >**Once completed, you will have:**
 >

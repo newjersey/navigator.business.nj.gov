@@ -3,19 +3,19 @@ filename: hvac-license
 urlSlug: hvac-license
 name: Get an HVACR License
 webflowName: "HVAC Contractor: HVACR License"
+issuingAgency: New Jersey Division of Consumer Affairs
 industryId: hvac-contractor
+callToActionText: Apply for My HVACR License
 callToActionLink: https://www.njconsumeraffairs.gov/hvacr/Pages/applications.aspx
 webflowIndustry: ""
 issuingDivision: Board of Examiners of Heating, Ventilation, Air Conditioning
   and Refrigeration Contracts
 divisionPhone: (973) 504-6250
 id: hvac-license
-issuingAgency: New Jersey Department of Consumer Affairs
-callToActionText: Apply for My HVACR License
+licenseCertificationClassification: ""
 webflowType: individual-license
 webflowId: 5f772993a195c8849e15b18f
-licenseCertificationClassification: ""
-summaryDescription: >
+summaryDescriptionMd: >
   You or any staff providing HVACR services must be licensed as an HVACR contractor.
 ---
 

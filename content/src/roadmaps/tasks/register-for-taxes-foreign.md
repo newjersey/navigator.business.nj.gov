@@ -1,7 +1,7 @@
 ---
 urlSlug: register-for-taxes
 filename: register-for-taxes-foreign
-name: Register for Tax and/or Employer Purposes
+name: Register Your Business for Tax and/or Employer Purposes
 id: register-for-taxes
 callToActionLink: ""
 callToActionText: ""
@@ -16,7 +16,7 @@ You are seeing this task because your business either has a `nexus|nexus-busines
 
 ### Application Requirements
 
-*  `Entity ID|entity-id` (Required only for LLC, Corporations, LLP or LP Nexus businesses)
+*  `Entity ID|entity-id` (required only for LLC, Corporations, LLP or LP Nexus businesses)
 * [NAICS code](/tasks/determine-naics-code): ${naicsCode}
 *  `EIN|ein` 
 * Estimated start date in New Jersey
@@ -25,9 +25,19 @@ You are seeing this task because your business either has a `nexus|nexus-busines
 * Anticipated first payroll withholding date for employees (if applicable)
 * Information on if and when you expect to report and collect sales tax
 * Owner information
-* Mailing Address
-* Business Addresses
-* Other taxes you may collect (i.e. motor fuels and cigarette/tobacco taxes), a list will be provided
+* Mailing address
+* Business addresses
+* Other taxes you may collect (e.g., motor fuels and cigarette/tobacco taxes). A list will be provided
+
+- - -
+
+### Next Steps
+
+1. [Register for State Taxes](https://www.njportal.com/DOR/BusinessRegistration)
+2. Save your New Jersey Tax ID (xxx-xxx-xxx/xxx)
+
+${taxInputComponent}
+- - -
 
 > **Once completed, you will have:**
 >

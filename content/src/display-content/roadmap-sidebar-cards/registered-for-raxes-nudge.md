@@ -1,14 +1,14 @@
 ---
 id: registered-for-taxes-nudge
-header: Access Certification Opportunities
+header: Want to Grow Your Business?
+hasCloseButton: false
+ctaText: Show Me Business Opportunities
+weight: 1
 imgPath: /img/nudge-icon.svg
-ctaText: "I'm Registered for Taxes"
 color: accent-cool-darker
 headerBackgroundColor: accent-cool-lighter
 borderColor: info-light
-hasCloseButton: false
-weight: 1
-section: "below-opportunities"
+section: below-opportunities
 ---
 
-[Register for State Taxes](/tasks/register-for-taxes) to discover State certifications your business may be eligible for.
+If you [registered for State taxes](/tasks/register-for-taxes), check out State certifications that can help grow your business.
