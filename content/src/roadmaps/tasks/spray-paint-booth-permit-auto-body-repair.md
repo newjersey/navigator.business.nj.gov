@@ -4,7 +4,8 @@ name: Obtain Spray Paint Booth Permits, if Needed
 id: spray-paint-booth-permit-auto-body-repair
 callToActionLink: null
 callToActionText: null
-issuingAgency: New Jersey Department of Environmental Protection (DEP)
+issuingAgency: New Jersey Department of Environmental Protection (DEP), Office
+  of Permitting and Project Navigation
 ---
 
 If your business will offer spray paint services to vehicles, you must contact the Department of Environmental Protection (DEP) Office of Permitting and Project Navigation at (609)292-3600 for specific guidance on your permitting needs.
