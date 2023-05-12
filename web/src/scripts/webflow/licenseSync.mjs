@@ -1,6 +1,7 @@
 /* eslint-disable unicorn/no-process-exit */
 /* eslint-disable no-undef */
 
+import { LookupIndustryById } from "@businessnjgovnavigator/shared";
 import fs from "fs";
 import {
   loadAllLicenses,
@@ -40,7 +41,9 @@ const getLicenseFromMd = (licenseMd) => {
     "department-phone-2": licenseMd.divisionPhone,
     "license-certification-classification": licenseMd.licenseCertificationClassification,
     "form-name": licenseMd.formName,
-    "primary-industry": licenseMd.industryId ?? licenseMd.webflowIndustry,
+    "primary-industry": licenseMd.industryId
+      ? LookupIndustryById(licenseMd.industryId).name
+      : licenseMd.webflowIndustry,
     content: getHtml(contentToStrings(licenseMd.contentMd)),
     "last-updated": new Date(Date.now()).toISOString(),
     "license-classification": licenseMd.webflowType

@@ -339,6 +339,10 @@ module.exports = {
       to: { path: "src/scripts" },
     },
     {
+      from: { path: "src/scripts" },
+      to: { path: "../shared" },
+    },
+    {
       from: {},
       to: { path: "@aws-amplify/auth" },
     },
