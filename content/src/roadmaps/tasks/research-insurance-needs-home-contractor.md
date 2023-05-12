@@ -15,7 +15,7 @@ To find an insurance broker, speak to your network, local Chamber of Commerce, o
 
 ### Common Types of Business Insurance
 
-- **Commercial general liability insurance:** In order to complete your registration with the Department of Consumer Affairs, you must show a certificate of insurance at a minimum amount of $500,000 per occurrence.
+- **Commercial general liability insurance:** In order to complete your registration with the Division of Consumer Affairs, you must show a certificate of insurance at a minimum amount of $500,000 per occurrence.
 - **Workers' compensation insurance:** Find a `workers' compensation insurance|workers-comp` plan if you have employees. The State of New Jersey requires that you obtain this insurance if you have employees or stockholders in a corporation.
 - **Motor vehicle insurance:** If your company will own or use any vehicles, consider purchasing motor vehicle insurance.
 
