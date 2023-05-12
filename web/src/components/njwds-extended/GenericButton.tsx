@@ -1,5 +1,6 @@
 import { CircularProgress } from "@mui/material";
 import React, { ReactElement, useEffect, useRef, useState } from "react";
+
 export interface GenericButtonProps {
   className?: string;
   children?: React.ReactNode;
@@ -10,7 +11,7 @@ export interface GenericButtonProps {
   isSmallerText?: boolean;
   isLoading?: boolean;
   isNotFullWidthOnMobile?: boolean;
-  intercomButton?: boolean;
+  isIntercomEnabled?: boolean;
   isFullWidthOnDesktop?: boolean;
   isVerticalPaddingRemoved?: boolean;
   isUnBolded?: boolean;
@@ -28,7 +29,7 @@ export const GenericButton = (props: GenericButtonProps): ReactElement => {
   const isVerticalPaddingRemoved = props.isVerticalPaddingRemoved ? "padding-y-0" : "padding-y-11px";
   const isLargeButton = props.isLargeButton ? "usa-button--big" : "";
   const isSmallerText = props.isSmallerText ? "font-body-2xs" : "";
-  const intercomButton = props.intercomButton ? "intercom-button" : "";
+  const intercomButton = props.isIntercomEnabled ? "intercom-button" : "";
 
   const widthRef = useRef<HTMLInputElement | null>(null);
   const [width, setWidth] = useState<number>();

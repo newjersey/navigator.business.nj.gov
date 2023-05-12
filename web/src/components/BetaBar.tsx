@@ -16,7 +16,7 @@ export const BetaBar = (): ReactElement => {
         isUnBolded={true}
         isVerticalPaddingRemoved={true}
         isSmallerText={true}
-        intercomButton
+        isIntercomEnabled
         isNotFullWidthOnMobile={true}
         onClick={analytics.event.share_feedback.click.open_live_chat}
       >
