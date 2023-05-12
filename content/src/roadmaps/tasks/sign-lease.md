@@ -11,9 +11,9 @@ Signing your lease under your registered business name may protect you from liab
 
 ### Contract Considerations
 
-* **Lease Start Date:** Identify a start date for your lease that considers potential delays due to renovations, industry licenses, or other activities that are out of your control.
-* **Lease length:** Determine your ideal lease length by analyzing a few `lease considerations|lease-considerations` .
-* **Tenant Improvements:** Identify the entity responsible and write out expectations for `tenant improvements|tenant-improvements` in your lease.
+* **Lease start date:** Identify a start date for your lease that considers potential delays due to renovations, industry licenses, or other activities that are out of your control
+* **Lease length:** Determine your ideal lease length by analyzing a few `lease considerations|lease-considerations` 
+* **Tenant improvements:** Identify the entity responsible and write out expectations for `tenant improvements|tenant-improvements` in your lease
 
 > **Once completed, you will have:**
 >
