@@ -12,8 +12,9 @@ import {
 import { argsInclude, contentToStrings, getHtml, wait } from "./helpers.mjs";
 import { LicenseClassificationLookup } from "./licenseClassifications.mjs";
 import { createItem, getAllItems, modifyItem } from "./methods.mjs";
-import { LookupIndustryById } from "@businessnjgovnavigator/shared";
+import * as industryHelpers from "../../../../shared/lib/shared/src/industry.js";
 
+const { LookupIndustryById } = industryHelpers;
 const licenseCollectionId = "5e31b06cb76b830c0c358aa8";
 
 const getLicenseFromMd = (licenseMd) => {
