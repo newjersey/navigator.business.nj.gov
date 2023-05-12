@@ -8,7 +8,7 @@ callToActionText: Apply for My Federal S Corp Designation
 issuingAgency: Internal Revenue Service
 formName: "2553"
 ---
-The process to apply for an `S corporation|s-corp` designation starts at the federal level. In most cases, your business will be notified of your application determination within 60 days.
+The process to apply for an `S corporation|s-corp` designation starts at the federal level. In most cases, your business will be notified of your application determination within 60 days. The State will be informed of your status through the Federal government.
 
 - - -
 
