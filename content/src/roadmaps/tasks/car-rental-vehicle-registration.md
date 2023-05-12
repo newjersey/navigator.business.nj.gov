@@ -5,7 +5,7 @@ name: Register Your Fleet with NJ Motor Vehicle Commission
 id: car-rental-vehicle-registration
 callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm
 callToActionText: Make an Appointment
-issuingAgency: New Jersey Motor Vehicle Commission
+agencyId: nj-motor-vehicle
 formName: BA-49
 ---
 

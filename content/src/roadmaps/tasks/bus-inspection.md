@@ -5,7 +5,7 @@ name: Inspect and Register Your Vehicles
 id: bus-inspection
 callToActionLink: https://www.state.nj.us/mvc/inspection/schoolbus.htm
 callToActionText: Schedule My Inspection
-issuingAgency: New Jersey Motor Vehicle Commission
+agencyId: nj-motor-vehicle
 formName: ""
 ---
 

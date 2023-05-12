@@ -5,8 +5,8 @@ urlSlug: "produce-dealer-wholesale-dealer-in-hay-grain-straw-eggs-poultry-fruits
 webflowName: "Wholesale Produce Dealer (in hay, grain, straw, eggs, poultry, fruits and vegetables)"
 callToActionLink: "http://nj.gov/agriculture/divisions/md/prog/licensing.html"
 callToActionText: ""
-issuingAgency: "Department of Agriculture"
-issuingDivision: "Division of Dairy and Commodity Regulation"
+agencyId: agriculture
+agencyAdditionalContext: "Division of Dairy and Commodity Regulation"
 divisionPhone: "(609) 292-5651"
 webflowIndustry: "Produce Dealer"
 licenseCertificationClassification: "LICENSE/BOND"

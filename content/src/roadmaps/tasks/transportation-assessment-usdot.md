@@ -5,7 +5,7 @@ name: Get Your USDoT Number, if Applicable
 id: transportation-assessment-usdot
 callToActionLink: https://portal.fmcsa.dot.gov/UrsRegistrationWizard/
 callToActionText: Get My USDoT Number
-issuingAgency: "Federal Motor Carrier Safety Administration "
+agencyAdditionalContext: "Federal Motor Carrier Safety Administration"
 ---
 You may be required to get a USDoT number for your commercial vehicle if you are crossing state lines. Use the [self-assessment tool](https://www.fmcsa.dot.gov/registration/do-i-need-usdot-number) to determine if you must complete this task.
 

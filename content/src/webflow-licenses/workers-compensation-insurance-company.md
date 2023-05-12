@@ -5,7 +5,7 @@ urlSlug: "workers-compensation-insurance-company"
 webflowName: "Workers Compensation Insurance Company"
 filename: "workers-compensation-insurance-company"
 callToActionLink: "https://www.njcrib.com/"
-issuingAgency: "Department of Banking and Insurance"
+agencyId: nj-banking-insurance
 divisionPhone: "(973) 622-6014"
 webflowIndustry: "Workers Compensation"
 licenseCertificationClassification: "APPROVAL"

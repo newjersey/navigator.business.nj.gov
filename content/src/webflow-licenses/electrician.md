@@ -5,7 +5,7 @@ urlSlug: "electrician"
 webflowName: "Electrician"
 filename: "electrician"
 callToActionLink: "http://state.nj.us/dca/divisions/codes/resources/index.html"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6410"
 webflowIndustry: "Electrician"
 licenseCertificationClassification: "REGISTRATION/LICENSE"

@@ -5,7 +5,7 @@ urlSlug: "laundry-facility"
 webflowName: "Laundry Facility"
 filename: "laundry-facility"
 callToActionLink: ""
-issuingAgency: "Check with Local Municipality"
+agencyId: municipal-clerk
 divisionPhone: ""
 webflowIndustry: "Laundry Facility"
 licenseCertificationClassification: "CONTACT"

@@ -5,7 +5,7 @@ urlSlug: "master-hearth-specialist"
 webflowName: "Master Hearth Specialist"
 filename: "master-hearth-specialist"
 callToActionLink: "https://www.njconsumeraffairs.gov/mhs"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6230"
 webflowIndustry: "Hearth Specialist, Chimney, Fueled Patio Appliances, Inserts, Gas Logs & Piping"
 licenseCertificationClassification: "License"

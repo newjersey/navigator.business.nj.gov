@@ -5,7 +5,7 @@ urlSlug: "modeling-agency"
 webflowName: "Modeling Agency"
 filename: "modeling-agency"
 callToActionLink: "http://njconsumeraffairs.gov/epservices"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6370"
 webflowIndustry: "Modeling Agency"
 licenseCertificationClassification: "LICENSE"

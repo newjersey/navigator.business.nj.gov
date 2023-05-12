@@ -5,7 +5,7 @@ urlSlug: "podiatrist"
 webflowName: "Podiatrist"
 filename: "podiatrist"
 callToActionLink: "http://njconsumeraffairs.gov/elec/Pages/FAQ.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 826-7100"
 webflowIndustry: "Podiatrist"
 licenseCertificationClassification: "LICENSE"

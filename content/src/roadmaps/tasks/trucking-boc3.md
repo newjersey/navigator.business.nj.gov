@@ -5,7 +5,7 @@ name: File Your Blanket of Coverage (BOC-3)
 id: trucking-boc3
 callToActionLink: https://www.fmcsa.dot.gov/registration/form-boc-3-designation-agents-service-process
 callToActionText: File My BOC-3
-issuingAgency: Federal Motor Carrier Safety Administration
+agencyAdditionalContext: Federal Motor Carrier Safety Administration
 required: true
 ---
 If you do any type of load-hauling for your company, you need to select a process agent and have them file the BOC-3 for your company. The Blanket of Coverage (BOC-3) designates a `process agent|process-agent` for your company that can file and receive legal documents on your behalf.

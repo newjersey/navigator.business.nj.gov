@@ -5,7 +5,7 @@ urlSlug: "ophthalmologist"
 webflowName: "Ophthalmologist"
 filename: "ophthalmologist"
 callToActionLink: "http://njconsumeraffairs.gov/bme"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 826-7100"
 webflowIndustry: "Ophthalmologist"
 licenseCertificationClassification: "LICENSE"

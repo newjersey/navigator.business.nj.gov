@@ -5,7 +5,7 @@ urlSlug: "firefighter"
 webflowName: "Firefighter"
 filename: "firefighter"
 callToActionLink: "http://nj.gov/dca/divisions/dfs/"
-issuingAgency: "Department of Community Affairs"
+agencyId: nj-community-affairs
 divisionPhone: "(609) 777-3552"
 webflowIndustry: "Firefighter"
 licenseCertificationClassification: "LICENSE"

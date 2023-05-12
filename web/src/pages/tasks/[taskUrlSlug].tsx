@@ -30,6 +30,7 @@ import { rswitch, templateEval } from "@/lib/utils/helpers";
 import { getModifiedTaskContent, getTaskFromRoadmap, getUrlSlugs } from "@/lib/utils/roadmap-helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { formationTaskId, Municipality } from "@businessnjgovnavigator/shared/";
+import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
@@ -197,6 +198,19 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
     }
   }
 
+  const getAgencyText = (): string => {
+    const agency = props.task.agencyId ? LookupTaskAgencyById(props.task.agencyId).name : "";
+    const context = props.task.agencyAdditionalContext ?? "";
+    if (agency && context) {
+      return `${agency}, ${context}`;
+    } else if (agency) {
+      return agency;
+    } else if (context) {
+      return context;
+    }
+    return "";
+  };
+
   return (
     <div id="taskElement" className="flex flex-column space-between minh-38">
       <div>
@@ -228,23 +242,22 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
           </>
         )}
 
-        {props.task.issuingAgency || props.task.formName ? (
-          <>
-            <hr className="margin-y-3" />
-            {props.task.issuingAgency ? (
-              <div>
-                <span className="h5-styling">{`${Config.taskDefaults.issuingAgencyText}: `}</span>
-                <span className="h6-styling">{props.task.issuingAgency}</span>
-              </div>
-            ) : null}
-            {props.task.formName ? (
-              <div>
-                <span className="h5-styling">{`${Config.taskDefaults.formNameText}: `}</span>
-                <span className="h6-styling">{props.task.formName}</span>
-              </div>
-            ) : null}
-          </>
-        ) : null}
+        {(props.task.agencyId || props.task.formName || props.task.agencyAdditionalContext) && (
+          <hr className="margin-y-3" />
+        )}
+
+        {(props.task.agencyId || props.task.agencyAdditionalContext) && (
+          <div>
+            <span className="h5-styling">{`${Config.taskDefaults.issuingAgencyText}: `}</span>
+            <span className="h6-styling">{getAgencyText()}</span>
+          </div>
+        )}
+        {props.task.formName && (
+          <div>
+            <span className="h5-styling">{`${Config.taskDefaults.formNameText}: `}</span>
+            <span className="h6-styling">{props.task.formName}</span>
+          </div>
+        )}
       </div>
       <TaskCTA link={props.task.callToActionLink} text={props.task.callToActionText} />
     </div>

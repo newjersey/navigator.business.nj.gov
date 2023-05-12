@@ -3,12 +3,12 @@ filename: cosmetology-individual-staff-license
 urlSlug: cosmetology-individual-staff-license
 name: Get Your Individual License and Ensure Your Staff is Licensed
 webflowName: "Cosmetology: Individual and Staff License"
-industryIntegration: New Jersey Division of Consumer Affairs
 industryId: cosmetology
 callToActionLink: https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx
 divisionPhone: (973) 504-6400
 id: individual-staff-licenses-cosmetology
-issuingAgency: New Jersey Division of Consumer Affairs Board of Cosmetology and Hairstyling
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Board of Cosmetology and Hairstyling
 callToActionText: Apply for a Cosmetology License
 webflowType: individual-license
 webflowId: 641370d262d9de2b82a85d95

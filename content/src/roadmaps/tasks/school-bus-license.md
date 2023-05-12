@@ -5,7 +5,7 @@ name: Ensure You or Your Drivers Have the Right Credentials
 id: school-bus-license
 callToActionLink: https://telegov.njportal.com/njmvc/AppointmentWizard/20
 callToActionText: Apply for My License
-issuingAgency: New Jersey Motor Vehicle Commission
+agencyId: nj-motor-vehicle
 ---
 
 Employers must do a background check on all potential school bus drivers. Only drivers with clean records can legally drive a school bus.

@@ -8,7 +8,7 @@ callToActionLink: https://www.state.nj.us/mvcbiz/BusinessServices/AutoBodyRepair
 webflowIndustry: Auto Body
 divisionPhone: (609) 292-6500
 id: auto-body-repair-license
-issuingAgency: New Jersey Motor Vehicle Commission
+agencyId: nj-motor-vehicle
 callToActionText: Apply for My Auto-Body Repair License
 webflowType: business-license
 webflowId: 5f7729541a08097ccbbb2ecb

@@ -5,7 +5,7 @@ urlSlug: "pharmacy-permit"
 webflowName: "Pharmacy Permit"
 filename: "pharmacy-permit"
 callToActionLink: "http://njconsumeraffairs.gov/phar"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6450"
 webflowIndustry: "Pharmacy"
 licenseCertificationClassification: "REGISTRATION"

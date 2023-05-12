@@ -1,6 +1,7 @@
 import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
 import { WebflowLicense } from "@/lib/types/types";
+import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
 
 export const searchWebflowLicenses = (licenses: WebflowLicense[], term: string): Match[] => {
   const matches: Match[] = [];
@@ -14,8 +15,8 @@ export const searchWebflowLicenses = (licenses: WebflowLicense[], term: string):
     const content = license.contentMd?.toLowerCase();
     const name = license.webflowName?.toLowerCase();
     const cta = license.callToActionText?.toLowerCase();
-    const agency = license.issuingAgency?.toLowerCase();
-    const division = license.issuingDivision?.toLowerCase();
+    const agency = license.agencyId ? LookupTaskAgencyById(license.agencyId).name.toLowerCase() : "";
+    const division = license.agencyAdditionalContext?.toLowerCase();
     const classification = license.licenseCertificationClassification?.toLowerCase();
     const industry = license.webflowIndustry?.toLowerCase();
     const summary = license.summaryDescriptionMd?.toLowerCase();

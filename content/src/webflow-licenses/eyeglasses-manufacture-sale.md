@@ -5,7 +5,7 @@ urlSlug: "eyeglasses-manufacture-sale"
 webflowName: "Eyeglasses (Manufacture & Sale)"
 filename: "eyeglasses-manufacture-sale"
 callToActionLink: "http://njconsumeraffairs.gov/oph/Pages/default.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6435"
 webflowIndustry: "Eyeglasses"
 licenseCertificationClassification: "LICENSE"

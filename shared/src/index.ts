@@ -21,6 +21,7 @@ export * from "./profileData";
 export * from "./sector";
 export * from "./states";
 export * from "./stringHelpers";
+export * from "./taskAgency";
 export * from "./taxFiling";
 export * from "./test";
 export * from "./userData";

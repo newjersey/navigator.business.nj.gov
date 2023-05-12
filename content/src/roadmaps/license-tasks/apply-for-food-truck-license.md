@@ -9,7 +9,7 @@ id: apply-for-food-truck-license
 callToActionText: Contact My Department of Health
 webflowType: business-license
 webflowId: 64120ab148da55fdb9c3b1c4
-localLevelTask: Local Department of Health
+agencyId: local-health
 licenseCertificationClassification: LICENSE
 summaryDescriptionMd: >
   Food trucks need to be cleaned and sanitized according to the guidelines from your local Department of Health. The regulation and licensing of food trucks vary by location.

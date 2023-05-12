@@ -5,9 +5,10 @@ name: Apply for Tax-Exempt Status with the IRS
 id: nonprofit-tax-exempt
 callToActionLink: https://www.pay.gov/public/home
 callToActionText: Apply for Tax-Exempt Status
-issuingAgency: Internal Revenue Service
+agencyAdditionalContext: Internal Revenue Service
 formName: 1023 / 1024-A
 ---
+
 Your non-profit organization may qualify for tax-exemption status with the IRS. 
 
 See the IRS [guide on tax-exempt organizations](https://www.irs.gov/charities-non-profits/applying-for-tax-exempt-status) for the form specific to your organization and more details about the application process.

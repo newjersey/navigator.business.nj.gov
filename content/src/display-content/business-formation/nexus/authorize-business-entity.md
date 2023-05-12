@@ -6,7 +6,7 @@ id: authorize-business-entity
 callToActionLink: https://www.nj.gov/treasury/revenue/pdf/2000.pdf
 callToActionText: Authorize My Business
 required: true
-issuingAgency: New Jersey Department of Treasury's Division of Revenue and Enterprise Services
+agencyId: nj-revenue-enterprise-services
 ---
 
 You must register your business name and `authorize|certificate-formation` your `business structure|business-structure-learn-more` with the State.

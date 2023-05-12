@@ -5,7 +5,7 @@ urlSlug: "dentistry-clinic"
 webflowName: "Dentistry-Clinic"
 filename: "dentistry-clinic"
 callToActionLink: "http://njconsumeraffairs.gov/den/Pages/default.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6405"
 webflowIndustry: "Dentistry Clinic"
 licenseCertificationClassification: "PERMIT"

@@ -5,7 +5,7 @@ urlSlug: "telemarketing"
 webflowName: "Telemarketing"
 filename: "telemarketing"
 callToActionLink: "https://www.njconsumeraffairs.gov/telemarketers"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6370"
 webflowIndustry: "Telemarketing"
 licenseCertificationClassification: "Registration"

@@ -5,8 +5,8 @@ urlSlug: "ambulance-service-invalid-coach-transport-ambulance-services-emergency
 webflowName: "Ambulance Service (Invalid Coach, Transport Ambulance Services, Emergency Ambulance Service) *Volunteer First Air Squads are Exempt"
 callToActionLink: "http://nj.gov/health/ems/education/"
 callToActionText: ""
-issuingAgency: "Department of Health and Senior Services"
-issuingDivision: "Office of Emergency Medical Services"
+agencyId: health-senior-services
+agencyAdditionalContext: "Office of Emergency Medical Services"
 divisionPhone: "(609) 633-7777"
 webflowIndustry: "Ambulance"
 licenseCertificationClassification: "LICENSE"

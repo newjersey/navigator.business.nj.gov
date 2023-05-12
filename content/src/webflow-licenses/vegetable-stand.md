@@ -5,7 +5,7 @@ urlSlug: "vegetable-stand"
 name: "Vegetable Stand"
 filename: "vegetable-stand"
 callToActionLink: ""
-issuingAgency: "Contact Your Local Health Department"
+agencyId: local-health
 divisionPhone: ""
 industryId: "Vegetable Stand"
 licenseCertificationClassification: "LICENSE"

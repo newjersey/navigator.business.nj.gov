@@ -5,7 +5,7 @@ urlSlug: "drywall-contractor-residential"
 webflowName: "Drywall Contractor (Residential)"
 filename: "drywall-contractor-residential"
 callToActionLink: "http://njconsumeraffairs.gov/hic/Pages/default.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 424-8150"
 webflowIndustry: "Drywall Contractor"
 licenseCertificationClassification: "REGISTRATION"

@@ -6,7 +6,7 @@ webflowName: "Cannabis: Conversion License"
 industryId: cannabis
 callToActionLink: https://nj-crc-public.nls.egov.com/#!/signin
 id: conversion-license-cannabis
-issuingAgency: Cannabis Regulatory Commission
+agencyId: nj-cannabis-commission
 callToActionText: Apply for My Conversion License
 webflowId: 640b852c9a5e4f6a4de2ae45
 licenseCertificationClassification: LICENSE
