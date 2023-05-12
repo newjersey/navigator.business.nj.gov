@@ -15,7 +15,8 @@ callToActionText: Apply for My Notary Public Certificate
 webflowType: individual-license
 webflowId: 5f77296c2edc674c7cb4a708
 licenseCertificationClassification: ""
-summaryDescriptionMd: "You or any staff providing notary services must be registered as a notary public."
+summaryDescriptionMd: >
+  You or any staff providing notary services must be registered as a notary public.
 ---
 
 ---

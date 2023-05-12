@@ -15,7 +15,8 @@ callToActionText: Get My Massage Therapy Business License
 webflowType: business-license
 webflowId: 5f77299ae10dec7f6a025080
 licenseCertificationClassification: ""
-summaryDescriptionMd: "If you will employ others to offer massage therapy services, you need to register your business as a massage therapy employer."
+summaryDescriptionMd: >
+  If you will employ others to offer massage therapy services, you need to register your business as a massage therapy employer."
 ---
 
 ---

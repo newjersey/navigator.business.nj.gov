@@ -14,9 +14,8 @@ callToActionText: Apply for My License
 webflowType: individual-license
 webflowId: 5f77296ee10dec7593024f1c
 licenseCertificationClassification: ""
-summaryDescriptionMd:
-  "You or any staff conducting financial audits in accordance with the Statements on Auditing Standards (SAS), the Statements on Standards for Attestation Engagements (SSAE), or the the Public Company Accounting
-  Oversight Board (PCAOB) must obtain a certified public accountant license."
+summaryDescriptionMd: >
+  You or any staff conducting financial audits in accordance with the Statements on Auditing Standards (SAS), the Statements on Standards for Attestation Engagements (SSAE), or the the Public Company Accounting Oversight Board (PCAOB) must obtain a certified public accountant license.
 ---
 
 ---

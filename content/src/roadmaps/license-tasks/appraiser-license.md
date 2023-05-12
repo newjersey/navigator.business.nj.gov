@@ -14,7 +14,8 @@ callToActionText: "Apply ​for My Appraiser License "
 webflowType: business-license
 webflowId: 640b8467b7c8237f0cdd1541
 licenseCertificationClassification: LICENSE
-summaryDescriptionMd: "You need a real estate appraiser license if you open an `appraisal management company|appraisal-management-company` and plan to appraise real estate that includes either: A) non-complex one to four residential units having a transaction value less than $1 million, or B) complex one to four residential units (such as those with atypical ownership or market conditions) having a transaction value less than $250,000."
+summaryDescriptionMd: >
+  You need a real estate appraiser license if you open an `appraisal management company|appraisal-management-company` and plan to appraise real estate that includes either: A) non-complex one to four residential units having a transaction value less than $1 million, or B) complex one to four residential units (such as those with atypical ownership or market conditions) having a transaction value less than $250,000.
 ---
 
 ---

@@ -202,6 +202,7 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
       <div>
         <TaskHeader task={props.task} />
         {props.children}
+        <Content>{props.task.summaryDescriptionMd || ""}</Content>
 
         {hasDeferredLocationQuestion && (
           <>
@@ -223,7 +224,6 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
 
         {!hasPostOnboardingQuestion && !hasDeferredLocationQuestion && (
           <>
-            <Content>{props.task.summaryDescriptionMd || ""}</Content>
             <Content>{props.task.contentMd}</Content>
           </>
         )}

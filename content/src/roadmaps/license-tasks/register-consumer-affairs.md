@@ -16,7 +16,8 @@ callToActionText: Complete My Contractor Registration
 webflowType: individual-license
 webflowId: 5f7729927fe89d43ed054794
 licenseCertificationClassification: ""
-summaryDescriptionMd: "Home improvement contractors are individuals and companies involved in repairing, renovating, modernizing, installing, replacing, improving, restoring, painting, constructing, remodeling, moving, or demolishing residential or noncommercial properties. If you or your business is involved in any of the activities mentioned above you must register as a Home Improvement Contractor."
+summaryDescriptionMd: >
+  Home improvement contractors are individuals and companies involved in repairing, renovating, modernizing, installing, replacing, improving, restoring, painting, constructing, remodeling, moving, or demolishing residential or noncommercial properties. If you or your business is involved in any of the activities mentioned above you must register as a Home Improvement Contractor.
 ---
 
 ---

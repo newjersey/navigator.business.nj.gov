@@ -15,7 +15,8 @@ callToActionText: Apply for My Engineer License
 webflowType: individual-license
 webflowId: 640b84674c4b70b5b2420c3b
 licenseCertificationClassification: ""
-summaryDescriptionMd: "You or any staff providing engineering services will need an engineer license."
+summaryDescriptionMd: >
+  You or any staff providing engineering services will need an engineer license.
 ---
 
 ---

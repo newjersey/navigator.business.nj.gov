@@ -16,7 +16,8 @@ callToActionText: Apply for My Cosmetology Shop License
 webflowType: business-license
 webflowId: 5f77298fd2749a78af9cf7df
 licenseCertificationClassification: LICENSE
-summaryDescriptionMd: "New shops, relocated shops, or shops that have transferred ownership are required to obtain a license. After your application is submitted and reviewed, your shop will be inspected."
+summaryDescriptionMd: >
+  New shops, relocated shops, or shops that have transferred ownership are required to obtain a license. After your application is submitted and reviewed, your shop will be inspected.
 ---
 
 ---

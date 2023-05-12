@@ -133,6 +133,7 @@ export const LicenseTask = (props: Props): ReactElement => {
             <TabPanel value="0" sx={{ paddingX: 0 }}>
               <div className="margin-top-3">
                 <UnlockedBy task={props.task} />
+                <Content>{props.task.summaryDescriptionMd || ""}</Content>
                 <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
               </div>
               <div className="flex flex-column margin-top-4 margin-bottom-1">
