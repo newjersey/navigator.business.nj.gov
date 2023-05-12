@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 
 import fs from "fs";
-import { LookupIndustryById } from "../../../../shared";
+import { LookupIndustryById } from "../../../../shared/lib/shared/src/industry.js";
 import {
   loadAllLicenses,
   loadAllNavigatorLicenses,
