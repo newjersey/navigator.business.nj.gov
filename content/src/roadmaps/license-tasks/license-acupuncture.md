@@ -14,7 +14,8 @@ callToActionText: Apply for My License
 webflowType: individual-license
 webflowId: 5f77296edd6a49eae99b6067
 licenseCertificationClassification: ""
-summaryDescriptionMd: "You need an acupuncturist license to offer services as an acupuncturist."
+summaryDescriptionMd: >
+  You need an acupuncturist license to offer services as an acupuncturist.
 ---
 
 ---

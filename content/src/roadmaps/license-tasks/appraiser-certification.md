@@ -13,7 +13,8 @@ callToActionText: "Apply ​for My Appraiser Certification "
 webflowType: individual-license
 webflowId: 6414793bb48ba7e9395c9540
 licenseCertificationClassification: CERTIFICATION
-summaryDescriptionMd: "You need a certification to appraise real estate with one to four residential units—regardless of value or complexity. If you are opening an `Appraisal Management Company|appraisal-management-company` you must have a certified appraiser."
+summaryDescriptionMd: >
+  You need a certification to appraise real estate with one to four residential units—regardless of value or complexity. If you are opening an `Appraisal Management Company|appraisal-management-company` you must have a certified appraiser.
 ---
 
 ---

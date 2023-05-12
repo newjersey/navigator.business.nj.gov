@@ -11,8 +11,11 @@ webflowType: business-license
 webflowId: 64120ab148da55fdb9c3b1c4
 localLevelTask: Local Department of Health
 licenseCertificationClassification: LICENSE
-summaryDescriptionMd: "Food trucks need to be cleaned and sanitized according to the guidelines from your local Department of Health. The regulation and licensing of food trucks vary by location.
-You'll need to check license requirements with the county and/or local Department of Health in every county where you plan to do business."
+summaryDescriptionMd: >
+  Food trucks need to be cleaned and sanitized according to the guidelines from your local Department of Health. The regulation and licensing of food trucks vary by location.
+
+
+  You'll need to check license requirements with the county and/or local Department of Health in every county where you plan to do business.
 ---
 
 ---

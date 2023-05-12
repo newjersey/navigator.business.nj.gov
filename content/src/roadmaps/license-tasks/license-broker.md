@@ -12,7 +12,8 @@ issuingAgency: State of New Jersey Department of Banking and Insurance Real Esta
 callToActionText: Submit a Real Estate Broker License Application
 webflowId: 5f77292da6bfb58d9402edff
 licenseCertificationClassification: ""
-summaryDescriptionMd: "If you own or plan to own a real estate agency, you need a real estate broker license."
+summaryDescriptionMd: >
+  If you own or plan to own a real estate agency, you need a real estate broker license.
 ---
 
 ---

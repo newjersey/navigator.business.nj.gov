@@ -13,8 +13,8 @@ callToActionText: Apply for My Agency License
 webflowType: business-license
 webflowId: 5f772960a67e4a21735c0f36
 licenseCertificationClassification: LICENSE
-summaryDescriptionMd: "You need a license to operate a detective agency. To prepare for the application, consider reading the [Private Detective License Application Instructions](https://www.nj.gov/njsp/private-detective/pdf/sp-171-instructions_2020.pdf) and the [New Jersey State Police Private Detective Information](https://www.nj.gov/njsp/private-detective/index.shtml).
-"
+summaryDescriptionMd: >
+  You need a license to operate a detective agency. To prepare for the application, consider reading the [Private Detective License Application Instructions](https://www.nj.gov/njsp/private-detective/pdf/sp-171-instructions_2020.pdf) and the [New Jersey State Police Private Detective Information](https://www.nj.gov/njsp/private-detective/index.shtml).
 ---
 
 ---

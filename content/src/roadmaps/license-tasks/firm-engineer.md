@@ -12,7 +12,8 @@ licenseCertificationClassification: undefined
 divisionPhone: 973-504-6460
 id: firm-engineer
 webflowId: 6414793b798bdb29a5fe9567
-summaryDescriptionMd: "You need a certificate of authorization to operate an engineering firm."
+summaryDescriptionMd: >
+  You need a certificate of authorization to operate an engineering firm.
 ---
 
 ---

@@ -12,7 +12,8 @@ callToActionText: Apply for Your Permit
 webflowType: business-license
 webflowId: 6414793b7e0fbe2794b95bfe
 licenseCertificationClassification: ""
-summaryDescriptionMd: "You need a cottage food operator (home baker) permit to sell food/baked goods prepared in your home. See the [application instructions](https://www.nj.gov/health/forms/cfo-1instr.pdf) and the [Department of Health code for cottage industries](https://www.nj.gov/health/ceohs/phfpp/retailfood/cottagefood.shtml#5) for important information on allowed ingredients, allergens, and labeling requirements."
+summaryDescriptionMd: >
+  You need a cottage food operator (home baker) permit to sell food/baked goods prepared in your home. See the [application instructions](https://www.nj.gov/health/forms/cfo-1instr.pdf) and the [Department of Health code for cottage industries](https://www.nj.gov/health/ceohs/phfpp/retailfood/cottagefood.shtml#5) for important information on allowed ingredients, allergens, and labeling requirements.
 ---
 
 ---

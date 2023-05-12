@@ -14,7 +14,8 @@ callToActionText: Apply for My Certificate of Authorization
 webflowType: business-license
 webflowId: 5f772971eb55580500feb5a2
 licenseCertificationClassification: LICENSE
-summaryDescriptionMd: "You need a certificate of authorization to open an architecture firm."
+summaryDescriptionMd: >
+  You need a certificate of authorization to open an architecture firm.
 ---
 
 ---

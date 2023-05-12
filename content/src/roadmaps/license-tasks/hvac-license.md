@@ -15,7 +15,8 @@ callToActionText: Apply for My HVACR License
 webflowType: individual-license
 webflowId: 5f772993a195c8849e15b18f
 licenseCertificationClassification: ""
-summaryDescription: "You or any staff providing HVACR services must be licensed as an HVACR contractor."
+summaryDescription: >
+  You or any staff providing HVACR services must be licensed as an HVACR contractor.
 ---
 
 ---

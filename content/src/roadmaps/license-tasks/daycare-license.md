@@ -13,7 +13,8 @@ issuingAgency: New Jersey Department of Children and Families
 callToActionText: Apply for My License
 webflowId: 5f7728f5e8bf507c5e317899
 licenseCertificationClassification: LICENSE
-summaryDescriptionMd: "If you have more than six children under your care you must run your child care services outside of your home and will need a child care center license."
+summaryDescriptionMd: >
+  If you have more than six children under your care you must run your child care services outside of your home and will need a child care center license.
 ---
 
 ---
