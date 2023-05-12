@@ -90,6 +90,16 @@
   }
 }
 
+.btn-info {
+  background-color: $info !important;
+  &:hover {
+    background-color: $info-dark !important;
+  }
+  &:active {
+    background-color: $info-darker !important;
+  }
+}
+
 .btn-accent-cool-lightest {
   background-color: $accent-cool-lightest !important;
   color: $base-darkest !important;

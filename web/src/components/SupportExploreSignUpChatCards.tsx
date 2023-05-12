@@ -12,32 +12,32 @@ export const SupportExploreSignUpChatCards = (): ReactElement => {
   return (
     <div className={`${isDesktopAndUp ? "flex flex-justify" : ""}`}>
       <UserSupportActionCard
-        color={"primary"}
+        borderColor={"primary"}
         headerLine1={cardConfig.card1HeaderLine1}
         headerLine2={cardConfig.card1HeaderLine2}
         supportingText={cardConfig.card1SupportingText}
         buttonLink={cardConfig.card1ButtonLink}
         buttonText={cardConfig.card1Button}
-        buttonStyleProp="primary"
+        primaryButtonColor="primary"
       />
       <UserSupportActionCard
-        color={"accent-cooler"}
+        borderColor={"accent-cooler"}
         headerLine1={cardConfig.card2HeaderLine1}
         headerLine2={cardConfig.card2HeaderLine2}
         supportingText={cardConfig.card2SupportingText}
         buttonLink={cardConfig.card2ButtonLink}
         buttonText={cardConfig.card2Button}
-        buttonStyleProp="accent-cooler"
+        primaryButtonColor="accent-cooler"
       />
       <UserSupportActionCard
-        color={"info-dark"}
+        borderColor={"info-dark"}
         headerLine1={cardConfig.card3HeaderLine1}
         headerLine2={cardConfig.card3HeaderLine2}
         supportingText={cardConfig.card3SupportingText}
         buttonLink=""
         buttonText={cardConfig.card3Button}
-        buttonStyleProp="info"
-        intercom={true}
+        primaryButtonColor="info"
+        isIntercomEnabled={true}
         isLast
       />
     </div>
