@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { TaskHeader } from "@/components/TaskHeader";
 import { CannabisApplicationQuestionsTab } from "@/components/tasks/cannabis/CannabisApplicationQuestionsTab";
@@ -132,6 +133,7 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
       {displayFirstTab ? (
         <>
           <UnlockedBy task={props.task} />
+          <Content className="margin-bottom-2">{props.task.summaryDescriptionMd || ""}</Content>
           <CannabisApplicationQuestionsTab
             onNextTab={handleNextTabButtonClick}
             priorityStatusState={priorityStatusState}
