@@ -64,10 +64,10 @@ const getAgencyOptions = async () => {
 };
 
 const agencyMap = {
-  "njeda": { name: "NJEDA", slug: "NJEDA", id: "af647a925b907472a8ad9f5fe07ba6ed" },
-  "njdol": { name: "NJDOL", slug: "NJDOL", id: "868ea3a1400bc3ae3d48cdabc909727a" },
-  "njdep": { name: "NJDEP", slug: "NJDEP", id: "e5191b387dca9f56520a9fb24ad56f74" },
-  "njdot": { name: "NJDOT", slug: "NJDOT", id: "5d5c1643d2b77d36a143d6ede5d8b6a2" },
+  njeda: { name: "NJEDA", slug: "NJEDA", id: "af647a925b907472a8ad9f5fe07ba6ed" },
+  njdol: { name: "NJDOL", slug: "NJDOL", id: "868ea3a1400bc3ae3d48cdabc909727a" },
+  njdep: { name: "NJDEP", slug: "NJDEP", id: "e5191b387dca9f56520a9fb24ad56f74" },
+  njdot: { name: "NJDOT", slug: "NJDOT", id: "5d5c1643d2b77d36a143d6ede5d8b6a2" },
   "nj-public-utilities": {
     name: "NJ Board of Public Utilities",
     slug: "NJ Board of Public Utilities",
