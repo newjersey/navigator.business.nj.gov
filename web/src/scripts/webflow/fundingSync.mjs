@@ -63,27 +63,27 @@ const getAgencyOptions = async () => {
   }).validations["options"];
 };
 
-const agencyMap = [
-  { name: "NJEDA", slug: "NJEDA", id: "af647a925b907472a8ad9f5fe07ba6ed" },
-  { name: "NJDOL", slug: "NJDOL", id: "868ea3a1400bc3ae3d48cdabc909727a" },
-  { name: "NJDEP", slug: "NJDEP", id: "e5191b387dca9f56520a9fb24ad56f74" },
-  { name: "NJDOT", slug: "NJDOT", id: "5d5c1643d2b77d36a143d6ede5d8b6a2" },
-  {
+const agencyMap = {
+  "njeda": { name: "NJEDA", slug: "NJEDA", id: "af647a925b907472a8ad9f5fe07ba6ed" },
+  "njdol": { name: "NJDOL", slug: "NJDOL", id: "868ea3a1400bc3ae3d48cdabc909727a" },
+  "njdep": { name: "NJDEP", slug: "NJDEP", id: "e5191b387dca9f56520a9fb24ad56f74" },
+  "njdot": { name: "NJDOT", slug: "NJDOT", id: "5d5c1643d2b77d36a143d6ede5d8b6a2" },
+  "nj-public-utilities": {
     name: "NJ Board of Public Utilities",
     slug: "NJ Board of Public Utilities",
     id: "15b93a9c93d07ea5929717526eb37704",
   },
-  {
+  "nj-treasury": {
     name: "NJ Department of Treasury",
     slug: "NJ Department of Treasury",
     id: "b96fca38c289eabd7cda9bc33be8996a",
   },
-  {
+  "nj-bac": {
     name: "New Jersey Business Action Center",
     slug: "New Jersey Business Action Center",
     id: "529992b90dbeaba3826e4afa761c1c8e",
   },
-];
+};
 
 const getFundingOptions = async () => {
   const itemResponse = await getCollection(fundingCollectionId);
@@ -180,9 +180,7 @@ const getFundingFromMd = (i, sectors) => {
   if (fundingType === undefined) {
     throw new Error("Funding Types are mis-matched, please check with webflow");
   }
-  const agency = agencyMap.find((v) => {
-    return v.slug === i.agency[0];
-  })?.id;
+  const agency = agencyMap[i.agency[0]]?.id;
   if (agency === undefined) {
     throw new Error("Agency Types are mis-matched, please check with webflow");
   }
