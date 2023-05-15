@@ -1,40 +1,40 @@
-@-webkit-keyframes slidein-right {
+@-webkit-keyframes slidein-left {
   0% {
-    -webkit-transform: translateX(-100%);
+    -webkit-transform: translateX(100%);
   }
   100% {
     -webkit-transform: translateX(0);
   }
 }
-@keyframes slidein-right {
+@keyframes slidein-left {
   0% {
-    transform: translateX(-100%);
+    transform: translateX(100%);
   }
   100% {
     transform: translateX(0);
   }
 }
 
-@-webkit-keyframes slideout-left {
+@-webkit-keyframes slideout-right {
   0% {
     -webkit-transform: translateX(0%);
   }
   100% {
-    -webkit-transform: translateX(-100%);
+    -webkit-transform: translateX(100%);
   }
 }
-@keyframes slideout-left {
+@keyframes slideout-right {
   0% {
     transform: translateX(0%);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(100%);
   }
 }
 
 @media all and (max-width: 63.99em) {
-  .left-nav {
-    left: 0;
+  .right-nav {
+    right: 0;
     bottom: 0;
     top: 0;
     position: fixed;
@@ -48,17 +48,17 @@
     z-index: 500;
 
     &.is-visible {
-      -webkit-animation: slidein-right 0.3s forwards;
-      animation: slidein-right 0.3s forwards;
+      -webkit-animation: slidein-left 0.3s forwards;
+      animation: slidein-left 0.3s forwards;
     }
 
     &.is-hidden {
-      -webkit-animation: slideout-left 0.3s forwards;
-      animation: slideout-left 0.3s forwards;
+      -webkit-animation: slideout-right 0.3s forwards;
+      animation: slideout-right 0.3s forwards;
     }
   }
 
-  .left-nav-close {
+  .right-nav-close {
     -moz-osx-font-smoothing: auto;
     -webkit-font-smoothing: subpixel-antialiased;
     text-decoration: underline;
@@ -75,7 +75,7 @@
     float: right;
     text-align: center;
   }
-  .left-nav-overlay {
+  .right-nav-overlay {
     bottom: 0;
     left: 0;
     right: 0;
@@ -92,7 +92,7 @@
       visibility: visible;
     }
   }
-  .left-nav-menu-button {
+  .right-nav-menu-button {
     -moz-osx-font-smoothing: auto;
     -webkit-font-smoothing: subpixel-antialiased;
     border: 0;
@@ -104,8 +104,8 @@
     flex: 0 1 auto;
     padding-left: 0.75rem;
     padding-right: 0.75rem;
-    background-color: $primary;
-    color: $white;
+    color: $primary;
+    background-color: transparent;
     font-size: 0.81rem;
     height: 3rem;
     text-align: center;
@@ -115,7 +115,7 @@
 }
 
 @media all and (min-width: 64em) {
-  .left-nav-close {
+  .right-nav-close {
     display: none;
   }
 }
