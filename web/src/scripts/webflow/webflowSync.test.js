@@ -54,7 +54,7 @@ const fundingMd = [
     callToActionLink: "https://www.njeda.com/cleantechvoucher/",
     callToActionText: "Learn more",
     fundingType: "grant",
-    agency: ["NJEDA"],
+    agency: ["njeda"],
     publishStageArchive: "",
     status: "first come, first serve",
     programFrequency: "ongoing",
@@ -101,7 +101,7 @@ const fundingMd = [
     callToActionText: "Learn More",
     fundingType: "grant",
     programPurpose: "",
-    agency: ["NJDEP"],
+    agency: ["njdep"],
     agencyContact: "",
     publishStageArchive: "",
     status: "first come, first serve",
@@ -138,7 +138,7 @@ const fundingMd = [
     callToActionLink: "https://www.njeda.com/njaccelerate/",
     callToActionText: "Learn more",
     fundingType: "loan",
-    agency: ["NJEDA"],
+    agency: ["njeda"],
     publishStageArchive: "",
     status: "rolling application",
     programFrequency: "ongoing",
@@ -757,7 +757,7 @@ describe("webflow syncing", () => {
                   ...fundings.find((item) => {
                     return item.slug === "nj-accelerate";
                   }),
-                  agency: ["NJDOL"],
+                  agency: ["njdol"],
                 },
               ],
             },
@@ -769,7 +769,7 @@ describe("webflow syncing", () => {
           ...fundingMd.find((i) => {
             return i.id === "nj-accelerate";
           }),
-          agency: ["NJDEP"],
+          agency: ["njdep"],
         },
       ]);
       await updateFundings();
@@ -791,9 +791,7 @@ describe("webflow syncing", () => {
             "last-updated": currentDate.toISOString(),
             "application-close-date": null,
             "start-date": null,
-            agency: agencyMap.find((i) => {
-              return i.slug === "NJDEP";
-            }).id,
+            agency: agencyMap["njdep"].id,
           },
         },
         responseType: "json",
