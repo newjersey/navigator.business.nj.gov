@@ -7,7 +7,7 @@ callToActionLink: https://www.childcarenj.gov/Parents/CCRR
 callToActionText: Find My Referral Agency
 issuingAgency: New Jersey Department of Human Services Division of Family Development
 ---
-Register your family daycare business with a Child Care Resource and Referral Agency to ensure you’re in compliance with state rules and regulations and gain more credibility for your business. 
+Register your family daycare business with your local Child Care Resource and Referral Agency to ensure you’re in compliance with state rules and regulations and gain more credibility for your business. 
 
 - - -
 
