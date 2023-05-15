@@ -8,13 +8,12 @@ callToActionText: Make an Appointment
 issuingAgency: New Jersey Motor Vehicle Commission
 formName: BA-49
 ---
-Your commercial vehicles need to be registered under your company name before you can legally rent them to customers.
+Your commercial vehicles need to be registered under your company name before you can legally rent them to customers. You'll need to bring a completed application to your appointment. 
 
 - - -
 
 ### Application Requirements
 
-* [An appointment](https://telegov.njportal.com/njmvc/AppointmentWizard) with the New Jersey Motor Vehicle Commission
 * Vehicle title
 * Driver’s license
 *  `Motor Vehicle Commission Entity ID Number|mvc-entity-id` 
