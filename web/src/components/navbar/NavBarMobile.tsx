@@ -42,7 +42,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
   return (
     <>
       <div
-        className={`left-nav-overlay ${sidebarIsOpen ? "is-visible" : ""}`}
+        className={`right-nav-overlay ${sidebarIsOpen ? "is-visible" : ""}`}
         aria-hidden="true"
         onClick={(): void => {
           analytics.event.mobile_menu.click_outside.close_mobile_menu();
@@ -55,8 +55,15 @@ export const NavBarMobile = (props: Props): ReactElement => {
           props.scrolled ? "scrolled scrolled-transition bg-white" : ""
         }`}
       >
+        <div className={`usa-logo ${props.scrolled ? "bg-white" : ""}`}>
+          {props.showSidebar ? (
+            <div className="text-bold">{Config.navigationDefaults.taskPageNavBarHeading}</div>
+          ) : (
+            <NavigatorLogo />
+          )}
+        </div>
         <button
-          className="left-nav-menu-button radius-0"
+          className="right-nav-menu-button radius-0"
           data-testid="nav-menu-open"
           aria-label="open menu"
           onClick={(): void => {
@@ -66,18 +73,12 @@ export const NavBarMobile = (props: Props): ReactElement => {
         >
           <Icon className="font-sans-xl">menu</Icon>
         </button>
-        <div className={`usa-logo ${props.scrolled ? "bg-white" : ""}`}>
-          {props.showSidebar ? (
-            <div className="text-bold">{Config.navigationDefaults.taskPageNavBarHeading}</div>
-          ) : (
-            <NavigatorLogo />
-          )}
-        </div>
+        
       </nav>
       <FocusTrappedSidebar close={close} isOpen={sidebarIsOpen}>
         <nav
           aria-label="Secondary"
-          className={`left-nav ${sidebarIsOpen ? "is-visible" : "is-hidden"} `}
+          className={`right-nav ${sidebarIsOpen ? "is-visible" : "is-hidden"} `}
           data-testid="nav-sidebar-menu"
         >
           <h4 className={`margin-0 flex flex-align-center fdr fjc space-between text-${textColor}`}>
@@ -88,7 +89,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
               </div>
             )}
             <button
-              className="left-nav-close fac fdr fjc"
+              className="right-nav-close fac fdr fjc"
               aria-label="close menu"
               onClick={(): void => {
                 analytics.event.mobile_menu_close_button.click.close_mobile_menu();
