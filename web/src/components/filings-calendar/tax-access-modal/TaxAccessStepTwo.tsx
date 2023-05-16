@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { TaxAccessModalBody } from "@/components/filings-calendar/tax-access-modal/TaxAccessModalBody";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
@@ -29,8 +30,10 @@ interface Props {
   isOpen: boolean;
   close: () => void;
   onSuccess: () => void;
+  moveToPrevStep: () => void;
 }
-export const TaxFilingLookupModal = (props: Props): ReactElement => {
+
+export const TaxAccessStepTwo = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { userData, update } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
@@ -46,10 +49,16 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
     state: formContextState,
   } = useFormContextHelper(createReducedFieldStates(fields));
 
+  useMountEffectWhenDefined(() => {
+    if (userData) {
+      setProfileData(userData.profileData);
+    }
+  }, userData);
+
   const errorMessages: Partial<Record<ProfileFields, string>> = {
-    businessName: Config.taxCalendar.modalBusinessFieldErrorName,
-    responsibleOwnerName: Config.taxCalendar.modalResponsibleOwnerFieldErrorName,
-    taxId: Config.taxCalendar.modalTaxFieldErrorName,
+    businessName: Config.taxAccess.modalBusinessFieldErrorName,
+    responsibleOwnerName: Config.taxAccess.modalResponsibleOwnerFieldErrorName,
+    taxId: Config.taxAccess.modalTaxFieldErrorName,
   };
 
   const displayBusinessName = (): boolean => {
@@ -66,10 +75,10 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
 
   const responsibleOwnerOrBusinessNameError = (): string => {
     if (displayBusinessName()) {
-      return Config.taxCalendar.modalBusinessFieldErrorName;
+      return Config.taxAccess.modalBusinessFieldErrorName;
     }
     if (displayResponsibleOwnerName()) {
-      return Config.taxCalendar.modalResponsibleOwnerFieldErrorName;
+      return Config.taxAccess.modalResponsibleOwnerFieldErrorName;
     }
     return "";
   };
@@ -78,7 +87,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
     if (userData?.taxFilingData.errorField === "businessName" && apiFailed === "FAILED") {
       return (
         <>
-          {Config.taxCalendar.failedErrorMessageHeader}
+          {Config.taxAccess.failedErrorMessageHeader}
           <ul>
             <li>{responsibleOwnerOrBusinessNameError()}</li>
           </ul>
@@ -87,23 +96,21 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
     } else if (apiFailed === "FAILED") {
       return (
         <>
-          {Config.taxCalendar.failedErrorMessageHeader}
+          {Config.taxAccess.failedErrorMessageHeader}
           <ul>
             <li>{responsibleOwnerOrBusinessNameError()}</li>
-            <li>{Config.taxCalendar.modalTaxFieldErrorName}</li>
+            <li>{Config.taxAccess.modalTaxFieldErrorName}</li>
           </ul>
         </>
       );
     } else {
-      return <Content>{Config.taxCalendar.failedUnknownMarkdown}</Content>;
+      return <Content>{Config.taxAccess.failedUnknownMarkdown}</Content>;
     }
   };
 
   FormFuncWrapper(
     async () => {
-      if (!userData) {
-        return;
-      }
+      if (!userData) return;
 
       setIsLoading(true);
       let userDataToSet: UserData;
@@ -189,12 +196,6 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
     () => analytics.event.tax_calendar_modal.submit.tax_calendar_modal_validation_error()
   );
 
-  useMountEffectWhenDefined(() => {
-    if (userData) {
-      setProfileData(userData.profileData);
-    }
-  }, userData);
-
   const onClose = (): void => {
     if (!userData) {
       return;
@@ -205,6 +206,8 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
     setOnSubmitClicked(false);
     formContextState.reducer({ type: FieldStateActionKind.RESET });
   };
+
+  if (profileData.legalStructureId === undefined) return <></>;
 
   return (
     <profileFormContext.Provider value={formContextState}>
@@ -225,17 +228,18 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
         <ModalTwoButton
           isOpen={props.isOpen}
           close={onClose}
-          title={Config.taxCalendar.modalHeader}
-          primaryButtonText={Config.taxCalendar.modalNextButton}
+          title={Config.taxAccess.modalHeader}
+          primaryButtonText={Config.taxAccess.stepTwoNextButton}
           primaryButtonOnClick={(): void => {
             onSubmit();
             setOnSubmitClicked(true);
           }}
-          secondaryButtonText={Config.taxCalendar.modalCancelButton}
+          secondaryButtonText={Config.taxAccess.stepTwoBackButton}
+          secondaryButtonOnClick={props.moveToPrevStep}
         >
           {!isValid() && onSubmitClicked && !apiFailed && (
             <Alert variant={"error"}>
-              {Config.taxCalendar.modalErrorHeader}
+              {Config.taxAccess.stepTwoErrorBanner}
               <ul>
                 {fields.map((i) => {
                   if (formContextState.fieldStates[i].invalid && errorMessages[i]) {
@@ -248,20 +252,18 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
 
           {apiFailed && <Alert variant={"error"}> {errorAlert()}</Alert>}
 
-          <div className="margin-bottom-4">
-            <Content>{Config.taxCalendar.modalBody}</Content>
-          </div>
+          <TaxAccessModalBody isStepOne={false} />
 
           {displayBusinessName() && (
             <WithErrorBar hasError={!!formContextState.fieldStates.businessName?.invalid} type="ALWAYS">
               <FieldLabelModal
                 fieldName="businessName"
                 overrides={{
-                  header: Config.taxCalendar.modalBusinessFieldHeader,
-                  description: Config.taxCalendar.modalBusinessFieldMarkdown,
+                  header: Config.taxAccess.modalBusinessFieldHeader,
+                  description: Config.taxAccess.modalBusinessFieldMarkdown,
                 }}
               />
-              <ProfileBusinessName validationText={Config.taxCalendar.failedBusinessFieldHelper} required />
+              <ProfileBusinessName validationText={Config.taxAccess.failedBusinessFieldHelper} required />
             </WithErrorBar>
           )}
 
@@ -273,12 +275,12 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
               <FieldLabelModal
                 fieldName="responsibleOwnerName"
                 overrides={{
-                  header: Config.taxCalendar.modalBusinessOwnerName,
-                  description: Config.taxCalendar.modalBusinessOwnerDescription,
+                  header: Config.taxAccess.modalBusinessOwnerName,
+                  description: Config.taxAccess.modalBusinessOwnerDescription,
                 }}
               />
               <ProfileResponsibleOwnerName
-                validationText={Config.taxCalendar.failedResponsibleOwnerFieldHelper}
+                validationText={Config.taxAccess.failedResponsibleOwnerFieldHelper}
                 required
               />
             </WithErrorBar>
@@ -289,8 +291,8 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
               <FieldLabelModal
                 fieldName="taxId"
                 overrides={{
-                  header: Config.taxCalendar.modalTaxIdHeader,
-                  description: Config.taxCalendar.modalTaxIdMarkdown,
+                  header: Config.taxAccess.modalTaxIdHeader,
+                  description: Config.taxAccess.modalTaxIdMarkdown,
                   postDescription: LookupLegalStructureById(
                     userData?.profileData.legalStructureId
                   ).elementsToDisplay.has("taxIdDisclaimer")
@@ -299,7 +301,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
                 }}
               />
             </div>
-            <OnboardingTaxId validationText={Config.taxCalendar.failedTaxIdHelper} required />
+            <OnboardingTaxId validationText={Config.taxAccess.failedTaxIdHelper} required />
           </WithErrorBar>
         </ModalTwoButton>
       </ProfileDataContext.Provider>

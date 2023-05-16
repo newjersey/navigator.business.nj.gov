@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
+import { TaxAccessModal } from "@/components/filings-calendar/tax-access-modal/TaxAccessModal";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
-import { TaxFilingLookupModal } from "@/components/TaxFilingLookupModal";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { postTaxFilingsLookup } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -110,7 +110,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
     } else {
       return (
         <>
-          <TaxFilingLookupModal
+          <TaxAccessModal
             isOpen={showTaxModal}
             close={(): void => setShowTaxModal(false)}
             onSuccess={(): void => {

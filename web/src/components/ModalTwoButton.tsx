@@ -12,6 +12,7 @@ interface Props {
   primaryButtonText: string;
   primaryButtonOnClick: () => void;
   secondaryButtonText: string;
+  secondaryButtonOnClick?: () => void;
   maxWidth?: Breakpoint;
   isLoading?: boolean;
 }
@@ -24,7 +25,11 @@ export const ModalTwoButton = (props: Props): ReactElement => {
     >
       <div className="mobile-lg:margin-left-auto display-flex flex-column-reverse mobile-lg:flex-row">
         <div className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-1">
-          <SecondaryButton isColor="primary" dataTestId="modal-button-secondary" onClick={props.close}>
+          <SecondaryButton
+            isColor="primary"
+            dataTestId="modal-button-secondary"
+            onClick={props.secondaryButtonOnClick ?? props.close}
+          >
             {props.secondaryButtonText}
           </SecondaryButton>
         </div>
