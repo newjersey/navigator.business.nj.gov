@@ -252,7 +252,6 @@ const OnboardingPage = (props: Props): ReactElement => {
           liquorLicense: profileData.liquorLicense,
           municipality: profileData.municipality,
           businessPersona: profileData.businessPersona,
-          legalStructureId: profileData.legalStructureId,
           requiresCpa: profileData.requiresCpa,
           providesStaffingService: profileData.providesStaffingService,
           certifiedInteriorDesigner: profileData.certifiedInteriorDesigner,

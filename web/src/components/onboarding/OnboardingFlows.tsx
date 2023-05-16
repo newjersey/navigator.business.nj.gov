@@ -4,7 +4,6 @@ import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBus
 import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
-import { OnboardingLegalStructureDropdown } from "@/components/onboarding/OnboardingLegalStructureDropDown";
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
 import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
@@ -27,12 +26,6 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
         component: (
           <>
             <OnboardingBusinessPersona<OnboardingErrors> errorTypes={["REQUIRED_EXISTING_BUSINESS"]} />
-            <div className="padding-top-3">
-              <FieldLabelDescriptionOnly fieldName="legalStructureId" />
-              <OnboardingLegalStructureDropdown<OnboardingErrors>
-                errorTypes={["REQUIRED_REVIEW_INFO_BELOW"]}
-              />
-            </div>
             <div className="padding-top-3">
               <FieldLabelDescriptionOnly fieldName="sectorId" />
               <OnboardingSectors<OnboardingErrors> errorTypes={["REQUIRED_REVIEW_INFO_BELOW"]} />

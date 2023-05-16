@@ -9,7 +9,7 @@ export const isMunicipalityRequired = (params: {
   operatingPhase: OperatingPhaseId;
 }): boolean => {
   if (!params.legalStructureId) {
-    return true;
+    return false;
   }
 
   if (LookupLegalStructureById(params.legalStructureId).requiresPublicFiling) {

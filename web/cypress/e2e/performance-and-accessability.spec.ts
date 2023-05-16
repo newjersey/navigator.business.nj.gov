@@ -116,7 +116,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         cy.url().should("include", "onboarding?page=1");
 
         onOnboardingPage.selectBusinessPersona("OWNING");
-        onOnboardingPage.selectLegalStructureDropDown("General Partnership");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -128,7 +127,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         cy.url().should("include", "onboarding?page=1");
 
         onOnboardingPage.selectBusinessPersona("OWNING");
-        onOnboardingPage.selectLegalStructureDropDown("General Partnership");
         onOnboardingPage.selectIndustrySector("clean-energy");
 
         onOnboardingPage.clickNext();
@@ -145,7 +143,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         cy.url().should("include", "onboarding?page=1");
 
         onOnboardingPage.selectBusinessPersona("OWNING");
-        onOnboardingPage.selectLegalStructureDropDown("General Partnership");
         onOnboardingPage.selectIndustrySector("clean-energy");
         onOnboardingPage.clickNext();
 

@@ -182,15 +182,6 @@ export class OnboardingPage {
     this.getLegalStructure(companyType).click({ force: true });
   }
 
-  getLegalStructureDropDown() {
-    return cy.get("#mui-component-select-legal-structure");
-  }
-
-  selectLegalStructureDropDown(companyType: string) {
-    this.getLegalStructureDropDown().click();
-    cy.get('[role="listbox"]').contains(companyType).click({ force: true });
-  }
-
   selectLiquorLicense(radio: boolean) {
     this.getLiquorLicense(radio).check();
   }

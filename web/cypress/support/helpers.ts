@@ -369,7 +369,6 @@ export const completeNewBusinessOnboarding = ({
 
 export const completeExistingBusinessOnboarding = ({
   sectorId = randomElementFromArray(arrayOfSectors).id,
-  legalStructureId = randomInt() % 2 ? "limited-partnership" : "sole-proprietorship",
   fullName = `Michael Smith ${randomInt()}`,
   email = `MichaelSmith${randomInt()}@gmail.com`,
   isNewsletterChecked = false,
@@ -382,14 +381,6 @@ export const completeExistingBusinessOnboarding = ({
   onOnboardingPage.getBusinessPersona("OWNING").should("be.checked");
   onOnboardingPage.getBusinessPersona("STARTING").should("not.be.checked");
   onOnboardingPage.getBusinessPersona("FOREIGN").should("not.be.checked");
-  const companyType = LookupLegalStructureById(legalStructureId);
-  onOnboardingPage.selectLegalStructureDropDown(companyType.name);
-  onOnboardingPage
-    .getLegalStructureDropDown()
-    .parent()
-    .find("input")
-    .invoke("prop", "value")
-    .should("contain", legalStructureId);
 
   onOnboardingPage.selectIndustrySector(sectorId);
   onOnboardingPage
