@@ -32,7 +32,7 @@ export const cmsCollections = [
   },
   {
     label: "🟪 TAXES & FILINGS",
-    children: ["Taxes Filings - All"],
+    children: ["Taxes Filings - All", "Tax Access Modal Config"],
   },
   {
     label: "🟥 DASHBOARD",

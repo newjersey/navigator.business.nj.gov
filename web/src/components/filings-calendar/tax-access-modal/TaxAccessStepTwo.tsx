@@ -16,7 +16,7 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { createReducedFieldStates, ProfileFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   createEmptyProfileData,
   LookupLegalStructureById,
@@ -31,16 +31,22 @@ interface Props {
   close: () => void;
   onSuccess: () => void;
   moveToPrevStep: () => void;
+  CMS_ONLY_fakeError?: "NONE" | "API" | "UNKNOWN"; // for CMS only
+  CMS_ONLY_fakeUserData?: UserData; // for CMS only
 }
 
 export const TaxAccessStepTwo = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { userData, update } = useUserData();
+  const userDataFromHook = useUserData();
+  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
+  const update = userDataFromHook.update;
+
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [apiFailed, setOnAPIfailed] = useState<undefined | "FAILED" | "UNKNOWN">(undefined);
   const [onSubmitClicked, setOnSubmitClicked] = useState<boolean>(false);
   const fields: ProfileFields[] = ["businessName", "taxId", "responsibleOwnerName"];
+  const has_CMS_ONLY_fakeError = props.CMS_ONLY_fakeError && props.CMS_ONLY_fakeError !== "NONE";
 
   const {
     FormFuncWrapper,
@@ -54,6 +60,23 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
       setProfileData(userData.profileData);
     }
   }, userData);
+
+  useMountEffect(() => {
+    if (has_CMS_ONLY_fakeError) {
+      formContextState.reducer({
+        type: FieldStateActionKind.VALIDATION,
+        payload: { field: "businessName", invalid: true },
+      });
+      formContextState.reducer({
+        type: FieldStateActionKind.VALIDATION,
+        payload: { field: "taxId", invalid: true },
+      });
+      formContextState.reducer({
+        type: FieldStateActionKind.VALIDATION,
+        payload: { field: "responsibleOwnerName", invalid: true },
+      });
+    }
+  });
 
   const errorMessages: Partial<Record<ProfileFields, string>> = {
     businessName: Config.taxAccess.modalBusinessFieldErrorName,
@@ -86,7 +109,9 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
   };
 
   const errorAlert = (): ReactElement => {
-    if (userData?.taxFilingData.errorField === "businessName" && apiFailed === "FAILED") {
+    const errorApiFailed = apiFailed === "FAILED" || props.CMS_ONLY_fakeError === "API";
+
+    if (userData?.taxFilingData.errorField === "businessName" && errorApiFailed) {
       return (
         <>
           {Config.taxAccess.failedErrorMessageHeader}
@@ -95,7 +120,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
           </ul>
         </>
       );
-    } else if (apiFailed === "FAILED") {
+    } else if (errorApiFailed) {
       return (
         <>
           {Config.taxAccess.failedErrorMessageHeader}
@@ -254,7 +279,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
             </Alert>
           )}
 
-          {apiFailed && <Alert variant={"error"}> {errorAlert()}</Alert>}
+          {(apiFailed || has_CMS_ONLY_fakeError) && <Alert variant={"error"}> {errorAlert()}</Alert>}
 
           <TaxAccessModalBody isStepOne={false} showHeader={canMoveToPrevStep} />
 

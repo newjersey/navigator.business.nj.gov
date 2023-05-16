@@ -20,6 +20,7 @@ import * as NexusDbaFormation from "@businessnjgovnavigator/content/fieldConfig/
 import * as NexusNameSearch from "@businessnjgovnavigator/content/fieldConfig/nexus-name-search.json";
 import * as PageNotFoundError from "@businessnjgovnavigator/content/fieldConfig/page-not-found-error.json";
 import * as Profile from "@businessnjgovnavigator/content/fieldConfig/profile.json";
+import * as TaxAccess from "@businessnjgovnavigator/content/fieldConfig/tax-access-modal.json";
 import * as Tax from "@businessnjgovnavigator/content/fieldConfig/tax.json";
 
 import { merge } from "lodash";
@@ -50,6 +51,7 @@ const merged = JSON.parse(
       DashboardTabs,
       DashboardModals,
       BusinessFormation,
+      TaxAccess,
       BusinessStructureTask
     )
   )
@@ -77,6 +79,7 @@ export type ConfigType = typeof ConfigOriginal &
   typeof DashboardTabs &
   typeof BusinessFormation &
   typeof BusinessStructureTask &
+  typeof TaxAccess &
   typeof DashboardSnackbars;
 
 export const getMergedConfig = (): ConfigType => {
@@ -103,6 +106,7 @@ export const getMergedConfig = (): ConfigType => {
     DashboardTabs,
     DashboardCalendar,
     BusinessFormation,
+    TaxAccess,
     BusinessStructureTask
   );
 };

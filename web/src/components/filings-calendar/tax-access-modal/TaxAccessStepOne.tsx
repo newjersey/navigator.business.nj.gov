@@ -47,8 +47,8 @@ export const TaxAccessStepOne = (props: Props): ReactElement => {
   });
 
   const onClose = (): void => {
-    if (!userData) return;
     props.close();
+    if (!userData) return;
     setProfileData(userData.profileData);
     formContextState.reducer({ type: FieldStateActionKind.RESET });
   };
