@@ -2599,6 +2599,7 @@ collections:
               - { label: Step 1 Next Button, name: stepOneNextButton, widget: text }
               - { label: Step 2 Next Button, name: stepTwoNextButton, widget: text }
               - { label: Step 2 Back Button, name: stepTwoBackButton, widget: text }
+              - { label: Step 2 Cancel Button, name: stepTwoCancelButton, widget: text }
               - { label: Step 1 Error Banner, name: stepOneErrorBanner, widget: text }
               - { label: Step 2 Error Banner, name: stepTwoErrorBanner, widget: text }
               - { label: BusinessName Field Header, name: modalBusinessFieldHeader, widget: markdown }

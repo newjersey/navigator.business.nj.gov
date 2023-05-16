@@ -61,6 +61,8 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
     taxId: Config.taxAccess.modalTaxFieldErrorName,
   };
 
+  const canMoveToPrevStep = userData?.profileData.businessPersona === "OWNING";
+
   const displayBusinessName = (): boolean => {
     return LookupLegalStructureById(userData?.profileData.legalStructureId).elementsToDisplay.has(
       "businessName"
@@ -234,8 +236,10 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
             onSubmit();
             setOnSubmitClicked(true);
           }}
-          secondaryButtonText={Config.taxAccess.stepTwoBackButton}
-          secondaryButtonOnClick={props.moveToPrevStep}
+          secondaryButtonText={
+            canMoveToPrevStep ? Config.taxAccess.stepTwoBackButton : Config.taxAccess.stepTwoCancelButton
+          }
+          secondaryButtonOnClick={canMoveToPrevStep ? props.moveToPrevStep : onClose}
         >
           {!isValid() && onSubmitClicked && !apiFailed && (
             <Alert variant={"error"}>
@@ -252,7 +256,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
 
           {apiFailed && <Alert variant={"error"}> {errorAlert()}</Alert>}
 
-          <TaxAccessModalBody isStepOne={false} />
+          <TaxAccessModalBody isStepOne={false} showHeader={canMoveToPrevStep} />
 
           {displayBusinessName() && (
             <WithErrorBar hasError={!!formContextState.fieldStates.businessName?.invalid} type="ALWAYS">

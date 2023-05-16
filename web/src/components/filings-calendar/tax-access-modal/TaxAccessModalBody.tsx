@@ -4,6 +4,7 @@ import { ReactElement } from "react";
 
 interface Props {
   isStepOne: boolean;
+  showHeader: boolean;
 }
 
 export const TaxAccessModalBody = (props: Props): ReactElement => {
@@ -16,7 +17,7 @@ export const TaxAccessModalBody = (props: Props): ReactElement => {
   return (
     <>
       <div className="margin-y-3">
-        <h2 className="h4-styling">{getHeader()}</h2>
+        {props.showHeader && <h2 className="h4-styling">{getHeader()}</h2>}
         <Content>{Config.taxAccess.body}</Content>
       </div>
       <hr className="margin-y-4" />
