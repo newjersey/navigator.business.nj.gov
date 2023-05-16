@@ -7,6 +7,7 @@ import { ReactElement, useContext } from "react";
 
 interface Props {
   fieldName: ProfileContentField;
+  bold?: boolean;
   isAltDescriptionDisplayed?: boolean;
 }
 
@@ -26,7 +27,9 @@ export const FieldLabelDescriptionOnly = (props: Props): ReactElement => {
 
   return (
     <>
-      <Content>{props.isAltDescriptionDisplayed ? altDescription : description}</Content>
+      <Content className={props.bold ? "text-bold" : ""}>
+        {props.isAltDescriptionDisplayed ? altDescription : description}
+      </Content>
     </>
   );
 };

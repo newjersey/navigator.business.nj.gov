@@ -26,6 +26,10 @@ export const OnboardingLegalStructureDropdown = <T,>(props: Props<T>): ReactElem
 
   const isValid = (): boolean => state.profileData.legalStructureId !== undefined;
 
+  const performValidation = (): void => {
+    Validate(!isValid());
+  };
+
   RegisterForOnSubmit(isValid);
 
   const LegalStructuresOrdered: LegalStructure[] = orderBy(
@@ -74,6 +78,7 @@ export const OnboardingLegalStructureDropdown = <T,>(props: Props<T>): ReactElem
             displayEmpty
             value={state.profileData.legalStructureId || ""}
             onChange={handleLegalStructure}
+            onBlur={performValidation}
             name="legal-structure"
             inputProps={{
               "aria-label": "Business structure",
