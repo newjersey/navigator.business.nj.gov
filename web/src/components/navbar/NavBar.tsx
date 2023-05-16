@@ -1,5 +1,5 @@
 import { NavBarDesktop } from "@/components/navbar/NavBarDesktop";
-import { NavBarLanding } from "@/components/navbar/NavBarLanding";
+import { NavBarLandingDesktop } from "@/components/navbar/NavBarLandingDesktop";
 import { NavBarLogoOnly } from "@/components/navbar/NavBarLogoOnly";
 import { NavBarMobile } from "@/components/navbar/NavBarMobile";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -37,8 +37,8 @@ export const NavBar = (props: Props): ReactElement => {
 
   if (props.logoOnly) {
     return <NavBarLogoOnly />;
-  } else if (props.landingPage) {
-    return <NavBarLanding />;
+  } else if (props.landingPage && isLargeScreen) {
+    return <NavBarLandingDesktop />;
   } else if (isLargeScreen) {
     return <NavBarDesktop />;
   } else {
@@ -49,8 +49,9 @@ export const NavBar = (props: Props): ReactElement => {
           task={props.task}
           showSidebar={props.showSidebar}
           hideMiniRoadmap={props.hideMiniRoadmap}
+          isLanding={props.landingPage}
         />
-        <div className={!isLargeScreen && scrolled ? "padding-top-6" : ""} />
+        <div className={scrolled ? "padding-top-6" : ""} />
       </>
     );
   }

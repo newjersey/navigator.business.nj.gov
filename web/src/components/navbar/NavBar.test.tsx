@@ -333,25 +333,51 @@ describe("<NavBar />", () => {
       useMockRoadmap({});
     });
 
-    const renderMobileTaskNav = (isAuthenticated = IsAuthenticated.TRUE): void => {
+    const renderMobileTaskNav = (navBarSettings: {
+      isLanding?: boolean;
+      isAuthenticated?: IsAuthenticated;
+    }): void => {
       setLargeScreen(false);
-
       render(
-        withAuth(<NavBar landingPage={false} task={generateTask({})} showSidebar={true} />, {
-          isAuthenticated,
-        })
+        withAuth(
+          <NavBar landingPage={navBarSettings.isLanding} task={generateTask({})} showSidebar={true} />,
+          { isAuthenticated: navBarSettings.isAuthenticated ?? IsAuthenticated.FALSE }
+        )
       );
       fireEvent.click(screen.getByTestId("nav-menu-open"));
     };
 
+    describe("landing page mobile navbar", () => {
+      it("doesn't display the account section", () => {
+        useMockUserData({});
+        renderMobileTaskNav({ isLanding: true });
+        expect(screen.queryByText(Config.navigationDefaults.navBarGuestText)).not.toBeInTheDocument();
+      });
+
+      it("doesn't display the show business profile button", () => {
+        useMockUserData({});
+        renderMobileTaskNav({ isLanding: true });
+        expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
+      });
+
+      it("displays the get started text instead of register for user registration", () => {
+        useMockUserData({});
+        renderMobileTaskNav({ isLanding: true });
+        expect(screen.getByText(Config.navigationDefaults.registerButton)).toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)
+        ).not.toBeInTheDocument();
+      });
+    });
+
     describe("authenticated mobile navbar - renders roadmap within drawer", () => {
       displaysUserNameOrEmail(() => {
-        return renderMobileTaskNav(IsAuthenticated.TRUE);
+        return renderMobileTaskNav({ isAuthenticated: IsAuthenticated.TRUE });
       });
 
       it("displays user profile links", async () => {
         useMockUserData({ user: generateUser({ name: "Grace Hopper" }) });
-        renderMobileTaskNav(IsAuthenticated.TRUE);
+        renderMobileTaskNav({ isAuthenticated: IsAuthenticated.TRUE });
 
         expect(screen.queryByText(Config.navigationDefaults.myNJAccountText)).toBeVisible();
         expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).toBeVisible();
@@ -361,7 +387,7 @@ describe("<NavBar />", () => {
     describe("guest mode mobile navbar - renders roadmap within drawer", () => {
       it("displays user registration links", async () => {
         useMockUserData({});
-        renderMobileTaskNav(IsAuthenticated.FALSE);
+        renderMobileTaskNav({ isLanding: false, isAuthenticated: IsAuthenticated.FALSE });
 
         expect(screen.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)).toBeVisible();
       });
@@ -413,7 +439,7 @@ describe("<NavBar />", () => {
             ],
           })
         );
-        renderMobileTaskNav();
+        renderMobileTaskNav({});
         expect(screen.getByText("step1")).toBeInTheDocument();
         expect(screen.getByText(Config.sectionHeaders.PLAN)).toBeInTheDocument();
         expect(screen.getByText(Config.sectionHeaders.START)).toBeInTheDocument();
@@ -451,7 +477,7 @@ describe("<NavBar />", () => {
             tasks: [generateTask({ name: "task1", stepNumber: 1 })],
           })
         );
-        renderMobileTaskNav();
+        renderMobileTaskNav({});
         fireEvent.click(screen.getByText("step1"));
         fireEvent.click(screen.getByText("task1"));
 
