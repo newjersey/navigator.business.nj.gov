@@ -5,7 +5,7 @@ urlSlug: "precious-metals"
 webflowName: "Precious Metals"
 filename: "precious-metals"
 callToActionLink: "https://www.businesslicenses.com/Licenses/NJ/"
-issuingAgency: "Department of Law and Public Safety"
+agencyId: law-public-safety
 divisionPhone: "(732) 815-4840"
 webflowIndustry: "Precious Metals"
 licenseCertificationClassification: "CONTACT"

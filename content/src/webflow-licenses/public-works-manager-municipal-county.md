@@ -5,7 +5,7 @@ urlSlug: "public-works-manager-municipal-county"
 webflowName: "Public Works Manager (Municipal/County)"
 filename: "public-works-manager-municipal-county"
 callToActionLink: "http://state.nj.us/dca/divisions/dlgs/programs/certification.html"
-issuingAgency: "Department of Community Affairs"
+agencyId: nj-community-affairs
 divisionPhone: "(609) 292-4656"
 webflowIndustry: "Public Works Manager"
 licenseCertificationClassification: "CERTIFICATION"

@@ -5,7 +5,7 @@ urlSlug: "health-benefit"
 webflowName: "Health Benefit"
 filename: "health-benefit"
 callToActionLink: "https://www.njconsumeraffairs.gov/bme/Pages/applications.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: ""
 webflowIndustry: "Health Benefit"
 licenseCertificationClassification: "CONTACT"

@@ -3,14 +3,13 @@ filename: accounting-license
 urlSlug: accounting-license
 name: Register Your Accounting Firm
 webflowName: "Accountant: Public Accounting Firm"
-industryIntegration: New Jersey Division of Consumer Affairs
-issuingAgency: New Jersey Division of Consumer Affairs' Board of Accountancy
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Board of Accountancy
 industryId: certified-public-accountant
 callToActionText: Register My Firm
 callToActionLink: https://www.njconsumeraffairs.gov/acc/Pages/applications.aspx
 webflowIndustry: ""
 licenseCertificationClassification: ""
-issuingDivision: NJ State Board of Accountancy
 divisionPhone: (973) 504-6380
 id: license-accounting
 webflowId: 5f7729d28aa6e3de76f1e60c

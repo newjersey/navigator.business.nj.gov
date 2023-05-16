@@ -5,7 +5,7 @@ name: Register Your Vehicle with the U.S. Department of Transportation
 id: trucking-usdot
 callToActionLink: https://portal.fmcsa.dot.gov/UrsRegistrationWizard/
 callToActionText: Register My Vehicle with USDoT
-issuingAgency: U.S. Department of Transportation
+agencyAdditionalContext: U.S. Department of Transportation
 ---
 
 Any commercial vehicle crossing state lines must register with the U.S. Department of Transportation (USDoT) to obtain a registration number.
@@ -23,9 +23,6 @@ Any commercial vehicle crossing state lines must register with the U.S. Departme
 - `Dun and Bradstreet (DUNS) number|duns` , if your company has one
 - Names and titles of the company officers
 - A `process agent|process-agent`, already filed with the Federal Motor Carrier Safety Administration (FMCSA)
-
-
-
 
 :::infoAlert
 

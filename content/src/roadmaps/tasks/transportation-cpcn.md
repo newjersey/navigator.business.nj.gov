@@ -5,7 +5,7 @@ name: File a Certificate of Public Convenience and Necessity
 id: transportation-cpcn
 callToActionLink: https://www.nj.gov/mvc/pdf/business/cpcn.pdf
 callToActionText: File My Certificate
-issuingAgency: New Jersey Motor Vehicle Commission
+agencyId: nj-motor-vehicle
 ---
 
 You need to file a Certificate of Public Convenience and Necessity to register your commercial vehicle.

@@ -5,7 +5,7 @@ urlSlug: "scrap-yard"
 webflowName: "Scrap Yard"
 filename: "scrap-yard"
 callToActionLink: ""
-issuingAgency: "Check with Local Municipality"
+agencyId: municipal-clerk
 divisionPhone: ""
 webflowIndustry: "Scrap Yard"
 licenseCertificationClassification: "LICENSE"

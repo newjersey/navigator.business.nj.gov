@@ -4,10 +4,10 @@ name: Apply for an Employment Agency License
 id: search-licenses
 callToActionLink: https://www.njconsumeraffairs.gov/epservices
 callToActionText: Apply for an Employment Agency License
-issuingAgency: New Jersey Division of Consumer Affairs Employment and Personnel Services
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Employment and Personnel Services, Regulated Business Unit
 webflowId: "5f77298a71c49e345d913b84"
 webflowName: "Employment Agency"
-issuingDivision: "Regulated Business Unit"
 divisionPhone: "(973) 504-6370"
 webflowIndustry: "Employment Agency"
 summaryDescriptionMd: >

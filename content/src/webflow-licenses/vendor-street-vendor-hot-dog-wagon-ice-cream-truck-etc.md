@@ -5,7 +5,7 @@ urlSlug: "vendor-street-vendor-hot-dog-wagon-ice-cream-truck-etc"
 name: "Street Vendor (Hot Dog Wagon, Ice Cream Truck, etc.)"
 filename: "vendor-street-vendor-hot-dog-wagon-ice-cream-truck-etc"
 callToActionLink: ""
-issuingAgency: "Check with Local Municipality"
+agencyId: municipal-clerk
 divisionPhone: ""
 industryId: "Vendor"
 licenseCertificationClassification: "CONTACT"

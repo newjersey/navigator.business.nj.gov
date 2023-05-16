@@ -5,7 +5,7 @@ urlSlug: "orthotics-certified"
 webflowName: "Orthotics-Certified"
 filename: "orthotics-certified"
 callToActionLink: "http://njconsumeraffairs.gov/orth"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6445"
 webflowIndustry: "Orthotics"
 licenseCertificationClassification: "REGISTRATION/LICENSE"

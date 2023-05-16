@@ -5,7 +5,7 @@ urlSlug: "security-alarms"
 webflowName: "Security Alarms"
 filename: "security-alarms"
 callToActionLink: "https://www.njconsumeraffairs.gov/fbl/Pages/applications.aspx"
-issuingAgency: "Department of Law and Public Safety"
+agencyId: law-public-safety
 divisionPhone: "(973) 504-6245"
 webflowIndustry: "Security Alarm"
 licenseCertificationClassification: "LICENSE/REGULATIONS"

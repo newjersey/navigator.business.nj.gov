@@ -6,6 +6,7 @@ id: annual-license-cannabis
 callToActionLink: https://nj-crc-public.nls.egov.com/#!/nj-crc/register
 callToActionText: Apply for My Annual Cannabis License
 required: true
-issuingAgency: Cannabis Regulatory Commission
+agencyId: nj-cannabis-commission
 ---
+
 This task intentionally left blank. Text here will not be displayed. test

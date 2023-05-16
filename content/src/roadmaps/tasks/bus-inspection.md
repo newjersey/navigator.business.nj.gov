@@ -5,15 +5,16 @@ name: Inspect and Register Your Vehicles
 id: bus-inspection
 callToActionLink: https://www.state.nj.us/mvc/inspection/schoolbus.htm
 callToActionText: Schedule My Inspection
-issuingAgency: New Jersey Motor Vehicle Commission
+agencyId: nj-motor-vehicle
 formName: ""
 ---
 
-Your commercial buses need to be inspected by the Motor Vehicle Commission’s School Bus Inspection Unit **before** obtaining registration and license plates for them. 
+Your commercial buses need to be inspected by the Motor Vehicle Commission’s School Bus Inspection Unit **before** obtaining registration and license plates for them.
 
 :::infoAlert
 Your vehicle will need to be inspected twice a year.
 :::
+
 ---
 
 ### Inspection Requirements:

@@ -4,14 +4,13 @@ urlSlug: cosmetology-shop-license
 name: Apply for Your Cosmetology Shop License
 webflowName: "Cosmetology: License to Operate a New Shop, Relocate, or to
   Transfer Ownership"
-industryIntegration: NJ Department of Consumer Affairs
 industryId: cosmetology
 callToActionLink: https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx
 webflowIndustry: General Cosmetology
-issuingDivision: Board of Cosmetology and Hairstyling
 divisionPhone: (973) 504-6400
 id: apply-for-shop-license
-issuingAgency: New Jersey Division of Consumer Affairs Board of Cosmetology and Hairstyling
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Board of Cosmetology and Hairstyling
 callToActionText: Apply for My Cosmetology Shop License
 webflowType: business-license
 webflowId: 5f77298fd2749a78af9cf7df

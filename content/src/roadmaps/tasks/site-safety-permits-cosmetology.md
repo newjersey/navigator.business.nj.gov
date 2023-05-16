@@ -4,7 +4,6 @@ name: Obtain Site Safety Permits
 id: certificate-of-occupancy
 callToActionLink: ""
 callToActionText: ""
-issuingAgency: ""
 ---
 
 Cosmetology businesses need to obtain and show site safety permits, such as a Fire Prevention Permit and a `Certificate of Occupancy or Approval|certificate-occupancy` prior to obtaining a shop license.

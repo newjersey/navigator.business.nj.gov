@@ -137,8 +137,8 @@ type TaskGrayMatter = {
   callToActionLink: string;
   callToActionText: string;
   postOnboardingQuestion: string;
-  issuingAgency?: string;
-  issuingDivision?: string;
+  agencyId?: string;
+  agencyAdditionalContext?: string;
   divisionPhone?: string;
   formName?: string;
   requiresLocation?: boolean;
@@ -191,8 +191,8 @@ type WebflowLicenseGrayMatter = {
   name: string;
   callToActionLink: string;
   callToActionText: string;
-  issuingAgency?: string;
-  issuingDivision: string;
+  agencyId?: string;
+  agencyAdditionalContext?: string;
   divisionPhone: string;
   licenseCertificationClassification: string;
   industryId?: string;

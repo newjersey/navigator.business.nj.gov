@@ -5,7 +5,6 @@ name: Your Task Tile Goes Here
 id: task-test
 callToActionLink: https://dev.navigator.business.nj.gov/mgmt/cms#/collections/business-formation-c-corp
 callToActionText: My CTA Button Goes Here
-issuingAgency: This is where the issuing agency goes
 formName: this is where you put the form name/number
 ---
 

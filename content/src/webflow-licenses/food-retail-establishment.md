@@ -5,7 +5,7 @@ urlSlug: "food-retail-establishment"
 webflowName: "Food, Retail Establishment"
 filename: "food-retail-establishment"
 callToActionLink: ""
-issuingAgency: "Contact Your Local Health Department"
+agencyId: local-health
 divisionPhone: ""
 webflowIndustry: "Food Retail"
 licenseCertificationClassification: "CONTACT"

@@ -5,7 +5,8 @@ name: Request a Vehicle Inspection
 id: transportation-inspection
 callToActionLink: https://www.nj.gov/mvc/pdf/inspections/Commercial_Bus_Application.pdf
 callToActionText: Request a Vehicle Inspection
-issuingAgency: New Jersey Motor Vehicle Commission Bus Inspection Unit
+agencyId: nj-motor-vehicle
+agencyAdditionalContext: Bus Inspection Unit
 ---
 
 You must have your commercial vehicle inspected by the New Jersey Motor Vehicle Commission Bus Inspection Unit to register it. Once your application is reviewed, you will be contacted by an inspector to schedule an inspection date.

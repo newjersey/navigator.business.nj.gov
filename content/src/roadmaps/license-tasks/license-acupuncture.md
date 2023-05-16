@@ -3,13 +3,13 @@ filename: acupuncture-license
 urlSlug: acupuncture-license
 name: Apply for an Acupuncturist License, if Applicable
 webflowName: "Acupuncture: Acupuncturist License"
-industryIntegration: New Jersey Division of Consumer Affairs
 industryId: acupuncture
 callToActionLink: https://www.njconsumeraffairs.gov/acu/Pages/applications.aspx
 webflowIndustry: ""
 divisionPhone: (973) 273-8092
 id: license-acupuncture
-issuingAgency: Division of Consumer Affairs Board of Acupuncture
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Board of Acupuncture
 callToActionText: Apply for My License
 webflowType: individual-license
 webflowId: 5f77296edd6a49eae99b6067

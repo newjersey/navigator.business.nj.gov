@@ -31,23 +31,21 @@ export const Authorization = (): ReactElement => {
       <div>
         <>
           {getFormattedBody()}
-          {state.dbaContent.Authorize.issuingAgency || state.dbaContent.Authorize.formName ? (
-            <>
-              <hr className="margin-y-3" />
-              {state.dbaContent.Authorize.issuingAgency ? (
-                <div>
-                  <span className="h5-styling">{`${Config.taskDefaults.issuingAgencyText}: `}</span>
-                  <span className="h6-styling">{state.dbaContent.Authorize.issuingAgency}</span>
-                </div>
-              ) : null}
-              {state.dbaContent.Authorize.formName ? (
-                <div>
-                  <span className="h5-styling">{`${Config.taskDefaults.formNameText}: `}</span>
-                  <span className="h6-styling">{state.dbaContent.Authorize.formName}</span>
-                </div>
-              ) : null}
-            </>
-          ) : null}
+          {(state.dbaContent.Authorize.agencyId || state.dbaContent.Authorize.formName) && (
+            <hr className="margin-y-3" />
+          )}
+          {state.dbaContent.Authorize.agencyId && (
+            <div>
+              <span className="h5-styling">{`${Config.taskDefaults.issuingAgencyText}: `}</span>
+              <span className="h6-styling">{state.dbaContent.Authorize.agencyId}</span>
+            </div>
+          )}
+          {state.dbaContent.Authorize.formName && (
+            <div>
+              <span className="h5-styling">{`${Config.taskDefaults.formNameText}: `}</span>
+              <span className="h6-styling">{state.dbaContent.Authorize.formName}</span>
+            </div>
+          )}
         </>
       </div>
     </div>

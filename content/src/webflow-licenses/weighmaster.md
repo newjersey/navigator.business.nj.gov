@@ -5,7 +5,7 @@ urlSlug: "weighmaster"
 webflowName: "Weighmaster"
 filename: "weighmaster"
 callToActionLink: "https://www.njconsumeraffairs.gov/OWM"
-issuingAgency: "Department of Law and Public Safety"
+agencyId: law-public-safety
 divisionPhone: "(732) 815-4840"
 webflowIndustry: "Weighmaster"
 licenseCertificationClassification: "LICENSE"

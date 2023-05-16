@@ -8,7 +8,8 @@ callToActionLink: https://www.nj.gov/njsp/private-detective/index.shtml
 webflowIndustry: Detective Agency
 divisionPhone: (609) 882-2000
 id: detective-agency-license
-issuingAgency: New Jersey State Police Private Detective Unit
+agencyId: nj-state-police
+agencyAdditionalContext: Private Detective Unit
 callToActionText: Apply for My Agency License
 webflowType: business-license
 webflowId: 5f772960a67e4a21735c0f36

@@ -1,0 +1,92 @@
+{
+  "arrayOfTaskAgencies": [
+    {
+      "id": "nj-consumer-affairs",
+      "name": "NJ Division of Consumer Affairs"
+    },
+    {
+      "id": "nj-taxation",
+      "name": "NJ Department of Taxation"
+    },
+    {
+      "id": "nj-revenue-enterprise-services",
+      "name": "NJ Division of Revenue and Enterprise Services"
+    },
+    {
+      "id": "nj-community-affairs",
+      "name": "NJ Department of Community Affairs"
+    },
+    {
+      "id": "nj-banking-insurance",
+      "name": "NJ Department of Banking and Insurance"
+    },
+    {
+      "id": "nj-health",
+      "name": "NJ Department of Health"
+    },
+    {
+      "id": "nj-state-police",
+      "name": "NJ State Police"
+    },
+    {
+      "id": "nj-children-families",
+      "name": "NJ Department of Children and Families"
+    },
+    {
+      "id": "nj-motor-vehicle",
+      "name": "NJ Motor Vehicle Commission"
+    },
+    {
+      "id": "nj-cannabis-commission",
+      "name": "NJ Cannabis Regulatory Commission"
+    },
+    {
+      "id": "county-clerk",
+      "name": "County Clerk"
+    },
+    {
+      "id": "local-health",
+      "name": "Local Department of Health"
+    },
+    {
+      "id": "municipal-clerk",
+      "name": "Municipal Clerk"
+    },
+    {
+      "id": "nj-human-services",
+      "name": "New Jersey Department of Human Services"
+    },
+    {
+      "id": "njdep",
+      "name": "NJ Department of Environmental Protection (DEP)"
+    },
+    {
+      "id": "health-senior-services",
+      "name": "Department of Health and Senior Services"
+    },
+    {
+      "id": "njdot",
+      "name": "Department of Transportation"
+    },
+    {
+      "id": "njdol",
+      "name": "Department of Labor and Workforce Development"
+    },
+    {
+      "id": "law-public-safety",
+      "name": "Department of Law and Public Safety"
+    },
+    {
+      "id": "agriculture",
+      "name": "Department of Agriculture"
+    },
+    {
+      "id": "education",
+      "name": "Department of Education"
+    },
+    {
+      "id": "public-utilities",
+      "name": "Board of Public Utilities"
+    }
+  ]
+}

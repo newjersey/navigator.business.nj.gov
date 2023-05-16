@@ -5,7 +5,7 @@ urlSlug: "nurses-aide"
 webflowName: "Nurses Aide"
 filename: "nurses-aide"
 callToActionLink: "http://njconsumeraffairs.gov/nur/pages/applications.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6430"
 webflowIndustry: "Nurses Aide"
 licenseCertificationClassification: "CERTIFICATION"

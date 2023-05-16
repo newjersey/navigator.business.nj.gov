@@ -5,7 +5,7 @@ urlSlug: "nail-salon"
 webflowName: "Nail Salon"
 filename: "nail-salon"
 callToActionLink: "https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: ""
 webflowIndustry: "Nail Salon"
 licenseCertificationClassification: "LICENSE/REGISTRATION"

@@ -5,7 +5,7 @@ name: Ensure You or Your Drivers Have the Right Credentials
 id: school-bus-license
 callToActionLink: https://telegov.njportal.com/njmvc/AppointmentWizard/20
 callToActionText: Apply for My License
-issuingAgency: New Jersey Motor Vehicle Commission
+agencyId: nj-motor-vehicle
 ---
 
 Employers must do a background check on all potential school bus drivers. Only drivers with clean records can legally drive a school bus.
@@ -29,7 +29,7 @@ P and S endorsements are only added to a CDL upon request and require that drive
 ### Application Requirements
 
 - Proof of identity, NJ residency, and Social Security Number (SSN) according to [New Jersey’s ID requirements](https://www.state.nj.us/mvc/pdf/license/Standard_License_Sheet_Engl.pdf)
-- [Medical Examiner's Certificate](https://www.state.nj.us/mvc/pdf/drivertopics/RA_4_1_a.pdf) completed by  healthcare provider
+- [Medical Examiner's Certificate](https://www.state.nj.us/mvc/pdf/drivertopics/RA_4_1_a.pdf) completed by healthcare provider
 - Completed [Holder Self-Certification form](https://www.state.nj.us/mvc/pdf/drivertopics/CDSC-1.pdf)
 - Background check and a fingerprint check
 - Applicable fees paid

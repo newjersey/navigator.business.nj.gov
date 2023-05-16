@@ -47,7 +47,8 @@ export const createEmptyTaskWithoutLinks = (): TaskWithoutLinks => {
     contentMd: "",
     postOnboardingQuestion: "",
     required: undefined,
-    issuingAgency: undefined,
+    agencyId: undefined,
+    agencyAdditionalContext: undefined,
     formName: undefined,
   };
 };
@@ -305,7 +306,8 @@ export interface Task {
   postOnboardingQuestion?: string;
   unlockedBy: TaskLink[];
   required?: boolean;
-  issuingAgency?: string;
+  agencyId?: string;
+  agencyAdditionalContext?: string;
   formName?: string;
   hidden?: true;
   requiresLocation?: boolean;
@@ -314,7 +316,6 @@ export interface Task {
 
 export interface LicenseTask extends Task {
   licenseCertificationClassification: string;
-  issuingDivision: string;
   divisionPhone: string;
   webflowId: string;
 }
@@ -327,8 +328,8 @@ export interface WebflowLicense {
   webflowName?: string;
   callToActionLink?: string;
   callToActionText?: string;
-  issuingAgency?: string;
-  issuingDivision?: string;
+  agencyId?: string;
+  agencyAdditionalContext?: string;
   divisionPhone?: string;
   licenseCertificationClassification?: string;
   webflowIndustry?: string;
@@ -484,7 +485,8 @@ export type TaskWithoutLinks = {
   postOnboardingQuestion: string;
   contentMd: string;
   required?: boolean;
-  issuingAgency?: string;
+  agencyId?: string;
+  agencyAdditionalContext?: string;
   formName?: string;
 };
 export type Page = { current: number; previous: number };

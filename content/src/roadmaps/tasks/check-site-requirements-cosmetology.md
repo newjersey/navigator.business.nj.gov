@@ -5,7 +5,6 @@ name: Determine Site Requirements for Your Cosmetology Business
 id: check-site-requirements
 callToActionLink: ""
 callToActionText: ""
-issuingAgency: ""
 ---
 
 Cosmetology businesses need to obtain and show a fire prevention permit and a `certificate of occupancy or approval|certificate-occupancy` from your local government prior to applying for a shop license.

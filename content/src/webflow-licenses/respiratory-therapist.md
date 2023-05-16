@@ -5,7 +5,7 @@ urlSlug: "respiratory-therapist"
 webflowName: "Respiratory Therapist"
 filename: "respiratory-therapist"
 callToActionLink: "http://njconsumeraffairs.gov/resp"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6485"
 webflowIndustry: "Respiratory Therapist"
 licenseCertificationClassification: "REGISTRATION/LICENSE"

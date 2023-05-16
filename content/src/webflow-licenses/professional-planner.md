@@ -5,7 +5,7 @@ urlSlug: "professional-planner"
 webflowName: "Professional Planner"
 filename: "professional-planner"
 callToActionLink: "http://njconsumeraffairs.gov/plan/Pages/default.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6465"
 webflowIndustry: "Planner"
 licenseCertificationClassification: "REGISTRATION/LICENSE"

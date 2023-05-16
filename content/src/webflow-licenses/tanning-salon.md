@@ -5,7 +5,7 @@ urlSlug: "tanning-salon"
 webflowName: "Tanning Salon"
 filename: "tanning-salon"
 callToActionLink: ""
-issuingAgency: "Check with Local Municipality"
+agencyId: municipal-clerk
 divisionPhone: ""
 webflowIndustry: "Tanning Salon"
 licenseCertificationClassification: "NO STATE LICENSES NECESSARY"

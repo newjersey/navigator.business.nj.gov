@@ -5,7 +5,7 @@ urlSlug: "registered-number-rn"
 webflowName: "Registered Number (RN)"
 filename: "registered-number-rn"
 callToActionLink: "https://www.njconsumeraffairs.gov/nur/pages/applications.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6430"
 webflowIndustry: "Registered Nurse"
 licenseCertificationClassification: "REGULATIONS & APPLICATION"

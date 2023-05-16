@@ -5,7 +5,7 @@ urlSlug: "agency-employment"
 webflowName: "Employment Agency"
 filename: "agency-employment"
 callToActionLink: "http://njconsumeraffairs.gov/epservices/Pages/default.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6370"
 webflowIndustry: "Employment Agency"
 licenseCertificationClassification: "LICENSE"

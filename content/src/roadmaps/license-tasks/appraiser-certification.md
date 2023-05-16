@@ -3,13 +3,13 @@ filename: real-estate-appraiser-certification
 urlSlug: appraiser-certification
 name: Apply for Your Real Estate Appraiser Certification
 webflowName: "Real Estate Appraisal: Real Estate Appraiser Certification"
-industryIntegration: New Jersey Division of Consumer Affairs
 industryId: real-estate-appraisals
 callToActionLink: https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx
 divisionPhone: (973) 504-6480
 id: appraiser-certification
-issuingAgency: New Jersey Division of Consumer Affairs Real Estate Appraiser Board
-callToActionText: "Apply ​for My Appraiser Certification "
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Real Estate Appraiser Board
+callToActionText: "Apply for My Appraiser Certification "
 webflowType: individual-license
 webflowId: 6414793bb48ba7e9395c9540
 licenseCertificationClassification: CERTIFICATION

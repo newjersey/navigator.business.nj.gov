@@ -5,7 +5,7 @@ urlSlug: "raffle"
 webflowName: "Raffle"
 filename: "raffle"
 callToActionLink: "http://njconsumeraffairs.gov/lgccc/Pages/default.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 5273-8000"
 webflowIndustry: "Raffle"
 licenseCertificationClassification: "LICENSE/LOCAL REGISTRATION"

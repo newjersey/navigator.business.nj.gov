@@ -5,7 +5,7 @@ urlSlug: "martial-arts-karate"
 webflowName: "Martial Arts (Karate)"
 filename: "martial-arts-karate"
 callToActionLink: ""
-issuingAgency: "Contact Your Local Health Department"
+agencyId: local-health
 divisionPhone: ""
 webflowIndustry: "Martial Arts"
 licenseCertificationClassification: "LICENSE"

@@ -5,7 +5,7 @@ urlSlug: "physician-do-or-md"
 webflowName: "Physician (DO or MD)"
 filename: "physician-do-or-md"
 callToActionLink: "http://njconsumeraffairs.gov/bme"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 826-7100"
 webflowIndustry: "Physician"
 licenseCertificationClassification: "LICENSE"

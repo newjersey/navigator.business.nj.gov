@@ -5,7 +5,7 @@ name: Apply for Your Motor Vehicle Entity ID
 id: transportation-entity-id
 callToActionLink: https://www.state.nj.us/mvc/pdf/business/BA-8.pdf
 callToActionText: Apply for My Entity ID with MVC
-issuingAgency: New Jersey Motor Vehicle Commission
+agencyId: nj-motor-vehicle
 formName: BA-8
 ---
 

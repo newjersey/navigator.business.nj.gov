@@ -5,7 +5,7 @@ urlSlug: "pathologist-speech-language"
 webflowName: "Pathologist, Speech Language"
 filename: "pathologist-speech-language"
 callToActionLink: "https://www.njconsumeraffairs.gov/aud/Pages/applications.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 504-6200"
 webflowIndustry: "Speech Pathologist"
 licenseCertificationClassification: "LICENSE"

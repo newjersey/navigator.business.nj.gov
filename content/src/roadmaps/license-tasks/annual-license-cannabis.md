@@ -6,7 +6,7 @@ webflowName: "Cannabis: Annual License"
 industryId: cannabis
 callToActionLink: https://www.nj.gov/cannabis/businesses/
 id: annual-license-cannabis
-issuingAgency: New Jersey Cannabis Regulatory Commission
+agencyId: nj-cannabis-commission
 callToActionText: Apply for My Annual Cannabis License
 webflowType: business-license
 webflowId: 6414793b9b4d2bcc74edb3a0

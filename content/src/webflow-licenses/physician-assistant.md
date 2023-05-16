@@ -5,7 +5,7 @@ urlSlug: "physician-assistant"
 webflowName: "Physician Assistant"
 filename: "physician-assistant"
 callToActionLink: "http://njconsumeraffairs.gov/elec/Pages/FAQ.aspx"
-issuingAgency: "Division of Consumer Affairs"
+agencyId: nj-consumer-affairs
 divisionPhone: "(973) 826-7100"
 webflowIndustry: "Physician Assistant"
 licenseCertificationClassification: "LICENSE"
