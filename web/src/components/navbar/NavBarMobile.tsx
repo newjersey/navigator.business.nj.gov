@@ -15,9 +15,10 @@ interface Props {
   task?: Task;
   hideMiniRoadmap?: boolean;
   showSidebar?: boolean;
+  isLanding?: boolean;
 }
 
-export const NavBarMobile = ({ scrolled, task, showSidebar, hideMiniRoadmap }: Props): ReactElement => {
+export const NavBarMobile = (props: Props): ReactElement => {
   const { userData } = useUserData();
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const { state } = useContext(AuthContext);
@@ -51,7 +52,7 @@ export const NavBarMobile = ({ scrolled, task, showSidebar, hideMiniRoadmap }: P
       <nav
         aria-label="Primary"
         className={`width-100 padding-y-05 usa-navbar ${
-          scrolled ? "scrolled scrolled-transition bg-white" : ""
+          props.scrolled ? "scrolled scrolled-transition bg-white" : ""
         }`}
       >
         <button
@@ -65,8 +66,8 @@ export const NavBarMobile = ({ scrolled, task, showSidebar, hideMiniRoadmap }: P
         >
           <Icon className="font-sans-xl">menu</Icon>
         </button>
-        <div className={`usa-logo ${scrolled ? "bg-white" : ""}`}>
-          {showSidebar ? (
+        <div className={`usa-logo ${props.scrolled ? "bg-white" : ""}`}>
+          {props.showSidebar ? (
             <div className="text-bold">{Config.navigationDefaults.taskPageNavBarHeading}</div>
           ) : (
             <NavigatorLogo />
@@ -80,10 +81,12 @@ export const NavBarMobile = ({ scrolled, task, showSidebar, hideMiniRoadmap }: P
           data-testid="nav-sidebar-menu"
         >
           <h4 className={`margin-0 flex flex-align-center fdr fjc space-between text-${textColor}`}>
-            <div className="flex">
-              <Icon className="margin-top-2px margin-right-1 usa-icon--size-3 minw-3">{accountIcon}</Icon>
-              <div>{accountString}</div>
-            </div>
+            {!props.isLanding && (
+              <div className="flex">
+                <Icon className="margin-top-2px margin-right-1 usa-icon--size-3 minw-3">{accountIcon}</Icon>
+                <div>{accountString}</div>
+              </div>
+            )}
             <button
               className="left-nav-close fac fdr fjc"
               aria-label="close menu"
@@ -95,11 +98,11 @@ export const NavBarMobile = ({ scrolled, task, showSidebar, hideMiniRoadmap }: P
               <Icon className="font-sans-xl">close</Icon>
             </button>
           </h4>
-          <NavSidebarUserSettings />
-          {showSidebar && !hideMiniRoadmap && (
+          <NavSidebarUserSettings isLanding={props.isLanding} />
+          {props.showSidebar && !props.hideMiniRoadmap && (
             <div>
               <hr />
-              <MiniRoadmap activeTaskId={task?.id} onTaskClick={close} />
+              <MiniRoadmap activeTaskId={props.task?.id} onTaskClick={close} />
             </div>
           )}
         </nav>

@@ -11,7 +11,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactElement, ReactNode, useContext, useMemo } from "react";
 
-export const NavSidebarUserSettings = (): ReactElement => {
+interface Props {
+  isLanding?: boolean;
+}
+
+export const NavSidebarUserSettings = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
   const { state } = useContext(AuthContext);
   const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
@@ -26,16 +30,18 @@ export const NavSidebarUserSettings = (): ReactElement => {
     return (
       <>
         <div className="margin-bottom-2">
-          <Link href={ROUTES.profile} passHref>
-            <UnStyledButton
-              style="tertiary"
-              onClick={(): void => {
-                analytics.event.account_menu_my_profile.click.go_to_profile_screen();
-              }}
-            >
-              <span className="text-base">{Config.navigationDefaults.profileLinkText}</span>
-            </UnStyledButton>
-          </Link>
+          {!props.isLanding && (
+            <Link href={ROUTES.profile} passHref>
+              <UnStyledButton
+                style="tertiary"
+                onClick={(): void => {
+                  analytics.event.account_menu_my_profile.click.go_to_profile_screen();
+                }}
+              >
+                <span className="text-base">{Config.navigationDefaults.profileLinkText}</span>
+              </UnStyledButton>
+            </Link>
+          )}
         </div>
         <div className="margin-bottom-2">
           <UnStyledButton
@@ -45,7 +51,11 @@ export const NavSidebarUserSettings = (): ReactElement => {
               onSelfRegister(router, userData, update, setRegistrationAlertStatus);
             }}
           >
-            <span className="text-base">{Config.navigationDefaults.navBarGuestRegistrationText}</span>
+            <span className="text-base">
+              {props.isLanding
+                ? Config.navigationDefaults.registerButton
+                : Config.navigationDefaults.navBarGuestRegistrationText}
+            </span>
           </UnStyledButton>
         </div>
       </>
