@@ -116,6 +116,7 @@
     "stepOneNextButton": "Next",
     "stepTwoNextButton": "Save",
     "stepTwoBackButton": "Back",
+    "stepTwoCancelButton": "Cancel",
     "stepOneErrorBanner": "Complete the field below.",
     "stepTwoErrorBanner": "Review the fields below for errors or omissions",
     "modalBusinessFieldHeader": "What is your business name?",

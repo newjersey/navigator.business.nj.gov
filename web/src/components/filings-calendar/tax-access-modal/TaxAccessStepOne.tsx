@@ -63,7 +63,7 @@ export const TaxAccessStepOne = (props: Props): ReactElement => {
     >
       {!isValid() && <Alert variant="error">{Config.taxAccess.stepOneErrorBanner}</Alert>}
 
-      <TaxAccessModalBody isStepOne={true} />
+      <TaxAccessModalBody isStepOne={true} showHeader={true} />
 
       <profileFormContext.Provider value={formContextState}>
         <ProfileDataContext.Provider

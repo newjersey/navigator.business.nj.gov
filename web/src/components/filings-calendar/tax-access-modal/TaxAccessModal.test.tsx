@@ -7,6 +7,7 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import { generateProfileData, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -29,12 +30,33 @@ describe("<TaxAccessModal />", () => {
     setupStatefulUserDataContext();
   });
 
+  describe("when poppy or dakota", () => {
+    it.each(["STARTING", "FOREIGN"])("shows step 2 only with no step 1 for %s", (persona) => {
+      renderModal(
+        generateUserData({
+          profileData: generateProfileData({
+            businessPersona: persona as BusinessPersona,
+          }),
+        })
+      );
+      expect(screen.queryByText(Config.taxAccess.stepOneHeader)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taxAccess.stepTwoHeader)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taxAccess.stepTwoBackButton)).not.toBeInTheDocument();
+      expect(screen.getByText(Config.taxAccess.body)).toBeInTheDocument();
+      expect(screen.getByText(Config.taxAccess.stepTwoCancelButton)).toBeInTheDocument();
+      expect(screen.getByLabelText("Tax id")).toBeInTheDocument();
+    });
+  });
+
   describe("when legal structure is undefined", () => {
     let undefinedLegalStructureUserData: UserData;
 
     beforeEach(() => {
       undefinedLegalStructureUserData = generateUserData({
-        profileData: generateProfileData({ legalStructureId: undefined }),
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          legalStructureId: undefined,
+        }),
       });
     });
 
@@ -92,7 +114,13 @@ describe("<TaxAccessModal />", () => {
 
   describe("when legal structure is defined", () => {
     it("shows step 2 question", () => {
-      renderModal(generateUserData({}));
+      renderModal(
+        generateUserData({
+          profileData: generateProfileData({
+            businessPersona: "OWNING",
+          }),
+        })
+      );
       expect(screen.queryByText(Config.taxAccess.stepOneHeader)).not.toBeInTheDocument();
       expect(screen.getByText(Config.taxAccess.stepTwoHeader)).toBeInTheDocument();
       expect(screen.getByText(Config.taxAccess.body)).toBeInTheDocument();
@@ -100,7 +128,13 @@ describe("<TaxAccessModal />", () => {
     });
 
     it("moves back to step 1 on back button", () => {
-      renderModal(generateUserData({}));
+      renderModal(
+        generateUserData({
+          profileData: generateProfileData({
+            businessPersona: "OWNING",
+          }),
+        })
+      );
       fireEvent.click(screen.getByText(Config.taxAccess.stepTwoBackButton));
       expect(screen.getByText(Config.taxAccess.stepOneHeader)).toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.stepTwoHeader)).not.toBeInTheDocument();
