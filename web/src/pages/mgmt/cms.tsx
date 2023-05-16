@@ -82,25 +82,15 @@ const CMS = dynamic(
       registerPreview(CMS, "profile-fields", ProfileFieldsPreview);
       registerPreview(CMS, "profile-misc", ProfilePreviewMisc);
 
-      registerPreview(CMS, "cannabisPriority-task", TaskPreview);
       registerPreview(CMS, "cannabisPriority-1", CannabisPriorityStatusPreview);
       registerPreview(CMS, "cannabisPriority-2", CannabisPriorityStatusPreview);
 
       registerPreview(CMS, "nexus-name-search", NexusNameSearchPreview);
       registerPreview(CMS, "nexus-dba-formation", NexusDbaFormationPreview);
-      registerPreview(CMS, "nexus-name-search-task", TaskPreview);
-      registerPreview(CMS, "nexus-dba-formation-task", TaskPreview);
 
-      registerPreview(CMS, "naics-code-task", TaskPreview);
       registerPreview(CMS, "naics-code-lookup", NaicsLookupPreview);
-
-      registerPreview(CMS, "ein-task-metadata", TaskPreview);
       registerPreview(CMS, "ein-input-section", EinInputPreview);
-
-      registerPreview(CMS, "tax-task-metadata", TaskPreview);
       registerPreview(CMS, "tax-input-section", TaxInputPreview);
-
-      registerPreview(CMS, "business-structure-task", TaskPreview);
       registerPreview(CMS, "business-structure-selection", BusinessStructurePreview);
 
       // ----- Cannabis License -----

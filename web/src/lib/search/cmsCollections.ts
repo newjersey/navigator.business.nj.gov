@@ -1,7 +1,7 @@
 export const cmsCollections = [
   {
     label: "🟥 BUSINESS FORMATION",
-    children: ["Biz Form - Config", "Biz Form - DBA Tasks"],
+    children: ["Biz Form - Config", "Biz Form - DBA Tasks", "Nexus"],
   },
   {
     label: "🟧 CERTIFICATION OPPS",
@@ -28,7 +28,6 @@ export const cmsCollections = [
       "Tasks - Tax ID",
       "Tasks - NAICS Code",
       "Tasks - Business Structure",
-      "Tasks - Nexus",
     ],
   },
   {
