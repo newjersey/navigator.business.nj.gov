@@ -2260,6 +2260,59 @@ collections:
     fields:
       - { name: "" }
 
+  - name: "tax-access-modal-config"
+    label: "Tax Access Modal Config"
+    delete: false
+    create: false
+    files:
+      - label: "Tax Access Modal Config"
+        name: "tax-access-modal"
+        file: "content/src/fieldConfig/tax-access-modal.json"
+        editor:
+          preview: true
+        fields:
+          - label: "Tax Access Modal"
+            name: taxAccess
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Modal Header, name: modalHeader, widget: text }
+              - { label: Step 1 Header, name: stepOneHeader, widget: text }
+              - { label: Step 2 Header, name: stepTwoHeader, widget: text }
+              - { label: Body, name: body, widget: markdown }
+              - { label: Step 1 Next Button, name: stepOneNextButton, widget: text }
+              - { label: Step 2 Next Button, name: stepTwoNextButton, widget: text }
+              - { label: Step 2 Back Button, name: stepTwoBackButton, widget: text }
+              - { label: Step 2 Cancel Button, name: stepTwoCancelButton, widget: text }
+              - { label: Step 1 Error Banner, name: stepOneErrorBanner, widget: text }
+              - { label: Step 2 Error Banner, name: stepTwoErrorBanner, widget: text }
+              - { label: BusinessName Field Header, name: modalBusinessFieldHeader, widget: markdown }
+              - {
+                  label: BusinessName Field Error Alert Text,
+                  name: modalBusinessFieldErrorName,
+                  widget: text,
+                }
+              - { label: BusinessName Field Text, name: modalBusinessFieldMarkdown, widget: markdown }
+              - { label: BusinessName API Failed Helper Text, name: failedBusinessFieldHelper, widget: text }
+              - { label: TaxId Field Header, name: modalTaxIdHeader, widget: markdown }
+              - { label: TaxId Field Text, name: modalTaxIdMarkdown, widget: markdown }
+              - { label: TaxId Field Error Alert Text, name: modalTaxFieldErrorName, widget: text }
+              - { label: TaxId API Failed Helper Text, name: failedTaxIdHelper, widget: text }
+              - { label: Responsible Owner Header, name: modalBusinessOwnerName, widget: text }
+              - { label: Responsible Owner Description, name: modalBusinessOwnerDescription, widget: text }
+              - {
+                  label: Responsible Owner Field Error Alert Text,
+                  name: modalResponsibleOwnerFieldErrorName,
+                  widget: text,
+                }
+              - {
+                  label: ResponsibleOwner API Failed Helper Text,
+                  name: failedResponsibleOwnerFieldHelper,
+                  widget: text,
+                }
+              - { label: Failed Alert Text, name: failedErrorMessageHeader, widget: text }
+              - { label: Unknown Failure Alert Text, name: failedUnknownMarkdown, widget: markdown }
+
   - name: "filings"
     label: "Taxes Filings - All"
     folder: "content/src/filings"
@@ -2587,6 +2640,7 @@ collections:
             fields:
               - { label: Beta Main Text, name: betaMainText, widget: string }
               - { label: Beta Modal Button Text, name: betaModalButtonText, widget: string }
+
           - label: Tax Calendar Defaults
             name: taxCalendar
             collapsed: true
@@ -2600,40 +2654,9 @@ collections:
                   name: registrationFollowUpCopyMarkdown,
                   widget: markdown,
                 }
-              - { label: Access Open Modal Button, name: accessButton, widget: text }
-              - { label: Modal Cancel Button, name: modalCancelButton, widget: text }
-              - { label: Modal Next Button, name: modalNextButton, widget: text }
-              - { label: Modal Header, name: modalHeader, widget: text }
-              - { label: Modal Error Header, name: modalErrorHeader, widget: text }
-              - { label: Modal Body Text, name: modalBody, widget: markdown }
-              - { label: BusinessName Field Header, name: modalBusinessFieldHeader, widget: markdown }
-              - {
-                  label: BusinessName Field Error Alert Text,
-                  name: modalBusinessFieldErrorName,
-                  widget: text,
-                }
-              - { label: BusinessName Field Text, name: modalBusinessFieldMarkdown, widget: markdown }
-              - { label: TaxId Field Error Alert Text, name: modalTaxFieldErrorName, widget: text }
-              - {
-                  label: Responsible Owner Field Error Alert Text,
-                  name: modalResponsibleOwnerFieldErrorName,
-                  widget: text,
-                }
-              - { label: Responsible Owner Header, name: modalBusinessOwnerName, widget: text }
-              - { label: Responsible Owner Description, name: modalBusinessOwnerDescription, widget: text }
-              - { label: TaxId Field Header, name: modalTaxIdHeader, widget: markdown }
-              - { label: TaxId Field Text, name: modalTaxIdMarkdown, widget: markdown }
-              - { label: Failed Alert Text, name: failedErrorMessageHeader, widget: text }
-              - { label: Unknown Failure Alert Text, name: failedUnknownMarkdown, widget: markdown }
-              - { label: BusinessName API Failed Helper Text, name: failedBusinessFieldHelper, widget: text }
-              - { label: TaxId API Failed Helper Text, name: failedTaxIdHelper, widget: text }
-              - {
-                  label: ResponsibleOwner API Failed Helper Text,
-                  name: failedResponsibleOwnerFieldHelper,
-                  widget: text,
-                }
               - { label: Success Alert Header, name: snackbarSuccessHeader, widget: text }
               - { label: Success Alert Body, name: snackbarSuccessBody, widget: text }
+              - { label: Access Open Modal Button, name: accessButton, widget: text }
 
           - label: Filing Defaults
             name: filingDefaults

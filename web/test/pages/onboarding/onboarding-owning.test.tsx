@@ -16,12 +16,7 @@ import {
   generateTaxFilingData,
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
-import {
-  generatePreferences,
-  generateUser,
-  generateUserData,
-  randomLegalStructure,
-} from "@businessnjgovnavigator/shared/test";
+import { generatePreferences, generateUser, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, screen, waitFor, within } from "@testing-library/react";
 
@@ -42,17 +37,10 @@ const Config = getMergedConfig();
 const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
   return generateUserData({
     profileData: generateProfileData({
+      businessPersona: "OWNING",
       ...overrides,
     }),
     onboardingFormProgress: "UNSTARTED",
-  });
-};
-
-const generateCCorpTestUserData = (overrides: Partial<ProfileData>): UserData => {
-  return generateTestUserData({
-    businessPersona: "OWNING",
-    legalStructureId: "c-corporation",
-    ...overrides,
   });
 };
 
@@ -87,54 +75,15 @@ describe("onboarding - owning a business", () => {
       ).toBeInTheDocument();
     });
 
-    it("displays the sector and legal structure dropdowns after radio selected", () => {
+    it("displays the sector dropdown after radio selected", () => {
       const { page } = renderPage({});
       expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
-      expect(screen.queryByLabelText("Business structure")).not.toBeInTheDocument();
       page.chooseRadio("business-persona-owning");
-      expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
       expect(screen.getByLabelText("Sector")).toBeInTheDocument();
     });
 
-    it("prevents user from moving after Step 1 if you have not entered a legal structure and have not entered a sector", async () => {
-      const userData = generateCCorpTestUserData({ legalStructureId: undefined, sectorId: undefined });
-      useMockRouter({ isReady: true, query: { page: "1" } });
-      const { page } = renderPage({ userData });
-      act(() => {
-        return page.clickNext();
-      });
-      await waitFor(() => {
-        expect(screen.getByTestId("step-1")).toBeInTheDocument();
-      });
-      expect(screen.queryByTestId("step-2")).not.toBeInTheDocument();
-      expect(
-        screen.getByText(Config.profileDefaults.fields.legalStructureId.default.errorTextRequired)
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
-      ).toBeInTheDocument();
-      expect(screen.getByTestId("banner-alert-REQUIRED_REVIEW_INFO_BELOW")).toBeInTheDocument();
-    });
-
-    it("prevents user from moving after Step 1 if you have not entered a legal structure and have entered a sector", async () => {
-      const userData = generateCCorpTestUserData({ legalStructureId: undefined });
-      useMockRouter({ isReady: true, query: { page: "1" } });
-      const { page } = renderPage({ userData });
-      act(() => {
-        return page.clickNext();
-      });
-      await waitFor(() => {
-        expect(screen.getByTestId("step-1")).toBeInTheDocument();
-      });
-      expect(screen.queryByTestId("step-2")).not.toBeInTheDocument();
-      expect(
-        screen.getByText(Config.profileDefaults.fields.legalStructureId.default.errorTextRequired)
-      ).toBeInTheDocument();
-      expect(screen.getByTestId("banner-alert-REQUIRED_REVIEW_INFO_BELOW")).toBeInTheDocument();
-    });
-
-    it("prevents user from moving after Step 1 if you have not entered a sector but have entered a legal structure", async () => {
-      const userData = generateCCorpTestUserData({ sectorId: undefined });
+    it("prevents user from moving after Step 1 if you have not entered a sector", async () => {
+      const userData = generateTestUserData({ sectorId: undefined });
       useMockRouter({ isReady: true, query: { page: "1" } });
       const { page } = renderPage({ userData });
       act(() => {
@@ -150,22 +99,16 @@ describe("onboarding - owning a business", () => {
       expect(screen.getByTestId("banner-alert-REQUIRED_REVIEW_INFO_BELOW")).toBeInTheDocument();
     });
 
-    it("allows user to move past Step 1 if you have entered a sector and a legal structure", async () => {
-      const userData = generateCCorpTestUserData({ legalStructureId: undefined, sectorId: undefined });
+    it("allows user to move past Step 1 if you have entered a sector", async () => {
+      const userData = generateTestUserData({ sectorId: undefined });
       useMockRouter({ isReady: true, query: { page: "1" } });
       const { page } = renderPage({ userData });
-      page.selectByValue("Business structure", randomLegalStructure().id);
       page.selectByValue("Sector", "clean-energy");
       await page.visitStep(2);
 
       await waitFor(() => {
         expect(
           screen.queryByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
-        ).not.toBeInTheDocument();
-      });
-      await waitFor(() => {
-        expect(
-          screen.queryByText(Config.profileDefaults.fields.legalStructureId.default.errorTextRequired)
         ).not.toBeInTheDocument();
       });
       expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
@@ -179,7 +122,6 @@ describe("onboarding - owning a business", () => {
     const { page } = renderPage({ municipalities: [newark] });
 
     page.chooseRadio("business-persona-owning");
-    page.selectByValue("Business structure", "c-corporation");
     page.selectByValue("Sector", "clean-energy");
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
 
@@ -192,7 +134,6 @@ describe("onboarding - owning a business", () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const { page } = renderPage({ municipalities: [newark] });
     page.chooseRadio("business-persona-owning");
-    page.selectByValue("Business structure", "sole-proprietorship");
     page.selectByValue("Sector", "clean-energy");
     const page1 = within(screen.getByTestId("page-1-form"));
     expect(page1.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
@@ -209,7 +150,6 @@ describe("onboarding - owning a business", () => {
     const { page } = renderPage({ userData: initialUserData });
 
     page.chooseRadio("business-persona-owning");
-    page.selectByValue("Business structure", "c-corporation");
     page.selectByValue("Sector", "clean-energy");
     await page.visitStep(2);
 
@@ -220,7 +160,7 @@ describe("onboarding - owning a business", () => {
         ...initialUserData.profileData,
         businessPersona: "OWNING",
         homeBasedBusiness: undefined,
-        legalStructureId: "c-corporation",
+        legalStructureId: undefined,
         sectorId: "clean-energy",
         industryId: "generic",
         operatingPhase: "GUEST_MODE_OWNING",
@@ -236,15 +176,12 @@ describe("onboarding - owning a business", () => {
     const userData = generateUserData({
       profileData: generateProfileData({
         businessPersona: "OWNING",
-        legalStructureId: "c-corporation",
         sectorId: "clean-energy",
       }),
     });
 
     const { page } = renderPage({ userData });
     expect(page.getRadioButton("Business Status - Owning")).toBeChecked();
-
-    expect(page.getLegalStructureValue()).toEqual("c-corporation");
     expect(page.getSectorIDValue()).toEqual("Clean Energy");
   });
 
@@ -256,7 +193,6 @@ describe("onboarding - owning a business", () => {
     const initialUserData = generateUserData({
       taxFilingData: taxData,
       profileData: generateProfileData({
-        legalStructureId: "c-corporation",
         businessPersona: "OWNING",
       }),
       onboardingFormProgress: "COMPLETED",

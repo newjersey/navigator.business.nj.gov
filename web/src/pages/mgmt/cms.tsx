@@ -32,6 +32,7 @@ import TaxInputPreview from "@/lib/cms/previews/TaxInputPreview";
 import { useMountEffect } from "@/lib/utils/helpers";
 
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
+import TaxAccessModalPreview from "@/lib/cms/previews/TaxAccessModalPreview";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
 import { ReactElement } from "react";
@@ -113,6 +114,8 @@ const CMS = dynamic(
       registerPreview(CMS, "dashboard-config-tabs", DashboardTabsPreview);
 
       registerPreview(CMS, "deferred-location-config", DeferredLocationPreview);
+
+      registerPreview(CMS, "tax-access-modal", TaxAccessModalPreview);
     });
   },
   { ssr: false, loading: Loading }

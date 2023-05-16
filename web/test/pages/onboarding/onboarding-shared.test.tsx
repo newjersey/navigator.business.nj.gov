@@ -188,14 +188,13 @@ describe("onboarding - shared", () => {
       screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" }))
     ).toBeInTheDocument();
     page.chooseRadio("business-persona-owning");
-    page.selectByValue("Business structure", "c-corporation");
     await page.visitStep(2);
     expect(currentUserData().profileData).toEqual({
       ...initialUserData.profileData,
       businessPersona: "OWNING",
       industryId: "generic",
       homeBasedBusiness: undefined,
-      legalStructureId: "c-corporation",
+      legalStructureId: undefined,
       sectorId: "retail-trade-and-ecommerce",
       municipality: undefined,
       liquorLicense: false,
@@ -215,7 +214,6 @@ describe("onboarding - shared", () => {
     const { page } = renderPage({ userData: initialUserData });
 
     page.chooseRadio("business-persona-owning");
-    page.selectByValue("Business structure", "sole-proprietorship");
     page.selectByValue("Sector", "clean-energy");
     await page.visitStep(2);
 
@@ -229,7 +227,7 @@ describe("onboarding - shared", () => {
       industryId: undefined,
       homeBasedBusiness: undefined,
       dateOfFormation: undefined,
-      legalStructureId: "sole-proprietorship",
+      legalStructureId: undefined,
       sectorId: "clean-energy",
       liquorLicense: false,
       constructionRenovationPlan: undefined,
@@ -247,7 +245,6 @@ describe("onboarding - shared", () => {
     const { page } = renderPage({ userData: initialUserData });
 
     page.chooseRadio("business-persona-owning");
-    page.selectByValue("Business structure", "c-corporation");
     page.selectByValue("Sector", "clean-energy");
     await page.visitStep(2);
     page.clickBack();
@@ -259,7 +256,7 @@ describe("onboarding - shared", () => {
       businessPersona: "STARTING",
       industryId: undefined,
       homeBasedBusiness: undefined,
-      legalStructureId: "c-corporation",
+      legalStructureId: undefined,
       sectorId: "clean-energy",
       liquorLicense: false,
       constructionRenovationPlan: undefined,
@@ -277,7 +274,6 @@ describe("onboarding - shared", () => {
     const { page } = renderPage({ userData: initialUserData });
 
     page.chooseRadio("business-persona-owning");
-    page.selectByValue("Business structure", "c-corporation");
     page.selectByValue("Sector", "clean-energy");
     await page.visitStep(2);
 
@@ -287,7 +283,7 @@ describe("onboarding - shared", () => {
     expect(currentUserData().profileData).toEqual({
       ...initialUserData.profileData,
       businessPersona: "OWNING",
-      legalStructureId: "c-corporation",
+      legalStructureId: undefined,
       industryId: "generic",
       homeBasedBusiness: undefined,
       liquorLicense: false,
@@ -366,9 +362,6 @@ describe("onboarding - shared", () => {
       const { page } = renderPage({});
 
       expect(screen.getByTestId("step-1")).toBeInTheDocument();
-
-      expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
-      page.selectByValue("Business structure", "c-corporation");
       page.selectByValue("Sector", "clean-energy");
       await page.visitStep(2);
       expect(currentUserData().profileData.businessPersona).toEqual("OWNING");
