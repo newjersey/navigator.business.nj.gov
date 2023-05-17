@@ -8,7 +8,7 @@ backend:
   squash_merges: true
   commit_messages:
     create: "chore: creating {{collection}} {{slug}}"
-    update: "fix: updating {{collection}} {{slug}}"
+    update: "chore: updating {{collection}} {{slug}}"
 publish_mode: editorial_workflow
 local_backend: true
 media_folder: web/public/img
