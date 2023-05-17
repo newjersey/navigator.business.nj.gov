@@ -39,7 +39,11 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       }/PrepareFiling data: ${JSON.stringify(postBody)}`
     );
     return axios
-      .post(`${config.baseUrl}/PrepareFiling`, postBody)
+      .post(`${config.baseUrl}/PrepareFiling`, postBody, {
+        headers: {
+          "Content-Type": "text/plain",
+        },
+      })
       .then((response) => {
         logger.LogInfo(
           `Formation - NICUSA - Id:${logId} - Response received: ${JSON.stringify(response.data)}`
