@@ -3,7 +3,8 @@ import * as api from "@/lib/api-client/apiClient";
 import { generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { generateLicenseData, generateProfileData } from "@businessnjgovnavigator/shared";
+import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import { generateLicenseData, generateProfileData, UserData } from "@businessnjgovnavigator/shared";
 import {
   generateLicenseStatusItem,
   generateNameAndAddress,
@@ -14,10 +15,7 @@ import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  checkLicenseStatus: jest.fn(),
-  getUserData: jest.fn(),
-}));
+jest.mock("@/lib/api-client/apiClient", () => ({ checkLicenseStatus: jest.fn(), getUserData: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;
 
 describe("<LicenseTask />", () => {
@@ -32,25 +30,60 @@ describe("<LicenseTask />", () => {
     );
   };
 
+  const renderTaskWithStatefulData = (initialUserData: UserData): void => {
+    render(
+      <ThemeProvider theme={createTheme()}>
+        <WithStatefulUserData initialUserData={initialUserData}>
+          <LicenseTask task={task} />
+        </WithStatefulUserData>
+      </ThemeProvider>
+    );
+  };
+
   beforeEach(() => {
     jest.resetAllMocks();
     useMockUserData(initialUserData);
     useMockRoadmap({});
-    mockApi.getUserData.mockResolvedValue(initialUserData);
     jest.useFakeTimers();
   });
 
-  it("displays status as an uneditable tag with a tooltip", () => {
-    useMockUserData({
+  it("displays status as an editable tag if user has not completed search", () => {
+    setupStatefulUserDataContext();
+    const initialUserData = generateUserData({
       taskProgress: {
         [task.id]: "IN_PROGRESS",
       },
+      licenseData: generateLicenseData({
+        completedSearch: false,
+      }),
     });
-    renderTask();
+    renderTaskWithStatefulData(initialUserData);
 
-    fireEvent.click(screen.getByTestId("IN_PROGRESS"));
+    fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
+
+    expect(screen.getByTestId("COMPLETED")).toBeInTheDocument();
     expect(screen.queryByTestId("NOT_STARTED")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("IN_PROGRESS")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("status-info-tooltip")).not.toBeInTheDocument();
+  });
+
+  it("displays status as not editable if user has completed search", () => {
+    setupStatefulUserDataContext();
+    const initialUserData = generateUserData({
+      taskProgress: {
+        [task.id]: "IN_PROGRESS",
+      },
+      licenseData: generateLicenseData({
+        completedSearch: true,
+      }),
+    });
+    renderTaskWithStatefulData(initialUserData);
+    expect(screen.getByTestId("IN_PROGRESS")).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
+
+    expect(screen.getByTestId("IN_PROGRESS")).toBeInTheDocument();
     expect(screen.getByTestId("status-info-tooltip")).toBeInTheDocument();
+    expect(screen.queryByTestId("COMPLETED")).not.toBeInTheDocument();
   });
 
   describe("starting tab", () => {

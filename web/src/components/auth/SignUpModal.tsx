@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 
 export const SignUpModal = (): ReactElement => {
-  const { userData, update } = useUserData();
+  const { userData, updateQueue } = useUserData();
   const router = useRouter();
   const {
     isAuthenticated,
@@ -37,10 +37,10 @@ export const SignUpModal = (): ReactElement => {
   const selfRegister = (): void => {
     if (userData?.preferences.returnToLink === `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true`) {
       analytics.event.myNJ_prompt_modal_complete_button.click.go_to_myNJ_registration();
-      onSelfRegister(router, userData, update, setRegistrationAlertStatus, true);
+      onSelfRegister(router, updateQueue, setRegistrationAlertStatus, true);
     } else {
       analytics.event.guest_modal.click.go_to_myNJ_registration();
-      onSelfRegister(router, userData, update, setRegistrationAlertStatus);
+      onSelfRegister(router, updateQueue, setRegistrationAlertStatus);
     }
   };
 

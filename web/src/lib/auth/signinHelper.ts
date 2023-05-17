@@ -1,6 +1,5 @@
 import { AuthAlertContextType } from "@/contexts/authAlertContext";
 import * as api from "@/lib/api-client/apiClient";
-import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
@@ -12,8 +11,9 @@ import {
   setRegistrationDimension,
   setUserId,
 } from "@/lib/utils/analytics-helpers";
-import { createEmptyUser, UserData } from "@businessnjgovnavigator/shared/";
+import { createEmptyUser } from "@businessnjgovnavigator/shared/";
 import { Dispatch } from "react";
+import { UpdateQueue } from "../types/types";
 import { AuthAction } from "./AuthContext";
 import * as session from "./sessionHelper";
 import { triggerSignOut } from "./sessionHelper";
@@ -37,12 +37,13 @@ export type SelfRegRouter = {
 
 export const onSelfRegister = (
   router: SelfRegRouter,
-  userData: UserData | undefined,
-  update: UseUserDataResponse["update"],
+  updateQueue: UpdateQueue | undefined,
   setRegistrationAlertStatus: AuthAlertContextType["setRegistrationAlertStatus"],
   usereturnToLink?: boolean
 ): void => {
-  if (!userData) {
+  const userData = updateQueue?.current();
+
+  if (!userData || !updateQueue) {
     return;
   }
   setRegistrationAlertStatus("IN_PROGRESS");
@@ -59,7 +60,7 @@ export const onSelfRegister = (
       preferences: { ...userData.preferences, returnToLink: route || "" },
     })
     .then(async (response) => {
-      await update(response.userData);
+      await updateQueue.queue(response.userData).update();
       await router.replace(response.authRedirectURL);
     })
     .catch((error) => {

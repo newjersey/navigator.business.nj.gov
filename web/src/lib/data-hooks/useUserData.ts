@@ -115,7 +115,10 @@ export const useUserData = (): UseUserDataResponse => {
   };
 
   const refresh = async (): Promise<void> => {
-    await mutate();
+    const updatedUserData = await mutate();
+    if (updatedUserData) {
+      setUpdateQueue(new UpdateQueueFactory(updatedUserData, update));
+    }
   };
 
   return {
