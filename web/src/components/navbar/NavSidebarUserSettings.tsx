@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const NavSidebarUserSettings = (props: Props): ReactElement => {
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
   const { state } = useContext(AuthContext);
   const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
 
@@ -48,7 +48,7 @@ export const NavSidebarUserSettings = (props: Props): ReactElement => {
             style="tertiary"
             onClick={(): void => {
               analytics.event.guest_menu.click.go_to_myNJ_registration();
-              onSelfRegister(router, userData, update, setRegistrationAlertStatus);
+              onSelfRegister(router, updateQueue, setRegistrationAlertStatus);
             }}
           >
             <span className="text-base">

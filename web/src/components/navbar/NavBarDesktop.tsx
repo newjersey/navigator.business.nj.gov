@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 export const NavBarDesktop = (): ReactElement => {
-  const { userData, update } = useUserData();
+  const { userData, updateQueue } = useUserData();
   const { state, dispatch } = useContext(AuthContext);
   const router = useRouter();
   const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
@@ -140,7 +140,7 @@ export const NavBarDesktop = (): ReactElement => {
                       style="tertiary"
                       onClick={(): void => {
                         analytics.event.guest_menu.click.go_to_myNJ_registration();
-                        onSelfRegister(router, userData, update, setRegistrationAlertStatus);
+                        onSelfRegister(router, updateQueue, setRegistrationAlertStatus);
                       }}
                     >
                       {Config.navigationDefaults.navBarGuestRegistrationText}

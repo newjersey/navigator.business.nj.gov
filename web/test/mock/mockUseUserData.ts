@@ -1,6 +1,7 @@
 import * as useUserModule from "@/lib/data-hooks/useUserData";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { UserDataError } from "@/lib/types/types";
+import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import {
   generateProfileData,
   generateUserData,
@@ -32,13 +33,15 @@ export const useMockProfileData = (profileData: Partial<ProfileData>): void => {
 };
 
 export const generateUseUserDataResponse = (overrides: Partial<UseUserDataResponse>): UseUserDataResponse => {
+  const update = overrides.update ?? jest.fn().mockResolvedValue({});
+  const userData = overrides.userData ?? generateUserData({});
   return {
-    userData: generateUserData({}),
-    update: jest.fn().mockResolvedValue({}),
+    update,
+    userData,
     error: undefined,
     isLoading: false,
     refresh: jest.fn().mockResolvedValue({}),
-    updateQueue: undefined,
+    updateQueue: new UpdateQueueFactory(userData, update),
     ...overrides,
   };
 };
