@@ -5,6 +5,8 @@ import * as UserDataStorage from "@/lib/storage/UserDataStorage";
 import { generateUser, generateUserData } from "@businessnjgovnavigator/shared/";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { waitFor } from "@testing-library/react";
+import { UpdateQueue } from "../types/types";
+import { UpdateQueueFactory } from "../UpdateQueue";
 import * as session from "./sessionHelper";
 
 const mockGetCurrentUserData = jest.fn();
@@ -59,6 +61,7 @@ describe("SigninHelper", () => {
 
   describe("onSelfRegister", () => {
     let userData: UserData;
+    let updateQueue: UpdateQueue;
     let update: jest.Mock;
     let mockSetAlertStatus: jest.Mock;
     let fakeRouter: SelfRegRouter;
@@ -66,19 +69,20 @@ describe("SigninHelper", () => {
     beforeEach(() => {
       userData = generateUserData({});
       update = jest.fn();
+      updateQueue = new UpdateQueueFactory(userData, update);
       mockSetAlertStatus = jest.fn();
       fakeRouter = { replace: mockPush, asPath: "/tasks/some-url" };
     });
 
     it("sets registration alert to IN_PROGRESS", async () => {
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
-      await onSelfRegister(fakeRouter, userData, update, mockSetAlertStatus);
+      await onSelfRegister(fakeRouter, updateQueue, mockSetAlertStatus);
       expect(mockSetAlertStatus).toHaveBeenCalledWith("IN_PROGRESS");
     });
 
-    it("posts userData to api self-reg with current pathname included", async () => {
+    it("posts userData to api self-reg with current pathname included when useReturnToLink is not true", async () => {
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
-      await onSelfRegister(fakeRouter, userData, update, mockSetAlertStatus);
+      await onSelfRegister(fakeRouter, updateQueue, mockSetAlertStatus);
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
         ...userData,
         preferences: { ...userData.preferences, returnToLink: "/tasks/some-url" },
@@ -89,8 +93,9 @@ describe("SigninHelper", () => {
       userData = generateUserData({
         preferences: { ...userData.preferences, returnToLink: "/pathname?query=true" },
       });
+      updateQueue = new UpdateQueueFactory(userData, update);
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
-      await onSelfRegister(fakeRouter, userData, update, mockSetAlertStatus, true);
+      await onSelfRegister(fakeRouter, updateQueue, mockSetAlertStatus, true);
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
         ...userData,
         preferences: { ...userData.preferences, returnToLink: "/pathname?query=true" },
@@ -103,7 +108,7 @@ describe("SigninHelper", () => {
         userData: returnedUserData,
         authRedirectURL: "/some-url",
       });
-      await onSelfRegister(fakeRouter, userData, update, mockSetAlertStatus);
+      await onSelfRegister(fakeRouter, updateQueue, mockSetAlertStatus);
       await waitFor(() => {
         return expect(mockPush).toHaveBeenCalledWith("/some-url");
       });
@@ -112,7 +117,7 @@ describe("SigninHelper", () => {
 
     it("sets alert to DUPLICATE_ERROR on 409 response code", async () => {
       mockApi.postSelfReg.mockRejectedValue(409);
-      await onSelfRegister(fakeRouter, userData, update, mockSetAlertStatus);
+      await onSelfRegister(fakeRouter, updateQueue, mockSetAlertStatus);
       await waitFor(() => {
         return expect(mockSetAlertStatus).toHaveBeenCalledWith("DUPLICATE_ERROR");
       });
@@ -122,7 +127,7 @@ describe("SigninHelper", () => {
 
     it("sets alert to RESPONSE_ERROR on generic error", async () => {
       mockApi.postSelfReg.mockRejectedValue(500);
-      await onSelfRegister(fakeRouter, userData, update, mockSetAlertStatus);
+      await onSelfRegister(fakeRouter, updateQueue, mockSetAlertStatus);
       await waitFor(() => {
         return expect(mockSetAlertStatus).toHaveBeenCalledWith("RESPONSE_ERROR");
       });

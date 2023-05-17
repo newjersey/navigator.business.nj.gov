@@ -12,15 +12,12 @@ interface Props {
 
 export const SelfRegLink = (props: Props): ReactElement => {
   const router = useRouter();
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
   const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
 
   const onClick = (): void => {
-    if (!userData) {
-      return;
-    }
     parseAndSendAnalyticsEvent(props.href);
-    onSelfRegister(router, userData, update, setRegistrationAlertStatus);
+    onSelfRegister(router, updateQueue, setRegistrationAlertStatus);
   };
 
   /* eslint-disable @typescript-eslint/ban-ts-comment */
