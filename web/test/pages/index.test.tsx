@@ -102,5 +102,11 @@ describe("HomePage", () => {
       render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.FALSE }));
       expect(mockPush).toHaveBeenCalledWith("www.example.com");
     });
+
+    it("doesn't redirect to alternate landing page when user is on the welcome page", () => {
+      setMockUserDataResponse({ error: undefined, userData: undefined });
+      render(withAuth(<Home isWelcomePage={true} />, { isAuthenticated: IsAuthenticated.FALSE }));
+      expect(mockPush).not.toHaveBeenCalled();
+    });
   });
 });

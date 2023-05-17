@@ -86,10 +86,14 @@ const Home = (props: Props): ReactElement => {
       } else if (userData === undefined && error !== undefined) {
         router.replace(`${ROUTES.dashboard}?error=true`);
       }
-    } else if (state.isAuthenticated === IsAuthenticated.FALSE && alternateLandingPageEnabled) {
+    } else if (
+      state.isAuthenticated === IsAuthenticated.FALSE &&
+      alternateLandingPageEnabled &&
+      !props.isWelcomePage
+    ) {
       router.replace(landingPageAlternateUrl);
     }
-  }, [userData, error, router, state.isAuthenticated]);
+  }, [userData, error, router, state.isAuthenticated, props.isWelcomePage]);
 
   useEffect(() => {
     if (!router.isReady || !router.query[QUERIES.signUp]) {
