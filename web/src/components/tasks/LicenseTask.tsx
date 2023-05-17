@@ -117,7 +117,12 @@ export const LicenseTask = (props: Props): ReactElement => {
   return (
     <SignUpModalWrapper>
       <div className="flex flex-column">
-        <TaskHeader task={props.task} tooltipText={Config.licenseSearchTask.tooltipText} />
+        <TaskHeader
+          task={props.task}
+          tooltipText={
+            userData?.licenseData?.completedSearch ? Config.licenseSearchTask.tooltipText : undefined
+          }
+        />
         <Box sx={{ width: "100%" }}>
           <TabContext value={tabIndex.toString()}>
             <Box>
