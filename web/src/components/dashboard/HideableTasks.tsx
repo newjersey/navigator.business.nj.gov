@@ -10,22 +10,22 @@ import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
 
 export const HideableTasks = (): ReactElement => {
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
+  const userData = updateQueue?.current();
 
   const handleToggleClick = (): void => {
-    if (!userData) {
+    if (!userData || !updateQueue) {
       return;
     }
-    update({
-      ...userData,
-      preferences: {
-        ...userData.preferences,
+
+    updateQueue
+      .queuePreferences({
         isHideableRoadmapOpen: !userData.preferences.isHideableRoadmapOpen,
-      },
-    });
+      })
+      .update();
   };
 
   const hiddenTasksCount = (): number => {
