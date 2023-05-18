@@ -8,13 +8,13 @@ import { ReactElement, useContext } from "react";
 
 export const DevOnlyResetUserDataButton = (): ReactElement => {
   const { state } = useContext(AuthContext);
-  const { update } = useUserData();
+  const { updateQueue } = useUserData();
   const router = useRouter();
 
   const resetUserData = async (): Promise<void> => {
     if (state.user) {
       const emptyUserData = createEmptyUserData(state.user);
-      await update(emptyUserData);
+      await updateQueue?.queue(emptyUserData).update();
       router.push(ROUTES.landing);
     }
   };
