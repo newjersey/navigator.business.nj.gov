@@ -24,7 +24,8 @@ interface Props {
 export const SectorModal = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
-  const { userData } = useUserData();
+  const { updateQueue } = useUserData();
+  const userData = updateQueue?.current();
 
   const {
     FormFuncWrapper,
@@ -43,7 +44,11 @@ export const SectorModal = (props: Props): ReactElement => {
     formContextState.reducer({ type: FieldStateActionKind.RESET });
   };
 
-  FormFuncWrapper(() => props.onContinue());
+  FormFuncWrapper(() => {
+    if (!updateQueue) return;
+    updateQueue.queueProfileData(profileData);
+    props.onContinue();
+  });
 
   return (
     <profileFormContext.Provider value={formContextState}>
