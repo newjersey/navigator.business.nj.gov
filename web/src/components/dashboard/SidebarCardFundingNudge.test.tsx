@@ -58,7 +58,7 @@ describe("<SidebarCardFundingNudge />", () => {
   });
 
   describe("when clicking funding button for generic industry", () => {
-    it("updates operating phase to UP_AND_RUNNING after modal success", () => {
+    it("updates with new sector and operating phase to UP_AND_RUNNING after modal success", () => {
       renderWithUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
@@ -73,6 +73,7 @@ describe("<SidebarCardFundingNudge />", () => {
       selectDropdownByValue("Sector", "clean-energy");
       fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalSaveButton));
       expect(currentUserData().profileData.operatingPhase).toEqual("UP_AND_RUNNING");
+      expect(currentUserData().profileData.sectorId).toEqual("clean-energy");
     });
 
     it("does not update operating phase when user cancels from within modal", () => {
