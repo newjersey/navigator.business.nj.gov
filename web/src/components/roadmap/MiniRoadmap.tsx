@@ -4,7 +4,6 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isStepCompleted } from "@/lib/domain-logic/isStepCompleted";
 import analytics from "@/lib/utils/analytics";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useCallback } from "react";
 
 interface Props {
@@ -14,41 +13,36 @@ interface Props {
 
 export const MiniRoadmap = (props: Props): ReactElement => {
   const { roadmap, sectionNamesInRoadmap } = useRoadmap();
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
+  const userData = updateQueue?.current();
+
   const onToggleStep = useCallback(
     async (stepNumber: number, setOpen: boolean, click: boolean): Promise<void> => {
-      const updateSteps = (openSteps: number[]): UserData | undefined => {
-        return userData
-          ? {
-              ...userData,
-              preferences: {
-                ...userData.preferences,
-                roadmapOpenSteps: openSteps,
-              },
-            }
-          : undefined;
-      };
-      if (!userData) {
-        return;
-      }
+      if (!userData || !updateQueue) return;
+
       const openSteps = userData?.preferences.roadmapOpenSteps;
       click && analytics.event.task_mini_roadmap_step.click.expand_contract();
       if (openSteps.includes(stepNumber)) {
         if (setOpen) {
           return;
         }
-        await update(
-          updateSteps(
-            openSteps?.filter((openStep) => {
+
+        await updateQueue
+          .queuePreferences({
+            roadmapOpenSteps: openSteps.filter((openStep) => {
               return openStep !== stepNumber;
-            })
-          )
-        );
+            }),
+          })
+          .update();
       } else {
-        await update(updateSteps([...openSteps, stepNumber]));
+        await updateQueue
+          .queuePreferences({
+            roadmapOpenSteps: [...openSteps, stepNumber],
+          })
+          .update();
       }
     },
-    [update, userData]
+    [updateQueue, userData]
   );
 
   return (
