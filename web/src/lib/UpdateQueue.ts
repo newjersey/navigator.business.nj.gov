@@ -92,6 +92,17 @@ export class UpdateQueueFactory implements UpdateQueue {
     return this;
   }
 
+  queueTaskItemChecklist(taskItemChecklist: Record<string, boolean>): UpdateQueue {
+    this.internalQueue = {
+      ...this.internalQueue,
+      taskItemChecklist: {
+        ...this.internalQueue.taskItemChecklist,
+        ...taskItemChecklist,
+      },
+    };
+    return this;
+  }
+
   update(): Promise<void> {
     return this.updateFunction(this.internalQueue);
   }

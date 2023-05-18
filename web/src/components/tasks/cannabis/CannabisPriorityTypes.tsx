@@ -27,7 +27,8 @@ interface Props {
 }
 
 export const CannabisPriorityTypes = (props: Props): ReactElement => {
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
+  const userData = updateQueue?.current();
   const [displayNextTabButton, setDisplayNextTabButton] = useState(false);
   const [eligibityPhrase, setEligibiltyPhrase] = useState("");
   const { Config } = useConfig();
@@ -39,9 +40,7 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
   });
 
   useEffect(() => {
-    if (!userData) {
-      return;
-    }
+    if (!userData || !updateQueue) return;
     const priorityTypeSelected = priorityTypes.some((key) => {
       return userData.taskItemChecklist[key] === true;
     });
@@ -53,15 +52,9 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
     }
 
     if (priorityTypeSelected && userData.taskItemChecklist[noneOfTheAbovePriorityId]) {
-      update({
-        ...userData,
-        taskItemChecklist: {
-          ...userData.taskItemChecklist,
-          [noneOfTheAbovePriorityId]: false,
-        },
-      });
+      updateQueue.queueTaskItemChecklist({ [noneOfTheAbovePriorityId]: false }).update();
     }
-  }, [userData, update]);
+  }, [userData, updateQueue]);
 
   useEffect(() => {
     if (!userData) {
@@ -102,9 +95,7 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
   }, [userData, Config.cannabisPriorityStatus]);
 
   const handleNoneOfTheAboveCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (!userData) {
-      return;
-    }
+    if (!userData || !updateQueue) return;
 
     if (event.target.checked) {
       const unselectPriorityTasks = {} as Record<string, boolean>;
@@ -112,22 +103,18 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
         unselectPriorityTasks[key] = false;
       }
 
-      update({
-        ...userData,
-        taskItemChecklist: {
-          ...userData.taskItemChecklist,
+      updateQueue
+        .queueTaskItemChecklist({
           ...unselectPriorityTasks,
           [noneOfTheAbovePriorityId]: true,
-        },
-      });
+        })
+        .update();
     } else {
-      update({
-        ...userData,
-        taskItemChecklist: {
-          ...userData.taskItemChecklist,
+      updateQueue
+        .queueTaskItemChecklist({
           [noneOfTheAbovePriorityId]: false,
-        },
-      });
+        })
+        .update();
     }
   };
 

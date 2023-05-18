@@ -126,6 +126,20 @@ describe("<CannabisPriorityStatusTask />", () => {
     expect(screen.getByText(C.nextButtonText)).toBeInTheDocument();
   });
 
+  it("deselects none of the above checkbox", async () => {
+    const task = generateTask({
+      id: "123",
+      name: "Header",
+    });
+    useMockRoadmapTask(task);
+
+    renderPage(task);
+    fireEvent.click(screen.getByTestId(noneOfTheAbovePriorityId));
+    expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(true);
+    fireEvent.click(screen.getByTestId(noneOfTheAbovePriorityId));
+    expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(false);
+  });
+
   it("updates task progress from not started to in progress when user navigates to the second tab", async () => {
     const randomPriorityType = randomElementFromArray([...allPriorityTypes, noneOfTheAbovePriorityId]);
 
