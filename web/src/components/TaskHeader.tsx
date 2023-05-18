@@ -19,9 +19,7 @@ export const TaskHeader = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
 
   const currentTaskProgress: TaskProgress =
-    updateQueue?.current().taskProgress[props.task.id] ??
-    userData?.taskProgress[props.task.id] ??
-    "NOT_STARTED";
+    updateQueue?.current().taskProgress[props.task.id] ?? "NOT_STARTED";
 
   const { Config } = useConfig();
 
