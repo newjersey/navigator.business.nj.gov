@@ -39,7 +39,7 @@ export const onSelfRegister = (
   router: SelfRegRouter,
   updateQueue: UpdateQueue | undefined,
   setRegistrationAlertStatus: AuthAlertContextType["setRegistrationAlertStatus"],
-  usereturnToLink?: boolean
+  options?: { useReturnToLink: boolean }
 ): void => {
   const userData = updateQueue?.current();
 
@@ -48,7 +48,7 @@ export const onSelfRegister = (
   }
   setRegistrationAlertStatus("IN_PROGRESS");
   let route;
-  if (usereturnToLink) {
+  if (options?.useReturnToLink) {
     route = userData.preferences.returnToLink;
   } else {
     route = router.asPath;

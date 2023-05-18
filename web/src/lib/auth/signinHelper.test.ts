@@ -95,7 +95,7 @@ describe("SigninHelper", () => {
       });
       updateQueue = new UpdateQueueFactory(userData, update);
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
-      await onSelfRegister(fakeRouter, updateQueue, mockSetAlertStatus, true);
+      await onSelfRegister(fakeRouter, updateQueue, mockSetAlertStatus, { useReturnToLink: true });
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
         ...userData,
         preferences: { ...userData.preferences, returnToLink: "/pathname?query=true" },
