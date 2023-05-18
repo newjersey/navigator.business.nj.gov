@@ -20,8 +20,10 @@ interface Props {
 const MAX_CONTENT_CHARS = 150;
 
 export const OpportunityCard = (props: Props): ReactElement => {
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
   const { Config } = useConfig();
+
+  const userData = updateQueue?.current();
 
   const TYPE_TO_LABEL: Record<"funding" | "certification", ReactElement> = {
     funding: <Tag backgroundColor="accent-semi-cool-light">{Config.dashboardDefaults.fundingTagText}</Tag>,
@@ -44,33 +46,29 @@ export const OpportunityCard = (props: Props): ReactElement => {
   };
 
   const hideSelf = async (): Promise<void> => {
-    if (!userData) {
+    if (!userData || !updateQueue) {
       return;
     }
     const propertyToUpdate = props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
-    await update({
-      ...userData,
-      preferences: {
-        ...userData.preferences,
+    await updateQueue
+      .queuePreferences({
         [propertyToUpdate]: [...userData.preferences[propertyToUpdate], props.opportunity.id],
-      },
-    });
+      })
+      .update();
   };
 
   const unhideSelf = async (): Promise<void> => {
-    if (!userData) {
+    if (!userData || !updateQueue) {
       return;
     }
     const propertyToUpdate = props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
-    await update({
-      ...userData,
-      preferences: {
-        ...userData.preferences,
+    await updateQueue
+      .queuePreferences({
         [propertyToUpdate]: userData.preferences[propertyToUpdate].filter((it: string) => {
           return it !== props.opportunity.id;
         }),
-      },
-    });
+      })
+      .update();
   };
 
   return (
