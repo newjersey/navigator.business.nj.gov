@@ -20,7 +20,8 @@ const isBeforeTheFollowingSaturday = (registeredISO: string | undefined): boolea
 };
 
 export const FilingsCalendarTaxAccess = (): ReactElement => {
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
+  const userData = updateQueue?.current();
   const { Config } = useConfig();
   const { isAuthenticated, setRegistrationModalIsVisible, registrationModalIsVisible } =
     useContext(AuthAlertContext);
@@ -40,7 +41,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
           taxId: userData.profileData.taxId as string,
           encryptedTaxId: userData.profileData.encryptedTaxId as string,
         });
-        update(updatedUserData);
+        updateQueue?.queue(updatedUserData).update();
       }
     })();
   }, userData);
@@ -60,7 +61,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
       return;
     }
     if (!registrationModalIsVisible && prevModalIsVisible.current === true) {
-      update({ ...userData, preferences: { ...userData.preferences, returnToLink: "" } });
+      updateQueue?.queuePreferences({ returnToLink: "" }).update();
     }
     prevModalIsVisible.current = registrationModalIsVisible;
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -71,13 +72,9 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
       return;
     }
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      update({
-        ...userData,
-        preferences: {
-          ...userData.preferences,
-          returnToLink: `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true`,
-        },
-      });
+      updateQueue
+        ?.queuePreferences({ returnToLink: `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true` })
+        .update();
       analytics.event.tax_calendar_banner_button.click.show_myNJ_registration_prompt_modal();
       setRegistrationModalIsVisible(true);
     } else {
