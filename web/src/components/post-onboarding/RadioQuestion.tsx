@@ -12,7 +12,8 @@ interface Props {
 }
 
 export const RadioQuestion = (props: Props): ReactElement => {
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
+  const userData = updateQueue?.current();
   const [onboardingQuestion, setOnboardingQuestion] = useState<PostOnboarding>({
     contentMd: "",
     question: "",
@@ -30,16 +31,14 @@ export const RadioQuestion = (props: Props): ReactElement => {
   const handleRadioChange = async (
     event: React.ChangeEvent<{ name?: string; value: string }>
   ): Promise<void> => {
-    if (!userData) {
+    if (!updateQueue) {
       return;
     }
-    await update({
-      ...userData,
-      profileData: {
-        ...userData.profileData,
+    await updateQueue
+      .queueProfileData({
         [props.onboardingKey]: event.target.value === "true",
-      },
-    });
+      })
+      .update();
   };
 
   return (
