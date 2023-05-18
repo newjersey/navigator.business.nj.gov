@@ -15,8 +15,9 @@ interface Props {
 }
 
 export const SectionAccordion = (props: Props): ReactElement => {
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
   const { isSectionCompleted } = useRoadmap();
+  const userData = updateQueue?.current();
   const dropdownIconClasses = props.mini
     ? "usa-icon--size-3 text-base-darkest"
     : "usa-icon--size-5 margin-left-1";
@@ -34,27 +35,19 @@ export const SectionAccordion = (props: Props): ReactElement => {
     }
     analytics.event.roadmap_section.click.expand_contract();
     if (isOpen) {
-      const newUserData = {
-        ...userData,
-        preferences: {
-          ...userData.preferences,
+      await updateQueue
+        ?.queuePreferences({
           roadmapOpenSections: roadmapOpenSections?.filter((roadmapOpenSection) => {
             return roadmapOpenSection !== props.sectionType;
           }),
-        },
-      };
-
-      await update(newUserData);
+        })
+        .update();
     } else {
-      const newUserData = {
-        ...userData,
-        preferences: {
-          ...userData?.preferences,
+      await updateQueue
+        ?.queuePreferences({
           roadmapOpenSections: [...roadmapOpenSections, props.sectionType],
-        },
-      };
-
-      await update(newUserData);
+        })
+        .update();
     }
   };
 

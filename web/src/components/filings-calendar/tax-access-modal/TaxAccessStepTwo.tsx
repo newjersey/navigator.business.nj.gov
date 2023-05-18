@@ -37,9 +37,8 @@ interface Props {
 
 export const TaxAccessStepTwo = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const userDataFromHook = useUserData();
-  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
-  const update = userDataFromHook.update;
+  const { updateQueue } = useUserData();
+  const userData = props.CMS_ONLY_fakeUserData ?? updateQueue?.current();
 
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -137,10 +136,9 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
 
   FormFuncWrapper(
     async () => {
-      if (!userData) return;
+      if (!userData || !updateQueue) return;
 
       setIsLoading(true);
-      let userDataToSet: UserData;
 
       const encryptedTaxId =
         profileData.taxId === userData.profileData.taxId ? profileData.encryptedTaxId : undefined;
@@ -155,51 +153,47 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
           businessNameToSubmitToTaxApi = profileData.responsibleOwnerName;
         }
 
-        userDataToSet = await postTaxFilingsOnboarding({
+        const userDataToSet = await postTaxFilingsOnboarding({
           taxId: profileData.taxId as string,
           businessName: businessNameToSubmitToTaxApi,
           encryptedTaxId: encryptedTaxId as string,
         });
+
+        await updateQueue
+          .queue(userDataToSet)
+          .queueProfileData({
+            taxId: profileData.taxId,
+            encryptedTaxId: encryptedTaxId,
+            responsibleOwnerName: profileData.responsibleOwnerName,
+          })
+          .update();
       } catch {
         setOnAPIfailed("UNKNOWN");
         setIsLoading(false);
         return;
       }
 
-      userDataToSet = {
-        ...userDataToSet,
-        profileData: {
-          ...userDataToSet.profileData,
-          taxId: profileData.taxId,
-          encryptedTaxId: encryptedTaxId,
-          responsibleOwnerName: profileData.responsibleOwnerName,
-        },
-      };
+      const { taxFilingData } = updateQueue.current();
 
-      await update(userDataToSet);
-
-      if (userDataToSet.taxFilingData.state === "SUCCESS") {
+      if (taxFilingData.state === "SUCCESS") {
         setIsLoading(false);
         analytics.event.tax_calendar_modal.submit.tax_deadlines_added_to_calendar();
         props.onSuccess();
       }
 
-      if (userDataToSet.taxFilingData.state === "PENDING") {
+      if (taxFilingData.state === "PENDING") {
         setIsLoading(false);
         analytics.event.tax_calendar_modal.submit.business_exists_but_not_in_Gov2Go();
         props.close();
       }
 
-      if (userDataToSet.taxFilingData.state === "FAILED") {
-        if (userDataToSet.taxFilingData.errorField === "businessName" && displayBusinessName()) {
+      if (taxFilingData.state === "FAILED") {
+        if (taxFilingData.errorField === "businessName" && displayBusinessName()) {
           formContextState.reducer({
             type: FieldStateActionKind.VALIDATION,
             payload: { field: "businessName", invalid: true },
           });
-        } else if (
-          userDataToSet.taxFilingData.errorField === "businessName" &&
-          displayResponsibleOwnerName()
-        ) {
+        } else if (taxFilingData.errorField === "businessName" && displayResponsibleOwnerName()) {
           formContextState.reducer({
             type: FieldStateActionKind.VALIDATION,
             payload: { field: "responsibleOwnerName", invalid: true },
@@ -215,7 +209,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
         setIsLoading(false);
       }
 
-      if (userDataToSet.taxFilingData.state === "API_ERROR") {
+      if (taxFilingData.state === "API_ERROR") {
         setOnAPIfailed("UNKNOWN");
         setIsLoading(false);
       }

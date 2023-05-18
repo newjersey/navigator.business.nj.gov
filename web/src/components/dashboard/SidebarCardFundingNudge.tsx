@@ -13,19 +13,18 @@ type Props = {
 export const SidebarCardFundingNudge = (props: Props): ReactElement => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const router = useRouter();
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
+  const userData = updateQueue?.current();
 
   const updateUserToUpAndRunning = async (): Promise<void> => {
     if (!userData) {
       return;
     }
-    await update({
-      ...userData,
-      profileData: {
-        ...userData.profileData,
+    await updateQueue
+      ?.queueProfileData({
         operatingPhase: "UP_AND_RUNNING",
-      },
-    });
+      })
+      .update();
     routeShallowWithQuery(router, QUERIES.fromFunding, "true");
   };
 
