@@ -124,110 +124,114 @@ describe("ApiFormationClient", () => {
 
         await client.form(userData, "navigator.com/form-business");
 
-        expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/PrepareFiling", {
-          Account: "12345",
-          Key: "abcdef",
-          ReturnUrl: "navigator.com/form-business?completeFiling=true",
-          FailureReturnUrl: "navigator.com/form-business?completeFiling=false",
-          Payer: {
-            CompanyName: formationFormData.businessName,
-            Address1: formationFormData.addressLine1,
-            Address2: formationFormData.addressLine2,
-            City: formationFormData.addressMunicipality?.name,
-            StateAbbreviation: "NJ",
-            ZipCode: formationFormData.addressZipCode,
-            Email: userData.user.email,
-          },
-          Formation: {
-            Gov2GoAnnualReports: formationFormData.annualReportNotification,
-            Gov2GoCorpWatch: formationFormData.corpWatchNotification,
-            ShortGoodStanding: formationFormData.certificateOfStanding,
-            Certified: formationFormData.certifiedCopyOfFormationDocument,
-            PayerEmail: userData.user.email,
-            SelectPaymentType: formationFormData.paymentType,
-            BusinessInformation: {
-              CompanyOrigin: "Domestic",
-              Business: "DomesticLimitedLiabilityCompany",
-              BusinessName: formationFormData.businessName,
-              BusinessDesignator: formationFormData.businessSuffix,
-              Naic: userData.profileData.naicsCode,
-              BusinessPurpose: formationFormData.businessPurpose,
-              EffectiveFilingDate: parseDateWithFormat(
-                formationFormData.businessStartDate,
-                defaultDateFormat
-              ).format(formationApiDateFormat),
-              MainAddress: {
-                Address1: formationFormData.addressLine1,
-                Address2: formationFormData.addressLine2,
-                City: formationFormData.addressMunicipality?.name,
-                State: "New Jersey",
-                Zipcode: formationFormData.addressZipCode,
-                Country: "US",
-              },
+        expect(mockAxios.post).toHaveBeenCalledWith(
+          "example.com/formation/PrepareFiling",
+          {
+            Account: "12345",
+            Key: "abcdef",
+            ReturnUrl: "navigator.com/form-business?completeFiling=true",
+            FailureReturnUrl: "navigator.com/form-business?completeFiling=false",
+            Payer: {
+              CompanyName: formationFormData.businessName,
+              Address1: formationFormData.addressLine1,
+              Address2: formationFormData.addressLine2,
+              City: formationFormData.addressMunicipality?.name,
+              StateAbbreviation: "NJ",
+              ZipCode: formationFormData.addressZipCode,
+              Email: userData.user.email,
             },
-            AdditionalLimitedLiabilityCompany: {
-              OtherProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }],
-            },
-            CompanyProfit: "Profit",
-            RegisteredAgent: {
-              Id: undefined,
-              Email: formationFormData.agentEmail,
-              Name: formationFormData.agentName,
-              Location: {
-                Address1: formationFormData.agentOfficeAddressLine1,
-                Address2: formationFormData.agentOfficeAddressLine2,
-                City: formationFormData.agentOfficeAddressMunicipality?.name,
-                State: "New Jersey",
-                Zipcode: formationFormData.agentOfficeAddressZipCode,
-                Country: "US",
-              },
-            },
-            Members: [
-              {
-                Name: members[0].name,
-                Location: {
-                  Address1: members[0].addressLine1,
-                  Address2: members[0].addressLine2,
-                  City: members[0].addressMunicipality?.name,
+            Formation: {
+              Gov2GoAnnualReports: formationFormData.annualReportNotification,
+              Gov2GoCorpWatch: formationFormData.corpWatchNotification,
+              ShortGoodStanding: formationFormData.certificateOfStanding,
+              Certified: formationFormData.certifiedCopyOfFormationDocument,
+              PayerEmail: userData.user.email,
+              SelectPaymentType: formationFormData.paymentType,
+              BusinessInformation: {
+                CompanyOrigin: "Domestic",
+                Business: "DomesticLimitedLiabilityCompany",
+                BusinessName: formationFormData.businessName,
+                BusinessDesignator: formationFormData.businessSuffix,
+                Naic: userData.profileData.naicsCode,
+                BusinessPurpose: formationFormData.businessPurpose,
+                EffectiveFilingDate: parseDateWithFormat(
+                  formationFormData.businessStartDate,
+                  defaultDateFormat
+                ).format(formationApiDateFormat),
+                MainAddress: {
+                  Address1: formationFormData.addressLine1,
+                  Address2: formationFormData.addressLine2,
+                  City: formationFormData.addressMunicipality?.name,
                   State: "New Jersey",
-                  Zipcode: members[0].addressZipCode,
+                  Zipcode: formationFormData.addressZipCode,
                   Country: "US",
                 },
               },
-              {
-                Name: members[1].name,
+              AdditionalLimitedLiabilityCompany: {
+                OtherProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }],
+              },
+              CompanyProfit: "Profit",
+              RegisteredAgent: {
+                Id: undefined,
+                Email: formationFormData.agentEmail,
+                Name: formationFormData.agentName,
                 Location: {
-                  Address1: members[1].addressLine1,
-                  Address2: members[1].addressLine2,
-                  City: members[1].addressCity,
-                  State: members[1].addressState?.name,
-                  Zipcode: members[1].addressZipCode,
+                  Address1: formationFormData.agentOfficeAddressLine1,
+                  Address2: formationFormData.agentOfficeAddressLine2,
+                  City: formationFormData.agentOfficeAddressMunicipality?.name,
+                  State: "New Jersey",
+                  Zipcode: formationFormData.agentOfficeAddressZipCode,
                   Country: "US",
                 },
               },
-            ],
-            Signers: [
-              {
-                Name: "faraz",
-                Title: "Authorized Representative",
-                Signed: true,
-              },
-              {
-                Name: "anne",
-                Title: "Authorized Representative",
-                Signed: true,
-              },
-              {
-                Name: "mike",
-                Title: "Authorized Representative",
-                Signed: false,
-              },
-            ],
-            ContactFirstName: formationFormData.contactFirstName,
-            ContactLastName: formationFormData.contactLastName,
-            ContactPhoneNumber: formationFormData.contactPhoneNumber,
+              Members: [
+                {
+                  Name: members[0].name,
+                  Location: {
+                    Address1: members[0].addressLine1,
+                    Address2: members[0].addressLine2,
+                    City: members[0].addressMunicipality?.name,
+                    State: "New Jersey",
+                    Zipcode: members[0].addressZipCode,
+                    Country: "US",
+                  },
+                },
+                {
+                  Name: members[1].name,
+                  Location: {
+                    Address1: members[1].addressLine1,
+                    Address2: members[1].addressLine2,
+                    City: members[1].addressCity,
+                    State: members[1].addressState?.name,
+                    Zipcode: members[1].addressZipCode,
+                    Country: "US",
+                  },
+                },
+              ],
+              Signers: [
+                {
+                  Name: "faraz",
+                  Title: "Authorized Representative",
+                  Signed: true,
+                },
+                {
+                  Name: "anne",
+                  Title: "Authorized Representative",
+                  Signed: true,
+                },
+                {
+                  Name: "mike",
+                  Title: "Authorized Representative",
+                  Signed: false,
+                },
+              ],
+              ContactFirstName: formationFormData.contactFirstName,
+              ContactLastName: formationFormData.contactLastName,
+              ContactPhoneNumber: formationFormData.contactPhoneNumber,
+            },
           },
-        });
+          { headers: { "Content-Type": "text/plain" } }
+        );
       });
 
       it("posts to the endpoint for a foreign user", async () => {
@@ -269,91 +273,95 @@ describe("ApiFormationClient", () => {
 
         await client.form(userData, "navigator.com/form-business");
 
-        expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/PrepareFiling", {
-          Account: "12345",
-          Key: "abcdef",
-          ReturnUrl: "navigator.com/form-business?completeFiling=true",
-          FailureReturnUrl: "navigator.com/form-business?completeFiling=false",
-          Payer: {
-            CompanyName: formationFormData.businessName,
-            Address1: "",
-            Address2: "",
-            City: "",
-            StateAbbreviation: undefined,
-            ZipCode: "",
-            Email: userData.user.email,
-          },
-          Formation: {
-            Gov2GoAnnualReports: formationFormData.annualReportNotification,
-            Gov2GoCorpWatch: formationFormData.corpWatchNotification,
-            ShortGoodStanding: formationFormData.certificateOfStanding,
-            Certified: formationFormData.certifiedCopyOfFormationDocument,
-            PayerEmail: userData.user.email,
-            SelectPaymentType: formationFormData.paymentType,
-            BusinessInformation: {
-              CompanyOrigin: "Foreign",
-              Business: "ForeignLimitedLiabilityCompany",
-              BusinessName: formationFormData.businessName,
-              BusinessDesignator: formationFormData.businessSuffix,
-              Naic: userData.profileData.naicsCode,
-              BusinessPurpose: formationFormData.businessPurpose,
-              EffectiveFilingDate: parseDateWithFormat(
-                formationFormData.businessStartDate,
-                defaultDateFormat
-              ).format(formationApiDateFormat),
-              ForeignDateOfFormation: "10/20/2022",
-              ForeignStateOfFormation: "Massachusetts",
-              MainAddress: {
-                Address1: formationFormData.addressLine1,
-                Address2: formationFormData.addressLine2,
-                City: formationFormData.addressCity,
-                State:
-                  formationFormData.addressCountry === "US"
-                    ? formationFormData.addressState?.name
-                    : undefined,
-                Zipcode: formationFormData.addressZipCode,
-                Country: formationFormData.addressCountry,
-                Province:
-                  formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince,
-              },
+        expect(mockAxios.post).toHaveBeenCalledWith(
+          "example.com/formation/PrepareFiling",
+          {
+            Account: "12345",
+            Key: "abcdef",
+            ReturnUrl: "navigator.com/form-business?completeFiling=true",
+            FailureReturnUrl: "navigator.com/form-business?completeFiling=false",
+            Payer: {
+              CompanyName: formationFormData.businessName,
+              Address1: "",
+              Address2: "",
+              City: "",
+              StateAbbreviation: undefined,
+              ZipCode: "",
+              Email: userData.user.email,
             },
-            CompanyProfit: "Profit",
-            RegisteredAgent: {
-              Id: undefined,
-              Email: formationFormData.agentEmail,
-              Name: formationFormData.agentName,
-              Location: {
-                Address1: formationFormData.agentOfficeAddressLine1,
-                Address2: formationFormData.agentOfficeAddressLine2,
-                City: formationFormData.agentOfficeAddressMunicipality?.name,
-                State: "New Jersey",
-                Zipcode: formationFormData.agentOfficeAddressZipCode,
-                Country: "US",
+            Formation: {
+              Gov2GoAnnualReports: formationFormData.annualReportNotification,
+              Gov2GoCorpWatch: formationFormData.corpWatchNotification,
+              ShortGoodStanding: formationFormData.certificateOfStanding,
+              Certified: formationFormData.certifiedCopyOfFormationDocument,
+              PayerEmail: userData.user.email,
+              SelectPaymentType: formationFormData.paymentType,
+              BusinessInformation: {
+                CompanyOrigin: "Foreign",
+                Business: "ForeignLimitedLiabilityCompany",
+                BusinessName: formationFormData.businessName,
+                BusinessDesignator: formationFormData.businessSuffix,
+                Naic: userData.profileData.naicsCode,
+                BusinessPurpose: formationFormData.businessPurpose,
+                EffectiveFilingDate: parseDateWithFormat(
+                  formationFormData.businessStartDate,
+                  defaultDateFormat
+                ).format(formationApiDateFormat),
+                ForeignDateOfFormation: "10/20/2022",
+                ForeignStateOfFormation: "Massachusetts",
+                MainAddress: {
+                  Address1: formationFormData.addressLine1,
+                  Address2: formationFormData.addressLine2,
+                  City: formationFormData.addressCity,
+                  State:
+                    formationFormData.addressCountry === "US"
+                      ? formationFormData.addressState?.name
+                      : undefined,
+                  Zipcode: formationFormData.addressZipCode,
+                  Country: formationFormData.addressCountry,
+                  Province:
+                    formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince,
+                },
               },
+              CompanyProfit: "Profit",
+              RegisteredAgent: {
+                Id: undefined,
+                Email: formationFormData.agentEmail,
+                Name: formationFormData.agentName,
+                Location: {
+                  Address1: formationFormData.agentOfficeAddressLine1,
+                  Address2: formationFormData.agentOfficeAddressLine2,
+                  City: formationFormData.agentOfficeAddressMunicipality?.name,
+                  State: "New Jersey",
+                  Zipcode: formationFormData.agentOfficeAddressZipCode,
+                  Country: "US",
+                },
+              },
+              Members: undefined,
+              Signers: [
+                {
+                  Name: "faraz",
+                  Title: "Authorized Representative",
+                  Signed: true,
+                },
+                {
+                  Name: "anne",
+                  Title: "General Partner",
+                  Signed: true,
+                },
+                {
+                  Name: "mike",
+                  Title: "Authorized Representative",
+                  Signed: false,
+                },
+              ],
+              ContactFirstName: formationFormData.contactFirstName,
+              ContactLastName: formationFormData.contactLastName,
+              ContactPhoneNumber: formationFormData.contactPhoneNumber,
             },
-            Members: undefined,
-            Signers: [
-              {
-                Name: "faraz",
-                Title: "Authorized Representative",
-                Signed: true,
-              },
-              {
-                Name: "anne",
-                Title: "General Partner",
-                Signed: true,
-              },
-              {
-                Name: "mike",
-                Title: "Authorized Representative",
-                Signed: false,
-              },
-            ],
-            ContactFirstName: formationFormData.contactFirstName,
-            ContactLastName: formationFormData.contactLastName,
-            ContactPhoneNumber: formationFormData.contactPhoneNumber,
           },
-        });
+          { headers: { "Content-Type": "text/plain" } }
+        );
       });
     });
 
@@ -402,131 +410,135 @@ describe("ApiFormationClient", () => {
 
         await client.form(userData, "hostname.com/form-business");
 
-        expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/PrepareFiling", {
-          Account: "12345",
-          Key: "abcdef",
-          ReturnUrl: "hostname.com/form-business?completeFiling=true",
-          FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
-          Payer: {
-            CompanyName: formationFormData.businessName,
-            Address1: formationFormData.addressLine1,
-            Address2: formationFormData.addressLine2,
-            City: formationFormData.addressMunicipality?.name,
-            StateAbbreviation: formationFormData.addressState?.shortCode,
-            ZipCode: formationFormData.addressZipCode,
-            Email: userData.user.email,
-          },
-          Formation: {
-            Gov2GoAnnualReports: formationFormData.annualReportNotification,
-            Gov2GoCorpWatch: formationFormData.corpWatchNotification,
-            ShortGoodStanding: formationFormData.certificateOfStanding,
-            Certified: formationFormData.certifiedCopyOfFormationDocument,
-            PayerEmail: userData.user.email,
-            SelectPaymentType: formationFormData.paymentType,
-            BusinessInformation: {
-              CompanyOrigin: "Domestic",
-              Business: "DomesticForProfitCorporation",
-              BusinessName: formationFormData.businessName,
-              BusinessDesignator: formationFormData.businessSuffix,
-              Naic: userData.profileData.naicsCode,
-              TotalShares: 1234,
-              BusinessPurpose: formationFormData.businessPurpose,
-              EffectiveFilingDate: parseDateWithFormat(
-                formationFormData.businessStartDate,
-                defaultDateFormat
-              ).format(formationApiDateFormat),
-              MainAddress: {
-                Address1: formationFormData.addressLine1,
-                Address2: formationFormData.addressLine2,
-                City: formationFormData.addressMunicipality?.name,
-                State: "New Jersey",
-                Zipcode: formationFormData.addressZipCode,
-                Country: "US",
-              },
+        expect(mockAxios.post).toHaveBeenCalledWith(
+          "example.com/formation/PrepareFiling",
+          {
+            Account: "12345",
+            Key: "abcdef",
+            ReturnUrl: "hostname.com/form-business?completeFiling=true",
+            FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
+            Payer: {
+              CompanyName: formationFormData.businessName,
+              Address1: formationFormData.addressLine1,
+              Address2: formationFormData.addressLine2,
+              City: formationFormData.addressMunicipality?.name,
+              StateAbbreviation: formationFormData.addressState?.shortCode,
+              ZipCode: formationFormData.addressZipCode,
+              Email: userData.user.email,
             },
-            AdditionalCCorpOrProfessionalCorp: {
-              AdditionalProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }],
-            },
-            CompanyProfit: "Profit",
-            MemberAttestation: true,
-            RegisteredAgent: {
-              Id: undefined,
-              Email: formationFormData.agentEmail,
-              Name: formationFormData.agentName,
-              Location: {
-                Address1: formationFormData.agentOfficeAddressLine1,
-                Address2: formationFormData.agentOfficeAddressLine2,
-                City: formationFormData.agentOfficeAddressMunicipality?.name,
-                State: "New Jersey",
-                Zipcode: formationFormData.agentOfficeAddressZipCode,
-                Country: "US",
-              },
-            },
-            Members: [
-              {
-                Name: members[0].name,
-                Location: {
-                  Address1: members[0].addressLine1,
-                  Address2: members[0].addressLine2,
-                  City: members[0].addressMunicipality?.name,
+            Formation: {
+              Gov2GoAnnualReports: formationFormData.annualReportNotification,
+              Gov2GoCorpWatch: formationFormData.corpWatchNotification,
+              ShortGoodStanding: formationFormData.certificateOfStanding,
+              Certified: formationFormData.certifiedCopyOfFormationDocument,
+              PayerEmail: userData.user.email,
+              SelectPaymentType: formationFormData.paymentType,
+              BusinessInformation: {
+                CompanyOrigin: "Domestic",
+                Business: "DomesticForProfitCorporation",
+                BusinessName: formationFormData.businessName,
+                BusinessDesignator: formationFormData.businessSuffix,
+                Naic: userData.profileData.naicsCode,
+                TotalShares: 1234,
+                BusinessPurpose: formationFormData.businessPurpose,
+                EffectiveFilingDate: parseDateWithFormat(
+                  formationFormData.businessStartDate,
+                  defaultDateFormat
+                ).format(formationApiDateFormat),
+                MainAddress: {
+                  Address1: formationFormData.addressLine1,
+                  Address2: formationFormData.addressLine2,
+                  City: formationFormData.addressMunicipality?.name,
                   State: "New Jersey",
-                  Zipcode: members[0].addressZipCode,
+                  Zipcode: formationFormData.addressZipCode,
                   Country: "US",
                 },
               },
-              {
-                Name: members[1].name,
-                Location: {
-                  Address1: members[1].addressLine1,
-                  Address2: members[1].addressLine2,
-                  City: members[1].addressCity,
-                  State: members[1].addressState?.name,
-                  Zipcode: members[1].addressZipCode,
-                  Country: "US",
-                },
+              AdditionalCCorpOrProfessionalCorp: {
+                AdditionalProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }],
               },
-            ],
-            Incorporators: [
-              {
-                Name: "faraz",
+              CompanyProfit: "Profit",
+              MemberAttestation: true,
+              RegisteredAgent: {
+                Id: undefined,
+                Email: formationFormData.agentEmail,
+                Name: formationFormData.agentName,
                 Location: {
-                  Address1: incorporators[0].addressLine1,
-                  Address2: incorporators[0].addressLine2,
-                  City: incorporators[0].addressMunicipality?.name,
+                  Address1: formationFormData.agentOfficeAddressLine1,
+                  Address2: formationFormData.agentOfficeAddressLine2,
+                  City: formationFormData.agentOfficeAddressMunicipality?.name,
                   State: "New Jersey",
-                  Zipcode: incorporators[0].addressZipCode,
+                  Zipcode: formationFormData.agentOfficeAddressZipCode,
                   Country: "US",
                 },
               },
-              {
-                Name: "anne",
-                Location: {
-                  Address1: incorporators[1].addressLine1,
-                  Address2: incorporators[1].addressLine2,
-                  City: incorporators[1].addressCity,
-                  State: incorporators[1].addressState?.name,
-                  Zipcode: incorporators[1].addressZipCode,
-                  Country: "US",
+              Members: [
+                {
+                  Name: members[0].name,
+                  Location: {
+                    Address1: members[0].addressLine1,
+                    Address2: members[0].addressLine2,
+                    City: members[0].addressMunicipality?.name,
+                    State: "New Jersey",
+                    Zipcode: members[0].addressZipCode,
+                    Country: "US",
+                  },
                 },
-              },
-            ],
-            Signers: [
-              {
-                Name: "faraz",
-                Title: "Incorporator",
-                Signed: true,
-              },
-              {
-                Name: "anne",
-                Title: "Incorporator",
-                Signed: false,
-              },
-            ],
-            ContactFirstName: formationFormData.contactFirstName,
-            ContactLastName: formationFormData.contactLastName,
-            ContactPhoneNumber: formationFormData.contactPhoneNumber,
+                {
+                  Name: members[1].name,
+                  Location: {
+                    Address1: members[1].addressLine1,
+                    Address2: members[1].addressLine2,
+                    City: members[1].addressCity,
+                    State: members[1].addressState?.name,
+                    Zipcode: members[1].addressZipCode,
+                    Country: "US",
+                  },
+                },
+              ],
+              Incorporators: [
+                {
+                  Name: "faraz",
+                  Location: {
+                    Address1: incorporators[0].addressLine1,
+                    Address2: incorporators[0].addressLine2,
+                    City: incorporators[0].addressMunicipality?.name,
+                    State: "New Jersey",
+                    Zipcode: incorporators[0].addressZipCode,
+                    Country: "US",
+                  },
+                },
+                {
+                  Name: "anne",
+                  Location: {
+                    Address1: incorporators[1].addressLine1,
+                    Address2: incorporators[1].addressLine2,
+                    City: incorporators[1].addressCity,
+                    State: incorporators[1].addressState?.name,
+                    Zipcode: incorporators[1].addressZipCode,
+                    Country: "US",
+                  },
+                },
+              ],
+              Signers: [
+                {
+                  Name: "faraz",
+                  Title: "Incorporator",
+                  Signed: true,
+                },
+                {
+                  Name: "anne",
+                  Title: "Incorporator",
+                  Signed: false,
+                },
+              ],
+              ContactFirstName: formationFormData.contactFirstName,
+              ContactLastName: formationFormData.contactLastName,
+              ContactPhoneNumber: formationFormData.contactPhoneNumber,
+            },
           },
-        });
+          { headers: { "Content-Type": "text/plain" } }
+        );
       });
 
       it("posts to the endpoint for a foreign user", async () => {
@@ -568,104 +580,108 @@ describe("ApiFormationClient", () => {
 
         await client.form(userData, "hostname.com/form-business", foreignGoodStandingFile);
 
-        expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/PrepareFiling", {
-          Account: "12345",
-          Key: "abcdef",
-          ReturnUrl: "hostname.com/form-business?completeFiling=true",
-          FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
-          ForeignGoodStandingFile: {
-            Extension: foreignGoodStandingFile.fileType,
-            Content: foreignGoodStandingFile.base64Contents,
-          },
-          Payer: {
-            CompanyName: formationFormData.businessName,
-            Address1: "",
-            Address2: "",
-            City: "",
-            StateAbbreviation: undefined,
-            ZipCode: "",
-            Email: userData.user.email,
-          },
-          Formation: {
-            Gov2GoAnnualReports: formationFormData.annualReportNotification,
-            Gov2GoCorpWatch: formationFormData.corpWatchNotification,
-            ShortGoodStanding: formationFormData.certificateOfStanding,
-            Certified: formationFormData.certifiedCopyOfFormationDocument,
-            PayerEmail: userData.user.email,
-            SelectPaymentType: formationFormData.paymentType,
+        expect(mockAxios.post).toHaveBeenCalledWith(
+          "example.com/formation/PrepareFiling",
+          {
+            Account: "12345",
+            Key: "abcdef",
+            ReturnUrl: "hostname.com/form-business?completeFiling=true",
+            FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
+            ForeignGoodStandingFile: {
+              Extension: foreignGoodStandingFile.fileType,
+              Content: foreignGoodStandingFile.base64Contents,
+            },
+            Payer: {
+              CompanyName: formationFormData.businessName,
+              Address1: "",
+              Address2: "",
+              City: "",
+              StateAbbreviation: undefined,
+              ZipCode: "",
+              Email: userData.user.email,
+            },
+            Formation: {
+              Gov2GoAnnualReports: formationFormData.annualReportNotification,
+              Gov2GoCorpWatch: formationFormData.corpWatchNotification,
+              ShortGoodStanding: formationFormData.certificateOfStanding,
+              Certified: formationFormData.certifiedCopyOfFormationDocument,
+              PayerEmail: userData.user.email,
+              SelectPaymentType: formationFormData.paymentType,
 
-            BusinessInformation: {
-              CompanyOrigin: "Foreign",
-              Business: "ForeignForProfitCorporation",
-              BusinessName: formationFormData.businessName,
-              BusinessDesignator: formationFormData.businessSuffix,
-              Naic: userData.profileData.naicsCode,
-              TotalShares: 1234,
-              BusinessPurpose: formationFormData.businessPurpose,
-              EffectiveFilingDate: parseDateWithFormat(
-                formationFormData.businessStartDate,
-                defaultDateFormat
-              ).format(formationApiDateFormat),
-              ForeignDateOfFormation: "10/20/2022",
-              ForeignStateOfFormation: "Massachusetts",
-              MainAddress: {
-                Address1: formationFormData.addressLine1,
-                Address2: formationFormData.addressLine2,
-                City: formationFormData.addressCity,
-                State:
-                  formationFormData.addressCountry === "US"
-                    ? formationFormData.addressState?.name
-                    : undefined,
-                Zipcode: formationFormData.addressZipCode,
-                Country: formationFormData.addressCountry,
-                Province:
-                  formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince,
+              BusinessInformation: {
+                CompanyOrigin: "Foreign",
+                Business: "ForeignForProfitCorporation",
+                BusinessName: formationFormData.businessName,
+                BusinessDesignator: formationFormData.businessSuffix,
+                Naic: userData.profileData.naicsCode,
+                TotalShares: 1234,
+                BusinessPurpose: formationFormData.businessPurpose,
+                EffectiveFilingDate: parseDateWithFormat(
+                  formationFormData.businessStartDate,
+                  defaultDateFormat
+                ).format(formationApiDateFormat),
+                ForeignDateOfFormation: "10/20/2022",
+                ForeignStateOfFormation: "Massachusetts",
+                MainAddress: {
+                  Address1: formationFormData.addressLine1,
+                  Address2: formationFormData.addressLine2,
+                  City: formationFormData.addressCity,
+                  State:
+                    formationFormData.addressCountry === "US"
+                      ? formationFormData.addressState?.name
+                      : undefined,
+                  Zipcode: formationFormData.addressZipCode,
+                  Country: formationFormData.addressCountry,
+                  Province:
+                    formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince,
+                },
               },
+              CompanyProfit: "Profit",
+              MemberAttestation: undefined,
+              RegisteredAgent: {
+                Id: undefined,
+                Email: formationFormData.agentEmail,
+                Name: formationFormData.agentName,
+                Location: {
+                  Address1: formationFormData.agentOfficeAddressLine1,
+                  Address2: formationFormData.agentOfficeAddressLine2,
+                  City: formationFormData.agentOfficeAddressMunicipality?.name,
+                  State: "New Jersey",
+                  Zipcode: formationFormData.agentOfficeAddressZipCode,
+                  Country: "US",
+                },
+              },
+              Members: undefined,
+              Incorporators: undefined,
+              Signers: [
+                {
+                  Name: "Faraz",
+                  Title: "President",
+                  Signed: true,
+                },
+                {
+                  Name: "Anne",
+                  Title: "Vice-President",
+                  Signed: true,
+                },
+                {
+                  Name: "Mike",
+                  Title: "Chairman of the Board",
+                  Signed: true,
+                },
+                {
+                  Name: "Dave",
+                  Title: "CEO",
+                  Signed: true,
+                },
+              ],
+              ContactFirstName: formationFormData.contactFirstName,
+              ContactLastName: formationFormData.contactLastName,
+              ContactPhoneNumber: formationFormData.contactPhoneNumber,
             },
-            CompanyProfit: "Profit",
-            MemberAttestation: undefined,
-            RegisteredAgent: {
-              Id: undefined,
-              Email: formationFormData.agentEmail,
-              Name: formationFormData.agentName,
-              Location: {
-                Address1: formationFormData.agentOfficeAddressLine1,
-                Address2: formationFormData.agentOfficeAddressLine2,
-                City: formationFormData.agentOfficeAddressMunicipality?.name,
-                State: "New Jersey",
-                Zipcode: formationFormData.agentOfficeAddressZipCode,
-                Country: "US",
-              },
-            },
-            Members: undefined,
-            Incorporators: undefined,
-            Signers: [
-              {
-                Name: "Faraz",
-                Title: "President",
-                Signed: true,
-              },
-              {
-                Name: "Anne",
-                Title: "Vice-President",
-                Signed: true,
-              },
-              {
-                Name: "Mike",
-                Title: "Chairman of the Board",
-                Signed: true,
-              },
-              {
-                Name: "Dave",
-                Title: "CEO",
-                Signed: true,
-              },
-            ],
-            ContactFirstName: formationFormData.contactFirstName,
-            ContactLastName: formationFormData.contactLastName,
-            ContactPhoneNumber: formationFormData.contactPhoneNumber,
           },
-        });
+          { headers: { "Content-Type": "text/plain" } }
+        );
       });
 
       describe("getPracticesLaw", () => {
@@ -795,87 +811,91 @@ describe("ApiFormationClient", () => {
 
         await client.form(userData, "hostname.com/form-business");
 
-        expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/PrepareFiling", {
-          Account: "12345",
-          Key: "abcdef",
-          ReturnUrl: "hostname.com/form-business?completeFiling=true",
-          FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
-          Payer: {
-            CompanyName: formationFormData.businessName,
-            Address1: formationFormData.addressLine1,
-            Address2: formationFormData.addressLine2,
-            City: formationFormData.addressMunicipality?.name,
-            StateAbbreviation: "NJ",
-            ZipCode: formationFormData.addressZipCode,
-            Email: userData.user.email,
+        expect(mockAxios.post).toHaveBeenCalledWith(
+          "example.com/formation/PrepareFiling",
+          {
+            Account: "12345",
+            Key: "abcdef",
+            ReturnUrl: "hostname.com/form-business?completeFiling=true",
+            FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
+            Payer: {
+              CompanyName: formationFormData.businessName,
+              Address1: formationFormData.addressLine1,
+              Address2: formationFormData.addressLine2,
+              City: formationFormData.addressMunicipality?.name,
+              StateAbbreviation: "NJ",
+              ZipCode: formationFormData.addressZipCode,
+              Email: userData.user.email,
+            },
+            Formation: {
+              Gov2GoAnnualReports: formationFormData.annualReportNotification,
+              Gov2GoCorpWatch: formationFormData.corpWatchNotification,
+              ShortGoodStanding: formationFormData.certificateOfStanding,
+              Certified: formationFormData.certifiedCopyOfFormationDocument,
+              PayerEmail: userData.user.email,
+              SelectPaymentType: formationFormData.paymentType,
+              BusinessInformation: {
+                CompanyOrigin: "Domestic",
+                Business: "DomesticLimitedLiabilityPartnership",
+                BusinessName: formationFormData.businessName,
+                BusinessDesignator: formationFormData.businessSuffix,
+                Naic: userData.profileData.naicsCode,
+                BusinessPurpose: formationFormData.businessPurpose,
+                EffectiveFilingDate: parseDateWithFormat(
+                  formationFormData.businessStartDate,
+                  defaultDateFormat
+                ).format(formationApiDateFormat),
+                MainAddress: {
+                  Address1: formationFormData.addressLine1,
+                  Address2: formationFormData.addressLine2,
+                  City: formationFormData.addressMunicipality?.name,
+                  State: "New Jersey",
+                  Zipcode: formationFormData.addressZipCode,
+                  Country: "US",
+                },
+              },
+              AdditionalLimitedLiabilityPartnership: {
+                OtherProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }],
+              },
+              CompanyProfit: "Profit",
+              RegisteredAgent: {
+                Id: undefined,
+                Email: formationFormData.agentEmail,
+                Name: formationFormData.agentName,
+                Location: {
+                  Address1: formationFormData.agentOfficeAddressLine1,
+                  Address2: formationFormData.agentOfficeAddressLine2,
+                  City: formationFormData.agentOfficeAddressMunicipality?.name,
+                  State: "New Jersey",
+                  Zipcode: formationFormData.agentOfficeAddressZipCode,
+                  Country: "US",
+                },
+              },
+              Members: [],
+              Signers: [
+                {
+                  Name: "faraz",
+                  Title: "Authorized Partner",
+                  Signed: true,
+                },
+                {
+                  Name: "anne",
+                  Title: "Authorized Partner",
+                  Signed: true,
+                },
+                {
+                  Name: "mike",
+                  Title: "Authorized Partner",
+                  Signed: false,
+                },
+              ],
+              ContactFirstName: formationFormData.contactFirstName,
+              ContactLastName: formationFormData.contactLastName,
+              ContactPhoneNumber: formationFormData.contactPhoneNumber,
+            },
           },
-          Formation: {
-            Gov2GoAnnualReports: formationFormData.annualReportNotification,
-            Gov2GoCorpWatch: formationFormData.corpWatchNotification,
-            ShortGoodStanding: formationFormData.certificateOfStanding,
-            Certified: formationFormData.certifiedCopyOfFormationDocument,
-            PayerEmail: userData.user.email,
-            SelectPaymentType: formationFormData.paymentType,
-            BusinessInformation: {
-              CompanyOrigin: "Domestic",
-              Business: "DomesticLimitedLiabilityPartnership",
-              BusinessName: formationFormData.businessName,
-              BusinessDesignator: formationFormData.businessSuffix,
-              Naic: userData.profileData.naicsCode,
-              BusinessPurpose: formationFormData.businessPurpose,
-              EffectiveFilingDate: parseDateWithFormat(
-                formationFormData.businessStartDate,
-                defaultDateFormat
-              ).format(formationApiDateFormat),
-              MainAddress: {
-                Address1: formationFormData.addressLine1,
-                Address2: formationFormData.addressLine2,
-                City: formationFormData.addressMunicipality?.name,
-                State: "New Jersey",
-                Zipcode: formationFormData.addressZipCode,
-                Country: "US",
-              },
-            },
-            AdditionalLimitedLiabilityPartnership: {
-              OtherProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }],
-            },
-            CompanyProfit: "Profit",
-            RegisteredAgent: {
-              Id: undefined,
-              Email: formationFormData.agentEmail,
-              Name: formationFormData.agentName,
-              Location: {
-                Address1: formationFormData.agentOfficeAddressLine1,
-                Address2: formationFormData.agentOfficeAddressLine2,
-                City: formationFormData.agentOfficeAddressMunicipality?.name,
-                State: "New Jersey",
-                Zipcode: formationFormData.agentOfficeAddressZipCode,
-                Country: "US",
-              },
-            },
-            Members: [],
-            Signers: [
-              {
-                Name: "faraz",
-                Title: "Authorized Partner",
-                Signed: true,
-              },
-              {
-                Name: "anne",
-                Title: "Authorized Partner",
-                Signed: true,
-              },
-              {
-                Name: "mike",
-                Title: "Authorized Partner",
-                Signed: false,
-              },
-            ],
-            ContactFirstName: formationFormData.contactFirstName,
-            ContactLastName: formationFormData.contactLastName,
-            ContactPhoneNumber: formationFormData.contactPhoneNumber,
-          },
-        });
+          { headers: { "Content-Type": "text/plain" } }
+        );
       });
 
       it("posts to the endpoint for a foreign user", async () => {
@@ -915,86 +935,90 @@ describe("ApiFormationClient", () => {
 
         await client.form(userData, "hostname.com/form-business");
 
-        expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/PrepareFiling", {
-          Account: "12345",
-          Key: "abcdef",
-          ReturnUrl: "hostname.com/form-business?completeFiling=true",
-          FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
-          Payer: {
-            CompanyName: formationFormData.businessName,
-            Address1: "",
-            Address2: "",
-            City: "",
-            StateAbbreviation: undefined,
-            ZipCode: "",
-            Email: userData.user.email,
-          },
-          Formation: {
-            Gov2GoAnnualReports: formationFormData.annualReportNotification,
-            Gov2GoCorpWatch: formationFormData.corpWatchNotification,
-            ShortGoodStanding: formationFormData.certificateOfStanding,
-            Certified: formationFormData.certifiedCopyOfFormationDocument,
-            PayerEmail: userData.user.email,
-            SelectPaymentType: formationFormData.paymentType,
-            BusinessInformation: {
-              CompanyOrigin: "Foreign",
-              Business: "ForeignLimitedLiabilityPartnership",
-              BusinessName: formationFormData.businessName,
-              BusinessDesignator: formationFormData.businessSuffix,
-              Naic: userData.profileData.naicsCode,
-              BusinessPurpose: formationFormData.businessPurpose,
-              EffectiveFilingDate: parseDateWithFormat(
-                formationFormData.businessStartDate,
-                defaultDateFormat
-              ).format(formationApiDateFormat),
-              ForeignDateOfFormation: "10/20/2022",
-              ForeignStateOfFormation: "Massachusetts",
-              MainAddress: {
-                Address1: formationFormData.addressLine1,
-                Address2: formationFormData.addressLine2,
-                City: formationFormData.addressCity,
-                State:
-                  formationFormData.addressCountry === "US"
-                    ? formationFormData.addressState?.name
-                    : undefined,
-                Zipcode: formationFormData.addressZipCode,
-                Country: formationFormData.addressCountry,
-                Province:
-                  formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince,
-              },
+        expect(mockAxios.post).toHaveBeenCalledWith(
+          "example.com/formation/PrepareFiling",
+          {
+            Account: "12345",
+            Key: "abcdef",
+            ReturnUrl: "hostname.com/form-business?completeFiling=true",
+            FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
+            Payer: {
+              CompanyName: formationFormData.businessName,
+              Address1: "",
+              Address2: "",
+              City: "",
+              StateAbbreviation: undefined,
+              ZipCode: "",
+              Email: userData.user.email,
             },
-            CompanyProfit: "Profit",
-            RegisteredAgent: {
-              Id: undefined,
-              Email: formationFormData.agentEmail,
-              Name: formationFormData.agentName,
-              Location: {
-                Address1: formationFormData.agentOfficeAddressLine1,
-                Address2: formationFormData.agentOfficeAddressLine2,
-                City: formationFormData.agentOfficeAddressMunicipality?.name,
-                State: "New Jersey",
-                Zipcode: formationFormData.agentOfficeAddressZipCode,
-                Country: "US",
+            Formation: {
+              Gov2GoAnnualReports: formationFormData.annualReportNotification,
+              Gov2GoCorpWatch: formationFormData.corpWatchNotification,
+              ShortGoodStanding: formationFormData.certificateOfStanding,
+              Certified: formationFormData.certifiedCopyOfFormationDocument,
+              PayerEmail: userData.user.email,
+              SelectPaymentType: formationFormData.paymentType,
+              BusinessInformation: {
+                CompanyOrigin: "Foreign",
+                Business: "ForeignLimitedLiabilityPartnership",
+                BusinessName: formationFormData.businessName,
+                BusinessDesignator: formationFormData.businessSuffix,
+                Naic: userData.profileData.naicsCode,
+                BusinessPurpose: formationFormData.businessPurpose,
+                EffectiveFilingDate: parseDateWithFormat(
+                  formationFormData.businessStartDate,
+                  defaultDateFormat
+                ).format(formationApiDateFormat),
+                ForeignDateOfFormation: "10/20/2022",
+                ForeignStateOfFormation: "Massachusetts",
+                MainAddress: {
+                  Address1: formationFormData.addressLine1,
+                  Address2: formationFormData.addressLine2,
+                  City: formationFormData.addressCity,
+                  State:
+                    formationFormData.addressCountry === "US"
+                      ? formationFormData.addressState?.name
+                      : undefined,
+                  Zipcode: formationFormData.addressZipCode,
+                  Country: formationFormData.addressCountry,
+                  Province:
+                    formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince,
+                },
               },
+              CompanyProfit: "Profit",
+              RegisteredAgent: {
+                Id: undefined,
+                Email: formationFormData.agentEmail,
+                Name: formationFormData.agentName,
+                Location: {
+                  Address1: formationFormData.agentOfficeAddressLine1,
+                  Address2: formationFormData.agentOfficeAddressLine2,
+                  City: formationFormData.agentOfficeAddressMunicipality?.name,
+                  State: "New Jersey",
+                  Zipcode: formationFormData.agentOfficeAddressZipCode,
+                  Country: "US",
+                },
+              },
+              Members: undefined,
+              Signers: [
+                {
+                  Name: "faraz",
+                  Title: "Authorized Representative",
+                  Signed: true,
+                },
+                {
+                  Name: "anne",
+                  Title: "General Partner",
+                  Signed: true,
+                },
+              ],
+              ContactFirstName: formationFormData.contactFirstName,
+              ContactLastName: formationFormData.contactLastName,
+              ContactPhoneNumber: formationFormData.contactPhoneNumber,
             },
-            Members: undefined,
-            Signers: [
-              {
-                Name: "faraz",
-                Title: "Authorized Representative",
-                Signed: true,
-              },
-              {
-                Name: "anne",
-                Title: "General Partner",
-                Signed: true,
-              },
-            ],
-            ContactFirstName: formationFormData.contactFirstName,
-            ContactLastName: formationFormData.contactLastName,
-            ContactPhoneNumber: formationFormData.contactPhoneNumber,
           },
-        });
+          { headers: { "Content-Type": "text/plain" } }
+        );
       });
     });
 
@@ -1052,130 +1076,134 @@ describe("ApiFormationClient", () => {
 
         await client.form(userData, "hostname.com/form-business");
 
-        expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/PrepareFiling", {
-          Account: "12345",
-          Key: "abcdef",
-          ReturnUrl: "hostname.com/form-business?completeFiling=true",
-          FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
-          Payer: {
-            CompanyName: formationFormData.businessName,
-            Address1: formationFormData.addressLine1,
-            Address2: formationFormData.addressLine2,
-            City: formationFormData.addressMunicipality?.name,
-            StateAbbreviation: "NJ",
-            ZipCode: formationFormData.addressZipCode,
-            Email: userData.user.email,
-          },
-          Formation: {
-            Gov2GoAnnualReports: formationFormData.annualReportNotification,
-            Gov2GoCorpWatch: formationFormData.corpWatchNotification,
-            ShortGoodStanding: formationFormData.certificateOfStanding,
-            Certified: formationFormData.certifiedCopyOfFormationDocument,
-            PayerEmail: userData.user.email,
-            SelectPaymentType: formationFormData.paymentType,
-            BusinessInformation: {
-              CompanyOrigin: "Domestic",
-              Business: "DomesticLimitedPartnership",
-              BusinessName: formationFormData.businessName,
-              BusinessDesignator: formationFormData.businessSuffix,
-              Naic: userData.profileData.naicsCode,
-              BusinessPurpose: formationFormData.businessPurpose,
-              EffectiveFilingDate: parseDateWithFormat(
-                formationFormData.businessStartDate,
-                defaultDateFormat
-              ).format(formationApiDateFormat),
-              MainAddress: {
-                Address1: formationFormData.addressLine1,
-                Address2: formationFormData.addressLine2,
-                City: formationFormData.addressMunicipality?.name,
-                State: "New Jersey",
-                Zipcode: formationFormData.addressZipCode,
-                Country: "US",
-              },
+        expect(mockAxios.post).toHaveBeenCalledWith(
+          "example.com/formation/PrepareFiling",
+          {
+            Account: "12345",
+            Key: "abcdef",
+            ReturnUrl: "hostname.com/form-business?completeFiling=true",
+            FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
+            Payer: {
+              CompanyName: formationFormData.businessName,
+              Address1: formationFormData.addressLine1,
+              Address2: formationFormData.addressLine2,
+              City: formationFormData.addressMunicipality?.name,
+              StateAbbreviation: "NJ",
+              ZipCode: formationFormData.addressZipCode,
+              Email: userData.user.email,
             },
-            AdditionalLimitedPartnership: {
-              AdditionalProvisions: [],
-              AggregateAmount: "combined investment",
-              DissolutionPlan: "dissolution",
-              GeneralPartnerWithdrawal: "withdrawl",
-              LimitedCanCreateLimited: "Yes",
-              LimitedCanCreateLimitedTerms: "partner terms",
-              LimitedCanGetDistribution: "Yes",
-              LimitedCanGetDistributionTerms: "get distro terms",
-              LimitedCanMakeDistribution: "No",
-              LimitedCanMakeDistributionTerms: "make distro terms",
-            },
-            CompanyProfit: "Profit",
-            RegisteredAgent: {
-              Id: undefined,
-              Email: formationFormData.agentEmail,
-              Name: formationFormData.agentName,
-              Location: {
-                Address1: formationFormData.agentOfficeAddressLine1,
-                Address2: formationFormData.agentOfficeAddressLine2,
-                City: formationFormData.agentOfficeAddressMunicipality?.name,
-                State: "New Jersey",
-                Zipcode: formationFormData.agentOfficeAddressZipCode,
-                Country: "US",
-              },
-            },
-            Members: [
-              {
-                Name: incorporators[0].name,
-                Location: {
-                  Address1: incorporators[0].addressLine1,
-                  Address2: incorporators[0].addressLine2,
-                  City: incorporators[0].addressMunicipality?.name,
+            Formation: {
+              Gov2GoAnnualReports: formationFormData.annualReportNotification,
+              Gov2GoCorpWatch: formationFormData.corpWatchNotification,
+              ShortGoodStanding: formationFormData.certificateOfStanding,
+              Certified: formationFormData.certifiedCopyOfFormationDocument,
+              PayerEmail: userData.user.email,
+              SelectPaymentType: formationFormData.paymentType,
+              BusinessInformation: {
+                CompanyOrigin: "Domestic",
+                Business: "DomesticLimitedPartnership",
+                BusinessName: formationFormData.businessName,
+                BusinessDesignator: formationFormData.businessSuffix,
+                Naic: userData.profileData.naicsCode,
+                BusinessPurpose: formationFormData.businessPurpose,
+                EffectiveFilingDate: parseDateWithFormat(
+                  formationFormData.businessStartDate,
+                  defaultDateFormat
+                ).format(formationApiDateFormat),
+                MainAddress: {
+                  Address1: formationFormData.addressLine1,
+                  Address2: formationFormData.addressLine2,
+                  City: formationFormData.addressMunicipality?.name,
                   State: "New Jersey",
-                  Zipcode: incorporators[0].addressZipCode,
+                  Zipcode: formationFormData.addressZipCode,
                   Country: "US",
                 },
               },
-              {
-                Name: incorporators[1].name,
+              AdditionalLimitedPartnership: {
+                AdditionalProvisions: [],
+                AggregateAmount: "combined investment",
+                DissolutionPlan: "dissolution",
+                GeneralPartnerWithdrawal: "withdrawl",
+                LimitedCanCreateLimited: "Yes",
+                LimitedCanCreateLimitedTerms: "partner terms",
+                LimitedCanGetDistribution: "Yes",
+                LimitedCanGetDistributionTerms: "get distro terms",
+                LimitedCanMakeDistribution: "No",
+                LimitedCanMakeDistributionTerms: "make distro terms",
+              },
+              CompanyProfit: "Profit",
+              RegisteredAgent: {
+                Id: undefined,
+                Email: formationFormData.agentEmail,
+                Name: formationFormData.agentName,
                 Location: {
-                  Address1: incorporators[1].addressLine1,
-                  Address2: incorporators[1].addressLine2,
-                  City: incorporators[1].addressCity,
-                  State: incorporators[1].addressState?.name,
-                  Zipcode: incorporators[1].addressZipCode,
+                  Address1: formationFormData.agentOfficeAddressLine1,
+                  Address2: formationFormData.agentOfficeAddressLine2,
+                  City: formationFormData.agentOfficeAddressMunicipality?.name,
+                  State: "New Jersey",
+                  Zipcode: formationFormData.agentOfficeAddressZipCode,
                   Country: "US",
                 },
               },
-              {
-                Name: incorporators[2].name,
-                Location: {
-                  Address1: incorporators[2].addressLine1,
-                  Address2: incorporators[2].addressLine2,
-                  City: incorporators[2].addressCity,
-                  State: incorporators[2].addressState?.name,
-                  Zipcode: incorporators[2].addressZipCode,
-                  Country: "US",
+              Members: [
+                {
+                  Name: incorporators[0].name,
+                  Location: {
+                    Address1: incorporators[0].addressLine1,
+                    Address2: incorporators[0].addressLine2,
+                    City: incorporators[0].addressMunicipality?.name,
+                    State: "New Jersey",
+                    Zipcode: incorporators[0].addressZipCode,
+                    Country: "US",
+                  },
                 },
-              },
-            ],
-            Signers: [
-              {
-                Name: incorporators[0].name,
-                Title: "General Partner",
-                Signed: true,
-              },
-              {
-                Name: incorporators[1].name,
-                Title: "General Partner",
-                Signed: true,
-              },
-              {
-                Name: incorporators[2].name,
-                Title: "General Partner",
-                Signed: true,
-              },
-            ],
-            ContactFirstName: formationFormData.contactFirstName,
-            ContactLastName: formationFormData.contactLastName,
-            ContactPhoneNumber: formationFormData.contactPhoneNumber,
+                {
+                  Name: incorporators[1].name,
+                  Location: {
+                    Address1: incorporators[1].addressLine1,
+                    Address2: incorporators[1].addressLine2,
+                    City: incorporators[1].addressCity,
+                    State: incorporators[1].addressState?.name,
+                    Zipcode: incorporators[1].addressZipCode,
+                    Country: "US",
+                  },
+                },
+                {
+                  Name: incorporators[2].name,
+                  Location: {
+                    Address1: incorporators[2].addressLine1,
+                    Address2: incorporators[2].addressLine2,
+                    City: incorporators[2].addressCity,
+                    State: incorporators[2].addressState?.name,
+                    Zipcode: incorporators[2].addressZipCode,
+                    Country: "US",
+                  },
+                },
+              ],
+              Signers: [
+                {
+                  Name: incorporators[0].name,
+                  Title: "General Partner",
+                  Signed: true,
+                },
+                {
+                  Name: incorporators[1].name,
+                  Title: "General Partner",
+                  Signed: true,
+                },
+                {
+                  Name: incorporators[2].name,
+                  Title: "General Partner",
+                  Signed: true,
+                },
+              ],
+              ContactFirstName: formationFormData.contactFirstName,
+              ContactLastName: formationFormData.contactLastName,
+              ContactPhoneNumber: formationFormData.contactPhoneNumber,
+            },
           },
-        });
+          { headers: { "Content-Type": "text/plain" } }
+        );
       });
     });
 
