@@ -37,27 +37,32 @@ export const statefulDataHelpers = (
   };
 };
 
-export const WithStatefulData = (spy: jest.Mock) => {
-  return ({
-    children,
-    initialData,
-  }: {
-    children: ReactNode;
-    initialData: GenericData | undefined;
-  }): ReactElement => {
-    const [genericData, setGenericData] = useState<GenericData | undefined>(initialData);
-    const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>(undefined);
+type StatefulDataProps = {
+  children: ReactNode;
+  initialData: GenericData | undefined;
+};
 
+export const WithStatefulData = (spy: jest.Mock): ((props: StatefulDataProps) => ReactElement) => {
+  type UpdateFn = (newData: GenericData | undefined, config?: { local?: boolean }) => Promise<void>;
+
+  return ({ children, initialData }: StatefulDataProps): ReactElement => {
     const update = (newData: GenericData | undefined, config?: { local?: boolean }): Promise<void> => {
       spy(newData, config);
       setGenericData(newData);
       return Promise.resolve();
     };
 
-    useEffect(() => {
+    const getUpdateQueue = (update: UpdateFn): UpdateQueue | undefined => {
       if (genericData && isUserData(genericData as UserData | ProfileData)) {
-        setUpdateQueue(new UpdateQueueFactory(genericData as UserData, update));
+        return new UpdateQueueFactory(genericData as UserData, update);
       }
+    };
+
+    const [genericData, setGenericData] = useState<GenericData | undefined>(initialData);
+    const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>(getUpdateQueue(update));
+
+    useEffect(() => {
+      setUpdateQueue(getUpdateQueue(update));
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [genericData]);
 
