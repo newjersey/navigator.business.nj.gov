@@ -1,9 +1,6 @@
 ---
 filename: njeda-historic-property
 name: Historic Property Reinvestment Program
-urlSlug: njeda-historic-property
-id: njeda-historic-property
-openDate: 02/01/2023
 dueDate: 04/03/2023
 descriptionMd: This program offers a tax credit for historic, income-producing
   properties within the state of New Jersey. It's administered by the New Jersey
@@ -11,25 +8,28 @@ descriptionMd: This program offers a tax credit for historic, income-producing
   Preservation Office and the New Jersey Division of Taxation in the Department
   of the Treasury.
 callToActionLink: https://www.njeda.com/historic-property-reinvestment-program/
-callToActionText: Learn More
-fundingType: tax credit
-programFrequency: ongoing
 status: deadline
-programPurpose: In State
 agency:
   - NJEDA
-agencyContact: ""
-businessStage: both
 employeesRequired: n/a
 homeBased: unknown
-mwvb:
-  - n/a
 preferenceForOpportunityZone: yes
 county:
   - All
 sector:
   - construction
-publishStageArchive: ""
+publishStageArchive: Do Not Publish
+mwvb:
+  - n/a
+urlSlug: njeda-historic-property
+id: njeda-historic-property
+openDate: 02/01/2023
+callToActionText: Learn More
+fundingType: tax credit
+programFrequency: ongoing
+programPurpose: In State
+agencyContact: ""
+businessStage: both
 ---
 
 This program offers a tax credit for historic, income-producing properties within the state of New Jersey. It's administered by the New Jersey Economic Development Authority in coordination with the New Jersey Historic Preservation Office and the New Jersey Division of Taxation in the Department of the Treasury.
