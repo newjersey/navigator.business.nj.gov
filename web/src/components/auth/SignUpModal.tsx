@@ -37,7 +37,7 @@ export const SignUpModal = (): ReactElement => {
   const selfRegister = (): void => {
     if (userData?.preferences.returnToLink === `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true`) {
       analytics.event.myNJ_prompt_modal_complete_button.click.go_to_myNJ_registration();
-      onSelfRegister(router, updateQueue, setRegistrationAlertStatus, true);
+      onSelfRegister(router, updateQueue, setRegistrationAlertStatus, { useReturnToLink: true });
     } else {
       analytics.event.guest_modal.click.go_to_myNJ_registration();
       onSelfRegister(router, updateQueue, setRegistrationAlertStatus);

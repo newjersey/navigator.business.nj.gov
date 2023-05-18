@@ -39,7 +39,6 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const currentTaskProgress: TaskProgress =
     props.STORYBOOK_ONLY_currentTaskProgress ??
     updateQueue?.current().taskProgress[props.taskId] ??
-    userData?.taskProgress[props.taskId] ??
     "NOT_STARTED";
   const isDisabled = !!props.disabledTooltipText;
 
