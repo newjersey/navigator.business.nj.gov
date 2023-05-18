@@ -28,9 +28,8 @@ interface Props {
 
 export const FilingsCalendar = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const userDataFromHook = useUserData();
-  const update = userDataFromHook.update;
-  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
+  const { updateQueue } = useUserData();
+  const userData = props.CMS_ONLY_fakeUserData ?? updateQueue?.current();
 
   const currentDate = getCurrentDate();
   const currentYear = getCurrentDate().year().toString();
@@ -92,15 +91,13 @@ export const FilingsCalendar = (props: Props): ReactElement => {
       isLargeScreen;
 
     const handleCalendarOnClick = (): void => {
-      if (!userData) return;
+      if (!userData || !updateQueue) return;
 
-      update({
-        ...userData,
-        preferences: {
-          ...userData.preferences,
+      updateQueue
+        .queuePreferences({
           isCalendarFullView: !userData.preferences.isCalendarFullView,
-        },
-      });
+        })
+        .update();
     };
 
     if (displayToggleButton) {
