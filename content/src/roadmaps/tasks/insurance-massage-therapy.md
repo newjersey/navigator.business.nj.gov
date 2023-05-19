@@ -4,7 +4,8 @@ filename: insurance-massage-therapy
 name: Obtain an Insurance Policy
 id: insurance-massage-therapy
 ---
-To complete your massage therapy business application, you need to obtain two insurance policies. 
+
+To complete your massage therapy business application, you need to obtain two insurance policies.
 
 ---
 

@@ -24,9 +24,6 @@ Any commercial vehicle crossing state lines must register with the U.S. Departme
 - Names and titles of the company officers
 - A `process agent|process-agent`, already filed with the Federal Motor Carrier Safety Administration (FMCSA)
 
-
-
-
 :::infoAlert
 
 The form can only be signed by an authorized official, like the owner, a partner, or an authorized representative.

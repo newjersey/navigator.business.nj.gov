@@ -9,11 +9,12 @@ agencyId: nj-motor-vehicle
 formName: ""
 ---
 
-Your commercial buses need to be inspected by the Motor Vehicle Commission’s School Bus Inspection Unit **before** obtaining registration and license plates for them. 
+Your commercial buses need to be inspected by the Motor Vehicle Commission’s School Bus Inspection Unit **before** obtaining registration and license plates for them.
 
 :::infoAlert
 Your vehicle will need to be inspected twice a year.
 :::
+
 ---
 
 ### Inspection Requirements:
