@@ -16,21 +16,21 @@ interface Props {
 export const FormationInterimSuccessPage = (props: Props): ReactElement => {
   const [showConfirmResubmitModal, setShowConfirmResubmitModal] = useState<boolean>(false);
   const { Config } = useConfig();
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
   const router = useRouter();
 
   const resetCompletedFilingPayment = (): void => {
-    if (!userData) {
+    if (!updateQueue) {
       return;
     }
-    const updatedUserData = {
-      ...userData,
-      formationData: { ...userData.formationData, completedFilingPayment: false },
-    };
-    update(updatedUserData).then(() => {
-      props.setStepIndex(LookupStepIndexByName("Review"));
-      router.replace({ pathname: `/tasks/${props.taskUrlSlug}` }, undefined, { shallow: true });
-    });
+
+    updateQueue
+      .queueFormationData({ completedFilingPayment: false })
+      .update()
+      .then(() => {
+        props.setStepIndex(LookupStepIndexByName("Review"));
+        router.replace({ pathname: `/tasks/${props.taskUrlSlug}` }, undefined, { shallow: true });
+      });
   };
 
   return (
