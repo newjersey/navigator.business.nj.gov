@@ -10,13 +10,14 @@ interface Props {
 }
 
 export const TaskCheckbox = (props: Props): ReactElement => {
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
+  const userData = updateQueue?.current();
   const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
 
   const checklistItemStatus = userData?.taskItemChecklist[props.checklistItemId] ?? false;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (!userData) {
+    if (!updateQueue) {
       return;
     }
 
@@ -25,13 +26,11 @@ export const TaskCheckbox = (props: Props): ReactElement => {
       return;
     }
 
-    update({
-      ...userData,
-      taskItemChecklist: {
-        ...userData.taskItemChecklist,
+    updateQueue
+      .queueTaskItemChecklist({
         [props.checklistItemId]: event.target.checked,
-      },
-    });
+      })
+      .update();
   };
 
   return (

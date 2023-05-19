@@ -12,7 +12,7 @@ import { ReactElement, useContext } from "react";
 
 export const DbaNameSearch = (): ReactElement => {
   const { Config } = useConfig();
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
   const { setBusinessNameAvailability } = useContext(BusinessFormationContext);
 
   useMountEffect(() => {
@@ -24,18 +24,16 @@ export const DbaNameSearch = (): ReactElement => {
   };
 
   const onSubmit = async (submittedName: string, nameAvailability: NameAvailability): Promise<void> => {
-    if (!nameAvailability || !userData) {
+    if (!nameAvailability || !updateQueue) {
       return;
     }
     setBusinessNameAvailability(nameAvailability);
     if (nameAvailability.status === "AVAILABLE") {
-      await update({
-        ...userData,
-        profileData: {
-          ...userData.profileData,
+      await updateQueue
+        .queueProfileData({
           nexusDbaName: submittedName,
-        },
-      });
+        })
+        .update();
     }
   };
 
