@@ -1,3 +1,27 @@
+# [5.20.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.19.0...v5.20.0) (2023-05-19)
+
+
+### Bug Fixes
+
+* [[#185191909](https://github.com/newjersey/navigator.business.nj.gov/issues/185191909)] no redirect to alt landing if on welcome landing ([37e2588](https://github.com/newjersey/navigator.business.nj.gov/commit/37e258801de218e41c1dc926d9181273458d607f))
+* broke linting and tests ([98fe27e](https://github.com/newjersey/navigator.business.nj.gov/commit/98fe27e7b26db674e4007050e902cb0cc7b2e09b))
+* update fundings sync with new agency mapping IDs ([ccb4eb4](https://github.com/newjersey/navigator.business.nj.gov/commit/ccb4eb4601d857d72ae16df40c4e16afd4fbe6ac))
+* updating Fund Opps - Content njeda-historic-property ([#5240](https://github.com/newjersey/navigator.business.nj.gov/issues/5240)) ([0fad60c](https://github.com/newjersey/navigator.business.nj.gov/commit/0fad60cdee4f407d1e9c02f3cefd846daf842ae7))
+* updating Tasks - All car-rental-vehicle-registration ([#5583](https://github.com/newjersey/navigator.business.nj.gov/issues/5583)) ([4730311](https://github.com/newjersey/navigator.business.nj.gov/commit/47303115f9b156761992443bbda2d3149e74a15a))
+* updating Tasks - All certificate-vending-machine ([#5585](https://github.com/newjersey/navigator.business.nj.gov/issues/5585)) ([91d1e73](https://github.com/newjersey/navigator.business.nj.gov/commit/91d1e73489ac9c829c7696351f8da5849019e151))
+* updating Tasks - All determine-naics-code ([#5675](https://github.com/newjersey/navigator.business.nj.gov/issues/5675)) ([ecb9260](https://github.com/newjersey/navigator.business.nj.gov/commit/ecb92602d15b55b132ad5b01369fdc4b267a0ad8))
+* updating Tasks - EIN ein-task-metadata ([#5820](https://github.com/newjersey/navigator.business.nj.gov/issues/5820)) ([83c2b4f](https://github.com/newjersey/navigator.business.nj.gov/commit/83c2b4ff53a045022b209491895c5e8f00baf8d5))
+
+
+### Features
+
+* [[#184306538](https://github.com/newjersey/navigator.business.nj.gov/issues/184306538)] Make license checkbox editable ([ab6d7ac](https://github.com/newjersey/navigator.business.nj.gov/commit/ab6d7ac38e43a396d05f6aee6943222b79874af9))
+* [[#184833864](https://github.com/newjersey/navigator.business.nj.gov/issues/184833864)] merge agency fields into agencyId and agencyAdditionalContext ([f179f4d](https://github.com/newjersey/navigator.business.nj.gov/commit/f179f4df1d76e57c04cfb9d23a4d7ddf5fce660d))
+* [[#184870963](https://github.com/newjersey/navigator.business.nj.gov/issues/184870963)] desktop navbar updated to be sticky ([285098a](https://github.com/newjersey/navigator.business.nj.gov/commit/285098a8a1fd3fb34ca7399ec43b793252d2b07e))
+* [[#184870963](https://github.com/newjersey/navigator.business.nj.gov/issues/184870963)] updated desktop navbar to sticky ([c8dfdb2](https://github.com/newjersey/navigator.business.nj.gov/commit/c8dfdb22cba439755eab8aeffba0e423bd3a0105))
+* [[#185093892](https://github.com/newjersey/navigator.business.nj.gov/issues/185093892)] add two-step modal for tax access ([467ad7c](https://github.com/newjersey/navigator.business.nj.gov/commit/467ad7ce8c1b0ae7db5ab3fd44902390a5e63295))
+* [[#185191912](https://github.com/newjersey/navigator.business.nj.gov/issues/185191912)] updated landing page navbar to hamburger and sticky ([6d1eab5](https://github.com/newjersey/navigator.business.nj.gov/commit/6d1eab554830cf6a77e80d57f3d6ec9a0c375443))
+
 # [5.19.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.18.0...v5.19.0) (2023-05-15)
 
 
