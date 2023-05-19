@@ -27,7 +27,7 @@ export const TaskCheckbox = (props: Props): ReactElement => {
     }
 
     updateQueue
-      .queueTaskItemChecklistData({
+      .queueTaskItemChecklist({
         [props.checklistItemId]: event.target.checked,
       })
       .update();
