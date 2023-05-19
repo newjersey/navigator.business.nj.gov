@@ -230,7 +230,7 @@ describe("ApiFormationClient", () => {
               ContactPhoneNumber: formationFormData.contactPhoneNumber,
             },
           },
-          { headers: { "Content-Type": "text/plain" } }
+          { headers: { "Content-Type": "application/json" } }
         );
       });
 
@@ -360,7 +360,7 @@ describe("ApiFormationClient", () => {
               ContactPhoneNumber: formationFormData.contactPhoneNumber,
             },
           },
-          { headers: { "Content-Type": "text/plain" } }
+          { headers: { "Content-Type": "application/json" } }
         );
       });
     });
@@ -537,11 +537,11 @@ describe("ApiFormationClient", () => {
               ContactPhoneNumber: formationFormData.contactPhoneNumber,
             },
           },
-          { headers: { "Content-Type": "text/plain" } }
+          { headers: { "Content-Type": "application/json" } }
         );
       });
 
-      it("posts to the endpoint for a foreign user", async () => {
+      it("posts to the endpoint for a foreign user using text/plain", async () => {
         const stubResponse = generateApiResponse({});
         mockAxios.post.mockResolvedValue({ data: stubResponse });
         const legalStructureId = randomInt() % 2 ? "s-corporation" : "c-corporation";
@@ -894,7 +894,7 @@ describe("ApiFormationClient", () => {
               ContactPhoneNumber: formationFormData.contactPhoneNumber,
             },
           },
-          { headers: { "Content-Type": "text/plain" } }
+          { headers: { "Content-Type": "application/json" } }
         );
       });
 
@@ -1017,7 +1017,7 @@ describe("ApiFormationClient", () => {
               ContactPhoneNumber: formationFormData.contactPhoneNumber,
             },
           },
-          { headers: { "Content-Type": "text/plain" } }
+          { headers: { "Content-Type": "application/json" } }
         );
       });
     });
@@ -1202,7 +1202,7 @@ describe("ApiFormationClient", () => {
               ContactPhoneNumber: formationFormData.contactPhoneNumber,
             },
           },
-          { headers: { "Content-Type": "text/plain" } }
+          { headers: { "Content-Type": "application/json" } }
         );
       });
     });
