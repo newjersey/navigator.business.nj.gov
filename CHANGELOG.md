@@ -1,3 +1,10 @@
+## [5.20.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.20.0...v5.20.1) (2023-05-19)
+
+
+### Bug Fixes
+
+* hotfix - only use text/plain in formation api when has good-standing file ([6c4eeb5](https://github.com/newjersey/navigator.business.nj.gov/commit/6c4eeb52626f6b1148d0e0b54ca4911f530b6170))
+
 # [5.20.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.19.0...v5.20.0) (2023-05-19)
 
 
