@@ -8,11 +8,16 @@ import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextField
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { FormContextFieldProps } from "@/lib/types/types";
 import { arrayOfSectors as sectors, LookupSectorTypeById, SectorType } from "@businessnjgovnavigator/shared/";
+import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
 import { Autocomplete, TextField } from "@mui/material";
 import { orderBy } from "lodash";
 import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
 
-export const OnboardingSectors = <T,>(props: FormContextFieldProps<T>): ReactElement => {
+interface Props<T> extends FormContextFieldProps<T> {
+  isSectorModal?: boolean;
+}
+
+export const OnboardingSectors = <T,>(props: Props<T>): ReactElement => {
   const [searchText, setSearchText] = useState<string>("");
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
@@ -51,7 +56,15 @@ export const OnboardingSectors = <T,>(props: FormContextFieldProps<T>): ReactEle
   };
 
   const isValid = (): boolean => {
-    return !!state.profileData.sectorId && LookupSectorTypeById(state.profileData.sectorId)?.id !== undefined;
+    const existsAndIsValid =
+      !!state.profileData.sectorId && LookupSectorTypeById(state.profileData.sectorId)?.id !== undefined;
+    const isRequiredForPhase = LookupOperatingPhaseById(state.profileData.operatingPhase).sectorRequired;
+
+    if (props.isSectorModal) {
+      return existsAndIsValid;
+    }
+
+    return isRequiredForPhase ? existsAndIsValid : true;
   };
 
   const onValidation = (): void => Validate(!isValid());

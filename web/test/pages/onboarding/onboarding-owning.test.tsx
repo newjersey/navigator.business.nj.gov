@@ -38,6 +38,7 @@ const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
   return generateUserData({
     profileData: generateProfileData({
       businessPersona: "OWNING",
+      operatingPhase: "GUEST_MODE_OWNING",
       ...overrides,
     }),
     onboardingFormProgress: "UNSTARTED",
