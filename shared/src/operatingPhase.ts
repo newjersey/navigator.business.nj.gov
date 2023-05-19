@@ -14,6 +14,7 @@ export interface OperatingPhase {
   readonly businessNameRequired: boolean;
   readonly feedbackFormToDisplay: "STARTING" | "OWNING" | "";
   readonly displayProfileOpportunityAlert: boolean;
+  readonly sectorRequired: boolean;
 }
 
 export type OperatingPhaseId =
@@ -46,6 +47,7 @@ export const LookupOperatingPhaseById = (id: OperatingPhaseId | undefined): Oper
       businessNameRequired: false,
       feedbackFormToDisplay: "",
       displayProfileOpportunityAlert: false,
+      sectorRequired: false,
     }
   );
 };
@@ -67,6 +69,7 @@ export const OperatingPhases: OperatingPhase[] = [
     businessNameRequired: false,
     feedbackFormToDisplay: "STARTING",
     displayProfileOpportunityAlert: false,
+    sectorRequired: false,
   },
   {
     id: "GUEST_MODE_OWNING",
@@ -84,6 +87,7 @@ export const OperatingPhases: OperatingPhase[] = [
     businessNameRequired: false,
     feedbackFormToDisplay: "OWNING",
     displayProfileOpportunityAlert: true,
+    sectorRequired: true,
   },
   {
     id: "FORMED_AND_REGISTERED",
@@ -101,6 +105,7 @@ export const OperatingPhases: OperatingPhase[] = [
     businessNameRequired: true,
     feedbackFormToDisplay: "STARTING",
     displayProfileOpportunityAlert: false,
+    sectorRequired: false,
   },
   {
     id: "NEEDS_TO_FORM",
@@ -118,6 +123,7 @@ export const OperatingPhases: OperatingPhase[] = [
     businessNameRequired: false,
     feedbackFormToDisplay: "STARTING",
     displayProfileOpportunityAlert: false,
+    sectorRequired: false,
   },
   {
     id: "NEEDS_TO_REGISTER_FOR_TAXES",
@@ -135,6 +141,7 @@ export const OperatingPhases: OperatingPhase[] = [
     businessNameRequired: false,
     feedbackFormToDisplay: "STARTING",
     displayProfileOpportunityAlert: false,
+    sectorRequired: false,
   },
   {
     id: "UP_AND_RUNNING",
@@ -152,6 +159,7 @@ export const OperatingPhases: OperatingPhase[] = [
     businessNameRequired: true,
     feedbackFormToDisplay: "OWNING",
     displayProfileOpportunityAlert: false,
+    sectorRequired: true,
   },
   {
     id: "UP_AND_RUNNING_OWNING",
@@ -169,5 +177,6 @@ export const OperatingPhases: OperatingPhase[] = [
     businessNameRequired: false,
     feedbackFormToDisplay: "OWNING",
     displayProfileOpportunityAlert: true,
+    sectorRequired: true,
   },
 ];

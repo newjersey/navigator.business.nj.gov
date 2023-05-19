@@ -961,6 +961,52 @@ describe("profile", () => {
       expect(screen.getByLabelText("Sector")).toBeInTheDocument();
     });
 
+    it.each(OperatingPhases.filter((it) => !it.sectorRequired).map((it) => it.id))(
+      "does not require sector when %s phase",
+      (phase) => {
+        renderPage({
+          userData: generateUserData({
+            profileData: generateProfileData({
+              operatingPhase: phase,
+              businessPersona: "STARTING",
+              industryId: "generic",
+              sectorId: undefined,
+            }),
+          }),
+        });
+        expect(screen.getByLabelText("Sector")).toBeInTheDocument();
+        chooseTab("numbers");
+        expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
+        const header = screen.getByTestId("profile-header");
+        expect(within(header).getByText(Config.profileDefaults.profileTabRefTitle)).toBeInTheDocument();
+        expect(
+          within(header).queryByText(Config.profileDefaults.profileTabInfoTitle)
+        ).not.toBeInTheDocument();
+      }
+    );
+
+    it.each(OperatingPhases.filter((it) => it.sectorRequired).map((it) => it.id))(
+      "requires sector when %s phase",
+      (phase) => {
+        renderPage({
+          userData: generateUserData({
+            profileData: generateProfileData({
+              operatingPhase: phase,
+              businessPersona: "STARTING",
+              industryId: "generic",
+              sectorId: undefined,
+            }),
+          }),
+        });
+        expect(screen.getByLabelText("Sector")).toBeInTheDocument();
+        chooseTab("numbers");
+        expect(screen.getByLabelText("Sector")).toBeInTheDocument();
+        const header = screen.getByTestId("profile-header");
+        expect(within(header).getByText(Config.profileDefaults.profileTabInfoTitle)).toBeInTheDocument();
+        expect(within(header).queryByText(Config.profileDefaults.profileTabRefTitle)).not.toBeInTheDocument();
+      }
+    );
+
     it.each(industryIdsWithOutEssentialQuestion.filter((industry) => industry !== "generic"))(
       "saves userData when sector dropdown is removed from DOM when %s industry is selected",
       async (industry) => {
@@ -971,6 +1017,7 @@ describe("profile", () => {
             businessPersona: "STARTING",
             industryId: "generic",
             sectorId: undefined,
+            operatingPhase: "UP_AND_RUNNING",
             ...emptyIndustrySpecificData,
           }),
           onboardingFormProgress: "COMPLETED",
@@ -1011,11 +1058,12 @@ describe("profile", () => {
       }
     );
 
-    it("prevents user from saving if sector is not selected", async () => {
+    it("prevents user from saving if in up-and-running and sector is not selected", async () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           industryId: "generic",
+          operatingPhase: "UP_AND_RUNNING",
           sectorId: undefined,
         }),
       });
@@ -1272,6 +1320,7 @@ describe("profile", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "OWNING",
+          operatingPhase: "UP_AND_RUNNING_OWNING",
           sectorId: "",
         }),
       });
