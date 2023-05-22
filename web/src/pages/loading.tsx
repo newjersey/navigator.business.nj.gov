@@ -20,7 +20,7 @@ import { ReactElement, useContext, useEffect, useState } from "react";
 export const signInSamlError = "Name+ID+value+was+not+found+in+SAML";
 
 const LoadingPage = (): ReactElement => {
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
   const router = useRouter();
   const { dispatch } = useContext(AuthContext);
   const [showLoginErrorModal, setShowLoginErrorModal] = useState<boolean>(false);
@@ -44,20 +44,22 @@ const LoadingPage = (): ReactElement => {
   }, [router, dispatch]);
 
   useMountEffectWhenDefined(() => {
-    if (!userData) {
-      return;
-    }
+    if (!updateQueue) return;
+    const userData = updateQueue.current();
     if (!onboardingCompleted(userData)) {
       router.push(ROUTES.onboarding);
     } else if (userData.preferences.returnToLink) {
       const pageLink = userData.preferences.returnToLink;
-      update({ ...userData, preferences: { ...userData.preferences, returnToLink: "" } }).then(() => {
-        router.push(pageLink);
-      });
+      updateQueue
+        .queuePreferences({ returnToLink: "" })
+        .update()
+        .then(() => {
+          router.push(pageLink);
+        });
     } else {
       router.push(ROUTES.dashboard);
     }
-  }, userData);
+  }, updateQueue?.current());
 
   const sendToOnboarding = (): void => {
     setRedirectIsLoading(true);
