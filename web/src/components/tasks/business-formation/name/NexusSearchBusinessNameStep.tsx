@@ -7,13 +7,12 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { NameAvailability } from "@businessnjgovnavigator/shared/";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useContext } from "react";
 
 export const NexusSearchBusinessNameStep = (): ReactElement => {
   const { setFormationFormData, setFieldsInteracted, setBusinessNameAvailability } =
     useContext(BusinessFormationContext);
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
   const { Config } = useConfig();
   const FIELD_NAME = "businessName";
 
@@ -26,46 +25,39 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
     nameAvailability: NameAvailability,
     isInitialSubmit: boolean
   ): Promise<void> => {
-    if (!nameAvailability || !userData || isInitialSubmit) {
+    if (!nameAvailability || !updateQueue || isInitialSubmit) {
       return;
     }
     setFieldsInteracted([FIELD_NAME]);
-    let newUserData: UserData | undefined;
     if (nameAvailability.status === "AVAILABLE") {
-      newUserData = {
-        ...userData,
-        formationData: {
-          ...userData.formationData,
+      await updateQueue
+        .queueFormationData({
           formationFormData: {
-            ...userData.formationData.formationFormData,
+            ...updateQueue.current().formationData.formationFormData,
             businessName: submittedName,
           },
           businessNameAvailability: nameAvailability,
-        },
-        profileData: {
-          ...userData.profileData,
+        })
+        .queueProfileData({
           businessName: submittedName,
           nexusDbaName: emptyProfileData.nexusDbaName,
           needsNexusDbaName: emptyProfileData.needsNexusDbaName,
-        },
-      };
+        })
+        .update();
     } else if (nameAvailability.status === "UNAVAILABLE") {
-      newUserData = {
-        ...userData,
-        formationData: {
-          ...userData.formationData,
+      await updateQueue
+        .queueFormationData({
           formationFormData: {
-            ...userData.formationData.formationFormData,
+            ...updateQueue.current().formationData.formationFormData,
             businessName: submittedName,
           },
           businessNameAvailability: nameAvailability,
-        },
-        profileData: {
-          ...userData.profileData,
+        })
+        .queueProfileData({
           businessName: submittedName,
           needsNexusDbaName: true,
-        },
-      };
+        })
+        .update();
     }
 
     setFormationFormData((previousFormationData) => {
@@ -74,11 +66,6 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
         businessName: submittedName,
       };
     });
-
-    if (newUserData) {
-      return update(newUserData);
-    }
-    return;
   };
 
   return (
