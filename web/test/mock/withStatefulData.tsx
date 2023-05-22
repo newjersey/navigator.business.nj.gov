@@ -62,7 +62,9 @@ export const WithStatefulData = (spy: jest.Mock): ((props: StatefulDataProps) =>
     const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>(getUpdateQueue(update));
 
     useEffect(() => {
-      setUpdateQueue(getUpdateQueue(update));
+      if (genericData && isUserData(genericData as UserData | ProfileData)) {
+        updateQueue?.queue(genericData as UserData);
+      }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [genericData]);
 

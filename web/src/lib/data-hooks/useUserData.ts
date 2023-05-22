@@ -89,8 +89,13 @@ export const useUserData = (): UseUserDataResponse => {
 
   const update = async (newUserData: UserData | undefined, config?: { local?: boolean }): Promise<void> => {
     if (newUserData) {
+      const localUpdateQueue = updateQueue ?? new UpdateQueueFactory(newUserData, update);
+      if (!updateQueue) {
+        setUpdateQueue(localUpdateQueue);
+      }
+
       await mutate(newUserData, false);
-      setUpdateQueue(new UpdateQueueFactory(newUserData, update));
+      localUpdateQueue.queue(newUserData);
       if (config?.local || state.isAuthenticated !== IsAuthenticated.TRUE) {
         if (profileDataHasChanged(data, newUserData)) {
           await onProfileDataChange(newUserData);
@@ -105,7 +110,7 @@ export const useUserData = (): UseUserDataResponse => {
 
           setUserDataError(undefined);
           mutate(response, false);
-          setUpdateQueue(new UpdateQueueFactory(response, update));
+          localUpdateQueue.queue(response);
         })
         .catch(() => {
           setUserDataError("UPDATE_FAILED");
@@ -117,7 +122,11 @@ export const useUserData = (): UseUserDataResponse => {
   const refresh = async (): Promise<void> => {
     const updatedUserData = await mutate();
     if (updatedUserData) {
-      setUpdateQueue(new UpdateQueueFactory(updatedUserData, update));
+      const localUpdateQueue = updateQueue ?? new UpdateQueueFactory(updatedUserData, update);
+      if (!updateQueue) {
+        setUpdateQueue(localUpdateQueue);
+      }
+      localUpdateQueue.queue(updatedUserData);
     }
   };
 
