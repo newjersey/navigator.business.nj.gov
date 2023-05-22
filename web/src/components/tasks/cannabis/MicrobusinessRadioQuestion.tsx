@@ -6,23 +6,20 @@ import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material"
 import React, { ReactElement } from "react";
 
 export const MicrobusinessRadioQuestion = (): ReactElement => {
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
+  const userData = updateQueue?.current();
   const { Config } = useConfig();
 
   const handleRadioChange = async (
     event: React.ChangeEvent<{ name?: string; value: string }>
   ): Promise<void> => {
-    if (!userData) {
-      return;
-    }
+    if (!userData || !updateQueue) return;
     const isMicrobusiness = event.target.value === "true";
-    await update({
-      ...userData,
-      profileData: {
-        ...userData.profileData,
+    await updateQueue
+      .queueProfileData({
         cannabisMicrobusiness: isMicrobusiness,
-      },
-    });
+      })
+      .update();
 
     if (isMicrobusiness) {
       analytics.event.cannabis_license_form_microbusiness_question.submit.yes_I_m_a_microbusiness();
