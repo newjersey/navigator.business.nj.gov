@@ -34,7 +34,6 @@ import {
   InputFile,
   NameAvailability,
   PublicFilingLegalType,
-  UserData,
 } from "@businessnjgovnavigator/shared/";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
@@ -46,7 +45,8 @@ interface Props {
 
 export const BusinessFormation = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
+  const userData = updateQueue?.current();
   const router = useRouter();
   const { Config } = useConfig();
 
@@ -137,36 +137,32 @@ export const BusinessFormation = (props: Props): ReactElement => {
       return completeFilingQueryParamExists || (completedPayment && noCompletedFilingExists);
     };
 
-    const setCompletedFilingPayment = (userData: UserData): UserData => {
-      return {
-        ...userData,
-        formationData: { ...userData.formationData, completedFilingPayment: true },
-      };
-    };
-
     (async function fetchCompletedFiling(): Promise<void> {
-      if (!router.isReady || !userData) {
+      if (!router.isReady || !userData || !updateQueue) {
         return;
       }
       if (shouldFetchCompletedFiling()) {
         setIsLoadingGetFiling(true);
         getCompletedFilingApiCallOccurred.current = true;
-        const userDataToSet = await api
+        await api
           .getCompletedFiling()
           .then((newUserData) => {
-            return newUserData;
+            updateQueue.queue(newUserData);
           })
-          .catch(() => {
-            return userData;
-          });
+          .catch(() => {});
 
-        update(setCompletedFilingPayment(userDataToSet)).then(() => {
-          setIsLoadingGetFiling(false);
-          router.replace({ pathname: `/tasks/${props.task.urlSlug}` }, undefined, { shallow: true });
-        });
+        updateQueue
+          .queueFormationData({
+            completedFilingPayment: true,
+          })
+          .update()
+          .then(() => {
+            setIsLoadingGetFiling(false);
+            router.replace({ pathname: `/tasks/${props.task.urlSlug}` }, undefined, { shallow: true });
+          });
       }
     })();
-  }, [router.isReady, update, router, props.task.urlSlug, userData]);
+  }, [router.isReady, updateQueue, router, props.task.urlSlug, userData]);
 
   const setFieldsInteracted = (
     fields: FieldsForErrorHandling[],

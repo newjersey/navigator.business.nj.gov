@@ -31,7 +31,8 @@ import { useRouter } from "next/router";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
 export const BusinessFormationPaginator = (): ReactElement => {
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
+  const userData = updateQueue?.current();
   const { state, setStepIndex, setHasBeenSubmitted, setFormationFormData, setFieldsInteracted } =
     useContext(BusinessFormationContext);
   const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
@@ -126,70 +127,54 @@ export const BusinessFormationPaginator = (): ReactElement => {
       return;
     }
 
-    const savedUserData = saveFormData({ shouldFilter: true, newStep: stepIndex });
+    saveFormData({ shouldFilter: true, newStep: stepIndex });
 
-    onStepChangeAnalytics(savedUserData?.formationData.formationFormData, stepIndex, config.moveType);
+    onStepChangeAnalytics(stepIndex, config.moveType);
     moveToStep(stepIndex);
   };
 
-  const saveFormData = ({
-    shouldFilter,
-    newStep,
-  }: {
-    shouldFilter: boolean;
-    newStep: number;
-  }): UserData | undefined => {
-    if (!userData) return;
+  const saveFormData = ({ shouldFilter, newStep }: { shouldFilter: boolean; newStep: number }): void => {
+    if (!updateQueue) return;
     let formationFormDataToSave = { ...state.formationFormData };
     if (shouldFilter) {
       formationFormDataToSave = filterEmptyFormData(state.formationFormData);
     }
-    const userDataWithProfileChanges = updateChangesInProfileData({
-      ...userData,
-      formationData: {
-        ...userData.formationData,
-        formationFormData: formationFormDataToSave,
-        businessNameAvailability: state.businessNameAvailability,
-        lastVisitedPageIndex: newStep,
-      },
+
+    updateQueue.queueFormationData({
+      formationFormData: formationFormDataToSave,
+      businessNameAvailability: state.businessNameAvailability,
+      lastVisitedPageIndex: newStep,
     });
-    update(userDataWithProfileChanges);
-    return userDataWithProfileChanges;
+
+    queueFormationChangesInProfile();
+    updateQueue.update();
   };
 
-  const updateChangesInProfileData = (userData: UserData | undefined): UserData | undefined => {
-    if (!userData) return;
-    let userDataWithChanges = { ...userData };
+  const queueFormationChangesInProfile = (): void => {
+    if (!updateQueue) return;
 
     if (isStep("Business")) {
       const muncipalityEnteredForFirstTime =
-        userDataWithChanges.profileData.municipality === undefined &&
-        userDataWithChanges.formationData.formationFormData.addressMunicipality !== undefined;
+        updateQueue.current().profileData.municipality === undefined &&
+        updateQueue.current().formationData.formationFormData.addressMunicipality !== undefined;
 
       if (muncipalityEnteredForFirstTime) {
         analytics.event.business_formation_location_question.submit.location_entered_for_first_time();
       }
 
-      userDataWithChanges = {
-        ...userDataWithChanges,
-        profileData: {
-          ...userDataWithChanges.profileData,
-          municipality: userDataWithChanges.formationData.formationFormData.addressMunicipality,
-        },
-      };
+      updateQueue.queueProfileData({
+        municipality: updateQueue.current().formationData.formationFormData.addressMunicipality,
+      });
     }
 
-    if (isStep("Name") && state.businessNameAvailability?.status === "AVAILABLE") {
-      userDataWithChanges = {
-        ...userDataWithChanges,
-        profileData: {
-          ...userDataWithChanges.profileData,
-          businessName: userDataWithChanges.formationData.formationFormData.businessName,
-        },
-      };
+    if (
+      isStep("Name") &&
+      updateQueue.current().formationData.businessNameAvailability?.status === "AVAILABLE"
+    ) {
+      updateQueue.queueProfileData({
+        businessName: updateQueue.current().formationData.formationFormData.businessName,
+      });
     }
-
-    return userDataWithChanges;
   };
 
   const filterEmptyFormData = (formationFormData: FormationFormData): FormationFormData => {
@@ -222,14 +207,9 @@ export const BusinessFormationPaginator = (): ReactElement => {
   };
 
   const onStepChangeAnalytics = (
-    formationFormData: FormationFormData | undefined,
     nextStepIndex: number,
     moveType: "PREVIOUS_BUTTON" | "NEXT_BUTTON" | "STEPPER"
   ): void => {
-    if (!formationFormData) {
-      return;
-    }
-
     if (moveType === "STEPPER") {
       if (LookupNameByStepIndex(nextStepIndex) === "Name") {
         analytics.event.business_formation_name_tab.click.arrive_on_business_formation_name_step();
@@ -295,7 +275,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
   };
 
   const submitToApi = async (): Promise<void> => {
-    if (!userData) return;
+    if (!userData || !updateQueue) return;
     const filteredUserData = {
       ...userData,
       formationData: {
@@ -311,7 +291,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
       window.location.href,
       state.foreignGoodStandingFile
     );
-    update(newUserData);
+    updateQueue.queue(newUserData).update();
     submitToApiAnalytics(newUserData);
     resetInteractedFields(newUserData);
 
@@ -349,10 +329,12 @@ export const BusinessFormationPaginator = (): ReactElement => {
   };
 
   const hasFormDataChanged = (): boolean => {
-    if (!userData || !state.hasSetStateFirstTime) return false;
+    if (!updateQueue || !state.hasSetStateFirstTime) return false;
+
     return (
-      JSON.stringify(userData.formationData.formationFormData) !== JSON.stringify(state.formationFormData) ||
-      JSON.stringify(userData.formationData.businessNameAvailability) !==
+      JSON.stringify(updateQueue.current().formationData.formationFormData) !==
+        JSON.stringify(state.formationFormData) ||
+      JSON.stringify(updateQueue.current().formationData.businessNameAvailability) !==
         JSON.stringify(state.businessNameAvailability)
     );
   };
