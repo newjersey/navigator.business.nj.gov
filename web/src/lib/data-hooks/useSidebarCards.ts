@@ -4,38 +4,34 @@ export const useSidebarCards = (): {
   showCard: (id: string) => Promise<void>;
   hideCard: (id: string) => Promise<void>;
 } => {
-  const { userData, update } = useUserData();
+  const { updateQueue } = useUserData();
 
   const showCard = async (id: string): Promise<void> => {
-    if (!userData) {
-      return;
-    }
-    const allCardsExceptDesired = userData.preferences.visibleSidebarCards.filter((cardId: string) => {
-      return cardId !== id;
-    });
-    await update({
-      ...userData,
-      preferences: {
-        ...userData.preferences,
+    if (!updateQueue) return;
+    const allCardsExceptDesired = updateQueue
+      .current()
+      .preferences.visibleSidebarCards.filter((cardId: string) => {
+        return cardId !== id;
+      });
+    await updateQueue
+      .queuePreferences({
         visibleSidebarCards: [...allCardsExceptDesired, id],
-      },
-    });
+      })
+      .update();
   };
 
   const hideCard = async (id: string): Promise<void> => {
-    if (!userData) {
-      return;
-    }
-    const allCardsExceptIdToHide = userData.preferences.visibleSidebarCards.filter((cardId: string) => {
-      return cardId !== id;
-    });
-    await update({
-      ...userData,
-      preferences: {
-        ...userData.preferences,
+    if (!updateQueue) return;
+    const allCardsExceptIdToHide = updateQueue
+      .current()
+      .preferences.visibleSidebarCards.filter((cardId: string) => {
+        return cardId !== id;
+      });
+    await updateQueue
+      .queuePreferences({
         visibleSidebarCards: [...allCardsExceptIdToHide],
-      },
-    });
+      })
+      .update();
   };
 
   return { showCard, hideCard };
