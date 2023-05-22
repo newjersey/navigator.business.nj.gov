@@ -18,21 +18,21 @@ isSbe: false
 
 ### Eligibility Criteria
 
-* Independently owned, operated, and controlled business that is generating revenue in New Jerey
+* Independently owned, operated, and controlled business that is generating revenue in New Jersey
 * At least 51% owned, operated, and controlled by persons who identify as LGBTQ+ (lesbian, gay, bisexual, transgender, queer, questioning)
 * Owner must be competent in the affairs in the business to show operational and managerial control
 
 ### Application Needs
 
 * The names and addresses of the owner, partners, or shareholders, as applicable, and their representative shares of ownership
-* The names and addresses of members of the board of directors (corporations only)
 * The names and addresses of the officers of the business
-* The number of shares of stock issued and outstanding (corporations only)
 * The articles of incorporation, bylaws, partnership agreements, or joint venture agreements, as applicable
-* Certificate of Formation
+* `Certificate of Formation|certificate-formation`
 * Organizational charts
 * An applicant's birth certificate, motor vehicle driver's license, passport, or other acceptable form of identification
 * An affidavit, signed by the individual seeking certification, certifying that the applicant is an LGBTQ+ business
+* The names and addresses of members of the board of directors (c-corps only)
+* The number of shares of stock issued and outstanding (c-corps only)
 
 > **After you complete this, you will have:**
 >
