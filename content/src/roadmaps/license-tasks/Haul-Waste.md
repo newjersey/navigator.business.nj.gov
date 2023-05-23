@@ -6,6 +6,12 @@ id: haul-waste-hic
 callToActionLink: https://www.wastedecals.nj.gov/sg2.html
 callToActionText: Apply for My Waste Hauling Decal
 agencyId: njdep
+webflowId: "5f77291fb0544f2f2d366147"
+webflowName: "Solid Waste Hauler"
+agencyAdditionalContext: "Environmental Enforcement"
+divisionPhone: "(609) 633-1418"
+webflowIndustry: "Solid Waste Hauler"
+licenseCertificationClassification: "LICENSE"
 ---
 
 Waste facilities will **only** allow registered vehicles with a decal to discard waste.
