@@ -8,13 +8,13 @@ Your daycare needs to be inspected and approved by your local government and the
 
 - - -
 
-### Industry-Specific Site Requirements
+### State Site Requirements
 
 * [DCF’s licensing manual](https://www.nj.gov/dcf/providers/licensing/Understanding.Licensing.Packet.pdf) has site requirements based on the children's ages:
 
-  * Children 2 ½ years or younger: Institutional (I-4)
-  * Six or more children older than 2 ½ years of age: Educational (E)
-  * School-aged child care program or Assembly: (A-3 or A-4)
+  * **Institutional (I-4)**: One or more children younger than  2 ½ years 
+  * **Educational (E)**: Six or more children  2 ½ years or older
+  * **Assembly: (A-3 or A-4)**: School-aged child care program or 
 
 You can schedule a free preliminary inspection with their Office of Licensing at 1-877-667-9845.
 
