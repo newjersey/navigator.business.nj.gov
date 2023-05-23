@@ -33,25 +33,18 @@ export const useMockProfileData = (profileData: Partial<ProfileData>): void => {
 };
 
 export const generateUseUserDataResponse = (overrides: Partial<UseUserDataResponse>): UseUserDataResponse => {
-  const update = overrides.update ?? jest.fn().mockResolvedValue({});
   const userData = overrides.userData ?? generateUserData({});
   return {
-    update,
     userData,
     error: undefined,
     isLoading: false,
     refresh: jest.fn().mockResolvedValue({}),
-    updateQueue: new UpdateQueueFactory(userData, update),
+    updateQueue: new UpdateQueueFactory(userData, jest.fn().mockResolvedValue({})),
     createUpdateQueue: jest.fn().mockResolvedValue({}),
     ...overrides,
   };
 };
 
 export const setMockUserDataResponse = (overrides: Partial<UseUserDataResponse>): void => {
-  mockUseUserData.mockReturnValue(
-    generateUseUserDataResponse({
-      update: jest.fn(),
-      ...overrides,
-    })
-  );
+  mockUseUserData.mockReturnValue(generateUseUserDataResponse({ ...overrides }));
 };
