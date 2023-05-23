@@ -22,7 +22,7 @@ You can schedule a free preliminary inspection with their Office of Licensing at
 
 ### Local Site Requirements
 
-* **Certificate of Occupancy/Approval:** If you've completed site renovations, it's time to obtain a `Certificate of Occupancy or Approval|certificate-occupancy\` from your local building/construction department.
+* **Certificate of Occupancy/Approval:** For new site buildings or if you've completed site renovations, you need to obtain a `Certificate of Occupancy or Approval|certificate-occupancy\` from your local building/construction department.
 * **Fire prevention permits:** Talk to your fire department to make sure your space meets requirements, like working sprinklers, extinguishers, and signage
 * **Signage:** Speak to your local zoning office and building/construction department to make sure the signage you're proposing is permitted
 * **Construction permits:** Check with your local government's building/construction department for any permit requirements prior to starting renovations. Find out the requirements for a construction permit at your site
