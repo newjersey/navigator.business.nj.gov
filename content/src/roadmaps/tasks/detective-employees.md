@@ -7,6 +7,7 @@ callToActionLink: ""
 callToActionText: ""
 agencyId: nj-state-police
 agencyAdditionalContext: Private Detective Unit
+webflowName: "Detective Agency: Employee Police Registration"
 ---
 
 All staff working in your Detective Agency must be registered before they can be scheduled for work.

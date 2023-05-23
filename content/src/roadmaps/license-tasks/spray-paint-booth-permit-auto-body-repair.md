@@ -1,0 +1,31 @@
+---
+urlSlug: spray-paint-permit
+name: Obtain Spray Paint Booth Permits, if Needed
+id: spray-paint-booth-permit-auto-body-repair
+agencyId: njdep
+additionalAgencyContext: Office of Permitting and Project Navigation
+webflowId: "5f7728fa71c49e6e76913b7d"
+webflowName: "Auto Body Repair Facility (If Spray Painting)"
+callToActionLink: "http://nj.gov/dep/enforcement/"
+callToActionText: ""
+agencyAdditionalContext: "Compliance and Enforcement"
+divisionPhone: "(609) 777-0122"
+webflowIndustry: "Auto Body"
+licenseCertificationClassification: "PERMIT"
+---
+
+If your business will offer spray paint services to vehicles, you must contact the Department of Environmental Protection (DEP) Office of Permitting and Project Navigation at (609)292-3600 for specific guidance on your permitting needs.
+
+---
+
+### Commonly Needed Permits
+
+- **Air permitting**: Due to potential chemicals spray paint emits
+- **Hazardous waste**: Related to potential paint solvents and material waste
+- **New Jersey Pollutant Discharge Elimination System (NJPDES)**: Caused by potential discharge water from your facility
+- **Wetlands, existing flood hazard areas**: Related to potential disturbances caused by your business
+- **Right to know**: Due to hazardous material which may be stored on the site
+
+> **Once completed, you will have:**
+>
+> - The permits required to operate a spray paint booth

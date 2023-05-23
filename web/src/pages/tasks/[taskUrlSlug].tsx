@@ -266,6 +266,7 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
 
 export const getStaticPaths = (): GetStaticPathsResult<TaskUrlSlugParam> => {
   const paths = loadAllTaskUrlSlugs();
+  console.log(paths);
   return {
     paths,
     fallback: false,
