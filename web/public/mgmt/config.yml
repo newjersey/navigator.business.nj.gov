@@ -1718,6 +1718,12 @@ collections:
       - { label: "Id", name: "id", widget: "nospace" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - {
+          label: "Webflow Name (not being synced, only for reference and future expansion)",
+          name: "webflowName",
+          widget: "string",
+          required: false,
+        }
       - label: Industry
         name: industryId
         widget: "relation"
