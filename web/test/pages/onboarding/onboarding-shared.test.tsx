@@ -1,7 +1,6 @@
 import { onboardingFlows } from "@/components/onboarding/OnboardingFlows";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import * as mockRouter from "@/test/mock/mockRouter";
@@ -117,13 +116,6 @@ describe("onboarding - shared", () => {
     useMockRouter({ isReady: true, query: { industry: "something-nonexistent" } });
     renderPage({});
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
-  });
-
-  it("generates a new empty userData object during guest checkout", async () => {
-    renderPage({ userData: null, user: generateUser({}), isAuthenticated: IsAuthenticated.FALSE });
-    await waitFor(() => {
-      return expect(currentUserData().user).not.toBeFalsy();
-    });
   });
 
   it("updates locally for each step", async () => {

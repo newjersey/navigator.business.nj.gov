@@ -1,5 +1,6 @@
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import * as useUserModule from "@/lib/data-hooks/useUserData";
+import { UpdateQueue } from "@/lib/types/types";
 import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { StatefulDataContext, statefulDataHelpers, WithStatefulData } from "@/test/mock/withStatefulData";
@@ -42,16 +43,17 @@ export const setupStatefulUserDataContext = (): void => {
     const { genericData, update } = useContext(StatefulDataContext);
     const { updateQueue, setUpdateQueue } = useContext(UpdateQueueContext);
 
-    const createUpdateQueue = (userData: UserData): Promise<void> => {
-      setUpdateQueue(new UpdateQueueFactory(userData, update));
-      return update(userData);
+    const createUpdateQueue = async (userData: UserData): Promise<UpdateQueue> => {
+      const queue = new UpdateQueueFactory(userData, update);
+      setUpdateQueue(queue);
+      await update(userData, { local: true });
+      return queue;
     };
 
     return {
       userData: genericData as UserData | undefined,
       isLoading: false,
       error: undefined,
-      update: update,
       updateQueue: updateQueue,
       createUpdateQueue,
       refresh: jest.fn(),

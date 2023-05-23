@@ -87,7 +87,7 @@ export const WithStatefulData = (spy: jest.Mock): ((props: StatefulDataProps) =>
 
 interface StatefulDataContextType {
   genericData: GenericData | undefined;
-  update: (genericData: GenericData | undefined) => Promise<void>;
+  update: (genericData: GenericData | undefined, config?: { local?: boolean }) => Promise<void>;
 }
 
 export const StatefulDataContext = createContext<StatefulDataContextType>({

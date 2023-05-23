@@ -9,6 +9,7 @@ import { generateRoadmap } from "@/test/factories";
 import { withAuth, withUserDataError } from "@/test/helpers/helpers-renderers";
 import { generateUseUserDataResponse } from "@/test/mock/mockUseUserData";
 import { BusinessUser, generateUser, generateUserData } from "@businessnjgovnavigator/shared/";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, render, waitFor } from "@testing-library/react";
 import { SWRConfig } from "swr";
 
@@ -35,16 +36,20 @@ describe("useUserData", () => {
     jest.resetAllMocks();
     mockSetError = jest.fn();
     mockSetRoadmap = jest.fn();
+    mockApi.postUserData.mockResolvedValue(generateUserData({}));
   });
 
-  const setupHook = (
+  const setupHook = async (
     currentUser: BusinessUser | undefined,
     isAuthenticated?: IsAuthenticated
-  ): UseUserDataResponse => {
+  ): Promise<UseUserDataResponse> => {
     const returnVal = generateUseUserDataResponse({});
 
     function TestComponent(): null {
       Object.assign(returnVal, useUserData());
+      returnVal.createUpdateQueue(returnVal.userData as UserData).then((createdQueue) => {
+        returnVal.updateQueue = createdQueue;
+      });
       return null;
     }
 
@@ -68,23 +73,26 @@ describe("useUserData", () => {
         mockSetError
       )
     );
+    await waitFor(() => {
+      expect(returnVal.updateQueue).toBeDefined();
+    });
     return returnVal;
   };
 
   it("does not post update when local flag is true", async () => {
     const currentUser = generateUser({});
-    const { update } = setupHook(currentUser);
+    const { updateQueue } = await setupHook(currentUser);
     await act(() => {
-      return update(generateUserData({}), { local: true });
+      return updateQueue?.queue(generateUserData({})).update({ local: true });
     });
     expect(mockApi.postUserData).not.toHaveBeenCalled();
   });
 
   it("does not post update when user is unauthenticated", async () => {
     const currentUser = generateUser({});
-    const { update } = setupHook(currentUser, IsAuthenticated.FALSE);
+    const { updateQueue } = await setupHook(currentUser, IsAuthenticated.FALSE);
     await act(() => {
-      return update(generateUserData({}));
+      return updateQueue?.queue(generateUserData({})).update();
     });
     expect(mockApi.postUserData).not.toHaveBeenCalled();
   });
@@ -97,22 +105,26 @@ describe("useUserData", () => {
   });
 
   describe("when there is a authenticated current user", () => {
-    it("uses user id to get user data", () => {
+    it("uses user id to get user data", async () => {
       const currentUser = generateUser({});
-      setupHook(currentUser);
+      await setupHook(currentUser);
       expect(mockApi.getUserData).toHaveBeenCalledWith(currentUser.id);
     });
 
     it("posts new user data when calling update", async () => {
       const currentUser = generateUser({});
-      mockApi.postUserData.mockResolvedValue(generateUserData({}));
+      const data = generateUserData({});
+      mockApi.postUserData.mockResolvedValue(data);
 
-      const { update } = setupHook(currentUser);
+      const { updateQueue, createUpdateQueue } = await setupHook(currentUser);
+      await act(() => {
+        return createUpdateQueue(generateUserData({}));
+      });
       const newUserData = generateUserData({});
       await act(() => {
-        return update(newUserData);
+        return updateQueue?.queue(newUserData).update();
       });
-      expect(mockApi.postUserData).toHaveBeenCalledWith(newUserData);
+      expect(mockApi.postUserData).toHaveBeenLastCalledWith(newUserData);
     });
 
     it("builds and sets roadmap when profile data changed", async () => {
@@ -122,11 +134,11 @@ describe("useUserData", () => {
       const currentUser = generateUser({});
       mockApi.postUserData.mockResolvedValue(generateUserData({}));
 
-      const { update } = setupHook(currentUser);
+      const { updateQueue } = await setupHook(currentUser);
 
       const newUserData = generateUserData({});
       await act(() => {
-        return update(newUserData);
+        return updateQueue?.queue(newUserData).update();
       });
 
       const newProfileData = {
@@ -135,10 +147,7 @@ describe("useUserData", () => {
       };
 
       await act(() => {
-        return update({
-          ...newUserData,
-          profileData: newProfileData,
-        });
+        return updateQueue?.queueProfileData(newProfileData).update();
       });
 
       await waitFor(() => {
@@ -151,7 +160,7 @@ describe("useUserData", () => {
     it("updates data from api when calling refresh", async () => {
       const currentUser = generateUser({});
 
-      const { refresh } = setupHook(currentUser);
+      const { refresh } = await setupHook(currentUser);
       const newUserData = generateUserData({});
       mockApi.getUserData.mockResolvedValue(newUserData);
       await act(() => {
@@ -165,7 +174,7 @@ describe("useUserData", () => {
       const currentUser = generateUser({});
       const currentUserData = generateUserData({ user: { ...currentUser, myNJUserKey: "1234" } });
       mockApi.getUserData.mockResolvedValue(currentUserData);
-      const { refresh } = setupHook(currentUser, IsAuthenticated.TRUE);
+      const { refresh } = await setupHook(currentUser, IsAuthenticated.TRUE);
       await act(() => {
         return refresh();
       });
@@ -182,7 +191,7 @@ describe("useUserData", () => {
       const currentUser = generateUser({});
       const rejectedPromise = Promise.reject(500);
       mockApi.getUserData.mockReturnValue(rejectedPromise);
-      const result = setupHook(currentUser);
+      const result = await setupHook(currentUser);
 
       await act(() => {
         return rejectedPromise.catch(() => {});
@@ -197,10 +206,13 @@ describe("useUserData", () => {
       mockApi.getUserData.mockResolvedValue(generateUserData({}));
       mockApi.postUserData.mockRejectedValue(400);
 
-      const { update } = setupHook(currentUser);
+      const { updateQueue } = await setupHook(currentUser);
       const newUserData = generateUserData({});
       await act(() => {
-        return update(newUserData).catch(() => {});
+        return updateQueue
+          ?.queue(newUserData)
+          .update()
+          .catch(() => {});
       });
       expect(mockSetError).toHaveBeenCalledWith("UPDATE_FAILED");
     });
@@ -211,22 +223,22 @@ describe("useUserData", () => {
       jest.restoreAllMocks();
     });
 
-    it("uses user id to get user data from cache", () => {
+    it("uses user id to get user data from cache", async () => {
       const currentUser = generateUser({});
       const currentUserData = generateUserData({ user: currentUser });
       userDataStorage.set(currentUser.id, currentUserData);
-      const { userData } = setupHook(currentUser, IsAuthenticated.FALSE);
+      const { userData } = await setupHook(currentUser, IsAuthenticated.FALSE);
       expect(mockApi.getUserData).not.toHaveBeenCalled();
       expect(userData).toEqual(currentUserData);
     });
 
     it("saves new user data to cache when calling update", async () => {
       const currentUser = generateUser({});
-      const { update } = setupHook(currentUser, IsAuthenticated.FALSE);
+      const { updateQueue } = await setupHook(currentUser, IsAuthenticated.FALSE);
       expect(userDataStorage.getCurrentUserData()).toBeUndefined();
       const currentUserData = generateUserData({ user: currentUser });
       await act(() => {
-        return update(currentUserData);
+        return updateQueue?.queue(currentUserData).update();
       });
       expect(mockApi.postUserData).not.toHaveBeenCalled();
       expect(userDataStorage.getCurrentUserData()).toEqual(currentUserData);
@@ -236,7 +248,7 @@ describe("useUserData", () => {
       const currentUser = generateUser({});
       const currentUserData = generateUserData({ user: currentUser });
       userDataStorage.set(currentUser.id, currentUserData);
-      const { refresh } = setupHook(currentUser, IsAuthenticated.FALSE);
+      const { refresh } = await setupHook(currentUser, IsAuthenticated.FALSE);
       await act(() => {
         return refresh();
       });
@@ -245,7 +257,7 @@ describe("useUserData", () => {
 
     it("does not update data from api when calling refresh", async () => {
       const currentUser = generateUser({});
-      const { refresh } = setupHook(currentUser, IsAuthenticated.FALSE);
+      const { refresh } = await setupHook(currentUser, IsAuthenticated.FALSE);
       await act(() => {
         return refresh();
       });
