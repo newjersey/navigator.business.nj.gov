@@ -112,7 +112,7 @@ describe("SigninHelper", () => {
       await waitFor(() => {
         return expect(mockPush).toHaveBeenCalledWith("/some-url");
       });
-      expect(update).toHaveBeenCalledWith(returnedUserData, undefined);
+      expect(update).toHaveBeenCalledWith(returnedUserData);
     });
 
     it("sets alert to DUPLICATE_ERROR on 409 response code", async () => {

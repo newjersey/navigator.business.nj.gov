@@ -468,7 +468,7 @@ export interface UpdateQueue {
   queueTaxFilingData: (taxFilingData: Partial<TaxFilingData>) => UpdateQueue;
   queueFormationData: (formationData: Partial<FormationData>) => UpdateQueue;
   queueTaskItemChecklist: (taskItemChecklist: Record<string, boolean>) => UpdateQueue;
-  update: (config?: { local?: boolean }) => Promise<void>;
+  update: () => Promise<void>;
   current: () => UserData;
 }
 

@@ -11,7 +11,7 @@ import { FormationData } from "@businessnjgovnavigator/shared/formationData";
 
 export class UpdateQueueFactory implements UpdateQueue {
   private internalQueue: UserData;
-  private updateFunction: (userData: UserData | undefined, config?: { local?: boolean }) => Promise<void>;
+  private updateFunction: (userData: UserData | undefined) => Promise<void>;
 
   constructor(userData: UserData, update: (userData: UserData | undefined) => Promise<void>) {
     this.internalQueue = userData;
@@ -103,8 +103,8 @@ export class UpdateQueueFactory implements UpdateQueue {
     return this;
   }
 
-  update(config?: { local?: boolean }): Promise<void> {
-    return this.updateFunction(this.internalQueue, config);
+  update(): Promise<void> {
+    return this.updateFunction(this.internalQueue);
   }
 
   current(): UserData {

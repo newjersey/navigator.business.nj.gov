@@ -119,11 +119,6 @@ export const useUserData = (): UseUserDataResponse => {
     }
   };
 
-  const createUpdateQueue = (userData: UserData): Promise<void> => {
-    setUpdateQueue(new UpdateQueueFactory(userData, update));
-    return update(userData);
-  };
-
   const refresh = async (): Promise<void> => {
     const updatedUserData = await mutate();
     if (updatedUserData) {
@@ -142,7 +137,6 @@ export const useUserData = (): UseUserDataResponse => {
     update: update,
     refresh: refresh,
     updateQueue: updateQueue,
-    createUpdateQueue: createUpdateQueue,
   };
 };
 
@@ -153,5 +147,4 @@ export type UseUserDataResponse = {
   update: (newUserData: UserData | undefined, config?: { local?: boolean }) => Promise<void>;
   refresh: () => Promise<void>;
   updateQueue: UpdateQueue | undefined;
-  createUpdateQueue: (userData: UserData) => Promise<void>;
 };
