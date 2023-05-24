@@ -12,7 +12,6 @@ import {
   randomNonHomeBasedIndustry,
   randomPublicFilingLegalStructure,
   updateNewBusinessProfilePage,
-  waitForUserDataMountUpdate,
 } from "../support/helpers";
 import { onDashboardPage } from "../support/page_objects/dashboardPage";
 import { onProfilePage } from "../support/page_objects/profilePage";
@@ -26,7 +25,6 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
     describe("onboarded as STARTING - PublicFiling", () => {
       const testLocationInThreePlaces = (): void => {
         it("can provide location in Location-Dependent task", () => {
-          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
           goToMercantileTask();
           selectLocation("Allendale");
           clickDeferredSaveButton();
@@ -38,7 +36,6 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
         });
 
         it("can provide location in Formation Date Modal", () => {
-          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
           openFormationDateModal();
           selectDate("04/2021");
           selectLocation("Allendale");
@@ -52,7 +49,6 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
 
         it("can provide location in profile", () => {
           updateNewBusinessProfilePage({
-            legalStructureId: randomPublicFilingLegalStructure(),
             townDisplayName: "Allendale",
           });
 
@@ -66,6 +62,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
           completeNewBusinessOnboarding({
             industry: randomNonHomeBasedIndustry(),
           });
+          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
         });
 
         testLocationInThreePlaces();
@@ -76,8 +73,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
           completeNewBusinessOnboarding({
             industry: randomHomeBasedIndustry(),
           });
-
-          waitForUserDataMountUpdate();
+          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
           selectHomeBased(false);
         });
 
@@ -149,6 +145,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
     describe("onboarded as STARTING - applicable industry", () => {
       it("shows and answers home-based-business deferred question", () => {
         completeNewBusinessOnboarding({ industry: randomHomeBasedIndustry() });
+        completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
         showsAndAnswersHomeBasedBusinessQuestionOnDashboard();
       });
     });
@@ -156,6 +153,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
     describe("onboarded as STARTING - non-applicable industry", () => {
       it("does not show pre-answered home-based-business deferred question", () => {
         completeNewBusinessOnboarding({ industry: randomNonHomeBasedIndustry() });
+        completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
         hasNonHomeBasedTasks();
         doesNotShowHomeBasedBusinessQuestionAtAll();
       });
@@ -182,6 +180,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
             industry: randomHomeBasedIndustry(),
             locationInNewJersey: true,
           });
+          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
           hasNonHomeBasedTasks();
           doesNotShowHomeBasedBusinessQuestionAtAll();
         });
@@ -193,6 +192,8 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
             industry: randomHomeBasedIndustry(),
             locationInNewJersey: false,
           });
+          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
+
           showsAndAnswersHomeBasedBusinessQuestionOnDashboard();
         });
       });
@@ -203,6 +204,8 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
             industry: randomNonHomeBasedIndustry(),
             locationInNewJersey: true,
           });
+          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
+
           hasNonHomeBasedTasks();
           doesNotShowHomeBasedBusinessQuestionAtAll();
         });
@@ -214,6 +217,8 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
             industry: randomNonHomeBasedIndustry(),
             locationInNewJersey: false,
           });
+          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
+
           hasHomeBasedTasks();
           doesNotShowHomeBasedBusinessQuestionAtAll();
         });
@@ -247,7 +252,6 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
   };
 
   const showsAndAnswersHomeBasedBusinessQuestionOnDashboard = (): void => {
-    waitForUserDataMountUpdate();
     selectHomeBased(true);
 
     onDashboardPage.clickEditProfileLink();

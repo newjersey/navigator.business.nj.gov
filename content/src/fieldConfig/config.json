@@ -25,6 +25,10 @@
     "betaModalButtonText": "Share your feedback!",
     "betaMainText": "This site is in beta."
   },
+  "businessStructurePrompt": {
+    "notCompletedTaskPrompt": "Select your [business structure](/tasks/business-structure) to learn how to **register and form your business.**",
+    "buttonText": "Select Business Structure"
+  },
   "selfRegistration": {
     "errorTextGeneric": "Something went wrong, please try again later.",
     "errorTextEmailsNotMatching": "Email addresses must match and be valid.",

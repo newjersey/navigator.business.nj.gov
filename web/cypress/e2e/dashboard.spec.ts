@@ -6,6 +6,7 @@ import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { onProfilePage } from "cypress/support/page_objects/profilePage";
 import {
   clickDeferredSaveButton,
+  completeBusinessStructureTask,
   completeExistingBusinessOnboarding,
   completeNewBusinessOnboarding,
   updateNewBusinessProfilePage,
@@ -45,8 +46,9 @@ describe("Dashboard [feature] [all] [group2]", () => {
           industry,
         });
 
+        completeBusinessStructureTask({ legalStructureId });
+
         updateNewBusinessProfilePage({
-          legalStructureId,
           townDisplayName,
         });
 
@@ -74,7 +76,7 @@ describe("Dashboard [feature] [all] [group2]", () => {
         cy.get('[data-step="3"]').should("exist");
       });
 
-      it("verifies the task screen and mini-roadmap displays", () => {
+      it.only("verifies the task screen and mini-roadmap displays", () => {
         const industry = LookupIndustryById("e-commerce");
         const legalStructureId = "general-partnership";
         const townDisplayName = "Barnegat";
@@ -84,19 +86,21 @@ describe("Dashboard [feature] [all] [group2]", () => {
         });
 
         waitForUserDataMountUpdate();
+        completeBusinessStructureTask({ legalStructureId });
 
         // answer deferred question to get local-requirements task
         onDashboardPage.getHomeBased(true).should("exist");
         onDashboardPage.getHomeBased(false).should("exist");
 
         onDashboardPage.selectHomeBased(false);
+        onDashboardPage.getHomeBased(false).should("be.checked");
+
         clickDeferredSaveButton();
         onDashboardPage.getHomeBased(true).should("not.exist");
         onDashboardPage.getHomeBased(false).should("not.exist");
 
         cy.wait(1000);
         updateNewBusinessProfilePage({
-          legalStructureId,
           townDisplayName,
         });
 
@@ -127,8 +131,9 @@ describe("Dashboard [feature] [all] [group2]", () => {
           legalStructureId,
         });
 
+        completeBusinessStructureTask({ legalStructureId });
+
         updateNewBusinessProfilePage({
-          legalStructureId,
           townDisplayName,
         });
         // editing data in the Profile page
@@ -163,8 +168,9 @@ describe("Dashboard [feature] [all] [group2]", () => {
           legalStructureId,
         });
 
+        completeBusinessStructureTask({ legalStructureId });
+
         updateNewBusinessProfilePage({
-          legalStructureId,
           townDisplayName,
         });
 
