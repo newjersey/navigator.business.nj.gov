@@ -502,7 +502,6 @@ describe("profile", () => {
           notes: "whats appppppp",
         },
         taskProgress: {
-          // [businessStructureTaskId]: "COMPLETED",
           [einTaskId]: "COMPLETED",
           [naicsCodeTaskId]: "NOT_STARTED",
         },

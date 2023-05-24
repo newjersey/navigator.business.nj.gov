@@ -8,6 +8,7 @@ export const ROUTES = {
   onboarding: "/onboarding",
   unsupported: "/unsupported",
   welcome: "/welcome",
+  businessStructureTask: "/tasks/business-structure",
 };
 
 export interface QUERY_PARAMS_VALUES {

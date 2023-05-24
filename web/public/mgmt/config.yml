@@ -2696,7 +2696,14 @@ collections:
             fields:
               - { label: Beta Main Text, name: betaMainText, widget: string }
               - { label: Beta Modal Button Text, name: betaModalButtonText, widget: string }
-
+          - label: Business Structure Prompt
+            name: businessStructurePrompt
+            collapsed: true
+            widget: object
+            summary: "{{businessStructurePrompt}}"
+            fields:
+              - { label: Not Completed Task Prompt Text, name: notCompletedTaskPrompt, widget: markdown }
+              - { label: Button Text, name: buttonText, widget: string }
           - label: Tax Calendar Defaults
             name: taxCalendar
             collapsed: true

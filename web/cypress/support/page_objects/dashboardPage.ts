@@ -30,6 +30,7 @@ export class DashboardPage {
 
   selectHomeBased(radio: boolean) {
     this.getHomeBased(radio).check();
+    this.getHomeBased(radio).check();
   }
 
   getHomeBased(radio?: boolean) {

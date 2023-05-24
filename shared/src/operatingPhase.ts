@@ -15,11 +15,14 @@ export interface OperatingPhase {
   readonly feedbackFormToDisplay: "STARTING" | "OWNING" | "";
   readonly displayProfileOpportunityAlert: boolean;
   readonly sectorRequired: boolean;
+  readonly displayBusinessStructurePrompt: boolean;
+  readonly displayHomeBasedPrompt: boolean;
 }
 
 export type OperatingPhaseId =
   | "GUEST_MODE"
   | "GUEST_MODE_OWNING"
+  | "NEEDS_BUSINESS_STRUCTURE"
   | "NEEDS_TO_FORM"
   | "NEEDS_TO_REGISTER_FOR_TAXES"
   | "FORMED_AND_REGISTERED"
@@ -48,6 +51,8 @@ export const LookupOperatingPhaseById = (id: OperatingPhaseId | undefined): Oper
       feedbackFormToDisplay: "",
       displayProfileOpportunityAlert: false,
       sectorRequired: false,
+      displayBusinessStructurePrompt: false,
+      displayHomeBasedPrompt: false,
     }
   );
 };
@@ -69,6 +74,8 @@ export const OperatingPhases: OperatingPhase[] = [
     businessNameRequired: false,
     feedbackFormToDisplay: "STARTING",
     displayProfileOpportunityAlert: false,
+    displayBusinessStructurePrompt: true,
+    displayHomeBasedPrompt: false,
     sectorRequired: false,
   },
   {
@@ -88,6 +95,8 @@ export const OperatingPhases: OperatingPhase[] = [
     feedbackFormToDisplay: "OWNING",
     displayProfileOpportunityAlert: true,
     sectorRequired: true,
+    displayBusinessStructurePrompt: false,
+    displayHomeBasedPrompt: true,
   },
   {
     id: "FORMED_AND_REGISTERED",
@@ -105,6 +114,8 @@ export const OperatingPhases: OperatingPhase[] = [
     businessNameRequired: true,
     feedbackFormToDisplay: "STARTING",
     displayProfileOpportunityAlert: false,
+    displayBusinessStructurePrompt: false,
+    displayHomeBasedPrompt: true,
     sectorRequired: false,
   },
   {
@@ -124,6 +135,28 @@ export const OperatingPhases: OperatingPhase[] = [
     feedbackFormToDisplay: "STARTING",
     displayProfileOpportunityAlert: false,
     sectorRequired: false,
+    displayBusinessStructurePrompt: false,
+    displayHomeBasedPrompt: true,
+  },
+  {
+    id: "NEEDS_BUSINESS_STRUCTURE",
+    displayCompanyDemographicProfileFields: false,
+    displayCertifications: false,
+    displayFundings: false,
+    displayCalendarType: "NONE",
+    displayRoadmapTasks: true,
+    displayTaxAccessButton: false,
+    displayCalendarToggleButton: false,
+    displayHideableRoadmapTasks: false,
+    displayAltHomeBasedBusinessDescription: true,
+    municipalityRequiredForTradeName: false, // situation never occurs
+    municipalityRequiredForPublicFiling: false,
+    businessNameRequired: false,
+    feedbackFormToDisplay: "STARTING",
+    displayProfileOpportunityAlert: false,
+    displayBusinessStructurePrompt: true,
+    displayHomeBasedPrompt: false,
+    sectorRequired: false,
   },
   {
     id: "NEEDS_TO_REGISTER_FOR_TAXES",
@@ -142,6 +175,8 @@ export const OperatingPhases: OperatingPhase[] = [
     feedbackFormToDisplay: "STARTING",
     displayProfileOpportunityAlert: false,
     sectorRequired: false,
+    displayBusinessStructurePrompt: false,
+    displayHomeBasedPrompt: true,
   },
   {
     id: "UP_AND_RUNNING",
@@ -159,6 +194,8 @@ export const OperatingPhases: OperatingPhase[] = [
     businessNameRequired: true,
     feedbackFormToDisplay: "OWNING",
     displayProfileOpportunityAlert: false,
+    displayBusinessStructurePrompt: false,
+    displayHomeBasedPrompt: true,
     sectorRequired: true,
   },
   {
@@ -178,5 +215,7 @@ export const OperatingPhases: OperatingPhase[] = [
     feedbackFormToDisplay: "OWNING",
     displayProfileOpportunityAlert: true,
     sectorRequired: true,
+    displayBusinessStructurePrompt: false,
+    displayHomeBasedPrompt: true,
   },
 ];

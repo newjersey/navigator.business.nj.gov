@@ -5,6 +5,7 @@ import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
 import {
+  completeBusinessStructureTask,
   completeNewBusinessOnboarding,
   defaultPa11yThresholds,
   lighthouseDesktopConfig,
@@ -143,11 +144,9 @@ describe("Performance and Accessibility - Dashboard [all] [group3]", () => {
 
   it("should pass the audits", () => {
     const industry = LookupIndustryById("e-commerce");
-    const legalStructureId = "general-partnership";
 
     completeNewBusinessOnboarding({
       industry,
-      legalStructureId,
     });
 
     onDashboardPage.getEditProfileLink().should("exist");
@@ -172,9 +171,10 @@ describe("Performance and Accessibility - Roadmap Tasks [all] [group3]", () => {
 
       completeNewBusinessOnboarding({
         industry,
-        legalStructureId,
         townDisplayName,
       });
+      completeBusinessStructureTask({ legalStructureId });
+
       onDashboardPage.clickRoadmapTask(slug);
 
       cy.lighthouse(undefined, lighthouseDesktopConfig);
