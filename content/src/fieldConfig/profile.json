@@ -81,6 +81,12 @@
           "description": "Enter your Last Name, First Name and Middle Initial. The name must match exactly the name listed on your tax confirmation email."
         }
       },
+      "tradeName": {
+        "default": {
+          "header": "Trade Name",
+          "errorTextRequired": "Please enter your trade name."
+        }
+      },
       "nexusBusinessName": {
         "default": {
           "editButton": "Edit",

@@ -2293,6 +2293,130 @@ describe("profile", () => {
     });
   });
 
+  describe("trade name field behavior", () => {
+    it("displays trade name field as editable if starting a trade name business", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "sole-proprietorship",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.getByTestId("tradeName")).toBeInTheDocument();
+    });
+
+    it("displays trade name field for an existing trade name business", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          legalStructureId: "sole-proprietorship",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.getByTestId("tradeName")).toBeInTheDocument();
+    });
+
+    it("hides trade name field if starting a non trade name business", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "limited-liability-company",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.queryByTestId("tradeName")).not.toBeInTheDocument();
+    });
+
+    it("hides trade name field for existing non trade name business", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          legalStructureId: "limited-liability-company",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.queryByTestId("tradeName")).not.toBeInTheDocument();
+    });
+
+    it("displays tradeName as locked if user has accessed tax data", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "sole-proprietorship",
+        }),
+        taxFilingData: generateTaxFilingData({
+          state: "SUCCESS",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.getByText(Config.profileDefaults.fields.tradeName.default.header)).toBeInTheDocument();
+      expect(screen.queryByTestId("tradeName")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("responsible owner name field behavior", () => {
+    it("displays responsibleOwnerName field if starting a trade name business", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "general-partnership",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.getByTestId("responsibleOwnerName")).toBeInTheDocument();
+    });
+
+    it("displays responsibleOwnerName field for an existing trade name business", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          legalStructureId: "general-partnership",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.getByTestId("responsibleOwnerName")).toBeInTheDocument();
+    });
+
+    it("hides responsibleOwnerName field if starting a non trade name business", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "limited-liability-partnership",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.queryByTestId("responsibleOwnerName")).not.toBeInTheDocument();
+    });
+
+    it("hides responsibleOwnerName field for an existing non trade name business", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "limited-liability-partnership",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.queryByTestId("responsibleOwnerName")).not.toBeInTheDocument();
+    });
+
+    it("displays responsibleOwnerName as locked if user has accessed tax data", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "sole-proprietorship",
+        }),
+        taxFilingData: generateTaxFilingData({
+          state: "PENDING",
+        }),
+      });
+      renderPage({ userData });
+      expect(
+        screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.header)
+      ).toBeInTheDocument();
+      expect(screen.queryByTestId("responsibleOwnerName")).not.toBeInTheDocument();
+    });
+  });
+
   const fillText = (label: string, value: string): void => {
     fireEvent.change(screen.getByLabelText(label), { target: { value: value } });
     fireEvent.blur(screen.getByLabelText(label));

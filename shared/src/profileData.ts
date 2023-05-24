@@ -72,6 +72,7 @@ export interface ProfileData extends IndustrySpecificData {
   readonly businessPersona: BusinessPersona;
   readonly businessName: string;
   readonly responsibleOwnerName: string;
+  readonly tradeName: string;
   readonly industryId: string | undefined;
   readonly legalStructureId: string | undefined;
   readonly municipality: Municipality | undefined;
@@ -98,6 +99,7 @@ export interface ProfileData extends IndustrySpecificData {
 export const emptyProfileData: ProfileData = {
   businessPersona: undefined,
   businessName: "",
+  tradeName: "",
   responsibleOwnerName: "",
   industryId: undefined,
   legalStructureId: undefined,

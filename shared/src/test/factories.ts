@@ -219,6 +219,7 @@ export const generateProfileData = (
     businessPersona: persona,
     businessName: `some-business-name-${randomInt()}`,
     responsibleOwnerName: `some-responsible-owner-name-${randomInt()}`,
+    tradeName: `some-trade-name-${randomInt()}`,
     industryId: industry.id,
     legalStructureId: randomLegalStructure().id,
     municipality: generateMunicipality({}),
