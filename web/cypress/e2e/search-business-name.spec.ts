@@ -1,7 +1,11 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
-import { completeForeignNexusBusinessOnboarding } from "cypress/support/helpers";
+import {
+  completeBusinessStructureTask,
+  completeForeignNexusBusinessOnboarding,
+} from "cypress/support/helpers";
 
+// NOTE: in the api .env BUSINESS_NAME_BASE_URL and FORMATION_API_BASE_URL have to be removed for this test to use wiremock correctly
 describe("search business name [feature] [all] [group2]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
@@ -18,6 +22,7 @@ describe("search business name [feature] [all] [group2]", () => {
       locationInNewJersey: true,
     });
 
+    completeBusinessStructureTask({ legalStructureId });
     // search name
     cy.get('[data-task="form-business-entity"]').click();
     cy.get('input[aria-label="Search business name"]').type(businessName);

@@ -1,16 +1,18 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 import { FormationFormData, LookupIndustryById, randomInt } from "@businessnjgovnavigator/shared/";
 import {
-  AdditionalFormation,
+  completeBusinessStructureTask,
   completeNewBusinessOnboarding,
   generateFormationMember,
   generateFormationSigner,
   generateMunicipality,
+  updateNewBusinessProfilePage,
 } from "cypress/support/helpers";
 import { onAddressModal } from "cypress/support/page_objects/addressModal";
 import { onBusinessFormationPage } from "cypress/support/page_objects/businessFormationPage";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import dayjs from "dayjs";
+import { AdditionalFormation } from "../support/types";
 
 // NOTE: in the api .env BUSINESS_NAME_BASE_URL and FORMATION_API_BASE_URL have to be removed for this test to use wiremock correctly
 
@@ -22,6 +24,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
   it("successfully forms an LLC business", () => {
     const industry = LookupIndustryById("food-truck");
     const legalStructureId = "limited-liability-company";
+    const townDisplayName = "Barnegat";
     const businessNameSearch = "My Cool Business";
     const businessStartDate = dayjs().add(2, "months").format("MM/DD/YYYY");
     const businessSuffix = "LIMITED LIABILITY CO";
@@ -59,14 +62,15 @@ describe("Business Formation [feature] [all] [group2]", () => {
 
     completeNewBusinessOnboarding({
       industry,
-      legalStructureId,
     });
+    completeBusinessStructureTask({ legalStructureId });
+
+    updateNewBusinessProfilePage({ townDisplayName });
 
     onDashboardPage.clickRoadmapTask("form-business-entity");
     submitBusinessNameSearchAndContinue(businessNameSearch);
 
     typeDesignatorAndStartDate({ businessStartDate, businessSuffix });
-    openAddressSection();
     typeBusinessAddress({
       addressLine1,
       addressLine2,
@@ -129,10 +133,6 @@ const typeDesignatorAndStartDate = ({
       .invoke("prop", "value")
       .should("contain", businessStartDate);
   }
-};
-
-const openAddressSection = (): void => {
-  cy.get('[data-testid="add-address-button"]').click();
 };
 
 const typeBusinessAddress = ({

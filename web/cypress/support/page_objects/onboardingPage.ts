@@ -87,7 +87,7 @@ export class OnboardingPage {
   }
 
   getLegalStructure(companyType: string) {
-    return cy.get(`[data-value="${companyType}"]`);
+    return cy.get(`input[name="legal-structure"][value="${companyType}"]`);
   }
 
   getLiquorLicense(radio?: boolean) {
@@ -187,7 +187,9 @@ export class OnboardingPage {
   }
 
   selectLegalStructure(companyType: string) {
-    this.getLegalStructure(companyType).click({ force: true });
+    this.getLegalStructure(companyType).scrollIntoView();
+    this.getLegalStructure(companyType).check();
+    this.getLegalStructure(companyType).check();
   }
 
   selectLiquorLicense(radio: boolean) {

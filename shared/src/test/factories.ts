@@ -226,7 +226,7 @@ export const generateProfileData = (
     responsibleOwnerName: `some-responsible-owner-name-${randomInt()}`,
     tradeName: `some-trade-name-${randomInt()}`,
     industryId: industry.id,
-    legalStructureId: randomLegalStructure().id,
+    legalStructureId: undefined,
     municipality: generateMunicipality({}),
     dateOfFormation: getCurrentDateFormatted(defaultDateFormat),
     entityId: randomInt(10).toString(),

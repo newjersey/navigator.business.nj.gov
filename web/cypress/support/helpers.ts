@@ -6,15 +6,12 @@ import {
   arrayOfStateObjects as states,
   BusinessSignerTypeMap,
   carServiceOptions,
-  CarServiceType,
   FormationAddress,
-  FormationFormData,
   FormationLegalType,
   FormationMember,
   FormationSigner,
   Industries,
   Industry,
-  LegalStructure,
   LegalStructures,
   LookupLegalStructureById,
   LookupSectorTypeById,
@@ -25,6 +22,17 @@ import {
 import { onDashboardPage } from "./page_objects/dashboardPage";
 import { onOnboardingPage } from "./page_objects/onboardingPage";
 import { onProfilePage } from "./page_objects/profilePage";
+import {
+  ExistingOnboardingData,
+  ExistingProfileData,
+  ForeignOnboardingData,
+  ForeignProfileData,
+  LighthouseConfig,
+  Pa11yThresholds,
+  Registration,
+  StartingOnboardingData,
+  StartingProfileData,
+} from "./types";
 
 /* eslint-disable cypress/no-unnecessary-waiting */
 
@@ -53,26 +61,6 @@ export const defaultPa11yThresholds: Pa11yThresholds = {
   runners: ["axe", "htmlcs"],
 };
 
-export interface LighthouseThresholds {
-  accessibility: number;
-  "best-practices": number;
-  performance: number;
-  seo: number;
-  pwa: number;
-}
-
-export interface LighthouseConfig {
-  formFactor: "desktop" | "mobile";
-  screenEmulation?: {
-    disabled: boolean;
-  };
-}
-
-export interface Pa11yThresholds {
-  ignore?: string[];
-  runners?: string[];
-}
-
 export const randomElementFromArray = (array: any[]) => {
   return array[Math.floor(Math.random() * array.length)];
 };
@@ -93,50 +81,8 @@ export const industriesNotHomeBasedOrLiquorLicense = Industries.filter((industry
   );
 });
 
-type Registration = {
-  fullName: string;
-  email: string;
-  isNewsletterChecked: boolean;
-  isContactMeChecked: boolean;
-};
-
-interface StartingOnboardingData {
-  industry: Industry | undefined;
-  legalStructureId: string | undefined;
-  townDisplayName: string | undefined;
-  homeBasedQuestion: boolean | undefined;
-  liquorLicenseQuestion: boolean | undefined;
-  requiresCpa: boolean | undefined;
-  providesStaffingService: boolean | undefined;
-  certifiedInteriorDesigner: boolean | undefined;
-  realEstateAppraisalManagement: boolean | undefined;
-  interstateLogistics: boolean | undefined;
-  interstateMoving: boolean | undefined;
-  carService: CarServiceType | undefined;
-  isChildcareForSixOrMore: boolean | undefined;
-  willSellPetCareItems: boolean | undefined;
-  petCareHousing: boolean | undefined;
-}
-
-interface ExistingOnboardingData {
-  businessFormationDate?: string;
-  businessName?: string;
-  sectorId?: string;
-  legalStructureId?: string;
-  numberOfEmployees?: string;
-  townDisplayName?: string;
-  homeBasedQuestion?: boolean;
-  ownershipDataValues?: string[];
-}
-
-interface ForeignOnboardingData {
-  foreignBusinessTypeIds: string[];
-  locationInNewJersey: boolean;
-}
-
 export const completeNewBusinessOnboarding = ({
   industry = undefined,
-  legalStructureId = undefined,
   liquorLicenseQuestion = undefined,
   requiresCpa = undefined,
   providesStaffingService = undefined,
@@ -221,10 +167,6 @@ export const completeNewBusinessOnboarding = ({
     interstateMoving = industry.industryOnboardingQuestions.isInterstateMovingApplicable
       ? Boolean(randomInt() % 2)
       : undefined;
-  }
-
-  if (legalStructureId === undefined) {
-    legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
   }
 
   if (!industry.industryOnboardingQuestions.isCpaRequiredApplicable && requiresCpa) {
@@ -341,16 +283,6 @@ export const completeNewBusinessOnboarding = ({
   onOnboardingPage.clickNext();
 
   cy.url().should("include", "onboarding?page=3");
-  onOnboardingPage.selectLegalStructure(legalStructureId!);
-  onOnboardingPage
-    .getLegalStructure(legalStructureId!)
-    .parents(`[data-testid=${legalStructureId}]`)
-    .find("span")
-    .first()
-    .should("have.class", "Mui-checked");
-  onOnboardingPage.clickNext();
-
-  cy.url().should("include", "onboarding?page=4");
 
   onOnboardingPage.typeFullName(fullName);
   onOnboardingPage.getFullName().invoke("prop", "value").should("contain", fullName);
@@ -494,25 +426,10 @@ export const completeForeignNexusBusinessOnboarding = ({
 
   cy.url().should("include", "onboarding?page=4");
 
-  if (legalStructureId === undefined) {
-    legalStructureId = randomInt() % 2 ? "limited-partnership" : "sole-proprietorship";
-  }
-
-  onOnboardingPage.selectLegalStructure(legalStructureId!);
-  onOnboardingPage
-    .getLegalStructure(legalStructureId!)
-    .parents(`[data-testid=${legalStructureId}]`)
-    .find("span")
-    .first()
-    .should("have.class", "Mui-checked");
-  onOnboardingPage.clickNext();
-
-  cy.url().should("include", "onboarding?page=5");
-
   onOnboardingPage.selectLocationInNewJersey(locationInNewJersey);
 
   onOnboardingPage.clickNext();
-  cy.url().should("include", "onboarding?page=6");
+  cy.url().should("include", "onboarding?page=5");
   onOnboardingPage.typeFullName(fullName);
   onOnboardingPage.getFullName().invoke("prop", "value").should("contain", fullName);
   onOnboardingPage.typeEmail(email);
@@ -527,26 +444,6 @@ export const completeForeignNexusBusinessOnboarding = ({
   onOnboardingPage.clickNext();
   cy.url().should("include", `dashboard`);
 };
-
-interface StartingProfileData extends StartingOnboardingData {
-  employerId: string;
-  taxId: string;
-  notes: string;
-  entityId: string;
-}
-
-interface ExistingProfileData extends ExistingOnboardingData {
-  employerId: string;
-  taxId: string;
-  notes: string;
-  entityId: string;
-  taxPin: string;
-}
-
-interface ForeignProfileData {
-  taxId: string;
-  notes: string;
-}
 
 export const checkNewBusinessProfilePage = ({
   businessName,
@@ -590,12 +487,24 @@ export const checkNewBusinessProfilePage = ({
     onProfilePage.getHomeBased(!homeBasedQuestion).should("not.be.checked");
   }
 
-  onProfilePage
-    .getLegalStructure()
-    .parent()
-    .find("input")
-    .invoke("prop", "value")
-    .should("contain", companyType);
+  if (companyType !== undefined) {
+    onProfilePage
+      .getLegalStructure()
+      .parent()
+      .find("input")
+      .invoke("prop", "value")
+      .should("contain", companyType);
+
+    if (LookupLegalStructureById(companyType).elementsToDisplay.has("entityId")) {
+      onProfilePage.getEntityId().should("exist");
+      onProfilePage.getEntityId().invoke("prop", "value").should("contain", entityId);
+    } else {
+      onProfilePage.getEntityId().should("not.exist");
+    }
+  } else {
+    onProfilePage.getLegalStructure().parent().find("input").invoke("prop", "value").should("contain", "");
+    onProfilePage.getEntityId().should("not.exist");
+  }
 
   const employerIdWithMatch = employerId.match("^[0-9]$") ? employerId.match("^[0-9]$") : "";
   onProfilePage.getEmployerId().invoke("prop", "value").should("contain", employerIdWithMatch);
@@ -871,6 +780,18 @@ export const updateExistingBusinessProfilePage = ({
   cy.url().should("contain", "/dashboard");
 };
 
+export const completeBusinessStructureTask = ({ legalStructureId }: { legalStructureId: string }): void => {
+  cy.get('[data-task="business-structure"]').click();
+  cy.url().should("contain", "/business-structure");
+  cy.log(legalStructureId as string);
+  onOnboardingPage.selectLegalStructure(legalStructureId as string);
+  onOnboardingPage.getLegalStructure(legalStructureId as string).should("be.checked");
+
+  cy.get('button[data-testid="save-business-structure"]').click();
+  cy.get('[data-testid="back-to-dashboard"]').click();
+  cy.url().should("contain", "/dashboard");
+};
+
 export const updateForeignBusinessProfilePage = ({ taxId, notes }: Partial<ForeignProfileData>): void => {
   cy.url().should("contain", "/dashboard");
   onDashboardPage.clickEditProfileInDropdown();
@@ -890,11 +811,6 @@ export const updateForeignBusinessProfilePage = ({ taxId, notes }: Partial<Forei
   onProfilePage.clickSaveButton();
   cy.url().should("contain", "/dashboard");
 };
-
-export interface AdditionalFormation extends Partial<FormationFormData> {
-  registeredAgentSameAsAccountCheckbox: boolean;
-  getRegisteredAgentSameAsBusinessAddressCheckbox: boolean;
-}
 
 export const generateMunicipality = (overrides: Partial<Municipality>): Municipality => {
   return {
