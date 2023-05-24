@@ -23,7 +23,7 @@ export const ProfileTabHeader = (props: Props): ReactElement => {
   };
 
   return (
-    <div>
+    <div data-testid="profile-header">
       <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
       <h2 className="" style={{ fontWeight: 300 }}>
         {getTitle()}

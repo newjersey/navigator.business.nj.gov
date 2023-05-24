@@ -78,7 +78,7 @@ export const SectorModal = (props: Props): ReactElement => {
             <WithErrorBar hasError={formContextState.fieldStates.sectorId.invalid} type="ALWAYS">
               <FormControl fullWidth={true}>
                 <FieldLabelModal fieldName="sectorId" />
-                <OnboardingSectors />
+                <OnboardingSectors isSectorModal={true} />
               </FormControl>
             </WithErrorBar>
           </div>

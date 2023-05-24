@@ -1,3 +1,10 @@
+## [5.20.3](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.20.2...v5.20.3) (2023-05-24)
+
+
+### Bug Fixes
+
+* disable error outage bar in prod ([f4fcb8f](https://github.com/newjersey/navigator.business.nj.gov/commit/f4fcb8f1c7d589f1ebd0163009d428a6db38b147))
+
 ## [5.20.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.20.1...v5.20.2) (2023-05-24)
 
 
