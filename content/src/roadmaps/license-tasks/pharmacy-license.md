@@ -6,6 +6,12 @@ callToActionLink: https://www.njconsumeraffairs.gov/phar/Applications/Pharmacy-P
 callToActionText: Apply for My Pharmacy Permit
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Pharmacy
+webflowId: "640b8467a1b0444c01a311c3"
+webflowName: "Pharmacy Permit"
+filename: "pharmacy-permit"
+divisionPhone: "(973) 504-6450"
+webflowIndustry: "Pharmacy"
+licenseCertificationClassification: "REGISTRATION"
 ---
 
 Your pharmacy business needs a permit in order to operate. The permit application process includes a site inspection. Once a permit is issued, your pharmacy must open within 90 days and notify the Board of Pharmacy in writing of the date the business opens.

@@ -6,6 +6,12 @@ callToActionLink: null
 callToActionText: null
 agencyId: njdep
 additionalAgencyContext: Office of Permitting and Project Navigation
+webflowId: "5f7728fa71c49e6e76913b7d"
+webflowName: "Auto Body Repair Facility (If Spray Painting)"
+agencyAdditionalContext: "Compliance and Enforcement"
+divisionPhone: "(609) 777-0122"
+webflowIndustry: "Auto Body"
+licenseCertificationClassification: "PERMIT"
 ---
 
 If your business will offer spray paint services to vehicles, you must contact the Department of Environmental Protection (DEP) Office of Permitting and Project Navigation at (609)292-3600 for specific guidance on your permitting needs.
