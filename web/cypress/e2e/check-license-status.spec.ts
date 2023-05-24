@@ -10,15 +10,16 @@ describe("check license status [feature] [all] [group1]", () => {
 
   it("searches and checks license status", () => {
     const industry = LookupIndustryById("home-contractor");
-    const legalStructureId = "limited-liability-company";
+    const legalStructureId = "general-partnership";
+    const townDisplayName = "Barnegat";
+    const businessName = "Aculyst";
 
     completeNewBusinessOnboarding({
       industry,
-      legalStructureId,
     });
 
     // dashboard business name
-    updateNewBusinessProfilePage({ businessName: "Aculyst", legalStructureId });
+    updateNewBusinessProfilePage({ businessName, legalStructureId, townDisplayName });
     onDashboardPage.getEditProfileLink().should("exist");
 
     // application tab

@@ -75,29 +75,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=3");
-        onOnboardingPage.selectLegalStructure("general-partnership");
-
-        cy.lighthouse(undefined, lighthouseDesktopConfig);
-        cy.pa11y(defaultPa11yThresholds);
-      });
-    });
-
-    describe("Step 4", () => {
-      it("should pass the audits", () => {
-        cy.url().should("include", "onboarding?page=1");
-
-        onOnboardingPage.selectBusinessPersona("STARTING");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.selectIndustry("e-commerce");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=3");
-        onOnboardingPage.selectLegalStructure("general-partnership");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=4");
         onOnboardingPage.typeFullName("Michael Smith");
         onOnboardingPage.typeEmail("MichaelSmith@gmail.com");
         onOnboardingPage.typeConfirmEmail("MichaelSmith@gmail.com");
@@ -116,7 +93,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         cy.url().should("include", "onboarding?page=1");
 
         onOnboardingPage.selectBusinessPersona("OWNING");
-
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
       });

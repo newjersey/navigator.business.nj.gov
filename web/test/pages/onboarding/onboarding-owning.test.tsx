@@ -15,6 +15,7 @@ import {
   generateProfileData,
   generateTaxFilingData,
   ProfileData,
+  randomLegalStructure,
 } from "@businessnjgovnavigator/shared/";
 import { generatePreferences, generateUser, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
@@ -216,6 +217,7 @@ describe("onboarding - owning a business", () => {
       profileData: generateProfileData({
         businessPersona: "OWNING",
         operatingPhase: "GUEST_MODE_OWNING",
+        legalStructureId: randomLegalStructure().id,
       }),
       preferences: generatePreferences({
         visibleSidebarCards: ["welcome"],

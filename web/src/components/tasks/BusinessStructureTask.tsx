@@ -132,7 +132,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
             <h3>{Config.businessStructureTask.radioQuestionHeader}</h3>
             <OnboardingLegalStructure />
             <div className="margin-top-4">
-              <SecondaryButton isColor="primary" onClick={onSubmit}>
+              <SecondaryButton isColor="primary" onClick={onSubmit} dataTestId={"save-business-structure"}>
                 {Config.businessStructureTask.saveButton}
               </SecondaryButton>
             </div>

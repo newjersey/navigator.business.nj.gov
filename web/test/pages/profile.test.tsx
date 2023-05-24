@@ -35,7 +35,6 @@ import {
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   businessPersonas,
-  businessStructureTaskId,
   createEmptyUserData,
   defaultDateFormat,
   einTaskId,
@@ -147,7 +146,11 @@ describe("profile", () => {
             <WithStatefulUserData
               initialUserData={
                 userData ||
-                generateUserData({ profileData: generateProfileData({ municipality: genericTown }) })
+                generateUserData({
+                  profileData: generateProfileData({
+                    municipality: genericTown,
+                  }),
+                })
               }
             >
               <Profile municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]} />
@@ -251,7 +254,10 @@ describe("profile", () => {
 
     beforeEach(() => {
       userData = generateUserData({
-        profileData: generateProfileData({ businessPersona: "STARTING" }),
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: randomLegalStructure().id,
+        }),
       });
     });
 
@@ -306,7 +312,11 @@ describe("profile", () => {
     describe("formation date", () => {
       it("does not display when empty", () => {
         const initialUserData = generateUserData({
-          profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "" }),
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            dateOfFormation: "",
+            legalStructureId: randomLegalStructure().id,
+          }),
         });
         const newark = generateMunicipality({ displayName: "Newark" });
         renderPage({ userData: initialUserData, municipalities: [newark] });
@@ -329,6 +339,7 @@ describe("profile", () => {
             profileData: generateProfileData({
               businessPersona: "STARTING",
               dateOfFormation: "2017-10-01",
+              legalStructureId: randomLegalStructure().id,
             }),
           });
           const newark = generateMunicipality({ displayName: "Newark" });
@@ -343,6 +354,7 @@ describe("profile", () => {
             profileData: generateProfileData({
               businessPersona: "STARTING",
               dateOfFormation: "2017-10-01",
+              legalStructureId: randomLegalStructure().id,
             }),
           });
           const newark = generateMunicipality({ displayName: "Newark" });
@@ -364,6 +376,7 @@ describe("profile", () => {
             profileData: generateProfileData({
               businessPersona: "STARTING",
               dateOfFormation: "2017-10-01",
+              legalStructureId: randomLegalStructure().id,
             }),
           });
           const newark = generateMunicipality({ displayName: "Newark" });
@@ -489,7 +502,7 @@ describe("profile", () => {
           notes: "whats appppppp",
         },
         taskProgress: {
-          [businessStructureTaskId]: "COMPLETED",
+          // [businessStructureTaskId]: "COMPLETED",
           [einTaskId]: "COMPLETED",
           [naicsCodeTaskId]: "NOT_STARTED",
         },
@@ -502,7 +515,10 @@ describe("profile", () => {
       mockApi.postGetAnnualFilings.mockImplementation((userData: UserData) => {
         return Promise.resolve({ ...userData, taxFilingData: { ...taxData, filings: [] } });
       });
-      const initialUserData = generateUserData({ taxFilingData: taxData });
+      const initialUserData = generateUserData({
+        taxFilingData: taxData,
+        profileData: generateProfileData({ legalStructureId: randomLegalStructure().id }),
+      });
       renderPage({ userData: initialUserData });
       clickSave();
 
@@ -519,7 +535,11 @@ describe("profile", () => {
     it("sets registerForEin task to complete if employerId exists", async () => {
       renderPage({
         userData: generateUserData({
-          profileData: generateProfileData({ businessPersona: "STARTING", employerId: undefined }),
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            employerId: undefined,
+            legalStructureId: randomLegalStructure().id,
+          }),
         }),
       });
       chooseTab("numbers");
@@ -664,7 +684,13 @@ describe("profile", () => {
     });
 
     it("prevents user from saving if they partially entered Employer Id", async () => {
-      renderPage({});
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          legalStructureId: "general-partnership",
+          businessPersona: "STARTING",
+        }),
+      });
+      renderPage({ userData });
       chooseTab("numbers");
       fillText("Employer id", "123490");
       fireEvent.blur(screen.queryByLabelText("Employer id") as HTMLElement);
@@ -695,6 +721,7 @@ describe("profile", () => {
         const userData = generateUserData({
           profileData: generateProfileData({
             taxId: "123456789",
+            legalStructureId: randomLegalStructure().id,
           }),
         });
 
@@ -771,6 +798,7 @@ describe("profile", () => {
         const userData = generateUserData({
           profileData: generateProfileData({
             taxId: "123456789123",
+            legalStructureId: randomLegalStructure().id,
           }),
         });
 
@@ -821,6 +849,7 @@ describe("profile", () => {
         const userData = generateUserData({
           profileData: generateProfileData({
             taxId: "",
+            legalStructureId: randomLegalStructure().id,
           }),
         });
 
@@ -989,6 +1018,7 @@ describe("profile", () => {
               operatingPhase: phase,
               businessPersona: "STARTING",
               industryId: "generic",
+              legalStructureId: "limited-liability-partnership",
               sectorId: undefined,
             }),
           }),
@@ -1037,6 +1067,7 @@ describe("profile", () => {
             industryId: "generic",
             sectorId: undefined,
             operatingPhase: "UP_AND_RUNNING",
+            legalStructureId: "limited-liability-company",
             ...emptyIndustrySpecificData,
           }),
           onboardingFormProgress: "COMPLETED",
@@ -1909,6 +1940,7 @@ describe("profile", () => {
     const initialUserData = generateUserData({
       profileData: generateProfileData({
         municipality: undefined,
+        legalStructureId: randomLegalStructure().id,
       }),
     });
 
@@ -1930,6 +1962,7 @@ describe("profile", () => {
     const initialUserData = generateUserData({
       profileData: generateProfileData({
         municipality: generateMunicipality({ displayName: "Jersey City" }),
+        legalStructureId: randomLegalStructure().id,
       }),
     });
 
@@ -1963,7 +1996,11 @@ describe("profile", () => {
 
   it("resets naicsCode task and data when the industry is changed and page is saved", async () => {
     const userData = generateUserData({
-      profileData: generateProfileData({ industryId: "cosmetology", businessPersona: "STARTING" }),
+      profileData: generateProfileData({
+        industryId: "cosmetology",
+        businessPersona: "STARTING",
+        legalStructureId: randomLegalStructure().id,
+      }),
       taskProgress: {
         [naicsCodeTaskId]: "COMPLETED",
       },
@@ -1980,7 +2017,11 @@ describe("profile", () => {
 
   it("resets all task checkbox data data when the industry is changed and page is saved", async () => {
     const userData = generateUserData({
-      profileData: generateProfileData({ industryId: "cosmetology", businessPersona: "STARTING" }),
+      profileData: generateProfileData({
+        industryId: "cosmetology",
+        businessPersona: "STARTING",
+        legalStructureId: randomLegalStructure().id,
+      }),
       taskProgress: {
         [naicsCodeTaskId]: "COMPLETED",
       },
@@ -2075,6 +2116,7 @@ describe("profile", () => {
                 encryptedTaxId: "some-encrypted-value",
                 businessPersona,
                 foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["NONE"] : undefined,
+                legalStructureId: randomLegalStructure().id,
               }),
               taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" }),
             });
@@ -2302,6 +2344,7 @@ describe("profile", () => {
         profileData: generateProfileData({
           operatingPhase: "UP_AND_RUNNING_OWNING",
           dateOfFormation: undefined,
+          legalStructureId: randomLegalStructure().id,
         }),
       });
       renderPage({ userData });

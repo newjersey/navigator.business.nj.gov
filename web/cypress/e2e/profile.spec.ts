@@ -41,12 +41,17 @@ describe("Profile [feature] [all] [group1]", () => {
       const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
+      const townDisplayName = "Barnegat";
 
       completeNewBusinessOnboarding({
         industry,
         liquorLicenseQuestion,
-        legalStructureId,
         requiresCpa,
+      });
+
+      updateNewBusinessProfilePage({
+        legalStructureId,
+        townDisplayName,
       });
 
       checkNewBusinessProfilePage({
@@ -54,6 +59,7 @@ describe("Profile [feature] [all] [group1]", () => {
         homeBasedQuestion,
         liquorLicenseQuestion,
         legalStructureId,
+        townDisplayName,
       });
 
       const newBusinessName = `Generic Business Name ${randomInt()}`;
@@ -91,16 +97,18 @@ describe("Profile [feature] [all] [group1]", () => {
       const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
+      const townDisplayName = "Barnegat";
 
       completeNewBusinessOnboarding({
         industry,
         liquorLicenseQuestion,
-        legalStructureId,
         requiresCpa,
       });
 
       updateNewBusinessProfilePage({
         homeBasedQuestion: homeBasedQuestion,
+        legalStructureId,
+        townDisplayName,
       });
 
       checkNewBusinessProfilePage({
@@ -108,6 +116,7 @@ describe("Profile [feature] [all] [group1]", () => {
         homeBasedQuestion,
         liquorLicenseQuestion,
         legalStructureId,
+        townDisplayName,
       });
     });
 
@@ -122,18 +131,24 @@ describe("Profile [feature] [all] [group1]", () => {
       const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
+      const townDisplayName = "Barnegat";
 
       completeNewBusinessOnboarding({
         industry,
         liquorLicenseQuestion,
-        legalStructureId,
         requiresCpa,
+      });
+
+      updateNewBusinessProfilePage({
+        legalStructureId,
+        townDisplayName,
       });
 
       checkNewBusinessProfilePage({
         industry,
         liquorLicenseQuestion,
         legalStructureId,
+        townDisplayName,
       });
 
       updateNewBusinessProfilePage({

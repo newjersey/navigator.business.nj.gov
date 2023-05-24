@@ -3,12 +3,16 @@
 
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
-import { clickDeferredSaveButton, completeNewBusinessOnboarding } from "../support/helpers";
+import {
+  clickDeferredSaveButton,
+  completeNewBusinessOnboarding,
+  updateNewBusinessProfilePage,
+} from "../support/helpers";
 
 describe("Guest Dashboard [feature] [all] [group2]", () => {
   const industry = LookupIndustryById("home-contractor");
-  const legalStructureId = "limited-liability-company";
   const townDisplayName = "Atlantic City";
+  const legalStructureId = "limited-liability-company";
 
   beforeEach(() => {
     cy.clearCookies();
@@ -18,8 +22,6 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     cy.visit("/onboarding");
     completeNewBusinessOnboarding({
       industry,
-      townDisplayName,
-      legalStructureId,
     });
   });
 
@@ -81,6 +83,11 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     cy.get(`[data-testid="back-to-dashboard"]`).click({ force: true });
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
     cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
+
+    updateNewBusinessProfilePage({
+      legalStructureId,
+      townDisplayName,
+    });
 
     // try editing data in the Profile page
     onDashboardPage.clickEditProfileLink();

@@ -8,6 +8,7 @@ import {
   clickDeferredSaveButton,
   completeExistingBusinessOnboarding,
   completeNewBusinessOnboarding,
+  updateNewBusinessProfilePage,
   waitForUserDataMountUpdate,
 } from "../support/helpers";
 
@@ -38,10 +39,15 @@ describe("Dashboard [feature] [all] [group2]", () => {
       it("enters user info and shows the dashboard", () => {
         const industry = LookupIndustryById("e-commerce");
         const legalStructureId = "general-partnership";
+        const townDisplayName = "Barnegat";
 
         completeNewBusinessOnboarding({
           industry,
+        });
+
+        updateNewBusinessProfilePage({
           legalStructureId,
+          townDisplayName,
         });
 
         // check dashboard
@@ -71,19 +77,29 @@ describe("Dashboard [feature] [all] [group2]", () => {
       it("verifies the task screen and mini-roadmap displays", () => {
         const industry = LookupIndustryById("e-commerce");
         const legalStructureId = "general-partnership";
+        const townDisplayName = "Barnegat";
 
         completeNewBusinessOnboarding({
           industry,
-          legalStructureId,
         });
 
         waitForUserDataMountUpdate();
 
         // answer deferred question to get local-requirements task
-        onDashboardPage.getHomeBased().should("exist");
+        onDashboardPage.getHomeBased(true).should("exist");
+        onDashboardPage.getHomeBased(false).should("exist");
+
         onDashboardPage.selectHomeBased(false);
         clickDeferredSaveButton();
-        onDashboardPage.getHomeBased().should("not.exist");
+        onDashboardPage.getHomeBased(true).should("not.exist");
+        onDashboardPage.getHomeBased(false).should("not.exist");
+
+        cy.wait(1000);
+        updateNewBusinessProfilePage({
+          legalStructureId,
+          townDisplayName,
+        });
+
         cy.get('[data-task="identify-potential-lease"]').should("exist");
         cy.wait(1000);
 
@@ -103,13 +119,18 @@ describe("Dashboard [feature] [all] [group2]", () => {
 
       it("update the industry and verifies the dashboard tasks are updated", () => {
         const industry = LookupIndustryById("e-commerce");
-        const legalStructureId = "limited-liability-company";
+        const legalStructureId = "general-partnership";
+        const townDisplayName = "Barnegat";
 
         completeNewBusinessOnboarding({
           industry,
           legalStructureId,
         });
 
+        updateNewBusinessProfilePage({
+          legalStructureId,
+          townDisplayName,
+        });
         // editing data in the Profile page
         onDashboardPage.clickEditProfileLink();
         cy.url().should("contain", "/profile");
@@ -135,10 +156,16 @@ describe("Dashboard [feature] [all] [group2]", () => {
       it("open and closes contextual info panel on get EIN from the IRS Task screen", () => {
         const industry = LookupIndustryById("e-commerce");
         const legalStructureId = "general-partnership";
+        const townDisplayName = "Barnegat";
 
         completeNewBusinessOnboarding({
           industry,
           legalStructureId,
+        });
+
+        updateNewBusinessProfilePage({
+          legalStructureId,
+          townDisplayName,
         });
 
         // dashboard

@@ -140,29 +140,6 @@ describe("onboarding - starting a business", () => {
     );
   });
 
-  describe("page 3", () => {
-    it("prevents user from moving after Step 3 if you have not selected a legal structure", async () => {
-      const userData = generateTestUserData({ legalStructureId: undefined });
-      useMockRouter({ isReady: true, query: { page: "3" } });
-      const { page } = renderPage({ userData });
-      act(() => {
-        return page.clickNext();
-      });
-      expect(screen.getByTestId("step-3")).toBeInTheDocument();
-      expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
-      expect(screen.getByTestId("banner-alert-REQUIRED_LEGAL")).toBeInTheDocument();
-    });
-
-    it("allows user to move past Step 3 if you have selected a legal structure", async () => {
-      const userData = generateTestUserData({ legalStructureId: undefined });
-      useMockRouter({ isReady: true, query: { page: "3" } });
-      const { page } = renderPage({ userData });
-      page.chooseRadio("general-partnership");
-      await page.visitStep(4);
-      expect(screen.queryByTestId("banner-alert-REQUIRED_LEGAL")).not.toBeInTheDocument();
-    });
-  });
-
   it("changes url pathname every time a user goes to a different page", async () => {
     const { page } = renderPage({});
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
@@ -176,11 +153,6 @@ describe("onboarding - starting a business", () => {
     await page.visitStep(3);
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 3 } }, undefined, { shallow: true });
     expect(screen.getByTestId("step-3")).toBeInTheDocument();
-    page.chooseRadio("general-partnership");
-
-    await page.visitStep(4);
-    expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 4 } }, undefined, { shallow: true });
-    expect(screen.getByTestId("step-4")).toBeInTheDocument();
   });
 
   it("shows correct next-button text on each page", async () => {
@@ -199,14 +171,8 @@ describe("onboarding - starting a business", () => {
 
     await page.visitStep(3);
     const page3 = within(screen.getByTestId("page-3-form"));
-    expect(page3.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
-    expect(page3.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
-    page.chooseRadio("general-partnership");
-
-    await page.visitStep(4);
-    const page4 = within(screen.getByTestId("page-4-form"));
-    expect(page4.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
-    expect(page4.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
+    expect(page3.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
+    expect(page3.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
   });
 
   it("prefills form from existing user data", async () => {
@@ -230,9 +196,6 @@ describe("onboarding - starting a business", () => {
     expect(page.getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);
 
     await page.visitStep(3);
-    expect(page.getRadioButton("c-corporation")).toBeChecked();
-
-    await page.visitStep(4);
     expect(page.getFullNameValue()).toEqual("Michael Deeb");
     expect(page.getEmailValue()).toEqual("mdeeb@example.com");
     expect(page.getConfirmEmailValue()).toEqual("mdeeb@example.com");
@@ -250,10 +213,6 @@ describe("onboarding - starting a business", () => {
     await page.visitStep(3);
     expect(currentUserData().profileData.industryId).toEqual("e-commerce");
 
-    page.chooseRadio("general-partnership");
-    await page.visitStep(4);
-    expect(currentUserData().profileData.legalStructureId).toEqual("general-partnership");
-
     page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
     page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
     page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
@@ -269,7 +228,6 @@ describe("onboarding - starting a business", () => {
         industryId: "e-commerce",
         sectorId: "retail-trade-and-ecommerce",
         homeBasedBusiness: undefined,
-        legalStructureId: "general-partnership",
         municipality: undefined,
       },
       preferences: {
@@ -318,22 +276,7 @@ describe("onboarding - starting a business", () => {
     });
   });
 
-  it("removes required fields error when user goes back", async () => {
-    const { page } = renderPage({});
-    page.chooseRadio("business-persona-starting");
-    await page.visitStep(2);
-    page.selectByText("Industry", "All Other Businesses");
-    await page.visitStep(3);
-    act(() => {
-      return page.clickNext();
-    });
-    expect(screen.getByTestId("step-3")).toBeInTheDocument();
-    expect(screen.getByTestId("banner-alert-REQUIRED_LEGAL")).toBeInTheDocument();
-    page.clickBack();
-    expect(screen.queryByTestId("banner-alert-REQUIRED_LEGAL")).not.toBeInTheDocument();
-  });
-
   describe("validates self-reg step", () => {
-    runSelfRegPageTests({ businessPersona: "STARTING", selfRegPage: "4" });
+    runSelfRegPageTests({ businessPersona: "STARTING", selfRegPage: "3" });
   });
 });

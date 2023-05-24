@@ -3,6 +3,7 @@
 
 import {
   clickDeferredSaveButton,
+  completeBusinessStructureTask,
   completeExistingBusinessOnboarding,
   completeForeignBusinessOnboarding,
   completeForeignNexusBusinessOnboarding,
@@ -10,6 +11,7 @@ import {
   randomHomeBasedIndustry,
   randomNonHomeBasedIndustry,
   randomPublicFilingLegalStructure,
+  updateNewBusinessProfilePage,
   waitForUserDataMountUpdate,
 } from "../support/helpers";
 import { onDashboardPage } from "../support/page_objects/dashboardPage";
@@ -24,6 +26,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
     describe("onboarded as STARTING - PublicFiling", () => {
       const testLocationInThreePlaces = (): void => {
         it("can provide location in Location-Dependent task", () => {
+          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
           goToMercantileTask();
           selectLocation("Allendale");
           clickDeferredSaveButton();
@@ -35,6 +38,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
         });
 
         it("can provide location in Formation Date Modal", () => {
+          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
           openFormationDateModal();
           selectDate("04/2021");
           selectLocation("Allendale");
@@ -47,9 +51,10 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
         });
 
         it("can provide location in profile", () => {
-          goToProfile();
-          selectLocation("Allendale");
-          onProfilePage.clickSaveButton();
+          updateNewBusinessProfilePage({
+            legalStructureId: randomPublicFilingLegalStructure(),
+            townDisplayName: "Allendale",
+          });
 
           goToMercantileTask();
           expectLocationSpecificContentInTask("Allendale");
@@ -60,7 +65,6 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
         beforeEach(() => {
           completeNewBusinessOnboarding({
             industry: randomNonHomeBasedIndustry(),
-            legalStructureId: randomPublicFilingLegalStructure(),
           });
         });
 
@@ -71,7 +75,6 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
         beforeEach(() => {
           completeNewBusinessOnboarding({
             industry: randomHomeBasedIndustry(),
-            legalStructureId: randomPublicFilingLegalStructure(),
           });
 
           waitForUserDataMountUpdate();
@@ -85,8 +88,8 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
         beforeEach(() => {
           completeNewBusinessOnboarding({
             industry: randomHomeBasedIndustry(),
-            legalStructureId: randomPublicFilingLegalStructure(),
           });
+          completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
         });
 
         it("can provide location in Formation Date Modal", () => {
