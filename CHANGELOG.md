@@ -1,3 +1,10 @@
+## [5.20.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.20.1...v5.20.2) (2023-05-24)
+
+
+### Bug Fixes
+
+* system outage message for prod ([1659f49](https://github.com/newjersey/navigator.business.nj.gov/commit/1659f494d86891b0ba3a40162b51c714311fbfea))
+
 ## [5.20.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.20.0...v5.20.1) (2023-05-19)
 
 
