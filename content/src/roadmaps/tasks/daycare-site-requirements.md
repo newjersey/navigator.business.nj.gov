@@ -4,7 +4,7 @@ filename: daycare-site-requirements
 name: Prepare for State and Local Site Requirements
 id: daycare-site-requirements
 ---
-Your daycare needs to be inspected and approved by the New Jersey Department of Children and Families (DCF) and your local government to verify that it's safe for customers and employees.
+Before opening your daycare, New Jersey Department of Children and Families (DCF) and your local government have to inspect your daycare. 
 
 - - -
 
