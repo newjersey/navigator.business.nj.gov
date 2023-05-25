@@ -10,6 +10,7 @@ type ElementsToDisplay =
   | "taxIdDisclaimer"
   | "entityId"
   | "responsibleOwnerName"
+  | "tradeName"
   | "businessName"
   | "nexusBusinessElements"
   | "dbaName"

@@ -207,7 +207,8 @@ describe("profile", () => {
     function opensModalWhenEditingNonGuestModeProfileFields(): void {
       it("user is able to edit name and save", async () => {
         renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
-        fillText("Business name", "Cool Computers");
+        const inputFieldName = getBusinessProfileInputFieldName(initialUserData);
+        fillText(inputFieldName, "Cool Computers");
         clickSave();
         await waitFor(() => {
           return expect(mockRouter.mockPush).toHaveBeenCalled();
@@ -390,7 +391,7 @@ describe("profile", () => {
 
     it("redirects user to dashboard with success query string on save", async () => {
       renderPage({ userData });
-      fillText("Business name", "Cool Computers");
+      fillText("Industry", "All Other Businesses");
       clickSave();
       await waitFor(() => {
         return expect(mockRouter.mockPush).toHaveBeenCalledWith(`${ROUTES.dashboard}?success=true`);
@@ -402,7 +403,7 @@ describe("profile", () => {
       useMockRoadmapTask({ id: formationTaskId, urlSlug: "some-formation-url" });
 
       renderPage({ userData });
-      fillText("Business name", "Cool Computers");
+      fillText("Industry", "All Other Businesses");
       clickSave();
       await waitFor(() => {
         return expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/some-formation-url");
@@ -422,18 +423,20 @@ describe("profile", () => {
 
     it("prevents user from going back to dashboard if there are unsaved changes", () => {
       renderPage({ userData });
-      fillText("Business name", "Cool Computers");
+      const inputFieldName = getBusinessProfileInputFieldName(userData);
+      fillText(inputFieldName, "Cool Computers");
       clickBack();
       expect(screen.getByText(Config.profileDefaults.escapeModalReturn)).toBeInTheDocument();
     });
 
     it("returns user to profile page from un-saved changes modal", () => {
       renderPage({ userData });
-      fillText("Business name", "Cool Computers");
+      const inputFieldName = getBusinessProfileInputFieldName(userData);
+      fillText(inputFieldName, "Cool Computers");
       clickBack();
       fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalEscape));
-      fillText("Business name", "Cool Computers2");
-      expect(screen.getByLabelText("Business name")).toBeInTheDocument();
+      fillText(inputFieldName, "Cool Computers2");
+      expect(screen.getByLabelText(inputFieldName)).toBeInTheDocument();
     });
 
     it("updates the user data on save", async () => {
@@ -444,18 +447,19 @@ describe("profile", () => {
           ...emptyData.profileData,
           taxId: "",
           businessPersona: "STARTING",
+          legalStructureId: randomLegalStructure().id,
         },
       };
+      const inputFieldName = getBusinessProfileInputFieldName(initialUserData);
       const newark = generateMunicipality({ displayName: "Newark" });
       renderPage({ userData: initialUserData, municipalities: [newark] });
-      fillText("Business name", "Cool Computers");
+      fillText(inputFieldName, "Cool Computers");
       selectByText("Location", newark.displayName);
       selectByValue("Industry", "e-commerce");
       selectByValue("Business structure", "c-corporation");
       chooseRadio("home-based-business-radio-true");
 
       chooseTab("numbers");
-      fillText("Entity id", "0234567890");
       fillText("Tax id", "023456790123");
       fillText("Employer id", "02-3456780");
       chooseTab("notes");
@@ -465,18 +469,21 @@ describe("profile", () => {
       await waitFor(() => {
         expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
       });
+      const profileInputField =
+        inputFieldName === "Business name"
+          ? { businessName: "Cool Computers" }
+          : { tradeName: "Cool Computers" };
       expect(currentUserData()).toEqual({
         ...initialUserData,
         profileData: {
           ...initialUserData.profileData,
-          businessName: "Cool Computers",
+          ...profileInputField,
           industryId: "e-commerce",
           sectorId: "retail-trade-and-ecommerce",
           homeBasedBusiness: true,
           legalStructureId: "c-corporation",
           municipality: newark,
           taxId: "023456790123",
-          entityId: "0234567890",
           employerId: "023456780",
           notes: "whats appppppp",
         },
@@ -1090,6 +1097,7 @@ describe("profile", () => {
               businessPersona: "STARTING",
               operatingPhase: phase,
               businessName: "",
+              legalStructureId: "limited-liability-company",
             }),
           });
           renderPage({ userData: userData });
@@ -1112,6 +1120,7 @@ describe("profile", () => {
               businessPersona: "STARTING",
               operatingPhase: phase,
               businessName: "",
+              legalStructureId: "limited-liability-company",
             }),
           });
           renderPage({ userData: userData });
@@ -1130,12 +1139,13 @@ describe("profile", () => {
   describe("owning existing business", () => {
     it("user is able to save and is redirected to dashboard", async () => {
       const userData = generateUserData({ profileData: generateProfileData({ businessPersona: "OWNING" }) });
+      const inputFieldName = getBusinessProfileInputFieldName(userData);
 
       renderPage({
         userData: userData,
       });
 
-      fillText("Business name", "Cool Computers");
+      fillText(inputFieldName, "Cool Computers");
       clickSave();
       await waitFor(() => {
         return expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard?success=true");
@@ -1144,25 +1154,27 @@ describe("profile", () => {
 
     it("prevents user from going back to dashboard if there are unsaved changes", () => {
       const userData = generateUserData({ profileData: generateProfileData({ businessPersona: "OWNING" }) });
+      const inputFieldName = getBusinessProfileInputFieldName(userData);
 
       renderPage({
         userData: userData,
       });
-      fillText("Business name", "Cool Computers");
+      fillText(inputFieldName, "Cool Computers");
       clickBack();
       expect(screen.getByText(Config.profileDefaults.escapeModalReturn)).toBeInTheDocument();
     });
 
     it("returns user to profile page from un-saved changes modal", () => {
       const userData = generateUserData({ profileData: generateProfileData({ businessPersona: "OWNING" }) });
+      const inputFieldName = getBusinessProfileInputFieldName(userData);
 
       renderPage({
         userData: userData,
       });
-      fillText("Business name", "Cool Computers");
+      fillText(inputFieldName, "Cool Computers");
       clickBack();
       fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalEscape));
-      expect(screen.getByLabelText("Business name")).toBeInTheDocument();
+      expect(screen.getByLabelText(inputFieldName)).toBeInTheDocument();
     });
 
     it("updates the user data on save", async () => {
@@ -2293,6 +2305,130 @@ describe("profile", () => {
     });
   });
 
+  describe("trade name field behavior", () => {
+    it("displays trade name field as editable if starting a trade name business", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "sole-proprietorship",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.getByTestId("tradeName")).toBeInTheDocument();
+    });
+
+    it("displays trade name field for an existing trade name business", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          legalStructureId: "sole-proprietorship",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.getByTestId("tradeName")).toBeInTheDocument();
+    });
+
+    it("hides trade name field if starting a non trade name business", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "limited-liability-company",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.queryByTestId("tradeName")).not.toBeInTheDocument();
+    });
+
+    it("hides trade name field for existing non trade name business", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          legalStructureId: "limited-liability-company",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.queryByTestId("tradeName")).not.toBeInTheDocument();
+    });
+
+    it("displays tradeName as locked if user has accessed tax data", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "sole-proprietorship",
+        }),
+        taxFilingData: generateTaxFilingData({
+          state: "SUCCESS",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.getByText(Config.profileDefaults.fields.tradeName.default.header)).toBeInTheDocument();
+      expect(screen.queryByTestId("tradeName")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("responsible owner name field behavior", () => {
+    it("displays responsibleOwnerName field if starting a trade name business", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "general-partnership",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.getByTestId("responsibleOwnerName")).toBeInTheDocument();
+    });
+
+    it("displays responsibleOwnerName field for an existing trade name business", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          legalStructureId: "general-partnership",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.getByTestId("responsibleOwnerName")).toBeInTheDocument();
+    });
+
+    it("hides responsibleOwnerName field if starting a non trade name business", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "limited-liability-partnership",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.queryByTestId("responsibleOwnerName")).not.toBeInTheDocument();
+    });
+
+    it("hides responsibleOwnerName field for an existing non trade name business", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "limited-liability-partnership",
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.queryByTestId("responsibleOwnerName")).not.toBeInTheDocument();
+    });
+
+    it("displays responsibleOwnerName as locked if user has accessed tax data", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "sole-proprietorship",
+        }),
+        taxFilingData: generateTaxFilingData({
+          state: "PENDING",
+        }),
+      });
+      renderPage({ userData });
+      expect(
+        screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.header)
+      ).toBeInTheDocument();
+      expect(screen.queryByTestId("responsibleOwnerName")).not.toBeInTheDocument();
+    });
+  });
+
   const fillText = (label: string, value: string): void => {
     fireEvent.change(screen.getByLabelText(label), { target: { value: value } });
     fireEvent.blur(screen.getByLabelText(label));
@@ -2397,5 +2533,11 @@ describe("profile", () => {
       screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
     ).toBeInTheDocument();
     expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
+  };
+
+  const getBusinessProfileInputFieldName = (userData: UserData): string => {
+    return LookupLegalStructureById(userData.profileData.legalStructureId).hasTradeName
+      ? "Trade name"
+      : "Business name";
   };
 });
