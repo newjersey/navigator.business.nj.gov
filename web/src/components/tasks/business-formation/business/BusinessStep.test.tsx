@@ -1,4 +1,5 @@
 import { getMergedConfig } from "@/contexts/configContext";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { defaultDisplayDateFormat } from "@/lib/types/types";
 import { generateFormationDbaContent } from "@/test/factories";
 import {
@@ -115,7 +116,7 @@ describe("Formation - BusinessStep", () => {
         Config.formation.legalStructure.warningModalContinueButton
       )
     );
-    expect(mockPush).toHaveBeenCalledWith("/profile?path=businessFormation");
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.businessStructureTask);
   });
 
   it("auto-fills fields from userData if it exists as an LLC", async () => {

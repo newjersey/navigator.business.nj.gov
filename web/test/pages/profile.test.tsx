@@ -20,7 +20,7 @@ import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-u
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
-import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulProfileFormContext } from "@/test/mock/withStatefulProfileData";
 import {
   currentUserData,
@@ -409,29 +409,6 @@ describe("profile", () => {
       clickSave();
       await waitFor(() => {
         return expect(mockRouter.mockPush).toHaveBeenCalledWith(`${ROUTES.dashboard}?success=true`);
-      });
-    });
-
-    it("returns user to Business Formation after save using query string", async () => {
-      useMockRouter({ query: { path: "businessFormation" } });
-      useMockRoadmapTask({ id: formationTaskId, urlSlug: "some-formation-url" });
-
-      renderPage({ userData });
-      fillText("Industry", "All Other Businesses");
-      clickSave();
-      await waitFor(() => {
-        return expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/some-formation-url");
-      });
-    });
-
-    it("returns user to Business Formation on back using query string", async () => {
-      useMockRouter({ query: { path: "businessFormation" } });
-      useMockRoadmapTask({ id: formationTaskId, urlSlug: "some-formation-url" });
-
-      renderPage({ userData });
-      clickBack();
-      await waitFor(() => {
-        return expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/some-formation-url");
       });
     });
 
