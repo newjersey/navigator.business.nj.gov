@@ -103,7 +103,7 @@ describe("Dashboard [feature] [all] [group2]", () => {
 
       it("update the industry and verifies the dashboard tasks are updated", () => {
         const industry = LookupIndustryById("e-commerce");
-        const legalStructureId = "general-partnership";
+        const legalStructureId = "limited-liability-company";
 
         completeNewBusinessOnboarding({
           industry,

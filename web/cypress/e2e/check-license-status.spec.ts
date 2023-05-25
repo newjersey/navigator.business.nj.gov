@@ -10,7 +10,7 @@ describe("check license status [feature] [all] [group1]", () => {
 
   it("searches and checks license status", () => {
     const industry = LookupIndustryById("home-contractor");
-    const legalStructureId = "general-partnership";
+    const legalStructureId = "limited-liability-company";
 
     completeNewBusinessOnboarding({
       industry,
