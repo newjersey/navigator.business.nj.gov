@@ -293,7 +293,7 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   const shouldLockFormationFields = userData?.formationData.getFilingResponse?.success;
-  const shouldLockTaxId =
+  const hasSubmittedTaxData =
     userData?.taxFilingData.state === "SUCCESS" || userData?.taxFilingData.state === "PENDING";
 
   const nexusBusinessElements: Record<ProfileTabs, ReactNode> = {
@@ -374,10 +374,12 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="numbers" />
 
         <ProfileField fieldName="taxId" noLabel={true}>
-          <FieldLabelProfile fieldName="taxId" locked={shouldLockTaxId} />
-          {!shouldLockTaxId && <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />}
+          <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
+          {!hasSubmittedTaxData && (
+            <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
+          )}
           <div className={"max-width-38rem"}>
-            {shouldLockTaxId ? (
+            {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
               <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
@@ -413,10 +415,12 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="numbers" />
 
         <ProfileField fieldName="taxId" noLabel={true}>
-          <FieldLabelProfile fieldName="taxId" locked={shouldLockTaxId} />
-          {!shouldLockTaxId && <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />}
+          <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
+          {!hasSubmittedTaxData && (
+            <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
+          )}
           <div className={"max-width-38rem"}>
-            {shouldLockTaxId ? (
+            {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
               <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
@@ -455,14 +459,18 @@ const ProfilePage = (props: Props): ReactElement => {
       <>
         <ProfileTabHeader tab="info" />
 
-        <ProfileField fieldName="businessName" locked={shouldLockFormationFields}>
+        <ProfileField
+          fieldName="businessName"
+          locked={shouldLockFormationFields}
+          isVisible={!shouldShowTradeNameElements()}
+        >
           <ProfileBusinessName required={isBusinessNameRequired()} />
         </ProfileField>
 
         <ProfileField
           fieldName="responsibleOwnerName"
           isVisible={shouldShowTradeNameElements()}
-          locked={shouldLockTaxId}
+          locked={hasSubmittedTaxData}
         >
           <ProfileResponsibleOwnerName />
         </ProfileField>
@@ -470,7 +478,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField
           fieldName="tradeName"
           isVisible={shouldShowTradeNameElements()}
-          locked={shouldLockTaxId}
+          locked={hasSubmittedTaxData}
         >
           <ProfileTradeName />
         </ProfileField>
@@ -560,10 +568,12 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
 
         <ProfileField fieldName="taxId" noLabel={true}>
-          <FieldLabelProfile fieldName="taxId" locked={shouldLockTaxId} />
-          {!shouldLockTaxId && <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />}
+          <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
+          {!hasSubmittedTaxData && (
+            <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
+          )}
           <div className="max-width-38rem">
-            {shouldLockTaxId ? (
+            {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
               <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
@@ -589,14 +599,14 @@ const ProfilePage = (props: Props): ReactElement => {
       <>
         <ProfileTabHeader tab="info" />
 
-        <ProfileField fieldName="businessName">
+        <ProfileField fieldName="businessName" isVisible={!shouldShowTradeNameElements()}>
           <ProfileBusinessName />
         </ProfileField>
 
         <ProfileField
           fieldName="responsibleOwnerName"
           isVisible={shouldShowTradeNameElements()}
-          locked={shouldLockTaxId}
+          locked={hasSubmittedTaxData}
         >
           <ProfileResponsibleOwnerName />
         </ProfileField>
@@ -604,7 +614,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField
           fieldName="tradeName"
           isVisible={shouldShowTradeNameElements()}
-          locked={shouldLockTaxId}
+          locked={hasSubmittedTaxData}
         >
           <ProfileTradeName />
         </ProfileField>
@@ -657,10 +667,12 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
 
         <ProfileField fieldName="taxId" noLabel={true}>
-          <FieldLabelProfile fieldName="taxId" locked={shouldLockTaxId} />
-          {!shouldLockTaxId && <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />}
+          <FieldLabelProfile fieldName="taxId" locked={hasSubmittedTaxData} />
+          {!hasSubmittedTaxData && (
+            <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
+          )}
           <div className={"max-width-38rem"}>
-            {shouldLockTaxId ? (
+            {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
               <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
