@@ -47,15 +47,13 @@ import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
-import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { createProfileFieldErrorMap, OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getFlow, useMountEffectWhenDefined, useScrollToPathAnchor } from "@/lib/utils/helpers";
-import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
 import {
   BusinessPersona,
   createEmptyProfileData,
@@ -87,7 +85,6 @@ interface Props {
 }
 
 const ProfilePage = (props: Props): ReactElement => {
-  const { roadmap } = useRoadmap();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const router = useRouter();
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
@@ -113,11 +110,6 @@ const ProfilePage = (props: Props): ReactElement => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const redirect = (params?: { [key: string]: any }, routerType = router.push): Promise<boolean> => {
-    if (checkQueryValue(router, QUERIES.path, "businessFormation")) {
-      const formationUrlSlug = getTaskFromRoadmap(roadmap, formationTaskId)?.urlSlug ?? "";
-      return routerType(`/tasks/${formationUrlSlug}`);
-    }
-
     const urlParams = params ? `?${new URLSearchParams(params).toString()}` : "";
     return routerType(`${ROUTES.dashboard}${urlParams}`);
   };
