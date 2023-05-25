@@ -4,7 +4,8 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SearchBusinessNameError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { NameAvailability } from "@businessnjgovnavigator/shared/";
+import { NameAvailability, UserData } from "@businessnjgovnavigator/shared/";
+import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { FormEvent, useContext, useState } from "react";
 
 export const useBusinessNameSearch = ({
@@ -24,22 +25,48 @@ export const useBusinessNameSearch = ({
     event?: FormEvent<HTMLFormElement>
   ) => Promise<{ nameAvailability: NameAvailability; submittedName: string }>;
   setCurrentName: (name: string) => void;
+  setBusinessName: (
+    submittedName: string,
+    nameAvailability: NameAvailability,
+    isDbaOverride?: boolean
+  ) => Promise<void>;
+  setNameAvailability: React.Dispatch<React.SetStateAction<NameAvailability | undefined>>;
   resetSearch: () => void;
 } => {
-  const { userData } = useUserData();
-  const { state, setFormationFormData, setFieldsInteracted, setBusinessNameAvailability } =
-    useContext(BusinessFormationContext);
+  const { userData, update } = useUserData();
+  const {
+    state,
+    setFormationFormData,
+    setFieldsInteracted,
+    setBusinessNameAvailability,
+    setDbaBusinessNameAvailability,
+  } = useContext(BusinessFormationContext);
   const [currentName, setCurrentName] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<SearchBusinessNameError | undefined>(undefined);
   const [updateButtonClicked, setUpdateButtonClicked] = useState<boolean>(false);
+  const emptyNameAvailability: NameAvailability = {
+    similarNames: [],
+    status: undefined,
+    lastUpdatedTimeStamp: "",
+  };
+  const FIELD_NAME = "businessName";
 
-  const businessNameHasBeenSearched = (): boolean => {
-    return userData?.formationData.businessNameAvailability !== undefined;
+  const setNameAvailability = isDba ? setDbaBusinessNameAvailability : setBusinessNameAvailability;
+  const nameHasBeenSearched = (): boolean => {
+    if (isDba) {
+      return userData?.formationData.dbaBusinessNameAvailability !== undefined;
+    } else {
+      return userData?.formationData.businessNameAvailability !== undefined;
+    }
   };
 
-  const businessNameIsNotAvailable = (): boolean => {
-    return userData?.formationData.businessNameAvailability?.status !== "AVAILABLE";
+  const nameIsNotAvailable = (): boolean => {
+    if (isDba) {
+      return userData?.formationData.dbaBusinessNameAvailability?.status !== "AVAILABLE";
+    } else {
+      return userData?.formationData.businessNameAvailability?.status !== "AVAILABLE";
+    }
   };
 
   useMountEffectWhenDefined(() => {
@@ -47,8 +74,8 @@ export const useBusinessNameSearch = ({
       return;
     }
     setCurrentName(isDba ? userData.profileData.nexusDbaName || "" : userData.profileData.businessName);
-    if (businessNameIsNotAvailable() && businessNameHasBeenSearched()) {
-      setFieldsInteracted(["businessName"]);
+    if (nameIsNotAvailable() && nameHasBeenSearched()) {
+      setFieldsInteracted([FIELD_NAME]);
     }
   }, userData);
 
@@ -56,19 +83,89 @@ export const useBusinessNameSearch = ({
     setCurrentName(value);
   };
 
-  const onBlurNameField = (): void => {
-    setFormationFormData({
-      ...state.formationFormData,
-      businessName: currentName,
-    });
-    setBusinessNameAvailability({ similarNames: [], status: undefined, lastUpdatedTimeStamp: "" });
+  const onBlurNameField = (value: string): void => {
+    if (value !== state.formationFormData.businessName) {
+      setFormationFormData({
+        ...state.formationFormData,
+        businessName: currentName,
+      });
+      setNameAvailability(emptyNameAvailability);
+    }
+    setFieldsInteracted([FIELD_NAME]);
   };
 
   const resetSearch = (): void => {
-    setBusinessNameAvailability({ similarNames: [], status: undefined, lastUpdatedTimeStamp: "" });
+    setBusinessNameAvailability(emptyNameAvailability);
+    setDbaBusinessNameAvailability(emptyNameAvailability);
     setUpdateButtonClicked(false);
     setError(undefined);
     setCurrentName("");
+    setBusinessName("", emptyNameAvailability);
+    setBusinessName("", emptyNameAvailability, !isDba);
+  };
+
+  const setBusinessName = async (
+    submittedName: string,
+    nameAvailability: NameAvailability,
+    isDbaOverride?: boolean
+  ): Promise<void> => {
+    if (!userData) return;
+
+    let newUserData: UserData | undefined;
+    if (isDbaOverride ?? isDba) {
+      newUserData = {
+        ...userData,
+        profileData: {
+          ...userData.profileData,
+          nexusDbaName: submittedName,
+          needsNexusDbaName: true,
+        },
+      };
+    } else {
+      if (nameAvailability.status === "AVAILABLE") {
+        newUserData = {
+          ...userData,
+          formationData: {
+            ...userData.formationData,
+            formationFormData: {
+              ...userData.formationData.formationFormData,
+              businessName: submittedName,
+            },
+          },
+          profileData: {
+            ...userData.profileData,
+            businessName: submittedName,
+            nexusDbaName: emptyProfileData.nexusDbaName,
+            needsNexusDbaName: emptyProfileData.needsNexusDbaName,
+          },
+        };
+      } else if (nameAvailability.status === "UNAVAILABLE") {
+        newUserData = {
+          ...userData,
+          formationData: {
+            ...userData.formationData,
+            formationFormData: {
+              ...userData.formationData.formationFormData,
+              businessName: submittedName,
+            },
+          },
+          profileData: {
+            ...userData.profileData,
+            businessName: submittedName,
+            needsNexusDbaName: true,
+          },
+        };
+      }
+    }
+
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        ...newUserData?.formationData.formationFormData,
+      };
+    });
+
+    await update(newUserData);
   };
 
   const searchBusinessName = async (
@@ -79,7 +176,7 @@ export const useBusinessNameSearch = ({
     }
 
     const resetState = (): void => {
-      setBusinessNameAvailability({ similarNames: [], status: undefined, lastUpdatedTimeStamp: "" });
+      setNameAvailability(emptyNameAvailability);
       setUpdateButtonClicked(false);
       setError(undefined);
     };
@@ -91,6 +188,8 @@ export const useBusinessNameSearch = ({
       throw new Error("ERROR");
     }
 
+    setFieldsInteracted([FIELD_NAME]);
+
     setIsLoading(true);
     analytics.event.task_business_name_check_availability.submit.view_business_name_availability();
     return api
@@ -98,11 +197,6 @@ export const useBusinessNameSearch = ({
       .then((result: NameAvailability) => {
         resetState();
         setIsLoading(false);
-        setFormationFormData({
-          ...state.formationFormData,
-          businessName: currentName,
-        });
-        setBusinessNameAvailability({ ...result });
         return { nameAvailability: result, submittedName: currentName };
       })
       .catch((api_error) => {
@@ -122,10 +216,12 @@ export const useBusinessNameSearch = ({
     isLoading,
     error,
     updateButtonClicked,
+    setBusinessName,
     setCurrentName,
     updateCurrentName,
     onBlurNameField,
     searchBusinessName,
+    setNameAvailability,
     resetSearch,
   };
 };

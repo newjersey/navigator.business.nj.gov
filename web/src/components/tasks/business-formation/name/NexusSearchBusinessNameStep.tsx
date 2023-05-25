@@ -3,80 +3,11 @@ import { NexusUnavailable } from "@/components/tasks/business-formation/name/Nex
 import { SearchBusinessNameForm } from "@/components/tasks/search-business-name/SearchBusinessNameForm";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { NameAvailability } from "@businessnjgovnavigator/shared/";
-import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useContext } from "react";
 
 export const NexusSearchBusinessNameStep = (): ReactElement => {
-  const { state, setFormationFormData, setFieldsInteracted, setBusinessNameAvailability } =
-    useContext(BusinessFormationContext);
-
-  console.log({"NexusSearchBusinessNameStep": state})
-  const { userData, update } = useUserData();
   const { Config } = useConfig();
-  const FIELD_NAME = "businessName";
-
-  const onSubmit = async (
-    submittedName: string,
-    nameAvailability: NameAvailability,
-    isInitialSubmit: boolean
-  ): Promise<void> => {
-    if (!nameAvailability || !userData || isInitialSubmit) {
-      return;
-    }
-    setFieldsInteracted([FIELD_NAME]);
-    let newUserData: UserData | undefined;
-    if (nameAvailability.status === "AVAILABLE") {
-      newUserData = {
-        ...userData,
-        formationData: {
-          ...userData.formationData,
-          formationFormData: {
-            ...userData.formationData.formationFormData,
-            businessName: submittedName,
-          },
-          businessNameAvailability: nameAvailability,
-        },
-        profileData: {
-          ...userData.profileData,
-          businessName: submittedName,
-          nexusDbaName: emptyProfileData.nexusDbaName,
-          needsNexusDbaName: emptyProfileData.needsNexusDbaName,
-        },
-      };
-    } else if (nameAvailability.status === "UNAVAILABLE") {
-      newUserData = {
-        ...userData,
-        formationData: {
-          ...userData.formationData,
-          formationFormData: {
-            ...userData.formationData.formationFormData,
-            businessName: submittedName,
-          },
-          businessNameAvailability: nameAvailability,
-        },
-        profileData: {
-          ...userData.profileData,
-          businessName: submittedName,
-          needsNexusDbaName: true,
-        },
-      };
-    }
-
-    setFormationFormData((previousFormationData) => {
-      return {
-        ...previousFormationData,
-        businessName: submittedName,
-      };
-    });
-
-    if (newUserData) {
-      return update(newUserData);
-    }
-    return;
-  };
+  const { state } = useContext(BusinessFormationContext);
 
   return (
     <div data-testid={"nexus-name-step"}>
@@ -85,7 +16,6 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
       <SearchBusinessNameForm
         businessName={state.formationFormData.businessName}
         nameAvailability={state.businessNameAvailability}
-        setNameAvailability={setBusinessNameAvailability}
         className="grid-col-12"
         config={{
           availableAlertText: Config.nexusNameSearch.availableText,
@@ -94,8 +24,6 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
         }}
         hideTextFieldWhenUnavailable={true}
         isBusinessFormation={true}
-        onChange={setBusinessNameAvailability}
-        onSubmit={onSubmit}
         unavailable={NexusUnavailable}
       />
     </div>

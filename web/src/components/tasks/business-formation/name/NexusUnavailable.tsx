@@ -13,7 +13,7 @@ export const NexusUnavailable = (props: UnavailableProps): ReactElement => {
 
   const onClick = (): void => {
     analytics.event.business_formation_search_existing_name_again.click.refresh_name_search_field();
-    // props.resetSearch();
+    props.resetSearch();
   };
 
   const [textBeforeButton, textAfterButton] = templateEval(Config.nexusNameSearch.unavailableText, {
@@ -28,9 +28,6 @@ export const NexusUnavailable = (props: UnavailableProps): ReactElement => {
 
   return (
     <>
-    <p>
-    Nexus Unavailable Component
-    </p>
       <div data-testid="unavailable-text">
         <Alert variant="error">
           <PureMarkdownContent components={inlineParagraphComponent}>{textBeforeButton}</PureMarkdownContent>{" "}
