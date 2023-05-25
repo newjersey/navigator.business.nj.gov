@@ -1,5 +1,6 @@
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import * as useUserModule from "@/lib/data-hooks/useUserData";
+import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { StatefulDataContext, statefulDataHelpers, WithStatefulData } from "@/test/mock/withStatefulData";
 import { UserData } from "@businessnjgovnavigator/shared/";
@@ -39,7 +40,12 @@ export const setupStatefulUserDataContext = (): void => {
   useMockRoadmap({});
   mockUseUserData.mockImplementation(() => {
     const { genericData, update } = useContext(StatefulDataContext);
-    const { updateQueue } = useContext(UpdateQueueContext);
+    const { updateQueue, setUpdateQueue } = useContext(UpdateQueueContext);
+
+    const createUpdateQueue = (userData: UserData): Promise<void> => {
+      setUpdateQueue(new UpdateQueueFactory(userData, update));
+      return update(userData);
+    };
 
     return {
       userData: genericData as UserData | undefined,
@@ -47,6 +53,7 @@ export const setupStatefulUserDataContext = (): void => {
       error: undefined,
       update: update,
       updateQueue: updateQueue,
+      createUpdateQueue,
       refresh: jest.fn(),
     };
   });

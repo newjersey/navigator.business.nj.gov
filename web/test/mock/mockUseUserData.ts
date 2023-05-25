@@ -42,6 +42,7 @@ export const generateUseUserDataResponse = (overrides: Partial<UseUserDataRespon
     isLoading: false,
     refresh: jest.fn().mockResolvedValue({}),
     updateQueue: new UpdateQueueFactory(userData, update),
+    createUpdateQueue: jest.fn().mockResolvedValue({}),
     ...overrides,
   };
 };
