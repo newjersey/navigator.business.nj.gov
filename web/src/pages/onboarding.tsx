@@ -77,7 +77,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [user, setUser] = useState<BusinessUser>(createEmptyUser(ABStorageFactory().getExperience()));
   const [error, setError] = useState<ProfileError | undefined>(undefined);
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
-  const { userData, update } = useUserData();
+  const { updateQueue, createUpdateQueue } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const headerRef = useRef<HTMLDivElement>(null);
   const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
@@ -162,7 +162,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         return;
       }
 
-      let currentUserData = userData;
+      let currentUserData = updateQueue?.current();
       if (currentUserData) {
         setProfileData(currentUserData.profileData);
         setUser(currentUserData.user);
@@ -170,7 +170,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       } else if (state.isAuthenticated === IsAuthenticated.FALSE) {
         currentUserData = createEmptyUserData(state.user);
         setRegistrationDimension("Began Onboarding");
-        await update(currentUserData);
+        await createUpdateQueue(currentUserData);
         setProfileData(currentUserData.profileData);
         setUser(currentUserData.user);
       }
@@ -238,7 +238,8 @@ const OnboardingPage = (props: Props): ReactElement => {
   FormFuncWrapper(
     async (): Promise<void> => {
       scrollToTop();
-      const currentUserData = userData as UserData;
+      if (!updateQueue) return;
+      const currentUserData = updateQueue.current();
       let newProfileData = profileData;
       const hasBusinessPersonaChanged =
         profileData.businessPersona !== currentUserData?.profileData.businessPersona;
@@ -273,15 +274,19 @@ const OnboardingPage = (props: Props): ReactElement => {
       if (profileData.foreignBusinessType === "NONE") {
         await router.push(ROUTES.unsupported);
       } else if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
-        update({ ...currentUserData, user, profileData: newProfileData }, { local: true }).then(() => {
-          const nextCurrentPage = page.current + 1;
-          setPage({
-            current: nextCurrentPage,
-            previous: page.current,
+        updateQueue
+          .queueUser(user)
+          .queueProfileData(newProfileData)
+          .update({ local: true })
+          .then(() => {
+            const nextCurrentPage = page.current + 1;
+            setPage({
+              current: nextCurrentPage,
+              previous: page.current,
+            });
+            routeToPage(nextCurrentPage);
+            headerRef.current?.focus();
           });
-          routeToPage(nextCurrentPage);
-          headerRef.current?.focus();
-        });
       } else {
         setRegistrationDimension("Onboarded Guest");
         analytics.event.onboarding_last_step.submit.finish_onboarding();
@@ -328,7 +333,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           preferences: newPreferencesData,
         };
 
-        await update(updatedUserData);
+        await updateQueue.queue(updatedUserData).update();
         await router.push({
           pathname: ROUTES.dashboard,
           query: { [QUERIES.fromOnboarding]: "true" },
