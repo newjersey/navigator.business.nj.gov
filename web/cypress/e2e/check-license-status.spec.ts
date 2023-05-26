@@ -28,8 +28,8 @@ describe("check license status [feature] [all] [group1]", () => {
     cy.intercept(`${Cypress.env("API_BASE_URL")}/api/users/*`).as("userAPI");
     // check status tab, error messages
     cy.get('input[data-testid="business-name"]').type(businessName);
+    cy.get('input[data-testid="business-name"]').should("have.value", businessName);
 
-    cy.get('input[data-testid="business-name"]').should("have.value", "Aculyst");
     cy.get('input[data-testid="zipcode"]').type("12345");
     cy.get('button[data-testid="check-status-submit"]').click();
 

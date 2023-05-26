@@ -476,3 +476,11 @@ export const operatingPhasesDisplayingAltHomeBasedBusinessDescription = Operatin
     return phase.displayAltHomeBasedBusinessDescription && phase.displayHomeBasedPrompt;
   }
 ).map((phase) => phase.id);
+
+export const operatingPhasesDisplayingBusinessStructurePrompt = OperatingPhases.filter(
+  (phase) => phase.displayBusinessStructurePrompt
+).map((phase) => phase.id);
+
+export const operatingPhasesNotDisplayingBusinessStructurePrompt = OperatingPhases.filter(
+  (phase) => !phase.displayBusinessStructurePrompt
+).map((phase) => phase.id);

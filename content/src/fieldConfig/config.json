@@ -26,7 +26,8 @@
     "betaMainText": "This site is in beta."
   },
   "businessStructurePrompt": {
-    "notCompletedTaskPrompt": "Select your [business structure](/tasks/business-structure) to learn how to **register and form your business.**",
+    "notCompletedTaskPromptAnyTask": "Select your [business structure](/tasks/business-structure) to learn how to **register and form your business.**",
+    "notCompletedTaskPromptBusinessStructureTask": "Select your business structure to learn how to **register and form your business.**",
     "buttonText": "Select Business Structure"
   },
   "selfRegistration": {

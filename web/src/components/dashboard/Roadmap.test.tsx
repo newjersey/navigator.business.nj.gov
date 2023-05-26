@@ -1,24 +1,20 @@
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { getMergedConfig } from "@/contexts/configContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import {
+  operatingPhasesDisplayingBusinessStructurePrompt,
+  operatingPhasesNotDisplayingBusinessStructurePrompt,
+} from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { generateProfileData, generateUserData, OperatingPhases } from "@businessnjgovnavigator/shared";
+import { generateProfileData, generateUserData } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
-
-const operatingPhasesDisplayingBusinessStructurePrompt = OperatingPhases.filter(
-  (phase) => phase.displayBusinessStructurePrompt
-).map((phase) => phase.id);
-
-const operatingPhasesNotDisplayingBusinessStructurePrompt = OperatingPhases.filter(
-  (phase) => !phase.displayBusinessStructurePrompt
-).map((phase) => phase.id);
 
 describe("<SectionAccordion />", () => {
   beforeEach(() => {
