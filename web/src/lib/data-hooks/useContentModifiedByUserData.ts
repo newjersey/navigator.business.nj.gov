@@ -2,7 +2,8 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { templateEval, templateEvalWithExtraSpaceRemoval } from "@/lib/utils/helpers";
 
 export const useContentModifiedByUserData = (content: string): string => {
-  const { userData } = useUserData();
+  const { updateQueue } = useUserData();
+  const userData = updateQueue?.current();
   let result = content;
   if (!userData || !result) return result;
 
@@ -11,7 +12,7 @@ export const useContentModifiedByUserData = (content: string): string => {
       result = templateEval(content, {
         oos: "out-of-state",
       });
-    } else if (userData?.profileData.businessPersona) {
+    } else {
       result = templateEvalWithExtraSpaceRemoval(content, {
         oos: "",
       });
@@ -23,7 +24,7 @@ export const useContentModifiedByUserData = (content: string): string => {
       result = templateEval(content, {
         OoS: "Out-of-State",
       });
-    } else if (userData?.profileData.businessPersona) {
+    } else {
       result = templateEvalWithExtraSpaceRemoval(content, {
         OoS: "",
       });

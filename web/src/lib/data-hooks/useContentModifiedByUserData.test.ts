@@ -24,6 +24,19 @@ describe("useContentModifiedByUserData", () => {
       );
 
       const result = useContentModifiedByUserData("You have a ${oos} business");
+      expect(result).toEqual(expect.not.stringContaining("${oos}"));
+      expect(result).toEqual(expect.not.stringContaining("out-of-state"));
+    });
+
+    it("does not render out of state designation when businessPersona is undefined", () => {
+      useMockUserData(
+        generateUserData({
+          profileData: generateProfileData({ businessPersona: randomInt() % 2 ? "STARTING" : "OWNING" }),
+        })
+      );
+
+      const result = useContentModifiedByUserData("You have a ${oos} business");
+      expect(result).toEqual(expect.not.stringContaining("${oos}"));
       expect(result).toEqual(expect.not.stringContaining("out-of-state"));
     });
   });
@@ -43,6 +56,19 @@ describe("useContentModifiedByUserData", () => {
       );
 
       const result = useContentModifiedByUserData("You have a ${OoS} business");
+      expect(result).toEqual(expect.not.stringContaining("${OoS}"));
+      expect(result).toEqual(expect.not.stringContaining("Out-of-State"));
+    });
+
+    it("does not render out of state designation when businessPersona is undefined", () => {
+      useMockUserData(
+        generateUserData({
+          profileData: generateProfileData({ businessPersona: undefined }),
+        })
+      );
+
+      const result = useContentModifiedByUserData("You have a ${OoS} business");
+      expect(result).toEqual(expect.not.stringContaining("${OoS}"));
       expect(result).toEqual(expect.not.stringContaining("Out-of-State"));
     });
   });
