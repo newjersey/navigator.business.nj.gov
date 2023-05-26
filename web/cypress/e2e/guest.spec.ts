@@ -5,14 +5,12 @@ import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import {
   clickDeferredSaveButton,
+  completeBusinessStructureTask,
   completeNewBusinessOnboarding,
-  updateNewBusinessProfilePage,
 } from "../support/helpers";
 
-// skipping until there is clarity on how save business structure button should behave for guest mode
-describe.skip("Guest Dashboard [feature] [all] [group2]", () => {
+describe("Guest Dashboard [feature] [all] [group2]", () => {
   const industry = LookupIndustryById("home-contractor");
-  const townDisplayName = "Atlantic City";
   const legalStructureId = "limited-liability-company";
 
   beforeEach(() => {
@@ -28,6 +26,8 @@ describe.skip("Guest Dashboard [feature] [all] [group2]", () => {
 
   it("enters user info and shows the dashboard", () => {
     cy.url().should("contain", "/dashboard");
+
+    completeBusinessStructureTask({ legalStructureId });
 
     // check dashboard
     onDashboardPage.getEditProfileLink().should("exist");
@@ -84,11 +84,6 @@ describe.skip("Guest Dashboard [feature] [all] [group2]", () => {
     cy.get(`[data-testid="back-to-dashboard"]`).click({ force: true });
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
     cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
-
-    updateNewBusinessProfilePage({
-      legalStructureId,
-      townDisplayName,
-    });
 
     // try editing data in the Profile page
     onDashboardPage.clickEditProfileLink();
