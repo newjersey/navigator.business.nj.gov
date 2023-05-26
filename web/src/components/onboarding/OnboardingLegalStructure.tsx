@@ -42,6 +42,10 @@ export const OnboardingLegalStructure = <T,>(props: FormContextFieldProps<T>): R
     setProfileData({
       ...state.profileData,
       legalStructureId: (event.target.value as string) || undefined,
+      operatingPhase:
+        state.profileData.operatingPhase === "GUEST_MODE"
+          ? "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
+          : state.profileData.operatingPhase,
     });
   };
 

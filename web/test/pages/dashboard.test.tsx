@@ -723,6 +723,26 @@ describe("dashboard page", () => {
     });
   });
 
+  it("displays step2 for guest mode user when business structure task is completed", () => {
+    useMockRoadmap({
+      steps: [
+        generateStep({ name: "step1", section: "PLAN" }),
+        generateStep({ name: "step2", section: "START" }),
+      ],
+    });
+
+    useMockUserData({
+      profileData: generateProfileData({
+        operatingPhase: "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
+      }),
+      onboardingFormProgress: "COMPLETED",
+    });
+
+    renderDashboardPage({});
+
+    expect(within(screen.getByTestId("section-start")).getByText("step2")).toBeVisible();
+  });
+
   const chooseHomeBasedValue = (value: "true" | "false"): void => {
     fireEvent.click(screen.getByTestId(`home-based-business-radio-${value}`));
   };

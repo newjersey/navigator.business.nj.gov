@@ -21,6 +21,7 @@ export interface OperatingPhase {
 
 export type OperatingPhaseId =
   | "GUEST_MODE"
+  | "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
   | "GUEST_MODE_OWNING"
   | "NEEDS_BUSINESS_STRUCTURE"
   | "NEEDS_TO_FORM"
@@ -76,6 +77,26 @@ export const OperatingPhases: OperatingPhase[] = [
     displayProfileOpportunityAlert: false,
     displayBusinessStructurePrompt: true,
     displayHomeBasedPrompt: false,
+    sectorRequired: false,
+  },
+  {
+    id: "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
+    displayCompanyDemographicProfileFields: false,
+    displayCertifications: false,
+    displayFundings: false,
+    displayCalendarType: "NONE",
+    displayTaxAccessButton: false,
+    displayCalendarToggleButton: false,
+    displayRoadmapTasks: true,
+    displayHideableRoadmapTasks: false,
+    displayAltHomeBasedBusinessDescription: true,
+    municipalityRequiredForTradeName: false,
+    municipalityRequiredForPublicFiling: false,
+    businessNameRequired: false,
+    feedbackFormToDisplay: "STARTING",
+    displayProfileOpportunityAlert: false,
+    displayBusinessStructurePrompt: false,
+    displayHomeBasedPrompt: true,
     sectorRequired: false,
   },
   {

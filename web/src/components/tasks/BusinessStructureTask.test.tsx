@@ -192,4 +192,16 @@ describe("<BusinessStructureTask />", () => {
       expect(currentUserData().taskProgress[taskId]).toEqual("COMPLETED");
     });
   });
+
+  it("updates operating phase from GUEST_MODE to GUEST_MODE_WITH_BUSINESS_STRUCTURE when business structure is saved", async () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({ legalStructureId: undefined, operatingPhase: "GUEST_MODE" }),
+    });
+    renderTask(userData);
+    fireEvent.click(screen.getByLabelText("limited-liability-company"));
+    fireEvent.click(screen.getByText(Config.businessStructureTask.saveButton));
+    await waitFor(() => {
+      expect(currentUserData().profileData.operatingPhase).toEqual("GUEST_MODE_WITH_BUSINESS_STRUCTURE");
+    });
+  });
 });
