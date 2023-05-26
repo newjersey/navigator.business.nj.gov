@@ -294,7 +294,7 @@
     "standingDocFileTitle": "Certificate of Good Standing",
     "profileTabDocsTitle": "Reference Documents",
     "profileTabRefTitle": "Reference Numbers",
-    "successTextBody": "Your information was saved successfully.",
+    "successTextBody": "Based on your answers you may see updates to your Navigator experience.",
     "essentialQuestionAlertText": "Complete all required fields.",
     "formationDocFileTitle": "Official Formation Document",
     "profileCompletionAlert": "Complete the information below to customize your certifications, funding opportunities, and annual report deadline:",
@@ -304,7 +304,7 @@
     "essentialQuestionInlineText": "Make a selection by clicking on a button.",
     "saveButtonText": "Save",
     "escapeModalReturn": "Continue without saving.",
-    "successTextHeader": "Business Profile Updated",
+    "successTextHeader": "Business Profile Saved",
     "certificationDocFileTitle": "Certified Copy of Formation",
     "profileTabInfoTitle": "Business Information"
   },
