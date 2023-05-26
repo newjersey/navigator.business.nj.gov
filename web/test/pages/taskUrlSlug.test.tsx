@@ -1,7 +1,15 @@
 import { getMergedConfig } from "@/contexts/configContext";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { createEmptyTaskDisplayContent, Task } from "@/lib/types/types";
 import TaskPage from "@/pages/tasks/[taskUrlSlug]";
-import { generateStep, generateTask, generateTaskLink, randomPublicFilingLegalType } from "@/test/factories";
+import {
+  generateStep,
+  generateTask,
+  generateTaskLink,
+  operatingPhasesDisplayingBusinessStructurePrompt,
+  operatingPhasesNotDisplayingBusinessStructurePrompt,
+  randomPublicFilingLegalType,
+} from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
@@ -16,9 +24,11 @@ import {
   LookupTaskAgencyById,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
@@ -489,4 +499,50 @@ describe("task page", () => {
       expect(screen.queryByText("${endLocationDependentSection}")).not.toBeInTheDocument();
     });
   });
+
+  test.each(operatingPhasesDisplayingBusinessStructurePrompt)(
+    "hides nextUrlSlug on business structure task when its not mark as completed for %p operating phase",
+    (operatingPhase) => {
+      useMockRouter({
+        asPath: ROUTES.businessStructureTask,
+      });
+
+      renderPage(
+        generateTask({
+          urlSlug: ROUTES.businessStructureTask,
+        }),
+        generateUserData({
+          profileData: generateProfileData({
+            operatingPhase,
+          }),
+          taskProgress: { [businessStructureTaskId]: "NOT_STARTED" },
+        })
+      );
+
+      expect(screen.queryByTestId("nextUrlSlugButton")).not.toBeInTheDocument();
+    }
+  );
+
+  test.each(operatingPhasesNotDisplayingBusinessStructurePrompt)(
+    "shows nextUrlSlug on business structure task when its not mark as completed for %p operating phase",
+    (operatingPhase) => {
+      useMockRouter({
+        asPath: ROUTES.businessStructureTask,
+      });
+
+      renderPage(
+        generateTask({
+          urlSlug: ROUTES.businessStructureTask,
+        }),
+        generateUserData({
+          profileData: generateProfileData({
+            operatingPhase,
+          }),
+          taskProgress: { [businessStructureTaskId]: "COMPLETED" },
+        })
+      );
+
+      expect(screen.getByTestId("nextUrlSlugButton")).toBeInTheDocument();
+    }
+  );
 });

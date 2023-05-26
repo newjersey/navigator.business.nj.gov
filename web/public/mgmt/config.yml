@@ -2702,7 +2702,16 @@ collections:
             widget: object
             summary: "{{businessStructurePrompt}}"
             fields:
-              - { label: Not Completed Task Prompt Text, name: notCompletedTaskPrompt, widget: markdown }
+              - {
+                  label: Not Completed Task Prompt Text On Any Task,
+                  name: notCompletedTaskPromptAnyTask,
+                  widget: markdown,
+                }
+              - {
+                  label: Not Completed Task Prompt Text On Business Structure Task,
+                  name: notCompletedTaskPromptBusinessStructureTask,
+                  widget: markdown,
+                }
               - { label: Button Text, name: buttonText, widget: string }
           - label: Tax Calendar Defaults
             name: taxCalendar

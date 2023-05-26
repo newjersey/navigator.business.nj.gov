@@ -27,14 +27,14 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
   it("enters user info and shows the dashboard", () => {
     cy.url().should("contain", "/dashboard");
 
-    completeBusinessStructureTask({ legalStructureId });
-
     // check dashboard
     onDashboardPage.getEditProfileLink().should("exist");
 
     cy.get('[data-testid="self-reg-snackbar"]').should("be.visible");
     cy.get('[aria-label="close"]').click({ force: true });
     cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
+
+    completeBusinessStructureTask({ legalStructureId });
 
     // answer deferred question to get local-requirements task
     onDashboardPage.getHomeBased().should("exist");

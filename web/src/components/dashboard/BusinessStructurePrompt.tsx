@@ -7,7 +7,10 @@ import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
-export const BusinessStructurePrompt = (): ReactElement => {
+interface Props {
+  isButtonHidden?: boolean;
+}
+export const BusinessStructurePrompt = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const router = useRouter();
@@ -19,20 +22,31 @@ export const BusinessStructurePrompt = (): ReactElement => {
     >
       <div className={isDesktopAndUp ? "flex flex-row flex-align-start" : ""}>
         <div className={isDesktopAndUp ? "flex-fill margin-right-2" : "margin-bottom-2"}>
-          <Content>{Config.businessStructurePrompt.notCompletedTaskPrompt}</Content>
+          {router.asPath === ROUTES.businessStructureTask ? (
+            <div data-testid={"business-structure-task-content"}>
+              <Content>{Config.businessStructurePrompt.notCompletedTaskPromptBusinessStructureTask}</Content>
+            </div>
+          ) : (
+            <div data-testid={"any-task-content"}>
+              <Content>{Config.businessStructurePrompt.notCompletedTaskPromptAnyTask}</Content>
+            </div>
+          )}
         </div>
-        <div className={isDesktopAndUp ? "flex-auto" : ""}>
-          <PrimaryButton
-            isColor="primary"
-            isRightMarginRemoved
-            isFullWidthOnDesktop
-            onClick={(): void => {
-              router.push(ROUTES.businessStructureTask);
-            }}
-          >
-            {Config.businessStructurePrompt.buttonText}
-          </PrimaryButton>
-        </div>
+        {!props.isButtonHidden && (
+          <div className={isDesktopAndUp ? "flex-auto" : ""}>
+            <PrimaryButton
+              isColor="primary"
+              isRightMarginRemoved
+              isFullWidthOnDesktop
+              onClick={(): void => {
+                router.push(ROUTES.businessStructureTask);
+              }}
+              dataTestId={"business-structure-prompt-button"}
+            >
+              {Config.businessStructurePrompt.buttonText}
+            </PrimaryButton>
+          </div>
+        )}
       </div>
     </div>
   );
