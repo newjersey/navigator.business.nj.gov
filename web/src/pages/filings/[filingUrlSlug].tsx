@@ -49,14 +49,13 @@ export const FilingElement = (props: {
                   {parseDateWithFormat(props.dueDate, defaultDateFormat).format("MMMM D, YYYY").toUpperCase()}
                 </span>
                 {props.filing.urlSlug === "annual-report" ? (
-                  <ArrowTooltip title={Config.filingDefaults.dueDateToolTip}>
-                    <div
-                      className="fdr fac margin-left-1 margin-bottom-05 font-body-lg text-green"
-                      data-testid="due-date-tooltip"
-                    >
-                      <Icon>help_outline</Icon>
-                    </div>
-                  </ArrowTooltip>
+                  <div className="margin-left-1 margin-bottom-05">
+                    <ArrowTooltip title={Config.filingDefaults.dueDateToolTip}>
+                      <div className="fdr fac font-body-lg text-green" data-testid="due-date-tooltip">
+                        <Icon>help_outline</Icon>
+                      </div>
+                    </ArrowTooltip>
+                  </div>
                 ) : (
                   <></>
                 )}
