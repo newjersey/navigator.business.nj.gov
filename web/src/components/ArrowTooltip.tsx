@@ -1,7 +1,9 @@
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
-import { Theme, Tooltip, TooltipProps } from "@mui/material";
+import { ClickAwayListener, Theme, Tooltip, TooltipProps, useMediaQuery } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 
 const useStylesBootstrap = makeStyles((theme: Theme) => {
   return {
@@ -19,13 +21,47 @@ const useStylesBootstrap = makeStyles((theme: Theme) => {
 export const ArrowTooltip = (props: TooltipProps): ReactElement => {
   const classes = useStylesBootstrap();
 
+  const isMobile = useMediaQuery(MediaQueries.isMobile);
+
+  const [open, setOpen] = useState(false);
+
   return (
-    <Tooltip
-      arrow
-      enterTouchDelay={0}
-      classes={classes}
-      {...props}
-      onOpen={analytics.event.tooltip.mouseover.view_tooltip}
-    />
+    <>
+      {isMobile ? (
+        <ClickAwayListener onClickAway={(): void => setOpen(false)}>
+          <div className="display-flex">
+            <Tooltip
+              arrow
+              enterTouchDelay={0}
+              classes={classes}
+              onOpen={analytics.event.tooltip.mouseover.view_tooltip}
+              PopperProps={{
+                disablePortal: true,
+              }}
+              onClose={(): void => setOpen(false)}
+              open={open}
+              disableFocusListener
+              disableHoverListener
+              disableTouchListener
+              {...props}
+            >
+              <div>
+                <UnStyledButton style="tertiary" onClick={(): void => setOpen(true)}>
+                  {props.children}
+                </UnStyledButton>
+              </div>
+            </Tooltip>
+          </div>
+        </ClickAwayListener>
+      ) : (
+        <Tooltip
+          arrow
+          enterTouchDelay={0}
+          classes={classes}
+          {...props}
+          onOpen={analytics.event.tooltip.mouseover.view_tooltip}
+        />
+      )}
+    </>
   );
 };
