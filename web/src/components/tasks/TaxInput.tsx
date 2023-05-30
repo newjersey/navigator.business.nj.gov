@@ -96,12 +96,16 @@ export const TaxInput = (props: Props): ReactElement => {
     <div className={`flex ${isTabletAndUp ? "flex-row" : "flex-column margin-right-2"} no-wrap`}>
       <div className={`${isTabletAndUp ? "padding-right-1" : ""}`}>{Config.tax.lockedPreText}</div>
       <div>{props.children}</div>
-      <div className={`${isTabletAndUp ? "padding-left-1" : ""}`}>{Config.tax.lockedPostText}</div>
-      <ArrowTooltip title={Config.profileDefaults.lockedFieldTooltipText}>
-        <div className="fdr fac margin-left-1 margin-bottom-1 font-body-lg">
-          <Icon>help_outline</Icon>
-        </div>
-      </ArrowTooltip>
+      <div className={`${isTabletAndUp ? "padding-left-1" : ""} margin-right-1`}>
+        {Config.tax.lockedPostText}
+      </div>
+      <div className={"text-wrap margin-bottom-1"}>
+        <ArrowTooltip title={Config.profileDefaults.lockedFieldTooltipText}>
+          <div className="fdr fac  font-body-lg">
+            <Icon>help_outline</Icon>
+          </div>
+        </ArrowTooltip>
+      </div>
       {isTabletAndUp ? <div className="margin-x-2">|</div> : <></>}
     </div>
   );

@@ -159,11 +159,13 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
                   {Config.taskDefaults.editText}
                 </UnStyledButton>
               ) : (
-                <ArrowTooltip title={Config.profileDefaults.lockedFieldTooltipText}>
-                  <div className="fdr fac margin-left-2 font-body-lg">
-                    <Icon>help_outline</Icon>
-                  </div>
-                </ArrowTooltip>
+                <div className="margin-left-2">
+                  <ArrowTooltip title={Config.profileDefaults.lockedFieldTooltipText}>
+                    <div className="fdr fac font-body-lg">
+                      <Icon>help_outline</Icon>
+                    </div>
+                  </ArrowTooltip>
+                </div>
               )}
             </div>
           </Alert>
