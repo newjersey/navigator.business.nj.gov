@@ -26,4 +26,4 @@ You can schedule a free preliminary inspection with DCF's Office of Licensing at
 > **Once completed, you will have:**
 >
 > * A Certificate of Occupancy 
-> * All applicable safety permits
+> * The permits your local government requires
