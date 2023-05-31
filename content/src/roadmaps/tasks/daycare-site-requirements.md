@@ -15,7 +15,6 @@ Before opening your daycare, New Jersey Department of Children and Families (DCF
   * **Institutional (I-4)**: One or more children younger than  2 ½ years 
   * **Educational (E)**: Six or more children  2 ½ years or older
   * **Assembly: (A-3 or A-4)**: School-aged child care program 
-
 * **Certificate of Occupancy/Approval:** For new site buildings or if you've completed site renovations, you need to obtain a `Certificate of Occupancy or Approval|certificate-occupancy\` from your local building/construction department.
 * **Fire prevention permits:** Talk to your fire department to make sure your space meets requirements, like working sprinklers, extinguishers, and signage
 * **Signage:** Speak to your local zoning office and building/construction department to make sure the signage you're proposing is permitted
@@ -26,4 +25,4 @@ You can schedule a free preliminary inspection with DCF's Office of Licensing at
 > **Once completed, you will have:**
 >
 > * A Certificate of Occupancy 
-> * The permits your local government requires
+> * Any permits your local government requires
