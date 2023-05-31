@@ -45,8 +45,7 @@ interface Props {
 
 export const BusinessFormation = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
-  const { updateQueue } = useUserData();
-  const userData = updateQueue?.current();
+  const { updateQueue, userData } = useUserData();
   const router = useRouter();
   const { Config } = useConfig();
 

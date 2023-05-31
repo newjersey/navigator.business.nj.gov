@@ -20,10 +20,8 @@ interface Props {
 const MAX_CONTENT_CHARS = 150;
 
 export const OpportunityCard = (props: Props): ReactElement => {
-  const { updateQueue } = useUserData();
+  const { updateQueue, userData } = useUserData();
   const { Config } = useConfig();
-
-  const userData = updateQueue?.current();
 
   const TYPE_TO_LABEL: Record<"funding" | "certification", ReactElement> = {
     funding: <Tag backgroundColor="accent-semi-cool-light">{Config.dashboardDefaults.fundingTagText}</Tag>,

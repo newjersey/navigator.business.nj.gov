@@ -13,8 +13,7 @@ type Props = {
 export const SidebarCardFundingNudge = (props: Props): ReactElement => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const router = useRouter();
-  const { updateQueue } = useUserData();
-  const userData = updateQueue?.current();
+  const { updateQueue, userData } = useUserData();
 
   const updateUserToUpAndRunning = async (): Promise<void> => {
     if (!userData) {

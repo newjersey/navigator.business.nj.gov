@@ -24,8 +24,7 @@ interface Props {
 export const SectorModal = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
-  const { updateQueue } = useUserData();
-  const userData = updateQueue?.current();
+  const { updateQueue, userData } = useUserData();
 
   const {
     FormFuncWrapper,

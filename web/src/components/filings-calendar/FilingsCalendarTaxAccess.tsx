@@ -20,8 +20,7 @@ const isBeforeTheFollowingSaturday = (registeredISO: string | undefined): boolea
 };
 
 export const FilingsCalendarTaxAccess = (): ReactElement => {
-  const { updateQueue } = useUserData();
-  const userData = updateQueue?.current();
+  const { updateQueue, userData } = useUserData();
   const { Config } = useConfig();
   const { isAuthenticated, setRegistrationModalIsVisible, registrationModalIsVisible } =
     useContext(AuthAlertContext);
