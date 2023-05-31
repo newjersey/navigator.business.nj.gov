@@ -27,8 +27,7 @@ interface Props {
 }
 
 export const CannabisPriorityTypes = (props: Props): ReactElement => {
-  const { updateQueue } = useUserData();
-  const userData = updateQueue?.current();
+  const { updateQueue, userData } = useUserData();
   const [displayNextTabButton, setDisplayNextTabButton] = useState(false);
   const [eligibityPhrase, setEligibiltyPhrase] = useState("");
   const { Config } = useConfig();

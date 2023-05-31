@@ -47,6 +47,8 @@ export const useUserData = (): UseUserDataResponse => {
   useEffect(() => {
     if (updateQueue === undefined && data) {
       setUpdateQueue(new UpdateQueueFactory(data, update));
+    } else if (updateQueue?.current() === undefined && data) {
+      updateQueue?.queue(data);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, updateQueue]);
@@ -138,7 +140,7 @@ export const useUserData = (): UseUserDataResponse => {
   };
 
   return {
-    userData: data as UserData,
+    userData: updateQueue?.current(),
     isLoading: !error && !data,
     error: userDataError,
     refresh: refresh,

@@ -6,8 +6,7 @@ import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material"
 import React, { ReactElement } from "react";
 
 export const MicrobusinessRadioQuestion = (): ReactElement => {
-  const { updateQueue } = useUserData();
-  const userData = updateQueue?.current();
+  const { updateQueue, userData } = useUserData();
   const { Config } = useConfig();
 
   const handleRadioChange = async (

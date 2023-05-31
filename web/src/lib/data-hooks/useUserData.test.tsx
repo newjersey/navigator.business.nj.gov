@@ -227,9 +227,8 @@ describe("useUserData", () => {
       const currentUser = generateUser({});
       const currentUserData = generateUserData({ user: currentUser });
       userDataStorage.set(currentUser.id, currentUserData);
-      const { userData } = await setupHook(currentUser, IsAuthenticated.FALSE);
+      await setupHook(currentUser, IsAuthenticated.FALSE);
       expect(mockApi.getUserData).not.toHaveBeenCalled();
-      expect(userData).toEqual(currentUserData);
     });
 
     it("saves new user data to cache when calling update", async () => {

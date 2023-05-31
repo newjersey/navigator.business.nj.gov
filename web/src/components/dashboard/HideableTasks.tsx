@@ -10,11 +10,10 @@ import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
 
 export const HideableTasks = (): ReactElement => {
-  const { updateQueue } = useUserData();
+  const { updateQueue, userData } = useUserData();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
-  const userData = updateQueue?.current();
 
   const handleToggleClick = (): void => {
     if (!userData || !updateQueue) {
