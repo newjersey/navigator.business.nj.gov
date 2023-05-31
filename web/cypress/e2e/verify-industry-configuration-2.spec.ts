@@ -4,7 +4,7 @@ import { Industries } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { completeNewBusinessOnboarding } from "../support/helpers";
 
-describe("Dashboard [all] [group4]", () => {
+describe("Dashboard [all] [group1]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
   });
