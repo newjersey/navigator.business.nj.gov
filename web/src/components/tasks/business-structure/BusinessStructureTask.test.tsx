@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { BusinessStructureTask } from "@/components/tasks/BusinessStructureTask";
+import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";
 import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateTask } from "@/test/factories";
@@ -11,6 +11,7 @@ import {
   triggerQueueUpdate,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { UserData } from "@businessnjgovnavigator/shared";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import {
   generateFormationData,
@@ -18,7 +19,6 @@ import {
   generateUserData,
   randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -203,5 +203,84 @@ describe("<BusinessStructureTask />", () => {
     await waitFor(() => {
       expect(currentUserData().profileData.operatingPhase).toEqual("GUEST_MODE_WITH_BUSINESS_STRUCTURE");
     });
+  });
+
+  it("updates task progress to in-progress when business structure radio is selected", async () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({ legalStructureId: undefined }),
+      taskProgress: { [taskId]: "NOT_STARTED" },
+    });
+    renderTask(userData);
+    fireEvent.click(screen.getByLabelText("limited-liability-company"));
+    await waitFor(() => {
+      expect(screen.getByTestId("taskProgress")).toHaveTextContent(Config.taskProgress.IN_PROGRESS);
+    });
+    triggerQueueUpdate();
+
+    await waitFor(() => {
+      expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
+    });
+  });
+
+  it("renders error message and alert when save button is clicked without a radio being selected and removed when selected", async () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({ legalStructureId: undefined }),
+      taskProgress: { [taskId]: "NOT_STARTED" },
+    });
+    renderTask(userData);
+
+    expect(screen.queryByTestId("business-structure-error")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("business-structure-alert")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText(Config.businessStructureTask.saveButton));
+    await waitFor(() => {
+      expect(screen.getByTestId("business-structure-error")).toBeInTheDocument();
+    });
+    expect(screen.getByTestId("business-structure-alert")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByLabelText("limited-liability-company"));
+    await waitFor(() => {
+      expect(screen.queryByTestId("business-structure-error")).not.toBeInTheDocument();
+    });
+    expect(screen.queryByTestId("business-structure-alert")).not.toBeInTheDocument();
+  });
+
+  it("updates task to NOT_STARTED when remove button is clicked", async () => {
+    const legalStructure = randomLegalStructure();
+
+    const userData = generateUserData({
+      profileData: generateProfileData({ legalStructureId: legalStructure.id }),
+      taskProgress: { [taskId]: "COMPLETED" },
+    });
+    renderTask(userData);
+    fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
+
+    await waitFor(() => {
+      expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
+    });
+    expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
+    expect(currentUserData().taskProgress[taskId]).toEqual("NOT_STARTED");
+    expect(currentUserData().profileData.legalStructureId).toEqual(undefined);
+  });
+
+  it("updates operating phase from GUEST_MODE_WITH_BUSINESS_STRUCTURE to GUEST_MODE when business structure is removed", async () => {
+    const legalStructure = randomLegalStructure();
+
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        legalStructureId: legalStructure.id,
+        operatingPhase: "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
+      }),
+      taskProgress: { [taskId]: "COMPLETED" },
+    });
+    renderTask(userData);
+    fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
+
+    await waitFor(() => {
+      expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
+    });
+    expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
+    expect(currentUserData().taskProgress[taskId]).toEqual("NOT_STARTED");
+    expect(currentUserData().profileData.legalStructureId).toEqual(undefined);
+    expect(currentUserData().profileData.operatingPhase).toEqual("GUEST_MODE");
   });
 });

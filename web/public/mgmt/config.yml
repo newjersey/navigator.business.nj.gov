@@ -2713,6 +2713,11 @@ collections:
                   widget: markdown,
                 }
               - { label: Button Text, name: buttonText, widget: string }
+              - {
+                  label: Select Business Structure To Save Alert Text,
+                  name: businessStructureNotSelectedAlertText,
+                  widget: string,
+                }
           - label: Tax Calendar Defaults
             name: taxCalendar
             collapsed: true
