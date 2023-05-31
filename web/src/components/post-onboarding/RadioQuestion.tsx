@@ -12,8 +12,7 @@ interface Props {
 }
 
 export const RadioQuestion = (props: Props): ReactElement => {
-  const { updateQueue } = useUserData();
-  const userData = updateQueue?.current();
+  const { updateQueue, userData } = useUserData();
   const [onboardingQuestion, setOnboardingQuestion] = useState<PostOnboarding>({
     contentMd: "",
     question: "",

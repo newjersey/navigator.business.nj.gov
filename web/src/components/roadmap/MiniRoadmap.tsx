@@ -13,8 +13,7 @@ interface Props {
 
 export const MiniRoadmap = (props: Props): ReactElement => {
   const { roadmap, sectionNamesInRoadmap } = useRoadmap();
-  const { updateQueue } = useUserData();
-  const userData = updateQueue?.current();
+  const { updateQueue, userData } = useUserData();
 
   const onToggleStep = useCallback(
     async (stepNumber: number, setOpen: boolean, click: boolean): Promise<void> => {

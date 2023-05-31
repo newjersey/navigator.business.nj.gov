@@ -15,9 +15,8 @@ interface Props {
 }
 
 export const SectionAccordion = (props: Props): ReactElement => {
-  const { updateQueue } = useUserData();
+  const { updateQueue, userData } = useUserData();
   const { isSectionCompleted } = useRoadmap();
-  const userData = updateQueue?.current();
   const dropdownIconClasses = props.mini
     ? "usa-icon--size-3 text-base-darkest"
     : "usa-icon--size-5 margin-left-1";
