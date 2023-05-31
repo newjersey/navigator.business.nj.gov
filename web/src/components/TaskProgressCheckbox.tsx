@@ -196,7 +196,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         data-testid="change-task-progress-checkbox"
         aria-label="update task status"
         onClick={isDisabled ? undefined : (): void => setToNextStatus()}
-        className={`cursor-pointer margin-neg-105 padding-105 usa-button--unstyled task-checkbox-base margin-right-05 ${styles.hover}`}
+        className={`cursor-pointer margin-neg-105 padding-105 usa-button--unstyled task-checkbox-base ${styles.hover}`}
         {...(isDisabled ? { disabled: true } : {})}
       >
         <span
@@ -217,15 +217,17 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
     <div className={"flex flex-align-center"}>
       <>{congratulatoryModal}</>
 
-      {isDisabled ? (
-        <ArrowTooltip title={props.disabledTooltipText || ""}>
-          <div data-testid="status-info-tooltip" className={"line-height-100"}>
-            {Checkbox()}
-          </div>
-        </ArrowTooltip>
-      ) : (
-        <>{Checkbox()}</>
-      )}
+      <div className="margin-right-2">
+        {isDisabled ? (
+          <ArrowTooltip title={props.disabledTooltipText || ""}>
+            <div data-testid="status-info-tooltip" className={"line-height-100"}>
+              {Checkbox()}
+            </div>
+          </ArrowTooltip>
+        ) : (
+          <>{Checkbox()}</>
+        )}
+      </div>
 
       <span className="flex flex-align-center">{TaskProgressTagLookup[currentTaskProgress]}</span>
 

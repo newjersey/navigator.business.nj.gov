@@ -58,11 +58,13 @@ export const FieldLabelProfile = (props: Props): ReactElement => {
           </div>
         )}
         {showLockedTooltip && (
-          <ArrowTooltip title={Config.profileDefaults.lockedFieldTooltipText}>
-            <div className="fdr fac margin-left-1 margin-bottom-2 font-body-lg">
-              <Icon>help_outline</Icon>
-            </div>
-          </ArrowTooltip>
+          <div className="margin-left-1 margin-bottom-2">
+            <ArrowTooltip title={Config.profileDefaults.lockedFieldTooltipText}>
+              <div className="fdr fac  font-body-lg">
+                <Icon>help_outline</Icon>
+              </div>
+            </ArrowTooltip>
+          </div>
         )}
       </div>
       {showDescription && (

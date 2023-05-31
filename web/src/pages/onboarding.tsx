@@ -199,40 +199,42 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.isReady, state.user, state.isAuthenticated]);
+  }, [router.isReady, state.user, state.isAuthenticated, updateQueue]);
 
   const setIndustryAndRouteToPage = async (
     userData: UserData,
     industryId: string | undefined
   ): Promise<void> => {
-    setProfileData({
+    const newProfileData: ProfileData = {
       ...userData.profileData,
       businessPersona: "STARTING",
       industryId: industryId,
-    });
+    };
 
+    setProfileData(newProfileData);
     if (hasEssentialQuestion(industryId)) {
       setPage({ current: 2, previous: 1 });
     } else {
       setPage({ current: 3, previous: 2 });
     }
+    await updateQueue?.queueProfileData(newProfileData);
   };
 
   const setBusinessPersonaAndRouteToPage = async (flow: string): Promise<void> => {
     const flowType = mapFlowQueryToPersona[flow as QUERY_PARAMS_VALUES["flow"]];
+    const newProfileData: ProfileData = {
+      ...profileData,
+      businessPersona: flowType,
+    };
 
-    setProfileData((previousProfileData) => {
-      return {
-        ...previousProfileData,
-        businessPersona: flowType,
-      };
-    });
+    setProfileData(newProfileData);
     setCurrentFlow(flowType);
     if (flowType === "OWNING") {
       setPage({ current: 1, previous: 1 });
     } else {
       setPage({ current: 2, previous: 1 });
     }
+    await updateQueue?.queueProfileData(newProfileData);
   };
 
   FormFuncWrapper(
