@@ -9,9 +9,13 @@ describe("Dashboard [all] [group4]", () => {
     cy.loginByCognitoApi();
   });
 
-  for (const industry of Industries.filter((x) => {
+  const enabledIndustries = Industries.filter((x) => {
     return x.isEnabled;
-  })) {
+  });
+
+  const lastIndex = Math.floor(enabledIndustries.length / 2);
+
+  for (const industry of enabledIndustries.slice(0, lastIndex)) {
     it(` ${industry.name} completes onboarding and shows the dashboard`, () => {
       completeNewBusinessOnboarding({
         industry,

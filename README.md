@@ -61,10 +61,10 @@ yarn test
 We use Cypress for end to end (e2e) testing. You can run these tests locally with:
 
 ```shell
-./scripts/feature-tests.sh
+./scripts/local-feature-tests.sh
 ```
 
-Some of the Cypress tests only run in the CI environment
+Some of the Cypress tests only run in the CI environment. When using the `local-feature-tests` script, make sure to have a locally running instance of the application
 
 ### Running locally
 
