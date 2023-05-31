@@ -8,9 +8,9 @@ imgPath: ""
 color: primary
 headerBackgroundColor: null
 borderColor: primary-light
-section: "above-opportunities"
+section: above-opportunities
 ---
 
-### Register to Save Your Progress
+### Save Your Progress
 
-Don’t lose your progress. Complete your registration by creating a free [myNewJersey account](/self-register) now.
+Now that you've filled out your business information, you can save your progress and come back later by  [creating an account](/self-register).
