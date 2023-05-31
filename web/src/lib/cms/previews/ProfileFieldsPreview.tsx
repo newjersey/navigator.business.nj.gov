@@ -3,7 +3,6 @@ import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBusinessPersona";
 import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
-import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
 import { OnboardingRadioQuestion } from "@/components/onboarding/OnboardingRadioQuestion";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
@@ -22,6 +21,7 @@ import { ProfileNotes } from "@/components/profile/ProfileNotes";
 import { ProfileOwnership } from "@/components/profile/ProfileOwnership";
 import { ProfileResponsibleOwnerName } from "@/components/profile/ProfileResponsibleOwnerName";
 import { ProfileTaxPin } from "@/components/profile/ProfileTaxPin";
+import { LegalStructureRadio } from "@/components/tasks/business-structure/LegalStructureRadio";
 import { ConfigContext } from "@/contexts/configContext";
 import { profileFormContext } from "@/contexts/profileFormContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
@@ -30,6 +30,7 @@ import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
 import { createProfileFieldErrorMap, ProfileContentField } from "@/lib/types/types";
+import { businessStructureTaskId } from "@businessnjgovnavigator/shared/";
 import {
   IndustrySpecificData,
   industrySpecificDataChoices,
@@ -65,12 +66,12 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
 
           <div className="margin-left-4">
             <FieldLabelOnboarding fieldName="legalStructureId" />
-            <OnboardingLegalStructure />
+            <LegalStructureRadio taskId={businessStructureTaskId} />
 
             <div className="margin-y-2" />
 
             <FieldLabelOnboarding fieldName="legalStructureId" CMS_ONLY_flow="FOREIGN" />
-            <OnboardingLegalStructure />
+            <LegalStructureRadio taskId={businessStructureTaskId} />
           </div>
 
           <hr className="margin-y-4" />

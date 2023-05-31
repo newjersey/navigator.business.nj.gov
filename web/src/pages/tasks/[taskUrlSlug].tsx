@@ -8,7 +8,7 @@ import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
-import { BusinessStructureTask } from "@/components/tasks/BusinessStructureTask";
+import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { EinTask } from "@/components/tasks/EinTask";
