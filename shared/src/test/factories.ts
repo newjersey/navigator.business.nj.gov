@@ -1,6 +1,6 @@
 import { randomElementFromArray } from "../arrayHelpers";
 import { BusinessUser } from "../businessUser";
-import { getCurrentDateFormatted, getCurrentDateISOString } from "../dateHelpers";
+import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
 import {
   createEmptyFormationFormData,
@@ -146,6 +146,7 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
     items: [generateLicenseStatusItem({})],
     status: "PENDING",
     lastUpdatedISO: getCurrentDateISOString(),
+    expirationISO: getCurrentDate().add(1, "year").toISOString(),
     ...overrides,
   };
 };

@@ -96,7 +96,7 @@ export type SearchLicenseStatus = (
   nameAndAddress: NameAndAddress,
   licenseType: string
 ) => Promise<LicenseStatusResult>;
-export type UpdateLicenseStatus = (userId: string, nameAndAddress: NameAndAddress) => Promise<UserData>;
+export type UpdateLicenseStatus = (userData: UserData, nameAndAddress: NameAndAddress) => Promise<UserData>;
 export type UpdateOperatingPhase = (userData: UserData) => UserData;
 export type UpdateSidebarCards = (userData: UserData) => UserData;
 export type GetCertHttpsAgent = () => Promise<https.Agent>;
