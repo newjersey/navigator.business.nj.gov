@@ -17,6 +17,7 @@ agencyId: njdep
 agencyAdditionalContext: Environmental Enforcement
 divisionPhone: (609) 633-1418
 id: haul-waste-hic
+webflowType: business-license
 webflowId: 5f77291fb0544f2f2d366147
 ---
 
