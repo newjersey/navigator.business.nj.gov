@@ -1,21 +1,21 @@
 {
   "dashboardDefaults": {
-    "calendarHeader": "Upcoming",
-    "emptyCalendarTitleText": "It looks like you do not have any filings for the next 12 months. Check back later.",
-    "calendarLegalText": "This calendar is not a complete list of your obligations as a business.",
-    "calendarListViewButton": "List View",
-    "calendarGridViewButton": "Grid View",
-    "calendarFilingDueDateLabel": "Due",
+    "calendarFeedbackButtonText": "Share feedback about the calendar.",
     "calendarTooltip": "This calendar shows you New Jersey tax and reporting due dates unique to your business. Click on any item to learn where to file.",
-    "upAndRunningTaskHeader": "My Registration Tasks",
+    "calendarAddDateMd": "Add your `business effective date|effective-date` to [your profile](/profile#question-dateOfFormation) to see your Annual Report deadline here.",
+    "calendarLegalText": "This calendar is not a complete list of your obligations as a business.",
+    "calendarListViewMoreButton": "View More",
+    "calendarFilingDueDateLabel": "Due",
+    "calendarHeader": "Upcoming",
+    "viewLessFilingsButton": "View less",
     "showTaskText": "Show",
-    "hideTaskText": "Hide",
     "hiddenTasksText": "${count} Hidden Tasks",
     "viewMoreFilingsButton": "View more",
-    "viewLessFilingsButton": "View less",
-    "calendarListViewMoreButton": "View More",
-    "calendarFeedbackButtonText": "Share feedback on the calendar.",
-    "calendarEmptyDescriptionMarkdown": "You don't have any **events** this year, but check back later.",
-    "calendarAddDateMd": "Add your `business effective date|effective-date` to [your profile](/profile#question-dateOfFormation) to see your Annual Report deadline here."
+    "calendarListViewButton": "List View",
+    "hideTaskText": "Hide",
+    "upAndRunningTaskHeader": "My Registration Tasks",
+    "emptyCalendarTitleText": "It looks like you do not have any filings for the next 12 months. Check back later.",
+    "calendarGridViewButton": "Grid View",
+    "calendarEmptyDescriptionMarkdown": "You don't have any **events** this year, but check back later."
   }
 }
