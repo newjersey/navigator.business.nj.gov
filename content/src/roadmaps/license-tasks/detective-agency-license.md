@@ -2,20 +2,24 @@
 filename: detective-agency-license
 urlSlug: detective-agency-license
 name: Obtain Your Detective Agency License
-webflowName: "Detective: Agency License"
+webflowName: "Detective: Detective Agency License"
+summaryDescriptionMd: >
+  You need a license to operate a detective agency. To prepare for the
+  application, consider reading the [Private Detective License Application
+  Instructions](https://www.nj.gov/njsp/private-detective/pdf/sp-171-instructions_2020.pdf)
+  and the [New Jersey State Police Private Detective
+  Information](https://www.nj.gov/njsp/private-detective/index.shtml).
 industryId: detective
+callToActionText: Apply for My Agency License
 callToActionLink: https://www.nj.gov/njsp/private-detective/index.shtml
 webflowIndustry: Detective Agency
-divisionPhone: (609) 882-2000
-id: detective-agency-license
+licenseCertificationClassification: LICENSE
 agencyId: nj-state-police
 agencyAdditionalContext: Private Detective Unit
-callToActionText: Apply for My Agency License
+divisionPhone: (609) 882-2000
+id: detective-agency-license
 webflowType: business-license
 webflowId: 5f772960a67e4a21735c0f36
-licenseCertificationClassification: LICENSE
-summaryDescriptionMd: >
-  You need a license to operate a detective agency. To prepare for the application, consider reading the [Private Detective License Application Instructions](https://www.nj.gov/njsp/private-detective/pdf/sp-171-instructions_2020.pdf) and the [New Jersey State Police Private Detective Information](https://www.nj.gov/njsp/private-detective/index.shtml).
 ---
 
 ---
