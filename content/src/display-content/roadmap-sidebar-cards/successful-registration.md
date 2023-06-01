@@ -1,6 +1,6 @@
 ---
 id: successful-registration
-header: Welcome to your business.nj.gov account!
+header: Welcome to your Business.NJ.gov account!
 hasCloseButton: true
 ctaText: ""
 weight: 1
