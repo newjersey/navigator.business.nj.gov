@@ -130,6 +130,7 @@ const TaskPage = (props: Props): ReactElement => {
             "pharmacy-license": <LicenseTask task={props.task} />,
             "license-accounting": <LicenseTask task={props.task} />,
             "license-massage-therapy": <LicenseTask task={props.task} />,
+            "moving-company-license": <LicenseTask task={props.task} />,
             "determine-naics-code": <NaicsCodeTask task={props.task} />,
             "priority-status-cannabis": <CannabisPriorityStatusTask task={props.task} />,
             "conditional-permit-cannabis": <CannabisApplyForLicenseTask task={props.task} />,
