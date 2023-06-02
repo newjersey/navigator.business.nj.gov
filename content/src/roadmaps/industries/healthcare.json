@@ -50,7 +50,7 @@
   ],
   "name": "Healthcare ",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": false,
+    "canBeHomeBased": true,
     "canBeReseller": false
   },
   "isEnabled": true,
