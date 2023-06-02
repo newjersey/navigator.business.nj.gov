@@ -2,7 +2,7 @@
 filename: school-bus-license
 urlSlug: school-bus-license
 name: Ensure You or Your Drivers Have the Right Credentials
-webflowName: "School Bus: School Bus Driver"
+webflowName: "School Bus: School Bus Driver Credentials"
 summaryDescriptionMd: >-
   Employers must do a background check on all potential school bus drivers. Only
   drivers with clean records can legally drive a school bus.
