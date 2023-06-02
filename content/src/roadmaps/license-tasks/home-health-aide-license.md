@@ -32,8 +32,10 @@ webflowId: 641370d2139a73fe804e07b5
 - `Registered agent's|registered-agent` contact information (if firm is a corporation or out-of-state corporation)
 - Notarized application submission statement called "Affidavit for Health Care Services Firm"
 - Applicable fees paid
-- Proof of a home-based permit (if applicable)
-- Proof of a direct entrance and exit to the office within the home (if applicable)
+- Proof of a home-based permit,  if operating from home
+- Proof of a seperate and direct entrance and exit to the office, if operating from home
+- Secure cabinets, if operating in a shared space
+- Rental agreement, if operating in a shared space
 
 > **What if I don't get this license?**
 >
