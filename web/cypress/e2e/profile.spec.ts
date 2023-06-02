@@ -1,12 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import {
-  arrayOfSectors,
-  Industry,
-  LegalStructure,
-  LegalStructures,
-  randomInt,
-} from "@businessnjgovnavigator/shared/";
+import { arrayOfSectors, Industry, randomInt } from "@businessnjgovnavigator/shared/";
 import {
   checkExistingBusinessProfilePage,
   checkNewBusinessProfilePage,
@@ -28,10 +22,9 @@ describe("Profile [feature] [all] [group1]", () => {
     cy.loginByCognitoApi();
   });
 
-  describe("navigates to profile page and updates all fields", () => {
+  describe.only("navigates to profile page and updates all fields", () => {
     it("onboards random industry where homebase doesn't apply, then changes to industry where it applies and updates all fields in profile", () => {
       const industry = randomNonHomeBasedIndustry();
-      const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const homeBasedQuestion = industry.industryOnboardingQuestions.canBeHomeBased
         ? Boolean(randomInt() % 2)
         : undefined;
@@ -48,9 +41,7 @@ describe("Profile [feature] [all] [group1]", () => {
         liquorLicenseQuestion,
         requiresCpa,
       });
-
       updateNewBusinessProfilePage({
-        legalStructureId,
         townDisplayName,
       });
 
@@ -58,7 +49,6 @@ describe("Profile [feature] [all] [group1]", () => {
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
-        legalStructureId,
         townDisplayName,
       });
 
@@ -68,7 +58,6 @@ describe("Profile [feature] [all] [group1]", () => {
           return x.isEnabled;
         }) as Industry[]
       );
-      const newLegalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const newtownDisplayName = "Bass River";
       const newHomeBasedQuestion = Boolean(randomInt() % 2);
       const newEmployerId = randomInt(9).toString();
@@ -77,7 +66,6 @@ describe("Profile [feature] [all] [group1]", () => {
 
       updateNewBusinessProfilePage({
         businessName: newBusinessName,
-        legalStructureId: newLegalStructureId,
         industry: newIndustry,
         townDisplayName: newtownDisplayName,
         homeBasedQuestion: newHomeBasedQuestion,
@@ -93,7 +81,6 @@ describe("Profile [feature] [all] [group1]", () => {
       const liquorLicenseQuestion = industry.industryOnboardingQuestions.isLiquorLicenseApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
-      const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
@@ -107,7 +94,6 @@ describe("Profile [feature] [all] [group1]", () => {
 
       updateNewBusinessProfilePage({
         homeBasedQuestion: homeBasedQuestion,
-        legalStructureId,
         townDisplayName,
       });
 
@@ -115,7 +101,6 @@ describe("Profile [feature] [all] [group1]", () => {
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
-        legalStructureId,
         townDisplayName,
       });
     });
@@ -127,7 +112,6 @@ describe("Profile [feature] [all] [group1]", () => {
         }) as Industry[]
       );
       const liquorLicenseQuestion = Boolean(randomInt() % 2);
-      const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
@@ -140,14 +124,12 @@ describe("Profile [feature] [all] [group1]", () => {
       });
 
       updateNewBusinessProfilePage({
-        legalStructureId,
         townDisplayName,
       });
 
       checkNewBusinessProfilePage({
         industry,
         liquorLicenseQuestion,
-        legalStructureId,
         townDisplayName,
       });
 

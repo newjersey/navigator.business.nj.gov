@@ -392,7 +392,7 @@ export const completeForeignNexusBusinessOnboarding = ({
   isNewsletterChecked = false,
   isContactMeChecked = false,
   industry = undefined,
-  legalStructureId = undefined,
+  legalStructureId,
   townDisplayName = "Absecon",
   locationInNewJersey = false,
 }: Partial<ForeignOnboardingData> & Partial<StartingOnboardingData> & Partial<Registration>): void => {
@@ -487,23 +487,13 @@ export const checkNewBusinessProfilePage = ({
     onProfilePage.getHomeBased(!homeBasedQuestion).should("not.be.checked");
   }
 
-  if (companyType !== undefined) {
-    onProfilePage
-      .getLegalStructure()
-      .parent()
-      .find("input")
-      .invoke("prop", "value")
-      .should("contain", companyType);
-
+  if (entityId && companyType) {
     if (LookupLegalStructureById(companyType).elementsToDisplay.has("entityId")) {
       onProfilePage.getEntityId().should("exist");
       onProfilePage.getEntityId().invoke("prop", "value").should("contain", entityId);
     } else {
       onProfilePage.getEntityId().should("not.exist");
     }
-  } else {
-    onProfilePage.getLegalStructure().parent().find("input").invoke("prop", "value").should("contain", "");
-    onProfilePage.getEntityId().should("not.exist");
   }
 
   const employerIdWithMatch = employerId.match("^[0-9]$") ? employerId.match("^[0-9]$") : "";
@@ -646,23 +636,9 @@ export const updateNewBusinessProfilePage = ({
     onProfilePage.getEmployerId().invoke("prop", "value").should("contain", employerIdWithMatch);
   }
 
-  if (entityId) {
-    if (companyType && LookupLegalStructureById(companyType).elementsToDisplay.has("entityId")) {
-      onProfilePage.typeEntityId(entityId);
-      onProfilePage.getEntityId().invoke("prop", "value").should("contain", entityId);
-    } else if (!companyType) {
-      onProfilePage
-        .getLegalStructure()
-        .parent()
-        .find("input")
-        .invoke("prop", "value")
-        .then((legalStructure) => {
-          if (LookupLegalStructureById(legalStructure).elementsToDisplay.has("entityId")) {
-            onProfilePage.typeEntityId(entityId);
-            onProfilePage.getEntityId().invoke("prop", "value").should("contain", entityId);
-          }
-        });
-    }
+  if (entityId && companyType && LookupLegalStructureById(companyType).elementsToDisplay.has("entityId")) {
+    onProfilePage.typeEntityId(entityId);
+    onProfilePage.getEntityId().invoke("prop", "value").should("contain", entityId);
   }
 
   if (taxId) {

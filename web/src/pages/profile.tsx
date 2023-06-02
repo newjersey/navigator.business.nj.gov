@@ -9,7 +9,6 @@ import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
-import { OnboardingLegalStructureDropdown } from "@/components/onboarding/OnboardingLegalStructureDropDown";
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { DisabledTaxId } from "@/components/onboarding/taxId/DisabledTaxId";
@@ -19,6 +18,7 @@ import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUse
 import { Documents } from "@/components/profile/Documents";
 import { EscapeModal } from "@/components/profile/EscapeModal";
 import { ProfileBusinessName } from "@/components/profile/ProfileBusinessName";
+import { ProfileBusinessStructure } from "@/components/profile/ProfileBusinessStructure";
 import { ProfileDateOfFormation } from "@/components/profile/ProfileDateOfFormation";
 import { ProfileEmployerId } from "@/components/profile/ProfileEmployerId";
 import { ProfileEntityId } from "@/components/profile/ProfileEntityId";
@@ -329,12 +329,8 @@ const ProfilePage = (props: Props): ReactElement => {
           <ProfileDateOfFormation futureAllowed={true} />
         </ProfileField>
 
-        <ProfileField
-          fieldName="legalStructureId"
-          locked={shouldLockFormationFields}
-          lockedValueFormatter={(value: string): string => LookupLegalStructureById(value).name}
-        >
-          <OnboardingLegalStructureDropdown />
+        <ProfileField fieldName="legalStructureId" noLabel={true}>
+          <ProfileBusinessStructure />
         </ProfileField>
 
         <ProfileField fieldName="nexusLocationInNewJersey">
@@ -465,7 +461,6 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
-
         <ProfileField
           fieldName="businessName"
           locked={shouldLockFormationFields}
@@ -473,7 +468,6 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ProfileBusinessName required={isBusinessNameRequired()} />
         </ProfileField>
-
         <ProfileField
           fieldName="responsibleOwnerName"
           isVisible={shouldShowTradeNameElements()}
@@ -481,7 +475,6 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ProfileResponsibleOwnerName />
         </ProfileField>
-
         <ProfileField
           fieldName="tradeName"
           isVisible={shouldShowTradeNameElements()}
@@ -489,18 +482,15 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ProfileTradeName />
         </ProfileField>
-
         <ProfileField fieldName="industryId">
           <OnboardingIndustry />
         </ProfileField>
-
         <ProfileField
           fieldName="sectorId"
           isVisible={profileData.industryId === "generic" || !!props.CMS_ONLY_fakeUserData}
         >
           <OnboardingSectors />
         </ProfileField>
-
         <ProfileField
           fieldName="dateOfFormation"
           isVisible={!!userData?.profileData.dateOfFormation}
@@ -510,18 +500,13 @@ const ProfilePage = (props: Props): ReactElement => {
           <ProfileDateOfFormation futureAllowed={true} />
         </ProfileField>
 
-        <ProfileField
-          fieldName="legalStructureId"
-          locked={shouldLockFormationFields}
-          lockedValueFormatter={(id): string => LookupLegalStructureById(id).name}
-        >
-          <OnboardingLegalStructureDropdown />
+        <ProfileField fieldName="legalStructureId" noLabel={true}>
+          <ProfileBusinessStructure />
         </ProfileField>
 
         <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
           <ProfileMunicipality />
         </ProfileField>
-
         <ProfileField
           fieldName="homeBasedBusiness"
           isVisible={displayHomedBaseBusinessQuestion()}
@@ -530,7 +515,6 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <OnboardingHomeBasedBusiness />
         </ProfileField>
-
         <ProfileField
           fieldName="ownershipTypeIds"
           isVisible={
@@ -540,7 +524,6 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ProfileOwnership />
         </ProfileField>
-
         <ProfileField
           fieldName="existingEmployees"
           isVisible={

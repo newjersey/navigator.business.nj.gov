@@ -266,7 +266,7 @@ describe("profile", () => {
       const municipality = generateMunicipality({
         displayName: "some-cool-town",
       });
-      const userData = generateUserData({
+      const startingUserData = generateUserData({
         formationData: generateFormationData({
           getFilingResponse: generateGetFilingResponse({
             success: true,
@@ -282,8 +282,26 @@ describe("profile", () => {
         }),
       });
 
+      const foreignNexusUserData = generateUserData({
+        formationData: generateFormationData({
+          getFilingResponse: generateGetFilingResponse({
+            success: true,
+          }),
+        }),
+        profileData: generateProfileData({
+          dateOfFormation: "2020-01-02",
+          businessPersona: "FOREIGN",
+          foreignBusinessType: "NEXUS",
+          foreignBusinessTypeIds: ["NEXUS"],
+          legalStructureId: legalStructure,
+          entityId: "some-id",
+          businessName: "some-name",
+          municipality: municipality,
+        }),
+      });
+
       it("locks businessName", () => {
-        renderPage({ userData });
+        renderPage({ userData: startingUserData });
         expect(
           screen.getByText(Config.profileDefaults.fields.businessName.default.header)
         ).toBeInTheDocument();
@@ -292,20 +310,41 @@ describe("profile", () => {
       });
 
       it("locks entityID", () => {
-        renderPage({ userData });
+        renderPage({ userData: startingUserData });
         chooseTab("numbers");
         expect(screen.getByText(Config.profileDefaults.fields.entityId.default.header)).toBeInTheDocument();
         expect(screen.getByText("some-id")).toBeInTheDocument();
         expect(screen.queryByLabelText("Entity id")).not.toBeInTheDocument();
       });
 
-      it("locks legalStructure", () => {
-        renderPage({ userData });
+      it("locks legalStructure for STARTING business Persona", async () => {
+        renderPage({ userData: startingUserData });
+        expect(screen.getByTestId("info")).toBeInTheDocument();
         expect(
           screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header)
         ).toBeInTheDocument();
         expect(screen.getByText(LookupLegalStructureById(legalStructure).name)).toBeInTheDocument();
-        expect(screen.queryByLabelText("Legal structure")).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.profileDefaults.lockedFieldTooltipText)).not.toBeInTheDocument();
+
+        expect(screen.queryByText("business-structure-task-link")).not.toBeInTheDocument();
+
+        fireEvent.mouseOver(screen.getByTestId("business-structure-tooltip"));
+        await screen.findByText(Config.profileDefaults.lockedFieldTooltipText);
+      });
+
+      it("locks legalStructure for FOREIGN business Persona", async () => {
+        renderPage({ userData: foreignNexusUserData });
+        expect(screen.getByTestId("info")).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header)
+        ).toBeInTheDocument();
+        expect(screen.getByText(LookupLegalStructureById(legalStructure).name)).toBeInTheDocument();
+        expect(screen.queryByText(Config.profileDefaults.lockedFieldTooltipText)).not.toBeInTheDocument();
+
+        expect(screen.queryByText("business-structure-task-link")).not.toBeInTheDocument();
+
+        fireEvent.mouseOver(screen.getByTestId("business-structure-tooltip"));
+        await screen.findByText(Config.profileDefaults.lockedFieldTooltipText);
       });
     });
 
@@ -447,7 +486,6 @@ describe("profile", () => {
       fillText(inputFieldName, "Cool Computers");
       selectByText("Location", newark.displayName);
       selectByValue("Industry", "e-commerce");
-      selectByValue("Business structure", "c-corporation");
       chooseRadio("home-based-business-radio-true");
 
       chooseTab("numbers");
@@ -472,7 +510,6 @@ describe("profile", () => {
           industryId: "e-commerce",
           sectorId: "retail-trade-and-ecommerce",
           homeBasedBusiness: true,
-          legalStructureId: "c-corporation",
           municipality: newark,
           taxId: "023456790123",
           employerId: "023456780",
@@ -879,7 +916,6 @@ describe("profile", () => {
           businessPersona: "STARTING",
           businessName: "Applebees",
           industryId: "cosmetology",
-          legalStructureId: "c-corporation",
           entityId: "1234567890",
           employerId: "123456789",
           taxId: "123456790",
@@ -894,9 +930,6 @@ describe("profile", () => {
       expect(getBusinessNameValue()).toEqual("Applebees");
 
       expect(getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);
-
-      expect(getLegalStructureValue()).toEqual("c-corporation");
-
       expect(getMunicipalityValue()).toEqual("Newark");
       chooseTab("numbers");
       expect(getEmployerIdValue()).toEqual("12-3456789");
@@ -2058,29 +2091,6 @@ describe("profile", () => {
     );
   });
 
-  describe("Information Section", () => {
-    describe("legal structure", () => {
-      it("displays legal structure name after formationData is successful", () => {
-        const legalStructure = "limited-liability-company";
-
-        renderPage({
-          userData: generateUserData({
-            formationData: generateFormationData({
-              getFilingResponse: generateGetFilingResponse({ success: true }),
-            }),
-            profileData: generateProfileData({
-              businessPersona: "FOREIGN",
-              foreignBusinessType: "NEXUS",
-              legalStructureId: legalStructure,
-            }),
-          }),
-        });
-        expect(screen.getByText(LookupLegalStructureById(legalStructure).name)).toBeInTheDocument();
-        expect(screen.queryByText(LookupLegalStructureById(legalStructure).id)).not.toBeInTheDocument();
-      });
-    });
-  });
-
   describe("Numbers Section", () => {
     describe("tax id", () => {
       describe("disabled", () => {
@@ -2582,10 +2592,6 @@ describe("profile", () => {
 
   const getMunicipalityValue = (): string => {
     return (screen.queryByTestId("municipality") as HTMLInputElement)?.value;
-  };
-
-  const getLegalStructureValue = (): string => {
-    return (screen.queryByTestId("legal-structure") as HTMLInputElement)?.value;
   };
 
   const getExistingEmployeesValue = (): string => {
