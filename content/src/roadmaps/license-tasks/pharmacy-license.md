@@ -30,14 +30,14 @@ webflowId: 640b8467a1b0444c01a311c3
 - \[]{pharmacist-info} The name, work hours, and certificate number for registered pharmacists, including a pharmacist in-charge
 - \[]{pharmacist-employee-info} The name and work hours of unregistered employees
 - \[]{pharmacist-prescription-label} A copy of prescription and poison labels
-- \[]{general-business-address} Business address
-- \[]{general-hours-operation} Hours of operation
-- \[]{pharmacist-floor-dimension} Floor dimensions of the pharmacy shop (height x width)
-- \[]{pharmacist-floor-dimension-prescriptions} Floor dimensions of prescription department (height x width)
-- \[]{pharmacist-counter-dimension} Pharmacy counter dimensions (height x width)
-- \[]{pharmacist-equipment} Required pharmacy equipment (possessed or ordered) and references
-- \[]{pharmacist-signage} Picture of any exterior signage (if available at the time of your application)
-- \[]{pharmacist-inspection} Site inspection date
+- \[]{general-business-address} The business address
+- \[]{general-hours-operation} The hours of operation
+- \[]{pharmacist-floor-dimension} The floor dimensions of the pharmacy shop (height x width)
+- \[]{pharmacist-floor-dimension-prescriptions} The floor dimensions of the prescription department (height x width)
+- \[]{pharmacist-counter-dimension} The pharmacy counter dimensions (height x width)
+- \[]{pharmacist-equipment} The required pharmacy equipment (possessed or ordered) and references
+- \[]{pharmacist-signage} A picture of any exterior signage (if available at the time of your application)
+- \[]{pharmacist-inspection} A site inspection date
 
 > **Once completed, you will have:**
 >
