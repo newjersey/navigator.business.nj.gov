@@ -3,18 +3,20 @@ filename: health-care-services-firm-license
 urlSlug: health-care-reg
 name: Apply for Your Health Care Service Firm Registration, if Applicable
 webflowName: "Home Health Aide: Health Care Services Firm License"
-agencyId: nj-consumer-affairs
-agencyAdditionalContext: Employment and Personnel Services
+summaryDescriptionMd: >
+  You need to register as a health care service firm if you are employing
+  individuals to provide health care, personal care, or companion services. This
+  applies to both in-home and facility care.
 formName: ""
 industryId: homemaker-home-health-aide
 callToActionText: Register as a Health Care Service Firm
 callToActionLink: https://www.njconsumeraffairs.gov/hcservice
 licenseCertificationClassification: ""
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Employment and Personnel Services
 divisionPhone: (973) 504-6370
 id: home-health-aide-license
 webflowId: 641370d2139a73fe804e07b5
-summaryDescriptionMd: >
-  You need to register as a health care service firm if you are employing individuals to provide health care, personal care, or companion services. This applies to both in-home and facility care.
 ---
 
 ---
@@ -30,6 +32,8 @@ summaryDescriptionMd: >
 - `Registered agent's|registered-agent` contact information (if firm is a corporation or out-of-state corporation)
 - Notarized application submission statement called "Affidavit for Health Care Services Firm"
 - Applicable fees paid
+- Proof of a home-based permit (if applicable)
+- Proof of a direct entrance and exit to the office within the home (if applicable)
 
 > **What if I don't get this license?**
 >
