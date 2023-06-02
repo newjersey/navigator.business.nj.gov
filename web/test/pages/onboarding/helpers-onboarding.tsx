@@ -13,6 +13,7 @@ import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
   BusinessPersona,
   BusinessUser,
   createEmptyUser,
@@ -40,6 +41,7 @@ import {
   waitForElementToBeRemoved,
   within,
 } from "@testing-library/react";
+import {generateBusiness, generateUserDataForBusiness} from "@businessnjgovnavigator/shared/test";
 
 const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();
@@ -333,10 +335,16 @@ export const runSelfRegPageTests = ({
   const user = createEmptyUser();
   const userData = generateUserData({
     user,
-    onboardingFormProgress: "UNSTARTED",
-    profileData: generateProfileData({
-      businessPersona,
-    }),
+    currentBusinessId: '12345',
+    businesses: {
+      '12345': generateBusiness({
+        onboardingFormProgress: "UNSTARTED",
+        profileData: generateProfileData({
+          businessPersona,
+          legalStructureId: randomLegalStructure().id,
+        }),
+      })
+    }
   });
 
   beforeEach(() => {
