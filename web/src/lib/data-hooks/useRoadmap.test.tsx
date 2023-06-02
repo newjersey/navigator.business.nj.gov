@@ -3,7 +3,7 @@ import * as buildUserRoadmapModule from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap } from "@/lib/types/types";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { withRoadmap } from "@/test/helpers/helpers-renderers";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { render } from "@testing-library/react";
@@ -16,7 +16,7 @@ const mockBuildUserRoadmap = (buildUserRoadmapModule as jest.Mocked<typeof build
 describe("useRoadmap", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockUserData({});
+    useMockBusiness({});
   });
 
   const setupHook = (initialRoadmap?: Roadmap): UseRoadmapReturnValue => {
@@ -41,7 +41,7 @@ describe("useRoadmap", () => {
 
   it("builds roadmap when user data is defined and form is COMPLETED", async () => {
     const profileData = generateProfileData({});
-    useMockUserData({ profileData, onboardingFormProgress: "COMPLETED" });
+    useMockBusiness({ profileData, onboardingFormProgress: "COMPLETED" });
     mockBuildUserRoadmap.mockResolvedValue(generateRoadmap({}));
     setupHook();
     expect(mockBuildUserRoadmap).toHaveBeenCalledWith(profileData);
@@ -49,7 +49,7 @@ describe("useRoadmap", () => {
 
   it("does not build roadmap when user data is defined and form is UNSTARTED", async () => {
     const profileData = generateProfileData({});
-    useMockUserData({ profileData, onboardingFormProgress: "UNSTARTED" });
+    useMockBusiness({ profileData, onboardingFormProgress: "UNSTARTED" });
     mockBuildUserRoadmap.mockResolvedValue(generateRoadmap({}));
     setupHook();
     expect(mockBuildUserRoadmap).not.toHaveBeenCalled();
@@ -71,7 +71,7 @@ describe("useRoadmap", () => {
     });
 
     it("is completed if all tasks in that section are completed", () => {
-      useMockUserData({
+      useMockBusiness({
         taskProgress: {
           task1: "COMPLETED",
           task2: "COMPLETED",
@@ -86,7 +86,7 @@ describe("useRoadmap", () => {
     });
 
     it("is not completed if some tasks in that section are not completed", () => {
-      useMockUserData({
+      useMockBusiness({
         taskProgress: {
           task1: "COMPLETED",
           task2: "COMPLETED",
@@ -101,7 +101,7 @@ describe("useRoadmap", () => {
     });
 
     it("uses taskProgressOverride instead of userData if provided", () => {
-      useMockUserData({
+      useMockBusiness({
         taskProgress: {
           task1: "COMPLETED",
           task2: "COMPLETED",
@@ -139,7 +139,7 @@ describe("useRoadmap", () => {
     });
 
     beforeEach(() => {
-      useMockUserData({
+      useMockBusiness({
         taskProgress: {
           task1: "NOT_STARTED",
           task2: "NOT_STARTED",
@@ -166,7 +166,7 @@ describe("useRoadmap", () => {
     });
 
     it("does not return next section if next section is completed", () => {
-      useMockUserData({
+      useMockBusiness({
         taskProgress: {
           task1: "COMPLETED",
           task2: "COMPLETED",

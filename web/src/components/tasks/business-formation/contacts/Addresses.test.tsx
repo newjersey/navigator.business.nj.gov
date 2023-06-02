@@ -2,7 +2,7 @@
 import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
 import { getMergedConfig } from "@/contexts/configContext";
 import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
-import { currentUserData } from "@/test/mock/withStatefulUserData";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   FormationLegalType,
   generateFormationIncorporator,
@@ -62,7 +62,7 @@ describe("Formation - Addresses", () => {
           page.clickAddressSubmit();
           page.checkSignerBox(0, "incorporators");
           await page.submitContactsStep();
-          expect(currentUserData().formationData.formationFormData.incorporators).toEqual([
+          expect(currentBusiness().formationData.formationFormData.incorporators).toEqual([
             { ...signer, signature: true, title: signer.title },
           ]);
         });
@@ -114,7 +114,7 @@ describe("Formation - Addresses", () => {
           });
           expect(screen.getByText(newName, { exact: false })).toBeInTheDocument();
           await page.submitContactsStep();
-          const newIncorporators = currentUserData().formationData.formationFormData.incorporators;
+          const newIncorporators = currentBusiness().formationData.formationFormData.incorporators;
           expect(newIncorporators?.length).toEqual(2);
           expect(
             newIncorporators?.findIndex((signer) => {
@@ -147,7 +147,7 @@ describe("Formation - Addresses", () => {
           // eslint-disable-next-line testing-library/no-node-access
           fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="delete"]') as Element);
           await page.submitContactsStep();
-          expect(currentUserData().formationData.formationFormData.incorporators).toEqual([incorporators[0]]);
+          expect(currentBusiness().formationData.formationFormData.incorporators).toEqual([incorporators[0]]);
         });
 
         it("does not allow more than 10 signers", async () => {

@@ -2,7 +2,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { LicenseEvent } from "@/lib/types/types";
 import LicensePage from "@/pages/licenses/[licenseUrlSlug]";
 import { generateLicenseEvent } from "@/test/factories";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
   generateProfileData,
   getCurrentDate,
@@ -34,7 +34,7 @@ describe("license page", () => {
   it("shows the basic expiration details and expiration date", () => {
     const expirationDate = currentDate.add(4, "days");
 
-    useMockUserData({
+    useMockBusiness({
       licenseData: generateLicenseData({ expirationISO: expirationDate.toISOString() }),
       profileData: generateProfileData({ industryId: "home-contractor" }),
     });
@@ -66,7 +66,7 @@ describe("license page", () => {
   it("shows the basic renewal details and renewal date", () => {
     const expirationDate = currentDate.add(4, "days");
 
-    useMockUserData({
+    useMockBusiness({
       licenseData: generateLicenseData({ expirationISO: expirationDate.toISOString() }),
       profileData: generateProfileData({ industryId: "home-contractor" }),
     });

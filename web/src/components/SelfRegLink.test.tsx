@@ -2,7 +2,7 @@ import { SelfRegLink } from "@/components/SelfRegLink";
 import * as signinHelper from "@/lib/auth/signinHelper";
 import analytics from "@/lib/utils/analytics";
 import { useMockRouter } from "@/test/mock/mockRouter";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 function setupMockAnalytics(): typeof analytics {
@@ -29,7 +29,7 @@ describe("<SelfRegLink />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
-    useMockUserData({});
+    useMockBusiness({});
   });
 
   const renderSelfRegLink = (href: string): void => {

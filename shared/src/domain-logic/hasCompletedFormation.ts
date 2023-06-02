@@ -1,5 +1,6 @@
-import { UserData } from "../userData";
+import { Business } from "../userData";
 
-export const hasCompletedFormation = (userData: UserData): boolean => {
-  return userData.formationData.completedFilingPayment;
+export const hasCompletedFormation = (business: Business | undefined): boolean => {
+  if (!business) return false;
+  return business.formationData.completedFilingPayment;
 };

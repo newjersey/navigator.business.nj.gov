@@ -58,6 +58,7 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -165,18 +166,19 @@ const OnboardingPage = (props: Props): ReactElement => {
 
       let currentUserData = userData;
       if (currentUserData) {
-        setProfileData(currentUserData.profileData);
+        setProfileData(currentUserData.businesses[currentUserData.currentBusinessId].profileData);
         setUser(currentUserData.user);
         setCurrentFlow(getFlow(currentUserData));
       } else if (state.isAuthenticated === IsAuthenticated.FALSE) {
         currentUserData = createEmptyUserData(state.user);
         setRegistrationDimension("Began Onboarding");
         await createUpdateQueue(currentUserData);
-        setProfileData(currentUserData.profileData);
+        setProfileData(currentUserData.businesses[currentUserData.currentBusinessId].profileData);
         setUser(currentUserData.user);
       }
       if (currentUserData) {
-        if (currentUserData?.onboardingFormProgress === "COMPLETED") {
+        const currentBusiness = currentUserData.businesses[currentUserData.currentBusinessId];
+        if (currentBusiness.onboardingFormProgress === "COMPLETED") {
           await router.replace(ROUTES.profile);
           return;
         } else {
@@ -185,8 +187,8 @@ const OnboardingPage = (props: Props): ReactElement => {
           const queryFlow = router.query[QUERIES.flow] as string;
 
           if (industryQueryParamIsValid(queryIndustryId)) {
-            await setIndustryAndRouteToPage(currentUserData, queryIndustryId);
-          } else if (pageQueryParamisValid(onboardingFlows, currentUserData, queryPage)) {
+            await setIndustryAndRouteToPage(currentBusiness, queryIndustryId);
+          } else if (pageQueryParamisValid(onboardingFlows, currentBusiness, queryPage)) {
             setPage({ current: queryPage, previous: queryPage - 1 });
           } else if (flowQueryParamIsValid(queryFlow)) {
             await setBusinessPersonaAndRouteToPage(queryFlow);
@@ -203,11 +205,11 @@ const OnboardingPage = (props: Props): ReactElement => {
   }, [router.isReady, state.user, state.isAuthenticated, updateQueue]);
 
   const setIndustryAndRouteToPage = async (
-    userData: UserData,
+    business: Business,
     industryId: string | undefined
   ): Promise<void> => {
     const newProfileData: ProfileData = {
-      ...userData.profileData,
+      ...business.profileData,
       businessPersona: "STARTING",
       industryId: industryId,
     };
@@ -242,10 +244,9 @@ const OnboardingPage = (props: Props): ReactElement => {
     async (): Promise<void> => {
       scrollToTop();
       if (!updateQueue) return;
-      const currentUserData = updateQueue.current();
       let newProfileData = profileData;
       const hasBusinessPersonaChanged =
-        profileData.businessPersona !== currentUserData?.profileData.businessPersona;
+        profileData.businessPersona !== updateQueue.currentBusiness().profileData.businessPersona;
 
       if (page.current === 1 && hasBusinessPersonaChanged) {
         newProfileData = {
@@ -300,15 +301,21 @@ const OnboardingPage = (props: Props): ReactElement => {
             newProfileData.foreignBusinessType === "REMOTE_WORKER");
 
         let newUserData: UserData = {
-          ...currentUserData,
+          ...updateQueue.current(),
           user,
-          profileData: {
-            ...newProfileData,
-            operatingPhase: isRemoteSellerWorker
-              ? "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
-              : newProfileData.operatingPhase,
+          businesses: {
+            ...updateQueue.current().businesses,
+            [updateQueue.current().currentBusinessId]: {
+              ...updateQueue.currentBusiness(),
+              profileData: {
+                ...newProfileData,
+                operatingPhase: isRemoteSellerWorker
+                  ? "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
+                  : newProfileData.operatingPhase,
+              },
+              onboardingFormProgress: "COMPLETED",
+            },
           },
-          onboardingFormProgress: "COMPLETED",
         };
 
         if (newUserData.user.receiveNewsletter) {
@@ -320,39 +327,35 @@ const OnboardingPage = (props: Props): ReactElement => {
         }
 
         newUserData = await api.postGetAnnualFilings(newUserData);
+        const preferences = newUserData.businesses[newUserData.currentBusinessId].preferences;
 
-        const newPreferencesData = {
-          ...newUserData.preferences,
+        updateQueue.queue(newUserData).queuePreferences({
           visibleSidebarCards:
             newProfileData.businessPersona === "OWNING"
-              ? newUserData.preferences.visibleSidebarCards.filter((cardId: string) => {
+              ? preferences.visibleSidebarCards.filter((cardId: string) => {
                   return cardId !== "task-progress";
                 })
-              : [...newUserData.preferences.visibleSidebarCards, "task-progress"],
-        };
+              : [...preferences.visibleSidebarCards, "task-progress"],
+        });
 
-        if (newProfileData.operatingPhase === "GUEST_MODE_OWNING") {
-          newPreferencesData.visibleSidebarCards = newPreferencesData.visibleSidebarCards.filter(
-            (cardId: string) => {
-              return cardId !== "welcome";
-            }
-          );
-          newPreferencesData.visibleSidebarCards = [
-            ...newPreferencesData.visibleSidebarCards,
-            "welcome-up-and-running",
-          ];
+        if (newProfileData.legalStructureId) {
+          const completed: TaskProgress = "COMPLETED";
+          updateQueue.queueTaskProgress({ [businessStructureTaskId]: completed });
         }
 
-        const completed: TaskProgress = "COMPLETED";
-        const updatedUserData = {
-          ...newUserData,
-          taskProgress: newUserData.profileData.legalStructureId
-            ? { ...newUserData.taskProgress, [businessStructureTaskId]: completed }
-            : { ...newUserData.taskProgress },
-          preferences: newPreferencesData,
-        };
+        if (newProfileData.operatingPhase === "GUEST_MODE_OWNING") {
+          updateQueue.queuePreferences({
+            visibleSidebarCards: [
+              ...updateQueue.currentBusiness().preferences.visibleSidebarCards.filter((cardId: string) => {
+                return cardId !== "welcome";
+              }),
+              "welcome-up-and-running",
+            ],
+          });
+        }
 
-        await updateQueue.queue(updatedUserData).update();
+        await updateQueue.update();
+
         await router.push({
           pathname: ROUTES.dashboard,
           query: { [QUERIES.fromOnboarding]: "true" },

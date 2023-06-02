@@ -20,7 +20,7 @@ interface Props {
 const MAX_CONTENT_CHARS = 150;
 
 export const OpportunityCard = (props: Props): ReactElement => {
-  const { updateQueue, userData } = useUserData();
+  const { updateQueue, business } = useUserData();
   const { Config } = useConfig();
 
   const TYPE_TO_LABEL: Record<"funding" | "certification", ReactElement> = {
@@ -36,33 +36,33 @@ export const OpportunityCard = (props: Props): ReactElement => {
   });
 
   const isHidden = (): boolean => {
-    if (!userData) {
+    if (!business) {
       return false;
     }
     const property = props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
-    return userData.preferences[property].includes(props.opportunity.id);
+    return business.preferences[property].includes(props.opportunity.id);
   };
 
   const hideSelf = async (): Promise<void> => {
-    if (!userData || !updateQueue) {
+    if (!business || !updateQueue) {
       return;
     }
     const propertyToUpdate = props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
     await updateQueue
       .queuePreferences({
-        [propertyToUpdate]: [...userData.preferences[propertyToUpdate], props.opportunity.id],
+        [propertyToUpdate]: [...business.preferences[propertyToUpdate], props.opportunity.id],
       })
       .update();
   };
 
   const unhideSelf = async (): Promise<void> => {
-    if (!userData || !updateQueue) {
+    if (!business || !updateQueue) {
       return;
     }
     const propertyToUpdate = props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
     await updateQueue
       .queuePreferences({
-        [propertyToUpdate]: userData.preferences[propertyToUpdate].filter((it: string) => {
+        [propertyToUpdate]: business.preferences[propertyToUpdate].filter((it: string) => {
           return it !== props.opportunity.id;
         }),
       })

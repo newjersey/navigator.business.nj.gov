@@ -17,12 +17,13 @@ import { randomInt, randomIntFromInterval } from "@shared/intHelpers";
 import { LicenseData, LicenseEntity } from "@shared/license";
 import { ProfileData } from "@shared/profileData";
 import {
+  generateBusiness,
   generateFormationData,
   generateFormationFormData,
   generateLicenseStatusItem,
   generateNameAndAddress,
   generateProfileData,
-  generateUserData,
+  generateUserDataForBusiness,
   randomPublicFilingLegalType,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
@@ -72,7 +73,9 @@ export const generateFormationUserData = (
     },
     legalStructureId
   );
-  return generateUserData({ formationData: _formationData, profileData: _profileData });
+  return generateUserDataForBusiness(
+    generateBusiness({ formationData: _formationData, profileData: _profileData })
+  );
 };
 
 export const generateInputFile = (overrides: Partial<InputFile>): InputFile => {

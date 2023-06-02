@@ -16,18 +16,18 @@ interface Props {
 
 export const MiniRoadmap = (props: Props): ReactElement => {
   const { roadmap, sectionNamesInRoadmap } = useRoadmap();
-  const { updateQueue, userData } = useUserData();
+  const { updateQueue, business } = useUserData();
 
   const displayBusinessStructurePrompt = LookupOperatingPhaseById(
-    userData?.profileData.operatingPhase
+    business?.profileData.operatingPhase
   ).displayBusinessStructurePrompt;
-  const completedBusinessStructure = hasCompletedBusinessStructure(userData);
+  const completedBusinessStructure = hasCompletedBusinessStructure(business);
 
   const onToggleStep = useCallback(
     async (stepNumber: number, setOpen: boolean, click: boolean): Promise<void> => {
-      if (!userData || !updateQueue) return;
+      if (!business || !updateQueue) return;
 
-      const openSteps = userData?.preferences.roadmapOpenSteps;
+      const openSteps = business.preferences.roadmapOpenSteps;
       click && analytics.event.task_mini_roadmap_step.click.expand_contract();
       if (openSteps.includes(stepNumber)) {
         if (setOpen) {
@@ -49,7 +49,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
           .update();
       }
     },
-    [updateQueue, userData]
+    [updateQueue, business]
   );
 
   return (
@@ -70,8 +70,8 @@ export const MiniRoadmap = (props: Props): ReactElement => {
                       step={step}
                       isLast={index === array.length - 1}
                       activeTaskId={props.activeTaskId}
-                      completed={isStepCompleted(roadmap, step, userData)}
-                      isOpen={userData?.preferences.roadmapOpenSteps.includes(step.stepNumber)}
+                      completed={isStepCompleted(roadmap, step, business)}
+                      isOpen={business?.preferences.roadmapOpenSteps.includes(step.stepNumber)}
                       toggleStep={onToggleStep}
                       onTaskClick={props.onTaskClick}
                       key={step.stepNumber}

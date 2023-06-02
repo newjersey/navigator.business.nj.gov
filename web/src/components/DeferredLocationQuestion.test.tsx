@@ -6,17 +6,18 @@ import { generateRoadmap } from "@/test/factories";
 import { withRoadmap } from "@/test/helpers/helpers-renderers";
 import { selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
 import {
+  generateBusiness,
   generateMunicipality,
   generateProfileData,
-  generateUserData,
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 function setupMockAnalytics(): typeof analytics {
@@ -49,25 +50,20 @@ describe("<DeferredLocationQuestion />", () => {
   });
 
   const renderComponent = ({
-    initialUserData,
+    initialBusiness,
     innerContent,
     municipalities,
-    fakeUserData,
   }: {
-    initialUserData?: UserData;
+    initialBusiness: Business;
     innerContent?: string;
     municipalities?: Municipality[];
-    fakeUserData?: UserData;
   }): void => {
     render(
       withRoadmap({
         component: (
           <MunicipalitiesContext.Provider value={{ municipalities: municipalities ?? [] }}>
-            <WithStatefulUserData initialUserData={initialUserData ?? generateUserData({})}>
-              <DeferredLocationQuestion
-                innerContent={innerContent ?? ""}
-                CMS_ONLY_fakeUserData={fakeUserData}
-              />
+            <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
+              <DeferredLocationQuestion innerContent={innerContent ?? ""} />
             </WithStatefulUserData>
           </MunicipalitiesContext.Provider>
         ),
@@ -78,8 +74,8 @@ describe("<DeferredLocationQuestion />", () => {
   };
 
   it("shows location question and not inner content if location is not yet answered", () => {
-    const userData = generateUserData({ profileData: generateProfileData({ municipality: undefined }) });
-    renderComponent({ initialUserData: userData, innerContent: "inner-content" });
+    const business = generateBusiness({ profileData: generateProfileData({ municipality: undefined }) });
+    renderComponent({ initialBusiness: business, innerContent: "inner-content" });
     expect(screen.getByText(Config.deferredLocation.header)).toBeInTheDocument();
     expect(screen.queryByText("inner-content")).not.toBeInTheDocument();
     expect(screen.queryByTestId("city-success-banner")).not.toBeInTheDocument();
@@ -87,17 +83,8 @@ describe("<DeferredLocationQuestion />", () => {
 
   it("shows inner content without question nor success banner when already location saved", () => {
     const municipality = generateMunicipality({});
-    const userData = generateUserData({ profileData: generateProfileData({ municipality }) });
-    renderComponent({ initialUserData: userData, innerContent: "inner-content" });
-    expect(screen.queryByText(Config.deferredLocation.header)).not.toBeInTheDocument();
-    expect(screen.getByText("inner-content")).toBeInTheDocument();
-    expect(screen.queryByTestId("city-success-banner")).not.toBeInTheDocument();
-  });
-
-  it("uses fake userData if provided", () => {
-    const municipality = generateMunicipality({});
-    const userData = generateUserData({ profileData: generateProfileData({ municipality }) });
-    renderComponent({ innerContent: "inner-content", fakeUserData: userData });
+    const business = generateBusiness({ profileData: generateProfileData({ municipality }) });
+    renderComponent({ initialBusiness: business, innerContent: "inner-content" });
     expect(screen.queryByText(Config.deferredLocation.header)).not.toBeInTheDocument();
     expect(screen.getByText("inner-content")).toBeInTheDocument();
     expect(screen.queryByTestId("city-success-banner")).not.toBeInTheDocument();
@@ -106,11 +93,11 @@ describe("<DeferredLocationQuestion />", () => {
   describe("when saving location", () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const absecon = generateMunicipality({ displayName: "Absecon" });
-    const userData = generateUserData({ profileData: generateProfileData({ municipality: undefined }) });
+    const business = generateBusiness({ profileData: generateProfileData({ municipality: undefined }) });
 
     const selectNewarkAndSave = async (): Promise<void> => {
       renderComponent({
-        initialUserData: userData,
+        initialBusiness: business,
         innerContent: "inner-content",
         municipalities: [newark, absecon],
       });
@@ -122,7 +109,7 @@ describe("<DeferredLocationQuestion />", () => {
 
     it("saves municipality to profile", async () => {
       await selectNewarkAndSave();
-      expect(currentUserData().profileData.municipality).toEqual(newark);
+      expect(currentBusiness().profileData.municipality).toEqual(newark);
     });
 
     it("shows inner content and banner on save", async () => {
@@ -150,7 +137,7 @@ describe("<DeferredLocationQuestion />", () => {
     it("removes municipality from user profile when clicking remove button", async () => {
       await selectNewarkAndSave();
       fireEvent.click(screen.getByText(Config.deferredLocation.removeText));
-      expect(currentUserData().profileData.municipality).toEqual(undefined);
+      expect(currentBusiness().profileData.municipality).toEqual(undefined);
     });
 
     it("shows question and removes inner-content/success banner when removing location", async () => {

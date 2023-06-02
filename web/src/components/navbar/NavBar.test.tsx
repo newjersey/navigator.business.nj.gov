@@ -7,13 +7,14 @@ import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
+  generateBusiness,
   generateProfileData,
   generateUser,
-  generateUserData,
-  UserData,
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
@@ -54,8 +55,8 @@ const setLargeScreen = (value: boolean): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => value);
 };
 
-const generateOnboardingUser = (): UserData => {
-  return generateUserData({
+const generateOnboardingBusiness = (): Business => {
+  return generateBusiness({
     profileData: generateProfileData({
       businessName: "",
       industryId: undefined,
@@ -64,8 +65,8 @@ const generateOnboardingUser = (): UserData => {
   });
 };
 
-const generateGuestUserData = (overrides?: Partial<UserData>): UserData => {
-  return generateUserData({
+const generateGuestBusiness = (overrides?: Partial<Business>): Business => {
+  return generateBusiness({
     profileData: generateProfileData({
       businessName: "",
       industryId: "cannabis",
@@ -77,8 +78,8 @@ const generateGuestUserData = (overrides?: Partial<UserData>): UserData => {
 
 const businessName = "businessName";
 
-const generateBusinessNamedUserData = (overrides?: Partial<UserData>): UserData => {
-  return generateUserData({
+const generateBusinessNamedBusiness = (overrides?: Partial<Business>): Business => {
+  return generateBusiness({
     profileData: generateProfileData({
       businessName: businessName,
       industryId: "cannabis",
@@ -95,7 +96,7 @@ describe("<NavBar />", () => {
   });
 
   it("shows business name when showSidebar is true on mobile", () => {
-    useMockUserData(generateBusinessNamedUserData());
+    useMockBusiness(generateBusinessNamedBusiness());
     setLargeScreen(false);
     render(
       withAuth(<NavBar landingPage={false} task={undefined} showSidebar={true} />, {
@@ -107,7 +108,7 @@ describe("<NavBar />", () => {
   });
 
   it("does not show business name when showSidebar is false on mobile", () => {
-    useMockUserData(generateBusinessNamedUserData());
+    useMockBusiness(generateBusinessNamedBusiness());
     setLargeScreen(false);
     render(
       withAuth(<NavBar landingPage={false} task={undefined} showSidebar={false} />, {
@@ -138,7 +139,7 @@ describe("<NavBar />", () => {
 
   describe("navbar - used when user is onboarding", () => {
     beforeEach(() => {
-      useMockUserData(generateOnboardingUser());
+      useMockBusiness(generateOnboardingBusiness());
       useMockRouter({ pathname: ROUTES.onboarding });
     });
 
@@ -208,31 +209,31 @@ describe("<NavBar />", () => {
     };
 
     it("doesn't display registration button when user is authenticated", async () => {
-      useMockUserData({});
+      useMockBusiness({});
       renderDesktopNav();
       expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
     });
 
     it("doesn't display log in button when user is authenticated", async () => {
-      useMockUserData({});
+      useMockBusiness({});
       renderDesktopNav();
       expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
     });
 
     it("displays myNJ button when user is authenticated", async () => {
-      useMockUserData({});
+      useMockBusiness({});
       renderDesktopNav();
       expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
     });
 
     it("displays log out button when user is authenticated", async () => {
-      useMockUserData({});
+      useMockBusiness({});
       renderDesktopNav();
       expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
     });
 
     it("displays a closed dropdown menu on the NavBar", () => {
-      useMockUserData(generateBusinessNamedUserData());
+      useMockBusiness(generateBusinessNamedBusiness());
 
       renderDesktopNav();
       const menuEl = screen.getByText(businessName);
@@ -242,7 +243,7 @@ describe("<NavBar />", () => {
     });
 
     it("displays an open dropdown menu when clicked and closes when clicked again", async () => {
-      useMockUserData(generateBusinessNamedUserData());
+      useMockBusiness(generateBusinessNamedBusiness());
 
       renderDesktopNav();
 
@@ -272,19 +273,19 @@ describe("<NavBar />", () => {
     };
 
     it("displays registration button only when isAuthenticated is false", async () => {
-      useMockUserData(generateGuestUserData());
+      useMockBusiness(generateGuestBusiness());
       renderDesktopNav();
       expect(screen.getByTestId("registration-button")).toBeInTheDocument();
     });
 
     it("displays log in button only when isAuthenticated is false", async () => {
-      useMockUserData(generateGuestUserData());
+      useMockBusiness(generateGuestBusiness());
       renderDesktopNav();
       expect(screen.getByTestId("login-button")).toBeInTheDocument();
     });
 
     it("displays business profile button only when the menu is open", async () => {
-      useMockUserData(generateBusinessNamedUserData());
+      useMockBusiness(generateBusinessNamedBusiness());
       renderDesktopNav();
       const menuEl = screen.getByText(businessName);
       fireEvent.click(menuEl);
@@ -298,7 +299,7 @@ describe("<NavBar />", () => {
     });
 
     it("displays business name title within menu", async () => {
-      useMockUserData(generateBusinessNamedUserData());
+      useMockBusiness(generateBusinessNamedBusiness());
       renderDesktopNav();
       const menuEl = screen.getByText(businessName);
       fireEvent.click(menuEl);
@@ -308,7 +309,7 @@ describe("<NavBar />", () => {
     });
 
     it("displays a closed dropdown menu on the NavBar", () => {
-      useMockUserData(generateBusinessNamedUserData());
+      useMockBusiness(generateBusinessNamedBusiness());
       renderDesktopNav();
       const menuEl = screen.getByText(businessName);
       expect(menuEl).toBeInTheDocument();
@@ -316,7 +317,7 @@ describe("<NavBar />", () => {
     });
 
     it("displays an open dropdown menu when clicked and closes when clicked again", async () => {
-      useMockUserData(generateBusinessNamedUserData());
+      useMockBusiness(generateBusinessNamedBusiness());
       renderDesktopNav();
       const menuEl = screen.getByText(businessName);
 
@@ -335,7 +336,8 @@ describe("<NavBar />", () => {
       setLargeScreen(true);
       setupStatefulUserDataContext();
       const user = generateUser({ name: "John Smith", email: "test@example.com" });
-      const userData = generateBusinessNamedUserData({ user });
+      const business = generateBusinessNamedBusiness({});
+      const userData = generateUserDataForBusiness(business, { user });
 
       render(
         withAuth(
@@ -381,7 +383,7 @@ describe("<NavBar />", () => {
     };
 
     it("does not display mini-roadmap", () => {
-      useMockUserData({});
+      useMockBusiness({});
       useMockRoadmap(generateRoadmap({ steps: [generateStep({ name: "step1" })] }));
       renderMobileRoadmapNav();
       expect(screen.queryByText("step1")).not.toBeInTheDocument();
@@ -410,19 +412,19 @@ describe("<NavBar />", () => {
 
     describe("landing page mobile navbar", () => {
       it("doesn't display the account section", () => {
-        useMockUserData({});
+        useMockBusiness({});
         renderMobileTaskNav({ isLanding: true });
         expect(screen.queryByText(Config.navigationDefaults.navBarGuestText)).not.toBeInTheDocument();
       });
 
       it("doesn't display the show business profile button", () => {
-        useMockUserData({});
+        useMockBusiness({});
         renderMobileTaskNav({ isLanding: true });
         expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
       });
 
       it("displays the get started text instead of register for user registration", () => {
-        useMockUserData({});
+        useMockBusiness({});
         renderMobileTaskNav({ isLanding: true });
         expect(screen.getByText(Config.navigationDefaults.registerButton)).toBeInTheDocument();
         expect(
@@ -443,21 +445,21 @@ describe("<NavBar />", () => {
 
     describe("guest mode mobile navbar - renders roadmap within drawer", () => {
       it("displays user registration links", async () => {
-        useMockUserData({});
+        useMockBusiness({});
         renderMobileTaskNav({ isLanding: false, isAuthenticated: IsAuthenticated.FALSE });
 
         expect(screen.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)).toBeVisible();
       });
 
       it("displays login button", async () => {
-        useMockUserData({});
+        useMockBusiness({});
         renderMobileTaskNav({ isAuthenticated: IsAuthenticated.FALSE });
 
         expect(screen.queryByText(Config.navigationDefaults.logInButton)).toBeVisible();
       });
 
       it("displays profile and dashboard buttons", async () => {
-        useMockUserData(generateBusinessNamedUserData());
+        useMockBusiness(generateBusinessNamedBusiness());
         renderMobileTaskNav({ isAuthenticated: IsAuthenticated.FALSE });
 
         expect(within(screen.getByTestId("nav-bar-popup-menu")).queryByText(businessName)).toBeVisible();
@@ -468,7 +470,8 @@ describe("<NavBar />", () => {
         setLargeScreen(false);
         setupStatefulUserDataContext();
         const user = generateUser({ name: "John Smith", email: "test@example.com" });
-        const userData = generateGuestUserData({ user });
+        const business = generateGuestBusiness({});
+        const userData = generateUserDataForBusiness(business, { user });
 
         render(
           withAuth(
@@ -502,7 +505,7 @@ describe("<NavBar />", () => {
       });
 
       it("displays mini-roadmap with PLAN/START when hideMiniRoadmap does not exist", () => {
-        useMockUserData({});
+        useMockBusiness({});
         useMockRoadmap(
           generateRoadmap({
             steps: [
@@ -518,7 +521,7 @@ describe("<NavBar />", () => {
       });
 
       it("does not display mini-roadmap when hideMiniRoadmap is true", () => {
-        useMockUserData({});
+        useMockBusiness({});
         useMockRoadmap(
           generateRoadmap({
             steps: [
@@ -542,7 +545,7 @@ describe("<NavBar />", () => {
       });
 
       it("hide drawer when mini-roadmap task is clicked", async () => {
-        useMockUserData({});
+        useMockBusiness({});
         useMockRoadmap(
           generateRoadmap({
             steps: [generateStep({ name: "step1", stepNumber: 1 })],

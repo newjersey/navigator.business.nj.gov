@@ -7,12 +7,12 @@ import {
 } from "@/lib/domain-logic/filterCalendarEvents";
 import { OperateReference } from "@/lib/types/types";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
 
 interface Props {
   operateReferences: Record<string, OperateReference>;
-  userData: UserData;
+  business: Business;
   activeYear: string;
 }
 
@@ -27,7 +27,7 @@ export const FilingsCalendarGrid = (props: Props): ReactElement => {
 
   return (
     <div>
-      {sortFilterCalendarEventsWithinAYear(props.userData.taxFilingData.filings, props.activeYear).length ===
+      {sortFilterCalendarEventsWithinAYear(props.business.taxFilingData.filings, props.activeYear).length ===
         0 && (
         <Content className="text-base margin-bottom-3">
           {Config.dashboardDefaults.calendarEmptyDescriptionMarkdown}
@@ -53,7 +53,7 @@ export const FilingsCalendarGrid = (props: Props): ReactElement => {
                       <FilingsCalendarSingleGrid
                         num={month}
                         operateReferences={props.operateReferences}
-                        userData={props.userData}
+                        business={props.business}
                         activeYear={props.activeYear}
                       />
                     </td>

@@ -4,8 +4,12 @@ import { templateEval } from "@/lib/utils/helpers";
 import { generateStep, generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/test";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import {
+  generateBusiness,
+  generatePreferences,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -20,9 +24,9 @@ describe("<HideableTasks />", () => {
     useMockRoadmap({});
   });
 
-  const renderHideableTask = (initialUserData?: UserData): void => {
+  const renderHideableTask = (business: Business): void => {
     render(
-      <WithStatefulUserData initialUserData={initialUserData}>
+      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
         <HideableTasks />
       </WithStatefulUserData>
     );
@@ -33,15 +37,13 @@ describe("<HideableTasks />", () => {
     const content = templateEval(Config.dashboardDefaults.hiddenTasksText, {
       count: String(tasks.length),
     });
-    const userData = generateUserData({
+    const business = generateBusiness({
       preferences: generatePreferences({ isHideableRoadmapOpen: true }),
     });
 
-    useMockRoadmap({
-      tasks: tasks,
-    });
+    useMockRoadmap({ tasks: tasks });
 
-    renderHideableTask(userData);
+    renderHideableTask(business);
     fireEvent.click(screen.getByText(Config.dashboardDefaults.hideTaskText));
     await waitFor(() => {
       expect(screen.getByText(content)).toBeInTheDocument();
@@ -55,7 +57,7 @@ describe("<HideableTasks />", () => {
       count: String(tasks.length),
     });
 
-    const userData = generateUserData({
+    const business = generateBusiness({
       preferences: generatePreferences({ isHideableRoadmapOpen: false }),
     });
 
@@ -64,7 +66,7 @@ describe("<HideableTasks />", () => {
       tasks: tasks,
     });
 
-    renderHideableTask(userData);
+    renderHideableTask(business);
 
     fireEvent.click(screen.getByText(Config.dashboardDefaults.showTaskText));
 

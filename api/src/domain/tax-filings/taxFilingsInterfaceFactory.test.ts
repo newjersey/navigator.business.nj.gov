@@ -1,14 +1,17 @@
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { TaxFilingCalendarEvent, TaxFilingLookupState, TaxFilingState } from "@shared/taxFiling";
 import {
+  generateBusiness,
   generateMunicipalityDetail,
   generatePreferences,
   generateProfileData,
   generateTaxFilingCalendarEvent,
   generateTaxFilingData,
   generateTaxIdAndBusinessName,
-  generateUserData,
+  generateUserDataForBusiness,
+  modifyCurrentBusiness,
 } from "@shared/test";
-import { UserData } from "@shared/userData";
+import { Business, UserData } from "@shared/userData";
 import { TaxFilingClient, TaxFilingInterface } from "../types";
 import * as fetchMunicipality from "../user/fetchMunicipalityByName";
 import { taxFilingsInterfaceFactory } from "./taxFilingsInterfaceFactory";
@@ -51,16 +54,18 @@ describe("TaxFilingsInterfaceFactory", () => {
     describe("when successful", () => {
       it("updates state and filing data", async () => {
         const filingData = generateTaxFilingCalendarEvent({});
-        const userData = generateUserData({
-          preferences: generatePreferences({
-            isCalendarFullView: true,
-          }),
-          taxFilingData: generateTaxFilingData({
-            state: undefined,
-            lastUpdatedISO: undefined,
-            filings: [generateTaxFilingCalendarEvent({})],
-          }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            preferences: generatePreferences({
+              isCalendarFullView: true,
+            }),
+            taxFilingData: generateTaxFilingData({
+              state: undefined,
+              lastUpdatedISO: undefined,
+              filings: [generateTaxFilingCalendarEvent({})],
+            }),
+          })
+        );
         taxFilingClient.lookup.mockResolvedValue({
           state: "SUCCESS",
           filings: [filingData],
@@ -75,10 +80,10 @@ describe("TaxFilingsInterfaceFactory", () => {
             countyName: "testCounty",
           })
         );
-        expect(await taxFilingInterface.lookup({ userData, ...taxIdBusinessName })).toEqual({
-          ...userData,
+        const expectedUserData = modifyCurrentBusiness(userData, (business) => ({
+          ...business,
           profileData: {
-            ...userData.profileData,
+            ...business.profileData,
             naicsCode: "123456",
             municipality: {
               county: "testCounty",
@@ -88,62 +93,69 @@ describe("TaxFilingsInterfaceFactory", () => {
             },
           },
           preferences: {
-            ...userData.preferences,
+            ...business.preferences,
             isCalendarFullView: true,
           },
           taxFilingData: {
-            ...userData.taxFilingData,
+            ...business.taxFilingData,
             state: "SUCCESS",
             businessName: taxIdBusinessName.businessName,
             filings: [filingData],
             lastUpdatedISO: currentDate.toISOString(),
             registeredISO: currentDate.toISOString(),
           },
-        });
+        }));
+        expect(await taxFilingInterface.lookup({ userData, ...taxIdBusinessName })).toEqual(expectedUserData);
       });
 
       it("removes errors if lookup succeeds", async () => {
-        const userData = generateUserData({
-          taxFilingData: generateTaxFilingData({
-            errorField: "formFailure",
-          }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            taxFilingData: generateTaxFilingData({
+              errorField: "formFailure",
+            }),
+          })
+        );
         taxFilingClient.lookup.mockResolvedValue({
           state: "SUCCESS",
           filings: [],
         });
 
         const response = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
-        expect(response.taxFilingData.errorField).toEqual(undefined);
+        expect(getCurrentBusiness(response).taxFilingData.errorField).toEqual(undefined);
       });
 
       it("sets registeredISO if it is undefined", async () => {
-        const userData = generateUserData({
-          taxFilingData: generateTaxFilingData({
-            registeredISO: undefined,
-          }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            taxFilingData: generateTaxFilingData({
+              registeredISO: undefined,
+            }),
+          })
+        );
         taxFilingClient.lookup.mockResolvedValue({
           state: "SUCCESS",
           filings: [],
         });
 
         const response = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
-        expect(response.taxFilingData.registeredISO).toEqual(currentDate.toISOString());
+        expect(getCurrentBusiness(response).taxFilingData.registeredISO).toEqual(currentDate.toISOString());
       });
 
       it("keeps existing registeredISO if it is defined", async () => {
         const registeredISO = new Date("2023-01-01").toISOString();
-        const userData = generateUserData({
-          taxFilingData: generateTaxFilingData({ registeredISO }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            taxFilingData: generateTaxFilingData({ registeredISO }),
+          })
+        );
         taxFilingClient.lookup.mockResolvedValue({
           state: "SUCCESS",
           filings: [],
         });
 
         const response = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
-        expect(response.taxFilingData.registeredISO).toEqual(registeredISO);
+        expect(getCurrentBusiness(response).taxFilingData.registeredISO).toEqual(registeredISO);
       });
 
       it("sets isCalendarFullView preference to true if filings in current year was 5 or fewer and is now more than 5", async () => {
@@ -153,7 +165,7 @@ describe("TaxFilingsInterfaceFactory", () => {
         });
         mockTaxFilingLookup({ numFilingsInCurrentYear: 6, state: "SUCCESS" });
         const resultingUserData = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
-        expect(resultingUserData.preferences.isCalendarFullView).toEqual(true);
+        expect(getCurrentBusiness(resultingUserData).preferences.isCalendarFullView).toEqual(true);
       });
 
       describe("keeps previous value of isCalendarFullView", () => {
@@ -167,7 +179,9 @@ describe("TaxFilingsInterfaceFactory", () => {
             });
             mockTaxFilingLookup({ numFilingsInCurrentYear: 6, state: "SUCCESS" });
             const resultingUserData = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
-            expect(resultingUserData.preferences.isCalendarFullView).toEqual(prevCalendarView);
+            expect(getCurrentBusiness(resultingUserData).preferences.isCalendarFullView).toEqual(
+              prevCalendarView
+            );
           });
 
           it(`${prevCalendarView} when filings length in current year 5 or fewer and remains fewer than 5`, async () => {
@@ -177,7 +191,9 @@ describe("TaxFilingsInterfaceFactory", () => {
             });
             mockTaxFilingLookup({ numFilingsInCurrentYear: 5, state: "SUCCESS" });
             const resultingUserData = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
-            expect(resultingUserData.preferences.isCalendarFullView).toEqual(prevCalendarView);
+            expect(getCurrentBusiness(resultingUserData).preferences.isCalendarFullView).toEqual(
+              prevCalendarView
+            );
           });
 
           it(`${prevCalendarView} when filings are more than 5 but not this year`, async () => {
@@ -190,7 +206,9 @@ describe("TaxFilingsInterfaceFactory", () => {
               filings: createFilings({ numFilingsInCurrentYear: 0, numFilingsInNextYear: 6 }),
             });
             const resultingUserData = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
-            expect(resultingUserData.preferences.isCalendarFullView).toEqual(prevCalendarView);
+            expect(getCurrentBusiness(resultingUserData).preferences.isCalendarFullView).toEqual(
+              prevCalendarView
+            );
           });
         }
       });
@@ -201,17 +219,19 @@ describe("TaxFilingsInterfaceFactory", () => {
 
       for (const state of nonSuccessStates) {
         it(`returns a ${state} state without updating filing data`, async () => {
-          const userData = generateUserData({
-            profileData: generateProfileData({
-              naicsCode: undefined,
-              municipality: undefined,
-            }),
-            taxFilingData: generateTaxFilingData({
-              state: undefined,
-              lastUpdatedISO: undefined,
-              filings: [generateTaxFilingCalendarEvent({})],
-            }),
-          });
+          const userData = generateUserDataForBusiness(
+            generateBusiness({
+              profileData: generateProfileData({
+                naicsCode: undefined,
+                municipality: undefined,
+              }),
+              taxFilingData: generateTaxFilingData({
+                state: undefined,
+                lastUpdatedISO: undefined,
+                filings: [generateTaxFilingCalendarEvent({})],
+              }),
+            })
+          );
 
           taxFilingClient.lookup.mockResolvedValue({
             state: state,
@@ -220,15 +240,19 @@ describe("TaxFilingsInterfaceFactory", () => {
             taxCity: undefined,
           });
 
-          expect(await taxFilingInterface.lookup({ userData, ...taxIdBusinessName })).toEqual({
-            ...userData,
+          const expectedUserData = modifyCurrentBusiness(userData, (business) => ({
+            ...business,
             taxFilingData: {
-              ...userData.taxFilingData,
+              ...business.taxFilingData,
               state: state,
               businessName: taxIdBusinessName.businessName,
               lastUpdatedISO: currentDate.toISOString(),
             },
-          });
+          }));
+
+          expect(await taxFilingInterface.lookup({ userData, ...taxIdBusinessName })).toEqual(
+            expectedUserData
+          );
         });
 
         it(`keeps false value of isCalendarFullView when state is ${state}`, async () => {
@@ -238,7 +262,7 @@ describe("TaxFilingsInterfaceFactory", () => {
           });
           mockTaxFilingLookup({ numFilingsInCurrentYear: 0, state });
           const resultingUserData = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
-          expect(resultingUserData.preferences.isCalendarFullView).toEqual(false);
+          expect(getCurrentBusiness(resultingUserData).preferences.isCalendarFullView).toEqual(false);
         });
 
         it(`keeps true value of isCalendarFullView when state is ${state}`, async () => {
@@ -248,7 +272,7 @@ describe("TaxFilingsInterfaceFactory", () => {
           });
           mockTaxFilingLookup({ numFilingsInCurrentYear: 0, state });
           const resultingUserData = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
-          expect(resultingUserData.preferences.isCalendarFullView).toEqual(true);
+          expect(getCurrentBusiness(resultingUserData).preferences.isCalendarFullView).toEqual(true);
         });
       }
     });
@@ -258,14 +282,16 @@ describe("TaxFilingsInterfaceFactory", () => {
       isCalendarFullView: boolean;
       numFilingsInCurrentYear: number;
     }): UserData {
-      return generateUserData({
-        preferences: generatePreferences({
-          isCalendarFullView: params.isCalendarFullView,
-        }),
-        taxFilingData: generateTaxFilingData({
-          filings: createFilings(params),
-        }),
-      });
+      return generateUserDataForBusiness(
+        generateBusiness({
+          preferences: generatePreferences({
+            isCalendarFullView: params.isCalendarFullView,
+          }),
+          taxFilingData: generateTaxFilingData({
+            filings: createFilings(params),
+          }),
+        })
+      );
     }
 
     /* eslint-disable unicorn/consistent-function-scoping */
@@ -296,16 +322,20 @@ describe("TaxFilingsInterfaceFactory", () => {
   describe("onboarding", () => {
     describe("only does a lookup when onboarding is successful and returns its response", () => {
       let userData: UserData;
+      let currentBusiness: Business;
 
       beforeEach(() => {
-        userData = generateUserData({
-          taxFilingData: generateTaxFilingData({
-            state: undefined,
-            lastUpdatedISO: undefined,
-            registeredISO: undefined,
-            filings: [generateTaxFilingCalendarEvent({})],
-          }),
-        });
+        userData = generateUserDataForBusiness(
+          generateBusiness({
+            taxFilingData: generateTaxFilingData({
+              state: undefined,
+              lastUpdatedISO: undefined,
+              registeredISO: undefined,
+              filings: [generateTaxFilingCalendarEvent({})],
+            }),
+          })
+        );
+        currentBusiness = getCurrentBusiness(userData);
       });
 
       describe("when successful", () => {
@@ -328,10 +358,11 @@ describe("TaxFilingsInterfaceFactory", () => {
               countyName: "testCounty",
             })
           );
-          expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
-            ...userData,
+
+          const expectedUserData = modifyCurrentBusiness(userData, (business) => ({
+            ...business,
             profileData: {
-              ...userData.profileData,
+              ...business.profileData,
               municipality: {
                 county: "testCounty",
                 displayName: "Testville",
@@ -341,14 +372,18 @@ describe("TaxFilingsInterfaceFactory", () => {
               naicsCode: "123456",
             },
             taxFilingData: {
-              ...userData.taxFilingData,
+              ...business.taxFilingData,
               state: "SUCCESS",
               businessName: taxIdBusinessName.businessName,
               filings: [filingData],
               lastUpdatedISO: currentDate.toISOString(),
               registeredISO: currentDate.toISOString(),
             },
-          });
+          }));
+
+          expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual(
+            expectedUserData
+          );
         });
       });
 
@@ -362,17 +397,21 @@ describe("TaxFilingsInterfaceFactory", () => {
             });
             taxFilingClient.lookup.mockResolvedValue({
               state: state,
-              filings: userData.taxFilingData.filings,
+              filings: currentBusiness.taxFilingData.filings,
             });
-            expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
-              ...userData,
+
+            const expectedUserData = modifyCurrentBusiness(userData, (business) => ({
+              ...business,
               taxFilingData: {
-                ...userData.taxFilingData,
+                ...business.taxFilingData,
                 state: state,
                 businessName: taxIdBusinessName.businessName,
                 lastUpdatedISO: currentDate.toISOString(),
               },
-            });
+            }));
+            expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual(
+              expectedUserData
+            );
           });
         }
       });
@@ -380,49 +419,60 @@ describe("TaxFilingsInterfaceFactory", () => {
 
     describe("returns onboarding response", () => {
       it("returns the API_ERROR response", async () => {
-        const userData = generateUserData({
-          taxFilingData: generateTaxFilingData({
-            state: undefined,
-            lastUpdatedISO: undefined,
-            registeredISO: undefined,
-          }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            taxFilingData: generateTaxFilingData({
+              state: undefined,
+              lastUpdatedISO: undefined,
+              registeredISO: undefined,
+            }),
+          })
+        );
         taxFilingClient.onboarding.mockResolvedValue({
           state: "API_ERROR",
         });
-        expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
-          ...userData,
+        const expectedUserData = modifyCurrentBusiness(userData, (business) => ({
+          ...business,
           taxFilingData: {
-            ...userData.taxFilingData,
+            ...business.taxFilingData,
             state: "API_ERROR",
             registeredISO: undefined,
             businessName: taxIdBusinessName.businessName,
           },
-        });
+        }));
+        expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual(
+          expectedUserData
+        );
       });
 
       it("returns the FAILED response", async () => {
-        const userData = generateUserData({
-          taxFilingData: generateTaxFilingData({
-            state: undefined,
-            lastUpdatedISO: undefined,
-            registeredISO: undefined,
-          }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            taxFilingData: generateTaxFilingData({
+              state: undefined,
+              lastUpdatedISO: undefined,
+              registeredISO: undefined,
+            }),
+          })
+        );
         taxFilingClient.onboarding.mockResolvedValue({
           state: "FAILED",
           errorField: "businessName",
         });
-        expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
-          ...userData,
+
+        const expectedUserData = modifyCurrentBusiness(userData, (business) => ({
+          ...business,
           taxFilingData: {
-            ...userData.taxFilingData,
+            ...business.taxFilingData,
             state: "FAILED",
             registeredISO: undefined,
             errorField: "businessName",
             businessName: taxIdBusinessName.businessName,
           },
-        });
+        }));
+        expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual(
+          expectedUserData
+        );
       });
     });
   });

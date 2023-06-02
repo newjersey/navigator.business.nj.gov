@@ -23,11 +23,11 @@ interface Props {
 }
 
 export const TaxInput = (props: Props): ReactElement => {
-  const { userData, updateQueue } = useUserData();
+  const { business, updateQueue } = useUserData();
   const { isAuthenticated } = useContext(AuthAlertContext);
   const { Config } = useConfig();
   const [profileData, setProfileData] = useState<ProfileData>(
-    userData?.profileData ?? createEmptyProfileData()
+    business?.profileData ?? createEmptyProfileData()
   );
 
   const {
@@ -40,7 +40,7 @@ export const TaxInput = (props: Props): ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const shouldLockTaxId =
-    userData?.taxFilingData.state === "SUCCESS" || userData?.taxFilingData.state === "PENDING";
+    business?.taxFilingData.state === "SUCCESS" || business?.taxFilingData.state === "PENDING";
 
   const saveButtonText =
     isAuthenticated === IsAuthenticated.FALSE
@@ -48,37 +48,33 @@ export const TaxInput = (props: Props): ReactElement => {
       : Config.tax.saveButtonText;
 
   useEffect(() => {
-    if (!userData) {
-      return;
-    }
-    setProfileData(userData.profileData);
-  }, [userData]);
+    if (!business) return;
+    setProfileData(business.profileData);
+  }, [business]);
 
   useMountEffectWhenDefined(() => {
-    if (!userData || !updateQueue) {
-      return;
-    }
+    if (!business || !updateQueue) return;
     if (isAuthenticated === IsAuthenticated.FALSE) {
       return;
     }
     if (
-      userData.profileData.taxId &&
-      userData.profileData.taxId?.length > 0 &&
-      userData.profileData.taxId?.length < 12
+      business.profileData.taxId &&
+      business.profileData.taxId?.length > 0 &&
+      business.profileData.taxId?.length < 12
     ) {
       updateQueue.queueTaskProgress({ [props.task.id]: "IN_PROGRESS" }).update();
     }
-  }, userData && updateQueue);
+  }, business);
 
   FormFuncWrapper(async () => {
-    if (!userData || !updateQueue || !isValid()) {
+    if (!business || !updateQueue || !isValid()) {
       return;
     }
 
     setIsLoading(true);
 
-    let { taxFilingData } = userData;
-    if (userData.profileData.taxId !== profileData.taxId) {
+    let { taxFilingData } = business;
+    if (business.profileData.taxId !== profileData.taxId) {
       taxFilingData = { ...taxFilingData, state: undefined, registeredISO: undefined, filings: [] };
     }
 

@@ -21,7 +21,7 @@ export const EinInput = (props: Props): ReactElement => {
   const [isInvalid, setIsInvalid] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [employerId, setEmployerId] = useState<string>("");
-  const { userData, updateQueue } = useUserData();
+  const { business, updateQueue } = useUserData();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
 
   let saveButtonText = Config.ein.saveButtonText;
@@ -30,20 +30,16 @@ export const EinInput = (props: Props): ReactElement => {
   }
 
   useMountEffectWhenDefined(() => {
-    if (!userData) {
-      return;
-    }
-    setEmployerId(userData.profileData.employerId || "");
-  }, userData);
+    if (!business) return;
+    setEmployerId(business.profileData.employerId || "");
+  }, business);
 
   const handleChange = (value: string): void => {
     setEmployerId(value);
   };
 
   const save = async (): Promise<void> => {
-    if (!userData || !updateQueue) {
-      return;
-    }
+    if (!business || !updateQueue) return;
 
     if (employerId.length !== LENGTH) {
       setIsInvalid(true);

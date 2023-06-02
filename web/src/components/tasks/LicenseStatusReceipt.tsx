@@ -64,7 +64,7 @@ const LicenseStatusLookup: Record<LicenseStatus, string> = {
 
 export const LicenseStatusReceipt = (props: Props): ReactElement => {
   const [theme, setTheme] = useState<PermitTheme>(pendingPermitTheme);
-  const { userData } = useUserData();
+  const { business } = useUserData();
 
   useEffect(() => {
     if (props.status === "ACTIVE") {
@@ -91,10 +91,10 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
   };
 
   const getOneLineAddress = (): string => {
-    if (!userData || !userData.licenseData) {
+    if (!business || !business.licenseData) {
       return "";
     }
-    const { nameAndAddress } = userData.licenseData;
+    const { nameAndAddress } = business.licenseData;
 
     const secondLineAddress = nameAndAddress.addressLine2 ? ` ${nameAndAddress.addressLine2}` : "";
 
@@ -136,7 +136,7 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
           </div>
           <div className="margin-3 font-body-2xs">
             <div className="fdr">
-              <div className="text-bold">{userData?.licenseData?.nameAndAddress.name}</div>
+              <div className="text-bold">{business?.licenseData?.nameAndAddress.name}</div>
               <button
                 data-testid="edit-button"
                 onClick={(): void => {

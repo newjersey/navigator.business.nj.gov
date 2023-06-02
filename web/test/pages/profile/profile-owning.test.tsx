@@ -7,7 +7,11 @@ import { randomPublicFilingLegalStructure, randomTradeNameLegalStructure } from 
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
+import {
+  currentBusiness,
+  currentUserData,
+  setupStatefulUserDataContext,
+} from "@/test/mock/withStatefulUserData";
 import {
   defaultDateFormat,
   emptyProfileData,
@@ -27,7 +31,7 @@ import {
   clickBack,
   clickSave,
   fillText,
-  generateUserData,
+  generateBusiness,
   getBusinessNameValue,
   getBusinessProfileInputFieldName,
   getDateOfFormation,
@@ -80,12 +84,10 @@ describe("profile - owning existing business", () => {
   });
 
   it("user is able to save and is redirected to dashboard", async () => {
-    const userData = generateUserData({ profileData: generateProfileData({ businessPersona: "OWNING" }) });
-    const inputFieldName = getBusinessProfileInputFieldName(userData);
+    const business = generateBusiness({ profileData: generateProfileData({ businessPersona: "OWNING" }) });
+    const inputFieldName = getBusinessProfileInputFieldName(business);
 
-    renderPage({
-      userData: userData,
-    });
+    renderPage({ business });
 
     fillText(inputFieldName, "Cool Computers");
     clickSave();
@@ -95,24 +97,20 @@ describe("profile - owning existing business", () => {
   });
 
   it("prevents user from going back to dashboard if there are unsaved changes", () => {
-    const userData = generateUserData({ profileData: generateProfileData({ businessPersona: "OWNING" }) });
-    const inputFieldName = getBusinessProfileInputFieldName(userData);
+    const business = generateBusiness({ profileData: generateProfileData({ businessPersona: "OWNING" }) });
+    const inputFieldName = getBusinessProfileInputFieldName(business);
 
-    renderPage({
-      userData: userData,
-    });
+    renderPage({ business });
     fillText(inputFieldName, "Cool Computers");
     clickBack();
     expect(screen.getByText(Config.profileDefaults.escapeModalReturn)).toBeInTheDocument();
   });
 
   it("returns user to profile page from un-saved changes modal", () => {
-    const userData = generateUserData({ profileData: generateProfileData({ businessPersona: "OWNING" }) });
-    const inputFieldName = getBusinessProfileInputFieldName(userData);
+    const business = generateBusiness({ profileData: generateProfileData({ businessPersona: "OWNING" }) });
+    const inputFieldName = getBusinessProfileInputFieldName(business);
 
-    renderPage({
-      userData: userData,
-    });
+    renderPage({ business });
     fillText(inputFieldName, "Cool Computers");
     clickBack();
     fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalEscape));
@@ -120,7 +118,7 @@ describe("profile - owning existing business", () => {
   });
 
   it("updates the user data on save", async () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         taxId: randomInt(9).toString(),
         businessPersona: "OWNING",
@@ -131,7 +129,7 @@ describe("profile - owning existing business", () => {
     });
     const newark = generateMunicipality({ displayName: "Newark" });
 
-    renderPage({ userData: userData, municipalities: [newark] });
+    renderPage({ business, municipalities: [newark] });
 
     fillText("Business name", "Cool Computers");
     fillText("Date of formation", date.format("MM/YYYY"));
@@ -154,12 +152,12 @@ describe("profile - owning existing business", () => {
     await waitFor(() => {
       expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
     });
-    expect(currentUserData()).toEqual({
-      ...userData,
+    expect(currentBusiness()).toEqual({
+      ...business,
       onboardingFormProgress: "COMPLETED",
-      taxFilingData: { ...userData.taxFilingData, state: undefined, filings: [], registeredISO: undefined },
+      taxFilingData: { ...business.taxFilingData, state: undefined, filings: [], registeredISO: undefined },
       profileData: {
-        ...userData.profileData,
+        ...business.profileData,
         businessName: "Cool Computers",
         homeBasedBusiness: true,
         existingEmployees: "123",
@@ -177,7 +175,7 @@ describe("profile - owning existing business", () => {
   });
 
   it("prefills form from existing user data", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         businessPersona: "OWNING",
         businessName: "Applebees",
@@ -202,7 +200,7 @@ describe("profile - owning existing business", () => {
     const veteran = LookupOwnershipTypeById("veteran-owned").name;
     const woman = LookupOwnershipTypeById("woman-owned").name;
 
-    renderPage({ userData });
+    renderPage({ business });
 
     expect(getBusinessNameValue()).toEqual("Applebees");
     expect(getMunicipalityValue()).toEqual("Newark");
@@ -221,10 +219,10 @@ describe("profile - owning existing business", () => {
   });
 
   it("shows an error when tax pin input is not empty or is less than 4 digits", async () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({ businessPersona: "OWNING" }),
     });
-    renderPage({ userData: userData });
+    renderPage({ business });
     chooseTab("numbers");
 
     fillText("Tax pin", "");
@@ -251,10 +249,10 @@ describe("profile - owning existing business", () => {
   });
 
   it("prevents user from saving if they partially entered Employer Id", async () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({ businessPersona: "OWNING" }),
     });
-    renderPage({ userData: userData });
+    renderPage({ business });
     chooseTab("numbers");
 
     fillText("Employer id", "123490");
@@ -271,14 +269,14 @@ describe("profile - owning existing business", () => {
   });
 
   it("prevents user from saving if sector is not selected", async () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         businessPersona: "OWNING",
         operatingPhase: "UP_AND_RUNNING_OWNING",
         sectorId: "",
       }),
     });
-    renderPage({ userData: userData });
+    renderPage({ business });
     fireEvent.blur(screen.queryByLabelText("Sector") as HTMLElement);
 
     clickSave();
@@ -291,10 +289,10 @@ describe("profile - owning existing business", () => {
   });
 
   it("returns user back to dashboard", async () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({ businessPersona: "OWNING" }),
     });
-    renderPage({ userData: userData });
+    renderPage({ business });
 
     clickBack();
     await waitFor(() => {
@@ -303,12 +301,12 @@ describe("profile - owning existing business", () => {
   });
 
   it("returns user to dashboard from un-saved changes modal", async () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({ businessPersona: "OWNING" }),
     });
 
     const newark = generateMunicipality({ displayName: "Newark" });
-    renderPage({ userData: userData, municipalities: [newark] });
+    renderPage({ business, municipalities: [newark] });
     selectByText("Location", newark.displayName);
     clickBack();
     fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalReturn));
@@ -322,7 +320,7 @@ describe("profile - owning existing business", () => {
 
   it("displays business info tab", () => {
     renderPage({
-      userData: generateUserData({
+      business: generateBusiness({
         profileData: generateProfileData({ businessPersona: "OWNING" }),
       }),
     });
@@ -330,57 +328,57 @@ describe("profile - owning existing business", () => {
   });
 
   it("displays date of formation input for public filing businesses", () => {
-    const initialUserData = generateUserData({
+    const initialBusiness = generateBusiness({
       profileData: generateProfileData({
         businessPersona: "OWNING",
         legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
       }),
     });
     const newark = generateMunicipality({ displayName: "Newark" });
-    renderPage({ userData: initialUserData, municipalities: [newark] });
+    renderPage({ business: initialBusiness, municipalities: [newark] });
     expect(screen.getByLabelText("Date of formation")).toBeInTheDocument();
   });
 
   it("does not display date of formation input for trade name businesses", () => {
-    const initialUserData = generateUserData({
+    const initialBusiness = generateBusiness({
       profileData: generateProfileData({
         businessPersona: "OWNING",
         legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
       }),
     });
     const newark = generateMunicipality({ displayName: "Newark" });
-    renderPage({ userData: initialUserData, municipalities: [newark] });
+    renderPage({ business: initialBusiness, municipalities: [newark] });
     expect(screen.queryByLabelText("Date of formation")).not.toBeInTheDocument();
   });
 
   it("displays NAICS code when it exists", () => {
-    const initialUserData = generateUserData({
+    const initialBusiness = generateBusiness({
       profileData: generateProfileData({
         businessPersona: "OWNING",
         naicsCode: "123456",
       }),
     });
-    renderPage({ userData: initialUserData });
+    renderPage({ business: initialBusiness });
     chooseTab("numbers");
     expect(screen.getByTestId("profile-naics-code")).toBeInTheDocument();
     expect(screen.getByText("123456")).toBeInTheDocument();
   });
 
   it("doesn't display the NAICS code field when it doesn't exist", () => {
-    const initialUserData = generateUserData({
+    const initialBusiness = generateBusiness({
       profileData: generateProfileData({
         businessPersona: "OWNING",
         naicsCode: "",
       }),
     });
-    renderPage({ userData: initialUserData });
+    renderPage({ business: initialBusiness });
     chooseTab("numbers");
     expect(screen.queryByTestId("profile-naics-code")).not.toBeInTheDocument();
   });
 
   it("locks the location field if it is populated and tax filing state is SUCCESS", () => {
     renderPage({
-      userData: generateUserData({
+      business: generateBusiness({
         profileData: generateProfileData({
           businessPersona: "OWNING",
           municipality: generateMunicipality({ displayName: "Trenton" }),
@@ -396,65 +394,65 @@ describe("profile - owning existing business", () => {
 
   describe("Document Section", () => {
     it("has no document section", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           businessPersona: "OWNING",
         }),
       });
-      renderPage({ userData });
+      renderPage({ business });
       expect(screen.queryByTestId("documents")).not.toBeInTheDocument();
     });
   });
 
   describe("trade name field behavior", () => {
     it("displays trade name field for an existing trade name business", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           businessPersona: "OWNING",
           legalStructureId: "sole-proprietorship",
         }),
       });
-      renderPage({ userData });
+      renderPage({ business });
       expect(screen.getByTestId("tradeName")).toBeInTheDocument();
     });
 
     it("hides trade name field for existing non trade name business", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           businessPersona: "OWNING",
           legalStructureId: "limited-liability-company",
         }),
       });
-      renderPage({ userData });
+      renderPage({ business });
       expect(screen.queryByTestId("tradeName")).not.toBeInTheDocument();
     });
   });
 
   describe("responsible owner name field behavior", () => {
     it("displays responsibleOwnerName field for an existing trade name business", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           businessPersona: "OWNING",
           legalStructureId: "general-partnership",
         }),
       });
-      renderPage({ userData });
+      renderPage({ business });
       expect(screen.getByTestId("responsibleOwnerName")).toBeInTheDocument();
     });
 
     it("hides responsibleOwnerName field for an existing non trade name business", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "limited-liability-partnership",
         }),
       });
-      renderPage({ userData });
+      renderPage({ business });
       expect(screen.queryByTestId("responsibleOwnerName")).not.toBeInTheDocument();
     });
 
     it("displays responsibleOwnerName as locked if user has accessed tax data", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           businessPersona: "OWNING",
           legalStructureId: "sole-proprietorship",
@@ -463,7 +461,7 @@ describe("profile - owning existing business", () => {
           state: "PENDING",
         }),
       });
-      renderPage({ userData });
+      renderPage({ business });
       expect(
         screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.header)
       ).toBeInTheDocument();
@@ -475,27 +473,27 @@ describe("profile - owning existing business", () => {
     const ProfileConfig = Config.profileDefaults.fields;
 
     it("only displays alert on info tab", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: "UP_AND_RUNNING_OWNING",
           dateOfFormation: undefined,
         }),
       });
-      renderPage({ userData });
+      renderPage({ business });
       expect(screen.getByTestId("opp-alert")).toBeInTheDocument();
       chooseTab("numbers");
       expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
     });
 
     it("does display date of formation question when legal structure is undefined", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: {
           ...emptyProfileData,
           operatingPhase: "UP_AND_RUNNING_OWNING",
           businessPersona: "OWNING",
         },
       });
-      renderPage({ userData });
+      renderPage({ business });
       expect(
         within(screen.getByTestId("opp-alert")).getByText(
           Config.profileDefaults.fields.dateOfFormation.default.header
@@ -509,7 +507,7 @@ describe("profile - owning existing business", () => {
     });
 
     it("does not display date of formation question when it is a Trade Name legal structure", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: {
           ...emptyProfileData,
           operatingPhase: "UP_AND_RUNNING_OWNING",
@@ -517,7 +515,7 @@ describe("profile - owning existing business", () => {
           legalStructureId: randomTradeNameLegalStructure(),
         },
       });
-      renderPage({ userData });
+      renderPage({ business });
       expect(
         screen.queryByText(Config.profileDefaults.fields.dateOfFormation.default.header)
       ).not.toBeInTheDocument();
@@ -525,7 +523,7 @@ describe("profile - owning existing business", () => {
     });
 
     it("does display date of formation question when it is a not a Trade Name legal structure", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: {
           ...emptyProfileData,
           operatingPhase: "UP_AND_RUNNING_OWNING",
@@ -533,7 +531,7 @@ describe("profile - owning existing business", () => {
           legalStructureId: randomPublicFilingLegalStructure(),
         },
       });
-      renderPage({ userData });
+      renderPage({ business });
       expect(
         within(screen.getByTestId("opp-alert")).getByText(
           Config.profileDefaults.fields.dateOfFormation.default.header
@@ -547,7 +545,7 @@ describe("profile - owning existing business", () => {
     });
 
     it("lists each unanswered funding/certification question", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: "UP_AND_RUNNING_OWNING",
           dateOfFormation: undefined,
@@ -558,7 +556,7 @@ describe("profile - owning existing business", () => {
           ownershipTypeIds: [],
         }),
       });
-      renderPage({ userData });
+      renderPage({ business });
 
       expect(screen.getByTestId("opp-alert")).toHaveTextContent(ProfileConfig.dateOfFormation.default.header);
       expect(screen.getByTestId("opp-alert")).toHaveTextContent(
@@ -574,7 +572,7 @@ describe("profile - owning existing business", () => {
     });
 
     it("removes question from alert when it gets answered", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: "UP_AND_RUNNING_OWNING",
           dateOfFormation: undefined,
@@ -582,7 +580,7 @@ describe("profile - owning existing business", () => {
           legalStructureId: randomPublicFilingLegalStructure(),
         }),
       });
-      renderPage({ userData });
+      renderPage({ business });
 
       expect(screen.getByTestId("opp-alert")).toHaveTextContent(ProfileConfig.dateOfFormation.default.header);
       expect(screen.getByTestId("opp-alert")).toHaveTextContent(
@@ -598,7 +596,7 @@ describe("profile - owning existing business", () => {
     });
 
     it("does not display alert if all funding/certification questions are answered", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: "UP_AND_RUNNING_OWNING",
           dateOfFormation: "2023-03-01",
@@ -608,7 +606,7 @@ describe("profile - owning existing business", () => {
           existingEmployees: undefined,
         }),
       });
-      renderPage({ userData });
+      renderPage({ business });
       expect(screen.getByTestId("opp-alert")).toHaveTextContent(
         ProfileConfig.existingEmployees.overrides.OWNING.header
       );

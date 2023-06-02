@@ -3,18 +3,19 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { selectDate, selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   triggerQueueUpdate,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
   defaultDateFormat,
+  generateBusiness,
   generateMunicipality,
   generateProfileData,
-  generateUserData,
+  generateUserDataForBusiness,
   getCurrentDate,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
 
@@ -30,20 +31,20 @@ describe("<FormationDateModal />", () => {
     setupStatefulUserDataContext();
   });
 
-  const renderComponent = (initialUserData?: UserData): void => {
-    const userData = initialUserData ?? generateUserData({});
+  const renderComponent = (initialBusiness?: Business): void => {
+    const business = initialBusiness ?? generateBusiness({});
 
-    const userDataWithMunicipality = {
-      ...userData,
+    const businessWithMunicipality = {
+      ...business,
       profileData: {
-        ...userData.profileData,
-        municipality: userData.profileData.municipality === undefined ? undefined : municipality,
+        ...business.profileData,
+        municipality: business.profileData.municipality === undefined ? undefined : municipality,
       },
     };
 
     render(
       <MunicipalitiesContext.Provider value={{ municipalities: [municipality] }}>
-        <WithStatefulUserData initialUserData={userDataWithMunicipality}>
+        <WithStatefulUserData initialUserData={generateUserDataForBusiness(businessWithMunicipality)}>
           <FormationDateModal isOpen={true} close={(): void => {}} onSave={(): void => {}} />
         </WithStatefulUserData>
       </MunicipalitiesContext.Provider>
@@ -56,7 +57,7 @@ describe("<FormationDateModal />", () => {
     selectDate(date);
     fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
     triggerQueueUpdate();
-    expect(currentUserData().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
+    expect(currentBusiness().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
   });
 
   it("allows a date in the future", () => {
@@ -65,30 +66,30 @@ describe("<FormationDateModal />", () => {
     selectDate(date);
     fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
     triggerQueueUpdate();
-    expect(currentUserData().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
+    expect(currentBusiness().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
   });
 
   it("shows error when user saves without entering date", () => {
-    renderComponent(generateUserData({ profileData: generateProfileData({ dateOfFormation: undefined }) }));
+    renderComponent(generateBusiness({ profileData: generateProfileData({ dateOfFormation: undefined }) }));
     expect(screen.queryByText(Config.formationDateModal.dateOfFormationErrorText)).not.toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
     expect(screen.getByText(Config.formationDateModal.dateOfFormationErrorText)).toBeInTheDocument();
   });
 
   it("does not update dateOfFormation if user cancels", () => {
-    const initialUserData = generateUserData({});
-    renderComponent(initialUserData);
+    const initialBusiness = generateBusiness({});
+    renderComponent(initialBusiness);
     const date = getCurrentDate().subtract(1, "month").date(1);
     selectDate(date);
     fireEvent.click(screen.getByText(Config.formationDateModal.cancelButtonText));
     triggerQueueUpdate();
-    expect(currentUserData().profileData.dateOfFormation).toEqual(
-      initialUserData.profileData.dateOfFormation
+    expect(currentBusiness().profileData.dateOfFormation).toEqual(
+      initialBusiness.profileData.dateOfFormation
     );
   });
 
   it("shows and saves location field if user has not entered a location", () => {
-    renderComponent(generateUserData({ profileData: generateProfileData({ municipality: undefined }) }));
+    renderComponent(generateBusiness({ profileData: generateProfileData({ municipality: undefined }) }));
     const date = getCurrentDate().subtract(1, "month").date(1);
     selectDate(date);
 
@@ -96,7 +97,7 @@ describe("<FormationDateModal />", () => {
 
     fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
     triggerQueueUpdate();
-    expect(currentUserData().profileData.municipality).toEqual(municipality);
+    expect(currentBusiness().profileData.municipality).toEqual(municipality);
   });
 
   it("does not show location field if user has already entered a location", () => {
@@ -106,7 +107,7 @@ describe("<FormationDateModal />", () => {
 
   it("shows location field if user is dakota nexus with a new jersey location", () => {
     renderComponent(
-      generateUserData({
+      generateBusiness({
         profileData: generateProfileData({
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
@@ -120,7 +121,7 @@ describe("<FormationDateModal />", () => {
 
   it("does not show location field if user is dakota nexus with no new jersey location", () => {
     renderComponent(
-      generateUserData({
+      generateBusiness({
         profileData: generateProfileData({
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
@@ -133,7 +134,7 @@ describe("<FormationDateModal />", () => {
   });
 
   it("shows error when user saves without entering location", () => {
-    renderComponent(generateUserData({ profileData: generateProfileData({ municipality: undefined }) }));
+    renderComponent(generateBusiness({ profileData: generateProfileData({ municipality: undefined }) }));
     expect(
       screen.queryByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
     ).not.toBeInTheDocument();

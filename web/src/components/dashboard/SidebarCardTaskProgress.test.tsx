@@ -3,8 +3,8 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateRoadmap, generateSidebarCardContent, generateStep, generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { generateUserData } from "@businessnjgovnavigator/shared";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
+import { generateBusiness } from "@businessnjgovnavigator/shared";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -15,7 +15,7 @@ const Config = getMergedConfig();
 describe("<SidebarCardTaskProgress />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockUserData({});
+    useMockBusiness({});
     useMockRoadmap({});
   });
 
@@ -35,8 +35,8 @@ describe("<SidebarCardTaskProgress />", () => {
       })
     );
 
-    useMockUserData(
-      generateUserData({
+    useMockBusiness(
+      generateBusiness({
         taskProgress: {
           task1: "COMPLETED",
           task2: "IN_PROGRESS",
@@ -68,8 +68,8 @@ describe("<SidebarCardTaskProgress />", () => {
         contentMd: "You have ${numberOptionalTasks} left",
       });
 
-      useMockUserData(
-        generateUserData({
+      useMockBusiness(
+        generateBusiness({
           taskProgress: {
             optionalTask1: "IN_PROGRESS",
             optionalTask2: "NOT_STARTED",
@@ -87,8 +87,8 @@ describe("<SidebarCardTaskProgress />", () => {
         contentMd: "You have ${numberOptionalTasks} left",
       });
 
-      useMockUserData(
-        generateUserData({
+      useMockBusiness(
+        generateBusiness({
           taskProgress: {
             optionalTask1: "COMPLETED",
             optionalTask2: "NOT_STARTED",
@@ -107,8 +107,8 @@ describe("<SidebarCardTaskProgress />", () => {
         contentMd: "You have ${numberRequiredTasks} left",
       });
 
-      useMockUserData(
-        generateUserData({
+      useMockBusiness(
+        generateBusiness({
           taskProgress: {
             requiredTask1: "IN_PROGRESS",
             requiredTask2: "NOT_STARTED",
@@ -127,8 +127,8 @@ describe("<SidebarCardTaskProgress />", () => {
         contentMd: "You have ${numberRequiredTasks} left",
       });
 
-      useMockUserData(
-        generateUserData({
+      useMockBusiness(
+        generateBusiness({
           taskProgress: {
             requiredTask1: "COMPLETED",
             requiredTask2: "NOT_STARTED",
@@ -147,8 +147,8 @@ describe("<SidebarCardTaskProgress />", () => {
         contentMd: "You have ${numberOptionalTasks} and ${numberRequiredTasks} left",
       });
 
-      useMockUserData(
-        generateUserData({
+      useMockBusiness(
+        generateBusiness({
           taskProgress: {
             optionalTask1: "COMPLETED",
             optionalTask2: "COMPLETED",
@@ -183,7 +183,7 @@ describe("<SidebarCardTaskProgress />", () => {
       completedHeader: "All done!",
     });
 
-    useMockUserData(generateUserData({ taskProgress: { Task1: "COMPLETED" } }));
+    useMockBusiness(generateBusiness({ taskProgress: { Task1: "COMPLETED" } }));
     useMockRoadmap(
       generateRoadmap({
         steps: [generateStep({ stepNumber: 1 })],
@@ -200,7 +200,7 @@ describe("<SidebarCardTaskProgress />", () => {
       header: "Hey kid, you're ${percentDone} done",
       notStartedHeader: "Get to work",
     });
-    useMockUserData(generateUserData({ taskProgress: {} }));
+    useMockBusiness(generateBusiness({ taskProgress: {} }));
     useMockRoadmap(
       generateRoadmap({
         steps: [generateStep({ stepNumber: 1 })],

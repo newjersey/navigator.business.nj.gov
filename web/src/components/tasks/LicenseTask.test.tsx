@@ -2,9 +2,15 @@ import { LicenseTask } from "@/components/tasks/LicenseTask";
 import * as api from "@/lib/api-client/apiClient";
 import { generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import { generateLicenseData, generateProfileData, UserData } from "@businessnjgovnavigator/shared";
+import {
+  Business,
+  generateBusiness,
+  generateLicenseData,
+  generateProfileData,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared";
 import {
   generateLicenseStatusItem,
   generateNameAndAddress,
@@ -20,7 +26,6 @@ const mockApi = api as jest.Mocked<typeof api>;
 
 describe("<LicenseTask />", () => {
   const task = generateTask({});
-  const initialUserData = generateUserData({ licenseData: generateLicenseData({}) });
 
   const renderTask = (): void => {
     render(
@@ -30,10 +35,10 @@ describe("<LicenseTask />", () => {
     );
   };
 
-  const renderTaskWithStatefulData = (initialUserData: UserData): void => {
+  const renderTaskWithStatefulData = (business: Business): void => {
     render(
       <ThemeProvider theme={createTheme()}>
-        <WithStatefulUserData initialUserData={initialUserData}>
+        <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
           <LicenseTask task={task} />
         </WithStatefulUserData>
       </ThemeProvider>
@@ -42,22 +47,20 @@ describe("<LicenseTask />", () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockUserData(initialUserData);
+    useMockBusiness(generateBusiness({}));
     useMockRoadmap({});
     jest.useFakeTimers();
   });
 
   it("displays status as an editable tag if user has not completed search", () => {
     setupStatefulUserDataContext();
-    const initialUserData = generateUserData({
-      taskProgress: {
-        [task.id]: "IN_PROGRESS",
-      },
+    const business = generateBusiness({
+      taskProgress: { [task.id]: "IN_PROGRESS" },
       licenseData: generateLicenseData({
         completedSearch: false,
       }),
     });
-    renderTaskWithStatefulData(initialUserData);
+    renderTaskWithStatefulData(business);
 
     fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
 
@@ -69,15 +72,13 @@ describe("<LicenseTask />", () => {
 
   it("displays status as not editable if user has completed search", () => {
     setupStatefulUserDataContext();
-    const initialUserData = generateUserData({
-      taskProgress: {
-        [task.id]: "IN_PROGRESS",
-      },
+    const business = generateBusiness({
+      taskProgress: { [task.id]: "IN_PROGRESS" },
       licenseData: generateLicenseData({
         completedSearch: true,
       }),
     });
-    renderTaskWithStatefulData(initialUserData);
+    renderTaskWithStatefulData(business);
     expect(screen.getByTestId("IN_PROGRESS")).toBeInTheDocument();
     fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
 
@@ -88,13 +89,13 @@ describe("<LicenseTask />", () => {
 
   describe("starting tab", () => {
     it("shows content on first tab", () => {
-      useMockUserData({ licenseData: undefined });
+      useMockBusiness({ licenseData: undefined });
       renderTask();
       expect(screen.getByText(task.contentMd)).toBeInTheDocument();
     });
 
     it("starts on application tab when no licenseData and visits status tab by clicking secondary button", () => {
-      useMockUserData({ licenseData: undefined });
+      useMockBusiness({ licenseData: undefined });
       renderTask();
       expect(screen.queryByTestId("business-name")).not.toBeInTheDocument();
 
@@ -103,7 +104,7 @@ describe("<LicenseTask />", () => {
     });
 
     it("starts on check status form tab when it has form data but incomplete search", () => {
-      useMockUserData({
+      useMockBusiness({
         licenseData: generateLicenseData({
           completedSearch: false,
           nameAndAddress: generateNameAndAddress({
@@ -117,7 +118,7 @@ describe("<LicenseTask />", () => {
     });
 
     it("goes directly to receipt screen and shows data from licenseData when completed search is true", () => {
-      useMockUserData({
+      useMockBusiness({
         licenseData: generateLicenseData({
           completedSearch: true,
           nameAndAddress: generateNameAndAddress({
@@ -136,7 +137,7 @@ describe("<LicenseTask />", () => {
 
   describe("form tab", () => {
     it("fills form values from user data if applicable", async () => {
-      useMockUserData({
+      useMockBusiness({
         licenseData: generateLicenseData({
           nameAndAddress: generateNameAndAddress({
             name: "Applebees",
@@ -157,7 +158,7 @@ describe("<LicenseTask />", () => {
     });
 
     it("fills name from user data when no licenseData", async () => {
-      useMockUserData({
+      useMockBusiness({
         profileData: generateProfileData({
           businessName: "Applebees",
         }),
@@ -308,14 +309,16 @@ describe("<LicenseTask />", () => {
       renderTask();
 
       mockApi.checkLicenseStatus.mockResolvedValue(
-        generateUserData({
-          licenseData: generateLicenseData({
-            items: [
-              generateLicenseStatusItem({ title: "application fee", status: "PENDING" }),
-              generateLicenseStatusItem({ title: "board approval", status: "ACTIVE" }),
-            ],
-          }),
-        })
+        generateUserDataForBusiness(
+          generateBusiness({
+            licenseData: generateLicenseData({
+              items: [
+                generateLicenseStatusItem({ title: "application fee", status: "PENDING" }),
+                generateLicenseStatusItem({ title: "board approval", status: "ACTIVE" }),
+              ],
+            }),
+          })
+        )
       );
 
       fireEvent.submit(screen.getByTestId("check-status-submit"));
@@ -329,7 +332,7 @@ describe("<LicenseTask />", () => {
     });
 
     it("displays name and address on receipt screen", () => {
-      useMockUserData({
+      useMockBusiness({
         licenseData: generateLicenseData({
           completedSearch: true,
           nameAndAddress: generateNameAndAddress({

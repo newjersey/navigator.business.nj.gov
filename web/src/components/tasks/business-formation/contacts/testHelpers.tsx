@@ -40,14 +40,14 @@ export const getPageHelper = async (
     lastVisitedPageIndex: 0,
   };
   const user = initialUser ? generateUser(initialUser) : generateUser({});
-  const page = preparePage(
-    {
+  const page = preparePage({
+    business: {
       profileData,
       formationData,
-      user,
     },
-    displayContent
-  );
+    displayContent,
+    user,
+  });
 
   if (isForeign) {
     await page.fillAndSubmitNexusBusinessNameStep();

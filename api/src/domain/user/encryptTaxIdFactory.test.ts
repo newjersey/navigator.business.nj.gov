@@ -1,4 +1,9 @@
-import { generateProfileData, generateUserData } from "@shared/test";
+import {
+  generateBusiness,
+  generateProfileData,
+  generateUserDataForBusiness,
+  modifyCurrentBusiness,
+} from "@shared/test";
 import { EncryptionDecryptionClient, EncryptTaxId } from "../types";
 import { encryptTaxIdFactory } from "./encryptTaxIdFactory";
 
@@ -14,21 +19,25 @@ describe("encryptTaxId", () => {
   });
 
   it("updates user by masking and encrypting tax id", async () => {
-    const userData = generateUserData({
-      profileData: generateProfileData({
-        taxId: "123456789000",
-        encryptedTaxId: undefined,
-      }),
-    });
+    const userData = generateUserDataForBusiness(
+      generateBusiness({
+        profileData: generateProfileData({
+          taxId: "123456789000",
+          encryptedTaxId: undefined,
+        }),
+      })
+    );
     const response = await encryptTaxId(userData);
     expect(stubEncryptionDecryptionClient.encryptValue).toHaveBeenCalledWith("123456789000");
-    expect(response).toEqual({
-      ...userData,
+
+    const expectedUserData = modifyCurrentBusiness(userData, (business) => ({
+      ...business,
       profileData: {
-        ...userData.profileData,
+        ...business.profileData,
         taxId: "*******89000",
         encryptedTaxId: "some-encrypted-value",
       },
-    });
+    }));
+    expect(response).toEqual(expectedUserData);
   });
 });

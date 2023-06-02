@@ -18,26 +18,22 @@ interface Props {
 
 export const EinTask = (props: Props): ReactElement => {
   const [showInput, setShowInput] = useState<boolean>(true);
-  const { userData, updateQueue } = useUserData();
+  const { business, updateQueue } = useUserData();
   const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
   const { Config } = useConfig();
 
   useMountEffectWhenDefined(() => {
-    if (!userData) {
-      return;
-    }
+    if (!business) return;
     if (isAuthenticated === IsAuthenticated.FALSE) {
       return;
     }
-    setShowInput(!userData.profileData.employerId);
-  }, userData);
+    setShowInput(!business.profileData.employerId);
+  }, business);
 
   const setBackToEditing = ({ remove }: { remove: boolean }): void => {
-    if (!userData || !updateQueue) {
-      return;
-    }
+    if (!business || !updateQueue) return;
     setShowInput(true);
-    const newEinValue = remove ? emptyProfileData.employerId : userData.profileData.employerId;
+    const newEinValue = remove ? emptyProfileData.employerId : business.profileData.employerId;
     updateQueue
       .queueTaskProgress({ [props.task.id]: "IN_PROGRESS" })
       .queueProfileData({ employerId: newEinValue })
@@ -75,7 +71,7 @@ export const EinTask = (props: Props): ReactElement => {
           <EinDisplay
             onEdit={onEdit}
             onRemove={onRemove}
-            employerId={userData?.profileData.employerId || ""}
+            employerId={business?.profileData.employerId || ""}
           />
         )}
       </div>

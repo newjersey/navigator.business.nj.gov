@@ -13,17 +13,18 @@ import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulProfileFormContext } from "@/test/mock/withStatefulProfileData";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData as _WithStatefulUserData,
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
+  generateBusiness,
   generateProfileData,
   generateTaxFilingData,
-  generateUserData,
+  generateUserDataForBusiness,
   randomInt,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -34,15 +35,17 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 const Config = getMergedConfig();
 
-const WithStatefulUserData = ({
+const WithStatefulBusiness = ({
   children,
-  initialUserData,
+  initialBusiness,
 }: {
   children: ReactNode;
-  initialUserData: UserData | undefined;
+  initialBusiness: Business;
 }): ReactElement => (
   <WithStatefulProfileFormContext>
-    <_WithStatefulUserData initialUserData={initialUserData}>{children}</_WithStatefulUserData>
+    <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
+      {children}
+    </WithStatefulUserData>
   </WithStatefulProfileFormContext>
 );
 
@@ -61,9 +64,9 @@ describe("<TaxTask />", () => {
 
   it("replaces ${taxInputComponent} with taxInput component", () => {
     render(
-      <WithStatefulUserData initialUserData={generateUserData({})}>
+      <WithStatefulBusiness initialBusiness={generateBusiness({})}>
         <TaxTask task={task} />
-      </WithStatefulUserData>
+      </WithStatefulBusiness>
     );
     expect(screen.getByText("some content here")).toBeInTheDocument();
     expect(screen.getByText("more content")).toBeInTheDocument();
@@ -73,24 +76,24 @@ describe("<TaxTask />", () => {
 
   it("renders CTA button", () => {
     render(
-      <WithStatefulUserData initialUserData={generateUserData({})}>
+      <WithStatefulBusiness initialBusiness={generateBusiness({})}>
         <TaxTask task={task} />
-      </WithStatefulUserData>
+      </WithStatefulBusiness>
     );
     expect(screen.getByText(ctaText)).toBeInTheDocument();
   });
 
   it("shows disabled taxId when taxCalendar is PENDING or SUCCESS", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({ taxId: "*******89123", encryptedTaxId: "some-encrypted-value" }),
       taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" }),
     });
     render(
-      <WithStatefulUserData initialUserData={userData}>
+      <WithStatefulBusiness initialBusiness={business}>
         <ThemeProvider theme={createTheme()}>
           <TaxTask task={task} />
         </ThemeProvider>
-      </WithStatefulUserData>
+      </WithStatefulBusiness>
     );
     expect(screen.queryByLabelText("Tax id")).not.toBeInTheDocument();
     expect(screen.getByTestId("disabled-taxid")).toHaveTextContent(Config.tax.lockedPostText);
@@ -99,21 +102,21 @@ describe("<TaxTask />", () => {
   });
 
   describe("inputting Tax ID", () => {
-    let initialUserData: UserData;
+    let initialBusiness: Business;
 
     const renderPage = (): void => {
       render(
         withAuthAlert(
-          <WithStatefulUserData initialUserData={initialUserData}>
+          <WithStatefulBusiness initialBusiness={initialBusiness}>
             <TaxTask task={task} />
-          </WithStatefulUserData>,
+          </WithStatefulBusiness>,
           IsAuthenticated.TRUE
         )
       );
     };
 
     beforeEach(() => {
-      initialUserData = generateUserData({
+      initialBusiness = generateBusiness({
         profileData: generateProfileData({ taxId: "" }),
         taskProgress: { [taskId]: "NOT_STARTED" },
       });
@@ -125,18 +128,18 @@ describe("<TaxTask />", () => {
     });
 
     it("updates the progress of the task to IN_PROGRESS if there is a pre-existing 9 digit tax id", async () => {
-      initialUserData = generateUserData({
+      initialBusiness = generateBusiness({
         profileData: generateProfileData({ taxId: "123456789" }),
         taskProgress: { [taskId]: "COMPLETED" },
       });
       renderPage();
       await waitFor(() => {
-        expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
+        expect(currentBusiness().taskProgress[taskId]).toEqual("IN_PROGRESS");
       });
     });
 
     it("renders the split field if there is a pre-existing 9 digit tax id", async () => {
-      initialUserData = generateUserData({
+      initialBusiness = generateBusiness({
         profileData: generateProfileData({ taxId: "123456789" }),
         taskProgress: { [taskId]: "COMPLETED" },
       });
@@ -151,7 +154,7 @@ describe("<TaxTask />", () => {
       fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789123" } });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
       await waitFor(() => {
-        expect(currentUserData().profileData.taxId).toEqual("123456789123");
+        expect(currentBusiness().profileData.taxId).toEqual("123456789123");
       });
     });
 
@@ -174,27 +177,27 @@ describe("<TaxTask />", () => {
       fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789123" } });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
       await waitFor(() => {
-        expect(currentUserData().taskProgress[taskId]).toEqual("COMPLETED");
+        expect(currentBusiness().taskProgress[taskId]).toEqual("COMPLETED");
       });
     });
   });
 
   describe("displaying Tax ID", () => {
-    let initialUserData: UserData;
+    let initialBusiness: Business;
 
     const renderPage = (): void => {
       render(
         withAuthAlert(
-          <WithStatefulUserData initialUserData={initialUserData}>
+          <WithStatefulBusiness initialBusiness={initialBusiness}>
             <TaxTask task={task} />
-          </WithStatefulUserData>,
+          </WithStatefulBusiness>,
           IsAuthenticated.TRUE
         )
       );
     };
 
     beforeEach(() => {
-      initialUserData = generateUserData({
+      initialBusiness = generateBusiness({
         profileData: generateProfileData({ taxId: "*******89123", encryptedTaxId: "some-encrypted-value" }),
         taskProgress: { [taskId]: "COMPLETED" },
       });
@@ -207,15 +210,15 @@ describe("<TaxTask />", () => {
   });
 
   describe("guest mode", () => {
-    let initialUserData: UserData;
+    let initialBusiness: Business;
     const setRegistrationModalIsVisible = jest.fn();
 
     const renderPage = (): void => {
       render(
         withAuthAlert(
-          <WithStatefulUserData initialUserData={initialUserData}>
+          <WithStatefulBusiness initialBusiness={initialBusiness}>
             <TaxTask task={task} />
-          </WithStatefulUserData>,
+          </WithStatefulBusiness>,
           IsAuthenticated.FALSE,
           { registrationModalIsVisible: false, setRegistrationModalIsVisible }
         )
@@ -223,7 +226,7 @@ describe("<TaxTask />", () => {
     };
 
     beforeEach(() => {
-      initialUserData = generateUserData({
+      initialBusiness = generateBusiness({
         profileData: generateProfileData({ taxId: "" }),
         taskProgress: { [taskId]: "NOT_STARTED" },
       });
@@ -245,21 +248,21 @@ describe("<TaxTask />", () => {
   });
 
   describe("tax id disclaimer", () => {
-    const renderComponent = (initialUserData?: UserData): void => {
+    const renderComponent = (initialBusiness: Business): void => {
       render(
-        <WithStatefulUserData initialUserData={initialUserData ?? generateUserData({})}>
+        <WithStatefulBusiness initialBusiness={initialBusiness}>
           <TaxTask task={task} />
-        </WithStatefulUserData>
+        </WithStatefulBusiness>
       );
     };
 
     it("shows disclaimer for trade name legal structure", () => {
-      const userData = generateUserData({
+      const initialBusiness = generateBusiness({
         profileData: generateProfileData({
           legalStructureId: randomTradeNameLegalStructure(),
         }),
       });
-      renderComponent(userData);
+      renderComponent(initialBusiness);
 
       expect(screen.getByTestId("tax-disclaimer")).toHaveTextContent(
         markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
@@ -267,12 +270,12 @@ describe("<TaxTask />", () => {
     });
 
     it("does not show disclaimer for public filing legal structure", () => {
-      const userData = generateUserData({
+      const initialBusiness = generateBusiness({
         profileData: generateProfileData({
           legalStructureId: randomPublicFilingLegalStructure(),
         }),
       });
-      renderComponent(userData);
+      renderComponent(initialBusiness);
 
       expect(screen.queryByTestId("tax-disclaimer")).not.toBeInTheDocument();
     });

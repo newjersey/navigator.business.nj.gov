@@ -159,6 +159,10 @@ module.exports = {
       to: { path: "uuid" },
     },
     {
+      from: { path: "src/db/migrations" },
+      to: { path: "uuid" },
+    },
+    {
       from: {},
       to: { path: "test" },
     },

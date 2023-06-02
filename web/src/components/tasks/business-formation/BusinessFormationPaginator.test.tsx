@@ -24,7 +24,7 @@ import {
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { mockPush } from "@/test/mock/mockRouter";
 import {
-  currentUserData,
+  currentBusiness,
   userDataUpdatedNTimes,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
@@ -37,16 +37,17 @@ import {
   generateFormationForeignAddress,
   generateFormationUSAddress,
   generateProfileData,
-  generateUserData,
   getCurrentDate,
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
 import {
+  generateBusiness,
   generateFormationFormData,
   generateFormationSubmitResponse,
   generateMunicipality,
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 
@@ -105,7 +106,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 describe("<BusinessFormationPaginator />", () => {
-  let initialUserData: UserData;
+  let business: Business;
   let displayContent: TasksDisplayContent;
 
   beforeEach(() => {
@@ -118,12 +119,12 @@ describe("<BusinessFormationPaginator />", () => {
     displayContent = {
       formationDbaContent: generateFormationDbaContent({}),
     };
-    initialUserData = generateUserData({ profileData, formationData });
+    business = generateBusiness({ profileData, formationData });
   });
 
   describe("search business name only", () => {
     it("does not show buttons or stepper", () => {
-      preparePage(initialUserData, displayContent, undefined, undefined, undefined, undefined, true);
+      preparePage({ business, displayContent, searchOnly: true });
       expect(screen.queryByText(Config.formation.general.initialNextButtonText)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.formation.general.nextButtonText)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.formation.general.previousButtonText)).not.toBeInTheDocument();
@@ -131,15 +132,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("searches business name", async () => {
-      const page = preparePage(
-        initialUserData,
-        displayContent,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        true
-      );
+      const page = preparePage({ business, displayContent, searchOnly: true });
       page.fillText("Search business name", "Pizza Joint");
       await page.searchBusinessName({ status: "AVAILABLE" });
       expect(screen.getByTestId("available-text")).toBeInTheDocument();
@@ -148,7 +141,7 @@ describe("<BusinessFormationPaginator />", () => {
 
   describe("button text", () => {
     it("shows unique text on button on first step", () => {
-      preparePage(initialUserData, displayContent);
+      preparePage({ business, displayContent });
       expect(screen.getByText(Config.formation.general.initialNextButtonText)).toBeInTheDocument();
       expect(screen.queryByText(Config.formation.general.nextButtonText)).not.toBeInTheDocument();
 
@@ -158,21 +151,21 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("does not show previous button on first step", () => {
-      preparePage(initialUserData, displayContent);
+      preparePage({ business, displayContent });
       expect(screen.queryByText(Config.formation.general.previousButtonText)).not.toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.formation.general.initialNextButtonText));
       expect(screen.getByText(Config.formation.general.previousButtonText)).toBeInTheDocument();
     });
 
     it("shows unique text on last step button", () => {
-      const page = preparePage(initialUserData, displayContent);
+      const page = preparePage({ business, displayContent });
       page.stepperClickToReviewStep();
       expect(screen.getByText(Config.formation.general.submitButtonText)).toBeInTheDocument();
       expect(screen.queryByText(Config.formation.general.nextButtonText)).not.toBeInTheDocument();
     });
 
     it("shows the help button on every formation page", async () => {
-      const page = preparePage(initialUserData, displayContent);
+      const page = preparePage({ business, displayContent });
       await page.stepperClickToContactsStep();
       expect(screen.getByTestId("help-button")).toBeInTheDocument();
       await page.stepperClickToBusinessStep();
@@ -197,7 +190,7 @@ describe("<BusinessFormationPaginator />", () => {
     const renderAsGuest = (): void => {
       render(
         withAuthAlert(
-          <WithStatefulUserData initialUserData={initialUserData}>
+          <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
             <MunicipalitiesContext.Provider value={{ municipalities: [] }}>
               <BusinessFormation task={generateTask({})} displayContent={displayContent} />
             </MunicipalitiesContext.Provider>
@@ -230,14 +223,14 @@ describe("<BusinessFormationPaginator />", () => {
 
   describe("when switching steps and user has not yet submitted", () => {
     it("displays dependency alert on first step only", async () => {
-      const page = preparePage(initialUserData, displayContent);
+      const page = preparePage({ business, displayContent });
       expect(screen.getByTestId("dependency-alert")).toBeInTheDocument();
       await page.stepperClickToBusinessStep();
       expect(screen.queryByTestId("dependency-alert")).not.toBeInTheDocument();
     });
 
     it("switches steps when clicking the stepper", async () => {
-      const page = preparePage(initialUserData, displayContent);
+      const page = preparePage({ business, displayContent });
       await page.stepperClickToContactsStep();
       await page.stepperClickToBusinessStep();
       await page.stepperClickToReviewStep();
@@ -247,7 +240,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("switches steps when clicking the next and previous buttons", async () => {
-      const page = preparePage(initialUserData, displayContent);
+      const page = preparePage({ business, displayContent });
       await page.submitBusinessNameStep();
       await page.submitBusinessStep();
       await page.submitContactsStep();
@@ -259,7 +252,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("switches from error-active to error, persisting the error state on step one even after switching steps", async () => {
-      const page = preparePage(initialUserData, displayContent);
+      const page = preparePage({ business, displayContent });
       page.fillText("Search business name", "Pizza Joint");
       await page.searchBusinessName({ status: "UNAVAILABLE" });
       expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR-ACTIVE");
@@ -268,7 +261,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("maintains the unavailable business name search error, even after switching steps and returning", async () => {
-      const page = preparePage(initialUserData, displayContent);
+      const page = preparePage({ business, displayContent });
       page.fillText("Search business name", "Pizza Joint");
       await page.searchBusinessName({ status: "UNAVAILABLE" });
       expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR-ACTIVE");
@@ -280,7 +273,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("maintains the confirm business name error, even after switching steps and returning", async () => {
-      const page = preparePage(initialUserData, displayContent);
+      const page = preparePage({ business, displayContent });
       await page.fillAndBlurBusinessName("Pizza Joint");
       expect(
         screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch)
@@ -294,7 +287,7 @@ describe("<BusinessFormationPaginator />", () => {
 
     const switchingStepTests = (switchStepFunction: () => void): void => {
       it("filters out empty provisions", async () => {
-        const page = preparePage(initialUserData, displayContent);
+        const page = preparePage({ business, displayContent });
         await page.stepperClickToBusinessStep();
 
         fireEvent.click(screen.getByText(Config.formation.fields.provisions.addButtonText));
@@ -302,18 +295,18 @@ describe("<BusinessFormationPaginator />", () => {
         fireEvent.click(screen.getByText(Config.formation.fields.provisions.addAnotherButtonText));
         page.fillText("Provisions 2", "provision2");
         switchStepFunction();
-        expect(currentUserData().formationData.formationFormData.provisions).toEqual(["provision2"]);
+        expect(currentBusiness().formationData.formationFormData.provisions).toEqual(["provision2"]);
         await page.stepperClickToBusinessStep();
         expect(screen.getByLabelText("remove provision")).toBeInTheDocument();
       });
 
       describe("business name step", () => {
         it("saves name to formation data", async () => {
-          const page = preparePage(initialUserData, displayContent);
+          const page = preparePage({ business, displayContent });
           await page.stepperClickToBusinessNameStep();
           page.fillText("Search business name", "Pizza Joint");
           switchStepFunction();
-          expect(currentUserData().formationData.formationFormData.businessName).toEqual("Pizza Joint");
+          expect(currentBusiness().formationData.formationFormData.businessName).toEqual("Pizza Joint");
 
           await page.stepperClickToBusinessNameStep();
           expect((screen.getByLabelText("Search business name") as HTMLInputElement).value).toEqual(
@@ -322,7 +315,7 @@ describe("<BusinessFormationPaginator />", () => {
         });
 
         it("saves availability state when switching back to step", async () => {
-          const page = preparePage(initialUserData, displayContent);
+          const page = preparePage({ business, displayContent });
           await page.stepperClickToBusinessNameStep();
           page.fillText("Search business name", "Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
@@ -334,49 +327,47 @@ describe("<BusinessFormationPaginator />", () => {
         });
 
         it("saves name to profile when available", async () => {
-          const page = preparePage(initialUserData, displayContent);
+          const page = preparePage({ business, displayContent });
           await page.stepperClickToBusinessNameStep();
           page.fillText("Search business name", "Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
           switchStepFunction();
-          expect(currentUserData().profileData.businessName).toEqual("Pizza Joint");
+          expect(currentBusiness().profileData.businessName).toEqual("Pizza Joint");
         });
 
         it("does not save name to profile when unavailable", async () => {
-          const page = preparePage(initialUserData, displayContent);
+          const page = preparePage({ business, displayContent });
           await page.stepperClickToBusinessNameStep();
           page.fillText("Search business name", "Pizza Joint");
           await page.searchBusinessName({ status: "UNAVAILABLE" });
           switchStepFunction();
-          expect(currentUserData().profileData.businessName).toEqual(
-            initialUserData.profileData.businessName
-          );
+          expect(currentBusiness().profileData.businessName).toEqual(business.profileData.businessName);
         });
 
         it("does not save name to profile when error", async () => {
-          const page = preparePage(initialUserData, displayContent);
+          const page = preparePage({ business, displayContent });
           await page.stepperClickToBusinessNameStep();
           page.fillText("Search business name", "Pizza Joint LLC");
           await page.searchBusinessName({ status: "DESIGNATOR_ERROR" });
           switchStepFunction();
-          expect(currentUserData().profileData.businessName).toEqual(
-            initialUserData.profileData.businessName
-          );
+          expect(currentBusiness().profileData.businessName).toEqual(business.profileData.businessName);
         });
       });
 
       describe("business step", () => {
         it("saves municipality to profile", async () => {
-          const userDataWithMunicipality = {
-            ...initialUserData,
+          const businessWithMunicipality = {
+            ...business,
             profileData: {
-              ...initialUserData.profileData,
+              ...business.profileData,
               municipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
             },
           };
-          const page = preparePage(userDataWithMunicipality, displayContent, [
-            generateMunicipality({ displayName: "New Town", name: "New Town" }),
-          ]);
+          const page = preparePage({
+            business: businessWithMunicipality,
+            displayContent,
+            municipalities: [generateMunicipality({ displayName: "New Town", name: "New Town" })],
+          });
           await page.stepperClickToBusinessStep();
 
           expect((screen.getByLabelText("Address municipality") as HTMLInputElement).value).toEqual("Newark");
@@ -386,9 +377,9 @@ describe("<BusinessFormationPaginator />", () => {
           );
           switchStepFunction();
           await waitFor(() => {
-            expect(currentUserData().profileData.municipality?.displayName).toEqual("New Town");
+            expect(currentBusiness().profileData.municipality?.displayName).toEqual("New Town");
           });
-          expect(currentUserData().formationData.formationFormData.addressMunicipality?.displayName).toEqual(
+          expect(currentBusiness().formationData.formationFormData.addressMunicipality?.displayName).toEqual(
             "New Town"
           );
         });
@@ -396,22 +387,26 @@ describe("<BusinessFormationPaginator />", () => {
         it("send analytics when municipality entered for first time", async () => {
           const newTownMuncipality = generateMunicipality({ displayName: "New Town" });
 
-          const userDataWithMunicipality = {
-            ...initialUserData,
+          const businessWithMunicipality = {
+            ...business,
             profileData: {
-              ...initialUserData.profileData,
+              ...business.profileData,
               municipality: undefined,
             },
           };
 
-          const page = preparePage(userDataWithMunicipality, displayContent, [newTownMuncipality]);
+          const page = preparePage({
+            business: businessWithMunicipality,
+            displayContent,
+            municipalities: [newTownMuncipality],
+          });
           await page.stepperClickToBusinessStep();
           fireEvent.click(screen.getByText(Config.formation.sections.addressAddButtonText));
           page.selectByText("Address municipality", "New Town");
 
           switchStepFunction();
           await waitFor(() => {
-            expect(currentUserData().profileData.municipality?.displayName).toEqual("New Town");
+            expect(currentBusiness().profileData.municipality?.displayName).toEqual("New Town");
           });
 
           expect(
@@ -420,23 +415,25 @@ describe("<BusinessFormationPaginator />", () => {
         });
 
         it("does not send analytics when municipality was already entered", async () => {
-          const userDataWithMunicipality = {
-            ...initialUserData,
+          const businessWithMunicipality = {
+            ...business,
             profileData: {
-              ...initialUserData.profileData,
+              ...business.profileData,
               municipality: generateMunicipality({ displayName: "Newark" }),
             },
           };
 
-          const page = preparePage(userDataWithMunicipality, displayContent, [
-            generateMunicipality({ displayName: "New Town" }),
-          ]);
+          const page = preparePage({
+            business: businessWithMunicipality,
+            displayContent,
+            municipalities: [generateMunicipality({ displayName: "New Town" })],
+          });
           await page.stepperClickToBusinessStep();
           page.selectByText("Address municipality", "New Town");
 
           switchStepFunction();
           await waitFor(() => {
-            expect(currentUserData().profileData.municipality?.displayName).toEqual("New Town");
+            expect(currentBusiness().profileData.municipality?.displayName).toEqual("New Town");
           });
 
           expect(
@@ -446,14 +443,14 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("marks a step incomplete in the stepper when moving from it if required fields are missing", async () => {
-        const page = preparePage(initialUserData, displayContent);
+        const page = preparePage({ business, displayContent });
         await page.stepperClickToBillingStep();
         switchStepFunction();
         expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("INCOMPLETE");
       });
 
       it("marks a step as complete in the stepper if all required fields completed", async () => {
-        const page = preparePage(initialUserData, displayContent);
+        const page = preparePage({ business, displayContent });
         await page.stepperClickToBillingStep();
         page.completeRequiredBillingFields();
 
@@ -464,7 +461,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("marks step one as complete if business name is available", async () => {
-        const page = preparePage(initialUserData, displayContent);
+        const page = preparePage({ business, displayContent });
         page.fillText("Search business name", "Pizza Joint");
         await page.searchBusinessName({ status: "AVAILABLE" });
         switchStepFunction();
@@ -472,7 +469,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("marks step one as error if business name is unavailable", async () => {
-        const page = preparePage(initialUserData, displayContent);
+        const page = preparePage({ business, displayContent });
         page.fillText("Search business name", "Pizza Joint");
         await page.searchBusinessName({ status: "UNAVAILABLE" });
         switchStepFunction();
@@ -480,7 +477,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("marks step one as error if business name search is error", async () => {
-        const page = preparePage(initialUserData, displayContent);
+        const page = preparePage({ business, displayContent });
         page.fillText("Search business name", "Pizza Joint LLC");
         await page.searchBusinessName({ status: "DESIGNATOR_ERROR" });
         switchStepFunction();
@@ -488,7 +485,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("shows existing inline errors when visiting an INCOMPLETE step with inline errors", async () => {
-        const page = preparePage(initialUserData, displayContent);
+        const page = preparePage({ business, displayContent });
         await page.stepperClickToBusinessStep();
         page.fillText("Address zip code", "22222");
         expect(screen.getByText(Config.formation.fields.addressZipCode.error)).toBeInTheDocument();
@@ -518,7 +515,7 @@ describe("<BusinessFormationPaginator />", () => {
   describe("user attempting to submit", () => {
     describe("with validation errors", () => {
       it("shows error states in stepper for incomplete steps", async () => {
-        const page = preparePage(initialUserData, displayContent);
+        const page = preparePage({ business, displayContent });
         await page.stepperClickToBillingStep();
         page.completeRequiredBillingFields();
         await page.stepperClickToReviewStep();
@@ -536,7 +533,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("shows error field states for each step with error", async () => {
-        const page = preparePage(initialUserData, displayContent);
+        const page = preparePage({ business, displayContent });
         await page.stepperClickToBillingStep();
         page.completeRequiredBillingFields();
         await page.stepperClickToReviewStep();
@@ -553,7 +550,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("updates stepper to show error state if user changes a COMPLETE step", async () => {
-        const page = preparePage(initialUserData, displayContent);
+        const page = preparePage({ business, displayContent });
         await page.stepperClickToBillingStep();
         page.completeRequiredBillingFields();
         await page.stepperClickToReviewStep();
@@ -569,7 +566,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("updates stepper to show COMPLETE if user changes an ERROR step", async () => {
-        const page = preparePage(initialUserData, displayContent);
+        const page = preparePage({ business, displayContent });
         await page.stepperClickToReviewStep();
         await page.clickSubmit();
 
@@ -583,13 +580,13 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     describe("no validation errors", () => {
-      let filledInUserData: UserData;
+      let filledInBusiness: Business;
 
       beforeEach(() => {
-        filledInUserData = {
-          ...initialUserData,
+        filledInBusiness = {
+          ...business,
           formationData: {
-            ...initialUserData.formationData,
+            ...business.formationData,
             formationFormData: generateFormationFormData(
               {},
               { legalStructureId: "limited-liability-company" }
@@ -606,7 +603,7 @@ describe("<BusinessFormationPaginator />", () => {
           })
         );
 
-        const page = preparePage(filledInUserData, displayContent);
+        const page = preparePage({ business: filledInBusiness, displayContent });
         await page.fillAndSubmitBusinessNameStep();
         await page.stepperClickToReviewStep();
         await page.clickSubmit();
@@ -641,53 +638,53 @@ describe("<BusinessFormationPaginator />", () => {
           it("shows error alert and error state on step associated with businessName API error", async () => {
             const { formationFormData, formationResponse, formationStepName } = businessName;
 
-            filledInUserData = {
-              ...initialUserData,
+            filledInBusiness = {
+              ...business,
               formationData: {
-                ...initialUserData.formationData,
+                ...business.formationData,
                 formationFormData: formationFormData,
               },
             };
 
-            const filledInUserDataWithApiResponse = {
-              ...filledInUserData,
+            const filledInBusinessWithApiResponse = {
+              ...business,
               formationData: {
-                ...filledInUserData.formationData,
+                ...business.formationData,
                 formationResponse,
               },
             };
 
-            const page = preparePage(filledInUserData, displayContent);
+            const page = preparePage({ business: filledInBusiness, displayContent });
             await page.fillAndSubmitBusinessNameStep();
             expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual("COMPLETE");
 
             await page.stepperClickToReviewStep();
-            await page.clickSubmitAndGetError(filledInUserDataWithApiResponse);
+            await page.clickSubmitAndGetError(filledInBusinessWithApiResponse);
             expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual("ERROR");
             expect(screen.getByText(Config.formation.errorBanner.incompleteStepsError)).toBeInTheDocument();
           });
 
           it("shows API error message on step for businessName API error", async () => {
             const { formationFormData, formationResponse, fieldName } = businessName;
-            filledInUserData = {
-              ...initialUserData,
+            filledInBusiness = {
+              ...business,
               formationData: {
-                ...initialUserData.formationData,
+                ...business.formationData,
                 formationFormData,
               },
             };
 
-            const filledInUserDataWithApiResponse = {
-              ...filledInUserData,
+            const filledInBusinessWithApiResponse = {
+              ...filledInBusiness,
               formationData: {
-                ...filledInUserData.formationData,
+                ...filledInBusiness.formationData,
                 formationResponse,
               },
             };
-            const page = preparePage(filledInUserData, displayContent);
+            const page = preparePage({ business: filledInBusiness, displayContent });
             await page.fillAndSubmitBusinessNameStep();
             await page.stepperClickToReviewStep();
-            await page.clickSubmitAndGetError(filledInUserDataWithApiResponse);
+            await page.clickSubmitAndGetError(filledInBusinessWithApiResponse);
             await page.stepperClickToBusinessNameStep();
 
             expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.errorBanner.errorOnStep);
@@ -701,24 +698,24 @@ describe("<BusinessFormationPaginator />", () => {
           it("removes businessName API error on blur when user changes text field", async () => {
             const { formationFormData, formationResponse, formationStepName, fieldLabel, newTextInput } =
               businessName;
-            filledInUserData = {
-              ...initialUserData,
+            filledInBusiness = {
+              ...business,
               formationData: {
-                ...initialUserData.formationData,
+                ...business.formationData,
                 formationFormData,
               },
             };
-            const filledInUserDataWithApiResponse = {
-              ...filledInUserData,
+            const filledInBusinessWithApiResponse = {
+              ...filledInBusiness,
               formationData: {
-                ...filledInUserData.formationData,
+                ...filledInBusiness.formationData,
                 formationResponse,
               },
             };
-            const page = preparePage(filledInUserData, displayContent);
+            const page = preparePage({ business: filledInBusiness, displayContent });
             await page.fillAndSubmitBusinessNameStep();
             await page.stepperClickToReviewStep();
-            await page.clickSubmitAndGetError(filledInUserDataWithApiResponse);
+            await page.clickSubmitAndGetError(filledInBusinessWithApiResponse);
             await page.stepperClickToBusinessNameStep();
 
             expect(screen.getByRole("alert")).toBeInTheDocument();
@@ -1315,16 +1312,16 @@ describe("<BusinessFormationPaginator />", () => {
             async (testTitle, data) => {
               const { formationFormData, formationResponse, formationStepName, profileData } = data;
 
-              filledInUserData = {
-                ...initialUserData,
-                profileData: profileData ? { ...profileData } : { ...initialUserData.profileData },
+              filledInBusiness = {
+                ...business,
+                profileData: profileData ? { ...profileData } : { ...business.profileData },
                 formationData: {
-                  ...initialUserData.formationData,
+                  ...business.formationData,
                   formationFormData: formationFormData,
                   formationResponse: formationResponse,
                 },
               };
-              const page = preparePage(filledInUserData, displayContent);
+              const page = preparePage({ business: filledInBusiness, displayContent });
               await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
@@ -1359,16 +1356,16 @@ describe("<BusinessFormationPaginator />", () => {
             paymentType,
           ])("shows API error message on step for %o API error", async (testTitle, data) => {
             const { formationFormData, formationResponse, formationStepName, fieldName, profileData } = data;
-            filledInUserData = {
-              ...initialUserData,
-              profileData: profileData ? { ...profileData } : { ...initialUserData.profileData },
+            filledInBusiness = {
+              ...business,
+              profileData: profileData ? { ...profileData } : { ...business.profileData },
               formationData: {
-                ...initialUserData.formationData,
+                ...business.formationData,
                 formationFormData,
                 formationResponse,
               },
             };
-            const page = preparePage(filledInUserData, displayContent);
+            const page = preparePage({ business: filledInBusiness, displayContent });
             await page.fillAndSubmitBusinessNameStep();
             await page.stepperClickToReviewStep();
             await page.clickSubmit();
@@ -1411,16 +1408,16 @@ describe("<BusinessFormationPaginator />", () => {
               newTextInput,
               profileData,
             } = data;
-            filledInUserData = {
-              ...initialUserData,
-              profileData: profileData ? { ...profileData } : { ...initialUserData.profileData },
+            filledInBusiness = {
+              ...business,
+              profileData: profileData ? { ...profileData } : { ...business.profileData },
               formationData: {
-                ...initialUserData.formationData,
+                ...business.formationData,
                 formationFormData,
                 formationResponse,
               },
             };
-            const page = preparePage(filledInUserData, displayContent);
+            const page = preparePage({ business: filledInBusiness, displayContent });
             await page.fillAndSubmitBusinessNameStep();
             await page.stepperClickToReviewStep();
             await page.clickSubmit();
@@ -1441,16 +1438,16 @@ describe("<BusinessFormationPaginator />", () => {
             async (testTitle, data) => {
               const { formationFormData, formationResponse, formationStepName, radioBtnTestId, profileData } =
                 data;
-              filledInUserData = {
-                ...initialUserData,
-                profileData: profileData ? { ...profileData } : { ...initialUserData.profileData },
+              filledInBusiness = {
+                ...business,
+                profileData: profileData ? { ...profileData } : { ...business.profileData },
                 formationData: {
-                  ...initialUserData.formationData,
+                  ...business.formationData,
                   formationFormData,
                   formationResponse,
                 },
               };
-              const page = preparePage(filledInUserData, displayContent);
+              const page = preparePage({ business: filledInBusiness, displayContent });
               await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
@@ -1477,15 +1474,15 @@ describe("<BusinessFormationPaginator />", () => {
                 dropDownLabel,
                 dropDownValue,
               } = data;
-              filledInUserData = {
-                ...initialUserData,
+              filledInBusiness = {
+                ...business,
                 formationData: {
-                  ...initialUserData.formationData,
+                  ...business.formationData,
                   formationFormData,
                   formationResponse,
                 },
               };
-              const page = preparePage(filledInUserData, displayContent);
+              const page = preparePage({ business: filledInBusiness, displayContent });
               await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
@@ -1513,15 +1510,15 @@ describe("<BusinessFormationPaginator />", () => {
                 newDate,
                 datePickerFieldType,
               } = data as MockApiErrorTestData;
-              filledInUserData = {
-                ...initialUserData,
+              filledInBusiness = {
+                ...business,
                 formationData: {
-                  ...initialUserData.formationData,
+                  ...business.formationData,
                   formationFormData,
                   formationResponse,
                 },
               };
-              const page = preparePage(filledInUserData, displayContent);
+              const page = preparePage({ business: filledInBusiness, displayContent });
               await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
@@ -1909,16 +1906,16 @@ describe("<BusinessFormationPaginator />", () => {
             async (testTitle, data) => {
               const { formationFormData, formationResponse, formationStepName } = data;
 
-              filledInUserData = {
-                ...initialUserData,
-                profileData: { ...initialUserData.profileData, businessPersona: "FOREIGN" },
+              filledInBusiness = {
+                ...business,
+                profileData: { ...business.profileData, businessPersona: "FOREIGN" },
                 formationData: {
-                  ...initialUserData.formationData,
+                  ...business.formationData,
                   formationFormData: formationFormData,
                   formationResponse: formationResponse,
                 },
               };
-              const page = preparePage(filledInUserData, displayContent);
+              const page = preparePage({ business: filledInBusiness, displayContent });
               await page.fillAndSubmitNexusBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
@@ -1943,16 +1940,16 @@ describe("<BusinessFormationPaginator />", () => {
             foreignDateOfFormation,
           ])("shows API error message on step for %o API error", async (testTitle, data) => {
             const { formationFormData, formationResponse, formationStepName, fieldName } = data;
-            filledInUserData = {
-              ...initialUserData,
-              profileData: { ...initialUserData.profileData, businessPersona: "FOREIGN" },
+            filledInBusiness = {
+              ...business,
+              profileData: { ...business.profileData, businessPersona: "FOREIGN" },
               formationData: {
-                ...initialUserData.formationData,
+                ...business.formationData,
                 formationFormData,
                 formationResponse,
               },
             };
-            const page = preparePage(filledInUserData, displayContent);
+            const page = preparePage({ business: filledInBusiness, displayContent });
             await page.fillAndSubmitNexusBusinessNameStep();
             await page.stepperClickToReviewStep();
             await page.clickSubmit();
@@ -1984,16 +1981,16 @@ describe("<BusinessFormationPaginator />", () => {
           ])("removes %o API error on blur when user changes text field", async (testTitle, data) => {
             const { formationFormData, formationResponse, formationStepName, fieldLabel, newTextInput } =
               data;
-            filledInUserData = {
-              ...initialUserData,
-              profileData: { ...initialUserData.profileData, businessPersona: "FOREIGN" },
+            filledInBusiness = {
+              ...filledInBusiness,
+              profileData: { ...filledInBusiness.profileData, businessPersona: "FOREIGN" },
               formationData: {
-                ...initialUserData.formationData,
+                ...filledInBusiness.formationData,
                 formationFormData,
                 formationResponse,
               },
             };
-            const page = preparePage(filledInUserData, displayContent);
+            const page = preparePage({ business: filledInBusiness, displayContent });
             await page.fillAndSubmitNexusBusinessNameStep();
             await page.stepperClickToReviewStep();
             await page.clickSubmit();
@@ -2014,10 +2011,10 @@ describe("<BusinessFormationPaginator />", () => {
 
       describe("on unknown API error (generic)", () => {
         beforeEach(() => {
-          filledInUserData = {
-            ...initialUserData,
+          filledInBusiness = {
+            ...business,
             formationData: {
-              ...initialUserData.formationData,
+              ...business.formationData,
               formationFormData: generateFormationFormData(
                 {},
                 { legalStructureId: "limited-liability-company" }
@@ -2042,7 +2039,7 @@ describe("<BusinessFormationPaginator />", () => {
         });
 
         it("displays generic messages on API error on all steps", async () => {
-          const page = preparePage(filledInUserData, displayContent);
+          const page = preparePage({ business: filledInBusiness, displayContent });
           await page.stepperClickToReviewStep();
 
           expect(screen.getByText("some field 1")).toBeInTheDocument();
@@ -2059,7 +2056,7 @@ describe("<BusinessFormationPaginator />", () => {
         });
 
         it("still shows all steps as complete", async () => {
-          const page = preparePage(filledInUserData, displayContent);
+          const page = preparePage({ business: filledInBusiness, displayContent });
           await page.fillAndSubmitBusinessNameStep();
           await page.stepperClickToReviewStep();
 
@@ -2083,27 +2080,27 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("autosaves every second if a field has changed", async () => {
-      const page = preparePage(initialUserData, displayContent);
+      const page = preparePage({ business, displayContent });
       act(() => {
         jest.advanceTimersByTime(1000);
       });
       page.fillText("Search business name", "Pizza Joint");
       await waitFor(() =>
-        expect(currentUserData().formationData.formationFormData.businessName).toEqual("Pizza Joint")
+        expect(currentBusiness().formationData.formationFormData.businessName).toEqual("Pizza Joint")
       );
     });
 
     it("autosaves every second if business name availability has changed", async () => {
-      const userDataWithName = {
-        ...initialUserData,
-        profileData: { ...initialUserData.profileData, businessName: "old-name" },
+      const businessWithName = {
+        ...business,
+        profileData: { ...business.profileData, businessName: "old-name" },
         formationData: {
-          ...initialUserData.formationData,
+          ...business.formationData,
           businessNameAvailability: undefined,
           dbaBusinessNameAvailability: undefined,
         },
       };
-      const page = preparePage(userDataWithName, displayContent);
+      const page = preparePage({ business: businessWithName, displayContent });
       act(() => {
         jest.advanceTimersByTime(1000);
       });
@@ -2114,12 +2111,12 @@ describe("<BusinessFormationPaginator />", () => {
       await page.searchBusinessName({ status: "UNAVAILABLE" });
       expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
       await waitFor(() => {
-        expect(currentUserData().formationData.businessNameAvailability?.status).toEqual("UNAVAILABLE");
+        expect(currentBusiness().formationData.businessNameAvailability?.status).toEqual("UNAVAILABLE");
       });
     });
 
     it("does not autosave if fields have not changed", () => {
-      preparePage(initialUserData, displayContent);
+      preparePage({ business, displayContent });
       expect(userDataUpdatedNTimes()).toEqual(1);
       act(() => {
         jest.advanceTimersByTime(1000);
@@ -2128,7 +2125,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("does not filter user data when autosaving, only when switching steps", async () => {
-      const page = preparePage(initialUserData, displayContent);
+      const page = preparePage({ business, displayContent });
       await page.stepperClickToBusinessStep();
 
       act(() => {
@@ -2137,14 +2134,14 @@ describe("<BusinessFormationPaginator />", () => {
 
       fireEvent.click(screen.getByText(Config.formation.fields.provisions.addButtonText));
 
-      await waitFor(() => expect(currentUserData().formationData.formationFormData.provisions).toEqual([""]));
+      await waitFor(() => expect(currentBusiness().formationData.formationFormData.provisions).toEqual([""]));
       await page.stepperClickToContactsStep();
       await page.stepperClickToBusinessStep();
-      expect(currentUserData().formationData.formationFormData.provisions).toEqual([]);
+      expect(currentBusiness().formationData.formationFormData.provisions).toEqual([]);
     });
 
     it("does not autosave if a field has changed but less than 1 second has passed", () => {
-      const page = preparePage(initialUserData, displayContent);
+      const page = preparePage({ business, displayContent });
       expect(userDataUpdatedNTimes()).toEqual(1);
       makeChangeToForm(page);
       act(() => {
@@ -2154,7 +2151,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("displays the saving spinner every 1 min, for 2.5 seconds at a time", async () => {
-      const page = preparePage(initialUserData, displayContent);
+      const page = preparePage({ business, displayContent });
       expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.autosaveDefaults.savedText)).not.toBeInTheDocument();
 
@@ -2163,7 +2160,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
       makeChangeToForm(page);
       await waitFor(() =>
-        expect(currentUserData().formationData.formationFormData.businessName).toEqual("Pizza Joint")
+        expect(currentBusiness().formationData.formationFormData.businessName).toEqual("Pizza Joint")
       );
 
       expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();
@@ -2186,7 +2183,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("does not display the saving spinner if no saves occurred in that 1 min", async () => {
-      const page = preparePage(initialUserData, displayContent);
+      const page = preparePage({ business, displayContent });
 
       act(() => {
         jest.advanceTimersByTime(1000);
@@ -2217,10 +2214,10 @@ describe("<BusinessFormationPaginator />", () => {
 
   describe("remembers formation step", () => {
     it("shows the Business Step with an initial user when lastVisitedPage has index 0 which is by default", async () => {
-      preparePage(initialUserData, displayContent);
+      preparePage({ business, displayContent });
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
       await waitFor(() => {
-        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(0);
+        expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(0);
       });
     });
 
@@ -2229,55 +2226,55 @@ describe("<BusinessFormationPaginator />", () => {
       const profileData = generateFormationProfileData({ legalStructureId });
       const formationData = generateFormationData({ lastVisitedPageIndex: 4 });
 
-      initialUserData = generateUserData({ profileData, formationData });
-      preparePage(initialUserData, displayContent);
+      business = generateBusiness({ profileData, formationData });
+      preparePage({ business, displayContent });
       expect(screen.getByTestId("review-step")).toBeInTheDocument();
     });
 
     it("lastVistedPage updates on step change via stepper", async () => {
-      const page = preparePage(initialUserData, displayContent);
+      const page = preparePage({ business, displayContent });
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
 
       await page.stepperClickToBillingStep();
       await waitFor(() => {
-        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(3);
+        expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(3);
       });
 
       await page.stepperClickToBusinessStep();
       await waitFor(() => {
-        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(1);
+        expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(1);
       });
     });
 
     it("lastVisitedPage updates on step change via the previous and next button steps", async () => {
-      preparePage(initialUserData, displayContent);
+      preparePage({ business, displayContent });
 
       await waitFor(() => {
-        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(0);
+        expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(0);
       });
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("next-button"));
       await waitFor(() => {
-        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(1);
+        expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(1);
       });
       expect(screen.getByTestId("business-step")).toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("next-button"));
       await waitFor(() => {
-        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(2);
+        expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(2);
       });
       expect(screen.getByTestId("contacts-step")).toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("previous-button"));
       await waitFor(() => {
-        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(1);
+        expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(1);
       });
       expect(screen.getByTestId("business-step")).toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("previous-button"));
       await waitFor(() => {
-        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(0);
+        expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(0);
       });
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
     });
@@ -2288,8 +2285,8 @@ describe("<BusinessFormationPaginator />", () => {
         lastVisitedPageIndex: BusinessFormationStepsConfiguration.length,
       });
 
-      initialUserData = generateUserData({ profileData, formationData });
-      preparePage(initialUserData, displayContent);
+      business = generateBusiness({ profileData, formationData });
+      preparePage({ business, displayContent });
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
     });
 
@@ -2297,8 +2294,8 @@ describe("<BusinessFormationPaginator />", () => {
       const profileData = generateFormationProfileData({});
       const formationData = generateFormationData({ lastVisitedPageIndex: -1 });
 
-      initialUserData = generateUserData({ profileData, formationData });
-      preparePage(initialUserData, displayContent);
+      business = generateBusiness({ profileData, formationData });
+      preparePage({ business, displayContent });
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
     });
   });

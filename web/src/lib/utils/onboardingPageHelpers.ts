@@ -2,7 +2,7 @@ import { OnboardingFlow } from "@/components/onboarding/OnboardingFlows";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { QUERY_PARAMS_VALUES } from "../domain-logic/routes";
 import { FlowType, Page } from "../types/types";
 import { getFlow, templateEval } from "./helpers";
@@ -23,11 +23,11 @@ export const flowQueryParamIsValid = (flow: string): boolean => {
 
 export const pageQueryParamisValid = (
   onboardingFlows: Record<FlowType, OnboardingFlow>,
-  userData: UserData,
+  business: Business,
   page: number
 ): boolean => {
-  const hasAnsweredBusinessPersona = userData?.profileData.businessPersona !== undefined;
-  const flow = getFlow(userData);
+  const hasAnsweredBusinessPersona = business?.profileData.businessPersona !== undefined;
+  const flow = getFlow(business.profileData);
   const requestedPageIsInRange = page <= onboardingFlows[flow].pages.length && page > 0;
 
   return hasAnsweredBusinessPersona && requestedPageIsInRange;

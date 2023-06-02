@@ -8,7 +8,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
 import { NaicsCodeObject, Task } from "@/lib/types/types";
 import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { LookupIndustryById, UserData } from "@businessnjgovnavigator/shared";
+import { Business, LookupIndustryById } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useMemo, useState } from "react";
 
@@ -16,7 +16,7 @@ interface Props {
   onSave: () => void;
   task: Task;
   isAuthenticated: IsAuthenticated;
-  CMS_ONLY_fakeUserData?: UserData; // for CMS only
+  CMS_ONLY_fakeBusiness?: Business; // for CMS only
   CMS_ONLY_displayInput?: boolean; // for CMS only
 }
 
@@ -35,7 +35,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   const [displayInputState, setDisplayInput] = useState<boolean>(false);
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
   const userDataFromHook = useUserData();
-  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
+  const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
   const displayInput = props.CMS_ONLY_displayInput ?? displayInputState;
   const updateQueue = userDataFromHook.updateQueue;
 
@@ -52,24 +52,22 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   };
 
   useMountEffectWhenDefined(() => {
-    if (!userData) {
-      return;
-    }
-    setNaicsCode(userData.profileData.naicsCode);
+    if (!business) return;
+    setNaicsCode(business.profileData.naicsCode);
     const industryNaicsCodes =
-      LookupIndustryById(userData.profileData.industryId)
+      LookupIndustryById(business.profileData.industryId)
         .naicsCodes?.replace(/\s/g, "")
         .split(",")
         .filter((value) => {
           return value.length > 0;
         }) ?? [];
     setIndustryCodes(industryNaicsCodes);
-    const hasExistingCode = userData.profileData.naicsCode.length > 0;
-    const existingCodeIsIndustryCode = industryNaicsCodes.includes(userData.profileData.naicsCode);
+    const hasExistingCode = business.profileData.naicsCode.length > 0;
+    const existingCodeIsIndustryCode = industryNaicsCodes.includes(business.profileData.naicsCode);
     if (industryNaicsCodes.length === 0 || (hasExistingCode && !existingCodeIsIndustryCode)) {
       setDisplayInput(true);
     }
-  }, userData);
+  }, business);
 
   const saveNaicsCode = async (): Promise<void> => {
     if (!updateQueue) {

@@ -22,7 +22,7 @@ export const OnboardingTaxId = (props: Props): ReactElement => {
   const fieldName = "taxId";
 
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
-  const { userData } = useUserData();
+  const { business } = useUserData();
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
@@ -51,10 +51,10 @@ export const OnboardingTaxId = (props: Props): ReactElement => {
   const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<TaxIdDisplayStatus>(taxIdInitialDisplay());
 
   useEffect(() => {
-    if (userData?.profileData.taxId?.includes(maskingCharacter)) {
+    if (business?.profileData.taxId?.includes(maskingCharacter)) {
       setTaxIdDisplayStatus("password-view");
     }
-  }, [userData?.profileData.taxId]);
+  }, [business?.profileData.taxId]);
 
   const getShowHideToggleButton = (toggleFunc?: (taxId: string) => void): ReactElement => {
     return ShowHideToggleButton({
@@ -110,10 +110,10 @@ export const OnboardingTaxId = (props: Props): ReactElement => {
   };
 
   const additionalValidationIsValid = (value: string): boolean => {
-    if (!userData) return true;
+    if (!business) return true;
     if (
       !(value.length === 0 || value.length === 12) &&
-      (userData.profileData.taxId !== value || props.required)
+      (business.profileData.taxId !== value || props.required)
     ) {
       return false;
     }

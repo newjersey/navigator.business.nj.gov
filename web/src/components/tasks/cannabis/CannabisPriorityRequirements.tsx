@@ -22,7 +22,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
   const [displayImpactZonePriorityType, setDisplayImpactZonePriorityType] = useState(false);
   const [displaySocialEquityPriorityType, setDisplaySocialEquityPriorityType] = useState(false);
   const [displayNoPriorityType, setDisplayNoPriorityType] = useState(false);
-  const { userData } = useUserData();
+  const { business } = useUserData();
   const { Config } = useConfig();
 
   useMountEffect(() => {
@@ -35,30 +35,28 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
   });
 
   useMountEffectWhenDefined(() => {
-    if (!userData) {
-      return;
-    }
+    if (!business) return;
     const minorityOrWomenPriorityTypeSelected = priorityTypesObj.minorityOrWomen.some((key) => {
-      return userData.taskItemChecklist[key] === true;
+      return business.taskItemChecklist[key];
     });
     const veteranPriorityTypeSelected = priorityTypesObj.veteran.some((key) => {
-      return userData.taskItemChecklist[key] === true;
+      return business.taskItemChecklist[key];
     });
 
     const impactZonePriorityTypeSelected = priorityTypesObj.impactZone.some((key) => {
-      return userData.taskItemChecklist[key] === true;
+      return business.taskItemChecklist[key];
     });
 
     const socialEquityPriorityTypeSelected = priorityTypesObj.socialEquity.some((key) => {
-      return userData.taskItemChecklist[key] === true;
+      return business.taskItemChecklist[key];
     });
 
     setDisplayMWPriorityType(minorityOrWomenPriorityTypeSelected);
     setDisplayVeteranPriorityType(veteranPriorityTypeSelected);
     setDisplayImpactZonePriorityType(impactZonePriorityTypeSelected);
     setDisplaySocialEquityPriorityType(socialEquityPriorityTypeSelected);
-    setDisplayNoPriorityType(!!userData.taskItemChecklist[noneOfTheAbovePriorityId]);
-  }, [userData]);
+    setDisplayNoPriorityType(!!business.taskItemChecklist[noneOfTheAbovePriorityId]);
+  }, [business]);
 
   const showTaskCompleteButton = (): boolean => {
     if (displayNoPriorityType) {

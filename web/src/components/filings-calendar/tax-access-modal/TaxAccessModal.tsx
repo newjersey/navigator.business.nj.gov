@@ -12,13 +12,13 @@ interface Props {
 
 export const TaxAccessModal = (props: Props): ReactElement => {
   const [isStepOne, setIsStepOne] = useState<boolean>(true);
-  const { userData } = useUserData();
+  const { business } = useUserData();
 
   useMountEffectWhenDefined((): void => {
-    if (userData?.profileData.legalStructureId) {
+    if (business?.profileData.legalStructureId) {
       setIsStepOne(false);
     }
-  }, userData);
+  }, business);
 
   if (isStepOne) {
     return <TaxAccessStepOne {...props} moveToNextStep={(): void => setIsStepOne(false)} />;

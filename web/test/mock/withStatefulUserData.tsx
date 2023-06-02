@@ -5,6 +5,7 @@ import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { StatefulDataContext, statefulDataHelpers, WithStatefulData } from "@/test/mock/withStatefulData";
 import { UserData } from "@businessnjgovnavigator/shared/";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, screen } from "@testing-library/react";
 import { ReactElement, ReactNode, useContext } from "react";
 
@@ -15,6 +16,10 @@ export const helpers = statefulDataHelpers(updateSpy);
 export const getLastCalledWithConfig = helpers.getLastCalledWithConfig;
 
 export const currentUserData = helpers.currentData as () => UserData;
+export const currentBusiness = (): Business => {
+  const userData = currentUserData();
+  return userData.businesses[userData.currentBusinessId];
+};
 
 export const userDataWasNotUpdated = helpers.dataWasNotUpdated;
 
@@ -50,8 +55,11 @@ export const setupStatefulUserDataContext = (): void => {
       return queue;
     };
 
+    const userData = genericData as UserData | undefined;
+
     return {
-      userData: genericData as UserData | undefined,
+      userData,
+      business: userData?.businesses[userData?.currentBusinessId],
       isLoading: false,
       error: undefined,
       updateQueue: updateQueue,

@@ -4,7 +4,7 @@ import { templateEval } from "@/lib/utils/helpers";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
@@ -15,8 +15,9 @@ import {
   runNonprofitOnboardingTests,
   runSelfRegPageTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
-import { generateProfileData, generateUserData, ProfileData } from "@businessnjgovnavigator/shared/";
+import { generateProfileData, ProfileData } from "@businessnjgovnavigator/shared/";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
+import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, screen, waitFor } from "@testing-library/react";
 
@@ -35,12 +36,12 @@ const { employeesInNJ, transactionsInNJ, revenueInNJ, employeeOrContractorInNJ, 
   Config.profileDefaults.fields.foreignBusinessTypeIds.default.optionContent;
 
 const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
-  return generateUserData({
-    profileData: generateProfileData({
-      ...overrides,
-    }),
-    onboardingFormProgress: "UNSTARTED",
-  });
+  return generateUserDataForBusiness(
+    generateBusiness({
+      profileData: generateProfileData(overrides),
+      onboardingFormProgress: "UNSTARTED",
+    })
+  );
 };
 
 describe("onboarding - foreign business", () => {
@@ -96,8 +97,8 @@ describe("onboarding - foreign business", () => {
       ).toBeInTheDocument();
 
       await page.visitStep(3);
-      expect(currentUserData().profileData.foreignBusinessType).toEqual("NEXUS");
-      expect(currentUserData().profileData.foreignBusinessTypeIds).toEqual(["employeeOrContractorInNJ"]);
+      expect(currentBusiness().profileData.foreignBusinessType).toEqual("NEXUS");
+      expect(currentBusiness().profileData.foreignBusinessTypeIds).toEqual(["employeeOrContractorInNJ"]);
     });
 
     it("sets user as Remote Workers (and displays alert) when employeesInNJ checkbox checked", async () => {
@@ -111,8 +112,8 @@ describe("onboarding - foreign business", () => {
       ).toBeInTheDocument();
 
       await page.visitStep(3);
-      expect(currentUserData().profileData.foreignBusinessType).toEqual("REMOTE_WORKER");
-      expect(currentUserData().profileData.foreignBusinessTypeIds).toEqual(["employeesInNJ"]);
+      expect(currentBusiness().profileData.foreignBusinessType).toEqual("REMOTE_WORKER");
+      expect(currentBusiness().profileData.foreignBusinessTypeIds).toEqual(["employeesInNJ"]);
     });
 
     it("sets user as Remote Seller (and displays alert) when revenueInNJ checkbox checked", async () => {
@@ -125,8 +126,8 @@ describe("onboarding - foreign business", () => {
         screen.getByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.REMOTE_SELLER)
       ).toBeInTheDocument();
       await page.visitStep(3);
-      expect(currentUserData().profileData.foreignBusinessType).toEqual("REMOTE_SELLER");
-      expect(currentUserData().profileData.foreignBusinessTypeIds).toEqual(["revenueInNJ"]);
+      expect(currentBusiness().profileData.foreignBusinessType).toEqual("REMOTE_SELLER");
+      expect(currentBusiness().profileData.foreignBusinessTypeIds).toEqual(["revenueInNJ"]);
     });
 
     it("sets user as Remote Seller (and displays alert) when transactionsInNJ checkbox checked", async () => {
@@ -140,8 +141,8 @@ describe("onboarding - foreign business", () => {
       ).toBeInTheDocument();
 
       await page.visitStep(3);
-      expect(currentUserData().profileData.foreignBusinessType).toEqual("REMOTE_SELLER");
-      expect(currentUserData().profileData.foreignBusinessTypeIds).toEqual(["transactionsInNJ"]);
+      expect(currentBusiness().profileData.foreignBusinessType).toEqual("REMOTE_SELLER");
+      expect(currentBusiness().profileData.foreignBusinessTypeIds).toEqual(["transactionsInNJ"]);
     });
 
     it("prevents user from moving past Step 2 if no foreign business type checked", async () => {
@@ -252,7 +253,7 @@ describe("onboarding - foreign business", () => {
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalled();
       });
-      expect(currentUserData().profileData.operatingPhase).toEqual("GUEST_MODE_WITH_BUSINESS_STRUCTURE");
+      expect(currentBusiness().profileData.operatingPhase).toEqual("GUEST_MODE_WITH_BUSINESS_STRUCTURE");
     });
   });
 
@@ -286,7 +287,7 @@ describe("onboarding - foreign business", () => {
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalled();
       });
-      expect(currentUserData().profileData.operatingPhase).toEqual("GUEST_MODE_WITH_BUSINESS_STRUCTURE");
+      expect(currentBusiness().profileData.operatingPhase).toEqual("GUEST_MODE_WITH_BUSINESS_STRUCTURE");
     });
   });
 
@@ -427,8 +428,8 @@ describe("onboarding - foreign business", () => {
       const { page } = renderPage({ userData });
       page.chooseRadio("location-in-new-jersey-true");
       await page.visitStep(5);
-      expect(currentUserData().profileData.homeBasedBusiness).toEqual(false);
-      expect(currentUserData().profileData.nexusLocationInNewJersey).toEqual(true);
+      expect(currentBusiness().profileData.homeBasedBusiness).toEqual(false);
+      expect(currentBusiness().profileData.nexusLocationInNewJersey).toEqual(true);
     });
 
     it("shows error message banner when Location in New Jersey is not selected", async () => {
@@ -461,7 +462,7 @@ describe("onboarding - foreign business", () => {
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalled();
       });
-      expect(currentUserData().profileData.operatingPhase).toEqual("GUEST_MODE");
+      expect(currentBusiness().profileData.operatingPhase).toEqual("GUEST_MODE");
     });
   });
 

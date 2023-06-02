@@ -13,9 +13,9 @@ import {
   BusinessUser,
   FormationFormData,
   FormationLegalType,
+  generateBusiness,
   generateFormationFormData,
   generateUser,
-  generateUserData,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
@@ -73,14 +73,14 @@ describe("Formation - BillingStep", () => {
     };
     const user = initialUser ? generateUser(initialUser) : generateUser({});
     // eslint-disable-next-line testing-library/render-result-naming-convention
-    const page = preparePage(
-      generateUserData({
+    const page = preparePage({
+      business: generateBusiness({
         profileData,
         formationData,
-        user,
       }),
-      displayContent
-    );
+      displayContent,
+      user,
+    });
 
     await page.stepperClickToBillingStep();
     return page;

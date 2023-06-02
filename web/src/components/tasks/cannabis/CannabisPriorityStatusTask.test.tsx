@@ -11,11 +11,11 @@ import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generateUserData, UserData } from "@businessnjgovnavigator/shared/";
+import { generateUserData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -24,10 +24,10 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 const Config = getMergedConfig();
 const C = Config.cannabisPriorityStatus;
 
-const renderPage = (task: Task, initialUserData?: UserData): void => {
+const renderPage = (task: Task): void => {
   render(
     withAuthAlert(
-      <WithStatefulUserData initialUserData={initialUserData ?? generateUserData({})}>
+      <WithStatefulUserData initialUserData={generateUserData({})}>
         <CannabisPriorityStatusTask task={task} />
       </WithStatefulUserData>,
       IsAuthenticated.TRUE
@@ -78,11 +78,11 @@ describe("<CannabisPriorityStatusTask />", () => {
     renderPage(task);
 
     fireEvent.click(screen.getByTestId(randomPriorityType));
-    expect(currentUserData().taskItemChecklist[randomPriorityType]).toBe(true);
+    expect(currentBusiness().taskItemChecklist[randomPriorityType]).toBe(true);
     expect(screen.getByText(C.nextButtonText)).toBeInTheDocument();
 
     fireEvent.click(screen.getByTestId(randomPriorityType));
-    expect(currentUserData().taskItemChecklist[randomPriorityType]).toBe(false);
+    expect(currentBusiness().taskItemChecklist[randomPriorityType]).toBe(false);
     expect(screen.queryByText(C.nextButtonText)).not.toBeInTheDocument();
   });
 
@@ -97,13 +97,13 @@ describe("<CannabisPriorityStatusTask />", () => {
     renderPage(task);
 
     fireEvent.click(screen.getByTestId(randomPriorityType));
-    expect(currentUserData().taskItemChecklist[randomPriorityType]).toBe(true);
+    expect(currentBusiness().taskItemChecklist[randomPriorityType]).toBe(true);
     expect(screen.getByText(C.nextButtonText)).toBeInTheDocument();
 
     fireEvent.click(screen.getByTestId(noneOfTheAbovePriorityId));
     expect(screen.getByText(C.nextButtonText)).toBeInTheDocument();
-    expect(currentUserData().taskItemChecklist[randomPriorityType]).toBe(false);
-    expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(true);
+    expect(currentBusiness().taskItemChecklist[randomPriorityType]).toBe(false);
+    expect(currentBusiness().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(true);
   });
 
   it("deselect none of the above checkbox when a priority type is selected", async () => {
@@ -117,12 +117,12 @@ describe("<CannabisPriorityStatusTask />", () => {
 
     renderPage(task);
     fireEvent.click(screen.getByTestId(noneOfTheAbovePriorityId));
-    expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(true);
+    expect(currentBusiness().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(true);
     expect(screen.getByText(C.nextButtonText)).toBeInTheDocument();
 
     fireEvent.click(screen.getByTestId(randomPriorityType));
-    expect(currentUserData().taskItemChecklist[randomPriorityType]).toBe(true);
-    expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(false);
+    expect(currentBusiness().taskItemChecklist[randomPriorityType]).toBe(true);
+    expect(currentBusiness().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(false);
     expect(screen.getByText(C.nextButtonText)).toBeInTheDocument();
   });
 
@@ -135,9 +135,9 @@ describe("<CannabisPriorityStatusTask />", () => {
 
     renderPage(task);
     fireEvent.click(screen.getByTestId(noneOfTheAbovePriorityId));
-    expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(true);
+    expect(currentBusiness().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(true);
     fireEvent.click(screen.getByTestId(noneOfTheAbovePriorityId));
-    expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(false);
+    expect(currentBusiness().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(false);
   });
 
   it("updates task progress from not started to in progress when user navigates to the second tab", async () => {

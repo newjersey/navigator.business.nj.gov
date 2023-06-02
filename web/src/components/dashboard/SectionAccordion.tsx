@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const SectionAccordion = (props: Props): ReactElement => {
-  const { updateQueue, userData } = useUserData();
+  const { updateQueue, business } = useUserData();
   const { isSectionCompleted } = useRoadmap();
   const dropdownIconClasses = props.mini
     ? "usa-icon--size-3 text-base-darkest"
@@ -25,11 +25,11 @@ export const SectionAccordion = (props: Props): ReactElement => {
   const sectionIconClasses = props.mini ? "height-4 padding-right-105" : "height-5 padding-right-105";
   const dividerClasses = props.mini ? "margin-y-2" : "margin-y-3";
   const sectionName = props.sectionType.toLowerCase();
-  const isOpen = userData?.preferences.roadmapOpenSections.includes(props.sectionType) ?? false;
+  const isOpen = business?.preferences.roadmapOpenSections.includes(props.sectionType) ?? false;
   const isCompleted = isSectionCompleted(props.sectionType);
 
   const handleAccordionStateChange = async (): Promise<void> => {
-    const roadmapOpenSections = userData?.preferences.roadmapOpenSections;
+    const roadmapOpenSections = business?.preferences.roadmapOpenSections;
     if (!roadmapOpenSections) {
       return;
     }
