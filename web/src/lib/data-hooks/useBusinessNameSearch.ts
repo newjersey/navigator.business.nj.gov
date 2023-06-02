@@ -41,7 +41,12 @@ export const useBusinessNameSearch = ({
     setBusinessNameAvailability,
     setDbaBusinessNameAvailability,
   } = useContext(BusinessFormationContext);
-  const [currentName, setCurrentName] = useState<string>("");
+  const [currentName, setCurrentName] = useState<string>((): string => {
+    if (userData) {
+      return isDba ? userData.profileData.nexusDbaName || "" : userData.profileData.businessName;
+    }
+    return "";
+  });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<SearchBusinessNameError | undefined>(undefined);
   const [updateButtonClicked, setUpdateButtonClicked] = useState<boolean>(false);
@@ -73,7 +78,9 @@ export const useBusinessNameSearch = ({
     if (!userData) {
       return;
     }
-    setCurrentName(isDba ? userData.profileData.nexusDbaName || "" : userData.profileData.businessName);
+    setCurrentName(
+      isDba ? userData.profileData.nexusDbaName || "" : userData.formationData.formationFormData.businessName
+    );
     if (nameIsNotAvailable() && nameHasBeenSearched()) {
       setFieldsInteracted([FIELD_NAME]);
     }
@@ -85,9 +92,10 @@ export const useBusinessNameSearch = ({
 
   const onBlurNameField = (value: string): void => {
     if (value !== state.formationFormData.businessName) {
+      const businessName = isDba ? { nexusDbaName: currentName } : { businessName: currentName };
       setFormationFormData({
         ...state.formationFormData,
-        businessName: currentName,
+        ...businessName,
       });
       setNameAvailability(emptyNameAvailability);
     }
@@ -115,6 +123,10 @@ export const useBusinessNameSearch = ({
     if (isDbaOverride ?? isDba) {
       newUserData = {
         ...userData,
+        formationData: {
+          ...userData.formationData,
+          dbaBusinessNameAvailability: nameAvailability,
+        },
         profileData: {
           ...userData.profileData,
           nexusDbaName: submittedName,
@@ -122,11 +134,28 @@ export const useBusinessNameSearch = ({
         },
       };
     } else {
-      if (nameAvailability.status === "AVAILABLE") {
+      if (nameAvailability.status === "UNAVAILABLE") {
         newUserData = {
           ...userData,
           formationData: {
             ...userData.formationData,
+            businessNameAvailability: nameAvailability,
+            formationFormData: {
+              ...userData.formationData.formationFormData,
+              businessName: submittedName,
+            },
+          },
+          profileData: {
+            ...userData.profileData,
+            needsNexusDbaName: true,
+          },
+        };
+      } else if (nameAvailability.status === "AVAILABLE") {
+        newUserData = {
+          ...userData,
+          formationData: {
+            ...userData.formationData,
+            businessNameAvailability: nameAvailability,
             formationFormData: {
               ...userData.formationData.formationFormData,
               businessName: submittedName,
@@ -139,11 +168,12 @@ export const useBusinessNameSearch = ({
             needsNexusDbaName: emptyProfileData.needsNexusDbaName,
           },
         };
-      } else if (nameAvailability.status === "UNAVAILABLE") {
+      } else {
         newUserData = {
           ...userData,
           formationData: {
             ...userData.formationData,
+            businessNameAvailability: nameAvailability,
             formationFormData: {
               ...userData.formationData.formationFormData,
               businessName: submittedName,
@@ -151,19 +181,21 @@ export const useBusinessNameSearch = ({
           },
           profileData: {
             ...userData.profileData,
-            businessName: submittedName,
-            needsNexusDbaName: true,
+            nexusDbaName: emptyProfileData.nexusDbaName,
+            needsNexusDbaName: emptyProfileData.needsNexusDbaName,
           },
         };
       }
     }
 
-    setFormationFormData((previousFormationData) => {
+    setFormationFormData((previousFormationFormData) => {
       return {
-        ...previousFormationData,
+        ...previousFormationFormData,
         ...newUserData?.formationData.formationFormData,
       };
     });
+
+    setNameAvailability(nameAvailability);
 
     await update(newUserData);
   };

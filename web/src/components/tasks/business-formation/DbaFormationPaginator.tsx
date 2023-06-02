@@ -123,7 +123,7 @@ export const DbaFormationPaginator = (): ReactElement => {
     };
 
     return (
-      <div className={"mobile-lg:margin-top-0 margin-top-1 width-full mobile-lg:width-auto"}>
+      <div data-testid="primary-button-test-id" className={"mobile-lg:margin-top-0 margin-top-1 width-full mobile-lg:width-auto"}>
         <PrimaryButton
           isColor="primary"
           onClick={(): void => {
@@ -161,7 +161,7 @@ export const DbaFormationPaginator = (): ReactElement => {
   };
 
   const displayButtons = (): ReactNode => {
-    if (state.stepIndex === 0 && state.businessNameAvailability?.status === "AVAILABLE") {
+    if (state.stepIndex === 0 && (state.businessNameAvailability?.status === "AVAILABLE" || state.dbaBusinessNameAvailability?.status === "AVAILABLE")) {
       return (
         <ButtonWrapper>
           <HelpButton />

@@ -35,7 +35,7 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fi
       validatedFields = [...validatedFields, ...foreignValidatedFields, "addressProvince", "addressCountry"];
       break;
     case "NJ":
-      validatedFields.push("addressMunicipality");
+      validatedFields = [...validatedFields, "addressMunicipality"];
   }
 
   if (formationFormData.agentNumberOrManual === "NUMBER") {

@@ -230,7 +230,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   };
 
   const stepperClickToBusinessNameStep = async (): Promise<void> => {
-    fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`));
+    await fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`));
     await waitFor(() => {
       expect(screen.queryByTestId("business-name-step")).toBeInTheDocument();
     });

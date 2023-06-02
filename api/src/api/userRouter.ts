@@ -1,3 +1,4 @@
+import { NameAvailability } from "@shared/businessNameSearch";
 import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
 import { createEmptyFormationFormData } from "@shared/formationData";
@@ -237,17 +238,32 @@ export const userRouterFactory = (
       return userData;
     }
     try {
-      const response = await timeStampBusinessSearch.search(userData.profileData.businessName);
+      const isDba = userData.profileData.needsNexusDbaName;
+      const nameToSearch = isDba ? userData.profileData.nexusDbaName : userData.profileData.businessName;
+      const response = await timeStampBusinessSearch.search(nameToSearch);
+      const nameAvailability: NameAvailability = {
+        status: response.status,
+        similarNames: response.similarNames ?? [],
+        lastUpdatedTimeStamp: response.lastUpdatedTimeStamp,
+        invalidWord: response.invalidWord,
+      };
+
+      // TODO: Remove - this is for testing only
+      const nameUnavailability: NameAvailability = {
+        status: "UNAVAILABLE",
+        similarNames: [],
+        lastUpdatedTimeStamp: response.lastUpdatedTimeStamp,
+        invalidWord: response.invalidWord,
+      };
       return {
         ...userData,
         formationData: {
           ...userData.formationData,
-          businessNameAvailability: {
-            status: response.status,
-            similarNames: response.similarNames ?? [],
-            lastUpdatedTimeStamp: response.lastUpdatedTimeStamp,
-            invalidWord: response.invalidWord,
-          },
+          businessNameAvailability: isDba ? undefined : nameAvailability,
+          // dbaBusinessNameAvailability: isDba ? nameAvailability : undefined,
+
+          // TODO: Remove - this is for testing only
+          dbaBusinessNameAvailability: isDba ? nameUnavailability : undefined,
         },
       };
     } catch {

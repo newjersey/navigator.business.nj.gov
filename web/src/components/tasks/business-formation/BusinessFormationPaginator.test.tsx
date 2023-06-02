@@ -1526,8 +1526,9 @@ describe("<BusinessFormationPaginator />", () => {
                   ...generateFormationUSAddress({}),
                   businessSuffix: "LLC",
                   businessLocationType: "US",
+                  businessStartDate: getCurrentDate().format(defaultDateFormat),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1552,8 +1553,9 @@ describe("<BusinessFormationPaginator />", () => {
                 {
                   businessSuffix: "LLC",
                   ...generateFormationUSAddress({}),
+                  businessStartDate: getCurrentDate().format(defaultDateFormat),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1578,8 +1580,9 @@ describe("<BusinessFormationPaginator />", () => {
                 {
                   businessSuffix: "LLC",
                   ...generateFormationUSAddress({}),
+                  businessStartDate: getCurrentDate().format(defaultDateFormat),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1604,8 +1607,9 @@ describe("<BusinessFormationPaginator />", () => {
                 {
                   businessSuffix: "LLC",
                   ...generateFormationUSAddress({ addressState: undefined }),
+                  businessStartDate: getCurrentDate().format(defaultDateFormat),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1630,8 +1634,9 @@ describe("<BusinessFormationPaginator />", () => {
                 {
                   businessSuffix: "LLC",
                   ...generateFormationUSAddress({}),
+                  businessStartDate: getCurrentDate().format(defaultDateFormat),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1657,8 +1662,9 @@ describe("<BusinessFormationPaginator />", () => {
                 {
                   businessSuffix: "LLC",
                   ...generateFormationForeignAddress({}),
+                  businessStartDate: getCurrentDate().format(defaultDateFormat),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1683,8 +1689,9 @@ describe("<BusinessFormationPaginator />", () => {
                 {
                   businessSuffix: "LLC",
                   ...generateFormationForeignAddress({}),
+                  businessStartDate: getCurrentDate().format(defaultDateFormat),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1709,8 +1716,9 @@ describe("<BusinessFormationPaginator />", () => {
                 {
                   businessSuffix: "LLC",
                   ...generateFormationForeignAddress({}),
+                  businessStartDate: getCurrentDate().format(defaultDateFormat),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1735,8 +1743,9 @@ describe("<BusinessFormationPaginator />", () => {
                 {
                   businessSuffix: "LLC",
                   ...generateFormationForeignAddress({}),
+                  businessStartDate: getCurrentDate().format(defaultDateFormat),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1761,8 +1770,9 @@ describe("<BusinessFormationPaginator />", () => {
                 {
                   businessSuffix: "LLC",
                   ...generateFormationForeignAddress({}),
+                  businessStartDate: getCurrentDate().format(defaultDateFormat),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1787,8 +1797,9 @@ describe("<BusinessFormationPaginator />", () => {
                 {
                   businessSuffix: "LLC",
                   ...generateFormationForeignAddress({ addressCountry: undefined }),
+                  businessStartDate: getCurrentDate().format(defaultDateFormat),
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1815,9 +1826,10 @@ describe("<BusinessFormationPaginator />", () => {
                   ...generateFormationUSAddress({}),
                   businessSuffix: "LLC",
                   businessLocationType: "US",
+                  businessStartDate: getCurrentDate().format(defaultDateFormat),
                   foreignStateOfFormation: undefined,
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1844,9 +1856,10 @@ describe("<BusinessFormationPaginator />", () => {
                   ...generateFormationUSAddress({}),
                   businessSuffix: "LLC",
                   businessLocationType: "US",
+                  businessStartDate: getCurrentDate().format(defaultDateFormat),
                   foreignDateOfFormation: undefined,
                 },
-                { legalStructureId: "foreign-limited-partnership" }
+                { legalStructureId: "foreign-limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -1977,7 +1990,7 @@ describe("<BusinessFormationPaginator />", () => {
             if (formationStepName === "Billing") await page.stepperClickToBillingStep();
             expect(screen.getByRole("alert")).toBeInTheDocument();
 
-            page.fillText(fieldLabel as string as string, newTextInput as string);
+            page.fillText(fieldLabel as string, newTextInput as string);
             expect(screen.queryByRole("alert")).not.toBeInTheDocument();
             expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
             expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
@@ -2256,7 +2269,7 @@ describe("<BusinessFormationPaginator />", () => {
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
     });
 
-    it("defaults to first formation step we go beyond page index allowed", () => {
+    it("defaults to first formation step when we go beyond page index allowed", () => {
       const profileData = generateFormationProfileData({});
       const formationData = generateFormationData({
         lastVisitedPageIndex: BusinessFormationStepsConfiguration.length,

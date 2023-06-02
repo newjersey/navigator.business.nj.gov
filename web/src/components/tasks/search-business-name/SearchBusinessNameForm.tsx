@@ -44,7 +44,6 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     onBlurNameField,
     searchBusinessName,
     setBusinessName,
-    setNameAvailability,
     resetSearch,
     updateCurrentName,
   } = useBusinessNameSearch({
@@ -71,7 +70,6 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     ): Promise<void> => {
       searchBusinessName(event)
         .then(({ nameAvailability, submittedName }) => {
-          setNameAvailability(nameAvailability);
           setBusinessName(submittedName, nameAvailability);
           if (onSubmit && !isInitialSubmit) {
             onSubmit();
