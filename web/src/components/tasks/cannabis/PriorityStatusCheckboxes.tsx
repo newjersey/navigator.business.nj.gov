@@ -1,7 +1,6 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { Checkbox, FormControl, FormControlLabel, FormGroup } from "@mui/material";
 import React, { ReactElement, useState } from "react";
@@ -14,16 +13,12 @@ interface Props {
 export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
   const [eligibleModalIsOpenWith, setEligibleModalIsOpenWith] = useState<PriorityApplicationType | "">("");
 
-  const { userData } = useUserData();
   const { Config } = useConfig();
 
   const handleCheckbox = (
     event: React.ChangeEvent<HTMLInputElement>,
     type: PriorityApplicationType
   ): void => {
-    if (!userData) {
-      return;
-    }
     if (event.target.checked) {
       setEligibleModalIsOpenWith(type);
     } else {

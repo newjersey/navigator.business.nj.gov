@@ -16,11 +16,11 @@ type Props = {
 export const SidebarCardFormationNudge = (props: Props): ReactElement => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const router = useRouter();
-  const { userData, updateQueue } = useUserData();
+  const { business, updateQueue } = useUserData();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
 
   const updateFormationDateAndTaskProgress = async (): Promise<void> => {
-    if (!userData || !updateQueue) {
+    if (!business || !updateQueue) {
       return;
     }
     queueUpdateTaskProgress(formationTaskId, "COMPLETED");
@@ -29,7 +29,7 @@ export const SidebarCardFormationNudge = (props: Props): ReactElement => {
   };
 
   const onClick = (): void => {
-    if (!userData) {
+    if (!business) {
       return;
     }
     setModalOpen(true);

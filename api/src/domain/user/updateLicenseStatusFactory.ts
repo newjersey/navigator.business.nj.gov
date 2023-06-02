@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getCurrentDateISOString } from "@shared/dateHelpers";
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { LicenseStatusResult, NameAndAddress } from "@shared/license";
+import { modifyCurrentBusiness } from "@shared/test";
 import { TaskProgress, UserData } from "@shared/userData";
 import { convertIndustryToLicenseType } from "../license-status/convertIndustryToLicenseType";
 import { SearchLicenseStatus, UpdateLicenseStatus } from "../types";
@@ -14,9 +16,10 @@ const update = (
     completed: boolean;
   }
 ): UserData => {
-  const updatedValues = {
+  return modifyCurrentBusiness(userData, (business) => ({
+    ...business,
     taskProgress: {
-      ...userData.taskProgress,
+      ...business.taskProgress,
       "apply-for-shop-license": args.taskStatus,
       "register-consumer-affairs": args.taskStatus,
       "pharmacy-license": args.taskStatus,
@@ -35,14 +38,12 @@ const update = (
       status: args.licenseStatusResult.status,
       items: args.licenseStatusResult.checklistItems,
     },
-  };
-
-  return { ...userData, ...updatedValues };
+  }));
 };
 
 export const updateLicenseStatusFactory = (searchLicenseStatus: SearchLicenseStatus): UpdateLicenseStatus => {
   return async (userData: UserData, nameAndAddress: NameAndAddress): Promise<UserData> => {
-    const licenseType = convertIndustryToLicenseType(userData.profileData.industryId);
+    const licenseType = convertIndustryToLicenseType(getCurrentBusiness(userData).profileData.industryId);
     return searchLicenseStatus(nameAndAddress, licenseType)
       .then((licenseStatusResult: LicenseStatusResult) => {
         let taskStatus: TaskProgress = "NOT_STARTED";

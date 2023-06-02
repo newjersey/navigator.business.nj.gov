@@ -6,8 +6,7 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import Profile from "@/pages/profile";
-import { generateUser } from "@businessnjgovnavigator/shared";
-import { createEmptyUserData } from "@businessnjgovnavigator/shared/userData";
+import { createEmptyProfileData, generateBusiness } from "@businessnjgovnavigator/shared";
 import { ReactElement, useState } from "react";
 
 const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
@@ -16,14 +15,12 @@ const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
 
   const [modalOpen, setModalOpen] = useState(false);
 
-  const emptyUserData = createEmptyUserData(generateUser({}));
-  const userData = {
-    ...emptyUserData,
+  const business = generateBusiness({
     profileData: {
-      ...emptyUserData.profileData,
+      ...createEmptyProfileData(),
       legalStructureId: "limited-liability-company",
     },
-  };
+  });
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
@@ -60,7 +57,7 @@ const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
           municipalities={[]}
           CMS_ONLY_tab="documents"
           CMS_ONLY_businessPersona="STARTING"
-          CMS_ONLY_fakeUserData={userData}
+          CMS_ONLY_fakeBusiness={business}
         />
       </div>
     </ConfigContext.Provider>

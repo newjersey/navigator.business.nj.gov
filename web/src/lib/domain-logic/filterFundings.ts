@@ -1,9 +1,9 @@
 import { SMALL_BUSINESS_MAX_EMPLOYEE_COUNT } from "@/lib/domain-logic/smallBusinessEnterprise";
 import { County, defaultMarkdownDateFormat, Funding } from "@/lib/types/types";
-import { getCurrentDate, parseDateWithFormat, UserData } from "@businessnjgovnavigator/shared";
+import { Business, getCurrentDate, parseDateWithFormat } from "@businessnjgovnavigator/shared";
 import { arrayOfOwnershipTypes } from "@businessnjgovnavigator/shared/";
 
-export const filterFundings = (fundings: Funding[], userData: UserData): Funding[] => {
+export const filterFundings = (fundings: Funding[], business: Business): Funding[] => {
   return fundings.filter((it) => {
     if (it.publishStageArchive === "Do Not Publish") {
       return false;
@@ -13,30 +13,30 @@ export const filterFundings = (fundings: Funding[], userData: UserData): Funding
       return !parseDateWithFormat(it.dueDate, defaultMarkdownDateFormat).isBefore(getCurrentDate());
     }
 
-    if (userData.profileData.homeBasedBusiness && it.homeBased !== "yes" && it.homeBased !== "unknown") {
+    if (business.profileData.homeBasedBusiness && it.homeBased !== "yes" && it.homeBased !== "unknown") {
       return false;
     }
 
     if (
-      userData.profileData.municipality &&
+      business.profileData.municipality &&
       it.county.length > 0 &&
       !it.county.includes("All") &&
-      !it.county.includes(userData.profileData.municipality.county as County)
+      !it.county.includes(business.profileData.municipality.county as County)
     ) {
       return false;
     }
 
-    if (it.sector && userData.profileData.sectorId && it.sector.length > 0) {
+    if (it.sector && business.profileData.sectorId && it.sector.length > 0) {
       const sectorRegex = new RegExp(it.sector.join("|"), "i");
-      if (!sectorRegex.test(userData.profileData.sectorId)) {
+      if (!sectorRegex.test(business.profileData.sectorId)) {
         return false;
       }
     }
 
     if (
-      userData.profileData.existingEmployees &&
+      business.profileData.existingEmployees &&
       it.employeesRequired &&
-      Number.parseInt(userData.profileData.existingEmployees) === 0 &&
+      Number.parseInt(business.profileData.existingEmployees) === 0 &&
       it.employeesRequired !== "n/a"
     ) {
       return false;
@@ -49,14 +49,14 @@ export const filterFundings = (fundings: Funding[], userData: UserData): Funding
     if (
       it.certifications !== null &&
       it.certifications.length > 0 &&
-      userData.profileData.ownershipTypeIds.length > 0
+      business.profileData.ownershipTypeIds.length > 0
     ) {
       const ownershipTypeIds = new Set(arrayOfOwnershipTypes.map((ownershipType) => ownershipType.id)); // ['woman-owned', 'veteran-owned...]
       const ownershipTypeCerts = it.certifications.filter((cert) => ownershipTypeIds.has(cert));
 
       if (ownershipTypeCerts.length > 0) {
         const ownershipType = it.certifications.some((ownershipType) => {
-          return userData.profileData.ownershipTypeIds.includes(ownershipType);
+          return business.profileData.ownershipTypeIds.includes(ownershipType);
         });
         if (!ownershipType) {
           return false;
@@ -65,7 +65,7 @@ export const filterFundings = (fundings: Funding[], userData: UserData): Funding
     }
 
     if (it.certifications !== null && it.certifications.includes("small-business-enterprise")) {
-      const employeeCount = Number(userData.profileData.existingEmployees as string);
+      const employeeCount = Number(business.profileData.existingEmployees as string);
       if (employeeCount >= SMALL_BUSINESS_MAX_EMPLOYEE_COUNT) {
         return false;
       }

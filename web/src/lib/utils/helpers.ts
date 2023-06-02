@@ -8,6 +8,7 @@ import {
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 import { useEffect, useRef } from "react";
 
 export const useMountEffect = (fun: () => void): void => {
@@ -172,7 +173,9 @@ export const getPhoneNumberFormat = (phoneNumber: string): string => {
 };
 
 export const getFlow = (data: UserData | ProfileData): FlowType => {
-  const persona: BusinessPersona = isUserData(data) ? data.profileData.businessPersona : data.businessPersona;
+  const persona: BusinessPersona = isUserData(data)
+    ? getCurrentBusiness(data).profileData.businessPersona
+    : data.businessPersona;
 
   return persona || "STARTING";
 };

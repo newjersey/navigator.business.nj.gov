@@ -23,7 +23,7 @@ type FormationErrorsResponse = {
 
 export const useFormationErrors = (): FormationErrorsResponse => {
   const { state } = useContext(BusinessFormationContext);
-  const { userData } = useUserData();
+  const { business } = useUserData();
 
   const validatedFields = useMemo((): FieldsForErrorHandling[] => {
     return validatedFieldsForUser(state.formationFormData);
@@ -50,14 +50,14 @@ export const useFormationErrors = (): FormationErrorsResponse => {
 
   const getApiFieldErrorState = (field: FieldsForErrorHandling): FormationFieldErrorState | undefined => {
     if (
-      !userData?.formationData.formationResponse ||
-      userData.formationData.formationResponse.errors.length === 0
+      !business?.formationData.formationResponse ||
+      business.formationData.formationResponse.errors.length === 0
     ) {
       return undefined;
     }
 
     const apiField = getApiField(field);
-    const apiErrorForField = userData.formationData.formationResponse.errors.find((error) => {
+    const apiErrorForField = business.formationData.formationResponse.errors.find((error) => {
       return error.field === apiField;
     });
     const hasApiFieldError = apiErrorForField !== undefined;

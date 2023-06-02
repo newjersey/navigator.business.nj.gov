@@ -27,7 +27,7 @@ export const useBusinessNameSearch = ({
   setCurrentName: (name: string) => void;
   resetSearch: () => void;
 } => {
-  const { userData } = useUserData();
+  const { business } = useUserData();
   const {
     state,
     setFormationFormData,
@@ -41,11 +41,11 @@ export const useBusinessNameSearch = ({
   const [updateButtonClicked, setUpdateButtonClicked] = useState<boolean>(false);
 
   const businessNameHasBeenSearched = (): boolean => {
-    return userData?.formationData.businessNameAvailability !== undefined;
+    return business?.formationData.businessNameAvailability !== undefined;
   };
 
   const businessNameIsNotAvailable = (): boolean => {
-    return userData?.formationData.businessNameAvailability?.status !== "AVAILABLE";
+    return business?.formationData.businessNameAvailability?.status !== "AVAILABLE";
   };
 
   const setNameAvailability = isDba ? setDbaBusinessNameAvailability : setBusinessNameAvailability;
@@ -57,14 +57,12 @@ export const useBusinessNameSearch = ({
   };
 
   useMountEffectWhenDefined(() => {
-    if (!userData) {
-      return;
-    }
-    setCurrentName(isDba ? userData.profileData.nexusDbaName || "" : userData.profileData.businessName);
+    if (!business) return;
+    setCurrentName(isDba ? business.profileData.nexusDbaName || "" : business.profileData.businessName);
     if (businessNameIsNotAvailable() && businessNameHasBeenSearched()) {
       setFieldsInteracted(["businessName"]);
     }
-  }, userData);
+  }, business);
 
   const updateCurrentName = (value: string): void => {
     setCurrentName(value);

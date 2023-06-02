@@ -12,7 +12,7 @@ import { ReactElement, useContext } from "react";
 export const DbaNameSearch = (): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
-  const { userData } = useUserData();
+  const { business } = useUserData();
 
   useMountEffect(() => {
     analytics.event.business_formation_dba_name_search_field.appears.dba_name_search_field_appears();
@@ -26,7 +26,7 @@ export const DbaNameSearch = (): ReactElement => {
         available={DbaAvailable}
         isBusinessFormation
         isDba
-        businessName={userData?.profileData.nexusDbaName ?? ""}
+        businessName={business?.profileData.nexusDbaName ?? ""}
         nameAvailability={state.dbaBusinessNameAvailability}
         config={{
           searchButtonText: Config.nexusNameSearch.dbaNameSearchSubmitButton,

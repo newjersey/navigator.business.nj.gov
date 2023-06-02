@@ -10,13 +10,13 @@ import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useState } from "react";
 
 interface Props {
   task: Task;
   CMS_ONLY_tab?: string; // for CMS only
-  CMS_ONLY_fakeUserData?: UserData; // for CMS only
+  CMS_ONLY_fakeBusiness?: Business; // for CMS only
   CMS_ONLY_isAnnual?: boolean; // for CMS only
   CMS_ONLY_isConditional?: boolean; // for CMS only
 }
@@ -24,7 +24,7 @@ interface Props {
 export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
   const userDataFromHook = useUserData();
   const updateQueue = userDataFromHook.updateQueue;
-  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
+  const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
 
   const [displayFirstTab, setDisplayFirstTab] = useState<boolean>(true);
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState(false);
@@ -43,24 +43,22 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
       setDisplayFirstTab(false);
     }
 
-    if (!userData) {
-      return;
-    }
+    if (!business) return;
 
     const minorityOrWomenPriorityTypeSelected = priorityTypesObj.minorityOrWomen.some((key) => {
-      return userData.taskItemChecklist[key] === true;
+      return business.taskItemChecklist[key];
     });
 
     const veteranPriorityTypeSelected = priorityTypesObj.veteran.some((key) => {
-      return userData.taskItemChecklist[key] === true;
+      return business.taskItemChecklist[key];
     });
 
     const impactZonePriorityTypeSelected = priorityTypesObj.impactZone.some((key) => {
-      return userData.taskItemChecklist[key] === true;
+      return business.taskItemChecklist[key];
     });
 
     const socialEquityPriorityTypeSelected = priorityTypesObj.socialEquity.some((key) => {
-      return userData.taskItemChecklist[key] === true;
+      return business.taskItemChecklist[key];
     });
 
     setPriorityStatusState({
@@ -74,7 +72,7 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
         !impactZonePriorityTypeSelected &&
         !socialEquityPriorityTypeSelected
     );
-  }, userData);
+  }, business);
 
   const onCheckboxChange = (type: PriorityApplicationType, checked: boolean): void => {
     setPriorityStatusState((current) => {
@@ -105,15 +103,13 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
   };
 
   const handleNextTabButtonClick = (): void => {
-    if (!userData || !updateQueue) {
-      return;
-    }
+    if (!business || !updateQueue) return;
     setDisplayFirstTab(false);
     scrollToTop();
     sendNextTabButtonAnalytics();
     if (
-      userData.taskProgress[props.task.id] === undefined ||
-      userData.taskProgress[props.task.id] === "NOT_STARTED"
+      business.taskProgress[props.task.id] === undefined ||
+      business.taskProgress[props.task.id] === "NOT_STARTED"
     ) {
       setSuccessSnackbarIsOpen(true);
       updateQueue.queueTaskProgress({ [props.task.id]: "IN_PROGRESS" }).update();

@@ -13,8 +13,8 @@ interface Props {
 }
 
 export const MiniRoadmapTask = (props: Props): ReactElement => {
-  const { updateQueue } = useUserData();
-  const taskProgress = (updateQueue && updateQueue.current().taskProgress[props.task.id]) || "NOT_STARTED";
+  const { business } = useUserData();
+  const taskProgress = business?.taskProgress[props.task.id] || "NOT_STARTED";
 
   return (
     <Link href={`/tasks/${props.task.urlSlug}`}>

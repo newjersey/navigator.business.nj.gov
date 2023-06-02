@@ -6,6 +6,7 @@ import {
   ABExperience,
   BusinessPersona,
   ForeignBusinessType,
+  getCurrentBusiness,
   IndustrySpecificData,
   LookupOperatingPhaseById,
   OperatingPhaseId,
@@ -16,7 +17,7 @@ import {
 type RegistrationProgress = "Not Started" | "Began Onboarding" | "Onboarded Guest" | "Fully Registered";
 
 export const setOnLoadDimensions = (userData: UserData): void => {
-  setAnalyticsDimensions(userData.profileData, true);
+  setAnalyticsDimensions(getCurrentBusiness(userData).profileData, true);
   setUserId(userData.user.id, true);
   setABExperienceDimension(userData.user.abExperience);
 };
@@ -56,21 +57,23 @@ export const phaseChangeAnalytics = ({
   oldUserData: UserData;
   newUserData: UserData;
 }): void => {
-  if (oldUserData.profileData.operatingPhase === newUserData.profileData.operatingPhase) {
+  const oldProfileData = getCurrentBusiness(oldUserData).profileData;
+  const newProfileData = getCurrentBusiness(newUserData).profileData;
+  if (oldProfileData.operatingPhase === newProfileData.operatingPhase) {
     return;
   } else if (
-    oldUserData.profileData.operatingPhase === "NEEDS_TO_FORM" &&
-    newUserData.profileData.operatingPhase === "NEEDS_TO_REGISTER_FOR_TAXES"
+    oldProfileData.operatingPhase === "NEEDS_TO_FORM" &&
+    newProfileData.operatingPhase === "NEEDS_TO_REGISTER_FOR_TAXES"
   ) {
     analytics.event.roadmap_dashboard.arrive.progress_to_needs_to_register_phase();
   } else if (
-    oldUserData.profileData.operatingPhase === "NEEDS_TO_REGISTER_FOR_TAXES" &&
-    newUserData.profileData.operatingPhase === "FORMED_AND_REGISTERED"
+    oldProfileData.operatingPhase === "NEEDS_TO_REGISTER_FOR_TAXES" &&
+    newProfileData.operatingPhase === "FORMED_AND_REGISTERED"
   ) {
     analytics.event.roadmap_dashboard.arrive.progress_to_formed_and_registered_phase();
   } else if (
-    oldUserData.profileData.operatingPhase === "FORMED_AND_REGISTERED" &&
-    newUserData.profileData.operatingPhase === "UP_AND_RUNNING"
+    oldProfileData.operatingPhase === "FORMED_AND_REGISTERED" &&
+    newProfileData.operatingPhase === "UP_AND_RUNNING"
   ) {
     analytics.event.roadmap_dashboard.arrive.progress_to_up_and_running_phase();
   }

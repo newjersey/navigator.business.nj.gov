@@ -5,17 +5,18 @@ import { generateSidebarCardContent } from "@/test/factories";
 import { selectDropdownByValue } from "@/test/helpers/helpers-testing-library-selectors";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  generateBusiness,
   generatePreferences,
   generateProfileData,
-  generateUserData,
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -27,9 +28,9 @@ const Config = getMergedConfig();
 describe("<SidebarCardFundingNudge />", () => {
   let card: SidebarCardContent;
 
-  const renderWithUserData = (userData: Partial<UserData>): void => {
+  const renderWithBusiness = (business: Partial<Business>): void => {
     render(
-      <WithStatefulUserData initialUserData={generateUserData(userData)}>
+      <WithStatefulUserData initialUserData={generateUserDataForBusiness(generateBusiness(business))}>
         <SidebarCardFundingNudge card={card} />
       </WithStatefulUserData>
     );
@@ -44,7 +45,7 @@ describe("<SidebarCardFundingNudge />", () => {
 
   describe("when clicking funding button for non-generic industry", () => {
     it("updates operating phase to UP_AND_RUNNING", () => {
-      renderWithUserData({
+      renderWithBusiness({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           industryId: "cannabis",
@@ -53,13 +54,13 @@ describe("<SidebarCardFundingNudge />", () => {
       });
 
       fireEvent.click(screen.getByTestId("cta-funding-nudge"));
-      expect(currentUserData().profileData.operatingPhase).toEqual("UP_AND_RUNNING");
+      expect(currentBusiness().profileData.operatingPhase).toEqual("UP_AND_RUNNING");
     });
   });
 
   describe("when clicking funding button for generic industry", () => {
     it("updates with new sector and operating phase to UP_AND_RUNNING after modal success", () => {
-      renderWithUserData({
+      renderWithBusiness({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           industryId: "generic",
@@ -72,12 +73,12 @@ describe("<SidebarCardFundingNudge />", () => {
       expect(screen.getByText(Config.dashboardDefaults.sectorModalTitle)).toBeInTheDocument();
       selectDropdownByValue("Sector", "clean-energy");
       fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalSaveButton));
-      expect(currentUserData().profileData.operatingPhase).toEqual("UP_AND_RUNNING");
-      expect(currentUserData().profileData.sectorId).toEqual("clean-energy");
+      expect(currentBusiness().profileData.operatingPhase).toEqual("UP_AND_RUNNING");
+      expect(currentBusiness().profileData.sectorId).toEqual("clean-energy");
     });
 
     it("does not update operating phase when user cancels from within modal", () => {
-      renderWithUserData({
+      renderWithBusiness({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           industryId: "generic",

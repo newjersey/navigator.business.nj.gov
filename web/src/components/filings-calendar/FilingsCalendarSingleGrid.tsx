@@ -9,19 +9,19 @@ import {
 import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarEvents";
 import { OperateReference } from "@/lib/types/types";
 import {
+  Business,
   defaultDateFormat,
   getCurrentDate,
   getJanOfYear,
   LicenseCalendarEvent,
   parseDateWithFormat,
   TaxFilingCalendarEvent,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import { ReactElement, ReactNode, useState } from "react";
 import { UnStyledButton } from "../njwds-extended/UnStyledButton";
 
 interface Props {
-  userData: UserData;
+  business: Business;
   num: number;
   activeYear: string;
   operateReferences: Record<string, OperateReference>;
@@ -33,8 +33,8 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const [showExpandFilingsButton, setShowExpandFilingsButton] = useState(false);
   const date = getJanOfYear(parseDateWithFormat(props.activeYear, "YYYY")).add(props.num, "months");
-  const sortedFilteredFilingsWithinAYear: TaxFilingCalendarEvent[] = props.userData?.taxFilingData.filings
-    ? sortFilterCalendarEventsWithinAYear(props.userData.taxFilingData.filings, props.activeYear)
+  const sortedFilteredFilingsWithinAYear: TaxFilingCalendarEvent[] = props.business?.taxFilingData.filings
+    ? sortFilterCalendarEventsWithinAYear(props.business.taxFilingData.filings, props.activeYear)
     : [];
 
   const thisMonthFilings = sortedFilteredFilingsWithinAYear.filter((it) => {
@@ -47,7 +47,7 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
   const isOnCurrentYear = getCurrentDate().year().toString() === props.activeYear;
 
   const thisMonthLicenseEvents = getLicenseCalendarEvents(
-    props.userData?.licenseData,
+    props.business?.licenseData,
     date.year(),
     date.month()
   );
@@ -75,7 +75,7 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
           <LicenseEvent
             key={event.licenseEventSubtype}
             licenseEvent={event}
-            industryId={props.userData.profileData.industryId}
+            industryId={props.business.profileData.industryId}
           />
         );
       }

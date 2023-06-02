@@ -28,8 +28,10 @@ import { Auth } from "@aws-amplify/auth";
 import "@cypress-audit/lighthouse/commands";
 import "@cypress-audit/pa11y/commands";
 import "cypress-wait-until";
+import { getCurrentBusiness } from "../../../shared/src/domain-logic/getCurrentBusiness";
 import { createEmptyUserData } from "../../../shared/src/userData";
 import { testUserEmail, testUserPassword } from "./e2e";
+
 Auth.configure({
   identityPoolRegion: "us-east-1",
   identityPoolId: Cypress.env("COGNITO_IDENTITY_POOL_ID"),
@@ -98,7 +100,7 @@ Cypress.Commands.add("loginByCognitoApi", () => {
       })
         .then((response) => {
           expect(response.status).to.equal(200);
-          expect(response.body.onboardingFormProgress).to.equal("UNSTARTED");
+          expect(getCurrentBusiness(response.body).onboardingFormProgress).to.equal("UNSTARTED");
         })
         .visit("/onboarding", {
           onBeforeLoad: (win) => {

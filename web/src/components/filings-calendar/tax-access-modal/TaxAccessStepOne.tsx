@@ -24,14 +24,13 @@ interface Props {
 export const TaxAccessStepOne = (props: Props): ReactElement => {
   const fields: ProfileFields[] = ["legalStructureId"];
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
-  const { userData, updateQueue } = useUserData();
+  const { business, updateQueue } = useUserData();
   const { Config } = useConfig();
 
   useMountEffectWhenDefined(() => {
-    if (userData) {
-      setProfileData(userData.profileData);
-    }
-  }, userData);
+    if (!business) return;
+    setProfileData(business.profileData);
+  }, business);
 
   const {
     FormFuncWrapper,
@@ -48,8 +47,8 @@ export const TaxAccessStepOne = (props: Props): ReactElement => {
 
   const onClose = (): void => {
     props.close();
-    if (!userData) return;
-    setProfileData(userData.profileData);
+    if (!business) return;
+    setProfileData(business.profileData);
     formContextState.reducer({ type: FieldStateActionKind.RESET });
   };
 

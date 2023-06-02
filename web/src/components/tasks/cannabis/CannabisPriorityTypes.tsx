@@ -27,7 +27,7 @@ interface Props {
 }
 
 export const CannabisPriorityTypes = (props: Props): ReactElement => {
-  const { updateQueue, userData } = useUserData();
+  const { updateQueue, business } = useUserData();
   const [displayNextTabButton, setDisplayNextTabButton] = useState(false);
   const [eligibityPhrase, setEligibiltyPhrase] = useState("");
   const { Config } = useConfig();
@@ -39,30 +39,28 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
   });
 
   useEffect(() => {
-    if (!userData || !updateQueue) return;
+    if (!business || !updateQueue) return;
     const priorityTypeSelected = priorityTypes.some((key) => {
-      return userData.taskItemChecklist[key] === true;
+      return business.taskItemChecklist[key];
     });
 
-    if (priorityTypeSelected || userData.taskItemChecklist[noneOfTheAbovePriorityId]) {
+    if (priorityTypeSelected || business.taskItemChecklist[noneOfTheAbovePriorityId]) {
       setDisplayNextTabButton(true);
     } else {
       setDisplayNextTabButton(false);
     }
 
-    if (priorityTypeSelected && userData.taskItemChecklist[noneOfTheAbovePriorityId]) {
+    if (priorityTypeSelected && business.taskItemChecklist[noneOfTheAbovePriorityId]) {
       updateQueue.queueTaskItemChecklist({ [noneOfTheAbovePriorityId]: false }).update();
     }
-  }, [userData, updateQueue]);
+  }, [business, updateQueue]);
 
   useEffect(() => {
-    if (!userData) {
-      return;
-    }
+    if (!business) return;
 
     const isCheckboxesSelected = (priorityType: PriorityType): boolean => {
       return priorityTypesObj[priorityType].some((checkboxId) => {
-        return userData.taskItemChecklist[checkboxId] === true;
+        return business.taskItemChecklist[checkboxId] === true;
       });
     };
 
@@ -91,10 +89,10 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
     } else {
       setEligibiltyPhrase("");
     }
-  }, [userData, Config.cannabisPriorityStatus]);
+  }, [business, Config.cannabisPriorityStatus]);
 
   const handleNoneOfTheAboveCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (!userData || !updateQueue) return;
+    if (!business || !updateQueue) return;
 
     if (event.target.checked) {
       const unselectPriorityTasks = {} as Record<string, boolean>;
@@ -128,7 +126,7 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
               control={
                 <Checkbox
                   onChange={handleNoneOfTheAboveCheckboxChange}
-                  checked={!!userData?.taskItemChecklist[noneOfTheAbovePriorityId]}
+                  checked={!!business?.taskItemChecklist[noneOfTheAbovePriorityId]}
                   data-testid="cannabis-priority-status-none"
                 />
               }

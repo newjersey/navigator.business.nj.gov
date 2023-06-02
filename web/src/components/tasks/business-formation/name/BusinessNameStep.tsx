@@ -18,7 +18,7 @@ export const BusinessNameStep = (): ReactElement => {
   const FIELD_NAME = "businessName";
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
-  const { userData } = useUserData();
+  const { business } = useUserData();
   const { currentName, isLoading, error, updateCurrentName, onBlurNameField, searchBusinessName } =
     useBusinessNameSearch({ isBusinessFormation: true, isDba: false });
   const { doesFieldHaveError } = useFormationErrors();
@@ -26,14 +26,14 @@ export const BusinessNameStep = (): ReactElement => {
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   useEffect(() => {
-    if (!userData || !state.hasSetStateFirstTime || mountEffectOccurred.current) return;
-    const nameToSet = state.formationFormData.businessName || userData.profileData.businessName;
+    if (!business || !state.hasSetStateFirstTime || mountEffectOccurred.current) return;
+    const nameToSet = state.formationFormData.businessName || business.profileData.businessName;
     updateCurrentName(nameToSet);
 
     setFormationFormData((prev) => ({ ...prev, businessName: nameToSet }));
     mountEffectOccurred.current = true;
   }, [
-    userData,
+    business,
     state.hasSetStateFirstTime,
     mountEffectOccurred,
     state.formationFormData,

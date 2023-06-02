@@ -25,7 +25,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { FormationStepNames, StepperStep } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
-import { FormationFormData, UserData } from "@businessnjgovnavigator/shared";
+import { Business, FormationFormData, getCurrentBusiness } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
@@ -35,7 +35,7 @@ interface Props {
 }
 
 export const BusinessFormationPaginator = (props: Props): ReactElement => {
-  const { updateQueue, userData } = useUserData();
+  const { updateQueue, business } = useUserData();
   const { state, setStepIndex, setHasBeenSubmitted, setFormationFormData, setFieldsInteracted } =
     useContext(BusinessFormationContext);
   const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
@@ -58,16 +58,14 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   }, [state.stepIndex, isDesktop, state.hasBeenSubmitted]);
 
   useMountEffect(() => {
-    if (!userData) {
-      return;
-    }
+    if (!business) return;
     if (
-      userData.formationData.lastVisitedPageIndex > BusinessFormationStepsConfiguration.length - 1 ||
-      userData.formationData.lastVisitedPageIndex < 0
+      business.formationData.lastVisitedPageIndex > BusinessFormationStepsConfiguration.length - 1 ||
+      business.formationData.lastVisitedPageIndex < 0
     ) {
       setStepIndex(0);
     } else {
-      setStepIndex(userData.formationData.lastVisitedPageIndex);
+      setStepIndex(business.formationData.lastVisitedPageIndex);
     }
   });
 
@@ -158,24 +156,24 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
 
     if (isStep("Business")) {
       const muncipalityEnteredForFirstTime =
-        updateQueue.current().profileData.municipality === undefined &&
-        updateQueue.current().formationData.formationFormData.addressMunicipality !== undefined;
+        updateQueue.currentBusiness().profileData.municipality === undefined &&
+        updateQueue.currentBusiness().formationData.formationFormData.addressMunicipality !== undefined;
 
       if (muncipalityEnteredForFirstTime) {
         analytics.event.business_formation_location_question.submit.location_entered_for_first_time();
       }
 
       updateQueue.queueProfileData({
-        municipality: updateQueue.current().formationData.formationFormData.addressMunicipality,
+        municipality: updateQueue.currentBusiness().formationData.formationFormData.addressMunicipality,
       });
     }
 
     if (
       isStep("Name") &&
-      updateQueue.current().formationData.businessNameAvailability?.status === "AVAILABLE"
+      updateQueue.currentBusiness().formationData.businessNameAvailability?.status === "AVAILABLE"
     ) {
       updateQueue.queueProfileData({
-        businessName: updateQueue.current().formationData.formationFormData.businessName,
+        businessName: updateQueue.currentBusiness().formationData.formationFormData.businessName,
       });
     }
   };
@@ -247,8 +245,8 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     }
   };
 
-  const submitToApiAnalytics = (userData: UserData): void => {
-    const { formationFormData } = userData.formationData;
+  const submitToApiAnalytics = (business: Business): void => {
+    const { formationFormData } = business.formationData;
 
     analytics.event.business_formation_provisions.submit.provisions_submitted_with_formation(
       formationFormData.provisions?.length ?? 0
@@ -278,40 +276,37 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   };
 
   const submitToApi = async (): Promise<void> => {
-    if (!userData || !updateQueue) return;
-    const filteredUserData = {
-      ...userData,
-      formationData: {
-        ...userData.formationData,
-        formationFormData: filterEmptyFormData(state.formationFormData),
-      },
-    };
+    if (!business || !updateQueue) return;
+    updateQueue.queueFormationData({
+      formationFormData: filterEmptyFormData(state.formationFormData),
+    });
 
     setIsLoading(true);
 
     const newUserData = await api.postBusinessFormation(
-      filteredUserData,
+      updateQueue.current(),
       window.location.href,
       state.foreignGoodStandingFile
     );
     updateQueue.queue(newUserData).update();
-    submitToApiAnalytics(newUserData);
-    resetInteractedFields(newUserData);
+    const newBusiness = getCurrentBusiness(newUserData);
+    submitToApiAnalytics(newBusiness);
+    resetInteractedFields(newBusiness);
 
     if (
-      newUserData.formationData.formationResponse?.success &&
-      newUserData.formationData.formationResponse?.redirect
+      newBusiness.formationData.formationResponse?.success &&
+      newBusiness.formationData.formationResponse?.redirect
     ) {
       analytics.event.business_formation.submit.go_to_NIC_formation_processing();
-      await router.replace(newUserData.formationData.formationResponse.redirect);
+      await router.replace(newBusiness.formationData.formationResponse.redirect);
     } else {
       analytics.event.business_formation.submit.error_remain_at_formation();
       setIsLoading(false);
     }
   };
 
-  const resetInteractedFields = (userData: UserData): void => {
-    const validatedFields = validatedFieldsForUser(userData.formationData.formationFormData);
+  const resetInteractedFields = (business: Business): void => {
+    const validatedFields = validatedFieldsForUser(business.formationData.formationFormData);
     setFieldsInteracted(validatedFields, { setToUninteracted: true });
   };
 
@@ -335,9 +330,9 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     if (!updateQueue || !state.hasSetStateFirstTime) return false;
 
     return (
-      JSON.stringify(updateQueue.current().formationData.formationFormData) !==
+      JSON.stringify(updateQueue.currentBusiness().formationData.formationFormData) !==
         JSON.stringify(state.formationFormData) ||
-      JSON.stringify(updateQueue.current().formationData.businessNameAvailability) !==
+      JSON.stringify(updateQueue.currentBusiness().formationData.businessNameAvailability) !==
         JSON.stringify(state.businessNameAvailability)
     );
   };
@@ -395,14 +390,14 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
 
   const hasGenericApiError = (): boolean => {
     const hasApiError =
-      userData?.formationData.formationResponse !== undefined &&
-      userData.formationData.formationResponse.errors.length > 0;
+      business?.formationData.formationResponse !== undefined &&
+      business.formationData.formationResponse.errors.length > 0;
 
     if (!hasApiError) {
       return false;
     }
 
-    const allApiErrorsHaveMappings = userData.formationData.formationResponse.errors.every((error) => {
+    const allApiErrorsHaveMappings = business.formationData.formationResponse.errors.every((error) => {
       return getFieldByApiField(error.field) !== UNKNOWN_API_ERROR_FIELD;
     });
 
@@ -411,14 +406,14 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
 
   const getErrorComponent = (): ReactNode => {
     if (hasGenericApiError()) {
-      if (!userData || !userData.formationData.formationResponse) {
+      if (!business || !business.formationData.formationResponse) {
         return <></>;
       }
       return (
         <Alert variant="error">
           <div>{Config.formation.errorBanner.genericApiError}</div>
           <ul style={{ wordBreak: "break-word" }}>
-            {userData.formationData.formationResponse.errors.map((it) => {
+            {business.formationData.formationResponse.errors.map((it) => {
               return (
                 <li key={it.field}>
                   <span>{it.field}</span>

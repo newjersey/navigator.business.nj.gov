@@ -19,6 +19,8 @@ import { FormationClient } from "../domain/types";
 import { LogWriterType } from "../libs/logWriter";
 import { splitErrorField } from "./splitErrorField";
 
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+
 type ApiConfig = {
   account: string;
   key: string;
@@ -162,16 +164,18 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
     config: ApiConfig,
     foreignGoodStandingFile: InputFile | undefined
   ): ApiSubmission => {
-    const formationFormData = userData.formationData.formationFormData;
+    const currentBusiness = getCurrentBusiness(userData);
+    const formationFormData = currentBusiness.formationData.formationFormData;
 
     const isManual = formationFormData.agentNumberOrManual === "MANUAL_ENTRY";
 
-    const isForeign = userData.profileData.businessPersona === "FOREIGN";
+    const isForeign = currentBusiness.profileData.businessPersona === "FOREIGN";
     const toFormationLegalStructure: FormationLegalType = isForeign
-      ? (`foreign-${userData.profileData.legalStructureId}` as FormationLegalType)
-      : (userData.profileData.legalStructureId as FormationLegalType);
+      ? (`foreign-${currentBusiness.profileData.legalStructureId}` as FormationLegalType)
+      : (currentBusiness.profileData.legalStructureId as FormationLegalType);
 
-    const naicsCode = userData.profileData.naicsCode.length === 6 ? userData.profileData.naicsCode : "";
+    const naicsCode =
+      currentBusiness.profileData.naicsCode.length === 6 ? currentBusiness.profileData.naicsCode : "";
 
     const businessType = BusinessTypeMap[toFormationLegalStructure];
 

@@ -35,6 +35,7 @@ import {
   NameAvailability,
   PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared/";
+import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
 
@@ -46,7 +47,7 @@ interface Props {
 
 export const BusinessFormation = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
-  const { updateQueue, userData } = useUserData();
+  const { updateQueue, business, userData } = useUserData();
   const router = useRouter();
   const { Config } = useConfig();
 
@@ -70,16 +71,16 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
   const legalStructureId: FormationLegalType = useMemo(() => {
     return castPublicFilingLegalTypeToFormationType(
-      (userData?.profileData.legalStructureId ?? defaultFormationLegalType) as PublicFilingLegalType,
-      userData?.profileData.businessPersona
+      (business?.profileData.legalStructureId ?? defaultFormationLegalType) as PublicFilingLegalType,
+      business?.profileData.businessPersona
     );
-  }, [userData?.profileData.businessPersona, userData?.profileData.legalStructureId]);
+  }, [business?.profileData.businessPersona, business?.profileData.legalStructureId]);
 
   const isForeign = useMemo(() => legalStructureId.includes(foreignLegalTypePrefix), [legalStructureId]);
 
   const isValidLegalStructure = useMemo(
-    () => allowFormation(userData?.profileData.legalStructureId, userData?.profileData.businessPersona),
-    [userData?.profileData.legalStructureId, userData?.profileData.businessPersona]
+    () => allowFormation(business?.profileData.legalStructureId, business?.profileData.businessPersona),
+    [business?.profileData.legalStructureId, business?.profileData.businessPersona]
   );
 
   const getBusinessStartDate = (date: string | undefined, legalType: FormationLegalType): string => {
@@ -89,35 +90,34 @@ export const BusinessFormation = (props: Props): ReactElement => {
   };
 
   useMountEffectWhenDefined(() => {
-    if (!userData) {
-      return;
-    }
+    if (!userData) return;
+    const business = getCurrentBusiness(userData);
 
     const splitName = splitFullName(userData.user.name);
     setFormationFormData({
-      ...userData.formationData.formationFormData,
+      ...business.formationData.formationFormData,
       businessName:
-        userData.formationData.formationFormData.businessName ?? userData.profileData.businessName,
+        business.formationData.formationFormData.businessName ?? business.profileData.businessName,
       businessStartDate: getBusinessStartDate(
-        userData.formationData.formationFormData.businessStartDate,
+        business.formationData.formationFormData.businessStartDate,
         legalStructureId
       ),
-      addressMunicipality: userData.profileData.municipality,
+      addressMunicipality: business.profileData.municipality,
       legalType: legalStructureId,
-      contactFirstName: userData.formationData.formationFormData.contactFirstName || splitName.firstName,
-      contactLastName: userData.formationData.formationFormData.contactLastName || splitName.lastName,
+      contactFirstName: business.formationData.formationFormData.contactFirstName || splitName.firstName,
+      contactLastName: business.formationData.formationFormData.contactLastName || splitName.lastName,
       businessLocationType: isForeign
-        ? userData.formationData.formationFormData.businessLocationType ?? "US"
+        ? business.formationData.formationFormData.businessLocationType ?? "US"
         : "NJ",
     });
-    if (userData.formationData.businessNameAvailability) {
+    if (business.formationData.businessNameAvailability) {
       setBusinessNameAvailability({
-        ...userData.formationData.businessNameAvailability,
+        ...business.formationData.businessNameAvailability,
       });
     }
-    if (userData.formationData.dbaBusinessNameAvailability) {
+    if (business.formationData.dbaBusinessNameAvailability) {
       setDbaBusinessNameAvailability({
-        ...userData.formationData.dbaBusinessNameAvailability,
+        ...business.formationData.dbaBusinessNameAvailability,
       });
     }
 
@@ -136,17 +136,17 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
   useEffect(() => {
     const shouldFetchCompletedFiling = (): boolean => {
-      if (!userData || getCompletedFilingApiCallOccurred.current) {
+      if (!business || getCompletedFilingApiCallOccurred.current) {
         return false;
       }
       const completeFilingQueryParamExists = checkQueryValue(router, QUERIES.completeFiling, "true");
-      const completedPayment = userData.formationData.completedFilingPayment;
-      const noCompletedFilingExists = !userData.formationData.getFilingResponse?.success;
+      const completedPayment = business.formationData.completedFilingPayment;
+      const noCompletedFilingExists = !business.formationData.getFilingResponse?.success;
       return completeFilingQueryParamExists || (completedPayment && noCompletedFilingExists);
     };
 
     (async function fetchCompletedFiling(): Promise<void> {
-      if (!router.isReady || !userData || !updateQueue) {
+      if (!router.isReady || !business || !updateQueue) {
         return;
       }
       if (shouldFetchCompletedFiling()) {
@@ -170,7 +170,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
           });
       }
     })();
-  }, [router.isReady, updateQueue, router, props.task?.urlSlug, userData]);
+  }, [router.isReady, updateQueue, router, props.task?.urlSlug, business]);
 
   if (!props.task) return <></>;
 
@@ -189,7 +189,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     });
   };
 
-  if (!isValidLegalStructure && userData?.profileData.businessPersona !== "FOREIGN" && !props.searchOnly) {
+  if (!isValidLegalStructure && business?.profileData.businessPersona !== "FOREIGN" && !props.searchOnly) {
     return (
       <div className="flex flex-column space-between minh-38">
         <div>
@@ -206,10 +206,10 @@ export const BusinessFormation = (props: Props): ReactElement => {
   }
 
   const errorFetchingFilings =
-    userData?.formationData.completedFilingPayment &&
+    business?.formationData.completedFilingPayment &&
     !isLoadingGetFiling &&
     getCompletedFilingApiCallOccurred.current &&
-    !userData.formationData.getFilingResponse?.success;
+    !business.formationData.getFilingResponse?.success;
 
   if (errorFetchingFilings) {
     return (
@@ -231,11 +231,11 @@ export const BusinessFormation = (props: Props): ReactElement => {
     );
   }
 
-  if (userData?.formationData.getFilingResponse?.success) {
+  if (business?.formationData.getFilingResponse?.success) {
     return (
       <div className="flex flex-column space-between minh-38">
         <TaskHeader task={props.task} />
-        <FormationSuccessPage userData={userData} />
+        <FormationSuccessPage business={business} />
       </div>
     );
   }

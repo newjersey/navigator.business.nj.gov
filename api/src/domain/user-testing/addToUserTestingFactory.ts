@@ -1,9 +1,11 @@
 import { UserData } from "@shared/userData";
 import { AddToUserTesting, UserTestingClient } from "../types";
 
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+
 export const addToUserTestingFactory = (userTestingClient: UserTestingClient): AddToUserTesting => {
   return async (userData: UserData): Promise<UserData> => {
-    const userTesting = await userTestingClient.add(userData.user, userData.profileData);
+    const userTesting = await userTestingClient.add(userData.user, getCurrentBusiness(userData).profileData);
     const user: UserData = {
       ...userData,
       user: {

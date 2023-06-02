@@ -4,11 +4,11 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileTabs } from "@/lib/types/types";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { BusinessPersona, ForeignBusinessType } from "@businessnjgovnavigator/shared/profileData";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
 
 interface Props {
-  userData: UserData | undefined;
+  business: Business | undefined;
   businessPersona: BusinessPersona;
   foreignBusinessType: ForeignBusinessType;
   activeTab: ProfileTabs;
@@ -31,11 +31,11 @@ export const ProfileTabNav = (props: Props): ReactElement => {
   };
 
   const shouldShowDocuments = (): boolean => {
-    if (props.userData?.formationData.getFilingResponse?.success) {
+    if (props.business?.formationData.getFilingResponse?.success) {
       return true;
     }
     if (props.businessPersona === "STARTING") {
-      return LookupLegalStructureById(props.userData?.profileData.legalStructureId).elementsToDisplay.has(
+      return LookupLegalStructureById(props.business?.profileData.legalStructureId).elementsToDisplay.has(
         "formationDocuments"
       );
     }

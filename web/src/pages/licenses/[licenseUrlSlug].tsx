@@ -76,13 +76,13 @@ interface Props {
 }
 
 const LicensePage = (props: Props): ReactElement => {
-  const { userData } = useUserData();
-  let date = parseDate(userData?.licenseData?.expirationISO);
+  const { business } = useUserData();
+  let date = parseDate(business?.licenseData?.expirationISO);
   if (props.licenseEventType === "renewal") {
     date = date.add(30, "days");
   }
 
-  const licenseName = LookupIndustryById(userData?.profileData.industryId).licenseType;
+  const licenseName = LookupIndustryById(business?.profileData.industryId).licenseType;
 
   return (
     <>

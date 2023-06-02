@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const RadioQuestion = (props: Props): ReactElement => {
-  const { updateQueue, userData } = useUserData();
+  const { updateQueue, business } = useUserData();
   const [onboardingQuestion, setOnboardingQuestion] = useState<PostOnboarding>({
     contentMd: "",
     question: "",
@@ -53,7 +53,7 @@ export const RadioQuestion = (props: Props): ReactElement => {
             <RadioGroup
               aria-label={onboardingQuestion.question}
               name={props.id}
-              value={userData?.profileData[props.onboardingKey] ?? ""}
+              value={business?.profileData[props.onboardingKey] ?? ""}
               onChange={handleRadioChange}
               row
               data-testid="post-onboarding-radio-btn"
@@ -76,12 +76,12 @@ export const RadioQuestion = (props: Props): ReactElement => {
               />
             </RadioGroup>
           </FormControl>
-          {userData?.profileData[props.onboardingKey] && (
+          {business?.profileData[props.onboardingKey] && (
             <div data-testid="post-onboarding-true-content">
               <Content>{onboardingQuestion.contentMd}</Content>
             </div>
           )}
-          {userData?.profileData[props.onboardingKey] === false && (
+          {business?.profileData[props.onboardingKey] === false && (
             <div data-testid="post-onboarding-false-content">
               <Content>{onboardingQuestion.radioNoContent}</Content>
             </div>

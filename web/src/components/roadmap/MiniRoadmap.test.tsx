@@ -7,17 +7,19 @@ import {
 } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  generateBusiness,
   generatePreferences,
   generateProfileData,
-  generateUserData,
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -52,14 +54,14 @@ describe("<MiniRoadmap />", () => {
   });
 
   it("expands the step that you are in by default", () => {
-    useMockUserData({});
+    useMockBusiness({});
     renderMiniRoadMap("task2");
     expect(screen.getByText("task2")).toBeInTheDocument();
     expect(screen.queryByText("task1")).not.toBeInTheDocument();
   });
 
   it("expands another step when clicked, keeping your step open", () => {
-    useMockUserData({});
+    useMockBusiness({});
     renderMiniRoadMap("task2");
     fireEvent.click(screen.getByText("step1"));
     expect(screen.getByText("task2")).toBeInTheDocument();
@@ -67,7 +69,7 @@ describe("<MiniRoadmap />", () => {
   });
 
   it("closes an open step when clicked", () => {
-    useMockUserData({});
+    useMockBusiness({});
     renderMiniRoadMap("task2");
     fireEvent.click(screen.getByText("step2"));
     expect(screen.queryByText("task2")).not.toBeInTheDocument();
@@ -75,7 +77,7 @@ describe("<MiniRoadmap />", () => {
   });
 
   it("displays each step under associated section", () => {
-    useMockUserData({});
+    useMockBusiness({});
 
     useMockRoadmap({
       steps: [
@@ -112,7 +114,7 @@ describe("<MiniRoadmap />", () => {
       ],
     });
 
-    useMockUserData({
+    useMockBusiness({
       preferences: generatePreferences({
         roadmapOpenSections: ["PLAN", "START"],
       }),
@@ -138,7 +140,7 @@ describe("<MiniRoadmap />", () => {
           ],
         });
 
-        useMockUserData({
+        useMockBusiness({
           preferences: generatePreferences({
             roadmapOpenSections: ["PLAN", "START"],
           }),
@@ -165,7 +167,7 @@ describe("<MiniRoadmap />", () => {
         ],
       });
 
-      useMockUserData({
+      useMockBusiness({
         preferences: generatePreferences({
           roadmapOpenSections: ["PLAN", "START"],
         }),
@@ -177,16 +179,16 @@ describe("<MiniRoadmap />", () => {
     }
   );
 
-  const renderStatefulMiniRoadMap = (taskId: string, userData = generateUserData({})): void => {
+  const renderStatefulMiniRoadMap = (taskId: string, business: Business): void => {
     render(
-      <WithStatefulUserData initialUserData={userData}>
+      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
         <MiniRoadmap activeTaskId={taskId} />;
       </WithStatefulUserData>
     );
   };
 
   describe("User Step State Preferences", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       preferences: generatePreferences({
         roadmapOpenSections: ["PLAN", "START"],
         roadmapOpenSteps: [2],
@@ -215,42 +217,42 @@ describe("<MiniRoadmap />", () => {
     });
 
     it("display open step based on userData preferences", () => {
-      useMockUserData(userData);
+      useMockBusiness(business);
       renderMiniRoadMap("task1");
       expect(screen.getByText("task2")).toBeInTheDocument();
     });
 
     it("display closed step based on userData preferences", () => {
-      useMockUserData(userData);
+      useMockBusiness(business);
       renderMiniRoadMap("task2");
       expect(screen.queryByText("task1")).not.toBeInTheDocument();
     });
 
     it("adds step to userData openSteps when step is active", async () => {
-      renderStatefulMiniRoadMap("task1", userData);
+      renderStatefulMiniRoadMap("task1", business);
       expect(screen.getByText("task1")).toBeInTheDocument();
       await waitFor(() => {
-        return expect(currentUserData().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([1, 2]));
+        return expect(currentBusiness().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([1, 2]));
       });
     });
 
-    it("adds step to userData openSteps when step is clicked", async () => {
-      renderStatefulMiniRoadMap("task2", userData);
+    it("adds step to business openSteps when step is clicked", async () => {
+      renderStatefulMiniRoadMap("task2", business);
       expect(screen.queryByText("task1")).not.toBeInTheDocument();
       fireEvent.click(screen.getByText("step1"));
       expect(screen.getByText("task1")).toBeInTheDocument();
       expect(screen.getByText("task2")).toBeInTheDocument();
       await waitFor(() => {
-        return expect(currentUserData().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([1, 2]));
+        return expect(currentBusiness().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([1, 2]));
       });
     });
 
-    it("removes active step from userData openSteps when active step is clicked", async () => {
-      renderStatefulMiniRoadMap("task1", userData);
+    it("removes active step from business openSteps when active step is clicked", async () => {
+      renderStatefulMiniRoadMap("task1", business);
       fireEvent.click(screen.getByText("step1"));
       expect(screen.queryByText("task1")).not.toBeInTheDocument();
       await waitFor(() => {
-        return expect(currentUserData().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([2]));
+        return expect(currentBusiness().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([2]));
       });
     });
   });

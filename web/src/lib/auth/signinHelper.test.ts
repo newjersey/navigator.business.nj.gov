@@ -3,6 +3,11 @@ import { onGuestSignIn, onSelfRegister, onSignIn, onSignOut, SelfRegRouter } fro
 import { ROUTES } from "@/lib/domain-logic/routes";
 import * as UserDataStorage from "@/lib/storage/UserDataStorage";
 import { generateUser, generateUserData } from "@businessnjgovnavigator/shared/";
+import {
+  generateBusiness,
+  generatePreferences,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { waitFor } from "@testing-library/react";
 import { UpdateQueue } from "../types/types";
@@ -85,20 +90,37 @@ describe("SigninHelper", () => {
       await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
         ...userData,
-        preferences: { ...userData.preferences, returnToLink: "/tasks/some-url" },
+        businesses: {
+          [userData.currentBusinessId]: {
+            ...userData.businesses[userData.currentBusinessId],
+            preferences: {
+              ...userData.businesses[userData.currentBusinessId].preferences,
+              returnToLink: "/tasks/some-url",
+            },
+          },
+        },
       });
     });
 
     it("posts userData to api self-reg with the returnToLink if called with true for the useReturnToLink", async () => {
-      userData = generateUserData({
-        preferences: { ...userData.preferences, returnToLink: "/pathname?query=true" },
+      const business = generateBusiness({
+        preferences: generatePreferences({ returnToLink: "/pathname?query=true" }),
       });
+      userData = generateUserDataForBusiness(business);
       updateQueue = new UpdateQueueFactory(userData, update);
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
       await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus, { useReturnToLink: true });
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
         ...userData,
-        preferences: { ...userData.preferences, returnToLink: "/pathname?query=true" },
+        businesses: {
+          [userData.currentBusinessId]: {
+            ...userData.businesses[userData.currentBusinessId],
+            preferences: {
+              ...userData.businesses[userData.currentBusinessId].preferences,
+              returnToLink: "/pathname?query=true",
+            },
+          },
+        },
       });
     });
 
@@ -152,8 +174,7 @@ describe("SigninHelper", () => {
     });
 
     it("redirect user to onboarding if still in progress", async () => {
-      const user = generateUser({});
-      const userData = generateUserData({ user, onboardingFormProgress: "UNSTARTED" });
+      const userData = generateUserDataForBusiness(generateBusiness({ onboardingFormProgress: "UNSTARTED" }));
       mockGetCurrentUserData.mockImplementation(() => {
         return userData;
       });

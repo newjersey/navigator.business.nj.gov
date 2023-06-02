@@ -19,10 +19,11 @@ import { createReducedFieldStates, ProfileFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
+  Business,
   createEmptyProfileData,
+  getCurrentBusiness,
   LookupLegalStructureById,
   ProfileData,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import { Backdrop, CircularProgress } from "@mui/material";
 import { ReactElement, useState } from "react";
@@ -33,14 +34,14 @@ interface Props {
   onSuccess: () => void;
   moveToPrevStep: () => void;
   CMS_ONLY_fakeError?: "NONE" | "API" | "UNKNOWN"; // for CMS only
-  CMS_ONLY_fakeUserData?: UserData; // for CMS only
+  CMS_ONLY_fakeBusiness?: Business; // for CMS only
 }
 
 export const TaxAccessStepTwo = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { updateQueue, userData: userDataFromHook } = useUserData();
+  const { updateQueue } = useUserData();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
-  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook;
+  const business = props.CMS_ONLY_fakeBusiness ?? updateQueue?.currentBusiness();
 
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -57,10 +58,9 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
   } = useFormContextHelper(createReducedFieldStates(fields));
 
   useMountEffectWhenDefined(() => {
-    if (userData) {
-      setProfileData(userData.profileData);
-    }
-  }, userData);
+    if (!business) return;
+    setProfileData(business.profileData);
+  }, business);
 
   useMountEffect(() => {
     if (has_CMS_ONLY_fakeError) {
@@ -85,16 +85,16 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
     taxId: Config.taxAccess.modalTaxFieldErrorName,
   };
 
-  const canMoveToPrevStep = userData?.profileData.businessPersona === "OWNING";
+  const canMoveToPrevStep = business?.profileData.businessPersona === "OWNING";
 
   const displayBusinessName = (): boolean => {
-    return LookupLegalStructureById(userData?.profileData.legalStructureId).elementsToDisplay.has(
+    return LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
       "businessName"
     );
   };
 
   const displayResponsibleOwnerName = (): boolean => {
-    return LookupLegalStructureById(userData?.profileData.legalStructureId).elementsToDisplay.has(
+    return LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
       "responsibleOwnerName"
     );
   };
@@ -112,7 +112,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
   const errorAlert = (): ReactElement => {
     const errorApiFailed = apiFailed === "FAILED" || props.CMS_ONLY_fakeError === "API";
 
-    if (userData?.taxFilingData.errorField === "businessName" && errorApiFailed) {
+    if (business?.taxFilingData.errorField === "businessName" && errorApiFailed) {
       return (
         <>
           {Config.taxAccess.failedErrorMessageHeader}
@@ -138,12 +138,12 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
 
   FormFuncWrapper(
     async () => {
-      if (!userData || !updateQueue) return;
+      if (!business || !updateQueue) return;
 
       setIsLoading(true);
 
       const encryptedTaxId =
-        profileData.taxId === userData.profileData.taxId ? profileData.encryptedTaxId : undefined;
+        profileData.taxId === business.profileData.taxId ? profileData.encryptedTaxId : undefined;
 
       try {
         let businessNameToSubmitToTaxApi = "";
@@ -166,7 +166,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
           encryptedTaxId: encryptedTaxId,
         });
 
-        if (userDataToSet.taxFilingData.state === "SUCCESS") {
+        if (getCurrentBusiness(userDataToSet).taxFilingData.state === "SUCCESS") {
           if (displayBusinessName()) {
             updateQueue.queueProfileData({
               businessName: profileData.businessName,
@@ -187,7 +187,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
         return;
       }
 
-      const { taxFilingData } = updateQueue.current();
+      const { taxFilingData } = updateQueue.currentBusiness();
 
       if (taxFilingData.state === "SUCCESS") {
         setIsLoading(false);
@@ -234,11 +234,9 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
   );
 
   const onClose = (): void => {
-    if (!userData) {
-      return;
-    }
+    if (!business) return;
     props.close();
-    setProfileData(userData.profileData);
+    setProfileData(business.profileData);
     setOnAPIfailed(undefined);
     setOnSubmitClicked(false);
     formContextState.reducer({ type: FieldStateActionKind.RESET });
@@ -342,7 +340,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                   header: Config.taxAccess.modalTaxIdHeader,
                   description: Config.taxAccess.modalTaxIdMarkdown,
                   postDescription: LookupLegalStructureById(
-                    userData?.profileData.legalStructureId
+                    business?.profileData.legalStructureId
                   ).elementsToDisplay.has("taxIdDisclaimer")
                     ? Config.profileDefaults.fields.taxId.default.disclaimerMd
                     : undefined,

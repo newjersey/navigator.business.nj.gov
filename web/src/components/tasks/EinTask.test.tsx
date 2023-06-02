@@ -7,12 +7,17 @@ import { generateTask } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generateProfileData, generateUserData, UserData } from "@businessnjgovnavigator/shared";
+import {
+  Business,
+  generateBusiness,
+  generateProfileData,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -41,12 +46,12 @@ describe("<EinTask />", () => {
   });
 
   describe("inputting EIN", () => {
-    let initialUserData: UserData;
+    let initialBusiness: Business;
 
     const renderPage = (): void => {
       render(
         withAuthAlert(
-          <WithStatefulUserData initialUserData={initialUserData}>
+          <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <EinTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.TRUE
@@ -55,7 +60,7 @@ describe("<EinTask />", () => {
     };
 
     beforeEach(() => {
-      initialUserData = generateUserData({
+      initialBusiness = generateBusiness({
         profileData: generateProfileData({ employerId: "" }),
         taskProgress: { [taskId]: "NOT_STARTED" },
       });
@@ -73,7 +78,7 @@ describe("<EinTask />", () => {
       });
       fireEvent.click(screen.getByText(Config.ein.saveButtonText));
       await waitFor(() => {
-        expect(currentUserData().profileData.employerId).toEqual("123456789");
+        expect(currentBusiness().profileData.employerId).toEqual("123456789");
       });
     });
 
@@ -108,18 +113,18 @@ describe("<EinTask />", () => {
       });
       fireEvent.click(screen.getByText(Config.ein.saveButtonText));
       await waitFor(() => {
-        expect(currentUserData().taskProgress[taskId]).toEqual("COMPLETED");
+        expect(currentBusiness().taskProgress[taskId]).toEqual("COMPLETED");
       });
     });
   });
 
   describe("displaying EIN", () => {
-    let initialUserData: UserData;
+    let initialBusiness: Business;
 
     const renderPage = (): void => {
       render(
         withAuthAlert(
-          <WithStatefulUserData initialUserData={initialUserData}>
+          <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <EinTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.TRUE
@@ -128,7 +133,7 @@ describe("<EinTask />", () => {
     };
 
     beforeEach(() => {
-      initialUserData = generateUserData({
+      initialBusiness = generateBusiness({
         profileData: generateProfileData({ employerId: "123456789" }),
         taskProgress: { [taskId]: "COMPLETED" },
       });
@@ -153,30 +158,30 @@ describe("<EinTask />", () => {
       expect(screen.getByText(Config.ein.saveButtonText)).toBeInTheDocument();
       expect((screen.getByLabelText("Save your EIN") as HTMLInputElement).value).toEqual("");
       expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
-      expect(currentUserData().profileData.employerId).toEqual(undefined);
+      expect(currentBusiness().profileData.employerId).toEqual(undefined);
     });
 
     it("sets task status to in-progress on edit button", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.editText));
-      expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
+      expect(currentBusiness().taskProgress[taskId]).toEqual("IN_PROGRESS");
     });
 
     it("sets task status to in-progress on remove button", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
-      expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
+      expect(currentBusiness().taskProgress[taskId]).toEqual("IN_PROGRESS");
     });
   });
 
   describe("guest mode", () => {
-    let initialUserData: UserData;
+    let initialBusiness: Business;
     const setRegistrationModalIsVisible = jest.fn();
 
     const renderPage = (): void => {
       render(
         withAuthAlert(
-          <WithStatefulUserData initialUserData={initialUserData}>
+          <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <EinTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,
@@ -186,7 +191,7 @@ describe("<EinTask />", () => {
     };
 
     beforeEach(() => {
-      initialUserData = generateUserData({
+      initialBusiness = generateBusiness({
         profileData: generateProfileData({ employerId: "" }),
         taskProgress: { [taskId]: "NOT_STARTED" },
       });

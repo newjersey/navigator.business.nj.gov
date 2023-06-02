@@ -10,15 +10,15 @@ import {
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { mockPush } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { currentUserData } from "@/test/mock/withStatefulUserData";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   businessStructureTaskId,
   castPublicFilingLegalTypeToFormationType,
   defaultDateFormat,
   FormationFormData,
+  generateBusiness,
   generateFormationFormData,
   generateMunicipality,
-  generateUserData,
   getCurrentDate,
   getCurrentDateFormatted,
   Municipality,
@@ -81,11 +81,11 @@ describe("Formation - BusinessStep", () => {
       dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     };
-    const page = preparePage(
-      generateUserData({ profileData, formationData }),
+    const page = preparePage({
+      business: generateBusiness({ profileData, formationData }),
       displayContent,
-      municipalities
-    );
+      municipalities,
+    });
     if (isForeign) {
       await page.submitNexusBusinessNameStep();
     } else {
@@ -271,7 +271,7 @@ describe("Formation - BusinessStep", () => {
       const page = await getPageHelper({}, { businessPurpose: "some purpose" });
       fireEvent.click(screen.getByLabelText("remove business purpose"));
       await page.submitBusinessStep();
-      expect(currentUserData().formationData.formationFormData.businessPurpose).toEqual("");
+      expect(currentBusiness().formationData.formationFormData.businessPurpose).toEqual("");
     });
 
     it("updates char count in real time", async () => {
@@ -353,7 +353,7 @@ describe("Formation - BusinessStep", () => {
       const removeProvision2Button = screen.getAllByLabelText("remove provision")[1];
       fireEvent.click(removeProvision2Button);
       await page.submitBusinessStep();
-      expect(currentUserData().formationData.formationFormData.provisions).toEqual([
+      expect(currentBusiness().formationData.formationFormData.provisions).toEqual([
         "provision1",
         "provision3",
       ]);
@@ -389,7 +389,7 @@ describe("Formation - BusinessStep", () => {
       ).toBeInTheDocument();
       page.fillText("Foreign state of formation", "Virgin Islands");
       await page.submitBusinessStep(true);
-      expect(currentUserData().formationData.formationFormData.foreignStateOfFormation).toEqual(
+      expect(currentBusiness().formationData.formationFormData.foreignStateOfFormation).toEqual(
         "Virgin Islands"
       );
     });
@@ -481,7 +481,7 @@ describe("Formation - BusinessStep", () => {
       );
       page.fillText("Address country", "Canada");
       await page.submitBusinessStep(true);
-      expect(currentUserData().formationData.formationFormData.addressCountry).toEqual("CA");
+      expect(currentBusiness().formationData.formationFormData.addressCountry).toEqual("CA");
     });
 
     it("displays error on field validation", async () => {
@@ -502,7 +502,7 @@ describe("Formation - BusinessStep", () => {
       );
       page.fillText("Address province", "Quebec");
       await page.submitBusinessStep(true);
-      expect(currentUserData().formationData.formationFormData.addressProvince).toEqual("Quebec");
+      expect(currentBusiness().formationData.formationFormData.addressProvince).toEqual("Quebec");
     });
 
     it("displays error on field validation", async () => {
@@ -520,7 +520,7 @@ describe("Formation - BusinessStep", () => {
       const page = await getPageHelper({ businessPersona: "FOREIGN" }, { addressCity: undefined });
       page.fillText("Address city", "Quebec");
       await page.submitBusinessStep(true);
-      expect(currentUserData().formationData.formationFormData.addressCity).toEqual("Quebec");
+      expect(currentBusiness().formationData.formationFormData.addressCity).toEqual("Quebec");
     });
 
     it("displays error on field validation", async () => {
@@ -538,7 +538,7 @@ describe("Formation - BusinessStep", () => {
       );
       page.fillText("Address state", "AL");
       await page.submitBusinessStep(true);
-      expect(currentUserData().formationData.formationFormData.addressState).toEqual({
+      expect(currentBusiness().formationData.formationFormData.addressState).toEqual({
         name: "Alabama",
         shortCode: "AL",
       });
@@ -562,7 +562,7 @@ describe("Formation - BusinessStep", () => {
       );
       page.fillText("Business total stock", "123");
       await page.submitBusinessStep(true);
-      expect(currentUserData().formationData.formationFormData.businessTotalStock).toEqual("123");
+      expect(currentBusiness().formationData.formationFormData.businessTotalStock).toEqual("123");
     });
 
     it("trims leading zeros", async () => {
@@ -572,7 +572,7 @@ describe("Formation - BusinessStep", () => {
       );
       page.fillText("Business total stock", "0123");
       await page.submitBusinessStep(true);
-      expect(currentUserData().formationData.formationFormData.businessTotalStock).toEqual("123");
+      expect(currentBusiness().formationData.formationFormData.businessTotalStock).toEqual("123");
     });
   });
 
@@ -602,7 +602,7 @@ describe("Formation - BusinessStep", () => {
       );
       page.fillText("Address zip code", "01752");
       await page.submitBusinessStep();
-      expect(currentUserData().formationData.formationFormData.addressZipCode).toEqual("01752");
+      expect(currentBusiness().formationData.formationFormData.addressZipCode).toEqual("01752");
     });
 
     it("limits zipCode to 5-digits in length", async () => {
@@ -612,7 +612,7 @@ describe("Formation - BusinessStep", () => {
       );
       page.fillText("Address zip code", "01752345");
       await page.submitBusinessStep();
-      expect(currentUserData().formationData.formationFormData.addressZipCode).toEqual("01752");
+      expect(currentBusiness().formationData.formationFormData.addressZipCode).toEqual("01752");
     });
   });
 
@@ -633,7 +633,7 @@ describe("Formation - BusinessStep", () => {
       );
       page.fillText("Address zip code", "12345678912");
       await page.submitBusinessStep();
-      expect(currentUserData().formationData.formationFormData.addressZipCode).toEqual("12345678912");
+      expect(currentBusiness().formationData.formationFormData.addressZipCode).toEqual("12345678912");
     });
 
     it("limits postal code vto  11-digit digits in length", async () => {
@@ -643,7 +643,7 @@ describe("Formation - BusinessStep", () => {
       );
       page.fillText("Address zip code", "12345678912345");
       await page.submitBusinessStep();
-      expect(currentUserData().formationData.formationFormData.addressZipCode).toEqual("12345678912");
+      expect(currentBusiness().formationData.formationFormData.addressZipCode).toEqual("12345678912");
     });
   });
 
@@ -666,7 +666,7 @@ describe("Formation - BusinessStep", () => {
       );
       page.selectDate(getCurrentDate(), fieldLabel);
       await page.submitBusinessStep();
-      expect(currentUserData().formationData.formationFormData.foreignDateOfFormation).toEqual(
+      expect(currentBusiness().formationData.formationFormData.foreignDateOfFormation).toEqual(
         getCurrentDateFormatted(defaultDateFormat)
       );
     });
@@ -679,7 +679,7 @@ describe("Formation - BusinessStep", () => {
       const page = await getPageHelper({}, { businessStartDate: "" });
       expect(screen.getByLabelText("Business start date")).toBeInTheDocument();
       await page.submitBusinessStep();
-      expect(currentUserData().formationData.formationFormData.businessStartDate).toEqual(
+      expect(currentBusiness().formationData.formationFormData.businessStartDate).toEqual(
         getCurrentDateFormatted(defaultDateFormat)
       );
     });

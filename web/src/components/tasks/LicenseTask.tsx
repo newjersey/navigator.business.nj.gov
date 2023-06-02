@@ -31,26 +31,24 @@ export const LicenseTask = (props: Props): ReactElement => {
   const [error, setError] = useState<LicenseSearchError | undefined>(undefined);
   const [licenseStatusResult, setLicenseStatusResult] = useState<LicenseStatusResult | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { userData, refresh } = useUserData();
+  const { business, refresh } = useUserData();
 
   const allFieldsHaveValues = (nameAndAddress: NameAndAddress): boolean => {
     return !!(nameAndAddress.name && nameAndAddress.addressLine1 && nameAndAddress.zipCode);
   };
 
   useMountEffectWhenDefined(() => {
-    if (!userData) {
-      return;
-    }
-    if (userData.licenseData) {
+    if (!business) return;
+    if (business.licenseData) {
       setTabIndex(STATUS_TAB_INDEX);
     }
-    if (userData.licenseData?.completedSearch) {
+    if (business.licenseData?.completedSearch) {
       setLicenseStatusResult({
-        status: userData.licenseData.status,
-        checklistItems: userData.licenseData.items,
+        status: business.licenseData.status,
+        checklistItems: business.licenseData.items,
       });
     }
-  }, userData);
+  }, business);
 
   const onSelectTab = (event: React.SyntheticEvent, newValue: string): void => {
     const index = Number.parseInt(newValue);
@@ -68,9 +66,7 @@ export const LicenseTask = (props: Props): ReactElement => {
   };
 
   const onSubmit = (nameAndAddress: NameAndAddress): void => {
-    if (!userData || !userData.profileData.industryId) {
-      return;
-    }
+    if (!business || !business.profileData.industryId) return;
 
     if (!allFieldsHaveValues(nameAndAddress)) {
       setError("FIELDS_REQUIRED");
@@ -82,12 +78,11 @@ export const LicenseTask = (props: Props): ReactElement => {
       .checkLicenseStatus(nameAndAddress)
       .then((result: UserData) => {
         analytics.event.task_address_form.response.success_application_found();
-        if (!result.licenseData) {
-          return;
-        }
+        const resultLicenseData = result.businesses[result.currentBusinessId].licenseData;
+        if (!resultLicenseData) return;
         setLicenseStatusResult({
-          status: result.licenseData.status,
-          checklistItems: result.licenseData.items,
+          status: resultLicenseData.status,
+          checklistItems: resultLicenseData.items,
         });
         setError(undefined);
       })
@@ -120,7 +115,7 @@ export const LicenseTask = (props: Props): ReactElement => {
         <TaskHeader
           task={props.task}
           tooltipText={
-            userData?.licenseData?.completedSearch ? Config.licenseSearchTask.tooltipText : undefined
+            business?.licenseData?.completedSearch ? Config.licenseSearchTask.tooltipText : undefined
           }
         />
         <Box sx={{ width: "100%" }}>

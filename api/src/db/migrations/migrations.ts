@@ -20,7 +20,9 @@ import { migrate_v114_to_v115 } from "./v115_rename_tax_filings";
 import { migrate_v115_to_v116 } from "./v116_add_dba_business_name_availability";
 import { migrate_v116_to_v117 } from "./v117_add_onboarding_nonprofit";
 import { migrate_v117_to_v118 } from "./v118_set_operating_phase_remote_seller_worker";
+import { migrate_v118_to_v119 } from "./v119_update_structure_to_multiple_businesses";
 import { migrate_v10_to_v11 } from "./v11_change_license_statuses";
+import { migrate_v119_to_v120 } from "./v120_add_missing_migration_data_fields";
 import { migrate_v11_to_v12 } from "./v12_remove_scorp";
 import { migrate_v12_to_v13 } from "./v13_add_construction_renovation_plan";
 import { migrate_v13_to_v14 } from "./v14_add_cleaning_aid_industry";
@@ -240,4 +242,6 @@ export const Migrations: MigrationFunction[] = [
   migrate_v115_to_v116,
   migrate_v116_to_v117,
   migrate_v117_to_v118,
+  migrate_v118_to_v119,
+  migrate_v119_to_v120,
 ];

@@ -5,15 +5,16 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { UserData } from "@businessnjgovnavigator/shared";
+import { Business } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext, useMemo } from "react";
 
 interface Props {
-  CMS_ONLY_fakeUserData?: UserData; // for CMS only
+  CMS_ONLY_fakeBusiness?: Business; // for CMS only
 }
 
 export const Documents = (props: Props): ReactElement => {
   const userDataFromHook = useUserData();
+  const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
   const { Config } = useConfig();
   const { documents } = useDocuments();
   const { state } = useContext(ProfileDataContext);
@@ -26,11 +27,9 @@ export const Documents = (props: Props): ReactElement => {
     }
   );
 
-  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
-
   const listOfDocuments = useMemo(() => {
-    return Object.values(userData?.profileData.documents ?? {});
-  }, [userData?.profileData.documents]);
+    return Object.values(business?.profileData.documents ?? {});
+  }, [business?.profileData.documents]);
 
   return (
     <div className="margin-bottom-6" data-testid={`profileContent-documents`}>
@@ -38,7 +37,7 @@ export const Documents = (props: Props): ReactElement => {
         return !!value;
       }) ? (
         <ol className="padding-left-3 padding-top-1">
-          {userData?.profileData.documents.formationDoc ? (
+          {business?.profileData.documents.formationDoc ? (
             <li>
               <a href={documents?.formationDoc ?? "#"} target="_blank" rel="noreferrer noopener">
                 {Config.profileDefaults.formationDocFileTitle}
@@ -48,7 +47,7 @@ export const Documents = (props: Props): ReactElement => {
           ) : (
             <></>
           )}
-          {userData?.profileData.documents.certifiedDoc ? (
+          {business?.profileData.documents.certifiedDoc ? (
             <li>
               <a href={documents?.certifiedDoc ?? "#"} target="_blank" rel="noreferrer noopener">
                 {" "}
@@ -59,7 +58,7 @@ export const Documents = (props: Props): ReactElement => {
           ) : (
             <></>
           )}
-          {userData?.profileData.documents.standingDoc ? (
+          {business?.profileData.documents.standingDoc ? (
             <li>
               <a href={documents?.standingDoc ?? "#"} target="_blank" rel="noreferrer noopener">
                 {" "}

@@ -1,5 +1,5 @@
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { useMockUserData, useMockUserDataError } from "@/test/mock/mockUseUserData";
+import { useMockBusiness, useMockUserDataError } from "@/test/mock/mockUseUserData";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -10,7 +10,7 @@ describe("<UserDataErrorAlert />", () => {
   });
 
   it("does not display when no error", () => {
-    useMockUserData({});
+    useMockBusiness({});
     render(<UserDataErrorAlert />);
     expect(screen.queryByTestId("error-alert-CACHED_ONLY")).not.toBeInTheDocument();
     expect(screen.queryByTestId("error-alert-NO_DATA")).not.toBeInTheDocument();

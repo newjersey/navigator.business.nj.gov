@@ -44,7 +44,7 @@ interface Props {
 
 const DashboardPage = (props: Props): ReactElement => {
   useAuthAlertPage();
-  const { userData, updateQueue } = useUserData();
+  const { business, updateQueue } = useUserData();
   const router = useRouter();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
@@ -115,16 +115,16 @@ const DashboardPage = (props: Props): ReactElement => {
 
   useMountEffectWhenDefined(() => {
     (async (): Promise<void> => {
-      if (userData?.onboardingFormProgress !== "COMPLETED") {
+      if (business?.onboardingFormProgress !== "COMPLETED") {
         await router.replace(ROUTES.onboarding);
       }
     })();
-  }, userData);
+  }, business);
 
   useMountEffectWhenDefined(() => {
     (async (): Promise<void> => {
-      if (isDesktopAndUp && userData?.preferences.phaseNewlyChanged) {
-        if (!updateQueue || userData?.onboardingFormProgress !== "COMPLETED") {
+      if (isDesktopAndUp && business?.preferences.phaseNewlyChanged) {
+        if (!updateQueue || business?.onboardingFormProgress !== "COMPLETED") {
           return;
         }
         await updateQueue.queuePreferences({ phaseNewlyChanged: false }).update();
@@ -133,13 +133,11 @@ const DashboardPage = (props: Props): ReactElement => {
   }, updateQueue);
 
   const displayHomedBaseBusinessQuestion = (): boolean => {
-    if (!userData) {
-      return false;
-    }
+    if (!business) return false;
     return (
-      isHomeBasedBusinessApplicable(userData.profileData.industryId) &&
-      userData.profileData.homeBasedBusiness === undefined &&
-      LookupOperatingPhaseById(userData.profileData.operatingPhase).displayHomeBasedPrompt
+      isHomeBasedBusinessApplicable(business.profileData.industryId) &&
+      business.profileData.homeBasedBusiness === undefined &&
+      LookupOperatingPhaseById(business.profileData.operatingPhase).displayHomeBasedPrompt
     );
   };
 
@@ -157,7 +155,7 @@ const DashboardPage = (props: Props): ReactElement => {
                     <FieldLabelDescriptionOnly
                       fieldName="homeBasedBusiness"
                       isAltDescriptionDisplayed={
-                        LookupOperatingPhaseById(userData?.profileData.operatingPhase)
+                        LookupOperatingPhaseById(business?.profileData.operatingPhase)
                           .displayAltHomeBasedBusinessDescription
                       }
                     />
@@ -168,15 +166,15 @@ const DashboardPage = (props: Props): ReactElement => {
                 </DeferredOnboardingQuestion>
               )}
             </div>
-            {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayRoadmapTasks && (
+            {LookupOperatingPhaseById(business?.profileData.operatingPhase).displayRoadmapTasks && (
               <>
                 <hr className="margin-bottom-3" />
                 <Roadmap />
               </>
             )}
-            {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCalendarType !==
+            {LookupOperatingPhaseById(business?.profileData.operatingPhase).displayCalendarType !==
               "NONE" && <FilingsCalendar operateReferences={props.operateReferences} />}
-            {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayHideableRoadmapTasks && (
+            {LookupOperatingPhaseById(business?.profileData.operatingPhase).displayHideableRoadmapTasks && (
               <HideableTasks />
             )}
           </>
@@ -192,7 +190,7 @@ const DashboardPage = (props: Props): ReactElement => {
       <PageSkeleton>
         <NavBar />
         <main id="main">
-          {!userData || userData?.onboardingFormProgress !== "COMPLETED" ? (
+          {!business || business?.onboardingFormProgress !== "COMPLETED" ? (
             <div className="margin-top-3 desktop:margin-top-0 padding-top-0 desktop:padding-top-6 padding-bottom-15">
               <CircularIndicator />
             </div>

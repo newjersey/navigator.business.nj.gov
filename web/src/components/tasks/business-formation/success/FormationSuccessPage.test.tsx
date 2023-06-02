@@ -2,12 +2,13 @@ import { FormationSuccessPage } from "@/components/tasks/business-formation/succ
 import { getMergedConfig } from "@/contexts/configContext";
 import { generateFormationProfileData } from "@/test/helpers/helpers-formation";
 import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
-import { FormationLegalType, GetFilingResponse, ProfileData } from "@businessnjgovnavigator/shared";
 import {
-  generateFormationData,
-  generateGetFilingResponse,
-  generateUserData,
-} from "@businessnjgovnavigator/shared/test";
+  FormationLegalType,
+  generateBusiness,
+  GetFilingResponse,
+  ProfileData,
+} from "@businessnjgovnavigator/shared";
+import { generateFormationData, generateGetFilingResponse } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useDocuments");
@@ -28,14 +29,14 @@ describe("Formation - <FormationSuccessPage />", () => {
     getFilingResponse = generateGetFilingResponse({ success: true, ...overrides });
     const profileData = generateFormationProfileData(profileOverrides);
 
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData,
       formationData: generateFormationData(
         { getFilingResponse },
         profileData.legalStructureId as FormationLegalType
       ),
     });
-    render(<FormationSuccessPage userData={userData} />);
+    render(<FormationSuccessPage business={business} />);
   };
 
   it("displays success page, documents, entity id, confirmation id", () => {

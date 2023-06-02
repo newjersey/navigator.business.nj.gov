@@ -16,8 +16,8 @@ import {
 } from "@/test/helpers/helpersSearchBusinessName";
 import {
   castPublicFilingLegalTypeToFormationType,
+  generateBusiness,
   generateFormationFormData,
-  generateUserData,
   ProfileData,
   PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
@@ -77,8 +77,7 @@ describe("SearchBusinessNameForm", () => {
       dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     };
-    const page = preparePage(generateUserData({ profileData, formationData }), displayContent);
-    return page;
+    return preparePage({ business: generateBusiness({ profileData, formationData }), displayContent });
   };
 
   it("displays modal when legal structure Edit button clicked", async () => {

@@ -12,7 +12,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { onboardingCompleted } from "@businessnjgovnavigator/shared/domain-logic/onboarding";
+import { onboardingCompleted } from "@businessnjgovnavigator/shared";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useEffect, useState } from "react";
@@ -44,12 +44,12 @@ const LoadingPage = (): ReactElement => {
   }, [router, dispatch]);
 
   useMountEffectWhenDefined(() => {
-    if (!updateQueue || !userData) return;
-
-    if (!onboardingCompleted(userData)) {
+    if (!updateQueue) return;
+    const business = updateQueue.currentBusiness();
+    if (!onboardingCompleted(business)) {
       router.push(ROUTES.onboarding);
-    } else if (userData.preferences.returnToLink) {
-      const pageLink = userData.preferences.returnToLink;
+    } else if (business.preferences.returnToLink) {
+      const pageLink = business.preferences.returnToLink;
       updateQueue
         .queuePreferences({ returnToLink: "" })
         .update()

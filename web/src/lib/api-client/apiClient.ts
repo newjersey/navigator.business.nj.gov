@@ -1,6 +1,7 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { SelfRegResponse } from "@/lib/types/types";
 import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
+import { getCurrentBusiness } from "@businessnjgovnavigator/shared";
 import { InputFile, NameAndAddress, NameAvailability, UserData } from "@businessnjgovnavigator/shared/";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
@@ -8,7 +9,7 @@ const apiBaseUrl = process.env.API_BASE_URL || "";
 
 export const getUserData = (id: string): Promise<UserData> => {
   return get<UserData>(`/users/${id}`).then((userData) => {
-    setPhaseDimension(userData.profileData.operatingPhase);
+    setPhaseDimension(getCurrentBusiness(userData).profileData.operatingPhase);
     return userData;
   });
 };

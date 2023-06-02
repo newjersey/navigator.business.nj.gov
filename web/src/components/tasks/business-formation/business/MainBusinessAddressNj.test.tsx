@@ -5,13 +5,13 @@ import {
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
-import { currentUserData } from "@/test/mock/withStatefulUserData";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   castPublicFilingLegalTypeToFormationType,
   FormationFormData,
   PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared/formationData";
-import { generateFormationFormData, generateUserData } from "@businessnjgovnavigator/shared/test";
+import { generateBusiness, generateFormationFormData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen } from "@testing-library/react";
 import { displayContent } from "../contacts/testHelpers";
@@ -54,10 +54,10 @@ const getPageHelper = async (
     lastVisitedPageIndex: 0,
   };
 
-  const userData = generateUserData({ profileData, formationData });
+  const business = generateBusiness({ profileData, formationData });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (userData.profileData as any).municipality = formationData.formationFormData.addressMunicipality;
-  const page = preparePage(userData, displayContent);
+  (business.profileData as any).municipality = formationData.formationFormData.addressMunicipality;
+  const page = preparePage({ business, displayContent });
   await page.stepperClickToBusinessStep();
   return page;
 };
@@ -154,14 +154,14 @@ describe("<MainBusinessAddressNj />", () => {
     it("doesn't allow non-numeric zipCode is entered in main Address", async () => {
       const page = await getPageHelper({ addressZipCode: "" });
       page.fillText("Address zip code", "AAAAA");
-      expect(currentUserData().formationData.formationFormData.addressZipCode).toEqual("");
+      expect(currentBusiness().formationData.formationFormData.addressZipCode).toEqual("");
     });
 
     it("passes zipCode validation in main Address", async () => {
       const page = await getPageHelper({ addressZipCode: "" });
       page.fillText("Address zip code", "07001");
       await page.submitBusinessStep();
-      expect(currentUserData().formationData.formationFormData.addressZipCode).toEqual("07001");
+      expect(currentBusiness().formationData.formationFormData.addressZipCode).toEqual("07001");
     });
   });
 });

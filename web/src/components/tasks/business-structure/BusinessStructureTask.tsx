@@ -17,7 +17,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { createProfileFieldErrorMap, Task } from "@/lib/types/types";
 import { getFlow, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { hasCompletedFormation, UserData } from "@businessnjgovnavigator/shared";
+import { Business, hasCompletedFormation } from "@businessnjgovnavigator/shared";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useMediaQuery } from "@mui/material";
@@ -25,7 +25,7 @@ import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   task: Task;
-  CMS_ONLY_fakeUserData?: UserData; // for CMS only
+  CMS_ONLY_fakeBusiness?: Business; // for CMS only
 }
 
 export const BusinessStructureTask = (props: Props): ReactElement => {
@@ -35,7 +35,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
   const userDataFromHook = useUserData();
-  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
+  const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
   const updateQueue = userDataFromHook.updateQueue;
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const {
@@ -46,9 +46,9 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
 
   useEffect(() => {
     return () => {
-      if (userData?.profileData.legalStructureId) {
+      if (business?.profileData.legalStructureId) {
         queueUpdateTaskProgress(props.task.id, "COMPLETED");
-      } else if (!userData?.profileData.legalStructureId) {
+      } else if (!business?.profileData.legalStructureId) {
         queueUpdateTaskProgress(props.task.id, "NOT_STARTED");
       }
     };
@@ -56,17 +56,13 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   }, [updateQueue]);
 
   useMountEffectWhenDefined(() => {
-    if (!userData) {
-      return;
-    }
-    setProfileData(userData.profileData);
-    setShowRadioQuestion(!userData.profileData.legalStructureId);
-  }, userData);
+    if (!business) return;
+    setProfileData(business.profileData);
+    setShowRadioQuestion(!business.profileData.legalStructureId);
+  }, business);
 
   FormFuncWrapper(async () => {
-    if (!updateQueue || !userData) {
-      return;
-    }
+    if (!updateQueue || !business) return;
 
     queueUpdateTaskProgress(props.task.id, "COMPLETED");
     await updateQueue.queueProfileData(profileData).update();
@@ -75,9 +71,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   });
 
   const setBackToEditing = (): void => {
-    if (!userData || !updateQueue) {
-      return;
-    }
+    if (!business || !updateQueue) return;
     setShowRadioQuestion(true);
     queueUpdateTaskProgress(props.task.id, "IN_PROGRESS");
   };
@@ -114,19 +108,19 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
 
   const isCompleted = (): boolean => {
     if (!updateQueue) return false;
-    return updateQueue.current().taskProgress[props.task.id] === "COMPLETED";
+    return updateQueue.currentBusiness().taskProgress[props.task.id] === "COMPLETED";
   };
 
   const canEdit = (): boolean => {
-    if (!userData) return false;
-    return !hasCompletedFormation(userData);
+    if (!business) return false;
+    return !hasCompletedFormation(business);
   };
 
   const getTaskProgressTooltip = (): string => {
-    if (!userData) return "";
+    if (!business) return "";
     if (!isCompleted()) {
       return Config.businessStructureTask.uncompletedTooltip;
-    } else if (hasCompletedFormation(userData)) {
+    } else if (hasCompletedFormation(business)) {
       return Config.profileDefaults.lockedFieldTooltipText;
     } else {
       return Config.businessStructureTask.completedTooltip;
@@ -160,14 +154,14 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
           </ProfileDataContext.Provider>
         </profileFormContext.Provider>
       )}
-      {userData && !showRadioQuestion && (
+      {business && !showRadioQuestion && (
         <>
           <h3>{Config.businessStructureTask.completedHeader}</h3>
           <Alert variant="success">
             <div className={`flex ${isLargeScreen ? "flex-row" : "flex-column"}`} data-testid="success-alert">
               <Content>
                 {templateEval(Config.businessStructureTask.successMessage, {
-                  legalStructure: LookupLegalStructureById(userData.profileData.legalStructureId).name,
+                  legalStructure: LookupLegalStructureById(business.profileData.legalStructureId).name,
                 })}
               </Content>
               {canEdit() ? (

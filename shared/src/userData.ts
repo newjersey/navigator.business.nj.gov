@@ -1,4 +1,5 @@
 import { BusinessUser } from "./businessUser";
+import { createBusinessId } from "./domain-logic/createBusinessId";
 import { createEmptyFormationFormData, FormationData } from "./formationData";
 import { LicenseData } from "./license";
 import { createEmptyProfileData, ProfileData } from "./profileData";
@@ -6,6 +7,18 @@ import { TaxFilingData } from "./taxFiling";
 
 export interface UserData {
   readonly user: BusinessUser;
+  readonly version: number;
+  readonly lastUpdatedISO: string;
+  readonly dateCreatedISO: string;
+  readonly versionWhenCreated: number;
+  readonly businesses: Record<string, Business>;
+  readonly currentBusinessId: string;
+}
+
+export interface Business {
+  readonly id: string;
+  readonly dateCreatedISO: string;
+  readonly lastUpdatedISO: string;
   readonly profileData: ProfileData;
   readonly onboardingFormProgress: OnboardingFormProgress;
   readonly taskProgress: Record<string, TaskProgress>;
@@ -14,26 +27,20 @@ export interface UserData {
   readonly preferences: Preferences;
   readonly taxFilingData: TaxFilingData;
   readonly formationData: FormationData;
-  readonly version: number;
-  readonly lastUpdatedISO: string | undefined;
-  dateCreatedISO: string | undefined;
-  versionWhenCreated: number;
 }
 
-export const CURRENT_VERSION = 118;
+export const CURRENT_VERSION = 120;
 
-export const createEmptyUserData = (user: BusinessUser): UserData => {
+export const createEmptyBusiness = (id?: string): Business => {
   return {
-    version: CURRENT_VERSION,
-    user: user,
+    id: id || createBusinessId(),
+    dateCreatedISO: new Date(Date.now()).toISOString(),
+    lastUpdatedISO: new Date(Date.now()).toISOString(),
     profileData: createEmptyProfileData(),
     onboardingFormProgress: "UNSTARTED",
     taskProgress: {},
     taskItemChecklist: {},
     licenseData: undefined,
-    lastUpdatedISO: undefined,
-    dateCreatedISO: undefined,
-    versionWhenCreated: CURRENT_VERSION,
     preferences: {
       roadmapOpenSections: ["PLAN", "START"],
       roadmapOpenSteps: [],
@@ -64,6 +71,24 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
   };
 };
 
+export const createEmptyUserData = (user: BusinessUser): UserData => {
+  const businessId = createBusinessId();
+  return {
+    version: CURRENT_VERSION,
+    user: user,
+    lastUpdatedISO: new Date(Date.now()).toISOString(),
+    dateCreatedISO: new Date(Date.now()).toISOString(),
+    versionWhenCreated: CURRENT_VERSION,
+    currentBusinessId: businessId,
+    businesses: {
+      [businessId]: createEmptyBusiness(businessId),
+    },
+  };
+};
+
+export const sectionNames = ["PLAN", "START"] as const;
+export type SectionType = (typeof sectionNames)[number];
+
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export interface Preferences {
@@ -79,6 +104,3 @@ export interface Preferences {
 }
 
 export type OnboardingFormProgress = "UNSTARTED" | "COMPLETED";
-
-export const sectionNames = ["PLAN", "START"] as const;
-export type SectionType = (typeof sectionNames)[number];

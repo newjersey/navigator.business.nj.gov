@@ -5,7 +5,7 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { randomPublicFilingLegalStructure, randomTradeNameLegalStructure } from "@/test/factories";
-import { generateProfileData, generateUserData } from "@businessnjgovnavigator/shared/test";
+import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { ReactElement, useState } from "react";
 
 const TaxAccessModalPreview = (props: PreviewProps): ReactElement => {
@@ -90,7 +90,7 @@ const TaxAccessModalPreview = (props: PreviewProps): ReactElement => {
           moveToPrevStep={(): void => {}}
           onSuccess={(): void => {}}
           CMS_ONLY_fakeError={errorPreview}
-          CMS_ONLY_fakeUserData={generateUserData({
+          CMS_ONLY_fakeBusiness={generateBusiness({
             profileData: generateProfileData({
               businessPersona: "OWNING",
               legalStructureId: randomPublicFilingLegalStructure(),
@@ -104,7 +104,7 @@ const TaxAccessModalPreview = (props: PreviewProps): ReactElement => {
           moveToPrevStep={(): void => {}}
           onSuccess={(): void => {}}
           CMS_ONLY_fakeError={errorPreview}
-          CMS_ONLY_fakeUserData={generateUserData({
+          CMS_ONLY_fakeBusiness={generateBusiness({
             profileData: generateProfileData({
               businessPersona: "OWNING",
               legalStructureId: randomTradeNameLegalStructure(),

@@ -9,13 +9,15 @@ import {
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { currentUserData } from "@/test/mock/withStatefulUserData";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   defaultDateFormat,
   FormationData,
   FormationIncorporator,
   FormationMember,
+  generateBusiness,
   generateMunicipality,
+  getCurrentBusiness,
   getCurrentDate,
   UserData,
 } from "@businessnjgovnavigator/shared";
@@ -28,7 +30,7 @@ import {
 } from "@businessnjgovnavigator/shared/test/";
 
 import { Content } from "@/components/Content";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import * as materialUi from "@mui/material";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -66,39 +68,39 @@ describe("<BusinessFormation />", () => {
 
   it("does not show form for non-formation legal structure", () => {
     const profileData = generateProfileData({ legalStructureId: "sole-proprietorship" });
-    preparePage({ profileData }, displayContent);
+    preparePage({ business: { profileData }, displayContent });
     expect(screen.queryByTestId("formation-form")).not.toBeInTheDocument();
   });
 
   it("shows default intro content for in-state formation", () => {
-    preparePage(
-      {
+    preparePage({
+      business: {
         profileData: generateProfileData({
           legalStructureId: "limited-liability-company",
           businessPersona: "STARTING",
         }),
       },
-      displayContent
-    );
+      displayContent,
+    });
 
-    useMockUserData(generateUserData({})); // necessary for renderToStaticMarkup for Content
+    useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
     expect(screen.getByTestId("formation-form")).toContainHTML(
       renderToStaticMarkup(Content({ children: Config.formation.intro.default }))
     );
   });
 
   it("shows override intro content for foreign formation", () => {
-    preparePage(
-      {
+    preparePage({
+      business: {
         profileData: generateProfileData({
           legalStructureId: "limited-liability-company",
           businessPersona: "FOREIGN",
         }),
       },
-      displayContent
-    );
+      displayContent,
+    });
 
-    useMockUserData(generateUserData({})); // necessary for renderToStaticMarkup for Content
+    useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
     expect(screen.getByTestId("formation-form")).toContainHTML(
       renderToStaticMarkup(Content({ children: Config.formation.intro.foreign }))
     );
@@ -122,18 +124,18 @@ describe("<BusinessFormation />", () => {
       const userDataReturnFromApi = generateUserData({});
       mockApi.getCompletedFiling.mockResolvedValue(userDataReturnFromApi);
       await act(async () => {
-        preparePage({ formationData }, displayContent, undefined, task);
+        preparePage({ business: { formationData }, displayContent, task });
       });
       expect(mockApi.getCompletedFiling).toHaveBeenCalled();
-      const expectedUserData = {
-        ...userDataReturnFromApi,
+      const expectedBusiness = {
+        ...getCurrentBusiness(userDataReturnFromApi),
         formationData: {
-          ...userDataReturnFromApi.formationData,
+          ...getCurrentBusiness(userDataReturnFromApi).formationData,
           completedFilingPayment: true,
         },
       };
       await waitFor(() => {
-        expect(currentUserData()).toEqual(expectedUserData);
+        expect(currentBusiness()).toEqual(expectedBusiness);
       });
     });
   });
@@ -154,11 +156,11 @@ describe("<BusinessFormation />", () => {
       });
 
       await act(async () => {
-        preparePage({ formationData }, displayContent, undefined, task);
+        preparePage({ business: { formationData }, displayContent, task });
       });
 
       expect(screen.getByTestId("review-step")).toBeInTheDocument();
-      expect(currentUserData().formationData.completedFilingPayment).toEqual(false);
+      expect(currentBusiness().formationData.completedFilingPayment).toEqual(false);
       expect(mockPush).toHaveBeenCalledWith({ pathname: `/tasks/${task.urlSlug}` }, undefined, {
         shallow: true,
       });
@@ -170,7 +172,7 @@ describe("<BusinessFormation />", () => {
         getFilingResponse: generateGetFilingResponse({ success: true }),
       });
       await act(async () => {
-        preparePage({ formationData }, displayContent, undefined, task);
+        preparePage({ business: { formationData }, displayContent, task });
       });
 
       expect(screen.getByText(Config.formation.successPage.header)).toBeInTheDocument();
@@ -199,24 +201,24 @@ describe("<BusinessFormation />", () => {
 
       it("updates userData with getFilingResponse and completedFilingPayment", async () => {
         await act(async () => {
-          preparePage({ formationData }, displayContent, undefined, task);
+          preparePage({ business: { formationData }, displayContent, task });
         });
         expect(mockApi.getCompletedFiling).toHaveBeenCalled();
-        const expectedUserData = {
-          ...userDataReturnFromApi,
+        const expectedBusiness = {
+          ...getCurrentBusiness(userDataReturnFromApi),
           formationData: {
-            ...userDataReturnFromApi.formationData,
+            ...getCurrentBusiness(userDataReturnFromApi).formationData,
             completedFilingPayment: true,
           },
         };
         await waitFor(() => {
-          expect(currentUserData()).toEqual(expectedUserData);
+          expect(currentBusiness()).toEqual(expectedBusiness);
         });
       });
 
       it("replaces URL", async () => {
         await act(async () => {
-          preparePage({ formationData }, displayContent, undefined, task);
+          preparePage({ business: { formationData }, displayContent, task });
         });
         await waitFor(() => {
           return expect(mockPush).toHaveBeenCalledWith({ pathname: "/tasks/some-formation-url" }, undefined, {
@@ -233,17 +235,17 @@ describe("<BusinessFormation />", () => {
 
       it("updates userData with completedFilingPayment", async () => {
         await act(async () => {
-          preparePage({ formationData }, displayContent, undefined, task);
+          preparePage({ business: { formationData }, displayContent, task });
         });
         expect(mockApi.getCompletedFiling).toHaveBeenCalled();
         await waitFor(() => {
-          expect(currentUserData().formationData.completedFilingPayment).toEqual(true);
+          expect(currentBusiness().formationData.completedFilingPayment).toEqual(true);
         });
       });
 
       it("displays error message", async () => {
         await act(async () => {
-          preparePage({ formationData }, displayContent, undefined, task);
+          preparePage({ business: { formationData }, displayContent, task });
         });
         await waitFor(() => {
           expect(screen.getByTestId("api-error-text")).toBeInTheDocument();
@@ -252,7 +254,7 @@ describe("<BusinessFormation />", () => {
 
       it("resets completedFilingPayment and brings back to review page", async () => {
         await act(async () => {
-          preparePage({ formationData }, displayContent, undefined, task);
+          preparePage({ business: { formationData }, displayContent, task });
         });
 
         fireEvent.click(screen.getByText(Config.formation.interimSuccessPage.buttonText));
@@ -260,7 +262,7 @@ describe("<BusinessFormation />", () => {
 
         await screen.findByTestId("review-step");
         expect(screen.queryByText("api-error-text")).not.toBeInTheDocument();
-        expect(currentUserData().formationData.completedFilingPayment).toEqual(false);
+        expect(currentBusiness().formationData.completedFilingPayment).toEqual(false);
       });
     });
   });
@@ -269,7 +271,7 @@ describe("<BusinessFormation />", () => {
     const getFilingResponse = generateGetFilingResponse({ success: true });
     const profileData = generateFormationProfileData({});
     const formationData = generateFormationData({ getFilingResponse });
-    preparePage({ profileData, formationData }, displayContent);
+    preparePage({ business: { profileData, formationData }, displayContent });
     expect(screen.getByText(Config.formation.successPage.header)).toBeInTheDocument();
   });
 
@@ -279,9 +281,11 @@ describe("<BusinessFormation />", () => {
       legalStructureId,
     });
     const formationData = generateEmptyFormationData();
-    const page = preparePage({ profileData, formationData }, displayContent, [
-      generateMunicipality({ displayName: "Newark", name: "Newark" }),
-    ]);
+    const page = preparePage({
+      business: { profileData, formationData },
+      displayContent,
+      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
+    });
 
     await page.fillAndSubmitBusinessNameStep("Pizza Joint");
 
@@ -340,7 +344,7 @@ describe("<BusinessFormation />", () => {
     await page.submitBillingStep();
     await page.submitReviewStep();
 
-    const formationFormData = currentUserData().formationData.formationFormData;
+    const formationFormData = currentBusiness().formationData.formationFormData;
     await waitFor(() => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });
@@ -399,9 +403,11 @@ describe("<BusinessFormation />", () => {
     });
 
     const formationData = generateEmptyFormationData();
-    const page = preparePage({ profileData, formationData }, displayContent, [
-      generateMunicipality({ displayName: "Newark", name: "Newark" }),
-    ]);
+    const page = preparePage({
+      business: { profileData, formationData },
+      displayContent,
+      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
+    });
 
     await page.fillAndSubmitNexusBusinessNameStep("Pizza Joint");
 
@@ -454,7 +460,7 @@ describe("<BusinessFormation />", () => {
     await page.submitBillingStep();
     await page.submitReviewStep();
 
-    const formationFormData = currentUserData().formationData.formationFormData;
+    const formationFormData = currentBusiness().formationData.formationFormData;
     await waitFor(() => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });
@@ -498,9 +504,11 @@ describe("<BusinessFormation />", () => {
     const legalStructureId = "limited-liability-partnership";
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
-    const page = preparePage({ profileData, formationData }, displayContent, [
-      generateMunicipality({ displayName: "Newark", name: "Newark" }),
-    ]);
+    const page = preparePage({
+      business: { profileData, formationData },
+      displayContent,
+      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
+    });
 
     await page.fillAndSubmitBusinessNameStep("Pizza Joint");
 
@@ -552,7 +560,7 @@ describe("<BusinessFormation />", () => {
     await page.submitBillingStep();
     await page.submitReviewStep();
 
-    const formationFormData = currentUserData().formationData.formationFormData;
+    const formationFormData = currentBusiness().formationData.formationFormData;
     await waitFor(() => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });
@@ -601,9 +609,11 @@ describe("<BusinessFormation />", () => {
       legalStructureId: _legalStructureId,
     });
     const formationData = generateEmptyFormationData();
-    const page = preparePage({ profileData, formationData }, displayContent, [
-      generateMunicipality({ displayName: "Newark", name: "Newark" }),
-    ]);
+    const page = preparePage({
+      business: { profileData, formationData },
+      displayContent,
+      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
+    });
 
     await page.fillAndSubmitNexusBusinessNameStep("Pizza Joint");
 
@@ -664,7 +674,7 @@ describe("<BusinessFormation />", () => {
     await page.submitBillingStep();
     await page.submitReviewStep();
 
-    const formationFormData = currentUserData().formationData.formationFormData;
+    const formationFormData = currentBusiness().formationData.formationFormData;
     await waitFor(() => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });
@@ -713,9 +723,11 @@ describe("<BusinessFormation />", () => {
     const legalStructureId = "limited-partnership";
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
-    const page = preparePage({ profileData, formationData }, displayContent, [
-      generateMunicipality({ displayName: "Newark", name: "Newark" }),
-    ]);
+    const page = preparePage({
+      business: { profileData, formationData },
+      displayContent,
+      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
+    });
 
     await page.fillAndSubmitBusinessNameStep("Pizza Joint");
 
@@ -785,7 +797,7 @@ describe("<BusinessFormation />", () => {
     await page.submitBillingStep();
     await page.submitReviewStep();
 
-    const formationFormData = currentUserData().formationData.formationFormData;
+    const formationFormData = currentBusiness().formationData.formationFormData;
     await waitFor(() => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });
@@ -834,9 +846,11 @@ describe("<BusinessFormation />", () => {
     const legalStructureId = "c-corporation";
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
-    const page = preparePage({ profileData, formationData }, displayContent, [
-      generateMunicipality({ displayName: "Newark", name: "Newark" }),
-    ]);
+    const page = preparePage({
+      business: { profileData, formationData },
+      displayContent,
+      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
+    });
 
     const member: FormationMember = {
       name: "Joe Biden",
@@ -900,7 +914,7 @@ describe("<BusinessFormation />", () => {
     await page.submitBillingStep();
     await page.submitReviewStep();
 
-    const formationFormData = currentUserData().formationData.formationFormData;
+    const formationFormData = currentBusiness().formationData.formationFormData;
     await waitFor(() => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });

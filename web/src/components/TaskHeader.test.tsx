@@ -5,7 +5,13 @@ import { generateStep, generateTask } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import { formationTaskId, TaskProgress, UserData } from "@businessnjgovnavigator/shared";
+import {
+  Business,
+  formationTaskId,
+  generateBusiness,
+  generateUserDataForBusiness,
+  TaskProgress,
+} from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
   generateGetFilingResponse,
@@ -18,10 +24,12 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
-const renderTaskHeader = (task: Task, initialUserData?: UserData): void => {
+const renderTaskHeader = (task: Task, business?: Business): void => {
   render(
     <ThemeProvider theme={createTheme()}>
-      <WithStatefulUserData initialUserData={initialUserData}>
+      <WithStatefulUserData
+        initialUserData={business ? generateUserDataForBusiness(business) : generateUserData({})}
+      >
         <TaskHeader task={task} />
       </WithStatefulUserData>
     </ThemeProvider>
@@ -66,7 +74,7 @@ describe("<TaskHeader />", () => {
     const formationData = generateFormationData({
       getFilingResponse: generateGetFilingResponse({ success: true }),
     });
-    renderTaskHeader(task, generateUserData({ taskProgress, formationData }));
+    renderTaskHeader(task, generateBusiness({ taskProgress, formationData }));
 
     fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
     expect(screen.getByTestId("status-info-tooltip")).toBeInTheDocument();

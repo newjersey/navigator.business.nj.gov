@@ -1,10 +1,20 @@
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
-import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";
+import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
 import { ProfileDocuments } from "@shared/profileData";
+import { modifyCurrentBusiness } from "@shared/test";
+import { UserData } from "@shared/userData";
 import { Router } from "express";
 import { saveFileFromUrl } from "../domain/s3Writer";
 import { FormationClient, UserDataClient } from "../domain/types";
+import { ExpressRequestBody } from "./types";
 import { getSignedInUser, getSignedInUserId } from "./userRouter";
+
+type FormationPostBody = {
+  userData: UserData;
+  returnUrl: string;
+  foreignGoodStandingFile: InputFile;
+};
 
 export const formationRouterFactory = (
   formationClient: FormationClient,
@@ -13,19 +23,19 @@ export const formationRouterFactory = (
 ): Router => {
   const router = Router();
 
-  router.post("/formation", async (req, res) => {
+  router.post("/formation", async (req: ExpressRequestBody<FormationPostBody>, res) => {
     const { userData, returnUrl, foreignGoodStandingFile } = req.body;
 
     formationClient
       .form(userData, returnUrl, foreignGoodStandingFile)
       .then(async (formationResponse: FormationSubmitResponse) => {
-        const userDataWithResponse = {
-          ...userData,
+        const userDataWithResponse = modifyCurrentBusiness(userData, (business) => ({
+          ...business,
           formationData: {
-            ...userData.formationData,
+            ...business.formationData,
             formationResponse: formationResponse,
           },
-        };
+        }));
         await userDataClient.put(userDataWithResponse);
         res.json(userDataWithResponse);
       })
@@ -39,19 +49,20 @@ export const formationRouterFactory = (
     const signedInUser = getSignedInUser(req);
     const signedInUserId = getSignedInUserId(req);
     const userData = await userDataClient.get(signedInUserId);
+    const currentBusiness = getCurrentBusiness(userData);
 
-    if (!userData.formationData.formationResponse?.formationId) {
+    if (!currentBusiness.formationData.formationResponse?.formationId) {
       res.status(400).send("No formation ID");
       return;
     }
 
     formationClient
-      .getCompletedFiling(userData.formationData.formationResponse.formationId)
+      .getCompletedFiling(currentBusiness.formationData.formationResponse.formationId)
       .then(async (getFilingResponse: GetFilingResponse) => {
-        const taskProgress = userData.taskProgress;
-        let entityId = userData.profileData.entityId;
-        let dateOfFormation = userData.profileData.dateOfFormation;
-        let businessName = userData.profileData.businessName;
+        const taskProgress = currentBusiness.taskProgress;
+        let entityId = currentBusiness.profileData.entityId;
+        let dateOfFormation = currentBusiness.profileData.dateOfFormation;
+        let businessName = currentBusiness.profileData.businessName;
         let documents: ProfileDocuments = {
           certifiedDoc: "",
           formationDoc: "",
@@ -61,8 +72,8 @@ export const formationRouterFactory = (
         if (getFilingResponse.success && config.shouldSaveDocuments) {
           taskProgress[formationTaskId] = "COMPLETED";
           entityId = getFilingResponse.entityId;
-          dateOfFormation = userData.formationData.formationFormData.businessStartDate;
-          businessName = userData.formationData.formationFormData.businessName;
+          dateOfFormation = currentBusiness.formationData.formationFormData.businessStartDate;
+          businessName = currentBusiness.formationData.formationFormData.businessName;
 
           const formationDoc = await saveFileFromUrl(
             getFilingResponse.formationDoc,
@@ -96,21 +107,24 @@ export const formationRouterFactory = (
           };
         }
 
-        const userDataWithResponse = {
-          ...userData,
+        const userDataWithResponse = modifyCurrentBusiness(userData, (business) => ({
+          ...business,
           taskProgress,
           formationData: {
-            ...userData.formationData,
+            ...business.formationData,
             getFilingResponse,
           },
           profileData: {
-            ...userData.profileData,
+            ...business.profileData,
             entityId,
             dateOfFormation,
             businessName,
-            documents: { ...userData.profileData.documents, ...documents },
+            documents: {
+              ...business.profileData.documents,
+              ...documents,
+            },
           },
-        };
+        }));
         await userDataClient.put(userDataWithResponse);
         res.json(userDataWithResponse);
       })

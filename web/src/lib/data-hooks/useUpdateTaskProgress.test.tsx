@@ -6,12 +6,16 @@ import { UpdateQueue } from "@/lib/types/types";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/test";
-import { TaskProgress, UserData } from "@businessnjgovnavigator/shared/userData";
+import {
+  generateBusiness,
+  generatePreferences,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
+import { Business, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { act, render } from "@testing-library/react";
 import { ReactNode } from "react";
 
@@ -26,7 +30,7 @@ describe("useUpdateTaskProgress", () => {
   });
 
   const setupHook = (
-    initialUserData: UserData
+    business: Business
   ): {
     queueUpdateTaskProgress: (taskId: string, newValue: TaskProgress) => void;
     congratulatoryModal: ReactNode;
@@ -45,7 +49,7 @@ describe("useUpdateTaskProgress", () => {
     }
 
     render(
-      <WithStatefulUserData initialUserData={initialUserData}>
+      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
         <TestComponent />
       </WithStatefulUserData>
     );
@@ -56,15 +60,15 @@ describe("useUpdateTaskProgress", () => {
   };
 
   it("updates task progress", async () => {
-    const initialUserData = generateUserData({
+    const initialBusiness = generateBusiness({
       taskProgress: { "some-id": "COMPLETED" },
     });
-    const { queueUpdateTaskProgress, updateQueue } = setupHook(initialUserData);
+    const { queueUpdateTaskProgress, updateQueue } = setupHook(initialBusiness);
     queueUpdateTaskProgress("some-other-id", "IN_PROGRESS");
     await act(() => {
       return updateQueue.update();
     });
-    expect(currentUserData().taskProgress).toEqual({
+    expect(currentBusiness().taskProgress).toEqual({
       "some-id": "COMPLETED",
       "some-other-id": "IN_PROGRESS",
     });
@@ -86,7 +90,7 @@ describe("useUpdateTaskProgress", () => {
     });
 
     it("closes all roadmap sections when all sections complete", async () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         taskProgress: {
           [planTaskId]: "COMPLETED",
           [startTaskId]: "NOT_STARTED",
@@ -103,7 +107,7 @@ describe("useUpdateTaskProgress", () => {
         currentAndNextSection: () => ({ current: "START", next: undefined }),
       });
 
-      const { queueUpdateTaskProgress, updateQueue } = setupHook(userData);
+      const { queueUpdateTaskProgress, updateQueue } = setupHook(business);
       act(() => {
         return queueUpdateTaskProgress(startTaskId, "COMPLETED");
       });
@@ -111,16 +115,16 @@ describe("useUpdateTaskProgress", () => {
         return updateQueue.update();
       });
 
-      expect(currentUserData().taskProgress).toEqual({
+      expect(currentBusiness().taskProgress).toEqual({
         [planTaskId]: "COMPLETED",
         [startTaskId]: "COMPLETED",
       });
 
-      expect(currentUserData().preferences.roadmapOpenSections).toEqual([]);
+      expect(currentBusiness().preferences.roadmapOpenSections).toEqual([]);
     });
 
     it("closes PLAN roadmap section when complete", async () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         taskProgress: {
           [planTaskId]: "NOT_STARTED",
           [startTaskId]: "NOT_STARTED",
@@ -137,7 +141,7 @@ describe("useUpdateTaskProgress", () => {
         currentAndNextSection: () => ({ current: "PLAN", next: "START" }),
       });
 
-      const { queueUpdateTaskProgress, updateQueue } = setupHook(userData);
+      const { queueUpdateTaskProgress, updateQueue } = setupHook(business);
       act(() => {
         return queueUpdateTaskProgress(planTaskId, "COMPLETED");
       });
@@ -145,12 +149,12 @@ describe("useUpdateTaskProgress", () => {
         return updateQueue.update();
       });
 
-      expect(currentUserData().taskProgress).toEqual({
+      expect(currentBusiness().taskProgress).toEqual({
         [planTaskId]: "COMPLETED",
         [startTaskId]: "NOT_STARTED",
       });
 
-      expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START"]);
+      expect(currentBusiness().preferences.roadmapOpenSections).toEqual(["START"]);
     });
   });
 });

@@ -1,5 +1,5 @@
-import { UserData } from "../userData";
+import { Business } from "../userData";
 
-export const onboardingCompleted = (userData: UserData): boolean => {
-  return userData.onboardingFormProgress === "COMPLETED";
+export const onboardingCompleted = (business: Business): boolean => {
+  return business.onboardingFormProgress === "COMPLETED";
 };

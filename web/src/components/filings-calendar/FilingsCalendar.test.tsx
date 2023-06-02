@@ -11,26 +11,27 @@ import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-u
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockProfileData } from "@/test/mock/mockUseUserData";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
   defaultDateFormat,
+  generateBusiness,
   generateTaxFilingCalendarEvent,
+  generateUserDataForBusiness,
   getCurrentDate,
   LookupIndustryById,
   OperatingPhases,
   randomInt,
   TaxFilingCalendarEvent,
-  UserData,
 } from "@businessnjgovnavigator/shared/index";
 import {
   generateLicenseData,
   generatePreferences,
   generateProfileData,
   generateTaxFilingData,
-  generateUserData,
   randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
@@ -70,11 +71,11 @@ const Config = getMergedConfig();
 
 const renderFilingsCalendar = (
   operateReferences: Record<string, OperateReference>,
-  initialUserData?: UserData
+  business: Business
 ): void => {
   render(
     <ThemeProvider theme={createTheme()}>
-      <WithStatefulUserData initialUserData={initialUserData}>
+      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
         <FilingsCalendar operateReferences={operateReferences} />
       </WithStatefulUserData>
     </ThemeProvider>
@@ -102,7 +103,7 @@ describe("<FilingsCalendar />", () => {
       dueDate: dueDate.format(defaultDateFormat),
     });
 
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -122,7 +123,7 @@ describe("<FilingsCalendar />", () => {
       },
     };
 
-    renderFilingsCalendar(operateReferences, userData);
+    renderFilingsCalendar(operateReferences, business);
 
     expect(screen.getByTestId("filings-calendar-as-table")).toBeInTheDocument();
     expect(screen.getByText(dueDate.format("M/D"), { exact: false })).toBeInTheDocument();
@@ -142,7 +143,7 @@ describe("<FilingsCalendar />", () => {
       dueDate: recentDueDate.format(defaultDateFormat),
     });
 
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -167,7 +168,7 @@ describe("<FilingsCalendar />", () => {
       },
     };
 
-    renderFilingsCalendar(operateReferences, userData);
+    renderFilingsCalendar(operateReferences, business);
     expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
     expect(screen.queryByText(farDueDate.format("MMMM D, YYYY"), { exact: false })).not.toBeInTheDocument();
     expect(screen.getByText(recentDueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
@@ -186,7 +187,7 @@ describe("<FilingsCalendar />", () => {
       dueDate: recentDueDate.format(defaultDateFormat),
     });
 
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -211,7 +212,7 @@ describe("<FilingsCalendar />", () => {
       },
     };
 
-    renderFilingsCalendar(operateReferences, userData);
+    renderFilingsCalendar(operateReferences, business);
     expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
     const dateElement = within(
       // eslint-disable-next-line testing-library/no-node-access
@@ -227,7 +228,7 @@ describe("<FilingsCalendar />", () => {
       dueDate: getCurrentDate().add(2, "months").format(defaultDateFormat),
     });
 
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -247,7 +248,7 @@ describe("<FilingsCalendar />", () => {
       },
     };
 
-    renderFilingsCalendar(operateReferences, userData);
+    renderFilingsCalendar(operateReferences, business);
     expect(
       screen.getByText(Config.dashboardDefaults.calendarListViewButton, { exact: false })
     ).toBeInTheDocument();
@@ -263,7 +264,7 @@ describe("<FilingsCalendar />", () => {
       dueDate: getCurrentDate().add(2, "years").format(defaultDateFormat),
     });
 
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -283,7 +284,7 @@ describe("<FilingsCalendar />", () => {
       },
     };
 
-    renderFilingsCalendar(operateReferences, userData);
+    renderFilingsCalendar(operateReferences, business);
     expect(
       screen.getByText(Config.dashboardDefaults.calendarListViewButton, { exact: false })
     ).toBeInTheDocument();
@@ -302,7 +303,7 @@ describe("<FilingsCalendar />", () => {
       dueDate: getCurrentDate().add(2, "years").format(defaultDateFormat),
     });
 
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -322,7 +323,7 @@ describe("<FilingsCalendar />", () => {
       },
     };
 
-    renderFilingsCalendar(operateReferences, userData);
+    renderFilingsCalendar(operateReferences, business);
     expect(screen.getByTestId("filings-calendar")).toHaveTextContent(
       markdownToText(Config.dashboardDefaults.calendarEmptyDescriptionMarkdown)
     );
@@ -342,7 +343,7 @@ describe("<FilingsCalendar />", () => {
   });
 
   it("hides year selector when there are no taxFilings", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -354,12 +355,12 @@ describe("<FilingsCalendar />", () => {
       preferences: generatePreferences({ isCalendarFullView: true }),
     });
 
-    renderFilingsCalendar({}, userData);
+    renderFilingsCalendar({}, business);
     expect(screen.queryByTestId("primary-year-selector-dropdown-button")).not.toBeInTheDocument();
   });
 
   it("displays empty calendar content when there are no filings", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -379,7 +380,7 @@ describe("<FilingsCalendar />", () => {
       },
     };
 
-    renderFilingsCalendar(operateReferences, userData);
+    renderFilingsCalendar(operateReferences, business);
 
     expect(screen.queryByTestId("filings-calendar-as-table")).not.toBeInTheDocument();
     expect(
@@ -394,11 +395,11 @@ describe("<FilingsCalendar />", () => {
     it.each(publicFilingLegalStructures)(
       "shows formation date prompt if %s and not yet entered Formation Date",
       (legalStructureId) => {
-        const userData = generateUserData({
+        const business = generateBusiness({
           profileData: generateProfileData({ dateOfFormation: undefined, legalStructureId }),
           taxFilingData: generateTaxFilingData({ filings: [] }),
         });
-        renderFilingsCalendar({}, userData);
+        renderFilingsCalendar({}, business);
         expect(screen.getByTestId("formation-date-prompt")).toBeInTheDocument();
       }
     );
@@ -406,7 +407,7 @@ describe("<FilingsCalendar />", () => {
     it.each(publicFilingLegalStructures)(
       "shows formation date prompt if %s and not yet entered Formation Date even if other filings exist",
       (legalStructureId) => {
-        const userData = generateUserData({
+        const business = generateBusiness({
           profileData: generateProfileData({ dateOfFormation: undefined, legalStructureId }),
           taxFilingData: generateTaxFilingData({
             filings: [generateTaxFilingCalendarEvent({ identifier: "filing1" })],
@@ -416,7 +417,7 @@ describe("<FilingsCalendar />", () => {
           filing1: generateOperateReference({}),
         };
         useMockProfileData({ dateOfFormation: undefined, legalStructureId });
-        renderFilingsCalendar(operateReferences, userData);
+        renderFilingsCalendar(operateReferences, business);
         expect(screen.getByTestId("formation-date-prompt")).toBeInTheDocument();
       }
     );
@@ -424,21 +425,21 @@ describe("<FilingsCalendar />", () => {
     it.each(publicFilingLegalStructures)(
       "does not show formation date prompt if %s and has entered Formation Date",
       (legalStructureId) => {
-        const userData = generateUserData({
+        const business = generateBusiness({
           profileData: generateProfileData({ dateOfFormation: "2023-01-01", legalStructureId }),
           taxFilingData: generateTaxFilingData({ filings: [] }),
         });
-        renderFilingsCalendar({}, userData);
+        renderFilingsCalendar({}, business);
         expect(screen.queryByTestId("formation-date-prompt")).not.toBeInTheDocument();
       }
     );
 
     it.each(tradeNameLegalStructures)("does not show formation date prompt if %s", (legalStructureId) => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({ legalStructureId }),
         taxFilingData: generateTaxFilingData({ filings: [] }),
       });
-      renderFilingsCalendar({}, userData);
+      renderFilingsCalendar({}, business);
       expect(screen.queryByTestId("formation-date-prompt")).not.toBeInTheDocument();
     });
   });
@@ -450,7 +451,7 @@ describe("<FilingsCalendar />", () => {
       dueDate: dueDate.format(defaultDateFormat),
     });
 
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -470,7 +471,7 @@ describe("<FilingsCalendar />", () => {
       },
     };
 
-    renderFilingsCalendar(operateReferences, userData);
+    renderFilingsCalendar(operateReferences, business);
 
     expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
     expect(screen.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
@@ -480,7 +481,7 @@ describe("<FilingsCalendar />", () => {
   it("displays filings calendar as list with license events", () => {
     const expirationDate = getCurrentDate().add(2, "months");
 
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         industryId: "home-contractor",
         operatingPhase: randomElementFromArray(
@@ -509,7 +510,7 @@ describe("<FilingsCalendar />", () => {
       },
     };
 
-    renderFilingsCalendar(operateReferences, userData);
+    renderFilingsCalendar(operateReferences, business);
 
     expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
     expect(screen.getByText(expirationDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
@@ -525,7 +526,7 @@ describe("<FilingsCalendar />", () => {
       dueDate: getCurrentDate().format(defaultDateFormat),
     });
 
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
@@ -543,7 +544,7 @@ describe("<FilingsCalendar />", () => {
         urlPath: "annual_report-url-path",
       },
     };
-    renderFilingsCalendar(operateReferences, userData);
+    renderFilingsCalendar(operateReferences, business);
     fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarFeedbackButtonText));
     expect(mockAnalytics.event.share_calendar_feedback.click.open_live_chat).toHaveBeenCalled();
   });
@@ -560,7 +561,7 @@ describe("<FilingsCalendar />", () => {
         dueDate: dueDate.format(defaultDateFormat),
       });
 
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
           operatingPhase: randomElementFromArray(
@@ -580,7 +581,7 @@ describe("<FilingsCalendar />", () => {
         },
       };
 
-      renderFilingsCalendar(operateReferences, userData);
+      renderFilingsCalendar(operateReferences, business);
 
       expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
     });
@@ -589,7 +590,7 @@ describe("<FilingsCalendar />", () => {
       const whateverReport = generateTaxFilingCalendarEvent({
         identifier: "whatever-report",
       });
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
           operatingPhase: randomElementFromArray(
@@ -609,7 +610,7 @@ describe("<FilingsCalendar />", () => {
         },
       };
 
-      renderFilingsCalendar(operateReferences, userData);
+      renderFilingsCalendar(operateReferences, business);
 
       expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
     });
@@ -621,7 +622,7 @@ describe("<FilingsCalendar />", () => {
         dueDate: dueDate.format(defaultDateFormat),
       });
 
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
           operatingPhase: randomElementFromArray(
@@ -641,31 +642,31 @@ describe("<FilingsCalendar />", () => {
         },
       };
 
-      renderFilingsCalendar(operateReferences, userData);
+      renderFilingsCalendar(operateReferences, business);
 
       expect(screen.queryByTestId("get-tax-access")).not.toBeInTheDocument();
     });
 
     it("displays button on filings calendar in up and running guest mode for PublicFiling", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
           operatingPhase: "GUEST_MODE_OWNING",
         }),
       });
-      renderFilingsCalendar({}, userData);
+      renderFilingsCalendar({}, business);
       expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
     });
 
     it("display buttons on filings calendar in up and running guest mode for TradeName", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
           operatingPhase: "GUEST_MODE_OWNING",
         }),
         taxFilingData: generateTaxFilingData({ filings: [generateTaxFilingCalendarEvent({})] }),
       });
-      renderFilingsCalendar({}, userData);
+      renderFilingsCalendar({}, business);
       expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
     });
   });
@@ -673,7 +674,7 @@ describe("<FilingsCalendar />", () => {
   describe("filings calendar in mobile", () => {
     let dueDate: dayjs.Dayjs;
     let annualReport: TaxFilingCalendarEvent;
-    let userData: UserData;
+    let business: Business;
     let operateReferences: Record<string, OperateReference>;
 
     beforeEach(() => {
@@ -685,7 +686,7 @@ describe("<FilingsCalendar />", () => {
         dueDate: dueDate.format(defaultDateFormat),
       });
 
-      userData = generateUserData({
+      business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => {
@@ -703,14 +704,14 @@ describe("<FilingsCalendar />", () => {
     });
 
     it("displays filings calendar as list in mobile", () => {
-      renderFilingsCalendar(operateReferences, userData);
+      renderFilingsCalendar(operateReferences, business);
 
       expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
       expect(screen.queryByTestId("filings-calendar-as-table")).not.toBeInTheDocument();
     });
 
     it("does not display grid view button in mobile", () => {
-      renderFilingsCalendar(operateReferences, userData);
+      renderFilingsCalendar(operateReferences, business);
 
       expect(
         screen.queryByText(Config.dashboardDefaults.calendarGridViewButton, { exact: false })
@@ -730,7 +731,7 @@ describe("<FilingsCalendar />", () => {
         dueDate: futureDueDate.format(defaultDateFormat),
       });
 
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => {
@@ -746,7 +747,7 @@ describe("<FilingsCalendar />", () => {
         future: generateOperateReference({}),
       };
 
-      renderFilingsCalendar(operateReferences, userData);
+      renderFilingsCalendar(operateReferences, business);
 
       expect(
         screen.queryByText(pastDueDate.format("MMMM D, YYYY"), { exact: false })
@@ -758,7 +759,7 @@ describe("<FilingsCalendar />", () => {
   describe("calendar list and grid views", () => {
     let dueDate: dayjs.Dayjs;
     let annualReport: TaxFilingCalendarEvent;
-    let userData: UserData;
+    let business: Business;
     let operateReferences: Record<string, OperateReference>;
 
     beforeEach(() => {
@@ -768,7 +769,7 @@ describe("<FilingsCalendar />", () => {
         dueDate: dueDate.format(defaultDateFormat),
       });
 
-      userData = generateUserData({
+      business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => {
@@ -786,29 +787,29 @@ describe("<FilingsCalendar />", () => {
     });
 
     it("displays calendar list view when button is clicked", () => {
-      renderFilingsCalendar(operateReferences, userData);
+      renderFilingsCalendar(operateReferences, business);
 
       expect(screen.getByTestId("filings-calendar-as-table")).toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarListViewButton, { exact: false }));
-      expect(currentUserData().preferences.isCalendarFullView).toBeFalsy();
+      expect(currentBusiness().preferences.isCalendarFullView).toBeFalsy();
       expect(screen.queryByTestId("filings-calendar-as-table")).not.toBeInTheDocument();
       expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
     });
 
     it("displays calendar grid view when button is clicked", () => {
-      renderFilingsCalendar(operateReferences, userData);
+      renderFilingsCalendar(operateReferences, business);
 
       fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarListViewButton, { exact: false }));
       expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
-      expect(currentUserData().preferences.isCalendarFullView).toBeFalsy();
+      expect(currentBusiness().preferences.isCalendarFullView).toBeFalsy();
       fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarGridViewButton, { exact: false }));
-      expect(currentUserData().preferences.isCalendarFullView).toBeTruthy();
+      expect(currentBusiness().preferences.isCalendarFullView).toBeTruthy();
       expect(screen.getByTestId("filings-calendar-as-table")).toBeInTheDocument();
       expect(screen.queryByTestId("filings-calendar-as-list")).not.toBeInTheDocument();
     });
 
     it("displays the calendar toggle button in operating phases that need it", () => {
-      userData = generateUserData({
+      business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => obj.displayCalendarToggleButton)
@@ -818,12 +819,12 @@ describe("<FilingsCalendar />", () => {
         preferences: generatePreferences({ isCalendarFullView: false }),
       });
 
-      renderFilingsCalendar(operateReferences, userData);
+      renderFilingsCalendar(operateReferences, business);
       expect(screen.getByText(Config.dashboardDefaults.calendarGridViewButton)).toBeInTheDocument();
     });
 
     it("doesnt't display the toggle button for operating phases that don't need it", () => {
-      userData = generateUserData({
+      business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => !obj.displayCalendarToggleButton)
@@ -833,7 +834,7 @@ describe("<FilingsCalendar />", () => {
         preferences: generatePreferences({ isCalendarFullView: false }),
       });
 
-      renderFilingsCalendar(operateReferences, userData);
+      renderFilingsCalendar(operateReferences, business);
       expect(screen.queryByText(Config.dashboardDefaults.calendarGridViewButton)).not.toBeInTheDocument();
     });
   });
@@ -856,7 +857,7 @@ describe("<FilingsCalendar />", () => {
         }
       });
 
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => {
@@ -868,7 +869,7 @@ describe("<FilingsCalendar />", () => {
         preferences: generatePreferences({ isCalendarFullView: false }),
       });
 
-      renderFilingsCalendar(operateReferences, userData);
+      renderFilingsCalendar(operateReferences, business);
     };
 
     it("does not show the view more button if 5 or fewer events are in the calendar", () => {

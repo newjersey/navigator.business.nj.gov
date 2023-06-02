@@ -1,4 +1,4 @@
-import { generateProfileData, generateUserData } from "@shared/test";
+import { generateBusiness, generateProfileData, generateUserDataForBusiness } from "@shared/test";
 import { UserData } from "@shared/userData";
 import { EncryptionDecryptionClient, EncryptTaxId, UserDataClient } from "../types";
 import { encryptTaxIdBatch } from "./encryptTaxIdBatch";
@@ -30,12 +30,16 @@ describe("encryptTaxIdBatch", () => {
     stubEncryptionDecryptionClient.encryptValue.mockResolvedValue("some-encrypted-value");
 
     stubUserDataClient.getNeedTaxIdEncryptionUsers.mockResolvedValue([
-      generateUserData({
-        profileData: generateProfileData({ taxId: "123456789000", encryptedTaxId: undefined }),
-      }),
-      generateUserData({
-        profileData: generateProfileData({ taxId: "000987654321", encryptedTaxId: undefined }),
-      }),
+      generateUserDataForBusiness(
+        generateBusiness({
+          profileData: generateProfileData({ taxId: "123456789000", encryptedTaxId: undefined }),
+        })
+      ),
+      generateUserDataForBusiness(
+        generateBusiness({
+          profileData: generateProfileData({ taxId: "000987654321", encryptedTaxId: undefined }),
+        })
+      ),
     ]);
 
     const results = await encryptTaxIdBatch(encryptTaxId, stubUserDataClient);
@@ -51,12 +55,16 @@ describe("encryptTaxIdBatch", () => {
       .mockRejectedValueOnce({});
 
     stubUserDataClient.getNeedTaxIdEncryptionUsers.mockResolvedValue([
-      generateUserData({
-        profileData: generateProfileData({ taxId: "123456789000", encryptedTaxId: undefined }),
-      }),
-      generateUserData({
-        profileData: generateProfileData({ taxId: "000987654321", encryptedTaxId: undefined }),
-      }),
+      generateUserDataForBusiness(
+        generateBusiness({
+          profileData: generateProfileData({ taxId: "123456789000", encryptedTaxId: undefined }),
+        })
+      ),
+      generateUserDataForBusiness(
+        generateBusiness({
+          profileData: generateProfileData({ taxId: "000987654321", encryptedTaxId: undefined }),
+        })
+      ),
     ]);
 
     const results = await encryptTaxIdBatch(encryptTaxId, stubUserDataClient);

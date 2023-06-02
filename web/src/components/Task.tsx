@@ -14,10 +14,10 @@ interface Props {
 }
 
 export const Task = (props: Props): ReactElement => {
-  const { userData } = useUserData();
+  const { business } = useUserData();
   const { Config } = useConfig();
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
-  const taskProgress = (userData?.taskProgress && userData.taskProgress[props.task.id]) || "NOT_STARTED";
+  const taskProgress = (business?.taskProgress && business.taskProgress[props.task.id]) || "NOT_STARTED";
 
   const renderRequiredLabel = (): ReactNode => {
     if (!props.task.required) {

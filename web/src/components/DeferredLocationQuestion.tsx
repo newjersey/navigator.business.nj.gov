@@ -7,19 +7,19 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, ReactNode, useState } from "react";
 
 interface Props {
   innerContent: string;
   CMS_ONLY_showSuccessBanner?: boolean;
-  CMS_ONLY_fakeUserData?: UserData; // for CMS only
+  CMS_ONLY_fakeBusiness?: Business; // for CMS only
 }
 
 export const DeferredLocationQuestion = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const userDataFromHook = useUserData();
-  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
+  const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
   const updateQueue = userDataFromHook.updateQueue;
 
   const [showSuccessBanner, setShowSuccessBanner] = useState<boolean>(
@@ -34,13 +34,13 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
     </>
   );
 
-  const shouldShowQuestion = userData?.profileData.municipality === undefined || showEditLocation;
+  const shouldShowQuestion = business?.profileData.municipality === undefined || showEditLocation;
 
   const onSaveNewLocation = (): void => {
     setShowSuccessBanner(true);
     setShowEditLocation(false);
-    userData?.profileData.municipality === undefined &&
-      updateQueue?.current().profileData.municipality !== undefined &&
+    business?.profileData.municipality === undefined &&
+      updateQueue?.currentBusiness().profileData.municipality !== undefined &&
       analytics.event.task_location_question.submit.location_entered_for_first_time();
   };
 
@@ -52,7 +52,7 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
   };
 
   const successBanner = (): ReactNode => {
-    if (!userData?.profileData.municipality) {
+    if (!business?.profileData.municipality) {
       return <></>;
     }
     return (
@@ -61,7 +61,7 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
           <div className="margin-right-1">
             <Content>
               {templateEval(Config.deferredLocation.successText, {
-                city: userData.profileData.municipality.displayName,
+                city: business.profileData.municipality.displayName,
               })}
             </Content>
           </div>

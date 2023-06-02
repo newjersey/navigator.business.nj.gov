@@ -3,7 +3,7 @@ import { getPageHelper } from "@/components/tasks/business-formation/contacts/te
 import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
-import { currentUserData } from "@/test/mock/withStatefulUserData";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   BusinessSignerTypeMap,
   castPublicFilingLegalTypeToFormationType,
@@ -57,7 +57,7 @@ describe("Formation - Signatures", () => {
         page.checkSignerBox(1, "signers");
 
         await page.submitContactsStep();
-        expect(currentUserData().formationData.formationFormData.signers).toEqual([
+        expect(currentBusiness().formationData.formationFormData.signers).toEqual([
           generateFormationSigner(
             {
               name: "Red Skull",
@@ -87,7 +87,7 @@ describe("Formation - Signatures", () => {
         fireEvent.click(screen.getAllByLabelText("delete additional signer")[0]);
 
         await page.submitContactsStep();
-        expect(currentUserData().formationData.formationFormData.signers).toEqual([
+        expect(currentBusiness().formationData.formationFormData.signers).toEqual([
           generateFormationSigner(
             {
               name: "Red Skull",
@@ -246,7 +246,7 @@ describe("Formation - Signatures", () => {
           page.checkSignerBox(1, "signers");
 
           await page.submitContactsStep();
-          expect(currentUserData().formationData.formationFormData.signers).toEqual(signers);
+          expect(currentBusiness().formationData.formationFormData.signers).toEqual(signers);
         });
       });
     });

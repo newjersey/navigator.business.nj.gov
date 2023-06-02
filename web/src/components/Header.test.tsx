@@ -5,13 +5,8 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
-import {
-  generateProfileData,
-  generateUser,
-  getCurrentDateInNewJersey,
-  randomInt,
-} from "@businessnjgovnavigator/shared/";
+import { useMockBusiness, useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
+import { generateUser, getCurrentDateInNewJersey, randomInt } from "@businessnjgovnavigator/shared/";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 
@@ -23,7 +18,7 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 describe("<Header />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockUserData({});
+    useMockBusiness({});
     useMockRouter({});
   });
 
@@ -91,23 +86,6 @@ describe("<Header />", () => {
     fireEvent.click(screen.getByText(businessName));
 
     expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
-  });
-
-  it("shows template with user name as header", () => {
-    useMockUserData({
-      profileData: generateProfileData({
-        businessName: "some business",
-        industryId: "restaurant",
-        legalStructureId: "c-corporation",
-      }),
-      user: generateUser({ name: "Ada Lovelace" }),
-    });
-    renderHeader();
-
-    const expectedHeaderText = templateEval(Config.headerDefaults.defaultHeaderText, {
-      name: "Ada Lovelace",
-    });
-    expect(screen.getByText(expectedHeaderText)).toBeInTheDocument();
   });
 
   it("greets user when name is undefined", () => {

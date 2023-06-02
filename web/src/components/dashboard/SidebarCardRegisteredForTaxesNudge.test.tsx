@@ -4,18 +4,22 @@ import { SidebarCardContent } from "@/lib/types/types";
 import { generateRoadmap, generateSidebarCardContent } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { getCurrentDateISOString } from "@businessnjgovnavigator/shared/dateHelpers";
-import { generateTaxFilingCalendarEvent, taxTaskId } from "@businessnjgovnavigator/shared/index";
 import {
+  Business,
+  generateTaxFilingCalendarEvent,
+  generateUserDataForBusiness,
+  taxTaskId,
+} from "@businessnjgovnavigator/shared/index";
+import {
+  generateBusiness,
   generateProfileData,
   generateTaxFilingData,
-  generateUserData,
 } from "@businessnjgovnavigator/shared/test";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -24,12 +28,12 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
 
-describe("<SidebarCardTaxRegistrationNudge />", () => {
+describe("<SidebarCardRegisteredForTaxesNudge />", () => {
   let card: SidebarCardContent;
 
-  const renderWithUserData = (userData: Partial<UserData>): void => {
+  const renderWithBusiness = (business: Partial<Business>): void => {
     render(
-      <WithStatefulUserData initialUserData={generateUserData(userData)}>
+      <WithStatefulUserData initialUserData={generateUserDataForBusiness(generateBusiness(business))}>
         <SidebarCardRegisteredForTaxesNudge card={card} />
       </WithStatefulUserData>
     );
@@ -45,7 +49,7 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
     });
 
     it("saves tax information and updates the user data to COMPLETED registered for taxes task", async () => {
-      const initialUserData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           businessName: "",
           taxId: "",
@@ -57,20 +61,20 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
           state: "SUCCESS",
         }),
       });
-      renderWithUserData(initialUserData);
+      renderWithBusiness(business);
 
       fireEvent.click(screen.getByTestId("cta-registered-for-taxes-nudge"));
 
-      const updatedUserData = {
-        ...initialUserData,
+      const updateBusiness = {
+        ...business,
         taskProgress: {
-          ...initialUserData.taskProgress,
+          ...business.taskProgress,
           [taxTaskId]: "COMPLETED",
         },
       };
 
       await waitFor(() => {
-        return expect(currentUserData()).toEqual(updatedUserData);
+        return expect(currentBusiness()).toEqual(updateBusiness);
       });
       expect(mockPush).toHaveBeenCalledWith({ query: { fromTaxRegistrationCard: "true" } }, undefined, {
         shallow: true,

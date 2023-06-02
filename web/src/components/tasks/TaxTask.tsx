@@ -15,7 +15,7 @@ interface Props {
 
 export const TaxTask = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { userData } = useUserData();
+  const { business } = useUserData();
 
   const preInputContent = props.task.contentMd.split("${taxInputComponent}")[0];
   const postInputContent = props.task.contentMd.split("${taxInputComponent}")[1];
@@ -27,7 +27,7 @@ export const TaxTask = (props: Props): ReactElement => {
       <Content>{preInputContent}</Content>
       <div className="margin-left-5 margin-top-1">
         <Content>{Config.tax.descriptionText}</Content>
-        <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
+        <TaxDisclaimer legalStructureId={business?.profileData.legalStructureId} />
         <TaxInput task={props.task} />
       </div>
       <Content>{postInputContent}</Content>

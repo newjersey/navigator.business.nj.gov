@@ -1,7 +1,7 @@
 import * as sessionHelper from "@/lib/auth/sessionHelper";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { generateProfileData, ProfileDocuments } from "@businessnjgovnavigator/shared/";
+import { useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData";
+import { ProfileDocuments } from "@businessnjgovnavigator/shared/";
 import { act, render, waitFor } from "@testing-library/react";
 
 const mockGetSignedS3Link = (sessionHelper as jest.Mocked<typeof sessionHelper>).getSignedS3Link;
@@ -14,7 +14,7 @@ jest.mock("@/lib/auth/sessionHelper", () => ({
 describe("useDocuments", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockUserData({});
+    useMockBusiness({});
   });
 
   const setupHook = (): {
@@ -36,10 +36,8 @@ describe("useDocuments", () => {
   };
 
   it("generates documents on load", async () => {
-    useMockUserData({
-      profileData: generateProfileData({
-        documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
-      }),
+    useMockProfileData({
+      documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
     });
     setupHook();
     await waitFor(() => {
@@ -51,10 +49,8 @@ describe("useDocuments", () => {
   });
 
   it("regenerates documents when calling checkData", async () => {
-    useMockUserData({
-      profileData: generateProfileData({
-        documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
-      }),
+    useMockProfileData({
+      documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
     });
     const { checkData } = setupHook();
     checkData();
@@ -65,10 +61,8 @@ describe("useDocuments", () => {
 
   it("regenerates documents every 15 minutes", async () => {
     jest.useFakeTimers();
-    useMockUserData({
-      profileData: generateProfileData({
-        documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
-      }),
+    useMockProfileData({
+      documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
     });
     act(() => {
       setupHook();
@@ -92,10 +86,8 @@ describe("useDocuments", () => {
 
   it("does not regenerate documents before 15 minutes", async () => {
     jest.useFakeTimers();
-    useMockUserData({
-      profileData: generateProfileData({
-        documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
-      }),
+    useMockProfileData({
+      documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
     });
     act(() => {
       setupHook();

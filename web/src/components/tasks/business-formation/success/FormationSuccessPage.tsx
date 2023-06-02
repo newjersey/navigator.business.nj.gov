@@ -4,11 +4,11 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect } from "@/lib/utils/helpers";
-import { UserData } from "@businessnjgovnavigator/shared/";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
 
 interface Props {
-  userData: UserData;
+  business: Business;
 }
 
 export const FormationSuccessPage = (props: Props): ReactElement => {
@@ -34,14 +34,14 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
           downloadLink={documents?.formationDoc ?? "#"}
           icon="formation-icon-blue"
         />
-        {props.userData.profileData.documents.standingDoc && (
+        {props.business.profileData.documents.standingDoc && (
           <FormationSuccessDocument
             label={Config.formation.successPage.standingDocLabel}
             downloadLink={documents?.standingDoc ?? "#"}
             icon="certificate-icon"
           />
         )}
-        {props.userData.profileData.documents.certifiedDoc && (
+        {props.business.profileData.documents.certifiedDoc && (
           <FormationSuccessDocument
             label={Config.formation.successPage.certifiedDocLabel}
             downloadLink={documents?.certifiedDoc ?? "#"}
@@ -51,7 +51,7 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
         <FormationSuccessDocument
           label={Config.formation.successPage.entityIdLabel}
           downloadLink=""
-          subLabel={props.userData.formationData.getFilingResponse?.entityId}
+          subLabel={props.business.formationData.getFilingResponse?.entityId}
           icon="id-icon"
         />
       </div>
@@ -59,7 +59,7 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
       <p className="text-center font-body-2xs">
         {Config.formation.successPage.confirmationNumberLabel}
         <span className="margin-left-05">
-          {props.userData.formationData.getFilingResponse?.confirmationNumber}
+          {props.business.formationData.getFilingResponse?.confirmationNumber}
         </span>
       </p>
       <div className="text-center">
