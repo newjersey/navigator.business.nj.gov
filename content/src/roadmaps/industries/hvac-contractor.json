@@ -58,5 +58,6 @@
   "name": "HVAC Contractor",
   "additionalSearchTerms": "Heating, cooling, AC, Refrigeration, HVAC, HVAC-R, contractor",
   "id": "hvac-contractor",
+  "licenseType": "HVACR",
   "description": "Provides installation, maintenance, and repair services to Heating Ventilation, AC, and Refrigeration systems (HVACR)"
 }
