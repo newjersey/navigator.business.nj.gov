@@ -5,7 +5,7 @@ import Profile from "@/pages/profile";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { WithStatefulProfileFormContext } from "@/test/mock/withStatefulProfileData";
 import {
-  currentUserData,
+  currentBusiness,
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
@@ -13,56 +13,55 @@ import {
   einTaskId,
   generateMunicipality,
   generateProfileData,
-  generateUserData as _generateUserData,
-  TaskProgress,
+  generateBusiness as _generateBusiness,
+  TaskProgress, generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import {Business } from "@businessnjgovnavigator/shared/userData";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-export const generateUserData = (overrides: Partial<UserData>): UserData => {
+export const generateBusiness = (overrides: Partial<Business>): Business => {
   const profileData = generateProfileData({ ...overrides.profileData });
   const taskProgress: Record<string, TaskProgress> =
     profileData.employerId && profileData.employerId.length > 0
       ? { [einTaskId]: "COMPLETED", ...overrides.taskProgress }
       : { ...overrides.taskProgress };
-  return _generateUserData({ ...overrides, profileData, taskProgress });
+  return _generateBusiness({ ...overrides, profileData, taskProgress });
 };
 
 export const renderPage = ({
   municipalities,
-  userData,
+  business,
   isAuthenticated,
   setRegistrationModalIsVisible,
 }: {
   municipalities?: Municipality[];
-  userData?: UserData;
+  business?: Business;
   isAuthenticated?: IsAuthenticated;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setRegistrationModalIsVisible?: jest.Mock<any, any, any>;
 }): void => {
   const genericTown =
-    userData && userData.profileData.municipality
-      ? userData.profileData.municipality
+    business && business.profileData.municipality
+      ? business.profileData.municipality
       : generateMunicipality({ displayName: "GenericTown" });
+
+  const initialBusiness = business ??
+    generateBusiness({
+      profileData: generateProfileData({
+        municipality: genericTown,
+      }),
+    })
+
   render(
     withAuthAlert(
       <ThemeProvider theme={createTheme()}>
         <WithStatefulProfileFormContext>
-          <WithStatefulUserData
-            initialUserData={
-              userData ||
-              generateUserData({
-                profileData: generateProfileData({
-                  municipality: genericTown,
-                }),
-              })
-            }
-          >
+          <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <Profile municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]} />
           </WithStatefulUserData>
         </WithStatefulProfileFormContext>
@@ -135,8 +134,8 @@ export const getMunicipalityValue = (): string => {
   return (screen.queryByTestId("municipality") as HTMLInputElement)?.value;
 };
 
-export const getBusinessProfileInputFieldName = (userData: UserData): string => {
-  return LookupLegalStructureById(userData.profileData.legalStructureId).hasTradeName
+export const getBusinessProfileInputFieldName = (business: Business): string => {
+  return LookupLegalStructureById(business.profileData.legalStructureId).hasTradeName
     ? "Trade name"
     : "Business name";
 };
@@ -149,7 +148,7 @@ export const removeLocationAndSave = (): void => {
 
 export const expectLocationSavedAsUndefined = async (): Promise<void> => {
   await waitFor(() => {
-    return expect(currentUserData().profileData.municipality).toEqual(undefined);
+    return expect(currentBusiness().profileData.municipality).toEqual(undefined);
   });
 };
 

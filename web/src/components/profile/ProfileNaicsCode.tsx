@@ -13,7 +13,7 @@ import { ReactElement, useContext, useMemo } from "react";
 
 export const ProfileNaicsCode = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);
-  const { userData } = useUserData();
+  const { business } = useUserData();
   const { Config } = useConfig();
   const { roadmap } = useRoadmap();
 
@@ -31,7 +31,7 @@ export const ProfileNaicsCode = (): ReactElement => {
   }, [roadmap]);
 
   const shouldLockFieldForStartingAndNexus = (): boolean => {
-    return state.profileData.naicsCode !== "" && userData?.taxFilingData.state === "SUCCESS";
+    return state.profileData.naicsCode !== "" && business?.taxFilingData.state === "SUCCESS";
   };
 
   const shouldLockFieldForOwning = (): boolean => {

@@ -5,7 +5,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { UpdateQueue } from "@/lib/types/types";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
 import { hasCompletedFormation } from "@businessnjgovnavigator/shared/";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
@@ -19,7 +18,8 @@ export const ProfileBusinessStructure = (): ReactElement => {
   const [isFormed, setIsFormed] = useState(false);
 
   useEffect(() => {
-    setIsFormed(hasCompletedFormation((updateQueue as UpdateQueue).current()));
+    if (!updateQueue) return;
+    setIsFormed(hasCompletedFormation(updateQueue.currentBusiness()));
   }, [updateQueue]);
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["legalStructureId"]["default"] =
