@@ -2,10 +2,10 @@
 urlSlug: spray-paint-permit
 name: Obtain Your Spray Paint Booth Permits, if Needed
 webflowName: "Auto-Body Repair: Spray Paint Booth Permit"
-summaryDescriptionMd: If your business will offer spray paint services for
-  vehicles, you must contact the Department of Environmental Protection (DEP)
-  Office of Permitting and Project Navigation at (609) 292-3600 for specific
-  guidance on your permitting needs.
+summaryDescriptionMd: You need a spray paint booth permit if your business will
+  offer spray paint services for vehicles. Contact the Department of
+  Environmental Protection (DEP) Office of Permitting and Project Navigation at
+  (609) 292-3600 for specific guidance on obtaining the correct permits.
 industryId: auto-body-repair
 callToActionText: null
 callToActionLink: null
