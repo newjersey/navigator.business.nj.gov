@@ -24,14 +24,12 @@ webflowId: 640b8467a1b0444c01a311c3
 
 ### Application Requirements
 
-- \[]{general-business-name} Pharmacy name (this is usually your registered businesses name)
-- \[]{general-register-name-county-clerk} Name registration with the county clerk
-- \[]{general-registered-agent-info} Names and addresses of the registered agent (c corps only)
-- \[]{general-c-corp-officers-info} Names and addresses of all officers and owners of 10% or more of stock (c corps only)
-- \[]{pharmacist-info} Registered pharmacists' name, hours of work, and certificate number
-- \[]{pharmacist-employee-info} Name and contact of unregistered employees
-- []{pharmacist-in-charge} `Pharmacist in-charge|pharmacist-in-charge`
-- \[]{pharmacist-prescription-label} Copy of prescription and poison label
+- \[]{general-business-name} A pharmacy name (usually your registered businesses name), registered with the county clerk
+- \[]{general-registered-agent-info} The names and address of the registered agent (c corps only)
+- \[]{general-c-corp-officers-info} The names and addresses of all officers and owners of 10% or more of stock (c corps only)
+- \[]{pharmacist-info} The name, work hours, and certificate number for registered pharmacists, including a pharmacist in-charge
+- \[]{pharmacist-employee-info} The name and work hours of unregistered employees
+- \[]{pharmacist-prescription-label} A copy of prescription and poison labels
 - \[]{general-business-address} Business address
 - \[]{general-hours-operation} Hours of operation
 - \[]{pharmacist-floor-dimension} Floor dimensions of the pharmacy shop (height x width)
