@@ -1,30 +1,34 @@
 ---
+filename: pharmacy-permit
 urlSlug: pharmacy-license
-name: Apply for a Pharmacy Permit
-id: pharmacy-license
-callToActionLink: https://www.njconsumeraffairs.gov/phar/Applications/Pharmacy-Permit-Application.pdf
+name: Apply for Your Pharmacy Permit
+webflowName: "Pharmacy: Pharmacy Permit"
+summaryDescriptionMd: Your pharmacy business needs a permit in order to operate.
+  The permit application process includes a site inspection. Once a permit is
+  issued, your pharmacy must open within 90 days and notify the Board of
+  Pharmacy in writing of the date the business opens.
+industryId: pharmacy
 callToActionText: Apply for My Pharmacy Permit
+callToActionLink: https://www.njconsumeraffairs.gov/phar/Applications/Pharmacy-Permit-Application.pdf
+webflowIndustry: Pharmacy
+licenseCertificationClassification: REGISTRATION
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Pharmacy
-webflowId: "640b8467a1b0444c01a311c3"
-webflowName: "Pharmacy Permit"
-filename: "pharmacy-permit"
-divisionPhone: "(973) 504-6450"
-webflowIndustry: "Pharmacy"
-licenseCertificationClassification: "REGISTRATION"
+divisionPhone: (973) 504-6450
+id: pharmacy-license
+webflowType: business-license
+webflowId: 640b8467a1b0444c01a311c3
 ---
-
-Your pharmacy business needs a permit in order to operate. The permit application process includes a site inspection. Once a permit is issued, your pharmacy must open within 90 days and notify the Board of Pharmacy in writing of the date the business opens.
 
 ---
 
 ### Application Requirements
 
-- \[]{general-business-name} Pharmacy Name (this is usually your registered businesses name)
+- \[]{general-business-name} Pharmacy name (this is usually your registered businesses name)
 - \[]{general-register-name-county-clerk} Name registration with the county clerk
 - \[]{general-registered-agent-info} Names and addresses of the registered agent (c corps only)
 - \[]{general-c-corp-officers-info} Names and addresses of all officers and owners of 10% or more of stock (c corps only)
-- \[]{pharmacist-info} Registered pharmacists name, hours of work, and certificate number
+- \[]{pharmacist-info} Registered pharmacists' name, hours of work, and certificate number
 - \[]{pharmacist-employee-info} Name and contact of unregistered employees
 - []{pharmacist-in-charge} `Pharmacist in-charge|pharmacist-in-charge`
 - \[]{pharmacist-prescription-label} Copy of prescription and poison label
@@ -39,5 +43,5 @@ Your pharmacy business needs a permit in order to operate. The permit applicatio
 
 > **Once completed, you will have:**
 >
-> - A permit number
 > - A pharmacy permit
+> - A permit number
