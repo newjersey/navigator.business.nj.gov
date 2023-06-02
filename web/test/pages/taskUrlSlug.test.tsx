@@ -203,6 +203,21 @@ describe("task page", () => {
     expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
+  it("loads License task screen for architect-license", () => {
+    renderPage(generateTask({ id: "architect-license" }), generateUserData({ licenseData: undefined }));
+    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
+  });
+
+  it("loads License task screen for hvac-license", () => {
+    renderPage(generateTask({ id: "hvac-license" }), generateUserData({ licenseData: undefined }));
+    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
+  });
+
+  it("loads License task screen for appraiser-license", () => {
+    renderPage(generateTask({ id: "appraiser-license" }), generateUserData({ licenseData: undefined }));
+    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
+  });
+
   it("loads construction post-onboarding question for task in template body", async () => {
     renderPage(
       generateTask({
