@@ -1,4 +1,5 @@
 import { BusinessUser } from "./businessUser";
+import { createBusinessId } from "./domain-logic/createBusinessId";
 import { createEmptyFormationFormData, FormationData } from "./formationData";
 import { LicenseData } from "./license";
 import { createEmptyProfileData, ProfileData } from "./profileData";
@@ -6,6 +7,17 @@ import { TaxFilingData } from "./taxFiling";
 
 export interface UserData {
   readonly user: BusinessUser;
+  readonly version: number;
+  readonly lastUpdatedISO: string | undefined;
+  dateCreatedISO: string | undefined;
+  versionWhenCreated: number;
+  readonly businesses: Record<string, Business>;
+  readonly currentBusinessId: string;
+}
+
+export interface Business {
+  readonly id: string;
+  readonly dateCreatedISO: string;
   readonly profileData: ProfileData;
   readonly onboardingFormProgress: OnboardingFormProgress;
   readonly taskProgress: Record<string, TaskProgress>;
@@ -14,52 +26,56 @@ export interface UserData {
   readonly preferences: Preferences;
   readonly taxFilingData: TaxFilingData;
   readonly formationData: FormationData;
-  readonly version: number;
-  readonly lastUpdatedISO: string | undefined;
-  dateCreatedISO: string | undefined;
-  versionWhenCreated: number;
 }
 
 export const CURRENT_VERSION = 118;
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
+  const businessId = createBusinessId();
   return {
     version: CURRENT_VERSION,
     user: user,
-    profileData: createEmptyProfileData(),
-    onboardingFormProgress: "UNSTARTED",
-    taskProgress: {},
-    taskItemChecklist: {},
-    licenseData: undefined,
     lastUpdatedISO: undefined,
     dateCreatedISO: undefined,
     versionWhenCreated: CURRENT_VERSION,
-    preferences: {
-      roadmapOpenSections: ["PLAN", "START"],
-      roadmapOpenSteps: [],
-      hiddenCertificationIds: [],
-      hiddenFundingIds: [],
-      visibleSidebarCards: ["welcome"],
-      returnToLink: "",
-      isCalendarFullView: false,
-      isHideableRoadmapOpen: false,
-      phaseNewlyChanged: true,
-    },
-    taxFilingData: {
-      state: undefined,
-      businessName: undefined,
-      lastUpdatedISO: undefined,
-      registeredISO: undefined,
-      filings: [],
-    },
-    formationData: {
-      formationFormData: createEmptyFormationFormData(),
-      formationResponse: undefined,
-      getFilingResponse: undefined,
-      completedFilingPayment: false,
-      businessNameAvailability: undefined,
-      dbaBusinessNameAvailability: undefined,
-      lastVisitedPageIndex: 0,
+    currentBusinessId: businessId,
+    businesses: {
+      [businessId]: {
+        id: businessId,
+        dateCreatedISO: new Date(Date.now()).toISOString(),
+        profileData: createEmptyProfileData(),
+        onboardingFormProgress: "UNSTARTED",
+        taskProgress: {},
+        taskItemChecklist: {},
+        licenseData: undefined,
+        preferences: {
+          roadmapOpenSections: ["PLAN", "START"],
+          roadmapOpenSteps: [],
+          hiddenCertificationIds: [],
+          hiddenFundingIds: [],
+          visibleSidebarCards: ["welcome"],
+          returnToLink: "",
+          isCalendarFullView: false,
+          isHideableRoadmapOpen: false,
+          phaseNewlyChanged: true,
+        },
+        taxFilingData: {
+          state: undefined,
+          businessName: undefined,
+          lastUpdatedISO: undefined,
+          registeredISO: undefined,
+          filings: [],
+        },
+        formationData: {
+          formationFormData: createEmptyFormationFormData(),
+          formationResponse: undefined,
+          getFilingResponse: undefined,
+          completedFilingPayment: false,
+          businessNameAvailability: undefined,
+          dbaBusinessNameAvailability: undefined,
+          lastVisitedPageIndex: 0,
+        },
+      },
     },
   };
 };

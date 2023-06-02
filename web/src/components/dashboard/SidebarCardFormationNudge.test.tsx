@@ -5,14 +5,14 @@ import { SidebarCardContent } from "@/lib/types/types";
 import { generateRoadmap, generateSidebarCardContent } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { formationTaskId, generateProfileData } from "@businessnjgovnavigator/shared/";
 import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/test";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -26,9 +26,9 @@ const Config = getMergedConfig();
 describe("<SidebarCardFormationNudge />", () => {
   let card: SidebarCardContent;
 
-  const renderWithUserData = (userData: Partial<UserData>): void => {
+  const renderWithBusiness = (business: Partial<Business>): void => {
     render(
-      <WithStatefulUserData initialUserData={generateUserData(userData)}>
+      <WithStatefulUserData initialUserData={generateUserData(business)}>
         <SidebarCardFormationNudge card={card} />
       </WithStatefulUserData>
     );
@@ -44,7 +44,7 @@ describe("<SidebarCardFormationNudge />", () => {
     });
 
     it("opens the modal when the user clicks the formation nudge", () => {
-      renderWithUserData({
+      renderWithBusiness({
         profileData: generateProfileData({
           businessPersona: "STARTING",
         }),
@@ -58,7 +58,7 @@ describe("<SidebarCardFormationNudge />", () => {
 
     it("saves formation date and updates user data with completed formation task", async () => {
       const initialUserData = generateUserData({});
-      renderWithUserData(initialUserData);
+      renderWithBusiness(initialUserData);
 
       fireEvent.click(screen.getByTestId("cta-formation-nudge"));
 
@@ -68,20 +68,11 @@ describe("<SidebarCardFormationNudge />", () => {
 
       fireEvent.click(screen.getByTestId("modal-button-primary"));
 
-      const updatedUserData = {
-        ...initialUserData,
-        profileData: {
-          ...initialUserData.profileData,
-          dateOfFormation: "2021-05-01",
-        },
-        taskProgress: {
-          ...initialUserData.taskProgress,
-          [formationTaskId]: "COMPLETED",
-        },
-      };
       await waitFor(() => {
-        expect(currentUserData()).toEqual(updatedUserData);
+        expect(currentBusiness().profileData.dateOfFormation).toEqual("2021-05-01");
       });
+      expect(currentBusiness().taskProgress[formationTaskId]).toEqual("COMPLETED");
+
       expect(screen.queryByTestId(Config.formationDateModal.header)).not.toBeInTheDocument();
       await waitFor(() => {
         return expect(mockPush).toHaveBeenCalledWith({ query: { fromForming: "true" } }, undefined, {
@@ -92,7 +83,7 @@ describe("<SidebarCardFormationNudge />", () => {
 
     it("closes the modal and does not update user data when the user clicks the cancel button", () => {
       const initialUserData = generateUserData({});
-      renderWithUserData(initialUserData);
+      renderWithBusiness(initialUserData);
 
       fireEvent.click(screen.getByTestId("cta-formation-nudge"));
 

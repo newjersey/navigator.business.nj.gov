@@ -1,5 +1,5 @@
 import { UserData } from "../userData";
 
 export const hasCompletedFormation = (userData: UserData): boolean => {
-  return userData.formationData.completedFilingPayment;
+  return userData.businesses[userData.currentBusinessId].formationData.completedFilingPayment;
 };

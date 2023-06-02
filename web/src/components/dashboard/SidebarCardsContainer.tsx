@@ -7,7 +7,7 @@ import { getVisibleFundings } from "@/lib/domain-logic/getVisibleFundings";
 import { sortCertifications } from "@/lib/domain-logic/sortCertifications";
 import { sortFundings } from "@/lib/domain-logic/sortFundings";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
-import { LookupOperatingPhaseById, UserData } from "@businessnjgovnavigator/shared";
+import { Business, LookupOperatingPhaseById } from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 
 interface Props {
@@ -17,23 +17,23 @@ interface Props {
 }
 
 export const SidebarCardsContainer = (props: Props): ReactElement => {
-  const { userData } = useUserData();
+  const { business } = useUserData();
 
-  const filteredSortedFundings = userData ? sortFundings(filterFundings(props.fundings, userData)) : [];
+  const filteredSortedFundings = business ? sortFundings(filterFundings(props.fundings, business)) : [];
 
-  const filteredSortedCertifications = userData
-    ? sortCertifications(filterCertifications(props.certifications, userData))
+  const filteredSortedCertifications = business
+    ? sortCertifications(filterCertifications(props.certifications, business))
     : [];
 
-  const visibleSortedFundings = getVisibleFundings(filteredSortedFundings, userData as UserData);
+  const visibleSortedFundings = getVisibleFundings(filteredSortedFundings, business as Business);
 
   const visibleSortedCertifications = getVisibleCertifications(
     filteredSortedCertifications,
-    userData as UserData
+    business as Business
   );
 
   const hiddenSortedCertifications = sortCertifications(
-    (userData?.preferences.hiddenCertificationIds || [])
+    (business?.preferences.hiddenCertificationIds || [])
       .map((id) => {
         return props.certifications.find((it) => {
           return it.id === id;
@@ -45,7 +45,7 @@ export const SidebarCardsContainer = (props: Props): ReactElement => {
   );
 
   const hiddenSortedFundings = sortFundings(
-    (userData?.preferences.hiddenFundingIds || [])
+    (business?.preferences.hiddenFundingIds || [])
       .map((id) => {
         return props.fundings.find((it) => {
           return it.id === id;
@@ -57,15 +57,15 @@ export const SidebarCardsContainer = (props: Props): ReactElement => {
   );
 
   const displayFundingCards = (): boolean => {
-    return LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayFundings;
+    return LookupOperatingPhaseById(business?.profileData.operatingPhase).displayFundings;
   };
 
   const displayCertificationsCards = (): boolean => {
-    return LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCertifications;
+    return LookupOperatingPhaseById(business?.profileData.operatingPhase).displayCertifications;
   };
 
-  const visibleCardsOrderedByWeight = userData
-    ? userData.preferences.visibleSidebarCards
+  const visibleCardsOrderedByWeight = business
+    ? business.preferences.visibleSidebarCards
         .map((id: string) => {
           return props.sidebarDisplayContent[id];
         })

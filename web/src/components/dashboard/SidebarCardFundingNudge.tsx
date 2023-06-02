@@ -13,12 +13,10 @@ type Props = {
 export const SidebarCardFundingNudge = (props: Props): ReactElement => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const router = useRouter();
-  const { updateQueue, userData } = useUserData();
+  const { updateQueue, business } = useUserData();
 
   const updateUserToUpAndRunning = async (): Promise<void> => {
-    if (!userData) {
-      return;
-    }
+    if (!business) return;
     await updateQueue
       ?.queueProfileData({
         operatingPhase: "UP_AND_RUNNING",
@@ -28,10 +26,8 @@ export const SidebarCardFundingNudge = (props: Props): ReactElement => {
   };
 
   const onClick = async (): Promise<void> => {
-    if (!userData) {
-      return;
-    }
-    if (userData.profileData.industryId === "generic" || !userData.profileData.industryId) {
+    if (!business) return;
+    if (business.profileData.industryId === "generic" || !business.profileData.industryId) {
       setModalOpen(true);
     } else {
       await updateUserToUpAndRunning();

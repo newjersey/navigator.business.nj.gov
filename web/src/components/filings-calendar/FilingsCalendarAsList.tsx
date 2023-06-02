@@ -10,13 +10,13 @@ import { groupBy } from "@/lib/utils/helpers";
 import { LicenseCalendarEvent, TaxFilingCalendarEvent } from "@businessnjgovnavigator/shared";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useEffect, useState } from "react";
 
 const LIST_VIEW_MORE_INCREMENT = 5;
 
 interface Props {
-  userData: UserData;
+  business: Business;
   activeYear: string;
   operateReferences: Record<string, OperateReference>;
 }
@@ -31,14 +31,14 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
   }, [props.activeYear]);
 
   const licenseCalendarEvents = getLicenseCalendarEvents(
-    props.userData?.licenseData,
+    props.business?.licenseData,
     Number.parseInt(props.activeYear)
   );
 
-  const sortedFilteredEventsWithinAYear: Array<TaxFilingCalendarEvent | LicenseCalendarEvent> = props.userData
+  const sortedFilteredEventsWithinAYear: Array<TaxFilingCalendarEvent | LicenseCalendarEvent> = props.business
     ?.taxFilingData.filings
     ? sortFilterCalendarEventsWithinAYear(
-        [...licenseCalendarEvents, ...props.userData.taxFilingData.filings],
+        [...licenseCalendarEvents, ...props.business.taxFilingData.filings],
         props.activeYear
       )
     : [];
@@ -99,7 +99,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
                       key={`${event.licenseEventSubtype}-${event.dueDate}`}
                       licenseEvent={event}
                       index={index}
-                      industryId={props.userData.profileData.industryId}
+                      industryId={props.business.profileData.industryId}
                     />
                   );
                 }

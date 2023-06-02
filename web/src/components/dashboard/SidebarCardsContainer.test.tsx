@@ -10,18 +10,14 @@ import {
 } from "@/test/factories";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { UserData } from "@businessnjgovnavigator/shared";
-import {
-  generatePreferences,
-  generateProfileData,
-  generateUserData,
-} from "@businessnjgovnavigator/shared/test";
+import { Business, generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared";
+import { generatePreferences, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
@@ -59,8 +55,8 @@ describe("<SidebarCardsContainer />", () => {
     );
   };
 
-  const renderWithUserData = (
-    userData: UserData,
+  const renderWithBusiness = (
+    business: Business,
     overrides: {
       sidebarCards?: Record<string, SidebarCardContent>;
       fundings?: Funding[];
@@ -68,7 +64,7 @@ describe("<SidebarCardsContainer />", () => {
     }
   ): void => {
     render(
-      <WithStatefulUserData initialUserData={userData}>
+      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
         <ThemeProvider theme={createTheme()}>
           <SidebarCardsContainer
             sidebarDisplayContent={createDisplayContent(overrides.sidebarCards).sidebarDisplayContent}
@@ -86,7 +82,7 @@ describe("<SidebarCardsContainer />", () => {
         welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
       };
 
-      useMockUserData({ preferences: generatePreferences({ visibleSidebarCards: ["welcome"] }) });
+      useMockBusiness({ preferences: generatePreferences({ visibleSidebarCards: ["welcome"] }) });
 
       renderPage({ sidebarCards });
       expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
@@ -100,7 +96,7 @@ describe("<SidebarCardsContainer />", () => {
         }),
       };
 
-      useMockUserData({
+      useMockBusiness({
         preferences: generatePreferences({ visibleSidebarCards: ["welcome-up-and-running"] }),
       });
 
@@ -117,7 +113,7 @@ describe("<SidebarCardsContainer />", () => {
         }),
       };
 
-      useMockUserData({
+      useMockBusiness({
         preferences: generatePreferences({ visibleSidebarCards: ["welcome-up-and-running"] }),
       });
 
@@ -127,7 +123,7 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("removes successful registration card when it's closed", async () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         preferences: generatePreferences({
           visibleSidebarCards: ["successful-registration"],
         }),
@@ -141,9 +137,7 @@ describe("<SidebarCardsContainer />", () => {
         }),
       };
 
-      renderWithUserData(userData, {
-        sidebarCards,
-      });
+      renderWithBusiness(business, { sidebarCards });
 
       await waitFor(() => {
         expect(screen.getByText("SuccessContent")).toBeInTheDocument();
@@ -160,15 +154,13 @@ describe("<SidebarCardsContainer />", () => {
   });
 
   describe("certifications", () => {
-    it("shows the certification cards if the user is formed and registered", () => {
-      useMockUserData(
-        generateUserData({
-          profileData: generateProfileData({
-            operatingPhase: "FORMED_AND_REGISTERED",
-            ownershipTypeIds: ["disabled-veteran", "minority-owned"],
-          }),
-        })
-      );
+    it("shows the certification cards if the business is formed and registered", () => {
+      useMockBusiness({
+        profileData: generateProfileData({
+          operatingPhase: "FORMED_AND_REGISTERED",
+          ownershipTypeIds: ["disabled-veteran", "minority-owned"],
+        }),
+      });
 
       const certifications = [
         generateCertification({
@@ -187,10 +179,12 @@ describe("<SidebarCardsContainer />", () => {
       expect(screen.getByText("Cert 2")).toBeInTheDocument();
     });
 
-    it("doesn't show the certification cards if the user is not formed and registered", () => {
-      useMockProfileData({
-        operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
-        ownershipTypeIds: ["disabled-veteran", "minority-owned"],
+    it("doesn't show the certification cards if the business is not formed and registered", () => {
+      useMockBusiness({
+        profileData: generateProfileData({
+          operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
+          ownershipTypeIds: ["disabled-veteran", "minority-owned"],
+        }),
       });
 
       const certifications = [
@@ -211,9 +205,11 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("displays certifications filtered from user data", () => {
-      useMockProfileData({
-        operatingPhase: "FORMED_AND_REGISTERED",
-        ownershipTypeIds: ["disabled-veteran"],
+      useMockBusiness({
+        profileData: generateProfileData({
+          operatingPhase: "FORMED_AND_REGISTERED",
+          ownershipTypeIds: ["disabled-veteran"],
+        }),
       });
 
       const certifications = [
@@ -239,7 +235,7 @@ describe("<SidebarCardsContainer />", () => {
 
   describe("funding opportunities", () => {
     it("displays fundings filtered & sorted from user data when user is UP_AND_RUNNING", () => {
-      const initialUserData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           homeBasedBusiness: false,
           municipality: undefined,
@@ -257,7 +253,7 @@ describe("<SidebarCardsContainer />", () => {
         generateFunding({ name: "Funding 5", sector: [], status: "first come, first serve" }),
       ];
 
-      renderWithUserData(initialUserData, { fundings });
+      renderWithBusiness(business, { fundings });
 
       expect(screen.queryByText("Funding 1")).not.toBeInTheDocument();
       expect(screen.getByText("Funding 2")).toBeInTheDocument();
@@ -272,7 +268,7 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("does not display fundings for non 'up and running' operating phase", () => {
-      const initialUserData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           homeBasedBusiness: false,
           municipality: undefined,
@@ -286,7 +282,7 @@ describe("<SidebarCardsContainer />", () => {
         generateFunding({ name: "Funding 1", sector: ["construction"], status: "rolling application" }),
       ];
 
-      renderWithUserData(initialUserData, { fundings });
+      renderWithBusiness(business, { fundings });
 
       expect(screen.queryByText("Funding 1")).not.toBeInTheDocument();
     });
@@ -301,12 +297,12 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("displays link to learn more about fundings when user is UP_AND_RUNNING", () => {
-      const initialUserData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: "UP_AND_RUNNING",
         }),
       });
-      renderWithUserData(initialUserData, { fundings: [] });
+      renderWithBusiness(business, { fundings: [] });
       expect(
         screen.getByText(markdownToText(Config.dashboardDefaults.learnMoreFundingOpportunities), {
           exact: false,
@@ -315,12 +311,12 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("does not display link to learn more about fundings when user is not UP_AND_RUNNING", () => {
-      const initialUserData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: "FORMED_AND_REGISTERED",
         }),
       });
-      renderWithUserData(initialUserData, { fundings: [] });
+      renderWithBusiness(business, { fundings: [] });
       expect(
         screen.queryByText(markdownToText(Config.dashboardDefaults.learnMoreFundingOpportunities), {
           exact: false,
@@ -338,7 +334,7 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("moves an opportunity to/from Hidden accordion when hide/unhide is clicked", () => {
-      renderWithUserData(generateUserData({ profileData: getProfileDataForUnfilteredOpportunities() }), {
+      renderWithBusiness(generateBusiness({ profileData: getProfileDataForUnfilteredOpportunities() }), {
         certifications,
         fundings,
       });
@@ -369,7 +365,7 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("saves hidden opportunities to user data", () => {
-      const initialUserData = generateUserData({
+      const business = generateBusiness({
         profileData: getProfileDataForUnfilteredOpportunities(),
         preferences: generatePreferences({
           hiddenCertificationIds: [],
@@ -377,21 +373,15 @@ describe("<SidebarCardsContainer />", () => {
         }),
       });
 
-      renderWithUserData(initialUserData, { certifications, fundings });
+      renderWithBusiness(business, { certifications, fundings });
       const funding1 = within(screen.getByTestId("fund1-id"));
 
       fireEvent.click(funding1.getByText(Config.dashboardDefaults.hideOpportunityText));
-      expect(currentUserData()).toEqual({
-        ...initialUserData,
-        preferences: {
-          ...initialUserData.preferences,
-          hiddenFundingIds: ["fund1-id"],
-        },
-      });
+      expect(currentBusiness().preferences.hiddenFundingIds).toEqual(["fund1-id"]);
     });
 
     it("hides opportunities from user data", () => {
-      const initialUserData = generateUserData({
+      const business = generateBusiness({
         profileData: getProfileDataForUnfilteredOpportunities(),
         preferences: generatePreferences({
           hiddenCertificationIds: [],
@@ -399,7 +389,7 @@ describe("<SidebarCardsContainer />", () => {
         }),
       });
 
-      renderWithUserData(initialUserData, { certifications, fundings });
+      renderWithBusiness(business, { certifications, fundings });
       const visibleOpportunities = within(screen.getByTestId("visible-opportunities"));
 
       expect(visibleOpportunities.queryByText("Fund 1")).not.toBeInTheDocument();
@@ -407,7 +397,7 @@ describe("<SidebarCardsContainer />", () => {
     });
 
     it("displays empty state when all opportunities are hidden", () => {
-      const initialUserData = generateUserData({
+      const business = generateBusiness({
         profileData: getProfileDataForUnfilteredOpportunities(),
         preferences: generatePreferences({
           hiddenCertificationIds: ["cert1-id"],
@@ -415,12 +405,12 @@ describe("<SidebarCardsContainer />", () => {
         }),
       });
 
-      renderWithUserData(initialUserData, { certifications, fundings });
+      renderWithBusiness(business, { certifications, fundings });
       expect(screen.getByText(Config.dashboardDefaults.emptyOpportunitiesHeader)).toBeInTheDocument();
     });
 
     it("doesn't show empty state when all opportunities are hidden if user ungraduates", () => {
-      const initialUserData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
           ownershipTypeIds: ["veteran-owned", "disabled-veteran", "minority-owned", "woman-owned"],
@@ -431,12 +421,12 @@ describe("<SidebarCardsContainer />", () => {
         }),
       });
 
-      renderWithUserData(initialUserData, { certifications, fundings });
+      renderWithBusiness(business, { certifications, fundings });
       expect(screen.queryByText(Config.dashboardDefaults.emptyOpportunitiesHeader)).not.toBeInTheDocument();
     });
 
     it("only counts hidden certifications before fundings are unlocked", () => {
-      const initialUserData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: "FORMED_AND_REGISTERED",
         }),
@@ -446,14 +436,14 @@ describe("<SidebarCardsContainer />", () => {
         }),
       });
 
-      renderWithUserData(initialUserData, { certifications, fundings });
+      renderWithBusiness(business, { certifications, fundings });
       expect(
         screen.getByText(templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, { count: "1" }))
       ).toBeInTheDocument();
     });
 
     it("counts both hidden fundings and certifications after fundings are unlocked", () => {
-      const initialUserData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: "UP_AND_RUNNING",
         }),
@@ -463,7 +453,7 @@ describe("<SidebarCardsContainer />", () => {
         }),
       });
 
-      renderWithUserData(initialUserData, { certifications, fundings });
+      renderWithBusiness(business, { certifications, fundings });
       expect(
         screen.getByText(templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, { count: "2" }))
       ).toBeInTheDocument();

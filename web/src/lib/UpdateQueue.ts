@@ -1,5 +1,6 @@
 import { UpdateQueue } from "@/lib/types/types";
 import {
+  Business,
   BusinessUser,
   Preferences,
   ProfileData,
@@ -26,6 +27,28 @@ export class UpdateQueueFactory implements UpdateQueue {
     return this;
   }
 
+  queueSwitchBusiness(id: string): UpdateQueue {
+    this.internalQueue = {
+      ...this.internalQueue,
+      currentBusinessId: id,
+    };
+    return this;
+  }
+
+  queueBusiness(business: Partial<Business>): UpdateQueue {
+    this.internalQueue = {
+      ...this.internalQueue,
+      businesses: {
+        ...this.internalQueue.businesses,
+        [this.internalQueue.currentBusinessId]: {
+          ...this.currentBusiness(),
+          ...business,
+        },
+      },
+    };
+    return this;
+  }
+
   queueUser(user: Partial<BusinessUser>): UpdateQueue {
     this.internalQueue = {
       ...this.internalQueue,
@@ -40,9 +63,15 @@ export class UpdateQueueFactory implements UpdateQueue {
   queueProfileData(profileData: Partial<ProfileData>): UpdateQueue {
     this.internalQueue = {
       ...this.internalQueue,
-      profileData: {
-        ...this.internalQueue.profileData,
-        ...profileData,
+      businesses: {
+        ...this.internalQueue.businesses,
+        [this.internalQueue.currentBusinessId]: {
+          ...this.currentBusiness(),
+          profileData: {
+            ...this.currentBusiness().profileData,
+            ...profileData,
+          },
+        },
       },
     };
     return this;
@@ -51,9 +80,15 @@ export class UpdateQueueFactory implements UpdateQueue {
   queueFormationData(formationData: Partial<FormationData>): UpdateQueue {
     this.internalQueue = {
       ...this.internalQueue,
-      formationData: {
-        ...this.internalQueue.formationData,
-        ...formationData,
+      businesses: {
+        ...this.internalQueue.businesses,
+        [this.internalQueue.currentBusinessId]: {
+          ...this.currentBusiness(),
+          formationData: {
+            ...this.currentBusiness().formationData,
+            ...formationData,
+          },
+        },
       },
     };
     return this;
@@ -62,11 +97,17 @@ export class UpdateQueueFactory implements UpdateQueue {
   queueFormationFormData(formationFormData: Partial<FormationFormData>): UpdateQueue {
     this.internalQueue = {
       ...this.internalQueue,
-      formationData: {
-        ...this.internalQueue.formationData,
-        formationFormData: {
-          ...this.internalQueue.formationData.formationFormData,
-          ...formationFormData,
+      businesses: {
+        ...this.internalQueue.businesses,
+        [this.internalQueue.currentBusinessId]: {
+          ...this.currentBusiness(),
+          formationData: {
+            ...this.currentBusiness().formationData,
+            formationFormData: {
+              ...this.currentBusiness().formationData.formationFormData,
+              ...formationFormData,
+            },
+          },
         },
       },
     };
@@ -76,9 +117,15 @@ export class UpdateQueueFactory implements UpdateQueue {
   queueTaskProgress(taskProgress: Record<string, TaskProgress>): UpdateQueue {
     this.internalQueue = {
       ...this.internalQueue,
-      taskProgress: {
-        ...this.internalQueue.taskProgress,
-        ...taskProgress,
+      businesses: {
+        ...this.internalQueue.businesses,
+        [this.internalQueue.currentBusinessId]: {
+          ...this.currentBusiness(),
+          taskProgress: {
+            ...this.currentBusiness().taskProgress,
+            ...taskProgress,
+          },
+        },
       },
     };
     return this;
@@ -87,9 +134,15 @@ export class UpdateQueueFactory implements UpdateQueue {
   queuePreferences(preferences: Partial<Preferences>): UpdateQueue {
     this.internalQueue = {
       ...this.internalQueue,
-      preferences: {
-        ...this.internalQueue.preferences,
-        ...preferences,
+      businesses: {
+        ...this.internalQueue.businesses,
+        [this.internalQueue.currentBusinessId]: {
+          ...this.currentBusiness(),
+          preferences: {
+            ...this.currentBusiness().preferences,
+            ...preferences,
+          },
+        },
       },
     };
     return this;
@@ -98,9 +151,15 @@ export class UpdateQueueFactory implements UpdateQueue {
   queueTaxFilingData(taxFilingData: Partial<TaxFilingData>): UpdateQueue {
     this.internalQueue = {
       ...this.internalQueue,
-      taxFilingData: {
-        ...this.internalQueue.taxFilingData,
-        ...taxFilingData,
+      businesses: {
+        ...this.internalQueue.businesses,
+        [this.internalQueue.currentBusinessId]: {
+          ...this.currentBusiness(),
+          taxFilingData: {
+            ...this.currentBusiness().taxFilingData,
+            ...taxFilingData,
+          },
+        },
       },
     };
     return this;
@@ -109,9 +168,15 @@ export class UpdateQueueFactory implements UpdateQueue {
   queueTaskItemChecklist(taskItemChecklist: Record<string, boolean>): UpdateQueue {
     this.internalQueue = {
       ...this.internalQueue,
-      taskItemChecklist: {
-        ...this.internalQueue.taskItemChecklist,
-        ...taskItemChecklist,
+      businesses: {
+        ...this.internalQueue.businesses,
+        [this.internalQueue.currentBusinessId]: {
+          ...this.currentBusiness(),
+          taskItemChecklist: {
+            ...this.currentBusiness().taskItemChecklist,
+            ...taskItemChecklist,
+          },
+        },
       },
     };
     return this;
@@ -123,5 +188,9 @@ export class UpdateQueueFactory implements UpdateQueue {
 
   current(): UserData {
     return this.internalQueue;
+  }
+
+  currentBusiness(): Business {
+    return this.internalQueue.businesses[this.internalQueue.currentBusinessId];
   }
 }

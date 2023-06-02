@@ -24,7 +24,7 @@ interface Props {
 export const SectorModal = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
-  const { updateQueue, userData } = useUserData();
+  const { updateQueue, business } = useUserData();
 
   const {
     FormFuncWrapper,
@@ -33,10 +33,10 @@ export const SectorModal = (props: Props): ReactElement => {
   } = useFormContextHelper(createProfileFieldErrorMap());
 
   useMountEffectWhenDefined(() => {
-    if (userData) {
-      setProfileData(userData.profileData);
+    if (business) {
+      setProfileData(business.profileData);
     }
-  }, userData);
+  }, business);
 
   const handleClose = (): void => {
     props.handleClose();

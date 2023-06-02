@@ -10,24 +10,24 @@ export const useUpdateTaskProgress = (): {
 } => {
   const [nextSection, setNextSection] = useState<SectionType | undefined>(undefined);
   const { roadmap, isSectionCompleted, currentAndNextSection } = useRoadmap();
-  const { userData, updateQueue } = useUserData();
+  const { business, updateQueue } = useUserData();
   const [congratulatoryModalIsOpen, setCongratulatoryModalIsOpen] = useState<boolean>(false);
 
   const queueUpdateTaskProgress = (taskId: string, newValue: TaskProgress): void => {
-    if (!roadmap || !updateQueue || !userData) {
+    if (!roadmap || !updateQueue || !business) {
       return;
     }
 
     updateQueue.queueTaskProgress({ [taskId]: newValue });
     const { current, next } = currentAndNextSection(taskId);
     const wasSectionPreviouslyCompleted = isSectionCompleted(current);
-    const isSectionNowCompleted = isSectionCompleted(current, updateQueue.current().taskProgress);
+    const isSectionNowCompleted = isSectionCompleted(current, updateQueue.currentBusiness().taskProgress);
 
     if (!wasSectionPreviouslyCompleted && isSectionNowCompleted) {
       setNextSection(next);
       setCongratulatoryModalIsOpen(true);
       updateQueue.queuePreferences({
-        roadmapOpenSections: userData.preferences.roadmapOpenSections.filter((section) => {
+        roadmapOpenSections: business.preferences.roadmapOpenSections.filter((section) => {
           return section !== current;
         }),
       });

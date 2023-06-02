@@ -6,6 +6,7 @@ export * from "./dateHelpers";
 export * from "./defaultConstants";
 export * from "./domain-logic/fetchMunicipalityById";
 export * from "./domain-logic/hasCompletedBusinessStructure";
+export * from "./domain-logic/createBusinessId";
 export * from "./domain-logic/hasCompletedFormation";
 export * from "./domain-logic/onboarding";
 export * from "./domain-logic/opportunityFields";

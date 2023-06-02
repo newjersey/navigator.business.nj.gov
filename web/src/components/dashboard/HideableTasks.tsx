@@ -10,19 +10,19 @@ import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
 
 export const HideableTasks = (): ReactElement => {
-  const { updateQueue, userData } = useUserData();
+  const { updateQueue, business } = useUserData();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   const handleToggleClick = (): void => {
-    if (!userData || !updateQueue) {
+    if (!business || !updateQueue) {
       return;
     }
 
     updateQueue
       .queuePreferences({
-        isHideableRoadmapOpen: !userData.preferences.isHideableRoadmapOpen,
+        isHideableRoadmapOpen: !business.preferences.isHideableRoadmapOpen,
       })
       .update();
   };
@@ -45,9 +45,9 @@ export const HideableTasks = (): ReactElement => {
             onClick={handleToggleClick}
           >
             <div className="fdr fac">
-              <Icon>{userData?.preferences.isHideableRoadmapOpen ? "visibility_off" : "visibility"}</Icon>
+              <Icon>{business?.preferences.isHideableRoadmapOpen ? "visibility_off" : "visibility"}</Icon>
               <span className="margin-left-05 line-height-sans-2">
-                {userData?.preferences.isHideableRoadmapOpen
+                {business?.preferences.isHideableRoadmapOpen
                   ? Config.dashboardDefaults.hideTaskText
                   : Config.dashboardDefaults.showTaskText}
               </span>
@@ -57,7 +57,7 @@ export const HideableTasks = (): ReactElement => {
       </div>
       <hr className="margin-bottom-3 margin-top-0" aria-hidden={true} />
 
-      {userData?.preferences.isHideableRoadmapOpen ? (
+      {business?.preferences.isHideableRoadmapOpen ? (
         <Roadmap />
       ) : (
         <div className="text-base">

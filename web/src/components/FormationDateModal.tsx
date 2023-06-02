@@ -22,7 +22,7 @@ interface Props {
 
 export const FormationDateModal = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { userData, updateQueue } = useUserData();
+  const { business, updateQueue } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
 
   const {
@@ -33,24 +33,22 @@ export const FormationDateModal = (props: Props): ReactElement => {
   } = useFormContextHelper(createProfileFieldErrorMap());
 
   useEffect(() => {
-    if (!userData) {
-      return;
-    }
-    setProfileData(userData.profileData);
-  }, [userData]);
+    if (!business) return;
+    setProfileData(business.profileData);
+  }, [business]);
 
   const shouldShowMunicipalityQuestion = (): boolean => {
-    if (!userData) {
+    if (!business) {
       return false;
     }
-    if (userData.profileData.nexusLocationInNewJersey === false) {
+    if (business.profileData.nexusLocationInNewJersey === false) {
       return false;
     }
-    return userData.profileData.municipality === undefined;
+    return business.profileData.municipality === undefined;
   };
 
   FormFuncWrapper(() => {
-    if (!userData || !updateQueue || !isValid()) {
+    if (!business || !updateQueue || !isValid()) {
       return;
     }
     analytics.event.formation_date_modal.submit.formation_status_set_to_complete();

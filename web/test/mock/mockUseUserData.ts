@@ -5,14 +5,17 @@ import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import {
   generateProfileData,
   generateUserData,
+  generateUserDataForBusiness,
   ProfileData,
-  UserData,
 } from "@businessnjgovnavigator/shared/";
+import { generateBusiness } from "@businessnjgovnavigator/shared/test";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 
 const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
 
-export const useMockUserData = (overrides: Partial<UserData>): void => {
-  setMockUserDataResponse({ userData: generateUserData(overrides) });
+export const useMockBusiness = (overrides: Partial<Business>): void => {
+  const business = generateBusiness(overrides);
+  setMockUserDataResponse({ userData: generateUserDataForBusiness(business) });
 };
 
 export const useUndefinedUserData = (): void => {
@@ -24,18 +27,20 @@ export const useMockUserDataError = (error: UserDataError): void => {
 };
 
 export const useMockProfileData = (profileData: Partial<ProfileData>): void => {
-  setMockUserDataResponse({
-    userData: generateUserData({
-      profileData: generateProfileData(profileData),
-      onboardingFormProgress: "COMPLETED",
-    }),
+  const business = generateBusiness({
+    profileData: generateProfileData(profileData),
+    onboardingFormProgress: "COMPLETED",
   });
+
+  const userData = generateUserDataForBusiness(business);
+  setMockUserDataResponse({ userData });
 };
 
 export const generateUseUserDataResponse = (overrides: Partial<UseUserDataResponse>): UseUserDataResponse => {
   const userData = overrides.userData ?? generateUserData({});
   return {
     userData,
+    business: userData.businesses[userData.currentBusinessId],
     error: undefined,
     isLoading: false,
     refresh: jest.fn().mockResolvedValue({}),

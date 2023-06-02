@@ -8,7 +8,7 @@ import { getVisibleFundings } from "@/lib/domain-logic/getVisibleFundings";
 import { Certification, Funding } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { TabContext, TabList, TabPanel } from "@mui/lab/";
 import Tab from "@mui/material/Tab";
 import * as React from "react";
@@ -25,7 +25,7 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
   const DASHBOARD_TAB = 0;
   const FOR_YOU_TAB = 1;
 
-  const { userData, updateQueue } = useUserData();
+  const { business, updateQueue } = useUserData();
   const [tabIndex, setTabIndex] = React.useState(DASHBOARD_TAB);
   const { Config } = useConfig();
 
@@ -34,13 +34,11 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
   };
 
   useEffect(() => {
-    if (!userData || !updateQueue) {
-      return;
-    }
-    if (tabIndex === FOR_YOU_TAB && userData.preferences.phaseNewlyChanged) {
+    if (!business || !updateQueue) return;
+    if (tabIndex === FOR_YOU_TAB && business.preferences.phaseNewlyChanged) {
       updateQueue.queuePreferences({ phaseNewlyChanged: false }).update();
     }
-  }, [tabIndex, userData, updateQueue]);
+  }, [tabIndex, business, updateQueue]);
 
   const tabStyling = {
     "& .MuiTabs-indicator": {
@@ -75,22 +73,22 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
 
   const getContentWithCardCount = (): string => {
     let count = 0;
-    if (LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCertifications) {
+    if (LookupOperatingPhaseById(business?.profileData.operatingPhase).displayCertifications) {
       count += getVisibleCertifications(
-        filterCertifications(props.certifications, userData as UserData),
-        userData as UserData
+        filterCertifications(props.certifications, business as Business),
+        business as Business
       ).length;
     }
 
-    if (LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayFundings) {
+    if (LookupOperatingPhaseById(business?.profileData.operatingPhase).displayFundings) {
       count += getVisibleFundings(
-        filterFundings(props.fundings, userData as UserData),
-        userData as UserData
+        filterFundings(props.fundings, business as Business),
+        business as Business
       ).length;
     }
 
-    if (userData?.preferences.visibleSidebarCards.length) {
-      count += userData?.preferences.visibleSidebarCards.length;
+    if (business?.preferences.visibleSidebarCards.length) {
+      count += business?.preferences.visibleSidebarCards.length;
     }
 
     return templateEval(Config.dashboardDefaults.mobileSecondTabText, {
@@ -99,7 +97,7 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
   };
 
   const getIndicator = (): ReactNode => {
-    if (!userData?.preferences.phaseNewlyChanged) {
+    if (!business?.preferences.phaseNewlyChanged) {
       return <></>;
     }
     return (

@@ -4,7 +4,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRouter } from "@/test/mock/mockRouter";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -34,7 +34,7 @@ describe("SignUpSnackbar", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
-    useMockUserData({});
+    useMockBusiness({});
   });
 
   const setRegistrationAlertIsVisible = jest.fn();

@@ -2,7 +2,7 @@ import { SidebarCard } from "@/components/dashboard/SidebarCard";
 import { generateSidebarCardContent } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -12,7 +12,7 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 describe("<SidebarCard />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockUserData({});
+    useMockBusiness({});
     useMockRoadmap({});
     useMockRouter({});
   });

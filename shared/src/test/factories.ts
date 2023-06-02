@@ -2,6 +2,7 @@ import { randomElementFromArray } from "../arrayHelpers";
 import { BusinessUser } from "../businessUser";
 import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
+import { createBusinessId } from "../domain-logic/createBusinessId";
 import {
   createEmptyFormationFormData,
   FormationData,
@@ -19,7 +20,7 @@ import { MunicipalityDetail } from "../municipality";
 import { IndustrySpecificData, ProfileData } from "../profileData";
 import { arrayOfSectors, SectorType } from "../sector";
 import { TaxFilingCalendarEvent, TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
-import { CURRENT_VERSION, Preferences, UserData } from "../userData";
+import { Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
 
 export const generateFormationSubmitResponse = (
@@ -274,7 +275,7 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
   };
 };
 
-export const generateUserData = (overrides: Partial<UserData>): UserData => {
+export const generateBusiness = (overrides: Partial<Business>): Business => {
   const profileData = overrides.profileData ?? generateProfileData({});
   const formationData: FormationData = publicFilingLegalTypes.includes(
     profileData.legalStructureId as PublicFilingLegalType
@@ -291,11 +292,8 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
       };
 
   return {
-    version: CURRENT_VERSION,
-    versionWhenCreated: -1,
-    dateCreatedISO: undefined,
-    lastUpdatedISO: getCurrentDateISOString(),
-    user: generateUser({}),
+    id: createBusinessId(),
+    dateCreatedISO: getCurrentDateISOString(),
     onboardingFormProgress: "UNSTARTED",
     taskProgress: profileData.employerId ? { "register-for-ein": "COMPLETED" } : {},
     taskItemChecklist: {},
@@ -305,6 +303,38 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     profileData,
     formationData,
     ...overrides,
+  };
+};
+
+export const generateUserData = (overrides: Partial<UserData>): UserData => {
+  const id = createBusinessId();
+
+  return {
+    version: CURRENT_VERSION,
+    versionWhenCreated: -1,
+    dateCreatedISO: undefined,
+    lastUpdatedISO: getCurrentDateISOString(),
+    user: generateUser({}),
+    currentBusinessId: overrides.currentBusinessId ?? id,
+    businesses: {
+      ...overrides.businesses,
+      [id]: generateBusiness({ id }),
+    },
+    ...overrides,
+  };
+};
+
+export const generateUserDataForBusiness = (business: Business): UserData => {
+  return {
+    version: CURRENT_VERSION,
+    versionWhenCreated: -1,
+    dateCreatedISO: undefined,
+    lastUpdatedISO: getCurrentDateISOString(),
+    user: generateUser({}),
+    currentBusinessId: business.id,
+    businesses: {
+      [business.id]: business,
+    },
   };
 };
 

@@ -4,7 +4,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRouter } from "@/test/mock/mockRouter";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { render, screen } from "@testing-library/react";
 
@@ -19,7 +19,7 @@ describe("SelfRegSnackbar", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
-    useMockUserData({});
+    useMockBusiness({});
   });
 
   const setRegistrationAlertStatus = jest.fn();

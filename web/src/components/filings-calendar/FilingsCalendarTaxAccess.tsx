@@ -20,7 +20,7 @@ const isBeforeTheFollowingSaturday = (registeredISO: string | undefined): boolea
 };
 
 export const FilingsCalendarTaxAccess = (): ReactElement => {
-  const { updateQueue, userData } = useUserData();
+  const { updateQueue, business } = useUserData();
   const { Config } = useConfig();
   const { isAuthenticated, setRegistrationModalIsVisible, registrationModalIsVisible } =
     useContext(AuthAlertContext);
@@ -30,21 +30,19 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
   const prevModalIsVisible = useRef<boolean | undefined>(undefined);
 
   useMountEffectWhenDefined(() => {
-    if (!userData) {
-      return;
-    }
+    if (!business) return;
     (async (): Promise<void> => {
-      if (userData.taxFilingData.registeredISO) {
+      if (business.taxFilingData.registeredISO) {
         const updatedUserData = await postTaxFilingsLookup({
-          businessName: userData.taxFilingData.businessName as string,
-          taxId: userData.profileData.taxId as string,
-          encryptedTaxId: userData.profileData.encryptedTaxId as string,
+          businessName: business.taxFilingData.businessName as string,
+          taxId: business.profileData.taxId as string,
+          encryptedTaxId: business.profileData.encryptedTaxId as string,
         });
 
         updateQueue?.queue(updatedUserData).update();
       }
     })();
-  }, userData);
+  }, business);
 
   useEffect(() => {
     if (!router || !router.isReady) {
@@ -57,9 +55,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
   }, [router]);
 
   useEffect(() => {
-    if (!userData) {
-      return;
-    }
+    if (!business) return;
     if (!registrationModalIsVisible && prevModalIsVisible.current === true) {
       updateQueue?.queuePreferences({ returnToLink: "" }).update();
     }
@@ -68,9 +64,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
   }, [registrationModalIsVisible]);
 
   const openRegisterOrTaxModal = (): void => {
-    if (!userData) {
-      return;
-    }
+    if (!business) return;
     if (isAuthenticated === IsAuthenticated.FALSE) {
       updateQueue
         ?.queuePreferences({ returnToLink: `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true` })
@@ -84,8 +78,8 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
   };
 
   const getWidgetComponent = (): ReactElement => {
-    if (userData?.taxFilingData.registeredISO) {
-      if (userData?.taxFilingData.state === "PENDING") {
+    if (business?.taxFilingData.registeredISO) {
+      if (business?.taxFilingData.state === "PENDING") {
         return (
           <div className="tax-calendar-upper-widget-container" data-testid="pending-container">
             <div className="margin-bottom-2 tablet:margin-bottom-0 margin-right-2">
@@ -93,7 +87,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
             </div>
           </div>
         );
-      } else if (isBeforeTheFollowingSaturday(userData.taxFilingData.registeredISO)) {
+      } else if (isBeforeTheFollowingSaturday(business.taxFilingData.registeredISO)) {
         return (
           <div className="tax-calendar-upper-widget-container" data-testid="alert-content-container">
             <div className="margin-bottom-2 tablet:margin-bottom-0 margin-right-2">

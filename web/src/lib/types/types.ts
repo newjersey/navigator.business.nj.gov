@@ -19,6 +19,7 @@ import {
   TaxFilingData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { LicenseEventSubtype } from "@businessnjgovnavigator/shared/taxFiling";
 
 // returns all keys in an object of a type
@@ -471,6 +472,8 @@ export const profileTabs = _profileTabs as unknown as ProfileTabs[];
 
 export interface UpdateQueue {
   queue: (userData: Partial<UserData>) => UpdateQueue;
+  queueBusiness: (business: Business) => UpdateQueue;
+  queueSwitchBusiness: (id: string) => UpdateQueue;
   queueTaskProgress: (taskProgress: Record<string, TaskProgress>) => UpdateQueue;
   queueUser: (user: Partial<BusinessUser>) => UpdateQueue;
   queueProfileData: (profileData: Partial<ProfileData>) => UpdateQueue;
@@ -481,6 +484,7 @@ export interface UpdateQueue {
   queueTaskItemChecklist: (taskItemChecklist: Record<string, boolean>) => UpdateQueue;
   update: (config?: { local?: boolean }) => Promise<void>;
   current: () => UserData;
+  currentBusiness: () => Business;
 }
 
 export type MarkdownResult = {

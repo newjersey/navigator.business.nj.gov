@@ -4,7 +4,7 @@ import {
   getTotalTaskCount,
 } from "@/lib/domain-logic/roadmapTaskCounters";
 import { generateRoadmap, generateTask } from "@/test/factories";
-import { generateUserData } from "@businessnjgovnavigator/shared";
+import { generateBusiness } from "@businessnjgovnavigator/shared";
 
 describe("Roadmap Task Counters", () => {
   describe("getTotalTaskCount", () => {
@@ -22,7 +22,7 @@ describe("Roadmap Task Counters", () => {
     it("returns 0 if roadmap or userData do not exist", () => {
       const expectedEmptyState = { required: 0, optional: 0, total: 0 };
       expect(getCompletedTaskCount(generateRoadmap({}), undefined)).toEqual(expectedEmptyState);
-      expect(getCompletedTaskCount(undefined, generateUserData({}))).toEqual(expectedEmptyState);
+      expect(getCompletedTaskCount(undefined, generateBusiness({}))).toEqual(expectedEmptyState);
     });
 
     it("returns count of completed required and optional tasks", () => {
@@ -36,7 +36,7 @@ describe("Roadmap Task Counters", () => {
         ],
       });
 
-      const userData = generateUserData({
+      const business = generateBusiness({
         taskProgress: {
           optionalTask1: "COMPLETED",
           optionalTask2: "IN_PROGRESS",
@@ -45,7 +45,7 @@ describe("Roadmap Task Counters", () => {
         },
       });
 
-      expect(getCompletedTaskCount(roadmap, userData)).toEqual({ required: 1, optional: 1, total: 2 });
+      expect(getCompletedTaskCount(roadmap, business)).toEqual({ required: 1, optional: 1, total: 2 });
     });
   });
 
@@ -53,7 +53,7 @@ describe("Roadmap Task Counters", () => {
     it("returns 0 if roadmap or userData do not exist", () => {
       const expectedEmptyState = { required: 0, optional: 0, total: 0 };
       expect(getIncompleteTaskCount(generateRoadmap({}), undefined)).toEqual(expectedEmptyState);
-      expect(getIncompleteTaskCount(undefined, generateUserData({}))).toEqual(expectedEmptyState);
+      expect(getIncompleteTaskCount(undefined, generateBusiness({}))).toEqual(expectedEmptyState);
     });
 
     it("returns count of incomplete required and optional tasks", () => {
@@ -67,7 +67,7 @@ describe("Roadmap Task Counters", () => {
         ],
       });
 
-      const userData = generateUserData({
+      const business = generateBusiness({
         taskProgress: {
           optionalTask1: "COMPLETED",
           optionalTask2: "IN_PROGRESS",
@@ -76,7 +76,7 @@ describe("Roadmap Task Counters", () => {
         },
       });
 
-      expect(getIncompleteTaskCount(roadmap, userData)).toEqual({ required: 1, optional: 2, total: 3 });
+      expect(getIncompleteTaskCount(roadmap, business)).toEqual({ required: 1, optional: 2, total: 3 });
     });
   });
 });

@@ -9,7 +9,7 @@ export const useSidebarCards = (): {
   const showCard = async (id: string): Promise<void> => {
     if (!updateQueue) return;
     const allCardsExceptDesired = updateQueue
-      .current()
+      .currentBusiness()
       .preferences.visibleSidebarCards.filter((cardId: string) => {
         return cardId !== id;
       });
@@ -23,7 +23,7 @@ export const useSidebarCards = (): {
   const hideCard = async (id: string): Promise<void> => {
     if (!updateQueue) return;
     const allCardsExceptIdToHide = updateQueue
-      .current()
+      .currentBusiness()
       .preferences.visibleSidebarCards.filter((cardId: string) => {
         return cardId !== id;
       });

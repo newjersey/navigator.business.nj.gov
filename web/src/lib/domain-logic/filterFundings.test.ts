@@ -2,14 +2,14 @@ import { filterFundings } from "@/lib/domain-logic/filterFundings";
 import { SMALL_BUSINESS_MAX_EMPLOYEE_COUNT } from "@/lib/domain-logic/smallBusinessEnterprise";
 import { generateFunding } from "@/test/factories";
 import {
+  generateBusiness,
   generateMunicipality,
   generateProfileData,
-  generateUserData,
 } from "@businessnjgovnavigator/shared/test";
 
 describe("filterFundings", () => {
   it("shows home-based-business yes or unknown when user home-based-business is true", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         homeBasedBusiness: true,
         municipality: undefined,
@@ -43,13 +43,13 @@ describe("filterFundings", () => {
       publishStageArchive: "Do Not Publish",
     });
     const fundings = [funding1, funding2, funding3, funding4, funding5];
-    const result = filterFundings(fundings, userData);
+    const result = filterFundings(fundings, business);
     expect(result.length).toEqual(2);
     expect(result).toEqual(expect.arrayContaining([funding1, funding3]));
   });
 
   it("shows all when user home-based-business is false", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         homeBasedBusiness: false,
         municipality: undefined,
@@ -84,14 +84,14 @@ describe("filterFundings", () => {
     });
     const fundings = [funding1, funding2, funding3, funding4, funding5];
 
-    const result = filterFundings(fundings, userData);
+    const result = filterFundings(fundings, business);
     expect(result.length).toEqual(3);
     expect(result).toEqual(expect.arrayContaining([funding1, funding2, funding3]));
   });
 
   describe("filtering by municipality", () => {
     it("shows fundings where user municipality is in specified county", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           homeBasedBusiness: false,
           municipality: generateMunicipality({ county: "Atlantic" }),
@@ -113,13 +113,13 @@ describe("filterFundings", () => {
       });
       const fundings = [funding1, funding2, funding3, funding4, funding5, funding6, funding7];
 
-      const result = filterFundings(fundings, userData);
+      const result = filterFundings(fundings, business);
       expect(result.length).toEqual(5);
       expect(result).toEqual(expect.arrayContaining([funding1, funding2, funding3, funding5, funding6]));
     });
 
     it("shows fundings where user municipality is undefined", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           homeBasedBusiness: false,
           municipality: undefined,
@@ -141,7 +141,7 @@ describe("filterFundings", () => {
       });
       const fundings = [funding1, funding2, funding3, funding4, funding5, funding6, funding7];
 
-      const result = filterFundings(fundings, userData);
+      const result = filterFundings(fundings, business);
       expect(result.length).toEqual(6);
       expect(result).toEqual(
         expect.arrayContaining([funding1, funding2, funding3, funding4, funding5, funding6])
@@ -150,7 +150,7 @@ describe("filterFundings", () => {
   });
 
   it("does not display any fundings with a past due due date", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         homeBasedBusiness: false,
         municipality: undefined,
@@ -170,13 +170,13 @@ describe("filterFundings", () => {
 
     const fundings = [funding1, funding2];
 
-    const result = filterFundings(fundings, userData);
+    const result = filterFundings(fundings, business);
     expect(result.length).toEqual(1);
     expect(result).toEqual(expect.arrayContaining([funding2]));
   });
 
   it("displays any fundings with a due date in the future", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         homeBasedBusiness: false,
         municipality: undefined,
@@ -197,13 +197,13 @@ describe("filterFundings", () => {
 
     const fundings = [funding1, funding2];
 
-    const result = filterFundings(fundings, userData);
+    const result = filterFundings(fundings, business);
     expect(result.length).toEqual(2);
     expect(result).toEqual(expect.arrayContaining([funding1, funding2]));
   });
 
   it("does not display any fundings marked as Do Not Publish", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         homeBasedBusiness: false,
         municipality: undefined,
@@ -228,14 +228,14 @@ describe("filterFundings", () => {
     });
     const fundings = [funding1, funding2, funding3];
 
-    const result = filterFundings(fundings, userData);
+    const result = filterFundings(fundings, business);
     expect(result.length).toEqual(1);
     expect(result).toEqual(expect.arrayContaining([funding2]));
   });
 
   describe("filtering by number of employees", () => {
     it('displays only fundings with employeesRequired "n/a" when # employees is 0', () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           homeBasedBusiness: false,
           municipality: undefined,
@@ -252,13 +252,13 @@ describe("filterFundings", () => {
       });
       const fundings = [funding1, funding2, funding3];
 
-      const result = filterFundings(fundings, userData);
+      const result = filterFundings(fundings, business);
       expect(result.length).toEqual(1);
       expect(result).toEqual(expect.arrayContaining([funding1]));
     });
 
     it('displays only fundings with employeesRequired "n/a" when # employees is equivalent to 0', () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           homeBasedBusiness: false,
           municipality: undefined,
@@ -275,13 +275,13 @@ describe("filterFundings", () => {
       });
       const fundings = [funding1, funding2, funding3];
 
-      const result = filterFundings(fundings, userData);
+      const result = filterFundings(fundings, business);
       expect(result.length).toEqual(2);
       expect(result).toEqual(expect.arrayContaining([funding1, funding3]));
     });
 
     it("displays all fundings when # employees > 0", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           homeBasedBusiness: false,
           municipality: undefined,
@@ -301,13 +301,13 @@ describe("filterFundings", () => {
       });
       const fundings = [funding1, funding2];
 
-      const result = filterFundings(fundings, userData);
+      const result = filterFundings(fundings, business);
       expect(result.length).toEqual(2);
       expect(result).toEqual(expect.arrayContaining([funding1, funding2]));
     });
 
     it("displays all fundings when # employees is not answered", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           homeBasedBusiness: false,
           municipality: undefined,
@@ -319,14 +319,14 @@ describe("filterFundings", () => {
       const funding2 = generateFunding({ employeesRequired: "yes", status: "rolling application" });
       const fundings = [funding1, funding2];
 
-      const result = filterFundings(fundings, userData);
+      const result = filterFundings(fundings, business);
       expect(result.length).toEqual(2);
       expect(result).toEqual(expect.arrayContaining([funding1, funding2]));
     });
   });
 
   it("shows fundings where user sector is in specified sectors list", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         homeBasedBusiness: false,
         municipality: undefined,
@@ -345,7 +345,7 @@ describe("filterFundings", () => {
     const funding5 = generateFunding({ sector: ["Construction"], status: "rolling application" });
     const fundings = [funding1, funding2, funding3, funding4, funding5];
 
-    const result = filterFundings(fundings, userData);
+    const result = filterFundings(fundings, business);
     expect(result.length).toEqual(4);
     expect(result).toEqual(expect.arrayContaining([funding1, funding2, funding3]));
   });
@@ -364,7 +364,7 @@ describe("filterFundings", () => {
     const listOfFundingTypes = [funding1, funding2, funding3, funding4, funding5, funding6, funding7];
 
     it("does not return ownership types funding's when applicable ownership types do not match", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           ownershipTypeIds: ["woman-owned", "veteran-owned"],
           homeBasedBusiness: false,
@@ -374,13 +374,13 @@ describe("filterFundings", () => {
         }),
       });
 
-      const result = filterFundings(listOfFundingTypes, userData);
+      const result = filterFundings(listOfFundingTypes, business);
       expect(result.length).toEqual(5);
       expect(result).toEqual(expect.arrayContaining([funding1, funding3, funding5, funding6, funding7]));
     });
 
     it("does not return sbe funding when existing employees is greater than small business threshold", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           ownershipTypeIds: [],
           homeBasedBusiness: false,
@@ -390,7 +390,7 @@ describe("filterFundings", () => {
         }),
       });
 
-      const result = filterFundings(listOfFundingTypes, userData);
+      const result = filterFundings(listOfFundingTypes, business);
       expect(result.length).toEqual(6);
       expect(result).toEqual(
         expect.arrayContaining([funding1, funding2, funding3, funding4, funding6, funding7])
@@ -398,7 +398,7 @@ describe("filterFundings", () => {
     });
 
     it("returns sbe funding when existing employees is greater than small business threshold", () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           ownershipTypeIds: [],
           homeBasedBusiness: false,
@@ -408,7 +408,7 @@ describe("filterFundings", () => {
         }),
       });
 
-      const result = filterFundings(listOfFundingTypes, userData);
+      const result = filterFundings(listOfFundingTypes, business);
       expect(result.length).toEqual(7);
       expect(result).toEqual(
         expect.arrayContaining([funding1, funding2, funding3, funding4, funding5, funding6, funding7])

@@ -33,7 +33,7 @@ type Props = {
 
 export const SidebarCardTaskProgress = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { userData } = useUserData();
+  const { business } = useUserData();
   const { roadmap } = useRoadmap();
   const modifiedRoadmap = LookupOperatingPhaseById(userData?.profileData.operatingPhase)
     .displayBusinessStructurePrompt
@@ -41,7 +41,7 @@ export const SidebarCardTaskProgress = (props: Props): ReactElement => {
     : roadmap;
 
   const constructIncompleteTaskPhrase = (): { required: string; optional: string } => {
-    const { optional, required } = getIncompleteTaskCount(modifiedRoadmap, userData);
+    const { optional, required } = getIncompleteTaskCount(modifiedRoadmap, business);
 
     const optionalTaskPhrase =
       optional === 1
@@ -60,7 +60,7 @@ export const SidebarCardTaskProgress = (props: Props): ReactElement => {
   };
 
   const progressBarValue = (): number => {
-    const completedCount = getCompletedTaskCount(modifiedRoadmap, userData).total;
+    const completedCount = getCompletedTaskCount(modifiedRoadmap, business).total;
     const totalCount = getTotalTaskCount(modifiedRoadmap);
 
     return Math.round((completedCount / totalCount) * 100);

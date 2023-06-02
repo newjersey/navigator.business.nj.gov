@@ -8,7 +8,7 @@ import {
   getProfileDataForUnfilteredOpportunities,
 } from "@/test/factories";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { OperatingPhases } from "@businessnjgovnavigator/shared/operatingPhase";
 import { generatePreferences } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -19,7 +19,7 @@ const Config = getMergedConfig();
 
 describe("<TwoTabDashboardLayout />", () => {
   beforeEach(() => {
-    useMockUserData({});
+    useMockBusiness({});
   });
 
   const renderPage = ({
@@ -67,7 +67,7 @@ describe("<TwoTabDashboardLayout />", () => {
         return !phase.displayFundings && !phase.displayCertifications;
       });
 
-      useMockUserData({
+      useMockBusiness({
         preferences: generatePreferences({ visibleSidebarCards: ["welcome", "not-registered"] }),
         profileData: {
           ...getProfileDataForUnfilteredOpportunities(),
@@ -91,7 +91,7 @@ describe("<TwoTabDashboardLayout />", () => {
         return !phase.displayFundings && phase.displayCertifications;
       });
 
-      useMockUserData({
+      useMockBusiness({
         preferences: generatePreferences({ visibleSidebarCards: ["welcome", "not-registered"] }),
         profileData: {
           ...getProfileDataForUnfilteredOpportunities(),
@@ -116,7 +116,7 @@ describe("<TwoTabDashboardLayout />", () => {
         return phase.displayFundings && phase.displayCertifications;
       });
 
-      useMockUserData({
+      useMockBusiness({
         preferences: generatePreferences({ visibleSidebarCards: ["welcome", "not-registered"] }),
         profileData: {
           ...getProfileDataForUnfilteredOpportunities(),

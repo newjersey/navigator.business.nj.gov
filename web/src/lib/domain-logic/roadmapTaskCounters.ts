@@ -1,5 +1,5 @@
 import { Roadmap } from "@/lib/types/types";
-import { TaskProgress, UserData } from "@businessnjgovnavigator/shared";
+import { Business, TaskProgress } from "@businessnjgovnavigator/shared";
 
 export const getTotalTaskCount = (roadmap: Roadmap | undefined): number => {
   if (!roadmap) {
@@ -12,28 +12,28 @@ type TaskCount = { required: number; optional: number; total: number };
 
 export const getCompletedTaskCount = (
   roadmap: Roadmap | undefined,
-  userData: UserData | undefined
+  business: Business | undefined
 ): TaskCount => {
-  return getTaskCountForStatus({ userData, roadmap, complete: true });
+  return getTaskCountForStatus({ business, roadmap, complete: true });
 };
 
 export const getIncompleteTaskCount = (
   roadmap: Roadmap | undefined,
-  userData: UserData | undefined
+  business: Business | undefined
 ): TaskCount => {
-  return getTaskCountForStatus({ userData, roadmap, complete: false });
+  return getTaskCountForStatus({ business, roadmap, complete: false });
 };
 
 const getTaskCountForStatus = ({
-  userData,
+  business,
   roadmap,
   complete,
 }: {
   complete: boolean;
   roadmap: Roadmap | undefined;
-  userData: UserData | undefined;
+  business: Business | undefined;
 }): TaskCount => {
-  if (!roadmap || !userData) {
+  if (!roadmap || !business) {
     return { required: 0, optional: 0, total: 0 };
   }
 
@@ -50,13 +50,13 @@ const getTaskCountForStatus = ({
   };
 
   for (const id of optionalTasksIds) {
-    if (testIfCorrectStatus(userData.taskProgress[id])) {
+    if (testIfCorrectStatus(business.taskProgress[id])) {
       optionalTaskCountForStatus += 1;
     }
   }
 
   for (const id of requiredTasksIds) {
-    if (testIfCorrectStatus(userData.taskProgress[id])) {
+    if (testIfCorrectStatus(business.taskProgress[id])) {
       requiredTotalTaskCountForStatus += 1;
     }
   }

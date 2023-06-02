@@ -1,24 +1,24 @@
 import { generateFunding } from "@/test/factories";
-import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/test";
+import { generateBusiness, generatePreferences } from "@businessnjgovnavigator/shared/test";
 import { getVisibleFundings } from "./getVisibleFundings";
 
 describe("getVisibleFundings", () => {
   it("returns an array of all fundings when there is no matching id in hiddenFundingIds", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       preferences: generatePreferences({ hiddenFundingIds: ["three"] }),
     });
     const certifications = [generateFunding({ id: "one" }), generateFunding({ id: "two" })];
 
-    expect(getVisibleFundings(certifications, userData)).toEqual(certifications);
+    expect(getVisibleFundings(certifications, business)).toEqual(certifications);
   });
 
   it("returns an array of filtered fundings when there is a matching id in hiddenFundingIds", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       preferences: generatePreferences({ hiddenFundingIds: ["two"] }),
     });
     const cert1 = generateFunding({ id: "one" });
     const cert2 = generateFunding({ id: "two" });
 
-    expect(getVisibleFundings([cert1, cert2], userData)).toEqual([cert1]);
+    expect(getVisibleFundings([cert1, cert2], business)).toEqual([cert1]);
   });
 });
