@@ -306,29 +306,38 @@ describe("<NexusFormationFlow />", () => {
     describe("when feature flag is set", () => {
       describe("business name step", () => {
         beforeEach(async () => {
-          page = preparePage(initialUserData, displayContent);
+          const userData: UserData = {
+            ...initialUserData,
+            formationData: {
+              ...initialUserData.formationData,
+              formationFormData: {
+                ...initialUserData.formationData.formationFormData,
+                businessLocationType: "US",
+              },
+            },
+          };
+          page = preparePage(userData, displayContent);
         });
 
-        
         it("saves name to formation data", async () => {
           fillText("Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
           clickNext();
           expect(true).toEqual(true);
-          // expect(currentUserData().formationData.formationFormData.businessName).toEqual("Pizza Joint");
-          // await page.stepperClickToNexusBusinessNameStep();
-          // expect((screen.getByLabelText("Search business name") as HTMLInputElement).value).toEqual(
-          //   "Pizza Joint"
-          // );
+          expect(currentUserData().formationData.formationFormData.businessName).toEqual("Pizza Joint");
+          await page.stepperClickToNexusBusinessNameStep();
+          expect((screen.getByLabelText("Search business name") as HTMLInputElement).value).toEqual(
+            "Pizza Joint"
+          );
         });
 
-        it("does not save availablity state when switching back to step", async () => {
+        it("saves availablity state when switching back to step", async () => {
           fillText("Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
           await screen.findByTestId("available-text");
           clickNext();
           await page.stepperClickToNexusBusinessNameStep();
-          expect(screen.queryByTestId("available-text")).not.toBeInTheDocument();
+          expect(screen.getByTestId("available-text")).toBeInTheDocument();
         });
 
         it("goes back to nexus name step on back button", async () => {

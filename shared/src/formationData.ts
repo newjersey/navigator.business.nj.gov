@@ -87,6 +87,7 @@ export interface FormationAddress {
   readonly addressCountry: CountriesShortCodes | undefined;
   readonly businessLocationType: FormationBusinessLocationType | undefined;
 }
+
 export interface FormationSigner {
   readonly name: string;
   readonly signature: boolean;
