@@ -17,8 +17,8 @@ summaryDescriptionMd: >-
 
   :::
 industryId: school-bus
-callToActionText: Apply for My License
-callToActionLink: https://telegov.njportal.com/njmvc/AppointmentWizard/20
+callToActionText: Apply for My Commercial Driver’s License
+callToActionLink: https://www.state.nj.us/mvc/drivertopics/gettingcdl.htm
 webflowIndustry: School Bus Driver
 licenseCertificationClassification: CONTACT
 agencyId: nj-motor-vehicle
