@@ -12,6 +12,7 @@ interface BusinessFormationState {
   stepIndex: number;
   formationFormData: FormationFormData;
   businessNameAvailability: NameAvailability | undefined;
+  dbaBusinessNameAvailability: NameAvailability | undefined;
   showResponseAlert: boolean;
   hasBeenSubmitted: boolean;
   dbaContent: FormationDbaContent;
@@ -28,6 +29,7 @@ interface BusinessFormationContextType {
   setFieldsInteracted: (fields: FieldsForErrorHandling[], config?: { setToUninteracted: boolean }) => void;
   setHasBeenSubmitted: (hasBeenSubmitted: boolean) => void;
   setBusinessNameAvailability: React.Dispatch<React.SetStateAction<NameAvailability | undefined>>;
+  setDbaBusinessNameAvailability: React.Dispatch<React.SetStateAction<NameAvailability | undefined>>;
   setForeignGoodStandingFile: (file: InputFile | undefined) => void;
 }
 
@@ -42,6 +44,7 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
     foreignGoodStandingFile: undefined,
     hasSetStateFirstTime: false,
     businessNameAvailability: undefined,
+    dbaBusinessNameAvailability: undefined,
   },
   setFormationFormData: () => {},
   setStepIndex: () => {},
@@ -49,5 +52,6 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
   setFieldsInteracted: () => {},
   setHasBeenSubmitted: () => {},
   setBusinessNameAvailability: () => {},
+  setDbaBusinessNameAvailability: () => {},
   setForeignGoodStandingFile: () => {},
 });
