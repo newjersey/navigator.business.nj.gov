@@ -50,6 +50,7 @@ const getPageHelper = async (
     completedFilingPayment: false,
     businessNameSearch: undefined,
     businessNameAvailability: undefined,
+    dbaBusinessNameAvailability: undefined,
     lastVisitedPageIndex: 0,
   };
 

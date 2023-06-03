@@ -71,6 +71,7 @@ export interface FormationData {
   readonly getFilingResponse: GetFilingResponse | undefined;
   readonly completedFilingPayment: boolean;
   readonly businessNameAvailability: NameAvailability | undefined;
+  readonly dbaBusinessNameAvailability: NameAvailability | undefined;
   readonly lastVisitedPageIndex: number;
 }
 

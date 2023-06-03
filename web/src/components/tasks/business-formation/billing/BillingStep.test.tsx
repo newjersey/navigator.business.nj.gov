@@ -68,6 +68,7 @@ describe("Formation - BillingStep", () => {
       getFilingResponse: undefined,
       completedFilingPayment: false,
       businessNameAvailability: undefined,
+      dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     };
     const user = initialUser ? generateUser(initialUser) : generateUser({});

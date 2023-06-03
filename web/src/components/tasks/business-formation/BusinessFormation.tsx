@@ -62,6 +62,9 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [businessNameAvailability, setBusinessNameAvailability] = useState<NameAvailability | undefined>(
     undefined
   );
+  const [dbaBusinessNameAvailability, setDbaBusinessNameAvailability] = useState<
+    NameAvailability | undefined
+  >(undefined);
   const [foreignGoodStandingFile, setForeignGoodStandingFile] = useState<InputFile | undefined>(undefined);
 
   const legalStructureId: FormationLegalType = useMemo(() => {
@@ -109,6 +112,11 @@ export const BusinessFormation = (props: Props): ReactElement => {
     if (userData.formationData.businessNameAvailability) {
       setBusinessNameAvailability({
         ...userData.formationData.businessNameAvailability,
+      });
+    }
+    if (userData.formationData.dbaBusinessNameAvailability) {
+      setDbaBusinessNameAvailability({
+        ...userData.formationData.dbaBusinessNameAvailability,
       });
     }
 
@@ -233,11 +241,12 @@ export const BusinessFormation = (props: Props): ReactElement => {
     <BusinessFormationContext.Provider
       value={{
         state: {
-          stepIndex: stepIndex,
-          formationFormData: formationFormData,
-          businessNameAvailability: businessNameAvailability,
+          stepIndex,
+          formationFormData,
+          businessNameAvailability,
+          dbaBusinessNameAvailability,
           dbaContent: props.displayContent.formationDbaContent,
-          showResponseAlert: showResponseAlert,
+          showResponseAlert,
           interactedFields,
           hasBeenSubmitted,
           hasSetStateFirstTime,
@@ -245,6 +254,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         },
         setFormationFormData,
         setBusinessNameAvailability,
+        setDbaBusinessNameAvailability,
         setStepIndex,
         setShowResponseAlert,
         setFieldsInteracted,
