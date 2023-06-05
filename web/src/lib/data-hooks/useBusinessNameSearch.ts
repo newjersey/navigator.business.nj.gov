@@ -19,6 +19,7 @@ export const useBusinessNameSearch = ({
   error: SearchBusinessNameError | undefined;
   updateButtonClicked: boolean;
   updateCurrentName: (value: string) => void;
+  onChangeNameField: (value: string) => void;
   onBlurNameField: (value: string) => void;
   searchBusinessName: (
     event?: FormEvent<HTMLFormElement>
@@ -27,8 +28,13 @@ export const useBusinessNameSearch = ({
   resetSearch: () => void;
 } => {
   const { userData } = useUserData();
-  const { state, setFormationFormData, setFieldsInteracted, setBusinessNameAvailability } =
-    useContext(BusinessFormationContext);
+  const {
+    state,
+    setFormationFormData,
+    setFieldsInteracted,
+    setBusinessNameAvailability,
+    setDbaBusinessNameAvailability,
+  } = useContext(BusinessFormationContext);
   const [currentName, setCurrentName] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<SearchBusinessNameError | undefined>(undefined);
@@ -40,6 +46,14 @@ export const useBusinessNameSearch = ({
 
   const businessNameIsNotAvailable = (): boolean => {
     return userData?.formationData.businessNameAvailability?.status !== "AVAILABLE";
+  };
+
+  const setNameAvailability = isDba ? setDbaBusinessNameAvailability : setBusinessNameAvailability;
+
+  const emptyNameAvailability: NameAvailability = {
+    similarNames: [],
+    status: undefined,
+    lastUpdatedTimeStamp: "",
   };
 
   useMountEffectWhenDefined(() => {
@@ -56,16 +70,22 @@ export const useBusinessNameSearch = ({
     setCurrentName(value);
   };
 
+  const onChangeNameField = (value: string): void => {
+    updateCurrentName(value);
+    setNameAvailability(emptyNameAvailability);
+  };
+
   const onBlurNameField = (): void => {
     setFormationFormData({
       ...state.formationFormData,
       businessName: currentName,
     });
-    setBusinessNameAvailability({ similarNames: [], status: undefined, lastUpdatedTimeStamp: "" });
+    setNameAvailability(emptyNameAvailability);
   };
 
   const resetSearch = (): void => {
-    setBusinessNameAvailability({ similarNames: [], status: undefined, lastUpdatedTimeStamp: "" });
+    setBusinessNameAvailability(emptyNameAvailability);
+    setDbaBusinessNameAvailability(emptyNameAvailability);
     setUpdateButtonClicked(false);
     setError(undefined);
     setCurrentName("");
@@ -79,7 +99,7 @@ export const useBusinessNameSearch = ({
     }
 
     const resetState = (): void => {
-      setBusinessNameAvailability({ similarNames: [], status: undefined, lastUpdatedTimeStamp: "" });
+      setNameAvailability(emptyNameAvailability);
       setUpdateButtonClicked(false);
       setError(undefined);
     };
@@ -98,11 +118,13 @@ export const useBusinessNameSearch = ({
       .then((result: NameAvailability) => {
         resetState();
         setIsLoading(false);
-        setFormationFormData({
-          ...state.formationFormData,
-          businessName: currentName,
-        });
-        setBusinessNameAvailability({ ...result });
+        if (!isDba) {
+          setFormationFormData({
+            ...state.formationFormData,
+            businessName: currentName,
+          });
+        }
+        setNameAvailability({ ...result });
         return { nameAvailability: result, submittedName: currentName };
       })
       .catch((api_error) => {
@@ -124,6 +146,7 @@ export const useBusinessNameSearch = ({
     updateButtonClicked,
     setCurrentName,
     updateCurrentName,
+    onChangeNameField,
     onBlurNameField,
     searchBusinessName,
     resetSearch,

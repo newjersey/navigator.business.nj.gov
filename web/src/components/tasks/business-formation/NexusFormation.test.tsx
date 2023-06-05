@@ -320,13 +320,15 @@ describe("<NexusFormationFlow />", () => {
           );
         });
 
-        it("does not save availablity state when switching back to step", async () => {
+        it("saves availablity state when switching back to step", async () => {
           fillText("Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
           await screen.findByTestId("available-text");
+          expect(screen.getByTestId("available-text").innerHTML.includes("Pizza Joint")).toBeTruthy();
           clickNext();
           await page.stepperClickToNexusBusinessNameStep();
-          expect(screen.queryByTestId("available-text")).not.toBeInTheDocument();
+          expect(screen.getByTestId("available-text")).toBeInTheDocument();
+          expect(screen.getByTestId("available-text").innerHTML.includes("Pizza Joint")).toBeTruthy();
         });
 
         it("goes back to nexus name step on back button", async () => {

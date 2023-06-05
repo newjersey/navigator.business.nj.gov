@@ -161,7 +161,11 @@ export const DbaFormationPaginator = (): ReactElement => {
   };
 
   const displayButtons = (): ReactNode => {
-    if (state.stepIndex === 0 && state.businessNameAvailability?.status === "AVAILABLE") {
+    if (
+      state.stepIndex === 0 &&
+      ((isNotDba && state.businessNameAvailability?.status === "AVAILABLE") ||
+        (!isNotDba && state.dbaBusinessNameAvailability?.status === "AVAILABLE"))
+    ) {
       return (
         <ButtonWrapper>
           <HelpButton />
