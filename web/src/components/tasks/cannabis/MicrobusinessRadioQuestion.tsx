@@ -6,13 +6,13 @@ import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material"
 import React, { ReactElement } from "react";
 
 export const MicrobusinessRadioQuestion = (): ReactElement => {
-  const { updateQueue, userData } = useUserData();
+  const { updateQueue, business } = useUserData();
   const { Config } = useConfig();
 
   const handleRadioChange = async (
     event: React.ChangeEvent<{ name?: string; value: string }>
   ): Promise<void> => {
-    if (!userData || !updateQueue) return;
+    if (!business || !updateQueue) return;
     const isMicrobusiness = event.target.value === "true";
     await updateQueue
       .queueProfileData({
@@ -34,7 +34,7 @@ export const MicrobusinessRadioQuestion = (): ReactElement => {
         <RadioGroup
           aria-label={Config.cannabisApplyForLicense.microbusinessRadioQuestion}
           name="cannabis-microbusiness"
-          value={userData?.profileData.cannabisMicrobusiness ?? ""}
+          value={business?.profileData.cannabisMicrobusiness ?? ""}
           onChange={handleRadioChange}
           row
         >

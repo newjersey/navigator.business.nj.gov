@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const CannabisPriorityStatusTask = (props: Props): ReactElement => {
-  const { userData, updateQueue } = useUserData();
+  const { business, updateQueue } = useUserData();
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState(false);
   const [displayFirstTab, setDisplayFirstTab] = useState(true);
   const { Config } = useConfig();
@@ -31,15 +31,13 @@ export const CannabisPriorityStatusTask = (props: Props): ReactElement => {
   });
 
   const handleNextTabButtonClick = (): void => {
-    if (!userData || !updateQueue) {
-      return;
-    }
+    if (!business || !updateQueue) return;
 
     setDisplayFirstTab(false);
     scrollToTop();
     if (
-      userData.taskProgress[props.task.id] === undefined ||
-      userData.taskProgress[props.task.id] === "NOT_STARTED"
+      business.taskProgress[props.task.id] === undefined ||
+      business.taskProgress[props.task.id] === "NOT_STARTED"
     ) {
       setSuccessSnackbarIsOpen(true);
       updateQueue.queueTaskProgress({ [props.task.id]: "IN_PROGRESS" }).update();
@@ -52,9 +50,7 @@ export const CannabisPriorityStatusTask = (props: Props): ReactElement => {
   };
 
   const handleCompleteTaskButtonClick = (): void => {
-    if (!userData || !updateQueue) {
-      return;
-    }
+    if (!business || !updateQueue) return;
 
     setSuccessSnackbarIsOpen(true);
     queueUpdateTaskProgress(props.task.id, "COMPLETED");

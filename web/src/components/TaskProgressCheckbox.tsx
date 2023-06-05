@@ -28,7 +28,7 @@ interface Props {
 type ModalTypes = "formation" | "formation-unset" | "registered-for-taxes-unset";
 
 export const TaskProgressCheckbox = (props: Props): ReactElement => {
-  const { userData, updateQueue } = useUserData();
+  const { business, updateQueue } = useUserData();
   const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
   const { queueUpdateTaskProgress, congratulatoryModal } = useUpdateTaskProgress();
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState<boolean>(false);
@@ -39,7 +39,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
 
   const currentTaskProgress: TaskProgress =
     props.STORYBOOK_ONLY_currentTaskProgress ??
-    updateQueue?.current().taskProgress[props.taskId] ??
+    business?.taskProgress[props.taskId] ??
     "NOT_STARTED";
   const isDisabled = !!props.disabledTooltipText;
 
@@ -55,9 +55,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   };
 
   const setToNextStatus = (config?: { redirectOnSuccess: boolean }): void => {
-    if (!updateQueue || !userData) {
-      return;
-    }
+    if (!updateQueue) return;
     let redirectOnSuccess = config?.redirectOnSuccess;
     if (isAuthenticated === IsAuthenticated.FALSE) {
       setRegistrationModalIsVisible(true);

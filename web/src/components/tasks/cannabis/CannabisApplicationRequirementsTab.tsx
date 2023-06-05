@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const CannabisApplicationRequirementsTab = (props: Props): ReactElement => {
-  const { userData } = useUserData();
+  const { business } = useUserData();
   const { Config } = useConfig();
 
   const hasPriorityStatus = (Object.keys(props.priorityStatusState) as PriorityApplicationType[]).some(
@@ -71,10 +71,10 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
             </Accordion>
           </>
         )}
-        {(props.CMS_ONLY_isAnnual || userData?.profileData.cannabisMicrobusiness) && (
+        {(props.CMS_ONLY_isAnnual || business?.profileData.cannabisMicrobusiness) && (
           <>
             <hr />
-            <Accordion defaultExpanded={props.CMS_ONLY_isAnnual ? true : false} className="margin-top-2">
+            <Accordion defaultExpanded={props.CMS_ONLY_isAnnual} className="margin-top-2">
               <AccordionSummary
                 aria-controls={`${Config.cannabisApplyForLicense.microbusinessApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
