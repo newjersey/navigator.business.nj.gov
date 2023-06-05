@@ -8,27 +8,25 @@ export const useDocuments = (): {
   documents: ProfileDocuments | undefined;
   checkData: () => Promise<void>;
 } => {
-  const { userData } = useUserData();
+  const { business } = useUserData();
   const [documents, setDocuments] = useState<ProfileDocuments | undefined>(undefined);
 
   const checkData = async (): Promise<void> => {
-    const formationDoc = userData?.profileData.documents.formationDoc
-      ? await getSignedS3Link(userData?.profileData.documents.formationDoc)
+    const formationDoc = business?.profileData.documents.formationDoc
+      ? await getSignedS3Link(business?.profileData.documents.formationDoc)
       : "";
-    const certifiedDoc = userData?.profileData.documents.certifiedDoc
-      ? await getSignedS3Link(userData?.profileData.documents.certifiedDoc)
+    const certifiedDoc = business?.profileData.documents.certifiedDoc
+      ? await getSignedS3Link(business?.profileData.documents.certifiedDoc)
       : "";
-    const standingDoc = userData?.profileData.documents.standingDoc
-      ? await getSignedS3Link(userData?.profileData.documents.standingDoc)
+    const standingDoc = business?.profileData.documents.standingDoc
+      ? await getSignedS3Link(business?.profileData.documents.standingDoc)
       : "";
 
     return setDocuments({ formationDoc, certifiedDoc, standingDoc });
   };
 
   useMountEffectWhenDefined(() => {
-    if (!userData) {
-      return;
-    }
+    if (!business) return;
     checkData();
     const interval = setInterval(() => {
       return checkData();
@@ -36,7 +34,7 @@ export const useDocuments = (): {
     return () => {
       return clearInterval(interval);
     };
-  }, userData);
+  }, business);
 
   return { documents, checkData };
 };

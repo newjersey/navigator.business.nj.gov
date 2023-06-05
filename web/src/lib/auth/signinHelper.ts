@@ -13,11 +13,19 @@ import {
 } from "@/lib/utils/analytics-helpers";
 import { createEmptyUser, UserData } from "@businessnjgovnavigator/shared/";
 import { Dispatch } from "react";
+<<<<<<< HEAD
 
 import { AuthAction } from "@/lib/auth/AuthContext";
 import * as session from "@/lib/auth/sessionHelper";
 import { triggerSignOut } from "@/lib/auth/sessionHelper";
 import { UpdateQueue } from "@/lib/types/types";
+=======
+import { UpdateQueue } from "../types/types";
+import { AuthAction } from "./AuthContext";
+import * as session from "./sessionHelper";
+import { triggerSignOut } from "./sessionHelper";
+import {getCurrentBusiness} from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
+>>>>>>> wip: finished libs [skip ci]
 
 export const onSignIn = async (dispatch: Dispatch<AuthAction>): Promise<void> => {
   const user = await session.getCurrentUser();
@@ -49,7 +57,7 @@ export const onSelfRegister = (
   setRegistrationAlertStatus("IN_PROGRESS");
   let route;
   if (options?.useReturnToLink) {
-    route = userData.preferences.returnToLink;
+    route = getCurrentBusiness(userData).preferences.returnToLink;
   } else {
     route = router.asPath;
   }
@@ -57,7 +65,16 @@ export const onSelfRegister = (
   api
     .postSelfReg({
       ...userData,
-      preferences: { ...userData.preferences, returnToLink: route || "" },
+      businesses: {
+        ...userData.businesses,
+        [userData.currentBusinessId]: {
+          ...userData.businesses[userData.currentBusinessId],
+          preferences: {
+            ...userData.businesses[userData.currentBusinessId].preferences,
+            returnToLink: route || ""
+          },
+        }
+      }
     })
     .then(async (response) => {
       await updateQueue.queue(response.userData).update();
@@ -92,8 +109,8 @@ export const onGuestSignIn = async (
   setABExperienceDimension(user.abExperience, true);
   setUserId(user.id, true);
   if (userData) {
-    setAnalyticsDimensions(userData.profileData, true);
-    if (userData.onboardingFormProgress === "UNSTARTED") {
+    setAnalyticsDimensions(getCurrentBusiness(userData).profileData, true);
+    if (getCurrentBusiness(userData).onboardingFormProgress === "UNSTARTED") {
       setRegistrationDimension("Began Onboarding");
       push(ROUTES.onboarding);
     } else {

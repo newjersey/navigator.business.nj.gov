@@ -12,6 +12,7 @@ import { BusinessUser, generateUser, generateUserData } from "@businessnjgovnavi
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, render, waitFor } from "@testing-library/react";
 import { SWRConfig } from "swr";
+import {ProfileData} from "@businessnjgovnavigator/shared/profileData";
 
 jest.mock("@/lib/utils/analytics-helpers", () => ({ setAnalyticsDimensions: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
@@ -141,20 +142,20 @@ describe("useUserData", () => {
         return updateQueue?.queue(newUserData).update();
       });
 
-      const newProfileData = {
-        ...newUserData.profileData,
+      await act(() => {
+        return updateQueue?.queueProfileData({ businessName: "some new name" }).update();
+      });
+
+      const expectedProfileData = {
+        ...newUserData.businesses[newUserData.currentBusinessId].profileData,
         businessName: "some new name",
       };
 
-      await act(() => {
-        return updateQueue?.queueProfileData(newProfileData).update();
-      });
-
       await waitFor(() => {
-        return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith(newProfileData);
+        return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith(expectedProfileData);
       });
       expect(mockSetRoadmap).toHaveBeenCalledWith(returnedRoadmap);
-      expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith(newProfileData);
+      expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith(expectedProfileData);
     });
 
     it("updates data from api when calling refresh", async () => {
