@@ -8,9 +8,6 @@ callToActionText: Apply for My Certification
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Interior Design Examination and Evaluation Committee
 webflowName: "Interior Designer"
-divisionPhone: ""
-webflowIndustry: ""
-licenseCertificationClassification: ""
 ---
 
 You can only legally use the title of Certified Interior Designer if you’ve been certified by the New Jersey Interior Design Examination and Evaluation Committee.

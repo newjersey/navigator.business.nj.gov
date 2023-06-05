@@ -8,10 +8,6 @@ callToActionText: Schedule My Inspection
 agencyId: nj-motor-vehicle
 formName: ""
 webflowName: "School Bus: Bus Inspection"
-agencyAdditionalContext: ""
-divisionPhone: ""
-webflowIndustry: ""
-licenseCertificationClassification: ""
 ---
 
 Your commercial buses need to be inspected by the Motor Vehicle Commission’s School Bus Inspection Unit **before** obtaining registration and license plates for them.

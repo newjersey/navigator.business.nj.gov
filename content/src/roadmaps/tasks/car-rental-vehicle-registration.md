@@ -8,10 +8,6 @@ callToActionText: Make an Appointment
 agencyId: nj-motor-vehicle
 formName: BA-49
 webflowName: "Commercial Vehicle"
-agencyAdditionalContext: ""
-divisionPhone: ""
-webflowIndustry: ""
-licenseCertificationClassification: ""
 ---
 
 Your commercial vehicles need to be registered under your company name before you can legally rent them to customers. You'll need to bring a completed application to your appointment.

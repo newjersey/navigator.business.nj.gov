@@ -5,10 +5,6 @@ id: food-safety-course
 callToActionLink: ""
 callToActionText: ""
 webflowName: "Food Safety Management Course"
-agencyAdditionalContext: ""
-divisionPhone: ""
-webflowIndustry: ""
-licenseCertificationClassification: ""
 ---
 
 If your restaurant is serving anything that could cause a safety concern, such as raw food, you must complete food safety management certification training with your local government's department of health.
