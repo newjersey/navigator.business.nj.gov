@@ -7,6 +7,10 @@ callToActionText: Obtain Your Vehicle Registration
 agencyId: nj-motor-vehicle
 formName: BA-49
 webflowName: "Non-Medical Transport: Vehicle Registration"
+agencyAdditionalContext: ""
+divisionPhone: ""
+webflowIndustry: ""
+licenseCertificationClassification: ""
 ---
 
 You should ensure your vehicle is properly registered as a passenger vehicle prior to offering transportation services.
