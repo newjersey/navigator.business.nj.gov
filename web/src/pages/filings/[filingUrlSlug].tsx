@@ -7,7 +7,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { sortFilingsEarliestToLatest } from "@/lib/domain-logic/filterFilings";
+import { sortCalendarEventsEarliestToLatest } from "@/lib/domain-logic/filterCalendarEvents";
 import { FilingUrlSlugParam, loadAllFilingUrlSlugs, loadFilingByUrlSlug } from "@/lib/static/loadFilings";
 import { Filing, TaxFilingMethod } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -180,7 +180,7 @@ export const FilingElement = (props: {
 
 const FilingPage = (props: Props): ReactElement => {
   const { userData } = useUserData();
-  const matchingFiling = sortFilingsEarliestToLatest(userData?.taxFilingData.filings ?? []).find(
+  const matchingFiling = sortCalendarEventsEarliestToLatest(userData?.taxFilingData.filings ?? []).find(
     (it: TaxFiling) => {
       return it.identifier === props.filing.id;
     }

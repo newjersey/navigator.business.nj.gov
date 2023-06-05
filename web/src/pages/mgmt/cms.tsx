@@ -17,6 +17,8 @@ import DashboardTabsPreview from "@/lib/cms/previews/DashboardTabsPreview";
 import DeferredLocationPreview from "@/lib/cms/previews/DeferredLocationPreview";
 import EinInputPreview from "@/lib/cms/previews/EinInputPreview";
 import FilingsPreview from "@/lib/cms/previews/FilingsPreview";
+import LicensesPreview from "@/lib/cms/previews/LicenseEventPreview";
+
 import FormationInterimSuccessPreview from "@/lib/cms/previews/FormationInterimSuccessPreview";
 import FormationSuccessPreview from "@/lib/cms/previews/FormationSuccessPagePreview";
 import FundingsPreview from "@/lib/cms/previews/FundingsPreview";
@@ -74,6 +76,8 @@ const CMS = dynamic(
       registerPreview(CMS, "certification-checklist", CertificationsPreview);
       registerPreview(CMS, "contextual-information", ContextInfoPreview);
       registerPreview(CMS, "filings", FilingsPreview);
+      registerPreview(CMS, "licenses", LicensesPreview);
+
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);
 
       // ----- Roadmap Sidebar Card -----
