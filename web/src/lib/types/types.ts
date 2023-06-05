@@ -381,6 +381,25 @@ export interface Filing {
   agency?: TaxAgency | null;
 }
 
+export interface LicenseEvent {
+  filename: string;
+  title: string;
+  urlSlug: string;
+  callToActionLink?: string;
+  callToActionText?: string;
+  contentMd: string;
+  previewType?: LicenseEventType;
+}
+
+export type LicenseEventType = "expiration" | "renewal";
+
+export interface LicenseCalendarEvent {
+  dueDate: string;
+  type: LicenseEventType;
+  licenseType: string;
+  eventType: "licenses";
+}
+
 export type OperateReference = {
   name: string;
   urlSlug: string;

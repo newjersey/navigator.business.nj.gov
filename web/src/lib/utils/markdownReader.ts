@@ -12,6 +12,7 @@ import {
   FundingPublishStatus,
   FundingStatus,
   FundingType,
+  LicenseEvent,
   MarkdownResult,
   PostOnboardingFile,
   TaskWithoutLinks,
@@ -51,6 +52,16 @@ export const convertTaskMd = (taskMdContents: string): TaskWithoutLinks => {
 
   return {
     contentMd: matterResult.content,
+    ...taskGrayMatter,
+  };
+};
+
+export const convertLicenseMd = (taskMdContents: string, filename: string): LicenseEvent => {
+  const matterResult = matter(taskMdContents);
+  const taskGrayMatter = matterResult.data as LicenseGrayMatter;
+  return {
+    contentMd: matterResult.content,
+    filename,
     ...taskGrayMatter,
   };
 };
@@ -127,6 +138,14 @@ type FilingGrayMatter = {
   filingMethod: TaxFilingMethod | null;
   filingDetails: string;
   agency: TaxAgency | null;
+};
+
+type LicenseGrayMatter = {
+  id: string;
+  title: string;
+  urlSlug: string;
+  callToActionLink: string;
+  callToActionText: string;
 };
 
 type TaskGrayMatter = {
