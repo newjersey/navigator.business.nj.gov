@@ -68,5 +68,6 @@
   "isEnabled": true,
   "additionalSearchTerms": "architect, engineer, consulting, architectural services",
   "id": "architecture",
+  "licenseType": "Architecture",
   "description": "Plans, designs, and oversees the construction of buildings"
 }

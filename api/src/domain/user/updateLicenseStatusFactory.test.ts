@@ -99,6 +99,9 @@ describe("updateLicenseStatus", () => {
     expect(resultUserData.taskProgress["license-accounting"]).toEqual("NOT_STARTED");
     expect(resultUserData.taskProgress["license-massage-therapy"]).toEqual("NOT_STARTED");
     expect(resultUserData.taskProgress["moving-company-license"]).toEqual("NOT_STARTED");
+    expect(resultUserData.taskProgress["architect-license"]).toEqual("NOT_STARTED");
+    expect(resultUserData.taskProgress["hvac-license"]).toEqual("NOT_STARTED");
+    expect(resultUserData.taskProgress["appraiser-license"]).toEqual("NOT_STARTED");
 
     expect(stubUserDataClient.put).toHaveBeenCalledWith(resultUserData);
   });
@@ -123,6 +126,9 @@ describe("updateLicenseStatus", () => {
     expect(resultUserData.taskProgress["license-accounting"]).toEqual("IN_PROGRESS");
     expect(resultUserData.taskProgress["license-massage-therapy"]).toEqual("IN_PROGRESS");
     expect(resultUserData.taskProgress["moving-company-license"]).toEqual("IN_PROGRESS");
+    expect(resultUserData.taskProgress["architect-license"]).toEqual("IN_PROGRESS");
+    expect(resultUserData.taskProgress["hvac-license"]).toEqual("IN_PROGRESS");
+    expect(resultUserData.taskProgress["appraiser-license"]).toEqual("IN_PROGRESS");
   });
 
   it("updates the license task status to COMPLETED when license is active", async () => {
@@ -139,5 +145,8 @@ describe("updateLicenseStatus", () => {
     expect(resultUserData.taskProgress["license-accounting"]).toEqual("COMPLETED");
     expect(resultUserData.taskProgress["license-massage-therapy"]).toEqual("COMPLETED");
     expect(resultUserData.taskProgress["moving-company-license"]).toEqual("COMPLETED");
+    expect(resultUserData.taskProgress["architect-license"]).toEqual("COMPLETED");
+    expect(resultUserData.taskProgress["hvac-license"]).toEqual("COMPLETED");
+    expect(resultUserData.taskProgress["appraiser-license"]).toEqual("COMPLETED");
   });
 });
