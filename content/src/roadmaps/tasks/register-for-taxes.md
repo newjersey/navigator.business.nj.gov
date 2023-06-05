@@ -16,7 +16,7 @@ It's time to register your business for State taxes. Doing so will tell the Stat
 ### Application Requirements
 
 - `Entity ID|entity-id` (not required for general partnership or sole proprietorship)
-- [NAICS code](/tasks/determine-naics-code): ${naicsCode}
+- [NAICS code](/tasks/naics-code-determination): ${naicsCode}
 - `EIN|ein`
 - Estimated start date
 - Description of your business activity
