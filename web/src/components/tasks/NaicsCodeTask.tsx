@@ -17,29 +17,25 @@ interface Props {
 
 export const NaicsCodeTask = (props: Props): ReactElement => {
   const [showInput, setShowInput] = useState<boolean>(true);
-  const { userData, updateQueue } = useUserData();
+  const { business, updateQueue } = useUserData();
   const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
 
   useMountEffectWhenDefined(() => {
-    if (!userData) {
-      return;
-    }
+    if (!business) return;
     if (isAuthenticated === IsAuthenticated.FALSE) {
       return;
     }
-    setShowInput(!userData.profileData.naicsCode);
-  }, userData);
+    setShowInput(!business.profileData.naicsCode);
+  }, business);
 
   const shouldLockField = (): boolean => {
-    return userData?.profileData.naicsCode !== "" && userData?.taxFilingData.state === "SUCCESS";
+    return business?.profileData.naicsCode !== "" && business?.taxFilingData.state === "SUCCESS";
   };
 
   const setBackToEditing = ({ remove }: { remove: boolean }): void => {
-    if (!userData || !updateQueue) {
-      return;
-    }
+    if (!business || !updateQueue) return;
     setShowInput(true);
-    const newNaicsValue = remove ? emptyProfileData.naicsCode : userData.profileData.naicsCode;
+    const newNaicsValue = remove ? emptyProfileData.naicsCode : business.profileData.naicsCode;
     updateQueue
       .queueTaskProgress({ [props.task.id]: "IN_PROGRESS" })
       .queueProfileData({ naicsCode: newNaicsValue })
@@ -80,7 +76,7 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
           <NaicsCodeDisplay
             onEdit={onEdit}
             onRemove={onRemove}
-            code={userData?.profileData.naicsCode || ""}
+            code={business?.profileData.naicsCode || ""}
             lockField={shouldLockField()}
           />
         </div>

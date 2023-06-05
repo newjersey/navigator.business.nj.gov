@@ -40,24 +40,22 @@ const LicenseSearchErrorLookup: Record<LicenseSearchError, string> = {
 export const CheckStatus = (props: Props): ReactElement => {
   const classes = useStyles();
   const [formValues, setFormValues] = useState<NameAndAddress>(createEmptyNameAndAddress());
-  const { userData } = useUserData();
+  const { business } = useUserData();
 
   useMountEffectWhenDefined(() => {
-    if (!userData) {
-      return;
-    }
+    if (!business) return;
 
-    if (userData.licenseData) {
-      setFormValues(userData.licenseData.nameAndAddress);
+    if (business.licenseData) {
+      setFormValues(business.licenseData.nameAndAddress);
     } else {
       setFormValues((prevValues) => {
         return {
           ...prevValues,
-          name: userData.profileData.businessName,
+          name: business.profileData.businessName,
         };
       });
     }
-  }, userData);
+  }, business);
 
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
