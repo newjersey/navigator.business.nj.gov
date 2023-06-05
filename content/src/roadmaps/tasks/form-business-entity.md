@@ -17,7 +17,7 @@ register your business name and authorize your `business structure|business-stru
 
 - Business name (same name as in your home state)
 - Business structure
-- [NAICS code](/tasks/determine-naics-code) (optional) ${naicsCode}
+- [NAICS code](/tasks/naics-code-determination) (optional) ${naicsCode}
 - `EIN|ein` (optional)
 - Business description
 - Business address (this may be a home address if you are a home-based business)
