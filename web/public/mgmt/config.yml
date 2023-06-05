@@ -1784,6 +1784,7 @@ collections:
       - label: "Industry (Webflow & Navigator)"
         name: industryId
         widget: "relation"
+        multiple: true
         collection: "roadmaps"
         search_fields: ["{{id}}"]
         value_field: "{{id}}"
@@ -1874,6 +1875,7 @@ collections:
       - label: "Industry (Webflow & Navigator)"
         name: industryId
         widget: "relation"
+        multiple: true
         collection: "roadmaps"
         search_fields: ["{{id}}"]
         value_field: "{{id}}"
