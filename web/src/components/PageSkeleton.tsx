@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const PageSkeleton = (props: Props): ReactElement => {
-  const { userData } = useUserData();
+  const { business } = useUserData();
 
   return (
     <>
@@ -31,7 +31,7 @@ export const PageSkeleton = (props: Props): ReactElement => {
       </section>
       <div className="fit-screen-content">{props.children}</div>
       <footer>
-        {userData?.onboardingFormProgress === "COMPLETED" && <ReportAnIssueBar />}
+        {business?.onboardingFormProgress === "COMPLETED" && <ReportAnIssueBar />}
         {!props.landingPage && <LegalMessage />}
         <InnovFooter />
       </footer>

@@ -12,7 +12,7 @@ import { ReactElement, useContext } from "react";
 export const Header = (): ReactElement => {
   const { state } = useContext(AuthContext);
 
-  const { userData } = useUserData();
+  const { business, userData } = useUserData();
   const router = useRouter();
 
   const editOnClick = (): void => {
@@ -34,14 +34,14 @@ export const Header = (): ReactElement => {
     }
 
     if (
-      (userData?.profileData.businessName === undefined || userData?.profileData.businessName === "") &&
+      (business?.profileData.businessName === undefined || business?.profileData.businessName === "") &&
       state.isAuthenticated === "TRUE"
     ) {
       return Config.headerDefaults.genericToProfileButtonText;
     }
 
-    if (userData?.profileData.businessName && state.isAuthenticated === "TRUE") {
-      return userData.profileData.businessName;
+    if (business?.profileData.businessName && state.isAuthenticated === "TRUE") {
+      return business.profileData.businessName;
     }
   };
 

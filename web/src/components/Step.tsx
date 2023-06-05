@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const Step = (props: Props): ReactElement => {
-  const { userData } = useUserData();
+  const { business } = useUserData();
   const { roadmap } = useRoadmap();
   return (
     <div
@@ -25,7 +25,7 @@ export const Step = (props: Props): ReactElement => {
           <VerticalStepIndicator
             stepNumber={props.step.stepNumber}
             last={props.last}
-            completed={isStepCompleted(roadmap, props.step, userData)}
+            completed={isStepCompleted(roadmap, props.step, business)}
           />
 
           <div className="margin-left-6 margin-top-neg-2px tablet:margin-left-205 font-body-md margin-bottom-105">

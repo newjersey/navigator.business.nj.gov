@@ -5,7 +5,7 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
+import {useMockBusiness, useMockProfileData} from "@/test/mock/mockUseUserData";
 import {
   generateProfileData,
   generateUser,
@@ -23,7 +23,7 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 describe("<Header />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockUserData({});
+    useMockBusiness({});
     useMockRouter({});
   });
 

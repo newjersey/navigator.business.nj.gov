@@ -18,7 +18,7 @@ interface Props {
 
 export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
-  const { userData, updateQueue } = useUserData();
+  const { business, updateQueue } = useUserData();
   const { Config } = useConfig();
 
   const {
@@ -28,17 +28,13 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
   } = useFormContextHelper(createProfileFieldErrorMap());
 
   useEffect(() => {
-    if (!userData) {
-      return;
-    }
-    setProfileData(userData.profileData);
-  }, [userData]);
+    if (!business) return;
+    setProfileData(business.profileData);
+  }, [business]);
 
   FormFuncWrapper(async () => {
-    if (!updateQueue || !userData) {
-      return;
-    }
-    const profileDataHasNotChanged = JSON.stringify(profileData) === JSON.stringify(userData.profileData);
+    if (!updateQueue || !business) return;
+    const profileDataHasNotChanged = JSON.stringify(profileData) === JSON.stringify(business.profileData);
     if (profileDataHasNotChanged) {
       return;
     }

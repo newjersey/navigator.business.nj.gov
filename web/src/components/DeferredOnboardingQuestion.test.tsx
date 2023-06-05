@@ -3,12 +3,18 @@ import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingH
 import { getMergedConfig } from "@/contexts/configContext";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
+  currentBusiness,
   currentUserData,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generateProfileData, generateUserData } from "@businessnjgovnavigator/shared";
+import {
+  Business, generateBusiness,
+  generateProfileData,
+  generateUserData,
+  generateUserDataForBusiness
+} from "@businessnjgovnavigator/shared";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -26,13 +32,13 @@ describe("<DeferredOnboardingQuestion />", () => {
     useMockRouter({});
   });
 
-  const renderComponent = ({ userData, onSave }: { userData?: UserData; onSave?: () => void }): void => {
+  const renderComponent = ({ onSave }: { onSave?: () => void }): void => {
     render(
       <WithStatefulUserData
-        initialUserData={
-          userData || generateUserData({ profileData: generateProfileData({ ...emptyIndustrySpecificData }) })
-        }
-      >
+        initialUserData={generateUserDataForBusiness(
+          generateBusiness({ profileData: generateProfileData({ ...emptyIndustrySpecificData }) })
+          )}
+        >
         <DeferredOnboardingQuestion label="" onSave={onSave || jest.fn()}>
           <OnboardingHomeBasedBusiness />
         </DeferredOnboardingQuestion>
@@ -44,7 +50,7 @@ describe("<DeferredOnboardingQuestion />", () => {
     renderComponent({});
     fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
     fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
-    expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
+    expect(currentBusiness().profileData.homeBasedBusiness).toEqual(true);
   });
 
   it("calls onSave prop", async () => {

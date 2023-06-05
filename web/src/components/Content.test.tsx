@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
 import * as signinHelper from "@/lib/auth/signinHelper";
 import { useMockRouter } from "@/test/mock/mockRouter";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { fireEvent, render, screen } from "@testing-library/react";
+import {useMockBusiness} from "@/test/mock/mockUseUserData";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/auth/signinHelper", () => ({ onSelfRegister: jest.fn() }));
@@ -13,7 +13,7 @@ describe("<Content />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
-    useMockUserData({});
+    useMockBusiness({});
   });
 
   describe("links", () => {
