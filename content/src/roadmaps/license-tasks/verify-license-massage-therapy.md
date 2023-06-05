@@ -8,6 +8,9 @@ callToActionText: Apply for or Verify a License
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Massage and Bodywork Therapy
 webflowName: "Massage Therapy: Staff Licenses"
+divisionPhone: ""
+webflowIndustry: ""
+licenseCertificationClassification: ""
 ---
 
 You or any of your staff providing massage therapy services need to have **individual** massage therapy licenses. It is the responsibility of the business owner to ensure all staff providing massage therapy services have a current license.
