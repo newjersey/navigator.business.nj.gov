@@ -3,7 +3,8 @@ filename: architect-license
 urlSlug: architect-license
 name: Apply for Your Architect License
 webflowName: "Architecture: Architect License"
-industryId: architecture
+industryId:
+  - architecture
 callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
 webflowIndustry: Architect
 divisionPhone: (973) 504-6385

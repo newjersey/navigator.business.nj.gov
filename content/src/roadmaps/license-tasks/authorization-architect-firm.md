@@ -3,7 +3,8 @@ filename: authorization-architect-firm
 urlSlug: authorization-architect-firm
 name: Obtain a Certificate of Authorization for Your Firm
 webflowName: "Architecture: Certificate of Authorization for Your Firm"
-industryId: architecture
+industryId:
+  - architecture
 callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
 webflowIndustry: Architect
 divisionPhone: (973) 504-6385

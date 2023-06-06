@@ -3,7 +3,8 @@ filename: conversion-license-cannabis
 urlSlug: conversion-license
 name: Submit Your Cannabis Conversion License
 webflowName: "Cannabis: Conversion License"
-industryId: cannabis
+industryId:
+  - cannabis
 callToActionLink: https://nj-crc-public.nls.egov.com/#!/signin
 id: conversion-license-cannabis
 agencyId: nj-cannabis-commission

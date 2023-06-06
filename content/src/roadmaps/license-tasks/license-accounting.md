@@ -5,7 +5,8 @@ name: Register Your Accounting Firm
 webflowName: "Accountant: Public Accounting Firm"
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Accountancy
-industryId: certified-public-accountant
+industryId:
+  - certified-public-accountant
 callToActionText: Register My Firm
 callToActionLink: https://www.njconsumeraffairs.gov/acc/Pages/applications.aspx
 webflowIndustry: ""

@@ -3,7 +3,8 @@ filename: conditional-cannabis-license
 urlSlug: conditional-cannabis-license
 name: Apply for Your Conditional Cannabis License
 webflowName: "Cannabis: Conditional License"
-industryId: cannabis
+industryId:
+  - cannabis
 callToActionLink: https://www.nj.gov/cannabis/businesses/
 id: conditional-permit-cannabis
 agencyId: nj-cannabis-commission

@@ -5,7 +5,8 @@ name: Register Your Appraisal Management Company
 webflowName: "Real Estate Appraisal: Management Company Registration"
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Real Estate Appraiser Board
-industryId: real-estate-appraisals
+industryId:
+  - real-estate-appraisals
 callToActionText: Register My Company
 callToActionLink: https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx
 id: appraiser-company-register

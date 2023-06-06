@@ -3,7 +3,8 @@ filename: detective-agency-license
 urlSlug: detective-agency-license
 name: Obtain Your Detective Agency License
 webflowName: "Detective: Agency License"
-industryId: detective
+industryId:
+  - detective
 callToActionLink: https://www.nj.gov/njsp/private-detective/index.shtml
 webflowIndustry: Detective Agency
 divisionPhone: (609) 882-2000

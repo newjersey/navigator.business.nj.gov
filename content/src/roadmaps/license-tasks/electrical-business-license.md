@@ -3,7 +3,8 @@ filename: electrical-business-license
 urlSlug: electrical-business-license
 name: Get Your Electrical Contracting Business Permit
 webflowName: "Electrical Contractor: Business Permit"
-industryId: electrical-contractor
+industryId:
+  - electrical-contractor
 callToActionLink: https://www.njconsumeraffairs.gov/elec/Pages/applications.aspx
 divisionPhone: 973-504-6410
 id: electrical-business-license

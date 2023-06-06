@@ -3,7 +3,8 @@ filename: real-estate-appraiser-license
 urlSlug: appraiser-license
 name: Apply for Your Appraiser License
 webflowName: "Real Estate Appraisal: Real Estate Appraiser License"
-industryId: real-estate-appraisals
+industryId:
+  - real-estate-appraisals
 callToActionLink: https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx
 webflowIndustry: Real Estate Appraiser
 divisionPhone: (973) 504-6480
