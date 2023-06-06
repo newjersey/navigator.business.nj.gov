@@ -687,11 +687,6 @@ export const updateNewBusinessProfilePage = ({
   cy.url().should("contain", "/profile");
   cy.wait(1000);
 
-  if (businessName) {
-    onProfilePage.typeBusinessName(businessName);
-    onProfilePage.getBusinessName().invoke("prop", "value").should("contain", businessName);
-  }
-
   if (industry) {
     onProfilePage.selectIndustry((industry as Industry).id);
     onProfilePage
@@ -708,8 +703,23 @@ export const updateNewBusinessProfilePage = ({
       .find("input")
       .invoke("prop", "value")
       .should("contain", companyType);
-  }
+    onProfilePage.clickSaveButton(); // save because changing legal structure can change fields
+    cy.wait(1000);
+    onDashboardPage.clickEditProfileLink();
+    cy.url().should("contain", "/profile");
+    cy.wait(1000);
 
+    if (businessName) {
+      const hasTradeName = LookupLegalStructureById(companyType).hasTradeName;
+      if (hasTradeName) {
+        onProfilePage.typeTradeName(businessName);
+        onProfilePage.getTradeName().invoke("prop", "value").should("contain", businessName);
+      } else {
+        onProfilePage.typeBusinessName(businessName);
+        onProfilePage.getBusinessName().invoke("prop", "value").should("contain", businessName);
+      }
+    }
+  }
   if (townDisplayName) {
     onProfilePage.selectLocation(townDisplayName);
     onProfilePage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
