@@ -3,7 +3,8 @@ filename: real-estate-appraiser-certification
 urlSlug: appraiser-certification
 name: Apply for Your Real Estate Appraiser Certification
 webflowName: "Real Estate Appraisal: Real Estate Appraiser Certification"
-industryId: real-estate-appraisals
+industryId:
+  - real-estate-appraisals
 callToActionLink: https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx
 divisionPhone: (973) 504-6480
 id: appraiser-certification

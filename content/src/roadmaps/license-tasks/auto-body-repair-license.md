@@ -3,7 +3,8 @@ urlSlug: auto-body-repair-license
 name: Get Your Auto-Body Repair License
 webflowName: "Auto-Body Repair: Business License"
 formName: BLC-25
-industryId: auto-body-repair
+industryId:
+  - auto-body-repair
 callToActionLink: https://www.state.nj.us/mvcbiz/BusinessServices/AutoBodyRepair.htm
 webflowIndustry: Auto Body
 divisionPhone: (609) 292-6500

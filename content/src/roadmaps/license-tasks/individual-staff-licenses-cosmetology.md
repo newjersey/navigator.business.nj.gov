@@ -3,7 +3,8 @@ filename: cosmetology-individual-staff-license
 urlSlug: cosmetology-individual-staff-license
 name: Get Your Individual License and Ensure Your Staff is Licensed
 webflowName: "Cosmetology: Individual and Staff License"
-industryId: cosmetology
+industryId:
+  - cosmetology
 callToActionLink: https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx
 divisionPhone: (973) 504-6400
 id: individual-staff-licenses-cosmetology

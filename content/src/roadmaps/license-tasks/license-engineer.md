@@ -3,7 +3,8 @@ filename: engineer-license
 urlSlug: engineer-license
 name: Apply for an Engineer License, if Applicable
 webflowName: "Engineering: Engineer License"
-industryId: engineering
+industryId:
+  - engineering
 callToActionLink: https://www.njconsumeraffairs.gov/pels/Pages/applications.aspx
 webflowIndustry: ""
 divisionPhone: (973) 504-6460

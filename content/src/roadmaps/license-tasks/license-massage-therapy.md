@@ -3,7 +3,8 @@ filename: massage-therapy-license
 urlSlug: massage-therapy-license
 name: Get a Massage Therapy Business License
 webflowName: "Massage Therapy: Massage Therapy Business License"
-industryId: massage-therapy
+industryId:
+  - massage-therapy
 callToActionLink: https://www.njconsumeraffairs.gov/mbt/Pages/business.aspx
 webflowIndustry: ""
 divisionPhone: (973) 504-6520

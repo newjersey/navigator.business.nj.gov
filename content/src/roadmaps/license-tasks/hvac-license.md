@@ -5,7 +5,8 @@ name: Get an HVACR License
 webflowName: "HVAC Contractor: HVACR License"
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Examiners of Heating, Ventilation, Air Conditioning and Refrigeration Contracts
-industryId: hvac-contractor
+industryId:
+  - hvac-contractor
 callToActionText: Apply for My HVACR License
 callToActionLink: https://www.njconsumeraffairs.gov/hvacr/Pages/applications.aspx
 webflowIndustry: ""

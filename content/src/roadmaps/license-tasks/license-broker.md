@@ -3,7 +3,8 @@ filename: broker-license
 urlSlug: broker-license
 name: Obtain Your Real Estate Broker License
 webflowName: "Real Estate Broker: Real Estate Broker License"
-industryId: real-estate-broker
+industryId:
+  - real-estate-broker
 callToActionLink: https://www.state.nj.us/dobi/division_rec/brokeroriginalapplication.htm
 webflowIndustry: ""
 divisionPhone: (609) 292-7272
