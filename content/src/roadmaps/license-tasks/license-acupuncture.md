@@ -3,7 +3,8 @@ filename: acupuncture-license
 urlSlug: acupuncture-license
 name: Apply for an Acupuncturist License, if Applicable
 webflowName: "Acupuncture: Acupuncturist License"
-industryId: acupuncture
+industryId:
+  - acupuncture
 callToActionLink: https://www.njconsumeraffairs.gov/acu/Pages/applications.aspx
 webflowIndustry: ""
 divisionPhone: (973) 273-8092

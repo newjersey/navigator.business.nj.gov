@@ -3,7 +3,8 @@ filename: daycare-license
 urlSlug: daycare-license
 name: Obtain Your Child Care Center License
 webflowName: "Daycare: License for a Child Care Center"
-industryId: daycare
+industryId:
+  - daycare
 callToActionLink: https://www.nj.gov/dcf/providers/licensing/
 webflowIndustry: Child Care
 divisionPhone: (609) 826-3999

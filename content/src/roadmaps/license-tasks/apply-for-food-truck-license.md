@@ -3,7 +3,8 @@ filename: food-truck-license
 urlSlug: food-truck-license
 name: Apply for Your Food Truck License
 webflowName: "Food Truck: Food Truck License"
-industryId: food-truck
+industryId:
+  - food-truck
 callToActionLink: https://www.nj.gov/health/lh/documents/LocalHealthDirectory.pdf
 id: apply-for-food-truck-license
 callToActionText: Contact My Department of Health

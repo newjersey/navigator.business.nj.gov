@@ -6,7 +6,8 @@ webflowName: "Home Health Aide: Health Care Services Firm License"
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Employment and Personnel Services
 formName: ""
-industryId: homemaker-home-health-aide
+industryId:
+  - homemaker-home-health-aide
 callToActionText: Register as a Health Care Service Firm
 callToActionLink: https://www.njconsumeraffairs.gov/hcservice
 licenseCertificationClassification: ""

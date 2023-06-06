@@ -5,7 +5,8 @@ webflowName: "Auto-Body Repair: Business License"
 summaryDescriptionMd: |
   You need a license to open an auto-body repair business.
 formName: BLC-25
-industryId: auto-body-repair
+industryId:
+  - auto-body-repair
 callToActionText: Apply for My Auto-Body Repair License
 callToActionLink: https://www.state.nj.us/mvcbiz/BusinessServices/AutoBodyRepair.htm
 webflowIndustry: Auto Body

@@ -5,7 +5,8 @@ name: Obtain a Certificate of Authorization for Your Firm
 webflowName: "Engineering: Certificate of Authorization for Your Firm"
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Professional Engineers and Land Surveyors
-industryId: engineering
+industryId:
+  - engineering
 callToActionText: Apply for My Certificate of Authorization
 callToActionLink: https://www.njconsumeraffairs.gov/pels/Pages/applications.aspx
 licenseCertificationClassification: undefined

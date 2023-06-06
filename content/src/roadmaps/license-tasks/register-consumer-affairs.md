@@ -4,7 +4,8 @@ urlSlug: hic-license
 name: Obtain a Home Improvement Contractor Registration
 webflowName: "Home Contractor: Home Improvement Contractor Registration"
 formName: HIC-Form1-Rev
-industryId: home-contractor
+industryId:
+  - home-contractor
 callToActionLink: https://www.njconsumeraffairs.gov/ocp/Pages/hic.aspx
 webflowIndustry: ""
 divisionPhone: (973) 424-8150

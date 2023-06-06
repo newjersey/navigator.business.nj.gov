@@ -3,7 +3,8 @@ filename: town-mercantile-license
 urlSlug: town-mercantile-license
 name: Get a Mercantile License if Your Town Requires It
 webflowName: "Businesses with a Physical Location: Mercantile License"
-industryId: restaurant
+industryId:
+  - restaurant
 callToActionLink: ""
 id: check-local-requirements
 callToActionText: ""

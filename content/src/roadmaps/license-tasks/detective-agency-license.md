@@ -9,7 +9,8 @@ summaryDescriptionMd: >
   Instructions](https://www.nj.gov/njsp/private-detective/pdf/sp-171-instructions_2020.pdf)
   and the [New Jersey State Police Private Detective
   Information](https://www.nj.gov/njsp/private-detective/index.shtml).
-industryId: detective
+industryId:
+  - detective
 callToActionText: Apply for My Agency License
 callToActionLink: https://www.nj.gov/njsp/private-detective/index.shtml
 webflowIndustry: Detective Agency
