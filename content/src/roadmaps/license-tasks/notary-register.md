@@ -3,7 +3,8 @@ filename: notary-certificate
 urlSlug: notary-certificate
 name: Register as a Notary Public
 webflowName: "Notary Public: Notary Public Certificate"
-industryId: notary-public
+industryId:
+  - notary-public
 callToActionLink: https://www.njportal.com/DOR/Notary
 webflowIndustry: ""
 divisionPhone: (609) 292-9292

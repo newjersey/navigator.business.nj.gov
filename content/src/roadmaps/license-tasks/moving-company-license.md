@@ -3,7 +3,8 @@ filename: moving-company-license
 urlSlug: moving-company-license
 name: Apply for a Public Movers License
 webflowName: "Moving Company: Public Movers License"
-industryId: moving-company
+industryId:
+  - moving-company
 callToActionLink: https://www.njconsumeraffairs.gov/pmw/Pages/applications.aspx
 webflowIndustry: ""
 divisionPhone: (973) 504-6512
