@@ -18,7 +18,7 @@ describe("check license status [feature] [all] [group1]", () => {
     });
 
     // dashboard business name
-    updateNewBusinessProfilePage({ businessName: "Aculyst" });
+    updateNewBusinessProfilePage({ businessName: "Aculyst", legalStructureId });
     onDashboardPage.getEditProfileLink().should("exist");
 
     // application tab
