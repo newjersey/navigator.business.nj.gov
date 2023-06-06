@@ -38,12 +38,13 @@ export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusCli
         };
       });
 
+    const expirationDate =
+      match.expirationDate === undefined || match.expirationDate.length < 8
+        ? undefined
+        : parseDateWithFormat(match.expirationDate, "YYYYMMDD X");
     return {
       status: determineLicenseStatus(match.licenseStatus),
-      expirationISO:
-        match.expirationDate === undefined || match.expirationDate.length < 8
-          ? undefined
-          : parseDateWithFormat(match.expirationDate, "YYYYMMDD X").toISOString(),
+      expirationISO: expirationDate?.toISOString(),
       checklistItems: items,
     };
   };

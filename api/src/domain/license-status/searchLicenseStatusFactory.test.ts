@@ -1,3 +1,4 @@
+import { parseDateWithFormat } from "@shared/dateHelpers";
 import { LicenseEntity, LicenseStatusResult } from "@shared/license";
 import { generateNameAndAddress } from "@shared/test";
 import { generateLicenseEntity } from "../../../test/factories";
@@ -191,7 +192,7 @@ describe("searchLicenseStatus", () => {
     });
 
     const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
-    expect(result.expirationISO).toEqual("2021-05-05T04:00:00.000Z");
+    expect(result.expirationISO).toEqual(parseDateWithFormat("20210505", "YYYYMMDD").toISOString());
   });
 
   it("does not save the expirationDate if invalid", async () => {
