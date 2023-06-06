@@ -16,6 +16,7 @@ const Config = getMergedConfig();
 const currentDate = parseDateWithFormat(`2024-02-15`, "YYYY-MM-DD");
 const year = currentDate.year().toString();
 const month: number = Number.parseInt(currentDate.month().toString());
+
 function mockShared(): typeof shared {
   return {
     ...jest.requireActual("@businessnjgovnavigator/shared"),
@@ -149,7 +150,10 @@ describe("<FilingsCalendarSingleGrid />", () => {
   });
 
   it("renders a licenseEvent expiration task", () => {
-    const licenseData = generateLicenseData({ expirationISO: currentDate.add(4, "days").toISOString() });
+    const licenseData = generateLicenseData({
+      expirationISO: currentDate.add(4, "days").toISOString(),
+      status: "ACTIVE",
+    });
     const userData = generateUserData({
       licenseData,
     });
@@ -166,7 +170,10 @@ describe("<FilingsCalendarSingleGrid />", () => {
   });
 
   it("renders a licenseEvent renewal task", () => {
-    const licenseData = generateLicenseData({ expirationISO: currentDate.add(4, "days").toISOString() });
+    const licenseData = generateLicenseData({
+      expirationISO: currentDate.add(4, "days").toISOString(),
+      status: "ACTIVE",
+    });
     const userData = generateUserData({
       licenseData,
     });
@@ -203,7 +210,10 @@ describe("<FilingsCalendarSingleGrid />", () => {
 
   it("always shows a licenseEvent even with 2+ tax filings", () => {
     const userData = generateUserData({
-      licenseData: generateLicenseData({ expirationISO: currentDate.add(4, "days").toISOString() }),
+      licenseData: generateLicenseData({
+        expirationISO: currentDate.add(4, "days").toISOString(),
+        status: "ACTIVE",
+      }),
       taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo, taxFilingThree] }),
     });
     render(
