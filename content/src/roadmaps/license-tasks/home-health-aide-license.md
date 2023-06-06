@@ -7,7 +7,7 @@ agencyId: nj-consumer-affairs
 agencyAdditionalContext: Employment and Personnel Services
 formName: ""
 industryId:
-  - home-health-aide
+  - homemaker-home-health-aide
 callToActionText: Register as a Health Care Service Firm
 callToActionLink: https://www.njconsumeraffairs.gov/hcservice
 licenseCertificationClassification: ""
