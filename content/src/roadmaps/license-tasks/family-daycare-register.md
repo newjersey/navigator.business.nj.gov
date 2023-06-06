@@ -8,7 +8,7 @@ summaryDescriptionMd: Register your family daycare business with your local
   state rules and regulations and gain more credibility for your business.
 industryId:
   - daycare
-callToActionText: Find My Referral Agency
+callToActionText: Register with My Referral Agency
 callToActionLink: https://www.childcarenj.gov/Parents/CCRR
 webflowIndustry: ""
 licenseCertificationClassification: ""
