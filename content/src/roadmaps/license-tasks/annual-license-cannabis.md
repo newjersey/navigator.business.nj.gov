@@ -3,7 +3,8 @@ filename: annual-cannabis-license
 urlSlug: annual-cannabis-license
 name: Apply for Your Annual Cannabis License
 webflowName: "Cannabis: Annual License"
-industryId: cannabis
+industryId:
+  - cannabis
 callToActionLink: https://www.nj.gov/cannabis/businesses/
 id: annual-license-cannabis
 agencyId: nj-cannabis-commission
