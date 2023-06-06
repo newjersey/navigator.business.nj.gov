@@ -1,19 +1,23 @@
 ---
-urlSlug: family-daycare-registration
 filename: family-daycare-registration
+urlSlug: family-daycare-registration
 name: "Register Your Family Child Care "
-id: family-daycare-register
-callToActionLink: https://www.childcarenj.gov/Parents/CCRR
+webflowName: "Childcare Center: Family Child Care Registration"
+summaryDescriptionMd: Register your family daycare business with your local
+  Child Care Resource and Referral Agency to ensure you’re in compliance with
+  state rules and regulations and gain more credibility for your business.
+industryId:
+  - daycare
 callToActionText: Find My Referral Agency
-issuingAgency: New Jersey Department of Human Services Division of Family Development
-webflowName: "Family Daycare"
-agencyAdditionalContext: ""
-divisionPhone: ""
+callToActionLink: https://www.childcarenj.gov/Parents/CCRR
 webflowIndustry: ""
 licenseCertificationClassification: ""
+agencyId: nj-human-services
+agencyAdditionalContext: Division of Family Development
+divisionPhone: (877) 667-9845
+id: family-daycare-register
+issuingAgency: New Jersey Department of Human Services Division of Family Development
 ---
-
-Register your family daycare business with your local Child Care Resource and Referral Agency to ensure you’re in compliance with state rules and regulations and gain more credibility for your business.
 
 ---
 
