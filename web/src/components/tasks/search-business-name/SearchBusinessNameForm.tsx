@@ -64,8 +64,59 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
   };
 
+  const emptyNameAvailability: NameAvailability = {
+    similarNames: [],
+    status: undefined,
+    lastUpdatedTimeStamp: "",
+  };
+
   const Unavailable = props.unavailable;
   const Available = props.available;
+
+  const handleBusinessNameAvailability = (
+    nameAvailability: NameAvailability,
+    submittedName: string
+  ): void => {
+    const validName = ["AVAILABLE", "UNAVAILABLE"].includes(nameAvailability.status ?? "");
+    if (!updateQueue || !validName) return;
+
+    const nameUnavailable = nameAvailability.status === "UNAVAILABLE";
+    const needsNexusDbaName = nameUnavailable ? true : false;
+    setFieldsInteracted([FIELD_NAME]);
+    updateQueue
+      .queueFormationData({
+        businessNameAvailability: nameAvailability,
+      })
+      .queueFormationFormData({ businessName: submittedName })
+      .queueProfileData({
+        businessName: submittedName,
+        nexusDbaName: emptyProfileData.nexusDbaName,
+        needsNexusDbaName,
+      })
+      .update();
+
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        businessName: submittedName,
+      };
+    });
+  };
+
+  const handleDbaBusinessNameAvailability = (
+    nameAvailability: NameAvailability,
+    submittedName: string
+  ): void => {
+    if (!updateQueue || nameAvailability.status !== "AVAILABLE") return;
+    updateQueue
+      .queueFormationData({
+        dbaBusinessNameAvailability: nameAvailability,
+      })
+      .queueProfileData({
+        nexusDbaName: submittedName,
+      })
+      .update();
+  };
 
   const doSearch = useCallback(
     async (
@@ -74,67 +125,42 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     ): Promise<void> => {
       searchBusinessName(event)
         .then(async ({ nameAvailability, submittedName }) => {
+          if (!nameAvailability || isInitialSubmit) return;
           if (props.isDba) {
-            if (!nameAvailability || !updateQueue) {
-              return;
-            }
-            setNameAvailability(nameAvailability);
-            if (nameAvailability.status === "AVAILABLE") {
-              await updateQueue
-                .queueProfileData({
-                  nexusDbaName: submittedName,
-                })
-                .update();
-            }
+            handleDbaBusinessNameAvailability(nameAvailability, submittedName);
           } else {
-            if (!nameAvailability || !updateQueue || isInitialSubmit) {
-              return;
-            }
-            setFieldsInteracted([FIELD_NAME]);
-            if (nameAvailability.status === "AVAILABLE") {
-              await updateQueue
-                .queueFormationData({
-                  formationFormData: {
-                    ...updateQueue.current().formationData.formationFormData,
-                    businessName: submittedName,
-                  },
-                  businessNameAvailability: nameAvailability,
-                })
-                .queueProfileData({
-                  businessName: submittedName,
-                  nexusDbaName: emptyProfileData.nexusDbaName,
-                  needsNexusDbaName: emptyProfileData.needsNexusDbaName,
-                })
-                .update();
-            } else if (nameAvailability.status === "UNAVAILABLE") {
-              await updateQueue
-                .queueFormationData({
-                  formationFormData: {
-                    ...updateQueue.current().formationData.formationFormData,
-                    businessName: submittedName,
-                  },
-                  businessNameAvailability: nameAvailability,
-                })
-                .queueProfileData({
-                  businessName: submittedName,
-                  needsNexusDbaName: true,
-                })
-                .update();
-            }
-
-            setFormationFormData((previousFormationData) => {
-              return {
-                ...previousFormationData,
-                businessName: submittedName,
-              };
-            });
+            handleBusinessNameAvailability(nameAvailability, submittedName);
           }
+          setNameAvailability(nameAvailability);
         })
         .catch(() => {});
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [searchBusinessName]
   );
+
+  const resetNameAvailability = (): void => {
+    resetSearch();
+    if (updateQueue) {
+      updateQueue
+        .queueFormationData({
+          businessNameAvailability: emptyNameAvailability,
+          dbaBusinessNameAvailability: emptyNameAvailability,
+        })
+        .queueProfileData({
+          nexusDbaName: "",
+        })
+        .update();
+    }
+  };
+
+  const shouldShowTextField = (): boolean => {
+    if (props.hideTextFieldWhenUnavailable) {
+      return props.nameAvailability?.status !== "UNAVAILABLE";
+    }
+
+    return true;
+  };
 
   useEffect(() => {
     (function showBusinessNameSearchResultsIfDBANameExists(): void {
@@ -151,14 +177,6 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
       }
     })();
   }, [currentName, userData, props.isDba, doSearch]);
-
-  const shouldShowTextField = (): boolean => {
-    if (props.hideTextFieldWhenUnavailable) {
-      return props.nameAvailability?.status !== "UNAVAILABLE";
-    }
-
-    return true;
-  };
 
   return (
     <>
@@ -252,10 +270,8 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
 
         {props.nameAvailability?.status === "UNAVAILABLE" && (
           <Unavailable
-            resetSearch={(): void => {
-              resetSearch();
-            }}
-            submittedName={props.businessName}
+            resetSearch={(): void => resetNameAvailability()}
+            submittedName={currentName}
             nameAvailability={props.nameAvailability}
           />
         )}

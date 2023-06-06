@@ -50,6 +50,9 @@ const cognitoPayload = ({ id }: { id: string }): any => {
   };
 };
 
+const fiftyNineMinutesAgo: string = getCurrentDate().subtract(1, "hour").add(1, "minute").toISOString();
+const sixtyOneMinutesAgo: string = getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString();
+
 describe("userRouter", () => {
   let app: Express;
 
@@ -183,7 +186,7 @@ describe("userRouter", () => {
       it("does not update license if licenseData lastCheckedDate is within the last hour", async () => {
         const userData = generateUserData({
           licenseData: generateLicenseData({
-            lastUpdatedISO: getCurrentDate().subtract(1, "hour").add(1, "minute").toISOString(),
+            lastUpdatedISO: fiftyNineMinutesAgo,
           }),
         });
         stubUserDataClient.get.mockResolvedValue(userData);
@@ -198,7 +201,7 @@ describe("userRouter", () => {
             industryId: "home-contractor",
           }),
           licenseData: generateLicenseData({
-            lastUpdatedISO: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
+            lastUpdatedISO: sixtyOneMinutesAgo,
           }),
         });
         stubUserDataClient.get.mockResolvedValue(userData);
@@ -216,7 +219,7 @@ describe("userRouter", () => {
             industryId: "home-contractor",
           }),
           licenseData: generateLicenseData({
-            lastUpdatedISO: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
+            lastUpdatedISO: sixtyOneMinutesAgo,
           }),
         });
         stubUserDataClient.get.mockResolvedValue(userData);
@@ -248,7 +251,7 @@ describe("userRouter", () => {
           formationData: generateFormationData({
             businessNameAvailability: generateBusinessNameAvailability({
               status: "AVAILABLE",
-              lastUpdatedTimeStamp: getCurrentDate().subtract(1, "hour").add(1, "minute").toISOString(),
+              lastUpdatedTimeStamp: fiftyNineMinutesAgo,
             }),
           }),
         });
@@ -264,7 +267,7 @@ describe("userRouter", () => {
             completedFilingPayment: true,
             businessNameAvailability: generateBusinessNameAvailability({
               status: "AVAILABLE",
-              lastUpdatedTimeStamp: getCurrentDate().subtract(1, "hour").add(1, "minute").toISOString(),
+              lastUpdatedTimeStamp: fiftyNineMinutesAgo,
             }),
           }),
         });
@@ -280,7 +283,7 @@ describe("userRouter", () => {
             completedFilingPayment: false,
             businessNameAvailability: generateBusinessNameAvailability({
               status: "AVAILABLE",
-              lastUpdatedTimeStamp: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
+              lastUpdatedTimeStamp: sixtyOneMinutesAgo,
             }),
           }),
         });
@@ -295,6 +298,7 @@ describe("userRouter", () => {
         const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
         expect(result.body.formationData.businessNameAvailability.status).toEqual("UNAVAILABLE");
+        expect(result.body.profileData.needsNexusDbaName).toEqual(false);
         expect(
           parseDate(result.body.formationData.lastUpdatedTimeStamp).isSame(getCurrentDate(), "minute")
         ).toEqual(true);
@@ -306,7 +310,7 @@ describe("userRouter", () => {
             completedFilingPayment: false,
             businessNameAvailability: generateBusinessNameAvailability({
               status: "AVAILABLE",
-              lastUpdatedTimeStamp: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
+              lastUpdatedTimeStamp: sixtyOneMinutesAgo,
             }),
           }),
         });
@@ -321,6 +325,7 @@ describe("userRouter", () => {
         const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
         expect(result.body.formationData.businessNameAvailability.status).toEqual("UNAVAILABLE");
+        expect(result.body.profileData.needsNexusDbaName).toEqual(false);
         expect(
           parseDate(result.body.formationData.lastUpdatedTimeStamp).isSame(getCurrentDate(), "minute")
         ).toEqual(true);
@@ -332,7 +337,7 @@ describe("userRouter", () => {
             completedFilingPayment: false,
             businessNameAvailability: generateBusinessNameAvailability({
               status: "AVAILABLE",
-              lastUpdatedTimeStamp: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
+              lastUpdatedTimeStamp: sixtyOneMinutesAgo,
             }),
           }),
         });
@@ -342,6 +347,168 @@ describe("userRouter", () => {
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubTimeStampBusinessSearch.search).toHaveBeenCalledWith(userData.profileData.businessName);
         expect(stubUpdateOperatingPhase).toHaveBeenCalledWith(userData);
+      });
+
+      describe("when businessPersona is 'FOREIGN'", () => {
+        it("does not recheck business name availability if businessNameAvailability and dbaBusinessNameAvailability are undefined", async () => {
+          const userData = generateUserData({
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              needsNexusDbaName: true,
+            }),
+            formationData: generateFormationData({
+              businessNameAvailability: undefined,
+              dbaBusinessNameAvailability: undefined,
+            }),
+          });
+          stubUserDataClient.get.mockResolvedValue(userData);
+
+          await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+          expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
+        });
+
+        it("does not update dbaBusinessNameAvailability if needsNexusDbaName is false", async () => {
+          const userData = generateUserData({
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              needsNexusDbaName: false,
+            }),
+            formationData: generateFormationData({
+              dbaBusinessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
+              }),
+            }),
+          });
+          stubUserDataClient.get.mockResolvedValue(userData);
+
+          await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+          expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
+        });
+
+        it("sets needsNexusDbaName to true when business name becomes unavailable", async () => {
+          const userData = generateUserData({
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              needsNexusDbaName: false,
+            }),
+            formationData: generateFormationData({
+              businessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
+              }),
+            }),
+          });
+          stubUserDataClient.get.mockResolvedValue(userData);
+          stubTimeStampBusinessSearch.search.mockResolvedValue(
+            generateBusinessNameAvailability({
+              status: "UNAVAILABLE",
+              similarNames: ["random-name"],
+            })
+          );
+
+          const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+          expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
+          expect(result.body.formationData.businessNameAvailability.status).toEqual("UNAVAILABLE");
+          expect(result.body.profileData.needsNexusDbaName).toEqual(true);
+        });
+
+        it("when needsNexusDbaName is false only businessNameAvailability is updated", async () => {
+          const userData = generateUserData({
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              needsNexusDbaName: false,
+            }),
+            formationData: generateFormationData({
+              businessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
+              }),
+              dbaBusinessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
+              }),
+            }),
+          });
+          stubUserDataClient.get.mockResolvedValue(userData);
+          stubTimeStampBusinessSearch.search.mockResolvedValue(
+            generateBusinessNameAvailability({
+              status: "UNAVAILABLE",
+              similarNames: ["random-name"],
+            })
+          );
+
+          const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+          expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
+          expect(result.body.formationData.businessNameAvailability.status).toEqual("UNAVAILABLE");
+          expect(result.body.formationData.dbaBusinessNameAvailability.status).toEqual("AVAILABLE");
+          expect(result.body.profileData.needsNexusDbaName).toEqual(true);
+        });
+
+        it("when needsNexusDbaName is true only dbaBusinessNameAvailability is updated", async () => {
+          const userData = generateUserData({
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              needsNexusDbaName: true,
+            }),
+            formationData: generateFormationData({
+              completedFilingPayment: false,
+              dbaBusinessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
+              }),
+              businessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
+              }),
+            }),
+          });
+          stubUserDataClient.get.mockResolvedValue(userData);
+          stubTimeStampBusinessSearch.search.mockResolvedValue(
+            generateBusinessNameAvailability({
+              status: "UNAVAILABLE",
+              similarNames: ["random-name"],
+            })
+          );
+
+          const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+          expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
+          expect(result.body.formationData.dbaBusinessNameAvailability.status).toEqual("UNAVAILABLE");
+          expect(result.body.formationData.businessNameAvailability.status).toEqual("AVAILABLE");
+          expect(
+            parseDate(result.body.formationData.lastUpdatedTimeStamp).isSame(getCurrentDate(), "minute")
+          ).toEqual(true);
+        });
+
+        it("updates user in the background if dbaBusinessNameAvailability lastUpdatedTimeStamp is older than last hour", async () => {
+          const userData = generateUserData({
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              needsNexusDbaName: true,
+            }),
+            formationData: generateFormationData({
+              completedFilingPayment: false,
+              dbaBusinessNameAvailability: generateBusinessNameAvailability({
+                status: "AVAILABLE",
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
+              }),
+            }),
+          });
+          stubUserDataClient.get.mockResolvedValue(userData);
+          stubTimeStampBusinessSearch.search.mockResolvedValue(
+            generateBusinessNameAvailability({
+              status: "UNAVAILABLE",
+              similarNames: ["random-name"],
+            })
+          );
+
+          const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+          expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
+          expect(result.body.formationData.dbaBusinessNameAvailability.status).toEqual("UNAVAILABLE");
+          expect(
+            parseDate(result.body.formationData.lastUpdatedTimeStamp).isSame(getCurrentDate(), "minute")
+          ).toEqual(true);
+        });
       });
     });
   });

@@ -1,5 +1,4 @@
 import * as api from "@/lib/api-client/apiClient";
-import analytics from "@/lib/utils/analytics";
 import { generateFormationDbaContent } from "@/test/factories";
 import {
   FormationPageHelpers,
@@ -42,28 +41,8 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   getCompletedFiling: jest.fn(),
   searchBusinessName: jest.fn(),
 }));
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 const mockApi = api as jest.Mocked<typeof api>;
-
-function setupMockAnalytics(): typeof analytics {
-  return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
-    event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
-      business_formation_search_existing_name_again: {
-        click: {
-          refresh_name_search_field: jest.fn(),
-        },
-      },
-      business_formation_dba_name_search_field: {
-        appears: {
-          dba_name_search_field_appears: jest.fn(),
-        },
-      },
-    },
-  };
-}
 
 describe("SearchBusinessNameForm", () => {
   const displayContent = {
@@ -109,7 +88,7 @@ describe("SearchBusinessNameForm", () => {
     expect(true).toBe(true);
   });
 
-  it("pre-fills the text field with the business name entered in onboarding", async () => {
+  it("pre-fills the text field with the business name entered in profile", async () => {
     await getPageHelper({
       businessName: "Best Pizza",
     });
