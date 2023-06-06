@@ -14,6 +14,10 @@ export class OnboardingPage {
     return cy.get("#businessName");
   }
 
+  getTradeName() {
+    return cy.get("#tradeName");
+  }
+
   getCpa(radio?: boolean) {
     return cy.get(`input[name="requires-cpa"]${radio === undefined ? "" : `[value="${radio}"]`}`);
   }
@@ -112,6 +116,10 @@ export class OnboardingPage {
 
   typeBusinessName(businessName: string) {
     this.getBusinessName().clear().type(businessName);
+  }
+
+  typeTradeName(tradeName: string) {
+    this.getTradeName().clear().type(tradeName);
   }
 
   typeBusinessFormationDate(monthYearString: string) {
