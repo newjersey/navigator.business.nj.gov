@@ -3,7 +3,8 @@ filename: certified-accountant-license
 urlSlug: CPA-license
 name: Apply for a Certified Public Accountant License
 webflowName: "Accountant: Certified Public Accountant License"
-industryId: certified-public-accountant
+industryId:
+  - certified-public-accountant
 callToActionLink: https://www.njconsumeraffairs.gov/acc/Pages/applications.aspx
 webflowIndustry: ""
 divisionPhone: (973) 504-6380
