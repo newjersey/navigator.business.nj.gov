@@ -18,6 +18,7 @@ import {
 import {
   defaultDateFormat,
   getCurrentDate,
+  LookupIndustryById,
   OperatingPhases,
   parseDateWithFormat,
   randomInt,
@@ -517,13 +518,10 @@ describe("<FilingsCalendar />", () => {
 
     expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
     expect(screen.getByText(expirationDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        `Home Improvement Contractors ${
-          Config.licenseEventDefaults.expirationTitleLabel
-        } ${expirationDate.year()}`
-      )
-    ).toBeInTheDocument();
+    const expectedName = `${LookupIndustryById("home-contractor").name} ${
+      Config.licenseEventDefaults.expirationTitleLabel
+    }`;
+    expect(screen.getByText(expectedName)).toBeInTheDocument();
   });
 
   it("sends analytics when feedback modal link is clicked", () => {

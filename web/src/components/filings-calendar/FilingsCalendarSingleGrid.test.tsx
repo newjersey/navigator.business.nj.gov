@@ -174,9 +174,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
       expirationISO: currentDate.add(4, "days").toISOString(),
       status: "ACTIVE",
     });
-    const userData = generateUserData({
-      licenseData,
-    });
+    const userData = generateUserData({ licenseData });
     render(
       <FilingsCalendarSingleGrid
         userData={userData}

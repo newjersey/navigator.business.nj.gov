@@ -7,9 +7,7 @@ describe("getLicenseCalendarEvent", () => {
   const currentDate = getCurrentDate();
 
   it("does not return an array containing events when licenseData is undefined", () => {
-    expect(
-      getLicenseCalendarEvent(undefined, currentDate.year(), "home-contractor", currentDate.month())
-    ).toEqual([]);
+    expect(getLicenseCalendarEvent(undefined, currentDate.year(), currentDate.month())).toEqual([]);
   });
 
   it("does not return an array containing events when expirationISO is undefined", () => {
@@ -17,18 +15,6 @@ describe("getLicenseCalendarEvent", () => {
       getLicenseCalendarEvent(
         generateLicenseData({ expirationISO: undefined, status: "ACTIVE" }),
         currentDate.year(),
-        "home-contractor",
-        currentDate.month()
-      )
-    ).toEqual([]);
-  });
-
-  it("does not return an array containing events when industryId is undefined", () => {
-    expect(
-      getLicenseCalendarEvent(
-        generateLicenseData({ expirationISO: currentDate.toISOString(), status: "ACTIVE" }),
-        currentDate.year(),
-        undefined,
         currentDate.month()
       )
     ).toEqual([]);
@@ -39,7 +25,6 @@ describe("getLicenseCalendarEvent", () => {
       getLicenseCalendarEvent(
         generateLicenseData({ expirationISO: currentDate.toISOString(), status: "BARRED" }),
         currentDate.year(),
-        "home-contractor",
         currentDate.month()
       )
     ).toEqual([]);
@@ -50,13 +35,11 @@ describe("getLicenseCalendarEvent", () => {
       getLicenseCalendarEvent(
         generateLicenseData({ expirationISO: currentDate.toISOString(), status: "ACTIVE" }),
         currentDate.year(),
-        "home-contractor",
         currentDate.month()
       )
     ).toEqual([
       {
         dueDate: currentDate.format(defaultDateFormat),
-        licenseType: "Home Improvement Contractors",
         type: "expiration",
         eventType: "licenses",
       },
@@ -68,13 +51,11 @@ describe("getLicenseCalendarEvent", () => {
       getLicenseCalendarEvent(
         generateLicenseData({ expirationISO: currentDate.toISOString(), status: "ACTIVE" }),
         currentDate.year(),
-        "home-contractor",
         currentDate.add(1, "month").month()
       )
     ).toEqual([
       {
         dueDate: currentDate.add(30, "days").format(defaultDateFormat),
-        licenseType: "Home Improvement Contractors",
         type: "renewal",
         eventType: "licenses",
       },
@@ -85,19 +66,16 @@ describe("getLicenseCalendarEvent", () => {
     expect(
       getLicenseCalendarEvent(
         generateLicenseData({ expirationISO: currentDate.toISOString(), status: "ACTIVE" }),
-        currentDate.year(),
-        "home-contractor"
+        currentDate.year()
       )
     ).toEqual([
       {
         dueDate: currentDate.format(defaultDateFormat),
-        licenseType: "Home Improvement Contractors",
         type: "expiration",
         eventType: "licenses",
       },
       {
         dueDate: currentDate.add(30, "days").format(defaultDateFormat),
-        licenseType: "Home Improvement Contractors",
         type: "renewal",
         eventType: "licenses",
       },
@@ -109,13 +87,11 @@ describe("getLicenseCalendarEvent", () => {
     expect(
       getLicenseCalendarEvent(
         generateLicenseData({ expirationISO: expirationDate.toISOString(), status: "ACTIVE" }),
-        expirationDate.year(),
-        "home-contractor"
+        expirationDate.year()
       )
     ).toEqual([
       {
         dueDate: expirationDate.format(defaultDateFormat),
-        licenseType: "Home Improvement Contractors",
         type: "expiration",
         eventType: "licenses",
       },

@@ -1,17 +1,15 @@
 import { LicenseCalendarEvent } from "@/lib/types/types";
 import { parseDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { defaultDateFormat, LicenseData, LookupIndustryById } from "@businessnjgovnavigator/shared/index";
+import { defaultDateFormat, LicenseData } from "@businessnjgovnavigator/shared/index";
 
 export const getLicenseCalendarEvent = (
   licenseData: LicenseData | undefined,
   year: number,
-  industryId: string | undefined,
   monthFilter?: number
 ): LicenseCalendarEvent[] => {
   if (
     licenseData === undefined ||
     licenseData.expirationISO === undefined ||
-    industryId === undefined ||
     licenseData.status !== "ACTIVE"
   ) {
     return [];
@@ -22,7 +20,6 @@ export const getLicenseCalendarEvent = (
     events.push({
       dueDate: expirationDate.format(defaultDateFormat),
       type: "expiration",
-      licenseType: LookupIndustryById(industryId).licenseType ?? "Generic",
       eventType: "licenses",
     });
   }
@@ -32,7 +29,6 @@ export const getLicenseCalendarEvent = (
     events.push({
       dueDate: renewalDate.format(defaultDateFormat),
       type: "renewal",
-      licenseType: LookupIndustryById(industryId).licenseType ?? "Generic",
       eventType: "licenses",
     });
   }

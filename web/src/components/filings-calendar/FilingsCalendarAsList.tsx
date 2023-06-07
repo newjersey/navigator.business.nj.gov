@@ -1,9 +1,10 @@
 import { Content } from "@/components/Content";
+import { LicenseEvent } from "@/components/filings-calendar/LicenseEvent";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { sortFilterCalendarEventsWithinAYear } from "@/lib/domain-logic/filterCalendarEvents";
 import { getLicenseCalendarEvent } from "@/lib/domain-logic/getLicenseCalendarEvent";
-import { LicenseCalendarEvent, LicenseEventType, OperateReference } from "@/lib/types/types";
+import { LicenseCalendarEvent, OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { groupBy } from "@/lib/utils/helpers";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
@@ -43,8 +44,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
 
   const typedLicenseEvents = getLicenseCalendarEvent(
     props.userData?.licenseData,
-    Number.parseInt(props.activeYear),
-    props.userData.profileData.industryId
+    Number.parseInt(props.activeYear)
   );
 
   const sortedFilteredEventsWithinAYear: Array<TaxCalendarEvent | LicenseCalendarEvent> = props.userData
@@ -115,27 +115,13 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
                     </div>
                   );
                 } else if (event.eventType === "licenses") {
-                  const titles: Record<LicenseEventType, string> = {
-                    expiration: Config.licenseEventDefaults.expirationTitleLabel,
-                    renewal: Config.licenseEventDefaults.renewalTitleLabel,
-                  };
                   return (
-                    <div
-                      key={`${event.licenseType}-${event.dueDate}`}
-                      className={`margin-bottom-05 ${index === 0 ? "margin-top-05" : ""}`}
-                    >
-                      <Link href={`licenses/${event.licenseType}-${event.type}`} passHref>
-                        <a
-                          href={`licenses/${event.licenseType}-${event.type}`}
-                          onClick={(): void => {
-                            analytics.event.calendar_date.click.go_to_date_detail_screen();
-                          }}
-                        >
-                          {event.licenseType} {titles[event.type]}{" "}
-                          {parseDateWithFormat(event.dueDate, defaultDateFormat).format("YYYY")}
-                        </a>
-                      </Link>
-                    </div>
+                    <LicenseEvent
+                      key={`${event.type}-${event.dueDate}`}
+                      licenseEvent={event}
+                      index={index}
+                      industryId={props.userData.profileData.industryId}
+                    />
                   );
                 }
               })}

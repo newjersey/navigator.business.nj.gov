@@ -194,7 +194,7 @@
     "licenseNumber": "ABC123XYZ456",
     "licenseStatus": "Active",
     "issueDate": "20160809 000000.000",
-    "expirationDate": "20200331 000000.000",
+    "expirationDate": "20230704 000000.000",
     "checklistItem": "Application",
     "checkoffStatus": "Completed"
   },
@@ -211,7 +211,7 @@
     "licenseNumber": "ABC123XYZ456",
     "licenseStatus": "Active",
     "issueDate": "20160809 000000.000",
-    "expirationDate": "20200331 000000.000",
+    "expirationDate": "20230704 000000.000",
     "checklistItem": "Background Check",
     "checkoffStatus": "Completed"
   },
@@ -228,7 +228,7 @@
     "licenseNumber": "ABC123XYZ456",
     "licenseStatus": "Active",
     "issueDate": "20160809 000000.000",
-    "expirationDate": "20200331 000000.000",
+    "expirationDate": "20230704 000000.000",
     "checklistItem": "Insurance Certificate",
     "checkoffStatus": "Completed"
   },
@@ -245,7 +245,7 @@
     "licenseNumber": "ABC123XYZ456",
     "licenseStatus": "Active",
     "issueDate": "20160809 000000.000",
-    "expirationDate": "20200331 000000.000",
+    "expirationDate": "20230704 000000.000",
     "checklistItem": "Registration Fee",
     "checkoffStatus": "Completed"
   },
@@ -262,7 +262,7 @@
     "licenseNumber": "ABC123XYZ456",
     "licenseStatus": "Active",
     "issueDate": "20160809 000000.000",
-    "expirationDate": "20200331 000000.000",
+    "expirationDate": "20230704 000000.000",
     "checklistItem": "Renewal Fee",
     "checkoffStatus": "Completed"
   },
@@ -279,7 +279,7 @@
     "licenseNumber": "ABC123XYZ456",
     "licenseStatus": "Denied",
     "issueDate": "20021005 000000.000",
-    "expirationDate": "2005331 000000.000",
+    "expirationDate": "20230704 000000.000",
     "checklistItem": "Renewal Fee",
     "checkoffStatus": "Completed"
   },
@@ -296,7 +296,7 @@
     "licenseNumber": "ABC123XYZ456",
     "licenseStatus": "Denied",
     "issueDate": "20021005 000000.000",
-    "expirationDate": "2005331 000000.000",
+    "expirationDate": "20230704 000000.000",
     "checklistItem": "Registration Fee",
     "checkoffStatus": "Unchecked"
   },
@@ -313,7 +313,7 @@
     "licenseNumber": "ABC123XYZ456",
     "licenseStatus": "Expired",
     "issueDate": "20001005 000000.000",
-    "expirationDate": "2005331 000000.000",
+    "expirationDate": "20230704 000000.000",
     "checklistItem": "Renewal Fee",
     "checkoffStatus": "Completed"
   },
@@ -330,7 +330,7 @@
     "licenseNumber": "ABC123XYZ456",
     "licenseStatus": "Expired",
     "issueDate": "20001005 000000.000",
-    "expirationDate": "2005331 000000.000",
+    "expirationDate": "20230704 000000.000",
     "checklistItem": "Registration Fee",
     "checkoffStatus": "Completed"
   }
