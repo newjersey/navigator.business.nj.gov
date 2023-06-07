@@ -160,6 +160,10 @@ describe("<TaxAccessStepTwo />", () => {
       renderComponent(userDataWithPrefilledFields);
       mockApi.postTaxFilingsOnboarding.mockResolvedValue({
         ...userDataWithPrefilledFields,
+        profileData: {
+          ...userDataWithPrefilledFields.profileData,
+          municipality: undefined,
+        },
         taxFilingData: generateTaxFilingData({
           state: "FAILED",
           businessName: userDataWithPrefilledFields.profileData.businessName,
@@ -247,6 +251,10 @@ describe("<TaxAccessStepTwo />", () => {
         return Promise.resolve({
           ...userDataWithPrefilledFields,
           taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: undefined }),
+          profileData: {
+            ...userDataWithPrefilledFields.profileData,
+            municipality: undefined,
+          },
         });
       });
       clickSave();
@@ -267,6 +275,10 @@ describe("<TaxAccessStepTwo />", () => {
         return Promise.resolve({
           ...userDataWithPrefilledFields,
           taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: "businessName" }),
+          profileData: {
+            ...userDataWithPrefilledFields.profileData,
+            municipality: undefined,
+          },
         });
       });
       clickSave();
@@ -293,6 +305,16 @@ describe("<TaxAccessStepTwo />", () => {
           state: "SUCCESS",
           registeredISO: getCurrentDateISOString(),
         }),
+        profileData: {
+          ...userDataWithPrefilledFields.profileData,
+          municipality: {
+            name: "Absecon",
+            displayName: "",
+            county: "",
+            id: "",
+          },
+          naicsCode: "123456",
+        },
       });
       renderComponent(userDataWithPrefilledFields);
       clickSave();
@@ -303,6 +325,35 @@ describe("<TaxAccessStepTwo />", () => {
         taxId: userDataWithPrefilledFields.profileData.taxId,
         businessName: userDataWithPrefilledFields.profileData.businessName,
         encryptedTaxId: userDataWithPrefilledFields.profileData.encryptedTaxId,
+      });
+    });
+
+    it("marks the naics code task as complete on successful response", async () => {
+      mockApi.postTaxFilingsOnboarding.mockResolvedValue({
+        ...userDataWithPrefilledFields,
+        taxFilingData: generateTaxFilingData({
+          state: "SUCCESS",
+          registeredISO: getCurrentDateISOString(),
+        }),
+        profileData: {
+          ...userDataWithPrefilledFields.profileData,
+          municipality: {
+            name: "Absecon",
+            displayName: "",
+            county: "",
+            id: "",
+          },
+          naicsCode: "123456",
+        },
+      });
+
+      renderComponent(userDataWithPrefilledFields);
+      clickSave();
+      await waitFor(() => {
+        return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
+      });
+      await waitFor(() => {
+        return expect(currentUserData().taskProgress["determine-naics-code"]).toEqual("COMPLETED");
       });
     });
   });
@@ -353,6 +404,16 @@ describe("<TaxAccessStepTwo />", () => {
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
         }),
+        profileData: {
+          ...userDataWithPrefilledFields.profileData,
+          municipality: {
+            name: "Absecon",
+            displayName: "",
+            county: "",
+            id: "",
+          },
+          naicsCode: "123456",
+        },
       });
 
       renderComponent(userDataWithPrefilledFields);
@@ -442,6 +503,10 @@ describe("<TaxAccessStepTwo />", () => {
         return Promise.resolve({
           ...userDataWithPrefilledFields,
           taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: undefined }),
+          profileData: {
+            ...userDataWithPrefilledFields.profileData,
+            municipality: undefined,
+          },
         });
       });
       clickSave();
@@ -465,6 +530,10 @@ describe("<TaxAccessStepTwo />", () => {
         return Promise.resolve({
           ...userDataWithPrefilledFields,
           taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: "businessName" }),
+          profileData: {
+            ...userDataWithPrefilledFields.profileData,
+            municipality: undefined,
+          },
         });
       });
       clickSave();
@@ -484,6 +553,16 @@ describe("<TaxAccessStepTwo />", () => {
           state: "SUCCESS",
           registeredISO: getCurrentDateISOString(),
         }),
+        profileData: {
+          ...userDataWithPrefilledFields.profileData,
+          municipality: {
+            name: "Absecon",
+            displayName: "",
+            county: "",
+            id: "",
+          },
+          naicsCode: "123456",
+        },
       });
 
       renderComponent(userDataWithPrefilledFields);
@@ -495,6 +574,35 @@ describe("<TaxAccessStepTwo />", () => {
         taxId: userDataWithPrefilledFields.profileData.taxId,
         businessName: userDataWithPrefilledFields.profileData.responsibleOwnerName,
         encryptedTaxId: userDataWithPrefilledFields.profileData.encryptedTaxId,
+      });
+    });
+
+    it("marks the naics code task as complete on successful response", async () => {
+      mockApi.postTaxFilingsOnboarding.mockResolvedValue({
+        ...userDataWithPrefilledFields,
+        taxFilingData: generateTaxFilingData({
+          state: "SUCCESS",
+          registeredISO: getCurrentDateISOString(),
+        }),
+        profileData: {
+          ...userDataWithPrefilledFields.profileData,
+          municipality: {
+            name: "Absecon",
+            displayName: "",
+            county: "",
+            id: "",
+          },
+          naicsCode: "123456",
+        },
+      });
+
+      renderComponent(userDataWithPrefilledFields);
+      clickSave();
+      await waitFor(() => {
+        return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
+      });
+      await waitFor(() => {
+        return expect(currentUserData().taskProgress["determine-naics-code"]).toEqual("COMPLETED");
       });
     });
   });
@@ -523,6 +631,16 @@ describe("<TaxAccessStepTwo />", () => {
           state: "SUCCESS",
           registeredISO: getCurrentDateISOString(),
         }),
+        profileData: {
+          ...userData.profileData,
+          municipality: {
+            name: "Absecon",
+            displayName: "",
+            county: "",
+            id: "",
+          },
+          naicsCode: "123456",
+        },
       });
 
       fireEvent.click(screen.getByLabelText("Tax id location"));

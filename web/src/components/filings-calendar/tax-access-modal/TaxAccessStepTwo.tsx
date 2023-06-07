@@ -11,8 +11,10 @@ import { FieldStateActionKind } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { profileFormContext } from "@/contexts/profileFormContext";
 import { postTaxFilingsOnboarding } from "@/lib/api-client/apiClient";
+import { fetchMunicipalityByName } from "@/lib/async-content-fetchers/fetchMunicipalities";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
+import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { createReducedFieldStates, ProfileFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
@@ -38,6 +40,7 @@ interface Props {
 export const TaxAccessStepTwo = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { updateQueue } = useUserData();
+  const { queueUpdateTaskProgress } = useUpdateTaskProgress();
   const userData = props.CMS_ONLY_fakeUserData ?? updateQueue?.current();
 
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
@@ -159,12 +162,26 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
           encryptedTaxId: encryptedTaxId as string,
         });
 
+        let record;
+
+        if (userDataToSet.profileData.municipality?.name) {
+          record = await fetchMunicipalityByName(userDataToSet.profileData.municipality?.name || "");
+        }
+
+        const municipalityToSet = {
+          name: record?.townName || profileData.municipality?.name || "",
+          county: record?.countyName || profileData.municipality?.county || "",
+          id: record?.id || profileData.municipality?.id || "",
+          displayName: record?.townDisplayName || profileData.municipality?.displayName || "",
+        };
+
         await updateQueue
           .queue(userDataToSet)
           .queueProfileData({
             taxId: profileData.taxId,
             encryptedTaxId: encryptedTaxId,
             responsibleOwnerName: profileData.responsibleOwnerName,
+            municipality: municipalityToSet,
           })
           .update();
       } catch {
@@ -179,6 +196,8 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
         setIsLoading(false);
         analytics.event.tax_calendar_modal.submit.tax_deadlines_added_to_calendar();
         props.onSuccess();
+        queueUpdateTaskProgress("determine-naics-code", "COMPLETED");
+        updateQueue.update();
       }
 
       if (taxFilingData.state === "PENDING") {

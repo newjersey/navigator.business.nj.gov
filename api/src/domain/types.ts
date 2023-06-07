@@ -85,6 +85,8 @@ export type TaxFilingOnboardingResponse = {
 export interface TaxFilingLookupResponse {
   state: TaxFilingLookupState;
   filings: TaxFilingCalendarEvent[];
+  taxCity?: string;
+  naicsCode?: string;
 }
 export type SelfRegResponse = {
   authRedirectURL: string;
