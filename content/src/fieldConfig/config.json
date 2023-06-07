@@ -112,7 +112,7 @@
   "taxCalendar": {
     "accessBody": "Get access to your tax calendar.",
     "snackbarSuccessHeader": "Tax Calendar Added!",
-    "snackbarSuccessBody": "Your businesses tax deadlines are now in your calendar.",
+    "snackbarSuccessBody": "Your businesses tax deadlines are now in your calendar. NAICS code and location have been verified.",
     "registrationFollowUpCopyMarkdown": "#### Your Tax Calendar is pending. \n\n While some tax eligibilities are available below, your tax calendar is still being calculated by the Department of Treasury. Check back in **7 days** for possible additions to your calendar.",
     "accessButton": "Get Access",
     "pendingCopyMarkdown": "#### Your Tax Calendar is pending. \n\n Your tax due dates are being added, check back in **7 days**."

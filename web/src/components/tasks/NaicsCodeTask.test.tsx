@@ -14,11 +14,15 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  BusinessPersona,
   generateProfileData,
   generateUserData,
   LookupIndustryById,
+  OperatingPhaseId,
+  TaxFilingState,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
@@ -271,12 +275,31 @@ describe("<NaicsCodeTask />", () => {
   describe("displaying NAICS code", () => {
     let initialUserData: UserData;
 
-    const renderPage = (): void => {
+    const renderPage = (params?: {
+      taxFilingState?: TaxFilingState;
+      operatingPhaseId?: OperatingPhaseId;
+      businessPersona?: BusinessPersona;
+    }): void => {
       render(
         withAuthAlert(
-          <WithStatefulUserData initialUserData={initialUserData}>
-            <NaicsCodeTask task={task} />
-          </WithStatefulUserData>,
+          <ThemeProvider theme={createTheme()}>
+            <WithStatefulUserData
+              initialUserData={{
+                ...initialUserData,
+                profileData: {
+                  ...initialUserData.profileData,
+                  operatingPhase: params?.operatingPhaseId ?? initialUserData.profileData.operatingPhase,
+                  businessPersona: params?.businessPersona ?? initialUserData.profileData.businessPersona,
+                },
+                taxFilingData: {
+                  ...initialUserData.taxFilingData,
+                  state: params?.taxFilingState ?? initialUserData.taxFilingData.state,
+                },
+              }}
+            >
+              <NaicsCodeTask task={task} />
+            </WithStatefulUserData>
+          </ThemeProvider>,
           IsAuthenticated.TRUE
         )
       );
@@ -328,6 +351,40 @@ describe("<NaicsCodeTask />", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
       expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
+    });
+
+    describe("when the naics code is present", () => {
+      it("doesn't display the edit and remove button when the tax filing state is success", () => {
+        renderPage({ taxFilingState: "SUCCESS" });
+        expect(screen.queryByText(Config.taskDefaults.editText)).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
+        expect(screen.getByTestId("naics-code-tooltip")).toBeInTheDocument();
+      });
+
+      it("displays the tooltip when the tax filing state is success", () => {
+        renderPage({ taxFilingState: "SUCCESS" });
+        expect(screen.queryByText(Config.taskDefaults.editText)).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
+        expect(screen.getByTestId("naics-code-tooltip")).toBeInTheDocument();
+      });
+
+      describe("for tax filing states other than success", () => {
+        const taxFilingStates = ["FAILED", "API_ERROR", "PENDING", "UNREGISTERED"];
+        for (const state of taxFilingStates) {
+          it(`displays the edit and remove button when the tax filing state is ${state}`, () => {
+            renderPage({ taxFilingState: state as TaxFilingState });
+            expect(screen.getByText(Config.taskDefaults.editText)).toBeInTheDocument();
+            expect(screen.getByText(Config.taskDefaults.removeText)).toBeInTheDocument();
+          });
+
+          it(`doesn't display the tooltip when the tax filing state is ${state}`, () => {
+            renderPage({ taxFilingState: state as TaxFilingState });
+            expect(screen.getByText(Config.taskDefaults.editText)).toBeInTheDocument();
+            expect(screen.getByText(Config.taskDefaults.removeText)).toBeInTheDocument();
+            expect(screen.queryByTestId("naics-code-tooltip")).not.toBeInTheDocument();
+          });
+        }
+      });
     });
   });
 

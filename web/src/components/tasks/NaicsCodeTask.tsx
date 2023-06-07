@@ -30,6 +30,10 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
     setShowInput(!userData.profileData.naicsCode);
   }, userData);
 
+  const shouldLockField = (): boolean => {
+    return userData?.profileData.naicsCode !== "" && userData?.taxFilingData.state === "SUCCESS";
+  };
+
   const setBackToEditing = ({ remove }: { remove: boolean }): void => {
     if (!userData || !updateQueue) {
       return;
@@ -77,6 +81,7 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
             onEdit={onEdit}
             onRemove={onRemove}
             code={userData?.profileData.naicsCode || ""}
+            lockField={shouldLockField()}
           />
         </div>
       )}

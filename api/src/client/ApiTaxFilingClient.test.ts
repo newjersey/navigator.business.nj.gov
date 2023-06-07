@@ -36,7 +36,9 @@ const generateTaxIdAndBusinessNameAndEmail = (
 };
 
 const generateSuccessfulApiTaxFilingLookupResponse = (
-  overrides: Partial<ApiTaxFilingLookupResponse>
+  overrides: Partial<ApiTaxFilingLookupResponse>,
+  taxCity?: string,
+  naicsCode?: string
 ): ApiTaxFilingLookupResponse => {
   return {
     ApiKey: `some-ApiKey-${randomInt()}`,
@@ -45,6 +47,8 @@ const generateSuccessfulApiTaxFilingLookupResponse = (
       { Name: "taxpayer-location", Value: randomInt(3).toString() },
       { Name: "tax-business-name", Value: `Some, Name-${randomInt()}` },
       { Name: "tax-name-control", Value: "Some" },
+      { Name: "naics-code", Value: naicsCode ?? randomInt(6).toString() },
+      { Name: "tax-city", Value: taxCity ?? `Some-City-${randomInt()}` },
     ],
     Errors: null,
     Results: ["st-50/450", "st-51/451", "nj-927/927-w"].map((Id) => {
@@ -158,7 +162,13 @@ describe("ApiTaxFilingClient", () => {
           Values: generateTaxFilingDates(1),
         }),
       ];
-      const stubResponse = generateSuccessfulApiTaxFilingLookupResponse({ Results });
+      const stubResponse = generateSuccessfulApiTaxFilingLookupResponse(
+        {
+          Results,
+        },
+        "testville",
+        "123456"
+      );
       mockAxios.post.mockResolvedValue({ data: stubResponse });
       const response = await client.lookup({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
@@ -173,6 +183,8 @@ describe("ApiTaxFilingClient", () => {
             calendarEventType: "TAX-FILING",
           },
         ],
+        taxCity: "testville",
+        naicsCode: "123456",
       });
     });
 

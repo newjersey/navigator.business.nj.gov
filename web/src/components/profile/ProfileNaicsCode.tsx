@@ -1,9 +1,12 @@
+import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
+import { Icon } from "@/components/njwds/Icon";
 import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { lookupNaicsCode } from "@/lib/domain-logic/lookupNaicsCode";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
@@ -11,6 +14,7 @@ import { ReactElement, useContext, useMemo } from "react";
 
 export const ProfileNaicsCode = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);
+  const { userData } = useUserData();
   const { Config } = useConfig();
   const { roadmap } = useRoadmap();
 
@@ -27,13 +31,38 @@ export const ProfileNaicsCode = (): ReactElement => {
     return `/tasks/${urlSlug}`;
   }, [roadmap]);
 
+  const shouldLockFieldForStartingAndNexus = (): boolean => {
+    return state.profileData.naicsCode !== "" && userData?.taxFilingData.state === "SUCCESS";
+  };
+
+  const shouldLockFieldForOwning = (): boolean => {
+    return state.profileData.naicsCode !== "" && state.profileData.operatingPhase === "UP_AND_RUNNING_OWNING";
+  };
+
+  const shouldLockField = (): boolean => {
+    return shouldLockFieldForStartingAndNexus() || shouldLockFieldForOwning();
+  };
+
   return (
     <>
       <div className="flex flex-row">
         <FieldLabelProfile fieldName="naicsCode" />
-        <a className="margin-left-2" href={naicsTaskUrl}>
-          {state.profileData.naicsCode ? contentFromConfig.editText : contentFromConfig.addText}
-        </a>
+        {shouldLockField() ? (
+          <div className="margin-left-2 margin-top-1">
+            <ArrowTooltip
+              title={Config.profileDefaults.lockedFieldTooltipText}
+              data-testid="naics-code-tooltip"
+            >
+              <div className="fdr fac font-body-lg">
+                <Icon>help_outline</Icon>
+              </div>
+            </ArrowTooltip>
+          </div>
+        ) : (
+          <a className="margin-left-2" href={naicsTaskUrl}>
+            {state.profileData.naicsCode ? contentFromConfig.editText : contentFromConfig.addText}
+          </a>
+        )}
       </div>
       {state.profileData.naicsCode && (
         <>
