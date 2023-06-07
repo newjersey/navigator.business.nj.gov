@@ -1,3 +1,4 @@
+import { parseDateWithFormat } from "@shared/dateHelpers";
 import { LicenseEntity, LicenseStatusResult } from "@shared/license";
 import { generateNameAndAddress } from "@shared/test";
 import { generateLicenseEntity } from "../../../test/factories";
@@ -170,6 +171,72 @@ describe("searchLicenseStatus", () => {
         },
       ])
     );
+  });
+
+  it("saves expirationDate as expirationISO if it exists", async () => {
+    stubLicenseStatusClient.search.mockResolvedValue([
+      generateLicenseEntity({
+        addressLine1: "1234 Main St",
+        applicationNumber: "12345",
+        checklistItem: "Item 1",
+        checkoffStatus: "Completed",
+        licenseStatus: "ACTIVE",
+        issueDate: undefined,
+        dateThisStatus: undefined,
+        expirationDate: "20210505 000000.000",
+      }),
+    ]);
+
+    const nameAndAddress = generateNameAndAddress({
+      addressLine1: "1234 Main St",
+    });
+
+    const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
+    expect(result.expirationISO).toEqual(parseDateWithFormat("20210505", "YYYYMMDD").toISOString());
+  });
+
+  it("does not save the expirationDate if invalid", async () => {
+    stubLicenseStatusClient.search.mockResolvedValue([
+      generateLicenseEntity({
+        addressLine1: "1234 Main St",
+        applicationNumber: "12345",
+        checklistItem: "Item 1",
+        checkoffStatus: "Completed",
+        licenseStatus: "ACTIVE",
+        issueDate: undefined,
+        dateThisStatus: undefined,
+        expirationDate: "20210",
+      }),
+    ]);
+
+    const nameAndAddress = generateNameAndAddress({
+      addressLine1: "1234 Main St",
+    });
+
+    const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
+    expect(result.expirationISO).toBeUndefined();
+  });
+
+  it("does not save the expirationDate if undefined", async () => {
+    stubLicenseStatusClient.search.mockResolvedValue([
+      generateLicenseEntity({
+        addressLine1: "1234 Main St",
+        applicationNumber: "12345",
+        checklistItem: "Item 1",
+        checkoffStatus: "Completed",
+        licenseStatus: "ACTIVE",
+        issueDate: undefined,
+        dateThisStatus: undefined,
+        expirationDate: undefined,
+      }),
+    ]);
+
+    const nameAndAddress = generateNameAndAddress({
+      addressLine1: "1234 Main St",
+    });
+
+    const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
+    expect(result.expirationISO).toBeUndefined();
   });
 
   it("uses expirationDate as the date of an entity if issueDate and dateThisStatus are undefined", async () => {

@@ -14,6 +14,11 @@ local_backend: true
 media_folder: web/public/img
 logo_url: https://dev.navigator.business.nj.gov/img/Navigator-logo.svg
 public_folder: web/public
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "_"
+
 collections:
   - name: "business-formation-label"
     label: "🟥 BUSINESS FORMATION"
@@ -2321,6 +2326,40 @@ collections:
               - { label: Failed Alert Text, name: failedErrorMessageHeader, widget: text }
               - { label: Unknown Failure Alert Text, name: failedUnknownMarkdown, widget: markdown }
 
+  - name: "licenses"
+    label: "Licenses - All"
+    folder: "content/src/licenses"
+    summary: "{{title}}"
+    identifier_field: "{{urlSlug}}"
+    slug: "{{urlSlug}}"
+    delete: true
+    create: true
+    editor:
+      preview: true
+    fields:
+      - {
+          label: "Industry Id",
+          name: "urlSlug",
+          widget: "relation",
+          collection: "roadmaps",
+          search_fields: ["{{name}}"],
+          options_length: 500,
+          required: true,
+          value_field: "{{id}}",
+          display_fields: ["{{name}}"],
+        }
+      - {
+          label: "Preview Type (CMS Only)",
+          name: "previewType",
+          widget: "select",
+          default: "expiration",
+          options: ["expiration", "renewal"],
+        }
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Content", name: "body", widget: "markdown", required: true }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+
   - name: "filings"
     label: "Taxes Filings - All"
     folder: "content/src/filings"
@@ -2665,6 +2704,17 @@ collections:
               - { label: Success Alert Header, name: snackbarSuccessHeader, widget: text }
               - { label: Success Alert Body, name: snackbarSuccessBody, widget: text }
               - { label: Access Open Modal Button, name: accessButton, widget: text }
+          - label: LicenseEvent Defaults
+            name: licenseEventDefaults
+            collapsed: true
+            widget: object
+            summary: "{{licenseEventDefaults}}"
+            fields:
+              - { label: Expiration Title Label, name: expirationTitleLabel, widget: string }
+              - { label: Renewal Title Label, name: renewalTitleLabel, widget: string }
+              - { label: Before Expiration Date Text, name: beforeExpirationDateText, widget: string }
+              - { label: Before Renewal Date Text, name: beforeRenewalDateText, widget: string }
+              - { label: Disclaimer Markdown, name: disclaimerMarkdown, widget: markdown }
 
           - label: Filing Defaults
             name: filingDefaults

@@ -136,7 +136,7 @@ const taxFilingInterface = taxFilingsInterfaceFactory(taxFilingClient);
 const addGovDeliveryNewsletter = addNewsletterFactory(govDeliveryNewsletterClient);
 const addToAirtableUserTesting = addToUserTestingFactory(airtableUserTestingClient);
 const searchLicenseStatus = searchLicenseStatusFactory(licenseStatusClient);
-const updateLicenseStatus = updateLicenseStatusFactory(userDataClient, searchLicenseStatus);
+const updateLicenseStatus = updateLicenseStatusFactory(searchLicenseStatus);
 const timeStampToBusinessSearch = timeStampBusinessSearch(businessNameClient);
 
 const myNJSelfRegClient = MyNJSelfRegClientFactory(
@@ -177,7 +177,7 @@ app.use(
   externalEndpointRouterFactory(userDataClient, addGovDeliveryNewsletter, addToAirtableUserTesting)
 );
 app.use("/api/guest", guestRouterFactory(timeStampToBusinessSearch));
-app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));
+app.use("/api", licenseStatusRouterFactory(updateLicenseStatus, userDataClient));
 app.use("/api", selfRegRouterFactory(userDataClient, selfRegClient));
 app.use("/api", formationRouterFactory(apiFormationClient, userDataClient, { shouldSaveDocuments }));
 app.use(

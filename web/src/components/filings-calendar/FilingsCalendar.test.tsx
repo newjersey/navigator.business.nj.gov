@@ -25,6 +25,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared/index";
 import {
+  generateLicenseData,
   generatePreferences,
   generateProfileData,
   generateTaxFiling,
@@ -476,6 +477,51 @@ describe("<FilingsCalendar />", () => {
     expect(
       screen.getByText(
         `Annual Report ${parseDateWithFormat(annualReport.dueDate, defaultDateFormat).format("YYYY")}`
+      )
+    ).toBeInTheDocument();
+  });
+
+  it("displays filings calendar as list with license events", () => {
+    const expirationDate = getCurrentDate().add(2, "months");
+
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        industryId: "home-contractor",
+        operatingPhase: randomElementFromArray(
+          OperatingPhases.filter((obj) => {
+            return obj.displayCalendarType === "LIST";
+          })
+        ).id,
+      }),
+      licenseData: generateLicenseData({ expirationISO: expirationDate.toISOString(), status: "ACTIVE" }),
+      taxFilingData: generateTaxFilingData({
+        filings: [
+          generateTaxFiling({
+            identifier: "annual-report",
+            dueDate: getCurrentDate().add(1, "months").format(defaultDateFormat),
+          }),
+        ],
+      }),
+      preferences: generatePreferences({ isCalendarFullView: false }),
+    });
+
+    const operateReferences: Record<string, OperateReference> = {
+      "annual-report": {
+        name: "Annual Report",
+        urlSlug: "annual-report-url",
+        urlPath: "annual_report-url-path",
+      },
+    };
+
+    renderFilingsCalendar(operateReferences, userData);
+
+    expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
+    expect(screen.getByText(expirationDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        `Home Improvement Contractors ${
+          Config.licenseEventDefaults.expirationTitleLabel
+        } ${expirationDate.year()}`
       )
     ).toBeInTheDocument();
   });

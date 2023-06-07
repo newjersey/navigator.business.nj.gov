@@ -3,8 +3,8 @@ import { FilingsCalendarSingleGrid } from "@/components/filings-calendar/Filings
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import {
   isCalendarMonthLessThanCurrentMonth,
-  sortFilterFilingsWithinAYear,
-} from "@/lib/domain-logic/filterFilings";
+  sortFilterCalendarEventsWithinAYear,
+} from "@/lib/domain-logic/filterCalendarEvents";
 import { OperateReference } from "@/lib/types/types";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
@@ -27,7 +27,8 @@ export const FilingsCalendarGrid = (props: Props): ReactElement => {
 
   return (
     <div>
-      {sortFilterFilingsWithinAYear(props.userData.taxFilingData.filings, props.activeYear).length === 0 && (
+      {sortFilterCalendarEventsWithinAYear(props.userData.taxFilingData.filings, props.activeYear).length ===
+        0 && (
         <Content className="text-base margin-bottom-3">
           {Config.dashboardDefaults.calendarEmptyDescriptionMarkdown}
         </Content>

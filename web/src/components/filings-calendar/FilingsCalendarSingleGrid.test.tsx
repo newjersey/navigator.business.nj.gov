@@ -7,7 +7,7 @@ import {
   generateUserData,
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
-import { generateTaxFiling } from "@businessnjgovnavigator/shared/test";
+import { generateLicenseData, generateTaxFiling } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Dayjs } from "dayjs";
 import { FilingsCalendarSingleGrid } from "./FilingsCalendarSingleGrid";
@@ -16,6 +16,7 @@ const Config = getMergedConfig();
 const currentDate = parseDateWithFormat(`2024-02-15`, "YYYY-MM-DD");
 const year = currentDate.year().toString();
 const month: number = Number.parseInt(currentDate.month().toString());
+
 function mockShared(): typeof shared {
   return {
     ...jest.requireActual("@businessnjgovnavigator/shared"),
@@ -148,6 +149,46 @@ describe("<FilingsCalendarSingleGrid />", () => {
     expect(screen.queryByText("Tax Filing One")).not.toBeInTheDocument();
   });
 
+  it("renders a licenseEvent expiration task", () => {
+    const licenseData = generateLicenseData({
+      expirationISO: currentDate.add(4, "days").toISOString(),
+      status: "ACTIVE",
+    });
+    const userData = generateUserData({
+      licenseData,
+    });
+    render(
+      <FilingsCalendarSingleGrid
+        userData={userData}
+        operateReferences={operateReferences}
+        num={month}
+        activeYear={currentDate.year().toString()}
+      />
+    );
+
+    expect(screen.getByTestId("license-expiration")).toBeInTheDocument();
+  });
+
+  it("renders a licenseEvent renewal task", () => {
+    const licenseData = generateLicenseData({
+      expirationISO: currentDate.add(4, "days").toISOString(),
+      status: "ACTIVE",
+    });
+    const userData = generateUserData({
+      licenseData,
+    });
+    render(
+      <FilingsCalendarSingleGrid
+        userData={userData}
+        operateReferences={operateReferences}
+        num={currentDate.add(1, "month").month()}
+        activeYear={currentDate.year().toString()}
+      />
+    );
+
+    expect(screen.getByTestId("license-renewal")).toBeInTheDocument();
+  });
+
   it("does not render expand collapse button when there are only two tax filings", () => {
     const userData = generateUserData({
       taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo] }),
@@ -165,6 +206,31 @@ describe("<FilingsCalendarSingleGrid />", () => {
     expect(screen.getByText("Tax Filing Two")).toBeInTheDocument();
     expect(screen.queryByText(Config.dashboardDefaults.viewMoreFilingsButton)).not.toBeInTheDocument();
     expect(screen.queryByText(Config.dashboardDefaults.viewLessFilingsButton)).not.toBeInTheDocument();
+  });
+
+  it("always shows a licenseEvent even with 2+ tax filings", () => {
+    const userData = generateUserData({
+      licenseData: generateLicenseData({
+        expirationISO: currentDate.add(4, "days").toISOString(),
+        status: "ACTIVE",
+      }),
+      taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo, taxFilingThree] }),
+    });
+    render(
+      <FilingsCalendarSingleGrid
+        userData={userData}
+        operateReferences={operateReferences}
+        num={month}
+        activeYear={year}
+      />
+    );
+
+    expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
+    expect(screen.getByTestId("license-expiration")).toBeInTheDocument();
+    expect(screen.queryByText("Tax Filing Two")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText(Config.dashboardDefaults.viewMoreFilingsButton));
+    expect(screen.getByText("Tax Filing Two")).toBeInTheDocument();
+    expect(screen.getByText("Tax Filing Three")).toBeInTheDocument();
   });
 
   it("shows and hides the additional tax filings when the view more / view less button is clicked", () => {
