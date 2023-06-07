@@ -1,4 +1,4 @@
-import { getLicenseDate, parseDateWithFormat } from "@shared/dateHelpers";
+import { getLicenseDate } from "@shared/dateHelpers";
 import { LicenseStatus, LicenseStatusItem, LicenseStatusResult, NameAndAddress } from "@shared/license";
 import { inputManipulator } from "../inputManipulator";
 import { LicenseStatusClient, SearchLicenseStatus } from "../types";
@@ -40,10 +40,6 @@ export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusCli
 
     return {
       status: determineLicenseStatus(match.licenseStatus),
-      expirationISO:
-        match.expirationDate === undefined || match.expirationDate.length < 8
-          ? undefined
-          : parseDateWithFormat(match.expirationDate, "YYYYMMDD X").toISOString(),
       checklistItems: items,
     };
   };

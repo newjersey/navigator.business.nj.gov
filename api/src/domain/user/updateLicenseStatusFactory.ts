@@ -1,48 +1,51 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getCurrentDateISOString } from "@shared/dateHelpers";
-import { LicenseStatusResult, NameAndAddress } from "@shared/license";
+import { LicenseStatus, LicenseStatusItem, LicenseStatusResult, NameAndAddress } from "@shared/license";
 import { TaskProgress, UserData } from "@shared/userData";
 import { convertIndustryToLicenseType } from "../license-status/convertIndustryToLicenseType";
-import { SearchLicenseStatus, UpdateLicenseStatus } from "../types";
+import { SearchLicenseStatus, UpdateLicenseStatus, UserDataClient } from "../types";
 
-const update = (
-  userData: UserData,
-  args: {
+export const updateLicenseStatusFactory = (
+  userDataClient: UserDataClient,
+  searchLicenseStatus: SearchLicenseStatus
+): UpdateLicenseStatus => {
+  const update = (args: {
+    userData: UserData;
     nameAndAddress: NameAndAddress;
     taskStatus: TaskProgress;
-    licenseStatusResult: LicenseStatusResult;
+    licenseStatus: LicenseStatus;
+    items: LicenseStatusItem[];
     completed: boolean;
-  }
-): UserData => {
-  const updatedValues = {
-    taskProgress: {
-      ...userData.taskProgress,
-      "apply-for-shop-license": args.taskStatus,
-      "register-consumer-affairs": args.taskStatus,
-      "pharmacy-license": args.taskStatus,
-      "license-accounting": args.taskStatus,
-      "license-massage-therapy": args.taskStatus,
-      "moving-company-license": args.taskStatus,
-      "architect-license": args.taskStatus,
-      "hvac-license": args.taskStatus,
-      "appraiser-license": args.taskStatus,
-    },
-    licenseData: {
-      nameAndAddress: args.nameAndAddress,
-      completedSearch: args.completed,
-      expirationISO: args.licenseStatusResult.expirationISO,
-      lastUpdatedISO: getCurrentDateISOString(),
-      status: args.licenseStatusResult.status,
-      items: args.licenseStatusResult.checklistItems,
-    },
+  }): Promise<UserData> => {
+    const updatedValues = {
+      taskProgress: {
+        ...args.userData.taskProgress,
+        "apply-for-shop-license": args.taskStatus,
+        "register-consumer-affairs": args.taskStatus,
+        "pharmacy-license": args.taskStatus,
+        "license-accounting": args.taskStatus,
+        "license-massage-therapy": args.taskStatus,
+        "moving-company-license": args.taskStatus,
+        "architect-license": args.taskStatus,
+        "hvac-license": args.taskStatus,
+        "appraiser-license": args.taskStatus,
+      },
+      licenseData: {
+        nameAndAddress: args.nameAndAddress,
+        completedSearch: args.completed,
+        lastUpdatedISO: getCurrentDateISOString(),
+        status: args.licenseStatus,
+        items: args.items,
+      },
+    };
+
+    return userDataClient.put({ ...args.userData, ...updatedValues });
   };
 
-  return { ...userData, ...updatedValues };
-};
-
-export const updateLicenseStatusFactory = (searchLicenseStatus: SearchLicenseStatus): UpdateLicenseStatus => {
-  return async (userData: UserData, nameAndAddress: NameAndAddress): Promise<UserData> => {
+  return async (userId: string, nameAndAddress: NameAndAddress): Promise<UserData> => {
+    const userData = await userDataClient.get(userId);
     const licenseType = convertIndustryToLicenseType(userData.profileData.industryId);
+
     return searchLicenseStatus(nameAndAddress, licenseType)
       .then((licenseStatusResult: LicenseStatusResult) => {
         let taskStatus: TaskProgress = "NOT_STARTED";
@@ -52,22 +55,34 @@ export const updateLicenseStatusFactory = (searchLicenseStatus: SearchLicenseSta
           taskStatus = "IN_PROGRESS";
         }
 
-        return update(userData, {
+        return update({
+          userData: userData,
           nameAndAddress: nameAndAddress,
           taskStatus: taskStatus,
-          licenseStatusResult: licenseStatusResult,
+          licenseStatus: licenseStatusResult.status,
+          items: licenseStatusResult.checklistItems,
           completed: true,
         });
       })
       .catch(async (error) => {
         if (error === "NO_MATCH") {
-          return update(userData, {
+          return update({
+            userData: userData,
             nameAndAddress: nameAndAddress,
             taskStatus: "NOT_STARTED",
-            licenseStatusResult: { status: "UNKNOWN", checklistItems: [] },
+            licenseStatus: "UNKNOWN",
+            items: [],
             completed: false,
           });
         } else {
+          await update({
+            userData: userData,
+            nameAndAddress: nameAndAddress,
+            taskStatus: "NOT_STARTED",
+            licenseStatus: "UNKNOWN",
+            items: [],
+            completed: false,
+          });
           throw error;
         }
       });

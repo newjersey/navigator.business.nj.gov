@@ -8,12 +8,13 @@ import {
   generateUserData,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
-import { UpdateLicenseStatus } from "../types";
+import { UpdateLicenseStatus, UserDataClient } from "../types";
 import { updateLicenseStatusFactory } from "./updateLicenseStatusFactory";
 
 describe("updateLicenseStatus", () => {
   let updateLicenseStatus: UpdateLicenseStatus;
 
+  let stubUserDataClient: jest.Mocked<UserDataClient>;
   let stubSearchLicenseStatus: jest.Mock;
   let userData: UserData;
   const nameAndAddress = generateNameAndAddress({});
@@ -21,7 +22,15 @@ describe("updateLicenseStatus", () => {
   beforeEach(async () => {
     jest.resetAllMocks();
     stubSearchLicenseStatus = jest.fn();
-    updateLicenseStatus = updateLicenseStatusFactory(stubSearchLicenseStatus);
+    stubUserDataClient = {
+      get: jest.fn(),
+      put: jest.fn(),
+      findByEmail: jest.fn(),
+      getNeedNewsletterUsers: jest.fn(),
+      getNeedToAddToUserTestingUsers: jest.fn(),
+      getNeedTaxIdEncryptionUsers: jest.fn(),
+    };
+    updateLicenseStatus = updateLicenseStatusFactory(stubUserDataClient, stubSearchLicenseStatus);
 
     userData = generateUserData({
       profileData: generateProfileData({
@@ -31,12 +40,16 @@ describe("updateLicenseStatus", () => {
         lastUpdatedISO: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
       }),
     });
+    stubUserDataClient.get.mockResolvedValue(userData);
+    stubUserDataClient.put.mockImplementation((userData: UserData): Promise<UserData> => {
+      return Promise.resolve(userData);
+    });
   });
 
   it("searches for license status with criteria and license type", async () => {
     stubSearchLicenseStatus.mockResolvedValue(generateLicenseStatusResult({}));
 
-    await updateLicenseStatus(userData, nameAndAddress);
+    await updateLicenseStatus("some-id", nameAndAddress);
     expect(stubSearchLicenseStatus).toHaveBeenCalledWith(
       {
         name: nameAndAddress.name,
@@ -52,32 +65,25 @@ describe("updateLicenseStatus", () => {
     const checklistItems = [generateLicenseStatusItem({})];
     stubSearchLicenseStatus.mockResolvedValue({
       status: "ACTIVE",
-      expirationISO: "2020-01-01T00:00:00.000Z",
       checklistItems: checklistItems,
     });
 
-    userData = {
-      ...userData,
-      licenseData: generateLicenseData({
-        expirationISO: getCurrentDate().add(1, "year").subtract(1, "minute").toISOString(),
-      }),
-    };
-
-    const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+    const resultUserData = await updateLicenseStatus("some-id", nameAndAddress);
 
     expect(resultUserData.licenseData?.nameAndAddress).toEqual(nameAndAddress);
     expect(resultUserData.licenseData?.completedSearch).toEqual(true);
-    expect(resultUserData.licenseData?.expirationISO).toEqual("2020-01-01T00:00:00.000Z");
     expect(
       parseDate(resultUserData.licenseData?.lastUpdatedISO as string).isSame(getCurrentDate(), "minute")
     ).toEqual(true);
     expect(resultUserData.licenseData?.status).toEqual("ACTIVE");
     expect(resultUserData.licenseData?.items).toEqual(checklistItems);
+
+    expect(stubUserDataClient.put).toHaveBeenCalledWith(resultUserData);
   });
 
   it("updates the license task status to NOT_STARTED & user license data when NO MATCH", async () => {
     stubSearchLicenseStatus.mockRejectedValue("NO_MATCH");
-    const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+    const resultUserData = await updateLicenseStatus("some-id", nameAndAddress);
 
     expect(resultUserData.licenseData?.nameAndAddress).toEqual(nameAndAddress);
     expect(resultUserData.licenseData?.completedSearch).toEqual(false);
@@ -96,11 +102,14 @@ describe("updateLicenseStatus", () => {
     expect(resultUserData.taskProgress["architect-license"]).toEqual("NOT_STARTED");
     expect(resultUserData.taskProgress["hvac-license"]).toEqual("NOT_STARTED");
     expect(resultUserData.taskProgress["appraiser-license"]).toEqual("NOT_STARTED");
+
+    expect(stubUserDataClient.put).toHaveBeenCalledWith(resultUserData);
   });
 
   it("rejects and still updates user license data when generic error", async () => {
     stubSearchLicenseStatus.mockRejectedValue("some-error");
-    await expect(updateLicenseStatus(userData, nameAndAddress)).rejects.toEqual("some-error");
+    await expect(updateLicenseStatus("some-id", nameAndAddress)).rejects.toEqual("some-error");
+    expect(stubUserDataClient.put).toHaveBeenCalled();
   });
 
   it("updates the license task status to IN_PROGRESS when license is pending", async () => {
@@ -109,7 +118,7 @@ describe("updateLicenseStatus", () => {
       checklistItems: [],
     });
 
-    const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+    const resultUserData = await updateLicenseStatus("some-id", nameAndAddress);
 
     expect(resultUserData.taskProgress["apply-for-shop-license"]).toEqual("IN_PROGRESS");
     expect(resultUserData.taskProgress["register-consumer-affairs"]).toEqual("IN_PROGRESS");
@@ -128,7 +137,7 @@ describe("updateLicenseStatus", () => {
       checklistItems: [],
     });
 
-    const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+    const resultUserData = await updateLicenseStatus("some-id", nameAndAddress);
 
     expect(resultUserData.taskProgress["apply-for-shop-license"]).toEqual("COMPLETED");
     expect(resultUserData.taskProgress["register-consumer-affairs"]).toEqual("COMPLETED");

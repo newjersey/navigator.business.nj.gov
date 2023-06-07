@@ -112,12 +112,12 @@ export const userRouterFactory = (
     userDataClient
       .get(req.params.userId)
       .then(async (userData: UserData) => {
-        let updatedUserData = userData;
-        updatedUserData = await updateBusinessNameSearchIfNeeded(updatedUserData);
-        updatedUserData = updateOperatingPhase(updatedUserData);
-        updatedUserData = updateRoadmapSidebarCards(updatedUserData);
+        updateAndSaveLicenseStatusIfNeeded(userData);
+
+        const updatedBusinessNameSearchData = await updateBusinessNameSearchIfNeeded(userData);
+        const updatedOperatingPhaseData = updateOperatingPhase(updatedBusinessNameSearchData);
+        const updatedUserData = updateRoadmapSidebarCards(updatedOperatingPhaseData);
         await userDataClient.put(updatedUserData);
-        asyncUpdateAndSaveLicenseStatusIfNeeded(updatedUserData);
         res.json(updatedUserData);
       })
       .catch((error) => {
@@ -253,16 +253,18 @@ export const userRouterFactory = (
     }
   };
 
-  const asyncUpdateAndSaveLicenseStatusIfNeeded = async (userData: UserData): Promise<void> => {
+  const updateAndSaveLicenseStatusIfNeeded = (userData: UserData): void => {
     if (!userData.licenseData || !shouldCheckLicense(userData)) {
       return;
     }
-    try {
-      const updatedUserData = await updateLicenseStatus(userData, userData.licenseData.nameAndAddress);
-      await userDataClient.put(updatedUserData);
-    } catch {
-      return;
-    }
+
+    updateLicenseStatus(userData.user.id, userData.licenseData.nameAndAddress)
+      .then(() => {
+        return;
+      })
+      .catch(() => {
+        return;
+      });
   };
 
   return router;

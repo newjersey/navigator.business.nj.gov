@@ -5,7 +5,6 @@ export type LicenseStatusItem = {
 
 export type LicenseStatusResult = {
   status: LicenseStatus;
-  expirationISO?: string;
   checklistItems: LicenseStatusItem[];
 };
 
@@ -28,7 +27,6 @@ export type LicenseStatus =
 export interface LicenseData {
   nameAndAddress: NameAndAddress;
   completedSearch: boolean;
-  expirationISO?: string;
   lastUpdatedISO: string;
   status: LicenseStatus;
   items: LicenseStatusItem[];
