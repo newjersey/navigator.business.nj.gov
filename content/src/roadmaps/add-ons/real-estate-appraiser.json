@@ -1,8 +1,8 @@
 {
     "roadmapSteps": [
       {
-        "step": 1,
-        "weight": 6,
+        "step": 3,
+        "weight": 20,
         "task": "appraiser-license",
         "required": true
       }
