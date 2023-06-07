@@ -27,18 +27,18 @@ export const LicenseEvent = (props: Props): ReactElement | null => {
   }
 
   const urlSlug = `licenses/${props.industryId}-${props.licenseEvent.type}`;
+  const displayTitle = `${LookupIndustryById(props.industryId).name} ${titles[props.licenseEvent.type]}`;
+
+  const onClick = (): void => {
+    analytics.event.calendar_date.click.go_to_date_detail_screen();
+  };
 
   if (props.index !== undefined) {
     return (
       <div className={`margin-bottom-05 ${props.index === 0 ? "margin-top-05" : ""}`}>
-        <Link href={`licenses/${props.industryId}-${props.licenseEvent.type}`} passHref>
-          <a
-            href={`licenses/${props.industryId}-${props.licenseEvent.type}`}
-            onClick={(): void => {
-              analytics.event.calendar_date.click.go_to_date_detail_screen();
-            }}
-          >
-            {LookupIndustryById(props.industryId).name} {titles[props.licenseEvent.type]}
+        <Link href={urlSlug} passHref>
+          <a href={urlSlug} onClick={onClick}>
+            {displayTitle}
           </a>
         </Link>
       </div>
@@ -52,15 +52,14 @@ export const LicenseEvent = (props: Props): ReactElement | null => {
           <a
             href={urlSlug}
             data-testid={props.industryId}
+            onClick={onClick}
             className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline"
           >
             <span className="text-bold text-uppercase text-base-dark">
               {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
               {parseDateWithFormat(props.licenseEvent.dueDate, defaultDateFormat).format("M/D")}
             </span>{" "}
-            <span className="text-no-uppercase text-underline text-base-dark">
-              {LookupIndustryById(props.industryId).name} {titles[props.licenseEvent.type]}
-            </span>
+            <span className="text-no-uppercase text-underline text-base-dark">{displayTitle}</span>
           </a>
         </Link>
       </Tag>
