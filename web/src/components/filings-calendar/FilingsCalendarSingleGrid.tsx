@@ -1,3 +1,4 @@
+import { LicenseEvent } from "@/components/filings-calendar/LicenseEvent";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import {
@@ -5,7 +6,7 @@ import {
   sortFilterCalendarEventsWithinAYear,
 } from "@/lib/domain-logic/filterCalendarEvents";
 import { getLicenseCalendarEvent } from "@/lib/domain-logic/getLicenseCalendarEvent";
-import { LicenseCalendarEvent, LicenseEventType, OperateReference } from "@/lib/types/types";
+import { OperateReference } from "@/lib/types/types";
 import {
   defaultDateFormat,
   getCurrentDate,
@@ -46,47 +47,12 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
   const remainingFilings = thisMonthFilings.slice(NUM_OF_FILINGS_ALWAYS_VIEWABLE);
   const isOnCurrentYear = getCurrentDate().year().toString() === props.activeYear;
 
-  const licenseEvent = getLicenseCalendarEvent(
-    props.userData?.licenseData,
-    date.year(),
-    props.userData.profileData.industryId,
-    date.month()
-  );
+  const licenseEvent = getLicenseCalendarEvent(props.userData?.licenseData, date.year(), date.month());
 
   if (licenseEvent.length > 0 && visibleFilings.length === NUM_OF_FILINGS_ALWAYS_VIEWABLE) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     remainingFilings.unshift(visibleFilings.pop()!);
   }
-
-  const renderLicense = (licenseEvent: LicenseCalendarEvent | undefined): ReactNode => {
-    const titles: Record<LicenseEventType, string> = {
-      expiration: Config.licenseEventDefaults.expirationTitleLabel,
-      renewal: Config.licenseEventDefaults.renewalTitleLabel,
-    };
-    return (
-      licenseEvent && (
-        <div className="line-height-1 margin-bottom-1" data-testid={`license-${licenseEvent.type}`}>
-          <Tag backgroundColor="accent-warm-extra-light" isHover isRadiusMd isWrappingText>
-            <Link href={`licenses/${licenseEvent.licenseType}-${licenseEvent.type}`}>
-              <a
-                href={`licenses/${licenseEvent.licenseType}-${licenseEvent.type}`}
-                data-testid={licenseEvent.licenseType.toLowerCase()}
-                className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline"
-              >
-                <span className="text-bold text-uppercase text-base-dark">
-                  {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
-                  {parseDateWithFormat(licenseEvent.dueDate, defaultDateFormat).format("M/D")}
-                </span>{" "}
-                <span className="text-no-uppercase text-underline text-base-dark">
-                  {licenseEvent.licenseType} {titles[licenseEvent.type]}
-                </span>
-              </a>
-            </Link>
-          </Tag>
-        </div>
-      )
-    );
-  };
 
   const renderFilings = (filings: TaxFiling[]): ReactNode => {
     return filings
@@ -134,7 +100,7 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
       ) : (
         <>
           {renderFilings(visibleFilings)}
-          {renderLicense(licenseEvent[0])}
+          <LicenseEvent licenseEvent={licenseEvent[0]} industryId={props.userData.profileData.industryId} />
           {remainingFilings.length > 0 && showExpandFilingsButton && (
             <>
               {renderFilings(remainingFilings)}

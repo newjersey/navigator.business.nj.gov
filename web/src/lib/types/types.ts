@@ -396,7 +396,6 @@ export type LicenseEventType = "expiration" | "renewal";
 export interface LicenseCalendarEvent {
   dueDate: string;
   type: LicenseEventType;
-  licenseType: string;
   eventType: "licenses";
 }
 
