@@ -2,10 +2,9 @@ import { Tag } from "@/components/njwds-extended/Tag";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import {
   isCalendarMonthLessThanCurrentMonth,
-  sortFilterCalendarEventsWithinAYear,
-} from "@/lib/domain-logic/filterCalendarEvents";
-import { getLicenseCalendarEvent } from "@/lib/domain-logic/getLicenseCalendarEvent";
-import { LicenseCalendarEvent, LicenseEventType, OperateReference } from "@/lib/types/types";
+  sortFilterFilingsWithinAYear,
+} from "@/lib/domain-logic/filterFilings";
+import { OperateReference } from "@/lib/types/types";
 import {
   defaultDateFormat,
   getCurrentDate,
@@ -32,7 +31,7 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
   const [showExpandFilingsButton, setShowExpandFilingsButton] = useState(false);
   const date = getJanOfYear(parseDateWithFormat(props.activeYear, "YYYY")).add(props.num, "months");
   const sortedFilteredFilingsWithinAYear: TaxFiling[] = props.userData?.taxFilingData.filings
-    ? sortFilterCalendarEventsWithinAYear(props.userData.taxFilingData.filings, props.activeYear)
+    ? sortFilterFilingsWithinAYear(props.userData.taxFilingData.filings, props.activeYear)
     : [];
 
   const thisMonthFilings = sortedFilteredFilingsWithinAYear.filter((it) => {
@@ -42,51 +41,9 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
     );
   });
 
-  const visibleFilings = thisMonthFilings.slice(0, NUM_OF_FILINGS_ALWAYS_VIEWABLE);
+  const firstTwoFilings = thisMonthFilings.slice(0, NUM_OF_FILINGS_ALWAYS_VIEWABLE);
   const remainingFilings = thisMonthFilings.slice(NUM_OF_FILINGS_ALWAYS_VIEWABLE);
   const isOnCurrentYear = getCurrentDate().year().toString() === props.activeYear;
-
-  const licenseEvent = getLicenseCalendarEvent(
-    props.userData?.licenseData,
-    date.year(),
-    props.userData.profileData.industryId,
-    date.month()
-  );
-
-  if (licenseEvent && visibleFilings.length === NUM_OF_FILINGS_ALWAYS_VIEWABLE) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    remainingFilings.unshift(visibleFilings.pop()!);
-  }
-
-  const renderLicense = (licenseEvent: LicenseCalendarEvent | undefined): ReactNode => {
-    const titles: Record<LicenseEventType, string> = {
-      expiration: Config.licenseEventDefaults.expirationTitleLabel,
-      renewal: Config.licenseEventDefaults.renewalTitleLabel,
-    };
-    return (
-      licenseEvent && (
-        <div className="line-height-1 margin-bottom-1" data-testid={`license-${licenseEvent.type}`}>
-          <Tag backgroundColor="accent-warm-extra-light" isHover isRadiusMd isWrappingText>
-            <Link href={`licenses/${licenseEvent.licenseType}-${licenseEvent.type}`}>
-              <a
-                href={`licenses/${licenseEvent.licenseType}-${licenseEvent.type}`}
-                data-testid={licenseEvent.licenseType.toLowerCase()}
-                className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline"
-              >
-                <span className="text-bold text-uppercase text-base-dark">
-                  {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
-                  {parseDateWithFormat(licenseEvent.dueDate, defaultDateFormat).format("M/D")}
-                </span>{" "}
-                <span className="text-no-uppercase text-underline text-base-dark">
-                  {licenseEvent.licenseType} {titles[licenseEvent.type]}
-                </span>
-              </a>
-            </Link>
-          </Tag>
-        </div>
-      )
-    );
-  };
 
   const renderFilings = (filings: TaxFiling[]): ReactNode => {
     return filings
@@ -133,8 +90,7 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
         <></>
       ) : (
         <>
-          {renderFilings(visibleFilings)}
-          {renderLicense(licenseEvent[0])}
+          {renderFilings(firstTwoFilings)}
           {remainingFilings.length > 0 && showExpandFilingsButton && (
             <>
               {renderFilings(remainingFilings)}

@@ -1,9 +1,8 @@
 import { Content } from "@/components/Content";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { sortFilterCalendarEventsWithinAYear } from "@/lib/domain-logic/filterCalendarEvents";
-import { getLicenseCalendarEvent } from "@/lib/domain-logic/getLicenseCalendarEvent";
-import { LicenseCalendarEvent, LicenseEventType, OperateReference } from "@/lib/types/types";
+import { sortFilterFilingsWithinAYear } from "@/lib/domain-logic/filterFilings";
+import { OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { groupBy } from "@/lib/utils/helpers";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
@@ -21,10 +20,6 @@ interface Props {
   operateReferences: Record<string, OperateReference>;
 }
 
-interface TaxCalendarEvent extends TaxFiling {
-  eventType: "filing";
-}
-
 export const FilingsCalendarAsList = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const [numberOfVisibleCalendarEntries, setNumberOfVisibleCalendarEntries] =
@@ -34,28 +29,11 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
     setNumberOfVisibleCalendarEntries(LIST_VIEW_MORE_INCREMENT);
   }, [props.activeYear]);
 
-  const typedFilingEvents: TaxCalendarEvent[] = props.userData.taxFilingData.filings
-    ? (props.userData.taxFilingData.filings?.map((filing) => {
-        (filing as TaxCalendarEvent)["eventType"] = "filing";
-        return filing;
-      }) as TaxCalendarEvent[])
+  const sortedFilteredFilingsWithinAYear: TaxFiling[] = props.userData?.taxFilingData.filings
+    ? sortFilterFilingsWithinAYear(props.userData.taxFilingData.filings, props.activeYear)
     : [];
 
-  const typedLicenseEvents = getLicenseCalendarEvent(
-    props.userData?.licenseData,
-    Number.parseInt(props.activeYear),
-    props.userData.profileData.industryId
-  );
-
-  const sortedFilteredEventsWithinAYear: Array<TaxCalendarEvent | LicenseCalendarEvent> = props.userData
-    ?.taxFilingData.filings
-    ? sortFilterCalendarEventsWithinAYear<TaxCalendarEvent | LicenseCalendarEvent>(
-        [...typedLicenseEvents, ...typedFilingEvents],
-        props.activeYear
-      )
-    : [];
-
-  if (sortedFilteredEventsWithinAYear.length === 0) {
+  if (sortedFilteredFilingsWithinAYear.length === 0) {
     return (
       <>
         <Content className="text-base margin-bottom-3">
@@ -68,83 +46,53 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
     );
   }
 
-  const EventsGroupedByDate = groupBy(
-    sortedFilteredEventsWithinAYear.filter((event) => {
-      if (event.eventType === "filing") {
-        return props.operateReferences[event.identifier];
-      }
-      return true;
+  const filingsGroupedByDate = groupBy(
+    sortedFilteredFilingsWithinAYear.filter((filing) => {
+      return props.operateReferences[filing.identifier];
     }),
     (value) => value.dueDate
   );
 
-  const visibleEvents = EventsGroupedByDate.slice(0, numberOfVisibleCalendarEntries);
+  const visibleFilings = filingsGroupedByDate.slice(0, numberOfVisibleCalendarEntries);
 
   return (
     <div data-testid="filings-calendar-as-list">
-      {visibleEvents.map((events) => {
+      {visibleFilings.map((filings) => {
         return (
           <div
             className="flex margin-bottom-2 minh-6"
-            key={events[0].dueDate}
+            key={filings[0].dueDate}
             data-testid="calendar-list-entry"
           >
             <div className="width-05 bg-primary minw-05" />
             <div className="margin-left-205">
               <div className="text-bold">
-                {parseDateWithFormat(events[0].dueDate, defaultDateFormat).format("MMMM D, YYYY")}
+                {parseDateWithFormat(filings[0].dueDate, defaultDateFormat).format("MMMM D, YYYY")}
               </div>
-              {events.map((event, index) => {
-                if (event.eventType === "filing") {
-                  return (
-                    <div
-                      key={`${event.identifier}-${event.dueDate}`}
-                      className={`margin-bottom-05 ${index === 0 ? "margin-top-05" : ""}`}
+              {filings.map((filing, index) => (
+                <div
+                  key={`${filing.identifier}-${filing.dueDate}`}
+                  className={`margin-bottom-05 ${index === 0 ? "margin-top-05" : ""}`}
+                >
+                  <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`} passHref>
+                    <a
+                      href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
+                      onClick={(): void => {
+                        analytics.event.calendar_date.click.go_to_date_detail_screen();
+                      }}
                     >
-                      <Link href={`filings/${props.operateReferences[event.identifier].urlSlug}`} passHref>
-                        <a
-                          href={`filings/${props.operateReferences[event.identifier].urlSlug}`}
-                          onClick={(): void => {
-                            analytics.event.calendar_date.click.go_to_date_detail_screen();
-                          }}
-                        >
-                          {props.operateReferences[event.identifier].name}{" "}
-                          {parseDateWithFormat(event.dueDate, defaultDateFormat).format("YYYY")}
-                        </a>
-                      </Link>
-                    </div>
-                  );
-                } else if (event.eventType === "licenses") {
-                  const titles: Record<LicenseEventType, string> = {
-                    expiration: Config.licenseEventDefaults.expirationTitleLabel,
-                    renewal: Config.licenseEventDefaults.renewalTitleLabel,
-                  };
-                  return (
-                    <div
-                      key={`${event.licenseType}-${event.dueDate}`}
-                      className={`margin-bottom-05 ${index === 0 ? "margin-top-05" : ""}`}
-                    >
-                      <Link href={`licenses/${event.licenseType}-${event.type}`} passHref>
-                        <a
-                          href={`licenses/${event.licenseType}-${event.type}`}
-                          onClick={(): void => {
-                            analytics.event.calendar_date.click.go_to_date_detail_screen();
-                          }}
-                        >
-                          {event.licenseType} {titles[event.type]}{" "}
-                          {parseDateWithFormat(event.dueDate, defaultDateFormat).format("YYYY")}
-                        </a>
-                      </Link>
-                    </div>
-                  );
-                }
-              })}
+                      {props.operateReferences[filing.identifier].name}{" "}
+                      {parseDateWithFormat(filing.dueDate, defaultDateFormat).format("YYYY")}
+                    </a>
+                  </Link>
+                </div>
+              ))}
             </div>
           </div>
         );
       })}
 
-      {EventsGroupedByDate.length > numberOfVisibleCalendarEntries && (
+      {filingsGroupedByDate.length > numberOfVisibleCalendarEntries && (
         <UnStyledButton
           style={"tertiary"}
           underline={true}
