@@ -53,7 +53,7 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
     date.month()
   );
 
-  if (licenseEvent.length > 0 && visibleFilings.length === NUM_OF_FILINGS_ALWAYS_VIEWABLE) {
+  if (licenseEvent && visibleFilings.length === NUM_OF_FILINGS_ALWAYS_VIEWABLE) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     remainingFilings.unshift(visibleFilings.pop()!);
   }
