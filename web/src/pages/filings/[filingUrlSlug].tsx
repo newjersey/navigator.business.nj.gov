@@ -181,9 +181,7 @@ export const FilingElement = (props: {
 const FilingPage = (props: Props): ReactElement => {
   const { userData } = useUserData();
   const matchingFiling = sortCalendarEventsEarliestToLatest(userData?.taxFilingData.filings ?? []).find(
-    (it: TaxFiling) => {
-      return it.identifier === props.filing.id;
-    }
+    (it: TaxFiling) => it.identifier === props.filing.id
   );
 
   return (
