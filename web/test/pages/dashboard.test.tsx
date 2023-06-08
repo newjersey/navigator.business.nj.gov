@@ -32,6 +32,7 @@ import {
 import {
   defaultDateFormat,
   generateProfileData,
+  generateTaxFilingCalendarEvent,
   generateTaxFilingData,
   generateUserData,
   getCurrentDate,
@@ -40,7 +41,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhase } from "@businessnjgovnavigator/shared/src/operatingPhase";
-import { generatePreferences, generateTaxFiling } from "@businessnjgovnavigator/shared/test";
+import { generatePreferences } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -364,7 +365,7 @@ describe("dashboard page", () => {
 
   it("displays filings calendar as list when taxfiling is populated and operatingPhase has ListCalendar", () => {
     const dueDate = getCurrentDate().add(1, "days");
-    const annualReport = generateTaxFiling({
+    const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
       dueDate: dueDate.format(defaultDateFormat),
     });
@@ -409,7 +410,7 @@ describe("dashboard page", () => {
 
   it("does not display filings calendar as list when formation data is not populated", () => {
     const dueDate = getCurrentDate().add(12, "months");
-    const annualReport = generateTaxFiling({
+    const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
       dueDate: dueDate.format(defaultDateFormat),
     });

@@ -1,7 +1,7 @@
 ---
 urlSlug: cosmetology
 previewType: renewal
-title: Cosmetology License
+title: Cosmetology
 callToActionLink: null
 callToActionText: ""
 ---

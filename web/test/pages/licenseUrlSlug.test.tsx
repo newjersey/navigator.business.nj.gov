@@ -1,8 +1,8 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import { LicenseEvent, LicenseEventType } from "@/lib/types/types";
+import { LicenseEvent } from "@/lib/types/types";
 import LicensePage from "@/pages/licenses/[licenseUrlSlug]";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { getCurrentDate, randomInt } from "@businessnjgovnavigator/shared";
+import { getCurrentDate, LicenseEventSubtype, randomInt } from "@businessnjgovnavigator/shared";
 import { generateLicenseData } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
@@ -17,7 +17,7 @@ describe("license page", () => {
     jest.resetAllMocks();
   });
 
-  const renderLicensePage = (license: LicenseEvent, licenseEventType: LicenseEventType): void => {
+  const renderLicensePage = (license: LicenseEvent, licenseEventType: LicenseEventSubtype): void => {
     render(
       <ThemeProvider theme={createTheme()}>
         <LicensePage license={license} licenseEventType={licenseEventType} />

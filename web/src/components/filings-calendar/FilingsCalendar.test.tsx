@@ -17,18 +17,18 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   defaultDateFormat,
+  generateTaxFilingCalendarEvent,
   getCurrentDate,
   LookupIndustryById,
   OperatingPhases,
   randomInt,
-  TaxFiling,
+  TaxFilingCalendarEvent,
   UserData,
 } from "@businessnjgovnavigator/shared/index";
 import {
   generateLicenseData,
   generatePreferences,
   generateProfileData,
-  generateTaxFiling,
   generateTaxFilingData,
   generateUserData,
   randomLegalStructure,
@@ -97,7 +97,7 @@ describe("<FilingsCalendar />", () => {
 
   it("displays filings calendar with annual report date", () => {
     const dueDate = getCurrentDate().startOf("month");
-    const annualReport = generateTaxFiling({
+    const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
       dueDate: dueDate.format(defaultDateFormat),
     });
@@ -131,13 +131,13 @@ describe("<FilingsCalendar />", () => {
 
   it("displays filings only within a year in list view", () => {
     const farDueDate = getCurrentDate().add(2, "years");
-    const farReport = generateTaxFiling({
+    const farReport = generateTaxFilingCalendarEvent({
       identifier: "whatever",
       dueDate: farDueDate.format(defaultDateFormat),
     });
     const recentDueDate = getCurrentDate().add(2, "months");
 
-    const recentReport = generateTaxFiling({
+    const recentReport = generateTaxFilingCalendarEvent({
       identifier: "whatever2",
       dueDate: recentDueDate.format(defaultDateFormat),
     });
@@ -176,12 +176,12 @@ describe("<FilingsCalendar />", () => {
   it("displays filings nested within a date in list view", () => {
     const recentDueDate = getCurrentDate().add(2, "months");
 
-    const farReport = generateTaxFiling({
+    const farReport = generateTaxFilingCalendarEvent({
       identifier: "whatever",
       dueDate: recentDueDate.format(defaultDateFormat),
     });
 
-    const recentReport = generateTaxFiling({
+    const recentReport = generateTaxFilingCalendarEvent({
       identifier: "whatever2",
       dueDate: recentDueDate.format(defaultDateFormat),
     });
@@ -222,7 +222,7 @@ describe("<FilingsCalendar />", () => {
   });
 
   it("displays calendar content when there are filings inside of the year", () => {
-    const annualReport = generateTaxFiling({
+    const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
       dueDate: getCurrentDate().add(2, "months").format(defaultDateFormat),
     });
@@ -258,7 +258,7 @@ describe("<FilingsCalendar />", () => {
   });
 
   it("displays calendar content when there are filings in two years", () => {
-    const annualReport = generateTaxFiling({
+    const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
       dueDate: getCurrentDate().add(2, "years").format(defaultDateFormat),
     });
@@ -297,7 +297,7 @@ describe("<FilingsCalendar />", () => {
   });
 
   it("displays empty calendar content when there are filings in two years", () => {
-    const annualReport = generateTaxFiling({
+    const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
       dueDate: getCurrentDate().add(2, "years").format(defaultDateFormat),
     });
@@ -409,7 +409,7 @@ describe("<FilingsCalendar />", () => {
         const userData = generateUserData({
           profileData: generateProfileData({ dateOfFormation: undefined, legalStructureId }),
           taxFilingData: generateTaxFilingData({
-            filings: [generateTaxFiling({ identifier: "filing1" })],
+            filings: [generateTaxFilingCalendarEvent({ identifier: "filing1" })],
           }),
         });
         const operateReferences: Record<string, OperateReference> = {
@@ -445,7 +445,7 @@ describe("<FilingsCalendar />", () => {
 
   it("displays filings calendar as list with annual report", () => {
     const dueDate = getCurrentDate().add(2, "months");
-    const annualReport = generateTaxFiling({
+    const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
       dueDate: dueDate.format(defaultDateFormat),
     });
@@ -492,7 +492,7 @@ describe("<FilingsCalendar />", () => {
       licenseData: generateLicenseData({ expirationISO: expirationDate.toISOString(), status: "ACTIVE" }),
       taxFilingData: generateTaxFilingData({
         filings: [
-          generateTaxFiling({
+          generateTaxFilingCalendarEvent({
             identifier: "annual-report",
             dueDate: getCurrentDate().add(1, "months").format(defaultDateFormat),
           }),
@@ -520,7 +520,7 @@ describe("<FilingsCalendar />", () => {
   });
 
   it("sends analytics when feedback modal link is clicked", () => {
-    const annualReport = generateTaxFiling({
+    const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
       dueDate: getCurrentDate().format(defaultDateFormat),
     });
@@ -555,7 +555,7 @@ describe("<FilingsCalendar />", () => {
 
     it("displays button on filings calendar for PublicFiling", () => {
       const dueDate = getCurrentDate().add(2, "months");
-      const annualReport = generateTaxFiling({
+      const annualReport = generateTaxFilingCalendarEvent({
         identifier: "annual-report",
         dueDate: dueDate.format(defaultDateFormat),
       });
@@ -586,7 +586,7 @@ describe("<FilingsCalendar />", () => {
     });
 
     it("displays button on filings calendar for TradeName", () => {
-      const whateverReport = generateTaxFiling({
+      const whateverReport = generateTaxFilingCalendarEvent({
         identifier: "whatever-report",
       });
       const userData = generateUserData({
@@ -616,7 +616,7 @@ describe("<FilingsCalendar />", () => {
 
     it("hides button on filings calendar when displayTaxAccessButton is false", () => {
       const dueDate = getCurrentDate().add(2, "months");
-      const annualReport = generateTaxFiling({
+      const annualReport = generateTaxFilingCalendarEvent({
         identifier: "annual-report",
         dueDate: dueDate.format(defaultDateFormat),
       });
@@ -663,7 +663,7 @@ describe("<FilingsCalendar />", () => {
           legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
           operatingPhase: "GUEST_MODE_OWNING",
         }),
-        taxFilingData: generateTaxFilingData({ filings: [generateTaxFiling({})] }),
+        taxFilingData: generateTaxFilingData({ filings: [generateTaxFilingCalendarEvent({})] }),
       });
       renderFilingsCalendar({}, userData);
       expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
@@ -672,7 +672,7 @@ describe("<FilingsCalendar />", () => {
 
   describe("filings calendar in mobile", () => {
     let dueDate: dayjs.Dayjs;
-    let annualReport: TaxFiling;
+    let annualReport: TaxFilingCalendarEvent;
     let userData: UserData;
     let operateReferences: Record<string, OperateReference>;
 
@@ -680,7 +680,7 @@ describe("<FilingsCalendar />", () => {
       setTabletScreen(false);
 
       dueDate = getCurrentDate().add(2, "months");
-      annualReport = generateTaxFiling({
+      annualReport = generateTaxFilingCalendarEvent({
         identifier: "annual-report",
         dueDate: dueDate.format(defaultDateFormat),
       });
@@ -719,13 +719,13 @@ describe("<FilingsCalendar />", () => {
 
     it("doesn't display past months in list view", () => {
       const pastDueDate = getCurrentDate().subtract(1, "months");
-      const pastReport = generateTaxFiling({
+      const pastReport = generateTaxFilingCalendarEvent({
         identifier: "past",
         dueDate: pastDueDate.format(defaultDateFormat),
       });
 
       const futureDueDate = getCurrentDate().add(2, "months");
-      const futureReport = generateTaxFiling({
+      const futureReport = generateTaxFilingCalendarEvent({
         identifier: "future",
         dueDate: futureDueDate.format(defaultDateFormat),
       });
@@ -757,13 +757,13 @@ describe("<FilingsCalendar />", () => {
 
   describe("calendar list and grid views", () => {
     let dueDate: dayjs.Dayjs;
-    let annualReport: TaxFiling;
+    let annualReport: TaxFilingCalendarEvent;
     let userData: UserData;
     let operateReferences: Record<string, OperateReference>;
 
     beforeEach(() => {
       dueDate = getCurrentDate().add(2, "months");
-      annualReport = generateTaxFiling({
+      annualReport = generateTaxFilingCalendarEvent({
         identifier: "annual-report",
         dueDate: dueDate.format(defaultDateFormat),
       });
@@ -841,13 +841,13 @@ describe("<FilingsCalendar />", () => {
   describe("calendar list view, view more functionality", () => {
     const renderCalendarWithEntries = (numberOfCalendarEntries: number): void => {
       let dueDate: dayjs.Dayjs;
-      let annualReport: TaxFiling;
+      let annualReport: TaxFilingCalendarEvent;
       const operateReferences: Record<string, OperateReference> = {};
-      const filings: TaxFiling[] = [];
+      const filings: TaxFilingCalendarEvent[] = [];
       [getCurrentDate(), getCurrentDate().add(1, "years"), getCurrentDate().add(2, "years")].map((dates) => {
         for (let i = 0; i < numberOfCalendarEntries; i++) {
           dueDate = dates.add(2, "months").add(i, "day");
-          annualReport = generateTaxFiling({
+          annualReport = generateTaxFilingCalendarEvent({
             identifier: `annual-report-${i}`,
             dueDate: dueDate.format(defaultDateFormat),
           });

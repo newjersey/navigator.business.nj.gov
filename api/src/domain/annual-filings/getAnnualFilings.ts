@@ -19,6 +19,7 @@ export const getAnnualFilings = (userData: UserData): UserData => {
     filings.push(
       ...calculateNextAnnualFilingDates(userData.profileData.dateOfFormation).map((dueDate: string) => ({
         identifier: "ANNUAL_FILING",
+        calendarEventType: "TAX-FILING" as const,
         dueDate,
       }))
     );

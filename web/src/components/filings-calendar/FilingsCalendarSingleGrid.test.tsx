@@ -3,12 +3,13 @@ import { OperateReference } from "@/lib/types/types";
 import * as shared from "@businessnjgovnavigator/shared";
 import {
   defaultDateFormat,
+  generateTaxFilingCalendarEvent,
   generateTaxFilingData,
   generateUserData,
   LookupIndustryById,
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
-import { generateLicenseData, generateTaxFiling } from "@businessnjgovnavigator/shared/test";
+import { generateLicenseData } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Dayjs } from "dayjs";
 import { FilingsCalendarSingleGrid } from "./FilingsCalendarSingleGrid";
@@ -27,17 +28,17 @@ function mockShared(): typeof shared {
 
 jest.mock("@businessnjgovnavigator/shared", () => mockShared());
 
-const taxFilingOne = generateTaxFiling({
+const taxFilingOne = generateTaxFilingCalendarEvent({
   identifier: "tax-filing-one",
   dueDate: currentDate.format(defaultDateFormat),
 });
 
-const taxFilingTwo = generateTaxFiling({
+const taxFilingTwo = generateTaxFilingCalendarEvent({
   identifier: "tax-filing-two",
   dueDate: currentDate.format(defaultDateFormat),
 });
 
-const taxFilingThree = generateTaxFiling({
+const taxFilingThree = generateTaxFilingCalendarEvent({
   identifier: "tax-filing-three",
   dueDate: currentDate.format(defaultDateFormat),
 });
@@ -81,7 +82,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
     const userData = generateUserData({
       taxFilingData: generateTaxFilingData({
         filings: [
-          generateTaxFiling({
+          generateTaxFilingCalendarEvent({
             identifier: "tax-filing-old",
             dueDate: currentDate.subtract(1, "month").format(defaultDateFormat),
           }),
@@ -109,7 +110,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
     const userData = generateUserData({
       taxFilingData: generateTaxFilingData({
         filings: [
-          generateTaxFiling({
+          generateTaxFilingCalendarEvent({
             identifier: "tax-filing-old",
             dueDate: currentDate.add(1, "year").subtract(1, "month").format(defaultDateFormat),
           }),

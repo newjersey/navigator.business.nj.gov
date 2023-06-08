@@ -11,7 +11,11 @@ import { sortCalendarEventsEarliestToLatest } from "@/lib/domain-logic/filterCal
 import { FilingUrlSlugParam, loadAllFilingUrlSlugs, loadFilingByUrlSlug } from "@/lib/static/loadFilings";
 import { Filing, TaxFilingMethod } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { defaultDateFormat, parseDateWithFormat, TaxFiling } from "@businessnjgovnavigator/shared";
+import {
+  defaultDateFormat,
+  parseDateWithFormat,
+  TaxFilingCalendarEvent,
+} from "@businessnjgovnavigator/shared";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -181,7 +185,7 @@ export const FilingElement = (props: {
 const FilingPage = (props: Props): ReactElement => {
   const { userData } = useUserData();
   const matchingFiling = sortCalendarEventsEarliestToLatest(userData?.taxFilingData.filings ?? []).find(
-    (it: TaxFiling) => it.identifier === props.filing.id
+    (it: TaxFilingCalendarEvent) => it.identifier === props.filing.id
   );
 
   return (

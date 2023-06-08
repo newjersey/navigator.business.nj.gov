@@ -1,6 +1,6 @@
 ---
 urlSlug: "pharmacy"
-title: "Pharmacy License"
+title: Pharmacy
 callToActionLink: null
 callToActionText: ""
 ---

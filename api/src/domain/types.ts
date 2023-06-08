@@ -3,7 +3,7 @@ import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/b
 import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
 import { LicenseEntity, LicenseStatusResult, NameAndAddress } from "@shared/license";
 import { ProfileData } from "@shared/profileData";
-import { TaxFiling, TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
+import { TaxFilingCalendarEvent, TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
 import { UserData } from "@shared/userData";
 import * as https from "node:https";
 
@@ -84,7 +84,7 @@ export type TaxFilingOnboardingResponse = {
 };
 export interface TaxFilingLookupResponse {
   state: TaxFilingLookupState;
-  filings: TaxFiling[];
+  filings: TaxFilingCalendarEvent[];
 }
 export type SelfRegResponse = {
   authRedirectURL: string;

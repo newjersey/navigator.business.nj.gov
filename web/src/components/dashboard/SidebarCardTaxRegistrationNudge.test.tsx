@@ -11,11 +11,10 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { getCurrentDateISOString } from "@businessnjgovnavigator/shared/dateHelpers";
-import { taxTaskId } from "@businessnjgovnavigator/shared/index";
+import { generateTaxFilingCalendarEvent, taxTaskId } from "@businessnjgovnavigator/shared/index";
 import {
   generatePreferences,
   generateProfileData,
-  generateTaxFiling,
   generateTaxFilingData,
   generateUserData,
 } from "@businessnjgovnavigator/shared/test";
@@ -72,7 +71,7 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
         }),
         taxFilingData: generateTaxFilingData({
           registeredISO: getCurrentDateISOString(),
-          filings: [generateTaxFiling({})],
+          filings: [generateTaxFilingCalendarEvent({})],
           state: "SUCCESS",
         }),
       });

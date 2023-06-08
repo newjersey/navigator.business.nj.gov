@@ -1,7 +1,7 @@
-import { TaxFiling, TaxFilingLookupState, TaxFilingState } from "@shared/taxFiling";
+import { TaxFilingCalendarEvent, TaxFilingLookupState, TaxFilingState } from "@shared/taxFiling";
 import {
   generatePreferences,
-  generateTaxFiling,
+  generateTaxFilingCalendarEvent,
   generateTaxFilingData,
   generateTaxIdAndBusinessName,
   generateUserData,
@@ -40,7 +40,7 @@ describe("TaxFilingsInterfaceFactory", () => {
   describe("lookup", () => {
     describe("when successful", () => {
       it("updates state and filing data", async () => {
-        const filingData = generateTaxFiling({});
+        const filingData = generateTaxFilingCalendarEvent({});
         const userData = generateUserData({
           preferences: generatePreferences({
             isCalendarFullView: true,
@@ -48,7 +48,7 @@ describe("TaxFilingsInterfaceFactory", () => {
           taxFilingData: generateTaxFilingData({
             state: undefined,
             lastUpdatedISO: undefined,
-            filings: [generateTaxFiling({})],
+            filings: [generateTaxFilingCalendarEvent({})],
           }),
         });
         taxFilingClient.lookup.mockResolvedValue({
@@ -175,7 +175,7 @@ describe("TaxFilingsInterfaceFactory", () => {
             taxFilingData: generateTaxFilingData({
               state: undefined,
               lastUpdatedISO: undefined,
-              filings: [generateTaxFiling({})],
+              filings: [generateTaxFilingCalendarEvent({})],
             }),
           });
 
@@ -244,14 +244,14 @@ describe("TaxFilingsInterfaceFactory", () => {
     function createFilings(params: {
       numFilingsInCurrentYear: number;
       numFilingsInNextYear?: number;
-    }): TaxFiling[] {
+    }): TaxFilingCalendarEvent[] {
       const thisYear = currentDate.getFullYear();
       const nextYear = currentDate.getFullYear() + 1;
       const filingsInCurrentYear = Array(params.numFilingsInCurrentYear).fill(
-        generateTaxFiling({ dueDate: `${thisYear}-12-31` })
+        generateTaxFilingCalendarEvent({ dueDate: `${thisYear}-12-31` })
       );
       const filingsInNextYear = Array(params.numFilingsInNextYear ?? 5).fill(
-        generateTaxFiling({ dueDate: `${nextYear}-12-31` })
+        generateTaxFilingCalendarEvent({ dueDate: `${nextYear}-12-31` })
       );
       return [...filingsInCurrentYear, ...filingsInNextYear];
     }
@@ -267,14 +267,14 @@ describe("TaxFilingsInterfaceFactory", () => {
             state: undefined,
             lastUpdatedISO: undefined,
             registeredISO: undefined,
-            filings: [generateTaxFiling({})],
+            filings: [generateTaxFilingCalendarEvent({})],
           }),
         });
       });
 
       describe("when successful", () => {
         it("reflects the SUCCESS lookup response", async () => {
-          const filingData = generateTaxFiling({});
+          const filingData = generateTaxFilingCalendarEvent({});
           taxFilingClient.onboarding.mockResolvedValue({
             state: "SUCCESS",
           });
