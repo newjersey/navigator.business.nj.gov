@@ -142,7 +142,6 @@ type FilingGrayMatter = {
 
 type LicenseGrayMatter = {
   id: string;
-  title: string;
   urlSlug: string;
   callToActionLink: string;
   callToActionText: string;

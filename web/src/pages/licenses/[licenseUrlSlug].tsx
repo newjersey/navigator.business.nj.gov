@@ -10,6 +10,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   defaultDateFormat,
   LicenseEventSubtype,
+  LookupIndustryById,
   parseDate,
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
@@ -17,17 +18,15 @@ import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { ReactElement } from "react";
 
-interface Props {
-  license: LicenseEvent;
-  licenseEventType: LicenseEventSubtype;
-}
-
-export const LicenseElement = (props: {
+interface LicenseElementProps {
   license: LicenseEvent;
   licenseEventType: LicenseEventSubtype;
   dueDate: string;
   preview?: boolean;
-}): ReactElement => {
+  licenseName: string;
+}
+
+export const LicenseElement = (props: LicenseElementProps): ReactElement => {
   const titles: Record<LicenseEventSubtype, string> = {
     expiration: Config.licenseEventDefaults.expirationTitleLabel,
     renewal: Config.licenseEventDefaults.renewalTitleLabel,
@@ -36,6 +35,7 @@ export const LicenseElement = (props: {
     expiration: Config.licenseEventDefaults.beforeExpirationDateText,
     renewal: Config.licenseEventDefaults.beforeRenewalDateText,
   };
+
   return (
     <>
       <div className="minh-38">
@@ -43,7 +43,7 @@ export const LicenseElement = (props: {
           <div>
             <div className="padding-y-4 margin-x-4 margin-bottom-2">
               <div className="margin-bottom-2 ">
-                <h1>{`${props.license.title} ${titles[props.licenseEventType]}`}</h1>
+                <h1>{`${props.licenseName} ${titles[props.licenseEventType]}`}</h1>
               </div>
               <div className="display-inline-flex ">
                 <span className="text-bold">{dateText[props.licenseEventType].toUpperCase()}</span> &nbsp;{" "}
@@ -70,18 +70,29 @@ export const LicenseElement = (props: {
   );
 };
 
+interface Props {
+  license: LicenseEvent;
+  licenseEventType: LicenseEventSubtype;
+}
+
 const LicensePage = (props: Props): ReactElement => {
   const { userData } = useUserData();
   let date = parseDate(userData?.licenseData?.expirationISO);
-  props.licenseEventType === "renewal" ? (date = date.add(30, "days")) : undefined;
+  if (props.licenseEventType === "renewal") {
+    date = date.add(30, "days");
+  }
+
+  const licenseName = LookupIndustryById(userData?.profileData.industryId).licenseType;
+
   return (
     <>
-      <NextSeo title={`Business.NJ.gov Navigator - ${props.license.title}`} />
+      <NextSeo title={`Business.NJ.gov Navigator - ${licenseName}`} />
       <PageSkeleton>
         <NavBar showSidebar={true} hideMiniRoadmap={true} />
         <TaskSidebarPageLayout>
           <LicenseElement
             license={props.license}
+            licenseName={licenseName || ""}
             licenseEventType={props.licenseEventType}
             dueDate={date.format(defaultDateFormat)}
           />

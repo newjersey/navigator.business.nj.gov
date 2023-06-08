@@ -3,6 +3,7 @@ import { OperateReference } from "@/lib/types/types";
 import * as shared from "@businessnjgovnavigator/shared";
 import {
   defaultDateFormat,
+  generateProfileData,
   generateTaxFilingCalendarEvent,
   generateTaxFilingData,
   generateUserData,
@@ -153,7 +154,10 @@ describe("<FilingsCalendarSingleGrid />", () => {
 
   it("renders a licenseEvent expiration task", () => {
     const licenseData = generateLicenseData({ expirationISO: currentDate.add(4, "days").toISOString() });
-    const userData = generateUserData({ licenseData });
+    const userData = generateUserData({
+      licenseData,
+      profileData: generateProfileData({ industryId: "cosmetology" }),
+    });
     render(
       <FilingsCalendarSingleGrid
         userData={userData}
@@ -163,7 +167,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
       />
     );
 
-    const expectedTitle = `${LookupIndustryById(userData.profileData.industryId).name} ${
+    const expectedTitle = `${LookupIndustryById(userData.profileData.industryId).licenseType} ${
       Config.licenseEventDefaults.expirationTitleLabel
     }`;
     expect(screen.getByText(expectedTitle)).toBeInTheDocument();
@@ -173,7 +177,10 @@ describe("<FilingsCalendarSingleGrid />", () => {
     const licenseData = generateLicenseData({
       expirationISO: currentDate.add(4, "days").toISOString(),
     });
-    const userData = generateUserData({ licenseData });
+    const userData = generateUserData({
+      licenseData,
+      profileData: generateProfileData({ industryId: "cosmetology" }),
+    });
     render(
       <FilingsCalendarSingleGrid
         userData={userData}
@@ -182,7 +189,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         activeYear={currentDate.year().toString()}
       />
     );
-    const expectedTitle = `${LookupIndustryById(userData.profileData.industryId).name} ${
+    const expectedTitle = `${LookupIndustryById(userData.profileData.industryId).licenseType} ${
       Config.licenseEventDefaults.renewalTitleLabel
     }`;
     expect(screen.getByText(expectedTitle)).toBeInTheDocument();
@@ -214,6 +221,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
         status: "ACTIVE",
       }),
       taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo, taxFilingThree] }),
+      profileData: generateProfileData({ industryId: "home-contractor" }),
     });
     render(
       <FilingsCalendarSingleGrid
@@ -224,7 +232,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
       />
     );
 
-    const expectedLicenseTitle = `${LookupIndustryById(userData.profileData.industryId).name} ${
+    const expectedLicenseTitle = `${LookupIndustryById(userData.profileData.industryId).licenseType} ${
       Config.licenseEventDefaults.expirationTitleLabel
     }`;
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();

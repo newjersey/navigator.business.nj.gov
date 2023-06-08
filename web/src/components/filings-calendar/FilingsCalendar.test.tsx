@@ -513,7 +513,7 @@ describe("<FilingsCalendar />", () => {
 
     expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
     expect(screen.getByText(expirationDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
-    const expectedName = `${LookupIndustryById("home-contractor").name} ${
+    const expectedName = `${LookupIndustryById("home-contractor").licenseType} ${
       Config.licenseEventDefaults.expirationTitleLabel
     }`;
     expect(screen.getByText(expectedName)).toBeInTheDocument();

@@ -10,6 +10,7 @@ import {
   FundingProgramFrequency,
   FundingStatus,
   FundingType,
+  LicenseEvent,
   NaicsCodeObject,
   OperateReference,
   Opportunity,
@@ -317,6 +318,18 @@ export const generateOperateReference = (overrides: Partial<OperateReference>): 
     name: `some-name-${randomInt()}`,
     urlSlug: `some-url-slug-${randomInt()}`,
     urlPath: `some-url-path-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generateLicenseEvent = (overrides: Partial<LicenseEvent>): LicenseEvent => {
+  const id = randomInt(4);
+  return {
+    filename: `filename-${id}`,
+    urlSlug: `url-slug-${id}`,
+    callToActionLink: `cta-link-${id}`,
+    callToActionText: `cta-text-${id}`,
+    contentMd: `content-${id}`,
     ...overrides,
   };
 };

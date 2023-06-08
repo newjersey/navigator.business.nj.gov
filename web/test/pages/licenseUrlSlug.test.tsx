@@ -1,8 +1,14 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { LicenseEvent } from "@/lib/types/types";
 import LicensePage from "@/pages/licenses/[licenseUrlSlug]";
+import { generateLicenseEvent } from "@/test/factories";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { getCurrentDate, LicenseEventSubtype, randomInt } from "@businessnjgovnavigator/shared";
+import {
+  generateProfileData,
+  getCurrentDate,
+  LicenseEventSubtype,
+  LookupIndustryById,
+} from "@businessnjgovnavigator/shared";
 import { generateLicenseData } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
@@ -25,39 +31,28 @@ describe("license page", () => {
     );
   };
 
-  const generateLicenseEvent = (overrides: Partial<LicenseEvent>): LicenseEvent => {
-    const id = randomInt(4);
-    return {
-      filename: `filename-${id}`,
-      title: `License Name ${id}`,
-      urlSlug: `url-slug-${id}`,
-      callToActionLink: `cta-link-${id}`,
-      callToActionText: `cta-text-${id}`,
-      contentMd: `content-${id}`,
-      ...overrides,
-    };
-  };
-
   it("shows the basic expiration details and expiration date", () => {
     const expirationDate = currentDate.add(4, "days");
 
     useMockUserData({
       licenseData: generateLicenseData({ expirationISO: expirationDate.toISOString() }),
+      profileData: generateProfileData({ industryId: "home-contractor" }),
     });
 
     const license = generateLicenseEvent({
       urlSlug: "license-url-slug-1",
       filename: "filename-1",
-      title: "License Name 1",
       callToActionLink: "cta-link-1",
       callToActionText: "cta-text-1",
       contentMd: "content-1",
     });
 
+    const licenseName = LookupIndustryById("home-contractor").licenseType;
+
     renderLicensePage(license, "expiration");
 
     expect(
-      screen.getByText(`License Name 1 ${Config.licenseEventDefaults.expirationTitleLabel}`)
+      screen.getByText(`${licenseName} ${Config.licenseEventDefaults.expirationTitleLabel}`)
     ).toBeInTheDocument();
     expect(
       screen.getByText(Config.licenseEventDefaults.beforeExpirationDateText.toUpperCase())
@@ -73,21 +68,22 @@ describe("license page", () => {
 
     useMockUserData({
       licenseData: generateLicenseData({ expirationISO: expirationDate.toISOString() }),
+      profileData: generateProfileData({ industryId: "home-contractor" }),
     });
 
     const license = generateLicenseEvent({
       urlSlug: "license-url-slug-1",
       filename: "filename-1",
-      title: "License Name 1",
       callToActionLink: "cta-link-1",
       callToActionText: "cta-text-1",
       contentMd: "content-1",
     });
+    const licenseName = LookupIndustryById("home-contractor").licenseType;
 
     renderLicensePage(license, "renewal");
 
     expect(
-      screen.getByText(`License Name 1 ${Config.licenseEventDefaults.renewalTitleLabel}`)
+      screen.getByText(`${licenseName} ${Config.licenseEventDefaults.renewalTitleLabel}`)
     ).toBeInTheDocument();
     expect(
       screen.getByText(Config.licenseEventDefaults.beforeRenewalDateText.toUpperCase())

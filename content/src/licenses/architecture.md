@@ -1,6 +1,5 @@
 ---
 urlSlug: "architecture"
-title: Architecture
 callToActionLink: null
 callToActionText: ""
 ---

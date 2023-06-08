@@ -1,6 +1,5 @@
 ---
 urlSlug: "hvac-contractor"
-title: HVACR
 callToActionLink: null
 callToActionText: ""
 ---

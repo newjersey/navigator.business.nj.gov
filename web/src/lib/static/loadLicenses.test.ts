@@ -19,7 +19,6 @@ describe("loadLicenses", () => {
       const taskMd1 =
         "---\n" +
         'urlSlug: "some-url-slug-1"\n' +
-        'title: "Some Task Name"\n' +
         'callToActionLink: ""\n' +
         'callToActionText: ""\n' +
         "---\n";
@@ -27,7 +26,6 @@ describe("loadLicenses", () => {
       const taskMd2 =
         "---\n" +
         'urlSlug: "some-url-slug-2"\n' +
-        'title: "Some Task Name"\n' +
         'callToActionLink: ""\n' +
         'callToActionText: ""\n' +
         "---\n";
@@ -54,7 +52,6 @@ describe("loadLicenses", () => {
       const taskMd1 =
         "---\n" +
         'urlSlug: "some-url-slug-1"\n' +
-        'title: "Some Task Name1"\n' +
         'callToActionLink: "www.example1.com"\n' +
         'callToActionText: ""\n' +
         "---\n" +
@@ -66,7 +63,6 @@ describe("loadLicenses", () => {
       const taskMd2 =
         "---\n" +
         'urlSlug: "some-url-slug-2"\n' +
-        'title: "Some Task Name2"\n' +
         'callToActionLink: "www.example2.com"\n' +
         'callToActionText: ""\n' +
         "---\n" +
@@ -82,7 +78,6 @@ describe("loadLicenses", () => {
         .mockReturnValueOnce(taskMd2); // read file once we found the match
 
       expect(loadLicenseByUrlSlug("some-url-slug-2-expiration")).toEqual({
-        title: "Some Task Name2",
         filename: "task2",
         urlSlug: "some-url-slug-2",
         callToActionLink: "www.example2.com",
