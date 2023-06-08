@@ -17,7 +17,7 @@ import { LegalStructure, LegalStructures } from "../legalStructure";
 import { LicenseData, LicenseStatusItem, LicenseStatusResult, NameAndAddress } from "../license";
 import { IndustrySpecificData, ProfileData } from "../profileData";
 import { arrayOfSectors, SectorType } from "../sector";
-import { TaxFiling, TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
+import { TaxFilingCalendarEvent, TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
 import { CURRENT_VERSION, Preferences, UserData } from "../userData";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
 
@@ -120,10 +120,13 @@ export const generateLicenseStatusItem = (overrides: Partial<LicenseStatusItem>)
   };
 };
 
-export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
+export const generateTaxFilingCalendarEvent = (
+  overrides: Partial<TaxFilingCalendarEvent>
+): TaxFilingCalendarEvent => {
   return {
     identifier: `some-identifier-${randomInt()}`,
     dueDate: getCurrentDateFormatted(defaultDateFormat),
+    calendarEventType: "TAX-FILING",
     ...overrides,
   };
 };
@@ -262,7 +265,7 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
     registeredISO: ["SUCCESS", "PENDING"].includes(overrides.state ?? "")
       ? new Date(Date.now()).toISOString()
       : undefined,
-    filings: [generateTaxFiling({})],
+    filings: [generateTaxFilingCalendarEvent({})],
     ...overrides,
   };
 };

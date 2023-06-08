@@ -1,5 +1,6 @@
 import {
   generateProfileData,
+  generateTaxFilingCalendarEvent,
   generateTaxFilingData,
   generateUser,
   generateUserData,
@@ -52,7 +53,7 @@ describe("getAnnualFilings", () => {
         legalStructureId: "limited-liability-company",
       }),
       taxFilingData: generateTaxFilingData({
-        filings: [{ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" }],
+        filings: [generateTaxFilingCalendarEvent({ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" })],
       }),
     });
 
@@ -110,7 +111,7 @@ describe("getAnnualFilings", () => {
         legalStructureId: "sole-proprietorship",
       }),
       taxFilingData: generateTaxFilingData({
-        filings: [{ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" }],
+        filings: [generateTaxFilingCalendarEvent({ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" })],
       }),
     });
 

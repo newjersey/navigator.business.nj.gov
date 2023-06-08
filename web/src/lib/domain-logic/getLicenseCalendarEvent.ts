@@ -1,6 +1,5 @@
-import { LicenseCalendarEvent } from "@/lib/types/types";
 import { parseDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { defaultDateFormat, LicenseData } from "@businessnjgovnavigator/shared/index";
+import { defaultDateFormat, LicenseCalendarEvent, LicenseData } from "@businessnjgovnavigator/shared/index";
 
 export const getLicenseCalendarEvent = (
   licenseData: LicenseData | undefined,
@@ -19,8 +18,8 @@ export const getLicenseCalendarEvent = (
   if (expirationDate.year() === year && (monthFilter ? expirationDate.month() === monthFilter : true)) {
     events.push({
       dueDate: expirationDate.format(defaultDateFormat),
-      type: "expiration",
-      eventType: "licenses",
+      licenseEventSubtype: "expiration",
+      calendarEventType: "LICENSE",
     });
   }
   const renewalDate = expirationDate.add(30, "days");
@@ -28,8 +27,8 @@ export const getLicenseCalendarEvent = (
   if (renewalDate.year() === year && (monthFilter ? renewalDate.month() === monthFilter : true)) {
     events.push({
       dueDate: renewalDate.format(defaultDateFormat),
-      type: "renewal",
-      eventType: "licenses",
+      licenseEventSubtype: "renewal",
+      calendarEventType: "LICENSE",
     });
   }
 

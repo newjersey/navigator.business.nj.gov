@@ -1,4 +1,4 @@
-import { TaxFiling } from "@shared/taxFiling";
+import { TaxFilingCalendarEvent } from "@shared/taxFiling";
 import { TaxFilingResult, TaxIdentifierToIdsRecord } from "src/domain/types";
 
 export const slugifyTaxId = (id: string): string => {
@@ -10,7 +10,7 @@ export const getTaxIds = (id: string, taxIdentifierToIdsRecord: TaxIdentifierToI
   return taxIdentifierToIdsRecord[val] ?? [val];
 };
 
-type TaxIdsToFilingsRecord = Record<string, TaxFiling[]>;
+type TaxIdsToFilingsRecord = Record<string, TaxFilingCalendarEvent[]>;
 
 const getTaxIdsToFilingsRecord = (
   result: TaxFilingResult,
@@ -22,6 +22,7 @@ const getTaxIdsToFilingsRecord = (
         return {
           identifier,
           dueDate: dateToShortISO(value),
+          calendarEventType: "TAX-FILING",
         };
       });
       return accumulator;
@@ -33,12 +34,12 @@ const getTaxIdsToFilingsRecord = (
 export const flattenDeDupAndConvertTaxFilings = (
   results: TaxFilingResult[],
   taxIdentifierToIdsRecord?: TaxIdentifierToIdsRecord
-): TaxFiling[] => {
+): TaxFilingCalendarEvent[] => {
   const arrayOfFilingsRecords = results.map((result) => {
     return getTaxIdsToFilingsRecord(result, taxIdentifierToIdsRecord);
   });
   const deDupedRecordOfTaxFilingArrays = Object.assign({}, ...arrayOfFilingsRecords);
-  const arrayOfTaxFilingArrays = Object.values(deDupedRecordOfTaxFilingArrays) as TaxFiling[][];
+  const arrayOfTaxFilingArrays = Object.values(deDupedRecordOfTaxFilingArrays) as TaxFilingCalendarEvent[][];
   return arrayOfTaxFilingArrays.flat();
 };
 

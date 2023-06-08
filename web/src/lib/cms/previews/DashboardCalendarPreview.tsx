@@ -5,11 +5,10 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateOperateReference } from "@/test/factories";
-import { defaultDateFormat } from "@businessnjgovnavigator/shared/index";
+import { defaultDateFormat, generateTaxFilingCalendarEvent } from "@businessnjgovnavigator/shared/index";
 import {
   generatePreferences,
   generateProfileData,
-  generateTaxFiling,
   generateTaxFilingData,
   generateUserData,
 } from "@businessnjgovnavigator/shared/test";
@@ -38,10 +37,13 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
     }),
     taxFilingData: generateTaxFilingData({
       filings: [
-        generateTaxFiling({ identifier: "1", dueDate: dayjs().format(defaultDateFormat) }),
-        generateTaxFiling({ identifier: "2", dueDate: dayjs().add(1, "month").format(defaultDateFormat) }),
-        generateTaxFiling({ identifier: "3", dueDate: dayjs().format(defaultDateFormat) }),
-        generateTaxFiling({ identifier: "4", dueDate: dayjs().format(defaultDateFormat) }),
+        generateTaxFilingCalendarEvent({ identifier: "1", dueDate: dayjs().format(defaultDateFormat) }),
+        generateTaxFilingCalendarEvent({
+          identifier: "2",
+          dueDate: dayjs().add(1, "month").format(defaultDateFormat),
+        }),
+        generateTaxFilingCalendarEvent({ identifier: "3", dueDate: dayjs().format(defaultDateFormat) }),
+        generateTaxFilingCalendarEvent({ identifier: "4", dueDate: dayjs().format(defaultDateFormat) }),
       ],
     }),
   });

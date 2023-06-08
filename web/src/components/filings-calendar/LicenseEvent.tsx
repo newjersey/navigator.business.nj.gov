@@ -1,7 +1,7 @@
 import { CalendarEvent } from "@/components/filings-calendar/CalendarEvent";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { LicenseCalendarEvent, LicenseEventType } from "@/lib/types/types";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
+import { LicenseCalendarEvent, LicenseEventSubtype } from "@businessnjgovnavigator/shared/taxFiling";
 import { ReactElement } from "react";
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 export const LicenseEvent = (props: Props): ReactElement | null => {
   const { Config } = useConfig();
 
-  const titles: Record<LicenseEventType, string> = {
+  const titles: Record<LicenseEventSubtype, string> = {
     expiration: Config.licenseEventDefaults.expirationTitleLabel,
     renewal: Config.licenseEventDefaults.renewalTitleLabel,
   };
@@ -22,8 +22,10 @@ export const LicenseEvent = (props: Props): ReactElement | null => {
     return null;
   }
 
-  const urlSlug = `licenses/${props.industryId}-${props.licenseEvent.type}`;
-  const displayTitle = `${LookupIndustryById(props.industryId).name} ${titles[props.licenseEvent.type]}`;
+  const urlSlug = `licenses/${props.industryId}-${props.licenseEvent.licenseEventSubtype}`;
+  const displayTitle = `${LookupIndustryById(props.industryId).name} ${
+    titles[props.licenseEvent.licenseEventSubtype]
+  }`;
 
   return (
     <CalendarEvent

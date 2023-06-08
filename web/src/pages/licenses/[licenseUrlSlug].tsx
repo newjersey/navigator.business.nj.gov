@@ -5,29 +5,34 @@ import { TaskCTA } from "@/components/TaskCTA";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { LicenseUrlSlugParam, loadAllLicenseUrlSlugs, loadLicenseByUrlSlug } from "@/lib/static/loadLicenses";
-import { LicenseEvent, LicenseEventType } from "@/lib/types/types";
+import { LicenseEvent } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { defaultDateFormat, parseDate, parseDateWithFormat } from "@businessnjgovnavigator/shared";
+import {
+  defaultDateFormat,
+  LicenseEventSubtype,
+  parseDate,
+  parseDateWithFormat,
+} from "@businessnjgovnavigator/shared";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { ReactElement } from "react";
 
 interface Props {
   license: LicenseEvent;
-  licenseEventType: LicenseEventType;
+  licenseEventType: LicenseEventSubtype;
 }
 
 export const LicenseElement = (props: {
   license: LicenseEvent;
-  licenseEventType: LicenseEventType;
+  licenseEventType: LicenseEventSubtype;
   dueDate: string;
   preview?: boolean;
 }): ReactElement => {
-  const titles: Record<LicenseEventType, string> = {
+  const titles: Record<LicenseEventSubtype, string> = {
     expiration: Config.licenseEventDefaults.expirationTitleLabel,
     renewal: Config.licenseEventDefaults.renewalTitleLabel,
   };
-  const dateText: Record<LicenseEventType, string> = {
+  const dateText: Record<LicenseEventSubtype, string> = {
     expiration: Config.licenseEventDefaults.beforeExpirationDateText,
     renewal: Config.licenseEventDefaults.beforeRenewalDateText,
   };
@@ -95,7 +100,7 @@ export const getStaticPaths = (): GetStaticPathsResult<LicenseUrlSlugParam> => {
 };
 
 export const getStaticProps = ({ params }: { params: LicenseUrlSlugParam }): GetStaticPropsResult<Props> => {
-  const licenseEventType = params.licenseUrlSlug.split("-").pop() as LicenseEventType;
+  const licenseEventType = params.licenseUrlSlug.split("-").pop() as LicenseEventSubtype;
   return {
     props: {
       license: loadLicenseByUrlSlug(params.licenseUrlSlug),

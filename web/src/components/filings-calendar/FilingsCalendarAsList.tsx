@@ -5,11 +5,11 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { sortFilterCalendarEventsWithinAYear } from "@/lib/domain-logic/filterCalendarEvents";
 import { getLicenseCalendarEvent } from "@/lib/domain-logic/getLicenseCalendarEvent";
-import { LicenseCalendarEvent, OperateReference } from "@/lib/types/types";
+import { OperateReference } from "@/lib/types/types";
 import { groupBy } from "@/lib/utils/helpers";
+import { LicenseCalendarEvent, TaxFilingCalendarEvent } from "@businessnjgovnavigator/shared";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
-import { TaxFiling } from "@businessnjgovnavigator/shared/taxFiling";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useEffect, useState } from "react";
 
@@ -21,10 +21,6 @@ interface Props {
   operateReferences: Record<string, OperateReference>;
 }
 
-interface TaxCalendarEvent extends TaxFiling {
-  eventType: "filing";
-}
-
 export const FilingsCalendarAsList = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const [numberOfVisibleCalendarEntries, setNumberOfVisibleCalendarEntries] =
@@ -34,21 +30,17 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
     setNumberOfVisibleCalendarEntries(LIST_VIEW_MORE_INCREMENT);
   }, [props.activeYear]);
 
-  const typedFilingEvents: TaxCalendarEvent[] = props.userData.taxFilingData.filings
-    ? (props.userData.taxFilingData.filings?.map((filing) => {
-        (filing as TaxCalendarEvent)["eventType"] = "filing";
-        return filing;
-      }) as TaxCalendarEvent[])
-    : [];
-
-  const typedLicenseEvents = getLicenseCalendarEvent(
+  const licenseCalendarEvents = getLicenseCalendarEvent(
     props.userData?.licenseData,
     Number.parseInt(props.activeYear)
   );
 
-  const sortedFilteredEventsWithinAYear: Array<TaxCalendarEvent | LicenseCalendarEvent> = props.userData
+  const sortedFilteredEventsWithinAYear: Array<TaxFilingCalendarEvent | LicenseCalendarEvent> = props.userData
     ?.taxFilingData.filings
-    ? sortFilterCalendarEventsWithinAYear([...typedLicenseEvents, ...typedFilingEvents], props.activeYear)
+    ? sortFilterCalendarEventsWithinAYear(
+        [...licenseCalendarEvents, ...props.userData.taxFilingData.filings],
+        props.activeYear
+      )
     : [];
 
   if (sortedFilteredEventsWithinAYear.length === 0) {
@@ -64,9 +56,9 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
     );
   }
 
-  const EventsGroupedByDate = groupBy(
+  const eventsGroupedByDate = groupBy(
     sortedFilteredEventsWithinAYear.filter((event) => {
-      if (event.eventType === "filing") {
+      if (event.calendarEventType === "TAX-FILING") {
         return props.operateReferences[event.identifier];
       }
       return true;
@@ -74,7 +66,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
     (value) => value.dueDate
   );
 
-  const visibleEvents = EventsGroupedByDate.slice(0, numberOfVisibleCalendarEntries);
+  const visibleEvents = eventsGroupedByDate.slice(0, numberOfVisibleCalendarEntries);
 
   return (
     <div data-testid="filings-calendar-as-list">
@@ -91,7 +83,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
                 {parseDateWithFormat(events[0].dueDate, defaultDateFormat).format("MMMM D, YYYY")}
               </div>
               {events.map((event, index) => {
-                if (event.eventType === "filing") {
+                if (event.calendarEventType === "TAX-FILING") {
                   return (
                     <CalendarEvent
                       key={event.identifier}
@@ -101,10 +93,10 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
                       index={index}
                     />
                   );
-                } else if (event.eventType === "licenses") {
+                } else if (event.calendarEventType === "LICENSE") {
                   return (
                     <LicenseEvent
-                      key={`${event.type}-${event.dueDate}`}
+                      key={`${event.licenseEventSubtype}-${event.dueDate}`}
                       licenseEvent={event}
                       index={index}
                       industryId={props.userData.profileData.industryId}
@@ -117,7 +109,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
         );
       })}
 
-      {EventsGroupedByDate.length > numberOfVisibleCalendarEntries && (
+      {eventsGroupedByDate.length > numberOfVisibleCalendarEntries && (
         <UnStyledButton
           style={"tertiary"}
           underline={true}

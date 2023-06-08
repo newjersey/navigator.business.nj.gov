@@ -12,7 +12,7 @@ import {
   getCurrentDate,
   getJanOfYear,
   parseDateWithFormat,
-  TaxFiling,
+  TaxFilingCalendarEvent,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { ReactElement, ReactNode, useState } from "react";
@@ -31,7 +31,7 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const [showExpandFilingsButton, setShowExpandFilingsButton] = useState(false);
   const date = getJanOfYear(parseDateWithFormat(props.activeYear, "YYYY")).add(props.num, "months");
-  const sortedFilteredFilingsWithinAYear: TaxFiling[] = props.userData?.taxFilingData.filings
+  const sortedFilteredFilingsWithinAYear: TaxFilingCalendarEvent[] = props.userData?.taxFilingData.filings
     ? sortFilterCalendarEventsWithinAYear(props.userData.taxFilingData.filings, props.activeYear)
     : [];
 
@@ -53,7 +53,7 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
     remainingFilings.unshift(visibleFilings.pop()!);
   }
 
-  const renderFilings = (filings: TaxFiling[]): ReactNode => {
+  const renderFilings = (filings: TaxFilingCalendarEvent[]): ReactNode => {
     return filings
       .filter((filing) => {
         return props.operateReferences[filing.identifier];

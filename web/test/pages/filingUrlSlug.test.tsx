@@ -6,11 +6,11 @@ import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
   defaultDateFormat,
   generateProfileData,
+  generateTaxFilingCalendarEvent,
   generateTaxFilingData,
   getCurrentDate,
   randomInt,
 } from "@businessnjgovnavigator/shared";
-import { generateTaxFiling } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 import dayjs from "dayjs";
@@ -60,8 +60,8 @@ describe("filing page", () => {
       profileData: generateProfileData({ entityId: "1234567890" }),
       taxFilingData: generateTaxFilingData({
         filings: [
-          generateTaxFiling({}),
-          generateTaxFiling({
+          generateTaxFilingCalendarEvent({}),
+          generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
             dueDate: dueDate.format(defaultDateFormat),
           }),
@@ -107,7 +107,12 @@ describe("filing page", () => {
     useMockUserData({
       profileData: generateProfileData({ entityId: "1234567890" }),
       taxFilingData: generateTaxFilingData({
-        filings: [generateTaxFiling({ identifier: "filing id", dueDate: dueDate.format(defaultDateFormat) })],
+        filings: [
+          generateTaxFilingCalendarEvent({
+            identifier: "filing id",
+            dueDate: dueDate.format(defaultDateFormat),
+          }),
+        ],
       }),
     });
 
@@ -122,7 +127,10 @@ describe("filing page", () => {
     useMockUserData({
       profileData: generateProfileData({ entityId: "1234567890" }),
       taxFilingData: generateTaxFilingData({
-        filings: [generateTaxFiling({}), generateTaxFiling({ identifier: "filing-identifier-1" })],
+        filings: [
+          generateTaxFilingCalendarEvent({}),
+          generateTaxFilingCalendarEvent({ identifier: "filing-identifier-1" }),
+        ],
       }),
     });
 
@@ -157,7 +165,10 @@ describe("filing page", () => {
     useMockUserData({
       profileData: generateProfileData({ entityId: "1234567890" }),
       taxFilingData: generateTaxFilingData({
-        filings: [generateTaxFiling({}), generateTaxFiling({ identifier: "filing-identifier-1" })],
+        filings: [
+          generateTaxFilingCalendarEvent({}),
+          generateTaxFilingCalendarEvent({ identifier: "filing-identifier-1" }),
+        ],
       }),
     });
 
@@ -177,35 +188,35 @@ describe("filing page", () => {
       profileData: generateProfileData({ entityId: "1234567890" }),
       taxFilingData: generateTaxFilingData({
         filings: [
-          generateTaxFiling({
+          generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
             dueDate: getCurrentDate().add(2, "month").format(defaultDateFormat),
           }),
-          generateTaxFiling({
+          generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
             dueDate: getCurrentDate().add(3, "month").format(defaultDateFormat),
           }),
-          generateTaxFiling({
+          generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
             dueDate: getCurrentDate().add(8, "month").format(defaultDateFormat),
           }),
-          generateTaxFiling({
+          generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
             dueDate: getCurrentDate().add(1, "month").format(defaultDateFormat),
           }),
-          generateTaxFiling({
+          generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
             dueDate: closestDate.format(defaultDateFormat),
           }),
-          generateTaxFiling({
+          generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
             dueDate: getCurrentDate().add(7, "month").format(defaultDateFormat),
           }),
-          generateTaxFiling({
+          generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
             dueDate: getCurrentDate().add(4, "month").format(defaultDateFormat),
           }),
-          generateTaxFiling({
+          generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
             dueDate: getCurrentDate().add(6, "month").format(defaultDateFormat),
           }),
@@ -227,7 +238,7 @@ describe("filing page", () => {
   it("contains a tooltip with a note regarding filing date in the annual report", async () => {
     useMockUserData({
       taxFilingData: generateTaxFilingData({
-        filings: [generateTaxFiling({ identifier: "annual-report" })],
+        filings: [generateTaxFilingCalendarEvent({ identifier: "annual-report" })],
       }),
     });
 

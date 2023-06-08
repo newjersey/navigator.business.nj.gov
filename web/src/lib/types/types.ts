@@ -18,6 +18,7 @@ import {
   TaxFilingData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { LicenseEventSubtype } from "@businessnjgovnavigator/shared/taxFiling";
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types
@@ -388,15 +389,7 @@ export interface LicenseEvent {
   callToActionLink?: string;
   callToActionText?: string;
   contentMd: string;
-  previewType?: LicenseEventType;
-}
-
-export type LicenseEventType = "expiration" | "renewal";
-
-export interface LicenseCalendarEvent {
-  dueDate: string;
-  type: LicenseEventType;
-  eventType: "licenses";
+  previewType?: LicenseEventSubtype;
 }
 
 export type OperateReference = {
