@@ -140,13 +140,6 @@ interface v115TaxFilingCalendarEvent extends v115CalendarEvent {
   readonly calendarEventType: "TAX-FILING";
 }
 
-type v115LicenseEventSubtype = "expiration" | "renewal";
-
-interface v115LicenseCalendarEvent extends v115CalendarEvent {
-  readonly licenseEventSubtype: v115LicenseEventSubtype;
-  readonly calendarEventType: "LICENSE";
-}
-
 type v115NameAndAddress = {
   name: string;
   addressLine1: string;

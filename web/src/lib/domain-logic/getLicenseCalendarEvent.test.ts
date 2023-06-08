@@ -41,7 +41,7 @@ describe("getLicenseCalendarEvent", () => {
       {
         dueDate: currentDate.format(defaultDateFormat),
         licenseEventSubtype: "expiration",
-        calendarEventType: "licenses",
+        calendarEventType: "LICENSE",
       },
     ]);
   });
@@ -57,7 +57,7 @@ describe("getLicenseCalendarEvent", () => {
       {
         dueDate: currentDate.add(30, "days").format(defaultDateFormat),
         licenseEventSubtype: "renewal",
-        calendarEventType: "licenses",
+        calendarEventType: "LICENSE",
       },
     ]);
   });
@@ -72,12 +72,12 @@ describe("getLicenseCalendarEvent", () => {
       {
         dueDate: currentDate.format(defaultDateFormat),
         licenseEventSubtype: "expiration",
-        calendarEventType: "licenses",
+        calendarEventType: "LICENSE",
       },
       {
         dueDate: currentDate.add(30, "days").format(defaultDateFormat),
         licenseEventSubtype: "renewal",
-        calendarEventType: "licenses",
+        calendarEventType: "LICENSE",
       },
     ]);
   });
@@ -93,7 +93,7 @@ describe("getLicenseCalendarEvent", () => {
       {
         dueDate: expirationDate.format(defaultDateFormat),
         licenseEventSubtype: "expiration",
-        calendarEventType: "licenses",
+        calendarEventType: "LICENSE",
       },
     ]);
   });

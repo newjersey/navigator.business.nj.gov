@@ -1,9 +1,10 @@
-import { TaxFiling } from "@shared/taxFiling";
+import { TaxFilingCalendarEvent } from "@shared/taxFiling";
 import { createHmac } from "node:crypto";
 
-export const generateAnnualFilings = (dueDates: string[]): TaxFiling[] => {
+export const generateAnnualFilings = (dueDates: string[]): TaxFilingCalendarEvent[] => {
   return dueDates.map((dueDate: string) => ({
     identifier: "ANNUAL_FILING",
+    calendarEventType: "TAX-FILING",
     dueDate,
   }));
 };
