@@ -1,6 +1,6 @@
 ---
 urlSlug: "massage-therapy"
-title: Massage License
+title: Massage
 callToActionLink: null
 callToActionText: ""
 ---

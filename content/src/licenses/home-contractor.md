@@ -1,6 +1,6 @@
 ---
 urlSlug: "home-contractor"
-title: Home Contractor License
+title: Home Contractor
 callToActionLink: null
 callToActionText: ""
 ---

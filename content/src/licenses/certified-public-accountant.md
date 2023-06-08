@@ -1,6 +1,6 @@
 ---
 urlSlug: "certified-public-accountant"
-title: Accountant License
+title: Accountant
 callToActionLink: null
 callToActionText: ""
 ---
