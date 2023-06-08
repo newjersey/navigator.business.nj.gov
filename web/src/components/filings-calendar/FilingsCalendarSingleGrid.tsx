@@ -1,5 +1,5 @@
+import { CalendarEvent } from "@/components/filings-calendar/CalendarEvent";
 import { LicenseEvent } from "@/components/filings-calendar/LicenseEvent";
-import { Tag } from "@/components/njwds-extended/Tag";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import {
   isCalendarMonthLessThanCurrentMonth,
@@ -15,7 +15,6 @@ import {
   TaxFiling,
   UserData,
 } from "@businessnjgovnavigator/shared";
-import Link from "next/link";
 import { ReactElement, ReactNode, useState } from "react";
 import { UnStyledButton } from "../njwds-extended/UnStyledButton";
 
@@ -61,25 +60,12 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
       })
       .map((filing) => {
         return (
-          <div key={filing.identifier} className="line-height-1 margin-bottom-1" data-testid="filing">
-            <Tag backgroundColor="accent-warm-extra-light" isHover isRadiusMd isWrappingText>
-              <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}>
-                <a
-                  href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
-                  data-testid={filing.identifier.toLowerCase()}
-                  className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline"
-                >
-                  <span className="text-bold text-uppercase text-base-dark">
-                    {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
-                    {parseDateWithFormat(filing.dueDate, defaultDateFormat).format("M/D")}
-                  </span>{" "}
-                  <span className="text-no-uppercase text-underline text-base-dark">
-                    {props.operateReferences[filing.identifier].name}
-                  </span>
-                </a>
-              </Link>
-            </Tag>
-          </div>
+          <CalendarEvent
+            key={filing.identifier}
+            title={props.operateReferences[filing.identifier].name}
+            dueDate={filing.dueDate}
+            urlSlug={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
+          />
         );
       });
   };
