@@ -166,7 +166,13 @@ describe("ApiTaxFilingClient", () => {
       });
       expect(response).toEqual({
         state: "SUCCESS",
-        filings: [{ identifier: "test-id", dueDate: dateToShortISO(Results[0].Values[0]) }],
+        filings: [
+          {
+            identifier: "test-id",
+            dueDate: dateToShortISO(Results[0].Values[0]),
+            calendarEventType: "TAX-FILING",
+          },
+        ],
       });
     });
 

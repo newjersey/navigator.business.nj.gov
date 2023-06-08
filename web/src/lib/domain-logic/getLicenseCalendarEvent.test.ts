@@ -13,17 +13,7 @@ describe("getLicenseCalendarEvent", () => {
   it("does not return an array containing events when expirationISO is undefined", () => {
     expect(
       getLicenseCalendarEvent(
-        generateLicenseData({ expirationISO: undefined, status: "ACTIVE" }),
-        currentDate.year(),
-        currentDate.month()
-      )
-    ).toEqual([]);
-  });
-
-  it("does not return an array containing events when license status is not Active", () => {
-    expect(
-      getLicenseCalendarEvent(
-        generateLicenseData({ expirationISO: currentDate.toISOString(), status: "BARRED" }),
+        generateLicenseData({ expirationISO: undefined }),
         currentDate.year(),
         currentDate.month()
       )
@@ -33,7 +23,7 @@ describe("getLicenseCalendarEvent", () => {
   it("returns an array containing expiration event when within the current month", () => {
     expect(
       getLicenseCalendarEvent(
-        generateLicenseData({ expirationISO: currentDate.toISOString(), status: "ACTIVE" }),
+        generateLicenseData({ expirationISO: currentDate.toISOString() }),
         currentDate.year(),
         currentDate.month()
       )
@@ -49,7 +39,7 @@ describe("getLicenseCalendarEvent", () => {
   it("returns an array containing renewal event when within the month after expiration", () => {
     expect(
       getLicenseCalendarEvent(
-        generateLicenseData({ expirationISO: currentDate.toISOString(), status: "ACTIVE" }),
+        generateLicenseData({ expirationISO: currentDate.toISOString() }),
         currentDate.year(),
         currentDate.add(1, "month").month()
       )
@@ -65,7 +55,7 @@ describe("getLicenseCalendarEvent", () => {
   it("returns an array containing all license events within the year", () => {
     expect(
       getLicenseCalendarEvent(
-        generateLicenseData({ expirationISO: currentDate.toISOString(), status: "ACTIVE" }),
+        generateLicenseData({ expirationISO: currentDate.toISOString() }),
         currentDate.year()
       )
     ).toEqual([
@@ -86,7 +76,7 @@ describe("getLicenseCalendarEvent", () => {
     const expirationDate = currentDate.month(11);
     expect(
       getLicenseCalendarEvent(
-        generateLicenseData({ expirationISO: expirationDate.toISOString(), status: "ACTIVE" }),
+        generateLicenseData({ expirationISO: expirationDate.toISOString() }),
         expirationDate.year()
       )
     ).toEqual([

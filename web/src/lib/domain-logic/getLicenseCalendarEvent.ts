@@ -6,14 +6,10 @@ export const getLicenseCalendarEvent = (
   year: number,
   monthFilter?: number
 ): LicenseCalendarEvent[] => {
-  if (
-    licenseData === undefined ||
-    licenseData.expirationISO === undefined ||
-    licenseData.status !== "ACTIVE"
-  ) {
-    return [];
-  }
   const events: LicenseCalendarEvent[] = [];
+  if (licenseData === undefined || licenseData.expirationISO === undefined) {
+    return events;
+  }
   const expirationDate = parseDate(licenseData.expirationISO);
   if (expirationDate.year() === year && (monthFilter ? expirationDate.month() === monthFilter : true)) {
     events.push({
