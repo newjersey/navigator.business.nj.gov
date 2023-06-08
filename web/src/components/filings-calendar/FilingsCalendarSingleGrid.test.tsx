@@ -5,6 +5,7 @@ import {
   defaultDateFormat,
   generateTaxFilingData,
   generateUserData,
+  LookupIndustryById,
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
 import { generateLicenseData, generateTaxFiling } from "@businessnjgovnavigator/shared/test";
@@ -154,9 +155,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
       expirationISO: currentDate.add(4, "days").toISOString(),
       status: "ACTIVE",
     });
-    const userData = generateUserData({
-      licenseData,
-    });
+    const userData = generateUserData({ licenseData });
     render(
       <FilingsCalendarSingleGrid
         userData={userData}
@@ -166,7 +165,10 @@ describe("<FilingsCalendarSingleGrid />", () => {
       />
     );
 
-    expect(screen.getByTestId("license-expiration")).toBeInTheDocument();
+    const expectedTitle = `${LookupIndustryById(userData.profileData.industryId).name} ${
+      Config.licenseEventDefaults.expirationTitleLabel
+    }`;
+    expect(screen.getByText(expectedTitle)).toBeInTheDocument();
   });
 
   it("renders a licenseEvent renewal task", () => {
@@ -183,8 +185,10 @@ describe("<FilingsCalendarSingleGrid />", () => {
         activeYear={currentDate.year().toString()}
       />
     );
-
-    expect(screen.getByTestId("license-renewal")).toBeInTheDocument();
+    const expectedTitle = `${LookupIndustryById(userData.profileData.industryId).name} ${
+      Config.licenseEventDefaults.renewalTitleLabel
+    }`;
+    expect(screen.getByText(expectedTitle)).toBeInTheDocument();
   });
 
   it("does not render expand collapse button when there are only two tax filings", () => {
@@ -223,9 +227,13 @@ describe("<FilingsCalendarSingleGrid />", () => {
       />
     );
 
+    const expectedLicenseTitle = `${LookupIndustryById(userData.profileData.industryId).name} ${
+      Config.licenseEventDefaults.expirationTitleLabel
+    }`;
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
-    expect(screen.getByTestId("license-expiration")).toBeInTheDocument();
+    expect(screen.getByText(expectedLicenseTitle)).toBeInTheDocument();
     expect(screen.queryByText("Tax Filing Two")).not.toBeInTheDocument();
+
     fireEvent.click(screen.getByText(Config.dashboardDefaults.viewMoreFilingsButton));
     expect(screen.getByText("Tax Filing Two")).toBeInTheDocument();
     expect(screen.getByText("Tax Filing Three")).toBeInTheDocument();
