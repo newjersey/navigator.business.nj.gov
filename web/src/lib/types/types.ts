@@ -384,7 +384,6 @@ export interface Filing {
 
 export interface LicenseEvent {
   filename: string;
-  title: string;
   urlSlug: string;
   callToActionLink?: string;
   callToActionText?: string;

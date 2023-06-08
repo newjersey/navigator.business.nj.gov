@@ -1,7 +1,6 @@
 ---
 urlSlug: cosmetology
 previewType: renewal
-title: Cosmetology
 callToActionLink: null
 callToActionText: ""
 ---

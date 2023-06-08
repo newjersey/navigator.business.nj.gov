@@ -18,14 +18,14 @@ export const LicenseEvent = (props: Props): ReactElement | null => {
     renewal: Config.licenseEventDefaults.renewalTitleLabel,
   };
 
-  if (!props.licenseEvent || !props.industryId) {
+  const licenseName = LookupIndustryById(props.industryId).licenseType;
+
+  if (!props.licenseEvent || !props.industryId || !licenseName) {
     return null;
   }
 
   const urlSlug = `licenses/${props.industryId}-${props.licenseEvent.licenseEventSubtype}`;
-  const displayTitle = `${LookupIndustryById(props.industryId).name} ${
-    titles[props.licenseEvent.licenseEventSubtype]
-  }`;
+  const displayTitle = `${licenseName} ${titles[props.licenseEvent.licenseEventSubtype]}`;
 
   return (
     <CalendarEvent

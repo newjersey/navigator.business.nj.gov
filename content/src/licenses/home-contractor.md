@@ -1,6 +1,5 @@
 ---
 urlSlug: "home-contractor"
-title: Home Contractor
 callToActionLink: null
 callToActionText: ""
 ---

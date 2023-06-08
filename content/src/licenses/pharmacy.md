@@ -1,6 +1,5 @@
 ---
 urlSlug: "pharmacy"
-title: Pharmacy
 callToActionLink: null
 callToActionText: ""
 ---

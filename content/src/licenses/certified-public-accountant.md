@@ -1,6 +1,5 @@
 ---
 urlSlug: "certified-public-accountant"
-title: Accountant
 callToActionLink: null
 callToActionText: ""
 ---

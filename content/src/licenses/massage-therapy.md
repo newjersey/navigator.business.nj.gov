@@ -1,6 +1,5 @@
 ---
 urlSlug: "massage-therapy"
-title: Massage
 callToActionLink: null
 callToActionText: ""
 ---
