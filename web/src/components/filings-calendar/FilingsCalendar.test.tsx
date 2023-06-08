@@ -489,7 +489,7 @@ describe("<FilingsCalendar />", () => {
           })
         ).id,
       }),
-      licenseData: generateLicenseData({ expirationISO: expirationDate.toISOString(), status: "ACTIVE" }),
+      licenseData: generateLicenseData({ expirationISO: expirationDate.toISOString() }),
       taxFilingData: generateTaxFilingData({
         filings: [
           generateTaxFilingCalendarEvent({

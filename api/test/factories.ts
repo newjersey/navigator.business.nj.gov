@@ -113,7 +113,7 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
     nameAndAddress: generateNameAndAddress({}),
     completedSearch: true,
     items: [generateLicenseStatusItem({})],
-    status: "PENDING",
+    status: randomElementFromArray(["PENDING", "ACTIVE", "EXPIRED"]),
     lastUpdatedISO: getCurrentDateISOString(),
     ...overrides,
   };

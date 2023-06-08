@@ -152,10 +152,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
   });
 
   it("renders a licenseEvent expiration task", () => {
-    const licenseData = generateLicenseData({
-      expirationISO: currentDate.add(4, "days").toISOString(),
-      status: "ACTIVE",
-    });
+    const licenseData = generateLicenseData({ expirationISO: currentDate.add(4, "days").toISOString() });
     const userData = generateUserData({ licenseData });
     render(
       <FilingsCalendarSingleGrid
@@ -175,7 +172,6 @@ describe("<FilingsCalendarSingleGrid />", () => {
   it("renders a licenseEvent renewal task", () => {
     const licenseData = generateLicenseData({
       expirationISO: currentDate.add(4, "days").toISOString(),
-      status: "ACTIVE",
     });
     const userData = generateUserData({ licenseData });
     render(
