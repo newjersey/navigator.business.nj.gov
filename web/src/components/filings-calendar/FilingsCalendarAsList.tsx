@@ -48,10 +48,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
 
   const sortedFilteredEventsWithinAYear: Array<TaxCalendarEvent | LicenseCalendarEvent> = props.userData
     ?.taxFilingData.filings
-    ? sortFilterCalendarEventsWithinAYear<TaxCalendarEvent | LicenseCalendarEvent>(
-        [...typedLicenseEvents, ...typedFilingEvents],
-        props.activeYear
-      )
+    ? sortFilterCalendarEventsWithinAYear([...typedLicenseEvents, ...typedFilingEvents], props.activeYear)
     : [];
 
   if (sortedFilteredEventsWithinAYear.length === 0) {
