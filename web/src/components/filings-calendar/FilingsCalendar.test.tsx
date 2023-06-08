@@ -20,7 +20,6 @@ import {
   getCurrentDate,
   LookupIndustryById,
   OperatingPhases,
-  parseDateWithFormat,
   randomInt,
   TaxFiling,
   UserData,
@@ -444,7 +443,7 @@ describe("<FilingsCalendar />", () => {
     });
   });
 
-  it("displays filings calendar as list with annual report date", () => {
+  it("displays filings calendar as list with annual report", () => {
     const dueDate = getCurrentDate().add(2, "months");
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
@@ -475,11 +474,7 @@ describe("<FilingsCalendar />", () => {
 
     expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
     expect(screen.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        `Annual Report ${parseDateWithFormat(annualReport.dueDate, defaultDateFormat).format("YYYY")}`
-      )
-    ).toBeInTheDocument();
+    expect(screen.getByText("Annual Report")).toBeInTheDocument();
   });
 
   it("displays filings calendar as list with license events", () => {
