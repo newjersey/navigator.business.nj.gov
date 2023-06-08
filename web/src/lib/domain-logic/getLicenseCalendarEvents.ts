@@ -1,7 +1,7 @@
 import { parseDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { defaultDateFormat, LicenseCalendarEvent, LicenseData } from "@businessnjgovnavigator/shared/index";
 
-export const getLicenseCalendarEvent = (
+export const getLicenseCalendarEvents = (
   licenseData: LicenseData | undefined,
   year: number,
   monthFilter?: number

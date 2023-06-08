@@ -4,7 +4,7 @@ import { LicenseEvent } from "@/components/filings-calendar/LicenseEvent";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { sortFilterCalendarEventsWithinAYear } from "@/lib/domain-logic/filterCalendarEvents";
-import { getLicenseCalendarEvent } from "@/lib/domain-logic/getLicenseCalendarEvent";
+import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarEvents";
 import { OperateReference } from "@/lib/types/types";
 import { groupBy } from "@/lib/utils/helpers";
 import { LicenseCalendarEvent, TaxFilingCalendarEvent } from "@businessnjgovnavigator/shared";
@@ -30,7 +30,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
     setNumberOfVisibleCalendarEntries(LIST_VIEW_MORE_INCREMENT);
   }, [props.activeYear]);
 
-  const licenseCalendarEvents = getLicenseCalendarEvent(
+  const licenseCalendarEvents = getLicenseCalendarEvents(
     props.userData?.licenseData,
     Number.parseInt(props.activeYear)
   );
