@@ -1,17 +1,16 @@
 import { Content } from "@/components/Content";
+import { CalendarEvent } from "@/components/filings-calendar/CalendarEvent";
 import { LicenseEvent } from "@/components/filings-calendar/LicenseEvent";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { sortFilterCalendarEventsWithinAYear } from "@/lib/domain-logic/filterCalendarEvents";
 import { getLicenseCalendarEvent } from "@/lib/domain-logic/getLicenseCalendarEvent";
 import { LicenseCalendarEvent, OperateReference } from "@/lib/types/types";
-import analytics from "@/lib/utils/analytics";
 import { groupBy } from "@/lib/utils/helpers";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
 import { TaxFiling } from "@businessnjgovnavigator/shared/taxFiling";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import Link from "next/link";
 import { ReactElement, useEffect, useState } from "react";
 
 const LIST_VIEW_MORE_INCREMENT = 5;
@@ -97,22 +96,13 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
               {events.map((event, index) => {
                 if (event.eventType === "filing") {
                   return (
-                    <div
-                      key={`${event.identifier}-${event.dueDate}`}
-                      className={`margin-bottom-05 ${index === 0 ? "margin-top-05" : ""}`}
-                    >
-                      <Link href={`filings/${props.operateReferences[event.identifier].urlSlug}`} passHref>
-                        <a
-                          href={`filings/${props.operateReferences[event.identifier].urlSlug}`}
-                          onClick={(): void => {
-                            analytics.event.calendar_date.click.go_to_date_detail_screen();
-                          }}
-                        >
-                          {props.operateReferences[event.identifier].name}{" "}
-                          {parseDateWithFormat(event.dueDate, defaultDateFormat).format("YYYY")}
-                        </a>
-                      </Link>
-                    </div>
+                    <CalendarEvent
+                      key={event.identifier}
+                      title={props.operateReferences[event.identifier].name}
+                      dueDate={event.dueDate}
+                      urlSlug={`filings/${props.operateReferences[event.identifier].urlSlug}`}
+                      index={index}
+                    />
                   );
                 } else if (event.eventType === "licenses") {
                   return (

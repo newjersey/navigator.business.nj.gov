@@ -36,7 +36,6 @@ import {
   generateUserData,
   getCurrentDate,
   OperatingPhases,
-  parseDateWithFormat,
   RegistrationStatus,
   UserData,
 } from "@businessnjgovnavigator/shared";
@@ -385,11 +384,7 @@ describe("dashboard page", () => {
 
     expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
     expect(screen.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        `Annual Report ${parseDateWithFormat(annualReport.dueDate, defaultDateFormat).format("YYYY")}`
-      )
-    ).toBeInTheDocument();
+    expect(screen.getByText("Annual Report")).toBeInTheDocument();
   });
 
   it("does not display filings calendar as list when taxfiling is not populated", () => {

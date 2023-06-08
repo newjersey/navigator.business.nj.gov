@@ -10,6 +10,7 @@ interface Props {
   urlSlug: string;
   dueDate: string;
   title: string;
+  index?: number;
 }
 
 export const CalendarEvent = (props: Props): ReactElement => {
@@ -18,6 +19,18 @@ export const CalendarEvent = (props: Props): ReactElement => {
   const onClick = (): void => {
     analytics.event.calendar_date.click.go_to_date_detail_screen();
   };
+
+  if (props.index !== undefined) {
+    return (
+      <div className={`margin-bottom-05 ${props.index === 0 ? "margin-top-05" : ""}`}>
+        <Link href={props.urlSlug} passHref>
+          <a href={props.urlSlug} onClick={onClick}>
+            {props.title}
+          </a>
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="line-height-1 margin-bottom-1">
