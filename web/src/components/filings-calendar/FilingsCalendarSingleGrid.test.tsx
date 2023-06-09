@@ -195,6 +195,33 @@ describe("<FilingsCalendarSingleGrid />", () => {
     expect(screen.getByText(expectedTitle)).toBeInTheDocument();
   });
 
+  it("renders both license events in same month (on the 1st and 31st)", () => {
+    const licenseData = generateLicenseData({
+      expirationISO: currentDate.add(1, "year").month(1).day(1).toISOString(),
+    });
+    const userData = generateUserData({
+      licenseData,
+      profileData: generateProfileData({ industryId: "cosmetology" }),
+    });
+    render(
+      <FilingsCalendarSingleGrid
+        userData={userData}
+        operateReferences={operateReferences}
+        num={0}
+        activeYear={currentDate.add(1, "year").year().toString()}
+      />
+    );
+    const expectedExpirationTitle = `${LookupIndustryById(userData.profileData.industryId).licenseType} ${
+      Config.licenseEventDefaults.expirationTitleLabel
+    }`;
+
+    const expectedRenewalTitle = `${LookupIndustryById(userData.profileData.industryId).licenseType} ${
+      Config.licenseEventDefaults.renewalTitleLabel
+    }`;
+    expect(screen.getByText(expectedExpirationTitle)).toBeInTheDocument();
+    expect(screen.getByText(expectedRenewalTitle)).toBeInTheDocument();
+  });
+
   it("does not render expand collapse button when there are only two tax filings", () => {
     const userData = generateUserData({
       taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo] }),
@@ -214,7 +241,38 @@ describe("<FilingsCalendarSingleGrid />", () => {
     expect(screen.queryByText(Config.dashboardDefaults.viewLessFilingsButton)).not.toBeInTheDocument();
   });
 
-  it("always shows a licenseEvent even with 2+ tax filings", () => {
+  it("always shows a licenseEvent under the fold with exactly 2 tax filings", () => {
+    const userData = generateUserData({
+      licenseData: generateLicenseData({
+        expirationISO: currentDate.add(4, "days").toISOString(),
+        status: "ACTIVE",
+      }),
+      taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo] }),
+      profileData: generateProfileData({ industryId: "home-contractor" }),
+    });
+    render(
+      <FilingsCalendarSingleGrid
+        userData={userData}
+        operateReferences={operateReferences}
+        num={month}
+        activeYear={year}
+      />
+    );
+
+    const expectedLicenseTitle = `${LookupIndustryById(userData.profileData.industryId).licenseType} ${
+      Config.licenseEventDefaults.expirationTitleLabel
+    }`;
+    expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
+    expect(screen.getByText("Tax Filing Two")).toBeInTheDocument();
+    expect(screen.queryByText(expectedLicenseTitle)).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByText(Config.dashboardDefaults.viewMoreFilingsButton));
+    expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
+    expect(screen.getByText("Tax Filing Two")).toBeInTheDocument();
+    expect(screen.getByText(expectedLicenseTitle)).toBeInTheDocument();
+  });
+
+  it("always shows a licenseEvent under the fold with 2+ tax filings", () => {
     const userData = generateUserData({
       licenseData: generateLicenseData({
         expirationISO: currentDate.add(4, "days").toISOString(),
@@ -236,12 +294,14 @@ describe("<FilingsCalendarSingleGrid />", () => {
       Config.licenseEventDefaults.expirationTitleLabel
     }`;
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
-    expect(screen.getByText(expectedLicenseTitle)).toBeInTheDocument();
-    expect(screen.queryByText("Tax Filing Two")).not.toBeInTheDocument();
+    expect(screen.getByText("Tax Filing Two")).toBeInTheDocument();
+    expect(screen.queryByText(expectedLicenseTitle)).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByText(Config.dashboardDefaults.viewMoreFilingsButton));
+    expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
     expect(screen.getByText("Tax Filing Two")).toBeInTheDocument();
     expect(screen.getByText("Tax Filing Three")).toBeInTheDocument();
+    expect(screen.getByText(expectedLicenseTitle)).toBeInTheDocument();
   });
 
   it("shows and hides the additional tax filings when the view more / view less button is clicked", () => {

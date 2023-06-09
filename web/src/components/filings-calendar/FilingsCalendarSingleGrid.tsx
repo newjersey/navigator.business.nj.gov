@@ -5,12 +5,13 @@ import {
   isCalendarMonthLessThanCurrentMonth,
   sortFilterCalendarEventsWithinAYear,
 } from "@/lib/domain-logic/filterCalendarEvents";
-import { getLicenseCalendarEvent } from "@/lib/domain-logic/getLicenseCalendarEvent";
+import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarEvents";
 import { OperateReference } from "@/lib/types/types";
 import {
   defaultDateFormat,
   getCurrentDate,
   getJanOfYear,
+  LicenseCalendarEvent,
   parseDateWithFormat,
   TaxFilingCalendarEvent,
   UserData,
@@ -46,12 +47,18 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
   const remainingFilings = thisMonthFilings.slice(NUM_OF_FILINGS_ALWAYS_VIEWABLE);
   const isOnCurrentYear = getCurrentDate().year().toString() === props.activeYear;
 
-  const licenseEvent = getLicenseCalendarEvent(props.userData?.licenseData, date.year(), date.month());
-
-  if (licenseEvent.length > 0 && visibleFilings.length === NUM_OF_FILINGS_ALWAYS_VIEWABLE) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    remainingFilings.unshift(visibleFilings.pop()!);
+  const licenseEvents = getLicenseCalendarEvents(props.userData?.licenseData, date.year(), date.month());
+  let visibleLicenses: LicenseCalendarEvent[] = [];
+  let remainingLicenses: LicenseCalendarEvent[] = [];
+  if (visibleFilings.length < NUM_OF_FILINGS_ALWAYS_VIEWABLE) {
+    const visibleSlotsLeft = NUM_OF_FILINGS_ALWAYS_VIEWABLE - visibleFilings.length;
+    visibleLicenses = licenseEvents.slice(0, visibleSlotsLeft);
+    remainingLicenses = visibleLicenses.slice(visibleSlotsLeft);
+  } else {
+    remainingLicenses = licenseEvents;
   }
+
+  const remainingEventsCount = remainingLicenses.length + remainingFilings.length;
 
   const renderFilings = (filings: TaxFilingCalendarEvent[]): ReactNode => {
     return filings
@@ -86,10 +93,23 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
       ) : (
         <>
           {renderFilings(visibleFilings)}
-          <LicenseEvent licenseEvent={licenseEvent[0]} industryId={props.userData.profileData.industryId} />
-          {remainingFilings.length > 0 && showExpandFilingsButton && (
+          {visibleLicenses.map((licenseEvent) => (
+            <LicenseEvent
+              key={licenseEvent.licenseEventSubtype}
+              licenseEvent={licenseEvent}
+              industryId={props.userData.profileData.industryId}
+            />
+          ))}
+          {remainingEventsCount > 0 && showExpandFilingsButton && (
             <>
               {renderFilings(remainingFilings)}
+              {remainingLicenses.map((licenseEvent) => (
+                <LicenseEvent
+                  key={licenseEvent.licenseEventSubtype}
+                  licenseEvent={licenseEvent}
+                  industryId={props.userData.profileData.industryId}
+                />
+              ))}
               <div className="flex flex-justify-center">
                 <UnStyledButton
                   style="tertiary"
@@ -101,7 +121,7 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
               </div>
             </>
           )}
-          {remainingFilings.length > 0 && !showExpandFilingsButton && (
+          {remainingEventsCount > 0 && !showExpandFilingsButton && (
             <div className="flex flex-justify-center">
               <UnStyledButton
                 style="tertiary"
