@@ -3,7 +3,6 @@ import { Content } from "@/components/Content";
 import { FormationDateModal } from "@/components/FormationDateModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Icon } from "@/components/njwds/Icon";
-import { RegisteredForTaxesModal } from "@/components/RegisteredForTaxesModal";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
@@ -238,12 +237,6 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
 
       <FormationDateModal
         isOpen={currentOpenModal === "formation"}
-        close={(): void => setCurrentOpenModal(undefined)}
-        onSave={(config): void => setToNextStatus(config)}
-      />
-
-      <RegisteredForTaxesModal
-        isOpen={currentOpenModal === "registered-for-taxes"}
         close={(): void => setCurrentOpenModal(undefined)}
         onSave={(config): void => setToNextStatus(config)}
       />

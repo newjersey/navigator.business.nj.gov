@@ -2819,10 +2819,6 @@ collections:
             widget: object
             summary: "{{registeredForTaxesModal}}"
             fields:
-              - { label: Title, name: title, widget: string }
-              - { label: Subtitle, name: subtitle, widget: markdown }
-              - { label: Save button text, name: saveButtonText, widget: string }
-              - { label: Cancel button text, name: cancelButtonText, widget: string }
               - { label: Are-You-Sure Tax Title, name: areYouSureTaxTitle, widget: string }
               - { label: Are-You-Sure Tax Body, name: areYouSureTaxBody, widget: markdown }
               - { label: Are-You-Sure Tax Continue Button, name: areYouSureTaxContinueButton, widget: string }

@@ -283,12 +283,8 @@
     "linkTwoText": "Terms & Privacy Policy"
   },
   "registeredForTaxesModal": {
-    "title": "Find Certifications For Your Business",
-    "subtitle": "Now we can see what certifications you're eligible for, tell us your...",
-    "saveButtonText": "Save",
-    "cancelButtonText": "Cancel",
     "areYouSureTaxTitle": "Didn't Register Yet?",
-    "areYouSureTaxBody": "If you change your task status, you will will lose access to your Certifications. You can gain access to Certifications again once your status is marked as complete.",
+    "areYouSureTaxBody": "If you change your task status, you will lose access to your Certifications. You can gain access to Certifications again once your status is marked as complete.",
     "areYouSureTaxContinueButton": "Continue",
     "areYouSureTaxCancelButton": "Cancel"
   },
