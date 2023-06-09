@@ -9,10 +9,9 @@ import {
 import {
   createEmptyFormationFormData,
   foreignLegalTypePrefix,
-  FormationLegalType,
+  FormationLegalType, generateBusiness,
   generateBusinessNameAvailability,
   generateFormationFormData,
-  generateUserData,
   NameAvailability,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
@@ -60,8 +59,9 @@ describe("Formation - BusinessNameStep", () => {
       dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     };
-    return preparePage(generateUserData({ profileData, formationData }), {
-      formationDbaContent: generateFormationDbaContent({}),
+    return preparePage({
+      business: generateBusiness({ profileData, formationData }),
+      displayContent: { formationDbaContent: generateFormationDbaContent({})}
     });
   };
 
@@ -229,8 +229,9 @@ describe("Formation - BusinessNameStep", () => {
           lastVisitedPageIndex: 0,
         };
 
-        preparePage(generateUserData({ profileData, formationData }), {
-          formationDbaContent: generateFormationDbaContent({}),
+        preparePage({
+          business: generateBusiness({profileData, formationData}),
+          displayContent: {formationDbaContent: generateFormationDbaContent({})}
         });
 
         expect(screen.getByText(Config.formation.fields.businessName.header)).toBeInTheDocument();
@@ -250,9 +251,11 @@ describe("Formation - BusinessNameStep", () => {
           needsNexusDbaName: false,
         });
 
-        preparePage(generateUserData({ profileData, formationData: generateEmptyFormationData() }), {
-          formationDbaContent: generateFormationDbaContent({}),
+        preparePage({
+          business: generateBusiness({profileData, formationData: generateEmptyFormationData()}),
+          displayContent: {formationDbaContent: generateFormationDbaContent({})}
         });
+
         expect(
           screen.getByText(Config.formation.fields.businessName.overrides.foreign.header)
         ).toBeInTheDocument();

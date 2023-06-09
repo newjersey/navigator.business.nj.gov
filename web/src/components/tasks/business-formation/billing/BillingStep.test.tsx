@@ -12,7 +12,7 @@ import {
 import {
   BusinessUser,
   FormationFormData,
-  FormationLegalType,
+  FormationLegalType, generateBusiness,
   generateFormationFormData,
   generateUser,
   generateUserData,
@@ -73,14 +73,14 @@ describe("Formation - BillingStep", () => {
     };
     const user = initialUser ? generateUser(initialUser) : generateUser({});
     // eslint-disable-next-line testing-library/render-result-naming-convention
-    const page = preparePage(
-      generateUserData({
+    const page = preparePage({
+      business: generateBusiness({
         profileData,
         formationData,
-        user,
       }),
-      displayContent
-    );
+      displayContent,
+      user
+    });
 
     await page.stepperClickToBillingStep();
     return page;

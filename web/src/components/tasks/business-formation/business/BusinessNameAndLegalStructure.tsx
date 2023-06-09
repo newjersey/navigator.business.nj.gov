@@ -25,7 +25,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
   const { Config } = useConfig();
   const [legalStructureWarningIsOpen, setLegalStructureWarningIsOpen] = useState<boolean>(false);
   const { state, setStepIndex } = useContext(BusinessFormationContext);
-  const { userData } = useUserData();
+  const { business } = useUserData();
   const router = useRouter();
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { roadmap } = useRoadmap();
@@ -44,18 +44,18 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
   };
 
   const legalStructureName = (): string => {
-    if (!userData || !userData.profileData.legalStructureId) return "";
+    if (!business || !business.profileData.legalStructureId) return "";
     const preface =
-      userData?.profileData.businessPersona === "FOREIGN"
+      business?.profileData.businessPersona === "FOREIGN"
         ? `${Config.formation.legalStructure.foreignPrefaceText} `
         : "";
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const legalStructure = (Config.formation.legalStructure as any)[userData.profileData.legalStructureId];
+    const legalStructure = (Config.formation.legalStructure as any)[business.profileData.legalStructureId];
     return `${preface} ${legalStructure}`;
   };
 
-  if (!userData) {
+  if (!business) {
     return <></>;
   }
 

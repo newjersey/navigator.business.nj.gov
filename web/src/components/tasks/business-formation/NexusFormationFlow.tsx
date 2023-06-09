@@ -16,12 +16,12 @@ import { FormationFormData } from "@businessnjgovnavigator/shared/formationData"
 import { ReactElement, useContext } from "react";
 
 export const NexusFormationFlow = (): ReactElement => {
-  const { userData } = useUserData();
+  const { business } = useUserData();
   const { state, setStepIndex } = useContext(BusinessFormationContext);
   const { Config } = useConfig();
 
   const addNaicsCodeData = (contentMd: string): string => {
-    const naicsCode = userData?.profileData.naicsCode || "";
+    const naicsCode = business?.profileData.naicsCode || "";
     const naicsTemplateValue = getNaicsDisplayMd(naicsCode);
     return templateEval(contentMd, { naicsCode: naicsTemplateValue });
   };
@@ -34,7 +34,7 @@ export const NexusFormationFlow = (): ReactElement => {
     moveToStep(state.stepIndex - 1);
   };
 
-  const isNotDba = userData?.profileData.businessName && !userData.profileData.needsNexusDbaName;
+  const isNotDba = business?.profileData.businessName && !business.profileData.needsNexusDbaName;
 
   const onStepChangeAnalytics = (
     formationFormData: FormationFormData | undefined,
@@ -54,12 +54,12 @@ export const NexusFormationFlow = (): ReactElement => {
     stepIndex: number,
     config: { moveType: "NEXT_BUTTON" | "STEPPER" }
   ): Promise<void> => {
-    onStepChangeAnalytics(userData?.formationData.formationFormData, stepIndex, config.moveType);
+    onStepChangeAnalytics(business?.formationData.formationFormData, stepIndex, config.moveType);
     moveToStep(stepIndex);
   };
 
   if (state.stepIndex > 0 && isNotDba) {
-    if (allowFormation(userData.profileData.legalStructureId, userData.profileData.businessPersona)) {
+    if (allowFormation(business.profileData.legalStructureId, business.profileData.businessPersona)) {
       return <BusinessFormationPaginator />;
     } else {
       return (
