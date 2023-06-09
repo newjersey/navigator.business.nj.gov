@@ -216,6 +216,7 @@ export const generateEmptyFormationData = (): FormationData => {
     getFilingResponse: undefined,
     completedFilingPayment: false,
     businessNameAvailability: undefined,
+    dbaBusinessNameAvailability: undefined,
     lastVisitedPageIndex: 0,
   };
 };

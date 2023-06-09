@@ -2075,6 +2075,7 @@ describe("<BusinessFormationPaginator />", () => {
         formationData: {
           ...initialUserData.formationData,
           businessNameAvailability: undefined,
+          dbaBusinessNameAvailability: undefined,
         },
       };
       const page = preparePage(userDataWithName, displayContent);

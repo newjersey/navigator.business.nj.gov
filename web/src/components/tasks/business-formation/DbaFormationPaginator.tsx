@@ -63,7 +63,7 @@ export const DbaFormationPaginator = (): ReactElement => {
     moveToStep(state.stepIndex - 1);
   };
 
-  const isNotDba = userData?.profileData.businessName && !userData.profileData.needsNexusDbaName;
+  const isDba = userData?.profileData.businessName && userData.profileData.needsNexusDbaName;
 
   const onMoveToStep = async (
     stepIndex: number,
@@ -74,7 +74,7 @@ export const DbaFormationPaginator = (): ReactElement => {
     if (
       config.moveType === "NEXT_BUTTON" &&
       stepIndex === 1 &&
-      isNotDba &&
+      !isDba &&
       isAuthenticated === IsAuthenticated.FALSE
     ) {
       setRegistrationModalIsVisible(true);
@@ -115,7 +115,7 @@ export const DbaFormationPaginator = (): ReactElement => {
   };
   const ForwardButton = (): ReactElement => {
     const getForwardButtonText = (): string => {
-      if (isAuthenticated === IsAuthenticated.FALSE && isNotDba) {
+      if (isAuthenticated === IsAuthenticated.FALSE && !isDba) {
         return `Register & ${Config.formation.general.initialNextButtonText}`;
       } else {
         return Config.formation.general.initialNextNexusButtonText;
@@ -161,7 +161,11 @@ export const DbaFormationPaginator = (): ReactElement => {
   };
 
   const displayButtons = (): ReactNode => {
-    if (state.stepIndex === 0 && state.businessNameAvailability?.status === "AVAILABLE") {
+    const nameIsAvailable = isDba
+      ? state.dbaBusinessNameAvailability?.status === "AVAILABLE"
+      : state.businessNameAvailability?.status === "AVAILABLE";
+
+    if (state.stepIndex === 0 && nameIsAvailable) {
       return (
         <ButtonWrapper>
           <HelpButton />

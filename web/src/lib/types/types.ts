@@ -7,6 +7,7 @@ import {
   emptyProfileData,
   FieldsForErrorHandling,
   FormationData,
+  FormationFormData,
   FormationMember,
   FormationSigner,
   IndustrySpecificData,
@@ -477,6 +478,7 @@ export interface UpdateQueue {
   queuePreferences: (preferences: Partial<Preferences>) => UpdateQueue;
   queueTaxFilingData: (taxFilingData: Partial<TaxFilingData>) => UpdateQueue;
   queueFormationData: (formationData: Partial<FormationData>) => UpdateQueue;
+  queueFormationFormData: (formatdionFormData: Partial<FormationFormData>) => UpdateQueue;
   queueTaskItemChecklist: (taskItemChecklist: Record<string, boolean>) => UpdateQueue;
   update: (config?: { local?: boolean }) => Promise<void>;
   current: () => UserData;

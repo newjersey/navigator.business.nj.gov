@@ -20,7 +20,7 @@ export interface UserData {
   versionWhenCreated: number;
 }
 
-export const CURRENT_VERSION = 115;
+export const CURRENT_VERSION = 116;
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
   return {
@@ -60,6 +60,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
       getFilingResponse: undefined,
       completedFilingPayment: false,
       businessNameAvailability: undefined,
+      dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     },
   };

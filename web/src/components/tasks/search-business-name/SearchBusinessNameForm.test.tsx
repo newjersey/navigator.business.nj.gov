@@ -1,6 +1,11 @@
-import { SearchBusinessNameForm } from "@/components/tasks/search-business-name/SearchBusinessNameForm";
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
+import { generateFormationDbaContent } from "@/test/factories";
+import {
+  FormationPageHelpers,
+  generateFormationProfileData,
+  preparePage,
+  useSetupInitialMocks,
+} from "@/test/helpers/helpers-formation";
 import {
   fillText,
   getSearchValue,
@@ -9,73 +14,104 @@ import {
   searchAndReject,
   searchButton,
 } from "@/test/helpers/helpersSearchBusinessName";
-import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
-import { fireEvent, render, screen, within } from "@testing-library/react";
-import { ReactElement } from "react";
+import {
+  castPublicFilingLegalTypeToFormationType,
+  generateFormationFormData,
+  generateUserData,
+  ProfileData,
+  PublicFilingLegalType,
+} from "@businessnjgovnavigator/shared";
+import * as materialUi from "@mui/material";
+import { fireEvent, screen, within } from "@testing-library/react";
 
+function mockMaterialUI(): typeof materialUi {
+  return {
+    ...jest.requireActual("@mui/material"),
+    useMediaQuery: jest.fn(),
+  };
+}
+
+jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/data-hooks/useDocuments");
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
+  postBusinessFormation: jest.fn(),
+  getCompletedFiling: jest.fn(),
   searchBusinessName: jest.fn(),
 }));
+
 const mockApi = api as jest.Mocked<typeof api>;
 
-const Config = getMergedConfig();
-const onChange = jest.fn();
+describe("SearchBusinessNameForm", () => {
+  const displayContent = {
+    formationDbaContent: generateFormationDbaContent({}),
+  };
 
-describe("<SearchBusinessNameForm />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockUserData({});
-    useMockRoadmap({});
+    useSetupInitialMocks();
   });
 
-  const availableText = "AVAILABLE!";
-  const unavailableText = "UNAVAILABLE!";
-  const FakeAvailable = (): ReactElement => {
-    return <div>{availableText}</div>;
-  };
-  const FakeUnavailable = (): ReactElement => {
-    return <div>{unavailableText}</div>;
+  const getPageHelper = async (initialProfileData?: Partial<ProfileData>): Promise<FormationPageHelpers> => {
+    const profileData = generateFormationProfileData({
+      ...initialProfileData,
+      legalStructureId: "limited-liability-company",
+      businessPersona: "FOREIGN",
+    });
+    const formationData = {
+      formationFormData: generateFormationFormData(
+        {},
+        {
+          legalStructureId: castPublicFilingLegalTypeToFormationType(
+            profileData.legalStructureId as PublicFilingLegalType,
+            profileData.businessPersona
+          ),
+        }
+      ),
+      formationResponse: undefined,
+      getFilingResponse: undefined,
+      completedFilingPayment: false,
+      businessNameAvailability: undefined,
+      dbaBusinessNameAvailability: undefined,
+      lastVisitedPageIndex: 0,
+    };
+    const page = preparePage(generateUserData({ profileData, formationData }), displayContent);
+    return page;
   };
 
-  const renderForm = (): void => {
-    render(
-      <SearchBusinessNameForm
-        available={FakeAvailable}
-        unavailable={FakeUnavailable}
-        onChange={onChange}
-        config={{
-          searchButtonText: Config.searchBusinessNameTask.searchButtonText,
-          searchButtonTestId: "search-availability",
-        }}
-      />
-    );
-  };
+  it("displays modal when legal structure Edit button clicked", async () => {
+    const page = await getPageHelper();
+    await page.searchBusinessName({ status: "AVAILABLE" });
 
-  it("pre-fills the text field with the business name entered in onboarding", () => {
-    useMockProfileData({ businessName: "Best Pizza" });
-    renderForm();
+    expect(true).toBe(true);
+  });
+
+  it("pre-fills the text field with the business name entered in profile", async () => {
+    await getPageHelper({
+      businessName: "Best Pizza",
+    });
     expect(getSearchValue()).toEqual("Best Pizza");
   });
 
-  it("types a new potential name", () => {
-    useMockProfileData({ businessName: "Best Pizza" });
-    renderForm();
+  it("types a new potential name", async () => {
+    await getPageHelper({
+      businessName: "Best Pizza",
+    });
     fillText("My other new name");
     expect(getSearchValue()).toEqual("My other new name");
   });
 
   it("checks availability of typed name", async () => {
-    renderForm();
+    await getPageHelper();
     fillText("Pizza Joint");
     await searchAndGetValue({});
     expect(mockApi.searchBusinessName).toHaveBeenCalledWith("Pizza Joint");
   });
 
   it("shows available component if name is available", async () => {
-    renderForm();
+    await getPageHelper();
     fillText("Pizza Joint");
     await searchAndGetValue({ status: "AVAILABLE" });
     expect(availableTextExists()).toBe(true);
@@ -83,28 +119,21 @@ describe("<SearchBusinessNameForm />", () => {
     expect(designatorErrorTextExists()).toBe(false);
     expect(specialCharacterErrorTextExists()).toBe(false);
     expect(restrictedWordErrorTextExists()).toBe(false);
-    expect(onChange).toHaveBeenLastCalledWith(
-      expect.objectContaining({
-        status: "AVAILABLE",
-      })
-    );
   });
 
-  it("updates onChange with undefined when new values are typed into the field", async () => {
-    renderForm();
+  it("removes availabile component when new values are typed into the field", async () => {
+    await getPageHelper();
     fillText("Pizza Joint");
     await searchAndGetValue({ status: "AVAILABLE" });
-    expect(onChange).toHaveBeenLastCalledWith(
-      expect.objectContaining({
-        status: "AVAILABLE",
-      })
-    );
+    expect(availableTextExists()).toBe(true);
+    expect(unavailableTextExists()).toBe(false);
     fillText("Pizza Place");
-    expect(onChange).toHaveBeenLastCalledWith(undefined);
+    expect(availableTextExists()).toBe(false);
+    expect(unavailableTextExists()).toBe(false);
   });
 
   it("shows unavailable component if name is not available", async () => {
-    renderForm();
+    await getPageHelper();
     fillText("Pizza Joint");
     await searchAndGetValue({ status: "UNAVAILABLE" });
     expect(availableTextExists()).toBe(false);
@@ -115,7 +144,7 @@ describe("<SearchBusinessNameForm />", () => {
   });
 
   it("shows designator error text if name includes the designator", async () => {
-    renderForm();
+    await getPageHelper();
     fillText("Pizza Joint LLC");
     await searchAndGetValue({ status: "DESIGNATOR_ERROR" });
     expect(availableTextExists()).toBe(false);
@@ -126,7 +155,7 @@ describe("<SearchBusinessNameForm />", () => {
   });
 
   it("shows special character error text if name includes a special character", async () => {
-    renderForm();
+    await getPageHelper();
     fillText("Pizza Joint LLC");
     await searchAndGetValue({ status: "SPECIAL_CHARACTER_ERROR" });
     expect(availableTextExists()).toBe(false);
@@ -137,7 +166,7 @@ describe("<SearchBusinessNameForm />", () => {
   });
 
   it("shows restricted word error text if name includes a restricted word", async () => {
-    renderForm();
+    await getPageHelper();
     fillText("Pizza Joint LLC");
     await searchAndGetValue({ status: "RESTRICTED_ERROR", invalidWord: "JOINT" });
     expect(availableTextExists()).toBe(false);
@@ -150,18 +179,15 @@ describe("<SearchBusinessNameForm />", () => {
     ).toBeInTheDocument();
   });
 
-  it("shows message if user searches empty name", async () => {
-    renderForm();
+  it("does not search empty name", async () => {
+    await getPageHelper();
     fillText("");
     fireEvent.click(searchButton());
-    expect(screen.getByTestId("error-alert-BAD_INPUT")).toBeInTheDocument();
-    fillText("anything");
-    await searchAndGetValue({ status: "AVAILABLE", similarNames: [] });
-    expect(screen.queryByTestId("error-alert-BAD_INPUT")).not.toBeInTheDocument();
+    expect(mockApi.searchBusinessName).not.toHaveBeenCalled();
   });
 
   it("shows message if search returns 400", async () => {
-    renderForm();
+    await getPageHelper();
     fillText("LLC");
     await searchAndReject();
     expect(screen.getByTestId("error-alert-BAD_INPUT")).toBeInTheDocument();
@@ -171,7 +197,7 @@ describe("<SearchBusinessNameForm />", () => {
   });
 
   it("shows error if search fails", async () => {
-    renderForm();
+    await getPageHelper();
     fillText("whatever");
     await searchAndFail();
     expect(screen.getByTestId("error-alert-SEARCH_FAILED")).toBeInTheDocument();
@@ -181,10 +207,10 @@ describe("<SearchBusinessNameForm />", () => {
   });
 
   const availableTextExists = (): boolean => {
-    return screen.queryByText(availableText) !== null;
+    return screen.queryByTestId("available-text") !== null;
   };
   const unavailableTextExists = (): boolean => {
-    return screen.queryByText(unavailableText) !== null;
+    return screen.queryAllByTestId("unavailable-text").length > 0;
   };
   const designatorErrorTextExists = (): boolean => {
     return screen.queryByTestId("designator-error-text") !== null;

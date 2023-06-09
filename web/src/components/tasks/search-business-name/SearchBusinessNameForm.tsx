@@ -4,14 +4,15 @@ import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { AvailableProps } from "@/components/tasks/search-business-name/AvailableProps";
 import { UnavailableProps } from "@/components/tasks/search-business-name/UnavailableProps";
 import { WithErrorBar } from "@/components/WithErrorBar";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SearchBusinessNameError } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import { NameAvailability } from "@businessnjgovnavigator/shared/";
+import { emptyProfileData, NameAvailability } from "@businessnjgovnavigator/shared/";
 import { FormControl, TextField } from "@mui/material";
-import { FormEvent, ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { FormEvent, ReactElement, useCallback, useContext, useEffect, useRef } from "react";
 
 type SearchBusinessNameFormConfig = {
   searchButtonText: string;
@@ -22,17 +23,13 @@ type SearchBusinessNameFormConfig = {
 interface Props {
   unavailable: (props: UnavailableProps) => ReactElement;
   available: (props: AvailableProps) => ReactElement;
+  businessName: string;
   config: SearchBusinessNameFormConfig;
   className?: string;
   isBusinessFormation?: boolean;
   hideTextFieldWhenUnavailable?: boolean;
-  onChange?: (nameAvailability: NameAvailability | undefined) => void;
-  onSubmit?: (
-    submittedName: string,
-    nameAvailability: NameAvailability,
-    isInitialSubmit: boolean
-  ) => Promise<void>;
   isDba?: boolean;
+  nameAvailability: NameAvailability | undefined;
 }
 
 export const SearchBusinessNameForm = (props: Props): ReactElement => {
@@ -41,7 +38,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     isLoading,
     error,
     updateButtonClicked,
-    updateCurrentName,
+    onChangeNameField,
     searchBusinessName,
     resetSearch,
   } = useBusinessNameSearch({
@@ -51,23 +48,75 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
 
   const { Config } = useConfig();
   const didInitialSearch = useRef<boolean>(false);
-  const { userData } = useUserData();
-  const [nameAvailability, setNameAvailability] = useState<NameAvailability | undefined>(undefined);
-  const [submittedName, setSubmittedName] = useState<string>("");
+  const { userData, updateQueue } = useUserData();
+  const {
+    setFormationFormData,
+    setBusinessNameAvailability,
+    setDbaBusinessNameAvailability,
+    setFieldsInteracted,
+  } = useContext(BusinessFormationContext);
 
+  const setNameAvailability = props.isDba ? setDbaBusinessNameAvailability : setBusinessNameAvailability;
+
+  const FIELD_NAME = "businessName";
   const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
     BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,
     SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
   };
 
-  useEffect(() => {
-    props.onChange && props.onChange(nameAvailability);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nameAvailability]);
+  const emptyNameAvailability: NameAvailability = {
+    similarNames: [],
+    status: undefined,
+    lastUpdatedTimeStamp: "",
+  };
 
   const Unavailable = props.unavailable;
   const Available = props.available;
-  const onSubmit = props.onSubmit;
+
+  const handleBusinessNameAvailability = (
+    nameAvailability: NameAvailability,
+    submittedName: string
+  ): void => {
+    const validName = ["AVAILABLE", "UNAVAILABLE"].includes(nameAvailability.status ?? "");
+    if (!updateQueue || !validName) return;
+
+    const nameUnavailable = nameAvailability.status === "UNAVAILABLE";
+    const needsNexusDbaName = nameUnavailable ? true : false;
+    setFieldsInteracted([FIELD_NAME]);
+    updateQueue
+      .queueFormationData({
+        businessNameAvailability: nameAvailability,
+      })
+      .queueFormationFormData({ businessName: submittedName })
+      .queueProfileData({
+        businessName: submittedName,
+        nexusDbaName: emptyProfileData.nexusDbaName,
+        needsNexusDbaName,
+      })
+      .update();
+
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        businessName: submittedName,
+      };
+    });
+  };
+
+  const handleDbaBusinessNameAvailability = (
+    nameAvailability: NameAvailability,
+    submittedName: string
+  ): void => {
+    if (!updateQueue || nameAvailability.status !== "AVAILABLE") return;
+    updateQueue
+      .queueFormationData({
+        dbaBusinessNameAvailability: nameAvailability,
+      })
+      .queueProfileData({
+        nexusDbaName: submittedName,
+      })
+      .update();
+  };
 
   const doSearch = useCallback(
     async (
@@ -75,17 +124,43 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
       { isInitialSubmit }: { isInitialSubmit: boolean }
     ): Promise<void> => {
       searchBusinessName(event)
-        .then(({ nameAvailability, submittedName }) => {
-          setNameAvailability(nameAvailability);
-          setSubmittedName(submittedName);
-          if (onSubmit) {
-            onSubmit(submittedName, nameAvailability, isInitialSubmit);
+        .then(async ({ nameAvailability, submittedName }) => {
+          if (!nameAvailability || isInitialSubmit) return;
+          if (props.isDba) {
+            handleDbaBusinessNameAvailability(nameAvailability, submittedName);
+          } else {
+            handleBusinessNameAvailability(nameAvailability, submittedName);
           }
+          setNameAvailability(nameAvailability);
         })
         .catch(() => {});
     },
-    [onSubmit, searchBusinessName]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [searchBusinessName]
   );
+
+  const resetNameAvailability = (): void => {
+    resetSearch();
+    if (updateQueue) {
+      updateQueue
+        .queueFormationData({
+          businessNameAvailability: emptyNameAvailability,
+          dbaBusinessNameAvailability: emptyNameAvailability,
+        })
+        .queueProfileData({
+          nexusDbaName: "",
+        })
+        .update();
+    }
+  };
+
+  const shouldShowTextField = (): boolean => {
+    if (props.hideTextFieldWhenUnavailable) {
+      return props.nameAvailability?.status !== "UNAVAILABLE";
+    }
+
+    return true;
+  };
 
   useEffect(() => {
     (function showBusinessNameSearchResultsIfDBANameExists(): void {
@@ -102,14 +177,6 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
       }
     })();
   }, [currentName, userData, props.isDba, doSearch]);
-
-  const shouldShowTextField = (): boolean => {
-    if (props.hideTextFieldWhenUnavailable) {
-      return nameAvailability?.status !== "UNAVAILABLE";
-    }
-
-    return true;
-  };
 
   return (
     <>
@@ -141,8 +208,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
                   margin="dense"
                   value={currentName}
                   onChange={(event): void => {
-                    setNameAvailability(undefined);
-                    updateCurrentName(event.target.value);
+                    onChangeNameField(event.target.value);
                   }}
                   variant="outlined"
                   inputProps={{
@@ -174,42 +240,39 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
         </WithErrorBar>
       )}
       <div className="margin-top-2">
-        {nameAvailability?.status === "AVAILABLE" && (
-          <Available submittedName={submittedName} updateButtonClicked={updateButtonClicked} />
+        {props.nameAvailability?.status === "AVAILABLE" && (
+          <Available submittedName={props.businessName} updateButtonClicked={updateButtonClicked} />
         )}
-        {nameAvailability?.status === "DESIGNATOR_ERROR" && (
+        {props.nameAvailability?.status === "DESIGNATOR_ERROR" && (
           <Alert variant="error" dataTestid="designator-error-text">
             <p className="font-sans-xs">{Config.searchBusinessNameTask.designatorText}</p>
           </Alert>
         )}
-        {nameAvailability?.status === "SPECIAL_CHARACTER_ERROR" && (
+        {props.nameAvailability?.status === "SPECIAL_CHARACTER_ERROR" && (
           <Alert variant="error" dataTestid="special-character-error-text">
             <Content className="font-sans-xs">
               {templateEval(Config.formation.fields.businessName.alertSpecialCharacters, {
-                name: submittedName,
+                name: props.businessName,
               })}
             </Content>
           </Alert>
         )}
-        {nameAvailability?.status === "RESTRICTED_ERROR" && (
+        {props.nameAvailability?.status === "RESTRICTED_ERROR" && (
           <Alert variant="error" dataTestid="restricted-word-error-text">
             <Content className="font-sans-xs">
               {templateEval(Config.formation.fields.businessName.alertRestrictedWord, {
-                name: submittedName,
-                word: nameAvailability.invalidWord ?? "*unknown*",
+                name: currentName,
+                word: props.nameAvailability.invalidWord ?? "*unknown*",
               })}
             </Content>
           </Alert>
         )}
 
-        {nameAvailability?.status === "UNAVAILABLE" && (
+        {props.nameAvailability?.status === "UNAVAILABLE" && (
           <Unavailable
-            resetSearch={(): void => {
-              resetSearch();
-              setNameAvailability(undefined);
-            }}
-            submittedName={submittedName}
-            nameAvailability={nameAvailability}
+            resetSearch={(): void => resetNameAvailability()}
+            submittedName={currentName}
+            nameAvailability={props.nameAvailability}
           />
         )}
       </div>

@@ -1,3 +1,4 @@
+import { NameAvailability } from "@shared/businessNameSearch";
 import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
 import { createEmptyFormationFormData } from "@shared/formationData";
@@ -60,15 +61,27 @@ const shouldCheckLicense = (userData: UserData): boolean => {
 };
 
 const shouldUpdateBusinessNameSearch = (userData: UserData): boolean => {
-  if (!userData.formationData.businessNameAvailability?.lastUpdatedTimeStamp) {
+  if (
+    !userData.formationData.businessNameAvailability?.lastUpdatedTimeStamp &&
+    !userData.formationData.dbaBusinessNameAvailability?.lastUpdatedTimeStamp
+  ) {
     return false;
   }
-  return (
+
+  const dbaNameIsOlderThanAnHour =
+    userData.profileData.nexusDbaName !== undefined &&
+    userData.formationData.dbaBusinessNameAvailability !== undefined &&
+    hasBeenMoreThanOneHour(userData.formationData.dbaBusinessNameAvailability.lastUpdatedTimeStamp);
+
+  const businessNameIsOlderThanAnHour =
     userData.profileData.businessName !== undefined &&
     userData.formationData.businessNameAvailability !== undefined &&
-    hasBeenMoreThanOneHour(userData.formationData.businessNameAvailability.lastUpdatedTimeStamp) &&
-    userData.formationData.completedFilingPayment !== true
-  );
+    hasBeenMoreThanOneHour(userData.formationData.businessNameAvailability.lastUpdatedTimeStamp);
+
+  const isDba = userData.profileData.needsNexusDbaName;
+  const shouldUpdateNameAvailability = isDba ? dbaNameIsOlderThanAnHour : businessNameIsOlderThanAnHour;
+
+  return shouldUpdateNameAvailability && userData.formationData.completedFilingPayment !== true;
 };
 
 export const getSignedInUser = (req: Request): CognitoJWTPayload => {
@@ -198,6 +211,7 @@ export const userRouterFactory = (
               completedFilingPayment: false,
               formationFormData: createEmptyFormationFormData(),
               businessNameAvailability: undefined,
+              dbaBusinessNameAvailability: undefined,
               lastVisitedPageIndex: 0,
             },
           };
@@ -235,17 +249,35 @@ export const userRouterFactory = (
       return userData;
     }
     try {
-      const response = await timeStampBusinessSearch.search(userData.profileData.businessName);
+      const isForeign = userData.profileData.businessPersona === "FOREIGN";
+      const needsDba = userData.profileData.needsNexusDbaName;
+      const nameToSearch = needsDba ? userData.profileData.nexusDbaName : userData.profileData.businessName;
+      const response = await timeStampBusinessSearch.search(nameToSearch);
+
+      const nameAvailability: NameAvailability = {
+        status: response.status,
+        similarNames: response.similarNames ?? [],
+        lastUpdatedTimeStamp: response.lastUpdatedTimeStamp,
+        invalidWord: response.invalidWord,
+      };
+
+      const nameIsAvailable = response.status === "AVAILABLE";
+      const needsNexusDbaName = isForeign && !needsDba ? !nameIsAvailable : needsDba;
+
       return {
         ...userData,
+        profileData: {
+          ...userData.profileData,
+          needsNexusDbaName,
+        },
         formationData: {
           ...userData.formationData,
-          businessNameAvailability: {
-            status: response.status,
-            similarNames: response.similarNames ?? [],
-            lastUpdatedTimeStamp: response.lastUpdatedTimeStamp,
-            invalidWord: response.invalidWord,
-          },
+          businessNameAvailability: needsDba
+            ? userData.formationData.businessNameAvailability
+            : nameAvailability,
+          dbaBusinessNameAvailability: needsDba
+            ? nameAvailability
+            : userData.formationData.dbaBusinessNameAvailability,
         },
       };
     } catch {
