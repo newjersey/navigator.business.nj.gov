@@ -11,7 +11,7 @@ summaryDescriptionMd: >-
   All New Jersey (NJ) private detective agencies are required to mail in employee registrations to the NJ State Police Private Detective Unit within 48 hours of fingerprinting new employees.
 industryId:
   - detective
-callToActionText: Register My Employees
+callToActionText: Read the Registration Instructions
 callToActionLink: https://www.nj.gov/njsp/private-detective/pdf/Employee_Registration_Instructions.pdf
 webflowIndustry: ""
 licenseCertificationClassification: ""
