@@ -43,7 +43,6 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    padding: 1rem;
     width: 20rem;
     z-index: 500;
 
@@ -61,19 +60,10 @@
   .right-nav-close {
     -moz-osx-font-smoothing: auto;
     -webkit-font-smoothing: subpixel-antialiased;
-    text-decoration: underline;
     background-color: transparent;
     border: 0;
-    border-radius: 0;
-    box-shadow: none;
-    font-weight: 400;
-    padding: 0;
     height: 3rem;
     width: 3rem;
-    color: currentColor;
-    flex: none;
-    float: right;
-    text-align: center;
   }
   .right-nav-overlay {
     bottom: 0;

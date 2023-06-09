@@ -1,6 +1,7 @@
 export interface LegalStructure {
   readonly id: string;
   readonly name: string;
+  readonly abbreviation: string;
   readonly requiresPublicFiling: boolean;
   readonly hasTradeName: boolean;
   readonly onboardingOrder: number;
@@ -23,6 +24,7 @@ export const LookupLegalStructureById = (id: string | undefined): LegalStructure
     }) ?? {
       id: "",
       name: "",
+      abbreviation: "",
       requiresPublicFiling: false,
       hasTradeName: false,
       onboardingOrder: 0,
@@ -35,6 +37,7 @@ export const LegalStructures: LegalStructure[] = [
   {
     id: "sole-proprietorship",
     name: "Sole Proprietorship",
+    abbreviation: "SP",
     requiresPublicFiling: false,
     onboardingOrder: 30,
     hasTradeName: true,
@@ -43,6 +46,7 @@ export const LegalStructures: LegalStructure[] = [
   {
     id: "general-partnership",
     name: "General Partnership",
+    abbreviation: "GP",
     requiresPublicFiling: false,
     hasTradeName: true,
     onboardingOrder: 20,
@@ -51,6 +55,7 @@ export const LegalStructures: LegalStructure[] = [
   {
     id: "limited-partnership",
     name: "Limited Partnership (LP)",
+    abbreviation: "LP",
     requiresPublicFiling: true,
     hasTradeName: false,
     onboardingOrder: 70,
@@ -66,6 +71,7 @@ export const LegalStructures: LegalStructure[] = [
   {
     id: "limited-liability-partnership",
     name: "Limited Liability Partnership (LLP)",
+    abbreviation: "LLP",
     requiresPublicFiling: true,
     hasTradeName: false,
     onboardingOrder: 60,
@@ -81,6 +87,7 @@ export const LegalStructures: LegalStructure[] = [
   {
     id: "limited-liability-company",
     name: "Limited Liability Company (LLC)",
+    abbreviation: "LLC",
     requiresPublicFiling: true,
     hasTradeName: false,
     onboardingOrder: 10,
@@ -96,6 +103,7 @@ export const LegalStructures: LegalStructure[] = [
   {
     id: "c-corporation",
     name: "Corporation",
+    abbreviation: "C Corp",
     requiresPublicFiling: true,
     hasTradeName: false,
     onboardingOrder: 40,
@@ -111,6 +119,7 @@ export const LegalStructures: LegalStructure[] = [
   {
     id: "s-corporation",
     name: "Corporation (and optional S Corp tax designation)",
+    abbreviation: "S Corp",
     requiresPublicFiling: true,
     hasTradeName: false,
     onboardingOrder: 50,

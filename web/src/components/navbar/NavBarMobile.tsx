@@ -1,15 +1,16 @@
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
+import { MenuConfiguration, NavBarPopupMenu } from "@/components/navbar/NavBarPopupMenu";
 import { NavigatorLogo } from "@/components/navbar/NavigatorLogo";
-import { NavSidebarUserSettings } from "@/components/navbar/NavSidebarUserSettings";
 import { Icon } from "@/components/njwds/Icon";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { AuthContext } from "@/contexts/authContext";
-import { useUserData } from "@/lib/data-hooks/useUserData";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { useRouter } from "next/router";
 import { ReactElement, useContext, useMemo, useState } from "react";
+
 interface Props {
   scrolled: boolean;
   task?: Task;
@@ -19,9 +20,9 @@ interface Props {
 }
 
 export const NavBarMobile = (props: Props): ReactElement => {
-  const { userData } = useUserData();
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const { state } = useContext(AuthContext);
+  const router = useRouter();
 
   const open = (): void => {
     setSidebarIsOpen(true);
@@ -34,10 +35,26 @@ export const NavBarMobile = (props: Props): ReactElement => {
   const isAuthenticated = useMemo(() => {
     return state.isAuthenticated === "TRUE";
   }, [state.isAuthenticated]);
-  const userName = getUserNameOrEmail(userData);
-  const textColor = isAuthenticated ? "primary" : "base";
-  const accountIcon = isAuthenticated ? "account_circle" : "help";
-  const accountString = isAuthenticated ? userName : Config.navigationDefaults.navBarGuestText;
+
+  const currentlyOnboarding = (): boolean => {
+    if (!router) {
+      return false;
+    }
+    return router.pathname === ROUTES.onboarding;
+  };
+
+  const getMenuConfiguration = (): MenuConfiguration => {
+    if (props.isLanding) {
+      return "login-getstarted";
+    }
+    if (currentlyOnboarding()) {
+      return "login";
+    } else if (isAuthenticated) {
+      return "profile-myNj-logout";
+    } else {
+      return "profile-register-login";
+    }
+  };
 
   return (
     <>
@@ -73,7 +90,6 @@ export const NavBarMobile = (props: Props): ReactElement => {
         >
           <Icon className="font-sans-xl">menu</Icon>
         </button>
-        
       </nav>
       <FocusTrappedSidebar close={close} isOpen={sidebarIsOpen}>
         <nav
@@ -81,27 +97,14 @@ export const NavBarMobile = (props: Props): ReactElement => {
           className={`right-nav ${sidebarIsOpen ? "is-visible" : "is-hidden"} `}
           data-testid="nav-sidebar-menu"
         >
-          <h4 className={`margin-0 flex flex-align-center fdr fjc space-between text-${textColor}`}>
-            {!props.isLanding && (
-              <div className="flex">
-                <Icon className="margin-top-2px margin-right-1 usa-icon--size-3 minw-3">{accountIcon}</Icon>
-                <div>{accountString}</div>
-              </div>
-            )}
-            <button
-              className="right-nav-close fac fdr fjc"
-              aria-label="close menu"
-              onClick={(): void => {
-                analytics.event.mobile_menu_close_button.click.close_mobile_menu();
-                close();
-              }}
-            >
-              <Icon className="font-sans-xl">close</Icon>
-            </button>
-          </h4>
-          <NavSidebarUserSettings isLanding={props.isLanding} />
+          <NavBarPopupMenu
+            handleClose={close}
+            hasCloseButton={true}
+            menuConfiguration={getMenuConfiguration()}
+          />
+
           {props.showSidebar && !props.hideMiniRoadmap && (
-            <div>
+            <div className={"padding-x-1"}>
               <hr />
               <MiniRoadmap activeTaskId={props.task?.id} onTaskClick={close} />
             </div>
