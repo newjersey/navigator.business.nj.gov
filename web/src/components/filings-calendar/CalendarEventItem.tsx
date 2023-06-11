@@ -13,7 +13,7 @@ interface Props {
   index?: number;
 }
 
-export const CalendarEvent = (props: Props): ReactElement => {
+export const CalendarEventItem = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const onClick = (): void => {

@@ -1,9 +1,10 @@
-import { defaultDateFormat, getCurrentDate, parseDateWithFormat } from "@businessnjgovnavigator/shared";
+import {
+  CalendarEvent,
+  defaultDateFormat,
+  getCurrentDate,
+  parseDateWithFormat,
+} from "@businessnjgovnavigator/shared";
 import { getJanOfYear } from "@businessnjgovnavigator/shared/index";
-
-type CalendarEvent = {
-  dueDate: string;
-};
 
 export const sortCalendarEventsEarliestToLatest = <T extends CalendarEvent>(calendarEvents: T[]): T[] => {
   return calendarEvents.sort((a, b) => {

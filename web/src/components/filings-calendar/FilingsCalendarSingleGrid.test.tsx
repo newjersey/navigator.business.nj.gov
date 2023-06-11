@@ -241,13 +241,21 @@ describe("<FilingsCalendarSingleGrid />", () => {
     expect(screen.queryByText(Config.dashboardDefaults.viewLessFilingsButton)).not.toBeInTheDocument();
   });
 
-  it("always shows a licenseEvent under the fold with exactly 2 tax filings", () => {
+  it("shows a licenseEvent and exactly 2 tax filings in order by due date", () => {
+    const first = {
+      ...taxFilingOne,
+      dueDate: currentDate.toISOString(),
+    };
+    const last = {
+      ...taxFilingTwo,
+      dueDate: currentDate.add(2, "days").toISOString(),
+    };
     const userData = generateUserData({
       licenseData: generateLicenseData({
-        expirationISO: currentDate.add(4, "days").toISOString(),
+        expirationISO: currentDate.add(1, "days").toISOString(),
         status: "ACTIVE",
       }),
-      taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo] }),
+      taxFilingData: generateTaxFilingData({ filings: [last, first] }),
       profileData: generateProfileData({ industryId: "home-contractor" }),
     });
     render(
@@ -263,22 +271,34 @@ describe("<FilingsCalendarSingleGrid />", () => {
       Config.licenseEventDefaults.expirationTitleLabel
     }`;
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
-    expect(screen.getByText("Tax Filing Two")).toBeInTheDocument();
-    expect(screen.queryByText(expectedLicenseTitle)).not.toBeInTheDocument();
+    expect(screen.getByText(expectedLicenseTitle)).toBeInTheDocument();
+    expect(screen.queryByText("Tax Filing Two")).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByText(Config.dashboardDefaults.viewMoreFilingsButton));
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
-    expect(screen.getByText("Tax Filing Two")).toBeInTheDocument();
     expect(screen.getByText(expectedLicenseTitle)).toBeInTheDocument();
+    expect(screen.getByText("Tax Filing Two")).toBeInTheDocument();
   });
 
-  it("always shows a licenseEvent under the fold with 2+ tax filings", () => {
+  it("shows a licenseEvent and 2+ tax filings in order by due date", () => {
+    const first = {
+      ...taxFilingOne,
+      dueDate: currentDate.toISOString(),
+    };
+    const second = {
+      ...taxFilingTwo,
+      dueDate: currentDate.add(1, "day").toISOString(),
+    };
+    const last = {
+      ...taxFilingThree,
+      dueDate: currentDate.add(3, "days").toISOString(),
+    };
     const userData = generateUserData({
       licenseData: generateLicenseData({
-        expirationISO: currentDate.add(4, "days").toISOString(),
+        expirationISO: currentDate.add(2, "days").toISOString(),
         status: "ACTIVE",
       }),
-      taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo, taxFilingThree] }),
+      taxFilingData: generateTaxFilingData({ filings: [first, last, second] }),
       profileData: generateProfileData({ industryId: "home-contractor" }),
     });
     render(
