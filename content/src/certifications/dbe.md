@@ -14,6 +14,7 @@ applicableOwnershipTypes:
   - minority-owned
   - woman-owned
 isSbe: false
+"": "* Holla back chief"
 ---
 
 A Disadvantaged Business Enterprise (DBE) certification may **provide an advantage for the New Jersey Department of Transportation's (NJDOT) contracts**.
