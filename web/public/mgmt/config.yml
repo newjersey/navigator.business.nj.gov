@@ -38,7 +38,7 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Notes", name: "notesMd", widget: "markdown" }
+      - { label: "Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
       - { label: "Filename", name: "filename", widget: "nospace", required: false }
@@ -999,7 +999,7 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Notes", name: "notesMd", widget: "markdown" }
+      - { label: "Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Description", name: "descriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
@@ -1039,7 +1039,7 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Notes", name: "notesMd", widget: "markdown" }
+      - { label: "Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Description", name: "descriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
@@ -1086,7 +1086,7 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Notes", name: "notesMd", widget: "markdown" }
+      - { label: "Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "File Name", name: "filename", widget: "slug" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Url Slug", name: "urlSlug", widget: "string" }
@@ -1719,7 +1719,7 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Notes", name: "notesMd", widget: "markdown" }
+      - { label: "Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
       - { label: "Filename", name: "filename", widget: "nospace", required: false }
@@ -1779,7 +1779,7 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Notes", name: "notesMd", widget: "markdown" }
+      - { label: "Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Filename", name: "filename", widget: "nospace", required: false }
       - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
       - { label: "Title (Navigator)", name: "name", widget: "string" }
@@ -1856,7 +1856,7 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Notes", name: "notesMd", widget: "markdown" }
+      - { label: "Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Filename", name: "filename", widget: "nospace", required: false }
       - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
       - { label: "Title (Navigator)", name: "name", widget: "string", required: false }
@@ -2343,7 +2343,7 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Notes", name: "notesMd", widget: "markdown" }
+      - { label: "Notes", name: "notesMd", widget: "markdown", required: false }
       - {
           label: "Industry Id",
           name: "urlSlug",
@@ -2378,7 +2378,7 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Notes", name: "notesMd", widget: "markdown" }
+      - { label: "Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Extension", name: "extension", widget: "boolean", required: false }
@@ -2551,7 +2551,7 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Notes", name: "notesMd", widget: "markdown" }
+      - { label: "Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Header", name: "header", widget: "string", required: false }
       - { label: "Not Started Header", name: "notStartedHeader", widget: "string", required: false }
@@ -4398,7 +4398,7 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Notes", name: "notesMd", widget: "markdown" }
+      - { label: "Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Filename", name: "slug", widget: "slug", required: false }
       - { label: "Question Copy", name: "radioQuestion", widget: "string", required: false }
@@ -4419,7 +4419,7 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Notes", name: "notesMd", widget: "markdown" }
+      - { label: "Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Header", name: "header", widget: "string" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Filename", name: "slug", widget: "slug", required: false }
