@@ -4,4 +4,4 @@ callToActionLink: null
 callToActionText: ""
 ---
 
-Your license has expired
+Your license has expired.
