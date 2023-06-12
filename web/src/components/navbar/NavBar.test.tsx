@@ -7,13 +7,24 @@ import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { useMockUserData, useUndefinedUserData } from "@/test/mock/mockUseUserData";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import { generateUser, generateUserData } from "@businessnjgovnavigator/shared";
+import {
+  generateProfileData,
+  generateUser,
+  generateUserData,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
-import { fireEvent, render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+  within,
+} from "@testing-library/react";
 import { ReactNode } from "react";
 
 const Config = getMergedConfig();
@@ -43,6 +54,40 @@ const setLargeScreen = (value: boolean): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => value);
 };
 
+const generateOnboardingUser = (): UserData => {
+  return generateUserData({
+    profileData: generateProfileData({
+      businessName: "",
+      industryId: undefined,
+      legalStructureId: undefined,
+    }),
+  });
+};
+
+const generateGuestUserData = (overrides?: Partial<UserData>): UserData => {
+  return generateUserData({
+    profileData: generateProfileData({
+      businessName: "",
+      industryId: "cannabis",
+      legalStructureId: "limited-liability-company",
+    }),
+    ...overrides,
+  });
+};
+
+const businessName = "businessName";
+
+const generateBusinessNamedUserData = (overrides?: Partial<UserData>): UserData => {
+  return generateUserData({
+    profileData: generateProfileData({
+      businessName: businessName,
+      industryId: "cannabis",
+      legalStructureId: "limited-liability-company",
+    }),
+    ...overrides,
+  });
+};
+
 describe("<NavBar />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
@@ -69,7 +114,7 @@ describe("<NavBar />", () => {
 
   describe("navbar - used when user is onboarding", () => {
     beforeEach(() => {
-      useMockUserData({});
+      useMockUserData(generateOnboardingUser());
       useMockRouter({ pathname: ROUTES.onboarding });
     });
 
@@ -120,33 +165,13 @@ describe("<NavBar />", () => {
       });
 
       it("doesn't render register and profile text", async () => {
+        useMockRouter({ pathname: ROUTES.onboarding });
         renderMobileRoadmapNav();
         expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
         expect(screen.queryByText(Config.navigationDefaults.registerButton)).not.toBeInTheDocument();
       });
     });
   });
-
-  const displaysUserNameOrEmail = (renderFunc: () => void): void => {
-    it("displays name of user if available", () => {
-      useMockUserData({ user: generateUser({ name: "John Smith", email: "test@example.com" }) });
-      renderFunc();
-      expect(screen.getByText("John Smith")).toBeInTheDocument();
-      expect(screen.queryByText("test@example.com")).not.toBeInTheDocument();
-    });
-
-    it("displays email of user if no name available", () => {
-      useMockUserData({ user: generateUser({ name: undefined, email: "test@example.com" }) });
-      renderFunc();
-      expect(screen.getByText("test@example.com")).toBeInTheDocument();
-    });
-
-    it("displays default text if no user data", () => {
-      useUndefinedUserData();
-      renderFunc();
-      expect(screen.getAllByText(Config.navigationDefaults.myNJAccountText).length).toBeGreaterThan(0);
-    });
-  };
 
   describe("authenticated desktop navbar", () => {
     const renderDesktopNav = (): void => {
@@ -157,8 +182,6 @@ describe("<NavBar />", () => {
         })
       );
     };
-
-    displaysUserNameOrEmail(renderDesktopNav);
 
     it("doesn't display registration button when user is authenticated", async () => {
       useMockUserData({});
@@ -172,36 +195,41 @@ describe("<NavBar />", () => {
       expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
     });
 
-    it("displays a closed dropdown menu on the NavBar", () => {
-      const user = { name: "John Smith", email: "test@example.com" };
-
-      useMockUserData({
-        user: generateUser(user),
-      });
+    it("displays myNJ button when user is authenticated", async () => {
+      useMockUserData({});
       renderDesktopNav();
-      const menuEl = screen.getByText(user.name);
+      expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
+    });
+
+    it("displays log out button when user is authenticated", async () => {
+      useMockUserData({});
+      renderDesktopNav();
+      expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
+    });
+
+    it("displays a closed dropdown menu on the NavBar", () => {
+      useMockUserData(generateBusinessNamedUserData());
+
+      renderDesktopNav();
+      const menuEl = screen.getByText(businessName);
       expect(menuEl).toBeInTheDocument();
       expect(screen.queryByText(Config.navigationDefaults.logoutButton)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
     });
 
     it("displays an open dropdown menu when clicked and closes when clicked again", async () => {
-      const user = { name: "John Smith", email: "test@example.com" };
-
-      useMockUserData({
-        user: generateUser(user),
-      });
+      useMockUserData(generateBusinessNamedUserData());
 
       renderDesktopNav();
 
       await waitFor(() => {
-        expect(screen.getByText(user.name)).toBeInTheDocument();
+        expect(screen.getByText(businessName)).toBeInTheDocument();
       });
       expect(screen.queryByText(Config.navigationDefaults.logoutButton)).not.toBeInTheDocument();
 
-      const menuEl = screen.getByText(user.name);
+      const menuEl = screen.getByText(businessName);
+      fireEvent.click(menuEl);
 
-      userEvent.click(menuEl);
       await waitFor(() => {
         expect(screen.getByText(Config.navigationDefaults.logoutButton)).toBeInTheDocument();
       });
@@ -220,50 +248,60 @@ describe("<NavBar />", () => {
     };
 
     it("displays registration button only when isAuthenticated is false", async () => {
-      useMockUserData({});
+      useMockUserData(generateGuestUserData());
       renderDesktopNav();
       expect(screen.getByTestId("registration-button")).toBeInTheDocument();
     });
 
     it("displays log in button only when isAuthenticated is false", async () => {
-      useMockUserData({});
+      useMockUserData(generateGuestUserData());
       renderDesktopNav();
       expect(screen.getByTestId("login-button")).toBeInTheDocument();
     });
 
     it("displays business profile button only when the menu is open", async () => {
-      useMockUserData({});
+      useMockUserData(generateBusinessNamedUserData());
       renderDesktopNav();
-      const menuEl = screen.getByText(Config.navigationDefaults.navBarGuestText);
-      userEvent.click(menuEl);
+      const menuEl = screen.getByText(businessName);
+      fireEvent.click(menuEl);
       await waitFor(() => {
         expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
       });
-      userEvent.click(menuEl);
+      fireEvent.click(menuEl);
       await waitFor(() => {
         expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
       });
     });
 
-    it("displays a closed dropdown menu on the NavBar", () => {
-      useMockUserData({});
+    it("displays business name title within menu", async () => {
+      useMockUserData(generateBusinessNamedUserData());
       renderDesktopNav();
-      const menuEl = screen.getByText(Config.navigationDefaults.navBarGuestText);
+      const menuEl = screen.getByText(businessName);
+      fireEvent.click(menuEl);
+      await waitFor(() => {
+        expect(within(menuEl).getByText(businessName)).toBeInTheDocument();
+      });
+    });
+
+    it("displays a closed dropdown menu on the NavBar", () => {
+      useMockUserData(generateBusinessNamedUserData());
+      renderDesktopNav();
+      const menuEl = screen.getByText(businessName);
       expect(menuEl).toBeInTheDocument();
       expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
     });
 
     it("displays an open dropdown menu when clicked and closes when clicked again", async () => {
-      useMockUserData({});
+      useMockUserData(generateBusinessNamedUserData());
       renderDesktopNav();
-      const menuEl = screen.getByText(Config.navigationDefaults.navBarGuestText);
+      const menuEl = screen.getByText(businessName);
 
-      userEvent.click(menuEl);
+      fireEvent.click(menuEl);
       await waitFor(() => {
         expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
       });
 
-      userEvent.click(menuEl);
+      fireEvent.click(menuEl);
       await waitFor(() => {
         expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
       });
@@ -273,7 +311,8 @@ describe("<NavBar />", () => {
       setLargeScreen(true);
       setupStatefulUserDataContext();
       const user = generateUser({ name: "John Smith", email: "test@example.com" });
-      const userData = generateUserData({ user });
+      const userData = generateBusinessNamedUserData({ user });
+
       render(
         withAuth(
           <WithStatefulUserData initialUserData={userData}>
@@ -282,7 +321,7 @@ describe("<NavBar />", () => {
           { user, isAuthenticated: IsAuthenticated.FALSE }
         )
       );
-      fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestText));
+      fireEvent.click(screen.getByText(businessName));
 
       const businessUser = {
         ...user,
@@ -316,8 +355,6 @@ describe("<NavBar />", () => {
       );
       fireEvent.click(screen.getByTestId("nav-menu-open"));
     };
-
-    displaysUserNameOrEmail(renderMobileRoadmapNav);
 
     it("does not display mini-roadmap", () => {
       useMockUserData({});
@@ -371,10 +408,6 @@ describe("<NavBar />", () => {
     });
 
     describe("authenticated mobile navbar - renders roadmap within drawer", () => {
-      displaysUserNameOrEmail(() => {
-        return renderMobileTaskNav({ isAuthenticated: IsAuthenticated.TRUE });
-      });
-
       it("displays user profile links", async () => {
         useMockUserData({ user: generateUser({ name: "Grace Hopper" }) });
         renderMobileTaskNav({ isAuthenticated: IsAuthenticated.TRUE });
@@ -392,11 +425,27 @@ describe("<NavBar />", () => {
         expect(screen.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)).toBeVisible();
       });
 
+      it("displays login button", async () => {
+        useMockUserData({});
+        renderMobileTaskNav({ isAuthenticated: IsAuthenticated.FALSE });
+
+        expect(screen.queryByText(Config.navigationDefaults.logInButton)).toBeVisible();
+      });
+
+      it("displays profile and dashboard buttons", async () => {
+        useMockUserData(generateBusinessNamedUserData());
+        renderMobileTaskNav({ isAuthenticated: IsAuthenticated.FALSE });
+
+        expect(screen.queryByText(businessName)).toBeVisible();
+        expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).toBeVisible();
+      });
+
       it("sends user to selfRegistration when registration button is clicked", async () => {
         setLargeScreen(false);
         setupStatefulUserDataContext();
         const user = generateUser({ name: "John Smith", email: "test@example.com" });
-        const userData = generateUserData({ user });
+        const userData = generateGuestUserData({ user });
+
         render(
           withAuth(
             <WithStatefulUserData initialUserData={userData}>
@@ -406,7 +455,6 @@ describe("<NavBar />", () => {
           )
         );
         fireEvent.click(screen.getByTestId("nav-menu-open"));
-        fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestText));
 
         const businessUser = {
           ...user,
