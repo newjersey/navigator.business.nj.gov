@@ -1,6 +1,3 @@
-import { ArrowTooltip } from "@/components/ArrowTooltip";
-import { Content } from "@/components/Content";
-import { Icon } from "@/components/njwds/Icon";
 import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -8,17 +5,22 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { isGetFilingResponseSuccussful } from "@/lib/domain-logic/isGetFilingResponseSuccussful";
+import { UpdateQueue } from "@/lib/types/types";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
+import { hasCompletedFormation } from "@businessnjgovnavigator/shared/";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
-import { ReactElement, useContext, useMemo } from "react";
+import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
 export const ProfileBusinessStructure = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);
   const { Config } = useConfig();
   const { roadmap } = useRoadmap();
   const { updateQueue } = useUserData();
-  const isFormed = isGetFilingResponseSuccussful(updateQueue?.current());
+  const [isFormed, setIsFormed] = useState(false);
+
+  useEffect(() => {
+    setIsFormed(hasCompletedFormation((updateQueue as UpdateQueue).current()));
+  }, [updateQueue]);
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["legalStructureId"]["default"] =
     getProfileConfig({
@@ -36,18 +38,7 @@ export const ProfileBusinessStructure = (): ReactElement => {
     <div data-testid="business-structure">
       <div className="flex flex-row">
         <FieldLabelProfile fieldName="legalStructureId" />
-        {isFormed ? (
-          <div className="margin-left-2">
-            <ArrowTooltip
-              title={Config.profileDefaults.lockedFieldTooltipText}
-              data-testid="business-structure-tooltip"
-            >
-              <div className="fdr fac font-body-lg">
-                <Icon>help_outline</Icon>
-              </div>
-            </ArrowTooltip>
-          </div>
-        ) : (
+        {!isFormed && (
           <a
             className="margin-left-2"
             href={businessStructureTaskUrl}
@@ -63,9 +54,7 @@ export const ProfileBusinessStructure = (): ReactElement => {
         </div>
       )}
       {!state.profileData.legalStructureId && (
-        <div data-testid="not-entered">
-          <Content>{contentFromConfig.notEnteredText}</Content>
-        </div>
+        <div className={"text-italic"}>{contentFromConfig.notEnteredText}</div>
       )}
     </div>
   );

@@ -1,34 +1,32 @@
 import { ProfileBusinessStructure } from "@/components/profile/ProfileBusinessStructure";
 import { getMergedConfig } from "@/contexts/configContext";
-import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { getFlow } from "@/lib/utils/helpers";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
-import { generateProfileData, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
+import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import {
+  generateProfileData,
+  generateUserData,
+  LookupLegalStructureById,
+  UserData,
+} from "@businessnjgovnavigator/shared";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
 
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 const Config = getMergedConfig();
 
-const renderComponent = (profileData: Partial<ProfileData>): void => {
-  const data = generateProfileData({
-    businessPersona: "STARTING",
-    ...profileData,
-  });
+const renderComponent = (userData?: UserData): void => {
+  const data = userData || generateUserData({});
+
   render(
-    <ProfileDataContext.Provider
-      value={{
-        state: {
-          profileData: data,
-          flow: getFlow(data),
-        },
-        setProfileData: (): void => {},
-        setUser: (): void => {},
-        onBack: (): void => {},
-      }}
-    >
-      <ProfileBusinessStructure />
-    </ProfileDataContext.Provider>
+    <ThemeProvider theme={createTheme()}>
+      <WithStatefulUserData initialUserData={data}>
+        <WithStatefulProfileData initialData={data.profileData}>
+          <ProfileBusinessStructure />
+        </WithStatefulProfileData>
+      </WithStatefulUserData>
+    </ThemeProvider>
   );
 };
 
@@ -38,11 +36,17 @@ describe("<ProfileBusinessStructure />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRoadmap({});
+    setupStatefulUserDataContext();
   });
 
   it(`add text is displayed with href that routes to business structure URL`, () => {
     useMockRoadmapTask({ id: "business-structure", urlSlug: "some-business-structure-url" });
-    renderComponent({ legalStructureId: undefined });
+    renderComponent(
+      generateUserData({
+        profileData: generateProfileData({ legalStructureId: undefined }),
+      })
+    );
+
     expect(screen.getByText(configForField.addText)).toHaveAttribute(
       "href",
       "/tasks/some-business-structure-url"
@@ -51,20 +55,32 @@ describe("<ProfileBusinessStructure />", () => {
 
   it(`edit text is displayed with href that routes to business structure URL`, () => {
     useMockRoadmapTask({ id: "business-structure", urlSlug: "some-business-structure-url" });
-    renderComponent({ legalStructureId: "corporation" });
+    renderComponent(
+      generateUserData({
+        profileData: generateProfileData({ legalStructureId: "c-corporation" }),
+      })
+    );
     expect(screen.getByText(configForField.editText)).toHaveAttribute(
       "href",
       "/tasks/some-business-structure-url"
     );
   });
 
-  it("displays Not Entered text when user has no NAICS code", () => {
-    renderComponent({ legalStructureId: undefined });
-    expect(screen.getByTestId("not-entered")).toBeInTheDocument();
+  it("displays Not Entered text when user has no legal structure", () => {
+    renderComponent(
+      generateUserData({
+        profileData: generateProfileData({ legalStructureId: undefined }),
+      })
+    );
+    expect(screen.getByText(configForField.notEnteredText)).toBeInTheDocument();
   });
 
   it("displays business structure when exists", () => {
-    renderComponent({ legalStructureId: "c-corporation" });
+    renderComponent(
+      generateUserData({
+        profileData: generateProfileData({ legalStructureId: "c-corporation" }),
+      })
+    );
     expect(screen.queryByTestId("not-entered")).not.toBeInTheDocument();
     expect(screen.getByText(LookupLegalStructureById("c-corporation").name)).toBeInTheDocument();
   });

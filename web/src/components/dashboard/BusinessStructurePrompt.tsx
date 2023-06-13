@@ -1,19 +1,26 @@
 import { Content } from "@/components/Content";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ROUTES } from "@/lib/domain-logic/routes";
+import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { MediaQueries } from "@/lib/PageSizes";
+import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
+import { businessStructureTaskId } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
 interface Props {
-  isButtonHidden?: boolean;
+  isCTAButtonHidden?: boolean;
 }
 export const BusinessStructurePrompt = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const router = useRouter();
+  const { roadmap } = useRoadmap();
+
+  const businessStructureUrlSlug = roadmap
+    ? (getTaskFromRoadmap(roadmap, businessStructureTaskId)?.urlSlug as string)
+    : "";
 
   return (
     <div
@@ -22,24 +29,24 @@ export const BusinessStructurePrompt = (props: Props): ReactElement => {
     >
       <div className={isDesktopAndUp ? "flex flex-row flex-align-start" : ""}>
         <div className={isDesktopAndUp ? "flex-fill margin-right-2" : "margin-bottom-2"}>
-          {router.asPath === ROUTES.businessStructureTask ? (
-            <div data-testid={"business-structure-task-content"}>
+          {router.asPath === `/tasks/${businessStructureUrlSlug}` ? (
+            <div data-testid={"content-when-on-business-structure-task"}>
               <Content>{Config.businessStructurePrompt.notCompletedTaskPromptBusinessStructureTask}</Content>
             </div>
           ) : (
-            <div data-testid={"any-task-content"}>
+            <div data-testid={"content-when-not-on-business-structure-task"}>
               <Content>{Config.businessStructurePrompt.notCompletedTaskPromptAnyTask}</Content>
             </div>
           )}
         </div>
-        {!props.isButtonHidden && (
+        {!props.isCTAButtonHidden && (
           <div className={isDesktopAndUp ? "flex-auto" : ""}>
             <PrimaryButton
               isColor="primary"
               isRightMarginRemoved
               isFullWidthOnDesktop
               onClick={(): void => {
-                router.push(ROUTES.businessStructureTask);
+                router.push(`/tasks/${businessStructureUrlSlug}`);
               }}
               dataTestId={"business-structure-prompt-button"}
             >

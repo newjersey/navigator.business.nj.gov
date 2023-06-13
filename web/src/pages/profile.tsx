@@ -67,6 +67,7 @@ import {
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { hasCompletedFormation } from "@businessnjgovnavigator/shared/";
 import dayjs from "dayjs";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
@@ -90,6 +91,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
   const [escapeModal, setEscapeModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [shouldLockFormationFields, setShouldLockFormationFields] = useState<boolean>(false);
   const [isFormationDateDeletionModalOpen, setFormationDateDeletionModalOpen] = useState<boolean>(false);
 
   const userDataFromHook = useUserData();
@@ -119,6 +121,7 @@ const ProfilePage = (props: Props): ReactElement => {
   useMountEffectWhenDefined(() => {
     if (userData) {
       setProfileData(userData.profileData);
+      setShouldLockFormationFields(hasCompletedFormation(userData));
     }
   }, userData);
 
@@ -288,7 +291,6 @@ const ProfilePage = (props: Props): ReactElement => {
     return isHomeBasedBusinessApplicable(profileData.industryId);
   };
 
-  const shouldLockFormationFields = userData?.formationData.getFilingResponse?.success;
   const hasSubmittedTaxData =
     userData?.taxFilingData.state === "SUCCESS" || userData?.taxFilingData.state === "PENDING";
 
@@ -329,7 +331,12 @@ const ProfilePage = (props: Props): ReactElement => {
           <ProfileDateOfFormation futureAllowed={true} />
         </ProfileField>
 
-        <ProfileField fieldName="legalStructureId" noLabel={true}>
+        <ProfileField
+          fieldName="legalStructureId"
+          noLabel={true}
+          locked={shouldLockFormationFields}
+          lockedValueFormatter={(legalStructureId): string => LookupLegalStructureById(legalStructureId).name}
+        >
           <ProfileBusinessStructure />
         </ProfileField>
 
@@ -499,8 +506,12 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ProfileDateOfFormation futureAllowed={true} />
         </ProfileField>
-
-        <ProfileField fieldName="legalStructureId" noLabel={true}>
+        <ProfileField
+          fieldName="legalStructureId"
+          noLabel={true}
+          locked={shouldLockFormationFields}
+          lockedValueFormatter={(legalStructureId): string => LookupLegalStructureById(legalStructureId).name}
+        >
           <ProfileBusinessStructure />
         </ProfileField>
 

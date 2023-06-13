@@ -29,6 +29,7 @@ export class DashboardPage {
   };
 
   selectHomeBased(radio: boolean) {
+    // radio checked twice to prevent local flaky tests
     this.getHomeBased(radio).check();
     this.getHomeBased(radio).check();
   }

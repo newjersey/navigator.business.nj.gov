@@ -1,7 +1,7 @@
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { getMergedConfig } from "@/contexts/configContext";
-import { ROUTES } from "@/lib/domain-logic/routes";
 import {
+  generateTask,
   operatingPhasesDisplayingBusinessStructurePrompt,
   operatingPhasesNotDisplayingBusinessStructurePrompt,
 } from "@/test/factories";
@@ -9,7 +9,11 @@ import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { generateProfileData, generateUserData } from "@businessnjgovnavigator/shared";
+import {
+  businessStructureTaskId,
+  generateProfileData,
+  generateUserData,
+} from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -41,9 +45,12 @@ describe("<SectionAccordion />", () => {
         });
 
         it("routes user to task page on button click", () => {
+          useMockRoadmap({
+            tasks: [generateTask({ id: businessStructureTaskId, urlSlug: "business-structure-url-slug" })],
+          });
           render(<Roadmap />);
           fireEvent.click(screen.getByText(Config.businessStructurePrompt.buttonText));
-          expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.businessStructureTask);
+          expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/business-structure-url-slug");
         });
       });
     }

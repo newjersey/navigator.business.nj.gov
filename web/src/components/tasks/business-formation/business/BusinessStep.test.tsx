@@ -1,7 +1,6 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import { ROUTES } from "@/lib/domain-logic/routes";
 import { defaultDisplayDateFormat } from "@/lib/types/types";
-import { generateFormationDbaContent } from "@/test/factories";
+import { generateFormationDbaContent, generateTask } from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -10,8 +9,10 @@ import {
 } from "@/test/helpers/helpers-formation";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { mockPush } from "@/test/mock/mockRouter";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { currentUserData } from "@/test/mock/withStatefulUserData";
 import {
+  businessStructureTaskId,
   castPublicFilingLegalTypeToFormationType,
   defaultDateFormat,
   FormationFormData,
@@ -108,6 +109,9 @@ describe("Formation - BusinessStep", () => {
   });
 
   it("routes to profile page when edit legal structure button is clicked", async () => {
+    useMockRoadmap({
+      tasks: [generateTask({ id: businessStructureTaskId, urlSlug: "business-structure-url-slug" })],
+    });
     await getPageHelper({}, {});
 
     fireEvent.click(screen.getByTestId("edit-legal-structure"));
@@ -116,7 +120,7 @@ describe("Formation - BusinessStep", () => {
         Config.formation.legalStructure.warningModalContinueButton
       )
     );
-    expect(mockPush).toHaveBeenCalledWith(ROUTES.businessStructureTask);
+    expect(mockPush).toHaveBeenCalledWith("/tasks/business-structure-url-slug");
   });
 
   it("auto-fills fields from userData if it exists as an LLC", async () => {

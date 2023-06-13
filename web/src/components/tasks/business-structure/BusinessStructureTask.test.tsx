@@ -205,6 +205,22 @@ describe("<BusinessStructureTask />", () => {
     });
   });
 
+  it("does not update operating phase to GUEST_MODE_WITH_BUSINESS_STRUCTURE when business structure is saved", async () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        legalStructureId: undefined,
+        operatingPhase: "NEEDS_BUSINESS_STRUCTURE",
+      }),
+    });
+    renderTask(userData);
+    fireEvent.click(screen.getByLabelText("limited-liability-company"));
+    fireEvent.click(screen.getByText(Config.businessStructureTask.saveButton));
+    await waitFor(() => {
+      expect(currentUserData().profileData.operatingPhase).toBeDefined();
+    });
+    expect(currentUserData().profileData.operatingPhase).not.toEqual("GUEST_MODE_WITH_BUSINESS_STRUCTURE");
+  });
+
   it("updates task progress to in-progress when business structure radio is selected", async () => {
     const userData = generateUserData({
       profileData: generateProfileData({ legalStructureId: undefined }),

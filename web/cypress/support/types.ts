@@ -31,8 +31,6 @@ export type Registration = {
 
 export interface StartingOnboardingData {
   industry: Industry | undefined;
-  legalStructureId: string | undefined;
-  townDisplayName: string | undefined;
   homeBasedQuestion: boolean | undefined;
   liquorLicenseQuestion: boolean | undefined;
   requiresCpa: boolean | undefined;
@@ -68,6 +66,8 @@ export interface StartingProfileData extends StartingOnboardingData {
   taxId: string;
   notes: string;
   entityId: string;
+  townDisplayName: string;
+  legalStructureId: string;
 }
 
 export interface ExistingProfileData extends ExistingOnboardingData {

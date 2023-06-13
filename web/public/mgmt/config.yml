@@ -2272,6 +2272,34 @@ collections:
               - { label: Header - Complete, name: completedHeader, widget: string }
               - { label: Save Button, name: saveButton, widget: string }
               - { label: SuccessMessage, name: successMessage, widget: string }
+      - label: "Business Structure Prompt Component"
+        name: "business-structure-prompt"
+        file: content/src/fieldConfig/business-structure-prompt.json
+        editor:
+          preview: true
+        fields:
+          - label: Business Structure Prompt Config
+            name: businessStructurePrompt
+            collapsed: false
+            widget: object
+            summary: "{{businessStructurePrompt}}"
+            fields:
+              - {
+                  label: Not Completed Task Prompt Text On Any Task,
+                  name: notCompletedTaskPromptAnyTask,
+                  widget: markdown,
+                }
+              - {
+                  label: Not Completed Task Prompt Text On Business Structure Task,
+                  name: notCompletedTaskPromptBusinessStructureTask,
+                  widget: markdown,
+                }
+              - { label: Button Text, name: buttonText, widget: string }
+              - {
+                  label: Select Business Structure To Save Alert Text,
+                  name: businessStructureNotSelectedAlertText,
+                  widget: string,
+                }
 
   - name: "calendar-label"
     label: "🟪 CALENDAR"
@@ -2696,28 +2724,6 @@ collections:
             fields:
               - { label: Beta Main Text, name: betaMainText, widget: string }
               - { label: Beta Modal Button Text, name: betaModalButtonText, widget: string }
-          - label: Business Structure Prompt
-            name: businessStructurePrompt
-            collapsed: true
-            widget: object
-            summary: "{{businessStructurePrompt}}"
-            fields:
-              - {
-                  label: Not Completed Task Prompt Text On Any Task,
-                  name: notCompletedTaskPromptAnyTask,
-                  widget: markdown,
-                }
-              - {
-                  label: Not Completed Task Prompt Text On Business Structure Task,
-                  name: notCompletedTaskPromptBusinessStructureTask,
-                  widget: markdown,
-                }
-              - { label: Button Text, name: buttonText, widget: string }
-              - {
-                  label: Select Business Structure To Save Alert Text,
-                  name: businessStructureNotSelectedAlertText,
-                  widget: string,
-                }
           - label: Tax Calendar Defaults
             name: taxCalendar
             collapsed: true
@@ -3547,6 +3553,9 @@ collections:
                               name: "errorTextRequired",
                               widget: "string",
                             }
+                          - { label: "Edit Text", name: "editText", widget: "string" }
+                          - { label: "Add Text", name: "addText", widget: "string" }
+                          - { label: "Not Entered Text", name: "notEnteredText", widget: "string" }
                           - label: Option Content
                             name: optionContent
                             collapsed: false
@@ -4043,12 +4052,7 @@ collections:
                             }
                           - { label: "Edit Text", name: "editText", widget: "string" }
                           - { label: "Add Text", name: "addText", widget: "string" }
-                          - {
-                              label: "Not Entered Text",
-                              name: "notEnteredText",
-                              widget: "string",
-                              hint: This field supports Markdown,
-                            }
+                          - { label: "Not Entered Text", name: "notEnteredText", widget: "string" }
                   - label: Date of Formation
                     name: dateOfFormation
                     collapsed: true

@@ -1,5 +1,5 @@
-import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
-import { completeNewBusinessOnboarding } from "../support/helpers";
+import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
+import { onOnboardingPage } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPage";
 
 describe("Onboarding [feature] [all] [group2]", () => {
   beforeEach(() => {

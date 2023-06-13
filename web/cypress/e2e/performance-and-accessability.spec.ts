@@ -1,16 +1,16 @@
 /* eslint-disable testing-library/await-async-utils */
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
-import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
-import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
 import {
   completeBusinessStructureTask,
-  completeNewBusinessOnboarding,
   defaultPa11yThresholds,
   lighthouseDesktopConfig,
   lighthouseMobileConfig,
-} from "../support/helpers";
+} from "@businessnjgovnavigator/cypress/support/helpers/helpers";
+import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
+import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
+import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
 
 describe("Performance and Accessability - Landing Page [all] [group2]", () => {
   describe("Desktop", () => {
@@ -167,11 +167,9 @@ describe("Performance and Accessibility - Roadmap Tasks [all] [group3]", () => {
     it(`should pass the audits on ${slug}`, () => {
       const industry = LookupIndustryById("cosmetology");
       const legalStructureId = "general-partnership";
-      const townDisplayName = "Absecon";
 
       completeNewBusinessOnboarding({
         industry,
-        townDisplayName,
       });
       completeBusinessStructureTask({ legalStructureId });
 

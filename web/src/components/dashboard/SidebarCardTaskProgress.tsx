@@ -8,7 +8,7 @@ import {
   getTotalTaskCount,
 } from "@/lib/domain-logic/roadmapTaskCounters";
 import { roadmapWithSectionSpecificTasks } from "@/lib/domain-logic/roadmapWithSectionSpecificTasks";
-import { Roadmap, SidebarCardContent } from "@/lib/types/types";
+import { SidebarCardContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
 import { styled } from "@mui/material";
@@ -37,7 +37,7 @@ export const SidebarCardTaskProgress = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const modifiedRoadmap = LookupOperatingPhaseById(userData?.profileData.operatingPhase)
     .displayBusinessStructurePrompt
-    ? roadmapWithSectionSpecificTasks(roadmap as Roadmap, "PLAN")
+    ? roadmapWithSectionSpecificTasks(roadmap, "PLAN")
     : roadmap;
 
   const constructIncompleteTaskPhrase = (): { required: string; optional: string } => {

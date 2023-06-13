@@ -1,5 +1,4 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import { ROUTES } from "@/lib/domain-logic/routes";
 import { createEmptyTaskDisplayContent, Task } from "@/lib/types/types";
 import TaskPage from "@/pages/tasks/[taskUrlSlug]";
 import {
@@ -43,8 +42,8 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
-const setLargeScreen = (): void => {
-  (useMediaQuery as jest.Mock).mockImplementation(() => true);
+const setLargeScreen = (value = true): void => {
+  (useMediaQuery as jest.Mock).mockImplementation(() => value);
 };
 
 const renderPage = (task: Task, initialUserData?: UserData): void => {
@@ -456,6 +455,41 @@ describe("task page", () => {
     expect(screen.queryByTestId("nextAndPreviousButtons")).not.toBeInTheDocument();
   });
 
+  it.each(operatingPhasesDisplayingBusinessStructurePrompt)(
+    "hides nextUrlSlug on business structure task when its not mark as completed for %p operating phase",
+    (operatingPhase) => {
+      setLargeScreen(false);
+      renderPage(
+        generateTask({ id: businessStructureTaskId }),
+        generateUserData({
+          profileData: generateProfileData({
+            operatingPhase,
+          }),
+          taskProgress: { [businessStructureTaskId]: "NOT_STARTED" },
+        })
+      );
+      expect(screen.queryByTestId("nextUrlSlugButton")).not.toBeInTheDocument();
+    }
+  );
+
+  it.each(operatingPhasesNotDisplayingBusinessStructurePrompt)(
+    "shows nextUrlSlug on business structure task when its not mark as completed for %p operating phase",
+    (operatingPhase) => {
+      setLargeScreen(false);
+      renderPage(
+        generateTask({ id: businessStructureTaskId }),
+        generateUserData({
+          profileData: generateProfileData({
+            operatingPhase,
+          }),
+          taskProgress: { [businessStructureTaskId]: "COMPLETED" },
+        })
+      );
+
+      expect(screen.getByTestId("nextUrlSlugButton")).toBeInTheDocument();
+    }
+  );
+
   describe("deferred location question", () => {
     const contentWithLocationSection =
       "some content\n\n" +
@@ -499,50 +533,4 @@ describe("task page", () => {
       expect(screen.queryByText("${endLocationDependentSection}")).not.toBeInTheDocument();
     });
   });
-
-  test.each(operatingPhasesDisplayingBusinessStructurePrompt)(
-    "hides nextUrlSlug on business structure task when its not mark as completed for %p operating phase",
-    (operatingPhase) => {
-      useMockRouter({
-        asPath: ROUTES.businessStructureTask,
-      });
-
-      renderPage(
-        generateTask({
-          urlSlug: ROUTES.businessStructureTask,
-        }),
-        generateUserData({
-          profileData: generateProfileData({
-            operatingPhase,
-          }),
-          taskProgress: { [businessStructureTaskId]: "NOT_STARTED" },
-        })
-      );
-
-      expect(screen.queryByTestId("nextUrlSlugButton")).not.toBeInTheDocument();
-    }
-  );
-
-  test.each(operatingPhasesNotDisplayingBusinessStructurePrompt)(
-    "shows nextUrlSlug on business structure task when its not mark as completed for %p operating phase",
-    (operatingPhase) => {
-      useMockRouter({
-        asPath: ROUTES.businessStructureTask,
-      });
-
-      renderPage(
-        generateTask({
-          urlSlug: ROUTES.businessStructureTask,
-        }),
-        generateUserData({
-          profileData: generateProfileData({
-            operatingPhase,
-          }),
-          taskProgress: { [businessStructureTaskId]: "COMPLETED" },
-        })
-      );
-
-      expect(screen.getByTestId("nextUrlSlugButton")).toBeInTheDocument();
-    }
-  );
 });

@@ -22,7 +22,6 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
-import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
@@ -31,6 +30,7 @@ import { rswitch, templateEval } from "@/lib/utils/helpers";
 import { getModifiedTaskContent, getTaskFromRoadmap, getUrlSlugs } from "@/lib/utils/roadmap-helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
+  businessStructureTaskId,
   formationTaskId,
   hasCompletedBusinessStructure,
   Municipality,
@@ -87,7 +87,7 @@ const TaskPage = (props: Props): ReactElement => {
     }
 
     const hideNextUrlSlug =
-      router.asPath === ROUTES.businessStructureTask && !hasCompletedBusinessStructure(userData as UserData);
+      props.task.id === businessStructureTaskId && !hasCompletedBusinessStructure(userData as UserData);
 
     return (
       <div

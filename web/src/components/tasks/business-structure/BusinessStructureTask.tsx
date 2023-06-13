@@ -125,7 +125,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   };
 
   return (
-    <div className="minh-38">
+    <div className="minh-38" data-testid={"business-structure-task"}>
       <TaskHeader task={props.task} tooltipText={getTaskProgressTooltip()} />
       <UnlockedBy task={props.task} />
       <Content>{preLookupContent}</Content>

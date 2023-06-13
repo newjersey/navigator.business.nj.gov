@@ -1,9 +1,7 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
+import { completeBusinessStructureTask } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
+import { completeForeignNexusBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
-import {
-  completeBusinessStructureTask,
-  completeForeignNexusBusinessOnboarding,
-} from "cypress/support/helpers";
 
 // NOTE: in the api .env BUSINESS_NAME_BASE_URL and FORMATION_API_BASE_URL have to be removed for this test to use wiremock correctly
 describe("search business name [feature] [all] [group2]", () => {
@@ -17,7 +15,6 @@ describe("search business name [feature] [all] [group2]", () => {
     const legalStructureId = "limited-partnership";
 
     completeForeignNexusBusinessOnboarding({
-      legalStructureId: legalStructureId,
       industry,
       locationInNewJersey: true,
     });
