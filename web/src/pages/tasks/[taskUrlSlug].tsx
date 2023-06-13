@@ -32,6 +32,9 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   businessStructureTaskId,
   formationTaskId,
+  generateMunicipality,
+  generateProfileData,
+  generateUserData,
   hasCompletedBusinessStructure,
   Municipality,
   UserData,
@@ -107,7 +110,6 @@ const TaskPage = (props: Props): ReactElement => {
         )}
         {nextUrlSlug && !hideNextUrlSlug && (
           <UnStyledButton
-            dataTestid={"nextUrlSlugButton"}
             style="tertiary"
             onClick={(): void => {
               router.push(`/tasks/${nextUrlSlug}`);
@@ -175,7 +177,15 @@ const getPostOnboardingQuestion = (task: Task): ReactElement => {
   });
 };
 
-export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNode[] }): ReactElement => {
+interface TaskElementProps {
+  task: Task;
+  children?: ReactNode | ReactNode[];
+  overrides?: {
+    skipDeferredLocationQuestion: boolean;
+  };
+}
+
+export const TaskElement = (props: TaskElementProps): ReactElement => {
   const hasPostOnboardingQuestion = !!props.task.postOnboardingQuestion;
   const shouldShowDeferredQuestion = props.task.requiresLocation;
   let hasDeferredLocationQuestion = false;
@@ -237,7 +247,22 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
           <>
             <Content>{deferredLocationQuestion.before}</Content>
             {shouldShowDeferredQuestion && (
-              <DeferredLocationQuestion innerContent={deferredLocationQuestion.innerContent} />
+              <>
+                {props.overrides?.skipDeferredLocationQuestion && (
+                  <DeferredLocationQuestion
+                    innerContent={deferredLocationQuestion.innerContent}
+                    CMS_ONLY_fakeUserData={generateUserData({
+                      profileData: generateProfileData({
+                        municipality: generateMunicipality({}),
+                      }),
+                    })}
+                  />
+                )}
+
+                {!props.overrides?.skipDeferredLocationQuestion && (
+                  <DeferredLocationQuestion innerContent={deferredLocationQuestion.innerContent} />
+                )}
+              </>
             )}
             <Content>{deferredLocationQuestion.after}</Content>
           </>

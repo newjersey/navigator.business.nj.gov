@@ -18,6 +18,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   formationTaskId,
+  generateMunicipality,
   generateProfileData,
   generateUserData,
   LookupTaskAgencyById,
@@ -498,6 +499,12 @@ describe("task page", () => {
       "${endLocationDependentSection}\n\n" +
       "more content\n\n";
 
+    const userDataWithMunicipality = generateUserData({
+      profileData: generateProfileData({
+        municipality: generateMunicipality({}),
+      }),
+    });
+
     it("shows deferred location question if task requiresLocation=true", () => {
       const task = generateTask({
         requiresLocation: true,
@@ -506,6 +513,19 @@ describe("task page", () => {
       });
       renderPage(task);
       expect(screen.getByTestId("deferred-location-task")).toBeInTheDocument();
+      expect(screen.queryByTestId("deferred-location-content")).not.toBeInTheDocument();
+    });
+
+    it("shows deferred location content if task requiresLocation=true and user has municipalities set", () => {
+      const task = generateTask({
+        requiresLocation: true,
+        contentMd: contentWithLocationSection,
+        postOnboardingQuestion: undefined,
+      });
+
+      renderPage(task, userDataWithMunicipality);
+      expect(screen.getByTestId("deferred-location-task")).toBeInTheDocument();
+      expect(screen.getByTestId("deferred-location-content")).toBeInTheDocument();
     });
 
     it("does not show deferred location question if task requiresLocation=false", () => {
