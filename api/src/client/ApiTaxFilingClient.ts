@@ -49,10 +49,26 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
       logger.LogInfo(
         `TaxFiling Lookup - NICUSA - Id:${logId} - Response received: ${JSON.stringify(response.data)}`
       );
+
       const apiResponse = response.data as ApiTaxFilingLookupResponse;
+
+      const city = apiResponse.Data?.find((item) => {
+        if (item.Name === "tax-city") {
+          return item;
+        }
+      });
+
+      const naicsCode = apiResponse.Data?.find((item) => {
+        if (item.Name === "naics-code") {
+          return item;
+        }
+      });
+
       return {
         state: "SUCCESS",
         filings: flattenDeDupAndConvertTaxFilings(apiResponse.Results ?? [], taxIdMap),
+        taxCity: city?.Value ?? "",
+        naicsCode: naicsCode?.Value ?? "",
       };
     } catch (error) {
       const axiosError = error as AxiosError;
@@ -181,7 +197,13 @@ export type ApiTaxFilingLookupResponse = {
   ApiKey: string;
   Data:
     | {
-        Name: "taxpayer-id" | "taxpayer-location" | "tax-business-name" | "tax-name-control";
+        Name:
+          | "taxpayer-id"
+          | "taxpayer-location"
+          | "tax-business-name"
+          | "tax-name-control"
+          | "tax-city"
+          | "naics-code";
         Value: string;
       }[]
     | null;

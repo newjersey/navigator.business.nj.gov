@@ -59,6 +59,7 @@ import {
   ProfileData,
   randomInt,
   TaskProgress,
+  TaxFilingData,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import {
@@ -545,6 +546,21 @@ describe("profile", () => {
         renderPage({ municipalities: [newark], userData });
       };
 
+      it("locks the location field when it is populated and tax filing state is SUCCESS", () => {
+        renderPage({
+          userData: generateUserData({
+            profileData: generateProfileData({
+              municipality: generateMunicipality({ displayName: "Trenton" }),
+            }),
+            taxFilingData: generateTaxFilingData({
+              state: "SUCCESS",
+            }),
+          }),
+        });
+        expect(screen.getByText("Trenton")).toBeInTheDocument();
+        expect(screen.getByTestId("locked-municipality")).toBeInTheDocument();
+      });
+
       describe("when location is optional", () => {
         describe("legalStructure is Public Filing and operating Phase is GUEST_MODE or NEEDS_TO_FORM", () => {
           const allPublicFilingLegalStructures = allLegalStructuresOfType({ type: "publicFiling" }).map(
@@ -590,7 +606,7 @@ describe("profile", () => {
       });
 
       describe("when location is required", () => {
-        describe("legalStructure is Public Filing and operating Phase is any phase beyond NEEDS_TO_FORM", () => {
+        describe("legalStructure is Public Filing and operating Phase is NEEDS_TO_REGISTER_FOR_TAXES or FORMED_AND_REGISTERED", () => {
           const allPublicFilingLegalStructures = allLegalStructuresOfType({ type: "publicFiling" }).map(
             (it) => {
               return it.id;
@@ -599,7 +615,6 @@ describe("profile", () => {
           const operatingPhases: OperatingPhaseId[] = [
             "NEEDS_TO_REGISTER_FOR_TAXES",
             "FORMED_AND_REGISTERED",
-            "UP_AND_RUNNING",
           ];
           for (const legalStructure of allPublicFilingLegalStructures) {
             for (const operatingPhase of operatingPhases) {
@@ -615,22 +630,19 @@ describe("profile", () => {
           }
         });
 
-        describe("legalStructure is Trade Name and operating Phase is any phase beyond NEEDS_TO_REGISTER", () => {
+        describe("legalStructure is Trade Name and operating Phase is FORMED_AND_REGISTERED", () => {
           const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map((it) => {
             return it.id;
           });
-          const operatingPhases: OperatingPhaseId[] = ["FORMED_AND_REGISTERED", "UP_AND_RUNNING"];
           for (const legalStructure of allTradeNameLegalStructures) {
-            for (const operatingPhase of operatingPhases) {
-              it(`prevents saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
-                renderWithLegalStructureAndPhase({
-                  legalStructureId: legalStructure,
-                  operatingPhase: operatingPhase,
-                });
-                removeLocationAndSave();
-                expectLocationNotSavedAndError();
+            it(`prevents saving with empty location for ${legalStructure}`, async () => {
+              renderWithLegalStructureAndPhase({
+                legalStructureId: legalStructure,
+                operatingPhase: "FORMED_AND_REGISTERED",
               });
-            }
+              removeLocationAndSave();
+              expectLocationNotSavedAndError();
+            });
           }
         });
       });
@@ -1410,6 +1422,47 @@ describe("profile", () => {
       renderPage({ userData: initialUserData, municipalities: [newark] });
       expect(screen.queryByLabelText("Date of formation")).not.toBeInTheDocument();
     });
+
+    it("displays NAICS code when it exists", () => {
+      const initialUserData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          naicsCode: "123456",
+        }),
+      });
+      renderPage({ userData: initialUserData });
+      chooseTab("numbers");
+      expect(screen.getByTestId("profile-naics-code")).toBeInTheDocument();
+      expect(screen.getByText("123456")).toBeInTheDocument();
+    });
+
+    it("doesn't display the NAICS code field when it doesn't exist", () => {
+      const initialUserData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          naicsCode: "",
+        }),
+      });
+      renderPage({ userData: initialUserData });
+      chooseTab("numbers");
+      expect(screen.queryByTestId("profile-naics-code")).not.toBeInTheDocument();
+    });
+
+    it("locks the location field if it is populated and tax filing state is SUCCESS", () => {
+      renderPage({
+        userData: generateUserData({
+          profileData: generateProfileData({
+            businessPersona: "OWNING",
+            municipality: generateMunicipality({ displayName: "Trenton" }),
+          }),
+          taxFilingData: generateTaxFilingData({
+            state: "SUCCESS",
+          }),
+        }),
+      });
+      expect(screen.getByText("Trenton")).toBeInTheDocument();
+      expect(screen.getByTestId("locked-municipality")).toBeInTheDocument();
+    });
   });
 
   describe("foreign business", () => {
@@ -1441,9 +1494,11 @@ describe("profile", () => {
       const nexusForeignBusinessProfile = ({
         profileDataOverrides,
         formationDataOverrides,
+        taxFilingDataOverrides,
       }: {
         profileDataOverrides?: Partial<ProfileData>;
         formationDataOverrides?: Partial<FormationData>;
+        taxFilingDataOverrides?: Partial<TaxFilingData>;
       }): UserData => {
         return generateUserData({
           profileData: generateProfileData({
@@ -1455,6 +1510,9 @@ describe("profile", () => {
           }),
           formationData: generateFormationData({
             ...formationDataOverrides,
+          }),
+          taxFilingData: generateTaxFilingData({
+            ...taxFilingDataOverrides,
           }),
         });
       };
@@ -1565,6 +1623,26 @@ describe("profile", () => {
           renderPage({ municipalities: [newark], userData });
         };
 
+        it("locks when it is populated and tax filing state is SUCCESS", () => {
+          renderPage({
+            userData: generateUserData({
+              profileData: generateProfileData({
+                municipality: generateMunicipality({ displayName: "Trenton" }),
+                legalStructureId: randomLegalStructure().id,
+                businessPersona: "FOREIGN",
+                foreignBusinessType: "NEXUS",
+                foreignBusinessTypeIds: ["NEXUS"],
+                nexusLocationInNewJersey: true,
+              }),
+              taxFilingData: generateTaxFilingData({
+                state: "SUCCESS",
+              }),
+            }),
+          });
+          expect(screen.getByText("Trenton")).toBeInTheDocument();
+          expect(screen.getByTestId("locked-municipality")).toBeInTheDocument();
+        });
+
         describe("when location is optional", () => {
           describe("legalStructure is Public Filing and operating Phase is GUEST_MODE or NEEDS_TO_FORM", () => {
             const allPublicFilingLegalStructures = allLegalStructuresOfType({ type: "publicFiling" }).map(
@@ -1610,7 +1688,7 @@ describe("profile", () => {
         });
 
         describe("when location is required", () => {
-          describe("legalStructure is Public Filing and operating Phase is any phase beyond NEEDS_TO_FORM", () => {
+          describe("legalStructure is Public Filing and operating Phase is NEEDS_TO_REGISTER_FOR_TAXES or FORMED_AND_REGISTERED", () => {
             const allPublicFilingLegalStructures = allLegalStructuresOfType({ type: "publicFiling" }).map(
               (it) => {
                 return it.id;
@@ -1619,7 +1697,6 @@ describe("profile", () => {
             const operatingPhases: OperatingPhaseId[] = [
               "NEEDS_TO_REGISTER_FOR_TAXES",
               "FORMED_AND_REGISTERED",
-              "UP_AND_RUNNING",
             ];
             for (const legalStructure of allPublicFilingLegalStructures) {
               for (const operatingPhase of operatingPhases) {
@@ -1635,22 +1712,19 @@ describe("profile", () => {
             }
           });
 
-          describe("legalStructure is Trade Name and operating Phase is any phase beyond NEEDS_TO_REGISTER", () => {
+          describe("legalStructure is Trade Name and operating Phase is FORMED_AND_REGISTERED", () => {
             const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map((it) => {
               return it.id;
             });
-            const operatingPhases: OperatingPhaseId[] = ["FORMED_AND_REGISTERED", "UP_AND_RUNNING"];
             for (const legalStructure of allTradeNameLegalStructures) {
-              for (const operatingPhase of operatingPhases) {
-                it(`prevents saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
-                  renderWithLegalStructureAndPhase({
-                    legalStructureId: legalStructure,
-                    operatingPhase: operatingPhase,
-                  });
-                  removeLocationAndSave();
-                  expectLocationNotSavedAndError();
+              it(`prevents saving with empty location for ${legalStructure}`, async () => {
+                renderWithLegalStructureAndPhase({
+                  legalStructureId: legalStructure,
+                  operatingPhase: "FORMED_AND_REGISTERED",
                 });
-              }
+                removeLocationAndSave();
+                expectLocationNotSavedAndError();
+              });
             }
           });
         });

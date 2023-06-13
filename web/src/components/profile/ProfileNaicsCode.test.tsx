@@ -3,32 +3,43 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { getFlow } from "@/lib/utils/helpers";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
-import { generateProfileData } from "@businessnjgovnavigator/shared";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import {
+  generateProfileData,
+  generateTaxFilingData,
+  generateUserData,
+  TaxFilingState,
+  UserData,
+} from "@businessnjgovnavigator/shared";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 const Config = getMergedConfig();
 
-const renderComponent = (profileData: Partial<ProfileData>): void => {
+const renderComponent = (userDataOverrides: Partial<UserData>): void => {
   const data = generateProfileData({
     businessPersona: "STARTING",
-    ...profileData,
+    ...userDataOverrides.profileData,
   });
   render(
-    <ProfileDataContext.Provider
-      value={{
-        state: {
-          profileData: data,
-          flow: getFlow(data),
-        },
-        setProfileData: (): void => {},
-        setUser: (): void => {},
-        onBack: (): void => {},
-      }}
-    >
-      <ProfileNaicsCode />
-    </ProfileDataContext.Provider>
+    <ThemeProvider theme={createTheme()}>
+      <ProfileDataContext.Provider
+        value={{
+          state: {
+            profileData: data,
+            flow: getFlow(data),
+          },
+          setProfileData: (): void => {},
+          setUser: (): void => {},
+          onBack: (): void => {},
+        }}
+      >
+        <WithStatefulUserData initialUserData={generateUserData({ ...userDataOverrides })}>
+          <ProfileNaicsCode />
+        </WithStatefulUserData>
+      </ProfileDataContext.Provider>
+    </ThemeProvider>
   );
 };
 
@@ -47,25 +58,81 @@ describe("<ProfileNaicsCode />", () => {
   });
 
   it("displays NAICS code when exists", () => {
-    renderComponent({ naicsCode: "123456" });
+    renderComponent({ profileData: generateProfileData({ naicsCode: "123456" }) });
     expect(screen.queryByTestId("not-entered")).not.toBeInTheDocument();
     expect(screen.getByText("123456")).toBeInTheDocument();
   });
 
-  it("Display Edit when there is naics code", () => {
-    renderComponent({ naicsCode: "624410" });
+  it("display Edit when there is naics code", () => {
+    renderComponent({ profileData: generateProfileData({ naicsCode: "123456" }) });
     expect(screen.getByText(configForField.editText)).toBeInTheDocument();
     expect(screen.queryByText(configForField.addText)).not.toBeInTheDocument();
   });
 
   it("displays Not Entered text when user has no NAICS code", () => {
-    renderComponent({ naicsCode: "" });
+    renderComponent({ profileData: generateProfileData({ naicsCode: "" }) });
     expect(screen.getByTestId("not-entered")).toBeInTheDocument();
   });
 
-  it("Displays Add text when naics code field is empty", () => {
-    renderComponent({ naicsCode: "" });
+  it("displays Add text when naics code field is empty", () => {
+    renderComponent({ profileData: generateProfileData({ naicsCode: "" }) });
     expect(screen.getByText(configForField.addText)).toBeInTheDocument();
     expect(screen.queryByText(configForField.editText)).not.toBeInTheDocument();
+  });
+
+  describe("when starting", () => {
+    it("doesn't display Edit text and displays tooltip when there is a naics code and tax filing state is success", () => {
+      renderComponent({
+        profileData: generateProfileData({
+          naicsCode: "624410",
+        }),
+        taxFilingData: generateTaxFilingData({ state: "SUCCESS" }),
+      });
+      expect(screen.queryByText(configForField.editText)).not.toBeInTheDocument();
+      expect(screen.getByTestId("naics-code-tooltip")).toBeInTheDocument();
+    });
+
+    describe("tax filing states other than success", () => {
+      const taxFilingStates = ["FAILED", "API_ERROR", "PENDING", "UNREGISTERED"];
+      for (const state of taxFilingStates) {
+        it(`displays Edit text and doesn't display tooltip when tax filing state is ${state}`, () => {
+          renderComponent({
+            profileData: generateProfileData({
+              naicsCode: "624410",
+            }),
+            taxFilingData: generateTaxFilingData({ state: state as TaxFilingState }),
+          });
+          expect(screen.getByText(configForField.editText)).toBeInTheDocument();
+          expect(screen.queryByTestId("naics-code-tooltip")).not.toBeInTheDocument();
+        });
+      }
+    });
+  });
+
+  it("doesn't display Edit text and displays tooltip when there is a naics code is owning", () => {
+    renderComponent({
+      profileData: generateProfileData({
+        naicsCode: "624410",
+        operatingPhase: "UP_AND_RUNNING_OWNING",
+        businessPersona: "OWNING",
+      }),
+    });
+    expect(screen.queryByText(configForField.editText)).not.toBeInTheDocument();
+    expect(screen.getByTestId("naics-code-tooltip")).toBeInTheDocument();
+  });
+
+  it("doesn't display Edit text and displays tooltip when there is a naics code, tax filing state is success and is nexus", () => {
+    renderComponent({
+      profileData: generateProfileData({
+        naicsCode: "624410",
+        businessPersona: "FOREIGN",
+        foreignBusinessType: "NEXUS",
+      }),
+      taxFilingData: generateTaxFilingData({
+        state: "SUCCESS",
+      }),
+    });
+    expect(screen.queryByText(configForField.editText)).not.toBeInTheDocument();
+    expect(screen.getByTestId("naics-code-tooltip")).toBeInTheDocument();
   });
 });

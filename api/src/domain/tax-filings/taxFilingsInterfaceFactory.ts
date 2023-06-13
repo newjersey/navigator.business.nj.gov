@@ -14,7 +14,7 @@ const isThisYear = (dueDate: string): boolean => {
 
 export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient): TaxFilingInterface => {
   const lookup = async (request: taxFilingInterfaceRequest): Promise<UserData> => {
-    const { state, filings } = await apiTaxFilingClient.lookup({
+    const { state, filings, taxCity, naicsCode } = await apiTaxFilingClient.lookup({
       taxId: request.taxId,
       businessName: request.businessName,
     });
@@ -32,8 +32,23 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
     };
 
     const now = new Date(Date.now()).toISOString();
+    let profileDataToReturn = request.userData.profileData;
+
+    if (naicsCode && taxCity) {
+      profileDataToReturn = {
+        ...request.userData.profileData,
+        naicsCode: naicsCode,
+        municipality: {
+          name: taxCity,
+          county: "",
+          id: "",
+          displayName: "",
+        },
+      };
+    }
     return {
       ...request.userData,
+      profileData: profileDataToReturn,
       preferences: {
         ...request.userData.preferences,
         isCalendarFullView: shouldSwitchToCalendarGridView()

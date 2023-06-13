@@ -38,6 +38,9 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   postTaxFilingsOnboarding: jest.fn(),
   postTaxFilingsLookup: jest.fn(),
 }));
+jest.mock("@/lib/async-content-fetchers/fetchMunicipalities", () => ({
+  fetchMunicipalityByName: jest.fn(),
+}));
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;
 
@@ -203,6 +206,30 @@ describe("<FilingsCalendarTaxAccess />", () => {
     });
     await screen.findByTestId("tax-success");
     expect(screen.getByText(Config.taxCalendar.snackbarSuccessHeader)).toBeInTheDocument();
+  });
+
+  it("closes the success alert when the close button is clicked", async () => {
+    mockApi.postTaxFilingsOnboarding.mockResolvedValue({
+      ...userDataWithPrefilledFields,
+      taxFilingData: generateTaxFilingData({
+        state: "SUCCESS",
+        registeredISO: getCurrentDateISOString(),
+      }),
+    });
+
+    renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
+    openModal();
+    clickSave();
+    await waitFor(() => {
+      return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
+    });
+    await screen.findByTestId("tax-success");
+    expect(screen.getByText(Config.taxCalendar.snackbarSuccessHeader)).toBeInTheDocument();
+    expect(screen.getByTestId("close-icon-button")).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("close-icon-button"));
+    await waitFor(() => {
+      expect(screen.queryByText(Config.taxCalendar.snackbarSuccessHeader)).not.toBeInTheDocument();
+    });
   });
 
   describe("different taxFiling states and update behavior", () => {

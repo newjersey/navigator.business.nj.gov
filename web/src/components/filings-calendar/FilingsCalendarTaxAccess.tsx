@@ -142,7 +142,9 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
       <SnackbarAlert
         variant={"success"}
         isOpen={showAlert}
+        autoHideDuration={null}
         close={(): void => setShowAlert(false)}
+        closeIcon={true}
         heading={Config.taxCalendar.snackbarSuccessHeader}
         dataTestid={"tax-success"}
       >

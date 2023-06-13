@@ -275,6 +275,10 @@ const ProfilePage = (props: Props): ReactElement => {
     );
   };
 
+  const shouldLockMunicipality = (): boolean => {
+    return !!profileData.municipality && userData?.taxFilingData.state === "SUCCESS";
+  };
+
   const displayAltHomeBasedBusinessDescription = LookupOperatingPhaseById(
     userData?.profileData.operatingPhase
   ).displayAltHomeBasedBusinessDescription;
@@ -345,7 +349,11 @@ const ProfilePage = (props: Props): ReactElement => {
           <OnboardingLocationInNewJersey />
         </ProfileField>
 
-        <ProfileField fieldName="municipality" isVisible={profileData.nexusLocationInNewJersey === true}>
+        <ProfileField
+          fieldName="municipality"
+          isVisible={profileData.nexusLocationInNewJersey === true}
+          locked={shouldLockMunicipality()}
+        >
           <ProfileMunicipality />
         </ProfileField>
 
@@ -385,6 +393,13 @@ const ProfilePage = (props: Props): ReactElement => {
               <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
             )}
           </div>
+          {userData?.profileData.naicsCode && (
+            <div data-testid={"profile-naics-code"}>
+              <ProfileField fieldName="naicsCode" noLabel={true}>
+                <ProfileNaicsCode />
+              </ProfileField>
+            </div>
+          )}
         </ProfileField>
       </>
     ),
@@ -511,7 +526,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <OnboardingLegalStructureDropdown />
         </ProfileField>
 
-        <ProfileField fieldName="municipality">
+        <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
           <ProfileMunicipality />
         </ProfileField>
 
@@ -636,7 +651,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <ProfileExistingEmployees />
         </ProfileField>
 
-        <ProfileField fieldName="municipality">
+        <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
           <ProfileMunicipality />
         </ProfileField>
 
@@ -657,6 +672,14 @@ const ProfilePage = (props: Props): ReactElement => {
     numbers: (
       <>
         <ProfileTabHeader tab="numbers" />
+
+        {userData?.profileData.naicsCode && (
+          <div data-testid={"profile-naics-code"}>
+            <ProfileField fieldName="naicsCode" noLabel={true}>
+              <ProfileNaicsCode />
+            </ProfileField>
+          </div>
+        )}
 
         <ProfileField fieldName="entityId">
           <ProfileEntityId handleChangeOverride={showRegistrationModalForGuest()} />
