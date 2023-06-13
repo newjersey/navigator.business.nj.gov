@@ -72,7 +72,9 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
       await waitFor(() => {
         return expect(currentUserData()).toEqual(updatedUserData);
       });
-      expect(mockPush).toHaveBeenCalledWith("/dashboard");
+      expect(mockPush).toHaveBeenCalledWith({ query: { fromTaxRegistrationCard: "true" } }, undefined, {
+        shallow: true,
+      });
     });
   });
 });
