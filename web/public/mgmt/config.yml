@@ -1737,7 +1737,7 @@ collections:
         name: industryId
         widget: "relation"
         collection: "roadmaps"
-        search_fields: ["{{id}}"]
+        search_fields: ["id"]
         value_field: "{{id}}"
         display_fields: ["{{id}}"]
         required: false
@@ -1796,7 +1796,7 @@ collections:
         widget: "relation"
         multiple: true
         collection: "roadmaps"
-        search_fields: ["{{id}}"]
+        search_fields: ["id"]
         value_field: "{{id}}"
         display_fields: ["{{name}}"]
         options_length: 500
