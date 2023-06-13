@@ -1,15 +1,18 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 /* eslint-disable testing-library/await-async-utils */
 
+import {
+  clickDeferredSaveButton,
+  completeBusinessStructureTask,
+  waitForUserDataMountUpdate,
+} from "@businessnjgovnavigator/cypress/support/helpers/helpers";
+import {
+  completeExistingBusinessOnboarding,
+  completeNewBusinessOnboarding,
+} from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { onProfilePage } from "cypress/support/page_objects/profilePage";
-import {
-  clickDeferredSaveButton,
-  completeExistingBusinessOnboarding,
-  completeNewBusinessOnboarding,
-  waitForUserDataMountUpdate,
-} from "../support/helpers";
 
 const sizes = ["iphone-5", [1024, 768]];
 describe("Dashboard [feature] [all] [group2]", () => {
@@ -41,8 +44,9 @@ describe("Dashboard [feature] [all] [group2]", () => {
 
         completeNewBusinessOnboarding({
           industry,
-          legalStructureId,
         });
+
+        completeBusinessStructureTask({ legalStructureId });
 
         // check dashboard
         onDashboardPage.getEditProfileLink().should("exist");
@@ -74,16 +78,24 @@ describe("Dashboard [feature] [all] [group2]", () => {
 
         completeNewBusinessOnboarding({
           industry,
-          legalStructureId,
         });
 
         waitForUserDataMountUpdate();
+        completeBusinessStructureTask({ legalStructureId });
 
         // answer deferred question to get local-requirements task
-        onDashboardPage.getHomeBased().should("exist");
+        onDashboardPage.getHomeBased(true).should("exist");
+        onDashboardPage.getHomeBased(false).should("exist");
+
         onDashboardPage.selectHomeBased(false);
+        onDashboardPage.getHomeBased(false).should("be.checked");
+
         clickDeferredSaveButton();
-        onDashboardPage.getHomeBased().should("not.exist");
+        onDashboardPage.getHomeBased(true).should("not.exist");
+        onDashboardPage.getHomeBased(false).should("not.exist");
+
+        cy.wait(1000);
+
         cy.get('[data-task="identify-potential-lease"]').should("exist");
         cy.wait(1000);
 
@@ -103,22 +115,20 @@ describe("Dashboard [feature] [all] [group2]", () => {
 
       it("update the industry and verifies the dashboard tasks are updated", () => {
         const industry = LookupIndustryById("e-commerce");
-        const legalStructureId = "limited-liability-company";
+        const legalStructureId = "general-partnership";
 
         completeNewBusinessOnboarding({
           industry,
-          legalStructureId,
         });
+
+        completeBusinessStructureTask({ legalStructureId });
 
         // editing data in the Profile page
         onDashboardPage.clickEditProfileLink();
         cy.url().should("contain", "/profile");
 
-        cy.get('input[aria-label="Business name"]').clear().type("Applebee's");
         cy.get('[aria-label="Industry"]').click({ force: true });
         cy.contains("Restaurant").click({ force: true });
-        cy.get('[aria-label="Business structure"]').click({ force: true });
-        cy.get('[data-value="limited-liability-company"]').click({ force: true });
         cy.get('[aria-label="Location"]').click({ force: true });
         cy.contains("Allendale").click({ force: true });
 
@@ -138,8 +148,9 @@ describe("Dashboard [feature] [all] [group2]", () => {
 
         completeNewBusinessOnboarding({
           industry,
-          legalStructureId,
         });
+
+        completeBusinessStructureTask({ legalStructureId });
 
         // dashboard
         cy.get('[data-task="register-for-ein"]').click({ force: true });

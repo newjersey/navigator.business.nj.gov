@@ -4,8 +4,8 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
-import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { TaskHeader } from "@/components/TaskHeader";
+import { LegalStructureRadio } from "@/components/tasks/business-structure/LegalStructureRadio";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -43,13 +43,6 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   } = useFormContextHelper(createProfileFieldErrorMap());
 
   useEffect(() => {
-    if (!userData) {
-      return;
-    }
-    setProfileData(userData.profileData);
-  }, [userData]);
-
-  useEffect(() => {
     const current = updateQueue?.current();
     return () => {
       if (current?.profileData.legalStructureId) {
@@ -65,6 +58,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     if (!userData) {
       return;
     }
+    setProfileData(userData.profileData);
     setShowRadioQuestion(!userData.profileData.legalStructureId);
   }, userData);
 
@@ -85,6 +79,25 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     }
     setShowRadioQuestion(true);
     queueUpdateTaskProgress(props.task.id, "IN_PROGRESS");
+  };
+
+  const removeTaskCompletion = async (): Promise<void> => {
+    if (!updateQueue) return;
+
+    updateQueue
+      .queueProfileData({
+        legalStructureId: undefined,
+        operatingPhase:
+          profileData.operatingPhase === "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
+            ? "GUEST_MODE"
+            : profileData.operatingPhase,
+      })
+      .queueTaskProgress({ [props.task.id]: "NOT_STARTED" });
+
+    setShowRadioQuestion(true);
+    await updateQueue.update();
+
+    setProfileData(updateQueue.current().profileData);
   };
 
   const preLookupContent = props.task.contentMd.split("${businessStructureSelectionComponent}")[0];
@@ -112,7 +125,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   };
 
   return (
-    <div className="minh-38">
+    <div className="minh-38" data-testid={"business-structure-task"}>
       <TaskHeader task={props.task} tooltipText={getTaskProgressTooltip()} />
       <UnlockedBy task={props.task} />
       <Content>{preLookupContent}</Content>
@@ -129,10 +142,9 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
               onBack: (): void => {},
             }}
           >
-            <h3>{Config.businessStructureTask.radioQuestionHeader}</h3>
-            <OnboardingLegalStructure />
+            <LegalStructureRadio taskId={props.task.id} />
             <div className="margin-top-4">
-              <SecondaryButton isColor="primary" onClick={onSubmit}>
+              <SecondaryButton isColor="primary" onClick={onSubmit} dataTestId={"save-business-structure"}>
                 {Config.businessStructureTask.saveButton}
               </SecondaryButton>
             </div>
@@ -150,14 +162,26 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
                 })}
               </Content>
               {canEdit() ? (
-                <UnStyledButton
-                  className="margin-left-2"
-                  style="tertiary"
-                  underline
-                  onClick={setBackToEditing}
-                >
-                  {Config.taskDefaults.editText}
-                </UnStyledButton>
+                <>
+                  <UnStyledButton
+                    className="margin-left-2"
+                    style="tertiary"
+                    underline
+                    onClick={setBackToEditing}
+                  >
+                    {Config.taskDefaults.editText}
+                  </UnStyledButton>
+                  <span className="margin-left-1">|</span>
+
+                  <UnStyledButton
+                    className="margin-left-1"
+                    style="tertiary"
+                    underline
+                    onClick={removeTaskCompletion}
+                  >
+                    {Config.taskDefaults.removeText}
+                  </UnStyledButton>
+                </>
               ) : (
                 <div className="margin-left-2">
                   <ArrowTooltip title={Config.profileDefaults.lockedFieldTooltipText}>

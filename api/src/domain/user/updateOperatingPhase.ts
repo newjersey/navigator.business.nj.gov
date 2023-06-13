@@ -1,4 +1,4 @@
-import { formationTaskId, taxTaskId } from "@shared/domain-logic/taskIds";
+import { businessStructureTaskId, formationTaskId, taxTaskId } from "@shared/domain-logic/taskIds";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { OperatingPhaseId } from "@shared/operatingPhase";
 import { BusinessPersona } from "@shared/profileData";
@@ -47,66 +47,27 @@ const getNewPhase = ({
   isPublicFiling: boolean;
   taskProgress: Record<string, TaskProgress>;
 }): OperatingPhaseId => {
+  const hasCompletedBusinessStructure = taskProgress[businessStructureTaskId] === "COMPLETED";
   const hasCompletedFormation = taskProgress[formationTaskId] === "COMPLETED";
   const hasCompletedTaxes = taskProgress[taxTaskId] === "COMPLETED";
 
-  if (businessPersona === "OWNING" && currentPhase !== "UP_AND_RUNNING_OWNING") {
+  if (businessPersona === "OWNING") {
     return "UP_AND_RUNNING_OWNING";
   }
 
   if (currentPhase === "GUEST_MODE") {
-    return isPublicFiling ? "NEEDS_TO_FORM" : "NEEDS_TO_REGISTER_FOR_TAXES";
+    return "NEEDS_BUSINESS_STRUCTURE";
   }
 
-  if (currentPhase === "NEEDS_TO_FORM") {
-    if (isPublicFiling && hasCompletedFormation) {
-      return hasCompletedTaxes ? "FORMED_AND_REGISTERED" : "NEEDS_TO_REGISTER_FOR_TAXES";
-    }
+  if (hasCompletedBusinessStructure) {
+    if (isPublicFiling && !hasCompletedFormation) return "NEEDS_TO_FORM";
 
-    if (!isPublicFiling) {
-      return hasCompletedTaxes ? "FORMED_AND_REGISTERED" : "NEEDS_TO_REGISTER_FOR_TAXES";
-    }
+    if (!hasCompletedTaxes) return "NEEDS_TO_REGISTER_FOR_TAXES";
+
+    if (hasCompletedTaxes && currentPhase !== "UP_AND_RUNNING") return "FORMED_AND_REGISTERED";
+
+    return currentPhase;
+  } else {
+    return "NEEDS_BUSINESS_STRUCTURE";
   }
-
-  if (currentPhase === "NEEDS_TO_REGISTER_FOR_TAXES") {
-    if (isPublicFiling && !hasCompletedFormation) {
-      return "NEEDS_TO_FORM";
-    }
-
-    if (hasCompletedTaxes) {
-      return "FORMED_AND_REGISTERED";
-    }
-  }
-
-  if (currentPhase === "FORMED_AND_REGISTERED") {
-    if (isPublicFiling) {
-      if (!hasCompletedFormation) {
-        return "NEEDS_TO_FORM";
-      }
-      if (!hasCompletedTaxes) {
-        return "NEEDS_TO_REGISTER_FOR_TAXES";
-      }
-    }
-
-    if (!isPublicFiling && !hasCompletedTaxes) {
-      return "NEEDS_TO_REGISTER_FOR_TAXES";
-    }
-  }
-
-  if (currentPhase === "UP_AND_RUNNING") {
-    if (isPublicFiling) {
-      if (!hasCompletedFormation) {
-        return "NEEDS_TO_FORM";
-      }
-      if (!hasCompletedTaxes) {
-        return "NEEDS_TO_REGISTER_FOR_TAXES";
-      }
-    }
-
-    if (!isPublicFiling && !hasCompletedTaxes) {
-      return "NEEDS_TO_REGISTER_FOR_TAXES";
-    }
-  }
-
-  return currentPhase;
 };

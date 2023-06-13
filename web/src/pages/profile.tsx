@@ -9,7 +9,6 @@ import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
-import { OnboardingLegalStructureDropdown } from "@/components/onboarding/OnboardingLegalStructureDropDown";
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { DisabledTaxId } from "@/components/onboarding/taxId/DisabledTaxId";
@@ -19,6 +18,7 @@ import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUse
 import { Documents } from "@/components/profile/Documents";
 import { EscapeModal } from "@/components/profile/EscapeModal";
 import { ProfileBusinessName } from "@/components/profile/ProfileBusinessName";
+import { ProfileBusinessStructure } from "@/components/profile/ProfileBusinessStructure";
 import { ProfileDateOfFormation } from "@/components/profile/ProfileDateOfFormation";
 import { ProfileEmployerId } from "@/components/profile/ProfileEmployerId";
 import { ProfileEntityId } from "@/components/profile/ProfileEntityId";
@@ -47,15 +47,13 @@ import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
-import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { createProfileFieldErrorMap, OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getFlow, useMountEffectWhenDefined, useScrollToPathAnchor } from "@/lib/utils/helpers";
-import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
 import {
   BusinessPersona,
   createEmptyProfileData,
@@ -69,6 +67,7 @@ import {
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { hasCompletedFormation } from "@businessnjgovnavigator/shared/";
 import dayjs from "dayjs";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
@@ -87,12 +86,12 @@ interface Props {
 }
 
 const ProfilePage = (props: Props): ReactElement => {
-  const { roadmap } = useRoadmap();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const router = useRouter();
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
   const [escapeModal, setEscapeModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [shouldLockFormationFields, setShouldLockFormationFields] = useState<boolean>(false);
   const [isFormationDateDeletionModalOpen, setFormationDateDeletionModalOpen] = useState<boolean>(false);
 
   const userDataFromHook = useUserData();
@@ -113,11 +112,6 @@ const ProfilePage = (props: Props): ReactElement => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const redirect = (params?: { [key: string]: any }, routerType = router.push): Promise<boolean> => {
-    if (checkQueryValue(router, QUERIES.path, "businessFormation")) {
-      const formationUrlSlug = getTaskFromRoadmap(roadmap, formationTaskId)?.urlSlug ?? "";
-      return routerType(`/tasks/${formationUrlSlug}`);
-    }
-
     const urlParams = params ? `?${new URLSearchParams(params).toString()}` : "";
     return routerType(`${ROUTES.dashboard}${urlParams}`);
   };
@@ -127,6 +121,7 @@ const ProfilePage = (props: Props): ReactElement => {
   useMountEffectWhenDefined(() => {
     if (userData) {
       setProfileData(userData.profileData);
+      setShouldLockFormationFields(hasCompletedFormation(userData));
     }
   }, userData);
 
@@ -296,7 +291,6 @@ const ProfilePage = (props: Props): ReactElement => {
     return isHomeBasedBusinessApplicable(profileData.industryId);
   };
 
-  const shouldLockFormationFields = userData?.formationData.getFilingResponse?.success;
   const hasSubmittedTaxData =
     userData?.taxFilingData.state === "SUCCESS" || userData?.taxFilingData.state === "PENDING";
 
@@ -339,10 +333,11 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileField
           fieldName="legalStructureId"
+          noLabel={true}
           locked={shouldLockFormationFields}
-          lockedValueFormatter={(value: string): string => LookupLegalStructureById(value).name}
+          lockedValueFormatter={(legalStructureId): string => LookupLegalStructureById(legalStructureId).name}
         >
-          <OnboardingLegalStructureDropdown />
+          <ProfileBusinessStructure />
         </ProfileField>
 
         <ProfileField fieldName="nexusLocationInNewJersey">
@@ -473,7 +468,6 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
-
         <ProfileField
           fieldName="businessName"
           locked={shouldLockFormationFields}
@@ -481,7 +475,6 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ProfileBusinessName required={isBusinessNameRequired()} />
         </ProfileField>
-
         <ProfileField
           fieldName="responsibleOwnerName"
           isVisible={shouldShowTradeNameElements()}
@@ -489,7 +482,6 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ProfileResponsibleOwnerName />
         </ProfileField>
-
         <ProfileField
           fieldName="tradeName"
           isVisible={shouldShowTradeNameElements()}
@@ -497,18 +489,15 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ProfileTradeName />
         </ProfileField>
-
         <ProfileField fieldName="industryId">
           <OnboardingIndustry />
         </ProfileField>
-
         <ProfileField
           fieldName="sectorId"
           isVisible={profileData.industryId === "generic" || !!props.CMS_ONLY_fakeUserData}
         >
           <OnboardingSectors />
         </ProfileField>
-
         <ProfileField
           fieldName="dateOfFormation"
           isVisible={!!userData?.profileData.dateOfFormation}
@@ -517,19 +506,18 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ProfileDateOfFormation futureAllowed={true} />
         </ProfileField>
-
         <ProfileField
           fieldName="legalStructureId"
+          noLabel={true}
           locked={shouldLockFormationFields}
-          lockedValueFormatter={(id): string => LookupLegalStructureById(id).name}
+          lockedValueFormatter={(legalStructureId): string => LookupLegalStructureById(legalStructureId).name}
         >
-          <OnboardingLegalStructureDropdown />
+          <ProfileBusinessStructure />
         </ProfileField>
 
         <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
           <ProfileMunicipality />
         </ProfileField>
-
         <ProfileField
           fieldName="homeBasedBusiness"
           isVisible={displayHomedBaseBusinessQuestion()}
@@ -538,7 +526,6 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <OnboardingHomeBasedBusiness />
         </ProfileField>
-
         <ProfileField
           fieldName="ownershipTypeIds"
           isVisible={
@@ -548,7 +535,6 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ProfileOwnership />
         </ProfileField>
-
         <ProfileField
           fieldName="existingEmployees"
           isVisible={

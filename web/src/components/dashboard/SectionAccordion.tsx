@@ -12,6 +12,7 @@ interface Props {
   sectionType: SectionType;
   children: ReactNode;
   mini?: boolean;
+  isDividerDisabled?: boolean;
 }
 
 export const SectionAccordion = (props: Props): ReactElement => {
@@ -76,7 +77,7 @@ export const SectionAccordion = (props: Props): ReactElement => {
           <AccordionDetails>{props.children}</AccordionDetails>
         </Accordion>
       </SectionAccordionContext.Provider>
-      <hr className={dividerClasses} />
+      {!props.isDividerDisabled && <hr className={dividerClasses} />}
     </div>
   );
 };

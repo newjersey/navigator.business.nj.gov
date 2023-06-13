@@ -15,7 +15,8 @@
 /// <reference types="cypress" />
 
 import "./commands";
-import { LighthouseConfig, LighthouseThresholds, Pa11yThresholds } from "./helpers";
+import { LighthouseConfig, LighthouseThresholds, Pa11yThresholds } from "./types";
+
 export const testUserEmail = Cypress.env("TEST_USER_EMAIL");
 export const testUserPassword = Cypress.env("TEST_USER_PASSWORD");
 

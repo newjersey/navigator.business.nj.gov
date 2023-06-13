@@ -1,12 +1,13 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
-import { FormationFormData, LookupIndustryById, randomInt } from "@businessnjgovnavigator/shared/";
 import {
-  AdditionalFormation,
-  completeNewBusinessOnboarding,
   generateFormationMember,
   generateFormationSigner,
   generateMunicipality,
-} from "cypress/support/helpers";
+} from "@businessnjgovnavigator/cypress/support/helpers/factories";
+import { completeBusinessStructureTask } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
+import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
+import { AdditionalFormation } from "@businessnjgovnavigator/cypress/support/types";
+import { FormationFormData, LookupIndustryById, randomInt } from "@businessnjgovnavigator/shared/";
 import { onAddressModal } from "cypress/support/page_objects/addressModal";
 import { onBusinessFormationPage } from "cypress/support/page_objects/businessFormationPage";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
@@ -59,8 +60,8 @@ describe("Business Formation [feature] [all] [group2]", () => {
 
     completeNewBusinessOnboarding({
       industry,
-      legalStructureId,
     });
+    completeBusinessStructureTask({ legalStructureId });
 
     onDashboardPage.clickRoadmapTask("form-business-entity");
     submitBusinessNameSearchAndContinue(businessNameSearch);
@@ -131,10 +132,6 @@ const typeDesignatorAndStartDate = ({
   }
 };
 
-const openAddressSection = (): void => {
-  cy.get('[data-testid="add-address-button"]').click();
-};
-
 const typeBusinessAddress = ({
   addressLine1,
   addressLine2,
@@ -163,6 +160,10 @@ const typeBusinessAddress = ({
       .invoke("prop", "value")
       .should("contain", addressZipCode);
   }
+};
+
+const openAddressSection = (): void => {
+  cy.get('[data-testid="add-address-button"]').click();
 };
 
 const typeBusinessPurpose = (businessPurpose: FormationFormData["businessPurpose"]): void => {

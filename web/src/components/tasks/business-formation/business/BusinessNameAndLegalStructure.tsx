@@ -7,9 +7,12 @@ import { LookupStepIndexByName } from "@/components/tasks/business-formation/Bus
 import { ReviewNotEntered } from "@/components/tasks/business-formation/review/section/ReviewNotEntered";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
+import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
+import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useState } from "react";
@@ -25,10 +28,14 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
   const { userData } = useUserData();
   const router = useRouter();
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
+  const { roadmap } = useRoadmap();
+  const businessStructureUrlSlug = roadmap
+    ? (getTaskFromRoadmap(roadmap, businessStructureTaskId)?.urlSlug as string)
+    : "";
 
   const editLegalStructure = (): void => {
     analytics.event.business_formation_legal_structure_modal.submit.go_to_profile_screen();
-    router.push("/profile?path=businessFormation");
+    router.push(`/tasks/${businessStructureUrlSlug}`);
   };
 
   const showLegalStructureModal = (): void => {

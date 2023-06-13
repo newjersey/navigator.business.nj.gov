@@ -1,24 +1,42 @@
+import { BusinessStructurePrompt } from "@/components/dashboard/BusinessStructurePrompt";
 import { SectionAccordion } from "@/components/dashboard/SectionAccordion";
 import { Step } from "@/components/Step";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import {
+  hasCompletedBusinessStructure,
+  LookupOperatingPhaseById,
+  UserData,
+} from "@businessnjgovnavigator/shared/";
 import { ReactElement } from "react";
 
 export const Roadmap = (): ReactElement => {
   const { roadmap, sectionNamesInRoadmap } = useRoadmap();
+  const { updateQueue } = useUserData();
+
+  const displayBusinessStructurePrompt = LookupOperatingPhaseById(
+    updateQueue?.current().profileData.operatingPhase
+  ).displayBusinessStructurePrompt;
+
+  const completedBusinessStructure = hasCompletedBusinessStructure(updateQueue?.current() as UserData);
 
   return (
     <>
       {sectionNamesInRoadmap.map((section) => {
         return (
           <SectionAccordion key={section} sectionType={section}>
-            {roadmap &&
+            {section === "START" && !completedBusinessStructure && displayBusinessStructurePrompt ? (
+              <BusinessStructurePrompt />
+            ) : (
+              roadmap &&
               roadmap.steps
                 .filter((step) => {
                   return step.section === section;
                 })
                 .map((step, index, array) => {
                   return <Step key={step.stepNumber} step={step} last={index === array.length - 1} />;
-                })}
+                })
+            )}
           </SectionAccordion>
         );
       })}

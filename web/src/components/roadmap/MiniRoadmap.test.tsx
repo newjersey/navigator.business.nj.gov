@@ -1,5 +1,11 @@
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
-import { generateStep, generateTask } from "@/test/factories";
+import {
+  generateStep,
+  generateTask,
+  operatingPhasesDisplayingBusinessStructurePrompt,
+  operatingPhasesNotDisplayingBusinessStructurePrompt,
+} from "@/test/factories";
+import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
@@ -7,11 +13,16 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/test";
+import {
+  generatePreferences,
+  generateProfileData,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 
 const renderMiniRoadMap = (taskId: string): void => {
   render(<MiniRoadmap activeTaskId={taskId} />);
@@ -21,6 +32,7 @@ describe("<MiniRoadmap />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     setupStatefulUserDataContext();
+    useMockRouter({ asPath: "" });
     useMockRoadmap({
       steps: [
         generateStep({
@@ -114,6 +126,56 @@ describe("<MiniRoadmap />", () => {
     expect(within(sectionStart).getByText("step2")).toBeVisible();
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
   });
+
+  describe.each(operatingPhasesDisplayingBusinessStructurePrompt)(
+    "BusinessStructurePrompt",
+    (operatingPhase) => {
+      beforeEach(() => {
+        useMockRoadmap({
+          steps: [
+            generateStep({ name: "step1", section: "PLAN" }),
+            generateStep({ name: "step2", section: "START" }),
+          ],
+        });
+
+        useMockUserData({
+          preferences: generatePreferences({
+            roadmapOpenSections: ["PLAN", "START"],
+          }),
+          profileData: generateProfileData({ operatingPhase: operatingPhase }),
+        });
+      });
+
+      describe(`${operatingPhase}`, () => {
+        it("renders the roadmap with the business structure prompt", () => {
+          renderMiniRoadMap("task3");
+          expect(screen.getByTestId("business-structure-prompt")).toBeInTheDocument();
+        });
+      });
+    }
+  );
+
+  test.each(operatingPhasesNotDisplayingBusinessStructurePrompt)(
+    "does not render the roadmap with the business structure prompt for %p",
+    (operatingPhase) => {
+      useMockRoadmap({
+        steps: [
+          generateStep({ name: "step1", section: "PLAN" }),
+          generateStep({ name: "step2", section: "START" }),
+        ],
+      });
+
+      useMockUserData({
+        preferences: generatePreferences({
+          roadmapOpenSections: ["PLAN", "START"],
+        }),
+        profileData: generateProfileData({ operatingPhase: operatingPhase }),
+      });
+
+      renderMiniRoadMap("task3");
+      expect(screen.queryByTestId("business-structure-prompt")).not.toBeInTheDocument();
+    }
+  );
 
   const renderStatefulMiniRoadMap = (taskId: string, userData = generateUserData({})): void => {
     render(

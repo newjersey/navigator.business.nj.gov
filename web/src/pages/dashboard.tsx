@@ -129,7 +129,8 @@ const DashboardPage = (props: Props): ReactElement => {
     }
     return (
       isHomeBasedBusinessApplicable(userData.profileData.industryId) &&
-      userData.profileData.homeBasedBusiness === undefined
+      userData.profileData.homeBasedBusiness === undefined &&
+      LookupOperatingPhaseById(updateQueue?.current().profileData.operatingPhase).displayHomeBasedPrompt
     );
   };
 

@@ -1,7 +1,14 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { createEmptyTaskDisplayContent, Task } from "@/lib/types/types";
 import TaskPage from "@/pages/tasks/[taskUrlSlug]";
-import { generateStep, generateTask, generateTaskLink, randomPublicFilingLegalType } from "@/test/factories";
+import {
+  generateStep,
+  generateTask,
+  generateTaskLink,
+  operatingPhasesDisplayingBusinessStructurePrompt,
+  operatingPhasesNotDisplayingBusinessStructurePrompt,
+  randomPublicFilingLegalType,
+} from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
@@ -16,9 +23,11 @@ import {
   LookupTaskAgencyById,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
@@ -33,8 +42,8 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
-const setLargeScreen = (): void => {
-  (useMediaQuery as jest.Mock).mockImplementation(() => true);
+const setLargeScreen = (value = true): void => {
+  (useMediaQuery as jest.Mock).mockImplementation(() => value);
 };
 
 const renderPage = (task: Task, initialUserData?: UserData): void => {
@@ -445,6 +454,41 @@ describe("task page", () => {
 
     expect(screen.queryByTestId("nextAndPreviousButtons")).not.toBeInTheDocument();
   });
+
+  it.each(operatingPhasesDisplayingBusinessStructurePrompt)(
+    "hides nextUrlSlug on business structure task when its not mark as completed for %p operating phase",
+    (operatingPhase) => {
+      setLargeScreen(false);
+      renderPage(
+        generateTask({ id: businessStructureTaskId }),
+        generateUserData({
+          profileData: generateProfileData({
+            operatingPhase,
+          }),
+          taskProgress: { [businessStructureTaskId]: "NOT_STARTED" },
+        })
+      );
+      expect(screen.queryByTestId("nextUrlSlugButton")).not.toBeInTheDocument();
+    }
+  );
+
+  it.each(operatingPhasesNotDisplayingBusinessStructurePrompt)(
+    "shows nextUrlSlug on business structure task when its not mark as completed for %p operating phase",
+    (operatingPhase) => {
+      setLargeScreen(false);
+      renderPage(
+        generateTask({ id: businessStructureTaskId }),
+        generateUserData({
+          profileData: generateProfileData({
+            operatingPhase,
+          }),
+          taskProgress: { [businessStructureTaskId]: "COMPLETED" },
+        })
+      );
+
+      expect(screen.getByTestId("nextUrlSlugButton")).toBeInTheDocument();
+    }
+  );
 
   describe("deferred location question", () => {
     const contentWithLocationSection =

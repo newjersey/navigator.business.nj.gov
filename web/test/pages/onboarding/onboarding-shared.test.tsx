@@ -13,6 +13,7 @@ import {
 import {
   industriesWithEssentialQuestion,
   industriesWithOutEssentialQuestion,
+  mockSuccessfulApiSignups,
   renderPage,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
@@ -27,7 +28,6 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
-  postSelfReg: jest.fn(),
   postNewsletter: jest.fn(),
   postUserTesting: jest.fn(),
   postGetAnnualFilings: jest.fn(),
@@ -41,10 +41,8 @@ describe("onboarding - shared", () => {
     jest.resetAllMocks();
     useMockRouter({ isReady: true });
     setupStatefulUserDataContext();
-    mockApi.postSelfReg.mockResolvedValue({ authRedirectURL: "", userData: generateUserData({}) });
-    mockApi.postGetAnnualFilings.mockImplementation((request) => {
-      return Promise.resolve(request);
-    });
+    mockSuccessfulApiSignups();
+    jest.useFakeTimers();
   });
 
   it("routes to the first onboarding question when they have not answered the first question", async () => {
@@ -90,8 +88,10 @@ describe("onboarding - shared", () => {
     useMockRouter({ isReady: true, query: { industry } });
     const { page } = renderPage({});
     expect(screen.getByTestId("step-3")).toBeInTheDocument();
-    page.chooseRadio("general-partnership");
-    await page.visitStep(4);
+    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    page.clickNext();
 
     await waitFor(() => {
       expect(currentUserData().profileData.businessPersona).toEqual("STARTING");
@@ -169,7 +169,6 @@ describe("onboarding - shared", () => {
     await page.visitStep(2);
     page.selectByValue("Industry", "e-commerce");
     await page.visitStep(3);
-    page.chooseRadio("general-partnership");
 
     page.clickBack();
     page.clickBack();
@@ -289,7 +288,7 @@ describe("onboarding - shared", () => {
   });
 
   it("displays error message when @ is missing in email input field", async () => {
-    useMockRouter({ isReady: true, query: { page: "4" } });
+    useMockRouter({ isReady: true, query: { page: "3" } });
     const { page } = renderPage({
       userData: generateUserData({
         user: generateUser({ email: `some-emailexample.com` }),
@@ -307,7 +306,7 @@ describe("onboarding - shared", () => {
   });
 
   it("displays error message when . is missing in email input field", async () => {
-    useMockRouter({ isReady: true, query: { page: "4" } });
+    useMockRouter({ isReady: true, query: { page: "3" } });
     const { page } = renderPage({
       userData: generateUserData({
         user: generateUser({ email: `some-email@examplecom` }),

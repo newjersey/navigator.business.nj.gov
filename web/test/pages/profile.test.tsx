@@ -20,7 +20,7 @@ import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-u
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
-import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulProfileFormContext } from "@/test/mock/withStatefulProfileData";
 import {
   currentUserData,
@@ -35,7 +35,6 @@ import {
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   businessPersonas,
-  businessStructureTaskId,
   createEmptyUserData,
   defaultDateFormat,
   einTaskId,
@@ -147,7 +146,11 @@ describe("profile", () => {
             <WithStatefulUserData
               initialUserData={
                 userData ||
-                generateUserData({ profileData: generateProfileData({ municipality: genericTown }) })
+                generateUserData({
+                  profileData: generateProfileData({
+                    municipality: genericTown,
+                  }),
+                })
               }
             >
               <Profile municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]} />
@@ -251,7 +254,9 @@ describe("profile", () => {
 
     beforeEach(() => {
       userData = generateUserData({
-        profileData: generateProfileData({ businessPersona: "STARTING" }),
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+        }),
       });
     });
 
@@ -260,11 +265,9 @@ describe("profile", () => {
       const municipality = generateMunicipality({
         displayName: "some-cool-town",
       });
-      const userData = generateUserData({
+      const startingUserData = generateUserData({
         formationData: generateFormationData({
-          getFilingResponse: generateGetFilingResponse({
-            success: true,
-          }),
+          completedFilingPayment: true,
         }),
         profileData: generateProfileData({
           dateOfFormation: "2020-01-02",
@@ -276,8 +279,24 @@ describe("profile", () => {
         }),
       });
 
+      const foreignNexusUserData = generateUserData({
+        formationData: generateFormationData({
+          completedFilingPayment: true,
+        }),
+        profileData: generateProfileData({
+          dateOfFormation: "2020-01-02",
+          businessPersona: "FOREIGN",
+          foreignBusinessType: "NEXUS",
+          foreignBusinessTypeIds: ["NEXUS"],
+          legalStructureId: legalStructure,
+          entityId: "some-id",
+          businessName: "some-name",
+          municipality: municipality,
+        }),
+      });
+
       it("locks businessName", () => {
-        renderPage({ userData });
+        renderPage({ userData: startingUserData });
         expect(
           screen.getByText(Config.profileDefaults.fields.businessName.default.header)
         ).toBeInTheDocument();
@@ -286,27 +305,51 @@ describe("profile", () => {
       });
 
       it("locks entityID", () => {
-        renderPage({ userData });
+        renderPage({ userData: startingUserData });
         chooseTab("numbers");
         expect(screen.getByText(Config.profileDefaults.fields.entityId.default.header)).toBeInTheDocument();
         expect(screen.getByText("some-id")).toBeInTheDocument();
         expect(screen.queryByLabelText("Entity id")).not.toBeInTheDocument();
       });
 
-      it("locks legalStructure", () => {
-        renderPage({ userData });
+      it("locks legalStructure for STARTING business Persona", async () => {
+        renderPage({ userData: startingUserData });
+        expect(screen.getByTestId("info")).toBeInTheDocument();
         expect(
           screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header)
         ).toBeInTheDocument();
         expect(screen.getByText(LookupLegalStructureById(legalStructure).name)).toBeInTheDocument();
-        expect(screen.queryByLabelText("Legal structure")).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.profileDefaults.lockedFieldTooltipText)).not.toBeInTheDocument();
+
+        expect(screen.queryByText("business-structure-task-link")).not.toBeInTheDocument();
+
+        fireEvent.mouseOver(screen.getByTestId("legalStructureId-locked-tooltip"));
+        await screen.findByText(Config.profileDefaults.lockedFieldTooltipText);
+      });
+
+      it("locks legalStructure for FOREIGN business Persona", async () => {
+        renderPage({ userData: foreignNexusUserData });
+        expect(screen.getByTestId("info")).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header)
+        ).toBeInTheDocument();
+        expect(screen.getByText(LookupLegalStructureById(legalStructure).name)).toBeInTheDocument();
+        expect(screen.queryByText(Config.profileDefaults.lockedFieldTooltipText)).not.toBeInTheDocument();
+
+        expect(screen.queryByText("business-structure-task-link")).not.toBeInTheDocument();
+
+        fireEvent.mouseOver(screen.getByTestId("legalStructureId-locked-tooltip"));
+        await screen.findByText(Config.profileDefaults.lockedFieldTooltipText);
       });
     });
 
     describe("formation date", () => {
       it("does not display when empty", () => {
         const initialUserData = generateUserData({
-          profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "" }),
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            dateOfFormation: "",
+          }),
         });
         const newark = generateMunicipality({ displayName: "Newark" });
         renderPage({ userData: initialUserData, municipalities: [newark] });
@@ -399,29 +442,6 @@ describe("profile", () => {
       });
     });
 
-    it("returns user to Business Formation after save using query string", async () => {
-      useMockRouter({ query: { path: "businessFormation" } });
-      useMockRoadmapTask({ id: formationTaskId, urlSlug: "some-formation-url" });
-
-      renderPage({ userData });
-      fillText("Industry", "All Other Businesses");
-      clickSave();
-      await waitFor(() => {
-        return expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/some-formation-url");
-      });
-    });
-
-    it("returns user to Business Formation on back using query string", async () => {
-      useMockRouter({ query: { path: "businessFormation" } });
-      useMockRoadmapTask({ id: formationTaskId, urlSlug: "some-formation-url" });
-
-      renderPage({ userData });
-      clickBack();
-      await waitFor(() => {
-        return expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/some-formation-url");
-      });
-    });
-
     it("prevents user from going back to dashboard if there are unsaved changes", () => {
       renderPage({ userData });
       const inputFieldName = getBusinessProfileInputFieldName(userData);
@@ -448,7 +468,6 @@ describe("profile", () => {
           ...emptyData.profileData,
           taxId: "",
           businessPersona: "STARTING",
-          legalStructureId: randomLegalStructure().id,
         },
       };
       const inputFieldName = getBusinessProfileInputFieldName(initialUserData);
@@ -457,7 +476,6 @@ describe("profile", () => {
       fillText(inputFieldName, "Cool Computers");
       selectByText("Location", newark.displayName);
       selectByValue("Industry", "e-commerce");
-      selectByValue("Business structure", "c-corporation");
       chooseRadio("home-based-business-radio-true");
 
       chooseTab("numbers");
@@ -482,14 +500,12 @@ describe("profile", () => {
           industryId: "e-commerce",
           sectorId: "retail-trade-and-ecommerce",
           homeBasedBusiness: true,
-          legalStructureId: "c-corporation",
           municipality: newark,
           taxId: "023456790123",
           employerId: "023456780",
           notes: "whats appppppp",
         },
         taskProgress: {
-          [businessStructureTaskId]: "COMPLETED",
           [einTaskId]: "COMPLETED",
           [naicsCodeTaskId]: "NOT_STARTED",
         },
@@ -502,7 +518,9 @@ describe("profile", () => {
       mockApi.postGetAnnualFilings.mockImplementation((userData: UserData) => {
         return Promise.resolve({ ...userData, taxFilingData: { ...taxData, filings: [] } });
       });
-      const initialUserData = generateUserData({ taxFilingData: taxData });
+      const initialUserData = generateUserData({
+        taxFilingData: taxData,
+      });
       renderPage({ userData: initialUserData });
       clickSave();
 
@@ -519,7 +537,10 @@ describe("profile", () => {
     it("sets registerForEin task to complete if employerId exists", async () => {
       renderPage({
         userData: generateUserData({
-          profileData: generateProfileData({ businessPersona: "STARTING", employerId: undefined }),
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            employerId: undefined,
+          }),
         }),
       });
       chooseTab("numbers");
@@ -664,7 +685,13 @@ describe("profile", () => {
     });
 
     it("prevents user from saving if they partially entered Employer Id", async () => {
-      renderPage({});
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          legalStructureId: "general-partnership",
+          businessPersona: "STARTING",
+        }),
+      });
+      renderPage({ userData });
       chooseTab("numbers");
       fillText("Employer id", "123490");
       fireEvent.blur(screen.queryByLabelText("Employer id") as HTMLElement);
@@ -873,8 +900,8 @@ describe("profile", () => {
         profileData: generateProfileData({
           businessPersona: "STARTING",
           businessName: "Applebees",
+          legalStructureId: randomPublicFilingLegalStructure(),
           industryId: "cosmetology",
-          legalStructureId: "c-corporation",
           entityId: "1234567890",
           employerId: "123456789",
           taxId: "123456790",
@@ -889,9 +916,6 @@ describe("profile", () => {
       expect(getBusinessNameValue()).toEqual("Applebees");
 
       expect(getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);
-
-      expect(getLegalStructureValue()).toEqual("c-corporation");
-
       expect(getMunicipalityValue()).toEqual("Newark");
       chooseTab("numbers");
       expect(getEmployerIdValue()).toEqual("12-3456789");
@@ -989,6 +1013,7 @@ describe("profile", () => {
               operatingPhase: phase,
               businessPersona: "STARTING",
               industryId: "generic",
+              legalStructureId: "limited-liability-partnership",
               sectorId: undefined,
             }),
           }),
@@ -1037,6 +1062,7 @@ describe("profile", () => {
             industryId: "generic",
             sectorId: undefined,
             operatingPhase: "UP_AND_RUNNING",
+            legalStructureId: "limited-liability-company",
             ...emptyIndustrySpecificData,
           }),
           onboardingFormProgress: "COMPLETED",
@@ -1780,7 +1806,7 @@ describe("profile", () => {
                 dateOfFormation: getCurrentDateFormatted(defaultDateFormat),
               },
               formationDataOverrides: {
-                getFilingResponse: generateGetFilingResponse({ success: true }),
+                completedFilingPayment: true,
               },
             }),
           });
@@ -1963,7 +1989,10 @@ describe("profile", () => {
 
   it("resets naicsCode task and data when the industry is changed and page is saved", async () => {
     const userData = generateUserData({
-      profileData: generateProfileData({ industryId: "cosmetology", businessPersona: "STARTING" }),
+      profileData: generateProfileData({
+        industryId: "cosmetology",
+        businessPersona: "STARTING",
+      }),
       taskProgress: {
         [naicsCodeTaskId]: "COMPLETED",
       },
@@ -1980,7 +2009,10 @@ describe("profile", () => {
 
   it("resets all task checkbox data data when the industry is changed and page is saved", async () => {
     const userData = generateUserData({
-      profileData: generateProfileData({ industryId: "cosmetology", businessPersona: "STARTING" }),
+      profileData: generateProfileData({
+        industryId: "cosmetology",
+        businessPersona: "STARTING",
+      }),
       taskProgress: {
         [naicsCodeTaskId]: "COMPLETED",
       },
@@ -2039,29 +2071,6 @@ describe("profile", () => {
         });
       }
     );
-  });
-
-  describe("Information Section", () => {
-    describe("legal structure", () => {
-      it("displays legal structure name after formationData is successful", () => {
-        const legalStructure = "limited-liability-company";
-
-        renderPage({
-          userData: generateUserData({
-            formationData: generateFormationData({
-              getFilingResponse: generateGetFilingResponse({ success: true }),
-            }),
-            profileData: generateProfileData({
-              businessPersona: "FOREIGN",
-              foreignBusinessType: "NEXUS",
-              legalStructureId: legalStructure,
-            }),
-          }),
-        });
-        expect(screen.getByText(LookupLegalStructureById(legalStructure).name)).toBeInTheDocument();
-        expect(screen.queryByText(LookupLegalStructureById(legalStructure).id)).not.toBeInTheDocument();
-      });
-    });
   });
 
   describe("Numbers Section", () => {
@@ -2563,10 +2572,6 @@ describe("profile", () => {
 
   const getMunicipalityValue = (): string => {
     return (screen.queryByTestId("municipality") as HTMLInputElement)?.value;
-  };
-
-  const getLegalStructureValue = (): string => {
-    return (screen.queryByTestId("legal-structure") as HTMLInputElement)?.value;
   };
 
   const getExistingEmployeesValue = (): string => {

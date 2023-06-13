@@ -1,7 +1,8 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
+import { completeBusinessStructureTask } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
+import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
-import { completeNewBusinessOnboarding, updateNewBusinessProfilePage } from "../support/helpers";
 
 describe("check license status [feature] [all] [group1]", () => {
   beforeEach(() => {
@@ -10,15 +11,14 @@ describe("check license status [feature] [all] [group1]", () => {
 
   it("searches and checks license status", () => {
     const industry = LookupIndustryById("home-contractor");
-    const legalStructureId = "limited-liability-company";
+    const legalStructureId = "general-partnership";
+    const businessName = "Aculyst";
 
-    completeNewBusinessOnboarding({
-      industry,
-      legalStructureId,
-    });
+    completeNewBusinessOnboarding({ industry });
+
+    completeBusinessStructureTask({ legalStructureId });
 
     // dashboard business name
-    updateNewBusinessProfilePage({ businessName: "Aculyst", legalStructureId });
     onDashboardPage.getEditProfileLink().should("exist");
 
     // application tab
@@ -26,7 +26,9 @@ describe("check license status [feature] [all] [group1]", () => {
     cy.get('button[data-testid="cta-secondary"]').click();
     cy.intercept(`${Cypress.env("API_BASE_URL")}/api/users/*`).as("userAPI");
     // check status tab, error messages
-    cy.get('input[data-testid="business-name"]').should("have.value", "Aculyst");
+    cy.get('input[data-testid="business-name"]').type(businessName);
+    cy.get('input[data-testid="business-name"]').should("have.value", businessName);
+
     cy.get('input[data-testid="zipcode"]').type("12345");
     cy.get('button[data-testid="check-status-submit"]').click();
 
