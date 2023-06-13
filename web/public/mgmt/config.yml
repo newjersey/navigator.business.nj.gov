@@ -2484,6 +2484,12 @@ collections:
               - { label: Funding Snackbar Body, name: fundingSnackbarBody, widget: text }
               - { label: Hidden Tasks Snackbar Heading, name: hiddenTasksSnackbarHeading, widget: string }
               - { label: Hidden Tasks Snackbar Body, name: hiddenTasksSnackbarBody, widget: text }
+              - {
+                  label: Tax Registration Snackbar Heading,
+                  name: taxRegistrationSnackbarHeading,
+                  widget: string,
+                }
+              - { label: Tax Registration Snackbar Body, name: taxRegistrationSnackbarBody, widget: text }
       - label: "Dashboard Calendar"
         name: "dashboard-config-calendar"
         file: "content/src/fieldConfig/dashboard-calendar.json"
