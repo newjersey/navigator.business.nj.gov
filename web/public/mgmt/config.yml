@@ -2273,8 +2273,8 @@ collections:
               - { label: Save Button, name: saveButton, widget: string }
               - { label: SuccessMessage, name: successMessage, widget: string }
 
-  - name: "taxes-filings-label"
-    label: "🟪 TAXES & FILINGS"
+  - name: "calendar-label"
+    label: "🟪 CALENDAR"
     folder: "content/src"
     fields:
       - { name: "" }
@@ -2332,10 +2332,10 @@ collections:
               - { label: Failed Alert Text, name: failedErrorMessageHeader, widget: text }
               - { label: Unknown Failure Alert Text, name: failedUnknownMarkdown, widget: markdown }
 
-  - name: "licenses"
-    label: "Licenses - All"
+  - name: "license-calendar-events"
+    label: "License Expiration / Renewal Events"
     folder: "content/src/licenses"
-    summary: "{{title}}"
+    summary: "{{urlSlug}}"
     identifier_field: "{{urlSlug}}"
     slug: "{{urlSlug}}"
     delete: true

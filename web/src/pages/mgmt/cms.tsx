@@ -76,7 +76,7 @@ const CMS = dynamic(
       registerPreview(CMS, "certification-checklist", CertificationsPreview);
       registerPreview(CMS, "contextual-information", ContextInfoPreview);
       registerPreview(CMS, "filings", FilingsPreview);
-      registerPreview(CMS, "licenses", LicensesPreview);
+      registerPreview(CMS, "license-calendar-events", LicensesPreview);
 
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);
 
