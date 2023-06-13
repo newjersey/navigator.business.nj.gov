@@ -1,5 +1,4 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
-import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
 import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { ConfigType } from "@/contexts/configContext";
@@ -74,9 +73,7 @@ export const ProfileNaicsCode = (): ReactElement => {
         </>
       )}
       {!state.profileData.naicsCode && (
-        <div data-testid="not-entered">
-          <Content>{contentFromConfig.notEnteredText}</Content>
-        </div>
+        <div className={"text-italic"}>{contentFromConfig.notEnteredText}</div>
       )}
     </>
   );

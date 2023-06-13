@@ -80,6 +80,21 @@ describe("updateOperatingPhase", () => {
       });
       expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("FORMED_AND_REGISTERED");
     });
+
+    it("updates status to FORMED_AND_REGISTERED when business structure and tax tasks are completed for TradeName", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          operatingPhase: "NEEDS_BUSINESS_STRUCTURE",
+          legalStructureId: "general-partnership",
+        }),
+        taskProgress: {
+          [taxTaskId]: "COMPLETED",
+          [businessStructureTaskId]: "COMPLETED",
+        },
+      });
+      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("FORMED_AND_REGISTERED");
+    });
   });
 
   describe("NEEDS_TO_FORM", () => {
@@ -118,7 +133,7 @@ describe("updateOperatingPhase", () => {
           operatingPhase: "NEEDS_TO_FORM",
           legalStructureId: "general-partnership",
         }),
-        taskProgress: { [formationTaskId]: "IN_PROGRESS", [businessStructureTaskId]: "COMPLETED" },
+        taskProgress: { [taxTaskId]: "IN_PROGRESS", [businessStructureTaskId]: "COMPLETED" },
       });
       expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
     });

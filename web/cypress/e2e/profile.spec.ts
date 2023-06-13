@@ -1,28 +1,31 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import { arrayOfSectors, Industry, randomInt } from "@businessnjgovnavigator/shared/";
 import {
-  checkExistingBusinessProfilePage,
-  checkNewBusinessProfilePage,
   completeExistingBusinessOnboarding,
   completeForeignBusinessOnboarding,
   completeNewBusinessOnboarding,
-  homeBasedIndustries,
-  liquorLicenseIndustries,
-  randomElementFromArray,
-  randomHomeBasedIndustry,
-  randomNonHomeBasedIndustry,
+} from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
+import {
+  checkExistingBusinessProfilePage,
+  checkNewBusinessProfilePage,
   updateExistingBusinessProfilePage,
   updateForeignBusinessProfilePage,
   updateNewBusinessProfilePage,
-} from "../support/helpers";
+} from "@businessnjgovnavigator/cypress/support/helpers/helpers-profile";
+import {
+  homeBasedIndustries,
+  liquorLicenseIndustries,
+  randomHomeBasedIndustry,
+  randomNonHomeBasedIndustry,
+} from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
+import { arrayOfSectors, Industry, randomElementFromArray, randomInt } from "@businessnjgovnavigator/shared/";
 
 describe("Profile [feature] [all] [group1]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
   });
 
-  describe.only("navigates to profile page and updates all fields", () => {
+  describe("navigates to profile page and updates all fields", () => {
     it("onboards random industry where homebase doesn't apply, then changes to industry where it applies and updates all fields in profile", () => {
       const industry = randomNonHomeBasedIndustry();
       const homeBasedQuestion = industry.industryOnboardingQuestions.canBeHomeBased

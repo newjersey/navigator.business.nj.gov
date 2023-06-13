@@ -256,7 +256,6 @@ describe("profile", () => {
       userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          legalStructureId: randomLegalStructure().id,
         }),
       });
     });
@@ -268,9 +267,7 @@ describe("profile", () => {
       });
       const startingUserData = generateUserData({
         formationData: generateFormationData({
-          getFilingResponse: generateGetFilingResponse({
-            success: true,
-          }),
+          completedFilingPayment: true,
         }),
         profileData: generateProfileData({
           dateOfFormation: "2020-01-02",
@@ -284,9 +281,7 @@ describe("profile", () => {
 
       const foreignNexusUserData = generateUserData({
         formationData: generateFormationData({
-          getFilingResponse: generateGetFilingResponse({
-            success: true,
-          }),
+          completedFilingPayment: true,
         }),
         profileData: generateProfileData({
           dateOfFormation: "2020-01-02",
@@ -328,7 +323,7 @@ describe("profile", () => {
 
         expect(screen.queryByText("business-structure-task-link")).not.toBeInTheDocument();
 
-        fireEvent.mouseOver(screen.getByTestId("business-structure-tooltip"));
+        fireEvent.mouseOver(screen.getByTestId("legalStructureId-locked-tooltip"));
         await screen.findByText(Config.profileDefaults.lockedFieldTooltipText);
       });
 
@@ -343,7 +338,7 @@ describe("profile", () => {
 
         expect(screen.queryByText("business-structure-task-link")).not.toBeInTheDocument();
 
-        fireEvent.mouseOver(screen.getByTestId("business-structure-tooltip"));
+        fireEvent.mouseOver(screen.getByTestId("legalStructureId-locked-tooltip"));
         await screen.findByText(Config.profileDefaults.lockedFieldTooltipText);
       });
     });
@@ -354,7 +349,6 @@ describe("profile", () => {
           profileData: generateProfileData({
             businessPersona: "STARTING",
             dateOfFormation: "",
-            legalStructureId: randomLegalStructure().id,
           }),
         });
         const newark = generateMunicipality({ displayName: "Newark" });
@@ -378,7 +372,6 @@ describe("profile", () => {
             profileData: generateProfileData({
               businessPersona: "STARTING",
               dateOfFormation: "2017-10-01",
-              legalStructureId: randomLegalStructure().id,
             }),
           });
           const newark = generateMunicipality({ displayName: "Newark" });
@@ -393,7 +386,6 @@ describe("profile", () => {
             profileData: generateProfileData({
               businessPersona: "STARTING",
               dateOfFormation: "2017-10-01",
-              legalStructureId: randomLegalStructure().id,
             }),
           });
           const newark = generateMunicipality({ displayName: "Newark" });
@@ -415,7 +407,6 @@ describe("profile", () => {
             profileData: generateProfileData({
               businessPersona: "STARTING",
               dateOfFormation: "2017-10-01",
-              legalStructureId: randomLegalStructure().id,
             }),
           });
           const newark = generateMunicipality({ displayName: "Newark" });
@@ -477,7 +468,6 @@ describe("profile", () => {
           ...emptyData.profileData,
           taxId: "",
           businessPersona: "STARTING",
-          legalStructureId: randomLegalStructure().id,
         },
       };
       const inputFieldName = getBusinessProfileInputFieldName(initialUserData);
@@ -530,7 +520,6 @@ describe("profile", () => {
       });
       const initialUserData = generateUserData({
         taxFilingData: taxData,
-        profileData: generateProfileData({ legalStructureId: randomLegalStructure().id }),
       });
       renderPage({ userData: initialUserData });
       clickSave();
@@ -551,7 +540,6 @@ describe("profile", () => {
           profileData: generateProfileData({
             businessPersona: "STARTING",
             employerId: undefined,
-            legalStructureId: randomLegalStructure().id,
           }),
         }),
       });
@@ -734,7 +722,6 @@ describe("profile", () => {
         const userData = generateUserData({
           profileData: generateProfileData({
             taxId: "123456789",
-            legalStructureId: randomLegalStructure().id,
           }),
         });
 
@@ -811,7 +798,6 @@ describe("profile", () => {
         const userData = generateUserData({
           profileData: generateProfileData({
             taxId: "123456789123",
-            legalStructureId: randomLegalStructure().id,
           }),
         });
 
@@ -862,7 +848,6 @@ describe("profile", () => {
         const userData = generateUserData({
           profileData: generateProfileData({
             taxId: "",
-            legalStructureId: randomLegalStructure().id,
           }),
         });
 
@@ -915,6 +900,7 @@ describe("profile", () => {
         profileData: generateProfileData({
           businessPersona: "STARTING",
           businessName: "Applebees",
+          legalStructureId: randomPublicFilingLegalStructure(),
           industryId: "cosmetology",
           entityId: "1234567890",
           employerId: "123456789",
@@ -1820,7 +1806,7 @@ describe("profile", () => {
                 dateOfFormation: getCurrentDateFormatted(defaultDateFormat),
               },
               formationDataOverrides: {
-                getFilingResponse: generateGetFilingResponse({ success: true }),
+                completedFilingPayment: true,
               },
             }),
           });
@@ -1949,7 +1935,6 @@ describe("profile", () => {
     const initialUserData = generateUserData({
       profileData: generateProfileData({
         municipality: undefined,
-        legalStructureId: randomLegalStructure().id,
       }),
     });
 
@@ -1971,7 +1956,6 @@ describe("profile", () => {
     const initialUserData = generateUserData({
       profileData: generateProfileData({
         municipality: generateMunicipality({ displayName: "Jersey City" }),
-        legalStructureId: randomLegalStructure().id,
       }),
     });
 
@@ -2008,7 +1992,6 @@ describe("profile", () => {
       profileData: generateProfileData({
         industryId: "cosmetology",
         businessPersona: "STARTING",
-        legalStructureId: randomLegalStructure().id,
       }),
       taskProgress: {
         [naicsCodeTaskId]: "COMPLETED",
@@ -2029,7 +2012,6 @@ describe("profile", () => {
       profileData: generateProfileData({
         industryId: "cosmetology",
         businessPersona: "STARTING",
-        legalStructureId: randomLegalStructure().id,
       }),
       taskProgress: {
         [naicsCodeTaskId]: "COMPLETED",
@@ -2102,7 +2084,6 @@ describe("profile", () => {
                 encryptedTaxId: "some-encrypted-value",
                 businessPersona,
                 foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["NONE"] : undefined,
-                legalStructureId: randomLegalStructure().id,
               }),
               taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" }),
             });
@@ -2330,7 +2311,6 @@ describe("profile", () => {
         profileData: generateProfileData({
           operatingPhase: "UP_AND_RUNNING_OWNING",
           dateOfFormation: undefined,
-          legalStructureId: randomLegalStructure().id,
         }),
       });
       renderPage({ userData });

@@ -4,15 +4,19 @@
 import {
   clickDeferredSaveButton,
   completeBusinessStructureTask,
+  randomPublicFilingLegalStructure,
+} from "@businessnjgovnavigator/cypress/support/helpers/helpers";
+import {
   completeExistingBusinessOnboarding,
   completeForeignBusinessOnboarding,
   completeForeignNexusBusinessOnboarding,
   completeNewBusinessOnboarding,
+} from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
+import { updateNewBusinessProfilePage } from "@businessnjgovnavigator/cypress/support/helpers/helpers-profile";
+import {
   randomHomeBasedIndustry,
   randomNonHomeBasedIndustry,
-  randomPublicFilingLegalStructure,
-  updateNewBusinessProfilePage,
-} from "../support/helpers";
+} from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
 import { onDashboardPage } from "../support/page_objects/dashboardPage";
 import { onProfilePage } from "../support/page_objects/profilePage";
 

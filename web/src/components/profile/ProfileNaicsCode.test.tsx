@@ -71,7 +71,7 @@ describe("<ProfileNaicsCode />", () => {
 
   it("displays Not Entered text when user has no NAICS code", () => {
     renderComponent({ profileData: generateProfileData({ naicsCode: "" }) });
-    expect(screen.getByTestId("not-entered")).toBeInTheDocument();
+    expect(screen.getByText(configForField.notEnteredText)).toBeInTheDocument();
   });
 
   it("displays Add text when naics code field is empty", () => {

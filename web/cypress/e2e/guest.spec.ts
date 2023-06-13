@@ -1,13 +1,13 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 /* eslint-disable testing-library/await-async-utils */
 
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
-import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import {
   clickDeferredSaveButton,
   completeBusinessStructureTask,
-  completeNewBusinessOnboarding,
-} from "../support/helpers";
+} from "@businessnjgovnavigator/cypress/support/helpers/helpers";
+import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
+import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 
 describe("Guest Dashboard [feature] [all] [group2]", () => {
   const industry = LookupIndustryById("home-contractor");

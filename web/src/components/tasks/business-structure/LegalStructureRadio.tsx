@@ -8,7 +8,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { Task } from "@/lib/types/types";
 import {
   LegalStructure,
   LegalStructures,
@@ -19,7 +18,7 @@ import { orderBy } from "lodash";
 import React, { ReactElement, useContext } from "react";
 
 interface Props {
-  taskId: Task["id"];
+  taskId: string;
 }
 
 export const LegalStructureRadio = (props: Props): ReactElement => {
@@ -75,7 +74,6 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
     );
   };
 
-  console.log("state.profileData.legalStructureId", state.profileData.legalStructureId);
   return (
     <>
       {isFormFieldInValid && (

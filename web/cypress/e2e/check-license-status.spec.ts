@@ -1,7 +1,8 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
+import { completeBusinessStructureTask } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
+import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
-import { completeBusinessStructureTask, completeNewBusinessOnboarding } from "../support/helpers";
 
 describe("check license status [feature] [all] [group1]", () => {
   beforeEach(() => {
@@ -13,9 +14,7 @@ describe("check license status [feature] [all] [group1]", () => {
     const legalStructureId = "general-partnership";
     const businessName = "Aculyst";
 
-    completeNewBusinessOnboarding({
-      industry,
-    });
+    completeNewBusinessOnboarding({ industry });
 
     completeBusinessStructureTask({ legalStructureId });
 

@@ -276,6 +276,19 @@ describe("onboarding - starting a business", () => {
     });
   });
 
+  it("removes required fields error when user goes back", async () => {
+    const { page } = renderPage({});
+    page.chooseRadio("business-persona-foreign");
+    await page.visitStep(2);
+    act(() => {
+      return page.clickNext();
+    });
+    expect(screen.getByTestId("step-2")).toBeInTheDocument();
+    expect(screen.getByTestId("banner-alert-REQUIRED_FOREIGN_BUSINESS_TYPE")).toBeInTheDocument();
+    page.clickBack();
+    expect(screen.queryByTestId("banner-alert-REQUIRED_FOREIGN_BUSINESS_TYPE")).not.toBeInTheDocument();
+  });
+
   describe("validates self-reg step", () => {
     runSelfRegPageTests({ businessPersona: "STARTING", selfRegPage: "3" });
   });

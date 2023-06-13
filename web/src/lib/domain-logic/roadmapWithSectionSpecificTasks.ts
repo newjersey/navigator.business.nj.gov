@@ -2,7 +2,12 @@ import { Roadmap } from "@/lib/types/types";
 import { SectionType } from "@businessnjgovnavigator/shared/userData";
 import { cloneDeep } from "lodash";
 
-export const roadmapWithSectionSpecificTasks = (roadmap: Roadmap, section: SectionType): Roadmap => {
+export const roadmapWithSectionSpecificTasks = (
+  roadmap: Roadmap | undefined,
+  section: SectionType
+): Roadmap | undefined => {
+  if (!roadmap) return undefined;
+
   const result: Roadmap = { steps: [], tasks: [] };
   const stepNumber = [];
 

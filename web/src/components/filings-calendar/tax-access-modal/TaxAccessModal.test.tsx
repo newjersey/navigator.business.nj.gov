@@ -7,12 +7,8 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { generateProfileData, generateUserData } from "@businessnjgovnavigator/shared/";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
-import {
-  generateProfileData,
-  generateUserData,
-  randomLegalStructure,
-} from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
@@ -40,7 +36,6 @@ describe("<TaxAccessModal />", () => {
         generateUserData({
           profileData: generateProfileData({
             businessPersona: persona as BusinessPersona,
-            legalStructureId: randomLegalStructure().id,
           }),
         })
       );
@@ -123,7 +118,6 @@ describe("<TaxAccessModal />", () => {
         generateUserData({
           profileData: generateProfileData({
             businessPersona: "OWNING",
-            legalStructureId: randomLegalStructure().id,
           }),
         })
       );
@@ -138,7 +132,6 @@ describe("<TaxAccessModal />", () => {
         generateUserData({
           profileData: generateProfileData({
             businessPersona: "OWNING",
-            legalStructureId: randomLegalStructure().id,
           }),
         })
       );
