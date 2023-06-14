@@ -11,7 +11,7 @@ const TaskPreview = (props: PreviewProps): ReactElement => {
 
   return (
     <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-      <TaskElement task={task} />
+      <TaskElement task={task} overrides={{ skipDeferredLocationPrompt: true }} />
     </div>
   );
 };
