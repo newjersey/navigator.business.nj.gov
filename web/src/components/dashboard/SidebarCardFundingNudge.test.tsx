@@ -14,7 +14,7 @@ import {
   generateBusiness,
   generatePreferences,
   generateProfileData,
-  generateUserData, generateUserDataForBusiness,
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen } from "@testing-library/react";

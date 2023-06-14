@@ -5,6 +5,7 @@ import { Router } from "express";
 import { saveFileFromUrl } from "../domain/s3Writer";
 import { FormationClient, UserDataClient } from "../domain/types";
 import { getSignedInUser, getSignedInUserId } from "./userRouter";
+import {getCurrentBusiness} from "@businessnjgovnavigator/shared";
 
 export const formationRouterFactory = (
   formationClient: FormationClient,
@@ -39,19 +40,20 @@ export const formationRouterFactory = (
     const signedInUser = getSignedInUser(req);
     const signedInUserId = getSignedInUserId(req);
     const userData = await userDataClient.get(signedInUserId);
+    const business = getCurrentBusiness(userData)
 
-    if (!userData.formationData.formationResponse?.formationId) {
+    if (!business.formationData.formationResponse?.formationId) {
       res.status(400).send("No formation ID");
       return;
     }
 
     formationClient
-      .getCompletedFiling(userData.formationData.formationResponse.formationId)
+      .getCompletedFiling(business.formationData.formationResponse.formationId)
       .then(async (getFilingResponse: GetFilingResponse) => {
-        const taskProgress = userData.taskProgress;
-        let entityId = userData.profileData.entityId;
-        let dateOfFormation = userData.profileData.dateOfFormation;
-        let businessName = userData.profileData.businessName;
+        const taskProgress = business.taskProgress;
+        let entityId = business.profileData.entityId;
+        let dateOfFormation = business.profileData.dateOfFormation;
+        let businessName = business.profileData.businessName;
         let documents: ProfileDocuments = {
           certifiedDoc: "",
           formationDoc: "",
@@ -61,8 +63,8 @@ export const formationRouterFactory = (
         if (getFilingResponse.success && config.shouldSaveDocuments) {
           taskProgress[formationTaskId] = "COMPLETED";
           entityId = getFilingResponse.entityId;
-          dateOfFormation = userData.formationData.formationFormData.businessStartDate;
-          businessName = userData.formationData.formationFormData.businessName;
+          dateOfFormation = business.formationData.formationFormData.businessStartDate;
+          businessName = business.formationData.formationFormData.businessName;
 
           const formationDoc = await saveFileFromUrl(
             getFilingResponse.formationDoc,

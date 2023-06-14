@@ -6,7 +6,7 @@ import {
   generateFormationSubmitResponse,
   generateGetFilingResponse,
   generateProfileData,
-  generateUserData,
+  generateUserData, modifyCurrentBusiness,
 } from "@shared/test";
 import { Express } from "express";
 import request from "supertest";
@@ -87,13 +87,14 @@ describe("formationRouter", () => {
       expect(stubFormationClient.form).toHaveBeenCalledWith(userData, "some-url", foreignGoodStandingFile);
 
       expect(response.status).toEqual(200);
-      expect(response.body).toEqual({
-        ...userData,
-        formationData: {
-          ...userData.formationData,
-          formationResponse: formationResponse,
+      const expectedBody = modifyCurrentBusiness(userData, (business) => ({
+        ...business,
+          formationData: {
+        ...business.formationData,
+            formationResponse: formationResponse,
         },
-      });
+      }))
+      expect(response.body).toEqual(expectedBody)
     });
 
     it("updates user data with response from formation", async () => {

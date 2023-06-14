@@ -7,7 +7,6 @@ import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {useMockBusiness, useMockProfileData, useMockUserData} from "@/test/mock/mockUseUserData";
 import {
-  generateProfileData,
   generateUser,
   getCurrentDateInNewJersey,
   randomInt,
