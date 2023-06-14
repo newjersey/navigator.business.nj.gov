@@ -1,3 +1,38 @@
+# [5.21.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.20.3...v5.21.0) (2023-06-14)
+
+
+### Bug Fixes
+
+* [[#184726710](https://github.com/newjersey/navigator.business.nj.gov/issues/184726710)] add defaults for first half of licenses ([b485a65](https://github.com/newjersey/navigator.business.nj.gov/commit/b485a65d40ad2a50d510511aab766c28848063ca))
+* [[#184726710](https://github.com/newjersey/navigator.business.nj.gov/issues/184726710)] add preselected industry for cannabis license ([7c68b3d](https://github.com/newjersey/navigator.business.nj.gov/commit/7c68b3dfd06412aea91c8ede3b08be27789e45c0))
+* [[#184726710](https://github.com/newjersey/navigator.business.nj.gov/issues/184726710)] add preselected to multiselect for second half of licenses ([9b2ab0a](https://github.com/newjersey/navigator.business.nj.gov/commit/9b2ab0aea4f7e6ea0906645777137b23645f4649))
+* [[#184726710](https://github.com/newjersey/navigator.business.nj.gov/issues/184726710)] merge inconsistencies in industyID ([a3b10f5](https://github.com/newjersey/navigator.business.nj.gov/commit/a3b10f59a9bf735b707fb17932b0cf346091e73f))
+* [[#184726710](https://github.com/newjersey/navigator.business.nj.gov/issues/184726710)] restore home-health-aide-license industry type ([bc2712f](https://github.com/newjersey/navigator.business.nj.gov/commit/bc2712f84ee640793fdf6e41b2b26670f87a1e1d))
+* [[#184726710](https://github.com/newjersey/navigator.business.nj.gov/issues/184726710)] update license type to correct name for home health aide ([00638ec](https://github.com/newjersey/navigator.business.nj.gov/commit/00638ec0ad37a8573a7c05ddbd0a6b44f431f48c))
+* [[#185214380](https://github.com/newjersey/navigator.business.nj.gov/issues/185214380)] sector modal was not updating profile data ([c33d23c](https://github.com/newjersey/navigator.business.nj.gov/commit/c33d23c8954c1161c15af5c3679b66c541e26dd4))
+* [[#185214511](https://github.com/newjersey/navigator.business.nj.gov/issues/185214511)] do not require sector in profile until up-and-running ([03b6508](https://github.com/newjersey/navigator.business.nj.gov/commit/03b65087db21919d3e86bde1c2d6ff641f1e8451))
+* [[#185266819](https://github.com/newjersey/navigator.business.nj.gov/issues/185266819)] fix  bug in Dakota onboarding flow ([e050349](https://github.com/newjersey/navigator.business.nj.gov/commit/e0503494c449e3e6e5e07472d4cfca852865dd17))
+* [[#185266819](https://github.com/newjersey/navigator.business.nj.gov/issues/185266819)] handle state to update businessPersona for oos ([f818657](https://github.com/newjersey/navigator.business.nj.gov/commit/f81865783e8263ef727fef3e99b8bcadb710242e))
+* check for business or trade name ([faa0f20](https://github.com/newjersey/navigator.business.nj.gov/commit/faa0f20d30e42136c2afe071b8a4c37ed945a6cf))
+* resolve merge conflict ([3bd41c2](https://github.com/newjersey/navigator.business.nj.gov/commit/3bd41c2295f5e0f860b0fa893f95f2a36e11e6e7))
+* submit legal structure for saving business name ([29feb51](https://github.com/newjersey/navigator.business.nj.gov/commit/29feb51b0d2c66613b6e41077729a184a686384b))
+* update naics code task links ([24c783c](https://github.com/newjersey/navigator.business.nj.gov/commit/24c783c4dd45e03b1765b6ad4ba208a2f24300d7))
+* updating Tasks - All daycare-site-requirements ([#5666](https://github.com/newjersey/navigator.business.nj.gov/issues/5666)) ([e3feadd](https://github.com/newjersey/navigator.business.nj.gov/commit/e3feadd04bda0632f7869c2a3fa6feb9fe1ee031))
+* updating Tasks - All detective-employees ([#5671](https://github.com/newjersey/navigator.business.nj.gov/issues/5671)) ([104c192](https://github.com/newjersey/navigator.business.nj.gov/commit/104c19288448d6963c9ee7500c5b23771325e5f9))
+
+
+### Features
+
+* [[#184258256](https://github.com/newjersey/navigator.business.nj.gov/issues/184258256)] add trade name and responsible owner name to profile ([a8352a7](https://github.com/newjersey/navigator.business.nj.gov/commit/a8352a7d8134f9ac6250a82827c90f564d1fa96f))
+* [[#184258256](https://github.com/newjersey/navigator.business.nj.gov/issues/184258256)] remove business name from trade name businesses ([03f9f93](https://github.com/newjersey/navigator.business.nj.gov/commit/03f9f9302a3a31f5f7ee41f4c5f979e5e090c75d))
+* [[#184258256](https://github.com/newjersey/navigator.business.nj.gov/issues/184258256)] update tests to depend on non trade name businesses ([9cc2dcb](https://github.com/newjersey/navigator.business.nj.gov/commit/9cc2dcba185d6af66cf364c8f98ff6e52fd13963))
+* [[#184306224](https://github.com/newjersey/navigator.business.nj.gov/issues/184306224)] check if a business name or DBA name has become unavailable ([7ec5153](https://github.com/newjersey/navigator.business.nj.gov/commit/7ec515317f7e07449fbfc85d0ec5a9edf68b5237))
+* [[#184726710](https://github.com/newjersey/navigator.business.nj.gov/issues/184726710)] change select to multiselect for license tasks and webflow licenses ([faf2e23](https://github.com/newjersey/navigator.business.nj.gov/commit/faf2e23a12c3153d18bf144a0de133c59fd1232c))
+* [[#184999509](https://github.com/newjersey/navigator.business.nj.gov/issues/184999509)] add additional tasks from all folder to license folder in netlify ([14d4645](https://github.com/newjersey/navigator.business.nj.gov/commit/14d4645a70296893daf6700f0b8a65a67e556382))
+* [[#185183515](https://github.com/newjersey/navigator.business.nj.gov/issues/185183515)] add architect, HVACR, and RE appraisal license check integration ([6baabe7](https://github.com/newjersey/navigator.business.nj.gov/commit/6baabe7a5684edc1d33d4c2173f3d75a67ceb869))
+* [[#185212073](https://github.com/newjersey/navigator.business.nj.gov/issues/185212073)] adjust tooltip mobile behavior to stay open until clicked off ([e2364d1](https://github.com/newjersey/navigator.business.nj.gov/commit/e2364d1555d3e9e9180e8c495d8d333f92382753))
+* added license events to calendar ([010c53d](https://github.com/newjersey/navigator.business.nj.gov/commit/010c53dee68a889838bdb10914d50222e4cdddc0))
+
 ## [5.20.3](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.20.2...v5.20.3) (2023-05-24)
 
 
