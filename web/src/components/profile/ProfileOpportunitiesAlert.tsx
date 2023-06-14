@@ -5,7 +5,7 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileContentField } from "@/lib/types/types";
-import { FIELDS_FOR_PROFILE, isFieldAnswered } from "@businessnjgovnavigator/shared";
+import { getFieldsForProfile, isFieldAnswered } from "@businessnjgovnavigator/shared";
 import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 
@@ -13,10 +13,11 @@ export const ProfileOpportunitiesAlert = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);
   const { Config } = useConfig();
   const router = useRouter();
-
-  const unansweredOpportunityFields = FIELDS_FOR_PROFILE.filter((field) => {
-    return !isFieldAnswered(field, state.profileData);
-  });
+  const unansweredOpportunityFields = getFieldsForProfile(state.profileData.legalStructureId).filter(
+    (field) => {
+      return !isFieldAnswered(field, state.profileData);
+    }
+  );
 
   const getLabel = (field: ProfileContentField): string => {
     const contentFromConfig = getProfileConfig({
@@ -36,7 +37,7 @@ export const ProfileOpportunitiesAlert = (): ReactElement => {
       <Content>{Config.profileDefaults.profileCompletionAlert}</Content>
       <ul>
         {unansweredOpportunityFields.map((field) => (
-          <li key={field}>
+          <li key={field} data-testid={`question-${field}-alert-text`}>
             <UnStyledButton
               style="default"
               isUnderline

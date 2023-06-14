@@ -39,6 +39,7 @@ import {
   defaultDateFormat,
   einTaskId,
   emptyIndustrySpecificData,
+  emptyProfileData,
   ForeignBusinessType,
   FormationData,
   formationTaskId,
@@ -2319,6 +2320,65 @@ describe("profile", () => {
       expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
     });
 
+    it("does display date of formation question when legal structure is undefined", () => {
+      const userData = generateUserData({
+        profileData: {
+          ...emptyProfileData,
+          operatingPhase: "UP_AND_RUNNING_OWNING",
+          businessPersona: "OWNING",
+        },
+      });
+      renderPage({ userData });
+      expect(
+        within(screen.getByTestId("opp-alert")).getByText(
+          Config.profileDefaults.fields.dateOfFormation.default.header
+        )
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("effective-date")).getByText(
+          Config.profileDefaults.fields.dateOfFormation.default.header
+        )
+      ).toBeInTheDocument();
+    });
+
+    it("does not display date of formation question when it is a Trade Name legal structure", () => {
+      const userData = generateUserData({
+        profileData: {
+          ...emptyProfileData,
+          operatingPhase: "UP_AND_RUNNING_OWNING",
+          businessPersona: "OWNING",
+          legalStructureId: randomTradeNameLegalStructure(),
+        },
+      });
+      renderPage({ userData });
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.dateOfFormation.default.header)
+      ).not.toBeInTheDocument();
+      expect(screen.queryByTestId("effective-date")).not.toBeInTheDocument();
+    });
+
+    it("does display date of formation question when it is a not a Trade Name legal structure", () => {
+      const userData = generateUserData({
+        profileData: {
+          ...emptyProfileData,
+          operatingPhase: "UP_AND_RUNNING_OWNING",
+          businessPersona: "OWNING",
+          legalStructureId: randomPublicFilingLegalStructure(),
+        },
+      });
+      renderPage({ userData });
+      expect(
+        within(screen.getByTestId("opp-alert")).getByText(
+          Config.profileDefaults.fields.dateOfFormation.default.header
+        )
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("effective-date")).getByText(
+          Config.profileDefaults.fields.dateOfFormation.default.header
+        )
+      ).toBeInTheDocument();
+    });
+
     it("lists each unanswered funding/certification question", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
@@ -2327,6 +2387,7 @@ describe("profile", () => {
           existingEmployees: undefined,
           municipality: undefined,
           homeBasedBusiness: undefined,
+          legalStructureId: randomPublicFilingLegalStructure(),
           ownershipTypeIds: [],
         }),
       });
@@ -2351,6 +2412,7 @@ describe("profile", () => {
           operatingPhase: "UP_AND_RUNNING_OWNING",
           dateOfFormation: undefined,
           existingEmployees: undefined,
+          legalStructureId: randomPublicFilingLegalStructure(),
         }),
       });
       renderPage({ userData });
