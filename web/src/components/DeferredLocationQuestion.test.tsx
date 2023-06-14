@@ -52,17 +52,22 @@ describe("<DeferredLocationQuestion />", () => {
     initialUserData,
     innerContent,
     municipalities,
+    fakeUserData,
   }: {
     initialUserData?: UserData;
     innerContent?: string;
     municipalities?: Municipality[];
+    fakeUserData?: UserData;
   }): void => {
     render(
       withRoadmap({
         component: (
           <MunicipalitiesContext.Provider value={{ municipalities: municipalities ?? [] }}>
             <WithStatefulUserData initialUserData={initialUserData ?? generateUserData({})}>
-              <DeferredLocationQuestion innerContent={innerContent ?? ""} />
+              <DeferredLocationQuestion
+                innerContent={innerContent ?? ""}
+                CMS_ONLY_fakeUserData={fakeUserData}
+              />
             </WithStatefulUserData>
           </MunicipalitiesContext.Provider>
         ),
@@ -84,6 +89,15 @@ describe("<DeferredLocationQuestion />", () => {
     const municipality = generateMunicipality({});
     const userData = generateUserData({ profileData: generateProfileData({ municipality }) });
     renderComponent({ initialUserData: userData, innerContent: "inner-content" });
+    expect(screen.queryByText(Config.deferredLocation.header)).not.toBeInTheDocument();
+    expect(screen.getByText("inner-content")).toBeInTheDocument();
+    expect(screen.queryByTestId("city-success-banner")).not.toBeInTheDocument();
+  });
+
+  it("uses fake userData if provided", () => {
+    const municipality = generateMunicipality({});
+    const userData = generateUserData({ profileData: generateProfileData({ municipality }) });
+    renderComponent({ innerContent: "inner-content", fakeUserData: userData });
     expect(screen.queryByText(Config.deferredLocation.header)).not.toBeInTheDocument();
     expect(screen.getByText("inner-content")).toBeInTheDocument();
     expect(screen.queryByTestId("city-success-banner")).not.toBeInTheDocument();
