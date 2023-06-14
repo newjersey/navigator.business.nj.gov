@@ -90,7 +90,7 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
           <ProfileMunicipality hideErrorLabel={true} />
         </DeferredOnboardingQuestion>
       ) : (
-        <div className="padding-3">
+        <div data-testid="deferred-location-content" className="padding-3">
           {showSuccessBanner && successBanner()}
           <Content>{props.innerContent}</Content>
         </div>

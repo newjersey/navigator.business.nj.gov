@@ -32,6 +32,9 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   businessStructureTaskId,
   formationTaskId,
+  generateMunicipality,
+  generateProfileData,
+  generateUserData,
   hasCompletedBusinessStructure,
   Municipality,
   UserData,
@@ -175,7 +178,15 @@ const getPostOnboardingQuestion = (task: Task): ReactElement => {
   });
 };
 
-export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNode[] }): ReactElement => {
+interface TaskElementProps {
+  task: Task;
+  children?: ReactNode | ReactNode[];
+  overrides?: {
+    skipDeferredLocationPrompt: boolean;
+  };
+}
+
+export const TaskElement = (props: TaskElementProps): ReactElement => {
   const hasPostOnboardingQuestion = !!props.task.postOnboardingQuestion;
   const shouldShowDeferredQuestion = props.task.requiresLocation;
   let hasDeferredLocationQuestion = false;
@@ -226,6 +237,14 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
     return "";
   };
 
+  const getFakeUserDataWithMunicipality = (): UserData => {
+    return generateUserData({
+      profileData: generateProfileData({
+        municipality: generateMunicipality({}),
+      }),
+    });
+  };
+
   return (
     <div id="taskElement" className="flex flex-column space-between minh-38">
       <div>
@@ -237,7 +256,17 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
           <>
             <Content>{deferredLocationQuestion.before}</Content>
             {shouldShowDeferredQuestion && (
-              <DeferredLocationQuestion innerContent={deferredLocationQuestion.innerContent} />
+              <>
+                {props.overrides?.skipDeferredLocationPrompt && (
+                  <DeferredLocationQuestion
+                    innerContent={deferredLocationQuestion.innerContent}
+                    CMS_ONLY_fakeUserData={getFakeUserDataWithMunicipality()}
+                  />
+                )}
+                {!props.overrides?.skipDeferredLocationPrompt && (
+                  <DeferredLocationQuestion innerContent={deferredLocationQuestion.innerContent} />
+                )}
+              </>
             )}
             <Content>{deferredLocationQuestion.after}</Content>
           </>
