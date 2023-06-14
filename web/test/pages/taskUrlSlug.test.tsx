@@ -507,6 +507,7 @@ describe("task page", () => {
       });
       renderPage(task);
       expect(screen.getByTestId("deferred-location-task")).toBeInTheDocument();
+      expect(screen.queryByTestId("deferred-location-content")).not.toBeInTheDocument();
     });
 
     it("shows deferred location content if task requiresLocation=true and user has municipalities set", () => {
