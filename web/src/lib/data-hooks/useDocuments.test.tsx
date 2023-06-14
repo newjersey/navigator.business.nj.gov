@@ -1,6 +1,6 @@
 import * as sessionHelper from "@/lib/auth/sessionHelper";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
-import { generateProfileData, ProfileDocuments } from "@businessnjgovnavigator/shared/";
+import { ProfileDocuments } from "@businessnjgovnavigator/shared/";
 import { act, render, waitFor } from "@testing-library/react";
 import {useMockBusiness, useMockProfileData} from "@/test/mock/mockUseUserData";
 

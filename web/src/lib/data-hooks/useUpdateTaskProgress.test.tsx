@@ -7,17 +7,15 @@ import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   currentBusiness,
-  currentUserData,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   generateBusiness,
   generatePreferences,
-  generateUserData,
   generateUserDataForBusiness
 } from "@businessnjgovnavigator/shared/test";
-import {Business, TaskProgress, UserData} from "@businessnjgovnavigator/shared/userData";
+import {Business, TaskProgress} from "@businessnjgovnavigator/shared/userData";
 import { act, render } from "@testing-library/react";
 import { ReactNode } from "react";
 

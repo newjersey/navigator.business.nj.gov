@@ -12,14 +12,11 @@ import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
   currentBusiness,
-  currentUserData,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generateUserData, UserData } from "@businessnjgovnavigator/shared/";
+import { generateUserData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import {Business} from "@businessnjgovnavigator/shared/userData";
-import {generateUserDataForBusiness} from "@businessnjgovnavigator/shared/test";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

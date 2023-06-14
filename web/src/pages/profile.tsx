@@ -66,7 +66,6 @@ import {
   Municipality,
   naicsCodeTaskId,
   ProfileData,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import { hasCompletedFormation } from "@businessnjgovnavigator/shared/";
 import dayjs from "dayjs";

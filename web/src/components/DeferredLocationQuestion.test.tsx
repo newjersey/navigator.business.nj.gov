@@ -7,7 +7,6 @@ import { withRoadmap } from "@/test/helpers/helpers-renderers";
 import { selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
 import {
   currentBusiness,
-  currentUserData,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";

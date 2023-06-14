@@ -25,7 +25,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { FormationStepNames, StepperStep } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
-import {Business, FormationFormData, getCurrentBusiness, UserData} from "@businessnjgovnavigator/shared";
+import {Business, FormationFormData, getCurrentBusiness} from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";

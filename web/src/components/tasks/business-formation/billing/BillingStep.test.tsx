@@ -15,7 +15,6 @@ import {
   FormationLegalType, generateBusiness,
   generateFormationFormData,
   generateUser,
-  generateUserData,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";

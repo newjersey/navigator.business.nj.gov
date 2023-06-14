@@ -26,19 +26,21 @@ import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { setMockUserDataResponse, useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
+import {setMockUserDataResponse, useMockBusiness, useMockProfileData} from "@/test/mock/mockUseUserData";
 import {
+  currentBusiness,
   currentUserData,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
-  defaultDateFormat,
+  Business,
+  defaultDateFormat, generateBusiness,
   generateProfileData,
   generateTaxFilingCalendarEvent,
   generateTaxFilingData,
-  generateUserData,
+  generateUserData, generateUserDataForBusiness,
   getCurrentDate,
   OperatingPhases,
   RegistrationStatus,
@@ -82,7 +84,7 @@ const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>): Roa
 describe("dashboard page", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockUserData({ onboardingFormProgress: "COMPLETED" });
+    useMockBusiness({ onboardingFormProgress: "COMPLETED" });
     useMockRoadmap({});
     useMockRouter({});
     setDesktopScreen(true);
@@ -109,12 +111,12 @@ describe("dashboard page", () => {
     );
   };
 
-  const renderStatefulPage = (userData?: UserData): void => {
+  const renderStatefulPage = (business: Business): void => {
     setupStatefulUserDataContext();
 
     render(
       <WithStatefulUserData
-        initialUserData={userData || generateUserData({ onboardingFormProgress: "COMPLETED" })}
+        initialUserData={generateUserDataForBusiness(business)}
       >
         <ThemeProvider theme={createTheme()}>
           <DashboardPage
@@ -130,7 +132,6 @@ describe("dashboard page", () => {
   };
 
   const renderPageWithAuthAlert = ({
-    userData,
     isAuthenticated,
     sidebarDisplayContent,
     fundings,
@@ -139,7 +140,6 @@ describe("dashboard page", () => {
     registrationAlertStatus,
     setRegistrationAlertIsVisible,
   }: {
-    userData?: UserData;
     isAuthenticated?: IsAuthenticated;
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     fundings?: Funding[];
@@ -153,7 +153,7 @@ describe("dashboard page", () => {
     render(
       withAuthAlert(
         <WithStatefulUserData
-          initialUserData={userData || generateUserData({ onboardingFormProgress: "COMPLETED" })}
+          initialUserData={generateUserDataForBusiness(generateBusiness({ onboardingFormProgress: "COMPLETED" }))}
         >
           <ThemeProvider theme={createTheme()}>
             <SignUpSnackbar />
@@ -183,13 +183,13 @@ describe("dashboard page", () => {
   });
 
   it("shows loading page if user not finished onboarding", () => {
-    useMockUserData({ onboardingFormProgress: "UNSTARTED" });
+    useMockBusiness({ onboardingFormProgress: "UNSTARTED" });
     renderDashboardPage({});
     expect(screen.getByText("Loading", { exact: false })).toBeInTheDocument();
   });
 
   it("redirects to onboarding if user not finished onboarding", () => {
-    useMockUserData({ onboardingFormProgress: "UNSTARTED" });
+    useMockBusiness({ onboardingFormProgress: "UNSTARTED" });
     renderDashboardPage({});
     expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
   });
@@ -242,7 +242,7 @@ describe("dashboard page", () => {
       ],
     });
 
-    useMockUserData({
+    useMockBusiness({
       taskProgress: { task1: "IN_PROGRESS", task2: "COMPLETED" },
       onboardingFormProgress: "COMPLETED",
     });
@@ -289,7 +289,7 @@ describe("dashboard page", () => {
       ],
     });
 
-    useMockUserData({
+    useMockBusiness({
       preferences: generatePreferences({
         roadmapOpenSections: ["PLAN", "START"],
       }),
@@ -380,7 +380,7 @@ describe("dashboard page", () => {
       identifier: "annual-report",
       dueDate: dueDate.format(defaultDateFormat),
     });
-    useMockUserData({
+    useMockBusiness({
       profileData: generateProfileData({ operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES" }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
       onboardingFormProgress: "COMPLETED",
@@ -403,7 +403,7 @@ describe("dashboard page", () => {
     const currentDate = getCurrentDate();
     const dateOfFormation = currentDate.format(defaultDateFormat);
 
-    useMockUserData({
+    useMockBusiness({
       profileData: generateProfileData({ dateOfFormation: dateOfFormation }),
       taxFilingData: generateTaxFilingData({ filings: [] }),
     });
@@ -425,7 +425,7 @@ describe("dashboard page", () => {
       identifier: "annual-report",
       dueDate: dueDate.format(defaultDateFormat),
     });
-    useMockUserData({
+    useMockBusiness({
       profileData: generateProfileData({ dateOfFormation: undefined }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
     });
@@ -448,7 +448,7 @@ describe("dashboard page", () => {
       })
     );
 
-    useMockUserData({ profileData: generateProfileData({ operatingPhase: randomOperatingPhase.id }) });
+    useMockBusiness({ profileData: generateProfileData({ operatingPhase: randomOperatingPhase.id }) });
     renderDashboardPage({});
 
     expect(screen.queryByText(Config.dashboardDefaults.upAndRunningTaskHeader)).not.toBeInTheDocument();
@@ -461,7 +461,7 @@ describe("dashboard page", () => {
       })
     );
 
-    useMockUserData({
+    useMockBusiness({
       profileData: generateProfileData({ operatingPhase: randomOperatingPhase.id }),
       onboardingFormProgress: "COMPLETED",
     });
@@ -492,7 +492,7 @@ describe("dashboard page", () => {
       (operatingPhase) => {
         describe(`${operatingPhase}`, () => {
           it("shows home-based business question with default description when applicable to industry and not yet answered", () => {
-            const userData = generateUserData({
+            const business = generateBusiness({
               profileData: generateProfileData({
                 industryId: randomHomeBasedIndustry(),
                 homeBasedBusiness: undefined,
@@ -501,7 +501,7 @@ describe("dashboard page", () => {
               }),
               onboardingFormProgress: "COMPLETED",
             });
-            useMockUserData(userData);
+            useMockBusiness(business);
 
             renderDashboardPage({});
             expect(
@@ -513,14 +513,14 @@ describe("dashboard page", () => {
           });
 
           it("does not show home-based business question when already answered", () => {
-            const userData = generateUserData({
+            const business = generateBusiness({
               profileData: generateProfileData({
                 industryId: randomHomeBasedIndustry(),
                 homeBasedBusiness: false,
                 operatingPhase: operatingPhase,
               }),
             });
-            useMockUserData(userData);
+            useMockBusiness(business);
             renderDashboardPage({});
             expect(
               screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
@@ -538,7 +538,7 @@ describe("dashboard page", () => {
       (operatingPhase) => {
         describe(`${operatingPhase}`, () => {
           it("does not show home-based business question when not applicable to operating phase", () => {
-            const userData = generateUserData({
+            const business = generateBusiness({
               profileData: generateProfileData({
                 industryId: randomHomeBasedIndustry(),
                 homeBasedBusiness: undefined,
@@ -547,7 +547,7 @@ describe("dashboard page", () => {
               }),
               onboardingFormProgress: "COMPLETED",
             });
-            useMockUserData(userData);
+            useMockBusiness(business);
 
             renderDashboardPage({});
 
@@ -567,7 +567,7 @@ describe("dashboard page", () => {
       (operatingPhase) => {
         describe(`${operatingPhase}`, () => {
           it("does not show home-based business question when not applicable to industry", () => {
-            const userData = generateUserData({
+            const business = generateBusiness({
               profileData: generateProfileData({
                 homeBasedBusiness: undefined,
                 industryId: randomNonHomeBasedIndustry(),
@@ -576,7 +576,7 @@ describe("dashboard page", () => {
               }),
               onboardingFormProgress: "COMPLETED",
             });
-            useMockUserData(userData);
+            useMockBusiness(business);
 
             renderDashboardPage({});
 
@@ -589,7 +589,7 @@ describe("dashboard page", () => {
           });
 
           it("sets homeBasedBusiness in profile and removes question when radio is selected", async () => {
-            const userData = generateUserData({
+            const business = generateBusiness({
               profileData: generateProfileData({
                 industryId: randomHomeBasedIndustry(),
                 homeBasedBusiness: undefined,
@@ -597,8 +597,8 @@ describe("dashboard page", () => {
               }),
               onboardingFormProgress: "COMPLETED",
             });
-            useMockUserData(userData);
-            renderStatefulPage(userData);
+            useMockBusiness(business);
+            renderStatefulPage(business);
             chooseHomeBasedValue("true");
             fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
 
@@ -607,11 +607,11 @@ describe("dashboard page", () => {
                 screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
               ).not.toBeInTheDocument();
             });
-            expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
+            expect(currentBusiness().profileData.homeBasedBusiness).toEqual(true);
           });
 
           it("shallow routes with query parameter when radio is selected", async () => {
-            const userData = generateUserData({
+            const business = generateBusiness({
               profileData: generateProfileData({
                 industryId: randomHomeBasedIndustry(),
                 homeBasedBusiness: undefined,
@@ -619,8 +619,8 @@ describe("dashboard page", () => {
               }),
               onboardingFormProgress: "COMPLETED",
             });
-            useMockUserData(userData);
-            renderStatefulPage(userData);
+            useMockBusiness(business);
+            renderStatefulPage(business);
             chooseHomeBasedValue("false");
             fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
             await waitFor(() => {
@@ -642,7 +642,7 @@ describe("dashboard page", () => {
       (operatingPhase) => {
         describe(`${operatingPhase}`, () => {
           it("shows home-based business question with alt description when applicable to industry and not yet answered", () => {
-            const userData = generateUserData({
+            const business = generateBusiness({
               profileData: generateProfileData({
                 industryId: randomHomeBasedIndustry(),
                 homeBasedBusiness: undefined,
@@ -651,7 +651,7 @@ describe("dashboard page", () => {
               }),
               onboardingFormProgress: "COMPLETED",
             });
-            useMockUserData(userData);
+            useMockBusiness(business);
 
             renderDashboardPage({});
             expect(
@@ -670,20 +670,20 @@ describe("dashboard page", () => {
     it("immediately sets phaseNewlyChanged to false when in desktop mode", async () => {
       setDesktopScreen(true);
       renderStatefulPage(
-        generateUserData({
+        generateBusiness({
           preferences: generatePreferences({ phaseNewlyChanged: true }),
           onboardingFormProgress: "COMPLETED",
         })
       );
       await waitFor(() => {
-        return expect(currentUserData().preferences.phaseNewlyChanged).toBe(false);
+        return expect(currentBusiness().preferences.phaseNewlyChanged).toBe(false);
       });
     });
 
     it("does not update userData when phaseNewlyChanged is false in desktop mode", async () => {
       setDesktopScreen(true);
       renderStatefulPage(
-        generateUserData({ preferences: generatePreferences({ phaseNewlyChanged: false }) })
+        generateBusiness({ preferences: generatePreferences({ phaseNewlyChanged: false }) })
       );
       expect(userDataWasNotUpdated()).toBe(true);
     });
@@ -691,7 +691,7 @@ describe("dashboard page", () => {
     it("sets phaseNewlyChanged to false on mobile when visiting For You tab", async () => {
       setDesktopScreen(false);
       renderStatefulPage(
-        generateUserData({
+        generateBusiness({
           preferences: generatePreferences({ phaseNewlyChanged: true }),
           onboardingFormProgress: "COMPLETED",
         })
@@ -702,14 +702,14 @@ describe("dashboard page", () => {
       fireEvent.click(screen.getByTestId("for-you-tab"));
       expect(screen.getByText(Config.dashboardDefaults.sidebarHeading)).toBeInTheDocument();
       await waitFor(() => {
-        return expect(currentUserData().preferences.phaseNewlyChanged).toBe(false);
+        return expect(currentBusiness().preferences.phaseNewlyChanged).toBe(false);
       });
     });
 
     it("shows indicator next to For You tab when phaseNewlyChanged is true on mobile", async () => {
       setDesktopScreen(false);
       renderStatefulPage(
-        generateUserData({
+        generateBusiness({
           preferences: generatePreferences({ phaseNewlyChanged: true }),
           onboardingFormProgress: "COMPLETED",
         })
@@ -725,7 +725,7 @@ describe("dashboard page", () => {
 
     it("shows no indicator on desktop", () => {
       setDesktopScreen(true);
-      renderStatefulPage(generateUserData({ preferences: generatePreferences({ phaseNewlyChanged: true }) }));
+      renderStatefulPage(generateBusiness({ preferences: generatePreferences({ phaseNewlyChanged: true }) }));
       expect(screen.queryByTestId("for-you-indicator")).not.toBeInTheDocument();
     });
   });
@@ -738,7 +738,7 @@ describe("dashboard page", () => {
       ],
     });
 
-    useMockUserData({
+    useMockBusiness({
       profileData: generateProfileData({
         operatingPhase: "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
       }),

@@ -37,7 +37,6 @@ import {
   generateFormationForeignAddress,
   generateFormationUSAddress,
   generateProfileData,
-  generateUserData,
   getCurrentDate,
   ProfileData,
 } from "@businessnjgovnavigator/shared/";

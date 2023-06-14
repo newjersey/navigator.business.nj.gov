@@ -23,7 +23,7 @@ interface Props {
 }
 
 const Home = (props: Props): ReactElement => {
-  const { userData, error } = useUserData();
+  const { business, userData, error } = useUserData();
   const { state } = useContext(AuthContext);
   const { Config } = useConfig();
   const router = useRouter();
@@ -76,15 +76,15 @@ const Home = (props: Props): ReactElement => {
   }
   useEffect(() => {
     if (state.isAuthenticated === IsAuthenticated.TRUE) {
-      if (userData?.onboardingFormProgress === "COMPLETED") {
+      if (business?.onboardingFormProgress === "COMPLETED") {
         router.replace(ROUTES.dashboard);
-      } else if (userData?.onboardingFormProgress === "UNSTARTED") {
+      } else if (business?.onboardingFormProgress === "UNSTARTED") {
         router.replace(ROUTES.onboarding);
       } else if (userData === undefined && error !== undefined) {
         router.replace(`${ROUTES.dashboard}?error=true`);
       }
     }
-  }, [userData, error, router, state.isAuthenticated, props.isWelcomePage]);
+  }, [business, userData, error, router, state.isAuthenticated, props.isWelcomePage]);
 
   useEffect(() => {
     if (!router.isReady || !router.query[QUERIES.signUp]) {

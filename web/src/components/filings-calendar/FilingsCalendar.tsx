@@ -17,8 +17,7 @@ import {
   getCurrentDate,
   LookupLegalStructureById,
   LookupOperatingPhaseById,
-  UserData,
-} from "@businessnjgovnavigator/shared/";
+} from "@businessnjgovnavigator/shared/index";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useState } from "react";
 

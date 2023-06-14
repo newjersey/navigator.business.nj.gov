@@ -1,6 +1,5 @@
 import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifiedByUserData";
 import {useMockProfileData} from "@/test/mock/mockUseUserData";
-import { generateProfileData, generateUserData, randomInt } from "@businessnjgovnavigator/shared/";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 

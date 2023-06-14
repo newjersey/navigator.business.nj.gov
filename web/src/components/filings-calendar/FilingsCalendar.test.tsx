@@ -24,14 +24,12 @@ import {
   OperatingPhases,
   randomInt,
   TaxFilingCalendarEvent,
-  UserData,
 } from "@businessnjgovnavigator/shared/index";
 import {
   generateLicenseData,
   generatePreferences,
   generateProfileData,
   generateTaxFilingData,
-  generateUserData,
   randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";

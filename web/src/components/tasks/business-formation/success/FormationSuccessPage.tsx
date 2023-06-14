@@ -4,7 +4,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect } from "@/lib/utils/helpers";
-import { UserData } from "@businessnjgovnavigator/shared/";
 import { ReactElement } from "react";
 import {Business} from "@businessnjgovnavigator/shared/userData";
 

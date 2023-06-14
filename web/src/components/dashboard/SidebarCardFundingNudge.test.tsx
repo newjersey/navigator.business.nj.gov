@@ -11,9 +11,10 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  generateBusiness,
   generatePreferences,
   generateProfileData,
-  generateUserData,
+  generateUserData, generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -29,7 +30,7 @@ describe("<SidebarCardFundingNudge />", () => {
 
   const renderWithBusiness = (business: Partial<Business>): void => {
     render(
-      <WithStatefulUserData initialUserData={generateUserData(business)}>
+      <WithStatefulUserData initialUserData={generateUserDataForBusiness(generateBusiness(business))}>
         <SidebarCardFundingNudge card={card} />
       </WithStatefulUserData>
     );

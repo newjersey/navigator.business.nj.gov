@@ -1,7 +1,7 @@
 import { ReviewLineItem } from "@/components/tasks/business-formation/review/section/ReviewLineItem";
 import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { corpLegalStructures, FormationLegalType } from "@businessnjgovnavigator/shared/";
+import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
 import {ReactElement, useContext} from "react";
 import {BusinessFormationContext} from "@/contexts/businessFormationContext";
 

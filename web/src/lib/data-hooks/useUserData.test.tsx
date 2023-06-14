@@ -12,7 +12,6 @@ import { BusinessUser, generateUser, generateUserData } from "@businessnjgovnavi
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, render, waitFor } from "@testing-library/react";
 import { SWRConfig } from "swr";
-import {ProfileData} from "@businessnjgovnavigator/shared/profileData";
 
 jest.mock("@/lib/utils/analytics-helpers", () => ({ setAnalyticsDimensions: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));

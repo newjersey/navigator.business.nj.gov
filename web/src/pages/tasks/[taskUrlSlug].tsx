@@ -42,7 +42,7 @@ interface Props {
 
 const TaskPage = (props: Props): ReactElement => {
   const router = useRouter();
-  const { userData } = useUserData();
+  const { business } = useUserData();
   const { roadmap } = useRoadmap();
   const { previousUrlSlug, nextUrlSlug } = useMemo(() => {
     const arrayOfTasks = getUrlSlugs(roadmap);
@@ -55,15 +55,15 @@ const TaskPage = (props: Props): ReactElement => {
 
   const renderNextAndPreviousButtons = (): ReactElement | undefined => {
     const isValidLegalStructure = allowFormation(
-      userData?.profileData.legalStructureId,
-      userData?.profileData.businessPersona
+      business?.profileData.legalStructureId,
+      business?.profileData.businessPersona
     );
     if (props.task.id === formationTaskId && isValidLegalStructure) {
       return undefined;
     }
 
     const hideNextUrlSlug =
-      props.task.id === businessStructureTaskId && !hasCompletedBusinessStructure(userData);
+      props.task.id === businessStructureTaskId && !hasCompletedBusinessStructure(business);
 
     return (
       <div

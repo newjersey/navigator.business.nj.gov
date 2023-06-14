@@ -6,7 +6,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generateUserData, UserData } from "@businessnjgovnavigator/shared/";
+import { generateUserData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen } from "@testing-library/react";
 import {Business} from "@businessnjgovnavigator/shared/userData";
 import {generateBusiness, generateUserDataForBusiness} from "@businessnjgovnavigator/shared/test";

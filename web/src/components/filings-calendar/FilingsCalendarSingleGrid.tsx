@@ -16,7 +16,6 @@ import {
   LicenseCalendarEvent,
   parseDateWithFormat,
   TaxFilingCalendarEvent,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import { ReactElement, ReactNode, useState } from "react";
 import { UnStyledButton } from "../njwds-extended/UnStyledButton";
