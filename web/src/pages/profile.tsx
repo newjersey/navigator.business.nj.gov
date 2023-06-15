@@ -711,8 +711,8 @@ const ProfilePage = (props: Props): ReactElement => {
           }}
         >
           <PageSkeleton>
-            <NavBar />
-            <main id="main">
+            <NavBar showSidebar={true} hideMiniRoadmap={true} />
+            <main id="main" data-testid={"main"}>
               <div className="usa-section padding-top-0 desktop:padding-top-3">
                 <EscapeModal
                   isOpen={escapeModal}

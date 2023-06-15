@@ -27,3 +27,19 @@ $icon-offset: 45px;
 .menu-item-focus:focus {
   z-index: 5;
 }
+
+.truncate-long-business-names-mobile {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 15px;
+  max-width: 70vw;
+}
+
+.truncate-long-business-names-desktop {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 15px;
+  max-width: 230px;
+}

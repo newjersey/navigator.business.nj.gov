@@ -300,7 +300,7 @@ describe("profile", () => {
         expect(
           screen.getByText(Config.profileDefaults.fields.businessName.default.header)
         ).toBeInTheDocument();
-        expect(screen.getByText("some-name")).toBeInTheDocument();
+        expect(within(screen.getByTestId("main")).getByText("some-name")).toBeInTheDocument();
         expect(screen.queryByLabelText("Business name")).not.toBeInTheDocument();
       });
 
@@ -1597,7 +1597,7 @@ describe("profile", () => {
         renderPage({
           userData: nexusForeignBusinessProfile({ profileDataOverrides: { businessName: "Test Business" } }),
         });
-        expect(screen.getByText("Test Business")).toBeInTheDocument();
+        expect(within(screen.getByTestId("main")).getByText("Test Business")).toBeInTheDocument();
       });
 
       it("displays the user's dba name if they have one", () => {
@@ -1609,7 +1609,7 @@ describe("profile", () => {
             },
           }),
         });
-        expect(screen.getByText("Test Business")).toBeInTheDocument();
+        expect(within(screen.getByTestId("main")).getByText("Test Business")).toBeInTheDocument();
         expect(
           screen.getByText(markdownToText(Config.profileDefaults.fields.nexusDbaName.default.header))
         ).toBeInTheDocument();
@@ -1624,7 +1624,7 @@ describe("profile", () => {
             },
           }),
         });
-        expect(screen.getByText("Test Business")).toBeInTheDocument();
+        expect(within(screen.getByTestId("main")).getByText("Test Business")).toBeInTheDocument();
         expect(
           screen.queryByText(Config.profileDefaults.fields.nexusDbaName.default.header)
         ).not.toBeInTheDocument();

@@ -109,7 +109,7 @@ export const NavBarDesktop = (): ReactElement => {
                 >
                   {accountIcon}
                 </Icon>
-                <div>{navBarBusinessTitle}</div>
+                <div className="truncate-long-business-names-desktop">{navBarBusinessTitle}</div>
               </div>
             ) : (
               <button
@@ -122,7 +122,9 @@ export const NavBarDesktop = (): ReactElement => {
               >
                 <div className={`text-bold text-${textColor} flex flex-align-center margin-left-1`}>
                   <ButtonIcon svgFilename="business-green" sizePx="35px" />
-                  <div className="text-base-darkest">{navBarBusinessTitle}</div>
+                  <div className="text-base-darkest truncate-long-business-names-desktop">
+                    {navBarBusinessTitle}
+                  </div>
                   <Icon className="usa-icon--size-3">arrow_drop_down</Icon>
                 </div>
               </button>
