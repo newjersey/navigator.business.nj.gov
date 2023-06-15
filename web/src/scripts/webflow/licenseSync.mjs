@@ -67,7 +67,7 @@ const getLicenseFromMd = (licenseMd) => {
   }
 
   const removeValueWithSpecialChars = (value) => {
-    if (value.includes("$")) {
+    if (!value || value.includes("$")) {
       return "";
     }
     return value;
@@ -138,7 +138,7 @@ const updateLicenses = async (licenseMarkdowns) => {
       const webflowItem = getLicenseFromMd(licenseMd);
       return await modifyItem(webflowItem._id, licenseCollectionId, webflowItem);
     } catch (error) {
-      console.error(error.response.data);
+      console.error(error.response);
       throw error;
     }
   };
@@ -178,7 +178,7 @@ const createNewLicenses = async () => {
       const webflowItem = getLicenseFromMd(licenseMd);
       result = await createItem(webflowItem, licenseCollectionId, false);
     } catch (error) {
-      console.error(error.response.data);
+      console.error(error.response);
       throw error;
     }
 
