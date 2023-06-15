@@ -94,6 +94,30 @@ describe("<NavBar />", () => {
     useMockRouter({});
   });
 
+  it("shows business name when showSidebar is true on mobile", () => {
+    useMockUserData(generateBusinessNamedUserData());
+    setLargeScreen(false);
+    render(
+      withAuth(<NavBar landingPage={false} task={undefined} showSidebar={true} />, {
+        isAuthenticated: IsAuthenticated.TRUE,
+      })
+    );
+
+    expect(screen.getByText(businessName)).toBeInTheDocument();
+  });
+
+  it("does not show business name when showSidebar is false on mobile", () => {
+    useMockUserData(generateBusinessNamedUserData());
+    setLargeScreen(false);
+    render(
+      withAuth(<NavBar landingPage={false} task={undefined} showSidebar={false} />, {
+        isAuthenticated: IsAuthenticated.TRUE,
+      })
+    );
+
+    expect(screen.queryByText(businessName)).not.toBeInTheDocument();
+  });
+
   describe("navbar - used when user is on landing page", () => {
     it("displays landing page navbar when prop is passed", () => {
       setLargeScreen(true);
@@ -436,7 +460,7 @@ describe("<NavBar />", () => {
         useMockUserData(generateBusinessNamedUserData());
         renderMobileTaskNav({ isAuthenticated: IsAuthenticated.FALSE });
 
-        expect(screen.queryByText(businessName)).toBeVisible();
+        expect(within(screen.getByTestId("nav-bar-popup-menu")).queryByText(businessName)).toBeVisible();
         expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).toBeVisible();
       });
 

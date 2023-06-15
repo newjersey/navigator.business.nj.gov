@@ -34,7 +34,10 @@ export const NavMenuItem = ({
       key={key}
     >
       {icon && <div className="icon-width">{icon}</div>}
-      <div className={`${icon ? "" : "no-icon-offset"} text-wrap`} data-testid={dataTestid}>
+      <div
+        className={`${icon ? "" : "no-icon-offset"} text-wrap truncate-long-business-names-desktop`}
+        data-testid={dataTestid}
+      >
         {itemText}
       </div>
     </MenuItem>

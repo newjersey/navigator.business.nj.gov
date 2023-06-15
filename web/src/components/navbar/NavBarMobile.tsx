@@ -4,10 +4,11 @@ import { NavigatorLogo } from "@/components/navbar/NavigatorLogo";
 import { Icon } from "@/components/njwds/Icon";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { AuthContext } from "@/contexts/authContext";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useMemo, useState } from "react";
 
@@ -22,6 +23,7 @@ interface Props {
 export const NavBarMobile = (props: Props): ReactElement => {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const { state } = useContext(AuthContext);
+  const { userData } = useUserData();
   const router = useRouter();
 
   const open = (): void => {
@@ -74,7 +76,9 @@ export const NavBarMobile = (props: Props): ReactElement => {
       >
         <div className={`usa-logo ${props.scrolled ? "bg-white" : ""}`}>
           {props.showSidebar ? (
-            <div className="text-bold">{Config.navigationDefaults.taskPageNavBarHeading}</div>
+            <div className="text-bold font-body-sm truncate-long-business-names-mobile">
+              {getNavBarBusinessTitle(userData)}
+            </div>
           ) : (
             <NavigatorLogo />
           )}

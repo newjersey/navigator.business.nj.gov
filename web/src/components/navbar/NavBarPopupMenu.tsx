@@ -165,6 +165,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
       variant={"selectedMenu"}
       id="menu-list-grow"
       onKeyDown={handleListKeyDown}
+      data-testid={"nav-bar-popup-menu"}
     >
       <MenuItem
         className={`display-flex space-between padding-y-1 ${props.hasCloseButton ? "" : "menu-item-title"}`}
