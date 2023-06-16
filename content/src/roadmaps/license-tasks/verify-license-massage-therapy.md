@@ -1,15 +1,14 @@
 ---
-urlSlug: verify-license-massage-therapy
-filename: verify-license-massage-therapy
-name: Apply for Your License and Ensure Your Staff is Licensed
-id: verify-license-massage-therapy
-callToActionLink: https://newjersey.mylicense.com/verification/
-callToActionText: Apply for or Verify a License
-agencyId: nj-consumer-affairs
-agencyAdditionalContext: Board of Massage and Bodywork Therapy
+id: "verify-license-massage-therapy"
+webflowId: "648c97318fac0894d3500c32"
+urlSlug: "verify-license-massage-therapy"
+name: "Apply for Your License and Ensure Your Staff is Licensed"
 webflowName: "Massage Therapy: Staff Licenses"
-divisionPhone: ""
-webflowIndustry: ""
+filename: "verify-license-massage-therapy"
+callToActionLink: "https://newjersey.mylicense.com/verification/"
+callToActionText: "Apply for or Verify a License"
+agencyId: "nj-consumer-affairs"
+agencyAdditionalContext: "Board of Massage and Bodywork Therapy"
 licenseCertificationClassification: ""
 ---
 
