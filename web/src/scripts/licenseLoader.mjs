@@ -16,9 +16,9 @@ const convertLicenseMd = (mdContents, filename) => {
   const oppGrayMatter = matterResult.data;
 
   return {
+    ...oppGrayMatter,
     contentMd: matterResult.content,
     filename: filename,
-    ...oppGrayMatter,
   };
 };
 
