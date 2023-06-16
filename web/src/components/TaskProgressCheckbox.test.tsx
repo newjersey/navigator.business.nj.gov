@@ -125,7 +125,7 @@ describe("<TaskProgressCheckbox />", () => {
     });
   });
 
-  describe("tax registration modal", () => {
+  describe("tax registration warning modal", () => {
     it("shows the warning modal if the user tries to change status from completed", () => {
       const userData = generateUserData({
         taskProgress: { [taxTaskId]: "COMPLETED" },

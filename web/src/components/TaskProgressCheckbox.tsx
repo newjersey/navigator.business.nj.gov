@@ -5,6 +5,7 @@ import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
+import { TaskStatusTaxRegistrationSnackbar } from "@/components/TaskStatusTaxRegistrationSnackbar";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -24,7 +25,7 @@ interface Props {
   STORYBOOK_ONLY_currentTaskProgress?: TaskProgress;
 }
 
-type ModalTypes = "formation" | "formation-unset" | "registered-for-taxes" | "registered-for-taxes-unset";
+type ModalTypes = "formation" | "formation-unset" | "registered-for-taxes-unset";
 
 export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const { userData, updateQueue } = useUserData();
@@ -32,6 +33,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const { queueUpdateTaskProgress, congratulatoryModal } = useUpdateTaskProgress();
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState<boolean>(false);
   const [currentOpenModal, setCurrentOpenModal] = useState<ModalTypes | undefined>(undefined);
+  const [taxRegistrationSnackbarIsOpen, setTaxRegistrationSnackbarIsOpen] = useState<boolean>(false);
   const router = useRouter();
   const { Config } = useConfig();
 
@@ -56,6 +58,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
     if (!updateQueue || !userData) {
       return;
     }
+    let redirectOnSuccess = config?.redirectOnSuccess;
     if (isAuthenticated === IsAuthenticated.FALSE) {
       setRegistrationModalIsVisible(true);
       return;
@@ -78,10 +81,8 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
     }
 
     if (isTaxTask(props.taskId)) {
-      if (nextStatus === "COMPLETED" && currentOpenModal === undefined) {
-        setCurrentOpenModal("registered-for-taxes");
-        analytics.event.task_status_checkbox.click_completed.show_tax_registration_date_modal();
-        return;
+      if (nextStatus === "COMPLETED") {
+        redirectOnSuccess = true;
       }
       if (currentTaskProgress === "COMPLETED" && currentOpenModal === undefined) {
         setCurrentOpenModal("registered-for-taxes-unset");
@@ -96,7 +97,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
       .update()
       .then(() => {
         setSuccessSnackbarIsOpen(true);
-        if (!config?.redirectOnSuccess) {
+        if (!redirectOnSuccess) {
           return;
         }
         routeWithQuery(router, {
@@ -233,6 +234,11 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
       <TaskStatusChangeSnackbar
         isOpen={successSnackbarIsOpen}
         close={(): void => setSuccessSnackbarIsOpen(false)}
+      />
+
+      <TaskStatusTaxRegistrationSnackbar
+        isOpen={taxRegistrationSnackbarIsOpen}
+        close={(): void => setTaxRegistrationSnackbarIsOpen(false)}
       />
 
       <FormationDateModal

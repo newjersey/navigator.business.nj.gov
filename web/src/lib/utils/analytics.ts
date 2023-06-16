@@ -129,7 +129,6 @@ type Action =
   | "show_formation_date_modal"
   | "hide_contextual_info"
   | "formation_status_set_to_complete"
-  | "show_tax_registration_modal"
   | "show_tax_registration_date_modal"
   | "tax_registration_status_set_to_complete"
   | "go_to_myNJ_registration"
@@ -948,7 +947,6 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "task_status_checkbox",
             legacy_event_label: "show_tax_registration_date_modal",
-            action: "show_tax_registration_modal",
             item: "task_status_checkbox",
           });
         },
@@ -1721,20 +1719,6 @@ export default {
             legacy_event_category: "tax_calendar_modal",
             legacy_event_label: "tax_deadlines_added_to_calendar",
             server_response: "success",
-          });
-        },
-      },
-    },
-    tax_registration_nudge_button: {
-      click: {
-        show_tax_registration_modal: () => {
-          eventRunner.track({
-            event: "graduation_phase_interactions",
-            legacy_event_action: "click",
-            legacy_event_category: "tax_registration_nudge_button",
-            legacy_event_label: "show_tax_registration_modal",
-            action: "show_tax_registration_modal",
-            item: "tax_registration_nudge_button",
           });
         },
       },
