@@ -28,7 +28,7 @@ export const LookupLegalStructureById = (id: string | undefined): LegalStructure
       requiresPublicFiling: false,
       hasTradeName: false,
       onboardingOrder: 0,
-      elementsToDisplay: new Set<ElementsToDisplay>(["entityId"]),
+      elementsToDisplay: new Set<ElementsToDisplay>(["entityId", "formationDate"]),
     }
   );
 };
