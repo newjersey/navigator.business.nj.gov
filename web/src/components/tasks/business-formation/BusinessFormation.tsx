@@ -115,9 +115,9 @@ export const BusinessFormation = (props: Props): ReactElement => {
         ...business.formationData.businessNameAvailability,
       });
     }
-    if (userData.formationData.dbaBusinessNameAvailability) {
+    if (business.formationData.dbaBusinessNameAvailability) {
       setDbaBusinessNameAvailability({
-        ...userData.formationData.dbaBusinessNameAvailability,
+        ...business.formationData.dbaBusinessNameAvailability,
       });
     }
 

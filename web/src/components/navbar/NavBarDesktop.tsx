@@ -17,7 +17,7 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 export const NavBarDesktop = (): ReactElement => {
-  const { userData, updateQueue } = useUserData();
+  const { business, updateQueue } = useUserData();
   const { state } = useContext(AuthContext);
   const router = useRouter();
   const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
@@ -65,7 +65,7 @@ export const NavBarDesktop = (): ReactElement => {
 
   const textColor = isAuthenticated ? "primary" : "base";
   const accountIcon = isAuthenticated ? "account_circle" : "help";
-  const navBarBusinessTitle = getNavBarBusinessTitle(userData);
+  const navBarBusinessTitle = getNavBarBusinessTitle(business);
 
   return (
     <div className="position-sticky top-0 z-500 bg-white">

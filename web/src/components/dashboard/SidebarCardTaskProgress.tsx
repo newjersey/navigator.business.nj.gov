@@ -35,7 +35,7 @@ export const SidebarCardTaskProgress = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { business } = useUserData();
   const { roadmap } = useRoadmap();
-  const modifiedRoadmap = LookupOperatingPhaseById(userData?.profileData.operatingPhase)
+  const modifiedRoadmap = LookupOperatingPhaseById(business?.profileData.operatingPhase)
     .displayBusinessStructurePrompt
     ? roadmapWithSectionSpecificTasks(roadmap, "PLAN")
     : roadmap;

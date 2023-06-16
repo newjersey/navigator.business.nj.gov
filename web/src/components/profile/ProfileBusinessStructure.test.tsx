@@ -4,8 +4,7 @@ import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
-  Business,
-  generateBusiness,
+  Business, generateBusiness,
   generateProfileData,
   generateUserDataForBusiness,
   LookupLegalStructureById,

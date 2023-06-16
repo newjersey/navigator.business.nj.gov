@@ -7,7 +7,9 @@ import {
   userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
 import {
-  generateBusiness,
+  castPublicFilingLegalTypeToFormationType,
+  FormationData,
+  generateBusiness, generateFormationFormData,
   ProfileData,
   PublicFilingLegalType
 } from "@businessnjgovnavigator/shared";

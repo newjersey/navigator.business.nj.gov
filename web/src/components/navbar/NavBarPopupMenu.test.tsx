@@ -10,7 +10,8 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
-  BusinessUser,
+  Business,
+  BusinessUser, generateBusiness,
   generateProfileData,
   generateUserData,
   UserData,
@@ -33,8 +34,8 @@ jest.mock("@/lib/auth/sessionHelper", () => ({
   triggerSignIn: jest.fn(),
 }));
 
-const generateOnboardingUser = (): UserData => {
-  return generateUserData({
+const generateOnboardingBusiness = (): Business => {
+  return generateBusiness({
     profileData: generateProfileData({
       businessName: "",
       industryId: undefined,
@@ -93,7 +94,7 @@ describe("<NavBarPopupMenu />", () => {
   describe("menuConfiguration prop's various menu configurations", () => {
     describe("login configuration", () => {
       beforeEach(() => {
-        useMockUserData(generateOnboardingUser());
+        useMockUserData(generateOnboardingBusiness());
         renderNavBarPopupMenu({ menuConfiguration: "login" });
       });
 
@@ -109,7 +110,7 @@ describe("<NavBarPopupMenu />", () => {
 
     describe("profile configuration", () => {
       beforeEach(() => {
-        useMockUserData(generateOnboardingUser());
+        useMockUserData(generateOnboardingBusiness());
         renderNavBarPopupMenu({ menuConfiguration: "profile" });
       });
 
@@ -131,7 +132,7 @@ describe("<NavBarPopupMenu />", () => {
 
     describe("profile-myNj-logout configuration", () => {
       beforeEach(() => {
-        useMockUserData(generateOnboardingUser());
+        useMockUserData(generateOnboardingBusiness());
         renderNavBarPopupMenu({ menuConfiguration: "profile-myNj-logout" });
       });
 
@@ -171,7 +172,7 @@ describe("<NavBarPopupMenu />", () => {
 
     describe("profile-register-login configruation", () => {
       beforeEach(() => {
-        useMockUserData(generateOnboardingUser());
+        useMockUserData(generateOnboardingBusiness());
         renderNavBarPopupMenu({ menuConfiguration: "profile-register-login" });
       });
 
@@ -206,7 +207,7 @@ describe("<NavBarPopupMenu />", () => {
 
     describe("login-getstarted configuration", () => {
       beforeEach(() => {
-        useMockUserData(generateOnboardingUser());
+        useMockUserData(generateOnboardingBusiness());
         renderNavBarPopupMenu({ menuConfiguration: "login-getstarted" });
       });
 

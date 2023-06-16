@@ -1,16 +1,16 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import { LookupIndustryById, LookupLegalStructureById, UserData } from "@businessnjgovnavigator/shared";
+import { LookupIndustryById, LookupLegalStructureById, Business } from "@businessnjgovnavigator/shared";
 
-export const getNavBarBusinessTitle = (userData: UserData | undefined): string => {
+export const getNavBarBusinessTitle = (business: Business | undefined): string => {
   const Config = getMergedConfig();
-  if (!userData?.profileData.industryId || !userData.profileData.legalStructureId) {
+  if (!business?.profileData.industryId || !business.profileData.legalStructureId) {
     return Config.navigationDefaults.navBarGuestText;
   }
-  if (userData?.profileData.businessName) {
-    return userData.profileData.businessName;
+  if (business?.profileData.businessName) {
+    return business.profileData.businessName;
   } else {
     return `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
-      LookupIndustryById(userData?.profileData?.industryId).name
-    } ${LookupLegalStructureById(userData?.profileData?.legalStructureId).abbreviation}`;
+      LookupIndustryById(business?.profileData?.industryId).name
+    } ${LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation}`;
   }
 };

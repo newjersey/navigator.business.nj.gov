@@ -14,13 +14,12 @@ export const ProfileBusinessStructure = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);
   const { Config } = useConfig();
   const { roadmap } = useRoadmap();
-  const { updateQueue } = useUserData();
+  const { business } = useUserData();
   const [isFormed, setIsFormed] = useState(false);
 
   useEffect(() => {
-    if (!updateQueue) return;
-    setIsFormed(hasCompletedFormation(updateQueue.currentBusiness()));
-  }, [updateQueue]);
+    setIsFormed(hasCompletedFormation(business));
+  }, [business]);
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["legalStructureId"]["default"] =
     getProfileConfig({

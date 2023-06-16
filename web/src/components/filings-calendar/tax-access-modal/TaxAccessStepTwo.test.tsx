@@ -14,7 +14,7 @@ import {
   createEmptyFormationFormData,
   FormationData,
   FormationLegalType, generateBusiness,
-  generateUserDataForBusiness,
+  generateUserDataForBusiness, getCurrentBusiness,
   getCurrentDateISOString,
   OperatingPhases,
   UserData,
@@ -375,7 +375,7 @@ describe("<TaxAccessStepTwo />", () => {
           },
           naicsCode: "123456",
         },
-      });
+      })
 
 
       renderComponent(userDataWithPrefilledFields);
