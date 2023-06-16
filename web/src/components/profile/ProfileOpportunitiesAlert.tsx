@@ -38,8 +38,8 @@ export const ProfileOpportunitiesAlert = (): ReactElement => {
         {unansweredOpportunityFields.map((field) => (
           <li key={field}>
             <UnStyledButton
-              style="tertiary"
-              underline
+              style="default"
+              isUnderline
               onClick={(): void => {
                 router.replace(`#question-${field}`);
               }}

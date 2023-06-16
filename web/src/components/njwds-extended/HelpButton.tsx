@@ -9,11 +9,11 @@ export const HelpButton = (): ReactElement => {
   return (
     <div className="flex fac margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-left-auto mobile-lg:margin-right-105 width-full mobile-lg:width-auto">
       <UnStyledButton
-        style={"unstyled"}
+        style={"transparentBgColor"}
         className={"text-accent-cool-darker fjc padding-0"}
-        textBold={true}
-        intercomButton
-        noRightMargin={true}
+        isTextBold
+        isIntercomEnabled
+        isRightMarginRemoved
         dataTestid={"help-button"}
       >
         <ButtonIcon svgFilename="help-circle-blue" sizePx="25px" />

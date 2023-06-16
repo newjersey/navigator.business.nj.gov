@@ -281,7 +281,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
 
           {props.addressData.length <= 9 && (
             <UnStyledButton
-              style="tertiary"
+              style="default"
               onClick={(): void => {
                 setEditIndex(undefined);
                 setModalOpen(true);

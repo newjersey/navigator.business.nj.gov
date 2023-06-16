@@ -107,10 +107,9 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
             </div>
             {!isReviewStep && (
               <UnStyledButton
-                style="tertiary"
-                widthAutoOnMobile
+                style="default"
                 onClick={(): void => setStepIndex(LookupStepIndexByName("Name"))}
-                underline
+                isUnderline
                 dataTestid="edit-business-name"
               >
                 {Config.formation.general.editButtonText}
@@ -129,10 +128,9 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
               <div>
                 {!isReviewStep && (
                   <UnStyledButton
-                    style="tertiary"
-                    widthAutoOnMobile
+                    style="default"
                     onClick={showLegalStructureModal}
-                    underline
+                    isUnderline
                     dataTestid="edit-legal-structure"
                   >
                     {Config.formation.general.editButtonText}
