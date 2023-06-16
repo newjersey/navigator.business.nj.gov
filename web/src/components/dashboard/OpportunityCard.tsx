@@ -80,7 +80,8 @@ export const OpportunityCard = (props: Props): ReactElement => {
         <div>{TYPE_TO_LABEL[props.urlPath]}</div>
         <div className="mla">
           <UnStyledButton
-            style="narrow-light"
+            style={"transparentBgColor"}
+            className={"usa-tag text-normal text-base border-1px border-base-light hide-unhide-button"}
             onClick={(): void => {
               isHidden() ? unhideSelf() : hideSelf();
             }}

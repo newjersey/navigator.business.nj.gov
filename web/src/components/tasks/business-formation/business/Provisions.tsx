@@ -64,7 +64,7 @@ export const Provisions = (): ReactElement => {
         </div>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
-            <UnStyledButton style="tertiary" onClick={handleAddButtonClick} dataTestid="show-provisions">
+            <UnStyledButton style="default" onClick={handleAddButtonClick} dataTestid="show-provisions">
               {Config.formation.fields.provisions.addButtonText}
             </UnStyledButton>
           )}
@@ -101,7 +101,7 @@ export const Provisions = (): ReactElement => {
               </div>
               <div className="grid-col-auto margin-x-2 margin-top-3 display-flex flex-column flex-justify-center">
                 <UnStyledButton
-                  style="tertiary"
+                  style="default"
                   onClick={(): void => removeProvision(index)}
                   className="display-flex flex-column flex-justify-center"
                 >
@@ -121,7 +121,7 @@ export const Provisions = (): ReactElement => {
         <UnStyledButton
           onClick={handleAddAnother}
           className="margin-top-2"
-          style="tertiary"
+          style="default"
           dataTestid="add-new-provision"
         >
           <Icon>add</Icon>

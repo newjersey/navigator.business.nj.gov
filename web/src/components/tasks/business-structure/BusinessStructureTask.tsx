@@ -165,8 +165,8 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
                 <>
                   <UnStyledButton
                     className="margin-left-2"
-                    style="tertiary"
-                    underline
+                    style="default"
+                    isUnderline
                     onClick={setBackToEditing}
                   >
                     {Config.taskDefaults.editText}
@@ -175,8 +175,8 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
 
                   <UnStyledButton
                     className="margin-left-1"
-                    style="tertiary"
-                    underline
+                    style="default"
+                    isUnderline
                     onClick={removeTaskCompletion}
                   >
                     {Config.taskDefaults.removeText}

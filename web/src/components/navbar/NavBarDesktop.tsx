@@ -78,7 +78,7 @@ export const NavBarDesktop = (): ReactElement => {
                 {!currentlyOnboarding() && (
                   <div data-testid="registration-button" className="margin-left-4">
                     <UnStyledButton
-                      style="tertiary"
+                      style="default"
                       onClick={(): void => {
                         analytics.event.guest_menu.click.go_to_myNJ_registration();
                         onSelfRegister(router, updateQueue, setRegistrationAlertStatus);
@@ -90,7 +90,7 @@ export const NavBarDesktop = (): ReactElement => {
                 )}
                 <div data-testid="login-button" className="margin-right-4 margin-left-4">
                   <UnStyledButton
-                    style="tertiary"
+                    style="default"
                     onClick={(): void => {
                       analytics.event.guest_menu.click.go_to_myNJ_registration();
                       triggerSignIn();

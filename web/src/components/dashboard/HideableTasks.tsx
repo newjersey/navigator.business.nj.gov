@@ -39,7 +39,11 @@ export const HideableTasks = (): ReactElement => {
       <div className={`${isTabletAndUp ? "flex flex-align-center" : ""} margin-bottom-205`}>
         <h2 className="margin-bottom-0 text-medium">{Config.dashboardDefaults.upAndRunningTaskHeader}</h2>
         <div className={`mla ${isTabletAndUp ? "" : "margin-top-2"}`}>
-          <UnStyledButton style="narrow-light" onClick={handleToggleClick} widthAutoOnMobile>
+          <UnStyledButton
+            style={"transparentBgColor"}
+            className={"usa-tag text-normal text-base border-1px border-base-light hide-unhide-button"}
+            onClick={handleToggleClick}
+          >
             <div className="fdr fac">
               <Icon>{userData?.preferences.isHideableRoadmapOpen ? "visibility_off" : "visibility"}</Icon>
               <span className="margin-left-05 line-height-sans-2">
