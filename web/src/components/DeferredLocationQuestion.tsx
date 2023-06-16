@@ -65,13 +65,13 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
               })}
             </Content>
           </div>
-          <UnStyledButton style="tertiary" underline onClick={(): void => setShowEditLocation(true)}>
+          <UnStyledButton style="default" isUnderline onClick={(): void => setShowEditLocation(true)}>
             {Config.deferredLocation.editText}
           </UnStyledButton>
           <span className="margin-x-105">|</span>
           <UnStyledButton
-            style="tertiary"
-            underline
+            style="default"
+            isUnderline
             onClick={(): void => {
               onRemoveLocation();
             }}
