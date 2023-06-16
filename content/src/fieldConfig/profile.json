@@ -81,12 +81,6 @@
           "description": "Enter your Last Name, First Name and Middle Initial. The name must match exactly the name listed on your tax confirmation email."
         }
       },
-      "tradeName": {
-        "default": {
-          "header": "Trade Name",
-          "errorTextRequired": "Please enter your trade name."
-        }
-      },
       "nexusBusinessName": {
         "default": {
           "editButton": "Edit",
@@ -136,7 +130,7 @@
           "header": "Business Effective Date",
           "headerContextualInfo": "effective-date",
           "headerNotBolded": "(mm/yyyy)",
-          "description": "Find your on your `Certificate of Formation|certificate-formation`.",
+          "description": "Find your Business Effective Date on your `Certificate of Formation|certificate-formation`.",
           "errorTextRequired": "Your formation should be formatted as MM/YYYY. (This information will help us inform your annual reporting due date.)"
         }
       },
@@ -156,6 +150,12 @@
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
           "description": "Will you house animals?"
+        }
+      },
+      "tradeName": {
+        "default": {
+          "header": "Trade Name",
+          "errorTextRequired": "Please enter your trade name."
         }
       },
       "ownershipTypeIds": {
