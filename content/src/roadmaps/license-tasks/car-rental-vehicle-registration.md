@@ -1,16 +1,13 @@
 ---
-urlSlug: car-rental-vehicle-registration
-filename: car-rental-vehicle-registration
-name: Register Your Fleet with New Jersey Motor Vehicle Commission
-id: car-rental-vehicle-registration
-callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm
-callToActionText: Make an Appointment
-agencyId: nj-motor-vehicle
-formName: BA-49
+id: "car-rental-vehicle-registration"
+webflowId: "648c9731bcc5ad023b064add"
+urlSlug: "car-rental-vehicle-registration"
+name: "Register Your Fleet with New Jersey Motor Vehicle Commission"
 webflowName: "Commercial Vehicle"
-agencyAdditionalContext: ""
-divisionPhone: ""
-webflowIndustry: ""
+filename: "car-rental-vehicle-registration"
+callToActionLink: "https://www.nj.gov/mvc/vehicles/reginitial.htm"
+callToActionText: "Make an Appointment"
+agencyId: "nj-motor-vehicle"
 licenseCertificationClassification: ""
 ---
 
