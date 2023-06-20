@@ -9,8 +9,8 @@ export const getNavBarBusinessTitle = (userData: UserData | undefined): string =
   if (userData?.profileData.businessName) {
     return userData.profileData.businessName;
   } else {
-    return `${Config.navigationDefaults.navBarUnnamedBusinessText} [${
+    return `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
       LookupIndustryById(userData?.profileData?.industryId).name
-    }][${LookupLegalStructureById(userData?.profileData?.legalStructureId).abbreviation}]`;
+    } ${LookupLegalStructureById(userData?.profileData?.legalStructureId).abbreviation}`;
   }
 };
