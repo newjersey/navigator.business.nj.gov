@@ -1,12 +1,10 @@
 ---
-urlSlug: petcare-license
-filename: petcare-license
-name: Obtain an Animal Facilities License, if Required
-id: petcare-license
+id: "petcare-license"
+webflowId: "648c973177d79ad743b0e41e"
+urlSlug: "petcare-license"
+name: "Obtain an Animal Facilities License, if Required"
 webflowName: "Animal Facilities"
-agencyAdditionalContext: ""
-divisionPhone: ""
-webflowIndustry: ""
+filename: "petcare-license"
 licenseCertificationClassification: ""
 ---
 

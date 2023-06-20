@@ -2,6 +2,8 @@
 /* eslint-disable no-undef */
 
 import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 import industryJson from "../../../../content/lib/industry.json" assert { type: "json" };
 import taskAgenciesJSON from "../../../../content/src/mappings/taskAgency.json" assert { type: "json" };
 import {
@@ -160,7 +162,9 @@ const updateLicenseWithWebflowId = (webflowId, filename) => {
   };
   const stringifiedFile = writeMarkdownString(updatedMdObject);
 
-  const outDir = `${process.cwd()}/content/src/roadmaps/license-tasks`;
+  const outDir = `${path.dirname(
+    fileURLToPath(import.meta.url)
+  )}/../../../../content/src/roadmaps/license-tasks`;
   fs.writeFileSync(`${outDir}/${filename}.md`, stringifiedFile, (err) => {
     if (err) {
       throw err;

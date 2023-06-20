@@ -1,21 +1,18 @@
 ---
-urlSlug: register-vehicle
+id: "register-vehicle"
+webflowId: "648c973177806520b77d1e53"
+urlSlug: "register-vehicle"
 name: "Register Your Vehicle "
 webflowName: "Non-Medical Transport: Vehicle Registration"
-summaryDescriptionMd: Vehicles need to be registered as a passenger vehicle
-  prior to offering transportation services.
-formName: BA-49
-industryId:
-  - non-medical-transport
-callToActionText: Obtain My Vehicle Registration
-callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm
-webflowIndustry: ""
+filename: "register-vehicle"
+callToActionLink: "https://www.nj.gov/mvc/vehicles/reginitial.htm"
+callToActionText: "Obtain My Vehicle Registration"
+agencyId: "nj-motor-vehicle"
+divisionPhone: "(609) 292-6500"
+industryId: "non-medical-transport"
+webflowType: "object-vehicle"
 licenseCertificationClassification: ""
-agencyId: nj-motor-vehicle
-agencyAdditionalContext: ""
-divisionPhone: (609) 292-6500
-id: register-vehicle
-webflowType: object-vehicle
+summaryDescriptionMd: "Vehicles need to be registered as a passenger vehicle prior to offering transportation services."
 ---
 
 ---

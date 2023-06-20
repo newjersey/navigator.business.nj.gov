@@ -1,3 +1,11 @@
+## [5.21.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.21.0...v5.21.1) (2023-06-16)
+
+
+### Bug Fixes
+
+* webflow license sync ([13335eb](https://github.com/newjersey/navigator.business.nj.gov/commit/13335ebbefc2a5e5782edda1abd034fb4f176afb))
+* webflow license sync and update license-task files ([e2450f6](https://github.com/newjersey/navigator.business.nj.gov/commit/e2450f648bdbfe341fea7ec2cf288ed77192b41d))
+
 # [5.21.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.20.3...v5.21.0) (2023-06-14)
 
 
