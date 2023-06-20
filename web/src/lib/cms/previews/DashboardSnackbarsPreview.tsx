@@ -43,6 +43,16 @@ const DashboardSnackbarsPreview = (props: PreviewProps): ReactElement => {
           <Content>{config.dashboardDefaults.deferredOnboardingSnackbarBody}</Content>
         </SnackbarAlert>
 
+        <h2>Tax Registration Snackbar</h2>
+        <SnackbarAlert
+          variant="success"
+          isOpen={true}
+          close={(): void => {}}
+          heading={config.dashboardDefaults.taxRegistrationSnackbarHeading}
+        >
+          <Content>{config.dashboardDefaults.taxRegistrationSnackbarBody}</Content>
+        </SnackbarAlert>
+
         <h2>Funding Snackbar</h2>
         <SnackbarAlert
           variant="success"

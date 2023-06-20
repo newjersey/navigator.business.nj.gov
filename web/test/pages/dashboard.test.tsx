@@ -342,6 +342,13 @@ describe("dashboard page", () => {
     expect(screen.getByTestId("certification-alert")).toBeInTheDocument();
   });
 
+  it("renders tax registration snackbar when fromTaxRegistrationCard query parameter is provided", async () => {
+    useMockRouter({ isReady: true, query: { fromTaxRegistrationCard: "true" } });
+
+    renderDashboardPage({});
+    expect(screen.getByTestId("tax-registration-alert")).toBeInTheDocument();
+  });
+
   it("renders funding snackbar when fromFunding query parameter is provided", async () => {
     useMockRouter({ isReady: true, query: { fromFunding: "true" } });
 
