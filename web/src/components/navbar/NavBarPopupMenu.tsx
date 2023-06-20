@@ -40,7 +40,6 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
     props.menuConfiguration === "login"
       ? Config.navigationDefaults.navBarGuestText
       : getUserNameOrEmail(userData);
-  const isDashboardSelected = router.route === ROUTES.dashboard;
   const isProfileSelected = router.route === ROUTES.profile;
 
   const navBarBusinessTitle = getNavBarBusinessTitle(userData);
@@ -119,11 +118,11 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
         onClick: (): void => {
           router.push(ROUTES.dashboard);
         },
-        selected: isDashboardSelected,
-        justFocused: !isProfileSelected && !isDashboardSelected,
+        selected: !isProfileSelected,
         icon: <ButtonIcon svgFilename="business-green" sizePx="35px" />,
         itemText: navBarBusinessTitle,
         key: "dashboardMenuItem",
+        className: "profile-default-background-color",
       }),
 
       NavMenuItem({
@@ -135,6 +134,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
         itemText: Config.navigationDefaults.profileLinkText,
         key: "profileMenuItem",
         dataTestid: "profile-link",
+        className: "profile-default-background-color",
       }),
 
       <hr className="margin-0 hr-2px" key={"profile-break-2"} />,
@@ -166,26 +166,28 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
       id="menu-list-grow"
       onKeyDown={handleListKeyDown}
       data-testid={"nav-bar-popup-menu"}
+      className="padding-bottom-0"
     >
       <MenuItem
-        className={`display-flex space-between padding-y-1 ${props.hasCloseButton ? "" : "menu-item-title"}`}
-        disabled={!props.hasCloseButton}
+        className={`display-flex ${props.hasCloseButton ? "padding-y-205" : "padding-y-1"} menu-item-title`}
+        disabled={true}
       >
         <div className="text-bold">{guestOrUserName}</div>
-        {props.hasCloseButton && (
-          <button
-            className="right-nav-close fac fdr fjc"
-            aria-label="close menu"
-            data-testid={"close-button-nav-menu"}
-            onClick={(): void => {
-              analytics.event.mobile_menu_close_button.click.close_mobile_menu();
-              props.handleClose();
-            }}
-          >
-            <Icon className="font-sans-xl">close</Icon>
-          </button>
-        )}
       </MenuItem>
+      {props.hasCloseButton && (
+        <button
+          className="right-nav-close fac fdr fjc position-absolute usa-position-bottom-right top-0 right-0 margin-y-2 margin-x-105"
+          aria-label="close menu"
+          data-testid={"close-button-nav-menu"}
+          onClick={(): void => {
+            analytics.event.mobile_menu_close_button.click.close_mobile_menu();
+            props.handleClose();
+          }}
+          tabIndex={0}
+        >
+          <Icon className="font-sans-xl">close</Icon>
+        </button>
+      )}
 
       {renderMenu()}
     </MenuList>

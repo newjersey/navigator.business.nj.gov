@@ -28,6 +28,18 @@ $icon-offset: 45px;
   z-index: 5;
 }
 
+.nav-menu-item-container {
+  min-height: 47px;
+}
+
+.profile-default-background-color {
+  background-color: #fbfdf9;
+}
+
+.Mui-selected.bg-primary-extra-light-mui-selected-override {
+  background-color: $primary-extra-light;
+}
+
 .truncate-long-business-names-mobile {
   white-space: nowrap;
   overflow: hidden;

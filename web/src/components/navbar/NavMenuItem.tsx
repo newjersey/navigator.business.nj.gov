@@ -13,7 +13,6 @@ interface navMenuItemProps {
 }
 
 export const NavMenuItem = ({
-  justFocused,
   onClick,
   selected,
   icon,
@@ -22,15 +21,13 @@ export const NavMenuItem = ({
   key,
   dataTestid,
 }: navMenuItemProps): ReactElement => {
-  const highlitBackgroundClassWithBoldText = "bg-primary-extra-light text-bold ";
-
   return (
     <MenuItem
       onClick={onClick}
-      className={`font-body-2xs menu-item-focus ${className} ${
-        selected ? highlitBackgroundClassWithBoldText : "bg-transparent"
+      className={`font-body-2xs menu-item-focus nav-menu-item-container ${className} ${
+        selected ? "bg-primary-extra-light-mui-selected-override text-bold " : ""
       }`}
-      selected={selected || justFocused}
+      selected={selected}
       key={key}
     >
       {icon && <div className="icon-width">{icon}</div>}

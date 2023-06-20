@@ -53,9 +53,9 @@ describe("getNavBarBusinessTitle", () => {
     });
     const navBarBusinessTitle = getNavBarBusinessTitle(userData);
     expect(navBarBusinessTitle).toBe(
-      `${Config.navigationDefaults.navBarUnnamedBusinessText} [${
+      `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
         LookupIndustryById(userData?.profileData?.industryId).name
-      }][${LookupLegalStructureById(userData?.profileData?.legalStructureId).abbreviation}]`
+      } ${LookupLegalStructureById(userData?.profileData?.legalStructureId).abbreviation}`
     );
   });
 });
