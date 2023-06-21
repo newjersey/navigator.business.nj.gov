@@ -263,12 +263,9 @@ const ProfilePage = (props: Props): ReactElement => {
     return LookupLegalStructureById(userData.profileData.legalStructureId).hasTradeName;
   };
 
-  const displayOpportunityAlert = (): boolean => {
-    return (
-      profileTab === "info" &&
-      LookupOperatingPhaseById(profileData.operatingPhase).displayProfileOpportunityAlert
-    );
-  };
+  const displayOpportunityAlert = LookupOperatingPhaseById(
+    profileData.operatingPhase
+  ).displayProfileOpportunityAlert;
 
   const shouldLockMunicipality = (): boolean => {
     return !!profileData.municipality && userData?.taxFilingData.state === "SUCCESS";
@@ -298,6 +295,7 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
+        {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField fieldName="foreignBusinessTypeIds">
           <OnboardingForeignBusinessType required />
@@ -404,6 +402,7 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
+        {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField fieldName="foreignBusinessTypeIds">
           <OnboardingForeignBusinessType required />
@@ -468,6 +467,8 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
+        {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
+
         <ProfileField
           fieldName="businessName"
           locked={shouldLockFormationFields}
@@ -599,6 +600,7 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
+        {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField fieldName="businessName" isVisible={!shouldShowTradeNameElements()}>
           <ProfileBusinessName />
@@ -753,7 +755,6 @@ const ProfilePage = (props: Props): ReactElement => {
                       </div>
                     ) : (
                       <>
-                        {displayOpportunityAlert() && <ProfileOpportunitiesAlert />}
                         <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
                           {getElements()}
                           <div className="margin-top-2">
