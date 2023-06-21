@@ -138,12 +138,12 @@ describe("updateOperatingPhase", () => {
       expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
     });
 
-    it("updates status back to NEEDS_BUSINESS_STRUCTURE if business structure task is not completed", () => {
+    it("updates status back to NEEDS_BUSINESS_STRUCTURE if business structure task is not completed and legalStructureId is undefined", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           operatingPhase: "NEEDS_TO_FORM",
-          legalStructureId: "limited-liability-company",
+          legalStructureId: undefined,
         }),
         taskProgress: {
           [businessStructureTaskId]: "IN_PROGRESS",
@@ -207,12 +207,12 @@ describe("updateOperatingPhase", () => {
       expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
     });
 
-    it("updates status back to NEEDS_BUSINESS_STRUCTURE if business structure task is not completed", () => {
+    it("updates status back to NEEDS_BUSINESS_STRUCTURE if business structure task is not completed and legalStructureId is undefined", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
-          legalStructureId: "general-partnership",
+          legalStructureId: undefined,
         }),
         taskProgress: {
           [businessStructureTaskId]: "IN_PROGRESS",
@@ -225,11 +225,12 @@ describe("updateOperatingPhase", () => {
   });
 
   describe("FORMED_AND_REGISTERED", () => {
-    it("updates status back to NEEDS_BUSINESS_STRUCTURE if business structure task is not completed", () => {
+    it("updates status back to NEEDS_BUSINESS_STRUCTURE if business structure task is not completed and legalStructureId is undefined", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           operatingPhase: "FORMED_AND_REGISTERED",
+          legalStructureId: undefined,
         }),
         taskProgress: {
           [formationTaskId]: "COMPLETED",
@@ -289,6 +290,33 @@ describe("updateOperatingPhase", () => {
   });
 
   describe("UP_AND_RUNNING", () => {
+    describe("undefined legal structure", () => {
+      describe("when tax and formation complete, but business structure is not incomplete and legalStructureId is undefined", () => {
+        const getUserData = (taskProgress: Record<string, TaskProgress>): UserData => {
+          return generateUserData({
+            profileData: generateProfileData({
+              businessPersona: "STARTING",
+              operatingPhase: "UP_AND_RUNNING",
+              legalStructureId: undefined,
+            }),
+            taskProgress: taskProgress,
+            preferences: generatePreferences({ isHideableRoadmapOpen: true }),
+          });
+        };
+
+        it("sets back to NEEDS_BUSINESS_STRUCTURE (and sets hideableRoadmap to false)", () => {
+          const userData = getUserData({
+            [formationTaskId]: "COMPLETED",
+            [taxTaskId]: "COMPLETED",
+            [businessStructureTaskId]: "IN_PROGRESS",
+          });
+
+          expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
+          expect(updateOperatingPhase(userData).preferences.isHideableRoadmapOpen).toBe(false);
+        });
+      });
+    });
+
     describe("public filing legal structure", () => {
       const getUserData = (taskProgress: Record<string, TaskProgress>): UserData => {
         return generateUserData({
@@ -301,18 +329,6 @@ describe("updateOperatingPhase", () => {
           preferences: generatePreferences({ isHideableRoadmapOpen: true }),
         });
       };
-
-      describe("when tax and formation complete, but business structure incomplete", () => {
-        it("sets back to NEEDS_BUSINESS_STRUCTURE (and sets hideableRoadmap to false)", () => {
-          const userData = getUserData({
-            [formationTaskId]: "COMPLETED",
-            [taxTaskId]: "COMPLETED",
-            [businessStructureTaskId]: "IN_PROGRESS",
-          });
-          expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
-          expect(updateOperatingPhase(userData).preferences.isHideableRoadmapOpen).toBe(false);
-        });
-      });
 
       describe("when tax and business structure complete, but formation incomplete", () => {
         it("sets back to NEEDS_TO_FORM (and sets hideableRoadmap to false)", () => {
