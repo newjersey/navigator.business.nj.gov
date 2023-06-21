@@ -97,7 +97,7 @@
           "optionContent": {
             "employeeOrContractorInNJ": "I have an employee or independent contractor acting as a sales or manufacturing representative in New Jersey",
             "officeInNJ": "I have an office in New Jersey",
-            "propertyInNJ": "I have property, including inventory housed in a 3rd party warehouse, in New Jersey",
+            "propertyInNJ": "I am looking to contract with New Jersey state or local government, or school districts",
             "companyOperatedVehiclesInNJ": "I have company-operated vehicles making business-related stops (deliveries or pickups) in New Jersey",
             "employeesInNJ": "I have employees who live in New Jersey",
             "transactionsInNJ": "I have more than 200 separate taxable transactions in New Jersey in the current or prior calendar year",
@@ -130,7 +130,7 @@
           "header": "Business Effective Date",
           "headerContextualInfo": "effective-date",
           "headerNotBolded": "(mm/yyyy)",
-          "description": "Find your Business Effective Date on your `Certificate of Formation|certificate-formation`.",
+          "description": "Find your Business Effective Date on your `Certificate of Formation|certificate-formation` .",
           "errorTextRequired": "Your formation should be formatted as MM/YYYY. (This information will help us inform your annual reporting due date.)"
         }
       },
@@ -182,13 +182,13 @@
       "employmentAgency": {
         "default": {
           "header": "",
-          "description": "Learn about other `employment and personnel industries|employment-agency-types`."
+          "description": "Learn about other `employment and personnel industries|employment-agency-types` ."
         }
       },
       "cannabisLicenseType": {
         "default": {
           "header": "Cannabis License",
-          "description": "Which type of license do you plan to get?\n\nLearn more about the `Conditional & Conversion License|cannabis-conditional-license` or the `Annual License|cannabis-annual-license`.",
+          "description": "Which type of license do you plan to get?\n\nLearn more about the `Conditional & Conversion License|cannabis-conditional-license` or the `Annual License|cannabis-annual-license` .",
           "radioButtonAnnualText": "Annual",
           "radioButtonConditionalText": "Conditional"
         }
@@ -213,7 +213,7 @@
       "homeContractor": {
         "default": {
           "header": "",
-          "description": "`Learn what activities qualify as a Home Improvement Contractor|home-contractors-activities`"
+          "description": " `Learn what activities qualify as a Home Improvement Contractor|home-contractors-activities`"
         }
       },
       "willSellPetCareItems": {
@@ -228,8 +228,8 @@
           "header": "Home-based business",
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
-          "description": "Are you a `home-based business|home-based-business`?",
-          "altDescription": "Do you plan to be a `home-based business|home-based-business`?"
+          "description": "Are you a `home-based business|home-based-business` ?",
+          "altDescription": "Do you plan to be a `home-based business|home-based-business` ?"
         }
       },
       "legalStructureId": {
@@ -259,11 +259,11 @@
           },
           "overrides": {
             "OWNING": {
-              "description": "What is your `business structure|business-structure-learn-more`?"
+              "description": "What is your `business structure|business-structure-learn-more` ?"
             },
             "FOREIGN": {
               "header": "Business Structure of Your Existing Out-of-State Business",
-              "description": "Please select the business structure used when you registered your business in your home state. You can find your business structure on your original `Certificate of Formation|certificate-formation`.",
+              "description": "Please select the business structure used when you registered your business in your home state. You can find your business structure on your original `Certificate of Formation|certificate-formation` .",
               "optionContent": {
                 "general-partnership": "",
                 "c-corporation": "",
