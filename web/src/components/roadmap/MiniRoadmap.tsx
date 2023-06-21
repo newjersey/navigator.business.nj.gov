@@ -7,7 +7,6 @@ import { isStepCompleted } from "@/lib/domain-logic/isStepCompleted";
 import analytics from "@/lib/utils/analytics";
 import { hasCompletedBusinessStructure } from "@businessnjgovnavigator/shared/domain-logic/hasCompletedBusinessStructure";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useCallback } from "react";
 
 interface Props {
@@ -20,9 +19,9 @@ export const MiniRoadmap = (props: Props): ReactElement => {
   const { updateQueue, userData } = useUserData();
 
   const displayBusinessStructurePrompt = LookupOperatingPhaseById(
-    updateQueue?.current().profileData.operatingPhase
+    userData?.profileData.operatingPhase
   ).displayBusinessStructurePrompt;
-  const completedBusinessStructure = hasCompletedBusinessStructure(updateQueue?.current() as UserData);
+  const completedBusinessStructure = hasCompletedBusinessStructure(userData);
 
   const onToggleStep = useCallback(
     async (stepNumber: number, setOpen: boolean, click: boolean): Promise<void> => {
