@@ -8,7 +8,8 @@ summaryDescriptionMd: Waste facilities will **only** allow registered vehicles
   companies, you need to be a [commercial waste
   hauler](https://www.wastedecals.nj.gov/swt2.html), which is a more
   time-intensive process.
-industryId: home-contractor
+industryId:
+  - home-contractor
 callToActionText: Apply for My Waste Hauling Decal
 callToActionLink: https://www.wastedecals.nj.gov/sg2.html
 webflowIndustry: Solid Waste Hauler
