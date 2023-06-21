@@ -482,11 +482,7 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ProfileResponsibleOwnerName />
         </ProfileField>
-        <ProfileField
-          fieldName="tradeName"
-          isVisible={shouldShowTradeNameElements()}
-          locked={hasSubmittedTaxData}
-        >
+        <ProfileField fieldName="tradeName" isVisible={shouldShowTradeNameElements()}>
           <ProfileTradeName />
         </ProfileField>
         <ProfileField fieldName="industryId">
@@ -612,11 +608,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <ProfileResponsibleOwnerName />
         </ProfileField>
 
-        <ProfileField
-          fieldName="tradeName"
-          isVisible={shouldShowTradeNameElements()}
-          locked={hasSubmittedTaxData}
-        >
+        <ProfileField fieldName="tradeName" isVisible={shouldShowTradeNameElements()}>
           <ProfileTradeName />
         </ProfileField>
 
