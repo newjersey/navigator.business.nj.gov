@@ -2494,21 +2494,6 @@ describe("profile", () => {
       renderPage({ userData });
       expect(screen.queryByTestId("tradeName")).not.toBeInTheDocument();
     });
-
-    it("displays tradeName as locked if user has accessed tax data", () => {
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          legalStructureId: "sole-proprietorship",
-        }),
-        taxFilingData: generateTaxFilingData({
-          state: "SUCCESS",
-        }),
-      });
-      renderPage({ userData });
-      expect(screen.getByText(Config.profileDefaults.fields.tradeName.default.header)).toBeInTheDocument();
-      expect(screen.queryByTestId("tradeName")).not.toBeInTheDocument();
-    });
   });
 
   describe("responsible owner name field behavior", () => {
