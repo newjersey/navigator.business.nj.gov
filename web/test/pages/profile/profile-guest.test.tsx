@@ -1,0 +1,136 @@
+/* eslint-disable jest/expect-expect */
+import * as mockRouter from "@/test/mock/mockRouter";
+import { useMockRouter } from "@/test/mock/mockRouter";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
+import { generateProfileData, UserData } from "@businessnjgovnavigator/shared/index";
+import { generateUserData as _generateUserData } from "@businessnjgovnavigator/shared/test";
+
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import {
+  chooseTab,
+  clickSave,
+  fillText,
+  getBusinessProfileInputFieldName,
+  renderPage,
+} from "@/test/pages/profile/profile-helpers";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
+
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@/lib/data-hooks/useDocuments");
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+
+const generateUserData = (overrides: Partial<UserData>): UserData => {
+  const profileData = generateProfileData({ ...overrides.profileData });
+  return _generateUserData({ ...overrides, profileData });
+};
+
+describe("profile - guest mode", () => {
+  let setRegistrationModalIsVisible: jest.Mock;
+
+  beforeEach(() => {
+    jest.resetAllMocks();
+    setRegistrationModalIsVisible = jest.fn();
+    useMockRouter({});
+    useMockRoadmap({});
+    setupStatefulUserDataContext();
+  });
+
+  let initialUserData: UserData;
+
+  describe("when prospective business owner", () => {
+    beforeEach(() => {
+      initialUserData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          legalStructureId: "limited-liability-company",
+        }),
+      });
+    });
+
+    opensModalWhenEditingNonGuestModeProfileFields();
+  });
+
+  describe("when owning a business", () => {
+    beforeEach(() => {
+      initialUserData = generateUserData({
+        profileData: generateProfileData({ businessPersona: "OWNING" }),
+      });
+    });
+
+    opensModalWhenEditingNonGuestModeProfileFields();
+
+    it("opens registration modal when user tries to change Tax PIN", () => {
+      renderPage({
+        userData: initialUserData,
+        isAuthenticated: IsAuthenticated.FALSE,
+        setRegistrationModalIsVisible,
+      });
+      chooseTab("numbers");
+      fireEvent.change(screen.getByLabelText("Tax pin"), { target: { value: "123456789" } });
+      expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+    });
+  });
+
+  function opensModalWhenEditingNonGuestModeProfileFields(): void {
+    it("user is able to edit name and save", async () => {
+      renderPage({
+        userData: initialUserData,
+        isAuthenticated: IsAuthenticated.FALSE,
+        setRegistrationModalIsVisible,
+      });
+      const inputFieldName = getBusinessProfileInputFieldName(initialUserData);
+      fillText(inputFieldName, "Cool Computers");
+      clickSave();
+      await waitFor(() => {
+        return expect(mockRouter.mockPush).toHaveBeenCalled();
+      });
+    });
+
+    it("opens registration modal when user tries to change EIN", () => {
+      renderPage({
+        userData: initialUserData,
+        isAuthenticated: IsAuthenticated.FALSE,
+        setRegistrationModalIsVisible,
+      });
+      chooseTab("numbers");
+      fireEvent.change(screen.getByLabelText("Employer id"), { target: { value: "123456789" } });
+      expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+    });
+
+    it("opens registration modal when user tries to change entity ID", () => {
+      renderPage({
+        userData: initialUserData,
+        isAuthenticated: IsAuthenticated.FALSE,
+        setRegistrationModalIsVisible,
+      });
+      chooseTab("numbers");
+      fireEvent.change(screen.getByLabelText("Entity id"), { target: { value: "123456789" } });
+      expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+    });
+
+    it("opens registration modal when user tries to change NJ Tax ID", () => {
+      renderPage({
+        userData: initialUserData,
+        isAuthenticated: IsAuthenticated.FALSE,
+        setRegistrationModalIsVisible,
+      });
+      chooseTab("numbers");
+      fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789" } });
+      expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+    });
+
+    it("opens registration modal when user tries to change Notes", () => {
+      renderPage({
+        userData: initialUserData,
+        isAuthenticated: IsAuthenticated.FALSE,
+        setRegistrationModalIsVisible,
+      });
+      chooseTab("notes");
+      fireEvent.change(screen.getByLabelText("Notes"), { target: { value: "some note" } });
+      expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+    });
+  }
+});
