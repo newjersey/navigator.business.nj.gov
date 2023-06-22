@@ -83,6 +83,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
     if (isTaxTask(props.taskId)) {
       if (nextStatus === "COMPLETED") {
         redirectOnSuccess = true;
+        analytics.event.tax_registration_snackbar.submit.show_tax_registration_success_snackbar();
       }
       if (currentTaskProgress === "COMPLETED" && currentOpenModal === undefined) {
         setCurrentOpenModal("registered-for-taxes-unset");
