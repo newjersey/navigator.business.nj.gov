@@ -39,9 +39,9 @@ interface Props {
 
 export const TaxAccessStepTwo = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { updateQueue } = useUserData();
+  const { updateQueue, userData: userDataFromHook } = useUserData();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
-  const userData = props.CMS_ONLY_fakeUserData ?? updateQueue?.current();
+  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook;
 
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [isLoading, setIsLoading] = useState<boolean>(false);
