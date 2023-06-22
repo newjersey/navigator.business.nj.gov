@@ -203,12 +203,14 @@ const ProfilePage = (props: Props): ReactElement => {
       updateQueue.queueProfileData(profileData);
 
       (async (): Promise<void> => {
-        updateQueue.queue(await postGetAnnualFilings(updateQueue.current()));
-        updateQueue.update().then(async () => {
-          setIsLoading(false);
-          setAlert("SUCCESS");
-          await redirect({ success: true });
-        });
+        updateQueue
+          .queue(await postGetAnnualFilings(updateQueue.current()))
+          .update()
+          .then(async () => {
+            setIsLoading(false);
+            setAlert("SUCCESS");
+            await redirect({ success: true });
+          });
       })();
     },
     (isValid, _errors, pageChange) => {
@@ -343,7 +345,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileField
           fieldName="municipality"
-          isVisible={profileData.nexusLocationInNewJersey === true}
+          isVisible={profileData.nexusLocationInNewJersey}
           locked={shouldLockMunicipality()}
         >
           <ProfileMunicipality />

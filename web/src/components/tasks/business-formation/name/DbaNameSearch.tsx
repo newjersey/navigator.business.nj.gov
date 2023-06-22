@@ -12,7 +12,7 @@ import { ReactElement, useContext } from "react";
 export const DbaNameSearch = (): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
-  const { updateQueue, userData } = useUserData();
+  const { userData } = useUserData();
 
   useMountEffect(() => {
     analytics.event.business_formation_dba_name_search_field.appears.dba_name_search_field_appears();
