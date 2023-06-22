@@ -3,6 +3,7 @@ import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { SidebarCardContent } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { taxTaskId } from "@businessnjgovnavigator/shared";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
@@ -24,6 +25,7 @@ export const SidebarCardRegisteredForTaxesNudge = (props: Props): ReactElement =
     queueUpdateTaskProgress(taxTaskId, "COMPLETED");
     await updateQueue.update();
     routeShallowWithQuery(router, QUERIES.fromTaxRegistrationCard, "true");
+    analytics.event.tax_registration_snackbar.submit.show_tax_registration_success_snackbar();
   };
 
   return (
