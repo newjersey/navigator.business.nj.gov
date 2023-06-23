@@ -1,6 +1,7 @@
 import { FilingsCalendarTaxAccess } from "@/components/filings-calendar/FilingsCalendarTaxAccess";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
+import * as fetchMunicipality from "@/lib/async-content-fetchers/fetchMunicipalities";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
@@ -43,6 +44,8 @@ jest.mock("@/lib/async-content-fetchers/fetchMunicipalities", () => ({
 }));
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;
+const mockFetchMunicipality = (fetchMunicipality as jest.Mocked<typeof fetchMunicipality>)
+  .fetchMunicipalityByName;
 
 const Config = getMergedConfig();
 let setRegistrationModalIsVisible: jest.Mock;
@@ -84,6 +87,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
     businessName?: string;
     responsibleOwnerName?: string;
     taxId?: string;
+    municipalityName?: string;
   }): UserData => {
     const legalStructureId = randomLegalStructure({ requiresPublicFiling: params.publicFiling }).id;
 
@@ -119,6 +123,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
         encryptedTaxId: params.taxId ? `encrypted-${params.taxId}` : "",
         businessName: params.businessName || "",
         responsibleOwnerName: params.responsibleOwnerName || "",
+        municipality: params.municipalityName
+          ? { name: params.municipalityName, county: "", id: "", displayName: "" }
+          : undefined,
       }),
       formationData: formationData,
       taxFilingData: generateTaxFilingData({ state: undefined }),
@@ -255,6 +262,28 @@ describe("<FilingsCalendarTaxAccess />", () => {
       await waitFor(() => {
         return expect(userDataUpdatedNTimes()).toEqual(1);
       });
+    });
+
+    it("updates the municipality after taxFiling lookup", async () => {
+      mockApi.postTaxFilingsLookup.mockResolvedValue(
+        generateTaxFilingUserData({
+          publicFiling: true,
+          taxId: "123456789123",
+          businessName: "MrFakesHotDogBonanza",
+          municipalityName: "TRENTON",
+        })
+      );
+      renderFilingsCalendarTaxAccess({
+        ...userDataWithPrefilledFields,
+        taxFilingData: generateTaxFilingData({
+          registeredISO: getCurrentDateISOString(),
+        }),
+      });
+      expect(mockApi.postTaxFilingsLookup).toHaveBeenCalled();
+      await waitFor(() => {
+        return expect(userDataUpdatedNTimes()).toEqual(1);
+      });
+      expect(mockFetchMunicipality).toHaveBeenCalledWith("TRENTON");
     });
 
     it("shows button component when state is FAILED and unregistered", async () => {
