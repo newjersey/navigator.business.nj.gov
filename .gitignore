@@ -7,6 +7,9 @@ web/node_modules
 .yarn/cache
 .yarn/install-state.gz
 
+# scripts
+get-user-location-output.csv
+
 # testing
 /coverage
 
