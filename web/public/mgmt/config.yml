@@ -1027,6 +1027,7 @@ collections:
           - { label: "Minority Owned", value: "minority-owned" }
           - { label: "Veteran Owned", value: "veteran-owned" }
           - { label: "Disabled Veteran Owned", value: "disabled-veteran" }
+          - { label: "LGBTQ Owned", value: "lgbtq-owned" }
       - { label: "is SBE (show if fewer than 120 employees)", name: "isSbe", widget: boolean, default: false }
   - name: "archived-certification-opportunities"
     label: "Cert Opps - Archived"

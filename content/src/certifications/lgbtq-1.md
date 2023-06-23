@@ -10,8 +10,11 @@ id: lgbtq
 callToActionLink: https://www.njportal.com/DOR/SBERegistry
 callToActionText: Apply for My LGBTQ+ Certification
 agency: []
+applicableOwnershipTypes:
+  - lgbtq-owned
 isSbe: false
 ---
+
 _While New Jersey state government does not give special consideration to vendors that hold_ Lesbian, Gay, Bisexual, Transgender, Queer, and Question-Owned Business (LGBTQ+) certificates, some State licenses, municipal or federal contracts do give special consideration. Learn more about [government contracts](https://business.nj.gov/pages/government-contracting).
 
 - - -
