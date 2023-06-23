@@ -17,6 +17,10 @@
       "name": "a disabled veteran"
     },
     {
+      "id": "lgbtq-owned",
+      "name": "a member of the LGBTQ+"
+    },
+    {
       "id": "none",
       "name": "none of the above"
     }
