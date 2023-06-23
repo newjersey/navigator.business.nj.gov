@@ -122,7 +122,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
         icon: <ButtonIcon svgFilename="business-green" sizePx="35px" />,
         itemText: navBarBusinessTitle,
         key: "dashboardMenuItem",
-        className: "profile-default-background-color",
+        className: "profile-menu-item",
       }),
 
       NavMenuItem({
@@ -134,7 +134,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
         itemText: Config.navigationDefaults.profileLinkText,
         key: "profileMenuItem",
         dataTestid: "profile-link",
-        className: "profile-default-background-color",
+        className: "profile-menu-item",
       }),
 
       <hr className="margin-0 hr-2px" key={"profile-break-2"} />,

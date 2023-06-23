@@ -28,12 +28,31 @@ $icon-offset: 45px;
   z-index: 5;
 }
 
+.Mui-focusVisible {
+  &.nav-menu-item-container {
+    background-color: $transparent;
+  }
+
+  &.nav-menu-item-container.bg-primary-extra-light-mui-selected-override {
+    background-color: $primary-extra-light;
+  }
+
+  &.profile-menu-item {
+    background-color: #fbfdf9;
+  }
+}
+
 .nav-menu-item-container {
   min-height: 47px;
 }
 
-.profile-default-background-color {
+.profile-menu-item {
   background-color: #fbfdf9;
+
+  &:hover {
+    background-color: $primary-extra-light;
+    font-weight: 700;
+  }
 }
 
 .Mui-selected.bg-primary-extra-light-mui-selected-override {

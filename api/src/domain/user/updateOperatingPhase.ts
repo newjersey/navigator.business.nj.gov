@@ -15,6 +15,7 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): 
     taskProgress: userData.taskProgress,
     isPublicFiling: isPublicFiling,
     currentPhase: originalPhase,
+    legalStructureId: userData.profileData.legalStructureId,
   });
 
   const phaseHasChanged = newPhase !== originalPhase;
@@ -41,13 +42,16 @@ const getNewPhase = ({
   currentPhase,
   isPublicFiling,
   taskProgress,
+  legalStructureId,
 }: {
   businessPersona: BusinessPersona;
   currentPhase: OperatingPhaseId;
   isPublicFiling: boolean;
   taskProgress: Record<string, TaskProgress>;
+  legalStructureId: string | undefined;
 }): OperatingPhaseId => {
-  const hasCompletedBusinessStructure = taskProgress[businessStructureTaskId] === "COMPLETED";
+  const hasCompletedBusinessStructure =
+    taskProgress[businessStructureTaskId] === "COMPLETED" || !!legalStructureId;
   const hasCompletedFormation = taskProgress[formationTaskId] === "COMPLETED";
   const hasCompletedTaxes = taskProgress[taxTaskId] === "COMPLETED";
 

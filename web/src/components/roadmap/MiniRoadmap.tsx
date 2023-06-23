@@ -22,7 +22,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
     userData?.profileData.operatingPhase
   ).displayBusinessStructurePrompt;
   const completedBusinessStructure = hasCompletedBusinessStructure(userData);
-
+  
   const onToggleStep = useCallback(
     async (stepNumber: number, setOpen: boolean, click: boolean): Promise<void> => {
       if (!userData || !updateQueue) return;

@@ -130,7 +130,7 @@ type Action =
   | "hide_contextual_info"
   | "formation_status_set_to_complete"
   | "show_tax_registration_date_modal"
-  | "tax_registration_status_set_to_complete"
+  | "show_tax_registration_success_snackbar"
   | "go_to_myNJ_registration"
   | "go_to_filing_detail_screen"
   | "go_to_profile_screen"
@@ -186,7 +186,7 @@ type Item =
   | "formation_legal_structure_modal"
   | "task_status_checkbox"
   | "tax_registration_nudge_button"
-  | "tax_registration_modal"
+  | "tax_registration_snackbar"
   | "task_tax_registration_date_modal"
   | "myNJ_prompt_modal_complete_button"
   | "calendar_date"
@@ -1723,16 +1723,16 @@ export default {
         },
       },
     },
-    tax_registration_modal: {
+    tax_registration_snackbar: {
       submit: {
-        tax_registration_status_set_to_complete: () => {
+        show_tax_registration_success_snackbar: () => {
           eventRunner.track({
             event: "graduation_phase_interactions",
             legacy_event_action: "submit",
             legacy_event_category: "tax_registration_modal",
             legacy_event_label: "tax_registration_status_set_to_complete",
-            action: "tax_registration_status_set_to_complete",
-            item: "tax_registration_modal",
+            action: "show_tax_registration_success_snackbar",
+            item: "tax_registration_snackbar",
           });
         },
       },
