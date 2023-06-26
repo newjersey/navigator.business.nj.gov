@@ -90,7 +90,7 @@ const TaskPage = (props: Props): ReactElement => {
     }
 
     const hideNextUrlSlug =
-      props.task.id === businessStructureTaskId && !hasCompletedBusinessStructure(userData as UserData);
+      props.task.id === businessStructureTaskId && !hasCompletedBusinessStructure(userData);
 
     return (
       <div
