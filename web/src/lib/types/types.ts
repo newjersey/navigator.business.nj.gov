@@ -470,7 +470,7 @@ export type ProfileTabs = (typeof _profileTabs)[number];
 export const profileTabs = _profileTabs as unknown as ProfileTabs[];
 
 export interface UpdateQueue {
-  queue: (userData: UserData) => UpdateQueue;
+  queue: (userData: Partial<UserData>) => UpdateQueue;
   queueTaskProgress: (taskProgress: Record<string, TaskProgress>) => UpdateQueue;
   queueUser: (user: Partial<BusinessUser>) => UpdateQueue;
   queueProfileData: (profileData: Partial<ProfileData>) => UpdateQueue;

@@ -3,22 +3,18 @@ import { SectionAccordion } from "@/components/dashboard/SectionAccordion";
 import { Step } from "@/components/Step";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import {
-  hasCompletedBusinessStructure,
-  LookupOperatingPhaseById,
-  UserData,
-} from "@businessnjgovnavigator/shared/";
+import { hasCompletedBusinessStructure, LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
 import { ReactElement } from "react";
 
 export const Roadmap = (): ReactElement => {
   const { roadmap, sectionNamesInRoadmap } = useRoadmap();
-  const { updateQueue } = useUserData();
+  const { userData } = useUserData();
 
   const displayBusinessStructurePrompt = LookupOperatingPhaseById(
-    updateQueue?.current().profileData.operatingPhase
+    userData?.profileData.operatingPhase
   ).displayBusinessStructurePrompt;
 
-  const completedBusinessStructure = hasCompletedBusinessStructure(updateQueue?.current() as UserData);
+  const completedBusinessStructure = hasCompletedBusinessStructure(userData);
 
   return (
     <>

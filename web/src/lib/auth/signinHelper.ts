@@ -11,7 +11,7 @@ import {
   setRegistrationDimension,
   setUserId,
 } from "@/lib/utils/analytics-helpers";
-import { createEmptyUser } from "@businessnjgovnavigator/shared/";
+import { createEmptyUser, UserData } from "@businessnjgovnavigator/shared/";
 import { Dispatch } from "react";
 import { UpdateQueue } from "../types/types";
 import { AuthAction } from "./AuthContext";
@@ -38,11 +38,10 @@ export type SelfRegRouter = {
 export const onSelfRegister = (
   router: SelfRegRouter,
   updateQueue: UpdateQueue | undefined,
+  userData: UserData | undefined,
   setRegistrationAlertStatus: AuthAlertContextType["setRegistrationAlertStatus"],
   options?: { useReturnToLink: boolean }
 ): void => {
-  const userData = updateQueue?.current();
-
   if (!userData || !updateQueue) {
     return;
   }

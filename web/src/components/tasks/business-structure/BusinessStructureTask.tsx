@@ -45,7 +45,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   } = useFormContextHelper(createProfileFieldErrorMap());
 
   useEffect(() => {
-    const current = updateQueue?.current();
+    const current = userDataFromHook.userData;
     return () => {
       if (current?.profileData.legalStructureId) {
         queueUpdateTaskProgress(props.task.id, "COMPLETED");

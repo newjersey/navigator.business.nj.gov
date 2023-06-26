@@ -28,8 +28,8 @@ interface Props {
 
 export const FilingsCalendar = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { updateQueue } = useUserData();
-  const userData = props.CMS_ONLY_fakeUserData ?? updateQueue?.current();
+  const { updateQueue, userData: userDataFromHook } = useUserData();
+  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook;
 
   const currentDate = getCurrentDate();
   const currentYear = getCurrentDate().year().toString();

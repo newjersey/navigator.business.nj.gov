@@ -164,12 +164,12 @@ const ProfilePage = (props: Props): ReactElement => {
 
   FormFuncWrapper(
     () => {
-      if (!updateQueue) {
+      if (!updateQueue || !userData) {
         return;
       }
 
       const dateOfFormationHasBeenDeleted =
-        updateQueue.current().profileData.dateOfFormation !== profileData.dateOfFormation &&
+        userData.profileData.dateOfFormation !== profileData.dateOfFormation &&
         profileData.dateOfFormation === undefined;
 
       if (dateOfFormationHasBeenDeleted) {
@@ -186,30 +186,31 @@ const ProfilePage = (props: Props): ReactElement => {
 
       setIsLoading(true);
 
-      sendOnSaveAnalytics(updateQueue.current().profileData, profileData);
+      sendOnSaveAnalytics(userData.profileData, profileData);
 
       if (profileData.employerId && profileData.employerId.length > 0) {
         updateQueue.queueTaskProgress({ [einTaskId]: "COMPLETED" });
       }
 
-      if (updateQueue.current().profileData.taxId !== profileData.taxId) {
+      if (userData.profileData.taxId !== profileData.taxId) {
         updateQueue.queueTaxFilingData({ state: undefined, registeredISO: undefined, filings: [] });
       }
 
-      if (updateQueue.current().profileData.industryId !== profileData.industryId) {
-        updateQueue.queueTaskProgress({ [naicsCodeTaskId]: "NOT_STARTED" });
-        updateQueue.queue({ ...updateQueue.current(), taskItemChecklist: {} } as UserData);
+      if (userData.profileData.industryId !== profileData.industryId) {
+        updateQueue.queue({ taskItemChecklist: {} }).queueTaskProgress({ [naicsCodeTaskId]: "NOT_STARTED" });
       }
 
       updateQueue.queueProfileData(profileData);
 
       (async (): Promise<void> => {
-        updateQueue.queue(await postGetAnnualFilings(updateQueue.current()));
-        updateQueue.update().then(async () => {
-          setIsLoading(false);
-          setAlert("SUCCESS");
-          await redirect({ success: true });
-        });
+        updateQueue
+          .queue(await postGetAnnualFilings(updateQueue.current()))
+          .update()
+          .then(async () => {
+            setIsLoading(false);
+            setAlert("SUCCESS");
+            await redirect({ success: true });
+          });
       })();
     },
     (isValid, _errors, pageChange) => {
@@ -344,7 +345,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileField
           fieldName="municipality"
-          isVisible={profileData.nexusLocationInNewJersey === true}
+          isVisible={profileData.nexusLocationInNewJersey}
           locked={shouldLockMunicipality()}
         >
           <ProfileMunicipality />
