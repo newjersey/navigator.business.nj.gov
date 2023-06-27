@@ -13,9 +13,9 @@ divisionPhone: "(609) 341-3426"
 industryId: "detective"
 webflowType: "individual-license"
 licenseCertificationClassification: ""
-summaryDescriptionMd: "All staff working in your detective agency must be registered before they can be scheduled for work.
-
-All New Jersey (NJ) private detective agencies are required to mail in employee registrations to the NJ State Police Private Detective Unit within 48 hours of fingerprinting new employees."
+summaryDescriptionMd: >
+  All staff working in your detective agency must be registered before they can be scheduled for work.
+  All New Jersey (NJ) private detective agencies are required to mail in employee registrations to the NJ State Police Private Detective Unit within 48 hours of fingerprinting new employees.
 ---
 
 ---
