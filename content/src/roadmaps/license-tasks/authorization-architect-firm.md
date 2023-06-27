@@ -3,7 +3,7 @@ filename: authorization-architect-firm
 urlSlug: authorization-architect-firm
 name: Obtain a Certificate of Authorization for Your Firm
 webflowName: "Architecture: Certificate of Authorization for Your Firm"
-summaryDescriptionMd: |
+summaryDescriptionMd: >
   You need a certificate of authorization to open an architecture firm.
 industryId:
   - architecture
