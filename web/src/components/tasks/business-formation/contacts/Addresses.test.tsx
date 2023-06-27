@@ -178,7 +178,7 @@ describe("Formation - Addresses", () => {
           await attemptApiSubmission(page);
 
           const signerErrorText = (): HTMLElement | null => {
-            return screen.queryByText(Config.formation.fields.signers.errorBannerSignerName);
+            return screen.queryByText(Config.formation.fields.signers.errorBannerCheckbox);
           };
           expect(signerErrorText()).toBeInTheDocument();
           const nameTd = screen.getByText(incorporators[0].addressLine1, { exact: false });
@@ -186,7 +186,7 @@ describe("Formation - Addresses", () => {
           fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="edit"]') as Element);
           page.fillText("Address name", "Elrond");
           page.clickAddressSubmit();
-          expect(signerErrorText()).not.toBeInTheDocument();
+          expect(signerErrorText()).toBeInTheDocument();
         });
 
         it("fires validations when signers do not check the sign checkbox", async () => {

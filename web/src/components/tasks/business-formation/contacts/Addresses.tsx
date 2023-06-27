@@ -10,7 +10,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import styles from "@/styles/sections/members.module.scss";
 import { FormationFields, FormationIncorporator, FormationMember } from "@businessnjgovnavigator/shared/";
 import { Checkbox, IconButton, useMediaQuery } from "@mui/material";
-import React, { ChangeEvent, ReactElement, ReactNode, useState } from "react";
+import React, { ChangeEvent, Fragment, ReactElement, ReactNode, useState } from "react";
 
 interface DisplayContent {
   header: string;
@@ -23,6 +23,7 @@ interface DisplayContent {
   snackbarHeader: string;
   snackbarBody: string;
   defaultCheckbox?: string;
+  error?: string;
 }
 
 interface Props<T> {
@@ -33,6 +34,7 @@ interface Props<T> {
   needSignature?: boolean;
   createEmptyAddress: () => T;
   displayContent: DisplayContent;
+  hasError: boolean;
 }
 
 export const Addresses = <T extends FormationMember | FormationIncorporator>(
@@ -118,49 +120,60 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
         {props.addressData.length > 0 ? (
           props.addressData.map((it, index) => {
             return (
-              <tr className="margin-bottom-1" key={index} data-testid={`${props.fieldName}-${index}`}>
-                <td className="break-word">{it.name}</td>
-                <td className="break-word">{formatAddress(it)}</td>
-                {"signature" in it ? (
-                  <td className="padding-y-0">
-                    {" "}
-                    {renderSignatureColumn({
-                      onChange: (event) => {
-                        return handleSignerCheckbox(event, index);
-                      },
-                      checked: it.signature,
-                      fieldName: props.fieldName,
-                      index,
-                    })}
+              <Fragment key={index}>
+                <tr className="margin-bottom-1" key={index} data-testid={`${props.fieldName}-${index}`}>
+                  <td className="break-word">{it.name}</td>
+                  <td className="break-word">{formatAddress(it)}</td>
+                  {"signature" in it ? (
+                    <td className="padding-y-0">
+                      {" "}
+                      {renderSignatureColumn({
+                        onChange: (event) => {
+                          return handleSignerCheckbox(event, index);
+                        },
+                        checked: it.signature,
+                        fieldName: props.fieldName,
+                        index,
+                      })}
+                    </td>
+                  ) : (
+                    <></>
+                  )}
+                  <td className="display-inline-flex">
+                    <div>
+                      <IconButton
+                        aria-label="edit"
+                        onClick={(): void => {
+                          setEditIndex(index);
+                          setModalOpen(true);
+                        }}
+                        className="usa-button usa-button--unstyled"
+                      >
+                        <Icon className="usa-icon--size-3">edit</Icon>
+                      </IconButton>
+                    </div>
+                    <div className="margin-x-1 border-1px border-base-light" />
+                    <div>
+                      <IconButton
+                        aria-label="delete"
+                        onClick={(): void => deleteAddress(index)}
+                        className="usa-button usa-button--unstyled"
+                      >
+                        <Icon className="usa-icon--size-3">delete</Icon>
+                      </IconButton>
+                    </div>
                   </td>
+                </tr>
+                {doesFieldHaveError(props.fieldName) && "signature" in it && !it.signature ? (
+                  <tr key={`error-${index}`}>
+                    <td colSpan={4} className="text-error-dark text-bold">
+                      {Config.formation.fields.signers.errorBannerCheckbox}
+                    </td>
+                  </tr>
                 ) : (
                   <></>
                 )}
-                <td className="display-inline-flex">
-                  <div>
-                    <IconButton
-                      aria-label="edit"
-                      onClick={(): void => {
-                        setEditIndex(index);
-                        setModalOpen(true);
-                      }}
-                      className="usa-button usa-button--unstyled"
-                    >
-                      <Icon className="usa-icon--size-3">edit</Icon>
-                    </IconButton>
-                  </div>
-                  <div className="margin-x-1 border-1px border-base-light" />
-                  <div>
-                    <IconButton
-                      aria-label="delete"
-                      onClick={(): void => deleteAddress(index)}
-                      className="usa-button usa-button--unstyled"
-                    >
-                      <Icon className="usa-icon--size-3">delete</Icon>
-                    </IconButton>
-                  </div>
-                </td>
-              </tr>
+              </Fragment>
             );
           })
         ) : (
@@ -168,7 +181,11 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
         )}
       </tbody>
       <tfoot>
-        {props.addressData.length === 0 ? (
+        {props.hasError && props.addressData.length === 0 ? (
+          <tr>
+            <td className={"text-error-dark text-bold"}>{props.displayContent.error}</td>
+          </tr>
+        ) : props.addressData.length === 0 ? (
           <tr>
             <td colSpan={4}>{props.displayContent.placeholder}</td>
           </tr>
@@ -179,80 +196,104 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
     </table>
   );
 
-  const renderMobileTable =
-    props.addressData.length > 0 ? (
-      <>
-        <table
-          data-testid={`addresses-${props.fieldName}-table-mobile`}
-          className={`addresses-mobile margin-y-2`}
-        >
-          <tbody>
-            {props.addressData.map((it, index) => {
+  const renderMobileTable = (
+    <>
+      <table
+        data-testid={`addresses-${props.fieldName}-table-mobile`}
+        className={`addresses-mobile margin-y-2`}
+      >
+        <tbody>
+          {props.addressData.length > 0 ? (
+            props.addressData.map((it, index) => {
               return (
-                <tr key={index}>
-                  <td className="flex-column">
-                    <div className="flex-column">
-                      <div className="margin-bottom-2 break-word">{it.name}</div>
-                      <div className="break-word">{it.addressLine1}</div>
-                      <div className="break-word">{it.addressLine2}</div>
-                      <div className="margin-bottom-2">
-                        {it.addressCity}, {it.addressState?.name} {it.addressZipCode}
+                <Fragment key={index}>
+                  <tr>
+                    <td className="flex-column">
+                      <div className="flex-column">
+                        <div className="margin-bottom-2 break-word">{it.name}</div>
+                        <div className="break-word">{it.addressLine1}</div>
+                        <div className="break-word">{it.addressLine2}</div>
+                        <div className="margin-bottom-2">
+                          {it.addressCity}, {it.addressState?.name} {it.addressZipCode}
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex flex-row fac fjb">
-                      <span className="flex fac">
-                        {"signature" in it ? (
-                          <>
-                            {" "}
-                            <Content>{`${Config.formation.fields.signers.signColumnLabel}*`}</Content>
-                            <div>
-                              {renderSignatureColumn({
-                                onChange: (event) => {
-                                  return handleSignerCheckbox(event, index);
-                                },
-                                checked: it.signature,
-                                fieldName: props.fieldName,
-                                index,
-                              })}{" "}
-                            </div>
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </span>
-                      <span>
-                        <span className="vl border-base-light padding-y-05 padding-right-2 margin-right-2">
+                      <div className="flex flex-row fac fjb">
+                        <span className="flex fac">
+                          {"signature" in it ? (
+                            <>
+                              {" "}
+                              <Content>{`${Config.formation.fields.signers.signColumnLabel}*`}</Content>
+                              <div>
+                                {renderSignatureColumn({
+                                  onChange: (event) => {
+                                    return handleSignerCheckbox(event, index);
+                                  },
+                                  checked: it.signature,
+                                  fieldName: props.fieldName,
+                                  index,
+                                })}{" "}
+                              </div>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </span>
+                        <span>
+                          <span className="vl border-base-light padding-y-05 padding-right-2 margin-right-2">
+                            <IconButton
+                              aria-label="edit"
+                              onClick={(): void => {
+                                setEditIndex(index);
+                                setModalOpen(true);
+                              }}
+                              className="usa-button usa-button--unstyled width-auto"
+                            >
+                              <Icon className="usa-icon--size-3">edit</Icon>
+                            </IconButton>
+                          </span>
                           <IconButton
-                            aria-label="edit"
-                            onClick={(): void => {
-                              setEditIndex(index);
-                              setModalOpen(true);
-                            }}
+                            aria-label="delete"
+                            onClick={(): void => deleteAddress(index)}
                             className="usa-button usa-button--unstyled width-auto"
                           >
-                            <Icon className="usa-icon--size-3">edit</Icon>
+                            <Icon className="usa-icon--size-3">delete</Icon>
                           </IconButton>
                         </span>
-                        <IconButton
-                          aria-label="delete"
-                          onClick={(): void => deleteAddress(index)}
-                          className="usa-button usa-button--unstyled width-auto"
-                        >
-                          <Icon className="usa-icon--size-3">delete</Icon>
-                        </IconButton>
-                      </span>
-                    </div>
-                  </td>
-                </tr>
+                      </div>
+                    </td>
+                  </tr>
+                  {doesFieldHaveError(props.fieldName) && "signature" in it && !it.signature ? (
+                    <tr key={`error-${index}`}>
+                      <td className="flex-column text-error-dark text-bold">
+                        {Config.formation.fields.signers.errorBannerCheckbox}
+                      </td>
+                    </tr>
+                  ) : (
+                    <></>
+                  )}
+                </Fragment>
               );
-            })}
-          </tbody>
-        </table>
-      </>
-    ) : (
-      <div className="margin-bottom-3" />
-    );
-
+            })
+          ) : (
+            <></>
+          )}
+        </tbody>
+        <tfoot>
+          {props.hasError && props.addressData.length === 0 ? (
+            <tr>
+              <td className={"text-error-dark text-bold"}>{props.displayContent.error}</td>
+            </tr>
+          ) : props.addressData.length === 0 ? (
+            <tr>
+              <td className="flex-column">{props.displayContent.placeholder}</td>
+            </tr>
+          ) : (
+            <></>
+          )}
+        </tfoot>
+      </table>
+    </>
+  );
   return (
     <>
       {alert && (
