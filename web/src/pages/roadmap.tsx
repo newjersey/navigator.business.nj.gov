@@ -1,4 +1,4 @@
-import { LoadingIndicator } from "@/components/LoadingIndicator";
+import { CircularIndicator } from "@/components/CircularIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageSkeleton } from "@/components/PageSkeleton";
@@ -26,7 +26,7 @@ const RoadmapPage = (): ReactElement => {
       <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
         <SingleColumnContainer>
           <div className="margin-top-6">
-            <LoadingIndicator />
+            <CircularIndicator />
           </div>
         </SingleColumnContainer>
       </main>

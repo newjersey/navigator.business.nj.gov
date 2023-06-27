@@ -1,8 +1,8 @@
+import { TaskElement } from "@/components/TaskElement";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { Task } from "@/lib/types/types";
-import { TaskElement } from "@/pages/tasks/[taskUrlSlug]";
 import { ReactElement } from "react";
 
 const TaskPreview = (props: PreviewProps): ReactElement => {

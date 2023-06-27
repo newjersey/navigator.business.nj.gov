@@ -176,6 +176,7 @@ commands:
             echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_DEV' >> $BASH_ENV
             echo 'export LICENSE_STATUS_BASE_URL=$LICENSE_STATUS_BASE_URL_DEV' >> $BASH_ENV
             echo 'export FORMATION_API_BASE_URL=$FORMATION_API_BASE_URL_DEV' >> $BASH_ENV
+            echo 'export FEATURE_EXPORT_PDF=$FEATURE_EXPORT_PDF_DEV' >> $BASH_ENV
             echo 'export FORMATION_API_KEY=$FORMATION_API_KEY_DEV' >> $BASH_ENV
             echo 'export FORMATION_API_ACCOUNT=$FORMATION_API_ACCOUNT_DEV' >> $BASH_ENV
             echo 'export GOV2GO_REGISTRATION_API_KEY=$GOV2GO_REGISTRATION_API_KEY_DEV' >> $BASH_ENV
@@ -231,6 +232,7 @@ commands:
             echo 'export FEATURE_BUSINESS_FLLP=true' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FLP=false' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FLC=true' >> $BASH_ENV
+            echo 'export FEATURE_EXPORT_PDF=true' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FCORP=false' >> $BASH_ENV
             echo 'export FEATURE_LANDING_PAGE_REDIRECT=false' >> $BASH_ENV
             echo 'export ALTERNATE_LANDING_PAGE_URL=$ALTERNATE_LANDING_PAGE_URL' >> $BASH_ENV
@@ -257,6 +259,7 @@ commands:
           command: |
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_STAGING' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_STAGING' >> $BASH_ENV
+            echo 'export FEATURE_EXPORT_PDF=$FEATURE_EXPORT_PDF_STAGING' >> $BASH_ENV
             echo 'export BUSINESS_NAME_BASE_URL=$BUSINESS_NAME_BASE_URL_STAGING' >> $BASH_ENV
             echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_STAGING' >> $BASH_ENV
             echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_STAGING' >> $BASH_ENV
@@ -298,6 +301,7 @@ commands:
           command: |
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_PROD' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_PROD' >> $BASH_ENV
+            echo 'export FEATURE_EXPORT_PDF=$FEATURE_EXPORT_PDF_PROD' >> $BASH_ENV
             echo 'export BUSINESS_NAME_BASE_URL=$BUSINESS_NAME_BASE_URL_PROD' >> $BASH_ENV
             echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_PROD' >> $BASH_ENV
             echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_PROD' >> $BASH_ENV

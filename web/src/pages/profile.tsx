@@ -1,5 +1,5 @@
+import { CircularIndicator } from "@/components/CircularIndicator";
 import { FormationDateDeletionModal } from "@/components/FormationDateDeletionModal";
-import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
@@ -743,7 +743,7 @@ const ProfilePage = (props: Props): ReactElement => {
                   >
                     {userData === undefined ? (
                       <div className="padding-top-0 desktop:padding-top-6 padding-bottom-15">
-                        <LoadingIndicator />
+                        <CircularIndicator />
                       </div>
                     ) : (
                       <>
