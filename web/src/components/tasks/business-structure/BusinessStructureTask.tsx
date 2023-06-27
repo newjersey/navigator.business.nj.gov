@@ -45,11 +45,10 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   } = useFormContextHelper(createProfileFieldErrorMap());
 
   useEffect(() => {
-    const current = userDataFromHook.userData;
     return () => {
-      if (current?.profileData.legalStructureId) {
+      if (userData?.profileData.legalStructureId) {
         queueUpdateTaskProgress(props.task.id, "COMPLETED");
-      } else if (!current?.profileData.legalStructureId) {
+      } else if (!userData?.profileData.legalStructureId) {
         queueUpdateTaskProgress(props.task.id, "NOT_STARTED");
       }
     };
@@ -99,7 +98,15 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     setShowRadioQuestion(true);
     await updateQueue.update();
 
-    setProfileData(updateQueue.current().profileData);
+    const updatedProfileState: ProfileData = {
+      ...profileData,
+      legalStructureId: undefined,
+      operatingPhase:
+        profileData.operatingPhase === "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
+          ? "GUEST_MODE"
+          : profileData.operatingPhase,
+    };
+    setProfileData(updatedProfileState);
   };
 
   const preLookupContent = props.task.contentMd.split("${businessStructureSelectionComponent}")[0];
