@@ -175,15 +175,27 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
           displayName: record?.townDisplayName || profileData.municipality?.displayName || "",
         };
 
-        await updateQueue
-          .queue(userDataToSet)
-          .queueProfileData({
-            taxId: profileData.taxId,
-            encryptedTaxId: encryptedTaxId,
-            responsibleOwnerName: profileData.responsibleOwnerName,
-            municipality: municipalityToSet,
-          })
-          .update();
+        updateQueue.queue(userDataToSet).queueProfileData({
+          taxId: profileData.taxId,
+          encryptedTaxId: encryptedTaxId,
+          municipality: municipalityToSet,
+        });
+
+        if (userDataToSet.taxFilingData.state === "SUCCESS") {
+          if (displayBusinessName()) {
+            updateQueue.queueProfileData({
+              businessName: profileData.businessName,
+            });
+          }
+
+          if (displayResponsibleOwnerName()) {
+            updateQueue.queueProfileData({
+              responsibleOwnerName: profileData.responsibleOwnerName,
+            });
+          }
+        }
+
+        await updateQueue.update();
       } catch {
         setOnAPIfailed("UNKNOWN");
         setIsLoading(false);
