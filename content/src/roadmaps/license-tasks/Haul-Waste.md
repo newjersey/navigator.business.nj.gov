@@ -3,7 +3,8 @@ filename: haul-waste
 urlSlug: haul-waste
 name: Obtain Your Waste Hauling Decal, if Applicable
 webflowName: "Home Improvement Contractor: Waste Hauling Decal"
-summaryDescriptionMd: Waste facilities will **only** allow registered vehicles
+summaryDescriptionMd: >
+  Waste facilities will **only** allow registered vehicles
   with a decal to discard waste. If you collect or haul waste for other
   companies, you need to be a [commercial waste
   hauler](https://www.wastedecals.nj.gov/swt2.html), which is a more

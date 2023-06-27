@@ -13,11 +13,11 @@ divisionPhone: "(609) 633-9473"
 industryId: "school-bus"
 webflowType: "object-vehicle"
 licenseCertificationClassification: ""
-summaryDescriptionMd: "Your commercial buses need to be inspected by the Motor Vehicle Commission’s School Bus Inspection Unit **before** obtaining registration and license plates for them.
-
-:::infoAlert
-Your vehicle will need to be inspected twice a year.
-:::"
+summaryDescriptionMd: >
+  Your commercial buses need to be inspected by the Motor Vehicle Commission’s School Bus Inspection Unit **before** obtaining registration and license plates for them.
+  :::infoAlert
+  Your vehicle will need to be inspected twice a year.
+  :::
 ---
 
 ---
