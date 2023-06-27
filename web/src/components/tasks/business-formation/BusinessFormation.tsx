@@ -1,5 +1,5 @@
+import { CircularIndicator } from "@/components/CircularIndicator";
 import { Content } from "@/components/Content";
-import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
@@ -39,7 +39,7 @@ import { useRouter } from "next/router";
 import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
 
 interface Props {
-  task: Task;
+  task: Task | undefined;
   displayContent: TasksDisplayContent;
 }
 
@@ -129,9 +129,9 @@ export const BusinessFormation = (props: Props): ReactElement => {
     }
     if (checkQueryValue(router, QUERIES.completeFiling, "false")) {
       setStepIndex(LookupStepIndexByName("Review"));
-      router.replace({ pathname: `/tasks/${props.task.urlSlug}` }, undefined, { shallow: true });
+      router.replace({ pathname: `/tasks/${props.task?.urlSlug}` }, undefined, { shallow: true });
     }
-  }, [router, router.isReady, props.task.urlSlug]);
+  }, [router, router.isReady, props.task?.urlSlug]);
 
   useEffect(() => {
     const shouldFetchCompletedFiling = (): boolean => {
@@ -165,11 +165,13 @@ export const BusinessFormation = (props: Props): ReactElement => {
           .update()
           .then(() => {
             setIsLoadingGetFiling(false);
-            router.replace({ pathname: `/tasks/${props.task.urlSlug}` }, undefined, { shallow: true });
+            router.replace({ pathname: `/tasks/${props.task?.urlSlug}` }, undefined, { shallow: true });
           });
       }
     })();
-  }, [router.isReady, updateQueue, router, props.task.urlSlug, userData]);
+  }, [router.isReady, updateQueue, router, props.task?.urlSlug, userData]);
+
+  if (!props.task) return <></>;
 
   const setFieldsInteracted = (
     fields: FieldsForErrorHandling[],
@@ -222,7 +224,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
       <div className="flex flex-column minh-38">
         <TaskHeader task={props.task} />
         <div className="margin-top-6">
-          <LoadingIndicator />
+          <CircularIndicator />
         </div>
       </div>
     );

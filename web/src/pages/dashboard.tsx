@@ -1,3 +1,4 @@
+import { CircularIndicator } from "@/components/CircularIndicator";
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
@@ -5,7 +6,6 @@ import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout"
 import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuestion";
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { Header } from "@/components/Header";
-import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
 import { FieldLabelDescriptionOnly } from "@/components/onboarding/FieldLabelDescriptionOnly";
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
@@ -181,7 +181,7 @@ const DashboardPage = (props: Props): ReactElement => {
             )}
           </>
         ) : (
-          <LoadingIndicator />
+          <CircularIndicator />
         )}
       </div>
     </div>
@@ -194,7 +194,7 @@ const DashboardPage = (props: Props): ReactElement => {
         <main id="main">
           {!userData || userData?.onboardingFormProgress !== "COMPLETED" ? (
             <div className="margin-top-3 desktop:margin-top-0 padding-top-0 desktop:padding-top-6 padding-bottom-15">
-              <LoadingIndicator />
+              <CircularIndicator />
             </div>
           ) : isDesktopAndUp ? (
             <RightSidebarPageLayout

@@ -12,6 +12,14 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "jspdf" },
+    },
+    {
+      from: {},
+      to: { path: "html2canvas" },
+    },
+    {
+      from: {},
       to: { path: "@aws-crypto/sha256-browser" },
     },
     {

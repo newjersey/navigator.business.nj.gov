@@ -1,5 +1,5 @@
+import { CircularIndicator } from "@/components/CircularIndicator";
 import { Content } from "@/components/Content";
-import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { ModalOneButton } from "@/components/ModalOneButton";
 import { NavBar } from "@/components/navbar/NavBar";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
@@ -73,7 +73,7 @@ const LoadingPage = (): ReactElement => {
       <NavBar logoOnly={true} />
       <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
         <SingleColumnContainer>
-          <div className="margin-top-6">{!showLoginErrorModal && <LoadingIndicator />}</div>
+          <div className="margin-top-6">{!showLoginErrorModal && <CircularIndicator />}</div>
         </SingleColumnContainer>
         <ModalOneButton
           isOpen={showLoginErrorModal}
