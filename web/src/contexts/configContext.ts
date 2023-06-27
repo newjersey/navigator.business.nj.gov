@@ -14,6 +14,7 @@ import * as DashboardSnackbars from "@businessnjgovnavigator/content/fieldConfig
 import * as DashboardTabs from "@businessnjgovnavigator/content/fieldConfig/dashboard-tabs.json";
 import * as DeferredLocation from "@businessnjgovnavigator/content/fieldConfig/deferred-location.json";
 import * as Ein from "@businessnjgovnavigator/content/fieldConfig/ein.json";
+import * as exportPdf from "@businessnjgovnavigator/content/fieldConfig/export-pdf.json";
 import * as FormationInterimSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-interim-success-page.json";
 import * as FormationSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-success-page.json";
 import * as NaicsCode from "@businessnjgovnavigator/content/fieldConfig/naics-code.json";
@@ -54,7 +55,8 @@ const merged = JSON.parse(
       BusinessFormation,
       TaxAccess,
       BusinessStructureTask,
-      BusinessStructurePrompt
+      BusinessStructurePrompt,
+      exportPdf
     )
   )
 );
@@ -83,7 +85,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof BusinessStructureTask &
   typeof TaxAccess &
   typeof DashboardSnackbars &
-  typeof BusinessStructurePrompt;
+  typeof BusinessStructurePrompt &
+  typeof exportPdf;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(

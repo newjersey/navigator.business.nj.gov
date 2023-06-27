@@ -1,12 +1,8 @@
-import { Content } from "@/components/Content";
-import { DeferredLocationQuestion } from "@/components/DeferredLocationQuestion";
 import { NavBar } from "@/components/navbar/NavBar";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { PageSkeleton } from "@/components/PageSkeleton";
-import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
-import { TaskCTA } from "@/components/TaskCTA";
-import { TaskHeader } from "@/components/TaskHeader";
+import { TaskBody } from "@/components/TaskBody";
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
@@ -15,35 +11,28 @@ import { EinTask } from "@/components/tasks/EinTask";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
 import { TaxTask } from "@/components/tasks/TaxTask";
-import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { allowFormation } from "@/lib/domain-logic/allowFormation";
-import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
 import { Task, TasksDisplayContent } from "@/lib/types/types";
-import { rswitch, templateEval } from "@/lib/utils/helpers";
-import { getModifiedTaskContent, getTaskFromRoadmap, getUrlSlugs } from "@/lib/utils/roadmap-helpers";
+import { rswitch } from "@/lib/utils/helpers";
+import { getTaskFromRoadmap, getUrlSlugs } from "@/lib/utils/roadmap-helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   businessStructureTaskId,
   formationTaskId,
-  generateMunicipality,
-  generateProfileData,
-  generateUserData,
   hasCompletedBusinessStructure,
   Municipality,
-  UserData,
 } from "@businessnjgovnavigator/shared/";
-import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
-import { ReactElement, ReactNode, useMemo } from "react";
+import { ReactElement, useMemo } from "react";
 
 interface Props {
   task: Task;
@@ -63,22 +52,6 @@ const TaskPage = (props: Props): ReactElement => {
       nextUrlSlug: arrayOfTasks[currentUrlSlugIndex + 1],
     };
   }, [props.task.urlSlug, roadmap]);
-
-  const addNaicsCodeData = (contentMd: string): string => {
-    const naicsCode = userData?.profileData.naicsCode || "";
-    const naicsTemplateValue = getNaicsDisplayMd(naicsCode);
-    return templateEval(contentMd, { naicsCode: naicsTemplateValue });
-  };
-
-  const getTaskBody = (): ReactElement => {
-    const task = {
-      ...props.task,
-      contentMd: addNaicsCodeData(getModifiedTaskContent(roadmap, props.task, "contentMd")),
-      callToActionLink: getModifiedTaskContent(roadmap, props.task, "callToActionLink"),
-      callToActionText: getModifiedTaskContent(roadmap, props.task, "callToActionText"),
-    };
-    return <TaskElement task={task}>{<UnlockedBy task={props.task} />}</TaskElement>;
-  };
 
   const renderNextAndPreviousButtons = (): ReactElement | undefined => {
     const isValidLegalStructure = allowFormation(
@@ -124,14 +97,6 @@ const TaskPage = (props: Props): ReactElement => {
     );
   };
 
-  const renderFormationTask = (): ReactElement => {
-    const taskInRoadmap = getTaskFromRoadmap(roadmap, props.task.id);
-    if (!taskInRoadmap) {
-      return <></>;
-    }
-    return <BusinessFormation task={taskInRoadmap} displayContent={props.displayContent} />;
-  };
-
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
       <NextSeo title={`Business.NJ.gov Navigator - ${props.task.name}`} />
@@ -157,154 +122,17 @@ const TaskPage = (props: Props): ReactElement => {
             "business-structure": (
               <BusinessStructureTask task={getTaskFromRoadmap(roadmap, props.task.id) ?? props.task} />
             ),
-            [formationTaskId]: renderFormationTask(),
-            default: getTaskBody(),
+            [formationTaskId]: (
+              <BusinessFormation
+                task={getTaskFromRoadmap(roadmap, props.task.id)}
+                displayContent={props.displayContent}
+              />
+            ),
+            default: <TaskBody task={props.task} />,
           })}
         </TaskSidebarPageLayout>
       </PageSkeleton>
     </MunicipalitiesContext.Provider>
-  );
-};
-
-const getPostOnboardingQuestion = (task: Task): ReactElement => {
-  if (!task.postOnboardingQuestion) {
-    return <></>;
-  }
-  return rswitch(task.postOnboardingQuestion, {
-    "construction-renovation": (
-      <RadioQuestion id="construction-renovation" onboardingKey="constructionRenovationPlan" />
-    ),
-    default: <></>,
-  });
-};
-
-interface TaskElementProps {
-  task: Task;
-  children?: ReactNode | ReactNode[];
-  overrides?: {
-    skipDeferredLocationPrompt: boolean;
-  };
-}
-
-export const TaskElement = (props: TaskElementProps): ReactElement => {
-  const hasPostOnboardingQuestion = !!props.task.postOnboardingQuestion;
-  const shouldShowDeferredQuestion = props.task.requiresLocation;
-  let hasDeferredLocationQuestion = false;
-
-  const deferredLocationQuestion = {
-    before: "",
-    innerContent: "",
-    after: "",
-  };
-
-  const postOnboardingQuestion = {
-    before: "",
-    innerContent: "",
-    after: "",
-  };
-
-  if (props.task.contentMd) {
-    const [beforePostOnboarding, afterPostOnboarding] =
-      props.task.contentMd.split("{postOnboardingQuestion}");
-    postOnboardingQuestion.before = beforePostOnboarding;
-    postOnboardingQuestion.after = afterPostOnboarding;
-    hasDeferredLocationQuestion =
-      props.task.contentMd.includes("${beginLocationDependentSection}") &&
-      props.task.contentMd.includes("${endLocationDependentSection}");
-
-    const [beforeDeferredLocation, rest] = props.task.contentMd.split("${beginLocationDependentSection}");
-    deferredLocationQuestion.before = beforeDeferredLocation;
-    deferredLocationQuestion.after = rest;
-    if (rest) {
-      const [innerContentDeferredLocation, afterDeferredLocation] = rest.split(
-        "${endLocationDependentSection}"
-      );
-      deferredLocationQuestion.innerContent = innerContentDeferredLocation;
-      deferredLocationQuestion.after = afterDeferredLocation;
-    }
-  }
-
-  const getAgencyText = (): string => {
-    const agency = props.task.agencyId ? LookupTaskAgencyById(props.task.agencyId).name : "";
-    const context = props.task.agencyAdditionalContext ?? "";
-    if (agency && context) {
-      return `${agency}, ${context}`;
-    } else if (agency) {
-      return agency;
-    } else if (context) {
-      return context;
-    }
-    return "";
-  };
-
-  const getFakeUserDataWithMunicipality = (): UserData => {
-    return generateUserData({
-      profileData: generateProfileData({
-        municipality: generateMunicipality({}),
-      }),
-    });
-  };
-
-  return (
-    <div id="taskElement" className="flex flex-column space-between minh-38">
-      <div>
-        <TaskHeader task={props.task} />
-        {props.children}
-        <Content>{props.task.summaryDescriptionMd || ""}</Content>
-
-        {hasDeferredLocationQuestion && (
-          <>
-            <Content>{deferredLocationQuestion.before}</Content>
-            {shouldShowDeferredQuestion && (
-              <>
-                {props.overrides?.skipDeferredLocationPrompt && (
-                  <DeferredLocationQuestion
-                    innerContent={deferredLocationQuestion.innerContent}
-                    CMS_ONLY_fakeUserData={getFakeUserDataWithMunicipality()}
-                  />
-                )}
-                {!props.overrides?.skipDeferredLocationPrompt && (
-                  <DeferredLocationQuestion innerContent={deferredLocationQuestion.innerContent} />
-                )}
-              </>
-            )}
-            <Content>{deferredLocationQuestion.after}</Content>
-          </>
-        )}
-
-        {hasPostOnboardingQuestion && (
-          <>
-            <Content>{postOnboardingQuestion.before}</Content>
-            {getPostOnboardingQuestion(props.task)}
-            {postOnboardingQuestion.after && <Content>{postOnboardingQuestion.after}</Content>}
-          </>
-        )}
-
-        {!hasPostOnboardingQuestion && !hasDeferredLocationQuestion && (
-          <>
-            <Content>{props.task.contentMd}</Content>
-          </>
-        )}
-
-        {(props.task.agencyId || props.task.formName || props.task.agencyAdditionalContext) && (
-          <hr className="margin-y-3" />
-        )}
-
-        {(props.task.agencyId || props.task.agencyAdditionalContext) && (
-          <div>
-            <span className="h5-styling">{`${Config.taskDefaults.issuingAgencyText}: `}</span>
-            <span className="h6-styling">{getAgencyText()}</span>
-          </div>
-        )}
-        {props.task.formName && (
-          <div>
-            <span className="h5-styling">{`${Config.taskDefaults.formNameText}: `}</span>
-            <span className="h6-styling">{props.task.formName}</span>
-          </div>
-        )}
-      </div>
-      <TaskCTA link={props.task.callToActionLink} text={props.task.callToActionText} />
-    </div>
   );
 };
 
