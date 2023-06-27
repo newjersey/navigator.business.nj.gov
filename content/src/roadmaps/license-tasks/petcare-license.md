@@ -1,22 +1,29 @@
 ---
-id: "petcare-license"
-webflowId: "648c973177d79ad743b0e41e"
-urlSlug: "petcare-license"
-name: "Obtain an Animal Facilities License, if Required"
-webflowName: "Animal Facilities"
-filename: "petcare-license"
+filename: petcare-license
+urlSlug: petcare-license
+name: Obtain an Animal Facilities License, if Required
+webflowName: "Pet Care: Animal Facilities License"
+summaryDescriptionMd: >-
+  `Animal facilities|animal-facilities` need to apply for license(s) with their
+  local government annually. Your facility may need multiple licenses depending
+  on the services you provide.
+
+
+  Check with your local government's department of health for specific license application requirements and to schedule a site inspection prior to your application. 
+
+  To learn more, see the New Jersey Department of Health [Guidelines for Municipal Licensure of Animal Facilities](https://www.nj.gov/health/vph/documents/guidelines_for_municipal_licensure_of_animal_facilities.pdf).
+industryId:
+  - petcare
+id: petcare-license
+webflowId: 648c973177d79ad743b0e41e
 licenseCertificationClassification: ""
 ---
-
-`Animal facilities|animal-facilities` need to apply for license(s) with their local government annually. Your facility may need multiple licenses depending on the services you provide.
-
-Check with your local government's department of health for specific license application requirements and to schedule a site inspection prior to your application. For additional details, see the New Jersey Department of Health [general guidelines](https://www.nj.gov/health/vph/documents/guidelines_for_municipal_licensure_of_animal_facilities.pdf).
 
 ---
 
 ### Common Types of Licenses
 
-- **Kennel:** Board, breed, or sell dogs. Partial boarding (doggy daycares) are also considered kennels
+- **Kennel:** Board, breed, or sell dogs (partial boarding, such as doggy daycares, are also considered kennels)
 - **Pound:** House dogs captured by animal control
 - **Shelter:** House animals surrendered by their owners
 - **Pet Shop:** Display animals for sale but are not part of a kennel
