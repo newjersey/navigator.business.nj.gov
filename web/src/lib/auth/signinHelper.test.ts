@@ -76,13 +76,13 @@ describe("SigninHelper", () => {
 
     it("sets registration alert to IN_PROGRESS", async () => {
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
-      await onSelfRegister(fakeRouter, updateQueue, mockSetAlertStatus);
+      await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
       expect(mockSetAlertStatus).toHaveBeenCalledWith("IN_PROGRESS");
     });
 
     it("posts userData to api self-reg with current pathname included when useReturnToLink is not true", async () => {
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
-      await onSelfRegister(fakeRouter, updateQueue, mockSetAlertStatus);
+      await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
         ...userData,
         preferences: { ...userData.preferences, returnToLink: "/tasks/some-url" },
@@ -95,7 +95,7 @@ describe("SigninHelper", () => {
       });
       updateQueue = new UpdateQueueFactory(userData, update);
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
-      await onSelfRegister(fakeRouter, updateQueue, mockSetAlertStatus, { useReturnToLink: true });
+      await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus, { useReturnToLink: true });
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
         ...userData,
         preferences: { ...userData.preferences, returnToLink: "/pathname?query=true" },
@@ -108,7 +108,7 @@ describe("SigninHelper", () => {
         userData: returnedUserData,
         authRedirectURL: "/some-url",
       });
-      await onSelfRegister(fakeRouter, updateQueue, mockSetAlertStatus);
+      await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
       await waitFor(() => {
         return expect(mockPush).toHaveBeenCalledWith("/some-url");
       });
@@ -117,7 +117,7 @@ describe("SigninHelper", () => {
 
     it("sets alert to DUPLICATE_ERROR on 409 response code", async () => {
       mockApi.postSelfReg.mockRejectedValue(409);
-      await onSelfRegister(fakeRouter, updateQueue, mockSetAlertStatus);
+      await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
       await waitFor(() => {
         return expect(mockSetAlertStatus).toHaveBeenCalledWith("DUPLICATE_ERROR");
       });
@@ -127,7 +127,7 @@ describe("SigninHelper", () => {
 
     it("sets alert to RESPONSE_ERROR on generic error", async () => {
       mockApi.postSelfReg.mockRejectedValue(500);
-      await onSelfRegister(fakeRouter, updateQueue, mockSetAlertStatus);
+      await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
       await waitFor(() => {
         return expect(mockSetAlertStatus).toHaveBeenCalledWith("RESPONSE_ERROR");
       });

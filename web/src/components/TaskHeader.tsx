@@ -15,11 +15,10 @@ interface Props {
 }
 
 export const TaskHeader = (props: Props): ReactElement => {
-  const { userData, updateQueue } = useUserData();
+  const { userData } = useUserData();
   const { roadmap } = useRoadmap();
 
-  const currentTaskProgress: TaskProgress =
-    updateQueue?.current().taskProgress[props.task.id] ?? "NOT_STARTED";
+  const currentTaskProgress: TaskProgress = userData?.taskProgress[props.task.id] ?? "NOT_STARTED";
 
   const { Config } = useConfig();
 

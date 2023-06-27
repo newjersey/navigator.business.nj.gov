@@ -19,9 +19,9 @@ export const MiniRoadmap = (props: Props): ReactElement => {
   const { updateQueue, userData } = useUserData();
 
   const displayBusinessStructurePrompt = LookupOperatingPhaseById(
-    updateQueue?.current().profileData.operatingPhase
+    userData?.profileData.operatingPhase
   ).displayBusinessStructurePrompt;
-  const completedBusinessStructure = hasCompletedBusinessStructure(updateQueue?.current());
+  const completedBusinessStructure = hasCompletedBusinessStructure(userData);
 
   const onToggleStep = useCallback(
     async (stepNumber: number, setOpen: boolean, click: boolean): Promise<void> => {

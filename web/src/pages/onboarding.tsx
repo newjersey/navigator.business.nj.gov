@@ -77,7 +77,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [user, setUser] = useState<BusinessUser>(createEmptyUser(ABStorageFactory().getExperience()));
   const [error, setError] = useState<ProfileError | undefined>(undefined);
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
-  const { updateQueue, createUpdateQueue } = useUserData();
+  const { updateQueue, userData, createUpdateQueue } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const headerRef = useRef<HTMLDivElement>(null);
   const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
@@ -161,7 +161,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         return;
       }
 
-      let currentUserData = updateQueue?.current();
+      let currentUserData = userData;
       if (currentUserData) {
         setProfileData(currentUserData.profileData);
         setUser(currentUserData.user);
