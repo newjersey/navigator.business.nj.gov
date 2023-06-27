@@ -156,7 +156,7 @@ describe("<TaxAccessStepTwo />", () => {
       fireEvent.change(screen.getByTestId("businessName"), { target: { value: "MrFakesHotDogBonanza" } });
     });
 
-    it("updates taxId but not BusinessName on submit", async () => {
+    it("updates taxId but not businessName on submit", async () => {
       renderComponent(userDataWithPrefilledFields);
       mockApi.postTaxFilingsOnboarding.mockResolvedValue({
         ...userDataWithPrefilledFields,
@@ -180,12 +180,36 @@ describe("<TaxAccessStepTwo />", () => {
       await waitFor(() => {
         return expect(currentUserData().profileData.businessName).not.toEqual("zoom");
       });
-      await waitFor(() => {
-        return expect(currentUserData().profileData.taxId).toEqual("999888777666");
+      return expect(currentUserData().profileData.taxId).toEqual("999888777666");
+      return expect(currentUserData().profileData.encryptedTaxId).toEqual(undefined);
+    });
+
+    it("updates businessName on submit if tax filing is success", async () => {
+      renderComponent(userDataWithPrefilledFields);
+      mockApi.postTaxFilingsOnboarding.mockResolvedValue({
+        ...userDataWithPrefilledFields,
+        profileData: {
+          ...userDataWithPrefilledFields.profileData,
+          municipality: undefined,
+        },
+        taxFilingData: generateTaxFilingData({
+          state: "SUCCESS",
+          businessName: userDataWithPrefilledFields.profileData.businessName,
+          errorField: undefined,
+        }),
       });
-      await waitFor(() => {
-        return expect(currentUserData().profileData.encryptedTaxId).toEqual(undefined);
+      fireEvent.change(screen.getByLabelText("Business name"), {
+        target: { value: "zoom" },
       });
+      fireEvent.change(screen.getByLabelText("Tax id"), {
+        target: { value: "999888777666" },
+      });
+      clickSave();
+      await waitFor(() => {
+        return expect(currentUserData().profileData.businessName).toEqual("zoom");
+      });
+      return expect(currentUserData().profileData.taxId).toEqual("999888777666");
+      return expect(currentUserData().profileData.encryptedTaxId).toEqual(undefined);
     });
 
     it("displays in-line error and alert when businessName field is empty and save button is clicked", async () => {
