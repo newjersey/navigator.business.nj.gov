@@ -7,8 +7,8 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { generateProfileData, generateUserData } from "@businessnjgovnavigator/shared/";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
-import { generateProfileData, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 

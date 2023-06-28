@@ -1,5 +1,5 @@
-import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
-import { completeNewBusinessOnboarding } from "../support/helpers";
+import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
+import { onOnboardingPage } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPage";
 
 describe("Onboarding [feature] [all] [group2]", () => {
   beforeEach(() => {
@@ -21,15 +21,6 @@ describe("Onboarding [feature] [all] [group2]", () => {
     onOnboardingPage.clickNext();
 
     cy.url().should("include", "onboarding?page=3");
-    cy.get('[data-testid="business-structure-learn-more"]').click({ force: true });
-    cy.get('[data-testid="info-panel"]').should("exist");
-    cy.get('[aria-label="close panel"]').click({ force: true });
-    cy.get('[data-testid="info-panel"]').should("not.exist");
-
-    onOnboardingPage.selectLegalStructure("general-partnership");
-    onOnboardingPage.clickNext();
-
-    cy.url().should("include", "onboarding?page=4");
   });
 
   it("user data is updated if opted into newsletter", () => {

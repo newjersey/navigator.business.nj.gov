@@ -17,7 +17,7 @@ import {
   LookupLegalStructureById,
   LookupOperatingPhaseById,
   UserData,
-} from "@businessnjgovnavigator/shared/index";
+} from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useState } from "react";
 
@@ -28,8 +28,8 @@ interface Props {
 
 export const FilingsCalendar = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { updateQueue } = useUserData();
-  const userData = props.CMS_ONLY_fakeUserData ?? updateQueue?.current();
+  const { updateQueue, userData: userDataFromHook } = useUserData();
+  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook;
 
   const currentDate = getCurrentDate();
   const currentYear = getCurrentDate().year().toString();
@@ -101,25 +101,24 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     };
 
     if (displayToggleButton) {
-      return userData?.preferences.isCalendarFullView ? (
+      return (
         <UnStyledButton
-          style="light"
-          noRightMargin
-          className="font-body-2xs padding-y-05 padding-x-1"
+          style={"transparentBgColor"}
+          isRightMarginRemoved
+          className="font-body-2xs padding-x-1 text-normal text-base border-1px border-base-light hide-unhide-button padding-y-11px"
           onClick={handleCalendarOnClick}
         >
-          <Icon className="usa-icon--size-3 margin-right-05">list</Icon>
-          {Config.dashboardDefaults.calendarListViewButton}
-        </UnStyledButton>
-      ) : (
-        <UnStyledButton
-          style="light"
-          noRightMargin
-          className="font-body-2xs padding-y-05 padding-x-1"
-          onClick={handleCalendarOnClick}
-        >
-          <Icon className="usa-icon--size-3 margin-right-05">grid_view</Icon>
-          {Config.dashboardDefaults.calendarGridViewButton}
+          {userData?.preferences.isCalendarFullView ? (
+            <>
+              <Icon className="usa-icon--size-3 margin-right-05">list</Icon>
+              {Config.dashboardDefaults.calendarListViewButton}
+            </>
+          ) : (
+            <>
+              <Icon className="usa-icon--size-3 margin-right-05">grid_view</Icon>
+              {Config.dashboardDefaults.calendarGridViewButton}
+            </>
+          )}
         </UnStyledButton>
       );
     }
@@ -173,9 +172,9 @@ export const FilingsCalendar = (props: Props): ReactElement => {
               <div className="h6-styling">
                 <span className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</span>{" "}
                 <UnStyledButton
-                  style="tertiary"
-                  underline
-                  intercomButton
+                  style="default"
+                  isUnderline
+                  isIntercomEnabled
                   onClick={(): void => {
                     analytics.event.share_calendar_feedback.click.open_live_chat();
                   }}

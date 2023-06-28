@@ -38,6 +38,14 @@ export const ContactsStep = (): ReactElement => {
     return (Config.formation.fields as any)[field].description;
   };
 
+  const isCorpAndLp = (): boolean => {
+    return [...corpLegalStructures, "limited-partnership"].includes(state.formationFormData.legalType);
+  };
+
+  const isCorp = (): boolean => {
+    return [...corpLegalStructures].includes(state.formationFormData.legalType);
+  };
+
   return (
     <>
       <div data-testid="contacts-step">
@@ -45,7 +53,7 @@ export const ContactsStep = (): ReactElement => {
         {shouldShowMembers() && (
           <>
             <hr className="margin-top-0 margin-bottom-3" />
-            {doesFieldHaveError("members") && (
+            {doesFieldHaveError("members") && !isCorp() && (
               <Alert variant="error">
                 {
                   getErrorStateForField({ field: "members", formationFormData: state.formationFormData })
@@ -53,7 +61,7 @@ export const ContactsStep = (): ReactElement => {
                 }
               </Alert>
             )}
-            <Members />
+            <Members hasError={doesFieldHaveError("members")} />
           </>
         )}
         <hr className="margin-top-0 margin-bottom-3" />
@@ -62,7 +70,7 @@ export const ContactsStep = (): ReactElement => {
             {getErrorStateForField({ field: "signers", formationFormData: state.formationFormData }).label}
           </Alert>
         )}
-        {doesFieldHaveError("incorporators") && (
+        {doesFieldHaveError("incorporators") && !isCorpAndLp() && (
           <Alert variant="error">
             {
               getErrorStateForField({ field: "incorporators", formationFormData: state.formationFormData })
@@ -111,7 +119,9 @@ export const ContactsStep = (): ReactElement => {
               snackbarBody: Config.formation.fields.incorporators.successSnackbarBody,
               modalTitle: Config.formation.fields.incorporators.modalTitle,
               modalSaveButton: Config.formation.fields.incorporators.addButtonText,
+              error: Config.formation.fields.incorporators.error,
             }}
+            hasError={doesFieldHaveError("signers") || doesFieldHaveError("incorporators")}
           />
         ) : (
           <Signatures />

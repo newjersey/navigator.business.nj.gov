@@ -21,11 +21,11 @@ export const EinDisplay = (props: Props): ReactElement => {
         <div className="margin-right-1">
           <Content>{templateEval(Config.ein.successText, { ein: displayAsEin(props.employerId) })}</Content>
         </div>
-        <UnStyledButton style="tertiary" underline onClick={props.onEdit}>
+        <UnStyledButton style="default" isUnderline onClick={props.onEdit}>
           {Config.taskDefaults.editText}
         </UnStyledButton>
         <span className="margin-x-105">|</span>
-        <UnStyledButton style="tertiary" underline onClick={props.onRemove}>
+        <UnStyledButton style="default" isUnderline onClick={props.onRemove}>
           {Config.taskDefaults.removeText}
         </UnStyledButton>
       </div>

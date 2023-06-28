@@ -1,14 +1,17 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 /* eslint-disable testing-library/await-async-utils */
 
+import {
+  clickDeferredSaveButton,
+  completeBusinessStructureTask,
+} from "@businessnjgovnavigator/cypress/support/helpers/helpers";
+import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
-import { clickDeferredSaveButton, completeNewBusinessOnboarding } from "../support/helpers";
 
 describe("Guest Dashboard [feature] [all] [group2]", () => {
   const industry = LookupIndustryById("home-contractor");
   const legalStructureId = "limited-liability-company";
-  const townDisplayName = "Atlantic City";
 
   beforeEach(() => {
     cy.clearCookies();
@@ -18,8 +21,6 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     cy.visit("/onboarding");
     completeNewBusinessOnboarding({
       industry,
-      townDisplayName,
-      legalStructureId,
     });
   });
 
@@ -32,6 +33,8 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     cy.get('[data-testid="self-reg-snackbar"]').should("be.visible");
     cy.get('[aria-label="close"]').click({ force: true });
     cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
+
+    completeBusinessStructureTask({ legalStructureId });
 
     // answer deferred question to get local-requirements task
     onDashboardPage.getHomeBased().should("exist");

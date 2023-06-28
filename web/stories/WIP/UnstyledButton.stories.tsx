@@ -21,6 +21,6 @@ const Template: ComponentStory<typeof UnStyledButton> = ({ children, ...args }) 
 export const Standard = Template.bind({});
 
 Standard.args = {
-  style: "tertiary",
+  style: "default",
   children: "button",
 };

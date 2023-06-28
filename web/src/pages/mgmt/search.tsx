@@ -10,6 +10,7 @@ import { searchConfig } from "@/lib/search/searchConfig";
 import { searchContextualInfo } from "@/lib/search/searchContextualInfo";
 import { searchFundings } from "@/lib/search/searchFundings";
 import { searchIndustries } from "@/lib/search/searchIndustries";
+import { searchLicenseEvents } from "@/lib/search/searchLicenseEvents";
 import { searchPostOnboarding } from "@/lib/search/searchPostOnboarding";
 import { searchSidebarCards } from "@/lib/search/searchSidebarCards";
 import { searchSteps } from "@/lib/search/searchSteps";
@@ -24,6 +25,7 @@ import { loadAllArchivedContextualInfo, loadAllContextualInfo } from "@/lib/stat
 import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
+import { loadAllLicenses } from "@/lib/static/loadLicenses";
 import { loadAllPostOnboarding } from "@/lib/static/loadPostOnboarding";
 import { loadAllLicenseTasks, loadAllTasksOnly } from "@/lib/static/loadTasks";
 import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
@@ -32,6 +34,7 @@ import {
   ContextualInfoFile,
   Filing,
   Funding,
+  LicenseEvent,
   PostOnboardingFile,
   RoadmapDisplayContent,
   SidebarCardContent,
@@ -61,6 +64,7 @@ interface Props {
   contextualInfo: ContextualInfoFile[];
   archivedContextualInfo: ContextualInfoFile[];
   postOnboarding: PostOnboardingFile[];
+  licenseEvents: LicenseEvent[];
   cmsConfig: any;
 }
 
@@ -82,6 +86,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [contextualInfoMatches, setContextualInfoMatches] = useState<Match[]>([]);
   const [archivedContextualInfoMatches, setArchivedContextualInfoMatches] = useState<Match[]>([]);
   const [postOnboardingMatches, setPostOnboardingMatches] = useState<Match[]>([]);
+  const [licenseEventMatches, setLicenseEventMatches] = useState<Match[]>([]);
   const [groupedConfigMatches, setGroupedConfigMatches] = useState<GroupedConfigMatch[]>([]);
 
   const { Config } = useConfig();
@@ -122,6 +127,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     setContextualInfoMatches(searchContextualInfo(props.contextualInfo, lowercaseTerm));
     setArchivedContextualInfoMatches(searchContextualInfo(props.archivedContextualInfo, lowercaseTerm));
     setPostOnboardingMatches(searchPostOnboarding(props.postOnboarding, lowercaseTerm));
+    setLicenseEventMatches(searchLicenseEvents(props.licenseEvents, lowercaseTerm));
     setHasSearched(true);
   };
 
@@ -137,6 +143,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...industryMatches,
         ...stepsMatches,
         ...filingMatches,
+        ...licenseEventMatches,
         ...sidebarCardMatches,
         ...webflowLicenseMatches,
         ...archivedContextualInfoMatches,
@@ -165,8 +172,9 @@ const SearchContentPage = (props: Props): ReactElement => {
     "Roadmaps - Settings": stepsMatches,
   };
 
-  const filingsCollection = {
+  const calendarCollection = {
     "Taxes Filings - All": filingMatches,
+    "License Expiration / Renewal Events": licenseEventMatches,
   };
 
   const dashboardCollection = {
@@ -204,11 +212,12 @@ const SearchContentPage = (props: Props): ReactElement => {
         matchedCollections={{ "Biz Form - Config": [] }}
         groupedConfigMatches={groupedConfigMatches}
       />
+
       <MatchCollection matchedCollections={certCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={fundingCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={roadmapsCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={taskCollection} groupedConfigMatches={groupedConfigMatches} />
-      <MatchCollection matchedCollections={filingsCollection} groupedConfigMatches={groupedConfigMatches} />
+      <MatchCollection matchedCollections={calendarCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={dashboardCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={miscCollection} groupedConfigMatches={groupedConfigMatches} />
     </div>
@@ -248,6 +257,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       contextualInfo: loadAllContextualInfo(),
       archivedContextualInfo: loadAllArchivedContextualInfo(),
       postOnboarding: loadAllPostOnboarding(),
+      licenseEvents: loadAllLicenses(),
       cmsConfig: loadCmsConfig(),
     },
   };

@@ -4,8 +4,8 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
-import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { TaskHeader } from "@/components/TaskHeader";
+import { LegalStructureRadio } from "@/components/tasks/business-structure/LegalStructureRadio";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -14,11 +14,13 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { MediaQueries } from "@/lib/PageSizes";
 import { createProfileFieldErrorMap, Task } from "@/lib/types/types";
 import { getFlow, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { hasCompletedFormation, UserData } from "@businessnjgovnavigator/shared";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { useMediaQuery } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
@@ -35,7 +37,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   const userDataFromHook = useUserData();
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
   const updateQueue = userDataFromHook.updateQueue;
-
+  const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const {
     FormFuncWrapper,
     onSubmit,
@@ -43,18 +45,10 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   } = useFormContextHelper(createProfileFieldErrorMap());
 
   useEffect(() => {
-    if (!userData) {
-      return;
-    }
-    setProfileData(userData.profileData);
-  }, [userData]);
-
-  useEffect(() => {
-    const current = updateQueue?.current();
     return () => {
-      if (current?.profileData.legalStructureId) {
+      if (userData?.profileData.legalStructureId) {
         queueUpdateTaskProgress(props.task.id, "COMPLETED");
-      } else if (!current?.profileData.legalStructureId) {
+      } else if (!userData?.profileData.legalStructureId) {
         queueUpdateTaskProgress(props.task.id, "NOT_STARTED");
       }
     };
@@ -65,6 +59,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     if (!userData) {
       return;
     }
+    setProfileData(userData.profileData);
     setShowRadioQuestion(!userData.profileData.legalStructureId);
   }, userData);
 
@@ -85,6 +80,33 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     }
     setShowRadioQuestion(true);
     queueUpdateTaskProgress(props.task.id, "IN_PROGRESS");
+  };
+
+  const removeTaskCompletion = async (): Promise<void> => {
+    if (!updateQueue) return;
+
+    updateQueue
+      .queueProfileData({
+        legalStructureId: undefined,
+        operatingPhase:
+          profileData.operatingPhase === "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
+            ? "GUEST_MODE"
+            : profileData.operatingPhase,
+      })
+      .queueTaskProgress({ [props.task.id]: "NOT_STARTED" });
+
+    setShowRadioQuestion(true);
+    await updateQueue.update();
+
+    const updatedProfileState: ProfileData = {
+      ...profileData,
+      legalStructureId: undefined,
+      operatingPhase:
+        profileData.operatingPhase === "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
+          ? "GUEST_MODE"
+          : profileData.operatingPhase,
+    };
+    setProfileData(updatedProfileState);
   };
 
   const preLookupContent = props.task.contentMd.split("${businessStructureSelectionComponent}")[0];
@@ -112,7 +134,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   };
 
   return (
-    <div className="minh-38">
+    <div className="minh-38" data-testid={"business-structure-task"}>
       <TaskHeader task={props.task} tooltipText={getTaskProgressTooltip()} />
       <UnlockedBy task={props.task} />
       <Content>{preLookupContent}</Content>
@@ -129,10 +151,9 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
               onBack: (): void => {},
             }}
           >
-            <h3>{Config.businessStructureTask.radioQuestionHeader}</h3>
-            <OnboardingLegalStructure />
+            <LegalStructureRadio taskId={props.task.id} />
             <div className="margin-top-4">
-              <SecondaryButton isColor="primary" onClick={onSubmit}>
+              <SecondaryButton isColor="primary" onClick={onSubmit} dataTestId={"save-business-structure"}>
                 {Config.businessStructureTask.saveButton}
               </SecondaryButton>
             </div>
@@ -143,23 +164,35 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
         <>
           <h3>{Config.businessStructureTask.completedHeader}</h3>
           <Alert variant="success">
-            <div className="flex flex-row" data-testid="success-alert">
+            <div className={`flex ${isLargeScreen ? "flex-row" : "flex-column"}`} data-testid="success-alert">
               <Content>
                 {templateEval(Config.businessStructureTask.successMessage, {
                   legalStructure: LookupLegalStructureById(userData.profileData.legalStructureId).name,
                 })}
               </Content>
               {canEdit() ? (
-                <UnStyledButton
-                  className="margin-left-2"
-                  style="tertiary"
-                  underline
-                  onClick={setBackToEditing}
-                >
-                  {Config.taskDefaults.editText}
-                </UnStyledButton>
+                <div>
+                  <UnStyledButton
+                    className={`${isLargeScreen ? "margin-left-2" : ""}`}
+                    style="default"
+                    isUnderline
+                    onClick={setBackToEditing}
+                  >
+                    {Config.taskDefaults.editText}
+                  </UnStyledButton>
+                  <span className="margin-left-1">|</span>
+
+                  <UnStyledButton
+                    className="margin-left-1"
+                    style="default"
+                    isUnderline
+                    onClick={removeTaskCompletion}
+                  >
+                    {Config.taskDefaults.removeText}
+                  </UnStyledButton>
+                </div>
               ) : (
-                <div className="margin-left-2">
+                <div className="margin-left-2 flex flex-row flex-align-center">
                   <ArrowTooltip title={Config.profileDefaults.lockedFieldTooltipText}>
                     <div className="fdr fac font-body-lg">
                       <Icon>help_outline</Icon>

@@ -1,6 +1,7 @@
 import { FilingsCalendarTaxAccess } from "@/components/filings-calendar/FilingsCalendarTaxAccess";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
+import * as fetchMunicipality from "@/lib/async-content-fetchers/fetchMunicipalities";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
@@ -38,8 +39,13 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   postTaxFilingsOnboarding: jest.fn(),
   postTaxFilingsLookup: jest.fn(),
 }));
+jest.mock("@/lib/async-content-fetchers/fetchMunicipalities", () => ({
+  fetchMunicipalityByName: jest.fn(),
+}));
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;
+const mockFetchMunicipality = (fetchMunicipality as jest.Mocked<typeof fetchMunicipality>)
+  .fetchMunicipalityByName;
 
 const Config = getMergedConfig();
 let setRegistrationModalIsVisible: jest.Mock;
@@ -81,6 +87,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
     businessName?: string;
     responsibleOwnerName?: string;
     taxId?: string;
+    municipalityName?: string;
   }): UserData => {
     const legalStructureId = randomLegalStructure({ requiresPublicFiling: params.publicFiling }).id;
 
@@ -116,6 +123,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
         encryptedTaxId: params.taxId ? `encrypted-${params.taxId}` : "",
         businessName: params.businessName || "",
         responsibleOwnerName: params.responsibleOwnerName || "",
+        municipality: params.municipalityName
+          ? { name: params.municipalityName, county: "", id: "", displayName: "" }
+          : undefined,
       }),
       formationData: formationData,
       taxFilingData: generateTaxFilingData({ state: undefined }),
@@ -205,6 +215,30 @@ describe("<FilingsCalendarTaxAccess />", () => {
     expect(screen.getByText(Config.taxCalendar.snackbarSuccessHeader)).toBeInTheDocument();
   });
 
+  it("closes the success alert when the close button is clicked", async () => {
+    mockApi.postTaxFilingsOnboarding.mockResolvedValue({
+      ...userDataWithPrefilledFields,
+      taxFilingData: generateTaxFilingData({
+        state: "SUCCESS",
+        registeredISO: getCurrentDateISOString(),
+      }),
+    });
+
+    renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
+    openModal();
+    clickSave();
+    await waitFor(() => {
+      return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
+    });
+    await screen.findByTestId("tax-success");
+    expect(screen.getByText(Config.taxCalendar.snackbarSuccessHeader)).toBeInTheDocument();
+    expect(screen.getByTestId("close-icon-button")).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("close-icon-button"));
+    await waitFor(() => {
+      expect(screen.queryByText(Config.taxCalendar.snackbarSuccessHeader)).not.toBeInTheDocument();
+    });
+  });
+
   describe("different taxFiling states and update behavior", () => {
     it("does not do taxFiling lookup on page load if not registered", async () => {
       renderFilingsCalendarTaxAccess({
@@ -228,6 +262,28 @@ describe("<FilingsCalendarTaxAccess />", () => {
       await waitFor(() => {
         return expect(userDataUpdatedNTimes()).toEqual(1);
       });
+    });
+
+    it("updates the municipality after taxFiling lookup", async () => {
+      mockApi.postTaxFilingsLookup.mockResolvedValue(
+        generateTaxFilingUserData({
+          publicFiling: true,
+          taxId: "123456789123",
+          businessName: "MrFakesHotDogBonanza",
+          municipalityName: "TRENTON",
+        })
+      );
+      renderFilingsCalendarTaxAccess({
+        ...userDataWithPrefilledFields,
+        taxFilingData: generateTaxFilingData({
+          registeredISO: getCurrentDateISOString(),
+        }),
+      });
+      expect(mockApi.postTaxFilingsLookup).toHaveBeenCalled();
+      await waitFor(() => {
+        return expect(userDataUpdatedNTimes()).toEqual(1);
+      });
+      expect(mockFetchMunicipality).toHaveBeenCalledWith("TRENTON");
     });
 
     it("shows button component when state is FAILED and unregistered", async () => {

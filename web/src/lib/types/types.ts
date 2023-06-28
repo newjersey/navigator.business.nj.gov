@@ -29,7 +29,6 @@ export type UserDataError = "NO_DATA" | "CACHED_ONLY" | "UPDATE_FAILED";
 
 export type ProfileError =
   | "REQUIRED_ESSENTIAL_QUESTION"
-  | "REQUIRED_LEGAL"
   | "REQUIRED_EXISTING_BUSINESS"
   | "REQUIRED_FOREIGN_BUSINESS_TYPE"
   | "REQUIRED_NEXUS_LOCATION_IN_NJ"
@@ -471,7 +470,7 @@ export type ProfileTabs = (typeof _profileTabs)[number];
 export const profileTabs = _profileTabs as unknown as ProfileTabs[];
 
 export interface UpdateQueue {
-  queue: (userData: UserData) => UpdateQueue;
+  queue: (userData: Partial<UserData>) => UpdateQueue;
   queueTaskProgress: (taskProgress: Record<string, TaskProgress>) => UpdateQueue;
   queueUser: (user: Partial<BusinessUser>) => UpdateQueue;
   queueProfileData: (profileData: Partial<ProfileData>) => UpdateQueue;

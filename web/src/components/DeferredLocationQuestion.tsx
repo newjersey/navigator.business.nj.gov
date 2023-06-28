@@ -65,13 +65,13 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
               })}
             </Content>
           </div>
-          <UnStyledButton style="tertiary" underline onClick={(): void => setShowEditLocation(true)}>
+          <UnStyledButton style="default" isUnderline onClick={(): void => setShowEditLocation(true)}>
             {Config.deferredLocation.editText}
           </UnStyledButton>
           <span className="margin-x-105">|</span>
           <UnStyledButton
-            style="tertiary"
-            underline
+            style="default"
+            isUnderline
             onClick={(): void => {
               onRemoveLocation();
             }}
@@ -90,7 +90,7 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
           <ProfileMunicipality hideErrorLabel={true} />
         </DeferredOnboardingQuestion>
       ) : (
-        <div className="padding-3">
+        <div data-testid="deferred-location-content" className="padding-3">
           {showSuccessBanner && successBanner()}
           <Content>{props.innerContent}</Content>
         </div>

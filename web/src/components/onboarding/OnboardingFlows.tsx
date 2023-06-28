@@ -3,7 +3,6 @@ import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboardi
 import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBusinessPersona";
 import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
-import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
 import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
@@ -58,14 +57,6 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
         ),
       },
       {
-        component: (
-          <>
-            <FieldLabelOnboarding fieldName="legalStructureId" />
-            <OnboardingLegalStructure<OnboardingErrors> errorTypes={["REQUIRED_LEGAL"]} />
-          </>
-        ),
-      },
-      {
         component: <OnboardingNameAndEmail<OnboardingErrors> errorTypes={["ALERT_BAR"]} />,
       },
     ],
@@ -97,15 +88,6 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
               essentialQuestionErrorTypes={["REQUIRED_ESSENTIAL_QUESTION"]}
               errorTypes={["ALERT_BAR"]}
             />
-          </>
-        ),
-      },
-      {
-        name: "legal-structure-page",
-        component: (
-          <>
-            <FieldLabelOnboarding fieldName="legalStructureId" />
-            <OnboardingLegalStructure<OnboardingErrors> errorTypes={["REQUIRED_LEGAL"]} />
           </>
         ),
       },

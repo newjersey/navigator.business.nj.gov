@@ -7,8 +7,10 @@ import {
   getIncompleteTaskCount,
   getTotalTaskCount,
 } from "@/lib/domain-logic/roadmapTaskCounters";
+import { roadmapWithSectionSpecificTasks } from "@/lib/domain-logic/roadmapWithSectionSpecificTasks";
 import { SidebarCardContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
+import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
 import { styled } from "@mui/material";
 import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
 import { ReactElement, ReactNode } from "react";
@@ -33,9 +35,13 @@ export const SidebarCardTaskProgress = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { userData } = useUserData();
   const { roadmap } = useRoadmap();
+  const modifiedRoadmap = LookupOperatingPhaseById(userData?.profileData.operatingPhase)
+    .displayBusinessStructurePrompt
+    ? roadmapWithSectionSpecificTasks(roadmap, "PLAN")
+    : roadmap;
 
   const constructIncompleteTaskPhrase = (): { required: string; optional: string } => {
-    const { optional, required } = getIncompleteTaskCount(roadmap, userData);
+    const { optional, required } = getIncompleteTaskCount(modifiedRoadmap, userData);
 
     const optionalTaskPhrase =
       optional === 1
@@ -54,8 +60,8 @@ export const SidebarCardTaskProgress = (props: Props): ReactElement => {
   };
 
   const progressBarValue = (): number => {
-    const completedCount = getCompletedTaskCount(roadmap, userData).total;
-    const totalCount = getTotalTaskCount(roadmap);
+    const completedCount = getCompletedTaskCount(modifiedRoadmap, userData).total;
+    const totalCount = getTotalTaskCount(modifiedRoadmap);
 
     return Math.round((completedCount / totalCount) * 100);
   };

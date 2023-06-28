@@ -6,3 +6,70 @@
 .nav-bar-override-usa-accordion__content {
   padding: 0px 0px 12px 16px !important;
 }
+
+.menu-item-title.Mui-disabled {
+  opacity: 1;
+}
+
+$icon-offset: 45px;
+
+.icon-width {
+  width: $icon-offset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-icon-offset {
+  margin-left: $icon-offset;
+}
+
+.menu-item-focus:focus {
+  z-index: 5;
+}
+
+.Mui-focusVisible {
+  &.nav-menu-item-container {
+    background-color: $transparent;
+  }
+
+  &.nav-menu-item-container.bg-primary-extra-light-mui-selected-override {
+    background-color: $primary-extra-light;
+  }
+
+  &.profile-menu-item {
+    background-color: #fbfdf9;
+  }
+}
+
+.nav-menu-item-container {
+  min-height: 47px;
+}
+
+.profile-menu-item {
+  background-color: #fbfdf9;
+
+  &:hover {
+    background-color: $primary-extra-light;
+  }
+}
+
+.Mui-selected.bg-primary-extra-light-mui-selected-override {
+  background-color: $primary-extra-light;
+}
+
+.truncate-long-business-names-mobile {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 15px;
+  max-width: 70vw;
+}
+
+.truncate-long-business-names-desktop {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 15px;
+  max-width: 230px;
+}

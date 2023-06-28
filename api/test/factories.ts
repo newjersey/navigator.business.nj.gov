@@ -14,7 +14,6 @@ import {
   PublicFilingLegalType,
 } from "@shared/formationData";
 import { randomInt, randomIntFromInterval } from "@shared/intHelpers";
-import { LegalStructure, LegalStructures } from "@shared/legalStructure";
 import { LicenseData, LicenseEntity } from "@shared/license";
 import { ProfileData } from "@shared/profileData";
 import {
@@ -125,11 +124,6 @@ export const generateSelfRegResponse = (overrides: Partial<SelfRegResponse>): Se
     authRedirectURL: `some-redirect-url-${randomInt()}`,
     ...overrides,
   };
-};
-
-export const randomLegalStructure = (): LegalStructure => {
-  const randomIndex = Math.floor(Math.random() * LegalStructures.length);
-  return LegalStructures[randomIndex];
 };
 
 export const randomNewsletterStatus = (failed = !!(randomInt() % 2)): NewsletterStatus => {

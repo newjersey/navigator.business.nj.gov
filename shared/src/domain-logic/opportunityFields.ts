@@ -1,3 +1,4 @@
+import { LookupLegalStructureById } from "../legalStructure";
 import { ProfileData } from "../profileData";
 
 export const OPPORTUNITY_FIELDS: (keyof ProfileData)[] = [
@@ -10,6 +11,14 @@ export const OPPORTUNITY_FIELDS: (keyof ProfileData)[] = [
 export const REPORT_FIELDS: (keyof ProfileData)[] = ["dateOfFormation"];
 
 export const FIELDS_FOR_PROFILE = [...REPORT_FIELDS, ...OPPORTUNITY_FIELDS];
+export const getFieldsForProfile = (legalStructureId?: string): (keyof ProfileData)[] => {
+  return FIELDS_FOR_PROFILE.filter((field) => {
+    if (field === "dateOfFormation" && legalStructureId) {
+      return LookupLegalStructureById(legalStructureId).elementsToDisplay.has("formationDate");
+    }
+    return true;
+  });
+};
 
 export const isFieldAnswered = (field: keyof ProfileData, data: ProfileData): boolean => {
   switch (field) {

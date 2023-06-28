@@ -1,15 +1,16 @@
 /* eslint-disable testing-library/await-async-utils */
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
-import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
-import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
 import {
-  completeNewBusinessOnboarding,
+  completeBusinessStructureTask,
   defaultPa11yThresholds,
   lighthouseDesktopConfig,
   lighthouseMobileConfig,
-} from "../support/helpers";
+} from "@businessnjgovnavigator/cypress/support/helpers/helpers";
+import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
+import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
+import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
 
 describe("Performance and Accessability - Landing Page [all] [group2]", () => {
   describe("Desktop", () => {
@@ -75,29 +76,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=3");
-        onOnboardingPage.selectLegalStructure("general-partnership");
-
-        cy.lighthouse(undefined, lighthouseDesktopConfig);
-        cy.pa11y(defaultPa11yThresholds);
-      });
-    });
-
-    describe("Step 4", () => {
-      it("should pass the audits", () => {
-        cy.url().should("include", "onboarding?page=1");
-
-        onOnboardingPage.selectBusinessPersona("STARTING");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.selectIndustry("e-commerce");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=3");
-        onOnboardingPage.selectLegalStructure("general-partnership");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=4");
         onOnboardingPage.typeFullName("Michael Smith");
         onOnboardingPage.typeEmail("MichaelSmith@gmail.com");
         onOnboardingPage.typeConfirmEmail("MichaelSmith@gmail.com");
@@ -116,7 +94,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         cy.url().should("include", "onboarding?page=1");
 
         onOnboardingPage.selectBusinessPersona("OWNING");
-
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
       });
@@ -167,11 +144,9 @@ describe("Performance and Accessibility - Dashboard [all] [group3]", () => {
 
   it("should pass the audits", () => {
     const industry = LookupIndustryById("e-commerce");
-    const legalStructureId = "general-partnership";
 
     completeNewBusinessOnboarding({
       industry,
-      legalStructureId,
     });
 
     onDashboardPage.getEditProfileLink().should("exist");
@@ -192,13 +167,12 @@ describe("Performance and Accessibility - Roadmap Tasks [all] [group3]", () => {
     it(`should pass the audits on ${slug}`, () => {
       const industry = LookupIndustryById("cosmetology");
       const legalStructureId = "general-partnership";
-      const townDisplayName = "Absecon";
 
       completeNewBusinessOnboarding({
         industry,
-        legalStructureId,
-        townDisplayName,
       });
+      completeBusinessStructureTask({ legalStructureId });
+
       onDashboardPage.clickRoadmapTask(slug);
 
       cy.lighthouse(undefined, lighthouseDesktopConfig);

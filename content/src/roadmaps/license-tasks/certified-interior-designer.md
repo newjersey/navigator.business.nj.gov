@@ -13,7 +13,8 @@ divisionPhone: "(973) 504-6385"
 industryId: "interior-designer"
 webflowType: "individual-license"
 licenseCertificationClassification: ""
-summaryDescriptionMd: "You can only legally use the title of Certified Interior Designer if you’ve been certified by the New Jersey Interior Design Examination and Evaluation Committee."
+summaryDescriptionMd: >
+  You can only legally use the title of Certified Interior Designer if you’ve been certified by the New Jersey Interior Design Examination and Evaluation Committee.
 ---
 
 ---

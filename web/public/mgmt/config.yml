@@ -38,6 +38,7 @@ collections:
     editor:
       preview: true
     fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
       - { label: "Filename", name: "filename", widget: "nospace", required: false }
@@ -998,6 +999,7 @@ collections:
     editor:
       preview: true
     fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Description", name: "descriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
@@ -1025,8 +1027,8 @@ collections:
           - { label: "Minority Owned", value: "minority-owned" }
           - { label: "Veteran Owned", value: "veteran-owned" }
           - { label: "Disabled Veteran Owned", value: "disabled-veteran" }
+          - { label: "LGBTQ Owned", value: "lgbtq-owned" }
       - { label: "is SBE (show if fewer than 120 employees)", name: "isSbe", widget: boolean, default: false }
-
   - name: "archived-certification-opportunities"
     label: "Cert Opps - Archived"
     folder: "content/src/archived-certifications"
@@ -1038,6 +1040,7 @@ collections:
     editor:
       preview: true
     fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Description", name: "descriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
@@ -1084,6 +1087,7 @@ collections:
     editor:
       preview: true
     fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "File Name", name: "filename", widget: "slug" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Url Slug", name: "urlSlug", widget: "string" }
@@ -1716,6 +1720,7 @@ collections:
     editor:
       preview: true
     fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
       - { label: "Filename", name: "filename", widget: "nospace", required: false }
@@ -1733,7 +1738,7 @@ collections:
         name: industryId
         widget: "relation"
         collection: "roadmaps"
-        search_fields: ["{{id}}"]
+        search_fields: ["id"]
         value_field: "{{id}}"
         display_fields: ["{{id}}"]
         required: false
@@ -1775,6 +1780,7 @@ collections:
     editor:
       preview: true
     fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Filename", name: "filename", widget: "nospace", required: false }
       - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
       - { label: "Title (Navigator)", name: "name", widget: "string" }
@@ -1791,7 +1797,7 @@ collections:
         widget: "relation"
         multiple: true
         collection: "roadmaps"
-        search_fields: ["{{id}}"]
+        search_fields: ["id"]
         value_field: "{{id}}"
         display_fields: ["{{name}}"]
         options_length: 500
@@ -1851,6 +1857,7 @@ collections:
     editor:
       preview: true
     fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Filename", name: "filename", widget: "nospace", required: false }
       - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
       - { label: "Title (Navigator)", name: "name", widget: "string", required: false }
@@ -2266,9 +2273,37 @@ collections:
               - { label: Header - Complete, name: completedHeader, widget: string }
               - { label: Save Button, name: saveButton, widget: string }
               - { label: SuccessMessage, name: successMessage, widget: string }
+      - label: "Business Structure Prompt Component"
+        name: "business-structure-prompt"
+        file: content/src/fieldConfig/business-structure-prompt.json
+        editor:
+          preview: true
+        fields:
+          - label: Business Structure Prompt Config
+            name: businessStructurePrompt
+            collapsed: false
+            widget: object
+            summary: "{{businessStructurePrompt}}"
+            fields:
+              - {
+                  label: Not Completed Task Prompt Text On Any Task,
+                  name: notCompletedTaskPromptAnyTask,
+                  widget: markdown,
+                }
+              - {
+                  label: Not Completed Task Prompt Text On Business Structure Task,
+                  name: notCompletedTaskPromptBusinessStructureTask,
+                  widget: markdown,
+                }
+              - { label: Button Text, name: buttonText, widget: string }
+              - {
+                  label: Select Business Structure To Save Alert Text,
+                  name: businessStructureNotSelectedAlertText,
+                  widget: string,
+                }
 
-  - name: "taxes-filings-label"
-    label: "🟪 TAXES & FILINGS"
+  - name: "calendar-label"
+    label: "🟪 CALENDAR"
     folder: "content/src"
     fields:
       - { name: "" }
@@ -2326,10 +2361,10 @@ collections:
               - { label: Failed Alert Text, name: failedErrorMessageHeader, widget: text }
               - { label: Unknown Failure Alert Text, name: failedUnknownMarkdown, widget: markdown }
 
-  - name: "licenses"
-    label: "Licenses - All"
+  - name: "license-calendar-events"
+    label: "License Expiration / Renewal Events"
     folder: "content/src/licenses"
-    summary: "{{title}}"
+    summary: "{{urlSlug}}"
     identifier_field: "{{urlSlug}}"
     slug: "{{urlSlug}}"
     delete: true
@@ -2337,6 +2372,7 @@ collections:
     editor:
       preview: true
     fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - {
           label: "Industry Id",
           name: "urlSlug",
@@ -2371,6 +2407,7 @@ collections:
     editor:
       preview: true
     fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Extension", name: "extension", widget: "boolean", required: false }
@@ -2448,6 +2485,12 @@ collections:
               - { label: Funding Snackbar Body, name: fundingSnackbarBody, widget: text }
               - { label: Hidden Tasks Snackbar Heading, name: hiddenTasksSnackbarHeading, widget: string }
               - { label: Hidden Tasks Snackbar Body, name: hiddenTasksSnackbarBody, widget: text }
+              - {
+                  label: Tax Registration Snackbar Heading,
+                  name: taxRegistrationSnackbarHeading,
+                  widget: string,
+                }
+              - { label: Tax Registration Snackbar Body, name: taxRegistrationSnackbarBody, widget: text }
       - label: "Dashboard Calendar"
         name: "dashboard-config-calendar"
         file: "content/src/fieldConfig/dashboard-calendar.json"
@@ -2543,6 +2586,7 @@ collections:
     editor:
       preview: true
     fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Header", name: "header", widget: "string", required: false }
       - { label: "Not Started Header", name: "notStartedHeader", widget: "string", required: false }
@@ -2687,7 +2731,6 @@ collections:
             fields:
               - { label: Beta Main Text, name: betaMainText, widget: string }
               - { label: Beta Modal Button Text, name: betaModalButtonText, widget: string }
-
           - label: Tax Calendar Defaults
             name: taxCalendar
             collapsed: true
@@ -2783,10 +2826,6 @@ collections:
             widget: object
             summary: "{{registeredForTaxesModal}}"
             fields:
-              - { label: Title, name: title, widget: string }
-              - { label: Subtitle, name: subtitle, widget: markdown }
-              - { label: Save button text, name: saveButtonText, widget: string }
-              - { label: Cancel button text, name: cancelButtonText, widget: string }
               - { label: Are-You-Sure Tax Title, name: areYouSureTaxTitle, widget: string }
               - { label: Are-You-Sure Tax Body, name: areYouSureTaxBody, widget: markdown }
               - { label: Are-You-Sure Tax Continue Button, name: areYouSureTaxContinueButton, widget: string }
@@ -3067,6 +3106,11 @@ collections:
               - {
                   label: Navbar Guest dropdown registration text,
                   name: navBarGuestRegistrationText,
+                  widget: string,
+                }
+              - {
+                  label: Navbar Unnamed Business button text,
+                  name: navBarUnnamedBusinessText,
                   widget: string,
                 }
               - { label: Guest Alert Title, name: guestAlertTitle, widget: string }
@@ -3512,6 +3556,9 @@ collections:
                               name: "errorTextRequired",
                               widget: "string",
                             }
+                          - { label: "Edit Text", name: "editText", widget: "string" }
+                          - { label: "Add Text", name: "addText", widget: "string" }
+                          - { label: "Not Entered Text", name: "notEnteredText", widget: "string" }
                           - label: Option Content
                             name: optionContent
                             collapsed: false
@@ -4008,12 +4055,7 @@ collections:
                             }
                           - { label: "Edit Text", name: "editText", widget: "string" }
                           - { label: "Add Text", name: "addText", widget: "string" }
-                          - {
-                              label: "Not Entered Text",
-                              name: "notEnteredText",
-                              widget: "string",
-                              hint: This field supports Markdown,
-                            }
+                          - { label: "Not Entered Text", name: "notEnteredText", widget: "string" }
                   - label: Date of Formation
                     name: dateOfFormation
                     collapsed: true
@@ -4384,6 +4426,7 @@ collections:
     editor:
       preview: true
     fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Filename", name: "slug", widget: "slug", required: false }
       - { label: "Question Copy", name: "radioQuestion", widget: "string", required: false }
@@ -4404,6 +4447,7 @@ collections:
     editor:
       preview: true
     fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Header", name: "header", widget: "string" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Filename", name: "slug", widget: "slug", required: false }

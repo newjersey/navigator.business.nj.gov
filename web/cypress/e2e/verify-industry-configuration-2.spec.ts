@@ -1,8 +1,8 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
+import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
+import { onDashboardPage } from "@businessnjgovnavigator/cypress/support/page_objects/dashboardPage";
 import { Industries } from "@businessnjgovnavigator/shared/";
-import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
-import { completeNewBusinessOnboarding } from "../support/helpers";
 
 describe("Dashboard [all] [group1]", () => {
   beforeEach(() => {

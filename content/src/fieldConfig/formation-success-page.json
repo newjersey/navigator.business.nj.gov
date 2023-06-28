@@ -1,15 +1,15 @@
 {
   "formation": {
     "successPage": {
-      "header": "Hooray!",
-      "subheader": "You have successfully formed your business entity and registered your business name!",
       "body": "The documents you requested are listed below.",
-      "amendmentText": "**Made a mistake?** Submit a [paper amendment](https://www.njportal.com/DOR/BusinessAmendments/Forms/IdentifyBusiness).",
       "certifiedDocLabel": "Certified Copy of Formation (PDF)",
       "standingDocLabel": "Certificate of Good Standing (PDF)",
       "formationDocLabel": "Official Formation Document (PDF)",
+      "subheader": "You have successfully formed your business entity and registered your business name!",
+      "header": "Hooray!",
       "entityIdLabel": "`Entity ID|entity-id`",
-      "confirmationNumberLabel": "Confirmation Number:"
+      "confirmationNumberLabel": "Confirmation Number:",
+      "amendmentText": "**Made a mistake?** File an [amendment online](https://www.njportal.com/dor/businessamendments)."
     }
   }
 }

@@ -86,10 +86,6 @@ export class OnboardingPage {
     return cy.get('input[name="existingEmployees"]');
   }
 
-  getLegalStructure(companyType: string) {
-    return cy.get(`[data-value="${companyType}"]`);
-  }
-
   getLiquorLicense(radio?: boolean) {
     return cy.get(`input[name="liquor-license"]${radio === undefined ? "" : `[value="${radio}"]`}`);
   }
@@ -184,10 +180,6 @@ export class OnboardingPage {
     const sectorValue = LookupSectorTypeById(sectorId).name;
     this.getIndustrySectorDropdown().click();
     cy.get('[role="listbox"]').contains(sectorValue).click();
-  }
-
-  selectLegalStructure(companyType: string) {
-    this.getLegalStructure(companyType).click({ force: true });
   }
 
   selectLiquorLicense(radio: boolean) {

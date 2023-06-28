@@ -47,6 +47,7 @@ import {
   SectionType,
   StateObject,
 } from "@businessnjgovnavigator/shared";
+import { OperatingPhase } from "@businessnjgovnavigator/shared/";
 import { FormationData } from "@businessnjgovnavigator/shared/formationData";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import { randomFilteredIndustry, randomIndustry, randomSector } from "@businessnjgovnavigator/shared/test";
@@ -455,3 +456,31 @@ export const publicFilingLegalStructures: string[] = LegalStructures.filter(
 export const tradeNameLegalStructures: string[] = LegalStructures.filter((x) => x.hasTradeName).map(
   (it) => it.id
 );
+
+export const operatingPhasesDisplayingHomeBasedPrompt = OperatingPhases.filter((phase: OperatingPhase) => {
+  return phase.displayHomeBasedPrompt;
+}).map((phase) => phase.id);
+
+export const operatingPhasesNotDisplayingHomeBasedPrompt = OperatingPhases.filter((phase: OperatingPhase) => {
+  return !phase.displayHomeBasedPrompt;
+}).map((phase) => phase.id);
+
+export const operatingPhasesNotDisplayingAltHomeBasedBusinessDescription = OperatingPhases.filter(
+  (phase: OperatingPhase) => {
+    return !phase.displayAltHomeBasedBusinessDescription && phase.displayHomeBasedPrompt;
+  }
+).map((phase) => phase.id);
+
+export const operatingPhasesDisplayingAltHomeBasedBusinessDescription = OperatingPhases.filter(
+  (phase: OperatingPhase) => {
+    return phase.displayAltHomeBasedBusinessDescription && phase.displayHomeBasedPrompt;
+  }
+).map((phase) => phase.id);
+
+export const operatingPhasesDisplayingBusinessStructurePrompt = OperatingPhases.filter(
+  (phase) => phase.displayBusinessStructurePrompt
+).map((phase) => phase.id);
+
+export const operatingPhasesNotDisplayingBusinessStructurePrompt = OperatingPhases.filter(
+  (phase) => !phase.displayBusinessStructurePrompt
+).map((phase) => phase.id);
