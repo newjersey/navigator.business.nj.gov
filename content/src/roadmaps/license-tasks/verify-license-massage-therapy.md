@@ -24,10 +24,6 @@ industryId:
 callToActionText: Apply for My License
 callToActionLink: https://www.njconsumeraffairs.gov/mbt/Pages/individual.aspx
 licenseCertificationClassification: ""
-agencyId: nj-consumer-affairs
-agencyAdditionalContext: Board of Massage and Bodywork Therapy
-id: verify-license-massage-therapy
-webflowId: 648c97318fac0894d3500c32
 ---
 
 ---
