@@ -1,11 +1,4 @@
 ---
-id: "verify-license-massage-therapy"
-webflowId: "648b6ec531c8af9882656b8a"
-urlSlug: "verify-license-massage-therapy"
-name: "Apply for Your License and Ensure Your Staff is Licensed"
-filename: "verify-license-massage-therapy"
-agencyId: "nj-consumer-affairs"
-agencyAdditionalContext: "Board of Massage and Bodywork Therapy"
 notesMd: >-
   06/28/23: This task needs to CTA links: 1) "Apply for My License" and 2)
   "Verify My Staff Are Licensed." The CTA button needs to accommodate both.
@@ -14,6 +7,12 @@ notesMd: >-
   CTA 1: "Apply for My License"(https://www.njconsumeraffairs.gov/mbt/Pages/individual.aspx)
 
   CTA 2: "Verify My Staff Are Licensed"(https://newjersey.mylicense.com/verification/)
+
+
+  After adding second CTA, remove the inline link: "verify your employees are licensed."
+filename: verify-license-massage-therapy
+urlSlug: verify-license-massage-therapy
+name: Apply for Your License and Ensure Your Staff is Licensed
 webflowName: "Massage Therapy: Massage Therapy Licenses"
 summaryDescriptionMd: >
   If you or any of your staff provide massage therapy services, you each need to
@@ -24,6 +23,10 @@ industryId:
 callToActionText: Apply for My License
 callToActionLink: https://www.njconsumeraffairs.gov/mbt/Pages/individual.aspx
 licenseCertificationClassification: ""
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Board of Massage and Bodywork Therapy
+id: verify-license-massage-therapy
+webflowId: 648b6ec531c8af9882656b8a
 ---
 
 ---
@@ -40,7 +43,7 @@ licenseCertificationClassification: ""
 
 ### License Verification Requirements
 
-To verify your employees are licensed, you need:
+To [verify your employees are licensed](https://newjersey.mylicense.com/verification/), you need:
 
 - Employee's full name
 - Employee's license number
