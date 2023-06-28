@@ -25,6 +25,7 @@ import {
   Municipality,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import {
   emptyIndustrySpecificData,
   industrySpecificDataChoices,
@@ -227,6 +228,99 @@ export const createPageHelpers = (): PageHelpers => {
     checkByLabelText,
     chooseEssentialQuestionRadio,
   };
+};
+
+export const runNonprofitOnboardingTests = ({
+  businessPersona,
+  industryPage,
+  selfRegPage,
+}: {
+  businessPersona: BusinessPersona;
+  industryPage: number;
+  selfRegPage: number;
+}): void => {
+  const user = createEmptyUser();
+  const initialUserData = createEmptyUserData(user);
+  const userData: UserData = {
+    ...initialUserData,
+    profileData: {
+      ...initialUserData.profileData,
+      businessPersona,
+      foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
+    },
+  };
+
+  it("sets legal structure undefined if nonprofit is kept as default No", async () => {
+    useMockRouter({ isReady: true, query: { page: industryPage.toString() } });
+    const { page } = renderPage({ userData });
+    page.selectByValue("Industry", "e-commerce");
+    await page.visitStep(industryPage + 1);
+    expect(currentUserData().profileData.legalStructureId).toBeUndefined();
+    expect(currentUserData().profileData.isNonprofitOnboardingRadio).toBe(false);
+  });
+
+  it("sets legal structure to nonprofit if nonprofit is selected Yes", async () => {
+    useMockRouter({ isReady: true, query: { page: industryPage.toString() } });
+    const { page } = renderPage({ userData });
+    page.selectByValue("Industry", "e-commerce");
+    page.chooseRadio("is-nonprofit-onboarding-radio-true");
+
+    await page.visitStep(industryPage + 1);
+    expect(currentUserData().profileData.legalStructureId).toEqual("nonprofit");
+    expect(currentUserData().profileData.isNonprofitOnboardingRadio).toBe(true);
+  });
+
+  it("marks business structure task complete if nonprofit is Yes", async () => {
+    useMockRouter({ isReady: true, query: { page: selfRegPage.toString() } });
+    const filledInUserData = generateUserData({
+      user,
+      onboardingFormProgress: "UNSTARTED",
+      taskProgress: {},
+      profileData: generateProfileData({
+        businessPersona,
+        foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
+        legalStructureId: "nonprofit",
+        isNonprofitOnboardingRadio: true,
+      }),
+    });
+    const { page } = renderPage({ userData: filledInUserData });
+
+    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    page.clickNext();
+
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalled();
+    });
+    expect(currentUserData().taskProgress).toEqual({ [businessStructureTaskId]: "COMPLETED" });
+  });
+
+  it("does not change business structure task if nonprofit is No", async () => {
+    useMockRouter({ isReady: true, query: { page: selfRegPage.toString() } });
+    const filledInUserData = generateUserData({
+      user,
+      taskProgress: {},
+      onboardingFormProgress: "UNSTARTED",
+      profileData: generateProfileData({
+        businessPersona,
+        foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
+        legalStructureId: undefined,
+        isNonprofitOnboardingRadio: false,
+      }),
+    });
+    const { page } = renderPage({ userData: filledInUserData });
+
+    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    page.clickNext();
+
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalled();
+    });
+    expect(currentUserData().taskProgress).toEqual({});
+  });
 };
 
 export const runSelfRegPageTests = ({

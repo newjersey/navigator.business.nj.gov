@@ -5,6 +5,7 @@ import { OnboardingForeignBusinessType } from "@/components/onboarding/Onboardin
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
 import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
+import { OnboardingNonprofit } from "@/components/onboarding/OnboardingNonprofit";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { FlowType, OnboardingErrors } from "@/lib/types/types";
 import { ReactNode } from "react";
@@ -48,11 +49,15 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
         name: "industry-page",
         component: (
           <>
-            <FieldLabelOnboarding fieldName="industryId" />
-            <OnboardingIndustry<OnboardingErrors>
-              essentialQuestionErrorTypes={["REQUIRED_ESSENTIAL_QUESTION"]}
-              errorTypes={["ALERT_BAR"]}
-            />
+            <FieldLabelOnboarding fieldName="isNonprofitOnboardingRadio" />
+            <OnboardingNonprofit />
+            <div className="padding-top-3">
+              <FieldLabelOnboarding fieldName="industryId" />
+              <OnboardingIndustry<OnboardingErrors>
+                essentialQuestionErrorTypes={["REQUIRED_ESSENTIAL_QUESTION"]}
+                errorTypes={["ALERT_BAR"]}
+              />
+            </div>
           </>
         ),
       },
@@ -83,11 +88,15 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
         name: "industry-page",
         component: (
           <>
-            <FieldLabelOnboarding fieldName="industryId" />
-            <OnboardingIndustry<OnboardingErrors>
-              essentialQuestionErrorTypes={["REQUIRED_ESSENTIAL_QUESTION"]}
-              errorTypes={["ALERT_BAR"]}
-            />
+            <FieldLabelOnboarding fieldName="isNonprofitOnboardingRadio" />
+            <OnboardingNonprofit />
+            <div className="padding-top-3">
+              <FieldLabelOnboarding fieldName="industryId" />
+              <OnboardingIndustry<OnboardingErrors>
+                essentialQuestionErrorTypes={["REQUIRED_ESSENTIAL_QUESTION"]}
+                errorTypes={["ALERT_BAR"]}
+              />
+            </div>
           </>
         ),
       },

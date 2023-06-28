@@ -1,6 +1,7 @@
 import { TaxAccessStepTwo } from "@/components/filings-calendar/tax-access-modal/TaxAccessStepTwo";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
+import { randomPublicFilingLegalType } from "@/test/factories";
 import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
@@ -64,8 +65,6 @@ describe("<TaxAccessStepTwo />", () => {
     responsibleOwnerName?: string;
     taxId?: string;
   }): UserData => {
-    const legalStructureId = randomLegalStructure({ requiresPublicFiling: params.publicFiling }).id;
-
     let formationData: FormationData = {
       formationFormData: createEmptyFormationFormData(),
       formationResponse: undefined,
@@ -76,6 +75,9 @@ describe("<TaxAccessStepTwo />", () => {
       lastVisitedPageIndex: 0,
     };
 
+    const legalStructureId = params.publicFiling
+      ? randomPublicFilingLegalType()
+      : randomLegalStructure({ requiresPublicFiling: false }).id;
     if (params.publicFiling) {
       formationData = generateFormationData(
         {
