@@ -4,9 +4,9 @@ notesMd: >-
   Verify your staff is licensed. The CTA button needs to accommodate both.
 
 
-  CTA 1: "Apply for a License"(https://www.njconsumeraffairs.gov/mbt/Pages/individual.aspx)
+  CTA 1: "Apply for My License"(https://www.njconsumeraffairs.gov/mbt/Pages/individual.aspx)
 
-  CTA 2: "Verify Staff Are Licensed"(https://newjersey.mylicense.com/verification/)
+  CTA 2: "Verify My Staff Are Licensed"(https://newjersey.mylicense.com/verification/)
 filename: verify-license-massage-therapy
 urlSlug: verify-license-massage-therapy
 name: Apply for Your License and Ensure Your Staff is Licensed
@@ -17,8 +17,8 @@ summaryDescriptionMd: >
   to ensure all staff providing massage therapy services have a current license.
 industryId:
   - massage-therapy
-callToActionText: Apply for or Verify a License
-callToActionLink: https://newjersey.mylicense.com/verification/
+callToActionText: Apply for My License
+callToActionLink: https://www.njconsumeraffairs.gov/mbt/Pages/individual.aspx
 licenseCertificationClassification: ""
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Massage and Bodywork Therapy
