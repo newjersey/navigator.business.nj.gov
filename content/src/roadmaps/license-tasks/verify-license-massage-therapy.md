@@ -1,18 +1,30 @@
 ---
-id: "verify-license-massage-therapy"
-webflowId: "648c97318fac0894d3500c32"
-urlSlug: "verify-license-massage-therapy"
-name: "Apply for Your License and Ensure Your Staff is Licensed"
-webflowName: "Massage Therapy: Staff Licenses"
-filename: "verify-license-massage-therapy"
-callToActionLink: "https://newjersey.mylicense.com/verification/"
-callToActionText: "Apply for or Verify a License"
-agencyId: "nj-consumer-affairs"
-agencyAdditionalContext: "Board of Massage and Bodywork Therapy"
-licenseCertificationClassification: ""
----
+notesMd: >-
+  06/28/23: This task needs to CTA links: 1) "Apply for My License" and 2)
+  "Verify My Staff Are Licensed." The CTA button needs to accommodate both.
 
-You or any of your staff providing massage therapy services need to have **individual** massage therapy licenses. It is the responsibility of the business owner to ensure all staff providing massage therapy services have a current license.
+
+  CTA 1: "Apply for My License"(https://www.njconsumeraffairs.gov/mbt/Pages/individual.aspx)
+
+  CTA 2: "Verify My Staff Are Licensed"(https://newjersey.mylicense.com/verification/)
+filename: verify-license-massage-therapy
+urlSlug: verify-license-massage-therapy
+name: Apply for Your License and Ensure Your Staff is Licensed
+webflowName: "Massage Therapy: Massage Therapy Licenses"
+summaryDescriptionMd: >
+  If you or any of your staff provide massage therapy services, you each need to
+  have massage therapy license. It is the responsibility of the business owner
+  to ensure all staff providing massage therapy services have a current license.
+industryId:
+  - massage-therapy
+callToActionText: Apply for My License
+callToActionLink: https://www.njconsumeraffairs.gov/mbt/Pages/individual.aspx
+licenseCertificationClassification: ""
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Board of Massage and Bodywork Therapy
+id: verify-license-massage-therapy
+webflowId: 648c97318fac0894d3500c32
+---
 
 ---
 
@@ -24,11 +36,11 @@ You or any of your staff providing massage therapy services need to have **indiv
 
 - An official transcript sent by your school in a sealed envelope
 - A [Supervision Certification](https://www.njconsumeraffairs.gov/mbt/Applications/Supervising-Faculty-Member-Certification.pdf) form completed by a licensed massage and bodywork therapist who has supervised the required 100 hours of clinical practice
-- Official exam scores sent directly to the Board in a sealed envelope (scores must be from either the `National Certification Board for Therapeutic Massage and Bodywork|national-certification-board-massage` , or the `Federation of State Massage Therapy Board|state-board-massage`)
+- Official exam scores sent directly to the Board in a sealed envelope (scores must be from either the `National Certification Board for Therapeutic Massage and Bodywork|national-certification-board-massage`  or the `Federation of State Massage Therapy Board|state-board-massage`)
 
 ### License Verification Requirements
 
-To verify your employees are licensed, you need the following:
+To verify your employees are licensed, you need:
 
 - Employee's full name
 - Employee's license number
