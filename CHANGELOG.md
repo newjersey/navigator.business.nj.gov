@@ -1,3 +1,37 @@
+# [5.22.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.21.2...v5.22.0) (2023-06-28)
+
+
+### Bug Fixes
+
+* [[#184836745](https://github.com/newjersey/navigator.business.nj.gov/issues/184836745)] add check for location content to test ([749917a](https://github.com/newjersey/navigator.business.nj.gov/commit/749917ae58b7726e99285aaabe791bb4e2c364c4))
+* [[#184836745](https://github.com/newjersey/navigator.business.nj.gov/issues/184836745)] generate municipality data for cms preview ([fac5112](https://github.com/newjersey/navigator.business.nj.gov/commit/fac511278167a3bb7251686eacd46d100166be6b))
+* [[#185337472](https://github.com/newjersey/navigator.business.nj.gov/issues/185337472)] Fix anchor tags on Business Profile ([70b7615](https://github.com/newjersey/navigator.business.nj.gov/commit/70b7615f8a4a31653184b892f6f4e7603fe48b39))
+* [[#185337472](https://github.com/newjersey/navigator.business.nj.gov/issues/185337472)] Trade Name businesses should not have a Business Effective Date ([4f75d8b](https://github.com/newjersey/navigator.business.nj.gov/commit/4f75d8b53d20b379f35caac1f32370f044c71453))
+* [[#185453206](https://github.com/newjersey/navigator.business.nj.gov/issues/185453206)] remove lock on tradeName field after tax submission ([d9528de](https://github.com/newjersey/navigator.business.nj.gov/commit/d9528de71d496cf0e3364143c3dc470293f23837))
+* [[#185453206](https://github.com/newjersey/navigator.business.nj.gov/issues/185453206)] remove test for old behavior around trade name field locking ([4538142](https://github.com/newjersey/navigator.business.nj.gov/commit/4538142592c7974c277ce43954892dfdcba72bf1))
+* [[#185471630](https://github.com/newjersey/navigator.business.nj.gov/issues/185471630)] tax filing calendar lookup overwriting municipality ([5fd7d84](https://github.com/newjersey/navigator.business.nj.gov/commit/5fd7d8420841fad61f89a5ed8e39af920ad505a1))
+* [[#185473530](https://github.com/newjersey/navigator.business.nj.gov/issues/185473530)] business name saved in tax access modal ([91d6c0f](https://github.com/newjersey/navigator.business.nj.gov/commit/91d6c0fe3fb8dc64fd74e36859eecab4250bc971))
+* [[#185492036](https://github.com/newjersey/navigator.business.nj.gov/issues/185492036)] license tasks summary description syntax ([e32ece9](https://github.com/newjersey/navigator.business.nj.gov/commit/e32ece94364c38e1410724b1a9abc5118155811c))
+
+
+### Features
+
+* [[#184198991](https://github.com/newjersey/navigator.business.nj.gov/issues/184198991)] update error message for signers & BOD for LP & dom corp ([2866101](https://github.com/newjersey/navigator.business.nj.gov/commit/28661016dda62b76cf73f35c56cecd3ea57c491e))
+* [[#184643224](https://github.com/newjersey/navigator.business.nj.gov/issues/184643224)] remove tax registration modal from tax registration task ([d21f03e](https://github.com/newjersey/navigator.business.nj.gov/commit/d21f03eba2d0a4e1a7f830f6fa1788fda1c67a1f))
+* [[#184803759](https://github.com/newjersey/navigator.business.nj.gov/issues/184803759)] archive covest fund and historic property fundings ([bc02732](https://github.com/newjersey/navigator.business.nj.gov/commit/bc02732e4ab68f4b21337ea1fa8d0a4b8058a12a))
+* [[#184857807](https://github.com/newjersey/navigator.business.nj.gov/issues/184857807)] Moved mobile nav menu to right side ([111a725](https://github.com/newjersey/navigator.business.nj.gov/commit/111a7253eee32ade740790fca9c5c243e61fecf1))
+* [[#184857807](https://github.com/newjersey/navigator.business.nj.gov/issues/184857807)] revisions on padding, focus, background color, for etah nav updates ([8cdc3be](https://github.com/newjersey/navigator.business.nj.gov/commit/8cdc3be38cc34295933f19fe9dea61cee55856f7))
+* [[#184857807](https://github.com/newjersey/navigator.business.nj.gov/issues/184857807)] Update Nav to prepare for multiple businesses ([f861ca0](https://github.com/newjersey/navigator.business.nj.gov/commit/f861ca03ae737045ca190b6b6a2d1c07a3939751))
+* [[#184858078](https://github.com/newjersey/navigator.business.nj.gov/issues/184858078)] Nav Bar Updates Ethan Mobile ([fead7a9](https://github.com/newjersey/navigator.business.nj.gov/commit/fead7a9137bee4c38da056175ee5c398071a3775))
+* [[#184859520](https://github.com/newjersey/navigator.business.nj.gov/issues/184859520)] remove business structure from onboarding ([6fcb2f7](https://github.com/newjersey/navigator.business.nj.gov/commit/6fcb2f795b7951b3523f805c82130b13beb3e498))
+* [[#185141116](https://github.com/newjersey/navigator.business.nj.gov/issues/185141116)] naics code & location confirmed in tax access modal ([1620d9d](https://github.com/newjersey/navigator.business.nj.gov/commit/1620d9d37621c645725d7928c27ab88f303284cb))
+* [[#185211995](https://github.com/newjersey/navigator.business.nj.gov/issues/185211995)] adding LGBTQ cert and ownershipTypes ([e6e3e6d](https://github.com/newjersey/navigator.business.nj.gov/commit/e6e3e6dece2a39a20e8d524cb383425aa8f8b0ee))
+* [[#185212121](https://github.com/newjersey/navigator.business.nj.gov/issues/185212121)] internal notes for markdown files ([4904153](https://github.com/newjersey/navigator.business.nj.gov/commit/490415383bf9acbb4cdab4615150548aa3ce29b0))
+* [[#185214542](https://github.com/newjersey/navigator.business.nj.gov/issues/185214542)] blue profile page alert should be within the business info header ([54a8eda](https://github.com/newjersey/navigator.business.nj.gov/commit/54a8eda80630adaca2dc593e446976e2a6f392a6))
+* [[#185386798](https://github.com/newjersey/navigator.business.nj.gov/issues/185386798)] punctuation update for license expired ([9d002a6](https://github.com/newjersey/navigator.business.nj.gov/commit/9d002a639cdda3b1711161b7d710c6659fe30978))
+* [[#185461947](https://github.com/newjersey/navigator.business.nj.gov/issues/185461947)] adjust navigation dropdown focus and hover behavior ([8a82020](https://github.com/newjersey/navigator.business.nj.gov/commit/8a8202082732977f95668bbbb320dcd09e68869e))
+* [[#185461947](https://github.com/newjersey/navigator.business.nj.gov/issues/185461947)] adjust navigation dropdown hover states to not be bold for profile ([9ba92cc](https://github.com/newjersey/navigator.business.nj.gov/commit/9ba92ccb3ceebd6dec274bf2bb161a942b272ed2))
+
 ## [5.21.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.21.1...v5.21.2) (2023-06-28)
 
 
