@@ -4,6 +4,7 @@ import * as api from "@/lib/api-client/apiClient";
 import * as fetchMunicipality from "@/lib/async-content-fetchers/fetchMunicipalities";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import { randomPublicFilingLegalType } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -89,7 +90,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
     taxId?: string;
     municipalityName?: string;
   }): UserData => {
-    const legalStructureId = randomLegalStructure({ requiresPublicFiling: params.publicFiling }).id;
+    const legalStructureId = params.publicFiling
+      ? randomPublicFilingLegalType()
+      : randomLegalStructure({ requiresPublicFiling: false }).id;
 
     let formationData: FormationData = {
       formationFormData: createEmptyFormationFormData(),

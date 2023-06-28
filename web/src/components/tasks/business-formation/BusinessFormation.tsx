@@ -41,6 +41,7 @@ import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
 interface Props {
   task: Task | undefined;
   displayContent: TasksDisplayContent;
+  searchOnly?: boolean;
 }
 
 export const BusinessFormation = (props: Props): ReactElement => {
@@ -188,7 +189,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     });
   };
 
-  if (!isValidLegalStructure && userData?.profileData.businessPersona !== "FOREIGN") {
+  if (!isValidLegalStructure && userData?.profileData.businessPersona !== "FOREIGN" && !props.searchOnly) {
     return (
       <div className="flex flex-column space-between minh-38">
         <div>
@@ -239,6 +240,18 @@ export const BusinessFormation = (props: Props): ReactElement => {
     );
   }
 
+  const getIntro = (): string => {
+    if (isForeign) {
+      return Config.formation.intro.foreign;
+    }
+
+    if (props.searchOnly) {
+      return props.task?.contentMd || "";
+    }
+
+    return Config.formation.intro.default;
+  };
+
   return (
     <BusinessFormationContext.Provider
       value={{
@@ -272,12 +285,12 @@ export const BusinessFormation = (props: Props): ReactElement => {
               <>
                 <UnlockedBy task={props.task} dataTestid="dependency-alert" />
                 <div className="margin-bottom-2">
-                  <Content>{Config.formation.intro[isForeign ? "foreign" : "default"]}</Content>
+                  <Content>{getIntro()}</Content>
                 </div>
               </>
             )}
           </div>
-          {isForeign ? <NexusFormationFlow /> : <BusinessFormationPaginator />}
+          {isForeign ? <NexusFormationFlow /> : <BusinessFormationPaginator searchOnly={props.searchOnly} />}
         </>
       </div>
     </BusinessFormationContext.Provider>

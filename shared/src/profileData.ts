@@ -94,6 +94,7 @@ export interface ProfileData extends IndustrySpecificData {
   readonly nexusDbaName: string;
   readonly needsNexusDbaName: boolean;
   readonly operatingPhase: OperatingPhaseId;
+  readonly isNonprofitOnboardingRadio: boolean;
 }
 
 export const emptyProfileData: ProfileData = {
@@ -122,6 +123,7 @@ export const emptyProfileData: ProfileData = {
   needsNexusDbaName: false,
   nexusLocationInNewJersey: undefined,
   operatingPhase: "GUEST_MODE",
+  isNonprofitOnboardingRadio: false,
   ...emptyIndustrySpecificData,
 };
 

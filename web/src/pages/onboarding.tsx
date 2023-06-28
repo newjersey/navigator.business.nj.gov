@@ -53,8 +53,10 @@ import {
   LookupLegalStructureById,
   Municipality,
   ProfileData,
+  TaskProgress,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
@@ -329,8 +331,13 @@ const OnboardingPage = (props: Props): ReactElement => {
             "welcome-up-and-running",
           ];
         }
+
+        const completed: TaskProgress = "COMPLETED";
         const updatedUserData = {
           ...newUserData,
+          taskProgress: newUserData.profileData.legalStructureId
+            ? { ...newUserData.taskProgress, [businessStructureTaskId]: completed }
+            : { ...newUserData.taskProgress },
           preferences: newPreferencesData,
         };
 

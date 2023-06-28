@@ -227,6 +227,14 @@ describe("buildUserRoadmap", () => {
       await buildUserRoadmap(generateStartingProfile({ legalStructureId: "s-corporation" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("scorp");
     });
+
+    it("adds nonprofit addon for Nonprofit legal structures", async () => {
+      await buildUserRoadmap(generateStartingProfile({ legalStructureId: "general-partnership" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("nonprofit");
+
+      await buildUserRoadmap(generateStartingProfile({ legalStructureId: "nonprofit" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("nonprofit");
+    });
   });
 
   describe("industry", () => {

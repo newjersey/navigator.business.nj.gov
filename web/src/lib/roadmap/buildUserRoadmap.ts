@@ -80,10 +80,6 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("permanent-location-business");
   }
 
-  if (profileData.legalStructureId === "s-corporation") {
-    addOns.push("scorp");
-  }
-
   if (profileData.liquorLicense) {
     addOns.push("liquor-license");
   }
@@ -189,6 +185,15 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
       addOns.push("trade-name");
     }
   }
+
+  if (profileData.legalStructureId === "s-corporation") {
+    addOns.push("scorp");
+  }
+
+  if (profileData.legalStructureId === "nonprofit") {
+    addOns.push("nonprofit");
+  }
+
   return addOns;
 };
 

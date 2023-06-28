@@ -12,6 +12,7 @@ import {
   industryIdsWithRequiredEssentialQuestion,
   mockEmptyApiSignups,
   renderPage,
+  runNonprofitOnboardingTests,
   runSelfRegPageTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import { generateProfileData, generateUserData, ProfileData } from "@businessnjgovnavigator/shared/";
@@ -416,5 +417,9 @@ describe("onboarding - foreign business", () => {
 
   describe("validates self-reg step for non-nexus", () => {
     runSelfRegPageTests({ businessPersona: "FOREIGN", selfRegPage: "3" });
+  });
+
+  describe("nonprofit onboarding tests", () => {
+    runNonprofitOnboardingTests({ businessPersona: "FOREIGN", industryPage: 3, selfRegPage: 5 });
   });
 });

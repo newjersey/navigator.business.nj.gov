@@ -218,6 +218,7 @@ export const generateProfileData = (
   const id = `some-id-${randomInt()}`;
   const persona = randomInt() % 2 ? "STARTING" : "OWNING";
   const industry = randomIndustry(canHavePermanentLocation);
+  const legalStructure = randomLegalStructure().id;
 
   return {
     ...generateIndustrySpecificData({}),
@@ -250,6 +251,7 @@ export const generateProfileData = (
     nexusDbaName: "",
     needsNexusDbaName: false,
     operatingPhase: "NEEDS_TO_FORM",
+    isNonprofitOnboardingRadio: legalStructure === "nonprofit",
     ...overrides,
   };
 };

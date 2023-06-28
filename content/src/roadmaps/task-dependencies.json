@@ -3,6 +3,9 @@
     {
       "name": "register-for-ein",
       "dependencies": [
+        "form-business-entity",
+        "form-business-entity-nj",
+        "form-business-entity-foreign",
         "form-business-entity-llc"
       ]
     },
@@ -16,6 +19,8 @@
       "name": "register-for-taxes",
       "dependencies": [
         "form-business-entity",
+        "form-business-entity-nj",
+        "form-business-entity-foreign",
         "form-business-entity-llc",
         "register-for-ein",
         "determine-naics-code",
