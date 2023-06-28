@@ -1,3 +1,10 @@
+## [5.21.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.21.1...v5.21.2) (2023-06-28)
+
+
+### Bug Fixes
+
+* update webflowId in licenses and remove create licenses from CI ([ede9c0f](https://github.com/newjersey/navigator.business.nj.gov/commit/ede9c0ffcb805da3ab4bbb78da68b1b1e517cd68))
+
 ## [5.21.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.21.0...v5.21.1) (2023-06-16)
 
 

@@ -1,4 +1,11 @@
 ---
+id: "verify-license-massage-therapy"
+webflowId: "648b6ec531c8af9882656b8a"
+urlSlug: "verify-license-massage-therapy"
+name: "Apply for Your License and Ensure Your Staff is Licensed"
+filename: "verify-license-massage-therapy"
+agencyId: "nj-consumer-affairs"
+agencyAdditionalContext: "Board of Massage and Bodywork Therapy"
 notesMd: >-
   06/28/23: This task needs to CTA links: 1) "Apply for My License" and 2)
   "Verify My Staff Are Licensed." The CTA button needs to accommodate both.
@@ -7,9 +14,6 @@ notesMd: >-
   CTA 1: "Apply for My License"(https://www.njconsumeraffairs.gov/mbt/Pages/individual.aspx)
 
   CTA 2: "Verify My Staff Are Licensed"(https://newjersey.mylicense.com/verification/)
-filename: verify-license-massage-therapy
-urlSlug: verify-license-massage-therapy
-name: Apply for Your License and Ensure Your Staff is Licensed
 webflowName: "Massage Therapy: Massage Therapy Licenses"
 summaryDescriptionMd: >
   If you or any of your staff provide massage therapy services, you each need to
@@ -36,7 +40,7 @@ webflowId: 648c97318fac0894d3500c32
 
 - An official transcript sent by your school in a sealed envelope
 - A [Supervision Certification](https://www.njconsumeraffairs.gov/mbt/Applications/Supervising-Faculty-Member-Certification.pdf) form completed by a licensed massage and bodywork therapist who has supervised the required 100 hours of clinical practice
-- Official exam scores sent directly to the Board in a sealed envelope (scores must be from either the `National Certification Board for Therapeutic Massage and Bodywork|national-certification-board-massage`  or the `Federation of State Massage Therapy Board|state-board-massage`)
+- Official exam scores sent directly to the Board in a sealed envelope (scores must be from either the `National Certification Board for Therapeutic Massage and Bodywork|national-certification-board-massage` or the `Federation of State Massage Therapy Board|state-board-massage`)
 
 ### License Verification Requirements
 
