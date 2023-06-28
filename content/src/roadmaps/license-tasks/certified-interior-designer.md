@@ -1,6 +1,6 @@
 ---
 id: "certified-interior-designer"
-webflowId: "648c9731f2fa46064c1bd1af"
+webflowId: "648b6ec5e143e52467f1c8f2"
 urlSlug: "certified-interior-designer"
 name: "Become a Certified Interior Designer"
 webflowName: "Interior Design: Interior Designer Certification"

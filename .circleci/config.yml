@@ -689,7 +689,7 @@ jobs:
           command: |
             echo 'export WEBFLOW_API_TOKEN=$WEBFLOW_API_TOKEN' >> $BASH_ENV
             yarn workspace @businessnjgovnavigator/content build
-            yarn workspace @businessnjgovnavigator/web webflow:licenses-sync
+            yarn workspace @businessnjgovnavigator/web webflow:licenses-ci-sync
 
 workflows:
   release-pipeline:

@@ -203,15 +203,17 @@ const createNewLicenses = async () => {
   console.info(`Created a total of ${newLicenses.length} licenses`);
 };
 
-const syncLicenses = async () => {
+const syncLicenses = async (params) => {
   console.log("updating licenses");
   await wait();
   const licensesAlreadyInWebflow = await getLicensesAlreadyInWebflow();
   await updateLicenses(licensesAlreadyInWebflow);
   console.log("creating new licenses");
   await wait();
-  await createNewLicenses();
-  console.log("Complete license sync!");
+  if (params.create) {
+    await createNewLicenses();
+    console.log("Complete license sync!");
+  }
 };
 
 // eslint-disable-next-line no-empty
@@ -219,7 +221,12 @@ if (process.env.NODE_ENV === "test") {
   // intentionally empty
 } else if (argsInclude("--sync")) {
   await (async () => {
-    await syncLicenses();
+    await syncLicenses({ create: true });
+    process.exit(0);
+  })();
+} else if (argsInclude("--ci-sync")) {
+  await (async () => {
+    await syncLicenses({ create: false });
     process.exit(0);
   })();
 } else if (argsInclude("--legacy-sync")) {

@@ -1,6 +1,6 @@
 ---
 id: "verify-license-massage-therapy"
-webflowId: "648c97318fac0894d3500c32"
+webflowId: "648b6ec531c8af9882656b8a"
 urlSlug: "verify-license-massage-therapy"
 name: "Apply for Your License and Ensure Your Staff is Licensed"
 webflowName: "Massage Therapy: Staff Licenses"

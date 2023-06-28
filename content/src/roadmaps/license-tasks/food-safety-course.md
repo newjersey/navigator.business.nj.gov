@@ -1,6 +1,6 @@
 ---
 id: "food-safety-course"
-webflowId: "648c9731e604ed11c4741c19"
+webflowId: "648b6ec5ff1d0d38af2f5a2d"
 urlSlug: "food-safety-course"
 name: "Complete Food Safety Course"
 webflowName: "Restaurant: Food Safety Course"
