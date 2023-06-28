@@ -98,7 +98,7 @@
         "body": "When and under what circumstances can a limited partnership and its affairs dissolve?"
       },
       "directors": {
-        "addButtonText": "Add new Director",
+        "addButtonText": "Add New Director",
         "error": "Enter at least 1 director's name.",
         "successSnackbarBody": "A director has been added successfully.",
         "modalTitle": "Add New Director",
