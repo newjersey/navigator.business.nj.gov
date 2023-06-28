@@ -269,11 +269,11 @@ describe("onboarding - foreign business", () => {
       useMockRouter({ isReady: true, query: { page: "3" } });
     });
 
-    it("displays step 3 of 6 total pages", () => {
+    it("displays step 3 of 5 total pages", () => {
       renderPage({ userData });
       expect(
         screen.getByText(
-          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "3", totalPages: "6" })
+          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "3", totalPages: "5" })
         )
       ).toBeInTheDocument();
     });
@@ -372,44 +372,13 @@ describe("onboarding - foreign business", () => {
     beforeEach(() => {
       userData = generateTestUserData({
         industryId: "generic",
-        legalStructureId: undefined,
-        businessPersona: "FOREIGN",
-        foreignBusinessType: "NEXUS",
-      });
-      useMockRouter({ isReady: true, query: { page: "4" } });
-    });
-
-    it("displays legal structure question", async () => {
-      const { page } = renderPage({ userData });
-      page.chooseRadio("general-partnership");
-      await page.visitStep(5);
-      expect(screen.queryByTestId("banner-alert-REQUIRED_LEGAL")).not.toBeInTheDocument();
-    });
-
-    it("prevents user from moving past Step 4 if you have not selected a legal structure", async () => {
-      const { page } = renderPage({ userData });
-      act(() => {
-        return page.clickNext();
-      });
-      expect(screen.getByTestId("step-4")).toBeInTheDocument();
-      expect(screen.queryByTestId("step-5")).not.toBeInTheDocument();
-      expect(screen.getByTestId("banner-alert-REQUIRED_LEGAL")).toBeInTheDocument();
-    });
-  });
-
-  describe("Nexus - step 5", () => {
-    let userData: UserData;
-
-    beforeEach(() => {
-      userData = generateTestUserData({
-        industryId: "generic",
         legalStructureId: "limited-liability-company",
         businessPersona: "FOREIGN",
         foreignBusinessType: "NEXUS",
         municipality: undefined,
         homeBasedBusiness: undefined,
       });
-      useMockRouter({ isReady: true, query: { page: "5" } });
+      useMockRouter({ isReady: true, query: { page: "4" } });
     });
 
     it("displays Location In New Jersey question", () => {
@@ -424,7 +393,7 @@ describe("onboarding - foreign business", () => {
     it("sets homeBasedBusiness to false when YES is selected for Location In New Jersey", async () => {
       const { page } = renderPage({ userData });
       page.chooseRadio("location-in-new-jersey-true");
-      await page.visitStep(6);
+      await page.visitStep(5);
       expect(currentUserData().profileData.homeBasedBusiness).toEqual(false);
       expect(currentUserData().profileData.nexusLocationInNewJersey).toEqual(true);
     });
@@ -434,8 +403,8 @@ describe("onboarding - foreign business", () => {
       act(() => {
         return page.clickNext();
       });
-      expect(screen.getByTestId("step-5")).toBeInTheDocument();
-      expect(screen.queryByTestId("step-6")).not.toBeInTheDocument();
+      expect(screen.getByTestId("step-4")).toBeInTheDocument();
+      expect(screen.queryByTestId("step-5")).not.toBeInTheDocument();
       expect(screen.getByTestId("banner-alert-REQUIRED_NEXUS_LOCATION_IN_NJ")).toHaveTextContent(
         Config.profileDefaults.fields.nexusLocationInNewJersey.default.errorTextRequired
       );

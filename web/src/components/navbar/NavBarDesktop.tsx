@@ -1,26 +1,26 @@
+import { ButtonIcon } from "@/components/ButtonIcon";
+import { NavBarPopupMenu } from "@/components/navbar/NavBarPopupMenu";
 import { NavigatorLogo } from "@/components/navbar/NavigatorLogo";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { AuthContext } from "@/contexts/authContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
-import { onSelfRegister, onSignOut } from "@/lib/auth/signinHelper";
+import { onSelfRegister } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
-import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
+import { ClickAwayListener, Grow, Paper, Popper } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 export const NavBarDesktop = (): ReactElement => {
   const { userData, updateQueue } = useUserData();
-  const { state, dispatch } = useContext(AuthContext);
+  const { state } = useContext(AuthContext);
   const router = useRouter();
   const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
-
-  const userName = getUserNameOrEmail(userData);
 
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLButtonElement | null>(null);
@@ -41,32 +41,15 @@ export const NavBarDesktop = (): ReactElement => {
     return router.pathname === ROUTES.onboarding;
   };
 
-  const handleProfileClick = (event: React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>): void => {
-    analytics.event.account_menu_myNJ_account.click.go_to_myNJ_home();
-    window.open(process.env.MYNJ_PROFILE_LINK || "", "_ blank");
-    handleClose(event);
-  };
-
-  const handleLogoutClick = (event: React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>): void => {
-    onSignOut(router.push, dispatch);
-    handleClose(event);
-  };
-
   const handleClose = (
-    event: MouseEvent | TouchEvent | React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>
+    event?: MouseEvent | TouchEvent | React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>
   ): void => {
-    if (anchorRef.current && anchorRef.current.contains(event.target as Node)) {
+    if (event && anchorRef.current && anchorRef.current.contains(event.target as Node)) {
       return;
     }
+
     setOpen(false);
   };
-
-  function handleListKeyDown(event: React.KeyboardEvent): void {
-    if (event.key === "Tab") {
-      event.preventDefault();
-      setOpen(false);
-    }
-  }
 
   const prevOpen = useRef(open);
   useEffect(() => {
@@ -79,53 +62,11 @@ export const NavBarDesktop = (): ReactElement => {
   const isAuthenticated = useMemo(() => {
     return state.isAuthenticated === "TRUE";
   }, [state.isAuthenticated]);
+
   const textColor = isAuthenticated ? "primary" : "base";
   const accountIcon = isAuthenticated ? "account_circle" : "help";
-  const accountString = isAuthenticated ? userName : Config.navigationDefaults.navBarGuestText;
+  const navBarBusinessTitle = getNavBarBusinessTitle(userData);
 
-  const UnAuthenticatedMenu = (): ReactElement => {
-    return (
-      <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-        <MenuItem
-          onClick={(): void => {
-            analytics.event.account_menu_my_profile.click.go_to_profile_screen();
-            router.push(ROUTES.profile);
-          }}
-        >
-          <UnStyledButton style="tertiary" textBold smallText>
-            {Config.navigationDefaults.profileLinkText}
-          </UnStyledButton>
-        </MenuItem>
-      </MenuList>
-    );
-  };
-
-  const AuthenticatedMenu = (): ReactElement => {
-    return (
-      <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-        <MenuItem
-          onClick={(): void => {
-            analytics.event.account_menu_my_profile.click.go_to_profile_screen();
-            router.push(ROUTES.profile);
-          }}
-        >
-          <UnStyledButton style="tertiary" textBold smallText dataTestid="profile-link">
-            {Config.navigationDefaults.profileLinkText}
-          </UnStyledButton>
-        </MenuItem>{" "}
-        <MenuItem onClick={handleProfileClick}>
-          <UnStyledButton style="tertiary" textBold smallText>
-            {Config.navigationDefaults.myNJAccountText}
-          </UnStyledButton>
-        </MenuItem>
-        <MenuItem onClick={handleLogoutClick}>
-          <UnStyledButton style="tertiary" textBold smallText>
-            {Config.navigationDefaults.logoutButton}
-          </UnStyledButton>
-        </MenuItem>
-      </MenuList>
-    );
-  };
   return (
     <div className="position-sticky top-0 z-500 bg-white">
       <nav aria-label="Primary" className="grid-container-widescreen desktop:padding-x-7">
@@ -133,14 +74,14 @@ export const NavBarDesktop = (): ReactElement => {
           <NavigatorLogo />
           <div className="flex z-100">
             {!isAuthenticated && (
-              <div className="flex">
+              <div className="flex fac">
                 {!currentlyOnboarding() && (
                   <div data-testid="registration-button" className="margin-left-4">
                     <UnStyledButton
-                      style="tertiary"
+                      style="default"
                       onClick={(): void => {
                         analytics.event.guest_menu.click.go_to_myNJ_registration();
-                        onSelfRegister(router, updateQueue, setRegistrationAlertStatus);
+                        onSelfRegister(router, updateQueue, userData, setRegistrationAlertStatus);
                       }}
                     >
                       {Config.navigationDefaults.navBarGuestRegistrationText}
@@ -149,7 +90,7 @@ export const NavBarDesktop = (): ReactElement => {
                 )}
                 <div data-testid="login-button" className="margin-right-4 margin-left-4">
                   <UnStyledButton
-                    style="tertiary"
+                    style="default"
                     onClick={(): void => {
                       analytics.event.guest_menu.click.go_to_myNJ_registration();
                       triggerSignIn();
@@ -168,24 +109,22 @@ export const NavBarDesktop = (): ReactElement => {
                 >
                   {accountIcon}
                 </Icon>
-                <div>{accountString}</div>
+                <div className="truncate-long-business-names-desktop">{navBarBusinessTitle}</div>
               </div>
             ) : (
               <button
                 data-testid="profile-dropdown"
-                className="clear-button"
+                className="border-2px border-solid radius-pill border-base-lighter bg-white-transparent"
                 ref={anchorRef}
                 aria-controls={open ? "menu-list-grow" : undefined}
                 aria-haspopup="true"
                 onClick={toggleDropdown}
               >
-                <div className={`text-bold text-${textColor} flex flex-align-center`}>
-                  <Icon
-                    className={`${isAuthenticated ? "usa-icon--size-4" : "usa-icon--size-3"} margin-right-1`}
-                  >
-                    {accountIcon}
-                  </Icon>
-                  <div>{accountString}</div>
+                <div className={`text-bold text-${textColor} flex flex-align-center margin-left-1`}>
+                  <ButtonIcon svgFilename="business-green" sizePx="35px" />
+                  <div className="text-base-darkest truncate-long-business-names-desktop">
+                    {navBarBusinessTitle}
+                  </div>
                   <Icon className="usa-icon--size-3">arrow_drop_down</Icon>
                 </div>
               </button>
@@ -202,7 +141,13 @@ export const NavBarDesktop = (): ReactElement => {
                   >
                     <Paper>
                       <ClickAwayListener onClickAway={handleClose}>
-                        {isAuthenticated ? AuthenticatedMenu() : UnAuthenticatedMenu()}
+                        <div>
+                          <NavBarPopupMenu
+                            handleClose={(): void => setOpen(false)}
+                            open={open}
+                            menuConfiguration={isAuthenticated ? "profile-myNj-logout" : "profile"}
+                          />
+                        </div>
                       </ClickAwayListener>
                     </Paper>
                   </Grow>

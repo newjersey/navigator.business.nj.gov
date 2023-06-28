@@ -12,7 +12,8 @@ divisionPhone: "(609) 292-6500"
 industryId: "non-medical-transport"
 webflowType: "object-vehicle"
 licenseCertificationClassification: ""
-summaryDescriptionMd: "Vehicles need to be registered as a passenger vehicle prior to offering transportation services."
+summaryDescriptionMd: >
+  Vehicles need to be registered as a passenger vehicle prior to offering transportation services.
 ---
 
 ---

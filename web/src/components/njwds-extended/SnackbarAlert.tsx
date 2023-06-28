@@ -1,5 +1,6 @@
 import { Alert, AlertVariant } from "@/components/njwds-extended/Alert";
-import { Paper, Snackbar, SnackbarProps } from "@mui/material";
+import { Icon } from "@/components/njwds/Icon";
+import { IconButton, Paper, Snackbar, SnackbarProps } from "@mui/material";
 import { ReactElement, ReactNode } from "react";
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
   isOpen: boolean;
   autoHideDuration?: number | null;
   close: () => void;
+  closeIcon?: boolean;
   snackBarProps?: SnackbarProps;
   heading?: string;
   noIcon?: boolean;
@@ -38,6 +40,21 @@ export const SnackbarAlert = (props: Props): ReactElement => {
           >
             <div className="padding-top-05">{props.children}</div>
           </Alert>
+          {props.closeIcon && (
+            <IconButton
+              aria-label="close"
+              data-testid={"close-icon-button"}
+              onClick={props.close}
+              sx={{
+                position: "absolute",
+                right: 0,
+                top: 15,
+                color: "#757575",
+              }}
+            >
+              <Icon className="usa-icon--size-3">close</Icon>
+            </IconButton>
+          )}
         </Paper>
       </div>
     </Snackbar>

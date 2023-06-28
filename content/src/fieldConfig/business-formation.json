@@ -24,7 +24,7 @@
       "initialNextButtonText": "Continue Forming My Business",
       "submitButtonText": "Submit & Pay",
       "viewMoreButtonText": "View more",
-      "amendmentInfo": "#### Review your information before submitting to the New Jersey Department of Division of Revenue and Enterprise Services.\n If you need to make a change after submitting, you will need to file a [paper amendment.](https://www.njportal.com/DOR/BusinessAmendments/Forms/IdentifyBusiness)",
+      "amendmentInfo": "#### Review your information before submitting to the New Jersey Division of Revenue and Enterprise Services.\n If you need to make a change after submitting, you will need to file an [amendment online.](https://www.njportal.com/dor/businessamendments)",
       "viewLessButtonText": "View less",
       "genericErrorText": "This field requires information."
     },
@@ -128,7 +128,7 @@
         "errorInlineSignerTitle": "Select a title.",
         "placeholder": "No Signers have been added",
         "label": "Signers",
-        "errorBannerCheckbox": "Sign by clicking the checkbox(s) below.",
+        "errorBannerCheckbox": "Sign by clicking the checkbox above.",
         "deleteTextMobile": "Delete Signer",
         "errorBannerSignerTitle": "Select the signer titles below.",
         "errorBannerMinimum": "Enter at least 1 signer's name.",
@@ -162,6 +162,7 @@
         "addButtonText": "Add Signer",
         "modalTitle": "Add New Signer",
         "placeholder": "No Signers have been added",
+        "error": "Enter at least 1 signer's name.",
         "description": "List each `Incorporators'|incorporator` name and address. You can have up to 10 Incorporators listed.\n\nIncorporators are listed on the Certificate of Formation and will have the ability to file and sign documents.",
         "overrides": {
           "limited-partnership": {
@@ -270,7 +271,8 @@
         "label": "Members",
         "successSnackbarHeader": "Member Added",
         "modalSaveButton": "Add Member",
-        "description": "List each LLC's members' name and address. You may list up to 10 members. Members can be individuals or entities and are the owners of the LLC. Members do not own the LLC's property. They may or may not manage the business and affairs."
+        "description": "List each LLC's members' name and address. You may list up to 10 members. Members can be individuals or entities and are the owners of the LLC. Members do not own the LLC's property. They may or may not manage the business and affairs.",
+        "error": "Enter at least 1 member's name."
       },
       "certifiedCopyOfFormationDocument": {
         "cost": "25",

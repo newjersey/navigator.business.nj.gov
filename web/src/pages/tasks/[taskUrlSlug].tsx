@@ -8,7 +8,7 @@ import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
-import { BusinessStructureTask } from "@/components/tasks/BusinessStructureTask";
+import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { EinTask } from "@/components/tasks/EinTask";
@@ -29,7 +29,16 @@ import { Task, TasksDisplayContent } from "@/lib/types/types";
 import { rswitch, templateEval } from "@/lib/utils/helpers";
 import { getModifiedTaskContent, getTaskFromRoadmap, getUrlSlugs } from "@/lib/utils/roadmap-helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { formationTaskId, Municipality } from "@businessnjgovnavigator/shared/";
+import {
+  businessStructureTaskId,
+  formationTaskId,
+  generateMunicipality,
+  generateProfileData,
+  generateUserData,
+  hasCompletedBusinessStructure,
+  Municipality,
+  UserData,
+} from "@businessnjgovnavigator/shared/";
 import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -79,6 +88,10 @@ const TaskPage = (props: Props): ReactElement => {
     if (props.task.id === formationTaskId && isValidLegalStructure) {
       return undefined;
     }
+
+    const hideNextUrlSlug =
+      props.task.id === businessStructureTaskId && !hasCompletedBusinessStructure(userData);
+
     return (
       <div
         className={`flex flex-row ${previousUrlSlug ? "flex-justify" : "flex-justify-end"} margin-top-2 `}
@@ -86,7 +99,7 @@ const TaskPage = (props: Props): ReactElement => {
       >
         {previousUrlSlug && (
           <UnStyledButton
-            style="tertiary"
+            style="default"
             onClick={(): void => {
               router.push(`/tasks/${previousUrlSlug}`);
             }}
@@ -95,9 +108,10 @@ const TaskPage = (props: Props): ReactElement => {
             <span className="margin-left-2"> {Config.taskDefaults.previousTaskButtonText}</span>
           </UnStyledButton>
         )}
-        {nextUrlSlug && (
+        {nextUrlSlug && !hideNextUrlSlug && (
           <UnStyledButton
-            style="tertiary"
+            dataTestid={"nextUrlSlugButton"}
+            style="default"
             onClick={(): void => {
               router.push(`/tasks/${nextUrlSlug}`);
             }}
@@ -164,7 +178,15 @@ const getPostOnboardingQuestion = (task: Task): ReactElement => {
   });
 };
 
-export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNode[] }): ReactElement => {
+interface TaskElementProps {
+  task: Task;
+  children?: ReactNode | ReactNode[];
+  overrides?: {
+    skipDeferredLocationPrompt: boolean;
+  };
+}
+
+export const TaskElement = (props: TaskElementProps): ReactElement => {
   const hasPostOnboardingQuestion = !!props.task.postOnboardingQuestion;
   const shouldShowDeferredQuestion = props.task.requiresLocation;
   let hasDeferredLocationQuestion = false;
@@ -215,6 +237,14 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
     return "";
   };
 
+  const getFakeUserDataWithMunicipality = (): UserData => {
+    return generateUserData({
+      profileData: generateProfileData({
+        municipality: generateMunicipality({}),
+      }),
+    });
+  };
+
   return (
     <div id="taskElement" className="flex flex-column space-between minh-38">
       <div>
@@ -226,7 +256,17 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
           <>
             <Content>{deferredLocationQuestion.before}</Content>
             {shouldShowDeferredQuestion && (
-              <DeferredLocationQuestion innerContent={deferredLocationQuestion.innerContent} />
+              <>
+                {props.overrides?.skipDeferredLocationPrompt && (
+                  <DeferredLocationQuestion
+                    innerContent={deferredLocationQuestion.innerContent}
+                    CMS_ONLY_fakeUserData={getFakeUserDataWithMunicipality()}
+                  />
+                )}
+                {!props.overrides?.skipDeferredLocationPrompt && (
+                  <DeferredLocationQuestion innerContent={deferredLocationQuestion.innerContent} />
+                )}
+              </>
             )}
             <Content>{deferredLocationQuestion.after}</Content>
           </>

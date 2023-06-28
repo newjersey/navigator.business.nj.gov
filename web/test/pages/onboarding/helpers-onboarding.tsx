@@ -23,7 +23,6 @@ import {
   generateUserData,
   Industries,
   Municipality,
-  randomLegalStructure,
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import {
@@ -243,7 +242,6 @@ export const runSelfRegPageTests = ({
     onboardingFormProgress: "UNSTARTED",
     profileData: generateProfileData({
       businessPersona,
-      legalStructureId: randomLegalStructure().id,
     }),
   });
 

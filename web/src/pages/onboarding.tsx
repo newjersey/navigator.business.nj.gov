@@ -77,7 +77,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [user, setUser] = useState<BusinessUser>(createEmptyUser(ABStorageFactory().getExperience()));
   const [error, setError] = useState<ProfileError | undefined>(undefined);
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
-  const { updateQueue, createUpdateQueue } = useUserData();
+  const { updateQueue, userData, createUpdateQueue } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const headerRef = useRef<HTMLDivElement>(null);
   const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
@@ -87,7 +87,6 @@ const OnboardingPage = (props: Props): ReactElement => {
   const configFields = Config.profileDefaults.fields;
   const OnboardingErrorLookup: Record<ProfileError, string> = {
     REQUIRED_ESSENTIAL_QUESTION: Config.profileDefaults.essentialQuestionAlertText,
-    REQUIRED_LEGAL: configFields.legalStructureId.default.errorTextRequired,
     REQUIRED_EXISTING_BUSINESS: configFields.businessPersona.default.errorTextRequired,
     REQUIRED_FOREIGN_BUSINESS_TYPE: configFields.foreignBusinessTypeIds.default.errorTextRequired,
     REQUIRED_NEXUS_LOCATION_IN_NJ: configFields.nexusLocationInNewJersey.default.errorTextRequired,
@@ -162,7 +161,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         return;
       }
 
-      let currentUserData = updateQueue?.current();
+      let currentUserData = userData;
       if (currentUserData) {
         setProfileData(currentUserData.profileData);
         setUser(currentUserData.user);

@@ -1,6 +1,7 @@
 import { TaxFilingCalendarEvent, TaxFilingLookupState, TaxFilingState } from "@shared/taxFiling";
 import {
   generatePreferences,
+  generateProfileData,
   generateTaxFilingCalendarEvent,
   generateTaxFilingData,
   generateTaxIdAndBusinessName,
@@ -54,9 +55,21 @@ describe("TaxFilingsInterfaceFactory", () => {
         taxFilingClient.lookup.mockResolvedValue({
           state: "SUCCESS",
           filings: [filingData],
+          naicsCode: "123456",
+          taxCity: "testville",
         });
         expect(await taxFilingInterface.lookup({ userData, ...taxIdBusinessName })).toEqual({
           ...userData,
+          profileData: {
+            ...userData.profileData,
+            naicsCode: "123456",
+            municipality: {
+              county: "",
+              displayName: "",
+              id: "",
+              name: "testville",
+            },
+          },
           preferences: {
             ...userData.preferences,
             isCalendarFullView: true,
@@ -172,6 +185,15 @@ describe("TaxFilingsInterfaceFactory", () => {
       for (const state of nonSuccessStates) {
         it(`returns a ${state} state without updating filing data`, async () => {
           const userData = generateUserData({
+            profileData: generateProfileData({
+              naicsCode: "",
+              municipality: {
+                county: "",
+                displayName: "",
+                id: "",
+                name: "",
+              },
+            }),
             taxFilingData: generateTaxFilingData({
               state: undefined,
               lastUpdatedISO: undefined,
@@ -182,6 +204,8 @@ describe("TaxFilingsInterfaceFactory", () => {
           taxFilingClient.lookup.mockResolvedValue({
             state: state,
             filings: [],
+            naicsCode: "",
+            taxCity: "",
           });
 
           expect(await taxFilingInterface.lookup({ userData, ...taxIdBusinessName })).toEqual({
@@ -281,9 +305,21 @@ describe("TaxFilingsInterfaceFactory", () => {
           taxFilingClient.lookup.mockResolvedValue({
             state: "SUCCESS",
             filings: [filingData],
+            naicsCode: "123456",
+            taxCity: "testville",
           });
           expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
             ...userData,
+            profileData: {
+              ...userData.profileData,
+              municipality: {
+                county: "",
+                displayName: "",
+                id: "",
+                name: "testville",
+              },
+              naicsCode: "123456",
+            },
             taxFilingData: {
               ...userData.taxFilingData,
               state: "SUCCESS",

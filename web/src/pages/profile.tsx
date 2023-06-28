@@ -9,7 +9,6 @@ import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
-import { OnboardingLegalStructureDropdown } from "@/components/onboarding/OnboardingLegalStructureDropDown";
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { DisabledTaxId } from "@/components/onboarding/taxId/DisabledTaxId";
@@ -19,6 +18,7 @@ import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUse
 import { Documents } from "@/components/profile/Documents";
 import { EscapeModal } from "@/components/profile/EscapeModal";
 import { ProfileBusinessName } from "@/components/profile/ProfileBusinessName";
+import { ProfileBusinessStructure } from "@/components/profile/ProfileBusinessStructure";
 import { ProfileDateOfFormation } from "@/components/profile/ProfileDateOfFormation";
 import { ProfileEmployerId } from "@/components/profile/ProfileEmployerId";
 import { ProfileEntityId } from "@/components/profile/ProfileEntityId";
@@ -47,15 +47,13 @@ import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
-import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
-import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { createProfileFieldErrorMap, OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getFlow, useMountEffectWhenDefined, useScrollToPathAnchor } from "@/lib/utils/helpers";
-import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
 import {
   BusinessPersona,
   createEmptyProfileData,
@@ -69,6 +67,7 @@ import {
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { hasCompletedFormation } from "@businessnjgovnavigator/shared/";
 import dayjs from "dayjs";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
@@ -87,12 +86,12 @@ interface Props {
 }
 
 const ProfilePage = (props: Props): ReactElement => {
-  const { roadmap } = useRoadmap();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const router = useRouter();
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
   const [escapeModal, setEscapeModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [shouldLockFormationFields, setShouldLockFormationFields] = useState<boolean>(false);
   const [isFormationDateDeletionModalOpen, setFormationDateDeletionModalOpen] = useState<boolean>(false);
 
   const userDataFromHook = useUserData();
@@ -113,11 +112,6 @@ const ProfilePage = (props: Props): ReactElement => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const redirect = (params?: { [key: string]: any }, routerType = router.push): Promise<boolean> => {
-    if (checkQueryValue(router, QUERIES.path, "businessFormation")) {
-      const formationUrlSlug = getTaskFromRoadmap(roadmap, formationTaskId)?.urlSlug ?? "";
-      return routerType(`/tasks/${formationUrlSlug}`);
-    }
-
     const urlParams = params ? `?${new URLSearchParams(params).toString()}` : "";
     return routerType(`${ROUTES.dashboard}${urlParams}`);
   };
@@ -127,6 +121,7 @@ const ProfilePage = (props: Props): ReactElement => {
   useMountEffectWhenDefined(() => {
     if (userData) {
       setProfileData(userData.profileData);
+      setShouldLockFormationFields(hasCompletedFormation(userData));
     }
   }, userData);
 
@@ -169,12 +164,12 @@ const ProfilePage = (props: Props): ReactElement => {
 
   FormFuncWrapper(
     () => {
-      if (!updateQueue) {
+      if (!updateQueue || !userData) {
         return;
       }
 
       const dateOfFormationHasBeenDeleted =
-        updateQueue.current().profileData.dateOfFormation !== profileData.dateOfFormation &&
+        userData.profileData.dateOfFormation !== profileData.dateOfFormation &&
         profileData.dateOfFormation === undefined;
 
       if (dateOfFormationHasBeenDeleted) {
@@ -191,30 +186,31 @@ const ProfilePage = (props: Props): ReactElement => {
 
       setIsLoading(true);
 
-      sendOnSaveAnalytics(updateQueue.current().profileData, profileData);
+      sendOnSaveAnalytics(userData.profileData, profileData);
 
       if (profileData.employerId && profileData.employerId.length > 0) {
         updateQueue.queueTaskProgress({ [einTaskId]: "COMPLETED" });
       }
 
-      if (updateQueue.current().profileData.taxId !== profileData.taxId) {
+      if (userData.profileData.taxId !== profileData.taxId) {
         updateQueue.queueTaxFilingData({ state: undefined, registeredISO: undefined, filings: [] });
       }
 
-      if (updateQueue.current().profileData.industryId !== profileData.industryId) {
-        updateQueue.queueTaskProgress({ [naicsCodeTaskId]: "NOT_STARTED" });
-        updateQueue.queue({ ...updateQueue.current(), taskItemChecklist: {} } as UserData);
+      if (userData.profileData.industryId !== profileData.industryId) {
+        updateQueue.queue({ taskItemChecklist: {} }).queueTaskProgress({ [naicsCodeTaskId]: "NOT_STARTED" });
       }
 
       updateQueue.queueProfileData(profileData);
 
       (async (): Promise<void> => {
-        updateQueue.queue(await postGetAnnualFilings(updateQueue.current()));
-        updateQueue.update().then(async () => {
-          setIsLoading(false);
-          setAlert("SUCCESS");
-          await redirect({ success: true });
-        });
+        updateQueue
+          .queue(await postGetAnnualFilings(updateQueue.current()))
+          .update()
+          .then(async () => {
+            setIsLoading(false);
+            setAlert("SUCCESS");
+            await redirect({ success: true });
+          });
       })();
     },
     (isValid, _errors, pageChange) => {
@@ -268,11 +264,12 @@ const ProfilePage = (props: Props): ReactElement => {
     return LookupLegalStructureById(userData.profileData.legalStructureId).hasTradeName;
   };
 
-  const displayOpportunityAlert = (): boolean => {
-    return (
-      profileTab === "info" &&
-      LookupOperatingPhaseById(profileData.operatingPhase).displayProfileOpportunityAlert
-    );
+  const displayOpportunityAlert = LookupOperatingPhaseById(
+    profileData.operatingPhase
+  ).displayProfileOpportunityAlert;
+
+  const shouldLockMunicipality = (): boolean => {
+    return !!profileData.municipality && userData?.taxFilingData.state === "SUCCESS";
   };
 
   const displayAltHomeBasedBusinessDescription = LookupOperatingPhaseById(
@@ -292,7 +289,6 @@ const ProfilePage = (props: Props): ReactElement => {
     return isHomeBasedBusinessApplicable(profileData.industryId);
   };
 
-  const shouldLockFormationFields = userData?.formationData.getFilingResponse?.success;
   const hasSubmittedTaxData =
     userData?.taxFilingData.state === "SUCCESS" || userData?.taxFilingData.state === "PENDING";
 
@@ -300,6 +296,7 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
+        {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField fieldName="foreignBusinessTypeIds">
           <OnboardingForeignBusinessType required />
@@ -335,17 +332,22 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileField
           fieldName="legalStructureId"
+          noLabel={true}
           locked={shouldLockFormationFields}
-          lockedValueFormatter={(value: string): string => LookupLegalStructureById(value).name}
+          lockedValueFormatter={(legalStructureId): string => LookupLegalStructureById(legalStructureId).name}
         >
-          <OnboardingLegalStructureDropdown />
+          <ProfileBusinessStructure />
         </ProfileField>
 
         <ProfileField fieldName="nexusLocationInNewJersey">
           <OnboardingLocationInNewJersey />
         </ProfileField>
 
-        <ProfileField fieldName="municipality" isVisible={profileData.nexusLocationInNewJersey === true}>
+        <ProfileField
+          fieldName="municipality"
+          isVisible={profileData.nexusLocationInNewJersey}
+          locked={shouldLockMunicipality()}
+        >
           <ProfileMunicipality />
         </ProfileField>
 
@@ -385,6 +387,13 @@ const ProfilePage = (props: Props): ReactElement => {
               <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
             )}
           </div>
+          {userData?.profileData.naicsCode && (
+            <div data-testid={"profile-naics-code"}>
+              <ProfileField fieldName="naicsCode" noLabel={true}>
+                <ProfileNaicsCode />
+              </ProfileField>
+            </div>
+          )}
         </ProfileField>
       </>
     ),
@@ -394,6 +403,7 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
+        {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField fieldName="foreignBusinessTypeIds">
           <OnboardingForeignBusinessType required />
@@ -458,6 +468,7 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
+        {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField
           fieldName="businessName"
@@ -466,7 +477,6 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ProfileBusinessName required={isBusinessNameRequired()} />
         </ProfileField>
-
         <ProfileField
           fieldName="responsibleOwnerName"
           isVisible={shouldShowTradeNameElements()}
@@ -474,26 +484,18 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ProfileResponsibleOwnerName />
         </ProfileField>
-
-        <ProfileField
-          fieldName="tradeName"
-          isVisible={shouldShowTradeNameElements()}
-          locked={hasSubmittedTaxData}
-        >
+        <ProfileField fieldName="tradeName" isVisible={shouldShowTradeNameElements()}>
           <ProfileTradeName />
         </ProfileField>
-
         <ProfileField fieldName="industryId">
           <OnboardingIndustry />
         </ProfileField>
-
         <ProfileField
           fieldName="sectorId"
           isVisible={profileData.industryId === "generic" || !!props.CMS_ONLY_fakeUserData}
         >
           <OnboardingSectors />
         </ProfileField>
-
         <ProfileField
           fieldName="dateOfFormation"
           isVisible={!!userData?.profileData.dateOfFormation}
@@ -502,19 +504,18 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ProfileDateOfFormation futureAllowed={true} />
         </ProfileField>
-
         <ProfileField
           fieldName="legalStructureId"
+          noLabel={true}
           locked={shouldLockFormationFields}
-          lockedValueFormatter={(id): string => LookupLegalStructureById(id).name}
+          lockedValueFormatter={(legalStructureId): string => LookupLegalStructureById(legalStructureId).name}
         >
-          <OnboardingLegalStructureDropdown />
+          <ProfileBusinessStructure />
         </ProfileField>
 
-        <ProfileField fieldName="municipality">
+        <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
           <ProfileMunicipality />
         </ProfileField>
-
         <ProfileField
           fieldName="homeBasedBusiness"
           isVisible={displayHomedBaseBusinessQuestion()}
@@ -523,7 +524,6 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <OnboardingHomeBasedBusiness />
         </ProfileField>
-
         <ProfileField
           fieldName="ownershipTypeIds"
           isVisible={
@@ -533,7 +533,6 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <ProfileOwnership />
         </ProfileField>
-
         <ProfileField
           fieldName="existingEmployees"
           isVisible={
@@ -598,6 +597,7 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
+        {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField fieldName="businessName" isVisible={!shouldShowTradeNameElements()}>
           <ProfileBusinessName />
@@ -611,11 +611,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <ProfileResponsibleOwnerName />
         </ProfileField>
 
-        <ProfileField
-          fieldName="tradeName"
-          isVisible={shouldShowTradeNameElements()}
-          locked={hasSubmittedTaxData}
-        >
+        <ProfileField fieldName="tradeName" isVisible={shouldShowTradeNameElements()}>
           <ProfileTradeName />
         </ProfileField>
 
@@ -636,7 +632,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <ProfileExistingEmployees />
         </ProfileField>
 
-        <ProfileField fieldName="municipality">
+        <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
           <ProfileMunicipality />
         </ProfileField>
 
@@ -657,6 +653,14 @@ const ProfilePage = (props: Props): ReactElement => {
     numbers: (
       <>
         <ProfileTabHeader tab="numbers" />
+
+        {userData?.profileData.naicsCode && (
+          <div data-testid={"profile-naics-code"}>
+            <ProfileField fieldName="naicsCode" noLabel={true}>
+              <ProfileNaicsCode />
+            </ProfileField>
+          </div>
+        )}
 
         <ProfileField fieldName="entityId">
           <ProfileEntityId handleChangeOverride={showRegistrationModalForGuest()} />
@@ -702,8 +706,8 @@ const ProfilePage = (props: Props): ReactElement => {
           }}
         >
           <PageSkeleton>
-            <NavBar />
-            <main id="main">
+            <NavBar showSidebar={true} hideMiniRoadmap={true} />
+            <main id="main" data-testid={"main"}>
               <div className="usa-section padding-top-0 desktop:padding-top-3">
                 <EscapeModal
                   isOpen={escapeModal}
@@ -744,7 +748,6 @@ const ProfilePage = (props: Props): ReactElement => {
                       </div>
                     ) : (
                       <>
-                        {displayOpportunityAlert() && <ProfileOpportunitiesAlert />}
                         <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
                           {getElements()}
                           <div className="margin-top-2">

@@ -49,12 +49,12 @@ export const Header = (): ReactElement => {
     <div className="bg-white margin-bottom-4">
       <h1 className="margin-top-0 break-word">{getHeader()}</h1>
       <UnStyledButton
-        style="tertiary"
-        underline
-        textBold
+        style="default"
+        isUnderline
+        isTextBold
         onClick={editOnClick}
         dataTestid="header-link-to-profile"
-        ariaLabel="Link To Business Profile"
+        isAriaLabelApplied="Link To Business Profile"
       >
         {getButtonText()}
       </UnStyledButton>

@@ -139,7 +139,6 @@ export type LegacyEventLabel =
   | "progress_to_up_and_running_phase"
   | "show_formation_date_modal"
   | "formation_status_set_to_complete"
-  | "show_tax_registration_modal"
   | "tax_registration_status_set_to_complete"
   | "show_tax_registration_date_modal"
   | "go_to_myNJ_registration"

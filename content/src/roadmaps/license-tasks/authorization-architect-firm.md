@@ -3,20 +3,20 @@ filename: authorization-architect-firm
 urlSlug: authorization-architect-firm
 name: Obtain a Certificate of Authorization for Your Firm
 webflowName: "Architecture: Certificate of Authorization for Your Firm"
-industryId:
-  - architecture
-callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
-webflowIndustry: Architect
-divisionPhone: (973) 504-6385
-id: authorization-architect-firm
-agencyId: nj-consumer-affairs
-agencyAdditionalContext: Board of Architects
-callToActionText: Apply for My Certificate of Authorization
-webflowType: business-license
-webflowId: 5f772971eb55580500feb5a2
-licenseCertificationClassification: LICENSE
 summaryDescriptionMd: >
   You need a certificate of authorization to open an architecture firm.
+industryId:
+  - architecture
+callToActionText: Apply for My Certificate of Authorization
+callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
+webflowIndustry: Architect
+licenseCertificationClassification: LICENSE
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Board of Architects
+divisionPhone: (973) 504-6385
+id: authorization-architect-firm
+webflowType: business-license
+webflowId: 5f772971eb55580500feb5a2
 ---
 
 ---

@@ -1,4 +1,4 @@
-import { BusinessStructureTask } from "@/components/tasks/BusinessStructureTask";
+import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";
 import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";

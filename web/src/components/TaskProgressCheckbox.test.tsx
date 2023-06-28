@@ -19,7 +19,6 @@ import {
   generateProfileData,
   generateUserData,
   getCurrentDate,
-  randomInt,
   TaskProgress,
   taxTaskId,
   UserData,
@@ -126,60 +125,7 @@ describe("<TaskProgressCheckbox />", () => {
     });
   });
 
-  describe("tax registration modal", () => {
-    it("opens when tax task is marked complete", async () => {
-      const userData = generateUserData({
-        taskProgress: { [taxTaskId]: "NOT_STARTED" },
-      });
-      renderTaskCheckbox(taxTaskId, userData);
-      await selectCompleted();
-      expect(screen.getByText(Config.registeredForTaxesModal.title)).toBeInTheDocument();
-    });
-
-    it("doesn't update the task status when closed", async () => {
-      const userData = generateUserData({
-        taskProgress: { [taxTaskId]: "IN_PROGRESS" },
-      });
-      renderTaskCheckbox(taxTaskId, userData);
-      fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
-
-      fireEvent.click(screen.getByText(Config.registeredForTaxesModal.cancelButtonText));
-      expect(screen.getByText(Config.taskProgress.IN_PROGRESS)).toBeInTheDocument();
-      expect(screen.queryByText(Config.taskProgress.COMPLETED)).not.toBeInTheDocument();
-      expect(userDataWasNotUpdated()).toBe(true);
-    });
-
-    it("updates the task progress when the modal is saved", async () => {
-      const userData = generateUserData({
-        taskProgress: { [taxTaskId]: "NOT_STARTED" },
-        profileData: generateProfileData({ taxId: randomInt(12).toString() }),
-      });
-      renderTaskCheckbox(taxTaskId, userData);
-      await selectCompleted();
-
-      fireEvent.click(screen.getByText(Config.registeredForTaxesModal.saveButtonText));
-      await screen.findByText(Config.taskProgress.COMPLETED);
-      expect(currentUserData().taskProgress[taxTaskId]).toEqual("COMPLETED");
-    });
-
-    it("gets redirected to dashboard with the proper query parameter when completed", async () => {
-      const userData = generateUserData({
-        taskProgress: { [taxTaskId]: "NOT_STARTED" },
-        profileData: generateProfileData({ businessPersona: "STARTING", taxId: randomInt(12).toString() }),
-      });
-
-      renderTaskCheckbox(taxTaskId, userData);
-      await selectCompleted();
-
-      fireEvent.click(screen.getByText(Config.registeredForTaxesModal.saveButtonText));
-      await waitFor(() => {
-        expect(mockPush).toHaveBeenCalledWith({
-          pathname: ROUTES.dashboard,
-          query: { fromFormBusinessEntity: "false", fromTaxRegistration: "true" },
-        });
-      });
-    });
-
+  describe("tax registration warning modal", () => {
     it("shows the warning modal if the user tries to change status from completed", () => {
       const userData = generateUserData({
         taskProgress: { [taxTaskId]: "COMPLETED" },

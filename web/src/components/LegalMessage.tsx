@@ -11,9 +11,9 @@ export const LegalMessage = (): ReactElement => {
         <p className="line-height-body-2 padding-y-2 margin-top-0">
           {Config.legalMessageDefaults.legalMessageTextOne}
           <UnStyledButton
-            style="tertiary"
-            underline
-            intercomButton
+            style="default"
+            isUnderline
+            isIntercomEnabled
             onClick={analytics.event.roadmap_footer_live_chat_link.click.open_live_chat}
           >
             {Config.legalMessageDefaults.legalMessageLegalChat}

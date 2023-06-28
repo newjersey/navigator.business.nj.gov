@@ -11,12 +11,13 @@ import {
   setRegistrationDimension,
   setUserId,
 } from "@/lib/utils/analytics-helpers";
-import { createEmptyUser } from "@businessnjgovnavigator/shared/";
+import { createEmptyUser, UserData } from "@businessnjgovnavigator/shared/";
 import { Dispatch } from "react";
-import { UpdateQueue } from "../types/types";
-import { AuthAction } from "./AuthContext";
-import * as session from "./sessionHelper";
-import { triggerSignOut } from "./sessionHelper";
+
+import { AuthAction } from "@/lib/auth/AuthContext";
+import * as session from "@/lib/auth/sessionHelper";
+import { triggerSignOut } from "@/lib/auth/sessionHelper";
+import { UpdateQueue } from "@/lib/types/types";
 
 export const onSignIn = async (dispatch: Dispatch<AuthAction>): Promise<void> => {
   const user = await session.getCurrentUser();
@@ -38,11 +39,10 @@ export type SelfRegRouter = {
 export const onSelfRegister = (
   router: SelfRegRouter,
   updateQueue: UpdateQueue | undefined,
+  userData: UserData | undefined,
   setRegistrationAlertStatus: AuthAlertContextType["setRegistrationAlertStatus"],
   options?: { useReturnToLink: boolean }
 ): void => {
-  const userData = updateQueue?.current();
-
   if (!userData || !updateQueue) {
     return;
   }

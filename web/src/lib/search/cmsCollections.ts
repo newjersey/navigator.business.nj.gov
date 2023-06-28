@@ -31,8 +31,8 @@ export const cmsCollections = [
     ],
   },
   {
-    label: "🟪 TAXES & FILINGS",
-    children: ["Taxes Filings - All", "Tax Access Modal Config"],
+    label: "🟪 CALENDAR",
+    children: ["License Expiration / Renewal Events", "Taxes Filings - All", "Tax Access Modal Config"],
   },
   {
     label: "🟥 DASHBOARD",

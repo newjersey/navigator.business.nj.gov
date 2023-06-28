@@ -38,7 +38,12 @@ const NaicsLookupPreview = (props: PreviewProps): ReactElement => {
 
         <hr className="margin-y-6" />
 
-        <NaicsCodeDisplay onEdit={(): void => {}} onRemove={(): void => {}} code={"441221"} />
+        <NaicsCodeDisplay
+          onEdit={(): void => {}}
+          onRemove={(): void => {}}
+          code={"441221"}
+          lockField={false}
+        />
       </div>
     </ConfigContext.Provider>
   );

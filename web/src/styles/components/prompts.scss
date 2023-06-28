@@ -1,0 +1,8 @@
+.business-structure-prompt-border {
+  border: double 3px transparent;
+  border-radius: 6px;
+  background-image: linear-gradient(white, white),
+    radial-gradient(circle at top left, $primary-light-vivid, $accent-semi-cool-vivid);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}

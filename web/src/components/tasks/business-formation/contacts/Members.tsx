@@ -8,7 +8,11 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
-export const Members = (): ReactElement => {
+interface Props {
+  hasError: boolean;
+}
+
+export const Members = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
@@ -38,6 +42,7 @@ export const Members = (): ReactElement => {
     modalSaveButton: Config.formation.fields[configField].modalSaveButton,
     defaultCheckbox: isCorp ? undefined : Config.formation.fields.members.addressCheckboxText,
     placeholder: Config.formation.fields[configField].placeholder ?? "",
+    error: Config.formation.fields[configField].error ?? "",
   };
 
   return (
@@ -53,6 +58,7 @@ export const Members = (): ReactElement => {
       needSignature={false}
       displayContent={displayContent}
       defaultAddress={defaultAddress}
+      hasError={props.hasError}
     />
   );
 };

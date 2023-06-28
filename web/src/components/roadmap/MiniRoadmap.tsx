@@ -1,9 +1,12 @@
+import { BusinessStructurePrompt } from "@/components/dashboard/BusinessStructurePrompt";
 import { SectionAccordion } from "@/components/dashboard/SectionAccordion";
 import { MiniRoadmapStep } from "@/components/roadmap/MiniRoadmapStep";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isStepCompleted } from "@/lib/domain-logic/isStepCompleted";
 import analytics from "@/lib/utils/analytics";
+import { hasCompletedBusinessStructure } from "@businessnjgovnavigator/shared/domain-logic/hasCompletedBusinessStructure";
+import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
 import { ReactElement, useCallback } from "react";
 
 interface Props {
@@ -14,6 +17,11 @@ interface Props {
 export const MiniRoadmap = (props: Props): ReactElement => {
   const { roadmap, sectionNamesInRoadmap } = useRoadmap();
   const { updateQueue, userData } = useUserData();
+
+  const displayBusinessStructurePrompt = LookupOperatingPhaseById(
+    userData?.profileData.operatingPhase
+  ).displayBusinessStructurePrompt;
+  const completedBusinessStructure = hasCompletedBusinessStructure(userData);
 
   const onToggleStep = useCallback(
     async (stepNumber: number, setOpen: boolean, click: boolean): Promise<void> => {
@@ -49,24 +57,28 @@ export const MiniRoadmap = (props: Props): ReactElement => {
       {sectionNamesInRoadmap.map((section) => {
         return (
           <SectionAccordion key={section} sectionType={section} mini={true}>
-            {roadmap?.steps
-              .filter((step) => {
-                return step.section === section;
-              })
-              .map((step, index, array) => {
-                return (
-                  <MiniRoadmapStep
-                    step={step}
-                    isLast={index === array.length - 1}
-                    activeTaskId={props.activeTaskId}
-                    completed={isStepCompleted(roadmap, step, userData)}
-                    isOpen={userData?.preferences.roadmapOpenSteps.includes(step.stepNumber)}
-                    toggleStep={onToggleStep}
-                    onTaskClick={props.onTaskClick}
-                    key={step.stepNumber}
-                  />
-                );
-              })}
+            {section === "START" && !completedBusinessStructure && displayBusinessStructurePrompt ? (
+              <BusinessStructurePrompt isCTAButtonHidden={true} />
+            ) : (
+              roadmap?.steps
+                .filter((step) => {
+                  return step.section === section;
+                })
+                .map((step, index, array) => {
+                  return (
+                    <MiniRoadmapStep
+                      step={step}
+                      isLast={index === array.length - 1}
+                      activeTaskId={props.activeTaskId}
+                      completed={isStepCompleted(roadmap, step, userData)}
+                      isOpen={userData?.preferences.roadmapOpenSteps.includes(step.stepNumber)}
+                      toggleStep={onToggleStep}
+                      onTaskClick={props.onTaskClick}
+                      key={step.stepNumber}
+                    />
+                  );
+                })
+            )}
           </SectionAccordion>
         );
       })}
