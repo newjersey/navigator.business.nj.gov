@@ -1,7 +1,7 @@
 ---
 notesMd: >-
-  06/28/23: This task has two calls-to-action: 1) Apply for your License, and 2)
-  Verify your staff is licensed. The CTA button needs to accommodate both.
+  06/28/23: This task needs to CTA links: 1) "Apply for My License" and 2)
+  "Verify My Staff Are Licensed." The CTA button needs to accommodate both.
 
 
   CTA 1: "Apply for My License"(https://www.njconsumeraffairs.gov/mbt/Pages/individual.aspx)
