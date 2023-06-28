@@ -23,7 +23,7 @@ interface DisplayContent {
   snackbarHeader: string;
   snackbarBody: string;
   defaultCheckbox?: string;
-  error?: string;
+  errorText?: string;
 }
 
 interface Props<T> {
@@ -183,7 +183,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
       <tfoot>
         {props.hasError && props.addressData.length === 0 ? (
           <tr>
-            <td className={"text-error-dark text-bold"}>{props.displayContent.error}</td>
+            <td className={"text-error-dark text-bold"}>{props.displayContent.errorText}</td>
           </tr>
         ) : props.addressData.length === 0 ? (
           <tr>
@@ -262,14 +262,12 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                       </div>
                     </td>
                   </tr>
-                  {doesFieldHaveError(props.fieldName) && "signature" in it && !it.signature ? (
+                  {doesFieldHaveError(props.fieldName) && "signature" in it && !it.signature && (
                     <tr key={`error-${index}`}>
                       <td className="flex-column text-error-dark text-bold">
                         {Config.formation.fields.signers.errorBannerCheckbox}
                       </td>
                     </tr>
-                  ) : (
-                    <></>
                   )}
                 </Fragment>
               );
@@ -281,14 +279,14 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
         <tfoot>
           {props.hasError && props.addressData.length === 0 ? (
             <tr>
-              <td className={"text-error-dark text-bold"}>{props.displayContent.error}</td>
-            </tr>
-          ) : props.addressData.length === 0 ? (
-            <tr>
-              <td className="flex-column">{props.displayContent.placeholder}</td>
+              <td className={"text-error-dark text-bold"}>{props.displayContent.errorText}</td>
             </tr>
           ) : (
-            <></>
+            props.addressData.length === 0 && (
+              <tr>
+                <td className="flex-column">{props.displayContent.placeholder}</td>
+              </tr>
+            )
           )}
         </tfoot>
       </table>

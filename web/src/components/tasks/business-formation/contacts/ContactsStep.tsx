@@ -119,7 +119,7 @@ export const ContactsStep = (): ReactElement => {
               snackbarBody: Config.formation.fields.incorporators.successSnackbarBody,
               modalTitle: Config.formation.fields.incorporators.modalTitle,
               modalSaveButton: Config.formation.fields.incorporators.addButtonText,
-              error: Config.formation.fields.incorporators.error,
+              errorText: Config.formation.fields.incorporators.error,
             }}
             hasError={doesFieldHaveError("signers") || doesFieldHaveError("incorporators")}
           />
