@@ -126,7 +126,6 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                   <td className="break-word">{formatAddress(it)}</td>
                   {"signature" in it ? (
                     <td className="padding-y-0">
-                      {" "}
                       {renderSignatureColumn({
                         onChange: (event) => {
                           return handleSignerCheckbox(event, index);
@@ -164,14 +163,12 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                     </div>
                   </td>
                 </tr>
-                {doesFieldHaveError(props.fieldName) && "signature" in it && !it.signature ? (
+                {doesFieldHaveError(props.fieldName) && "signature" in it && !it.signature && (
                   <tr key={`error-${index}`}>
                     <td colSpan={4} className="text-error-dark text-bold">
                       {Config.formation.fields.signers.errorBannerCheckbox}
                     </td>
                   </tr>
-                ) : (
-                  <></>
                 )}
               </Fragment>
             );
@@ -185,12 +182,12 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
           <tr>
             <td className={"text-error-dark text-bold"}>{props.displayContent.error}</td>
           </tr>
-        ) : props.addressData.length === 0 ? (
-          <tr>
-            <td colSpan={4}>{props.displayContent.placeholder}</td>
-          </tr>
         ) : (
-          <></>
+          props.addressData.length === 0 && (
+            <tr>
+              <td colSpan={4}>{props.displayContent.placeholder}</td>
+            </tr>
+          )
         )}
       </tfoot>
     </table>
@@ -328,7 +325,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                 setModalOpen(true);
               }}
             >
-              <Icon>add</Icon>{" "}
+              <Icon>add</Icon>
               <span
                 className="text-underline"
                 style={{ textUnderlinePosition: "under" }}
