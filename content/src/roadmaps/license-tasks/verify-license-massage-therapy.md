@@ -1,13 +1,20 @@
 ---
+notesMd: >-
+  06/28/23: This task has two calls-to-action: 1) Apply for your License, and 2)
+  Verify your staff is licensed. The CTA button needs to accommodate both.
+
+
+  CTA 1: "Apply for a License"(https://www.njconsumeraffairs.gov/mbt/Pages/individual.aspx)
+
+  CTA 2: "Verify Staff Are Licensed"(https://newjersey.mylicense.com/verification/)
 filename: verify-license-massage-therapy
 urlSlug: verify-license-massage-therapy
 name: Apply for Your License and Ensure Your Staff is Licensed
 webflowName: "Massage Therapy: Massage Therapy Licenses"
 summaryDescriptionMd: >
-  You or any of your staff providing massage therapy services need to have
-  individual massage therapy licenses. It is the responsibility of the business
-  owner to ensure all staff providing massage therapy services have a current
-  license.
+  If you or any of your staff provide massage therapy services, you each need to
+  have massage therapy license. It is the responsibility of the business owner
+  to ensure all staff providing massage therapy services have a current license.
 industryId:
   - massage-therapy
 callToActionText: Apply for or Verify a License
