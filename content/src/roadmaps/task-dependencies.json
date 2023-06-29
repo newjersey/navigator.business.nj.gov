@@ -1,12 +1,6 @@
 {
   "dependencies": [
     {
-      "name": "register-for-ein",
-      "dependencies": [
-        "form-business-entity-llc"
-      ]
-    },
-    {
       "name": "form-business-entity",
       "dependencies": [
         "register-for-ein"
@@ -16,7 +10,6 @@
       "name": "register-for-taxes",
       "dependencies": [
         "form-business-entity",
-        "form-business-entity-llc",
         "register-for-ein",
         "determine-naics-code",
         "form-business-entity-foreign"
