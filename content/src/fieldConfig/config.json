@@ -157,7 +157,7 @@
     "areYouSureModalCancelButtonText": "Cancel",
     "dateOfFormationErrorText": "Your effective date must be formatted as MM/YYYY.",
     "header": "Find Your Annual Report Deadline",
-    "areYouSureModalBody": "If you change your task status, you will need to resubmit your Business `Effective Date|effective-date` and will lose access to your calendar.",
+    "areYouSureModalBody": "If you change your task status, you need to resubmit your Business `Effective Date|effective-date` and will lose access to your calendar.",
     "areYouSureModalContinueButtonText": "Continue",
     "lockedStatusTooltipText": "You have successfully completed forming your business in this task.",
     "cancelButtonText": "Cancel",
