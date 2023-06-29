@@ -20,7 +20,7 @@ export interface UserData {
   versionWhenCreated: number;
 }
 
-export const CURRENT_VERSION = 117;
+export const CURRENT_VERSION = 118;
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
   return {

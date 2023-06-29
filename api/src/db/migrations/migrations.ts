@@ -19,6 +19,7 @@ import { migrate_v113_to_v114 } from "./v114_add_expired_iso_field_to_license";
 import { migrate_v114_to_v115 } from "./v115_rename_tax_filings";
 import { migrate_v115_to_v116 } from "./v116_add_dba_business_name_availability";
 import { migrate_v116_to_v117 } from "./v117_add_onboarding_nonprofit";
+import { migrate_v117_to_v118 } from "./v118_set_operating_phase_remote_seller_worker";
 import { migrate_v10_to_v11 } from "./v11_change_license_statuses";
 import { migrate_v11_to_v12 } from "./v12_remove_scorp";
 import { migrate_v12_to_v13 } from "./v13_add_construction_renovation_plan";
@@ -238,4 +239,5 @@ export const Migrations: MigrationFunction[] = [
   migrate_v114_to_v115,
   migrate_v115_to_v116,
   migrate_v116_to_v117,
+  migrate_v117_to_v118,
 ];

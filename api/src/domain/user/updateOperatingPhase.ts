@@ -1,7 +1,7 @@
 import { businessStructureTaskId, formationTaskId, taxTaskId } from "@shared/domain-logic/taskIds";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { OperatingPhaseId } from "@shared/operatingPhase";
-import { BusinessPersona } from "@shared/profileData";
+import { BusinessPersona, ForeignBusinessType } from "@shared/profileData";
 import { TaskProgress, UserData } from "@shared/userData";
 import { UpdateOperatingPhase } from "../types";
 
@@ -12,6 +12,7 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): 
 
   const newPhase = getNewPhase({
     businessPersona: userData.profileData.businessPersona,
+    foreignBusinessType: userData.profileData.foreignBusinessType,
     taskProgress: userData.taskProgress,
     isPublicFiling: isPublicFiling,
     currentPhase: originalPhase,
@@ -39,12 +40,14 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): 
 
 const getNewPhase = ({
   businessPersona,
+  foreignBusinessType,
   currentPhase,
   isPublicFiling,
   taskProgress,
   legalStructureId,
 }: {
   businessPersona: BusinessPersona;
+  foreignBusinessType: ForeignBusinessType;
   currentPhase: OperatingPhaseId;
   isPublicFiling: boolean;
   taskProgress: Record<string, TaskProgress>;
@@ -57,6 +60,13 @@ const getNewPhase = ({
 
   if (businessPersona === "OWNING") {
     return "UP_AND_RUNNING_OWNING";
+  }
+
+  if (
+    businessPersona === "FOREIGN" &&
+    (foreignBusinessType === "REMOTE_WORKER" || foreignBusinessType === "REMOTE_SELLER")
+  ) {
+    return "NEEDS_TO_FORM";
   }
 
   if (currentPhase === "GUEST_MODE") {

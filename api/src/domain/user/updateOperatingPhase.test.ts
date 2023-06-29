@@ -38,6 +38,39 @@ describe("updateOperatingPhase", () => {
       });
       expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
     });
+
+    it("updates the phase to NEEDS_BUSINESS_STRUCTURE from GUEST_MODE for nexus", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          foreignBusinessType: "NEXUS",
+          operatingPhase: "GUEST_MODE",
+        }),
+      });
+      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
+    });
+
+    it("updates to NEEDS_TO_FORM from GUEST_MODE when user is remote seller", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          foreignBusinessType: "REMOTE_SELLER",
+          operatingPhase: "GUEST_MODE",
+        }),
+      });
+      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
+    });
+
+    it("updates to NEEDS_TO_FORM from GUEST_MODE when user is remote worker", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          foreignBusinessType: "REMOTE_WORKER",
+          operatingPhase: "GUEST_MODE",
+        }),
+      });
+      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
+    });
   });
 
   describe("NEEDS_BUSINESS_STRUCTURE", () => {
