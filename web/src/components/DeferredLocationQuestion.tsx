@@ -7,7 +7,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
-import { Municipality } from "@businessnjgovnavigator/shared/municipality";
+import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, ReactNode, useState } from "react";
 
@@ -37,15 +37,11 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
 
   const shouldShowQuestion = userData?.profileData.municipality === undefined || showEditLocation;
 
-  const onSaveNewLocation = (selectedMunicipality?: Municipality): void => {
+  const onSaveNewLocation = (updatedProfileData?: ProfileData): void => {
     setShowSuccessBanner(true);
     setShowEditLocation(false);
     userData?.profileData.municipality === undefined &&
-      selectedMunicipality &&
-      analytics.event.task_location_question.submit.location_entered_for_first_time();
-
-    userData?.profileData.municipality === undefined &&
-      updateQueue?.current().profileData.municipality !== undefined &&
+      updatedProfileData?.municipality &&
       analytics.event.task_location_question.submit.location_entered_for_first_time();
   };
 
