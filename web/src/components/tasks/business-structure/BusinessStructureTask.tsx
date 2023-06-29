@@ -36,6 +36,9 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
   const userDataFromHook = useUserData();
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
+  const [isTaskCompleted, setTaskCompleted] = useState<boolean>(
+    userData?.taskProgress[props.task.id] === "COMPLETED"
+  );
   const updateQueue = userDataFromHook.updateQueue;
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const {
@@ -48,8 +51,10 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     return () => {
       if (userData?.profileData.legalStructureId) {
         queueUpdateTaskProgress(props.task.id, "COMPLETED");
+        setTaskCompleted(true);
       } else if (!userData?.profileData.legalStructureId) {
         queueUpdateTaskProgress(props.task.id, "NOT_STARTED");
+        setTaskCompleted(false);
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -69,6 +74,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     }
 
     queueUpdateTaskProgress(props.task.id, "COMPLETED");
+    setTaskCompleted(true);
     await updateQueue.queueProfileData(profileData).update();
     setShowRadioQuestion(false);
     setSuccessSnackbarIsOpen(true);
@@ -80,6 +86,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     }
     setShowRadioQuestion(true);
     queueUpdateTaskProgress(props.task.id, "IN_PROGRESS");
+    setTaskCompleted(false);
   };
 
   const removeTaskCompletion = async (): Promise<void> => {
@@ -94,6 +101,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
             : profileData.operatingPhase,
       })
       .queueTaskProgress({ [props.task.id]: "NOT_STARTED" });
+    setTaskCompleted(false);
 
     setShowRadioQuestion(true);
     await updateQueue.update();
@@ -112,11 +120,6 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   const preLookupContent = props.task.contentMd.split("${businessStructureSelectionComponent}")[0];
   const postLookupContent = props.task.contentMd.split("${businessStructureSelectionComponent}")[1];
 
-  const isCompleted = (): boolean => {
-    if (!updateQueue) return false;
-    return updateQueue.current().taskProgress[props.task.id] === "COMPLETED";
-  };
-
   const canEdit = (): boolean => {
     if (!userData) return false;
     return !hasCompletedFormation(userData);
@@ -124,7 +127,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
 
   const getTaskProgressTooltip = (): string => {
     if (!userData) return "";
-    if (!isCompleted()) {
+    if (!isTaskCompleted) {
       return Config.businessStructureTask.uncompletedTooltip;
     } else if (hasCompletedFormation(userData)) {
       return Config.profileDefaults.lockedFieldTooltipText;

@@ -23,6 +23,7 @@ import {
   createEmptyProfileData,
   LookupLegalStructureById,
   ProfileData,
+  TaxFilingData,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { Backdrop, CircularProgress } from "@mui/material";
@@ -145,6 +146,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
 
       const encryptedTaxId =
         profileData.taxId === userData.profileData.taxId ? profileData.encryptedTaxId : undefined;
+      let retrievedTaxData: undefined | TaxFilingData;
 
       try {
         let businessNameToSubmitToTaxApi = "";
@@ -161,6 +163,8 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
           businessName: businessNameToSubmitToTaxApi,
           encryptedTaxId: encryptedTaxId as string,
         });
+
+        retrievedTaxData = userDataToSet.taxFilingData;
 
         let record;
 
@@ -202,7 +206,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
         return;
       }
 
-      const { taxFilingData } = updateQueue.current();
+      const taxFilingData = retrievedTaxData;
 
       if (taxFilingData.state === "SUCCESS") {
         setIsLoading(false);
