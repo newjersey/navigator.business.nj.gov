@@ -10,7 +10,7 @@ To add a business to your Premier Business Services (PBS) account, login to the 
 2. Read and Agree to the Agreement/Terms Of Use.
 3. Confirm the Information Associated with this Business.
 
-To register, you will need:
+To register, you need:
 
 - Business Name
 - NJ TAX ID
