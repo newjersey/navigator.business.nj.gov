@@ -15,4 +15,4 @@ Your operating agreement or bylaws should tell you how to get a resolution. For 
 
 > **Why do I need this?**
 >
-> You will need to share a copy of the resolution with the New Jersey Department of Treasury when you authorize your business.
+> You need to share a copy of the resolution with the New Jersey Department of Treasury when you authorize your business.
