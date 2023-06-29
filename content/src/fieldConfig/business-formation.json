@@ -24,7 +24,7 @@
       "initialNextButtonText": "Continue Forming My Business",
       "submitButtonText": "Submit & Pay",
       "viewMoreButtonText": "View more",
-      "amendmentInfo": "#### Review your information before submitting to the New Jersey Division of Revenue and Enterprise Services.\n If you need to make a change after submitting, you will need to file an [amendment online.](https://www.njportal.com/dor/businessamendments)",
+      "amendmentInfo": "#### Review your information before submitting to the New Jersey Division of Revenue and Enterprise Services.\n If you need to make a change after submitting, you must file an [amendment online.](https://www.njportal.com/dor/businessamendments)",
       "viewLessButtonText": "View less",
       "genericErrorText": "This field requires information."
     },
@@ -156,19 +156,19 @@
         "error": "Enter the agent's office street name and number."
       },
       "incorporators": {
-        "label": "Signers",
-        "successSnackbarHeader": "Signer Added",
-        "successSnackbarBody": "A signer has been added successfully.",
         "addButtonText": "Add Signer",
-        "modalTitle": "Add New Signer",
-        "placeholder": "No Signers have been added",
-        "error": "Enter at least 1 signer's name.",
-        "description": "List each `Incorporators'|incorporator` name and address. You can have up to 10 Incorporators listed.\n\nIncorporators are listed on the Certificate of Formation and will have the ability to file and sign documents.",
         "overrides": {
           "limited-partnership": {
             "description": "List each General Partners' name and address. You can have up to 10 General Partners listed.\n\nGeneral Partners are listed on the Certificate of Formation and will have the ability to file and sign documents."
           }
-        }
+        },
+        "error": "Enter at least 1 signer's name.",
+        "successSnackbarBody": "A signer has been added successfully.",
+        "modalTitle": "Add New Signer",
+        "placeholder": "No Signers have been added",
+        "label": "Signers",
+        "successSnackbarHeader": "Signer Added",
+        "description": "List each `Incorporators'|incorporator` name and address. You can have up to 10 Incorporators listed.\n\nIncorporators are listed on the Certificate of Formation and will have the ability to file and sign documents."
       },
       "businessName": {
         "alertRestrictedWord": "\"${name}\" contains the restricted word \"${word}\" that cannot be used in the Business Name for online filing. If you would like to use this restricted word, please contact us with your preferred name at [treasury.](https://www.state.nj.us/treasury/revenue/revgencode.shtml)",
@@ -264,6 +264,7 @@
         "addButtonText": "Add New Member",
         "addressCheckboxText": "Use business address.",
         "expandText": "Expand",
+        "error": "Enter at least 1 member's name.",
         "successSnackbarBody": "A member has been added successfully.",
         "modalTitle": "Add New Member",
         "subheader": "(Complete this section if you are a multi-member LLC)",
@@ -271,8 +272,7 @@
         "label": "Members",
         "successSnackbarHeader": "Member Added",
         "modalSaveButton": "Add Member",
-        "description": "List each LLC's members' name and address. You may list up to 10 members. Members can be individuals or entities and are the owners of the LLC. Members do not own the LLC's property. They may or may not manage the business and affairs.",
-        "error": "Enter at least 1 member's name."
+        "description": "List each LLC's members' name and address. You may list up to 10 members. Members can be individuals or entities and are the owners of the LLC. Members do not own the LLC's property. They may or may not manage the business and affairs."
       },
       "certifiedCopyOfFormationDocument": {
         "cost": "25",
