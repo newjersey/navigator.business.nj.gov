@@ -21,7 +21,7 @@ interface Props {
   hideDivider?: boolean;
 }
 
-export const ButtonDropdown = (props: Props): ReactElement => {
+export const CalendarButtonDropdown = (props: Props): ReactElement => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLButtonElement | null>(null);
   const prevOpen = useRef(open);

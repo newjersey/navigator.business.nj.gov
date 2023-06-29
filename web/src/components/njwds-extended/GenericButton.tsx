@@ -1,11 +1,15 @@
 import { CircularProgress } from "@mui/material";
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import React, { forwardRef, ReactElement, Ref, useEffect, useRef, useState } from "react";
 
 export interface GenericButtonProps {
   className?: string;
   children?: React.ReactNode;
   onClick?: (() => void) | ((event: React.MouseEvent) => Promise<void>) | ((event: React.MouseEvent) => void);
   dataTestId?: string;
+  id?: string;
+  isAriaControls?: string;
+  isAriaExpanded?: boolean;
+  isAriaHaspopup?: boolean;
   isSubmitButton?: boolean;
   isRightMarginRemoved?: boolean;
   isSmallerText?: boolean;
@@ -19,7 +23,10 @@ export interface GenericButtonProps {
   isLargeButton?: boolean;
 }
 
-export const GenericButton = (props: GenericButtonProps): ReactElement => {
+export const GenericButton = forwardRef(function GenericButton(
+  props: GenericButtonProps,
+  ref?: Ref<HTMLButtonElement> | undefined
+): ReactElement {
   const isUnBolded = props.isUnBolded ? "text-normal" : "";
   const disabledClass = "usa-button--disabled";
   const showDisabledClass = props.isLoading ? disabledClass : "";
@@ -65,8 +72,13 @@ export const GenericButton = (props: GenericButtonProps): ReactElement => {
     <button
       className={className}
       onClick={props.onClick}
+      ref={ref}
       {...(props.isSubmitButton ? { type: "submit" } : { type: "button" })}
       {...(props.dataTestId ? { "data-testid": props.dataTestId } : {})}
+      {...(props.id ? { id: props.id } : {})}
+      {...(props.isAriaControls ? { "aria-controls": props.isAriaControls } : {})}
+      {...(props.isAriaExpanded ? { "aria-expanded": props.isAriaExpanded } : {})}
+      {...(props.isAriaHaspopup ? { "aria-haspopup": props.isAriaHaspopup } : {})}
     >
       {props.isLoading ? (
         <div style={{ width: width, height: height }} data-testid="loading-spinner">
@@ -86,4 +98,4 @@ export const GenericButton = (props: GenericButtonProps): ReactElement => {
       )}
     </button>
   );
-};
+});

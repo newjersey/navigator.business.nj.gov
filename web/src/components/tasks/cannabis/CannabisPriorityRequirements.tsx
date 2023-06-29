@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
-import { ButtonDropdown } from "@/components/njwds-extended/ButtonDropdown";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { PrimaryButtonDropdown } from "@/components/njwds-extended/PrimaryButtonDropdown";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -109,9 +109,9 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
       );
     } else if (ctaButtons.length > 1) {
       return (
-        <ButtonDropdown dropdownOptions={ctaButtons}>
+        <PrimaryButtonDropdown dropdownOptions={ctaButtons}>
           {Config.cannabisPriorityStatus.dropdownCTAButtonText}
-        </ButtonDropdown>
+        </PrimaryButtonDropdown>
       );
     } else {
       return <></>;
