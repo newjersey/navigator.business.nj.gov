@@ -98,6 +98,8 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
     props.setData([...[...props.addressData].slice(0, index), ...[...props.addressData].slice(index + 1)]);
   };
 
+  const zebraOnOdd = (index: number): string => (index % 2 === 1 ? "bg-base-extra-light" : "");
+
   const renderDesktopTable = (
     <table className={`addresses margin-top-2 margin-bottom-3`}>
       <thead>
@@ -121,7 +123,11 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
           props.addressData.map((it, index) => {
             return (
               <Fragment key={index}>
-                <tr className="margin-bottom-1" key={index} data-testid={`${props.fieldName}-${index}`}>
+                <tr
+                  className={`margin-bottom-1 ${zebraOnOdd(index)}`}
+                  key={index}
+                  data-testid={`${props.fieldName}-${index}`}
+                >
                   <td className="break-word">{it.name}</td>
                   <td className="break-word">{formatAddress(it)}</td>
                   {"signature" in it ? (
@@ -164,7 +170,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                   </td>
                 </tr>
                 {doesFieldHaveError(props.fieldName) && "signature" in it && !it.signature && (
-                  <tr key={`error-${index}`}>
+                  <tr className={zebraOnOdd(index)} key={`error-${index}`}>
                     <td colSpan={4} className="text-error-dark text-bold">
                       {Config.formation.fields.signers.errorBannerCheckbox}
                     </td>
@@ -195,16 +201,13 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
 
   const renderMobileTable = (
     <>
-      <table
-        data-testid={`addresses-${props.fieldName}-table-mobile`}
-        className={`addresses-mobile margin-y-2`}
-      >
+      <table data-testid={`addresses-${props.fieldName}-table-mobile`} className="margin-y-2">
         <tbody>
           {props.addressData.length > 0 ? (
             props.addressData.map((it, index) => {
               return (
                 <Fragment key={index}>
-                  <tr>
+                  <tr className={`margin-bottom-1 ${zebraOnOdd(index)}`}>
                     <td className="flex-column">
                       <div className="flex-column">
                         <div className="margin-bottom-2 break-word">{it.name}</div>
@@ -218,7 +221,6 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                         <span className="flex fac">
                           {"signature" in it ? (
                             <>
-                              {" "}
                               <Content>{`${Config.formation.fields.signers.signColumnLabel}*`}</Content>
                               <div>
                                 {renderSignatureColumn({
@@ -228,7 +230,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                                   checked: it.signature,
                                   fieldName: props.fieldName,
                                   index,
-                                })}{" "}
+                                })}
                               </div>
                             </>
                           ) : (
@@ -260,7 +262,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                     </td>
                   </tr>
                   {doesFieldHaveError(props.fieldName) && "signature" in it && !it.signature ? (
-                    <tr key={`error-${index}`}>
+                    <tr className={`margin-bottom-1 ${zebraOnOdd(index)}`} key={`error-${index}`}>
                       <td className="flex-column text-error-dark text-bold">
                         {Config.formation.fields.signers.errorBannerCheckbox}
                       </td>
@@ -316,7 +318,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
           <WithErrorBar hasError={doesFieldHaveError(props.fieldName)} type="ALWAYS">
             {isTabletAndUp ? renderDesktopTable : renderMobileTable}
           </WithErrorBar>
-
+          {props.addressData.length > 0 && <hr className="margin-bottom-3" />}
           {props.addressData.length <= 9 && (
             <UnStyledButton
               style="default"
