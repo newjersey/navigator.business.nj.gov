@@ -40,7 +40,7 @@ export const BusinessStructurePrompt = (props: Props): ReactElement => {
           )}
         </div>
         {!props.isCTAButtonHidden && (
-          <div className={isDesktopAndUp ? "flex-auto" : ""}>
+          <div className={isDesktopAndUp ? "flex-auto" : "margin-top-2"}>
             <PrimaryButton
               isColor="primary"
               isRightMarginRemoved
