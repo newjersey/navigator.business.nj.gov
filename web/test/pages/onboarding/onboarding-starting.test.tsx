@@ -8,6 +8,7 @@ import {
   industryIdsWithRequiredEssentialQuestion,
   mockSuccessfulApiSignups,
   renderPage,
+  runNonprofitOnboardingTests,
   runSelfRegPageTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
@@ -181,7 +182,6 @@ describe("onboarding - starting a business", () => {
         businessPersona: "STARTING",
         businessName: "Applebees",
         industryId: "cosmetology",
-        legalStructureId: "c-corporation",
       }),
       user: generateUser({
         name: "Michael Deeb",
@@ -229,6 +229,7 @@ describe("onboarding - starting a business", () => {
         sectorId: "retail-trade-and-ecommerce",
         homeBasedBusiness: undefined,
         municipality: undefined,
+        isNonprofitOnboardingRadio: false,
       },
       preferences: {
         ...initialUserData.preferences,
@@ -291,5 +292,9 @@ describe("onboarding - starting a business", () => {
 
   describe("validates self-reg step", () => {
     runSelfRegPageTests({ businessPersona: "STARTING", selfRegPage: "3" });
+  });
+
+  describe("nonprofit onboarding tests", () => {
+    runNonprofitOnboardingTests({ businessPersona: "STARTING", industryPage: 2, selfRegPage: 3 });
   });
 });

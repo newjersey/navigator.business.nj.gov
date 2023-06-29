@@ -117,6 +117,22 @@ export const LegalStructures: LegalStructure[] = [
     ]),
   },
   {
+    id: "nonprofit",
+    name: "Nonprofit",
+    abbreviation: "NP",
+    requiresPublicFiling: true,
+    hasTradeName: false,
+    onboardingOrder: 45,
+    elementsToDisplay: new Set([
+      "businessName",
+      "nexusBusinessElements",
+      "formationDocuments",
+      "formationDate",
+      "entityId",
+      "dbaName",
+    ]),
+  },
+  {
     id: "s-corporation",
     name: "Corporation (and optional S Corp tax designation)",
     abbreviation: "S Corp",

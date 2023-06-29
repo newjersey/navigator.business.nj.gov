@@ -122,6 +122,13 @@ const TaskPage = (props: Props): ReactElement => {
             "business-structure": (
               <BusinessStructureTask task={getTaskFromRoadmap(roadmap, props.task.id) ?? props.task} />
             ),
+            "search-business-name": (
+              <BusinessFormation
+                task={getTaskFromRoadmap(roadmap, props.task.id)}
+                displayContent={props.displayContent}
+                searchOnly={true}
+              />
+            ),
             [formationTaskId]: (
               <BusinessFormation
                 task={getTaskFromRoadmap(roadmap, props.task.id)}

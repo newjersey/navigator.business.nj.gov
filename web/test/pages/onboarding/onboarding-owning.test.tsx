@@ -195,6 +195,7 @@ describe("onboarding - owning a business", () => {
       taxFilingData: taxData,
       profileData: generateProfileData({
         businessPersona: "OWNING",
+        legalStructureId: undefined,
       }),
       onboardingFormProgress: "COMPLETED",
     });
@@ -216,6 +217,7 @@ describe("onboarding - owning a business", () => {
       profileData: generateProfileData({
         businessPersona: "OWNING",
         operatingPhase: "GUEST_MODE_OWNING",
+        legalStructureId: undefined,
       }),
       preferences: generatePreferences({
         visibleSidebarCards: ["welcome"],
