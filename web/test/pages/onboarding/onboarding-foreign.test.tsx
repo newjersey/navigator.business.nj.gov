@@ -238,6 +238,22 @@ describe("onboarding - foreign business", () => {
       ).toBeInTheDocument();
       expect(screen.getByText(Config.selfRegistration.nameFieldLabel)).toBeInTheDocument();
     });
+
+    it("sets operating phase to GUEST_MODE_WITH_BUSINESS_STRUCTURE to prevent prompt", async () => {
+      const userData = generateTestUserData({
+        operatingPhase: "GUEST_MODE",
+        businessPersona: "FOREIGN",
+        foreignBusinessType: "REMOTE_SELLER",
+      });
+
+      useMockRouter({ isReady: true, query: { page: "3" } });
+      const { page } = renderPage({ userData });
+      page.clickNext();
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalled();
+      });
+      expect(currentUserData().profileData.operatingPhase).toEqual("GUEST_MODE_WITH_BUSINESS_STRUCTURE");
+    });
   });
 
   describe("REMOTE_WORKER onboarding", () => {
@@ -255,6 +271,22 @@ describe("onboarding - foreign business", () => {
         )
       ).toBeInTheDocument();
       expect(screen.getByText(Config.selfRegistration.nameFieldLabel)).toBeInTheDocument();
+    });
+
+    it("sets operating phase to GUEST_MODE_WITH_BUSINESS_STRUCTURE to prevent prompt", async () => {
+      const userData = generateTestUserData({
+        operatingPhase: "GUEST_MODE",
+        businessPersona: "FOREIGN",
+        foreignBusinessType: "REMOTE_WORKER",
+      });
+
+      useMockRouter({ isReady: true, query: { page: "3" } });
+      const { page } = renderPage({ userData });
+      page.clickNext();
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalled();
+      });
+      expect(currentUserData().profileData.operatingPhase).toEqual("GUEST_MODE_WITH_BUSINESS_STRUCTURE");
     });
   });
 
@@ -412,6 +444,24 @@ describe("onboarding - foreign business", () => {
       expect(screen.getByTestId("location-in-new-jersey")).toHaveTextContent(
         Config.profileDefaults.fields.nexusLocationInNewJersey.default.errorTextRequired
       );
+    });
+  });
+
+  describe("Nexus - final step", () => {
+    it("keeps operating phase set to GUEST_MODE", async () => {
+      const userData = generateTestUserData({
+        operatingPhase: "GUEST_MODE",
+        businessPersona: "FOREIGN",
+        foreignBusinessType: "NEXUS",
+      });
+
+      useMockRouter({ isReady: true, query: { page: "5" } });
+      const { page } = renderPage({ userData });
+      page.clickNext();
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalled();
+      });
+      expect(currentUserData().profileData.operatingPhase).toEqual("GUEST_MODE");
     });
   });
 

@@ -290,10 +290,21 @@ const OnboardingPage = (props: Props): ReactElement => {
       } else {
         setRegistrationDimension("Onboarded Guest");
         analytics.event.onboarding_last_step.submit.finish_onboarding();
+
+        const isRemoteSellerWorker =
+          newProfileData.businessPersona === "FOREIGN" &&
+          (newProfileData.foreignBusinessType === "REMOTE_SELLER" ||
+            newProfileData.foreignBusinessType === "REMOTE_WORKER");
+
         let newUserData: UserData = {
           ...currentUserData,
           user,
-          profileData: newProfileData,
+          profileData: {
+            ...newProfileData,
+            operatingPhase: isRemoteSellerWorker
+              ? "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
+              : newProfileData.operatingPhase,
+          },
           onboardingFormProgress: "COMPLETED",
         };
 
