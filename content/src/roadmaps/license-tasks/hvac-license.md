@@ -3,20 +3,22 @@ filename: hvac-license
 urlSlug: hvac-license
 name: Get an HVACR License
 webflowName: "HVAC Contractor: HVACR License"
-agencyId: nj-consumer-affairs
-agencyAdditionalContext: Board of Examiners of Heating, Ventilation, Air Conditioning and Refrigeration Contracts
+summaryDescriptionMd: >
+  You or any staff providing HVACR services must be licensed as an HVACR
+  contractor.
 industryId:
   - hvac-contractor
 callToActionText: Apply for My HVACR License
 callToActionLink: https://www.njconsumeraffairs.gov/hvacr/Pages/applications.aspx
 webflowIndustry: ""
+licenseCertificationClassification: ""
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Board of Examiners of Heating, Ventilation, Air
+  Conditioning and Refrigeration Contracts
 divisionPhone: (973) 504-6250
 id: hvac-license
-licenseCertificationClassification: ""
 webflowType: individual-license
 webflowId: 5f772993a195c8849e15b18f
-summaryDescriptionMd: >
-  You or any staff providing HVACR services must be licensed as an HVACR contractor.
 ---
 
 ---
@@ -41,7 +43,7 @@ summaryDescriptionMd: >
 - A copy of a Certificate of Insurance showing the purchase of a $3,000 `surety bond|surety-bond` and a minimum of $500,000 in liability insurance
 - Detailed information and police records if you answered “yes” to any of the questions related to moral character and criminal background
 
-> **Document Delivery:**
+> **Document delivery:**
 >
 > - All of these documents can be uploaded to your online application. If you need to mail them instead, include your Applicant ID number on all the documents. Your Applicant ID is displayed on your online application.
 >
