@@ -9,7 +9,7 @@ agencyId: nj-motor-vehicle
 formName: BA-8
 ---
 
-You will need a `New Jersey Motor Vehicle Commission (MVC) Entity ID Number|mvc-entity-id` from the for any transactions related to your commercial vehicles.
+You need a `New Jersey Motor Vehicle Commission (MVC) Entity ID Number|mvc-entity-id` from the for any transactions related to your commercial vehicles.
 
 ---
 
