@@ -1,14 +1,14 @@
 {
   "nexusNameSearch": {
     "dbaNameSearchSubmitButton": "Check Availability",
-    "dbaNameDescription": "Since the business name of your state of origin is unavailable, you will need a DBA name to register your business in New Jersey. Your DBA is the name your business will be referred to in New Jersey.",
+    "nexusNextButton": "Continue",
+    "dbaNameDescription": "Since the business name of your state of origin is unavailable, you need a DBA name to register your business in New Jersey. Your DBA is the name your business will be referred to in New Jersey.",
     "dbaAvailableText": "**\"${name}\" is available as your DBA Name!**\n\nYou're now ready to authorize your business in New Jersey.",
     "availableText": "**\"${name}\" is available!** This name will be registered with the State ONLY after you submit your business authorization",
     "searchAgainButtonText": "search again here",
     "dbaUnavailableText": "Sorry, the name **\"${name}\"** is already taken in New Jersey. Please search for another DBA name. Here are similar business names that are already taken:",
     "dbaNameHeader": "### Find a Doing Business As (DBA) Name",
     "unavailableText": "Sorry, the name **\"${name}\"** is already taken in New Jersey. You’ll have to create a Doing Business As (DBA) name, below. \n\n(If you entered the wrong name, ${searchAgainButton}).",
-    "dbaNameSearchLabel": "DBA Name Search",
-    "nexusNextButton": "Continue"
+    "dbaNameSearchLabel": "DBA Name Search"
   }
 }
