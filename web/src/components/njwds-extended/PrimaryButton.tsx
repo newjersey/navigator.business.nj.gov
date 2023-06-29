@@ -1,5 +1,5 @@
 import { GenericButton, GenericButtonProps } from "@/components/njwds-extended/GenericButton";
-import { ReactElement } from "react";
+import { forwardRef, ReactElement, Ref } from "react";
 
 export type PrimaryButtonColors =
   | "primary"
@@ -22,6 +22,9 @@ const colors = {
   info: "usa-button btn-info",
 };
 
-export const PrimaryButton = (props: Props): ReactElement => {
-  return <GenericButton {...props} className={colors[props.isColor]} />;
-};
+export const PrimaryButton = forwardRef(function PrimaryButton(
+  props: Props,
+  ref: Ref<HTMLButtonElement>
+): ReactElement {
+  return <GenericButton {...props} className={colors[props.isColor]} ref={ref} />;
+});

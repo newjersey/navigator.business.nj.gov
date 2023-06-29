@@ -1,4 +1,4 @@
-import { ButtonDropdown } from "@/components/njwds-extended/ButtonDropdown";
+import { CalendarButtonDropdown } from "@/components/njwds-extended/CalendarButtonDropdown";
 import { Icon } from "@/components/njwds/Icon";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { IconButton } from "@mui/material";
@@ -37,7 +37,7 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
       >
         <Icon className={`usa-icon--size-3 vam text-base`}>navigate_before</Icon>
       </IconButton>
-      <ButtonDropdown
+      <CalendarButtonDropdown
         dropdownOptions={props.years.map((year) => {
           return {
             text: year,
@@ -58,7 +58,7 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
         )}
       >
         <div className="text-base text-bold">{props.activeYear}</div>
-      </ButtonDropdown>
+      </CalendarButtonDropdown>
       <IconButton
         data-testid="year-selector-right"
         aria-label="next year"
