@@ -1,6 +1,7 @@
 import { UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { TaxFilingClient, TaxFilingInterface } from "../types";
+import { fetchMunicipalityByName } from "../user/fetchMunicipalityByName";
 
 type taxFilingInterfaceRequest = {
   userData: UserData;
@@ -34,17 +35,26 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
     const now = new Date(Date.now()).toISOString();
     let profileDataToReturn = request.userData.profileData;
 
-    if (naicsCode && taxCity) {
+    if (naicsCode) {
       profileDataToReturn = {
         ...request.userData.profileData,
         naicsCode: naicsCode,
-        municipality: {
-          name: taxCity,
-          county: "",
-          id: "",
-          displayName: "",
-        },
       };
+    }
+
+    if (taxCity) {
+      const record = await fetchMunicipalityByName(taxCity);
+      if (record) {
+        profileDataToReturn = {
+          ...profileDataToReturn,
+          municipality: {
+            name: record.townName,
+            county: record.countyName,
+            id: record.id,
+            displayName: record.townDisplayName,
+          },
+        };
+      }
     }
     return {
       ...request.userData,

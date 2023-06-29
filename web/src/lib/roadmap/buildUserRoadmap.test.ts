@@ -1,10 +1,15 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import * as fetchMunicipality from "@/lib/async-content-fetchers/fetchMunicipalities";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import * as roadmapBuilderModule from "@/lib/roadmap/roadmapBuilder";
-import { generateMunicipalityDetail, generateRoadmap, generateTask } from "@/test/factories";
+import { generateRoadmap, generateTask } from "@/test/factories";
 import { getLastCalledWith } from "@/test/helpers/helpers-utilities";
-import { generateMunicipality, generateProfileData, Industries } from "@businessnjgovnavigator/shared/";
+import {
+  generateMunicipality,
+  generateMunicipalityDetail,
+  generateProfileData,
+  Industries,
+} from "@businessnjgovnavigator/shared";
+import * as fetchMunicipalityById from "@businessnjgovnavigator/shared/domain-logic/fetchMunicipalityById";
 import {
   createEmptyProfileData,
   emptyIndustrySpecificData,
@@ -12,11 +17,11 @@ import {
 } from "@businessnjgovnavigator/shared/profileData";
 
 jest.mock("@/lib/roadmap/roadmapBuilder", () => ({ buildRoadmap: jest.fn() }));
-jest.mock("@/lib/async-content-fetchers/fetchMunicipalities", () => ({
+jest.mock("@businessnjgovnavigator/shared/domain-logic/fetchMunicipalityById", () => ({
   fetchMunicipalityById: jest.fn(),
 }));
 const mockRoadmapBuilder = (roadmapBuilderModule as jest.Mocked<typeof roadmapBuilderModule>).buildRoadmap;
-const mockFetchMunicipality = (fetchMunicipality as jest.Mocked<typeof fetchMunicipality>)
+const mockFetchMunicipality = (fetchMunicipalityById as jest.Mocked<typeof fetchMunicipalityById>)
   .fetchMunicipalityById;
 
 const Config = getMergedConfig();
@@ -226,6 +231,14 @@ describe("buildUserRoadmap", () => {
 
       await buildUserRoadmap(generateStartingProfile({ legalStructureId: "s-corporation" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("scorp");
+    });
+
+    it("adds nonprofit addon for Nonprofit legal structures", async () => {
+      await buildUserRoadmap(generateStartingProfile({ legalStructureId: "general-partnership" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("nonprofit");
+
+      await buildUserRoadmap(generateStartingProfile({ legalStructureId: "nonprofit" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("nonprofit");
     });
   });
 

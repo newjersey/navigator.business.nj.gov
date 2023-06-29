@@ -232,6 +232,14 @@
           "altDescription": "Do you plan to be a `home-based business|home-based-business` ?"
         }
       },
+      "isNonprofitOnboardingRadio": {
+        "default": {
+          "header": "Nonprofit",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Is your business a nonprofit?"
+        }
+      },
       "legalStructureId": {
         "default": {
           "header": "Business Structure",
@@ -248,7 +256,8 @@
             "limited-liability-partnership": "Limited Liability Partnerships have general partners who own and operate the business, and limited partners who invest in the business, both types of partners have limited liability. [Learn more about Limited Liability Partnerships.](https://business.nj.gov/pages/llp-lp) ",
             "limited-partnership": "Limited Partnerships have general partners who own and operate the business, and limited partners who invest in the business but have limited liability and oversight. [Learn more about Limited Partners.](https://business.nj.gov/pages/llp-lp) ",
             "s-corporation": "A Corporation with an S Corporation Tax Designation (S Corp) is similar to a C Corporation except that the business is not taxed separately from the owners. S Corps are also very similar to Limited Liability Companies (LLCs), but with more limitations. You may elect S Corp status separately after you form and register for tax and employer purposes. [Learn more about Corporations with an S designation.](https://business.nj.gov/pages/s-corporation-s-corp) ",
-            "sole-proprietorship": "In a sole proprietorship you alone own the company and are responsible for its assets and liabilities. [Learn more about Sole Proprietorships.](https://business.nj.gov/pages/sole-proprietorship) "
+            "sole-proprietorship": "In a sole proprietorship you alone own the company and are responsible for its assets and liabilities. [Learn more about Sole Proprietorships.](https://business.nj.gov/pages/sole-proprietorship) ",
+            "nonprofit": "Nonprofits are a type of C Corporation, but unlike a for-profit corporation, a nonprofit organization has a mission to benefit the public rather than generating profit. Nonprofits belong to the public, are governed by a board of trustees, and can qualify for tax-exemption. [Learn more about Nonprofits.](https://business.nj.gov/pages/nonprofit)"
           }
         },
         "onboarding": {

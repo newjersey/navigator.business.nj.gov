@@ -4,7 +4,6 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { postTaxFilingsLookup } from "@/lib/api-client/apiClient";
-import { fetchMunicipalityByName } from "@/lib/async-content-fetchers/fetchMunicipalities";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -42,20 +41,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
           encryptedTaxId: userData.profileData.encryptedTaxId as string,
         });
 
-        let record;
-
-        if (updatedUserData.profileData.municipality?.name) {
-          record = await fetchMunicipalityByName(updatedUserData.profileData.municipality?.name || "");
-        }
-
-        const municipalityToSet = {
-          name: record?.townName || userData.profileData.municipality?.name || "",
-          county: record?.countyName || userData.profileData.municipality?.county || "",
-          id: record?.id || userData.profileData.municipality?.id || "",
-          displayName: record?.townDisplayName || userData.profileData.municipality?.displayName || "",
-        };
-
-        updateQueue?.queue(updatedUserData).queueProfileData({ municipality: municipalityToSet }).update();
+        updateQueue?.queue(updatedUserData).update();
       }
     })();
   }, userData);

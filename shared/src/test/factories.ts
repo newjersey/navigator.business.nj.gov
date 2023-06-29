@@ -15,6 +15,7 @@ import { Industries, Industry } from "../industry";
 import { randomInt } from "../intHelpers";
 import { LegalStructure, LegalStructures } from "../legalStructure";
 import { LicenseData, LicenseStatusItem, LicenseStatusResult, NameAndAddress } from "../license";
+import { MunicipalityDetail } from "../municipality";
 import { IndustrySpecificData, ProfileData } from "../profileData";
 import { arrayOfSectors, SectorType } from "../sector";
 import { TaxFilingCalendarEvent, TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
@@ -218,6 +219,7 @@ export const generateProfileData = (
   const id = `some-id-${randomInt()}`;
   const persona = randomInt() % 2 ? "STARTING" : "OWNING";
   const industry = randomIndustry(canHavePermanentLocation);
+  const legalStructure = randomLegalStructure().id;
 
   return {
     ...generateIndustrySpecificData({}),
@@ -250,6 +252,7 @@ export const generateProfileData = (
     nexusDbaName: "",
     needsNexusDbaName: false,
     operatingPhase: "NEEDS_TO_FORM",
+    isNonprofitOnboardingRadio: legalStructure === "nonprofit",
     ...overrides,
   };
 };
@@ -301,6 +304,21 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     taxFilingData: generateTaxFilingData({}),
     profileData,
     formationData,
+    ...overrides,
+  };
+};
+
+export const generateMunicipalityDetail = (overrides: Partial<MunicipalityDetail>): MunicipalityDetail => {
+  return {
+    id: `some-id-${randomInt()}`,
+    townName: `some-town-name-${randomInt()}`,
+    countyId: `some-county-id-${randomInt()}`,
+    townDisplayName: `some-town-display-name-${randomInt()}`,
+    townWebsite: `some-town-website-${randomInt()}`,
+    countyName: `some-county-name-${randomInt()}`,
+    countyClerkPhone: `some-phone-${randomInt()}`,
+    countyClerkWebsite: `some-clerk-webpage-${randomInt()}`,
+    countyWebsite: `some-county-website-${randomInt()}`,
     ...overrides,
   };
 };

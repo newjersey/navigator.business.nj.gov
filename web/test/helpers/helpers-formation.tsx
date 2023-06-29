@@ -72,7 +72,8 @@ export const preparePage = (
   municipalities?: Municipality[],
   task?: Task,
   isAuthenticated?: IsAuthenticated,
-  setRegistrationModalIsVisible?: (value: boolean) => void
+  setRegistrationModalIsVisible?: (value: boolean) => void,
+  searchOnly?: boolean
 ): FormationPageHelpers => {
   const profileData = generateFormationProfileData({ ...userData.profileData });
   const isValid = publicFilingLegalTypes.includes(profileData.legalStructureId as PublicFilingLegalType);
@@ -107,7 +108,11 @@ export const preparePage = (
       <MunicipalitiesContext.Provider value={{ municipalities: internalMunicipalities }}>
         <WithStatefulUserData initialUserData={initialUserData}>
           <ThemeProvider theme={createTheme()}>
-            <BusinessFormation task={task ?? generateTask({})} displayContent={displayContent} />
+            <BusinessFormation
+              task={task ?? generateTask({})}
+              displayContent={displayContent}
+              searchOnly={searchOnly}
+            />
           </ThemeProvider>
         </WithStatefulUserData>
       </MunicipalitiesContext.Provider>,

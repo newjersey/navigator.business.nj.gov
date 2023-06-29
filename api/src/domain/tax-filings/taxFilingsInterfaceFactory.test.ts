@@ -1,5 +1,6 @@
 import { TaxFilingCalendarEvent, TaxFilingLookupState, TaxFilingState } from "@shared/taxFiling";
 import {
+  generateMunicipalityDetail,
   generatePreferences,
   generateProfileData,
   generateTaxFilingCalendarEvent,
@@ -9,7 +10,15 @@ import {
 } from "@shared/test";
 import { UserData } from "@shared/userData";
 import { TaxFilingClient, TaxFilingInterface } from "../types";
+import * as fetchMunicipality from "../user/fetchMunicipalityByName";
 import { taxFilingsInterfaceFactory } from "./taxFilingsInterfaceFactory";
+
+jest.mock("../user/fetchMunicipalityByName", () => ({
+  fetchMunicipalityByName: jest.fn(),
+}));
+
+const mockFetchMunicipalityByName = (fetchMunicipality as jest.Mocked<typeof fetchMunicipality>)
+  .fetchMunicipalityByName;
 
 describe("TaxFilingsInterfaceFactory", () => {
   let taxFilingInterface: TaxFilingInterface;
@@ -58,15 +67,23 @@ describe("TaxFilingsInterfaceFactory", () => {
           naicsCode: "123456",
           taxCity: "testville",
         });
+        mockFetchMunicipalityByName.mockResolvedValue(
+          generateMunicipalityDetail({
+            id: "testville-id",
+            townName: "testville",
+            townDisplayName: "Testville",
+            countyName: "testCounty",
+          })
+        );
         expect(await taxFilingInterface.lookup({ userData, ...taxIdBusinessName })).toEqual({
           ...userData,
           profileData: {
             ...userData.profileData,
             naicsCode: "123456",
             municipality: {
-              county: "",
-              displayName: "",
-              id: "",
+              county: "testCounty",
+              displayName: "Testville",
+              id: "testville-id",
               name: "testville",
             },
           },
@@ -186,13 +203,8 @@ describe("TaxFilingsInterfaceFactory", () => {
         it(`returns a ${state} state without updating filing data`, async () => {
           const userData = generateUserData({
             profileData: generateProfileData({
-              naicsCode: "",
-              municipality: {
-                county: "",
-                displayName: "",
-                id: "",
-                name: "",
-              },
+              naicsCode: undefined,
+              municipality: undefined,
             }),
             taxFilingData: generateTaxFilingData({
               state: undefined,
@@ -204,8 +216,8 @@ describe("TaxFilingsInterfaceFactory", () => {
           taxFilingClient.lookup.mockResolvedValue({
             state: state,
             filings: [],
-            naicsCode: "",
-            taxCity: "",
+            naicsCode: undefined,
+            taxCity: undefined,
           });
 
           expect(await taxFilingInterface.lookup({ userData, ...taxIdBusinessName })).toEqual({
@@ -308,14 +320,22 @@ describe("TaxFilingsInterfaceFactory", () => {
             naicsCode: "123456",
             taxCity: "testville",
           });
+          mockFetchMunicipalityByName.mockResolvedValue(
+            generateMunicipalityDetail({
+              id: "testville-id",
+              townName: "testville",
+              townDisplayName: "Testville",
+              countyName: "testCounty",
+            })
+          );
           expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
             ...userData,
             profileData: {
               ...userData.profileData,
               municipality: {
-                county: "",
-                displayName: "",
-                id: "",
+                county: "testCounty",
+                displayName: "Testville",
+                id: "testville-id",
                 name: "testville",
               },
               naicsCode: "123456",
