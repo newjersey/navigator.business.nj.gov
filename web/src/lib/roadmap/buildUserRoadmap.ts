@@ -1,4 +1,3 @@
-import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalities";
 import { getIsApplicableToFunctionByFieldName } from "@/lib/domain-logic/essentialQuestions";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { isInterstateLogisticsApplicable } from "@/lib/domain-logic/isInterstateLogisticsApplicable";
@@ -6,7 +5,12 @@ import { isInterstateMovingApplicable } from "@/lib/domain-logic/isInterstateMov
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { Roadmap } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import { LookupIndustryById, LookupLegalStructureById, ProfileData } from "@businessnjgovnavigator/shared/";
+import {
+  fetchMunicipalityById,
+  LookupIndustryById,
+  LookupLegalStructureById,
+  ProfileData,
+} from "@businessnjgovnavigator/shared";
 
 export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadmap> => {
   let industryId = profileData.industryId;

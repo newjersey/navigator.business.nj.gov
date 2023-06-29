@@ -1,4 +1,4 @@
-import { generateMunicipalityDetail } from "@/test/factories";
+import { generateMunicipalityDetail } from "@businessnjgovnavigator/shared";
 import fs from "fs";
 import { loadAllMunicipalities } from "./loadMunicipalities";
 

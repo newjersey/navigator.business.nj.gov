@@ -3,7 +3,7 @@ import { Municipality, MunicipalityDetail } from "@businessnjgovnavigator/shared
 import fs from "fs";
 import path from "path";
 
-const recordsDir = path.join(process.cwd(), "src/lib/static/records");
+const recordsDir = path.join(process.cwd(), "../shared/src/static");
 
 export const loadAllMunicipalities = (): Municipality[] => {
   const fullPath = path.join(recordsDir, "municipalities.json");
