@@ -6,13 +6,14 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { getFlow } from "@/lib/utils/helpers";
+import { Municipality } from "@businessnjgovnavigator/shared/municipality";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, ReactNode, useEffect, useState } from "react";
 
 interface Props {
   children: ReactNode;
   label: ReactNode;
-  onSave: () => void;
+  onSave: (selectedMunicipality?: Municipality) => void;
   isTaskPage?: boolean;
 }
 
@@ -45,7 +46,7 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
 
     await updateQueue.queueProfileData(profileData).update();
 
-    props.onSave();
+    props.onSave(profileData.municipality);
   });
 
   const onTaskPage = (

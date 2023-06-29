@@ -183,11 +183,11 @@ const OnboardingPage = (props: Props): ReactElement => {
           const queryFlow = router.query[QUERIES.flow] as string;
 
           if (industryQueryParamIsValid(queryIndustryId)) {
-            await setIndustryAndRouteToPage(currentUserData, queryIndustryId);
+            setIndustryAndRouteToPage(currentUserData, queryIndustryId);
           } else if (pageQueryParamisValid(onboardingFlows, currentUserData, queryPage)) {
             setPage({ current: queryPage, previous: queryPage - 1 });
           } else if (flowQueryParamIsValid(queryFlow)) {
-            await setBusinessPersonaAndRouteToPage(queryFlow);
+            setBusinessPersonaAndRouteToPage(queryFlow);
           } else {
             setPage({ current: 1, previous: 1 });
             routeToPage(1);
@@ -200,10 +200,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady, state.user, state.isAuthenticated, updateQueue]);
 
-  const setIndustryAndRouteToPage = async (
-    userData: UserData,
-    industryId: string | undefined
-  ): Promise<void> => {
+  const setIndustryAndRouteToPage = (userData: UserData, industryId: string | undefined): void => {
     const newProfileData: ProfileData = {
       ...userData.profileData,
       businessPersona: "STARTING",
@@ -216,10 +213,10 @@ const OnboardingPage = (props: Props): ReactElement => {
     } else {
       setPage({ current: 3, previous: 2 });
     }
-    await updateQueue?.queueProfileData(newProfileData);
+    updateQueue?.queueProfileData(newProfileData);
   };
 
-  const setBusinessPersonaAndRouteToPage = async (flow: string): Promise<void> => {
+  const setBusinessPersonaAndRouteToPage = (flow: string): void => {
     const flowType = mapFlowQueryToPersona[flow as QUERY_PARAMS_VALUES["flow"]];
     const newProfileData: ProfileData = {
       ...profileData,
@@ -233,7 +230,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     } else {
       setPage({ current: 2, previous: 1 });
     }
-    await updateQueue?.queueProfileData(newProfileData);
+    updateQueue?.queueProfileData(newProfileData);
   };
 
   FormFuncWrapper(
