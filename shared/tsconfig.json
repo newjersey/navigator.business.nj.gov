@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.paths.json",
   "compilerOptions": {
+    "module": "esnext",
     "esModuleInterop": true,
     "lib": ["ESNext"],
     "declaration": true,
