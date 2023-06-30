@@ -384,7 +384,7 @@ const ProfilePage = (props: Props): ReactElement => {
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
-              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
+              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} inputWidth="default" />
             )}
           </div>
           {userData?.profileData.naicsCode && (
@@ -433,7 +433,7 @@ const ProfilePage = (props: Props): ReactElement => {
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
-              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
+              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} inputWidth="default" />
             )}
           </div>
         </ProfileField>
@@ -575,7 +575,7 @@ const ProfilePage = (props: Props): ReactElement => {
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
-              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
+              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} inputWidth="default" />
             )}
           </div>
         </ProfileField>
@@ -679,7 +679,7 @@ const ProfilePage = (props: Props): ReactElement => {
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
-              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
+              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} inputWidth="default" />
             )}
           </div>
         </ProfileField>

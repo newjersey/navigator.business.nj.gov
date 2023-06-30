@@ -5,7 +5,6 @@ import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { MediaQueries } from "@/lib/PageSizes";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   advancedDateLibrary,
@@ -14,7 +13,7 @@ import {
   getCurrentDate,
   parseDate,
 } from "@businessnjgovnavigator/shared";
-import { TextFieldProps, useMediaQuery } from "@mui/material";
+import { TextFieldProps } from "@mui/material";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, { ReactElement, useContext } from "react";
@@ -34,7 +33,6 @@ export const ProfileDateOfFormation = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const [dateValue, setDateValue] = React.useState<DateObject | null>(null);
   const [dateError, setDateError] = React.useState<boolean>(false);
-  const isTablet = useMediaQuery(MediaQueries.tabletAndUp);
 
   const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
     fieldName,
@@ -90,24 +88,21 @@ export const ProfileDateOfFormation = (props: Props): ReactElement => {
         }}
         renderInput={(params: TextFieldProps): JSX.Element => {
           return (
-            <div>
-              <GenericTextField
-                fieldName={fieldName}
-                onValidation={onValidation}
-                validationText={errorText}
-                error={isFormFieldInValid}
-                inputProps={params.InputProps}
-                fieldOptions={{
-                  ...params,
-                  inputProps: {
-                    ...params.inputProps,
-                    placeholder: "",
-                  },
-                  sx: { width: isTablet ? "50%" : "100%", ...params.sx },
-                  error: isFormFieldInValid,
-                }}
-              />
-            </div>
+            <GenericTextField
+              inputWidth="reduced"
+              fieldName={fieldName}
+              onValidation={onValidation}
+              validationText={errorText}
+              error={isFormFieldInValid}
+              inputProps={params.InputProps}
+              fieldOptions={{
+                ...params,
+                inputProps: {
+                  ...params.inputProps,
+                },
+                error: isFormFieldInValid,
+              }}
+            />
           );
         }}
       />

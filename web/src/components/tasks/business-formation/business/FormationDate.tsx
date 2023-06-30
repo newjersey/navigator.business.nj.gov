@@ -77,7 +77,7 @@ export const FormationDate = (props: Props): ReactElement => {
     process.env.NODE_ENV === "test" || process.env.CI === "true" ? DesktopDatePicker : DatePicker;
   return (
     <>
-      <div className="flex margin-bottom-2">{contentProps[props.fieldName].label}</div>
+      <div className="flex">{contentProps[props.fieldName].label}</div>
       <div className="tablet:display-flex tablet:flex-row tablet:flex-justify">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Picker
@@ -107,24 +107,26 @@ export const FormationDate = (props: Props): ReactElement => {
             }}
             renderInput={(params): JSX.Element => {
               return (
-                <TextField
-                  {...params}
-                  variant="outlined"
-                  fullWidth
-                  error={doesFieldHaveError(props.fieldName)}
-                  onBlur={(): void => {
-                    setFieldsInteracted([props.fieldName]);
-                  }}
-                  helperText={
-                    doesFieldHaveError(props.fieldName) ? contentProps[props.fieldName].helperText : " "
-                  }
-                  inputProps={{
-                    ...params.inputProps,
-                    placeholder: "",
-                    "aria-label": camelCaseToSentence(props.fieldName),
-                    "data-testid": `date-${props.fieldName}`,
-                  }}
-                />
+                <div className="width-100">
+                  <TextField
+                    {...params}
+                    className="margin-top-2"
+                    variant="outlined"
+                    error={doesFieldHaveError(props.fieldName)}
+                    onBlur={(): void => {
+                      setFieldsInteracted([props.fieldName]);
+                    }}
+                    helperText={
+                      doesFieldHaveError(props.fieldName) && contentProps[props.fieldName].helperText
+                    }
+                    inputProps={{
+                      ...params.inputProps,
+                      placeholder: "",
+                      "aria-label": camelCaseToSentence(props.fieldName),
+                      "data-testid": `date-${props.fieldName}`,
+                    }}
+                  />
+                </div>
               );
             }}
           />

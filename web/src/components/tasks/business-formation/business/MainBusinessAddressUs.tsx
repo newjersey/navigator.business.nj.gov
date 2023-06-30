@@ -1,4 +1,4 @@
-import { Content } from "@/components/Content";
+import { ModifiedContent } from "@/components/ModifiedContent";
 import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
@@ -21,14 +21,12 @@ export const MainBusinessUs = (): ReactElement => {
         className={"margin-bottom-2"}
         errorBarType="ALWAYS"
         validationText={getFieldErrorLabel("addressLine1")}
-        formInputFull
       />
       <BusinessFormationTextField
         label={Config.formation.fields.addressLine2.label}
         secondaryLabel={Config.formation.general.optionalLabel}
         errorBarType="ALWAYS"
         fieldName="addressLine2"
-        formInputFull
         validationText={getFieldErrorLabel("addressLine2")}
         className="margin-bottom-2"
       />
@@ -43,17 +41,17 @@ export const MainBusinessUs = (): ReactElement => {
           fieldName="addressCity"
           required={true}
           className={"margin-bottom-2 grid-col-12 tablet:grid-col-6"}
-          noValidationMargin={true}
           validationText={getFieldErrorLabel("addressCity")}
-          formInputFull
         />
         <>
           <WithErrorBar
             hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
             type="MOBILE-ONLY"
-            className="form-input grid-col-5 tablet:grid-col-2"
+            className="grid-col-5 tablet:grid-col-2"
           >
-            <Content>{Config.formation.fields.addressState.label}</Content>
+            <strong>
+              <ModifiedContent>{Config.formation.fields.addressState.label}</ModifiedContent>
+            </strong>
             <StateDropdown
               fieldName="addressState"
               value={state.formationFormData.addressState?.name}
@@ -70,7 +68,6 @@ export const MainBusinessUs = (): ReactElement => {
                 });
                 setFieldsInteracted(["addressState"]);
               }}
-              className={"margin-top-2"}
             />
           </WithErrorBar>
 
@@ -81,7 +78,7 @@ export const MainBusinessUs = (): ReactElement => {
             errorBarType="NEVER"
             fieldName={"addressZipCode"}
             validationText={Config.formation.fields.addressZipCode.foreign.errorUS}
-            className="form-input grid-col-7 tablet:grid-col-4"
+            className="grid-col-7 tablet:grid-col-4"
           />
         </>
       </WithErrorBar>

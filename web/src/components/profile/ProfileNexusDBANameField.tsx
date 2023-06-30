@@ -4,7 +4,7 @@ import { OnboardingField, OnboardingProps } from "@/components/onboarding/Onboar
 import { TextFieldProps } from "@mui/material";
 import { ReactElement } from "react";
 
-interface Props extends Omit<OnboardingProps, "fieldName"> {
+interface Props extends Omit<OnboardingProps, "fieldName" | "inputWidth"> {
   fieldOptions?: TextFieldProps;
 }
 
@@ -15,6 +15,7 @@ export const ProfileNexusDBANameField = (props: Props): ReactElement => {
       fieldOptions={{
         inputProps: { "data-testid": "nexusDBAName" },
       }}
+      inputWidth="default"
       {...props}
     />
   );

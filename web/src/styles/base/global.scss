@@ -254,22 +254,8 @@ ol {
 }
 
 @media all and (min-width: $xs) {
-  .form-input {
-    max-width: 30rem;
-  }
-
   .display-block {
     display: block;
-  }
-}
-
-@media all and (min-width: $sm) {
-  .form-input {
-    max-width: 37.5rem;
-  }
-
-  .form-input-wide {
-    max-width: 43.75rem;
   }
 }
 

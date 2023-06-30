@@ -1,5 +1,5 @@
-import { Content } from "@/components/Content";
 import { CountryDropdown } from "@/components/CountryDropdown";
+import { ModifiedContent } from "@/components/ModifiedContent";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -22,14 +22,12 @@ export const MainBusinessIntl = (): ReactElement => {
         className={"margin-bottom-2"}
         errorBarType="ALWAYS"
         validationText={getFieldErrorLabel("addressLine1")}
-        formInputFull
       />
       <BusinessFormationTextField
         label={Config.formation.fields.addressLine2.label}
         secondaryLabel={Config.formation.general.optionalLabel}
         errorBarType="ALWAYS"
         fieldName="addressLine2"
-        formInputFull
         validationText={getFieldErrorLabel("addressLine2")}
         className="margin-bottom-2"
       />
@@ -44,9 +42,7 @@ export const MainBusinessIntl = (): ReactElement => {
             fieldName="addressCity"
             required={true}
             errorBarType="MOBILE-ONLY"
-            noValidationMargin={true}
             validationText={getFieldErrorLabel("addressCity")}
-            formInputFull
           />
         </div>
         <div className="tablet:grid-col-6 grid-col-12">
@@ -55,9 +51,7 @@ export const MainBusinessIntl = (): ReactElement => {
             label={Config.formation.fields.addressProvince.label}
             fieldName="addressProvince"
             required={true}
-            noValidationMargin={true}
             validationText={getFieldErrorLabel("addressProvince")}
-            formInputFull
           />
         </div>
       </WithErrorBar>
@@ -66,7 +60,9 @@ export const MainBusinessIntl = (): ReactElement => {
         className="grid-col-12"
         type="ALWAYS"
       >
-        <Content>{Config.formation.fields.addressCountry.label}</Content>
+        <strong>
+          <ModifiedContent>{Config.formation.fields.addressCountry.label}</ModifiedContent>
+        </strong>
         <CountryDropdown
           useFullName
           excludeUS
@@ -85,7 +81,6 @@ export const MainBusinessIntl = (): ReactElement => {
             });
             setFieldsInteracted(["addressCountry"]);
           }}
-          className={"margin-top-2"}
         />
       </WithErrorBar>
 

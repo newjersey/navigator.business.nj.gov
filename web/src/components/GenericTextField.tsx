@@ -17,6 +17,7 @@ import {
 
 export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFieldProps<T> {
   fieldName: string;
+  inputWidth: "full" | "default" | "reduced";
   fieldOptions?: TextFieldProps;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formContext?: Context<FormContextType<any>>;
@@ -24,10 +25,9 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
   additionalValidationIsValid?: (value: string) => boolean;
   visualFilter?: (value: string) => string;
   valueFilter?: (value: string) => string;
-  handleChange?: (value: string) => void;
-  onChange?: (value: string) => void;
+  handleChange?: (value: string) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
+  onChange?: (value: string) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
   error?: boolean;
-  noValidationMargin?: boolean;
   validationText?: string;
   disabled?: boolean;
   value?: string | number;
@@ -38,9 +38,7 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
     maxLength?: number;
     minLength?: number;
   };
-  formInputWide?: boolean;
   ariaLabel?: string;
-  formInputFull?: boolean;
   className?: string;
   allowMasking?: boolean;
   inputProps?: OutlinedInputProps;
@@ -53,6 +51,13 @@ export const GenericTextField = forwardRef(
     props: GenericTextFieldProps<T>,
     ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined
   ): ReactElement => {
+    const widthStyling =
+      props.inputWidth === "reduced"
+        ? "text-field-width-reduced"
+        : props.inputWidth === "full"
+        ? "width-100"
+        : "text-field-width-default";
+
     let visualFilter = props.visualFilter;
     let valueFilter = props.valueFilter;
     let additionalValidationIsValid = props.additionalValidationIsValid;
@@ -142,20 +147,8 @@ export const GenericTextField = forwardRef(
 
     const error = props.error ?? isFormFieldInValid;
 
-    const helperText = props.validationText
-      ? error
-        ? props.validationText
-        : props.noValidationMargin
-        ? ""
-        : " "
-      : "";
-
     return (
-      <div
-        className={`${props.formInputWide ? "form-input-wide" : ""} ${
-          !props.formInputFull && !props.formInputWide ? "form-input" : ""
-        } margin-top-2 ${props.className ?? ""} ${error ? "error" : ""}`}
-      >
+      <div className={`${widthStyling} ${props.className ?? ""} ${error ? "error" : ""} margin-top-2`}>
         <TextField
           value={value ?? ""}
           id={props.fieldName}
@@ -164,7 +157,7 @@ export const GenericTextField = forwardRef(
           onChange={handleChange}
           onBlur={onValidation}
           error={error}
-          helperText={helperText}
+          helperText={error && props.validationText}
           variant="outlined"
           autoComplete={props.autoComplete ?? "no"}
           disabled={props.disabled}

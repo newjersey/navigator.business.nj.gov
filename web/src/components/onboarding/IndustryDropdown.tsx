@@ -157,24 +157,26 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       }}
       renderInput={(params): JSX.Element => {
         return (
-          <TextField
-            {...params}
-            id="industryId"
-            inputProps={{
-              "aria-label": "Industry",
-              "data-testid": "industryid",
-              ...params.inputProps,
-            }}
-            value={searchText}
-            onChange={handleSearchBoxChange}
-            onSubmit={props.onValidation}
-            variant="outlined"
-            error={props.error}
-            helperText={props.error ? props.validationText ?? " " : " "}
-          />
+          <div className="text-field-width-default">
+            <TextField
+              {...params}
+              className="margin-top-2"
+              id="industryId"
+              inputProps={{
+                "aria-label": "Industry",
+                "data-testid": "industryid",
+                ...params.inputProps,
+              }}
+              value={searchText}
+              onChange={handleSearchBoxChange}
+              onSubmit={props.onValidation}
+              variant="outlined"
+              error={props.error}
+              helperText={props.error && props.validationText}
+            />
+          </div>
         );
       }}
-      fullWidth
       openOnFocus
       clearOnEscape
       autoHighlight

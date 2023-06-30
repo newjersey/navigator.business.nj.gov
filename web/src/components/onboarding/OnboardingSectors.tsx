@@ -72,59 +72,57 @@ export const OnboardingSectors = <T,>(props: Props<T>): ReactElement => {
   RegisterForOnSubmit(isValid);
 
   return (
-    <>
-      <div className="form-input margin-top-2">
-        <Autocomplete
-          id="sectorId"
-          options={SectorsOrdered}
-          getOptionLabel={(sector: SectorType): string => {
-            return sector.name;
-          }}
-          renderOption={(props, option, { selected }): JSX.Element => {
-            return (
-              <li {...props}>
-                {selected ? (
-                  <div className="padding-top-1 padding-bottom-1" data-testid={option.id}>
-                    <MenuOptionSelected>{option.name}</MenuOptionSelected>
-                  </div>
-                ) : (
-                  <div className="padding-top-1 padding-bottom-1" data-testid={option.id}>
-                    <MenuOptionUnselected>{option.name}</MenuOptionUnselected>
-                  </div>
-                )}
-              </li>
-            );
-          }}
-          isOptionEqualToValue={(option: SectorType, value: SectorType): boolean => {
-            return option.id === value.id;
-          }}
-          value={state.profileData.sectorId ? LookupSectorTypeById(state.profileData.sectorId) : null}
-          onChange={handleSectorSelect}
-          renderInput={(params): JSX.Element => {
-            return (
-              <TextField
-                {...params}
-                inputProps={{
-                  "aria-label": "Sector",
-                  "data-testid": "sectorId",
-                  ...params.inputProps,
-                }}
-                onBlur={onValidation}
-                onSubmit={onValidation}
-                value={searchText}
-                onChange={handleChange}
-                variant="outlined"
-                error={isFormFieldInValid}
-                helperText={isFormFieldInValid ? contentFromConfig.errorTextRequired : ""}
-              />
-            );
-          }}
-          fullWidth
-          openOnFocus
-          clearOnEscape
-          autoHighlight
-        />
-      </div>
-    </>
+    <div className="text-field-width-default">
+      <Autocomplete
+        id="sectorId"
+        options={SectorsOrdered}
+        getOptionLabel={(sector: SectorType): string => {
+          return sector.name;
+        }}
+        renderOption={(props, option, { selected }): JSX.Element => {
+          return (
+            <li {...props}>
+              {selected ? (
+                <div className="padding-top-1 padding-bottom-1" data-testid={option.id}>
+                  <MenuOptionSelected>{option.name}</MenuOptionSelected>
+                </div>
+              ) : (
+                <div className="padding-top-1 padding-bottom-1" data-testid={option.id}>
+                  <MenuOptionUnselected>{option.name}</MenuOptionUnselected>
+                </div>
+              )}
+            </li>
+          );
+        }}
+        isOptionEqualToValue={(option: SectorType, value: SectorType): boolean => {
+          return option.id === value.id;
+        }}
+        value={state.profileData.sectorId ? LookupSectorTypeById(state.profileData.sectorId) : null}
+        onChange={handleSectorSelect}
+        renderInput={(params): JSX.Element => {
+          return (
+            <TextField
+              {...params}
+              className="margin-top-2"
+              inputProps={{
+                "aria-label": "Sector",
+                "data-testid": "sectorId",
+                ...params.inputProps,
+              }}
+              onBlur={onValidation}
+              onSubmit={onValidation}
+              value={searchText}
+              onChange={handleChange}
+              variant="outlined"
+              error={isFormFieldInValid}
+              helperText={isFormFieldInValid ? contentFromConfig.errorTextRequired : ""}
+            />
+          );
+        }}
+        openOnFocus
+        clearOnEscape
+        autoHighlight
+      />
+    </div>
   );
 };

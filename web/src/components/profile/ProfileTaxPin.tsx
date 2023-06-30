@@ -24,6 +24,7 @@ export const ProfileTaxPin = (props: Props): ReactElement => {
   return (
     <>
       <ProfileNumericField
+        inputWidth="default"
         fieldName={fieldName}
         maxLength={4}
         minLength={4}
