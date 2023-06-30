@@ -2409,7 +2409,6 @@ collections:
           default: "expiration",
           options: ["expiration", "renewal"],
         }
-      - { label: "Title", name: "title", widget: "string", required: true }
       - { label: "Content", name: "body", widget: "markdown", required: true }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
