@@ -71,20 +71,18 @@ export const ProfileMunicipality = (props: Props): ReactElement => {
   };
 
   return (
-    <div className="form-input margin-top-2">
-      <MunicipalityDropdown
-        municipalities={municipalities}
-        ariaLabel="Location"
-        onValidation={onValidation}
-        fieldName={fieldName}
-        error={isFormFieldInValid}
-        validationLabel="Error"
-        handleChange={handleChange}
-        value={state.profileData.municipality}
-        onSelect={onSelect}
-        helperText={contentFromConfig.errorTextRequired ?? " "}
-        hideErrorLabel={props.hideErrorLabel}
-      />
-    </div>
+    <MunicipalityDropdown
+      municipalities={municipalities}
+      ariaLabel="Location"
+      onValidation={onValidation}
+      fieldName={fieldName}
+      error={isFormFieldInValid}
+      validationLabel="Error"
+      handleChange={handleChange}
+      value={state.profileData.municipality}
+      onSelect={onSelect}
+      helperText={contentFromConfig.errorTextRequired ?? ""}
+      hideErrorLabel={props.hideErrorLabel}
+    />
   );
 };

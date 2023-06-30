@@ -8,6 +8,7 @@ interface Props {
 export const ProfileNotes = (props: Props): ReactElement => {
   return (
     <OnboardingField
+      inputWidth="default"
       fieldName={"notes"}
       fieldOptions={{ multiline: true, minRows: 4, inputProps: { maxLength: "500" } }}
       handleChange={props.handleChangeOverride}

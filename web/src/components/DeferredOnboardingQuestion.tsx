@@ -52,7 +52,7 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
     <div className="padding-3">
       {props.label}
       <div className="display-flex mobile-lg:flex-row flex-column mobile-lg:flex-align-center">
-        <div className="width-100 margin-right-1 form-input margin-bottom-2">{props.children}</div>
+        <div className="margin-right-1 text-field-width-default margin-bottom-2">{props.children}</div>
         <SecondaryButton isColor="primary" onClick={onSubmit} dataTestId="deferred-question-save">
           {Config.deferredLocation.deferredOnboardingSaveButtonText}
         </SecondaryButton>
@@ -65,7 +65,7 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
       <div className="display-flex mobile-lg:flex-row flex-column mobile-lg:flex-justify">
         <div>
           <div>{props.label}</div>
-          <div className="width-100 margin-right-1 form-input">{props.children}</div>
+          <div className="margin-right-1">{props.children}</div>
         </div>
         <div className="flex flex-align-center">
           <div className="mobile-lg:margin-top-0 margin-top-2">

@@ -1,3 +1,4 @@
+import { ModifiedContent } from "@/components/ModifiedContent";
 import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -23,23 +24,20 @@ export const ForeignStateOfFormation = (): ReactElement => {
 
   return (
     <>
-      <div className="flex margin-bottom-2">
-        <strong>{Config.formation.fields.foreignStateOfFormation.label}</strong>
-      </div>
-      <div className="margin-bottom-2">
-        <StateDropdown
-          fieldName="foreignStateOfFormation"
-          useFullName
-          excludeNJ
-          onValidation={(): void => setFieldsInteracted([FIELD])}
-          value={state.formationFormData.foreignStateOfFormation}
-          validationText={Config.formation.fields.foreignStateOfFormation.error}
-          required
-          error={doesFieldHaveError(FIELD)}
-          onSelect={handleChange}
-          className={"margin-top-2"}
-        />
-      </div>
+      <strong>
+        <ModifiedContent>{Config.formation.fields.foreignStateOfFormation.label}</ModifiedContent>
+      </strong>
+      <StateDropdown
+        fieldName="foreignStateOfFormation"
+        useFullName
+        excludeNJ
+        onValidation={(): void => setFieldsInteracted([FIELD])}
+        value={state.formationFormData.foreignStateOfFormation}
+        validationText={Config.formation.fields.foreignStateOfFormation.error}
+        required
+        error={doesFieldHaveError(FIELD)}
+        onSelect={handleChange}
+      />
     </>
   );
 };

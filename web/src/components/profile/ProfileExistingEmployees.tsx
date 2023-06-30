@@ -25,6 +25,7 @@ export const ProfileExistingEmployees = (props: Props): ReactElement => {
   return (
     <>
       <ProfileNumericField
+        inputWidth="default"
         fieldName={fieldName}
         maxLength={7}
         minLength={1}

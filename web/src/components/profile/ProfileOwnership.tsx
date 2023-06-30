@@ -29,7 +29,7 @@ export const ProfileOwnership = (): ReactElement => {
 
   return (
     <>
-      <div className="form-input margin-top-3">
+      <div className="margin-top-3 text-field-width-default">
         <FormControl variant="outlined" fullWidth>
           <Select
             multiple

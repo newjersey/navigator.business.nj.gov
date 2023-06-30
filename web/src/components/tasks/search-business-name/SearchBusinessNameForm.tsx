@@ -11,7 +11,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SearchBusinessNameError } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { emptyProfileData, NameAvailability } from "@businessnjgovnavigator/shared/";
-import { FormControl, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { FormEvent, ReactElement, useCallback, useContext, useEffect, useRef } from "react";
 
 type SearchBusinessNameFormConfig = {
@@ -202,22 +202,24 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
           >
             <div className="grid-row grid-gap-1">
               <div className="tablet:grid-col-8">
-                <TextField
-                  id="name-input"
-                  className="fg1 width-100"
-                  margin="dense"
-                  value={currentName}
-                  onChange={(event): void => {
-                    onChangeNameField(event.target.value);
-                  }}
-                  variant="outlined"
-                  inputProps={{
-                    "aria-label": props.config.inputLabel ?? "Search business name",
-                  }}
-                />
+                <div className="width-100">
+                  <TextField
+                    id="name-input"
+                    className="margin-top-2"
+                    margin="dense"
+                    value={currentName}
+                    onChange={(event): void => {
+                      onChangeNameField(event.target.value);
+                    }}
+                    variant="outlined"
+                    inputProps={{
+                      "aria-label": props.config.inputLabel ?? "Search business name",
+                    }}
+                  />
+                </div>
               </div>
               <div className="tablet:grid-col-4">
-                <FormControl margin="dense" className="">
+                <div className="margin-top-2">
                   <SecondaryButton
                     isColor="primary"
                     onClick={(): void => {}}
@@ -228,7 +230,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
                   >
                     {props.config.searchButtonText}
                   </SecondaryButton>
-                </FormControl>
+                </div>
               </div>
             </div>
           </form>

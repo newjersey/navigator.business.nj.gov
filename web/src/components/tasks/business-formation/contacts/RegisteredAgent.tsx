@@ -133,34 +133,31 @@ export const RegisteredAgent = (): ReactElement => {
       <h3>{Config.formation.registeredAgent.label}</h3>
       <Content>{Config.formation.registeredAgent.sectionDescription}</Content>
       <div id="registeredAgent">
-        <div className="form-input">
-          <FormControl fullWidth>
-            <RadioGroup
-              aria-label="Registered Agent"
-              name="registered-agent"
-              value={state.formationFormData.agentNumberOrManual}
-              onChange={handleRadioSelection}
-              row
-            >
-              <FormControlLabel
-                labelPlacement="end"
-                style={{ alignItems: "center" }}
-                data-testid="registered-agent-number"
-                value="NUMBER"
-                control={<Radio color="primary" />}
-                label={Config.formation.registeredAgent.radioButtonNumberText}
-              />
-              <FormControlLabel
-                labelPlacement="end"
-                data-testid="registered-agent-manual"
-                style={{ alignItems: "center" }}
-                value="MANUAL_ENTRY"
-                control={<Radio color="primary" />}
-                label={Config.formation.registeredAgent.radioButtonManualText}
-              />
-            </RadioGroup>
-          </FormControl>
-        </div>
+        <FormControl fullWidth>
+          <RadioGroup
+            aria-label="Registered Agent"
+            name="registered-agent"
+            value={state.formationFormData.agentNumberOrManual}
+            onChange={handleRadioSelection}
+          >
+            <FormControlLabel
+              labelPlacement="end"
+              style={{ alignItems: "center" }}
+              data-testid="registered-agent-number"
+              value="NUMBER"
+              control={<Radio color="primary" />}
+              label={Config.formation.registeredAgent.radioButtonNumberText}
+            />
+            <FormControlLabel
+              labelPlacement="end"
+              data-testid="registered-agent-manual"
+              style={{ alignItems: "center" }}
+              value="MANUAL_ENTRY"
+              control={<Radio color="primary" />}
+              label={Config.formation.registeredAgent.radioButtonManualText}
+            />
+          </RadioGroup>
+        </FormControl>
         <div className="margin-top-2">
           {state.formationFormData.agentNumberOrManual === "NUMBER" && (
             <div data-testid="agent-number">
@@ -170,7 +167,6 @@ export const RegisteredAgent = (): ReactElement => {
                 fieldName="agentNumber"
                 required={true}
                 validationText={Config.formation.fields.agentNumber.error}
-                formInputFull
                 errorBarType="ALWAYS"
               />
             </div>
@@ -193,7 +189,7 @@ export const RegisteredAgent = (): ReactElement => {
               <WithErrorBar
                 hasError={doSomeFieldsHaveError(["agentName", "agentEmail"])}
                 type="DESKTOP-ONLY"
-                className="grid-row grid-gap-2"
+                className="grid-row grid-gap-2  margin-bottom-2"
               >
                 <div className="tablet:grid-col-6">
                   <BusinessFormationTextField
@@ -203,10 +199,9 @@ export const RegisteredAgent = (): ReactElement => {
                     errorBarType="MOBILE-ONLY"
                     fieldName="agentName"
                     disabled={shouldBeDisabled("agentName", "ACCOUNT")}
-                    formInputFull
                   />
                 </div>
-                <div className="tablet:grid-col-6 margin-bottom-2">
+                <div className="tablet:grid-col-6">
                   <BusinessFormationTextField
                     label={Config.formation.fields.agentEmail.label}
                     fieldName="agentEmail"
@@ -214,7 +209,6 @@ export const RegisteredAgent = (): ReactElement => {
                     required={true}
                     validationText={getFieldErrorLabel("agentEmail")}
                     disabled={shouldBeDisabled("agentEmail", "ACCOUNT")}
-                    formInputFull
                   />
                 </div>
               </WithErrorBar>
@@ -238,7 +232,6 @@ export const RegisteredAgent = (): ReactElement => {
                 required={true}
                 validationText={getFieldErrorLabel("agentOfficeAddressLine1")}
                 disabled={shouldBeDisabled("agentOfficeAddressLine1", "ADDRESS")}
-                formInputFull
                 errorBarType="ALWAYS"
               />
               <BusinessFormationTextField
@@ -246,7 +239,6 @@ export const RegisteredAgent = (): ReactElement => {
                 fieldName="agentOfficeAddressLine2"
                 validationText={getFieldErrorLabel("agentOfficeAddressLine2")}
                 disabled={state.formationFormData.agentUseBusinessAddress}
-                formInputFull
                 errorBarType="ALWAYS"
               />
               <WithErrorBar
@@ -263,24 +255,22 @@ export const RegisteredAgent = (): ReactElement => {
                     type="MOBILE-ONLY"
                   >
                     <Content>{Config.formation.fields.agentOfficeAddressMunicipality.label}</Content>
-                    <div className="margin-top-2">
-                      <MunicipalityDropdown
-                        municipalities={municipalities}
-                        fieldName={"agentOfficeAddressMunicipality"}
-                        error={doesFieldHaveError("agentOfficeAddressMunicipality")}
-                        disabled={shouldBeDisabled("agentOfficeAddressMunicipality", "ADDRESS")}
-                        validationLabel="Error"
-                        value={state.formationFormData.agentOfficeAddressMunicipality}
-                        onSelect={(value: Municipality | undefined): void => {
-                          setFormationFormData({
-                            ...state.formationFormData,
-                            agentOfficeAddressMunicipality: value,
-                          });
-                        }}
-                        onValidation={(): void => setFieldsInteracted(["agentOfficeAddressMunicipality"])}
-                        helperText={Config.formation.fields.agentOfficeAddressMunicipality.error}
-                      />
-                    </div>
+                    <MunicipalityDropdown
+                      municipalities={municipalities}
+                      fieldName={"agentOfficeAddressMunicipality"}
+                      error={doesFieldHaveError("agentOfficeAddressMunicipality")}
+                      disabled={shouldBeDisabled("agentOfficeAddressMunicipality", "ADDRESS")}
+                      validationLabel="Error"
+                      value={state.formationFormData.agentOfficeAddressMunicipality}
+                      onSelect={(value: Municipality | undefined): void => {
+                        setFormationFormData({
+                          ...state.formationFormData,
+                          agentOfficeAddressMunicipality: value,
+                        });
+                      }}
+                      onValidation={(): void => setFieldsInteracted(["agentOfficeAddressMunicipality"])}
+                      helperText={Config.formation.fields.agentOfficeAddressMunicipality.error}
+                    />
                   </WithErrorBar>
                 </div>
 
@@ -293,7 +283,6 @@ export const RegisteredAgent = (): ReactElement => {
                       validationText={Config.formation.fields.agentOfficeAddressState.error}
                       disabled={true}
                       onSelect={(): void => {}}
-                      className={"margin-top-2"}
                     />
                   </WithErrorBar>
                 </div>

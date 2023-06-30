@@ -71,7 +71,7 @@ export const OnboardingLegalStructureDropdown = <T,>(props: Props<T>): ReactElem
 
   return (
     <>
-      <div className="form-input margin-top-2">
+      <div className="margin-top-2 text-field-width-default">
         <FormControl variant="outlined" fullWidth error={isFormFieldInValid}>
           <Select
             fullWidth

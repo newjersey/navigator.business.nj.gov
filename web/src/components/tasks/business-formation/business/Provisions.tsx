@@ -81,10 +81,10 @@ export const Provisions = (): ReactElement => {
             <div className="grid-row">
               <div className="grid-col">
                 <GenericTextField
+                  inputWidth="full"
                   value={provision}
                   handleChange={(value): void => handleProvisionChange(value, index)}
                   fieldName={`provisions ${index}`}
-                  formInputFull
                   fieldOptions={{
                     multiline: true,
                     minRows: 3,
