@@ -1,5 +1,6 @@
 ---
-urlSlug: "massage-therapy"
+urlSlug: massage-therapy
+previewType: expiration
 callToActionLink: https://newjersey.mylicense.com/eGov/PersonSearchResults.aspx
 callToActionText: Renew My Massage Therapy License
 ---
@@ -27,4 +28,4 @@ You will only see the option to renew online 60 days prior to your expiration da
 > - A renewed business registration valid for two years
 >
 > **What if don't renew my registration?**\
-> If you don't renew your registration, your license will be suspended and you won't be able to legally run your business. You will need to contact your licensing board for reinstatement procedures and associated fees.
+> If you don't renew your registration, your license will be suspended and you won't be able to legally run your business. You need to contact your licensing board for reinstatement procedures and associated fees.
