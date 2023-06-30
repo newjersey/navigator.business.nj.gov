@@ -5,14 +5,24 @@ if [[ -z $AWS_ACCESS_KEY_ID ]] || [[ -z $AWS_SECRET_ACCESS_KEY ]] || [[ -z $AWS_
     exit 1
 fi
 
+if [[ -z $AWS_REGION ]]; then
+    echo "AWS region not set. Set AWS_REGION before proceeding."
+    exit 1
+fi
+
+if [[ -z $DYNAMODB_TABLE ]]; then
+    echo "No table name provided. Set DYNAMODB_TABLE before proceeding."
+    exit 1
+fi
+
 aws_command="aws dynamodb scan"
 output_file="get-user-location-output.csv" # This filename is included in .gitignore to prevent accidental commits
 max_items=1000
 last_evaluated_key=""
 counter=0
 
-read -p "Enter the AWS region: " region
-read -p "Enter the table name: " table_name
+region="$AWS_REGION"
+table_name="$DYNAMODB_TABLE"
 
 while true; do
 
