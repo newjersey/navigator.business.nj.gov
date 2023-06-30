@@ -340,7 +340,11 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                 }}
               />
             </div>
-            <OnboardingTaxId validationText={Config.taxAccess.failedTaxIdHelper} required />
+            <OnboardingTaxId
+              validationText={Config.taxAccess.failedTaxIdHelper}
+              required
+              inputWidth="default"
+            />
           </WithErrorBar>
         </ModalTwoButton>
       </ProfileDataContext.Provider>

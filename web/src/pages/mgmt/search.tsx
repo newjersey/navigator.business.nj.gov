@@ -189,30 +189,25 @@ const SearchContentPage = (props: Props): ReactElement => {
   const authedView = (
     <div>
       <h1>Search in CMS</h1>
-      <div className="margin-bottom-4 margin-top-2">
-        <label htmlFor="search">Search Exact Text</label>
-        <TextField
-          fullWidth
-          name="search"
-          variant="outlined"
-          type="text"
-          value={searchTerm}
-          onChange={handleSearchInput}
-          onKeyPress={(event): void => handleKeyPress(event, onSearchSubmit)}
-          inputProps={{ id: "search" }}
-        />
-        <button onClick={onSearchSubmit} className="usa-button margin-top-2">
-          Submit
-        </button>
-      </div>
-
+      <label htmlFor="search">Search Exact Text</label>
+      <TextField
+        className="margin-top-2"
+        name="search"
+        variant="outlined"
+        type="text"
+        value={searchTerm}
+        onChange={handleSearchInput}
+        onKeyPress={(event): void => handleKeyPress(event, onSearchSubmit)}
+        inputProps={{ id: "search" }}
+      />
+      <button onClick={onSearchSubmit} className="usa-button margin-top-2 margin-bottom-4">
+        Submit
+      </button>
       {noMatches() && <div>No matches.</div>}
-
       <MatchCollection
         matchedCollections={{ "Biz Form - Config": [] }}
         groupedConfigMatches={groupedConfigMatches}
       />
-
       <MatchCollection matchedCollections={certCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={fundingCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={roadmapsCollection} groupedConfigMatches={groupedConfigMatches} />

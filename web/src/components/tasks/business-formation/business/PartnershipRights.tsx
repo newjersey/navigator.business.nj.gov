@@ -25,7 +25,6 @@ export const PartnershipRights = (): ReactElement => {
               errorBarType="ALWAYS"
               validationText={Config.formation.general.genericErrorText}
               label={Config.formation.partnershipRights.description}
-              formInputFull
               fieldOptions={{
                 multiline: true,
                 rows: 3,

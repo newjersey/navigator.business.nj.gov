@@ -97,10 +97,10 @@ export const CheckStatus = (props: Props): ReactElement => {
         <div className="margin-bottom-2">
           <label htmlFor="business-name">{Config.licenseSearchTask.businessNameLabel}</label>
           <TextField
+            className="margin-top-2"
             value={formValues.name}
             onChange={handleChangeForKey("name")}
             variant="outlined"
-            fullWidth
             inputProps={{
               id: "business-name",
               "data-testid": "business-name",
@@ -110,10 +110,10 @@ export const CheckStatus = (props: Props): ReactElement => {
         <div className="margin-bottom-2">
           <label htmlFor="address-1">{Config.licenseSearchTask.address1Label}</label>
           <TextField
+            className="margin-top-2"
             value={formValues.addressLine1}
             onChange={handleChangeForKey("addressLine1")}
             variant="outlined"
-            fullWidth
             inputProps={{
               id: "address-1",
               "data-testid": "address-1",
@@ -123,10 +123,10 @@ export const CheckStatus = (props: Props): ReactElement => {
         <div className="margin-bottom-2">
           <label htmlFor="address-2">{Config.licenseSearchTask.address2Label}</label>
           <TextField
+            className="margin-top-2"
             value={formValues.addressLine2}
             onChange={handleChangeForKey("addressLine2")}
             variant="outlined"
-            fullWidth
             inputProps={{
               id: "address-2",
               "data-testid": "address-2",
@@ -140,13 +140,12 @@ export const CheckStatus = (props: Props): ReactElement => {
               value={formValues.zipCode}
               onChange={handleChangeForKey("zipCode")}
               variant="outlined"
-              fullWidth
               inputProps={{
                 id: "zipcode",
                 "data-testid": "zipcode",
                 type: "number",
               }}
-              className={`${classes.zipCodeField}`}
+              className={`${classes.zipCodeField} margin-top-2`}
             />
           </div>
           <div className="flex-half padding-left-1">
@@ -155,7 +154,6 @@ export const CheckStatus = (props: Props): ReactElement => {
               value={"New Jersey"}
               onChange={(): void => {}}
               variant="outlined"
-              fullWidth
               inputProps={{
                 id: "state",
                 "data-testid": "state",
@@ -164,7 +162,7 @@ export const CheckStatus = (props: Props): ReactElement => {
                 },
               }}
               disabled
-              className={`${classes.disabledTextField}`}
+              className={`${classes.disabledTextField} margin-top-2`}
             />
           </div>
         </div>

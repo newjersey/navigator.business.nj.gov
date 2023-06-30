@@ -263,7 +263,7 @@ export const Signatures = (): ReactElement => {
           </div>
         )}
         <GenericTextField
-          noValidationMargin
+          inputWidth="full"
           value={state.formationFormData.signers[index].name}
           handleChange={(value: string): void => handleSignerChange(value, index)}
           error={hasError && doesRowHaveError(index)}
@@ -275,7 +275,6 @@ export const Signatures = (): ReactElement => {
           className={`margin-top-0`}
           ariaLabel={`Signer ${index}`}
           required={true}
-          formInputFull
         />
       </>
     );

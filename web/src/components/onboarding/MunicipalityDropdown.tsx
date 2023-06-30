@@ -46,7 +46,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
     if (props.hideErrorLabel) {
       return undefined;
     }
-    return props.error ? props.helperText : " ";
+    return props.error ? props.helperText : "";
   };
 
   return (
@@ -80,28 +80,30 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
       }}
       renderInput={(params): JSX.Element => {
         return (
-          <TextField
-            {...params}
-            inputProps={{
-              "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
-              "data-testid": props.fieldName,
-              ...params.inputProps,
-            }}
-            value={searchText}
-            onChange={handleChange}
-            onSubmit={props.onValidation}
-            variant="outlined"
-            error={props.error}
-            helperText={getHelperText()}
-            sx={{
-              "& .MuiInputBase-root": {
-                backgroundColor: "#FFFFFF",
-              },
-            }}
-          />
+          <div className="text-field-width-default">
+            <TextField
+              {...params}
+              className="margin-top-2"
+              inputProps={{
+                "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
+                "data-testid": props.fieldName,
+                ...params.inputProps,
+              }}
+              value={searchText}
+              onChange={handleChange}
+              onSubmit={props.onValidation}
+              variant="outlined"
+              error={props.error}
+              helperText={getHelperText()}
+              sx={{
+                "& .MuiInputBase-root": {
+                  backgroundColor: "#FFFFFF",
+                },
+              }}
+            />
+          </div>
         );
       }}
-      fullWidth
       openOnFocus
       clearOnEscape
       autoHighlight

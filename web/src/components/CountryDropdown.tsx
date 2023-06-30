@@ -12,7 +12,6 @@ interface Props {
   onValidation?: (fieldName: string, invalid: boolean) => void;
   error?: boolean;
   validationText?: string;
-  className?: string;
   excludeUS?: boolean;
   useFullName?: boolean;
   validationLabel?: string;
@@ -72,7 +71,6 @@ export const CountryDropdown = (props: Props): ReactElement => {
   return (
     <Autocomplete
       options={filteredCountries()}
-      className={props.className ?? ""}
       value={getCountry(props.value) || null}
       filterOptions={filterOptions}
       getOptionLabel={(option: CountriesObject): string => {
@@ -105,6 +103,7 @@ export const CountryDropdown = (props: Props): ReactElement => {
         return (
           <TextField
             {...params}
+            className="margin-top-2"
             id={props.fieldName}
             name={props.fieldName}
             disabled={props.disabled}
@@ -126,7 +125,6 @@ export const CountryDropdown = (props: Props): ReactElement => {
           />
         );
       }}
-      fullWidth
       openOnFocus
       clearOnEscape
       autoHighlight

@@ -11,7 +11,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { SearchBusinessNameError } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import { FormControl, TextField, useMediaQuery } from "@mui/material";
+import { TextField, useMediaQuery } from "@mui/material";
 import { FocusEvent, FormEvent, ReactElement, useContext, useEffect, useRef } from "react";
 
 export const BusinessNameStep = (): ReactElement => {
@@ -62,34 +62,36 @@ export const BusinessNameStep = (): ReactElement => {
           <div className={isTabletAndUp ? "grid-row grid-gap-2" : "display-flex flex-column"}>
             <div className={isTabletAndUp ? "grid-col-8" : ""}>
               <WithErrorBar hasError={hasError} type="MOBILE-ONLY">
-                <TextField
-                  autoComplete="no"
-                  className="fg1 width-100"
-                  margin="dense"
-                  value={currentName}
-                  onChange={(event): void => updateCurrentName(event.target.value)}
-                  variant="outlined"
-                  inputProps={{
-                    "aria-label": "Search business name",
-                  }}
-                  error={hasError}
-                  helperText={
-                    hasError
-                      ? getErrorStateForField({
-                          field: "businessName",
-                          formationFormData: state.formationFormData,
-                          businessNameAvailability: state.businessNameAvailability,
-                        }).label
-                      : undefined
-                  }
-                  onBlur={(event: FocusEvent<HTMLInputElement>): void => {
-                    setFieldsInteracted([FIELD_NAME]);
-                    onBlurNameField(event.target.value);
-                  }}
-                />{" "}
+                <div className="width-100">
+                  <TextField
+                    autoComplete="no"
+                    className="margin-top-2"
+                    margin="dense"
+                    value={currentName}
+                    onChange={(event): void => updateCurrentName(event.target.value)}
+                    variant="outlined"
+                    inputProps={{
+                      "aria-label": "Search business name",
+                    }}
+                    error={hasError}
+                    helperText={
+                      hasError
+                        ? getErrorStateForField({
+                            field: "businessName",
+                            formationFormData: state.formationFormData,
+                            businessNameAvailability: state.businessNameAvailability,
+                          }).label
+                        : undefined
+                    }
+                    onBlur={(event: FocusEvent<HTMLInputElement>): void => {
+                      setFieldsInteracted([FIELD_NAME]);
+                      onBlurNameField(event.target.value);
+                    }}
+                  />
+                </div>
               </WithErrorBar>
             </div>
-            <FormControl margin="dense">
+            <div className="margin-top-2">
               <SecondaryButton
                 isColor="primary"
                 onClick={(): void => {}}
@@ -101,7 +103,7 @@ export const BusinessNameStep = (): ReactElement => {
               >
                 {Config.searchBusinessNameTask.searchButtonText}
               </SecondaryButton>
-            </FormControl>
+            </div>
           </div>
         </WithErrorBar>
       </form>

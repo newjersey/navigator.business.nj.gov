@@ -56,7 +56,6 @@ export const OnboardingSingleTaxId = ({
             <InputAdornment position="end">{isTabletAndUp && props.getShowHideToggleButton()}</InputAdornment>
           ),
         }}
-        formInputFull={props.formInputFull ? true : false}
         {...props}
       />
       {!isTabletAndUp && (
