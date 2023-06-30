@@ -1,5 +1,6 @@
 ---
-urlSlug: "home-contractor"
+urlSlug: home-contractor
+previewType: expiration
 callToActionLink: https://www.njconsumeraffairs.gov/renewals/Pages/default.aspx
 callToActionText: Renew My License
 ---
@@ -16,9 +17,9 @@ Your Home Improvement Contractor license will expire every year.
 - Current mailing address
 - Current business address
 - Professional Liability Insurance with a minimum of 500,000 per occurrence
-- Pay the associated fees
+- Applicable fees paid
 
-> **Once completed you will have:**
+> **Once completed, you will have:**
 >
 > - An updated Home Improvement Contractor license valid for a year
 
