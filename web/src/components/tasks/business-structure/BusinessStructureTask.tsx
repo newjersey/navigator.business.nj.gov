@@ -71,8 +71,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
       return;
     }
 
-    queueUpdateTaskProgress(props.task.id, "COMPLETED");
-    setTaskCompleted(true);
+    updateLocalAndQueueTaskStatus("COMPLETED");
     await updateQueue.queueProfileData(profileData).update();
     setShowRadioQuestion(false);
     setSuccessSnackbarIsOpen(true);
