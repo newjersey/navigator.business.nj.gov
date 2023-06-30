@@ -24,4 +24,4 @@ Your Home Improvement Contractor license will expire every year.
 > - An updated Home Improvement Contractor license valid for a year
 
 > **What if I don't renew my registration?**\
-> If you don’t renew your license 30 days after your expiration date your license will be moved to “expired” status and you won't be able to legally operate your business. You will need to contact your licensing board for reinstatement procedures and associated fees.
+> If you don’t renew your license 30 days after your expiration date, your license will be moved to “expired” status and you won't be able to legally operate your business. You will need to contact your licensing board for reinstatement procedures and associated fees.
