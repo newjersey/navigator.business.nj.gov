@@ -189,6 +189,7 @@ commands:
             echo 'export FEATURE_BUSINESS_FLP=$FEATURE_BUSINESS_FLP_DEV' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FLC=$FEATURE_BUSINESS_FLC_DEV' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FCORP=$FEATURE_BUSINESS_FCORP_DEV' >> $BASH_ENV
+            echo 'export FEATURE_BUSINESS_FNP=$FEATURE_BUSINESS_FNP_DEV' >> $BASH_ENV
 
             echo 'export FEATURE_BUSINESS_FLLP_STAGING=$FEATURE_BUSINESS_FLLP_STAGING' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FLP_STAGING=$FEATURE_BUSINESS_FLP_STAGING' >> $BASH_ENV
@@ -228,6 +229,7 @@ commands:
             echo 'export FEATURE_BUSINESS_FLLP=true' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FLP=false' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FLC=true' >> $BASH_ENV
+            echo 'export FEATURE_BUSINESS_FNP=false' >> $BASH_ENV
             echo 'export FEATURE_EXPORT_PDF=true' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FCORP=false' >> $BASH_ENV
             echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_DEV' >> $BASH_ENV
@@ -269,6 +271,7 @@ commands:
             echo 'export FEATURE_BUSINESS_FLLP=$FEATURE_BUSINESS_FLLP_STAGING' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FLP=$FEATURE_BUSINESS_FLP_STAGING' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FCORP=$FEATURE_BUSINESS_FCORP_STAGING' >> $BASH_ENV
+            echo 'export FEATURE_BUSINESS_FNP=$FEATURE_BUSINESS_FNP_STAGING' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FLC=$FEATURE_BUSINESS_FLC_STAGING' >> $BASH_ENV
             echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_STAGING' >> $BASH_ENV
             echo 'export REDIRECT_URL=$REDIRECT_URL_STAGING' >> $BASH_ENV
@@ -309,6 +312,7 @@ commands:
             echo 'export FEATURE_BUSINESS_FLP=$FEATURE_BUSINESS_FLP_PROD' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FCORP=$FEATURE_BUSINESS_FCORP_PROD' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FLC=$FEATURE_BUSINESS_FLC_PROD' >> $BASH_ENV
+            echo 'export FEATURE_BUSINESS_FNP=$FEATURE_BUSINESS_FNP_PROD' >> $BASH_ENV
             echo 'export MYNJ_SERVICE_TOKEN=$MYNJ_SERVICE_TOKEN_PROD' >> $BASH_ENV
             echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_PROD' >> $BASH_ENV
             echo 'export REDIRECT_URL=$REDIRECT_URL_PROD' >> $BASH_ENV

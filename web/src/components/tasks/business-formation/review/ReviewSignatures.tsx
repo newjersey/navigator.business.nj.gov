@@ -9,6 +9,7 @@ export const ReviewSignatures = (): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
   const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
+  const isNonprofit = state.formationFormData.legalType === "nonprofit";
   const hasNoSigners = (state.formationFormData.signers?.length ?? 0) === 0;
   const hasNoIncorporators = (state.formationFormData.incorporators?.length ?? 0) === 0;
 
@@ -120,7 +121,7 @@ export const ReviewSignatures = (): ReactElement => {
   };
 
   const signers = (): ReactElement => {
-    if (!isCorp && hasNoSigners) {
+    if (!isCorp && !isNonprofit && hasNoSigners) {
       return displayEmptySigners();
     } else {
       return displaySigners();
@@ -128,7 +129,7 @@ export const ReviewSignatures = (): ReactElement => {
   };
 
   const incorporators = (): ReactElement => {
-    if (isCorp && hasNoIncorporators) {
+    if ((isCorp || isNonprofit) && hasNoIncorporators) {
       return displayEmptyIncorporators();
     } else {
       return displayIncorporators();

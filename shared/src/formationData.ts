@@ -32,6 +32,7 @@ export const publicFilingLegalTypes = [
   "limited-partnership",
   "c-corporation",
   "s-corporation",
+  "nonprofit",
 ] as const;
 
 export type PublicFilingLegalType = (typeof publicFilingLegalTypes)[number];
@@ -42,6 +43,8 @@ export const allFormationLegalTypes = [
   "limited-partnership",
   "c-corporation",
   "s-corporation",
+  "nonprofit",
+  "foreign-nonprofit",
   "foreign-limited-liability-partnership",
   "foreign-limited-liability-company",
   "foreign-limited-partnership",
@@ -58,6 +61,8 @@ export const BusinessSignerTypeMap: Record<FormationLegalType, SignerTitle[]> = 
   "limited-partnership": ["General Partner"],
   "c-corporation": ["Incorporator"],
   "s-corporation": ["Incorporator"],
+  nonprofit: ["Incorporator"],
+  "foreign-nonprofit": ["President", "Vice-President", "Chairman of the Board"],
   "foreign-limited-liability-company": ["Authorized Representative", "General Partner"],
   "foreign-limited-liability-partnership": ["Authorized Representative", "General Partner"],
   "foreign-limited-partnership": ["Authorized Representative", "General Partner"],
@@ -116,6 +121,16 @@ export interface FormationFormData extends FormationAddress {
   readonly getDistributionTerms: string;
   readonly canMakeDistribution: boolean | undefined;
   readonly makeDistributionTerms: string;
+  readonly hasNonprofitBoardMembers: boolean | undefined;
+  readonly nonprofitBoardMembersTerms: string;
+  readonly nonprofitBoardMemberQualificationsSpecified: "IN_BYLAWS" | "IN_FORM" | undefined;
+  readonly nonprofitBoardMemberQualificationsTerms: string;
+  readonly nonprofitBoardMemberRightsSpecified: "IN_BYLAWS" | "IN_FORM" | undefined;
+  readonly nonprofitBoardMemberRightsTerms: string;
+  readonly nonprofitTrusteesMethodSpecified: "IN_BYLAWS" | "IN_FORM" | undefined;
+  readonly nonprofitTrusteesMethodTerms: string;
+  readonly nonprofitAssetDistributionSpecified: "IN_BYLAWS" | "IN_FORM" | undefined;
+  readonly nonprofitAssetDistributionTerms: string;
   readonly provisions: string[] | undefined;
   readonly agentNumberOrManual: "NUMBER" | "MANUAL_ENTRY";
   readonly agentNumber: string;
@@ -143,6 +158,7 @@ export interface FormationFormData extends FormationAddress {
   readonly foreignStateOfFormation: StateNames | undefined;
   readonly foreignDateOfFormation: string | undefined; // YYYY-MM-DD
   readonly willPracticeLaw: boolean | undefined;
+  readonly isVeteranNonprofit: boolean | undefined;
 }
 
 export type FormationFields = keyof FormationFormData;
@@ -175,10 +191,16 @@ export type FormationTextField = Exclude<
   | "canCreateLimitedPartner"
   | "canGetDistribution"
   | "canMakeDistribution"
+  | "hasNonprofitBoardMembers"
+  | "nonprofitBoardMemberQualificationsSpecified"
+  | "nonprofitBoardMemberRightsSpecified"
+  | "nonprofitTrusteesMethodSpecified"
+  | "nonprofitAssetDistributionSpecified"
   | "foreignDateOfFormation"
   | "foreignStateOfFormation"
   | "foreignGoodStandingFile"
   | "willPracticeLaw"
+  | "isVeteranNonprofit"
 >;
 
 export const createEmptyFormationAddress = (): FormationAddress => {
@@ -237,6 +259,16 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     getDistributionTerms: "",
     canMakeDistribution: undefined,
     makeDistributionTerms: "",
+    hasNonprofitBoardMembers: undefined,
+    nonprofitBoardMembersTerms: "",
+    nonprofitBoardMemberQualificationsSpecified: undefined,
+    nonprofitBoardMemberQualificationsTerms: "",
+    nonprofitBoardMemberRightsSpecified: undefined,
+    nonprofitBoardMemberRightsTerms: "",
+    nonprofitTrusteesMethodSpecified: undefined,
+    nonprofitTrusteesMethodTerms: "",
+    nonprofitAssetDistributionSpecified: undefined,
+    nonprofitAssetDistributionTerms: "",
     provisions: undefined,
     agentNumberOrManual: "NUMBER",
     agentNumber: "",
@@ -264,6 +296,7 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     foreignDateOfFormation: undefined,
     foreignStateOfFormation: undefined,
     willPracticeLaw: undefined,
+    isVeteranNonprofit: undefined,
   };
 };
 
@@ -306,9 +339,21 @@ export const corpBusinessSuffix = [
   "INC.",
 ] as const;
 
+export const nonprofitBusinessSuffix = [
+  "A NJ NONPROFIT CORPORATION",
+  "CORPORATION",
+  "INCORPORATED",
+  "CORP",
+  "CORP.",
+  "INC",
+  "INC.",
+] as const;
+
 export const foreignCorpBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
 
 export type CorpBusinessSuffix = (typeof corpBusinessSuffix)[number];
+
+export type NonprofitBusinessSuffix = (typeof nonprofitBusinessSuffix)[number];
 
 export type ForeignCorpBusinessSuffix = (typeof foreignCorpBusinessSuffix)[number];
 
@@ -322,6 +367,7 @@ export const AllBusinessSuffixes = [
   ...lpBusinessSuffix,
   ...corpBusinessSuffix,
   ...foreignCorpBusinessSuffix,
+  ...nonprofitBusinessSuffix,
 ] as const;
 
 export type BusinessSuffix = (typeof AllBusinessSuffixes)[number];
@@ -333,12 +379,15 @@ export const BusinessSuffixMap: Record<
   | CorpBusinessSuffix[]
   | LpBusinessSuffix[]
   | ForeignCorpBusinessSuffix[]
+  | NonprofitBusinessSuffix[]
 > = {
   "limited-liability-company": llcBusinessSuffix as unknown as LlcBusinessSuffix[],
   "limited-liability-partnership": llpBusinessSuffix as unknown as LlpBusinessSuffix[],
   "limited-partnership": lpBusinessSuffix as unknown as LpBusinessSuffix[],
   "c-corporation": corpBusinessSuffix as unknown as CorpBusinessSuffix[],
   "s-corporation": corpBusinessSuffix as unknown as CorpBusinessSuffix[],
+  nonprofit: nonprofitBusinessSuffix as unknown as NonprofitBusinessSuffix[],
+  "foreign-nonprofit": nonprofitBusinessSuffix as unknown as NonprofitBusinessSuffix[],
   "foreign-limited-liability-company": llcBusinessSuffix as unknown as LlcBusinessSuffix[],
   "foreign-limited-liability-partnership": llpBusinessSuffix as unknown as LlpBusinessSuffix[],
   "foreign-limited-partnership": lpBusinessSuffix as unknown as LpBusinessSuffix[],
@@ -355,6 +404,7 @@ export const foreignCorpLegalStructures: FormationLegalType[] = [
 export const incorporationLegalStructures: FormationLegalType[] = [
   ...corpLegalStructures,
   "limited-partnership",
+  "nonprofit",
 ];
 
 export type AcceptedFileType = "PDF" | "PNG";

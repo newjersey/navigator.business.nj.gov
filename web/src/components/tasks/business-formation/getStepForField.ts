@@ -30,6 +30,16 @@ export const getStepForField = (field: FieldsForErrorHandling): FormationStepNam
     case "makeDistributionTerms":
     case "foreignGoodStandingFile":
     case "willPracticeLaw":
+    case "isVeteranNonprofit":
+    case "hasNonprofitBoardMembers":
+    case "nonprofitBoardMemberQualificationsSpecified":
+    case "nonprofitBoardMemberRightsSpecified":
+    case "nonprofitTrusteesMethodSpecified":
+    case "nonprofitAssetDistributionSpecified":
+    case "nonprofitBoardMemberQualificationsTerms":
+    case "nonprofitBoardMemberRightsTerms":
+    case "nonprofitTrusteesMethodTerms":
+    case "nonprofitAssetDistributionTerms":
       return "Business";
 
     case "agentNumber":

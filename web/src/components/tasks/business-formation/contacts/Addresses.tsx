@@ -34,7 +34,9 @@ interface Props<T> {
   needSignature?: boolean;
   createEmptyAddress: () => T;
   displayContent: DisplayContent;
+  legalType: string;
   hasError: boolean;
+  showErrorOnBottom?: boolean;
 }
 
 export const Addresses = <T extends FormationMember | FormationIncorporator>(
@@ -186,14 +188,22 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
       <tfoot>
         {props.hasError && props.addressData.length === 0 ? (
           <tr>
-            <td className={"text-error-dark text-bold"}>{props.displayContent.error}</td>
+            <td colSpan={3} className={"text-error-dark text-bold"}>
+              {props.displayContent.error}
+            </td>
+          </tr>
+        ) : props.hasError && props.showErrorOnBottom ? (
+          <tr>
+            <td colSpan={3} className={"text-error-dark text-bold"}>
+              {props.displayContent.error}
+            </td>
+          </tr>
+        ) : props.addressData.length === 0 ? (
+          <tr>
+            <td colSpan={4}>{props.displayContent.placeholder}</td>
           </tr>
         ) : (
-          props.addressData.length === 0 && (
-            <tr>
-              <td colSpan={4}>{props.displayContent.placeholder}</td>
-            </tr>
-          )
+          <></>
         )}
       </tfoot>
     </table>
@@ -280,11 +290,19 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
         <tfoot>
           {props.hasError && props.addressData.length === 0 ? (
             <tr>
-              <td className={"text-error-dark text-bold"}>{props.displayContent.error}</td>
+              <td colSpan={3} className={"text-error-dark text-bold"}>
+                {props.displayContent.error}
+              </td>
+            </tr>
+          ) : props.hasError && props.showErrorOnBottom ? (
+            <tr>
+              <td colSpan={3} className={"text-error-dark text-bold"}>
+                {props.displayContent.error}
+              </td>
             </tr>
           ) : props.addressData.length === 0 ? (
             <tr>
-              <td className="flex-column">{props.displayContent.placeholder}</td>
+              <td colSpan={4}>{props.displayContent.placeholder}</td>
             </tr>
           ) : (
             <></>
@@ -318,7 +336,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
           <WithErrorBar hasError={doesFieldHaveError(props.fieldName)} type="ALWAYS">
             {isTabletAndUp ? renderDesktopTable : renderMobileTable}
           </WithErrorBar>
-          {props.addressData.length > 0 && <hr className="margin-bottom-3" />}
+          {props.addressData.length > 0}
           {props.addressData.length <= 9 && (
             <UnStyledButton
               style="default"

@@ -45,7 +45,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
   return (
     <>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
-        <h2 className="h3-styling margin-bottom-0">
+        <h2 className="h3-styling margin-0">
           {props.title}{" "}
           {props.required ? (
             <></>

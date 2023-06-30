@@ -23,9 +23,9 @@
       "previousButtonText": "Back",
       "initialNextButtonText": "Continue Forming My Business",
       "submitButtonText": "Submit & Pay",
-      "viewMoreButtonText": "View more",
+      "viewMoreButtonText": "Read more",
       "amendmentInfo": "#### Review your information before submitting to the New Jersey Division of Revenue and Enterprise Services.\n If you need to make a change after submitting, you must file an [amendment online.](https://www.njportal.com/dor/businessamendments)",
-      "viewLessButtonText": "View less",
+      "viewLessButtonText": "Read less",
       "genericErrorText": "This field requires information."
     },
     "intro": {
@@ -36,7 +36,7 @@
       "addressHeader": "Primary Business Address",
       "servicesHeader": "Services and Payment",
       "addressAddButtonText": "Add Primary Business Address",
-      "businessNameAndStructureHeader": "Business Name and Business Structure",
+      "businessNameAndStructureHeader": "Business Details",
       "notificationsDescription": "Get free text/email notifications:",
       "notificationsHeader": "Notifications",
       "review": {
@@ -73,7 +73,12 @@
       "officialFormationDocument": {
         "label": "Official Formation Document",
         "labelContextualInfo": "certificate-formation",
-        "cost": "125"
+        "cost": "125",
+        "overrides": {
+          "nonprofit": {
+            "cost": "75"
+          }
+        }
       },
       "contactLastName": {
         "label": "Last Name",
@@ -109,6 +114,19 @@
         "successSnackbarHeader": "Director Added",
         "modalSaveButton": "Add Director",
         "description": "List each `Board of Directors’|board-directors` name and address. You need at least 1 and can have up to 10 Directors listed.\n\nBoard of Directors’ names are listed on the Certificate of Formation and will have the ability to file and sign documents."
+      },
+      "trustees": {
+        "label": "Board of Trustees",
+        "addButtonText": "Add Trustee",
+        "error": "Enter at least 3 trustees names.",
+        "successSnackbarBody": "A trustee has been added successfully.",
+        "modalTitle": "Add Trustee",
+        "subheader": "",
+        "trusteeFullName": "Trustees Full Name",
+        "placeholder": "No Trustees have been added",
+        "successSnackbarHeader": "Trustee Added",
+        "modalSaveButton": "Add Trustee",
+        "description": "List each board of trustees name and address. You need a minimum of 3 trustees and can have up to 10 listed.\n\nBoard of Trustees names are listed on the `Certificate of Formation|certificate-formation` and have the ability to file and sign documents."
       },
       "signers": {
         "addButtonText": "Add New Signer",
@@ -242,6 +260,22 @@
         "radioYesText": "Yes",
         "error": "Select 'Yes' or 'No'."
       },
+      "isVeteranNonprofit": {
+        "label": "Non-Profit Veteran Corporation",
+        "description": "Is your Domestic Non-Profit a `Veteran Corporation|veteran-corporation`?",
+        "radioNoText": "No",
+        "radioYesText": "Yes",
+        "error": "Select 'Yes' or 'No'."
+      },
+      "nonprofit": {
+        "domNpVetCorpReviewText": "**Yes**, my Domestic Non-Profit is a Veteran Corporation.",
+        "yesBoardMembersReviewText": "**Yes**, my Non-Profit will have board members.",
+        "noBoardMembersReviewText": "**No**, my Non-Profit will not have board members.",
+        "boardMembersQualificationsReviewText": "Board member qualifications are specified",
+        "rightsAndLimitationsReviewText": "**Rights and limitations of the** board **members are specified**",
+        "choosingTrusteesReviewText": "The method for choosing trustees are specified",
+        "distributingAssetsReviewText": "The method for distributing assets are specified"
+      },
       "contactPhoneNumber": {
         "label": "Phone Number",
         "labelSecondaryText": "(xxx) xxx-xxxx",
@@ -309,6 +343,38 @@
         "body": "Can limited partners assign other partners limited partner rights?",
         "reviewStepNo": "**No**, the limited partners cannot assign other partners limited partner rights.",
         "reviewStepYes": "**Yes**, the limited partners can assign other partners limited partner rights."
+      },
+      "hasNonprofitBoardMembers": {
+        "label": "Provisions - Board Members",
+        "body": "Will your Non-Profit have `board members|board-member`?"
+      },
+      "nonprofitBoardMemberQualificationsSpecified": {
+        "label": "Provisions - Board Member Qualifications",
+        "body": "Board member qualifications are specified"
+      },
+      "nonprofitBoardMemberQualificationsTerms": {
+        "label": "Provisions - Board Member Qualifications"
+      },
+      "nonprofitBoardMemberRightsSpecified": {
+        "label": "Provisions - Board Member Rights",
+        "body": "The rights and limitations of the board members are specified"
+      },
+      "nonprofitBoardMemberRightsTerms": {
+        "label": "Provisions - Board Member Rights"
+      },
+      "nonprofitTrusteesMethodSpecified": {
+        "label": "Provisions - Trustees",
+        "body": "The method for choosing Trustees are specified"
+      },
+      "nonprofitTrusteesMethodTerms": {
+        "label": "Provisions - Trustees"
+      },
+      "nonprofitAssetDistributionSpecified": {
+        "label": "Provisions - Asset Distribution",
+        "body": "The method for distributing assets are specified"
+      },
+      "nonprofitAssetDistributionTerms": {
+        "label": "Provisions - Asset Distribution"
       },
       "addressZipCode": {
         "label": "Zip Code",
@@ -402,6 +468,7 @@
       "foreignPrefaceText": "Foreign",
       "warningModalCancelButton": "Cancel",
       "c-corporation": "Domestic Corporation",
+      "nonprofit": "Non-Profit Domestic Corporation",
       "warningModalHeader": "You Might Need a Different Form",
       "contextualInfo": "business-structure-learn-more"
     },
@@ -411,6 +478,14 @@
       "radioNoText": "No, they do not have the right",
       "radioYesText": "Yes, they have the right",
       "reviewStepTermsLabel": "Applicable Terms:"
+    },
+    "nonprofitProvisions": {
+      "label": "Provisions",
+      "description": "Specify form",
+      "radioNoText": "No",
+      "radioYesText": "Yes",
+      "radioInBylawsText": "In the bylaws",
+      "radioInFormText": "In this form"
     }
   }
 }

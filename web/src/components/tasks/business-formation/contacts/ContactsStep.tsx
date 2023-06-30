@@ -23,8 +23,9 @@ export const ContactsStep = (): ReactElement => {
 
   const shouldShowMembers = (): boolean => {
     return (
-      [...corpLegalStructures, "limited-liability-company"].includes(state.formationFormData.legalType) &&
-      state.formationFormData.businessLocationType === "NJ"
+      [...corpLegalStructures, "limited-liability-company", "nonprofit"].includes(
+        state.formationFormData.legalType
+      ) && state.formationFormData.businessLocationType === "NJ"
     );
   };
 
@@ -38,14 +39,6 @@ export const ContactsStep = (): ReactElement => {
     return (Config.formation.fields as any)[field].description;
   };
 
-  const isCorpAndLp = (): boolean => {
-    return [...corpLegalStructures, "limited-partnership"].includes(state.formationFormData.legalType);
-  };
-
-  const isCorp = (): boolean => {
-    return [...corpLegalStructures].includes(state.formationFormData.legalType);
-  };
-
   return (
     <>
       <div data-testid="contacts-step">
@@ -53,29 +46,18 @@ export const ContactsStep = (): ReactElement => {
         {shouldShowMembers() && (
           <>
             <hr className="margin-top-0 margin-bottom-3" />
-            {doesFieldHaveError("members") && !isCorp() && (
-              <Alert variant="error">
-                {
-                  getErrorStateForField({ field: "members", formationFormData: state.formationFormData })
-                    .label
-                }
-              </Alert>
-            )}
-            <Members hasError={doesFieldHaveError("members")} />
+            <Members
+              hasError={doesFieldHaveError("members")}
+              showErrorOnBottom={
+                state.formationFormData.legalType === "nonprofit" && doesFieldHaveError("members")
+              }
+            />
           </>
         )}
         <hr className="margin-top-0 margin-bottom-3" />
         {doesFieldHaveError("signers") && (
           <Alert variant="error">
             {getErrorStateForField({ field: "signers", formationFormData: state.formationFormData }).label}
-          </Alert>
-        )}
-        {doesFieldHaveError("incorporators") && !isCorpAndLp() && (
-          <Alert variant="error">
-            {
-              getErrorStateForField({ field: "incorporators", formationFormData: state.formationFormData })
-                .label
-            }
           </Alert>
         )}
         {incorporationLegalStructures.includes(state.formationFormData.legalType) ? (
@@ -121,6 +103,7 @@ export const ContactsStep = (): ReactElement => {
               modalSaveButton: Config.formation.fields.incorporators.addButtonText,
               error: Config.formation.fields.incorporators.error,
             }}
+            legalType={state.formationFormData.legalType}
             hasError={doesFieldHaveError("signers") || doesFieldHaveError("incorporators")}
           />
         ) : (

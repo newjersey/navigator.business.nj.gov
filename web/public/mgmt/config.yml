@@ -658,6 +658,26 @@ collections:
                             widget: object
                             fields:
                               - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Trustees
+                    name: trustees
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Add Button Text", name: "addButtonText", widget: "string" }
+                      - { label: "Error", name: "error", widget: "string" }
+                      - { label: "Success snackbar - body", name: "successSnackbarBody", widget: "string" }
+                      - { label: "Modal Title", name: "modalTitle", widget: "string" }
+                      - { label: "Subheader", name: "subheader", widget: "string" }
+                      - { label: "Trustee Full Name", name: "trusteeFullName", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - {
+                          label: "Success snackbar - header",
+                          name: "successSnackbarHeader",
+                          widget: "string",
+                        }
+                      - { label: "Modal save button", name: "modalSaveButton", widget: "string" }
+                      - { label: "Description", name: "description", widget: "string" }
                   - label: Withdrawals
                     name: withdrawals
                     collapsed: true
@@ -665,6 +685,58 @@ collections:
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
                       - { label: "Body", name: "body", widget: "markdown" }
+                  - label: Veteran Nonprofit
+                    name: veteranNonprofit
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Description", name: "description", widget: "string" }
+                      - { label: "Radio no text", name: "radioNoText", widget: "string" }
+                      - { label: "Radio yes text", name: "radioYesText", widget: "string" }
+                      - { label: "Error", name: "error", widget: "string" }
+                      - { label: "In form", name: "inForm", widget: "string" }
+                      - { label: "In bylaws", name: "inByLaws", widget: "string" }
+              - label: Nonprofit
+                name: nonprofit
+                collapsed: true
+                widget: object
+                fields:
+                  - {
+                    label: "Board members yes review text",
+                    name: "yesBoardMembersReviewText",
+                    widget: "markdown",
+                  }
+                  - {
+                    label: "Board members no review text",
+                    name: "noBoardMembersReviewText",
+                    widget: "markdown",
+                  }
+                  - {
+                    label: "Board members qualifications review text",
+                    name: "boardMembersQualificationsReviewText",
+                    widget: "text",
+                  }
+                  - {
+                    label: "Rights and limitations review text",
+                    name: "rightsAndLimitationsReviewText",
+                    widget: "markdown",
+                  }
+                  - {
+                    label: "Choosing trustees review text",
+                    name: "choosingTrusteesReviewText",
+                    widget: "text",
+                  }
+                  - {
+                    label: "Domestic nonprofit veteran corp review text",
+                    name: "domNpVetCorpReviewText",
+                    widget: markdown",
+                  }
+                  - {
+                    label: "Distributing assets review text",
+                    name: "distributingAssetsReviewText",
+                    widget: "text",
+                  }
               - label: Address Modal
                 name: addressModal
                 collapsed: true
@@ -857,8 +929,19 @@ collections:
                       name: "partialAddressErrorText",
                       widget: "string",
                     }
-                  - { label: "View more button text", name: "viewMoreButtonText", widget: "string" }
-                  - { label: "View less button text", name: "viewLessButtonText", widget: "string" }
+                  - { label: "Read more button text", name: "viewMoreButtonText", widget: "string" }
+                  - { label: "Read less button text", name: "viewLessButtonText", widget: "string" }
+              - label: Nonprofit Provisions
+                name: nonprofitProvisions
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: "Provisions", name: "label", widget: "string" }
+                  - { label: "Description", name: "description", widget: "string" }
+                  - { label: "Radio no text", name: "radioNoText", widget: "string" }
+                  - { label: "Radio yes text", name: "radioYesText", widget: "string" }
+                  - { label: "Radio in bylaws text", name: "radioInBylawsText", widget: "string" }
+                  - { label: "Radio in form text", name: "radioInFormText", widget: "string" }
               - label: Intro Paragraph
                 name: intro
                 collapsed: true

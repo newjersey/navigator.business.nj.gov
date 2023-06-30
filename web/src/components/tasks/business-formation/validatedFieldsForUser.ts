@@ -68,6 +68,39 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fi
     validatedFields = [...validatedFields, "willPracticeLaw", "foreignGoodStandingFile"];
   }
 
+  if (formationFormData.legalType === "nonprofit") {
+    validatedFields = [
+      ...validatedFields,
+      "isVeteranNonprofit",
+      "hasNonprofitBoardMembers",
+      "members",
+      "incorporators",
+    ];
+
+    if (formationFormData.hasNonprofitBoardMembers) {
+      validatedFields.push("nonprofitBoardMemberQualificationsSpecified");
+      validatedFields.push("nonprofitBoardMemberRightsSpecified");
+      validatedFields.push("nonprofitTrusteesMethodSpecified");
+      validatedFields.push("nonprofitAssetDistributionSpecified");
+    }
+
+    if (formationFormData.nonprofitBoardMemberQualificationsSpecified === "IN_FORM") {
+      validatedFields.push("nonprofitBoardMemberQualificationsTerms");
+    }
+
+    if (formationFormData.nonprofitBoardMemberRightsSpecified === "IN_FORM") {
+      validatedFields.push("nonprofitBoardMemberRightsTerms");
+    }
+
+    if (formationFormData.nonprofitTrusteesMethodSpecified === "IN_FORM") {
+      validatedFields.push("nonprofitTrusteesMethodTerms");
+    }
+
+    if (formationFormData.nonprofitAssetDistributionSpecified === "IN_FORM") {
+      validatedFields.push("nonprofitAssetDistributionTerms");
+    }
+  }
+
   if (formationFormData.legalType === "limited-partnership") {
     validatedFields = [
       ...validatedFields,

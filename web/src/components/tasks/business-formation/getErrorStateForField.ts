@@ -109,6 +109,10 @@ export const getErrorStateForField = (inputParams: {
     "getDistributionTerms",
     "makeDistributionTerms",
     "paymentType",
+    "nonprofitBoardMemberQualificationsTerms",
+    "nonprofitBoardMemberRightsTerms",
+    "nonprofitTrusteesMethodTerms",
+    "nonprofitAssetDistributionTerms",
   ];
 
   const hasErrorIfUndefined: FormationFields[] = [
@@ -119,6 +123,12 @@ export const getErrorStateForField = (inputParams: {
     "addressCountry",
     "foreignStateOfFormation",
     "willPracticeLaw",
+    "isVeteranNonprofit",
+    "hasNonprofitBoardMembers",
+    "nonprofitBoardMemberQualificationsSpecified",
+    "nonprofitBoardMemberRightsSpecified",
+    "nonprofitTrusteesMethodSpecified",
+    "nonprofitAssetDistributionSpecified",
   ];
 
   if (field === "foreignStateOfFormation") {
@@ -219,11 +229,12 @@ export const getErrorStateForField = (inputParams: {
   }
 
   if (field === "members") {
-    if (!formationFormData.members || formationFormData.members?.length === 0) {
+    const minimumLength = formationFormData.legalType === "nonprofit" ? 3 : 1;
+    if (!formationFormData.members || formationFormData.members?.length < minimumLength) {
       return {
         ...errorState,
         hasError: true,
-        label: Config.formation.fields.directors.error,
+        label: field,
       };
     } else {
       const allValid = formationFormData.members.every((it) => {
@@ -239,7 +250,7 @@ export const getErrorStateForField = (inputParams: {
       return {
         ...errorState,
         hasError: !allValid,
-        label: Config.formation.fields.directors.error,
+        label: field,
       };
     }
   }

@@ -170,24 +170,45 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
     const isManual = formationFormData.agentNumberOrManual === "MANUAL_ENTRY";
 
     const isForeign = currentBusiness.profileData.businessPersona === "FOREIGN";
-    const toFormationLegalStructure: FormationLegalType = isForeign
-      ? (`foreign-${currentBusiness.profileData.legalStructureId}` as FormationLegalType)
-      : (currentBusiness.profileData.legalStructureId as FormationLegalType);
+    const isVeteranNonprofit = formationFormData.isVeteranNonprofit;
+
+    const toFormationLegalStructure = (): FormationLegalType | "veteran-nonprofit" => {
+      if (isForeign) {
+        return `foreign-${currentBusiness.profileData.legalStructureId}` as FormationLegalType;
+      } else if (isVeteranNonprofit) {
+        return "veteran-nonprofit";
+      }
+      return currentBusiness.profileData.legalStructureId as FormationLegalType;
+    };
 
     const naicsCode =
       currentBusiness.profileData.naicsCode.length === 6 ? currentBusiness.profileData.naicsCode : "";
 
-    const businessType = BusinessTypeMap[toFormationLegalStructure];
+    const businessType = BusinessTypeMap[toFormationLegalStructure()];
 
     const isCorp = businessType.shortDescription === "DP";
     const isForeignCorp = businessType.shortDescription === "FR";
+    const isDomesticNonProfit = businessType.shortDescription === ("NP" || "NV");
+
+    const isInFormAndTerms = (
+      input: "IN_BYLAWS" | "IN_FORM" | undefined,
+      terms: string | undefined
+    ): string | undefined => {
+      return input === "IN_FORM" ? terms : undefined;
+    };
+
+    // eslint-disable-next-line unicorn/consistent-function-scoping
+    const isInFormOrBylaw = (input: "IN_BYLAWS" | "IN_FORM" | undefined): "Herein" | "Bylaw" => {
+      return input === "IN_FORM" ? "Herein" : "Bylaw";
+    };
 
     const getAdditionalProvisions = (): Provisions => {
       const additionalProvisions =
         formationFormData.provisions?.map((it: string) => {
           return { Provision: it };
         }) ?? [];
-      switch (toFormationLegalStructure) {
+
+      switch (toFormationLegalStructure()) {
         case "limited-partnership": {
           return {
             AdditionalLimitedPartnership: {
@@ -226,8 +247,46 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
             },
           };
         }
+        case "nonprofit":
+        case "veteran-nonprofit": {
+          return {
+            AdditionalDomesticNonProfitCorp: {
+              HasMembers: formationFormData.hasNonprofitBoardMembers ? "Yes" : "No",
+              MemberTermsProvisionLocation: isInFormOrBylaw(
+                formationFormData.nonprofitBoardMemberQualificationsSpecified
+              ),
+              MemberTerms: isInFormAndTerms(
+                formationFormData.nonprofitBoardMemberQualificationsSpecified,
+                formationFormData.nonprofitBoardMemberQualificationsTerms
+              ),
+
+              MemberClassPermissionsProvisionLocation: isInFormOrBylaw(
+                formationFormData.nonprofitBoardMemberRightsSpecified
+              ),
+              MemberClassPermissions: isInFormAndTerms(
+                formationFormData.nonprofitBoardMemberRightsSpecified,
+                formationFormData.nonprofitBoardMemberRightsTerms
+              ),
+              TrusteeElectionProcessProvisionLocation: isInFormOrBylaw(
+                formationFormData.nonprofitTrusteesMethodSpecified
+              ),
+              TrusteeElectionProcess: isInFormAndTerms(
+                formationFormData.nonprofitTrusteesMethodSpecified,
+                formationFormData.nonprofitTrusteesMethodTerms
+              ),
+              AssetDistributionProvisionLocation: isInFormOrBylaw(
+                formationFormData.nonprofitAssetDistributionSpecified
+              ),
+              AssetDistribution: isInFormAndTerms(
+                formationFormData.nonprofitAssetDistributionSpecified,
+                formationFormData.nonprofitAssetDistributionTerms
+              ),
+            },
+          };
+        }
+
         default:
-          if (["c-corporation", "s-corporation"].includes(toFormationLegalStructure)) {
+          if (["c-corporation", "s-corporation"].includes(toFormationLegalStructure())) {
             return {
               AdditionalCCorpOrProfessionalCorp: {
                 AdditionalProvisions: additionalProvisions,
@@ -276,7 +335,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
         SelectPaymentType: formationFormData.paymentType as Exclude<PaymentType, undefined>,
         BusinessInformation: {
           CompanyOrigin: isForeign ? "Foreign" : "Domestic",
-          Business: BusinessTypeMap[toFormationLegalStructure].businessType,
+          Business: BusinessTypeMap[toFormationLegalStructure()].businessType,
           BusinessName: formationFormData.businessName,
           BusinessDesignator: formationFormData.businessSuffix as Exclude<BusinessSuffix, undefined>,
           Naic: naicsCode,
@@ -307,7 +366,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
               : undefined,
         },
         ...getAdditionalProvisions(),
-        CompanyProfit: "Profit",
+        CompanyProfit: isDomesticNonProfit || isVeteranNonprofit ? "NonProfit" : "Profit",
         RegisteredAgent: {
           Id: isManual ? undefined : formationFormData.agentNumber,
           Email: isManual ? formationFormData.agentEmail : undefined,
@@ -414,6 +473,19 @@ type AdditionalForeignLimitedPartnershipProvision = {
   AggregateAmount: string; // Max 400 chars
   AdditionalProvisions: AdditionalProvision[];
 };
+
+type AdditionalDomesticNonProfitCorp = {
+  HasMembers: "Yes" | "No";
+  MemberTermsProvisionLocation: "Bylaw" | "Herein";
+  MemberTerms: string | undefined; // Max 400 chars
+  MemberClassPermissionsProvisionLocation: "Bylaw" | "Herein";
+  MemberClassPermissions: string | undefined; // Max 400 chars
+  TrusteeElectionProcessProvisionLocation: "Bylaw" | "Herein";
+  TrusteeElectionProcess: string | undefined; // Max 400 chars
+  AssetDistributionProvisionLocation: "Bylaw" | "Herein";
+  AssetDistribution: string | undefined; // Max 400 chars
+};
+
 type AdditionalProvisions = {
   AdditionalProvisions: AdditionalProvision[];
 };
@@ -428,6 +500,7 @@ type Provisions = {
   AdditionalCCorpOrProfessionalCorp?: AdditionalProvisions;
   AdditionalForeignLimitedPartnership?: AdditionalForeignLimitedPartnershipProvision;
   AdditionalLimitedPartnership?: AdditionalLimitedPartnershipProvision;
+  AdditionalDomesticNonProfitCorp?: AdditionalDomesticNonProfitCorp;
 };
 
 interface Formation extends Provisions {
@@ -451,7 +524,7 @@ interface Formation extends Provisions {
     ForeignStateOfFormation: StateNames | undefined;
     ForeignDateOfFormation: string | undefined; // date mm/dd/yyyy
   };
-  CompanyProfit: "Profit"; //Valid Values: Profit, NonProfit
+  CompanyProfit: "Profit" | "NonProfit";
   RegisteredAgent: {
     Id: string | undefined; // 7 max, must be valid NJ registered agent number
     Email: string | undefined; //50 max, must be email address
@@ -519,6 +592,9 @@ type BusinessType =
   | "DomesticLimitedLiabilityCompany"
   | "DomesticLimitedLiabilityPartnership"
   | "DomesticForProfitCorporation"
+  | "DomesticNonProfitCorporation"
+  | "DomesticNonProfitVeteranCorporation"
+  | "ForeignNonProfitCorporation"
   | "DomesticLimitedPartnership"
   | "ForeignForProfitCorporation"
   | "ForeignLimitedLiabilityCompany"
@@ -527,10 +603,10 @@ type BusinessType =
 
 type FormationFields = {
   businessType: BusinessType;
-  shortDescription: "LLC" | "LLP" | "LP" | "DP" | "LF" | "LFC" | "FLC" | "FLP" | "FR";
+  shortDescription: "LLC" | "LLP" | "LP" | "DP" | "NP" | "NV" | "NF" | "LF" | "LFC" | "FLC" | "FLP" | "FR";
 };
 
-const BusinessTypeMap: Record<FormationLegalType, FormationFields> = {
+const BusinessTypeMap: Record<FormationLegalType | "veteran-nonprofit", FormationFields> = {
   "limited-liability-company": {
     businessType: "DomesticLimitedLiabilityCompany",
     shortDescription: "LLC",
@@ -550,6 +626,18 @@ const BusinessTypeMap: Record<FormationLegalType, FormationFields> = {
   "s-corporation": {
     businessType: "DomesticForProfitCorporation",
     shortDescription: "DP",
+  },
+  nonprofit: {
+    businessType: "DomesticNonProfitCorporation",
+    shortDescription: "NP",
+  },
+  "veteran-nonprofit": {
+    businessType: "DomesticNonProfitVeteranCorporation",
+    shortDescription: "NV",
+  },
+  "foreign-nonprofit": {
+    businessType: "ForeignNonProfitCorporation",
+    shortDescription: "NF",
   },
   "foreign-limited-partnership": {
     businessType: "ForeignLimitedPartnership",

@@ -569,4 +569,184 @@ describe("Formation - ReviewStep", () => {
       expect(phoneNumberField.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
     });
   });
+
+  describe("when nonprofit", () => {
+    const legalStructureId = "nonprofit";
+
+    it("displays the Provisions section", async () => {
+      await renderStep({ legalStructureId }, {});
+      expect(screen.getByText(Config.formation.fields.provisions.label)).toBeInTheDocument();
+    });
+
+    it("yes for board members is displayed in the Provisions section", async () => {
+      await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: true });
+      const getByMarkup = withMarkup(screen.getByText);
+      expect(
+        getByMarkup(markdownToText(Config.formation.fields.nonprofit.yesBoardMembersReviewText))
+      ).toBeInTheDocument();
+    });
+
+    it("no for board members is displayed in the Provisions section", async () => {
+      await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: false });
+      const getByMarkup = withMarkup(screen.getByText);
+      expect(
+        getByMarkup(markdownToText(Config.formation.fields.nonprofit.noBoardMembersReviewText))
+      ).toBeInTheDocument();
+    });
+
+    it("in the by laws are specified and is displayed in the Board member qualifications in the Provisions section", async () => {
+      await renderStep(
+        { legalStructureId },
+        { hasNonprofitBoardMembers: true, nonprofitBoardMemberQualificationsSpecified: "IN_BYLAWS" }
+      );
+      const nonprofitBoardMemberQualificationsSpecifiedSection = within(
+        screen.getByTestId("nonprofitBoardMemberQualificationsSpecified")
+      );
+      expect(
+        nonprofitBoardMemberQualificationsSpecifiedSection.getByText(
+          Config.formation.fields.nonprofit.boardMembersQualificationsReviewText
+        )
+      ).toBeInTheDocument();
+      expect(
+        nonprofitBoardMemberQualificationsSpecifiedSection.getByText(
+          `${Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase()}.`
+        )
+      ).toBeInTheDocument();
+    });
+
+    it("in the form are specified and is displayed in the Board member qualifications in the Provisions section", async () => {
+      const boardMembersQualificationsTerms = "Board members qualifications specified";
+      await renderStep(
+        { legalStructureId },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitBoardMemberQualificationsSpecified: "IN_FORM",
+          nonprofitBoardMemberQualificationsTerms: boardMembersQualificationsTerms,
+        }
+      );
+      const nonprofitBoardMemberQualificationsSpecifiedSection = within(
+        screen.getByTestId("nonprofitBoardMemberQualificationsSpecified")
+      );
+      expect(
+        nonprofitBoardMemberQualificationsSpecifiedSection.getByText(
+          Config.formation.fields.nonprofit.boardMembersQualificationsReviewText
+        )
+      ).toBeInTheDocument();
+      expect(
+        nonprofitBoardMemberQualificationsSpecifiedSection.getByText(
+          `${Config.formation.nonprofitProvisions.radioInFormText.toLowerCase()}.`
+        )
+      ).toBeInTheDocument();
+    });
+
+    it("in the by laws are specified and is displayed in the Board member rights specification in the Provisions section", async () => {
+      await renderStep(
+        { legalStructureId },
+        { hasNonprofitBoardMembers: true, nonprofitBoardMemberRightsSpecified: "IN_BYLAWS" }
+      );
+      expect(screen.getByTestId("nonprofitBoardMemberRightsSpecified")).toBeInTheDocument();
+    });
+
+    it("in the form are specified and is displayed in the Board member rights specification in the Provisions section", async () => {
+      const boardMembersQualificationsRight = "Board members rights are specified";
+      await renderStep(
+        { legalStructureId },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitBoardMemberRightsSpecified: "IN_FORM",
+          nonprofitBoardMemberRightsTerms: boardMembersQualificationsRight,
+        }
+      );
+      expect(screen.getByTestId("nonprofitBoardMemberRightsSpecified")).toBeInTheDocument();
+    });
+
+    it("in the by laws are specified and is displayed in the Choosing trustees in the Provisions section", async () => {
+      await renderStep(
+        { legalStructureId },
+        { hasNonprofitBoardMembers: true, nonprofitTrusteesMethodSpecified: "IN_BYLAWS" }
+      );
+      const choosingTrusteesReviewSection = within(screen.getByTestId("nonprofitTrusteesMethodSpecified"));
+      expect(
+        choosingTrusteesReviewSection.getByText(Config.formation.fields.nonprofit.choosingTrusteesReviewText)
+      ).toBeInTheDocument();
+      expect(
+        choosingTrusteesReviewSection.getByText(
+          `${Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase()}.`
+        )
+      ).toBeInTheDocument();
+    });
+
+    it("in the form are specified and is displayed in the Choosing trustees in the Provisions section", async () => {
+      const trusteesMethodTerms = "Trustees method terms are specified";
+      await renderStep(
+        { legalStructureId },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitTrusteesMethodSpecified: "IN_FORM",
+          nonprofitTrusteesMethodTerms: trusteesMethodTerms,
+        }
+      );
+      const choosingTrusteesReviewSection = within(screen.getByTestId("nonprofitTrusteesMethodSpecified"));
+      expect(
+        choosingTrusteesReviewSection.getByText(Config.formation.fields.nonprofit.choosingTrusteesReviewText)
+      ).toBeInTheDocument();
+      expect(
+        choosingTrusteesReviewSection.getByText(
+          `${Config.formation.nonprofitProvisions.radioInFormText.toLowerCase()}.`
+        )
+      ).toBeInTheDocument();
+    });
+
+    it("in the by laws are specified and is displayed in assets in the Provisions section", async () => {
+      await renderStep(
+        { legalStructureId },
+        { hasNonprofitBoardMembers: true, nonprofitAssetDistributionSpecified: "IN_BYLAWS" }
+      );
+      const nonprofitAssetDistributionSpecifiedReviewSection = within(
+        screen.getByTestId("nonprofitAssetDistributionSpecified")
+      );
+      expect(
+        nonprofitAssetDistributionSpecifiedReviewSection.getByText(
+          Config.formation.fields.nonprofit.distributingAssetsReviewText
+        )
+      ).toBeInTheDocument();
+      expect(
+        nonprofitAssetDistributionSpecifiedReviewSection.getByText(
+          `${Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase()}.`
+        )
+      ).toBeInTheDocument();
+    });
+
+    it("in the form are specified and is displayed in assets in the Provisions section", async () => {
+      const assetTerms = "Asset terms are specified";
+      await renderStep(
+        { legalStructureId },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitAssetDistributionSpecified: "IN_FORM",
+          nonprofitAssetDistributionTerms: assetTerms,
+        }
+      );
+      const nonprofitAssetDistributionSpecifiedReviewSection = within(
+        screen.getByTestId("nonprofitAssetDistributionSpecified")
+      );
+      expect(
+        nonprofitAssetDistributionSpecifiedReviewSection.getByText(
+          Config.formation.fields.nonprofit.distributingAssetsReviewText
+        )
+      ).toBeInTheDocument();
+      expect(
+        nonprofitAssetDistributionSpecifiedReviewSection.getByText(
+          `${Config.formation.nonprofitProvisions.radioInFormText.toLowerCase()}.`
+        )
+      ).toBeInTheDocument();
+    });
+
+    it("terms do not display when there are no board members", async () => {
+      await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: false });
+      expect(
+        screen.queryByText(Config.formation.fields.nonprofit.distributingAssetsReviewText)
+      ).not.toBeInTheDocument();
+    });
+  });
 });

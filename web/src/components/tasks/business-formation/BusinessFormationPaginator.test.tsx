@@ -122,23 +122,6 @@ describe("<BusinessFormationPaginator />", () => {
     business = generateBusiness({ profileData, formationData });
   });
 
-  describe("search business name only", () => {
-    it("does not show buttons or stepper", () => {
-      preparePage({ business, displayContent, searchOnly: true });
-      expect(screen.queryByText(Config.formation.general.initialNextButtonText)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.formation.general.nextButtonText)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.formation.general.previousButtonText)).not.toBeInTheDocument();
-      expect(screen.queryByTestId("stepper-0")).not.toBeInTheDocument();
-    });
-
-    it("searches business name", async () => {
-      const page = preparePage({ business, displayContent, searchOnly: true });
-      page.fillText("Search business name", "Pizza Joint");
-      await page.searchBusinessName({ status: "AVAILABLE" });
-      expect(screen.getByTestId("available-text")).toBeInTheDocument();
-    });
-  });
-
   describe("button text", () => {
     it("shows unique text on button on first step", () => {
       preparePage({ business, displayContent });

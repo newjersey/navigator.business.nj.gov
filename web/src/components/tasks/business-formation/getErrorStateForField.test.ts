@@ -16,6 +16,8 @@ import {
   generateMunicipality,
   getCurrentDate,
   getCurrentDateFormatted,
+  publicFilingLegalTypes,
+  randomElementFromArray,
 } from "@businessnjgovnavigator/shared";
 
 const Config = getMergedConfig();
@@ -722,16 +724,31 @@ describe("getErrorStateForField", () => {
   });
 
   describe("members", () => {
-    it("has MINIMUM-labelled error when members length is 0", () => {
+    it("has error when members length is 0", () => {
       const formationFormData = generateFormationFormData({ members: [] });
       expect(getErrorStateForField({ field: "members", formationFormData }).hasError).toEqual(true);
-      expect(getErrorStateForField({ field: "members", formationFormData }).label).toEqual(
-        Config.formation.fields.directors.error
-      );
     });
 
-    it("has no error when members exist", () => {
-      const formationFormData = generateFormationFormData({ members: [generateFormationMember({})] });
+    it("has error when members is fewer than 3 for nonprofits", () => {
+      const members = [generateFormationMember({}), generateFormationMember({})];
+      const formationFormData = generateFormationFormData({ legalType: "nonprofit", members });
+      expect(getErrorStateForField({ field: "members", formationFormData }).hasError).toEqual(true);
+    });
+
+    it("has no error when members is at least 3 for nonprofits", () => {
+      const members = [generateFormationMember({}), generateFormationMember({}), generateFormationMember({})];
+      const formationFormData = generateFormationFormData({ legalType: "nonprofit", members });
+      expect(getErrorStateForField({ field: "members", formationFormData }).hasError).toEqual(false);
+    });
+
+    it("has no error when there is at least 1 member for for-profit legal type", () => {
+      const legalTypesNotNonprofit = publicFilingLegalTypes.filter((it) => it !== "nonprofit");
+      const legalType = randomElementFromArray(legalTypesNotNonprofit);
+
+      const formationFormData = generateFormationFormData({
+        legalType,
+        members: [generateFormationMember({})],
+      });
       expect(getErrorStateForField({ field: "members", formationFormData }).hasError).toEqual(false);
     });
 
@@ -1109,6 +1126,12 @@ describe("getErrorStateForField", () => {
       "addressCountry",
       "addressState",
       "willPracticeLaw",
+      "isVeteranNonprofit",
+      "hasNonprofitBoardMembers",
+      "nonprofitBoardMemberQualificationsSpecified",
+      "nonprofitBoardMemberRightsSpecified",
+      "nonprofitTrusteesMethodSpecified",
+      "nonprofitAssetDistributionSpecified",
     ];
 
     const runTests = (hasErrorIfUndefined: FormationFields[], expectedLabel?: string): void => {
@@ -1194,6 +1217,10 @@ describe("getErrorStateForField", () => {
       "makeDistributionTerms",
       "paymentType",
       "addressProvince",
+      "nonprofitBoardMemberQualificationsTerms",
+      "nonprofitBoardMemberRightsTerms",
+      "nonprofitTrusteesMethodTerms",
+      "nonprofitAssetDistributionTerms",
     ];
 
     const runTests = (hasErrorIfEmpty: FormationFields[]): void => {

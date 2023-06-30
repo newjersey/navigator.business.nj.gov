@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
 import { getMergedConfig } from "@/contexts/configContext";
-import { useSetupInitialMocks } from "@/test/helpers/helpers-formation";
+import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
 import {
   FormationFormData,
   FormationIncorporator,
@@ -9,6 +9,7 @@ import {
   FormationMember,
   generateFormationFormData,
   generateFormationIncorporator,
+  generateFormationMember,
   generateFormationSigner,
   generateFormationUSAddress,
 } from "@businessnjgovnavigator/shared";
@@ -206,6 +207,108 @@ describe("Formation - ContactsStep", () => {
       expect(screen.getByText(incorporators[0].addressState!.name, { exact: false })).toBeInTheDocument();
       expect(screen.getByText(incorporators[0].addressZipCode, { exact: false })).toBeInTheDocument();
       expect(page.getSignerBox(0, "incorporators")).toEqual(true);
+    });
+  });
+
+  describe("when nonprofit", () => {
+    const legalStructureId = "nonprofit";
+
+    const attemptApiSubmission = async (page: FormationPageHelpers): Promise<void> => {
+      await page.stepperClickToReviewStep();
+      await page.clickSubmit();
+      await page.stepperClickToContactsStep();
+    };
+
+    it("auto-fills fields from userData if it exists", async () => {
+      const members: FormationMember[] = [
+        {
+          name: "Joe Biden",
+          addressCity: "Washington",
+          addressLine1: "1600 Pennsylvania Ave NW",
+          addressLine2: "Office of the President",
+          addressState: { name: "District of Columbia", shortCode: "DC" },
+          addressCountry: "US",
+          businessLocationType: "US",
+          addressZipCode: "20500",
+        },
+      ];
+      const incorporators: FormationIncorporator[] = [
+        {
+          name: "Donald Whatever",
+          addressCity: "Miami",
+          addressLine1: "160 Something Ave NW",
+          addressLine2: "Office of Whatever",
+          addressState: { name: "Florida", shortCode: "FL" },
+          addressCountry: "US",
+          addressZipCode: "20501",
+          businessLocationType: "US",
+          title: "Incorporator",
+          signature: true,
+        },
+      ];
+      const formationFormData = generateFormationFormData({ members, incorporators }, { legalStructureId });
+
+      const page = await getPageHelper({ legalStructureId }, formationFormData);
+
+      expect(screen.getByTestId("addresses-members")).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.trustees.label)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.trustees.description.split("\n\n")[0])
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.trustees.description.split("\n\n")[1])
+      ).toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields.trustees.placeholder)).not.toBeInTheDocument();
+      expect(screen.getByText(members[0].name)).toBeInTheDocument();
+      expect(screen.getByText(members[0].addressLine1, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(members[0].addressLine2, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(members[0].addressCity as string, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(members[0].addressState!.name, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(members[0].addressZipCode, { exact: false })).toBeInTheDocument();
+
+      expect(screen.getByTestId("addresses-incorporators")).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.incorporators.label)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.incorporators.description.split("\n\n")[0])
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.incorporators.description.split("\n\n")[1])
+      ).toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields.incorporators.placeholder)).not.toBeInTheDocument();
+      expect(screen.getByText(incorporators[0].name)).toBeInTheDocument();
+      expect(screen.getByText(incorporators[0].addressLine1, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(incorporators[0].addressLine2, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(incorporators[0].addressCity as string, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(incorporators[0].addressState!.name, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(incorporators[0].addressZipCode, { exact: false })).toBeInTheDocument();
+      expect(page.getSignerBox(0, "incorporators")).toEqual(true);
+    });
+
+    it("has an error if there are no trustees", async () => {
+      const members = [generateFormationMember({})];
+      const incorporators = [generateFormationIncorporator({})];
+      const formationFormData = generateFormationFormData({ members, incorporators }, { legalStructureId });
+      const page = await getPageHelper({ legalStructureId }, formationFormData);
+      await attemptApiSubmission(page);
+      expect(screen.getByText(Config.formation.fields.trustees.error)).toBeInTheDocument();
+    });
+
+    it("has an error if there are fewer than 3 trustees", async () => {
+      const members = [generateFormationMember({}), generateFormationMember({})];
+      const incorporators = [generateFormationIncorporator({})];
+      const formationFormData = generateFormationFormData({ members, incorporators }, { legalStructureId });
+      const page = await getPageHelper({ legalStructureId }, formationFormData);
+      await attemptApiSubmission(page);
+      expect(screen.getByText(Config.formation.fields.trustees.error)).toBeInTheDocument();
+    });
+
+    it("has no error if at least 3 trustees", async () => {
+      const members = [generateFormationMember({}), generateFormationMember({}), generateFormationMember({})];
+      const incorporators = [generateFormationIncorporator({})];
+      const formationFormData = generateFormationFormData({ members, incorporators }, { legalStructureId });
+      const page = await getPageHelper({ legalStructureId }, formationFormData);
+      await attemptApiSubmission(page);
+      expect(screen.queryByText(Config.formation.fields.trustees.error)).not.toBeInTheDocument();
     });
   });
 
