@@ -12,7 +12,7 @@ import { ReactElement, ReactNode, useEffect, useState } from "react";
 interface Props {
   children: ReactNode;
   label: ReactNode;
-  onSave: () => void;
+  onSave: (updatedProfileData?: ProfileData) => void;
   isTaskPage?: boolean;
 }
 
@@ -45,7 +45,7 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
 
     await updateQueue.queueProfileData(profileData).update();
 
-    props.onSave();
+    props.onSave(profileData);
   });
 
   const onTaskPage = (

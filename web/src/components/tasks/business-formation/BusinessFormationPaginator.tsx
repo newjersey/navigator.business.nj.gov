@@ -154,28 +154,25 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   };
 
   const queueFormationChangesInProfile = (): void => {
-    if (!updateQueue) return;
+    if (!updateQueue || !userData) return;
 
     if (isStep("Business")) {
-      const muncipalityEnteredForFirstTime =
-        updateQueue.current().profileData.municipality === undefined &&
-        updateQueue.current().formationData.formationFormData.addressMunicipality !== undefined;
+      const municipalityEnteredForFirstTime =
+        userData.profileData.municipality === undefined &&
+        state.formationFormData.addressMunicipality !== undefined;
 
-      if (muncipalityEnteredForFirstTime) {
+      if (municipalityEnteredForFirstTime) {
         analytics.event.business_formation_location_question.submit.location_entered_for_first_time();
       }
 
       updateQueue.queueProfileData({
-        municipality: updateQueue.current().formationData.formationFormData.addressMunicipality,
+        municipality: state.formationFormData.addressMunicipality,
       });
     }
 
-    if (
-      isStep("Name") &&
-      updateQueue.current().formationData.businessNameAvailability?.status === "AVAILABLE"
-    ) {
+    if (isStep("Name") && state.businessNameAvailability?.status === "AVAILABLE") {
       updateQueue.queueProfileData({
-        businessName: updateQueue.current().formationData.formationFormData.businessName,
+        businessName: state.formationFormData.businessName,
       });
     }
   };
@@ -332,12 +329,11 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   };
 
   const hasFormDataChanged = (): boolean => {
-    if (!updateQueue || !state.hasSetStateFirstTime) return false;
+    if (!userData || !state.hasSetStateFirstTime) return false;
 
     return (
-      JSON.stringify(updateQueue.current().formationData.formationFormData) !==
-        JSON.stringify(state.formationFormData) ||
-      JSON.stringify(updateQueue.current().formationData.businessNameAvailability) !==
+      JSON.stringify(userData.formationData.formationFormData) !== JSON.stringify(state.formationFormData) ||
+      JSON.stringify(userData.formationData.businessNameAvailability) !==
         JSON.stringify(state.businessNameAvailability)
     );
   };

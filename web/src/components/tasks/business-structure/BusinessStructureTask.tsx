@@ -17,7 +17,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { createProfileFieldErrorMap, Task } from "@/lib/types/types";
 import { getFlow, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { hasCompletedFormation, UserData } from "@businessnjgovnavigator/shared";
+import { hasCompletedFormation, TaskProgress, UserData } from "@businessnjgovnavigator/shared";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useMediaQuery } from "@mui/material";
@@ -36,6 +36,9 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
   const userDataFromHook = useUserData();
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
+  const [isTaskCompleted, setTaskCompleted] = useState<boolean>(
+    userData?.taskProgress[props.task.id] === "COMPLETED"
+  );
   const updateQueue = userDataFromHook.updateQueue;
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const {
@@ -47,9 +50,9 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   useEffect(() => {
     return () => {
       if (userData?.profileData.legalStructureId) {
-        queueUpdateTaskProgress(props.task.id, "COMPLETED");
+        updateLocalAndQueueTaskStatus("COMPLETED");
       } else if (!userData?.profileData.legalStructureId) {
-        queueUpdateTaskProgress(props.task.id, "NOT_STARTED");
+        updateLocalAndQueueTaskStatus("NOT_STARTED");
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -69,6 +72,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     }
 
     queueUpdateTaskProgress(props.task.id, "COMPLETED");
+    setTaskCompleted(true);
     await updateQueue.queueProfileData(profileData).update();
     setShowRadioQuestion(false);
     setSuccessSnackbarIsOpen(true);
@@ -79,21 +83,20 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
       return;
     }
     setShowRadioQuestion(true);
-    queueUpdateTaskProgress(props.task.id, "IN_PROGRESS");
+    updateLocalAndQueueTaskStatus("IN_PROGRESS");
   };
 
   const removeTaskCompletion = async (): Promise<void> => {
     if (!updateQueue) return;
 
-    updateQueue
-      .queueProfileData({
-        legalStructureId: undefined,
-        operatingPhase:
-          profileData.operatingPhase === "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
-            ? "GUEST_MODE"
-            : profileData.operatingPhase,
-      })
-      .queueTaskProgress({ [props.task.id]: "NOT_STARTED" });
+    updateQueue.queueProfileData({
+      legalStructureId: undefined,
+      operatingPhase:
+        profileData.operatingPhase === "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
+          ? "GUEST_MODE"
+          : profileData.operatingPhase,
+    });
+    updateLocalAndQueueTaskStatus("NOT_STARTED");
 
     setShowRadioQuestion(true);
     await updateQueue.update();
@@ -112,9 +115,9 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   const preLookupContent = props.task.contentMd.split("${businessStructureSelectionComponent}")[0];
   const postLookupContent = props.task.contentMd.split("${businessStructureSelectionComponent}")[1];
 
-  const isCompleted = (): boolean => {
-    if (!updateQueue) return false;
-    return updateQueue.current().taskProgress[props.task.id] === "COMPLETED";
+  const updateLocalAndQueueTaskStatus = (taskStatus: TaskProgress): void => {
+    queueUpdateTaskProgress(props.task.id, taskStatus);
+    setTaskCompleted(taskStatus === "COMPLETED");
   };
 
   const canEdit = (): boolean => {
@@ -124,7 +127,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
 
   const getTaskProgressTooltip = (): string => {
     if (!userData) return "";
-    if (!isCompleted()) {
+    if (!isTaskCompleted) {
       return Config.businessStructureTask.uncompletedTooltip;
     } else if (hasCompletedFormation(userData)) {
       return Config.profileDefaults.lockedFieldTooltipText;
