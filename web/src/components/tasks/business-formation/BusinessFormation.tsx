@@ -42,7 +42,6 @@ import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
 interface Props {
   task: Task | undefined;
   displayContent: TasksDisplayContent;
-  searchOnly?: boolean;
 }
 
 export const BusinessFormation = (props: Props): ReactElement => {
@@ -189,7 +188,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     });
   };
 
-  if (!isValidLegalStructure && business?.profileData.businessPersona !== "FOREIGN" && !props.searchOnly) {
+  if (!isValidLegalStructure && business?.profileData.businessPersona !== "FOREIGN") {
     return (
       <div className="flex flex-column space-between minh-38">
         <div>
@@ -245,10 +244,6 @@ export const BusinessFormation = (props: Props): ReactElement => {
       return Config.formation.intro.foreign;
     }
 
-    if (props.searchOnly) {
-      return props.task?.contentMd || "";
-    }
-
     return Config.formation.intro.default;
   };
 
@@ -290,7 +285,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
               </>
             )}
           </div>
-          {isForeign ? <NexusFormationFlow /> : <BusinessFormationPaginator searchOnly={props.searchOnly} />}
+          {isForeign ? <NexusFormationFlow /> : <BusinessFormationPaginator />}
         </>
       </div>
     </BusinessFormationContext.Provider>

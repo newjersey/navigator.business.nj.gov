@@ -10,12 +10,15 @@ import { ReactElement, useContext } from "react";
 
 interface Props {
   hasError: boolean;
+  showErrorOnBottom?: boolean;
 }
 
 export const Members = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
+  const isNonprofit = state.formationFormData.legalType === "nonprofit";
+
   const defaultAddress = isCorp
     ? undefined
     : {
@@ -30,7 +33,12 @@ export const Members = (props: Props): ReactElement => {
         addressZipCode: state.formationFormData.addressZipCode,
       };
 
-  const configField = isCorp ? "directors" : "members";
+  const configField = ((): "directors" | "trustees" | "members" => {
+    if (isCorp) return "directors";
+    else if (isNonprofit) return "trustees";
+    else return "members";
+  })();
+
   const displayContent = {
     header: Config.formation.fields[configField].label,
     subheader: Config.formation.fields[configField].subheader,
@@ -58,7 +66,9 @@ export const Members = (props: Props): ReactElement => {
       needSignature={false}
       displayContent={displayContent}
       defaultAddress={defaultAddress}
+      legalType={state.formationFormData.legalType}
       hasError={props.hasError}
+      showErrorOnBottom={props.showErrorOnBottom}
     />
   );
 };

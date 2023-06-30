@@ -24,6 +24,7 @@ import {
   Municipality,
   ProfileData,
   PublicFilingLegalType,
+  randomElementFromArray,
   randomPublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
 import { publicFilingLegalTypes } from "@businessnjgovnavigator/shared/formationData";
@@ -864,6 +865,39 @@ describe("Formation - BusinessStep", () => {
     });
   });
 
+  describe("nonprofit veteran question", () => {
+    it("shows veteran question for nonprofit legal type", async () => {
+      await getPageHelper({ legalStructureId: "nonprofit" }, {});
+      expect(screen.getByLabelText("Is veteran nonprofit")).toBeInTheDocument();
+    });
+
+    it("does not show veteran question for legal types that are not nonprofit", async () => {
+      const legalTypesNotNonprofit = publicFilingLegalTypes.filter((it) => it !== "nonprofit");
+      await getPageHelper({ legalStructureId: randomElementFromArray(legalTypesNotNonprofit) }, {});
+      expect(screen.queryByLabelText("Is veteran nonprofit")).not.toBeInTheDocument();
+    });
+
+    it("saves data to formationData", async () => {
+      const page = await getPageHelper({ legalStructureId: "nonprofit" }, { isVeteranNonprofit: undefined });
+      page.chooseRadio("is-veteran-nonprofit-yes");
+      await page.submitBusinessStep(true);
+      expect(currentBusiness().formationData.formationFormData.isVeteranNonprofit).toEqual(true);
+    });
+  });
+
+  describe("nonprofit provisions", () => {
+    it("shows nonprofit provisions for nonprofit legal type", async () => {
+      await getPageHelper({ legalStructureId: "nonprofit" }, {});
+      expect(screen.getByLabelText("Has nonprofit board members")).toBeInTheDocument();
+    });
+
+    it("does not show nonprofit provisions for legal types that are not nonprofit", async () => {
+      const legalTypesNotNonprofit = publicFilingLegalTypes.filter((it) => it !== "nonprofit");
+      await getPageHelper({ legalStructureId: randomElementFromArray(legalTypesNotNonprofit) }, {});
+      expect(screen.queryByLabelText("Has nonprofit board members")).not.toBeInTheDocument();
+    });
+  });
+
   describe("required fields", () => {
     const attemptApiSubmission = async (page: FormationPageHelpers): Promise<void> => {
       await page.stepperClickToReviewStep();
@@ -1044,6 +1078,157 @@ describe("Formation - BusinessStep", () => {
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressState.label);
+    });
+
+    it("isVeteranNonprofit", async () => {
+      const page = await getPageHelper({ legalStructureId: "nonprofit" }, { isVeteranNonprofit: undefined });
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.isVeteranNonprofit.label);
+      expect(screen.getByText(Config.formation.fields.isVeteranNonprofit.error)).toBeInTheDocument();
+    });
+
+    it("hasNonprofitBoardMembers", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        { hasNonprofitBoardMembers: undefined, legalType: "nonprofit" }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.hasNonprofitBoardMembers.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
+    });
+
+    it("nonprofitBoardMemberQualificationsSpecified", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitBoardMemberQualificationsSpecified: undefined,
+          legalType: "nonprofit",
+        }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.nonprofitBoardMemberQualificationsSpecified.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
+    });
+
+    it("nonprofitBoardMemberQualificationsTerms", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitBoardMemberQualificationsSpecified: "IN_FORM",
+          nonprofitBoardMemberQualificationsTerms: "",
+          legalType: "nonprofit",
+        }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.nonprofitBoardMemberQualificationsTerms.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
+    });
+
+    it("nonprofitBoardMemberRightsSpecified is undefined", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitBoardMemberRightsSpecified: undefined,
+          legalType: "nonprofit",
+        }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.nonprofitBoardMemberRightsSpecified.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
+    });
+
+    it("nonprofitBoardMemberRightsSpecified", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitBoardMemberRightsSpecified: "IN_FORM",
+          legalType: "nonprofit",
+          nonprofitBoardMemberRightsTerms: "",
+        }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.nonprofitBoardMemberRightsSpecified.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
+    });
+
+    it("nonprofitTrusteesMethodSpecified", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitTrusteesMethodSpecified: undefined,
+          legalType: "nonprofit",
+        }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.nonprofitTrusteesMethodSpecified.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
+    });
+
+    it("nonprofitTrusteesMethodTerms", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitTrusteesMethodSpecified: "IN_FORM",
+          nonprofitTrusteesMethodTerms: "",
+          legalType: "nonprofit",
+        }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.nonprofitTrusteesMethodTerms.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
+    });
+
+    it("nonprofitAssetDistributionSpecified", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitAssetDistributionSpecified: undefined,
+          legalType: "nonprofit",
+        }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.nonprofitAssetDistributionSpecified.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
+    });
+
+    it("nonprofitAssetDistributionTerms", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitAssetDistributionSpecified: "IN_FORM",
+          nonprofitAssetDistributionTerms: "",
+          legalType: "nonprofit",
+        }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.nonprofitAssetDistributionTerms.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
   });
 });

@@ -49,6 +49,8 @@ export const getBusinessStartDateRule = (legalType: FormationLegalType): StartDa
     case "s-corporation":
       return "90";
     case "limited-partnership":
+    case "nonprofit":
+    case "foreign-nonprofit":
       return "30";
     case "limited-liability-company":
     case "limited-liability-partnership":

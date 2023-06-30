@@ -11,12 +11,15 @@ export const ReviewMembers = (): ReactElement => {
 
   const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
   const hasMembers = (state.formationFormData.members?.length ?? 0) > 0;
+  const isNonProfit = state.formationFormData.legalType === "nonprofit";
 
   const getConfig = (): { header: string; label: string } => {
     const field = isCorp ? "directors" : "members";
     return {
-      header: Config.formation.fields[field].label,
-      label: Config.formation.sections.review.nameLabel,
+      header: isNonProfit ? Config.formation.fields.trustees.label : Config.formation.fields[field].label,
+      label: isNonProfit
+        ? Config.formation.fields.trustees.trusteeFullName
+        : Config.formation.sections.review.nameLabel,
     };
   };
 

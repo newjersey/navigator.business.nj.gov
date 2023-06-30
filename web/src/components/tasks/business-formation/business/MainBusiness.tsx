@@ -1,8 +1,8 @@
 import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/business/BusinessNameAndLegalStructure";
 import { ForeignStateOfFormation } from "@/components/tasks/business-formation/business/ForeignStateOfFormation";
 import { FormationDate } from "@/components/tasks/business-formation/business/FormationDate";
-import { MainBusinessAddressNj } from "@/components/tasks/business-formation/business/MainBusinessAddressNj";
-import { MainBusinessForeignAddressFlow } from "@/components/tasks/business-formation/business/MainBusinessForeignAddressFlow";
+import { IsVeteranNonprofit } from "@/components/tasks/business-formation/business/IsVeteranNonprofit";
+import { NonprofitProvisions } from "@/components/tasks/business-formation/business/NonprofitProvisions";
 import { SuffixDropdown } from "@/components/tasks/business-formation/business/SuffixDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
@@ -74,6 +74,15 @@ export const MainBusiness = (): ReactElement => {
           )}
         </>
       )}
+      {state.formationFormData.legalType === "nonprofit" && (
+        <>
+          <div className="grid-row">
+            <IsVeteranNonprofit />
+          </div>
+          <hr />
+          <NonprofitProvisions />
+        </>
+      )}
       {corpLegalStructures.includes(state.formationFormData.legalType) && (
         <div className="grid-row grid-gap-1">
           <div className="margin-top-2 tablet:grid-col-6">
@@ -92,8 +101,7 @@ export const MainBusiness = (): ReactElement => {
           </div>
         </div>
       )}
-      <hr className="margin-bottom-4 margin-top-4" aria-hidden={true} />
-      {isForeign ? <MainBusinessForeignAddressFlow /> : <MainBusinessAddressNj />}
+      <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} key={"business-line-1"} />
     </div>
   );
 };
