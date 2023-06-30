@@ -1,8 +1,8 @@
 {
   "formationDateDeletionModal": {
     "header": "Confirm Your Changes",
-    "description": "Deleting your business `effective date|effective-date` (the date you formed your business) will remove your calendar from the Navigator.",
-    "areYouSureModalBody": "Are you sure you'd like to proceed?",
+    "description": "If you delete your business `effective date|effective-date`, you won't receive a reminder to submit your annual report when it's due and the reminder won't appear in your calendar.",
+    "areYouSureModalBody": "Are you sure you want to continue?",
     "cancelButtonText": "Cancel",
     "deleteButtonText": "Delete Date"
   },
