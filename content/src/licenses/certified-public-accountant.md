@@ -1,5 +1,6 @@
 ---
-urlSlug: "certified-public-accountant"
+urlSlug: certified-public-accountant
+previewType: expiration
 callToActionLink: https://newjersey.mylicense.com/eGov/Login
 callToActionText: Renew My Registration
 ---
@@ -23,4 +24,4 @@ Your accounting firm registration will expire every three years.
 > - A renewed accounting firm registration valid for three years. It will be mailed to your business mailing address on file
 
 > **What if I don't renew my registration?**\
-> If you don't renew your registration 30 days after expiration, your license will be suspended and you won't be able to legally run your business. You will need to contact your licensing board for reinstatement procedures and associated fees.
+> If you don't renew your registration 30 days after expiration, your license will be suspended and you won't be able to legally run your business. You need to contact your licensing board for reinstatement procedures and associated fees.
