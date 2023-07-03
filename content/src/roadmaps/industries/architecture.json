@@ -48,7 +48,7 @@
     {
       "step": 3,
       "weight": 20,
-      "task": "architect-license",
+      "licenseTask": "architect-license",
       "required": true
     },
     {
@@ -60,7 +60,7 @@
     {
       "step": 3,
       "weight": 30,
-      "task": "authorization-architect-firm",
+      "licenseTask": "authorization-architect-firm",
       "required": true
     }
   ],

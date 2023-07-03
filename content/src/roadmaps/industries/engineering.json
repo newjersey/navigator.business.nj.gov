@@ -48,12 +48,12 @@
     {
       "step": 3,
       "weight": 20,
-      "task": "license-engineer"
+      "licenseTask": "license-engineer"
     },
     {
       "step": 3,
       "weight": 22,
-      "task": "firm-engineer",
+      "licenseTask": "firm-engineer",
       "required": true
     }
   ],

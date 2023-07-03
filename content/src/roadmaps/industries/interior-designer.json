@@ -49,7 +49,7 @@
     {
       "step": 3,
       "weight": 20,
-      "task": "certified-interior-designer",
+      "licenseTask": "certified-interior-designer",
       "required": true
     }
   ],

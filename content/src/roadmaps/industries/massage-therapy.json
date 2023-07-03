@@ -46,13 +46,13 @@
     {
       "step": 3,
       "weight": 31,
-      "task": "license-massage-therapy",
+      "licenseTask": "license-massage-therapy",
       "required": true
     },
     {
       "step": 3,
       "weight": 32,
-      "task": "verify-license-massage-therapy",
+      "licenseTask": "verify-license-massage-therapy",
       "required": true
     }
   ],

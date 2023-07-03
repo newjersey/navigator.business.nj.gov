@@ -53,7 +53,7 @@
     {
       "step": 4,
       "weight": 8,
-      "task": "pharmacy-license",
+      "licenseTask": "pharmacy-license",
       "required": true
     }
   ],
