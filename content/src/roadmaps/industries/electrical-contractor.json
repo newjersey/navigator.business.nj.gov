@@ -46,7 +46,7 @@
     {
       "step": 3,
       "weight": 16,
-      "task": "electrical-business-license",
+      "licenseTask": "electrical-business-license",
       "required": true
     }
   ],

@@ -54,7 +54,7 @@
     {
       "step": 3,
       "weight": 20,
-      "task": "register-vehicle",
+      "licenseTask": "register-vehicle",
       "required": true
     },
     {

@@ -45,13 +45,13 @@
     {
       "step": 3,
       "weight": 16,
-      "task": "detective-agency-license",
+      "licenseTask": "detective-agency-license",
       "required": true
     },
     {
       "step": 3,
       "weight": 17,
-      "task": "detective-employees",
+      "licenseTask": "detective-employees",
       "required": true
     }
   ],
