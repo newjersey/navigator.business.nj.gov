@@ -51,7 +51,7 @@
     {
       "step": 3,
       "weight": 18,
-      "task": "car-rental-vehicle-registration",
+      "licenseTask": "car-rental-vehicle-registration",
       "required": true
     }
   ],

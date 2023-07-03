@@ -36,7 +36,8 @@ interface IndustryOnboardingQuestions {
 export interface AddOn {
   readonly step: number;
   readonly weight: number;
-  readonly task: string;
+  readonly task?: string;
+  readonly licenseTask?: string;
 }
 
 export interface TaskModification {
