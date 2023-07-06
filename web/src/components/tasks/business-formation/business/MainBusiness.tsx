@@ -40,7 +40,7 @@ export const MainBusiness = (): ReactElement => {
           <SuffixDropdown />
         </WithErrorBar>
         <WithErrorBar
-          hasError={doesFieldHaveError("businessSuffix")}
+          hasError={doesFieldHaveError("businessStartDate")}
           type="MOBILE-ONLY"
           className="tablet:grid-col-6"
         >
