@@ -75,9 +75,6 @@ const Home = (props: Props): ReactElement => {
     };
   }
   useEffect(() => {
-    const landingPageAlternateUrl = process.env.ALTERNATE_LANDING_PAGE_URL || ROUTES.landing;
-    const alternateLandingPageEnabled = process.env.FEATURE_LANDING_PAGE_REDIRECT === "true";
-
     if (state.isAuthenticated === IsAuthenticated.TRUE) {
       if (userData?.onboardingFormProgress === "COMPLETED") {
         router.replace(ROUTES.dashboard);
@@ -86,12 +83,6 @@ const Home = (props: Props): ReactElement => {
       } else if (userData === undefined && error !== undefined) {
         router.replace(`${ROUTES.dashboard}?error=true`);
       }
-    } else if (
-      state.isAuthenticated === IsAuthenticated.FALSE &&
-      alternateLandingPageEnabled &&
-      !props.isWelcomePage
-    ) {
-      router.replace(landingPageAlternateUrl);
     }
   }, [userData, error, router, state.isAuthenticated, props.isWelcomePage]);
 
