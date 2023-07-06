@@ -3,7 +3,7 @@
       {
         "step": 3,
         "weight": 20,
-        "task": "appraiser-license",
+        "licenseTask": "appraiser-license",
         "required": true
       }
     ],

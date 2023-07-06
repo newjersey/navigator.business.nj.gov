@@ -3,13 +3,13 @@
     {
       "step": 3,
       "weight": 4,
-      "task": "conditional-permit-cannabis",
+      "licenseTask": "conditional-permit-cannabis",
       "required": true
     },
     {
       "step": 4,
       "weight": 1,
-      "task": "conversion-license-cannabis",
+      "licenseTask": "conversion-license-cannabis",
       "required": true
     }
   ]

@@ -3,7 +3,7 @@
     {
       "step": 3,
       "weight": 30,
-      "task": "petcare-license"
+      "licenseTask": "petcare-license"
     }
   ]
 }
