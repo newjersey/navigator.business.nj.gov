@@ -1,3 +1,10 @@
+## [5.22.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.22.0...v5.22.1) (2023-07-06)
+
+
+### Bug Fixes
+
+* remove duplicate meta-data keys from license ([88e9708](https://github.com/newjersey/navigator.business.nj.gov/commit/88e970857a9361462e2761e0be4bb5cd6a9b9832))
+
 # [5.22.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.21.2...v5.22.0) (2023-06-28)
 
 
