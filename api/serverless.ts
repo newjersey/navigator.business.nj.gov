@@ -63,7 +63,8 @@ const serverlessConfiguration: AWS = {
         nodeModulesRelativeDir: "../",
       },
     },
-    dynamodb: {
+    "serverless-dynamodb": {
+      port: dynamoOfflinePort,
       start: {
         migrate: true,
         port: dynamoOfflinePort,
@@ -83,7 +84,7 @@ const serverlessConfiguration: AWS = {
   },
   plugins: [
     "serverless-webpack",
-    ...(isDocker ? [] : ["serverless-dynamodb-local"]),
+    ...(isDocker ? [] : ["serverless-dynamodb"]),
     "serverless-offline-ssm",
     "serverless-offline",
   ],
