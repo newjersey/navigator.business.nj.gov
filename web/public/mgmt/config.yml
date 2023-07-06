@@ -1555,7 +1555,7 @@ collections:
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list
-        summary: "Step {{step}} - {{task}}"
+        summary: "Step {{step}} - {{task}} {{licenseTask}}"
         fields:
           - label: Roadmap Step
             name: step
@@ -1567,13 +1567,23 @@ collections:
           - label: Weight
             name: weight
             widget: number
-          - label: Task
+          - label: Task (this or License Task is required)
             name: task
             widget: "relation"
             collection: "tasks"
             search_fields: ["{{filename}}", "name", "urlSlug"]
             value_field: "{{filename}}"
             display_fields: ["{{filename}}"]
+            required: false
+            options_length: 500
+          - label: License Task (this or Task is required)
+            name: licenseTask
+            widget: "relation"
+            collection: "license-tasks"
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
+            required: false
             options_length: 500
           - label: "Required"
             name: "required"

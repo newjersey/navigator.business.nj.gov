@@ -14,7 +14,7 @@
     {
       "step": 3,
       "weight": 20,
-      "task": "daycare-license",
+      "licenseTask": "daycare-license",
       "required": true
     }
   ]

@@ -3,13 +3,13 @@
     {
       "step": 4,
       "weight": 51,
-      "task": "license-accounting",
+      "licenseTask": "license-accounting",
       "required": true
     },
     {
       "step": 4,
       "weight": 50,
-      "task": "register-firm-accounting"
+      "licenseTask": "register-firm-accounting"
     }
   ],
   "modifications": []
