@@ -1,8 +1,11 @@
 ---
-notesMd: "Draft:
-  https://docs.google.com/document/d/1J427TU2MFzfznhfhWYhC9oC5-IUgVUAeBfMeX8iGx\
-  wg/edit "
-urlSlug: cosmetology-instructor
+notesMd: >
+  Draft:
+  https://docs.google.com/document/d/1J427TU2MFzfznhfhWYhC9oC5-IUgVUAeBfMeX8iGxwg/edit 
+
+
+  Two outstanding questions remain for Don.
+urlSlug: cosmetology-teacher-license
 name: Get Your Cosmetologist Teacher License
 webflowName: "Cosmetology: Cosmetologist Teacher License"
 summaryDescriptionMd: If you want to teach cosmetology in New Jersey, you need a
