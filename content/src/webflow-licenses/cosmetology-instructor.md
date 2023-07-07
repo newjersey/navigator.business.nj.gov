@@ -1,4 +1,7 @@
 ---
+notesMd: "Draft:
+  https://docs.google.com/document/d/1J427TU2MFzfznhfhWYhC9oC5-IUgVUAeBfMeX8iGx\
+  wg/edit "
 urlSlug: cosmetology-instructor
 name: Get Your Cosmetologist Teacher License
 webflowName: "Cosmetology: Cosmetologist Teacher License"
@@ -25,7 +28,8 @@ webflowId: 5f77298224006193297834be
 - Complete a teacher training course of 500 hours at an approved school in New Jersey
 - Complete a 30-hour teaching methods course conducted by a college approved by the State Board of Higher Education or a substantially equivalent course
 Complete six months of employment in a licensed shop within this State
-- Application Requirements
+
+### Application Requirements
 
 - Copy of government issued photo ID
 - Physician’s Certificate 
@@ -40,6 +44,6 @@ Complete six months of employment in a licensed shop within this State
 - Notarized application
 - Applicable fees paid
 
-> Once completed, you will have:
+> **Once completed, you will have**:
 > 
-> A cosmetology teacher license
+> - A cosmetology teacher license
