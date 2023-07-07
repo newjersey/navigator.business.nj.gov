@@ -3,20 +3,23 @@ filename: certified-accountant-license
 urlSlug: CPA-license
 name: Apply for a Certified Public Accountant License
 webflowName: "Accountant: Certified Public Accountant License"
+summaryDescriptionMd: >
+  You or any staff conducting financial audits in accordance with the Statements
+  on Auditing Standards (SAS), the Statements on Standards for Attestation
+  Engagements (SSAE), or the Public Company Accounting Oversight Board (PCAOB)
+  must obtain a certified public accountant license.
 industryId:
   - certified-public-accountant
+callToActionText: Apply for My License
 callToActionLink: https://www.njconsumeraffairs.gov/acc/Pages/applications.aspx
 webflowIndustry: ""
-divisionPhone: (973) 504-6380
-id: register-firm-accounting
+licenseCertificationClassification: ""
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Accountancy
-callToActionText: Apply for My License
+divisionPhone: (973) 504-6380
+id: register-firm-accounting
 webflowType: individual-license
 webflowId: 5f77296ee10dec7593024f1c
-licenseCertificationClassification: ""
-summaryDescriptionMd: >
-  You or any staff conducting financial audits in accordance with the Statements on Auditing Standards (SAS), the Statements on Standards for Attestation Engagements (SSAE), or the the Public Company Accounting Oversight Board (PCAOB) must obtain a certified public accountant license.
 ---
 
 ---
