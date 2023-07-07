@@ -49,13 +49,13 @@
     {
       "step": 4,
       "weight": 8,
-      "task": "apply-for-shop-license",
+      "licenseTask": "apply-for-shop-license",
       "required": true
     },
     {
       "step": 4,
       "weight": 9,
-      "task": "individual-staff-licenses-cosmetology",
+      "licenseTask": "individual-staff-licenses-cosmetology",
       "required": true
     }
   ],
