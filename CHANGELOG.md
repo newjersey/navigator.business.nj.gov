@@ -1,3 +1,27 @@
+# [5.23.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.22.1...v5.23.0) (2023-07-07)
+
+
+### Bug Fixes
+
+* [[#185355437](https://github.com/newjersey/navigator.business.nj.gov/issues/185355437)] roadmap part of license tasks not rendering in the CMS ([dab9c99](https://github.com/newjersey/navigator.business.nj.gov/commit/dab9c99d00cc1d24cb46f1766e81dd4651e4b0da))
+* [[#185512025](https://github.com/newjersey/navigator.business.nj.gov/issues/185512025)] do not show biz structure prompt for foreign remote seller/worker ([fc3b08d](https://github.com/newjersey/navigator.business.nj.gov/commit/fc3b08d2382835453a2ab2d5e2a0b71ef8051326))
+* [[#185519654](https://github.com/newjersey/navigator.business.nj.gov/issues/185519654)] businessStartDate field correctly shows error bar in mobile ([35cbfc3](https://github.com/newjersey/navigator.business.nj.gov/commit/35cbfc3a763edf543b9ac3ba0ebfb27a9778a8cb))
+* backdating CI docker image ([ee0f769](https://github.com/newjersey/navigator.business.nj.gov/commit/ee0f7698a072b6cfdfcf85fc1b18a457f5cce03e))
+* revert storybook-addon-pseudo-states back to v1 ([9f07a59](https://github.com/newjersey/navigator.business.nj.gov/commit/9f07a5915e0ff4bc37d987f77949cec639160cae))
+* updated to the latest dynamodb-serverless package that fixes the AWS key errors ([9573cfa](https://github.com/newjersey/navigator.business.nj.gov/commit/9573cfa66abd83e846cf825955b8a34dc7d72d2a))
+* use latest docker image ([abcb0d8](https://github.com/newjersey/navigator.business.nj.gov/commit/abcb0d817320c526d062fd08ec8be1aa944ba7a0))
+
+
+### Features
+
+* [[#184822307](https://github.com/newjersey/navigator.business.nj.gov/issues/184822307)] add nonprofit onboarding and roadmap ([ac1e8a7](https://github.com/newjersey/navigator.business.nj.gov/commit/ac1e8a74ada1e1e0e530a247b1c37bdd6c3ff563))
+* [[#184822307](https://github.com/newjersey/navigator.business.nj.gov/issues/184822307)] remove business structure description overrides ([f7cd949](https://github.com/newjersey/navigator.business.nj.gov/commit/f7cd9498b05609ee97ab1181cd6fdf16ffe9bca6))
+* [[#185141979](https://github.com/newjersey/navigator.business.nj.gov/issues/185141979)] export roadmap to pdf ([5ea07a6](https://github.com/newjersey/navigator.business.nj.gov/commit/5ea07a64a69273bf7ed2fd3d745308f5d60b4abc))
+* [[#185396010](https://github.com/newjersey/navigator.business.nj.gov/issues/185396010)] create script to get user locations ([6421d67](https://github.com/newjersey/navigator.business.nj.gov/commit/6421d67b6a4780bad38efea0f219d0dd87fd67fb))
+* [[#185415302](https://github.com/newjersey/navigator.business.nj.gov/issues/185415302)] move license event content to the correct files ([534f0e0](https://github.com/newjersey/navigator.business.nj.gov/commit/534f0e04736ff161c5c2681f6510b957c9f3aca4))
+* [[#185543521](https://github.com/newjersey/navigator.business.nj.gov/issues/185543521)] remove landing page redirect to webflow ([d096f93](https://github.com/newjersey/navigator.business.nj.gov/commit/d096f93e59ecfec9019b922ed34ba5a92c6f2be0))
+* create script to update records in Airtable ([80977eb](https://github.com/newjersey/navigator.business.nj.gov/commit/80977eb3e683d5fb7c2511aee5c86e266b263cb0))
+
 ## [5.22.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.22.0...v5.22.1) (2023-07-06)
 
 
