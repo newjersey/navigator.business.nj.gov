@@ -14,6 +14,8 @@ divisionPhone: (973) 504-6400
 id: cosmetology-instructor
 webflowId: 5f77298224006193297834be
 ---
+- - -
+
 ### Eligibility Criteria
 
 - Be 18 years old at a minimum
@@ -25,12 +27,12 @@ webflowId: 5f77298224006193297834be
 Complete six months of employment in a licensed shop within this State
 - Application Requirements
 
-Copy of government issued photo ID
-Physician’s Certificate 
-Copy of high school diploma
-Copy of cosmetology license
-List of all professional licenses and certificates 
-Certification of Cosmetology and Hairstyling School Hours, signed by a school official
+- Copy of government issued photo ID
+- Physician’s Certificate 
+- Copy of high school diploma
+- Copy of cosmetology license
+- List of all professional licenses and certificates 
+- Certification of Cosmetology and Hairstyling School Hours, signed by a school official
 -Copy of certificate for completing 30-hour teaching methods course conducted by a college approved by the New Jersey Board of Cosmetology and Hairstyling
 - Applicable work history
 - Certificate of Experience from your Present or Former Employer
