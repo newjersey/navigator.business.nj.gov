@@ -20,10 +20,6 @@ $icon-offset: 45px;
   align-items: center;
 }
 
-.no-icon-offset {
-  margin-left: $icon-offset;
-}
-
 .menu-item-focus:focus {
   z-index: 5;
 }
@@ -58,7 +54,7 @@ $icon-offset: 45px;
   background-color: $primary-extra-light;
 }
 
-.truncate-long-business-names-mobile {
+.truncate-long-business-names_NavBarMobile {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -66,7 +62,7 @@ $icon-offset: 45px;
   max-width: 70vw;
 }
 
-.truncate-long-business-names-desktop {
+.truncate-long-business-names_NavBarDesktop {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
