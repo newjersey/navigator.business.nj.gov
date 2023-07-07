@@ -20,7 +20,7 @@ We deploy using **[CircleCI](https://app.circleci.com/pipelines/github/newjersey
 
 ## Development
 
-You will need `yarn`, `npm` and Node installed, and also Java (for `serverless-dynamodb-local`)
+You will need `yarn`, `npm` and Node installed, and also Java (for `serverless-dynamodb`)
 
 ### Software Requirement
 
@@ -147,7 +147,7 @@ with AWS Lambdas.
 
 We use serverless to deploy. If you do this locally, your local serverless CLI needs to be configured with AWS credentials.
 
-Locally, it uses `serverless-offline` and `serverless-dynamodb-local` to run and simulate the AWS environment. Everything AWS and serverless is configured in `./api/serverless.ts`.
+Locally, it uses `serverless-offline` and `serverless-dynamodb` to run and simulate the AWS environment. Everything AWS and serverless is configured in `./api/serverless.ts`.
 
 We use serverless to deploy an Express app. The app itself is defined in `src/functions/migrate.ts` and is mostly a regular Express app,
 except it wraps its export in `serverless` to become a handler. Then, `src/functions/index.ts` defines the config structure that
