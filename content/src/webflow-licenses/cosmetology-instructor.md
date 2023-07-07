@@ -31,12 +31,12 @@ Copy of high school diploma
 Copy of cosmetology license
 List of all professional licenses and certificates 
 Certification of Cosmetology and Hairstyling School Hours, signed by a school official
-Copy of certificate for completing 30-hour teaching methods course conducted by a college approved by the New Jersey Board of Cosmetology and Hairstyling
-Applicable work history
-Certificate of Experience from your Present or Former Employer
-Passing written examination scores
-Notarized application
-Applicable fees paid
+-Copy of certificate for completing 30-hour teaching methods course conducted by a college approved by the New Jersey Board of Cosmetology and Hairstyling
+- Applicable work history
+- Certificate of Experience from your Present or Former Employer
+- Passing written examination scores
+- Notarized application
+- Applicable fees paid
 
 > Once completed, you will have:
 > 
