@@ -284,19 +284,6 @@
               }
             }
           }
-        },
-        "overrides": {
-          "FOREIGN": {
-            "optionContent": {
-              "general-partnership": "",
-              "c-corporation": "",
-              "limited-liability-company": "",
-              "limited-liability-partnership": "",
-              "limited-partnership": "",
-              "s-corporation": "",
-              "sole-proprietorship": ""
-            }
-          }
         }
       },
       "employerId": {
