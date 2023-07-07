@@ -1,8 +1,8 @@
 {
   "formationDateDeletionModal": {
     "header": "Confirm Your Changes",
-    "description": "Deleting your business `effective date|effective-date` (the date you formed your business) will remove your calendar from the Navigator.",
-    "areYouSureModalBody": "Are you sure you'd like to proceed?",
+    "description": "If you delete your business `effective date|effective-date`, you won't receive a reminder to submit your annual report when it's due and the reminder won't appear in your calendar.",
+    "areYouSureModalBody": "Are you sure you want to continue?",
     "cancelButtonText": "Cancel",
     "deleteButtonText": "Delete Date"
   },
@@ -157,7 +157,7 @@
     "areYouSureModalCancelButtonText": "Cancel",
     "dateOfFormationErrorText": "Your effective date must be formatted as MM/YYYY.",
     "header": "Find Your Annual Report Deadline",
-    "areYouSureModalBody": "If you change your task status, you will need to resubmit your Business `Effective Date|effective-date` and will lose access to your calendar.",
+    "areYouSureModalBody": "If you change your task status, you need to resubmit your Business `Effective Date|effective-date` and will lose access to your calendar.",
     "areYouSureModalContinueButtonText": "Continue",
     "lockedStatusTooltipText": "You have successfully completed forming your business in this task.",
     "cancelButtonText": "Cancel",

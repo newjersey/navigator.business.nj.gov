@@ -8,7 +8,7 @@ requiresLocation: true
 filename: town-mercantile-liquor-license
 ---
 
-You will need to obtain a local liquor license if your business will sell alcohol.
+You need to obtain a local liquor license if your business will sell alcohol.
 
 In addition to a liquor license, some local governments require businesses to get a mercantile license. Each town will have its own application process for both the liquor license and the mercantile license.
 
