@@ -37,3 +37,7 @@ Certificate of Experience from your Present or Former Employer
 Passing written examination scores
 Notarized application
 Applicable fees paid
+
+> Once completed, you will have:
+> 
+> A cosmetology teacher license
