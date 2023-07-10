@@ -46,7 +46,7 @@ interface Props {
 
 export const BusinessFormation = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
-  const { updateQueue, userData } = useUserData();
+  const { updateQueue, userData, currentBusiness } = useUserData();
   const router = useRouter();
   const { Config } = useConfig();
 
@@ -70,16 +70,16 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
   const legalStructureId: FormationLegalType = useMemo(() => {
     return castPublicFilingLegalTypeToFormationType(
-      (userData?.profileData.legalStructureId ?? defaultFormationLegalType) as PublicFilingLegalType,
-      userData?.profileData.businessPersona
+      (currentBusiness?.profileData.legalStructureId ?? defaultFormationLegalType) as PublicFilingLegalType,
+      currentBusiness?.profileData.businessPersona
     );
-  }, [userData?.profileData.businessPersona, userData?.profileData.legalStructureId]);
+  }, [currentBusiness?.profileData.businessPersona, currentBusiness?.profileData.legalStructureId]);
 
   const isForeign = useMemo(() => legalStructureId.includes(foreignLegalTypePrefix), [legalStructureId]);
 
   const isValidLegalStructure = useMemo(
-    () => allowFormation(userData?.profileData.legalStructureId, userData?.profileData.businessPersona),
-    [userData?.profileData.legalStructureId, userData?.profileData.businessPersona]
+    () => allowFormation(currentBusiness?.profileData.legalStructureId, currentBusiness?.profileData.businessPersona),
+    [currentBusiness?.profileData.legalStructureId, currentBusiness?.profileData.businessPersona]
   );
 
   const getBusinessStartDate = (date: string | undefined, legalType: FormationLegalType): string => {
@@ -89,35 +89,35 @@ export const BusinessFormation = (props: Props): ReactElement => {
   };
 
   useMountEffectWhenDefined(() => {
-    if (!userData) {
+    if (!userData || !currentBusiness) {
       return;
     }
 
     const splitName = splitFullName(userData.user.name);
     setFormationFormData({
-      ...userData.formationData.formationFormData,
+      ...currentBusiness.formationData.formationFormData,
       businessName:
-        userData.formationData.formationFormData.businessName ?? userData.profileData.businessName,
+        currentBusiness.formationData.formationFormData.businessName ?? currentBusiness.profileData.businessName,
       businessStartDate: getBusinessStartDate(
-        userData.formationData.formationFormData.businessStartDate,
+        currentBusiness.formationData.formationFormData.businessStartDate,
         legalStructureId
       ),
-      addressMunicipality: userData.profileData.municipality,
+      addressMunicipality: currentBusiness.profileData.municipality,
       legalType: legalStructureId,
-      contactFirstName: userData.formationData.formationFormData.contactFirstName || splitName.firstName,
-      contactLastName: userData.formationData.formationFormData.contactLastName || splitName.lastName,
+      contactFirstName: currentBusiness.formationData.formationFormData.contactFirstName || splitName.firstName,
+      contactLastName: currentBusiness.formationData.formationFormData.contactLastName || splitName.lastName,
       businessLocationType: isForeign
-        ? userData.formationData.formationFormData.businessLocationType ?? "US"
+        ? currentBusiness.formationData.formationFormData.businessLocationType ?? "US"
         : "NJ",
     });
-    if (userData.formationData.businessNameAvailability) {
+    if (currentBusiness.formationData.businessNameAvailability) {
       setBusinessNameAvailability({
-        ...userData.formationData.businessNameAvailability,
+        ...currentBusiness.formationData.businessNameAvailability,
       });
     }
-    if (userData.formationData.dbaBusinessNameAvailability) {
+    if (currentBusiness.formationData.dbaBusinessNameAvailability) {
       setDbaBusinessNameAvailability({
-        ...userData.formationData.dbaBusinessNameAvailability,
+        ...currentBusiness.formationData.dbaBusinessNameAvailability,
       });
     }
 
@@ -136,12 +136,12 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
   useEffect(() => {
     const shouldFetchCompletedFiling = (): boolean => {
-      if (!userData || getCompletedFilingApiCallOccurred.current) {
+      if (!userData || getCompletedFilingApiCallOccurred.current || !currentBusiness) {
         return false;
       }
       const completeFilingQueryParamExists = checkQueryValue(router, QUERIES.completeFiling, "true");
-      const completedPayment = userData.formationData.completedFilingPayment;
-      const noCompletedFilingExists = !userData.formationData.getFilingResponse?.success;
+      const completedPayment = currentBusiness.formationData.completedFilingPayment;
+      const noCompletedFilingExists = !currentBusiness.formationData.getFilingResponse?.success;
       return completeFilingQueryParamExists || (completedPayment && noCompletedFilingExists);
     };
 
@@ -189,7 +189,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     });
   };
 
-  if (!isValidLegalStructure && userData?.profileData.businessPersona !== "FOREIGN" && !props.searchOnly) {
+  if (!isValidLegalStructure && currentBusiness?.profileData.businessPersona !== "FOREIGN" && !props.searchOnly) {
     return (
       <div className="flex flex-column space-between minh-38">
         <div>
@@ -206,10 +206,10 @@ export const BusinessFormation = (props: Props): ReactElement => {
   }
 
   const errorFetchingFilings =
-    userData?.formationData.completedFilingPayment &&
+    currentBusiness?.formationData.completedFilingPayment &&
     !isLoadingGetFiling &&
     getCompletedFilingApiCallOccurred.current &&
-    !userData.formationData.getFilingResponse?.success;
+    !currentBusiness.formationData.getFilingResponse?.success;
 
   if (errorFetchingFilings) {
     return (
@@ -231,7 +231,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     );
   }
 
-  if (userData?.formationData.getFilingResponse?.success) {
+  if (currentBusiness?.formationData.getFilingResponse?.success && userData) {
     return (
       <div className="flex flex-column space-between minh-38">
         <TaskHeader task={props.task} />

@@ -19,7 +19,7 @@ describe("addToUserTesting", () => {
     const userData = generateUserData({ user: generateUser({ externalStatus: {} }) });
     const response = await addToUserTesting(userData);
 
-    expect(stubUserTestingClient.add).toHaveBeenCalledWith(userData.user, userData.profileData);
+    expect(stubUserTestingClient.add).toHaveBeenCalledWith(userData.user, userData.businesses[userData.currentBusinessID].profileData);
     expect(response).toEqual({
       ...userData,
       user: {

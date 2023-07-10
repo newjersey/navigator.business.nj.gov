@@ -1,35 +1,35 @@
 import { LookupLegalStructureById } from "@shared/legalStructure";
-import { UserData } from "@shared/userData";
+import { Business, UserData } from "@shared/userData";
 import { calculateNextAnnualFilingDates } from "./calculateNextAnnualFilingDates";
 
 export const getAnnualFilings = (userData: UserData): UserData => {
-  const filings = userData.taxFilingData.filings.filter((it) => {
+  const currentBusiness = userData.businesses[userData.currentBusinessID]
+  const filings = currentBusiness.taxFilingData.filings.filter((it) => {
     return it.identifier !== "ANNUAL_FILING";
   });
 
   let requiresPublicFiling = true;
 
-  if (userData.profileData.legalStructureId) {
+  if (currentBusiness.profileData.legalStructureId) {
     requiresPublicFiling = LookupLegalStructureById(
-      userData.profileData.legalStructureId
+      currentBusiness.profileData.legalStructureId
     ).requiresPublicFiling;
   }
 
-  if (userData.profileData.dateOfFormation && requiresPublicFiling) {
+  if (currentBusiness.profileData.dateOfFormation && requiresPublicFiling) {
     filings.push(
-      ...calculateNextAnnualFilingDates(userData.profileData.dateOfFormation).map((dueDate: string) => ({
+      ...calculateNextAnnualFilingDates(currentBusiness.profileData.dateOfFormation).map((dueDate: string) => ({
         identifier: "ANNUAL_FILING",
         calendarEventType: "TAX-FILING" as const,
         dueDate,
       }))
     );
   }
+  const updatedBusiness: Business = {...currentBusiness, taxFilingData: {...currentBusiness.taxFilingData, filings}}
+  const updatedBusinesses: Record<string, Business> =  {...userData.businesses, [userData.currentBusinessID]: updatedBusiness }
 
   return {
     ...userData,
-    taxFilingData: {
-      ...userData.taxFilingData,
-      filings,
-    },
+    businesses: updatedBusinesses
   };
 };

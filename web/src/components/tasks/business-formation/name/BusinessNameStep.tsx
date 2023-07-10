@@ -27,7 +27,7 @@ export const BusinessNameStep = (): ReactElement => {
 
   useEffect(() => {
     if (!userData || !state.hasSetStateFirstTime || mountEffectOccurred.current) return;
-    const nameToSet = state.formationFormData.businessName || userData.profileData.businessName;
+    const nameToSet = state.formationFormData.businessName || userData.businesses[userData.currentBusinessID].profileData.businessName;
     updateCurrentName(nameToSet);
 
     setFormationFormData((prev) => ({ ...prev, businessName: nameToSet }));

@@ -1,11 +1,12 @@
 import { UpdateQueue } from "@/lib/types/types";
 import {
+  Business,
   BusinessUser,
   Preferences,
   ProfileData,
   TaskProgress,
   TaxFilingData,
-  UserData,
+  UserData
 } from "@businessnjgovnavigator/shared";
 import { FormationData, FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 
@@ -38,81 +39,73 @@ export class UpdateQueueFactory implements UpdateQueue {
   }
 
   queueProfileData(profileData: Partial<ProfileData>): UpdateQueue {
+    const updatedBusiness: Business = {...this.internalQueue.businesses[this.internalQueue.currentBusinessID], profileData: {...this.internalQueue.businesses[this.internalQueue.currentBusinessID].profileData, ...profileData}}
+    const updatedBusinesses: Record<string, Business> = {...this.internalQueue.businesses, [this.internalQueue.currentBusinessID]: updatedBusiness}
     this.internalQueue = {
       ...this.internalQueue,
-      profileData: {
-        ...this.internalQueue.profileData,
-        ...profileData,
-      },
+     businesses: updatedBusinesses
     };
     return this;
   }
 
   queueFormationData(formationData: Partial<FormationData>): UpdateQueue {
+    const updatedBusiness: Business = {...this.internalQueue.businesses[this.internalQueue.currentBusinessID], formationData: {...this.internalQueue.businesses[this.internalQueue.currentBusinessID].formationData, ...formationData}}
+    const updatedBusinesses: Record<string, Business> = {...this.internalQueue.businesses, [this.internalQueue.currentBusinessID]: updatedBusiness}
     this.internalQueue = {
       ...this.internalQueue,
-      formationData: {
-        ...this.internalQueue.formationData,
-        ...formationData,
-      },
+      businesses: updatedBusinesses
     };
     return this;
   }
 
   queueFormationFormData(formationFormData: Partial<FormationFormData>): UpdateQueue {
+    const updatedBusiness: Business = {...this.internalQueue.businesses[this.internalQueue.currentBusinessID], formationData: {...this.internalQueue.businesses[this.internalQueue.currentBusinessID].formationData, formationFormData: {
+          ...this.internalQueue.businesses[this.internalQueue.currentBusinessID].formationData.formationFormData, ...formationFormData
+        }}}
+    const updatedBusinesses: Record<string, Business> = {...this.internalQueue.businesses, [this.internalQueue.currentBusinessID]: updatedBusiness}
     this.internalQueue = {
       ...this.internalQueue,
-      formationData: {
-        ...this.internalQueue.formationData,
-        formationFormData: {
-          ...this.internalQueue.formationData.formationFormData,
-          ...formationFormData,
-        },
-      },
+      businesses: updatedBusinesses
     };
     return this;
   }
 
   queueTaskProgress(taskProgress: Record<string, TaskProgress>): UpdateQueue {
+    const updatedBusiness: Business = {...this.internalQueue.businesses[this.internalQueue.currentBusinessID], taskProgress: {...this.internalQueue.businesses[this.internalQueue.currentBusinessID].taskProgress, ...taskProgress}}
+    const updatedBusinesses: Record<string, Business> = {...this.internalQueue.businesses, [this.internalQueue.currentBusinessID]: updatedBusiness}
     this.internalQueue = {
       ...this.internalQueue,
-      taskProgress: {
-        ...this.internalQueue.taskProgress,
-        ...taskProgress,
-      },
+      businesses: updatedBusinesses
     };
     return this;
   }
 
   queuePreferences(preferences: Partial<Preferences>): UpdateQueue {
+    const updatedBusiness: Business = {...this.internalQueue.businesses[this.internalQueue.currentBusinessID], preferences: {...this.internalQueue.businesses[this.internalQueue.currentBusinessID].preferences, ...preferences}}
+    const updatedBusinesses: Record<string, Business> = {...this.internalQueue.businesses, [this.internalQueue.currentBusinessID]: updatedBusiness}
     this.internalQueue = {
       ...this.internalQueue,
-      preferences: {
-        ...this.internalQueue.preferences,
-        ...preferences,
-      },
+      businesses: updatedBusinesses
     };
     return this;
   }
 
   queueTaxFilingData(taxFilingData: Partial<TaxFilingData>): UpdateQueue {
+    const updatedBusiness: Business = {...this.internalQueue.businesses[this.internalQueue.currentBusinessID], taxFilingData: {...this.internalQueue.businesses[this.internalQueue.currentBusinessID].taxFilingData, ...taxFilingData}}
+    const updatedBusinesses: Record<string, Business> = {...this.internalQueue.businesses, [this.internalQueue.currentBusinessID]: updatedBusiness}
     this.internalQueue = {
       ...this.internalQueue,
-      taxFilingData: {
-        ...this.internalQueue.taxFilingData,
-        ...taxFilingData,
-      },
+      businesses: updatedBusinesses
     };
     return this;
   }
 
   queueTaskItemChecklist(taskItemChecklist: Record<string, boolean>): UpdateQueue {
+    const updatedBusiness: Business = {...this.internalQueue.businesses[this.internalQueue.currentBusinessID], taskItemChecklist: {...this.internalQueue.businesses[this.internalQueue.currentBusinessID].taskItemChecklist, ...taskItemChecklist}}
+    const updatedBusinesses: Record<string, Business> = {...this.internalQueue.businesses, [this.internalQueue.currentBusinessID]: updatedBusiness}
     this.internalQueue = {
       ...this.internalQueue,
-      taskItemChecklist: {
-        ...this.internalQueue.taskItemChecklist,
-        ...taskItemChecklist,
-      },
+      businesses: updatedBusinesses
     };
     return this;
   }

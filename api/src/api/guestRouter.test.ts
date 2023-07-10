@@ -16,6 +16,7 @@ import { generateAnnualFilings } from "../../test/helpers";
 import { TimeStampBusinessSearch } from "../domain/types";
 import { setupExpress } from "../libs/express";
 import { guestRouterFactory } from "./guestRouter";
+import { Business } from "@shared/userData";
 
 describe("guestRouter", () => {
   let app: Express;
@@ -48,19 +49,19 @@ describe("guestRouter", () => {
           filings: [],
         }),
       });
+      const currentBusiness = postedUserData.businesses[postedUserData.currentBusinessID]
 
       const response = await request(app).post(`/annualFilings`).send(postedUserData);
+      const updatedBusiness: Business = {...currentBusiness, taxFilingData: {...currentBusiness.taxFilingData, filings: generateAnnualFilings([
+        getFirstAnnualFiling(formationDate),
+        getSecondAnnualFiling(formationDate),
+        getThirdAnnualFiling(formationDate),
+      ]),} }
+      const updatedBusinesses: Record<string, Business> = {...postedUserData.businesses, [postedUserData.currentBusinessID]: updatedBusiness}
 
       expect(response.body).toEqual({
         ...postedUserData,
-        taxFilingData: {
-          ...postedUserData.taxFilingData,
-          filings: generateAnnualFilings([
-            getFirstAnnualFiling(formationDate),
-            getSecondAnnualFiling(formationDate),
-            getThirdAnnualFiling(formationDate),
-          ]),
-        },
+        businesses: updatedBusinesses
       });
     });
   });

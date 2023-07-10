@@ -65,10 +65,10 @@ describe("<CannabisApplyForLicenseTask />", () => {
     });
     renderPage(generateTask({}), initialUserData);
     fireEvent.click(screen.getByTestId("microbusiness-radio-true"));
-    expect(currentUserData().profileData.cannabisMicrobusiness).toEqual(true);
+    expect(currentUserData().businesses[currentUserData().currentBusinessID].profileData.cannabisMicrobusiness).toEqual(true);
 
     fireEvent.click(screen.getByTestId("microbusiness-radio-false"));
-    expect(currentUserData().profileData.cannabisMicrobusiness).toEqual(false);
+    expect(currentUserData().businesses[currentUserData().currentBusinessID].profileData.cannabisMicrobusiness).toEqual(false);
   });
 
   it("does not display Priority Status checkboxes if none checked", () => {
@@ -206,7 +206,7 @@ describe("<CannabisApplyForLicenseTask />", () => {
       });
       renderPage(generateTask({ id: "annual-license-cannabis" }), initialUserData);
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
-      expect(currentUserData().taskProgress).toEqual({
+      expect(currentUserData().businesses[currentUserData().currentBusinessID].taskProgress).toEqual({
         "annual-license-cannabis": "IN_PROGRESS",
       });
     });

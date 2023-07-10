@@ -10,7 +10,7 @@ import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { UpdateQueue, UserDataError } from "@/lib/types/types";
 import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
-import { UserData } from "@businessnjgovnavigator/shared/";
+import { Business, UserData } from "@businessnjgovnavigator/shared/";
 import { useContext, useEffect } from "react";
 import useSWR from "swr";
 
@@ -25,23 +25,25 @@ export const useUserData = (): UseUserDataResponse => {
     },
   });
   const dataExists = !!data;
+  const currentBusiness = data?.businesses[data.currentBusinessID]
   const { setOperatingPhaseId, setLegalStructureId, setIndustryId, setBusinessPersona } =
     useContext(IntercomContext);
 
   useEffect(() => {
-    setOperatingPhaseId(data?.profileData.operatingPhase);
-    setLegalStructureId(data?.profileData.legalStructureId);
-    setIndustryId(data?.profileData.industryId);
-    setBusinessPersona(data?.profileData.businessPersona);
+    setOperatingPhaseId(currentBusiness?.profileData.operatingPhase);
+    setLegalStructureId(currentBusiness?.profileData.legalStructureId);
+    setIndustryId(currentBusiness?.profileData.industryId);
+    setBusinessPersona(currentBusiness?.profileData.businessPersona);
   }, [
     setOperatingPhaseId,
-    data?.profileData.operatingPhase,
+    currentBusiness?.profileData.operatingPhase,
     setLegalStructureId,
-    data?.profileData.legalStructureId,
+    currentBusiness?.profileData.legalStructureId,
     setIndustryId,
-    data?.profileData.industryId,
+    currentBusiness?.profileData.industryId,
     setBusinessPersona,
-    data?.profileData.businessPersona,
+    currentBusiness?.profileData.businessPersona,
+    data?.currentBusinessID
   ]);
 
   useEffect(() => {
@@ -80,12 +82,16 @@ export const useUserData = (): UseUserDataResponse => {
   }, [userDataError, dataExists, error, setUserDataError, state.isAuthenticated]);
 
   const profileDataHasChanged = (oldUserData: UserData | undefined, newUserData: UserData): boolean => {
-    return JSON.stringify(oldUserData?.profileData) !== JSON.stringify(newUserData.profileData);
+    const oldCurrentBusinessProfileData = oldUserData?.businesses[oldUserData?.currentBusinessID].profileData
+    const newCurrentBusinessProfileData = newUserData.businesses[newUserData.currentBusinessID].profileData
+
+    return JSON.stringify(oldCurrentBusinessProfileData) !== JSON.stringify(newCurrentBusinessProfileData);
   };
 
   const onProfileDataChange = async (newUserData: UserData): Promise<void> => {
-    setAnalyticsDimensions(newUserData.profileData);
-    const newRoadmap = await buildUserRoadmap(newUserData.profileData);
+    const newCurrentBusinessProfileData = newUserData.businesses[newUserData.currentBusinessID].profileData
+    setAnalyticsDimensions(newCurrentBusinessProfileData);
+    const newRoadmap = await buildUserRoadmap(newCurrentBusinessProfileData);
     setRoadmap(newRoadmap);
   };
 
@@ -141,6 +147,7 @@ export const useUserData = (): UseUserDataResponse => {
 
   return {
     userData: updateQueue?.current(),
+    currentBusiness: updateQueue?.current().businesses[updateQueue?.current().currentBusinessID],
     isLoading: !error && !data,
     error: userDataError,
     refresh: refresh,
@@ -151,6 +158,7 @@ export const useUserData = (): UseUserDataResponse => {
 
 export type UseUserDataResponse = {
   userData: UserData | undefined;
+  currentBusiness: Business | undefined;
   isLoading: boolean;
   error: UserDataError | undefined;
   refresh: () => Promise<void>;

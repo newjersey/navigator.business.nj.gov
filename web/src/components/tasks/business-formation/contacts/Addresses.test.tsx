@@ -62,7 +62,8 @@ describe("Formation - Addresses", () => {
           page.clickAddressSubmit();
           page.checkSignerBox(0, "incorporators");
           await page.submitContactsStep();
-          expect(currentUserData().formationData.formationFormData.incorporators).toEqual([
+          const currentBusinessFormationData = currentUserData().businesses[currentUserData().currentBusinessID].formationData
+          expect(currentBusinessFormationData.formationFormData.incorporators).toEqual([
             { ...signer, signature: true, title: signer.title },
           ]);
         });
@@ -114,7 +115,8 @@ describe("Formation - Addresses", () => {
           });
           expect(screen.getByText(newName, { exact: false })).toBeInTheDocument();
           await page.submitContactsStep();
-          const newIncorporators = currentUserData().formationData.formationFormData.incorporators;
+          const currentBusinessFormationData = currentUserData().businesses[currentUserData().currentBusinessID].formationData
+          const newIncorporators = currentBusinessFormationData.formationFormData.incorporators;
           expect(newIncorporators?.length).toEqual(2);
           expect(
             newIncorporators?.findIndex((signer) => {
@@ -147,7 +149,8 @@ describe("Formation - Addresses", () => {
           // eslint-disable-next-line testing-library/no-node-access
           fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="delete"]') as Element);
           await page.submitContactsStep();
-          expect(currentUserData().formationData.formationFormData.incorporators).toEqual([incorporators[0]]);
+          const currentBusinessFormationData = currentUserData().businesses[currentUserData().currentBusinessID].formationData
+          expect(currentBusinessFormationData.formationFormData.incorporators).toEqual([incorporators[0]]);
         });
 
         it("does not allow more than 10 signers", async () => {

@@ -10,6 +10,7 @@ export const useSidebarCards = (): {
     if (!updateQueue) return;
     const allCardsExceptDesired = updateQueue
       .current()
+      .businesses[updateQueue.current().currentBusinessID]
       .preferences.visibleSidebarCards.filter((cardId: string) => {
         return cardId !== id;
       });
@@ -24,6 +25,7 @@ export const useSidebarCards = (): {
     if (!updateQueue) return;
     const allCardsExceptIdToHide = updateQueue
       .current()
+      .businesses[updateQueue.current().currentBusinessID]
       .preferences.visibleSidebarCards.filter((cardId: string) => {
         return cardId !== id;
       });

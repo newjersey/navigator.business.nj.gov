@@ -2,7 +2,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { onGuestSignIn, onSelfRegister, onSignIn, onSignOut, SelfRegRouter } from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import * as UserDataStorage from "@/lib/storage/UserDataStorage";
-import { generateUser, generateUserData } from "@businessnjgovnavigator/shared/";
+import { Business, generateUser, generateUserData } from "@businessnjgovnavigator/shared/";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { waitFor } from "@testing-library/react";
 import { UpdateQueue } from "../types/types";
@@ -61,6 +61,7 @@ describe("SigninHelper", () => {
 
   describe("onSelfRegister", () => {
     let userData: UserData;
+    let currentBusiness: Business;
     let updateQueue: UpdateQueue;
     let update: jest.Mock;
     let mockSetAlertStatus: jest.Mock;
@@ -68,6 +69,7 @@ describe("SigninHelper", () => {
 
     beforeEach(() => {
       userData = generateUserData({});
+      currentBusiness = userData.businesses[userData.currentBusinessID]
       update = jest.fn();
       updateQueue = new UpdateQueueFactory(userData, update);
       mockSetAlertStatus = jest.fn();
@@ -82,23 +84,27 @@ describe("SigninHelper", () => {
 
     it("posts userData to api self-reg with current pathname included when useReturnToLink is not true", async () => {
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
-      await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
+      onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
+
+      const expectedBusiness: Business = {...currentBusiness, preferences: {...currentBusiness.preferences, returnToLink: "/tasks/some-url"}}
+      const expectedBusinesses: Record<string, Business> = {...userData.businesses, [userData.currentBusinessID]: expectedBusiness}
+
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
         ...userData,
-        preferences: { ...userData.preferences, returnToLink: "/tasks/some-url" },
+        businesses: expectedBusinesses
       });
     });
 
     it("posts userData to api self-reg with the returnToLink if called with true for the useReturnToLink", async () => {
       userData = generateUserData({
-        preferences: { ...userData.preferences, returnToLink: "/pathname?query=true" },
+        preferences: { ...currentBusiness.preferences, returnToLink: "/pathname?query=true" },
       });
       updateQueue = new UpdateQueueFactory(userData, update);
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
       await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus, { useReturnToLink: true });
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
         ...userData,
-        preferences: { ...userData.preferences, returnToLink: "/pathname?query=true" },
+        preferences: { ...currentBusiness.preferences, returnToLink: "/pathname?query=true" },
       });
     });
 

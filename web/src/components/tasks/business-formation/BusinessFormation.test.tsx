@@ -11,13 +11,14 @@ import {
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
   defaultDateFormat,
   FormationData,
   FormationIncorporator,
   FormationMember,
   generateMunicipality,
   getCurrentDate,
-  UserData,
+  UserData
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
@@ -125,12 +126,13 @@ describe("<BusinessFormation />", () => {
         preparePage({ formationData }, displayContent, undefined, task);
       });
       expect(mockApi.getCompletedFiling).toHaveBeenCalled();
+      const expectedBusiness: Business = {...userDataReturnFromApi.businesses[userDataReturnFromApi.currentBusinessID], formationData: {
+        ...userDataReturnFromApi.businesses[userDataReturnFromApi.currentBusinessID].formationData, completedFilingPayment: true
+        }}
+      const expectedBusinesses: Record<string, Business> = {...userDataReturnFromApi.businesses, [userDataReturnFromApi.currentBusinessID]: expectedBusiness}
       const expectedUserData = {
         ...userDataReturnFromApi,
-        formationData: {
-          ...userDataReturnFromApi.formationData,
-          completedFilingPayment: true,
-        },
+        businesses: expectedBusinesses
       };
       await waitFor(() => {
         expect(currentUserData()).toEqual(expectedUserData);
@@ -158,7 +160,7 @@ describe("<BusinessFormation />", () => {
       });
 
       expect(screen.getByTestId("review-step")).toBeInTheDocument();
-      expect(currentUserData().formationData.completedFilingPayment).toEqual(false);
+      expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.completedFilingPayment).toEqual(false);
       expect(mockPush).toHaveBeenCalledWith({ pathname: `/tasks/${task.urlSlug}` }, undefined, {
         shallow: true,
       });
@@ -202,12 +204,12 @@ describe("<BusinessFormation />", () => {
           preparePage({ formationData }, displayContent, undefined, task);
         });
         expect(mockApi.getCompletedFiling).toHaveBeenCalled();
+        const expectedBusiness: Business = {...userDataReturnFromApi.businesses[userDataReturnFromApi.currentBusinessID],
+          formationData: {...userDataReturnFromApi.businesses[userDataReturnFromApi.currentBusinessID].formationData, completedFilingPayment: true}}
+        const expectedBusinesses: Record<string, Business> = {...userDataReturnFromApi.businesses, [userDataReturnFromApi.currentBusinessID]: expectedBusiness}
         const expectedUserData = {
           ...userDataReturnFromApi,
-          formationData: {
-            ...userDataReturnFromApi.formationData,
-            completedFilingPayment: true,
-          },
+          businesses: expectedBusinesses
         };
         await waitFor(() => {
           expect(currentUserData()).toEqual(expectedUserData);
@@ -237,7 +239,7 @@ describe("<BusinessFormation />", () => {
         });
         expect(mockApi.getCompletedFiling).toHaveBeenCalled();
         await waitFor(() => {
-          expect(currentUserData().formationData.completedFilingPayment).toEqual(true);
+          expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.completedFilingPayment).toEqual(true);
         });
       });
 
@@ -260,7 +262,7 @@ describe("<BusinessFormation />", () => {
 
         await screen.findByTestId("review-step");
         expect(screen.queryByText("api-error-text")).not.toBeInTheDocument();
-        expect(currentUserData().formationData.completedFilingPayment).toEqual(false);
+        expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.completedFilingPayment).toEqual(false);
       });
     });
   });
@@ -340,7 +342,7 @@ describe("<BusinessFormation />", () => {
     await page.submitBillingStep();
     await page.submitReviewStep();
 
-    const formationFormData = currentUserData().formationData.formationFormData;
+    const formationFormData = currentUserData().businesses[currentUserData().currentBusinessID].formationData.formationFormData;
     await waitFor(() => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });
@@ -454,7 +456,7 @@ describe("<BusinessFormation />", () => {
     await page.submitBillingStep();
     await page.submitReviewStep();
 
-    const formationFormData = currentUserData().formationData.formationFormData;
+    const formationFormData = currentUserData().businesses[currentUserData().currentBusinessID].formationData.formationFormData;
     await waitFor(() => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });
@@ -552,7 +554,7 @@ describe("<BusinessFormation />", () => {
     await page.submitBillingStep();
     await page.submitReviewStep();
 
-    const formationFormData = currentUserData().formationData.formationFormData;
+    const formationFormData = currentUserData().businesses[currentUserData().currentBusinessID].formationData.formationFormData;
     await waitFor(() => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });
@@ -664,7 +666,7 @@ describe("<BusinessFormation />", () => {
     await page.submitBillingStep();
     await page.submitReviewStep();
 
-    const formationFormData = currentUserData().formationData.formationFormData;
+    const formationFormData = currentUserData().businesses[currentUserData().currentBusinessID].formationData.formationFormData;
     await waitFor(() => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });
@@ -785,7 +787,7 @@ describe("<BusinessFormation />", () => {
     await page.submitBillingStep();
     await page.submitReviewStep();
 
-    const formationFormData = currentUserData().formationData.formationFormData;
+    const formationFormData = currentUserData().businesses[currentUserData().currentBusinessID].formationData.formationFormData;
     await waitFor(() => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });
@@ -900,7 +902,7 @@ describe("<BusinessFormation />", () => {
     await page.submitBillingStep();
     await page.submitReviewStep();
 
-    const formationFormData = currentUserData().formationData.formationFormData;
+    const formationFormData = currentUserData().businesses[currentUserData().currentBusinessID].formationData.formationFormData;
     await waitFor(() => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });

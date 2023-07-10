@@ -152,7 +152,7 @@ describe("ApiFormationClient", () => {
                 Business: "DomesticLimitedLiabilityCompany",
                 BusinessName: formationFormData.businessName,
                 BusinessDesignator: formationFormData.businessSuffix,
-                Naic: userData.profileData.naicsCode,
+                Naic: userData.businesses[userData.currentBusinessID].profileData.naicsCode,
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
@@ -301,7 +301,7 @@ describe("ApiFormationClient", () => {
                 Business: "ForeignLimitedLiabilityCompany",
                 BusinessName: formationFormData.businessName,
                 BusinessDesignator: formationFormData.businessSuffix,
-                Naic: userData.profileData.naicsCode,
+                Naic: userData.businesses[userData.currentBusinessID].profileData.naicsCode,
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
@@ -438,7 +438,7 @@ describe("ApiFormationClient", () => {
                 Business: "DomesticForProfitCorporation",
                 BusinessName: formationFormData.businessName,
                 BusinessDesignator: formationFormData.businessSuffix,
-                Naic: userData.profileData.naicsCode,
+                Naic: userData.businesses[userData.currentBusinessID].profileData.naicsCode,
                 TotalShares: 1234,
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
@@ -613,7 +613,7 @@ describe("ApiFormationClient", () => {
                 Business: "ForeignForProfitCorporation",
                 BusinessName: formationFormData.businessName,
                 BusinessDesignator: formationFormData.businessSuffix,
-                Naic: userData.profileData.naicsCode,
+                Naic: userData.businesses[userData.currentBusinessID].profileData.naicsCode,
                 TotalShares: 1234,
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
@@ -839,7 +839,7 @@ describe("ApiFormationClient", () => {
                 Business: "DomesticLimitedLiabilityPartnership",
                 BusinessName: formationFormData.businessName,
                 BusinessDesignator: formationFormData.businessSuffix,
-                Naic: userData.profileData.naicsCode,
+                Naic: userData.businesses[userData.currentBusinessID].profileData.naicsCode,
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
@@ -963,7 +963,7 @@ describe("ApiFormationClient", () => {
                 Business: "ForeignLimitedLiabilityPartnership",
                 BusinessName: formationFormData.businessName,
                 BusinessDesignator: formationFormData.businessSuffix,
-                Naic: userData.profileData.naicsCode,
+                Naic: userData.businesses[userData.currentBusinessID].profileData.naicsCode,
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
@@ -1104,7 +1104,7 @@ describe("ApiFormationClient", () => {
                 Business: "DomesticLimitedPartnership",
                 BusinessName: formationFormData.businessName,
                 BusinessDesignator: formationFormData.businessSuffix,
-                Naic: userData.profileData.naicsCode,
+                Naic: userData.businesses[userData.currentBusinessID].profileData.naicsCode,
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
@@ -1216,7 +1216,7 @@ describe("ApiFormationClient", () => {
       await client.form(userData, "some-url");
       const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
       expect(postBody.Formation.RegisteredAgent.Id).toEqual(
-        userData.formationData.formationFormData.agentNumber
+        userData.businesses[userData.currentBusinessID].formationData.formationFormData.agentNumber
       );
       expect(postBody.Formation.RegisteredAgent.Email).toEqual(undefined);
       expect(postBody.Formation.RegisteredAgent.Name).toEqual(undefined);

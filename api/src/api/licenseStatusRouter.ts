@@ -17,7 +17,8 @@ export const licenseStatusRouterFactory = (
     updateLicenseStatus(userData, nameAndAddress)
       .then(async (userData: UserData) => {
         const updatedUserData = await userDataClient.put(userData);
-        if (!updatedUserData.licenseData || updatedUserData.licenseData.status === "UNKNOWN") {
+        const currentBusiness = updatedUserData.businesses[userData.currentBusinessID]
+        if (!currentBusiness.licenseData || currentBusiness.licenseData.status === "UNKNOWN") {
           res.status(404).json();
           return;
         }

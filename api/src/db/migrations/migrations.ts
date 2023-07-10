@@ -118,6 +118,7 @@ import { migrate_v96_to_v97 } from "./v97_updating_formation_types";
 import { migrate_v97_to_v98 } from "./v98_add_phase_newly_changed";
 import { migrate_v98_to_v99 } from "./v99_added_encrypted_tax_id";
 import { migrate_v8_to_v9 } from "./v9_add_license_status_to_data";
+import { migrate_v118_to_v119 } from "./v119_multiple_businesses";
 
 export type MigrationFunction = (data: any) => any;
 
@@ -240,4 +241,5 @@ export const Migrations: MigrationFunction[] = [
   migrate_v115_to_v116,
   migrate_v116_to_v117,
   migrate_v117_to_v118,
+  migrate_v118_to_v119
 ];

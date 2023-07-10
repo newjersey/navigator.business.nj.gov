@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getCurrentDateISOString } from "@shared/dateHelpers";
 import { LicenseStatusResult, NameAndAddress } from "@shared/license";
-import { TaskProgress, UserData } from "@shared/userData";
+import { Business, TaskProgress, UserData } from "@shared/userData";
 import { convertIndustryToLicenseType } from "../license-status/convertIndustryToLicenseType";
 import { SearchLicenseStatus, UpdateLicenseStatus } from "../types";
 
@@ -14,35 +14,37 @@ const update = (
     completed: boolean;
   }
 ): UserData => {
-  const updatedValues = {
-    taskProgress: {
-      ...userData.taskProgress,
-      "apply-for-shop-license": args.taskStatus,
-      "register-consumer-affairs": args.taskStatus,
-      "pharmacy-license": args.taskStatus,
-      "license-accounting": args.taskStatus,
-      "license-massage-therapy": args.taskStatus,
-      "moving-company-license": args.taskStatus,
-      "architect-license": args.taskStatus,
-      "hvac-license": args.taskStatus,
-      "appraiser-license": args.taskStatus,
-    },
-    licenseData: {
-      nameAndAddress: args.nameAndAddress,
-      completedSearch: args.completed,
-      expirationISO: args.licenseStatusResult.expirationISO,
-      lastUpdatedISO: getCurrentDateISOString(),
-      status: args.licenseStatusResult.status,
-      items: args.licenseStatusResult.checklistItems,
-    },
-  };
+  const currentBusiness = userData.businesses[userData.currentBusinessID]
+  const taskProgress = {
+    ...currentBusiness.taskProgress,
+    "apply-for-shop-license": args.taskStatus,
+    "register-consumer-affairs": args.taskStatus,
+    "pharmacy-license": args.taskStatus,
+    "license-accounting": args.taskStatus,
+    "license-massage-therapy": args.taskStatus,
+    "moving-company-license": args.taskStatus,
+    "architect-license": args.taskStatus,
+    "hvac-license": args.taskStatus,
+    "appraiser-license": args.taskStatus,
+  }
+  const licenseData = {
+    nameAndAddress: args.nameAndAddress,
+    completedSearch: args.completed,
+    expirationISO: args.licenseStatusResult.expirationISO,
+    lastUpdatedISO: getCurrentDateISOString(),
+    status: args.licenseStatusResult.status,
+    items: args.licenseStatusResult.checklistItems,
+  }
 
-  return { ...userData, ...updatedValues };
+  const updatedBusiness: Business = {...currentBusiness, taskProgress, licenseData}
+  const updatedBusinesses: Record<string, Business> = {...userData.businesses, [userData.currentBusinessID]: updatedBusiness}
+
+  return { ...userData, businesses: updatedBusinesses };
 };
 
 export const updateLicenseStatusFactory = (searchLicenseStatus: SearchLicenseStatus): UpdateLicenseStatus => {
   return async (userData: UserData, nameAndAddress: NameAndAddress): Promise<UserData> => {
-    const licenseType = convertIndustryToLicenseType(userData.profileData.industryId);
+    const licenseType = convertIndustryToLicenseType(userData.businesses[userData.currentBusinessID].profileData.industryId);
     return searchLicenseStatus(nameAndAddress, licenseType)
       .then((licenseStatusResult: LicenseStatusResult) => {
         let taskStatus: TaskProgress = "NOT_STARTED";

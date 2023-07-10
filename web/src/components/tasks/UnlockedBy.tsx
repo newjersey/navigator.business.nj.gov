@@ -11,13 +11,13 @@ interface Props {
 }
 
 export const UnlockedBy = (props: Props): ReactElement => {
-  const { userData } = useUserData();
+  const { currentBusiness } = useUserData();
 
   const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
 
   const unlockedByTaskLinks = taskFromRoadmap
     ? taskFromRoadmap.unlockedBy.filter((it) => {
-        return userData?.taskProgress[it.id] !== "COMPLETED";
+        return currentBusiness?.taskProgress[it.id] !== "COMPLETED";
       })
     : [];
 

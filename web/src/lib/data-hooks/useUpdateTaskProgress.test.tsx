@@ -64,7 +64,7 @@ describe("useUpdateTaskProgress", () => {
     await act(() => {
       return updateQueue.update();
     });
-    expect(currentUserData().taskProgress).toEqual({
+    expect(currentUserData().businesses[currentUserData().currentBusinessID].taskProgress).toEqual({
       "some-id": "COMPLETED",
       "some-other-id": "IN_PROGRESS",
     });
@@ -111,12 +111,12 @@ describe("useUpdateTaskProgress", () => {
         return updateQueue.update();
       });
 
-      expect(currentUserData().taskProgress).toEqual({
+      expect(currentUserData().businesses[currentUserData().currentBusinessID]).toEqual({
         [planTaskId]: "COMPLETED",
         [startTaskId]: "COMPLETED",
       });
 
-      expect(currentUserData().preferences.roadmapOpenSections).toEqual([]);
+      expect(currentUserData().businesses[currentUserData().currentBusinessID].preferences.roadmapOpenSections).toEqual([]);
     });
 
     it("closes PLAN roadmap section when complete", async () => {
@@ -145,12 +145,12 @@ describe("useUpdateTaskProgress", () => {
         return updateQueue.update();
       });
 
-      expect(currentUserData().taskProgress).toEqual({
+      expect(currentUserData().businesses[currentUserData().currentBusinessID].taskProgress).toEqual({
         [planTaskId]: "COMPLETED",
         [startTaskId]: "NOT_STARTED",
       });
 
-      expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START"]);
+      expect(currentUserData().businesses[currentUserData().currentBusinessID].preferences.roadmapOpenSections).toEqual(["START"]);
     });
   });
 });

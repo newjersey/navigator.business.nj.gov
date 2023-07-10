@@ -52,6 +52,7 @@ export const setupStatefulUserDataContext = (): void => {
 
     return {
       userData: genericData as UserData | undefined,
+      currentBusiness: (genericData as UserData).businesses[(genericData as UserData).currentBusinessID] || undefined,
       isLoading: false,
       error: undefined,
       updateQueue: updateQueue,

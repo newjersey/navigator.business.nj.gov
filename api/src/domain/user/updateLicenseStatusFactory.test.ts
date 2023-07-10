@@ -55,47 +55,53 @@ describe("updateLicenseStatus", () => {
       expirationISO: "2020-01-01T00:00:00.000Z",
       checklistItems: checklistItems,
     });
+    const currentBusiness = userData.businesses[userData.currentBusinessID]
+    const updatedBusiness = {...currentBusiness, licenseData:  generateLicenseData({
+        expirationISO: getCurrentDate().add(1, "year").subtract(1, "minute").toISOString(),
+      })}
+    const updatedBusinesses = {...userData.businesses, [userData.currentBusinessID]: updatedBusiness}
 
     userData = {
       ...userData,
-      licenseData: generateLicenseData({
-        expirationISO: getCurrentDate().add(1, "year").subtract(1, "minute").toISOString(),
-      }),
+     businesses: updatedBusinesses
     };
 
     const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+    const resultCurrentBusinessLicenseData = resultUserData.businesses[resultUserData.currentBusinessID].licenseData
 
-    expect(resultUserData.licenseData?.nameAndAddress).toEqual(nameAndAddress);
-    expect(resultUserData.licenseData?.completedSearch).toEqual(true);
-    expect(resultUserData.licenseData?.expirationISO).toEqual("2020-01-01T00:00:00.000Z");
+    expect(resultCurrentBusinessLicenseData?.nameAndAddress).toEqual(nameAndAddress);
+    expect(resultCurrentBusinessLicenseData?.completedSearch).toEqual(true);
+    expect(resultCurrentBusinessLicenseData?.expirationISO).toEqual("2020-01-01T00:00:00.000Z");
     expect(
-      parseDate(resultUserData.licenseData?.lastUpdatedISO as string).isSame(getCurrentDate(), "minute")
+      parseDate(resultCurrentBusinessLicenseData?.lastUpdatedISO as string).isSame(getCurrentDate(), "minute")
     ).toEqual(true);
-    expect(resultUserData.licenseData?.status).toEqual("ACTIVE");
-    expect(resultUserData.licenseData?.items).toEqual(checklistItems);
+    expect(resultCurrentBusinessLicenseData?.status).toEqual("ACTIVE");
+    expect(resultCurrentBusinessLicenseData?.items).toEqual(checklistItems);
   });
 
   it("updates the license task status to NOT_STARTED & user license data when NO MATCH", async () => {
     stubSearchLicenseStatus.mockRejectedValue("NO_MATCH");
     const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+    const resultCurrentBusinessLicenseData = resultUserData.businesses[resultUserData.currentBusinessID].licenseData
+    const resultCurrentBusinessTaskProgress = resultUserData.businesses[resultUserData.currentBusinessID].taskProgress
 
-    expect(resultUserData.licenseData?.nameAndAddress).toEqual(nameAndAddress);
-    expect(resultUserData.licenseData?.completedSearch).toEqual(false);
+    expect(resultCurrentBusinessLicenseData?.nameAndAddress).toEqual(nameAndAddress);
+    expect(resultCurrentBusinessLicenseData?.completedSearch).toEqual(false);
     expect(
-      parseDate(resultUserData.licenseData?.lastUpdatedISO as string).isSame(getCurrentDate(), "minute")
+      parseDate(resultCurrentBusinessLicenseData?.lastUpdatedISO as string).isSame(getCurrentDate(), "minute")
     ).toEqual(true);
-    expect(resultUserData.licenseData?.status).toEqual("UNKNOWN");
-    expect(resultUserData.licenseData?.items).toEqual([]);
+    expect(resultCurrentBusinessLicenseData?.status).toEqual("UNKNOWN");
+    expect(resultCurrentBusinessLicenseData?.items).toEqual([]);
 
-    expect(resultUserData.taskProgress["apply-for-shop-license"]).toEqual("NOT_STARTED");
-    expect(resultUserData.taskProgress["register-consumer-affairs"]).toEqual("NOT_STARTED");
-    expect(resultUserData.taskProgress["pharmacy-license"]).toEqual("NOT_STARTED");
-    expect(resultUserData.taskProgress["license-accounting"]).toEqual("NOT_STARTED");
-    expect(resultUserData.taskProgress["license-massage-therapy"]).toEqual("NOT_STARTED");
-    expect(resultUserData.taskProgress["moving-company-license"]).toEqual("NOT_STARTED");
-    expect(resultUserData.taskProgress["architect-license"]).toEqual("NOT_STARTED");
-    expect(resultUserData.taskProgress["hvac-license"]).toEqual("NOT_STARTED");
-    expect(resultUserData.taskProgress["appraiser-license"]).toEqual("NOT_STARTED");
+    expect(resultCurrentBusinessTaskProgress["apply-for-shop-license"]).toEqual("NOT_STARTED");
+    expect(resultCurrentBusinessTaskProgress["register-consumer-affairs"]).toEqual("NOT_STARTED");
+    expect(resultCurrentBusinessTaskProgress["pharmacy-license"]).toEqual("NOT_STARTED");
+    expect(resultCurrentBusinessTaskProgress["license-accounting"]).toEqual("NOT_STARTED");
+    expect(resultCurrentBusinessTaskProgress["license-massage-therapy"]).toEqual("NOT_STARTED");
+    expect(resultCurrentBusinessTaskProgress["moving-company-license"]).toEqual("NOT_STARTED");
+    expect(resultCurrentBusinessTaskProgress["architect-license"]).toEqual("NOT_STARTED");
+    expect(resultCurrentBusinessTaskProgress["hvac-license"]).toEqual("NOT_STARTED");
+    expect(resultCurrentBusinessTaskProgress["appraiser-license"]).toEqual("NOT_STARTED");
   });
 
   it("rejects and still updates user license data when generic error", async () => {
@@ -110,16 +116,17 @@ describe("updateLicenseStatus", () => {
     });
 
     const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+    const resultCurrentBusinessTaskProgress = resultUserData.businesses[resultUserData.currentBusinessID].taskProgress
 
-    expect(resultUserData.taskProgress["apply-for-shop-license"]).toEqual("IN_PROGRESS");
-    expect(resultUserData.taskProgress["register-consumer-affairs"]).toEqual("IN_PROGRESS");
-    expect(resultUserData.taskProgress["pharmacy-license"]).toEqual("IN_PROGRESS");
-    expect(resultUserData.taskProgress["license-accounting"]).toEqual("IN_PROGRESS");
-    expect(resultUserData.taskProgress["license-massage-therapy"]).toEqual("IN_PROGRESS");
-    expect(resultUserData.taskProgress["moving-company-license"]).toEqual("IN_PROGRESS");
-    expect(resultUserData.taskProgress["architect-license"]).toEqual("IN_PROGRESS");
-    expect(resultUserData.taskProgress["hvac-license"]).toEqual("IN_PROGRESS");
-    expect(resultUserData.taskProgress["appraiser-license"]).toEqual("IN_PROGRESS");
+    expect(resultCurrentBusinessTaskProgress["apply-for-shop-license"]).toEqual("IN_PROGRESS");
+    expect(resultCurrentBusinessTaskProgress["register-consumer-affairs"]).toEqual("IN_PROGRESS");
+    expect(resultCurrentBusinessTaskProgress["pharmacy-license"]).toEqual("IN_PROGRESS");
+    expect(resultCurrentBusinessTaskProgress["license-accounting"]).toEqual("IN_PROGRESS");
+    expect(resultCurrentBusinessTaskProgress["license-massage-therapy"]).toEqual("IN_PROGRESS");
+    expect(resultCurrentBusinessTaskProgress["moving-company-license"]).toEqual("IN_PROGRESS");
+    expect(resultCurrentBusinessTaskProgress["architect-license"]).toEqual("IN_PROGRESS");
+    expect(resultCurrentBusinessTaskProgress["hvac-license"]).toEqual("IN_PROGRESS");
+    expect(resultCurrentBusinessTaskProgress["appraiser-license"]).toEqual("IN_PROGRESS");
   });
 
   it("updates the license task status to COMPLETED when license is active", async () => {
@@ -129,15 +136,16 @@ describe("updateLicenseStatus", () => {
     });
 
     const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+    const resultCurrentBusinessTaskProgress = resultUserData.businesses[resultUserData.currentBusinessID].taskProgress
 
-    expect(resultUserData.taskProgress["apply-for-shop-license"]).toEqual("COMPLETED");
-    expect(resultUserData.taskProgress["register-consumer-affairs"]).toEqual("COMPLETED");
-    expect(resultUserData.taskProgress["pharmacy-license"]).toEqual("COMPLETED");
-    expect(resultUserData.taskProgress["license-accounting"]).toEqual("COMPLETED");
-    expect(resultUserData.taskProgress["license-massage-therapy"]).toEqual("COMPLETED");
-    expect(resultUserData.taskProgress["moving-company-license"]).toEqual("COMPLETED");
-    expect(resultUserData.taskProgress["architect-license"]).toEqual("COMPLETED");
-    expect(resultUserData.taskProgress["hvac-license"]).toEqual("COMPLETED");
-    expect(resultUserData.taskProgress["appraiser-license"]).toEqual("COMPLETED");
+    expect(resultCurrentBusinessTaskProgress["apply-for-shop-license"]).toEqual("COMPLETED");
+    expect(resultCurrentBusinessTaskProgress["register-consumer-affairs"]).toEqual("COMPLETED");
+    expect(resultCurrentBusinessTaskProgress["pharmacy-license"]).toEqual("COMPLETED");
+    expect(resultCurrentBusinessTaskProgress["license-accounting"]).toEqual("COMPLETED");
+    expect(resultCurrentBusinessTaskProgress["license-massage-therapy"]).toEqual("COMPLETED");
+    expect(resultCurrentBusinessTaskProgress["moving-company-license"]).toEqual("COMPLETED");
+    expect(resultCurrentBusinessTaskProgress["architect-license"]).toEqual("COMPLETED");
+    expect(resultCurrentBusinessTaskProgress["hvac-license"]).toEqual("COMPLETED");
+    expect(resultCurrentBusinessTaskProgress["appraiser-license"]).toEqual("COMPLETED");
   });
 });

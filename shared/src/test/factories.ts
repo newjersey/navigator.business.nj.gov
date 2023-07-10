@@ -19,7 +19,7 @@ import { MunicipalityDetail } from "../municipality";
 import { IndustrySpecificData, ProfileData } from "../profileData";
 import { arrayOfSectors, SectorType } from "../sector";
 import { TaxFilingCalendarEvent, TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
-import { CURRENT_VERSION, Preferences, UserData } from "../userData";
+import { Business, CURRENT_VERSION, OnboardingFormProgress, Preferences, TaskProgress, UserData } from "../userData";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
 
 export const generateFormationSubmitResponse = (
@@ -274,13 +274,15 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
   };
 };
 
-export const generateUserData = (overrides: Partial<UserData>): UserData => {
+export const generateBusinessData = (overrides: Partial<Business>): Business => {
   const profileData = overrides.profileData ?? generateProfileData({});
-  const formationData: FormationData = publicFilingLegalTypes.includes(
-    profileData.legalStructureId as PublicFilingLegalType
-  )
-    ? generateFormationData({}, profileData.legalStructureId as FormationLegalType)
-    : {
+  let formationData = overrides.formationData
+  if (!formationData) {
+    formationData = publicFilingLegalTypes.includes(
+      profileData.legalStructureId as PublicFilingLegalType
+    )
+      ? generateFormationData({}, profileData.legalStructureId as FormationLegalType)
+      : {
         formationFormData: createEmptyFormationFormData(),
         businessNameAvailability: undefined,
         dbaBusinessNameAvailability: undefined,
@@ -288,27 +290,59 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
         getFilingResponse: undefined,
         completedFilingPayment: false,
         lastVisitedPageIndex: 0,
-      };
+      }
+  }
+
+  return {
+    taskProgress: profileData.employerId ? { "register-for-ein": "COMPLETED" } : {},
+    taskItemChecklist: {},
+    dateCreatedISO: overrides.dateCreatedISO ?? undefined,
+    dateLastUpdatedISO: overrides.dateLastUpdatedISO ?? undefined,
+    formationData: formationData,
+    onboardingFormProgress: "UNSTARTED",
+    profileData: profileData,
+    licenseData: generateLicenseData(overrides.licenseData ?? {}),
+    preferences: generatePreferences(overrides.preferences ?? {}),
+    taxFilingData: generateTaxFilingData(overrides.taxFilingData ?? {}),
+    id: `${randomInt()}`
+  }
+}
+
+export type UserDataOverrides = {
+  profileData?: ProfileData;
+  formationData?: FormationData;
+  user?: BusinessUser;
+  onboardingFormProgress?: Partial<OnboardingFormProgress>;
+  taskProgress?: Record<string, TaskProgress>;
+  taskItemChecklist?: Record<string, boolean>;
+  taxFilingData?: TaxFilingData;
+  licenseData?: LicenseData;
+  preferences?: Preferences;
+  version?: number;
+  lastUpdatedISO?: string;
+  dateCreatedISO?: string;
+  versionWhenCreated?: number;
+}
+
+export const generateUserData = (overrides: UserDataOverrides): UserData => {
+  const business = generateBusinessData({profileData: overrides.profileData, formationData: overrides.formationData, taxFilingData: overrides.taxFilingData, licenseData: overrides.licenseData, preferences: overrides.preferences})
+  const businessID = business.id
+
+  const businesses: Record<string, Business> = {}
+  businesses[business.id] = business
 
   return {
     version: CURRENT_VERSION,
     versionWhenCreated: -1,
-    dateCreatedISO: undefined,
-    lastUpdatedISO: getCurrentDateISOString(),
     user: generateUser({}),
-    onboardingFormProgress: "UNSTARTED",
-    taskProgress: profileData.employerId ? { "register-for-ein": "COMPLETED" } : {},
-    taskItemChecklist: {},
-    licenseData: generateLicenseData({}),
-    preferences: generatePreferences({}),
-    taxFilingData: generateTaxFilingData({}),
-    profileData,
-    formationData,
+    businesses,
+    currentBusinessID: businessID,
     ...overrides,
   };
 };
 
 export const generateMunicipalityDetail = (overrides: Partial<MunicipalityDetail>): MunicipalityDetail => {
+
   return {
     id: `some-id-${randomInt()}`,
     townName: `some-town-name-${randomInt()}`,

@@ -116,6 +116,8 @@ const ProfilePage = (props: Props): ReactElement => {
     return routerType(`${ROUTES.dashboard}${urlParams}`);
   };
 
+  console.log("SAMSEARCH", userData)
+
   useScrollToPathAnchor();
 
   useMountEffectWhenDefined(() => {

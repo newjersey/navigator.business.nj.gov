@@ -131,7 +131,7 @@ describe("<TaxTask />", () => {
       });
       renderPage();
       await waitFor(() => {
-        expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
+        expect(currentUserData().businesses[currentUserData().currentBusinessID].taskProgress[taskId]).toEqual("IN_PROGRESS");
       });
     });
 
@@ -151,7 +151,7 @@ describe("<TaxTask />", () => {
       fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789123" } });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
       await waitFor(() => {
-        expect(currentUserData().profileData.taxId).toEqual("123456789123");
+        expect(currentUserData().businesses[currentUserData().currentBusinessID].profileData.taxId).toEqual("123456789123");
       });
     });
 
@@ -174,7 +174,7 @@ describe("<TaxTask />", () => {
       fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789123" } });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
       await waitFor(() => {
-        expect(currentUserData().taskProgress[taskId]).toEqual("COMPLETED");
+        expect(currentUserData().businesses[currentUserData().currentBusinessID].taskProgress[taskId]).toEqual("COMPLETED");
       });
     });
   });

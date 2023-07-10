@@ -8,7 +8,7 @@ import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
 import { generateRoadmap } from "@/test/factories";
 import { withAuth, withUserDataError } from "@/test/helpers/helpers-renderers";
 import { generateUseUserDataResponse } from "@/test/mock/mockUseUserData";
-import { BusinessUser, generateUser, generateUserData } from "@businessnjgovnavigator/shared/";
+import { Business, BusinessUser, generateUser, generateUserData } from "@businessnjgovnavigator/shared/";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, render, waitFor } from "@testing-library/react";
 import { SWRConfig } from "swr";
@@ -142,7 +142,7 @@ describe("useUserData", () => {
       });
 
       const newProfileData = {
-        ...newUserData.profileData,
+        ...newUserData.businesses[newUserData.currentBusinessID].profileData,
         businessName: "some new name",
       };
 

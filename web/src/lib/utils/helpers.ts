@@ -172,7 +172,7 @@ export const getPhoneNumberFormat = (phoneNumber: string): string => {
 };
 
 export const getFlow = (data: UserData | ProfileData): FlowType => {
-  const persona: BusinessPersona = isUserData(data) ? data.profileData.businessPersona : data.businessPersona;
+  const persona: BusinessPersona = isUserData(data) ? data.businesses[data.currentBusinessID].profileData.businessPersona : data.businessPersona;
 
   return persona || "STARTING";
 };

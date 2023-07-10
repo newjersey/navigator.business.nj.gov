@@ -18,6 +18,7 @@ export type UseRoadmapReturnValue = {
 export const useRoadmap = (): UseRoadmapReturnValue => {
   const { roadmap, setRoadmap } = useContext(RoadmapContext);
   const { userData } = useUserData();
+  const currentBusiness = userData?.businesses[userData?.currentBusinessID]
 
   const sectionNamesInRoadmap = useMemo(() => {
     if (!roadmap) {
@@ -38,8 +39,8 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
   }, userData);
 
   const buildAndSetRoadmap = async (): Promise<void> => {
-    if (userData?.onboardingFormProgress === "COMPLETED") {
-      const roadmap = await buildUserRoadmap(userData.profileData);
+    if (currentBusiness?.onboardingFormProgress === "COMPLETED") {
+      const roadmap = await buildUserRoadmap(currentBusiness.profileData);
       setRoadmap(roadmap);
     }
   };
@@ -89,9 +90,10 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
     section: SectionType,
     taskProgressOverride?: Record<string, TaskProgress>
   ): boolean => {
-    if (!userData) return false;
+    console.log(userData)
+    if (!currentBusiness) return false;
     return tasksInSection(section).every((task) => {
-      const status = taskProgressOverride ? taskProgressOverride[task.id] : userData.taskProgress[task.id];
+      const status = taskProgressOverride ? taskProgressOverride[task.id] : currentBusiness.taskProgress[task.id];
       return status === "COMPLETED";
     });
   };

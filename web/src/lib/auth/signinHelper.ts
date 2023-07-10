@@ -46,18 +46,21 @@ export const onSelfRegister = (
   if (!userData || !updateQueue) {
     return;
   }
+  const currentBusiness = userData.businesses[userData.currentBusinessID]
   setRegistrationAlertStatus("IN_PROGRESS");
   let route;
   if (options?.useReturnToLink) {
-    route = userData.preferences.returnToLink;
+    route = currentBusiness.preferences.returnToLink;
   } else {
     route = router.asPath;
   }
+  const updatedBusiness = {...currentBusiness, preferences: {...currentBusiness.preferences, returnToLink: route || ""}}
+  const updatedBusinesses = {...userData.businesses, [userData.currentBusinessID]: updatedBusiness}
 
   api
     .postSelfReg({
       ...userData,
-      preferences: { ...userData.preferences, returnToLink: route || "" },
+      businesses: updatedBusinesses
     })
     .then(async (response) => {
       await updateQueue.queue(response.userData).update();
@@ -92,8 +95,9 @@ export const onGuestSignIn = async (
   setABExperienceDimension(user.abExperience, true);
   setUserId(user.id, true);
   if (userData) {
-    setAnalyticsDimensions(userData.profileData, true);
-    if (userData.onboardingFormProgress === "UNSTARTED") {
+    const currentBusiness = userData.businesses[userData.currentBusinessID]
+    setAnalyticsDimensions(currentBusiness.profileData, true);
+    if (currentBusiness.onboardingFormProgress === "UNSTARTED") {
       setRegistrationDimension("Began Onboarding");
       push(ROUTES.onboarding);
     } else {

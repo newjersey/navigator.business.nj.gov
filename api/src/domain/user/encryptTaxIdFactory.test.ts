@@ -1,6 +1,7 @@
 import { generateProfileData, generateUserData } from "@shared/test";
 import { EncryptionDecryptionClient, EncryptTaxId } from "../types";
 import { encryptTaxIdFactory } from "./encryptTaxIdFactory";
+import { Business } from "@shared/userData";
 
 describe("encryptTaxId", () => {
   let stubEncryptionDecryptionClient: jest.Mocked<EncryptionDecryptionClient>;
@@ -20,15 +21,14 @@ describe("encryptTaxId", () => {
         encryptedTaxId: undefined,
       }),
     });
+    const currentBusiness = userData.businesses[userData.currentBusinessID]
+    const expectedBusiness : Business = {...currentBusiness, profileData: {...currentBusiness.profileData, taxId: "*******89000", encryptedTaxId: "some-encrypted-value"}}
     const response = await encryptTaxId(userData);
+
     expect(stubEncryptionDecryptionClient.encryptValue).toHaveBeenCalledWith("123456789000");
     expect(response).toEqual({
       ...userData,
-      profileData: {
-        ...userData.profileData,
-        taxId: "*******89000",
-        encryptedTaxId: "some-encrypted-value",
-      },
+      businesses: {[userData.currentBusinessID]: expectedBusiness}
     });
   });
 });

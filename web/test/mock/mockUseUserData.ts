@@ -6,12 +6,12 @@ import {
   generateProfileData,
   generateUserData,
   ProfileData,
-  UserData,
+  UserData, UserDataOverrides
 } from "@businessnjgovnavigator/shared/";
 
 const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
 
-export const useMockUserData = (overrides: Partial<UserData>): void => {
+export const useMockUserData = (overrides: UserDataOverrides): void => {
   setMockUserDataResponse({ userData: generateUserData(overrides) });
 };
 

@@ -21,10 +21,10 @@ interface Props {
 }
 
 export const CertificationElement = (props: { certification: Certification }): ReactElement => {
-  const { userData } = useUserData();
+  const { currentBusiness } = useUserData();
 
   const addNaicsCodeData = (contentMd: string): string => {
-    const naicsCode = userData?.profileData.naicsCode || "";
+    const naicsCode = currentBusiness?.profileData.naicsCode || "";
     const naicsTemplateValue = getNaicsDisplayMd(naicsCode);
     return templateEval(contentMd, { naicsCode: naicsTemplateValue });
   };

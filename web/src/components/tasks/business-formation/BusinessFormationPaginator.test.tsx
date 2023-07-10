@@ -29,6 +29,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
   DateObject,
   defaultDateFormat,
   FormationFormData,
@@ -39,7 +40,7 @@ import {
   generateProfileData,
   generateUserData,
   getCurrentDate,
-  ProfileData,
+  ProfileData
 } from "@businessnjgovnavigator/shared/";
 import {
   generateFormationFormData,
@@ -302,7 +303,7 @@ describe("<BusinessFormationPaginator />", () => {
         fireEvent.click(screen.getByText(Config.formation.fields.provisions.addAnotherButtonText));
         page.fillText("Provisions 2", "provision2");
         switchStepFunction();
-        expect(currentUserData().formationData.formationFormData.provisions).toEqual(["provision2"]);
+        expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.formationFormData.provisions).toEqual(["provision2"]);
         await page.stepperClickToBusinessStep();
         expect(screen.getByLabelText("remove provision")).toBeInTheDocument();
       });
@@ -313,7 +314,7 @@ describe("<BusinessFormationPaginator />", () => {
           await page.stepperClickToBusinessNameStep();
           page.fillText("Search business name", "Pizza Joint");
           switchStepFunction();
-          expect(currentUserData().formationData.formationFormData.businessName).toEqual("Pizza Joint");
+          expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.formationFormData.businessName).toEqual("Pizza Joint");
 
           await page.stepperClickToBusinessNameStep();
           expect((screen.getByLabelText("Search business name") as HTMLInputElement).value).toEqual(
@@ -339,7 +340,7 @@ describe("<BusinessFormationPaginator />", () => {
           page.fillText("Search business name", "Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
           switchStepFunction();
-          expect(currentUserData().profileData.businessName).toEqual("Pizza Joint");
+          expect(currentUserData().businesses[currentUserData().currentBusinessID].profileData.businessName).toEqual("Pizza Joint");
         });
 
         it("does not save name to profile when unavailable", async () => {
@@ -348,8 +349,8 @@ describe("<BusinessFormationPaginator />", () => {
           page.fillText("Search business name", "Pizza Joint");
           await page.searchBusinessName({ status: "UNAVAILABLE" });
           switchStepFunction();
-          expect(currentUserData().profileData.businessName).toEqual(
-            initialUserData.profileData.businessName
+          expect(currentUserData().businesses[currentUserData().currentBusinessID].profileData.businessName).toEqual(
+            initialUserData.businesses[initialUserData.currentBusinessID].profileData.businessName
           );
         });
 
@@ -359,20 +360,19 @@ describe("<BusinessFormationPaginator />", () => {
           page.fillText("Search business name", "Pizza Joint LLC");
           await page.searchBusinessName({ status: "DESIGNATOR_ERROR" });
           switchStepFunction();
-          expect(currentUserData().profileData.businessName).toEqual(
-            initialUserData.profileData.businessName
+          expect(currentUserData().businesses[currentUserData().currentBusinessID].profileData.businessName).toEqual(
+            initialUserData.businesses[initialUserData.currentBusinessID].profileData.businessName
           );
         });
       });
 
       describe("business step", () => {
         it("saves municipality to profile", async () => {
+          const businessWithMunicipality: Business = {...initialUserData.businesses[initialUserData.currentBusinessID], profileData: {...initialUserData.businesses[initialUserData.currentBusinessID].profileData, municipality: generateMunicipality({ displayName: "Newark", name: "Newark" })}}
+          const businessesWithMunicipality: Record<string, Business> = {...initialUserData.businesses, [initialUserData.currentBusinessID]: businessWithMunicipality}
           const userDataWithMunicipality = {
             ...initialUserData,
-            profileData: {
-              ...initialUserData.profileData,
-              municipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
-            },
+            businesses: businessesWithMunicipality
           };
           const page = preparePage(userDataWithMunicipality, displayContent, [
             generateMunicipality({ displayName: "New Town", name: "New Town" }),
@@ -386,22 +386,21 @@ describe("<BusinessFormationPaginator />", () => {
           );
           switchStepFunction();
           await waitFor(() => {
-            expect(currentUserData().profileData.municipality?.displayName).toEqual("New Town");
+            expect(currentUserData().businesses[currentUserData().currentBusinessID].profileData.municipality?.displayName).toEqual("New Town");
           });
-          expect(currentUserData().formationData.formationFormData.addressMunicipality?.displayName).toEqual(
+          expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.formationFormData.addressMunicipality?.displayName).toEqual(
             "New Town"
           );
         });
 
         it("send analytics when municipality entered for first time", async () => {
           const newTownMuncipality = generateMunicipality({ displayName: "New Town" });
+          const businessWithMunicipality: Business = {...initialUserData.businesses[initialUserData.currentBusinessID], profileData: {...initialUserData.businesses[initialUserData.currentBusinessID].profileData, municipality: undefined}}
+          const businessesWithMunicipality: Record<string, Business> = {...initialUserData.businesses, [initialUserData.currentBusinessID]: businessWithMunicipality}
 
           const userDataWithMunicipality = {
             ...initialUserData,
-            profileData: {
-              ...initialUserData.profileData,
-              municipality: undefined,
-            },
+            businesses: businessesWithMunicipality
           };
 
           const page = preparePage(userDataWithMunicipality, displayContent, [newTownMuncipality]);
@@ -411,7 +410,7 @@ describe("<BusinessFormationPaginator />", () => {
 
           switchStepFunction();
           await waitFor(() => {
-            expect(currentUserData().profileData.municipality?.displayName).toEqual("New Town");
+            expect(currentUserData().businesses[currentUserData().currentBusinessID].profileData.municipality?.displayName).toEqual("New Town");
           });
 
           expect(
@@ -420,12 +419,11 @@ describe("<BusinessFormationPaginator />", () => {
         });
 
         it("does not send analytics when municipality was already entered", async () => {
+          const businessWithMunicipality: Business = {...initialUserData.businesses[initialUserData.currentBusinessID], profileData: {...initialUserData.businesses[initialUserData.currentBusinessID].profileData, municipality: generateMunicipality({ displayName: "Newark" })}}
+          const businessesWithMunicipality: Record<string, Business> = {...initialUserData.businesses, [initialUserData.currentBusinessID]: businessWithMunicipality}
           const userDataWithMunicipality = {
             ...initialUserData,
-            profileData: {
-              ...initialUserData.profileData,
-              municipality: generateMunicipality({ displayName: "Newark" }),
-            },
+            businesses: businessesWithMunicipality
           };
 
           const page = preparePage(userDataWithMunicipality, displayContent, [
@@ -436,7 +434,7 @@ describe("<BusinessFormationPaginator />", () => {
 
           switchStepFunction();
           await waitFor(() => {
-            expect(currentUserData().profileData.municipality?.displayName).toEqual("New Town");
+            expect(currentUserData().businesses[currentUserData().currentBusinessID].profileData.municipality?.displayName).toEqual("New Town");
           });
 
           expect(
@@ -586,15 +584,14 @@ describe("<BusinessFormationPaginator />", () => {
       let filledInUserData: UserData;
 
       beforeEach(() => {
+        const business: Business = {...initialUserData.businesses[initialUserData.currentBusinessID], formationData: {...filledInUserData.businesses[initialUserData.currentBusinessID].formationData, formationFormData: generateFormationFormData(
+          {},
+          { legalStructureId: "limited-liability-company" }
+        )}}
+        const businesses = {...initialUserData.businesses, [initialUserData.currentBusinessID]: business}
         filledInUserData = {
           ...initialUserData,
-          formationData: {
-            ...initialUserData.formationData,
-            formationFormData: generateFormationFormData(
-              {},
-              { legalStructureId: "limited-liability-company" }
-            ),
-          },
+         businesses
         };
       });
 
@@ -641,20 +638,20 @@ describe("<BusinessFormationPaginator />", () => {
           it("shows error alert and error state on step associated with businessName API error", async () => {
             const { formationFormData, formationResponse, formationStepName } = businessName;
 
+            const business: Business = {...initialUserData.businesses[initialUserData.currentBusinessID], formationData: {...initialUserData.businesses[initialUserData.currentBusinessID].formationData, formationFormData}}
+            const businesses: Record<string, Business> = {...initialUserData.businesses, [initialUserData.currentBusinessID]: business}
+
             filledInUserData = {
               ...initialUserData,
-              formationData: {
-                ...initialUserData.formationData,
-                formationFormData: formationFormData,
-              },
+              businesses
             };
+
+            const businessWithApiResponse: Business = {...filledInUserData.businesses[filledInUserData.currentBusinessID], formationData: {...filledInUserData.businesses[filledInUserData.currentBusinessID].formationData, formationResponse}}
+            const businessesWithApiResponse: Record<string, Business> = {...filledInUserData.businesses, [filledInUserData.currentBusinessID]: businessWithApiResponse}
 
             const filledInUserDataWithApiResponse = {
               ...filledInUserData,
-              formationData: {
-                ...filledInUserData.formationData,
-                formationResponse,
-              },
+             businesses: businessesWithApiResponse
             };
 
             const page = preparePage(filledInUserData, displayContent);
@@ -669,20 +666,21 @@ describe("<BusinessFormationPaginator />", () => {
 
           it("shows API error message on step for businessName API error", async () => {
             const { formationFormData, formationResponse, fieldName } = businessName;
+
+            const business: Business = {...initialUserData.businesses[initialUserData.currentBusinessID], formationData: {...initialUserData.businesses[initialUserData.currentBusinessID].formationData, formationFormData}}
+            const businesses: Record<string, Business> = {...initialUserData.businesses, [initialUserData.currentBusinessID]: business}
+
             filledInUserData = {
               ...initialUserData,
-              formationData: {
-                ...initialUserData.formationData,
-                formationFormData,
-              },
+              businesses: businesses
             };
+
+            const businessWithApiResponse: Business = {...filledInUserData.businesses[filledInUserData.currentBusinessID], formationData: {...filledInUserData.businesses[filledInUserData.currentBusinessID].formationData, formationResponse}}
+            const businessesWithApiResponse: Record<string, Business> = {...filledInUserData.businesses, [filledInUserData.currentBusinessID]: businessWithApiResponse}
 
             const filledInUserDataWithApiResponse = {
               ...filledInUserData,
-              formationData: {
-                ...filledInUserData.formationData,
-                formationResponse,
-              },
+             businesses: businessesWithApiResponse
             };
             const page = preparePage(filledInUserData, displayContent);
             await page.fillAndSubmitBusinessNameStep();
@@ -701,19 +699,20 @@ describe("<BusinessFormationPaginator />", () => {
           it("removes businessName API error on blur when user changes text field", async () => {
             const { formationFormData, formationResponse, formationStepName, fieldLabel, newTextInput } =
               businessName;
+            const business: Business = {...initialUserData.businesses[initialUserData.currentBusinessID], formationData: {...initialUserData.businesses[initialUserData.currentBusinessID].formationData, formationFormData}}
+            const businesses: Record<string, Business> = {...initialUserData.businesses, [initialUserData.currentBusinessID]: business}
+
             filledInUserData = {
               ...initialUserData,
-              formationData: {
-                ...initialUserData.formationData,
-                formationFormData,
-              },
+             businesses
             };
+
+            const businessWithApiResponse: Business = {...filledInUserData.businesses[filledInUserData.currentBusinessID], formationData: {...filledInUserData.businesses[filledInUserData.currentBusinessID].formationData, formationResponse}}
+            const businessesWithApiResponse: Record<string, Business> = {...filledInUserData.businesses, [filledInUserData.currentBusinessID]: businessWithApiResponse}
+
             const filledInUserDataWithApiResponse = {
               ...filledInUserData,
-              formationData: {
-                ...filledInUserData.formationData,
-                formationResponse,
-              },
+              businesses: businessesWithApiResponse
             };
             const page = preparePage(filledInUserData, displayContent);
             await page.fillAndSubmitBusinessNameStep();
@@ -1314,6 +1313,8 @@ describe("<BusinessFormationPaginator />", () => {
             "shows error alert and error state on step associated with %o API error",
             async (testTitle, data) => {
               const { formationFormData, formationResponse, formationStepName, profileData } = data;
+
+              const filledInBusiness: Business = {...initialUserData.businesses[initialUserData.currentBusinessID], profileData: profileData ? { ...profileData } : { ...initialUserData.businesses[initialUserData.currentBusinessID].profileData }}
 
               filledInUserData = {
                 ...initialUserData,
@@ -2089,7 +2090,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
       page.fillText("Search business name", "Pizza Joint");
       await waitFor(() =>
-        expect(currentUserData().formationData.formationFormData.businessName).toEqual("Pizza Joint")
+        expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.formationFormData.businessName).toEqual("Pizza Joint")
       );
     });
 
@@ -2114,7 +2115,7 @@ describe("<BusinessFormationPaginator />", () => {
       await page.searchBusinessName({ status: "UNAVAILABLE" });
       expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
       await waitFor(() => {
-        expect(currentUserData().formationData.businessNameAvailability?.status).toEqual("UNAVAILABLE");
+        expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.businessNameAvailability?.status).toEqual("UNAVAILABLE");
       });
     });
 
@@ -2137,10 +2138,10 @@ describe("<BusinessFormationPaginator />", () => {
 
       fireEvent.click(screen.getByText(Config.formation.fields.provisions.addButtonText));
 
-      await waitFor(() => expect(currentUserData().formationData.formationFormData.provisions).toEqual([""]));
+      await waitFor(() => expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.formationFormData.provisions).toEqual([""]));
       await page.stepperClickToContactsStep();
       await page.stepperClickToBusinessStep();
-      expect(currentUserData().formationData.formationFormData.provisions).toEqual([]);
+      expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.formationFormData.provisions).toEqual([]);
     });
 
     it("does not autosave if a field has changed but less than 1 second has passed", () => {
@@ -2163,7 +2164,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
       makeChangeToForm(page);
       await waitFor(() =>
-        expect(currentUserData().formationData.formationFormData.businessName).toEqual("Pizza Joint")
+        expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.formationFormData.businessName).toEqual("Pizza Joint")
       );
 
       expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();
@@ -2220,7 +2221,7 @@ describe("<BusinessFormationPaginator />", () => {
       preparePage(initialUserData, displayContent);
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
       await waitFor(() => {
-        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(0);
+        expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.lastVisitedPageIndex).toEqual(0);
       });
     });
 
@@ -2240,12 +2241,12 @@ describe("<BusinessFormationPaginator />", () => {
 
       await page.stepperClickToBillingStep();
       await waitFor(() => {
-        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(3);
+        expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.lastVisitedPageIndex).toEqual(3);
       });
 
       await page.stepperClickToBusinessStep();
       await waitFor(() => {
-        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(1);
+        expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.lastVisitedPageIndex).toEqual(1);
       });
     });
 
@@ -2253,31 +2254,31 @@ describe("<BusinessFormationPaginator />", () => {
       preparePage(initialUserData, displayContent);
 
       await waitFor(() => {
-        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(0);
+        expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.lastVisitedPageIndex).toEqual(0);
       });
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("next-button"));
       await waitFor(() => {
-        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(1);
+        expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.lastVisitedPageIndex).toEqual(1);
       });
       expect(screen.getByTestId("business-step")).toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("next-button"));
       await waitFor(() => {
-        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(2);
+        expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.lastVisitedPageIndex).toEqual(2);
       });
       expect(screen.getByTestId("contacts-step")).toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("previous-button"));
       await waitFor(() => {
-        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(1);
+        expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.lastVisitedPageIndex).toEqual(1);
       });
       expect(screen.getByTestId("business-step")).toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("previous-button"));
       await waitFor(() => {
-        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(0);
+        expect(currentUserData().businesses[currentUserData().currentBusinessID].formationData.lastVisitedPageIndex).toEqual(0);
       });
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
     });

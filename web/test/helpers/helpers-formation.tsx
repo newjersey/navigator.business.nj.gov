@@ -18,6 +18,7 @@ import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
   castPublicFilingLegalTypeToFormationType,
   createEmptyFormationFormData,
   DateObject,
@@ -32,6 +33,7 @@ import {
   publicFilingLegalTypes,
   randomInt,
   UserData,
+  UserDataOverrides
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
@@ -67,7 +69,7 @@ export const useSetupInitialMocks = (): void => {
 };
 
 export const preparePage = (
-  userData: Partial<UserData>,
+  userData: UserDataOverrides,
   displayContent: TasksDisplayContent,
   municipalities?: Municipality[],
   task?: Task,
@@ -93,16 +95,18 @@ export const preparePage = (
           formationFormData: createEmptyFormationFormData(),
         }),
   });
+  const initialFormationData = initialUserData.businesses[initialUserData.currentBusinessID].formationData
   const internalMunicipalities = [
     profileData?.municipality ?? generateMunicipality({ displayName: "GenericTown" }),
     ...(municipalities ?? []),
   ];
-  initialUserData.formationData.formationFormData.addressMunicipality &&
-    internalMunicipalities.push(initialUserData.formationData.formationFormData.addressMunicipality);
-  initialUserData.formationData.formationFormData.agentOfficeAddressMunicipality &&
+  initialFormationData.formationFormData.addressMunicipality &&
+    internalMunicipalities.push(initialFormationData.formationFormData.addressMunicipality);
+  initialFormationData.formationFormData.agentOfficeAddressMunicipality &&
     internalMunicipalities.push(
-      initialUserData.formationData.formationFormData.agentOfficeAddressMunicipality
+      initialFormationData.formationFormData.agentOfficeAddressMunicipality
     );
+
   render(
     withAuthAlert(
       <MunicipalitiesContext.Provider value={{ municipalities: internalMunicipalities }}>
@@ -129,12 +133,11 @@ export const preparePage = (
 export const mockApiResponse = (response?: FormationSubmitResponse): void => {
   const mockApi = api as jest.Mocked<typeof api>;
   mockApi.postBusinessFormation.mockImplementation((userData) => {
+    const updatedCurrentBusiness: Business = {...userData.businesses[userData.currentBusinessID], formationData: {...userData.businesses[userData.currentBusinessID].formationData, formationResponse: response}}
+    const updatedBusinesses: Record<string, Business> = {...userData.businesses, [userData.currentBusinessID]: updatedCurrentBusiness}
     return Promise.resolve({
       ...userData,
-      formationData: {
-        ...userData.formationData,
-        formationResponse: response,
-      },
+      businesses: updatedBusinesses
     });
   });
 };

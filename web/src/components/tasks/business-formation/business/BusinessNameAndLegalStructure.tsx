@@ -44,14 +44,16 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
   };
 
   const legalStructureName = (): string => {
-    if (!userData || !userData.profileData.legalStructureId) return "";
+    if (!userData?.businesses[userData.currentBusinessID].profileData.legalStructureId) return "";
     const preface =
-      userData?.profileData.businessPersona === "FOREIGN"
+      userData.businesses[userData.currentBusinessID]?.profileData.businessPersona === "FOREIGN"
         ? `${Config.formation.legalStructure.foreignPrefaceText} `
         : "";
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const legalStructure = (Config.formation.legalStructure as any)[userData.profileData.legalStructureId];
+    const legalStructureId = userData.businesses[userData.currentBusinessID].profileData.legalStructureId
+    if (!legalStructureId) return "";
+    const legalStructure = (Config.formation.legalStructure as any)[legalStructureId];
     return `${preface} ${legalStructure}`;
   };
 

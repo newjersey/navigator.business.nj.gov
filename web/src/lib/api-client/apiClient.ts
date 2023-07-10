@@ -8,7 +8,8 @@ const apiBaseUrl = process.env.API_BASE_URL || "";
 
 export const getUserData = (id: string): Promise<UserData> => {
   return get<UserData>(`/users/${id}`).then((userData) => {
-    setPhaseDimension(userData.profileData.operatingPhase);
+    const currentBusiness = userData.businesses[userData.currentBusinessID]
+    setPhaseDimension(currentBusiness.profileData.operatingPhase);
     return userData;
   });
 };
