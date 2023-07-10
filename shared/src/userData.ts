@@ -1,3 +1,4 @@
+import { Business, createEmptyBusiness } from "./business";
 import { BusinessUser } from "./businessUser";
 import { createEmptyFormationFormData, FormationData } from "./formationData";
 import { LicenseData } from "./license";
@@ -19,6 +20,30 @@ export interface UserData {
   dateCreatedISO: string | undefined;
   versionWhenCreated: number;
 }
+
+export interface UserDataPrime {
+  readonly user: BusinessUser;
+  readonly businesses: Record<string, Business>;
+  version: number;
+  versionWhenCreated: number;
+  currentBusinessID: string;
+}
+
+export type LegacyUserDataOverrides = {
+  profileData?: ProfileData;
+  formationData?: FormationData;
+  user?: BusinessUser;
+  onboardingFormProgress?: Partial<OnboardingFormProgress>;
+  taskProgress?: Record<string, TaskProgress>;
+  taskItemChecklist?: Record<string, boolean>;
+  taxFilingData?: TaxFilingData;
+  licenseData?: LicenseData;
+  preferences?: Preferences;
+  version?: number;
+  lastUpdatedISO?: string;
+  dateCreatedISO?: string;
+  versionWhenCreated?: number;
+};
 
 export const CURRENT_VERSION = 118;
 
@@ -61,6 +86,16 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
       dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     },
+  };
+};
+
+export const createEmptyUserDataPrime = (user: BusinessUser): UserDataPrime => {
+  return {
+    version: CURRENT_VERSION,
+    user: user,
+    businesses: { abc: createEmptyBusiness() },
+    versionWhenCreated: CURRENT_VERSION,
+    currentBusinessID: "abc",
   };
 };
 

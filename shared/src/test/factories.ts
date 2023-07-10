@@ -1,4 +1,5 @@
 import { randomElementFromArray } from "../arrayHelpers";
+import { Business } from "../business";
 import { BusinessUser } from "../businessUser";
 import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
@@ -19,7 +20,7 @@ import { MunicipalityDetail } from "../municipality";
 import { IndustrySpecificData, ProfileData } from "../profileData";
 import { arrayOfSectors, SectorType } from "../sector";
 import { TaxFilingCalendarEvent, TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
-import { CURRENT_VERSION, Preferences, UserData } from "../userData";
+import { CURRENT_VERSION, LegacyUserDataOverrides, Preferences, UserData, UserDataPrime } from "../userData";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
 
 export const generateFormationSubmitResponse = (
@@ -305,6 +306,61 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     profileData,
     formationData,
     ...overrides,
+  };
+};
+
+export const generateUserDataPrime = (overrides: LegacyUserDataOverrides): UserDataPrime => {
+  const business = generateBusinessData({
+    profileData: overrides.profileData,
+    formationData: overrides.formationData,
+    taxFilingData: overrides.taxFilingData,
+    licenseData: overrides.licenseData,
+    preferences: overrides.preferences,
+  });
+  const businessID = business.id;
+
+  const businesses: Record<string, Business> = {};
+  businesses[business.id] = business;
+
+  return {
+    version: CURRENT_VERSION,
+    versionWhenCreated: -1,
+    user: generateUser({}),
+    businesses,
+    currentBusinessID: businessID,
+    ...overrides,
+  };
+};
+
+export const generateBusinessData = (overrides: Partial<Business>): Business => {
+  const profileData = overrides.profileData ?? generateProfileData({});
+  let formationData = overrides.formationData;
+  if (!formationData) {
+    formationData = publicFilingLegalTypes.includes(profileData.legalStructureId as PublicFilingLegalType)
+      ? generateFormationData({}, profileData.legalStructureId as FormationLegalType)
+      : {
+          formationFormData: createEmptyFormationFormData(),
+          businessNameAvailability: undefined,
+          dbaBusinessNameAvailability: undefined,
+          formationResponse: undefined,
+          getFilingResponse: undefined,
+          completedFilingPayment: false,
+          lastVisitedPageIndex: 0,
+        };
+  }
+
+  return {
+    taskProgress: profileData.employerId ? { "register-for-ein": "COMPLETED" } : {},
+    taskItemChecklist: {},
+    dateCreatedISO: overrides.dateCreatedISO ?? undefined,
+    dateLastUpdatedISO: overrides.dateLastUpdatedISO ?? undefined,
+    formationData: formationData,
+    onboardingFormProgress: "UNSTARTED",
+    profileData: profileData,
+    licenseData: generateLicenseData(overrides.licenseData ?? {}),
+    preferences: generatePreferences(overrides.preferences ?? {}),
+    taxFilingData: generateTaxFilingData(overrides.taxFilingData ?? {}),
+    id: `${randomInt()}`,
   };
 };
 
