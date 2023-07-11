@@ -15,7 +15,8 @@ describe("deadlinks page [feature] [all] [group3]", () => {
 
     it("allows the user to login", () => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      cy.get('input[data-testid="mgmt-password-field"]').clear().type("Test1!");
+      cy.get('input[data-testid="mgmt-password-field"]').clear();
+      cy.get('input[data-testid="mgmt-password-field"]').type("Test1!");
       cy.get('button[data-testid="mgmt-submit-bttn"]').click();
       cy.get('[data-testid="dl-task-header"]').should("exist");
     });
@@ -36,7 +37,8 @@ describe("deadlinks page [feature] [all] [group3]", () => {
 
     it("allows the user to login", () => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      cy.get('input[data-testid="mgmt-password-field"]').clear().type("Test1!");
+      cy.get('input[data-testid="mgmt-password-field"]').clear();
+      cy.get('input[data-testid="mgmt-password-field"]').type("Test1!");
       cy.get('button[data-testid="mgmt-submit-bttn"]').click();
       cy.get('[data-testid="dl-task-header"]').should("exist");
     });
