@@ -156,7 +156,7 @@
     "@types/simple-oauth2": "5.0.4",
     "@types/supertest": "2.0.12",
     "@types/testing-library__jest-dom": "5.14.7",
-    "@types/uuid": "9.0.1",
+    "@types/uuid": "9.0.2",
     "@types/webpack-node-externals": "3.0.0",
     "@types/xml2js": "0.4.11",
     "@typescript-eslint/eslint-plugin": "5.61.0",
