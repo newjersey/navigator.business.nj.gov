@@ -1,4 +1,9 @@
 ---
+notesMd: >-
+  https://dev.azure.com/NJInnovation/Business%20First%20Stop/_boards/board/t/Research%20and%20Content/Discovery%20Stories/?workitem=2868
+
+
+  Draft: https://docs.google.com/document/d/1J427TU2MFzfznhfhWYhC9oC5-IUgVUAeBfMeX8iGxwg/edit 
 urlSlug: cosmetologist
 name: "Get a Cosmetology License "
 webflowName: "Cosmetologist: Cosmetologist License"
