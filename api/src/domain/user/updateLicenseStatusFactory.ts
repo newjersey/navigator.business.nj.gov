@@ -1,22 +1,26 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { Business } from "@shared/business";
+import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
 import { LicenseStatusResult, NameAndAddress } from "@shared/license";
-import { TaskProgress, UserData } from "@shared/userData";
+import { TaskProgress, UserDataPrime } from "@shared/userData";
 import { convertIndustryToLicenseType } from "../license-status/convertIndustryToLicenseType";
 import { SearchLicenseStatus, UpdateLicenseStatus } from "../types";
 
 const update = (
-  userData: UserData,
+  userData: UserDataPrime,
   args: {
     nameAndAddress: NameAndAddress;
     taskStatus: TaskProgress;
     licenseStatusResult: LicenseStatusResult;
     completed: boolean;
   }
-): UserData => {
-  const updatedValues = {
+): UserDataPrime => {
+  const currentBusiness = getCurrentBusinessForUser(userData);
+  const updatedBusiness: Business = {
+    ...currentBusiness,
     taskProgress: {
-      ...userData.taskProgress,
+      ...currentBusiness.taskProgress,
       "apply-for-shop-license": args.taskStatus,
       "register-consumer-affairs": args.taskStatus,
       "pharmacy-license": args.taskStatus,
@@ -37,12 +41,14 @@ const update = (
     },
   };
 
-  return { ...userData, ...updatedValues };
+  return getUserDataWithUpdatedCurrentBusiness(userData, updatedBusiness);
 };
 
 export const updateLicenseStatusFactory = (searchLicenseStatus: SearchLicenseStatus): UpdateLicenseStatus => {
-  return async (userData: UserData, nameAndAddress: NameAndAddress): Promise<UserData> => {
-    const licenseType = convertIndustryToLicenseType(userData.profileData.industryId);
+  return async (userData: UserDataPrime, nameAndAddress: NameAndAddress): Promise<UserDataPrime> => {
+    const licenseType = convertIndustryToLicenseType(
+      getCurrentBusinessForUser(userData).profileData.industryId
+    );
     return searchLicenseStatus(nameAndAddress, licenseType)
       .then((licenseStatusResult: LicenseStatusResult) => {
         let taskStatus: TaskProgress = "NOT_STARTED";

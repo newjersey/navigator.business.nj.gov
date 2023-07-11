@@ -1,4 +1,4 @@
-import { UserData } from "@shared/userData";
+import { UserDataPrime } from "@shared/userData";
 import { Router } from "express";
 import { getAnnualFilings } from "../domain/annual-filings/getAnnualFilings";
 import { TimeStampBusinessSearch } from "../domain/types";
@@ -7,7 +7,7 @@ export const guestRouterFactory = (timeStampBusinessSearch: TimeStampBusinessSea
   const router = Router();
 
   router.post("/annualFilings", async (req, res) => {
-    res.json(getAnnualFilings(req.body as UserData));
+    res.json(getAnnualFilings(req.body as UserDataPrime));
   });
 
   router.get("/business-name-availability", async (req, res) => {

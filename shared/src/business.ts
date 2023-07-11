@@ -2,12 +2,11 @@ import { createEmptyFormationFormData, FormationData } from "./formationData";
 import { LicenseData } from "./license";
 import { createEmptyProfileData, ProfileData } from "./profileData";
 import { TaxFilingData } from "./taxFiling";
-import { OnboardingFormProgress, Preferences, TaskProgress } from "./userData";
 
 export interface Business {
   id: string;
   dateCreatedISO: string | undefined;
-  dateLastUpdatedISO: string | undefined;
+  lastUpdatedISO: string | undefined;
   profileData: ProfileData;
   onboardingFormProgress: OnboardingFormProgress;
   taskProgress: Record<string, TaskProgress>;
@@ -25,7 +24,7 @@ export const createEmptyBusiness = (): Business => {
     taskProgress: {},
     taskItemChecklist: {},
     licenseData: undefined,
-    dateLastUpdatedISO: undefined,
+    lastUpdatedISO: undefined,
     dateCreatedISO: undefined,
     taxFilingData: {
       state: undefined,
@@ -57,3 +56,22 @@ export const createEmptyBusiness = (): Business => {
     id: "",
   };
 };
+
+export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
+
+export interface Preferences {
+  roadmapOpenSections: SectionType[];
+  roadmapOpenSteps: number[];
+  hiddenFundingIds: string[];
+  hiddenCertificationIds: string[];
+  visibleSidebarCards: string[];
+  returnToLink: string;
+  isCalendarFullView: boolean;
+  isHideableRoadmapOpen: boolean;
+  phaseNewlyChanged: boolean;
+}
+
+export type OnboardingFormProgress = "UNSTARTED" | "COMPLETED";
+
+export const sectionNames = ["PLAN", "START"] as const;
+export type SectionType = (typeof sectionNames)[number];

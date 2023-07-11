@@ -1,22 +1,27 @@
+import { Business } from "@shared/business";
+import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
 import { businessStructureTaskId, formationTaskId, taxTaskId } from "@shared/domain-logic/taskIds";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { OperatingPhaseId } from "@shared/operatingPhase";
 import { BusinessPersona, ForeignBusinessType } from "@shared/profileData";
-import { TaskProgress, UserData } from "@shared/userData";
+import { TaskProgress, UserDataPrime } from "@shared/userData";
 import { UpdateOperatingPhase } from "../types";
 
-export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): UserData => {
-  const originalPhase = userData.profileData.operatingPhase;
-  const isPublicFiling = LookupLegalStructureById(userData.profileData.legalStructureId).requiresPublicFiling;
-  let updatedIsHideableRoadmapOpen: boolean = userData.preferences.isHideableRoadmapOpen;
+export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserDataPrime): UserDataPrime => {
+  const currentBusiness = getCurrentBusinessForUser(userData);
+  const originalPhase = currentBusiness.profileData.operatingPhase;
+  const isPublicFiling = LookupLegalStructureById(
+    currentBusiness.profileData.legalStructureId
+  ).requiresPublicFiling;
+  let updatedIsHideableRoadmapOpen: boolean = currentBusiness.preferences.isHideableRoadmapOpen;
 
   const newPhase = getNewPhase({
-    businessPersona: userData.profileData.businessPersona,
-    foreignBusinessType: userData.profileData.foreignBusinessType,
-    taskProgress: userData.taskProgress,
+    businessPersona: currentBusiness.profileData.businessPersona,
+    foreignBusinessType: currentBusiness.profileData.foreignBusinessType,
+    taskProgress: currentBusiness.taskProgress,
     isPublicFiling: isPublicFiling,
     currentPhase: originalPhase,
-    legalStructureId: userData.profileData.legalStructureId,
+    legalStructureId: currentBusiness.profileData.legalStructureId,
   });
 
   const phaseHasChanged = newPhase !== originalPhase;
@@ -24,18 +29,19 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): 
     updatedIsHideableRoadmapOpen = false;
   }
 
-  return {
-    ...userData,
+  const updatedBusiness: Business = {
+    ...currentBusiness,
     profileData: {
-      ...userData.profileData,
+      ...currentBusiness.profileData,
       operatingPhase: newPhase,
     },
     preferences: {
-      ...userData.preferences,
+      ...currentBusiness.preferences,
       isHideableRoadmapOpen: updatedIsHideableRoadmapOpen,
-      phaseNewlyChanged: phaseHasChanged || userData.preferences.phaseNewlyChanged,
+      phaseNewlyChanged: phaseHasChanged || currentBusiness.preferences.phaseNewlyChanged,
     },
   };
+  return getUserDataWithUpdatedCurrentBusiness(userData, updatedBusiness);
 };
 
 const getNewPhase = ({

@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+import { Business } from "@shared/business";
+import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
 import {
   generateFormationData,
@@ -7,6 +9,7 @@ import {
   generateGetFilingResponse,
   generateProfileData,
   generateUserData,
+  generateUserDataPrime,
 } from "@shared/test";
 import { Express } from "express";
 import request from "supertest";
@@ -150,7 +153,7 @@ describe("formationRouter", () => {
       const getFilingResponse = generateGetFilingResponse({ success: true });
       stubFormationClient.getCompletedFiling.mockResolvedValue(getFilingResponse);
 
-      const userData = generateUserData({
+      const userData = generateUserDataPrime({
         formationData: generateFormationData({
           formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
         }),
@@ -166,30 +169,32 @@ describe("formationRouter", () => {
       const response = await request(app).get(`/completed-filing`).send();
 
       expect(response.status).toEqual(200);
-
-      const expectedNewUserData = {
-        ...userData,
+      const currentBusiness = getCurrentBusinessForUser(userData);
+      const expectedNewBusinessData: Business = {
+        ...currentBusiness,
         formationData: {
-          ...userData.formationData,
+          ...currentBusiness.formationData,
           getFilingResponse: getFilingResponse,
         },
         taskProgress: {
-          ...userData.taskProgress,
+          ...currentBusiness.taskProgress,
           [formationTaskId]: "COMPLETED",
         },
         profileData: {
-          ...userData.profileData,
+          ...currentBusiness.profileData,
           entityId: getFilingResponse.entityId,
-          dateOfFormation: userData.formationData.formationFormData.businessStartDate,
-          businessName: userData.formationData.formationFormData.businessName,
+          dateOfFormation: currentBusiness.formationData.formationFormData.businessStartDate,
+          businessName: currentBusiness.formationData.formationFormData.businessName,
           documents: {
-            ...userData.profileData.documents,
+            ...currentBusiness.profileData.documents,
             formationDoc: `http://us-east-1:identityId/formationDoc-1487076708000.pdf`,
             certifiedDoc: `http://us-east-1:identityId/certifiedDoc-1487076708000.pdf`,
             standingDoc: `http://us-east-1:identityId/standingDoc-1487076708000.pdf`,
           },
         },
       };
+
+      const expectedNewUserData = getUserDataWithUpdatedCurrentBusiness(userData, expectedNewBusinessData);
       expect(fakeSaveFileFromUrl).toHaveBeenCalledWith(
         getFilingResponse.formationDoc,
         `us-east-1:identityId/formationDoc-1487076708000.pdf`,
@@ -204,7 +209,7 @@ describe("formationRouter", () => {
       const getFilingResponse = generateGetFilingResponse({ success: false });
       stubFormationClient.getCompletedFiling.mockResolvedValue(getFilingResponse);
 
-      const userData = generateUserData({
+      const userData = generateUserDataPrime({
         formationData: generateFormationData({
           formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
         }),
@@ -219,20 +224,24 @@ describe("formationRouter", () => {
       stubUserDataClient.get.mockResolvedValue(userData);
       await request(app).get(`/completed-filing`).send();
 
-      expect(stubUserDataClient.put).toHaveBeenCalledWith({
-        ...userData,
+      const currentBusiness = getCurrentBusinessForUser(userData);
+      const expectedBusiness: Business = {
+        ...currentBusiness,
         formationData: {
-          ...userData.formationData,
+          ...currentBusiness.formationData,
           getFilingResponse: getFilingResponse,
         },
-      });
+      };
+      const expectedUserData = getUserDataWithUpdatedCurrentBusiness(userData, expectedBusiness);
+
+      expect(stubUserDataClient.put).toHaveBeenCalledWith(expectedUserData);
     });
 
     it("only fetches files that are in the filingResponse", async () => {
       const getFilingResponse = generateGetFilingResponse({ success: true, certifiedDoc: "" });
       stubFormationClient.getCompletedFiling.mockResolvedValue(getFilingResponse);
 
-      const userData = generateUserData({
+      const userData = generateUserDataPrime({
         formationData: generateFormationData({
           formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
         }),
@@ -247,28 +256,31 @@ describe("formationRouter", () => {
       stubUserDataClient.get.mockResolvedValue(userData);
       await request(app).get(`/completed-filing`).send();
 
-      const expectedNewUserData = {
-        ...userData,
+      const currentBusiness = getCurrentBusinessForUser(userData);
+      const expectedNewBusinessData: Business = {
+        ...currentBusiness,
         formationData: {
-          ...userData.formationData,
+          ...currentBusiness.formationData,
           getFilingResponse: getFilingResponse,
         },
         taskProgress: {
-          ...userData.taskProgress,
+          ...currentBusiness.taskProgress,
           [formationTaskId]: "COMPLETED",
         },
         profileData: {
-          ...userData.profileData,
+          ...currentBusiness.profileData,
           entityId: getFilingResponse.entityId,
-          dateOfFormation: userData.formationData.formationFormData.businessStartDate,
-          businessName: userData.formationData.formationFormData.businessName,
+          dateOfFormation: currentBusiness.formationData.formationFormData.businessStartDate,
+          businessName: currentBusiness.formationData.formationFormData.businessName,
           documents: {
-            ...userData.profileData.documents,
+            ...currentBusiness.profileData.documents,
             formationDoc: `http://us-east-1:identityId/formationDoc-1487076708000.pdf`,
             standingDoc: `http://us-east-1:identityId/standingDoc-1487076708000.pdf`,
           },
         },
       };
+
+      const expectedNewUserData = getUserDataWithUpdatedCurrentBusiness(userData, expectedNewBusinessData);
 
       expect(fakeSaveFileFromUrl).toHaveBeenCalledWith(
         getFilingResponse.formationDoc,

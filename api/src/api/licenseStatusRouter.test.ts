@@ -3,7 +3,7 @@ import {
   generateLicenseData,
   generateLicenseStatusItem,
   generateNameAndAddress,
-  generateUserData,
+  generateUserDataPrime,
 } from "@shared/test";
 import { Express } from "express";
 import { UserDataClient } from "src/domain/types";
@@ -55,7 +55,7 @@ describe("licenseStatusRouter", () => {
       items: [generateLicenseStatusItem({})],
       status: "PENDING",
     });
-    const userData = generateUserData({ licenseData });
+    const userData = generateUserDataPrime({ licenseData });
     stubUpdateLicenseStatus.mockResolvedValue(userData);
 
     const nameAndAddress = generateNameAndAddress({});
@@ -73,7 +73,7 @@ describe("licenseStatusRouter", () => {
       items: [],
       status: "UNKNOWN",
     });
-    const userData = generateUserData({ licenseData });
+    const userData = generateUserDataPrime({ licenseData });
     stubUpdateLicenseStatus.mockResolvedValue(userData);
 
     const response = await request(app).post(`/license-status`).send(generateNameAndAddress({}));

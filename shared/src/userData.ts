@@ -27,6 +27,8 @@ export interface UserDataPrime {
   version: number;
   versionWhenCreated: number;
   currentBusinessID: string;
+  lastUpdatedISO: string | undefined;
+  dateCreatedISO: string | undefined;
 }
 
 export type LegacyUserDataOverrides = {
@@ -96,6 +98,8 @@ export const createEmptyUserDataPrime = (user: BusinessUser): UserDataPrime => {
     businesses: { abc: createEmptyBusiness() },
     versionWhenCreated: CURRENT_VERSION,
     currentBusinessID: "abc",
+    lastUpdatedISO: undefined,
+    dateCreatedISO: undefined,
   };
 };
 

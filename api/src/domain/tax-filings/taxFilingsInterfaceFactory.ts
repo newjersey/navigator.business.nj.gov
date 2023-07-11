@@ -1,10 +1,12 @@
-import { UserData } from "@shared/userData";
+import { Business } from "@shared/business";
+import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
+import { UserDataPrime } from "@shared/userData";
 import dayjs from "dayjs";
 import { TaxFilingClient, TaxFilingInterface } from "../types";
 import { fetchMunicipalityByName } from "../user/fetchMunicipalityByName";
 
 type taxFilingInterfaceRequest = {
-  userData: UserData;
+  userData: UserDataPrime;
   taxId: string;
   businessName: string;
 };
@@ -14,7 +16,8 @@ const isThisYear = (dueDate: string): boolean => {
 };
 
 export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient): TaxFilingInterface => {
-  const lookup = async (request: taxFilingInterfaceRequest): Promise<UserData> => {
+  const lookup = async (request: taxFilingInterfaceRequest): Promise<UserDataPrime> => {
+    const currentBusiness = getCurrentBusinessForUser(request.userData);
     const { state, filings, taxCity, naicsCode } = await apiTaxFilingClient.lookup({
       taxId: request.taxId,
       businessName: request.businessName,
@@ -22,7 +25,7 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
 
     const shouldSwitchToCalendarGridView = (): boolean => {
       const maxFilingsInCurrentYearListView = 5;
-      const prevFilingsThisYear = request.userData.taxFilingData.filings.filter((it) =>
+      const prevFilingsThisYear = currentBusiness.taxFilingData.filings.filter((it) =>
         isThisYear(it.dueDate)
       );
       const prevFilingsCountBelowMax = prevFilingsThisYear.length <= maxFilingsInCurrentYearListView;
@@ -33,11 +36,11 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
     };
 
     const now = new Date(Date.now()).toISOString();
-    let profileDataToReturn = request.userData.profileData;
+    let profileDataToReturn = currentBusiness.profileData;
 
     if (naicsCode) {
       profileDataToReturn = {
-        ...request.userData.profileData,
+        ...currentBusiness.profileData,
         naicsCode: naicsCode,
       };
     }
@@ -56,28 +59,30 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
         };
       }
     }
-    return {
-      ...request.userData,
+
+    const updatedBusiness: Business = {
+      ...currentBusiness,
       profileData: profileDataToReturn,
       preferences: {
-        ...request.userData.preferences,
+        ...currentBusiness.preferences,
         isCalendarFullView: shouldSwitchToCalendarGridView()
           ? true
-          : request.userData.preferences.isCalendarFullView,
+          : currentBusiness.preferences.isCalendarFullView,
       },
       taxFilingData: {
-        ...request.userData.taxFilingData,
+        ...currentBusiness.taxFilingData,
         businessName: request.businessName,
         lastUpdatedISO: now,
-        registeredISO: state === "SUCCESS" ? request.userData.taxFilingData.registeredISO ?? now : undefined,
-        errorField: state === "SUCCESS" ? undefined : request.userData.taxFilingData.errorField,
+        registeredISO: state === "SUCCESS" ? currentBusiness.taxFilingData.registeredISO ?? now : undefined,
+        errorField: state === "SUCCESS" ? undefined : currentBusiness.taxFilingData.errorField,
         state: state,
-        filings: state === "SUCCESS" ? filings : request.userData.taxFilingData.filings,
+        filings: state === "SUCCESS" ? filings : currentBusiness.taxFilingData.filings,
       },
     };
+    return getUserDataWithUpdatedCurrentBusiness(request.userData, updatedBusiness);
   };
 
-  const onboarding = async (request: taxFilingInterfaceRequest): Promise<UserData> => {
+  const onboarding = async (request: taxFilingInterfaceRequest): Promise<UserDataPrime> => {
     const response = await apiTaxFilingClient.onboarding({
       taxId: request.taxId,
       email: request.userData.user.email,
@@ -90,16 +95,18 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
       }
       case "API_ERROR":
       case "FAILED": {
-        return {
-          ...request.userData,
+        const previousBusiness = getCurrentBusinessForUser(request.userData);
+        const updatedBusiness: Business = {
+          ...previousBusiness,
           taxFilingData: {
-            ...request.userData.taxFilingData,
+            ...previousBusiness.taxFilingData,
             registeredISO: undefined,
             state: response.state,
             errorField: response.errorField,
             businessName: request.businessName,
           },
         };
+        return getUserDataWithUpdatedCurrentBusiness(request.userData, updatedBusiness);
       }
     }
   };

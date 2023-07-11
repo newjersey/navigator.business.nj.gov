@@ -1,9 +1,11 @@
+import { Business } from "@shared/business";
+import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
 import {
   generateProfileData,
   generateTaxFilingCalendarEvent,
   generateTaxFilingData,
   generateUser,
-  generateUserData,
+  generateUserDataPrime,
   getFirstAnnualFiling,
   getSecondAnnualFiling,
   getThirdAnnualFiling,
@@ -15,7 +17,7 @@ describe("getAnnualFilings", () => {
   it("calculates 3 new annual filing datea and updates them for dateOfFormation", async () => {
     const formationDate = "2021-03-01";
 
-    const postedUserData = generateUserData({
+    const postedUserData = generateUserDataPrime({
       user: generateUser({ id: "123" }),
       profileData: generateProfileData({
         dateOfFormation: "2021-03-01",
@@ -28,24 +30,27 @@ describe("getAnnualFilings", () => {
     });
 
     const response = getAnnualFilings(postedUserData);
-
-    expect(response).toEqual({
-      ...postedUserData,
+    const currentBusiness = getCurrentBusinessForUser(postedUserData);
+    const expectedBusiness: Business = {
+      ...currentBusiness,
       taxFilingData: {
-        ...postedUserData.taxFilingData,
+        ...currentBusiness.taxFilingData,
         filings: generateAnnualFilings([
           getFirstAnnualFiling(formationDate),
           getSecondAnnualFiling(formationDate),
           getThirdAnnualFiling(formationDate),
         ]),
       },
-    });
+    };
+    const expectedUserData = getUserDataWithUpdatedCurrentBusiness(postedUserData, expectedBusiness);
+
+    expect(response).toEqual(expectedUserData);
   });
 
   it("calculates 3 new annual filing dates and overrides existing dates if needed", async () => {
     const formationDate = "2021-03-01";
 
-    const postedUserData = generateUserData({
+    const postedUserData = generateUserDataPrime({
       user: generateUser({ id: "123" }),
       profileData: generateProfileData({
         dateOfFormation: formationDate,
@@ -58,24 +63,27 @@ describe("getAnnualFilings", () => {
     });
 
     const response = getAnnualFilings(postedUserData);
-
-    expect(response).toEqual({
-      ...postedUserData,
+    const currentBusiness = getCurrentBusinessForUser(postedUserData);
+    const expectedBusiness: Business = {
+      ...currentBusiness,
       taxFilingData: {
-        ...postedUserData.taxFilingData,
+        ...currentBusiness.taxFilingData,
         filings: generateAnnualFilings([
           getFirstAnnualFiling(formationDate),
           getSecondAnnualFiling(formationDate),
           getThirdAnnualFiling(formationDate),
         ]),
       },
-    });
+    };
+    const expectedUserData = getUserDataWithUpdatedCurrentBusiness(postedUserData, expectedBusiness);
+
+    expect(response).toEqual(expectedUserData);
   });
 
   it("calculates 3 new annual filing dates and updates them for dateOfFormation when there is no legalStructureId", async () => {
     const formationDate = "2021-03-01";
 
-    const postedUserData = generateUserData({
+    const postedUserData = generateUserDataPrime({
       user: generateUser({ id: "123" }),
       profileData: generateProfileData({
         dateOfFormation: formationDate,
@@ -88,22 +96,25 @@ describe("getAnnualFilings", () => {
     });
 
     const response = getAnnualFilings(postedUserData);
-
-    expect(response).toEqual({
-      ...postedUserData,
+    const currentBusiness = getCurrentBusinessForUser(postedUserData);
+    const expectedBusiness: Business = {
+      ...currentBusiness,
       taxFilingData: {
-        ...postedUserData.taxFilingData,
+        ...currentBusiness.taxFilingData,
         filings: generateAnnualFilings([
           getFirstAnnualFiling(formationDate),
           getSecondAnnualFiling(formationDate),
           getThirdAnnualFiling(formationDate),
         ]),
       },
-    });
+    };
+    const expectedUserData = getUserDataWithUpdatedCurrentBusiness(postedUserData, expectedBusiness);
+
+    expect(response).toEqual(expectedUserData);
   });
 
   it("removes the annual filing object if the users industry does not require public filings", async () => {
-    const postedUserData = generateUserData({
+    const postedUserData = generateUserDataPrime({
       user: generateUser({ id: "123" }),
       profileData: generateProfileData({
         dateOfFormation: "2021-03-01",
@@ -116,12 +127,13 @@ describe("getAnnualFilings", () => {
     });
 
     const response = getAnnualFilings(postedUserData);
+    const currentBusiness = getCurrentBusinessForUser(response);
+    const expectedBusiness: Business = {
+      ...currentBusiness,
+      taxFilingData: generateTaxFilingData({ filings: [] }),
+    };
+    const expectedUserData = getUserDataWithUpdatedCurrentBusiness(response, expectedBusiness);
 
-    expect(response).toEqual({
-      ...postedUserData,
-      taxFilingData: generateTaxFilingData({
-        filings: [],
-      }),
-    });
+    expect(response).toEqual(expectedUserData);
   });
 });

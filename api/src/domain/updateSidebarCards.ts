@@ -1,10 +1,13 @@
+import { Business } from "@shared/business";
+import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
 import { isFieldAnswered, OPPORTUNITY_FIELDS } from "@shared/domain-logic/opportunityFields";
-import { UserData } from "@shared/userData";
+import { UserDataPrime } from "@shared/userData";
 import { UpdateSidebarCards } from "./types";
 
-export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): UserData => {
-  let cards = userData.preferences.visibleSidebarCards;
-  const operatingPhase = userData.profileData.operatingPhase;
+export const updateSidebarCards: UpdateSidebarCards = (userData: UserDataPrime): UserDataPrime => {
+  const currentBusiness = getCurrentBusinessForUser(userData);
+  let cards = currentBusiness.preferences.visibleSidebarCards;
+  const operatingPhase = currentBusiness.profileData.operatingPhase;
 
   const showCard = (id: string): void => {
     const allCardsExceptDesired = cards.filter((cardId: string) => {
@@ -50,7 +53,7 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
 
   if (operatingPhase === "UP_AND_RUNNING_OWNING" || operatingPhase === "GUEST_MODE_OWNING") {
     const isEveryOpportunityFieldAnswered = OPPORTUNITY_FIELDS.every((field) => {
-      return isFieldAnswered(field, userData.profileData);
+      return isFieldAnswered(field, currentBusiness.profileData);
     });
     if (isEveryOpportunityFieldAnswered) {
       hideCard("go-to-profile");
@@ -69,11 +72,12 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
     hideCard("welcome-up-and-running");
   }
 
-  return {
-    ...userData,
+  const updatedBusiness: Business = {
+    ...currentBusiness,
     preferences: {
-      ...userData.preferences,
+      ...currentBusiness.preferences,
       visibleSidebarCards: cards,
     },
   };
+  return getUserDataWithUpdatedCurrentBusiness(userData, updatedBusiness);
 };

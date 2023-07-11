@@ -1,8 +1,10 @@
+import { Business } from "@shared/business";
+import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
 import { createEmptyFormationFormData } from "@shared/formationData";
-import { createEmptyUserData, UserData } from "@shared/userData";
+import { createEmptyUserDataPrime, UserDataPrime } from "@shared/userData";
 import { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
 import { getAnnualFilings } from "../domain/annual-filings/getAnnualFilings";
@@ -45,43 +47,43 @@ const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean => {
   return parseDate(lastCheckedDate).isBefore(getCurrentDate().subtract(1, "hour"));
 };
 
-const clearTaskItemChecklists = (userData: UserData): UserData => {
-  return {
-    ...userData,
-    taskItemChecklist: {},
-  };
+const clearTaskItemChecklists = (userData: UserDataPrime): UserDataPrime => {
+  const updatedBusiness: Business = { ...getCurrentBusinessForUser(userData), taskItemChecklist: {} };
+  return getUserDataWithUpdatedCurrentBusiness(userData, updatedBusiness);
 };
 
-const shouldCheckLicense = (userData: UserData): boolean => {
+const shouldCheckLicense = (userData: UserDataPrime): boolean => {
+  const currentBusiness = getCurrentBusinessForUser(userData);
   return (
-    userData.licenseData !== undefined &&
-    industryHasALicenseType(userData.profileData.industryId) &&
-    hasBeenMoreThanOneHour(userData.licenseData.lastUpdatedISO)
+    currentBusiness.licenseData !== undefined &&
+    industryHasALicenseType(currentBusiness.profileData.industryId) &&
+    hasBeenMoreThanOneHour(currentBusiness.licenseData.lastUpdatedISO)
   );
 };
 
-const shouldUpdateBusinessNameSearch = (userData: UserData): boolean => {
+const shouldUpdateBusinessNameSearch = (userData: UserDataPrime): boolean => {
+  const currentBusiness = getCurrentBusinessForUser(userData);
   if (
-    !userData.formationData.businessNameAvailability?.lastUpdatedTimeStamp &&
-    !userData.formationData.dbaBusinessNameAvailability?.lastUpdatedTimeStamp
+    !currentBusiness.formationData.businessNameAvailability?.lastUpdatedTimeStamp &&
+    !currentBusiness.formationData.dbaBusinessNameAvailability?.lastUpdatedTimeStamp
   ) {
     return false;
   }
 
   const dbaNameIsOlderThanAnHour =
-    userData.profileData.nexusDbaName !== undefined &&
-    userData.formationData.dbaBusinessNameAvailability !== undefined &&
-    hasBeenMoreThanOneHour(userData.formationData.dbaBusinessNameAvailability.lastUpdatedTimeStamp);
+    currentBusiness.profileData.nexusDbaName !== undefined &&
+    currentBusiness.formationData.dbaBusinessNameAvailability !== undefined &&
+    hasBeenMoreThanOneHour(currentBusiness.formationData.dbaBusinessNameAvailability.lastUpdatedTimeStamp);
 
   const businessNameIsOlderThanAnHour =
-    userData.profileData.businessName !== undefined &&
-    userData.formationData.businessNameAvailability !== undefined &&
-    hasBeenMoreThanOneHour(userData.formationData.businessNameAvailability.lastUpdatedTimeStamp);
+    currentBusiness.profileData.businessName !== undefined &&
+    currentBusiness.formationData.businessNameAvailability !== undefined &&
+    hasBeenMoreThanOneHour(currentBusiness.formationData.businessNameAvailability.lastUpdatedTimeStamp);
 
-  const isDba = userData.profileData.needsNexusDbaName;
+  const isDba = currentBusiness.profileData.needsNexusDbaName;
   const shouldUpdateNameAvailability = isDba ? dbaNameIsOlderThanAnHour : businessNameIsOlderThanAnHour;
 
-  return shouldUpdateNameAvailability && userData.formationData.completedFilingPayment !== true;
+  return shouldUpdateNameAvailability && currentBusiness.formationData.completedFilingPayment !== true;
 };
 
 export const getSignedInUser = (req: Request): CognitoJWTPayload => {
@@ -96,12 +98,15 @@ export const getSignedInUserId = (req: Request): string => {
   return myNJIdentityPayload?.userId || signedInUser.sub;
 };
 
-const legalStructureHasChanged = (oldUserData: UserData, newUserData: UserData): boolean => {
-  return oldUserData.profileData.legalStructureId !== newUserData.profileData.legalStructureId;
+const legalStructureHasChanged = (oldUserData: UserDataPrime, newUserData: UserDataPrime): boolean => {
+  return (
+    getCurrentBusinessForUser(oldUserData).profileData.legalStructureId !==
+    getCurrentBusinessForUser(newUserData).profileData.legalStructureId
+  );
 };
 
-const businessHasFormed = (userData: UserData): boolean => {
-  return userData.formationData.getFilingResponse?.success ?? false;
+const businessHasFormed = (userData: UserDataPrime): boolean => {
+  return getCurrentBusinessForUser(userData).formationData.getFilingResponse?.success ?? false;
 };
 
 export const userRouterFactory = (
@@ -124,7 +129,7 @@ export const userRouterFactory = (
 
     userDataClient
       .get(req.params.userId)
-      .then(async (userData: UserData) => {
+      .then(async (userData: UserDataPrime) => {
         let updatedUserData = userData;
         updatedUserData = await updateBusinessNameSearchIfNeeded(updatedUserData);
         updatedUserData = updateOperatingPhase(updatedUserData);
@@ -147,7 +152,7 @@ export const userRouterFactory = (
   });
 
   router.post("/users", async (req, res) => {
-    let userData = req.body as UserData;
+    let userData = req.body as UserDataPrime;
     const postedUserBodyId = userData.user.id;
 
     if (getSignedInUserId(req) !== postedUserBodyId) {
@@ -168,7 +173,7 @@ export const userRouterFactory = (
 
     userDataClient
       .put(userData)
-      .then((result: UserData) => {
+      .then((result: UserDataPrime) => {
         res.json(result);
       })
       .catch((error) => {
@@ -176,16 +181,19 @@ export const userRouterFactory = (
       });
   });
 
-  const industryHasChanged = async (userData: UserData): Promise<boolean> => {
+  const industryHasChanged = async (userData: UserDataPrime): Promise<boolean> => {
     try {
       const oldUserData = await userDataClient.get(userData.user.id);
-      return oldUserData.profileData.industryId !== userData.profileData.industryId;
+      const oldBusinessData = getCurrentBusinessForUser(oldUserData);
+      const currentBusinessData = getCurrentBusinessForUser(userData);
+
+      return oldBusinessData.profileData.industryId !== currentBusinessData.profileData.industryId;
     } catch {
       return false;
     }
   };
 
-  const updateLegalStructureIfNeeded = async (userData: UserData): Promise<UserData> => {
+  const updateLegalStructureIfNeeded = async (userData: UserDataPrime): Promise<UserDataPrime> => {
     let oldUserData;
     try {
       oldUserData = await userDataClient.get(userData.user.id);
@@ -194,27 +202,36 @@ export const userRouterFactory = (
     }
 
     if (legalStructureHasChanged(oldUserData, userData)) {
-      // prevent legal structure from changing is business has been formed
-      userData = businessHasFormed(oldUserData)
-        ? {
-            ...userData,
-            profileData: {
-              ...userData.profileData,
-              legalStructureId: oldUserData.profileData.legalStructureId,
-            },
-          }
-        : {
-            ...userData,
-            formationData: {
-              formationResponse: undefined,
-              getFilingResponse: undefined,
-              completedFilingPayment: false,
-              formationFormData: createEmptyFormationFormData(),
-              businessNameAvailability: undefined,
-              dbaBusinessNameAvailability: undefined,
-              lastVisitedPageIndex: 0,
-            },
-          };
+      // prevent legal structure from changing if business has been formed
+
+      if (businessHasFormed(oldUserData)) {
+        const oldBusiness = getCurrentBusinessForUser(oldUserData);
+        const currentBusiness = getCurrentBusinessForUser(userData);
+        const updatedBusiness: Business = {
+          ...currentBusiness,
+          profileData: {
+            ...currentBusiness.profileData,
+            legalStructureId: oldBusiness.profileData.legalStructureId,
+          },
+        };
+
+        return getUserDataWithUpdatedCurrentBusiness(userData, updatedBusiness);
+      }
+
+      const currentBusiness: Business = {
+        ...getCurrentBusinessForUser(userData),
+        formationData: {
+          formationResponse: undefined,
+          getFilingResponse: undefined,
+          completedFilingPayment: false,
+          formationFormData: createEmptyFormationFormData(),
+          businessNameAvailability: undefined,
+          dbaBusinessNameAvailability: undefined,
+          lastVisitedPageIndex: 0,
+        },
+      };
+
+      return getUserDataWithUpdatedCurrentBusiness(userData, currentBusiness);
     }
 
     return userData;
@@ -223,7 +240,7 @@ export const userRouterFactory = (
   const saveEmptyUserData = (req: Request, res: Response, signedInUserId: string): void => {
     const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
 
-    const emptyUserData = createEmptyUserData({
+    const emptyUserData = createEmptyUserDataPrime({
       myNJUserKey: signedInUserId,
       email: signedInUser.email,
       id: signedInUserId,
@@ -244,14 +261,17 @@ export const userRouterFactory = (
       });
   };
 
-  const updateBusinessNameSearchIfNeeded = async (userData: UserData): Promise<UserData> => {
+  const updateBusinessNameSearchIfNeeded = async (userData: UserDataPrime): Promise<UserDataPrime> => {
     if (!shouldUpdateBusinessNameSearch(userData)) {
       return userData;
     }
     try {
-      const isForeign = userData.profileData.businessPersona === "FOREIGN";
-      const needsDba = userData.profileData.needsNexusDbaName;
-      const nameToSearch = needsDba ? userData.profileData.nexusDbaName : userData.profileData.businessName;
+      const currentBusiness = getCurrentBusinessForUser(userData);
+      const isForeign = currentBusiness.profileData.businessPersona === "FOREIGN";
+      const needsDba = currentBusiness.profileData.needsNexusDbaName;
+      const nameToSearch = needsDba
+        ? currentBusiness.profileData.nexusDbaName
+        : currentBusiness.profileData.businessName;
       const response = await timeStampBusinessSearch.search(nameToSearch);
 
       const nameAvailability: NameAvailability = {
@@ -264,33 +284,36 @@ export const userRouterFactory = (
       const nameIsAvailable = response.status === "AVAILABLE";
       const needsNexusDbaName = isForeign && !needsDba ? !nameIsAvailable : needsDba;
 
-      return {
-        ...userData,
+      const updatedBusiness: Business = {
+        ...currentBusiness,
         profileData: {
-          ...userData.profileData,
+          ...currentBusiness.profileData,
           needsNexusDbaName,
         },
         formationData: {
-          ...userData.formationData,
+          ...currentBusiness.formationData,
           businessNameAvailability: needsDba
-            ? userData.formationData.businessNameAvailability
+            ? currentBusiness.formationData.businessNameAvailability
             : nameAvailability,
           dbaBusinessNameAvailability: needsDba
             ? nameAvailability
-            : userData.formationData.dbaBusinessNameAvailability,
+            : currentBusiness.formationData.dbaBusinessNameAvailability,
         },
       };
+
+      return getUserDataWithUpdatedCurrentBusiness(userData, updatedBusiness);
     } catch {
       return userData;
     }
   };
 
-  const asyncUpdateAndSaveLicenseStatusIfNeeded = async (userData: UserData): Promise<void> => {
-    if (!userData.licenseData || !shouldCheckLicense(userData)) {
+  const asyncUpdateAndSaveLicenseStatusIfNeeded = async (userData: UserDataPrime): Promise<void> => {
+    const currentBusinessLicenseData = getCurrentBusinessForUser(userData).licenseData;
+    if (!currentBusinessLicenseData || !shouldCheckLicense(userData)) {
       return;
     }
     try {
-      const updatedUserData = await updateLicenseStatus(userData, userData.licenseData.nameAndAddress);
+      const updatedUserData = await updateLicenseStatus(userData, currentBusinessLicenseData.nameAndAddress);
       await userDataClient.put(updatedUserData);
     } catch {
       return;
@@ -300,9 +323,11 @@ export const userRouterFactory = (
   return router;
 };
 
-const setLastUpdatedISO = (userData: UserData): UserData => {
-  return {
-    ...userData,
+const setLastUpdatedISO = (userData: UserDataPrime): UserDataPrime => {
+  const updatedBusiness: Business = {
+    ...getCurrentBusinessForUser(userData),
     lastUpdatedISO: getCurrentDateISOString(),
   };
+  const updatedUserData: UserDataPrime = { ...userData, lastUpdatedISO: getCurrentDateISOString() };
+  return getUserDataWithUpdatedCurrentBusiness(updatedUserData, updatedBusiness);
 };

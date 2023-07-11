@@ -1,3 +1,5 @@
+import { Business } from "@shared/business";
+import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import {
@@ -5,7 +7,7 @@ import {
   generateProfileData,
   generateTaxFilingData,
   generateUser,
-  generateUserData,
+  generateUserDataPrime,
   getFirstAnnualFiling,
   getSecondAnnualFiling,
   getThirdAnnualFiling,
@@ -37,7 +39,7 @@ describe("guestRouter", () => {
     it("calculates 3 new annual filing dates and updates them for dateOfFormation", async () => {
       const formationDate = "2021-03-01";
 
-      const postedUserData = generateUserData({
+      const postedUserData = generateUserDataPrime({
         user: generateUser({ id: "123" }),
         profileData: generateProfileData({
           dateOfFormation: formationDate,
@@ -50,18 +52,20 @@ describe("guestRouter", () => {
       });
 
       const response = await request(app).post(`/annualFilings`).send(postedUserData);
-
-      expect(response.body).toEqual({
-        ...postedUserData,
+      const postedUserDataBusiness = getCurrentBusinessForUser(postedUserData);
+      const expectedBusiness: Business = {
+        ...postedUserDataBusiness,
         taxFilingData: {
-          ...postedUserData.taxFilingData,
+          ...postedUserDataBusiness.taxFilingData,
           filings: generateAnnualFilings([
             getFirstAnnualFiling(formationDate),
             getSecondAnnualFiling(formationDate),
             getThirdAnnualFiling(formationDate),
           ]),
         },
-      });
+      };
+      const expectedUserData = getUserDataWithUpdatedCurrentBusiness(postedUserData, expectedBusiness);
+      expect(response.body).toEqual(expectedUserData);
     });
   });
 

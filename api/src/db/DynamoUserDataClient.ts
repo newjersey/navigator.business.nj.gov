@@ -4,7 +4,7 @@
 import { ExecuteStatementCommand, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
-import { CURRENT_VERSION, UserData } from "@shared/userData";
+import { CURRENT_VERSION, UserDataPrime } from "@shared/userData";
 import { UserDataClient } from "../domain/types";
 import { MigrationFunction, Migrations } from "./migrations/migrations";
 
@@ -34,13 +34,13 @@ const migrateUserData = (data: any): any => {
 };
 
 export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: string): UserDataClient => {
-  const doMigration = async (data: any): Promise<UserData> => {
+  const doMigration = async (data: any): Promise<UserDataPrime> => {
     const migratedData = migrateUserData(data);
     await put(migratedData);
     return migratedData;
   };
 
-  const findByEmail = (email: string): Promise<UserData | undefined> => {
+  const findByEmail = (email: string): Promise<UserDataPrime | undefined> => {
     const params: QueryCommandInput = {
       TableName: tableName,
       IndexName: "EmailIndex",
@@ -63,7 +63,7 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
       });
   };
 
-  const get = (userId: string): Promise<UserData> => {
+  const get = (userId: string): Promise<UserDataPrime> => {
     const params = {
       TableName: tableName,
       Key: {
@@ -84,7 +84,7 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
       });
   };
 
-  const put = (userData: UserData): Promise<UserData> => {
+  const put = (userData: UserDataPrime): Promise<UserDataPrime> => {
     const migratedData = migrateUserData(userData);
     const params = {
       TableName: tableName,
@@ -105,25 +105,25 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
       });
   };
 
-  const getNeedNewsletterUsers = (): Promise<UserData[]> => {
+  const getNeedNewsletterUsers = (): Promise<UserDataPrime[]> => {
     const statement = `SELECT data FROM "${tableName}" WHERE data["user"].receiveNewsletter = true and (data["user"].externalStatus.newsletter is missing or data["user"].externalStatus.newsletter.success = false)`;
     return search(statement);
   };
 
-  const getNeedToAddToUserTestingUsers = (): Promise<UserData[]> => {
+  const getNeedToAddToUserTestingUsers = (): Promise<UserDataPrime[]> => {
     const statement = `SELECT data FROM "${tableName}" WHERE data["user"].userTesting = true and (data["user"].externalStatus.userTesting is missing or data["user"].externalStatus.userTesting.success = false)`;
     return search(statement);
   };
 
-  const getNeedTaxIdEncryptionUsers = (): Promise<UserData[]> => {
+  const getNeedTaxIdEncryptionUsers = (): Promise<UserDataPrime[]> => {
     const statement = `SELECT data FROM "${tableName}" WHERE data["profileData"].encryptedTaxId IS MISSING AND data["profileData"].taxId IS NOT MISSING`;
     return search(statement);
   };
 
-  const search = async (statement: string): Promise<UserData[]> => {
+  const search = async (statement: string): Promise<UserDataPrime[]> => {
     const { Items = [] } = await db.send(new ExecuteStatementCommand({ Statement: statement }));
     return await Promise.all(
-      Items.map(async (object: any): Promise<UserData> => {
+      Items.map(async (object: any): Promise<UserDataPrime> => {
         const data = unmarshall(object).data;
         return await doMigration(data);
       })

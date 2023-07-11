@@ -1,5 +1,5 @@
 import { randomElementFromArray } from "../arrayHelpers";
-import { Business } from "../business";
+import { Business, Preferences, TaskProgress } from "../business";
 import { BusinessUser } from "../businessUser";
 import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
@@ -20,7 +20,7 @@ import { MunicipalityDetail } from "../municipality";
 import { IndustrySpecificData, ProfileData } from "../profileData";
 import { arrayOfSectors, SectorType } from "../sector";
 import { TaxFilingCalendarEvent, TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
-import { CURRENT_VERSION, LegacyUserDataOverrides, Preferences, UserData, UserDataPrime } from "../userData";
+import { CURRENT_VERSION, LegacyUserDataOverrides, UserData, UserDataPrime } from "../userData";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
 
 export const generateFormationSubmitResponse = (
@@ -316,6 +316,8 @@ export const generateUserDataPrime = (overrides: LegacyUserDataOverrides): UserD
     taxFilingData: overrides.taxFilingData,
     licenseData: overrides.licenseData,
     preferences: overrides.preferences,
+    taskProgress: overrides.taskProgress,
+    taskItemChecklist: overrides.taskItemChecklist,
   });
   const businessID = business.id;
 
@@ -328,6 +330,8 @@ export const generateUserDataPrime = (overrides: LegacyUserDataOverrides): UserD
     user: generateUser({}),
     businesses,
     currentBusinessID: businessID,
+    lastUpdatedISO: getCurrentDateISOString(),
+    dateCreatedISO: getCurrentDateISOString(),
     ...overrides,
   };
 };
@@ -348,12 +352,17 @@ export const generateBusinessData = (overrides: Partial<Business>): Business => 
           lastVisitedPageIndex: 0,
         };
   }
+  let taskProgress: Record<string, TaskProgress> | undefined = overrides.taskProgress;
+
+  if (!taskProgress) {
+    taskProgress = profileData.employerId ? { "register-for-ein": "COMPLETED" } : {};
+  }
 
   return {
-    taskProgress: profileData.employerId ? { "register-for-ein": "COMPLETED" } : {},
-    taskItemChecklist: {},
+    taskProgress: taskProgress,
+    taskItemChecklist: overrides.taskItemChecklist ?? {},
     dateCreatedISO: overrides.dateCreatedISO ?? undefined,
-    dateLastUpdatedISO: overrides.dateLastUpdatedISO ?? undefined,
+    lastUpdatedISO: overrides.lastUpdatedISO ?? undefined,
     formationData: formationData,
     onboardingFormProgress: "UNSTARTED",
     profileData: profileData,

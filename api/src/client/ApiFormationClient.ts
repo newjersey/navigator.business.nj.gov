@@ -13,11 +13,13 @@ import {
   SignerTitle,
 } from "@shared/formationData";
 import { StateNames, StateShortCodes } from "@shared/states";
-import { UserData } from "@shared/userData";
+import { UserDataPrime } from "@shared/userData";
 import axios from "axios";
 import { FormationClient } from "../domain/types";
 import { LogWriterType } from "../libs/logWriter";
 import { splitErrorField } from "./splitErrorField";
+
+import { getCurrentBusinessForUser } from "@shared/businessHelpers";
 
 type ApiConfig = {
   account: string;
@@ -28,7 +30,7 @@ type ApiConfig = {
 export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): FormationClient => {
   const logId = logger.GetId();
   const form = (
-    userData: UserData,
+    userData: UserDataPrime,
     returnUrl: string,
     foreignGoodStandingFile: InputFile | undefined
   ): Promise<FormationSubmitResponse> => {
@@ -157,21 +159,23 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
   };
 
   const makePostBody = (
-    userData: UserData,
+    userData: UserDataPrime,
     returnUrl: string,
     config: ApiConfig,
     foreignGoodStandingFile: InputFile | undefined
   ): ApiSubmission => {
-    const formationFormData = userData.formationData.formationFormData;
+    const currentBusiness = getCurrentBusinessForUser(userData);
+    const formationFormData = currentBusiness.formationData.formationFormData;
 
     const isManual = formationFormData.agentNumberOrManual === "MANUAL_ENTRY";
 
-    const isForeign = userData.profileData.businessPersona === "FOREIGN";
+    const isForeign = currentBusiness.profileData.businessPersona === "FOREIGN";
     const toFormationLegalStructure: FormationLegalType = isForeign
-      ? (`foreign-${userData.profileData.legalStructureId}` as FormationLegalType)
-      : (userData.profileData.legalStructureId as FormationLegalType);
+      ? (`foreign-${currentBusiness.profileData.legalStructureId}` as FormationLegalType)
+      : (currentBusiness.profileData.legalStructureId as FormationLegalType);
 
-    const naicsCode = userData.profileData.naicsCode.length === 6 ? userData.profileData.naicsCode : "";
+    const naicsCode =
+      currentBusiness.profileData.naicsCode.length === 6 ? currentBusiness.profileData.naicsCode : "";
 
     const businessType = BusinessTypeMap[toFormationLegalStructure];
 

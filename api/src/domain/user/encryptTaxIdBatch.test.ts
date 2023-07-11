@@ -1,5 +1,5 @@
-import { generateProfileData, generateUserData } from "@shared/test";
-import { UserData } from "@shared/userData";
+import { generateProfileData, generateUserDataPrime } from "@shared/test";
+import { UserDataPrime } from "@shared/userData";
 import { EncryptionDecryptionClient, EncryptTaxId, UserDataClient } from "../types";
 import { encryptTaxIdBatch } from "./encryptTaxIdBatch";
 import { encryptTaxIdFactory } from "./encryptTaxIdFactory";
@@ -24,16 +24,16 @@ describe("encryptTaxIdBatch", () => {
   });
 
   it("encrypts and masks tax id for users who need it and returns success, failed, and total count when all succeed", async () => {
-    stubUserDataClient.put.mockImplementation((userData: UserData): Promise<UserData> => {
+    stubUserDataClient.put.mockImplementation((userData: UserDataPrime): Promise<UserDataPrime> => {
       return Promise.resolve(userData);
     });
     stubEncryptionDecryptionClient.encryptValue.mockResolvedValue("some-encrypted-value");
 
     stubUserDataClient.getNeedTaxIdEncryptionUsers.mockResolvedValue([
-      generateUserData({
+      generateUserDataPrime({
         profileData: generateProfileData({ taxId: "123456789000", encryptedTaxId: undefined }),
       }),
-      generateUserData({
+      generateUserDataPrime({
         profileData: generateProfileData({ taxId: "000987654321", encryptedTaxId: undefined }),
       }),
     ]);
@@ -43,7 +43,7 @@ describe("encryptTaxIdBatch", () => {
   });
 
   it("does not stop execution if one fails", async () => {
-    stubUserDataClient.put.mockImplementation((userData: UserData): Promise<UserData> => {
+    stubUserDataClient.put.mockImplementation((userData: UserDataPrime): Promise<UserDataPrime> => {
       return Promise.resolve(userData);
     });
     stubEncryptionDecryptionClient.encryptValue
@@ -51,10 +51,10 @@ describe("encryptTaxIdBatch", () => {
       .mockRejectedValueOnce({});
 
     stubUserDataClient.getNeedTaxIdEncryptionUsers.mockResolvedValue([
-      generateUserData({
+      generateUserDataPrime({
         profileData: generateProfileData({ taxId: "123456789000", encryptedTaxId: undefined }),
       }),
-      generateUserData({
+      generateUserDataPrime({
         profileData: generateProfileData({ taxId: "000987654321", encryptedTaxId: undefined }),
       }),
     ]);

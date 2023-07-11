@@ -4,16 +4,16 @@ import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/f
 import { LicenseEntity, LicenseStatusResult, NameAndAddress } from "@shared/license";
 import { ProfileData } from "@shared/profileData";
 import { TaxFilingCalendarEvent, TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
-import { UserData } from "@shared/userData";
+import { UserDataPrime } from "@shared/userData";
 import * as https from "node:https";
 
 export interface UserDataClient {
-  get: (userId: string) => Promise<UserData>;
-  findByEmail: (email: string) => Promise<UserData | undefined>;
-  put: (userData: UserData) => Promise<UserData>;
-  getNeedNewsletterUsers: () => Promise<UserData[]>;
-  getNeedToAddToUserTestingUsers: () => Promise<UserData[]>;
-  getNeedTaxIdEncryptionUsers: () => Promise<UserData[]>;
+  get: (userId: string) => Promise<UserDataPrime>;
+  findByEmail: (email: string) => Promise<UserDataPrime | undefined>;
+  put: (userData: UserDataPrime) => Promise<UserDataPrime>;
+  getNeedNewsletterUsers: () => Promise<UserDataPrime[]>;
+  getNeedToAddToUserTestingUsers: () => Promise<UserDataPrime[]>;
+  getNeedTaxIdEncryptionUsers: () => Promise<UserDataPrime[]>;
 }
 
 export interface BusinessNameClient {
@@ -26,7 +26,7 @@ export interface NewsletterClient {
 
 export interface FormationClient {
   form: (
-    userData: UserData,
+    userData: UserDataPrime,
     returnUrl: string,
     foreignGoodStandingFile?: InputFile
   ) => Promise<FormationSubmitResponse>;
@@ -43,8 +43,12 @@ export interface TaxFilingClient {
 }
 
 export interface TaxFilingInterface {
-  lookup: (props: { userData: UserData; taxId: string; businessName: string }) => Promise<UserData>;
-  onboarding: (props: { userData: UserData; taxId: string; businessName: string }) => Promise<UserData>;
+  lookup: (props: { userData: UserDataPrime; taxId: string; businessName: string }) => Promise<UserDataPrime>;
+  onboarding: (props: {
+    userData: UserDataPrime;
+    taxId: string;
+    businessName: string;
+  }) => Promise<UserDataPrime>;
 }
 
 export interface EncryptionDecryptionClient {
@@ -56,10 +60,10 @@ export interface TimeStampBusinessSearch {
   search: (businessName: string) => Promise<NameAvailability>;
 }
 
-export type EncryptTaxId = (userData: UserData) => Promise<UserData>;
+export type EncryptTaxId = (userData: UserDataPrime) => Promise<UserDataPrime>;
 
-export type AddNewsletter = (userData: UserData) => Promise<UserData>;
-export type AddToUserTesting = (userData: UserData) => Promise<UserData>;
+export type AddNewsletter = (userData: UserDataPrime) => Promise<UserDataPrime>;
+export type AddToUserTesting = (userData: UserDataPrime) => Promise<UserDataPrime>;
 
 export interface LicenseStatusClient {
   search: (name: string, zipCode: string, licenseType: string) => Promise<LicenseEntity[]>;
@@ -98,7 +102,10 @@ export type SearchLicenseStatus = (
   nameAndAddress: NameAndAddress,
   licenseType: string
 ) => Promise<LicenseStatusResult>;
-export type UpdateLicenseStatus = (userData: UserData, nameAndAddress: NameAndAddress) => Promise<UserData>;
-export type UpdateOperatingPhase = (userData: UserData) => UserData;
-export type UpdateSidebarCards = (userData: UserData) => UserData;
+export type UpdateLicenseStatus = (
+  userData: UserDataPrime,
+  nameAndAddress: NameAndAddress
+) => Promise<UserDataPrime>;
+export type UpdateOperatingPhase = (userData: UserDataPrime) => UserDataPrime;
+export type UpdateSidebarCards = (userData: UserDataPrime) => UserDataPrime;
 export type GetCertHttpsAgent = () => Promise<https.Agent>;

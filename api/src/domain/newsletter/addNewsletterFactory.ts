@@ -1,10 +1,10 @@
-import { UserData } from "@shared/userData";
+import { UserDataPrime } from "@shared/userData";
 import { AddNewsletter, NewsletterClient } from "../types";
 
 export const addNewsletterFactory = (newsletterClient: NewsletterClient): AddNewsletter => {
-  return async (userData: UserData): Promise<UserData> => {
+  return async (userData: UserDataPrime): Promise<UserDataPrime> => {
     const newsletter = await newsletterClient.add(userData.user.email);
-    const user: UserData = {
+    const user: UserDataPrime = {
       ...userData,
       user: {
         ...userData.user,

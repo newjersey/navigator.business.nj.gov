@@ -9,7 +9,7 @@ import {
   generateProfileData,
   generateTaxFilingData,
   generateUser,
-  generateUserData,
+  generateUserDataPrime,
   getFirstAnnualFiling,
   getSecondAnnualFiling,
   getThirdAnnualFiling,
@@ -19,6 +19,9 @@ import { Express } from "express";
 import jwt from "jsonwebtoken";
 import request from "supertest";
 
+import { Business } from "@shared/business";
+import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
+import { UserDataPrime } from "@shared/userData";
 import { generateAnnualFilings, getLastCalledWith } from "../../test/helpers";
 import { EncryptionDecryptionClient, TimeStampBusinessSearch, UserDataClient } from "../domain/types";
 import { setupExpress } from "../libs/express";
@@ -109,7 +112,7 @@ describe("userRouter", () => {
 
   describe("GET", () => {
     it("gets user with id", async () => {
-      const userData = generateUserData({});
+      const userData = generateUserDataPrime({});
       stubUserDataClient.get.mockResolvedValue(userData);
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
@@ -150,10 +153,10 @@ describe("userRouter", () => {
 
     describe("updating roadmap cards", () => {
       it("saves user data with updated cards", async () => {
-        const userData = generateUserData({
+        const userData = generateUserDataPrime({
           user: generateUser({ id: "123" }),
         });
-        const updatedUserData = generateUserData({});
+        const updatedUserData = generateUserDataPrime({});
         stubUserDataClient.get.mockResolvedValue(userData);
         stubUserDataClient.put.mockResolvedValue(updatedUserData);
         stubUpdateOperatingPhase.mockReturnValue(updatedUserData);
@@ -176,7 +179,7 @@ describe("userRouter", () => {
       });
 
       it("does not update license if licenseData is undefined", async () => {
-        const userData = generateUserData({ licenseData: undefined });
+        const userData = generateUserDataPrime({ licenseData: undefined });
         stubUserDataClient.get.mockResolvedValue(userData);
 
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
@@ -184,7 +187,7 @@ describe("userRouter", () => {
       });
 
       it("does not update license if licenseData lastCheckedDate is within the last hour", async () => {
-        const userData = generateUserData({
+        const userData = generateUserDataPrime({
           licenseData: generateLicenseData({
             lastUpdatedISO: fiftyNineMinutesAgo,
           }),
@@ -196,7 +199,7 @@ describe("userRouter", () => {
       });
 
       it("updates user in the background if licenseData lastCheckedDate is older than last hour", async () => {
-        const userData = generateUserData({
+        const userData = generateUserDataPrime({
           profileData: generateProfileData({
             industryId: "home-contractor",
           }),
@@ -205,7 +208,7 @@ describe("userRouter", () => {
           }),
         });
         stubUserDataClient.get.mockResolvedValue(userData);
-        const updatedUserData = generateUserData({});
+        const updatedUserData = generateUserDataPrime({});
         stubUpdateLicenseStatus.mockResolvedValue(updatedUserData);
 
         const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
@@ -214,7 +217,7 @@ describe("userRouter", () => {
       });
 
       it("moves on in the flow if license check fails", async () => {
-        const userData = generateUserData({
+        const userData = generateUserDataPrime({
           profileData: generateProfileData({
             industryId: "home-contractor",
           }),
@@ -237,7 +240,7 @@ describe("userRouter", () => {
       });
 
       it("does not update business name search if businessNameAvailability is undefined", async () => {
-        const userData = generateUserData({
+        const userData = generateUserDataPrime({
           formationData: generateFormationData({ businessNameAvailability: undefined }),
         });
         stubUserDataClient.get.mockResolvedValue(userData);
@@ -247,7 +250,7 @@ describe("userRouter", () => {
       });
 
       it("does not update businessNameAvailability if it's lastUpdatedTimeStamp is within the last hour", async () => {
-        const userData = generateUserData({
+        const userData = generateUserDataPrime({
           formationData: generateFormationData({
             businessNameAvailability: generateBusinessNameAvailability({
               status: "AVAILABLE",
@@ -262,7 +265,7 @@ describe("userRouter", () => {
       });
 
       it("does not update businessNameAvailability if it's completedFilingPayment is true", async () => {
-        const userData = generateUserData({
+        const userData = generateUserDataPrime({
           formationData: generateFormationData({
             completedFilingPayment: true,
             businessNameAvailability: generateBusinessNameAvailability({
@@ -278,7 +281,7 @@ describe("userRouter", () => {
       });
 
       it("updates user in the background if businessNameAvailability lastUpdatedTimeStamp is older than last hour", async () => {
-        const userData = generateUserData({
+        const userData = generateUserDataPrime({
           formationData: generateFormationData({
             completedFilingPayment: false,
             businessNameAvailability: generateBusinessNameAvailability({
@@ -296,16 +299,17 @@ describe("userRouter", () => {
         );
 
         const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        const resultBusiness = getCurrentBusinessForUser(result.body as UserDataPrime);
         expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
-        expect(result.body.formationData.businessNameAvailability.status).toEqual("UNAVAILABLE");
-        expect(result.body.profileData.needsNexusDbaName).toEqual(false);
+        expect(resultBusiness.formationData.businessNameAvailability?.status).toEqual("UNAVAILABLE");
+        expect(resultBusiness.profileData.needsNexusDbaName).toEqual(false);
         expect(
           parseDate(result.body.formationData.lastUpdatedTimeStamp).isSame(getCurrentDate(), "minute")
         ).toEqual(true);
       });
 
       it("updates user in the background only if completedFilingPayment is false", async () => {
-        const userData = generateUserData({
+        const userData = generateUserDataPrime({
           formationData: generateFormationData({
             completedFilingPayment: false,
             businessNameAvailability: generateBusinessNameAvailability({
@@ -323,16 +327,17 @@ describe("userRouter", () => {
         );
 
         const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        const resultBusiness = getCurrentBusinessForUser(result.body as UserDataPrime);
         expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
-        expect(result.body.formationData.businessNameAvailability.status).toEqual("UNAVAILABLE");
-        expect(result.body.profileData.needsNexusDbaName).toEqual(false);
+        expect(resultBusiness.formationData.businessNameAvailability?.status).toEqual("UNAVAILABLE");
+        expect(resultBusiness.profileData.needsNexusDbaName).toEqual(false);
         expect(
           parseDate(result.body.formationData.lastUpdatedTimeStamp).isSame(getCurrentDate(), "minute")
         ).toEqual(true);
       });
 
       it("does not update userData if the business name search fails and continues with other updates", async () => {
-        const userData = generateUserData({
+        const userData = generateUserDataPrime({
           formationData: generateFormationData({
             completedFilingPayment: false,
             businessNameAvailability: generateBusinessNameAvailability({
@@ -345,13 +350,15 @@ describe("userRouter", () => {
         stubTimeStampBusinessSearch.search.mockRejectedValue({});
 
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
-        expect(stubTimeStampBusinessSearch.search).toHaveBeenCalledWith(userData.profileData.businessName);
+        expect(stubTimeStampBusinessSearch.search).toHaveBeenCalledWith(
+          getCurrentBusinessForUser(userData).profileData.businessName
+        );
         expect(stubUpdateOperatingPhase).toHaveBeenCalledWith(userData);
       });
 
       describe("when businessPersona is 'FOREIGN'", () => {
         it("does not recheck business name availability if businessNameAvailability and dbaBusinessNameAvailability are undefined", async () => {
-          const userData = generateUserData({
+          const userData = generateUserDataPrime({
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
               needsNexusDbaName: true,
@@ -368,7 +375,7 @@ describe("userRouter", () => {
         });
 
         it("does not update dbaBusinessNameAvailability if needsNexusDbaName is false", async () => {
-          const userData = generateUserData({
+          const userData = generateUserDataPrime({
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
               needsNexusDbaName: false,
@@ -387,7 +394,7 @@ describe("userRouter", () => {
         });
 
         it("sets needsNexusDbaName to true when business name becomes unavailable", async () => {
-          const userData = generateUserData({
+          const userData = generateUserDataPrime({
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
               needsNexusDbaName: false,
@@ -408,13 +415,14 @@ describe("userRouter", () => {
           );
 
           const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+          const resultBusiness = getCurrentBusinessForUser(result.body as UserDataPrime);
           expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
-          expect(result.body.formationData.businessNameAvailability.status).toEqual("UNAVAILABLE");
-          expect(result.body.profileData.needsNexusDbaName).toEqual(true);
+          expect(resultBusiness.formationData.businessNameAvailability?.status).toEqual("UNAVAILABLE");
+          expect(resultBusiness.profileData.needsNexusDbaName).toEqual(true);
         });
 
         it("when needsNexusDbaName is false only businessNameAvailability is updated", async () => {
-          const userData = generateUserData({
+          const userData = generateUserDataPrime({
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
               needsNexusDbaName: false,
@@ -439,14 +447,15 @@ describe("userRouter", () => {
           );
 
           const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+          const resultBusiness = getCurrentBusinessForUser(result.body as UserDataPrime);
           expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
-          expect(result.body.formationData.businessNameAvailability.status).toEqual("UNAVAILABLE");
-          expect(result.body.formationData.dbaBusinessNameAvailability.status).toEqual("AVAILABLE");
-          expect(result.body.profileData.needsNexusDbaName).toEqual(true);
+          expect(resultBusiness.formationData.businessNameAvailability?.status).toEqual("UNAVAILABLE");
+          expect(resultBusiness.formationData.dbaBusinessNameAvailability?.status).toEqual("AVAILABLE");
+          expect(resultBusiness.profileData.needsNexusDbaName).toEqual(true);
         });
 
         it("when needsNexusDbaName is true only dbaBusinessNameAvailability is updated", async () => {
-          const userData = generateUserData({
+          const userData = generateUserDataPrime({
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
               needsNexusDbaName: true,
@@ -472,16 +481,15 @@ describe("userRouter", () => {
           );
 
           const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+          const resultBusiness = getCurrentBusinessForUser(result.body as UserDataPrime);
           expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
-          expect(result.body.formationData.dbaBusinessNameAvailability.status).toEqual("UNAVAILABLE");
-          expect(result.body.formationData.businessNameAvailability.status).toEqual("AVAILABLE");
-          expect(
-            parseDate(result.body.formationData.lastUpdatedTimeStamp).isSame(getCurrentDate(), "minute")
-          ).toEqual(true);
+          expect(resultBusiness.formationData.dbaBusinessNameAvailability?.status).toEqual("UNAVAILABLE");
+          expect(resultBusiness.formationData.businessNameAvailability?.status).toEqual("AVAILABLE");
+          expect(parseDate(resultBusiness.lastUpdatedISO).isSame(getCurrentDate(), "minute")).toEqual(true);
         });
 
         it("updates user in the background if dbaBusinessNameAvailability lastUpdatedTimeStamp is older than last hour", async () => {
-          const userData = generateUserData({
+          const userData = generateUserDataPrime({
             profileData: generateProfileData({
               businessPersona: "FOREIGN",
               needsNexusDbaName: true,
@@ -504,7 +512,9 @@ describe("userRouter", () => {
 
           const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
           expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
-          expect(result.body.formationData.dbaBusinessNameAvailability.status).toEqual("UNAVAILABLE");
+          expect(
+            getCurrentBusinessForUser(result.body).formationData.dbaBusinessNameAvailability?.status
+          ).toEqual("UNAVAILABLE");
           expect(
             parseDate(result.body.formationData.lastUpdatedTimeStamp).isSame(getCurrentDate(), "minute")
           ).toEqual(true);
@@ -515,12 +525,12 @@ describe("userRouter", () => {
 
   describe("POST", () => {
     beforeEach(() => {
-      stubUserDataClient.get.mockResolvedValue(generateUserData({}));
+      stubUserDataClient.get.mockResolvedValue(generateUserDataPrime({}));
     });
 
     it("puts user data", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-      const userData = generateUserData({ user: generateUser({ id: "123" }) });
+      const userData = generateUserDataPrime({ user: generateUser({ id: "123" }) });
       stubUserDataClient.put.mockResolvedValue(userData);
 
       const response = await request(app)
@@ -536,7 +546,10 @@ describe("userRouter", () => {
     it("sets current time as lastUpdatedISO", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const dateOneDayAgo = dayjs().subtract(1, "day").toISOString();
-      const userData = generateUserData({ lastUpdatedISO: dateOneDayAgo, user: generateUser({ id: "123" }) });
+      const userData = generateUserDataPrime({
+        lastUpdatedISO: dateOneDayAgo,
+        user: generateUser({ id: "123" }),
+      });
       stubUserDataClient.put.mockResolvedValue(userData);
 
       await request(app).post(`/users`).send(userData).set("Authorization", "Bearer user-123-token");
@@ -553,7 +566,7 @@ describe("userRouter", () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const formationDate = "2021-03-01";
 
-      const postedUserData = generateUserData({
+      const postedUserData = generateUserDataPrime({
         user: generateUser({ id: "123" }),
         profileData: generateProfileData({
           dateOfFormation: formationDate,
@@ -570,7 +583,8 @@ describe("userRouter", () => {
 
       await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
 
-      const taxFilingsPut = getLastCalledWith(stubUserDataClient.put)[0].taxFilingData.filings;
+      const taxFilingsPut = getCurrentBusinessForUser(getLastCalledWith(stubUserDataClient.put)[0])
+        .taxFilingData.filings;
       expect(taxFilingsPut).toEqual(
         generateAnnualFilings([
           getFirstAnnualFiling(formationDate),
@@ -582,19 +596,26 @@ describe("userRouter", () => {
 
     it("clears taskChecklistItems if industry has changed", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-      const newIndustryUserData = generateUserData({
+      const newIndustryUserData = generateUserDataPrime({
         user: generateUser({ id: "123" }),
         profileData: generateProfileData({ industryId: "cannabis" }),
         taskItemChecklist: { "some-id": true },
       });
 
-      stubUserDataClient.get.mockResolvedValue({
-        ...newIndustryUserData,
+      const existingBusiness = getCurrentBusinessForUser(newIndustryUserData);
+      const updatedIndustryBusiness: Business = {
+        ...existingBusiness,
         profileData: {
-          ...newIndustryUserData.profileData,
+          ...existingBusiness.profileData,
           industryId: "home-contractor",
         },
-      });
+      };
+      const updatedIndustryUserData = getUserDataWithUpdatedCurrentBusiness(
+        newIndustryUserData,
+        updatedIndustryBusiness
+      );
+
+      stubUserDataClient.get.mockResolvedValue(updatedIndustryUserData);
       stubUserDataClient.put.mockResolvedValue(newIndustryUserData);
 
       await request(app)
@@ -602,13 +623,15 @@ describe("userRouter", () => {
         .send(newIndustryUserData)
         .set("Authorization", "Bearer user-123-token");
 
-      const taskItemChecklistPut = getLastCalledWith(stubUserDataClient.put)[0].taskItemChecklist;
+      const taskItemChecklistPut = getCurrentBusinessForUser(
+        getLastCalledWith(stubUserDataClient.put)[0]
+      ).taskItemChecklist;
       expect(taskItemChecklistPut).toEqual({});
     });
 
     it("does not clear taskChecklistItems if industry has not changed", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-      const newIndustryUserData = generateUserData({
+      const newIndustryUserData = generateUserDataPrime({
         user: generateUser({ id: "123" }),
         profileData: generateProfileData({ industryId: "cannabis" }),
         taskItemChecklist: { "some-id": true },
@@ -622,13 +645,15 @@ describe("userRouter", () => {
         .send(newIndustryUserData)
         .set("Authorization", "Bearer user-123-token");
 
-      const taskItemChecklistPut = getLastCalledWith(stubUserDataClient.put)[0].taskItemChecklist;
+      const taskItemChecklistPut = getCurrentBusinessForUser(
+        getLastCalledWith(stubUserDataClient.put)[0]
+      ).taskItemChecklist;
       expect(taskItemChecklistPut).toEqual({ "some-id": true });
     });
 
     it("returns a 403 when user JWT does not match user ID", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "other-user-id" }));
-      const userData = generateUserData({ user: generateUser({ id: "123" }) });
+      const userData = generateUserDataPrime({ user: generateUser({ id: "123" }) });
 
       const response = await request(app)
         .post(`/users`)
@@ -642,7 +667,7 @@ describe("userRouter", () => {
 
     it("returns a 500 when user put fails", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-      const userData = generateUserData({ user: generateUser({ id: "123" }) });
+      const userData = generateUserDataPrime({ user: generateUser({ id: "123" }) });
 
       stubUserDataClient.put.mockRejectedValue("error");
       const response = await request(app)
@@ -663,30 +688,39 @@ describe("userRouter", () => {
           getFilingResponse: generateGetFilingResponse({ success: true }),
         };
 
-        const newLegalStructureUserData = generateUserData({
+        const newLegalStructureUserData = generateUserDataPrime({
           user: generateUser({ id: "123" }),
           profileData: generateProfileData({ legalStructureId: "c-corporation" }),
           formationData: completedFormationData,
         });
 
-        const existingProfileData = {
-          ...newLegalStructureUserData,
+        const existingBusiness = getCurrentBusinessForUser(newLegalStructureUserData);
+        const updatedBusiness: Business = {
+          ...existingBusiness,
           profileData: {
-            ...newLegalStructureUserData.profileData,
+            ...existingBusiness.profileData,
             legalStructureId: "limited-liability-company",
           },
         };
 
-        stubUserDataClient.get.mockResolvedValue(existingProfileData);
-        stubUserDataClient.put.mockResolvedValue(existingProfileData);
+        const updatedLegalStructureUserData = getUserDataWithUpdatedCurrentBusiness(
+          newLegalStructureUserData,
+          updatedBusiness
+        );
+
+        stubUserDataClient.get.mockResolvedValue(updatedLegalStructureUserData);
+        stubUserDataClient.put.mockResolvedValue(updatedLegalStructureUserData);
 
         await request(app)
           .post(`/users`)
           .send(newLegalStructureUserData)
           .set("Authorization", "Bearer user-123-token");
 
-        const formationDataPut = getLastCalledWith(stubUserDataClient.put)[0].formationData;
-        const legalStructurePut = getLastCalledWith(stubUserDataClient.put)[0].profileData.legalStructureId;
+        const formationDataPut = getCurrentBusinessForUser(
+          getLastCalledWith(stubUserDataClient.put)[0]
+        ).formationData;
+        const legalStructurePut = getCurrentBusinessForUser(getLastCalledWith(stubUserDataClient.put)[0])
+          .profileData.legalStructureId;
 
         expect(legalStructurePut).toEqual("limited-liability-company");
         expect(formationDataPut).toEqual(completedFormationData);
@@ -695,7 +729,7 @@ describe("userRouter", () => {
       it("allows changing the legal structure (and clears formationData) if formation is not completed", async () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
 
-        const existingUserData = generateUserData({
+        const existingUserData = generateUserDataPrime({
           user: generateUser({ id: "123" }),
           profileData: generateProfileData({ legalStructureId: "limited-liability-company" }),
           formationData: generateFormationData({
@@ -706,13 +740,16 @@ describe("userRouter", () => {
 
         stubUserDataClient.get.mockResolvedValue(existingUserData);
 
-        const newUserData = {
-          ...existingUserData,
+        const existingBusiness = getCurrentBusinessForUser(existingUserData);
+        const updatedBusiness: Business = {
+          ...existingBusiness,
           profileData: {
-            ...existingUserData.profileData,
+            ...existingBusiness.profileData,
             legalStructureId: "c-corporation",
           },
         };
+
+        const newUserData = getUserDataWithUpdatedCurrentBusiness(existingUserData, updatedBusiness);
 
         stubUserDataClient.put.mockResolvedValue(newUserData);
 
@@ -721,9 +758,14 @@ describe("userRouter", () => {
           .send(newUserData)
           .set("Authorization", "Bearer user-123-token");
 
-        expect(response.body.profileData.legalStructureId).toEqual("c-corporation");
-        const formationDataPut = getLastCalledWith(stubUserDataClient.put)[0].formationData;
-        const legalStructurePut = getLastCalledWith(stubUserDataClient.put)[0].profileData.legalStructureId;
+        expect(getCurrentBusinessForUser(response.body).profileData.legalStructureId).toEqual(
+          "c-corporation"
+        );
+        const formationDataPut = getCurrentBusinessForUser(
+          getLastCalledWith(stubUserDataClient.put)[0]
+        ).formationData;
+        const legalStructurePut = getCurrentBusinessForUser(getLastCalledWith(stubUserDataClient.put)[0])
+          .profileData.legalStructureId;
         expect(legalStructurePut).toEqual("c-corporation");
         expect(formationDataPut).toEqual({
           formationFormData: createEmptyFormationFormData(),
@@ -740,17 +782,17 @@ describe("userRouter", () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
         stubEncryptionDecryptionClient.encryptValue.mockResolvedValue("my cool encrypted value");
 
-        const oldUserData = generateUserData({
+        const oldUserData = generateUserDataPrime({
           user: generateUser({ id: "123" }),
         });
 
-        const updatedUserData = generateUserData({
-          ...oldUserData,
+        const updatedUserData = generateUserDataPrime({
           profileData: generateProfileData({
-            ...oldUserData.profileData,
+            ...getCurrentBusinessForUser(oldUserData).profileData,
             taxId: "123456789123",
             encryptedTaxId: undefined,
           }),
+          user: oldUserData.user,
         });
 
         stubUserDataClient.get.mockResolvedValue(oldUserData);
@@ -758,9 +800,11 @@ describe("userRouter", () => {
 
         await request(app).post(`/users`).send(updatedUserData).set("Authorization", "Bearer user-123-token");
 
-        const profileDataPut = getLastCalledWith(stubUserDataClient.put)[0].profileData;
+        const profileDataPut = getCurrentBusinessForUser(
+          getLastCalledWith(stubUserDataClient.put)[0]
+        ).profileData;
         expect(profileDataPut).toEqual({
-          ...updatedUserData.profileData,
+          ...getCurrentBusinessForUser(updatedUserData).profileData,
           taxId: "*******89123",
           encryptedTaxId: "my cool encrypted value",
         });
@@ -768,16 +812,16 @@ describe("userRouter", () => {
 
       it("doesn't encrypt tax id if the same masked value as before is being posted", async () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-        const oldUserData = generateUserData({
+        const oldUserData = generateUserDataPrime({
           user: generateUser({ id: "123" }),
           profileData: generateProfileData({
             taxId: "*******89123",
           }),
         });
-        const updatedUserData = generateUserData({
+        const updatedUserData = generateUserDataPrime({
           ...oldUserData,
           profileData: generateProfileData({
-            ...oldUserData.profileData,
+            ...getCurrentBusinessForUser(oldUserData).profileData,
             taxId: "*******89123",
           }),
         });
