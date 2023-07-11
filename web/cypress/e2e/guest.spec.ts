@@ -88,11 +88,13 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     // try editing data in the Profile page
     onDashboardPage.clickEditProfileLink();
 
-    cy.get('input[aria-label="Business name"]').clear().type("Applebee's");
+    cy.get('input[aria-label="Business name"]').clear();
+    cy.get('input[aria-label="Business name"]').type("Applebee's");
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
 
     cy.get(`[data-testid="numbers"]`).click({ force: true });
-    cy.get('input[aria-label="Employer id"]').clear().type("123456789");
+    cy.get('input[aria-label="Employer id"]').clear();
+    cy.get('input[aria-label="Employer id"]').type("123456789");
     cy.get('[data-testid="self-reg-modal"]').should("be.visible");
 
     cy.get('[aria-label="close"]').click({ force: true });
