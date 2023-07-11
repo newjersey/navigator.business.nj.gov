@@ -1,3 +1,10 @@
+## [5.23.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.23.0...v5.23.1) (2023-07-11)
+
+
+### Bug Fixes
+
+* updated mismatched webflow ids ([e5ba2a8](https://github.com/newjersey/navigator.business.nj.gov/commit/e5ba2a83f8f0abae2655d9717133a34a56153a3b))
+
 # [5.23.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.22.1...v5.23.0) (2023-07-07)
 
 
