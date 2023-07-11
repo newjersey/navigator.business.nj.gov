@@ -207,15 +207,13 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
           <div>
             <Content>{Config.determineNaicsCode.inputLabel}</Content>
             <GenericTextField
+              inputWidth="reduced"
               fieldName="naicsCode"
               numericProps={{ maxLength: LENGTH }}
               value={naicsCode}
               ariaLabel="Save NAICS Code"
               fieldOptions={{
                 inputProps: { style: { backgroundColor: "white" } },
-                sx: {
-                  maxWidth: "350px",
-                },
               }}
               error={isInvalid !== undefined}
               handleChange={handleChange}

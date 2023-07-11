@@ -13,6 +13,7 @@ export const ProfileEntityId = (props: Props): ReactElement => {
   return (
     <>
       <ProfileNumericField
+        inputWidth="default"
         fieldName={fieldName}
         maxLength={10}
         disabled={props.disabled}

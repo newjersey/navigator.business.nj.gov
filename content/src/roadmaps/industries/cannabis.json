@@ -77,7 +77,7 @@
     {
       "step": 4,
       "weight": 35,
-      "task": "town-mercantile-license"
+      "licenseTask": "town-mercantile-license"
     }
   ],
   "name": "Cannabis",

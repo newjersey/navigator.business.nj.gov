@@ -70,51 +70,49 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
       {isExpanded && (
         <WithErrorBar hasError={doesFieldHaveError(props.fieldName)} type="ALWAYS">
           <Content className="margin-bottom-2">{props.contentMd}</Content>
-          <div style={{ maxWidth: "41em" }}>
-            <div className="grid-row">
-              <div className="grid-col">
-                <BusinessFormationTextField
-                  errorBarType="NEVER"
-                  fieldName={props.fieldName}
-                  label={props.inputLabel ?? ""}
-                  validationText={Config.formation.general.genericErrorText}
-                  required={props.required}
-                  fieldOptions={{
-                    multiline: true,
-                    rows: 3,
-                    className: "override-padding",
-                    inputProps: {
-                      maxLength: props.maxChars,
-                      sx: {
-                        padding: "1rem",
-                      },
+          <div className="grid-row">
+            <div className="grid-col">
+              <BusinessFormationTextField
+                errorBarType="NEVER"
+                fieldName={props.fieldName}
+                label={props.inputLabel ?? ""}
+                validationText={Config.formation.general.genericErrorText}
+                required={props.required}
+                fieldOptions={{
+                  multiline: true,
+                  rows: 3,
+                  className: "override-padding",
+                  inputProps: {
+                    maxLength: props.maxChars,
+                    sx: {
+                      padding: "1rem",
                     },
-                  }}
-                />
-              </div>
-              {props.required ? (
-                <></>
-              ) : (
-                <div className="grid-col-auto margin-x-2 margin-top-3 display-flex flex-column flex-justify-center">
-                  <UnStyledButton
-                    style="default"
-                    onClick={(): void => removeEntry()}
-                    className="display-flex flex-column flex-justify-center"
+                  },
+                }}
+              />
+            </div>
+            {props.required ? (
+              <></>
+            ) : (
+              <div className="grid-col-auto margin-x-2 margin-top-3 display-flex flex-column flex-justify-center">
+                <UnStyledButton
+                  style="default"
+                  onClick={(): void => removeEntry()}
+                  className="display-flex flex-column flex-justify-center"
+                >
+                  <Icon
+                    className="font-body-lg"
+                    label={`remove ${camelCaseToSentence(props.fieldName).toLowerCase()}`}
                   >
-                    <Icon
-                      className="font-body-lg"
-                      label={`remove ${camelCaseToSentence(props.fieldName).toLowerCase()}`}
-                    >
-                      delete
-                    </Icon>
-                  </UnStyledButton>
-                </div>
-              )}
-            </div>
-            <div className="text-base-dark margin-top-1 margin-bottom-2">
-              {(state.formationFormData[props.fieldName] as string)?.length ?? 0} / {props.maxChars}{" "}
-              {Config.formation.general.charactersLabel}
-            </div>
+                    delete
+                  </Icon>
+                </UnStyledButton>
+              </div>
+            )}
+          </div>
+          <div className="text-base-dark margin-top-1 margin-bottom-2">
+            {(state.formationFormData[props.fieldName] as string)?.length ?? 0} / {props.maxChars}{" "}
+            {Config.formation.general.charactersLabel}
           </div>
         </WithErrorBar>
       )}

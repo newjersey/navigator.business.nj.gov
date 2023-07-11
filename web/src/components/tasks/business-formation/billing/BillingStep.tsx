@@ -21,7 +21,7 @@ export const BillingStep = (): ReactElement => {
         type="DESKTOP-ONLY"
         className="grid-row grid-gap-2 margin-top-2"
       >
-        <div className="form-input tablet:grid-col-6">
+        <div className="tablet:grid-col-6">
           <BusinessFormationTextField
             label={Config.formation.fields.contactFirstName.label}
             fieldName="contactFirstName"
@@ -30,7 +30,7 @@ export const BillingStep = (): ReactElement => {
             validationText={getFieldErrorLabel("contactFirstName")}
           />
         </div>
-        <div className="form-input tablet:grid-col-6">
+        <div className="tablet:grid-col-6">
           <BusinessFormationTextField
             label={Config.formation.fields.contactLastName.label}
             fieldName="contactLastName"
@@ -42,18 +42,16 @@ export const BillingStep = (): ReactElement => {
       </WithErrorBar>
       <div className="grid-row">
         <div className="tablet:grid-col-6">
-          <div className="form-input">
-            <BusinessFormationTextField
-              validationText={Config.formation.fields.contactPhoneNumber.error}
-              label={Config.formation.fields.contactPhoneNumber.label}
-              errorBarType="ALWAYS"
-              fieldName={"contactPhoneNumber"}
-              numericProps={{
-                maxLength: 10,
-              }}
-              visualFilter={getPhoneNumberFormat}
-            />
-          </div>
+          <BusinessFormationTextField
+            validationText={Config.formation.fields.contactPhoneNumber.error}
+            label={Config.formation.fields.contactPhoneNumber.label}
+            errorBarType="ALWAYS"
+            fieldName={"contactPhoneNumber"}
+            numericProps={{
+              maxLength: 10,
+            }}
+            visualFilter={getPhoneNumberFormat}
+          />
         </div>
       </div>
       <hr className="margin-bottom-2" />

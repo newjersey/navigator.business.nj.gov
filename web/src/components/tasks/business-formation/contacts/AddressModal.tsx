@@ -255,6 +255,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               <ModifiedContent>{Config.formation.addressModal.name.label}</ModifiedContent>
             </strong>
             <GenericTextField
+              inputWidth="full"
               value={addressData.name}
               handleChange={(value: string): void => {
                 setAddressData((prevAddressData) => {
@@ -278,6 +279,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               <ModifiedContent>{Config.formation.addressModal.addressLine1.label}</ModifiedContent>
             </strong>
             <GenericTextField
+              inputWidth="full"
               fieldName="addressLine1"
               value={addressData.addressLine1}
               handleChange={(value: string): void => {
@@ -303,6 +305,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             </strong>
             <span className="margin-left-1">{Config.formation.general.optionalLabel}</span>
             <GenericTextField
+              inputWidth="full"
               fieldName="addressLine2"
               value={addressData.addressLine2}
               error={addressErrorMap["addressLine2"].invalid}
@@ -332,6 +335,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                     <ModifiedContent>{Config.formation.addressModal.addressCity.label}</ModifiedContent>
                   </strong>
                   <GenericTextField
+                    inputWidth="full"
                     fieldName="addressCity"
                     autoComplete="address-level2"
                     value={addressData.addressCity}
@@ -356,11 +360,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                 }
                 type="MOBILE-ONLY"
               >
-                <div className="margin-bottom-2">
-                  <strong>
-                    <ModifiedContent>{Config.formation.addressModal.addressState.label}</ModifiedContent>
-                  </strong>
-                </div>
+                <strong>
+                  <ModifiedContent>{Config.formation.addressModal.addressState.label}</ModifiedContent>
+                </strong>
                 <StateDropdown
                   fieldName="addressState"
                   value={addressData.addressState?.name ?? ""}
@@ -383,6 +385,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                 <ModifiedContent>{Config.formation.addressModal.addressZipCode.label}</ModifiedContent>
               </strong>
               <GenericTextField
+                inputWidth="full"
                 numericProps={{
                   maxLength: 5,
                 }}

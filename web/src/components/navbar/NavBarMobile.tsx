@@ -76,7 +76,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
       >
         <div className={`usa-logo ${props.scrolled ? "bg-white" : ""}`}>
           {props.showSidebar ? (
-            <div className="text-bold font-body-sm truncate-long-business-names-mobile">
+            <div className="text-bold font-body-sm truncate-long-business-names_NavBarMobile">
               {getNavBarBusinessTitle(userData)}
             </div>
           ) : (

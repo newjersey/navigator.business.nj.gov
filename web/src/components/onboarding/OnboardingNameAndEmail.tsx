@@ -76,6 +76,7 @@ export const OnboardingNameAndEmail = <T,>(props: FormContextFieldProps<T>): Rea
           required={true}
           handleChange={handleName}
           additionalValidationIsValid={isFullNameValid}
+          inputWidth="default"
         />
       </div>
       <div className="margin-top-2">
@@ -91,6 +92,7 @@ export const OnboardingNameAndEmail = <T,>(props: FormContextFieldProps<T>): Rea
           additionalValidationIsValid={(value): boolean => {
             return confirmEmail ? value === confirmEmail : true && validateEmail(value);
           }}
+          inputWidth="default"
         />
       </div>
       <div className="margin-y-2">
@@ -106,6 +108,7 @@ export const OnboardingNameAndEmail = <T,>(props: FormContextFieldProps<T>): Rea
           }}
           validationText={Config.selfRegistration.errorTextEmailsNotMatching}
           fieldName={"confirm-email"}
+          inputWidth="default"
         />
       </div>
       <FormGroup>

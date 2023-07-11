@@ -40,7 +40,7 @@
     {
       "weight": 15,
       "step": 3,
-      "task": "school-bus-license",
+      "licenseTask": "school-bus-license",
       "required": true
     },
     {
@@ -52,7 +52,7 @@
     {
       "step": 3,
       "weight": 25,
-      "task": "bus-inspection",
+      "licenseTask": "bus-inspection",
       "required": true
     },
     {

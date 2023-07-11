@@ -17,17 +17,15 @@ export const FormationMunicipality = (): ReactElement => {
   };
 
   return (
-    <div className="margin-top-2">
-      <MunicipalityDropdown
-        onValidation={(): void => setFieldsInteracted(["addressMunicipality"])}
-        municipalities={municipalities}
-        fieldName={"addressMunicipality"}
-        error={doesFieldHaveError("addressMunicipality")}
-        validationLabel="Error"
-        value={state.formationFormData.addressMunicipality}
-        onSelect={onSelect}
-        helperText={getFieldErrorLabel("addressMunicipality")}
-      />
-    </div>
+    <MunicipalityDropdown
+      onValidation={(): void => setFieldsInteracted(["addressMunicipality"])}
+      municipalities={municipalities}
+      fieldName={"addressMunicipality"}
+      error={doesFieldHaveError("addressMunicipality")}
+      validationLabel="Error"
+      value={state.formationFormData.addressMunicipality}
+      onSelect={onSelect}
+      helperText={getFieldErrorLabel("addressMunicipality")}
+    />
   );
 };

@@ -21,7 +21,7 @@ describe("roadmapBuilder", () => {
     expect(roadmap.steps).toHaveLength(0);
   });
 
-  it("builds a roadmap with add-ons only when industry is undefined", async () => {
+  it("builds a roadmap with task add-ons only when industry is undefined", async () => {
     const roadmap = await buildRoadmap({
       industryId: undefined,
       addOns: ["tea"],
@@ -31,6 +31,18 @@ describe("roadmapBuilder", () => {
         return it.id;
       })
     ).toEqual(expect.arrayContaining(["tea-task-1-id"]));
+  });
+
+  it("builds a roadmap with license task add-ons only when industry is undefined", async () => {
+    const roadmap = await buildRoadmap({
+      industryId: undefined,
+      addOns: ["license-addon"],
+    });
+    expect(
+      roadmap.tasks.map((it) => {
+        return it.id;
+      })
+    ).toEqual(expect.arrayContaining(["license-task-1-id"]));
   });
 
   it("removes any steps that have no tasks", async () => {
@@ -48,6 +60,30 @@ describe("roadmapBuilder", () => {
       addOns: [],
     });
     expect(roadmap).toEqual(expectedGenericRoadmap);
+  });
+
+  it("prioritizes a task over a license task when building a roadmap with add-ons", async () => {
+    const roadmap = await buildRoadmap({
+      industryId: "coffee",
+      addOns: ["task-and-license-addon"],
+    });
+    const roadmapIds = roadmap.tasks.map((it) => {
+      return it.id;
+    });
+    expect(roadmapIds).toContain("tea-task-1-id");
+    expect(roadmapIds).not.toContain("license-task-1-id");
+  });
+
+  it("builds a roadmap with license task add-ons", async () => {
+    const roadmap = await buildRoadmap({
+      industryId: "coffee",
+      addOns: ["license-addon"],
+    });
+    expect(
+      roadmap.tasks.map((it) => {
+        return it.id;
+      })
+    ).toEqual(expect.arrayContaining(["license-task-1-id"]));
   });
 
   it("adds tasks from multiple add-ons", async () => {

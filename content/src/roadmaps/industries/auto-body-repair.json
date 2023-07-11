@@ -49,13 +49,13 @@
     {
       "step": 3,
       "weight": 50,
-      "task": "auto-body-repair-license",
+      "licenseTask": "auto-body-repair-license",
       "required": true
     },
     {
       "step": 3,
       "weight": 60,
-      "task": "spray-paint-booth-permit-auto-body-repair"
+      "licenseTask": "spray-paint-booth-permit-auto-body-repair"
     }
   ],
   "name": "Auto-Body Repair",

@@ -1,0 +1,10 @@
+{
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 3,
+      "licenseTask": "license-task-1"
+    }
+  ],
+  "modifications": []
+}

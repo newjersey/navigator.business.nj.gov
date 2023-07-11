@@ -69,7 +69,6 @@ export const EinInput = (props: Props): ReactElement => {
   return (
     <div className="display-flex flex-column mobile-lg:flex-row">
       <GenericTextField
-        className="width-100"
         fieldName="employerId"
         error={isInvalid}
         validationText={templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {
@@ -79,7 +78,7 @@ export const EinInput = (props: Props): ReactElement => {
         visualFilter={displayAsEin}
         handleChange={handleChange}
         value={employerId}
-        formInputFull
+        inputWidth="full"
         ariaLabel="Save your EIN"
       />
       <div className="mobile-lg:margin-left-1 mobile-lg:margin-top-2">

@@ -65,14 +65,12 @@ export const MainBusinessAddressNj = (): ReactElement => {
             className={"margin-bottom-2"}
             errorBarType="ALWAYS"
             validationText={getFieldErrorLabel("addressLine1")}
-            formInputFull
           />
           <BusinessFormationTextField
             label={Config.formation.fields.addressLine2.label}
             secondaryLabel={Config.formation.general.optionalLabel}
             errorBarType="ALWAYS"
             fieldName="addressLine2"
-            formInputFull
             validationText={getFieldErrorLabel("addressLine2")}
             className="margin-bottom-2"
           />
@@ -103,7 +101,6 @@ export const MainBusinessAddressNj = (): ReactElement => {
                 validationText={Config.formation.fields.addressState.error}
                 disabled={true}
                 onSelect={(): void => {}}
-                className={"margin-top-2"}
               />
             </WithErrorBar>
             <BusinessFormationTextField
@@ -113,7 +110,7 @@ export const MainBusinessAddressNj = (): ReactElement => {
               errorBarType="NEVER"
               fieldName={"addressZipCode"}
               validationText={getFieldErrorLabel("addressZipCode")}
-              className="form-input grid-col-7 tablet:grid-col-4"
+              className="grid-col-7 tablet:grid-col-4"
             />
           </WithErrorBar>
           <Alert variant="info" className="margin-bottom-5">

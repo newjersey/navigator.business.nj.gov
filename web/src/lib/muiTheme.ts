@@ -173,6 +173,11 @@ export default createTheme({
         },
       },
     },
+    MuiTextField: {
+      defaultProps: {
+        fullWidth: true,
+      },
+    },
     MuiOutlinedInput: {
       styleOverrides: {
         root: {

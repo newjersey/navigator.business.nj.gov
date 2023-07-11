@@ -51,7 +51,7 @@ export const OnboardingIndustry = <T,>(props: Props<T>): ReactElement => {
   };
 
   return (
-    <div className="form-input margin-top-2">
+    <>
       <IndustryDropdown
         error={isFormFieldInValid}
         validationLabel="Error"
@@ -78,6 +78,6 @@ export const OnboardingIndustry = <T,>(props: Props<T>): ReactElement => {
         </div>
       )}
       {getEssentialQuestions(state.profileData.industryId)}
-    </div>
+    </>
   );
 };

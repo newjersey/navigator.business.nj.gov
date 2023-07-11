@@ -15,6 +15,7 @@ export const ProfileEmployerId = (props: Props): ReactElement => {
   return (
     <>
       <ProfileNumericField
+        inputWidth="default"
         fieldName={fieldName}
         validationText={templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {
           length: "9",

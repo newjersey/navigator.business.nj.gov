@@ -3,6 +3,16 @@ import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, Next
 import Script from "next/script";
 import { ReactElement } from "react";
 
+function getFaviconPath(): string {
+  if (process.env.NODE_ENV === "development") {
+    return "/favicon_development.ico";
+  } else if (process.env.NODE_ENV === "test") {
+    return "/favicon_test.ico";
+  } else {
+    return "/favicon.ico";
+  }
+}
+
 class CustomDocument extends Document {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
     const initialProps = await Document.getInitialProps(ctx);
@@ -14,6 +24,7 @@ class CustomDocument extends Document {
       <Html lang="en">
         <Head>
           <Script src="/vendor/js/uswds-init.min.js" strategy="beforeInteractive" />
+          <link rel="icon" href={getFaviconPath()} />
         </Head>
         <body>
           <noscript>
