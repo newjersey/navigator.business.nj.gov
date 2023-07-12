@@ -6,12 +6,15 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { formatIntlPostalCode } from "@/lib/domain-logic/formatIntlPostalCode";
+import { MediaQueries } from "@/lib/PageSizes";
+import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export const MainBusinessIntl = (): ReactElement => {
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useFormationErrors();
+  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   return (
     <>
@@ -45,7 +48,7 @@ export const MainBusinessIntl = (): ReactElement => {
             validationText={getFieldErrorLabel("addressCity")}
           />
         </div>
-        <div className="tablet:grid-col-6 grid-col-12">
+        <div className={`tablet:grid-col-6 grid-col-12 ${isTabletAndUp ? "" : "margin-top-2"}`}>
           <BusinessFormationTextField
             errorBarType="MOBILE-ONLY"
             label={Config.formation.fields.addressProvince.label}
@@ -57,7 +60,7 @@ export const MainBusinessIntl = (): ReactElement => {
       </WithErrorBar>
       <WithErrorBar
         hasError={doSomeFieldsHaveError(["addressCountry"])}
-        className="grid-col-12"
+        className={`margin-top-2`}
         type="ALWAYS"
       >
         <strong>
@@ -84,15 +87,18 @@ export const MainBusinessIntl = (): ReactElement => {
         />
       </WithErrorBar>
 
-      <BusinessFormationTextField
-        label={Config.formation.fields.addressZipCode.foreign.label}
-        valueFilter={formatIntlPostalCode}
-        errorBarType="ALWAYS"
-        required={true}
-        fieldName={"addressZipCode"}
-        validationText={Config.formation.fields.addressZipCode.foreign.errorIntl}
-        className="tablet:grid-col-6 grid-col-12"
-      />
+      <div className="grid-row grid-gap-1 margin-top-2 input-error-bar">
+        <div className="tablet:grid-col-6 grid-col-12">
+          <BusinessFormationTextField
+            label={Config.formation.fields.addressZipCode.foreign.label}
+            valueFilter={formatIntlPostalCode}
+            errorBarType="ALWAYS"
+            required={true}
+            fieldName={"addressZipCode"}
+            validationText={Config.formation.fields.addressZipCode.foreign.errorIntl}
+          />
+        </div>
+      </div>
     </>
   );
 };
