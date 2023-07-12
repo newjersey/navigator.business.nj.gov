@@ -1,8 +1,8 @@
 {
   "dependencies": [
     {
-      "name": "blocked-task",
-      "dependencies": ["blocking-task-1", "blocking-task-2", "blocking-task-1-duplicate"]
+      "task": "blocked-task",
+      "taskDependencies": ["blocking-task-1", "blocking-task-2", "blocking-task-1-duplicate"]
     }
   ]
 }

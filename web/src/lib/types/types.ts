@@ -346,8 +346,10 @@ export interface TaskLink {
 }
 
 export type TaskDependencies = {
-  name: string;
-  dependencies: string[];
+  task?: string;
+  licenseTask?: string;
+  taskDependencies?: string[];
+  licenseTaskDependencies?: string[];
 };
 
 export const taxFilingMethod = [

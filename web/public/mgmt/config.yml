@@ -1676,23 +1676,45 @@ collections:
           - label: Tasks
             name: dependencies
             widget: list
+            summary: "{{task}} {{licenseTask}}"
             fields:
-              - label: Task
-                name: name
+              - label: Task (this or License Task is required)
+                name: task
                 widget: "relation"
                 collection: "tasks"
                 search_fields: ["{{filename}}", "name", "urlSlug"]
                 value_field: "{{filename}}"
                 display_fields: ["{{filename}}"]
+                required: false
                 options_length: 500
-              - label: Dependencies
-                name: dependencies
+              - label: License Task (this or Task is required)
+                name: licenseTask
+                widget: "relation"
+                collection: "license-tasks"
+                search_fields: ["{{filename}}", "name", "urlSlug"]
+                value_field: "{{filename}}"
+                display_fields: ["{{filename}}"]
+                required: false
+                options_length: 500
+              - label: Task Dependencies
+                name: taskDependencies
                 widget: "relation"
                 collection: "tasks"
                 search_fields: ["{{filename}}", "name", "urlSlug"]
                 value_field: "{{filename}}"
                 display_fields: ["{{filename}}"]
                 multiple: true
+                required: false
+                options_length: 500
+              - label: License Task Dependencies
+                name: licenseTaskDependencies
+                widget: "relation"
+                collection: "license-tasks"
+                search_fields: ["{{filename}}", "name", "urlSlug"]
+                value_field: "{{filename}}"
+                display_fields: ["{{filename}}"]
+                multiple: true
+                required: false
                 options_length: 500
 
   - name: "tasks-label"
