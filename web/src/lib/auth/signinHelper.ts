@@ -11,21 +11,12 @@ import {
   setRegistrationDimension,
   setUserId,
 } from "@/lib/utils/analytics-helpers";
-import { createEmptyUser, UserData } from "@businessnjgovnavigator/shared/";
+import { createEmptyUser, getCurrentBusiness, UserData } from "@businessnjgovnavigator/shared/";
 import { Dispatch } from "react";
-<<<<<<< HEAD
-
-import { AuthAction } from "@/lib/auth/AuthContext";
-import * as session from "@/lib/auth/sessionHelper";
-import { triggerSignOut } from "@/lib/auth/sessionHelper";
-import { UpdateQueue } from "@/lib/types/types";
-=======
-import { UpdateQueue } from "../types/types";
-import { AuthAction } from "./AuthContext";
 import * as session from "./sessionHelper";
-import { triggerSignOut } from "./sessionHelper";
-import {getCurrentBusiness} from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
->>>>>>> wip: finished libs [skip ci]
+import {AuthAction} from "@/lib/auth/AuthContext";
+import {UpdateQueue} from "@/lib/types/types";
+import {triggerSignOut} from "./sessionHelper";
 
 export const onSignIn = async (dispatch: Dispatch<AuthAction>): Promise<void> => {
   const user = await session.getCurrentUser();

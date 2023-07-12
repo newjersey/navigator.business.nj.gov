@@ -19,7 +19,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { QUERIES, QUERY_PARAMS_VALUES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
-import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import {
   createProfileFieldErrorMap,
@@ -66,6 +65,7 @@ import { useRouter } from "next/router";
 import { ReactElement, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import {Business} from "@businessnjgovnavigator/shared/userData";
+import {loadAllMunicipalities} from "@/lib/static/loadMunicipalities";
 
 interface Props {
   municipalities: Municipality[];
@@ -303,15 +303,6 @@ const OnboardingPage = (props: Props): ReactElement => {
         let newUserData: UserData = {
           ...updateQueue.current(),
           user,
-<<<<<<< HEAD
-          profileData: {
-            ...newProfileData,
-            operatingPhase: isRemoteSellerWorker
-              ? "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
-              : newProfileData.operatingPhase,
-          },
-          onboardingFormProgress: "COMPLETED",
-=======
           businesses: {
             ...updateQueue.current().businesses,
             [updateQueue.current().currentBusinessId]: {
@@ -320,7 +311,6 @@ const OnboardingPage = (props: Props): ReactElement => {
               onboardingFormProgress: "COMPLETED",
             }
           }
->>>>>>> wip: finished onboarding [skip-ci]
         };
 
         if (newUserData.user.receiveNewsletter) {
@@ -345,6 +335,11 @@ const OnboardingPage = (props: Props): ReactElement => {
                 : [...preferences.visibleSidebarCards, "task-progress"],
           })
 
+          if (newProfileData.legalStructureId) {
+            const completed: TaskProgress = "COMPLETED";
+            updateQueue.queueTaskProgress({[businessStructureTaskId]: completed })
+          }
+
 
         if (newProfileData.operatingPhase === "GUEST_MODE_OWNING") {
           updateQueue.queuePreferences({
@@ -357,20 +352,9 @@ const OnboardingPage = (props: Props): ReactElement => {
             ]
           })
         }
-<<<<<<< HEAD
-
-        const completed: TaskProgress = "COMPLETED";
-        const updatedUserData = {
-          ...newUserData,
-          taskProgress: newUserData.profileData.legalStructureId
-            ? { ...newUserData.taskProgress, [businessStructureTaskId]: completed }
-            : { ...newUserData.taskProgress },
-          preferences: newPreferencesData,
-        };
-=======
->>>>>>> wip: finished onboarding [skip-ci]
 
         await updateQueue.update();
+
         await router.push({
           pathname: ROUTES.dashboard,
           query: { [QUERIES.fromOnboarding]: "true" },
