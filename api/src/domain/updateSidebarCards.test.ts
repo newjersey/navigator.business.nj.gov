@@ -8,7 +8,7 @@ import {
 } from "@shared/test";
 import { updateSidebarCards } from "./updateSidebarCards";
 
-import { getCurrentBusinessForUser } from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/businessHelpers";
 
 describe("updateRoadmapSidebarCards", () => {
   describe("successful registration", () => {
@@ -19,7 +19,7 @@ describe("updateRoadmapSidebarCards", () => {
         }),
       });
       const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
         "successful-registration"
       );
     });
@@ -35,10 +35,10 @@ describe("updateRoadmapSidebarCards", () => {
       });
 
       const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
         "not-registered"
       );
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
         "successful-registration"
       );
     });
@@ -54,13 +54,13 @@ describe("updateRoadmapSidebarCards", () => {
       });
 
       const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
         "not-registered"
       );
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
         "successful-registration"
       );
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).toContain("welcome");
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain("welcome");
     });
   });
 
@@ -77,7 +77,7 @@ describe("updateRoadmapSidebarCards", () => {
       });
 
       const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
         "formation-nudge"
       );
     });
@@ -91,7 +91,7 @@ describe("updateRoadmapSidebarCards", () => {
       });
 
       const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
         "formation-nudge"
       );
     });
@@ -106,7 +106,7 @@ describe("updateRoadmapSidebarCards", () => {
         preferences: generatePreferences({ visibleSidebarCards: [] }),
       });
       const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
         "registered-for-taxes-nudge"
       );
     });
@@ -119,7 +119,7 @@ describe("updateRoadmapSidebarCards", () => {
         preferences: generatePreferences({ visibleSidebarCards: ["registered-for-taxes-nudge"] }),
       });
       const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
         "registered-for-taxes-nudge"
       );
     });
@@ -134,10 +134,10 @@ describe("updateRoadmapSidebarCards", () => {
         preferences: generatePreferences({ visibleSidebarCards: [] }),
       });
       const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
         "formation-nudge"
       );
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
         "funding-nudge"
       );
     });
@@ -150,7 +150,7 @@ describe("updateRoadmapSidebarCards", () => {
         preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] }),
       });
       const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
         "funding-nudge"
       );
     });
@@ -176,10 +176,10 @@ describe("updateRoadmapSidebarCards", () => {
           preferences: generatePreferences({ visibleSidebarCards: [] }),
         });
         const updatedUserData = updateSidebarCards(userData);
-        expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
           "welcome-up-and-running"
         );
-        expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
           "welcome"
         );
       }
@@ -195,10 +195,10 @@ describe("updateRoadmapSidebarCards", () => {
       });
 
       const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
         "welcome-up-and-running"
       );
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
         "welcome"
       );
     });
@@ -213,10 +213,10 @@ describe("updateRoadmapSidebarCards", () => {
       });
 
       const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
         "welcome-up-and-running"
       );
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
         "welcome"
       );
     });
@@ -231,10 +231,10 @@ describe("updateRoadmapSidebarCards", () => {
       });
 
       const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
         "welcome-up-and-running"
       );
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
         "welcome"
       );
     });
@@ -249,10 +249,10 @@ describe("updateRoadmapSidebarCards", () => {
       });
 
       const updatedUserData = updateSidebarCards(revertedUserData);
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
         "welcome-up-and-running"
       );
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).toContain("welcome");
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain("welcome");
     });
 
     for (const operatingPhase of nonUpAndRunningOperatingPhases) {
@@ -266,10 +266,10 @@ describe("updateRoadmapSidebarCards", () => {
         });
 
         const updatedUserData = updateSidebarCards(userData);
-        expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).toContain(
+        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
           "welcome"
         );
-        expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
           "welcome-up-and-running"
         );
       });
@@ -296,7 +296,7 @@ describe("updateRoadmapSidebarCards", () => {
         preferences: generatePreferences({ visibleSidebarCards: [] }),
       });
       const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
         "go-to-profile"
       );
     });
@@ -312,7 +312,7 @@ describe("updateRoadmapSidebarCards", () => {
           preferences: generatePreferences({ visibleSidebarCards: [] }),
         });
         const updatedUserData = updateSidebarCards(userData);
-        expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).toContain(
+        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
           "go-to-profile"
         );
       }
@@ -333,7 +333,7 @@ describe("updateRoadmapSidebarCards", () => {
           preferences: generatePreferences({ visibleSidebarCards: [] }),
         });
         const updatedUserData = updateSidebarCards(userData);
-        expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
           "go-to-profile"
         );
       }
@@ -351,7 +351,7 @@ describe("updateRoadmapSidebarCards", () => {
       });
 
       const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusinessForUser(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
         "task-progress"
       );
     });

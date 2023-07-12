@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { Business } from "@shared/business";
-import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
 import {
   generateFormationData,
@@ -169,7 +169,7 @@ describe("formationRouter", () => {
       const response = await request(app).get(`/completed-filing`).send();
 
       expect(response.status).toEqual(200);
-      const currentBusiness = getCurrentBusinessForUser(userData);
+      const currentBusiness = getCurrentBusiness(userData);
       const expectedNewBusinessData: Business = {
         ...currentBusiness,
         formationData: {
@@ -194,7 +194,7 @@ describe("formationRouter", () => {
         },
       };
 
-      const expectedNewUserData = getUserDataWithUpdatedCurrentBusiness(userData, expectedNewBusinessData);
+      const expectedNewUserData = modifyCurrentBusiness(userData, expectedNewBusinessData);
       expect(fakeSaveFileFromUrl).toHaveBeenCalledWith(
         getFilingResponse.formationDoc,
         `us-east-1:identityId/formationDoc-1487076708000.pdf`,
@@ -224,7 +224,7 @@ describe("formationRouter", () => {
       stubUserDataClient.get.mockResolvedValue(userData);
       await request(app).get(`/completed-filing`).send();
 
-      const currentBusiness = getCurrentBusinessForUser(userData);
+      const currentBusiness = getCurrentBusiness(userData);
       const expectedBusiness: Business = {
         ...currentBusiness,
         formationData: {
@@ -232,7 +232,7 @@ describe("formationRouter", () => {
           getFilingResponse: getFilingResponse,
         },
       };
-      const expectedUserData = getUserDataWithUpdatedCurrentBusiness(userData, expectedBusiness);
+      const expectedUserData = modifyCurrentBusiness(userData, expectedBusiness);
 
       expect(stubUserDataClient.put).toHaveBeenCalledWith(expectedUserData);
     });
@@ -256,7 +256,7 @@ describe("formationRouter", () => {
       stubUserDataClient.get.mockResolvedValue(userData);
       await request(app).get(`/completed-filing`).send();
 
-      const currentBusiness = getCurrentBusinessForUser(userData);
+      const currentBusiness = getCurrentBusiness(userData);
       const expectedNewBusinessData: Business = {
         ...currentBusiness,
         formationData: {
@@ -280,7 +280,7 @@ describe("formationRouter", () => {
         },
       };
 
-      const expectedNewUserData = getUserDataWithUpdatedCurrentBusiness(userData, expectedNewBusinessData);
+      const expectedNewUserData = modifyCurrentBusiness(userData, expectedNewBusinessData);
 
       expect(fakeSaveFileFromUrl).toHaveBeenCalledWith(
         getFilingResponse.formationDoc,

@@ -1,5 +1,5 @@
 import { Business } from "@shared/business";
-import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
 import { UserDataPrime } from "@shared/userData";
 import dayjs from "dayjs";
 import { TaxFilingClient, TaxFilingInterface } from "../types";
@@ -17,7 +17,7 @@ const isThisYear = (dueDate: string): boolean => {
 
 export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient): TaxFilingInterface => {
   const lookup = async (request: taxFilingInterfaceRequest): Promise<UserDataPrime> => {
-    const currentBusiness = getCurrentBusinessForUser(request.userData);
+    const currentBusiness = getCurrentBusiness(request.userData);
     const { state, filings, taxCity, naicsCode } = await apiTaxFilingClient.lookup({
       taxId: request.taxId,
       businessName: request.businessName,
@@ -79,7 +79,7 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
         filings: state === "SUCCESS" ? filings : currentBusiness.taxFilingData.filings,
       },
     };
-    return getUserDataWithUpdatedCurrentBusiness(request.userData, updatedBusiness);
+    return modifyCurrentBusiness(request.userData, updatedBusiness);
   };
 
   const onboarding = async (request: taxFilingInterfaceRequest): Promise<UserDataPrime> => {
@@ -95,7 +95,7 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
       }
       case "API_ERROR":
       case "FAILED": {
-        const previousBusiness = getCurrentBusinessForUser(request.userData);
+        const previousBusiness = getCurrentBusiness(request.userData);
         const updatedBusiness: Business = {
           ...previousBusiness,
           taxFilingData: {
@@ -106,7 +106,7 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
             businessName: request.businessName,
           },
         };
-        return getUserDataWithUpdatedCurrentBusiness(request.userData, updatedBusiness);
+        return modifyCurrentBusiness(request.userData, updatedBusiness);
       }
     }
   };

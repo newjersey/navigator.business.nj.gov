@@ -1,5 +1,5 @@
 import { Business } from "@shared/business";
-import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import {
   generateLicenseData,
@@ -58,7 +58,7 @@ describe("updateLicenseStatus", () => {
       checklistItems: checklistItems,
     });
 
-    const currentBusiness = getCurrentBusinessForUser(userData);
+    const currentBusiness = getCurrentBusiness(userData);
     const updatedBusiness: Business = {
       ...currentBusiness,
       licenseData: generateLicenseData({
@@ -66,10 +66,10 @@ describe("updateLicenseStatus", () => {
       }),
     };
 
-    userData = getUserDataWithUpdatedCurrentBusiness(userData, updatedBusiness);
+    userData = modifyCurrentBusiness(userData, updatedBusiness);
 
     const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
-    const resultCurrentBusiness = getCurrentBusinessForUser(resultUserData);
+    const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
     expect(resultCurrentBusiness.licenseData?.nameAndAddress).toEqual(nameAndAddress);
     expect(resultCurrentBusiness.licenseData?.completedSearch).toEqual(true);
@@ -87,7 +87,7 @@ describe("updateLicenseStatus", () => {
   it("updates the license task status to NOT_STARTED & user license data when NO MATCH", async () => {
     stubSearchLicenseStatus.mockRejectedValue("NO_MATCH");
     const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
-    const resultCurrentBusiness = getCurrentBusinessForUser(resultUserData);
+    const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
     expect(resultCurrentBusiness.licenseData?.nameAndAddress).toEqual(nameAndAddress);
     expect(resultCurrentBusiness.licenseData?.completedSearch).toEqual(false);
@@ -123,7 +123,7 @@ describe("updateLicenseStatus", () => {
     });
 
     const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
-    const resultCurrentBusiness = getCurrentBusinessForUser(resultUserData);
+    const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
     expect(resultCurrentBusiness.taskProgress["apply-for-shop-license"]).toEqual("IN_PROGRESS");
     expect(resultCurrentBusiness.taskProgress["register-consumer-affairs"]).toEqual("IN_PROGRESS");
@@ -143,7 +143,7 @@ describe("updateLicenseStatus", () => {
     });
 
     const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
-    const resultCurrentBusiness = getCurrentBusinessForUser(resultUserData);
+    const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
     expect(resultCurrentBusiness.taskProgress["apply-for-shop-license"]).toEqual("COMPLETED");
     expect(resultCurrentBusiness.taskProgress["register-consumer-affairs"]).toEqual("COMPLETED");

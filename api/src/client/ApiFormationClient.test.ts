@@ -26,7 +26,7 @@ import {
   ApiSubmission,
 } from "./ApiFormationClient";
 
-import { getCurrentBusinessForUser } from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/businessHelpers";
 
 jest.mock("axios");
 jest.mock("winston");
@@ -123,7 +123,7 @@ describe("ApiFormationClient", () => {
           {},
           formationFormData
         );
-        const currentBusiness = getCurrentBusinessForUser(userData);
+        const currentBusiness = getCurrentBusiness(userData);
 
         await client.form(userData, "navigator.com/form-business");
 
@@ -273,7 +273,7 @@ describe("ApiFormationClient", () => {
           {},
           formationFormData
         );
-        const currentBusiness = getCurrentBusinessForUser(userData);
+        const currentBusiness = getCurrentBusiness(userData);
 
         await client.form(userData, "navigator.com/form-business");
 
@@ -411,7 +411,7 @@ describe("ApiFormationClient", () => {
           {},
           formationFormData
         );
-        const currentBusiness = getCurrentBusinessForUser(userData);
+        const currentBusiness = getCurrentBusiness(userData);
 
         await client.form(userData, "hostname.com/form-business");
 
@@ -580,7 +580,7 @@ describe("ApiFormationClient", () => {
           {},
           formationFormData
         );
-        const currentBusiness = getCurrentBusinessForUser(userData);
+        const currentBusiness = getCurrentBusiness(userData);
 
         const foreignGoodStandingFile = generateInputFile({});
 
@@ -816,7 +816,7 @@ describe("ApiFormationClient", () => {
         });
 
         await client.form(userData, "hostname.com/form-business");
-        const currentBusiness = getCurrentBusinessForUser(userData);
+        const currentBusiness = getCurrentBusiness(userData);
 
         expect(mockAxios.post).toHaveBeenCalledWith(
           "example.com/formation/PrepareFiling",
@@ -939,7 +939,7 @@ describe("ApiFormationClient", () => {
           }),
           formationData: generateFormationData({ formationFormData }),
         });
-        const currentBusiness = getCurrentBusinessForUser(userData);
+        const currentBusiness = getCurrentBusiness(userData);
 
         await client.form(userData, "hostname.com/form-business");
 
@@ -1081,7 +1081,7 @@ describe("ApiFormationClient", () => {
           }),
           formationData: generateFormationData({ formationFormData }),
         });
-        const currentBusiness = getCurrentBusinessForUser(userData);
+        const currentBusiness = getCurrentBusiness(userData);
 
         await client.form(userData, "hostname.com/form-business");
 
@@ -1221,7 +1221,7 @@ describe("ApiFormationClient", () => {
       mockAxios.post.mockResolvedValue({ data: stubResponse });
 
       const userData = generateFormationUserData({}, {}, { agentNumberOrManual: "NUMBER" });
-      const currentBusiness = getCurrentBusinessForUser(userData);
+      const currentBusiness = getCurrentBusiness(userData);
 
       await client.form(userData, "some-url");
       const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;

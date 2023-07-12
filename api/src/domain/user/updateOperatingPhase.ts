@@ -1,5 +1,5 @@
 import { Business, TaskProgress } from "@shared/business";
-import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
 import { businessStructureTaskId, formationTaskId, taxTaskId } from "@shared/domain-logic/taskIds";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { OperatingPhaseId } from "@shared/operatingPhase";
@@ -8,7 +8,7 @@ import { UserDataPrime } from "@shared/userData";
 import { UpdateOperatingPhase } from "../types";
 
 export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserDataPrime): UserDataPrime => {
-  const currentBusiness = getCurrentBusinessForUser(userData);
+  const currentBusiness = getCurrentBusiness(userData);
   const originalPhase = currentBusiness.profileData.operatingPhase;
   const isPublicFiling = LookupLegalStructureById(
     currentBusiness.profileData.legalStructureId
@@ -41,7 +41,7 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserDataPri
       phaseNewlyChanged: phaseHasChanged || currentBusiness.preferences.phaseNewlyChanged,
     },
   };
-  return getUserDataWithUpdatedCurrentBusiness(userData, updatedBusiness);
+  return modifyCurrentBusiness(userData, updatedBusiness);
 };
 
 const getNewPhase = ({

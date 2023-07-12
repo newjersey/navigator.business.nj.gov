@@ -1,5 +1,5 @@
 import { Business } from "@shared/business";
-import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import {
@@ -52,7 +52,7 @@ describe("guestRouter", () => {
       });
 
       const response = await request(app).post(`/annualFilings`).send(postedUserData);
-      const postedUserDataBusiness = getCurrentBusinessForUser(postedUserData);
+      const postedUserDataBusiness = getCurrentBusiness(postedUserData);
       const expectedBusiness: Business = {
         ...postedUserDataBusiness,
         taxFilingData: {
@@ -64,7 +64,7 @@ describe("guestRouter", () => {
           ]),
         },
       };
-      const expectedUserData = getUserDataWithUpdatedCurrentBusiness(postedUserData, expectedBusiness);
+      const expectedUserData = modifyCurrentBusiness(postedUserData, expectedBusiness);
       expect(response.body).toEqual(expectedUserData);
     });
   });

@@ -1,5 +1,5 @@
 import { Business } from "@shared/business";
-import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
 import { generateProfileData, generateUserDataPrime } from "@shared/test";
 import { EncryptionDecryptionClient, EncryptTaxId } from "../types";
 import { encryptTaxIdFactory } from "./encryptTaxIdFactory";
@@ -24,7 +24,7 @@ describe("encryptTaxId", () => {
     });
     const response = await encryptTaxId(userData);
     expect(stubEncryptionDecryptionClient.encryptValue).toHaveBeenCalledWith("123456789000");
-    const currentBusiness = getCurrentBusinessForUser(userData);
+    const currentBusiness = getCurrentBusiness(userData);
     const expectedBusiness: Business = {
       ...currentBusiness,
       profileData: {
@@ -33,7 +33,7 @@ describe("encryptTaxId", () => {
         encryptedTaxId: "some-encrypted-value",
       },
     };
-    const expectedUserData = getUserDataWithUpdatedCurrentBusiness(userData, expectedBusiness);
+    const expectedUserData = modifyCurrentBusiness(userData, expectedBusiness);
     expect(response).toEqual(expectedUserData);
   });
 });

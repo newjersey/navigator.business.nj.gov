@@ -1,11 +1,11 @@
 import { Business } from "@shared/business";
-import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { UserDataPrime } from "@shared/userData";
 import { calculateNextAnnualFilingDates } from "./calculateNextAnnualFilingDates";
 
 export const getAnnualFilings = (userData: UserDataPrime): UserDataPrime => {
-  const currentBusiness = getCurrentBusinessForUser(userData);
+  const currentBusiness = getCurrentBusiness(userData);
   const filings = currentBusiness.taxFilingData.filings.filter((it) => {
     return it.identifier !== "ANNUAL_FILING";
   });
@@ -34,5 +34,5 @@ export const getAnnualFilings = (userData: UserDataPrime): UserDataPrime => {
     ...currentBusiness,
     taxFilingData: { ...currentBusiness.taxFilingData, filings },
   };
-  return getUserDataWithUpdatedCurrentBusiness(userData, updatedBusiness);
+  return modifyCurrentBusiness(userData, updatedBusiness);
 };

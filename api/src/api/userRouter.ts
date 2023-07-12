@@ -1,5 +1,5 @@
 import { Business } from "@shared/business";
-import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
@@ -48,12 +48,12 @@ const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean => {
 };
 
 const clearTaskItemChecklists = (userData: UserDataPrime): UserDataPrime => {
-  const updatedBusiness: Business = { ...getCurrentBusinessForUser(userData), taskItemChecklist: {} };
-  return getUserDataWithUpdatedCurrentBusiness(userData, updatedBusiness);
+  const updatedBusiness: Business = { ...getCurrentBusiness(userData), taskItemChecklist: {} };
+  return modifyCurrentBusiness(userData, updatedBusiness);
 };
 
 const shouldCheckLicense = (userData: UserDataPrime): boolean => {
-  const currentBusiness = getCurrentBusinessForUser(userData);
+  const currentBusiness = getCurrentBusiness(userData);
   return (
     currentBusiness.licenseData !== undefined &&
     industryHasALicenseType(currentBusiness.profileData.industryId) &&
@@ -62,7 +62,7 @@ const shouldCheckLicense = (userData: UserDataPrime): boolean => {
 };
 
 const shouldUpdateBusinessNameSearch = (userData: UserDataPrime): boolean => {
-  const currentBusiness = getCurrentBusinessForUser(userData);
+  const currentBusiness = getCurrentBusiness(userData);
   if (
     !currentBusiness.formationData.businessNameAvailability?.lastUpdatedTimeStamp &&
     !currentBusiness.formationData.dbaBusinessNameAvailability?.lastUpdatedTimeStamp
@@ -100,13 +100,13 @@ export const getSignedInUserId = (req: Request): string => {
 
 const legalStructureHasChanged = (oldUserData: UserDataPrime, newUserData: UserDataPrime): boolean => {
   return (
-    getCurrentBusinessForUser(oldUserData).profileData.legalStructureId !==
-    getCurrentBusinessForUser(newUserData).profileData.legalStructureId
+    getCurrentBusiness(oldUserData).profileData.legalStructureId !==
+    getCurrentBusiness(newUserData).profileData.legalStructureId
   );
 };
 
 const businessHasFormed = (userData: UserDataPrime): boolean => {
-  return getCurrentBusinessForUser(userData).formationData.getFilingResponse?.success ?? false;
+  return getCurrentBusiness(userData).formationData.getFilingResponse?.success ?? false;
 };
 
 export const userRouterFactory = (
@@ -184,8 +184,8 @@ export const userRouterFactory = (
   const industryHasChanged = async (userData: UserDataPrime): Promise<boolean> => {
     try {
       const oldUserData = await userDataClient.get(userData.user.id);
-      const oldBusinessData = getCurrentBusinessForUser(oldUserData);
-      const currentBusinessData = getCurrentBusinessForUser(userData);
+      const oldBusinessData = getCurrentBusiness(oldUserData);
+      const currentBusinessData = getCurrentBusiness(userData);
 
       return oldBusinessData.profileData.industryId !== currentBusinessData.profileData.industryId;
     } catch {
@@ -205,8 +205,8 @@ export const userRouterFactory = (
       // prevent legal structure from changing if business has been formed
 
       if (businessHasFormed(oldUserData)) {
-        const oldBusiness = getCurrentBusinessForUser(oldUserData);
-        const currentBusiness = getCurrentBusinessForUser(userData);
+        const oldBusiness = getCurrentBusiness(oldUserData);
+        const currentBusiness = getCurrentBusiness(userData);
         const updatedBusiness: Business = {
           ...currentBusiness,
           profileData: {
@@ -215,11 +215,11 @@ export const userRouterFactory = (
           },
         };
 
-        return getUserDataWithUpdatedCurrentBusiness(userData, updatedBusiness);
+        return modifyCurrentBusiness(userData, updatedBusiness);
       }
 
       const currentBusiness: Business = {
-        ...getCurrentBusinessForUser(userData),
+        ...getCurrentBusiness(userData),
         formationData: {
           formationResponse: undefined,
           getFilingResponse: undefined,
@@ -231,7 +231,7 @@ export const userRouterFactory = (
         },
       };
 
-      return getUserDataWithUpdatedCurrentBusiness(userData, currentBusiness);
+      return modifyCurrentBusiness(userData, currentBusiness);
     }
 
     return userData;
@@ -266,7 +266,7 @@ export const userRouterFactory = (
       return userData;
     }
     try {
-      const currentBusiness = getCurrentBusinessForUser(userData);
+      const currentBusiness = getCurrentBusiness(userData);
       const isForeign = currentBusiness.profileData.businessPersona === "FOREIGN";
       const needsDba = currentBusiness.profileData.needsNexusDbaName;
       const nameToSearch = needsDba
@@ -301,14 +301,14 @@ export const userRouterFactory = (
         },
       };
 
-      return getUserDataWithUpdatedCurrentBusiness(userData, updatedBusiness);
+      return modifyCurrentBusiness(userData, updatedBusiness);
     } catch {
       return userData;
     }
   };
 
   const asyncUpdateAndSaveLicenseStatusIfNeeded = async (userData: UserDataPrime): Promise<void> => {
-    const currentBusinessLicenseData = getCurrentBusinessForUser(userData).licenseData;
+    const currentBusinessLicenseData = getCurrentBusiness(userData).licenseData;
     if (!currentBusinessLicenseData || !shouldCheckLicense(userData)) {
       return;
     }
@@ -325,9 +325,9 @@ export const userRouterFactory = (
 
 const setLastUpdatedISO = (userData: UserDataPrime): UserDataPrime => {
   const updatedBusiness: Business = {
-    ...getCurrentBusinessForUser(userData),
+    ...getCurrentBusiness(userData),
     lastUpdatedISO: getCurrentDateISOString(),
   };
   const updatedUserData: UserDataPrime = { ...userData, lastUpdatedISO: getCurrentDateISOString() };
-  return getUserDataWithUpdatedCurrentBusiness(updatedUserData, updatedBusiness);
+  return modifyCurrentBusiness(updatedUserData, updatedBusiness);
 };

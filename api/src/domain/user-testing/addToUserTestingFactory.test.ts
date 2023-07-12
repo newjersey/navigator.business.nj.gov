@@ -2,7 +2,7 @@ import { generateUser, generateUserDataPrime } from "@shared/test";
 import { AddToUserTesting, UserTestingClient } from "../types";
 import { addToUserTestingFactory } from "./addToUserTestingFactory";
 
-import { getCurrentBusinessForUser } from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/businessHelpers";
 
 describe("addToUserTesting", () => {
   let stubUserTestingClient: jest.Mocked<UserTestingClient>;
@@ -23,7 +23,7 @@ describe("addToUserTesting", () => {
 
     expect(stubUserTestingClient.add).toHaveBeenCalledWith(
       userData.user,
-      getCurrentBusinessForUser(userData).profileData
+      getCurrentBusiness(userData).profileData
     );
     expect(response).toEqual({
       ...userData,

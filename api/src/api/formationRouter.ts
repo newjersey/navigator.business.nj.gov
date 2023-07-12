@@ -1,5 +1,5 @@
 import { Business } from "@shared/business";
-import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
 import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";
 import { ProfileDocuments } from "@shared/profileData";
@@ -41,7 +41,7 @@ export const formationRouterFactory = (
     const signedInUser = getSignedInUser(req);
     const signedInUserId = getSignedInUserId(req);
     const userData = await userDataClient.get(signedInUserId);
-    const currentBusiness = getCurrentBusinessForUser(userData);
+    const currentBusiness = getCurrentBusiness(userData);
 
     if (!currentBusiness.formationData.formationResponse?.formationId) {
       res.status(400).send("No formation ID");
@@ -118,7 +118,7 @@ export const formationRouterFactory = (
           },
         };
 
-        const userDataWithResponse = getUserDataWithUpdatedCurrentBusiness(userData, businessWithResponse);
+        const userDataWithResponse = modifyCurrentBusiness(userData, businessWithResponse);
         await userDataClient.put(userDataWithResponse);
         res.json(userDataWithResponse);
       })

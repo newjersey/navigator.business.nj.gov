@@ -1,11 +1,11 @@
 import { Business } from "@shared/business";
-import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
 import { isFieldAnswered, OPPORTUNITY_FIELDS } from "@shared/domain-logic/opportunityFields";
 import { UserDataPrime } from "@shared/userData";
 import { UpdateSidebarCards } from "./types";
 
 export const updateSidebarCards: UpdateSidebarCards = (userData: UserDataPrime): UserDataPrime => {
-  const currentBusiness = getCurrentBusinessForUser(userData);
+  const currentBusiness = getCurrentBusiness(userData);
   let cards = currentBusiness.preferences.visibleSidebarCards;
   const operatingPhase = currentBusiness.profileData.operatingPhase;
 
@@ -79,5 +79,5 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserDataPrime):
       visibleSidebarCards: cards,
     },
   };
-  return getUserDataWithUpdatedCurrentBusiness(userData, updatedBusiness);
+  return modifyCurrentBusiness(userData, updatedBusiness);
 };

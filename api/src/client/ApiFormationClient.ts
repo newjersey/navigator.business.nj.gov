@@ -19,7 +19,7 @@ import { FormationClient } from "../domain/types";
 import { LogWriterType } from "../libs/logWriter";
 import { splitErrorField } from "./splitErrorField";
 
-import { getCurrentBusinessForUser } from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/businessHelpers";
 
 type ApiConfig = {
   account: string;
@@ -164,7 +164,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
     config: ApiConfig,
     foreignGoodStandingFile: InputFile | undefined
   ): ApiSubmission => {
-    const currentBusiness = getCurrentBusinessForUser(userData);
+    const currentBusiness = getCurrentBusiness(userData);
     const formationFormData = currentBusiness.formationData.formationFormData;
 
     const isManual = formationFormData.agentNumberOrManual === "MANUAL_ENTRY";

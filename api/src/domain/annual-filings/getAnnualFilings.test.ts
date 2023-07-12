@@ -1,5 +1,5 @@
 import { Business } from "@shared/business";
-import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
 import {
   generateProfileData,
   generateTaxFilingCalendarEvent,
@@ -30,7 +30,7 @@ describe("getAnnualFilings", () => {
     });
 
     const response = getAnnualFilings(postedUserData);
-    const currentBusiness = getCurrentBusinessForUser(postedUserData);
+    const currentBusiness = getCurrentBusiness(postedUserData);
     const expectedBusiness: Business = {
       ...currentBusiness,
       taxFilingData: {
@@ -42,7 +42,7 @@ describe("getAnnualFilings", () => {
         ]),
       },
     };
-    const expectedUserData = getUserDataWithUpdatedCurrentBusiness(postedUserData, expectedBusiness);
+    const expectedUserData = modifyCurrentBusiness(postedUserData, expectedBusiness);
 
     expect(response).toEqual(expectedUserData);
   });
@@ -63,7 +63,7 @@ describe("getAnnualFilings", () => {
     });
 
     const response = getAnnualFilings(postedUserData);
-    const currentBusiness = getCurrentBusinessForUser(postedUserData);
+    const currentBusiness = getCurrentBusiness(postedUserData);
     const expectedBusiness: Business = {
       ...currentBusiness,
       taxFilingData: {
@@ -75,7 +75,7 @@ describe("getAnnualFilings", () => {
         ]),
       },
     };
-    const expectedUserData = getUserDataWithUpdatedCurrentBusiness(postedUserData, expectedBusiness);
+    const expectedUserData = modifyCurrentBusiness(postedUserData, expectedBusiness);
 
     expect(response).toEqual(expectedUserData);
   });
@@ -96,7 +96,7 @@ describe("getAnnualFilings", () => {
     });
 
     const response = getAnnualFilings(postedUserData);
-    const currentBusiness = getCurrentBusinessForUser(postedUserData);
+    const currentBusiness = getCurrentBusiness(postedUserData);
     const expectedBusiness: Business = {
       ...currentBusiness,
       taxFilingData: {
@@ -108,7 +108,7 @@ describe("getAnnualFilings", () => {
         ]),
       },
     };
-    const expectedUserData = getUserDataWithUpdatedCurrentBusiness(postedUserData, expectedBusiness);
+    const expectedUserData = modifyCurrentBusiness(postedUserData, expectedBusiness);
 
     expect(response).toEqual(expectedUserData);
   });
@@ -127,12 +127,12 @@ describe("getAnnualFilings", () => {
     });
 
     const response = getAnnualFilings(postedUserData);
-    const currentBusiness = getCurrentBusinessForUser(response);
+    const currentBusiness = getCurrentBusiness(response);
     const expectedBusiness: Business = {
       ...currentBusiness,
       taxFilingData: generateTaxFilingData({ filings: [] }),
     };
-    const expectedUserData = getUserDataWithUpdatedCurrentBusiness(response, expectedBusiness);
+    const expectedUserData = modifyCurrentBusiness(response, expectedBusiness);
 
     expect(response).toEqual(expectedUserData);
   });

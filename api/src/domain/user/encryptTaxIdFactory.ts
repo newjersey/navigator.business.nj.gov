@@ -1,5 +1,5 @@
 import { Business } from "@shared/business";
-import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
 import { maskingCharacter } from "@shared/profileData";
 import { UserDataPrime } from "@shared/userData";
 import { EncryptionDecryptionClient, EncryptTaxId } from "../types";
@@ -7,7 +7,7 @@ import { maskTaxId } from "./maskTaxId";
 
 export const encryptTaxIdFactory = (encryptionDecryptionClient: EncryptionDecryptionClient): EncryptTaxId => {
   return async (userData: UserDataPrime): Promise<UserDataPrime> => {
-    const currentBusiness = getCurrentBusinessForUser(userData);
+    const currentBusiness = getCurrentBusiness(userData);
     if (!currentBusiness.profileData.taxId || currentBusiness.profileData.taxId?.includes(maskingCharacter)) {
       return userData;
     }
@@ -24,6 +24,6 @@ export const encryptTaxIdFactory = (encryptionDecryptionClient: EncryptionDecryp
         encryptedTaxId: encryptedTaxId,
       },
     };
-    return getUserDataWithUpdatedCurrentBusiness(userData, updatedBusiness);
+    return modifyCurrentBusiness(userData, updatedBusiness);
   };
 };

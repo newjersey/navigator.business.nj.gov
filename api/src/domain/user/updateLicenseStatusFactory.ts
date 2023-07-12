@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Business, TaskProgress } from "@shared/business";
-import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
 import { LicenseStatusResult, NameAndAddress } from "@shared/license";
 import { UserDataPrime } from "@shared/userData";
@@ -16,7 +16,7 @@ const update = (
     completed: boolean;
   }
 ): UserDataPrime => {
-  const currentBusiness = getCurrentBusinessForUser(userData);
+  const currentBusiness = getCurrentBusiness(userData);
   const updatedBusiness: Business = {
     ...currentBusiness,
     taskProgress: {
@@ -41,13 +41,13 @@ const update = (
     },
   };
 
-  return getUserDataWithUpdatedCurrentBusiness(userData, updatedBusiness);
+  return modifyCurrentBusiness(userData, updatedBusiness);
 };
 
 export const updateLicenseStatusFactory = (searchLicenseStatus: SearchLicenseStatus): UpdateLicenseStatus => {
   return async (userData: UserDataPrime, nameAndAddress: NameAndAddress): Promise<UserDataPrime> => {
     const licenseType = convertIndustryToLicenseType(
-      getCurrentBusinessForUser(userData).profileData.industryId
+      getCurrentBusiness(userData).profileData.industryId
     );
     return searchLicenseStatus(nameAndAddress, licenseType)
       .then((licenseStatusResult: LicenseStatusResult) => {
