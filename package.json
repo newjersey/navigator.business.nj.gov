@@ -50,7 +50,7 @@
     "@newjersey/njwds": "0.3.0",
     "@storybook/addon-outline": "6.5.16",
     "@types/mdast": "3.0.11",
-    "airtable": "0.11.6",
+    "airtable": "0.12.1",
     "axios": "0.27.2",
     "babel-jest": "29.5.0",
     "body-parser": "1.20.2",
