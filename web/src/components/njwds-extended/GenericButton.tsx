@@ -21,6 +21,7 @@ export interface GenericButtonProps {
   isUnBolded?: boolean;
   isTextAlignedLeft?: boolean;
   isLargeButton?: boolean;
+  isTextNoWrap?: boolean;
 }
 
 export const GenericButton = forwardRef(function GenericButton(
@@ -37,6 +38,7 @@ export const GenericButton = forwardRef(function GenericButton(
   const isLargeButton = props.isLargeButton ? "usa-button--big" : "";
   const isSmallerText = props.isSmallerText ? "font-body-2xs" : "";
   const intercomButton = props.isIntercomEnabled ? "intercom-button" : "";
+  const isTextNoWrap = props.isTextNoWrap ? "text-no-wrap" : "";
 
   const widthRef = useRef<HTMLInputElement | null>(null);
   const [width, setWidth] = useState<number>();
@@ -59,6 +61,7 @@ export const GenericButton = forwardRef(function GenericButton(
     showDisabledClass,
     fullWidth,
     isVerticalPaddingRemoved,
+    isTextNoWrap,
   ]
     .map((i) => {
       return i?.trim();

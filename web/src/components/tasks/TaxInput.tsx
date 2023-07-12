@@ -123,7 +123,7 @@ export const TaxInput = (props: Props): ReactElement => {
           onBack: (): void => {},
         }}
       >
-        <div className={"flex flex-row"}>
+        <div className={isTabletAndUp ? "flex flex-row" : ""}>
           {shouldLockTaxId ? (
             <Alert variant="success" className="width-100">
               <DisabledTaxId template={DisabledElement} />
@@ -138,6 +138,7 @@ export const TaxInput = (props: Props): ReactElement => {
                   isLoading={isLoading}
                   isSubmitButton={true}
                   isRightMarginRemoved={true}
+                  isTextNoWrap={isTabletAndUp}
                   isFullWidthOnDesktop={!isTabletAndUp}
                 >
                   {saveButtonText}
