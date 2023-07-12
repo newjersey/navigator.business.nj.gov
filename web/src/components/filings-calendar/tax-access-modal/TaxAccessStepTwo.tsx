@@ -294,7 +294,11 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
           <TaxAccessModalBody isStepOne={false} showHeader={canMoveToPrevStep} />
 
           {displayBusinessName() && (
-            <WithErrorBar hasError={!!formContextState.fieldStates.businessName?.invalid} type="ALWAYS">
+            <WithErrorBar
+              hasError={!!formContextState.fieldStates.businessName?.invalid}
+              type="ALWAYS"
+              className="margin-top-2"
+            >
               <FieldLabelModal
                 fieldName="businessName"
                 overrides={{
@@ -310,6 +314,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
             <WithErrorBar
               hasError={!!formContextState.fieldStates.responsibleOwnerName?.invalid}
               type="ALWAYS"
+              className="margin-top-2"
             >
               <FieldLabelModal
                 fieldName="responsibleOwnerName"
@@ -325,7 +330,11 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
             </WithErrorBar>
           )}
 
-          <WithErrorBar hasError={!!formContextState.fieldStates.taxId?.invalid} type="ALWAYS">
+          <WithErrorBar
+            hasError={!!formContextState.fieldStates.taxId?.invalid}
+            type="ALWAYS"
+            className="margin-top-2"
+          >
             <div data-testid="taxIdInput">
               <FieldLabelModal
                 fieldName="taxId"

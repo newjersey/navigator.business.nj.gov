@@ -100,7 +100,11 @@ export const FormationDateModal = (props: Props): ReactElement => {
             />
           </WithErrorBar>
           {shouldShowMunicipalityQuestion() && (
-            <WithErrorBar hasError={formContextState.fieldStates.municipality.invalid} type="ALWAYS">
+            <WithErrorBar
+              hasError={formContextState.fieldStates.municipality.invalid}
+              type="ALWAYS"
+              className="margin-top-2"
+            >
               <FieldLabelModal fieldName="municipality" />
               <ProfileMunicipality required />
             </WithErrorBar>
