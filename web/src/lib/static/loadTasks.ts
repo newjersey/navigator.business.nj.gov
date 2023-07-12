@@ -60,7 +60,7 @@ export const loadTaskByUrlSlug = (urlSlug: string): Task => {
   }
 };
 
-const loadTaskByFileName = (fileName: string, directory: string): Task => {
+export const loadTaskByFileName = (fileName: string, directory: string): Task => {
   const fullPath = path.join(directory, `${fileName}`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
@@ -69,11 +69,14 @@ const loadTaskByFileName = (fileName: string, directory: string): Task => {
 
   const taskWithoutLinks = convertTaskMd(fileContents);
   const fileNameWithoutMd = fileName.split(".md")[0];
-  const unlockedByTaskLinks = (
-    dependencies.find((dependency) => {
-      return dependency.name === fileNameWithoutMd;
-    })?.dependencies || []
-  ).map((dependencyFileName) => {
+
+  const currentTaskDependencies = dependencies.find((dependency) => {
+    return dependency.task === fileNameWithoutMd || dependency.licenseTask === fileNameWithoutMd;
+  });
+  const taskDependencies = currentTaskDependencies?.taskDependencies || [];
+  const licenseTaskDependencies = currentTaskDependencies?.licenseTaskDependencies || [];
+  const combinedDependencies = [...taskDependencies, ...licenseTaskDependencies];
+  const unlockedByTaskLinks = combinedDependencies.map((dependencyFileName) => {
     return loadTaskLinkByFilename(dependencyFileName);
   });
 
