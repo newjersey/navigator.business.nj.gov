@@ -24,7 +24,7 @@ export type BusinessUser = {
 
 export const decideABExperience = (): ABExperience => {
   const percent = process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE ?? 0;
-  return Math.floor(Math.random() * 100) >= percent ? "ExperienceA" : "ExperienceB";
+  return Math.floor(Math.random() * 100) >= Number(percent) ? "ExperienceA" : "ExperienceB";
 };
 
 export const emptyBusinessUser: BusinessUser = {
