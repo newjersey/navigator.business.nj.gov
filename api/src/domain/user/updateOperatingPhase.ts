@@ -1,10 +1,10 @@
-import { Business } from "@shared/business";
+import { Business, TaskProgress } from "@shared/business";
 import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
 import { businessStructureTaskId, formationTaskId, taxTaskId } from "@shared/domain-logic/taskIds";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { OperatingPhaseId } from "@shared/operatingPhase";
 import { BusinessPersona, ForeignBusinessType } from "@shared/profileData";
-import { TaskProgress, UserDataPrime } from "@shared/userData";
+import { UserDataPrime } from "@shared/userData";
 import { UpdateOperatingPhase } from "../types";
 
 export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserDataPrime): UserDataPrime => {

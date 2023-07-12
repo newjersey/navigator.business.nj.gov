@@ -2,10 +2,11 @@
 
 import { businessStructureTaskId, formationTaskId, taxTaskId } from "@shared/domain-logic/taskIds";
 import { generatePreferences, generateProfileData, generateUserDataPrime } from "@shared/test";
-import { TaskProgress, UserDataPrime } from "@shared/userData";
+import {  UserDataPrime } from "@shared/userData";
 import { updateOperatingPhase } from "./updateOperatingPhase";
 
 import { getCurrentBusinessForUser } from "@shared/businessHelpers";
+import { TaskProgress } from "@shared/business";
 
 describe("updateOperatingPhase", () => {
   describe("OWNING", () => {

@@ -1,4 +1,4 @@
-import { Business, createEmptyBusiness } from "./business";
+import { Business, createEmptyBusiness, OnboardingFormProgress, Preferences, TaskProgress } from "./business";
 import { BusinessUser } from "./businessUser";
 import { createEmptyFormationFormData, FormationData } from "./formationData";
 import { LicenseData } from "./license";
@@ -102,22 +102,3 @@ export const createEmptyUserDataPrime = (user: BusinessUser): UserDataPrime => {
     dateCreatedISO: undefined,
   };
 };
-
-export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
-
-export interface Preferences {
-  roadmapOpenSections: SectionType[];
-  roadmapOpenSteps: number[];
-  hiddenFundingIds: string[];
-  hiddenCertificationIds: string[];
-  visibleSidebarCards: string[];
-  returnToLink: string;
-  isCalendarFullView: boolean;
-  isHideableRoadmapOpen: boolean;
-  phaseNewlyChanged: boolean;
-}
-
-export type OnboardingFormProgress = "UNSTARTED" | "COMPLETED";
-
-export const sectionNames = ["PLAN", "START"] as const;
-export type SectionType = (typeof sectionNames)[number];

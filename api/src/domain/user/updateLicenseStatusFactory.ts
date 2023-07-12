@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Business } from "@shared/business";
+import { Business, TaskProgress } from "@shared/business";
 import { getCurrentBusinessForUser, getUserDataWithUpdatedCurrentBusiness } from "@shared/businessHelpers";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
 import { LicenseStatusResult, NameAndAddress } from "@shared/license";
-import { TaskProgress, UserDataPrime } from "@shared/userData";
+import { UserDataPrime } from "@shared/userData";
 import { convertIndustryToLicenseType } from "../license-status/convertIndustryToLicenseType";
 import { SearchLicenseStatus, UpdateLicenseStatus } from "../types";
 
