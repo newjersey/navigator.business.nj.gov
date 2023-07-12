@@ -80,7 +80,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/caching-materials-manager-node@npm:^3.2.0":
+"@aws-crypto/caching-materials-manager-node@npm:^3.2.2":
   version: 3.2.2
   resolution: "@aws-crypto/caching-materials-manager-node@npm:3.2.2"
   dependencies:
@@ -91,19 +91,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/client-node@npm:3.2.0":
-  version: 3.2.0
-  resolution: "@aws-crypto/client-node@npm:3.2.0"
+"@aws-crypto/client-node@npm:3.2.2":
+  version: 3.2.2
+  resolution: "@aws-crypto/client-node@npm:3.2.2"
   dependencies:
-    "@aws-crypto/caching-materials-manager-node": ^3.2.0
-    "@aws-crypto/decrypt-node": ^3.2.0
-    "@aws-crypto/encrypt-node": ^3.2.0
-    "@aws-crypto/kms-keyring-node": ^3.2.0
-    "@aws-crypto/material-management-node": ^3.2.0
-    "@aws-crypto/raw-aes-keyring-node": ^3.2.0
-    "@aws-crypto/raw-rsa-keyring-node": ^3.2.0
+    "@aws-crypto/caching-materials-manager-node": ^3.2.2
+    "@aws-crypto/decrypt-node": ^3.2.2
+    "@aws-crypto/encrypt-node": ^3.2.2
+    "@aws-crypto/kms-keyring-node": ^3.2.2
+    "@aws-crypto/material-management-node": ^3.2.2
+    "@aws-crypto/raw-aes-keyring-node": ^3.2.2
+    "@aws-crypto/raw-rsa-keyring-node": ^3.2.2
     tslib: ^2.2.0
-  checksum: a6de493123bb2d1a441018223a610caac65662e932088528198a2fdb9d18fd0e2a900afcd805133cffbaff50abf1d2104a2a83ffb7c1cc8b478f179172c7b76a
+  checksum: cb4bb26dc7a8b81721132a6a8ed17606e4735aef37c4795ae700b29c7d931e58492db6c97777640925c20247a93bbd8030857f59ddb7a884b18311687ad02c33
   languageName: node
   linkType: hard
 
@@ -129,7 +129,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/decrypt-node@npm:^3.2.0":
+"@aws-crypto/decrypt-node@npm:^3.2.2":
   version: 3.2.2
   resolution: "@aws-crypto/decrypt-node@npm:3.2.2"
   dependencies:
@@ -143,7 +143,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/encrypt-node@npm:^3.2.0":
+"@aws-crypto/encrypt-node@npm:^3.2.2":
   version: 3.2.2
   resolution: "@aws-crypto/encrypt-node@npm:3.2.2"
   dependencies:
@@ -193,7 +193,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/kms-keyring-node@npm:^3.2.0":
+"@aws-crypto/kms-keyring-node@npm:^3.2.2":
   version: 3.2.2
   resolution: "@aws-crypto/kms-keyring-node@npm:3.2.2"
   dependencies:
@@ -215,7 +215,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/material-management-node@npm:^3.2.0, @aws-crypto/material-management-node@npm:^3.2.2":
+"@aws-crypto/material-management-node@npm:^3.2.2":
   version: 3.2.2
   resolution: "@aws-crypto/material-management-node@npm:3.2.2"
   dependencies:
@@ -238,7 +238,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/raw-aes-keyring-node@npm:^3.2.0":
+"@aws-crypto/raw-aes-keyring-node@npm:^3.2.2":
   version: 3.2.2
   resolution: "@aws-crypto/raw-aes-keyring-node@npm:3.2.2"
   dependencies:
@@ -261,7 +261,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/raw-rsa-keyring-node@npm:^3.2.0":
+"@aws-crypto/raw-rsa-keyring-node@npm:^3.2.2":
   version: 3.2.2
   resolution: "@aws-crypto/raw-rsa-keyring-node@npm:3.2.2"
   dependencies:
@@ -4369,7 +4369,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/api@workspace:api"
   dependencies:
-    "@aws-crypto/client-node": 3.2.0
+    "@aws-crypto/client-node": 3.2.2
     "@aws-sdk/client-cloudwatch-logs": 3.312.0
     "@aws-sdk/client-dynamodb": 3.312.0
     "@aws-sdk/client-s3": 3.312.0
@@ -4460,7 +4460,7 @@ __metadata:
   dependencies:
     "@aws-amplify/auth": 5.3.1
     "@aws-amplify/core": 5.1.10
-    "@aws-crypto/client-node": 3.2.0
+    "@aws-crypto/client-node": 3.2.2
     "@aws-crypto/sha256-browser": 4.0.0
     "@aws-sdk/client-cloudwatch-logs": 3.312.0
     "@aws-sdk/client-dynamodb": 3.312.0
