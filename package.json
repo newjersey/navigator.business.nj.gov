@@ -308,7 +308,7 @@
     "trim@0.0.1": "0.0.3",
     "postcss": "8.4.25",
     "glob-parent": "6.0.2",
-    "tar": "6.1.13",
+    "tar": "6.1.15",
     "ansi-regex": "5.0.1",
     "trim-newlines": "5.0.0"
   }
