@@ -104,6 +104,7 @@ export const CountryDropdown = (props: Props): ReactElement => {
           <TextField
             {...params}
             className="margin-top-2"
+            fullWidth
             id={props.fieldName}
             name={props.fieldName}
             disabled={props.disabled}
@@ -121,7 +122,7 @@ export const CountryDropdown = (props: Props): ReactElement => {
               }
             }}
             error={props.error}
-            helperText={props.error ? props.validationText ?? " " : " "}
+            helperText={props.error && props.validationText}
           />
         );
       }}

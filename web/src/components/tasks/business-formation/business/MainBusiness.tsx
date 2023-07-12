@@ -9,8 +9,10 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
+import { MediaQueries } from "@/lib/PageSizes";
 import { isForeignCorporation } from "@/lib/utils/helpers";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
+import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext, useMemo } from "react";
 import { ForeignCertificate } from "./ForeignCertificate";
 import { PracticesLaw } from "./PracticesLaw";
@@ -23,14 +25,15 @@ export const MainBusiness = (): ReactElement => {
     () => state.formationFormData.businessLocationType !== "NJ",
     [state.formationFormData.businessLocationType]
   );
+  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   return (
-    <>
+    <div className={"margin-bottom-4"}>
       <BusinessNameAndLegalStructure />
       <WithErrorBar
         hasError={doSomeFieldsHaveError(["businessSuffix", "businessStartDate"])}
         type="DESKTOP-ONLY"
-        className="grid-row tablet:grid-gap-1"
+        className="grid-row tablet:grid-gap-1 margin-top-4"
       >
         <WithErrorBar
           hasError={doesFieldHaveError("businessSuffix")}
@@ -57,7 +60,7 @@ export const MainBusiness = (): ReactElement => {
             <WithErrorBar
               hasError={doesFieldHaveError("foreignStateOfFormation")}
               type="MOBILE-ONLY"
-              className="tablet:grid-col-6"
+              className={`tablet:grid-col-6 ${isTabletAndUp ? "" : "margin-top-2"}`}
             >
               <ForeignStateOfFormation />
             </WithErrorBar>
@@ -99,6 +102,6 @@ export const MainBusiness = (): ReactElement => {
       )}
       <hr className="margin-bottom-4 margin-top-0" aria-hidden={true} />
       {isForeign ? <MainBusinessForeignAddressFlow /> : <MainBusinessAddressNj />}
-    </>
+    </div>
   );
 };
