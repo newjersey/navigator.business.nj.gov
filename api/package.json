@@ -42,7 +42,7 @@
     "@aws-sdk/util-dynamodb": "3.312.0",
     "@businessnjgovnavigator/shared": "*",
     "@serverless/typescript": "3.29.0",
-    "airtable": "0.11.6",
+    "airtable": "0.12.1",
     "axios": "0.27.2",
     "body-parser": "1.20.2",
     "cors": "2.8.5",
