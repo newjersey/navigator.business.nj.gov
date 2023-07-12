@@ -1,3 +1,10 @@
+## [5.23.3](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.23.2...v5.23.3) (2023-07-12)
+
+
+### Bug Fixes
+
+* enabling alert outage bar ([c0b6d29](https://github.com/newjersey/navigator.business.nj.gov/commit/c0b6d2954bf5a982e4f52f715ccd1374ef152e8e))
+
 ## [5.23.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.23.1...v5.23.2) (2023-07-12)
 
 
