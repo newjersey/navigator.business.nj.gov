@@ -1,21 +1,25 @@
 ---
+agencyId: municipal-clerk
+requiresLocation: true
 filename: town-mercantile-license
 urlSlug: town-mercantile-license
-name: Get a Mercantile License if Your Town Requires It
+name: Get Your Mercantile License if Your Town Requires It
 webflowName: "Businesses with a Physical Location: Mercantile License"
+summaryDescriptionMd: >+
+  Prior to opening your physical location, you may need to get a mercantile
+  license. Some local governments require businesses with physical locations to
+  get a mercantile license. Each town or city will have its own application
+  process for the mercantile license.
+
+
+
 industryId:
   - restaurant
+callToActionText: ""
 callToActionLink: ""
 id: check-local-requirements
-callToActionText: ""
 webflowId: 64147a42689e2308a6b2252a
-agencyId: municipal-clerk
 licenseCertificationClassification: ""
-requiresLocation: true
-summaryDescriptionMd: >
-  Prior to opening your physical location, you may need to get a mercantile license. The mercantile license provides your local government with information on how to reach you in an emergency.
-
-  Each town or city will have its own application process for the mercantile license, some governments do not require this.
 ---
 
 ---
