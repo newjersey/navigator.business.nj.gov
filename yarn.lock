@@ -4362,7 +4362,7 @@ __metadata:
     "@types/dedent": 0.7.0
     "@types/express": 4.17.17
     "@types/jest": 29.5.2
-    "@types/jsonwebtoken": 9.0.1
+    "@types/jsonwebtoken": 9.0.2
     "@types/lodash": 4.14.195
     "@types/node": 16.18.38
     "@types/simple-oauth2": 5.0.4
@@ -4390,7 +4390,7 @@ __metadata:
     jest: 29.6.1
     jest-dynalite: 3.6.1
     jest-junit: 16.0.0
-    jsonwebtoken: 9.0.0
+    jsonwebtoken: 9.0.1
     lodash: 4.17.21
     prettier: 2.8.8
     prettier-plugin-organize-imports: 3.2.2
@@ -4503,12 +4503,12 @@ __metadata:
     "@types/express": 4.17.17
     "@types/jest": 29.5.2
     "@types/js-yaml": 4.0.5
-    "@types/jsonwebtoken": 9.0.1
+    "@types/jsonwebtoken": 9.0.2
     "@types/lodash": 4.14.195
     "@types/mdast": 3.0.11
     "@types/node": 16.18.38
-    "@types/react": 18.0.38
-    "@types/react-dom": 18.0.11
+    "@types/react": 18.2.14
+    "@types/react-dom": 18.2.6
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.2
     "@types/react-transition-group": 4.4.6
@@ -4556,7 +4556,7 @@ __metadata:
     eslint-plugin-unicorn: 46.0.1
     express: 4.18.2
     fast-deep-equal: 3.1.3
-    focus-trap-react: 10.1.1
+    focus-trap-react: 10.2.1
     gray-matter: 4.0.3
     helmet: 6.1.5
     html2canvas: 1.4.1
@@ -4567,7 +4567,7 @@ __metadata:
     jest-environment-jsdom: 29.6.1
     jest-junit: 16.0.0
     js-yaml: 4.1.0
-    jsonwebtoken: 9.0.0
+    jsonwebtoken: 9.0.1
     jspdf: 2.5.1
     kill-port: 1.6.1
     lint-staged: 13.2.3
@@ -4717,8 +4717,8 @@ __metadata:
     "@types/lodash": 4.14.195
     "@types/mdast": 3.0.11
     "@types/node": 16.18.38
-    "@types/react": 18.0.38
-    "@types/react-dom": 18.0.11
+    "@types/react": 18.2.14
+    "@types/react-dom": 18.2.6
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.2
     "@types/react-transition-group": 4.4.6
@@ -4754,7 +4754,7 @@ __metadata:
     eslint-plugin-testing-library: 5.11.0
     eslint-plugin-unicorn: 46.0.1
     fast-deep-equal: 3.1.3
-    focus-trap-react: 10.1.1
+    focus-trap-react: 10.2.1
     gray-matter: 4.0.3
     html2canvas: 1.4.1
     identity-obj-proxy: 3.0.0
@@ -10723,12 +10723,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jsonwebtoken@npm:9.0.1":
-  version: 9.0.1
-  resolution: "@types/jsonwebtoken@npm:9.0.1"
+"@types/jsonwebtoken@npm:9.0.2":
+  version: 9.0.2
+  resolution: "@types/jsonwebtoken@npm:9.0.2"
   dependencies:
     "@types/node": "*"
-  checksum: a7f0925e9a42ad3ae970364c63c5986d40da5c83d51d3f4e624eb0f064a380376f9e3fb3f2f837390a9ab80143f5d75fd51866da30e110f6b486a3379e1c768f
+  checksum: 3bb8d40e78d7eb53e427db6e9f0f22e0890cfee80965dcf741d08341814913afb211306de6e9847c6d241cc8e36f8a59090cbfdcc510ab7c81af9d650c5afe0e
   languageName: node
   linkType: hard
 
@@ -10923,16 +10923,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.0.11":
-  version: 18.0.11
-  resolution: "@types/react-dom@npm:18.0.11"
-  dependencies:
-    "@types/react": "*"
-  checksum: 579691e4d5ec09688087568037c35edf8cfb1ab3e07f6c60029280733ee7b5c06d66df6fcc90786702c93ac8cb13bc7ff16c79ddfc75d082938fbaa36e1cdbf4
-  languageName: node
-  linkType: hard
-
-"@types/react-dom@npm:^18.0.0":
+"@types/react-dom@npm:18.2.6, @types/react-dom@npm:^18.0.0":
   version: 18.2.6
   resolution: "@types/react-dom@npm:18.2.6"
   dependencies:
@@ -10989,7 +10980,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:>=16":
+"@types/react@npm:*, @types/react@npm:18.2.14, @types/react@npm:>=16":
   version: 18.2.14
   resolution: "@types/react@npm:18.2.14"
   dependencies:
@@ -10997,17 +10988,6 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: a6a5e8cc78f486b9020d1ad009aa6c56943c68c7c6376e0f8399e9cbcd950b7b8f5d73f00200f5379f5e58d31d57d8aed24357f301d8e86108cd438ce6c8b3dd
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:18.0.38":
-  version: 18.0.38
-  resolution: "@types/react@npm:18.0.38"
-  dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: 34481c79f4f7ea2aefbaa45281319dc183200230d932d968463eba1643bd3635073d0a17c5c613150a69e36ca18b811ecffafea6384fa3dff3b5203866339d69
   languageName: node
   linkType: hard
 
@@ -19345,21 +19325,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"focus-trap-react@npm:10.1.1":
-  version: 10.1.1
-  resolution: "focus-trap-react@npm:10.1.1"
+"focus-trap-react@npm:10.2.1":
+  version: 10.2.1
+  resolution: "focus-trap-react@npm:10.2.1"
   dependencies:
-    focus-trap: ^7.4.0
-    tabbable: ^6.1.1
+    focus-trap: ^7.5.2
+    tabbable: ^6.2.0
   peerDependencies:
     prop-types: ^15.8.1
     react: ">=16.3.0"
     react-dom: ">=16.3.0"
-  checksum: 66bf8d9efa0efda77b7dc2591736fa38e2892151362db7543ea81e70187b8d2e25f471a31175eb0596a862ec8c6391c943bc5fbf69cfaaeb61c0ef2aa3e4750c
+  checksum: 0abd094e4497adc88f5d206f695f4451ad05db03f21f3b61aa49d919fb02476a0fb15f6857c7485c80456a865732b80e456d457e37fda752591fc1aac3e94633
   languageName: node
   linkType: hard
 
-"focus-trap@npm:^7.4.0":
+"focus-trap@npm:^7.5.2":
   version: 7.5.2
   resolution: "focus-trap@npm:7.5.2"
   dependencies:
@@ -23771,15 +23751,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonwebtoken@npm:9.0.0":
-  version: 9.0.0
-  resolution: "jsonwebtoken@npm:9.0.0"
+"jsonwebtoken@npm:9.0.1":
+  version: 9.0.1
+  resolution: "jsonwebtoken@npm:9.0.1"
   dependencies:
     jws: ^3.2.2
     lodash: ^4.17.21
     ms: ^2.1.1
     semver: ^7.3.8
-  checksum: b9181cecf9df99f1dc0253f91ba000a1aa4d91f5816d1608c0dba61a5623726a0bfe200b51df25de18c1a6000825d231ad7ce2788aa54fd48dcb760ad9eb9514
+  checksum: 0eafe268896f4e8f9ab1f0f20e8c645721b7a9cddc41c0aba1e58da5c34564e8c9990817c1a5b646d795bcbb1339350826fe57c4569b5379ba9eea4a9aa5bbd0
   languageName: node
   linkType: hard
 
@@ -34590,7 +34570,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tabbable@npm:^6.1.1, tabbable@npm:^6.2.0":
+"tabbable@npm:^6.2.0":
   version: 6.2.0
   resolution: "tabbable@npm:6.2.0"
   checksum: f8440277d223949272c74bb627a3371be21735ca9ad34c2570f7e1752bd646ccfc23a9d8b1ee65d6561243f4134f5fbbf1ad6b39ac3c4b586554accaff4a1300
