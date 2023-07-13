@@ -2,6 +2,7 @@ import { createEmptyFormationFormData, FormationData } from "./formationData";
 import { LicenseData } from "./license";
 import { createEmptyProfileData, ProfileData } from "./profileData";
 import { TaxFilingData } from "./taxFiling";
+import { randomInt } from "./intHelpers";
 
 export interface Business {
   id: string;
@@ -17,7 +18,11 @@ export interface Business {
   formationData: FormationData;
 }
 
-export const createEmptyBusiness = (): Business => {
+export const generateBusinessId = (): string => {
+  return `some-Id-${randomInt()}`;
+}
+
+export const createEmptyBusiness = (id?: string): Business => {
   return {
     profileData: createEmptyProfileData(),
     onboardingFormProgress: "UNSTARTED",
@@ -53,7 +58,7 @@ export const createEmptyBusiness = (): Business => {
       isHideableRoadmapOpen: false,
       phaseNewlyChanged: true,
     },
-    id: "",
+    id: id ?? generateBusinessId(),
   };
 };
 

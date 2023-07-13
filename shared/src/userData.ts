@@ -1,4 +1,8 @@
-import { Business, createEmptyBusiness, OnboardingFormProgress, Preferences, TaskProgress } from "./business";
+import {
+  Business,
+  createEmptyBusiness,
+  generateBusinessId,
+} from "./business";
 import { BusinessUser } from "./businessUser";
 import { createEmptyFormationFormData, FormationData } from "./formationData";
 import { LicenseData } from "./license";
@@ -26,7 +30,7 @@ export interface UserDataPrime {
   readonly businesses: Record<string, Business>;
   version: number;
   versionWhenCreated: number;
-  currentBusinessID: string;
+  currentBusinessId: string;
   lastUpdatedISO: string | undefined;
   dateCreatedISO: string | undefined;
 }
@@ -92,13 +96,33 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
 };
 
 export const createEmptyUserDataPrime = (user: BusinessUser): UserDataPrime => {
+  const businessId = generateBusinessId();
   return {
     version: CURRENT_VERSION,
     user: user,
-    businesses: { abc: createEmptyBusiness() },
+    businesses: { abc: createEmptyBusiness(businessId) },
     versionWhenCreated: CURRENT_VERSION,
-    currentBusinessID: "abc",
+    currentBusinessId: businessId,
     lastUpdatedISO: undefined,
     dateCreatedISO: undefined,
   };
 };
+
+export const sectionNames = ["PLAN", "START"] as const;
+export type SectionType = (typeof sectionNames)[number];
+
+export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
+
+export interface Preferences {
+  roadmapOpenSections: SectionType[];
+  roadmapOpenSteps: number[];
+  hiddenFundingIds: string[];
+  hiddenCertificationIds: string[];
+  visibleSidebarCards: string[];
+  returnToLink: string;
+  isCalendarFullView: boolean;
+  isHideableRoadmapOpen: boolean;
+  phaseNewlyChanged: boolean;
+}
+
+export type OnboardingFormProgress = "UNSTARTED" | "COMPLETED";

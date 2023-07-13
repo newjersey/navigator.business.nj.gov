@@ -1,5 +1,5 @@
 import { randomElementFromArray } from "../arrayHelpers";
-import { Business, Preferences, TaskProgress } from "../business";
+import { Business, generateBusinessId, Preferences, TaskProgress } from "../business";
 import { BusinessUser } from "../businessUser";
 import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
@@ -329,7 +329,7 @@ export const generateUserDataPrime = (overrides: LegacyUserDataOverrides): UserD
     versionWhenCreated: -1,
     user: generateUser({}),
     businesses,
-    currentBusinessID: businessID,
+    currentBusinessId: businessID,
     lastUpdatedISO: getCurrentDateISOString(),
     dateCreatedISO: getCurrentDateISOString(),
     ...overrides,
@@ -337,6 +337,7 @@ export const generateUserDataPrime = (overrides: LegacyUserDataOverrides): UserD
 };
 
 export const generateBusinessData = (overrides: Partial<Business>): Business => {
+  const id = overrides.id ?? generateBusinessId();
   const profileData = overrides.profileData ?? generateProfileData({});
   let formationData = overrides.formationData;
   if (!formationData) {
@@ -369,7 +370,7 @@ export const generateBusinessData = (overrides: Partial<Business>): Business => 
     licenseData: generateLicenseData(overrides.licenseData ?? {}),
     preferences: generatePreferences(overrides.preferences ?? {}),
     taxFilingData: generateTaxFilingData(overrides.taxFilingData ?? {}),
-    id: `${randomInt()}`,
+    id,
   };
 };
 
