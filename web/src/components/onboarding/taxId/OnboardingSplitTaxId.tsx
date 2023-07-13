@@ -114,7 +114,7 @@ export const OnboardingSplitTaxId = ({
             />
           </div>
           <div className="grid-row">
-            <span className="padding-x-2 padding-bottom-2 padding-top-4 flex-align-self-center ">/</span>
+            <span className="padding-x-2 padding-bottom-2 padding-top-4">/</span>
             <GenericTextField
               ref={locationBoxRef}
               value={locationValue}
