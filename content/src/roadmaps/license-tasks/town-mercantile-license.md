@@ -7,9 +7,10 @@ name: Get Your Mercantile License if Your Town Requires It
 webflowName: "Businesses with a Physical Location: Mercantile License"
 summaryDescriptionMd: >+
   Prior to opening your physical location, you may need to get a mercantile
-  license. Some local governments require businesses with physical locations to
-  get a mercantile license. Each town or city will have its own application
-  process for the mercantile license.
+  license. 
+
+
+  Some local governments require businesses with physical locations to get a mercantile license. Each town or city will have its own application process for the mercantile license.
 
 
 
