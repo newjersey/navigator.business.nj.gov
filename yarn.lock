@@ -3856,7 +3856,7 @@ __metadata:
     "@types/remove-markdown": 0.3.1
     "@types/simple-oauth2": 5.0.4
     "@types/supertest": 2.0.12
-    "@types/testing-library__jest-dom": 5.14.7
+    "@types/testing-library__jest-dom": 5.14.8
     "@types/uuid": 9.0.2
     "@types/webpack-node-externals": 3.0.0
     "@types/xml2js": 0.4.11
@@ -4064,7 +4064,7 @@ __metadata:
     "@types/react-swipeable-views": 0.13.2
     "@types/react-transition-group": 4.4.6
     "@types/remove-markdown": 0.3.1
-    "@types/testing-library__jest-dom": 5.14.7
+    "@types/testing-library__jest-dom": 5.14.8
     "@typescript-eslint/eslint-plugin": 5.61.0
     "@typescript-eslint/parser": 5.61.0
     airtable: 0.12.1
@@ -10430,16 +10430,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/testing-library__jest-dom@npm:5.14.7":
-  version: 5.14.7
-  resolution: "@types/testing-library__jest-dom@npm:5.14.7"
-  dependencies:
-    "@types/jest": "*"
-  checksum: 197de547ff2c7a7a649470560f323a5b3e7a7c1498baa49f063e7056f64ecdf05d1d68c82fd7e382201ba3fd83e783de48531461c50e4770ef007c1294b8cc0b
-  languageName: node
-  linkType: hard
-
-"@types/testing-library__jest-dom@npm:^5.9.1":
+"@types/testing-library__jest-dom@npm:5.14.8, @types/testing-library__jest-dom@npm:^5.9.1":
   version: 5.14.8
   resolution: "@types/testing-library__jest-dom@npm:5.14.8"
   dependencies:
