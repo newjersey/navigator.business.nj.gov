@@ -56,6 +56,7 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
               <OnboardingIndustry<OnboardingErrors>
                 essentialQuestionErrorTypes={["REQUIRED_ESSENTIAL_QUESTION"]}
                 errorTypes={["ALERT_BAR"]}
+                onboardingFieldLabel
               />
             </div>
           </>
@@ -95,6 +96,7 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
               <OnboardingIndustry<OnboardingErrors>
                 essentialQuestionErrorTypes={["REQUIRED_ESSENTIAL_QUESTION"]}
                 errorTypes={["ALERT_BAR"]}
+                onboardingFieldLabel
               />
             </div>
           </>

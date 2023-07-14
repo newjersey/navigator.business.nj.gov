@@ -71,7 +71,7 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
                   }}
                 />
               </div>
-              <OnboardingTaxId required inputWidth={"default"} />
+              <OnboardingTaxId required />
             </WithErrorBar>
 
             <WithErrorBar hasError type="ALWAYS" className="margin-top-2">
@@ -87,12 +87,7 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
                   }}
                 />
               </div>
-              <OnboardingTaxId
-                validationText={config.taxAccess.failedTaxIdHelper}
-                required
-                error
-                inputWidth={"default"}
-              />
+              <OnboardingTaxId validationText={config.taxAccess.failedTaxIdHelper} required error />
             </WithErrorBar>
           </ProfileDataContext.Provider>
         </ConfigContext.Provider>

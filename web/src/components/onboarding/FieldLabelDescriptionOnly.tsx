@@ -27,7 +27,7 @@ export const FieldLabelDescriptionOnly = (props: Props): ReactElement => {
 
   return (
     <>
-      <Content className={props.bold ? "text-bold" : ""}>
+      <Content className={`${props.bold ? "text-bold" : ""} margin-bottom-05`}>
         {props.isAltDescriptionDisplayed ? altDescription : description}
       </Content>
     </>

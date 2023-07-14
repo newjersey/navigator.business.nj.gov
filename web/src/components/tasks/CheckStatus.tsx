@@ -13,9 +13,6 @@ import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 
 const useStyles = makeStyles(() => {
   return createStyles({
-    disabledTextField: {
-      background: "#e6e6e6",
-    },
     zipCodeField: {
       "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
         {
@@ -95,7 +92,6 @@ export const CheckStatus = (props: Props): ReactElement => {
         <div className="margin-bottom-2">
           <label htmlFor="business-name">{Config.licenseSearchTask.businessNameLabel}</label>
           <TextField
-            className="margin-top-2"
             value={formValues.name}
             onChange={handleChangeForKey("name")}
             variant="outlined"
@@ -108,7 +104,6 @@ export const CheckStatus = (props: Props): ReactElement => {
         <div className="margin-bottom-2">
           <label htmlFor="address-1">{Config.licenseSearchTask.address1Label}</label>
           <TextField
-            className="margin-top-2"
             value={formValues.addressLine1}
             onChange={handleChangeForKey("addressLine1")}
             variant="outlined"
@@ -121,7 +116,6 @@ export const CheckStatus = (props: Props): ReactElement => {
         <div className="margin-bottom-2">
           <label htmlFor="address-2">{Config.licenseSearchTask.address2Label}</label>
           <TextField
-            className="margin-top-2"
             value={formValues.addressLine2}
             onChange={handleChangeForKey("addressLine2")}
             variant="outlined"
@@ -143,7 +137,7 @@ export const CheckStatus = (props: Props): ReactElement => {
                 "data-testid": "zipcode",
                 type: "number",
               }}
-              className={`${classes.zipCodeField} margin-top-2`}
+              className={`${classes.zipCodeField}`}
             />
           </div>
           <div className="flex-half padding-left-1">
@@ -160,7 +154,6 @@ export const CheckStatus = (props: Props): ReactElement => {
                 },
               }}
               disabled
-              className={`${classes.disabledTextField} margin-top-2`}
             />
           </div>
         </div>

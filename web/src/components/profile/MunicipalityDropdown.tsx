@@ -2,7 +2,7 @@ import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { splitAndBoldSearchText } from "@/lib/utils/splitAndBoldSearchText";
-import { Municipality } from "@businessnjgovnavigator/shared/";
+import { Municipality } from "@businessnjgovnavigator/shared/index";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 import { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
 
@@ -83,7 +83,6 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
           <div className="text-field-width-default">
             <TextField
               {...params}
-              className="margin-top-2"
               inputProps={{
                 "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
                 "data-testid": props.fieldName,

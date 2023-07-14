@@ -58,42 +58,30 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
             }}
           >
             <h1>Using Modal Field Label Component</h1>
-
-            <WithErrorBar hasError={false} type="ALWAYS" className="margin-top-2">
-              <div data-testid="taxIdInput">
-                <FieldLabelModal
-                  fieldName="taxId"
-                  overrides={{
-                    header: "Header Text",
-                    description:
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam gravida mattis magna et placerat. Aenean sagittis lectus neque, sed ultrices est fringilla eu. Vivamus non tellus ut dui auctor vehicula. Sed pellentesque nisi vel at blandit urna auctor ut.",
-                    postDescription: "postDescription",
-                    headerNotBolded: "UnBoldedHeader Text",
-                  }}
-                />
-              </div>
-              <OnboardingTaxId required inputWidth={"full"} />
-            </WithErrorBar>
+            <FieldLabelModal
+              fieldName="taxId"
+              overrides={{
+                header: "Header Text",
+                description:
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam gravida mattis magna et placerat. Aenean sagittis lectus neque, sed ultrices est fringilla eu. Vivamus non tellus ut dui auctor vehicula. Sed pellentesque nisi vel at blandit urna auctor ut.",
+                postDescription: "postDescription",
+                headerNotBolded: "UnBoldedHeader Text",
+              }}
+            />
+            <OnboardingTaxId validationText={config.taxAccess.failedTaxIdHelper} required />
 
             <WithErrorBar hasError type="ALWAYS" className="margin-top-2">
-              <div data-testid="taxIdInput">
-                <FieldLabelModal
-                  fieldName="taxId"
-                  overrides={{
-                    header: "Header Text",
-                    description:
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam gravida mattis magna et placerat. Aenean sagittis lectus neque, sed ultrices est fringilla eu. Vivamus non tellus ut dui auctor vehicula. Sed pellentesque nisi vel at blandit urna auctor ut.",
-                    postDescription: "postDescription",
-                    headerNotBolded: "UnBoldedHeader Text",
-                  }}
-                />
-              </div>
-              <OnboardingTaxId
-                validationText={config.taxAccess.failedTaxIdHelper}
-                required
-                error
-                inputWidth={"full"}
+              <FieldLabelModal
+                fieldName="taxId"
+                overrides={{
+                  header: "Header Text",
+                  description:
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam gravida mattis magna et placerat. Aenean sagittis lectus neque, sed ultrices est fringilla eu. Vivamus non tellus ut dui auctor vehicula. Sed pellentesque nisi vel at blandit urna auctor ut.",
+                  postDescription: "postDescription",
+                  headerNotBolded: "UnBoldedHeader Text",
+                }}
               />
+              <OnboardingTaxId validationText={config.taxAccess.failedTaxIdHelper} required error />
             </WithErrorBar>
           </ProfileDataContext.Provider>
         </ConfigContext.Provider>

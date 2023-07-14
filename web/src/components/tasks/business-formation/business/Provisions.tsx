@@ -99,7 +99,7 @@ export const Provisions = (): ReactElement => {
                   }}
                 />
               </div>
-              <div className="grid-col-auto margin-x-2 margin-top-3 display-flex flex-column flex-justify-center">
+              <div className="grid-col-auto margin-x-2 margin-top-05 display-flex flex-column flex-justify-center">
                 <UnStyledButton
                   style="default"
                   onClick={(): void => removeProvision(index)}

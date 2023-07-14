@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { MunicipalityDropdown } from "@/components/onboarding/MunicipalityDropdown";
+import { MunicipalityDropdown } from "@/components/profile/MunicipalityDropdown";
 import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";

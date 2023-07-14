@@ -160,7 +160,6 @@ export const IndustryDropdown = (props: Props): ReactElement => {
           <div className="text-field-width-default">
             <TextField
               {...params}
-              className="margin-top-2"
               id="industryId"
               inputProps={{
                 "aria-label": "Industry",

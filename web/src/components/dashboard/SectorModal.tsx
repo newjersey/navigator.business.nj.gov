@@ -71,9 +71,11 @@ export const SectorModal = (props: Props): ReactElement => {
           secondaryButtonText={Config.dashboardDefaults.sectorModalCancelButton}
           maxWidth="md"
         >
-          <div data-testid="sector-modal" className="padding-top-4">
-            <Content>{Config.dashboardDefaults.sectorModalBody}</Content>
-            <div className="margin-top-2" />
+          <div data-testid="sector-modal">
+            <div className="margin-y-3">
+              <Content>{Config.dashboardDefaults.sectorModalBody}</Content>
+            </div>
+            <hr className="margin-y-4" />
             <WithErrorBar hasError={formContextState.fieldStates.sectorId.invalid} type="ALWAYS">
               <FormControl fullWidth={true}>
                 <FieldLabelModal fieldName="sectorId" />

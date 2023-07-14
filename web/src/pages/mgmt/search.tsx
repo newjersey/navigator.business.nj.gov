@@ -191,7 +191,6 @@ const SearchContentPage = (props: Props): ReactElement => {
       <h1>Search in CMS</h1>
       <label htmlFor="search">Search Exact Text</label>
       <TextField
-        className="margin-top-2"
         name="search"
         variant="outlined"
         type="text"

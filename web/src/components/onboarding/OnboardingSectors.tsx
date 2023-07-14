@@ -103,7 +103,6 @@ export const OnboardingSectors = <T,>(props: Props<T>): ReactElement => {
           return (
             <TextField
               {...params}
-              className="margin-top-2"
               inputProps={{
                 "aria-label": "Sector",
                 "data-testid": "sectorId",
