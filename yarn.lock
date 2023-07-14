@@ -39,31 +39,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/auth@npm:5.3.1":
-  version: 5.3.1
-  resolution: "@aws-amplify/auth@npm:5.3.1"
+"@aws-amplify/auth@npm:5.5.3":
+  version: 5.5.3
+  resolution: "@aws-amplify/auth@npm:5.5.3"
   dependencies:
-    "@aws-amplify/core": 5.1.10
-    amazon-cognito-identity-js: 6.2.0
+    "@aws-amplify/core": 5.5.2
+    amazon-cognito-identity-js: 6.3.1
     tslib: ^1.8.0
-  checksum: cd1daf1862fd0bdf92044d2efc9f0a7df246d749b5bef170690367f09597995158747568343127b9f9fdb66e14d3b888b633ec94af73ba916db48337a3ae30ac
+    url: 0.11.0
+  checksum: 0dbef301ae4c101060e013d4f768f415866515fd2b0f24848fa08e60b3d458e7a6c5a4c2dc2e61bf7b971c95dfc9301fa1aeedd49b35670457ea75b4378d8c54
   languageName: node
   linkType: hard
 
-"@aws-amplify/core@npm:5.1.10":
-  version: 5.1.10
-  resolution: "@aws-amplify/core@npm:5.1.10"
+"@aws-amplify/core@npm:5.5.2":
+  version: 5.5.2
+  resolution: "@aws-amplify/core@npm:5.5.2"
   dependencies:
     "@aws-crypto/sha256-js": 1.2.2
     "@aws-sdk/client-cloudwatch-logs": 3.6.1
-    "@aws-sdk/client-cognito-identity": 3.6.1
-    "@aws-sdk/credential-provider-cognito-identity": 3.6.1
     "@aws-sdk/types": 3.6.1
     "@aws-sdk/util-hex-encoding": 3.6.1
+    isomorphic-unfetch: ^3.0.0
+    react-native-url-polyfill: ^1.3.0
     tslib: ^1.8.0
     universal-cookie: ^4.0.4
     zen-observable-ts: 0.8.19
-  checksum: 7c4eb3613bc41d220e61a92ca2ccbc1781930f3410c5dd169f7a78aa33068788fa1a20aa8df3b024e9715f65b4e90218b9454b1d5c701cda9d7d562301185fbe
+  checksum: 63530613aba5d78d71e5edde862e3a99b022c8c7cd6af72d02281a35d74ddf0870e29a92f4843e92b75bdbc53d4a6fd3504c080e506ae3801f145f4cee633322
   languageName: node
   linkType: hard
 
@@ -550,45 +551,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-cognito-identity@npm:3.6.1":
-  version: 3.6.1
-  resolution: "@aws-sdk/client-cognito-identity@npm:3.6.1"
-  dependencies:
-    "@aws-crypto/sha256-browser": ^1.0.0
-    "@aws-crypto/sha256-js": ^1.0.0
-    "@aws-sdk/config-resolver": 3.6.1
-    "@aws-sdk/credential-provider-node": 3.6.1
-    "@aws-sdk/fetch-http-handler": 3.6.1
-    "@aws-sdk/hash-node": 3.6.1
-    "@aws-sdk/invalid-dependency": 3.6.1
-    "@aws-sdk/middleware-content-length": 3.6.1
-    "@aws-sdk/middleware-host-header": 3.6.1
-    "@aws-sdk/middleware-logger": 3.6.1
-    "@aws-sdk/middleware-retry": 3.6.1
-    "@aws-sdk/middleware-serde": 3.6.1
-    "@aws-sdk/middleware-signing": 3.6.1
-    "@aws-sdk/middleware-stack": 3.6.1
-    "@aws-sdk/middleware-user-agent": 3.6.1
-    "@aws-sdk/node-config-provider": 3.6.1
-    "@aws-sdk/node-http-handler": 3.6.1
-    "@aws-sdk/protocol-http": 3.6.1
-    "@aws-sdk/smithy-client": 3.6.1
-    "@aws-sdk/types": 3.6.1
-    "@aws-sdk/url-parser": 3.6.1
-    "@aws-sdk/url-parser-native": 3.6.1
-    "@aws-sdk/util-base64-browser": 3.6.1
-    "@aws-sdk/util-base64-node": 3.6.1
-    "@aws-sdk/util-body-length-browser": 3.6.1
-    "@aws-sdk/util-body-length-node": 3.6.1
-    "@aws-sdk/util-user-agent-browser": 3.6.1
-    "@aws-sdk/util-user-agent-node": 3.6.1
-    "@aws-sdk/util-utf8-browser": 3.6.1
-    "@aws-sdk/util-utf8-node": 3.6.1
-    tslib: ^2.0.0
-  checksum: d6e970f69f82b41ca56ccf97dd1fef08b8cc6ae12560ad8a66db78182daae685af657f6466475fb39296936dd1f4b443c692ffa9b2e8028ce5294c344c83c428
-  languageName: node
-  linkType: hard
-
 "@aws-sdk/client-dynamodb@npm:3.312.0":
   version: 3.312.0
   resolution: "@aws-sdk/client-dynamodb@npm:3.312.0"
@@ -1017,18 +979,6 @@ __metadata:
     "@aws-sdk/types": 3.6.1
     tslib: ^1.8.0
   checksum: 3960b2a5e8ae74ae94942eb5d8ad4e74ef8b8c13aa6ae46352cae69111ce1470b47a61e1d1b90ce42544477d8e11ce255469a6837c09bf8f1043066a5b4c65b3
-  languageName: node
-  linkType: hard
-
-"@aws-sdk/credential-provider-cognito-identity@npm:3.6.1":
-  version: 3.6.1
-  resolution: "@aws-sdk/credential-provider-cognito-identity@npm:3.6.1"
-  dependencies:
-    "@aws-sdk/client-cognito-identity": 3.6.1
-    "@aws-sdk/property-provider": 3.6.1
-    "@aws-sdk/types": 3.6.1
-    tslib: ^1.8.0
-  checksum: 0a942e1e91a84912c5612b2a55805e52e5a5d76cadd082f49f790d835af0b4a1aa57a2e842497f811aad2afbcc09dc75c244c6e7efd963bc710e28b2cfab8a22
   languageName: node
   linkType: hard
 
@@ -4435,8 +4385,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/root@workspace:."
   dependencies:
-    "@aws-amplify/auth": 5.3.1
-    "@aws-amplify/core": 5.1.10
+    "@aws-amplify/auth": 5.5.3
+    "@aws-amplify/core": 5.5.2
     "@aws-crypto/client-node": 3.2.2
     "@aws-crypto/sha256-browser": 4.0.0
     "@aws-sdk/client-cloudwatch-logs": 3.312.0
@@ -4535,7 +4485,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 6.31.1
     css-loader: 6.8.1
-    cypress: 12.17.0
+    cypress: 12.17.1
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
     dayjs: 1.11.9
@@ -4666,8 +4616,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/web@workspace:web"
   dependencies:
-    "@aws-amplify/auth": 5.3.1
-    "@aws-amplify/core": 5.1.10
+    "@aws-amplify/auth": 5.5.3
+    "@aws-amplify/core": 5.5.2
     "@aws-crypto/sha256-browser": 4.0.0
     "@aws-sdk/protocol-http": 3.310.0
     "@aws-sdk/s3-request-presigner": 3.312.0
@@ -4736,7 +4686,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 6.31.1
     css-loader: 6.8.1
-    cypress: 12.17.0
+    cypress: 12.17.1
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
     dayjs: 1.11.9
@@ -5469,7 +5419,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/request@npm:^2.88.10":
+"@cypress/request@npm:^2.88.11":
   version: 2.88.11
   resolution: "@cypress/request@npm:2.88.11"
   dependencies:
@@ -12231,16 +12181,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"amazon-cognito-identity-js@npm:6.2.0":
-  version: 6.2.0
-  resolution: "amazon-cognito-identity-js@npm:6.2.0"
+"amazon-cognito-identity-js@npm:6.3.1":
+  version: 6.3.1
+  resolution: "amazon-cognito-identity-js@npm:6.3.1"
   dependencies:
     "@aws-crypto/sha256-js": 1.2.2
     buffer: 4.9.2
     fast-base64-decode: ^1.0.0
     isomorphic-unfetch: ^3.0.0
     js-cookie: ^2.2.1
-  checksum: 9b976ceac2a2648bfa707190d683214168cf1a70083152355b36e5b87b1aedbbb38dab8b71904ee968de25e90ebcf1e86ffaa21d809373d31acd73f62b6c7c1c
+  checksum: a38d1c809417d2894613a2fba896434cad3514ed2a16ec6be8084b14788440a4829b50c0dd0ecae3c878ff76bcd1f8df1a862b545eeeb0ca219c6e28cdf598fc
   languageName: node
   linkType: hard
 
@@ -13984,7 +13934,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"buffer@npm:^5.2.1, buffer@npm:^5.5.0, buffer@npm:^5.6.0":
+"buffer@npm:^5.2.1, buffer@npm:^5.4.3, buffer@npm:^5.5.0, buffer@npm:^5.6.0":
   version: 5.7.1
   resolution: "buffer@npm:5.7.1"
   dependencies:
@@ -16220,11 +16170,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:12.17.0":
-  version: 12.17.0
-  resolution: "cypress@npm:12.17.0"
+"cypress@npm:12.17.1":
+  version: 12.17.1
+  resolution: "cypress@npm:12.17.1"
   dependencies:
-    "@cypress/request": ^2.88.10
+    "@cypress/request": ^2.88.11
     "@cypress/xvfb": ^1.2.4
     "@types/node": ^14.14.31
     "@types/sinonjs__fake-timers": 8.1.1
@@ -16268,7 +16218,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: 5ec3b4b63da0297f35fd69ace549158ad7c1836841bcea6e863fc64702fe00907c98553f44816bf4d81664dd3b4a51da2fb4aaabe3ee03414cb45d5cae37deca
+  checksum: 1f042e3e5931498bdf826cba09060939349e677fca8654c9695760acbec5a424cb69d3445ace57cf80deb496d770ffe571ef791dff72af24e7f560ee43986ee4
   languageName: node
   linkType: hard
 
@@ -30655,6 +30605,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-url-polyfill@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "react-native-url-polyfill@npm:1.3.0"
+  dependencies:
+    whatwg-url-without-unicode: 8.0.0-3
+  peerDependencies:
+    react-native: "*"
+  checksum: 24ef81493a642b9359c1e8048de4da84fb554ffcf35677f9d8b11956d700faa4b9ac9d74f56aee67dd8d8b4ef6d9879e7431848785880ada657f8bec0211b00a
+  languageName: node
+  linkType: hard
+
 "react-polyglot@npm:^0.7.0":
   version: 0.7.2
   resolution: "react-polyglot@npm:0.7.2"
@@ -36033,6 +35994,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"url@npm:0.11.0":
+  version: 0.11.0
+  resolution: "url@npm:0.11.0"
+  dependencies:
+    punycode: 1.3.2
+    querystring: 0.2.0
+  checksum: 50d100d3dd2d98b9fe3ada48cadb0b08aa6be6d3ac64112b867b56b19be4bfcba03c2a9a0d7922bfd7ac17d4834e88537749fe182430dfd9b68e520175900d90
+  languageName: node
+  linkType: hard
+
 "url@npm:^0.11.0":
   version: 0.11.1
   resolution: "url@npm:0.11.1"
@@ -36611,6 +36582,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"webidl-conversions@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "webidl-conversions@npm:5.0.0"
+  checksum: ccf1ec2ca7c0b5671e5440ace4a66806ae09c49016ab821481bec0c05b1b82695082dc0a27d1fe9d804d475a408ba0c691e6803fd21be608e710955d4589cd69
+  languageName: node
+  linkType: hard
+
 "webidl-conversions@npm:^7.0.0":
   version: 7.0.0
   resolution: "webidl-conversions@npm:7.0.0"
@@ -36840,6 +36818,17 @@ __metadata:
   version: 3.0.0
   resolution: "whatwg-mimetype@npm:3.0.0"
   checksum: ce08bbb36b6aaf64f3a84da89707e3e6a31e5ab1c1a2379fd68df79ba712a4ab090904f0b50e6693b0dafc8e6343a6157e40bf18fdffd26e513cf95ee2a59824
+  languageName: node
+  linkType: hard
+
+"whatwg-url-without-unicode@npm:8.0.0-3":
+  version: 8.0.0-3
+  resolution: "whatwg-url-without-unicode@npm:8.0.0-3"
+  dependencies:
+    buffer: ^5.4.3
+    punycode: ^2.1.1
+    webidl-conversions: ^5.0.0
+  checksum: 1fe266f7161e0bd961087c1254a5a59d1138c3d402064495eed65e7590d9caed5a1d9acfd6e7a1b0bf0431253b0e637ee3e4ffc08387cd60e0b2ddb9d4687a4b
   languageName: node
   linkType: hard
 

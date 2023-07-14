@@ -24,8 +24,8 @@
     "verify:node": "check-node-version --node $(cat .nvmrc) --npm 9.5.1"
   },
   "dependencies": {
-    "@aws-amplify/auth": "5.3.1",
-    "@aws-amplify/core": "5.1.10",
+    "@aws-amplify/auth": "5.5.3",
+    "@aws-amplify/core": "5.5.2",
     "@aws-crypto/client-node": "3.2.2",
     "@aws-crypto/sha256-browser": "4.0.0",
     "@aws-sdk/client-cloudwatch-logs": "3.312.0",
@@ -169,7 +169,7 @@
     "cross-env": "7.0.3",
     "cspell": "6.31.1",
     "css-loader": "6.8.1",
-    "cypress": "12.17.0",
+    "cypress": "12.17.1",
     "cypress-dotenv": "2.0.0",
     "cypress-wait-until": "1.7.2",
     "dependency-cruiser": "12.12.2",
