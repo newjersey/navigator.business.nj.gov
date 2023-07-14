@@ -229,11 +229,10 @@ describe("<BusinessStructureTask />", () => {
     });
     renderTask(business);
     fireEvent.click(screen.getByLabelText("limited-liability-company"));
+    triggerQueueUpdate();
     await waitFor(() => {
       expect(screen.getByTestId("taskProgress")).toHaveTextContent(Config.taskProgress.IN_PROGRESS);
     });
-    triggerQueueUpdate();
-
     await waitFor(() => {
       expect(currentBusiness().taskProgress[taskId]).toEqual("IN_PROGRESS");
     });

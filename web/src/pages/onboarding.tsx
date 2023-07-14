@@ -307,7 +307,12 @@ const OnboardingPage = (props: Props): ReactElement => {
             ...updateQueue.current().businesses,
             [updateQueue.current().currentBusinessId]: {
               ...updateQueue.currentBusiness(),
-              profileData: newProfileData,
+              profileData: {
+                ...newProfileData,
+                operatingPhase: isRemoteSellerWorker
+                  ? "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
+                  : newProfileData.operatingPhase,
+              },
               onboardingFormProgress: "COMPLETED",
             }
           }

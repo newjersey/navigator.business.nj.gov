@@ -123,7 +123,7 @@ describe("<BusinessFormationPaginator />", () => {
 
   describe("search business name only", () => {
     it("does not show buttons or stepper", () => {
-      preparePage(initialUserData, displayContent, undefined, undefined, undefined, undefined, true);
+      preparePage({ business, displayContent, searchOnly: true });
       expect(screen.queryByText(Config.formation.general.initialNextButtonText)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.formation.general.nextButtonText)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.formation.general.previousButtonText)).not.toBeInTheDocument();
@@ -131,15 +131,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("searches business name", async () => {
-      const page = preparePage(
-        initialUserData,
-        displayContent,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        true
-      );
+      const page = preparePage({ business, displayContent, searchOnly: true });
       page.fillText("Search business name", "Pizza Joint");
       await page.searchBusinessName({ status: "AVAILABLE" });
       expect(screen.getByTestId("available-text")).toBeInTheDocument();

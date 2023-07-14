@@ -324,7 +324,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
   };
 };
 
-export const generateUserDataForBusiness = (business: Business): UserData => {
+export const generateUserDataForBusiness = (business: Business, overrides?: Partial<UserData>): UserData => {
   return {
     version: CURRENT_VERSION,
     versionWhenCreated: -1,
@@ -335,6 +335,7 @@ export const generateUserDataForBusiness = (business: Business): UserData => {
     businesses: {
       [business.id]: business,
     },
+    ...overrides
   };
 };
 

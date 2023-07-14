@@ -7,13 +7,12 @@ import { onSelfRegister, onSignOut } from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import {useMockBusiness} from "@/test/mock/mockUseUserData";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
   Business,
   BusinessUser, generateBusiness,
   generateProfileData,
-  generateUserData,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -72,20 +71,20 @@ describe("<NavBarPopupMenu />", () => {
   };
 
   it("renders close button when hasCloseButton prop is true", () => {
-    useMockUserData({});
+    useMockBusiness({});
     renderNavBarPopupMenu({ hasCloseButton: true });
     expect(screen.getByTestId("close-button-nav-menu")).toBeInTheDocument();
   });
 
   it("doesn't render close button when handleClose prop is false", () => {
-    useMockUserData({});
+    useMockBusiness({});
     renderNavBarPopupMenu({ hasCloseButton: false });
     expect(screen.queryByTestId("close-button-nav-menu")).not.toBeInTheDocument();
   });
 
   it("triggers handleClose when close button is pressed", () => {
     const handleClose = jest.fn();
-    useMockUserData({});
+    useMockBusiness({});
     renderNavBarPopupMenu({ hasCloseButton: true, handleClose: handleClose });
     fireEvent.click(screen.getByTestId("close-button-nav-menu"));
     expect(handleClose).toHaveBeenCalled();
@@ -94,7 +93,7 @@ describe("<NavBarPopupMenu />", () => {
   describe("menuConfiguration prop's various menu configurations", () => {
     describe("login configuration", () => {
       beforeEach(() => {
-        useMockUserData(generateOnboardingBusiness());
+        useMockBusiness(generateOnboardingBusiness());
         renderNavBarPopupMenu({ menuConfiguration: "login" });
       });
 
@@ -110,7 +109,7 @@ describe("<NavBarPopupMenu />", () => {
 
     describe("profile configuration", () => {
       beforeEach(() => {
-        useMockUserData(generateOnboardingBusiness());
+        useMockBusiness(generateOnboardingBusiness());
         renderNavBarPopupMenu({ menuConfiguration: "profile" });
       });
 
@@ -132,7 +131,7 @@ describe("<NavBarPopupMenu />", () => {
 
     describe("profile-myNj-logout configuration", () => {
       beforeEach(() => {
-        useMockUserData(generateOnboardingBusiness());
+        useMockBusiness(generateOnboardingBusiness());
         renderNavBarPopupMenu({ menuConfiguration: "profile-myNj-logout" });
       });
 
@@ -172,7 +171,7 @@ describe("<NavBarPopupMenu />", () => {
 
     describe("profile-register-login configruation", () => {
       beforeEach(() => {
-        useMockUserData(generateOnboardingBusiness());
+        useMockBusiness(generateOnboardingBusiness());
         renderNavBarPopupMenu({ menuConfiguration: "profile-register-login" });
       });
 
@@ -207,7 +206,7 @@ describe("<NavBarPopupMenu />", () => {
 
     describe("login-getstarted configuration", () => {
       beforeEach(() => {
-        useMockUserData(generateOnboardingBusiness());
+        useMockBusiness(generateOnboardingBusiness());
         renderNavBarPopupMenu({ menuConfiguration: "login-getstarted" });
       });
 

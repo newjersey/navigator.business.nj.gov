@@ -500,13 +500,19 @@ describe("task page", () => {
       "${endLocationDependentSection}\n\n" +
       "more content\n\n";
 
-    it("shows deferred location question if task requiresLocation=true", () => {
+    it("shows deferred location question if task requiresLocation=true and municipality is undefined", () => {
       const task = generateTask({
         requiresLocation: true,
         contentMd: contentWithLocationSection,
         postOnboardingQuestion: undefined,
       });
-      renderPage(task);
+      const businessWithoutMunicipality = generateBusiness({
+        profileData: generateProfileData({
+          municipality: undefined,
+        }),
+      });
+
+      renderPage(task, businessWithoutMunicipality);
       expect(screen.getByTestId("deferred-location-task")).toBeInTheDocument();
       expect(screen.queryByTestId("deferred-location-content")).not.toBeInTheDocument();
     });

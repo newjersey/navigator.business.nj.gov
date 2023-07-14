@@ -5,7 +5,6 @@ import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentBusiness,
-  currentUserData,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
@@ -254,7 +253,7 @@ describe("onboarding - foreign business", () => {
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalled();
       });
-      expect(currentUserData().profileData.operatingPhase).toEqual("GUEST_MODE_WITH_BUSINESS_STRUCTURE");
+      expect(currentBusiness().profileData.operatingPhase).toEqual("GUEST_MODE_WITH_BUSINESS_STRUCTURE");
     });
   });
 
@@ -288,7 +287,7 @@ describe("onboarding - foreign business", () => {
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalled();
       });
-      expect(currentUserData().profileData.operatingPhase).toEqual("GUEST_MODE_WITH_BUSINESS_STRUCTURE");
+      expect(currentBusiness().profileData.operatingPhase).toEqual("GUEST_MODE_WITH_BUSINESS_STRUCTURE");
     });
   });
 
@@ -463,7 +462,7 @@ describe("onboarding - foreign business", () => {
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalled();
       });
-      expect(currentUserData().profileData.operatingPhase).toEqual("GUEST_MODE");
+      expect(currentBusiness().profileData.operatingPhase).toEqual("GUEST_MODE");
     });
   });
 

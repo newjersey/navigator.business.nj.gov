@@ -277,7 +277,6 @@ const ProfilePage = (props: Props): ReactElement => {
   ).displayAltHomeBasedBusinessDescription;
 
   const displayHomedBaseBusinessQuestion = (): boolean => {
-    console.log(profileData.industryId)
     if (!business) return false;
     if (!profileData.industryId) {
       return true;

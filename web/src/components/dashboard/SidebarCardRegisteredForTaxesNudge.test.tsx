@@ -12,11 +12,11 @@ import { getCurrentDateISOString } from "@businessnjgovnavigator/shared/dateHelp
 import { Business, generateUserDataForBusiness, generateTaxFilingCalendarEvent, taxTaskId } from "@businessnjgovnavigator/shared/index";
 import {
   generateBusiness,
-  generatePreferences,
   generateProfileData,
   generateTaxFilingData,
 } from "@businessnjgovnavigator/shared/test";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {getMergedConfig} from "@/contexts/configContext";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
@@ -64,7 +64,7 @@ describe("<SidebarCardRegisteredForTaxesNudge />", () => {
       fireEvent.click(screen.getByTestId("cta-registered-for-taxes-nudge"));
 
       const updateBusiness = {
-        ...initialUserData,
+        ...business,
         taskProgress: {
           ...business.taskProgress,
           [taxTaskId]: "COMPLETED",

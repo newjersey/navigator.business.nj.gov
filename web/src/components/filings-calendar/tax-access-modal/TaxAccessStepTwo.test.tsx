@@ -28,7 +28,6 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import {useMockBusiness} from "@/test/mock/mockUseUserData";
-import {getCurrentBusiness} from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

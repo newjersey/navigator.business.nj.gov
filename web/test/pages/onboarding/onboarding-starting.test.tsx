@@ -181,13 +181,6 @@ describe("onboarding - starting a business", () => {
 
   it("prefills form from existing user data", async () => {
     const userData = generateUserData({
-<<<<<<< HEAD
-      profileData: generateProfileData({
-        businessPersona: "STARTING",
-        businessName: "Applebees",
-        industryId: "cosmetology",
-      }),
-=======
       currentBusinessId: '12345',
       businesses: {
         '12345': generateBusiness({
@@ -195,11 +188,9 @@ describe("onboarding - starting a business", () => {
             businessPersona: "STARTING",
             businessName: "Applebees",
             industryId: "cosmetology",
-            legalStructureId: "c-corporation",
           }),
         })
       },
->>>>>>> wip: finished onboarding [skip-ci]
       user: generateUser({
         name: "Michael Deeb",
         email: "mdeeb@example.com",
@@ -238,22 +229,6 @@ describe("onboarding - starting a business", () => {
 
     const expectedUserData: UserData = {
       ...initialUserData,
-<<<<<<< HEAD
-      onboardingFormProgress: "COMPLETED",
-      profileData: {
-        ...initialUserData.profileData,
-        businessPersona: "STARTING",
-        businessName: "",
-        industryId: "e-commerce",
-        sectorId: "retail-trade-and-ecommerce",
-        homeBasedBusiness: undefined,
-        municipality: undefined,
-        isNonprofitOnboardingRadio: false,
-      },
-      preferences: {
-        ...initialUserData.preferences,
-        visibleSidebarCards: ["welcome"],
-=======
       businesses: {
         [businessId]: {
           ...initialUserData.businesses[businessId],
@@ -266,13 +241,14 @@ describe("onboarding - starting a business", () => {
             sectorId: "retail-trade-and-ecommerce",
             homeBasedBusiness: undefined,
             municipality: undefined,
+            isNonprofitOnboardingRadio: false,
+
           },
           preferences: {
             ...initialUserData.businesses[businessId].preferences,
             visibleSidebarCards: ["welcome"],
           },
         }
->>>>>>> wip: finished onboarding [skip-ci]
       },
       user: {
         ...initialUserData.user,

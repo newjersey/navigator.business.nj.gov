@@ -24,7 +24,6 @@ import {
   LookupLegalStructureById,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
-import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 import { Backdrop, CircularProgress } from "@mui/material";
 import { ReactElement, useState } from "react";
 

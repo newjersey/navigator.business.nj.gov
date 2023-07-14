@@ -7,6 +7,7 @@ import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
   defaultDateFormat,
   emptyIndustrySpecificData,
   FormationData,
@@ -17,7 +18,6 @@ import {
   OperatingPhaseId,
   ProfileData,
   TaxFilingData,
-  UserData,
 } from "@businessnjgovnavigator/shared/index";
 import {
   generateFormationData,
@@ -31,8 +31,7 @@ import {
   clickBack,
   clickSave,
   expectLocationNotSavedAndError,
-  expectLocationSavedAsUndefined,
-  generateUserData,
+  expectLocationSavedAsUndefined, generateBusiness,
   removeLocationAndSave,
   renderPage,
 } from "@/test/pages/profile/profile-helpers";
@@ -46,20 +45,20 @@ jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn()
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("profile-foreign", () => {
-  let userData: UserData;
+  let setupBusiness: Business;
 
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
     useMockRoadmap({});
     setupStatefulUserDataContext();
-    userData = generateUserData({
+    setupBusiness = generateBusiness({
       profileData: generateProfileData({ businessPersona: "FOREIGN" }),
     });
   });
 
   it("sends user back to dashboard", async () => {
-    renderPage({ userData: userData });
+    renderPage({ business: setupBusiness });
     clickBack();
     await waitFor(() => {
       return expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
@@ -67,7 +66,7 @@ describe("profile-foreign", () => {
   });
 
   it("does not display the documents tab", () => {
-    renderPage({ userData: userData });
+    renderPage({ business: setupBusiness });
     expect(screen.getAllByText(Config.profileDefaults.profileTabRefTitle).length).toBeGreaterThan(0);
     expect(screen.getAllByText(Config.profileDefaults.profileTabNoteTitle).length).toBeGreaterThan(0);
     expect(screen.getAllByText(Config.profileDefaults.profileTabInfoTitle).length).toBeGreaterThan(0);
@@ -76,7 +75,7 @@ describe("profile-foreign", () => {
 
   it("does not show the home-based question if locationInNewJersey=true, even if industry applicable", () => {
     renderPage({
-      userData: generateUserData({
+      business: generateBusiness({
         profileData: generateProfileData({
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
@@ -91,7 +90,7 @@ describe("profile-foreign", () => {
   it.each(industryIdsWithRequiredEssentialQuestion)(
     "prevents Foreign Nexus user from saving when %s is selected as industry, but essential question is not answered",
     async (industryId) => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         onboardingFormProgress: "UNSTARTED",
         profileData: generateProfileData({
           businessPersona: "FOREIGN",
@@ -101,7 +100,7 @@ describe("profile-foreign", () => {
           ...emptyIndustrySpecificData,
         }),
       });
-      renderPage({ userData });
+      renderPage({ business });
       clickSave();
       await waitFor(() => {
         expect(
@@ -120,8 +119,8 @@ describe("profile-foreign", () => {
       profileDataOverrides?: Partial<ProfileData>;
       formationDataOverrides?: Partial<FormationData>;
       taxFilingDataOverrides?: Partial<TaxFilingData>;
-    }): UserData => {
-      return generateUserData({
+    }): Business => {
+      return generateBusiness({
         profileData: generateProfileData({
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
@@ -139,7 +138,7 @@ describe("profile-foreign", () => {
     };
 
     it("opens the default business information tab when clicked on profile", () => {
-      renderPage({ userData: nexusForeignBusinessProfile({}) });
+      renderPage({ business: nexusForeignBusinessProfile({}) });
       expect(screen.getByTestId("info")).toBeInTheDocument();
       expect(
         screen.getByText(markdownToText(Config.profileDefaults.fields.industryId.default.header))
@@ -150,7 +149,7 @@ describe("profile-foreign", () => {
     });
 
     it("displays the out of state business name field", () => {
-      renderPage({ userData: nexusForeignBusinessProfile({}) });
+      renderPage({ business: nexusForeignBusinessProfile({}) });
       expect(
         screen.getByText(Config.profileDefaults.fields.nexusBusinessName.default.outOfStateNameHeader)
       ).toBeInTheDocument();
@@ -158,7 +157,7 @@ describe("profile-foreign", () => {
 
     it("displays Not Entered when the user hasn't entered a business name yet", () => {
       renderPage({
-        userData: generateUserData({
+        business: generateBusiness({
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
             foreignBusinessType: "NEXUS",
@@ -175,7 +174,7 @@ describe("profile-foreign", () => {
 
     it("does not display out-of-state business name when SP/GP", () => {
       renderPage({
-        userData: nexusForeignBusinessProfile({
+        business: nexusForeignBusinessProfile({
           profileDataOverrides: { legalStructureId: "sole-proprietorship" },
         }),
       });
@@ -190,14 +189,14 @@ describe("profile-foreign", () => {
 
     it("displays the user's business name if they have one", () => {
       renderPage({
-        userData: nexusForeignBusinessProfile({ profileDataOverrides: { businessName: "Test Business" } }),
+        business: nexusForeignBusinessProfile({ profileDataOverrides: { businessName: "Test Business" } }),
       });
       expect(within(screen.getByTestId("main")).getByText("Test Business")).toBeInTheDocument();
     });
 
     it("displays the user's dba name if they have one", () => {
       renderPage({
-        userData: nexusForeignBusinessProfile({
+        business: nexusForeignBusinessProfile({
           profileDataOverrides: {
             businessName: "Test Business",
             nexusDbaName: "DBA Name",
@@ -212,7 +211,7 @@ describe("profile-foreign", () => {
 
     it("doesn't display the user's dba name if they don't have one", () => {
       renderPage({
-        userData: nexusForeignBusinessProfile({
+        business: nexusForeignBusinessProfile({
           profileDataOverrides: {
             businessName: "Test Business",
             nexusDbaName: "",
@@ -231,7 +230,7 @@ describe("profile-foreign", () => {
         operatingPhase: OperatingPhaseId;
       }): void => {
         const newark = generateMunicipality({ displayName: "Newark" });
-        const userData = generateUserData({
+        const business = generateBusiness({
           profileData: generateProfileData({
             legalStructureId: params.legalStructureId,
             operatingPhase: params.operatingPhase,
@@ -241,12 +240,12 @@ describe("profile-foreign", () => {
             nexusLocationInNewJersey: true,
           }),
         });
-        renderPage({ municipalities: [newark], userData });
+        renderPage({ municipalities: [newark], business });
       };
 
       it("locks when it is populated and tax filing state is SUCCESS", () => {
         renderPage({
-          userData: generateUserData({
+          business: generateBusiness({
             profileData: generateProfileData({
               municipality: generateMunicipality({ displayName: "Trenton" }),
               legalStructureId: randomLegalStructure().id,
@@ -354,7 +353,7 @@ describe("profile-foreign", () => {
     describe("ProfileDateOfFormation", () => {
       it("displays the date of formation input field when date of formation has been submitted", () => {
         renderPage({
-          userData: nexusForeignBusinessProfile({
+          business: nexusForeignBusinessProfile({
             profileDataOverrides: {
               dateOfFormation: getCurrentDateFormatted(defaultDateFormat),
             },
@@ -367,7 +366,7 @@ describe("profile-foreign", () => {
 
       it("updates the date of formation to a future date", () => {
         renderPage({
-          userData: nexusForeignBusinessProfile({
+          business: nexusForeignBusinessProfile({
             profileDataOverrides: {
               dateOfFormation: getCurrentDateFormatted(defaultDateFormat),
             },
@@ -383,7 +382,7 @@ describe("profile-foreign", () => {
 
       it("does not display the date of formation input field when date of formation has not been submitted", () => {
         renderPage({
-          userData: nexusForeignBusinessProfile({
+          business: nexusForeignBusinessProfile({
             profileDataOverrides: {
               dateOfFormation: undefined,
             },
@@ -396,7 +395,7 @@ describe("profile-foreign", () => {
 
       it("locks the date of formation input field when the business has successfully formed", () => {
         renderPage({
-          userData: nexusForeignBusinessProfile({
+          business: nexusForeignBusinessProfile({
             profileDataOverrides: {
               dateOfFormation: getCurrentDateFormatted(defaultDateFormat),
             },
@@ -415,7 +414,7 @@ describe("profile-foreign", () => {
         displayName: "some-cool-town",
       });
 
-      const foreignNexusUserData = generateUserData({
+      const foreignNexusUserData = generateBusiness({
         formationData: generateFormationData({
           completedFilingPayment: true,
         }),
@@ -432,7 +431,7 @@ describe("profile-foreign", () => {
       });
 
       it("locks legalStructure", async () => {
-        renderPage({ userData: foreignNexusUserData });
+        renderPage({ business: foreignNexusUserData });
         expect(screen.getByTestId("info")).toBeInTheDocument();
         expect(
           screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header)

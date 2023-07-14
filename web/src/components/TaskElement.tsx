@@ -8,11 +8,11 @@ import { rswitch } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
 import {
+  generateBusiness,
   generateMunicipality,
   generateProfileData,
-  generateUserData,
 } from "@businessnjgovnavigator/shared/test";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import {Business,} from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, ReactNode } from "react";
 
 interface Props {
@@ -86,8 +86,8 @@ export const TaskElement = (props: Props): ReactElement => {
     return "";
   };
 
-  const getFakeUserDataWithMunicipality = (): UserData => {
-    return generateUserData({
+  const getFakeBusinessWithMunicipality = (): Business => {
+    return generateBusiness({
       profileData: generateProfileData({
         municipality: generateMunicipality({}),
       }),
@@ -109,7 +109,7 @@ export const TaskElement = (props: Props): ReactElement => {
                 {props.overrides?.skipDeferredLocationPrompt && (
                   <DeferredLocationQuestion
                     innerContent={deferredLocationQuestion.innerContent}
-                    CMS_ONLY_fakeUserData={getFakeUserDataWithMunicipality()}
+                    CMS_ONLY_fakeBusiness={getFakeBusinessWithMunicipality()}
                   />
                 )}
                 {!props.overrides?.skipDeferredLocationPrompt && (

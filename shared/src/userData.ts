@@ -30,6 +30,45 @@ export interface Business {
 
 export const CURRENT_VERSION = 118;
 
+export const createEmptyBusiness = (id?: string): Business => {
+  return {
+    id: id ?? createBusinessId(),
+    dateCreatedISO: new Date(Date.now()).toISOString(),
+    profileData: createEmptyProfileData(),
+    onboardingFormProgress: "UNSTARTED",
+    taskProgress: {},
+    taskItemChecklist: {},
+    licenseData: undefined,
+    preferences: {
+      roadmapOpenSections: ["PLAN", "START"],
+      roadmapOpenSteps: [],
+      hiddenCertificationIds: [],
+      hiddenFundingIds: [],
+      visibleSidebarCards: ["welcome"],
+      returnToLink: "",
+      isCalendarFullView: false,
+      isHideableRoadmapOpen: false,
+      phaseNewlyChanged: true,
+    },
+    taxFilingData: {
+      state: undefined,
+      businessName: undefined,
+      lastUpdatedISO: undefined,
+      registeredISO: undefined,
+      filings: [],
+    },
+    formationData: {
+      formationFormData: createEmptyFormationFormData(),
+      formationResponse: undefined,
+      getFilingResponse: undefined,
+      completedFilingPayment: false,
+      businessNameAvailability: undefined,
+      dbaBusinessNameAvailability: undefined,
+      lastVisitedPageIndex: 0,
+    },
+  }
+}
+
 export const createEmptyUserData = (user: BusinessUser): UserData => {
   const businessId = createBusinessId();
   return {
@@ -40,42 +79,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
     versionWhenCreated: CURRENT_VERSION,
     currentBusinessId: businessId,
     businesses: {
-      [businessId]: {
-        id: businessId,
-        dateCreatedISO: new Date(Date.now()).toISOString(),
-        profileData: createEmptyProfileData(),
-        onboardingFormProgress: "UNSTARTED",
-        taskProgress: {},
-        taskItemChecklist: {},
-        licenseData: undefined,
-        preferences: {
-          roadmapOpenSections: ["PLAN", "START"],
-          roadmapOpenSteps: [],
-          hiddenCertificationIds: [],
-          hiddenFundingIds: [],
-          visibleSidebarCards: ["welcome"],
-          returnToLink: "",
-          isCalendarFullView: false,
-          isHideableRoadmapOpen: false,
-          phaseNewlyChanged: true,
-        },
-        taxFilingData: {
-          state: undefined,
-          businessName: undefined,
-          lastUpdatedISO: undefined,
-          registeredISO: undefined,
-          filings: [],
-        },
-        formationData: {
-          formationFormData: createEmptyFormationFormData(),
-          formationResponse: undefined,
-          getFilingResponse: undefined,
-          completedFilingPayment: false,
-          businessNameAvailability: undefined,
-          dbaBusinessNameAvailability: undefined,
-          lastVisitedPageIndex: 0,
-        },
-      },
+      [businessId]: createEmptyBusiness(businessId)
     },
   };
 };

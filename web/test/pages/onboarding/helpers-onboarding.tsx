@@ -11,7 +11,7 @@ import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
 import Onboarding from "@/pages/onboarding";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import {currentBusiness, currentUserData, WithStatefulUserData} from "@/test/mock/withStatefulUserData";
 import {
   Business,
   BusinessPersona,
@@ -41,7 +41,7 @@ import {
   waitForElementToBeRemoved,
   within,
 } from "@testing-library/react";
-import {generateBusiness, generateUserDataForBusiness} from "@businessnjgovnavigator/shared/test";
+import {generateBusiness, generateUserDataForBusiness, randomLegalStructure} from "@businessnjgovnavigator/shared/test";
 
 const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();
@@ -245,11 +245,16 @@ export const runNonprofitOnboardingTests = ({
   const initialUserData = createEmptyUserData(user);
   const userData: UserData = {
     ...initialUserData,
-    profileData: {
-      ...initialUserData.profileData,
-      businessPersona,
-      foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
-    },
+    businesses: {
+      [initialUserData.currentBusinessId]: {
+        ...initialUserData.businesses[initialUserData.currentBusinessId],
+        profileData: {
+          ...initialUserData.businesses[initialUserData.currentBusinessId].profileData,
+          businessPersona,
+          foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
+        },
+      }
+    }
   };
 
   it("sets legal structure undefined if nonprofit is kept as default No", async () => {
@@ -257,8 +262,8 @@ export const runNonprofitOnboardingTests = ({
     const { page } = renderPage({ userData });
     page.selectByValue("Industry", "e-commerce");
     await page.visitStep(industryPage + 1);
-    expect(currentUserData().profileData.legalStructureId).toBeUndefined();
-    expect(currentUserData().profileData.isNonprofitOnboardingRadio).toBe(false);
+    expect(currentBusiness().profileData.legalStructureId).toBeUndefined();
+    expect(currentBusiness().profileData.isNonprofitOnboardingRadio).toBe(false);
   });
 
   it("sets legal structure to nonprofit if nonprofit is selected Yes", async () => {
@@ -268,14 +273,13 @@ export const runNonprofitOnboardingTests = ({
     page.chooseRadio("is-nonprofit-onboarding-radio-true");
 
     await page.visitStep(industryPage + 1);
-    expect(currentUserData().profileData.legalStructureId).toEqual("nonprofit");
-    expect(currentUserData().profileData.isNonprofitOnboardingRadio).toBe(true);
+    expect(currentBusiness().profileData.legalStructureId).toEqual("nonprofit");
+    expect(currentBusiness().profileData.isNonprofitOnboardingRadio).toBe(true);
   });
 
   it("marks business structure task complete if nonprofit is Yes", async () => {
     useMockRouter({ isReady: true, query: { page: selfRegPage.toString() } });
-    const filledInUserData = generateUserData({
-      user,
+    const filledInUserData = generateUserDataForBusiness(generateBusiness({
       onboardingFormProgress: "UNSTARTED",
       taskProgress: {},
       profileData: generateProfileData({
@@ -284,7 +288,7 @@ export const runNonprofitOnboardingTests = ({
         legalStructureId: "nonprofit",
         isNonprofitOnboardingRadio: true,
       }),
-    });
+    }), { user });
     const { page } = renderPage({ userData: filledInUserData });
 
     page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
@@ -295,13 +299,12 @@ export const runNonprofitOnboardingTests = ({
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalled();
     });
-    expect(currentUserData().taskProgress).toEqual({ [businessStructureTaskId]: "COMPLETED" });
+    expect(currentBusiness().taskProgress).toEqual({ [businessStructureTaskId]: "COMPLETED" });
   });
 
   it("does not change business structure task if nonprofit is No", async () => {
     useMockRouter({ isReady: true, query: { page: selfRegPage.toString() } });
-    const filledInUserData = generateUserData({
-      user,
+    const filledInUserData = generateUserDataForBusiness(generateBusiness({
       taskProgress: {},
       onboardingFormProgress: "UNSTARTED",
       profileData: generateProfileData({
@@ -310,7 +313,7 @@ export const runNonprofitOnboardingTests = ({
         legalStructureId: undefined,
         isNonprofitOnboardingRadio: false,
       }),
-    });
+    }), { user });
     const { page } = renderPage({ userData: filledInUserData });
 
     page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
@@ -321,7 +324,7 @@ export const runNonprofitOnboardingTests = ({
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalled();
     });
-    expect(currentUserData().taskProgress).toEqual({});
+    expect(currentBusiness().taskProgress).toEqual({});
   });
 };
 
