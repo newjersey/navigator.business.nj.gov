@@ -1,7 +1,9 @@
+import { getCurrentBusiness } from "@shared/businessHelpers";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
 import { createEmptyFormationFormData } from "@shared/formationData";
+import { modifyCurrentBusiness } from "@shared/test";
 import { createEmptyUserData, UserData } from "@shared/userData";
 import { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
@@ -46,42 +48,44 @@ const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean => {
 };
 
 const clearTaskItemChecklists = (userData: UserData): UserData => {
-  return {
-    ...userData,
+  return modifyCurrentBusiness(userData, (business) => ({
+    ...business,
     taskItemChecklist: {},
-  };
+  }));
 };
 
 const shouldCheckLicense = (userData: UserData): boolean => {
+  const currentBusiness = getCurrentBusiness(userData);
   return (
-    userData.licenseData !== undefined &&
-    industryHasALicenseType(userData.profileData.industryId) &&
-    hasBeenMoreThanOneHour(userData.licenseData.lastUpdatedISO)
+    currentBusiness.licenseData !== undefined &&
+    industryHasALicenseType(currentBusiness.profileData.industryId) &&
+    hasBeenMoreThanOneHour(currentBusiness.licenseData.lastUpdatedISO)
   );
 };
 
 const shouldUpdateBusinessNameSearch = (userData: UserData): boolean => {
+  const currentBusiness = getCurrentBusiness(userData);
   if (
-    !userData.formationData.businessNameAvailability?.lastUpdatedTimeStamp &&
-    !userData.formationData.dbaBusinessNameAvailability?.lastUpdatedTimeStamp
+    !currentBusiness.formationData.businessNameAvailability?.lastUpdatedTimeStamp &&
+    !currentBusiness.formationData.dbaBusinessNameAvailability?.lastUpdatedTimeStamp
   ) {
     return false;
   }
 
   const dbaNameIsOlderThanAnHour =
-    userData.profileData.nexusDbaName !== undefined &&
-    userData.formationData.dbaBusinessNameAvailability !== undefined &&
-    hasBeenMoreThanOneHour(userData.formationData.dbaBusinessNameAvailability.lastUpdatedTimeStamp);
+    currentBusiness.profileData.nexusDbaName !== undefined &&
+    currentBusiness.formationData.dbaBusinessNameAvailability !== undefined &&
+    hasBeenMoreThanOneHour(currentBusiness.formationData.dbaBusinessNameAvailability.lastUpdatedTimeStamp);
 
   const businessNameIsOlderThanAnHour =
-    userData.profileData.businessName !== undefined &&
-    userData.formationData.businessNameAvailability !== undefined &&
-    hasBeenMoreThanOneHour(userData.formationData.businessNameAvailability.lastUpdatedTimeStamp);
+    currentBusiness.profileData.businessName !== undefined &&
+    currentBusiness.formationData.businessNameAvailability !== undefined &&
+    hasBeenMoreThanOneHour(currentBusiness.formationData.businessNameAvailability.lastUpdatedTimeStamp);
 
-  const isDba = userData.profileData.needsNexusDbaName;
+  const isDba = currentBusiness.profileData.needsNexusDbaName;
   const shouldUpdateNameAvailability = isDba ? dbaNameIsOlderThanAnHour : businessNameIsOlderThanAnHour;
 
-  return shouldUpdateNameAvailability && userData.formationData.completedFilingPayment !== true;
+  return shouldUpdateNameAvailability && currentBusiness.formationData.completedFilingPayment !== true;
 };
 
 export const getSignedInUser = (req: Request): CognitoJWTPayload => {
@@ -97,11 +101,14 @@ export const getSignedInUserId = (req: Request): string => {
 };
 
 const legalStructureHasChanged = (oldUserData: UserData, newUserData: UserData): boolean => {
-  return oldUserData.profileData.legalStructureId !== newUserData.profileData.legalStructureId;
+  return (
+    getCurrentBusiness(oldUserData).profileData.legalStructureId !==
+    getCurrentBusiness(newUserData).profileData.legalStructureId
+  );
 };
 
 const businessHasFormed = (userData: UserData): boolean => {
-  return userData.formationData.getFilingResponse?.success ?? false;
+  return getCurrentBusiness(userData).formationData.getFilingResponse?.success ?? false;
 };
 
 export const userRouterFactory = (
@@ -179,7 +186,10 @@ export const userRouterFactory = (
   const industryHasChanged = async (userData: UserData): Promise<boolean> => {
     try {
       const oldUserData = await userDataClient.get(userData.user.id);
-      return oldUserData.profileData.industryId !== userData.profileData.industryId;
+      const oldBusinessData = getCurrentBusiness(oldUserData);
+      const currentBusinessData = getCurrentBusiness(userData);
+
+      return oldBusinessData.profileData.industryId !== currentBusinessData.profileData.industryId;
     } catch {
       return false;
     }
@@ -194,27 +204,32 @@ export const userRouterFactory = (
     }
 
     if (legalStructureHasChanged(oldUserData, userData)) {
-      // prevent legal structure from changing is business has been formed
-      userData = businessHasFormed(oldUserData)
-        ? {
-            ...userData,
-            profileData: {
-              ...userData.profileData,
-              legalStructureId: oldUserData.profileData.legalStructureId,
-            },
-          }
-        : {
-            ...userData,
-            formationData: {
-              formationResponse: undefined,
-              getFilingResponse: undefined,
-              completedFilingPayment: false,
-              formationFormData: createEmptyFormationFormData(),
-              businessNameAvailability: undefined,
-              dbaBusinessNameAvailability: undefined,
-              lastVisitedPageIndex: 0,
-            },
-          };
+      // prevent legal structure from changing if business has been formed
+
+      if (businessHasFormed(oldUserData)) {
+        const oldBusiness = getCurrentBusiness(oldUserData);
+
+        return modifyCurrentBusiness(userData, (business) => ({
+          ...business,
+          profileData: {
+            ...business.profileData,
+            legalStructureId: oldBusiness.profileData.legalStructureId,
+          },
+        }));
+      }
+
+      return modifyCurrentBusiness(userData, (business) => ({
+        ...business,
+        formationData: {
+          formationResponse: undefined,
+          getFilingResponse: undefined,
+          completedFilingPayment: false,
+          formationFormData: createEmptyFormationFormData(),
+          businessNameAvailability: undefined,
+          dbaBusinessNameAvailability: undefined,
+          lastVisitedPageIndex: 0,
+        },
+      }));
     }
 
     return userData;
@@ -249,9 +264,12 @@ export const userRouterFactory = (
       return userData;
     }
     try {
-      const isForeign = userData.profileData.businessPersona === "FOREIGN";
-      const needsDba = userData.profileData.needsNexusDbaName;
-      const nameToSearch = needsDba ? userData.profileData.nexusDbaName : userData.profileData.businessName;
+      const currentBusiness = getCurrentBusiness(userData);
+      const isForeign = currentBusiness.profileData.businessPersona === "FOREIGN";
+      const needsDba = currentBusiness.profileData.needsNexusDbaName;
+      const nameToSearch = needsDba
+        ? currentBusiness.profileData.nexusDbaName
+        : currentBusiness.profileData.businessName;
       const response = await timeStampBusinessSearch.search(nameToSearch);
 
       const nameAvailability: NameAvailability = {
@@ -264,33 +282,34 @@ export const userRouterFactory = (
       const nameIsAvailable = response.status === "AVAILABLE";
       const needsNexusDbaName = isForeign && !needsDba ? !nameIsAvailable : needsDba;
 
-      return {
-        ...userData,
+      return modifyCurrentBusiness(userData, (business) => ({
+        ...business,
         profileData: {
-          ...userData.profileData,
+          ...business.profileData,
           needsNexusDbaName,
         },
         formationData: {
-          ...userData.formationData,
+          ...business.formationData,
           businessNameAvailability: needsDba
-            ? userData.formationData.businessNameAvailability
+            ? business.formationData.businessNameAvailability
             : nameAvailability,
           dbaBusinessNameAvailability: needsDba
             ? nameAvailability
-            : userData.formationData.dbaBusinessNameAvailability,
+            : business.formationData.dbaBusinessNameAvailability,
         },
-      };
+      }));
     } catch {
       return userData;
     }
   };
 
   const asyncUpdateAndSaveLicenseStatusIfNeeded = async (userData: UserData): Promise<void> => {
-    if (!userData.licenseData || !shouldCheckLicense(userData)) {
+    const currentBusinessLicenseData = getCurrentBusiness(userData).licenseData;
+    if (!currentBusinessLicenseData || !shouldCheckLicense(userData)) {
       return;
     }
     try {
-      const updatedUserData = await updateLicenseStatus(userData, userData.licenseData.nameAndAddress);
+      const updatedUserData = await updateLicenseStatus(userData, currentBusinessLicenseData.nameAndAddress);
       await userDataClient.put(updatedUserData);
     } catch {
       return;
@@ -301,8 +320,9 @@ export const userRouterFactory = (
 };
 
 const setLastUpdatedISO = (userData: UserData): UserData => {
-  return {
-    ...userData,
+  const updatedUserData: UserData = { ...userData, lastUpdatedISO: getCurrentDateISOString() };
+  return modifyCurrentBusiness(updatedUserData, (business) => ({
+    ...business,
     lastUpdatedISO: getCurrentDateISOString(),
-  };
+  }));
 };

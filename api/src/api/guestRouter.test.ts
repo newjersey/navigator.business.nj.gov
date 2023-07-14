@@ -9,6 +9,7 @@ import {
   getFirstAnnualFiling,
   getSecondAnnualFiling,
   getThirdAnnualFiling,
+  modifyCurrentBusiness,
 } from "@shared/test";
 import { Express } from "express";
 import request from "supertest";
@@ -50,18 +51,18 @@ describe("guestRouter", () => {
       });
 
       const response = await request(app).post(`/annualFilings`).send(postedUserData);
-
-      expect(response.body).toEqual({
-        ...postedUserData,
+      const expectedUserData = modifyCurrentBusiness(postedUserData, (business) => ({
+        ...business,
         taxFilingData: {
-          ...postedUserData.taxFilingData,
+          ...business.taxFilingData,
           filings: generateAnnualFilings([
             getFirstAnnualFiling(formationDate),
             getSecondAnnualFiling(formationDate),
             getThirdAnnualFiling(formationDate),
           ]),
         },
-      });
+      }));
+      expect(response.body).toEqual(expectedUserData);
     });
   });
 

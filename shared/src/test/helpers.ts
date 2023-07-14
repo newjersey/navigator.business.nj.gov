@@ -20,12 +20,15 @@ export const getThirdAnnualFiling = (formationDate: string): string => {
     : getDateInCurrentYear(formationDate).endOf("month").add(3, "year").format(defaultDateFormat);
 };
 
-export const modifyCurrentBusiness = (userData: UserData, modificationFn: (currentBusiness: Business) => Business): UserData => {
+export const modifyCurrentBusiness = (
+  userData: UserData,
+  modificationFunction: (currentBusiness: Business) => Business
+): UserData => {
   return {
     ...userData,
     businesses: {
       ...userData.businesses,
-      [userData.currentBusinessId]: modificationFn(userData.businesses[userData.currentBusinessId])
-    }
-  }
-}
+      [userData.currentBusinessId]: modificationFunction(userData.businesses[userData.currentBusinessId]),
+    },
+  };
+};

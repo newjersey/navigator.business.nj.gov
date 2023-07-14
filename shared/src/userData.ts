@@ -28,6 +28,22 @@ export interface Business {
   readonly formationData: FormationData;
 }
 
+export type LegacyUserDataOverrides = {
+  profileData?: ProfileData;
+  formationData?: FormationData;
+  user?: BusinessUser;
+  onboardingFormProgress?: Partial<OnboardingFormProgress>;
+  taskProgress?: Record<string, TaskProgress>;
+  taskItemChecklist?: Record<string, boolean>;
+  taxFilingData?: TaxFilingData;
+  licenseData?: LicenseData;
+  preferences?: Preferences;
+  version?: number;
+  lastUpdatedISO?: string;
+  dateCreatedISO?: string;
+  versionWhenCreated?: number;
+};
+
 export const CURRENT_VERSION = 118;
 
 export const createEmptyBusiness = (id?: string): Business => {
@@ -84,6 +100,9 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
   };
 };
 
+export const sectionNames = ["PLAN", "START"] as const;
+export type SectionType = (typeof sectionNames)[number];
+
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export interface Preferences {
@@ -99,6 +118,3 @@ export interface Preferences {
 }
 
 export type OnboardingFormProgress = "UNSTARTED" | "COMPLETED";
-
-export const sectionNames = ["PLAN", "START"] as const;
-export type SectionType = (typeof sectionNames)[number];

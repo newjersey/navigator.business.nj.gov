@@ -44,7 +44,11 @@ export interface TaxFilingClient {
 
 export interface TaxFilingInterface {
   lookup: (props: { userData: UserData; taxId: string; businessName: string }) => Promise<UserData>;
-  onboarding: (props: { userData: UserData; taxId: string; businessName: string }) => Promise<UserData>;
+  onboarding: (props: {
+    userData: UserData;
+    taxId: string;
+    businessName: string;
+  }) => Promise<UserData>;
 }
 
 export interface EncryptionDecryptionClient {
@@ -98,7 +102,10 @@ export type SearchLicenseStatus = (
   nameAndAddress: NameAndAddress,
   licenseType: string
 ) => Promise<LicenseStatusResult>;
-export type UpdateLicenseStatus = (userData: UserData, nameAndAddress: NameAndAddress) => Promise<UserData>;
+export type UpdateLicenseStatus = (
+  userData: UserData,
+  nameAndAddress: NameAndAddress
+) => Promise<UserData>;
 export type UpdateOperatingPhase = (userData: UserData) => UserData;
 export type UpdateSidebarCards = (userData: UserData) => UserData;
 export type GetCertHttpsAgent = () => Promise<https.Agent>;

@@ -20,7 +20,7 @@ import { MunicipalityDetail } from "../municipality";
 import { IndustrySpecificData, ProfileData } from "../profileData";
 import { arrayOfSectors, SectorType } from "../sector";
 import { TaxFilingCalendarEvent, TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
-import { Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
+import { CURRENT_VERSION, Business, Preferences, LegacyUserDataOverrides, UserData } from "../userData";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
 
 export const generateFormationSubmitResponse = (
@@ -275,34 +275,18 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
   };
 };
 
-export const generateBusiness = (overrides: Partial<Business>): Business => {
-  const profileData = overrides.profileData ?? generateProfileData({});
-  const formationData: FormationData = publicFilingLegalTypes.includes(
-    profileData.legalStructureId as PublicFilingLegalType
-  )
-    ? generateFormationData({}, profileData.legalStructureId as FormationLegalType)
-    : {
-        formationFormData: createEmptyFormationFormData(),
-        businessNameAvailability: undefined,
-        dbaBusinessNameAvailability: undefined,
-        formationResponse: undefined,
-        getFilingResponse: undefined,
-        completedFilingPayment: false,
-        lastVisitedPageIndex: 0,
-      };
-
+export const generateUserDataForBusiness = (business: Business, overrides?: Partial<UserData>): UserData => {
   return {
-    id: createBusinessId(),
-    dateCreatedISO: getCurrentDateISOString(),
-    onboardingFormProgress: "UNSTARTED",
-    taskProgress: profileData.employerId ? { "register-for-ein": "COMPLETED" } : {},
-    taskItemChecklist: {},
-    licenseData: generateLicenseData({}),
-    preferences: generatePreferences({}),
-    taxFilingData: generateTaxFilingData({}),
-    profileData,
-    formationData,
-    ...overrides,
+    version: CURRENT_VERSION,
+    versionWhenCreated: -1,
+    dateCreatedISO: undefined,
+    lastUpdatedISO: getCurrentDateISOString(),
+    user: generateUser({}),
+    currentBusinessId: business.id,
+    businesses: {
+      [business.id]: business,
+    },
+    ...overrides
   };
 };
 
@@ -324,18 +308,99 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
   };
 };
 
-export const generateUserDataForBusiness = (business: Business, overrides?: Partial<UserData>): UserData => {
+export const generateUserData2 = (overrides: LegacyUserDataOverrides): UserData => {
+  const business = generateBusinessData({
+    profileData: overrides.profileData,
+    formationData: overrides.formationData,
+    taxFilingData: overrides.taxFilingData,
+    licenseData: overrides.licenseData,
+    preferences: overrides.preferences,
+    taskProgress: overrides.taskProgress,
+    taskItemChecklist: overrides.taskItemChecklist,
+  });
+  const businessID = business.id;
+
+  const businesses: Record<string, Business> = {};
+  businesses[business.id] = business;
+
   return {
     version: CURRENT_VERSION,
     versionWhenCreated: -1,
-    dateCreatedISO: undefined,
-    lastUpdatedISO: getCurrentDateISOString(),
     user: generateUser({}),
-    currentBusinessId: business.id,
-    businesses: {
-      [business.id]: business,
-    },
-    ...overrides
+    businesses,
+    currentBusinessId: businessID,
+    lastUpdatedISO: getCurrentDateISOString(),
+    dateCreatedISO: getCurrentDateISOString(),
+    ...overrides,
+  };
+};
+
+export const generateBusiness = (overrides: Partial<Business>): Business => {
+  const profileData = overrides.profileData ?? generateProfileData({});
+  const formationData: FormationData = publicFilingLegalTypes.includes(
+    profileData.legalStructureId as PublicFilingLegalType
+  )
+    ? generateFormationData({}, profileData.legalStructureId as FormationLegalType)
+    : {
+      formationFormData: createEmptyFormationFormData(),
+      businessNameAvailability: undefined,
+      dbaBusinessNameAvailability: undefined,
+      formationResponse: undefined,
+      getFilingResponse: undefined,
+      completedFilingPayment: false,
+      lastVisitedPageIndex: 0,
+    };
+
+  return {
+    id: createBusinessId(),
+    dateCreatedISO: getCurrentDateISOString(),
+    onboardingFormProgress: "UNSTARTED",
+    taskProgress: profileData.employerId ? { "register-for-ein": "COMPLETED" } : {},
+    taskItemChecklist: {},
+    licenseData: generateLicenseData({}),
+    preferences: generatePreferences({}),
+    taxFilingData: generateTaxFilingData({}),
+    profileData,
+    formationData,
+    ...overrides,
+  };
+};
+
+export const generateBusinessData = (overrides: Partial<Business>): Business => {
+  const id = overrides.id ?? generateBusinessId();
+  const profileData = overrides.profileData ?? generateProfileData({});
+  let formationData = overrides.formationData;
+  if (!formationData) {
+    formationData = publicFilingLegalTypes.includes(profileData.legalStructureId as PublicFilingLegalType)
+      ? generateFormationData({}, profileData.legalStructureId as FormationLegalType)
+      : {
+          formationFormData: createEmptyFormationFormData(),
+          businessNameAvailability: undefined,
+          dbaBusinessNameAvailability: undefined,
+          formationResponse: undefined,
+          getFilingResponse: undefined,
+          completedFilingPayment: false,
+          lastVisitedPageIndex: 0,
+        };
+  }
+  let taskProgress: Record<string, TaskProgress> | undefined = overrides.taskProgress;
+
+  if (!taskProgress) {
+    taskProgress = profileData.employerId ? { "register-for-ein": "COMPLETED" } : {};
+  }
+
+  return {
+    taskProgress: taskProgress,
+    taskItemChecklist: overrides.taskItemChecklist ?? {},
+    dateCreatedISO: overrides.dateCreatedISO ?? undefined,
+    lastUpdatedISO: overrides.lastUpdatedISO ?? undefined,
+    formationData: formationData,
+    onboardingFormProgress: "UNSTARTED",
+    profileData: profileData,
+    licenseData: generateLicenseData(overrides.licenseData ?? {}),
+    preferences: generatePreferences(overrides.preferences ?? {}),
+    taxFilingData: generateTaxFilingData(overrides.taxFilingData ?? {}),
+    id,
   };
 };
 

@@ -4,6 +4,8 @@ import { Router } from "express";
 import { UpdateLicenseStatus, UserDataClient } from "../domain/types";
 import { getSignedInUserId } from "./userRouter";
 
+import { getCurrentBusiness } from "@shared/businessHelpers";
+
 export const licenseStatusRouterFactory = (
   updateLicenseStatus: UpdateLicenseStatus,
   userDataClient: UserDataClient
@@ -17,7 +19,8 @@ export const licenseStatusRouterFactory = (
     updateLicenseStatus(userData, nameAndAddress)
       .then(async (userData: UserData) => {
         const updatedUserData = await userDataClient.put(userData);
-        if (!updatedUserData.licenseData || updatedUserData.licenseData.status === "UNKNOWN") {
+        const updatedCurrentBusiness = getCurrentBusiness(updatedUserData);
+        if (!updatedCurrentBusiness.licenseData || updatedCurrentBusiness.licenseData.status === "UNKNOWN") {
           res.status(404).json();
           return;
         }

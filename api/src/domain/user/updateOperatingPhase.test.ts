@@ -2,8 +2,11 @@
 
 import { businessStructureTaskId, formationTaskId, taxTaskId } from "@shared/domain-logic/taskIds";
 import { generatePreferences, generateProfileData, generateUserData } from "@shared/test";
-import { TaskProgress, UserData } from "@shared/userData";
+import { UserData } from "@shared/userData";
 import { updateOperatingPhase } from "./updateOperatingPhase";
+
+import { TaskProgress } from "@shared/business";
+import { getCurrentBusiness } from "@shared/businessHelpers";
 
 describe("updateOperatingPhase", () => {
   describe("OWNING", () => {
@@ -14,7 +17,8 @@ describe("updateOperatingPhase", () => {
           operatingPhase: "GUEST_MODE",
         }),
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("UP_AND_RUNNING_OWNING");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("UP_AND_RUNNING_OWNING");
     });
 
     it("updates a GUEST_MODE_OWNING to UP_AND_RUNNING_OWNING if it is not", () => {
@@ -24,7 +28,8 @@ describe("updateOperatingPhase", () => {
           operatingPhase: "GUEST_MODE_OWNING",
         }),
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("UP_AND_RUNNING_OWNING");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("UP_AND_RUNNING_OWNING");
     });
   });
 
@@ -36,7 +41,8 @@ describe("updateOperatingPhase", () => {
           operatingPhase: "GUEST_MODE",
         }),
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
     });
 
     it("updates the phase to NEEDS_BUSINESS_STRUCTURE from GUEST_MODE for nexus", () => {
@@ -47,7 +53,8 @@ describe("updateOperatingPhase", () => {
           operatingPhase: "GUEST_MODE",
         }),
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
     });
 
     it("updates to NEEDS_TO_FORM from GUEST_MODE when user is remote seller", () => {
@@ -58,7 +65,8 @@ describe("updateOperatingPhase", () => {
           operatingPhase: "GUEST_MODE",
         }),
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
     });
 
     it("updates to NEEDS_TO_FORM from GUEST_MODE when user is remote worker", () => {
@@ -69,7 +77,8 @@ describe("updateOperatingPhase", () => {
           operatingPhase: "GUEST_MODE",
         }),
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
     });
   });
 
@@ -83,7 +92,8 @@ describe("updateOperatingPhase", () => {
         }),
         taskProgress: { [businessStructureTaskId]: "COMPLETED" },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
     });
 
     it("updates the phase to NEEDS_TO_REGISTER_FOR_TAXES from NEEDS_BUSINESS_STRUCTURE for TradeName", () => {
@@ -95,7 +105,8 @@ describe("updateOperatingPhase", () => {
         }),
         taskProgress: { [businessStructureTaskId]: "COMPLETED" },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
     });
 
     it("updates status to FORMED_AND_REGISTERED when formation and business structure tasks are completed and PublicFiling legal structure and tax task is complete", () => {
@@ -111,7 +122,8 @@ describe("updateOperatingPhase", () => {
           [businessStructureTaskId]: "COMPLETED",
         },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("FORMED_AND_REGISTERED");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("FORMED_AND_REGISTERED");
     });
 
     it("updates status to FORMED_AND_REGISTERED when business structure and tax tasks are completed for TradeName", () => {
@@ -126,7 +138,8 @@ describe("updateOperatingPhase", () => {
           [businessStructureTaskId]: "COMPLETED",
         },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("FORMED_AND_REGISTERED");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("FORMED_AND_REGISTERED");
     });
   });
 
@@ -140,7 +153,8 @@ describe("updateOperatingPhase", () => {
         }),
         taskProgress: { [formationTaskId]: "COMPLETED", [businessStructureTaskId]: "COMPLETED" },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
     });
 
     it("updates status to FORMED_AND_REGISTERED when formation and business structure tasks are completed and PublicFiling legal structure and tax task is complete", () => {
@@ -156,7 +170,8 @@ describe("updateOperatingPhase", () => {
           [businessStructureTaskId]: "COMPLETED",
         },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("FORMED_AND_REGISTERED");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("FORMED_AND_REGISTERED");
     });
 
     it("updates status to NEEDS_TO_REGISTER_FOR_TAXES when formation task is not completed and TradeName legal structure", () => {
@@ -168,7 +183,8 @@ describe("updateOperatingPhase", () => {
         }),
         taskProgress: { [taxTaskId]: "IN_PROGRESS", [businessStructureTaskId]: "COMPLETED" },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
     });
 
     it("updates status back to NEEDS_BUSINESS_STRUCTURE if business structure task is not completed and legalStructureId is undefined", () => {
@@ -184,7 +200,8 @@ describe("updateOperatingPhase", () => {
           [taxTaskId]: "COMPLETED",
         },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
     });
   });
 
@@ -201,7 +218,8 @@ describe("updateOperatingPhase", () => {
           [businessStructureTaskId]: "COMPLETED",
         },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("FORMED_AND_REGISTERED");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("FORMED_AND_REGISTERED");
     });
 
     it("updates status to NEEDS_TO_FORM when formation task is not completed and legal structure requires public filing", () => {
@@ -213,7 +231,8 @@ describe("updateOperatingPhase", () => {
         }),
         taskProgress: { [formationTaskId]: "IN_PROGRESS", [businessStructureTaskId]: "COMPLETED" },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
     });
 
     it("updates status to NEEDS_TO_FORM when formation task has no status and legal structure requires public filing", () => {
@@ -225,7 +244,8 @@ describe("updateOperatingPhase", () => {
         }),
         taskProgress: { [taxTaskId]: "COMPLETED", [businessStructureTaskId]: "COMPLETED" },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
     });
 
     it("does not update status from NEEDS_TO_REGISTER_FOR_TAXES when formation task is not completed and legal structure does not require public filing", () => {
@@ -237,7 +257,8 @@ describe("updateOperatingPhase", () => {
         }),
         taskProgress: { [formationTaskId]: "IN_PROGRESS", [businessStructureTaskId]: "COMPLETED" },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
     });
 
     it("updates status back to NEEDS_BUSINESS_STRUCTURE if business structure task is not completed and legalStructureId is undefined", () => {
@@ -253,7 +274,8 @@ describe("updateOperatingPhase", () => {
           [taxTaskId]: "COMPLETED",
         },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
     });
   });
 
@@ -271,7 +293,8 @@ describe("updateOperatingPhase", () => {
           [businessStructureTaskId]: "IN_PROGRESS",
         },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
     });
 
     it("updates status back to NEEDS_TO_REGISTER_FOR_TAXES if tax task is not completed", () => {
@@ -286,7 +309,8 @@ describe("updateOperatingPhase", () => {
           [businessStructureTaskId]: "COMPLETED",
         },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
     });
 
     it("updates status back to NEEDS_TO_FORM if tax task and formation task is not completed", () => {
@@ -302,7 +326,8 @@ describe("updateOperatingPhase", () => {
           [businessStructureTaskId]: "COMPLETED",
         },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
     });
 
     it("updates status back to NEEDS_TO_FORM if tax and business structure task is completed and formation task is not completed", () => {
@@ -318,7 +343,8 @@ describe("updateOperatingPhase", () => {
           [businessStructureTaskId]: "COMPLETED",
         },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
     });
   });
 
@@ -344,8 +370,9 @@ describe("updateOperatingPhase", () => {
             [businessStructureTaskId]: "IN_PROGRESS",
           });
 
-          expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
-          expect(updateOperatingPhase(userData).preferences.isHideableRoadmapOpen).toBe(false);
+          const result = updateOperatingPhase(userData);
+          expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
+          expect(getCurrentBusiness(result).preferences.isHideableRoadmapOpen).toBe(false);
         });
       });
     });
@@ -370,8 +397,10 @@ describe("updateOperatingPhase", () => {
             [taxTaskId]: "COMPLETED",
             [businessStructureTaskId]: "COMPLETED",
           });
-          expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
-          expect(updateOperatingPhase(userData).preferences.isHideableRoadmapOpen).toBe(false);
+
+          const result = updateOperatingPhase(userData);
+          expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
+          expect(getCurrentBusiness(result).preferences.isHideableRoadmapOpen).toBe(false);
         });
       });
 
@@ -382,8 +411,10 @@ describe("updateOperatingPhase", () => {
             [taxTaskId]: "IN_PROGRESS",
             [businessStructureTaskId]: "COMPLETED",
           });
-          expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
-          expect(updateOperatingPhase(userData).preferences.isHideableRoadmapOpen).toBe(false);
+
+          const result = updateOperatingPhase(userData);
+          expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
+          expect(getCurrentBusiness(result).preferences.isHideableRoadmapOpen).toBe(false);
         });
       });
 
@@ -394,10 +425,10 @@ describe("updateOperatingPhase", () => {
             [taxTaskId]: "IN_PROGRESS",
             [businessStructureTaskId]: "COMPLETED",
           });
-          expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe(
-            "NEEDS_TO_REGISTER_FOR_TAXES"
-          );
-          expect(updateOperatingPhase(userData).preferences.isHideableRoadmapOpen).toBe(false);
+
+          const result = updateOperatingPhase(userData);
+          expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
+          expect(getCurrentBusiness(result).preferences.isHideableRoadmapOpen).toBe(false);
         });
       });
     });
@@ -421,10 +452,10 @@ describe("updateOperatingPhase", () => {
             [taxTaskId]: "IN_PROGRESS",
             [businessStructureTaskId]: "COMPLETED",
           });
-          expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe(
-            "NEEDS_TO_REGISTER_FOR_TAXES"
-          );
-          expect(updateOperatingPhase(userData).preferences.isHideableRoadmapOpen).toBe(false);
+
+          const result = updateOperatingPhase(userData);
+          expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
+          expect(getCurrentBusiness(result).preferences.isHideableRoadmapOpen).toBe(false);
         });
       });
     });
@@ -442,7 +473,8 @@ describe("updateOperatingPhase", () => {
           [businessStructureTaskId]: "COMPLETED",
         },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("UP_AND_RUNNING");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("UP_AND_RUNNING");
     });
 
     it("does not update status to FORMED_AND_REGISTERED when all tasks are complete for trade name legal structure", () => {
@@ -458,7 +490,8 @@ describe("updateOperatingPhase", () => {
           [businessStructureTaskId]: "COMPLETED",
         },
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("UP_AND_RUNNING");
+      const result = updateOperatingPhase(userData);
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("UP_AND_RUNNING");
     });
   });
 
@@ -471,8 +504,8 @@ describe("updateOperatingPhase", () => {
       preferences: generatePreferences({ phaseNewlyChanged: false }),
     });
     const updatedData = updateOperatingPhase(userData);
-    expect(updatedData.profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
-    expect(updatedData.preferences.phaseNewlyChanged).toBe(true);
+    expect(getCurrentBusiness(updatedData).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
+    expect(getCurrentBusiness(updatedData).preferences.phaseNewlyChanged).toBe(true);
   });
 
   it("keeps existing value of phaseNewlyChanged if phase did not changed", () => {
@@ -486,8 +519,8 @@ describe("updateOperatingPhase", () => {
       preferences: generatePreferences({ phaseNewlyChanged: false }),
     });
     const updatedData1 = updateOperatingPhase(userData1);
-    expect(updatedData1.profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
-    expect(updatedData1.preferences.phaseNewlyChanged).toBe(false);
+    expect(getCurrentBusiness(updatedData1).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
+    expect(getCurrentBusiness(updatedData1).preferences.phaseNewlyChanged).toBe(false);
 
     const userData2 = generateUserData({
       profileData: generateProfileData({
@@ -499,7 +532,7 @@ describe("updateOperatingPhase", () => {
       preferences: generatePreferences({ phaseNewlyChanged: true }),
     });
     const updatedData2 = updateOperatingPhase(userData2);
-    expect(updatedData2.profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
-    expect(updatedData2.preferences.phaseNewlyChanged).toBe(true);
+    expect(getCurrentBusiness(updatedData2).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
+    expect(getCurrentBusiness(updatedData2).preferences.phaseNewlyChanged).toBe(true);
   });
 });

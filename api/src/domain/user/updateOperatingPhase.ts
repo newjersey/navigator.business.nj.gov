@@ -1,22 +1,28 @@
+import { TaskProgress } from "@shared/business";
+import { getCurrentBusiness } from "@shared/businessHelpers";
 import { businessStructureTaskId, formationTaskId, taxTaskId } from "@shared/domain-logic/taskIds";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { OperatingPhaseId } from "@shared/operatingPhase";
 import { BusinessPersona, ForeignBusinessType } from "@shared/profileData";
-import { TaskProgress, UserData } from "@shared/userData";
+import { modifyCurrentBusiness } from "@shared/test";
+import { UserData } from "@shared/userData";
 import { UpdateOperatingPhase } from "../types";
 
 export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): UserData => {
-  const originalPhase = userData.profileData.operatingPhase;
-  const isPublicFiling = LookupLegalStructureById(userData.profileData.legalStructureId).requiresPublicFiling;
-  let updatedIsHideableRoadmapOpen: boolean = userData.preferences.isHideableRoadmapOpen;
+  const currentBusiness = getCurrentBusiness(userData);
+  const originalPhase = currentBusiness.profileData.operatingPhase;
+  const isPublicFiling = LookupLegalStructureById(
+    currentBusiness.profileData.legalStructureId
+  ).requiresPublicFiling;
+  let updatedIsHideableRoadmapOpen: boolean = currentBusiness.preferences.isHideableRoadmapOpen;
 
   const newPhase = getNewPhase({
-    businessPersona: userData.profileData.businessPersona,
-    foreignBusinessType: userData.profileData.foreignBusinessType,
-    taskProgress: userData.taskProgress,
+    businessPersona: currentBusiness.profileData.businessPersona,
+    foreignBusinessType: currentBusiness.profileData.foreignBusinessType,
+    taskProgress: currentBusiness.taskProgress,
     isPublicFiling: isPublicFiling,
     currentPhase: originalPhase,
-    legalStructureId: userData.profileData.legalStructureId,
+    legalStructureId: currentBusiness.profileData.legalStructureId,
   });
 
   const phaseHasChanged = newPhase !== originalPhase;
@@ -24,18 +30,18 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): 
     updatedIsHideableRoadmapOpen = false;
   }
 
-  return {
-    ...userData,
+  return modifyCurrentBusiness(userData, (business) => ({
+    ...business,
     profileData: {
-      ...userData.profileData,
+      ...business.profileData,
       operatingPhase: newPhase,
     },
     preferences: {
-      ...userData.preferences,
+      ...business.preferences,
       isHideableRoadmapOpen: updatedIsHideableRoadmapOpen,
-      phaseNewlyChanged: phaseHasChanged || userData.preferences.phaseNewlyChanged,
+      phaseNewlyChanged: phaseHasChanged || currentBusiness.preferences.phaseNewlyChanged,
     },
-  };
+  }));
 };
 
 const getNewPhase = ({
