@@ -14,7 +14,7 @@ import { maskingCharacter } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
-interface Props extends Omit<OnboardingProps, "fieldName" | "handleChange" | "onValidation"> {
+interface Props extends Omit<OnboardingProps, "fieldName" | "handleChange" | "onValidation" | "inputWidth"> {
   handleChangeOverride?: (value: string) => void;
 }
 

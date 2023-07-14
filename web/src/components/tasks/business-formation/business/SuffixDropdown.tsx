@@ -24,7 +24,7 @@ export const SuffixDropdown = (): ReactElement => {
 
   return (
     <>
-      <div className="flex margin-bottom-2">
+      <div className="flex">
         <strong>
           <ContextualInfoButton
             text={Config.formation.fields.businessSuffix.label}
@@ -32,7 +32,7 @@ export const SuffixDropdown = (): ReactElement => {
           />
         </strong>
       </div>
-      <div className="margin-bottom-2">
+      <div className="margin-bottom-3">
         <FormControl fullWidth error={doesFieldHaveError(FIELD)}>
           <InputLabel id="business-suffix-label" className="visibility-hidden">
             {camelCaseToSentence("businessSuffix")}

@@ -38,7 +38,7 @@ export const OnboardingBusinessPersona = <T,>(props: FormContextFieldProps<T>): 
 
   return (
     <>
-      <div role="heading" aria-level={2} className="h3-styling margin-bottom-2">
+      <div role="heading" aria-level={2} className="h3-styling margin-bottom-05-override">
         {contentFromConfig.header}
       </div>
       <Content>{contentFromConfig.description}</Content>

@@ -1,8 +1,8 @@
 import { TaxAccessModalBody } from "@/components/filings-calendar/tax-access-modal/TaxAccessModalBody";
+import { LegalStructureDropDown } from "@/components/LegalStructureDropDown";
 import { ModalOneButton } from "@/components/ModalOneButton";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { FieldLabelDescriptionOnly } from "@/components/onboarding/FieldLabelDescriptionOnly";
-import { OnboardingLegalStructureDropdown } from "@/components/onboarding/OnboardingLegalStructureDropDown";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { FieldStateActionKind } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -78,7 +78,7 @@ export const TaxAccessStepOne = (props: Props): ReactElement => {
         >
           <WithErrorBar hasError={!isValid()} type="ALWAYS">
             <FieldLabelDescriptionOnly fieldName="legalStructureId" bold={true} />
-            <OnboardingLegalStructureDropdown />
+            <LegalStructureDropDown />
           </WithErrorBar>
         </ProfileDataContext.Provider>
       </profileFormContext.Provider>

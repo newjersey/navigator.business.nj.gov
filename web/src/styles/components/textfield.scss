@@ -1,5 +1,9 @@
 .text-field-width-reduced {
   max-width: 22rem;
+
+  @media (min-width: 640px) {
+    width: 22rem;
+  }
 }
 
 .text-field-width-default {

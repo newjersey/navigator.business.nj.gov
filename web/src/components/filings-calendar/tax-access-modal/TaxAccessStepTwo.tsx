@@ -307,12 +307,11 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
               <ProfileBusinessName validationText={Config.taxAccess.failedBusinessFieldHelper} required />
             </WithErrorBar>
           )}
-
           {displayResponsibleOwnerName() && (
             <WithErrorBar
               hasError={!!formContextState.fieldStates.responsibleOwnerName?.invalid}
               type="ALWAYS"
-              className="margin-top-2"
+              className="margin-top-3"
             >
               <FieldLabelModal
                 fieldName="responsibleOwnerName"
@@ -327,11 +326,10 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
               />
             </WithErrorBar>
           )}
-
           <WithErrorBar
             hasError={!!formContextState.fieldStates.taxId?.invalid}
             type="ALWAYS"
-            className="margin-top-2"
+            className="margin-top-3"
           >
             <div data-testid="taxIdInput">
               <FieldLabelModal
@@ -347,11 +345,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                 }}
               />
             </div>
-            <OnboardingTaxId
-              validationText={Config.taxAccess.failedTaxIdHelper}
-              required
-              inputWidth="default"
-            />
+            <OnboardingTaxId validationText={Config.taxAccess.failedTaxIdHelper} required />
           </WithErrorBar>
         </ModalTwoButton>
       </ProfileDataContext.Provider>

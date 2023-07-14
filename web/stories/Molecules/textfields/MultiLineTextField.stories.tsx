@@ -1,5 +1,5 @@
 import { GenericTextField } from "@/components/GenericTextField";
-import { ProfileField } from "@/components/profile/ProfileField";
+import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -48,8 +48,30 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
           onBack: (): void => {},
         }}
       >
-        <h1>Using Profile Field Label Component</h1>
-        <ProfileField fieldName={fieldName} isVisible={true}>
+        <h1>Using Onboarding Field Label Component</h1>
+        <FieldLabelOnboarding fieldName={fieldName} />
+        <GenericTextField
+          fieldName={fieldName}
+          inputWidth={"reduced"}
+          fieldOptions={{
+            multiline: true,
+            minRows: 3,
+            maxRows: 20,
+            className: "override-padding",
+            inputProps: {
+              maxLength: 500,
+              sx: {
+                padding: "1rem",
+              },
+            },
+          }}
+        />
+        <div className="text-base-dark margin-top-1 margin-bottom-2">
+          {10} / {500} {config.formation.general.charactersLabel}
+        </div>
+
+        <WithErrorBar hasError type="ALWAYS">
+          <FieldLabelOnboarding fieldName={fieldName} />
           <GenericTextField
             fieldName={fieldName}
             inputWidth={"reduced"}
@@ -65,35 +87,12 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
                 },
               },
             }}
+            error
+            validationText={mergedConfig.profileDefaults.fields[fieldName].default.errorTextRequired}
           />
           <div className="text-base-dark margin-top-1 margin-bottom-2">
             {10} / {500} {config.formation.general.charactersLabel}
           </div>
-        </ProfileField>
-
-        <WithErrorBar hasError type="ALWAYS">
-          <ProfileField fieldName={fieldName} isVisible={true}>
-            <GenericTextField
-              fieldName={fieldName}
-              inputWidth={"reduced"}
-              fieldOptions={{
-                multiline: true,
-                minRows: 3,
-                maxRows: 20,
-                className: "override-padding",
-                inputProps: {
-                  maxLength: 500,
-                  sx: {
-                    padding: "1rem",
-                  },
-                },
-              }}
-              validationText={mergedConfig.profileDefaults.fields.businessName.default.errorTextRequired}
-            />
-            <div className="text-base-dark margin-top-1 margin-bottom-2">
-              {10} / {500} {config.formation.general.charactersLabel}
-            </div>
-          </ProfileField>
         </WithErrorBar>
       </ProfileDataContext.Provider>
     </ConfigContext.Provider>

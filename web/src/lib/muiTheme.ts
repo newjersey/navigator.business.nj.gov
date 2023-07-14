@@ -141,7 +141,7 @@ export default createTheme({
     },
     MuiInputBase: {
       styleOverrides: {
-        root: { marginTop: "0px" },
+        root: { marginTop: "4px" },
         input: { padding: "12.5px 12px" },
       },
     },

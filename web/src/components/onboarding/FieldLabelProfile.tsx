@@ -40,7 +40,7 @@ export const FieldLabelProfile = (props: Props): ReactElement => {
     <>
       <div className="flex flex-row fac">
         {isHeaderInConfig && showHeader && (
-          <div role="heading" aria-level={3} className="h3-styling margin-bottom-2">
+          <div role="heading" aria-level={3} className="text-bold margin-bottom-05">
             {contentFromConfig.headerContextualInfo ? (
               <ContextualInfoButton
                 text={contentFromConfig.header}

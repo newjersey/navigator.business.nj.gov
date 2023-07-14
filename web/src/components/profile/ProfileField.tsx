@@ -18,10 +18,9 @@ export const ProfileField = (props: Props): ReactElement => {
   if (props.isVisible === false) {
     return <></>;
   }
-
   return (
     <>
-      <div className="margin-y-5" id={`question-${props.fieldName}`}>
+      <div className="margin-y-4" id={`question-${props.fieldName}`}>
         {props.locked ? (
           <LockedProfileField fieldName={props.fieldName} valueFormatter={props.lockedValueFormatter} />
         ) : (
@@ -33,10 +32,11 @@ export const ProfileField = (props: Props): ReactElement => {
                 hideHeader={props.hideHeader}
               />
             )}
-            {props.children}
+            <div className={props.noLabel ? "margin-bottom-05" : ""}>{props.children}</div>
           </>
         )}
       </div>
+      <hr aria-hidden={true} />
     </>
   );
 };

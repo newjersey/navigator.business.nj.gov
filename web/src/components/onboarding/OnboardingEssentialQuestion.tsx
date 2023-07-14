@@ -1,3 +1,4 @@
+import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
 import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { OnboardingRadioQuestion } from "@/components/onboarding/OnboardingRadioQuestion";
 import { WithErrorBar } from "@/components/WithErrorBar";
@@ -12,6 +13,7 @@ import { ReactElement, useContext } from "react";
 
 interface Props<T> extends FormContextFieldProps<T> {
   essentialQuestion: EssentialQuestion;
+  onboardingFieldLabel?: boolean;
 }
 export const OnboardingEssentialQuestion = <T,>(props: Props<T>): ReactElement => {
   const { state } = useContext(ProfileDataContext);
@@ -30,7 +32,16 @@ export const OnboardingEssentialQuestion = <T,>(props: Props<T>): ReactElement =
       data-testid={`industry-specific-${state.profileData.industryId}-${props.essentialQuestion.fieldName}`}
     >
       <WithErrorBar hasError={isFormFieldInValid} type="ALWAYS" className="margin-top-2">
-        <FieldLabelProfile fieldName={props.essentialQuestion.fieldName as ProfileContentField} />
+        {props.onboardingFieldLabel ? (
+          <div data-testid={"FieldLabelOnboarding"}>
+            <FieldLabelOnboarding fieldName={props.essentialQuestion.fieldName as ProfileContentField} />
+          </div>
+        ) : (
+          <div data-testid={"FieldLabelProfile"}>
+            <FieldLabelProfile fieldName={props.essentialQuestion.fieldName as ProfileContentField} />
+          </div>
+        )}
+
         <OnboardingRadioQuestion<IndustrySpecificData[keyof IndustrySpecificData]>
           {...props.essentialQuestion}
           choices={industrySpecificDataChoices[props.essentialQuestion.fieldName]}

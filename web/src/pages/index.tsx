@@ -104,7 +104,7 @@ const Home = (props: Props): ReactElement => {
   ): ReactElement => {
     return (
       <div className={`${isDesktopAndUp ? "landing-two-column-row" : "landing-one-column-row"}`}>
-        <div className="grid-row">
+        <div className="grid-row margin-x-05">
           <div
             className={`desktop:grid-col ${isDesktopAndUp ? "" : "text-center"} ${
               reverseOrder && isDesktopAndUp ? "order-last desktop:margin-left-8" : "desktop:margin-right-3"

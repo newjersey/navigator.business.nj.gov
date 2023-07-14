@@ -62,36 +62,32 @@ export const BusinessNameStep = (): ReactElement => {
           <div className={isTabletAndUp ? "grid-row grid-gap-2" : "display-flex flex-column"}>
             <div className={isTabletAndUp ? "grid-col-8" : ""}>
               <WithErrorBar hasError={hasError} type="MOBILE-ONLY">
-                <div className="width-100">
-                  <TextField
-                    autoComplete="no"
-                    className="margin-top-2"
-                    margin="dense"
-                    value={currentName}
-                    onChange={(event): void => updateCurrentName(event.target.value)}
-                    variant="outlined"
-                    inputProps={{
-                      "aria-label": "Search business name",
-                    }}
-                    error={hasError}
-                    helperText={
-                      hasError
-                        ? getErrorStateForField({
-                            field: "businessName",
-                            formationFormData: state.formationFormData,
-                            businessNameAvailability: state.businessNameAvailability,
-                          }).label
-                        : undefined
-                    }
-                    onBlur={(event: FocusEvent<HTMLInputElement>): void => {
-                      setFieldsInteracted([FIELD_NAME]);
-                      onBlurNameField(event.target.value);
-                    }}
-                  />
-                </div>
+                <TextField
+                  autoComplete="no"
+                  value={currentName}
+                  onChange={(event): void => updateCurrentName(event.target.value)}
+                  variant="outlined"
+                  inputProps={{
+                    "aria-label": "Search business name",
+                  }}
+                  error={hasError}
+                  helperText={
+                    hasError
+                      ? getErrorStateForField({
+                          field: "businessName",
+                          formationFormData: state.formationFormData,
+                          businessNameAvailability: state.businessNameAvailability,
+                        }).label
+                      : undefined
+                  }
+                  onBlur={(event: FocusEvent<HTMLInputElement>): void => {
+                    setFieldsInteracted([FIELD_NAME]);
+                    onBlurNameField(event.target.value);
+                  }}
+                />
               </WithErrorBar>
             </div>
-            <div className="margin-top-2">
+            <div className="margin-top-05">
               <SecondaryButton
                 isColor="primary"
                 onClick={(): void => {}}

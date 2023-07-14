@@ -126,8 +126,8 @@ export const TaxInput = (props: Props): ReactElement => {
             </Alert>
           ) : (
             <>
-              <OnboardingTaxId required inputWidth="full" />
-              <div className="tablet:margin-top-2 tablet:margin-left-2">
+              <OnboardingTaxId required />
+              <div className="tablet:margin-top-05 tablet:margin-left-2">
                 <SecondaryButton
                   isColor="primary"
                   onClick={onSubmit}

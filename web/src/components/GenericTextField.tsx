@@ -146,9 +146,8 @@ export const GenericTextField = forwardRef(
     };
 
     const error = props.error ?? isFormFieldInValid;
-
     return (
-      <div className={`${widthStyling} ${props.className ?? ""} ${error ? "error" : ""} margin-top-2`}>
+      <div className={`${widthStyling} ${props.className ?? ""} ${error ? "error" : ""}`}>
         <TextField
           value={value ?? ""}
           id={props.fieldName}

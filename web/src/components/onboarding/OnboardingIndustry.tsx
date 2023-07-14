@@ -14,6 +14,7 @@ import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props<T> extends FormContextFieldProps<T> {
   essentialQuestionErrorTypes?: T[];
+  onboardingFieldLabel?: boolean;
 }
 export const OnboardingIndustry = <T,>(props: Props<T>): ReactElement => {
   const { state } = useContext(ProfileDataContext);
@@ -46,6 +47,7 @@ export const OnboardingIndustry = <T,>(props: Props<T>): ReactElement => {
         essentialQuestion={obj}
         key={obj.fieldName}
         errorTypes={props.essentialQuestionErrorTypes}
+        onboardingFieldLabel={props.onboardingFieldLabel}
       />
     ));
   };
