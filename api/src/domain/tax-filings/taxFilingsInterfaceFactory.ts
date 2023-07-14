@@ -1,4 +1,3 @@
-import { Business } from "@shared/business";
 import { getCurrentBusiness } from "@shared/businessHelpers";
 import { modifyCurrentBusiness } from "@shared/test";
 import { UserDataPrime } from "@shared/userData";
@@ -66,9 +65,7 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
       profileData: profileDataToReturn,
       preferences: {
         ...business.preferences,
-        isCalendarFullView: shouldSwitchToCalendarGridView()
-          ? true
-          : business.preferences.isCalendarFullView,
+        isCalendarFullView: shouldSwitchToCalendarGridView() ? true : business.preferences.isCalendarFullView,
       },
       taxFilingData: {
         ...business.taxFilingData,

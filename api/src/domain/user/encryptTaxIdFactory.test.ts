@@ -29,7 +29,7 @@ describe("encryptTaxId", () => {
         ...business.profileData,
         taxId: "*******89000",
         encryptedTaxId: "some-encrypted-value",
-      }
+      },
     }));
     expect(response).toEqual(expectedUserData);
   });

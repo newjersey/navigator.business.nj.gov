@@ -1,8 +1,8 @@
 import { createEmptyFormationFormData, FormationData } from "./formationData";
+import { randomInt } from "./intHelpers";
 import { LicenseData } from "./license";
 import { createEmptyProfileData, ProfileData } from "./profileData";
 import { TaxFilingData } from "./taxFiling";
-import { randomInt } from "./intHelpers";
 
 export interface Business {
   id: string;
@@ -20,7 +20,7 @@ export interface Business {
 
 export const generateBusinessId = (): string => {
   return `some-Id-${randomInt()}`;
-}
+};
 
 export const createEmptyBusiness = (id?: string): Business => {
   return {

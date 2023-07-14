@@ -6,7 +6,8 @@ import {
   generateLicenseStatusResult,
   generateNameAndAddress,
   generateProfileData,
-  generateUserDataPrime, modifyCurrentBusiness
+  generateUserDataPrime,
+  modifyCurrentBusiness,
 } from "@shared/test";
 import { UserDataPrime } from "@shared/userData";
 import { UpdateLicenseStatus } from "../types";

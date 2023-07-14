@@ -1,4 +1,3 @@
-import { Business } from "@shared/business";
 import { getCurrentBusiness } from "@shared/businessHelpers";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
 import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";

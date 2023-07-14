@@ -1,4 +1,4 @@
-import { getCurrentBusiness} from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/businessHelpers";
 import { maskingCharacter } from "@shared/profileData";
 import { modifyCurrentBusiness } from "@shared/test";
 import { UserDataPrime } from "@shared/userData";
@@ -22,7 +22,7 @@ export const encryptTaxIdFactory = (encryptionDecryptionClient: EncryptionDecryp
         ...business.profileData,
         taxId: maskedTaxId,
         encryptedTaxId: encryptedTaxId,
-      }
+      },
     }));
   };
 };

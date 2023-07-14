@@ -12,7 +12,8 @@ import {
   generateUserDataPrime,
   getFirstAnnualFiling,
   getSecondAnnualFiling,
-  getThirdAnnualFiling, modifyCurrentBusiness
+  getThirdAnnualFiling,
+  modifyCurrentBusiness,
 } from "@shared/test";
 import dayjs from "dayjs";
 import { Express } from "express";
@@ -512,9 +513,9 @@ describe("userRouter", () => {
 
           const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
           expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
-          expect(
-            getCurrentBusiness(result.body).formationData.dbaBusinessNameAvailability?.status
-          ).toEqual("UNAVAILABLE");
+          expect(getCurrentBusiness(result.body).formationData.dbaBusinessNameAvailability?.status).toEqual(
+            "UNAVAILABLE"
+          );
           expect(
             parseDate(result.body.formationData.lastUpdatedTimeStamp).isSame(getCurrentDate(), "minute")
           ).toEqual(true);
@@ -583,8 +584,8 @@ describe("userRouter", () => {
 
       await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
 
-      const taxFilingsPut = getCurrentBusiness(getLastCalledWith(stubUserDataClient.put)[0])
-        .taxFilingData.filings;
+      const taxFilingsPut = getCurrentBusiness(getLastCalledWith(stubUserDataClient.put)[0]).taxFilingData
+        .filings;
       expect(taxFilingsPut).toEqual(
         generateAnnualFilings([
           getFirstAnnualFiling(formationDate),
@@ -602,16 +603,13 @@ describe("userRouter", () => {
         taskItemChecklist: { "some-id": true },
       });
 
-      const updatedIndustryUserData = modifyCurrentBusiness(
-        newIndustryUserData,
-        (business) => ({
-          ...business,
-          profileData: {
-            ...business.profileData,
-            industryId: "home-contractor",
-          },
-        })
-      );
+      const updatedIndustryUserData = modifyCurrentBusiness(newIndustryUserData, (business) => ({
+        ...business,
+        profileData: {
+          ...business.profileData,
+          industryId: "home-contractor",
+        },
+      }));
 
       stubUserDataClient.get.mockResolvedValue(updatedIndustryUserData);
       stubUserDataClient.put.mockResolvedValue(newIndustryUserData);
@@ -714,8 +712,8 @@ describe("userRouter", () => {
         const formationDataPut = getCurrentBusiness(
           getLastCalledWith(stubUserDataClient.put)[0]
         ).formationData;
-        const legalStructurePut = getCurrentBusiness(getLastCalledWith(stubUserDataClient.put)[0])
-          .profileData.legalStructureId;
+        const legalStructurePut = getCurrentBusiness(getLastCalledWith(stubUserDataClient.put)[0]).profileData
+          .legalStructureId;
 
         expect(legalStructurePut).toEqual("limited-liability-company");
         expect(formationDataPut).toEqual(completedFormationData);
@@ -759,14 +757,12 @@ describe("userRouter", () => {
           .send(newUserData)
           .set("Authorization", "Bearer user-123-token");
 
-        expect(getCurrentBusiness(response.body).profileData.legalStructureId).toEqual(
-          "c-corporation"
-        );
+        expect(getCurrentBusiness(response.body).profileData.legalStructureId).toEqual("c-corporation");
         const formationDataPut = getCurrentBusiness(
           getLastCalledWith(stubUserDataClient.put)[0]
         ).formationData;
-        const legalStructurePut = getCurrentBusiness(getLastCalledWith(stubUserDataClient.put)[0])
-          .profileData.legalStructureId;
+        const legalStructurePut = getCurrentBusiness(getLastCalledWith(stubUserDataClient.put)[0]).profileData
+          .legalStructureId;
         expect(legalStructurePut).toEqual("c-corporation");
         expect(formationDataPut).toEqual({
           formationFormData: createEmptyFormationFormData(),
@@ -801,9 +797,7 @@ describe("userRouter", () => {
 
         await request(app).post(`/users`).send(updatedUserData).set("Authorization", "Bearer user-123-token");
 
-        const profileDataPut = getCurrentBusiness(
-          getLastCalledWith(stubUserDataClient.put)[0]
-        ).profileData;
+        const profileDataPut = getCurrentBusiness(getLastCalledWith(stubUserDataClient.put)[0]).profileData;
         expect(profileDataPut).toEqual({
           ...getCurrentBusiness(updatedUserData).profileData,
           taxId: "*******89123",

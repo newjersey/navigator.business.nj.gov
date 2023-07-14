@@ -137,9 +137,7 @@ describe("updateRoadmapSidebarCards", () => {
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
         "formation-nudge"
       );
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
-        "funding-nudge"
-      );
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain("funding-nudge");
     });
 
     it("removes funding-nudge when operatingPhase is NEEDS_TO_REGISTER_FOR_TAXES", () => {
@@ -179,9 +177,7 @@ describe("updateRoadmapSidebarCards", () => {
         expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
           "welcome-up-and-running"
         );
-        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-          "welcome"
-        );
+        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain("welcome");
       }
     );
 
@@ -198,9 +194,7 @@ describe("updateRoadmapSidebarCards", () => {
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
         "welcome-up-and-running"
       );
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        "welcome"
-      );
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain("welcome");
     });
 
     it("does not remove welcome-up-and-running card when operating phase is UP_AND_RUNNING_OWNING", () => {
@@ -216,9 +210,7 @@ describe("updateRoadmapSidebarCards", () => {
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
         "welcome-up-and-running"
       );
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        "welcome"
-      );
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain("welcome");
     });
 
     it("adds the welcome-up-and-running card when operating phase is UP_AND_RUNNING and removes the welcome card", () => {
@@ -234,9 +226,7 @@ describe("updateRoadmapSidebarCards", () => {
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
         "welcome-up-and-running"
       );
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        "welcome"
-      );
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain("welcome");
     });
 
     it("removes the welcome-up-and-running card and adds the welcome card back if the user reverts from UP_AND_RUNNING", () => {
@@ -266,9 +256,7 @@ describe("updateRoadmapSidebarCards", () => {
         });
 
         const updatedUserData = updateSidebarCards(userData);
-        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
-          "welcome"
-        );
+        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain("welcome");
         expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
           "welcome-up-and-running"
         );

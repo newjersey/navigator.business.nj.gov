@@ -1,4 +1,3 @@
-import { Business } from "@shared/business";
 import { getCurrentBusiness } from "@shared/businessHelpers";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { modifyCurrentBusiness } from "@shared/test";

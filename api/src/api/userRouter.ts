@@ -1,4 +1,4 @@
-import { getCurrentBusiness} from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/businessHelpers";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
@@ -50,7 +50,7 @@ const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean => {
 const clearTaskItemChecklists = (userData: UserDataPrime): UserDataPrime => {
   return modifyCurrentBusiness(userData, (business) => ({
     ...business,
-    taskItemChecklist: {}
+    taskItemChecklist: {},
   }));
 };
 

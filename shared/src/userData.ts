@@ -1,8 +1,4 @@
-import {
-  Business,
-  createEmptyBusiness,
-  generateBusinessId,
-} from "./business";
+import { Business, createEmptyBusiness, generateBusinessId } from "./business";
 import { BusinessUser } from "./businessUser";
 import { createEmptyFormationFormData, FormationData } from "./formationData";
 import { LicenseData } from "./license";

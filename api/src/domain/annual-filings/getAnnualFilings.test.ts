@@ -6,7 +6,8 @@ import {
   generateUserDataPrime,
   getFirstAnnualFiling,
   getSecondAnnualFiling,
-  getThirdAnnualFiling, modifyCurrentBusiness
+  getThirdAnnualFiling,
+  modifyCurrentBusiness,
 } from "@shared/test";
 import { generateAnnualFilings } from "../../../test/helpers";
 import { getAnnualFilings } from "./getAnnualFilings";
@@ -121,7 +122,7 @@ describe("getAnnualFilings", () => {
     const response = getAnnualFilings(postedUserData);
     const expectedUserData = modifyCurrentBusiness(response, (business) => ({
       ...business,
-      taxFilingData:  generateTaxFilingData({ filings: [] }),
+      taxFilingData: generateTaxFilingData({ filings: [] }),
     }));
 
     expect(response).toEqual(expectedUserData);

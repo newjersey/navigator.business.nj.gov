@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { TaskProgress } from "@shared/business";
-import { getCurrentBusiness} from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/businessHelpers";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
 import { LicenseStatusResult, NameAndAddress } from "@shared/license";
 import { modifyCurrentBusiness } from "@shared/test";
@@ -17,7 +17,6 @@ const update = (
     completed: boolean;
   }
 ): UserDataPrime => {
-
   return modifyCurrentBusiness(userData, (business) => ({
     ...business,
     taskProgress: {
@@ -45,9 +44,7 @@ const update = (
 
 export const updateLicenseStatusFactory = (searchLicenseStatus: SearchLicenseStatus): UpdateLicenseStatus => {
   return async (userData: UserDataPrime, nameAndAddress: NameAndAddress): Promise<UserDataPrime> => {
-    const licenseType = convertIndustryToLicenseType(
-      getCurrentBusiness(userData).profileData.industryId
-    );
+    const licenseType = convertIndustryToLicenseType(getCurrentBusiness(userData).profileData.industryId);
     return searchLicenseStatus(nameAndAddress, licenseType)
       .then((licenseStatusResult: LicenseStatusResult) => {
         let taskStatus: TaskProgress = "NOT_STARTED";

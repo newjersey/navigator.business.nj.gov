@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { Business } from "@shared/business";
-import { getCurrentBusiness} from "@shared/businessHelpers";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
 import {
   generateFormationData,
@@ -9,7 +7,8 @@ import {
   generateGetFilingResponse,
   generateProfileData,
   generateUserData,
-  generateUserDataPrime, modifyCurrentBusiness
+  generateUserDataPrime,
+  modifyCurrentBusiness,
 } from "@shared/test";
 import { Express } from "express";
 import request from "supertest";
@@ -227,7 +226,7 @@ describe("formationRouter", () => {
         formationData: {
           ...business.formationData,
           getFilingResponse: getFilingResponse,
-        }
+        },
       }));
 
       expect(stubUserDataClient.put).toHaveBeenCalledWith(expectedUserData);

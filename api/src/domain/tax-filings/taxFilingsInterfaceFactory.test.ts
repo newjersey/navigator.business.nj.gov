@@ -8,7 +8,8 @@ import {
   generateTaxFilingCalendarEvent,
   generateTaxFilingData,
   generateTaxIdAndBusinessName,
-  generateUserDataPrime, modifyCurrentBusiness
+  generateUserDataPrime,
+  modifyCurrentBusiness,
 } from "@shared/test";
 import { UserDataPrime } from "@shared/userData";
 import { TaxFilingClient, TaxFilingInterface } from "../types";
@@ -132,9 +133,7 @@ describe("TaxFilingsInterfaceFactory", () => {
         });
 
         const response = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
-        expect(getCurrentBusiness(response).taxFilingData.registeredISO).toEqual(
-          currentDate.toISOString()
-        );
+        expect(getCurrentBusiness(response).taxFilingData.registeredISO).toEqual(currentDate.toISOString());
       });
 
       it("keeps existing registeredISO if it is defined", async () => {

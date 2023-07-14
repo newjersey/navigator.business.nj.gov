@@ -40,7 +40,7 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserDataPri
       ...business.preferences,
       isHideableRoadmapOpen: updatedIsHideableRoadmapOpen,
       phaseNewlyChanged: phaseHasChanged || currentBusiness.preferences.phaseNewlyChanged,
-    }
+    },
   }));
 };
 

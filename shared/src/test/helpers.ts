@@ -1,6 +1,6 @@
+import { Business } from "../business";
 import { getDateInCurrentYear, isDateAfterCurrentDate } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
-import { Business } from "../business";
 import { UserDataPrime } from "../userData";
 
 export const getFirstAnnualFiling = (formationDate: string): string => {
@@ -21,13 +21,15 @@ export const getThirdAnnualFiling = (formationDate: string): string => {
     : getDateInCurrentYear(formationDate).endOf("month").add(3, "year").format(defaultDateFormat);
 };
 
-
-export const modifyCurrentBusiness = (userData: UserDataPrime, modificationFunction: (currentBusiness: Business) => Business): UserDataPrime => {
+export const modifyCurrentBusiness = (
+  userData: UserDataPrime,
+  modificationFunction: (currentBusiness: Business) => Business
+): UserDataPrime => {
   return {
     ...userData,
     businesses: {
       ...userData.businesses,
-      [userData.currentBusinessId]: modificationFunction(userData.businesses[userData.currentBusinessId])
-    }
-  }
+      [userData.currentBusinessId]: modificationFunction(userData.businesses[userData.currentBusinessId]),
+    },
+  };
 };
