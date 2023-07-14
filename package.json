@@ -41,8 +41,8 @@
     "@aws-sdk/util-format-url": "3.369.0",
     "@businessnjgovnavigator/content": "*",
     "@businessnjgovnavigator/shared": "*",
-    "@emotion/react": "11.10.6",
-    "@emotion/styled": "11.10.6",
+    "@emotion/react": "11.11.1",
+    "@emotion/styled": "11.11.0",
     "@mui/lab": "5.0.0-alpha.126",
     "@mui/material": "5.12.0",
     "@mui/styles": "5.12.0",
@@ -97,7 +97,7 @@
     "uuid": "9.0.0",
     "winston": "3.10.0",
     "winston-cloudwatch": "6.1.1",
-    "xml2js": "0.5.0"
+    "xml2js": "0.6.0"
   },
   "devDependencies": {
     "@aws-sdk/types": "3.369.0",
