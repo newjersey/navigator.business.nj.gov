@@ -3756,7 +3756,7 @@ __metadata:
     winston: 3.10.0
     winston-cloudwatch: 6.1.1
     wiremock: 2.35.0
-    xml2js: 0.5.0
+    xml2js: 0.6.0
   languageName: unknown
   linkType: soft
 
@@ -3968,7 +3968,7 @@ __metadata:
     winston: 3.10.0
     winston-cloudwatch: 6.1.1
     wiremock: 2.35.0
-    xml2js: 0.5.0
+    xml2js: 0.6.0
     yarn-workspace-sync-deps: 0.3.3
   languageName: unknown
   linkType: soft
@@ -36576,6 +36576,16 @@ __metadata:
     sax: ">=0.6.0"
     xmlbuilder: ~11.0.0
   checksum: 1aa71d62e5bc2d89138e3929b9ea46459157727759cbc62ef99484b778641c0cd21fb637696c052d901a22f82d092a3e740a16b4ce218e81ac59b933535124ea
+  languageName: node
+  linkType: hard
+
+"xml2js@npm:0.6.0":
+  version: 0.6.0
+  resolution: "xml2js@npm:0.6.0"
+  dependencies:
+    sax: ">=0.6.0"
+    xmlbuilder: ~11.0.0
+  checksum: 437f353fd66d367bf158e9555a0625df9965d944e499728a5c6bc92a54a2763179b144f14b7e1c725040f56bbd22b0fa6cfcb09ec4faf39c45ce01efe631f40b
   languageName: node
   linkType: hard
 
