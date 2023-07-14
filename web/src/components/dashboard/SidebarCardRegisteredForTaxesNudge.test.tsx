@@ -9,14 +9,18 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { getCurrentDateISOString } from "@businessnjgovnavigator/shared/dateHelpers";
-import { Business, generateUserDataForBusiness, generateTaxFilingCalendarEvent, taxTaskId } from "@businessnjgovnavigator/shared/index";
+import {
+  Business,
+  generateTaxFilingCalendarEvent,
+  generateUserDataForBusiness,
+  taxTaskId,
+} from "@businessnjgovnavigator/shared/index";
 import {
   generateBusiness,
   generateProfileData,
   generateTaxFilingData,
 } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import {getMergedConfig} from "@/contexts/configContext";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));

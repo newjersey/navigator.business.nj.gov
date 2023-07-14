@@ -1,10 +1,9 @@
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { NameAndAddress } from "@shared/license";
 import { UserData } from "@shared/userData";
 import { Router } from "express";
 import { UpdateLicenseStatus, UserDataClient } from "../domain/types";
 import { getSignedInUserId } from "./userRouter";
-
-import { getCurrentBusiness } from "@shared/businessHelpers";
 
 export const licenseStatusRouterFactory = (
   updateLicenseStatus: UpdateLicenseStatus,

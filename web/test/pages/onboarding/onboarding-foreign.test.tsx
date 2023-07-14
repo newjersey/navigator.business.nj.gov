@@ -15,11 +15,11 @@ import {
   runNonprofitOnboardingTests,
   runSelfRegPageTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
-import { generateProfileData, generateUserData, ProfileData } from "@businessnjgovnavigator/shared/";
+import { generateProfileData, ProfileData } from "@businessnjgovnavigator/shared/";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
+import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, screen, waitFor } from "@testing-library/react";
-import {generateBusiness, generateUserDataForBusiness} from "@businessnjgovnavigator/shared/test";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

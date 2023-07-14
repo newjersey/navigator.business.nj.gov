@@ -1,17 +1,17 @@
-import { Business } from "@shared/business";
-import { getCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { TaxFilingCalendarEvent, TaxFilingLookupState, TaxFilingState } from "@shared/taxFiling";
 import {
+  generateBusiness,
   generateMunicipalityDetail,
   generatePreferences,
   generateProfileData,
   generateTaxFilingCalendarEvent,
   generateTaxFilingData,
   generateTaxIdAndBusinessName,
-  generateUserData,
+  generateUserDataForBusiness,
   modifyCurrentBusiness,
 } from "@shared/test";
-import { UserData } from "@shared/userData";
+import { Business, UserData } from "@shared/userData";
 import { TaxFilingClient, TaxFilingInterface } from "../types";
 import * as fetchMunicipality from "../user/fetchMunicipalityByName";
 import { taxFilingsInterfaceFactory } from "./taxFilingsInterfaceFactory";
@@ -54,16 +54,18 @@ describe("TaxFilingsInterfaceFactory", () => {
     describe("when successful", () => {
       it("updates state and filing data", async () => {
         const filingData = generateTaxFilingCalendarEvent({});
-        const userData = generateUserData({
-          preferences: generatePreferences({
-            isCalendarFullView: true,
-          }),
-          taxFilingData: generateTaxFilingData({
-            state: undefined,
-            lastUpdatedISO: undefined,
-            filings: [generateTaxFilingCalendarEvent({})],
-          }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            preferences: generatePreferences({
+              isCalendarFullView: true,
+            }),
+            taxFilingData: generateTaxFilingData({
+              state: undefined,
+              lastUpdatedISO: undefined,
+              filings: [generateTaxFilingCalendarEvent({})],
+            }),
+          })
+        );
         taxFilingClient.lookup.mockResolvedValue({
           state: "SUCCESS",
           filings: [filingData],
@@ -107,11 +109,13 @@ describe("TaxFilingsInterfaceFactory", () => {
       });
 
       it("removes errors if lookup succeeds", async () => {
-        const userData = generateUserData({
-          taxFilingData: generateTaxFilingData({
-            errorField: "formFailure",
-          }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            taxFilingData: generateTaxFilingData({
+              errorField: "formFailure",
+            }),
+          })
+        );
         taxFilingClient.lookup.mockResolvedValue({
           state: "SUCCESS",
           filings: [],
@@ -122,11 +126,13 @@ describe("TaxFilingsInterfaceFactory", () => {
       });
 
       it("sets registeredISO if it is undefined", async () => {
-        const userData = generateUserData({
-          taxFilingData: generateTaxFilingData({
-            registeredISO: undefined,
-          }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            taxFilingData: generateTaxFilingData({
+              registeredISO: undefined,
+            }),
+          })
+        );
         taxFilingClient.lookup.mockResolvedValue({
           state: "SUCCESS",
           filings: [],
@@ -138,9 +144,11 @@ describe("TaxFilingsInterfaceFactory", () => {
 
       it("keeps existing registeredISO if it is defined", async () => {
         const registeredISO = new Date("2023-01-01").toISOString();
-        const userData = generateUserData({
-          taxFilingData: generateTaxFilingData({ registeredISO }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            taxFilingData: generateTaxFilingData({ registeredISO }),
+          })
+        );
         taxFilingClient.lookup.mockResolvedValue({
           state: "SUCCESS",
           filings: [],
@@ -211,17 +219,19 @@ describe("TaxFilingsInterfaceFactory", () => {
 
       for (const state of nonSuccessStates) {
         it(`returns a ${state} state without updating filing data`, async () => {
-          const userData = generateUserData({
-            profileData: generateProfileData({
-              naicsCode: undefined,
-              municipality: undefined,
-            }),
-            taxFilingData: generateTaxFilingData({
-              state: undefined,
-              lastUpdatedISO: undefined,
-              filings: [generateTaxFilingCalendarEvent({})],
-            }),
-          });
+          const userData = generateUserDataForBusiness(
+            generateBusiness({
+              profileData: generateProfileData({
+                naicsCode: undefined,
+                municipality: undefined,
+              }),
+              taxFilingData: generateTaxFilingData({
+                state: undefined,
+                lastUpdatedISO: undefined,
+                filings: [generateTaxFilingCalendarEvent({})],
+              }),
+            })
+          );
 
           taxFilingClient.lookup.mockResolvedValue({
             state: state,
@@ -272,14 +282,16 @@ describe("TaxFilingsInterfaceFactory", () => {
       isCalendarFullView: boolean;
       numFilingsInCurrentYear: number;
     }): UserData {
-      return generateUserData({
-        preferences: generatePreferences({
-          isCalendarFullView: params.isCalendarFullView,
-        }),
-        taxFilingData: generateTaxFilingData({
-          filings: createFilings(params),
-        }),
-      });
+      return generateUserDataForBusiness(
+        generateBusiness({
+          preferences: generatePreferences({
+            isCalendarFullView: params.isCalendarFullView,
+          }),
+          taxFilingData: generateTaxFilingData({
+            filings: createFilings(params),
+          }),
+        })
+      );
     }
 
     /* eslint-disable unicorn/consistent-function-scoping */
@@ -313,14 +325,16 @@ describe("TaxFilingsInterfaceFactory", () => {
       let currentBusiness: Business;
 
       beforeEach(() => {
-        userData = generateUserData({
-          taxFilingData: generateTaxFilingData({
-            state: undefined,
-            lastUpdatedISO: undefined,
-            registeredISO: undefined,
-            filings: [generateTaxFilingCalendarEvent({})],
-          }),
-        });
+        userData = generateUserDataForBusiness(
+          generateBusiness({
+            taxFilingData: generateTaxFilingData({
+              state: undefined,
+              lastUpdatedISO: undefined,
+              registeredISO: undefined,
+              filings: [generateTaxFilingCalendarEvent({})],
+            }),
+          })
+        );
         currentBusiness = getCurrentBusiness(userData);
       });
 
@@ -405,13 +419,15 @@ describe("TaxFilingsInterfaceFactory", () => {
 
     describe("returns onboarding response", () => {
       it("returns the API_ERROR response", async () => {
-        const userData = generateUserData({
-          taxFilingData: generateTaxFilingData({
-            state: undefined,
-            lastUpdatedISO: undefined,
-            registeredISO: undefined,
-          }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            taxFilingData: generateTaxFilingData({
+              state: undefined,
+              lastUpdatedISO: undefined,
+              registeredISO: undefined,
+            }),
+          })
+        );
         taxFilingClient.onboarding.mockResolvedValue({
           state: "API_ERROR",
         });
@@ -430,13 +446,15 @@ describe("TaxFilingsInterfaceFactory", () => {
       });
 
       it("returns the FAILED response", async () => {
-        const userData = generateUserData({
-          taxFilingData: generateTaxFilingData({
-            state: undefined,
-            lastUpdatedISO: undefined,
-            registeredISO: undefined,
-          }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            taxFilingData: generateTaxFilingData({
+              state: undefined,
+              lastUpdatedISO: undefined,
+              registeredISO: undefined,
+            }),
+          })
+        );
         taxFilingClient.onboarding.mockResolvedValue({
           state: "FAILED",
           errorField: "businessName",

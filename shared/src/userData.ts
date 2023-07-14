@@ -8,9 +8,9 @@ import { TaxFilingData } from "./taxFiling";
 export interface UserData {
   readonly user: BusinessUser;
   readonly version: number;
-  readonly lastUpdatedISO: string | undefined;
-  dateCreatedISO: string | undefined;
-  versionWhenCreated: number;
+  readonly lastUpdatedISO: string;
+  readonly dateCreatedISO: string;
+  readonly versionWhenCreated: number;
   readonly businesses: Record<string, Business>;
   readonly currentBusinessId: string;
 }
@@ -18,6 +18,7 @@ export interface UserData {
 export interface Business {
   readonly id: string;
   readonly dateCreatedISO: string;
+  readonly lastUpdatedISO: string;
   readonly profileData: ProfileData;
   readonly onboardingFormProgress: OnboardingFormProgress;
   readonly taskProgress: Record<string, TaskProgress>;
@@ -28,28 +29,13 @@ export interface Business {
   readonly formationData: FormationData;
 }
 
-export type LegacyUserDataOverrides = {
-  profileData?: ProfileData;
-  formationData?: FormationData;
-  user?: BusinessUser;
-  onboardingFormProgress?: Partial<OnboardingFormProgress>;
-  taskProgress?: Record<string, TaskProgress>;
-  taskItemChecklist?: Record<string, boolean>;
-  taxFilingData?: TaxFilingData;
-  licenseData?: LicenseData;
-  preferences?: Preferences;
-  version?: number;
-  lastUpdatedISO?: string;
-  dateCreatedISO?: string;
-  versionWhenCreated?: number;
-};
-
 export const CURRENT_VERSION = 118;
 
 export const createEmptyBusiness = (id?: string): Business => {
   return {
     id: id ?? createBusinessId(),
     dateCreatedISO: new Date(Date.now()).toISOString(),
+    lastUpdatedISO: new Date(Date.now()).toISOString(),
     profileData: createEmptyProfileData(),
     onboardingFormProgress: "UNSTARTED",
     taskProgress: {},
@@ -82,20 +68,20 @@ export const createEmptyBusiness = (id?: string): Business => {
       dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     },
-  }
-}
+  };
+};
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
   const businessId = createBusinessId();
   return {
     version: CURRENT_VERSION,
     user: user,
-    lastUpdatedISO: undefined,
-    dateCreatedISO: undefined,
+    lastUpdatedISO: new Date(Date.now()).toISOString(),
+    dateCreatedISO: new Date(Date.now()).toISOString(),
     versionWhenCreated: CURRENT_VERSION,
     currentBusinessId: businessId,
     businesses: {
-      [businessId]: createEmptyBusiness(businessId)
+      [businessId]: createEmptyBusiness(businessId),
     },
   };
 };

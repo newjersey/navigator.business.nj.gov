@@ -7,15 +7,14 @@ import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import {useMockBusiness, useMockUserData} from "@/test/mock/mockUseUserData";
+import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
   Business,
   generateBusiness,
   generateProfileData,
   generateUser,
-  generateUserData, generateUserDataForBusiness,
-  UserData,
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
@@ -337,7 +336,7 @@ describe("<NavBar />", () => {
       setLargeScreen(true);
       setupStatefulUserDataContext();
       const user = generateUser({ name: "John Smith", email: "test@example.com" });
-      const business = generateBusinessNamedBusiness({})
+      const business = generateBusinessNamedBusiness({});
       const userData = generateUserDataForBusiness(business, { user });
 
       render(
@@ -471,7 +470,7 @@ describe("<NavBar />", () => {
         setLargeScreen(false);
         setupStatefulUserDataContext();
         const user = generateUser({ name: "John Smith", email: "test@example.com" });
-        const business = generateGuestBusiness({})
+        const business = generateGuestBusiness({});
         const userData = generateUserDataForBusiness(business, { user });
 
         render(

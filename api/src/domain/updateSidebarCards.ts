@@ -1,4 +1,4 @@
-import { getCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { isFieldAnswered, OPPORTUNITY_FIELDS } from "@shared/domain-logic/opportunityFields";
 import { modifyCurrentBusiness } from "@shared/test";
 import { UserData } from "@shared/userData";

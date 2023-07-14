@@ -2,7 +2,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { LicenseEvent } from "@/lib/types/types";
 import LicensePage from "@/pages/licenses/[licenseUrlSlug]";
 import { generateLicenseEvent } from "@/test/factories";
-import {useMockBusiness, useMockUserData} from "@/test/mock/mockUseUserData";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
   generateProfileData,
   getCurrentDate,

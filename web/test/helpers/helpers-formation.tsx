@@ -18,21 +18,24 @@ import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
-  Business, BusinessUser,
+  Business,
+  BusinessUser,
   castPublicFilingLegalTypeToFormationType,
   createEmptyFormationFormData,
   DateObject,
-  FormationSubmitResponse, generateBusiness,
+  FormationSubmitResponse,
+  generateBusiness,
   generateBusinessNameAvailability,
   generateFormationIncorporator,
-  generateMunicipality, generateUser, generateUserDataForBusiness,
+  generateMunicipality,
+  generateUser,
+  generateUserDataForBusiness,
   Municipality,
   NameAvailability,
   ProfileData,
   PublicFilingLegalType,
   publicFilingLegalTypes,
   randomInt,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
@@ -68,25 +71,25 @@ export const useSetupInitialMocks = (): void => {
 };
 
 type PreparePageParams = {
-  business: Partial<Business>,
-  displayContent: TasksDisplayContent,
-  municipalities?: Municipality[],
-  task?: Task,
-  isAuthenticated?: IsAuthenticated,
-  setRegistrationModalIsVisible?: (value: boolean) => void
-  user?: Partial<BusinessUser>,
-  searchOnly?: boolean
-}
+  business: Partial<Business>;
+  displayContent: TasksDisplayContent;
+  municipalities?: Municipality[];
+  task?: Task;
+  isAuthenticated?: IsAuthenticated;
+  setRegistrationModalIsVisible?: (value: boolean) => void;
+  user?: Partial<BusinessUser>;
+  searchOnly?: boolean;
+};
 
 export const preparePage = ({
-    business,
-    displayContent,
-    municipalities,
-    task,
-    isAuthenticated,
-    setRegistrationModalIsVisible,
-    user,
-    searchOnly
+  business,
+  displayContent,
+  municipalities,
+  task,
+  isAuthenticated,
+  setRegistrationModalIsVisible,
+  user,
+  searchOnly,
 }: PreparePageParams): FormationPageHelpers => {
   const profileData = generateFormationProfileData({ ...business.profileData });
   const isValid = publicFilingLegalTypes.includes(profileData.legalStructureId as PublicFilingLegalType);
@@ -120,10 +123,10 @@ export const preparePage = ({
   const userData = generateUserData({
     user: generateUser(user ?? {}),
     businesses: {
-      [initialBusiness.id]: initialBusiness
+      [initialBusiness.id]: initialBusiness,
     },
-    currentBusinessId: initialBusiness.id
-  })
+    currentBusinessId: initialBusiness.id,
+  });
 
   render(
     withAuthAlert(
@@ -161,8 +164,8 @@ export const mockApiResponse = (response?: FormationSubmitResponse): void => {
             ...userData.businesses[userData.currentBusinessId].formationData,
             formationResponse: response,
           },
-        }
-      }
+        },
+      },
     });
   });
 };

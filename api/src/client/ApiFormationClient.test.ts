@@ -4,6 +4,7 @@ import { defaultDateFormat } from "@shared/defaultConstants";
 import { formationApiDateFormat, FormationLegalType } from "@shared/formationData";
 import { randomInt } from "@shared/intHelpers";
 import {
+  generateBusiness,
   generateFormationData,
   generateFormationFormData,
   generateFormationIncorporator,
@@ -12,7 +13,7 @@ import {
   generateFormationSigner,
   generateFormationUSAddress,
   generateProfileData,
-  generateUserData,
+  generateUserDataForBusiness,
 } from "@shared/test";
 import axios from "axios";
 import { generateFormationUserData, generateInputFile } from "../../test/factories";
@@ -26,7 +27,7 @@ import {
   ApiSubmission,
 } from "./ApiFormationClient";
 
-import { getCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 
 jest.mock("axios");
 jest.mock("winston");
@@ -807,13 +808,15 @@ describe("ApiFormationClient", () => {
           { legalStructureId: "limited-liability-partnership" }
         );
 
-        const userData = generateUserData({
-          profileData: generateProfileData({
-            legalStructureId: "limited-liability-partnership",
-            businessPersona: "STARTING",
-          }),
-          formationData: generateFormationData({ formationFormData }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            profileData: generateProfileData({
+              legalStructureId: "limited-liability-partnership",
+              businessPersona: "STARTING",
+            }),
+            formationData: generateFormationData({ formationFormData }),
+          })
+        );
 
         await client.form(userData, "hostname.com/form-business");
         const currentBusiness = getCurrentBusiness(userData);
@@ -932,13 +935,15 @@ describe("ApiFormationClient", () => {
           { legalStructureId: "foreign-limited-liability-partnership" }
         );
 
-        const userData = generateUserData({
-          profileData: generateProfileData({
-            legalStructureId: "limited-liability-partnership",
-            businessPersona: "FOREIGN",
-          }),
-          formationData: generateFormationData({ formationFormData }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            profileData: generateProfileData({
+              legalStructureId: "limited-liability-partnership",
+              businessPersona: "FOREIGN",
+            }),
+            formationData: generateFormationData({ formationFormData }),
+          })
+        );
         const currentBusiness = getCurrentBusiness(userData);
 
         await client.form(userData, "hostname.com/form-business");
@@ -1074,13 +1079,15 @@ describe("ApiFormationClient", () => {
           { legalStructureId: "limited-partnership" }
         );
 
-        const userData = generateUserData({
-          profileData: generateProfileData({
-            legalStructureId: "limited-partnership",
-            businessPersona: "STARTING",
-          }),
-          formationData: generateFormationData({ formationFormData }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            profileData: generateProfileData({
+              legalStructureId: "limited-partnership",
+              businessPersona: "STARTING",
+            }),
+            formationData: generateFormationData({ formationFormData }),
+          })
+        );
         const currentBusiness = getCurrentBusiness(userData);
 
         await client.form(userData, "hostname.com/form-business");

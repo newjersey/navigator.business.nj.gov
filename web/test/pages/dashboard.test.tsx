@@ -26,25 +26,24 @@ import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import {setMockUserDataResponse, useMockBusiness, useMockProfileData} from "@/test/mock/mockUseUserData";
+import { setMockUserDataResponse, useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData";
 import {
   currentBusiness,
-  currentUserData,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  defaultDateFormat, generateBusiness,
+  defaultDateFormat,
+  generateBusiness,
   generateProfileData,
   generateTaxFilingCalendarEvent,
   generateTaxFilingData,
-  generateUserData, generateUserDataForBusiness,
+  generateUserDataForBusiness,
   getCurrentDate,
   OperatingPhases,
   RegistrationStatus,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhase } from "@businessnjgovnavigator/shared/src/operatingPhase";
 import { generatePreferences } from "@businessnjgovnavigator/shared/test";
@@ -115,9 +114,7 @@ describe("dashboard page", () => {
     setupStatefulUserDataContext();
 
     render(
-      <WithStatefulUserData
-        initialUserData={generateUserDataForBusiness(business)}
-      >
+      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
         <ThemeProvider theme={createTheme()}>
           <DashboardPage
             operateReferences={{}}
@@ -153,7 +150,9 @@ describe("dashboard page", () => {
     render(
       withAuthAlert(
         <WithStatefulUserData
-          initialUserData={generateUserDataForBusiness(generateBusiness({ onboardingFormProgress: "COMPLETED" }))}
+          initialUserData={generateUserDataForBusiness(
+            generateBusiness({ onboardingFormProgress: "COMPLETED" })
+          )}
         >
           <ThemeProvider theme={createTheme()}>
             <SignUpSnackbar />

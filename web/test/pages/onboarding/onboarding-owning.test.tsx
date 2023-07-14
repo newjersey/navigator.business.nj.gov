@@ -3,7 +3,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { templateEval } from "@/lib/utils/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
-import {currentBusiness, currentUserData, setupStatefulUserDataContext} from "@/test/mock/withStatefulUserData";
+import { currentBusiness, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import {
   mockEmptyApiSignups,
   renderPage,
@@ -20,8 +20,7 @@ import {
   generateBusiness,
   generatePreferences,
   generateUser,
-  generateUserData,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, screen, waitFor, within } from "@testing-library/react";
@@ -156,7 +155,7 @@ describe("onboarding - owning a business", () => {
 
   it("updates the user data after each form page", async () => {
     const initialUserData = createEmptyUserData(generateUser({}));
-    const initialBusiness = initialUserData.businesses[initialUserData.currentBusinessId]
+    const initialBusiness = initialUserData.businesses[initialUserData.currentBusinessId];
     const { page } = renderPage({ userData: initialUserData });
 
     page.chooseRadio("business-persona-owning");
@@ -204,9 +203,9 @@ describe("onboarding - owning a business", () => {
         businesses: {
           [userData.currentBusinessId]: {
             ...userData.businesses[userData.currentBusinessId],
-            taxFilingData: { ...taxData, filings: [] }
-          }
-        }
+            taxFilingData: { ...taxData, filings: [] },
+          },
+        },
       });
     });
 

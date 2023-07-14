@@ -19,7 +19,7 @@ import { FormationClient } from "../domain/types";
 import { LogWriterType } from "../libs/logWriter";
 import { splitErrorField } from "./splitErrorField";
 
-import { getCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 
 type ApiConfig = {
   account: string;

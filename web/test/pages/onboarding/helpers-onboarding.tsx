@@ -11,9 +11,8 @@ import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
 import Onboarding from "@/pages/onboarding";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import {currentBusiness, currentUserData, WithStatefulUserData} from "@/test/mock/withStatefulUserData";
+import { currentBusiness, currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
-  Business,
   BusinessPersona,
   BusinessUser,
   createEmptyUser,
@@ -31,6 +30,11 @@ import {
   emptyIndustrySpecificData,
   industrySpecificDataChoices,
 } from "@businessnjgovnavigator/shared/profileData";
+import {
+  generateBusiness,
+  generateUserDataForBusiness,
+  randomLegalStructure,
+} from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import {
   act,
@@ -41,7 +45,6 @@ import {
   waitForElementToBeRemoved,
   within,
 } from "@testing-library/react";
-import {generateBusiness, generateUserDataForBusiness, randomLegalStructure} from "@businessnjgovnavigator/shared/test";
 
 const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();
@@ -253,8 +256,8 @@ export const runNonprofitOnboardingTests = ({
           businessPersona,
           foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
         },
-      }
-    }
+      },
+    },
   };
 
   it("sets legal structure undefined if nonprofit is kept as default No", async () => {
@@ -279,16 +282,19 @@ export const runNonprofitOnboardingTests = ({
 
   it("marks business structure task complete if nonprofit is Yes", async () => {
     useMockRouter({ isReady: true, query: { page: selfRegPage.toString() } });
-    const filledInUserData = generateUserDataForBusiness(generateBusiness({
-      onboardingFormProgress: "UNSTARTED",
-      taskProgress: {},
-      profileData: generateProfileData({
-        businessPersona,
-        foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
-        legalStructureId: "nonprofit",
-        isNonprofitOnboardingRadio: true,
+    const filledInUserData = generateUserDataForBusiness(
+      generateBusiness({
+        onboardingFormProgress: "UNSTARTED",
+        taskProgress: {},
+        profileData: generateProfileData({
+          businessPersona,
+          foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
+          legalStructureId: "nonprofit",
+          isNonprofitOnboardingRadio: true,
+        }),
       }),
-    }), { user });
+      { user }
+    );
     const { page } = renderPage({ userData: filledInUserData });
 
     page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
@@ -304,16 +310,19 @@ export const runNonprofitOnboardingTests = ({
 
   it("does not change business structure task if nonprofit is No", async () => {
     useMockRouter({ isReady: true, query: { page: selfRegPage.toString() } });
-    const filledInUserData = generateUserDataForBusiness(generateBusiness({
-      taskProgress: {},
-      onboardingFormProgress: "UNSTARTED",
-      profileData: generateProfileData({
-        businessPersona,
-        foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
-        legalStructureId: undefined,
-        isNonprofitOnboardingRadio: false,
+    const filledInUserData = generateUserDataForBusiness(
+      generateBusiness({
+        taskProgress: {},
+        onboardingFormProgress: "UNSTARTED",
+        profileData: generateProfileData({
+          businessPersona,
+          foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
+          legalStructureId: undefined,
+          isNonprofitOnboardingRadio: false,
+        }),
       }),
-    }), { user });
+      { user }
+    );
     const { page } = renderPage({ userData: filledInUserData });
 
     page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
@@ -338,16 +347,16 @@ export const runSelfRegPageTests = ({
   const user = createEmptyUser();
   const userData = generateUserData({
     user,
-    currentBusinessId: '12345',
+    currentBusinessId: "12345",
     businesses: {
-      '12345': generateBusiness({
+      "12345": generateBusiness({
         onboardingFormProgress: "UNSTARTED",
         profileData: generateProfileData({
           businessPersona,
           legalStructureId: randomLegalStructure().id,
         }),
-      })
-    }
+      }),
+    },
   });
 
   beforeEach(() => {

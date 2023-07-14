@@ -1,4 +1,4 @@
-import { getCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { maskingCharacter } from "@shared/profileData";
 import { modifyCurrentBusiness } from "@shared/test";
 import { UserData } from "@shared/userData";

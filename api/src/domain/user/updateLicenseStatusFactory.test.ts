@@ -1,12 +1,13 @@
-import { getCurrentBusiness } from "@shared/businessHelpers";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import {
+  generateBusiness,
   generateLicenseData,
   generateLicenseStatusItem,
   generateLicenseStatusResult,
   generateNameAndAddress,
   generateProfileData,
-  generateUserData,
+  generateUserDataForBusiness,
   modifyCurrentBusiness,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
@@ -25,14 +26,16 @@ describe("updateLicenseStatus", () => {
     stubSearchLicenseStatus = jest.fn();
     updateLicenseStatus = updateLicenseStatusFactory(stubSearchLicenseStatus);
 
-    userData = generateUserData({
-      profileData: generateProfileData({
-        industryId: "home-contractor",
-      }),
-      licenseData: generateLicenseData({
-        lastUpdatedISO: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
-      }),
-    });
+    userData = generateUserDataForBusiness(
+      generateBusiness({
+        profileData: generateProfileData({
+          industryId: "home-contractor",
+        }),
+        licenseData: generateLicenseData({
+          lastUpdatedISO: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
+        }),
+      })
+    );
   });
 
   it("searches for license status with criteria and license type", async () => {

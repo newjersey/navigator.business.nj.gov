@@ -2,7 +2,7 @@ import { generateUser, generateUserData } from "@shared/test";
 import { AddToUserTesting, UserTestingClient } from "../types";
 import { addToUserTestingFactory } from "./addToUserTestingFactory";
 
-import { getCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 
 describe("addToUserTesting", () => {
   let stubUserTestingClient: jest.Mocked<UserTestingClient>;

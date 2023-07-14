@@ -1,12 +1,20 @@
-import { getCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
-import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";
+import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
 import { ProfileDocuments } from "@shared/profileData";
 import { modifyCurrentBusiness } from "@shared/test";
+import { UserData } from "@shared/userData";
 import { Router } from "express";
 import { saveFileFromUrl } from "../domain/s3Writer";
 import { FormationClient, UserDataClient } from "../domain/types";
+import { ExpressRequestBody } from "./types";
 import { getSignedInUser, getSignedInUserId } from "./userRouter";
+
+type FormationPostBody = {
+  userData: UserData;
+  returnUrl: string;
+  foreignGoodStandingFile: InputFile;
+};
 
 export const formationRouterFactory = (
   formationClient: FormationClient,
@@ -15,19 +23,19 @@ export const formationRouterFactory = (
 ): Router => {
   const router = Router();
 
-  router.post("/formation", async (req, res) => {
+  router.post("/formation", async (req: ExpressRequestBody<FormationPostBody>, res) => {
     const { userData, returnUrl, foreignGoodStandingFile } = req.body;
 
     formationClient
       .form(userData, returnUrl, foreignGoodStandingFile)
       .then(async (formationResponse: FormationSubmitResponse) => {
-        const userDataWithResponse = {
-          ...userData,
+        const userDataWithResponse = modifyCurrentBusiness(userData, (business) => ({
+          ...business,
           formationData: {
-            ...userData.formationData,
+            ...business.formationData,
             formationResponse: formationResponse,
           },
-        };
+        }));
         await userDataClient.put(userDataWithResponse);
         res.json(userDataWithResponse);
       })

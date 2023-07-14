@@ -9,12 +9,12 @@ import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   generateUseUserDataResponse,
-  setMockUserDataResponse, useMockBusiness,
+  setMockUserDataResponse,
+  useMockBusiness,
   useMockProfileData,
 } from "@/test/mock/mockUseUserData";
 import {
   currentBusiness,
-  currentUserData,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";

@@ -1,11 +1,12 @@
 import { NameAvailability } from "@shared/businessNameSearch";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import {
+  generateBusiness,
   generateBusinessNameAvailability,
   generateProfileData,
   generateTaxFilingData,
   generateUser,
-  generateUserData,
+  generateUserDataForBusiness,
   getFirstAnnualFiling,
   getSecondAnnualFiling,
   getThirdAnnualFiling,
@@ -38,8 +39,7 @@ describe("guestRouter", () => {
     it("calculates 3 new annual filing dates and updates them for dateOfFormation", async () => {
       const formationDate = "2021-03-01";
 
-      const postedUserData = generateUserData({
-        user: generateUser({ id: "123" }),
+      const business = generateBusiness({
         profileData: generateProfileData({
           dateOfFormation: formationDate,
           entityId: undefined,
@@ -49,6 +49,7 @@ describe("guestRouter", () => {
           filings: [],
         }),
       });
+      const postedUserData = generateUserDataForBusiness(business, { user: generateUser({ id: "123" }) });
 
       const response = await request(app).post(`/annualFilings`).send(postedUserData);
       const expectedUserData = modifyCurrentBusiness(postedUserData, (business) => ({
