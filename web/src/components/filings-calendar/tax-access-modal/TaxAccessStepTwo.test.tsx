@@ -674,7 +674,6 @@ describe("<TaxAccessStepTwo />", () => {
 
       renderComponent(nineDigitData);
 
-      const business = getCurrentBusiness(userData)
       mockApiResponse(userData, {
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",

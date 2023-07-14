@@ -53,7 +53,7 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { createProfileFieldErrorMap, OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { getFlow, useMountEffect, useMountEffectWhenDefined, useScrollToPathAnchor } from "@/lib/utils/helpers";
+import { getFlow, useMountEffectWhenDefined, useScrollToPathAnchor } from "@/lib/utils/helpers";
 import {
   Business,
   BusinessPersona,

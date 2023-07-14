@@ -24,8 +24,6 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
 
-const Config = getMergedConfig();
-
 describe("<SidebarCardRegisteredForTaxesNudge />", () => {
   let card: SidebarCardContent;
 

@@ -17,7 +17,6 @@ import {
 import {
   castPublicFilingLegalTypeToFormationType, generateBusiness,
   generateFormationFormData,
-  generateUserData,
   ProfileData,
   PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
