@@ -13,9 +13,9 @@ import {
 import {
   generateBusiness,
   generatePreferences,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import {Business, TaskProgress} from "@businessnjgovnavigator/shared/userData";
+import { Business, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { act, render } from "@testing-library/react";
 import { ReactNode } from "react";
 

@@ -5,7 +5,8 @@ import { camelCaseToSnakeCase } from "@/lib/utils/cases-helpers";
 import {
   ABExperience,
   BusinessPersona,
-  ForeignBusinessType, getCurrentBusiness,
+  ForeignBusinessType,
+  getCurrentBusiness,
   IndustrySpecificData,
   LookupOperatingPhaseById,
   OperatingPhaseId,
@@ -56,8 +57,8 @@ export const phaseChangeAnalytics = ({
   oldUserData: UserData;
   newUserData: UserData;
 }): void => {
-  const oldProfileData = getCurrentBusiness(oldUserData).profileData
-  const newProfileData = getCurrentBusiness(newUserData).profileData
+  const oldProfileData = getCurrentBusiness(oldUserData).profileData;
+  const newProfileData = getCurrentBusiness(newUserData).profileData;
   if (oldProfileData.operatingPhase === newProfileData.operatingPhase) {
     return;
   } else if (

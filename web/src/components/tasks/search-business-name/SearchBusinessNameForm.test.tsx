@@ -15,7 +15,8 @@ import {
   searchButton,
 } from "@/test/helpers/helpersSearchBusinessName";
 import {
-  castPublicFilingLegalTypeToFormationType, generateBusiness,
+  castPublicFilingLegalTypeToFormationType,
+  generateBusiness,
   generateFormationFormData,
   ProfileData,
   PublicFilingLegalType,

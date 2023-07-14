@@ -1,6 +1,6 @@
 import { getDateInCurrentYear, isDateAfterCurrentDate } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
-import {Business, UserData} from "../userData";
+import { Business, UserData } from "../userData";
 
 export const getFirstAnnualFiling = (formationDate: string): string => {
   return isDateAfterCurrentDate(formationDate)

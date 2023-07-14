@@ -5,12 +5,8 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import {useMockBusiness, useMockProfileData, useMockUserData} from "@/test/mock/mockUseUserData";
-import {
-  generateUser,
-  getCurrentDateInNewJersey,
-  randomInt,
-} from "@businessnjgovnavigator/shared/";
+import { useMockBusiness, useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
+import { generateUser, getCurrentDateInNewJersey, randomInt } from "@businessnjgovnavigator/shared/";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 

@@ -17,7 +17,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { createProfileFieldErrorMap, Task } from "@/lib/types/types";
 import { getFlow, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import {Business, hasCompletedFormation} from "@businessnjgovnavigator/shared";
+import { Business, hasCompletedFormation } from "@businessnjgovnavigator/shared";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useMediaQuery } from "@mui/material";

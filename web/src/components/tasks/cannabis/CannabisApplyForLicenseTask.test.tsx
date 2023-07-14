@@ -14,8 +14,10 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
+  generateBusiness,
   generateProfileData,
-  generateBusiness, generateUserDataForBusiness, generateUserData,
+  generateUserData,
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
@@ -27,7 +29,9 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 const renderPage = (task: Task, business?: Business): void => {
   render(
     withAuthAlert(
-      <WithStatefulUserData initialUserData={business ? generateUserDataForBusiness(business) : generateUserData({})}>
+      <WithStatefulUserData
+        initialUserData={business ? generateUserDataForBusiness(business) : generateUserData({})}
+      >
         <CannabisApplyForLicenseTask task={task} />
       </WithStatefulUserData>,
       IsAuthenticated.TRUE
@@ -286,20 +290,14 @@ describe("<CannabisApplyForLicenseTask />", () => {
     });
 
     it("shows CTA for task", () => {
-      renderPage(
-        generateTask({ callToActionText: "do the application here" }),
-        generateBusiness({})
-      );
+      renderPage(generateTask({ callToActionText: "do the application here" }), generateBusiness({}));
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
 
       expect(screen.getByText("do the application here")).toBeInTheDocument();
     });
 
     it("can go back to first tab", () => {
-      renderPage(
-        generateTask({ callToActionText: "do the application here" }),
-        generateBusiness({})
-      );
+      renderPage(generateTask({ callToActionText: "do the application here" }), generateBusiness({}));
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.backToFirstTabButton));
       expect(screen.getByText(Config.cannabisApplyForLicense.applicationQuestionsText)).toBeInTheDocument();

@@ -11,14 +11,15 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   einTaskId,
+  generateBusiness as _generateBusiness,
   generateMunicipality,
   generateProfileData,
-  generateBusiness as _generateBusiness,
-  TaskProgress, generateUserDataForBusiness,
+  generateUserDataForBusiness,
+  TaskProgress,
 } from "@businessnjgovnavigator/shared";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
-import {Business } from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
@@ -50,12 +51,13 @@ export const renderPage = ({
       ? business.profileData.municipality
       : generateMunicipality({ displayName: "GenericTown" });
 
-  const initialBusiness = business ??
+  const initialBusiness =
+    business ??
     generateBusiness({
       profileData: generateProfileData({
         municipality: genericTown,
       }),
-    })
+    });
 
   render(
     withAuthAlert(

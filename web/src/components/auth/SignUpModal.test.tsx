@@ -6,7 +6,7 @@ import * as session from "@/lib/auth/sessionHelper";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import {useMockBusiness, useMockUserData} from "@/test/mock/mockUseUserData";
+import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
 import { generateUser, generateUserData } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 

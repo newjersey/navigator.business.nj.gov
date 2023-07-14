@@ -3,12 +3,16 @@ import { onGuestSignIn, onSelfRegister, onSignIn, onSignOut, SelfRegRouter } fro
 import { ROUTES } from "@/lib/domain-logic/routes";
 import * as UserDataStorage from "@/lib/storage/UserDataStorage";
 import { generateUser, generateUserData } from "@businessnjgovnavigator/shared/";
+import {
+  generateBusiness,
+  generatePreferences,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { waitFor } from "@testing-library/react";
 import { UpdateQueue } from "../types/types";
 import { UpdateQueueFactory } from "../UpdateQueue";
 import * as session from "./sessionHelper";
-import {generateBusiness, generatePreferences, generateUserDataForBusiness} from "@businessnjgovnavigator/shared/test";
 
 const mockGetCurrentUserData = jest.fn();
 const mockDelete = jest.fn();
@@ -91,10 +95,10 @@ describe("SigninHelper", () => {
             ...userData.businesses[userData.currentBusinessId],
             preferences: {
               ...userData.businesses[userData.currentBusinessId].preferences,
-              returnToLink: "/tasks/some-url"
-            }
-          }
-        }
+              returnToLink: "/tasks/some-url",
+            },
+          },
+        },
       });
     });
 
@@ -102,7 +106,7 @@ describe("SigninHelper", () => {
       const business = generateBusiness({
         preferences: generatePreferences({ returnToLink: "/pathname?query=true" }),
       });
-      userData = generateUserDataForBusiness(business)
+      userData = generateUserDataForBusiness(business);
       updateQueue = new UpdateQueueFactory(userData, update);
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
       await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus, { useReturnToLink: true });
@@ -113,10 +117,10 @@ describe("SigninHelper", () => {
             ...userData.businesses[userData.currentBusinessId],
             preferences: {
               ...userData.businesses[userData.currentBusinessId].preferences,
-              returnToLink: "/pathname?query=true"
-            }
-          }
-        }
+              returnToLink: "/pathname?query=true",
+            },
+          },
+        },
       });
     });
 

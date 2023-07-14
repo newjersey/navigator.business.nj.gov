@@ -25,7 +25,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { FormationStepNames, StepperStep } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
-import {Business, FormationFormData, getCurrentBusiness} from "@businessnjgovnavigator/shared";
+import { Business, FormationFormData, getCurrentBusiness } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
@@ -278,8 +278,8 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   const submitToApi = async (): Promise<void> => {
     if (!business || !updateQueue) return;
     updateQueue.queueFormationData({
-      formationFormData: filterEmptyFormData(state.formationFormData)
-    })
+      formationFormData: filterEmptyFormData(state.formationFormData),
+    });
 
     setIsLoading(true);
 
@@ -289,7 +289,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
       state.foreignGoodStandingFile
     );
     updateQueue.queue(newUserData).update();
-    const newBusiness = getCurrentBusiness(newUserData)
+    const newBusiness = getCurrentBusiness(newUserData);
     submitToApiAnalytics(newBusiness);
     resetInteractedFields(newBusiness);
 

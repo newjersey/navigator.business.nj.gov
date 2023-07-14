@@ -6,7 +6,7 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import Profile from "@/pages/profile";
-import {createEmptyProfileData, generateBusiness} from "@businessnjgovnavigator/shared";
+import { createEmptyProfileData, generateBusiness } from "@businessnjgovnavigator/shared";
 import { ReactElement, useState } from "react";
 
 const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {

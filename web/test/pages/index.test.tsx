@@ -3,7 +3,7 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import Home from "@/pages/index";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import {setMockUserDataResponse, useMockBusiness} from "@/test/mock/mockUseUserData";
+import { setMockUserDataResponse, useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generateProfileData, generateUser } from "@businessnjgovnavigator/shared";
 import { render } from "@testing-library/react";
 

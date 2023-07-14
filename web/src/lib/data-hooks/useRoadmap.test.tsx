@@ -3,10 +3,10 @@ import * as buildUserRoadmapModule from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap } from "@/lib/types/types";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { withRoadmap } from "@/test/helpers/helpers-renderers";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { render } from "@testing-library/react";
-import {useMockBusiness} from "@/test/mock/mockUseUserData";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));

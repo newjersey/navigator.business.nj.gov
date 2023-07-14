@@ -2,6 +2,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { Filing, taxFilingMethod } from "@/lib/types/types";
 import FilingPage from "@/pages/filings/[filingUrlSlug]";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
   defaultDateFormat,
   generateProfileData,
@@ -13,7 +14,6 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 import dayjs from "dayjs";
-import {useMockBusiness} from "@/test/mock/mockUseUserData";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 const Config = getMergedConfig();

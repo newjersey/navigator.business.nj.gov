@@ -9,7 +9,7 @@ import {
   setDesktopScreen,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
-import {currentBusiness} from "@/test/mock/withStatefulUserData";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   FormationLegalType,
   FormationMember,

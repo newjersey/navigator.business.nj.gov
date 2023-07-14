@@ -5,13 +5,13 @@ import {
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
-import {currentBusiness} from "@/test/mock/withStatefulUserData";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   castPublicFilingLegalTypeToFormationType,
   FormationFormData,
   PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared/formationData";
-import {generateBusiness, generateFormationFormData} from "@businessnjgovnavigator/shared/test";
+import { generateBusiness, generateFormationFormData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen } from "@testing-library/react";
 import { displayContent } from "../contacts/testHelpers";

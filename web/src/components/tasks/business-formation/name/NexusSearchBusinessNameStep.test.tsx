@@ -1,18 +1,6 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import analytics from "@/lib/utils/analytics";
-import { dbaInputField } from "@/test/helpers/helpersSearchBusinessName";
 import { generateFormationDbaContent } from "@/test/factories";
-import {
-  currentBusiness,
-  userDataWasNotUpdated,
-} from "@/test/mock/withStatefulUserData";
-import {
-  castPublicFilingLegalTypeToFormationType,
-  FormationData,
-  generateBusiness, generateFormationFormData,
-  ProfileData,
-  PublicFilingLegalType
-} from "@businessnjgovnavigator/shared";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -20,9 +8,17 @@ import {
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
+import { dbaInputField } from "@/test/helpers/helpersSearchBusinessName";
+import { currentBusiness, userDataWasNotUpdated } from "@/test/mock/withStatefulUserData";
 import {
-  generateBusinessNameAvailability
-} from "@businessnjgovnavigator/shared/test";
+  castPublicFilingLegalTypeToFormationType,
+  FormationData,
+  generateBusiness,
+  generateFormationFormData,
+  ProfileData,
+  PublicFilingLegalType,
+} from "@businessnjgovnavigator/shared";
+import { generateBusinessNameAvailability } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
@@ -181,7 +177,7 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
   it("shows DBA search immediately if businessNameAvailability status is 'UNAVAILABLE'", async () => {
     const page = await getPageHelper(
       { businessName: "some cool name" },
-      { businessNameAvailability: generateBusinessNameAvailability({ status: "UNAVAILABLE" })}
+      { businessNameAvailability: generateBusinessNameAvailability({ status: "UNAVAILABLE" }) }
     );
 
     await page.searchBusinessName({ status: "UNAVAILABLE" });

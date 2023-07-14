@@ -1,7 +1,7 @@
-import {FormationDateModal} from "@/components/FormationDateModal";
-import {getMergedConfig} from "@/contexts/configContext";
-import {MunicipalitiesContext} from "@/contexts/municipalitiesContext";
-import {selectDate, selectLocationByText} from "@/test/helpers/helpers-testing-library-selectors";
+import { FormationDateModal } from "@/components/FormationDateModal";
+import { getMergedConfig } from "@/contexts/configContext";
+import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
+import { selectDate, selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -17,7 +17,7 @@ import {
   generateUserDataForBusiness,
   getCurrentDate,
 } from "@businessnjgovnavigator/shared";
-import {fireEvent, render, screen} from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

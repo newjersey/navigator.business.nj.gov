@@ -1,5 +1,5 @@
 import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifiedByUserData";
-import {useMockProfileData} from "@/test/mock/mockUseUserData";
+import { useMockProfileData } from "@/test/mock/mockUseUserData";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
@@ -34,7 +34,6 @@ describe("useContentModifiedByUserData", () => {
       expect(result).toEqual(expect.not.stringContaining("out-of-state"));
       expect(result).toEqual("You have a business");
     });
-
 
     it("does not render out of state designation when businessPersona is undefined", () => {
       useMockProfileData({ businessPersona: undefined });

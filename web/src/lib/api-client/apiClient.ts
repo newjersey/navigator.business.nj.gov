@@ -1,9 +1,9 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { SelfRegResponse } from "@/lib/types/types";
 import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
+import { getCurrentBusiness } from "@businessnjgovnavigator/shared";
 import { InputFile, NameAndAddress, NameAvailability, UserData } from "@businessnjgovnavigator/shared/";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
-import {getCurrentBusiness} from "@businessnjgovnavigator/shared";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
 

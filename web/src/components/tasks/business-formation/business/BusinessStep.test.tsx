@@ -15,7 +15,8 @@ import {
   businessStructureTaskId,
   castPublicFilingLegalTypeToFormationType,
   defaultDateFormat,
-  FormationFormData, generateBusiness,
+  FormationFormData,
+  generateBusiness,
   generateFormationFormData,
   generateMunicipality,
   getCurrentDate,
@@ -81,9 +82,9 @@ describe("Formation - BusinessStep", () => {
       lastVisitedPageIndex: 0,
     };
     const page = preparePage({
-      business: generateBusiness({profileData, formationData}),
+      business: generateBusiness({ profileData, formationData }),
       displayContent,
-      municipalities
+      municipalities,
     });
     if (isForeign) {
       await page.submitNexusBusinessNameStep();

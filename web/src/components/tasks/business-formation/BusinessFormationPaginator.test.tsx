@@ -44,9 +44,10 @@ import {
   generateBusiness,
   generateFormationFormData,
   generateFormationSubmitResponse,
-  generateMunicipality, generateUserDataForBusiness,
+  generateMunicipality,
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import {Business} from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 
@@ -140,7 +141,7 @@ describe("<BusinessFormationPaginator />", () => {
 
   describe("button text", () => {
     it("shows unique text on button on first step", () => {
-      preparePage({business, displayContent});
+      preparePage({ business, displayContent });
       expect(screen.getByText(Config.formation.general.initialNextButtonText)).toBeInTheDocument();
       expect(screen.queryByText(Config.formation.general.nextButtonText)).not.toBeInTheDocument();
 
@@ -150,21 +151,21 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("does not show previous button on first step", () => {
-      preparePage({business, displayContent});
+      preparePage({ business, displayContent });
       expect(screen.queryByText(Config.formation.general.previousButtonText)).not.toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.formation.general.initialNextButtonText));
       expect(screen.getByText(Config.formation.general.previousButtonText)).toBeInTheDocument();
     });
 
     it("shows unique text on last step button", () => {
-      const page = preparePage({business, displayContent});
+      const page = preparePage({ business, displayContent });
       page.stepperClickToReviewStep();
       expect(screen.getByText(Config.formation.general.submitButtonText)).toBeInTheDocument();
       expect(screen.queryByText(Config.formation.general.nextButtonText)).not.toBeInTheDocument();
     });
 
     it("shows the help button on every formation page", async () => {
-      const page = preparePage({business, displayContent});
+      const page = preparePage({ business, displayContent });
       await page.stepperClickToContactsStep();
       expect(screen.getByTestId("help-button")).toBeInTheDocument();
       await page.stepperClickToBusinessStep();
@@ -222,14 +223,14 @@ describe("<BusinessFormationPaginator />", () => {
 
   describe("when switching steps and user has not yet submitted", () => {
     it("displays dependency alert on first step only", async () => {
-      const page = preparePage({business, displayContent});
+      const page = preparePage({ business, displayContent });
       expect(screen.getByTestId("dependency-alert")).toBeInTheDocument();
       await page.stepperClickToBusinessStep();
       expect(screen.queryByTestId("dependency-alert")).not.toBeInTheDocument();
     });
 
     it("switches steps when clicking the stepper", async () => {
-      const page = preparePage({business, displayContent});
+      const page = preparePage({ business, displayContent });
       await page.stepperClickToContactsStep();
       await page.stepperClickToBusinessStep();
       await page.stepperClickToReviewStep();
@@ -239,7 +240,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("switches steps when clicking the next and previous buttons", async () => {
-      const page = preparePage({business, displayContent});
+      const page = preparePage({ business, displayContent });
       await page.submitBusinessNameStep();
       await page.submitBusinessStep();
       await page.submitContactsStep();
@@ -251,7 +252,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("switches from error-active to error, persisting the error state on step one even after switching steps", async () => {
-      const page = preparePage({business, displayContent});
+      const page = preparePage({ business, displayContent });
       page.fillText("Search business name", "Pizza Joint");
       await page.searchBusinessName({ status: "UNAVAILABLE" });
       expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR-ACTIVE");
@@ -260,7 +261,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("maintains the unavailable business name search error, even after switching steps and returning", async () => {
-      const page = preparePage({business, displayContent});
+      const page = preparePage({ business, displayContent });
       page.fillText("Search business name", "Pizza Joint");
       await page.searchBusinessName({ status: "UNAVAILABLE" });
       expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR-ACTIVE");
@@ -272,7 +273,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("maintains the confirm business name error, even after switching steps and returning", async () => {
-      const page = preparePage({business, displayContent});
+      const page = preparePage({ business, displayContent });
       await page.fillAndBlurBusinessName("Pizza Joint");
       expect(
         screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch)
@@ -286,7 +287,7 @@ describe("<BusinessFormationPaginator />", () => {
 
     const switchingStepTests = (switchStepFunction: () => void): void => {
       it("filters out empty provisions", async () => {
-        const page = preparePage({business, displayContent});
+        const page = preparePage({ business, displayContent });
         await page.stepperClickToBusinessStep();
 
         fireEvent.click(screen.getByText(Config.formation.fields.provisions.addButtonText));
@@ -301,7 +302,7 @@ describe("<BusinessFormationPaginator />", () => {
 
       describe("business name step", () => {
         it("saves name to formation data", async () => {
-          const page = preparePage({business, displayContent});
+          const page = preparePage({ business, displayContent });
           await page.stepperClickToBusinessNameStep();
           page.fillText("Search business name", "Pizza Joint");
           switchStepFunction();
@@ -314,7 +315,7 @@ describe("<BusinessFormationPaginator />", () => {
         });
 
         it("saves availability state when switching back to step", async () => {
-          const page = preparePage({business, displayContent});
+          const page = preparePage({ business, displayContent });
           await page.stepperClickToBusinessNameStep();
           page.fillText("Search business name", "Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
@@ -326,7 +327,7 @@ describe("<BusinessFormationPaginator />", () => {
         });
 
         it("saves name to profile when available", async () => {
-          const page = preparePage({business, displayContent});
+          const page = preparePage({ business, displayContent });
           await page.stepperClickToBusinessNameStep();
           page.fillText("Search business name", "Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
@@ -335,25 +336,21 @@ describe("<BusinessFormationPaginator />", () => {
         });
 
         it("does not save name to profile when unavailable", async () => {
-          const page = preparePage({business, displayContent});
+          const page = preparePage({ business, displayContent });
           await page.stepperClickToBusinessNameStep();
           page.fillText("Search business name", "Pizza Joint");
           await page.searchBusinessName({ status: "UNAVAILABLE" });
           switchStepFunction();
-          expect(currentBusiness().profileData.businessName).toEqual(
-            business.profileData.businessName
-          );
+          expect(currentBusiness().profileData.businessName).toEqual(business.profileData.businessName);
         });
 
         it("does not save name to profile when error", async () => {
-          const page = preparePage({business, displayContent});
+          const page = preparePage({ business, displayContent });
           await page.stepperClickToBusinessNameStep();
           page.fillText("Search business name", "Pizza Joint LLC");
           await page.searchBusinessName({ status: "DESIGNATOR_ERROR" });
           switchStepFunction();
-          expect(currentBusiness().profileData.businessName).toEqual(
-            business.profileData.businessName
-          );
+          expect(currentBusiness().profileData.businessName).toEqual(business.profileData.businessName);
         });
       });
 
@@ -369,9 +366,7 @@ describe("<BusinessFormationPaginator />", () => {
           const page = preparePage({
             business: businessWithMunicipality,
             displayContent,
-            municipalities: [
-              generateMunicipality({displayName: "New Town", name: "New Town"}),
-            ]
+            municipalities: [generateMunicipality({ displayName: "New Town", name: "New Town" })],
           });
           await page.stepperClickToBusinessStep();
 
@@ -400,7 +395,11 @@ describe("<BusinessFormationPaginator />", () => {
             },
           };
 
-          const page = preparePage({ business: businessWithMunicipality, displayContent, municipalities: [newTownMuncipality] });
+          const page = preparePage({
+            business: businessWithMunicipality,
+            displayContent,
+            municipalities: [newTownMuncipality],
+          });
           await page.stepperClickToBusinessStep();
           fireEvent.click(screen.getByText(Config.formation.sections.addressAddButtonText));
           page.selectByText("Address municipality", "New Town");
@@ -424,9 +423,11 @@ describe("<BusinessFormationPaginator />", () => {
             },
           };
 
-          const page = preparePage({ business: businessWithMunicipality, displayContent, municipalities: [
-            generateMunicipality({ displayName: "New Town" }),
-          ]});
+          const page = preparePage({
+            business: businessWithMunicipality,
+            displayContent,
+            municipalities: [generateMunicipality({ displayName: "New Town" })],
+          });
           await page.stepperClickToBusinessStep();
           page.selectByText("Address municipality", "New Town");
 
@@ -442,14 +443,14 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("marks a step incomplete in the stepper when moving from it if required fields are missing", async () => {
-        const page = preparePage({business, displayContent});
+        const page = preparePage({ business, displayContent });
         await page.stepperClickToBillingStep();
         switchStepFunction();
         expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("INCOMPLETE");
       });
 
       it("marks a step as complete in the stepper if all required fields completed", async () => {
-        const page = preparePage({business, displayContent});
+        const page = preparePage({ business, displayContent });
         await page.stepperClickToBillingStep();
         page.completeRequiredBillingFields();
 
@@ -460,7 +461,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("marks step one as complete if business name is available", async () => {
-        const page = preparePage({business, displayContent});
+        const page = preparePage({ business, displayContent });
         page.fillText("Search business name", "Pizza Joint");
         await page.searchBusinessName({ status: "AVAILABLE" });
         switchStepFunction();
@@ -468,7 +469,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("marks step one as error if business name is unavailable", async () => {
-        const page = preparePage({business, displayContent});
+        const page = preparePage({ business, displayContent });
         page.fillText("Search business name", "Pizza Joint");
         await page.searchBusinessName({ status: "UNAVAILABLE" });
         switchStepFunction();
@@ -476,7 +477,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("marks step one as error if business name search is error", async () => {
-        const page = preparePage({business, displayContent});
+        const page = preparePage({ business, displayContent });
         page.fillText("Search business name", "Pizza Joint LLC");
         await page.searchBusinessName({ status: "DESIGNATOR_ERROR" });
         switchStepFunction();
@@ -484,7 +485,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("shows existing inline errors when visiting an INCOMPLETE step with inline errors", async () => {
-        const page = preparePage({business, displayContent});
+        const page = preparePage({ business, displayContent });
         await page.stepperClickToBusinessStep();
         page.fillText("Address zip code", "22222");
         expect(screen.getByText(Config.formation.fields.addressZipCode.error)).toBeInTheDocument();
@@ -514,7 +515,7 @@ describe("<BusinessFormationPaginator />", () => {
   describe("user attempting to submit", () => {
     describe("with validation errors", () => {
       it("shows error states in stepper for incomplete steps", async () => {
-        const page = preparePage({business, displayContent});
+        const page = preparePage({ business, displayContent });
         await page.stepperClickToBillingStep();
         page.completeRequiredBillingFields();
         await page.stepperClickToReviewStep();
@@ -532,7 +533,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("shows error field states for each step with error", async () => {
-        const page = preparePage({business, displayContent});
+        const page = preparePage({ business, displayContent });
         await page.stepperClickToBillingStep();
         page.completeRequiredBillingFields();
         await page.stepperClickToReviewStep();
@@ -549,7 +550,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("updates stepper to show error state if user changes a COMPLETE step", async () => {
-        const page = preparePage({business, displayContent});
+        const page = preparePage({ business, displayContent });
         await page.stepperClickToBillingStep();
         page.completeRequiredBillingFields();
         await page.stepperClickToReviewStep();
@@ -565,7 +566,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       it("updates stepper to show COMPLETE if user changes an ERROR step", async () => {
-        const page = preparePage({business, displayContent});
+        const page = preparePage({ business, displayContent });
         await page.stepperClickToReviewStep();
         await page.clickSubmit();
 
@@ -602,7 +603,7 @@ describe("<BusinessFormationPaginator />", () => {
           })
         );
 
-        const page = preparePage({business: filledInBusiness, displayContent});
+        const page = preparePage({ business: filledInBusiness, displayContent });
         await page.fillAndSubmitBusinessNameStep();
         await page.stepperClickToReviewStep();
         await page.clickSubmit();
@@ -653,7 +654,7 @@ describe("<BusinessFormationPaginator />", () => {
               },
             };
 
-            const page = preparePage({business: filledInBusiness, displayContent});
+            const page = preparePage({ business: filledInBusiness, displayContent });
             await page.fillAndSubmitBusinessNameStep();
             expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual("COMPLETE");
 
@@ -680,7 +681,7 @@ describe("<BusinessFormationPaginator />", () => {
                 formationResponse,
               },
             };
-            const page = preparePage({business: filledInBusiness, displayContent});
+            const page = preparePage({ business: filledInBusiness, displayContent });
             await page.fillAndSubmitBusinessNameStep();
             await page.stepperClickToReviewStep();
             await page.clickSubmitAndGetError(filledInBusinessWithApiResponse);
@@ -711,7 +712,7 @@ describe("<BusinessFormationPaginator />", () => {
                 formationResponse,
               },
             };
-            const page = preparePage({business: filledInBusiness, displayContent});
+            const page = preparePage({ business: filledInBusiness, displayContent });
             await page.fillAndSubmitBusinessNameStep();
             await page.stepperClickToReviewStep();
             await page.clickSubmitAndGetError(filledInBusinessWithApiResponse);
@@ -1320,7 +1321,7 @@ describe("<BusinessFormationPaginator />", () => {
                   formationResponse: formationResponse,
                 },
               };
-              const page = preparePage({business: filledInBusiness, displayContent});
+              const page = preparePage({ business: filledInBusiness, displayContent });
               await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
@@ -1364,7 +1365,7 @@ describe("<BusinessFormationPaginator />", () => {
                 formationResponse,
               },
             };
-            const page = preparePage({business: filledInBusiness, displayContent});
+            const page = preparePage({ business: filledInBusiness, displayContent });
             await page.fillAndSubmitBusinessNameStep();
             await page.stepperClickToReviewStep();
             await page.clickSubmit();
@@ -1416,7 +1417,7 @@ describe("<BusinessFormationPaginator />", () => {
                 formationResponse,
               },
             };
-            const page = preparePage({business: filledInBusiness, displayContent});
+            const page = preparePage({ business: filledInBusiness, displayContent });
             await page.fillAndSubmitBusinessNameStep();
             await page.stepperClickToReviewStep();
             await page.clickSubmit();
@@ -1446,7 +1447,7 @@ describe("<BusinessFormationPaginator />", () => {
                   formationResponse,
                 },
               };
-              const page = preparePage({business: filledInBusiness, displayContent});
+              const page = preparePage({ business: filledInBusiness, displayContent });
               await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
@@ -1481,7 +1482,7 @@ describe("<BusinessFormationPaginator />", () => {
                   formationResponse,
                 },
               };
-              const page = preparePage({business: filledInBusiness, displayContent});
+              const page = preparePage({ business: filledInBusiness, displayContent });
               await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
@@ -1517,7 +1518,7 @@ describe("<BusinessFormationPaginator />", () => {
                   formationResponse,
                 },
               };
-              const page = preparePage({business: filledInBusiness, displayContent});
+              const page = preparePage({ business: filledInBusiness, displayContent });
               await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
@@ -1914,7 +1915,7 @@ describe("<BusinessFormationPaginator />", () => {
                   formationResponse: formationResponse,
                 },
               };
-              const page = preparePage({business: filledInBusiness, displayContent});
+              const page = preparePage({ business: filledInBusiness, displayContent });
               await page.fillAndSubmitNexusBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
@@ -1948,7 +1949,7 @@ describe("<BusinessFormationPaginator />", () => {
                 formationResponse,
               },
             };
-            const page = preparePage({business: filledInBusiness, displayContent});
+            const page = preparePage({ business: filledInBusiness, displayContent });
             await page.fillAndSubmitNexusBusinessNameStep();
             await page.stepperClickToReviewStep();
             await page.clickSubmit();
@@ -1989,7 +1990,7 @@ describe("<BusinessFormationPaginator />", () => {
                 formationResponse,
               },
             };
-            const page = preparePage({business: filledInBusiness, displayContent});
+            const page = preparePage({ business: filledInBusiness, displayContent });
             await page.fillAndSubmitNexusBusinessNameStep();
             await page.stepperClickToReviewStep();
             await page.clickSubmit();
@@ -2038,7 +2039,7 @@ describe("<BusinessFormationPaginator />", () => {
         });
 
         it("displays generic messages on API error on all steps", async () => {
-          const page = preparePage({business: filledInBusiness, displayContent});
+          const page = preparePage({ business: filledInBusiness, displayContent });
           await page.stepperClickToReviewStep();
 
           expect(screen.getByText("some field 1")).toBeInTheDocument();
@@ -2055,7 +2056,7 @@ describe("<BusinessFormationPaginator />", () => {
         });
 
         it("still shows all steps as complete", async () => {
-          const page = preparePage({business: filledInBusiness, displayContent});
+          const page = preparePage({ business: filledInBusiness, displayContent });
           await page.fillAndSubmitBusinessNameStep();
           await page.stepperClickToReviewStep();
 
@@ -2079,7 +2080,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("autosaves every second if a field has changed", async () => {
-      const page = preparePage({business, displayContent});
+      const page = preparePage({ business, displayContent });
       act(() => {
         jest.advanceTimersByTime(1000);
       });
@@ -2099,7 +2100,7 @@ describe("<BusinessFormationPaginator />", () => {
           dbaBusinessNameAvailability: undefined,
         },
       };
-      const page = preparePage({ business: businessWithName, displayContent});
+      const page = preparePage({ business: businessWithName, displayContent });
       act(() => {
         jest.advanceTimersByTime(1000);
       });
@@ -2115,7 +2116,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("does not autosave if fields have not changed", () => {
-      preparePage({business, displayContent});
+      preparePage({ business, displayContent });
       expect(userDataUpdatedNTimes()).toEqual(1);
       act(() => {
         jest.advanceTimersByTime(1000);
@@ -2124,7 +2125,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("does not filter user data when autosaving, only when switching steps", async () => {
-      const page = preparePage({business, displayContent});
+      const page = preparePage({ business, displayContent });
       await page.stepperClickToBusinessStep();
 
       act(() => {
@@ -2140,7 +2141,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("does not autosave if a field has changed but less than 1 second has passed", () => {
-      const page = preparePage({business, displayContent});
+      const page = preparePage({ business, displayContent });
       expect(userDataUpdatedNTimes()).toEqual(1);
       makeChangeToForm(page);
       act(() => {
@@ -2150,7 +2151,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("displays the saving spinner every 1 min, for 2.5 seconds at a time", async () => {
-      const page = preparePage({business, displayContent});
+      const page = preparePage({ business, displayContent });
       expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.autosaveDefaults.savedText)).not.toBeInTheDocument();
 
@@ -2182,7 +2183,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("does not display the saving spinner if no saves occurred in that 1 min", async () => {
-      const page = preparePage({business, displayContent});
+      const page = preparePage({ business, displayContent });
 
       act(() => {
         jest.advanceTimersByTime(1000);
@@ -2213,7 +2214,7 @@ describe("<BusinessFormationPaginator />", () => {
 
   describe("remembers formation step", () => {
     it("shows the Business Step with an initial user when lastVisitedPage has index 0 which is by default", async () => {
-      preparePage({business, displayContent});
+      preparePage({ business, displayContent });
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
       await waitFor(() => {
         expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(0);
@@ -2226,12 +2227,12 @@ describe("<BusinessFormationPaginator />", () => {
       const formationData = generateFormationData({ lastVisitedPageIndex: 4 });
 
       business = generateBusiness({ profileData, formationData });
-      preparePage({business, displayContent});
+      preparePage({ business, displayContent });
       expect(screen.getByTestId("review-step")).toBeInTheDocument();
     });
 
     it("lastVistedPage updates on step change via stepper", async () => {
-      const page = preparePage({business, displayContent});
+      const page = preparePage({ business, displayContent });
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
 
       await page.stepperClickToBillingStep();
@@ -2246,7 +2247,7 @@ describe("<BusinessFormationPaginator />", () => {
     });
 
     it("lastVisitedPage updates on step change via the previous and next button steps", async () => {
-      preparePage({business, displayContent});
+      preparePage({ business, displayContent });
 
       await waitFor(() => {
         expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(0);
@@ -2285,7 +2286,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       business = generateBusiness({ profileData, formationData });
-      preparePage({business, displayContent});
+      preparePage({ business, displayContent });
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
     });
 
@@ -2294,7 +2295,7 @@ describe("<BusinessFormationPaginator />", () => {
       const formationData = generateFormationData({ lastVisitedPageIndex: -1 });
 
       business = generateBusiness({ profileData, formationData });
-      preparePage({business, displayContent});
+      preparePage({ business, displayContent });
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
     });
   });

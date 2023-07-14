@@ -9,13 +9,15 @@ import {
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import {currentBusiness} from "@/test/mock/withStatefulUserData";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   defaultDateFormat,
   FormationData,
   FormationIncorporator,
-  FormationMember, generateBusiness,
-  generateMunicipality, getCurrentBusiness,
+  FormationMember,
+  generateBusiness,
+  generateMunicipality,
+  getCurrentBusiness,
   getCurrentDate,
   UserData,
 } from "@businessnjgovnavigator/shared";
@@ -28,10 +30,10 @@ import {
 } from "@businessnjgovnavigator/shared/test/";
 
 import { Content } from "@/components/Content";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import * as materialUi from "@mui/material";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";
-import {useMockBusiness} from "@/test/mock/mockUseUserData";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -66,20 +68,20 @@ describe("<BusinessFormation />", () => {
 
   it("does not show form for non-formation legal structure", () => {
     const profileData = generateProfileData({ legalStructureId: "sole-proprietorship" });
-    preparePage({business: { profileData }, displayContent});
+    preparePage({ business: { profileData }, displayContent });
     expect(screen.queryByTestId("formation-form")).not.toBeInTheDocument();
   });
 
   it("shows default intro content for in-state formation", () => {
     preparePage({
-    business: {
-      profileData: generateProfileData({
-        legalStructureId: "limited-liability-company",
-        businessPersona: "STARTING",
-      }),
-    },
-    displayContent
-  });
+      business: {
+        profileData: generateProfileData({
+          legalStructureId: "limited-liability-company",
+          businessPersona: "STARTING",
+        }),
+      },
+      displayContent,
+    });
 
     useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
     expect(screen.getByTestId("formation-form")).toContainHTML(
@@ -95,7 +97,7 @@ describe("<BusinessFormation />", () => {
           businessPersona: "FOREIGN",
         }),
       },
-      displayContent
+      displayContent,
     });
 
     useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
@@ -122,7 +124,7 @@ describe("<BusinessFormation />", () => {
       const userDataReturnFromApi = generateUserData({});
       mockApi.getCompletedFiling.mockResolvedValue(userDataReturnFromApi);
       await act(async () => {
-        preparePage({ business: { formationData }, displayContent, task});
+        preparePage({ business: { formationData }, displayContent, task });
       });
       expect(mockApi.getCompletedFiling).toHaveBeenCalled();
       const expectedBusiness = {
@@ -282,9 +284,7 @@ describe("<BusinessFormation />", () => {
     const page = preparePage({
       business: { profileData, formationData },
       displayContent,
-      municipalities: [
-        generateMunicipality({ displayName: "Newark", name: "Newark" }),
-      ]
+      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
     });
 
     await page.fillAndSubmitBusinessNameStep("Pizza Joint");
@@ -404,11 +404,9 @@ describe("<BusinessFormation />", () => {
 
     const formationData = generateEmptyFormationData();
     const page = preparePage({
-      business: {profileData, formationData},
+      business: { profileData, formationData },
       displayContent,
-      municipalities: [
-        generateMunicipality({displayName: "Newark", name: "Newark"}),
-      ]
+      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
     });
 
     await page.fillAndSubmitNexusBusinessNameStep("Pizza Joint");
@@ -507,11 +505,9 @@ describe("<BusinessFormation />", () => {
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
     const page = preparePage({
-      business: {profileData, formationData},
+      business: { profileData, formationData },
       displayContent,
-      municipalities: [
-        generateMunicipality({displayName: "Newark", name: "Newark"}),
-      ]
+      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
     });
 
     await page.fillAndSubmitBusinessNameStep("Pizza Joint");
@@ -614,11 +610,9 @@ describe("<BusinessFormation />", () => {
     });
     const formationData = generateEmptyFormationData();
     const page = preparePage({
-      business: {profileData, formationData},
+      business: { profileData, formationData },
       displayContent,
-      municipalities: [
-        generateMunicipality({displayName: "Newark", name: "Newark"}),
-      ]
+      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
     });
 
     await page.fillAndSubmitNexusBusinessNameStep("Pizza Joint");
@@ -730,11 +724,9 @@ describe("<BusinessFormation />", () => {
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
     const page = preparePage({
-      business: {profileData, formationData},
+      business: { profileData, formationData },
       displayContent,
-      municipalities: [
-        generateMunicipality({displayName: "Newark", name: "Newark"}),
-      ]
+      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
     });
 
     await page.fillAndSubmitBusinessNameStep("Pizza Joint");
@@ -855,11 +847,9 @@ describe("<BusinessFormation />", () => {
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
     const page = preparePage({
-      business: {profileData, formationData},
+      business: { profileData, formationData },
       displayContent,
-      municipalities: [
-        generateMunicipality({displayName: "Newark", name: "Newark"}),
-      ]
+      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
     });
 
     const member: FormationMember = {

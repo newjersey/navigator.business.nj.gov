@@ -7,7 +7,11 @@ import { randomPublicFilingLegalStructure, randomTradeNameLegalStructure } from 
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import {currentBusiness, currentUserData, setupStatefulUserDataContext} from "@/test/mock/withStatefulUserData";
+import {
+  currentBusiness,
+  currentUserData,
+  setupStatefulUserDataContext,
+} from "@/test/mock/withStatefulUserData";
 import {
   defaultDateFormat,
   emptyProfileData,
@@ -26,7 +30,8 @@ import {
   chooseTab,
   clickBack,
   clickSave,
-  fillText, generateBusiness,
+  fillText,
+  generateBusiness,
   getBusinessNameValue,
   getBusinessProfileInputFieldName,
   getDateOfFormation,

@@ -3,6 +3,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { randomPublicFilingLegalType } from "@/test/factories";
 import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -13,8 +14,10 @@ import {
   Business,
   createEmptyFormationFormData,
   FormationData,
-  FormationLegalType, generateBusiness,
-  generateUserDataForBusiness, getCurrentBusiness,
+  FormationLegalType,
+  generateBusiness,
+  generateUserDataForBusiness,
+  getCurrentBusiness,
   getCurrentDateISOString,
   OperatingPhases,
   UserData,
@@ -27,7 +30,6 @@ import {
   randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import {useMockBusiness} from "@/test/mock/mockUseUserData";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -59,11 +61,11 @@ const mockApiResponse = (userData: UserData, overrides: Partial<Business>): void
       ...userData.businesses,
       [userData.currentBusinessId]: {
         ...userData.businesses[userData.currentBusinessId],
-        ...overrides
-      }
-    }
+        ...overrides,
+      },
+    },
   });
-}
+};
 
 describe("<TaxAccessStepTwo />", () => {
   beforeEach(() => {
@@ -104,21 +106,21 @@ describe("<TaxAccessStepTwo />", () => {
 
     return generateUserDataForBusiness(
       generateBusiness({
-      profileData: generateProfileData({
-        legalStructureId: legalStructureId,
-        operatingPhase: randomElementFromArray(
-          OperatingPhases.filter((obj) => {
-            return obj.displayTaxAccessButton;
-          })
-        ).id,
-        taxId: params.taxId ? `*${params.taxId.slice(1)}` : "",
-        encryptedTaxId: params.taxId ? `encrypted-${params.taxId}` : "",
-        businessName: params.businessName || "",
-        responsibleOwnerName: params.responsibleOwnerName || "",
-      }),
-      formationData: formationData,
-      taxFilingData: generateTaxFilingData({ state: undefined }),
-    })
+        profileData: generateProfileData({
+          legalStructureId: legalStructureId,
+          operatingPhase: randomElementFromArray(
+            OperatingPhases.filter((obj) => {
+              return obj.displayTaxAccessButton;
+            })
+          ).id,
+          taxId: params.taxId ? `*${params.taxId.slice(1)}` : "",
+          encryptedTaxId: params.taxId ? `encrypted-${params.taxId}` : "",
+          businessName: params.businessName || "",
+          responsibleOwnerName: params.responsibleOwnerName || "",
+        }),
+        formationData: formationData,
+        taxFilingData: generateTaxFilingData({ state: undefined }),
+      })
     );
   };
 
@@ -176,7 +178,7 @@ describe("<TaxAccessStepTwo />", () => {
 
     it("updates taxId but not businessName on submit", async () => {
       renderComponent(userDataWithPrefilledFields);
-      const business = userDataWithPrefilledFields.businesses[userDataWithPrefilledFields.currentBusinessId]
+      const business = userDataWithPrefilledFields.businesses[userDataWithPrefilledFields.currentBusinessId];
 
       mockApiResponse(userDataWithPrefilledFields, {
         profileData: {
@@ -186,7 +188,7 @@ describe("<TaxAccessStepTwo />", () => {
           state: "FAILED",
           businessName: business.profileData.businessName,
           errorField: undefined,
-        })
+        }),
       });
       fireEvent.change(screen.getByLabelText("Business name"), {
         target: { value: "zoom" },
@@ -205,7 +207,7 @@ describe("<TaxAccessStepTwo />", () => {
     it("updates businessName on submit if tax filing is success", async () => {
       renderComponent(userDataWithPrefilledFields);
 
-      const business = getCurrentBusiness(userDataWithPrefilledFields)
+      const business = getCurrentBusiness(userDataWithPrefilledFields);
       mockApiResponse(userDataWithPrefilledFields, {
         profileData: {
           ...business.profileData,
@@ -216,7 +218,7 @@ describe("<TaxAccessStepTwo />", () => {
           businessName: business.profileData.businessName,
           errorField: undefined,
         }),
-      })
+      });
       fireEvent.change(screen.getByLabelText("Business name"), {
         target: { value: "zoom" },
       });
@@ -290,13 +292,13 @@ describe("<TaxAccessStepTwo />", () => {
 
     it("displays inline errors when api failed", async () => {
       renderComponent(userDataWithPrefilledFields);
-      const business = getCurrentBusiness(userDataWithPrefilledFields)
+      const business = getCurrentBusiness(userDataWithPrefilledFields);
       mockApiResponse(userDataWithPrefilledFields, {
         profileData: {
           ...business.profileData,
         },
         taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: undefined }),
-      })
+      });
 
       clickSave();
       await waitFor(() => {
@@ -312,13 +314,13 @@ describe("<TaxAccessStepTwo />", () => {
 
     it("states business name specific field error in alert if api fails", async () => {
       renderComponent(userDataWithPrefilledFields);
-      const business = getCurrentBusiness(userDataWithPrefilledFields)
+      const business = getCurrentBusiness(userDataWithPrefilledFields);
       mockApiResponse(userDataWithPrefilledFields, {
         profileData: {
           ...business.profileData,
         },
         taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: "businessName" }),
-      })
+      });
       clickSave();
       await screen.findByRole("alert");
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.failedErrorMessageHeader);
@@ -337,7 +339,7 @@ describe("<TaxAccessStepTwo />", () => {
     });
 
     it("submits taxId and businessName to api", async () => {
-      const business = getCurrentBusiness(userDataWithPrefilledFields)
+      const business = getCurrentBusiness(userDataWithPrefilledFields);
       mockApiResponse(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
@@ -357,8 +359,7 @@ describe("<TaxAccessStepTwo />", () => {
     });
 
     it("marks the naics code task as complete on successful response", async () => {
-
-      const business = getCurrentBusiness(userDataWithPrefilledFields)
+      const business = getCurrentBusiness(userDataWithPrefilledFields);
       mockApiResponse(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
@@ -374,8 +375,7 @@ describe("<TaxAccessStepTwo />", () => {
           },
           naicsCode: "123456",
         },
-      })
-
+      });
 
       renderComponent(userDataWithPrefilledFields);
       clickSave();
@@ -518,13 +518,13 @@ describe("<TaxAccessStepTwo />", () => {
 
     it("displays alert & inline errors when api failed", async () => {
       renderComponent(userDataWithPrefilledFields);
-      const business = getCurrentBusiness(userDataWithPrefilledFields)
+      const business = getCurrentBusiness(userDataWithPrefilledFields);
       mockApiResponse(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: undefined }),
         profileData: {
           ...business.profileData,
         },
-      })
+      });
       clickSave();
       await screen.findByRole("alert");
 
@@ -542,13 +542,13 @@ describe("<TaxAccessStepTwo />", () => {
 
     it("states responsible owner name specific field error in alert if api fails", async () => {
       renderComponent(userDataWithPrefilledFields);
-      const business = getCurrentBusiness(userDataWithPrefilledFields)
+      const business = getCurrentBusiness(userDataWithPrefilledFields);
       mockApiResponse(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: "businessName" }),
         profileData: {
           ...business.profileData,
         },
-      })
+      });
       clickSave();
       await screen.findByRole("alert");
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.failedErrorMessageHeader);
@@ -560,7 +560,7 @@ describe("<TaxAccessStepTwo />", () => {
     });
 
     it("submits taxId and responsibleOwnerName to api", async () => {
-      const business = getCurrentBusiness(userDataWithPrefilledFields)
+      const business = getCurrentBusiness(userDataWithPrefilledFields);
       mockApiResponse(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
@@ -576,7 +576,7 @@ describe("<TaxAccessStepTwo />", () => {
           },
           naicsCode: "123456",
         },
-      })
+      });
 
       renderComponent(userDataWithPrefilledFields);
       clickSave();
@@ -591,8 +591,7 @@ describe("<TaxAccessStepTwo />", () => {
     });
 
     it("updates naics code and marks the naics code task as complete on successful response", async () => {
-
-      const business = getCurrentBusiness(userDataWithPrefilledFields)
+      const business = getCurrentBusiness(userDataWithPrefilledFields);
       mockApiResponse(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
@@ -602,7 +601,7 @@ describe("<TaxAccessStepTwo />", () => {
           ...business.profileData,
           naicsCode: "123456",
         },
-      })
+      });
 
       renderComponent(userDataWithPrefilledFields);
       clickSave();
@@ -615,8 +614,7 @@ describe("<TaxAccessStepTwo />", () => {
     });
 
     it("updates municipality from the API on successful response", async () => {
-
-      const business = getCurrentBusiness(userDataWithPrefilledFields)
+      const business = getCurrentBusiness(userDataWithPrefilledFields);
       mockApiResponse(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
@@ -631,7 +629,7 @@ describe("<TaxAccessStepTwo />", () => {
             id: "testville-id",
           },
         },
-      })
+      });
 
       renderComponent(userDataWithPrefilledFields);
       clickSave();
@@ -668,9 +666,9 @@ describe("<TaxAccessStepTwo />", () => {
               ...userData.businesses[userData.currentBusinessId].profileData,
               taxId: "123456789",
             },
-          }
-        }
-      }
+          },
+        },
+      };
 
       renderComponent(nineDigitData);
 
@@ -696,7 +694,7 @@ describe("<TaxAccessStepTwo />", () => {
           taxFilingData: generateTaxFilingData({
             state: "API_ERROR",
           }),
-        })
+        });
         clickSave();
         await screen.findByRole("alert");
         expect(screen.getByRole("alert")).toHaveTextContent(

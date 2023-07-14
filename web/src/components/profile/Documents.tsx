@@ -5,7 +5,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import {Business} from "@businessnjgovnavigator/shared";
+import { Business } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext, useMemo } from "react";
 
 interface Props {
@@ -26,7 +26,6 @@ export const Documents = (props: Props): ReactElement => {
       fieldName: "documents",
     }
   );
-
 
   const listOfDocuments = useMemo(() => {
     return Object.values(business?.profileData.documents ?? {});

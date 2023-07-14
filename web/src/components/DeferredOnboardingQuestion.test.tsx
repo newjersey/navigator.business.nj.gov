@@ -1,16 +1,20 @@
-import {DeferredOnboardingQuestion} from "@/components/DeferredOnboardingQuestion";
-import {OnboardingHomeBasedBusiness} from "@/components/onboarding/OnboardingHomeBasedBusiness";
-import {getMergedConfig} from "@/contexts/configContext";
-import {mockPush, useMockRouter} from "@/test/mock/mockRouter";
+import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuestion";
+import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
+import { getMergedConfig } from "@/contexts/configContext";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import {generateBusiness, generateProfileData, generateUserDataForBusiness} from "@businessnjgovnavigator/shared";
-import {emptyIndustrySpecificData} from "@businessnjgovnavigator/shared/profileData";
-import {fireEvent, render, screen, waitFor} from "@testing-library/react";
+import {
+  generateBusiness,
+  generateProfileData,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared";
+import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -30,8 +34,8 @@ describe("<DeferredOnboardingQuestion />", () => {
       <WithStatefulUserData
         initialUserData={generateUserDataForBusiness(
           generateBusiness({ profileData: generateProfileData({ ...emptyIndustrySpecificData }) })
-          )}
-        >
+        )}
+      >
         <DeferredOnboardingQuestion label="" onSave={onSave || jest.fn()}>
           <OnboardingHomeBasedBusiness />
         </DeferredOnboardingQuestion>

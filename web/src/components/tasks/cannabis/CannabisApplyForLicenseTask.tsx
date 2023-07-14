@@ -10,7 +10,7 @@ import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import {Business} from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useState } from "react";
 
 interface Props {

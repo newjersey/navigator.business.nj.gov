@@ -1,7 +1,7 @@
 import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { useMockRouter } from "@/test/mock/mockRouter";
-import {useMockBusiness, useMockProfileData} from "@/test/mock/mockUseUserData";
+import { useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { render, screen } from "@testing-library/react";

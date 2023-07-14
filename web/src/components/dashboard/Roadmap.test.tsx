@@ -8,9 +8,10 @@ import {
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import {useMockBusiness } from "@/test/mock/mockUseUserData";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
-  businessStructureTaskId, generateBusiness,
+  businessStructureTaskId,
+  generateBusiness,
   generateProfileData,
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";

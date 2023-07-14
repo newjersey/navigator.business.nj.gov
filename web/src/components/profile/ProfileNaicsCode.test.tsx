@@ -36,7 +36,9 @@ const renderComponent = (businessOverrides: Partial<Business>): void => {
           onBack: (): void => {},
         }}
       >
-        <WithStatefulUserData initialUserData={generateUserDataForBusiness(generateBusiness(businessOverrides))}>
+        <WithStatefulUserData
+          initialUserData={generateUserDataForBusiness(generateBusiness(businessOverrides))}
+        >
           <ProfileNaicsCode />
         </WithStatefulUserData>
       </ProfileDataContext.Provider>

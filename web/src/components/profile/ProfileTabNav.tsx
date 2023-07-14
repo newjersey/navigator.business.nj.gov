@@ -4,8 +4,8 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileTabs } from "@/lib/types/types";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { BusinessPersona, ForeignBusinessType } from "@businessnjgovnavigator/shared/profileData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
-import {Business} from "@businessnjgovnavigator/shared/userData";
 
 interface Props {
   business: Business | undefined;

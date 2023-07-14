@@ -3,10 +3,7 @@ import { SectionAccordion } from "@/components/dashboard/SectionAccordion";
 import { Step } from "@/components/Step";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import {
-  hasCompletedBusinessStructure,
-  LookupOperatingPhaseById,
-} from "@businessnjgovnavigator/shared/";
+import { hasCompletedBusinessStructure, LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
 import { ReactElement } from "react";
 
 export const Roadmap = (): ReactElement => {

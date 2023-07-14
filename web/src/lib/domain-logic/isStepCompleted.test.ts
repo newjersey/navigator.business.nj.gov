@@ -1,6 +1,6 @@
 import { isStepCompleted } from "@/lib/domain-logic/isStepCompleted";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
-import {generateBusiness} from "@businessnjgovnavigator/shared";
+import { generateBusiness } from "@businessnjgovnavigator/shared";
 
 describe("isStepCompleted", () => {
   it("returns false if roadmap is undefined", () => {

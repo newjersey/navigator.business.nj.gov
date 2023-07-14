@@ -7,11 +7,12 @@ import { onSelfRegister, onSignOut } from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import {useMockBusiness} from "@/test/mock/mockUseUserData";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  BusinessUser, generateBusiness,
+  BusinessUser,
+  generateBusiness,
   generateProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared";

@@ -12,7 +12,7 @@ import {
   generateMunicipality,
   generateProfileData,
 } from "@businessnjgovnavigator/shared/test";
-import {Business,} from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, ReactNode } from "react";
 
 interface Props {

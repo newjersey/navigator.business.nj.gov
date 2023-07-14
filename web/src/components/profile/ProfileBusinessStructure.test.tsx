@@ -4,7 +4,8 @@ import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
-  Business, generateBusiness,
+  Business,
+  generateBusiness,
   generateProfileData,
   generateUserDataForBusiness,
   LookupLegalStructureById,
@@ -17,7 +18,6 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 const Config = getMergedConfig();
 
 const renderComponent = (business: Business): void => {
-
   render(
     <ThemeProvider theme={createTheme()}>
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>

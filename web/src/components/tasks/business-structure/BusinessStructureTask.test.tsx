@@ -4,6 +4,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -18,11 +19,10 @@ import {
   generateUserDataForBusiness,
   randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
-import {Business} from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";
-import {useMockBusiness} from "@/test/mock/mockUseUserData";
 
 const Config = getMergedConfig();
 

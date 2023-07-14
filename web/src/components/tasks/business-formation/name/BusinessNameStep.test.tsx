@@ -9,7 +9,8 @@ import {
 import {
   createEmptyFormationFormData,
   foreignLegalTypePrefix,
-  FormationLegalType, generateBusiness,
+  FormationLegalType,
+  generateBusiness,
   generateBusinessNameAvailability,
   generateFormationFormData,
   NameAvailability,
@@ -61,7 +62,7 @@ describe("Formation - BusinessNameStep", () => {
     };
     return preparePage({
       business: generateBusiness({ profileData, formationData }),
-      displayContent: { formationDbaContent: generateFormationDbaContent({})}
+      displayContent: { formationDbaContent: generateFormationDbaContent({}) },
     });
   };
 
@@ -230,8 +231,8 @@ describe("Formation - BusinessNameStep", () => {
         };
 
         preparePage({
-          business: generateBusiness({profileData, formationData}),
-          displayContent: {formationDbaContent: generateFormationDbaContent({})}
+          business: generateBusiness({ profileData, formationData }),
+          displayContent: { formationDbaContent: generateFormationDbaContent({}) },
         });
 
         expect(screen.getByText(Config.formation.fields.businessName.header)).toBeInTheDocument();
@@ -252,8 +253,8 @@ describe("Formation - BusinessNameStep", () => {
         });
 
         preparePage({
-          business: generateBusiness({profileData, formationData: generateEmptyFormationData()}),
-          displayContent: {formationDbaContent: generateFormationDbaContent({})}
+          business: generateBusiness({ profileData, formationData: generateEmptyFormationData() }),
+          displayContent: { formationDbaContent: generateFormationDbaContent({}) },
         });
 
         expect(

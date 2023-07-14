@@ -22,8 +22,8 @@ import {
   generateUser,
   generateUserData,
 } from "@businessnjgovnavigator/shared/";
+import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { screen, waitFor } from "@testing-library/react";
-import {generateBusiness, generateUserDataForBusiness} from "@businessnjgovnavigator/shared/test";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -293,16 +293,16 @@ describe("onboarding - shared", () => {
     const { page } = renderPage({
       userData: generateUserData({
         user: generateUser({ email: `some-emailexample.com` }),
-        currentBusinessId: '12345',
+        currentBusinessId: "12345",
         businesses: {
-          '12345': generateBusiness({
+          "12345": generateBusiness({
             profileData: generateProfileData({
               businessPersona: "STARTING",
               legalStructureId: "c-corporation",
             }),
             onboardingFormProgress: "UNSTARTED",
-          })
-        }
+          }),
+        },
       }),
     });
     page.clickNext();
@@ -316,16 +316,16 @@ describe("onboarding - shared", () => {
     const { page } = renderPage({
       userData: generateUserData({
         user: generateUser({ email: `some-email@examplecom` }),
-        currentBusinessId: '12345',
+        currentBusinessId: "12345",
         businesses: {
-          '12345': generateBusiness({
+          "12345": generateBusiness({
             profileData: generateProfileData({
               businessPersona: "STARTING",
               legalStructureId: "c-corporation",
             }),
             onboardingFormProgress: "UNSTARTED",
-          })
-        }
+          }),
+        },
       }),
     });
     page.clickNext();

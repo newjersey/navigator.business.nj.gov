@@ -35,9 +35,9 @@ import {
   NameAvailability,
   PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared/";
+import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
-import {getCurrentBusiness} from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 
 interface Props {
   task: Task | undefined;
@@ -91,7 +91,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
   useMountEffectWhenDefined(() => {
     if (!userData) return;
-    const business = getCurrentBusiness(userData)
+    const business = getCurrentBusiness(userData);
 
     const splitName = splitFullName(userData.user.name);
     setFormationFormData({

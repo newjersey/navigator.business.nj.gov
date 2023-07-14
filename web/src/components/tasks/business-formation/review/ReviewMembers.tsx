@@ -1,15 +1,15 @@
 import { ReviewLineItem } from "@/components/tasks/business-formation/review/section/ReviewLineItem";
 import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
-import {ReactElement, useContext} from "react";
-import {BusinessFormationContext} from "@/contexts/businessFormationContext";
+import { ReactElement, useContext } from "react";
 
 export const ReviewMembers = (): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
 
-  const isCorp = corpLegalStructures.includes(state.formationFormData.legalType)
+  const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
   const hasMembers = (state.formationFormData.members?.length ?? 0) > 0;
 
   const getConfig = (): { header: string; label: string } => {

@@ -2,7 +2,7 @@
 import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
 import { getMergedConfig } from "@/contexts/configContext";
 import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
-import {currentBusiness} from "@/test/mock/withStatefulUserData";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   FormationLegalType,
   generateFormationIncorporator,

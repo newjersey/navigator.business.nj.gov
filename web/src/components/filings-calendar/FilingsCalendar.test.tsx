@@ -17,8 +17,10 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  defaultDateFormat, generateBusiness, generateUserDataForBusiness,
+  defaultDateFormat,
+  generateBusiness,
   generateTaxFilingCalendarEvent,
+  generateUserDataForBusiness,
   getCurrentDate,
   LookupIndustryById,
   OperatingPhases,

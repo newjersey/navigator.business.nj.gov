@@ -2,12 +2,12 @@ import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { generateStep } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import {generateBusiness} from "@businessnjgovnavigator/shared";
+import { generateBusiness } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { render, screen } from "@testing-library/react";
-import {useMockBusiness} from "@/test/mock/mockUseUserData";
 
 function mockMaterialUI(): typeof materialUi {
   return {

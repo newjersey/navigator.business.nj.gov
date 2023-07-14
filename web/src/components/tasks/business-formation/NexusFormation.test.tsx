@@ -17,10 +17,11 @@ import {
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import { fillText, searchAndGetValue } from "@/test/helpers/helpersSearchBusinessName";
-import {currentBusiness} from "@/test/mock/withStatefulUserData";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  defaultDateFormat, generateBusiness,
+  defaultDateFormat,
+  generateBusiness,
   generateFormationFormData,
   generateFormationSubmitResponse,
   getCurrentDate,
@@ -169,12 +170,14 @@ describe("<NexusFormationFlow />", () => {
     };
 
     await waitFor(() => {
-      const userDataCalledWith = mockApi.postBusinessFormation.mock.lastCall![0]
-      expect(userDataCalledWith.businesses[userDataCalledWith.currentBusinessId]).toEqual(updatedForeignBusiness)
-    })
-    const returnUrlCalledWith = mockApi.postBusinessFormation.mock.lastCall![1]
-    const fileCalledWith = mockApi.postBusinessFormation.mock.lastCall![2]
-    expect(returnUrlCalledWith).toEqual("http://localhost/")
+      const userDataCalledWith = mockApi.postBusinessFormation.mock.lastCall![0];
+      expect(userDataCalledWith.businesses[userDataCalledWith.currentBusinessId]).toEqual(
+        updatedForeignBusiness
+      );
+    });
+    const returnUrlCalledWith = mockApi.postBusinessFormation.mock.lastCall![1];
+    const fileCalledWith = mockApi.postBusinessFormation.mock.lastCall![2];
+    expect(returnUrlCalledWith).toEqual("http://localhost/");
     expect(fileCalledWith).toEqual({
       fileType: "PNG",
       sizeInBytes: file.size,
@@ -185,13 +188,13 @@ describe("<NexusFormationFlow />", () => {
 
   describe("name search step", () => {
     it("does not display the stepper on name search", async () => {
-      preparePage({ business: initialBusiness, displayContent});
+      preparePage({ business: initialBusiness, displayContent });
       expect(screen.getByTestId("nexus-name-step")).toBeInTheDocument();
       expect(screen.queryByTestId("stepper-0")).not.toBeInTheDocument();
     });
 
     it("does not display buttons on name search initially", async () => {
-      preparePage({ business: initialBusiness, displayContent});
+      preparePage({ business: initialBusiness, displayContent });
       expect(screen.queryByText(Config.nexusNameSearch.nexusNextButton)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.formation.general.previousButtonText)).not.toBeInTheDocument();
     });
@@ -201,7 +204,7 @@ describe("<NexusFormationFlow />", () => {
     let page: FormationPageHelpers;
 
     beforeEach(async () => {
-      page = preparePage({ business: initialBusiness, displayContent});
+      page = preparePage({ business: initialBusiness, displayContent });
       fillText("My Cool Business");
       await searchAndGetValue({ status: "UNAVAILABLE" });
       fillText("My Cool DBA Name", { dba: true });
@@ -309,7 +312,7 @@ describe("<NexusFormationFlow />", () => {
     describe("when feature flag is set", () => {
       describe("business name step", () => {
         beforeEach(async () => {
-          page = preparePage({ business: initialBusiness, displayContent});
+          page = preparePage({ business: initialBusiness, displayContent });
         });
 
         it("saves name to formation data", async () => {
@@ -368,7 +371,7 @@ describe("<NexusFormationFlow />", () => {
             business: initialBusiness,
             displayContent,
             isAuthenticated: IsAuthenticated.FALSE,
-            setRegistrationModalIsVisible
+            setRegistrationModalIsVisible,
           });
         });
 
@@ -391,17 +394,20 @@ describe("<NexusFormationFlow />", () => {
     describe("when feature flag is not set", () => {
       beforeEach(async () => {
         process.env.FEATURE_BUSINESS_FLC = "false";
-        page = preparePage({ business: initialBusiness, displayContent: {
-          ...displayContent,
-          formationDbaContent: {
-            ...displayContent.formationDbaContent,
-            Formation: {
-              ...displayContent.formationDbaContent.Formation,
-              contentMd: "roflcopter",
-              callToActionText: "buttonText",
+        page = preparePage({
+          business: initialBusiness,
+          displayContent: {
+            ...displayContent,
+            formationDbaContent: {
+              ...displayContent.formationDbaContent,
+              Formation: {
+                ...displayContent.formationDbaContent.Formation,
+                contentMd: "roflcopter",
+                callToActionText: "buttonText",
+              },
             },
           },
-        }});
+        });
         fillText("My Cool Business");
         await searchAndGetValue({ status: "AVAILABLE" });
         clickNext();

@@ -17,7 +17,7 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import {Business} from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 function setupMockAnalytics(): typeof analytics {
@@ -63,7 +63,7 @@ describe("<DeferredLocationQuestion />", () => {
         component: (
           <MunicipalitiesContext.Provider value={{ municipalities: municipalities ?? [] }}>
             <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
-              <DeferredLocationQuestion innerContent={innerContent ?? ""}/>
+              <DeferredLocationQuestion innerContent={innerContent ?? ""} />
             </WithStatefulUserData>
           </MunicipalitiesContext.Provider>
         ),

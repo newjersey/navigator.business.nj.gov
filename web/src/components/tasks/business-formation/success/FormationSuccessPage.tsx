@@ -4,8 +4,8 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect } from "@/lib/utils/helpers";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
-import {Business} from "@businessnjgovnavigator/shared/userData";
 
 interface Props {
   business: Business;

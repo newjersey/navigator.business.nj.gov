@@ -14,8 +14,9 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
   BusinessPersona,
-  Business, generateBusiness,
+  generateBusiness,
   generateProfileData,
   generateUserDataForBusiness,
   LookupIndustryById,
@@ -291,7 +292,7 @@ describe("<NaicsCodeTask />", () => {
           ...initialBusiness.taxFilingData,
           state: params?.taxFilingState ?? initialBusiness.taxFilingData.state,
         },
-      }
+      };
       render(
         withAuthAlert(
           <ThemeProvider theme={createTheme()}>

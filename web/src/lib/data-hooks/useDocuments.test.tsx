@@ -1,8 +1,8 @@
 import * as sessionHelper from "@/lib/auth/sessionHelper";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
+import { useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData";
 import { ProfileDocuments } from "@businessnjgovnavigator/shared/";
 import { act, render, waitFor } from "@testing-library/react";
-import {useMockBusiness, useMockProfileData} from "@/test/mock/mockUseUserData";
 
 const mockGetSignedS3Link = (sessionHelper as jest.Mocked<typeof sessionHelper>).getSignedS3Link;
 
@@ -62,7 +62,7 @@ describe("useDocuments", () => {
   it("regenerates documents every 15 minutes", async () => {
     jest.useFakeTimers();
     useMockProfileData({
-        documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
+      documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
     });
     act(() => {
       setupHook();
@@ -87,7 +87,7 @@ describe("useDocuments", () => {
   it("does not regenerate documents before 15 minutes", async () => {
     jest.useFakeTimers();
     useMockProfileData({
-        documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
+      documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
     });
     act(() => {
       setupHook();

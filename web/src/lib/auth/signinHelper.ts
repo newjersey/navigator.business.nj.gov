@@ -1,8 +1,10 @@
 import { AuthAlertContextType } from "@/contexts/authAlertContext";
 import * as api from "@/lib/api-client/apiClient";
+import { AuthAction } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
+import { UpdateQueue } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   setABExperienceDimension,
@@ -14,9 +16,7 @@ import {
 import { createEmptyUser, getCurrentBusiness, UserData } from "@businessnjgovnavigator/shared/";
 import { Dispatch } from "react";
 import * as session from "./sessionHelper";
-import {AuthAction} from "@/lib/auth/AuthContext";
-import {UpdateQueue} from "@/lib/types/types";
-import {triggerSignOut} from "./sessionHelper";
+import { triggerSignOut } from "./sessionHelper";
 
 export const onSignIn = async (dispatch: Dispatch<AuthAction>): Promise<void> => {
   const user = await session.getCurrentUser();
@@ -62,10 +62,10 @@ export const onSelfRegister = (
           ...userData.businesses[userData.currentBusinessId],
           preferences: {
             ...userData.businesses[userData.currentBusinessId].preferences,
-            returnToLink: route || ""
+            returnToLink: route || "",
           },
-        }
-      }
+        },
+      },
     })
     .then(async (response) => {
       await updateQueue.queue(response.userData).update();

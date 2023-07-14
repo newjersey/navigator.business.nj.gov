@@ -78,7 +78,7 @@ describe("Formation - ReviewStep", () => {
       },
       displayContent: {
         formationDbaContent: generateFormationDbaContent({}),
-      }
+      },
     });
 
     if (isForeign) {

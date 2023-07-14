@@ -19,8 +19,8 @@ import {
   TaxFilingData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
-import { Business } from "@businessnjgovnavigator/shared/userData";
 import { LicenseEventSubtype } from "@businessnjgovnavigator/shared/taxFiling";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types

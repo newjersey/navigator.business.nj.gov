@@ -26,6 +26,7 @@ import {
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   Business,
+  createEmptyBusiness,
   einTaskId,
   emptyIndustrySpecificData,
   formationTaskId,
@@ -34,16 +35,13 @@ import {
   generateProfileData,
   LookupIndustryById,
   LookupLegalStructureById,
+  modifyCurrentBusiness,
   naicsCodeTaskId,
   OperatingPhaseId,
   OperatingPhases,
   UserData,
-  createEmptyBusiness, modifyCurrentBusiness
 } from "@businessnjgovnavigator/shared/index";
-import {
-  generateFormationData,
-  generateTaxFilingData,
-} from "@businessnjgovnavigator/shared/test";
+import { generateFormationData, generateTaxFilingData } from "@businessnjgovnavigator/shared/test";
 
 import analytics from "@/lib/utils/analytics";
 import {
@@ -53,7 +51,8 @@ import {
   clickSave,
   expectLocationNotSavedAndError,
   expectLocationSavedAsUndefined,
-  fillText, generateBusiness,
+  fillText,
+  generateBusiness,
   getBusinessNameValue,
   getBusinessProfileInputFieldName,
   getDateOfFormation,
@@ -340,12 +339,12 @@ describe("profile - starting business", () => {
     mockApi.postGetAnnualFilings.mockImplementation((userData: UserData) => {
       const modifiedUserData = modifyCurrentBusiness(userData, (business) => ({
         ...business,
-        taxFilingData: { ...taxData, filings: [] }
-      }))
+        taxFilingData: { ...taxData, filings: [] },
+      }));
       return Promise.resolve(modifiedUserData);
     });
 
-    const initialBusiness = generateBusiness({taxFilingData: taxData });
+    const initialBusiness = generateBusiness({ taxFilingData: taxData });
     renderPage({ business: initialBusiness, setRegistrationModalIsVisible });
     clickSave();
 

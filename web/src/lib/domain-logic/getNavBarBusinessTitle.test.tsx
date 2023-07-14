@@ -1,7 +1,11 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
-import {generateBusiness, LookupIndustryById, LookupLegalStructureById} from "@businessnjgovnavigator/shared";
-import { generateProfileData} from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  LookupIndustryById,
+  LookupLegalStructureById,
+} from "@businessnjgovnavigator/shared";
+import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 
 const Config = getMergedConfig();
 

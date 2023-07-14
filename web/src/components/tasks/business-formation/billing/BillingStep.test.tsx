@@ -12,7 +12,8 @@ import {
 import {
   BusinessUser,
   FormationFormData,
-  FormationLegalType, generateBusiness,
+  FormationLegalType,
+  generateBusiness,
   generateFormationFormData,
   generateUser,
   ProfileData,
@@ -78,7 +79,7 @@ describe("Formation - BillingStep", () => {
         formationData,
       }),
       displayContent,
-      user
+      user,
     });
 
     await page.stepperClickToBillingStep();

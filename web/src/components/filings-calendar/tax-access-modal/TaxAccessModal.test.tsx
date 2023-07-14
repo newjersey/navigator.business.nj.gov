@@ -12,9 +12,9 @@ import {
   generateBusiness,
   generateProfileData,
   generateUserData,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import {Business} from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 const Config = getMergedConfig();
@@ -24,7 +24,9 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 describe("<TaxAccessModal />", () => {
   const renderModal = (business?: Business): void => {
     render(
-      <WithStatefulUserData initialUserData={business ? generateUserDataForBusiness(business) : generateUserData({})}>
+      <WithStatefulUserData
+        initialUserData={business ? generateUserDataForBusiness(business) : generateUserData({})}
+      >
         <TaxAccessModal isOpen={true} close={(): void => {}} onSuccess={(): void => {}} />
       </WithStatefulUserData>
     );

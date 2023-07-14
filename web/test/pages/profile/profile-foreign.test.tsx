@@ -31,7 +31,8 @@ import {
   clickBack,
   clickSave,
   expectLocationNotSavedAndError,
-  expectLocationSavedAsUndefined, generateBusiness,
+  expectLocationSavedAsUndefined,
+  generateBusiness,
   removeLocationAndSave,
   renderPage,
 } from "@/test/pages/profile/profile-helpers";

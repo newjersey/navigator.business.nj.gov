@@ -5,7 +5,11 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateOperateReference } from "@/test/factories";
-import {defaultDateFormat, generateBusiness, generateTaxFilingCalendarEvent} from "@businessnjgovnavigator/shared/index";
+import {
+  defaultDateFormat,
+  generateBusiness,
+  generateTaxFilingCalendarEvent,
+} from "@businessnjgovnavigator/shared/index";
 import {
   generatePreferences,
   generateProfileData,

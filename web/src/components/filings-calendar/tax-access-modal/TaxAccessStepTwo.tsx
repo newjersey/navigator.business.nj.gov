@@ -20,7 +20,8 @@ import analytics from "@/lib/utils/analytics";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   Business,
-  createEmptyProfileData, getCurrentBusiness,
+  createEmptyProfileData,
+  getCurrentBusiness,
   LookupLegalStructureById,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
@@ -57,7 +58,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
   } = useFormContextHelper(createReducedFieldStates(fields));
 
   useMountEffectWhenDefined(() => {
-    if (!business) return
+    if (!business) return;
     setProfileData(business.profileData);
   }, business);
 

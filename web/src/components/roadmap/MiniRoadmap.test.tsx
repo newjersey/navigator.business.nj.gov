@@ -7,6 +7,7 @@ import {
 } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -14,13 +15,12 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   generateBusiness,
-  generateProfileData,
   generatePreferences,
-  generateUserDataForBusiness
+  generateProfileData,
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import {useMockBusiness} from "@/test/mock/mockUseUserData";
-import {Business} from "@businessnjgovnavigator/shared/userData";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

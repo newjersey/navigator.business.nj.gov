@@ -2,7 +2,7 @@ import { LicenseTask } from "@/components/tasks/LicenseTask";
 import * as api from "@/lib/api-client/apiClient";
 import { generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import {useMockBusiness} from "@/test/mock/mockUseUserData";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
   Business,
@@ -47,7 +47,7 @@ describe("<LicenseTask />", () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockBusiness(generateBusiness({}))
+    useMockBusiness(generateBusiness({}));
     useMockRoadmap({});
     jest.useFakeTimers();
   });
@@ -313,10 +313,10 @@ describe("<LicenseTask />", () => {
           generateBusiness({
             licenseData: generateLicenseData({
               items: [
-                generateLicenseStatusItem({title: "application fee", status: "PENDING"}),
-                generateLicenseStatusItem({title: "board approval", status: "ACTIVE"}),
+                generateLicenseStatusItem({ title: "application fee", status: "PENDING" }),
+                generateLicenseStatusItem({ title: "board approval", status: "ACTIVE" }),
               ],
-            })
+            }),
           })
         )
       );

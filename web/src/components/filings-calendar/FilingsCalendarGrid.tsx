@@ -7,7 +7,7 @@ import {
 } from "@/lib/domain-logic/filterCalendarEvents";
 import { OperateReference } from "@/lib/types/types";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import {Business} from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
 
 interface Props {

@@ -16,8 +16,10 @@ import {
 import {
   Business,
   defaultDateFormat,
-  formationTaskId, generateBusiness,
-  generateProfileData, generateUserDataForBusiness,
+  formationTaskId,
+  generateBusiness,
+  generateProfileData,
+  generateUserDataForBusiness,
   getCurrentDate,
   TaskProgress,
   taxTaskId,

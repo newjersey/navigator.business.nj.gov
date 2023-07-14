@@ -13,7 +13,8 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
-  Business, generateBusiness,
+  Business,
+  generateBusiness,
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";

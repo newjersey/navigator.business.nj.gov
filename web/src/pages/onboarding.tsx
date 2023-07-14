@@ -19,6 +19,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { QUERIES, QUERY_PARAMS_VALUES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
+import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import {
   createProfileFieldErrorMap,
@@ -57,6 +58,7 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -64,8 +66,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactElement, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
-import {Business} from "@businessnjgovnavigator/shared/userData";
-import {loadAllMunicipalities} from "@/lib/static/loadMunicipalities";
 
 interface Props {
   municipalities: Municipality[];
@@ -177,7 +177,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         setUser(currentUserData.user);
       }
       if (currentUserData) {
-        const currentBusiness = currentUserData.businesses[currentUserData.currentBusinessId]
+        const currentBusiness = currentUserData.businesses[currentUserData.currentBusinessId];
         if (currentBusiness.onboardingFormProgress === "COMPLETED") {
           await router.replace(ROUTES.profile);
           return;
@@ -314,8 +314,8 @@ const OnboardingPage = (props: Props): ReactElement => {
                   : newProfileData.operatingPhase,
               },
               onboardingFormProgress: "COMPLETED",
-            }
-          }
+            },
+          },
         };
 
         if (newUserData.user.receiveNewsletter) {
@@ -327,35 +327,31 @@ const OnboardingPage = (props: Props): ReactElement => {
         }
 
         newUserData = await api.postGetAnnualFilings(newUserData);
-        const preferences = newUserData.businesses[newUserData.currentBusinessId].preferences
+        const preferences = newUserData.businesses[newUserData.currentBusinessId].preferences;
 
-        updateQueue
-          .queue(newUserData)
-          .queuePreferences({
-            visibleSidebarCards:
-              newProfileData.businessPersona === "OWNING"
-                ? preferences.visibleSidebarCards.filter((cardId: string) => {
+        updateQueue.queue(newUserData).queuePreferences({
+          visibleSidebarCards:
+            newProfileData.businessPersona === "OWNING"
+              ? preferences.visibleSidebarCards.filter((cardId: string) => {
                   return cardId !== "task-progress";
                 })
-                : [...preferences.visibleSidebarCards, "task-progress"],
-          })
+              : [...preferences.visibleSidebarCards, "task-progress"],
+        });
 
-          if (newProfileData.legalStructureId) {
-            const completed: TaskProgress = "COMPLETED";
-            updateQueue.queueTaskProgress({[businessStructureTaskId]: completed })
-          }
-
+        if (newProfileData.legalStructureId) {
+          const completed: TaskProgress = "COMPLETED";
+          updateQueue.queueTaskProgress({ [businessStructureTaskId]: completed });
+        }
 
         if (newProfileData.operatingPhase === "GUEST_MODE_OWNING") {
           updateQueue.queuePreferences({
             visibleSidebarCards: [
-              ...updateQueue.currentBusiness().preferences.visibleSidebarCards.filter(
-                (cardId: string) => {
-                  return cardId !== "welcome";
-                }),
-              "welcome-up-and-running"
-            ]
-          })
+              ...updateQueue.currentBusiness().preferences.visibleSidebarCards.filter((cardId: string) => {
+                return cardId !== "welcome";
+              }),
+              "welcome-up-and-running",
+            ],
+          });
         }
 
         await updateQueue.update();

@@ -7,7 +7,8 @@ import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  formationTaskId, generateBusiness,
+  formationTaskId,
+  generateBusiness,
   generateUserDataForBusiness,
   TaskProgress,
 } from "@businessnjgovnavigator/shared";
@@ -26,7 +27,9 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 const renderTaskHeader = (task: Task, business?: Business): void => {
   render(
     <ThemeProvider theme={createTheme()}>
-      <WithStatefulUserData initialUserData={business ? generateUserDataForBusiness(business) : generateUserData({})}>
+      <WithStatefulUserData
+        initialUserData={business ? generateUserDataForBusiness(business) : generateUserData({})}
+      >
         <TaskHeader task={task} />
       </WithStatefulUserData>
     </ThemeProvider>

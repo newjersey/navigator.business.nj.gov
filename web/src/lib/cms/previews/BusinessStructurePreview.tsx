@@ -4,7 +4,7 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateTask } from "@/test/factories";
-import {generateBusiness, generateProfileData} from "@businessnjgovnavigator/shared/test";
+import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { ReactElement } from "react";
 
 const BusinessStructurePreview = (props: PreviewProps): ReactElement => {

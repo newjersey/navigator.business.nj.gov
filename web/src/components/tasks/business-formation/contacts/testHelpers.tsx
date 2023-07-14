@@ -46,7 +46,7 @@ export const getPageHelper = async (
       formationData,
     },
     displayContent,
-    user
+    user,
   });
 
   if (isForeign) {

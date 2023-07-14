@@ -1,5 +1,5 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import { LookupIndustryById, LookupLegalStructureById, Business } from "@businessnjgovnavigator/shared";
+import { Business, LookupIndustryById, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
 
 export const getNavBarBusinessTitle = (business: Business | undefined): string => {
   const Config = getMergedConfig();

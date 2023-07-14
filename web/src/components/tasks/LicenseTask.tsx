@@ -78,7 +78,7 @@ export const LicenseTask = (props: Props): ReactElement => {
       .checkLicenseStatus(nameAndAddress)
       .then((result: UserData) => {
         analytics.event.task_address_form.response.success_application_found();
-        const resultLicenseData = result.businesses[result.currentBusinessId].licenseData
+        const resultLicenseData = result.businesses[result.currentBusinessId].licenseData;
         if (!resultLicenseData) return;
         setLicenseStatusResult({
           status: resultLicenseData.status,

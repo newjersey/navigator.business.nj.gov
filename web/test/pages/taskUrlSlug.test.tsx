@@ -18,8 +18,8 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  generateBusiness,
   formationTaskId,
+  generateBusiness,
   generateMunicipality,
   generateProfileData,
   generateUserDataForBusiness,
@@ -51,7 +51,9 @@ const setLargeScreen = (value = true): void => {
 const renderPage = (task: Task, initialBusiness?: Business): void => {
   render(
     <materialUi.ThemeProvider theme={materialUi.createTheme()}>
-      <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness ?? generateBusiness({}))}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(initialBusiness ?? generateBusiness({}))}
+      >
         <TaskPage task={task} displayContent={createEmptyTaskDisplayContent()} municipalities={[]} />
       </WithStatefulUserData>
     </materialUi.ThemeProvider>
