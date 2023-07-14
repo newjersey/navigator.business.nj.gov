@@ -1,6 +1,7 @@
 import { Business } from "@shared/business";
-import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/businessHelpers";
 import { LookupLegalStructureById } from "@shared/legalStructure";
+import { modifyCurrentBusiness } from "@shared/test";
 import { UserDataPrime } from "@shared/userData";
 import { calculateNextAnnualFilingDates } from "./calculateNextAnnualFilingDates";
 
@@ -30,9 +31,8 @@ export const getAnnualFilings = (userData: UserDataPrime): UserDataPrime => {
     );
   }
 
-  const updatedBusiness: Business = {
-    ...currentBusiness,
-    taxFilingData: { ...currentBusiness.taxFilingData, filings },
-  };
-  return modifyCurrentBusiness(userData, updatedBusiness);
+  return modifyCurrentBusiness(userData, (business) => ({
+    ...business,
+    taxFilingData: { ...business.taxFilingData, filings },
+  }));
 };

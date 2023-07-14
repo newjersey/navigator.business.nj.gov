@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Business, TaskProgress } from "@shared/business";
-import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
+import { TaskProgress } from "@shared/business";
+import { getCurrentBusiness} from "@shared/businessHelpers";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
 import { LicenseStatusResult, NameAndAddress } from "@shared/license";
+import { modifyCurrentBusiness } from "@shared/test";
 import { UserDataPrime } from "@shared/userData";
 import { convertIndustryToLicenseType } from "../license-status/convertIndustryToLicenseType";
 import { SearchLicenseStatus, UpdateLicenseStatus } from "../types";
@@ -16,11 +17,11 @@ const update = (
     completed: boolean;
   }
 ): UserDataPrime => {
-  const currentBusiness = getCurrentBusiness(userData);
-  const updatedBusiness: Business = {
-    ...currentBusiness,
+
+  return modifyCurrentBusiness(userData, (business) => ({
+    ...business,
     taskProgress: {
-      ...currentBusiness.taskProgress,
+      ...business.taskProgress,
       "apply-for-shop-license": args.taskStatus,
       "register-consumer-affairs": args.taskStatus,
       "pharmacy-license": args.taskStatus,
@@ -39,9 +40,7 @@ const update = (
       status: args.licenseStatusResult.status,
       items: args.licenseStatusResult.checklistItems,
     },
-  };
-
-  return modifyCurrentBusiness(userData, updatedBusiness);
+  }));
 };
 
 export const updateLicenseStatusFactory = (searchLicenseStatus: SearchLicenseStatus): UpdateLicenseStatus => {

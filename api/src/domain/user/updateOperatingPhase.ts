@@ -1,9 +1,10 @@
-import { Business, TaskProgress } from "@shared/business";
-import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
+import { TaskProgress } from "@shared/business";
+import { getCurrentBusiness } from "@shared/businessHelpers";
 import { businessStructureTaskId, formationTaskId, taxTaskId } from "@shared/domain-logic/taskIds";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { OperatingPhaseId } from "@shared/operatingPhase";
 import { BusinessPersona, ForeignBusinessType } from "@shared/profileData";
+import { modifyCurrentBusiness } from "@shared/test";
 import { UserDataPrime } from "@shared/userData";
 import { UpdateOperatingPhase } from "../types";
 
@@ -29,19 +30,18 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserDataPri
     updatedIsHideableRoadmapOpen = false;
   }
 
-  const updatedBusiness: Business = {
-    ...currentBusiness,
+  return modifyCurrentBusiness(userData, (business) => ({
+    ...business,
     profileData: {
-      ...currentBusiness.profileData,
+      ...business.profileData,
       operatingPhase: newPhase,
     },
     preferences: {
-      ...currentBusiness.preferences,
+      ...business.preferences,
       isHideableRoadmapOpen: updatedIsHideableRoadmapOpen,
       phaseNewlyChanged: phaseHasChanged || currentBusiness.preferences.phaseNewlyChanged,
-    },
-  };
-  return modifyCurrentBusiness(userData, updatedBusiness);
+    }
+  }));
 };
 
 const getNewPhase = ({

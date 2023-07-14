@@ -1,5 +1,3 @@
-import { Business } from "@shared/business";
-import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import {
@@ -10,7 +8,7 @@ import {
   generateUserDataPrime,
   getFirstAnnualFiling,
   getSecondAnnualFiling,
-  getThirdAnnualFiling,
+  getThirdAnnualFiling, modifyCurrentBusiness
 } from "@shared/test";
 import { Express } from "express";
 import request from "supertest";
@@ -52,19 +50,17 @@ describe("guestRouter", () => {
       });
 
       const response = await request(app).post(`/annualFilings`).send(postedUserData);
-      const postedUserDataBusiness = getCurrentBusiness(postedUserData);
-      const expectedBusiness: Business = {
-        ...postedUserDataBusiness,
+      const expectedUserData = modifyCurrentBusiness(postedUserData, (business) => ({
+        ...business,
         taxFilingData: {
-          ...postedUserDataBusiness.taxFilingData,
+          ...business.taxFilingData,
           filings: generateAnnualFilings([
             getFirstAnnualFiling(formationDate),
             getSecondAnnualFiling(formationDate),
             getThirdAnnualFiling(formationDate),
           ]),
         },
-      };
-      const expectedUserData = modifyCurrentBusiness(postedUserData, expectedBusiness);
+      }));
       expect(response.body).toEqual(expectedUserData);
     });
   });

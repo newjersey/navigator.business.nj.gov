@@ -1,5 +1,4 @@
-import { Business } from "@shared/business";
-import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/businessHelpers";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import {
   generateLicenseData,
@@ -7,7 +6,7 @@ import {
   generateLicenseStatusResult,
   generateNameAndAddress,
   generateProfileData,
-  generateUserDataPrime,
+  generateUserDataPrime, modifyCurrentBusiness
 } from "@shared/test";
 import { UserDataPrime } from "@shared/userData";
 import { UpdateLicenseStatus } from "../types";
@@ -58,15 +57,12 @@ describe("updateLicenseStatus", () => {
       checklistItems: checklistItems,
     });
 
-    const currentBusiness = getCurrentBusiness(userData);
-    const updatedBusiness: Business = {
-      ...currentBusiness,
+    userData = modifyCurrentBusiness(userData, (business) => ({
+      ...business,
       licenseData: generateLicenseData({
         expirationISO: getCurrentDate().add(1, "year").subtract(1, "minute").toISOString(),
       }),
-    };
-
-    userData = modifyCurrentBusiness(userData, updatedBusiness);
+    }));
 
     const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
     const resultCurrentBusiness = getCurrentBusiness(resultUserData);

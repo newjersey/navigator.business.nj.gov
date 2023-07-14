@@ -1,9 +1,9 @@
-import { Business } from "@shared/business";
-import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness} from "@shared/businessHelpers";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
 import { createEmptyFormationFormData } from "@shared/formationData";
+import { modifyCurrentBusiness } from "@shared/test";
 import { createEmptyUserDataPrime, UserDataPrime } from "@shared/userData";
 import { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
@@ -48,8 +48,10 @@ const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean => {
 };
 
 const clearTaskItemChecklists = (userData: UserDataPrime): UserDataPrime => {
-  const updatedBusiness: Business = { ...getCurrentBusiness(userData), taskItemChecklist: {} };
-  return modifyCurrentBusiness(userData, updatedBusiness);
+  return modifyCurrentBusiness(userData, (business) => ({
+    ...business,
+    taskItemChecklist: {}
+  }));
 };
 
 const shouldCheckLicense = (userData: UserDataPrime): boolean => {
@@ -206,20 +208,18 @@ export const userRouterFactory = (
 
       if (businessHasFormed(oldUserData)) {
         const oldBusiness = getCurrentBusiness(oldUserData);
-        const currentBusiness = getCurrentBusiness(userData);
-        const updatedBusiness: Business = {
-          ...currentBusiness,
+
+        return modifyCurrentBusiness(userData, (business) => ({
+          ...business,
           profileData: {
-            ...currentBusiness.profileData,
+            ...business.profileData,
             legalStructureId: oldBusiness.profileData.legalStructureId,
           },
-        };
-
-        return modifyCurrentBusiness(userData, updatedBusiness);
+        }));
       }
 
-      const currentBusiness: Business = {
-        ...getCurrentBusiness(userData),
+      return modifyCurrentBusiness(userData, (business) => ({
+        ...business,
         formationData: {
           formationResponse: undefined,
           getFilingResponse: undefined,
@@ -229,9 +229,7 @@ export const userRouterFactory = (
           dbaBusinessNameAvailability: undefined,
           lastVisitedPageIndex: 0,
         },
-      };
-
-      return modifyCurrentBusiness(userData, currentBusiness);
+      }));
     }
 
     return userData;
@@ -284,24 +282,22 @@ export const userRouterFactory = (
       const nameIsAvailable = response.status === "AVAILABLE";
       const needsNexusDbaName = isForeign && !needsDba ? !nameIsAvailable : needsDba;
 
-      const updatedBusiness: Business = {
-        ...currentBusiness,
+      return modifyCurrentBusiness(userData, (business) => ({
+        ...business,
         profileData: {
-          ...currentBusiness.profileData,
+          ...business.profileData,
           needsNexusDbaName,
         },
         formationData: {
-          ...currentBusiness.formationData,
+          ...business.formationData,
           businessNameAvailability: needsDba
-            ? currentBusiness.formationData.businessNameAvailability
+            ? business.formationData.businessNameAvailability
             : nameAvailability,
           dbaBusinessNameAvailability: needsDba
             ? nameAvailability
-            : currentBusiness.formationData.dbaBusinessNameAvailability,
+            : business.formationData.dbaBusinessNameAvailability,
         },
-      };
-
-      return modifyCurrentBusiness(userData, updatedBusiness);
+      }));
     } catch {
       return userData;
     }
@@ -324,10 +320,9 @@ export const userRouterFactory = (
 };
 
 const setLastUpdatedISO = (userData: UserDataPrime): UserDataPrime => {
-  const updatedBusiness: Business = {
-    ...getCurrentBusiness(userData),
-    lastUpdatedISO: getCurrentDateISOString(),
-  };
   const updatedUserData: UserDataPrime = { ...userData, lastUpdatedISO: getCurrentDateISOString() };
-  return modifyCurrentBusiness(updatedUserData, updatedBusiness);
+  return modifyCurrentBusiness(updatedUserData, (business) => ({
+    ...business,
+    lastUpdatedISO: getCurrentDateISOString(),
+  }));
 };

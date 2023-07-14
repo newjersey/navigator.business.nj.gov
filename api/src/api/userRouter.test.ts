@@ -12,7 +12,7 @@ import {
   generateUserDataPrime,
   getFirstAnnualFiling,
   getSecondAnnualFiling,
-  getThirdAnnualFiling,
+  getThirdAnnualFiling, modifyCurrentBusiness
 } from "@shared/test";
 import dayjs from "dayjs";
 import { Express } from "express";
@@ -20,7 +20,7 @@ import jwt from "jsonwebtoken";
 import request from "supertest";
 
 import { Business } from "@shared/business";
-import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/businessHelpers";
 import { UserDataPrime } from "@shared/userData";
 import { generateAnnualFilings, getLastCalledWith } from "../../test/helpers";
 import { EncryptionDecryptionClient, TimeStampBusinessSearch, UserDataClient } from "../domain/types";
@@ -602,17 +602,15 @@ describe("userRouter", () => {
         taskItemChecklist: { "some-id": true },
       });
 
-      const existingBusiness = getCurrentBusiness(newIndustryUserData);
-      const updatedIndustryBusiness: Business = {
-        ...existingBusiness,
-        profileData: {
-          ...existingBusiness.profileData,
-          industryId: "home-contractor",
-        },
-      };
       const updatedIndustryUserData = modifyCurrentBusiness(
         newIndustryUserData,
-        updatedIndustryBusiness
+        (business) => ({
+          ...business,
+          profileData: {
+            ...business.profileData,
+            industryId: "home-contractor",
+          },
+        })
       );
 
       stubUserDataClient.get.mockResolvedValue(updatedIndustryUserData);
@@ -694,18 +692,15 @@ describe("userRouter", () => {
           formationData: completedFormationData,
         });
 
-        const existingBusiness = getCurrentBusiness(newLegalStructureUserData);
-        const updatedBusiness: Business = {
-          ...existingBusiness,
-          profileData: {
-            ...existingBusiness.profileData,
-            legalStructureId: "limited-liability-company",
-          },
-        };
-
         const updatedLegalStructureUserData = modifyCurrentBusiness(
           newLegalStructureUserData,
-          updatedBusiness
+          (business) => ({
+            ...business,
+            profileData: {
+              ...business.profileData,
+              legalStructureId: "limited-liability-company",
+            },
+          })
         );
 
         stubUserDataClient.get.mockResolvedValue(updatedLegalStructureUserData);
@@ -749,7 +744,13 @@ describe("userRouter", () => {
           },
         };
 
-        const newUserData = modifyCurrentBusiness(existingUserData, updatedBusiness);
+        const newUserData = modifyCurrentBusiness(existingUserData, (business) => ({
+          ...business,
+          profileData: {
+            ...business.profileData,
+            legalStructureId: "c-corporation",
+          },
+        }));
 
         stubUserDataClient.put.mockResolvedValue(newUserData);
 

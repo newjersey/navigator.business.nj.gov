@@ -1,6 +1,6 @@
-import { Business } from "@shared/business";
-import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness} from "@shared/businessHelpers";
 import { isFieldAnswered, OPPORTUNITY_FIELDS } from "@shared/domain-logic/opportunityFields";
+import { modifyCurrentBusiness } from "@shared/test";
 import { UserDataPrime } from "@shared/userData";
 import { UpdateSidebarCards } from "./types";
 
@@ -72,12 +72,11 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserDataPrime):
     hideCard("welcome-up-and-running");
   }
 
-  const updatedBusiness: Business = {
-    ...currentBusiness,
+  return modifyCurrentBusiness(userData, (business) => ({
+    ...business,
     preferences: {
-      ...currentBusiness.preferences,
+      ...business.preferences,
       visibleSidebarCards: cards,
     },
-  };
-  return modifyCurrentBusiness(userData, updatedBusiness);
+  }));
 };

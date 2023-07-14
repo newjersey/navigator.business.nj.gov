@@ -1,8 +1,9 @@
 import { Business } from "@shared/business";
-import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/businessHelpers";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
 import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";
 import { ProfileDocuments } from "@shared/profileData";
+import { modifyCurrentBusiness } from "@shared/test";
 import { Router } from "express";
 import { saveFileFromUrl } from "../domain/s3Writer";
 import { FormationClient, UserDataClient } from "../domain/types";
@@ -99,26 +100,24 @@ export const formationRouterFactory = (
           };
         }
 
-        const businessWithResponse: Business = {
-          ...currentBusiness,
+        const userDataWithResponse = modifyCurrentBusiness(userData, (business) => ({
+          ...business,
           taskProgress,
           formationData: {
-            ...currentBusiness.formationData,
+            ...business.formationData,
             getFilingResponse,
           },
           profileData: {
-            ...currentBusiness.profileData,
+            ...business.profileData,
             entityId,
             dateOfFormation,
             businessName,
             documents: {
-              ...currentBusiness.profileData.documents,
+              ...business.profileData.documents,
               ...documents,
             },
           },
-        };
-
-        const userDataWithResponse = modifyCurrentBusiness(userData, businessWithResponse);
+        }));
         await userDataClient.put(userDataWithResponse);
         res.json(userDataWithResponse);
       })

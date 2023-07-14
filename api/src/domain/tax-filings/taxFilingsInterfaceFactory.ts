@@ -1,5 +1,6 @@
 import { Business } from "@shared/business";
-import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness } from "@shared/businessHelpers";
+import { modifyCurrentBusiness } from "@shared/test";
 import { UserDataPrime } from "@shared/userData";
 import dayjs from "dayjs";
 import { TaxFilingClient, TaxFilingInterface } from "../types";
@@ -60,26 +61,25 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
       }
     }
 
-    const updatedBusiness: Business = {
-      ...currentBusiness,
+    return modifyCurrentBusiness(request.userData, (business) => ({
+      ...business,
       profileData: profileDataToReturn,
       preferences: {
-        ...currentBusiness.preferences,
+        ...business.preferences,
         isCalendarFullView: shouldSwitchToCalendarGridView()
           ? true
-          : currentBusiness.preferences.isCalendarFullView,
+          : business.preferences.isCalendarFullView,
       },
       taxFilingData: {
-        ...currentBusiness.taxFilingData,
+        ...business.taxFilingData,
         businessName: request.businessName,
         lastUpdatedISO: now,
-        registeredISO: state === "SUCCESS" ? currentBusiness.taxFilingData.registeredISO ?? now : undefined,
-        errorField: state === "SUCCESS" ? undefined : currentBusiness.taxFilingData.errorField,
+        registeredISO: state === "SUCCESS" ? business.taxFilingData.registeredISO ?? now : undefined,
+        errorField: state === "SUCCESS" ? undefined : business.taxFilingData.errorField,
         state: state,
-        filings: state === "SUCCESS" ? filings : currentBusiness.taxFilingData.filings,
+        filings: state === "SUCCESS" ? filings : business.taxFilingData.filings,
       },
-    };
-    return modifyCurrentBusiness(request.userData, updatedBusiness);
+    }));
   };
 
   const onboarding = async (request: taxFilingInterfaceRequest): Promise<UserDataPrime> => {
@@ -95,18 +95,16 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
       }
       case "API_ERROR":
       case "FAILED": {
-        const previousBusiness = getCurrentBusiness(request.userData);
-        const updatedBusiness: Business = {
-          ...previousBusiness,
+        return modifyCurrentBusiness(request.userData, (business) => ({
+          ...business,
           taxFilingData: {
-            ...previousBusiness.taxFilingData,
+            ...business.taxFilingData,
             registeredISO: undefined,
             state: response.state,
             errorField: response.errorField,
             businessName: request.businessName,
           },
-        };
-        return modifyCurrentBusiness(request.userData, updatedBusiness);
+        }));
       }
     }
   };

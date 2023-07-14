@@ -1,6 +1,6 @@
-import { Business } from "@shared/business";
-import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
+import { getCurrentBusiness} from "@shared/businessHelpers";
 import { maskingCharacter } from "@shared/profileData";
+import { modifyCurrentBusiness } from "@shared/test";
 import { UserDataPrime } from "@shared/userData";
 import { EncryptionDecryptionClient, EncryptTaxId } from "../types";
 import { maskTaxId } from "./maskTaxId";
@@ -16,14 +16,13 @@ export const encryptTaxIdFactory = (encryptionDecryptionClient: EncryptionDecryp
       currentBusiness.profileData.taxId as string
     );
 
-    const updatedBusiness: Business = {
-      ...currentBusiness,
+    return modifyCurrentBusiness(userData, (business) => ({
+      ...business,
       profileData: {
-        ...currentBusiness.profileData,
+        ...business.profileData,
         taxId: maskedTaxId,
         encryptedTaxId: encryptedTaxId,
-      },
-    };
-    return modifyCurrentBusiness(userData, updatedBusiness);
+      }
+    }));
   };
 };

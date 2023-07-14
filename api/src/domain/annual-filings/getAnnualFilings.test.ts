@@ -1,5 +1,3 @@
-import { Business } from "@shared/business";
-import { getCurrentBusiness, modifyCurrentBusiness } from "@shared/businessHelpers";
 import {
   generateProfileData,
   generateTaxFilingCalendarEvent,
@@ -8,7 +6,7 @@ import {
   generateUserDataPrime,
   getFirstAnnualFiling,
   getSecondAnnualFiling,
-  getThirdAnnualFiling,
+  getThirdAnnualFiling, modifyCurrentBusiness
 } from "@shared/test";
 import { generateAnnualFilings } from "../../../test/helpers";
 import { getAnnualFilings } from "./getAnnualFilings";
@@ -30,19 +28,17 @@ describe("getAnnualFilings", () => {
     });
 
     const response = getAnnualFilings(postedUserData);
-    const currentBusiness = getCurrentBusiness(postedUserData);
-    const expectedBusiness: Business = {
-      ...currentBusiness,
+    const expectedUserData = modifyCurrentBusiness(postedUserData, (business) => ({
+      ...business,
       taxFilingData: {
-        ...currentBusiness.taxFilingData,
+        ...business.taxFilingData,
         filings: generateAnnualFilings([
           getFirstAnnualFiling(formationDate),
           getSecondAnnualFiling(formationDate),
           getThirdAnnualFiling(formationDate),
         ]),
       },
-    };
-    const expectedUserData = modifyCurrentBusiness(postedUserData, expectedBusiness);
+    }));
 
     expect(response).toEqual(expectedUserData);
   });
@@ -63,19 +59,17 @@ describe("getAnnualFilings", () => {
     });
 
     const response = getAnnualFilings(postedUserData);
-    const currentBusiness = getCurrentBusiness(postedUserData);
-    const expectedBusiness: Business = {
-      ...currentBusiness,
+    const expectedUserData = modifyCurrentBusiness(postedUserData, (business) => ({
+      ...business,
       taxFilingData: {
-        ...currentBusiness.taxFilingData,
+        ...business.taxFilingData,
         filings: generateAnnualFilings([
           getFirstAnnualFiling(formationDate),
           getSecondAnnualFiling(formationDate),
           getThirdAnnualFiling(formationDate),
         ]),
       },
-    };
-    const expectedUserData = modifyCurrentBusiness(postedUserData, expectedBusiness);
+    }));
 
     expect(response).toEqual(expectedUserData);
   });
@@ -96,19 +90,17 @@ describe("getAnnualFilings", () => {
     });
 
     const response = getAnnualFilings(postedUserData);
-    const currentBusiness = getCurrentBusiness(postedUserData);
-    const expectedBusiness: Business = {
-      ...currentBusiness,
+    const expectedUserData = modifyCurrentBusiness(postedUserData, (business) => ({
+      ...business,
       taxFilingData: {
-        ...currentBusiness.taxFilingData,
+        ...business.taxFilingData,
         filings: generateAnnualFilings([
           getFirstAnnualFiling(formationDate),
           getSecondAnnualFiling(formationDate),
           getThirdAnnualFiling(formationDate),
         ]),
       },
-    };
-    const expectedUserData = modifyCurrentBusiness(postedUserData, expectedBusiness);
+    }));
 
     expect(response).toEqual(expectedUserData);
   });
@@ -127,12 +119,10 @@ describe("getAnnualFilings", () => {
     });
 
     const response = getAnnualFilings(postedUserData);
-    const currentBusiness = getCurrentBusiness(response);
-    const expectedBusiness: Business = {
-      ...currentBusiness,
-      taxFilingData: generateTaxFilingData({ filings: [] }),
-    };
-    const expectedUserData = modifyCurrentBusiness(response, expectedBusiness);
+    const expectedUserData = modifyCurrentBusiness(response, (business) => ({
+      ...business,
+      taxFilingData:  generateTaxFilingData({ filings: [] }),
+    }));
 
     expect(response).toEqual(expectedUserData);
   });
