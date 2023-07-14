@@ -4,7 +4,7 @@ import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
 import { createEmptyFormationFormData } from "@shared/formationData";
 import { modifyCurrentBusiness } from "@shared/test";
-import { createEmptyUserDataPrime, UserDataPrime } from "@shared/userData";
+import { createEmptyUserData, UserData } from "@shared/userData";
 import { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
 import { getAnnualFilings } from "../domain/annual-filings/getAnnualFilings";
@@ -47,14 +47,14 @@ const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean => {
   return parseDate(lastCheckedDate).isBefore(getCurrentDate().subtract(1, "hour"));
 };
 
-const clearTaskItemChecklists = (userData: UserDataPrime): UserDataPrime => {
+const clearTaskItemChecklists = (userData: UserData): UserData => {
   return modifyCurrentBusiness(userData, (business) => ({
     ...business,
     taskItemChecklist: {},
   }));
 };
 
-const shouldCheckLicense = (userData: UserDataPrime): boolean => {
+const shouldCheckLicense = (userData: UserData): boolean => {
   const currentBusiness = getCurrentBusiness(userData);
   return (
     currentBusiness.licenseData !== undefined &&
@@ -63,7 +63,7 @@ const shouldCheckLicense = (userData: UserDataPrime): boolean => {
   );
 };
 
-const shouldUpdateBusinessNameSearch = (userData: UserDataPrime): boolean => {
+const shouldUpdateBusinessNameSearch = (userData: UserData): boolean => {
   const currentBusiness = getCurrentBusiness(userData);
   if (
     !currentBusiness.formationData.businessNameAvailability?.lastUpdatedTimeStamp &&
@@ -100,14 +100,14 @@ export const getSignedInUserId = (req: Request): string => {
   return myNJIdentityPayload?.userId || signedInUser.sub;
 };
 
-const legalStructureHasChanged = (oldUserData: UserDataPrime, newUserData: UserDataPrime): boolean => {
+const legalStructureHasChanged = (oldUserData: UserData, newUserData: UserData): boolean => {
   return (
     getCurrentBusiness(oldUserData).profileData.legalStructureId !==
     getCurrentBusiness(newUserData).profileData.legalStructureId
   );
 };
 
-const businessHasFormed = (userData: UserDataPrime): boolean => {
+const businessHasFormed = (userData: UserData): boolean => {
   return getCurrentBusiness(userData).formationData.getFilingResponse?.success ?? false;
 };
 
@@ -131,7 +131,7 @@ export const userRouterFactory = (
 
     userDataClient
       .get(req.params.userId)
-      .then(async (userData: UserDataPrime) => {
+      .then(async (userData: UserData) => {
         let updatedUserData = userData;
         updatedUserData = await updateBusinessNameSearchIfNeeded(updatedUserData);
         updatedUserData = updateOperatingPhase(updatedUserData);
@@ -154,7 +154,7 @@ export const userRouterFactory = (
   });
 
   router.post("/users", async (req, res) => {
-    let userData = req.body as UserDataPrime;
+    let userData = req.body as UserData;
     const postedUserBodyId = userData.user.id;
 
     if (getSignedInUserId(req) !== postedUserBodyId) {
@@ -175,7 +175,7 @@ export const userRouterFactory = (
 
     userDataClient
       .put(userData)
-      .then((result: UserDataPrime) => {
+      .then((result: UserData) => {
         res.json(result);
       })
       .catch((error) => {
@@ -183,7 +183,7 @@ export const userRouterFactory = (
       });
   });
 
-  const industryHasChanged = async (userData: UserDataPrime): Promise<boolean> => {
+  const industryHasChanged = async (userData: UserData): Promise<boolean> => {
     try {
       const oldUserData = await userDataClient.get(userData.user.id);
       const oldBusinessData = getCurrentBusiness(oldUserData);
@@ -195,7 +195,7 @@ export const userRouterFactory = (
     }
   };
 
-  const updateLegalStructureIfNeeded = async (userData: UserDataPrime): Promise<UserDataPrime> => {
+  const updateLegalStructureIfNeeded = async (userData: UserData): Promise<UserData> => {
     let oldUserData;
     try {
       oldUserData = await userDataClient.get(userData.user.id);
@@ -238,7 +238,7 @@ export const userRouterFactory = (
   const saveEmptyUserData = (req: Request, res: Response, signedInUserId: string): void => {
     const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
 
-    const emptyUserData = createEmptyUserDataPrime({
+    const emptyUserData = createEmptyUserData({
       myNJUserKey: signedInUserId,
       email: signedInUser.email,
       id: signedInUserId,
@@ -259,7 +259,7 @@ export const userRouterFactory = (
       });
   };
 
-  const updateBusinessNameSearchIfNeeded = async (userData: UserDataPrime): Promise<UserDataPrime> => {
+  const updateBusinessNameSearchIfNeeded = async (userData: UserData): Promise<UserData> => {
     if (!shouldUpdateBusinessNameSearch(userData)) {
       return userData;
     }
@@ -303,7 +303,7 @@ export const userRouterFactory = (
     }
   };
 
-  const asyncUpdateAndSaveLicenseStatusIfNeeded = async (userData: UserDataPrime): Promise<void> => {
+  const asyncUpdateAndSaveLicenseStatusIfNeeded = async (userData: UserData): Promise<void> => {
     const currentBusinessLicenseData = getCurrentBusiness(userData).licenseData;
     if (!currentBusinessLicenseData || !shouldCheckLicense(userData)) {
       return;
@@ -319,8 +319,8 @@ export const userRouterFactory = (
   return router;
 };
 
-const setLastUpdatedISO = (userData: UserDataPrime): UserDataPrime => {
-  const updatedUserData: UserDataPrime = { ...userData, lastUpdatedISO: getCurrentDateISOString() };
+const setLastUpdatedISO = (userData: UserData): UserData => {
+  const updatedUserData: UserData = { ...userData, lastUpdatedISO: getCurrentDateISOString() };
   return modifyCurrentBusiness(updatedUserData, (business) => ({
     ...business,
     lastUpdatedISO: getCurrentDateISOString(),

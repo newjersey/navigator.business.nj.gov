@@ -1,7 +1,7 @@
 import { Business } from "../business";
 import { getDateInCurrentYear, isDateAfterCurrentDate } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
-import { UserDataPrime } from "../userData";
+import { UserData } from "../userData";
 
 export const getFirstAnnualFiling = (formationDate: string): string => {
   return isDateAfterCurrentDate(formationDate)
@@ -22,9 +22,9 @@ export const getThirdAnnualFiling = (formationDate: string): string => {
 };
 
 export const modifyCurrentBusiness = (
-  userData: UserDataPrime,
+  userData: UserData,
   modificationFunction: (currentBusiness: Business) => Business
-): UserDataPrime => {
+): UserData => {
   return {
     ...userData,
     businesses: {

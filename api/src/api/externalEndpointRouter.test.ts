@@ -1,4 +1,4 @@
-import { generateUser, generateUserDataPrime } from "@shared/test";
+import { generateUser, generateUserData } from "@shared/test";
 import { Express } from "express";
 import jwt from "jsonwebtoken";
 import request from "supertest";
@@ -63,7 +63,7 @@ describe("externalEndpointRouter", () => {
   describe("POST", () => {
     describe("newsletter", () => {
       it("adds to newsletter if receiveNewsletter is set to true and externalStatus is empty", async () => {
-        const userData = generateUserDataPrime({
+        const userData = generateUserData({
           user: generateUser({
             externalStatus: { userTesting: { status: "IN_PROGRESS" } },
             receiveNewsletter: true,
@@ -74,7 +74,7 @@ describe("externalEndpointRouter", () => {
       });
 
       it("does not add to newsletter if the request has been attempted", async () => {
-        const userData = generateUserDataPrime({
+        const userData = generateUserData({
           user: generateUser({
             externalStatus: { newsletter: { status: "IN_PROGRESS" } },
             receiveNewsletter: true,
@@ -85,7 +85,7 @@ describe("externalEndpointRouter", () => {
       });
 
       it("adds to newsletter and does not update the db if the user is unauthenticated", async () => {
-        const userData = generateUserDataPrime({
+        const userData = generateUserData({
           user: generateUser({ id: "123", externalStatus: {}, userTesting: true }),
         });
         await request(app).post(`/newsletter`).send(userData);
@@ -94,7 +94,7 @@ describe("externalEndpointRouter", () => {
       });
 
       it("adds to newsletter and updates the db if the user is authenticated", async () => {
-        const userData = generateUserDataPrime({
+        const userData = generateUserData({
           user: generateUser({ id: "123", externalStatus: {}, receiveNewsletter: true }),
         });
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
@@ -107,7 +107,7 @@ describe("externalEndpointRouter", () => {
 
     describe("userTesting", () => {
       it("adds to userTesting if userTesting is set to true and externalStatus is empty", async () => {
-        const userData = generateUserDataPrime({
+        const userData = generateUserData({
           user: generateUser({
             externalStatus: { newsletter: { status: "IN_PROGRESS" } },
             userTesting: true,
@@ -118,7 +118,7 @@ describe("externalEndpointRouter", () => {
       });
 
       it("does not add to userTesting if the request has been attempted", async () => {
-        const userData = generateUserDataPrime({
+        const userData = generateUserData({
           user: generateUser({
             externalStatus: { userTesting: { status: "IN_PROGRESS" } },
             userTesting: true,
@@ -129,7 +129,7 @@ describe("externalEndpointRouter", () => {
       });
 
       it("adds to newsletter and does not update the db if the user is unauthenticated", async () => {
-        const userData = generateUserDataPrime({
+        const userData = generateUserData({
           user: generateUser({ id: "123", externalStatus: {}, userTesting: true }),
         });
         await request(app).post(`/userTesting`).send(userData);
@@ -138,7 +138,7 @@ describe("externalEndpointRouter", () => {
       });
 
       it("adds to newsletter and updates the db if the user is authenticated", async () => {
-        const userData = generateUserDataPrime({
+        const userData = generateUserData({
           user: generateUser({ id: "123", externalStatus: {}, userTesting: true }),
         });
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));

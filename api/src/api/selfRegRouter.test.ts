@@ -1,5 +1,5 @@
-import { generateUser, generateUserDataPrime } from "@shared/test";
-import { UserDataPrime } from "@shared/userData";
+import { generateUser, generateUserData } from "@shared/test";
+import { UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { Express } from "express";
 import request, { Response } from "supertest";
@@ -40,13 +40,13 @@ describe("selfRegRouter", () => {
     });
   });
 
-  const sendRequest = async (userData: UserDataPrime): Promise<Response> => {
+  const sendRequest = async (userData: UserData): Promise<Response> => {
     return request(app).post(`/self-reg`).send(userData);
   };
 
   describe("when record has a myNJ key", () => {
     const myNJKey = "some-mynj-key";
-    const stubRecordWithMyNJKey = generateUserDataPrime({ user: generateUser({ myNJUserKey: myNJKey }) });
+    const stubRecordWithMyNJKey = generateUserData({ user: generateUser({ myNJUserKey: myNJKey }) });
 
     it("calls auth resume with myNJ key, saves data, & returns the auth redirect URL on success", async () => {
       const selfRegResponse = generateSelfRegResponse({ myNJUserKey: myNJKey });
@@ -86,7 +86,7 @@ describe("selfRegRouter", () => {
   });
 
   describe("when record DOES NOT have a myNJ key", () => {
-    const stubRecordNoKey = generateUserDataPrime({ user: generateUser({ myNJUserKey: undefined }) });
+    const stubRecordNoKey = generateUserData({ user: generateUser({ myNJUserKey: undefined }) });
 
     it("calls auth grant with user info & returns the auth redirect URL & saves myNJ key / hash on success", async () => {
       const selfRegResponse = generateSelfRegResponse({});

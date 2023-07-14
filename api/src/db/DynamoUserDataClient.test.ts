@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-import { generateUser, generateUserDataPrime } from "@shared/test";
+import { generateUser, generateUserData } from "@shared/test";
 import { UserDataClient } from "../domain/types";
 import { dynamoDbTranslateConfig, DynamoUserDataClient } from "./DynamoUserDataClient";
 
@@ -29,7 +29,7 @@ describe("DynamoUserDataClient", () => {
   it("gets inserted items", async () => {
     await expect(dynamoUserDataClient.get("some-id")).rejects.toEqual("Not found");
 
-    const userData = generateUserDataPrime({ user: generateUser({ id: "some-id" }) });
+    const userData = generateUserData({ user: generateUser({ id: "some-id" }) });
     await dynamoUserDataClient.put(userData);
 
     expect(await dynamoUserDataClient.get("some-id")).toEqual(userData);
@@ -38,7 +38,7 @@ describe("DynamoUserDataClient", () => {
   it("finds a user by email", async () => {
     expect(await dynamoUserDataClient.findByEmail("email@example.com")).toBeUndefined();
 
-    const userData = generateUserDataPrime({ user: generateUser({ email: "email@example.com" }) });
+    const userData = generateUserData({ user: generateUser({ email: "email@example.com" }) });
     await dynamoUserDataClient.put(userData);
 
     expect(await dynamoUserDataClient.findByEmail("email@example.com")).toEqual(userData);

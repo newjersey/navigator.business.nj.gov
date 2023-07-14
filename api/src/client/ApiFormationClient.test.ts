@@ -12,7 +12,7 @@ import {
   generateFormationSigner,
   generateFormationUSAddress,
   generateProfileData,
-  generateUserDataPrime,
+  generateUserData,
 } from "@shared/test";
 import axios from "axios";
 import { generateFormationUserData, generateInputFile } from "../../test/factories";
@@ -807,7 +807,7 @@ describe("ApiFormationClient", () => {
           { legalStructureId: "limited-liability-partnership" }
         );
 
-        const userData = generateUserDataPrime({
+        const userData = generateUserData({
           profileData: generateProfileData({
             legalStructureId: "limited-liability-partnership",
             businessPersona: "STARTING",
@@ -932,7 +932,7 @@ describe("ApiFormationClient", () => {
           { legalStructureId: "foreign-limited-liability-partnership" }
         );
 
-        const userData = generateUserDataPrime({
+        const userData = generateUserData({
           profileData: generateProfileData({
             legalStructureId: "limited-liability-partnership",
             businessPersona: "FOREIGN",
@@ -1074,7 +1074,7 @@ describe("ApiFormationClient", () => {
           { legalStructureId: "limited-partnership" }
         );
 
-        const userData = generateUserDataPrime({
+        const userData = generateUserData({
           profileData: generateProfileData({
             legalStructureId: "limited-partnership",
             businessPersona: "STARTING",

@@ -7,7 +7,7 @@ import {
   generateGetFilingResponse,
   generateProfileData,
   generateUserData,
-  generateUserDataPrime,
+  generateUserData,
   modifyCurrentBusiness,
 } from "@shared/test";
 import { Express } from "express";
@@ -152,7 +152,7 @@ describe("formationRouter", () => {
       const getFilingResponse = generateGetFilingResponse({ success: true });
       stubFormationClient.getCompletedFiling.mockResolvedValue(getFilingResponse);
 
-      const userData = generateUserDataPrime({
+      const userData = generateUserData({
         formationData: generateFormationData({
           formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
         }),
@@ -206,7 +206,7 @@ describe("formationRouter", () => {
       const getFilingResponse = generateGetFilingResponse({ success: false });
       stubFormationClient.getCompletedFiling.mockResolvedValue(getFilingResponse);
 
-      const userData = generateUserDataPrime({
+      const userData = generateUserData({
         formationData: generateFormationData({
           formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
         }),
@@ -236,7 +236,7 @@ describe("formationRouter", () => {
       const getFilingResponse = generateGetFilingResponse({ success: true, certifiedDoc: "" });
       stubFormationClient.getCompletedFiling.mockResolvedValue(getFilingResponse);
 
-      const userData = generateUserDataPrime({
+      const userData = generateUserData({
         formationData: generateFormationData({
           formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
         }),

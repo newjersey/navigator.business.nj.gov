@@ -1,5 +1,5 @@
-import { generateUser, generateUserDataPrime } from "@shared/test";
-import { UserDataPrime } from "@shared/userData";
+import { generateUser, generateUserData } from "@shared/test";
+import { UserData } from "@shared/userData";
 import { AddToUserTesting, UserDataClient, UserTestingClient } from "../types";
 import { addToUserTestingBatch } from "./addToUserTestingBatch";
 import { addToUserTestingFactory } from "./addToUserTestingFactory";
@@ -24,14 +24,14 @@ describe("addToUserTestingBatch", () => {
   });
 
   it("adds all users and returns success, failed, and total count when all succeed", async () => {
-    stubUserDataClient.put.mockImplementation((userData: UserDataPrime): Promise<UserDataPrime> => {
+    stubUserDataClient.put.mockImplementation((userData: UserData): Promise<UserData> => {
       return Promise.resolve(userData);
     });
     stubUserTestingClient.add.mockResolvedValue({ success: true, status: "SUCCESS" });
 
     stubUserDataClient.getNeedToAddToUserTestingUsers.mockResolvedValue([
-      generateUserDataPrime({ user: generateUser({ externalStatus: {} }) }),
-      generateUserDataPrime({ user: generateUser({ externalStatus: {} }) }),
+      generateUserData({ user: generateUser({ externalStatus: {} }) }),
+      generateUserData({ user: generateUser({ externalStatus: {} }) }),
     ]);
 
     const results = await addToUserTestingBatch(addToUserTesting, stubUserDataClient);
@@ -39,7 +39,7 @@ describe("addToUserTestingBatch", () => {
   });
 
   it("adds all users and returns success, failed, and total count whens some fail", async () => {
-    stubUserDataClient.put.mockImplementation((userData: UserDataPrime): Promise<UserDataPrime> => {
+    stubUserDataClient.put.mockImplementation((userData: UserData): Promise<UserData> => {
       return Promise.resolve(userData);
     });
     stubUserTestingClient.add
@@ -47,8 +47,8 @@ describe("addToUserTestingBatch", () => {
       .mockResolvedValueOnce({ success: true, status: "SUCCESS" });
 
     stubUserDataClient.getNeedToAddToUserTestingUsers.mockResolvedValue([
-      generateUserDataPrime({ user: generateUser({ externalStatus: {} }) }),
-      generateUserDataPrime({ user: generateUser({ externalStatus: {} }) }),
+      generateUserData({ user: generateUser({ externalStatus: {} }) }),
+      generateUserData({ user: generateUser({ externalStatus: {} }) }),
     ]);
 
     const results = await addToUserTestingBatch(addToUserTesting, stubUserDataClient);
@@ -56,7 +56,7 @@ describe("addToUserTestingBatch", () => {
   });
 
   it("does not stop execution if one fails", async () => {
-    stubUserDataClient.put.mockImplementation((userData: UserDataPrime): Promise<UserDataPrime> => {
+    stubUserDataClient.put.mockImplementation((userData: UserData): Promise<UserData> => {
       return Promise.resolve(userData);
     });
     stubUserTestingClient.add
@@ -64,8 +64,8 @@ describe("addToUserTestingBatch", () => {
       .mockResolvedValueOnce({ success: true, status: "SUCCESS" });
 
     stubUserDataClient.getNeedToAddToUserTestingUsers.mockResolvedValue([
-      generateUserDataPrime({ user: generateUser({ externalStatus: {} }) }),
-      generateUserDataPrime({ user: generateUser({ externalStatus: {} }) }),
+      generateUserData({ user: generateUser({ externalStatus: {} }) }),
+      generateUserData({ user: generateUser({ externalStatus: {} }) }),
     ]);
 
     const results = await addToUserTestingBatch(addToUserTesting, stubUserDataClient);

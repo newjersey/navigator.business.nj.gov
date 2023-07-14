@@ -1,4 +1,4 @@
-import { UserDataPrime } from "@shared/userData";
+import { UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { Router } from "express";
 import { createHmac } from "node:crypto";
@@ -11,7 +11,7 @@ export const selfRegRouterFactory = (
   const router = Router();
 
   router.post("/self-reg", async (req, res) => {
-    const userData = req.body as UserDataPrime;
+    const userData = req.body as UserData;
 
     try {
       const selfRegResponse = await (userData.user.myNJUserKey
@@ -28,7 +28,7 @@ export const selfRegRouterFactory = (
     }
   });
 
-  const updateMyNJKey = (userData: UserDataPrime, myNJUserKey: string): Promise<UserDataPrime> => {
+  const updateMyNJKey = (userData: UserData, myNJUserKey: string): Promise<UserData> => {
     const hmac = createHmac("sha256", process.env.INTERCOM_HASH_SECRET || "");
     const hash = hmac.update(myNJUserKey).digest("hex");
     return userDataClient.put({

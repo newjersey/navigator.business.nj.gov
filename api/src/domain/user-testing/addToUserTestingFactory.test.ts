@@ -1,4 +1,4 @@
-import { generateUser, generateUserDataPrime } from "@shared/test";
+import { generateUser, generateUserData } from "@shared/test";
 import { AddToUserTesting, UserTestingClient } from "../types";
 import { addToUserTestingFactory } from "./addToUserTestingFactory";
 
@@ -18,7 +18,7 @@ describe("addToUserTesting", () => {
   it("updates the users database entry", async () => {
     stubUserTestingClient.add.mockResolvedValue({ success: true, status: "SUCCESS" });
 
-    const userData = generateUserDataPrime({ user: generateUser({ externalStatus: {} }) });
+    const userData = generateUserData({ user: generateUser({ externalStatus: {} }) });
     const response = await addToUserTesting(userData);
 
     expect(stubUserTestingClient.add).toHaveBeenCalledWith(

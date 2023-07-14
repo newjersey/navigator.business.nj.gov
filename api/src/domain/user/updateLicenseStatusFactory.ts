@@ -4,19 +4,19 @@ import { getCurrentBusiness } from "@shared/businessHelpers";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
 import { LicenseStatusResult, NameAndAddress } from "@shared/license";
 import { modifyCurrentBusiness } from "@shared/test";
-import { UserDataPrime } from "@shared/userData";
+import { UserData } from "@shared/userData";
 import { convertIndustryToLicenseType } from "../license-status/convertIndustryToLicenseType";
 import { SearchLicenseStatus, UpdateLicenseStatus } from "../types";
 
 const update = (
-  userData: UserDataPrime,
+  userData: UserData,
   args: {
     nameAndAddress: NameAndAddress;
     taskStatus: TaskProgress;
     licenseStatusResult: LicenseStatusResult;
     completed: boolean;
   }
-): UserDataPrime => {
+): UserData => {
   return modifyCurrentBusiness(userData, (business) => ({
     ...business,
     taskProgress: {
@@ -43,7 +43,7 @@ const update = (
 };
 
 export const updateLicenseStatusFactory = (searchLicenseStatus: SearchLicenseStatus): UpdateLicenseStatus => {
-  return async (userData: UserDataPrime, nameAndAddress: NameAndAddress): Promise<UserDataPrime> => {
+  return async (userData: UserData, nameAndAddress: NameAndAddress): Promise<UserData> => {
     const licenseType = convertIndustryToLicenseType(getCurrentBusiness(userData).profileData.industryId);
     return searchLicenseStatus(nameAndAddress, licenseType)
       .then((licenseStatusResult: LicenseStatusResult) => {

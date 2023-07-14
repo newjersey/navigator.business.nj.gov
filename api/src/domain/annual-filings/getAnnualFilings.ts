@@ -1,10 +1,10 @@
 import { getCurrentBusiness } from "@shared/businessHelpers";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { modifyCurrentBusiness } from "@shared/test";
-import { UserDataPrime } from "@shared/userData";
+import { UserData } from "@shared/userData";
 import { calculateNextAnnualFilingDates } from "./calculateNextAnnualFilingDates";
 
-export const getAnnualFilings = (userData: UserDataPrime): UserDataPrime => {
+export const getAnnualFilings = (userData: UserData): UserData => {
   const currentBusiness = getCurrentBusiness(userData);
   const filings = currentBusiness.taxFilingData.filings.filter((it) => {
     return it.identifier !== "ANNUAL_FILING";

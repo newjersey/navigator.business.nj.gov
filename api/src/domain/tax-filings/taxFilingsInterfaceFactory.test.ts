@@ -8,10 +8,10 @@ import {
   generateTaxFilingCalendarEvent,
   generateTaxFilingData,
   generateTaxIdAndBusinessName,
-  generateUserDataPrime,
+  generateUserData,
   modifyCurrentBusiness,
 } from "@shared/test";
-import { UserDataPrime } from "@shared/userData";
+import { UserData } from "@shared/userData";
 import { TaxFilingClient, TaxFilingInterface } from "../types";
 import * as fetchMunicipality from "../user/fetchMunicipalityByName";
 import { taxFilingsInterfaceFactory } from "./taxFilingsInterfaceFactory";
@@ -54,7 +54,7 @@ describe("TaxFilingsInterfaceFactory", () => {
     describe("when successful", () => {
       it("updates state and filing data", async () => {
         const filingData = generateTaxFilingCalendarEvent({});
-        const userData = generateUserDataPrime({
+        const userData = generateUserData({
           preferences: generatePreferences({
             isCalendarFullView: true,
           }),
@@ -107,7 +107,7 @@ describe("TaxFilingsInterfaceFactory", () => {
       });
 
       it("removes errors if lookup succeeds", async () => {
-        const userData = generateUserDataPrime({
+        const userData = generateUserData({
           taxFilingData: generateTaxFilingData({
             errorField: "formFailure",
           }),
@@ -122,7 +122,7 @@ describe("TaxFilingsInterfaceFactory", () => {
       });
 
       it("sets registeredISO if it is undefined", async () => {
-        const userData = generateUserDataPrime({
+        const userData = generateUserData({
           taxFilingData: generateTaxFilingData({
             registeredISO: undefined,
           }),
@@ -138,7 +138,7 @@ describe("TaxFilingsInterfaceFactory", () => {
 
       it("keeps existing registeredISO if it is defined", async () => {
         const registeredISO = new Date("2023-01-01").toISOString();
-        const userData = generateUserDataPrime({
+        const userData = generateUserData({
           taxFilingData: generateTaxFilingData({ registeredISO }),
         });
         taxFilingClient.lookup.mockResolvedValue({
@@ -211,7 +211,7 @@ describe("TaxFilingsInterfaceFactory", () => {
 
       for (const state of nonSuccessStates) {
         it(`returns a ${state} state without updating filing data`, async () => {
-          const userData = generateUserDataPrime({
+          const userData = generateUserData({
             profileData: generateProfileData({
               naicsCode: undefined,
               municipality: undefined,
@@ -271,8 +271,8 @@ describe("TaxFilingsInterfaceFactory", () => {
     function setupInitialUserDataWithCal(params: {
       isCalendarFullView: boolean;
       numFilingsInCurrentYear: number;
-    }): UserDataPrime {
-      return generateUserDataPrime({
+    }): UserData {
+      return generateUserData({
         preferences: generatePreferences({
           isCalendarFullView: params.isCalendarFullView,
         }),
@@ -309,11 +309,11 @@ describe("TaxFilingsInterfaceFactory", () => {
 
   describe("onboarding", () => {
     describe("only does a lookup when onboarding is successful and returns its response", () => {
-      let userData: UserDataPrime;
+      let userData: UserData;
       let currentBusiness: Business;
 
       beforeEach(() => {
-        userData = generateUserDataPrime({
+        userData = generateUserData({
           taxFilingData: generateTaxFilingData({
             state: undefined,
             lastUpdatedISO: undefined,
@@ -405,7 +405,7 @@ describe("TaxFilingsInterfaceFactory", () => {
 
     describe("returns onboarding response", () => {
       it("returns the API_ERROR response", async () => {
-        const userData = generateUserDataPrime({
+        const userData = generateUserData({
           taxFilingData: generateTaxFilingData({
             state: undefined,
             lastUpdatedISO: undefined,
@@ -430,7 +430,7 @@ describe("TaxFilingsInterfaceFactory", () => {
       });
 
       it("returns the FAILED response", async () => {
-        const userData = generateUserDataPrime({
+        const userData = generateUserData({
           taxFilingData: generateTaxFilingData({
             state: undefined,
             lastUpdatedISO: undefined,

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { generateTaxFilingData, generateTaxIdAndBusinessName, generateUserDataPrime } from "@shared/test";
+import { generateTaxFilingData, generateTaxIdAndBusinessName, generateUserData } from "@shared/test";
 import { Express } from "express";
 import request from "supertest";
 import { EncryptionDecryptionClient, TaxFilingInterface, UserDataClient } from "../domain/types";
@@ -20,7 +20,7 @@ describe("taxFilingRouter", () => {
   let stubUserDataClient: jest.Mocked<UserDataClient>;
   let apiTaxFilingClient: jest.Mocked<TaxFilingInterface>;
   let stubEncryptionDecryptionClient: jest.Mocked<EncryptionDecryptionClient>;
-  const userData = generateUserDataPrime({ taxFilingData: generateTaxFilingData({ state: "PENDING" }) });
+  const userData = generateUserData({ taxFilingData: generateTaxFilingData({ state: "PENDING" }) });
   const responseUserData = { ...userData, taxFilingData: generateTaxFilingData({ state: "SUCCESS" }) };
 
   beforeEach(async () => {

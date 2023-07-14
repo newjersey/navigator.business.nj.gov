@@ -5,7 +5,7 @@ import {
   generateProfileData,
   generateTaxFilingData,
   generateUser,
-  generateUserDataPrime,
+  generateUserData,
   getFirstAnnualFiling,
   getSecondAnnualFiling,
   getThirdAnnualFiling,
@@ -38,7 +38,7 @@ describe("guestRouter", () => {
     it("calculates 3 new annual filing dates and updates them for dateOfFormation", async () => {
       const formationDate = "2021-03-01";
 
-      const postedUserData = generateUserDataPrime({
+      const postedUserData = generateUserData({
         user: generateUser({ id: "123" }),
         profileData: generateProfileData({
           dateOfFormation: formationDate,

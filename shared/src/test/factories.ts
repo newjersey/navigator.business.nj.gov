@@ -20,7 +20,7 @@ import { MunicipalityDetail } from "../municipality";
 import { IndustrySpecificData, ProfileData } from "../profileData";
 import { arrayOfSectors, SectorType } from "../sector";
 import { TaxFilingCalendarEvent, TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
-import { CURRENT_VERSION, LegacyUserDataOverrides, UserData, UserDataPrime } from "../userData";
+import { CURRENT_VERSION, LegacyUserDataOverrides, UserData } from "../userData";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
 
 export const generateFormationSubmitResponse = (
@@ -275,41 +275,7 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
   };
 };
 
-export const generateUserData = (overrides: Partial<UserData>): UserData => {
-  const profileData = overrides.profileData ?? generateProfileData({});
-  const formationData: FormationData = publicFilingLegalTypes.includes(
-    profileData.legalStructureId as PublicFilingLegalType
-  )
-    ? generateFormationData({}, profileData.legalStructureId as FormationLegalType)
-    : {
-        formationFormData: createEmptyFormationFormData(),
-        businessNameAvailability: undefined,
-        dbaBusinessNameAvailability: undefined,
-        formationResponse: undefined,
-        getFilingResponse: undefined,
-        completedFilingPayment: false,
-        lastVisitedPageIndex: 0,
-      };
-
-  return {
-    version: CURRENT_VERSION,
-    versionWhenCreated: -1,
-    dateCreatedISO: undefined,
-    lastUpdatedISO: getCurrentDateISOString(),
-    user: generateUser({}),
-    onboardingFormProgress: "UNSTARTED",
-    taskProgress: profileData.employerId ? { "register-for-ein": "COMPLETED" } : {},
-    taskItemChecklist: {},
-    licenseData: generateLicenseData({}),
-    preferences: generatePreferences({}),
-    taxFilingData: generateTaxFilingData({}),
-    profileData,
-    formationData,
-    ...overrides,
-  };
-};
-
-export const generateUserDataPrime = (overrides: LegacyUserDataOverrides): UserDataPrime => {
+export const generateUserData = (overrides: LegacyUserDataOverrides): UserData => {
   const business = generateBusinessData({
     profileData: overrides.profileData,
     formationData: overrides.formationData,

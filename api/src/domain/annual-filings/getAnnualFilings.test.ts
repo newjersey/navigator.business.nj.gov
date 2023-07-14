@@ -3,7 +3,7 @@ import {
   generateTaxFilingCalendarEvent,
   generateTaxFilingData,
   generateUser,
-  generateUserDataPrime,
+  generateUserData,
   getFirstAnnualFiling,
   getSecondAnnualFiling,
   getThirdAnnualFiling,
@@ -16,7 +16,7 @@ describe("getAnnualFilings", () => {
   it("calculates 3 new annual filing datea and updates them for dateOfFormation", async () => {
     const formationDate = "2021-03-01";
 
-    const postedUserData = generateUserDataPrime({
+    const postedUserData = generateUserData({
       user: generateUser({ id: "123" }),
       profileData: generateProfileData({
         dateOfFormation: "2021-03-01",
@@ -47,7 +47,7 @@ describe("getAnnualFilings", () => {
   it("calculates 3 new annual filing dates and overrides existing dates if needed", async () => {
     const formationDate = "2021-03-01";
 
-    const postedUserData = generateUserDataPrime({
+    const postedUserData = generateUserData({
       user: generateUser({ id: "123" }),
       profileData: generateProfileData({
         dateOfFormation: formationDate,
@@ -78,7 +78,7 @@ describe("getAnnualFilings", () => {
   it("calculates 3 new annual filing dates and updates them for dateOfFormation when there is no legalStructureId", async () => {
     const formationDate = "2021-03-01";
 
-    const postedUserData = generateUserDataPrime({
+    const postedUserData = generateUserData({
       user: generateUser({ id: "123" }),
       profileData: generateProfileData({
         dateOfFormation: formationDate,
@@ -107,7 +107,7 @@ describe("getAnnualFilings", () => {
   });
 
   it("removes the annual filing object if the users industry does not require public filings", async () => {
-    const postedUserData = generateUserDataPrime({
+    const postedUserData = generateUserData({
       user: generateUser({ id: "123" }),
       profileData: generateProfileData({
         dateOfFormation: "2021-03-01",

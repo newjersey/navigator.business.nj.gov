@@ -1,4 +1,4 @@
-import { UserDataPrime } from "@shared/userData";
+import { UserData } from "@shared/userData";
 import { Router } from "express";
 import { shouldAddToNewsletter } from "../domain/newsletter/shouldAddToNewsletter";
 import { AddNewsletter, AddToUserTesting, UserDataClient } from "../domain/types";
@@ -13,7 +13,7 @@ export const externalEndpointRouterFactory = (
   const router = Router();
 
   router.post("/newsletter", async (req, res) => {
-    let userData = req.body as UserDataPrime;
+    let userData = req.body as UserData;
     let isAnonymous;
     try {
       isAnonymous = getSignedInUserId(req) !== userData.user.id;
@@ -35,7 +35,7 @@ export const externalEndpointRouterFactory = (
   });
 
   router.post("/userTesting", async (req, res) => {
-    let userData = req.body as UserDataPrime;
+    let userData = req.body as UserData;
     let isAnonymous;
     try {
       isAnonymous = getSignedInUserId(req) !== userData.user.id;

@@ -6,10 +6,10 @@ import {
   generateLicenseStatusResult,
   generateNameAndAddress,
   generateProfileData,
-  generateUserDataPrime,
+  generateUserData,
   modifyCurrentBusiness,
 } from "@shared/test";
-import { UserDataPrime } from "@shared/userData";
+import { UserData } from "@shared/userData";
 import { UpdateLicenseStatus } from "../types";
 import { updateLicenseStatusFactory } from "./updateLicenseStatusFactory";
 
@@ -17,7 +17,7 @@ describe("updateLicenseStatus", () => {
   let updateLicenseStatus: UpdateLicenseStatus;
 
   let stubSearchLicenseStatus: jest.Mock;
-  let userData: UserDataPrime;
+  let userData: UserData;
   const nameAndAddress = generateNameAndAddress({});
 
   beforeEach(async () => {
@@ -25,7 +25,7 @@ describe("updateLicenseStatus", () => {
     stubSearchLicenseStatus = jest.fn();
     updateLicenseStatus = updateLicenseStatusFactory(stubSearchLicenseStatus);
 
-    userData = generateUserDataPrime({
+    userData = generateUserData({
       profileData: generateProfileData({
         industryId: "home-contractor",
       }),

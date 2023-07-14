@@ -22,10 +22,10 @@ import {
   generateLicenseStatusItem,
   generateNameAndAddress,
   generateProfileData,
-  generateUserDataPrime,
+  generateUserData,
   randomPublicFilingLegalType,
 } from "@shared/test";
-import { UserDataPrime } from "@shared/userData";
+import { UserData } from "@shared/userData";
 import { SelfRegResponse, TaxFilingResult } from "src/domain/types";
 import { getRandomDateInBetween, randomElementFromArray } from "./helpers";
 
@@ -54,7 +54,7 @@ export const generateFormationUserData = (
   profileData: Partial<ProfileData>,
   formationData: Partial<FormationData>,
   formationFormData: Partial<FormationFormData>
-): UserDataPrime => {
+): UserData => {
   const _profileData = generateProfileData({
     legalStructureId: randomPublicFilingLegalType(),
     ...profileData,
@@ -72,7 +72,7 @@ export const generateFormationUserData = (
     },
     legalStructureId
   );
-  return generateUserDataPrime({ formationData: _formationData, profileData: _profileData });
+  return generateUserData({ formationData: _formationData, profileData: _profileData });
 };
 
 export const generateInputFile = (overrides: Partial<InputFile>): InputFile => {

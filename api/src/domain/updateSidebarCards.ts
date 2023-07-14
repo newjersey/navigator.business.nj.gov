@@ -1,10 +1,10 @@
 import { getCurrentBusiness } from "@shared/businessHelpers";
 import { isFieldAnswered, OPPORTUNITY_FIELDS } from "@shared/domain-logic/opportunityFields";
 import { modifyCurrentBusiness } from "@shared/test";
-import { UserDataPrime } from "@shared/userData";
+import { UserData } from "@shared/userData";
 import { UpdateSidebarCards } from "./types";
 
-export const updateSidebarCards: UpdateSidebarCards = (userData: UserDataPrime): UserDataPrime => {
+export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): UserData => {
   const currentBusiness = getCurrentBusiness(userData);
   let cards = currentBusiness.preferences.visibleSidebarCards;
   const operatingPhase = currentBusiness.profileData.operatingPhase;

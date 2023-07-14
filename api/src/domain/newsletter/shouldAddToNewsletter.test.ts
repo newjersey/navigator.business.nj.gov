@@ -1,15 +1,15 @@
-import { generateUser, generateUserDataPrime } from "@shared/test";
+import { generateUser, generateUserData } from "@shared/test";
 import { generateExternalStatus, generateNewsletterResponse } from "../../../test/factories";
 import { shouldAddToNewsletter } from "./shouldAddToNewsletter";
 
 describe("shouldAddToNewsletter", () => {
   it("does not add newsletter if receiveNewsletter is false", async () => {
-    const userData = generateUserDataPrime({ user: generateUser({ receiveNewsletter: false }) });
+    const userData = generateUserData({ user: generateUser({ receiveNewsletter: false }) });
     expect(shouldAddToNewsletter(userData)).toEqual(false);
   });
 
   it("does not add newsletter if receiveNewsletter was successful", async () => {
-    const userData = generateUserDataPrime({
+    const userData = generateUserData({
       user: generateUser({
         externalStatus: generateExternalStatus({
           newsletter: generateNewsletterResponse({ success: true }),
@@ -20,7 +20,7 @@ describe("shouldAddToNewsletter", () => {
   });
 
   it("does not add newsletter if receiveNewsletter is true but unsuccessful", async () => {
-    const userData = generateUserDataPrime({
+    const userData = generateUserData({
       user: generateUser({
         externalStatus: generateExternalStatus({
           newsletter: generateNewsletterResponse({ success: false }),
@@ -31,7 +31,7 @@ describe("shouldAddToNewsletter", () => {
   });
 
   it("does add newsletter if no status exists yet", async () => {
-    const userData = generateUserDataPrime({
+    const userData = generateUserData({
       user: generateUser({ externalStatus: {} }),
     });
     expect(shouldAddToNewsletter(userData)).toEqual(true);

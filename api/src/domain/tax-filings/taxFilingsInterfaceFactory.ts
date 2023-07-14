@@ -1,12 +1,12 @@
 import { getCurrentBusiness } from "@shared/businessHelpers";
 import { modifyCurrentBusiness } from "@shared/test";
-import { UserDataPrime } from "@shared/userData";
+import { UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { TaxFilingClient, TaxFilingInterface } from "../types";
 import { fetchMunicipalityByName } from "../user/fetchMunicipalityByName";
 
 type taxFilingInterfaceRequest = {
-  userData: UserDataPrime;
+  userData: UserData;
   taxId: string;
   businessName: string;
 };
@@ -16,7 +16,7 @@ const isThisYear = (dueDate: string): boolean => {
 };
 
 export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient): TaxFilingInterface => {
-  const lookup = async (request: taxFilingInterfaceRequest): Promise<UserDataPrime> => {
+  const lookup = async (request: taxFilingInterfaceRequest): Promise<UserData> => {
     const currentBusiness = getCurrentBusiness(request.userData);
     const { state, filings, taxCity, naicsCode } = await apiTaxFilingClient.lookup({
       taxId: request.taxId,
@@ -79,7 +79,7 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
     }));
   };
 
-  const onboarding = async (request: taxFilingInterfaceRequest): Promise<UserDataPrime> => {
+  const onboarding = async (request: taxFilingInterfaceRequest): Promise<UserData> => {
     const response = await apiTaxFilingClient.onboarding({
       taxId: request.taxId,
       email: request.userData.user.email,

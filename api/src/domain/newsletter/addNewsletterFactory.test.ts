@@ -1,4 +1,4 @@
-import { generateUser, generateUserDataPrime } from "@shared/test";
+import { generateUser, generateUserData } from "@shared/test";
 import { AddNewsletter, NewsletterClient } from "../types";
 import { addNewsletterFactory } from "./addNewsletterFactory";
 
@@ -14,7 +14,7 @@ describe("addNewsletter", () => {
   });
 
   it("updates the users database entry", async () => {
-    const userData = generateUserDataPrime({ user: generateUser({ externalStatus: {} }) });
+    const userData = generateUserData({ user: generateUser({ externalStatus: {} }) });
     const response = await addNewsletter(userData);
     expect(stubNewsletterClient.add).toHaveBeenCalledWith(userData.user.email);
     expect(response).toEqual({

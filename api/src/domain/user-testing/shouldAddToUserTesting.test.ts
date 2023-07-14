@@ -1,15 +1,15 @@
-import { generateUser, generateUserDataPrime } from "@shared/test";
+import { generateUser, generateUserData } from "@shared/test";
 import { generateExternalStatus, generateUserTestingResponse } from "../../../test/factories";
 import { shouldAddToUserTesting } from "./shouldAddToUserTesting";
 
 describe("shouldAddToUserTesting", () => {
   it("does not add for user-testing if userTesting is false", async () => {
-    const userData = generateUserDataPrime({ user: generateUser({ userTesting: false }) });
+    const userData = generateUserData({ user: generateUser({ userTesting: false }) });
     expect(shouldAddToUserTesting(userData)).toEqual(false);
   });
 
   it("does not add for user-testing if userTesting add was already successful", async () => {
-    const userData = generateUserDataPrime({
+    const userData = generateUserData({
       user: generateUser({
         externalStatus: generateExternalStatus({
           userTesting: generateUserTestingResponse({ success: true }),
@@ -20,7 +20,7 @@ describe("shouldAddToUserTesting", () => {
   });
 
   it("does not add for user-testing if userTesting exists but is unsuccessful", async () => {
-    const userData = generateUserDataPrime({
+    const userData = generateUserData({
       user: generateUser({
         externalStatus: generateExternalStatus({
           userTesting: generateUserTestingResponse({ success: false }),
@@ -31,7 +31,7 @@ describe("shouldAddToUserTesting", () => {
   });
 
   it("does add for user-testing if no status exists yet", async () => {
-    const userData = generateUserDataPrime({
+    const userData = generateUserData({
       user: generateUser({ externalStatus: {} }),
     });
     expect(shouldAddToUserTesting(userData)).toEqual(true);

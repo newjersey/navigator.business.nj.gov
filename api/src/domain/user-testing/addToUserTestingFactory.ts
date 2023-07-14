@@ -1,12 +1,12 @@
-import { UserDataPrime } from "@shared/userData";
+import { UserData } from "@shared/userData";
 import { AddToUserTesting, UserTestingClient } from "../types";
 
 import { getCurrentBusiness } from "@shared/businessHelpers";
 
 export const addToUserTestingFactory = (userTestingClient: UserTestingClient): AddToUserTesting => {
-  return async (userData: UserDataPrime): Promise<UserDataPrime> => {
+  return async (userData: UserData): Promise<UserData> => {
     const userTesting = await userTestingClient.add(userData.user, getCurrentBusiness(userData).profileData);
-    const user: UserDataPrime = {
+    const user: UserData = {
       ...userData,
       user: {
         ...userData.user,

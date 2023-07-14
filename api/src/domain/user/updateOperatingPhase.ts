@@ -5,10 +5,10 @@ import { LookupLegalStructureById } from "@shared/legalStructure";
 import { OperatingPhaseId } from "@shared/operatingPhase";
 import { BusinessPersona, ForeignBusinessType } from "@shared/profileData";
 import { modifyCurrentBusiness } from "@shared/test";
-import { UserDataPrime } from "@shared/userData";
+import { UserData } from "@shared/userData";
 import { UpdateOperatingPhase } from "../types";
 
-export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserDataPrime): UserDataPrime => {
+export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): UserData => {
   const currentBusiness = getCurrentBusiness(userData);
   const originalPhase = currentBusiness.profileData.operatingPhase;
   const isPublicFiling = LookupLegalStructureById(

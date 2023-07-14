@@ -1,5 +1,5 @@
 import { NameAndAddress } from "@shared/license";
-import { UserDataPrime } from "@shared/userData";
+import { UserData } from "@shared/userData";
 import { Router } from "express";
 import { UpdateLicenseStatus, UserDataClient } from "../domain/types";
 import { getSignedInUserId } from "./userRouter";
@@ -17,7 +17,7 @@ export const licenseStatusRouterFactory = (
     const nameAndAddress = req.body as NameAndAddress;
     const userData = await userDataClient.get(userId);
     updateLicenseStatus(userData, nameAndAddress)
-      .then(async (userData: UserDataPrime) => {
+      .then(async (userData: UserData) => {
         const updatedUserData = await userDataClient.put(userData);
         const updatedCurrentBusiness = getCurrentBusiness(updatedUserData);
         if (!updatedCurrentBusiness.licenseData || updatedCurrentBusiness.licenseData.status === "UNKNOWN") {

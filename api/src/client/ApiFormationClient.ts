@@ -13,7 +13,7 @@ import {
   SignerTitle,
 } from "@shared/formationData";
 import { StateNames, StateShortCodes } from "@shared/states";
-import { UserDataPrime } from "@shared/userData";
+import { UserData } from "@shared/userData";
 import axios from "axios";
 import { FormationClient } from "../domain/types";
 import { LogWriterType } from "../libs/logWriter";
@@ -30,7 +30,7 @@ type ApiConfig = {
 export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): FormationClient => {
   const logId = logger.GetId();
   const form = (
-    userData: UserDataPrime,
+    userData: UserData,
     returnUrl: string,
     foreignGoodStandingFile: InputFile | undefined
   ): Promise<FormationSubmitResponse> => {
@@ -159,7 +159,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
   };
 
   const makePostBody = (
-    userData: UserDataPrime,
+    userData: UserData,
     returnUrl: string,
     config: ApiConfig,
     foreignGoodStandingFile: InputFile | undefined
