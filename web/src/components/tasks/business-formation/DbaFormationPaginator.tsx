@@ -21,7 +21,7 @@ import { useMediaQuery } from "@mui/material";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
 export const DbaFormationPaginator = (): ReactElement => {
-  const { userData, updateQueue } = useUserData();
+  const { business, updateQueue } = useUserData();
   const { state, setStepIndex } = useContext(BusinessFormationContext);
   const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
   const { Config } = useConfig();
@@ -63,14 +63,14 @@ export const DbaFormationPaginator = (): ReactElement => {
     moveToStep(state.stepIndex - 1);
   };
 
-  const isDba = userData?.profileData.businessName && userData.profileData.needsNexusDbaName;
+  const isDba = business?.profileData.businessName && business.profileData.needsNexusDbaName;
 
   const onMoveToStep = async (
     stepIndex: number,
     config: { moveType: "NEXT_BUTTON" | "STEPPER" }
   ): Promise<void> => {
     if (!updateQueue) return;
-    onStepChangeAnalytics(userData?.formationData.formationFormData, stepIndex, config.moveType);
+    onStepChangeAnalytics(business?.formationData.formationFormData, stepIndex, config.moveType);
     if (
       config.moveType === "NEXT_BUTTON" &&
       stepIndex === 1 &&

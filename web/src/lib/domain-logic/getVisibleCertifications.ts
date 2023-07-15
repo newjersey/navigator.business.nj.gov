@@ -1,11 +1,11 @@
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { Certification } from "../types/types";
 
 export const getVisibleCertifications = (
   certifications: Certification[],
-  userData: UserData
+  business: Business
 ): Certification[] => {
   return certifications.filter((it) => {
-    return !userData?.preferences.hiddenCertificationIds.includes(it.id);
+    return !business?.preferences.hiddenCertificationIds.includes(it.id);
   });
 };

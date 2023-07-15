@@ -3,7 +3,11 @@ import * as api from "@/lib/api-client/apiClient";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
+import {
+  currentBusiness,
+  currentUserData,
+  setupStatefulUserDataContext,
+} from "@/test/mock/withStatefulUserData";
 import {
   industryIdsWithRequiredEssentialQuestion,
   mockSuccessfulApiSignups,
@@ -23,6 +27,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
+import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { act, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
@@ -38,13 +43,15 @@ const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();
 
 const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
-  return generateUserData({
-    profileData: generateProfileData({
-      businessPersona: "STARTING",
-      ...overrides,
-    }),
-    onboardingFormProgress: "UNSTARTED",
-  });
+  return generateUserDataForBusiness(
+    generateBusiness({
+      profileData: generateProfileData({
+        businessPersona: "STARTING",
+        ...overrides,
+      }),
+      onboardingFormProgress: "UNSTARTED",
+    })
+  );
 };
 
 describe("onboarding - starting a business", () => {
@@ -178,11 +185,16 @@ describe("onboarding - starting a business", () => {
 
   it("prefills form from existing user data", async () => {
     const userData = generateUserData({
-      profileData: generateProfileData({
-        businessPersona: "STARTING",
-        businessName: "Applebees",
-        industryId: "cosmetology",
-      }),
+      currentBusinessId: "12345",
+      businesses: {
+        "12345": generateBusiness({
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            businessName: "Applebees",
+            industryId: "cosmetology",
+          }),
+        }),
+      },
       user: generateUser({
         name: "Michael Deeb",
         email: "mdeeb@example.com",
@@ -203,15 +215,16 @@ describe("onboarding - starting a business", () => {
 
   it("updates the user data after each form page", async () => {
     const initialUserData = createEmptyUserData(createEmptyUser());
+    const businessId = initialUserData.currentBusinessId;
     const { page } = renderPage({ userData: initialUserData });
 
     page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
-    expect(currentUserData().profileData.businessPersona).toEqual("STARTING");
+    expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
 
     page.selectByValue("Industry", "e-commerce");
     await page.visitStep(3);
-    expect(currentUserData().profileData.industryId).toEqual("e-commerce");
+    expect(currentBusiness().profileData.industryId).toEqual("e-commerce");
 
     page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
     page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
@@ -220,20 +233,25 @@ describe("onboarding - starting a business", () => {
 
     const expectedUserData: UserData = {
       ...initialUserData,
-      onboardingFormProgress: "COMPLETED",
-      profileData: {
-        ...initialUserData.profileData,
-        businessPersona: "STARTING",
-        businessName: "",
-        industryId: "e-commerce",
-        sectorId: "retail-trade-and-ecommerce",
-        homeBasedBusiness: undefined,
-        municipality: undefined,
-        isNonprofitOnboardingRadio: false,
-      },
-      preferences: {
-        ...initialUserData.preferences,
-        visibleSidebarCards: ["welcome"],
+      businesses: {
+        [businessId]: {
+          ...initialUserData.businesses[businessId],
+          onboardingFormProgress: "COMPLETED",
+          profileData: {
+            ...initialUserData.businesses[businessId].profileData,
+            businessPersona: "STARTING",
+            businessName: "",
+            industryId: "e-commerce",
+            sectorId: "retail-trade-and-ecommerce",
+            homeBasedBusiness: undefined,
+            municipality: undefined,
+            isNonprofitOnboardingRadio: false,
+          },
+          preferences: {
+            ...initialUserData.businesses[businessId].preferences,
+            visibleSidebarCards: ["welcome"],
+          },
+        },
       },
       user: {
         ...initialUserData.user,
@@ -263,9 +281,14 @@ describe("onboarding - starting a business", () => {
 
     expect(currentUserData()).toEqual({
       ...expectedUserData,
-      preferences: {
-        ...expectedUserData.preferences,
-        visibleSidebarCards: ["welcome", "task-progress"],
+      businesses: {
+        [businessId]: {
+          ...expectedUserData.businesses[businessId],
+          preferences: {
+            ...expectedUserData.businesses[businessId].preferences,
+            visibleSidebarCards: ["welcome", "task-progress"],
+          },
+        },
       },
       user: {
         ...expectedUserData.user,

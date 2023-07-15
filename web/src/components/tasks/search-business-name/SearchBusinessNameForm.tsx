@@ -48,7 +48,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
 
   const { Config } = useConfig();
   const didInitialSearch = useRef<boolean>(false);
-  const { userData, updateQueue } = useUserData();
+  const { business, updateQueue } = useUserData();
   const {
     setFormationFormData,
     setBusinessNameAvailability,
@@ -164,19 +164,15 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
 
   useEffect(() => {
     (function showBusinessNameSearchResultsIfDBANameExists(): void {
-      if (!userData) {
-        return;
-      }
-      if (props.isDba) {
-        return;
-      }
-      const shouldDoInitialSearch = currentName.length > 0 && userData.profileData.needsNexusDbaName;
+      if (!business) return;
+      if (props.isDba) return;
+      const shouldDoInitialSearch = currentName.length > 0 && business.profileData.needsNexusDbaName;
       if (shouldDoInitialSearch && !didInitialSearch.current) {
         didInitialSearch.current = true;
         doSearch(undefined, { isInitialSubmit: true });
       }
     })();
-  }, [currentName, userData, props.isDba, doSearch]);
+  }, [currentName, business, props.isDba, doSearch]);
 
   return (
     <>

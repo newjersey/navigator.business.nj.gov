@@ -8,7 +8,7 @@ import {
   randomNegativeFilteredIndustry,
   randomNonHomeBasedIndustry,
 } from "@/test/factories";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { generateProfileData, randomFilteredIndustry, randomIndustry } from "@businessnjgovnavigator/shared";
 import {
@@ -26,7 +26,7 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 describe("<OnboardingIndustry />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockUserData({});
+    useMockBusiness({});
   });
 
   const renderComponent = (profileData?: ProfileData): void => {

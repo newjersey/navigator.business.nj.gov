@@ -71,15 +71,15 @@ describe("Formation - ReviewStep", () => {
       dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     };
-    const page = preparePage(
-      {
+    const page = preparePage({
+      business: {
         profileData,
         formationData,
       },
-      {
+      displayContent: {
         formationDbaContent: generateFormationDbaContent({}),
-      }
-    );
+      },
+    });
 
     if (isForeign) {
       await page.fillAndSubmitNexusBusinessNameStep(formationFormData.businessName);

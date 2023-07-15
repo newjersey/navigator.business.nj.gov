@@ -15,15 +15,15 @@ interface Props {
 }
 
 export const TaskHeader = (props: Props): ReactElement => {
-  const { userData } = useUserData();
+  const { business } = useUserData();
   const { roadmap } = useRoadmap();
 
-  const currentTaskProgress: TaskProgress = userData?.taskProgress[props.task.id] ?? "NOT_STARTED";
+  const currentTaskProgress: TaskProgress = business?.taskProgress[props.task.id] ?? "NOT_STARTED";
 
   const { Config } = useConfig();
 
   const hasCompletedAPIFormation = (): boolean => {
-    return userData?.formationData.getFilingResponse?.success === true;
+    return business?.formationData.getFilingResponse?.success === true;
   };
 
   const getDisabledText = (): string | undefined => {

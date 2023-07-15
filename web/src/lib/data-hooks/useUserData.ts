@@ -11,6 +11,7 @@ import { UpdateQueue, UserDataError } from "@/lib/types/types";
 import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { UserData } from "@businessnjgovnavigator/shared/";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { useContext, useEffect } from "react";
 import useSWR from "swr";
 
@@ -29,19 +30,18 @@ export const useUserData = (): UseUserDataResponse => {
     useContext(IntercomContext);
 
   useEffect(() => {
-    setOperatingPhaseId(data?.profileData.operatingPhase);
-    setLegalStructureId(data?.profileData.legalStructureId);
-    setIndustryId(data?.profileData.industryId);
-    setBusinessPersona(data?.profileData.businessPersona);
+    const profileData = data?.businesses[data?.currentBusinessId].profileData;
+    setOperatingPhaseId(profileData?.operatingPhase);
+    setLegalStructureId(profileData?.legalStructureId);
+    setIndustryId(profileData?.industryId);
+    setBusinessPersona(profileData?.businessPersona);
   }, [
     setOperatingPhaseId,
-    data?.profileData.operatingPhase,
+    data?.currentBusinessId,
     setLegalStructureId,
-    data?.profileData.legalStructureId,
     setIndustryId,
-    data?.profileData.industryId,
     setBusinessPersona,
-    data?.profileData.businessPersona,
+    data?.businesses,
   ]);
 
   useEffect(() => {
@@ -80,12 +80,16 @@ export const useUserData = (): UseUserDataResponse => {
   }, [userDataError, dataExists, error, setUserDataError, state.isAuthenticated]);
 
   const profileDataHasChanged = (oldUserData: UserData | undefined, newUserData: UserData): boolean => {
-    return JSON.stringify(oldUserData?.profileData) !== JSON.stringify(newUserData.profileData);
+    const oldProfileData = oldUserData?.businesses[oldUserData?.currentBusinessId].profileData;
+    const newProfileData = newUserData.businesses[newUserData.currentBusinessId].profileData;
+
+    return JSON.stringify(oldProfileData) !== JSON.stringify(newProfileData);
   };
 
   const onProfileDataChange = async (newUserData: UserData): Promise<void> => {
-    setAnalyticsDimensions(newUserData.profileData);
-    const newRoadmap = await buildUserRoadmap(newUserData.profileData);
+    const newProfileData = newUserData.businesses[newUserData.currentBusinessId].profileData;
+    setAnalyticsDimensions(newProfileData);
+    const newRoadmap = await buildUserRoadmap(newProfileData);
     setRoadmap(newRoadmap);
   };
 
@@ -141,6 +145,7 @@ export const useUserData = (): UseUserDataResponse => {
 
   return {
     userData: updateQueue?.current(),
+    business: updateQueue?.currentBusiness(),
     isLoading: !error && !data,
     error: userDataError,
     refresh: refresh,
@@ -151,6 +156,7 @@ export const useUserData = (): UseUserDataResponse => {
 
 export type UseUserDataResponse = {
   userData: UserData | undefined;
+  business: Business | undefined;
   isLoading: boolean;
   error: UserDataError | undefined;
   refresh: () => Promise<void>;

@@ -3,8 +3,7 @@ import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
-import { generateProfileData, UserData } from "@businessnjgovnavigator/shared/index";
-import { generateUserData as _generateUserData } from "@businessnjgovnavigator/shared/test";
+import { Business, generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/index";
 
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
@@ -22,11 +21,6 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
-const generateUserData = (overrides: Partial<UserData>): UserData => {
-  const profileData = generateProfileData({ ...overrides.profileData });
-  return _generateUserData({ ...overrides, profileData });
-};
-
 describe("profile - guest mode", () => {
   let setRegistrationModalIsVisible: jest.Mock;
 
@@ -38,11 +32,11 @@ describe("profile - guest mode", () => {
     setupStatefulUserDataContext();
   });
 
-  let initialUserData: UserData;
+  let initialBusiness: Business;
 
   describe("when prospective business owner", () => {
     beforeEach(() => {
-      initialUserData = generateUserData({
+      initialBusiness = generateBusiness({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "limited-liability-company",
@@ -55,7 +49,7 @@ describe("profile - guest mode", () => {
 
   describe("when owning a business", () => {
     beforeEach(() => {
-      initialUserData = generateUserData({
+      initialBusiness = generateBusiness({
         profileData: generateProfileData({ businessPersona: "OWNING" }),
       });
     });
@@ -64,7 +58,7 @@ describe("profile - guest mode", () => {
 
     it("opens registration modal when user tries to change Tax PIN", () => {
       renderPage({
-        userData: initialUserData,
+        business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
         setRegistrationModalIsVisible,
       });
@@ -77,11 +71,11 @@ describe("profile - guest mode", () => {
   function opensModalWhenEditingNonGuestModeProfileFields(): void {
     it("user is able to edit name and save", async () => {
       renderPage({
-        userData: initialUserData,
+        business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
         setRegistrationModalIsVisible,
       });
-      const inputFieldName = getBusinessProfileInputFieldName(initialUserData);
+      const inputFieldName = getBusinessProfileInputFieldName(initialBusiness);
       fillText(inputFieldName, "Cool Computers");
       clickSave();
       await waitFor(() => {
@@ -91,7 +85,7 @@ describe("profile - guest mode", () => {
 
     it("opens registration modal when user tries to change EIN", () => {
       renderPage({
-        userData: initialUserData,
+        business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
         setRegistrationModalIsVisible,
       });
@@ -102,7 +96,7 @@ describe("profile - guest mode", () => {
 
     it("opens registration modal when user tries to change entity ID", () => {
       renderPage({
-        userData: initialUserData,
+        business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
         setRegistrationModalIsVisible,
       });
@@ -113,7 +107,7 @@ describe("profile - guest mode", () => {
 
     it("opens registration modal when user tries to change NJ Tax ID", () => {
       renderPage({
-        userData: initialUserData,
+        business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
         setRegistrationModalIsVisible,
       });
@@ -124,7 +118,7 @@ describe("profile - guest mode", () => {
 
     it("opens registration modal when user tries to change Notes", () => {
       renderPage({
-        userData: initialUserData,
+        business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
         setRegistrationModalIsVisible,
       });

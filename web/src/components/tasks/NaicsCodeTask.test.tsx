@@ -8,19 +8,20 @@ import { generateTask } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
   BusinessPersona,
+  generateBusiness,
   generateProfileData,
-  generateUserData,
+  generateUserDataForBusiness,
   LookupIndustryById,
   OperatingPhaseId,
   TaxFilingState,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -66,12 +67,12 @@ describe("<NaicsCodeTask />", () => {
   });
 
   describe("NAICS code radio buttons", () => {
-    let initialUserData: UserData;
+    let initialBusiness: Business;
 
     const renderPage = (): void => {
       render(
         withAuthAlert(
-          <WithStatefulUserData initialUserData={initialUserData}>
+          <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.TRUE
@@ -80,7 +81,7 @@ describe("<NaicsCodeTask />", () => {
     };
 
     beforeEach(() => {
-      initialUserData = generateUserData({
+      initialBusiness = generateBusiness({
         profileData: generateProfileData({ naicsCode: "", industryId: validIndustryId }),
         taskProgress: { [taskId]: "NOT_STARTED" },
       });
@@ -117,7 +118,7 @@ describe("<NaicsCodeTask />", () => {
       renderPage();
       fireEvent.click(screen.getByTestId(`naics-radio-${validNaicsCode}`));
       await waitFor(() => {
-        expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
+        expect(currentBusiness().taskProgress[taskId]).toEqual("IN_PROGRESS");
       });
     });
 
@@ -127,7 +128,7 @@ describe("<NaicsCodeTask />", () => {
 
       fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
       await waitFor(() => {
-        expect(currentUserData().profileData.naicsCode).toEqual(validNaicsCode);
+        expect(currentBusiness().profileData.naicsCode).toEqual(validNaicsCode);
       });
     });
 
@@ -161,18 +162,18 @@ describe("<NaicsCodeTask />", () => {
 
       fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
       await waitFor(() => {
-        expect(currentUserData().taskProgress[taskId]).toEqual("COMPLETED");
+        expect(currentBusiness().taskProgress[taskId]).toEqual("COMPLETED");
       });
     });
   });
 
   describe("inputting NAICS code", () => {
-    let initialUserData: UserData;
+    let initialBusiness: Business;
 
     const renderPage = (): void => {
       render(
         withAuthAlert(
-          <WithStatefulUserData initialUserData={initialUserData}>
+          <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.TRUE
@@ -181,7 +182,7 @@ describe("<NaicsCodeTask />", () => {
     };
 
     beforeEach(() => {
-      initialUserData = generateUserData({
+      initialBusiness = generateBusiness({
         profileData: generateProfileData({ naicsCode: "", industryId: "" }),
         taskProgress: { [taskId]: "NOT_STARTED" },
       });
@@ -209,7 +210,7 @@ describe("<NaicsCodeTask />", () => {
       });
       fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
       await waitFor(() => {
-        expect(currentUserData().profileData.naicsCode).toEqual(validNaicsCode);
+        expect(currentBusiness().profileData.naicsCode).toEqual(validNaicsCode);
       });
     });
 
@@ -267,36 +268,35 @@ describe("<NaicsCodeTask />", () => {
       });
       fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
       await waitFor(() => {
-        expect(currentUserData().taskProgress[taskId]).toEqual("COMPLETED");
+        expect(currentBusiness().taskProgress[taskId]).toEqual("COMPLETED");
       });
     });
   });
 
   describe("displaying NAICS code", () => {
-    let initialUserData: UserData;
+    let initialBusiness: Business;
 
     const renderPage = (params?: {
       taxFilingState?: TaxFilingState;
       operatingPhaseId?: OperatingPhaseId;
       businessPersona?: BusinessPersona;
     }): void => {
+      const business: Business = {
+        ...initialBusiness,
+        profileData: {
+          ...initialBusiness.profileData,
+          operatingPhase: params?.operatingPhaseId ?? initialBusiness.profileData.operatingPhase,
+          businessPersona: params?.businessPersona ?? initialBusiness.profileData.businessPersona,
+        },
+        taxFilingData: {
+          ...initialBusiness.taxFilingData,
+          state: params?.taxFilingState ?? initialBusiness.taxFilingData.state,
+        },
+      };
       render(
         withAuthAlert(
           <ThemeProvider theme={createTheme()}>
-            <WithStatefulUserData
-              initialUserData={{
-                ...initialUserData,
-                profileData: {
-                  ...initialUserData.profileData,
-                  operatingPhase: params?.operatingPhaseId ?? initialUserData.profileData.operatingPhase,
-                  businessPersona: params?.businessPersona ?? initialUserData.profileData.businessPersona,
-                },
-                taxFilingData: {
-                  ...initialUserData.taxFilingData,
-                  state: params?.taxFilingState ?? initialUserData.taxFilingData.state,
-                },
-              }}
-            >
+            <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
               <NaicsCodeTask task={task} />
             </WithStatefulUserData>
           </ThemeProvider>,
@@ -306,7 +306,7 @@ describe("<NaicsCodeTask />", () => {
     };
 
     beforeEach(() => {
-      initialUserData = generateUserData({
+      initialBusiness = generateBusiness({
         profileData: generateProfileData({ naicsCode: validNaicsCode }),
         taskProgress: { [taskId]: "COMPLETED" },
       });
@@ -338,19 +338,19 @@ describe("<NaicsCodeTask />", () => {
       fireEvent.click(screen.getByTestId(`naics-radio-input`));
       expect((screen.getByLabelText("Save NAICS Code") as HTMLInputElement).value).toEqual("");
       expect(screen.queryByText(Config.determineNaicsCode.hasSavedCodeHeader)).not.toBeInTheDocument();
-      expect(currentUserData().profileData.naicsCode).toEqual("");
+      expect(currentBusiness().profileData.naicsCode).toEqual("");
     });
 
     it("sets task status to in-progress on edit button", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.editText));
-      expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
+      expect(currentBusiness().taskProgress[taskId]).toEqual("IN_PROGRESS");
     });
 
     it("sets task status to in-progress on remove button", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
-      expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
+      expect(currentBusiness().taskProgress[taskId]).toEqual("IN_PROGRESS");
     });
 
     describe("when the naics code is present", () => {
@@ -389,13 +389,13 @@ describe("<NaicsCodeTask />", () => {
   });
 
   describe("guest mode", () => {
-    let initialUserData: UserData;
+    let initialBusiness: Business;
     let setRegistrationModalIsVisible: jest.Mock;
 
     const renderPage = (): void => {
       render(
         withAuthAlert(
-          <WithStatefulUserData initialUserData={initialUserData}>
+          <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,
@@ -406,7 +406,7 @@ describe("<NaicsCodeTask />", () => {
 
     beforeEach(() => {
       setRegistrationModalIsVisible = jest.fn();
-      initialUserData = generateUserData({
+      initialBusiness = generateBusiness({
         profileData: generateProfileData({ naicsCode: "", industryId: "" }),
         taskProgress: { [taskId]: "NOT_STARTED" },
       });

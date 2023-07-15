@@ -13,23 +13,23 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
+  Business,
   getCurrentDate,
   LookupLegalStructureById,
   LookupOperatingPhaseById,
-  UserData,
-} from "@businessnjgovnavigator/shared/";
+} from "@businessnjgovnavigator/shared/index";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useState } from "react";
 
 interface Props {
   operateReferences: Record<string, OperateReference>;
-  CMS_ONLY_fakeUserData?: UserData; // for CMS only
+  CMS_ONLY_fakeBusiness?: Business; // for CMS only
 }
 
 export const FilingsCalendar = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { updateQueue, userData: userDataFromHook } = useUserData();
-  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook;
+  const { updateQueue } = useUserData();
+  const business = props.CMS_ONLY_fakeBusiness ?? updateQueue?.currentBusiness();
 
   const currentDate = getCurrentDate();
   const currentYear = getCurrentDate().year().toString();
@@ -37,45 +37,43 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
   const isLargeScreen = useMediaQuery(MediaQueries.tabletAndUp);
 
-  const shouldRenderFilingsCalendarTaxAccess = (userData?: UserData): boolean => {
-    if (!userData) {
-      return false;
-    }
-    return LookupOperatingPhaseById(userData.profileData.operatingPhase).displayTaxAccessButton;
+  const shouldRenderFilingsCalendarTaxAccess = (business?: Business): boolean => {
+    if (!business) return false;
+    return LookupOperatingPhaseById(business.profileData.operatingPhase).displayTaxAccessButton;
   };
 
   const showFormationDatePrompt = (): boolean => {
-    if (!userData) return false;
+    if (!business) return false;
     return (
-      LookupLegalStructureById(userData.profileData.legalStructureId).elementsToDisplay.has(
+      LookupLegalStructureById(business.profileData.legalStructureId).elementsToDisplay.has(
         "formationDate"
-      ) && !userData.profileData.dateOfFormation
+      ) && !business.profileData.dateOfFormation
     );
   };
 
   const renderCalendar = (): ReactElement => {
-    const type = LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCalendarType;
+    const type = LookupOperatingPhaseById(business?.profileData.operatingPhase).displayCalendarType;
     if (type === "LIST")
       return (
         <FilingsCalendarAsList
           operateReferences={props.operateReferences}
-          userData={userData as UserData}
+          business={business as Business}
           activeYear={activeYear}
         />
       );
     if (type === "FULL") {
-      if (isLargeScreen && userData?.preferences.isCalendarFullView)
+      if (isLargeScreen && business?.preferences.isCalendarFullView)
         return (
           <FilingsCalendarGrid
             operateReferences={props.operateReferences}
-            userData={userData}
+            business={business}
             activeYear={activeYear}
           />
         );
       return (
         <FilingsCalendarAsList
           operateReferences={props.operateReferences}
-          userData={userData as UserData}
+          business={business as Business}
           activeYear={activeYear}
         />
       );
@@ -85,17 +83,17 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
   const renderToggleButton = (): ReactElement => {
     const displayToggleButton =
-      userData?.taxFilingData?.filings &&
-      userData?.taxFilingData?.filings.length > 0 &&
-      LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCalendarToggleButton &&
+      business?.taxFilingData?.filings &&
+      business?.taxFilingData?.filings.length > 0 &&
+      LookupOperatingPhaseById(business?.profileData.operatingPhase).displayCalendarToggleButton &&
       isLargeScreen;
 
     const handleCalendarOnClick = (): void => {
-      if (!userData || !updateQueue) return;
+      if (!business || !updateQueue) return;
 
       updateQueue
         .queuePreferences({
-          isCalendarFullView: !userData.preferences.isCalendarFullView,
+          isCalendarFullView: !business.preferences.isCalendarFullView,
         })
         .update();
     };
@@ -108,7 +106,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           className="font-body-2xs padding-x-1 text-normal text-base border-1px border-base-light hide-unhide-button padding-y-11px"
           onClick={handleCalendarOnClick}
         >
-          {userData?.preferences.isCalendarFullView ? (
+          {business?.preferences.isCalendarFullView ? (
             <>
               <Icon className="usa-icon--size-3 margin-right-05">list</Icon>
               {Config.dashboardDefaults.calendarListViewButton}
@@ -141,7 +139,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             </div>
           </div>
           <div className="flex flex-row flex-align-end flex-justify-center mobile-lg:flex-justify">
-            {userData?.taxFilingData?.filings && userData?.taxFilingData.filings.length > 0 ? (
+            {business?.taxFilingData?.filings && business?.taxFilingData.filings.length > 0 ? (
               <ThreeYearSelector
                 className="tablet:margin-right-2"
                 activeYear={activeYear}
@@ -159,8 +157,8 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           </div>
         </div>
         <hr className="bg-base-lighter margin-top-2 margin-bottom-4" aria-hidden={true} />
-        {shouldRenderFilingsCalendarTaxAccess(userData) && <FilingsCalendarTaxAccess />}
-        {userData?.taxFilingData?.filings && userData?.taxFilingData.filings.length > 0 ? (
+        {shouldRenderFilingsCalendarTaxAccess(business) && <FilingsCalendarTaxAccess />}
+        {business?.taxFilingData?.filings && business?.taxFilingData.filings.length > 0 ? (
           <>
             {renderCalendar()}
             {showFormationDatePrompt() && (

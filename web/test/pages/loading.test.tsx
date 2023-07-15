@@ -10,18 +10,19 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   generateUseUserDataResponse,
   setMockUserDataResponse,
+  useMockBusiness,
   useMockProfileData,
-  useMockUserData,
 } from "@/test/mock/mockUseUserData";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  generateBusiness,
   generatePreferences,
   generateProfileData,
-  generateUserData,
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
@@ -78,7 +79,7 @@ describe("loading page", () => {
   });
 
   it("redirects to onboarding if user has not yet completed onboarding", () => {
-    useMockUserData({
+    useMockBusiness({
       onboardingFormProgress: "UNSTARTED",
       profileData: generateProfileData({ businessPersona: "STARTING" }),
     });
@@ -87,19 +88,19 @@ describe("loading page", () => {
   });
 
   it("redirects user to returnToLink page url if they have one and resets returnToLink", async () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({ businessPersona: "STARTING" }),
       preferences: generatePreferences({ returnToLink: "/tasks/some-task" }),
       onboardingFormProgress: "COMPLETED",
     });
     setupStatefulUserDataContext();
     render(
-      <WithStatefulUserData initialUserData={userData}>
+      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
         <LoadingPage />
       </WithStatefulUserData>
     );
     await waitFor(() => {
-      expect(currentUserData().preferences.returnToLink).toEqual("");
+      expect(currentBusiness().preferences.returnToLink).toEqual("");
     });
     expect(mockPush).toHaveBeenCalledWith("/tasks/some-task");
   });

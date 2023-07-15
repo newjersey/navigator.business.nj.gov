@@ -12,11 +12,11 @@ interface Props {
   task: Task;
 }
 export const TaskBody = (props: Props): ReactElement => {
-  const { userData } = useUserData();
+  const { business } = useUserData();
   const { roadmap } = useRoadmap();
 
   const addNaicsCodeData = (contentMd: string): string => {
-    const naicsCode = userData?.profileData.naicsCode || "";
+    const naicsCode = business?.profileData.naicsCode || "";
     const naicsTemplateValue = getNaicsDisplayMd(naicsCode);
     return templateEval(contentMd, { naicsCode: naicsTemplateValue });
   };

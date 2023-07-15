@@ -12,17 +12,18 @@ import {
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
   formationTaskId,
+  generateBusiness,
   generateMunicipality,
   generateProfileData,
-  generateUserData,
+  generateUserDataForBusiness,
   LookupTaskAgencyById,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import * as materialUi from "@mui/material";
@@ -47,10 +48,12 @@ const setLargeScreen = (value = true): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => value);
 };
 
-const renderPage = (task: Task, initialUserData?: UserData): void => {
+const renderPage = (task: Task, initialBusiness?: Business): void => {
   render(
     <materialUi.ThemeProvider theme={materialUi.createTheme()}>
-      <WithStatefulUserData initialUserData={initialUserData}>
+      <WithStatefulUserData
+        initialUserData={generateUserDataForBusiness(initialBusiness ?? generateBusiness({}))}
+      >
         <TaskPage task={task} displayContent={createEmptyTaskDisplayContent()} municipalities={[]} />
       </WithStatefulUserData>
     </materialUi.ThemeProvider>
@@ -181,50 +184,50 @@ describe("task page", () => {
   });
 
   it("loads License task screen for apply-for-shop-license", () => {
-    renderPage(generateTask({ id: "apply-for-shop-license" }), generateUserData({ licenseData: undefined }));
+    renderPage(generateTask({ id: "apply-for-shop-license" }), generateBusiness({ licenseData: undefined }));
     expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
   it("loads License task screen for register-consumer-affairs", () => {
     renderPage(
       generateTask({ id: "register-consumer-affairs" }),
-      generateUserData({ licenseData: undefined })
+      generateBusiness({ licenseData: undefined })
     );
     expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
   it("loads License task screen for pharmacy-license", () => {
-    renderPage(generateTask({ id: "pharmacy-license" }), generateUserData({ licenseData: undefined }));
+    renderPage(generateTask({ id: "pharmacy-license" }), generateBusiness({ licenseData: undefined }));
     expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
   it("loads License task screen for license-accounting", () => {
-    renderPage(generateTask({ id: "license-accounting" }), generateUserData({ licenseData: undefined }));
+    renderPage(generateTask({ id: "license-accounting" }), generateBusiness({ licenseData: undefined }));
     expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
   it("loads License task screen for license-massage-therapy", () => {
-    renderPage(generateTask({ id: "license-massage-therapy" }), generateUserData({ licenseData: undefined }));
+    renderPage(generateTask({ id: "license-massage-therapy" }), generateBusiness({ licenseData: undefined }));
     expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
   it("loads License task screen for moving-company-license", () => {
-    renderPage(generateTask({ id: "moving-company-license" }), generateUserData({ licenseData: undefined }));
+    renderPage(generateTask({ id: "moving-company-license" }), generateBusiness({ licenseData: undefined }));
     expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
   it("loads License task screen for architect-license", () => {
-    renderPage(generateTask({ id: "architect-license" }), generateUserData({ licenseData: undefined }));
+    renderPage(generateTask({ id: "architect-license" }), generateBusiness({ licenseData: undefined }));
     expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
   it("loads License task screen for hvac-license", () => {
-    renderPage(generateTask({ id: "hvac-license" }), generateUserData({ licenseData: undefined }));
+    renderPage(generateTask({ id: "hvac-license" }), generateBusiness({ licenseData: undefined }));
     expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
   it("loads License task screen for appraiser-license", () => {
-    renderPage(generateTask({ id: "appraiser-license" }), generateUserData({ licenseData: undefined }));
+    renderPage(generateTask({ id: "appraiser-license" }), generateBusiness({ licenseData: undefined }));
     expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
@@ -261,7 +264,7 @@ describe("task page", () => {
   });
 
   it("toggles radio button for post-onboarding question", async () => {
-    const initialUserData = generateUserData({
+    const initialBusiness = generateBusiness({
       profileData: generateProfileData({ constructionRenovationPlan: undefined }),
     });
     renderPage(
@@ -269,7 +272,7 @@ describe("task page", () => {
         postOnboardingQuestion: "construction-renovation",
         requiresLocation: false,
       }),
-      initialUserData
+      initialBusiness
     );
 
     await waitFor(() => {
@@ -281,12 +284,12 @@ describe("task page", () => {
     fireEvent.click(screen.getByTestId("post-onboarding-radio-true"));
     expect(screen.queryByTestId("post-onboarding-false-content")).not.toBeInTheDocument();
     expect(screen.getByTestId("post-onboarding-true-content")).toBeInTheDocument();
-    expect(currentUserData().profileData.constructionRenovationPlan).toBe(true);
+    expect(currentBusiness().profileData.constructionRenovationPlan).toBe(true);
 
     fireEvent.click(screen.getByTestId("post-onboarding-radio-false"));
     expect(screen.getByTestId("post-onboarding-false-content")).toBeInTheDocument();
     expect(screen.queryByTestId("post-onboarding-true-content")).not.toBeInTheDocument();
-    expect(currentUserData().profileData.constructionRenovationPlan).toBe(false);
+    expect(currentBusiness().profileData.constructionRenovationPlan).toBe(false);
   });
 
   describe("next and previous task buttons", () => {
@@ -415,7 +418,7 @@ describe("task page", () => {
       });
 
       useMockRoadmapWithTask(task);
-      renderPage(task, generateUserData({ taskProgress: { "do-this-first": "COMPLETED" } }));
+      renderPage(task, generateBusiness({ taskProgress: { "do-this-first": "COMPLETED" } }));
 
       expect(
         screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
@@ -429,7 +432,7 @@ describe("task page", () => {
   it("does not render next and previous buttons for STARTING when legal structure allows for business formation and form-business-entity task is rendered", () => {
     renderPage(
       generateTask({ id: formationTaskId }),
-      generateUserData({
+      generateBusiness({
         taskProgress: {},
         profileData: generateProfileData({
           legalStructureId: randomPublicFilingLegalType(),
@@ -444,7 +447,7 @@ describe("task page", () => {
   it("does not render next and previous buttons for FOREIGN when legal structure allows for business formation and form-business-entity task is rendered", () => {
     renderPage(
       generateTask({ id: formationTaskId }),
-      generateUserData({
+      generateBusiness({
         taskProgress: {},
         profileData: generateProfileData({
           legalStructureId: randomPublicFilingLegalType(),
@@ -462,7 +465,7 @@ describe("task page", () => {
       setLargeScreen(false);
       renderPage(
         generateTask({ id: businessStructureTaskId }),
-        generateUserData({
+        generateBusiness({
           profileData: generateProfileData({
             operatingPhase,
           }),
@@ -479,7 +482,7 @@ describe("task page", () => {
       setLargeScreen(false);
       renderPage(
         generateTask({ id: businessStructureTaskId }),
-        generateUserData({
+        generateBusiness({
           profileData: generateProfileData({
             operatingPhase,
           }),
@@ -499,13 +502,19 @@ describe("task page", () => {
       "${endLocationDependentSection}\n\n" +
       "more content\n\n";
 
-    it("shows deferred location question if task requiresLocation=true", () => {
+    it("shows deferred location question if task requiresLocation=true and municipality is undefined", () => {
       const task = generateTask({
         requiresLocation: true,
         contentMd: contentWithLocationSection,
         postOnboardingQuestion: undefined,
       });
-      renderPage(task);
+      const businessWithoutMunicipality = generateBusiness({
+        profileData: generateProfileData({
+          municipality: undefined,
+        }),
+      });
+
+      renderPage(task, businessWithoutMunicipality);
       expect(screen.getByTestId("deferred-location-task")).toBeInTheDocument();
       expect(screen.queryByTestId("deferred-location-content")).not.toBeInTheDocument();
     });
@@ -516,13 +525,13 @@ describe("task page", () => {
         contentMd: contentWithLocationSection,
         postOnboardingQuestion: undefined,
       });
-      const userDataWithMunicipality = generateUserData({
+      const businessWithMunicipality = generateBusiness({
         profileData: generateProfileData({
           municipality: generateMunicipality({}),
         }),
       });
 
-      renderPage(task, userDataWithMunicipality);
+      renderPage(task, businessWithMunicipality);
       expect(screen.getByTestId("deferred-location-task")).toBeInTheDocument();
       expect(screen.getByTestId("deferred-location-content")).toBeInTheDocument();
     });

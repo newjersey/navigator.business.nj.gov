@@ -5,11 +5,12 @@ import { getFlow } from "@/lib/utils/helpers";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
+  generateBusiness,
   generateProfileData,
   generateTaxFilingData,
-  generateUserData,
+  generateUserDataForBusiness,
   TaxFilingState,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
@@ -17,10 +18,10 @@ import { render, screen } from "@testing-library/react";
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 const Config = getMergedConfig();
 
-const renderComponent = (userDataOverrides: Partial<UserData>): void => {
+const renderComponent = (businessOverrides: Partial<Business>): void => {
   const data = generateProfileData({
     businessPersona: "STARTING",
-    ...userDataOverrides.profileData,
+    ...businessOverrides.profileData,
   });
   render(
     <ThemeProvider theme={createTheme()}>
@@ -35,7 +36,9 @@ const renderComponent = (userDataOverrides: Partial<UserData>): void => {
           onBack: (): void => {},
         }}
       >
-        <WithStatefulUserData initialUserData={generateUserData({ ...userDataOverrides })}>
+        <WithStatefulUserData
+          initialUserData={generateUserDataForBusiness(generateBusiness(businessOverrides))}
+        >
           <ProfileNaicsCode />
         </WithStatefulUserData>
       </ProfileDataContext.Provider>

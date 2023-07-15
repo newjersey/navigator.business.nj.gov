@@ -18,20 +18,24 @@ import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
+  BusinessUser,
   castPublicFilingLegalTypeToFormationType,
   createEmptyFormationFormData,
   DateObject,
   FormationSubmitResponse,
+  generateBusiness,
   generateBusinessNameAvailability,
   generateFormationIncorporator,
   generateMunicipality,
+  generateUser,
+  generateUserDataForBusiness,
   Municipality,
   NameAvailability,
   ProfileData,
   PublicFilingLegalType,
   publicFilingLegalTypes,
   randomInt,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
@@ -66,30 +70,42 @@ export const useSetupInitialMocks = (): void => {
   setDesktopScreen(true);
 };
 
-export const preparePage = (
-  userData: Partial<UserData>,
-  displayContent: TasksDisplayContent,
-  municipalities?: Municipality[],
-  task?: Task,
-  isAuthenticated?: IsAuthenticated,
-  setRegistrationModalIsVisible?: (value: boolean) => void,
-  searchOnly?: boolean
-): FormationPageHelpers => {
-  const profileData = generateFormationProfileData({ ...userData.profileData });
+type PreparePageParams = {
+  business: Partial<Business>;
+  displayContent: TasksDisplayContent;
+  municipalities?: Municipality[];
+  task?: Task;
+  isAuthenticated?: IsAuthenticated;
+  setRegistrationModalIsVisible?: (value: boolean) => void;
+  user?: Partial<BusinessUser>;
+  searchOnly?: boolean;
+};
+
+export const preparePage = ({
+  business,
+  displayContent,
+  municipalities,
+  task,
+  isAuthenticated,
+  setRegistrationModalIsVisible,
+  user,
+  searchOnly,
+}: PreparePageParams): FormationPageHelpers => {
+  const profileData = generateFormationProfileData({ ...business.profileData });
   const isValid = publicFilingLegalTypes.includes(profileData.legalStructureId as PublicFilingLegalType);
-  const initialUserData = generateUserData({
-    ...userData,
+  const initialBusiness = generateBusiness({
+    ...business,
     profileData,
     formationData: isValid
       ? generateFormationData(
-          { ...userData.formationData },
+          { ...business.formationData },
           castPublicFilingLegalTypeToFormationType(
             profileData.legalStructureId as PublicFilingLegalType,
             profileData.businessPersona
           )
         )
       : generateFormationData({
-          ...userData.formationData,
+          ...business.formationData,
           formationFormData: createEmptyFormationFormData(),
         }),
   });
@@ -97,16 +113,25 @@ export const preparePage = (
     profileData?.municipality ?? generateMunicipality({ displayName: "GenericTown" }),
     ...(municipalities ?? []),
   ];
-  initialUserData.formationData.formationFormData.addressMunicipality &&
-    internalMunicipalities.push(initialUserData.formationData.formationFormData.addressMunicipality);
-  initialUserData.formationData.formationFormData.agentOfficeAddressMunicipality &&
+  initialBusiness.formationData.formationFormData.addressMunicipality &&
+    internalMunicipalities.push(initialBusiness.formationData.formationFormData.addressMunicipality);
+  initialBusiness.formationData.formationFormData.agentOfficeAddressMunicipality &&
     internalMunicipalities.push(
-      initialUserData.formationData.formationFormData.agentOfficeAddressMunicipality
+      initialBusiness.formationData.formationFormData.agentOfficeAddressMunicipality
     );
+
+  const userData = generateUserData({
+    user: generateUser(user ?? {}),
+    businesses: {
+      [initialBusiness.id]: initialBusiness,
+    },
+    currentBusinessId: initialBusiness.id,
+  });
+
   render(
     withAuthAlert(
       <MunicipalitiesContext.Provider value={{ municipalities: internalMunicipalities }}>
-        <WithStatefulUserData initialUserData={initialUserData}>
+        <WithStatefulUserData initialUserData={userData}>
           <ThemeProvider theme={createTheme()}>
             <BusinessFormation
               task={task ?? generateTask({})}
@@ -131,9 +156,15 @@ export const mockApiResponse = (response?: FormationSubmitResponse): void => {
   mockApi.postBusinessFormation.mockImplementation((userData) => {
     return Promise.resolve({
       ...userData,
-      formationData: {
-        ...userData.formationData,
-        formationResponse: response,
+      businesses: {
+        ...userData.businesses,
+        [userData.currentBusinessId]: {
+          ...userData.businesses[userData.currentBusinessId],
+          formationData: {
+            ...userData.businesses[userData.currentBusinessId].formationData,
+            formationResponse: response,
+          },
+        },
       },
     });
   });
@@ -156,7 +187,7 @@ export type FormationPageHelpers = {
   submitContactsStep: (completed?: boolean) => Promise<void>;
   submitBillingStep: () => Promise<void>;
   submitReviewStep: () => Promise<void>;
-  clickSubmitAndGetError: (userData: UserData) => Promise<void>;
+  clickSubmitAndGetError: (business: Business) => Promise<void>;
   stepperClickToBusinessNameStep: () => Promise<void>;
   stepperClickToNexusBusinessNameStep: () => Promise<void>;
   stepperClickToBusinessStep: () => Promise<void>;
@@ -317,8 +348,8 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     });
   };
 
-  const clickSubmitAndGetError = async (userData: UserData): Promise<void> => {
-    const returnedPromise = Promise.resolve(userData);
+  const clickSubmitAndGetError = async (business: Business): Promise<void> => {
+    const returnedPromise = Promise.resolve(generateUserDataForBusiness(business));
     mockApi.postBusinessFormation.mockReturnValue(returnedPromise);
     fireEvent.click(screen.getByText(Config.formation.general.submitButtonText));
     await act(async () => {

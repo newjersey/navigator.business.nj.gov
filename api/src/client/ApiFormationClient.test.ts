@@ -4,6 +4,7 @@ import { defaultDateFormat } from "@shared/defaultConstants";
 import { formationApiDateFormat, FormationLegalType } from "@shared/formationData";
 import { randomInt } from "@shared/intHelpers";
 import {
+  generateBusiness,
   generateFormationData,
   generateFormationFormData,
   generateFormationIncorporator,
@@ -12,7 +13,7 @@ import {
   generateFormationSigner,
   generateFormationUSAddress,
   generateProfileData,
-  generateUserData,
+  generateUserDataForBusiness,
 } from "@shared/test";
 import axios from "axios";
 import { generateFormationUserData, generateInputFile } from "../../test/factories";
@@ -25,6 +26,8 @@ import {
   ApiResponse,
   ApiSubmission,
 } from "./ApiFormationClient";
+
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 
 jest.mock("axios");
 jest.mock("winston");
@@ -121,6 +124,7 @@ describe("ApiFormationClient", () => {
           {},
           formationFormData
         );
+        const currentBusiness = getCurrentBusiness(userData);
 
         await client.form(userData, "navigator.com/form-business");
 
@@ -152,7 +156,7 @@ describe("ApiFormationClient", () => {
                 Business: "DomesticLimitedLiabilityCompany",
                 BusinessName: formationFormData.businessName,
                 BusinessDesignator: formationFormData.businessSuffix,
-                Naic: userData.profileData.naicsCode,
+                Naic: currentBusiness.profileData.naicsCode,
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
@@ -270,6 +274,7 @@ describe("ApiFormationClient", () => {
           {},
           formationFormData
         );
+        const currentBusiness = getCurrentBusiness(userData);
 
         await client.form(userData, "navigator.com/form-business");
 
@@ -301,7 +306,7 @@ describe("ApiFormationClient", () => {
                 Business: "ForeignLimitedLiabilityCompany",
                 BusinessName: formationFormData.businessName,
                 BusinessDesignator: formationFormData.businessSuffix,
-                Naic: userData.profileData.naicsCode,
+                Naic: currentBusiness.profileData.naicsCode,
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
@@ -407,6 +412,7 @@ describe("ApiFormationClient", () => {
           {},
           formationFormData
         );
+        const currentBusiness = getCurrentBusiness(userData);
 
         await client.form(userData, "hostname.com/form-business");
 
@@ -438,7 +444,7 @@ describe("ApiFormationClient", () => {
                 Business: "DomesticForProfitCorporation",
                 BusinessName: formationFormData.businessName,
                 BusinessDesignator: formationFormData.businessSuffix,
-                Naic: userData.profileData.naicsCode,
+                Naic: currentBusiness.profileData.naicsCode,
                 TotalShares: 1234,
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
@@ -575,6 +581,7 @@ describe("ApiFormationClient", () => {
           {},
           formationFormData
         );
+        const currentBusiness = getCurrentBusiness(userData);
 
         const foreignGoodStandingFile = generateInputFile({});
 
@@ -613,7 +620,7 @@ describe("ApiFormationClient", () => {
                 Business: "ForeignForProfitCorporation",
                 BusinessName: formationFormData.businessName,
                 BusinessDesignator: formationFormData.businessSuffix,
-                Naic: userData.profileData.naicsCode,
+                Naic: currentBusiness.profileData.naicsCode,
                 TotalShares: 1234,
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
@@ -801,15 +808,18 @@ describe("ApiFormationClient", () => {
           { legalStructureId: "limited-liability-partnership" }
         );
 
-        const userData = generateUserData({
-          profileData: generateProfileData({
-            legalStructureId: "limited-liability-partnership",
-            businessPersona: "STARTING",
-          }),
-          formationData: generateFormationData({ formationFormData }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            profileData: generateProfileData({
+              legalStructureId: "limited-liability-partnership",
+              businessPersona: "STARTING",
+            }),
+            formationData: generateFormationData({ formationFormData }),
+          })
+        );
 
         await client.form(userData, "hostname.com/form-business");
+        const currentBusiness = getCurrentBusiness(userData);
 
         expect(mockAxios.post).toHaveBeenCalledWith(
           "example.com/formation/PrepareFiling",
@@ -839,7 +849,7 @@ describe("ApiFormationClient", () => {
                 Business: "DomesticLimitedLiabilityPartnership",
                 BusinessName: formationFormData.businessName,
                 BusinessDesignator: formationFormData.businessSuffix,
-                Naic: userData.profileData.naicsCode,
+                Naic: currentBusiness.profileData.naicsCode,
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
@@ -925,13 +935,16 @@ describe("ApiFormationClient", () => {
           { legalStructureId: "foreign-limited-liability-partnership" }
         );
 
-        const userData = generateUserData({
-          profileData: generateProfileData({
-            legalStructureId: "limited-liability-partnership",
-            businessPersona: "FOREIGN",
-          }),
-          formationData: generateFormationData({ formationFormData }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            profileData: generateProfileData({
+              legalStructureId: "limited-liability-partnership",
+              businessPersona: "FOREIGN",
+            }),
+            formationData: generateFormationData({ formationFormData }),
+          })
+        );
+        const currentBusiness = getCurrentBusiness(userData);
 
         await client.form(userData, "hostname.com/form-business");
 
@@ -963,7 +976,7 @@ describe("ApiFormationClient", () => {
                 Business: "ForeignLimitedLiabilityPartnership",
                 BusinessName: formationFormData.businessName,
                 BusinessDesignator: formationFormData.businessSuffix,
-                Naic: userData.profileData.naicsCode,
+                Naic: currentBusiness.profileData.naicsCode,
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
@@ -1066,13 +1079,16 @@ describe("ApiFormationClient", () => {
           { legalStructureId: "limited-partnership" }
         );
 
-        const userData = generateUserData({
-          profileData: generateProfileData({
-            legalStructureId: "limited-partnership",
-            businessPersona: "STARTING",
-          }),
-          formationData: generateFormationData({ formationFormData }),
-        });
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            profileData: generateProfileData({
+              legalStructureId: "limited-partnership",
+              businessPersona: "STARTING",
+            }),
+            formationData: generateFormationData({ formationFormData }),
+          })
+        );
+        const currentBusiness = getCurrentBusiness(userData);
 
         await client.form(userData, "hostname.com/form-business");
 
@@ -1104,7 +1120,7 @@ describe("ApiFormationClient", () => {
                 Business: "DomesticLimitedPartnership",
                 BusinessName: formationFormData.businessName,
                 BusinessDesignator: formationFormData.businessSuffix,
-                Naic: userData.profileData.naicsCode,
+                Naic: currentBusiness.profileData.naicsCode,
                 BusinessPurpose: formationFormData.businessPurpose,
                 EffectiveFilingDate: parseDateWithFormat(
                   formationFormData.businessStartDate,
@@ -1212,11 +1228,12 @@ describe("ApiFormationClient", () => {
       mockAxios.post.mockResolvedValue({ data: stubResponse });
 
       const userData = generateFormationUserData({}, {}, { agentNumberOrManual: "NUMBER" });
+      const currentBusiness = getCurrentBusiness(userData);
 
       await client.form(userData, "some-url");
       const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
       expect(postBody.Formation.RegisteredAgent.Id).toEqual(
-        userData.formationData.formationFormData.agentNumber
+        currentBusiness.formationData.formationFormData.agentNumber
       );
       expect(postBody.Formation.RegisteredAgent.Email).toEqual(undefined);
       expect(postBody.Formation.RegisteredAgent.Name).toEqual(undefined);

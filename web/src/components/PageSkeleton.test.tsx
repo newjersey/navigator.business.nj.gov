@@ -1,5 +1,5 @@
 import { PageSkeleton } from "@/components/PageSkeleton";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -10,7 +10,7 @@ describe("<PageSkeleton />", () => {
   });
 
   it("does not render report an issues bar if onboarding is not completed", () => {
-    useMockUserData({ onboardingFormProgress: "UNSTARTED" });
+    useMockBusiness({ onboardingFormProgress: "UNSTARTED" });
 
     render(
       <PageSkeleton>
@@ -22,7 +22,7 @@ describe("<PageSkeleton />", () => {
   });
 
   it("renders report an issues bar after onboarding is completed", () => {
-    useMockUserData({ onboardingFormProgress: "COMPLETED" });
+    useMockBusiness({ onboardingFormProgress: "COMPLETED" });
 
     render(
       <PageSkeleton>

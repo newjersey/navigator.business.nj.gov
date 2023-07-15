@@ -10,10 +10,10 @@ interface Props {
 }
 
 export const TaskCheckbox = (props: Props): ReactElement => {
-  const { updateQueue, userData } = useUserData();
+  const { updateQueue, business } = useUserData();
   const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
 
-  const checklistItemStatus = userData?.taskItemChecklist[props.checklistItemId] ?? false;
+  const checklistItemStatus = business?.taskItemChecklist[props.checklistItemId] ?? false;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (!updateQueue) {

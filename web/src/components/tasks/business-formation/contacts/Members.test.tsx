@@ -9,7 +9,7 @@ import {
   setDesktopScreen,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
-import { currentUserData } from "@/test/mock/withStatefulUserData";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   FormationLegalType,
   FormationMember,
@@ -100,7 +100,7 @@ describe("Formation - Members Field", () => {
           });
           expect(screen.getByText(newName, { exact: false })).toBeInTheDocument();
           await page.submitContactsStep();
-          const newMembers = currentUserData().formationData.formationFormData.members;
+          const newMembers = currentBusiness().formationData.formationFormData.members;
           expect(newMembers?.length).toEqual(2);
           expect(
             newMembers?.findIndex((member) => {
@@ -120,7 +120,7 @@ describe("Formation - Members Field", () => {
           // eslint-disable-next-line testing-library/no-node-access
           fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="delete"]') as Element);
           await page.submitContactsStep();
-          const newMembers = currentUserData().formationData.formationFormData.members;
+          const newMembers = currentBusiness().formationData.formationFormData.members;
           expect(newMembers?.length).toEqual(1);
           expect(
             newMembers?.find((member) => {
@@ -233,7 +233,7 @@ describe("Formation - Members Field", () => {
           });
           expect(screen.queryByText(nextButtonText, { exact: false })).not.toBeInTheDocument();
           await page.submitContactsStep();
-          expect(currentUserData().formationData.formationFormData.members?.length).toEqual(10);
+          expect(currentBusiness().formationData.formationFormData.members?.length).toEqual(10);
         });
 
         it("renders mobile view of members table", async () => {
@@ -339,7 +339,7 @@ describe("Formation - Members Field", () => {
           expect(screen.getByText(Config.formation.fields.members.successSnackbarBody)).toBeInTheDocument();
         });
         await page.submitContactsStep();
-        const newMembers = currentUserData().formationData.formationFormData.members!;
+        const newMembers = currentBusiness().formationData.formationFormData.members!;
         expect(newMembers.length).toEqual(1);
         expect(newMembers[0].addressCity).toEqual("Hampton");
       });

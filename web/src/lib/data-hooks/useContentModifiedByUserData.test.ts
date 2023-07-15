@@ -1,6 +1,5 @@
 import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifiedByUserData";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { generateProfileData, generateUserData, randomInt } from "@businessnjgovnavigator/shared/";
+import { useMockProfileData } from "@/test/mock/mockUseUserData";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
@@ -10,66 +9,75 @@ describe("useContentModifiedByUserData", () => {
   });
 
   describe("${oos} keyword", () => {
-    it("renders out of state designation when businessPersona is Foreign", () => {
-      useMockUserData(generateUserData({ profileData: generateProfileData({ businessPersona: "FOREIGN" }) }));
+    it("renders out of state designation when businessPersona is FOREIGN", () => {
+      useMockProfileData({ businessPersona: "FOREIGN" });
+
       const result = useContentModifiedByUserData("You have a ${oos} business");
       expect(result).toEqual(expect.stringContaining("out-of-state"));
+      expect(result).toEqual("You have a out-of-state business");
     });
 
-    it("does not render out of state designation when businessPersona is not Foreign", () => {
-      useMockUserData(
-        generateUserData({
-          profileData: generateProfileData({ businessPersona: randomInt() % 2 ? "STARTING" : "OWNING" }),
-        })
-      );
+    it("does not render out of state designation when businessPersona is STARTING", () => {
+      useMockProfileData({ businessPersona: "STARTING" });
 
       const result = useContentModifiedByUserData("You have a ${oos} business");
       expect(result).toEqual(expect.not.stringContaining("${oos}"));
       expect(result).toEqual(expect.not.stringContaining("out-of-state"));
+      expect(result).toEqual("You have a business");
+    });
+
+    it("does not render out of state designation when businessPersona is OWNING", () => {
+      useMockProfileData({ businessPersona: "OWNING" });
+
+      const result = useContentModifiedByUserData("You have a ${oos} business");
+      expect(result).toEqual(expect.not.stringContaining("${oos}"));
+      expect(result).toEqual(expect.not.stringContaining("out-of-state"));
+      expect(result).toEqual("You have a business");
     });
 
     it("does not render out of state designation when businessPersona is undefined", () => {
-      useMockUserData(
-        generateUserData({
-          profileData: generateProfileData({ businessPersona: randomInt() % 2 ? "STARTING" : "OWNING" }),
-        })
-      );
+      useMockProfileData({ businessPersona: undefined });
 
       const result = useContentModifiedByUserData("You have a ${oos} business");
       expect(result).toEqual(expect.not.stringContaining("${oos}"));
       expect(result).toEqual(expect.not.stringContaining("out-of-state"));
+      expect(result).toEqual("You have a business");
     });
   });
 
   describe("${OoS} keyword", () => {
-    it("renders out of state designation when businessPersona is Foreign", () => {
-      useMockUserData(generateUserData({ profileData: generateProfileData({ businessPersona: "FOREIGN" }) }));
+    it("renders out of state designation when businessPersona is FOREIGN", () => {
+      useMockProfileData({ businessPersona: "FOREIGN" });
       const result = useContentModifiedByUserData("You have a ${OoS} business");
       expect(result).toEqual(expect.stringContaining("Out-of-State"));
+      expect(result).toEqual("You have a Out-of-State business");
     });
 
-    it("does not render out of state designation when businessPersona is not Foreign", () => {
-      useMockUserData(
-        generateUserData({
-          profileData: generateProfileData({ businessPersona: randomInt() % 2 ? "STARTING" : "OWNING" }),
-        })
-      );
+    it("does not render out of state designation when businessPersona is STARTING", () => {
+      useMockProfileData({ businessPersona: "STARTING" });
 
       const result = useContentModifiedByUserData("You have a ${OoS} business");
       expect(result).toEqual(expect.not.stringContaining("${OoS}"));
       expect(result).toEqual(expect.not.stringContaining("Out-of-State"));
+      expect(result).toEqual("You have a business");
+    });
+
+    it("does not render out of state designation when businessPersona is OWNING", () => {
+      useMockProfileData({ businessPersona: "OWNING" });
+
+      const result = useContentModifiedByUserData("You have a ${OoS} business");
+      expect(result).toEqual(expect.not.stringContaining("${OoS}"));
+      expect(result).toEqual(expect.not.stringContaining("Out-of-State"));
+      expect(result).toEqual("You have a business");
     });
 
     it("does not render out of state designation when businessPersona is undefined", () => {
-      useMockUserData(
-        generateUserData({
-          profileData: generateProfileData({ businessPersona: undefined }),
-        })
-      );
+      useMockProfileData({ businessPersona: undefined });
 
       const result = useContentModifiedByUserData("You have a ${OoS} business");
       expect(result).toEqual(expect.not.stringContaining("${OoS}"));
       expect(result).toEqual(expect.not.stringContaining("Out-of-State"));
+      expect(result).toEqual("You have a business");
     });
   });
 });

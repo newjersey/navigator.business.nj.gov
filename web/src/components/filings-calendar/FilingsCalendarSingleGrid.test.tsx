@@ -3,10 +3,10 @@ import { OperateReference } from "@/lib/types/types";
 import * as shared from "@businessnjgovnavigator/shared";
 import {
   defaultDateFormat,
+  generateBusiness,
   generateProfileData,
   generateTaxFilingCalendarEvent,
   generateTaxFilingData,
-  generateUserData,
   LookupIndustryById,
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
@@ -65,12 +65,12 @@ const operateReferences: Record<string, OperateReference> = {
 describe("<FilingsCalendarSingleGrid />", () => {
   it("renders a tax filings", () => {
     const taxFilingData = generateTaxFilingData({ filings: [taxFilingOne] });
-    const userData = generateUserData({
+    const business = generateBusiness({
       taxFilingData: taxFilingData,
     });
     render(
       <FilingsCalendarSingleGrid
-        userData={userData}
+        business={business}
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
@@ -80,7 +80,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
   });
 
   it("does not render tax filing if it's in a month that has elapsed", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       taxFilingData: generateTaxFilingData({
         filings: [
           generateTaxFilingCalendarEvent({
@@ -92,7 +92,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
     });
     render(
       <FilingsCalendarSingleGrid
-        userData={userData}
+        business={business}
         operateReferences={{
           "tax-filing-old": {
             name: "Tax Filing Old",
@@ -108,7 +108,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
   });
 
   it("renders tax filing when on a future year in a month that has elapsed", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       taxFilingData: generateTaxFilingData({
         filings: [
           generateTaxFilingCalendarEvent({
@@ -120,7 +120,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
     });
     render(
       <FilingsCalendarSingleGrid
-        userData={userData}
+        business={business}
         operateReferences={{
           "tax-filing-old": {
             name: "Tax Filing Old",
@@ -137,12 +137,12 @@ describe("<FilingsCalendarSingleGrid />", () => {
 
   it("does not render tax filing when on a future year", () => {
     const taxFilingData = generateTaxFilingData({ filings: [taxFilingOne] });
-    const userData = generateUserData({
+    const business = generateBusiness({
       taxFilingData: taxFilingData,
     });
     render(
       <FilingsCalendarSingleGrid
-        userData={userData}
+        business={business}
         operateReferences={operateReferences}
         num={month}
         activeYear={currentDate.add(1, "year").year().toString()}
@@ -154,20 +154,20 @@ describe("<FilingsCalendarSingleGrid />", () => {
 
   it("renders a licenseEvent expiration task", () => {
     const licenseData = generateLicenseData({ expirationISO: currentDate.add(4, "days").toISOString() });
-    const userData = generateUserData({
+    const business = generateBusiness({
       licenseData,
       profileData: generateProfileData({ industryId: "cosmetology" }),
     });
     render(
       <FilingsCalendarSingleGrid
-        userData={userData}
+        business={business}
         operateReferences={operateReferences}
         num={month}
         activeYear={currentDate.year().toString()}
       />
     );
 
-    const expectedTitle = `${LookupIndustryById(userData.profileData.industryId).licenseType} ${
+    const expectedTitle = `${LookupIndustryById(business.profileData.industryId).licenseType} ${
       Config.licenseEventDefaults.expirationTitleLabel
     }`;
     expect(screen.getByText(expectedTitle)).toBeInTheDocument();
@@ -177,19 +177,19 @@ describe("<FilingsCalendarSingleGrid />", () => {
     const licenseData = generateLicenseData({
       expirationISO: currentDate.add(4, "days").toISOString(),
     });
-    const userData = generateUserData({
+    const business = generateBusiness({
       licenseData,
       profileData: generateProfileData({ industryId: "cosmetology" }),
     });
     render(
       <FilingsCalendarSingleGrid
-        userData={userData}
+        business={business}
         operateReferences={operateReferences}
         num={currentDate.add(1, "month").month()}
         activeYear={currentDate.year().toString()}
       />
     );
-    const expectedTitle = `${LookupIndustryById(userData.profileData.industryId).licenseType} ${
+    const expectedTitle = `${LookupIndustryById(business.profileData.industryId).licenseType} ${
       Config.licenseEventDefaults.renewalTitleLabel
     }`;
     expect(screen.getByText(expectedTitle)).toBeInTheDocument();
@@ -199,23 +199,23 @@ describe("<FilingsCalendarSingleGrid />", () => {
     const licenseData = generateLicenseData({
       expirationISO: currentDate.add(1, "year").month(1).day(1).toISOString(),
     });
-    const userData = generateUserData({
+    const business = generateBusiness({
       licenseData,
       profileData: generateProfileData({ industryId: "cosmetology" }),
     });
     render(
       <FilingsCalendarSingleGrid
-        userData={userData}
+        business={business}
         operateReferences={operateReferences}
         num={0}
         activeYear={currentDate.add(1, "year").year().toString()}
       />
     );
-    const expectedExpirationTitle = `${LookupIndustryById(userData.profileData.industryId).licenseType} ${
+    const expectedExpirationTitle = `${LookupIndustryById(business.profileData.industryId).licenseType} ${
       Config.licenseEventDefaults.expirationTitleLabel
     }`;
 
-    const expectedRenewalTitle = `${LookupIndustryById(userData.profileData.industryId).licenseType} ${
+    const expectedRenewalTitle = `${LookupIndustryById(business.profileData.industryId).licenseType} ${
       Config.licenseEventDefaults.renewalTitleLabel
     }`;
     expect(screen.getByText(expectedExpirationTitle)).toBeInTheDocument();
@@ -223,12 +223,12 @@ describe("<FilingsCalendarSingleGrid />", () => {
   });
 
   it("does not render expand collapse button when there are only two tax filings", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo] }),
     });
     render(
       <FilingsCalendarSingleGrid
-        userData={userData}
+        business={business}
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
@@ -250,7 +250,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
       ...taxFilingTwo,
       dueDate: currentDate.add(2, "days").toISOString(),
     };
-    const userData = generateUserData({
+    const business = generateBusiness({
       licenseData: generateLicenseData({
         expirationISO: currentDate.add(1, "days").toISOString(),
         status: "ACTIVE",
@@ -260,14 +260,14 @@ describe("<FilingsCalendarSingleGrid />", () => {
     });
     render(
       <FilingsCalendarSingleGrid
-        userData={userData}
+        business={business}
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
       />
     );
 
-    const expectedLicenseTitle = `${LookupIndustryById(userData.profileData.industryId).licenseType} ${
+    const expectedLicenseTitle = `${LookupIndustryById(business.profileData.industryId).licenseType} ${
       Config.licenseEventDefaults.expirationTitleLabel
     }`;
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
@@ -293,7 +293,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
       ...taxFilingThree,
       dueDate: currentDate.add(3, "days").toISOString(),
     };
-    const userData = generateUserData({
+    const business = generateBusiness({
       licenseData: generateLicenseData({
         expirationISO: currentDate.add(2, "days").toISOString(),
         status: "ACTIVE",
@@ -303,14 +303,14 @@ describe("<FilingsCalendarSingleGrid />", () => {
     });
     render(
       <FilingsCalendarSingleGrid
-        userData={userData}
+        business={business}
         operateReferences={operateReferences}
         num={month}
         activeYear={year}
       />
     );
 
-    const expectedLicenseTitle = `${LookupIndustryById(userData.profileData.industryId).licenseType} ${
+    const expectedLicenseTitle = `${LookupIndustryById(business.profileData.industryId).licenseType} ${
       Config.licenseEventDefaults.expirationTitleLabel
     }`;
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
@@ -325,12 +325,12 @@ describe("<FilingsCalendarSingleGrid />", () => {
   });
 
   it("shows and hides the additional tax filings when the view more / view less button is clicked", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo, taxFilingThree] }),
     });
     render(
       <FilingsCalendarSingleGrid
-        userData={userData}
+        business={business}
         operateReferences={operateReferences}
         num={month}
         activeYear={year}

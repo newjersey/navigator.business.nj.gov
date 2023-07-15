@@ -2,14 +2,19 @@ import { TaxAccessModal } from "@/components/filings-calendar/tax-access-modal/T
 import { getMergedConfig } from "@/contexts/configContext";
 import { selectDropdownByValue } from "@/test/helpers/helpers-testing-library-selectors";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generateProfileData, generateUserData } from "@businessnjgovnavigator/shared/";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import {
+  generateBusiness,
+  generateProfileData,
+  generateUserData,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 const Config = getMergedConfig();
@@ -17,9 +22,11 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("<TaxAccessModal />", () => {
-  const renderModal = (initialUserData?: UserData): void => {
+  const renderModal = (business?: Business): void => {
     render(
-      <WithStatefulUserData initialUserData={initialUserData || generateUserData({})}>
+      <WithStatefulUserData
+        initialUserData={business ? generateUserDataForBusiness(business) : generateUserData({})}
+      >
         <TaxAccessModal isOpen={true} close={(): void => {}} onSuccess={(): void => {}} />
       </WithStatefulUserData>
     );
@@ -33,7 +40,7 @@ describe("<TaxAccessModal />", () => {
   describe("when poppy or dakota", () => {
     it.each(["STARTING", "FOREIGN"])("shows step 2 only with no step 1 for %s", (persona) => {
       renderModal(
-        generateUserData({
+        generateBusiness({
           profileData: generateProfileData({
             businessPersona: persona as BusinessPersona,
           }),
@@ -49,10 +56,10 @@ describe("<TaxAccessModal />", () => {
   });
 
   describe("when legal structure is undefined", () => {
-    let undefinedLegalStructureUserData: UserData;
+    let undefinedLegalStructureBusiness: Business;
 
     beforeEach(() => {
-      undefinedLegalStructureUserData = generateUserData({
+      undefinedLegalStructureBusiness = generateBusiness({
         profileData: generateProfileData({
           businessPersona: "OWNING",
           legalStructureId: undefined,
@@ -61,7 +68,7 @@ describe("<TaxAccessModal />", () => {
     });
 
     it("shows step 1 question to choose a legal structure", () => {
-      renderModal(undefinedLegalStructureUserData);
+      renderModal(undefinedLegalStructureBusiness);
       expect(screen.getByText(Config.taxAccess.stepOneHeader)).toBeInTheDocument();
       expect(screen.getByText(Config.taxAccess.body)).toBeInTheDocument();
       expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
@@ -69,17 +76,17 @@ describe("<TaxAccessModal />", () => {
     });
 
     it("does not save selection when closing modal", () => {
-      renderModal(undefinedLegalStructureUserData);
+      renderModal(undefinedLegalStructureBusiness);
       selectDropdownByValue("Business structure", "c-corporation");
       fireEvent.click(screen.getByLabelText("close"));
       expect(userDataWasNotUpdated()).toBe(true);
     });
 
     it("saves selection and moves to step 2 when clicking next button", async () => {
-      renderModal(undefinedLegalStructureUserData);
+      renderModal(undefinedLegalStructureBusiness);
       selectDropdownByValue("Business structure", "c-corporation");
       fireEvent.click(screen.getByText(Config.taxAccess.stepOneNextButton));
-      expect(currentUserData().profileData.legalStructureId).toBe("c-corporation");
+      expect(currentBusiness().profileData.legalStructureId).toBe("c-corporation");
       await waitFor(() => {
         expect(screen.getByText(Config.taxAccess.stepTwoHeader)).toBeInTheDocument();
       });
@@ -87,7 +94,7 @@ describe("<TaxAccessModal />", () => {
     });
 
     it("shows error when blur without selection", () => {
-      renderModal(undefinedLegalStructureUserData);
+      renderModal(undefinedLegalStructureBusiness);
       expect(screen.queryByText(Config.taxAccess.stepOneErrorBanner)).not.toBeInTheDocument();
       expect(
         screen.queryByText(Config.profileDefaults.fields.legalStructureId.default.errorTextRequired)
@@ -101,7 +108,7 @@ describe("<TaxAccessModal />", () => {
     });
 
     it("does not allow clicking next when no selection", () => {
-      renderModal(undefinedLegalStructureUserData);
+      renderModal(undefinedLegalStructureBusiness);
       fireEvent.click(screen.getByText(Config.taxAccess.stepOneNextButton));
       expect(screen.getByText(Config.taxAccess.stepOneErrorBanner)).toBeInTheDocument();
       expect(
@@ -115,7 +122,7 @@ describe("<TaxAccessModal />", () => {
   describe("when legal structure is defined", () => {
     it("shows step 2 question", () => {
       renderModal(
-        generateUserData({
+        generateBusiness({
           profileData: generateProfileData({
             businessPersona: "OWNING",
           }),
@@ -129,7 +136,7 @@ describe("<TaxAccessModal />", () => {
 
     it("moves back to step 1 on back button", () => {
       renderModal(
-        generateUserData({
+        generateBusiness({
           profileData: generateProfileData({
             businessPersona: "OWNING",
           }),

@@ -5,12 +5,15 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateOperateReference } from "@/test/factories";
-import { defaultDateFormat, generateTaxFilingCalendarEvent } from "@businessnjgovnavigator/shared/index";
+import {
+  defaultDateFormat,
+  generateBusiness,
+  generateTaxFilingCalendarEvent,
+} from "@businessnjgovnavigator/shared/index";
 import {
   generatePreferences,
   generateProfileData,
   generateTaxFilingData,
-  generateUserData,
 } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import dayjs from "dayjs";
@@ -20,7 +23,7 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
-  const emptyFilingsUserData = generateUserData({
+  const emptyFilingsUserData = generateBusiness({
     profileData: generateProfileData({
       operatingPhase: "UP_AND_RUNNING",
       legalStructureId: "general-partnership",
@@ -30,7 +33,7 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
     }),
   });
 
-  const filingsUserData = generateUserData({
+  const filingsBusiness = generateBusiness({
     profileData: generateProfileData({
       operatingPhase: "UP_AND_RUNNING",
       legalStructureId: "general-partnership",
@@ -48,15 +51,15 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
     }),
   });
 
-  const filingsUserDataGrid = {
-    ...filingsUserData,
+  const filingsBusinessGrid = {
+    ...filingsBusiness,
     preferences: generatePreferences({
       isCalendarFullView: true,
     }),
   };
 
-  const filingsUserDataList = {
-    ...filingsUserData,
+  const filingsBusinessList = {
+    ...filingsBusiness,
     preferences: generatePreferences({
       isCalendarFullView: false,
     }),
@@ -74,14 +77,14 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         <ThemeProvider theme={createTheme()}>
           <h2>Empty calendar</h2>
-          <FilingsCalendar operateReferences={{}} CMS_ONLY_fakeUserData={emptyFilingsUserData} />
+          <FilingsCalendar operateReferences={{}} CMS_ONLY_fakeBusiness={emptyFilingsUserData} />
 
           <hr className="margin-top-6" />
 
           <h2>Calendar with filings, list view</h2>
           <FilingsCalendar
             operateReferences={operateReferences}
-            CMS_ONLY_fakeUserData={filingsUserDataList}
+            CMS_ONLY_fakeBusiness={filingsBusinessList}
           />
 
           <hr className="margin-top-6" />
@@ -89,7 +92,7 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
           <h2>Calendar with filings, grid view</h2>
           <FilingsCalendar
             operateReferences={operateReferences}
-            CMS_ONLY_fakeUserData={filingsUserDataGrid}
+            CMS_ONLY_fakeBusiness={filingsBusinessGrid}
           />
 
           <HideableTasks />

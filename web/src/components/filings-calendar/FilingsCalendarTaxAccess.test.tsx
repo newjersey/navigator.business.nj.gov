@@ -7,18 +7,19 @@ import { randomPublicFilingLegalType } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   userDataUpdatedNTimes,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
   createEmptyFormationFormData,
   FormationData,
   FormationLegalType,
-  generateUserData,
+  generateBusiness,
+  generateUserDataForBusiness,
   getCurrentDateISOString,
   OperatingPhases,
   UserData,
@@ -55,10 +56,10 @@ const renderFilingsCalendarTaxAccess = (initialUserData?: UserData): void => {
   );
 };
 
-const renderUnauthenticatedFilingsCalendarTaxAccess = (initialUserData?: UserData): void => {
+const renderUnauthenticatedFilingsCalendarTaxAccess = (business: Business): void => {
   render(
     withAuthAlert(
-      <WithStatefulUserData initialUserData={initialUserData}>
+      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
         <FilingsCalendarTaxAccess />
       </WithStatefulUserData>,
       IsAuthenticated.FALSE,
@@ -67,10 +68,26 @@ const renderUnauthenticatedFilingsCalendarTaxAccess = (initialUserData?: UserDat
   );
 };
 
+const modifyUserData = (userData: UserData, overrides: Partial<Business>): UserData => {
+  return {
+    ...userData,
+    businesses: {
+      ...userData.businesses,
+      [userData.currentBusinessId]: {
+        ...userData.businesses[userData.currentBusinessId],
+        ...overrides,
+      },
+    },
+  };
+};
+
+const mockApiResponse = (userData: UserData, overrides: Partial<Business>): void => {
+  mockApi.postTaxFilingsLookup.mockResolvedValue(modifyUserData(userData, overrides));
+};
+
 describe("<FilingsCalendarTaxAccess />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockUserData({ onboardingFormProgress: "COMPLETED" });
     setRegistrationModalIsVisible = jest.fn();
     setupStatefulUserDataContext();
     useMockRouter({});
@@ -108,36 +125,38 @@ describe("<FilingsCalendarTaxAccess />", () => {
       );
     }
 
-    return generateUserData({
-      profileData: generateProfileData({
-        legalStructureId: legalStructureId,
-        operatingPhase: randomElementFromArray(
-          OperatingPhases.filter((obj) => {
-            return obj.displayTaxAccessButton;
-          })
-        ).id,
-        taxId: params.taxId ? `*${params.taxId.slice(1)}` : "",
-        encryptedTaxId: params.taxId ? `encrypted-${params.taxId}` : "",
-        businessName: params.businessName || "",
-        responsibleOwnerName: params.responsibleOwnerName || "",
-        municipality: params.municipalityName
-          ? { name: params.municipalityName, county: "", id: "", displayName: "" }
-          : undefined,
-      }),
-      formationData: formationData,
-      taxFilingData: generateTaxFilingData({ state: undefined }),
-    });
+    return generateUserDataForBusiness(
+      generateBusiness({
+        profileData: generateProfileData({
+          legalStructureId: legalStructureId,
+          operatingPhase: randomElementFromArray(
+            OperatingPhases.filter((obj) => {
+              return obj.displayTaxAccessButton;
+            })
+          ).id,
+          taxId: params.taxId ? `*${params.taxId.slice(1)}` : "",
+          encryptedTaxId: params.taxId ? `encrypted-${params.taxId}` : "",
+          businessName: params.businessName || "",
+          responsibleOwnerName: params.responsibleOwnerName || "",
+          municipality: params.municipalityName
+            ? { name: params.municipalityName, county: "", id: "", displayName: "" }
+            : undefined,
+        }),
+        formationData: formationData,
+        taxFilingData: generateTaxFilingData({ state: undefined }),
+      })
+    );
   };
 
   describe("guest mode / query param behavior", () => {
     it("opens the sign up modal when button is clicked in up and running guest mode", async () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: "GUEST_MODE_OWNING",
         }),
       });
 
-      renderUnauthenticatedFilingsCalendarTaxAccess(userData);
+      renderUnauthenticatedFilingsCalendarTaxAccess(business);
       openModal();
       expect(screen.queryByTestId("modal-content")).not.toBeInTheDocument();
       await waitFor(() => {
@@ -146,26 +165,28 @@ describe("<FilingsCalendarTaxAccess />", () => {
     });
 
     it("updates userData with return link when the button is clicked in up and running guest mode", async () => {
-      const userData = generateUserData({
+      const business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: "GUEST_MODE_OWNING",
         }),
       });
-      renderUnauthenticatedFilingsCalendarTaxAccess(userData);
+      renderUnauthenticatedFilingsCalendarTaxAccess(business);
       openModal();
       await waitFor(() => {
-        return expect(currentUserData().preferences.returnToLink).toEqual(
+        return expect(currentBusiness().preferences.returnToLink).toEqual(
           `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true`
         );
       });
     });
 
     it("opens tax modal if the query parameter openTaxFilingsModal is true and shallow reloads", async () => {
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          operatingPhase: "GUEST_MODE_OWNING",
-        }),
-      });
+      const userData = generateUserDataForBusiness(
+        generateBusiness({
+          profileData: generateProfileData({
+            operatingPhase: "GUEST_MODE_OWNING",
+          }),
+        })
+      );
       useMockRouter({ query: { openTaxFilingsModal: "true" }, isReady: true });
       renderFilingsCalendarTaxAccess(userData);
       await screen.findByTestId("modal-content");
@@ -179,13 +200,12 @@ describe("<FilingsCalendarTaxAccess />", () => {
     businessName: "MrFakesHotDogBonanza",
   });
 
-  const pendingStateUserData = {
-    ...userDataWithPrefilledFields,
+  const pendingStateUserData: UserData = modifyUserData(userDataWithPrefilledFields, {
     taxFilingData: generateTaxFilingData({
       registeredISO: getCurrentDateISOString(),
       state: "PENDING",
     }),
-  };
+  });
 
   it("opens tax access modal when on button click", () => {
     renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
@@ -194,38 +214,40 @@ describe("<FilingsCalendarTaxAccess />", () => {
   });
 
   it("displays alert on success", async () => {
-    mockApi.postTaxFilingsOnboarding.mockResolvedValue({
-      ...userDataWithPrefilledFields,
-      taxFilingData: generateTaxFilingData({
-        state: "SUCCESS",
-        registeredISO: getCurrentDateISOString(),
-      }),
-    });
+    mockApi.postTaxFilingsOnboarding.mockResolvedValue(
+      modifyUserData(userDataWithPrefilledFields, {
+        taxFilingData: generateTaxFilingData({
+          state: "SUCCESS",
+          registeredISO: getCurrentDateISOString(),
+        }),
+      })
+    );
 
     renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
     openModal();
     clickSave();
     await waitFor(() => {
-      return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
+      return expect(currentBusiness().taxFilingData.state).toEqual("SUCCESS");
     });
     await screen.findByTestId("tax-success");
     expect(screen.getByText(Config.taxCalendar.snackbarSuccessHeader)).toBeInTheDocument();
   });
 
   it("closes the success alert when the close button is clicked", async () => {
-    mockApi.postTaxFilingsOnboarding.mockResolvedValue({
-      ...userDataWithPrefilledFields,
-      taxFilingData: generateTaxFilingData({
-        state: "SUCCESS",
-        registeredISO: getCurrentDateISOString(),
-      }),
-    });
+    mockApi.postTaxFilingsOnboarding.mockResolvedValue(
+      modifyUserData(userDataWithPrefilledFields, {
+        taxFilingData: generateTaxFilingData({
+          state: "SUCCESS",
+          registeredISO: getCurrentDateISOString(),
+        }),
+      })
+    );
 
     renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
     openModal();
     clickSave();
     await waitFor(() => {
-      return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
+      return expect(currentBusiness().taxFilingData.state).toEqual("SUCCESS");
     });
     await screen.findByTestId("tax-success");
     expect(screen.getByText(Config.taxCalendar.snackbarSuccessHeader)).toBeInTheDocument();
@@ -238,23 +260,26 @@ describe("<FilingsCalendarTaxAccess />", () => {
 
   describe("different taxFiling states and update behavior", () => {
     it("does not do taxFiling lookup on page load if not registered", async () => {
-      renderFilingsCalendarTaxAccess({
-        ...userDataWithPrefilledFields,
-        taxFilingData: generateTaxFilingData({
-          registeredISO: undefined,
-        }),
-      });
+      renderFilingsCalendarTaxAccess(
+        modifyUserData(userDataWithPrefilledFields, {
+          taxFilingData: generateTaxFilingData({
+            registeredISO: undefined,
+          }),
+        })
+      );
       expect(mockApi.postTaxFilingsLookup).not.toHaveBeenCalled();
     });
 
     it("does taxFiling lookup on page load if registered", async () => {
       mockApi.postTaxFilingsLookup.mockResolvedValue(userDataWithPrefilledFields);
-      renderFilingsCalendarTaxAccess({
-        ...userDataWithPrefilledFields,
-        taxFilingData: generateTaxFilingData({
-          registeredISO: getCurrentDateISOString(),
-        }),
-      });
+      renderFilingsCalendarTaxAccess(
+        modifyUserData(userDataWithPrefilledFields, {
+          taxFilingData: generateTaxFilingData({
+            registeredISO: getCurrentDateISOString(),
+          }),
+        })
+      );
+
       expect(mockApi.postTaxFilingsLookup).toHaveBeenCalled();
       await waitFor(() => {
         return expect(userDataUpdatedNTimes()).toEqual(1);
@@ -262,35 +287,36 @@ describe("<FilingsCalendarTaxAccess />", () => {
     });
 
     it("shows button component when state is FAILED and unregistered", async () => {
-      renderFilingsCalendarTaxAccess({
-        ...userDataWithPrefilledFields,
-        taxFilingData: generateTaxFilingData({
-          state: "FAILED",
-          registeredISO: undefined,
-          errorField: undefined,
-        }),
-      });
+      renderFilingsCalendarTaxAccess(
+        modifyUserData(userDataWithPrefilledFields, {
+          taxFilingData: generateTaxFilingData({
+            state: "FAILED",
+            registeredISO: undefined,
+            errorField: undefined,
+          }),
+        })
+      );
       expect(mockApi.postTaxFilingsLookup).not.toHaveBeenCalled();
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
       expect(screen.getByTestId("button-container")).toBeInTheDocument();
     });
 
     it("shows button component when state is undefined and unregistered", async () => {
-      renderFilingsCalendarTaxAccess({
-        ...userDataWithPrefilledFields,
-        taxFilingData: generateTaxFilingData({
-          state: undefined,
-          registeredISO: undefined,
-        }),
-      });
+      renderFilingsCalendarTaxAccess(
+        modifyUserData(userDataWithPrefilledFields, {
+          taxFilingData: generateTaxFilingData({
+            state: undefined,
+            registeredISO: undefined,
+          }),
+        })
+      );
       expect(mockApi.postTaxFilingsLookup).not.toHaveBeenCalled();
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
       expect(screen.getByTestId("button-container")).toBeInTheDocument();
     });
 
     it("hides pending and button components when state is SUCCESS", async () => {
-      mockApi.postTaxFilingsLookup.mockResolvedValue({
-        ...pendingStateUserData,
+      mockApiResponse(pendingStateUserData, {
         taxFilingData: generateTaxFilingData({
           registeredISO: getCurrentDateISOString(),
           state: "SUCCESS",
@@ -304,15 +330,14 @@ describe("<FilingsCalendarTaxAccess />", () => {
         return expect(userDataUpdatedNTimes()).toEqual(1);
       });
       await waitFor(() => {
-        return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
+        return expect(currentBusiness().taxFilingData.state).toEqual("SUCCESS");
       });
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
       expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
     });
 
     it("hides pending and button components when state is API_ERROR but registered", async () => {
-      mockApi.postTaxFilingsLookup.mockResolvedValue({
-        ...pendingStateUserData,
+      mockApiResponse(pendingStateUserData, {
         taxFilingData: generateTaxFilingData({
           registeredISO: getCurrentDateISOString(),
           state: "API_ERROR",
@@ -326,21 +351,19 @@ describe("<FilingsCalendarTaxAccess />", () => {
         return expect(userDataUpdatedNTimes()).toEqual(1);
       });
       await waitFor(() => {
-        return expect(currentUserData().taxFilingData.state).toEqual("API_ERROR");
+        return expect(currentBusiness().taxFilingData.state).toEqual("API_ERROR");
       });
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
       expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
     });
 
     it("shows registration followup component when state is SUCCESS but it's before the Saturday after registration", async () => {
-      mockApi.postTaxFilingsLookup.mockResolvedValue({
-        ...pendingStateUserData,
+      mockApiResponse(pendingStateUserData, {
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
           registeredISO: getCurrentDateISOString(),
         }),
       });
-
       renderFilingsCalendarTaxAccess(pendingStateUserData);
 
       await waitFor(() => {
@@ -361,7 +384,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
         return expect(userDataUpdatedNTimes()).toEqual(1);
       });
       await waitFor(() => {
-        return expect(currentUserData().taxFilingData.state).toEqual("PENDING");
+        return expect(currentBusiness().taxFilingData.state).toEqual("PENDING");
       });
       expect(screen.getByTestId("pending-container")).toBeInTheDocument();
       expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();

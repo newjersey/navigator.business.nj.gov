@@ -6,7 +6,7 @@ import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import {
-  currentUserData,
+  currentBusiness,
   getLastCalledWithConfig,
   setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
@@ -22,6 +22,7 @@ import {
   generateUser,
   generateUserData,
 } from "@businessnjgovnavigator/shared/";
+import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
@@ -53,7 +54,7 @@ describe("onboarding - shared", () => {
 
   it("routes to the second onboarding page when they have answered the first question and we route them to page 2", async () => {
     useMockRouter({ isReady: true, query: { page: "2" } });
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         businessPersona: "STARTING",
         legalStructureId: "c-corporation",
@@ -61,7 +62,7 @@ describe("onboarding - shared", () => {
       onboardingFormProgress: "UNSTARTED",
     });
 
-    renderPage({ userData });
+    renderPage({ userData: generateUserDataForBusiness(business) });
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
   });
 
@@ -94,9 +95,9 @@ describe("onboarding - shared", () => {
     page.clickNext();
 
     await waitFor(() => {
-      expect(currentUserData().profileData.businessPersona).toEqual("STARTING");
+      expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
     });
-    expect(currentUserData().profileData.industryId).toEqual(industry);
+    expect(currentBusiness().profileData.industryId).toEqual(industry);
   });
 
   it("routes to the second page when industry with essential question is set by using industry query string", async () => {
@@ -107,9 +108,9 @@ describe("onboarding - shared", () => {
     page.chooseEssentialQuestionRadio(industry, 0);
     await page.visitStep(3);
     await waitFor(() => {
-      expect(currentUserData().profileData.businessPersona).toEqual("STARTING");
+      expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
     });
-    expect(currentUserData().profileData.industryId).toEqual(industry);
+    expect(currentBusiness().profileData.industryId).toEqual(industry);
   });
 
   it("routes to the first page when using industry query string is invalid", async () => {
@@ -119,8 +120,8 @@ describe("onboarding - shared", () => {
   });
 
   it("updates locally for each step", async () => {
-    const userData = generateUserData({ profileData: generateProfileData({ businessPersona: "STARTING" }) });
-    const { page } = renderPage({ userData });
+    const business = generateBusiness({ profileData: generateProfileData({ businessPersona: "STARTING" }) });
+    const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
     mockApi.postNewsletter.mockImplementation((request) => {
       return Promise.resolve(request);
     });
@@ -159,11 +160,11 @@ describe("onboarding - shared", () => {
   });
 
   it("resets non-shared information when switching from starting flow to owning flow", async () => {
-    const initialUserData = generateUserData({
+    const business = generateBusiness({
       onboardingFormProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
-    const { page } = renderPage({ userData: initialUserData });
+    const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
 
     page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
@@ -180,8 +181,8 @@ describe("onboarding - shared", () => {
     ).toBeInTheDocument();
     page.chooseRadio("business-persona-owning");
     await page.visitStep(2);
-    expect(currentUserData().profileData).toEqual({
-      ...initialUserData.profileData,
+    expect(currentBusiness().profileData).toEqual({
+      ...business.profileData,
       businessPersona: "OWNING",
       industryId: "generic",
       homeBasedBusiness: undefined,
@@ -198,11 +199,11 @@ describe("onboarding - shared", () => {
   });
 
   it("resets non-shared information when switching from owning flow to starting flow with non-filing legal structure", async () => {
-    const initialUserData = generateUserData({
+    const business = generateBusiness({
       onboardingFormProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
-    const { page } = renderPage({ userData: initialUserData });
+    const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
 
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Sector", "clean-energy");
@@ -212,8 +213,8 @@ describe("onboarding - shared", () => {
 
     page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
-    expect(currentUserData().profileData).toEqual({
-      ...initialUserData.profileData,
+    expect(currentBusiness().profileData).toEqual({
+      ...business.profileData,
       businessPersona: "STARTING",
       industryId: undefined,
       homeBasedBusiness: undefined,
@@ -229,11 +230,11 @@ describe("onboarding - shared", () => {
   });
 
   it("resets non-shared information when switching from owning flow to starting flow", async () => {
-    const initialUserData = generateUserData({
+    const business = generateBusiness({
       onboardingFormProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
-    const { page } = renderPage({ userData: initialUserData });
+    const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
 
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Sector", "clean-energy");
@@ -242,8 +243,8 @@ describe("onboarding - shared", () => {
     page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
 
-    expect(currentUserData().profileData).toEqual({
-      ...initialUserData.profileData,
+    expect(currentBusiness().profileData).toEqual({
+      ...business.profileData,
       businessPersona: "STARTING",
       industryId: undefined,
       homeBasedBusiness: undefined,
@@ -258,11 +259,11 @@ describe("onboarding - shared", () => {
   });
 
   it("does not reset information when re-visiting page 1 but not switching the answer", async () => {
-    const initialUserData = generateUserData({
+    const business = generateBusiness({
       onboardingFormProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
-    const { page } = renderPage({ userData: initialUserData });
+    const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
 
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Sector", "clean-energy");
@@ -271,8 +272,8 @@ describe("onboarding - shared", () => {
     page.clickBack();
 
     await page.visitStep(2);
-    expect(currentUserData().profileData).toEqual({
-      ...initialUserData.profileData,
+    expect(currentBusiness().profileData).toEqual({
+      ...business.profileData,
       businessPersona: "OWNING",
       legalStructureId: undefined,
       industryId: "generic",
@@ -292,11 +293,16 @@ describe("onboarding - shared", () => {
     const { page } = renderPage({
       userData: generateUserData({
         user: generateUser({ email: `some-emailexample.com` }),
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          legalStructureId: "c-corporation",
-        }),
-        onboardingFormProgress: "UNSTARTED",
+        currentBusinessId: "12345",
+        businesses: {
+          "12345": generateBusiness({
+            profileData: generateProfileData({
+              businessPersona: "STARTING",
+              legalStructureId: "c-corporation",
+            }),
+            onboardingFormProgress: "UNSTARTED",
+          }),
+        },
       }),
     });
     page.clickNext();
@@ -310,11 +316,16 @@ describe("onboarding - shared", () => {
     const { page } = renderPage({
       userData: generateUserData({
         user: generateUser({ email: `some-email@examplecom` }),
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          legalStructureId: "c-corporation",
-        }),
-        onboardingFormProgress: "UNSTARTED",
+        currentBusinessId: "12345",
+        businesses: {
+          "12345": generateBusiness({
+            profileData: generateProfileData({
+              businessPersona: "STARTING",
+              legalStructureId: "c-corporation",
+            }),
+            onboardingFormProgress: "UNSTARTED",
+          }),
+        },
       }),
     });
     page.clickNext();
@@ -332,7 +343,7 @@ describe("onboarding - shared", () => {
       page.selectByText("Industry", "All Other Businesses");
       await page.visitStep(3);
 
-      expect(currentUserData().profileData.businessPersona).toEqual("STARTING");
+      expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
     });
 
     it("routes user to step 2 when query parameter exists and value is out-of-state", async () => {
@@ -345,7 +356,7 @@ describe("onboarding - shared", () => {
       page.checkByLabelText(transactionsInNJ);
 
       await page.visitStep(3);
-      expect(currentUserData().profileData.businessPersona).toEqual("FOREIGN");
+      expect(currentBusiness().profileData.businessPersona).toEqual("FOREIGN");
     });
 
     it("routes user to step 1 with up-and-running business selected when up-and-running query parameter exists", async () => {
@@ -355,7 +366,7 @@ describe("onboarding - shared", () => {
       expect(screen.getByTestId("step-1")).toBeInTheDocument();
       page.selectByValue("Sector", "clean-energy");
       await page.visitStep(2);
-      expect(currentUserData().profileData.businessPersona).toEqual("OWNING");
+      expect(currentBusiness().profileData.businessPersona).toEqual("OWNING");
     });
   });
 });

@@ -3,7 +3,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { templateEval } from "@/lib/utils/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
-import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
+import { currentBusiness, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import {
   mockEmptyApiSignups,
   renderPage,
@@ -16,7 +16,12 @@ import {
   generateTaxFilingData,
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
-import { generatePreferences, generateUser, generateUserData } from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  generatePreferences,
+  generateUser,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, screen, waitFor, within } from "@testing-library/react";
 
@@ -35,14 +40,16 @@ const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();
 
 const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
-  return generateUserData({
-    profileData: generateProfileData({
-      businessPersona: "OWNING",
-      operatingPhase: "GUEST_MODE_OWNING",
-      ...overrides,
-    }),
-    onboardingFormProgress: "UNSTARTED",
-  });
+  return generateUserDataForBusiness(
+    generateBusiness({
+      profileData: generateProfileData({
+        businessPersona: "OWNING",
+        operatingPhase: "GUEST_MODE_OWNING",
+        ...overrides,
+      }),
+      onboardingFormProgress: "UNSTARTED",
+    })
+  );
 };
 
 describe("onboarding - owning a business", () => {
@@ -148,17 +155,18 @@ describe("onboarding - owning a business", () => {
 
   it("updates the user data after each form page", async () => {
     const initialUserData = createEmptyUserData(generateUser({}));
+    const initialBusiness = initialUserData.businesses[initialUserData.currentBusinessId];
     const { page } = renderPage({ userData: initialUserData });
 
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Sector", "clean-energy");
     await page.visitStep(2);
 
-    expect(currentUserData()).toEqual({
-      ...initialUserData,
+    expect(currentBusiness()).toEqual({
+      ...initialBusiness,
       onboardingFormProgress: "UNSTARTED",
       profileData: {
-        ...initialUserData.profileData,
+        ...initialBusiness.profileData,
         businessPersona: "OWNING",
         homeBasedBusiness: undefined,
         legalStructureId: undefined,
@@ -167,31 +175,41 @@ describe("onboarding - owning a business", () => {
         operatingPhase: "GUEST_MODE_OWNING",
       },
       preferences: {
-        ...initialUserData.preferences,
+        ...initialBusiness.preferences,
         visibleSidebarCards: ["welcome"],
       },
     });
   });
 
   it("prefills form from existing user data", async () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       profileData: generateProfileData({
         businessPersona: "OWNING",
         sectorId: "clean-energy",
       }),
     });
 
-    const { page } = renderPage({ userData });
+    const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
     expect(page.getRadioButton("Business Status - Owning")).toBeChecked();
     expect(page.getSectorIDValue()).toEqual("Clean Energy");
   });
 
   it("updates tax filing data on save", async () => {
     const taxData = generateTaxFilingData({});
-    mockApi.postGetAnnualFilings.mockImplementation((userData) => {
-      return Promise.resolve({ ...userData, taxFilingData: { ...taxData, filings: [] } });
+
+    mockApi.postGetAnnualFilings.mockImplementation((userData): Promise<UserData> => {
+      return Promise.resolve({
+        ...userData,
+        businesses: {
+          [userData.currentBusinessId]: {
+            ...userData.businesses[userData.currentBusinessId],
+            taxFilingData: { ...taxData, filings: [] },
+          },
+        },
+      });
     });
-    const initialUserData = generateUserData({
+
+    const initialBusiness = generateBusiness({
       taxFilingData: taxData,
       profileData: generateProfileData({
         businessPersona: "OWNING",
@@ -199,21 +217,22 @@ describe("onboarding - owning a business", () => {
       }),
       onboardingFormProgress: "COMPLETED",
     });
-    const { page } = renderPage({ userData: initialUserData });
+
+    const { page } = renderPage({ userData: generateUserDataForBusiness(initialBusiness) });
     expect(page.getRadioButton("Business Status - Owning")).toBeChecked();
     await page.visitStep(2);
     page.clickNext();
 
     await waitFor(() => {
-      expect(currentUserData()).toEqual({
-        ...initialUserData,
+      expect(currentBusiness()).toEqual({
+        ...initialBusiness,
         taxFilingData: { ...taxData, filings: [] },
       });
     });
   });
 
   it("removes welcome and adds welcome-up-and-running to visibleSidebarCards preferences on save", async () => {
-    const initialUserData = generateUserData({
+    const initialBusiness = generateBusiness({
       profileData: generateProfileData({
         businessPersona: "OWNING",
         operatingPhase: "GUEST_MODE_OWNING",
@@ -224,16 +243,17 @@ describe("onboarding - owning a business", () => {
       }),
       onboardingFormProgress: "COMPLETED",
     });
-    const { page } = renderPage({ userData: initialUserData });
+
+    const { page } = renderPage({ userData: generateUserDataForBusiness(initialBusiness) });
     expect(page.getRadioButton("Business Status - Owning")).toBeChecked();
     await page.visitStep(2);
     page.clickNext();
 
     await waitFor(() => {
-      expect(currentUserData()).toEqual({
-        ...initialUserData,
+      expect(currentBusiness()).toEqual({
+        ...initialBusiness,
         preferences: {
-          ...initialUserData.preferences,
+          ...initialBusiness.preferences,
           visibleSidebarCards: ["welcome-up-and-running"],
         },
       });

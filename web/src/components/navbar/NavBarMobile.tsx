@@ -23,7 +23,7 @@ interface Props {
 export const NavBarMobile = (props: Props): ReactElement => {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const { state } = useContext(AuthContext);
-  const { userData } = useUserData();
+  const { business } = useUserData();
   const router = useRouter();
 
   const open = (): void => {
@@ -77,7 +77,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
         <div className={`usa-logo ${props.scrolled ? "bg-white" : ""}`}>
           {props.showSidebar ? (
             <div className="text-bold font-body-sm truncate-long-business-names_NavBarMobile">
-              {getNavBarBusinessTitle(userData)}
+              {getNavBarBusinessTitle(business)}
             </div>
           ) : (
             <NavigatorLogo />

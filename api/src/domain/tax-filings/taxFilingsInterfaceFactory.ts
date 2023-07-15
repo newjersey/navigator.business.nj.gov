@@ -1,3 +1,5 @@
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+import { modifyCurrentBusiness } from "@shared/test";
 import { UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { TaxFilingClient, TaxFilingInterface } from "../types";
@@ -15,6 +17,7 @@ const isThisYear = (dueDate: string): boolean => {
 
 export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient): TaxFilingInterface => {
   const lookup = async (request: taxFilingInterfaceRequest): Promise<UserData> => {
+    const currentBusiness = getCurrentBusiness(request.userData);
     const { state, filings, taxCity, naicsCode } = await apiTaxFilingClient.lookup({
       taxId: request.taxId,
       businessName: request.businessName,
@@ -22,7 +25,7 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
 
     const shouldSwitchToCalendarGridView = (): boolean => {
       const maxFilingsInCurrentYearListView = 5;
-      const prevFilingsThisYear = request.userData.taxFilingData.filings.filter((it) =>
+      const prevFilingsThisYear = currentBusiness.taxFilingData.filings.filter((it) =>
         isThisYear(it.dueDate)
       );
       const prevFilingsCountBelowMax = prevFilingsThisYear.length <= maxFilingsInCurrentYearListView;
@@ -33,11 +36,11 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
     };
 
     const now = new Date(Date.now()).toISOString();
-    let profileDataToReturn = request.userData.profileData;
+    let profileDataToReturn = currentBusiness.profileData;
 
     if (naicsCode) {
       profileDataToReturn = {
-        ...request.userData.profileData,
+        ...currentBusiness.profileData,
         naicsCode: naicsCode,
       };
     }
@@ -56,25 +59,24 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
         };
       }
     }
-    return {
-      ...request.userData,
+
+    return modifyCurrentBusiness(request.userData, (business) => ({
+      ...business,
       profileData: profileDataToReturn,
       preferences: {
-        ...request.userData.preferences,
-        isCalendarFullView: shouldSwitchToCalendarGridView()
-          ? true
-          : request.userData.preferences.isCalendarFullView,
+        ...business.preferences,
+        isCalendarFullView: shouldSwitchToCalendarGridView() ? true : business.preferences.isCalendarFullView,
       },
       taxFilingData: {
-        ...request.userData.taxFilingData,
+        ...business.taxFilingData,
         businessName: request.businessName,
         lastUpdatedISO: now,
-        registeredISO: state === "SUCCESS" ? request.userData.taxFilingData.registeredISO ?? now : undefined,
-        errorField: state === "SUCCESS" ? undefined : request.userData.taxFilingData.errorField,
+        registeredISO: state === "SUCCESS" ? business.taxFilingData.registeredISO ?? now : undefined,
+        errorField: state === "SUCCESS" ? undefined : business.taxFilingData.errorField,
         state: state,
-        filings: state === "SUCCESS" ? filings : request.userData.taxFilingData.filings,
+        filings: state === "SUCCESS" ? filings : business.taxFilingData.filings,
       },
-    };
+    }));
   };
 
   const onboarding = async (request: taxFilingInterfaceRequest): Promise<UserData> => {
@@ -90,16 +92,16 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
       }
       case "API_ERROR":
       case "FAILED": {
-        return {
-          ...request.userData,
+        return modifyCurrentBusiness(request.userData, (business) => ({
+          ...business,
           taxFilingData: {
-            ...request.userData.taxFilingData,
+            ...business.taxFilingData,
             registeredISO: undefined,
             state: response.state,
             errorField: response.errorField,
             businessName: request.businessName,
           },
-        };
+        }));
       }
     }
   };

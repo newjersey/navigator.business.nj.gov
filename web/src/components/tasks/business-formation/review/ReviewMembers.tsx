@@ -1,18 +1,16 @@
 import { ReviewLineItem } from "@/components/tasks/business-formation/review/section/ReviewLineItem";
 import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { corpLegalStructures, FormationLegalType } from "@businessnjgovnavigator/shared/";
-import { ReactElement } from "react";
+import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
+import { ReactElement, useContext } from "react";
 
 export const ReviewMembers = (): ReactElement => {
   const { Config } = useConfig();
-  const { userData } = useUserData();
+  const { state } = useContext(BusinessFormationContext);
 
-  const isCorp = userData?.profileData.legalStructureId
-    ? corpLegalStructures.includes(userData?.profileData.legalStructureId as FormationLegalType)
-    : false;
-  const hasMembers = (userData?.formationData.formationFormData.members?.length ?? 0) > 0;
+  const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
+  const hasMembers = (state.formationFormData.members?.length ?? 0) > 0;
 
   const getConfig = (): { header: string; label: string } => {
     const field = isCorp ? "directors" : "members";
@@ -25,7 +23,7 @@ export const ReviewMembers = (): ReactElement => {
   const displayMembers = (): ReactElement => {
     return (
       <>
-        {userData?.formationData.formationFormData.members?.map((member, index) => {
+        {state.formationFormData.members?.map((member, index) => {
           return (
             <div key={`${member.name}-${index}`}>
               <ReviewLineItem

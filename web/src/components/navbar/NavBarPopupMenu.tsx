@@ -30,7 +30,7 @@ export interface Props {
 }
 
 export const NavBarPopupMenu = (props: Props): ReactElement => {
-  const { userData, updateQueue } = useUserData();
+  const { business, userData, updateQueue } = useUserData();
   const { dispatch } = useContext(AuthContext);
   const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
 
@@ -42,7 +42,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
       : getUserNameOrEmail(userData);
   const isProfileSelected = router.route === ROUTES.profile;
 
-  const navBarBusinessTitle = getNavBarBusinessTitle(userData);
+  const navBarBusinessTitle = getNavBarBusinessTitle(business);
 
   function handleListKeyDown(event: React.KeyboardEvent): void {
     if (event.key === "Tab") {

@@ -2,6 +2,8 @@ import { generateUser, generateUserData } from "@shared/test";
 import { AddToUserTesting, UserTestingClient } from "../types";
 import { addToUserTestingFactory } from "./addToUserTestingFactory";
 
+import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+
 describe("addToUserTesting", () => {
   let stubUserTestingClient: jest.Mocked<UserTestingClient>;
   let addToUserTesting: AddToUserTesting;
@@ -19,7 +21,10 @@ describe("addToUserTesting", () => {
     const userData = generateUserData({ user: generateUser({ externalStatus: {} }) });
     const response = await addToUserTesting(userData);
 
-    expect(stubUserTestingClient.add).toHaveBeenCalledWith(userData.user, userData.profileData);
+    expect(stubUserTestingClient.add).toHaveBeenCalledWith(
+      userData.user,
+      getCurrentBusiness(userData).profileData
+    );
     expect(response).toEqual({
       ...userData,
       user: {

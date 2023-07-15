@@ -3,7 +3,7 @@ import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { generateMunicipality, generateProfileData, generateUserData } from "@businessnjgovnavigator/shared";
+import { generateBusiness, generateMunicipality, generateProfileData } from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 
 const DeferredLocationPreview = (props: PreviewProps): ReactElement => {
@@ -17,7 +17,7 @@ const DeferredLocationPreview = (props: PreviewProps): ReactElement => {
         <DeferredLocationQuestion
           innerContent=""
           CMS_ONLY_showSuccessBanner={true}
-          CMS_ONLY_fakeUserData={generateUserData({
+          CMS_ONLY_fakeBusiness={generateBusiness({
             profileData: generateProfileData({
               municipality: generateMunicipality({ displayName: "Newark" }),
             }),

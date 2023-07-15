@@ -23,10 +23,10 @@ interface Props {
 export const FundingElement = (props: { funding: Funding }): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
 
-  const { userData } = useUserData();
+  const { business } = useUserData();
 
   const addNaicsCodeData = (contentMd: string): string => {
-    const naicsCode = userData?.profileData.naicsCode || "";
+    const naicsCode = business?.profileData.naicsCode || "";
     const naicsTemplateValue = getNaicsDisplayMd(naicsCode);
     return templateEval(contentMd, { naicsCode: naicsTemplateValue });
   };

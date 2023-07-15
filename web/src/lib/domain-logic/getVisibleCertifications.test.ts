@@ -1,25 +1,25 @@
 import { generateCertification } from "@/test/factories";
-import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/test";
+import { generateBusiness, generatePreferences } from "@businessnjgovnavigator/shared/test";
 import { getVisibleCertifications } from "./getVisibleCertifications";
 
 describe("getVisibleCertifications", () => {
   it("returns an array of all certifications when there is no matching id in hiddenCertificationIds", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       preferences: generatePreferences({ hiddenCertificationIds: ["three"] }),
     });
     const certifications = [generateCertification({ id: "one" }), generateCertification({ id: "two" })];
 
-    expect(getVisibleCertifications(certifications, userData)).toEqual(certifications);
+    expect(getVisibleCertifications(certifications, business)).toEqual(certifications);
   });
 
   it("returns an array of filtered certifications when there is a matching id in hiddenCertificationIds", () => {
-    const userData = generateUserData({
+    const business = generateBusiness({
       preferences: generatePreferences({ hiddenCertificationIds: ["two"] }),
     });
 
     const cert1 = generateCertification({ id: "one" });
     const cert2 = generateCertification({ id: "two" });
 
-    expect(getVisibleCertifications([cert1, cert2], userData)).toEqual([cert1]);
+    expect(getVisibleCertifications([cert1, cert2], business)).toEqual([cert1]);
   });
 });

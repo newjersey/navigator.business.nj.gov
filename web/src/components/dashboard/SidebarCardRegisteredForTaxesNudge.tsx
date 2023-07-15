@@ -19,9 +19,7 @@ export const SidebarCardRegisteredForTaxesNudge = (props: Props): ReactElement =
   const router = useRouter();
 
   const updateTaxInformationAndTaskProgress = async (): Promise<void> => {
-    if (!updateQueue) {
-      return;
-    }
+    if (!updateQueue) return;
     queueUpdateTaskProgress(taxTaskId, "COMPLETED");
     await updateQueue.update();
     routeShallowWithQuery(router, QUERIES.fromTaxRegistrationCard, "true");

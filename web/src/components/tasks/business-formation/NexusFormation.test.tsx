@@ -1,3 +1,5 @@
+/* eslint-disable  @typescript-eslint/no-non-null-assertion */
+
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { LookupDbaStepIndexByName } from "@/components/tasks/business-formation/DbaFormationStepsConfiguration";
 import { LookupNexusStepIndexByName } from "@/components/tasks/business-formation/NexusFormationStepsConfiguration";
@@ -15,14 +17,14 @@ import {
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import { fillText, searchAndGetValue } from "@/test/helpers/helpersSearchBusinessName";
-import { currentUserData } from "@/test/mock/withStatefulUserData";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
   defaultDateFormat,
+  generateBusiness,
   generateFormationFormData,
   generateFormationSubmitResponse,
-  generateUserData,
   getCurrentDate,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
@@ -88,7 +90,7 @@ const clickNext = (): void => {
 };
 
 describe("<NexusFormationFlow />", () => {
-  let initialUserData: UserData;
+  let initialBusiness: Business;
   let displayContent: TasksDisplayContent;
 
   beforeEach(() => {
@@ -107,7 +109,7 @@ describe("<NexusFormationFlow />", () => {
     displayContent = {
       formationDbaContent: generateFormationDbaContent({}),
     };
-    initialUserData = generateUserData({ profileData, formationData });
+    initialBusiness = generateBusiness({ profileData, formationData });
   });
 
   it("posts to the api with userData and foreign good standing file", async () => {
@@ -128,9 +130,9 @@ describe("<NexusFormationFlow />", () => {
       needsNexusDbaName: false,
     });
     const formationData = generateEmptyFormationData();
-    initialUserData = generateUserData({ profileData, formationData });
+    initialBusiness = generateBusiness({ profileData, formationData });
 
-    const foreignUserData = generateUserData({
+    const foreignBusiness = generateBusiness({
       profileData,
       formationData: {
         ...generateEmptyFormationData(),
@@ -146,7 +148,7 @@ describe("<NexusFormationFlow />", () => {
       },
     });
 
-    const page = preparePage(foreignUserData, displayContent);
+    const page = preparePage({ business: foreignBusiness, displayContent });
 
     await page.searchBusinessName({ status: "AVAILABLE", similarNames: [], lastUpdatedTimeStamp: "" });
     clickNext();
@@ -159,36 +161,40 @@ describe("<NexusFormationFlow />", () => {
     await page.clickSubmit();
 
     const base64String = Buffer.from("my cool file contents", "utf8").toString("base64");
-    const updatedForeignUserData = {
-      ...foreignUserData,
+    const updatedForeignBusiness = {
+      ...foreignBusiness,
       formationData: {
-        ...foreignUserData.formationData,
+        ...foreignBusiness.formationData,
         lastVisitedPageIndex: 4,
       },
     };
+
     await waitFor(() => {
-      expect(mockApi.postBusinessFormation).toHaveBeenCalledWith(
-        updatedForeignUserData,
-        "http://localhost/",
-        {
-          fileType: "PNG",
-          sizeInBytes: file.size,
-          base64Contents: base64String,
-          filename: "cool.png",
-        }
+      const userDataCalledWith = mockApi.postBusinessFormation.mock.lastCall![0];
+      expect(userDataCalledWith.businesses[userDataCalledWith.currentBusinessId]).toEqual(
+        updatedForeignBusiness
       );
+    });
+    const returnUrlCalledWith = mockApi.postBusinessFormation.mock.lastCall![1];
+    const fileCalledWith = mockApi.postBusinessFormation.mock.lastCall![2];
+    expect(returnUrlCalledWith).toEqual("http://localhost/");
+    expect(fileCalledWith).toEqual({
+      fileType: "PNG",
+      sizeInBytes: file.size,
+      base64Contents: base64String,
+      filename: "cool.png",
     });
   });
 
   describe("name search step", () => {
     it("does not display the stepper on name search", async () => {
-      preparePage(initialUserData, displayContent);
+      preparePage({ business: initialBusiness, displayContent });
       expect(screen.getByTestId("nexus-name-step")).toBeInTheDocument();
       expect(screen.queryByTestId("stepper-0")).not.toBeInTheDocument();
     });
 
     it("does not display buttons on name search initially", async () => {
-      preparePage(initialUserData, displayContent);
+      preparePage({ business: initialBusiness, displayContent });
       expect(screen.queryByText(Config.nexusNameSearch.nexusNextButton)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.formation.general.previousButtonText)).not.toBeInTheDocument();
     });
@@ -198,7 +204,7 @@ describe("<NexusFormationFlow />", () => {
     let page: FormationPageHelpers;
 
     beforeEach(async () => {
-      page = preparePage(initialUserData, displayContent);
+      page = preparePage({ business: initialBusiness, displayContent });
       fillText("My Cool Business");
       await searchAndGetValue({ status: "UNAVAILABLE" });
       fillText("My Cool DBA Name", { dba: true });
@@ -306,14 +312,14 @@ describe("<NexusFormationFlow />", () => {
     describe("when feature flag is set", () => {
       describe("business name step", () => {
         beforeEach(async () => {
-          page = preparePage(initialUserData, displayContent);
+          page = preparePage({ business: initialBusiness, displayContent });
         });
 
         it("saves name to formation data", async () => {
           fillText("Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
           clickNext();
-          expect(currentUserData().formationData.formationFormData.businessName).toEqual("Pizza Joint");
+          expect(currentBusiness().formationData.formationFormData.businessName).toEqual("Pizza Joint");
           await page.stepperClickToNexusBusinessNameStep();
           expect((screen.getByLabelText("Search business name") as HTMLInputElement).value).toEqual(
             "Pizza Joint"
@@ -344,7 +350,7 @@ describe("<NexusFormationFlow />", () => {
           fillText("Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
           await screen.findByTestId("available-text");
-          expect(currentUserData().profileData.businessName).toEqual("Pizza Joint");
+          expect(currentBusiness().profileData.businessName).toEqual("Pizza Joint");
         });
 
         it("marks step one as complete if business name is available", async () => {
@@ -361,14 +367,12 @@ describe("<NexusFormationFlow />", () => {
 
         beforeEach(() => {
           setRegistrationModalIsVisible = jest.fn();
-          page = preparePage(
-            initialUserData,
+          page = preparePage({
+            business: initialBusiness,
             displayContent,
-            undefined,
-            undefined,
-            IsAuthenticated.FALSE,
-            setRegistrationModalIsVisible
-          );
+            isAuthenticated: IsAuthenticated.FALSE,
+            setRegistrationModalIsVisible,
+          });
         });
 
         it("prepends register to the next button on first step", async () => {
@@ -390,14 +394,17 @@ describe("<NexusFormationFlow />", () => {
     describe("when feature flag is not set", () => {
       beforeEach(async () => {
         process.env.FEATURE_BUSINESS_FLC = "false";
-        page = preparePage(initialUserData, {
-          ...displayContent,
-          formationDbaContent: {
-            ...displayContent.formationDbaContent,
-            Formation: {
-              ...displayContent.formationDbaContent.Formation,
-              contentMd: "roflcopter",
-              callToActionText: "buttonText",
+        page = preparePage({
+          business: initialBusiness,
+          displayContent: {
+            ...displayContent,
+            formationDbaContent: {
+              ...displayContent.formationDbaContent,
+              Formation: {
+                ...displayContent.formationDbaContent.Formation,
+                contentMd: "roflcopter",
+                callToActionText: "buttonText",
+              },
             },
           },
         });

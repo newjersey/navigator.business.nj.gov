@@ -2,11 +2,13 @@ import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import {
-  currentUserData,
+  currentBusiness,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { generateUserData, UserData } from "@businessnjgovnavigator/shared/";
+import { generateUserData } from "@businessnjgovnavigator/shared/";
+import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
+import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -23,16 +25,20 @@ describe("<TaskCheckbox />", () => {
 
   const renderTaskCheckbox = ({
     checklistItemId,
-    initialUserData,
+    initialBusiness,
     isAuthenticated,
   }: {
     checklistItemId: string;
-    initialUserData?: UserData;
+    initialBusiness?: Business;
     isAuthenticated?: IsAuthenticated;
   }): void => {
     render(
       withAuthAlert(
-        <WithStatefulUserData initialUserData={initialUserData ?? generateUserData({})}>
+        <WithStatefulUserData
+          initialUserData={
+            initialBusiness ? generateUserDataForBusiness(initialBusiness) : generateUserData({})
+          }
+        >
           <TaskCheckbox checklistItemId={checklistItemId} />
         </WithStatefulUserData>,
         isAuthenticated ?? IsAuthenticated.TRUE,
@@ -44,7 +50,7 @@ describe("<TaskCheckbox />", () => {
   it("sets checked property from userData for task", () => {
     renderTaskCheckbox({
       checklistItemId: "some-id",
-      initialUserData: generateUserData({
+      initialBusiness: generateBusiness({
         taskItemChecklist: {
           "some-id": true,
           "some-other-id": false,
@@ -57,7 +63,7 @@ describe("<TaskCheckbox />", () => {
   it("updates userData when item is checked off", () => {
     renderTaskCheckbox({
       checklistItemId: "some-id",
-      initialUserData: generateUserData({
+      initialBusiness: generateBusiness({
         taskItemChecklist: {
           "some-id": false,
         },
@@ -65,7 +71,7 @@ describe("<TaskCheckbox />", () => {
     });
     fireEvent.click(screen.getByRole("checkbox"));
     expect(screen.getByRole("checkbox") as HTMLInputElement).toBeChecked();
-    expect(currentUserData().taskItemChecklist["some-id"]).toBe(true);
+    expect(currentBusiness().taskItemChecklist["some-id"]).toBe(true);
   });
 
   it("opens registration modal when guest mode user tries to change state", () => {

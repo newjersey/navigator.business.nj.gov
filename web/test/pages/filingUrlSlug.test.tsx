@@ -2,7 +2,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { Filing, taxFilingMethod } from "@/lib/types/types";
 import FilingPage from "@/pages/filings/[filingUrlSlug]";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
   defaultDateFormat,
   generateProfileData,
@@ -56,7 +56,7 @@ describe("filing page", () => {
   it("shows the basic filing details and correct due date", () => {
     const dueDate = dayjs(new Date(getCurrentDate().year(), 4, 30));
 
-    useMockUserData({
+    useMockBusiness({
       profileData: generateProfileData({ entityId: "1234567890" }),
       taxFilingData: generateTaxFilingData({
         filings: [
@@ -104,7 +104,7 @@ describe("filing page", () => {
   it("shows correct date for a filing id with spaces in it", () => {
     const dueDate = dayjs(new Date(getCurrentDate().year(), 4, 30));
 
-    useMockUserData({
+    useMockBusiness({
       profileData: generateProfileData({ entityId: "1234567890" }),
       taxFilingData: generateTaxFilingData({
         filings: [
@@ -124,7 +124,7 @@ describe("filing page", () => {
   });
 
   it("shows the full filing details and correct due date", () => {
-    useMockUserData({
+    useMockBusiness({
       profileData: generateProfileData({ entityId: "1234567890" }),
       taxFilingData: generateTaxFilingData({
         filings: [
@@ -162,7 +162,7 @@ describe("filing page", () => {
   });
 
   it("hides late filing content when not New Jersey Division of Taxation", () => {
-    useMockUserData({
+    useMockBusiness({
       profileData: generateProfileData({ entityId: "1234567890" }),
       taxFilingData: generateTaxFilingData({
         filings: [
@@ -184,7 +184,7 @@ describe("filing page", () => {
   it("returns the most recent tax deadline date", () => {
     const closestDate = getCurrentDate().add(1, "day");
 
-    useMockUserData({
+    useMockBusiness({
       profileData: generateProfileData({ entityId: "1234567890" }),
       taxFilingData: generateTaxFilingData({
         filings: [
@@ -236,7 +236,7 @@ describe("filing page", () => {
   });
 
   it("contains a tooltip with a note regarding filing date in the annual report", async () => {
-    useMockUserData({
+    useMockBusiness({
       taxFilingData: generateTaxFilingData({
         filings: [generateTaxFilingCalendarEvent({ identifier: "annual-report" })],
       }),

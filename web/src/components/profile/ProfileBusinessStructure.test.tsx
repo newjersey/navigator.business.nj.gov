@@ -4,10 +4,11 @@ import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
+  generateBusiness,
   generateProfileData,
-  generateUserData,
+  generateUserDataForBusiness,
   LookupLegalStructureById,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
@@ -16,13 +17,11 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 const Config = getMergedConfig();
 
-const renderComponent = (userData?: UserData): void => {
-  const data = userData || generateUserData({});
-
+const renderComponent = (business: Business): void => {
   render(
     <ThemeProvider theme={createTheme()}>
-      <WithStatefulUserData initialUserData={data}>
-        <WithStatefulProfileData initialData={data.profileData}>
+      <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
+        <WithStatefulProfileData initialData={business.profileData}>
           <ProfileBusinessStructure />
         </WithStatefulProfileData>
       </WithStatefulUserData>
@@ -42,7 +41,7 @@ describe("<ProfileBusinessStructure />", () => {
   it(`add text is displayed with href that routes to business structure URL`, () => {
     useMockRoadmapTask({ id: "business-structure", urlSlug: "some-business-structure-url" });
     renderComponent(
-      generateUserData({
+      generateBusiness({
         profileData: generateProfileData({ legalStructureId: undefined }),
       })
     );
@@ -56,7 +55,7 @@ describe("<ProfileBusinessStructure />", () => {
   it(`edit text is displayed with href that routes to business structure URL`, () => {
     useMockRoadmapTask({ id: "business-structure", urlSlug: "some-business-structure-url" });
     renderComponent(
-      generateUserData({
+      generateBusiness({
         profileData: generateProfileData({ legalStructureId: "c-corporation" }),
       })
     );
@@ -68,7 +67,7 @@ describe("<ProfileBusinessStructure />", () => {
 
   it("displays Not Entered text when user has no legal structure", () => {
     renderComponent(
-      generateUserData({
+      generateBusiness({
         profileData: generateProfileData({ legalStructureId: undefined }),
       })
     );
@@ -77,7 +76,7 @@ describe("<ProfileBusinessStructure />", () => {
 
   it("displays business structure when exists", () => {
     renderComponent(
-      generateUserData({
+      generateBusiness({
         profileData: generateProfileData({ legalStructureId: "c-corporation" }),
       })
     );
