@@ -5,7 +5,7 @@ notesMd: >-
 
   Draft: https://docs.google.com/document/d/1J427TU2MFzfznhfhWYhC9oC5-IUgVUAeBfMeX8iGxwg/edit 
 urlSlug: cosmetologist
-name: "Get a Cosmetology License "
+name: "Get Your Cosmetology License "
 webflowName: "Cosmetologist: Cosmetologist License"
 summaryDescriptionMd: If you or an employee wants to work as a cosmetologist,
   hairstylist, esthetician, or nail technician in New Jersey, you or they need a
