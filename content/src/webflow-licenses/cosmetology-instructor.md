@@ -9,7 +9,7 @@ urlSlug: cosmetology-teacher-license
 name: Get Your Cosmetology Teacher License
 webflowName: "Cosmetology: Cosmetology Teacher License"
 summaryDescriptionMd: If you want to teach cosmetology in New Jersey, you need a
-  cosmetologist teacher license.
+  cosmetology teacher license.
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Cosmetology and Hairstyling
 callToActionText: Apply for My Cosmetology Teacher License
