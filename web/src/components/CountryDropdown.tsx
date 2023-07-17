@@ -103,7 +103,6 @@ export const CountryDropdown = (props: Props): ReactElement => {
         return (
           <TextField
             {...params}
-            className="margin-top-2"
             fullWidth
             id={props.fieldName}
             name={props.fieldName}

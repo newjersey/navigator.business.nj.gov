@@ -78,9 +78,10 @@ export const FormationDateModal = (props: Props): ReactElement => {
           primaryButtonOnClick={onSubmit}
           secondaryButtonText={Config.formationDateModal.cancelButtonText}
         >
-          <div className="margin-bottom-3">
+          <div className="margin-y-3">
             <Content>{Config.formationDateModal.description}</Content>
           </div>
+          <hr className="margin-y-4" />
           <WithErrorBar hasError={formContextState.fieldStates.dateOfFormation.invalid} type="ALWAYS">
             <FieldLabelModal
               fieldName="dateOfFormation"
@@ -97,11 +98,12 @@ export const FormationDateModal = (props: Props): ReactElement => {
               errorTextOverride={Config.formationDateModal.dateOfFormationErrorText}
             />
           </WithErrorBar>
+
           {shouldShowMunicipalityQuestion() && (
             <WithErrorBar
               hasError={formContextState.fieldStates.municipality.invalid}
               type="ALWAYS"
-              className="margin-top-2"
+              className="margin-top-3"
             >
               <FieldLabelModal fieldName="municipality" />
               <ProfileMunicipality required />

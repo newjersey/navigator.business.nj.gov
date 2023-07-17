@@ -16,7 +16,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext, useRef, useState } from "react";
 
-interface Props extends Omit<OnboardingProps, "fieldName" | "handleChange" | "onValidation"> {
+interface Props extends Omit<OnboardingProps, "fieldName" | "handleChange" | "onValidation" | "inputWidth"> {
   handleChangeOverride?: (value: string) => void;
   getShowHideToggleButton: (toggleFunc?: (taxId: string) => void) => ReactElement;
   taxIdDisplayStatus: TaxIdDisplayStatus;
@@ -88,8 +88,8 @@ export const OnboardingSplitTaxId = ({
 
   return (
     <taxIdFormContext.Provider value={formContextState}>
-      <div className={isTabletAndUp ? "flex flex-row width-100" : "flex flex-column"}>
-        <div className="grid-row width-100">
+      <div className={isTabletAndUp ? "flex flex-row" : "flex flex-column"}>
+        <div className="grid-row">
           <div className="grid-col">
             <GenericTextField
               ref={taxIdBoxRef}
@@ -110,12 +110,14 @@ export const OnboardingSplitTaxId = ({
               disabled={props.taxIdDisplayStatus === "password-view"}
               type={props.taxIdDisplayStatus === "text-view" ? "text" : "password"}
               allowMasking={true}
+              inputWidth={"reduced"}
               {...props}
             />
           </div>
           <div className="grid-row">
-            <span className="padding-x-2 padding-bottom-2 padding-top-4">/</span>
+            <span className="padding-x-2 padding-bottom-2 padding-top-1">/</span>
             <GenericTextField
+              inputWidth={"full"}
               ref={locationBoxRef}
               value={locationValue}
               formContext={taxIdFormContext}
@@ -138,7 +140,7 @@ export const OnboardingSplitTaxId = ({
 
         <div
           className={
-            isTabletAndUp ? "padding-top-3 margin-left-3" : "flex flex-justify-center margin-bottom-3"
+            isTabletAndUp ? "padding-top-1 margin-left-3" : "flex flex-justify-center margin-bottom-3"
           }
         >
           {props.getShowHideToggleButton(updateSplitTaxId)}

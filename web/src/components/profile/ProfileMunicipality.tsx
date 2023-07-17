@@ -1,4 +1,4 @@
-import { MunicipalityDropdown } from "@/components/onboarding/MunicipalityDropdown";
+import { MunicipalityDropdown } from "@/components/profile/MunicipalityDropdown";
 import { ConfigType } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";

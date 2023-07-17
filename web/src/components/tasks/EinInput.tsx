@@ -77,7 +77,7 @@ export const EinInput = (props: Props): ReactElement => {
         inputWidth="full"
         ariaLabel="Save your EIN"
       />
-      <div className="mobile-lg:margin-left-1 mobile-lg:margin-top-2">
+      <div className="mobile-lg:margin-left-1 mobile-lg:margin-top-05">
         <SecondaryButton
           isColor="primary"
           onClick={save}

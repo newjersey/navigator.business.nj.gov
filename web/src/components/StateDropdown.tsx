@@ -102,7 +102,6 @@ export const StateDropdown = (props: Props): ReactElement => {
       renderInput={(params): JSX.Element => {
         return (
           <TextField
-            className="margin-top-2"
             {...params}
             id={props.fieldName}
             name={props.fieldName}

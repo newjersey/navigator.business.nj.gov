@@ -110,7 +110,6 @@ export const FormationDate = (props: Props): ReactElement => {
                 <div className="width-100">
                   <TextField
                     {...params}
-                    className="margin-top-2"
                     variant="outlined"
                     error={doesFieldHaveError(props.fieldName)}
                     onBlur={(): void => {

@@ -10,7 +10,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { InputAdornment, useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
-interface Props extends Omit<OnboardingProps, "fieldName" | "handleChange" | "onValidation"> {
+interface Props extends Omit<OnboardingProps, "fieldName" | "handleChange" | "onValidation" | "inputWidth"> {
   handleChangeOverride?: (value: string) => void;
   getShowHideToggleButton: () => ReactElement;
   taxIdDisplayStatus: TaxIdDisplayStatus;
@@ -41,8 +41,9 @@ export const OnboardingSingleTaxId = ({
   };
 
   return (
-    <div className={isTabletAndUp ? "width-100" : "flex flex-column width-100"}>
+    <div className={isTabletAndUp ? "" : "flex flex-column"}>
       <OnboardingField
+        inputWidth={"reduced"}
         fieldName={fieldName}
         visualFilter={formatTaxId}
         validationText={validationText}

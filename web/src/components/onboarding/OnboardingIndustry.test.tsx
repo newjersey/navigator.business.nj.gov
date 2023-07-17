@@ -161,6 +161,24 @@ describe("<OnboardingIndustry />", () => {
           selectIndustry("generic");
           expect(currentProfileData()[el.fieldName]).toEqual(emptyIndustrySpecificData[el.fieldName]);
         });
+
+        it(`displays FieldLabelProfile for ${validIndustryId.id} as a ${persona} when onboardingFieldLabel is false`, () => {
+          render(
+            <WithStatefulProfileData initialData={generateProfileData({ industryId: validIndustryId.id })}>
+              <OnboardingIndustry onboardingFieldLabel={false} />
+            </WithStatefulProfileData>
+          );
+          expect(screen.getAllByTestId("FieldLabelProfile")[0]).toBeInTheDocument();
+        });
+
+        it(`displays FieldLabelOnboarding for ${validIndustryId.id} as a ${persona} when onboardingFieldLabel is true`, () => {
+          render(
+            <WithStatefulProfileData initialData={generateProfileData({ industryId: validIndustryId.id })}>
+              <OnboardingIndustry onboardingFieldLabel={true} />
+            </WithStatefulProfileData>
+          );
+          expect(screen.getAllByTestId("FieldLabelOnboarding")[0]).toBeInTheDocument();
+        });
       });
     });
   });

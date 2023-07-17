@@ -34,7 +34,7 @@ export const FieldLabelModal = (props: Props): ReactElement => {
 
   return (
     <>
-      <div className="margin-bottom-2">
+      <div className="margin-bottom-05">
         <strong>
           <Content>{header}</Content>
           {unboldedHeader && (
@@ -53,8 +53,7 @@ export const FieldLabelModal = (props: Props): ReactElement => {
 
       {postDescription && (
         <>
-          <br />
-          <div data-testid="postDescription">
+          <div data-testid="postDescription" className="margin-top-05">
             <Content>{postDescription}</Content>
           </div>
         </>

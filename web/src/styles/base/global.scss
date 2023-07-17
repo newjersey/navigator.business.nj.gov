@@ -16,6 +16,10 @@ ol {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
 }
+.usa-prose > p + *,
+p + * {
+  margin-top: 0.25rem !important;
+}
 
 .green-box {
   h1,
@@ -396,4 +400,8 @@ ol {
 
 .pdfPageWidthInPx {
   width: 713px;
+}
+
+.margin-bottom-05-override {
+  margin-bottom: 0.5rem !important;
 }

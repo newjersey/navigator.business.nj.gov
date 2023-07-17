@@ -201,7 +201,6 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
                 <div className="width-100">
                   <TextField
                     id="name-input"
-                    className="margin-top-2"
                     margin="dense"
                     value={currentName}
                     onChange={(event): void => {

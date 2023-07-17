@@ -40,7 +40,6 @@ export const MgmtAuth = (props: Props): ReactElement => {
       <h1>Enter admin password:</h1>
       <label htmlFor="password">Password</label>
       <TextField
-        className="margin-top-2"
         name="password"
         variant="outlined"
         type="password"

@@ -5,7 +5,11 @@ import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { FormContextFieldProps } from "@/lib/types/types";
-import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
+import {
+  LegalStructure,
+  LegalStructures,
+  LookupLegalStructureById,
+} from "@businessnjgovnavigator/shared/index";
 import { FormControl, FormHelperText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { orderBy } from "lodash";
 import { ReactElement, ReactNode, useContext } from "react";
@@ -14,7 +18,7 @@ interface Props<T> extends FormContextFieldProps<T> {
   disabled?: boolean;
 }
 
-export const OnboardingLegalStructureDropdown = <T,>(props: Props<T>): ReactElement => {
+export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
