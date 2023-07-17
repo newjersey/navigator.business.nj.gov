@@ -45,6 +45,16 @@
     {
       "step": 3,
       "weight": 21
+    },
+    {
+      "step": 3,
+      "weight": 21,
+      "task": "get-insurance"
+    },
+    {
+      "step": 3,
+      "weight": 21,
+      "licenseTask":  "car-rental-vehicle-registration"
     }
   ],
   "name": "Acupuncture",
