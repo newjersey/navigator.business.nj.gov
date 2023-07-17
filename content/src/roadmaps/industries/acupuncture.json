@@ -49,12 +49,14 @@
     {
       "step": 3,
       "weight": 21,
-      "task": "get-insurance"
+      "task": "",
+      "licenseTask": "architect-license"
     },
     {
       "step": 3,
       "weight": 21,
-      "licenseTask":  "car-rental-vehicle-registration"
+      "licenseTask": "",
+      "task": "bank-account"
     }
   ],
   "name": "Acupuncture",
