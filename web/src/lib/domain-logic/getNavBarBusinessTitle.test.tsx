@@ -15,26 +15,13 @@ describe("getNavBarBusinessTitle", () => {
       profileData: generateProfileData({
         businessName: "",
         industryId: undefined,
-        legalStructureId: "limited-liability-company",
       }),
     });
     const navBarBusinessTitle = getNavBarBusinessTitle(business);
     expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarGuestText);
   });
 
-  it("shows guest text if legalStructureId is undefined", () => {
-    const business = generateBusiness({
-      profileData: generateProfileData({
-        businessName: "businessName",
-        industryId: "cannabis",
-        legalStructureId: undefined,
-      }),
-    });
-    const navBarBusinessTitle = getNavBarBusinessTitle(business);
-    expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarGuestText);
-  });
-
-  it("shows businessName if business name is defined and legalStructureId and industryId are also defined", () => {
+  it("shows businessName if business name is defined and industryId are also defined", () => {
     const businessName = "businessName";
     const business = generateBusiness({
       profileData: generateProfileData({
@@ -47,7 +34,23 @@ describe("getNavBarBusinessTitle", () => {
     expect(navBarBusinessTitle).toEqual(businessName);
   });
 
-  it("shows unnamed[industryId name][legalStructurId abbreviation] if legalStructureId and industryId are defined and business name is undefined", () => {
+  it("shows unnamed[industryId name] abbreviation if industryId is defined and business name & legal structure is undefined", () => {
+    const business = generateBusiness({
+      profileData: generateProfileData({
+        businessName: "",
+        industryId: "cannabis",
+        legalStructureId: undefined,
+      }),
+    });
+    const navBarBusinessTitle = getNavBarBusinessTitle(business);
+    expect(navBarBusinessTitle).toBe(
+      `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
+        LookupIndustryById(business?.profileData?.industryId).name
+      }`
+    );
+  });
+
+  it("shows unnamed[industryId name][legalStructureId] abbreviation if legalStructureId and industryId are defined and business name is undefined", () => {
     const business = generateBusiness({
       profileData: generateProfileData({
         businessName: "",
