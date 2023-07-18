@@ -5,9 +5,7 @@ export const getNavBarBusinessTitle = (business: Business | undefined): string =
   const Config = getMergedConfig();
   if (!business) return Config.navigationDefaults.navBarGuestText;
 
-  const { businessName, legalStructureId, industryId } = business.profileData;
-
-  if (businessName) return businessName;
+  const { businessName, tradeName, legalStructureId, industryId } = business.profileData;
 
   if (!industryId) return Config.navigationDefaults.navBarGuestText;
 
@@ -15,6 +13,9 @@ export const getNavBarBusinessTitle = (business: Business | undefined): string =
     return `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
       LookupIndustryById(business?.profileData?.industryId).name
     }`;
+
+  const name = LookupLegalStructureById(legalStructureId).requiresPublicFiling ? businessName : tradeName;
+  if (name) return name;
 
   return `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
     LookupIndustryById(business?.profileData?.industryId).name
