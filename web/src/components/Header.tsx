@@ -6,6 +6,7 @@ import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { getCurrentDateInNewJersey } from "@businessnjgovnavigator/shared/";
+import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 
@@ -33,15 +34,16 @@ export const Header = (): ReactElement => {
       return Config.headerDefaults.guestModeToProfileButtonText;
     }
 
-    if (
-      (business?.profileData.businessName === undefined || business?.profileData.businessName === "") &&
-      state.isAuthenticated === "TRUE"
-    ) {
+    const businessName = LookupLegalStructureById(business?.profileData.legalStructureId).requiresPublicFiling
+      ? business?.profileData.businessName
+      : business?.profileData.tradeName;
+
+    if (!businessName && state.isAuthenticated === "TRUE") {
       return Config.headerDefaults.genericToProfileButtonText;
     }
 
-    if (business?.profileData.businessName && state.isAuthenticated === "TRUE") {
-      return business.profileData.businessName;
+    if (businessName && state.isAuthenticated === "TRUE") {
+      return businessName;
     }
   };
 
