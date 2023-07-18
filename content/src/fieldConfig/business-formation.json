@@ -353,7 +353,7 @@
       "provisions": {
         "label": "Additional Provisions/Articles",
         "secondaryLabel": "Provision/Article",
-        "body": "Outline your company's functional and financial decisions to help run the internal operations of the business. Provisions help you prevent personal legal liabilities and clarify members' rights and duties to the company to prevent misunderstandings. You can list up to 10 provisions.\n\nCorporations may include a `class of shares|shares-class` structure and details on the rights of the Board of Directors to determine the different classes.",
+        "body": "Provisions help you prevent personal legal liabilities and clarify board members' rights and duties to the company to prevent misunderstandings. You can list up to 10 provisions; consider including the information on operations, finances, `class of shares|shares-class` structure, and details on the rights of the Board of Directors.",
         "addButtonText": "Add Provisions/Articles",
         "addAnotherButtonText": "Add a Provision"
       },
