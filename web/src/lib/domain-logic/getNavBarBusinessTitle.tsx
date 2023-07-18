@@ -3,14 +3,20 @@ import { Business, LookupIndustryById, LookupLegalStructureById } from "@busines
 
 export const getNavBarBusinessTitle = (business: Business | undefined): string => {
   const Config = getMergedConfig();
-  if (!business?.profileData.industryId || !business.profileData.legalStructureId) {
-    return Config.navigationDefaults.navBarGuestText;
-  }
-  if (business?.profileData.businessName) {
-    return business.profileData.businessName;
-  } else {
+  if (!business) return Config.navigationDefaults.navBarGuestText;
+
+  const { businessName, legalStructureId, industryId } = business.profileData;
+
+  if (businessName) return businessName;
+
+  if (!industryId) return Config.navigationDefaults.navBarGuestText;
+
+  if (!legalStructureId)
     return `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
       LookupIndustryById(business?.profileData?.industryId).name
-    } ${LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation}`;
-  }
+    }`;
+
+  return `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
+    LookupIndustryById(business?.profileData?.industryId).name
+  } ${LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation}`;
 };
