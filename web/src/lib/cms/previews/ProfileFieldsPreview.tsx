@@ -29,6 +29,7 @@ import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
+import { NonEssentialQuestions } from "@/lib/domain-logic/nonEssentialQuestions";
 import { createProfileFieldErrorMap, ProfileContentField } from "@/lib/types/types";
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/";
 import {
@@ -178,6 +179,22 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
           <ProfileResponsibleOwnerName />
 
           {EssentialQuestions.map((props, index) => {
+            return (
+              <div className="margin-top-4" key={props.fieldName + index}>
+                <FieldLabelProfile fieldName={props.fieldName as ProfileContentField} />
+                <OnboardingRadioQuestion<IndustrySpecificData[keyof IndustrySpecificData]>
+                  {...props}
+                  choices={industrySpecificDataChoices[props.fieldName]}
+                />
+              </div>
+            );
+          })}
+
+          <hr className="margin-y-4" />
+
+          <div>{config.profileDefaults.fields.nonEssentialQuestions.default.header}</div>
+
+          {NonEssentialQuestions.map((props, index) => {
             return (
               <div className="margin-top-4" key={props.fieldName + index}>
                 <FieldLabelProfile fieldName={props.fieldName as ProfileContentField} />

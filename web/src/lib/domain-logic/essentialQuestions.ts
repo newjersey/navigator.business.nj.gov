@@ -6,7 +6,7 @@ import {
   LookupIndustryById,
 } from "@businessnjgovnavigator/shared";
 
-export const getResetIndustrySpecificData = (
+export const getResetIndustrySpecificDataEssentialQuestions = (
   industryId: string | undefined
 ): Partial<IndustrySpecificData> => {
   const industry = LookupIndustryById(industryId);

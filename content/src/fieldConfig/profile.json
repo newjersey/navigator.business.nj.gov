@@ -49,6 +49,27 @@
           "description": "Will you market as a certified interior designer?"
         }
       },
+      "nonEssentialQuestions": {
+        "default": {
+          "header": "Based, on your industry, answer additional questions to personalize your experience."
+        }
+      },
+      "retailWillPierceEars": {
+        "default": {
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Do you pierce ears? (Optional)?",
+          "flow": "BOTH"
+        }
+      },
+      "retailWillSellMilk": {
+        "default": {
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Do you sell milk? (Optional)?",
+          "flow": "BOTH"
+        }
+      },
       "interstateMoving": {
         "default": {
           "header": "Moving Goods Across State Lines",

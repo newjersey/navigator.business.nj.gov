@@ -26,6 +26,8 @@ export interface IndustrySpecificData {
   readonly isChildcareForSixOrMore: boolean | undefined;
   readonly petCareHousing: boolean | undefined;
   readonly willSellPetCareItems: boolean | undefined;
+  readonly retailWillPierceEars: boolean | undefined;
+  readonly retailWillSellMilk: boolean | undefined;
 }
 
 type IndustrySpecificDataChoices = {
@@ -48,6 +50,8 @@ export const industrySpecificDataChoices: IndustrySpecificDataChoices = {
   isChildcareForSixOrMore: booleanChoice,
   petCareHousing: booleanChoice,
   willSellPetCareItems: booleanChoice,
+  retailWillPierceEars: booleanChoice,
+  retailWillSellMilk: booleanChoice,
 };
 
 export const emptyIndustrySpecificData: IndustrySpecificData = {
@@ -66,6 +70,8 @@ export const emptyIndustrySpecificData: IndustrySpecificData = {
   isChildcareForSixOrMore: undefined,
   petCareHousing: undefined,
   willSellPetCareItems: undefined,
+  retailWillPierceEars: false,
+  retailWillSellMilk: false,
 };
 
 export interface ProfileData extends IndustrySpecificData {

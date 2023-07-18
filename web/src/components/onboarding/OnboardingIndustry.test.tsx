@@ -82,6 +82,12 @@ describe("<OnboardingIndustry />", () => {
     expect(currentProfileData().sectorId).toEqual("other-services");
   });
 
+  it("resets NAICs code in userdata when industry is changed", () => {
+    renderComponent(generateProfileData({ industryId: "home-contractor", naicsCode: "111111" }));
+    selectIndustry("e-commerce");
+    expect(currentProfileData().naicsCode).toEqual("");
+  });
+
   describe("essential questions", () => {
     it("defaults cannabis license type to CONDITIONAL", () => {
       renderComponent();
@@ -183,10 +189,28 @@ describe("<OnboardingIndustry />", () => {
     });
   });
 
-  it("resets NAICs code in userdata when industry is changed", () => {
-    renderComponent(generateProfileData({ industryId: "home-contractor", naicsCode: "111111" }));
-    selectIndustry("e-commerce");
-    expect(currentProfileData().naicsCode).toEqual("");
+  describe("non essential questions", () => {
+    it("sets retailWillSellMilk to false if user selects a different industry", () => {
+      const profileData = {
+        ...createEmptyProfileData(),
+        industryId: "retail",
+        retailWillSellMilk: true,
+      };
+      renderComponent(profileData);
+      selectIndustry("logistics");
+      expect(currentProfileData().retailWillSellMilk).toEqual(false);
+    });
+
+    it("sets retailWillPierceEars to false if user selects a different industry", () => {
+      const profileData = {
+        ...createEmptyProfileData(),
+        industryId: "retail",
+        retailWillPierceEars: true,
+      };
+      renderComponent(profileData);
+      selectIndustry("logistics");
+      expect(currentProfileData().retailWillPierceEars).toEqual(false);
+    });
   });
 
   const selectIndustry = (value: string): void => {

@@ -13,6 +13,7 @@ interface Props {
   isAltDescriptionDisplayed?: boolean;
   locked?: boolean;
   hideHeader?: boolean;
+  boldDescription?: boolean;
 }
 
 export const FieldLabelProfile = (props: Props): ReactElement => {
@@ -73,7 +74,9 @@ export const FieldLabelProfile = (props: Props): ReactElement => {
       {showDescription && (
         <>
           {props.isAltDescriptionDisplayed && altDescription && <Content>{altDescription}</Content>}
-          {!props.isAltDescriptionDisplayed && description && <Content>{description}</Content>}
+          <div className={props.boldDescription ? "text-bold" : ""}>
+            {!props.isAltDescriptionDisplayed && description && <Content>{description}</Content>}
+          </div>
         </>
       )}
     </>

@@ -660,4 +660,26 @@ describe("buildUserRoadmap", () => {
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("will-sell-pet-care-items");
     });
   });
+
+  describe("if industry is retail", () => {
+    it("adds retail-pierce-ears add-on if planning to pierce ears", () => {
+      buildUserRoadmap(generateStartingProfile({ retailWillPierceEars: true, industryId: "retail" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("retail-pierce-ears");
+    });
+
+    it("does not add retail-pierce-ears add-on if planning to not pierce ears", () => {
+      buildUserRoadmap(generateStartingProfile({ retailWillPierceEars: false, industryId: "retail" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("retail-pierce-ears");
+    });
+
+    it("adds retail-sell-milk add-on if planning to sell milk", () => {
+      buildUserRoadmap(generateStartingProfile({ retailWillSellMilk: true, industryId: "retail" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("retail-sell-milk");
+    });
+
+    it("does not add retail-sell-milk add-on if planning to not sell milk", () => {
+      buildUserRoadmap(generateStartingProfile({ retailWillSellMilk: false, industryId: "retail" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("retail-sell-milk");
+    });
+  });
 });

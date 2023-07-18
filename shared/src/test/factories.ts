@@ -209,6 +209,8 @@ export const generateIndustrySpecificData = (
     isChildcareForSixOrMore: !(randomInt() % 2),
     petCareHousing: !(randomInt() % 2),
     willSellPetCareItems: !(randomInt() % 2),
+    retailWillPierceEars: !(randomInt() % 2),
+    retailWillSellMilk: !(randomInt() % 2),
     ...overrides,
   };
 };

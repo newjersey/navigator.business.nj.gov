@@ -6,10 +6,11 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import {
   getIsApplicableToFunctionByFieldName,
-  getResetIndustrySpecificData,
+  getResetIndustrySpecificDataEssentialQuestions,
 } from "@/lib/domain-logic/essentialQuestions";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
+import { getResetIndustrySpecificDataNonEssentialQuestions } from "@/lib/domain-logic/nonEssentialQuestions";
 import { templateEval } from "@/lib/utils/helpers";
 import { splitAndBoldSearchText } from "@/lib/utils/splitAndBoldSearchText";
 import {
@@ -72,7 +73,8 @@ export const IndustryDropdown = (props: Props): ReactElement => {
 
     setProfileData({
       ...state.profileData,
-      ...getResetIndustrySpecificData(industryId),
+      ...getResetIndustrySpecificDataEssentialQuestions(industryId),
+      ...getResetIndustrySpecificDataNonEssentialQuestions(industryId),
       homeBasedBusiness,
       cannabisLicenseType,
       industryId: industryId,

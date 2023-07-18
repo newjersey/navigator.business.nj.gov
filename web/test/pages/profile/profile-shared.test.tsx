@@ -35,6 +35,7 @@ import {
   renderPage,
   selectByText,
 } from "@/test/pages/profile/profile-helpers";
+import { BusinessPersona } from "@businessnjgovnavigator/shared";
 import { render, screen, waitFor } from "@testing-library/react";
 
 const Config = getMergedConfig();
@@ -269,6 +270,62 @@ describe("profile - shared", () => {
       renderPage({ business, setRegistrationModalIsVisible });
 
       expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("non essential questions", () => {
+    it("doesn't display section if industry doesn't have non essential questions", () => {
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          industryId: "logistics",
+        }),
+      });
+
+      renderPage({ business });
+
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.nonEssentialQuestions.default.header)
+      ).not.toBeInTheDocument();
+    });
+
+    describe("industry is retail", () => {
+      const validPersonas: BusinessPersona[] = ["STARTING", "FOREIGN"];
+
+      for (const persona of validPersonas) {
+        it(`displays the sell milk question if persona is ${persona}`, () => {
+          const business = generateBusiness({
+            profileData: generateProfileData({
+              industryId: "retail",
+              retailWillSellMilk: true,
+              businessPersona: persona,
+              foreignBusinessType: persona === "FOREIGN" ? "NEXUS" : undefined,
+            }),
+          });
+
+          renderPage({ business });
+
+          expect(
+            screen.getByText(Config.profileDefaults.fields.retailWillSellMilk.default.description)
+          ).toBeInTheDocument();
+        });
+
+        it(`displays the pierce ears question if persona is ${persona}`, () => {
+          const business = generateBusiness({
+            profileData: generateProfileData({
+              industryId: "retail",
+              retailWillPierceEars: true,
+              businessPersona: persona,
+              foreignBusinessType: persona === "FOREIGN" ? "NEXUS" : undefined,
+            }),
+          });
+
+          renderPage({ business });
+
+          expect(
+            screen.getByText(Config.profileDefaults.fields.retailWillPierceEars.default.description)
+          ).toBeInTheDocument();
+        });
+      }
     });
   });
 });

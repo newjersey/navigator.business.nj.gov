@@ -31,6 +31,8 @@ interface IndustryOnboardingQuestions {
   readonly willSellPetCareItems?: boolean;
   readonly isPetCareHousingApplicable?: boolean;
   readonly isCannabisLicenseTypeApplicable?: boolean;
+  readonly retailWillPierceEars?: boolean;
+  readonly retailWillSellMilk?: boolean;
 }
 
 export interface AddOn {
@@ -72,6 +74,8 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
         isChildcareForSixOrMore: undefined,
         willSellPetCareItems: undefined,
         isPetCareHousingApplicable: undefined,
+        retailWillPierceEars: undefined,
+        retailWillSellMilk: undefined,
       },
     }
   );

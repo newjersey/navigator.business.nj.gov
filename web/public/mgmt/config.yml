@@ -1485,6 +1485,14 @@ collections:
             name: isCannabisLicenseTypeApplicable
             widget: boolean
             required: false
+          - label: Will Sell Milk
+            name: retailWillSellMilk
+            widget: boolean
+            required: false
+          - label: Will Pierce Ears
+            name: retailWillPierceEars
+            widget: boolean
+            required: false
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list
@@ -4445,7 +4453,53 @@ collections:
                           - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
                           - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
-
+                  - label: Will Sell Milk
+                    name: retailWillSellMilk
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
+                          - { label: "Description", name: "description", widget: "markdown" }
+                          - label: "STARTING, FOREIGN, BOTH (only use for non-essential questions tasks)"
+                            name: "persona"
+                            widget: select
+                            options: ["STARTING", "OWNING", "BOTH"]
+                            required: false
+                  - label: Will Pierce Ears
+                    name: retailWillPierceEars
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
+                          - { label: "Description", name: "description", widget: "markdown" }
+                          - label: "STARTING, FOREIGN, BOTH (only use for non-essential questions tasks)"
+                            name: "flow"
+                            widget: select
+                            options: ["STARTING", "OWNING", "BOTH"]
+                            required: false
+                  - label: Non Essential Questions
+                    name: nonEssentialQuestions
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
       - label: "Profile / Onboarding Page Misc"
         name: "profile-misc"
         file: "content/src/fieldConfig/config.json"

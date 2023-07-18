@@ -2,6 +2,8 @@ import { getIsApplicableToFunctionByFieldName } from "@/lib/domain-logic/essenti
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { isInterstateLogisticsApplicable } from "@/lib/domain-logic/isInterstateLogisticsApplicable";
 import { isInterstateMovingApplicable } from "@/lib/domain-logic/isInterstateMovingApplicable";
+import { isRetailPierceEarsApplicable } from "@/lib/domain-logic/isRetailPierceEarsApplicable";
+import { isRetailSellMilkApplicable } from "@/lib/domain-logic/isRetailSellMilkApplicable";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { Roadmap } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
@@ -140,6 +142,14 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
 
   if (isInterstateMovingApplicable(industryId) && profileData.interstateMoving) {
     addOns.push("interstate-moving");
+  }
+
+  if (isRetailPierceEarsApplicable(industryId) && profileData.retailWillPierceEars) {
+    addOns.push("retail-pierce-ears");
+  }
+
+  if (isRetailSellMilkApplicable(industryId) && profileData.retailWillSellMilk) {
+    addOns.push("retail-sell-milk");
   }
 
   if (profileData.industryId === "logistics") {
