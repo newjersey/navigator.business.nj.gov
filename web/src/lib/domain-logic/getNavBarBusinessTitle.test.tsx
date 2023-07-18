@@ -34,6 +34,19 @@ describe("getNavBarBusinessTitle", () => {
     expect(navBarBusinessTitle).toEqual(businessName);
   });
 
+  it("shows trade Name if trade name is defined for Trade Name type and industryId are also defined", () => {
+    const businessName = "businessName";
+    const business = generateBusiness({
+      profileData: generateProfileData({
+        tradeName: businessName,
+        industryId: "cannabis",
+        legalStructureId: "sole-proprietorship",
+      }),
+    });
+    const navBarBusinessTitle = getNavBarBusinessTitle(business);
+    expect(navBarBusinessTitle).toEqual(businessName);
+  });
+
   it("shows unnamed[industryId name] abbreviation if industryId is defined and business name & legal structure is undefined", () => {
     const business = generateBusiness({
       profileData: generateProfileData({
@@ -56,6 +69,22 @@ describe("getNavBarBusinessTitle", () => {
         businessName: "",
         industryId: "cannabis",
         legalStructureId: "limited-liability-company",
+      }),
+    });
+    const navBarBusinessTitle = getNavBarBusinessTitle(business);
+    expect(navBarBusinessTitle).toBe(
+      `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
+        LookupIndustryById(business?.profileData?.industryId).name
+      } ${LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation}`
+    );
+  });
+
+  it("shows unnamed[industryId name][legalStructureId] abbreviation if legalStructureId and industryId are defined and trade name is undefined", () => {
+    const business = generateBusiness({
+      profileData: generateProfileData({
+        tradeName: "",
+        industryId: "cannabis",
+        legalStructureId: "sole-proprietorship",
       }),
     });
     const navBarBusinessTitle = getNavBarBusinessTitle(business);
