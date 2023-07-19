@@ -6,10 +6,10 @@ import { ProfileContentField } from "@/lib/types/types";
 import { ReactElement, useContext } from "react";
 
 interface FieldOverrides {
-  header?: string;
-  description?: string;
-  headerNotBolded?: string;
-  postDescription?: string;
+  header: string | undefined;
+  description: string | undefined;
+  headerNotBolded: string | undefined;
+  postDescription: string | undefined;
 }
 
 interface Props {
@@ -27,9 +27,9 @@ export const FieldLabelModal = (props: Props): ReactElement => {
     fieldName: props.fieldName,
   });
 
-  const header = props.overrides?.header || contentFromConfig.header;
-  const description = props.overrides?.description || contentFromConfig.description;
-  const unboldedHeader = props.overrides?.headerNotBolded || contentFromConfig.headerNotBolded;
+  const header = props.overrides?.header ?? contentFromConfig.header;
+  const description = props.overrides?.description ?? contentFromConfig.description;
+  const unboldedHeader = props.overrides?.headerNotBolded ?? contentFromConfig.headerNotBolded;
   const postDescription = props.overrides?.postDescription;
 
   return (
