@@ -179,6 +179,8 @@ const OnboardingPage = (props: Props): ReactElement => {
         return;
       }
 
+      hasHandledRouting.current = true;
+
       let currentUserData = updateQueue?.current();
       if (currentUserData) {
         const queryAdditionalBusiness = router.query[QUERIES.additionalBusiness] as string;
@@ -220,8 +222,6 @@ const OnboardingPage = (props: Props): ReactElement => {
             setPage({ current: 1, previous: 1 });
             routeToPage(1);
           }
-
-          hasHandledRouting.current = true;
         }
       }
     })();
