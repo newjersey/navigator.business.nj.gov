@@ -5,6 +5,7 @@ import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer"
 import { DevOnlySkipOnboardingButton } from "@/components/onboarding/DevOnlySkipOnboardingButton";
 import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
 import { onboardingFlows as onboardingFlowObject } from "@/components/onboarding/OnboardingFlows";
+import { ReturnToPreviousBusinessBar } from "@/components/onboarding/ReturnToPreviousBusinessBar";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AuthContext } from "@/contexts/authContext";
@@ -16,7 +17,9 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { addAdditionalBusiness } from "@/lib/domain-logic/addAdditionalBusiness";
 import { hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
+import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import { QUERIES, QUERY_PARAMS_VALUES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
@@ -56,6 +59,7 @@ import {
   TaskProgress,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Business } from "@businessnjgovnavigator/shared/userData";
@@ -80,12 +84,14 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [user, setUser] = useState<BusinessUser>(createEmptyUser(ABStorageFactory().getExperience()));
   const [error, setError] = useState<ProfileError | undefined>(undefined);
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
-  const { updateQueue, userData, createUpdateQueue } = useUserData();
+  const { updateQueue, createUpdateQueue } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const headerRef = useRef<HTMLDivElement>(null);
   const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
   const hasHandledRouting = useRef<boolean>(false);
   const { Config } = useConfig();
+  const [isAdditionalBusiness, setIsAdditionalBusiness] = useState<boolean>(false);
+  const [previousBusiness, setPreviousBusiness] = useState<Business | undefined>(undefined);
 
   const configFields = Config.profileDefaults.fields;
   const OnboardingErrorLookup: Record<ProfileError, string> = {
@@ -136,11 +142,20 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
     };
 
+    const removeNameAndEmailForAdditionalBusiness = (): void => {
+      if (isAdditionalBusiness) {
+        removePageFromFlow("name-email-page", "STARTING");
+        removePageFromFlow("name-email-page", "OWNING");
+        removePageFromFlow("name-email-page", "FOREIGN");
+      }
+    };
+
     removeDateAndEntityIdForPublicFilingPages();
     removeNexusSpecificPages();
+    removeNameAndEmailForAdditionalBusiness();
 
     return onboardingFlows;
-  }, [profileData]);
+  }, [profileData, isAdditionalBusiness]);
 
   const routeToPage = useCallback(
     (page: number) => {
@@ -164,8 +179,17 @@ const OnboardingPage = (props: Props): ReactElement => {
         return;
       }
 
-      let currentUserData = userData;
+      let currentUserData = updateQueue?.current();
       if (currentUserData) {
+        const queryAdditionalBusiness = router.query[QUERIES.additionalBusiness] as string;
+        if (queryAdditionalBusiness === "true") {
+          setIsAdditionalBusiness(true);
+          setPreviousBusiness(getCurrentBusiness(currentUserData));
+          const userDataWithAdditionalBusiness = addAdditionalBusiness(currentUserData);
+          await updateQueue?.queue(userDataWithAdditionalBusiness).update({ local: true });
+          currentUserData = userDataWithAdditionalBusiness;
+        }
+
         setProfileData(currentUserData.businesses[currentUserData.currentBusinessId].profileData);
         setUser(currentUserData.user);
         setCurrentFlow(getFlow(currentUserData));
@@ -245,6 +269,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       scrollToTop();
       if (!updateQueue) return;
       let newProfileData = profileData;
+
       const hasBusinessPersonaChanged =
         profileData.businessPersona !== updateQueue.currentBusiness().profileData.businessPersona;
 
@@ -293,7 +318,11 @@ const OnboardingPage = (props: Props): ReactElement => {
           });
       } else {
         setRegistrationDimension("Onboarded Guest");
-        analytics.event.onboarding_last_step.submit.finish_onboarding();
+        if (isAdditionalBusiness) {
+          analytics.event.onboarding_last_step_save_additional_business_button.click.finish_additional_business_onboarding();
+        } else {
+          analytics.event.onboarding_last_step.submit.finish_onboarding();
+        }
 
         const isRemoteSellerWorker =
           newProfileData.businessPersona === "FOREIGN" &&
@@ -318,12 +347,14 @@ const OnboardingPage = (props: Props): ReactElement => {
           },
         };
 
-        if (newUserData.user.receiveNewsletter) {
-          newUserData = await api.postNewsletter(newUserData);
-        }
+        if (!isAdditionalBusiness) {
+          if (newUserData.user.receiveNewsletter) {
+            newUserData = await api.postNewsletter(newUserData);
+          }
 
-        if (newUserData.user.userTesting) {
-          newUserData = await api.postUserTesting(newUserData);
+          if (newUserData.user.userTesting) {
+            newUserData = await api.postUserTesting(newUserData);
+          }
         }
 
         newUserData = await api.postGetAnnualFilings(newUserData);
@@ -358,7 +389,9 @@ const OnboardingPage = (props: Props): ReactElement => {
 
         await router.push({
           pathname: ROUTES.dashboard,
-          query: { [QUERIES.fromOnboarding]: "true" },
+          query: isAdditionalBusiness
+            ? { [QUERIES.fromAdditionalBusiness]: "true" }
+            : { [QUERIES.fromOnboarding]: "true" },
         });
       }
     },
@@ -395,10 +428,19 @@ const OnboardingPage = (props: Props): ReactElement => {
   };
 
   const header = (): ReactElement => {
+    const pageTitle = modifyContent({
+      content: Config.onboardingDefaults.pageTitle,
+      condition: () => isAdditionalBusiness,
+      modificationMap: {
+        Additional: "Additional",
+        additional: "additional",
+      },
+    });
+
     return (
       <div className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-1">
         <h1 ref={headerRef}>
-          {Config.onboardingDefaults.pageTitle}{" "}
+          {pageTitle}{" "}
           <span className="text-light" data-testid={`step-${page.current.toString()}`}>
             {evalHeaderStepsTemplate(onboardingFlows, currentFlow, profileData, page)}
           </span>
@@ -430,6 +472,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           />
           <PageSkeleton>
             <NavBar />
+            <ReturnToPreviousBusinessBar previousBusiness={previousBusiness} />
             <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
               <SingleColumnContainer isSmallerWidth>
                 {header()}
@@ -482,6 +525,7 @@ const OnboardingPage = (props: Props): ReactElement => {
                           <hr className="margin-top-6 margin-bottom-4" aria-hidden={true} />
                           <DevOnlySkipOnboardingButton setPage={setPage} routeToPage={routeToPage} />
                           <OnboardingButtonGroup
+                            isAdditionalBusiness={isAdditionalBusiness}
                             isFinal={page.current === onboardingFlows[currentFlow].pages.length}
                           />
                         </form>

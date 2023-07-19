@@ -52,7 +52,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
     if (currentlyOnboarding()) {
       return "login";
     } else if (isAuthenticated) {
-      return "profile-myNj-logout";
+      return "profile-mynj-addbusiness-logout";
     } else {
       return "profile-register-login";
     }

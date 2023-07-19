@@ -64,7 +64,8 @@
     "logInButton": "Log in",
     "logoutButton": "Log out",
     "navBarUnnamedBusinessText": "Unnamed",
-    "taskPageNavBarHeading": "Business Roadmap"
+    "taskPageNavBarHeading": "Business Roadmap",
+    "addBusinessButton": "Add a Business"
   },
   "landingPage": {
     "section5FirstSupportingText": "Knowing exactly what your business needs to do to start can be difficult. Our step-by-step guide is unique to your industry and even includes Cannabis retailers. Find what licenses, forms, and permits you need to start your business in New Jersey. Learn the requirements of each application, find out what you get after submitting your application, and store critical business identification numbers all in one place. ",
@@ -147,10 +148,12 @@
     "errorTextMinimumRangeNumericField": "Must be between ${min} and ${max} digits long.",
     "backButtonText": "Back",
     "finalNextButtonText": "Submit",
-    "pageTitle": "Tell Us About Your Business",
+    "additionalBusinessFinalNextButtonText": "Save Additional Business",
+    "pageTitle": "Tell Us About Your ${Additional} Business",
     "stepXofYTemplate": "(Step ${currentPage} of ${totalPages})",
     "stepXTemplate": "(Step ${currentPage})",
-    "nextButtonText": "Next"
+    "nextButtonText": "Next",
+    "returnToPreviousBusiness": "Return to ${previousBusiness}"
   },
   "formationDateModal": {
     "fieldDescription": "Find your effective date on your `Certificate of Formation|certificate-formation` .",

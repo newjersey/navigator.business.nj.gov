@@ -113,6 +113,15 @@ const DashboardPage = (props: Props): ReactElement => {
     dataTestId: "deferredQuestionAnswered-alert",
   });
 
+  const AdditionalBusinessAlert = useQueryControlledAlert({
+    queryKey: QUERIES.fromAdditionalBusiness,
+    pagePath: ROUTES.dashboard,
+    headerText: Config.dashboardDefaults.additionalBusinessSnackbarHeader,
+    bodyText: Config.dashboardDefaults.additionalBusinessSnackbarBody,
+    variant: "success",
+    dataTestId: "fromAdditionalBusiness-alert",
+  });
+
   useMountEffectWhenDefined(() => {
     (async (): Promise<void> => {
       if (business?.onboardingFormProgress !== "COMPLETED") {
@@ -226,6 +235,7 @@ const DashboardPage = (props: Props): ReactElement => {
           <>{FundingAlert}</>
           <>{HiddenTasksAlert}</>
           <>{DeferredQuestionAnsweredAlert}</>
+          <>{AdditionalBusinessAlert}</>
         </main>
       </PageSkeleton>
     </MunicipalitiesContext.Provider>

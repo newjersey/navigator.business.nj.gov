@@ -1,34 +1,16 @@
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { templateEval, templateEvalWithExtraSpaceRemoval } from "@/lib/utils/helpers";
+import { modifyContent } from "@/lib/domain-logic/modifyContent";
 
 export const useContentModifiedByUserData = (content: string): string => {
   const { business } = useUserData();
-  let result = content;
-  if (!business || !result) return result;
+  if (!business || !content) return content;
 
-  if (content.includes("${oos}")) {
-    if (business?.profileData.businessPersona === "FOREIGN") {
-      result = templateEval(content, {
-        oos: "out-of-state",
-      });
-    } else {
-      result = templateEvalWithExtraSpaceRemoval(content, {
-        oos: "",
-      });
-    }
-  }
-
-  if (content.includes("${OoS}")) {
-    if (business?.profileData.businessPersona === "FOREIGN") {
-      result = templateEval(content, {
-        OoS: "Out-of-State",
-      });
-    } else {
-      result = templateEvalWithExtraSpaceRemoval(content, {
-        OoS: "",
-      });
-    }
-  }
-
-  return result;
+  return modifyContent({
+    content,
+    condition: () => business?.profileData.businessPersona === "FOREIGN",
+    modificationMap: {
+      oos: "out-of-state",
+      OoS: "Out-of-State",
+    },
+  });
 };

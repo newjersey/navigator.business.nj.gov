@@ -34,6 +34,7 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
         ),
       },
       {
+        name: "name-email-page",
         component: <OnboardingNameAndEmail<OnboardingErrors> errorTypes={["ALERT_BAR"]} />,
       },
     ],
@@ -63,6 +64,7 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
         ),
       },
       {
+        name: "name-email-page",
         component: <OnboardingNameAndEmail<OnboardingErrors> errorTypes={["ALERT_BAR"]} />,
       },
     ],
@@ -112,6 +114,7 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
         ),
       },
       {
+        name: "name-email-page",
         component: <OnboardingNameAndEmail<OnboardingErrors> errorTypes={["ALERT_BAR"]} />,
       },
     ],

@@ -11,6 +11,8 @@
     "hiddenTasksSnackbarHeading": "Your tasks are hidden",
     "calendarSnackbarHeading": "Your annual reporting deadline was added",
     "taxRegistrationSnackbarHeading": "We marked the “Register for State Taxes and Employer Purposes” task complete.",
-    "taxRegistrationSnackbarBody": "State certifications can give you new government contracting opportunities. Your certification options now appear in the “For You” section."
+    "taxRegistrationSnackbarBody": "State certifications can give you new government contracting opportunities. Your certification options now appear in the “For You” section.",
+    "additionalBusinessSnackbarHeader": "Additional business added",
+    "additionalBusinessSnackbarBody": "You can switch between your businesses in your account drop down menu."
   }
 }

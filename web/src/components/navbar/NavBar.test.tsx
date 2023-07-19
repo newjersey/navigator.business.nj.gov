@@ -3,7 +3,12 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
+import {
+  generateRoadmap,
+  generateStep,
+  generateTask,
+  randomPublicFilingLegalStructure,
+} from "@/test/factories";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -14,6 +19,7 @@ import {
   generateBusiness,
   generateProfileData,
   generateUser,
+  generateUserData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
@@ -220,16 +226,16 @@ describe("<NavBar />", () => {
       expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
     });
 
-    it("displays myNJ button when user is authenticated", async () => {
-      useMockBusiness({});
+    it("displays myNJ button, log out, and Add New Business button when user is authenticated", async () => {
+      useMockBusiness(generateBusinessNamedBusiness());
       renderDesktopNav();
-      expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
-    });
-
-    it("displays log out button when user is authenticated", async () => {
-      useMockBusiness({});
-      renderDesktopNav();
-      expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
+      const menuEl = screen.getByText(businessName);
+      fireEvent.click(menuEl);
+      await waitFor(() => {
+        expect(screen.getByText(Config.navigationDefaults.myNJAccountText)).toBeInTheDocument();
+      });
+      expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
+      expect(screen.getByText(Config.navigationDefaults.logoutButton)).toBeInTheDocument();
     });
 
     it("displays a closed dropdown menu on the NavBar", () => {
@@ -240,6 +246,7 @@ describe("<NavBar />", () => {
       expect(menuEl).toBeInTheDocument();
       expect(screen.queryByText(Config.navigationDefaults.logoutButton)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.navigationDefaults.addBusinessButton)).not.toBeInTheDocument();
     });
 
     it("displays an open dropdown menu when clicked and closes when clicked again", async () => {
@@ -259,6 +266,46 @@ describe("<NavBar />", () => {
         expect(screen.getByText(Config.navigationDefaults.logoutButton)).toBeInTheDocument();
       });
       expect(screen.getByText(Config.navigationDefaults.myNJAccountText)).toBeInTheDocument();
+      expect(screen.getByText(Config.navigationDefaults.addBusinessButton)).toBeInTheDocument();
+    });
+
+    it("displays all businesses for user when opened", async () => {
+      const firstBusiness = generateBusiness({
+        profileData: generateProfileData({
+          businessName: "first-biz",
+          legalStructureId: randomPublicFilingLegalStructure(),
+        }),
+      });
+      const secondBusiness = generateBusiness({
+        profileData: generateProfileData({
+          businessName: "second-biz",
+          legalStructureId: randomPublicFilingLegalStructure(),
+        }),
+      });
+      const userData = generateUserData({
+        currentBusinessId: firstBusiness.id,
+        businesses: {
+          [firstBusiness.id]: firstBusiness,
+          [secondBusiness.id]: secondBusiness,
+        },
+      });
+      useMockUserData(userData);
+
+      renderDesktopNav();
+
+      await waitFor(() => {
+        expect(screen.getByText("first-biz")).toBeInTheDocument();
+      });
+
+      expect(screen.queryByText("second-biz")).not.toBeInTheDocument();
+
+      const menuEl = screen.getByText("first-biz");
+      fireEvent.click(menuEl);
+
+      await waitFor(() => {
+        expect(screen.getByText("second-biz")).toBeInTheDocument();
+      });
+      expect(screen.getAllByText("first-biz")).toHaveLength(2);
     });
   });
 
@@ -440,6 +487,7 @@ describe("<NavBar />", () => {
 
         expect(screen.queryByText(Config.navigationDefaults.myNJAccountText)).toBeVisible();
         expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).toBeVisible();
+        expect(screen.queryByText(Config.navigationDefaults.addBusinessButton)).toBeVisible();
       });
     });
 
