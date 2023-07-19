@@ -65,6 +65,7 @@ const generateOnboardingBusiness = (): Business => {
   return generateBusiness({
     profileData: generateProfileData({
       businessName: "",
+      tradeName: "",
       industryId: undefined,
       legalStructureId: undefined,
     }),
@@ -75,6 +76,7 @@ const generateGuestBusiness = (overrides?: Partial<Business>): Business => {
   return generateBusiness({
     profileData: generateProfileData({
       businessName: "",
+      tradeName: "",
       industryId: "cannabis",
       legalStructureId: "limited-liability-company",
     }),
@@ -88,6 +90,7 @@ const generateBusinessNamedBusiness = (overrides?: Partial<Business>): Business 
   return generateBusiness({
     profileData: generateProfileData({
       businessName: businessName,
+      tradeName: "",
       industryId: "cannabis",
       legalStructureId: "limited-liability-company",
     }),
