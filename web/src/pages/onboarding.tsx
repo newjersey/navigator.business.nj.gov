@@ -195,33 +195,32 @@ const OnboardingPage = (props: Props): ReactElement => {
         setProfileData(currentUserData.businesses[currentUserData.currentBusinessId].profileData);
         setUser(currentUserData.user);
         setCurrentFlow(getFlow(currentUserData));
-      } else if (state.isAuthenticated === IsAuthenticated.FALSE) {
+      } else {
         currentUserData = createEmptyUserData(state.user);
         setRegistrationDimension("Began Onboarding");
         await createUpdateQueue(currentUserData);
         setProfileData(currentUserData.businesses[currentUserData.currentBusinessId].profileData);
         setUser(currentUserData.user);
       }
-      if (currentUserData) {
-        const currentBusiness = currentUserData.businesses[currentUserData.currentBusinessId];
-        if (currentBusiness.onboardingFormProgress === "COMPLETED") {
-          await router.replace(ROUTES.profile);
-          return;
-        } else {
-          const queryPage = Number(router.query[QUERIES.page]);
-          const queryIndustryId = router.query[QUERIES.industry] as string | undefined;
-          const queryFlow = router.query[QUERIES.flow] as string;
 
-          if (industryQueryParamIsValid(queryIndustryId)) {
-            await setIndustryAndRouteToPage(currentBusiness, queryIndustryId);
-          } else if (pageQueryParamisValid(onboardingFlows, currentBusiness, queryPage)) {
-            setPage({ current: queryPage, previous: queryPage - 1 });
-          } else if (flowQueryParamIsValid(queryFlow)) {
-            await setBusinessPersonaAndRouteToPage(queryFlow);
-          } else {
-            setPage({ current: 1, previous: 1 });
-            routeToPage(1);
-          }
+      const currentBusiness = currentUserData.businesses[currentUserData.currentBusinessId];
+      if (currentBusiness.onboardingFormProgress === "COMPLETED") {
+        await router.replace(ROUTES.profile);
+        return;
+      } else {
+        const queryPage = Number(router.query[QUERIES.page]);
+        const queryIndustryId = router.query[QUERIES.industry] as string | undefined;
+        const queryFlow = router.query[QUERIES.flow] as string;
+
+        if (industryQueryParamIsValid(queryIndustryId)) {
+          await setIndustryAndRouteToPage(currentBusiness, queryIndustryId);
+        } else if (pageQueryParamisValid(onboardingFlows, currentBusiness, queryPage)) {
+          setPage({ current: queryPage, previous: queryPage - 1 });
+        } else if (flowQueryParamIsValid(queryFlow)) {
+          await setBusinessPersonaAndRouteToPage(queryFlow);
+        } else {
+          setPage({ current: 1, previous: 1 });
+          routeToPage(1);
         }
       }
     })();
