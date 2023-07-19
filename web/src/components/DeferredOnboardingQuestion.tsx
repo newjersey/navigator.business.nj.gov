@@ -48,7 +48,9 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
     <div className="padding-3">
       {props.label}
       <div className="display-flex mobile-lg:flex-row flex-column mobile-lg:flex-align-center">
-        <div className="margin-right-1 text-field-width-default margin-bottom-2">{props.children}</div>
+        <div className="margin-right-1 width-100 text-field-width-default margin-bottom-05">
+          {props.children}
+        </div>
         <SecondaryButton isColor="primary" onClick={onSubmit} dataTestId="deferred-question-save">
           {Config.deferredLocation.deferredOnboardingSaveButtonText}
         </SecondaryButton>
