@@ -1,3 +1,25 @@
+## [5.23.5](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.23.4...v5.23.5) (2023-07-19)
+
+
+### Bug Fixes
+
+* [[#185355437](https://github.com/newjersey/navigator.business.nj.gov/issues/185355437)] license task not rendering in CMS roadmap steps ([0d28061](https://github.com/newjersey/navigator.business.nj.gov/commit/0d28061a1aa4a147df83ff791f5423c724175936))
+* [[#185355437](https://github.com/newjersey/navigator.business.nj.gov/issues/185355437)] license task not rendering in CMS, dependencies ([8137b5a](https://github.com/newjersey/navigator.business.nj.gov/commit/8137b5a16c2841e2af7e0b544919231e92fba4a0))
+* [[#185629976](https://github.com/newjersey/navigator.business.nj.gov/issues/185629976)] show Unnamed Industry when missing legal structure in NavBar ([0d49276](https://github.com/newjersey/navigator.business.nj.gov/commit/0d492765e31d902818adf0190269af9df37ff5c3))
+* [[#185641164](https://github.com/newjersey/navigator.business.nj.gov/issues/185641164)] use trade name in nav bar if exists for TradeName businesses ([b3fa511](https://github.com/newjersey/navigator.business.nj.gov/commit/b3fa5113521d84807f27564c20775c08a3a75363))
+* **deps:** update aws-amplify ([f937d19](https://github.com/newjersey/navigator.business.nj.gov/commit/f937d199202919797a75d659b31e8e4a3995722b))
+* **deps:** update aws-sdk to v3.369.0 ([50b44ec](https://github.com/newjersey/navigator.business.nj.gov/commit/50b44ecba3e6bba4968ad7dc3ac53a0acd0d0726))
+* **deps:** update dependency @aws-crypto/client-node to v3.2.2 ([863e690](https://github.com/newjersey/navigator.business.nj.gov/commit/863e6904834d1ea06c02c5291e6750956dff2fc5))
+* **deps:** update dependency @types/mdast to v3.0.12 ([9f3f815](https://github.com/newjersey/navigator.business.nj.gov/commit/9f3f815f3c7dc2654794a5d7f13917890b4c1fab))
+* **deps:** update dependency dayjs to v1.11.9 ([16bf0a9](https://github.com/newjersey/navigator.business.nj.gov/commit/16bf0a939f1ddd00331a041c4a047eaedad32e8a))
+* **deps:** update dependency helmet to v6.2.0 ([d40f121](https://github.com/newjersey/navigator.business.nj.gov/commit/d40f12101102af97ef3fb0f451412e3e58415be0))
+* **deps:** update dependency jsonwebtoken to v9.0.1 ([f4b0003](https://github.com/newjersey/navigator.business.nj.gov/commit/f4b000341a3548ebddc8abe34ad446d65b7bc67b))
+* **deps:** update dependency next-seo to v6.1.0 ([7db1d19](https://github.com/newjersey/navigator.business.nj.gov/commit/7db1d19bd2cc08c3f92bc110a85ddf767757df5f))
+* **deps:** update dependency remark-parse to v10.0.2 ([6aa0955](https://github.com/newjersey/navigator.business.nj.gov/commit/6aa0955af7b618152c972f4a4182c6d3dda91700))
+* **deps:** update dependency winston to v3.10.0 ([f829473](https://github.com/newjersey/navigator.business.nj.gov/commit/f829473696831afe6da9e454bba878c4fd7d40fa))
+* **deps:** update dependency xml2js to v0.6.0 ([fa64215](https://github.com/newjersey/navigator.business.nj.gov/commit/fa642152e991511b8836aa112d28ff90385299b6))
+* **deps:** update emotion monorepo ([dfbeda2](https://github.com/newjersey/navigator.business.nj.gov/commit/dfbeda28bbe9b09724609bf76e095de2439fdfa5))
+
 ## [5.23.4](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.23.3...v5.23.4) (2023-07-12)
 
 
