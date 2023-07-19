@@ -53,7 +53,6 @@ import {
   createEmptyProfileData,
   createEmptyUser,
   createEmptyUserData,
-  LookupLegalStructureById,
   Municipality,
   ProfileData,
   TaskProgress,
@@ -123,21 +122,9 @@ const OnboardingPage = (props: Props): ReactElement => {
       };
     };
 
-    const removeDateAndEntityIdForPublicFilingPages = (): void => {
-      if (profileData.legalStructureId) {
-        const requiresPublicFiling = LookupLegalStructureById(
-          profileData.legalStructureId
-        ).requiresPublicFiling;
-        if (!requiresPublicFiling) {
-          removePageFromFlow("date-and-entity-id-for-public-filing", "OWNING");
-        }
-      }
-    };
-
     const removeNexusSpecificPages = (): void => {
       if (profileData.businessPersona === "FOREIGN" && profileData.foreignBusinessType !== "NEXUS") {
         removePageFromFlow("industry-page", "FOREIGN");
-        removePageFromFlow("legal-structure-page", "FOREIGN");
         removePageFromFlow("municipality-page", "FOREIGN");
       }
     };
@@ -150,7 +137,6 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
     };
 
-    removeDateAndEntityIdForPublicFilingPages();
     removeNexusSpecificPages();
     removeNameAndEmailForAdditionalBusiness();
 
