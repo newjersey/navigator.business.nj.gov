@@ -88,6 +88,8 @@ export const FormationDateModal = (props: Props): ReactElement => {
               overrides={{
                 header: Config.formationDateModal.fieldLabel,
                 description: Config.formationDateModal.fieldDescription,
+                headerNotBolded: "",
+                postDescription: "",
               }}
             />
 

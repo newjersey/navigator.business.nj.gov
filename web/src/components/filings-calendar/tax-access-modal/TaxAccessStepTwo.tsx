@@ -302,6 +302,8 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                 overrides={{
                   header: Config.taxAccess.modalBusinessFieldHeader,
                   description: Config.taxAccess.modalBusinessFieldMarkdown,
+                  headerNotBolded: "",
+                  postDescription: "",
                 }}
               />
               <ProfileBusinessName validationText={Config.taxAccess.failedBusinessFieldHelper} required />
@@ -318,6 +320,8 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                 overrides={{
                   header: Config.taxAccess.modalBusinessOwnerName,
                   description: Config.taxAccess.modalBusinessOwnerDescription,
+                  headerNotBolded: "",
+                  postDescription: "",
                 }}
               />
               <ProfileResponsibleOwnerName
@@ -337,6 +341,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                 overrides={{
                   header: Config.taxAccess.modalTaxIdHeader,
                   description: Config.taxAccess.modalTaxIdMarkdown,
+                  headerNotBolded: "",
                   postDescription: LookupLegalStructureById(
                     business?.profileData.legalStructureId
                   ).elementsToDisplay.has("taxIdDisclaimer")
