@@ -40,6 +40,7 @@ const generateOnboardingBusiness = (): Business => {
   return generateBusiness({
     profileData: generateProfileData({
       businessName: "",
+      tradeName: "",
       industryId: undefined,
       legalStructureId: undefined,
     }),

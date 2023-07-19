@@ -14,6 +14,7 @@ describe("getNavBarBusinessTitle", () => {
     const business = generateBusiness({
       profileData: generateProfileData({
         businessName: "",
+        tradeName: "",
         industryId: undefined,
       }),
     });
@@ -34,6 +35,20 @@ describe("getNavBarBusinessTitle", () => {
     expect(navBarBusinessTitle).toEqual(businessName);
   });
 
+  it("shows businessName if business name is defined even if missing legal structure", () => {
+    const businessName = "businessName";
+    const business = generateBusiness({
+      profileData: generateProfileData({
+        businessName: businessName,
+        tradeName: "",
+        industryId: "cannabis",
+        legalStructureId: undefined,
+      }),
+    });
+    const navBarBusinessTitle = getNavBarBusinessTitle(business);
+    expect(navBarBusinessTitle).toEqual(businessName);
+  });
+
   it("shows trade Name if trade name is defined for Trade Name type and industryId are also defined", () => {
     const businessName = "businessName";
     const business = generateBusiness({
@@ -47,10 +62,39 @@ describe("getNavBarBusinessTitle", () => {
     expect(navBarBusinessTitle).toEqual(businessName);
   });
 
+  it("shows trade Name if trade name is defined even if missing legal structure", () => {
+    const businessName = "businessName";
+    const business = generateBusiness({
+      profileData: generateProfileData({
+        tradeName: businessName,
+        businessName: "",
+        industryId: "cannabis",
+        legalStructureId: undefined,
+      }),
+    });
+    const navBarBusinessTitle = getNavBarBusinessTitle(business);
+    expect(navBarBusinessTitle).toEqual(businessName);
+  });
+
+  it("prefers business name over trade name if both are defined and we don't know legal structure", () => {
+    const businessName = "businessName";
+    const business = generateBusiness({
+      profileData: generateProfileData({
+        tradeName: "trade name",
+        businessName: businessName,
+        industryId: "cannabis",
+        legalStructureId: undefined,
+      }),
+    });
+    const navBarBusinessTitle = getNavBarBusinessTitle(business);
+    expect(navBarBusinessTitle).toEqual(businessName);
+  });
+
   it("shows unnamed[industryId name] abbreviation if industryId is defined and business name & legal structure is undefined", () => {
     const business = generateBusiness({
       profileData: generateProfileData({
         businessName: "",
+        tradeName: "",
         industryId: "cannabis",
         legalStructureId: undefined,
       }),

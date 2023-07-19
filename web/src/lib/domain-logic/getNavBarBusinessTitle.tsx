@@ -6,6 +6,16 @@ export const getNavBarBusinessTitle = (business: Business | undefined): string =
   if (!business) return Config.navigationDefaults.navBarGuestText;
 
   const { businessName, tradeName, legalStructureId, industryId } = business.profileData;
+  const determineName = (): string => {
+    if (legalStructureId) {
+      return LookupLegalStructureById(legalStructureId).hasTradeName ? tradeName : businessName;
+    } else {
+      return businessName || tradeName || "";
+    }
+  };
+
+  const name = determineName();
+  if (name) return name;
 
   if (!industryId) return Config.navigationDefaults.navBarGuestText;
 
@@ -13,9 +23,6 @@ export const getNavBarBusinessTitle = (business: Business | undefined): string =
     return `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
       LookupIndustryById(business?.profileData?.industryId).name
     }`;
-
-  const name = LookupLegalStructureById(legalStructureId).requiresPublicFiling ? businessName : tradeName;
-  if (name) return name;
 
   return `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
     LookupIndustryById(business?.profileData?.industryId).name
