@@ -105,7 +105,7 @@ const orderByWeight = (taskA: TaskBuilder, taskB: TaskBuilder): number => {
 
 const addTasksFromAddOn = (builder: RoadmapBuilder, addOns: AddOn[]): RoadmapBuilder => {
   for (const addOn of addOns) {
-    const task = addOn.task ?? addOn.licenseTask;
+    const task = addOn.task || addOn.licenseTask;
     if (!task) continue;
     builder.tasks = [
       ...builder.tasks,
