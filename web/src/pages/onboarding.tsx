@@ -226,7 +226,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.isReady, state.user, state.isAuthenticated, updateQueue]);
+  }, [router.isReady, state.user, state.isAuthenticated]);
 
   const setIndustryAndRouteToPage = async (
     business: Business,
