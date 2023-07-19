@@ -3178,8 +3178,13 @@ collections:
                   widget: string,
                 }
               - {
-                  label: Navbar Unnamed Business button text,
+                  label: Navbar Unnamed Business STARTING text,
                   name: navBarUnnamedBusinessText,
+                  widget: string,
+                }
+              - {
+                  label: Navbar Unnamed Business OWNING text,
+                  name: navBarUnnamedOwnedBusinessText,
                   widget: string,
                 }
               - { label: Guest Alert Title, name: guestAlertTitle, widget: string }
