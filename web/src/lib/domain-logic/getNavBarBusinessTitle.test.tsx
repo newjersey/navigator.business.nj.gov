@@ -1,141 +1,344 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import {
+  BusinessPersona,
   generateBusiness,
   LookupIndustryById,
   LookupLegalStructureById,
+  ProfileData,
 } from "@businessnjgovnavigator/shared";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 
 const Config = getMergedConfig();
 
+const name = "some cool name";
+
+const publicFilingProfile = (): Partial<ProfileData> => {
+  return {
+    tradeName: "",
+    legalStructureId: "limited-liability-company",
+  };
+};
+
+const tradeNameProfile = (): Partial<ProfileData> => {
+  return {
+    businessName: "",
+    legalStructureId: "sole-proprietorship",
+  };
+};
+
 describe("getNavBarBusinessTitle", () => {
-  it("shows guest text if industryId is undefined", () => {
-    const business = generateBusiness({
-      profileData: generateProfileData({
-        businessName: "",
-        tradeName: "",
-        industryId: undefined,
-      }),
+  describe("when name is defined", () => {
+    describe("when legal structure undefined", () => {
+      it.each(["STARTING", "OWNING"])("shows business name", (businessPersona) => {
+        const business = generateBusiness({
+          profileData: generateProfileData({
+            businessPersona: businessPersona as BusinessPersona,
+            businessName: name,
+            tradeName: "",
+            legalStructureId: undefined,
+          }),
+        });
+        const navBarBusinessTitle = getNavBarBusinessTitle(business);
+        expect(navBarBusinessTitle).toEqual(name);
+      });
+
+      it.each(["STARTING", "OWNING"])("shows business name", (businessPersona) => {
+        const business = generateBusiness({
+          profileData: generateProfileData({
+            businessPersona: businessPersona as BusinessPersona,
+            businessName: "",
+            tradeName: name,
+            legalStructureId: undefined,
+          }),
+        });
+        const navBarBusinessTitle = getNavBarBusinessTitle(business);
+        expect(navBarBusinessTitle).toEqual(name);
+      });
+
+      it.each(["STARTING", "OWNING"])(
+        "shows business name over trade name if both defined",
+        (businessPersona) => {
+          const business = generateBusiness({
+            profileData: generateProfileData({
+              businessPersona: businessPersona as BusinessPersona,
+              businessName: name,
+              tradeName: "some trade name",
+              legalStructureId: undefined,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          expect(navBarBusinessTitle).toEqual(name);
+        }
+      );
     });
-    const navBarBusinessTitle = getNavBarBusinessTitle(business);
-    expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarGuestText);
+
+    describe("Public Filing", () => {
+      describe("STARTING", () => {
+        it("shows business name", () => {
+          const business = generateBusiness({
+            profileData: generateProfileData({
+              ...publicFilingProfile(),
+              businessPersona: "STARTING",
+              businessName: name,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          expect(navBarBusinessTitle).toEqual(name);
+        });
+      });
+
+      describe("OWNING", () => {
+        it("shows business name", () => {
+          const business = generateBusiness({
+            profileData: generateProfileData({
+              ...publicFilingProfile(),
+              businessPersona: "OWNING",
+              businessName: name,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          expect(navBarBusinessTitle).toEqual(name);
+        });
+      });
+    });
+
+    describe("Trade Name", () => {
+      describe("STARTING", () => {
+        it("shows trade name", () => {
+          const business = generateBusiness({
+            profileData: generateProfileData({
+              ...tradeNameProfile(),
+              businessPersona: "STARTING",
+              tradeName: name,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          expect(navBarBusinessTitle).toEqual(name);
+        });
+      });
+
+      describe("OWNING", () => {
+        it("shows trade name", () => {
+          const business = generateBusiness({
+            profileData: generateProfileData({
+              ...tradeNameProfile(),
+              businessPersona: "OWNING",
+              tradeName: name,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          expect(navBarBusinessTitle).toEqual(name);
+        });
+      });
+    });
   });
 
-  it("shows businessName if business name is defined and industryId are also defined", () => {
-    const businessName = "businessName";
-    const business = generateBusiness({
-      profileData: generateProfileData({
-        businessName: businessName,
-        industryId: "cannabis",
-        legalStructureId: "limited-liability-company",
-      }),
+  describe("when name undefined, legal structure defined, and industry defined", () => {
+    describe("Public Filing", () => {
+      describe("STARTING", () => {
+        it("shows Unnamed [Industry] [Legal Structure]", () => {
+          const business = generateBusiness({
+            profileData: generateProfileData({
+              ...publicFilingProfile(),
+              businessPersona: "STARTING",
+              businessName: undefined,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          expect(navBarBusinessTitle).toEqual(
+            `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
+              LookupIndustryById(business?.profileData?.industryId).name
+            } ${LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation}`
+          );
+        });
+      });
+
+      describe("OWNING", () => {
+        it("shows Unnamed Business [Legal Structure]", () => {
+          const business = generateBusiness({
+            profileData: generateProfileData({
+              ...publicFilingProfile(),
+              businessPersona: "OWNING",
+              businessName: undefined,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          expect(navBarBusinessTitle).toEqual(
+            `${Config.navigationDefaults.navBarUnnamedOwnedBusinessText} ${
+              LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation
+            }`
+          );
+        });
+      });
     });
-    const navBarBusinessTitle = getNavBarBusinessTitle(business);
-    expect(navBarBusinessTitle).toEqual(businessName);
+
+    describe("Trade Name", () => {
+      describe("STARTING", () => {
+        it("shows Unnamed [Industry] [Legal Structure]", () => {
+          const business = generateBusiness({
+            profileData: generateProfileData({
+              ...tradeNameProfile(),
+              businessPersona: "STARTING",
+              tradeName: undefined,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          expect(navBarBusinessTitle).toEqual(
+            `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
+              LookupIndustryById(business?.profileData?.industryId).name
+            } ${LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation}`
+          );
+        });
+      });
+
+      describe("OWNING", () => {
+        it("shows Unnamed Business [Legal Structure]", () => {
+          const business = generateBusiness({
+            profileData: generateProfileData({
+              ...tradeNameProfile(),
+              businessPersona: "OWNING",
+              tradeName: undefined,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          expect(navBarBusinessTitle).toEqual(
+            `${Config.navigationDefaults.navBarUnnamedOwnedBusinessText} ${
+              LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation
+            }`
+          );
+        });
+      });
+    });
   });
 
-  it("shows businessName if business name is defined even if missing legal structure", () => {
-    const businessName = "businessName";
-    const business = generateBusiness({
-      profileData: generateProfileData({
-        businessName: businessName,
-        tradeName: "",
-        industryId: "cannabis",
-        legalStructureId: undefined,
-      }),
+  describe("when name undefined, legal structure undefined, and industry defined", () => {
+    describe("when completed onboarding", () => {
+      describe("STARTING", () => {
+        it("shows Unnamed [Industry]", () => {
+          const business = generateBusiness({
+            onboardingFormProgress: "COMPLETED",
+            profileData: generateProfileData({
+              businessPersona: "STARTING",
+              legalStructureId: undefined,
+              tradeName: undefined,
+              businessName: undefined,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          expect(navBarBusinessTitle).toEqual(
+            `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
+              LookupIndustryById(business?.profileData?.industryId).name
+            }`
+          );
+        });
+      });
+
+      describe("OWNING", () => {
+        it("shows Unnamed Business", () => {
+          const business = generateBusiness({
+            onboardingFormProgress: "COMPLETED",
+            profileData: generateProfileData({
+              businessPersona: "OWNING",
+              legalStructureId: undefined,
+              tradeName: undefined,
+              businessName: undefined,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedOwnedBusinessText);
+        });
+      });
     });
-    const navBarBusinessTitle = getNavBarBusinessTitle(business);
-    expect(navBarBusinessTitle).toEqual(businessName);
+
+    describe("when NOT completed onboarding", () => {
+      it.each(["STARTING", "OWNING"])("shows Guest", (persona) => {
+        const business = generateBusiness({
+          onboardingFormProgress: "UNSTARTED",
+          profileData: generateProfileData({
+            businessPersona: persona as BusinessPersona,
+            legalStructureId: undefined,
+            tradeName: undefined,
+            businessName: undefined,
+          }),
+        });
+        const navBarBusinessTitle = getNavBarBusinessTitle(business);
+        expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarGuestText);
+      });
+    });
   });
 
-  it("shows trade Name if trade name is defined for Trade Name type and industryId are also defined", () => {
-    const businessName = "businessName";
-    const business = generateBusiness({
-      profileData: generateProfileData({
-        tradeName: businessName,
-        industryId: "cannabis",
-        legalStructureId: "sole-proprietorship",
-      }),
-    });
-    const navBarBusinessTitle = getNavBarBusinessTitle(business);
-    expect(navBarBusinessTitle).toEqual(businessName);
-  });
+  describe("when legal structure, industry, name undefined", () => {
+    describe("when completed onboarding", () => {
+      describe("STARTING", () => {
+        it("shows guest text", () => {
+          const business = generateBusiness({
+            onboardingFormProgress: "COMPLETED",
+            profileData: generateProfileData({
+              businessPersona: "STARTING",
+              legalStructureId: undefined,
+              industryId: undefined,
+              tradeName: undefined,
+              businessName: undefined,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarGuestText);
+        });
+      });
 
-  it("shows trade Name if trade name is defined even if missing legal structure", () => {
-    const businessName = "businessName";
-    const business = generateBusiness({
-      profileData: generateProfileData({
-        tradeName: businessName,
-        businessName: "",
-        industryId: "cannabis",
-        legalStructureId: undefined,
-      }),
-    });
-    const navBarBusinessTitle = getNavBarBusinessTitle(business);
-    expect(navBarBusinessTitle).toEqual(businessName);
-  });
+      describe("OWNING", () => {
+        it("shows Unnamed Business text", () => {
+          const business = generateBusiness({
+            onboardingFormProgress: "COMPLETED",
+            profileData: generateProfileData({
+              businessPersona: "OWNING",
+              legalStructureId: undefined,
+              industryId: undefined,
+              tradeName: undefined,
+              businessName: undefined,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedOwnedBusinessText);
+        });
+      });
 
-  it("prefers business name over trade name if both are defined and we don't know legal structure", () => {
-    const businessName = "businessName";
-    const business = generateBusiness({
-      profileData: generateProfileData({
-        tradeName: "trade name",
-        businessName: businessName,
-        industryId: "cannabis",
-        legalStructureId: undefined,
-      }),
-    });
-    const navBarBusinessTitle = getNavBarBusinessTitle(business);
-    expect(navBarBusinessTitle).toEqual(businessName);
-  });
+      describe("when not completed onboarding", () => {
+        describe("STARTING", () => {
+          it("shows guest text", () => {
+            const business = generateBusiness({
+              onboardingFormProgress: "UNSTARTED",
+              profileData: generateProfileData({
+                businessPersona: "STARTING",
+                legalStructureId: undefined,
+                industryId: undefined,
+                tradeName: undefined,
+                businessName: undefined,
+              }),
+            });
+            const navBarBusinessTitle = getNavBarBusinessTitle(business);
+            expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarGuestText);
+          });
+        });
 
-  it("shows unnamed[industryId name] abbreviation if industryId is defined and business name & legal structure is undefined", () => {
-    const business = generateBusiness({
-      profileData: generateProfileData({
-        businessName: "",
-        tradeName: "",
-        industryId: "cannabis",
-        legalStructureId: undefined,
-      }),
+        describe("OWNING", () => {
+          it("shows guest text", () => {
+            const business = generateBusiness({
+              onboardingFormProgress: "UNSTARTED",
+              profileData: generateProfileData({
+                businessPersona: "STARTING",
+                legalStructureId: undefined,
+                industryId: undefined,
+                tradeName: undefined,
+                businessName: undefined,
+              }),
+            });
+            const navBarBusinessTitle = getNavBarBusinessTitle(business);
+            expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarGuestText);
+          });
+        });
+      });
     });
-    const navBarBusinessTitle = getNavBarBusinessTitle(business);
-    expect(navBarBusinessTitle).toBe(
-      `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
-        LookupIndustryById(business?.profileData?.industryId).name
-      }`
-    );
-  });
-
-  it("shows unnamed[industryId name][legalStructureId] abbreviation if legalStructureId and industryId are defined and business name is undefined", () => {
-    const business = generateBusiness({
-      profileData: generateProfileData({
-        businessName: "",
-        industryId: "cannabis",
-        legalStructureId: "limited-liability-company",
-      }),
-    });
-    const navBarBusinessTitle = getNavBarBusinessTitle(business);
-    expect(navBarBusinessTitle).toBe(
-      `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
-        LookupIndustryById(business?.profileData?.industryId).name
-      } ${LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation}`
-    );
-  });
-
-  it("shows unnamed[industryId name][legalStructureId] abbreviation if legalStructureId and industryId are defined and trade name is undefined", () => {
-    const business = generateBusiness({
-      profileData: generateProfileData({
-        tradeName: "",
-        industryId: "cannabis",
-        legalStructureId: "sole-proprietorship",
-      }),
-    });
-    const navBarBusinessTitle = getNavBarBusinessTitle(business);
-    expect(navBarBusinessTitle).toBe(
-      `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
-        LookupIndustryById(business?.profileData?.industryId).name
-      } ${LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation}`
-    );
   });
 });

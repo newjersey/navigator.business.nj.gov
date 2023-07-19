@@ -64,6 +64,7 @@
     "logInButton": "Log in",
     "logoutButton": "Log out",
     "navBarUnnamedBusinessText": "Unnamed",
+    "navBarUnnamedOwnedBusinessText": "Unnamed Business",
     "taskPageNavBarHeading": "Business Roadmap",
     "addBusinessButton": "Add a Business"
   },
