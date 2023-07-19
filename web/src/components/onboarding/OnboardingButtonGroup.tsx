@@ -7,6 +7,7 @@ import React, { ReactElement, useContext } from "react";
 
 interface Props {
   isFinal: boolean;
+  isAdditionalBusiness: boolean;
 }
 
 export const OnboardingButtonGroup = (props: Props): ReactElement => {
@@ -18,6 +19,16 @@ export const OnboardingButtonGroup = (props: Props): ReactElement => {
     onBack();
   };
 
+  const getText = (): string => {
+    if (!props.isFinal) {
+      return Config.onboardingDefaults.nextButtonText;
+    } else if (props.isAdditionalBusiness) {
+      return Config.onboardingDefaults.additionalBusinessFinalNextButtonText;
+    } else {
+      return Config.onboardingDefaults.finalNextButtonText;
+    }
+  };
+
   return (
     <div className="float-right fdr margin-bottom-8">
       {(state.page || 1) > 1 && (
@@ -26,9 +37,7 @@ export const OnboardingButtonGroup = (props: Props): ReactElement => {
         </SecondaryButton>
       )}
       <PrimaryButton isColor="primary" dataTestId="next" isSubmitButton={true} isRightMarginRemoved={true}>
-        {props.isFinal
-          ? Config.onboardingDefaults.finalNextButtonText
-          : Config.onboardingDefaults.nextButtonText}
+        {getText()}
       </PrimaryButton>
     </div>
   );

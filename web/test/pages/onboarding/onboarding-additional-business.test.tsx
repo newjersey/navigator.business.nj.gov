@@ -1,0 +1,131 @@
+import { getMergedConfig } from "@/contexts/configContext";
+import * as api from "@/lib/api-client/apiClient";
+import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
+import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import { templateEval } from "@/lib/utils/helpers";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import {
+  currentBusiness,
+  currentUserData,
+  setupStatefulUserDataContext,
+} from "@/test/mock/withStatefulUserData";
+import { mockSuccessfulApiSignups, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
+import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
+import { createEmptyBusiness, UserData } from "@businessnjgovnavigator/shared/userData";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
+
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  postNewsletter: jest.fn(),
+  postUserTesting: jest.fn(),
+  postGetAnnualFilings: jest.fn(),
+}));
+
+const mockApi = api as jest.Mocked<typeof api>;
+const Config = getMergedConfig();
+
+describe("onboarding - additional business", () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+    setupStatefulUserDataContext();
+    mockSuccessfulApiSignups();
+    jest.useFakeTimers();
+  });
+
+  it("displays Additional keyword in header", async () => {
+    useMockRouter({ isReady: true, query: { additionalBusiness: "true" } });
+    renderPage({});
+
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalledWith({ query: { page: 1 } }, undefined, { shallow: true });
+    });
+
+    const expectedTitle = templateEval(Config.onboardingDefaults.pageTitle, { Additional: "Additional" });
+    expect(screen.getByText(expectedTitle)).toBeInTheDocument();
+  });
+
+  it("returns user to previous business without saving", async () => {
+    useMockRouter({ isReady: true, query: { additionalBusiness: "true" } });
+    const initialBusiness = generateBusiness({});
+    const initialData = generateUserDataForBusiness(initialBusiness);
+    renderPage({ userData: initialData });
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalledWith({ query: { page: 1 } }, undefined, { shallow: true });
+    });
+
+    const previousBusinessName = getNavBarBusinessTitle(initialBusiness);
+    const expectedText = templateEval(Config.onboardingDefaults.returnToPreviousBusiness, {
+      previousBusiness: previousBusinessName,
+    });
+
+    fireEvent.click(screen.getByText(expectedText));
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
+    });
+    expect(currentUserData()).toEqual(initialData);
+  });
+
+  it("onboards and saves an additional empty business", async () => {
+    const emptyBusiness = createEmptyBusiness();
+    const initialBusiness = generateBusiness({});
+    const initialData = generateUserDataForBusiness(initialBusiness);
+    expect(Object.keys(initialData.businesses)).toHaveLength(1);
+
+    useMockRouter({ isReady: true, query: { additionalBusiness: "true" } });
+    const { page } = renderPage({ userData: initialData });
+
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalledWith({ query: { page: 1 } }, undefined, { shallow: true });
+    });
+
+    page.chooseRadio("business-persona-starting");
+    await page.visitStep(2);
+
+    const newBusinessId = currentBusiness().id;
+    expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
+    page.selectByValue("Industry", "e-commerce");
+
+    page.clickNext();
+
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalledWith({
+        pathname: ROUTES.dashboard,
+        query: { [QUERIES.fromAdditionalBusiness]: "true" },
+      });
+    });
+
+    expect(mockApi.postNewsletter).not.toHaveBeenCalled();
+    expect(mockApi.postUserTesting).not.toHaveBeenCalled();
+
+    const expectedUserData: UserData = {
+      ...initialData,
+      currentBusinessId: newBusinessId,
+      businesses: {
+        [initialBusiness.id]: initialBusiness,
+        [newBusinessId]: {
+          ...emptyBusiness,
+          id: newBusinessId,
+          onboardingFormProgress: "COMPLETED",
+          profileData: {
+            ...emptyBusiness.profileData,
+            businessPersona: "STARTING",
+            businessName: "",
+            industryId: "e-commerce",
+            sectorId: "retail-trade-and-ecommerce",
+            homeBasedBusiness: undefined,
+            municipality: undefined,
+            isNonprofitOnboardingRadio: false,
+          },
+          preferences: {
+            ...emptyBusiness.preferences,
+            visibleSidebarCards: ["welcome", "task-progress"],
+          },
+        },
+      },
+    };
+
+    expect(currentUserData()).toEqual(expectedUserData);
+  });
+});
