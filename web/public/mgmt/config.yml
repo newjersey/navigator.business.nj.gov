@@ -2550,6 +2550,16 @@ collections:
                   widget: string,
                 }
               - { label: Tax Registration Snackbar Body, name: taxRegistrationSnackbarBody, widget: text }
+              - {
+                  label: Additional Business Snackbar Heading,
+                  name: additionalBusinessSnackbarHeader,
+                  widget: string,
+                }
+              - {
+                  label: Additional Business Snackbar Body,
+                  name: additionalBusinessSnackbarBody,
+                  widget: text,
+                }
       - label: "Dashboard Calendar"
         name: "dashboard-config-calendar"
         file: "content/src/fieldConfig/dashboard-calendar.json"
@@ -3180,6 +3190,7 @@ collections:
               - { label: Guest Alert Modal Body, name: guestModalBody, widget: text }
               - { label: Guest Alert Button, name: guestModalButtonText, widget: string }
               - { label: Guest Alert Sub Button text, name: guestModalSubText, widget: string }
+              - { label: Add Business Button, name: addBusinessButton, widget: string }
           - label: Onboarding Defaults
             name: onboardingDefaults
             collapsed: true
@@ -3187,8 +3198,14 @@ collections:
             summary: "{{onboardingDefaults}}"
             fields:
               - { label: Page Title, name: pageTitle, widget: string }
+              - { label: Return to Previous Business, name: returnToPreviousBusiness, widget: string }
               - { label: Next Button Text, name: nextButtonText, widget: string }
               - { label: Final Next Button Text, name: finalNextButtonText, widget: string }
+              - {
+                  label: Addition Business - Final Next Button Text,
+                  name: additionalBusinessFinalNextButtonText,
+                  widget: string,
+                }
               - { label: Back Button Test, name: backButtonText, widget: string }
               - { label: Step X of Y Template, name: stepXofYTemplate, widget: string }
               - { label: Step X Template, name: stepXTemplate, widget: string }

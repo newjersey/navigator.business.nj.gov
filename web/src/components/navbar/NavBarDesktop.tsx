@@ -105,18 +105,21 @@ export const NavBarDesktop = (): ReactElement => {
                   </UnStyledButton>
                 </div>
                 <div className="margin-right-4 text-base">|</div>
+                {currentlyOnboarding() && (
+                  <div className={`text-bold text-${textColor} flex flex-align-center`}>
+                    <Icon
+                      className={`${
+                        isAuthenticated ? "usa-icon--size-4" : "usa-icon--size-3"
+                      } margin-right-1`}
+                    >
+                      {accountIcon}
+                    </Icon>
+                    <div className="truncate-long-business-names_NavBarDesktop">{navBarBusinessTitle}</div>
+                  </div>
+                )}
               </div>
             )}
-            {currentlyOnboarding() ? (
-              <div className={`text-bold text-${textColor} flex flex-align-center`}>
-                <Icon
-                  className={`${isAuthenticated ? "usa-icon--size-4" : "usa-icon--size-3"} margin-right-1`}
-                >
-                  {accountIcon}
-                </Icon>
-                <div className="truncate-long-business-names_NavBarDesktop">{navBarBusinessTitle}</div>
-              </div>
-            ) : (
+            {!currentlyOnboarding() && (
               <button
                 data-testid="profile-dropdown"
                 className="border-2px border-solid radius-pill border-base-lighter bg-white-transparent"
@@ -150,7 +153,9 @@ export const NavBarDesktop = (): ReactElement => {
                           <NavBarPopupMenu
                             handleClose={(): void => setOpen(false)}
                             open={open}
-                            menuConfiguration={isAuthenticated ? "profile-myNj-logout" : "profile"}
+                            menuConfiguration={
+                              isAuthenticated ? "profile-mynj-addbusiness-logout" : "profile"
+                            }
                           />
                         </div>
                       </ClickAwayListener>

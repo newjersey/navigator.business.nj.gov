@@ -158,6 +158,7 @@ type ScrollDepth = "how_it_works" | "more_support_seen";
 
 type FormName =
   | "finish_onboarding"
+  | "finish_additional_business_onboarding"
   | "business_formation"
   | "profile"
   | "tax_calendar_modal"
@@ -1144,6 +1145,19 @@ export default {
             legacy_event_category: "onboarding_last_step",
             legacy_event_label: "finish_onboarding",
             form_name: "finish_onboarding",
+          });
+        },
+      },
+    },
+    onboarding_last_step_save_additional_business_button: {
+      click: {
+        finish_additional_business_onboarding: () => {
+          eventRunner.track({
+            event: "form_submits",
+            legacy_event_action: "click",
+            legacy_event_category: "onboarding_last_step_save_additional_business_button",
+            legacy_event_label: "finish_additional_business_onboarding",
+            form_name: "finish_additional_business_onboarding",
           });
         },
       },

@@ -136,6 +136,14 @@ p + * {
   .text-green-color-hover {
     color: $primary-dark;
   }
+
+  .icon-blue-bg-color-hover {
+    background-color: $accent-cool-darkest;
+  }
+
+  .text-blue-color-hover {
+    color: $accent-cool-darkest;
+  }
 }
 
 .operate-bullet:before {

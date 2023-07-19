@@ -11,6 +11,10 @@ export class DashboardPage {
     return cy.get('[data-testid="profile-link"]');
   };
 
+  getAddBusinessButtonInDropdown = () => {
+    return cy.get('[data-testid="addBusinessMenuItem"]');
+  };
+
   clickEditProfileLink = () => {
     this.getEditProfileLink().click();
   };

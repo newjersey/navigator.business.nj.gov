@@ -16,11 +16,13 @@ export interface QUERY_PARAMS_VALUES {
   fromFormBusinessEntity: "true" | "false";
   fromTaxRegistration: "true" | "false";
   fromForming: "true";
+  fromAdditionalBusiness: "true";
   fromFunding: "true";
   fromOnboarding: "true";
   fromTaxRegistrationCard: "true";
   completeFiling: "true" | "false";
   success: "true";
+  additionalBusiness: "true";
   path: "businessFormation";
   signUp: "true";
   industry: string;
@@ -38,8 +40,10 @@ export enum QUERIES {
   fromFunding = "fromFunding",
   fromOnboarding = "fromOnboarding",
   fromTaxRegistrationCard = "fromTaxRegistrationCard",
+  fromAdditionalBusiness = "fromAdditionalBusiness",
   completeFiling = "completeFiling",
   success = "success",
+  additionalBusiness = "additionalBusiness",
   path = "path",
   signUp = "signUp",
   industry = "industry",

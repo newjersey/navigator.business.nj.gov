@@ -5,15 +5,17 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSelfRegister, onSignOut } from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import { randomPublicFilingLegalStructure } from "@/test/factories";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { useMockBusiness } from "@/test/mock/mockUseUserData";
+import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
   Business,
   BusinessUser,
   generateBusiness,
   generateProfileData,
+  generateUserData,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -130,30 +132,93 @@ describe("<NavBarPopupMenu />", () => {
       });
     });
 
-    describe("profile-myNj-logout configuration", () => {
-      beforeEach(() => {
+    describe("profile-mynj-addbusiness-logout configuration", () => {
+      it("shows profile, myNJ, add business, and logout buttons", () => {
         useMockBusiness(generateOnboardingBusiness());
-        renderNavBarPopupMenu({ menuConfiguration: "profile-myNj-logout" });
-      });
-
-      it("shows profile, myNJ and logout buttons", () => {
+        renderNavBarPopupMenu({ menuConfiguration: "profile-mynj-addbusiness-logout" });
         expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
         expect(screen.getByText(Config.navigationDefaults.navBarGuestText)).toBeInTheDocument();
         expect(screen.getByText(Config.navigationDefaults.myNJAccountText)).toBeInTheDocument();
+        expect(screen.getByText(Config.navigationDefaults.addBusinessButton)).toBeInTheDocument();
         expect(screen.getByText(Config.navigationDefaults.logoutButton)).toBeInTheDocument();
       });
 
+      it("shows multiple businesses", () => {
+        const firstBusiness = generateBusiness({
+          profileData: generateProfileData({
+            businessName: "first-biz",
+            legalStructureId: randomPublicFilingLegalStructure(),
+          }),
+        });
+        const secondBusiness = generateBusiness({
+          profileData: generateProfileData({
+            businessName: "second-biz",
+            legalStructureId: randomPublicFilingLegalStructure(),
+          }),
+        });
+        const userData = generateUserData({
+          currentBusinessId: firstBusiness.id,
+          businesses: {
+            [firstBusiness.id]: firstBusiness,
+            [secondBusiness.id]: secondBusiness,
+          },
+        });
+
+        useMockUserData(userData);
+        renderNavBarPopupMenu({ menuConfiguration: "profile-mynj-addbusiness-logout" });
+
+        expect(screen.getByText("first-biz")).toBeInTheDocument();
+        expect(screen.getByText("second-biz")).toBeInTheDocument();
+      });
+
+      it("only shows profile link for current business", () => {
+        const firstBusiness = generateBusiness({
+          profileData: generateProfileData({ businessName: "first-biz" }),
+        });
+        const secondBusiness = generateBusiness({
+          profileData: generateProfileData({ businessName: "second-biz" }),
+        });
+        const userData = generateUserData({
+          currentBusinessId: firstBusiness.id,
+          businesses: {
+            [firstBusiness.id]: firstBusiness,
+            [secondBusiness.id]: secondBusiness,
+          },
+        });
+
+        useMockUserData(userData);
+        renderNavBarPopupMenu({ menuConfiguration: "profile-mynj-addbusiness-logout" });
+
+        expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
+      });
+
       it("sends user to profile when profile is clicked", () => {
+        useMockBusiness(generateOnboardingBusiness());
+        renderNavBarPopupMenu({ menuConfiguration: "profile-mynj-addbusiness-logout" });
         fireEvent.click(screen.getByText(Config.navigationDefaults.profileLinkText));
         expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
       });
 
-      it("sends user to dashbaord when dashbaord link is clicked", () => {
+      it("sends user to dashboard when dashboard link is clicked", () => {
+        useMockBusiness(generateOnboardingBusiness());
+        renderNavBarPopupMenu({ menuConfiguration: "profile-mynj-addbusiness-logout" });
         fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestText));
         expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
       });
 
+      it("sends user to new business onboarding when add business is clicked", () => {
+        useMockBusiness(generateOnboardingBusiness());
+        renderNavBarPopupMenu({ menuConfiguration: "profile-mynj-addbusiness-logout" });
+        fireEvent.click(screen.getByText(Config.navigationDefaults.addBusinessButton));
+        expect(mockPush).toHaveBeenCalledWith({
+          pathname: ROUTES.onboarding,
+          query: { additionalBusiness: "true" },
+        });
+      });
+
       it("sends user to selfRegistration when registration button is clicked", async () => {
+        useMockBusiness(generateOnboardingBusiness());
+        renderNavBarPopupMenu({ menuConfiguration: "profile-mynj-addbusiness-logout" });
         const openMock = jest.fn();
         global.open = openMock;
 
@@ -165,6 +230,8 @@ describe("<NavBarPopupMenu />", () => {
       });
 
       it("sends user to landing when logout button is clicked", async () => {
+        useMockBusiness(generateOnboardingBusiness());
+        renderNavBarPopupMenu({ menuConfiguration: "profile-mynj-addbusiness-logout" });
         fireEvent.click(screen.getByText(Config.navigationDefaults.logoutButton));
         expect(onSignOut).toHaveBeenCalled();
       });

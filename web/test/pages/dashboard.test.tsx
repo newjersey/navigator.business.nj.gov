@@ -1,7 +1,7 @@
 import { SignUpSnackbar } from "@/components/auth/SignUpSnackbar";
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { ROUTES } from "@/lib/domain-logic/routes";
+import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import {
   Certification,
   Funding,
@@ -330,26 +330,26 @@ describe("dashboard page", () => {
   });
 
   it("renders calendar snackbar when fromFormBusinessEntity query parameter is provided", () => {
-    useMockRouter({ isReady: true, query: { fromFormBusinessEntity: "true" } });
+    useMockRouter({ isReady: true, query: { [QUERIES.fromFormBusinessEntity]: "true" } });
     renderDashboardPage({});
     expect(screen.getByTestId("snackbar-alert-calendar")).toBeInTheDocument();
   });
 
   it("renders certification snackbar when fromTaxRegistration query parameter is provided", () => {
-    useMockRouter({ isReady: true, query: { fromTaxRegistration: "true" } });
+    useMockRouter({ isReady: true, query: { [QUERIES.fromTaxRegistration]: "true" } });
     renderDashboardPage({});
     expect(screen.getByTestId("certification-alert")).toBeInTheDocument();
   });
 
   it("renders tax registration snackbar when fromTaxRegistrationCard query parameter is provided", async () => {
-    useMockRouter({ isReady: true, query: { fromTaxRegistrationCard: "true" } });
+    useMockRouter({ isReady: true, query: { [QUERIES.fromTaxRegistrationCard]: "true" } });
 
     renderDashboardPage({});
     expect(screen.getByTestId("tax-registration-alert")).toBeInTheDocument();
   });
 
   it("renders funding snackbar when fromFunding query parameter is provided", async () => {
-    useMockRouter({ isReady: true, query: { fromFunding: "true" } });
+    useMockRouter({ isReady: true, query: { [QUERIES.fromFunding]: "true" } });
 
     renderDashboardPage({});
     expect(screen.getByTestId("funding-alert")).toBeInTheDocument();
@@ -357,7 +357,7 @@ describe("dashboard page", () => {
 
   it("renders hiddenTasks snackbar after delay when fromFunding query parameter is provided", async () => {
     jest.useFakeTimers();
-    useMockRouter({ isReady: true, query: { fromFunding: "true" } });
+    useMockRouter({ isReady: true, query: { [QUERIES.fromFunding]: "true" } });
 
     renderDashboardPage({});
     await act(() => {
@@ -367,10 +367,17 @@ describe("dashboard page", () => {
   });
 
   it("renders deferred question snackbar when deferredQuestionAnswered query parameter is provided", async () => {
-    useMockRouter({ isReady: true, query: { deferredQuestionAnswered: "true" } });
+    useMockRouter({ isReady: true, query: { [QUERIES.deferredQuestionAnswered]: "true" } });
 
     renderDashboardPage({});
     expect(screen.getByTestId("deferredQuestionAnswered-alert")).toBeInTheDocument();
+  });
+
+  it("renders additional business snackbar when from query parameter is provided", async () => {
+    useMockRouter({ isReady: true, query: { [QUERIES.fromAdditionalBusiness]: "true" } });
+
+    renderDashboardPage({});
+    expect(screen.getByTestId("fromAdditionalBusiness-alert")).toBeInTheDocument();
   });
 
   it("displays filings calendar as list when taxfiling is populated and operatingPhase has ListCalendar", () => {

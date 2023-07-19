@@ -7,7 +7,8 @@ import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSelfRegister, onSignOut } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
-import { ROUTES } from "@/lib/domain-logic/routes";
+import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
+import { switchCurrentBusiness } from "@/lib/domain-logic/switchCurrentBusiness";
 import analytics from "@/lib/utils/analytics";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -18,7 +19,7 @@ import { ReactElement, useContext } from "react";
 export type MenuConfiguration =
   | "profile"
   | "profile-register-login"
-  | "profile-myNj-logout"
+  | "profile-mynj-addbusiness-logout"
   | "login"
   | "login-getstarted";
 
@@ -30,7 +31,7 @@ export interface Props {
 }
 
 export const NavBarPopupMenu = (props: Props): ReactElement => {
-  const { business, userData, updateQueue } = useUserData();
+  const { userData, updateQueue } = useUserData();
   const { dispatch } = useContext(AuthContext);
   const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
 
@@ -41,8 +42,6 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
       ? Config.navigationDefaults.navBarGuestText
       : getUserNameOrEmail(userData);
   const isProfileSelected = router.route === ROUTES.profile;
-
-  const navBarBusinessTitle = getNavBarBusinessTitle(business);
 
   function handleListKeyDown(event: React.KeyboardEvent): void {
     if (event.key === "Tab") {
@@ -88,6 +87,25 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
     });
   };
 
+  const addBusinessItem = (): ReactElement[] => {
+    return [
+      NavMenuItem({
+        onClick: (): void => {
+          routeWithQuery(router, {
+            path: ROUTES.onboarding,
+            queries: { [QUERIES.additionalBusiness]: "true" },
+          });
+          props.handleClose();
+        },
+        icon: <ButtonIcon svgFilename="add-business-plus" sizePx="25px" />,
+        itemText: Config.navigationDefaults.addBusinessButton,
+        key: "addBusinessMenuItem",
+        dataTestid: "addBusinessMenuItem",
+      }),
+      <hr className="margin-0 hr-2px" key={"add-break-1"} />,
+    ];
+  };
+
   const registerMenuItem = (): ReactElement => {
     return NavMenuItem({
       onClick: (): void => {
@@ -106,39 +124,51 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
         router.push(ROUTES.onboarding);
       },
       itemText: Config.navigationDefaults.registerButton,
-      key: "getStartedMnueItem",
+      key: "getStartedMenuItem",
     });
   };
 
   const profileMenuItem = (): ReactElement[] => {
-    return [
-      <hr className="margin-0 hr-2px" key={"profile-break-1"} />,
+    if (!userData) return [];
+    return Object.keys(userData.businesses).flatMap((businessId, i) => {
+      const isCurrent = businessId === userData.currentBusinessId;
 
-      NavMenuItem({
-        onClick: (): void => {
-          router.push(ROUTES.dashboard);
-        },
-        selected: !isProfileSelected,
-        icon: <ButtonIcon svgFilename="business-green" sizePx="35px" />,
-        itemText: navBarBusinessTitle,
-        key: "dashboardMenuItem",
-        className: "profile-menu-item",
-      }),
+      const businessMenuItems = [
+        NavMenuItem({
+          onClick: async (): Promise<void> => {
+            if (Object.keys(userData.businesses).length > 1) {
+              await updateQueue?.queue(switchCurrentBusiness(userData, businessId)).update();
+            }
+            await router.push(ROUTES.dashboard);
+          },
+          selected: !isProfileSelected && isCurrent,
+          icon: <ButtonIcon svgFilename="business-green" sizePx="35px" />,
+          itemText: getNavBarBusinessTitle(userData.businesses[businessId]),
+          dataTestid: `business-title-${i}`,
+          key: `business-title-${businessId}`,
+          className: "profile-menu-item",
+        }),
+      ];
 
-      NavMenuItem({
-        onClick: (): void => {
-          analytics.event.account_menu_my_profile.click.go_to_profile_screen();
-          router.push(ROUTES.profile);
-        },
-        selected: isProfileSelected,
-        itemText: Config.navigationDefaults.profileLinkText,
-        key: "profileMenuItem",
-        dataTestid: "profile-link",
-        className: "profile-menu-item",
-      }),
+      if (isCurrent) {
+        const profileLink = NavMenuItem({
+          onClick: (): void => {
+            analytics.event.account_menu_my_profile.click.go_to_profile_screen();
+            router.push(ROUTES.profile);
+          },
+          selected: isProfileSelected && isCurrent,
+          itemText: Config.navigationDefaults.profileLinkText,
+          key: `profile-title-${businessId}`,
+          dataTestid: `profile-link`,
+          className: "profile-menu-item",
+        });
+        businessMenuItems.push(profileLink);
+      }
 
-      <hr className="margin-0 hr-2px" key={"profile-break-2"} />,
-    ];
+      businessMenuItems.push(<hr className="margin-0 hr-2px" key={`profile-break-${i}`} />);
+
+      return businessMenuItems;
+    });
   };
 
   const renderMenu = (): ReactElement[] | undefined | Array<ReactElement | ReactElement[]> => {
@@ -148,8 +178,8 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
     if (props.menuConfiguration === "profile") {
       return [profileMenuItem()];
     }
-    if (props.menuConfiguration === "profile-myNj-logout") {
-      return [profileMenuItem(), myNjMenuItem(), logoutMenuItem()];
+    if (props.menuConfiguration === "profile-mynj-addbusiness-logout") {
+      return [profileMenuItem(), addBusinessItem(), myNjMenuItem(), logoutMenuItem()];
     }
     if (props.menuConfiguration === "profile-register-login") {
       return [profileMenuItem(), registerMenuItem(), loginMenuItem()];
@@ -173,6 +203,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
         disabled={true}
       >
         <div className="text-bold">{guestOrUserName}</div>
+        <hr className="margin-0 hr-2px" key="name-break" />
       </MenuItem>
       {props.hasCloseButton && (
         <button
