@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: newjersey/navigator.business.nj.gov
-  branch: content-repo
+  branch: cms-non-essential-questions
   base_url: https://0szgd6wmlk.execute-api.us-east-1.amazonaws.com
   auth_endpoint: /dev/api/cms/auth
   use_graphql: true
@@ -1485,6 +1485,35 @@ collections:
             name: isCannabisLicenseTypeApplicable
             widget: boolean
             required: false
+      - label: Non Essential Questions
+        name: nonEssentialQuestionsArray
+        widget: list
+        fields:
+          - label: Non Essential Question
+            name: nonEqName
+            widget: "relation"
+            collection: "mappings"
+            search_fields: ["nonEssentialQuestionsArray.*.name"]
+            value_field: "nonEssentialQuestionsArray.*.name"
+            display_fields: ["nonEssentialQuestionsArray.*.name"]
+          - label: Task (this or License Task is required)
+            name: task
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
+            required: false
+            options_length: 500
+          - label: License Task (this or Task is required)
+            name: licenseTask
+            widget: "relation"
+            collection: "license-tasks"
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
+            required: false
+            options_length: 500
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list
@@ -2772,7 +2801,22 @@ collections:
               - label: Id
                 name: id
                 widget: hidden
-
+      - label: "Non Essential Questions"
+        name: "nonEssentialQuestionsArray"
+        file: "content/src/mappings/nonEssentialQuestions.json"
+        fields:
+          - label: Non Essential Questions
+            name: nonEssentialQuestionsArray
+            widget: list
+            create: true
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Question
+                name: question
+                widget: string
   - name: "config"
     label: "General Config"
     editor:
