@@ -60,8 +60,8 @@ export const updateLicenseStatusFactory = (searchLicenseStatus: SearchLicenseSta
           completed: true,
         });
       })
-      .catch(async (error) => {
-        if (error === "NO_MATCH") {
+      .catch(async (error: Error) => {
+        if (error.message === "NO_MATCH") {
           return update(userData, {
             nameAndAddress: nameAndAddress,
             taskStatus: "NOT_STARTED",

@@ -119,7 +119,7 @@ describe("selfRegRouter", () => {
     });
 
     it("returns a 409 error when auth grant returns DUPLICATE_SIGNUP", async () => {
-      stubSelfRegClient.grant.mockRejectedValue("DUPLICATE_SIGNUP");
+      stubSelfRegClient.grant.mockRejectedValue(new Error("DUPLICATE_SIGNUP"));
 
       const response = await sendRequest(stubRecordNoKey);
       expect(stubSelfRegClient.grant).toHaveBeenCalledWith(stubRecordNoKey.user);

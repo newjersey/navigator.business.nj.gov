@@ -31,7 +31,9 @@ describe("searchLicenseStatus", () => {
       name: "Crystal",
       zipCode: "12345",
     });
-    await expect(searchLicenseStatus(nameAndAddress, "Home improvement")).rejects.toEqual(new Error("NO_MATCH"));
+    await expect(searchLicenseStatus(nameAndAddress, "Home improvement")).rejects.toEqual(
+      new Error("NO_MATCH")
+    );
     expect(stubLicenseStatusClient.search).toHaveBeenCalledWith("crystal", "12345", "Home improvement");
   });
 
@@ -41,7 +43,9 @@ describe("searchLicenseStatus", () => {
       name: " Crystal, LLC   ",
       zipCode: "12345",
     });
-    await expect(searchLicenseStatus(nameAndAddress, "Home improvement")).rejects.toEqual(new Error("NO_MATCH"));
+    await expect(searchLicenseStatus(nameAndAddress, "Home improvement")).rejects.toEqual(
+      new Error("NO_MATCH")
+    );
     expect(stubLicenseStatusClient.search).toHaveBeenCalledWith("crystal", "12345", "Home improvement");
   });
 

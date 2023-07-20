@@ -140,8 +140,8 @@ export const userRouterFactory = (
         asyncUpdateAndSaveLicenseStatusIfNeeded(updatedUserData);
         res.json(updatedUserData);
       })
-      .catch((error) => {
-        if (error === "Not found") {
+      .catch((error: Error) => {
+        if (error.message === "Not found") {
           if (process.env.IS_OFFLINE || process.env.STAGE === "dev") {
             saveEmptyUserData(req, res, signedInUserId);
           } else {
