@@ -241,17 +241,6 @@ describe("<NavBar />", () => {
       expect(screen.getByText(Config.navigationDefaults.logoutButton)).toBeInTheDocument();
     });
 
-    it("displays a closed dropdown menu on the NavBar", () => {
-      useMockBusiness(generateBusinessNamedBusiness());
-
-      renderDesktopNav();
-      const menuEl = screen.getByText(businessName);
-      expect(menuEl).toBeInTheDocument();
-      expect(screen.queryByText(Config.navigationDefaults.logoutButton)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.navigationDefaults.addBusinessButton)).not.toBeInTheDocument();
-    });
-
     it("displays an open dropdown menu when clicked and closes when clicked again", async () => {
       useMockBusiness(generateBusinessNamedBusiness());
 
@@ -270,6 +259,13 @@ describe("<NavBar />", () => {
       });
       expect(screen.getByText(Config.navigationDefaults.myNJAccountText)).toBeInTheDocument();
       expect(screen.getByText(Config.navigationDefaults.addBusinessButton)).toBeInTheDocument();
+
+      fireEvent.click(menuEl);
+      await waitFor(() => {
+        expect(screen.queryByText(Config.navigationDefaults.logoutButton)).not.toBeInTheDocument();
+      });
+      expect(screen.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.navigationDefaults.addBusinessButton)).not.toBeInTheDocument();
     });
 
     it("displays all businesses for user when opened", async () => {
