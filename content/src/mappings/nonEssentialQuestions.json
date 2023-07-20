@@ -1,5 +1,5 @@
 {
-  "nonEssentialQuestionsArray":  [
+  "nonEssentialQuestionsArray": [
     {
       "name": "sell-milk",
       "question": "Will you sell milk? (Optional)"
@@ -7,6 +7,10 @@
     {
       "name": "pierce-ears",
       "question": "Will you pierce ears? (Optional)"
+    },
+    {
+      "name": "upcycle-clothes",
+      "question": "Do you upcycle clothes that would otherwise end up in the landfill?"
     }
   ]
 }
