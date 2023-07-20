@@ -25,7 +25,7 @@ webflowId: 5f77298224006193297834be
 ### Eligibility Criteria
 
 - Be 18 years old at a minimum
-- Must not have a communicable, contagious, or infectious disease which could reasonably be expected to be transmitted during the course of teaching cosmetology and hairstyling services
+- Must not have any diseases that could be transmitted during the course of teaching cosmetology and hairstyling services
 - Have successfully completed high school or its equivalent
 - Hold a current cosmetology-hairstylist license issued by the New Jersey Board of Cosmetology and Hairstyling
 - Complete a teacher training course of 500 hours at an approved school in New Jersey
