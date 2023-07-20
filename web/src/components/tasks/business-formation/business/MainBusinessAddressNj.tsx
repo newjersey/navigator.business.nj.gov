@@ -77,43 +77,44 @@ export const MainBusinessAddressNj = (): ReactElement => {
           <WithErrorBar
             hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressMunicipality"])}
             type="DESKTOP-ONLY"
-            className="grid-gap-1 grid-row margin-top-2"
           >
-            <WithErrorBar
-              hasError={doesFieldHaveError("addressMunicipality")}
-              type="MOBILE-ONLY"
-              className="grid-col-12 tablet:grid-col-6 padding-left-0"
-            >
-              <span className="text-bold">{Config.formation.fields.addressMunicipality.label}</span>
-              <FormationMunicipality />
-            </WithErrorBar>
-            <WithErrorBar
-              hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
-              type="MOBILE-ONLY"
-              className=" orm-input grid-col-5 tablet:grid-col-2"
-            >
-              <strong>
-                <ModifiedContent>{Config.formation.fields.addressState.label}</ModifiedContent>
-              </strong>
-              <StateDropdown
-                fieldName="addressState"
-                value={"New Jersey"}
-                validationText={Config.formation.fields.addressState.error}
-                disabled={true}
-                onSelect={(): void => {}}
-              />
-            </WithErrorBar>
-            <BusinessFormationTextField
-              label={Config.formation.fields.addressZipCode.label}
-              numericProps={{ maxLength: 5 }}
-              required={true}
-              errorBarType="NEVER"
-              fieldName={"addressZipCode"}
-              validationText={getFieldErrorLabel("addressZipCode")}
-              className="grid-col-7 tablet:grid-col-4"
-            />
+            <div className="grid-row grid-gap-1">
+              <div className="grid-col-12 tablet:grid-col-6">
+                <WithErrorBar hasError={doesFieldHaveError("addressMunicipality")} type="MOBILE-ONLY">
+                  <span className="text-bold">{Config.formation.fields.addressMunicipality.label}</span>
+                  <FormationMunicipality />
+                </WithErrorBar>
+              </div>
+              <div className="margin-top-2 tablet:margin-top-0 grid-col-5 tablet:grid-col-2">
+                <WithErrorBar
+                  hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
+                  type="MOBILE-ONLY"
+                >
+                  <strong>
+                    <ModifiedContent>{Config.formation.fields.addressState.label}</ModifiedContent>
+                  </strong>
+                  <StateDropdown
+                    fieldName="addressState"
+                    value={"New Jersey"}
+                    validationText={Config.formation.fields.addressState.error}
+                    disabled={true}
+                    onSelect={(): void => {}}
+                  />
+                </WithErrorBar>
+              </div>
+              <div className="margin-top-2 tablet:margin-top-0 grid-col-7 tablet:grid-col-4">
+                <BusinessFormationTextField
+                  label={Config.formation.fields.addressZipCode.label}
+                  numericProps={{ maxLength: 5 }}
+                  required={true}
+                  errorBarType="NEVER"
+                  fieldName={"addressZipCode"}
+                  validationText={getFieldErrorLabel("addressZipCode")}
+                />
+              </div>
+            </div>
           </WithErrorBar>
-          <Alert variant="info" className="margin-bottom-5">
+          <Alert variant="info" className="margin-top-3 margin-bottom-4">
             <Content>{Config.formation.fields.addressMunicipality.infoAlert}</Content>
           </Alert>
         </>

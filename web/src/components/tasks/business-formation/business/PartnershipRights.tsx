@@ -17,28 +17,24 @@ export const PartnershipRights = (): ReactElement => {
   const getTextField = (fieldName: FormationTextField): ReactNode => {
     return (
       <div className="margin-top-1">
-        <div className="grid-row">
-          <div className="grid-col">
-            <BusinessFormationTextField
-              fieldName={fieldName}
-              required={true}
-              errorBarType="ALWAYS"
-              validationText={Config.formation.general.genericErrorText}
-              label={Config.formation.partnershipRights.description}
-              fieldOptions={{
-                multiline: true,
-                rows: 3,
-                className: "override-padding",
-                inputProps: {
-                  maxLength: 400,
-                  sx: {
-                    padding: "1rem",
-                  },
-                },
-              }}
-            />
-          </div>
-        </div>
+        <BusinessFormationTextField
+          fieldName={fieldName}
+          required={true}
+          errorBarType="ALWAYS"
+          validationText={Config.formation.general.genericErrorText}
+          label={Config.formation.partnershipRights.description}
+          fieldOptions={{
+            multiline: true,
+            rows: 3,
+            className: "override-padding",
+            inputProps: {
+              maxLength: 400,
+              sx: {
+                padding: "1rem",
+              },
+            },
+          }}
+        />
         <div className="text-base-dark margin-top-1 margin-bottom-2">
           {(state.formationFormData[fieldName] as string)?.length ?? 0} / {400}{" "}
           {Config.formation.general.charactersLabel}

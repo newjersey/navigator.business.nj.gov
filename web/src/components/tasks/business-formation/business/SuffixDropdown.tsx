@@ -32,41 +32,39 @@ export const SuffixDropdown = (): ReactElement => {
           />
         </strong>
       </div>
-      <div className="margin-bottom-3">
-        <FormControl fullWidth error={doesFieldHaveError(FIELD)}>
-          <InputLabel id="business-suffix-label" className="visibility-hidden">
-            {camelCaseToSentence("businessSuffix")}
-          </InputLabel>
-          <Select
-            autoComplete="no"
-            labelId="business-suffix-label"
-            id="business-suffix"
-            displayEmpty
-            value={state.formationFormData.businessSuffix || ""}
-            onChange={handleChange}
-            onBlur={(): void => setFieldsInteracted([FIELD])}
-            inputProps={{ "data-testid": "business-suffix" }}
-            renderValue={(selected): ReactNode => {
-              if (selected.length === 0) {
-                return <></>;
-              }
+      <FormControl fullWidth error={doesFieldHaveError(FIELD)}>
+        <InputLabel id="business-suffix-label" className="visibility-hidden">
+          {camelCaseToSentence("businessSuffix")}
+        </InputLabel>
+        <Select
+          autoComplete="no"
+          labelId="business-suffix-label"
+          id="business-suffix"
+          displayEmpty
+          value={state.formationFormData.businessSuffix || ""}
+          onChange={handleChange}
+          onBlur={(): void => setFieldsInteracted([FIELD])}
+          inputProps={{ "data-testid": "business-suffix" }}
+          renderValue={(selected): ReactNode => {
+            if (selected.length === 0) {
+              return <></>;
+            }
 
-              return selected;
-            }}
-          >
-            {BusinessSuffixMap[state.formationFormData.legalType].map((suffix) => {
-              return (
-                <MenuItem key={suffix} value={suffix} data-testid={suffix}>
-                  {suffix}
-                </MenuItem>
-              );
-            })}
-          </Select>
-          <FormHelperText>
-            {doesFieldHaveError(FIELD) ? Config.formation.fields.businessSuffix.error : " "}
-          </FormHelperText>
-        </FormControl>
-      </div>
+            return selected;
+          }}
+        >
+          {BusinessSuffixMap[state.formationFormData.legalType].map((suffix) => {
+            return (
+              <MenuItem key={suffix} value={suffix} data-testid={suffix}>
+                {suffix}
+              </MenuItem>
+            );
+          })}
+        </Select>
+        {doesFieldHaveError(FIELD) && (
+          <FormHelperText>{Config.formation.fields.businessSuffix.error}</FormHelperText>
+        )}
+      </FormControl>
     </>
   );
 };

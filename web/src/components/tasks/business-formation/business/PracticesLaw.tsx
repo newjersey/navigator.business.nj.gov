@@ -14,7 +14,7 @@ export const PracticesLaw = (props: Props): ReactElement => {
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
 
   return (
-    <FormControl variant="outlined" fullWidth className="padding-bottom-2">
+    <FormControl variant="outlined" fullWidth>
       <RadioGroup
         aria-label={camelCaseToSentence(Config.formation.fields.willPracticeLaw.label)}
         className="fac"

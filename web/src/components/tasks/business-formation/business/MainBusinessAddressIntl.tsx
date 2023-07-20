@@ -6,15 +6,12 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { formatIntlPostalCode } from "@/lib/domain-logic/formatIntlPostalCode";
-import { MediaQueries } from "@/lib/PageSizes";
-import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export const MainBusinessIntl = (): ReactElement => {
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useFormationErrors();
-  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   return (
     <>
@@ -34,28 +31,26 @@ export const MainBusinessIntl = (): ReactElement => {
         validationText={getFieldErrorLabel("addressLine2")}
         className="margin-bottom-2"
       />
-      <WithErrorBar
-        hasError={doSomeFieldsHaveError(["addressCity", "addressProvince"])}
-        type="DESKTOP-ONLY"
-        className="grid-row grid-gap-1 margin-top-2"
-      >
-        <div className="tablet:grid-col-6 grid-col-12">
-          <BusinessFormationTextField
-            label={Config.formation.fields.addressCity.label}
-            fieldName="addressCity"
-            required={true}
-            errorBarType="MOBILE-ONLY"
-            validationText={getFieldErrorLabel("addressCity")}
-          />
-        </div>
-        <div className={`tablet:grid-col-6 grid-col-12 ${isTabletAndUp ? "" : "margin-top-2"}`}>
-          <BusinessFormationTextField
-            errorBarType="MOBILE-ONLY"
-            label={Config.formation.fields.addressProvince.label}
-            fieldName="addressProvince"
-            required={true}
-            validationText={getFieldErrorLabel("addressProvince")}
-          />
+      <WithErrorBar hasError={doSomeFieldsHaveError(["addressCity", "addressProvince"])} type="DESKTOP-ONLY">
+        <div className="grid-row grid-gap-1">
+          <div className="tablet:grid-col-6">
+            <BusinessFormationTextField
+              label={Config.formation.fields.addressCity.label}
+              fieldName="addressCity"
+              required={true}
+              errorBarType="MOBILE-ONLY"
+              validationText={getFieldErrorLabel("addressCity")}
+            />
+          </div>
+          <div className="tablet:grid-col-6">
+            <BusinessFormationTextField
+              errorBarType="MOBILE-ONLY"
+              label={Config.formation.fields.addressProvince.label}
+              fieldName="addressProvince"
+              required={true}
+              validationText={getFieldErrorLabel("addressProvince")}
+            />
+          </div>
         </div>
       </WithErrorBar>
       <WithErrorBar
@@ -87,8 +82,8 @@ export const MainBusinessIntl = (): ReactElement => {
         />
       </WithErrorBar>
 
-      <div className="grid-row grid-gap-1 margin-top-2 input-error-bar">
-        <div className="tablet:grid-col-6 grid-col-12">
+      <div className="grid-row grid-gap-1 margin-top-2">
+        <div className="tablet:grid-col-6">
           <BusinessFormationTextField
             label={Config.formation.fields.addressZipCode.foreign.label}
             valueFilter={formatIntlPostalCode}
