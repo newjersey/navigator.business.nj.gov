@@ -151,7 +151,6 @@
     "finalNextButtonText": "Submit",
     "additionalBusinessFinalNextButtonText": "Save Additional Business",
     "pageTitle": "Tell Us About Your ${Additional} Business",
-    "stepXofYTemplate": "(Step ${currentPage} of ${totalPages})",
     "stepXTemplate": "(Step ${currentPage})",
     "nextButtonText": "Next",
     "returnToPreviousBusiness": "Return to ${previousBusiness}"

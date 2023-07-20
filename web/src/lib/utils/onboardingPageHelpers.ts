@@ -1,7 +1,6 @@
 import { OnboardingFlow } from "@/components/onboarding/OnboardingFlows";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { QUERY_PARAMS_VALUES } from "../domain-logic/routes";
 import { FlowType, Page } from "../types/types";
@@ -33,26 +32,10 @@ export const pageQueryParamisValid = (
   return hasAnsweredBusinessPersona && requestedPageIsInRange;
 };
 
-export const evalHeaderStepsTemplate = (
-  onboardingFlows: Record<FlowType, OnboardingFlow>,
-  currentFlow: FlowType,
-  profileData: ProfileData,
-  page: Page
-): string => {
-  if (page.current === 1) {
-    return templateEval(Config.onboardingDefaults.stepXTemplate, {
-      currentPage: page.current.toString(),
-    });
-  } else if (page.current === 2 && profileData.businessPersona === "FOREIGN") {
-    return templateEval(Config.onboardingDefaults.stepXTemplate, {
-      currentPage: page.current.toString(),
-    });
-  } else {
-    return templateEval(Config.onboardingDefaults.stepXofYTemplate, {
-      currentPage: page.current.toString(),
-      totalPages: onboardingFlows[currentFlow].pages.length.toString(),
-    });
-  }
+export const evalHeaderStepsTemplate = (page: Page): string => {
+  return templateEval(Config.onboardingDefaults.stepXTemplate, {
+    currentPage: page.current.toString(),
+  });
 };
 
 export const getAnimation = (page: Page): string => {

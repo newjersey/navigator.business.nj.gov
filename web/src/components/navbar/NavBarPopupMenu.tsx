@@ -98,6 +98,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
           props.handleClose();
         },
         icon: <ButtonIcon svgFilename="add-business-plus" sizePx="25px" />,
+        hoverIcon: <ButtonIcon svgFilename="add-business-plus-hover" sizePx="25px" />,
         itemText: Config.navigationDefaults.addBusinessButton,
         key: "addBusinessMenuItem",
         dataTestid: "addBusinessMenuItem",
@@ -133,6 +134,13 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
     return Object.keys(userData.businesses).flatMap((businessId, i) => {
       const isCurrent = businessId === userData.currentBusinessId;
 
+      const iconColor = (): string => {
+        if (i % 4 === 0) return "green";
+        else if (i % 4 === 1) return "blue";
+        else if (i % 4 === 2) return "purple";
+        else return "teal";
+      };
+
       const businessMenuItems = [
         NavMenuItem({
           onClick: async (): Promise<void> => {
@@ -142,11 +150,11 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
             await router.push(ROUTES.dashboard);
           },
           selected: !isProfileSelected && isCurrent,
-          icon: <ButtonIcon svgFilename="business-green" sizePx="35px" />,
+          icon: <ButtonIcon svgFilename={`business-${iconColor()}`} sizePx="35px" />,
           itemText: getNavBarBusinessTitle(userData.businesses[businessId], state.isAuthenticated),
           dataTestid: `business-title-${i}`,
           key: `business-title-${businessId}`,
-          className: "profile-menu-item",
+          className: `profile-menu-item ${isCurrent ? "current" : ""}`,
         }),
       ];
 
@@ -160,7 +168,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
           itemText: Config.navigationDefaults.profileLinkText,
           key: `profile-title-${businessId}`,
           dataTestid: `profile-link`,
-          className: "profile-menu-item",
+          className: `profile-menu-item ${isCurrent ? "current" : ""}`,
         });
         businessMenuItems.push(profileLink);
       }

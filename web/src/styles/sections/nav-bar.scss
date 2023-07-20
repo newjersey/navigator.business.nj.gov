@@ -34,7 +34,11 @@ $icon-offset: 45px;
   }
 
   &.profile-menu-item {
-    background-color: #fbfdf9;
+    background-color: $white;
+
+    &.current {
+      background-color: #fbfdf9;
+    }
   }
 }
 
@@ -43,7 +47,11 @@ $icon-offset: 45px;
 }
 
 .profile-menu-item {
-  background-color: #fbfdf9;
+  background-color: $white;
+
+  &.current {
+    background-color: #fbfdf9;
+  }
 
   &:hover {
     background-color: $primary-extra-light;

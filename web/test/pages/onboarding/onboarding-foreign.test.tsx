@@ -233,9 +233,7 @@ describe("onboarding - foreign business", () => {
       useMockRouter({ isReady: true, query: { page: "3" } });
       renderPage({ userData });
       expect(
-        screen.getByText(
-          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "3", totalPages: "3" })
-        )
+        screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "3" }))
       ).toBeInTheDocument();
       expect(screen.getByText(Config.selfRegistration.nameFieldLabel)).toBeInTheDocument();
     });
@@ -267,9 +265,7 @@ describe("onboarding - foreign business", () => {
       useMockRouter({ isReady: true, query: { page: "3" } });
       renderPage({ userData });
       expect(
-        screen.getByText(
-          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "3", totalPages: "3" })
-        )
+        screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "3" }))
       ).toBeInTheDocument();
       expect(screen.getByText(Config.selfRegistration.nameFieldLabel)).toBeInTheDocument();
     });
@@ -303,12 +299,10 @@ describe("onboarding - foreign business", () => {
       useMockRouter({ isReady: true, query: { page: "3" } });
     });
 
-    it("displays step 3 of 5 total pages", () => {
+    it("displays step 3", () => {
       renderPage({ userData });
       expect(
-        screen.getByText(
-          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "3", totalPages: "5" })
-        )
+        screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "3" }))
       ).toBeInTheDocument();
     });
 

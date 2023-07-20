@@ -62,24 +62,10 @@ describe("onboarding - owning a business", () => {
   });
 
   describe("page 1", () => {
-    it("uses special template eval for step 1 label", () => {
+    it("uses standard template eval for step label", () => {
       renderPage({});
       expect(
         screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" }))
-      ).toBeInTheDocument();
-    });
-
-    it("uses standard template eval for step 2 label", () => {
-      const userData = generateTestUserData({
-        businessPersona: "OWNING",
-        legalStructureId: "sole-proprietorship",
-      });
-      useMockRouter({ isReady: true, query: { page: "2" } });
-      renderPage({ userData });
-      expect(
-        screen.getByText(
-          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "2", totalPages: "2" })
-        )
       ).toBeInTheDocument();
     });
 

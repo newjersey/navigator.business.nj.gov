@@ -1,38 +1,35 @@
 import { MenuItem } from "@mui/material";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 
-interface navMenuItemProps {
+interface Props {
   onClick: () => void;
   selected?: boolean;
   icon?: ReactElement;
+  hoverIcon?: ReactElement;
   className?: string;
   itemText: string;
-  justFocused?: boolean;
   key: string;
   dataTestid?: string;
 }
 
-export const NavMenuItem = ({
-  onClick,
-  selected,
-  icon,
-  className,
-  itemText,
-  key,
-  dataTestid,
-}: navMenuItemProps): ReactElement => {
+export const NavMenuItem = (props: Props): ReactElement => {
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const icon = props.hoverIcon && isHovered ? props.hoverIcon : props.icon ?? "";
+
   return (
     <MenuItem
-      onClick={onClick}
-      className={`font-body-2xs menu-item-focus nav-menu-item-container ${className} ${
-        selected ? "bg-primary-extra-light-mui-selected-override text-bold " : ""
+      onClick={props.onClick}
+      onMouseOver={(): void => setIsHovered(true)}
+      onMouseOut={(): void => setIsHovered(false)}
+      className={`font-body-2xs menu-item-focus nav-menu-item-container ${props.className} ${
+        props.selected ? "bg-primary-extra-light-mui-selected-override text-bold " : ""
       }`}
-      selected={selected}
-      key={key}
+      selected={props.selected}
+      key={props.key}
     >
-      <div className="icon-width">{icon ?? ""}</div>
-      <div className={`text-wrap truncate-long-business-names_NavBarDesktop`} data-testid={dataTestid}>
-        {itemText}
+      <div className="icon-width">{icon}</div>
+      <div className={`text-wrap truncate-long-business-names_NavBarDesktop`} data-testid={props.dataTestid}>
+        {props.itemText}
       </div>
     </MenuItem>
   );

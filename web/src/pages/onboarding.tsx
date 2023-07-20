@@ -427,7 +427,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         <h1 ref={headerRef}>
           {pageTitle}{" "}
           <span className="text-light" data-testid={`step-${page.current.toString()}`}>
-            {evalHeaderStepsTemplate(onboardingFlows, currentFlow, profileData, page)}
+            {evalHeaderStepsTemplate(page)}
           </span>
         </h1>
       </div>
@@ -453,7 +453,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           <NextSeo
             title={`Business.NJ.gov Navigator - ${
               Config.onboardingDefaults.pageTitle
-            } ${evalHeaderStepsTemplate(onboardingFlows, currentFlow, profileData, page)}`}
+            } ${evalHeaderStepsTemplate(page)}`}
           />
           <PageSkeleton>
             <NavBar />
