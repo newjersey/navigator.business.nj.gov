@@ -16,32 +16,34 @@ export const BillingStep = (): ReactElement => {
   return (
     <div data-testid="billing-step">
       <h3>{Config.formation.sections.contactInfoHeader}</h3>
+
       <WithErrorBar
         hasError={doSomeFieldsHaveError(["contactFirstName", "contactLastName"])}
         type="DESKTOP-ONLY"
-        className="grid-row grid-gap-2 margin-top-2"
       >
-        <div className="tablet:grid-col-6">
-          <BusinessFormationTextField
-            label={Config.formation.fields.contactFirstName.label}
-            fieldName="contactFirstName"
-            errorBarType="MOBILE-ONLY"
-            required={true}
-            validationText={getFieldErrorLabel("contactFirstName")}
-          />
-        </div>
-        <div className="tablet:grid-col-6">
-          <BusinessFormationTextField
-            label={Config.formation.fields.contactLastName.label}
-            fieldName="contactLastName"
-            errorBarType="MOBILE-ONLY"
-            required={true}
-            validationText={getFieldErrorLabel("contactLastName")}
-          />
+        <div className="grid-row grid-gap-1">
+          <div className="margin-top-2 tablet:grid-col-6">
+            <BusinessFormationTextField
+              label={Config.formation.fields.contactFirstName.label}
+              fieldName="contactFirstName"
+              errorBarType="MOBILE-ONLY"
+              required={true}
+              validationText={getFieldErrorLabel("contactFirstName")}
+            />
+          </div>
+          <div className="margin-top-2 tablet:grid-col-6">
+            <BusinessFormationTextField
+              label={Config.formation.fields.contactLastName.label}
+              fieldName="contactLastName"
+              errorBarType="MOBILE-ONLY"
+              required={true}
+              validationText={getFieldErrorLabel("contactLastName")}
+            />
+          </div>
         </div>
       </WithErrorBar>
-      <div className="grid-row">
-        <div className="tablet:grid-col-6">
+      <div className="grid-row grid-gap-1">
+        <div className="margin-top-2 tablet:grid-col-6">
           <BusinessFormationTextField
             validationText={Config.formation.fields.contactPhoneNumber.error}
             label={Config.formation.fields.contactPhoneNumber.label}
@@ -54,7 +56,8 @@ export const BillingStep = (): ReactElement => {
           />
         </div>
       </div>
-      <hr className="margin-bottom-2" />
+      <hr className="margin-y-4" />
+
       <h3>{Config.formation.sections.servicesHeader}</h3>
       <Content>{Config.formation.sections.servicesDescription}</Content>
       <FormationChooseDocuments />

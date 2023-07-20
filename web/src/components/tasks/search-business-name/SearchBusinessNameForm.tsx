@@ -214,7 +214,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
                 </div>
               </div>
               <div className="tablet:grid-col-4">
-                <div className="margin-top-2">
+                <div className="margin-top-105">
                   <SecondaryButton
                     isColor="primary"
                     onClick={(): void => {}}

@@ -132,7 +132,7 @@ export const RegisteredAgent = (): ReactElement => {
     <>
       <h3>{Config.formation.registeredAgent.label}</h3>
       <Content>{Config.formation.registeredAgent.sectionDescription}</Content>
-      <div id="registeredAgent">
+      <div id="registeredAgent" className="margin-bottom-3">
         <FormControl fullWidth>
           <RadioGroup
             aria-label="Registered Agent"
@@ -186,30 +186,28 @@ export const RegisteredAgent = (): ReactElement => {
                   }
                 />
               </div>
-              <WithErrorBar
-                hasError={doSomeFieldsHaveError(["agentName", "agentEmail"])}
-                type="DESKTOP-ONLY"
-                className="grid-row grid-gap-2  margin-bottom-2"
-              >
-                <div className="tablet:grid-col-6">
-                  <BusinessFormationTextField
-                    label={Config.formation.fields.agentName.label}
-                    required={true}
-                    validationText={getFieldErrorLabel("agentName")}
-                    errorBarType="MOBILE-ONLY"
-                    fieldName="agentName"
-                    disabled={shouldBeDisabled("agentName", "ACCOUNT")}
-                  />
-                </div>
-                <div className="tablet:grid-col-6">
-                  <BusinessFormationTextField
-                    label={Config.formation.fields.agentEmail.label}
-                    fieldName="agentEmail"
-                    errorBarType="MOBILE-ONLY"
-                    required={true}
-                    validationText={getFieldErrorLabel("agentEmail")}
-                    disabled={shouldBeDisabled("agentEmail", "ACCOUNT")}
-                  />
+              <WithErrorBar hasError={doSomeFieldsHaveError(["agentName", "agentEmail"])} type="DESKTOP-ONLY">
+                <div className="grid-row grid-gap-1 margin-bottom-2">
+                  <div className="grid-col-12 tablet:grid-col-6">
+                    <BusinessFormationTextField
+                      label={Config.formation.fields.agentName.label}
+                      required={true}
+                      validationText={getFieldErrorLabel("agentName")}
+                      errorBarType="MOBILE-ONLY"
+                      fieldName="agentName"
+                      disabled={shouldBeDisabled("agentName", "ACCOUNT")}
+                    />
+                  </div>
+                  <div className="grid-col-12 tablet:grid-col-6 margin-top-2 tablet:margin-top-0">
+                    <BusinessFormationTextField
+                      label={Config.formation.fields.agentEmail.label}
+                      fieldName="agentEmail"
+                      errorBarType="MOBILE-ONLY"
+                      required={true}
+                      validationText={getFieldErrorLabel("agentEmail")}
+                      disabled={shouldBeDisabled("agentEmail", "ACCOUNT")}
+                    />
+                  </div>
                 </div>
               </WithErrorBar>
               {state.formationFormData.businessLocationType === "NJ" && (
@@ -240,6 +238,7 @@ export const RegisteredAgent = (): ReactElement => {
                 validationText={getFieldErrorLabel("agentOfficeAddressLine2")}
                 disabled={state.formationFormData.agentUseBusinessAddress}
                 errorBarType="ALWAYS"
+                className={"margin-top-2"}
               />
               <WithErrorBar
                 type="DESKTOP-ONLY"
@@ -247,55 +246,59 @@ export const RegisteredAgent = (): ReactElement => {
                   "agentOfficeAddressMunicipality",
                   "agentOfficeAddressZipCode",
                 ])}
-                className="grid-row grid-gap-2 margin-top-2"
               >
-                <div className="grid-col-12 tablet:grid-col-6">
-                  <WithErrorBar
-                    hasError={doesFieldHaveError("agentOfficeAddressMunicipality")}
-                    type="MOBILE-ONLY"
-                  >
-                    <Content>{Config.formation.fields.agentOfficeAddressMunicipality.label}</Content>
-                    <MunicipalityDropdown
-                      municipalities={municipalities}
-                      fieldName={"agentOfficeAddressMunicipality"}
-                      error={doesFieldHaveError("agentOfficeAddressMunicipality")}
-                      disabled={shouldBeDisabled("agentOfficeAddressMunicipality", "ADDRESS")}
-                      validationLabel="Error"
-                      value={state.formationFormData.agentOfficeAddressMunicipality}
-                      onSelect={(value: Municipality | undefined): void => {
-                        setFormationFormData({
-                          ...state.formationFormData,
-                          agentOfficeAddressMunicipality: value,
-                        });
-                      }}
-                      onValidation={(): void => setFieldsInteracted(["agentOfficeAddressMunicipality"])}
-                      helperText={Config.formation.fields.agentOfficeAddressMunicipality.error}
-                    />
-                  </WithErrorBar>
-                </div>
+                <div className="grid-row grid-gap-1 margin-top-2">
+                  <div className="grid-col-12 tablet:grid-col-6">
+                    <WithErrorBar
+                      hasError={doesFieldHaveError("agentOfficeAddressMunicipality")}
+                      type="MOBILE-ONLY"
+                    >
+                      <Content>{Config.formation.fields.agentOfficeAddressMunicipality.label}</Content>
+                      <MunicipalityDropdown
+                        municipalities={municipalities}
+                        fieldName={"agentOfficeAddressMunicipality"}
+                        error={doesFieldHaveError("agentOfficeAddressMunicipality")}
+                        disabled={shouldBeDisabled("agentOfficeAddressMunicipality", "ADDRESS")}
+                        validationLabel="Error"
+                        value={state.formationFormData.agentOfficeAddressMunicipality}
+                        onSelect={(value: Municipality | undefined): void => {
+                          setFormationFormData({
+                            ...state.formationFormData,
+                            agentOfficeAddressMunicipality: value,
+                          });
+                        }}
+                        onValidation={(): void => setFieldsInteracted(["agentOfficeAddressMunicipality"])}
+                        helperText={Config.formation.fields.agentOfficeAddressMunicipality.error}
+                      />
+                    </WithErrorBar>
+                  </div>
 
-                <div className="grid-col-5 tablet:grid-col-2">
-                  <WithErrorBar hasError={doesFieldHaveError("agentOfficeAddressZipCode")} type="MOBILE-ONLY">
-                    <Content>{Config.formation.fields.agentOfficeAddressState.label}</Content>
-                    <StateDropdown
-                      fieldName="agentOfficeAddressState"
-                      value={"New Jersey"}
-                      validationText={Config.formation.fields.agentOfficeAddressState.error}
-                      disabled={true}
-                      onSelect={(): void => {}}
+                  <div className="grid-col-5 tablet:grid-col-2">
+                    <WithErrorBar
+                      hasError={doesFieldHaveError("agentOfficeAddressZipCode")}
+                      type="MOBILE-ONLY"
+                    >
+                      <Content>{Config.formation.fields.agentOfficeAddressState.label}</Content>
+                      <StateDropdown
+                        fieldName="agentOfficeAddressState"
+                        value={"New Jersey"}
+                        validationText={Config.formation.fields.agentOfficeAddressState.error}
+                        disabled={true}
+                        onSelect={(): void => {}}
+                      />
+                    </WithErrorBar>
+                  </div>
+                  <div className="grid-col-7 tablet:grid-col-4">
+                    <BusinessFormationTextField
+                      errorBarType="NEVER"
+                      numericProps={{ maxLength: 5 }}
+                      fieldName="agentOfficeAddressZipCode"
+                      label={Config.formation.fields.agentOfficeAddressZipCode.label}
+                      validationText={Config.formation.fields.agentOfficeAddressZipCode.error}
+                      required={true}
+                      disabled={shouldBeDisabled("agentOfficeAddressZipCode", "ADDRESS")}
                     />
-                  </WithErrorBar>
-                </div>
-                <div className="grid-col-7 tablet:grid-col-4">
-                  <BusinessFormationTextField
-                    errorBarType="NEVER"
-                    numericProps={{ maxLength: 5 }}
-                    fieldName="agentOfficeAddressZipCode"
-                    label={Config.formation.fields.agentOfficeAddressZipCode.label}
-                    validationText={Config.formation.fields.agentOfficeAddressZipCode.error}
-                    required={true}
-                    disabled={shouldBeDisabled("agentOfficeAddressZipCode", "ADDRESS")}
-                  />
+                  </div>
                 </div>
               </WithErrorBar>
             </div>

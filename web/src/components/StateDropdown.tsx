@@ -120,7 +120,7 @@ export const StateDropdown = (props: Props): ReactElement => {
               }
             }}
             error={props.error}
-            helperText={props.error ? props.validationText ?? " " : " "}
+            helperText={props.error && props.validationText}
           />
         );
       }}

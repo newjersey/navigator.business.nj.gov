@@ -33,54 +33,55 @@ export const MainBusinessUs = (): ReactElement => {
       <WithErrorBar
         hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressCity"])}
         type="DESKTOP-ONLY"
-        className="grid-gap-1 grid-row margin-top-2"
       >
-        <BusinessFormationTextField
-          errorBarType="MOBILE-ONLY"
-          label={Config.formation.fields.addressCity.label}
-          fieldName="addressCity"
-          required={true}
-          className={"margin-bottom-2 grid-col-12 tablet:grid-col-6"}
-          validationText={getFieldErrorLabel("addressCity")}
-        />
-        <>
-          <WithErrorBar
-            hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
-            type="MOBILE-ONLY"
-            className="grid-col-5 tablet:grid-col-2"
-          >
-            <strong>
-              <ModifiedContent>{Config.formation.fields.addressState.label}</ModifiedContent>
-            </strong>
-            <StateDropdown
-              fieldName="addressState"
-              value={state.formationFormData.addressState?.name}
-              error={doesFieldHaveError("addressState")}
-              validationText={Config.formation.fields.addressState.error}
-              required
-              onValidation={(): void => setFieldsInteracted(["addressState"])}
-              onSelect={(stateObject): void => {
-                setFormationFormData((previousFormationData) => {
-                  return {
-                    ...previousFormationData,
-                    addressState: stateObject,
-                  };
-                });
-                setFieldsInteracted(["addressState"]);
-              }}
+        <div className="grid-row grid-gap-1">
+          <div className="grid-col-12 tablet:grid-col-6">
+            <BusinessFormationTextField
+              errorBarType="MOBILE-ONLY"
+              label={Config.formation.fields.addressCity.label}
+              fieldName="addressCity"
+              required={true}
+              validationText={getFieldErrorLabel("addressCity")}
             />
-          </WithErrorBar>
-
-          <BusinessFormationTextField
-            label={Config.formation.fields.addressZipCode.label}
-            numericProps={{ maxLength: 5 }}
-            required={true}
-            errorBarType="NEVER"
-            fieldName={"addressZipCode"}
-            validationText={Config.formation.fields.addressZipCode.foreign.errorUS}
-            className="grid-col-7 tablet:grid-col-4"
-          />
-        </>
+          </div>
+          <div className="margin-top-2 tablet:margin-top-0 grid-col-5 tablet:grid-col-2">
+            <WithErrorBar
+              hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
+              type="MOBILE-ONLY"
+            >
+              <strong>
+                <ModifiedContent>{Config.formation.fields.addressState.label}</ModifiedContent>
+              </strong>
+              <StateDropdown
+                fieldName="addressState"
+                value={state.formationFormData.addressState?.name}
+                error={doesFieldHaveError("addressState")}
+                validationText={Config.formation.fields.addressState.error}
+                required
+                onValidation={(): void => setFieldsInteracted(["addressState"])}
+                onSelect={(stateObject): void => {
+                  setFormationFormData((previousFormationData) => {
+                    return {
+                      ...previousFormationData,
+                      addressState: stateObject,
+                    };
+                  });
+                  setFieldsInteracted(["addressState"]);
+                }}
+              />
+            </WithErrorBar>
+          </div>
+          <div className="margin-top-2 tablet:margin-top-0 grid-col-7 tablet:grid-col-4">
+            <BusinessFormationTextField
+              label={Config.formation.fields.addressZipCode.label}
+              numericProps={{ maxLength: 5 }}
+              required={true}
+              errorBarType="NEVER"
+              fieldName={"addressZipCode"}
+              validationText={Config.formation.fields.addressZipCode.foreign.errorUS}
+            />
+          </div>
+        </div>
       </WithErrorBar>
     </>
   );
