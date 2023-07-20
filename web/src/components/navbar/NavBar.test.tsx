@@ -337,7 +337,7 @@ describe("<NavBar />", () => {
     it("displays business profile button only when the menu is open", async () => {
       useMockBusiness(generateBusinessNamedBusiness());
       renderDesktopNav();
-      const menuEl = screen.getByText(businessName);
+      const menuEl = screen.getByText(Config.navigationDefaults.navBarGuestText);
       fireEvent.click(menuEl);
       await waitFor(() => {
         expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
@@ -348,20 +348,20 @@ describe("<NavBar />", () => {
       });
     });
 
-    it("displays business name title within menu", async () => {
+    it("displays Guest business name title within menu", async () => {
       useMockBusiness(generateBusinessNamedBusiness());
       renderDesktopNav();
-      const menuEl = screen.getByText(businessName);
+      const menuEl = screen.getByText(Config.navigationDefaults.navBarGuestText);
       fireEvent.click(menuEl);
       await waitFor(() => {
-        expect(within(menuEl).getByText(businessName)).toBeInTheDocument();
+        expect(within(menuEl).getByText(Config.navigationDefaults.navBarGuestText)).toBeInTheDocument();
       });
     });
 
     it("displays a closed dropdown menu on the NavBar", () => {
       useMockBusiness(generateBusinessNamedBusiness());
       renderDesktopNav();
-      const menuEl = screen.getByText(businessName);
+      const menuEl = screen.getByText(Config.navigationDefaults.navBarGuestText);
       expect(menuEl).toBeInTheDocument();
       expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
     });
@@ -369,7 +369,7 @@ describe("<NavBar />", () => {
     it("displays an open dropdown menu when clicked and closes when clicked again", async () => {
       useMockBusiness(generateBusinessNamedBusiness());
       renderDesktopNav();
-      const menuEl = screen.getByText(businessName);
+      const menuEl = screen.getByText(Config.navigationDefaults.navBarGuestText);
 
       fireEvent.click(menuEl);
       await waitFor(() => {
@@ -397,7 +397,7 @@ describe("<NavBar />", () => {
           { user, isAuthenticated: IsAuthenticated.FALSE }
         )
       );
-      fireEvent.click(screen.getByText(businessName));
+      fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestText));
 
       const businessUser = {
         ...user,
@@ -463,7 +463,7 @@ describe("<NavBar />", () => {
     describe("landing page mobile navbar", () => {
       it("doesn't display the account section", () => {
         useMockBusiness({});
-        renderMobileTaskNav({ isLanding: true });
+        renderMobileTaskNav({ isLanding: true, isAuthenticated: IsAuthenticated.TRUE });
         expect(screen.queryByText(Config.navigationDefaults.navBarGuestText)).not.toBeInTheDocument();
       });
 
@@ -513,7 +513,11 @@ describe("<NavBar />", () => {
         useMockBusiness(generateBusinessNamedBusiness());
         renderMobileTaskNav({ isAuthenticated: IsAuthenticated.FALSE });
 
-        expect(within(screen.getByTestId("nav-bar-popup-menu")).queryByText(businessName)).toBeVisible();
+        expect(
+          within(screen.getByTestId("nav-bar-popup-menu")).queryByText(
+            Config.navigationDefaults.navBarGuestText
+          )
+        ).toBeVisible();
         expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).toBeVisible();
       });
 

@@ -1,5 +1,6 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
@@ -55,7 +56,7 @@ describe("onboarding - additional business", () => {
       expect(mockPush).toHaveBeenCalledWith({ query: { page: 1 } }, undefined, { shallow: true });
     });
 
-    const previousBusinessName = getNavBarBusinessTitle(initialBusiness);
+    const previousBusinessName = getNavBarBusinessTitle(initialBusiness, IsAuthenticated.TRUE);
     const expectedText = templateEval(Config.onboardingDefaults.returnToPreviousBusiness, {
       previousBusiness: previousBusinessName,
     });

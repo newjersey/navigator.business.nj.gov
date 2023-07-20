@@ -1,9 +1,15 @@
 import { getMergedConfig } from "@/contexts/configContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { Business, LookupIndustryById, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
 
-export const getNavBarBusinessTitle = (business: Business | undefined): string => {
+export const getNavBarBusinessTitle = (
+  business: Business | undefined,
+  isAuthenticated: IsAuthenticated
+): string => {
   const Config = getMergedConfig();
-  if (!business) return Config.navigationDefaults.navBarGuestText;
+  if (!business || isAuthenticated === IsAuthenticated.FALSE) {
+    return Config.navigationDefaults.navBarGuestText;
+  }
 
   const { businessName, tradeName, legalStructureId, industryId, businessPersona } = business.profileData;
   const determineName = (): string => {
@@ -22,10 +28,8 @@ export const getNavBarBusinessTitle = (business: Business | undefined): string =
       return `${Config.navigationDefaults.navBarUnnamedOwnedBusinessText} ${
         LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation
       }`;
-    } else if (!legalStructureId && business.onboardingFormProgress === "COMPLETED") {
-      return Config.navigationDefaults.navBarUnnamedOwnedBusinessText;
     } else {
-      return Config.navigationDefaults.navBarGuestText;
+      return Config.navigationDefaults.navBarUnnamedOwnedBusinessText;
     }
   }
 
@@ -36,14 +40,10 @@ export const getNavBarBusinessTitle = (business: Business | undefined): string =
   }
 
   if (!legalStructureId && industryId) {
-    if (business.onboardingFormProgress === "COMPLETED") {
-      return `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
-        LookupIndustryById(business?.profileData?.industryId).name
-      }`;
-    } else {
-      return Config.navigationDefaults.navBarGuestText;
-    }
+    return `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
+      LookupIndustryById(business?.profileData?.industryId).name
+    }`;
   }
 
-  return Config.navigationDefaults.navBarGuestText;
+  return Config.navigationDefaults.navBarUnnamedOwnedBusinessText;
 };

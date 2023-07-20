@@ -1,5 +1,6 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
+import { AuthContext } from "@/contexts/authContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { removeBusiness } from "@/lib/domain-logic/removeBusiness";
@@ -8,7 +9,7 @@ import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { useRouter } from "next/router";
-import { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 
 interface Props {
   previousBusiness: Business | undefined;
@@ -16,8 +17,9 @@ interface Props {
 
 export const ReturnToPreviousBusinessBar = (props: Props): ReactElement | null => {
   const { updateQueue, userData } = useUserData();
+  const { state } = useContext(AuthContext);
   const router = useRouter();
-  const businessName = getNavBarBusinessTitle(props.previousBusiness);
+  const businessName = getNavBarBusinessTitle(props.previousBusiness, state.isAuthenticated);
 
   if (!props.previousBusiness) return null;
 

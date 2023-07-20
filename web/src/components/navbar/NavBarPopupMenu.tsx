@@ -32,7 +32,7 @@ export interface Props {
 
 export const NavBarPopupMenu = (props: Props): ReactElement => {
   const { userData, updateQueue } = useUserData();
-  const { dispatch } = useContext(AuthContext);
+  const { state, dispatch } = useContext(AuthContext);
   const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
 
   const router = useRouter();
@@ -143,7 +143,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
           },
           selected: !isProfileSelected && isCurrent,
           icon: <ButtonIcon svgFilename="business-green" sizePx="35px" />,
-          itemText: getNavBarBusinessTitle(userData.businesses[businessId]),
+          itemText: getNavBarBusinessTitle(userData.businesses[businessId], state.isAuthenticated),
           dataTestid: `business-title-${i}`,
           key: `business-title-${businessId}`,
           className: "profile-menu-item",

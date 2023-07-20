@@ -1,4 +1,5 @@
 import { getMergedConfig } from "@/contexts/configContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import {
   BusinessPersona,
@@ -28,6 +29,13 @@ const tradeNameProfile = (): Partial<ProfileData> => {
 };
 
 describe("getNavBarBusinessTitle", () => {
+  describe("when not authenticated", () => {
+    it("shows Guest text", () => {
+      const navBarBusinessTitle = getNavBarBusinessTitle(generateBusiness({}), IsAuthenticated.FALSE);
+      expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarGuestText);
+    });
+  });
+
   describe("when name is defined", () => {
     describe("when legal structure undefined", () => {
       it.each(["STARTING", "OWNING"])("shows business name", (businessPersona) => {
@@ -39,7 +47,7 @@ describe("getNavBarBusinessTitle", () => {
             legalStructureId: undefined,
           }),
         });
-        const navBarBusinessTitle = getNavBarBusinessTitle(business);
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
         expect(navBarBusinessTitle).toEqual(name);
       });
 
@@ -52,7 +60,7 @@ describe("getNavBarBusinessTitle", () => {
             legalStructureId: undefined,
           }),
         });
-        const navBarBusinessTitle = getNavBarBusinessTitle(business);
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
         expect(navBarBusinessTitle).toEqual(name);
       });
 
@@ -67,7 +75,7 @@ describe("getNavBarBusinessTitle", () => {
               legalStructureId: undefined,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(name);
         }
       );
@@ -83,7 +91,7 @@ describe("getNavBarBusinessTitle", () => {
               businessName: name,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(name);
         });
       });
@@ -97,7 +105,7 @@ describe("getNavBarBusinessTitle", () => {
               businessName: name,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(name);
         });
       });
@@ -113,7 +121,7 @@ describe("getNavBarBusinessTitle", () => {
               tradeName: name,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(name);
         });
       });
@@ -127,7 +135,7 @@ describe("getNavBarBusinessTitle", () => {
               tradeName: name,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(name);
         });
       });
@@ -145,7 +153,7 @@ describe("getNavBarBusinessTitle", () => {
               businessName: undefined,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(
             `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
               LookupIndustryById(business?.profileData?.industryId).name
@@ -163,7 +171,7 @@ describe("getNavBarBusinessTitle", () => {
               businessName: undefined,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(
             `${Config.navigationDefaults.navBarUnnamedOwnedBusinessText} ${
               LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation
@@ -183,7 +191,7 @@ describe("getNavBarBusinessTitle", () => {
               tradeName: undefined,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(
             `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
               LookupIndustryById(business?.profileData?.industryId).name
@@ -201,7 +209,7 @@ describe("getNavBarBusinessTitle", () => {
               tradeName: undefined,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(
             `${Config.navigationDefaults.navBarUnnamedOwnedBusinessText} ${
               LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation
@@ -213,132 +221,56 @@ describe("getNavBarBusinessTitle", () => {
   });
 
   describe("when name undefined, legal structure undefined, and industry defined", () => {
-    describe("when completed onboarding", () => {
-      describe("STARTING", () => {
-        it("shows Unnamed [Industry]", () => {
-          const business = generateBusiness({
-            onboardingFormProgress: "COMPLETED",
-            profileData: generateProfileData({
-              businessPersona: "STARTING",
-              legalStructureId: undefined,
-              tradeName: undefined,
-              businessName: undefined,
-            }),
-          });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business);
-          expect(navBarBusinessTitle).toEqual(
-            `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
-              LookupIndustryById(business?.profileData?.industryId).name
-            }`
-          );
-        });
-      });
-
-      describe("OWNING", () => {
-        it("shows Unnamed Business", () => {
-          const business = generateBusiness({
-            onboardingFormProgress: "COMPLETED",
-            profileData: generateProfileData({
-              businessPersona: "OWNING",
-              legalStructureId: undefined,
-              tradeName: undefined,
-              businessName: undefined,
-            }),
-          });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business);
-          expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedOwnedBusinessText);
-        });
-      });
-    });
-
-    describe("when NOT completed onboarding", () => {
-      it.each(["STARTING", "OWNING"])("shows Guest", (persona) => {
+    describe("STARTING", () => {
+      it("shows Unnamed [Industry]", () => {
         const business = generateBusiness({
-          onboardingFormProgress: "UNSTARTED",
+          onboardingFormProgress: "COMPLETED",
           profileData: generateProfileData({
-            businessPersona: persona as BusinessPersona,
+            businessPersona: "STARTING",
             legalStructureId: undefined,
             tradeName: undefined,
             businessName: undefined,
           }),
         });
-        const navBarBusinessTitle = getNavBarBusinessTitle(business);
-        expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarGuestText);
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+        expect(navBarBusinessTitle).toEqual(
+          `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
+            LookupIndustryById(business?.profileData?.industryId).name
+          }`
+        );
+      });
+    });
+
+    describe("OWNING", () => {
+      it("shows Unnamed Business", () => {
+        const business = generateBusiness({
+          onboardingFormProgress: "COMPLETED",
+          profileData: generateProfileData({
+            businessPersona: "OWNING",
+            legalStructureId: undefined,
+            tradeName: undefined,
+            businessName: undefined,
+          }),
+        });
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+        expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedOwnedBusinessText);
       });
     });
   });
 
-  describe("when legal structure, industry, name undefined", () => {
-    describe("when completed onboarding", () => {
-      describe("STARTING", () => {
-        it("shows guest text", () => {
-          const business = generateBusiness({
-            onboardingFormProgress: "COMPLETED",
-            profileData: generateProfileData({
-              businessPersona: "STARTING",
-              legalStructureId: undefined,
-              industryId: undefined,
-              tradeName: undefined,
-              businessName: undefined,
-            }),
-          });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business);
-          expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarGuestText);
-        });
+  describe("when legal structure, industry, and name undefined", () => {
+    it.each(["STARTING", "OWNING"])("shows Unnamed Business", (persona) => {
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          businessPersona: persona as BusinessPersona,
+          legalStructureId: undefined,
+          tradeName: undefined,
+          businessName: undefined,
+          industryId: undefined,
+        }),
       });
-
-      describe("OWNING", () => {
-        it("shows Unnamed Business text", () => {
-          const business = generateBusiness({
-            onboardingFormProgress: "COMPLETED",
-            profileData: generateProfileData({
-              businessPersona: "OWNING",
-              legalStructureId: undefined,
-              industryId: undefined,
-              tradeName: undefined,
-              businessName: undefined,
-            }),
-          });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business);
-          expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedOwnedBusinessText);
-        });
-      });
-
-      describe("when not completed onboarding", () => {
-        describe("STARTING", () => {
-          it("shows guest text", () => {
-            const business = generateBusiness({
-              onboardingFormProgress: "UNSTARTED",
-              profileData: generateProfileData({
-                businessPersona: "STARTING",
-                legalStructureId: undefined,
-                industryId: undefined,
-                tradeName: undefined,
-                businessName: undefined,
-              }),
-            });
-            const navBarBusinessTitle = getNavBarBusinessTitle(business);
-            expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarGuestText);
-          });
-        });
-
-        describe("OWNING", () => {
-          it("shows guest text", () => {
-            const business = generateBusiness({
-              onboardingFormProgress: "UNSTARTED",
-              profileData: generateProfileData({
-                businessPersona: "STARTING",
-                legalStructureId: undefined,
-                industryId: undefined,
-                tradeName: undefined,
-                businessName: undefined,
-              }),
-            });
-            const navBarBusinessTitle = getNavBarBusinessTitle(business);
-            expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarGuestText);
-          });
-        });
-      });
+      const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+      expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedOwnedBusinessText);
     });
   });
 });

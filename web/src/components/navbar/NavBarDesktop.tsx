@@ -65,7 +65,7 @@ export const NavBarDesktop = (): ReactElement => {
 
   const textColor = isAuthenticated ? "primary" : "base";
   const accountIcon = isAuthenticated ? "account_circle" : "help";
-  const navBarBusinessTitle = getNavBarBusinessTitle(business);
+  const navBarBusinessTitle = getNavBarBusinessTitle(business, state.isAuthenticated);
 
   return (
     <div className="position-sticky top-0 z-500 bg-white">

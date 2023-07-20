@@ -16,6 +16,7 @@ import {
   generateBusiness,
   generateProfileData,
   generateUserData,
+  ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -36,13 +37,14 @@ jest.mock("@/lib/auth/sessionHelper", () => ({
   triggerSignIn: jest.fn(),
 }));
 
-const generateOnboardingBusiness = (): Business => {
+const generateOnboardingBusiness = (overrides?: Partial<ProfileData>): Business => {
   return generateBusiness({
     profileData: generateProfileData({
       businessName: "",
       tradeName: "",
       industryId: undefined,
       legalStructureId: undefined,
+      ...overrides,
     }),
   });
 };
@@ -53,43 +55,44 @@ describe("<NavBarPopupMenu />", () => {
     useMockRouter({});
   });
 
-  const renderNavBarPopupMenu = (
-    overrides: Partial<NavBarPopupMenuProps>,
-    userData?: UserData,
-    user?: BusinessUser
-  ): void => {
+  const renderNavBarPopupMenu = (params: {
+    props: Partial<NavBarPopupMenuProps>;
+    userData?: UserData;
+    user?: BusinessUser;
+    isAuthenticated?: IsAuthenticated;
+  }): void => {
     render(
       withAuth(
-        <WithStatefulUserData initialUserData={userData}>
+        <WithStatefulUserData initialUserData={params.userData}>
           <NavBarPopupMenu
             handleClose={(): void => {}}
             open={true}
             hasCloseButton={false}
             menuConfiguration={"login"}
-            {...overrides}
+            {...params.props}
           />
         </WithStatefulUserData>,
-        { user, isAuthenticated: IsAuthenticated.FALSE }
+        { user: params.user, isAuthenticated: params.isAuthenticated ?? IsAuthenticated.TRUE }
       )
     );
   };
 
   it("renders close button when hasCloseButton prop is true", () => {
     useMockBusiness({});
-    renderNavBarPopupMenu({ hasCloseButton: true });
+    renderNavBarPopupMenu({ props: { hasCloseButton: true } });
     expect(screen.getByTestId("close-button-nav-menu")).toBeInTheDocument();
   });
 
   it("doesn't render close button when handleClose prop is false", () => {
     useMockBusiness({});
-    renderNavBarPopupMenu({ hasCloseButton: false });
+    renderNavBarPopupMenu({ props: { hasCloseButton: false } });
     expect(screen.queryByTestId("close-button-nav-menu")).not.toBeInTheDocument();
   });
 
   it("triggers handleClose when close button is pressed", () => {
     const handleClose = jest.fn();
     useMockBusiness({});
-    renderNavBarPopupMenu({ hasCloseButton: true, handleClose: handleClose });
+    renderNavBarPopupMenu({ props: { hasCloseButton: true, handleClose: handleClose } });
     fireEvent.click(screen.getByTestId("close-button-nav-menu"));
     expect(handleClose).toHaveBeenCalled();
   });
@@ -98,7 +101,10 @@ describe("<NavBarPopupMenu />", () => {
     describe("login configuration", () => {
       beforeEach(() => {
         useMockBusiness(generateOnboardingBusiness());
-        renderNavBarPopupMenu({ menuConfiguration: "login" });
+        renderNavBarPopupMenu({
+          props: { menuConfiguration: "login" },
+          isAuthenticated: IsAuthenticated.FALSE,
+        });
       });
 
       it("shows login button", () => {
@@ -114,7 +120,10 @@ describe("<NavBarPopupMenu />", () => {
     describe("profile configuration", () => {
       beforeEach(() => {
         useMockBusiness(generateOnboardingBusiness());
-        renderNavBarPopupMenu({ menuConfiguration: "profile" });
+        renderNavBarPopupMenu({
+          props: { menuConfiguration: "profile" },
+          isAuthenticated: IsAuthenticated.FALSE,
+        });
       });
 
       it("shows profile button", () => {
@@ -136,9 +145,11 @@ describe("<NavBarPopupMenu />", () => {
     describe("profile-mynj-addbusiness-logout configuration", () => {
       it("shows profile, myNJ, add business, and logout buttons", () => {
         useMockBusiness(generateOnboardingBusiness());
-        renderNavBarPopupMenu({ menuConfiguration: "profile-mynj-addbusiness-logout" });
+        renderNavBarPopupMenu({
+          props: { menuConfiguration: "profile-mynj-addbusiness-logout" },
+          isAuthenticated: IsAuthenticated.TRUE,
+        });
         expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
-        expect(screen.getByText(Config.navigationDefaults.navBarGuestText)).toBeInTheDocument();
         expect(screen.getByText(Config.navigationDefaults.myNJAccountText)).toBeInTheDocument();
         expect(screen.getByText(Config.navigationDefaults.addBusinessButton)).toBeInTheDocument();
         expect(screen.getByText(Config.navigationDefaults.logoutButton)).toBeInTheDocument();
@@ -166,7 +177,10 @@ describe("<NavBarPopupMenu />", () => {
         });
 
         useMockUserData(userData);
-        renderNavBarPopupMenu({ menuConfiguration: "profile-mynj-addbusiness-logout" });
+        renderNavBarPopupMenu({
+          props: { menuConfiguration: "profile-mynj-addbusiness-logout" },
+          isAuthenticated: IsAuthenticated.TRUE,
+        });
 
         expect(screen.getByText("first-biz")).toBeInTheDocument();
         expect(screen.getByText("second-biz")).toBeInTheDocument();
@@ -188,28 +202,40 @@ describe("<NavBarPopupMenu />", () => {
         });
 
         useMockUserData(userData);
-        renderNavBarPopupMenu({ menuConfiguration: "profile-mynj-addbusiness-logout" });
+        renderNavBarPopupMenu({
+          props: { menuConfiguration: "profile-mynj-addbusiness-logout" },
+          isAuthenticated: IsAuthenticated.TRUE,
+        });
 
         expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
       });
 
       it("sends user to profile when profile is clicked", () => {
         useMockBusiness(generateOnboardingBusiness());
-        renderNavBarPopupMenu({ menuConfiguration: "profile-mynj-addbusiness-logout" });
+        renderNavBarPopupMenu({
+          props: { menuConfiguration: "profile-mynj-addbusiness-logout" },
+          isAuthenticated: IsAuthenticated.TRUE,
+        });
         fireEvent.click(screen.getByText(Config.navigationDefaults.profileLinkText));
         expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
       });
 
       it("sends user to dashboard when dashboard link is clicked", () => {
-        useMockBusiness(generateOnboardingBusiness());
-        renderNavBarPopupMenu({ menuConfiguration: "profile-mynj-addbusiness-logout" });
-        fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestText));
+        useMockBusiness(generateOnboardingBusiness({ businessName: "some name" }));
+        renderNavBarPopupMenu({
+          props: { menuConfiguration: "profile-mynj-addbusiness-logout" },
+          isAuthenticated: IsAuthenticated.TRUE,
+        });
+        fireEvent.click(screen.getByText("some name"));
         expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
       });
 
       it("sends user to new business onboarding when add business is clicked", () => {
         useMockBusiness(generateOnboardingBusiness());
-        renderNavBarPopupMenu({ menuConfiguration: "profile-mynj-addbusiness-logout" });
+        renderNavBarPopupMenu({
+          props: { menuConfiguration: "profile-mynj-addbusiness-logout" },
+          isAuthenticated: IsAuthenticated.TRUE,
+        });
         fireEvent.click(screen.getByText(Config.navigationDefaults.addBusinessButton));
         expect(mockPush).toHaveBeenCalledWith({
           pathname: ROUTES.onboarding,
@@ -219,7 +245,10 @@ describe("<NavBarPopupMenu />", () => {
 
       it("sends user to selfRegistration when registration button is clicked", async () => {
         useMockBusiness(generateOnboardingBusiness());
-        renderNavBarPopupMenu({ menuConfiguration: "profile-mynj-addbusiness-logout" });
+        renderNavBarPopupMenu({
+          props: { menuConfiguration: "profile-mynj-addbusiness-logout" },
+          isAuthenticated: IsAuthenticated.TRUE,
+        });
         const openMock = jest.fn();
         global.open = openMock;
 
@@ -232,16 +261,22 @@ describe("<NavBarPopupMenu />", () => {
 
       it("sends user to landing when logout button is clicked", async () => {
         useMockBusiness(generateOnboardingBusiness());
-        renderNavBarPopupMenu({ menuConfiguration: "profile-mynj-addbusiness-logout" });
+        renderNavBarPopupMenu({
+          props: { menuConfiguration: "profile-mynj-addbusiness-logout" },
+          isAuthenticated: IsAuthenticated.TRUE,
+        });
         fireEvent.click(screen.getByText(Config.navigationDefaults.logoutButton));
         expect(onSignOut).toHaveBeenCalled();
       });
     });
 
-    describe("profile-register-login configruation", () => {
+    describe("profile-register-login configuration", () => {
       beforeEach(() => {
         useMockBusiness(generateOnboardingBusiness());
-        renderNavBarPopupMenu({ menuConfiguration: "profile-register-login" });
+        renderNavBarPopupMenu({
+          props: { menuConfiguration: "profile-register-login" },
+          isAuthenticated: IsAuthenticated.FALSE,
+        });
       });
 
       it("shows profile, register and login buttons", () => {
@@ -276,7 +311,10 @@ describe("<NavBarPopupMenu />", () => {
     describe("login-getstarted configuration", () => {
       beforeEach(() => {
         useMockBusiness(generateOnboardingBusiness());
-        renderNavBarPopupMenu({ menuConfiguration: "login-getstarted" });
+        renderNavBarPopupMenu({
+          props: { menuConfiguration: "login-getstarted" },
+          isAuthenticated: IsAuthenticated.FALSE,
+        });
       });
 
       it("shows login and getstarted buttons", () => {
