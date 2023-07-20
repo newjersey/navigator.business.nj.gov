@@ -75,7 +75,7 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
 
   return (
     <>
-      <div className="margin-top-2 text-field-width-default">
+      <div className="text-field-width-default">
         <FormControl variant="outlined" fullWidth error={isFormFieldInValid}>
           <Select
             fullWidth
