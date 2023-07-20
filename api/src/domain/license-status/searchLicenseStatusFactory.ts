@@ -17,7 +17,7 @@ export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusCli
     });
 
     if (allMatchingAddressesArray.length === 0) {
-      throw "NO_MATCH";
+      throw new Error("NO_MATCH");
     }
 
     const match = allMatchingAddressesArray.reduce((a, b) => {

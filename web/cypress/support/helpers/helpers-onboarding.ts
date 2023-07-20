@@ -100,7 +100,7 @@ export const completeNewBusinessOnboarding = ({
   }
 
   if (!industry.industryOnboardingQuestions.isCpaRequiredApplicable && requiresCpa) {
-    throw "Cypress configuration error - CPA set for non-cpa industry";
+    throw new Error("Cypress configuration error - CPA set for non-cpa industry");
   }
 
   cy.url().should("include", "onboarding?page=1");

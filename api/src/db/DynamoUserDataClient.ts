@@ -59,7 +59,7 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
       })
       .catch((error) => {
         console.log(error);
-        throw "Not found";
+        throw new Error("Not found");
       });
   };
 
@@ -75,7 +75,7 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
 
       .then(async (result) => {
         if (!result.Item) {
-          throw "Not found";
+          throw new Error("Not found");
         }
         return await doMigration(result.Item.data);
       })

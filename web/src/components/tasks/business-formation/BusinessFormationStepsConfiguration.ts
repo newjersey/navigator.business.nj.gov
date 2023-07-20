@@ -21,7 +21,7 @@ export const LookupNameByStepIndex = (index: number): FormationStepNames => {
     return x.stepIndex === index;
   })?.name;
   if (!foundName) {
-    throw "No step exists for index";
+    throw new Error("No step exists for index");
   }
   return foundName;
 };

@@ -74,7 +74,7 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logger: LogWriterTy
 
         const myNJDuplicateErrors = ["E1048", "E1017", "E1059", "E2109"];
         if (error.length > 0 && myNJDuplicateErrors.includes(error[0].split(" ")[0])) {
-          throw "DUPLICATE_SIGNUP";
+          throw new Error("DUPLICATE_SIGNUP");
         }
 
         return error;

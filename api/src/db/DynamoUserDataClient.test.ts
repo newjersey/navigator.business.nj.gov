@@ -27,7 +27,7 @@ describe("DynamoUserDataClient", () => {
   });
 
   it("gets inserted items", async () => {
-    await expect(dynamoUserDataClient.get("some-id")).rejects.toEqual("Not found");
+    await expect(dynamoUserDataClient.get("some-id")).rejects.toEqual(new Error("Not found"));
 
     const userData = generateUserData({ user: generateUser({ id: "some-id" }) });
     await dynamoUserDataClient.put(userData);

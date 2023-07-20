@@ -13,7 +13,7 @@ export const removeBusiness = ({
   newCurrentBusinessId: string;
 }): UserData => {
   if (!Object.keys(userData.businesses).includes(newCurrentBusinessId)) {
-    throw "Business does not exist";
+    throw new Error("Business does not exist");
   }
 
   return {
