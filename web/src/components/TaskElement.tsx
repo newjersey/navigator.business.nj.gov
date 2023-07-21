@@ -8,20 +8,13 @@ import { Task } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
-import {
-  generateBusiness,
-  generateMunicipality,
-  generateProfileData,
-} from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, ReactNode } from "react";
 
 interface Props {
   task: Task;
   children?: ReactNode | ReactNode[];
-  overrides?: {
-    skipDeferredLocationPrompt: boolean;
-  };
+  CMS_ONLY_fakeBusiness?: Business;
 }
 
 export const TaskElement = (props: Props): ReactElement => {
@@ -87,14 +80,6 @@ export const TaskElement = (props: Props): ReactElement => {
     return "";
   };
 
-  const getFakeBusinessWithMunicipality = (): Business => {
-    return generateBusiness({
-      profileData: generateProfileData({
-        municipality: generateMunicipality({}),
-      }),
-    });
-  };
-
   return (
     <div id="taskElement" className="flex flex-column space-between minh-38">
       <div>
@@ -106,17 +91,10 @@ export const TaskElement = (props: Props): ReactElement => {
           <>
             <Content>{deferredLocationQuestion.before}</Content>
             {shouldShowDeferredQuestion && (
-              <>
-                {props.overrides?.skipDeferredLocationPrompt && (
-                  <DeferredLocationQuestion
-                    innerContent={deferredLocationQuestion.innerContent}
-                    CMS_ONLY_fakeBusiness={getFakeBusinessWithMunicipality()}
-                  />
-                )}
-                {!props.overrides?.skipDeferredLocationPrompt && (
-                  <DeferredLocationQuestion innerContent={deferredLocationQuestion.innerContent} />
-                )}
-              </>
+              <DeferredLocationQuestion
+                innerContent={deferredLocationQuestion.innerContent}
+                CMS_ONLY_fakeBusiness={props.CMS_ONLY_fakeBusiness}
+              />
             )}
             <Content>{deferredLocationQuestion.after}</Content>
           </>
