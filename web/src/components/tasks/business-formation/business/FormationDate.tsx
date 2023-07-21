@@ -118,6 +118,9 @@ export const FormationDate = (props: Props): ReactElement => {
                     helperText={
                       doesFieldHaveError(props.fieldName) && contentProps[props.fieldName].helperText
                     }
+                    sx={{
+                      svg: { fill: "#4b7600" },
+                    }}
                     inputProps={{
                       ...params.inputProps,
                       placeholder: "",
