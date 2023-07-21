@@ -9,38 +9,33 @@ filename: hvacr-license-reinstatement
 urlSlug: hvacr-license-reinstatement
 name: Reinstate Your HVACR License
 webflowName: "HVACR: License Reinstatement"
-summaryDescriptionMd: "If you’ve let your Heating, Ventilating, Air
-  Conditioning, and Refrigeration (HVACR) license expire, you can apply to
-  reinstate it. "
+summaryDescriptionMd: If your Heating, Ventilating, Air Conditioning, and
+  Refrigeration (HVACR) license has expired, you can apply for reinstatement.
 industryId:
   - hvac-contractor
 callToActionText: " Reinstate My License "
 callToActionLink: https://www.njconsumeraffairs.gov/hvacr/Pages/applications.aspx
 divisionPhone: (973) 504-6250
 ---
-___
-### Reinstatement Requirements
-- `EIN |EIN` 
-- Reinstatement application
-- Suspended license number
-- Social Security number (SSN)
-- List of licenses or certificates (past and present) 
-- Certification of employment, listing all jobs held during suspension
-- Certificate of completion for continuing education 
-- `Surety bond|surety-bond` in the amount of $3,000 and a minimum of $500,000 in liability insurance
-- Notarized affidavit 
-- Applicable fees paid
+- - -
 
-:::infoAlert
-You need to pay the $150 reinstatement fee and the $160 renewal fee for one renewal period.
+### Reinstatement Requirements
+
+*  `EIN|EIN` 
+* Reinstatement application
+* Suspended license number
+* Social Security number (SSN)
+* List of licenses or certificates (past and present) 
+* Certification of employment, listing all jobs held during suspension
+* Certificate of completion for continuing education 
+*  `Surety bond|surety-bond` in the amount of $3,000 and a minimum of $500,000 in liability insurance
+* Notarized affidavit 
+* Applicable fees paid
+
+:::infoAlert 
+ You need to pay the $150 reinstatement fee and the $160 renewal fee for one renewal period.
 :::
 
 > **Once completed, you will have:**
 >
-> - The same license number
-
-
-
-
-
-
+> * The same license number
