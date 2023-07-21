@@ -1,15 +1,33 @@
 import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { ReactElement, useContext } from "react";
-
-type OutageAlertType = "ALL" | "UNREGISTERED_ONLY" | "LOGGED_IN_ONLY" | undefined;
+import { OutageAlertType, OutageConfig } from "@/lib/types/types";
+import { useMountEffect } from "@/lib/utils/helpers";
+import axios from "axios";
+import { ReactElement, useContext, useState } from "react";
 
 export const OutageAlertBar = (): ReactElement => {
   const { state } = useContext(AuthContext);
 
-  const isEnabled = process.env.FEATURE_ENABLE_OUTAGE_ALERT_BAR === "true";
-  const message = process.env.OUTAGE_ALERT_MESSAGE;
-  const alertType = process.env.OUTAGE_ALERT_TYPE as OutageAlertType;
+  const [outageConfig, setOutageConfig] = useState<OutageConfig>({
+    FEATURE_ENABLE_OUTAGE_ALERT_BAR: false,
+    OUTAGE_ALERT_MESSAGE: "",
+    OUTAGE_ALERT_TYPE: undefined,
+  });
+
+  const isEnabled = outageConfig.FEATURE_ENABLE_OUTAGE_ALERT_BAR;
+  const message = outageConfig.OUTAGE_ALERT_MESSAGE;
+  const alertType = outageConfig.OUTAGE_ALERT_TYPE as OutageAlertType;
+  const urlToFetchFrom = process.env.OUTAGE_ALERT_CONFIG_URL || "";
+
+  useMountEffect(() => {
+    if (!urlToFetchFrom) return;
+    axios
+      .get(urlToFetchFrom)
+      .then((response) => {
+        setOutageConfig(response.data);
+      })
+      .catch(() => {});
+  });
 
   if (!isEnabled || !alertType || !message) return <></>;
   if (alertType === "LOGGED_IN_ONLY" && state.isAuthenticated !== IsAuthenticated.TRUE) {
