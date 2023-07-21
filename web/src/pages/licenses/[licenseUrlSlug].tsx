@@ -55,9 +55,9 @@ export const LicenseElement = (props: LicenseElementProps): ReactElement => {
             </div>
           </div>
         </div>
-        <p className="h6-styling">
+        <div className="h6-styling">
           <Content>{Config.licenseEventDefaults.disclaimerMarkdown}</Content>
-        </p>
+        </div>
         <HorizontalLine />
         <Content>{props.license.contentMd}</Content>
       </div>
