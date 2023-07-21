@@ -6,7 +6,9 @@ import { AuthContext } from "@/contexts/authContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSelfRegister, onSignOut } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getBusinessIconColor } from "@/lib/domain-logic/getBusinessIconColor";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
+import { orderBusinessIdsByDateCreated } from "@/lib/domain-logic/orderBusinessIdsByDateCreated";
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import { switchCurrentBusiness } from "@/lib/domain-logic/switchCurrentBusiness";
 import analytics from "@/lib/utils/analytics";
@@ -131,15 +133,8 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
 
   const profileMenuItem = (): ReactElement[] => {
     if (!userData) return [];
-    return Object.keys(userData.businesses).flatMap((businessId, i) => {
+    return orderBusinessIdsByDateCreated(userData).flatMap((businessId, i) => {
       const isCurrent = businessId === userData.currentBusinessId;
-
-      const iconColor = (): string => {
-        if (i % 4 === 0) return "green";
-        else if (i % 4 === 1) return "blue";
-        else if (i % 4 === 2) return "purple";
-        else return "teal";
-      };
 
       const businessMenuItems = [
         NavMenuItem({
@@ -147,10 +142,11 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
             if (Object.keys(userData.businesses).length > 1) {
               await updateQueue?.queue(switchCurrentBusiness(userData, businessId)).update();
             }
+            props.handleClose();
             await router.push(ROUTES.dashboard);
           },
           selected: !isProfileSelected && isCurrent,
-          icon: <ButtonIcon svgFilename={`business-${iconColor()}`} sizePx="35px" />,
+          icon: <ButtonIcon svgFilename={`business-${getBusinessIconColor(i)}`} sizePx="35px" />,
           itemText: getNavBarBusinessTitle(userData.businesses[businessId], state.isAuthenticated),
           dataTestid: `business-title-${i}`,
           key: `business-title-${businessId}`,
@@ -211,8 +207,8 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
         disabled={true}
       >
         <div className="text-bold">{guestOrUserName}</div>
-        <hr className="margin-0 hr-2px" key="name-break" />
       </MenuItem>
+      <hr className="margin-0 hr-2px" key="name-break" />
       {props.hasCloseButton && (
         <button
           className="right-nav-close fac fdr fjc position-absolute usa-position-bottom-right top-0 right-0 margin-y-2 margin-x-105"
