@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { HorizontalLine } from "@/components/HorizontalLine";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { MicrobusinessRadioQuestion } from "@/components/tasks/cannabis/MicrobusinessRadioQuestion";
 import { PriorityStatusCheckboxes } from "@/components/tasks/cannabis/PriorityStatusCheckboxes";
@@ -19,9 +20,7 @@ export const CannabisApplicationQuestionsTab = (props: Props): ReactElement => {
   return (
     <div className="flex flex-column">
       <Content>{Config.cannabisApplyForLicense.applicationQuestionsText}</Content>
-      <div>
-        <hr className="margin-y-3" />
-      </div>
+      <HorizontalLine />
       <div className="margin-top-2">
         <div role="heading" aria-level={2} className="h3-styling margin-bottom-2 text-normal">
           {Config.cannabisApplyForLicense.businessSizeHeader}

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { ContextualInfoLink } from "@/components/ContextualInfoLink";
+import { HorizontalLine } from "@/components/HorizontalLine";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Icon } from "@/components/njwds/Icon";
 import { PureMarkdownContent } from "@/components/PureMarkdownContent";
@@ -40,7 +41,7 @@ export const Content = (props: ContentProps): ReactElement => {
       return <div className="h6-styling">{props.children}</div>;
     },
     hr: (): ReactElement => {
-      return <hr className="margin-y-3" />;
+      return <HorizontalLine />;
     },
     blockquote: GreenBox,
     infoAlert: (props: any): ReactElement => {

@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { HorizontalLine } from "@/components/HorizontalLine";
 import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
@@ -58,7 +59,7 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
         <Content>{addNaicsCodeData(props.funding.contentMd)}</Content>
         {props.funding.agency && props.funding.agency.length > 0 ? (
           <>
-            <hr className="margin-y-3" />
+            <HorizontalLine />
             <div>
               <span
                 className="h5-styling"

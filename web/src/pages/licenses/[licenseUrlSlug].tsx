@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { HorizontalLine } from "@/components/HorizontalLine";
 import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
@@ -54,14 +55,11 @@ export const LicenseElement = (props: LicenseElementProps): ReactElement => {
             </div>
           </div>
         </div>
+        <p className="h6-styling">
+          <Content>{Config.licenseEventDefaults.disclaimerMarkdown}</Content>
+        </p>
+        <HorizontalLine />
         <Content>{props.license.contentMd}</Content>
-
-        <hr className="margin-y-3" />
-        <div className="h6-styling">
-          <span className="text-base-dark">
-            <Content>{Config.licenseEventDefaults.disclaimerMarkdown}</Content>
-          </span>
-        </div>
       </div>
       {props.license.callToActionLink && props.license.callToActionText && (
         <TaskCTA link={props.license.callToActionLink} text={props.license.callToActionText} />

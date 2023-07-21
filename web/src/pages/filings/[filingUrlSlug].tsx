@@ -1,5 +1,6 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content, ExternalLink, GreenBox } from "@/components/Content";
+import { HorizontalLine } from "@/components/HorizontalLine";
 import { NavBar } from "@/components/navbar/NavBar";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { Icon } from "@/components/njwds/Icon";
@@ -153,7 +154,7 @@ export const FilingElement = (props: {
             <hr className="margin-bottom-2" />
           </>
         ) : (
-          <hr className="margin-y-3" />
+          <HorizontalLine />
         )}
 
         {props.filing.agency && (

@@ -1,3 +1,4 @@
+import { HorizontalLine } from "@/components/HorizontalLine";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { PureMarkdownContent } from "@/components/PureMarkdownContent";
@@ -43,7 +44,7 @@ export const NexusUnavailable = (props: UnavailableProps): ReactElement => {
         </Alert>
       </div>
 
-      <hr className="margin-y-3" />
+      <HorizontalLine />
       <DbaNameSearch />
     </>
   );
