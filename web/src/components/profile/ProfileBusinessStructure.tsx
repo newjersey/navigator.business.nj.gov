@@ -35,7 +35,7 @@ export const ProfileBusinessStructure = (): ReactElement => {
 
   return (
     <div data-testid="business-structure">
-      <div className="flex flex-row">
+      <div className="flex flex-row flex-align-center">
         <FieldLabelProfile fieldName="legalStructureId" />
         {!isFormed && (
           <a
