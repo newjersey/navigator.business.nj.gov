@@ -523,3 +523,11 @@ export interface ActionTile {
   onClick: () => void;
   isPrimary?: boolean;
 }
+
+export type OutageAlertType = "ALL" | "UNREGISTERED_ONLY" | "LOGGED_IN_ONLY" | undefined;
+
+export type OutageConfig = {
+  FEATURE_ENABLE_OUTAGE_ALERT_BAR: boolean;
+  OUTAGE_ALERT_MESSAGE: string;
+  OUTAGE_ALERT_TYPE: OutageAlertType;
+};
