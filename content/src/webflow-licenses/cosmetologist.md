@@ -4,7 +4,7 @@ notesMd: >-
 
 
   Draft: https://docs.google.com/document/d/1J427TU2MFzfznhfhWYhC9oC5-IUgVUAeBfMeX8iGxwg/edit 
-urlSlug: cosmetologist
+urlSlug: cosmetologist-license
 name: "Get Your Cosmetology License "
 webflowName: "Cosmetologist: Cosmetologist License"
 summaryDescriptionMd: If you or an employee wants to work as a cosmetologist,
@@ -20,21 +20,24 @@ divisionPhone: (973) 504-6400
 id: cosmetologist
 webflowId: 5f772982147ced365526bf46
 ---
-- - - 
+
+
+- - -
+
 ### Eligibility Criteria
 
-- Be 17 years old at a minimum
-- Complete the required 1,200 hours of education and training from an approved school in New Jersey, another state or a foreign country
-- Pass the cosmetology licensing examination
-- Hold a temporary cosmetology permit (you must obtain a temporary cosmetology permit before a cosmetology license can be issued)
+* Be at least 17 years old 
+* Complete the required 1,200 hours of education and training from an approved school in New Jersey, another state or a foreign country
+* Pass the cosmetology licensing examination
+* Hold a temporary cosmetology permit (you must obtain a temporary cosmetology permit before a cosmetology license can be issued)
 
 ### Application Requirements
-- Proof of age (e.g., birth certificate, passport, driver's license)
-- Proof of completing the required education and training hours
-- Proof of passing the cosmetology licensing examination
-- Applicable fees paid
+
+* Proof of age (e.g., birth certificate, passport, driver's license)
+* Proof of completing the required education and training hours
+* Proof of passing the cosmetology licensing examination
+* Applicable fees paid
 
 > **Once completed, you will have**:
 >
 > A cosmetology license
-
