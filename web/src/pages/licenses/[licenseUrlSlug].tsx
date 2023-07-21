@@ -55,14 +55,11 @@ export const LicenseElement = (props: LicenseElementProps): ReactElement => {
             </div>
           </div>
         </div>
-        <Content>{props.license.contentMd}</Content>
-
+        <p className="h6-styling">
+          <Content>{Config.licenseEventDefaults.disclaimerMarkdown}</Content>
+        </p>
         <HorizontalLine />
-        <div className="h6-styling">
-          <span className="text-base-dark">
-            <Content>{Config.licenseEventDefaults.disclaimerMarkdown}</Content>
-          </span>
-        </div>
+        <Content>{props.license.contentMd}</Content>
       </div>
       {props.license.callToActionLink && props.license.callToActionText && (
         <TaskCTA link={props.license.callToActionLink} text={props.license.callToActionText} />
