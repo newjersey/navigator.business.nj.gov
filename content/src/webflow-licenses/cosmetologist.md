@@ -7,9 +7,9 @@ notesMd: >-
 urlSlug: cosmetologist-license
 name: "Get Your Cosmetology License "
 webflowName: "Cosmetologist: Cosmetologist License"
-summaryDescriptionMd: If you or an employee wants to work as a cosmetologist,
+summaryDescriptionMd: "If you or an employee wants to work as a cosmetologist,
   hairstylist, esthetician, or nail technician in New Jersey, you or they need a
-  cosmetology license.
+  cosmetology license.   ffgf "
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Cosmetology and Hairstyling
 callToActionText: " Apply for My Cosmetology License"
