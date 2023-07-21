@@ -8,7 +8,9 @@ import { AuthContext } from "@/contexts/authContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSelfRegister } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getBusinessIconColor } from "@/lib/domain-logic/getBusinessIconColor";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
+import { orderBusinessIdsByDateCreated } from "@/lib/domain-logic/orderBusinessIdsByDateCreated";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -17,7 +19,7 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 export const NavBarDesktop = (): ReactElement => {
-  const { business, updateQueue } = useUserData();
+  const { business, updateQueue, userData } = useUserData();
   const { state } = useContext(AuthContext);
   const router = useRouter();
   const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
@@ -66,6 +68,8 @@ export const NavBarDesktop = (): ReactElement => {
   const textColor = isAuthenticated ? "primary" : "base";
   const accountIcon = isAuthenticated ? "account_circle" : "help";
   const navBarBusinessTitle = getNavBarBusinessTitle(business, state.isAuthenticated);
+  const currentIndex =
+    userData && business ? orderBusinessIdsByDateCreated(userData).indexOf(business.id) : 0;
 
   return (
     <div className="position-sticky top-0 z-500 bg-white">
@@ -129,7 +133,7 @@ export const NavBarDesktop = (): ReactElement => {
                 onClick={toggleDropdown}
               >
                 <div className={`text-bold text-${textColor} flex flex-align-center margin-left-1`}>
-                  <ButtonIcon svgFilename="business-green" sizePx="35px" />
+                  <ButtonIcon svgFilename={`business-${getBusinessIconColor(currentIndex)}`} sizePx="35px" />
                   <div className="text-base-darkest truncate-long-business-names_NavBarDesktop">
                     {navBarBusinessTitle}
                   </div>
@@ -138,13 +142,20 @@ export const NavBarDesktop = (): ReactElement => {
               </button>
             )}
 
-            <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal={true}>
+            <Popper
+              open={open}
+              anchorEl={anchorRef.current}
+              role={undefined}
+              transition
+              disablePortal={true}
+              placement="bottom-end"
+            >
               {({ TransitionProps, placement }): JSX.Element => {
                 return (
                   <Grow
                     {...TransitionProps}
                     style={{
-                      transformOrigin: placement === "bottom" ? "center top" : "center bottom",
+                      transformOrigin: placement.startsWith("bottom") ? "center top" : "center bottom",
                     }}
                   >
                     <Paper>
