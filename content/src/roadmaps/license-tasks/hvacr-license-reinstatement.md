@@ -1,10 +1,13 @@
 ---
-notesMd: >
+notesMd: >-
   Draft:
   https://docs.google.com/document/d/1Wz_sMYY0t3ycS4rmiqeWrNafLwdBStGE_R_ivT3c57w/edit#heading=h.o4i5usz2zi3h
 
 
   Ticket: https://dev.azure.com/NJInnovation/Business%20First%20Stop/_boards/board/t/Research%20and%20Content/Discovery%20Stories/?workitem=3023
+
+
+  Reminder: may need to move to  Tasks-All folder
 filename: hvacr-license-reinstatement
 urlSlug: hvacr-license-reinstatement
 name: Reinstate Your HVACR License
@@ -17,8 +20,6 @@ callToActionText: " Reinstate My License "
 callToActionLink: https://www.njconsumeraffairs.gov/hvacr/Pages/applications.aspx
 divisionPhone: (973) 504-6250
 ---
-
-
 - - -
 
 ### Reinstatement Requirements
