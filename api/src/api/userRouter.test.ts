@@ -125,7 +125,7 @@ describe("userRouter", () => {
 
     it("returns a 404 when a user isn't registered", async () => {
       stubUserDataClient.get.mockImplementation(() => {
-        return Promise.reject("Not found");
+        return Promise.reject(new Error("Not found"));
       });
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
@@ -143,7 +143,7 @@ describe("userRouter", () => {
     });
 
     it("returns a 500 when user get fails", async () => {
-      stubUserDataClient.get.mockRejectedValue("error");
+      stubUserDataClient.get.mockRejectedValue(new Error("error"));
 
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
@@ -233,7 +233,7 @@ describe("userRouter", () => {
           })
         );
         stubUserDataClient.get.mockResolvedValue(userData);
-        stubUpdateLicenseStatus.mockRejectedValue("license failure");
+        stubUpdateLicenseStatus.mockRejectedValue(new Error("license failure"));
 
         const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateOperatingPhase).toHaveBeenCalledWith(userData);
@@ -372,7 +372,7 @@ describe("userRouter", () => {
           })
         );
         stubUserDataClient.get.mockResolvedValue(userData);
-        stubTimeStampBusinessSearch.search.mockRejectedValue({});
+        stubTimeStampBusinessSearch.search.mockRejectedValue(new Error("message"));
 
         await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubTimeStampBusinessSearch.search).toHaveBeenCalledWith(
@@ -710,7 +710,7 @@ describe("userRouter", () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const userData = generateUserData({ user: generateUser({ id: "123" }) });
 
-      stubUserDataClient.put.mockRejectedValue("error");
+      stubUserDataClient.put.mockRejectedValue(new Error("error"));
       const response = await request(app)
         .post(`/users`)
         .send(userData)

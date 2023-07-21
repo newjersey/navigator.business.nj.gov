@@ -145,10 +145,10 @@ export const userRouterFactory = (
           if (process.env.IS_OFFLINE || process.env.STAGE === "dev") {
             saveEmptyUserData(req, res, signedInUserId);
           } else {
-            res.status(404).json({ error });
+            res.status(404).json({ error: error.message });
           }
         } else {
-          res.status(500).json({ error });
+          res.status(500).json({ error: error.message });
         }
       });
   });
@@ -178,8 +178,8 @@ export const userRouterFactory = (
       .then((result: UserData) => {
         res.json(result);
       })
-      .catch((error) => {
-        res.status(500).json({ error });
+      .catch((error: Error) => {
+        res.status(500).json({ error: error.message });
       });
   });
 

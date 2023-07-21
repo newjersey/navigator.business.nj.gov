@@ -20,11 +20,12 @@ export const selfRegRouterFactory = (
       const updatedUserData = await updateMyNJKey(userData, selfRegResponse.myNJUserKey);
       res.json({ authRedirectURL: selfRegResponse.authRedirectURL, userData: updatedUserData });
     } catch (error) {
-      if ((error as Error).message === "DUPLICATE_SIGNUP") {
-        res.status(409).send(error);
+      const message = (error as Error).message;
+      if (message === "DUPLICATE_SIGNUP") {
+        res.status(409).send({ error: message });
         return;
       }
-      res.status(500).send(error);
+      res.status(500).send({ error: message });
     }
   });
 

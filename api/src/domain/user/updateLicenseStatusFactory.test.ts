@@ -85,7 +85,7 @@ describe("updateLicenseStatus", () => {
   });
 
   it("updates the license task status to NOT_STARTED & user license data when NO MATCH", async () => {
-    stubSearchLicenseStatus.mockRejectedValue("NO_MATCH");
+    stubSearchLicenseStatus.mockRejectedValue(new Error("NO_MATCH"));
     const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
     const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
@@ -112,8 +112,8 @@ describe("updateLicenseStatus", () => {
   });
 
   it("rejects and still updates user license data when generic error", async () => {
-    stubSearchLicenseStatus.mockRejectedValue("some-error");
-    await expect(updateLicenseStatus(userData, nameAndAddress)).rejects.toEqual("some-error");
+    stubSearchLicenseStatus.mockRejectedValue(new Error("some-error"));
+    await expect(updateLicenseStatus(userData, nameAndAddress)).rejects.toEqual(new Error("some-error"));
   });
 
   it("updates the license task status to IN_PROGRESS when license is pending", async () => {
