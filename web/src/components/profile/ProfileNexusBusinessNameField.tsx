@@ -20,8 +20,12 @@ export const ProfileNexusBusinessNameField = (): ReactElement => {
     return (
       <div>
         <div className="flex">
-          <h3 className="margin-right-105">{contentFromConfig.outOfStateNameHeader}</h3>
-          <a href={`/tasks/${formationTaskId}`}>{contentFromConfig.addButton}</a>
+          <div role="heading" aria-level={3} className="text-bold margin-bottom-05">
+            {contentFromConfig.outOfStateNameHeader}
+          </div>
+          <a href={`/tasks/${formationTaskId}`} className="margin-left-2 margin-top-2px">
+            {contentFromConfig.addButton}{" "}
+          </a>
         </div>
         <div className="italic">
           <em>{contentFromConfig.emptyBusinessPlaceHolder}</em>
@@ -33,9 +37,13 @@ export const ProfileNexusBusinessNameField = (): ReactElement => {
   const renderUserBusinessName = (): ReactNode => {
     return (
       <div>
-        <div className="flex">
-          <h3 className="margin-right-105">{contentFromConfig.outOfStateNameHeader}</h3>
-          <a href={`/tasks/${formationTaskId}`}>{contentFromConfig.editButton}</a>
+        <div className="flex flex-row flex-align-center">
+          <div role="heading" aria-level={3} className="text-bold margin-bottom-05">
+            {contentFromConfig.outOfStateNameHeader}
+          </div>
+          <a href={`/tasks/${formationTaskId}`} className="margin-left-2">
+            {contentFromConfig.editButton}
+          </a>
         </div>
         <div>{state?.profileData.businessName}</div>
       </div>
