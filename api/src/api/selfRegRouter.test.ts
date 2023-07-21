@@ -77,7 +77,7 @@ describe("selfRegRouter", () => {
     });
 
     it("returns a 409 error when auth resume returns DUPLICATE_SIGNUP", async () => {
-      stubSelfRegClient.resume.mockRejectedValue("DUPLICATE_SIGNUP");
+      stubSelfRegClient.resume.mockRejectedValue(new Error("DUPLICATE_SIGNUP"));
 
       const response = await sendRequest(stubRecordWithMyNJKey);
       expect(stubSelfRegClient.resume).toHaveBeenCalledWith(myNJKey);
