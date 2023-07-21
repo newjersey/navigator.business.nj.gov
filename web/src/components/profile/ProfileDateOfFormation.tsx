@@ -86,7 +86,7 @@ export const ProfileDateOfFormation = (props: Props): ReactElement => {
         onError={(hasError: string | null): void => {
           setDateError(!!hasError);
         }}
-        renderInput={(params: TextFieldProps): JSX.Element => {
+        renderInput={(params: TextFieldProps): ReactElement => {
           return (
             <GenericTextField
               inputWidth="reduced"
@@ -101,6 +101,7 @@ export const ProfileDateOfFormation = (props: Props): ReactElement => {
                   ...params.inputProps,
                 },
                 error: isFormFieldInValid,
+                sx: { svg: { fill: "#4b7600" } },
               }}
             />
           );
