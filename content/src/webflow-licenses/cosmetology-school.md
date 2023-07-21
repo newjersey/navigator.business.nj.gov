@@ -1,7 +1,13 @@
 ---
-notesMd: "Draft is here:
-  https://docs.google.com/document/d/1J427TU2MFzfznhfhWYhC9oC5-IUgVUAeBfMeX8iGx\
-  wg/edit "
+notesMd: >-
+  Draft is here:
+  https://docs.google.com/document/d/1J427TU2MFzfznhfhWYhC9oC5-IUgVUAeBfMeX8iGxwg/edit 
+
+
+  Reminder:
+
+
+  For the time being, this license task has not been added to a roadmap.
 urlSlug: cosmetology-school-license
 name: Get Your Cosmetology School License
 webflowName: "Cosmetologist: Cosmetology School License "
