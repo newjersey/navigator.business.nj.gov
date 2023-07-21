@@ -1158,6 +1158,10 @@ collections:
         widget: "select"
         options: ["yes", "no", "unknown"]
         default: "unknown"
+      - label: "Is nonprofit only"
+        name: "isNonprofitOnly"
+        widget: "boolean"
+        required: false
       - label: "Certification(s)"
         name: "certifications"
         widget: "select"
