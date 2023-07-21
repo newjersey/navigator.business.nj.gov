@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { HorizontalLine } from "@/components/HorizontalLine";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext } from "react";
@@ -31,9 +32,7 @@ export const Authorization = (): ReactElement => {
       <div>
         <>
           {getFormattedBody()}
-          {(state.dbaContent.Authorize.agencyId || state.dbaContent.Authorize.formName) && (
-            <hr className="margin-y-3" />
-          )}
+          {(state.dbaContent.Authorize.agencyId || state.dbaContent.Authorize.formName) && <HorizontalLine />}
           {state.dbaContent.Authorize.agencyId && (
             <div>
               <span className="h5-styling">{`${Config.taskDefaults.issuingAgencyText}: `}</span>

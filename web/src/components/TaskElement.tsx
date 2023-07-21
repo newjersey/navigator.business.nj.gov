@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { DeferredLocationQuestion } from "@/components/DeferredLocationQuestion";
+import { HorizontalLine } from "@/components/HorizontalLine";
 import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
@@ -136,7 +137,7 @@ export const TaskElement = (props: Props): ReactElement => {
         )}
 
         {(props.task.agencyId || props.task.formName || props.task.agencyAdditionalContext) && (
-          <hr className="margin-y-3" />
+          <HorizontalLine />
         )}
 
         {(props.task.agencyId || props.task.agencyAdditionalContext) && (

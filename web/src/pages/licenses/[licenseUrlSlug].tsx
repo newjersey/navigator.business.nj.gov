@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { HorizontalLine } from "@/components/HorizontalLine";
 import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
@@ -56,7 +57,7 @@ export const LicenseElement = (props: LicenseElementProps): ReactElement => {
         </div>
         <Content>{props.license.contentMd}</Content>
 
-        <hr className="margin-y-3" />
+        <HorizontalLine />
         <div className="h6-styling">
           <span className="text-base-dark">
             <Content>{Config.licenseEventDefaults.disclaimerMarkdown}</Content>

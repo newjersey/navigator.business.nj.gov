@@ -16,9 +16,10 @@ ol {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
 }
-.usa-prose > p + *,
-p + * {
-  margin-top: 0.25rem !important;
+.usa-prose {
+  p:not(:first-child) {
+    margin-top: 0.25rem !important;
+  }
 }
 
 .green-box {
