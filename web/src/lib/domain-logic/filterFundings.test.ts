@@ -415,4 +415,96 @@ describe("filterFundings", () => {
       );
     });
   });
+
+  describe("isNonprofitOnly", () => {
+    it("includes fundings marked as isNonprofitOnly when user legal structure is nonprofit", () => {
+      const funding = generateFunding({ isNonprofitOnly: true });
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          legalStructureId: "nonprofit",
+          ownershipTypeIds: [],
+          homeBasedBusiness: false,
+          sectorId: undefined,
+          existingEmployees: (SMALL_BUSINESS_MAX_EMPLOYEE_COUNT - 1).toString(),
+          municipality: undefined,
+        }),
+      });
+
+      const result = filterFundings([funding], business);
+      expect(result.length).toEqual(1);
+      expect(result).toEqual(expect.arrayContaining([funding]));
+    });
+
+    it("includes fundings marked as isNonprofitOnly when user legal structure is not yet defined", () => {
+      const funding = generateFunding({ isNonprofitOnly: true });
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          legalStructureId: undefined,
+          ownershipTypeIds: [],
+          homeBasedBusiness: false,
+          sectorId: undefined,
+          existingEmployees: (SMALL_BUSINESS_MAX_EMPLOYEE_COUNT - 1).toString(),
+          municipality: undefined,
+        }),
+      });
+
+      const result = filterFundings([funding], business);
+      expect(result.length).toEqual(1);
+      expect(result).toEqual(expect.arrayContaining([funding]));
+    });
+
+    it("does not include fundings marked as isNonprofitOnly when user legal structure is not nonprofit", () => {
+      const funding = generateFunding({ isNonprofitOnly: true });
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          legalStructureId: "limited-liability-company",
+          ownershipTypeIds: [],
+          homeBasedBusiness: false,
+          sectorId: undefined,
+          existingEmployees: (SMALL_BUSINESS_MAX_EMPLOYEE_COUNT - 1).toString(),
+          municipality: undefined,
+        }),
+      });
+
+      const result = filterFundings([funding], business);
+      expect(result.length).toEqual(0);
+      expect(result).toEqual(expect.arrayContaining([]));
+    });
+  });
+
+  it("includes fundings marked as NOT isNonprofitOnly when user legal structure is nonprofit", () => {
+    const funding = generateFunding({ isNonprofitOnly: false });
+    const business = generateBusiness({
+      profileData: generateProfileData({
+        legalStructureId: "nonprofit",
+        ownershipTypeIds: [],
+        homeBasedBusiness: false,
+        sectorId: undefined,
+        existingEmployees: (SMALL_BUSINESS_MAX_EMPLOYEE_COUNT - 1).toString(),
+        municipality: undefined,
+      }),
+    });
+
+    const result = filterFundings([funding], business);
+    expect(result.length).toEqual(1);
+    expect(result).toEqual(expect.arrayContaining([funding]));
+  });
+
+  it("includes fundings marked as NOT isNonprofitOnly when user legal structure is not nonprofit", () => {
+    const funding = generateFunding({ isNonprofitOnly: false });
+    const business = generateBusiness({
+      profileData: generateProfileData({
+        legalStructureId: "limited-liability-company",
+        ownershipTypeIds: [],
+        homeBasedBusiness: false,
+        sectorId: undefined,
+        existingEmployees: (SMALL_BUSINESS_MAX_EMPLOYEE_COUNT - 1).toString(),
+        municipality: undefined,
+      }),
+    });
+
+    const result = filterFundings([funding], business);
+    expect(result.length).toEqual(1);
+    expect(result).toEqual(expect.arrayContaining([funding]));
+  });
 });

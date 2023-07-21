@@ -18,6 +18,14 @@ export const filterFundings = (fundings: Funding[], business: Business): Funding
     }
 
     if (
+      it.isNonprofitOnly &&
+      business.profileData.legalStructureId &&
+      business.profileData.legalStructureId !== "nonprofit"
+    ) {
+      return false;
+    }
+
+    if (
       business.profileData.municipality &&
       it.county.length > 0 &&
       !it.county.includes("All") &&
