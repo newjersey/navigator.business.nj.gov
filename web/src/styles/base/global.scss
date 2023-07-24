@@ -164,22 +164,6 @@ ol {
   background-color: $primary-dark;
 }
 
-.dashboard-opportunities-list {
-  @media all and (min-width: $lg) {
-    max-height: calc(100vh - 19rem);
-    overflow: auto;
-  }
-  &.fundingsLink {
-    max-height: calc(100vh - 24rem);
-  }
-  &.hiddenAccordion {
-    max-height: calc(100vh - 26rem);
-  }
-  &.fundingsLinkAndHiddenAccordion {
-    max-height: calc(100vh - 30rem);
-  }
-}
-
 .margin-0-override {
   margin: 0 !important;
 }

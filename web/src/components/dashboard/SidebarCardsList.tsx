@@ -3,10 +3,9 @@ import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
 import { SidebarCard } from "@/components/dashboard/SidebarCard";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { MediaQueries } from "@/lib/PageSizes";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import { Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, ReactNode, useState } from "react";
 
 interface Props {
@@ -23,7 +22,6 @@ interface Props {
 export const SidebarCardsList = (props: Props): ReactElement => {
   const [hiddenAccordionIsOpen, setHiddenAccordionIsOpen] = useState<boolean>(false);
   const { Config } = useConfig();
-  const hasForYouTab = !useMediaQuery(MediaQueries.desktopAndUp);
 
   const hiddenOpportunitiesCount = (): number => {
     if (props.displayCertifications && props.displayFundings) {
@@ -49,8 +47,8 @@ export const SidebarCardsList = (props: Props): ReactElement => {
     if (props.displayCertifications) {
       return (
         <>
-          <hr className="desktop:margin-right-1 margin-top-3 bg-cool-lighter" aria-hidden={true} />
-          <div className="desktop:margin-right-3 desktop:margin-bottom-1">
+          <hr className="margin-top-3 bg-cool-lighter" aria-hidden={true} />
+          <div className="desktop:margin-bottom-1">
             <Accordion
               expanded={hiddenAccordionIsOpen}
               onChange={(): void => {
@@ -89,7 +87,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
               </AccordionDetails>
             </Accordion>
           </div>
-          <hr className="desktop:margin-right-1 margin-bottom-3 bg-cool-lighter" aria-hidden={true} />
+          <hr className="margin-bottom-3 bg-cool-lighter" aria-hidden={true} />
         </>
       );
     } else {
@@ -100,7 +98,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
   const learnMoreAboutFundingsLink = (): ReactNode => {
     return (
       <>
-        <hr className="desktop:margin-right-1 margin-top-3 bg-cool-lighter" aria-hidden={true} />
+        <hr className="margin-top-3 bg-cool-lighter" aria-hidden={true} />
         <div className="margin-y-205 weight-unset-override">
           <Content>{Config.dashboardDefaults.learnMoreFundingOpportunities}</Content>
         </div>
@@ -108,37 +106,17 @@ export const SidebarCardsList = (props: Props): ReactElement => {
     );
   };
 
-  const scrollbar = (): string => {
-    if (hasForYouTab) {
-      return "";
-    }
-
-    if (props.displayCertifications && props.displayFundings) {
-      return "dashboard-opportunities-list fundingsLinkAndHiddenAccordion";
-    } else if (props.displayCertifications) {
-      return "dashboard-opportunities-list hiddenAccordion";
-    } else if (props.displayFundings) {
-      return "dashboard-opportunities-list fundingsLink";
-    } else {
-      return "dashboard-opportunities-list";
-    }
-  };
-
   return (
     <>
       <h2 className="h1-styling margin-top-0">{Config.dashboardDefaults.sidebarHeading}</h2>
-      <hr
-        className="desktop:margin-right-1 margin-top-2 margin-bottom-3 bg-cool-lighter"
-        aria-hidden={true}
-      />
-
-      <div className={`${scrollbar()} desktop:margin-right-1`}>
+      <hr className="margin-top-2 margin-bottom-3 bg-cool-lighter" aria-hidden={true} />
+      <div>
         <div data-testid="top-cards">
           {props.topCards.map((card) => {
             return <SidebarCard card={card} key={card.id} />;
           })}
         </div>
-        <div className="desktop:padding-right-105" data-testid="visible-opportunities">
+        <div data-testid="visible-opportunities">
           {props.displayCertifications &&
             props.certifications.map((cert) => {
               return <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />;
