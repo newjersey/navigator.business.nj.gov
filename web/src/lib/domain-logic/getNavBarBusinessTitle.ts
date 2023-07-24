@@ -34,12 +34,22 @@ export const getNavBarBusinessTitle = (
   }
 
   if (legalStructureId && industryId) {
+    if (industryId === "generic") {
+      return `${Config.navigationDefaults.navBarUnnamedOwnedBusinessText} ${
+        LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation
+      }`;
+    }
+
     return `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
       LookupIndustryById(business?.profileData?.industryId).name
     } ${LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation}`;
   }
 
   if (!legalStructureId && industryId) {
+    if (industryId === "generic") {
+      return Config.navigationDefaults.navBarUnnamedOwnedBusinessText;
+    }
+
     return `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
       LookupIndustryById(business?.profileData?.industryId).name
     }`;
