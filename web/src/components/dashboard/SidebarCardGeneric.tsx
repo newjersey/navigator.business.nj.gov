@@ -59,7 +59,7 @@ export const SidebarCardGeneric = (props: Props): ReactElement => {
   return (
     <>
       <div
-        className={`border radius-md border-${props.card.borderColor} desktop:margin-right-3 margin-bottom-3`}
+        className={`border radius-md border-${props.card.borderColor} margin-bottom-3`}
         {...{ "data-testid": props.card.id }}
       >
         {props.headerText && (
