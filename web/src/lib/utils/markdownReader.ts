@@ -188,6 +188,7 @@ type FundingGrayMatter = {
   programPurpose: string;
   agencyContact: string;
   descriptionMd: string;
+  isNonprofitOnly: boolean | undefined | null;
 };
 
 type CertificationGrayMatter = {
