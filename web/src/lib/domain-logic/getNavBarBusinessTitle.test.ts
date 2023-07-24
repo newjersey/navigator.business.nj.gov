@@ -145,10 +145,11 @@ describe("getNavBarBusinessTitle", () => {
   describe("when name undefined, legal structure defined, and industry defined", () => {
     describe("Public Filing", () => {
       describe("STARTING", () => {
-        it("shows Unnamed [Industry] [Legal Structure]", () => {
+        it("shows Unnamed [Industry] [Legal Structure] when non-generic industry", () => {
           const business = generateBusiness({
             profileData: generateProfileData({
               ...publicFilingProfile(),
+              industryId: "cannabis",
               businessPersona: "STARTING",
               businessName: undefined,
             }),
@@ -158,6 +159,23 @@ describe("getNavBarBusinessTitle", () => {
             `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
               LookupIndustryById(business?.profileData?.industryId).name
             } ${LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation}`
+          );
+        });
+
+        it("shows Unnamed Business [Legal Structure] when generic industry", () => {
+          const business = generateBusiness({
+            profileData: generateProfileData({
+              ...publicFilingProfile(),
+              industryId: "generic",
+              businessPersona: "STARTING",
+              businessName: undefined,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+          expect(navBarBusinessTitle).toEqual(
+            `${Config.navigationDefaults.navBarUnnamedOwnedBusinessText} ${
+              LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation
+            }`
           );
         });
       });
@@ -222,11 +240,12 @@ describe("getNavBarBusinessTitle", () => {
 
   describe("when name undefined, legal structure undefined, and industry defined", () => {
     describe("STARTING", () => {
-      it("shows Unnamed [Industry]", () => {
+      it("shows Unnamed [Industry] when non-generic industry", () => {
         const business = generateBusiness({
           onboardingFormProgress: "COMPLETED",
           profileData: generateProfileData({
             businessPersona: "STARTING",
+            industryId: "home-contractor",
             legalStructureId: undefined,
             tradeName: undefined,
             businessName: undefined,
@@ -238,6 +257,21 @@ describe("getNavBarBusinessTitle", () => {
             LookupIndustryById(business?.profileData?.industryId).name
           }`
         );
+      });
+
+      it("shows Unnamed Business when generic industry", () => {
+        const business = generateBusiness({
+          onboardingFormProgress: "COMPLETED",
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            industryId: "generic",
+            legalStructureId: undefined,
+            tradeName: undefined,
+            businessName: undefined,
+          }),
+        });
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+        expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedOwnedBusinessText);
       });
     });
 
