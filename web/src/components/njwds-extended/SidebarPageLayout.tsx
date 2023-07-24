@@ -34,7 +34,7 @@ export const SidebarPageLayout = ({
         className="usa-link fdr fac margin-top-3 margin-bottom-3 usa-link-hover-override desktop:margin-top-0 desktop:margin-bottom-4"
         onClick={analytics.event.task_back_to_roadmap.click.view_roadmap}
       >
-        <div className="circle-3 icon-green-bg-color-hover">
+        <div className="circle-3 bg-primary icon-green-bg-color-hover">
           <Icon className="text-white usa-icon--size-3">arrow_back</Icon>
         </div>
         <div className="margin-left-2 margin-y-auto text-primary font-sans-xs usa-link text-green-color-hover">

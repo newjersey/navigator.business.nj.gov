@@ -44,10 +44,10 @@ export const ProfileNaicsCode = (): ReactElement => {
 
   return (
     <>
-      <div className="flex flex-row">
+      <div className="flex flex-row flex-align-center">
         <FieldLabelProfile fieldName="naicsCode" />
         {shouldLockField() ? (
-          <div className="margin-left-2 margin-top-1">
+          <div className="margin-left-2">
             <ArrowTooltip
               title={Config.profileDefaults.lockedFieldTooltipText}
               data-testid="naics-code-tooltip"
