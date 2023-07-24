@@ -52,6 +52,7 @@ export const UnStyledButton = forwardRef(
     return (
       <button
         className={className}
+        type={"button"}
         ref={ref}
         onClick={props.onClick}
         {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}
