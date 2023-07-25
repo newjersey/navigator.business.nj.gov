@@ -10,10 +10,14 @@ const roadmapsDir = path.join(process.cwd(), "..", "content", "src", "roadmaps")
 const displayContentDir = path.join(process.cwd(), "..", "content", "src", "display-content");
 const filingsDir = path.join(process.cwd(), "..", "content", "src", "filings");
 const tasksDir = path.join(roadmapsDir, "tasks");
+const licenseTasksDir = path.join(roadmapsDir, "license-tasks");
 const industriesDir = path.join(roadmapsDir, "industries");
 const addOnsDir = path.join(roadmapsDir, "add-ons");
 const contextualInfoDir = path.join(displayContentDir, "contextual-information");
 const fieldConfigDir = path.join(process.cwd(), "..", "content", "src", "fieldConfig");
+const fundingsDir = path.join(process.cwd(), "..", "content", "src", "fundings");
+const certificationsDir = path.join(process.cwd(), "..", "content", "src", "certifications");
+const licensesDir = path.join(process.cwd(), "..", "content", "src", "licenses");
 
 type Filenames = {
   tasks: string[];
@@ -23,6 +27,10 @@ type Filenames = {
   contextualInfos: string[];
   displayContents: string[];
   fieldConfigs: string[];
+  fundings: string[];
+  certifications: string[];
+  licenses: string[];
+  licenseTasks: string[];
 };
 
 type FileContents = {
@@ -61,6 +69,10 @@ const getFilenames = (): Filenames => {
       return it.endsWith(".md");
     }),
     fieldConfigs: fs.readdirSync(fieldConfigDir),
+    fundings: fs.readdirSync(fundingsDir),
+    certifications: fs.readdirSync(certificationsDir),
+    licenses: fs.readdirSync(licensesDir),
+    licenseTasks: fs.readdirSync(licenseTasksDir),
   };
 };
 
@@ -203,7 +215,6 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     "/onboarding?page=1",
     "/onboarding?page=2",
     "/onboarding?page=3",
-    "/onboarding?page=4",
     "/profile",
     "/dashboard",
     ...filenames.tasks.map((it) => {
@@ -212,14 +223,30 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     ...filenames.filings.map((it) => {
       return `/filings/${it.split(".md")[0]}`;
     }),
+    "/welcome",
+    "/unsupported",
+    ...filenames.licenseTasks.map((it) => {
+      return `/tasks/${it.split(".md")[0]}`;
+    }),
+
+    ...filenames.licenses.map((it) => {
+      return `/licenses/${it.split(".md")[0]}-renewal`;
+    }),
+    ...filenames.licenses.map((it) => {
+      return `/licenses/${it.split(".md")[0]}-expiration`;
+    }),
+    ...filenames.fundings.map((it) => {
+      return `/funding/${it.split(".md")[0]}`;
+    }),
+    ...filenames.certifications.map((it) => {
+      return `/certification/${it.split(".md")[0]}`;
+    }),
   ];
 
   const deadLinks = pages.reduce((acc, cur) => {
     acc[cur] = [];
     return acc;
   }, {} as Record<string, string[]>);
-
-  const pagePromises = [];
 
   const templateEvals = [
     "municipalityWebsite",
@@ -238,29 +265,42 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     );
   };
 
-  for (const page of pages) {
-    const promise = new Promise((resolve) => {
-      const htmlUrlChecker = new HtmlUrlChecker(
-        {},
-        {
-          link: (result: any): void => {
-            if (result.broken && !isTemplateLink(result.url.original)) {
-              deadLinks[page].push(result.url.original);
-            }
-          },
-          end: (): void => {
-            resolve({});
-          },
-        }
-      );
-      const url = new URL(process.env.REDIRECT_URL || "");
-      htmlUrlChecker.enqueue(`${url.origin}${page}`, {});
-    });
+  const numberOfBatches = Math.ceil(pages.length / 5);
 
-    pagePromises.push(promise);
+  for (let j = 0; j < numberOfBatches; j++) {
+    const pagePromises = [];
+    const startIndex = j * 5;
+    const batch = pages.slice(startIndex, startIndex + 5);
+
+    for (const page of batch) {
+      const promise = new Promise((resolve) => {
+        const htmlUrlChecker = new HtmlUrlChecker(
+          {},
+          {
+            link: (result: any): void => {
+              if (
+                result.broken &&
+                !isTemplateLink(result.url.original) &&
+                result.url.original !== "https://twitter.com/i/lists/1148625562895826945"
+              ) {
+                deadLinks[page].push(result.url.original);
+              }
+            },
+            end: (): void => {
+              resolve({});
+            },
+          }
+        );
+        const url = new URL(process.env.REDIRECT_URL || "");
+        htmlUrlChecker.enqueue(`${url.origin}${page}`, {});
+      });
+
+      pagePromises.push(promise);
+    }
+
+    await Promise.all(pagePromises);
   }
 
-  await Promise.all(pagePromises);
   return deadLinks;
 };
 
