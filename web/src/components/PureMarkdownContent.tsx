@@ -42,6 +42,13 @@ function customRemarkPlugin():
             header: node.attributes.header,
           };
         }
+        if (node.name === "greenBox") {
+          const data = node.data || (node.data = {});
+          data.hName = "greenBox";
+          data.hProperties = {
+            header: node.attributes.header,
+          };
+        }
         if (node.name === "icon") {
           const data = node.data || (node.data = {});
           data.hName = "icon";
