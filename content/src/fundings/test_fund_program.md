@@ -1,6 +1,6 @@
 ---
 filename: Test Fund Program
-name: Test Fund Program
+name: Test Fund Program ...
 urlSlug: test-funding
 id: test-funding
 openDate: ""
