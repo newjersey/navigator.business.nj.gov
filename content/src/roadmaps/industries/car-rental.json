@@ -60,7 +60,7 @@
     "canBeHomeBased": false,
     "canBeReseller": false
   },
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "vehicle rental",
   "id": "car-rental",
   "description": "Leases vehicles to customers for less than 90 days."
