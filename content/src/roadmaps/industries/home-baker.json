@@ -2,7 +2,8 @@
   "naicsCodes": "311811, 311821 ",
   "defaultSectorId": "accommodation-and-food-services",
   "canHavePermanentLocation": false,
-  "roadmapSteps": [
+  "nonEssentialQuestions": [],
+"roadmapSteps": [
     {
       "step": 1,
       "weight": 1,

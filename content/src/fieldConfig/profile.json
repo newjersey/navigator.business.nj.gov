@@ -41,6 +41,11 @@
           }
         }
       },
+      "nonEssentialQuestions": {
+        "default": {
+          "header": "Based, on your industry, answer additional questions to personalize your experience."
+        }
+      },
       "certifiedInteriorDesigner": {
         "default": {
           "header": "Certified Interior Designer",

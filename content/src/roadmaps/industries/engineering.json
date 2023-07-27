@@ -5,6 +5,7 @@
   "industryOnboardingQuestions" : {
     "canBeHomeBased": true
   },
+  "nonEssentialQuestions": [],
   "roadmapSteps": [
     {
       "step": 1,

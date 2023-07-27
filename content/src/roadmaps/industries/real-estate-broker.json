@@ -4,6 +4,7 @@
   "canHavePermanentLocation": true,
   "industryOnboardingQuestions" : {
   },
+  "nonEssentialQuestions": [],
   "roadmapSteps": [
     {
       "step": 1,

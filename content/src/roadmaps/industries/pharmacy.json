@@ -5,6 +5,7 @@
   "industryOnboardingQuestions": {
   },
   "isEnabled": true,
+  "nonEssentialQuestions": [],
   "roadmapSteps": [
     {
       "step": 1,

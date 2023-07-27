@@ -2,6 +2,7 @@
   "naicsCodes": "484110, 484121, 484122, 484220, 484230",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
+  "nonEssentialQuestions": [],
   "roadmapSteps": [
     {
       "step": 1,

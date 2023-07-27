@@ -5,6 +5,7 @@
     "canBeHomeBased": true,
     "isRealEstateAppraisalManagementApplicable": true
   },
+  "nonEssentialQuestions": [],
   "roadmapSteps": [
     {
       "step": 1,

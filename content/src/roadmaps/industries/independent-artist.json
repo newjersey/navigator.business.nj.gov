@@ -1,6 +1,7 @@
 {
   "defaultSectorId": "arts-entertainment-and-recreation",
   "canHavePermanentLocation": true,
+  "nonEssentialQuestions": [],
   "roadmapSteps": [
     {
       "step": 1,

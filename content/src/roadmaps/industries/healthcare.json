@@ -2,7 +2,8 @@
   "naicsCodes": "621330, 621112, 621420, 812990, 622210, 621111, 621112, 621330, 621391, 621310, 621210, 621399, 621320, 621330, 621111, 621112,  621340",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
-  "roadmapSteps": [
+  "nonEssentialQuestions": [],
+"roadmapSteps": [
     {
       "step": 1,
       "weight": 1,

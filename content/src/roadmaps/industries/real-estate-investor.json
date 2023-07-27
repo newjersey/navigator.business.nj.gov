@@ -6,6 +6,7 @@
     "canBeReseller": true
   },
   "canHavePermanentLocation": true,
+  "nonEssentialQuestions": [],
   "roadmapSteps": [
     {
       "step": 1,

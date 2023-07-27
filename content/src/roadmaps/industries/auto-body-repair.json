@@ -6,6 +6,7 @@
     "canBeReseller": true
   },
   "isEnabled": true,
+  "nonEssentialQuestions": [],
   "roadmapSteps": [
     {
       "step": 1,

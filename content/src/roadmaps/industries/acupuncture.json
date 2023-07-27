@@ -2,6 +2,7 @@
   "naicsCodes": "621399",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
+  "nonEssentialQuestions": [],
   "roadmapSteps": [
     {
       "step": 1,

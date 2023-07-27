@@ -2,6 +2,7 @@
   "naicsCodes": "812910",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
+  "nonEssentialQuestions": [],
   "roadmapSteps": [
     {
       "step": 1,

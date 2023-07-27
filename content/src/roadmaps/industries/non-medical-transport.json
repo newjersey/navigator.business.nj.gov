@@ -6,6 +6,7 @@
     "canBeHomeBased": true
   },
   "isEnabled": true,
+  "nonEssentialQuestions": [],
   "roadmapSteps": [
     {
       "step": 1,
