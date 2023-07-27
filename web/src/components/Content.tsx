@@ -44,6 +44,9 @@ export const Content = (props: ContentProps): ReactElement => {
       return <HorizontalLine />;
     },
     blockquote: GreenBox,
+    greenBox: (props: any): ReactElement => {
+      return <GreenBox>{props.children}</GreenBox>;
+    },
     infoAlert: (props: any): ReactElement => {
       return (
         <Alert variant="info" heading={props.header}>
