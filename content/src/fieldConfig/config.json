@@ -48,6 +48,7 @@
     "errorTextFullNameStartWithLetter": "Full name must start with a letter"
   },
   "navigationDefaults": {
+    "navBarUnnamedOwnedBusinessText": "Unnamed Business",
     "guestModalTitle": "## Create an Account to Access this Feature",
     "guestAlertBody": "Now that you've filled out your business information, you can save your progress and come back later by [creating an account](/self-register/guest_snackbar). ",
     "guestSuccessTitle": "### Welcome to your Business.NJ.gov account!",
@@ -55,6 +56,7 @@
     "navBarGuestRegistrationText": "Create an Account",
     "profileLinkText": "Business Profile",
     "myNJAccountText": "myNewJersey account",
+    "addBusinessButton": "Add a Business",
     "guestModalButtonText": "Complete Setup",
     "guestAlertTitle": "### Save your progress",
     "navBarGuestText": "Guest",
@@ -64,9 +66,7 @@
     "logInButton": "Log in",
     "logoutButton": "Log out",
     "navBarUnnamedBusinessText": "Unnamed",
-    "navBarUnnamedOwnedBusinessText": "Unnamed Business",
-    "taskPageNavBarHeading": "Business Roadmap",
-    "addBusinessButton": "Add a Business"
+    "taskPageNavBarHeading": "Business Roadmap"
   },
   "landingPage": {
     "section5FirstSupportingText": "Knowing exactly what your business needs to do to start can be difficult. Our step-by-step guide is unique to your industry and even includes Cannabis retailers. Find what licenses, forms, and permits you need to start your business in New Jersey. Learn the requirements of each application, find out what you get after submitting your application, and store critical business identification numbers all in one place. ",
@@ -145,15 +145,15 @@
     "filingMethod": "Filing Method:"
   },
   "onboardingDefaults": {
+    "additionalBusinessFinalNextButtonText": "Save Additional Business",
+    "returnToPreviousBusiness": "Return to ${previousBusiness}",
     "errorTextMinimumNumericField": "Must be ${length} digits long.",
-    "errorTextMinimumRangeNumericField": "Must be between ${min} and ${max} digits long.",
+    "stepXTemplate": "(Step ${currentPage})",
     "backButtonText": "Back",
     "finalNextButtonText": "Submit",
-    "additionalBusinessFinalNextButtonText": "Save Additional Business",
     "pageTitle": "Tell Us About Your ${Additional} Business",
-    "stepXTemplate": "(Step ${currentPage})",
-    "nextButtonText": "Next",
-    "returnToPreviousBusiness": "Return to ${previousBusiness}"
+    "errorTextMinimumRangeNumericField": "Must be between ${min} and ${max} digits long.",
+    "nextButtonText": "Next"
   },
   "formationDateModal": {
     "fieldDescription": "Find your effective date on your `Certificate of Formation|certificate-formation` .",
@@ -310,7 +310,7 @@
     "profileTabNoteTitle": "Notes",
     "essentialQuestionInlineText": "Make a selection by clicking on a button.",
     "saveButtonText": "Save",
-    "escapeModalReturn": "Continue without saving.",
+    "escapeModalReturn": "Continue without saving",
     "successTextHeader": "Business Profile Saved",
     "certificationDocFileTitle": "Certified Copy of Formation",
     "profileTabInfoTitle": "Business Information"
