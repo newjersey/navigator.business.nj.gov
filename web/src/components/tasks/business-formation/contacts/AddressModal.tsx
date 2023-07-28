@@ -320,16 +320,16 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               }}
             />
           </WithErrorBar>
-          <div className="grid-row grid-gap-1 margin-y-2">
-            <div className="grid-col-12 tablet:grid-col-6">
-              <WithErrorBar
-                hasError={
-                  !!addressErrorMap["addressCity"].invalid ||
-                  !!addressErrorMap["addressState"].invalid ||
-                  !!addressErrorMap["addressZipCode"].invalid
-                }
-                type="DESKTOP-ONLY"
-              >
+          <WithErrorBar
+            hasError={
+              !!addressErrorMap["addressCity"].invalid ||
+              !!addressErrorMap["addressState"].invalid ||
+              !!addressErrorMap["addressZipCode"].invalid
+            }
+            type="DESKTOP-ONLY"
+          >
+            <div className="grid-row grid-gap-1">
+              <div className="grid-col-12 tablet:grid-col-6">
                 <WithErrorBar hasError={!!addressErrorMap["addressCity"].invalid} type="MOBILE-ONLY">
                   <strong>
                     <ModifiedContent>{Config.formation.addressModal.addressCity.label}</ModifiedContent>
@@ -351,62 +351,66 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                     validationText={addressErrorMap["addressCity"].label}
                   />
                 </WithErrorBar>
-              </WithErrorBar>
+              </div>
+              <div className="grid-col-12 tablet:grid-col-6 margin-top-2 tablet:margin-top-0">
+                <WithErrorBar
+                  hasError={
+                    !!addressErrorMap["addressState"].invalid || !!addressErrorMap["addressZipCode"].invalid
+                  }
+                  type="MOBILE-ONLY"
+                >
+                  <div className="grid-row grid-gap-1">
+                    <div className="grid-col-5">
+                      <strong>
+                        <ModifiedContent>{Config.formation.addressModal.addressState.label}</ModifiedContent>
+                      </strong>
+                      <StateDropdown
+                        fieldName="addressState"
+                        value={addressData.addressState?.name ?? ""}
+                        validationText={addressErrorMap["addressState"].label}
+                        onSelect={(value: StateObject | undefined): void => {
+                          setAddressData((prevAddressData) => {
+                            return { ...prevAddressData, addressState: value };
+                          });
+                        }}
+                        error={addressErrorMap["addressState"].invalid}
+                        autoComplete
+                        disabled={shouldBeDisabled("addressState")}
+                        onValidation={onValidation}
+                        required={true}
+                      />
+                    </div>
+                    <div className="grid-col-7">
+                      <strong>
+                        <ModifiedContent>
+                          {Config.formation.addressModal.addressZipCode.label}
+                        </ModifiedContent>
+                      </strong>
+                      <GenericTextField
+                        inputWidth="full"
+                        numericProps={{
+                          maxLength: 5,
+                        }}
+                        disabled={shouldBeDisabled("addressZipCode")}
+                        fieldName={"addressZipCode"}
+                        autoComplete="postal-code"
+                        error={addressErrorMap["addressZipCode"].invalid}
+                        handleChange={(value: string): void => {
+                          setAddressData((prevAddressData) => {
+                            return { ...prevAddressData, addressZipCode: value };
+                          });
+                        }}
+                        value={addressData.addressZipCode}
+                        validationText={addressErrorMap["addressZipCode"].label}
+                        onValidation={onValidation}
+                        required={true}
+                      />
+                    </div>
+                  </div>
+                </WithErrorBar>
+              </div>
             </div>
-            <div className="grid-col-6 tablet:grid-col-3">
-              <WithErrorBar
-                hasError={
-                  !!addressErrorMap["addressState"].invalid || !!addressErrorMap["addressZipCode"].invalid
-                }
-                type="MOBILE-ONLY"
-              >
-                <div className={"margin-top-2 tablet:margin-top-0"}>
-                  <strong>
-                    <ModifiedContent>{Config.formation.addressModal.addressState.label}</ModifiedContent>
-                  </strong>
-                  <StateDropdown
-                    fieldName="addressState"
-                    value={addressData.addressState?.name ?? ""}
-                    validationText={addressErrorMap["addressState"].label}
-                    onSelect={(value: StateObject | undefined): void => {
-                      setAddressData((prevAddressData) => {
-                        return { ...prevAddressData, addressState: value };
-                      });
-                    }}
-                    error={addressErrorMap["addressState"].invalid}
-                    autoComplete
-                    disabled={shouldBeDisabled("addressState")}
-                    onValidation={onValidation}
-                    required={true}
-                  />
-                </div>
-              </WithErrorBar>
-            </div>
-            <div className="grid-col-6 tablet:grid-col-3 margin-top-2 tablet:margin-top-0">
-              <strong>
-                <ModifiedContent>{Config.formation.addressModal.addressZipCode.label}</ModifiedContent>
-              </strong>
-              <GenericTextField
-                inputWidth="full"
-                numericProps={{
-                  maxLength: 5,
-                }}
-                disabled={shouldBeDisabled("addressZipCode")}
-                fieldName={"addressZipCode"}
-                autoComplete="postal-code"
-                error={addressErrorMap["addressZipCode"].invalid}
-                handleChange={(value: string): void => {
-                  setAddressData((prevAddressData) => {
-                    return { ...prevAddressData, addressZipCode: value };
-                  });
-                }}
-                value={addressData.addressZipCode}
-                validationText={addressErrorMap["addressZipCode"].label}
-                onValidation={onValidation}
-                required={true}
-              />
-            </div>
-          </div>
+          </WithErrorBar>
         </div>
       </>
     </ModalTwoButton>

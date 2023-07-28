@@ -85,32 +85,36 @@ export const MainBusinessAddressNj = (): ReactElement => {
                   <FormationMunicipality />
                 </WithErrorBar>
               </div>
-              <div className="margin-top-2 tablet:margin-top-0 grid-col-5 tablet:grid-col-2">
+              <div className="grid-col-12 tablet:grid-col-6 margin-top-2 tablet:margin-top-0">
                 <WithErrorBar
                   hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
                   type="MOBILE-ONLY"
                 >
-                  <strong>
-                    <ModifiedContent>{Config.formation.fields.addressState.label}</ModifiedContent>
-                  </strong>
-                  <StateDropdown
-                    fieldName="addressState"
-                    value={"New Jersey"}
-                    validationText={Config.formation.fields.addressState.error}
-                    disabled={true}
-                    onSelect={(): void => {}}
-                  />
+                  <div className="grid-row grid-gap-1">
+                    <div className="grid-col-5">
+                      <strong>
+                        <ModifiedContent>{Config.formation.fields.addressState.label}</ModifiedContent>
+                      </strong>
+                      <StateDropdown
+                        fieldName="addressState"
+                        value={"New Jersey"}
+                        validationText={Config.formation.fields.addressState.error}
+                        disabled={true}
+                        onSelect={(): void => {}}
+                      />
+                    </div>
+                    <div className="grid-col-7">
+                      <BusinessFormationTextField
+                        label={Config.formation.fields.addressZipCode.label}
+                        numericProps={{ maxLength: 5 }}
+                        required={true}
+                        errorBarType="NEVER"
+                        fieldName={"addressZipCode"}
+                        validationText={getFieldErrorLabel("addressZipCode")}
+                      />
+                    </div>
+                  </div>
                 </WithErrorBar>
-              </div>
-              <div className="margin-top-2 tablet:margin-top-0 grid-col-7 tablet:grid-col-4">
-                <BusinessFormationTextField
-                  label={Config.formation.fields.addressZipCode.label}
-                  numericProps={{ maxLength: 5 }}
-                  required={true}
-                  errorBarType="NEVER"
-                  fieldName={"addressZipCode"}
-                  validationText={getFieldErrorLabel("addressZipCode")}
-                />
               </div>
             </div>
           </WithErrorBar>
