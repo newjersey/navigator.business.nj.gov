@@ -16,6 +16,7 @@ import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
 interface Props extends Omit<OnboardingProps, "fieldName" | "handleChange" | "onValidation" | "inputWidth"> {
   handleChangeOverride?: (value: string) => void;
+  inputWidth?: "full" | "default" | "reduced";
 }
 
 export const OnboardingTaxId = (props: Props): ReactElement => {
