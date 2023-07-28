@@ -34,6 +34,7 @@ import {
   generateBusiness,
   renderPage,
   selectByText,
+  selectByValue,
 } from "@/test/pages/profile/profile-helpers";
 import { render, screen, waitFor } from "@testing-library/react";
 
@@ -269,6 +270,38 @@ describe("profile - shared", () => {
       renderPage({ business, setRegistrationModalIsVisible });
 
       expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("non essential questions", () => {
+    it("adds questions to profile data if industry has them", async () => {
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          industryId: "generic",
+        }),
+      });
+      renderPage({ business, setRegistrationModalIsVisible });
+      selectByValue("Industry", "retail");
+      clickSave();
+      await waitFor(() => {
+        expect(currentBusiness().profileData.nonEssentialQuestions).not.toBeUndefined();
+      });
+    });
+
+    it("resets the nonEssentialQuestions if industry is changed", async () => {
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          industryId: "retail",
+        }),
+      });
+      renderPage({ business, setRegistrationModalIsVisible });
+      selectByValue("Industry", "generic");
+      clickSave();
+      await waitFor(() => {
+        expect(currentBusiness().profileData.nonEssentialQuestions).toStrictEqual({});
+      });
     });
   });
 });

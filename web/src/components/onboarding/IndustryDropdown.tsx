@@ -18,7 +18,8 @@ import {
   Industry,
   isIndustryIdGeneric,
   LookupIndustryById,
-} from "@businessnjgovnavigator/shared/";
+  NonEssentialQuestionResponse,
+} from "@businessnjgovnavigator/shared";
 import { Autocomplete, createFilterOptions, FilterOptionsState, TextField } from "@mui/material";
 import { orderBy } from "lodash";
 import { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
@@ -70,11 +71,21 @@ export const IndustryDropdown = (props: Props): ReactElement => {
 
     const newSector = LookupIndustryById(industryId).defaultSectorId;
 
+    const nonEssentialQuestionsArray = LookupIndustryById(industryId).nonEssentialQuestions;
+    const nonEssentialQuestionsRecord: Record<string, NonEssentialQuestionResponse> = {};
+
+    if (nonEssentialQuestionsArray) {
+      for (const question of nonEssentialQuestionsArray) {
+        nonEssentialQuestionsRecord[question.nonEssentialQuestionId] = "NO";
+      }
+    }
+
     setProfileData({
       ...state.profileData,
       ...getResetIndustrySpecificData(industryId),
       homeBasedBusiness,
       cannabisLicenseType,
+      nonEssentialQuestions: nonEssentialQuestionsRecord,
       industryId: industryId,
       sectorId: newSector,
       naicsCode: state.profileData.industryId === industryId ? state.profileData.naicsCode : "",

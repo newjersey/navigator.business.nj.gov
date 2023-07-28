@@ -9,6 +9,7 @@ export interface Industry {
   readonly additionalSearchTerms?: string;
   readonly defaultSectorId?: string;
   readonly roadmapSteps: AddOn[];
+  readonly nonEssentialQuestions: NonEssentialQuestion[];
   readonly modifications?: TaskModification[];
   readonly naicsCodes?: string;
   readonly isEnabled: boolean;
@@ -40,12 +41,17 @@ export interface AddOn {
   readonly licenseTask?: string;
 }
 
+export interface NonEssentialQuestion {
+  readonly nonEssentialQuestionId: string;
+  readonly addOn: string;
+}
+
 export interface TaskModification {
   readonly taskToReplaceFilename: string;
   readonly replaceWithFilename: string;
 }
 
-export const LookupIndustryById = (id: string | undefined): Industry => {
+export const LookupIndustryById = (id: string | undefined) => {
   return (
     Industries.find((x) => {
       return x.id === id;
@@ -55,6 +61,7 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
       description: "",
       canHavePermanentLocation: true,
       roadmapSteps: [],
+      nonEssentialQuestions: [],
       naicsCodes: "",
       isEnabled: false,
       industryOnboardingQuestions: {

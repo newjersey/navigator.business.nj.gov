@@ -28,6 +28,7 @@ import { ProfileMunicipality } from "@/components/profile/ProfileMunicipality";
 import { ProfileNaicsCode } from "@/components/profile/ProfileNaicsCode";
 import { ProfileNexusBusinessNameField } from "@/components/profile/ProfileNexusBusinessNameField";
 import { ProfileNexusDBANameField } from "@/components/profile/ProfileNexusDBANameField";
+import { ProfileNonEssentialQuestions } from "@/components/profile/ProfileNonEssentialQuestions";
 import { ProfileNotes } from "@/components/profile/ProfileNotes";
 import { ProfileOpportunitiesAlert } from "@/components/profile/ProfileOpportunitiesAlert";
 import { ProfileOwnership } from "@/components/profile/ProfileOwnership";
@@ -487,6 +488,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
         <ProfileField fieldName="industryId">
           <OnboardingIndustry />
+          <ProfileNonEssentialQuestions />
         </ProfileField>
         <ProfileField
           fieldName="sectorId"

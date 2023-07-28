@@ -71,6 +71,7 @@ const getForeignAddOns = (profileData: ProfileData): string[] => {
 
 const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | undefined): string[] => {
   const industry = LookupIndustryById(industryId);
+  console.log(industry);
   if (industry.id === "") {
     return [];
   }
@@ -160,6 +161,20 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
 
   if (industry.industryOnboardingQuestions.canBeReseller) {
     addOns.push("reseller");
+  }
+
+  if (industry.nonEssentialQuestions && profileData.nonEssentialQuestions) {
+    for (const questionId in profileData.nonEssentialQuestions) {
+      const addOnToAdd = industry.nonEssentialQuestions.find(
+        (curr) =>
+          questionId === curr.nonEssentialQuestionId &&
+          profileData.nonEssentialQuestions?.[questionId] === "YES"
+      )?.addOn;
+
+      if (addOnToAdd) {
+        addOns.push(addOnToAdd);
+      }
+    }
   }
 
   return addOns;

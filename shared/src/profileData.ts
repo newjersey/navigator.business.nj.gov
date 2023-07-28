@@ -95,6 +95,7 @@ export interface ProfileData extends IndustrySpecificData {
   readonly needsNexusDbaName: boolean;
   readonly operatingPhase: OperatingPhaseId;
   readonly isNonprofitOnboardingRadio: boolean;
+  readonly nonEssentialQuestions: NonEssentialQuestionsRecord | undefined;
 }
 
 export const emptyProfileData: ProfileData = {
@@ -124,6 +125,7 @@ export const emptyProfileData: ProfileData = {
   nexusLocationInNewJersey: undefined,
   operatingPhase: "GUEST_MODE",
   isNonprofitOnboardingRadio: false,
+  nonEssentialQuestions: undefined,
   ...emptyIndustrySpecificData,
 };
 
@@ -131,6 +133,8 @@ export const createEmptyProfileData = (): ProfileData => {
   return emptyProfileData;
 };
 
+export type NonEssentialQuestionsRecord = Record<string, NonEssentialQuestionResponse>;
+export type NonEssentialQuestionResponse = "YES" | "NO";
 export type CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 export type CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
 export const businessPersonas = ["STARTING", "OWNING", "FOREIGN"] as const;

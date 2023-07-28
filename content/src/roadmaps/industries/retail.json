@@ -4,11 +4,11 @@
   "canHavePermanentLocation": true,
   "nonEssentialQuestions": [
     {
-      "nonEssentialQuestion": "pierce-ears",
+      "nonEssentialQuestionId": "pierce-ears",
       "addOn": "liquor-license"
     },
     {
-      "nonEssentialQuestion": "sell-milk",
+      "nonEssentialQuestionId": "sell-milk",
       "addOn": "liquor-license"
     }
   ],

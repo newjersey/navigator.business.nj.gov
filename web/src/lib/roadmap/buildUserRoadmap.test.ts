@@ -16,14 +16,40 @@ import {
   ProfileData,
 } from "@businessnjgovnavigator/shared/profileData";
 
+jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
+  industries: [
+    ...jest.requireActual("../../../../shared/lib/content/lib/industry.json").industries,
+    {
+      id: "test-industry",
+      name: "Test Industry",
+      description: "",
+      canHavePermanentLocation: true,
+      roadmapSteps: [],
+      nonEssentialQuestions: [
+        {
+          nonEssentialQuestion: "test-question-1",
+          addOn: "test-addOn-1",
+        },
+        {
+          nonEssentialQuestion: "test-question-2",
+          addOn: "test-addOn-2",
+        },
+      ],
+      naicsCodes: "",
+      isEnabled: true,
+      industryOnboardingQuestions: {},
+    },
+  ],
+}));
+
 jest.mock("@/lib/roadmap/roadmapBuilder", () => ({ buildRoadmap: jest.fn() }));
 jest.mock("@businessnjgovnavigator/shared/domain-logic/fetchMunicipalityById", () => ({
   fetchMunicipalityById: jest.fn(),
 }));
+
 const mockRoadmapBuilder = (roadmapBuilderModule as jest.Mocked<typeof roadmapBuilderModule>).buildRoadmap;
 const mockFetchMunicipality = (fetchMunicipalityById as jest.Mocked<typeof fetchMunicipalityById>)
   .fetchMunicipalityById;
-
 const Config = getMergedConfig();
 
 const generateStartingProfile = (overrides: Partial<ProfileData>): ProfileData => {
@@ -460,6 +486,34 @@ describe("buildUserRoadmap", () => {
         await buildUserRoadmap(generateStartingProfile({ cannabisLicenseType: undefined }));
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("cannabis-annual");
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("cannabis-conditional");
+      });
+    });
+
+    describe("non essential questions", () => {
+      it("adds addOn if nonEssentialsQuestions is answered YES", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({
+            industryId: "test-industry",
+            nonEssentialQuestions: {
+              "test-question-1": "YES",
+              "test-question-2": "NO",
+            },
+          })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("test-addOn-1");
+      });
+
+      it("doesn't add addOn if nonEssentialsQuestions is answered NO", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({
+            industryId: "test-industry",
+            nonEssentialQuestions: {
+              "test-question-1": "YES",
+              "test-question-2": "NO",
+            },
+          })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("test-addOn-2");
       });
     });
   });
