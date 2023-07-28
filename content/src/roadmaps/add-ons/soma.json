@@ -1,0 +1,10 @@
+{
+  "filename": "soma",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 8,
+      "task": "apply-scorp-state"
+    }
+  ]
+}
