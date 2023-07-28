@@ -25,6 +25,7 @@ interface Props {
   required?: boolean;
   disabled?: boolean;
   errorTextOverride?: string;
+  inputWidth?: "full" | "default" | "reduced";
 }
 
 export const ProfileDateOfFormation = (props: Props): ReactElement => {
@@ -89,7 +90,7 @@ export const ProfileDateOfFormation = (props: Props): ReactElement => {
         renderInput={(params: TextFieldProps): ReactElement => {
           return (
             <GenericTextField
-              inputWidth="reduced"
+              inputWidth={props.inputWidth || "reduced"}
               fieldName={fieldName}
               onValidation={onValidation}
               validationText={errorText}
