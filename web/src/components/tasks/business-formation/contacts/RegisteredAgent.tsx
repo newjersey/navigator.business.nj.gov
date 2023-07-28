@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { ModifiedContent } from "@/components/ModifiedContent";
 import { MunicipalityDropdown } from "@/components/profile/MunicipalityDropdown";
 import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
@@ -253,7 +254,11 @@ export const RegisteredAgent = (): ReactElement => {
                       hasError={doesFieldHaveError("agentOfficeAddressMunicipality")}
                       type="MOBILE-ONLY"
                     >
-                      <Content>{Config.formation.fields.agentOfficeAddressMunicipality.label}</Content>
+                      <strong>
+                        <ModifiedContent>
+                          {Config.formation.fields.agentOfficeAddressMunicipality.label}
+                        </ModifiedContent>
+                      </strong>
                       <MunicipalityDropdown
                         municipalities={municipalities}
                         fieldName={"agentOfficeAddressMunicipality"}
@@ -272,32 +277,39 @@ export const RegisteredAgent = (): ReactElement => {
                       />
                     </WithErrorBar>
                   </div>
-
-                  <div className="grid-col-5 tablet:grid-col-2">
+                  <div className="grid-col-12 tablet:grid-col-6 margin-top-2 tablet:margin-top-0">
                     <WithErrorBar
                       hasError={doesFieldHaveError("agentOfficeAddressZipCode")}
                       type="MOBILE-ONLY"
                     >
-                      <Content>{Config.formation.fields.agentOfficeAddressState.label}</Content>
-                      <StateDropdown
-                        fieldName="agentOfficeAddressState"
-                        value={"New Jersey"}
-                        validationText={Config.formation.fields.agentOfficeAddressState.error}
-                        disabled={true}
-                        onSelect={(): void => {}}
-                      />
+                      <div className="grid-row grid-gap-1">
+                        <div className="grid-col-5">
+                          <strong>
+                            <ModifiedContent>
+                              {Config.formation.fields.agentOfficeAddressState.label}
+                            </ModifiedContent>
+                          </strong>
+                          <StateDropdown
+                            fieldName="agentOfficeAddressState"
+                            value={"New Jersey"}
+                            validationText={Config.formation.fields.agentOfficeAddressState.error}
+                            disabled={true}
+                            onSelect={(): void => {}}
+                          />
+                        </div>
+                        <div className="grid-col-7">
+                          <BusinessFormationTextField
+                            errorBarType="NEVER"
+                            numericProps={{ maxLength: 5 }}
+                            fieldName="agentOfficeAddressZipCode"
+                            label={Config.formation.fields.agentOfficeAddressZipCode.label}
+                            validationText={Config.formation.fields.agentOfficeAddressZipCode.error}
+                            required={true}
+                            disabled={shouldBeDisabled("agentOfficeAddressZipCode", "ADDRESS")}
+                          />
+                        </div>
+                      </div>
                     </WithErrorBar>
-                  </div>
-                  <div className="grid-col-7 tablet:grid-col-4">
-                    <BusinessFormationTextField
-                      errorBarType="NEVER"
-                      numericProps={{ maxLength: 5 }}
-                      fieldName="agentOfficeAddressZipCode"
-                      label={Config.formation.fields.agentOfficeAddressZipCode.label}
-                      validationText={Config.formation.fields.agentOfficeAddressZipCode.error}
-                      required={true}
-                      disabled={shouldBeDisabled("agentOfficeAddressZipCode", "ADDRESS")}
-                    />
                   </div>
                 </div>
               </WithErrorBar>

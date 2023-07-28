@@ -31,9 +31,13 @@ export const MainBusinessIntl = (): ReactElement => {
         validationText={getFieldErrorLabel("addressLine2")}
         className="margin-bottom-2"
       />
-      <WithErrorBar hasError={doSomeFieldsHaveError(["addressCity", "addressProvince"])} type="DESKTOP-ONLY">
+      <WithErrorBar
+        hasError={doSomeFieldsHaveError(["addressCity", "addressProvince"])}
+        type="DESKTOP-ONLY"
+        className="margin-bottom-2"
+      >
         <div className="grid-row grid-gap-1">
-          <div className="tablet:grid-col-6">
+          <div className="tablet:grid-col-6 margin-bottom-2 tablet:margin-bottom-0">
             <BusinessFormationTextField
               label={Config.formation.fields.addressCity.label}
               fieldName="addressCity"
@@ -53,11 +57,7 @@ export const MainBusinessIntl = (): ReactElement => {
           </div>
         </div>
       </WithErrorBar>
-      <WithErrorBar
-        hasError={doSomeFieldsHaveError(["addressCountry"])}
-        className={`margin-top-2`}
-        type="ALWAYS"
-      >
+      <WithErrorBar hasError={doSomeFieldsHaveError(["addressCountry"])} type="ALWAYS">
         <strong>
           <ModifiedContent>{Config.formation.fields.addressCountry.label}</ModifiedContent>
         </strong>
