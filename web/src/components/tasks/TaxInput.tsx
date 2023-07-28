@@ -15,7 +15,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { createProfileFieldErrorMap, Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { useMediaQuery } from "@mui/material";
+import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { ReactElement, ReactNode, useContext, useEffect, useState } from "react";
 
 interface Props {
@@ -120,28 +120,30 @@ export const TaxInput = (props: Props): ReactElement => {
         }}
       >
         <div className={isTabletAndUp ? "flex flex-row" : ""}>
-          {shouldLockTaxId ? (
-            <Alert variant="success" className="width-100">
-              <DisabledTaxId template={DisabledElement} />
-            </Alert>
-          ) : (
-            <>
-              <OnboardingTaxId required />
-              <div className="tablet:margin-top-05 tablet:margin-left-2">
-                <SecondaryButton
-                  isColor="primary"
-                  onClick={onSubmit}
-                  isLoading={isLoading}
-                  isSubmitButton={true}
-                  isRightMarginRemoved={true}
-                  isTextNoWrap={isTabletAndUp}
-                  isFullWidthOnDesktop={!isTabletAndUp}
-                >
-                  {saveButtonText}
-                </SecondaryButton>
-              </div>
-            </>
-          )}
+          <ThemeProvider theme={createTheme()}>
+            {shouldLockTaxId ? (
+              <Alert variant="success" className="width-100">
+                <DisabledTaxId template={DisabledElement} />
+              </Alert>
+            ) : (
+              <>
+                <OnboardingTaxId required />
+                <div className="tablet:margin-top-05 tablet:margin-left-2">
+                  <SecondaryButton
+                    isColor="primary"
+                    onClick={onSubmit}
+                    isLoading={isLoading}
+                    isSubmitButton={true}
+                    isRightMarginRemoved={true}
+                    isTextNoWrap={isTabletAndUp}
+                    isFullWidthOnDesktop={!isTabletAndUp}
+                  >
+                    {saveButtonText}
+                  </SecondaryButton>
+                </div>
+              </>
+            )}
+          </ThemeProvider>
         </div>
       </ProfileDataContext.Provider>
     </profileFormContext.Provider>

@@ -50,14 +50,6 @@ describe("<DisabledTaxId />", () => {
     });
   });
 
-  it("pre-populates from profileData", () => {
-    renderComponent({
-      ...profileData,
-      taxId: "*******89000",
-    });
-    expect(screen.getByTestId("disabled-taxid")).toHaveTextContent("***-***-*89/000");
-  });
-
   it("decrypts the tax id if tax id is a masked value", async () => {
     mockApi.decryptTaxId.mockResolvedValue("123456789000");
     renderComponent({
@@ -80,6 +72,7 @@ describe("<DisabledTaxId />", () => {
       encryptedTaxId: "some-encrypted-value",
     });
     expect(screen.queryByText(Config.tax.hideButtonText)).not.toBeInTheDocument();
+    expect(screen.getByTestId("disabled-tax-id-value")).toHaveTextContent("****-****-****");
     fireEvent.click(screen.getByText(Config.tax.showButtonText));
     await waitFor(() => {
       expect(screen.getByText(Config.tax.hideButtonText)).toBeInTheDocument();

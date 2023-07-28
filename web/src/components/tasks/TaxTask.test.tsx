@@ -98,7 +98,7 @@ describe("<TaxTask />", () => {
     expect(screen.queryByLabelText("Tax id")).not.toBeInTheDocument();
     expect(screen.getByTestId("disabled-taxid")).toHaveTextContent(Config.tax.lockedPostText);
     expect(screen.getByTestId("disabled-taxid")).toHaveTextContent(Config.tax.lockedPreText);
-    expect(screen.getByTestId("disabled-taxid")).toHaveTextContent("***-***-*89/123");
+    expect(screen.getByTestId("disabled-tax-id-value")).toHaveTextContent("****-****-****");
   });
 
   describe("inputting Tax ID", () => {
