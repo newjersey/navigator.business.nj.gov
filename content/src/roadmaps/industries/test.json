@@ -2,5 +2,12 @@
   "isEnabled": false,
   "canHavePermanentLocation": true,
   "id": "test",
-  "name": "teset"
+  "name": "teset",
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 6,
+      "task": "apply-scorp-state"
+    }
+  ]
 }
