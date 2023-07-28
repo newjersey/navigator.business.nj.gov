@@ -62,14 +62,9 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
   };
 
   const makeLabel = (legalStructureId: string): ReactElement => {
-    const supportingText =
-      (contentFromConfig.optionContent as Record<string, string>)[legalStructureId] ?? "";
     return (
-      <div data-value={legalStructureId}>
-        <div className={supportingText === "" ? "" : "text-bold"}>
-          {LookupLegalStructureById(legalStructureId).name}
-        </div>
-        <Content>{supportingText}</Content>
+      <div data-value={legalStructureId} className={"text-bold"}>
+        {LookupLegalStructureById(legalStructureId).name}
       </div>
     );
   };
@@ -95,16 +90,26 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
             >
               {LegalStructuresOrdered.map((legalStructure) => {
                 return (
-                  <FormControlLabel
-                    aria-label={legalStructure.id}
-                    style={{ alignItems: "center" }}
-                    labelPlacement="end"
-                    key={legalStructure.id}
-                    data-testid={legalStructure.id}
-                    value={legalStructure.id}
-                    control={<Radio color={isFormFieldInValid ? "error" : "primary"} />}
-                    label={makeLabel(legalStructure.id)}
-                  />
+                  <div key={legalStructure.id}>
+                    <FormControlLabel
+                      aria-label={legalStructure.id}
+                      style={{ alignItems: "center" }}
+                      labelPlacement="end"
+                      key={legalStructure.id}
+                      data-testid={legalStructure.id}
+                      value={legalStructure.id}
+                      control={<Radio color={isFormFieldInValid ? "error" : "primary"} />}
+                      label={makeLabel(legalStructure.id)}
+                    />
+
+                    {(contentFromConfig.optionContent as Record<string, string>)[legalStructure.id] && (
+                      <div className="margin-left-4 padding-left-05">
+                        <Content>
+                          {(contentFromConfig.optionContent as Record<string, string>)[legalStructure.id]}
+                        </Content>
+                      </div>
+                    )}
+                  </div>
                 );
               })}
             </RadioGroup>
