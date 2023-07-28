@@ -1,0 +1,10 @@
+{
+  "filename": "bob",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 8,
+      "task": "architect-are-exam"
+    }
+  ]
+}
