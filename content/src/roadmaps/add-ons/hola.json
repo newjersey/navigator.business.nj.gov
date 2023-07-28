@@ -1,0 +1,10 @@
+{
+  "id": "hola",
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "apply-scorp-state"
+    }
+  ]
+}
