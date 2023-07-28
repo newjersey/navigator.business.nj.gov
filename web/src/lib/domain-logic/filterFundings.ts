@@ -1,7 +1,11 @@
 import { SMALL_BUSINESS_MAX_EMPLOYEE_COUNT } from "@/lib/domain-logic/smallBusinessEnterprise";
 import { County, defaultMarkdownDateFormat, Funding } from "@/lib/types/types";
-import { Business, getCurrentDate, parseDateWithFormat } from "@businessnjgovnavigator/shared";
-import { arrayOfOwnershipTypes } from "@businessnjgovnavigator/shared/";
+import {
+  arrayOfOwnershipTypes,
+  Business,
+  getCurrentDate,
+  parseDateWithFormat,
+} from "@businessnjgovnavigator/shared";
 
 export const filterFundings = (fundings: Funding[], business: Business): Funding[] => {
   return fundings.filter((it) => {
@@ -54,28 +58,26 @@ export const filterFundings = (fundings: Funding[], business: Business): Funding
       return false;
     }
 
-    if (
-      it.certifications !== null &&
-      it.certifications.length > 0 &&
-      business.profileData.ownershipTypeIds.length > 0
-    ) {
-      const ownershipTypeIds = new Set(arrayOfOwnershipTypes.map((ownershipType) => ownershipType.id)); // ['woman-owned', 'veteran-owned...]
-      const ownershipTypeCerts = it.certifications.filter((cert) => ownershipTypeIds.has(cert));
+    if (it.certifications !== undefined && it.certifications !== null) {
+      if (it.certifications.length > 0 && business.profileData.ownershipTypeIds.length > 0) {
+        const ownershipTypeIds = new Set(arrayOfOwnershipTypes.map((ownershipType) => ownershipType.id));
+        const ownershipTypeCerts = it.certifications.filter((cert) => ownershipTypeIds.has(cert));
 
-      if (ownershipTypeCerts.length > 0) {
-        const ownershipType = it.certifications.some((ownershipType) => {
-          return business.profileData.ownershipTypeIds.includes(ownershipType);
-        });
-        if (!ownershipType) {
-          return false;
+        if (ownershipTypeCerts.length > 0) {
+          const ownershipType = it.certifications.some((ownershipType) => {
+            return business.profileData.ownershipTypeIds.includes(ownershipType);
+          });
+          if (!ownershipType) {
+            return false;
+          }
         }
       }
-    }
 
-    if (it.certifications !== null && it.certifications.includes("small-business-enterprise")) {
-      const employeeCount = Number(business.profileData.existingEmployees as string);
-      if (employeeCount >= SMALL_BUSINESS_MAX_EMPLOYEE_COUNT) {
-        return false;
+      if (it.certifications.includes("small-business-enterprise")) {
+        const employeeCount = Number(business.profileData.existingEmployees as string);
+        if (employeeCount >= SMALL_BUSINESS_MAX_EMPLOYEE_COUNT) {
+          return false;
+        }
       }
     }
 
