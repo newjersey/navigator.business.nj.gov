@@ -39,7 +39,6 @@ export const UnStyledButton = forwardRef(
     const smallText = props.isSmallerText ? "font-body-2xs" : "";
     const textBold = props.isTextBold ? "text-bold" : "";
     const intercomButton = props.isIntercomEnabled ? "intercom-button" : "";
-    const isButton = false;
 
     const className = [style, props.className, noRightMargin, underline, smallText, textBold, intercomButton]
       .map((i) => {
@@ -56,8 +55,6 @@ export const UnStyledButton = forwardRef(
         type={"button"}
         ref={ref}
         onClick={props.onClick}
-        style={isButton ? { outline: "none" } : {}}
-        {...(isButton ? { type: "button" } : {})}
         {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}
         {...(props.isAriaLabelApplied ? { "aria-label": props.isAriaLabelApplied } : {})}
       >

@@ -192,7 +192,7 @@ describe("profile - shared", () => {
             renderPage({ business, setRegistrationModalIsVisible });
             chooseTab("numbers");
             expect(screen.queryByLabelText("Tax id")).not.toBeInTheDocument();
-            expect(screen.getByTestId("disabled-taxid")).toHaveTextContent("***-***-*89/123");
+            expect(screen.getByTestId("disabled-tax-id-value")).toHaveTextContent("****-****-****");
             expect(screen.queryByTestId("tax-disclaimer")).not.toBeInTheDocument();
           });
         });

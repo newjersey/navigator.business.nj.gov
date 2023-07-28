@@ -110,8 +110,13 @@ export const DisabledTaxId = (props: Props): ReactElement => {
 
   const getSpacedValue = (value: string): ReactNode => (
     <>
-      <span className={taxIdDisplayStatus === "password-view" ? "text-ls-3" : ""}>{value.slice(0, 9)}</span>
-      <span>{value.slice(9)}</span>
+      {taxIdDisplayStatus === "password-view" ? (
+        <span data-testid={"disabled-tax-id-value"} className={"password-view"}>
+          {"****-****-****"}
+        </span>
+      ) : (
+        <span data-testid={"disabled-tax-id-value"}>{value}</span>
+      )}
     </>
   );
 
