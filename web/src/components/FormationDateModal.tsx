@@ -98,6 +98,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
               disabled={false}
               futureAllowed={true}
               errorTextOverride={Config.formationDateModal.dateOfFormationErrorText}
+              inputWidth="full"
             />
           </WithErrorBar>
 
