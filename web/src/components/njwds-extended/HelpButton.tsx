@@ -7,7 +7,7 @@ export const HelpButton = (): ReactElement => {
   const { Config } = useConfig();
 
   return (
-    <div className="flex fac margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-left-auto mobile-lg:margin-right-3 width-full mobile-lg:width-auto">
+    <div className="flex fac margin-top-3 mobile-lg:margin-top-0 mobile-lg:margin-left-auto mobile-lg:margin-right-3 width-full mobile-lg:width-auto">
       <UnStyledButton
         style={"transparentBgColor"}
         className={"text-accent-cool-darker fjc padding-0"}
