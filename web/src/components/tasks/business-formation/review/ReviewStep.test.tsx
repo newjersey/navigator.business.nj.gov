@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { getMergedConfig } from "@/contexts/configContext";
 import { generateFormationDbaContent } from "@/test/factories";
 import {
@@ -679,6 +681,22 @@ describe("Formation - ReviewStep", () => {
           )
         ).toBeInTheDocument();
         expect(screen.getByText(terms)).toBeInTheDocument();
+      });
+
+      it(`displays Not Entered for empty terms when IN_FORM`, async () => {
+        await renderStep(
+          { legalStructureId },
+          {
+            hasNonprofitBoardMembers: true,
+            [args.radio]: "IN_FORM",
+            [args.terms]: "",
+          }
+        );
+        const termsReviewSection = within(screen.getByTestId(`${args.radio}-terms`));
+        expect(termsReviewSection.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
+        expect(
+          termsReviewSection.getByText(`${Config.formation.nonprofitProvisions.description}:`)
+        ).toBeInTheDocument();
       });
     });
   });
