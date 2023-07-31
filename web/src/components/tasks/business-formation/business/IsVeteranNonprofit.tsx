@@ -15,7 +15,7 @@ export const IsVeteranNonprofit = (): ReactElement => {
   const hasError = doesFieldHaveError(fieldName);
 
   return (
-    <WithErrorBar hasError={hasError} type="ALWAYS">
+    <WithErrorBar hasError={hasError} type="ALWAYS" className="margin-top-2">
       <FormControl variant="outlined" fullWidth className="padding-bottom-2">
         <label className="margin-right-3 text-bold">
           <Content>{Config.formation.fields.isVeteranNonprofit.description}</Content>
