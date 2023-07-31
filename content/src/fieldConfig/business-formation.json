@@ -266,7 +266,8 @@
         "radioNoText": "No",
         "radioYesText": "Yes",
         "error": "Select 'Yes' or 'No'.",
-        "reviewText": "**Yes**, my Domestic Non-Profit is a Veteran Corporation."
+        "reviewTextYes": "**Yes**, my Domestic Non-Profit is a Veteran Corporation.",
+        "reviewTextNo": "**No**, my Domestic Non-Profit is not a Veteran Corporation."
       },
       "contactPhoneNumber": {
         "label": "Phone Number",

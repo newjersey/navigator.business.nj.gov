@@ -756,7 +756,8 @@ collections:
                       - { label: "Radio no text", name: "radioNoText", widget: "string" }
                       - { label: "Radio yes text", name: "radioYesText", widget: "string" }
                       - { label: "Error", name: "error", widget: "string" }
-                      - { label: "Review Text", name: "reviewText", widget: "markdown" }
+                      - { label: "Review Text - Yes", name: "reviewTextYes", widget: "markdown" }
+                      - { label: "Review Text - No", name: "reviewTextNo", widget: "markdown" }
               - label: Address Modal
                 name: addressModal
                 collapsed: true

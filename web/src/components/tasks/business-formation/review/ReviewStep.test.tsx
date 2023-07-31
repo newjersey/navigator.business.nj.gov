@@ -575,6 +575,35 @@ describe("Formation - ReviewStep", () => {
   describe("when nonprofit", () => {
     const legalStructureId = "nonprofit";
 
+    it("displays yes for Is Veteran Nonprofit", async () => {
+      await renderStep({ legalStructureId }, { isVeteranNonprofit: true });
+      const getByMarkup = withMarkup(screen.getByText);
+      expect(
+        getByMarkup(markdownToText(Config.formation.fields.isVeteranNonprofit.reviewTextYes))
+      ).toBeInTheDocument();
+    });
+
+    it("displays no for Is Veteran Nonprofit", async () => {
+      await renderStep({ legalStructureId }, { isVeteranNonprofit: false });
+      const getByMarkup = withMarkup(screen.getByText);
+      expect(
+        getByMarkup(markdownToText(Config.formation.fields.isVeteranNonprofit.reviewTextNo))
+      ).toBeInTheDocument();
+    });
+
+    it("displays Not Entered for Is Veteran Nonprofit when undefined", async () => {
+      await renderStep({ legalStructureId }, { isVeteranNonprofit: undefined });
+      const queryByMarkup = withMarkup(screen.queryByText);
+      expect(
+        queryByMarkup(markdownToText(Config.formation.fields.isVeteranNonprofit.reviewTextNo))
+      ).not.toBeInTheDocument();
+      expect(
+        queryByMarkup(markdownToText(Config.formation.fields.isVeteranNonprofit.reviewTextYes))
+      ).not.toBeInTheDocument();
+      const section = within(screen.getByTestId("isVeteranNonprofit"));
+      expect(section.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
+    });
+
     it("displays the Provisions section", async () => {
       await renderStep({ legalStructureId }, {});
       expect(screen.getByText(Config.formation.fields.provisions.label)).toBeInTheDocument();
