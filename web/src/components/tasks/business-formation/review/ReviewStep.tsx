@@ -43,7 +43,7 @@ export const ReviewStep = (): ReactElement => {
           <ReviewBusinessSuffixAndStartDate />
           {state.formationFormData.isVeteranNonprofit && (
             <Content className="margin-top-2">
-              {Config.formation.fields.nonprofit.domNpVetCorpReviewText}
+              {Config.formation.fields.isVeteranNonprofit.reviewText}
             </Content>
           )}
           {isForeignCorporation(state.formationFormData.legalType) && (
