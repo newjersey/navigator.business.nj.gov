@@ -14,7 +14,6 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
 
   const {
     hasNonprofitBoardMembers,
-    nonprofitBoardMembersTerms,
     nonprofitBoardMemberQualificationsSpecified,
     nonprofitBoardMemberQualificationsTerms,
     nonprofitBoardMemberRightsSpecified,
@@ -77,15 +76,6 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
           {hasNonprofitBoardMembers === undefined && (
             <ReviewLineItem label={Config.formation.fields.hasNonprofitBoardMembers.label} value="" />
           )}
-        </div>
-
-        <div className="margin-top-2 margin-left-3">
-          <ExpandCollapseString
-            text={nonprofitBoardMembersTerms}
-            viewMoreText={Config.formation.general.viewMoreButtonText}
-            viewLessText={Config.formation.general.viewLessButtonText}
-            lines={2}
-          />
         </div>
 
         <div className="margin-top-2">
