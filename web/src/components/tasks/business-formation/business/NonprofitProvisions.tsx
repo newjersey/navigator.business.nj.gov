@@ -5,22 +5,19 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
-import { FormationFields, FormationTextField } from "@businessnjgovnavigator/shared";
+import { FormationFields, FormationTextField, InFormInBylaws } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from "@mui/material";
 import { ReactElement, ReactNode, useContext } from "react";
 
-type inFormBylaws = "IN_FORM" | "IN_BYLAWS";
-type trueFalse = "true" | "false";
+type InFormBylawsRadioType = Exclude<InFormInBylaws, undefined>;
+type TrueFalseRadioType = "true" | "false";
 
 export const NonprofitProvisions = (): ReactElement => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { Config } = useConfig();
   const { doesFieldHaveError } = useFormationErrors();
 
-  const isInForm = (
-    hasBoardMembers: boolean | undefined,
-    fieldName: "IN_FORM" | "IN_BYLAWS" | undefined
-  ): boolean => {
+  const isInForm = (hasBoardMembers: boolean | undefined, fieldName: InFormInBylaws): boolean => {
     if (hasBoardMembers) {
       return hasBoardMembers && fieldName === "IN_FORM";
     } else {
@@ -61,7 +58,7 @@ export const NonprofitProvisions = (): ReactElement => {
     );
   };
 
-  const getRadioLabel = (value: trueFalse | inFormBylaws): string => {
+  const getRadioLabel = (value: InFormBylawsRadioType | TrueFalseRadioType): string => {
     const labelMap = {
       true: Config.formation.nonprofitProvisions.radioYesText,
       false: Config.formation.nonprofitProvisions.radioNoText,
@@ -79,7 +76,7 @@ export const NonprofitProvisions = (): ReactElement => {
   }: {
     fieldName: FormationFields;
     title: string;
-    values: trueFalse[] | inFormBylaws[];
+    values: InFormBylawsRadioType[] | TrueFalseRadioType[];
   }): ReactNode => {
     const hasError = doesFieldHaveError(fieldName);
     return (
