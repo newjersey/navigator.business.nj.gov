@@ -554,6 +554,67 @@ collections:
                       - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Address checkbox label", name: "addressCheckboxText", widget: "string" }
                       - { label: "Expand text", name: "expandText", widget: "string" }
+                  - label: Nonprofit Provisions - Board Members
+                    name: hasNonprofitBoardMembers
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Body", name: "body", widget: "markdown" }
+                      - { label: "Yes Review Text", name: "yesReviewText", widget: "markdown" }
+                      - { label: "No Review Text", name: "noReviewText", widget: "markdown" }
+                  - label: Nonprofit Provisions - Board Member Qualifications
+                    name: nonprofitBoardMemberQualificationsSpecified
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Body", name: "body", widget: "string" }
+                  - label: Nonprofit Provisions - Board Member Qualifications Terms
+                    name: nonprofitBoardMemberQualificationsTerms
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                  - label: Nonprofit Provisions - Board Member Rights
+                    name: nonprofitBoardMemberRightsSpecified
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Body", name: "body", widget: "string" }
+                  - label: Nonprofit Provisions - Board Member Rights Terms
+                    name: nonprofitBoardMemberRightsTerms
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                  - label: Nonprofit Provisions - Trustees
+                    name: nonprofitTrusteesMethodSpecified
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Body", name: "body", widget: "string" }
+                  - label: Nonprofit Provisions - Trustees Terms
+                    name: nonprofitTrusteesMethodTerms
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                  - label: Nonprofit Provisions - Asset Distribution
+                    name: nonprofitAssetDistributionSpecified
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Body", name: "body", widget: "string" }
+                  - label: Nonprofit Provisions - Asset Distribution Terms
+                    name: nonprofitAssetDistributionTerms
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
                   - label: Payment Type
                     name: paymentType
                     collapsed: true
@@ -686,57 +747,16 @@ collections:
                       - { label: "Label", name: "label", widget: "string" }
                       - { label: "Body", name: "body", widget: "markdown" }
                   - label: Veteran Nonprofit
-                    name: veteranNonprofit
+                    name: isVeteranNonprofit
                     collapsed: true
                     widget: object
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
-                      - { label: "Description", name: "description", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
                       - { label: "Radio no text", name: "radioNoText", widget: "string" }
                       - { label: "Radio yes text", name: "radioYesText", widget: "string" }
                       - { label: "Error", name: "error", widget: "string" }
-                      - { label: "In form", name: "inForm", widget: "string" }
-                      - { label: "In bylaws", name: "inByLaws", widget: "string" }
-              - label: Nonprofit
-                name: nonprofit
-                collapsed: true
-                widget: object
-                fields:
-                  - {
-                    label: "Board members yes review text",
-                    name: "yesBoardMembersReviewText",
-                    widget: "markdown",
-                  }
-                  - {
-                    label: "Board members no review text",
-                    name: "noBoardMembersReviewText",
-                    widget: "markdown",
-                  }
-                  - {
-                    label: "Board members qualifications review text",
-                    name: "boardMembersQualificationsReviewText",
-                    widget: "text",
-                  }
-                  - {
-                    label: "Rights and limitations review text",
-                    name: "rightsAndLimitationsReviewText",
-                    widget: "markdown",
-                  }
-                  - {
-                    label: "Choosing trustees review text",
-                    name: "choosingTrusteesReviewText",
-                    widget: "text",
-                  }
-                  - {
-                    label: "Domestic nonprofit veteran corp review text",
-                    name: "domNpVetCorpReviewText",
-                    widget: markdown",
-                  }
-                  - {
-                    label: "Distributing assets review text",
-                    name: "distributingAssetsReviewText",
-                    widget: "text",
-                  }
+                      - { label: "Review Text", name: "reviewText", widget: "markdown" }
               - label: Address Modal
                 name: addressModal
                 collapsed: true

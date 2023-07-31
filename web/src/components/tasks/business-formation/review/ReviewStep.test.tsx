@@ -582,7 +582,7 @@ describe("Formation - ReviewStep", () => {
       await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: true });
       const getByMarkup = withMarkup(screen.getByText);
       expect(
-        getByMarkup(markdownToText(Config.formation.fields.nonprofit.yesBoardMembersReviewText))
+        getByMarkup(markdownToText(Config.formation.fields.hasNonprofitBoardMembers.yesReviewText))
       ).toBeInTheDocument();
     });
 
@@ -590,7 +590,7 @@ describe("Formation - ReviewStep", () => {
       await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: false });
       const getByMarkup = withMarkup(screen.getByText);
       expect(
-        getByMarkup(markdownToText(Config.formation.fields.nonprofit.noBoardMembersReviewText))
+        getByMarkup(markdownToText(Config.formation.fields.hasNonprofitBoardMembers.noReviewText))
       ).toBeInTheDocument();
     });
 
@@ -598,10 +598,10 @@ describe("Formation - ReviewStep", () => {
       await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: undefined });
       const queryByMarkup = withMarkup(screen.queryByText);
       expect(
-        queryByMarkup(markdownToText(Config.formation.fields.nonprofit.yesBoardMembersReviewText))
+        queryByMarkup(markdownToText(Config.formation.fields.hasNonprofitBoardMembers.yesReviewText))
       ).not.toBeInTheDocument();
       expect(
-        queryByMarkup(markdownToText(Config.formation.fields.nonprofit.noBoardMembersReviewText))
+        queryByMarkup(markdownToText(Config.formation.fields.hasNonprofitBoardMembers.noReviewText))
       ).not.toBeInTheDocument();
       const boardMemberSection = within(screen.getByTestId("hasNonprofitBoardMembers"));
       expect(boardMemberSection.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
@@ -617,7 +617,7 @@ describe("Formation - ReviewStep", () => {
       );
       expect(
         nonprofitBoardMemberQualificationsSpecifiedSection.getByText(
-          Config.formation.fields.nonprofit.boardMembersQualificationsReviewText
+          Config.formation.fields.nonprofitBoardMemberQualificationsSpecified.body
         )
       ).toBeInTheDocument();
       expect(
@@ -642,7 +642,7 @@ describe("Formation - ReviewStep", () => {
       );
       expect(
         nonprofitBoardMemberQualificationsSpecifiedSection.getByText(
-          Config.formation.fields.nonprofit.boardMembersQualificationsReviewText
+          Config.formation.fields.nonprofitBoardMemberQualificationsSpecified.body
         )
       ).toBeInTheDocument();
       expect(
@@ -680,7 +680,7 @@ describe("Formation - ReviewStep", () => {
       );
       const choosingTrusteesReviewSection = within(screen.getByTestId("nonprofitTrusteesMethodSpecified"));
       expect(
-        choosingTrusteesReviewSection.getByText(Config.formation.fields.nonprofit.choosingTrusteesReviewText)
+        choosingTrusteesReviewSection.getByText(Config.formation.fields.nonprofitTrusteesMethodSpecified.body)
       ).toBeInTheDocument();
       expect(
         choosingTrusteesReviewSection.getByText(
@@ -701,7 +701,7 @@ describe("Formation - ReviewStep", () => {
       );
       const choosingTrusteesReviewSection = within(screen.getByTestId("nonprofitTrusteesMethodSpecified"));
       expect(
-        choosingTrusteesReviewSection.getByText(Config.formation.fields.nonprofit.choosingTrusteesReviewText)
+        choosingTrusteesReviewSection.getByText(Config.formation.fields.nonprofitTrusteesMethodSpecified.body)
       ).toBeInTheDocument();
       expect(
         choosingTrusteesReviewSection.getByText(
@@ -720,7 +720,7 @@ describe("Formation - ReviewStep", () => {
       );
       expect(
         nonprofitAssetDistributionSpecifiedReviewSection.getByText(
-          Config.formation.fields.nonprofit.distributingAssetsReviewText
+          Config.formation.fields.nonprofitAssetDistributionSpecified.body
         )
       ).toBeInTheDocument();
       expect(
@@ -745,7 +745,7 @@ describe("Formation - ReviewStep", () => {
       );
       expect(
         nonprofitAssetDistributionSpecifiedReviewSection.getByText(
-          Config.formation.fields.nonprofit.distributingAssetsReviewText
+          Config.formation.fields.nonprofitAssetDistributionSpecified.body
         )
       ).toBeInTheDocument();
       expect(
@@ -758,7 +758,7 @@ describe("Formation - ReviewStep", () => {
     it("terms do not display when there are no board members", async () => {
       await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: false });
       expect(
-        screen.queryByText(Config.formation.fields.nonprofit.distributingAssetsReviewText)
+        screen.queryByText(Config.formation.fields.nonprofitAssetDistributionSpecified.body)
       ).not.toBeInTheDocument();
     });
   });
