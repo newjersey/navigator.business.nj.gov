@@ -578,7 +578,7 @@ describe("Formation - ReviewStep", () => {
       expect(screen.getByText(Config.formation.fields.provisions.label)).toBeInTheDocument();
     });
 
-    it("yes for board members is displayed in the Provisions section", async () => {
+    it("displays yes for board members in the Provisions section", async () => {
       await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: true });
       const getByMarkup = withMarkup(screen.getByText);
       expect(
@@ -586,12 +586,25 @@ describe("Formation - ReviewStep", () => {
       ).toBeInTheDocument();
     });
 
-    it("no for board members is displayed in the Provisions section", async () => {
+    it("displays no for board members in the Provisions section", async () => {
       await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: false });
       const getByMarkup = withMarkup(screen.getByText);
       expect(
         getByMarkup(markdownToText(Config.formation.fields.nonprofit.noBoardMembersReviewText))
       ).toBeInTheDocument();
+    });
+
+    it("displays Not Entered for board members in the Provisions section when undefined", async () => {
+      await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: undefined });
+      const queryByMarkup = withMarkup(screen.queryByText);
+      expect(
+        queryByMarkup(markdownToText(Config.formation.fields.nonprofit.yesBoardMembersReviewText))
+      ).not.toBeInTheDocument();
+      expect(
+        queryByMarkup(markdownToText(Config.formation.fields.nonprofit.noBoardMembersReviewText))
+      ).not.toBeInTheDocument();
+      const boardMemberSection = within(screen.getByTestId("hasNonprofitBoardMembers"));
+      expect(boardMemberSection.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
     });
 
     it("in the by laws are specified and is displayed in the Board member qualifications in the Provisions section", async () => {
