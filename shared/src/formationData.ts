@@ -124,7 +124,6 @@ export interface FormationFormData extends FormationAddress {
   readonly canMakeDistribution: boolean | undefined;
   readonly makeDistributionTerms: string;
   readonly hasNonprofitBoardMembers: boolean | undefined;
-  readonly nonprofitBoardMembersTerms: string;
   readonly nonprofitBoardMemberQualificationsSpecified: InFormInBylaws;
   readonly nonprofitBoardMemberQualificationsTerms: string;
   readonly nonprofitBoardMemberRightsSpecified: InFormInBylaws;
@@ -262,7 +261,6 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     canMakeDistribution: undefined,
     makeDistributionTerms: "",
     hasNonprofitBoardMembers: undefined,
-    nonprofitBoardMembersTerms: "",
     nonprofitBoardMemberQualificationsSpecified: undefined,
     nonprofitBoardMemberQualificationsTerms: "",
     nonprofitBoardMemberRightsSpecified: undefined,

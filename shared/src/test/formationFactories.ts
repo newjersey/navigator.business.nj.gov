@@ -233,7 +233,6 @@ export const generateFormationFormData = (
     canMakeDistribution: !!(randomInt() % 2),
     makeDistributionTerms: `some-makeDistributionTerms-text-${randomInt()}`,
     hasNonprofitBoardMembers: !!(randomInt() % 2),
-    nonprofitBoardMembersTerms: `some-nonprofitBoardMembersTerms-text-${randomInt()}`,
     nonprofitBoardMemberQualificationsSpecified: randomInt() % 2 ? "IN_BYLAWS" : "IN_FORM",
     nonprofitBoardMemberQualificationsTerms: `some-nonprofitBoardMemberQualificationsTerms-text-${randomInt()}`,
     nonprofitBoardMemberRightsSpecified: randomInt() % 2 ? "IN_BYLAWS" : "IN_FORM",
