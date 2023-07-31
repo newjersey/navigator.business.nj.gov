@@ -5,22 +5,12 @@ import { ReviewNotEntered } from "@/components/tasks/business-formation/review/s
 import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { InFormInBylaws } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
 export const ReviewNonprofitProvisions = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
   const { Config } = useConfig();
-
-  const checkIfInFormOrBylaw = (stringToCompare: string | undefined): string => {
-    if (stringToCompare === "IN_BYLAWS") {
-      return ` ${Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase().replace('"', "")}.`;
-    }
-
-    if (stringToCompare === "IN_FORM") {
-      return ` ${Config.formation.nonprofitProvisions.radioInFormText.toLowerCase().replace('"', "")}.`;
-    }
-    return " ";
-  };
 
   const {
     hasNonprofitBoardMembers,
@@ -35,44 +25,43 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
     nonprofitAssetDistributionTerms,
   } = state.formationFormData;
 
-  const fillInByLawFormText = (stringToCompare: string | undefined, outputText: string): string => {
-    return `${outputText}  ${checkIfInFormOrBylaw(`${stringToCompare}`)}`;
+  const isVisibleInReview = (value: InFormInBylaws): boolean => {
+    return value === "IN_FORM";
   };
 
-  const isVisibleInReview = (stringToCompare: string | undefined): boolean => {
-    if (stringToCompare === "IN_FORM") {
-      return true;
-    } else {
-      return false;
-    }
-  };
+  const showQuestionAnswer = ({
+    testId,
+    value,
+    reviewText,
+  }: {
+    testId: string;
+    value: InFormInBylaws;
+    reviewText: string;
+  }): ReactElement => {
+    const endOfSentence = ((): string => {
+      switch (value) {
+        case "IN_FORM":
+          return Config.formation.nonprofitProvisions.radioInFormText.toLowerCase();
+        case "IN_BYLAWS":
+          return Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase();
+        default:
+          return "";
+      }
+    })();
 
-  const showQuestionAnswer = (
-    testId: string,
-    questionString: string | undefined,
-    outputText: string,
-    isBold?: boolean
-  ): ReactElement => {
     return (
       <>
-        {isBold && (
-          <div data-testid={testId} style={{ display: "inline-block" }}>
-            <strong>{outputText}</strong>
-            <div style={{ display: "inline-block" }}>{checkIfInFormOrBylaw(questionString)}</div>
-          </div>
-        )}
-        {!isBold && (
-          <div data-testid={testId}>
-            <Content style={{ display: "inline-block" }}>
-              {fillInByLawFormText(questionString, outputText)}
-            </Content>
-          </div>
-        )}
-        {questionString === undefined && (
-          <div data-testid={testId} style={{ display: "inline-block", paddingLeft: "5px" }}>
-            <span className={"bg-accent-warm-extra-light text-italic"}>
-              <ReviewNotEntered />
-            </span>
+        <div data-testid={testId} style={{ display: "inline-block" }}>
+          <strong>{reviewText}</strong>{" "}
+          {endOfSentence && (
+            <>
+              <span>{endOfSentence}</span>.
+            </>
+          )}
+        </div>
+        {value === undefined && (
+          <div style={{ display: "inline-block", paddingLeft: "5px" }}>
+            <ReviewNotEntered />
           </div>
         )}
       </>
@@ -106,12 +95,11 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
 
         <div className="margin-top-2">
           {hasNonprofitBoardMembers &&
-            showQuestionAnswer(
-              "nonprofitBoardMemberQualificationsSpecified",
-              nonprofitBoardMemberQualificationsSpecified,
-              Config.formation.fields.nonprofit.boardMembersQualificationsReviewText,
-              true
-            )}
+            showQuestionAnswer({
+              testId: "nonprofitBoardMemberQualificationsSpecified",
+              value: nonprofitBoardMemberQualificationsSpecified,
+              reviewText: Config.formation.fields.nonprofit.boardMembersQualificationsReviewText,
+            })}
         </div>
 
         {isVisibleInReview(nonprofitBoardMemberQualificationsSpecified) && (
@@ -127,11 +115,11 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
 
         <div className="margin-top-2">
           {hasNonprofitBoardMembers &&
-            showQuestionAnswer(
-              "nonprofitBoardMemberRightsSpecified",
-              nonprofitBoardMemberRightsSpecified,
-              Config.formation.fields.nonprofit.rightsAndLimitationsReviewText
-            )}
+            showQuestionAnswer({
+              testId: "nonprofitBoardMemberRightsSpecified",
+              value: nonprofitBoardMemberRightsSpecified,
+              reviewText: Config.formation.fields.nonprofit.rightsAndLimitationsReviewText,
+            })}
         </div>
 
         {isVisibleInReview(nonprofitBoardMemberRightsSpecified) && (
@@ -147,12 +135,11 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
 
         <div className="margin-top-2">
           {hasNonprofitBoardMembers &&
-            showQuestionAnswer(
-              "nonprofitTrusteesMethodSpecified",
-              nonprofitTrusteesMethodSpecified,
-              Config.formation.fields.nonprofit.choosingTrusteesReviewText,
-              true
-            )}
+            showQuestionAnswer({
+              testId: "nonprofitTrusteesMethodSpecified",
+              value: nonprofitTrusteesMethodSpecified,
+              reviewText: Config.formation.fields.nonprofit.choosingTrusteesReviewText,
+            })}
         </div>
 
         {isVisibleInReview(nonprofitTrusteesMethodSpecified) && (
@@ -168,12 +155,11 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
 
         <div className="margin-top-2">
           {hasNonprofitBoardMembers &&
-            showQuestionAnswer(
-              "nonprofitAssetDistributionSpecified",
-              nonprofitAssetDistributionSpecified,
-              Config.formation.fields.nonprofit.distributingAssetsReviewText,
-              true
-            )}
+            showQuestionAnswer({
+              testId: "nonprofitAssetDistributionSpecified",
+              value: nonprofitAssetDistributionSpecified,
+              reviewText: Config.formation.fields.nonprofit.distributingAssetsReviewText,
+            })}
         </div>
 
         {isVisibleInReview(nonprofitAssetDistributionSpecified) && (

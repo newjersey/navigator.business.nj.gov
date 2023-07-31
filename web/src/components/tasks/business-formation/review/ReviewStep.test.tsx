@@ -622,7 +622,7 @@ describe("Formation - ReviewStep", () => {
       ).toBeInTheDocument();
       expect(
         nonprofitBoardMemberQualificationsSpecifiedSection.getByText(
-          `${Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase()}.`
+          `${Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase()}`
         )
       ).toBeInTheDocument();
     });
@@ -647,7 +647,7 @@ describe("Formation - ReviewStep", () => {
       ).toBeInTheDocument();
       expect(
         nonprofitBoardMemberQualificationsSpecifiedSection.getByText(
-          `${Config.formation.nonprofitProvisions.radioInFormText.toLowerCase()}.`
+          `${Config.formation.nonprofitProvisions.radioInFormText.toLowerCase()}`
         )
       ).toBeInTheDocument();
     });
@@ -684,7 +684,7 @@ describe("Formation - ReviewStep", () => {
       ).toBeInTheDocument();
       expect(
         choosingTrusteesReviewSection.getByText(
-          `${Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase()}.`
+          `${Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase()}`
         )
       ).toBeInTheDocument();
     });
@@ -705,7 +705,7 @@ describe("Formation - ReviewStep", () => {
       ).toBeInTheDocument();
       expect(
         choosingTrusteesReviewSection.getByText(
-          `${Config.formation.nonprofitProvisions.radioInFormText.toLowerCase()}.`
+          `${Config.formation.nonprofitProvisions.radioInFormText.toLowerCase()}`
         )
       ).toBeInTheDocument();
     });
@@ -725,7 +725,7 @@ describe("Formation - ReviewStep", () => {
       ).toBeInTheDocument();
       expect(
         nonprofitAssetDistributionSpecifiedReviewSection.getByText(
-          `${Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase()}.`
+          `${Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase()}`
         )
       ).toBeInTheDocument();
     });
@@ -750,7 +750,7 @@ describe("Formation - ReviewStep", () => {
       ).toBeInTheDocument();
       expect(
         nonprofitAssetDistributionSpecifiedReviewSection.getByText(
-          `${Config.formation.nonprofitProvisions.radioInFormText.toLowerCase()}.`
+          `${Config.formation.nonprofitProvisions.radioInFormText.toLowerCase()}`
         )
       ).toBeInTheDocument();
     });
