@@ -30,13 +30,11 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
   };
 
   const showQuestionAnswer = ({
-    testId,
+    fieldName,
     value,
-    reviewText,
   }: {
-    testId: string;
+    fieldName: keyof typeof Config.formation.fields;
     value: InFormInBylaws;
-    reviewText: string;
   }): ReactElement => {
     const endOfSentence = ((): string => {
       switch (value) {
@@ -49,10 +47,12 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
       }
     })();
 
+    const bodyText = (Config.formation.fields[fieldName] as any).body;
+
     return (
       <>
-        <div data-testid={testId} style={{ display: "inline-block" }}>
-          <strong>{reviewText}</strong>{" "}
+        <div data-testid={fieldName} style={{ display: "inline-block" }}>
+          <strong>{bodyText}</strong>{" "}
           {endOfSentence && (
             <>
               <span>{endOfSentence}</span>.
@@ -74,10 +74,10 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
       <ReviewSubSection header={"Provisions"}>
         <div className="margin-top-2" data-testid="hasNonprofitBoardMembers">
           {hasNonprofitBoardMembers === true && (
-            <Content>{Config.formation.fields.nonprofit.yesBoardMembersReviewText}</Content>
+            <Content>{Config.formation.fields.hasNonprofitBoardMembers.yesReviewText}</Content>
           )}
           {hasNonprofitBoardMembers === false && (
-            <Content>{Config.formation.fields.nonprofit.noBoardMembersReviewText}</Content>
+            <Content>{Config.formation.fields.hasNonprofitBoardMembers.noReviewText}</Content>
           )}
           {hasNonprofitBoardMembers === undefined && (
             <ReviewLineItem label={Config.formation.fields.hasNonprofitBoardMembers.label} value="" />
@@ -96,9 +96,8 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
         <div className="margin-top-2">
           {hasNonprofitBoardMembers &&
             showQuestionAnswer({
-              testId: "nonprofitBoardMemberQualificationsSpecified",
+              fieldName: "nonprofitBoardMemberQualificationsSpecified",
               value: nonprofitBoardMemberQualificationsSpecified,
-              reviewText: Config.formation.fields.nonprofit.boardMembersQualificationsReviewText,
             })}
         </div>
 
@@ -116,9 +115,8 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
         <div className="margin-top-2">
           {hasNonprofitBoardMembers &&
             showQuestionAnswer({
-              testId: "nonprofitBoardMemberRightsSpecified",
+              fieldName: "nonprofitBoardMemberRightsSpecified",
               value: nonprofitBoardMemberRightsSpecified,
-              reviewText: Config.formation.fields.nonprofit.rightsAndLimitationsReviewText,
             })}
         </div>
 
@@ -136,9 +134,8 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
         <div className="margin-top-2">
           {hasNonprofitBoardMembers &&
             showQuestionAnswer({
-              testId: "nonprofitTrusteesMethodSpecified",
+              fieldName: "nonprofitTrusteesMethodSpecified",
               value: nonprofitTrusteesMethodSpecified,
-              reviewText: Config.formation.fields.nonprofit.choosingTrusteesReviewText,
             })}
         </div>
 
@@ -156,9 +153,8 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
         <div className="margin-top-2">
           {hasNonprofitBoardMembers &&
             showQuestionAnswer({
-              testId: "nonprofitAssetDistributionSpecified",
+              fieldName: "nonprofitAssetDistributionSpecified",
               value: nonprofitAssetDistributionSpecified,
-              reviewText: Config.formation.fields.nonprofit.distributingAssetsReviewText,
             })}
         </div>
 
