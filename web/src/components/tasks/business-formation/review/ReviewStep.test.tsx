@@ -631,7 +631,7 @@ describe("Formation - ReviewStep", () => {
         ).toBeInTheDocument();
         expect(
           radioReviewSection.getByText(
-            `${Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase()}`
+            `${Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase()}.`
           )
         ).toBeInTheDocument();
       });
@@ -642,6 +642,21 @@ describe("Formation - ReviewStep", () => {
           { hasNonprofitBoardMembers: true, [args.radio]: "IN_BYLAWS", [args.terms]: "some-random-terms" }
         );
         expect(screen.queryByText("some-random-terms")).not.toBeInTheDocument();
+      });
+
+      it(`displays Not Entered when radio unanswered for ${args.radio}`, async () => {
+        await renderStep(
+          { legalStructureId },
+          {
+            hasNonprofitBoardMembers: true,
+            [args.radio]: undefined,
+          }
+        );
+        const radioReviewSection = within(screen.getByTestId(args.radio));
+        expect(
+          radioReviewSection.getByText(((Config.formation.fields as any)[args.radio] as any).body)
+        ).toBeInTheDocument();
+        expect(radioReviewSection.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
       });
 
       it(`displays as IN_FORM for ${args.radio}`, async () => {
@@ -660,7 +675,7 @@ describe("Formation - ReviewStep", () => {
         ).toBeInTheDocument();
         expect(
           radioReviewSection.getByText(
-            `${Config.formation.nonprofitProvisions.radioInFormText.toLowerCase()}`
+            `${Config.formation.nonprofitProvisions.radioInFormText.toLowerCase()}.`
           )
         ).toBeInTheDocument();
         expect(screen.getByText(terms)).toBeInTheDocument();

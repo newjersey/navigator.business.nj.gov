@@ -50,21 +50,16 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
     const bodyText = (Config.formation.fields[fieldName] as any).body;
 
     return (
-      <>
-        <div data-testid={fieldName} style={{ display: "inline-block" }}>
-          <strong>{bodyText}</strong>{" "}
-          {endOfSentence && (
-            <>
-              <span>{endOfSentence}</span>.
-            </>
-          )}
-        </div>
+      <div data-testid={fieldName}>
+        <span>
+          <strong>{bodyText}</strong> {endOfSentence && <>{endOfSentence}.</>}
+        </span>
         {value === undefined && (
-          <div style={{ display: "inline-block", paddingLeft: "5px" }}>
+          <div className="display-inline-block padding-left-1">
             <ReviewNotEntered />
           </div>
         )}
-      </>
+      </div>
     );
   };
 
