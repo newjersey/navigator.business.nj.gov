@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { ExpandCollapseString } from "@/components/ExpandCollapseString";
+import { ReviewLineItem } from "@/components/tasks/business-formation/review/section/ReviewLineItem";
 import { ReviewNotEntered } from "@/components/tasks/business-formation/review/section/ReviewNotEntered";
 import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -82,12 +83,15 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
     <>
       <hr className="margin-y-205" />
       <ReviewSubSection header={"Provisions"}>
-        <div className="margin-top-2">
-          {hasNonprofitBoardMembers && (
+        <div className="margin-top-2" data-testid="hasNonprofitBoardMembers">
+          {hasNonprofitBoardMembers === true && (
             <Content>{Config.formation.fields.nonprofit.yesBoardMembersReviewText}</Content>
           )}
-          {!hasNonprofitBoardMembers && (
+          {hasNonprofitBoardMembers === false && (
             <Content>{Config.formation.fields.nonprofit.noBoardMembersReviewText}</Content>
+          )}
+          {hasNonprofitBoardMembers === undefined && (
+            <ReviewLineItem label={Config.formation.fields.hasNonprofitBoardMembers.label} value="" />
           )}
         </div>
 
