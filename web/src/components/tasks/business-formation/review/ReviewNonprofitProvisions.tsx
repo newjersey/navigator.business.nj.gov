@@ -1,187 +1,116 @@
 import { Content } from "@/components/Content";
 import { ExpandCollapseString } from "@/components/ExpandCollapseString";
+import { ReviewLineItem } from "@/components/tasks/business-formation/review/section/ReviewLineItem";
 import { ReviewNotEntered } from "@/components/tasks/business-formation/review/section/ReviewNotEntered";
 import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement, useContext } from "react";
+import { FormationFields, InFormInBylaws } from "@businessnjgovnavigator/shared";
+import { Fragment, ReactElement, useContext } from "react";
 
 export const ReviewNonprofitProvisions = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
   const { Config } = useConfig();
 
-  const checkIfInFormOrBylaw = (stringToCompare: string | undefined): string => {
-    if (stringToCompare === "IN_BYLAWS") {
-      return ` ${Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase().replace('"', "")}.`;
-    }
+  const { hasNonprofitBoardMembers } = state.formationFormData;
 
-    if (stringToCompare === "IN_FORM") {
-      return ` ${Config.formation.nonprofitProvisions.radioInFormText.toLowerCase().replace('"', "")}.`;
-    }
-    return " ";
-  };
+  const showQuestionAnswer = ({
+    fieldName,
+    value,
+  }: {
+    fieldName: FormationFields;
+    value: InFormInBylaws;
+  }): ReactElement => {
+    const endOfSentence = ((): string => {
+      switch (value) {
+        case "IN_FORM":
+          return Config.formation.nonprofitProvisions.radioInFormText.toLowerCase();
+        case "IN_BYLAWS":
+          return Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase();
+        default:
+          return "";
+      }
+    })();
 
-  const {
-    hasNonprofitBoardMembers,
-    nonprofitBoardMembersTerms,
-    nonprofitBoardMemberQualificationsSpecified,
-    nonprofitBoardMemberQualificationsTerms,
-    nonprofitBoardMemberRightsSpecified,
-    nonprofitBoardMemberRightsTerms,
-    nonprofitTrusteesMethodSpecified,
-    nonprofitTrusteesMethodTerms,
-    nonprofitAssetDistributionSpecified,
-    nonprofitAssetDistributionTerms,
-  } = state.formationFormData;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const bodyText = ((Config.formation.fields as any)[fieldName] as any).body;
 
-  const fillInByLawFormText = (stringToCompare: string | undefined, outputText: string): string => {
-    return `${outputText}  ${checkIfInFormOrBylaw(`${stringToCompare}`)}`;
-  };
-
-  const isVisibleInReview = (stringToCompare: string | undefined): boolean => {
-    if (stringToCompare === "IN_FORM") {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  const showQuestionAnswer = (
-    testId: string,
-    questionString: string | undefined,
-    outputText: string,
-    isBold?: boolean
-  ): ReactElement => {
     return (
-      <>
-        {isBold && (
-          <div data-testid={testId} style={{ display: "inline-block" }}>
-            <strong>{outputText}</strong>
-            <div style={{ display: "inline-block" }}>{checkIfInFormOrBylaw(questionString)}</div>
+      <div data-testid={fieldName}>
+        <span>
+          <strong>{bodyText}</strong> {endOfSentence && <>{endOfSentence}.</>}
+        </span>
+        {value === undefined && (
+          <div className="display-inline-block padding-left-1">
+            <ReviewNotEntered />
           </div>
         )}
-        {!isBold && (
-          <div data-testid={testId}>
-            <Content style={{ display: "inline-block" }}>
-              {fillInByLawFormText(questionString, outputText)}
-            </Content>
-          </div>
-        )}
-        {questionString === undefined && (
-          <div data-testid={testId} style={{ display: "inline-block", paddingLeft: "5px" }}>
-            <span className={"bg-accent-warm-extra-light text-italic"}>
-              <ReviewNotEntered />
-            </span>
-          </div>
-        )}
-      </>
+      </div>
     );
   };
+
+  const provisionsToDisplay: Array<{ radioField: FormationFields; termsField: FormationFields }> = [
+    {
+      radioField: "nonprofitBoardMemberQualificationsSpecified",
+      termsField: "nonprofitBoardMemberQualificationsTerms",
+    },
+    { radioField: "nonprofitBoardMemberRightsSpecified", termsField: "nonprofitBoardMemberRightsTerms" },
+    { radioField: "nonprofitTrusteesMethodSpecified", termsField: "nonprofitTrusteesMethodTerms" },
+    { radioField: "nonprofitAssetDistributionSpecified", termsField: "nonprofitAssetDistributionTerms" },
+  ];
 
   return (
     <>
       <hr className="margin-y-205" />
       <ReviewSubSection header={"Provisions"}>
-        <div className="margin-top-2">
-          {hasNonprofitBoardMembers && (
-            <Content>{Config.formation.fields.nonprofit.yesBoardMembersReviewText}</Content>
+        <div className="margin-top-2" data-testid="hasNonprofitBoardMembers">
+          {hasNonprofitBoardMembers === true && (
+            <Content>{Config.formation.fields.hasNonprofitBoardMembers.yesReviewText}</Content>
           )}
-          {!hasNonprofitBoardMembers && (
-            <Content>{Config.formation.fields.nonprofit.noBoardMembersReviewText}</Content>
+          {hasNonprofitBoardMembers === false && (
+            <Content>{Config.formation.fields.hasNonprofitBoardMembers.noReviewText}</Content>
+          )}
+          {hasNonprofitBoardMembers === undefined && (
+            <ReviewLineItem label={Config.formation.fields.hasNonprofitBoardMembers.label} value="" />
           )}
         </div>
 
-        <div className="margin-top-2 margin-left-3">
-          <ExpandCollapseString
-            text={nonprofitBoardMembersTerms}
-            viewMoreText={Config.formation.general.viewMoreButtonText}
-            viewLessText={Config.formation.general.viewLessButtonText}
-            lines={2}
-          />
-        </div>
+        {provisionsToDisplay.map(({ radioField, termsField }) => {
+          const radioValue = state.formationFormData[radioField] as InFormInBylaws;
+          const termsValue = state.formationFormData[termsField] as string;
 
-        <div className="margin-top-2">
-          {hasNonprofitBoardMembers &&
-            showQuestionAnswer(
-              "nonprofitBoardMemberQualificationsSpecified",
-              nonprofitBoardMemberQualificationsSpecified,
-              Config.formation.fields.nonprofit.boardMembersQualificationsReviewText,
-              true
-            )}
-        </div>
+          return (
+            <Fragment key={radioField}>
+              <div className="margin-top-2">
+                {hasNonprofitBoardMembers &&
+                  showQuestionAnswer({
+                    fieldName: radioField,
+                    value: radioValue,
+                  })}
+              </div>
 
-        {isVisibleInReview(nonprofitBoardMemberQualificationsSpecified) && (
-          <div className="margin-top-2 margin-left-3">
-            <ExpandCollapseString
-              text={nonprofitBoardMemberQualificationsTerms}
-              viewMoreText={Config.formation.general.viewMoreButtonText}
-              viewLessText={Config.formation.general.viewLessButtonText}
-              lines={2}
-            />
-          </div>
-        )}
-
-        <div className="margin-top-2">
-          {hasNonprofitBoardMembers &&
-            showQuestionAnswer(
-              "nonprofitBoardMemberRightsSpecified",
-              nonprofitBoardMemberRightsSpecified,
-              Config.formation.fields.nonprofit.rightsAndLimitationsReviewText
-            )}
-        </div>
-
-        {isVisibleInReview(nonprofitBoardMemberRightsSpecified) && (
-          <div className="margin-top-2 margin-left-3">
-            <ExpandCollapseString
-              text={nonprofitBoardMemberRightsTerms}
-              viewMoreText={Config.formation.general.viewMoreButtonText}
-              viewLessText={Config.formation.general.viewLessButtonText}
-              lines={2}
-            />
-          </div>
-        )}
-
-        <div className="margin-top-2">
-          {hasNonprofitBoardMembers &&
-            showQuestionAnswer(
-              "nonprofitTrusteesMethodSpecified",
-              nonprofitTrusteesMethodSpecified,
-              Config.formation.fields.nonprofit.choosingTrusteesReviewText,
-              true
-            )}
-        </div>
-
-        {isVisibleInReview(nonprofitTrusteesMethodSpecified) && (
-          <div className="margin-top-2 margin-left-3">
-            <ExpandCollapseString
-              text={nonprofitTrusteesMethodTerms}
-              viewMoreText={Config.formation.general.viewMoreButtonText}
-              viewLessText={Config.formation.general.viewLessButtonText}
-              lines={2}
-            />
-          </div>
-        )}
-
-        <div className="margin-top-2">
-          {hasNonprofitBoardMembers &&
-            showQuestionAnswer(
-              "nonprofitAssetDistributionSpecified",
-              nonprofitAssetDistributionSpecified,
-              Config.formation.fields.nonprofit.distributingAssetsReviewText,
-              true
-            )}
-        </div>
-
-        {isVisibleInReview(nonprofitAssetDistributionSpecified) && (
-          <div className="margin-top-2 margin-left-3">
-            <ExpandCollapseString
-              text={nonprofitAssetDistributionTerms}
-              viewMoreText={Config.formation.general.viewMoreButtonText}
-              viewLessText={Config.formation.general.viewLessButtonText}
-              lines={2}
-            />
-          </div>
-        )}
+              {radioValue === "IN_FORM" && (
+                <div className="margin-top-2 margin-left-3" data-testid={`${radioField}-terms`}>
+                  {termsValue ? (
+                    <ExpandCollapseString
+                      text={termsValue}
+                      viewMoreText={Config.formation.general.viewMoreButtonText}
+                      viewLessText={Config.formation.general.viewLessButtonText}
+                      lines={2}
+                    />
+                  ) : (
+                    <div className="display-flex flex-row">
+                      <span className="margin-right-1">
+                        <strong>{Config.formation.nonprofitProvisions.description}:</strong>
+                      </span>
+                      <ReviewNotEntered />
+                    </div>
+                  )}
+                </div>
+              )}
+            </Fragment>
+          );
+        })}
       </ReviewSubSection>
     </>
   );

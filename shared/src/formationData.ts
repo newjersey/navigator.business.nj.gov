@@ -105,6 +105,8 @@ export interface FormationMember extends FormationAddress {
   readonly name: string;
 }
 
+export type InFormInBylaws = "IN_BYLAWS" | "IN_FORM" | undefined;
+
 export interface FormationFormData extends FormationAddress {
   readonly legalType: FormationLegalType;
   readonly businessName: string;
@@ -122,14 +124,13 @@ export interface FormationFormData extends FormationAddress {
   readonly canMakeDistribution: boolean | undefined;
   readonly makeDistributionTerms: string;
   readonly hasNonprofitBoardMembers: boolean | undefined;
-  readonly nonprofitBoardMembersTerms: string;
-  readonly nonprofitBoardMemberQualificationsSpecified: "IN_BYLAWS" | "IN_FORM" | undefined;
+  readonly nonprofitBoardMemberQualificationsSpecified: InFormInBylaws;
   readonly nonprofitBoardMemberQualificationsTerms: string;
-  readonly nonprofitBoardMemberRightsSpecified: "IN_BYLAWS" | "IN_FORM" | undefined;
+  readonly nonprofitBoardMemberRightsSpecified: InFormInBylaws;
   readonly nonprofitBoardMemberRightsTerms: string;
-  readonly nonprofitTrusteesMethodSpecified: "IN_BYLAWS" | "IN_FORM" | undefined;
+  readonly nonprofitTrusteesMethodSpecified: InFormInBylaws;
   readonly nonprofitTrusteesMethodTerms: string;
-  readonly nonprofitAssetDistributionSpecified: "IN_BYLAWS" | "IN_FORM" | undefined;
+  readonly nonprofitAssetDistributionSpecified: InFormInBylaws;
   readonly nonprofitAssetDistributionTerms: string;
   readonly provisions: string[] | undefined;
   readonly agentNumberOrManual: "NUMBER" | "MANUAL_ENTRY";
@@ -260,7 +261,6 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     canMakeDistribution: undefined,
     makeDistributionTerms: "",
     hasNonprofitBoardMembers: undefined,
-    nonprofitBoardMembersTerms: "",
     nonprofitBoardMemberQualificationsSpecified: undefined,
     nonprofitBoardMemberQualificationsTerms: "",
     nonprofitBoardMemberRightsSpecified: undefined,

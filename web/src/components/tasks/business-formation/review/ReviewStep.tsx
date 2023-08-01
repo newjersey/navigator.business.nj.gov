@@ -5,6 +5,7 @@ import { ReviewBillingContact } from "@/components/tasks/business-formation/revi
 import { ReviewBillingServices } from "@/components/tasks/business-formation/review/ReviewBillingServices";
 import { ReviewBusinessSuffixAndStartDate } from "@/components/tasks/business-formation/review/ReviewBusinessSuffixAndStartDate";
 import { ReviewForeignCertificate } from "@/components/tasks/business-formation/review/ReviewForeignCertificate";
+import { ReviewIsVeteranNonprofit } from "@/components/tasks/business-formation/review/ReviewIsVeteranNonprofit";
 import { ReviewMainBusinessLocation } from "@/components/tasks/business-formation/review/ReviewMainBusinessLocation";
 import { ReviewMembers } from "@/components/tasks/business-formation/review/ReviewMembers";
 import { ReviewNonprofitProvisions } from "@/components/tasks/business-formation/review/ReviewNonprofitProvisions";
@@ -41,11 +42,7 @@ export const ReviewStep = (): ReactElement => {
         <ReviewSection stepName={"Business"} testId="edit-business-name-step">
           <BusinessNameAndLegalStructure isReviewStep />
           <ReviewBusinessSuffixAndStartDate />
-          {state.formationFormData.isVeteranNonprofit && (
-            <Content className="margin-top-2">
-              {Config.formation.fields.nonprofit.domNpVetCorpReviewText}
-            </Content>
-          )}
+          {isNonProfit && <ReviewIsVeteranNonprofit value={state.formationFormData.isVeteranNonprofit} />}
           {isForeignCorporation(state.formationFormData.legalType) && (
             <>
               <ReviewWillPracticeLaw willPracticeLaw={state.formationFormData.willPracticeLaw} />
