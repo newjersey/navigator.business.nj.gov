@@ -46,12 +46,7 @@ export const ContactsStep = (): ReactElement => {
         {shouldShowMembers() && (
           <>
             <hr className="margin-top-0 margin-bottom-3" />
-            <Members
-              hasError={doesFieldHaveError("members")}
-              showErrorOnBottom={
-                state.formationFormData.legalType === "nonprofit" && doesFieldHaveError("members")
-              }
-            />
+            <Members hasError={doesFieldHaveError("members")} />
           </>
         )}
         <hr className="margin-top-0 margin-bottom-3" />
