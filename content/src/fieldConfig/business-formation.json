@@ -309,7 +309,6 @@
       "foreignGoodStandingFile": {
         "label": "Foreign Certificate of Good Standing",
         "contextualLabel": "Foreign `Certificate of Good Standing|good-standing`",
-        "labelContextualInfo": "good-standing",
         "helperText": "Select a PNG or PDF file. Max file size: 3MB.",
         "errorMessageFileSize": "${fileName} exceeds maximum size of ${maxFileSize} MB.",
         "errorMessageFileType": "${fileName} file format is not supported.",

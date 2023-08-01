@@ -502,7 +502,7 @@ collections:
                     widget: object
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
-                      - { label: "Contextual Label", name: "contextualLabel", widget: "string" }
+                      - { label: "Contextual Label", name: "contextualLabel", widget: "markdown" }
                       - { label: "Helper Text", name: "helperText", widget: "string" }
                       - { label: "Error Message - File Size", name: "errorMessageFileSize", widget: "string" }
                       - { label: "Error Message - File Type", name: "errorMessageFileType", widget: "string" }
@@ -740,6 +740,15 @@ collections:
                         }
                       - { label: "Modal save button", name: "modalSaveButton", widget: "string" }
                       - { label: "Description", name: "description", widget: "string" }
+                  - label: Will Practice Law
+                    name: willPracticeLaw
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Radio No Text", name: "radioNoText", widget: "string" }
+                      - { label: "Radio Yes Text", name: "radioYesText", widget: "string" }
+                      - { label: "Error", name: "error", widget: "string" }
                   - label: Withdrawals
                     name: withdrawals
                     collapsed: true
