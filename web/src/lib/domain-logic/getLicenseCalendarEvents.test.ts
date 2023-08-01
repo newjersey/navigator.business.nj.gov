@@ -2,6 +2,9 @@ import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarE
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
 import { generateLicenseData } from "@businessnjgovnavigator/shared/test";
+import dayjs from "dayjs";
+import objectSupport from "dayjs/plugin/objectSupport";
+dayjs.extend(objectSupport);
 
 describe("getLicenseCalendarEvent", () => {
   const currentDate = getCurrentDate();
@@ -21,15 +24,16 @@ describe("getLicenseCalendarEvent", () => {
   });
 
   it("returns an array containing expiration event when within the current month", () => {
+    const tenthOfMonthDate = dayjs({ year: currentDate.year(), month: currentDate.month(), day: 10 });
     expect(
       getLicenseCalendarEvents(
-        generateLicenseData({ expirationISO: currentDate.toISOString() }),
+        generateLicenseData({ expirationISO: tenthOfMonthDate.toISOString() }),
         currentDate.year(),
         currentDate.month()
       )
     ).toEqual([
       {
-        dueDate: currentDate.format(defaultDateFormat),
+        dueDate: tenthOfMonthDate.format(defaultDateFormat),
         licenseEventSubtype: "expiration",
         calendarEventType: "LICENSE",
       },
@@ -37,15 +41,16 @@ describe("getLicenseCalendarEvent", () => {
   });
 
   it("returns an array containing renewal event when within the month after expiration", () => {
+    const tenthOfMonthDate = dayjs({ year: currentDate.year(), month: currentDate.month(), day: 10 });
     expect(
       getLicenseCalendarEvents(
-        generateLicenseData({ expirationISO: currentDate.toISOString() }),
+        generateLicenseData({ expirationISO: tenthOfMonthDate.toISOString() }),
         currentDate.year(),
         currentDate.add(1, "month").month()
       )
     ).toEqual([
       {
-        dueDate: currentDate.add(30, "days").format(defaultDateFormat),
+        dueDate: tenthOfMonthDate.add(30, "days").format(defaultDateFormat),
         licenseEventSubtype: "renewal",
         calendarEventType: "LICENSE",
       },
@@ -73,15 +78,15 @@ describe("getLicenseCalendarEvent", () => {
   });
 
   it("returns an array containing only license events within the year", () => {
-    const expirationDate = currentDate.month(11);
+    const tenthOfDecemberDate = dayjs({ year: currentDate.year(), month: 11, day: 10 });
     expect(
       getLicenseCalendarEvents(
-        generateLicenseData({ expirationISO: expirationDate.toISOString() }),
-        expirationDate.year()
+        generateLicenseData({ expirationISO: tenthOfDecemberDate.toISOString() }),
+        currentDate.year()
       )
     ).toEqual([
       {
-        dueDate: expirationDate.format(defaultDateFormat),
+        dueDate: tenthOfDecemberDate.format(defaultDateFormat),
         licenseEventSubtype: "expiration",
         calendarEventType: "LICENSE",
       },
