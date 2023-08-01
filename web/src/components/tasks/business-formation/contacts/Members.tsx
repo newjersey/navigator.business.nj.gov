@@ -10,7 +10,6 @@ import { ReactElement, useContext } from "react";
 
 interface Props {
   hasError: boolean;
-  showErrorOnBottom?: boolean;
 }
 
 export const Members = (props: Props): ReactElement => {
@@ -68,7 +67,6 @@ export const Members = (props: Props): ReactElement => {
       defaultAddress={defaultAddress}
       legalType={state.formationFormData.legalType}
       hasError={props.hasError}
-      showErrorOnBottom={props.showErrorOnBottom}
     />
   );
 };

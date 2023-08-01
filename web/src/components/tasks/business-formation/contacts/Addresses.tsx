@@ -36,7 +36,6 @@ interface Props<T> {
   displayContent: DisplayContent;
   legalType: string;
   hasError: boolean;
-  showErrorOnBottom?: boolean;
 }
 
 export const Addresses = <T extends FormationMember | FormationIncorporator>(
@@ -186,13 +185,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
         )}
       </tbody>
       <tfoot>
-        {props.hasError && props.addressData.length === 0 ? (
-          <tr>
-            <td colSpan={3} className={"text-error-dark text-bold"}>
-              {props.displayContent.error}
-            </td>
-          </tr>
-        ) : props.hasError && props.showErrorOnBottom ? (
+        {props.hasError ? (
           <tr>
             <td colSpan={3} className={"text-error-dark text-bold"}>
               {props.displayContent.error}
@@ -288,13 +281,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
           )}
         </tbody>
         <tfoot>
-          {props.hasError && props.addressData.length === 0 ? (
-            <tr>
-              <td colSpan={3} className={"text-error-dark text-bold"}>
-                {props.displayContent.error}
-              </td>
-            </tr>
-          ) : props.hasError && props.showErrorOnBottom ? (
+          {props.hasError ? (
             <tr>
               <td colSpan={3} className={"text-error-dark text-bold"}>
                 {props.displayContent.error}
@@ -336,7 +323,6 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
           <WithErrorBar hasError={doesFieldHaveError(props.fieldName)} type="ALWAYS">
             {isTabletAndUp ? renderDesktopTable : renderMobileTable}
           </WithErrorBar>
-          {props.addressData.length > 0}
           {props.addressData.length <= 9 && (
             <UnStyledButton
               style="default"

@@ -112,7 +112,7 @@ export const NonprofitProvisions = (): ReactElement => {
     );
   };
 
-  const getBoardMembersRadio = () => {
+  const getBoardMembersRadio = (): ReactNode => {
     return getRadio({
       fieldName: "hasNonprofitBoardMembers",
       title: Config.formation.fields.hasNonprofitBoardMembers.body,
@@ -149,7 +149,7 @@ export const NonprofitProvisions = (): ReactElement => {
     });
   };
 
-  const getFormBylawsRadio = (fieldName: FormationFields) => {
+  const getFormBylawsRadio = (fieldName: FormationFields): ReactNode => {
     return getRadio({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       title: (Config.formation.fields as any)[fieldName].body,
