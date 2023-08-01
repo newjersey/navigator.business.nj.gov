@@ -292,15 +292,9 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
           }
         );
 
-        if (process.env.NODE_ENV === "test") {
-          const url = new URL(process.env.REDIRECT_URL || "");
-          const targetUrl = `${url.protocol}//${process.env.BASIC_AUTH_USERNAME}:${process.env.BASIC_AUTH_PASSWORD}@${url.hostname}${page}`;
-          console.log(targetUrl);
-          htmlUrlChecker.enqueue(targetUrl, {});
-        } else {
-          const url = new URL(process.env.REDIRECT_URL || "");
-          htmlUrlChecker.enqueue(`${url.origin}${page}`, {});
-        }
+        const url = new URL(process.env.REDIRECT_URL || "");
+        const targetUrl = `${url.protocol}//${process.env.BASIC_AUTH_USERNAME}:${process.env.BASIC_AUTH_PASSWORD}@${url.hostname}${page}`;
+        htmlUrlChecker.enqueue(targetUrl, {});
       });
 
       pagePromises.push(promise);
