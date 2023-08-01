@@ -9,6 +9,7 @@ import {
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
@@ -76,6 +77,59 @@ describe("<NonprofitProvisions />", () => {
     { radio: "nonprofitTrusteesMethodSpecified", terms: "nonprofitTrusteesMethodTerms" },
     { radio: "nonprofitAssetDistributionSpecified", terms: "nonprofitAssetDistributionTerms" },
   ];
+
+  describe("hasNonprofitBoardMembers", () => {
+    it("resets all other provisions questions and terms when No is selected", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitBoardMemberQualificationsSpecified: "IN_FORM",
+          nonprofitBoardMemberQualificationsTerms: "some terms here",
+          nonprofitBoardMemberRightsSpecified: "IN_BYLAWS",
+        }
+      );
+      page.chooseRadio(`hasNonprofitBoardMembers-false`);
+      await page.submitBusinessStep();
+      expect(currentBusiness().formationData.formationFormData.hasNonprofitBoardMembers).toEqual(false);
+      expect(
+        currentBusiness().formationData.formationFormData.nonprofitBoardMemberQualificationsSpecified
+      ).toBeUndefined();
+      expect(
+        currentBusiness().formationData.formationFormData.nonprofitBoardMemberRightsSpecified
+      ).toBeUndefined();
+      expect(
+        currentBusiness().formationData.formationFormData.nonprofitTrusteesMethodSpecified
+      ).toBeUndefined();
+      expect(
+        currentBusiness().formationData.formationFormData.nonprofitAssetDistributionSpecified
+      ).toBeUndefined();
+      expect(
+        currentBusiness().formationData.formationFormData.nonprofitBoardMemberQualificationsTerms
+      ).toEqual("");
+      expect(currentBusiness().formationData.formationFormData.nonprofitBoardMemberRightsTerms).toEqual("");
+      expect(currentBusiness().formationData.formationFormData.nonprofitTrusteesMethodTerms).toEqual("");
+      expect(currentBusiness().formationData.formationFormData.nonprofitAssetDistributionTerms).toEqual("");
+    });
+
+    it("removes field interaction and error text when resetting fields", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitBoardMemberRightsSpecified: "IN_BYLAWS",
+        }
+      );
+      page.chooseRadio("nonprofitBoardMemberRightsSpecified-IN_FORM");
+      expect(screen.queryByText(Config.formation.general.genericErrorText)).not.toBeInTheDocument();
+      page.fillText("Nonprofit board member rights terms", "");
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
+
+      page.chooseRadio("hasNonprofitBoardMembers-false");
+      page.chooseRadio("hasNonprofitBoardMembers-true");
+      expect(screen.queryByText(Config.formation.general.genericErrorText)).not.toBeInTheDocument();
+    });
+  });
 
   describe.each(provisions)("when has board members is true", (args) => {
     describe(`${args.radio}`, () => {
