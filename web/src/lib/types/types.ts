@@ -169,7 +169,7 @@ export type Funding = {
   county: County[];
   sector: string[];
   programPurpose: string | null | undefined;
-  agencyContact: string;
+  agencyContact: string | null | undefined;
   isNonprofitOnly: boolean | undefined | null;
 };
 

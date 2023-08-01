@@ -41,6 +41,7 @@ export const cmsCollections = [
   {
     label: "🟧 MISC",
     children: [
+      "Export Pdf Config",
       "Dropdown Mappings",
       "General Config",
       "Profile Page",
