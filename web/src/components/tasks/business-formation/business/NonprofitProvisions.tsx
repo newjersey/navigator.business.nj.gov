@@ -7,7 +7,7 @@ import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { FormationFields, FormationTextField, InFormInBylaws } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from "@mui/material";
-import { ReactElement, ReactNode, useContext } from "react";
+import { ChangeEvent, ReactElement, ReactNode, useContext } from "react";
 
 type InFormBylawsRadioType = Exclude<InFormInBylaws, undefined>;
 type TrueFalseRadioType = "true" | "false";
@@ -17,12 +17,10 @@ export const NonprofitProvisions = (): ReactElement => {
   const { Config } = useConfig();
   const { doesFieldHaveError } = useFormationErrors();
 
-  const isInForm = (hasBoardMembers: boolean | undefined, fieldName: InFormInBylaws): boolean => {
-    if (hasBoardMembers) {
-      return hasBoardMembers && fieldName === "IN_FORM";
-    } else {
-      return false;
-    }
+  const hasBoardMembers = state.formationFormData.hasNonprofitBoardMembers;
+
+  const isInForm = (fieldName: FormationFields): boolean => {
+    return hasBoardMembers === true && state.formationFormData[fieldName] === "IN_FORM";
   };
 
   const getTextField = (fieldName: FormationTextField): ReactNode => {
@@ -73,10 +71,12 @@ export const NonprofitProvisions = (): ReactElement => {
     fieldName,
     title,
     values,
+    onChange,
   }: {
     fieldName: FormationFields;
     title: string;
     values: InFormBylawsRadioType[] | TrueFalseRadioType[];
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   }): ReactNode => {
     const hasError = doesFieldHaveError(fieldName);
     return (
@@ -87,15 +87,7 @@ export const NonprofitProvisions = (): ReactElement => {
             aria-label={camelCaseToSentence(fieldName)}
             name={camelCaseToSentence(fieldName)}
             value={state.formationFormData[fieldName]?.toString() ?? ""}
-            onChange={(e): void => {
-              const value = e.target.value;
-              const valueToSave = value === "true" || value === "false" ? JSON.parse(value) : value;
-              setFormationFormData({
-                ...state.formationFormData,
-                [fieldName]: valueToSave,
-              });
-              setFieldsInteracted([fieldName]);
-            }}
+            onChange={onChange}
             row
           >
             {values.map((value) => (
@@ -120,6 +112,60 @@ export const NonprofitProvisions = (): ReactElement => {
     );
   };
 
+  const getBoardMembersRadio = () => {
+    return getRadio({
+      fieldName: "hasNonprofitBoardMembers",
+      title: Config.formation.fields.hasNonprofitBoardMembers.body,
+      values: ["true", "false"],
+      onChange: (e): void => {
+        const valueToSave = JSON.parse(e.target.value);
+        setFormationFormData({
+          ...state.formationFormData,
+          hasNonprofitBoardMembers: valueToSave,
+          nonprofitBoardMemberQualificationsSpecified: undefined,
+          nonprofitBoardMemberQualificationsTerms: "",
+          nonprofitBoardMemberRightsSpecified: undefined,
+          nonprofitBoardMemberRightsTerms: "",
+          nonprofitTrusteesMethodSpecified: undefined,
+          nonprofitTrusteesMethodTerms: "",
+          nonprofitAssetDistributionSpecified: undefined,
+          nonprofitAssetDistributionTerms: "",
+        });
+        setFieldsInteracted(["hasNonprofitBoardMembers"]);
+        setFieldsInteracted(
+          [
+            "nonprofitBoardMemberQualificationsSpecified",
+            "nonprofitBoardMemberQualificationsTerms",
+            "nonprofitBoardMemberRightsSpecified",
+            "nonprofitBoardMemberRightsTerms",
+            "nonprofitTrusteesMethodSpecified",
+            "nonprofitTrusteesMethodTerms",
+            "nonprofitAssetDistributionSpecified",
+            "nonprofitAssetDistributionTerms",
+          ],
+          { setToUninteracted: true }
+        );
+      },
+    });
+  };
+
+  const getFormBylawsRadio = (fieldName: FormationFields) => {
+    return getRadio({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      title: (Config.formation.fields as any)[fieldName].body,
+      fieldName: fieldName,
+      values: ["IN_BYLAWS", "IN_FORM"],
+      onChange: (e): void => {
+        const value = e.target.value;
+        setFormationFormData({
+          ...state.formationFormData,
+          [fieldName]: value,
+        });
+        setFieldsInteracted([fieldName]);
+      },
+    });
+  };
+
   return (
     <>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
@@ -128,55 +174,20 @@ export const NonprofitProvisions = (): ReactElement => {
         </div>
       </div>
 
-      {getRadio({
-        fieldName: "hasNonprofitBoardMembers",
-        title: Config.formation.fields.hasNonprofitBoardMembers.body,
-        values: ["true", "false"],
-      })}
+      {getBoardMembersRadio()}
 
-      {state.formationFormData.hasNonprofitBoardMembers &&
-        getRadio({
-          fieldName: "nonprofitBoardMemberQualificationsSpecified",
-          title: Config.formation.fields.nonprofitBoardMemberQualificationsSpecified.body,
-          values: ["IN_BYLAWS", "IN_FORM"],
-        })}
-      {isInForm(
-        state.formationFormData.hasNonprofitBoardMembers,
-        state.formationFormData.nonprofitBoardMemberQualificationsSpecified
-      ) && getTextField("nonprofitBoardMemberQualificationsTerms")}
+      {hasBoardMembers && getFormBylawsRadio("nonprofitBoardMemberQualificationsSpecified")}
+      {isInForm("nonprofitBoardMemberQualificationsSpecified") &&
+        getTextField("nonprofitBoardMemberQualificationsTerms")}
 
-      {state.formationFormData.hasNonprofitBoardMembers &&
-        getRadio({
-          fieldName: "nonprofitBoardMemberRightsSpecified",
-          title: Config.formation.fields.nonprofitBoardMemberRightsSpecified.body,
-          values: ["IN_BYLAWS", "IN_FORM"],
-        })}
-      {isInForm(
-        state.formationFormData.hasNonprofitBoardMembers,
-        state.formationFormData.nonprofitBoardMemberRightsSpecified
-      ) && getTextField("nonprofitBoardMemberRightsTerms")}
+      {hasBoardMembers && getFormBylawsRadio("nonprofitBoardMemberRightsSpecified")}
+      {isInForm("nonprofitBoardMemberRightsSpecified") && getTextField("nonprofitBoardMemberRightsTerms")}
 
-      {state.formationFormData.hasNonprofitBoardMembers &&
-        getRadio({
-          fieldName: "nonprofitTrusteesMethodSpecified",
-          title: Config.formation.fields.nonprofitTrusteesMethodSpecified.body,
-          values: ["IN_BYLAWS", "IN_FORM"],
-        })}
-      {isInForm(
-        state.formationFormData.hasNonprofitBoardMembers,
-        state.formationFormData.nonprofitTrusteesMethodSpecified
-      ) && getTextField("nonprofitTrusteesMethodTerms")}
+      {hasBoardMembers && getFormBylawsRadio("nonprofitTrusteesMethodSpecified")}
+      {isInForm("nonprofitTrusteesMethodSpecified") && getTextField("nonprofitTrusteesMethodTerms")}
 
-      {state.formationFormData.hasNonprofitBoardMembers &&
-        getRadio({
-          fieldName: "nonprofitAssetDistributionSpecified",
-          title: Config.formation.fields.nonprofitAssetDistributionSpecified.body,
-          values: ["IN_BYLAWS", "IN_FORM"],
-        })}
-      {isInForm(
-        state.formationFormData.hasNonprofitBoardMembers,
-        state.formationFormData.nonprofitAssetDistributionSpecified
-      ) && getTextField("nonprofitAssetDistributionTerms")}
+      {hasBoardMembers && getFormBylawsRadio("nonprofitAssetDistributionSpecified")}
+      {isInForm("nonprofitAssetDistributionSpecified") && getTextField("nonprofitAssetDistributionTerms")}
     </>
   );
 };
