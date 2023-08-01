@@ -45,6 +45,7 @@ export const ReviewStep = (): ReactElement => {
           {isNonProfit && <ReviewIsVeteranNonprofit value={state.formationFormData.isVeteranNonprofit} />}
           {isForeignCorporation(state.formationFormData.legalType) && (
             <>
+              <hr className="margin-y-205" />
               <ReviewWillPracticeLaw willPracticeLaw={state.formationFormData.willPracticeLaw} />
               <ReviewForeignCertificate foreignGoodStandingFile={state.foreignGoodStandingFile} />
             </>
