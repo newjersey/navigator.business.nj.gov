@@ -561,6 +561,7 @@ collections:
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
                       - { label: "Body", name: "body", widget: "markdown" }
+                      - { label: "Review Label", name: "reviewLabel", widget: "string" }
                       - { label: "Yes Review Text", name: "yesReviewText", widget: "markdown" }
                       - { label: "No Review Text", name: "noReviewText", widget: "markdown" }
                   - label: Nonprofit Provisions - Board Member Qualifications
@@ -2458,24 +2459,6 @@ collections:
     fields:
       - { name: "" }
 
-  - name: "export-pdf-config"
-    label: "Export Pdf Config"
-    delete: false
-    create: false
-    files:
-      - label: "Export Pdf Config"
-        name: "export-pdf"
-        file: "content/src/fieldConfig/export-pdf.json"
-        editor:
-          preview: true
-        fields:
-          - label: "Tax Access Modal"
-            name: taxAccess
-            collapsed: false
-            widget: object
-            fields:
-              - { label: Download Button Text, name: downloadButtonText, widget: text }
-
   - name: "tax-access-modal-config"
     label: "Tax Access Modal Config"
     delete: false
@@ -2819,6 +2802,24 @@ collections:
     folder: "content/src"
     fields:
       - { name: "" }
+
+  - name: "export-pdf-config"
+    label: "Export Pdf Config"
+    delete: false
+    create: false
+    files:
+      - label: "Export Pdf Config"
+        name: "export-pdf"
+        file: "content/src/fieldConfig/export-pdf.json"
+        editor:
+          preview: false
+        fields:
+          - label: "Export PDF"
+            name: exportPdf
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Download Button Text, name: downloadButtonText, widget: string }
 
   - name: "mappings"
     label: "Dropdown Mappings"

@@ -169,7 +169,7 @@ export const NonprofitProvisions = (): ReactElement => {
   return (
     <>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
-        <div role="heading" aria-level={2} className="h3-styling margin-bottom-0">
+        <div role="heading" aria-level={2} className="h3-styling margin-0-override">
           {Config.formation.nonprofitProvisions.label}
         </div>
       </div>

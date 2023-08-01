@@ -45,7 +45,10 @@ export const MainBusinessAddressNj = (): ReactElement => {
         data-testid={"main-business-address-container-header"}
         className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2"
       >
-        <h3 className="margin-bottom-0">{Config.formation.sections.addressHeader} </h3>
+        <div role="heading" aria-level={2} className="h3-styling margin-0-override">
+          {Config.formation.sections.addressHeader}{" "}
+          <span className="text-normal font-body-lg">{Config.formation.general.optionalLabel}</span>
+        </div>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
             <div data-testid={"add-address-button"}>

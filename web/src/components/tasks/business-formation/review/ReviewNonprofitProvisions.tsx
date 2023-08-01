@@ -71,7 +71,7 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
             <Content>{Config.formation.fields.hasNonprofitBoardMembers.noReviewText}</Content>
           )}
           {hasNonprofitBoardMembers === undefined && (
-            <ReviewLineItem label={Config.formation.fields.hasNonprofitBoardMembers.label} value="" />
+            <ReviewLineItem label={Config.formation.fields.hasNonprofitBoardMembers.reviewLabel} value="" />
           )}
         </div>
 

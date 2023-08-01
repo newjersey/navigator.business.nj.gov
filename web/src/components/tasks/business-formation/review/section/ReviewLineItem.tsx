@@ -21,7 +21,7 @@ export const ReviewLineItem = (props: Props): ReactElement => {
       className={`${isTabletAndUp ? "grid-row" : "display-block"} ${props.marginOverride || "margin-top-1"}`}
       data-testid={props.dataTestId}
     >
-      <div className="text-bold grid-col flex-4">
+      <div className="text-bold grid-col flex-5">
         {props.labelContextualInfo ? (
           <ContextualInfoButton text={`${props.label}:`} id={props.labelContextualInfo} />
         ) : (
@@ -29,11 +29,11 @@ export const ReviewLineItem = (props: Props): ReactElement => {
         )}
       </div>
       {props.value ? (
-        <Content className={"grid-col flex-8 text-italic"}>
+        <Content className={"grid-col flex-7"}>
           {props.formatter ? props.formatter(props.value) : props.value}
         </Content>
       ) : (
-        <div className={"grid-col flex-8"}>
+        <div className={"grid-col flex-7"}>
           <ReviewNotEntered />
         </div>
       )}
