@@ -1,11 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { displayContent } from "@/components/tasks/business-formation/contacts/testHelpers";
 import { getMergedConfig } from "@/contexts/configContext";
+import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
+import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
@@ -64,211 +68,120 @@ describe("<NonprofitProvisions />", () => {
     return page;
   };
 
-  describe("has board members", () => {
-    describe("nonprofitBoardMemberQualificationsSpecified", () => {
-      it("shows text field when IN_FORM is selected", async () => {
-        const page = await getPageHelper(
-          { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: true, nonprofitBoardMemberQualificationsSpecified: undefined }
-        );
-        expect(
-          screen.queryByLabelText("Nonprofit board member qualifications terms")
-        ).not.toBeInTheDocument();
-        page.chooseRadio("nonprofitBoardMemberQualificationsSpecified-IN_FORM");
-        expect(screen.getByLabelText("Nonprofit board member qualifications terms")).toBeInTheDocument();
-      });
+  const provisions = [
+    {
+      radio: "nonprofitBoardMemberQualificationsSpecified",
+      terms: "nonprofitBoardMemberQualificationsTerms",
+    },
+    { radio: "nonprofitBoardMemberRightsSpecified", terms: "nonprofitBoardMemberRightsTerms" },
+    { radio: "nonprofitTrusteesMethodSpecified", terms: "nonprofitTrusteesMethodTerms" },
+    { radio: "nonprofitAssetDistributionSpecified", terms: "nonprofitAssetDistributionTerms" },
+  ];
 
-      it("does not show text field when IN_BYLAWS is selected", async () => {
-        const page = await getPageHelper(
-          { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: true, nonprofitBoardMemberQualificationsSpecified: undefined }
-        );
-        expect(
-          screen.queryByLabelText("Nonprofit board member qualifications terms")
-        ).not.toBeInTheDocument();
-        page.chooseRadio("nonprofitBoardMemberQualificationsSpecified-IN_BYLAWS");
-        expect(
-          screen.queryByLabelText("Nonprofit board member qualifications terms")
-        ).not.toBeInTheDocument();
-      });
+  describe("hasNonprofitBoardMembers", () => {
+    it("resets all other provisions questions and terms when No is selected", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitBoardMemberQualificationsSpecified: "IN_FORM",
+          nonprofitBoardMemberQualificationsTerms: "some terms here",
+          nonprofitBoardMemberRightsSpecified: "IN_BYLAWS",
+        }
+      );
+      page.chooseRadio(`hasNonprofitBoardMembers-false`);
+      await page.submitBusinessStep();
+      expect(currentBusiness().formationData.formationFormData.hasNonprofitBoardMembers).toEqual(false);
+      expect(
+        currentBusiness().formationData.formationFormData.nonprofitBoardMemberQualificationsSpecified
+      ).toBeUndefined();
+      expect(
+        currentBusiness().formationData.formationFormData.nonprofitBoardMemberRightsSpecified
+      ).toBeUndefined();
+      expect(
+        currentBusiness().formationData.formationFormData.nonprofitTrusteesMethodSpecified
+      ).toBeUndefined();
+      expect(
+        currentBusiness().formationData.formationFormData.nonprofitAssetDistributionSpecified
+      ).toBeUndefined();
+      expect(
+        currentBusiness().formationData.formationFormData.nonprofitBoardMemberQualificationsTerms
+      ).toEqual("");
+      expect(currentBusiness().formationData.formationFormData.nonprofitBoardMemberRightsTerms).toEqual("");
+      expect(currentBusiness().formationData.formationFormData.nonprofitTrusteesMethodTerms).toEqual("");
+      expect(currentBusiness().formationData.formationFormData.nonprofitAssetDistributionTerms).toEqual("");
     });
 
-    describe("nonprofitBoardMemberRightsSpecified", () => {
-      it("shows text field when IN_FORM is selected", async () => {
-        const page = await getPageHelper(
-          { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: true, nonprofitBoardMemberRightsSpecified: undefined }
-        );
-        expect(screen.queryByLabelText("Nonprofit board member rights terms")).not.toBeInTheDocument();
-        page.chooseRadio("nonprofitBoardMemberRightsSpecified-IN_FORM");
-        expect(screen.getByLabelText("Nonprofit board member rights terms")).toBeInTheDocument();
-      });
+    it("removes field interaction and error text when resetting fields", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitBoardMemberRightsSpecified: "IN_BYLAWS",
+        }
+      );
+      page.chooseRadio("nonprofitBoardMemberRightsSpecified-IN_FORM");
+      expect(screen.queryByText(Config.formation.general.genericErrorText)).not.toBeInTheDocument();
+      page.fillText("Nonprofit board member rights terms", "");
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
 
-      it("does not show text field when IN_BYLAWS is selected", async () => {
-        const page = await getPageHelper(
-          { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: true, nonprofitBoardMemberRightsSpecified: undefined }
-        );
-        expect(screen.queryByLabelText("Nonprofit board member rights terms")).not.toBeInTheDocument();
-        page.chooseRadio("nonprofitBoardMemberRightsSpecified-IN_BYLAWS");
-        expect(screen.queryByLabelText("Nonprofit board member rights terms")).not.toBeInTheDocument();
-      });
+      page.chooseRadio("hasNonprofitBoardMembers-false");
+      page.chooseRadio("hasNonprofitBoardMembers-true");
+      expect(screen.queryByText(Config.formation.general.genericErrorText)).not.toBeInTheDocument();
     });
+  });
 
-    describe("nonprofitTrusteesMethodSpecified", () => {
+  describe.each(provisions)("when has board members is true", (args) => {
+    describe(`${args.radio}`, () => {
       it("shows text field when IN_FORM is selected", async () => {
         const page = await getPageHelper(
           { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: true, nonprofitTrusteesMethodSpecified: undefined }
+          { hasNonprofitBoardMembers: true, [args.radio]: undefined }
         );
-        expect(screen.queryByLabelText("Nonprofit trustees method terms")).not.toBeInTheDocument();
-        page.chooseRadio("nonprofitTrusteesMethodSpecified-IN_FORM");
-        expect(screen.getByLabelText("Nonprofit trustees method terms")).toBeInTheDocument();
+        const termsLabel = camelCaseToSentence(args.terms);
+        expect(screen.queryByLabelText(termsLabel)).not.toBeInTheDocument();
+        page.chooseRadio(`${args.radio}-IN_FORM`);
+        expect(screen.getByLabelText(termsLabel)).toBeInTheDocument();
       });
 
       it("does not show text field when IN_BYLAWS is selected", async () => {
         const page = await getPageHelper(
           { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: true, nonprofitTrusteesMethodSpecified: undefined }
+          { hasNonprofitBoardMembers: true, [args.radio]: undefined }
         );
-        expect(screen.queryByLabelText("Nonprofit trustees method terms")).not.toBeInTheDocument();
-        page.chooseRadio("nonprofitTrusteesMethodSpecified-IN_BYLAWS");
-        expect(screen.queryByLabelText("Nonprofit trustees method terms")).not.toBeInTheDocument();
-      });
-    });
-
-    describe("nonprofitAssetDistributionSpecified", () => {
-      it("shows text field when IN_FORM is selected", async () => {
-        const page = await getPageHelper(
-          { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: true, nonprofitAssetDistributionSpecified: undefined }
-        );
-        expect(screen.queryByLabelText("Nonprofit asset distribution terms")).not.toBeInTheDocument();
-        page.chooseRadio("nonprofitAssetDistributionSpecified-IN_FORM");
-        expect(screen.getByLabelText("Nonprofit asset distribution terms")).toBeInTheDocument();
-      });
-
-      it("does not show text field when IN_BYLAWS is selected", async () => {
-        const page = await getPageHelper(
-          { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: true, nonprofitAssetDistributionSpecified: undefined }
-        );
-        expect(screen.queryByLabelText("Nonprofit asset distribution terms")).not.toBeInTheDocument();
-        page.chooseRadio("nonprofitAssetDistributionSpecified-IN_BYLAWS");
-        expect(screen.queryByLabelText("Nonprofit asset distribution terms")).not.toBeInTheDocument();
+        const termsLabel = camelCaseToSentence(args.terms);
+        expect(screen.queryByLabelText(termsLabel)).not.toBeInTheDocument();
+        page.chooseRadio(`${args.radio}-IN_BYLAWS`);
+        expect(screen.queryByLabelText(termsLabel)).not.toBeInTheDocument();
       });
     });
   });
 
-  describe("does not have board members", () => {
-    describe("nonprofitBoardMemberQualificationsSpecified", () => {
-      it("does not show nonprofitBoardMemberQualificationsSpecified when board members is undefined", async () => {
-        await getPageHelper(
-          { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: false, nonprofitBoardMemberQualificationsSpecified: undefined }
-        );
-        expect(
-          screen.queryByLabelText("Nonprofit board member qualifications terms")
-        ).not.toBeInTheDocument();
-        expect(
-          screen.queryByText(Config.formation.fields.nonprofitBoardMemberQualificationsSpecified.body)
-        ).not.toBeInTheDocument();
-      });
+  describe.each(provisions)("when has no board members", (args) => {
+    it(`does not show ${args.radio} when board members is false`, async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        { hasNonprofitBoardMembers: false }
+      );
+      const termsLabel = camelCaseToSentence(args.terms);
+      expect(screen.queryByLabelText(termsLabel)).not.toBeInTheDocument();
+      expect(screen.queryByText((Config.formation.fields as any)[args.radio].body)).not.toBeInTheDocument();
+
+      page.chooseRadio(`hasNonprofitBoardMembers-true`);
+      expect(screen.getByText((Config.formation.fields as any)[args.radio].body)).toBeInTheDocument();
     });
 
-    describe("nonprofitBoardMemberRightsSpecified", () => {
-      it("does not show nonprofitBoardMemberRightsSpecified when there are no board members", async () => {
-        await getPageHelper(
-          { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: false, nonprofitBoardMemberRightsSpecified: undefined }
-        );
-        expect(screen.queryByLabelText("Nonprofit board member rights specified")).not.toBeInTheDocument();
-        expect(
-          screen.queryByText(Config.formation.fields.nonprofitBoardMemberRightsSpecified.body)
-        ).not.toBeInTheDocument();
-      });
-    });
+    it(`does not show ${args.radio} when board members is undefined`, async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        { hasNonprofitBoardMembers: undefined }
+      );
+      const termsLabel = camelCaseToSentence(args.terms);
+      expect(screen.queryByLabelText(termsLabel)).not.toBeInTheDocument();
+      expect(screen.queryByText((Config.formation.fields as any)[args.radio].body)).not.toBeInTheDocument();
 
-    describe("nonprofitTrusteesMethodSpecified", () => {
-      it("does not show nonprofitTrusteesMethodSpecified when there are no board members", async () => {
-        await getPageHelper(
-          { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: false, nonprofitTrusteesMethodSpecified: undefined }
-        );
-        expect(screen.queryByLabelText("Nonprofit trustees methods specified")).not.toBeInTheDocument();
-        expect(
-          screen.queryByText(Config.formation.fields.nonprofitTrusteesMethodSpecified.body)
-        ).not.toBeInTheDocument();
-      });
-    });
-
-    describe("nonprofitAssetDistributionSpecified", () => {
-      it("does not show nonprofitAssetDistributionSpecified when there are no board members", async () => {
-        await getPageHelper(
-          { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: false, nonprofitAssetDistributionSpecified: undefined }
-        );
-        expect(screen.queryByLabelText("Nonprofit asset distribution specified")).not.toBeInTheDocument();
-        expect(
-          screen.queryByText(Config.formation.fields.nonprofitAssetDistributionSpecified.body)
-        ).not.toBeInTheDocument();
-      });
-    });
-  });
-
-  describe("when board members is undefined", () => {
-    describe("nonprofitBoardMemberQualificationsSpecified", () => {
-      it("does not show nonprofitBoardMemberQualificationsSpecified when board members is undefined", async () => {
-        await getPageHelper(
-          { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: undefined, nonprofitBoardMemberQualificationsSpecified: undefined }
-        );
-        expect(
-          screen.queryByLabelText("Nonprofit board member qualifications terms")
-        ).not.toBeInTheDocument();
-        expect(
-          screen.queryByText(Config.formation.fields.nonprofitBoardMemberQualificationsSpecified.body)
-        ).not.toBeInTheDocument();
-      });
-    });
-
-    describe("nonprofitBoardMemberRightsSpecified", () => {
-      it("does not show nonprofitBoardMemberRightsSpecified when board members is undefined", async () => {
-        await getPageHelper(
-          { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: undefined, nonprofitBoardMemberRightsSpecified: undefined }
-        );
-        expect(screen.queryByLabelText("Nonprofit board member rights specified")).not.toBeInTheDocument();
-        expect(
-          screen.queryByText(Config.formation.fields.nonprofitBoardMemberRightsSpecified.body)
-        ).not.toBeInTheDocument();
-      });
-    });
-
-    describe("nonprofitTrusteesMethodSpecified", () => {
-      it("does not show nonprofitTrusteesMethodSpecified when board members is undefined", async () => {
-        await getPageHelper(
-          { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: undefined, nonprofitTrusteesMethodSpecified: undefined }
-        );
-        expect(screen.queryByLabelText("Nonprofit trustees methods specified")).not.toBeInTheDocument();
-        expect(
-          screen.queryByText(Config.formation.fields.nonprofitTrusteesMethodSpecified.body)
-        ).not.toBeInTheDocument();
-      });
-    });
-
-    describe("nonprofitAssetDistributionSpecified", () => {
-      it("does not show nonprofitAssetDistributionSpecified when board members is undefined", async () => {
-        await getPageHelper(
-          { legalStructureId: "nonprofit" },
-          { hasNonprofitBoardMembers: undefined, nonprofitAssetDistributionSpecified: undefined }
-        );
-        expect(screen.queryByLabelText("Nonprofit asset distribution specified")).not.toBeInTheDocument();
-        expect(
-          screen.queryByText(Config.formation.fields.nonprofitAssetDistributionSpecified.body)
-        ).not.toBeInTheDocument();
-      });
+      page.chooseRadio(`hasNonprofitBoardMembers-true`);
+      expect(screen.getByText((Config.formation.fields as any)[args.radio].body)).toBeInTheDocument();
     });
   });
 });
