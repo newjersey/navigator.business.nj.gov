@@ -26,7 +26,7 @@ export const BusinessStep = (): ReactElement => {
     if (state.formationFormData.legalType !== "limited-partnership") return null;
     return (
       <>
-        <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
+        <hr className="margin-y-2" aria-hidden={true} />
         <BusinessFormationTextBox
           maxChars={400}
           fieldName={"combinedInvestment"}
@@ -58,7 +58,7 @@ export const BusinessStep = (): ReactElement => {
 
   const businessPurposeSection = (): ReactElement => (
     <>
-      <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} key={"business-line-2"} />
+      <hr className="margin-y-2" aria-hidden={true} key={"business-line-2"} />
       <BusinessFormationTextBox
         maxChars={300}
         fieldName={"businessPurpose"}
@@ -68,7 +68,7 @@ export const BusinessStep = (): ReactElement => {
         title={Config.formation.fields.businessPurpose.label}
         contentMd={Config.formation.fields.businessPurpose.body}
       />
-      <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} key={"business-line-3"} />
+      <hr className="margin-y-2" aria-hidden={true} key={"business-line-3"} />
     </>
   );
 

@@ -340,6 +340,7 @@
       "hasNonprofitBoardMembers": {
         "label": "Provisions - Board Members",
         "body": "Will your Non-Profit have `board members|board-member`?",
+        "reviewLabel": "Board Members",
         "yesReviewText": "**Yes**, my Non-Profit will have board members.",
         "noReviewText": "**No**, my Non-Profit will not have board members."
       },
@@ -359,7 +360,7 @@
       },
       "nonprofitTrusteesMethodSpecified": {
         "label": "Provisions - Trustees",
-        "body": "The method for choosing Trustees are specified"
+        "body": "The method for choosing trustees are specified"
       },
       "nonprofitTrusteesMethodTerms": {
         "label": "Provisions - Trustees"

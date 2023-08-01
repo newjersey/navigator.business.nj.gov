@@ -561,6 +561,7 @@ collections:
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
                       - { label: "Body", name: "body", widget: "markdown" }
+                      - { label: "Review Label", name: "reviewLabel", widget: "string" }
                       - { label: "Yes Review Text", name: "yesReviewText", widget: "markdown" }
                       - { label: "No Review Text", name: "noReviewText", widget: "markdown" }
                   - label: Nonprofit Provisions - Board Member Qualifications

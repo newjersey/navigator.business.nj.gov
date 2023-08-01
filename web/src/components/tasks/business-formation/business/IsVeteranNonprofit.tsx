@@ -16,7 +16,7 @@ export const IsVeteranNonprofit = (): ReactElement => {
 
   return (
     <WithErrorBar hasError={hasError} type="ALWAYS" className="margin-top-2">
-      <FormControl variant="outlined" fullWidth className="padding-bottom-2">
+      <FormControl variant="outlined" fullWidth>
         <label className="margin-right-3 text-bold">
           <Content>{Config.formation.fields.isVeteranNonprofit.description}</Content>
         </label>
