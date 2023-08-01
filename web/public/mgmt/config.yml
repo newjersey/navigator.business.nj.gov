@@ -1603,6 +1603,16 @@ collections:
             name: isCannabisLicenseTypeApplicable
             widget: boolean
             required: false
+      - label: Non Essential Questions
+        name: nonEssentialQuestionsIds
+        widget: relation
+        multiple: true
+        required: false
+        default: []
+        collection: "nonEssentialQuestionsCollection"
+        search_fields: ["nonEssentialQuestionsArray.*.id"]
+        value_field: "nonEssentialQuestionsArray.*.id"
+        display_fields: ["nonEssentialQuestionsArray.*.id"]
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list
@@ -1664,12 +1674,19 @@ collections:
   - name: addons
     label: "Roadmaps - Add-ons"
     folder: "content/src/roadmaps/add-ons"
+    slug: "{{id}}"
+    identifier_field: "{{id}}"
     extension: "json"
-    identifier_field: "{{filename}}"
+    create: true
+    delete: true
+    format: "json"
     summary: "{{filename}}"
     editor:
       preview: false
     fields:
+      - label: Filename
+        name: id
+        widget: string
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list
@@ -1728,6 +1745,36 @@ collections:
             value_field: "{{filename}}"
             display_fields: ["{{filename}}"]
             options_length: 500
+  - name: "nonEssentialQuestionsCollection"
+    label: "Roadmaps - Non Essential Questions"
+    editor:
+      preview: false
+    files:
+      - label: "Non Essential Questions"
+        name: "nonEssentialQuestionsArray"
+        file: "content/src/roadmaps/nonEssentialQuestions.json"
+        fields:
+          - label: Non Essential Questions
+            name: nonEssentialQuestionsArray
+            widget: list
+            create: true
+            summary: "{{id}}"
+            fields:
+              - label: ID
+                name: id
+                widget: string
+              - label: Question
+                name: questionText
+                widget: string
+              - label: Add On
+                name: addOn
+                widget: "relation"
+                collection: "addons"
+                search_fields: ["{{filename}}"]
+                value_field: "{{filename}}"
+                display_fields: ["{{filename}}"]
+                options_length: 500
+
   - name: "settings"
     label: "Roadmaps - Settings"
     editor:
@@ -2900,7 +2947,6 @@ collections:
               - label: Id
                 name: id
                 widget: hidden
-
   - name: "config"
     label: "General Config"
     editor:
@@ -4339,6 +4385,19 @@ collections:
                         widget: object
                         fields:
                           - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Non Essential Questions
+                    name: nonEssentialQuestions
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - { label: "Radio Button - Yes", name: "radioButtonTrueText", widget: "string" }
+                          - { label: "Radio Button - No", name: "radioButtonFalseText", widget: "string" }
                   - label: Responsible Owner Name
                     name: responsibleOwnerName
                     collapsed: true

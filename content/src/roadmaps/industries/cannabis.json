@@ -2,6 +2,7 @@
   "naicsCodes": "111419, 111998, 424590, 459991",
   "defaultSectorId": "cannabis",
   "canHavePermanentLocation": false,
+  "nonEssentialQuestionsIds": [],
   "roadmapSteps": [
     {
       "step": 1,

@@ -2,6 +2,7 @@
   "naicsCodes": "532111",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
+  "nonEssentialQuestionsIds": [],
   "roadmapSteps": [
     {
       "step": 1,
