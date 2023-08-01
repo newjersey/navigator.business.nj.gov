@@ -5,6 +5,7 @@
     "canBeReseller": true
   },
   "canHavePermanentLocation": false,
+  "nonEssentialQuestionsIds": [],
   "roadmapSteps": [
     {
       "step": 1,

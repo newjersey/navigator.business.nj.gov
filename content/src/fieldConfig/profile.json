@@ -41,6 +41,13 @@
           }
         }
       },
+      "nonEssentialQuestions": {
+        "default": {
+          "header": "Based, on your industry, answer additional questions to personalize your experience.",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No"
+        }
+      },
       "certifiedInteriorDesigner": {
         "default": {
           "header": "Certified Interior Designer",

@@ -2,6 +2,7 @@
   "naicsCodes": "621399",
   "defaultSectorId": "health-care-and-social-assistance",
   "canHavePermanentLocation": true,
+  "nonEssentialQuestionsIds": [],
   "roadmapSteps": [
     {
       "step": 1,

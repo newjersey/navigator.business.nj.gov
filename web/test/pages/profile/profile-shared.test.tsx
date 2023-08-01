@@ -34,7 +34,9 @@ import {
   generateBusinessForProfile,
   renderPage,
   selectByText,
+  selectByValue,
 } from "@/test/pages/profile/profile-helpers";
+import { Business, BusinessPersona, generateBusiness, ProfileData } from "@businessnjgovnavigator/shared";
 import { render, screen, waitFor } from "@testing-library/react";
 
 const Config = getMergedConfig();
@@ -53,6 +55,34 @@ function setupMockAnalytics(): typeof analytics {
     },
   };
 }
+
+jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
+  industries: [
+    ...jest.requireActual("../../../../shared/lib/content/lib/industry.json").industries,
+    {
+      id: "test-industry-with-non-essential-questions",
+      name: "test-industry-with-non-essential-questions",
+      description: "",
+      canHavePermanentLocation: true,
+      roadmapSteps: [],
+      nonEssentialQuestionsIds: ["test-question-1", "test-question-2"],
+      naicsCodes: "",
+      isEnabled: true,
+      industryOnboardingQuestions: {},
+    },
+    {
+      id: "test-industry-with-no-non-essential-questions",
+      name: "test-industry-with-no-non-essential-questions",
+      description: "",
+      canHavePermanentLocation: true,
+      roadmapSteps: [],
+      nonEssentialQuestionsIds: [],
+      naicsCodes: "",
+      isEnabled: true,
+      industryOnboardingQuestions: {},
+    },
+  ],
+}));
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
@@ -270,5 +300,39 @@ describe("profile - shared", () => {
 
       expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
     });
+  });
+
+  describe("non essential questions", () => {
+    const generateBusinessForNonEssentialQuestionTest = (profileData: Partial<ProfileData>): Business => {
+      return generateBusiness({
+        profileData: generateProfileData({
+          ...profileData,
+          foreignBusinessType: profileData.businessPersona === "FOREIGN" ? "NEXUS" : undefined,
+          nexusLocationInNewJersey: profileData.businessPersona === "FOREIGN" ? false : undefined,
+          foreignBusinessTypeIds:
+            profileData.businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : undefined,
+        }),
+      });
+    };
+
+    it.each(["STARTING", "FOREIGN"])(
+      "resets non essential questions if industry is changed when %s",
+      async (businessPersona: string) => {
+        const business = generateBusinessForNonEssentialQuestionTest({
+          industryId: "test-industry-with-non-essential-questions",
+          businessPersona: businessPersona as BusinessPersona,
+          nonEssentialRadioAnswers: {
+            "test-question-1": true,
+            "test-question-2": true,
+          },
+        });
+        renderPage({ business, setRegistrationModalIsVisible });
+        selectByValue("Industry", "test-industry-with-no-non-essential-questions");
+        clickSave();
+        await waitFor(() => {
+          expect(currentBusiness().profileData.nonEssentialRadioAnswers).toStrictEqual({});
+        });
+      }
+    );
   });
 });

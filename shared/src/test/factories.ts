@@ -254,6 +254,7 @@ export const generateProfileData = (
     needsNexusDbaName: false,
     operatingPhase: "NEEDS_TO_FORM",
     isNonprofitOnboardingRadio: legalStructure === "nonprofit",
+    nonEssentialRadioAnswers: {},
     ...overrides,
   };
 };

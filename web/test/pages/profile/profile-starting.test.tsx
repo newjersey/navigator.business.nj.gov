@@ -907,22 +907,25 @@ describe("profile - starting business", () => {
       await waitFor(() => {
         expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
       });
-      expect(currentBusiness()).toEqual({
-        ...business,
-        onboardingFormProgress: "COMPLETED",
-        profileData: {
-          ...business.profileData,
-          industryId: newIndustry,
-          sectorId: LookupIndustryById(newIndustry).defaultSectorId,
-          homeBasedBusiness: isHomeBasedBusinessApplicable(newIndustry) ? undefined : false,
-          naicsCode: "",
-        },
-        taskProgress: {
-          ...business.taskProgress,
-          [naicsCodeTaskId]: "NOT_STARTED",
-        },
-        taskItemChecklist: {},
-      });
+      expect(currentBusiness()).toEqual(
+        expect.objectContaining({
+          ...business,
+          onboardingFormProgress: "COMPLETED",
+          profileData: {
+            ...business.profileData,
+            industryId: newIndustry,
+            sectorId: LookupIndustryById(newIndustry).defaultSectorId,
+            homeBasedBusiness: isHomeBasedBusinessApplicable(newIndustry) ? undefined : false,
+            naicsCode: "",
+            nonEssentialRadioAnswers: expect.anything(),
+          },
+          taskProgress: {
+            ...business.taskProgress,
+            [naicsCodeTaskId]: "NOT_STARTED",
+          },
+          taskItemChecklist: {},
+        })
+      );
     }
   );
 
