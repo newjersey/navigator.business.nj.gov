@@ -2,7 +2,7 @@
 notesMd: Drafted in
   https://docs.google.com/document/d/1Wz_sMYY0t3ycS4rmiqeWrNafLwdBStGE_R_ivT3c57w/edit?pli=1#heading=h.k5ckr6mdkitr
 urlSlug: hvac-contractor
-previewType: renewal
+previewType: expiration
 callToActionLink: https://newjersey.mylicense.com/eGov/PersonSearchResults.aspx
 callToActionText: Renew My License
 ---
