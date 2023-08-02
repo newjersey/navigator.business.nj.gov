@@ -24,7 +24,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { FormationStepNames, StepperStep } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
+import { getConfigFieldByLegalStructure, scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
 import { Business, FormationFormData, getCurrentBusiness } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
@@ -45,6 +45,8 @@ export const BusinessFormationPaginator = (): ReactElement => {
   const errorAlertRef = useRef<HTMLDivElement>(null);
   const isMounted = useRef(false);
   const isDesktop = useMediaQuery(MediaQueries.desktopAndUp);
+
+  type ConfigFormationFields = keyof typeof Config.formation.fields;
 
   useEffect(() => {
     if (isMounted.current) {
@@ -456,8 +458,14 @@ export const BusinessFormationPaginator = (): ReactElement => {
           <div>{Config.formation.errorBanner.errorOnStep}</div>
           <ul>
             {dedupedFieldErrors.map((fieldError) => {
+              let configFieldName = fieldError.field as ConfigFormationFields;
+
+              if (fieldError.field === "members") {
+                configFieldName = getConfigFieldByLegalStructure(state.formationFormData.legalType);
+              }
+
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              const label = (Config.formation.fields as any)[fieldError.field].label;
+              const label = (Config.formation.fields as any)[configFieldName].label;
               return (
                 <li key={label}>
                   {label}

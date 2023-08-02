@@ -218,3 +218,17 @@ export const mapMunicipalityDetailToMunicipality = (municipalityDetail: Municipa
 export const isForeignCorporation = (legalStructure: FormationLegalType): boolean => {
   return ["foreign-c-corporation", "foreign-s-corporation"].includes(legalStructure);
 };
+
+export const getConfigFieldByLegalStructure = (
+  legalType: FormationLegalType
+): "directors" | "trustees" | "members" => {
+  switch (legalType) {
+    case "c-corporation":
+    case "s-corporation":
+      return "directors";
+    case "nonprofit":
+      return "trustees";
+    default:
+      return "members";
+  }
+};

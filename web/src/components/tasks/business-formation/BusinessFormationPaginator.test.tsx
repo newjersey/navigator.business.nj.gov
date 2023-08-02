@@ -29,6 +29,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  corpLegalStructures,
   DateObject,
   defaultDateFormat,
   FormationFormData,
@@ -560,6 +561,48 @@ describe("<BusinessFormationPaginator />", () => {
         expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
         expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("COMPLETE-ACTIVE");
       });
+
+      it("shows the Trustees label when members' field has an error and legalType is nonprofit", async () => {
+        const nonprofit = generateBusiness({
+          formationData: generateFormationData({
+            formationFormData: generateFormationFormData({
+              members: undefined,
+            }),
+          }),
+          profileData: generateProfileData({ legalStructureId: "nonprofit" }),
+        });
+        const page = preparePage({ business: nonprofit, displayContent });
+
+        await page.stepperClickToReviewStep();
+        await page.submitReviewStep();
+
+        await page.stepperClickToContactsStep();
+        expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.errorBanner.errorOnStep);
+        expect(screen.queryByRole("alert")).not.toHaveTextContent(Config.formation.fields.members.label);
+        expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.trustees.label);
+      });
+
+      it.each(corpLegalStructures)(
+        "shows Board of Directors label when members' field has an error and legalType is %s",
+        async (corpLegalStructure) => {
+          const corporation = generateBusiness({
+            formationData: generateFormationData({
+              formationFormData: generateFormationFormData({ members: undefined }),
+            }),
+            profileData: generateProfileData({ legalStructureId: corpLegalStructure }),
+          });
+          const page = preparePage({ business: corporation, displayContent });
+
+          await page.stepperClickToReviewStep();
+          await page.submitReviewStep();
+
+          await page.stepperClickToContactsStep();
+
+          expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.errorBanner.errorOnStep);
+          expect(screen.queryByRole("alert")).not.toHaveTextContent(Config.formation.fields.members.label);
+          expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.directors.label);
+        }
+      );
     });
 
     describe("no validation errors", () => {

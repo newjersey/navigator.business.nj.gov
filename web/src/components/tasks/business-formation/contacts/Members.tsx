@@ -1,6 +1,7 @@
 import { Addresses } from "@/components/tasks/business-formation/contacts/Addresses";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { getConfigFieldByLegalStructure } from "@/lib/utils/helpers";
 import {
   corpLegalStructures,
   createEmptyFormationMember,
@@ -17,7 +18,6 @@ export const Members = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
-  const isNonprofit = state.formationFormData.legalType === "nonprofit";
 
   const defaultAddress = isCorp
     ? undefined
@@ -33,11 +33,7 @@ export const Members = (props: Props): ReactElement => {
         addressZipCode: state.formationFormData.addressZipCode,
       };
 
-  const configField = ((): "directors" | "trustees" | "members" => {
-    if (isCorp) return "directors";
-    else if (isNonprofit) return "trustees";
-    else return "members";
-  })();
+  const configField = getConfigFieldByLegalStructure(state.formationFormData.legalType);
 
   const displayContent = {
     header: Config.formation.fields[configField].label,
