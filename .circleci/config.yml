@@ -332,6 +332,13 @@ commands:
             echo 'export REDIRECT_URL=$REDIRECT_URL_CONTENT' >> $BASH_ENV
             echo 'export SHOW_DISABLED_INDUSTRIES=true' >> $BASH_ENV
 
+  set-accessibility-testing-env-vars:
+    steps:
+      - run:
+          name: Set Accessibility Testing Environment Variables
+          command: |
+            echo 'export REDIRECT_URL=$REDIRECT_URL_ACCESSIBILITY_TESTING' >> $BASH_ENV
+
   deploy-content:
     steps:
       - configure-and-build
@@ -343,6 +350,18 @@ commands:
       - run:
           name: Deploy WebApp
           command: aws ecs update-service --cluster bfs_container_cluster --service bfs-navigator-content --region ${AWS_REGION} --force-new-deployment
+
+  deploy-accessibility-testing:
+    steps:
+      - configure-and-build
+      - setup_remote_docker:
+          version: 20.10.14
+          docker_layer_caching: true
+      - package-webapp-docker:
+          image-name: bfs-navigator-testing
+      - run:
+          name: Deploy WebApp
+          command: aws ecs update-service --cluster bfs_container_cluster --service bfs-navigator-testing --region ${AWS_REGION} --force-new-deployment
 
   deploy:
     steps:
@@ -554,6 +573,22 @@ jobs:
       - deploy-content
     environment:
       STAGE: content
+      MYNJ_PROFILE_LINK: https://myt1.state.nj.us/portal/Desktop
+
+  deploy-accessibility-testing:
+    docker:
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-18_16_0
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
+    steps:
+      - set-dev-env-vars
+      - set-accessibility-testing-env-vars
+      - attach_workspace:
+          at: .
+      - deploy-accessibility-testing
+    environment:
+      STAGE: testing
       MYNJ_PROFILE_LINK: https://myt1.state.nj.us/portal/Desktop
 
   deploy-dev:
@@ -916,6 +951,14 @@ workflows:
             branches:
               only:
                 - content-repo
+          requires:
+            - build
+      - deploy-accessibility-testing:
+          name: accessibility-testing-deploy
+          filters:
+            branches:
+              only:
+                - accessibility-testing-repo
           requires:
             - build
 
