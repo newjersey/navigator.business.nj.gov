@@ -354,6 +354,7 @@ const ProfilePage = (props: Props): ReactElement => {
           displayAltDescription={displayAltHomeBasedBusinessDescription}
           isVisible={displayHomedBaseBusinessQuestion()}
           hideHeader={true}
+          boldAltDescription={true}
         >
           <OnboardingHomeBasedBusiness />
         </ProfileField>
@@ -519,6 +520,7 @@ const ProfilePage = (props: Props): ReactElement => {
           isVisible={displayHomedBaseBusinessQuestion()}
           displayAltDescription={displayAltHomeBasedBusinessDescription}
           hideHeader={true}
+          boldAltDescription={true}
         >
           <OnboardingHomeBasedBusiness />
         </ProfileField>
@@ -639,6 +641,7 @@ const ProfilePage = (props: Props): ReactElement => {
           isVisible={displayHomedBaseBusinessQuestion()}
           displayAltDescription={displayAltHomeBasedBusinessDescription}
           hideHeader={true}
+          boldAltDescription={true}
         >
           <OnboardingHomeBasedBusiness />
         </ProfileField>
