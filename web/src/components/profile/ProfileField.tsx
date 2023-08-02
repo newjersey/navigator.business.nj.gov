@@ -12,6 +12,7 @@ interface Props {
   displayAltDescription?: boolean;
   noLabel?: boolean;
   hideHeader?: boolean;
+  boldAltDescription?: boolean;
 }
 
 export const ProfileField = (props: Props): ReactElement => {
@@ -30,6 +31,7 @@ export const ProfileField = (props: Props): ReactElement => {
                 fieldName={props.fieldName}
                 isAltDescriptionDisplayed={props.displayAltDescription}
                 hideHeader={props.hideHeader}
+                boldAltDescription={props.boldAltDescription}
               />
             )}
             <div className={props.noLabel ? "margin-bottom-05" : ""}>{props.children}</div>
