@@ -1,3 +1,27 @@
+# [5.24.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.23.5...v5.24.0) (2023-08-02)
+
+
+### Bug Fixes
+
+* [[#185641143](https://github.com/newjersey/navigator.business.nj.gov/issues/185641143)] municipality field not full width in deferred question ([2275d86](https://github.com/newjersey/navigator.business.nj.gov/commit/2275d867f90203cf2a5d2263a578999f1f7ef3a1))
+* [[#185647571](https://github.com/newjersey/navigator.business.nj.gov/issues/185647571)] override default date of formation label in modal ([8c97515](https://github.com/newjersey/navigator.business.nj.gov/commit/8c97515e1ac26bccb2498e04487340d0c2c2e948))
+* [185617245] fix tax id hide show on profile ([227f4dc](https://github.com/newjersey/navigator.business.nj.gov/commit/227f4dcf97e18f85e352c745f155b20f80f13bbf))
+
+
+### Features
+
+* [[#184882700](https://github.com/newjersey/navigator.business.nj.gov/issues/184882700)] allow user to add multiple businesses ([990e2b0](https://github.com/newjersey/navigator.business.nj.gov/commit/990e2b0c80e289d658dbd48e81ee41b01962261d))
+* [[#184992392](https://github.com/newjersey/navigator.business.nj.gov/issues/184992392)] filter fundings by nonprofit legal structure ([94d0dc4](https://github.com/newjersey/navigator.business.nj.gov/commit/94d0dc417be0a315ac367d3379a92c3e6bb0e1e2))
+* [[#185513827](https://github.com/newjersey/navigator.business.nj.gov/issues/185513827)] remove content overflow from for you section ([1cb1061](https://github.com/newjersey/navigator.business.nj.gov/commit/1cb106107a176c8c15cdb2a3064c6836f0ed2363))
+* [[#185649292](https://github.com/newjersey/navigator.business.nj.gov/issues/185649292)] add navbar business name logic for OWNING businesses ([5198640](https://github.com/newjersey/navigator.business.nj.gov/commit/51986408e8a55b15a6d2b327820deb02f6055bfb))
+* [[#185659870](https://github.com/newjersey/navigator.business.nj.gov/issues/185659870)] move disclaimer text to top of licenses ([95eb08b](https://github.com/newjersey/navigator.business.nj.gov/commit/95eb08becd32f7489f605378780d5346e9a52a88))
+* [[#185678151](https://github.com/newjersey/navigator.business.nj.gov/issues/185678151)] change navbar name display for generic industry ([eb3b78d](https://github.com/newjersey/navigator.business.nj.gov/commit/eb3b78d0b35397c351c8a26ac5f4dece2910ae60))
+
+
+### Reverts
+
+* Revert "chore: updating Webflow Licenses cosmetologist (#6018)" ([9ddc554](https://github.com/newjersey/navigator.business.nj.gov/commit/9ddc554f4dda6f737e1b7b6a5c794db3a06ceb5b)), closes [#6018](https://github.com/newjersey/navigator.business.nj.gov/issues/6018)
+
 ## [5.23.5](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.23.4...v5.23.5) (2023-07-19)
 
 
