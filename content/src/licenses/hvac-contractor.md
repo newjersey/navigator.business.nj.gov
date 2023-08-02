@@ -4,7 +4,7 @@ notesMd: Drafted in
 urlSlug: hvac-contractor
 previewType: expiration
 callToActionLink: https://newjersey.mylicense.com/eGov/PersonSearchResults.aspx
-callToActionText: Renew My License
+callToActionText: Renew My HVAC License
 ---
 ### Renewal Requirements
 
@@ -18,5 +18,5 @@ callToActionText: Renew My License
 :::greenBox 
  **Once completed, you will have**:
 
-* The same license number
+* The same HVAC license number
 :::
