@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { DeferredLocationQuestion } from "@/components/DeferredLocationQuestion";
 import { HorizontalLine } from "@/components/HorizontalLine";
-import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
+import { PostOnboardingRadioQuestion } from "@/components/post-onboarding/PostOnboardingRadioQuestion";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { Task } from "@/lib/types/types";
@@ -40,7 +40,11 @@ export const TaskElement = (props: Props): ReactElement => {
     }
     return rswitch(task.postOnboardingQuestion, {
       "construction-renovation": (
-        <RadioQuestion id="construction-renovation" onboardingKey="constructionRenovationPlan" />
+        <PostOnboardingRadioQuestion
+          postOnboardingQuestionId="construction-renovation"
+          onboardingKey="constructionRenovationPlan"
+          taskId={task.id}
+        />
       ),
       default: <></>,
     });

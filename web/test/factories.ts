@@ -15,6 +15,7 @@ import {
   OperateReference,
   Opportunity,
   OutageConfig,
+  PostOnboarding,
   Roadmap,
   SidebarCardContent,
   Step,
@@ -318,6 +319,17 @@ export const generateLicenseEvent = (overrides: Partial<LicenseEvent>): LicenseE
     callToActionLink: `cta-link-${id}`,
     callToActionText: `cta-text-${id}`,
     contentMd: `content-${id}`,
+    ...overrides,
+  };
+};
+
+export const generatePostOnboarding = (overrides: Partial<PostOnboarding>): PostOnboarding => {
+  return {
+    question: `some-question-${randomInt()}`,
+    contentMd: `some-yes-content-${randomInt()}`,
+    radioYes: "Yes",
+    radioNo: "No",
+    radioNoContent: `some-no-content-${randomInt()}`,
     ...overrides,
   };
 };
