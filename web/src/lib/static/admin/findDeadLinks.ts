@@ -291,10 +291,8 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
             },
           }
         );
-
         const url = new URL(process.env.REDIRECT_URL || "");
-        const targetUrl = `${url.protocol}//${process.env.BASIC_AUTH_USERNAME}:${process.env.BASIC_AUTH_PASSWORD}@${url.hostname}${page}`;
-        htmlUrlChecker.enqueue(targetUrl, {});
+        htmlUrlChecker.enqueue(`${url.origin}${page}`, {});
       });
 
       pagePromises.push(promise);
