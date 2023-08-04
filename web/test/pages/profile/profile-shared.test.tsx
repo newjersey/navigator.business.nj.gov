@@ -31,7 +31,7 @@ import { generateTaxFilingData } from "@businessnjgovnavigator/shared/test";
 import {
   chooseTab,
   clickSave,
-  generateBusiness,
+  generateBusinessForProfile,
   renderPage,
   selectByText,
 } from "@/test/pages/profile/profile-helpers";
@@ -95,7 +95,7 @@ describe("profile - shared", () => {
       return !phase.displayAltHomeBasedBusinessDescription;
     });
 
-    const business = generateBusiness({
+    const business = generateBusinessForProfile({
       profileData: generateProfileData({
         industryId: randomHomeBasedIndustry(),
         operatingPhase: randomElementFromArray(defaultDescOperatingPhases as OperatingPhase[]).id,
@@ -117,7 +117,7 @@ describe("profile - shared", () => {
     const altDescOperatingPhases = OperatingPhases.filter((phase: OperatingPhase) => {
       return phase.displayAltHomeBasedBusinessDescription;
     });
-    const business = generateBusiness({
+    const business = generateBusinessForProfile({
       profileData: generateProfileData({
         industryId: randomHomeBasedIndustry(),
         operatingPhase: randomElementFromArray(altDescOperatingPhases as OperatingPhase[]).id,
@@ -136,7 +136,7 @@ describe("profile - shared", () => {
   });
 
   it("sends analytics when municipality entered for first time", async () => {
-    const initialBusiness = generateBusiness({
+    const initialBusiness = generateBusinessForProfile({
       profileData: generateProfileData({
         municipality: undefined,
       }),
@@ -157,7 +157,7 @@ describe("profile - shared", () => {
   it("does not send analytics when municipality already existed", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
 
-    const initialBusiness = generateBusiness({
+    const initialBusiness = generateBusinessForProfile({
       profileData: generateProfileData({
         municipality: generateMunicipality({ displayName: "Jersey City" }),
       }),
@@ -179,7 +179,7 @@ describe("profile - shared", () => {
       describe("disabled", () => {
         businessPersonas.map((businessPersona) => {
           it(`disables taxId for ${businessPersona} businessPersona when taxFiling Status is SUCCESS or PENDING`, () => {
-            const business = generateBusiness({
+            const business = generateBusinessForProfile({
               profileData: generateProfileData({
                 taxId: "*******89123",
                 encryptedTaxId: "some-encrypted-value",
@@ -206,7 +206,7 @@ describe("profile - shared", () => {
             it(`shows disclaimer for trade name legal structure for ${businessPersona} ${
               foreignBusinessType ?? ""
             } businessPersona`, () => {
-              const business = generateBusiness({
+              const business = generateBusinessForProfile({
                 profileData: generateProfileData({
                   legalStructureId: randomTradeNameLegalStructure(),
                   businessPersona: businessPersona,
@@ -225,7 +225,7 @@ describe("profile - shared", () => {
         });
 
         it("does not show disclaimer for public filing legal structure", () => {
-          const business = generateBusiness({
+          const business = generateBusinessForProfile({
             profileData: generateProfileData({
               legalStructureId: randomPublicFilingLegalStructure(),
             }),
@@ -248,7 +248,7 @@ describe("profile - shared", () => {
     );
 
     it.each(phasesWhereAlertTrue)("displays alert for %s", (operatingPhase) => {
-      const business = generateBusiness({
+      const business = generateBusinessForProfile({
         profileData: generateProfileData({
           operatingPhase,
           dateOfFormation: undefined,
@@ -260,7 +260,7 @@ describe("profile - shared", () => {
     });
 
     it.each(phasesWhereAlertFalse)("does not display alert for %s", (operatingPhase) => {
-      const business = generateBusiness({
+      const business = generateBusinessForProfile({
         profileData: generateProfileData({
           operatingPhase,
           dateOfFormation: undefined,
