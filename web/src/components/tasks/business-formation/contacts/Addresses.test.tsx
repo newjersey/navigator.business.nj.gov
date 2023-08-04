@@ -104,7 +104,7 @@ describe("Formation - Addresses", () => {
             incorporators[1].addressState?.shortCode
           );
           expect(page.getInputElementByLabel("Address zip code").value).toBe(incorporators[1].addressZipCode);
-          const newName = "Joe Biden";
+          const newName = "Luke Potter";
           page.fillText("Address name", newName);
           page.clickAddressSubmit();
           await waitFor(() => {

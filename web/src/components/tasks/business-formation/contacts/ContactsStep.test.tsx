@@ -91,14 +91,14 @@ describe("Formation - ContactsStep", () => {
         {
           incorporators: [
             {
-              name: "Donald Whatever",
+              name: "Ava Curie",
               businessLocationType: "US",
               addressCity: "Miami",
-              addressLine1: "160 Something Ave NW",
-              addressLine2: "Office of Whatever",
+              addressLine1: "160 Something Ave",
+              addressLine2: "Apt 1",
               addressState: { name: "Florida", shortCode: "FL" },
               addressCountry: "US",
-              addressZipCode: "20501",
+              addressZipCode: "32003",
               title: "General Partner",
               signature: true,
             },
@@ -131,12 +131,12 @@ describe("Formation - ContactsStep", () => {
       ).toBeInTheDocument();
       expect(screen.queryByText(Config.formation.fields.incorporators.placeholder)).not.toBeInTheDocument();
 
-      expect(screen.getByText("Donald Whatever")).toBeInTheDocument();
-      expect(screen.getByText("160 Something Ave NW", { exact: false })).toBeInTheDocument();
-      expect(screen.getByText("Office of Whatever", { exact: false })).toBeInTheDocument();
+      expect(screen.getByText("Ava Curie")).toBeInTheDocument();
+      expect(screen.getByText("160 Something Ave", { exact: false })).toBeInTheDocument();
+      expect(screen.getByText("Apt 1", { exact: false })).toBeInTheDocument();
       expect(screen.getByText("Miami", { exact: false })).toBeInTheDocument();
       expect(screen.getByText("Florida", { exact: false })).toBeInTheDocument();
-      expect(screen.getByText("20501", { exact: false })).toBeInTheDocument();
+      expect(screen.getByText("32003", { exact: false })).toBeInTheDocument();
       expect(page.getSignerBox(0, "incorporators")).toEqual(true);
     });
   });
@@ -147,25 +147,25 @@ describe("Formation - ContactsStep", () => {
     it("auto-fills fields from userData if it exists", async () => {
       const members: FormationMember[] = [
         {
-          name: "Joe Biden",
-          addressCity: "Washington",
-          addressLine1: "1600 Pennsylvania Ave NW",
-          addressLine2: "Office of the President",
-          addressState: { name: "District of Columbia", shortCode: "DC" },
+          name: "Jane Parks",
+          addressCity: "New Orleans",
+          addressLine1: "1600 Somewhere Drive",
+          addressLine2: "PH",
+          addressState: { name: "Louisiana", shortCode: "LA" },
           addressCountry: "US",
           businessLocationType: "US",
-          addressZipCode: "20500",
+          addressZipCode: "70032",
         },
       ];
       const incorporators: FormationIncorporator[] = [
         {
-          name: "Donald Whatever",
+          name: "Emily Jones",
           addressCity: "Miami",
-          addressLine1: "160 Something Ave NW",
-          addressLine2: "Office of Whatever",
+          addressLine1: "160 Something Ave",
+          addressLine2: "3rd Floor",
           addressState: { name: "Florida", shortCode: "FL" },
           addressCountry: "US",
-          addressZipCode: "20501",
+          addressZipCode: "34997",
           businessLocationType: "US",
           title: "Incorporator",
           signature: true,
@@ -222,25 +222,25 @@ describe("Formation - ContactsStep", () => {
     it("auto-fills fields from userData if it exists", async () => {
       const members: FormationMember[] = [
         {
-          name: "Joe Biden",
-          addressCity: "Washington",
-          addressLine1: "1600 Pennsylvania Ave NW",
-          addressLine2: "Office of the President",
-          addressState: { name: "District of Columbia", shortCode: "DC" },
+          name: "Luke Potter",
+          addressCity: "Seattle",
+          addressLine1: "989 Broadway",
+          addressLine2: "Unit 123",
+          addressState: { name: "Washington", shortCode: "WA" },
           addressCountry: "US",
           businessLocationType: "US",
-          addressZipCode: "20500",
+          addressZipCode: "98001",
         },
       ];
       const incorporators: FormationIncorporator[] = [
         {
-          name: "Donald Whatever",
+          name: "Marie Smith",
           addressCity: "Miami",
-          addressLine1: "160 Something Ave NW",
-          addressLine2: "Office of Whatever",
+          addressLine1: "433 Some Place",
+          addressLine2: "Unit 4",
           addressState: { name: "Florida", shortCode: "FL" },
           addressCountry: "US",
-          addressZipCode: "20501",
+          addressZipCode: "32003",
           businessLocationType: "US",
           title: "Incorporator",
           signature: true,
@@ -318,14 +318,14 @@ describe("Formation - ContactsStep", () => {
     it("auto-fills fields from userData if it exists", async () => {
       const members: FormationMember[] = [
         {
-          name: "Joe Biden",
-          addressCity: "Washington",
-          addressLine1: "1600 Pennsylvania Ave NW",
-          addressLine2: "Office of the President",
-          addressState: { name: "District of Columbia", shortCode: "DC" },
+          name: "Rosa Thomas",
+          addressCity: "Philadephia",
+          addressLine1: "1439 Pennsylvania Road",
+          addressLine2: "Apt 6B",
+          addressState: { name: "Pennsylvania", shortCode: "PA" },
           addressCountry: "US",
           businessLocationType: "US",
-          addressZipCode: "20500",
+          addressZipCode: "19019",
         },
       ];
       const formationFormData = generateFormationFormData(
