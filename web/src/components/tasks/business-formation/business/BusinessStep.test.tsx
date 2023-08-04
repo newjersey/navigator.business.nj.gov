@@ -905,26 +905,26 @@ describe("Formation - BusinessStep", () => {
       await page.stepperClickToBusinessStep();
     };
 
-    it("Business suffix", async () => {
+    it("displays Business Suffix error label when Business Suffix is undefined", async () => {
       const page = await getPageHelper({}, { businessSuffix: undefined });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.businessSuffix.label);
     });
 
-    it("Withdrawals", async () => {
+    it("displays Withdrawals error label when Withdrawals is empty", async () => {
       const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { withdrawals: "" });
       await attemptApiSubmission(page);
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.withdrawals.label);
     });
 
-    it("Dissolution", async () => {
+    it("displays Dissolution error label when Dissolution is empty", async () => {
       const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { dissolution: "" });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.dissolution.label);
     });
 
-    it("Combined Investment", async () => {
+    it("displays Combined Investment error label when Combined Investment is empty", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
         { combinedInvestment: "" }
@@ -933,7 +933,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.combinedInvestment.label);
     });
 
-    it("Partnership Rights can create Limited Partner", async () => {
+    it("displays error label when Partnership Rights can create Limited Partner is undefined", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
         { canCreateLimitedPartner: undefined }
@@ -945,10 +945,10 @@ describe("Formation - BusinessStep", () => {
       );
     });
 
-    it("Partnership Rights Limited Partner Terms", async () => {
+    it("displays error label when Partnership Rights Limited Partner Terms is empty", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
-        { canCreateLimitedPartner: undefined, createLimitedPartnerTerms: "" }
+        { canCreateLimitedPartner: true, createLimitedPartnerTerms: "" }
       );
       fireEvent.click(screen.getByTestId("canCreateLimitedPartner-true"));
       await attemptApiSubmission(page);
@@ -957,7 +957,7 @@ describe("Formation - BusinessStep", () => {
       );
     });
 
-    it("Partnership Rights can make distribution", async () => {
+    it("displays error label when Partnership Rights can make distribution is undefined", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
         { canMakeDistribution: undefined }
@@ -968,10 +968,10 @@ describe("Formation - BusinessStep", () => {
       );
     });
 
-    it("Partnership Rights make distribution terms", async () => {
+    it("displays error label when Partnership Rights make distribution terms is empty", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
-        { canMakeDistribution: undefined, makeDistributionTerms: "" }
+        { canMakeDistribution: true, makeDistributionTerms: "" }
       );
       fireEvent.click(screen.getByTestId("canMakeDistribution-true"));
       await attemptApiSubmission(page);
@@ -980,7 +980,7 @@ describe("Formation - BusinessStep", () => {
       );
     });
 
-    it("Partnership Rights can get distribution", async () => {
+    it("displays error label when Partnership Rights can get distribution is undefined", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
         { canGetDistribution: undefined }
@@ -991,24 +991,24 @@ describe("Formation - BusinessStep", () => {
       );
     });
 
-    it("Partnership Rights get distribution terms", async () => {
+    it("displays error label when Partnership Rights get distribution terms is empty", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
-        { canGetDistribution: undefined, getDistributionTerms: "" }
+        { canGetDistribution: true, getDistributionTerms: "" }
       );
       fireEvent.click(screen.getByTestId("canGetDistribution-true"));
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.getDistributionTerms.label);
     });
 
-    it("Total Shares", async () => {
+    it("displays error label when Total Shares is empty", async () => {
       const page = await getPageHelper({ legalStructureId: "c-corporation" }, { businessTotalStock: "" });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.businessTotalStock.label);
       expect(screen.getByText(Config.formation.fields.businessTotalStock.error)).toBeInTheDocument();
     });
 
-    it("Foreign date of formation", async () => {
+    it("displays error label when Foreign Date of Formation is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
         { foreignDateOfFormation: undefined }
@@ -1020,7 +1020,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByText(Config.formation.fields.foreignDateOfFormation.error)).toBeInTheDocument();
     });
 
-    it("Foreign state of formation", async () => {
+    it("displays error label when Foreign State of Formation is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
         { foreignStateOfFormation: undefined }
@@ -1032,19 +1032,19 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByText(Config.formation.fields.foreignStateOfFormation.error)).toBeInTheDocument();
     });
 
-    it("Address line1", async () => {
+    it("displays error label when Address line1 is empty", async () => {
       const page = await getPageHelper({ businessPersona: "FOREIGN" }, { addressLine1: "" });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressLine1.label);
     });
 
-    it("Address zip code", async () => {
+    it("displays error label when Address zip code is empty", async () => {
       const page = await getPageHelper({ businessPersona: "FOREIGN" }, { addressZipCode: "" });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressZipCode.label);
     });
 
-    it("Address province", async () => {
+    it("displays error label when Address province is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
         { addressProvince: undefined, businessLocationType: "INTL" }
@@ -1053,7 +1053,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressProvince.label);
     });
 
-    it("Address country", async () => {
+    it("displays error label when Address country is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
         { addressCountry: undefined, businessLocationType: "INTL" }
@@ -1062,7 +1062,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressCountry.label);
     });
 
-    it("Address city", async () => {
+    it("displays error label when Address city is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
         { addressCity: undefined, businessLocationType: "INTL" }
@@ -1071,7 +1071,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressCity.label);
     });
 
-    it("Address state", async () => {
+    it("displays error label when Address state is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
         { addressState: undefined, businessLocationType: "US" }
@@ -1080,14 +1080,14 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressState.label);
     });
 
-    it("isVeteranNonprofit", async () => {
+    it("displays error label when isVeteranNonprofit is undefined", async () => {
       const page = await getPageHelper({ legalStructureId: "nonprofit" }, { isVeteranNonprofit: undefined });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.isVeteranNonprofit.label);
       expect(screen.getByText(Config.formation.fields.isVeteranNonprofit.error)).toBeInTheDocument();
     });
 
-    it("hasNonprofitBoardMembers", async () => {
+    it("displays error label when hasNonprofitBoardMembers is undefined", async () => {
       const page = await getPageHelper(
         { legalStructureId: "nonprofit" },
         { hasNonprofitBoardMembers: undefined, legalType: "nonprofit" }
@@ -1099,7 +1099,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
 
-    it("nonprofitBoardMemberQualificationsSpecified", async () => {
+    it("displays error label when nonprofitBoardMemberQualificationsSpecified is undefined", async () => {
       const page = await getPageHelper(
         { legalStructureId: "nonprofit" },
         {
@@ -1115,7 +1115,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
 
-    it("nonprofitBoardMemberQualificationsTerms", async () => {
+    it("displays error label when nonprofitBoardMemberQualificationsTerms is empty", async () => {
       const page = await getPageHelper(
         { legalStructureId: "nonprofit" },
         {
@@ -1132,7 +1132,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
 
-    it("nonprofitBoardMemberRightsSpecified is undefined", async () => {
+    it("displays error label when nonprofitBoardMemberRightsSpecified is undefined", async () => {
       const page = await getPageHelper(
         { legalStructureId: "nonprofit" },
         {
@@ -1148,7 +1148,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
 
-    it("nonprofitBoardMemberRightsSpecified", async () => {
+    it("displays error label when nonprofitBoardMemberRightsTerms is empty", async () => {
       const page = await getPageHelper(
         { legalStructureId: "nonprofit" },
         {
@@ -1165,7 +1165,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
 
-    it("nonprofitTrusteesMethodSpecified", async () => {
+    it("displays error label when nonprofitTrusteesMethodSpecified is undefined", async () => {
       const page = await getPageHelper(
         { legalStructureId: "nonprofit" },
         {
@@ -1181,7 +1181,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
 
-    it("nonprofitTrusteesMethodTerms", async () => {
+    it("displays error label when nonprofitTrusteesMethodTerms is empty", async () => {
       const page = await getPageHelper(
         { legalStructureId: "nonprofit" },
         {
@@ -1198,7 +1198,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
 
-    it("nonprofitAssetDistributionSpecified", async () => {
+    it("displays error label when nonprofitAssetDistributionSpecified is undefined", async () => {
       const page = await getPageHelper(
         { legalStructureId: "nonprofit" },
         {
@@ -1214,7 +1214,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
 
-    it("nonprofitAssetDistributionTerms", async () => {
+    it("displays error label when nonprofitAssetDistributionTerms is empty", async () => {
       const page = await getPageHelper(
         { legalStructureId: "nonprofit" },
         {
