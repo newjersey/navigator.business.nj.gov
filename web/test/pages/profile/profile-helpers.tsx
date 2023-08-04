@@ -11,7 +11,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   einTaskId,
-  generateBusiness as _generateBusiness,
+  generateBusiness,
   generateMunicipality,
   generateProfileData,
   generateUserDataForBusiness,
@@ -25,13 +25,13 @@ import { fireEvent, render, screen, waitFor, within } from "@testing-library/rea
 
 const Config = getMergedConfig();
 
-export const generateBusiness = (overrides: Partial<Business>): Business => {
+export const generateBusinessForProfile = (overrides: Partial<Business>): Business => {
   const profileData = generateProfileData({ ...overrides.profileData });
   const taskProgress: Record<string, TaskProgress> =
     profileData.employerId && profileData.employerId.length > 0
       ? { [einTaskId]: "COMPLETED", ...overrides.taskProgress }
       : { ...overrides.taskProgress };
-  return _generateBusiness({ ...overrides, profileData, taskProgress });
+  return generateBusiness({ ...overrides, profileData, taskProgress });
 };
 
 export const renderPage = ({

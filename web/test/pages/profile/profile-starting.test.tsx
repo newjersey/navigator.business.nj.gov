@@ -52,7 +52,7 @@ import {
   expectLocationNotSavedAndError,
   expectLocationSavedAsUndefined,
   fillText,
-  generateBusiness,
+  generateBusinessForProfile,
   getBusinessNameValue,
   getBusinessProfileInputFieldName,
   getDateOfFormation,
@@ -107,7 +107,7 @@ describe("profile - starting business", () => {
     mockApi.postGetAnnualFilings.mockImplementation((userData) => {
       return Promise.resolve(userData);
     });
-    businessFromSetup = generateBusiness({
+    businessFromSetup = generateBusinessForProfile({
       profileData: generateProfileData({
         businessPersona: "STARTING",
       }),
@@ -119,7 +119,7 @@ describe("profile - starting business", () => {
     const municipality = generateMunicipality({
       displayName: "some-cool-town",
     });
-    const startingBusiness = generateBusiness({
+    const startingBusiness = generateBusinessForProfile({
       formationData: generateFormationData({
         completedFilingPayment: true,
       }),
@@ -166,7 +166,7 @@ describe("profile - starting business", () => {
 
   describe("formation date", () => {
     it("does not display when empty", () => {
-      const initialBusiness = generateBusiness({
+      const initialBusiness = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           dateOfFormation: "",
@@ -179,7 +179,7 @@ describe("profile - starting business", () => {
     });
 
     it("displays when populated", () => {
-      const initialBusiness = generateBusiness({
+      const initialBusiness = generateBusinessForProfile({
         profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "2020-01-01" }),
       });
       const newark = generateMunicipality({ displayName: "Newark" });
@@ -189,7 +189,7 @@ describe("profile - starting business", () => {
 
     describe("formation date deletion", () => {
       it("allows user to delete formation date in profile", async () => {
-        const initialBusiness = generateBusiness({
+        const initialBusiness = generateBusinessForProfile({
           profileData: generateProfileData({
             businessPersona: "STARTING",
             dateOfFormation: "2017-10-01",
@@ -203,7 +203,7 @@ describe("profile - starting business", () => {
       });
 
       it("allows user to cancel formation date deletion", () => {
-        const initialBusiness = generateBusiness({
+        const initialBusiness = generateBusinessForProfile({
           profileData: generateProfileData({
             businessPersona: "STARTING",
             dateOfFormation: "2017-10-01",
@@ -224,7 +224,7 @@ describe("profile - starting business", () => {
       });
 
       it("allows user to delete formation date and sets task progress to IN_PROGRESS", async () => {
-        const initialBusiness = generateBusiness({
+        const initialBusiness = generateBusinessForProfile({
           profileData: generateProfileData({
             businessPersona: "STARTING",
             dateOfFormation: "2017-10-01",
@@ -344,7 +344,7 @@ describe("profile - starting business", () => {
       return Promise.resolve(modifiedUserData);
     });
 
-    const initialBusiness = generateBusiness({ taxFilingData: taxData });
+    const initialBusiness = generateBusinessForProfile({ taxFilingData: taxData });
     renderPage({ business: initialBusiness, setRegistrationModalIsVisible });
     clickSave();
 
@@ -360,7 +360,7 @@ describe("profile - starting business", () => {
 
   it("sets registerForEin task to complete if employerId exists", async () => {
     renderPage({
-      business: generateBusiness({
+      business: generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           employerId: undefined,
@@ -382,7 +382,7 @@ describe("profile - starting business", () => {
       operatingPhase: OperatingPhaseId;
     }): void => {
       const newark = generateMunicipality({ displayName: "Newark" });
-      const business = generateBusiness({
+      const business = generateBusinessForProfile({
         profileData: generateProfileData({
           legalStructureId: params.legalStructureId,
           operatingPhase: params.operatingPhase,
@@ -394,7 +394,7 @@ describe("profile - starting business", () => {
 
     it("locks the location field when it is populated and tax filing state is SUCCESS", () => {
       renderPage({
-        business: generateBusiness({
+        business: generateBusinessForProfile({
           profileData: generateProfileData({
             municipality: generateMunicipality({ displayName: "Trenton" }),
           }),
@@ -493,7 +493,7 @@ describe("profile - starting business", () => {
   });
 
   it("entity-id field existing depends on legal structure when starting", () => {
-    const business = generateBusiness({
+    const business = generateBusinessForProfile({
       profileData: generateProfileData({
         legalStructureId: "general-partnership",
         businessPersona: "STARTING",
@@ -506,7 +506,7 @@ describe("profile - starting business", () => {
   });
 
   it("prevents user from saving if they partially entered Employer Id", async () => {
-    const business = generateBusiness({
+    const business = generateBusinessForProfile({
       profileData: generateProfileData({
         legalStructureId: "general-partnership",
         businessPersona: "STARTING",
@@ -528,7 +528,7 @@ describe("profile - starting business", () => {
   });
 
   it("user is able to go back to dashboard", async () => {
-    const business = generateBusiness({
+    const business = generateBusinessForProfile({
       profileData: generateProfileData({ businessPersona: "STARTING" }),
     });
     renderPage({ business, setRegistrationModalIsVisible });
@@ -540,7 +540,7 @@ describe("profile - starting business", () => {
 
   describe("the tax ID field behavior", () => {
     describe("when the tax ID is initially 9 digits in length", () => {
-      const businessWith9TaxId = generateBusiness({
+      const businessWith9TaxId = generateBusinessForProfile({
         profileData: generateProfileData({
           taxId: "123456789",
         }),
@@ -616,7 +616,7 @@ describe("profile - starting business", () => {
     });
 
     describe("when the tax ID is initially 12 digits in length", () => {
-      const businessWith12TaxId = generateBusiness({
+      const businessWith12TaxId = generateBusinessForProfile({
         profileData: generateProfileData({
           taxId: "123456789123",
         }),
@@ -666,7 +666,7 @@ describe("profile - starting business", () => {
     });
 
     describe("when the tax ID is initially 0  in length", () => {
-      const businessWithEmptyTaxId = generateBusiness({
+      const businessWithEmptyTaxId = generateBusinessForProfile({
         profileData: generateProfileData({
           taxId: "",
         }),
@@ -717,7 +717,7 @@ describe("profile - starting business", () => {
   });
 
   it("prefills form from existing user data", () => {
-    const business = generateBusiness({
+    const business = generateBusinessForProfile({
       profileData: generateProfileData({
         businessPersona: "STARTING",
         businessName: "Applebees",
@@ -747,7 +747,7 @@ describe("profile - starting business", () => {
   });
 
   it("returns user to dashboard from un-saved changes modal", async () => {
-    const initialBusiness = generateBusiness({
+    const initialBusiness = generateBusinessForProfile({
       profileData: generateProfileData({ businessPersona: "STARTING" }),
     });
     const newark = generateMunicipality({ displayName: "Newark" });
@@ -767,7 +767,7 @@ describe("profile - starting business", () => {
 
   describe("tax related profile fields", () => {
     it("does not render the existing employees field and ownership field when register for taxes task is not complete", () => {
-      const initialBusiness = generateBusiness({
+      const initialBusiness = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
@@ -780,7 +780,7 @@ describe("profile - starting business", () => {
     });
 
     it("renders the existing employees field and ownership field when register for taxes task is complete", () => {
-      const initialBusiness = generateBusiness({
+      const initialBusiness = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           operatingPhase: "FORMED_AND_REGISTERED",
@@ -793,7 +793,7 @@ describe("profile - starting business", () => {
     });
 
     it("prevents user from saving if existing employees field is empty", async () => {
-      const initialBusiness = generateBusiness({
+      const initialBusiness = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           operatingPhase: "FORMED_AND_REGISTERED",
@@ -815,7 +815,7 @@ describe("profile - starting business", () => {
 
   it("displays the sector dropdown when industry is generic", () => {
     renderPage({
-      business: generateBusiness({
+      business: generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           industryId: "generic",
@@ -830,7 +830,7 @@ describe("profile - starting business", () => {
     "does not require sector when %s phase",
     (phase) => {
       renderPage({
-        business: generateBusiness({
+        business: generateBusinessForProfile({
           profileData: generateProfileData({
             operatingPhase: phase,
             businessPersona: "STARTING",
@@ -854,7 +854,7 @@ describe("profile - starting business", () => {
     "requires sector when %s phase",
     (phase) => {
       renderPage({
-        business: generateBusiness({
+        business: generateBusinessForProfile({
           profileData: generateProfileData({
             operatingPhase: phase,
             businessPersona: "STARTING",
@@ -878,7 +878,7 @@ describe("profile - starting business", () => {
     async (industry) => {
       const newIndustry = industry;
 
-      const business = generateBusiness({
+      const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           industryId: "generic",
@@ -927,7 +927,7 @@ describe("profile - starting business", () => {
   );
 
   it("prevents user from saving if in up-and-running and sector is not selected", async () => {
-    const business = generateBusiness({
+    const business = generateBusinessForProfile({
       profileData: generateProfileData({
         businessPersona: "STARTING",
         industryId: "generic",
@@ -953,7 +953,7 @@ describe("profile - starting business", () => {
 
     for (const phase of required) {
       it(`prevents user from saving if business name in ${phase} phase`, async () => {
-        const business = generateBusiness({
+        const business = generateBusinessForProfile({
           profileData: generateProfileData({
             businessPersona: "STARTING",
             operatingPhase: phase,
@@ -976,7 +976,7 @@ describe("profile - starting business", () => {
 
     for (const phase of notRequired) {
       it(`allows user to save with empty business name in ${phase} phase`, async () => {
-        const business = generateBusiness({
+        const business = generateBusinessForProfile({
           profileData: generateProfileData({
             businessPersona: "STARTING",
             operatingPhase: phase,
@@ -998,7 +998,7 @@ describe("profile - starting business", () => {
 
   it("shows the home-based question if applicable to industry", () => {
     renderPage({
-      business: generateBusiness({
+      business: generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           industryId: randomHomeBasedIndustry(),
@@ -1011,7 +1011,7 @@ describe("profile - starting business", () => {
 
   it("shows the home-based question when user changes to applicable industry, even before saving", () => {
     renderPage({
-      business: generateBusiness({
+      business: generateBusinessForProfile({
         profileData: generateProfileData({
           industryId: randomNonHomeBasedIndustry(),
           businessPersona: "STARTING",
@@ -1027,7 +1027,7 @@ describe("profile - starting business", () => {
 
   it("shows the home-based question when industry is undefined", () => {
     renderPage({
-      business: generateBusiness({
+      business: generateBusinessForProfile({
         profileData: generateProfileData({
           industryId: undefined,
           businessPersona: "STARTING",
@@ -1039,7 +1039,7 @@ describe("profile - starting business", () => {
   });
 
   it("does not show the home-based question if not applicable to industry", () => {
-    const business = generateBusiness({
+    const business = generateBusinessForProfile({
       profileData: generateProfileData({
         industryId: randomNonHomeBasedIndustry(),
         businessPersona: "STARTING",
@@ -1056,7 +1056,7 @@ describe("profile - starting business", () => {
   });
 
   it("prevents user from saving when petcare is selected as industry, but essential question is not answered", async () => {
-    const business = generateBusiness({
+    const business = generateBusinessForProfile({
       onboardingFormProgress: "UNSTARTED",
       profileData: generateProfileData({
         businessPersona: "STARTING",
@@ -1073,7 +1073,7 @@ describe("profile - starting business", () => {
   });
 
   it("resets naicsCode task and data when the industry is changed and page is saved", async () => {
-    const business = generateBusiness({
+    const business = generateBusinessForProfile({
       profileData: generateProfileData({
         industryId: "cosmetology",
         businessPersona: "STARTING",
@@ -1093,7 +1093,7 @@ describe("profile - starting business", () => {
   });
 
   it("resets all task checkbox data data when the industry is changed and page is saved", async () => {
-    const business = generateBusiness({
+    const business = generateBusinessForProfile({
       profileData: generateProfileData({
         industryId: "cosmetology",
         businessPersona: "STARTING",
@@ -1115,7 +1115,7 @@ describe("profile - starting business", () => {
   it.each(industryIdsWithRequiredEssentialQuestion)(
     "prevents user from saving when %s is selected as industry, but essential question is not answered",
     async (industryId) => {
-      const business = generateBusiness({
+      const business = generateBusinessForProfile({
         onboardingFormProgress: "UNSTARTED",
         profileData: generateProfileData({
           businessPersona: "STARTING",
@@ -1135,7 +1135,7 @@ describe("profile - starting business", () => {
 
   describe("Document Section", () => {
     it("shows document section if user's legal structure requires public filing", () => {
-      const business = generateBusiness({
+      const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "limited-liability-company",
@@ -1147,7 +1147,7 @@ describe("profile - starting business", () => {
     });
 
     it("removes document section if user's legal structure does not require public filing", () => {
-      const business = generateBusiness({
+      const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "sole-proprietorship",
@@ -1159,7 +1159,7 @@ describe("profile - starting business", () => {
     });
 
     it("shows placeholder text if there are no documents", () => {
-      const business = generateBusiness({
+      const business = generateBusinessForProfile({
         formationData: generateFormationData({
           getFilingResponse: generateGetFilingResponse({ success: true }),
         }),
@@ -1179,7 +1179,7 @@ describe("profile - starting business", () => {
     });
 
     it("shows document links", () => {
-      const business = generateBusiness({
+      const business = generateBusinessForProfile({
         formationData: generateFormationData({
           getFilingResponse: generateGetFilingResponse({ success: true }),
         }),
@@ -1203,7 +1203,7 @@ describe("profile - starting business", () => {
         certifiedDoc: "testCert.pdf",
         standingDoc: "testStand.pdf",
       });
-      const business = generateBusiness({
+      const business = generateBusinessForProfile({
         formationData: generateFormationData({
           getFilingResponse: generateGetFilingResponse({ success: true }),
         }),
@@ -1231,7 +1231,7 @@ describe("profile - starting business", () => {
     });
 
     it("hides document links if they do not exist", () => {
-      const business = generateBusiness({
+      const business = generateBusinessForProfile({
         formationData: generateFormationData({
           getFilingResponse: generateGetFilingResponse({ success: true }),
         }),
@@ -1253,7 +1253,7 @@ describe("profile - starting business", () => {
 
   describe("trade name field behavior", () => {
     it("displays trade name field as editable if it's a trade name business", () => {
-      const business = generateBusiness({
+      const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "sole-proprietorship",
@@ -1264,7 +1264,7 @@ describe("profile - starting business", () => {
     });
 
     it("hides trade name field if it's a non trade name business", () => {
-      const business = generateBusiness({
+      const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "limited-liability-company",
@@ -1277,7 +1277,7 @@ describe("profile - starting business", () => {
 
   describe("responsible owner name field behavior", () => {
     it("displays responsibleOwnerName field if starting a trade name business", () => {
-      const business = generateBusiness({
+      const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "general-partnership",
@@ -1288,7 +1288,7 @@ describe("profile - starting business", () => {
     });
 
     it("hides responsibleOwnerName field if it's a non trade name business", () => {
-      const business = generateBusiness({
+      const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "limited-liability-partnership",
@@ -1299,7 +1299,7 @@ describe("profile - starting business", () => {
     });
 
     it("displays responsibleOwnerName as locked if user has accessed tax data", () => {
-      const business = generateBusiness({
+      const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "sole-proprietorship",

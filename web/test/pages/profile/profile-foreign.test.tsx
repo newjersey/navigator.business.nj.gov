@@ -32,7 +32,7 @@ import {
   clickSave,
   expectLocationNotSavedAndError,
   expectLocationSavedAsUndefined,
-  generateBusiness,
+  generateBusinessForProfile,
   removeLocationAndSave,
   renderPage,
 } from "@/test/pages/profile/profile-helpers";
@@ -53,7 +53,7 @@ describe("profile-foreign", () => {
     useMockRouter({});
     useMockRoadmap({});
     setupStatefulUserDataContext();
-    setupBusiness = generateBusiness({
+    setupBusiness = generateBusinessForProfile({
       profileData: generateProfileData({ businessPersona: "FOREIGN" }),
     });
   });
@@ -76,7 +76,7 @@ describe("profile-foreign", () => {
 
   it("does not show the home-based question if locationInNewJersey=true, even if industry applicable", () => {
     renderPage({
-      business: generateBusiness({
+      business: generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
@@ -91,7 +91,7 @@ describe("profile-foreign", () => {
   it.each(industryIdsWithRequiredEssentialQuestion)(
     "prevents Foreign Nexus user from saving when %s is selected as industry, but essential question is not answered",
     async (industryId) => {
-      const business = generateBusiness({
+      const business = generateBusinessForProfile({
         onboardingFormProgress: "UNSTARTED",
         profileData: generateProfileData({
           businessPersona: "FOREIGN",
@@ -121,7 +121,7 @@ describe("profile-foreign", () => {
       formationDataOverrides?: Partial<FormationData>;
       taxFilingDataOverrides?: Partial<TaxFilingData>;
     }): Business => {
-      return generateBusiness({
+      return generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
@@ -158,7 +158,7 @@ describe("profile-foreign", () => {
 
     it("displays Not Entered when the user hasn't entered a business name yet", () => {
       renderPage({
-        business: generateBusiness({
+        business: generateBusinessForProfile({
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
             foreignBusinessType: "NEXUS",
@@ -231,7 +231,7 @@ describe("profile-foreign", () => {
         operatingPhase: OperatingPhaseId;
       }): void => {
         const newark = generateMunicipality({ displayName: "Newark" });
-        const business = generateBusiness({
+        const business = generateBusinessForProfile({
           profileData: generateProfileData({
             legalStructureId: params.legalStructureId,
             operatingPhase: params.operatingPhase,
@@ -246,7 +246,7 @@ describe("profile-foreign", () => {
 
       it("locks when it is populated and tax filing state is SUCCESS", () => {
         renderPage({
-          business: generateBusiness({
+          business: generateBusinessForProfile({
             profileData: generateProfileData({
               municipality: generateMunicipality({ displayName: "Trenton" }),
               legalStructureId: randomLegalStructure().id,
@@ -415,7 +415,7 @@ describe("profile-foreign", () => {
         displayName: "some-cool-town",
       });
 
-      const foreignNexusUserData = generateBusiness({
+      const foreignNexusUserData = generateBusinessForProfile({
         formationData: generateFormationData({
           completedFilingPayment: true,
         }),
