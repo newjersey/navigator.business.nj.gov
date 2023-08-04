@@ -92,7 +92,7 @@ describe("Formation - Members Field", () => {
           expect(page.getInputElementByLabel("Address city").value).toBe(members[1].addressCity);
           expect(page.getInputElementByLabel("Address state").value).toBe(members[1].addressState?.shortCode);
           expect(page.getInputElementByLabel("Address zip code").value).toBe(members[1].addressZipCode);
-          const newName = "Joe Biden";
+          const newName = "Marie Smith";
           page.fillText("Address name", newName);
           page.clickAddressSubmit();
           await waitFor(() => {
