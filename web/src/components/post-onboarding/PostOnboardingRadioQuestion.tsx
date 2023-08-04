@@ -119,14 +119,15 @@ export const PostOnboardingRadioQuestion = (props: Props): ReactElement => {
               />
             </RadioGroup>
           </FormControl>
-          <hr className="margin-y-2" />
           {business?.profileData[props.onboardingKey] && (
             <div data-testid="post-onboarding-true-content">
+              <hr className="margin-y-2" />
               <Content>{onboardingQuestion.contentMd}</Content>
             </div>
           )}
           {business?.profileData[props.onboardingKey] === false && (
             <div data-testid="post-onboarding-false-content">
+              <hr className="margin-y-2" />
               <Content>{onboardingQuestion.radioNoContent}</Content>
             </div>
           )}
