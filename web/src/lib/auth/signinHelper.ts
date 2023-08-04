@@ -39,19 +39,13 @@ export const onSelfRegister = (
   router: SelfRegRouter,
   updateQueue: UpdateQueue | undefined,
   userData: UserData | undefined,
-  setRegistrationAlertStatus: AuthAlertContextType["setRegistrationAlertStatus"],
-  options?: { useReturnToLink: boolean }
+  setRegistrationAlertStatus: AuthAlertContextType["setRegistrationAlertStatus"]
 ): void => {
   if (!userData || !updateQueue) {
     return;
   }
   setRegistrationAlertStatus("IN_PROGRESS");
-  let route;
-  if (options?.useReturnToLink) {
-    route = getCurrentBusiness(userData).preferences.returnToLink;
-  } else {
-    route = router.asPath;
-  }
+  const route = getCurrentBusiness(userData).preferences.returnToLink || router.asPath || "";
 
   api
     .postSelfReg({
@@ -62,7 +56,7 @@ export const onSelfRegister = (
           ...userData.businesses[userData.currentBusinessId],
           preferences: {
             ...userData.businesses[userData.currentBusinessId].preferences,
-            returnToLink: route || "",
+            returnToLink: route,
           },
         },
       },
