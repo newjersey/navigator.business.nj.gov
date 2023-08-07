@@ -1252,6 +1252,7 @@ describe("ApiFormationClient", () => {
             members,
             signers: undefined,
             incorporators,
+            isVeteranNonprofit: false,
           },
           { legalStructureId: "nonprofit" }
         );
@@ -1417,6 +1418,7 @@ describe("ApiFormationClient", () => {
             members,
             signers: undefined,
             incorporators,
+            isVeteranNonprofit: false,
           },
           { legalStructureId: "nonprofit" }
         );
