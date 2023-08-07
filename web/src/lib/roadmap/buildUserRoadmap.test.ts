@@ -1,4 +1,5 @@
 import { getMergedConfig } from "@/contexts/configContext";
+import * as getNonEssentialAddOnModule from "@/lib/domain-logic/getNonEssentialQuestionAddOn";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import * as roadmapBuilderModule from "@/lib/roadmap/roadmapBuilder";
 import { generateRoadmap, generateTask } from "@/test/factories";
@@ -16,14 +17,39 @@ import {
   ProfileData,
 } from "@businessnjgovnavigator/shared/profileData";
 
+jest.mock("@/lib/domain-logic/getNonEssentialQuestionAddOn", () => ({
+  getNonEssentialQuestionAddOn: jest.fn(),
+}));
+
+const mockGetNonEssentiaQuestionAddOn = (
+  getNonEssentialAddOnModule as jest.Mocked<typeof getNonEssentialAddOnModule>
+).getNonEssentialQuestionAddOn;
+
+jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
+  industries: [
+    ...jest.requireActual("../../../../shared/lib/content/lib/industry.json").industries,
+    {
+      id: "test-industry",
+      name: "Test Industry",
+      description: "",
+      canHavePermanentLocation: true,
+      roadmapSteps: [],
+      nonEssentialQuestionsIds: ["test-question-1", "test-question-2"],
+      naicsCodes: "",
+      isEnabled: true,
+      industryOnboardingQuestions: {},
+    },
+  ],
+}));
+
 jest.mock("@/lib/roadmap/roadmapBuilder", () => ({ buildRoadmap: jest.fn() }));
 jest.mock("@businessnjgovnavigator/shared/domain-logic/fetchMunicipalityById", () => ({
   fetchMunicipalityById: jest.fn(),
 }));
+
 const mockRoadmapBuilder = (roadmapBuilderModule as jest.Mocked<typeof roadmapBuilderModule>).buildRoadmap;
 const mockFetchMunicipality = (fetchMunicipalityById as jest.Mocked<typeof fetchMunicipalityById>)
   .fetchMunicipalityById;
-
 const Config = getMergedConfig();
 
 const generateStartingProfile = (overrides: Partial<ProfileData>): ProfileData => {
@@ -460,6 +486,34 @@ describe("buildUserRoadmap", () => {
         await buildUserRoadmap(generateStartingProfile({ cannabisLicenseType: undefined }));
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("cannabis-annual");
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("cannabis-conditional");
+      });
+    });
+
+    describe("non essential questions", () => {
+      it("adds addOn if nonEssentialsQuestion value is true", async () => {
+        mockGetNonEssentiaQuestionAddOn.mockReturnValue("test-addOn-1");
+        await buildUserRoadmap(
+          generateStartingProfile({
+            industryId: "test-industry",
+            nonEssentialRadioAnswers: {
+              "test-question-1": true,
+            },
+          })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("test-addOn-1");
+      });
+
+      it("doesn't add addOn if nonEssentialsQuestion is value is false", async () => {
+        mockGetNonEssentiaQuestionAddOn.mockReturnValue("test-addOn-2");
+        await buildUserRoadmap(
+          generateStartingProfile({
+            industryId: "test-industry",
+            nonEssentialRadioAnswers: {
+              "test-question-2": false,
+            },
+          })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("test-addOn-2");
       });
     });
   });
