@@ -85,7 +85,13 @@ describe("SigninHelper", () => {
       expect(mockSetAlertStatus).toHaveBeenCalledWith("IN_PROGRESS");
     });
 
-    it("posts userData to api self-reg with current pathname included when useReturnToLink is not true", async () => {
+    it("posts userData to api self-reg with current pathname included when returnToLink is empty", async () => {
+      const business = generateBusiness({
+        preferences: generatePreferences({ returnToLink: "" }),
+      });
+      userData = generateUserDataForBusiness(business);
+      updateQueue = new UpdateQueueFactory(userData, update);
+
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
       await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
@@ -109,7 +115,7 @@ describe("SigninHelper", () => {
       userData = generateUserDataForBusiness(business);
       updateQueue = new UpdateQueueFactory(userData, update);
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
-      await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus, { useReturnToLink: true });
+      await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
         ...userData,
         businesses: {
