@@ -11,7 +11,13 @@ export const getNavBarBusinessTitle = (
     return Config.navigationDefaults.navBarGuestText;
   }
 
-  const { businessName, tradeName, legalStructureId, industryId, businessPersona } = business.profileData;
+  const { businessName, tradeName, legalStructureId, industryId, businessPersona, foreignBusinessType } =
+    business.profileData;
+
+  const isRemoteWorkerOrSeller = (): boolean => {
+    return foreignBusinessType === "REMOTE_SELLER" || foreignBusinessType === "REMOTE_WORKER";
+  };
+
   const determineName = (): string => {
     if (legalStructureId) {
       return LookupLegalStructureById(legalStructureId).hasTradeName ? tradeName : businessName;
@@ -31,6 +37,10 @@ export const getNavBarBusinessTitle = (
     } else {
       return Config.navigationDefaults.navBarUnnamedOwnedBusinessText;
     }
+  }
+
+  if (businessPersona === "FOREIGN" && isRemoteWorkerOrSeller()) {
+    return Config.navigationDefaults.navBarUnnamedForeignRemoteSellerWorkerText;
   }
 
   if (legalStructureId && industryId) {
