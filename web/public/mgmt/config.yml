@@ -3351,6 +3351,11 @@ collections:
                   name: navBarUnnamedOwnedBusinessText,
                   widget: string,
                 }
+              - {
+                  label: Navbar Unnamed Business FOREIGN REMOTE_SELLER/REMOTE_WORKER text,
+                  name: navBarUnnamedForeignRemoteSellerWorkerText,
+                  widget: string,
+                }
               - { label: Guest Alert Title, name: guestAlertTitle, widget: string }
               - { label: Guest Alert Body, name: guestAlertBody, widget: text }
               - { label: Guest Success Snackbar Title, name: guestSuccessTitle, widget: string }
