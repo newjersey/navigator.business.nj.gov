@@ -176,6 +176,7 @@ export const generateFormationFormData = (
   const legalStructureId = options?.legalStructureId ?? randomFormationLegalType();
   const isForeign = legalStructureId.includes(foreignLegalTypePrefix);
   const isCorp = corpLegalStructures.includes(legalStructureId);
+  const isNonprofit = legalStructureId === "nonprofit";
   const usesIncorporation = incorporationLegalStructures.includes(legalStructureId);
   let businessAddress = generateFormationNJAddress({});
   if (isForeign) {
@@ -243,8 +244,8 @@ export const generateFormationFormData = (
     nonprofitAssetDistributionTerms: `some-nonprofitAssetDistributionTerms-text-${randomInt()}`,
     foreignStateOfFormation: isForeign ? randomElementFromArray(states).name : undefined,
     foreignDateOfFormation: isForeign ? getCurrentDate().add(1, "days").format(defaultDateFormat) : undefined,
-    willPracticeLaw: undefined,
-    isVeteranNonprofit: undefined,
+    willPracticeLaw: isCorp ? !!(randomInt() % 2) : undefined,
+    isVeteranNonprofit: isNonprofit ? !!(randomInt() % 2) : undefined,
     ...overrides,
   };
 };
