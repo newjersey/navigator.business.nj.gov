@@ -143,7 +143,7 @@
     "css-loader": "6.8.1",
     "cypress": "12.17.1",
     "cypress-dotenv": "2.0.0",
-    "cypress-wait-until": "1.7.2",
+    "cypress-wait-until": "2.0.1",
     "dependency-cruiser": "13.1.3",
     "dotenv": "16.3.1",
     "eslint": "8.44.0",
