@@ -53,8 +53,8 @@ const DashboardPage = (props: Props): ReactElement => {
   const ProfileUpdatedAlert = useQueryControlledAlert({
     queryKey: QUERIES.success,
     pagePath: ROUTES.dashboard,
-    headerText: Config.profileDefaults.successTextHeader,
-    bodyText: Config.profileDefaults.successTextBody,
+    headerText: Config.profileDefaults.default.successTextHeader,
+    bodyText: Config.profileDefaults.default.successTextBody,
     variant: "success",
   });
 

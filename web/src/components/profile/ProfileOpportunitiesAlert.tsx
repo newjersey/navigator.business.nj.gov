@@ -31,7 +31,7 @@ export const ProfileOpportunitiesAlert = (): ReactElement => {
 
   return (
     <Alert variant="info" dataTestid="opp-alert">
-      <Content>{Config.profileDefaults.profileCompletionAlert}</Content>
+      <Content>{Config.profileDefaults.default.profileCompletionAlert}</Content>
       <ul>
         {unansweredOpportunityFields.map((field) => (
           <li key={field} data-testid={`question-${field}-alert-text`}>

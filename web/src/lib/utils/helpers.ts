@@ -123,13 +123,13 @@ export const OnboardingStatusLookup = (
   const config = configOverrides ?? getMergedConfig();
   return {
     SUCCESS: {
-      body: config.profileDefaults.successTextBody,
-      header: config.profileDefaults.successTextHeader,
+      body: config.profileDefaults.default.successTextBody,
+      header: config.profileDefaults.default.successTextHeader,
       variant: "success",
     },
     ERROR: {
-      body: config.profileDefaults.errorTextBody,
-      header: config.profileDefaults.errorTextHeader,
+      body: config.profileDefaults.default.errorTextBody,
+      header: config.profileDefaults.default.errorTextHeader,
       variant: "error",
     },
   };
