@@ -17,7 +17,6 @@ import {
   generateTask,
   operatingPhasesDisplayingAltHomeBasedBusinessDescription,
   operatingPhasesDisplayingHomeBasedPrompt,
-  operatingPhasesNotDisplayingAltHomeBasedBusinessDescription,
   operatingPhasesNotDisplayingHomeBasedPrompt,
   randomHomeBasedIndustry,
   randomNonHomeBasedIndustry,
@@ -493,54 +492,8 @@ describe("dashboard page", () => {
   });
 
   describe("deferred onboarding question", () => {
-    describe.each(operatingPhasesNotDisplayingAltHomeBasedBusinessDescription)(
-      "operatingPhasesNotDisplayingAltHomeBasedBusinessDescription",
-      (operatingPhase) => {
-        describe(`${operatingPhase}`, () => {
-          it("shows home-based business question with default description when applicable to industry and not yet answered", () => {
-            const business = generateBusiness({
-              profileData: generateProfileData({
-                industryId: randomHomeBasedIndustry(),
-                homeBasedBusiness: undefined,
-                businessPersona: generateBusinessPersona(),
-                operatingPhase: operatingPhase,
-              }),
-              onboardingFormProgress: "COMPLETED",
-            });
-            useMockBusiness(business);
-
-            renderDashboardPage({});
-            expect(
-              screen.getByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
-            ).toBeInTheDocument();
-            expect(
-              screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
-            ).not.toBeInTheDocument();
-          });
-
-          it("does not show home-based business question when already answered", () => {
-            const business = generateBusiness({
-              profileData: generateProfileData({
-                industryId: randomHomeBasedIndustry(),
-                homeBasedBusiness: false,
-                operatingPhase: operatingPhase,
-              }),
-            });
-            useMockBusiness(business);
-            renderDashboardPage({});
-            expect(
-              screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
-            ).not.toBeInTheDocument();
-            expect(
-              screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
-            ).not.toBeInTheDocument();
-          });
-        });
-      }
-    );
-
     describe.each(operatingPhasesNotDisplayingHomeBasedPrompt)(
-      "operatingPhasesNotDisplayingHomeBasedPrompt",
+      "phases not displaying home-based prompt",
       (operatingPhase) => {
         describe(`${operatingPhase}`, () => {
           it("does not show home-based business question when not applicable to operating phase", () => {
@@ -569,7 +522,7 @@ describe("dashboard page", () => {
     );
 
     describe.each(operatingPhasesDisplayingHomeBasedPrompt)(
-      "operatingPhasesDisplayingHomeBasedPrompt",
+      "phases displaying home-based prompt",
       (operatingPhase) => {
         describe(`${operatingPhase}`, () => {
           it("does not show home-based business question when not applicable to industry", () => {
@@ -644,7 +597,7 @@ describe("dashboard page", () => {
     );
 
     describe.each(operatingPhasesDisplayingAltHomeBasedBusinessDescription)(
-      "operatingPhasesDisplayingAltHomeBasedBusinessDescription",
+      "phases displaying home-based prompt with alt description",
       (operatingPhase) => {
         describe(`${operatingPhase}`, () => {
           it("shows home-based business question with alt description when applicable to industry and not yet answered", () => {
