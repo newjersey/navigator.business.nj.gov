@@ -24,10 +24,6 @@ export const completeNewBusinessOnboarding = ({
   isChildcareForSixOrMore = undefined,
   willSellPetCareItems = undefined,
   petCareHousing = undefined,
-  fullName = `Michael Smith ${randomInt()}`,
-  email = `MichaelSmith${randomInt()}@gmail.com`,
-  isNewsletterChecked = false,
-  isContactMeChecked = false,
 }: Partial<StartingOnboardingData> & Partial<Registration>): void => {
   if (industry === undefined) {
     industry = randomElementFromArray(Industries.filter((x) => x.isEnabled) as Industry[]) as Industry;
@@ -211,29 +207,10 @@ export const completeNewBusinessOnboarding = ({
   }
 
   onOnboardingPage.clickNext();
-
-  cy.url().should("include", "onboarding?page=3");
-
-  onOnboardingPage.typeFullName(fullName);
-  onOnboardingPage.getFullName().invoke("prop", "value").should("contain", fullName);
-  onOnboardingPage.typeEmail(email);
-  onOnboardingPage.getEmail().invoke("prop", "value").should("contain", email);
-  onOnboardingPage.typeConfirmEmail(email);
-  onOnboardingPage.getConfirmEmail().invoke("prop", "value").should("contain", email);
-  onOnboardingPage.toggleNewsletterCheckbox(isNewsletterChecked);
-  onOnboardingPage.toggleContactMeCheckbox(isContactMeChecked);
-  onOnboardingPage.getNewsletterCheckbox().should(`${isNewsletterChecked ? "be" : "not.be"}.checked`);
-  onOnboardingPage.getContactMeCheckbox().should(`${isContactMeChecked ? "be" : "not.be"}.checked`);
-
-  onOnboardingPage.clickNext();
   cy.url().should("include", `dashboard`);
 };
 export const completeExistingBusinessOnboarding = ({
   sectorId = randomElementFromArray(arrayOfSectors).id,
-  fullName = `Michael Smith ${randomInt()}`,
-  email = `MichaelSmith${randomInt()}@gmail.com`,
-  isNewsletterChecked = false,
-  isContactMeChecked = false,
 }: Partial<ExistingOnboardingData> & Partial<Registration>): void => {
   let pageIndex = 1;
   cy.url().should("include", `onboarding?page=${pageIndex}`);
@@ -251,30 +228,10 @@ export const completeExistingBusinessOnboarding = ({
       expect(value).to.contain(LookupSectorTypeById(sectorId).name);
     });
   onOnboardingPage.clickNext();
-
-  pageIndex += 1;
-  cy.url().should("include", `onboarding?page=${pageIndex}`);
-
-  onOnboardingPage.typeFullName(fullName);
-  onOnboardingPage.getFullName().invoke("prop", "value").should("contain", fullName);
-  onOnboardingPage.typeEmail(email);
-  onOnboardingPage.getEmail().invoke("prop", "value").should("contain", email);
-  onOnboardingPage.typeConfirmEmail(email);
-  onOnboardingPage.getConfirmEmail().invoke("prop", "value").should("contain", email);
-  onOnboardingPage.toggleNewsletterCheckbox(isNewsletterChecked);
-  onOnboardingPage.toggleContactMeCheckbox(isContactMeChecked);
-  onOnboardingPage.getNewsletterCheckbox().should(`${isNewsletterChecked ? "be" : "not.be"}.checked`);
-  onOnboardingPage.getContactMeCheckbox().should(`${isContactMeChecked ? "be" : "not.be"}.checked`);
-
-  onOnboardingPage.clickNext();
   cy.url().should("include", `dashboard`);
 };
 export const completeForeignBusinessOnboarding = ({
   foreignBusinessTypeIds,
-  fullName = `Michael Smith ${randomInt()}`,
-  email = `MichaelSmith${randomInt()}@gmail.com`,
-  isNewsletterChecked = false,
-  isContactMeChecked = false,
 }: Partial<ForeignOnboardingData> & Partial<Registration>): void => {
   let pageIndex = 1;
   cy.url().should("include", `onboarding?page=${pageIndex}`);
@@ -295,29 +252,9 @@ export const completeForeignBusinessOnboarding = ({
   }
 
   onOnboardingPage.clickNext();
-
-  pageIndex += 1;
-  cy.url().should("include", `onboarding?page=${pageIndex}`);
-
-  onOnboardingPage.typeFullName(fullName);
-  onOnboardingPage.getFullName().invoke("prop", "value").should("contain", fullName);
-  onOnboardingPage.typeEmail(email);
-  onOnboardingPage.getEmail().invoke("prop", "value").should("contain", email);
-  onOnboardingPage.typeConfirmEmail(email);
-  onOnboardingPage.getConfirmEmail().invoke("prop", "value").should("contain", email);
-  onOnboardingPage.toggleNewsletterCheckbox(isNewsletterChecked);
-  onOnboardingPage.toggleContactMeCheckbox(isContactMeChecked);
-  onOnboardingPage.getNewsletterCheckbox().should(`${isNewsletterChecked ? "be" : "not.be"}.checked`);
-  onOnboardingPage.getContactMeCheckbox().should(`${isContactMeChecked ? "be" : "not.be"}.checked`);
-
-  onOnboardingPage.clickNext();
   cy.url().should("include", `dashboard`);
 };
 export const completeForeignNexusBusinessOnboarding = ({
-  fullName = `Michael Smith ${randomInt()}`,
-  email = `MichaelSmith${randomInt()}@gmail.com`,
-  isNewsletterChecked = false,
-  isContactMeChecked = false,
   industry = undefined,
   locationInNewJersey = false,
 }: Partial<ForeignOnboardingData> & Partial<StartingOnboardingData> & Partial<Registration>): void => {
@@ -352,19 +289,6 @@ export const completeForeignNexusBusinessOnboarding = ({
   cy.url().should("include", "onboarding?page=4");
 
   onOnboardingPage.selectLocationInNewJersey(locationInNewJersey);
-
-  onOnboardingPage.clickNext();
-  cy.url().should("include", "onboarding?page=5");
-  onOnboardingPage.typeFullName(fullName);
-  onOnboardingPage.getFullName().invoke("prop", "value").should("contain", fullName);
-  onOnboardingPage.typeEmail(email);
-  onOnboardingPage.getEmail().invoke("prop", "value").should("contain", email);
-  onOnboardingPage.typeConfirmEmail(email);
-  onOnboardingPage.getConfirmEmail().invoke("prop", "value").should("contain", email);
-  onOnboardingPage.toggleNewsletterCheckbox(isNewsletterChecked);
-  onOnboardingPage.toggleContactMeCheckbox(isContactMeChecked);
-  onOnboardingPage.getNewsletterCheckbox().should(`${isNewsletterChecked ? "be" : "not.be"}.checked`);
-  onOnboardingPage.getContactMeCheckbox().should(`${isContactMeChecked ? "be" : "not.be"}.checked`);
 
   onOnboardingPage.clickNext();
   cy.url().should("include", `dashboard`);

@@ -704,7 +704,6 @@ const ProfilePage = (props: Props): ReactElement => {
               profileData: profileData,
               flow: getFlow(profileData),
             },
-            setUser: (): void => {},
             setProfileData,
             onBack,
           }}

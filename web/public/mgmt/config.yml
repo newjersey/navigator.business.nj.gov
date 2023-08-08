@@ -2790,6 +2790,21 @@ collections:
                 }
               - { label: Mobile View - First Tab Text, name: mobileFirstTabText, widget: string }
               - { label: Mobile View - Second Tab Text, name: mobileSecondTabText, widget: string }
+      - label: "Account Setup Page"
+        name: "account-setup-page"
+        file: "content/src/fieldConfig/account-setup-page.json"
+        editor:
+          preview: true
+        fields:
+          - label: Account Setup
+            name: accountSetup
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Header, name: header, widget: string }
+              - { label: Body, name: body, widget: markdown }
+              - { label: Submit Button, name: submitButton, widget: string }
+              - { label: Error Alert, name: errorAlert, widget: string }
 
   - name: "roadmap-sidebar-card"
     label: "Sidebar Cards Content"

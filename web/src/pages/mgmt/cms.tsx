@@ -34,6 +34,7 @@ import TaskPreview from "@/lib/cms/previews/TaskPreview";
 import TaxInputPreview from "@/lib/cms/previews/TaxInputPreview";
 import { useMountEffect } from "@/lib/utils/helpers";
 
+import AccountSetupPreview from "@/lib/cms/previews/AccountSetupPreview";
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
 import TaxAccessModalPreview from "@/lib/cms/previews/TaxAccessModalPreview";
 import { GetStaticPropsResult } from "next";
@@ -119,6 +120,7 @@ const CMS = dynamic(
       registerPreview(CMS, "dashboard-config-calendar", DashboardCalendarPreview);
       registerPreview(CMS, "dashboard-config-modals", DashboardModalsPreview);
       registerPreview(CMS, "dashboard-config-tabs", DashboardTabsPreview);
+      registerPreview(CMS, "account-setup-page", AccountSetupPreview);
 
       registerPreview(CMS, "deferred-location-config", DeferredLocationPreview);
 

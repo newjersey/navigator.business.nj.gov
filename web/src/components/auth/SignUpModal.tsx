@@ -4,7 +4,6 @@ import { Icon } from "@/components/njwds/Icon";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
-import { onSelfRegister } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
@@ -15,14 +14,10 @@ import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 
 export const SignUpModal = (): ReactElement => {
-  const { business, updateQueue } = useUserData();
+  const { business } = useUserData();
   const router = useRouter();
-  const {
-    isAuthenticated,
-    registrationModalIsVisible,
-    setRegistrationModalIsVisible,
-    setRegistrationAlertStatus,
-  } = useContext(AuthAlertContext);
+  const { isAuthenticated, registrationModalIsVisible, setRegistrationModalIsVisible } =
+    useContext(AuthAlertContext);
 
   useMountEffectWhenDefined(() => {
     if (isAuthenticated === IsAuthenticated.TRUE) {
@@ -34,13 +29,13 @@ export const SignUpModal = (): ReactElement => {
     return <></>;
   }
 
-  const selfRegister = (): void => {
+  const linkToAccountSetup = (): void => {
     if (business?.preferences.returnToLink === `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true`) {
-      analytics.event.myNJ_prompt_modal_complete_button.click.go_to_myNJ_registration();
+      analytics.event.myNJ_prompt_modal_complete_button.click.go_to_NavigatorAccount_setup();
     } else {
-      analytics.event.guest_modal.click.go_to_myNJ_registration();
+      analytics.event.guest_modal.click.go_to_NavigatorAccount_setup();
     }
-    onSelfRegister(router, updateQueue, updateQueue?.current(), setRegistrationAlertStatus);
+    router.push(ROUTES.accountSetup);
   };
 
   return (
@@ -71,7 +66,7 @@ export const SignUpModal = (): ReactElement => {
       </DialogContent>
       <DialogContent dividers={false} sx={{ paddingX: 5 }}>
         <Box>
-          <PrimaryButton isColor="primary" isFullWidthOnDesktop onClick={selfRegister}>
+          <PrimaryButton isColor="primary" isFullWidthOnDesktop onClick={linkToAccountSetup}>
             {Config.navigationDefaults.guestModalButtonText}
           </PrimaryButton>
         </Box>

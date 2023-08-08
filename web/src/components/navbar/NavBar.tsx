@@ -12,7 +12,7 @@ type Props = {
   task?: Task;
   showSidebar?: boolean;
   hideMiniRoadmap?: boolean;
-  logoOnly?: boolean;
+  logoOnly?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
 };
 
 export const NavBar = (props: Props): ReactElement => {
@@ -36,7 +36,7 @@ export const NavBar = (props: Props): ReactElement => {
   }, []);
 
   if (props.logoOnly) {
-    return <NavBarLogoOnly />;
+    return <NavBarLogoOnly logoType={props.logoOnly} />;
   } else if (props.landingPage && isLargeScreen) {
     return <NavBarLandingDesktop />;
   } else if (isLargeScreen) {

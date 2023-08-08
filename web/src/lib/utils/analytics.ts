@@ -102,7 +102,7 @@ type Clicked =
   | "expand_contract"
   | "go_to_profile_screen"
   | "go_to_myNJ_login"
-  | "go_to_myNJ_registration"
+  | "go_to_NavigatorAccount_setup"
   | "log_out"
   | "unlinked_myNJ_account"
   | "get_unlinked_myNJ_account_modal";
@@ -134,6 +134,7 @@ type Action =
   | "go_to_myNJ_registration"
   | "go_to_filing_detail_screen"
   | "go_to_profile_screen"
+  | "go_to_NavigatorAccount_setup"
   | "return_from_myNJ_registration";
 
 type ClickText =
@@ -165,6 +166,7 @@ type FormName =
   | "cannabis_license"
   | "industry_essential_questions"
   | "name_search"
+  | "account_setup"
   | "task_address_form";
 
 type OnTabName =
@@ -208,7 +210,7 @@ type Item =
   | "landing_page_navbar_log_in"
   | "guest_modal"
   | "guest_menu"
-  | "guest_toast"
+  | "guest_snackbar"
   | "roadmap_logout_button"
   | "landing_page_hero_log_in"
   | "go_to_profile_nudge_button"
@@ -558,27 +560,27 @@ export default {
     },
     guest_snackbar: {
       click: {
-        go_to_myNJ_registration: () => {
+        go_to_NavigatorAccount_setup: () => {
           eventRunner.track({
             event: "account_clicks",
             legacy_event_action: "click",
             legacy_event_category: "guest_snackbar",
-            legacy_event_label: "go_to_myNJ_registration",
-            clicked: "go_to_myNJ_registration",
-            item: "guest_toast",
+            legacy_event_label: "go_to_NavigatorAccount_setup",
+            clicked: "go_to_NavigatorAccount_setup",
+            item: "guest_snackbar",
           });
         },
       },
     },
     guest_modal: {
       click: {
-        go_to_myNJ_registration: () => {
+        go_to_NavigatorAccount_setup: () => {
           eventRunner.track({
             event: "account_clicks",
             legacy_event_action: "click",
             legacy_event_category: "guest_modal",
-            legacy_event_label: "go_to_myNJ_registration",
-            clicked: "go_to_myNJ_registration",
+            legacy_event_label: "go_to_NavigatorAccount_setup",
+            clicked: "go_to_NavigatorAccount_setup",
             item: "guest_modal",
           });
         },
@@ -596,13 +598,13 @@ export default {
     },
     guest_menu: {
       click: {
-        go_to_myNJ_registration: () => {
+        go_to_NavigatorAccount_setup: () => {
           eventRunner.track({
             event: "account_clicks",
             legacy_event_action: "click",
             legacy_event_category: "guest_menu",
-            legacy_event_label: "go_to_myNJ_registration",
-            clicked: "go_to_myNJ_registration",
+            legacy_event_label: "go_to_NavigatorAccount_setup",
+            clicked: "go_to_NavigatorAccount_setup",
             item: "guest_menu",
           });
         },
@@ -1797,13 +1799,13 @@ export default {
     },
     myNJ_prompt_modal_complete_button: {
       click: {
-        go_to_myNJ_registration: () => {
+        go_to_NavigatorAccount_setup: () => {
           eventRunner.track({
             event: "graduation_phase_interactions",
             legacy_event_action: "click",
             legacy_event_category: "myNJ_prompt_modal_complete_button",
-            legacy_event_label: "go_to_myNJ_registration",
-            action: "go_to_myNJ_registration",
+            legacy_event_label: "go_to_NavigatorAccount_setup",
+            action: "go_to_NavigatorAccount_setup",
             item: "myNJ_prompt_modal_complete_button",
           });
         },
@@ -1944,6 +1946,20 @@ export default {
             legacy_event_label: "go_to_profile",
             action: "go_to_profile_screen",
             item: "go_to_profile_nudge_button",
+          });
+        },
+      },
+    },
+    finish_setup_on_myNewJersey_button: {
+      submit: {
+        go_to_myNJ_registration: () => {
+          eventRunner.track({
+            legacy_event_category: "finish_setup_on_myNewJersey_button",
+            legacy_event_action: "submit",
+            legacy_event_label: "go_to_myNJ_registration",
+            event: "form_submits",
+            form_name: "account_setup",
+            action: "go_to_myNJ_registration",
           });
         },
       },

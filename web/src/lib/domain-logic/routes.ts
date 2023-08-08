@@ -8,6 +8,7 @@ export const ROUTES = {
   onboarding: "/onboarding",
   unsupported: "/unsupported",
   welcome: "/welcome",
+  accountSetup: "/account-setup",
 };
 
 export interface QUERY_PARAMS_VALUES {
@@ -29,6 +30,7 @@ export interface QUERY_PARAMS_VALUES {
   code: string;
   openTaxFilingsModal: "true";
   flow: "starting" | "out-of-state" | "up-and-running";
+  source: "guest_snackbar";
 }
 
 export enum QUERIES {
@@ -50,6 +52,7 @@ export enum QUERIES {
   code = "code",
   openTaxFilingsModal = "openTaxFilingsModal",
   flow = "flow",
+  source = "source",
 }
 
 export const routeShallowWithQuery = <K extends keyof QUERY_PARAMS_VALUES>(

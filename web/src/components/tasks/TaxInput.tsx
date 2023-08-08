@@ -115,7 +115,6 @@ export const TaxInput = (props: Props): ReactElement => {
             flow: "STARTING",
           },
           setProfileData,
-          setUser: (): void => {},
           onBack: (): void => {},
         }}
       >
