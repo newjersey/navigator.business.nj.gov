@@ -3,6 +3,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import {
   BusinessPersona,
+  ForeignBusinessType,
   generateBusiness,
   LookupIndustryById,
   LookupLegalStructureById,
@@ -305,6 +306,27 @@ describe("getNavBarBusinessTitle", () => {
       });
       const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
       expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedOwnedBusinessText);
+    });
+
+    describe("FOREIGN", () => {
+      it.each(["REMOTE_SELLER", "REMOTE_WORKER"])(
+        "shows Unnamed Out-of-State Business when FOREIGN and %s",
+        (foreignBusinessType) => {
+          const business = generateBusiness({
+            profileData: generateProfileData({
+              legalStructureId: undefined,
+              businessName: undefined,
+              tradeName: undefined,
+              businessPersona: "FOREIGN",
+              foreignBusinessType: foreignBusinessType as ForeignBusinessType,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+          expect(navBarBusinessTitle).toEqual(
+            Config.navigationDefaults.navBarUnnamedForeignRemoteSellerWorkerText
+          );
+        }
+      );
     });
   });
 });
