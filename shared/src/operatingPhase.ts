@@ -117,7 +117,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayProfileOpportunityAlert: true,
     sectorRequired: true,
     displayBusinessStructurePrompt: false,
-    displayHomeBasedPrompt: true,
+    displayHomeBasedPrompt: false,
   },
   {
     id: "FORMED_AND_REGISTERED",
@@ -216,7 +216,7 @@ export const OperatingPhases: OperatingPhase[] = [
     feedbackFormToDisplay: "OWNING",
     displayProfileOpportunityAlert: false,
     displayBusinessStructurePrompt: false,
-    displayHomeBasedPrompt: true,
+    displayHomeBasedPrompt: false,
     sectorRequired: true,
   },
   {
@@ -237,6 +237,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayProfileOpportunityAlert: true,
     sectorRequired: true,
     displayBusinessStructurePrompt: false,
-    displayHomeBasedPrompt: true,
+    displayHomeBasedPrompt: false,
   },
 ];

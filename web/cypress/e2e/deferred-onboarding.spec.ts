@@ -7,7 +7,6 @@ import {
   randomPublicFilingLegalStructure,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import {
-  completeExistingBusinessOnboarding,
   completeForeignBusinessOnboarding,
   completeForeignNexusBusinessOnboarding,
   completeNewBusinessOnboarding,
@@ -120,29 +119,6 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
         });
       });
     });
-    //
-    // describe('onboarded as STARTING - TradeName', () => {
-    //   it('can provide location in Location-Dependent task', () => {
-    //
-    //   })
-    //
-    //   it('can provide location in Registered For Taxes Modal', () => {
-    //
-    //   })
-    //
-    //   it('can provide location in profile', () => {
-    //
-    //   })
-    // });
-    //
-    // describe('onboarded as FOREIGN NEXUS - PublicFiling', () => {
-    //
-    // });
-    //
-    // describe('onboarded as FOREIGN NEXUS - TradeName', () => {
-    //
-    // });
-    //
   });
 
   describe("home-based business", () => {
@@ -160,13 +136,6 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
         completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
         hasNonHomeBasedTasks();
         doesNotShowHomeBasedBusinessQuestionAtAll();
-      });
-    });
-
-    describe("onboarded as OWNING - all sectors", () => {
-      it("shows and answers home-based-business deferred question", () => {
-        completeExistingBusinessOnboarding({});
-        showsAndAnswersHomeBasedBusinessQuestionOnDashboard();
       });
     });
 
