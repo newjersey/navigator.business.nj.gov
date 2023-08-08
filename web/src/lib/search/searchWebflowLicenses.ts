@@ -15,6 +15,7 @@ export const searchWebflowLicenses = (licenses: WebflowLicense[], term: string):
     const content = license.contentMd?.toLowerCase();
     const name = license.webflowName?.toLowerCase();
     const cta = license.callToActionText?.toLowerCase();
+    const ctaLink = license.callToActionLink?.toLowerCase();
     const agency = license.agencyId ? LookupTaskAgencyById(license.agencyId).name.toLowerCase() : "";
     const division = license.agencyAdditionalContext?.toLowerCase();
     const classification = license.licenseCertificationClassification?.toLowerCase();
@@ -24,6 +25,7 @@ export const searchWebflowLicenses = (licenses: WebflowLicense[], term: string):
     const blockTexts = [content, summary];
     const labelledTexts = [
       { content: cta, label: "CTA Text" },
+      { content: ctaLink, label: "CTA Link" },
       { content: name, label: "Task name" },
       { content: agency, label: "Agency" },
       { content: division, label: "Division" },

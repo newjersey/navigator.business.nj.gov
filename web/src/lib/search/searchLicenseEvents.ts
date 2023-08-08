@@ -20,8 +20,8 @@ export const searchLicenseEvents = (licenseEvents: LicenseEvent[], term: string)
 
     const labelledTexts = [
       { content: filename, label: "Filename" },
-      { content: callToActionLink, label: "Call To Action Link" },
-      { content: callToActionText, label: "Call To Action Text" },
+      { content: callToActionLink, label: "CTA Link" },
+      { content: callToActionText, label: "CTA Text" },
     ];
 
     match = findMatchInBlock(blockTexts, term, match);
