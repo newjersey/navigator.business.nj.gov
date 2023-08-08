@@ -121,7 +121,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
     if (!isCompleted()) {
       return Config.businessStructureTask.uncompletedTooltip;
     } else if (hasCompletedFormation(business)) {
-      return Config.profileDefaults.lockedFieldTooltipText;
+      return Config.profileDefaults.default.lockedFieldTooltipText;
     } else {
       return Config.businessStructureTask.completedTooltip;
     }
@@ -187,7 +187,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
                 </div>
               ) : (
                 <div className="margin-left-2 flex flex-row flex-align-center">
-                  <ArrowTooltip title={Config.profileDefaults.lockedFieldTooltipText}>
+                  <ArrowTooltip title={Config.profileDefaults.default.lockedFieldTooltipText}>
                     <div className="fdr fac font-body-lg">
                       <Icon>help_outline</Icon>
                     </div>

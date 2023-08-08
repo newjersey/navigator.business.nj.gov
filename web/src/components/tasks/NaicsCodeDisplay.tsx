@@ -32,7 +32,7 @@ export const NaicsCodeDisplay = (props: Props): ReactElement => {
         </span>
         {props.lockField ? (
           <ArrowTooltip
-            title={Config.profileDefaults.lockedFieldTooltipText}
+            title={Config.profileDefaults.default.lockedFieldTooltipText}
             data-testid="naics-code-tooltip"
           >
             <div className="fdr fac font-body-lg">

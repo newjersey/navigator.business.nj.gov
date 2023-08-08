@@ -107,7 +107,7 @@ describe("profile - owning existing business", () => {
     renderPage({ business });
     fillText(inputFieldName, "Cool Computers");
     clickBack();
-    expect(screen.getByText(Config.profileDefaults.escapeModalReturn)).toBeInTheDocument();
+    expect(screen.getByText(Config.profileDefaults.default.escapeModalReturn)).toBeInTheDocument();
   });
 
   it("returns user to profile page from un-saved changes modal", () => {
@@ -119,7 +119,7 @@ describe("profile - owning existing business", () => {
     renderPage({ business });
     fillText(inputFieldName, "Cool Computers");
     clickBack();
-    fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalEscape));
+    fireEvent.click(screen.getByText(Config.profileDefaults.default.escapeModalEscape));
     expect(screen.getByLabelText(inputFieldName)).toBeInTheDocument();
   });
 
@@ -315,7 +315,7 @@ describe("profile - owning existing business", () => {
     renderPage({ business, municipalities: [newark] });
     selectByText("Location", newark.displayName);
     clickBack();
-    fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalReturn));
+    fireEvent.click(screen.getByText(Config.profileDefaults.default.escapeModalReturn));
     await waitFor(() => {
       expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
     });

@@ -45,11 +45,11 @@ const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
         <hr className="margin-y-4" />
 
         <h2>Essential Question Alert Banner</h2>
-        <Alert variant="error">{config.profileDefaults.essentialQuestionAlertText}</Alert>
+        <Alert variant="error">{config.profileDefaults.default.essentialQuestionAlertText}</Alert>
 
         <hr className="margin-y-4" />
         <h2>Essential Question Inline Error Text</h2>
-        {config.profileDefaults.essentialQuestionInlineText}
+        {config.profileDefaults.default.essentialQuestionInlineText}
         <hr className="margin-y-4" />
 
         <h2 className="margin-bottom-4">Misc Buttons & Labels:</h2>

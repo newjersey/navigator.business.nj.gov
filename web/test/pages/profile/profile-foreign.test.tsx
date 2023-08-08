@@ -68,10 +68,10 @@ describe("profile-foreign", () => {
 
   it("does not display the documents tab", () => {
     renderPage({ business: setupBusiness });
-    expect(screen.getAllByText(Config.profileDefaults.profileTabRefTitle).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(Config.profileDefaults.profileTabNoteTitle).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(Config.profileDefaults.profileTabInfoTitle).length).toBeGreaterThan(0);
-    expect(screen.queryByText(Config.profileDefaults.profileTabDocsTitle)).not.toBeInTheDocument();
+    expect(screen.getAllByText(Config.profileDefaults.default.profileTabRefTitle).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(Config.profileDefaults.default.profileTabNoteTitle).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(Config.profileDefaults.default.profileTabInfoTitle).length).toBeGreaterThan(0);
+    expect(screen.queryByText(Config.profileDefaults.default.profileTabDocsTitle)).not.toBeInTheDocument();
   });
 
   it("does not show the home-based question if locationInNewJersey=true, even if industry applicable", () => {
@@ -105,7 +105,7 @@ describe("profile-foreign", () => {
       clickSave();
       await waitFor(() => {
         expect(
-          screen.getAllByText(Config.profileDefaults.essentialQuestionInlineText)[0]
+          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0]
         ).toBeInTheDocument();
       });
     }
@@ -438,12 +438,14 @@ describe("profile-foreign", () => {
           screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header)
         ).toBeInTheDocument();
         expect(screen.getByText(LookupLegalStructureById(legalStructure).name)).toBeInTheDocument();
-        expect(screen.queryByText(Config.profileDefaults.lockedFieldTooltipText)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.profileDefaults.default.lockedFieldTooltipText)
+        ).not.toBeInTheDocument();
 
         expect(screen.queryByText("business-structure-task-link")).not.toBeInTheDocument();
 
         fireEvent.mouseOver(screen.getByTestId("legalStructureId-locked-tooltip"));
-        await screen.findByText(Config.profileDefaults.lockedFieldTooltipText);
+        await screen.findByText(Config.profileDefaults.default.lockedFieldTooltipText);
       });
     });
   });

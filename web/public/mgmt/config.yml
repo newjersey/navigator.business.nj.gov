@@ -4650,8 +4650,9 @@ collections:
                           - { label: "Description", name: "description", widget: "markdown" }
 
       - label: "Profile / Onboarding Page Misc"
-        name: "profile-misc"
+        name: "default"
         file: "content/src/fieldConfig/config.json"
+        widget: object
         editor:
           preview: true
         fields:

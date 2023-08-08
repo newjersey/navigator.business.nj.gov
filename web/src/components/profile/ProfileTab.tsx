@@ -15,13 +15,13 @@ export const ProfileTab = (props: Props): ReactElement => {
   const lookupName = (tab: ProfileTabs): string => {
     switch (tab) {
       case "documents":
-        return Config.profileDefaults.profileTabDocsTitle;
+        return Config.profileDefaults.default.profileTabDocsTitle;
       case "info":
-        return Config.profileDefaults.profileTabInfoTitle;
+        return Config.profileDefaults.default.profileTabInfoTitle;
       case "notes":
-        return Config.profileDefaults.profileTabNoteTitle;
+        return Config.profileDefaults.default.profileTabNoteTitle;
       case "numbers":
-        return Config.profileDefaults.profileTabRefTitle;
+        return Config.profileDefaults.default.profileTabRefTitle;
     }
   };
 
