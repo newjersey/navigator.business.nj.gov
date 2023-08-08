@@ -18,12 +18,10 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { addAdditionalBusiness } from "@/lib/domain-logic/addAdditionalBusiness";
-import { hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import { QUERIES, QUERY_PARAMS_VALUES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import {
   createProfileFieldErrorMap,
   FlowType,
@@ -49,9 +47,7 @@ import {
   pageQueryParamisValid,
 } from "@/lib/utils/onboardingPageHelpers";
 import {
-  BusinessUser,
   createEmptyProfileData,
-  createEmptyUser,
   createEmptyUserData,
   Municipality,
   ProfileData,
@@ -80,7 +76,6 @@ const OnboardingPage = (props: Props): ReactElement => {
   const router = useRouter();
   const [page, setPage] = useState<Page>({ current: 1, previous: 1 });
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
-  const [user, setUser] = useState<BusinessUser>(createEmptyUser(ABStorageFactory().getExperience()));
   const [error, setError] = useState<ProfileError | undefined>(undefined);
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
   const { updateQueue, createUpdateQueue } = useUserData();
@@ -129,19 +124,10 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
     };
 
-    const removeNameAndEmailForAdditionalBusiness = (): void => {
-      if (isAdditionalBusiness) {
-        removePageFromFlow("name-email-page", "STARTING");
-        removePageFromFlow("name-email-page", "OWNING");
-        removePageFromFlow("name-email-page", "FOREIGN");
-      }
-    };
-
     removeNexusSpecificPages();
-    removeNameAndEmailForAdditionalBusiness();
 
     return onboardingFlows;
-  }, [profileData, isAdditionalBusiness]);
+  }, [profileData]);
 
   const routeToPage = useCallback(
     (page: number) => {
@@ -179,14 +165,12 @@ const OnboardingPage = (props: Props): ReactElement => {
         }
 
         setProfileData(currentUserData.businesses[currentUserData.currentBusinessId].profileData);
-        setUser(currentUserData.user);
         setCurrentFlow(getFlow(currentUserData));
       } else {
         currentUserData = createEmptyUserData(state.user);
         setRegistrationDimension("Began Onboarding");
         await createUpdateQueue(currentUserData);
         setProfileData(currentUserData.businesses[currentUserData.currentBusinessId].profileData);
-        setUser(currentUserData.user);
       }
 
       const currentBusiness = currentUserData.businesses[currentUserData.currentBusinessId];
@@ -224,11 +208,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     };
 
     setProfileData(newProfileData);
-    if (hasEssentialQuestion(industryId)) {
-      setPage({ current: 2, previous: 1 });
-    } else {
-      setPage({ current: 3, previous: 2 });
-    }
+    setPage({ current: 2, previous: 1 });
     await updateQueue?.queueProfileData(newProfileData);
   };
 
@@ -289,7 +269,6 @@ const OnboardingPage = (props: Props): ReactElement => {
         await router.push(ROUTES.unsupported);
       } else if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
         updateQueue
-          .queueUser(user)
           .queueProfileData(newProfileData)
           .update({ local: true })
           .then(() => {
@@ -316,7 +295,6 @@ const OnboardingPage = (props: Props): ReactElement => {
 
         let newUserData: UserData = {
           ...updateQueue.current(),
-          user,
           businesses: {
             ...updateQueue.current().businesses,
             [updateQueue.current().currentBusinessId]: {
@@ -331,16 +309,6 @@ const OnboardingPage = (props: Props): ReactElement => {
             },
           },
         };
-
-        if (!isAdditionalBusiness) {
-          if (newUserData.user.receiveNewsletter) {
-            newUserData = await api.postNewsletter(newUserData);
-          }
-
-          if (newUserData.user.userTesting) {
-            newUserData = await api.postUserTesting(newUserData);
-          }
-        }
 
         newUserData = await api.postGetAnnualFilings(newUserData);
         const preferences = newUserData.businesses[newUserData.currentBusinessId].preferences;
@@ -442,11 +410,9 @@ const OnboardingPage = (props: Props): ReactElement => {
             state: {
               page: page.current,
               profileData: profileData,
-              user: user,
               flow: currentFlow,
             },
             setProfileData,
-            setUser,
             onBack,
           }}
         >

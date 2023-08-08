@@ -1,3 +1,4 @@
+import * as AccountSetup from "@businessnjgovnavigator/content/fieldConfig/account-setup-page.json";
 import * as BusinessFormation from "@businessnjgovnavigator/content/fieldConfig/business-formation.json";
 import * as BusinessStructurePrompt from "@businessnjgovnavigator/content/fieldConfig/business-structure-prompt.json";
 import * as BusinessStructureTask from "@businessnjgovnavigator/content/fieldConfig/business-structure-task.json";
@@ -14,7 +15,7 @@ import * as DashboardSnackbars from "@businessnjgovnavigator/content/fieldConfig
 import * as DashboardTabs from "@businessnjgovnavigator/content/fieldConfig/dashboard-tabs.json";
 import * as DeferredLocation from "@businessnjgovnavigator/content/fieldConfig/deferred-location.json";
 import * as Ein from "@businessnjgovnavigator/content/fieldConfig/ein.json";
-import * as exportPdf from "@businessnjgovnavigator/content/fieldConfig/export-pdf.json";
+import * as ExportPdf from "@businessnjgovnavigator/content/fieldConfig/export-pdf.json";
 import * as FormationInterimSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-interim-success-page.json";
 import * as FormationSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-success-page.json";
 import * as NaicsCode from "@businessnjgovnavigator/content/fieldConfig/naics-code.json";
@@ -56,7 +57,8 @@ const merged = JSON.parse(
       TaxAccess,
       BusinessStructureTask,
       BusinessStructurePrompt,
-      exportPdf
+      AccountSetup,
+      ExportPdf
     )
   )
 );
@@ -86,7 +88,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof TaxAccess &
   typeof DashboardSnackbars &
   typeof BusinessStructurePrompt &
-  typeof exportPdf;
+  typeof AccountSetup &
+  typeof ExportPdf;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -113,7 +116,9 @@ export const getMergedConfig = (): ConfigType => {
     DashboardCalendar,
     BusinessFormation,
     TaxAccess,
-    BusinessStructureTask
+    AccountSetup,
+    BusinessStructureTask,
+    ExportPdf
   );
 };
 

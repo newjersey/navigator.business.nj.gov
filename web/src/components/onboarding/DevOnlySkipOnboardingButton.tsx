@@ -17,8 +17,8 @@ export const DevOnlySkipOnboardingButton = (props: Props): ReactElement => {
       businessPersona: "STARTING",
       industryId: "generic",
     });
-    props.setPage({ current: 3, previous: 2 });
-    props.routeToPage(3);
+    props.setPage({ current: 2, previous: 1 });
+    props.routeToPage(2);
   };
 
   if (state.page === 1 && process.env.NODE_ENV === "development") {

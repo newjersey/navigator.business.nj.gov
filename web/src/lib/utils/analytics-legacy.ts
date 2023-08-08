@@ -101,8 +101,6 @@ export type LegacyEventCategory =
   | "roadmap_profile_edit_button"
   | "landing_page_navbar_log_in"
   | "onboarding_header_login"
-  | "guest_modal"
-  | "guest_menu"
   | "guest_header_login"
   | "guest_toast"
   | "guest_modal"
@@ -110,6 +108,7 @@ export type LegacyEventCategory =
   | "guest_header_register"
   | "roadmap_logout_button"
   | "landing_page_hero_log_in"
+  | "finish_setup_on_myNewJersey_button"
   | "landing_page";
 
 export type LegacyEventAction =
@@ -142,7 +141,7 @@ export type LegacyEventLabel =
   | "formation_status_set_to_complete"
   | "tax_registration_status_set_to_complete"
   | "show_tax_registration_date_modal"
-  | "go_to_myNJ_registration"
+  | "go_to_NavigatorAccount_setup"
   | "go_to_date_detail_screen"
   | "go_to_onboarding"
   | "go_to_onboarding "

@@ -6,35 +6,28 @@ import {
   getEssentialQuestion,
   hasEssentialQuestion,
 } from "@/lib/domain-logic/essentialQuestions";
-import { ROUTES } from "@/lib/domain-logic/routes";
 import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
 import Onboarding from "@/pages/onboarding";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { currentBusiness, currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import { currentBusiness, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
   BusinessPersona,
+  businessStructureTaskId,
   BusinessUser,
   createEmptyUser,
   createEmptyUserData,
   DateObject,
+  emptyIndustrySpecificData,
+  generateBusiness,
   generateProfileData,
   generateUser,
-  generateUserData,
+  generateUserDataForBusiness,
   Industries,
+  industrySpecificDataChoices,
   Municipality,
   UserData,
 } from "@businessnjgovnavigator/shared/";
-import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
-import {
-  emptyIndustrySpecificData,
-  industrySpecificDataChoices,
-} from "@businessnjgovnavigator/shared/profileData";
-import {
-  generateBusiness,
-  generateUserDataForBusiness,
-  randomLegalStructure,
-} from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import {
   act,
@@ -238,14 +231,13 @@ export const createPageHelpers = (): PageHelpers => {
 export const runNonprofitOnboardingTests = ({
   businessPersona,
   industryPage,
-  selfRegPage,
+  lastPage,
 }: {
   businessPersona: BusinessPersona;
   industryPage: number;
-  selfRegPage: number;
+  lastPage: number;
 }): void => {
-  const user = createEmptyUser();
-  const initialUserData = createEmptyUserData(user);
+  const initialUserData = createEmptyUserData(createEmptyUser());
   const userData: UserData = {
     ...initialUserData,
     businesses: {
@@ -264,7 +256,10 @@ export const runNonprofitOnboardingTests = ({
     useMockRouter({ isReady: true, query: { page: industryPage.toString() } });
     const { page } = renderPage({ userData });
     page.selectByValue("Industry", "e-commerce");
-    await page.visitStep(industryPage + 1);
+    page.clickNext();
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalled();
+    });
     expect(currentBusiness().profileData.legalStructureId).toBeUndefined();
     expect(currentBusiness().profileData.isNonprofitOnboardingRadio).toBe(false);
   });
@@ -275,13 +270,16 @@ export const runNonprofitOnboardingTests = ({
     page.selectByValue("Industry", "e-commerce");
     page.chooseRadio("is-nonprofit-onboarding-radio-true");
 
-    await page.visitStep(industryPage + 1);
+    page.clickNext();
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalled();
+    });
     expect(currentBusiness().profileData.legalStructureId).toEqual("nonprofit");
     expect(currentBusiness().profileData.isNonprofitOnboardingRadio).toBe(true);
   });
 
   it("marks business structure task complete if nonprofit is Yes", async () => {
-    useMockRouter({ isReady: true, query: { page: selfRegPage.toString() } });
+    useMockRouter({ isReady: true, query: { page: lastPage.toString() } });
     const filledInUserData = generateUserDataForBusiness(
       generateBusiness({
         onboardingFormProgress: "UNSTARTED",
@@ -291,17 +289,13 @@ export const runNonprofitOnboardingTests = ({
           foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
           legalStructureId: "nonprofit",
           isNonprofitOnboardingRadio: true,
+          nexusLocationInNewJersey: businessPersona === "FOREIGN" ? true : undefined,
         }),
-      }),
-      { user }
+      })
     );
     const { page } = renderPage({ userData: filledInUserData });
 
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
     page.clickNext();
-
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalled();
     });
@@ -309,7 +303,7 @@ export const runNonprofitOnboardingTests = ({
   });
 
   it("does not change business structure task if nonprofit is No", async () => {
-    useMockRouter({ isReady: true, query: { page: selfRegPage.toString() } });
+    useMockRouter({ isReady: true, query: { page: lastPage.toString() } });
     const filledInUserData = generateUserDataForBusiness(
       generateBusiness({
         taskProgress: {},
@@ -319,15 +313,12 @@ export const runNonprofitOnboardingTests = ({
           foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
           legalStructureId: undefined,
           isNonprofitOnboardingRadio: false,
+          nexusLocationInNewJersey: businessPersona === "FOREIGN" ? true : undefined,
         }),
-      }),
-      { user }
+      })
     );
     const { page } = renderPage({ userData: filledInUserData });
 
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
     page.clickNext();
 
     await waitFor(() => {
@@ -337,217 +328,8 @@ export const runNonprofitOnboardingTests = ({
   });
 };
 
-export const runSelfRegPageTests = ({
-  businessPersona,
-  selfRegPage,
-}: {
-  businessPersona: BusinessPersona;
-  selfRegPage: string;
-}): void => {
-  const user = createEmptyUser();
-  const userData = generateUserData({
-    user,
-    currentBusinessId: "12345",
-    businesses: {
-      "12345": generateBusiness({
-        onboardingFormProgress: "UNSTARTED",
-        profileData: generateProfileData({
-          businessPersona,
-          legalStructureId: randomLegalStructure().id,
-        }),
-      }),
-    },
-  });
-
-  beforeEach(() => {
-    mockSuccessfulApiSignups();
-  });
-
-  it("prevents user from registering if the email is not matching", () => {
-    useMockRouter({ isReady: true, query: { page: selfRegPage } });
-    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
-    const page = render.page;
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.co");
-    act(() => {
-      return page.clickNext();
-    });
-    expect(screen.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
-  });
-
-  it("prevents user from registering if the email is not matching after changing it", () => {
-    useMockRouter({ isReady: true, query: { page: selfRegPage } });
-    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
-    const page = render.page;
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.co");
-    act(() => {
-      return page.clickNext();
-    });
-    expect(screen.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
-  });
-
-  it("prevents user from registering if the name is empty", () => {
-    useMockRouter({ isReady: true, query: { page: selfRegPage } });
-    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
-    const page = render.page;
-    page.fillText(Config.selfRegistration.nameFieldLabel, "");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    act(() => {
-      return page.clickNext();
-    });
-    expect(screen.queryByText(Config.selfRegistration.errorTextFullName)).toBeInTheDocument();
-  });
-
-  it("prevents user from registering if the name contains a special character", () => {
-    useMockRouter({ isReady: true, query: { page: selfRegPage } });
-    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
-    const page = render.page;
-    page.fillText(Config.selfRegistration.nameFieldLabel, "Some & Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    act(() => {
-      return page.clickNext();
-    });
-    expect(screen.queryByText(Config.selfRegistration.errorTextFullNameSpecialCharacter)).toBeInTheDocument();
-  });
-
-  it("prevents user from registering if the name is greater than 50 characters", () => {
-    useMockRouter({ isReady: true, query: { page: selfRegPage } });
-    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
-    const page = render.page;
-    const name = Array(51).fill("a").join("");
-    page.fillText(Config.selfRegistration.nameFieldLabel, name);
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    act(() => {
-      return page.clickNext();
-    });
-    expect(screen.queryByText(Config.selfRegistration.errorTextFullNameLength)).toBeInTheDocument();
-  });
-
-  it("prevents user from registering if the name does not start with a letter", () => {
-    useMockRouter({ isReady: true, query: { page: selfRegPage } });
-    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
-    const page = render.page;
-    page.fillText(Config.selfRegistration.nameFieldLabel, "12345");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    act(() => {
-      return page.clickNext();
-    });
-    expect(screen.queryByText(Config.selfRegistration.errorTextFullNameStartWithLetter)).toBeInTheDocument();
-  });
-
-  it("prevents user from registering if the email is empty", () => {
-    useMockRouter({ isReady: true, query: { page: selfRegPage } });
-    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
-    const page = render.page;
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "");
-    act(() => {
-      return page.clickNext();
-    });
-    expect(screen.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
-  });
-
-  it("allows a user to uncheck to opt out of newsletter", async () => {
-    useMockRouter({ isReady: true, query: { page: selfRegPage } });
-    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
-    const page = render.page;
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    fireEvent.click(screen.getByLabelText(Config.selfRegistration.newsletterCheckboxLabel));
-    act(() => {
-      return page.clickNext();
-    });
-    const businessUser = {
-      ...user,
-      email: "email@example.com",
-      name: "My Name",
-      receiveNewsletter: false,
-      userTesting: true,
-      externalStatus: { userTesting: { status: "SUCCESS", success: true } },
-    };
-
-    await waitFor(() => {
-      expect(currentUserData().user).toEqual(businessUser);
-    });
-  });
-
-  it("allows a user to uncheck to opt out of user testing", async () => {
-    useMockRouter({ isReady: true, query: { page: selfRegPage } });
-    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
-    const page = render.page;
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    fireEvent.click(screen.getByLabelText(Config.selfRegistration.userTestingCheckboxLabel));
-    act(() => {
-      return page.clickNext();
-    });
-    const businessUser = {
-      ...user,
-      email: "email@example.com",
-      name: "My Name",
-      receiveNewsletter: true,
-      userTesting: false,
-      externalStatus: { newsletter: { status: "SUCCESS", success: true } },
-    };
-
-    await waitFor(() => {
-      expect(currentUserData().user).toEqual(businessUser);
-    });
-  });
-
-  it("redirects the user after completion", async () => {
-    useMockRouter({ isReady: true, query: { page: selfRegPage } });
-    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
-    const page = render.page;
-    /*await waitFor(() => {
-      expect(screen.findByLabelText(Config.selfRegistration.nameFieldLabel)).toBeInTheDocument()
-    })*/
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    act(() => {
-      return page.clickNext();
-    });
-    const businessUser = {
-      ...user,
-      email: "email@example.com",
-      name: "My Name",
-      receiveNewsletter: true,
-      userTesting: true,
-      externalStatus: {
-        newsletter: { status: "SUCCESS", success: true },
-        userTesting: { status: "SUCCESS", success: true },
-      },
-    };
-    await waitFor(() => {
-      expect(currentUserData().user).toEqual(businessUser);
-      expect(mockPush).toHaveBeenCalledWith({
-        pathname: businessPersona === "OWNING" ? ROUTES.dashboard : ROUTES.dashboard,
-        query: { fromOnboarding: "true" },
-      });
-    });
-  });
-};
-
 export const mockEmptyApiSignups = (): void => {
   mockApi.postGetAnnualFilings.mockImplementation((request) => {
-    return Promise.resolve(request);
-  });
-  mockApi.postNewsletter.mockImplementation((request) => {
-    return Promise.resolve(request);
-  });
-  mockApi.postUserTesting.mockImplementation((request) => {
     return Promise.resolve(request);
   });
 };
@@ -555,31 +337,6 @@ export const mockEmptyApiSignups = (): void => {
 export const mockSuccessfulApiSignups = (): void => {
   mockApi.postGetAnnualFilings.mockImplementation((request) => {
     return Promise.resolve(request);
-  });
-  mockApi.postNewsletter.mockImplementation((request) => {
-    return Promise.resolve({
-      ...request,
-      user: {
-        ...request.user,
-        externalStatus: {
-          ...request.user.externalStatus,
-          newsletter: { status: "SUCCESS", success: true },
-        },
-      },
-    });
-  });
-
-  mockApi.postUserTesting.mockImplementation((request) => {
-    return Promise.resolve({
-      ...request,
-      user: {
-        ...request.user,
-        externalStatus: {
-          ...request.user.externalStatus,
-          userTesting: { status: "SUCCESS", success: true },
-        },
-      },
-    });
   });
 };
 

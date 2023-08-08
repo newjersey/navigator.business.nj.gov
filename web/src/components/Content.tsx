@@ -5,7 +5,6 @@ import { HorizontalLine } from "@/components/HorizontalLine";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Icon } from "@/components/njwds/Icon";
 import { PureMarkdownContent } from "@/components/PureMarkdownContent";
-import { SelfRegLink } from "@/components/SelfRegLink";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import { InlineIconType } from "@/lib/cms/types";
 import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifiedByUserData";
@@ -84,8 +83,6 @@ const Link = (onClick?: (url?: string) => void): any => {
             {props.children[0]}
           </ExternalLink>
         );
-      } else if (props.href.startsWith("/self-register")) {
-        return <SelfRegLink href={props.href}>{props.children}</SelfRegLink>;
       }
       return (
         <a href={props.href} onClick={(): void => (onClick ? onClick(props.href) : undefined)}>

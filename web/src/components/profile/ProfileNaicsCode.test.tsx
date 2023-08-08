@@ -32,7 +32,6 @@ const renderComponent = (businessOverrides: Partial<Business>): void => {
             flow: getFlow(data),
           },
           setProfileData: (): void => {},
-          setUser: (): void => {},
           onBack: (): void => {},
         }}
       >

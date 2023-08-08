@@ -112,7 +112,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
   const registerMenuItem = (): ReactElement => {
     return NavMenuItem({
       onClick: (): void => {
-        analytics.event.guest_menu.click.go_to_myNJ_registration();
+        analytics.event.guest_menu.click.go_to_NavigatorAccount_setup();
         onSelfRegister(router, updateQueue, userData, setRegistrationAlertStatus);
       },
       icon: <ButtonIcon svgFilename="profile" sizePx="25px" />,
