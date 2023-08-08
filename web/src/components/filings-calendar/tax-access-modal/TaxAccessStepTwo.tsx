@@ -253,7 +253,6 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
             flow: "OWNING",
           },
           setProfileData,
-          setUser: (): void => {},
           onBack: (): void => {},
         }}
       >

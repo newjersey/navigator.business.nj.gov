@@ -15,12 +15,12 @@ export const EscapeModal = (props: Props): ReactElement => {
     <ModalTwoButton
       isOpen={props.isOpen}
       close={props.close}
-      title={Config.profileDefaults.escapeModalHeader}
-      primaryButtonText={Config.profileDefaults.escapeModalReturn}
+      title={Config.profileDefaults.default.escapeModalHeader}
+      primaryButtonText={Config.profileDefaults.default.escapeModalReturn}
       primaryButtonOnClick={props.primaryButtonOnClick}
-      secondaryButtonText={Config.profileDefaults.escapeModalEscape}
+      secondaryButtonText={Config.profileDefaults.default.escapeModalEscape}
     >
-      <Content>{Config.profileDefaults.escapeModalBody}</Content>
+      <Content>{Config.profileDefaults.default.escapeModalBody}</Content>
     </ModalTwoButton>
   );
 };

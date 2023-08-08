@@ -1,14 +1,9 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { templateEval } from "@/lib/utils/helpers";
-import * as mockRouter from "@/test/mock/mockRouter";
-import { useMockRouter } from "@/test/mock/mockRouter";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentBusiness, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
-import {
-  mockEmptyApiSignups,
-  renderPage,
-  runSelfRegPageTests,
-} from "@/test/pages/onboarding/helpers-onboarding";
+import { mockEmptyApiSignups, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   createEmptyUserData,
   generateMunicipality,
@@ -23,15 +18,13 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { act, screen, waitFor, within } from "@testing-library/react";
+import { screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
-  postNewsletter: jest.fn(),
-  postUserTesting: jest.fn(),
   postGetAnnualFilings: jest.fn(),
 }));
 
@@ -80,13 +73,10 @@ describe("onboarding - owning a business", () => {
       const userData = generateTestUserData({ sectorId: undefined });
       useMockRouter({ isReady: true, query: { page: "1" } });
       const { page } = renderPage({ userData });
-      act(() => {
-        return page.clickNext();
-      });
+      page.clickNext();
       await waitFor(() => {
         expect(screen.getByTestId("step-1")).toBeInTheDocument();
       });
-      expect(screen.queryByTestId("step-2")).not.toBeInTheDocument();
       expect(
         screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
       ).toBeInTheDocument();
@@ -98,45 +88,26 @@ describe("onboarding - owning a business", () => {
       useMockRouter({ isReady: true, query: { page: "1" } });
       const { page } = renderPage({ userData });
       page.selectByValue("Sector", "clean-energy");
-      await page.visitStep(2);
-
+      page.clickNext();
       await waitFor(() => {
-        expect(
-          screen.queryByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
-        ).not.toBeInTheDocument();
+        expect(mockPush).toHaveBeenCalled();
       });
+
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
+      ).not.toBeInTheDocument();
       expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("step-1")).not.toBeInTheDocument();
-      expect(screen.getByTestId("step-2")).toBeInTheDocument();
     });
   });
 
-  it("changes url pathname every time a user goes to a different page", async () => {
-    const newark = generateMunicipality({ displayName: "Newark" });
-    const { page } = renderPage({ municipalities: [newark] });
-
-    page.chooseRadio("business-persona-owning");
-    page.selectByValue("Sector", "clean-energy");
-    expect(screen.getByTestId("step-1")).toBeInTheDocument();
-
-    await page.visitStep(2);
-    expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 2 } }, undefined, { shallow: true });
-    expect(screen.getByTestId("step-2")).toBeInTheDocument();
-  });
-
-  it("shows correct next-button text on each page", async () => {
+  it("shows correct next-button text on page", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const { page } = renderPage({ municipalities: [newark] });
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Sector", "clean-energy");
     const page1 = within(screen.getByTestId("page-1-form"));
-    expect(page1.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
-    expect(page1.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
-
-    await page.visitStep(2);
-    const page2 = within(screen.getByTestId("page-2-form"));
-    expect(page2.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
-    expect(page2.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
+    expect(page1.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
+    expect(page1.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
   });
 
   it("updates the user data after each form page", async () => {
@@ -146,11 +117,14 @@ describe("onboarding - owning a business", () => {
 
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Sector", "clean-energy");
-    await page.visitStep(2);
+    page.clickNext();
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalled();
+    });
 
     expect(currentBusiness()).toEqual({
       ...initialBusiness,
-      onboardingFormProgress: "UNSTARTED",
+      onboardingFormProgress: "COMPLETED",
       profileData: {
         ...initialBusiness.profileData,
         businessPersona: "OWNING",
@@ -206,8 +180,10 @@ describe("onboarding - owning a business", () => {
 
     const { page } = renderPage({ userData: generateUserDataForBusiness(initialBusiness) });
     expect(page.getRadioButton("Business Status - Owning")).toBeChecked();
-    await page.visitStep(2);
     page.clickNext();
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalled();
+    });
 
     await waitFor(() => {
       expect(currentBusiness()).toEqual({
@@ -232,8 +208,10 @@ describe("onboarding - owning a business", () => {
 
     const { page } = renderPage({ userData: generateUserDataForBusiness(initialBusiness) });
     expect(page.getRadioButton("Business Status - Owning")).toBeChecked();
-    await page.visitStep(2);
     page.clickNext();
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalled();
+    });
 
     await waitFor(() => {
       expect(currentBusiness()).toEqual({
@@ -244,9 +222,5 @@ describe("onboarding - owning a business", () => {
         },
       });
     });
-  });
-
-  describe("validates self-reg step", () => {
-    runSelfRegPageTests({ businessPersona: "OWNING", selfRegPage: "2" });
   });
 });

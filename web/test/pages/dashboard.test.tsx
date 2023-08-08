@@ -196,7 +196,7 @@ describe("dashboard page", () => {
     useMockProfileData({});
     useMockRouter({ isReady: true, query: { success: "true" } });
     renderDashboardPage({});
-    expect(screen.getByText(Config.profileDefaults.successTextHeader)).toBeInTheDocument();
+    expect(screen.getByText(Config.profileDefaults.default.successTextHeader)).toBeInTheDocument();
   });
 
   it("shows steps and tasks from roadmap", () => {

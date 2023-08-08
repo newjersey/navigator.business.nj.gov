@@ -72,7 +72,6 @@ export const TaxAccessStepOne = (props: Props): ReactElement => {
               flow: "OWNING",
             },
             setProfileData,
-            setUser: (): void => {},
             onBack: (): void => {},
           }}
         >

@@ -1,5 +1,4 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import * as api from "@/lib/api-client/apiClient";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -13,14 +12,12 @@ import {
   mockSuccessfulApiSignups,
   renderPage,
   runNonprofitOnboardingTests,
-  runSelfRegPageTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   createEmptyUser,
   createEmptyUserData,
   generateMunicipality,
   generateProfileData,
-  generateUser,
   generateUserData,
   LookupIndustryById,
   ProfileData,
@@ -34,12 +31,9 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
-  postNewsletter: jest.fn(),
-  postUserTesting: jest.fn(),
   postGetAnnualFilings: jest.fn(),
 }));
 
-const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();
 
 const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
@@ -68,11 +62,8 @@ describe("onboarding - starting a business", () => {
       const userData = generateTestUserData({ industryId: undefined });
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
-      act(() => {
-        return page.clickNext();
-      });
+      page.clickNext();
       expect(screen.getByTestId("step-2")).toBeInTheDocument();
-      expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
 
@@ -81,8 +72,13 @@ describe("onboarding - starting a business", () => {
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
       page.selectByText("Industry", "All Other Businesses");
-      await page.visitStep(3);
-      expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
+      page.clickNext();
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalledWith({
+          pathname: ROUTES.dashboard,
+          query: { [QUERIES.fromOnboarding]: "true" },
+        });
+      });
     });
 
     it.each(industryIdsWithRequiredEssentialQuestion)(
@@ -95,14 +91,11 @@ describe("onboarding - starting a business", () => {
         useMockRouter({ isReady: true, query: { page: "2" } });
         const { page } = renderPage({ userData });
 
-        act(() => {
-          page.clickNext();
-        });
+        page.clickNext();
         expect(screen.getByTestId("step-2")).toBeInTheDocument();
-        expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
         expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
         expect(
-          screen.getAllByText(Config.profileDefaults.essentialQuestionInlineText)[0]
+          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0]
         ).toBeInTheDocument();
       }
     );
@@ -118,8 +111,13 @@ describe("onboarding - starting a business", () => {
         const { page } = renderPage({ userData });
 
         page.chooseEssentialQuestionRadio(industryId, 0);
-        await page.visitStep(3);
-        expect(screen.queryByTestId("step-2")).not.toBeInTheDocument();
+        page.clickNext();
+        await waitFor(() => {
+          expect(mockPush).toHaveBeenCalledWith({
+            pathname: ROUTES.dashboard,
+            query: { [QUERIES.fromOnboarding]: "true" },
+          });
+        });
       }
     );
 
@@ -133,16 +131,14 @@ describe("onboarding - starting a business", () => {
         useMockRouter({ isReady: true, query: { page: "2" } });
         const { page } = renderPage({ userData });
 
-        act(() => {
-          page.clickNext();
-        });
+        page.clickNext();
         expect(screen.getByTestId("step-2")).toBeInTheDocument();
         expect(
-          screen.getAllByText(Config.profileDefaults.essentialQuestionInlineText)[0]
+          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0]
         ).toBeInTheDocument();
         page.chooseEssentialQuestionRadio(industryId, 0);
         expect(
-          screen.queryByText(Config.profileDefaults.essentialQuestionInlineText)
+          screen.queryByText(Config.profileDefaults.default.essentialQuestionInlineText)
         ).not.toBeInTheDocument();
       }
     );
@@ -156,11 +152,6 @@ describe("onboarding - starting a business", () => {
     await page.visitStep(2);
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 2 } }, undefined, { shallow: true });
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
-    page.selectByText("Industry", "All Other Businesses");
-
-    await page.visitStep(3);
-    expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 3 } }, undefined, { shallow: true });
-    expect(screen.getByTestId("step-3")).toBeInTheDocument();
   });
 
   it("shows correct next-button text on each page", async () => {
@@ -173,14 +164,8 @@ describe("onboarding - starting a business", () => {
 
     await page.visitStep(2);
     const page2 = within(screen.getByTestId("page-2-form"));
-    expect(page2.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
-    expect(page2.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
-    page.selectByText("Industry", "All Other Businesses");
-
-    await page.visitStep(3);
-    const page3 = within(screen.getByTestId("page-3-form"));
-    expect(page3.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
-    expect(page3.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
+    expect(page2.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
+    expect(page2.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
   });
 
   it("prefills form from existing user data", async () => {
@@ -195,10 +180,6 @@ describe("onboarding - starting a business", () => {
           }),
         }),
       },
-      user: generateUser({
-        name: "Michael Deeb",
-        email: "mdeeb@example.com",
-      }),
     });
 
     const { page } = renderPage({ userData });
@@ -206,11 +187,6 @@ describe("onboarding - starting a business", () => {
 
     await page.visitStep(2);
     expect(page.getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);
-
-    await page.visitStep(3);
-    expect(page.getFullNameValue()).toEqual("Michael Deeb");
-    expect(page.getEmailValue()).toEqual("mdeeb@example.com");
-    expect(page.getConfirmEmailValue()).toEqual("mdeeb@example.com");
   });
 
   it("updates the user data after each form page", async () => {
@@ -223,12 +199,6 @@ describe("onboarding - starting a business", () => {
     expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
 
     page.selectByValue("Industry", "e-commerce");
-    await page.visitStep(3);
-    expect(currentBusiness().profileData.industryId).toEqual("e-commerce");
-
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
     page.clickNext();
 
     const expectedUserData: UserData = {
@@ -253,11 +223,6 @@ describe("onboarding - starting a business", () => {
           },
         },
       },
-      user: {
-        ...initialUserData.user,
-        name: "My Name",
-        email: "email@example.com",
-      },
     };
 
     await waitFor(() => {
@@ -265,18 +230,6 @@ describe("onboarding - starting a business", () => {
         pathname: ROUTES.dashboard,
         query: { [QUERIES.fromOnboarding]: "true" },
       });
-    });
-
-    expect(mockApi.postNewsletter).toHaveBeenCalledWith({
-      ...expectedUserData,
-      user: { ...expectedUserData.user, externalStatus: {} },
-    });
-    expect(mockApi.postUserTesting).toHaveBeenCalledWith({
-      ...expectedUserData,
-      user: {
-        ...expectedUserData.user,
-        externalStatus: { newsletter: { status: "SUCCESS", success: true } },
-      },
     });
 
     expect(currentUserData()).toEqual({
@@ -288,13 +241,6 @@ describe("onboarding - starting a business", () => {
             ...expectedUserData.businesses[businessId].preferences,
             visibleSidebarCards: ["task-progress"],
           },
-        },
-      },
-      user: {
-        ...expectedUserData.user,
-        externalStatus: {
-          newsletter: { status: "SUCCESS", success: true },
-          userTesting: { status: "SUCCESS", success: true },
         },
       },
     });
@@ -313,11 +259,7 @@ describe("onboarding - starting a business", () => {
     expect(screen.queryByTestId("banner-alert-REQUIRED_FOREIGN_BUSINESS_TYPE")).not.toBeInTheDocument();
   });
 
-  describe("validates self-reg step", () => {
-    runSelfRegPageTests({ businessPersona: "STARTING", selfRegPage: "3" });
-  });
-
   describe("nonprofit onboarding tests", () => {
-    runNonprofitOnboardingTests({ businessPersona: "STARTING", industryPage: 2, selfRegPage: 3 });
+    runNonprofitOnboardingTests({ businessPersona: "STARTING", industryPage: 2, lastPage: 2 });
   });
 });

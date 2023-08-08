@@ -96,7 +96,7 @@ export const TaxInput = (props: Props): ReactElement => {
         {Config.tax.lockedPostText}
       </div>
       <div className={"text-wrap margin-bottom-1"}>
-        <ArrowTooltip title={Config.profileDefaults.lockedFieldTooltipText}>
+        <ArrowTooltip title={Config.profileDefaults.default.lockedFieldTooltipText}>
           <div className="fdr fac  font-body-lg">
             <Icon>help_outline</Icon>
           </div>
@@ -115,7 +115,6 @@ export const TaxInput = (props: Props): ReactElement => {
             flow: "STARTING",
           },
           setProfileData,
-          setUser: (): void => {},
           onBack: (): void => {},
         }}
       >

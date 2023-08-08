@@ -155,12 +155,14 @@ describe("profile - starting business", () => {
         screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header)
       ).toBeInTheDocument();
       expect(screen.getByText(LookupLegalStructureById(legalStructure).name)).toBeInTheDocument();
-      expect(screen.queryByText(Config.profileDefaults.lockedFieldTooltipText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.profileDefaults.default.lockedFieldTooltipText)
+      ).not.toBeInTheDocument();
 
       expect(screen.queryByText("business-structure-task-link")).not.toBeInTheDocument();
 
       fireEvent.mouseOver(screen.getByTestId("legalStructureId-locked-tooltip"));
-      await screen.findByText(Config.profileDefaults.lockedFieldTooltipText);
+      await screen.findByText(Config.profileDefaults.default.lockedFieldTooltipText);
     });
   });
 
@@ -268,7 +270,7 @@ describe("profile - starting business", () => {
     const inputFieldName = getBusinessProfileInputFieldName(businessFromSetup);
     fillText(inputFieldName, "Cool Computers");
     clickBack();
-    expect(screen.getByText(Config.profileDefaults.escapeModalReturn)).toBeInTheDocument();
+    expect(screen.getByText(Config.profileDefaults.default.escapeModalReturn)).toBeInTheDocument();
   });
 
   it("returns user to profile page from un-saved changes modal", () => {
@@ -276,7 +278,7 @@ describe("profile - starting business", () => {
     const inputFieldName = getBusinessProfileInputFieldName(businessFromSetup);
     fillText(inputFieldName, "Cool Computers");
     clickBack();
-    fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalEscape));
+    fireEvent.click(screen.getByText(Config.profileDefaults.default.escapeModalEscape));
     fillText(inputFieldName, "Cool Computers2");
     expect(screen.getByLabelText(inputFieldName)).toBeInTheDocument();
   });
@@ -754,7 +756,7 @@ describe("profile - starting business", () => {
     renderPage({ business: initialBusiness, municipalities: [newark], setRegistrationModalIsVisible });
     selectByText("Location", newark.displayName);
     clickBack();
-    fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalReturn));
+    fireEvent.click(screen.getByText(Config.profileDefaults.default.escapeModalReturn));
     await waitFor(() => {
       return expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
     });
@@ -845,8 +847,10 @@ describe("profile - starting business", () => {
       chooseTab("numbers");
       expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
       const header = screen.getByTestId("profile-header");
-      expect(within(header).getByText(Config.profileDefaults.profileTabRefTitle)).toBeInTheDocument();
-      expect(within(header).queryByText(Config.profileDefaults.profileTabInfoTitle)).not.toBeInTheDocument();
+      expect(within(header).getByText(Config.profileDefaults.default.profileTabRefTitle)).toBeInTheDocument();
+      expect(
+        within(header).queryByText(Config.profileDefaults.default.profileTabInfoTitle)
+      ).not.toBeInTheDocument();
     }
   );
 
@@ -868,8 +872,12 @@ describe("profile - starting business", () => {
       chooseTab("numbers");
       expect(screen.getByLabelText("Sector")).toBeInTheDocument();
       const header = screen.getByTestId("profile-header");
-      expect(within(header).getByText(Config.profileDefaults.profileTabInfoTitle)).toBeInTheDocument();
-      expect(within(header).queryByText(Config.profileDefaults.profileTabRefTitle)).not.toBeInTheDocument();
+      expect(
+        within(header).getByText(Config.profileDefaults.default.profileTabInfoTitle)
+      ).toBeInTheDocument();
+      expect(
+        within(header).queryByText(Config.profileDefaults.default.profileTabRefTitle)
+      ).not.toBeInTheDocument();
     }
   );
 
@@ -1071,7 +1079,9 @@ describe("profile - starting business", () => {
     clickSave();
 
     await waitFor(() => {
-      expect(screen.getByText(Config.profileDefaults.essentialQuestionInlineText)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.default.essentialQuestionInlineText)
+      ).toBeInTheDocument();
     });
   });
 
@@ -1130,7 +1140,7 @@ describe("profile - starting business", () => {
       clickSave();
       await waitFor(() => {
         expect(
-          screen.getAllByText(Config.profileDefaults.essentialQuestionInlineText)[0]
+          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0]
         ).toBeInTheDocument();
       });
     }
@@ -1195,9 +1205,9 @@ describe("profile - starting business", () => {
       renderPage({ business, setRegistrationModalIsVisible });
       chooseTab("documents");
       expect(screen.queryByText("test12345")).not.toBeInTheDocument();
-      expect(screen.getByText(Config.profileDefaults.formationDocFileTitle)).toBeInTheDocument();
-      expect(screen.getByText(Config.profileDefaults.certificationDocFileTitle)).toBeInTheDocument();
-      expect(screen.getByText(Config.profileDefaults.standingDocFileTitle)).toBeInTheDocument();
+      expect(screen.getByText(Config.profileDefaults.default.formationDocFileTitle)).toBeInTheDocument();
+      expect(screen.getByText(Config.profileDefaults.default.certificationDocFileTitle)).toBeInTheDocument();
+      expect(screen.getByText(Config.profileDefaults.default.standingDocFileTitle)).toBeInTheDocument();
     });
 
     it("uses links from useDocuments hook", () => {
@@ -1219,15 +1229,15 @@ describe("profile - starting business", () => {
       renderPage({ business, setRegistrationModalIsVisible });
       chooseTab("documents");
 
-      expect(screen.getByText(Config.profileDefaults.formationDocFileTitle)).toHaveAttribute(
+      expect(screen.getByText(Config.profileDefaults.default.formationDocFileTitle)).toHaveAttribute(
         "href",
         "testForm.pdf"
       );
-      expect(screen.getByText(Config.profileDefaults.standingDocFileTitle)).toHaveAttribute(
+      expect(screen.getByText(Config.profileDefaults.default.standingDocFileTitle)).toHaveAttribute(
         "href",
         "testStand.pdf"
       );
-      expect(screen.getByText(Config.profileDefaults.certificationDocFileTitle)).toHaveAttribute(
+      expect(screen.getByText(Config.profileDefaults.default.certificationDocFileTitle)).toHaveAttribute(
         "href",
         "testCert.pdf"
       );
@@ -1248,9 +1258,9 @@ describe("profile - starting business", () => {
       renderPage({ business, setRegistrationModalIsVisible });
       chooseTab("documents");
 
-      expect(screen.getByText(Config.profileDefaults.formationDocFileTitle)).toBeInTheDocument();
-      expect(screen.getByText(Config.profileDefaults.certificationDocFileTitle)).toBeInTheDocument();
-      expect(screen.queryByText(Config.profileDefaults.standingDocFileTitle)).not.toBeInTheDocument();
+      expect(screen.getByText(Config.profileDefaults.default.formationDocFileTitle)).toBeInTheDocument();
+      expect(screen.getByText(Config.profileDefaults.default.certificationDocFileTitle)).toBeInTheDocument();
+      expect(screen.queryByText(Config.profileDefaults.default.standingDocFileTitle)).not.toBeInTheDocument();
     });
   });
 

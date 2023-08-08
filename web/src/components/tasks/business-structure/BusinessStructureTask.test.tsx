@@ -69,12 +69,12 @@ describe("<BusinessStructureTask />", () => {
     renderTask(business);
     expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
     expect(screen.queryByText(Config.businessStructureTask.uncompletedTooltip)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.profileDefaults.lockedFieldTooltipText)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.profileDefaults.default.lockedFieldTooltipText)).not.toBeInTheDocument();
 
     fireEvent.mouseOver(screen.getByTestId("status-info-tooltip"));
     expect(screen.queryByText(Config.businessStructureTask.uncompletedTooltip)).not.toBeInTheDocument();
     expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
-    await screen.findByText(Config.profileDefaults.lockedFieldTooltipText);
+    await screen.findByText(Config.profileDefaults.default.lockedFieldTooltipText);
   });
 
   it("shows locked formation tooltip text on task progress checkbox when formation is completed", async () => {

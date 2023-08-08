@@ -704,7 +704,6 @@ const ProfilePage = (props: Props): ReactElement => {
               profileData: profileData,
               flow: getFlow(profileData),
             },
-            setUser: (): void => {},
             setProfileData,
             onBack,
           }}
@@ -762,7 +761,7 @@ const ProfilePage = (props: Props): ReactElement => {
                                 onClick={(): Promise<void> => onBack()}
                                 dataTestId="back"
                               >
-                                {Config.profileDefaults.backButtonText}
+                                {Config.profileDefaults.default.backButtonText}
                               </SecondaryButton>
                               <PrimaryButton
                                 isColor="primary"
@@ -772,7 +771,7 @@ const ProfilePage = (props: Props): ReactElement => {
                                 dataTestId="save"
                                 isLoading={isLoading}
                               >
-                                {Config.profileDefaults.saveButtonText}
+                                {Config.profileDefaults.default.saveButtonText}
                               </PrimaryButton>
                             </div>
                           </div>

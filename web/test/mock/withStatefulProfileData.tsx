@@ -4,7 +4,7 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { getFlow } from "@/lib/utils/helpers";
 import { statefulDataHelpers } from "@/test/mock/withStatefulData";
-import { createEmptyUser, ProfileData } from "@businessnjgovnavigator/shared/";
+import { ProfileData } from "@businessnjgovnavigator/shared/";
 import { ReactElement, ReactNode, useEffect, useState } from "react";
 
 const updateSpy = jest.fn();
@@ -44,13 +44,11 @@ export const WithStatefulProfileData = ({
         value={{
           state: {
             page: 1,
-            user: createEmptyUser(),
             flow: getFlow(genericData),
             profileData: genericData,
           },
           onBack: jest.fn(),
           setProfileData: setGenericData,
-          setUser: jest.fn(),
         }}
       >
         {children}
