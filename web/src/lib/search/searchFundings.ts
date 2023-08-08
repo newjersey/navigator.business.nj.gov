@@ -16,6 +16,7 @@ export const searchFundings = (fundings: Funding[], term: string): Match[] => {
     const name = funding.name.toLowerCase();
     const description = funding.descriptionMd.toLowerCase();
     const cta = funding.callToActionText?.toLowerCase();
+    const ctaLink = funding.callToActionLink?.toLowerCase();
     const agencyIDs = funding.agency ? funding.agency.map((it) => it.toLowerCase()) : [];
     const agencyNames = funding.agency
       ? funding.agency.map((it) => LookupFundingAgencyById(it).name.toLowerCase())
@@ -33,6 +34,7 @@ export const searchFundings = (fundings: Funding[], term: string): Match[] => {
     const blockTexts = [content, description];
     const labelledTexts = [
       { content: cta, label: "CTA Text" },
+      { content: ctaLink, label: "CTA Link" },
       { content: name, label: "Name" },
       { content: fundingType, label: "Funding Type" },
       { content: status, label: "Status" },

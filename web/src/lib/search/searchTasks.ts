@@ -15,6 +15,7 @@ export const searchTasks = (tasks: Task[], term: string): Match[] => {
     const content = task.contentMd.toLowerCase();
     const name = task.name.toLowerCase();
     const cta = task.callToActionText?.toLowerCase();
+    const ctaLink = task.callToActionLink?.toLowerCase();
     const agency = task.agencyId ? LookupTaskAgencyById(task.agencyId).name.toLowerCase() : "";
     const agencyContext = task.agencyAdditionalContext?.toLowerCase();
     const formName = task.formName?.toLowerCase();
@@ -23,6 +24,7 @@ export const searchTasks = (tasks: Task[], term: string): Match[] => {
     const blockTexts = [content, summary];
     const labelledTexts = [
       { content: cta, label: "CTA Text" },
+      { content: ctaLink, label: "CTA Link" },
       { content: name, label: "Task name" },
       { content: agency, label: "Agency" },
       { content: agencyContext, label: "Agency Additional Context" },

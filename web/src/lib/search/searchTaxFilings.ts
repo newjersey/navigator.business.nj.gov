@@ -16,6 +16,7 @@ export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
     const rates = filing.taxRates?.toLowerCase();
     const name = filing.name.toLowerCase();
     const cta = filing.callToActionText?.toLowerCase();
+    const ctaLink = filing.callToActionLink?.toLowerCase();
     const agency = filing.agency?.toLowerCase();
     const method = filing.filingMethod?.toLowerCase();
     const id = filing.id?.toLowerCase();
@@ -31,6 +32,7 @@ export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
     }
     const labelledTexts = [
       { content: cta, label: "CTA Text" },
+      { content: ctaLink, label: "CTA Link" },
       { content: name, label: "Task name" },
       { content: agency, label: "Agency" },
       { content: method, label: "Filing Method" },

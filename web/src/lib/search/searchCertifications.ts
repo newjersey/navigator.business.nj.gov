@@ -16,6 +16,7 @@ export const searchCertifications = (certifications: Certification[], term: stri
     const name = cert.name.toLowerCase();
     const description = cert.descriptionMd.toLowerCase();
     const cta = cert.callToActionText?.toLowerCase();
+    const ctaLink = cert.callToActionLink?.toLowerCase();
     const agencyIDs = cert.agency ? cert.agency.map((it) => it.toLowerCase()) : [];
     const agencyNames = cert.agency
       ? cert.agency.map((it) => LookupFundingAgencyById(it).name.toLowerCase())
@@ -24,6 +25,7 @@ export const searchCertifications = (certifications: Certification[], term: stri
     const blockTexts = [content, description];
     const labelledTexts = [
       { content: cta, label: "CTA Text" },
+      { content: ctaLink, label: "CTA Link" },
       { content: name, label: "Name" },
     ];
 
