@@ -48,10 +48,7 @@
     }
   ],
   "name": "Acupuncture",
-  "nonEssentialQuestionsIds": [
-    "sell-milk",
-    "pierce-ears"
-  ],
+  "nonEssentialQuestionsIds": [],
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true
