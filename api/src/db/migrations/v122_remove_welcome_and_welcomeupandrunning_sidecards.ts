@@ -45,7 +45,7 @@ const migrate_v121Business_to_v122Business = (v121BusinessData: v121Business): v
         ...v121BusinessData,
         preferences: {
             ...v121BusinessData.preferences,
-            visibleSidebarCards: updatedCards,
+            visibleSidebarCards: updatedCards
         },
     };
 };
