@@ -6,8 +6,10 @@ import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer"
 import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { AuthContext } from "@/contexts/authContext";
 import { profileFormContext } from "@/contexts/profileFormContext";
 import * as api from "@/lib/api-client/apiClient";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { onSelfRegister } from "@/lib/auth/signinHelper";
 import { useAuthAlertPage } from "@/lib/auth/useAuthAlertPage";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -32,7 +34,16 @@ const AccountSetupPage = (): ReactElement => {
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const router = useRouter();
   const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
+  const { state } = useContext(AuthContext);
   const queryAnalyticsOccurred = useRef<boolean>(false);
+
+  useEffect(() => {
+    (async (): Promise<void> => {
+      if (state.isAuthenticated === IsAuthenticated.TRUE) {
+        await router.replace(ROUTES.dashboard);
+      }
+    })();
+  }, [state.isAuthenticated, router]);
 
   const {
     FormFuncWrapper,
