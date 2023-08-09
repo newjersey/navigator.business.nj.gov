@@ -2,12 +2,12 @@
   "nonEssentialQuestionsArray":  [
     {
       "id": "sell-milk",
-      "questionText": "Will you sell milk? (Optional)",
+      "questionText": "Will you sell milk?",
       "addOn": "sell-milk"
     },
     {
       "id": "pierce-ears",
-      "questionText": "Will you pierce ears? (Optional)",
+      "questionText": "Will you pierce ears?",
       "addOn": "pierce-ears"
     }
   ]
