@@ -84,7 +84,7 @@ export const NavBarDesktop = (): ReactElement => {
                     <UnStyledButton
                       style="default"
                       onClick={(): void => {
-                        analytics.event.guest_menu.click.go_to_myNJ_registration();
+                        analytics.event.guest_menu.click.go_to_NavigatorAccount_setup();
                         onSelfRegister(
                           router,
                           updateQueue,
@@ -101,7 +101,7 @@ export const NavBarDesktop = (): ReactElement => {
                   <UnStyledButton
                     style="default"
                     onClick={(): void => {
-                      analytics.event.guest_menu.click.go_to_myNJ_registration();
+                      analytics.event.guest_menu.click.go_to_NavigatorAccount_setup();
                       triggerSignIn();
                     }}
                   >

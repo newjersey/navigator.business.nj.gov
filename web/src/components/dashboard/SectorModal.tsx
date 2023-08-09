@@ -58,7 +58,6 @@ export const SectorModal = (props: Props): ReactElement => {
             flow: "OWNING",
           },
           setProfileData,
-          setUser: (): void => {},
           onBack: (): void => {},
         }}
       >

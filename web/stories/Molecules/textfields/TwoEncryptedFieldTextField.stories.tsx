@@ -53,7 +53,6 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
                 flow: "STARTING",
               },
               setProfileData,
-              setUser: (): void => {},
               onBack: (): void => {},
             }}
           >

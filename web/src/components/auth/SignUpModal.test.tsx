@@ -1,14 +1,13 @@
 import { SignUpModal } from "@/components/auth/SignUpModal";
 import { getMergedConfig } from "@/contexts/configContext";
-import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import * as session from "@/lib/auth/sessionHelper";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
-import { generateUser, generateUserData } from "@businessnjgovnavigator/shared";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
@@ -17,7 +16,6 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
 
-const mockApi = api as jest.Mocked<typeof api>;
 const mockSession = session as jest.Mocked<typeof session>;
 
 describe("SignUpModal", () => {
@@ -59,20 +57,16 @@ describe("SignUpModal", () => {
     expect(screen.queryByText(Config.navigationDefaults.guestModalBody)).not.toBeInTheDocument();
   });
 
-  it("goes to self-reg when link is clicked", async () => {
-    const user = generateUser({ name: undefined, email: "test@example.com" });
-    const userData = generateUserData({ user });
-    useMockUserData(userData);
-    mockApi.postSelfReg.mockResolvedValue({
-      authRedirectURL: "www.example.com",
-      userData,
-    });
+  it("routes to account setup when link is clicked", async () => {
     setupHookWithAuth(IsAuthenticated.FALSE);
     fireEvent.click(screen.getByText(Config.navigationDefaults.guestModalButtonText));
-    await waitFor(() => {
-      expect(mockApi.postSelfReg).toHaveBeenCalled();
-    });
-    expect(mockPush).toHaveBeenCalled();
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.accountSetup);
+  });
+
+  it("routes to account setup with query param when open tax filings modal query", async () => {
+    setupHookWithAuth(IsAuthenticated.FALSE);
+    fireEvent.click(screen.getByText(Config.navigationDefaults.guestModalButtonText));
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.accountSetup);
   });
 
   it("goes to myNJ when Log-in link is clicked", () => {

@@ -4,7 +4,6 @@ import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBus
 import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
-import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
 import { OnboardingNonprofit } from "@/components/onboarding/OnboardingNonprofit";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { FlowType, OnboardingErrors } from "@/lib/types/types";
@@ -33,10 +32,6 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
           </>
         ),
       },
-      {
-        name: "name-email-page",
-        component: <OnboardingNameAndEmail<OnboardingErrors> errorTypes={["ALERT_BAR"]} />,
-      },
     ],
   },
   STARTING: {
@@ -62,10 +57,6 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
             </div>
           </>
         ),
-      },
-      {
-        name: "name-email-page",
-        component: <OnboardingNameAndEmail<OnboardingErrors> errorTypes={["ALERT_BAR"]} />,
       },
     ],
   },
@@ -112,10 +103,6 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
             <OnboardingLocationInNewJersey<OnboardingErrors> errorTypes={["REQUIRED_NEXUS_LOCATION_IN_NJ"]} />
           </>
         ),
-      },
-      {
-        name: "name-email-page",
-        component: <OnboardingNameAndEmail<OnboardingErrors> errorTypes={["ALERT_BAR"]} />,
       },
     ],
   },

@@ -1,0 +1,126 @@
+import { Content } from "@/components/Content";
+import { NavBar } from "@/components/navbar/NavBar";
+import { Alert } from "@/components/njwds-extended/Alert";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
+import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
+import { PageSkeleton } from "@/components/PageSkeleton";
+import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
+import * as api from "@/lib/api-client/apiClient";
+import { onSelfRegister } from "@/lib/auth/signinHelper";
+import { useAuthAlertPage } from "@/lib/auth/useAuthAlertPage";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import { createProfileFieldErrorMap, OnboardingErrors } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
+import {
+  BusinessUser,
+  createEmptyUser,
+  decideABExperience,
+} from "@businessnjgovnavigator/shared/businessUser";
+import { useRouter } from "next/router";
+import { ReactElement, useContext, useEffect, useRef, useState } from "react";
+
+const AccountSetupPage = (): ReactElement => {
+  useAuthAlertPage();
+  const { Config } = useConfig();
+  const { updateQueue } = useUserData();
+  const [user, setUser] = useState<BusinessUser>(createEmptyUser(decideABExperience()));
+  const [showAlert, setShowAlert] = useState<boolean>(false);
+  const router = useRouter();
+  const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
+  const queryAnalyticsOccurred = useRef<boolean>(false);
+
+  const {
+    FormFuncWrapper,
+    onSubmit,
+    state: formContextState,
+  } = useFormContextHelper(createProfileFieldErrorMap<OnboardingErrors>());
+
+  FormFuncWrapper(
+    async (): Promise<void> => {
+      if (!updateQueue) return;
+
+      updateQueue.queueUser(user);
+      let userDataWithUser = updateQueue.current();
+
+      if (user.receiveNewsletter) {
+        userDataWithUser = await api.postNewsletter(userDataWithUser);
+      }
+
+      if (user.userTesting) {
+        userDataWithUser = await api.postUserTesting(userDataWithUser);
+      }
+
+      await updateQueue.queue(userDataWithUser).update();
+      analytics.event.finish_setup_on_myNewJersey_button.submit.go_to_myNJ_registration();
+      onSelfRegister(router, updateQueue, userDataWithUser, setRegistrationAlertStatus);
+    },
+    (isValid) => {
+      if (isValid) {
+        setShowAlert(false);
+      } else {
+        setShowAlert(true);
+      }
+    }
+  );
+
+  useEffect(() => {
+    if (!router.isReady || queryAnalyticsOccurred.current) {
+      return;
+    }
+    if (router.query[QUERIES.source] !== undefined) {
+      parseAndSendAnalyticsEvent(router.query[QUERIES.source] as string);
+      router.replace({ pathname: ROUTES.accountSetup }, undefined, { shallow: true });
+      queryAnalyticsOccurred.current = true;
+    }
+  }, [router]);
+
+  /* eslint-disable @typescript-eslint/ban-ts-comment */
+  const parseAndSendAnalyticsEvent = (source: string): void => {
+    const possibleAnalyticsEvents = Object.keys(analytics.event);
+
+    if (
+      possibleAnalyticsEvents.includes(source) && // @ts-ignore
+      Object.keys(analytics.event[source]).includes("click") && // @ts-ignore
+      Object.keys(analytics.event[source].click).includes("go_to_NavigatorAccount_setup")
+    ) {
+      // @ts-ignore
+      analytics.event[source].click.go_to_NavigatorAccount_setup();
+    }
+  };
+
+  return (
+    <PageSkeleton>
+      <NavBar logoOnly="NAVIGATOR_MYNJ_LOGO" />
+      <main id="main" className="padding-top-0 desktop:padding-top-8">
+        <SingleColumnContainer isSmallerWidth>
+          <h1>{Config.accountSetup.header}</h1>
+          {showAlert && <Alert variant="error">{Config.accountSetup.errorAlert}</Alert>}
+          <Content>{Config.accountSetup.body}</Content>
+          <profileFormContext.Provider value={formContextState}>
+            <OnboardingNameAndEmail user={user} setUser={setUser} />
+
+            <hr className="margin-top-4 margin-bottom-2" />
+            <div className="float-right fdr margin-bottom-8">
+              <PrimaryButton
+                onClick={onSubmit}
+                dataTestId="mynj-submit"
+                isColor="primary"
+                isSubmitButton={true}
+                isRightMarginRemoved={true}
+              >
+                {Config.accountSetup.submitButton}
+              </PrimaryButton>
+            </div>
+          </profileFormContext.Provider>
+        </SingleColumnContainer>
+      </main>
+    </PageSkeleton>
+  );
+};
+
+export default AccountSetupPage;
