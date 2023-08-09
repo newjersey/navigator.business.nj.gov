@@ -85,7 +85,7 @@ describe("SigninHelper", () => {
       expect(mockSetAlertStatus).toHaveBeenCalledWith("IN_PROGRESS");
     });
 
-    it("posts userData to api self-reg with current pathname included when returnToLink is empty", async () => {
+    it("does not use a returnToLink if path is account-setup", async () => {
       const business = generateBusiness({
         preferences: generatePreferences({ returnToLink: "" }),
       });
@@ -108,7 +108,33 @@ describe("SigninHelper", () => {
       });
     });
 
-    it("posts userData to api self-reg with the returnToLink if called with true for the useReturnToLink", async () => {
+    it("posts userData to api self-reg with current pathname included when returnToLink is empty", async () => {
+      fakeRouter = { replace: mockPush, asPath: ROUTES.accountSetup };
+      const business = generateBusiness({
+        preferences: generatePreferences({ returnToLink: "" }),
+      });
+
+      userData = generateUserDataForBusiness(business);
+      updateQueue = new UpdateQueueFactory(userData, update);
+
+      mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
+      await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
+
+      expect(mockApi.postSelfReg).toHaveBeenCalledWith({
+        ...userData,
+        businesses: {
+          [userData.currentBusinessId]: {
+            ...userData.businesses[userData.currentBusinessId],
+            preferences: {
+              ...userData.businesses[userData.currentBusinessId].preferences,
+              returnToLink: "",
+            },
+          },
+        },
+      });
+    });
+
+    it("posts userData to api self-reg with the returnToLink if exists", async () => {
       const business = generateBusiness({
         preferences: generatePreferences({ returnToLink: "/pathname?query=true" }),
       });
