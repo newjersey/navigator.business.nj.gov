@@ -2,7 +2,6 @@
   "naicsCodes": "621399",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": [],
   "roadmapSteps": [
     {
       "step": 1,
@@ -49,6 +48,10 @@
     }
   ],
   "name": "Acupuncture",
+  "nonEssentialQuestionsIds": [
+    "sell-milk",
+    "pierce-ears"
+  ],
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true
