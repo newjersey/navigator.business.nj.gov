@@ -49,9 +49,7 @@
     }
   ],
   "name": "Retail",
-  "nonEssentialQuestionsIds": [
-    "sell-milk"
-  ],
+  "nonEssentialQuestionsIds": [],
   "industryOnboardingQuestions": {
     "canBeReseller": true
   },
