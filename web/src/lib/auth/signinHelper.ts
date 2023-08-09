@@ -45,7 +45,10 @@ export const onSelfRegister = (
     return;
   }
   setRegistrationAlertStatus("IN_PROGRESS");
-  const route = getCurrentBusiness(userData).preferences.returnToLink || router.asPath || "";
+
+  const route = router.asPath?.includes(ROUTES.accountSetup)
+    ? ""
+    : getCurrentBusiness(userData).preferences.returnToLink || router.asPath || "";
 
   api
     .postSelfReg({
