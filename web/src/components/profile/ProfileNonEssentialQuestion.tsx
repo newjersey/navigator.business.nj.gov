@@ -27,7 +27,12 @@ export const ProfileNonEssentialQuestion = (props: Props): ReactElement => {
     <>
       {nonEssentialQuestionText && (
         <>
-          <div className={"margin-top-2 text-bold"}>{nonEssentialQuestionText}</div>
+          <div className={"margin-top-2"}>
+            <span className={"text-bold"}>{nonEssentialQuestionText}</span>
+            <span className={"margin-left-05"}>
+              {Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText}
+            </span>
+          </div>
           <FormControl fullWidth>
             <RadioGroup
               aria-label={nonEssentialQuestionText}
