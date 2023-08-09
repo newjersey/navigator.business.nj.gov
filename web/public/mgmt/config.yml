@@ -4418,6 +4418,7 @@ collections:
                           - { label: "Header", name: "header", widget: "string" }
                           - { label: "Radio Button - Yes", name: "radioButtonTrueText", widget: "string" }
                           - { label: "Radio Button - No", name: "radioButtonFalseText", widget: "string" }
+                          - { label: "Optional Suffix", name: "optionalText", widget: "string" }
                   - label: Responsible Owner Name
                     name: responsibleOwnerName
                     collapsed: true
