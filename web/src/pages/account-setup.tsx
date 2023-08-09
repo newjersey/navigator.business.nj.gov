@@ -52,31 +52,31 @@ const AccountSetupPage = (): ReactElement => {
   } = useFormContextHelper(createProfileFieldErrorMap<OnboardingErrors>());
 
   FormFuncWrapper(
-    async (): Promise<void> => {
-      if (!updateQueue) return;
+      async (): Promise<void> => {
+        if (!updateQueue) return;
 
-      updateQueue.queueUser(user);
-      let userDataWithUser = updateQueue.current();
+        updateQueue.queueUser(user);
+        let userDataWithUser = updateQueue.current();
 
-      if (user.receiveNewsletter) {
-        userDataWithUser = await api.postNewsletter(userDataWithUser);
+        if (user.receiveNewsletter) {
+          userDataWithUser = await api.postNewsletter(userDataWithUser);
+        }
+
+        if (user.userTesting) {
+          userDataWithUser = await api.postUserTesting(userDataWithUser);
+        }
+
+        await updateQueue.queue(userDataWithUser).update();
+        analytics.event.finish_setup_on_myNewJersey_button.submit.go_to_myNJ_registration();
+        onSelfRegister(router, updateQueue, userDataWithUser, setRegistrationAlertStatus);
+      },
+      (isValid) => {
+        if (isValid) {
+          setShowAlert(false);
+        } else {
+          setShowAlert(true);
+        }
       }
-
-      if (user.userTesting) {
-        userDataWithUser = await api.postUserTesting(userDataWithUser);
-      }
-
-      await updateQueue.queue(userDataWithUser).update();
-      analytics.event.finish_setup_on_myNewJersey_button.submit.go_to_myNJ_registration();
-      onSelfRegister(router, updateQueue, userDataWithUser, setRegistrationAlertStatus);
-    },
-    (isValid) => {
-      if (isValid) {
-        setShowAlert(false);
-      } else {
-        setShowAlert(true);
-      }
-    }
   );
 
   useEffect(() => {
@@ -95,9 +95,9 @@ const AccountSetupPage = (): ReactElement => {
     const possibleAnalyticsEvents = Object.keys(analytics.event);
 
     if (
-      possibleAnalyticsEvents.includes(source) && // @ts-ignore
-      Object.keys(analytics.event[source]).includes("click") && // @ts-ignore
-      Object.keys(analytics.event[source].click).includes("go_to_NavigatorAccount_setup")
+        possibleAnalyticsEvents.includes(source) && // @ts-ignore
+        Object.keys(analytics.event[source]).includes("click") && // @ts-ignore
+        Object.keys(analytics.event[source].click).includes("go_to_NavigatorAccount_setup")
     ) {
       // @ts-ignore
       analytics.event[source].click.go_to_NavigatorAccount_setup();
@@ -105,33 +105,34 @@ const AccountSetupPage = (): ReactElement => {
   };
 
   return (
-    <PageSkeleton>
-      <NavBar logoOnly="NAVIGATOR_MYNJ_LOGO" />
-      <main id="main" className="padding-top-0 desktop:padding-top-8">
-        <SingleColumnContainer isSmallerWidth>
-          <h1>{Config.accountSetup.header}</h1>
-          {showAlert && <Alert variant="error">{Config.accountSetup.errorAlert}</Alert>}
-          <Content>{Config.accountSetup.body}</Content>
-          <profileFormContext.Provider value={formContextState}>
-            <OnboardingNameAndEmail user={user} setUser={setUser} />
+      <PageSkeleton>
+        <NavBar logoOnly="NAVIGATOR_MYNJ_LOGO" />
+        <main id="main" className="padding-top-0 desktop:padding-top-8">
+          <SingleColumnContainer isSmallerWidth>
+            <h1>{Config.accountSetup.header}</h1>
+            {showAlert && <Alert variant="error">{Config.accountSetup.errorAlert}</Alert>}
+            <Content>{Config.accountSetup.body}</Content>
+            <profileFormContext.Provider value={formContextState}>
+              <OnboardingNameAndEmail user={user} setUser={setUser} />
 
-            <hr className="margin-top-4 margin-bottom-2" />
-            <div className="float-right fdr margin-bottom-8">
-              <PrimaryButton
-                onClick={onSubmit}
-                dataTestId="mynj-submit"
-                isColor="primary"
-                isSubmitButton={true}
-                isRightMarginRemoved={true}
-              >
-                {Config.accountSetup.submitButton}
-              </PrimaryButton>
-            </div>
-          </profileFormContext.Provider>
-        </SingleColumnContainer>
-      </main>
-    </PageSkeleton>
+              <hr className="margin-top-4 margin-bottom-2" />
+              <div className="float-right fdr margin-bottom-8">
+                <PrimaryButton
+                    onClick={onSubmit}
+                    dataTestId="mynj-submit"
+                    isColor="primary"
+                    isSubmitButton={true}
+                    isRightMarginRemoved={true}
+                >
+                  {Config.accountSetup.submitButton}
+                </PrimaryButton>
+              </div>
+            </profileFormContext.Provider>
+          </SingleColumnContainer>
+        </main>
+      </PageSkeleton>
   );
 };
 
 export default AccountSetupPage;
+

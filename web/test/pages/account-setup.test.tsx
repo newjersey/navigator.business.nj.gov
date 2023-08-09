@@ -88,20 +88,20 @@ describe("Account Setup page", () => {
 
   const emptyUser = createEmptyUser();
   const renderPage = ({
-    userData,
-    isAuthenticated,
-  }: {
+                        userData,
+                        isAuthenticated,
+                      }: {
     userData?: UserData | null;
     isAuthenticated?: IsAuthenticated;
   }): { page: PageHelpers } => {
     const initialUserData = { ...(userData || generateUserData({})), user: emptyUser };
     render(
-      withAuth(
-        <WithStatefulUserData initialUserData={initialUserData}>
-          <AccountSetupPage />
-        </WithStatefulUserData>,
-        { user: emptyUser, isAuthenticated }
-      )
+        withAuth(
+            <WithStatefulUserData initialUserData={initialUserData}>
+              <AccountSetupPage />
+            </WithStatefulUserData>,
+            { user: emptyUser, isAuthenticated }
+        )
     );
     const page = createPageHelpers();
     return { page };
@@ -286,7 +286,7 @@ describe("Account Setup page", () => {
 
     expect(mockSigninHelper.onSelfRegister).toHaveBeenCalled();
     expect(
-      mockAnalytics.event.finish_setup_on_myNewJersey_button.submit.go_to_myNJ_registration
+        mockAnalytics.event.finish_setup_on_myNewJersey_button.submit.go_to_myNJ_registration
     ).toHaveBeenCalled();
   });
 
