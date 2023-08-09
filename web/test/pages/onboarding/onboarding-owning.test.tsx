@@ -162,7 +162,7 @@ describe("onboarding - owning a business", () => {
       },
       preferences: {
         ...initialBusiness.preferences,
-        visibleSidebarCards: ["welcome"],
+        visibleSidebarCards: [],
       },
     });
   });
@@ -217,7 +217,7 @@ describe("onboarding - owning a business", () => {
     });
   });
 
-  it("removes welcome and adds welcome-up-and-running to visibleSidebarCards preferences on save", async () => {
+  it("removes all card when visibleSidebarCards preferences on save", async () => {
     const initialBusiness = generateBusiness({
       profileData: generateProfileData({
         businessPersona: "OWNING",
@@ -225,7 +225,7 @@ describe("onboarding - owning a business", () => {
         legalStructureId: undefined,
       }),
       preferences: generatePreferences({
-        visibleSidebarCards: ["welcome"],
+        visibleSidebarCards: [],
       }),
       onboardingFormProgress: "COMPLETED",
     });
@@ -240,7 +240,7 @@ describe("onboarding - owning a business", () => {
         ...initialBusiness,
         preferences: {
           ...initialBusiness.preferences,
-          visibleSidebarCards: ["welcome-up-and-running"],
+          visibleSidebarCards: [],
         },
       });
     });

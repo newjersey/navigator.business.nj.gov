@@ -52,7 +52,7 @@ describe("<TwoTabDashboardLayout />", () => {
     fireEvent.click(
       screen.getByText(
         templateEval(Config.dashboardDefaults.mobileSecondTabText, {
-          count: "1",
+          count: "0",
         })
       )
     );
@@ -68,7 +68,7 @@ describe("<TwoTabDashboardLayout />", () => {
       });
 
       useMockBusiness({
-        preferences: generatePreferences({ visibleSidebarCards: ["welcome", "not-registered"] }),
+        preferences: generatePreferences({ visibleSidebarCards: ["not-registered"] }),
         profileData: {
           ...getProfileDataForUnfilteredOpportunities(),
           operatingPhase: randomElementFromArray(operatingPhases).id,
@@ -80,7 +80,7 @@ describe("<TwoTabDashboardLayout />", () => {
       expect(
         screen.getByText(
           templateEval(Config.dashboardDefaults.mobileSecondTabText, {
-            count: "2",
+            count: "1",
           })
         )
       ).toBeInTheDocument();
@@ -92,7 +92,7 @@ describe("<TwoTabDashboardLayout />", () => {
       });
 
       useMockBusiness({
-        preferences: generatePreferences({ visibleSidebarCards: ["welcome", "not-registered"] }),
+        preferences: generatePreferences({ visibleSidebarCards: ["not-registered"] }),
         profileData: {
           ...getProfileDataForUnfilteredOpportunities(),
           operatingPhase: randomElementFromArray(operatingPhases).id,
@@ -105,7 +105,7 @@ describe("<TwoTabDashboardLayout />", () => {
       expect(
         screen.getByText(
           templateEval(Config.dashboardDefaults.mobileSecondTabText, {
-            count: "5",
+            count: "4",
           })
         )
       ).toBeInTheDocument();
@@ -117,7 +117,7 @@ describe("<TwoTabDashboardLayout />", () => {
       });
 
       useMockBusiness({
-        preferences: generatePreferences({ visibleSidebarCards: ["welcome", "not-registered"] }),
+        preferences: generatePreferences({ visibleSidebarCards: ["not-registered"] }),
         profileData: {
           ...getProfileDataForUnfilteredOpportunities(),
 
@@ -131,7 +131,7 @@ describe("<TwoTabDashboardLayout />", () => {
       expect(
         screen.getByText(
           templateEval(Config.dashboardDefaults.mobileSecondTabText, {
-            count: "7",
+            count: "6",
           })
         )
       ).toBeInTheDocument();

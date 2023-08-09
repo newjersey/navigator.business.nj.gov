@@ -121,7 +121,7 @@ describe("onboarding - additional business", () => {
           },
           preferences: {
             ...emptyBusiness.preferences,
-            visibleSidebarCards: ["welcome", "task-progress"],
+            visibleSidebarCards: ["task-progress"],
           },
         },
       },
