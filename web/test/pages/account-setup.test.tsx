@@ -2,10 +2,11 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import * as signinHelper from "@/lib/auth/signinHelper";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import AccountSetupPage from "@/pages/account-setup";
 import { withAuth } from "@/test/helpers/helpers-renderers";
-import { useMockRouter } from "@/test/mock/mockRouter";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -109,6 +110,11 @@ describe("Account Setup page", () => {
   const clickSubmit = (): void => {
     fireEvent.click(screen.getByTestId("mynj-submit"));
   };
+
+  it("redirects to dashboard if user is authenticated", () => {
+    renderPage({ isAuthenticated: IsAuthenticated.TRUE });
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
+  });
 
   it("prevents user from registering if the email is not matching", () => {
     const { page } = renderPage({ isAuthenticated: IsAuthenticated.FALSE });
