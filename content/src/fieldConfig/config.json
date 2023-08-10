@@ -151,7 +151,7 @@
     "errorTextMinimumNumericField": "Must be ${length} digits long.",
     "stepXTemplate": "(Step ${currentPage})",
     "backButtonText": "Back",
-    "finalNextButtonText": "Submit",
+    "finalNextButtonText": "Show My Guide",
     "pageTitle": "Tell Us About Your ${Additional} Business",
     "errorTextMinimumRangeNumericField": "Must be between ${min} and ${max} digits long.",
     "nextButtonText": "Next"
