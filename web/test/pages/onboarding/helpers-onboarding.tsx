@@ -467,6 +467,7 @@ export const runSelfRegPageTests = ({
     act(() => {
       return page.clickNext();
     });
+
     const businessUser = {
       ...user,
       email: "email@example.com",
