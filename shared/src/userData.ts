@@ -29,7 +29,7 @@ export interface Business {
   readonly formationData: FormationData;
 }
 
-export const CURRENT_VERSION = 121;
+export const CURRENT_VERSION = 122;
 
 export const createEmptyBusiness = (id?: string): Business => {
   return {
@@ -46,7 +46,7 @@ export const createEmptyBusiness = (id?: string): Business => {
       roadmapOpenSteps: [],
       hiddenCertificationIds: [],
       hiddenFundingIds: [],
-      visibleSidebarCards: ["welcome"],
+      visibleSidebarCards: [],
       returnToLink: "",
       isCalendarFullView: false,
       isHideableRoadmapOpen: false,
