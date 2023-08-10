@@ -45,7 +45,8 @@
         "default": {
           "header": "Based, on your industry, answer additional questions to personalize your experience.",
           "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No"
+          "radioButtonFalseText": "No",
+          "optionalText": "(Optional)"
         }
       },
       "certifiedInteriorDesigner": {
