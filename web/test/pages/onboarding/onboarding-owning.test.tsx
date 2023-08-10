@@ -13,7 +13,6 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,
-  generatePreferences,
   generateUser,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
@@ -136,7 +135,7 @@ describe("onboarding - owning a business", () => {
       },
       preferences: {
         ...initialBusiness.preferences,
-        visibleSidebarCards: ["welcome-up-and-running"],
+        visibleSidebarCards: [],
       },
     });
   });
@@ -189,37 +188,6 @@ describe("onboarding - owning a business", () => {
       expect(currentBusiness()).toEqual({
         ...initialBusiness,
         taxFilingData: { ...taxData, filings: [] },
-      });
-    });
-  });
-
-  it("removes welcome and adds welcome-up-and-running to visibleSidebarCards preferences on save", async () => {
-    const initialBusiness = generateBusiness({
-      profileData: generateProfileData({
-        businessPersona: "OWNING",
-        operatingPhase: "GUEST_MODE_OWNING",
-        legalStructureId: undefined,
-      }),
-      preferences: generatePreferences({
-        visibleSidebarCards: ["welcome"],
-      }),
-      onboardingFormProgress: "COMPLETED",
-    });
-
-    const { page } = renderPage({ userData: generateUserDataForBusiness(initialBusiness) });
-    expect(page.getRadioButton("Business Status - Owning")).toBeChecked();
-    page.clickNext();
-    await waitFor(() => {
-      expect(mockPush).toHaveBeenCalled();
-    });
-
-    await waitFor(() => {
-      expect(currentBusiness()).toEqual({
-        ...initialBusiness,
-        preferences: {
-          ...initialBusiness.preferences,
-          visibleSidebarCards: ["welcome-up-and-running"],
-        },
       });
     });
   });

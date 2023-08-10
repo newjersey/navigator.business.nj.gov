@@ -17,7 +17,7 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           preferences: generatePreferences({
-            visibleSidebarCards: ["welcome"],
+            visibleSidebarCards: [],
           }),
         })
       );
@@ -55,7 +55,7 @@ describe("updateRoadmapSidebarCards", () => {
             operatingPhase: "NEEDS_TO_FORM",
           }),
           preferences: generatePreferences({
-            visibleSidebarCards: ["welcome", "not-registered"],
+            visibleSidebarCards: ["not-registered"],
           }),
         })
       );
@@ -67,7 +67,6 @@ describe("updateRoadmapSidebarCards", () => {
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
         "successful-registration"
       );
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain("welcome");
     });
   });
 
@@ -171,128 +170,6 @@ describe("updateRoadmapSidebarCards", () => {
         "funding-nudge"
       );
     });
-  });
-
-  describe("welcome card", () => {
-    const nonUpAndRunningOperatingPhases: OperatingPhaseId[] = [
-      "GUEST_MODE",
-      "GUEST_MODE_OWNING",
-      "NEEDS_TO_FORM",
-      "NEEDS_TO_REGISTER_FOR_TAXES",
-      "FORMED_AND_REGISTERED",
-    ];
-
-    it.each<OperatingPhaseId>([...nonUpAndRunningOperatingPhases, "UP_AND_RUNNING", "UP_AND_RUNNING_OWNING"])(
-      "does NOT re-add the welcome card when the visibleSidebarCards are empty",
-      (operatingPhase) => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              operatingPhase: operatingPhase,
-              industryId: "generic",
-            }),
-            preferences: generatePreferences({ visibleSidebarCards: [] }),
-          })
-        );
-        const updatedUserData = updateSidebarCards(userData);
-        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-          "welcome-up-and-running"
-        );
-        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain("welcome");
-      }
-    );
-
-    it("adds the welcome-up-and-running card when operating phase is UP_AND_RUNNING_OWNING and removes the welcome card", () => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase: "UP_AND_RUNNING_OWNING",
-            industryId: "generic",
-          }),
-          preferences: generatePreferences({ visibleSidebarCards: ["welcome"] }),
-        })
-      );
-
-      const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
-        "welcome-up-and-running"
-      );
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain("welcome");
-    });
-
-    it("does not remove welcome-up-and-running card when operating phase is UP_AND_RUNNING_OWNING", () => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase: "UP_AND_RUNNING_OWNING",
-            industryId: "generic",
-          }),
-          preferences: generatePreferences({ visibleSidebarCards: ["welcome-up-and-running"] }),
-        })
-      );
-
-      const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
-        "welcome-up-and-running"
-      );
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain("welcome");
-    });
-
-    it("adds the welcome-up-and-running card when operating phase is UP_AND_RUNNING and removes the welcome card", () => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase: "UP_AND_RUNNING",
-            industryId: "generic",
-          }),
-          preferences: generatePreferences({ visibleSidebarCards: ["welcome"] }),
-        })
-      );
-
-      const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
-        "welcome-up-and-running"
-      );
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain("welcome");
-    });
-
-    it("removes the welcome-up-and-running card and adds the welcome card back if the user reverts from UP_AND_RUNNING", () => {
-      const revertedUserData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase: "FORMED_AND_REGISTERED",
-            industryId: "generic",
-          }),
-          preferences: generatePreferences({ visibleSidebarCards: ["welcome-up-and-running"] }),
-        })
-      );
-
-      const updatedUserData = updateSidebarCards(revertedUserData);
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        "welcome-up-and-running"
-      );
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain("welcome");
-    });
-
-    for (const operatingPhase of nonUpAndRunningOperatingPhases) {
-      it(`doesn't remove the generic welcome card when operating phase is ${operatingPhase}`, () => {
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              operatingPhase: operatingPhase,
-              industryId: "generic",
-            }),
-            preferences: generatePreferences({ visibleSidebarCards: ["welcome"] }),
-          })
-        );
-
-        const updatedUserData = updateSidebarCards(userData);
-        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain("welcome");
-        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-          "welcome-up-and-running"
-        );
-      });
-    }
   });
 
   describe("go-to-profile nudge", () => {

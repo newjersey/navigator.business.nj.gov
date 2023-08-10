@@ -219,7 +219,7 @@ describe("onboarding - starting a business", () => {
           },
           preferences: {
             ...initialUserData.businesses[businessId].preferences,
-            visibleSidebarCards: ["welcome"],
+            visibleSidebarCards: [],
           },
         },
       },
@@ -239,7 +239,7 @@ describe("onboarding - starting a business", () => {
           ...expectedUserData.businesses[businessId],
           preferences: {
             ...expectedUserData.businesses[businessId].preferences,
-            visibleSidebarCards: ["welcome", "task-progress"],
+            visibleSidebarCards: ["task-progress"],
           },
         },
       },
