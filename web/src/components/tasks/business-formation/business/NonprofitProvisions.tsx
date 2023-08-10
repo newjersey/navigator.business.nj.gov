@@ -81,7 +81,9 @@ export const NonprofitProvisions = (): ReactElement => {
     const hasError = doesFieldHaveError(fieldName);
     return (
       <WithErrorBar className="margin-top-2" hasError={hasError} type="ALWAYS">
-        <Content>{title}</Content>
+        <strong>
+          <Content>{title}</Content>
+        </strong>
         <FormControl error={hasError}>
           <RadioGroup
             aria-label={camelCaseToSentence(fieldName)}

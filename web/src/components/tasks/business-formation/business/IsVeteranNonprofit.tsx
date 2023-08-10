@@ -35,12 +35,13 @@ export const IsVeteranNonprofit = (): ReactElement => {
           row
         >
           <FormControlLabel
+            className="margin-right-0"
             labelPlacement="end"
             data-testid={"is-veteran-nonprofit-yes"}
             value={true}
             control={<Radio color="primary" />}
             label={
-              <div className="padding-y-1 margin-right-3">
+              <div className="padding-y-1 margin-right-2">
                 {Config.formation.fields.isVeteranNonprofit.radioYesText}
               </div>
             }
@@ -51,7 +52,7 @@ export const IsVeteranNonprofit = (): ReactElement => {
             value={false}
             control={<Radio color="primary" />}
             label={
-              <div className="padding-y-1 margin-right-3">
+              <div className="padding-y-1 margin-right-2">
                 {Config.formation.fields.isVeteranNonprofit.radioNoText}
               </div>
             }
