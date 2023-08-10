@@ -43,11 +43,11 @@ const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();
 
 export const renderPage = ({
-  municipalities,
-  userData,
-  user,
-  isAuthenticated,
-}: {
+                             municipalities,
+                             userData,
+                             user,
+                             isAuthenticated,
+                           }: {
   municipalities?: Municipality[];
   userData?: UserData | null;
   user?: BusinessUser;
@@ -55,18 +55,18 @@ export const renderPage = ({
 }): { page: PageHelpers } => {
   const currentUser = user ?? userData?.user ?? generateUser({});
   render(
-    withAuth(
-      <WithStatefulUserData
-        initialUserData={
-          userData === undefined ? createEmptyUserData(currentUser) : userData === null ? undefined : userData
-        }
-      >
-        <ThemeProvider theme={createTheme()}>
-          <Onboarding municipalities={municipalities || []} />
-        </ThemeProvider>
-      </WithStatefulUserData>,
-      { user: currentUser, isAuthenticated }
-    )
+      withAuth(
+          <WithStatefulUserData
+              initialUserData={
+                userData === undefined ? createEmptyUserData(currentUser) : userData === null ? undefined : userData
+              }
+          >
+            <ThemeProvider theme={createTheme()}>
+              <Onboarding municipalities={municipalities || []} />
+            </ThemeProvider>
+          </WithStatefulUserData>,
+          { user: currentUser, isAuthenticated }
+      )
   );
   const page = createPageHelpers();
   return { page };
@@ -169,7 +169,7 @@ export const createPageHelpers = (): PageHelpers => {
 
   const getConfirmEmailValue = (): string => {
     return (screen.queryByLabelText(Config.selfRegistration.confirmEmailFieldLabel) as HTMLInputElement)
-      ?.value;
+        ?.value;
   };
 
   const visitStep = async (step: number): Promise<void> => {
@@ -188,18 +188,18 @@ export const createPageHelpers = (): PageHelpers => {
   };
 
   const chooseEssentialQuestionRadio = (
-    industryId: string,
-    indexOfIndustrySpecificDataChoices: number
+      industryId: string,
+      indexOfIndustrySpecificDataChoices: number
   ): void => {
     const essentialQuestions = getEssentialQuestion(industryId);
 
     for (const essentialQuestion of essentialQuestions) {
       const value =
-        industrySpecificDataChoices[essentialQuestion.fieldName][indexOfIndustrySpecificDataChoices];
+          industrySpecificDataChoices[essentialQuestion.fieldName][indexOfIndustrySpecificDataChoices];
       fireEvent.click(
-        screen.getByTestId(
-          `${camelCaseToKebabCase(essentialQuestion.fieldName)}-radio-${value.toString().toLowerCase()}`
-        )
+          screen.getByTestId(
+              `${camelCaseToKebabCase(essentialQuestion.fieldName)}-radio-${value.toString().toLowerCase()}`
+          )
       );
     }
   };
@@ -349,21 +349,21 @@ export const industriesWithOutEssentialQuestion = Industries.filter((industry) =
 });
 
 export const industryIdsWithOutEssentialQuestion = industriesWithOutEssentialQuestion.map(
-  (industry) => industry.id
+    (industry) => industry.id
 );
 
 export const industryIdsWithEssentialQuestion = industriesWithEssentialQuestion.map(
-  (industry) => industry.id
+    (industry) => industry.id
 );
 
 export const industryIdsWithRequiredEssentialQuestion = industryIdsWithEssentialQuestion.filter(
-  (industry) => {
-    const applicableQuestions = EssentialQuestions.filter((question) =>
-      question.isQuestionApplicableToIndustryId(industry)
-    );
-    const someQuestionsStartAsUndefined = applicableQuestions.some((question) => {
-      return emptyIndustrySpecificData[question.fieldName] === undefined;
-    });
-    return someQuestionsStartAsUndefined;
-  }
+    (industry) => {
+      const applicableQuestions = EssentialQuestions.filter((question) =>
+          question.isQuestionApplicableToIndustryId(industry)
+      );
+      const someQuestionsStartAsUndefined = applicableQuestions.some((question) => {
+        return emptyIndustrySpecificData[question.fieldName] === undefined;
+      });
+      return someQuestionsStartAsUndefined;
+    }
 );
