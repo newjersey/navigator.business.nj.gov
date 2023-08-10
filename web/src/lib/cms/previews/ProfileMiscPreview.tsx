@@ -59,6 +59,10 @@ const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
           CMS_ONLY_businessPersona="STARTING"
           CMS_ONLY_fakeBusiness={business}
         />
+        <hr className="margin-y-4" />
+
+        <h2>Cannabis Location Alert: </h2>
+        <Alert variant="warning">{config.profileDefaults.default.cannabisLocationAlert}</Alert>
       </div>
     </ConfigContext.Provider>
   );

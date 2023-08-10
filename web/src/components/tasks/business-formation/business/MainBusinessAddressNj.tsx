@@ -1,3 +1,4 @@
+import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { Content } from "@/components/Content";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { Alert } from "@/components/njwds-extended/Alert";
@@ -61,6 +62,7 @@ export const MainBusinessAddressNj = (): ReactElement => {
       </div>
       {isExpanded && (
         <>
+          <CannabisLocationAlert />
           <BusinessFormationTextField
             label={Config.formation.fields.addressLine1.label}
             fieldName="addressLine1"

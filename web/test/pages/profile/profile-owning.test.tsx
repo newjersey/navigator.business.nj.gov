@@ -382,20 +382,22 @@ describe("profile - owning existing business", () => {
     expect(screen.queryByTestId("profile-naics-code")).not.toBeInTheDocument();
   });
 
-  it("locks the location field if it is populated and tax filing state is SUCCESS", () => {
-    renderPage({
-      business: generateBusinessForProfile({
-        profileData: generateProfileData({
-          businessPersona: "OWNING",
-          municipality: generateMunicipality({ displayName: "Trenton" }),
+  describe("Location Section", () => {
+    it("locks the location field if it is populated and tax filing state is SUCCESS", () => {
+      renderPage({
+        business: generateBusinessForProfile({
+          profileData: generateProfileData({
+            businessPersona: "OWNING",
+            municipality: generateMunicipality({ displayName: "Trenton" }),
+          }),
+          taxFilingData: generateTaxFilingData({
+            state: "SUCCESS",
+          }),
         }),
-        taxFilingData: generateTaxFilingData({
-          state: "SUCCESS",
-        }),
-      }),
+      });
+      expect(screen.getByText("Trenton")).toBeInTheDocument();
+      expect(screen.getByTestId("locked-municipality")).toBeInTheDocument();
     });
-    expect(screen.getByText("Trenton")).toBeInTheDocument();
-    expect(screen.getByTestId("locked-municipality")).toBeInTheDocument();
   });
 
   describe("Document Section", () => {

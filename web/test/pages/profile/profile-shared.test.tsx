@@ -22,11 +22,12 @@ import {
   ForeignBusinessType,
   generateMunicipality,
   generateProfileData,
+  Industry,
   OperatingPhase,
   OperatingPhases,
   randomInt,
 } from "@businessnjgovnavigator/shared/index";
-import { generateTaxFilingData } from "@businessnjgovnavigator/shared/test";
+import { generateTaxFilingData, randomFilteredIndustry } from "@businessnjgovnavigator/shared/test";
 
 import {
   chooseTab,
@@ -334,5 +335,69 @@ describe("profile - shared", () => {
         });
       }
     );
+  });
+
+  describe("location", () => {
+    const getProfileDataMixin = (businessPersona: BusinessPersona): Partial<ProfileData> => {
+      return businessPersona === "FOREIGN"
+        ? {
+            foreignBusinessType: "NEXUS",
+            foreignBusinessTypeIds: ["NEXUS"],
+            nexusLocationInNewJersey: true,
+          }
+        : {};
+    };
+
+    it.each(["STARTING", "FOREIGN"])(
+      "displays a warning alert for cannabis businesses when %s",
+      async (businessPersona: string) => {
+        renderPage({
+          business: generateBusinessForProfile({
+            profileData: generateProfileData({
+              businessPersona: businessPersona as BusinessPersona,
+              municipality: generateMunicipality({ displayName: "Trenton" }),
+              industryId: "cannabis",
+              ...getProfileDataMixin(businessPersona as BusinessPersona),
+            }),
+          }),
+        });
+        expect(screen.getByText(Config.profileDefaults.default.cannabisLocationAlert)).toBeInTheDocument();
+      }
+    );
+
+    it.each(["STARTING", "FOREIGN"])(
+      "should NOT display a warning alert for non-cannabis businesses when %s",
+      async (businessPersona: string) => {
+        const filter = (industry: Industry): boolean => industry.id !== "cannabis";
+        const industry = randomFilteredIndustry(filter, { isEnabled: true });
+
+        renderPage({
+          business: generateBusinessForProfile({
+            profileData: generateProfileData({
+              businessPersona: businessPersona as BusinessPersona,
+              municipality: generateMunicipality({ displayName: "Trenton" }),
+              industryId: industry.id,
+              ...getProfileDataMixin(businessPersona as BusinessPersona),
+            }),
+          }),
+        });
+        expect(
+          screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert)
+        ).not.toBeInTheDocument();
+      }
+    );
+
+    it("should NOT display a cannabis specific warning alert when OWNING", () => {
+      renderPage({
+        business: generateBusinessForProfile({
+          profileData: generateProfileData({
+            businessPersona: "OWNING",
+          }),
+        }),
+      });
+      expect(
+        screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert)
+      ).not.toBeInTheDocument();
+    });
   });
 });
