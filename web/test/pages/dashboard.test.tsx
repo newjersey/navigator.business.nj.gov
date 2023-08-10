@@ -311,7 +311,6 @@ describe("dashboard page", () => {
 
     const sidebarDisplayContent = {
       "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
-      welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
     };
     renderPageWithAuthAlert({
       registrationAlertIsVisible: true,
@@ -321,10 +320,6 @@ describe("dashboard page", () => {
     });
 
     expect(screen.getByText("NotRegisteredContent")).toBeInTheDocument();
-
-    await waitFor(() => {
-      expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
-    });
     expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(false);
   });
 

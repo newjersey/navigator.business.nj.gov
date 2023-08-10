@@ -62,16 +62,6 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
     }
   }
 
-  if (operatingPhase === "UP_AND_RUNNING_OWNING" || operatingPhase === "UP_AND_RUNNING") {
-    if (cards.includes("welcome")) {
-      showCard("welcome-up-and-running");
-      hideCard("welcome");
-    }
-  } else if (cards.includes("welcome-up-and-running")) {
-    showCard("welcome");
-    hideCard("welcome-up-and-running");
-  }
-
   return modifyCurrentBusiness(userData, (business) => ({
     ...business,
     preferences: {

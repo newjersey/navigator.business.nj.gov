@@ -327,17 +327,6 @@ const OnboardingPage = (props: Props): ReactElement => {
           updateQueue.queueTaskProgress({ [businessStructureTaskId]: completed });
         }
 
-        if (newProfileData.operatingPhase === "GUEST_MODE_OWNING") {
-          updateQueue.queuePreferences({
-            visibleSidebarCards: [
-              ...updateQueue.currentBusiness().preferences.visibleSidebarCards.filter((cardId: string) => {
-                return cardId !== "welcome";
-              }),
-              "welcome-up-and-running",
-            ],
-          });
-        }
-
         await updateQueue.update();
 
         await router.push({
