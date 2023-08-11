@@ -1,12 +1,12 @@
 ---
-id: "pilot"
-webflowId: "5f7728de240061a8637834b6"
-urlSlug: "pilot"
-webflowName: "Pilot"
-callToActionLink: "http://faa.gov/"
+urlSlug: pilot
+webflowName: Pilot
+agencyAdditionalContext: Federal Aviation Administration
 callToActionText: ""
-agencyAdditionalContext: "Federal Aviation Administration"
-divisionPhone: "(866) 635-5322"
-webflowIndustry: "Pilot"
-licenseCertificationClassification: "LICENSE"
+callToActionLink: https://www.faa.gov/
+webflowIndustry: Pilot
+divisionPhone: (866) 635-5322
+id: pilot
+webflowId: 5f7728de240061a8637834b6
+licenseCertificationClassification: LICENSE
 ---
