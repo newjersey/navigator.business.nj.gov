@@ -44,4 +44,18 @@ describe("<Content />", () => {
       expect(screen.getByText("body text")).toBeInTheDocument();
     });
   });
+
+  it("renders greenBox content", () => {
+    const mdString = ":::greenBox\n" + "body text\n" + ":::";
+
+    render(<Content>{mdString}</Content>);
+    expect(screen.getByText("body text")).toBeInTheDocument();
+  });
+
+  it("renders note content", () => {
+    const mdString = ":::note \n" + "body text\n" + ":::";
+
+    render(<Content>{mdString}</Content>);
+    expect(screen.getByText("body text")).toBeInTheDocument();
+  });
 });

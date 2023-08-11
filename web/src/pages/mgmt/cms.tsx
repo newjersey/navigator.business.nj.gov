@@ -2,6 +2,7 @@ import ContextEditor from "@/lib/cms/editors/context-info";
 import GreenBox from "@/lib/cms/editors/greenBox";
 import IconWidgetEditor from "@/lib/cms/editors/icon";
 import AlertEditor from "@/lib/cms/editors/infoAlert";
+import Note from "@/lib/cms/editors/note";
 import { NoSpaceControl } from "@/lib/cms/fields/nospacefield";
 import { SlugControl } from "@/lib/cms/fields/slugfield";
 import { applyTheme } from "@/lib/cms/helpers/applyTheme";
@@ -64,6 +65,8 @@ const CMS = dynamic(
       CMS.registerEditorComponent(ContextEditor);
       // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(AlertEditor);
+      // @ts-expect-error: No type definition available
+      CMS.registerEditorComponent(Note);
       // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(GreenBox);
       // @ts-expect-error: No type definition available

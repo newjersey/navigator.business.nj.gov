@@ -49,15 +49,15 @@ export default {
   // Function to create a text block from an instance of this component
   toBlock: (obj: { header?: string; body: string }): string => {
     if (obj.header) {
-      return `:::infoAlert{ header="${obj.header}" } \n ${obj.body.trim()}\n:::`;
+      return `:::infoAlert{ header="${obj.header}" } \n ${obj.body ? obj.body.trim() : ""}\n:::`;
     }
-    return `:::infoAlert \n ${obj.body.trim()}\n:::`;
+    return `:::infoAlert \n ${obj.body ? obj.body.trim() : ""}\n:::`;
   },
 
   toPreview: (obj: { header?: string; body: string }): string => {
     if (obj.header) {
-      return `:::infoAlert{ header="${obj.header}" } \n ${obj.body.trim()}\n:::`;
+      return `:::infoAlert{ header="${obj.header}" } \n ${obj.body ? obj.body.trim() : ""}\n:::`;
     }
-    return `:::infoAlert \n ${obj.body.trim()}\n:::`;
+    return `:::infoAlert \n ${obj.body ? obj.body.trim() : ""}\n:::`;
   },
 };

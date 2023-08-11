@@ -46,6 +46,13 @@ export const Content = (props: ContentProps): ReactElement => {
     greenBox: (props: any): ReactElement => {
       return <GreenBox>{props.children}</GreenBox>;
     },
+    note: (props: any): ReactElement => {
+      return (
+        <Alert variant="note" borderRight={true} borderSmall={true}>
+          {props.children}
+        </Alert>
+      );
+    },
     infoAlert: (props: any): ReactElement => {
       return (
         <Alert variant="info" heading={props.header}>

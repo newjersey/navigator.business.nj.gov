@@ -29,33 +29,29 @@ export const PureMarkdownContent = (props: Props): ReactElement => {
   return <>{markdown}</>;
 };
 
+type hProperties = {
+  header?: any;
+  type?: any;
+};
+
+function setNodeValues(node: any, nodeName: string, hProperties: hProperties): void {
+  if (node.name === nodeName) {
+    const data = node.data || (node.data = {});
+    data.hName = nodeName;
+    data.hProperties = hProperties;
+  }
+}
+
 function customRemarkPlugin():
   | void
   | import("unified").Transformer<import("mdast").Root, import("mdast").Root> {
   return (tree: any) => {
     visit(tree, (node) => {
       if (node.type === "containerDirective") {
-        if (node.name === "infoAlert") {
-          const data = node.data || (node.data = {});
-          data.hName = "infoAlert";
-          data.hProperties = {
-            header: node.attributes.header,
-          };
-        }
-        if (node.name === "greenBox") {
-          const data = node.data || (node.data = {});
-          data.hName = "greenBox";
-          data.hProperties = {
-            header: node.attributes.header,
-          };
-        }
-        if (node.name === "icon") {
-          const data = node.data || (node.data = {});
-          data.hName = "icon";
-          data.hProperties = {
-            type: node.attributes.type,
-          };
-        }
+        setNodeValues(node, "infoAlert", { header: node.attributes.header });
+        setNodeValues(node, "greenBox", { header: node.attributes.header });
+        setNodeValues(node, "note", { header: node.attributes.header });
+        setNodeValues(node, "icon", { type: node.attributes.type });
       } else {
         return;
       }
