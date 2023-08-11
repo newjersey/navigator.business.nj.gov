@@ -1,12 +1,12 @@
 ---
-id: "sprinkler-fire-installer"
-webflowId: "640b8467c38939f993f80b02"
-urlSlug: "sprinkler-fire-installer"
-webflowName: "Sprinkler (Fire) Installer"
-filename: "sprinkler-fire-installer"
-callToActionLink: "https://www.nj.gov/dca/divisions/dfs/forms/"
+filename: sprinkler-fire-installer
+urlSlug: sprinkler-fire-installer
+webflowName: Sprinkler (Fire) Installer
 agencyId: nj-community-affairs
-divisionPhone: "609-984-7860"
-webflowIndustry: "Sprinkler Installer"
-licenseCertificationClassification: "LICENSE"
+callToActionLink: https://firesolutions.dca.nj.gov/
+webflowIndustry: Sprinkler Installer
+divisionPhone: 609-984-7860
+id: sprinkler-fire-installer
+webflowId: 640b8467c38939f993f80b02
+licenseCertificationClassification: LICENSE
 ---
