@@ -1,13 +1,13 @@
 ---
-id: "landscape-irrigation-contractor"
-webflowId: "5f77290d8e9f87815a6859b5"
-urlSlug: "landscape-irrigation-contractor"
-webflowName: "Landscape Irrigation Contractor"
-callToActionLink: "http://nj.gov/dep/exams/lic.htm"
-callToActionText: ""
+urlSlug: landscape-irrigation-contractor
+webflowName: Landscape Irrigation Contractor
 agencyId: njdep
-agencyAdditionalContext: "Examining and Licensing Unit"
-divisionPhone: "(609) 984-7834"
-webflowIndustry: "Landscape Irrigation Contractor"
-licenseCertificationClassification: "CERTIFICATION"
+agencyAdditionalContext: Examining and Licensing Unit
+callToActionText: ""
+callToActionLink: https://nj.gov/dep/exams/ust.htm
+webflowIndustry: Landscape Irrigation Contractor
+divisionPhone: (609) 984-7834
+id: landscape-irrigation-contractor
+webflowId: 5f77290d8e9f87815a6859b5
+licenseCertificationClassification: CERTIFICATION
 ---
