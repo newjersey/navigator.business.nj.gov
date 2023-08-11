@@ -64,7 +64,7 @@ export const EinTask = (props: Props): ReactElement => {
       <TaskHeader task={props.task} />
       <UnlockedBy task={props.task} />
       <Content>{preInputContent}</Content>
-      <div className="margin-left-5 margin-top-1">
+      <div className="margin-left-3ch margin-top-1">
         <Content>{Config.ein.descriptionText}</Content>
         {showInput && <EinInput isAuthenticated={isAuthenticated} onSave={onSave} task={props.task} />}
         {!showInput && (
