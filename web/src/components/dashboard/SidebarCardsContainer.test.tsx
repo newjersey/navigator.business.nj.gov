@@ -77,6 +77,51 @@ describe("<SidebarCardsContainer />", () => {
   };
 
   describe("nudges", () => {
+    it("renders content for visible card", () => {
+      const sidebarCards = {
+        fakeCard: generateSidebarCardContent({ contentMd: "FakeCardContent" }),
+      };
+
+      useMockBusiness({ preferences: generatePreferences({ visibleSidebarCards: ["fakeCard"] }) });
+
+      renderPage({ sidebarCards });
+      expect(screen.getByText("FakeCardContent")).toBeInTheDocument();
+    });
+
+    it("renders a card in the top section if set to above-opportunities", () => {
+      const sidebarCards = {
+        "fake-above-card": generateSidebarCardContent({
+          id: "fake-above-card",
+          section: "above-opportunities",
+        }),
+      };
+
+      useMockBusiness({
+        preferences: generatePreferences({ visibleSidebarCards: ["fake-above-card"] }),
+      });
+
+      renderPage({ sidebarCards });
+      const topCardSection = screen.getByTestId("top-cards");
+      expect(within(topCardSection).getByTestId("fake-above-card")).toBeInTheDocument();
+    });
+
+    it("renders a card in the bottom section if set to below-opportunities", () => {
+      const sidebarCards = {
+        "fake-below-card": generateSidebarCardContent({
+          id: "fake-below-card",
+          section: "below-opportunities",
+        }),
+      };
+
+      useMockBusiness({
+        preferences: generatePreferences({ visibleSidebarCards: ["fake-below-card"] }),
+      });
+
+      renderPage({ sidebarCards });
+      const bottomCardSection = screen.getByTestId("bottom-cards");
+      expect(within(bottomCardSection).getByTestId("fake-below-card")).toBeInTheDocument();
+    });
+
     it("removes successful registration card when it's closed", async () => {
       const business = generateBusiness({
         preferences: generatePreferences({
