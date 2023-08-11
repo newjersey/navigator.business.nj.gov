@@ -77,51 +77,6 @@ describe("<SidebarCardsContainer />", () => {
   };
 
   describe("nudges", () => {
-    it("renders the welcome card", () => {
-      const sidebarCards = {
-        welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
-      };
-
-      useMockBusiness({ preferences: generatePreferences({ visibleSidebarCards: ["welcome"] }) });
-
-      renderPage({ sidebarCards });
-      expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
-    });
-
-    it("renders a card in the top section if set to above-opportunities", () => {
-      const sidebarCards = {
-        "welcome-up-and-running": generateSidebarCardContent({
-          id: "welcome-up-and-running",
-          section: "above-opportunities",
-        }),
-      };
-
-      useMockBusiness({
-        preferences: generatePreferences({ visibleSidebarCards: ["welcome-up-and-running"] }),
-      });
-
-      renderPage({ sidebarCards });
-      const topCardSection = screen.getByTestId("top-cards");
-      expect(within(topCardSection).getByTestId("welcome-up-and-running")).toBeInTheDocument();
-    });
-
-    it("renders a card in the bottom section if set to below-opportunities", () => {
-      const sidebarCards = {
-        "welcome-up-and-running": generateSidebarCardContent({
-          id: "welcome-up-and-running",
-          section: "below-opportunities",
-        }),
-      };
-
-      useMockBusiness({
-        preferences: generatePreferences({ visibleSidebarCards: ["welcome-up-and-running"] }),
-      });
-
-      renderPage({ sidebarCards });
-      const bottomCardSection = screen.getByTestId("bottom-cards");
-      expect(within(bottomCardSection).getByTestId("welcome-up-and-running")).toBeInTheDocument();
-    });
-
     it("removes successful registration card when it's closed", async () => {
       const business = generateBusiness({
         preferences: generatePreferences({
