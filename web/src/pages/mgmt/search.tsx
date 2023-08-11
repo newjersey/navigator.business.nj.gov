@@ -11,6 +11,7 @@ import { searchContextualInfo } from "@/lib/search/searchContextualInfo";
 import { searchFundings } from "@/lib/search/searchFundings";
 import { searchIndustries } from "@/lib/search/searchIndustries";
 import { searchLicenseEvents } from "@/lib/search/searchLicenseEvents";
+import { searchNonEssentialQuestions } from "@/lib/search/searchNonEssentialQuestions";
 import { searchPostOnboarding } from "@/lib/search/searchPostOnboarding";
 import { searchSidebarCards } from "@/lib/search/searchSidebarCards";
 import { searchSteps } from "@/lib/search/searchSteps";
@@ -35,6 +36,7 @@ import {
   Filing,
   Funding,
   LicenseEvent,
+  NonEssentialQuestion,
   PostOnboardingFile,
   RoadmapDisplayContent,
   SidebarCardContent,
@@ -42,6 +44,7 @@ import {
   Task,
   WebflowLicense,
 } from "@/lib/types/types";
+import NonEssentialQuestions from "@businessnjgovnavigator/content/roadmaps/nonEssentialQuestions.json";
 import ForeignSteps from "@businessnjgovnavigator/content/roadmaps/steps-foreign.json";
 import Steps from "@businessnjgovnavigator/content/roadmaps/steps.json";
 import { Industries } from "@businessnjgovnavigator/shared";
@@ -80,6 +83,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [fundingMatches, setFundingMatches] = useState<Match[]>([]);
   const [industryMatches, setIndustryMatches] = useState<Match[]>([]);
   const [stepsMatches, setStepsMatches] = useState<Match[]>([]);
+  const [nonEssentialQuestionsMatches, setNonEssentialQuestionsMatches] = useState<Match[]>([]);
   const [webflowLicenseMatches, setWebflowLicenseMatches] = useState<Match[]>([]);
   const [filingMatches, setFilingMatches] = useState<Match[]>([]);
   const [sidebarCardMatches, setSidebarCardMatches] = useState<Match[]>([]);
@@ -121,6 +125,13 @@ const SearchContentPage = (props: Props): ReactElement => {
     });
     setStepsMatches([...defaultStepsMatches, ...foreignStepsMatches]);
 
+    setNonEssentialQuestionsMatches(
+      searchNonEssentialQuestions(
+        NonEssentialQuestions.nonEssentialQuestionsArray as NonEssentialQuestion[],
+        lowercaseTerm
+      )
+    );
+
     setWebflowLicenseMatches(searchWebflowLicenses(props.webflowLicenses, lowercaseTerm));
     setFilingMatches(searchTaxFilings(props.filings, lowercaseTerm));
     setSidebarCardMatches(searchSidebarCards(sidebarCards, lowercaseTerm));
@@ -142,6 +153,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...fundingMatches,
         ...industryMatches,
         ...stepsMatches,
+        ...nonEssentialQuestionsMatches,
         ...filingMatches,
         ...licenseEventMatches,
         ...sidebarCardMatches,
@@ -170,6 +182,7 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const roadmapsCollection = {
     "Roadmaps - Settings": stepsMatches,
+    "Roadmaps - Non Essential Question": nonEssentialQuestionsMatches,
   };
 
   const calendarCollection = {
