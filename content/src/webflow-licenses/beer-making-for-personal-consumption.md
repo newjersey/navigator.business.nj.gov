@@ -1,13 +1,13 @@
 ---
-id: "beer-making-for-personal-consumption"
-webflowId: "5f77295d486eeb3aa9c25618"
-urlSlug: "beer-making-for-personal-consumption"
-webflowName: "Beer Making for Personal Consumption"
-callToActionLink: "http://nj.gov/oag/abc/licensing-files.html"
-callToActionText: ""
+urlSlug: beer-making-for-personal-consumption
+webflowName: Beer Making for Personal Consumption
 agencyId: law-public-safety
-agencyAdditionalContext: "Division of Alcoholic Beverage, Control Licensing Bureau"
-divisionPhone: "(609) 984-2736"
-webflowIndustry: "Beer Making"
-licenseCertificationClassification: "PERMIT"
+agencyAdditionalContext: Division of Alcoholic Beverage, Control Licensing Bureau
+callToActionText: ""
+callToActionLink: https://www.njoag.gov/about/divisions-and-offices/division-of-alcoholic-beverage-control-home/posse-online-licensing-system/
+webflowIndustry: Beer Making
+divisionPhone: (609) 984-2736
+id: beer-making-for-personal-consumption
+webflowId: 5f77295d486eeb3aa9c25618
+licenseCertificationClassification: PERMIT
 ---
