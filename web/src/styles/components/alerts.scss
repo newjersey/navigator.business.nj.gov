@@ -2,7 +2,43 @@
   mask: url(/vendor/img/usa-icons/error.svg) no-repeat center !important;
 }
 
+.usa-alert--note::before {
+  content: url(/img/push-pin.svg);
+  height: 2.5rem;
+  width: 1.5rem;
+  display: block;
+  position: absolute;
+  left: 0.91rem;
+}
+
 .usa-alert.radius-md::before {
   border-bottom-left-radius: 0.25rem;
   border-top-left-radius: 0.25rem;
+}
+
+@mixin note() {
+  background-color: $base-lightest;
+  border-left-color: $secondary;
+  border-right-color: $secondary;
+  color: $base-darkest;
+}
+
+.usa-alert.usa-alert--note {
+  @include note();
+}
+
+.usa-alert.usa-alert--note.alert-border-small {
+  @include note();
+}
+
+.usa-alert.alert-border-small {
+  border-left: 0.25rem solid;
+}
+
+.alert-border-right {
+  border-right: 0.5rem solid;
+}
+
+.alert-border-small.alert-border-right {
+  border-right: 0.25rem solid;
 }
