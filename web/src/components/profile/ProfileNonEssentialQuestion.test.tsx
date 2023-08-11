@@ -1,4 +1,5 @@
 import { ProfileNonEssentialQuestion } from "@/components/profile/ProfileNonEssentialQuestion";
+import { getMergedConfig } from "@/contexts/configContext";
 import * as GetNonEssentialQuestionTextModule from "@/lib/domain-logic/getNonEssentialQuestionText";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { createEmptyProfileData, generateProfileData, ProfileData } from "@businessnjgovnavigator/shared";
@@ -12,10 +13,13 @@ const mockGetNonEssentialQuestionText = (
   GetNonEssentialQuestionTextModule as jest.Mocked<typeof GetNonEssentialQuestionTextModule>
 ).getNonEssentialQuestionText;
 
+const questionText = "Cool Test Question?";
+const Config = getMergedConfig();
+
 describe("ProfileNonEssentialQuestion", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    mockGetNonEssentialQuestionText.mockReturnValue("Cool Test Question?");
+    mockGetNonEssentialQuestionText.mockReturnValue(questionText);
   });
 
   const renderEssentialQuestion = ({
@@ -34,6 +38,14 @@ describe("ProfileNonEssentialQuestion", () => {
     );
   };
 
+  it("renders both the question text and optional text suffix", () => {
+    renderEssentialQuestion({ essentialQuestionId: "cool-test-id" });
+    expect(screen.getByText(questionText)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.profileDefaults.fields.nonEssentialQuestions.default.optionalText)
+    ).toBeInTheDocument();
+  });
+
   it("doesn't have an option pre-filled if user hasn't selected anything", () => {
     renderEssentialQuestion({ essentialQuestionId: "cool-test-id" });
     expect(
@@ -50,7 +62,7 @@ describe("ProfileNonEssentialQuestion", () => {
       profileData: { nonEssentialRadioAnswers: { "cool-test-id": false } },
     });
     fireEvent.click(screen.getByTestId("cool-test-id-radio-yes"));
-    expect(currentProfileData().nonEssentialRadioAnswers).toEqual({ "cool-test-id": "true" });
+    expect(currentProfileData().nonEssentialRadioAnswers).toEqual({ "cool-test-id": true });
   });
 
   it("updates profile data with false if answered no", () => {
@@ -59,6 +71,6 @@ describe("ProfileNonEssentialQuestion", () => {
       profileData: { nonEssentialRadioAnswers: { "cool-test-id": true } },
     });
     fireEvent.click(screen.getByTestId("cool-test-id-radio-no"));
-    expect(currentProfileData().nonEssentialRadioAnswers).toEqual({ "cool-test-id": "false" });
+    expect(currentProfileData().nonEssentialRadioAnswers).toEqual({ "cool-test-id": false });
   });
 });

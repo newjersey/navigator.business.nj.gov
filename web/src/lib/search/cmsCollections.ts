@@ -13,7 +13,12 @@ export const cmsCollections = [
   },
   {
     label: "🟩 ROADMAPS",
-    children: ["Roadmaps - Industries", "Roadmaps - Add-ons", "Roadmaps - Settings"],
+    children: [
+      "Roadmaps - Industries",
+      "Roadmaps - Add-ons",
+      "Roadmaps - Non Essential Questions",
+      "Roadmaps - Settings",
+    ],
   },
   {
     label: "🟦 TASKS",

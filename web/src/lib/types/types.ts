@@ -532,3 +532,9 @@ export type OutageConfig = {
   OUTAGE_ALERT_MESSAGE: string;
   OUTAGE_ALERT_TYPE: OutageAlertType;
 };
+
+export interface NonEssentialQuestion {
+  id: string;
+  questionText: string;
+  addOn: string;
+}

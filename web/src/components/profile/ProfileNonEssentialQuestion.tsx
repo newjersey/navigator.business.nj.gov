@@ -13,12 +13,12 @@ export const ProfileNonEssentialQuestion = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
-  const handleChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
+  const handleChange = (event: React.ChangeEvent<{ name?: string; value: string }>): void => {
     setProfileData({
       ...state.profileData,
       nonEssentialRadioAnswers: {
         ...state.profileData.nonEssentialRadioAnswers,
-        [props.essentialQuestionId]: event.target.value as boolean,
+        [props.essentialQuestionId]: event.target.value === "true",
       },
     });
   };

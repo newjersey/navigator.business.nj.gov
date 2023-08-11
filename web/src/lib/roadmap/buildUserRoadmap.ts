@@ -163,10 +163,14 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("reseller");
   }
 
-  if (industry.nonEssentialQuestionsIds && profileData.nonEssentialRadioAnswers) {
+  if (industry.nonEssentialQuestionsIds) {
     for (const questionId in profileData.nonEssentialRadioAnswers) {
       const addOnToAdd = getNonEssentialQuestionAddOn(questionId);
-      if (addOnToAdd && profileData.nonEssentialRadioAnswers[questionId]) {
+      if (
+        addOnToAdd &&
+        profileData.nonEssentialRadioAnswers[questionId] &&
+        industry.nonEssentialQuestionsIds.includes(questionId)
+      ) {
         addOns.push(addOnToAdd);
       }
     }
