@@ -1,13 +1,13 @@
 ---
-id: "bartending-school"
-webflowId: "5f77294e8fbb22532a6ec08a"
-urlSlug: "bartending-school"
-webflowName: "Bartending School"
-callToActionLink: "http://nj.gov/education/cte/ppcs/"
-callToActionText: ""
+urlSlug: bartending-school
+webflowName: Bartending School
 agencyId: njdol
-agencyAdditionalContext: "Private School Unit"
-divisionPhone: "(609) 984-2242"
-webflowIndustry: "Bartending School"
-licenseCertificationClassification: "CERTIFICATE OF APPROVAL"
+agencyAdditionalContext: Private School Unit
+callToActionText: ""
+callToActionLink: https://nj.gov/education/cte/postsec/ppcs/
+webflowIndustry: Bartending School
+divisionPhone: (609) 984-2242
+id: bartending-school
+webflowId: 5f77294e8fbb22532a6ec08a
+licenseCertificationClassification: CERTIFICATE OF APPROVAL
 ---
