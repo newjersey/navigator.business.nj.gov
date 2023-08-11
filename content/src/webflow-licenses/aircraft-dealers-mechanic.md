@@ -1,12 +1,12 @@
 ---
-id: "aircraft-dealers-mechanic"
-webflowId: "5f7728dd90d9acc6a31306f4"
-urlSlug: "aircraft-dealers-mechanic"
-webflowName: "Aircraft Dealers/ Mechanic"
-callToActionLink: "http://faa.gov/licenses_certificates/aircraft_certification/aircraft_registry/"
+urlSlug: aircraft-dealers-mechanic
+webflowName: Aircraft Dealers/ Mechanic
+agencyAdditionalContext: Federal Aviation Administration
 callToActionText: ""
-agencyAdditionalContext: "Federal Aviation Administration"
-divisionPhone: "(866) 635-5322"
-webflowIndustry: "Aircraft Dealer"
-licenseCertificationClassification: "CONTACT"
+callToActionLink: https://www.faa.gov/licenses_certificates/aircraft_certification
+webflowIndustry: Aircraft Dealer
+divisionPhone: (866) 635-5322
+id: aircraft-dealers-mechanic
+webflowId: 5f7728dd90d9acc6a31306f4
+licenseCertificationClassification: CONTACT
 ---
