@@ -21,7 +21,7 @@ jest.mock("@/lib/domain-logic/getNonEssentialQuestionAddOn", () => ({
   getNonEssentialQuestionAddOn: jest.fn(),
 }));
 
-const mockGetNonEssentiaQuestionAddOn = (
+const mockGetNonEssentialQuestionAddOn = (
   getNonEssentialAddOnModule as jest.Mocked<typeof getNonEssentialAddOnModule>
 ).getNonEssentialQuestionAddOn;
 
@@ -29,12 +29,12 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
   industries: [
     ...jest.requireActual("../../../../shared/lib/content/lib/industry.json").industries,
     {
-      id: "test-industry",
-      name: "Test Industry",
+      id: "non-essential-question-industry",
+      name: "Non Essential Question Industry",
       description: "",
       canHavePermanentLocation: true,
       roadmapSteps: [],
-      nonEssentialQuestionsIds: ["test-question-1", "test-question-2"],
+      nonEssentialQuestionsIds: ["non-essential-question-1", "non-essential-question-2"],
       naicsCodes: "",
       isEnabled: true,
       industryOnboardingQuestions: {},
@@ -490,30 +490,48 @@ describe("buildUserRoadmap", () => {
     });
 
     describe("non essential questions", () => {
-      it("adds addOn if nonEssentialsQuestion value is true", async () => {
-        mockGetNonEssentiaQuestionAddOn.mockReturnValue("test-addOn-1");
+      it("adds addOn if nonEssentialQuestion value is true", async () => {
+        mockGetNonEssentialQuestionAddOn.mockReturnValue("non-essential-add-on-1");
         await buildUserRoadmap(
           generateStartingProfile({
-            industryId: "test-industry",
+            industryId: "non-essential-question-industry",
             nonEssentialRadioAnswers: {
-              "test-question-1": true,
+              "non-essential-question-1": true,
             },
           })
         );
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("test-addOn-1");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("non-essential-add-on-1");
       });
 
-      it("doesn't add addOn if nonEssentialsQuestion is value is false", async () => {
-        mockGetNonEssentiaQuestionAddOn.mockReturnValue("test-addOn-2");
+      it("doesn't add addOn if nonEssentialQuestion value is false", async () => {
+        mockGetNonEssentialQuestionAddOn
+          .mockReturnValue("non-essential-add-on-2")
+          .mockReturnValue("non-essential-add-on-1");
         await buildUserRoadmap(
           generateStartingProfile({
-            industryId: "test-industry",
+            industryId: "non-essential-question-industry",
             nonEssentialRadioAnswers: {
-              "test-question-2": false,
+              "non-essential-question-1": true,
+              "non-essential-question-2": false,
             },
           })
         );
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("test-addOn-2");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("non-essential-add-on-2");
+      });
+
+      it("doesn't add addOn if question id is not in industry nonEssentialQuestions", async () => {
+        mockGetNonEssentialQuestionAddOn.mockReturnValue("add-on-for-question-not-contained-in-industry");
+        await buildUserRoadmap(
+          generateStartingProfile({
+            industryId: "non-essential-question-industry",
+            nonEssentialRadioAnswers: {
+              "question-not-contained-in-industry": true,
+            },
+          })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
+          "add-on-for-question-not-contained-in-industry"
+        );
       });
     });
   });
