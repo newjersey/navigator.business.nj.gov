@@ -25,7 +25,6 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
   };
 
   if (operatingPhase !== "GUEST_MODE" && cards.includes("not-registered")) {
-    showCard("successful-registration");
     hideCard("not-registered");
   }
 
