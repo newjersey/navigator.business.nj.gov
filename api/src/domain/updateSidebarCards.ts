@@ -1,5 +1,6 @@
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { isFieldAnswered, OPPORTUNITY_FIELDS } from "@shared/domain-logic/opportunityFields";
+import { LookupOperatingPhaseById } from "@shared/operatingPhase";
 import { modifyCurrentBusiness } from "@shared/test";
 import { UserData } from "@shared/userData";
 import { UpdateSidebarCards } from "./types";
@@ -51,10 +52,11 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
     hideCard("task-progress");
   }
 
-  if (operatingPhase === "UP_AND_RUNNING_OWNING" || operatingPhase === "GUEST_MODE_OWNING") {
+  if (LookupOperatingPhaseById(operatingPhase).displayGoToProfileNudge) {
     const isEveryOpportunityFieldAnswered = OPPORTUNITY_FIELDS.every((field) => {
       return isFieldAnswered(field, currentBusiness.profileData);
     });
+
     if (isEveryOpportunityFieldAnswered) {
       hideCard("go-to-profile");
     } else {
