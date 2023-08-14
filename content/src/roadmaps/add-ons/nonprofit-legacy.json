@@ -1,0 +1,19 @@
+{
+    "roadmapSteps": [
+      
+      {
+        "step": 2,
+        "weight": 0,
+        "task": "search-business-name"
+      }
+     
+    ],
+    "modifications": [
+      
+      {
+        "taskToReplaceFilename": "form-business-entity-nj",
+        "replaceWithFilename": "form-business-entity"
+      }
+    ]
+  }
+  
