@@ -84,7 +84,7 @@
     "remark-rehype": "10.1.0",
     "remove-markdown": "0.5.0",
     "slick-carousel": "^1.8.1",
-    "swr": "1.3.0",
+    "swr": "2.2.1",
     "unified": "10.1.2",
     "unist-util-visit": "4.1.2"
   },
