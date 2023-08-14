@@ -1,5 +1,4 @@
 import { formationTaskId } from "@shared/domain-logic/taskIds";
-import { OperatingPhaseId } from "@shared/operatingPhase";
 import {
   generateBusiness,
   generateMunicipality,
@@ -10,6 +9,7 @@ import {
 import { updateSidebarCards } from "./updateSidebarCards";
 
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+import { OperatingPhases } from "@shared/index";
 
 describe("updateRoadmapSidebarCards", () => {
   describe("successful registration", () => {
@@ -173,17 +173,14 @@ describe("updateRoadmapSidebarCards", () => {
   });
 
   describe("go-to-profile nudge", () => {
-    const poppyPhases: OperatingPhaseId[] = [
-      "GUEST_MODE",
-      "NEEDS_TO_FORM",
-      "NEEDS_TO_REGISTER_FOR_TAXES",
-      "FORMED_AND_REGISTERED",
-      "UP_AND_RUNNING",
-    ];
+    const phasesWhereGoToProfileNudgeTrue = OperatingPhases.filter((it) => it.displayGoToProfileNudge).map(
+      (it) => it.id
+    );
+    const phasesWhereGoToProfileNudgeFalse = OperatingPhases.filter((it) => !it.displayGoToProfileNudge).map(
+      (it) => it.id
+    );
 
-    const oscarPhases: OperatingPhaseId[] = ["GUEST_MODE_OWNING", "UP_AND_RUNNING_OWNING"];
-
-    it.each(poppyPhases)("does not add go-to-profile nudge for %s", (operatingPhase) => {
+    it.each(phasesWhereGoToProfileNudgeFalse)("does not add go-to-profile nudge for %s", (operatingPhase) => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
@@ -199,7 +196,7 @@ describe("updateRoadmapSidebarCards", () => {
       );
     });
 
-    it.each(oscarPhases)(
+    it.each(phasesWhereGoToProfileNudgeTrue)(
       "adds go-to-profile nudge for %s when at least one opportunity question unanswered",
       (operatingPhase) => {
         const userData = generateUserDataForBusiness(
@@ -218,7 +215,7 @@ describe("updateRoadmapSidebarCards", () => {
       }
     );
 
-    it.each(oscarPhases)(
+    it.each(phasesWhereGoToProfileNudgeTrue)(
       "removes go-to-profile nudge for %s when all opportunity questions answered",
       (operatingPhase) => {
         const userData = generateUserDataForBusiness(
