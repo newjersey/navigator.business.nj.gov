@@ -125,14 +125,14 @@ describe("<SidebarCardsContainer />", () => {
     it("removes successful registration card when it's closed", async () => {
       const business = generateBusiness({
         preferences: generatePreferences({
-          visibleSidebarCards: ["successful-registration"],
+          visibleSidebarCards: ["fake-visible-card"],
         }),
       });
 
       const sidebarCards = {
-        "successful-registration": generateSidebarCardContent({
-          id: "successful-registration",
-          contentMd: "SuccessContent",
+        "fake-visible-card": generateSidebarCardContent({
+          id: "fake-visible-card",
+          contentMd: "FakeContent",
           hasCloseButton: true,
         }),
       };
@@ -140,15 +140,13 @@ describe("<SidebarCardsContainer />", () => {
       renderWithBusiness(business, { sidebarCards });
 
       await waitFor(() => {
-        expect(screen.getByText("SuccessContent")).toBeInTheDocument();
+        expect(screen.getByText("FakeContent")).toBeInTheDocument();
       });
 
-      fireEvent.click(
-        within(screen.getByTestId("successful-registration") as HTMLElement).getByLabelText("Close")
-      );
+      fireEvent.click(within(screen.getByTestId("fake-visible-card") as HTMLElement).getByLabelText("Close"));
 
       await waitFor(() => {
-        expect(screen.queryByText("SuccessContent")).not.toBeInTheDocument();
+        expect(screen.queryByText("FakeContent")).not.toBeInTheDocument();
       });
     });
   });

@@ -2830,8 +2830,7 @@ collections:
           name: "imgPath",
           widget: "select",
           required: false,
-          options:
-            ["/img/congratulations-purple.svg", "/img/check-mark-circular-blue.svg", "/img/nudge-icon.svg"],
+          options: ["/img/congratulations-purple.svg", "/img/nudge-icon.svg"],
         }
       - { label: "Content", name: "body", widget: "markdown" }
       - {

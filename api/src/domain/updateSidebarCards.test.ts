@@ -12,22 +12,8 @@ import { updateSidebarCards } from "./updateSidebarCards";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 
 describe("updateRoadmapSidebarCards", () => {
-  describe("successful registration", () => {
-    it("does not add successful-registration card if not-registered card does not exist", async () => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          preferences: generatePreferences({
-            visibleSidebarCards: [],
-          }),
-        })
-      );
-      const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        "successful-registration"
-      );
-    });
-
-    it("removes not-registered card and adds successful-registration card", async () => {
+  describe("not registered card", () => {
+    it("removes not-registered card and adds formation nudge card", async () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
@@ -44,11 +30,11 @@ describe("updateRoadmapSidebarCards", () => {
         "not-registered"
       );
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
-        "successful-registration"
+        "formation-nudge"
       );
     });
 
-    it("leaves existing cards besides not registered when adding successful registration card", async () => {
+    it("leaves existing cards except for not registered when adding formation nudge card", async () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
@@ -65,7 +51,7 @@ describe("updateRoadmapSidebarCards", () => {
         "not-registered"
       );
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
-        "successful-registration"
+        "formation-nudge"
       );
     });
   });
