@@ -17,10 +17,11 @@ export const allowFormation = (
     "foreign-s-corporation": process.env.FEATURE_BUSINESS_FCORP === "true",
     "foreign-c-corporation": process.env.FEATURE_BUSINESS_FCORP === "true",
     "foreign-nonprofit": process.env.FEATURE_BUSINESS_FNP === "true",
+    nonprofit: process.env.FEATURE_BUSINESS_NP === "true",
   };
 
   if (publicFilingLegalTypes.includes(legalStructureId as PublicFilingLegalType)) {
-    if (persona === "FOREIGN") {
+    if (persona === "FOREIGN" || legalStructureId === "nonprofit") {
       return (
         featureFlagMap[
           castPublicFilingLegalTypeToFormationType(legalStructureId as PublicFilingLegalType, persona)

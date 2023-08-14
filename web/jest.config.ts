@@ -45,6 +45,7 @@ process.env = Object.assign(process.env, {
   FEATURE_BUSINESS_FLC: "true",
   FEATURE_BUSINESS_FCORP: "true",
   FEATURE_BUSINESS_FNP: "true",
+  FEATURE_BUSINESS_NP: "true",
   FEATURE_EXPORT_PDF: "true",
   WEBFLOW_API_TOKEN: 12345678910,
 });

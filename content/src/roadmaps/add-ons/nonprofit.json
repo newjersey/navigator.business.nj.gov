@@ -7,6 +7,11 @@
     },
     {
       "step": 2,
+      "weight": 0,
+      "task": "search-business-name"
+    },
+    {
+      "step": 2,
       "weight": 100,
       "task": "nonprofit-tax-exempt"
     },
@@ -20,6 +25,10 @@
     {
       "taskToReplaceFilename": "business-plan",
       "replaceWithFilename": "nonprofit-business-plan"
+    },
+    {
+      "taskToReplaceFilename": "form-business-entity-nj",
+      "replaceWithFilename": "form-business-entity"
     }
   ]
 }

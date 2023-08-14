@@ -126,6 +126,14 @@ const TaskPage = (props: Props): ReactElement => {
               <BusinessFormation
                 task={getTaskFromRoadmap(roadmap, props.task.id)}
                 displayContent={props.displayContent}
+                searchOnly={
+                  allowFormation(
+                    business?.profileData.legalStructureId,
+                    business?.profileData.businessPersona
+                  )
+                    ? false
+                    : true
+                }
               />
             ),
             [formationTaskId]: (

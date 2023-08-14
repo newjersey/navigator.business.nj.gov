@@ -16,6 +16,7 @@ module.exports = withBundleAnalyzer({
     FEATURE_BUSINESS_FCORP: process.env.FEATURE_BUSINESS_FCORP ?? "false",
     FEATURE_BUSINESS_FLC: process.env.FEATURE_BUSINESS_FLC ?? "false",
     FEATURE_BUSINESS_FNP: process.env.FEATURE_BUSINESS_FNP ?? "false",
+    FEATURE_BUSINESS_NP: process.env.FEATURE_BUSINESS_NP ?? "false",
     FEATURE_EXPORT_PDF: process.env.FEATURE_EXPORT_PDF ?? "false",
     FEATURE_LANDING_PAGE_REDIRECT: process.env.FEATURE_LANDING_PAGE_REDIRECT ?? "false",
     ALTERNATE_LANDING_PAGE_URL: process.env.ALTERNATE_LANDING_PAGE_URL ?? "",

@@ -78,6 +78,7 @@ type PreparePageParams = {
   isAuthenticated?: IsAuthenticated;
   setRegistrationModalIsVisible?: (value: boolean) => void;
   user?: Partial<BusinessUser>;
+  searchOnly?: boolean;
 };
 
 export const preparePage = ({
@@ -88,6 +89,7 @@ export const preparePage = ({
   isAuthenticated,
   setRegistrationModalIsVisible,
   user,
+  searchOnly,
 }: PreparePageParams): FormationPageHelpers => {
   const profileData = generateFormationProfileData({ ...business.profileData });
   const isValid = publicFilingLegalTypes.includes(profileData.legalStructureId as PublicFilingLegalType);
@@ -131,7 +133,11 @@ export const preparePage = ({
       <MunicipalitiesContext.Provider value={{ municipalities: internalMunicipalities }}>
         <WithStatefulUserData initialUserData={userData}>
           <ThemeProvider theme={createTheme()}>
-            <BusinessFormation task={task ?? generateTask({})} displayContent={displayContent} />
+            <BusinessFormation
+              task={task ?? generateTask({})}
+              displayContent={displayContent}
+              searchOnly={searchOnly}
+            />
           </ThemeProvider>
         </WithStatefulUserData>
       </MunicipalitiesContext.Provider>,
