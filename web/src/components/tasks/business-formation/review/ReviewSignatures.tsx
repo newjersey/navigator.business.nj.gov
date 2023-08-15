@@ -10,8 +10,10 @@ export const ReviewSignatures = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
   const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
   const isNonprofit = state.formationFormData.legalType === "nonprofit";
-  const hasNoSigners = (state.formationFormData.signers?.length ?? 0) === 0;
-  const hasNoIncorporators = (state.formationFormData.incorporators?.length ?? 0) === 0;
+  const hasSigners = (state.formationFormData.signers?.length ?? 0) > 0;
+  const hasIncorporators = (state.formationFormData.incorporators?.length ?? 0) > 0;
+  const areSignersApplicable = !isCorp && !isNonprofit;
+  const areIncorporatorsApplicable = isCorp || isNonprofit;
 
   const getConfig = (): { header: string; label: string } => {
     const field = isCorp ? "incorporators" : "signers";
@@ -120,19 +122,23 @@ export const ReviewSignatures = (): ReactElement => {
     );
   };
 
-  const signers = (): ReactElement => {
-    if (!isCorp && !isNonprofit && hasNoSigners) {
-      return displayEmptySigners();
-    } else {
+  const signers = (): ReactElement | null => {
+    if (!areSignersApplicable) return null;
+
+    if (hasSigners) {
       return displaySigners();
+    } else {
+      return displayEmptySigners();
     }
   };
 
-  const incorporators = (): ReactElement => {
-    if ((isCorp || isNonprofit) && hasNoIncorporators) {
-      return displayEmptyIncorporators();
-    } else {
+  const incorporators = (): ReactElement | null => {
+    if (!areIncorporatorsApplicable) return null;
+
+    if (hasIncorporators) {
       return displayIncorporators();
+    } else {
+      return displayEmptyIncorporators();
     }
   };
 
