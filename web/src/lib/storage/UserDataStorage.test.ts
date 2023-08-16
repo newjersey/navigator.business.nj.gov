@@ -18,35 +18,35 @@ describe("userDataStorage", () => {
   });
 
   it("stores userData", async () => {
-    expect(storage.set("whatever", user)).toBeTruthy();
-    expect(storage.get("whatever")).toEqual(user);
+    expect(storage.set("whatever", { data: user })).toBeTruthy();
+    expect(storage.get("whatever")?.data).toEqual(user);
   });
 
   it("deletes stored userData", async () => {
-    storage.set("whatever", user);
+    storage.set("whatever", { data: user });
     storage.delete("whatever");
     expect(storage.get("whatever")).toBeUndefined();
   });
 
   it("clears stored userData", async () => {
-    storage.set("whatever", user);
+    storage.set("whatever", { data: user });
     storage.clear();
     expect(storage.get("whatever")).toBeUndefined();
   });
 
   it("sets a prefix key during normal use", async () => {
-    storage.set("whatever", user);
+    storage.set("whatever", { data: user });
     expect(setItemSpy).toHaveBeenCalledWith(`${userDataPrefix}whatever`, JSON.stringify(user));
   });
 
   it("ignores useSWR internal prefix values", async () => {
-    storage.set(`${swrPrefixToIgnore}whatever`, user);
+    storage.set(`${swrPrefixToIgnore}whatever`, { data: user });
     expect(setItemSpy).toHaveBeenCalledWith(`${swrPrefixToIgnore}whatever`, JSON.stringify(user));
   });
 
   it("returns stored userData from memory cache after being set", async () => {
-    storage.set("whatever", user);
-    expect(storage.get("whatever")).toEqual(user);
+    storage.set("whatever", { data: user });
+    expect(storage.get("whatever")?.data).toEqual(user);
     expect(getItemSpy).toHaveBeenCalledTimes(0);
   });
 
@@ -54,7 +54,7 @@ describe("userDataStorage", () => {
     getItemSpy.mockImplementation(() => {
       return JSON.stringify(user);
     });
-    expect(storage.get("whatever")).toEqual(user);
+    expect(storage.get("whatever")?.data).toEqual(user);
     expect(getItemSpy).toHaveBeenCalledWith(`${userDataPrefix}whatever`);
   });
 
@@ -62,32 +62,32 @@ describe("userDataStorage", () => {
     getItemSpy.mockImplementation(() => {
       return JSON.stringify(user);
     });
-    expect(storage.get("whatever")).toEqual(user);
-    expect(storage.get("whatever")).toEqual(user);
+    expect(storage.get("whatever")?.data).toEqual(user);
+    expect(storage.get("whatever")?.data).toEqual(user);
     expect(getItemSpy).toHaveBeenCalledTimes(1);
   });
 
   it("returns current user id when it exists", async () => {
-    storage.set("whatever", user);
-    expect(storage.get("whatever")).toEqual(user);
+    storage.set("whatever", { data: user });
+    expect(storage.get("whatever")?.data).toEqual(user);
     expect(storage.getCurrentUserId()).toEqual("whatever");
   });
 
   it("returns current userData when it exists", async () => {
-    storage.set("whatever", user);
+    storage.set("whatever", { data: user });
     expect(storage.getCurrentUserData()).toEqual(user);
   });
 
   it("deletes current user", async () => {
-    storage.set("whatever", user);
+    storage.set("whatever", { data: user });
     storage.deleteCurrentUser();
-    expect(storage.get("whatever")).toBeUndefined();
+    expect(storage.get("whatever")?.data).toBeUndefined();
     expect(storage.getCurrentUserId()).toBeUndefined();
   });
 
   it("return undefined when if no users or multiple exist", async () => {
-    storage.set("whatever", user);
-    storage.set("whateve2", user);
+    storage.set("whatever", { data: user });
+    storage.set("whateve2", { data: user });
     expect(storage.getCurrentUserId()).toBeUndefined();
     storage.clear();
     expect(storage.getCurrentUserId()).toBeUndefined();

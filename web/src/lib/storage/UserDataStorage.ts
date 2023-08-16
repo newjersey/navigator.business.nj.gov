@@ -1,9 +1,11 @@
 import { BrowserStorageFactory } from "@/lib/storage/BrowserStorage";
 import { RegistrationStatus, UserData } from "@businessnjgovnavigator/shared/";
+import { State } from "swr";
 
 interface UserDataStorage {
-  get: (key?: string) => UserData | undefined;
-  set: (key: string, value: UserData) => boolean;
+  get: (key?: string) => State<UserData> | undefined;
+  keys: () => IterableIterator<string>;
+  set: (key: string, value: State<UserData>) => boolean;
   delete: (key?: string) => void;
   clear: () => void;
   getCurrentUserData: () => UserData | undefined;
@@ -21,29 +23,33 @@ export const UserDataStorageFactory = (): UserDataStorage => {
   const buffer = new Map<string, UserData | undefined>();
   const browserStorage = BrowserStorageFactory("session");
 
-  const get = (key?: string): UserData | undefined => {
+  const get = (key?: string): State<UserData> | undefined => {
     if (!key) {
       return undefined;
     }
     const bufferData = buffer.get(key);
     if (bufferData) {
-      return bufferData;
+      return {
+        data: bufferData,
+      };
     }
     const data = browserStorage.get(`${prefix(key)}${key}`);
-    if (data) {
+    if (data && data !== "undefined") {
       const userObject = JSON.parse(data);
       buffer.set(key, userObject);
-      return userObject;
+      return {
+        data: userObject,
+      };
     }
     return undefined;
   };
 
-  const set = (key: string, value: UserData): boolean => {
+  const set = (key: string, value: State<UserData>): boolean => {
     if (!key) {
       return false;
     }
-    buffer.set(key, value);
-    return browserStorage.set(`${prefix(key)}${key}`, JSON.stringify(value));
+    buffer.set(key, value.data);
+    return browserStorage.set(`${prefix(key)}${key}`, JSON.stringify(value.data));
   };
 
   const _delete = (key?: string): void => {
@@ -57,6 +63,10 @@ export const UserDataStorageFactory = (): UserDataStorage => {
   const clear = (): void => {
     buffer.clear();
     browserStorage.clear();
+  };
+
+  const keys = (): IterableIterator<string> => {
+    return getCurrentUsers().values();
   };
 
   const setRegistrationStatus = (value: RegistrationStatus | undefined): void => {
@@ -88,7 +98,7 @@ export const UserDataStorageFactory = (): UserDataStorage => {
 
   const getCurrentUserData = (): UserData | undefined => {
     const key = getCurrentUserId();
-    return key ? get(key) : undefined;
+    return key ? get(key)?.data : undefined;
   };
 
   const getCurrentUsers = (): string[] => {
@@ -102,6 +112,7 @@ export const UserDataStorageFactory = (): UserDataStorage => {
   };
 
   return {
+    keys,
     get,
     set,
     clear,

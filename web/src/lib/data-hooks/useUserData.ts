@@ -20,11 +20,15 @@ export const useUserData = (): UseUserDataResponse => {
   const { updateQueue, setUpdateQueue } = useContext(UpdateQueueContext);
   const { userDataError, setUserDataError } = useContext(UserDataErrorContext);
   const { setRoadmap } = useContext(RoadmapContext);
-  const { data, error, mutate } = useSWR<UserData | undefined>(state.user?.id || null, api.getUserData, {
-    isPaused: () => {
-      return state.isAuthenticated !== IsAuthenticated.TRUE;
-    },
-  });
+  const { data, error, mutate, isLoading } = useSWR<UserData | undefined>(
+    state.user?.id || null,
+    api.getUserData,
+    {
+      isPaused: () => {
+        return state.isAuthenticated !== IsAuthenticated.TRUE;
+      },
+    }
+  );
   const dataExists = !!data;
   const { setOperatingPhaseId, setLegalStructureId, setIndustryId, setBusinessPersona } =
     useContext(IntercomContext);
@@ -146,7 +150,7 @@ export const useUserData = (): UseUserDataResponse => {
   return {
     userData: updateQueue?.current(),
     business: updateQueue?.currentBusiness(),
-    isLoading: !error && !data,
+    isLoading: isLoading,
     error: userDataError,
     refresh: refresh,
     updateQueue: updateQueue,
