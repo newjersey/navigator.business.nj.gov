@@ -45,6 +45,8 @@ export const useMountEffectWhenDefined = (fun: () => void, thingToBeDefined: unk
 
 export const useScrollToPathAnchor = (): void => {
   useEffect(() => {
+    if (window.location.pathname === "/mgmt/cms") return;
+
     const path = window.location.hash;
     if (path && path.includes("#")) {
       const id = path.replace("#", "");

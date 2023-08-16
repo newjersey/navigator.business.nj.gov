@@ -1,3 +1,4 @@
+import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { CircularIndicator } from "@/components/CircularIndicator";
 import { FormationDateDeletionModal } from "@/components/FormationDateDeletionModal";
 import { NavBar } from "@/components/navbar/NavBar";
@@ -81,9 +82,6 @@ interface Props {
   CMS_ONLY_foreignBusinessType?: ForeignBusinessType; // for CMS only
   CMS_ONLY_tab?: ProfileTabs; // for CMS only
   CMS_ONLY_fakeBusiness?: Business; // for CMS only
-  CMS_ONLY_showEscapeModal?: boolean; // for CMS only
-  CMS_ONLY_showSuccessAlert?: boolean; // for CMS only
-  CMS_ONLY_showErrorAlert?: boolean; // for CMS only
 }
 
 const ProfilePage = (props: Props): ReactElement => {
@@ -348,6 +346,7 @@ const ProfilePage = (props: Props): ReactElement => {
           isVisible={profileData.nexusLocationInNewJersey}
           locked={shouldLockMunicipality()}
         >
+          <CannabisLocationAlert />
           <ProfileMunicipality />
         </ProfileField>
 
@@ -516,6 +515,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
 
         <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
+          <CannabisLocationAlert />
           <ProfileMunicipality />
         </ProfileField>
         <ProfileField
