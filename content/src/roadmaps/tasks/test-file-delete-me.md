@@ -1,6 +1,6 @@
 ---
 urlSlug: test-file
-filename: test-file-delete-me
+filename: ""
 name: test file to be deleted
 id: delete-me-please
 ---
