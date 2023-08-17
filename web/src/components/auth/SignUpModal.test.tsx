@@ -63,6 +63,12 @@ describe("SignUpModal", () => {
     expect(mockPush).toHaveBeenCalledWith(ROUTES.accountSetup);
   });
 
+  it("closes modal when link to account setup is clicked", () => {
+    setupHookWithAuth(IsAuthenticated.FALSE);
+    fireEvent.click(screen.getByText(Config.navigationDefaults.guestModalButtonText));
+    expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(false);
+  });
+
   it("goes to myNJ when Log-in link is clicked", () => {
     setupHookWithAuth(IsAuthenticated.FALSE);
     fireEvent.click(screen.getByText(markdownToText(Config.navigationDefaults.guestModalSubText)));
