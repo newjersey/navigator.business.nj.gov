@@ -63,12 +63,6 @@ describe("SignUpModal", () => {
     expect(mockPush).toHaveBeenCalledWith(ROUTES.accountSetup);
   });
 
-  it("routes to account setup with query param when open tax filings modal query", async () => {
-    setupHookWithAuth(IsAuthenticated.FALSE);
-    fireEvent.click(screen.getByText(Config.navigationDefaults.guestModalButtonText));
-    expect(mockPush).toHaveBeenCalledWith(ROUTES.accountSetup);
-  });
-
   it("goes to myNJ when Log-in link is clicked", () => {
     setupHookWithAuth(IsAuthenticated.FALSE);
     fireEvent.click(screen.getByText(markdownToText(Config.navigationDefaults.guestModalSubText)));
