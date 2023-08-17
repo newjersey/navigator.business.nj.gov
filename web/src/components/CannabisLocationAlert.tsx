@@ -1,17 +1,16 @@
-import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ReactElement } from "react";
 
-export const CannabisLocationAlert = (): ReactElement => {
-  const { Config } = useConfig();
-  const { business } = useUserData();
+type Props = {
+  industryId?: string;
+};
 
-  return business?.profileData.industryId === "cannabis" ? (
-    <Alert variant="warning">
-      <Content>{Config.profileDefaults.default.cannabisLocationAlert}</Content>
-    </Alert>
+export const CannabisLocationAlert = (props: Props): ReactElement => {
+  const { Config } = useConfig();
+
+  return props.industryId === "cannabis" ? (
+    <Alert variant="warning">{Config.profileDefaults.default.cannabisLocationAlert}</Alert>
   ) : (
     <></>
   );

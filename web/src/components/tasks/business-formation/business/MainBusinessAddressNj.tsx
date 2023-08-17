@@ -10,12 +10,14 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { ReactElement, useContext, useState } from "react";
 
 export const MainBusinessAddressNj = (): ReactElement => {
   const { Config } = useConfig();
   const { setFormationFormData, state } = useContext(BusinessFormationContext);
+  const { business } = useUserData();
   const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useFormationErrors();
 
   const doAnyFieldsHaveAValue = (): boolean => {
@@ -62,7 +64,7 @@ export const MainBusinessAddressNj = (): ReactElement => {
       </div>
       {isExpanded && (
         <>
-          <CannabisLocationAlert />
+          <CannabisLocationAlert industryId={business?.profileData.industryId} />
           <BusinessFormationTextField
             label={Config.formation.fields.addressLine1.label}
             fieldName="addressLine1"
