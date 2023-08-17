@@ -35,6 +35,7 @@ export const SignUpModal = (): ReactElement => {
     } else {
       analytics.event.guest_modal.click.go_to_NavigatorAccount_setup();
     }
+    setRegistrationModalIsVisible(false);
     router.push(ROUTES.accountSetup);
   };
 
