@@ -29,29 +29,25 @@ export const PureMarkdownContent = (props: Props): ReactElement => {
   return <>{markdown}</>;
 };
 
-type hProperties = {
-  header?: any;
-  type?: any;
-};
-
-function setNodeValues(node: any, nodeName: string, hProperties: hProperties): void {
-  if (node.name === nodeName) {
-    const data = node.data || (node.data = {});
-    data.hName = nodeName;
-    data.hProperties = hProperties;
-  }
-}
-
 function customRemarkPlugin():
   | void
   | import("unified").Transformer<import("mdast").Root, import("mdast").Root> {
   return (tree: any) => {
     visit(tree, (node) => {
       if (node.type === "containerDirective") {
-        setNodeValues(node, "infoAlert", { header: node.attributes.header });
-        setNodeValues(node, "greenBox", { header: node.attributes.header });
-        setNodeValues(node, "note", { header: node.attributes.header });
-        setNodeValues(node, "icon", { type: node.attributes.type });
+        const data = node.data || (node.data = {});
+        data.hName = node.name;
+        switch (node.name) {
+          case "cannabisLocationAlert":
+          case "greenBox":
+          case "infoAlert":
+          case "note":
+            data.hProperties = { header: node.attributes.header };
+            break;
+          case "icon":
+            data.hProperties = { type: node.attributes.type };
+            break;
+        }
       } else {
         return;
       }

@@ -13,6 +13,9 @@ If you would like to use a consumer-facing business name other than your persona
 
 ---
 
+:::cannabisLocationAlert
+:::
+
 ${beginLocationDependentSection}
 
 **Check with your local clerk’s office**

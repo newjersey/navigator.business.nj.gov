@@ -346,7 +346,7 @@ const ProfilePage = (props: Props): ReactElement => {
           isVisible={profileData.nexusLocationInNewJersey}
           locked={shouldLockMunicipality()}
         >
-          <CannabisLocationAlert />
+          <CannabisLocationAlert industryId={business?.profileData.industryId} />
           <ProfileMunicipality />
         </ProfileField>
 
@@ -515,7 +515,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
 
         <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
-          <CannabisLocationAlert />
+          <CannabisLocationAlert industryId={business?.profileData.industryId} />
           <ProfileMunicipality />
         </ProfileField>
         <ProfileField

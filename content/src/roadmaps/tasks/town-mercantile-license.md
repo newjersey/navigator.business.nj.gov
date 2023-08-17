@@ -6,10 +6,13 @@ callToActionLink: ${municipalityWebsite}
 callToActionText: Visit the ${municipality} Website
 requiresLocation: true
 ---
+
 Prior to opening, you may need to get a mercantile license. Some local governments require businesses with physical locations to get a mercantile license. Each municipality will have its own application process for the mercantile license.
 
-- - -
+---
 
+:::cannabisLocationAlert
+:::
 
 ${beginLocationDependentSection}
 
@@ -19,8 +22,8 @@ You can find your local municipal clerk's office through the [${municipality} we
 
 ${endLocationDependentSection}
 
-- - -
+---
 
 > **Once completed, you will have:**
 >
-> * A mercantile license
+> - A mercantile license
