@@ -197,6 +197,17 @@ export interface Opportunity {
   status?: string;
 }
 
+export interface QuickAction {
+  id: string;
+  name: string;
+  urlSlug: string;
+  filename: string;
+  contentMd: string;
+  callToActionLink: string | undefined;
+  callToActionText: string | undefined;
+  form: string | undefined;
+}
+
 export type FundingType =
   | "tax credit"
   | "loan"

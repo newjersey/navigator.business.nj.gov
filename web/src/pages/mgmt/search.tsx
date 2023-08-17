@@ -13,6 +13,7 @@ import { searchIndustries } from "@/lib/search/searchIndustries";
 import { searchLicenseEvents } from "@/lib/search/searchLicenseEvents";
 import { searchNonEssentialQuestions } from "@/lib/search/searchNonEssentialQuestions";
 import { searchPostOnboarding } from "@/lib/search/searchPostOnboarding";
+import { searchQuickActions } from "@/lib/search/searchQuickActions";
 import { searchSidebarCards } from "@/lib/search/searchSidebarCards";
 import { searchSteps } from "@/lib/search/searchSteps";
 import { searchTasks } from "@/lib/search/searchTasks";
@@ -28,6 +29,7 @@ import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllLicenses } from "@/lib/static/loadLicenses";
 import { loadAllPostOnboarding } from "@/lib/static/loadPostOnboarding";
+import { loadAllQuickActions } from "@/lib/static/loadQuickActions";
 import { loadAllLicenseTasks, loadAllTasksOnly } from "@/lib/static/loadTasks";
 import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
 import {
@@ -38,6 +40,7 @@ import {
   LicenseEvent,
   NonEssentialQuestion,
   PostOnboardingFile,
+  QuickAction,
   RoadmapDisplayContent,
   SidebarCardContent,
   Step,
@@ -68,6 +71,7 @@ interface Props {
   archivedContextualInfo: ContextualInfoFile[];
   postOnboarding: PostOnboardingFile[];
   licenseEvents: LicenseEvent[];
+  quickActions: QuickAction[];
   cmsConfig: any;
 }
 
@@ -86,6 +90,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [nonEssentialQuestionsMatches, setNonEssentialQuestionsMatches] = useState<Match[]>([]);
   const [webflowLicenseMatches, setWebflowLicenseMatches] = useState<Match[]>([]);
   const [filingMatches, setFilingMatches] = useState<Match[]>([]);
+  const [quickActionMatches, setQuickActionMatches] = useState<Match[]>([]);
   const [sidebarCardMatches, setSidebarCardMatches] = useState<Match[]>([]);
   const [contextualInfoMatches, setContextualInfoMatches] = useState<Match[]>([]);
   const [archivedContextualInfoMatches, setArchivedContextualInfoMatches] = useState<Match[]>([]);
@@ -118,6 +123,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
     setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
     setIndustryMatches(searchIndustries(Industries, lowercaseTerm));
+    setQuickActionMatches(searchQuickActions(props.quickActions, lowercaseTerm));
 
     const defaultStepsMatches = searchSteps(Steps.steps as Step[], lowercaseTerm, { filename: "Steps" });
     const foreignStepsMatches = searchSteps(ForeignSteps.steps as Step[], lowercaseTerm, {
@@ -161,6 +167,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...archivedContextualInfoMatches,
         ...contextualInfoMatches,
         ...groupedConfigMatches,
+        ...quickActionMatches,
       ].length === 0
     );
   };
@@ -199,6 +206,10 @@ const SearchContentPage = (props: Props): ReactElement => {
     "Post Onboarding Content": postOnboardingMatches,
   };
 
+  const quickActionCollection = {
+    "Quick Actions": quickActionMatches,
+  };
+
   const authedView = (
     <div>
       <h1>Search in CMS</h1>
@@ -227,6 +238,10 @@ const SearchContentPage = (props: Props): ReactElement => {
       <MatchCollection matchedCollections={calendarCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={dashboardCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={miscCollection} groupedConfigMatches={groupedConfigMatches} />
+      <MatchCollection
+        matchedCollections={quickActionCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
     </div>
   );
 
@@ -265,6 +280,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       archivedContextualInfo: loadAllArchivedContextualInfo(),
       postOnboarding: loadAllPostOnboarding(),
       licenseEvents: loadAllLicenses(),
+      quickActions: loadAllQuickActions(),
       cmsConfig: loadCmsConfig(),
     },
   };
