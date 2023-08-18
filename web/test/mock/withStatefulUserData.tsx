@@ -62,6 +62,7 @@ export const setupStatefulUserDataContext = (): void => {
       business: userData?.businesses[userData?.currentBusinessId],
       isLoading: false,
       error: undefined,
+      hasCompletedFetch: true,
       updateQueue: updateQueue,
       createUpdateQueue,
       refresh: jest.fn(),

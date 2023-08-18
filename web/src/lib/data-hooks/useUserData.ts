@@ -12,14 +12,17 @@ import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { UserData } from "@businessnjgovnavigator/shared/";
 import { Business } from "@businessnjgovnavigator/shared/userData";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import useSWR from "swr";
+
+const NOT_YET_FETCHED = "NOT_YET_FETCHED";
 
 export const useUserData = (): UseUserDataResponse => {
   const { state, dispatch } = useContext(AuthContext);
   const { updateQueue, setUpdateQueue } = useContext(UpdateQueueContext);
   const { userDataError, setUserDataError } = useContext(UserDataErrorContext);
   const { setRoadmap } = useContext(RoadmapContext);
+  const fetchedUserId = useRef<string | undefined>(NOT_YET_FETCHED);
   const { data, error, mutate } = useSWR<UserData | undefined>(state.user?.id || null, api.getUserData, {
     isPaused: () => {
       return state.isAuthenticated !== IsAuthenticated.TRUE;
@@ -45,6 +48,7 @@ export const useUserData = (): UseUserDataResponse => {
   ]);
 
   useEffect(() => {
+    fetchedUserId.current = data?.user.id;
     if (updateQueue === undefined && data) {
       setUpdateQueue(new UpdateQueueFactory(data, update));
     } else if (updateQueue?.current() === undefined && data) {
@@ -143,10 +147,19 @@ export const useUserData = (): UseUserDataResponse => {
     }
   };
 
+  const calculateHasFetched = (): boolean => {
+    if (state.isAuthenticated === IsAuthenticated.UNKNOWN) return false;
+    if (fetchedUserId.current === NOT_YET_FETCHED) return false;
+    if (state.user?.id === undefined) return false;
+    if (data && !updateQueue) return false;
+    return true;
+  };
+
   return {
     userData: updateQueue?.current(),
     business: updateQueue?.currentBusiness(),
     isLoading: !error && !data,
+    hasCompletedFetch: calculateHasFetched(),
     error: userDataError,
     refresh: refresh,
     updateQueue: updateQueue,
@@ -158,6 +171,7 @@ export type UseUserDataResponse = {
   userData: UserData | undefined;
   business: Business | undefined;
   isLoading: boolean;
+  hasCompletedFetch: boolean;
   error: UserDataError | undefined;
   refresh: () => Promise<void>;
   updateQueue: UpdateQueue | undefined;
