@@ -98,11 +98,7 @@ export const NonprofitProvisions = (): ReactElement => {
                 style={{ alignItems: "center" }}
                 value={value}
                 control={
-                  <Radio
-                    required={true}
-                    data-testid={`${fieldName}-${value}`}
-                    color={hasError ? "error" : "primary"}
-                  />
+                  <Radio data-testid={`${fieldName}-${value}`} color={hasError ? "error" : "primary"} />
                 }
                 label={getRadioLabel(value)}
               />

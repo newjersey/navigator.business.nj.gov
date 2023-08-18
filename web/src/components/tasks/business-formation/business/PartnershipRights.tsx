@@ -65,25 +65,13 @@ export const PartnershipRights = (): ReactElement => {
             <FormControlLabel
               style={{ alignItems: "center" }}
               value={"true"}
-              control={
-                <Radio
-                  required={true}
-                  data-testid={`${fieldName}-true`}
-                  color={hasError ? "error" : "primary"}
-                />
-              }
+              control={<Radio data-testid={`${fieldName}-true`} color={hasError ? "error" : "primary"} />}
               label={Config.formation.partnershipRights.radioYesText}
             />
             <FormControlLabel
               style={{ alignItems: "center" }}
               value={"false"}
-              control={
-                <Radio
-                  required={true}
-                  color={hasError ? "error" : "primary"}
-                  data-testid={`${fieldName}-false`}
-                />
-              }
+              control={<Radio color={hasError ? "error" : "primary"} data-testid={`${fieldName}-false`} />}
               label={Config.formation.partnershipRights.radioNoText}
             />
           </RadioGroup>
