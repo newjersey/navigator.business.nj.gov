@@ -87,7 +87,7 @@
     "jest-dynalite": "3.6.1",
     "jest-junit": "16.0.0",
     "prettier": "2.8.8",
-    "prettier-plugin-organize-imports": "3.2.2",
+    "prettier-plugin-organize-imports": "3.2.3",
     "rimraf": "5.0.1",
     "serverless": "3.33.0",
     "serverless-dynamodb": "0.2.42",
