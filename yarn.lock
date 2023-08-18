@@ -4227,7 +4227,7 @@ __metadata:
     css-loader: 6.8.1
     cypress: 12.17.1
     cypress-dotenv: 2.0.0
-    cypress-wait-until: 1.7.2
+    cypress-wait-until: 2.0.1
     dayjs: 1.11.9
     dedent: 0.7.0
     dependency-cruiser: 13.1.3
@@ -4428,7 +4428,7 @@ __metadata:
     css-loader: 6.8.1
     cypress: 12.17.1
     cypress-dotenv: 2.0.0
-    cypress-wait-until: 1.7.2
+    cypress-wait-until: 2.0.1
     dayjs: 1.11.9
     dependency-cruiser: 13.1.3
     dotenv: 16.3.1
@@ -16270,10 +16270,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress-wait-until@npm:1.7.2":
-  version: 1.7.2
-  resolution: "cypress-wait-until@npm:1.7.2"
-  checksum: e3fe3c35ef8cfda39fb8919ae63a238bd580a98f5c02120306b32d6502ddfa9bfc3afde733cd9b282035b9f67e8386bd6c58bd59ca5fd2ea65291e6d9bac1ed7
+"cypress-wait-until@npm:2.0.1":
+  version: 2.0.1
+  resolution: "cypress-wait-until@npm:2.0.1"
+  checksum: 5736d34655ec84a27587647daf5654330f2ca407bbef14bdf7fa32c1dbac4ada04cea06d074f0ca604acae8496741740eedd8974bd90333b81df01bf3c4ef2f5
   languageName: node
   linkType: hard
 
