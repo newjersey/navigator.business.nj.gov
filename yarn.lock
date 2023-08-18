@@ -4225,7 +4225,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 6.31.3
     css-loader: 6.8.1
-    cypress: 12.17.1
+    cypress: 12.17.3
     cypress-dotenv: 2.0.0
     cypress-wait-until: 2.0.1
     dayjs: 1.11.9
@@ -4426,7 +4426,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 6.31.3
     css-loader: 6.8.1
-    cypress: 12.17.1
+    cypress: 12.17.3
     cypress-dotenv: 2.0.0
     cypress-wait-until: 2.0.1
     dayjs: 1.11.9
@@ -10931,17 +10931,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:16.18.40, @types/node@npm:^14.0.10 || ^16.0.0, @types/node@npm:^14.14.20 || ^16.0.0":
+"@types/node@npm:16.18.40":
   version: 16.18.40
   resolution: "@types/node@npm:16.18.40"
   checksum: a683930491b4fd7cb2dc7684e32bbeedc4a83fb1949a7b15ea724fbfaa9988cec59091f169a3f1090cb91992caba8c1a7d50315b2c67c6e2579a3788bb09eec4
   languageName: node
   linkType: hard
 
-"@types/node@npm:>=8.0.0 <15, @types/node@npm:^14.14.31":
+"@types/node@npm:>=8.0.0 <15":
   version: 14.18.54
   resolution: "@types/node@npm:14.18.54"
   checksum: 9fd66f91fcd8e9b25067f784a9c60bd710ef86a89c838c131ab2b1921398adc53b1c70d741bceed48bb2403b75c434b1bbbb255240773819cde36295c4b6abf1
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^14.0.10 || ^16.0.0, @types/node@npm:^14.14.20 || ^16.0.0, @types/node@npm:^16.18.39":
+  version: 16.18.41
+  resolution: "@types/node@npm:16.18.41"
+  checksum: b12650d8e4289edafcf0453c8a66c00d6397d465a48b1c683babba4f16f92a6418f678e98a85751e3fef78d23c2b07f641df8da14bf5428ad8282b57b2695243
   languageName: node
   linkType: hard
 
@@ -16277,13 +16284,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:12.17.1":
-  version: 12.17.1
-  resolution: "cypress@npm:12.17.1"
+"cypress@npm:12.17.3":
+  version: 12.17.3
+  resolution: "cypress@npm:12.17.3"
   dependencies:
     "@cypress/request": ^2.88.11
     "@cypress/xvfb": ^1.2.4
-    "@types/node": ^14.14.31
+    "@types/node": ^16.18.39
     "@types/sinonjs__fake-timers": 8.1.1
     "@types/sizzle": ^2.3.2
     arch: ^2.2.0
@@ -16325,7 +16332,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: 1f042e3e5931498bdf826cba09060939349e677fca8654c9695760acbec5a424cb69d3445ace57cf80deb496d770ffe571ef791dff72af24e7f560ee43986ee4
+  checksum: 1da3922cac45c35ee282116fe2af2278e92cc08bd2d8586e0f2346cbe5c9f62129cec567bc9274c585e8c2e887341fa4e5c8623cfaa41dba87331cfb5a023721
   languageName: node
   linkType: hard
 
