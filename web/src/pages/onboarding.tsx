@@ -78,7 +78,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [error, setError] = useState<ProfileError | undefined>(undefined);
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
-  const { updateQueue, createUpdateQueue } = useUserData();
+  const { updateQueue, createUpdateQueue, hasCompletedFetch } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const headerRef = useRef<HTMLDivElement>(null);
   const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
@@ -146,7 +146,8 @@ const OnboardingPage = (props: Props): ReactElement => {
         !router.isReady ||
         hasHandledRouting.current ||
         !state.user ||
-        state.isAuthenticated === IsAuthenticated.UNKNOWN
+        state.isAuthenticated === IsAuthenticated.UNKNOWN ||
+        !hasCompletedFetch
       ) {
         return;
       }
@@ -195,7 +196,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.isReady, state.user, state.isAuthenticated]);
+  }, [router.isReady, state.user, state.isAuthenticated, hasCompletedFetch]);
 
   const setIndustryAndRouteToPage = async (
     business: Business,
