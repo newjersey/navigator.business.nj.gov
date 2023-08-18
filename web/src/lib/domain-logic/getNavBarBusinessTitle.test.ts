@@ -141,6 +141,38 @@ describe("getNavBarBusinessTitle", () => {
         });
       });
     });
+
+    describe("Nexus DBA", () => {
+      it("shows unnamed dba when the nexusDbaName is empty and needsNexusDbaName is true", () => {
+        const business = generateBusiness({
+          profileData: generateProfileData({
+            businessPersona: "FOREIGN",
+            foreignBusinessType: "NEXUS",
+            businessName: "test business Name",
+            needsNexusDbaName: true,
+            nexusDbaName: "",
+          }),
+        });
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+        expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedDbaBusinessText);
+      });
+
+      it("shows the dba name when the user has entered a DBA name", () => {
+        const dbaName = "dbaName";
+
+        const business = generateBusiness({
+          profileData: generateProfileData({
+            businessPersona: "FOREIGN",
+            foreignBusinessType: "NEXUS",
+            businessName: "test business Name",
+            needsNexusDbaName: true,
+            nexusDbaName: dbaName,
+          }),
+        });
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+        expect(navBarBusinessTitle).toEqual(dbaName);
+      });
+    });
   });
 
   describe("when name undefined, legal structure defined, and industry defined", () => {
