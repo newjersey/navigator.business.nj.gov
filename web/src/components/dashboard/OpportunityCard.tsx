@@ -27,12 +27,12 @@ export const OpportunityCard = (props: Props): ReactElement => {
     funding: <Tag backgroundColor="accent-semi-cool-light">{Config.dashboardDefaults.fundingTagText}</Tag>,
     certification: (
       <Tag backgroundColor="accent-cool-light">{Config.dashboardDefaults.certificationTagText}</Tag>
-    ),
+    )
   };
 
   const truncatedMd = truncateMarkdown(props.opportunity.descriptionMd, {
     limit: MAX_CONTENT_CHARS,
-    ellipsis: true,
+    ellipsis: true
   });
 
   const isHidden = (): boolean => {
@@ -50,7 +50,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
     const propertyToUpdate = props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
     await updateQueue
       .queuePreferences({
-        [propertyToUpdate]: [...business.preferences[propertyToUpdate], props.opportunity.id],
+        [propertyToUpdate]: [...business.preferences[propertyToUpdate], props.opportunity.id]
       })
       .update();
   };
@@ -64,7 +64,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
       .queuePreferences({
         [propertyToUpdate]: business.preferences[propertyToUpdate].filter((it: string) => {
           return it !== props.opportunity.id;
-        }),
+        })
       })
       .update();
   };

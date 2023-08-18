@@ -7,7 +7,7 @@ import { ReactElement, ReactNode } from "react";
 const colors = {
   active: "usa-button",
   current: "usa-button usa-button--outline bg-base-lightest-hover",
-  unselected: "usa-button text-base bg-white bg-base-lightest-hover",
+  unselected: "usa-button text-base bg-white bg-base-lightest-hover"
 };
 type Props = {
   onChange: (year: string) => void;
@@ -42,7 +42,7 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
           return {
             text: year,
             props: { className: getColors(year) },
-            onClick: () => props.onChange(year),
+            onClick: () => props.onChange(year)
           };
         })}
         horizontal

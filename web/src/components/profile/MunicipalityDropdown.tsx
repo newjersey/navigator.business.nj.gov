@@ -39,7 +39,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
     matchFrom: "any",
     stringify: (option: Municipality) => {
       return option.displayName;
-    },
+    }
   });
 
   const getHelperText = (): string | undefined => {
@@ -86,7 +86,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
               inputProps={{
                 "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
                 "data-testid": props.fieldName,
-                ...params.inputProps,
+                ...params.inputProps
               }}
               value={searchText}
               onChange={handleChange}
@@ -96,8 +96,8 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
               helperText={getHelperText()}
               sx={{
                 "& .MuiInputBase-root": {
-                  backgroundColor: "#FFFFFF",
-                },
+                  backgroundColor: "#FFFFFF"
+                }
               }}
             />
           </div>

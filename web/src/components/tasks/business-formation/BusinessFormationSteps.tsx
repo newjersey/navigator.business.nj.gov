@@ -10,16 +10,16 @@ import { ReactElement } from "react";
 export const BusinessFormationSteps: { component: ReactElement; step: FormationStepNames }[] = [
   {
     component: <BusinessNameStep />,
-    step: BusinessFormationStepsConfiguration[0].name,
+    step: BusinessFormationStepsConfiguration[0].name
   },
   {
     component: <BusinessStep />,
-    step: BusinessFormationStepsConfiguration[1].name,
+    step: BusinessFormationStepsConfiguration[1].name
   },
   {
     component: <ContactsStep />,
-    step: BusinessFormationStepsConfiguration[2].name,
+    step: BusinessFormationStepsConfiguration[2].name
   },
   { component: <BillingStep />, step: BusinessFormationStepsConfiguration[3].name },
-  { component: <ReviewStep />, step: BusinessFormationStepsConfiguration[4].name },
+  { component: <ReviewStep />, step: BusinessFormationStepsConfiguration[4].name }
 ];

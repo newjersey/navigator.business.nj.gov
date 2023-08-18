@@ -7,7 +7,7 @@ import { ReactElement } from "react";
 const UserDataErrorLookup: Record<UserDataError, string> = {
   NO_DATA: Config.siteWideErrorMessages.errorTextNoData,
   CACHED_ONLY: Config.siteWideErrorMessages.errorTextCachedOnly,
-  UPDATE_FAILED: Config.siteWideErrorMessages.errorTextUpdateFailed,
+  UPDATE_FAILED: Config.siteWideErrorMessages.errorTextUpdateFailed
 };
 
 export const UserDataErrorAlert = (): ReactElement => {

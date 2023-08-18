@@ -13,7 +13,7 @@ export const migrate_v0_to_v1 = (v0Data: v0UserData): v1UserData => {
   return {
     ...v0Data,
     taskProgress: {},
-    version: 1,
+    version: 1
   };
 };
 
@@ -90,7 +90,7 @@ export const generateV1User = (overrides: Partial<v1BusinessUser>): v1BusinessUs
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -100,32 +100,32 @@ export const generateV1FormData = (overrides: Partial<v1BusinessForm>): v1Busine
       firstName: `some-firstname-${randomInt()}`,
       lastName: `some-lastname-${randomInt()}`,
       email: `some-email-${randomInt()}`,
-      ...overrides.user,
+      ...overrides.user
     },
     businessType: {
       businessType: "restaurant",
-      ...overrides.businessType,
+      ...overrides.businessType
     },
     businessName: {
       businessName: `some-business-name-${randomInt()}`,
-      ...overrides.businessName,
+      ...overrides.businessName
     },
     businessDescription: {
       businessDescription: `some-description-${randomInt()}`,
-      ...overrides.businessDescription,
+      ...overrides.businessDescription
     },
     businessStructure: {
       businessStructure: "Sole Proprietorship",
-      ...overrides.businessStructure,
+      ...overrides.businessStructure
     },
     locations: {
       locations: [
         {
           zipCode: `some-zipcode-${randomInt()}`,
-          license: false,
-        },
+          license: false
+        }
       ],
-      ...overrides.locations,
-    },
+      ...overrides.locations
+    }
   };
 };

@@ -4,13 +4,13 @@ import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadm
 import {
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData,
+  WithStatefulUserData
 } from "@/test/mock/withStatefulUserData";
 import { SectionType } from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,
   generatePreferences,
-  generateUserDataForBusiness,
+  generateUserDataForBusiness
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -38,8 +38,8 @@ describe("<SectionAccordion />", () => {
       "PLAN",
       generateBusiness({
         preferences: generatePreferences({
-          roadmapOpenSections: [],
-        }),
+          roadmapOpenSections: []
+        })
       })
     );
 
@@ -61,8 +61,8 @@ describe("<SectionAccordion />", () => {
       "PLAN",
       generateBusiness({
         preferences: generatePreferences({
-          roadmapOpenSections: ["PLAN", "START"],
-        }),
+          roadmapOpenSections: ["PLAN", "START"]
+        })
       })
     );
 

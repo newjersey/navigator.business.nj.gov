@@ -24,10 +24,10 @@ describe("HomePage", () => {
           config: {
             ...Config,
             landingPageExperienceWelcome: {
-              section3SupportingText: "Soma is available to help all new business Users globally",
-            } as unknown as typeof Config.landingPageExperienceWelcome,
+              section3SupportingText: "Soma is available to help all new business Users globally"
+            } as unknown as typeof Config.landingPageExperienceWelcome
           },
-          setOverrides: (): undefined => void {},
+          setOverrides: (): undefined => void {}
         }}
       >
         <WelcomePage />

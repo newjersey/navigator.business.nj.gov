@@ -8,7 +8,7 @@ import { externalEndpointRouterFactory } from "./externalEndpointRouter";
 
 jest.mock("jsonwebtoken", () => {
   return {
-    decode: jest.fn(),
+    decode: jest.fn()
   };
 });
 const mockJwt = jwt as jest.Mocked<typeof jwt>;
@@ -26,9 +26,9 @@ const cognitoPayload = ({ id }: { id: string }): any => {
         primary: "some-primary",
         providerName: "myNJ",
         providerType: "some-provider-type",
-        userId: id,
-      },
-    ],
+        userId: id
+      }
+    ]
   };
 };
 
@@ -46,7 +46,7 @@ describe("externalEndpointRouter", () => {
       findByEmail: jest.fn(),
       getNeedNewsletterUsers: jest.fn(),
       getNeedToAddToUserTestingUsers: jest.fn(),
-      getNeedTaxIdEncryptionUsers: jest.fn(),
+      getNeedTaxIdEncryptionUsers: jest.fn()
     };
     stubAddNewsletter = jest.fn();
     stubAddToUserTesting = jest.fn();
@@ -66,8 +66,8 @@ describe("externalEndpointRouter", () => {
         const userData = generateUserData({
           user: generateUser({
             externalStatus: { userTesting: { status: "IN_PROGRESS" } },
-            receiveNewsletter: true,
-          }),
+            receiveNewsletter: true
+          })
         });
         await request(app).post(`/newsletter`).send(userData);
         expect(stubAddNewsletter).toHaveBeenCalled();
@@ -77,8 +77,8 @@ describe("externalEndpointRouter", () => {
         const userData = generateUserData({
           user: generateUser({
             externalStatus: { newsletter: { status: "IN_PROGRESS" } },
-            receiveNewsletter: true,
-          }),
+            receiveNewsletter: true
+          })
         });
         await request(app).post(`/newsletter`).send(userData);
         expect(stubAddNewsletter).not.toHaveBeenCalled();
@@ -86,7 +86,7 @@ describe("externalEndpointRouter", () => {
 
       it("adds to newsletter and does not update the db if the user is unauthenticated", async () => {
         const userData = generateUserData({
-          user: generateUser({ id: "123", externalStatus: {}, userTesting: true }),
+          user: generateUser({ id: "123", externalStatus: {}, userTesting: true })
         });
         await request(app).post(`/newsletter`).send(userData);
         expect(stubAddNewsletter).toHaveBeenCalled();
@@ -95,7 +95,7 @@ describe("externalEndpointRouter", () => {
 
       it("adds to newsletter and updates the db if the user is authenticated", async () => {
         const userData = generateUserData({
-          user: generateUser({ id: "123", externalStatus: {}, receiveNewsletter: true }),
+          user: generateUser({ id: "123", externalStatus: {}, receiveNewsletter: true })
         });
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
         stubUserDataClient.put.mockResolvedValue(userData);
@@ -110,8 +110,8 @@ describe("externalEndpointRouter", () => {
         const userData = generateUserData({
           user: generateUser({
             externalStatus: { newsletter: { status: "IN_PROGRESS" } },
-            userTesting: true,
-          }),
+            userTesting: true
+          })
         });
         await request(app).post(`/userTesting`).send(userData);
         expect(stubAddToUserTesting).toHaveBeenCalled();
@@ -121,8 +121,8 @@ describe("externalEndpointRouter", () => {
         const userData = generateUserData({
           user: generateUser({
             externalStatus: { userTesting: { status: "IN_PROGRESS" } },
-            userTesting: true,
-          }),
+            userTesting: true
+          })
         });
         await request(app).post(`/userTesting`).send(userData);
         expect(stubAddToUserTesting).not.toHaveBeenCalled();
@@ -130,7 +130,7 @@ describe("externalEndpointRouter", () => {
 
       it("adds to newsletter and does not update the db if the user is unauthenticated", async () => {
         const userData = generateUserData({
-          user: generateUser({ id: "123", externalStatus: {}, userTesting: true }),
+          user: generateUser({ id: "123", externalStatus: {}, userTesting: true })
         });
         await request(app).post(`/userTesting`).send(userData);
         expect(stubAddToUserTesting).toHaveBeenCalled();
@@ -139,7 +139,7 @@ describe("externalEndpointRouter", () => {
 
       it("adds to newsletter and updates the db if the user is authenticated", async () => {
         const userData = generateUserData({
-          user: generateUser({ id: "123", externalStatus: {}, userTesting: true }),
+          user: generateUser({ id: "123", externalStatus: {}, userTesting: true })
         });
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
         stubUserDataClient.put.mockResolvedValue(userData);

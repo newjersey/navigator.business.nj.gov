@@ -20,9 +20,9 @@ export const migrate_v7_to_v8 = (v7Data: v7UserData): v8UserData => {
     ...v7Data,
     onboardingData: {
       ...v7Data.onboardingData,
-      legalStructure: newLegalStructure,
+      legalStructure: newLegalStructure
     },
-    version: 8,
+    version: 8
   };
 };
 
@@ -82,7 +82,7 @@ export const generateV8User = (overrides: Partial<v8BusinessUser>): v8BusinessUs
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -95,11 +95,11 @@ export const generateV8OnboardingData = (overrides: Partial<v8OnboardingData>): 
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`,
+      id: `some-id-${randomInt()}`
     },
     liquorLicense: true,
     homeBasedBusiness: true,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -107,7 +107,7 @@ export const generateV8LicenseSearchData = (overrides: Partial<v8LicenseSearchDa
   return {
     nameAndAddress: generateV8NameAndAddress({}),
     completedSearch: false,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -117,6 +117,6 @@ export const generateV8NameAndAddress = (overrides: Partial<v8NameAndAddress>): 
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
     zipCode: `some-zipcode-${randomInt()}`,
-    ...overrides,
+    ...overrides
   };
 };

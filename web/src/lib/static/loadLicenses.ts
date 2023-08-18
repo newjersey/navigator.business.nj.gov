@@ -24,8 +24,8 @@ export const loadAllLicenseUrlSlugs = (): PathParams<LicenseUrlSlugParam>[] => {
     const slug = loadUrlSlugByFilename(fileName, licensesDir);
     return ["expiration", "renewal"].map((type) => ({
       params: {
-        licenseUrlSlug: [slug, type].join("-"),
-      },
+        licenseUrlSlug: [slug, type].join("-")
+      }
     }));
   });
 };

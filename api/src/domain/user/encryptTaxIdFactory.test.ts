@@ -2,7 +2,7 @@ import {
   generateBusiness,
   generateProfileData,
   generateUserDataForBusiness,
-  modifyCurrentBusiness,
+  modifyCurrentBusiness
 } from "@shared/test";
 import { EncryptionDecryptionClient, EncryptTaxId } from "../types";
 import { encryptTaxIdFactory } from "./encryptTaxIdFactory";
@@ -23,8 +23,8 @@ describe("encryptTaxId", () => {
       generateBusiness({
         profileData: generateProfileData({
           taxId: "123456789000",
-          encryptedTaxId: undefined,
-        }),
+          encryptedTaxId: undefined
+        })
       })
     );
     const response = await encryptTaxId(userData);
@@ -35,8 +35,8 @@ describe("encryptTaxId", () => {
       profileData: {
         ...business.profileData,
         taxId: "*******89000",
-        encryptedTaxId: "some-encrypted-value",
-      },
+        encryptedTaxId: "some-encrypted-value"
+      }
     }));
     expect(response).toEqual(expectedUserData);
   });

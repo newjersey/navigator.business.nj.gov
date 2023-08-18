@@ -58,7 +58,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [contextualInfo, setContextualInfo] = useState<ContextualInfo>({
     isVisible: false,
     header: "",
-    markdown: "",
+    markdown: ""
   });
   const [userDataError, setUserDataError] = useState<UserDataError | undefined>(undefined);
   const router = useRouter();
@@ -100,10 +100,13 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
   Hub.listen("auth", listener);
 
-  useMountEffectWhenDefined(() => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    setOnLoadDimensions(updateQueue!.current());
-  }, updateQueue?.current);
+  useMountEffectWhenDefined(
+    () => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      setOnLoadDimensions(updateQueue!.current());
+    },
+    updateQueue?.current
+  );
 
   useMountEffect(() => {
     if (!pageProps.noAuth) {
@@ -111,7 +114,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         .then((currentUser) => {
           dispatch({
             type: "LOGIN",
-            user: currentUser,
+            user: currentUser
           });
         })
         .catch(() => {
@@ -134,7 +137,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       <script
         dangerouslySetInnerHTML={{
           __html: `window.dataLayer = window.dataLayer || []; 
-          function gtm(layer){window.dataLayer.push(layer);};      `,
+          function gtm(layer){window.dataLayer.push(layer);};      `
         }}
       />
       <Script src="/vendor/js/uswds.min.js" />
@@ -167,7 +170,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                             registrationAlertStatus,
                             setRegistrationAlertStatus,
                             setRegistrationAlertIsVisible: setAuthSnackbar,
-                            setRegistrationModalIsVisible: setAuthModal,
+                            setRegistrationModalIsVisible: setAuthModal
                           }}
                         >
                           <ContextualInfoPanel />

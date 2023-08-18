@@ -8,7 +8,7 @@ export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
   for (const filing of filings) {
     let match: Match = {
       filename: filing.filename,
-      snippets: [],
+      snippets: []
     };
 
     const content = filing.contentMd.toLowerCase();
@@ -38,7 +38,7 @@ export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
       { content: method, label: "Filing Method" },
       { content: id, label: "ID" },
       { content: info, label: "Additional Info" },
-      { content: frequency, label: "Frequency" },
+      { content: frequency, label: "Frequency" }
     ];
 
     match = findMatchInBlock(blockTexts, term, match);

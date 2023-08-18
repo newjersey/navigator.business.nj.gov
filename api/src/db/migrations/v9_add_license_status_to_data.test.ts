@@ -4,7 +4,7 @@ import {
   generateV8OnboardingData,
   generateV8User,
   v8LicenseSearchData,
-  v8UserData,
+  v8UserData
 } from "./v8_remove_bcorp";
 import { migrate_v8_to_v9 } from "./v9_add_license_status_to_data";
 
@@ -28,7 +28,7 @@ describe("migrate_v8_to_v9", () => {
         taskProgress: {},
         onboardingData,
         licenseData: undefined,
-        version: 9,
+        version: 9
       });
     });
   });
@@ -36,7 +36,7 @@ describe("migrate_v8_to_v9", () => {
   describe("when license status exists", () => {
     const licenseSearchData = generateV8LicenseSearchData({
       nameAndAddress: generateV8NameAndAddress({}),
-      completedSearch: false,
+      completedSearch: false
     });
     const v8 = makeV8(licenseSearchData);
 

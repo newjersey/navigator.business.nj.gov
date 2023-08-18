@@ -18,7 +18,7 @@ describe("Dashboard [all] [group4]", () => {
   for (const industry of enabledIndustries.slice(0, lastIndex)) {
     it(` ${industry.name} completes onboarding and shows the dashboard`, () => {
       completeNewBusinessOnboarding({
-        industry,
+        industry
       });
 
       // check dashboard

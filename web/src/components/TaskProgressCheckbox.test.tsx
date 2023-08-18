@@ -11,7 +11,7 @@ import {
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData,
+  WithStatefulUserData
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
@@ -22,7 +22,7 @@ import {
   generateUserDataForBusiness,
   getCurrentDate,
   TaskProgress,
-  taxTaskId,
+  taxTaskId
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -79,7 +79,7 @@ describe("<TaskProgressCheckbox />", () => {
     const taskId = "123";
     const taskProgress: Record<string, TaskProgress> = {
       "some-id": "COMPLETED",
-      [taskId]: "IN_PROGRESS",
+      [taskId]: "IN_PROGRESS"
     };
     renderTaskCheckbox(taskId, generateBusiness({ taskProgress }));
     expect(screen.getByText(Config.taskProgress.IN_PROGRESS)).toBeInTheDocument();
@@ -95,7 +95,7 @@ describe("<TaskProgressCheckbox />", () => {
     await waitFor(() => {
       return expect(currentBusiness().taskProgress).toEqual({
         "some-id": "COMPLETED",
-        [taskId]: "IN_PROGRESS",
+        [taskId]: "IN_PROGRESS"
       });
     });
     await screen.findByText(Config.taskProgress.IN_PROGRESS);
@@ -104,7 +104,7 @@ describe("<TaskProgressCheckbox />", () => {
     await waitFor(() => {
       return expect(currentBusiness().taskProgress).toEqual({
         "some-id": "COMPLETED",
-        [taskId]: "COMPLETED",
+        [taskId]: "COMPLETED"
       });
     });
     await screen.findByText(Config.taskProgress.COMPLETED);
@@ -129,7 +129,7 @@ describe("<TaskProgressCheckbox />", () => {
   describe("tax registration warning modal", () => {
     it("shows the warning modal if the user tries to change status from completed", () => {
       const userData = generateBusiness({
-        taskProgress: { [taxTaskId]: "COMPLETED" },
+        taskProgress: { [taxTaskId]: "COMPLETED" }
       });
 
       renderTaskCheckbox(taxTaskId, userData);
@@ -139,7 +139,7 @@ describe("<TaskProgressCheckbox />", () => {
 
     it("updates the task progress if the user continues in the warning modal", async () => {
       const userData = generateBusiness({
-        taskProgress: { [taxTaskId]: "COMPLETED" },
+        taskProgress: { [taxTaskId]: "COMPLETED" }
       });
 
       renderTaskCheckbox(taxTaskId, userData);
@@ -153,8 +153,8 @@ describe("<TaskProgressCheckbox />", () => {
     it("doesn't update the task progress if the user cancels in the warning modal", async () => {
       const userData = generateBusiness({
         taskProgress: {
-          [taxTaskId]: "COMPLETED",
-        },
+          [taxTaskId]: "COMPLETED"
+        }
       });
 
       renderTaskCheckbox(taxTaskId, userData);
@@ -177,7 +177,7 @@ describe("<TaskProgressCheckbox />", () => {
       renderTaskCheckbox(
         formationTaskId,
         generateBusiness({
-          taskProgress: { [formationTaskId]: "COMPLETED" },
+          taskProgress: { [formationTaskId]: "COMPLETED" }
         })
       );
       expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
@@ -193,7 +193,7 @@ describe("<TaskProgressCheckbox />", () => {
       renderTaskCheckbox(
         formationTaskId,
         generateBusiness({
-          taskProgress: { [formationTaskId]: "IN_PROGRESS" },
+          taskProgress: { [formationTaskId]: "IN_PROGRESS" }
         })
       );
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
@@ -206,7 +206,7 @@ describe("<TaskProgressCheckbox />", () => {
       renderTaskCheckbox(
         formationTaskId,
         generateBusiness({
-          taskProgress: { [formationTaskId]: "IN_PROGRESS" },
+          taskProgress: { [formationTaskId]: "IN_PROGRESS" }
         })
       );
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
@@ -230,7 +230,7 @@ describe("<TaskProgressCheckbox />", () => {
       expect(currentBusiness().taskProgress[id]).toEqual("COMPLETED");
       expect(mockPush).toHaveBeenCalledWith({
         pathname: ROUTES.dashboard,
-        query: { fromFormBusinessEntity: "true", fromTaxRegistration: "false" },
+        query: { fromFormBusinessEntity: "true", fromTaxRegistration: "false" }
       });
     });
 
@@ -238,7 +238,7 @@ describe("<TaskProgressCheckbox />", () => {
       renderTaskCheckbox(
         formationTaskId,
         generateBusiness({
-          profileData: generateProfileData({ businessPersona: "STARTING" }),
+          profileData: generateProfileData({ businessPersona: "STARTING" })
         })
       );
       await selectCompleted();
@@ -269,7 +269,7 @@ describe("<TaskProgressCheckbox />", () => {
       renderTaskCheckbox(
         formationTaskId,
         generateBusiness({
-          profileData: generateProfileData({ businessPersona: "STARTING" }),
+          profileData: generateProfileData({ businessPersona: "STARTING" })
         })
       );
       await selectCompleted();

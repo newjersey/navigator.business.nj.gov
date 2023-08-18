@@ -24,7 +24,7 @@ export const FieldLabelModal = (props: Props): ReactElement => {
   const contentFromConfig = getProfileConfig({
     config: Config,
     persona: state.flow,
-    fieldName: props.fieldName,
+    fieldName: props.fieldName
   });
 
   const header = props.overrides?.header ?? contentFromConfig.header;

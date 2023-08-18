@@ -10,7 +10,7 @@ describe("migrate_v2_to_v3", () => {
 
   it("translates legal structure to new value", () => {
     const onboardingData = generateV2OnboardingData({
-      legalStructure: "Sole Proprietorship",
+      legalStructure: "Sole Proprietorship"
     });
 
     const v2: v2UserData = { user, onboardingData, formProgress, taskProgress, version: 2 };
@@ -21,15 +21,15 @@ describe("migrate_v2_to_v3", () => {
       taskProgress: {},
       onboardingData: {
         ...onboardingData,
-        legalStructure: "sole-proprietorship",
+        legalStructure: "sole-proprietorship"
       },
-      version: 3,
+      version: 3
     });
   });
 
   it("translates another legal structure to new value", () => {
     const onboardingData = generateV2OnboardingData({
-      legalStructure: "Limited Liability Company (LLC)",
+      legalStructure: "Limited Liability Company (LLC)"
     });
 
     const v2: v2UserData = { user, onboardingData, formProgress, taskProgress, version: 2 };
@@ -40,15 +40,15 @@ describe("migrate_v2_to_v3", () => {
       taskProgress: {},
       onboardingData: {
         ...onboardingData,
-        legalStructure: "limited-liability-company",
+        legalStructure: "limited-liability-company"
       },
-      version: 3,
+      version: 3
     });
   });
 
   it("translates undefined legal structure to undefined", () => {
     const onboardingData = generateV2OnboardingData({
-      legalStructure: undefined,
+      legalStructure: undefined
     });
 
     const v2: v2UserData = { user, onboardingData, formProgress, taskProgress, version: 2 };
@@ -59,9 +59,9 @@ describe("migrate_v2_to_v3", () => {
       taskProgress: {},
       onboardingData: {
         ...onboardingData,
-        legalStructure: undefined,
+        legalStructure: undefined
       },
-      version: 3,
+      version: 3
     });
   });
 });

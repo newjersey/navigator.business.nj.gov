@@ -55,7 +55,7 @@ export const ReviewPartnership = (): ReactElement => {
             termsData: state.formationFormData.createLimitedPartnerTerms,
             questionText: Config.formation.fields.canCreateLimitedPartner.body,
             yesBody: Config.formation.fields.canCreateLimitedPartner.reviewStepYes,
-            noBody: Config.formation.fields.canCreateLimitedPartner.reviewStepNo,
+            noBody: Config.formation.fields.canCreateLimitedPartner.reviewStepNo
           })}
         </div>
         <div className="margin-bottom-3">
@@ -64,7 +64,7 @@ export const ReviewPartnership = (): ReactElement => {
             termsData: state.formationFormData.getDistributionTerms,
             questionText: Config.formation.fields.canGetDistribution.body,
             yesBody: Config.formation.fields.canGetDistribution.reviewStepYes,
-            noBody: Config.formation.fields.canGetDistribution.reviewStepNo,
+            noBody: Config.formation.fields.canGetDistribution.reviewStepNo
           })}
         </div>
         <div className="margin-bottom-3">
@@ -73,7 +73,7 @@ export const ReviewPartnership = (): ReactElement => {
             termsData: state.formationFormData.makeDistributionTerms,
             questionText: Config.formation.fields.canMakeDistribution.body,
             yesBody: Config.formation.fields.canMakeDistribution.reviewStepYes,
-            noBody: Config.formation.fields.canMakeDistribution.reviewStepNo,
+            noBody: Config.formation.fields.canMakeDistribution.reviewStepNo
           })}
         </div>
       </div>

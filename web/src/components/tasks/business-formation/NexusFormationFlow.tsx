@@ -71,7 +71,7 @@ export const NexusFormationFlow = (): ReactElement => {
                   return {
                     name: value.name,
                     hasError: false,
-                    isComplete: index === 0,
+                    isComplete: index === 0
                   };
                 })}
                 currentStep={state.stepIndex}

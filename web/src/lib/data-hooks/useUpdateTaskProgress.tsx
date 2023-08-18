@@ -29,7 +29,7 @@ export const useUpdateTaskProgress = (): {
       updateQueue.queuePreferences({
         roadmapOpenSections: business.preferences.roadmapOpenSections.filter((section) => {
           return section !== current;
-        }),
+        })
       });
     }
   };
@@ -48,6 +48,6 @@ export const useUpdateTaskProgress = (): {
 
   return {
     queueUpdateTaskProgress,
-    congratulatoryModal,
+    congratulatoryModal
   };
 };

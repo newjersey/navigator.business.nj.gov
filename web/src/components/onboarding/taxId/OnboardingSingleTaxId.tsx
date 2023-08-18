@@ -36,7 +36,7 @@ export const OnboardingSingleTaxId = ({
     }
     setProfileData({
       ...state.profileData,
-      [fieldName]: value,
+      [fieldName]: value
     });
   };
 
@@ -55,7 +55,7 @@ export const OnboardingSingleTaxId = ({
         inputProps={{
           endAdornment: (
             <InputAdornment position="end">{isTabletAndUp && props.getShowHideToggleButton()}</InputAdornment>
-          ),
+          )
         }}
         {...props}
       />

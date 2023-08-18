@@ -74,7 +74,7 @@ export const MainBusinessIntl = (): ReactElement => {
             setFormationFormData((previousFormationData) => {
               return {
                 ...previousFormationData,
-                addressCountry: country?.shortCode,
+                addressCountry: country?.shortCode
               };
             });
             setFieldsInteracted(["addressCountry"]);

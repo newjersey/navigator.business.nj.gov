@@ -52,7 +52,7 @@ export const SignUpSnackbar = (): ReactElement => {
               position: "absolute",
               right: 0,
               top: 0,
-              color: "#757575",
+              color: "#757575"
             }}
           >
             <Icon className="usa-icon--size-4">close</Icon>

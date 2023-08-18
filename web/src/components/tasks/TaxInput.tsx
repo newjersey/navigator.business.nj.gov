@@ -34,7 +34,7 @@ export const TaxInput = (props: Props): ReactElement => {
     FormFuncWrapper,
     onSubmit,
     isValid,
-    state: formContextState,
+    state: formContextState
   } = useFormContextHelper(createProfileFieldErrorMap());
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -112,10 +112,10 @@ export const TaxInput = (props: Props): ReactElement => {
         value={{
           state: {
             profileData: profileData,
-            flow: "STARTING",
+            flow: "STARTING"
           },
           setProfileData,
-          onBack: (): void => {},
+          onBack: (): void => {}
         }}
       >
         <div className={isTabletAndUp ? "flex flex-row" : ""}>

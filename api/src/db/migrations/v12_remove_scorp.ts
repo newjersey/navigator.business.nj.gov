@@ -20,9 +20,9 @@ export const migrate_v11_to_v12 = (v11Data: v11UserData): v12UserData => {
     ...v11Data,
     onboardingData: {
       ...v11Data.onboardingData,
-      legalStructure: newLegalStructure,
+      legalStructure: newLegalStructure
     },
-    version: 12,
+    version: 12
   };
 };
 
@@ -105,7 +105,7 @@ export const generatev12User = (overrides: Partial<v12BusinessUser>): v12Busines
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -118,10 +118,10 @@ export const generatev12OnboardingData = (overrides: Partial<v12OnboardingData>)
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`,
+      id: `some-id-${randomInt()}`
     },
     liquorLicense: true,
     homeBasedBusiness: true,
-    ...overrides,
+    ...overrides
   };
 };

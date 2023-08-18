@@ -5,14 +5,14 @@ import {
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData,
+  WithStatefulUserData
 } from "@/test/mock/withStatefulUserData";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import {
   generateBusiness,
   generateProfileData,
   generateUserData,
-  generateUserDataForBusiness,
+  generateUserDataForBusiness
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -42,8 +42,8 @@ describe("<TaxAccessModal />", () => {
       renderModal(
         generateBusiness({
           profileData: generateProfileData({
-            businessPersona: persona as BusinessPersona,
-          }),
+            businessPersona: persona as BusinessPersona
+          })
         })
       );
       expect(screen.queryByText(Config.taxAccess.stepOneHeader)).not.toBeInTheDocument();
@@ -62,8 +62,8 @@ describe("<TaxAccessModal />", () => {
       undefinedLegalStructureBusiness = generateBusiness({
         profileData: generateProfileData({
           businessPersona: "OWNING",
-          legalStructureId: undefined,
-        }),
+          legalStructureId: undefined
+        })
       });
     });
 
@@ -124,8 +124,8 @@ describe("<TaxAccessModal />", () => {
       renderModal(
         generateBusiness({
           profileData: generateProfileData({
-            businessPersona: "OWNING",
-          }),
+            businessPersona: "OWNING"
+          })
         })
       );
       expect(screen.queryByText(Config.taxAccess.stepOneHeader)).not.toBeInTheDocument();
@@ -138,8 +138,8 @@ describe("<TaxAccessModal />", () => {
       renderModal(
         generateBusiness({
           profileData: generateProfileData({
-            businessPersona: "OWNING",
-          }),
+            businessPersona: "OWNING"
+          })
         })
       );
       fireEvent.click(screen.getByText(Config.taxAccess.stepTwoBackButton));

@@ -2,7 +2,7 @@ import { ContextualInfoButton } from "@/components/ContextualInfoButton";
 import {
   getBusinessStartDateHelperText,
   getBusinessStartDateMaxDate,
-  getBusinessStartDateRule,
+  getBusinessStartDateRule
 } from "@/components/tasks/business-formation/business/BusinessDateValidators";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -13,7 +13,7 @@ import {
   DateObject,
   defaultDateFormat,
   getCurrentDate,
-  parseDateWithFormat,
+  parseDateWithFormat
 } from "@businessnjgovnavigator/shared";
 import { TextField } from "@mui/material";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -45,7 +45,7 @@ export const FormationDate = (props: Props): ReactElement => {
             </span>
           </>
         ),
-        helperText: getBusinessStartDateHelperText(state.formationFormData.legalType),
+        helperText: getBusinessStartDateHelperText(state.formationFormData.legalType)
       },
       foreignDateOfFormation: {
         label: (
@@ -56,8 +56,8 @@ export const FormationDate = (props: Props): ReactElement => {
             </span>
           </>
         ),
-        helperText: Config.formation.fields.foreignDateOfFormation.error,
-      },
+        helperText: Config.formation.fields.foreignDateOfFormation.error
+      }
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [state.formationFormData.legalType]
@@ -68,7 +68,7 @@ export const FormationDate = (props: Props): ReactElement => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        [props.fieldName]: value,
+        [props.fieldName]: value
       };
     });
   };
@@ -119,13 +119,13 @@ export const FormationDate = (props: Props): ReactElement => {
                       doesFieldHaveError(props.fieldName) && contentProps[props.fieldName].helperText
                     }
                     sx={{
-                      svg: { fill: "#4b7600" },
+                      svg: { fill: "#4b7600" }
                     }}
                     inputProps={{
                       ...params.inputProps,
                       placeholder: "",
                       "aria-label": camelCaseToSentence(props.fieldName),
-                      "data-testid": `date-${props.fieldName}`,
+                      "data-testid": `date-${props.fieldName}`
                     }}
                   />
                 </div>

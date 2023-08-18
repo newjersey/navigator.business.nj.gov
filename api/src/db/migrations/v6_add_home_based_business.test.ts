@@ -19,9 +19,9 @@ describe("migrate_v5_to_v6", () => {
       taskProgress: {},
       onboardingData: {
         ...onboardingData,
-        homeBasedBusiness: false,
+        homeBasedBusiness: false
       },
-      version: 6,
+      version: 6
     });
   });
 });

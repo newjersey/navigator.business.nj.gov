@@ -20,9 +20,9 @@ export const migrate_v61_to_v62 = (v61Data: v61UserData): v62UserData => {
     ...v61Data,
     profileData: {
       ...rest,
-      businessPersona: hasExistingBusiness ? "OWNING" : "STARTING",
+      businessPersona: hasExistingBusiness ? "OWNING" : "STARTING"
     },
-    version: 62,
+    version: 62
   };
 };
 
@@ -167,7 +167,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v62FormationData {
@@ -230,7 +230,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY",
+  "LIMITED LIABILITY COMPANY"
 ] as const;
 
 const llpBusinessSuffix = [
@@ -239,7 +239,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P.",
+  "R.L.L.P."
 ] as const;
 
 export const corpBusinessSuffix = [
@@ -252,7 +252,7 @@ export const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC.",
+  "INC."
 ] as const;
 
 export const createEmptyFormationAddress = (): v62FormationAddress => {
@@ -263,7 +263,7 @@ export const createEmptyFormationAddress = (): v62FormationAddress => {
     addressCity: "",
     addressState: "",
     addressZipCode: "",
-    signature: false,
+    signature: false
   };
 };
 

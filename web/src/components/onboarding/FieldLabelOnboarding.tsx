@@ -20,7 +20,7 @@ export const FieldLabelOnboarding = (props: Props): ReactElement => {
     config: Config,
     persona: props.CMS_ONLY_flow ?? state.flow,
     fieldName: props.fieldName,
-    onboarding: true,
+    onboarding: true
   });
 
   const unboldedHeader = contentFromConfig.headerNotBolded;

@@ -14,7 +14,7 @@ describe("migrate_v7_to_v8", () => {
       formProgress,
       taskProgress,
       licenseSearchData: undefined,
-      version: 7,
+      version: 7
     };
 
     const v8 = migrate_v7_to_v8(v7);
@@ -30,7 +30,7 @@ describe("migrate_v7_to_v8", () => {
       formProgress,
       taskProgress,
       licenseSearchData: undefined,
-      version: 7,
+      version: 7
     };
 
     const v8 = migrate_v7_to_v8(v7);

@@ -9,7 +9,7 @@ export const searchTasks = (tasks: Task[], term: string): Match[] => {
   for (const task of tasks) {
     let match: Match = {
       filename: task.filename,
-      snippets: [],
+      snippets: []
     };
 
     const content = task.contentMd.toLowerCase();
@@ -28,7 +28,7 @@ export const searchTasks = (tasks: Task[], term: string): Match[] => {
       { content: name, label: "Task name" },
       { content: agency, label: "Agency" },
       { content: agencyContext, label: "Agency Additional Context" },
-      { content: formName, label: "Form Name" },
+      { content: formName, label: "Form Name" }
     ];
 
     match = findMatchInBlock(blockTexts, term, match);

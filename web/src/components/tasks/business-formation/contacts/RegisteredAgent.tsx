@@ -31,7 +31,7 @@ export const RegisteredAgent = (): ReactElement => {
         addressLine1,
         addressLine2,
         addressMunicipality,
-        addressZipCode,
+        addressZipCode
       } = state.formationFormData;
 
       if (
@@ -43,7 +43,7 @@ export const RegisteredAgent = (): ReactElement => {
       ) {
         setFormationFormData({
           ...state.formationFormData,
-          agentUseBusinessAddress: false,
+          agentUseBusinessAddress: false
         });
       }
     },
@@ -60,7 +60,7 @@ export const RegisteredAgent = (): ReactElement => {
         "agentOfficeAddressLine1",
         "agentOfficeAddressLine2",
         "agentOfficeAddressMunicipality",
-        "agentOfficeAddressZipCode",
+        "agentOfficeAddressZipCode"
       ],
       { setToUninteracted: true }
     );
@@ -71,7 +71,7 @@ export const RegisteredAgent = (): ReactElement => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        agentNumberOrManual: event.target.value as "NUMBER" | "MANUAL_ENTRY",
+        agentNumberOrManual: event.target.value as "NUMBER" | "MANUAL_ENTRY"
       };
     });
   };
@@ -83,14 +83,14 @@ export const RegisteredAgent = (): ReactElement => {
         ...state.formationFormData,
         agentName: userData?.user.name ?? "",
         agentEmail: userData?.user.email ?? "",
-        agentUseAccountInfo: checked,
+        agentUseAccountInfo: checked
       });
 
       setFieldsInteracted(["agentName", "agentEmail"]);
     } else {
       setFormationFormData({
         ...state.formationFormData,
-        agentUseAccountInfo: checked,
+        agentUseAccountInfo: checked
       });
     }
   };
@@ -113,18 +113,18 @@ export const RegisteredAgent = (): ReactElement => {
         agentOfficeAddressLine2: state.formationFormData.addressLine2,
         agentOfficeAddressMunicipality: state.formationFormData.addressMunicipality,
         agentOfficeAddressZipCode: state.formationFormData.addressZipCode,
-        agentUseBusinessAddress: checked,
+        agentUseBusinessAddress: checked
       });
       setFieldsInteracted([
         "agentOfficeAddressLine1",
         "agentOfficeAddressLine2",
         "agentOfficeAddressMunicipality",
-        "agentOfficeAddressZipCode",
+        "agentOfficeAddressZipCode"
       ]);
     } else {
       setFormationFormData({
         ...state.formationFormData,
-        agentUseBusinessAddress: checked,
+        agentUseBusinessAddress: checked
       });
     }
   };
@@ -245,7 +245,7 @@ export const RegisteredAgent = (): ReactElement => {
                 type="DESKTOP-ONLY"
                 hasError={doSomeFieldsHaveError([
                   "agentOfficeAddressMunicipality",
-                  "agentOfficeAddressZipCode",
+                  "agentOfficeAddressZipCode"
                 ])}
               >
                 <div className="grid-row grid-gap-1 margin-top-2">
@@ -269,7 +269,7 @@ export const RegisteredAgent = (): ReactElement => {
                         onSelect={(value: Municipality | undefined): void => {
                           setFormationFormData({
                             ...state.formationFormData,
-                            agentOfficeAddressMunicipality: value,
+                            agentOfficeAddressMunicipality: value
                           });
                         }}
                         onValidation={(): void => setFieldsInteracted(["agentOfficeAddressMunicipality"])}

@@ -3,7 +3,7 @@ import {
   generatev66ProfileData,
   generatev66User,
   v66ProfileData,
-  v66UserData,
+  v66UserData
 } from "./v66_add_nexus_to_profile";
 import { migrate_v66_to_v67 } from "./v67_add_graduation_card";
 
@@ -46,16 +46,16 @@ const makeUserData = (profileData: v66ProfileData): v66UserData => {
       roadmapOpenSteps: [],
       hiddenCertificationIds: [],
       hiddenFundingIds: [],
-      visibleRoadmapSidebarCards: [],
+      visibleRoadmapSidebarCards: []
     },
     taxFilingData: {
-      filings: [],
+      filings: []
     },
     formationData: {
       formationFormData: generatev66FormationFormData({}),
       formationResponse: undefined,
-      getFilingResponse: undefined,
+      getFilingResponse: undefined
     },
-    version: 66,
+    version: 66
   };
 };

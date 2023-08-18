@@ -24,7 +24,7 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
   const {
     FormFuncWrapper,
     onSubmit,
-    state: formContextState,
+    state: formContextState
   } = useFormContextHelper(createProfileFieldErrorMap());
 
   useEffect(() => {
@@ -87,10 +87,10 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
         value={{
           state: {
             profileData: profileData,
-            flow: getFlow(profileData),
+            flow: getFlow(profileData)
           },
           setProfileData,
-          onBack: (): void => {},
+          onBack: (): void => {}
         }}
       >
         {props.isTaskPage ? onTaskPage : onDashboard}

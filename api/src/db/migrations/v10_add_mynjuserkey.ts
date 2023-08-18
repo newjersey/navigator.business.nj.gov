@@ -14,9 +14,9 @@ export const migrate_v9_to_v10 = (v9Data: v9UserData): v10UserData => {
     ...v9Data,
     user: {
       ...v9Data.user,
-      myNJUserKey: undefined,
+      myNJUserKey: undefined
     },
-    version: 10,
+    version: 10
   };
 };
 

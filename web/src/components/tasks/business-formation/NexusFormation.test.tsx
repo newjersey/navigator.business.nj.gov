@@ -14,7 +14,7 @@ import {
   generateFormationProfileData,
   mockApiResponse,
   preparePage,
-  useSetupInitialMocks,
+  useSetupInitialMocks
 } from "@/test/helpers/helpers-formation";
 import { fillText, searchAndGetValue } from "@/test/helpers/helpersSearchBusinessName";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
@@ -24,7 +24,7 @@ import {
   generateBusiness,
   generateFormationFormData,
   generateFormationSubmitResponse,
-  getCurrentDate,
+  getCurrentDate
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
@@ -34,7 +34,7 @@ const Config = getMergedConfig();
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    useMediaQuery: jest.fn()
   };
 }
 
@@ -45,25 +45,25 @@ function setupMockAnalytics(): typeof analytics {
       ...jest.requireActual("@/lib/utils/analytics").default.event,
       business_formation_dba_resolution_tab: {
         click: {
-          arrive_on_business_formation_dba_resolution_step: jest.fn(),
-        },
+          arrive_on_business_formation_dba_resolution_step: jest.fn()
+        }
       },
       business_formation_dba_authorization_tab: {
         click: {
-          arrive_on_business_formation_dba_authorization_step: jest.fn(),
-        },
+          arrive_on_business_formation_dba_authorization_step: jest.fn()
+        }
       },
       business_formation_dba_resolution_step_continue_button: {
         click: {
-          arrive_on_business_formation_dba_resolution_step: jest.fn(),
-        },
+          arrive_on_business_formation_dba_resolution_step: jest.fn()
+        }
       },
       business_formation_dba_authorization_step_continue_button: {
         click: {
-          arrive_on_business_formation_dba_authorization_step: jest.fn(),
-        },
-      },
-    },
+          arrive_on_business_formation_dba_authorization_step: jest.fn()
+        }
+      }
+    }
   };
 }
 
@@ -76,7 +76,7 @@ jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn(),
+  searchBusinessName: jest.fn()
 }));
 
 const mockApi = api as jest.Mocked<typeof api>;
@@ -103,11 +103,11 @@ describe("<NexusFormationFlow />", () => {
       businessPersona: "FOREIGN",
       businessName: "",
       nexusDbaName: "",
-      needsNexusDbaName: false,
+      needsNexusDbaName: false
     });
     const formationData = generateEmptyFormationData();
     displayContent = {
-      formationDbaContent: generateFormationDbaContent({}),
+      formationDbaContent: generateFormationDbaContent({})
     };
     initialBusiness = generateBusiness({ profileData, formationData });
   });
@@ -116,7 +116,7 @@ describe("<NexusFormationFlow />", () => {
     mockApiResponse(
       generateFormationSubmitResponse({
         success: true,
-        redirect: "www.example.com",
+        redirect: "www.example.com"
       })
     );
 
@@ -127,7 +127,7 @@ describe("<NexusFormationFlow />", () => {
       businessName: "Pizza Joint",
       nexusDbaName: "",
       municipality: undefined,
-      needsNexusDbaName: false,
+      needsNexusDbaName: false
     });
     const formationData = generateEmptyFormationData();
     initialBusiness = generateBusiness({ profileData, formationData });
@@ -141,11 +141,11 @@ describe("<NexusFormationFlow />", () => {
           {
             businessName: "Pizza Joint",
             businessStartDate: getCurrentDate().format(defaultDateFormat),
-            willPracticeLaw: false,
+            willPracticeLaw: false
           },
           { legalStructureId: "foreign-c-corporation" }
-        ),
-      },
+        )
+      }
     });
 
     const page = preparePage({ business: foreignBusiness, displayContent });
@@ -165,8 +165,8 @@ describe("<NexusFormationFlow />", () => {
       ...foreignBusiness,
       formationData: {
         ...foreignBusiness.formationData,
-        lastVisitedPageIndex: 4,
-      },
+        lastVisitedPageIndex: 4
+      }
     };
 
     await waitFor(() => {
@@ -182,7 +182,7 @@ describe("<NexusFormationFlow />", () => {
       fileType: "PNG",
       sizeInBytes: file.size,
       base64Contents: base64String,
-      filename: "cool.png",
+      filename: "cool.png"
     });
   });
 
@@ -371,7 +371,7 @@ describe("<NexusFormationFlow />", () => {
             business: initialBusiness,
             displayContent,
             isAuthenticated: IsAuthenticated.FALSE,
-            setRegistrationModalIsVisible,
+            setRegistrationModalIsVisible
           });
         });
 
@@ -403,10 +403,10 @@ describe("<NexusFormationFlow />", () => {
               Formation: {
                 ...displayContent.formationDbaContent.Formation,
                 contentMd: "roflcopter",
-                callToActionText: "buttonText",
-              },
-            },
-          },
+                callToActionText: "buttonText"
+              }
+            }
+          }
         });
         fillText("My Cool Business");
         await searchAndGetValue({ status: "AVAILABLE" });

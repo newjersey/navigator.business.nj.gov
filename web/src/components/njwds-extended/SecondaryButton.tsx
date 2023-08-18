@@ -5,7 +5,7 @@ interface Props extends GenericButtonProps {
 }
 
 const colors = {
-  primary: "usa-button usa-button--outline",
+  primary: "usa-button usa-button--outline"
 };
 
 export const SecondaryButton = (props: Props): ReactElement => {

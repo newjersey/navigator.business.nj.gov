@@ -13,9 +13,9 @@ export const migrate_v5_to_v6 = (v5Data: v5UserData): v6UserData => {
     ...v5Data,
     onboardingData: {
       ...v5Data.onboardingData,
-      homeBasedBusiness: false,
+      homeBasedBusiness: false
     },
-    version: 6,
+    version: 6
   };
 };
 

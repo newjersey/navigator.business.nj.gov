@@ -55,7 +55,7 @@ const DashboardPage = (props: Props): ReactElement => {
     pagePath: ROUTES.dashboard,
     headerText: Config.profileDefaults.default.successTextHeader,
     bodyText: Config.profileDefaults.default.successTextBody,
-    variant: "success",
+    variant: "success"
   });
 
   const CalendarAlert = useQueryControlledAlert({
@@ -64,7 +64,7 @@ const DashboardPage = (props: Props): ReactElement => {
     headerText: Config.dashboardDefaults.calendarSnackbarHeading,
     bodyText: Config.dashboardDefaults.calendarSnackbarBody,
     variant: "success",
-    dataTestId: "snackbar-alert-calendar",
+    dataTestId: "snackbar-alert-calendar"
   });
 
   const CertificationsAlert = useQueryControlledAlert({
@@ -73,7 +73,7 @@ const DashboardPage = (props: Props): ReactElement => {
     headerText: Config.dashboardDefaults.certificationsSnackbarHeading,
     bodyText: Config.dashboardDefaults.certificationsSnackbarBody,
     variant: "success",
-    dataTestId: "certification-alert",
+    dataTestId: "certification-alert"
   });
 
   const TaxRegistrationAlert = useQueryControlledAlert({
@@ -82,7 +82,7 @@ const DashboardPage = (props: Props): ReactElement => {
     headerText: Config.dashboardDefaults.taxRegistrationSnackbarHeading,
     bodyText: Config.dashboardDefaults.taxRegistrationSnackbarBody,
     variant: "success",
-    dataTestId: "tax-registration-alert",
+    dataTestId: "tax-registration-alert"
   });
 
   const FundingAlert = useQueryControlledAlert({
@@ -91,7 +91,7 @@ const DashboardPage = (props: Props): ReactElement => {
     headerText: Config.dashboardDefaults.fundingSnackbarHeading,
     bodyText: Config.dashboardDefaults.fundingSnackbarBody,
     variant: "success",
-    dataTestId: "funding-alert",
+    dataTestId: "funding-alert"
   });
 
   const HiddenTasksAlert = useQueryControlledAlert({
@@ -101,7 +101,7 @@ const DashboardPage = (props: Props): ReactElement => {
     bodyText: Config.dashboardDefaults.hiddenTasksSnackbarBody,
     variant: "success",
     dataTestId: "hiddenTasks-alert",
-    delayInMilliseconds: 6000,
+    delayInMilliseconds: 6000
   });
 
   const DeferredQuestionAnsweredAlert = useQueryControlledAlert({
@@ -110,7 +110,7 @@ const DashboardPage = (props: Props): ReactElement => {
     headerText: Config.dashboardDefaults.deferredOnboardingSnackbarHeader,
     bodyText: Config.dashboardDefaults.deferredOnboardingSnackbarBody,
     variant: "success",
-    dataTestId: "deferredQuestionAnswered-alert",
+    dataTestId: "deferredQuestionAnswered-alert"
   });
 
   const AdditionalBusinessAlert = useQueryControlledAlert({
@@ -119,7 +119,7 @@ const DashboardPage = (props: Props): ReactElement => {
     headerText: Config.dashboardDefaults.additionalBusinessSnackbarHeader,
     bodyText: Config.dashboardDefaults.additionalBusinessSnackbarBody,
     variant: "success",
-    dataTestId: "fromAdditionalBusiness-alert",
+    dataTestId: "fromAdditionalBusiness-alert"
   });
 
   useMountEffectWhenDefined(() => {
@@ -249,8 +249,8 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
       operateReferences: loadOperateReferences(),
       fundings: loadAllFundings(),
       certifications: loadAllCertifications(),
-      municipalities: loadAllMunicipalities(),
-    },
+      municipalities: loadAllMunicipalities()
+    }
   };
 };
 

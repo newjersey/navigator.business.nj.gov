@@ -3,7 +3,7 @@ import {
   generatev61ProfileData,
   generatev61User,
   v61ProfileData,
-  v61UserData,
+  v61UserData
 } from "./v61_add_corp_formation";
 import { migrate_v61_to_v62 } from "./v62_rename_has_existing_business";
 
@@ -40,18 +40,18 @@ describe("migrate_v61_to_v62", () => {
         roadmapOpenSteps: [],
         hiddenCertificationIds: [],
         hiddenFundingIds: [],
-        visibleRoadmapSidebarCards: [],
+        visibleRoadmapSidebarCards: []
       },
       taskItemChecklist: {},
       taxFilingData: {
-        filings: [],
+        filings: []
       },
       formationData: {
         formationFormData: generatev61FormationFormData({}),
         formationResponse: undefined,
-        getFilingResponse: undefined,
+        getFilingResponse: undefined
       },
-      version: 53,
+      version: 53
     };
   };
 });

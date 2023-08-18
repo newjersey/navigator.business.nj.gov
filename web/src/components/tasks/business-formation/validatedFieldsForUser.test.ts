@@ -2,7 +2,7 @@ import { validatedFieldsForUser } from "@/components/tasks/business-formation/va
 import {
   FormationFields,
   generateFormationFormData,
-  randomFormationLegalType,
+  randomFormationLegalType
 } from "@businessnjgovnavigator/shared";
 
 describe("validatedFieldsForUser", () => {
@@ -16,13 +16,13 @@ describe("validatedFieldsForUser", () => {
     "paymentType",
     "contactFirstName",
     "contactLastName",
-    "contactPhoneNumber",
+    "contactPhoneNumber"
   ];
 
   const foreignValidatedFields: FormationFields[] = [
     "addressCity",
     "foreignDateOfFormation",
-    "foreignStateOfFormation",
+    "foreignStateOfFormation"
   ];
 
   describe("addressFields", () => {
@@ -63,7 +63,7 @@ describe("validatedFieldsForUser", () => {
         "agentOfficeAddressLine1",
         "agentOfficeAddressLine2",
         "agentOfficeAddressMunicipality",
-        "agentOfficeAddressZipCode",
+        "agentOfficeAddressZipCode"
       ];
 
       expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
@@ -113,7 +113,7 @@ describe("validatedFieldsForUser", () => {
         ...validatedFieldsForAllLegalStructures,
         "businessTotalStock",
         "members",
-        "incorporators",
+        "incorporators"
       ];
       expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
@@ -128,7 +128,7 @@ describe("validatedFieldsForUser", () => {
         ...validatedFieldsForAllLegalStructures,
         "businessTotalStock",
         "members",
-        "incorporators",
+        "incorporators"
       ];
       expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
@@ -142,7 +142,7 @@ describe("validatedFieldsForUser", () => {
         {
           canCreateLimitedPartner: false,
           canGetDistribution: false,
-          canMakeDistribution: false,
+          canMakeDistribution: false
         },
         { legalStructureId }
       );
@@ -155,7 +155,7 @@ describe("validatedFieldsForUser", () => {
         "canCreateLimitedPartner",
         "canGetDistribution",
         "canMakeDistribution",
-        "incorporators",
+        "incorporators"
       ];
       expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
@@ -166,7 +166,7 @@ describe("validatedFieldsForUser", () => {
           legalType: "limited-partnership",
           canCreateLimitedPartner: true,
           canGetDistribution: false,
-          canMakeDistribution: false,
+          canMakeDistribution: false
         },
         { legalStructureId }
       );
@@ -181,7 +181,7 @@ describe("validatedFieldsForUser", () => {
         {
           canCreateLimitedPartner: true,
           canGetDistribution: true,
-          canMakeDistribution: false,
+          canMakeDistribution: false
         },
         { legalStructureId }
       );
@@ -196,7 +196,7 @@ describe("validatedFieldsForUser", () => {
         {
           canCreateLimitedPartner: true,
           canGetDistribution: true,
-          canMakeDistribution: true,
+          canMakeDistribution: true
         },
         { legalStructureId }
       );
@@ -221,7 +221,7 @@ describe("validatedFieldsForUser", () => {
         "isVeteranNonprofit",
         "hasNonprofitBoardMembers",
         "members",
-        "incorporators",
+        "incorporators"
       ];
 
       const validatedFieldsArray = validatedFieldsForUser(formationFormData);
@@ -243,7 +243,7 @@ describe("validatedFieldsForUser", () => {
         "isVeteranNonprofit",
         "hasNonprofitBoardMembers",
         "members",
-        "incorporators",
+        "incorporators"
       ];
 
       const validatedFieldsArray = validatedFieldsForUser(formationFormData);
@@ -268,7 +268,7 @@ describe("validatedFieldsForUser", () => {
         "nonprofitBoardMemberQualificationsSpecified",
         "nonprofitBoardMemberRightsSpecified",
         "nonprofitTrusteesMethodSpecified",
-        "nonprofitAssetDistributionSpecified",
+        "nonprofitAssetDistributionSpecified"
       ];
 
       const validatedFieldsArray = validatedFieldsForUser(formationFormData);
@@ -282,7 +282,7 @@ describe("validatedFieldsForUser", () => {
           nonprofitBoardMemberQualificationsSpecified: "IN_FORM",
           nonprofitBoardMemberRightsSpecified: "IN_FORM",
           nonprofitTrusteesMethodSpecified: "IN_FORM",
-          nonprofitAssetDistributionSpecified: "IN_FORM",
+          nonprofitAssetDistributionSpecified: "IN_FORM"
         },
         { legalStructureId }
       );
@@ -300,7 +300,7 @@ describe("validatedFieldsForUser", () => {
           nonprofitBoardMemberQualificationsSpecified: "IN_BYLAWS",
           nonprofitBoardMemberRightsSpecified: "IN_BYLAWS",
           nonprofitTrusteesMethodSpecified: "IN_BYLAWS",
-          nonprofitAssetDistributionSpecified: "IN_BYLAWS",
+          nonprofitAssetDistributionSpecified: "IN_BYLAWS"
         },
         { legalStructureId }
       );

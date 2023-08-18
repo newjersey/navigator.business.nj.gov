@@ -49,7 +49,7 @@ const eventMap: Record<EventType, string> = {
   task_tab_continue_button_clicks: "task_tab_continue_button_clicks",
   task_search_interactions: "task_search_interactions",
   navigation_clicks: "navigation_clicks",
-  account_clicks: "account_clicks",
+  account_clicks: "account_clicks"
 };
 
 type ParameterType =
@@ -88,7 +88,7 @@ const parameterMap: Record<ParameterType, string> = {
   server_response: "server_response",
   legacy_event_action: "legacy_event_action",
   legacy_event_category: "legacy_event_category",
-  legacy_event_label: "legacy_event_label",
+  legacy_event_label: "legacy_event_label"
 };
 
 type Clicked =
@@ -333,7 +333,7 @@ class GTMTracker {
           event: eventName,
           hostname: location.hostname,
           on_site_section,
-          on_task_id,
+          on_task_id
         } as Partial<Record<string, string>>
       );
     };
@@ -383,7 +383,7 @@ export class DimensionQueueFactory {
   queue(userData: Partial<GTMUserData>) {
     this.internalQueue = {
       ...this.internalQueue,
-      ...userData,
+      ...userData
     };
     return this;
   }
@@ -453,7 +453,7 @@ export default {
       page_name: page_name,
       page_path: path,
       hostname: window.location.hostname,
-      section_name: section_name,
+      section_name: section_name
     });
   },
   dimensions: dimensionRunner,
@@ -467,10 +467,10 @@ export default {
             legacy_event_category: "landing_page_hero_log_in",
             legacy_event_label: "go_to_myNJ_login",
             clicked: "go_to_myNJ_login",
-            item: "landing_page_hero_log_in",
+            item: "landing_page_hero_log_in"
           });
-        },
-      },
+        }
+      }
     },
     landing_page_hero_get_started: {
       click: {
@@ -481,10 +481,10 @@ export default {
             legacy_event_category: "landing_page_hero_get_started",
             legacy_event_label: "go_to_onboarding",
             click_text: "hero_get_started",
-            clicked_to: "/onboarding",
+            clicked_to: "/onboarding"
           });
-        },
-      },
+        }
+      }
     },
     landing_page_navbar_log_in: {
       click: {
@@ -495,10 +495,10 @@ export default {
             legacy_event_category: "landing_page_navbar_log_in",
             legacy_event_label: "go_to_myNJ_login",
             clicked: "go_to_myNJ_login",
-            item: "landing_page_navbar_log_in",
+            item: "landing_page_navbar_log_in"
           });
-        },
-      },
+        }
+      }
     },
     landing_page_navbar_register: {
       click: {
@@ -509,10 +509,10 @@ export default {
             legacy_event_category: "landing_page_navbar_register",
             legacy_event_label: "go_to_onboarding",
             click_text: "navbar_register",
-            clicked_to: "/onboarding",
+            clicked_to: "/onboarding"
           });
-        },
-      },
+        }
+      }
     },
     // update all these events with the legacy_event* fields
 
@@ -525,10 +525,10 @@ export default {
             legacy_event_category: "landing_page_second_get_started",
             legacy_event_label: "go_to_onboarding",
             click_text: "secondary_get_started",
-            clicked_to: "/onboarding",
+            clicked_to: "/onboarding"
           });
-        },
-      },
+        }
+      }
     },
     landing_page_find_funding: {
       click: {
@@ -539,10 +539,10 @@ export default {
             legacy_event_category: "landing_page_find_funding",
             legacy_event_label: "go_to_onboarding",
             click_text: "find_funding",
-            clicked_to: "/onboarding",
+            clicked_to: "/onboarding"
           });
-        },
-      },
+        }
+      }
     },
     landing_page: {
       arrive: {
@@ -553,10 +553,10 @@ export default {
             legacy_event_category: "landing_page",
             legacy_event_label: "get_unlinked_myNJ_account_modal",
             clicked: "get_unlinked_myNJ_account_modal",
-            item: "landing_page",
+            item: "landing_page"
           });
-        },
-      },
+        }
+      }
     },
     guest_snackbar: {
       click: {
@@ -567,10 +567,10 @@ export default {
             legacy_event_category: "guest_snackbar",
             legacy_event_label: "go_to_NavigatorAccount_setup",
             clicked: "go_to_NavigatorAccount_setup",
-            item: "guest_snackbar",
+            item: "guest_snackbar"
           });
-        },
-      },
+        }
+      }
     },
     guest_modal: {
       click: {
@@ -581,7 +581,7 @@ export default {
             legacy_event_category: "guest_modal",
             legacy_event_label: "go_to_NavigatorAccount_setup",
             clicked: "go_to_NavigatorAccount_setup",
-            item: "guest_modal",
+            item: "guest_modal"
           });
         },
         go_to_myNJ_login: () => {
@@ -591,10 +591,10 @@ export default {
             legacy_event_category: "guest_modal",
             legacy_event_label: "go_to_myNJ_login",
             clicked: "go_to_myNJ_login",
-            item: "guest_modal",
+            item: "guest_modal"
           });
-        },
-      },
+        }
+      }
     },
     guest_menu: {
       click: {
@@ -605,7 +605,7 @@ export default {
             legacy_event_category: "guest_menu",
             legacy_event_label: "go_to_NavigatorAccount_setup",
             clicked: "go_to_NavigatorAccount_setup",
-            item: "guest_menu",
+            item: "guest_menu"
           });
         },
         go_to_myNJ_login: () => {
@@ -616,10 +616,10 @@ export default {
             legacy_event_category: "guest_menu",
             legacy_event_label: "go_to_myNJ_login",
             clicked: "go_to_myNJ_login",
-            item: "guest_menu",
+            item: "guest_menu"
           });
-        },
-      },
+        }
+      }
     },
     roadmap_dashboard: {
       arrive: {
@@ -629,7 +629,7 @@ export default {
             legacy_event_action: "arrive",
             legacy_event_category: "roadmap_dashboard",
             legacy_event_label: "arrive_from_myNJ_registration",
-            action: "return_from_myNJ_registration",
+            action: "return_from_myNJ_registration"
           });
         },
         progress_to_needs_to_register_phase: () => {
@@ -638,7 +638,7 @@ export default {
             legacy_event_action: "arrive",
             legacy_event_category: "roadmap_dashboard",
             legacy_event_label: "progress_to_needs_to_register_phase",
-            phase: "progress_to_needs_to_register_phase",
+            phase: "progress_to_needs_to_register_phase"
           });
         },
         progress_to_formed_and_registered_phase: () => {
@@ -647,7 +647,7 @@ export default {
             legacy_event_action: "arrive",
             legacy_event_category: "roadmap_dashboard",
             legacy_event_label: "progress_to_formed_and_registered_phase",
-            phase: "progress_to_formed_and_registered_phase",
+            phase: "progress_to_formed_and_registered_phase"
           });
         },
         progress_to_up_and_running_phase: () => {
@@ -656,10 +656,10 @@ export default {
             legacy_event_action: "arrive",
             legacy_event_category: "roadmap_dashboard",
             legacy_event_label: "progress_to_up_and_running_phase",
-            phase: "progress_to_up_and_running_phase",
+            phase: "progress_to_up_and_running_phase"
           });
-        },
-      },
+        }
+      }
     },
     roadmap_task_title: {
       click: {
@@ -670,10 +670,10 @@ export default {
             legacy_event_category: "roadmap_task_title",
             legacy_event_label: "go_to_task",
             clicked: "go_to_task",
-            clicked_to: task_id,
+            clicked_to: task_id
           });
-        },
-      },
+        }
+      }
     },
     roadmap_logout_button: {
       click: {
@@ -684,10 +684,10 @@ export default {
             legacy_event_category: "roadmap_logout_button",
             legacy_event_label: "log_out",
             clicked: "log_out",
-            item: "roadmap_logout_button",
+            item: "roadmap_logout_button"
           });
-        },
-      },
+        }
+      }
     },
     roadmap_profile_edit_button: {
       click: {
@@ -697,10 +697,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "roadmap_profile_edit_button",
             legacy_event_label: "go_to_profile_screen",
-            clicked: "go_to_profile_screen",
+            clicked: "go_to_profile_screen"
           });
-        },
-      },
+        }
+      }
     },
     roadmap_footer_live_chat_link: {
       click: {
@@ -711,10 +711,10 @@ export default {
             legacy_event_category: "roadmap_footer_live_chat_link",
             legacy_event_label: "open_live_chat",
             click_text: "roadmap_footer_live_chat_link",
-            clicked_to: "live_chat",
+            clicked_to: "live_chat"
           });
-        },
-      },
+        }
+      }
     },
     roadmap_section: {
       click: {
@@ -725,10 +725,10 @@ export default {
             legacy_event_category: "roadmap_section",
             legacy_event_label: "expand_contract",
             clicked: "expand_contract",
-            item: "roadmap_section",
+            item: "roadmap_section"
           });
-        },
-      },
+        }
+      }
     },
     profile_save: {
       click: {
@@ -738,10 +738,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "profile_save",
             legacy_event_label: "save_profile_changes",
-            click_text: "profile_save",
+            click_text: "profile_save"
           });
-        },
-      },
+        }
+      }
     },
     profile_back_to_roadmap: {
       click: {
@@ -752,10 +752,10 @@ export default {
             legacy_event_category: "profile_back_to_roadmap",
             legacy_event_label: "view_roadmap",
             clicked: "view_roadmap",
-            item: "profile_back_to_roadmap",
+            item: "profile_back_to_roadmap"
           });
-        },
-      },
+        }
+      }
     },
     task_back_to_roadmap: {
       click: {
@@ -766,10 +766,10 @@ export default {
             legacy_event_category: "task_back_to_roadmap",
             legacy_event_label: "view_roadmap",
             clicked: "view_roadmap",
-            item: "task_back_to_roadmap",
+            item: "task_back_to_roadmap"
           });
-        },
-      },
+        }
+      }
     },
     task_mini_roadmap_step: {
       click: {
@@ -780,10 +780,10 @@ export default {
             legacy_event_category: "task_mini_roadmap_step",
             legacy_event_label: "expand_contract",
             clicked: "expand_contract",
-            item: "task_mini_roadmap_step",
+            item: "task_mini_roadmap_step"
           });
-        },
-      },
+        }
+      }
     },
     task_mini_roadmap_task: {
       click: {
@@ -794,10 +794,10 @@ export default {
             legacy_event_category: "task_mini_roadmap_task",
             legacy_event_label: "go_to_task",
             clicked_to: task_id,
-            item: "task_mini_roadmap_task",
+            item: "task_mini_roadmap_task"
           });
-        },
-      },
+        }
+      }
     },
     task_primary_call_to_action: {
       click: {
@@ -809,10 +809,10 @@ export default {
             legacy_event_label: "open_external_website",
             click_text: click_text as ClickText | undefined,
             clicked_to,
-            on_tab_name,
+            on_tab_name
           });
-        },
-      },
+        }
+      }
     },
     task_tab_start_application: {
       click: {
@@ -822,10 +822,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "task_tab_start_application",
             legacy_event_label: "view_application_tab",
-            on_tab_name: "start_application",
+            on_tab_name: "start_application"
           });
-        },
-      },
+        }
+      }
     },
     task_tab_check_status: {
       click: {
@@ -835,10 +835,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "task_tab_check_status",
             legacy_event_label: "view_status_tab",
-            on_tab_name: "check_status",
+            on_tab_name: "check_status"
           });
-        },
-      },
+        }
+      }
     },
     task_button_i_already_submitted: {
       click: {
@@ -850,10 +850,10 @@ export default {
             legacy_event_label: "view_status_tab",
             click_text: "i_already_submitted",
             clicked_to,
-            on_tab_name,
+            on_tab_name
           });
-        },
-      },
+        }
+      }
     },
     task_address_form: {
       submit: {
@@ -863,9 +863,9 @@ export default {
             legacy_event_action: "submit",
             legacy_event_category: "task_address_form",
             legacy_event_label: "submitted_address_form",
-            form_name: "task_address_form",
+            form_name: "task_address_form"
           });
-        },
+        }
       },
       response: {
         fail_application_not_found: () => {
@@ -875,7 +875,7 @@ export default {
             legacy_event_category: "task_address_form",
             legacy_event_label: "fail_application_not_found",
             form_name: "task_address_form",
-            server_response: "not_found",
+            server_response: "not_found"
           });
         },
         success_application_found: () => {
@@ -885,10 +885,10 @@ export default {
             legacy_event_category: "task_address_form",
             legacy_event_label: "success_application_found",
             form_name: "task_address_form",
-            server_response: "found",
+            server_response: "found"
           });
-        },
-      },
+        }
+      }
     },
     task_status_checklist_edit_button: {
       click: {
@@ -898,10 +898,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "task_status_checklist_edit_button",
             legacy_event_label: "edit_address_form",
-            form_name: "task_address_form",
+            form_name: "task_address_form"
           });
-        },
-      },
+        }
+      }
     },
     task_status_checkbox: {
       click: {
@@ -911,7 +911,7 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "task_status_checkbox",
             legacy_event_label: "selected_not_started_status",
-            status_selected: "selected_not_started",
+            status_selected: "selected_not_started"
           });
         },
         selected_in_progress_status: () => {
@@ -920,7 +920,7 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "task_status_checkbox",
             legacy_event_label: "selected_in_progress_status",
-            status_selected: "selected_in_progress",
+            status_selected: "selected_in_progress"
           });
         },
         selected_completed_status: () => {
@@ -929,9 +929,9 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "task_status_checkbox",
             legacy_event_label: "selected_completed_status",
-            status_selected: "selected_completed",
+            status_selected: "selected_completed"
           });
-        },
+        }
       },
       click_completed: {
         show_formation_date_modal: () => {
@@ -941,7 +941,7 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "task_status_checkbox",
             legacy_event_label: "show_formation_date_modal",
-            item: "task_status_checkbox",
+            item: "task_status_checkbox"
           });
         },
         show_tax_registration_date_modal: () => {
@@ -950,10 +950,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "task_status_checkbox",
             legacy_event_label: "show_tax_registration_date_modal",
-            item: "task_status_checkbox",
+            item: "task_status_checkbox"
           });
-        },
-      },
+        }
+      }
     },
     formation_date_modal: {
       submit: {
@@ -964,10 +964,10 @@ export default {
             legacy_event_category: "formation_date_modal",
             legacy_event_label: "formation_status_set_to_complete",
             action: "show_formation_date_modal",
-            item: "task_status_checkbox",
+            item: "task_status_checkbox"
           });
-        },
-      },
+        }
+      }
     },
     contextual_link: {
       click: {
@@ -979,10 +979,10 @@ export default {
             legacy_event_label: "view_sidebar",
             clicked_to,
             click_text: click_text as ClickText,
-            on_tab_name,
+            on_tab_name
           });
-        },
-      },
+        }
+      }
     },
     tooltip: {
       mouseover: {
@@ -991,10 +991,10 @@ export default {
             legacy_event_action: "mouseover",
             legacy_event_category: "tooltip",
             legacy_event_label: "view_tooltip",
-            event: "tool_tip_mouseover",
+            event: "tool_tip_mouseover"
           });
-        },
-      },
+        }
+      }
     },
     external_link: {
       click: {
@@ -1005,10 +1005,10 @@ export default {
             legacy_event_category: "external_link",
             legacy_event_label: "open_external_website",
             click_text: click_text as ClickText | undefined,
-            clicked_to,
+            clicked_to
           });
-        },
-      },
+        }
+      }
     },
     contextual_sidebar: {
       click_outside: {
@@ -1020,10 +1020,10 @@ export default {
             legacy_event_label: "close_contextual_sidebar",
             item: "contextual_sidebar",
             click_text: null,
-            clicked_to: null,
+            clicked_to: null
           });
-        },
-      },
+        }
+      }
     },
     contextual_sidebar_close_button: {
       click: {
@@ -1035,10 +1035,10 @@ export default {
             legacy_event_category: "contextual_sidebar_close_button",
             legacy_event_label: "close_contextual_sidebar",
             click_text: "close_contextual_sidebar",
-            clicked_to: null,
+            clicked_to: null
           });
-        },
-      },
+        }
+      }
     },
     mobile_hamburger_icon: {
       click: {
@@ -1049,10 +1049,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "mobile_hamburger_icon",
             legacy_event_label: "open_mobile_menu",
-            clicked: "open_mobile_menu",
+            clicked: "open_mobile_menu"
           });
-        },
-      },
+        }
+      }
     },
     mobile_menu_close_button: {
       click: {
@@ -1063,10 +1063,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "mobile_menu_close_button",
             legacy_event_label: "close_mobile_menu",
-            clicked: "close_mobile_menu",
+            clicked: "close_mobile_menu"
           });
-        },
-      },
+        }
+      }
     },
     mobile_menu: {
       click_outside: {
@@ -1077,10 +1077,10 @@ export default {
             legacy_event_action: "click_outside",
             legacy_event_category: "mobile_menu",
             legacy_event_label: "close_mobile_menu",
-            clicked: "close_mobile_menu",
+            clicked: "close_mobile_menu"
           });
-        },
-      },
+        }
+      }
     },
     task_business_name_check_availability: {
       submit: {
@@ -1091,10 +1091,10 @@ export default {
             legacy_event_action: "submit",
             legacy_event_category: "task_business_name_check_availability",
             legacy_event_label: "view_business_name_availability",
-            form_name: "name_search",
+            form_name: "name_search"
           });
-        },
-      },
+        }
+      }
     },
     account_menu_my_profile: {
       click: {
@@ -1105,10 +1105,10 @@ export default {
             legacy_event_category: "account_menu_my_profile",
             legacy_event_label: "go_to_profile_screen",
             item: "account_menu_my_profile",
-            clicked: "go_to_profile_screen",
+            clicked: "go_to_profile_screen"
           });
-        },
-      },
+        }
+      }
     },
     account_menu_myNJ_account: {
       click: {
@@ -1119,10 +1119,10 @@ export default {
             legacy_event_category: "account_menu_myNJ_account",
             legacy_event_label: "go_to_myNJ_home",
             item: "account_menu_myNJ_account",
-            clicked: "go_to_myNJ_home",
+            clicked: "go_to_myNJ_home"
           });
-        },
-      },
+        }
+      }
     },
     account_name: {
       click: {
@@ -1133,10 +1133,10 @@ export default {
             legacy_event_category: "account_name",
             legacy_event_label: "expand_account_menu",
             item: "account_name",
-            clicked: "expand_account_menu",
+            clicked: "expand_account_menu"
           });
-        },
-      },
+        }
+      }
     },
     onboarding_last_step: {
       submit: {
@@ -1146,10 +1146,10 @@ export default {
             legacy_event_action: "submit",
             legacy_event_category: "onboarding_last_step",
             legacy_event_label: "finish_onboarding",
-            form_name: "finish_onboarding",
+            form_name: "finish_onboarding"
           });
-        },
-      },
+        }
+      }
     },
     onboarding_last_step_save_additional_business_button: {
       click: {
@@ -1159,10 +1159,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "onboarding_last_step_save_additional_business_button",
             legacy_event_label: "finish_additional_business_onboarding",
-            form_name: "finish_additional_business_onboarding",
+            form_name: "finish_additional_business_onboarding"
           });
-        },
-      },
+        }
+      }
     },
     business_formation: {
       submit: {
@@ -1173,7 +1173,7 @@ export default {
             legacy_event_category: "business_formation",
             legacy_event_label: "go_to_NIC_formation_processing",
             form_name: "business_formation",
-            on_tab_name: "review_step",
+            on_tab_name: "review_step"
           });
         },
         error_remain_at_formation: () => {
@@ -1183,10 +1183,10 @@ export default {
             legacy_event_category: "business_formation",
             legacy_event_label: "error_remain_at_formation",
             form_name: "business_formation",
-            on_tab_name: "review_step",
+            on_tab_name: "review_step"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_success_screen: {
       arrive: {
@@ -1196,10 +1196,10 @@ export default {
             legacy_event_action: "arrive",
             legacy_event_category: "business_formation_success_screen",
             legacy_event_label: "arrive_from_NIC_formation_processing",
-            form_name: "business_formation",
+            form_name: "business_formation"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_search_existing_name_again: {
       click: {
@@ -1209,10 +1209,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "business_formation_search_existing_name_again",
             legacy_event_label: "refresh_name_search_field",
-            on_tab_name: "name_step",
+            on_tab_name: "name_step"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_dba_name_search_field: {
       appears: {
@@ -1223,10 +1223,10 @@ export default {
             legacy_event_category: "business_formation_dba_name_search_field",
             legacy_event_label: "dba_name_search_field_appears",
 
-            on_tab_name: "name_step",
+            on_tab_name: "name_step"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_dba_resolution_tab: {
       click: {
@@ -1236,10 +1236,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "business_formation_dba_resolution_tab",
             legacy_event_label: "arrive_on_business_formation_dba_resolution_step",
-            on_tab_name: "resolution_step",
+            on_tab_name: "resolution_step"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_dba_authorization_tab: {
       click: {
@@ -1249,10 +1249,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "business_formation_dba_authorization_tab",
             legacy_event_label: "arrive_on_business_formation_dba_authorization_step",
-            on_tab_name: "authorization_step",
+            on_tab_name: "authorization_step"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_dba_resolution_step_continue_button: {
       click: {
@@ -1262,10 +1262,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "business_formation_dba_resolution_step_continue_button",
             legacy_event_label: "arrive_on_business_formation_dba_resolution_step",
-            on_tab_name: "resolution_step",
+            on_tab_name: "resolution_step"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_dba_authorization_step_continue_button: {
       click: {
@@ -1275,10 +1275,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "business_formation_dba_authorization_step_continue_button",
             legacy_event_label: "arrive_on_business_formation_dba_authorization_step",
-            on_tab_name: "authorization_step",
+            on_tab_name: "authorization_step"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_business_name_edit: {
       click: {
@@ -1291,10 +1291,10 @@ export default {
             on_tab_name: "business_step",
             form_name: "business_formation",
             click_text: "edit",
-            clicked_to: "name_step",
+            clicked_to: "name_step"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_legal_structure_edit: {
       click: {
@@ -1307,10 +1307,10 @@ export default {
             on_tab_name: "business_step",
             form_name: "business_formation",
             click_text: "edit",
-            clicked_to: "formation_legal_structure_modal",
+            clicked_to: "formation_legal_structure_modal"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_legal_structure_modal: {
       submit: {
@@ -1322,10 +1322,10 @@ export default {
             legacy_event_label: "go_to_profile_screen",
             on_tab_name: "business_step",
             item: "formation_legal_structure_modal",
-            clicked: "go_to_profile_screen",
+            clicked: "go_to_profile_screen"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_name_step: {
       arrive: {
@@ -1335,10 +1335,10 @@ export default {
             legacy_event_action: "arrive",
             legacy_event_category: "business_formation_name_step",
             legacy_event_label: "arrive_on_business_formation_name_step",
-            on_tab_name: "name_step",
+            on_tab_name: "name_step"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_name_step_continue_button: {
       click: {
@@ -1349,10 +1349,10 @@ export default {
             legacy_event_category: "business_formation_name_step_continue_button",
             legacy_event_label: "arrive_on_business_formation_business_step",
             on_tab_name: "name_step",
-            clicked_to: "business_step",
+            clicked_to: "business_step"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_business_step_continue_button: {
       click: {
@@ -1363,10 +1363,10 @@ export default {
             legacy_event_category: "business_formation_business_step_continue_button",
             legacy_event_label: "arrive_on_business_formation_contacts_step",
             on_tab_name: "business_step",
-            clicked_to: "contacts_step",
+            clicked_to: "contacts_step"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_contacts_step_continue_button: {
       click: {
@@ -1377,10 +1377,10 @@ export default {
             legacy_event_category: "business_formation_contacts_step_continue_button",
             legacy_event_label: "arrive_on_business_formation_billing_step",
             on_tab_name: "contacts_step",
-            clicked_to: "billing_step",
+            clicked_to: "billing_step"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_billing_step_continue_button: {
       click: {
@@ -1391,10 +1391,10 @@ export default {
             legacy_event_category: "business_formation_billing_step_continue_button",
             legacy_event_label: "arrive_on_business_formation_review_step",
             on_tab_name: "billing_step",
-            clicked_to: "review_step",
+            clicked_to: "review_step"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_registered_agent_identification: {
       submit: {
@@ -1406,7 +1406,7 @@ export default {
             legacy_event_label: "entered_agent_ID",
             on_tab_name: "contacts_step",
             form_name: "business_formation",
-            questions: { registered_agent: "agent_id" },
+            questions: { registered_agent: "agent_id" }
           });
         },
         identified_agent_manually: () => {
@@ -1417,10 +1417,10 @@ export default {
             legacy_event_category: "business_formation_registered_agent_identification",
             legacy_event_label: "identified_agent_manually",
             form_name: "business_formation",
-            questions: { registered_agent: "manual" },
+            questions: { registered_agent: "manual" }
           });
-        },
-      },
+        }
+      }
     },
     business_formation_registered_agent_manual_name: {
       submit: {
@@ -1432,10 +1432,10 @@ export default {
             legacy_event_label: "name_is_same_as_account_holder",
             on_tab_name: "contacts_step",
             form_name: "business_formation",
-            questions: { registered_agent_name: "same_as_account_holder" },
+            questions: { registered_agent_name: "same_as_account_holder" }
           });
-        },
-      },
+        }
+      }
     },
     business_formation_registered_agent_manual_address: {
       submit: {
@@ -1447,10 +1447,10 @@ export default {
             legacy_event_label: "address_is_same_as_account_holder",
             on_tab_name: "contacts_step",
             form_name: "business_formation",
-            questions: { registered_agent_address: "same_as_account_holder" },
+            questions: { registered_agent_address: "same_as_account_holder" }
           });
-        },
-      },
+        }
+      }
     },
     business_formation_members: {
       submit: {
@@ -1462,10 +1462,10 @@ export default {
             legacy_event_category: "business_formation_members",
             legacy_event_label: "members_submitted_with_formation",
             form_name: "business_formation",
-            questions: { members: number.toString() },
+            questions: { members: number.toString() }
           });
-        },
-      },
+        }
+      }
     },
     business_formation_signers: {
       submit: {
@@ -1477,10 +1477,10 @@ export default {
             legacy_event_label: "signers_submitted_with_formation",
             on_tab_name: "contacts_step",
             form_name: "business_formation",
-            questions: { signers: number.toString() },
+            questions: { signers: number.toString() }
           });
-        },
-      },
+        }
+      }
     },
     business_formation_provisions: {
       submit: {
@@ -1492,10 +1492,10 @@ export default {
             legacy_event_label: "provisions_submitted_with_formation",
             on_tab_name: "business_step",
             form_name: "business_formation",
-            questions: { provisions: number.toString() },
+            questions: { provisions: number.toString() }
           });
-        },
-      },
+        }
+      }
     },
     business_formation_purpose: {
       submit: {
@@ -1507,10 +1507,10 @@ export default {
             legacy_event_label: "purpose_submitted_with_formation",
             on_tab_name: "business_step",
             form_name: "business_formation",
-            questions: { business_purpose: "changed" },
+            questions: { business_purpose: "changed" }
           });
-        },
-      },
+        }
+      }
     },
     business_formation_name_tab: {
       click: {
@@ -1520,10 +1520,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "business_formation_name_tab",
             legacy_event_label: "arrive_on_business_formation_name_step",
-            on_tab_name: "name_step",
+            on_tab_name: "name_step"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_business_tab: {
       click: {
@@ -1533,10 +1533,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "business_formation_business_tab",
             legacy_event_label: "arrive_on_business_formation_business_step",
-            on_tab_name: "business_step",
+            on_tab_name: "business_step"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_contacts_tab: {
       click: {
@@ -1546,10 +1546,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "business_formation_contacts_tab",
             legacy_event_label: "arrive_on_business_formation_contacts_step",
-            on_tab_name: "contacts_step",
+            on_tab_name: "contacts_step"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_billing_tab: {
       click: {
@@ -1559,10 +1559,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "business_formation_billing_tab",
             legacy_event_label: "arrive_on_business_formation_billing_step",
-            on_tab_name: "billing_step",
+            on_tab_name: "billing_step"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_review_tab: {
       click: {
@@ -1572,10 +1572,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "business_formation_review_tab",
             legacy_event_label: "arrive_on_business_formation_review_step",
-            on_tab_name: "review_step",
+            on_tab_name: "review_step"
           });
-        },
-      },
+        }
+      }
     },
     cannabis_license_form_microbusiness_question: {
       submit: {
@@ -1586,7 +1586,7 @@ export default {
             legacy_event_category: "cannabis_license_form_microbusiness_question",
             legacy_event_label: "yes_I_m_a_microbusiness",
             form_name: "cannabis_license",
-            questions: { cannabis_business_type: "micro" },
+            questions: { cannabis_business_type: "micro" }
           });
         },
         no_I_m_a_standard_business: () => {
@@ -1596,10 +1596,10 @@ export default {
             legacy_event_category: "cannabis_license_form_microbusiness_question",
             legacy_event_label: "no_I_m_a_standard_business",
             form_name: "cannabis_license",
-            questions: { cannabis_business_type: "standard" },
+            questions: { cannabis_business_type: "standard" }
           });
-        },
-      },
+        }
+      }
     },
     cannabis_license_form: {
       click: {
@@ -1609,10 +1609,10 @@ export default {
             legacy_event_action: "click",
             legacy_event_category: "cannabis_license_form",
             legacy_event_label: "view_requirements",
-            on_tab_name,
+            on_tab_name
           });
-        },
-      },
+        }
+      }
     },
     cannabis_license_form_priority_status_diversity_checkbox: {
       submit: {
@@ -1623,10 +1623,10 @@ export default {
             legacy_event_category: "cannabis_license_form_priority_status_diversity_checkbox",
             legacy_event_label: "diversely_owned_business",
             form_name: "cannabis_license",
-            questions: { priority_status: "diversely_owned_business" },
+            questions: { priority_status: "diversely_owned_business" }
           });
-        },
-      },
+        }
+      }
     },
     cannabis_license_form_priority_status_impact_checkbox: {
       submit: {
@@ -1637,10 +1637,10 @@ export default {
             legacy_event_category: "cannabis_license_form_priority_status_impact_checkbox",
             legacy_event_label: "impact_zone_business",
             form_name: "cannabis_license",
-            questions: { priority_status: "impact_zone_business" },
+            questions: { priority_status: "impact_zone_business" }
           });
-        },
-      },
+        }
+      }
     },
     cannabis_license_form_priority_status_social_equity_checkbox: {
       submit: {
@@ -1651,10 +1651,10 @@ export default {
             legacy_event_category: "cannabis_license_form_priority_status_social_equity_checkbox",
             legacy_event_label: "social_equity_business",
             form_name: "cannabis_license",
-            questions: { priority_status: "social_equity_business" },
+            questions: { priority_status: "social_equity_business" }
           });
-        },
-      },
+        }
+      }
     },
     calendar_date: {
       click: {
@@ -1665,10 +1665,10 @@ export default {
             legacy_event_category: "calendar_date",
             legacy_event_label: "go_to_date_detail_screen",
             action: "go_to_filing_detail_screen",
-            item: "calendar_date",
+            item: "calendar_date"
           });
-        },
-      },
+        }
+      }
     },
 
     tax_calendar_banner_button: {
@@ -1680,7 +1680,7 @@ export default {
             legacy_event_category: "tax_calendar_banner_button",
             legacy_event_label: "show_tax_calendar_modal",
             click_text: "show_tax_calendar_modal",
-            clicked_to: "tax_calendar_modal",
+            clicked_to: "tax_calendar_modal"
           });
         },
         show_myNJ_registration_prompt_modal: () => {
@@ -1690,10 +1690,10 @@ export default {
             legacy_event_category: "tax_calendar_banner_button",
             legacy_event_label: "show_myNJ_registration_prompt_modal",
             click_text: "show_myNJ_registration_prompt_modal",
-            clicked_to: "myNJ_registration_prompt_modal",
+            clicked_to: "myNJ_registration_prompt_modal"
           });
-        },
-      },
+        }
+      }
     },
     tax_calendar_modal: {
       submit: {
@@ -1704,7 +1704,7 @@ export default {
             legacy_event_category: "tax_calendar_modal",
             legacy_event_label: "tax_calendar_modal_validation_error",
             form_name: "tax_calendar_modal",
-            server_response: "error",
+            server_response: "error"
           });
         },
         tax_calendar_business_does_not_exist: () => {
@@ -1714,7 +1714,7 @@ export default {
             legacy_event_category: "tax_calendar_modal",
             legacy_event_label: "tax_calendar_business_does_not_exist",
             form_name: "tax_calendar_modal",
-            server_response: "not_found",
+            server_response: "not_found"
           });
         },
         business_exists_but_not_in_Gov2Go: () => {
@@ -1724,7 +1724,7 @@ export default {
             legacy_event_category: "tax_calendar_modal",
             legacy_event_label: "business_exists_but_not_in_Gov2Go",
             form_name: "tax_calendar_modal",
-            server_response: "found",
+            server_response: "found"
           });
         },
         tax_deadlines_added_to_calendar: () => {
@@ -1734,10 +1734,10 @@ export default {
             legacy_event_action: "submit",
             legacy_event_category: "tax_calendar_modal",
             legacy_event_label: "tax_deadlines_added_to_calendar",
-            server_response: "success",
+            server_response: "success"
           });
-        },
-      },
+        }
+      }
     },
     tax_registration_snackbar: {
       submit: {
@@ -1748,10 +1748,10 @@ export default {
             legacy_event_category: "tax_registration_modal",
             legacy_event_label: "tax_registration_status_set_to_complete",
             action: "show_tax_registration_success_snackbar",
-            item: "tax_registration_snackbar",
+            item: "tax_registration_snackbar"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_review_amendments_external_link: {
       click: {
@@ -1763,10 +1763,10 @@ export default {
             legacy_event_label: "go_to_Treasury_amendments_page",
             form_name: "business_formation",
             on_tab_name: "review_step",
-            click_text: "go_to_treasury_amendments_page",
+            click_text: "go_to_treasury_amendments_page"
           });
-        },
-      },
+        }
+      }
     },
     business_formation_success_amendments_external_link: {
       click: {
@@ -1778,10 +1778,10 @@ export default {
             legacy_event_label: "go_to_Treasury_amendments_page",
             form_name: "business_formation",
             on_tab_name: "success_step",
-            click_text: "go_to_treasury_amendments_page",
+            click_text: "go_to_treasury_amendments_page"
           });
-        },
-      },
+        }
+      }
     },
     profile_formation_date: {
       submit: {
@@ -1792,10 +1792,10 @@ export default {
             legacy_event_category: "profile_formation_date",
             legacy_event_label: "formation_date_changed",
             form_name: "profile",
-            questions: { formation_date: "change" },
+            questions: { formation_date: "change" }
           });
-        },
-      },
+        }
+      }
     },
     myNJ_prompt_modal_complete_button: {
       click: {
@@ -1806,10 +1806,10 @@ export default {
             legacy_event_category: "myNJ_prompt_modal_complete_button",
             legacy_event_label: "go_to_NavigatorAccount_setup",
             action: "go_to_NavigatorAccount_setup",
-            item: "myNJ_prompt_modal_complete_button",
+            item: "myNJ_prompt_modal_complete_button"
           });
-        },
-      },
+        }
+      }
     },
     formation_nudge_button: {
       click: {
@@ -1820,10 +1820,10 @@ export default {
             legacy_event_category: "formation_nudge_button",
             legacy_event_label: "show_formation_date_modal",
             action: "show_formation_date_modal",
-            item: "formation_nudge_button",
+            item: "formation_nudge_button"
           });
-        },
-      },
+        }
+      }
     },
     landing_page_how_it_works: {
       scroll: {
@@ -1833,10 +1833,10 @@ export default {
             legacy_event_action: "scroll",
             legacy_event_category: "landing_page_how_it_works",
             legacy_event_label: "how_it_works_seen",
-            scroll_depth: "how_it_works",
+            scroll_depth: "how_it_works"
           });
-        },
-      },
+        }
+      }
     },
     landing_page_more_support: {
       scroll: {
@@ -1846,10 +1846,10 @@ export default {
             legacy_event_action: "scroll",
             legacy_event_category: "landing_page_more_support",
             legacy_event_label: "more_support_seen",
-            scroll_depth: "more_support_seen",
+            scroll_depth: "more_support_seen"
           });
-        },
-      },
+        }
+      }
     },
     task_location_question: {
       submit: {
@@ -1860,10 +1860,10 @@ export default {
             legacy_event_category: "task_location_question",
             legacy_event_label: "location_entered_for_first_time",
             form_name: "task_address_form",
-            questions: { location: "first_time" },
+            questions: { location: "first_time" }
           });
-        },
-      },
+        }
+      }
     },
     profile_location_question: {
       submit: {
@@ -1874,10 +1874,10 @@ export default {
             legacy_event_category: "profile_location_question",
             legacy_event_label: "location_entered_for_first_time",
             form_name: "profile",
-            questions: { location: "first_time" },
+            questions: { location: "first_time" }
           });
-        },
-      },
+        }
+      }
     },
     business_formation_location_question: {
       submit: {
@@ -1889,10 +1889,10 @@ export default {
             legacy_event_label: "location_entered_for_first_time",
             on_tab_name: "business_step",
             form_name: "business_formation",
-            questions: { location: "first_time" },
+            questions: { location: "first_time" }
           });
-        },
-      },
+        }
+      }
     },
     share_calendar_feedback: {
       click: {
@@ -1903,10 +1903,10 @@ export default {
             legacy_event_category: "share_calendar_feedback",
             legacy_event_label: "open_live_chat",
             click_text: "share_calendar_feedback",
-            clicked_to: "live_chat",
+            clicked_to: "live_chat"
           });
-        },
-      },
+        }
+      }
     },
     share_feedback: {
       click: {
@@ -1917,10 +1917,10 @@ export default {
             legacy_event_category: "share_feedback",
             legacy_event_label: "open_live_chat",
             click_text: "share_feedback",
-            clicked_to: "live_chat",
+            clicked_to: "live_chat"
           });
-        },
-      },
+        }
+      }
     },
     report_something_that_is_broken: {
       click: {
@@ -1931,10 +1931,10 @@ export default {
             legacy_event_category: "report_something_that_is_broken",
             legacy_event_label: "open_live_chat",
             click_text: "report_something_that_is_broken",
-            clicked_to: "live_chat",
+            clicked_to: "live_chat"
           });
-        },
-      },
+        }
+      }
     },
     go_to_profile_nudge: {
       click: {
@@ -1945,10 +1945,10 @@ export default {
             legacy_event_category: "go_to_profile_nudge",
             legacy_event_label: "go_to_profile",
             action: "go_to_profile_screen",
-            item: "go_to_profile_nudge_button",
+            item: "go_to_profile_nudge_button"
           });
-        },
-      },
+        }
+      }
     },
     finish_setup_on_myNewJersey_button: {
       submit: {
@@ -1959,10 +1959,10 @@ export default {
             legacy_event_label: "go_to_myNJ_registration",
             event: "form_submits",
             form_name: "account_setup",
-            action: "go_to_myNJ_registration",
+            action: "go_to_myNJ_registration"
           });
-        },
-      },
-    },
-  },
+        }
+      }
+    }
+  }
 };

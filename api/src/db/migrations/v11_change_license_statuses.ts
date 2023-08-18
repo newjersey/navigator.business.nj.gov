@@ -13,7 +13,7 @@ export interface v11UserData {
 export const migrate_v10_to_v11 = (v10Data: v10UserData): v11UserData => {
   return {
     ...v10Data,
-    version: 11,
+    version: 11
   };
 };
 
@@ -98,7 +98,7 @@ export const generatev11User = (overrides: Partial<v11BusinessUser>): v11Busines
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -111,10 +111,10 @@ export const generatev11OnboardingData = (overrides: Partial<v11OnboardingData>)
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`,
+      id: `some-id-${randomInt()}`
     },
     liquorLicense: true,
     homeBasedBusiness: true,
-    ...overrides,
+    ...overrides
   };
 };

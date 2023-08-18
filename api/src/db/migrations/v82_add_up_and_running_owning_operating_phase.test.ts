@@ -5,7 +5,7 @@ import {
   generatev81User,
   v81OperatingPhase,
   v81ProfileData,
-  v81UserData,
+  v81UserData
 } from "./v81_add_completed_filing_payment";
 import { migrate_v81_to_v82 } from "./v82_add_up_and_running_owning_operating_phase";
 
@@ -28,14 +28,14 @@ describe("migrate_v81_to_v82", () => {
       "GUEST_MODE_OWNING",
       "NEEDS_TO_FORM",
       "NEEDS_TO_REGISTER_FOR_TAXES",
-      "FORMED_AND_REGISTERED",
+      "FORMED_AND_REGISTERED"
     ];
 
     const randomOperatingPhase = randomElementFromArray(operatingPhaseIdsExcludingUpAndRunning);
 
     const v81 = makeUserData({
       businessPersona: "OWNING",
-      operatingPhase: randomOperatingPhase as v81OperatingPhase,
+      operatingPhase: randomOperatingPhase as v81OperatingPhase
     });
     const v82 = migrate_v81_to_v82(v81);
     expect(v82.profileData.operatingPhase).toEqual(randomOperatingPhase);
@@ -57,17 +57,17 @@ const makeUserData = (profileData: Partial<v81ProfileData>): v81UserData => {
       hiddenFundingIds: [],
       visibleSidebarCards: ["welcome"],
       returnToLink: "",
-      isCalendarFullView: true,
+      isCalendarFullView: true
     },
     taxFilingData: {
-      filings: [],
+      filings: []
     },
     formationData: {
       formationFormData: generatev81FormationFormData({}),
       formationResponse: undefined,
       getFilingResponse: undefined,
-      completedFilingPayment: false,
+      completedFilingPayment: false
     },
-    version: 81,
+    version: 81
   };
 };

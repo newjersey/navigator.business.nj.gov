@@ -36,7 +36,7 @@ export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType)
         return {
           status: responseStatus,
           invalidWord,
-          similarNames: response.data.Similars,
+          similarNames: response.data.Similars
         };
       })
       .catch((error: AxiosError) => {
@@ -46,7 +46,7 @@ export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType)
   };
 
   return {
-    search,
+    search
   };
 };
 

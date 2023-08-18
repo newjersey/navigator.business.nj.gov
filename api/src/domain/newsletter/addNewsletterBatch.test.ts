@@ -18,7 +18,7 @@ describe("addNewsletterBatch", () => {
       findByEmail: jest.fn(),
       getNeedNewsletterUsers: jest.fn(),
       getNeedToAddToUserTestingUsers: jest.fn(),
-      getNeedTaxIdEncryptionUsers: jest.fn(),
+      getNeedTaxIdEncryptionUsers: jest.fn()
     };
     addNewsletter = addNewsletterFactory(stubNewsletterClient);
   });
@@ -31,7 +31,7 @@ describe("addNewsletterBatch", () => {
 
     stubUserDataClient.getNeedNewsletterUsers.mockResolvedValue([
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
-      generateUserData({ user: generateUser({ externalStatus: {} }) }),
+      generateUserData({ user: generateUser({ externalStatus: {} }) })
     ]);
 
     const results = await addNewsletterBatch(addNewsletter, stubUserDataClient);
@@ -48,7 +48,7 @@ describe("addNewsletterBatch", () => {
 
     stubUserDataClient.getNeedNewsletterUsers.mockResolvedValue([
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
-      generateUserData({ user: generateUser({ externalStatus: {} }) }),
+      generateUserData({ user: generateUser({ externalStatus: {} }) })
     ]);
 
     const results = await addNewsletterBatch(addNewsletter, stubUserDataClient);
@@ -65,7 +65,7 @@ describe("addNewsletterBatch", () => {
 
     stubUserDataClient.getNeedNewsletterUsers.mockResolvedValue([
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
-      generateUserData({ user: generateUser({ externalStatus: {} }) }),
+      generateUserData({ user: generateUser({ externalStatus: {} }) })
     ]);
 
     const results = await addNewsletterBatch(addNewsletter, stubUserDataClient);

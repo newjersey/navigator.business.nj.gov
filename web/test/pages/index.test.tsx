@@ -21,7 +21,7 @@ describe("HomePage", () => {
   it("redirects to dashboard page when user has completed onboarding flow", () => {
     useMockBusiness({
       onboardingFormProgress: "COMPLETED",
-      profileData: generateProfileData({ businessPersona: "STARTING" }),
+      profileData: generateProfileData({ businessPersona: "STARTING" })
     });
     render(withAuth(<Home />, { user: generateUser({}) }));
     expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);

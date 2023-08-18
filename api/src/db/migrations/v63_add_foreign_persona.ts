@@ -19,9 +19,9 @@ export const migrate_v62_to_v63 = (v62Data: v62UserData): v63UserData => {
     profileData: {
       ...v62Data.profileData,
       foreignBusinessType: undefined,
-      foreignBusinessTypeIds: [],
+      foreignBusinessTypeIds: []
     },
-    version: 63,
+    version: 63
   };
 };
 
@@ -172,7 +172,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v63FormationData {
@@ -235,7 +235,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY",
+  "LIMITED LIABILITY COMPANY"
 ] as const;
 
 const llpBusinessSuffix = [
@@ -244,7 +244,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P.",
+  "R.L.L.P."
 ] as const;
 
 export const corpBusinessSuffix = [
@@ -257,7 +257,7 @@ export const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC.",
+  "INC."
 ] as const;
 
 export const createEmptyFormationAddress = (): v63FormationAddress => {
@@ -268,7 +268,7 @@ export const createEmptyFormationAddress = (): v63FormationAddress => {
     addressCity: "",
     addressState: "",
     addressZipCode: "",
-    signature: false,
+    signature: false
   };
 };
 

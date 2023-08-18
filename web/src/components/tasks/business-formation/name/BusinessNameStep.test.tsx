@@ -4,7 +4,7 @@ import {
   FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
-  useSetupInitialMocks,
+  useSetupInitialMocks
 } from "@/test/helpers/helpers-formation";
 import {
   createEmptyFormationFormData,
@@ -13,7 +13,7 @@ import {
   generateBusiness,
   generateBusinessNameAvailability,
   generateFormationFormData,
-  NameAvailability,
+  NameAvailability
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { screen, within } from "@testing-library/react";
@@ -21,7 +21,7 @@ import { screen, within } from "@testing-library/react";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    useMediaQuery: jest.fn()
   };
 }
 
@@ -35,7 +35,7 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn(),
+  searchBusinessName: jest.fn()
 }));
 
 describe("Formation - BusinessNameStep", () => {
@@ -58,11 +58,11 @@ describe("Formation - BusinessNameStep", () => {
       completedFilingPayment: false,
       businessNameAvailability: businessNameAvailability ?? undefined,
       dbaBusinessNameAvailability: undefined,
-      lastVisitedPageIndex: 0,
+      lastVisitedPageIndex: 0
     };
     return preparePage({
       business: generateBusiness({ profileData, formationData }),
-      displayContent: { formationDbaContent: generateFormationDbaContent({}) },
+      displayContent: { formationDbaContent: generateFormationDbaContent({}) }
     });
   };
 
@@ -77,7 +77,7 @@ describe("Formation - BusinessNameStep", () => {
     getPageHelper(
       "My Restaurant",
       generateBusinessNameAvailability({
-        status: "UNAVAILABLE",
+        status: "UNAVAILABLE"
       })
     );
     expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
@@ -210,11 +210,11 @@ describe("Formation - BusinessNameStep", () => {
       "limited-liability-partnership",
       "limited-partnership",
       "c-corporation",
-      "s-corporation",
+      "s-corporation"
     ];
     const foreignTypes: FormationLegalType[] = [
       "foreign-limited-liability-company",
-      "foreign-limited-liability-partnership",
+      "foreign-limited-liability-partnership"
     ];
 
     for (const legalStructureId of domesticTypes) {
@@ -227,12 +227,12 @@ describe("Formation - BusinessNameStep", () => {
           completedFilingPayment: false,
           businessNameAvailability: undefined,
           dbaBusinessNameAvailability: undefined,
-          lastVisitedPageIndex: 0,
+          lastVisitedPageIndex: 0
         };
 
         preparePage({
           business: generateBusiness({ profileData, formationData }),
-          displayContent: { formationDbaContent: generateFormationDbaContent({}) },
+          displayContent: { formationDbaContent: generateFormationDbaContent({}) }
         });
 
         expect(screen.getByText(Config.formation.fields.businessName.header)).toBeInTheDocument();
@@ -249,12 +249,12 @@ describe("Formation - BusinessNameStep", () => {
           legalStructureId: legalStructureWithoutPrefix,
           businessPersona: "FOREIGN",
           businessName: "some name",
-          needsNexusDbaName: false,
+          needsNexusDbaName: false
         });
 
         preparePage({
           business: generateBusiness({ profileData, formationData: generateEmptyFormationData() }),
-          displayContent: { formationDbaContent: generateFormationDbaContent({}) },
+          displayContent: { formationDbaContent: generateFormationDbaContent({}) }
         });
 
         expect(

@@ -30,22 +30,25 @@ export const useFormationErrors = (): FormationErrorsResponse => {
   }, [state.formationFormData]);
 
   const errorStates: Record<FieldsForErrorHandling, FormationFieldErrorState> = useMemo(() => {
-    return validatedFields.reduce((acc, field) => {
-      return {
-        ...acc,
-        [field]: getErrorStateForField({
-          field,
-          formationFormData: state.formationFormData,
-          businessNameAvailability: state.businessNameAvailability,
-          foreignGoodStandingFile: state.foreignGoodStandingFile,
-        }),
-      };
-    }, {} as Record<FieldsForErrorHandling, FormationFieldErrorState>);
+    return validatedFields.reduce(
+      (acc, field) => {
+        return {
+          ...acc,
+          [field]: getErrorStateForField({
+            field,
+            formationFormData: state.formationFormData,
+            businessNameAvailability: state.businessNameAvailability,
+            foreignGoodStandingFile: state.foreignGoodStandingFile
+          })
+        };
+      },
+      {} as Record<FieldsForErrorHandling, FormationFieldErrorState>
+    );
   }, [
     validatedFields,
     state.formationFormData,
     state.businessNameAvailability,
-    state.foreignGoodStandingFile,
+    state.foreignGoodStandingFile
   ]);
 
   const getApiFieldErrorState = (field: FieldsForErrorHandling): FormationFieldErrorState | undefined => {
@@ -70,7 +73,7 @@ export const useFormationErrors = (): FormationErrorsResponse => {
     return {
       field,
       hasError: hasApiFieldError,
-      label: apiErrorForField.message,
+      label: apiErrorForField.message
     };
   };
 
@@ -156,7 +159,7 @@ export const useFormationErrors = (): FormationErrorsResponse => {
           field,
           formationFormData: state.formationFormData,
           businessNameAvailability: state.businessNameAvailability,
-          foreignGoodStandingFile: state.foreignGoodStandingFile,
+          foreignGoodStandingFile: state.foreignGoodStandingFile
         });
       return !errorState.hasError;
     });
@@ -180,6 +183,6 @@ export const useFormationErrors = (): FormationErrorsResponse => {
     doesStepHaveError,
     isStepCompleted,
     getApiErrorMessage,
-    getFieldErrorLabel,
+    getFieldErrorLabel
   };
 };

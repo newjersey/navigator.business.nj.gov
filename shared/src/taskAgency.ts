@@ -11,7 +11,7 @@ export const LookupTaskAgencyById = (id: string): TaskAgency => {
       return x.id === id;
     }) ?? {
       id: "",
-      name: "",
+      name: ""
     }
   );
 };

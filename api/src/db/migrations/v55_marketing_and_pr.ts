@@ -24,9 +24,9 @@ export const migrate_v54_to_v55 = (v54Data: v54UserData): v55UserData => {
     ...v54Data,
     profileData: {
       ...v54Data.profileData,
-      industryId: newIndustryId,
+      industryId: newIndustryId
     },
-    version: 55,
+    version: 55
   };
 };
 
@@ -171,7 +171,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v55FormationData {
@@ -265,7 +265,7 @@ export const generatev55User = (overrides: Partial<v55BusinessUser>): v55Busines
     userTesting: false,
     externalStatus: {},
     abExperience: "ExperienceA",
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -283,7 +283,7 @@ export const generatev55ProfileData = (overrides: Partial<v55ProfileData>): v55P
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`,
+      id: `some-id-${randomInt()}`
     },
     liquorLicense: true,
     requiresCpa: false,
@@ -299,7 +299,7 @@ export const generatev55ProfileData = (overrides: Partial<v55ProfileData>): v55P
     taxPin: undefined,
     sectorId: undefined,
     naicsCode: "",
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -335,6 +335,6 @@ export const generatev55FormationFormData = (
     contactLastName: "",
     contactPhoneNumber: "",
     businessPurpose: "",
-    ...overrides,
+    ...overrides
   };
 };

@@ -6,7 +6,7 @@ export const NexusFormationStepsConfiguration: {
   disableStepper?: boolean;
 }[] = [
   { name: "Business Name", stepIndex: 0, disableStepper: true },
-  { name: "Authorize Business", stepIndex: 1 },
+  { name: "Authorize Business", stepIndex: 1 }
 ];
 
 export const LookupNexusStepIndexByName = (name: DbaStepNames): number | undefined => {

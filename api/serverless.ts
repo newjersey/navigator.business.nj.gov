@@ -60,33 +60,33 @@ const serverlessConfiguration: AWS = {
     webpack: {
       webpackConfig: "./webpack.config.ts",
       includeModules: {
-        nodeModulesRelativeDir: "../",
-      },
+        nodeModulesRelativeDir: "../"
+      }
     },
     "serverless-dynamodb": {
       port: dynamoOfflinePort,
       start: {
         migrate: true,
-        port: dynamoOfflinePort,
+        port: dynamoOfflinePort
       },
-      stages: [stage],
+      stages: [stage]
     },
     "serverless-offline-ssm": {
-      stages: ["offline"],
+      stages: ["offline"]
     },
     "serverless-offline": {
       host: isDocker ? "0.0.0.0" : "localhost",
       httpPort: offlinePort,
       lambdaPort: offlineLambdaPort,
-      noTimeout: true,
+      noTimeout: true
     },
-    ssmLocation: ssmLocation,
+    ssmLocation: ssmLocation
   },
   plugins: [
     "serverless-webpack",
     ...(isDocker ? [] : ["serverless-dynamodb"]),
     "serverless-offline-ssm",
-    "serverless-offline",
+    "serverless-offline"
   ],
   provider: {
     name: "aws",
@@ -106,39 +106,39 @@ const serverlessConfiguration: AWS = {
               "dynamodb:PutItem",
               "dynamodb:UpdateItem",
               "dynamodb:DeleteItem",
-              "dynamodb:PartiQLSelect",
+              "dynamodb:PartiQLSelect"
             ],
             Resource: [
               `arn:aws:dynamodb:${region}:*:table/${usersTable}`,
-              `arn:aws:dynamodb:${region}:*:table/${usersTable}/index/*`,
-            ],
+              `arn:aws:dynamodb:${region}:*:table/${usersTable}/index/*`
+            ]
           },
           {
             Effect: "Allow",
             Action: ["s3:GetObject"],
-            Resource: "arn:aws:s3:::*/*",
+            Resource: "arn:aws:s3:::*/*"
           },
           {
             Effect: "Allow",
             Action: ["kms:GenerateDataKey", "kms:Encrypt", "kms:Decrypt"],
-            Resource: awsCryptoKey,
+            Resource: awsCryptoKey
           },
           {
             Effect: "Allow",
             Action: ["s3:PutObject", "s3:ListBucket", "s3:GetObject"],
-            Resource: `arn:aws:s3:::${documentS3Bucket}/*`,
+            Resource: `arn:aws:s3:::${documentS3Bucket}/*`
           },
           {
             Effect: "Allow",
             Action: ["secretsmanager:GetSecretValue"],
-            Resource: `arn:aws:secretsmanager:${region}:*:secret:*`,
-          },
-        ],
-      },
+            Resource: `arn:aws:secretsmanager:${region}:*:secret:*`
+          }
+        ]
+      }
     },
     apiGateway: {
       restApiId: "${self:custom.config.application.API_GATEWEAY_ID}",
-      restApiRootResourceId: "${self:custom.config.application.API_GATEWEAY_ROOT_RESOURCE_ID}",
+      restApiRootResourceId: "${self:custom.config.application.API_GATEWEAY_ROOT_RESOURCE_ID}"
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
@@ -173,19 +173,19 @@ const serverlessConfiguration: AWS = {
       AWS_CRYPTO_KEY: awsCryptoKey,
       AWS_CRYPTO_CONTEXT_STAGE: awsCryptoContextStage,
       AWS_CRYPTO_CONTEXT_PURPOSE: awsCryptoContextPurpose,
-      AWS_CRYPTO_CONTEXT_ORIGIN: awsCryptoContextOrigin,
+      AWS_CRYPTO_CONTEXT_ORIGIN: awsCryptoContextOrigin
     } as AwsLambdaEnvironment,
-    logRetentionInDays: 180,
+    logRetentionInDays: 180
   },
-  functions: {},
+  functions: {}
 };
 
 serverlessConfiguration.custom = {
   ...serverlessConfiguration.custom,
   config: {
     application: "${ssm:/config/application}",
-    infrastructure: "${ssm:/config/infrastructure}",
-  },
+    infrastructure: "${ssm:/config/infrastructure}"
+  }
 };
 
 serverlessConfiguration.functions = {
@@ -197,8 +197,8 @@ serverlessConfiguration.functions = {
           securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
           subnetIds: [
             "${self:custom.config.infrastructure.SUBNET_01}",
-            "${self:custom.config.infrastructure.SUBNET_02}",
-          ],
+            "${self:custom.config.infrastructure.SUBNET_02}"
+          ]
         }
       : undefined
   ),
@@ -208,8 +208,8 @@ serverlessConfiguration.functions = {
           securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
           subnetIds: [
             "${self:custom.config.infrastructure.SUBNET_01}",
-            "${self:custom.config.infrastructure.SUBNET_02}",
-          ],
+            "${self:custom.config.infrastructure.SUBNET_02}"
+          ]
         }
       : undefined
   ),
@@ -220,11 +220,11 @@ serverlessConfiguration.functions = {
           securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
           subnetIds: [
             "${self:custom.config.infrastructure.SUBNET_01}",
-            "${self:custom.config.infrastructure.SUBNET_02}",
-          ],
+            "${self:custom.config.infrastructure.SUBNET_02}"
+          ]
         }
       : undefined
-  ),
+  )
 };
 
 if (stage === "dev") {
@@ -236,11 +236,11 @@ if (stage === "dev") {
             securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
             subnetIds: [
               "${self:custom.config.infrastructure.SUBNET_01}",
-              "${self:custom.config.infrastructure.SUBNET_02}",
-            ],
+              "${self:custom.config.infrastructure.SUBNET_02}"
+            ]
           }
         : undefined
-    ),
+    )
   };
 }
 
@@ -252,23 +252,23 @@ if (!env.CI || stage === "local") {
         DeletionPolicy: "Retain",
         Properties: {
           ...dynamoDbSchema,
-          TableName: usersTable,
-        },
+          TableName: usersTable
+        }
       },
       GatewayResponseDefault4XX: {
         Type: "AWS::ApiGateway::GatewayResponse",
         Properties: {
           ResponseParameters: {
             "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
-            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'",
+            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'"
           },
           ResponseType: "DEFAULT_5XX",
           RestApiId: {
-            Ref: "ApiGatewayRestApi",
-          },
-        },
-      },
-    },
+            Ref: "ApiGatewayRestApi"
+          }
+        }
+      }
+    }
   };
 }
 

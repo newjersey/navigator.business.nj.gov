@@ -3,7 +3,7 @@ import {
   generatev49ProfileData,
   generatev49User,
   v49ProfileData,
-  v49UserData,
+  v49UserData
 } from "./v49_add_cannabis_microbusiness";
 import { migrate_v49_to_v50 } from "./v50_fix_annual_conditional_ids";
 
@@ -15,39 +15,39 @@ describe("migrate_v49_to_v50", () => {
   it("changes conditional to annual task progress when user is annual cannabis", () => {
     const profileData = generatev49ProfileData({
       industryId: "cannabis",
-      cannabisLicenseType: "ANNUAL",
+      cannabisLicenseType: "ANNUAL"
     });
     const v49 = makeUserData(profileData, {
       taskProgress: {
         "conditional-permit-cannabis": "IN_PROGRESS",
-        "another-task": "COMPLETED",
-      },
+        "another-task": "COMPLETED"
+      }
     });
     const v50 = migrate_v49_to_v50(v49);
 
     expect(v50.taskProgress).toEqual({
       "annual-license-cannabis": "IN_PROGRESS",
       "conditional-permit-cannabis": "NOT_STARTED",
-      "another-task": "COMPLETED",
+      "another-task": "COMPLETED"
     });
   });
 
   it("keeps task progress when user is conditional cannabis", () => {
     const profileData = generatev49ProfileData({
       industryId: "cannabis",
-      cannabisLicenseType: "CONDITIONAL",
+      cannabisLicenseType: "CONDITIONAL"
     });
     const v49 = makeUserData(profileData, {
       taskProgress: {
         "conditional-permit-cannabis": "IN_PROGRESS",
-        "another-task": "COMPLETED",
-      },
+        "another-task": "COMPLETED"
+      }
     });
     const v50 = migrate_v49_to_v50(v49);
 
     expect(v50.taskProgress).toEqual({
       "conditional-permit-cannabis": "IN_PROGRESS",
-      "another-task": "COMPLETED",
+      "another-task": "COMPLETED"
     });
   });
 
@@ -62,19 +62,19 @@ describe("migrate_v49_to_v50", () => {
         roadmapOpenSections: ["PLAN", "START"],
         roadmapOpenSteps: [],
         hiddenCertificationIds: [],
-        hiddenFundingIds: [],
+        hiddenFundingIds: []
       },
       taxFilingData: {
-        filings: [],
+        filings: []
       },
       taskItemChecklist: {},
       formationData: {
         formationFormData: generatev42FormationFormData({}),
         formationResponse: undefined,
-        getFilingResponse: undefined,
+        getFilingResponse: undefined
       },
       version: 49,
-      ...overrides,
+      ...overrides
     };
   };
 });

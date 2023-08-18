@@ -87,14 +87,14 @@ export const BusinessStep = (): ReactElement => {
     addressSection(),
     lpSection(),
     businessPurposeSection(),
-    additionalProvisionsSection(),
+    additionalProvisionsSection()
   ];
 
   const nonprofitOrder: (ReactElement | null)[] = [
     <MainBusiness key={"main-business"} />,
     additionalProvisionsSection(),
     businessPurposeSection(),
-    addressSection(),
+    addressSection()
   ];
 
   const elementsToDisplay = isNonprofit ? nonprofitOrder : defaultOrder;

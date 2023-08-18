@@ -3,7 +3,7 @@
 
 import {
   clickDeferredSaveButton,
-  completeBusinessStructureTask,
+  completeBusinessStructureTask
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
@@ -20,7 +20,7 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     });
     cy.visit("/onboarding");
     completeNewBusinessOnboarding({
-      industry,
+      industry
     });
   });
 

@@ -17,7 +17,7 @@ import {
   generateProfileData,
   generateUserData,
   ProfileData,
-  UserData,
+  UserData
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
 
@@ -30,11 +30,11 @@ jest.mock("@/lib/auth/signinHelper", () => {
   return {
     ...originalSigninHelper,
     onSelfRegister: jest.fn(),
-    onSignOut: jest.fn(),
+    onSignOut: jest.fn()
   };
 });
 jest.mock("@/lib/auth/sessionHelper", () => ({
-  triggerSignIn: jest.fn(),
+  triggerSignIn: jest.fn()
 }));
 
 const generateOnboardingBusiness = (overrides?: Partial<ProfileData>): Business => {
@@ -44,8 +44,8 @@ const generateOnboardingBusiness = (overrides?: Partial<ProfileData>): Business 
       tradeName: "",
       industryId: undefined,
       legalStructureId: undefined,
-      ...overrides,
-    }),
+      ...overrides
+    })
   });
 };
 
@@ -103,7 +103,7 @@ describe("<NavBarPopupMenu />", () => {
         useMockBusiness(generateOnboardingBusiness());
         renderNavBarPopupMenu({
           props: { menuConfiguration: "login" },
-          isAuthenticated: IsAuthenticated.FALSE,
+          isAuthenticated: IsAuthenticated.FALSE
         });
       });
 
@@ -122,7 +122,7 @@ describe("<NavBarPopupMenu />", () => {
         useMockBusiness(generateOnboardingBusiness());
         renderNavBarPopupMenu({
           props: { menuConfiguration: "profile" },
-          isAuthenticated: IsAuthenticated.FALSE,
+          isAuthenticated: IsAuthenticated.FALSE
         });
       });
 
@@ -147,7 +147,7 @@ describe("<NavBarPopupMenu />", () => {
         useMockBusiness(generateOnboardingBusiness());
         renderNavBarPopupMenu({
           props: { menuConfiguration: "profile-mynj-addbusiness-logout" },
-          isAuthenticated: IsAuthenticated.TRUE,
+          isAuthenticated: IsAuthenticated.TRUE
         });
         expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
         expect(screen.getByText(Config.navigationDefaults.myNJAccountText)).toBeInTheDocument();
@@ -159,27 +159,27 @@ describe("<NavBarPopupMenu />", () => {
         const firstBusiness = generateBusiness({
           profileData: generateProfileData({
             businessName: "first-biz",
-            legalStructureId: randomPublicFilingLegalStructure(),
-          }),
+            legalStructureId: randomPublicFilingLegalStructure()
+          })
         });
         const secondBusiness = generateBusiness({
           profileData: generateProfileData({
             businessName: "second-biz",
-            legalStructureId: randomPublicFilingLegalStructure(),
-          }),
+            legalStructureId: randomPublicFilingLegalStructure()
+          })
         });
         const userData = generateUserData({
           currentBusinessId: firstBusiness.id,
           businesses: {
             [firstBusiness.id]: firstBusiness,
-            [secondBusiness.id]: secondBusiness,
-          },
+            [secondBusiness.id]: secondBusiness
+          }
         });
 
         useMockUserData(userData);
         renderNavBarPopupMenu({
           props: { menuConfiguration: "profile-mynj-addbusiness-logout" },
-          isAuthenticated: IsAuthenticated.TRUE,
+          isAuthenticated: IsAuthenticated.TRUE
         });
 
         expect(screen.getByText("first-biz")).toBeInTheDocument();
@@ -188,23 +188,23 @@ describe("<NavBarPopupMenu />", () => {
 
       it("only shows profile link for current business", () => {
         const firstBusiness = generateBusiness({
-          profileData: generateProfileData({ businessName: "first-biz" }),
+          profileData: generateProfileData({ businessName: "first-biz" })
         });
         const secondBusiness = generateBusiness({
-          profileData: generateProfileData({ businessName: "second-biz" }),
+          profileData: generateProfileData({ businessName: "second-biz" })
         });
         const userData = generateUserData({
           currentBusinessId: firstBusiness.id,
           businesses: {
             [firstBusiness.id]: firstBusiness,
-            [secondBusiness.id]: secondBusiness,
-          },
+            [secondBusiness.id]: secondBusiness
+          }
         });
 
         useMockUserData(userData);
         renderNavBarPopupMenu({
           props: { menuConfiguration: "profile-mynj-addbusiness-logout" },
-          isAuthenticated: IsAuthenticated.TRUE,
+          isAuthenticated: IsAuthenticated.TRUE
         });
 
         expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
@@ -214,7 +214,7 @@ describe("<NavBarPopupMenu />", () => {
         useMockBusiness(generateOnboardingBusiness());
         renderNavBarPopupMenu({
           props: { menuConfiguration: "profile-mynj-addbusiness-logout" },
-          isAuthenticated: IsAuthenticated.TRUE,
+          isAuthenticated: IsAuthenticated.TRUE
         });
         fireEvent.click(screen.getByText(Config.navigationDefaults.profileLinkText));
         expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
@@ -224,7 +224,7 @@ describe("<NavBarPopupMenu />", () => {
         useMockBusiness(generateOnboardingBusiness({ businessName: "some name" }));
         renderNavBarPopupMenu({
           props: { menuConfiguration: "profile-mynj-addbusiness-logout" },
-          isAuthenticated: IsAuthenticated.TRUE,
+          isAuthenticated: IsAuthenticated.TRUE
         });
         fireEvent.click(screen.getByText("some name"));
         expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
@@ -234,12 +234,12 @@ describe("<NavBarPopupMenu />", () => {
         useMockBusiness(generateOnboardingBusiness());
         renderNavBarPopupMenu({
           props: { menuConfiguration: "profile-mynj-addbusiness-logout" },
-          isAuthenticated: IsAuthenticated.TRUE,
+          isAuthenticated: IsAuthenticated.TRUE
         });
         fireEvent.click(screen.getByText(Config.navigationDefaults.addBusinessButton));
         expect(mockPush).toHaveBeenCalledWith({
           pathname: ROUTES.onboarding,
-          query: { additionalBusiness: "true" },
+          query: { additionalBusiness: "true" }
         });
       });
 
@@ -247,7 +247,7 @@ describe("<NavBarPopupMenu />", () => {
         useMockBusiness(generateOnboardingBusiness());
         renderNavBarPopupMenu({
           props: { menuConfiguration: "profile-mynj-addbusiness-logout" },
-          isAuthenticated: IsAuthenticated.TRUE,
+          isAuthenticated: IsAuthenticated.TRUE
         });
         const openMock = jest.fn();
         global.open = openMock;
@@ -263,7 +263,7 @@ describe("<NavBarPopupMenu />", () => {
         useMockBusiness(generateOnboardingBusiness());
         renderNavBarPopupMenu({
           props: { menuConfiguration: "profile-mynj-addbusiness-logout" },
-          isAuthenticated: IsAuthenticated.TRUE,
+          isAuthenticated: IsAuthenticated.TRUE
         });
         fireEvent.click(screen.getByText(Config.navigationDefaults.logoutButton));
         expect(onSignOut).toHaveBeenCalled();
@@ -275,7 +275,7 @@ describe("<NavBarPopupMenu />", () => {
         useMockBusiness(generateOnboardingBusiness());
         renderNavBarPopupMenu({
           props: { menuConfiguration: "profile-register-login" },
-          isAuthenticated: IsAuthenticated.FALSE,
+          isAuthenticated: IsAuthenticated.FALSE
         });
       });
 
@@ -313,7 +313,7 @@ describe("<NavBarPopupMenu />", () => {
         useMockBusiness(generateOnboardingBusiness());
         renderNavBarPopupMenu({
           props: { menuConfiguration: "login-getstarted" },
-          isAuthenticated: IsAuthenticated.FALSE,
+          isAuthenticated: IsAuthenticated.FALSE
         });
       });
 

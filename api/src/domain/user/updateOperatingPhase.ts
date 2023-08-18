@@ -21,7 +21,7 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): 
     taskProgress: currentBusiness.taskProgress,
     isPublicFiling: isPublicFiling,
     currentPhase: originalPhase,
-    legalStructureId: currentBusiness.profileData.legalStructureId,
+    legalStructureId: currentBusiness.profileData.legalStructureId
   });
 
   const phaseHasChanged = newPhase !== originalPhase;
@@ -33,13 +33,13 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): 
     ...business,
     profileData: {
       ...business.profileData,
-      operatingPhase: newPhase,
+      operatingPhase: newPhase
     },
     preferences: {
       ...business.preferences,
       isHideableRoadmapOpen: updatedIsHideableRoadmapOpen,
-      phaseNewlyChanged: phaseHasChanged || currentBusiness.preferences.phaseNewlyChanged,
-    },
+      phaseNewlyChanged: phaseHasChanged || currentBusiness.preferences.phaseNewlyChanged
+    }
   }));
 };
 
@@ -49,7 +49,7 @@ const getNewPhase = ({
   currentPhase,
   isPublicFiling,
   taskProgress,
-  legalStructureId,
+  legalStructureId
 }: {
   businessPersona: BusinessPersona;
   foreignBusinessType: ForeignBusinessType;

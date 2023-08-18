@@ -59,8 +59,8 @@ export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Pro
         props: {
           deadTasks: await findDeadTasks(),
           deadContextualInfo: await findDeadContextualInfo(),
-          noAuth: true,
-        },
+          noAuth: true
+        }
       }
     : { notFound: true };
 };

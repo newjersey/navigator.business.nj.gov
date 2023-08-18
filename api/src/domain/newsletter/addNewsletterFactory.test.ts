@@ -21,8 +21,8 @@ describe("addNewsletter", () => {
       ...userData,
       user: {
         ...userData.user,
-        externalStatus: { ...userData.user.externalStatus, newsletter: { success: true, status: "SUCCESS" } },
-      },
+        externalStatus: { ...userData.user.externalStatus, newsletter: { success: true, status: "SUCCESS" } }
+      }
     });
   });
 });

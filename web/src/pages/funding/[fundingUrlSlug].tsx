@@ -98,15 +98,15 @@ export const getStaticPaths = (): GetStaticPathsResult<FundingUrlSlugParam> => {
   const paths = loadAllFundingUrlSlugs();
   return {
     paths,
-    fallback: false,
+    fallback: false
   };
 };
 
 export const getStaticProps = ({ params }: { params: FundingUrlSlugParam }): GetStaticPropsResult<Props> => {
   return {
     props: {
-      funding: loadFundingByUrlSlug(params.fundingUrlSlug),
-    },
+      funding: loadFundingByUrlSlug(params.fundingUrlSlug)
+    }
   };
 };
 

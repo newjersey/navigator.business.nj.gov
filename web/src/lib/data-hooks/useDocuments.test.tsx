@@ -8,7 +8,7 @@ const mockGetSignedS3Link = (sessionHelper as jest.Mocked<typeof sessionHelper>)
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/auth/sessionHelper", () => ({
-  getSignedS3Link: jest.fn((url) => `${url}`),
+  getSignedS3Link: jest.fn((url) => `${url}`)
 }));
 
 describe("useDocuments", () => {
@@ -25,7 +25,7 @@ describe("useDocuments", () => {
       documents: undefined,
       checkData: (): Promise<void> => {
         return Promise.resolve();
-      },
+      }
     };
     function TestComponent(): null {
       Object.assign(returnVal, useDocuments());
@@ -37,7 +37,7 @@ describe("useDocuments", () => {
 
   it("generates documents on load", async () => {
     useMockProfileData({
-      documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
+      documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" }
     });
     setupHook();
     await waitFor(() => {
@@ -50,7 +50,7 @@ describe("useDocuments", () => {
 
   it("regenerates documents when calling checkData", async () => {
     useMockProfileData({
-      documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
+      documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" }
     });
     const { checkData } = setupHook();
     checkData();
@@ -62,7 +62,7 @@ describe("useDocuments", () => {
   it("regenerates documents every 15 minutes", async () => {
     jest.useFakeTimers();
     useMockProfileData({
-      documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
+      documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" }
     });
     act(() => {
       setupHook();
@@ -87,7 +87,7 @@ describe("useDocuments", () => {
   it("does not regenerate documents before 15 minutes", async () => {
     jest.useFakeTimers();
     useMockProfileData({
-      documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
+      documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" }
     });
     act(() => {
       setupHook();

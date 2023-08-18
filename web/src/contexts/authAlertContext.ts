@@ -19,5 +19,5 @@ export const AuthAlertContext = createContext<AuthAlertContextType>({
   setRegistrationAlertStatus: () => {},
   setRegistrationAlertIsVisible: () => {},
   registrationModalIsVisible: false,
-  setRegistrationModalIsVisible: () => {},
+  setRegistrationModalIsVisible: () => {}
 });

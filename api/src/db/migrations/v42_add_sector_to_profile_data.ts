@@ -18,9 +18,9 @@ export const migrate_v41_to_v42 = (v41Data: v41UserData): v42UserData => {
     ...v41Data,
     profileData: {
       ...v41Data.profileData,
-      sectorId: undefined,
+      sectorId: undefined
     },
-    version: 42,
+    version: 42
   };
 };
 
@@ -149,7 +149,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v42FormationData {
@@ -242,7 +242,7 @@ export const generatev42User = (overrides: Partial<v42BusinessUser>): v42Busines
     receiveNewsletter: false,
     userTesting: false,
     externalStatus: {},
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -256,7 +256,7 @@ export const generatev42ProfileData = (overrides: Partial<v42ProfileData>): v42P
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`,
+      id: `some-id-${randomInt()}`
     },
     liquorLicense: true,
     homeBasedBusiness: true,
@@ -270,7 +270,7 @@ export const generatev42ProfileData = (overrides: Partial<v42ProfileData>): v42P
     existingEmployees: undefined,
     taxPin: undefined,
     sectorId: undefined,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -305,6 +305,6 @@ export const generatev42FormationFormData = (
     contactFirstName: "",
     contactLastName: "",
     contactPhoneNumber: "",
-    ...overrides,
+    ...overrides
   };
 };

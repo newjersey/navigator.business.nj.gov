@@ -13,11 +13,11 @@ const BusinessStructurePreview = (props: PreviewProps): ReactElement => {
 
   const task = generateTask({
     name: "Name is controlled by Task Metadata",
-    contentMd: "Body content is controlled by Task Metadata\n\n---",
+    contentMd: "Body content is controlled by Task Metadata\n\n---"
   });
 
   const missingLegalStructure = generateBusiness({
-    profileData: generateProfileData({ legalStructureId: undefined }),
+    profileData: generateProfileData({ legalStructureId: undefined })
   });
 
   return (

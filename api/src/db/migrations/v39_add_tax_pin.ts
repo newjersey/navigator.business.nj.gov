@@ -16,7 +16,7 @@ export const migrate_v38_to_v39 = (v38Data: v38UserData): v39UserData => {
   return {
     ...v38Data,
     profileData: { ...v38Data.profileData, taxPin: undefined },
-    version: 39,
+    version: 39
   };
 };
 
@@ -147,7 +147,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v39FormationData {

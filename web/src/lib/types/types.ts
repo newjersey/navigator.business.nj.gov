@@ -17,7 +17,7 @@ import {
   SectionType,
   TaskProgress,
   TaxFilingData,
-  UserData,
+  UserData
 } from "@businessnjgovnavigator/shared/";
 import { LicenseEventSubtype } from "@businessnjgovnavigator/shared/taxFiling";
 import { Business } from "@businessnjgovnavigator/shared/userData";
@@ -51,7 +51,7 @@ export const createEmptyTaskWithoutLinks = (): TaskWithoutLinks => {
     required: undefined,
     agencyId: undefined,
     agencyAdditionalContext: undefined,
-    formName: undefined,
+    formName: undefined
   };
 };
 
@@ -59,13 +59,13 @@ export const createEmptyDbaDisplayContent = (): FormationDbaContent => {
   return {
     Authorize: createEmptyTaskWithoutLinks(),
     DbaResolution: createEmptyTaskWithoutLinks(),
-    Formation: createEmptyTaskWithoutLinks(),
+    Formation: createEmptyTaskWithoutLinks()
   };
 };
 
 export const createEmptyTaskDisplayContent = (): TasksDisplayContent => {
   return {
-    formationDbaContent: createEmptyDbaDisplayContent(),
+    formationDbaContent: createEmptyDbaDisplayContent()
   };
 };
 
@@ -109,10 +109,13 @@ export type ReducedFieldStates<K extends string | number | symbol, FieldError = 
 export const createReducedFieldStates = <K extends string | number | symbol, FieldError = FieldErrorType>(
   fields: K[]
 ): ReducedFieldStates<K, FieldError> => {
-  return fields.reduce((p, c: K) => {
-    p[c] = { invalid: false };
-    return p;
-  }, {} as ReducedFieldStates<K, FieldError>);
+  return fields.reduce(
+    (p, c: K) => {
+      p[c] = { invalid: false };
+      return p;
+    },
+    {} as ReducedFieldStates<K, FieldError>
+  );
 };
 
 const allProfileFields = Object.keys(profileFieldsFromConfig) as ProfileFields[];
@@ -121,7 +124,7 @@ const businessUserDisplayFields = Object.keys(emptyBusinessUser) as (keyof Busin
 const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
 
 export const profileFields: ProfileFields[] = [
-  ...new Set([...allProfileFields, ...onboardingDataFields, ...businessUserDisplayFields]),
+  ...new Set([...allProfileFields, ...onboardingDataFields, ...businessUserDisplayFields])
 ] as ProfileFields[];
 
 export const createProfileFieldErrorMap = <FieldError>(): ReducedFieldStates<ProfileFields, FieldError> =>
@@ -216,7 +219,7 @@ export const FundingStatusOrder: Record<FundingStatus, number> = {
   deadline: 0,
   "first come, first serve": 1,
   closed: 4,
-  "opening soon": 4,
+  "opening soon": 4
 };
 export type FundingProgramFrequency = "annual" | "ongoing" | "reoccuring" | "one-time" | "pilot" | "other";
 export type FundingBusinessStage = "early-stage" | "operating" | "both";
@@ -245,7 +248,7 @@ export const AllCounties = [
   "Somerset",
   "Sussex",
   "Union",
-  "Warren",
+  "Warren"
 ];
 
 export type County =
@@ -358,7 +361,7 @@ export const taxFilingMethod = [
   "online",
   "paper-or-by-mail-only",
   "online-required",
-  "online-or-phone",
+  "online-or-phone"
 ] as const;
 export type TaxFilingMethod = (typeof taxFilingMethod)[number];
 

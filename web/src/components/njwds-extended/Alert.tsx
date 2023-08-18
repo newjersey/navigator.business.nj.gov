@@ -30,7 +30,7 @@ export const Alert = (props: Props): ReactElement => {
     borderRight,
     borderSmall,
     noIconClass,
-    props.className ?? "",
+    props.className ?? ""
   ]
     .map((i) => {
       return i?.trim();

@@ -35,7 +35,7 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
         style={{
           textAlign: "center",
           backgroundColor: "#538200",
-          color: "white",
+          color: "white"
         }}
       >
         <IconButton
@@ -45,7 +45,7 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
             position: "absolute",
             right: 8,
             top: 8,
-            color: "#757575",
+            color: "#757575"
           }}
         >
           <Icon className="usa-icon--size-4">close</Icon>
@@ -65,7 +65,7 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
               fontWeight: 400,
               fontSize: "20px",
               lineHeight: "23.5px",
-              letterSpacing: "2.5%",
+              letterSpacing: "2.5%"
             }}
           >
             {Config.dashboardDefaults.congratulatoryModalHeader}
@@ -84,7 +84,7 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
                     fontSize: "20px",
                     lineHeight: "23.5px",
                     letterSpacing: "2.5%",
-                    cursor: "pointer",
+                    cursor: "pointer"
                   }}
                 >
                   {publicName} {Config.dashboardDefaults.congratulatoryModalLinkText}

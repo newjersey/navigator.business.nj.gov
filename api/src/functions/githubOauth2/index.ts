@@ -10,10 +10,10 @@ export default (vpcConfig: FnType["vpc"]): FnType => {
         http: {
           method: "get",
           path: "/api/cms/{proxy+}",
-          cors: true,
-        },
-      },
+          cors: true
+        }
+      }
     ],
-    vpc: vpcConfig,
+    vpc: vpcConfig
   };
 };

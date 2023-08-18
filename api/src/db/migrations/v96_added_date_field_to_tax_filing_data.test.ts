@@ -26,9 +26,9 @@ describe("migrate_v95_to_v96", () => {
       taxFilingData: {
         ...v95.taxFilingData,
         registered: undefined,
-        registeredISO: currentDate.toISOString(),
+        registeredISO: currentDate.toISOString()
       },
-      version: 96,
+      version: 96
     });
   });
 });

@@ -52,7 +52,7 @@ export const StateDropdown = (props: Props): ReactElement => {
     trim: true,
     stringify: (option: StateObject) => {
       return props.useFullName ? option.name : option.shortCode;
-    },
+    }
   });
 
   const filteredStates = (): StateObject[] =>
@@ -109,7 +109,7 @@ export const StateDropdown = (props: Props): ReactElement => {
             inputProps={{
               "aria-label": camelCaseToSentence(props.fieldName),
               "data-testid": props.fieldName,
-              ...params.inputProps,
+              ...params.inputProps
             }}
             onSubmit={onValidation}
             autoComplete={props.autoComplete ? "address-level1" : "no"}

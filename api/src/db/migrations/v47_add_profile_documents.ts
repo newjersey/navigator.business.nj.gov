@@ -18,9 +18,9 @@ export const migrate_v46_to_v47 = (v46Data: v46UserData): v47UserData => {
     ...v46Data,
     profileData: {
       ...v46Data.profileData,
-      documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" },
+      documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" }
     },
-    version: 47,
+    version: 47
   };
 };
 
@@ -159,7 +159,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v47FormationData {

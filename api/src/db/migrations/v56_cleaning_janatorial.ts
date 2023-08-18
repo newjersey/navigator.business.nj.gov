@@ -23,9 +23,9 @@ export const migrate_v55_to_v56 = (v55Data: v55UserData): v56UserData => {
     ...v55Data,
     profileData: {
       ...v55Data.profileData,
-      industryId: newIndustryId,
+      industryId: newIndustryId
     },
-    version: 56,
+    version: 56
   };
 };
 
@@ -170,7 +170,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v56FormationData {

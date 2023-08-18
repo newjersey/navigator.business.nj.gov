@@ -1,7 +1,7 @@
 import {
   getCompletedTaskCount,
   getIncompleteTaskCount,
-  getTotalTaskCount,
+  getTotalTaskCount
 } from "@/lib/domain-logic/roadmapTaskCounters";
 import { generateRoadmap, generateTask } from "@/test/factories";
 import { generateBusiness } from "@businessnjgovnavigator/shared";
@@ -32,8 +32,8 @@ describe("Roadmap Task Counters", () => {
           generateTask({ required: false, id: "optionalTask1" }),
           generateTask({ required: true, id: "requiredTask2" }),
           generateTask({ required: false, id: "optionalTask2" }),
-          generateTask({ required: false, id: "optionalTask3" }),
-        ],
+          generateTask({ required: false, id: "optionalTask3" })
+        ]
       });
 
       const business = generateBusiness({
@@ -41,8 +41,8 @@ describe("Roadmap Task Counters", () => {
           optionalTask1: "COMPLETED",
           optionalTask2: "IN_PROGRESS",
           optionalTask3: "NOT_STARTED",
-          requiredTask1: "COMPLETED",
-        },
+          requiredTask1: "COMPLETED"
+        }
       });
 
       expect(getCompletedTaskCount(roadmap, business)).toEqual({ required: 1, optional: 1, total: 2 });
@@ -63,8 +63,8 @@ describe("Roadmap Task Counters", () => {
           generateTask({ required: false, id: "optionalTask1" }),
           generateTask({ required: true, id: "requiredTask2" }),
           generateTask({ required: false, id: "optionalTask2" }),
-          generateTask({ required: false, id: "optionalTask3" }),
-        ],
+          generateTask({ required: false, id: "optionalTask3" })
+        ]
       });
 
       const business = generateBusiness({
@@ -72,8 +72,8 @@ describe("Roadmap Task Counters", () => {
           optionalTask1: "COMPLETED",
           optionalTask2: "IN_PROGRESS",
           optionalTask3: "NOT_STARTED",
-          requiredTask1: "COMPLETED",
-        },
+          requiredTask1: "COMPLETED"
+        }
       });
 
       expect(getIncompleteTaskCount(roadmap, business)).toEqual({ required: 1, optional: 2, total: 3 });

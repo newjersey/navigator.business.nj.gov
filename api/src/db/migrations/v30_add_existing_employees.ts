@@ -16,9 +16,9 @@ export const migrate_v29_to_v30 = (v29Data: v29UserData): v30UserData => {
     ...v29Data,
     profileData: {
       ...v29Data.profileData,
-      existingEmployees: undefined,
+      existingEmployees: undefined
     },
-    version: 30,
+    version: 30
   };
 };
 

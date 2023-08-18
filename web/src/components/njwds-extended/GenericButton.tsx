@@ -61,7 +61,7 @@ export const GenericButton = forwardRef(function GenericButton(
     showDisabledClass,
     fullWidth,
     isVerticalPaddingRemoved,
-    isTextNoWrap,
+    isTextNoWrap
   ]
     .map((i) => {
       return i?.trim();

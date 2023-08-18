@@ -18,7 +18,7 @@ export const ProfileEmployerId = (props: Props): ReactElement => {
         inputWidth="default"
         fieldName={fieldName}
         validationText={templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {
-          length: "9",
+          length: "9"
         })}
         visualFilter={displayAsEin}
         maxLength={9}

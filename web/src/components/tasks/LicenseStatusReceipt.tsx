@@ -26,7 +26,7 @@ const pendingPermitTheme: PermitTheme = {
   textColor: "text-cyan",
   borderColor: "border-cyan",
   iconColor: "text-base-lighter",
-  headerIconColor: "text-cyan",
+  headerIconColor: "text-cyan"
 };
 
 const activePermitTheme: PermitTheme = {
@@ -35,7 +35,7 @@ const activePermitTheme: PermitTheme = {
   textColor: "text-success",
   borderColor: "border-success",
   iconColor: "text-success",
-  headerIconColor: "text-success",
+  headerIconColor: "text-success"
 };
 
 const grayPermitTheme: PermitTheme = {
@@ -44,7 +44,7 @@ const grayPermitTheme: PermitTheme = {
   textColor: "text-gray-50",
   borderColor: "border-gray-50",
   iconColor: "text-gray-50",
-  headerIconColor: "text-gray-50",
+  headerIconColor: "text-gray-50"
 };
 
 const LicenseStatusLookup: Record<LicenseStatus, string> = {
@@ -59,7 +59,7 @@ const LicenseStatusLookup: Record<LicenseStatus, string> = {
   DENIED: Config.licenseSearchTask.deniedPermitStatusText,
   VOLUNTARY_SURRENDER: Config.licenseSearchTask.voluntarySurrenderPermitStatusText,
   WITHDRAWN: Config.licenseSearchTask.withdrawnPermitStatusText,
-  UNKNOWN: "",
+  UNKNOWN: ""
 };
 
 export const LicenseStatusReceipt = (props: Props): ReactElement => {

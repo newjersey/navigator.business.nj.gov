@@ -17,7 +17,7 @@ export const WebserviceLicenseStatusClient = (
       .post(url, {
         zipCode: zipCode,
         businessName: name,
-        licenseType: licenseType,
+        licenseType: licenseType
       })
       .then((response) => {
         logWriter.LogInfo(
@@ -34,6 +34,6 @@ export const WebserviceLicenseStatusClient = (
   };
 
   return {
-    search,
+    search
   };
 };

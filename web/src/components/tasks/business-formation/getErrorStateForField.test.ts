@@ -17,7 +17,7 @@ import {
   getCurrentDate,
   getCurrentDateFormatted,
   publicFilingLegalTypes,
-  randomElementFromArray,
+  randomElementFromArray
 } from "@businessnjgovnavigator/shared";
 
 const Config = getMergedConfig();
@@ -29,7 +29,7 @@ describe("getErrorStateForField", () => {
       expect(
         getErrorStateForField({
           field: "businessName",
-          formationFormData,
+          formationFormData
         }).hasError
       ).toEqual(true);
     });
@@ -39,7 +39,7 @@ describe("getErrorStateForField", () => {
       expect(
         getErrorStateForField({
           field: "businessName",
-          formationFormData,
+          formationFormData
         }).hasError
       ).toEqual(true);
     });
@@ -73,7 +73,7 @@ describe("getErrorStateForField", () => {
       expect(
         getErrorStateForField({
           field: "businessName",
-          formationFormData,
+          formationFormData
         }).label
       ).toEqual(Config.formation.fields.businessName.errorInlineEmpty);
     });
@@ -83,7 +83,7 @@ describe("getErrorStateForField", () => {
       expect(
         getErrorStateForField({
           field: "businessName",
-          formationFormData,
+          formationFormData
         }).label
       ).toEqual(Config.formation.fields.businessName.errorInlineNeedsToSearch);
     });
@@ -95,7 +95,7 @@ describe("getErrorStateForField", () => {
         getErrorStateForField({
           field: "businessName",
           formationFormData,
-          businessNameAvailability,
+          businessNameAvailability
         }).label
       ).toEqual(Config.formation.fields.businessName.errorInlineUnavailable);
     });
@@ -107,7 +107,7 @@ describe("getErrorStateForField", () => {
         getErrorStateForField({
           field: "businessName",
           formationFormData,
-          businessNameAvailability,
+          businessNameAvailability
         }).label
       ).toEqual(Config.formation.fields.businessName.errorInlineUnavailable);
     });
@@ -119,7 +119,7 @@ describe("getErrorStateForField", () => {
         getErrorStateForField({
           field: "businessName",
           formationFormData,
-          businessNameAvailability,
+          businessNameAvailability
         }).label
       ).toEqual(Config.formation.fields.businessName.label);
     });
@@ -131,7 +131,7 @@ describe("getErrorStateForField", () => {
       expect(
         getErrorStateForField({
           field: "foreignDateOfFormation",
-          formationFormData,
+          formationFormData
         }).hasError
       ).toEqual(true);
     });
@@ -141,43 +141,43 @@ describe("getErrorStateForField", () => {
       expect(
         getErrorStateForField({
           field: "foreignDateOfFormation",
-          formationFormData,
+          formationFormData
         }).hasError
       ).toEqual(true);
     });
 
     it("has no error in the past", () => {
       const formationFormData = generateFormationFormData({
-        foreignDateOfFormation: getCurrentDate().subtract(1, "day").format(defaultDateFormat),
+        foreignDateOfFormation: getCurrentDate().subtract(1, "day").format(defaultDateFormat)
       });
       expect(
         getErrorStateForField({
           field: "foreignDateOfFormation",
-          formationFormData,
+          formationFormData
         }).hasError
       ).toEqual(false);
     });
 
     it("has no error if today", () => {
       const formationFormData = generateFormationFormData({
-        foreignDateOfFormation: getCurrentDateFormatted(defaultDateFormat),
+        foreignDateOfFormation: getCurrentDateFormatted(defaultDateFormat)
       });
       expect(
         getErrorStateForField({
           field: "foreignDateOfFormation",
-          formationFormData,
+          formationFormData
         }).hasError
       ).toEqual(false);
     });
 
     it("has no error if in the future", () => {
       const formationFormData = generateFormationFormData({
-        foreignDateOfFormation: getCurrentDate().add(1, "day").format(defaultDateFormat),
+        foreignDateOfFormation: getCurrentDate().add(1, "day").format(defaultDateFormat)
       });
       expect(
         getErrorStateForField({
           field: "foreignDateOfFormation",
-          formationFormData,
+          formationFormData
         }).hasError
       ).toEqual(false);
     });
@@ -187,7 +187,7 @@ describe("getErrorStateForField", () => {
       expect(
         getErrorStateForField({
           field: "foreignDateOfFormation",
-          formationFormData,
+          formationFormData
         }).label
       ).toEqual(Config.formation.fields.foreignDateOfFormation.error);
     });
@@ -199,7 +199,7 @@ describe("getErrorStateForField", () => {
       expect(
         getErrorStateForField({
           field: "businessStartDate",
-          formationFormData,
+          formationFormData
         }).hasError
       ).toEqual(true);
     });
@@ -209,31 +209,31 @@ describe("getErrorStateForField", () => {
       expect(
         getErrorStateForField({
           field: "businessStartDate",
-          formationFormData,
+          formationFormData
         }).hasError
       ).toEqual(true);
     });
 
     it("has error in the past", () => {
       const formationFormData = generateFormationFormData({
-        businessStartDate: getCurrentDate().subtract(1, "day").format(defaultDateFormat),
+        businessStartDate: getCurrentDate().subtract(1, "day").format(defaultDateFormat)
       });
       expect(
         getErrorStateForField({
           field: "businessStartDate",
-          formationFormData,
+          formationFormData
         }).hasError
       ).toEqual(true);
     });
 
     it("has no error if today", () => {
       const formationFormData = generateFormationFormData({
-        businessStartDate: getCurrentDateFormatted(defaultDateFormat),
+        businessStartDate: getCurrentDateFormatted(defaultDateFormat)
       });
       expect(
         getErrorStateForField({
           field: "businessStartDate",
-          formationFormData,
+          formationFormData
         }).hasError
       ).toEqual(false);
     });
@@ -249,14 +249,14 @@ describe("getErrorStateForField", () => {
             it(`has${error ? " " : " no "}error if in the future`, () => {
               const formationFormData = generateFormationFormData(
                 {
-                  businessStartDate: getCurrentDate().add(additionalDays, "day").format(defaultDateFormat),
+                  businessStartDate: getCurrentDate().add(additionalDays, "day").format(defaultDateFormat)
                 },
                 { legalStructureId }
               );
               expect(
                 getErrorStateForField({
                   field: "businessStartDate",
-                  formationFormData,
+                  formationFormData
                 }).hasError
               ).toEqual(error);
             });
@@ -268,7 +268,7 @@ describe("getErrorStateForField", () => {
         const legalStructureIds: FormationLegalType[] = [
           "limited-liability-company",
           "limited-liability-partnership",
-          "foreign-limited-liability-partnership",
+          "foreign-limited-liability-partnership"
         ];
         testFutureDates(legalStructureIds, 123, false);
       });
@@ -276,7 +276,7 @@ describe("getErrorStateForField", () => {
       describe("only current date", () => {
         const legalStructureIds: FormationLegalType[] = [
           "foreign-limited-partnership",
-          "foreign-limited-liability-company",
+          "foreign-limited-liability-company"
         ];
         testFutureDates(legalStructureIds, 1, true);
       });
@@ -296,7 +296,7 @@ describe("getErrorStateForField", () => {
 
     it("inserts label from config", () => {
       const formationFormData = generateFormationFormData({
-        businessStartDate: getCurrentDate().add(1, "day").format(defaultDateFormat),
+        businessStartDate: getCurrentDate().add(1, "day").format(defaultDateFormat)
       });
       expect(getErrorStateForField({ field: "businessStartDate", formationFormData }).label).toEqual(
         Config.formation.fields.businessStartDate.label
@@ -360,7 +360,7 @@ describe("getErrorStateForField", () => {
           const formationFormData = generateFormationFormData(
             {
               addressZipCode: "1231245",
-              businessLocationType: "INTL",
+              businessLocationType: "INTL"
             },
             { legalStructureId }
           );
@@ -373,7 +373,7 @@ describe("getErrorStateForField", () => {
           const formationFormData = generateFormationFormData(
             {
               addressZipCode: "12345678912",
-              businessLocationType: "INTL",
+              businessLocationType: "INTL"
             },
             { legalStructureId }
           );
@@ -386,7 +386,7 @@ describe("getErrorStateForField", () => {
           const formationFormData = generateFormationFormData(
             {
               addressZipCode: "123456789124",
-              businessLocationType: "INTL",
+              businessLocationType: "INTL"
             },
             { legalStructureId }
           );
@@ -430,7 +430,7 @@ describe("getErrorStateForField", () => {
         const formationFormData = generateFormationFormData(
           {
             addressLine1: "some-stuff",
-            addressZipCode: "",
+            addressZipCode: ""
           },
           { legalStructureId }
         );
@@ -444,7 +444,7 @@ describe("getErrorStateForField", () => {
         const formationFormData = generateFormationFormData(
           {
             addressZipCode: "",
-            addressMunicipality: generateMunicipality({}),
+            addressMunicipality: generateMunicipality({})
           },
           { legalStructureId }
         );
@@ -459,7 +459,7 @@ describe("getErrorStateForField", () => {
           {
             addressLine1: "some-stuff",
             addressMunicipality: generateMunicipality({}),
-            addressZipCode: "",
+            addressZipCode: ""
           },
           { legalStructureId }
         );
@@ -474,7 +474,7 @@ describe("getErrorStateForField", () => {
           {
             addressLine1: "",
             addressMunicipality: undefined,
-            addressZipCode: "",
+            addressZipCode: ""
           },
           { legalStructureId }
         );
@@ -548,7 +548,7 @@ describe("getErrorStateForField", () => {
       expect(errorState.label).toEqual(
         templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.agentEmail.label,
-          maxLen: "50",
+          maxLen: "50"
         })
       );
     });
@@ -571,7 +571,7 @@ describe("getErrorStateForField", () => {
 
     it("inserts label from config", () => {
       const formationFormData = generateFormationFormData({
-        agentOfficeAddressMunicipality: generateMunicipality({}),
+        agentOfficeAddressMunicipality: generateMunicipality({})
       });
       expect(
         getErrorStateForField({ field: "agentOfficeAddressMunicipality", formationFormData }).label
@@ -587,8 +587,8 @@ describe("getErrorStateForField", () => {
           const formationFormData = generateFormationFormData({
             [field]: [
               generator({ name: "", signature: true }),
-              generator({ name: "some-name", signature: true }),
-            ],
+              generator({ name: "some-name", signature: true })
+            ]
           });
           expect(getErrorStateForField({ field, formationFormData }).hasError).toEqual(true);
           expect(getErrorStateForField({ field, formationFormData }).label).toEqual(
@@ -598,7 +598,7 @@ describe("getErrorStateForField", () => {
 
         it(`has NAME-labelled error when some ${field} name is just whitespace`, () => {
           const formationFormData = generateFormationFormData({
-            [field]: [generator({ name: " ", signature: true })],
+            [field]: [generator({ name: " ", signature: true })]
           });
           expect(getErrorStateForField({ field, formationFormData }).hasError).toEqual(true);
           expect(getErrorStateForField({ field, formationFormData }).label).toEqual(
@@ -610,8 +610,8 @@ describe("getErrorStateForField", () => {
           const formationFormData = generateFormationFormData({
             [field]: [
               generator({ name: "some-name", signature: false }),
-              generator({ name: "some-name", signature: true }),
-            ],
+              generator({ name: "some-name", signature: true })
+            ]
           });
           expect(getErrorStateForField({ field, formationFormData }).hasError).toEqual(true);
           expect(getErrorStateForField({ field, formationFormData }).label).toEqual(
@@ -623,8 +623,8 @@ describe("getErrorStateForField", () => {
           const formationFormData = generateFormationFormData({
             [field]: [
               generator({ name: "some-name", signature: true }),
-              generator({ name: "some-name", signature: true, title: "" }),
-            ],
+              generator({ name: "some-name", signature: true, title: "" })
+            ]
           });
           expect(getErrorStateForField({ field, formationFormData }).hasError).toEqual(true);
           expect(getErrorStateForField({ field, formationFormData }).label).toEqual(
@@ -637,14 +637,14 @@ describe("getErrorStateForField", () => {
           const formationFormData = generateFormationFormData({
             [field]: [
               generator({ name: "some-name", signature: true }),
-              generator({ name: tooLongName, signature: true }),
-            ],
+              generator({ name: tooLongName, signature: true })
+            ]
           });
           expect(getErrorStateForField({ field, formationFormData }).hasError).toEqual(true);
           expect(getErrorStateForField({ field, formationFormData }).label).toEqual(
             templateEval(Config.formation.general.maximumLengthErrorText, {
               field: Config.formation.fields.signers.label,
-              maxLen: "50",
+              maxLen: "50"
             })
           );
         });
@@ -661,8 +661,8 @@ describe("getErrorStateForField", () => {
           const formationFormData = generateFormationFormData({
             [field]: [
               generator({ name: "", signature: true }),
-              generator({ name: "some-name", signature: false }),
-            ],
+              generator({ name: "some-name", signature: false })
+            ]
           });
           expect(getErrorStateForField({ field, formationFormData }).hasError).toEqual(true);
           expect(getErrorStateForField({ field, formationFormData }).label).toEqual(
@@ -674,8 +674,8 @@ describe("getErrorStateForField", () => {
           const formationFormData = generateFormationFormData({
             [field]: [
               generator({ name: "some-name", signature: true }),
-              generator({ name: "some-name", signature: true }),
-            ],
+              generator({ name: "some-name", signature: true })
+            ]
           });
           expect(getErrorStateForField({ field, formationFormData }).hasError).toEqual(false);
         });
@@ -684,8 +684,8 @@ describe("getErrorStateForField", () => {
           it(`has error if some incorporators missing city and municipality`, () => {
             const formationFormData = generateFormationFormData({
               incorporators: [
-                generateFormationIncorporator({ addressCity: "", addressMunicipality: undefined }),
-              ],
+                generateFormationIncorporator({ addressCity: "", addressMunicipality: undefined })
+              ]
             });
             expect(getErrorStateForField({ field: "incorporators", formationFormData }).hasError).toEqual(
               true
@@ -694,7 +694,7 @@ describe("getErrorStateForField", () => {
 
           it(`has error if some incorporators missing addressLine1`, () => {
             const formationFormData = generateFormationFormData({
-              incorporators: [generateFormationIncorporator({ addressLine1: "" })],
+              incorporators: [generateFormationIncorporator({ addressLine1: "" })]
             });
             expect(getErrorStateForField({ field: "incorporators", formationFormData }).hasError).toEqual(
               true
@@ -703,7 +703,7 @@ describe("getErrorStateForField", () => {
 
           it(`has error if some incorporators missing state`, () => {
             const formationFormData = generateFormationFormData({
-              incorporators: [generateFormationIncorporator({ addressState: undefined })],
+              incorporators: [generateFormationIncorporator({ addressState: undefined })]
             });
             expect(getErrorStateForField({ field: "incorporators", formationFormData }).hasError).toEqual(
               true
@@ -712,7 +712,7 @@ describe("getErrorStateForField", () => {
 
           it(`has error if some incorporators missing zip code`, () => {
             const formationFormData = generateFormationFormData({
-              incorporators: [generateFormationIncorporator({ addressZipCode: "" })],
+              incorporators: [generateFormationIncorporator({ addressZipCode: "" })]
             });
             expect(getErrorStateForField({ field: "incorporators", formationFormData }).hasError).toEqual(
               true
@@ -747,42 +747,42 @@ describe("getErrorStateForField", () => {
 
       const formationFormData = generateFormationFormData({
         legalType,
-        members: [generateFormationMember({})],
+        members: [generateFormationMember({})]
       });
       expect(getErrorStateForField({ field: "members", formationFormData }).hasError).toEqual(false);
     });
 
     it("has error if some members missing name", () => {
       const formationFormData = generateFormationFormData({
-        members: [generateFormationMember({ name: "" })],
+        members: [generateFormationMember({ name: "" })]
       });
       expect(getErrorStateForField({ field: "members", formationFormData }).hasError).toEqual(true);
     });
 
     it("has error if some members missing city and municipality", () => {
       const formationFormData = generateFormationFormData({
-        members: [generateFormationMember({ addressCity: "", addressMunicipality: undefined })],
+        members: [generateFormationMember({ addressCity: "", addressMunicipality: undefined })]
       });
       expect(getErrorStateForField({ field: "members", formationFormData }).hasError).toEqual(true);
     });
 
     it("has error if some members missing addressLine1", () => {
       const formationFormData = generateFormationFormData({
-        members: [generateFormationMember({ addressLine1: "" })],
+        members: [generateFormationMember({ addressLine1: "" })]
       });
       expect(getErrorStateForField({ field: "members", formationFormData }).hasError).toEqual(true);
     });
 
     it("has error if some members missing state", () => {
       const formationFormData = generateFormationFormData({
-        members: [generateFormationMember({ addressState: undefined })],
+        members: [generateFormationMember({ addressState: undefined })]
       });
       expect(getErrorStateForField({ field: "members", formationFormData }).hasError).toEqual(true);
     });
 
     it("has error if some members missing zip code", () => {
       const formationFormData = generateFormationFormData({
-        members: [generateFormationMember({ addressZipCode: "" })],
+        members: [generateFormationMember({ addressZipCode: "" })]
       });
       expect(getErrorStateForField({ field: "members", formationFormData }).hasError).toEqual(true);
     });
@@ -809,7 +809,7 @@ describe("getErrorStateForField", () => {
         expect(errorState.hasError).toEqual(true);
         const expectedLabel = templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.addressLine1.label,
-          maxLen: "35",
+          maxLen: "35"
         });
         expect(errorState.label).toEqual(expectedLabel);
       });
@@ -836,7 +836,7 @@ describe("getErrorStateForField", () => {
         );
         const expectedLabel = templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.addressLine1.label,
-          maxLen: "35",
+          maxLen: "35"
         });
 
         const errorState = getErrorStateForField({ field: "addressLine1", formationFormData });
@@ -858,7 +858,7 @@ describe("getErrorStateForField", () => {
         const formationFormData = generateFormationFormData(
           {
             addressLine1: "",
-            addressZipCode: "08100",
+            addressZipCode: "08100"
           },
           { legalStructureId }
         );
@@ -872,7 +872,7 @@ describe("getErrorStateForField", () => {
         const formationFormData = generateFormationFormData(
           {
             addressLine1: "",
-            addressMunicipality: generateMunicipality({}),
+            addressMunicipality: generateMunicipality({})
           },
           { legalStructureId }
         );
@@ -887,7 +887,7 @@ describe("getErrorStateForField", () => {
           {
             addressLine1: "",
             addressMunicipality: generateMunicipality({}),
-            addressZipCode: "08100",
+            addressZipCode: "08100"
           },
           { legalStructureId }
         );
@@ -902,7 +902,7 @@ describe("getErrorStateForField", () => {
           {
             addressLine1: "",
             addressMunicipality: undefined,
-            addressZipCode: "",
+            addressZipCode: ""
           },
           { legalStructureId }
         );
@@ -921,7 +921,7 @@ describe("getErrorStateForField", () => {
         const formationFormData = generateFormationFormData(
           {
             addressMunicipality: undefined,
-            addressZipCode: "08100",
+            addressZipCode: "08100"
           },
           { legalStructureId }
         );
@@ -935,7 +935,7 @@ describe("getErrorStateForField", () => {
         const formationFormData = generateFormationFormData(
           {
             addressLine1: "some-stuff",
-            addressMunicipality: undefined,
+            addressMunicipality: undefined
           },
           { legalStructureId }
         );
@@ -950,7 +950,7 @@ describe("getErrorStateForField", () => {
           {
             addressLine1: "some-stuff",
             addressMunicipality: undefined,
-            addressZipCode: "08100",
+            addressZipCode: "08100"
           },
           { legalStructureId }
         );
@@ -965,7 +965,7 @@ describe("getErrorStateForField", () => {
           {
             addressLine1: "",
             addressMunicipality: undefined,
-            addressZipCode: "",
+            addressZipCode: ""
           },
           { legalStructureId }
         );
@@ -989,8 +989,8 @@ describe("getErrorStateForField", () => {
         labelWhenMissing: Config.formation.fields.addressCity.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.addressCity.label,
-          maxLen: "30",
-        }),
+          maxLen: "30"
+        })
       },
       {
         field: "agentName",
@@ -998,8 +998,8 @@ describe("getErrorStateForField", () => {
         labelWhenMissing: Config.formation.fields.agentName.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.agentName.label,
-          maxLen: "50",
-        }),
+          maxLen: "50"
+        })
       },
       {
         field: "contactFirstName",
@@ -1007,8 +1007,8 @@ describe("getErrorStateForField", () => {
         labelWhenMissing: Config.formation.fields.contactFirstName.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.contactFirstName.label,
-          maxLen: "50",
-        }),
+          maxLen: "50"
+        })
       },
       {
         field: "contactLastName",
@@ -1016,8 +1016,8 @@ describe("getErrorStateForField", () => {
         labelWhenMissing: Config.formation.fields.contactLastName.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.contactLastName.label,
-          maxLen: "50",
-        }),
+          maxLen: "50"
+        })
       },
       {
         field: "agentOfficeAddressLine1",
@@ -1025,9 +1025,9 @@ describe("getErrorStateForField", () => {
         labelWhenMissing: Config.formation.fields.agentOfficeAddressLine1.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.agentOfficeAddressLine1.label,
-          maxLen: "35",
-        }),
-      },
+          maxLen: "35"
+        })
+      }
     ];
 
     for (const data of fieldData) {
@@ -1077,17 +1077,17 @@ describe("getErrorStateForField", () => {
         maxLen: 35,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.addressLine2.label,
-          maxLen: "35",
-        }),
+          maxLen: "35"
+        })
       },
       {
         field: "agentOfficeAddressLine2",
         maxLen: 35,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
           field: Config.formation.fields.agentOfficeAddressLine2.label,
-          maxLen: "35",
-        }),
-      },
+          maxLen: "35"
+        })
+      }
     ];
 
     for (const data of fieldData) {
@@ -1131,7 +1131,7 @@ describe("getErrorStateForField", () => {
       "nonprofitBoardMemberQualificationsSpecified",
       "nonprofitBoardMemberRightsSpecified",
       "nonprofitTrusteesMethodSpecified",
-      "nonprofitAssetDistributionSpecified",
+      "nonprofitAssetDistributionSpecified"
     ];
 
     const runTests = (hasErrorIfUndefined: FormationFields[], expectedLabel?: string): void => {
@@ -1179,7 +1179,7 @@ describe("getErrorStateForField", () => {
         getErrorStateForField({
           field,
           formationFormData,
-          foreignGoodStandingFile: undefined,
+          foreignGoodStandingFile: undefined
         }).hasError
       ).toEqual(true);
     });
@@ -1220,7 +1220,7 @@ describe("getErrorStateForField", () => {
       "nonprofitBoardMemberQualificationsTerms",
       "nonprofitBoardMemberRightsTerms",
       "nonprofitTrusteesMethodTerms",
-      "nonprofitAssetDistributionTerms",
+      "nonprofitAssetDistributionTerms"
     ];
 
     const runTests = (hasErrorIfEmpty: FormationFields[]): void => {

@@ -68,7 +68,7 @@ export const EinInput = (props: Props): ReactElement => {
         fieldName="employerId"
         error={isInvalid}
         validationText={templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {
-          length: LENGTH.toString(),
+          length: LENGTH.toString()
         })}
         numericProps={{ minLength: LENGTH, maxLength: LENGTH }}
         visualFilter={displayAsEin}

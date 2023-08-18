@@ -6,14 +6,14 @@ export default {
       name: "header",
       label: "Header Text",
       required: false,
-      widget: "string",
+      widget: "string"
     },
     {
       name: "body",
       label: "Body Text",
       required: true,
-      widget: "markdown",
-    },
+      widget: "markdown"
+    }
   ],
 
   pattern: /:::infoAlert[^:]+:::/g,
@@ -43,7 +43,7 @@ export default {
 
     return {
       header: headerValue,
-      body: body,
+      body: body
     };
   },
   // Function to create a text block from an instance of this component
@@ -59,5 +59,5 @@ export default {
       return `:::infoAlert{ header="${obj.header}" } \n ${obj.body ? obj.body.trim() : ""}\n:::`;
     }
     return `:::infoAlert \n ${obj.body ? obj.body.trim() : ""}\n:::`;
-  },
+  }
 };

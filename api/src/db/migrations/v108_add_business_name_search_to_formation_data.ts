@@ -20,9 +20,9 @@ export const migrate_v107_to_v108 = (v107Data: v107UserData): v108UserData => {
     ...v107Data,
     formationData: {
       ...v107Data.formationData,
-      businessNameSearch: undefined,
+      businessNameSearch: undefined
     },
-    version: 108,
+    version: 108
   };
 };
 
@@ -211,7 +211,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 type v108NameAvailabilityStatus =
@@ -337,7 +337,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY",
+  "LIMITED LIABILITY COMPANY"
 ] as const;
 
 const llpBusinessSuffix = [
@@ -346,7 +346,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P.",
+  "R.L.L.P."
 ] as const;
 
 export const lpBusinessSuffix = ["LIMITED PARTNERSHIP", "LP", "L.P."] as const;
@@ -361,7 +361,7 @@ const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC.",
+  "INC."
 ] as const;
 
 const foreignCorpBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
@@ -370,7 +370,7 @@ const AllBusinessSuffixes = [
   ...llcBusinessSuffix,
   ...llpBusinessSuffix,
   ...lpBusinessSuffix,
-  ...foreignCorpBusinessSuffix,
+  ...foreignCorpBusinessSuffix
 ] as const;
 
 type v108BusinessSuffix = (typeof AllBusinessSuffixes)[number];
@@ -412,7 +412,7 @@ export const generateV108User = (overrides: Partial<v108BusinessUser>): v108Busi
     myNJUserKey: undefined,
     intercomHash: undefined,
     abExperience: "ExperienceA",
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -425,7 +425,7 @@ export const generateV108FormationMember = (overrides: Partial<v108FormationMemb
     addressState: { shortCode: "123", name: "new-jersey" },
     addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
     addressCountry: `some-county`,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -435,7 +435,7 @@ export const generateV108Municipality = (overrides: Partial<v108Municipality>): 
     name: `some-name-${randomInt()}`,
     county: `some-county-${randomInt()}`,
     id: `some-id-${randomInt()}`,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -444,7 +444,7 @@ export const allFormationLegalTypes = [
   "limited-liability-company",
   "limited-partnership",
   "c-corporation",
-  "s-corporation",
+  "s-corporation"
 ];
 
 export const generateV108FormationFormData = (
@@ -496,7 +496,7 @@ export const generateV108FormationFormData = (
     getDistributionTerms: `some-getDistributionTerms-text-${randomInt()}`,
     canMakeDistribution: !!(randomInt() % 2),
     makeDistributionTerms: `some-makeDistributionTerms-text-${randomInt()}`,
-    ...overrides,
+    ...overrides
   } as v108FormationFormData;
 };
 
@@ -520,7 +520,7 @@ export const generateV108IndustrySpecificData = (
     petCareHousing: undefined,
     isInterstateLogisticsApplicable: undefined,
     isInterstateMovingApplicable: undefined,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -537,7 +537,7 @@ export const generateV108ProfileData = (overrides: Partial<v108ProfileData>): v1
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`,
+      id: `some-id-${randomInt()}`
     },
     dateOfFormation: undefined,
     entityId: randomInt(10).toString(),
@@ -549,7 +549,7 @@ export const generateV108ProfileData = (overrides: Partial<v108ProfileData>): v1
     documents: {
       certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
       formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
-      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
+      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`
     },
     existingEmployees: randomInt(7).toString(),
     taxPin: randomInt(4).toString(),
@@ -561,7 +561,7 @@ export const generateV108ProfileData = (overrides: Partial<v108ProfileData>): v1
     needsNexusDbaName: true,
     nexusLocationInNewJersey: undefined,
     operatingPhase: "NEEDS_TO_FORM",
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -573,7 +573,7 @@ export const generateV108TaxFilingData = (overrides: Partial<v108TaxFilingData>)
     lastUpdatedISO: undefined,
     registeredISO: undefined,
     filings: [],
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -587,7 +587,7 @@ export const generateV108FormationData = (
     getFilingResponse: undefined,
     completedFilingPayment: false,
     businessNameSearch: undefined,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -605,7 +605,7 @@ export const generateV108UserData = (overrides: Partial<v108UserData>): v108User
     lastUpdatedISO: "",
     taxFilingData: generateV108TaxFilingData({}),
     formationData: generateV108FormationData({}, profileData.legalStructureId ?? ""),
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -619,6 +619,6 @@ export const generateV108Preferences = (overrides: Partial<v108Preferences>): v1
     returnToLink: "",
     isCalendarFullView: true,
     isHideableRoadmapOpen: false,
-    ...overrides,
+    ...overrides
   };
 };

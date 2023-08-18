@@ -13,7 +13,7 @@ export const OnboardingHomeContractor = (): ReactElement => {
     getProfileConfig({
       config: Config,
       persona: state.flow,
-      fieldName: "homeContractor",
+      fieldName: "homeContractor"
     });
 
   return (

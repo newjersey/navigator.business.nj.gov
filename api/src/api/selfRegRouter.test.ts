@@ -22,12 +22,12 @@ describe("selfRegRouter", () => {
       findByEmail: jest.fn(),
       getNeedNewsletterUsers: jest.fn(),
       getNeedToAddToUserTestingUsers: jest.fn(),
-      getNeedTaxIdEncryptionUsers: jest.fn(),
+      getNeedTaxIdEncryptionUsers: jest.fn()
     };
 
     stubSelfRegClient = {
       grant: jest.fn(),
-      resume: jest.fn(),
+      resume: jest.fn()
     };
 
     app = setupExpress(false);

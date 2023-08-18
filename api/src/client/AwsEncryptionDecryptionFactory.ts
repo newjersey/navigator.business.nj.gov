@@ -23,7 +23,7 @@ export const AWSEncryptionDecryptionFactory = (
 
   const encryptValue = async (plainTextTaxId: string): Promise<string> => {
     const { result } = await encrypt(keyring, plainTextTaxId, {
-      encryptionContext: context,
+      encryptionContext: context
     });
     const base64TaxId = toBase64(result);
     return base64TaxId;

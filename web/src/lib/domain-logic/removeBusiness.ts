@@ -6,7 +6,7 @@ const removeKey = (key: string, { [key]: _, ...rest }) => rest;
 export const removeBusiness = ({
   userData,
   idToRemove,
-  newCurrentBusinessId,
+  newCurrentBusinessId
 }: {
   userData: UserData;
   idToRemove: string;
@@ -19,6 +19,6 @@ export const removeBusiness = ({
   return {
     ...userData,
     currentBusinessId: newCurrentBusinessId,
-    businesses: removeKey(idToRemove, userData.businesses),
+    businesses: removeKey(idToRemove, userData.businesses)
   };
 };

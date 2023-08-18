@@ -19,10 +19,10 @@ export const migrate_v35_to_v36 = (v35Data: v35UserData): v36UserData => {
       ...v35Data.formationData,
       formationFormData: {
         ...v35Data.formationData.formationFormData,
-        members: [],
-      },
+        members: []
+      }
     },
-    version: 36,
+    version: 36
   };
 };
 
@@ -151,7 +151,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v36FormationData {

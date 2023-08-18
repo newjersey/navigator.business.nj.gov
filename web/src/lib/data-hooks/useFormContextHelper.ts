@@ -42,7 +42,7 @@ export const useFormContextHelper = <
               ...reducer[field],
               invalid: payload.invalid,
               updated: true,
-              errorTypes: payload.errorTypes,
+              errorTypes: payload.errorTypes
             };
             return reducer;
           }, prevState);
@@ -53,8 +53,8 @@ export const useFormContextHelper = <
             ...prevState[payload.field],
             invalid: payload.invalid,
             updated: true,
-            errorTypes: payload.errorTypes,
-          },
+            errorTypes: payload.errorTypes
+          }
         };
       case FieldStateActionKind.RESET:
         return (Object.keys(prevState) as (keyof T)[]).reduce((reducer, field) => {
@@ -66,15 +66,15 @@ export const useFormContextHelper = <
           ...prevState,
           [payload.field]: {
             ...prevState[payload.field],
-            updated: false,
-          },
+            updated: false
+          }
         };
       case FieldStateActionKind.UNREGISTER:
         return {
           ...prevState,
           [payload.field]: {
-            ...initState[payload.field],
-          },
+            ...initState[payload.field]
+          }
         };
     }
   };
@@ -170,7 +170,7 @@ export const useFormContextHelper = <
     state: {
       fieldStates,
       runValidations: submitted || stagingTab !== undefined,
-      reducer: fieldStateDispatch,
-    },
+      reducer: fieldStateDispatch
+    }
   };
 };

@@ -34,8 +34,8 @@ describe("<OutageAlertBar />", () => {
     mockAxios.get.mockResolvedValue({
       data: generateOutageConfig({
         FEATURE_ENABLE_OUTAGE_ALERT_BAR: false,
-        OUTAGE_ALERT_TYPE: "ALL",
-      }),
+        OUTAGE_ALERT_TYPE: "ALL"
+      })
     });
     render(<OutageAlertBar />);
     await waitFor(() => {
@@ -47,8 +47,8 @@ describe("<OutageAlertBar />", () => {
     mockAxios.get.mockResolvedValue({
       data: generateOutageConfig({
         FEATURE_ENABLE_OUTAGE_ALERT_BAR: undefined,
-        OUTAGE_ALERT_TYPE: "ALL",
-      }),
+        OUTAGE_ALERT_TYPE: "ALL"
+      })
     });
     render(<OutageAlertBar />);
     await waitFor(() => {
@@ -61,8 +61,8 @@ describe("<OutageAlertBar />", () => {
       data: generateOutageConfig({
         FEATURE_ENABLE_OUTAGE_ALERT_BAR: true,
         OUTAGE_ALERT_TYPE: "ALL",
-        OUTAGE_ALERT_MESSAGE: "some cool message",
-      }),
+        OUTAGE_ALERT_MESSAGE: "some cool message"
+      })
     });
     render(<OutageAlertBar />);
     await waitFor(() => {
@@ -76,8 +76,8 @@ describe("<OutageAlertBar />", () => {
       data: generateOutageConfig({
         FEATURE_ENABLE_OUTAGE_ALERT_BAR: true,
         OUTAGE_ALERT_MESSAGE: undefined,
-        OUTAGE_ALERT_TYPE: "ALL",
-      }),
+        OUTAGE_ALERT_TYPE: "ALL"
+      })
     });
     render(<OutageAlertBar />);
     await waitFor(() => {
@@ -90,8 +90,8 @@ describe("<OutageAlertBar />", () => {
       mockAxios.get.mockResolvedValue({
         data: generateOutageConfig({
           FEATURE_ENABLE_OUTAGE_ALERT_BAR: true,
-          OUTAGE_ALERT_TYPE: undefined,
-        }),
+          OUTAGE_ALERT_TYPE: undefined
+        })
       });
       render(<OutageAlertBar />);
       await waitFor(() => {
@@ -104,8 +104,8 @@ describe("<OutageAlertBar />", () => {
         mockAxios.get.mockResolvedValue({
           data: generateOutageConfig({
             FEATURE_ENABLE_OUTAGE_ALERT_BAR: true,
-            OUTAGE_ALERT_TYPE: "ALL",
-          }),
+            OUTAGE_ALERT_TYPE: "ALL"
+          })
         });
       });
 
@@ -136,8 +136,8 @@ describe("<OutageAlertBar />", () => {
         mockAxios.get.mockResolvedValue({
           data: generateOutageConfig({
             FEATURE_ENABLE_OUTAGE_ALERT_BAR: true,
-            OUTAGE_ALERT_TYPE: "LOGGED_IN_ONLY",
-          }),
+            OUTAGE_ALERT_TYPE: "LOGGED_IN_ONLY"
+          })
         });
       });
 
@@ -168,8 +168,8 @@ describe("<OutageAlertBar />", () => {
         mockAxios.get.mockResolvedValue({
           data: generateOutageConfig({
             FEATURE_ENABLE_OUTAGE_ALERT_BAR: true,
-            OUTAGE_ALERT_TYPE: "UNREGISTERED_ONLY",
-          }),
+            OUTAGE_ALERT_TYPE: "UNREGISTERED_ONLY"
+          })
         });
       });
 

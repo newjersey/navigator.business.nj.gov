@@ -19,18 +19,18 @@ describe("Export page", () => {
     useMockRoadmap({
       steps: [
         generateStep({
-          stepNumber: 1,
+          stepNumber: 1
         }),
         generateStep({
-          stepNumber: 2,
-        }),
+          stepNumber: 2
+        })
       ],
       tasks: [
         generateTask({ stepNumber: 1, id: "one" }),
         generateTask({ stepNumber: 1, id: "two" }),
         generateTask({ stepNumber: 2, id: "three" }),
-        generateTask({ stepNumber: 2, id: "four" }),
-      ],
+        generateTask({ stepNumber: 2, id: "four" })
+      ]
     });
   });
 
@@ -55,7 +55,7 @@ describe("Export page", () => {
     expect(mockExportComponentsAsPDF).toHaveBeenCalledWith({
       componentIds: ["roadmap", "one", "two", "three", "four"],
       prePdfProcessingCallback: expect.any(Function),
-      postPdfProcessingCallback: expect.any(Function),
+      postPdfProcessingCallback: expect.any(Function)
     });
   });
 

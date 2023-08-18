@@ -4,7 +4,7 @@ import analyticsBase from "./analytics-base";
 jest.mock("@/lib/utils/analytics-base", () => ({
   sendEvent: jest.fn(),
   userUpdate: jest.fn(),
-  context: { calendar_view: undefined },
+  context: { calendar_view: undefined }
 }));
 
 const mockAnalyticsBase = analyticsBase as jest.Mocked<typeof analyticsBase>;
@@ -17,7 +17,7 @@ describe("analytics", () => {
     Object.defineProperty(window, "location", {
       configurable: true,
       enumerable: true,
-      value: new URL(window.location.href),
+      value: new URL(window.location.href)
     });
   });
 
@@ -25,7 +25,7 @@ describe("analytics", () => {
     Object.defineProperty(window, "location", {
       configurable: true,
       enumerable: true,
-      value: originalWindowLocation,
+      value: originalWindowLocation
     });
   });
 
@@ -35,7 +35,7 @@ describe("analytics", () => {
         analytics.eventRunner.track({
           event: "form_submits",
           form_name: "industry_essential_questions",
-          questions: { car_service_size: "large_size", certifiedInteriorDesigner: "yes" },
+          questions: { car_service_size: "large_size", certifiedInteriorDesigner: "yes" }
         });
 
         expect(mockAnalyticsBase.sendEvent).toHaveBeenNthCalledWith(1, {
@@ -44,7 +44,7 @@ describe("analytics", () => {
           hostname: "localhost",
           on_site_section: "landing_page",
           question: "car_service_size",
-          response: "large_size",
+          response: "large_size"
         });
 
         expect(mockAnalyticsBase.sendEvent).toHaveBeenNthCalledWith(2, {
@@ -53,7 +53,7 @@ describe("analytics", () => {
           hostname: "localhost",
           on_site_section: "landing_page",
           question: "certifiedInteriorDesigner",
-          response: "yes",
+          response: "yes"
         });
       });
     });
@@ -65,7 +65,7 @@ describe("analytics", () => {
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
           event: "account_clicks",
           hostname: "localhost",
-          on_site_section: "landing_page",
+          on_site_section: "landing_page"
         });
       });
 
@@ -75,7 +75,7 @@ describe("analytics", () => {
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
           event: "account_clicks",
           hostname: "localhost",
-          on_site_section: "onboarding_screen",
+          on_site_section: "onboarding_screen"
         });
       });
 
@@ -85,7 +85,7 @@ describe("analytics", () => {
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
           event: "account_clicks",
           hostname: "localhost",
-          on_site_section: "dashboard_screen",
+          on_site_section: "dashboard_screen"
         });
       });
 
@@ -95,7 +95,7 @@ describe("analytics", () => {
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
           event: "account_clicks",
           hostname: "localhost",
-          on_site_section: "profile_screen",
+          on_site_section: "profile_screen"
         });
       });
 
@@ -106,7 +106,7 @@ describe("analytics", () => {
           event: "account_clicks",
           hostname: "localhost",
           on_site_section: "generic_task_screen",
-          on_task_id: "evaluate-your-location",
+          on_task_id: "evaluate-your-location"
         });
       });
 
@@ -117,7 +117,7 @@ describe("analytics", () => {
           event: "account_clicks",
           hostname: "localhost",
           on_site_section: "business_formation_task",
-          on_task_id: "form-business-entity",
+          on_task_id: "form-business-entity"
         });
       });
 
@@ -128,7 +128,7 @@ describe("analytics", () => {
           event: "account_clicks",
           hostname: "localhost",
           on_site_section: "cannabis_task",
-          on_task_id: "conditional-permit-cannabis",
+          on_task_id: "conditional-permit-cannabis"
         });
       });
 
@@ -138,7 +138,7 @@ describe("analytics", () => {
         expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith({
           event: "account_clicks",
           hostname: "localhost",
-          on_site_section: "generic_filing_screen",
+          on_site_section: "generic_filing_screen"
         });
       });
 
@@ -149,7 +149,7 @@ describe("analytics", () => {
           event: "account_clicks",
           hostname: "localhost",
           on_site_section: "cannabis_task",
-          on_task_id: "conditional-permit-cannabis",
+          on_task_id: "conditional-permit-cannabis"
         });
       });
     });

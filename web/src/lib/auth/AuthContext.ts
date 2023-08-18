@@ -6,7 +6,7 @@ export type UserActionType = "LOGIN" | "LOGOUT" | "UPDATE_USER" | "LOGIN_GUEST" 
 export enum IsAuthenticated {
   TRUE = "TRUE",
   FALSE = "FALSE",
-  UNKNOWN = "UNKNOWN",
+  UNKNOWN = "UNKNOWN"
 }
 
 export interface AuthState {
@@ -31,27 +31,27 @@ export const authReducer: AuthReducer = (state: AuthState, action: AuthAction): 
     case "LOGIN":
       return {
         user: action.user,
-        isAuthenticated: IsAuthenticated.TRUE,
+        isAuthenticated: IsAuthenticated.TRUE
       };
     case "LOGIN_GUEST":
       return {
         user: action.user,
-        isAuthenticated: IsAuthenticated.FALSE,
+        isAuthenticated: IsAuthenticated.FALSE
       };
     case "UPDATE_GUEST":
       return {
         user: action.user,
-        isAuthenticated: IsAuthenticated.FALSE,
+        isAuthenticated: IsAuthenticated.FALSE
       };
     case "LOGOUT":
       return {
         user: undefined,
-        isAuthenticated: IsAuthenticated.FALSE,
+        isAuthenticated: IsAuthenticated.FALSE
       };
     case "UPDATE_USER":
       return {
         user: action.user,
-        isAuthenticated: IsAuthenticated.TRUE,
+        isAuthenticated: IsAuthenticated.TRUE
       };
   }
 };

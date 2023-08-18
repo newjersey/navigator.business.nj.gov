@@ -12,9 +12,9 @@ describe("shouldAddToUserTesting", () => {
     const userData = generateUserData({
       user: generateUser({
         externalStatus: generateExternalStatus({
-          userTesting: generateUserTestingResponse({ success: true }),
-        }),
-      }),
+          userTesting: generateUserTestingResponse({ success: true })
+        })
+      })
     });
     expect(shouldAddToUserTesting(userData)).toEqual(false);
   });
@@ -23,16 +23,16 @@ describe("shouldAddToUserTesting", () => {
     const userData = generateUserData({
       user: generateUser({
         externalStatus: generateExternalStatus({
-          userTesting: generateUserTestingResponse({ success: false }),
-        }),
-      }),
+          userTesting: generateUserTestingResponse({ success: false })
+        })
+      })
     });
     expect(shouldAddToUserTesting(userData)).toEqual(false);
   });
 
   it("does add for user-testing if no status exists yet", async () => {
     const userData = generateUserData({
-      user: generateUser({ externalStatus: {} }),
+      user: generateUser({ externalStatus: {} })
     });
     expect(shouldAddToUserTesting(userData)).toEqual(true);
   });

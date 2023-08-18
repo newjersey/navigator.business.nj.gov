@@ -8,7 +8,7 @@ export interface RightSidebarPageLayoutProps {
 
 export const RightSidebarPageLayout = ({
   mainContent,
-  sidebarContent,
+  sidebarContent
 }: RightSidebarPageLayoutProps): ReactElement => {
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 

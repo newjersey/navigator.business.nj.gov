@@ -65,7 +65,7 @@ export const MainBusinessUs = (): ReactElement => {
                       setFormationFormData((previousFormationData) => {
                         return {
                           ...previousFormationData,
-                          addressState: stateObject,
+                          addressState: stateObject
                         };
                       });
                       setFieldsInteracted(["addressState"]);

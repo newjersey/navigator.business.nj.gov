@@ -4,17 +4,17 @@
 import {
   clickDeferredSaveButton,
   completeBusinessStructureTask,
-  randomPublicFilingLegalStructure,
+  randomPublicFilingLegalStructure
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import {
   completeForeignBusinessOnboarding,
   completeForeignNexusBusinessOnboarding,
-  completeNewBusinessOnboarding,
+  completeNewBusinessOnboarding
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 import { updateNewBusinessProfilePage } from "@businessnjgovnavigator/cypress/support/helpers/helpers-profile";
 import {
   randomHomeBasedIndustry,
-  randomNonHomeBasedIndustry,
+  randomNonHomeBasedIndustry
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
 import { onDashboardPage } from "../support/page_objects/dashboardPage";
 import { onProfilePage } from "../support/page_objects/profilePage";
@@ -52,7 +52,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
 
         it("can provide location in profile", () => {
           updateNewBusinessProfilePage({
-            townDisplayName: "Allendale",
+            townDisplayName: "Allendale"
           });
 
           goToMercantileTask();
@@ -63,7 +63,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
       describe("when home-based business question does not exist", () => {
         beforeEach(() => {
           completeNewBusinessOnboarding({
-            industry: randomNonHomeBasedIndustry(),
+            industry: randomNonHomeBasedIndustry()
           });
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
         });
@@ -74,7 +74,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
       describe("when we answer No to home-based business question immediately", () => {
         beforeEach(() => {
           completeNewBusinessOnboarding({
-            industry: randomHomeBasedIndustry(),
+            industry: randomHomeBasedIndustry()
           });
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
           selectHomeBased(false);
@@ -86,7 +86,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
       describe("when we answer No to home-based business question after providing location", () => {
         beforeEach(() => {
           completeNewBusinessOnboarding({
-            industry: randomHomeBasedIndustry(),
+            industry: randomHomeBasedIndustry()
           });
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
         });
@@ -151,7 +151,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
         it("does not show home-based-business question", () => {
           completeForeignNexusBusinessOnboarding({
             industry: randomHomeBasedIndustry(),
-            locationInNewJersey: true,
+            locationInNewJersey: true
           });
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
           hasNonHomeBasedTasks();
@@ -163,7 +163,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
         it("shows and answers home-based-business deferred question", () => {
           completeForeignNexusBusinessOnboarding({
             industry: randomHomeBasedIndustry(),
-            locationInNewJersey: false,
+            locationInNewJersey: false
           });
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
 
@@ -175,7 +175,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
         it("does not show home-based-business question", () => {
           completeForeignNexusBusinessOnboarding({
             industry: randomNonHomeBasedIndustry(),
-            locationInNewJersey: true,
+            locationInNewJersey: true
           });
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
 
@@ -188,7 +188,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
         it("does not show home-based-business question", () => {
           completeForeignNexusBusinessOnboarding({
             industry: randomNonHomeBasedIndustry(),
-            locationInNewJersey: false,
+            locationInNewJersey: false
           });
           completeBusinessStructureTask({ legalStructureId: randomPublicFilingLegalStructure() });
 

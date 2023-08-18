@@ -25,7 +25,7 @@ class SlugControl extends Component<SlugProps, SlugState> {
     this.state = {
       entry_object,
       value: entry_object.slug,
-      _sel: 0,
+      _sel: 0
     };
   }
 

@@ -18,9 +18,9 @@ export const migrate_v23_to_v24 = (v23Data: v23UserData): v24UserData => {
     ...v23Data,
     taxFilingData: {
       entityIdStatus: "UNKNOWN" as v24EntityIdStatus,
-      filings: v23Data.taxFilings,
+      filings: v23Data.taxFilings
     },
-    version: 24,
+    version: 24
   };
 };
 
@@ -120,7 +120,7 @@ export const generatev24User = (overrides: Partial<v24BusinessUser>): v24Busines
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -133,7 +133,7 @@ export const generatev24ProfileData = (overrides: Partial<v24ProfileData>): v24P
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`,
+      id: `some-id-${randomInt()}`
     },
     liquorLicense: false,
     homeBasedBusiness: false,
@@ -143,6 +143,6 @@ export const generatev24ProfileData = (overrides: Partial<v24ProfileData>): v24P
     employerId: "",
     taxId: "",
     notes: `some-notes-${randomInt()}`,
-    ...overrides,
+    ...overrides
   };
 };

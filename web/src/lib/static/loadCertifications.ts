@@ -34,8 +34,8 @@ export const loadAllCertificationUrlSlugs = (): PathParams<CertificationUrlSlugP
   return fileNames.map((fileName) => {
     return {
       params: {
-        certificationUrlSlug: loadCertificationByFileName(fileName).urlSlug,
-      },
+        certificationUrlSlug: loadCertificationByFileName(fileName).urlSlug
+      }
     };
   });
 };

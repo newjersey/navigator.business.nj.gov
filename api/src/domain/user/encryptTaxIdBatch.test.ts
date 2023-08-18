@@ -18,7 +18,7 @@ describe("encryptTaxIdBatch", () => {
       findByEmail: jest.fn(),
       getNeedNewsletterUsers: jest.fn(),
       getNeedToAddToUserTestingUsers: jest.fn(),
-      getNeedTaxIdEncryptionUsers: jest.fn(),
+      getNeedTaxIdEncryptionUsers: jest.fn()
     };
     encryptTaxId = encryptTaxIdFactory(stubEncryptionDecryptionClient);
   });
@@ -32,14 +32,14 @@ describe("encryptTaxIdBatch", () => {
     stubUserDataClient.getNeedTaxIdEncryptionUsers.mockResolvedValue([
       generateUserDataForBusiness(
         generateBusiness({
-          profileData: generateProfileData({ taxId: "123456789000", encryptedTaxId: undefined }),
+          profileData: generateProfileData({ taxId: "123456789000", encryptedTaxId: undefined })
         })
       ),
       generateUserDataForBusiness(
         generateBusiness({
-          profileData: generateProfileData({ taxId: "000987654321", encryptedTaxId: undefined }),
+          profileData: generateProfileData({ taxId: "000987654321", encryptedTaxId: undefined })
         })
-      ),
+      )
     ]);
 
     const results = await encryptTaxIdBatch(encryptTaxId, stubUserDataClient);
@@ -57,14 +57,14 @@ describe("encryptTaxIdBatch", () => {
     stubUserDataClient.getNeedTaxIdEncryptionUsers.mockResolvedValue([
       generateUserDataForBusiness(
         generateBusiness({
-          profileData: generateProfileData({ taxId: "123456789000", encryptedTaxId: undefined }),
+          profileData: generateProfileData({ taxId: "123456789000", encryptedTaxId: undefined })
         })
       ),
       generateUserDataForBusiness(
         generateBusiness({
-          profileData: generateProfileData({ taxId: "000987654321", encryptedTaxId: undefined }),
+          profileData: generateProfileData({ taxId: "000987654321", encryptedTaxId: undefined })
         })
-      ),
+      )
     ]);
 
     const results = await encryptTaxIdBatch(encryptTaxId, stubUserDataClient);

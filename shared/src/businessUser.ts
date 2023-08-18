@@ -4,7 +4,7 @@ export const registrationStatusList = [
   "SUCCESS",
   "IN_PROGRESS",
   "RESPONSE_ERROR",
-  "DUPLICATE_ERROR",
+  "DUPLICATE_ERROR"
 ] as const;
 export type RegistrationStatus = (typeof registrationStatusList)[number];
 
@@ -36,13 +36,13 @@ export const emptyBusinessUser: BusinessUser = {
   userTesting: true,
   myNJUserKey: undefined,
   intercomHash: undefined,
-  abExperience: decideABExperience(),
+  abExperience: decideABExperience()
 };
 
 export const createEmptyUser = (abExperience?: ABExperience): BusinessUser => {
   return {
     ...emptyBusinessUser,
-    abExperience: abExperience ?? decideABExperience(),
+    abExperience: abExperience ?? decideABExperience()
   };
 };
 
@@ -75,5 +75,5 @@ export const newsletterStatusList = [
   "TOPIC_ERROR",
   "RESPONSE_FAIL",
   "RESPONSE_WARNING",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;

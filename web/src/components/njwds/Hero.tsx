@@ -23,14 +23,14 @@ export const Hero = (props: Props): ReactElement => {
   if (ABStorageFactory().getExperience() === "ExperienceB") {
     landingPageConfig = {
       ...Config.landingPage,
-      ...Config.landingPageExperienceB,
+      ...Config.landingPageExperienceB
     };
   }
 
   if (props.isWelcomePage) {
     landingPageConfig = {
       ...landingPageConfig,
-      ...Config.landingPageExperienceWelcome,
+      ...Config.landingPageExperienceWelcome
     };
   }
 

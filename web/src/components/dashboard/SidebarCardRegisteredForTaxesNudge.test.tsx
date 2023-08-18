@@ -6,19 +6,19 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData,
+  WithStatefulUserData
 } from "@/test/mock/withStatefulUserData";
 import { getCurrentDateISOString } from "@businessnjgovnavigator/shared/dateHelpers";
 import {
   Business,
   generateTaxFilingCalendarEvent,
   generateUserDataForBusiness,
-  taxTaskId,
+  taxTaskId
 } from "@businessnjgovnavigator/shared/index";
 import {
   generateBusiness,
   generateProfileData,
-  generateTaxFilingData,
+  generateTaxFilingData
 } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
@@ -53,13 +53,13 @@ describe("<SidebarCardRegisteredForTaxesNudge />", () => {
         profileData: generateProfileData({
           businessName: "",
           taxId: "",
-          legalStructureId: "limited-liability-partnership",
+          legalStructureId: "limited-liability-partnership"
         }),
         taxFilingData: generateTaxFilingData({
           registeredISO: getCurrentDateISOString(),
           filings: [generateTaxFilingCalendarEvent({})],
-          state: "SUCCESS",
-        }),
+          state: "SUCCESS"
+        })
       });
       renderWithBusiness(business);
 
@@ -69,15 +69,15 @@ describe("<SidebarCardRegisteredForTaxesNudge />", () => {
         ...business,
         taskProgress: {
           ...business.taskProgress,
-          [taxTaskId]: "COMPLETED",
-        },
+          [taxTaskId]: "COMPLETED"
+        }
       };
 
       await waitFor(() => {
         return expect(currentBusiness()).toEqual(updateBusiness);
       });
       expect(mockPush).toHaveBeenCalledWith({ query: { fromTaxRegistrationCard: "true" } }, undefined, {
-        shallow: true,
+        shallow: true
       });
     });
   });

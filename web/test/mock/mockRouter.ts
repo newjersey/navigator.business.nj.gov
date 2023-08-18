@@ -9,6 +9,6 @@ export const useMockRouter = (overrides: Partial<Router>): void => {
     back: mockPush,
     replace: mockPush,
     query: mockQuery,
-    ...overrides,
+    ...overrides
   });
 };

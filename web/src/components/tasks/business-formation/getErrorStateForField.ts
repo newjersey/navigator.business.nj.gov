@@ -2,7 +2,7 @@
 
 import {
   isBusinessStartDateValid,
-  isDateValid,
+  isDateValid
 } from "@/components/tasks/business-formation/business/BusinessDateValidators";
 import { getMergedConfig } from "@/contexts/configContext";
 import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
@@ -15,7 +15,7 @@ import {
   FormationFields,
   FormationFormData,
   InputFile,
-  NameAvailability,
+  NameAvailability
 } from "@businessnjgovnavigator/shared";
 
 export const getErrorStateForField = (inputParams: {
@@ -29,7 +29,7 @@ export const getErrorStateForField = (inputParams: {
 
   const errorState = {
     field: field,
-    label: (Config.formation.fields as any)[field].label,
+    label: (Config.formation.fields as any)[field].label
   };
 
   // foreignGoodStandingFile must be first in order to prevent type errors
@@ -37,7 +37,7 @@ export const getErrorStateForField = (inputParams: {
     return {
       ...errorState,
       label: Config.formation.fields.foreignGoodStandingFile.errorMessageRequired,
-      hasError: !foreignGoodStandingFile,
+      hasError: !foreignGoodStandingFile
     };
   }
 
@@ -51,7 +51,7 @@ export const getErrorStateForField = (inputParams: {
     } else if (isTooLong) {
       label = templateEval(Config.formation.general.maximumLengthErrorText, {
         field: (Config.formation.fields as any)[field].label,
-        maxLen: params.maxLen.toString(),
+        maxLen: params.maxLen.toString()
       });
     }
     return { ...errorState, label, hasError: !isValid };
@@ -112,7 +112,7 @@ export const getErrorStateForField = (inputParams: {
     "nonprofitBoardMemberQualificationsTerms",
     "nonprofitBoardMemberRightsTerms",
     "nonprofitTrusteesMethodTerms",
-    "nonprofitAssetDistributionTerms",
+    "nonprofitAssetDistributionTerms"
   ];
 
   const hasErrorIfUndefined: FormationFields[] = [
@@ -128,14 +128,14 @@ export const getErrorStateForField = (inputParams: {
     "nonprofitBoardMemberQualificationsSpecified",
     "nonprofitBoardMemberRightsSpecified",
     "nonprofitTrusteesMethodSpecified",
-    "nonprofitAssetDistributionSpecified",
+    "nonprofitAssetDistributionSpecified"
   ];
 
   if (field === "foreignStateOfFormation") {
     return {
       ...errorState,
       hasError: formationFormData.foreignStateOfFormation === undefined,
-      label: Config.formation.fields.foreignStateOfFormation.error,
+      label: Config.formation.fields.foreignStateOfFormation.error
     };
   }
 
@@ -165,7 +165,7 @@ export const getErrorStateForField = (inputParams: {
   if (field === "businessStartDate") {
     return {
       ...errorState,
-      hasError: !isBusinessStartDateValid(formationFormData.businessStartDate, formationFormData.legalType),
+      hasError: !isBusinessStartDateValid(formationFormData.businessStartDate, formationFormData.legalType)
     };
   }
 
@@ -173,7 +173,7 @@ export const getErrorStateForField = (inputParams: {
     return {
       ...errorState,
       hasError: !isDateValid(formationFormData.foreignDateOfFormation),
-      label: Config.formation.fields.foreignDateOfFormation.error,
+      label: Config.formation.fields.foreignDateOfFormation.error
     };
   }
 
@@ -200,7 +200,7 @@ export const getErrorStateForField = (inputParams: {
       return {
         ...errorState,
         hasError: true,
-        label: Config.formation.fields.signers.errorBannerMinimum,
+        label: Config.formation.fields.signers.errorBannerMinimum
       };
     } else if (someSignersMissingName) {
       return { ...errorState, hasError: true, label: Config.formation.fields.signers.errorBannerSignerName };
@@ -208,13 +208,13 @@ export const getErrorStateForField = (inputParams: {
       return {
         ...errorState,
         hasError: true,
-        label: Config.formation.fields.signers.errorBannerSignerTitle,
+        label: Config.formation.fields.signers.errorBannerSignerTitle
       };
     } else if (someSignersMissingCheckbox) {
       return {
         ...errorState,
         hasError: true,
-        label: Config.formation.fields.signers.errorBannerCheckbox,
+        label: Config.formation.fields.signers.errorBannerCheckbox
       };
     } else if (someSignersTooLong) {
       return {
@@ -222,8 +222,8 @@ export const getErrorStateForField = (inputParams: {
         hasError: true,
         label: templateEval(Config.formation.general.maximumLengthErrorText, {
           field: (Config.formation.fields as any)[field].label,
-          maxLen: SIGNER_NAME_MAX_LEN.toString(),
-        }),
+          maxLen: SIGNER_NAME_MAX_LEN.toString()
+        })
       };
     }
   }
@@ -234,7 +234,7 @@ export const getErrorStateForField = (inputParams: {
       return {
         ...errorState,
         hasError: true,
-        label: field,
+        label: field
       };
     } else {
       const allValid = formationFormData.members.every((it) => {
@@ -250,7 +250,7 @@ export const getErrorStateForField = (inputParams: {
       return {
         ...errorState,
         hasError: !allValid,
-        label: field,
+        label: field
       };
     }
   }
@@ -281,7 +281,7 @@ export const getErrorStateForField = (inputParams: {
 
     const partialAddressError = fieldWithAssociatedFields({
       associatedFields: ["addressMunicipality", "addressLine1"],
-      label: Config.formation.general.partialAddressErrorText,
+      label: Config.formation.general.partialAddressErrorText
     });
 
     inRange = isZipCodeNj(formationFormData[field]);
@@ -289,7 +289,7 @@ export const getErrorStateForField = (inputParams: {
     const inRangeError = {
       ...errorState,
       hasError: hasError,
-      label: Config.formation.fields.addressZipCode.error,
+      label: Config.formation.fields.addressZipCode.error
     };
     return combineErrorStates({ firstPriority: inRangeError, secondPriority: partialAddressError });
   }
@@ -302,7 +302,7 @@ export const getErrorStateForField = (inputParams: {
     const maxLengthError = fieldWithMaxLength({ required: false, maxLen: 35 });
     const partialAddressError = fieldWithAssociatedFields({
       associatedFields: ["addressMunicipality", "addressZipCode"],
-      label: Config.formation.general.partialAddressErrorText,
+      label: Config.formation.general.partialAddressErrorText
     });
 
     return combineErrorStates({ firstPriority: maxLengthError, secondPriority: partialAddressError });
@@ -311,7 +311,7 @@ export const getErrorStateForField = (inputParams: {
   if (field === "addressMunicipality") {
     return fieldWithAssociatedFields({
       associatedFields: ["addressLine1", "addressZipCode"],
-      label: Config.formation.general.partialAddressErrorText,
+      label: Config.formation.general.partialAddressErrorText
     });
   }
 
@@ -353,7 +353,7 @@ export const getErrorStateForField = (inputParams: {
       return {
         ...errorState,
         hasError: !emailIsValid,
-        label: Config.formation.fields.agentEmail.error,
+        label: Config.formation.fields.agentEmail.error
       };
     }
     return fieldWithMaxLength({ required: true, maxLen: 50 });

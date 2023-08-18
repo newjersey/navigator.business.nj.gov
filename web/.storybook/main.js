@@ -9,11 +9,11 @@ module.exports = {
     "storybook-addon-designs",
     "@storybook/addon-a11y",
     "storybook-addon-pseudo-states",
-    "@storybook/addon-interactions",
+    "@storybook/addon-interactions"
   ],
   framework: "@storybook/react",
   core: {
-    builder: "webpack5",
+    builder: "webpack5"
   },
   webpackFinal: async (config) => {
     config.resolve.alias = {
@@ -27,13 +27,13 @@ module.exports = {
       "@/styles": path.resolve(__dirname, "../src/styles"),
       "@/pages": path.resolve(__dirname, "../src/pages"),
       "@businessnjgovnavigator/content": path.resolve(__dirname, "../../content/src"),
-      "@businessnjgovnavigator/shared": path.resolve(__dirname, "../../shared/lib/shared/src"),
+      "@businessnjgovnavigator/shared": path.resolve(__dirname, "../../shared/lib/shared/src")
     };
     return config;
   },
   features: {
     emotionAlias: false,
-    interactionsDebugger: true,
+    interactionsDebugger: true
   },
-  staticDirs: ["../public"],
+  staticDirs: ["../public"]
 };

@@ -4,7 +4,7 @@ import {
   FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
-  useSetupInitialMocks,
+  useSetupInitialMocks
 } from "@/test/helpers/helpers-formation";
 import {
   fillText,
@@ -12,14 +12,14 @@ import {
   searchAndFail,
   searchAndGetValue,
   searchAndReject,
-  searchButton,
+  searchButton
 } from "@/test/helpers/helpersSearchBusinessName";
 import {
   castPublicFilingLegalTypeToFormationType,
   generateBusiness,
   generateFormationFormData,
   ProfileData,
-  PublicFilingLegalType,
+  PublicFilingLegalType
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";
@@ -27,7 +27,7 @@ import { fireEvent, screen, within } from "@testing-library/react";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    useMediaQuery: jest.fn()
   };
 }
 
@@ -39,14 +39,14 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn(),
+  searchBusinessName: jest.fn()
 }));
 
 const mockApi = api as jest.Mocked<typeof api>;
 
 describe("SearchBusinessNameForm", () => {
   const displayContent = {
-    formationDbaContent: generateFormationDbaContent({}),
+    formationDbaContent: generateFormationDbaContent({})
   };
 
   beforeEach(() => {
@@ -58,7 +58,7 @@ describe("SearchBusinessNameForm", () => {
     const profileData = generateFormationProfileData({
       ...initialProfileData,
       legalStructureId: "limited-liability-company",
-      businessPersona: "FOREIGN",
+      businessPersona: "FOREIGN"
     });
     const formationData = {
       formationFormData: generateFormationFormData(
@@ -67,7 +67,7 @@ describe("SearchBusinessNameForm", () => {
           legalStructureId: castPublicFilingLegalTypeToFormationType(
             profileData.legalStructureId as PublicFilingLegalType,
             profileData.businessPersona
-          ),
+          )
         }
       ),
       formationResponse: undefined,
@@ -75,7 +75,7 @@ describe("SearchBusinessNameForm", () => {
       completedFilingPayment: false,
       businessNameAvailability: undefined,
       dbaBusinessNameAvailability: undefined,
-      lastVisitedPageIndex: 0,
+      lastVisitedPageIndex: 0
     };
     return preparePage({ business: generateBusiness({ profileData, formationData }), displayContent });
   };
@@ -89,14 +89,14 @@ describe("SearchBusinessNameForm", () => {
 
   it("pre-fills the text field with the business name entered in profile", async () => {
     await getPageHelper({
-      businessName: "Best Pizza",
+      businessName: "Best Pizza"
     });
     expect(getSearchValue()).toEqual("Best Pizza");
   });
 
   it("types a new potential name", async () => {
     await getPageHelper({
-      businessName: "Best Pizza",
+      businessName: "Best Pizza"
     });
     fillText("My other new name");
     expect(getSearchValue()).toEqual("My other new name");

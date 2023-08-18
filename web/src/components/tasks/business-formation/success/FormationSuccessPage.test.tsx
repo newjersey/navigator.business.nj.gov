@@ -6,7 +6,7 @@ import {
   FormationLegalType,
   generateBusiness,
   GetFilingResponse,
-  ProfileData,
+  ProfileData
 } from "@businessnjgovnavigator/shared";
 import { generateFormationData, generateGetFilingResponse } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
@@ -34,7 +34,7 @@ describe("Formation - <FormationSuccessPage />", () => {
       formationData: generateFormationData(
         { getFilingResponse },
         profileData.legalStructureId as FormationLegalType
-      ),
+      )
     });
     render(<FormationSuccessPage business={business} />);
   };
@@ -43,7 +43,7 @@ describe("Formation - <FormationSuccessPage />", () => {
     setMockDocumentsResponse({
       formationDoc: "testForm.pdf",
       certifiedDoc: "testCert.pdf",
-      standingDoc: "testStand.pdf",
+      standingDoc: "testStand.pdf"
     });
     renderSuccessPage({});
     expect(screen.getByText(Config.formation.successPage.header)).toBeInTheDocument();

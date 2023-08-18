@@ -1,7 +1,11 @@
 // Drop Shadows
 
-$dropShadows: xs 4px 8px $base-extra-light, sm 6px 12px $base-lighter, md 8px 16px $base-lighter,
-  lg 10px 20px $base-lighter, xl 12px 24px $base-lighter;
+$dropShadows:
+  xs 4px 8px $base-extra-light,
+  sm 6px 12px $base-lighter,
+  md 8px 16px $base-lighter,
+  lg 10px 20px $base-lighter,
+  xl 12px 24px $base-lighter;
 
 .drop-shadow-none {
   box-shadow: 0 !important;

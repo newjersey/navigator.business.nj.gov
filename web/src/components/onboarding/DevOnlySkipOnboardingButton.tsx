@@ -15,7 +15,7 @@ export const DevOnlySkipOnboardingButton = (props: Props): ReactElement => {
     setProfileData({
       ...emptyProfileData,
       businessPersona: "STARTING",
-      industryId: "generic",
+      industryId: "generic"
     });
     props.setPage({ current: 2, previous: 1 });
     props.routeToPage(2);

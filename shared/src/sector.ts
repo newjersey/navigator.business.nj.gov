@@ -11,7 +11,7 @@ export const LookupSectorTypeById = (id: string): SectorType => {
       return x.id === id;
     }) ?? {
       id: "",
-      name: "",
+      name: ""
     }
   );
 };

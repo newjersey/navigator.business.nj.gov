@@ -50,14 +50,14 @@ export const createEmptyBusiness = (id?: string): Business => {
       returnToLink: "",
       isCalendarFullView: false,
       isHideableRoadmapOpen: false,
-      phaseNewlyChanged: true,
+      phaseNewlyChanged: true
     },
     taxFilingData: {
       state: undefined,
       businessName: undefined,
       lastUpdatedISO: undefined,
       registeredISO: undefined,
-      filings: [],
+      filings: []
     },
     formationData: {
       formationFormData: createEmptyFormationFormData(),
@@ -66,8 +66,8 @@ export const createEmptyBusiness = (id?: string): Business => {
       completedFilingPayment: false,
       businessNameAvailability: undefined,
       dbaBusinessNameAvailability: undefined,
-      lastVisitedPageIndex: 0,
-    },
+      lastVisitedPageIndex: 0
+    }
   };
 };
 
@@ -81,8 +81,8 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
     versionWhenCreated: CURRENT_VERSION,
     currentBusinessId: businessId,
     businesses: {
-      [businessId]: createEmptyBusiness(businessId),
-    },
+      [businessId]: createEmptyBusiness(businessId)
+    }
   };
 };
 

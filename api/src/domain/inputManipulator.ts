@@ -45,14 +45,14 @@ export const inputManipulator = (initial: string): InputManipulator => {
         "co",
         "a new jersey non profit corporation",
         "a limited dividend housing partnership",
-        "of new jersey",
+        "of new jersey"
       ]);
       return this;
     },
     makeLowerCase: function (): InputManipulator {
       this.value = this.value.toLowerCase();
       return this;
-    },
+    }
   };
 };
 

@@ -8,7 +8,7 @@ export const ProfileBusinessName = (
     <OnboardingField
       fieldName="businessName"
       fieldOptions={{
-        inputProps: { "data-testid": "businessName" },
+        inputProps: { "data-testid": "businessName" }
       }}
       inputWidth="default"
       {...props}

@@ -9,7 +9,7 @@ export const searchCertifications = (certifications: Certification[], term: stri
   for (const cert of certifications) {
     let match: Match = {
       filename: cert.filename,
-      snippets: [],
+      snippets: []
     };
 
     const content = cert.contentMd.toLowerCase();
@@ -26,12 +26,12 @@ export const searchCertifications = (certifications: Certification[], term: stri
     const labelledTexts = [
       { content: cta, label: "CTA Text" },
       { content: ctaLink, label: "CTA Link" },
-      { content: name, label: "Name" },
+      { content: name, label: "Name" }
     ];
 
     const listTexts = [
       { content: agencyIDs, label: "Agency ID" },
-      { content: agencyNames, label: "Agency Names" },
+      { content: agencyNames, label: "Agency Names" }
     ];
 
     match = findMatchInBlock(blockTexts, term, match);

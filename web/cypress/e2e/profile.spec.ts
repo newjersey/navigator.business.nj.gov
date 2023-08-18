@@ -3,20 +3,20 @@
 import {
   completeExistingBusinessOnboarding,
   completeForeignBusinessOnboarding,
-  completeNewBusinessOnboarding,
+  completeNewBusinessOnboarding
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 import {
   checkExistingBusinessProfilePage,
   checkNewBusinessProfilePage,
   updateExistingBusinessProfilePage,
   updateForeignBusinessProfilePage,
-  updateNewBusinessProfilePage,
+  updateNewBusinessProfilePage
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers-profile";
 import {
   homeBasedIndustries,
   liquorLicenseIndustries,
   randomHomeBasedIndustry,
-  randomNonHomeBasedIndustry,
+  randomNonHomeBasedIndustry
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
 import { arrayOfSectors, Industry, randomElementFromArray, randomInt } from "@businessnjgovnavigator/shared/";
 
@@ -42,17 +42,17 @@ describe("Profile [feature] [all] [group1]", () => {
       completeNewBusinessOnboarding({
         industry,
         liquorLicenseQuestion,
-        requiresCpa,
+        requiresCpa
       });
       updateNewBusinessProfilePage({
-        townDisplayName,
+        townDisplayName
       });
 
       checkNewBusinessProfilePage({
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
-        townDisplayName,
+        townDisplayName
       });
 
       const newBusinessName = `Generic Business Name ${randomInt()}`;
@@ -74,7 +74,7 @@ describe("Profile [feature] [all] [group1]", () => {
         homeBasedQuestion: newHomeBasedQuestion,
         employerId: newEmployerId,
         taxId: newTaxId,
-        notes: newNotes,
+        notes: newNotes
       });
     });
 
@@ -92,19 +92,19 @@ describe("Profile [feature] [all] [group1]", () => {
       completeNewBusinessOnboarding({
         industry,
         liquorLicenseQuestion,
-        requiresCpa,
+        requiresCpa
       });
 
       updateNewBusinessProfilePage({
         homeBasedQuestion: homeBasedQuestion,
-        townDisplayName,
+        townDisplayName
       });
 
       checkNewBusinessProfilePage({
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
-        townDisplayName,
+        townDisplayName
       });
     });
 
@@ -123,21 +123,21 @@ describe("Profile [feature] [all] [group1]", () => {
       completeNewBusinessOnboarding({
         industry,
         liquorLicenseQuestion,
-        requiresCpa,
+        requiresCpa
       });
 
       updateNewBusinessProfilePage({
-        townDisplayName,
+        townDisplayName
       });
 
       checkNewBusinessProfilePage({
         industry,
         liquorLicenseQuestion,
-        townDisplayName,
+        townDisplayName
       });
 
       updateNewBusinessProfilePage({
-        liquorLicenseQuestion: !liquorLicenseQuestion,
+        liquorLicenseQuestion: !liquorLicenseQuestion
       });
     });
   });
@@ -168,18 +168,18 @@ describe("Profile [feature] [all] [group1]", () => {
       employerId,
       taxId,
       notes,
-      taxPin,
+      taxPin
     });
   });
 
   it("onboards REMOTE_SELLER foreign business and updates profile data", () => {
     completeForeignBusinessOnboarding({
-      foreignBusinessTypeIds: ["revenueInNJ"],
+      foreignBusinessTypeIds: ["revenueInNJ"]
     });
 
     updateForeignBusinessProfilePage({
       taxId: randomInt(12).toString(),
-      notes: `Notes ${randomInt()}`,
+      notes: `Notes ${randomInt()}`
     });
   });
 });

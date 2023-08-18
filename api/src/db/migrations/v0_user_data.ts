@@ -78,33 +78,33 @@ export const generateV0FormData = (overrides: Partial<v0BusinessForm>): v0Busine
       firstName: `some-firstname-${randomInt()}`,
       lastName: `some-lastname-${randomInt()}`,
       email: `some-email-${randomInt()}`,
-      ...overrides.user,
+      ...overrides.user
     },
     businessType: {
       businessType: "restaurant",
-      ...overrides.businessType,
+      ...overrides.businessType
     },
     businessName: {
       businessName: `some-business-name-${randomInt()}`,
-      ...overrides.businessName,
+      ...overrides.businessName
     },
     businessDescription: {
       businessDescription: `some-description-${randomInt()}`,
-      ...overrides.businessDescription,
+      ...overrides.businessDescription
     },
     businessStructure: {
       businessStructure: "Sole Proprietorship",
-      ...overrides.businessStructure,
+      ...overrides.businessStructure
     },
     locations: {
       locations: [
         {
           zipCode: `some-zipcode-${randomInt()}`,
-          license: false,
-        },
+          license: false
+        }
       ],
-      ...overrides.locations,
-    },
+      ...overrides.locations
+    }
   };
 };
 
@@ -113,6 +113,6 @@ export const generateV0User = (overrides: Partial<v0BusinessUser>): v0BusinessUs
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
-    ...overrides,
+    ...overrides
   };
 };

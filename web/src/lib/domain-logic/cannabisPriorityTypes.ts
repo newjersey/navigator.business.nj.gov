@@ -4,12 +4,12 @@ export const priorityTypesObj: Record<PriorityType, string[]> = {
   impactZone: [
     "cannabis-business-in-impact-zone",
     "cannabis-owner-in-impact-zone",
-    "cannabis-employee-in-impact-zone",
+    "cannabis-employee-in-impact-zone"
   ],
   socialEquity: [
     "cannabis-economically-disadvantaged-social-equity",
-    "cannabis-criminal-offense-social-equity",
-  ],
+    "cannabis-criminal-offense-social-equity"
+  ]
 };
 
 export const noneOfTheAbovePriorityId = "cannabis-priority-status-none";

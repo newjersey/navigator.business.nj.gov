@@ -16,7 +16,7 @@ describe("search business name [feature] [all] [group2]", () => {
 
     completeForeignNexusBusinessOnboarding({
       industry,
-      locationInNewJersey: true,
+      locationInNewJersey: true
     });
 
     completeBusinessStructureTask({ legalStructureId });

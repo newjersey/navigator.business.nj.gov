@@ -18,7 +18,7 @@ describe("Industry Dropdown", () => {
 
     fireEvent.click(screen.getByLabelText("Industry"));
     fireEvent.change(screen.getByLabelText("Industry"), {
-      target: { value: searchTerm },
+      target: { value: searchTerm }
     });
 
     fireEvent.click(screen.getByLabelText("Industry"));

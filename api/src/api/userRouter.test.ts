@@ -16,7 +16,7 @@ import {
   getFirstAnnualFiling,
   getSecondAnnualFiling,
   getThirdAnnualFiling,
-  modifyCurrentBusiness,
+  modifyCurrentBusiness
 } from "@shared/test";
 import { UserData } from "@shared/userData";
 import dayjs from "dayjs";
@@ -30,7 +30,7 @@ import { userRouterFactory } from "./userRouter";
 
 jest.mock("jsonwebtoken", () => {
   return {
-    decode: jest.fn(),
+    decode: jest.fn()
   };
 });
 const mockJwt = jwt as jest.Mocked<typeof jwt>;
@@ -48,9 +48,9 @@ const cognitoPayload = ({ id }: { id: string }): any => {
         primary: "some-primary",
         providerName: "myNJ",
         providerType: "some-provider-type",
-        userId: id,
-      },
-    ],
+        userId: id
+      }
+    ]
   };
 };
 
@@ -74,7 +74,7 @@ describe("userRouter", () => {
       findByEmail: jest.fn(),
       getNeedNewsletterUsers: jest.fn(),
       getNeedToAddToUserTestingUsers: jest.fn(),
-      getNeedTaxIdEncryptionUsers: jest.fn(),
+      getNeedTaxIdEncryptionUsers: jest.fn()
     };
     stubUpdateLicenseStatus = jest.fn();
     stubUpdateRoadmapSidebarCards = jest.fn();
@@ -87,10 +87,10 @@ describe("userRouter", () => {
     });
     stubEncryptionDecryptionClient = {
       encryptValue: jest.fn(),
-      decryptValue: jest.fn(),
+      decryptValue: jest.fn()
     };
     stubTimeStampBusinessSearch = {
-      search: jest.fn(),
+      search: jest.fn()
     };
     app = setupExpress(false);
     app.use(
@@ -155,7 +155,7 @@ describe("userRouter", () => {
     describe("updating roadmap cards", () => {
       it("saves user data with updated cards", async () => {
         const userData = generateUserData({
-          user: generateUser({ id: "123" }),
+          user: generateUser({ id: "123" })
         });
         const updatedUserData = generateUserData({});
         stubUserDataClient.get.mockResolvedValue(userData);
@@ -191,8 +191,8 @@ describe("userRouter", () => {
         const userData = generateUserDataForBusiness(
           generateBusiness({
             licenseData: generateLicenseData({
-              lastUpdatedISO: fiftyNineMinutesAgo,
-            }),
+              lastUpdatedISO: fiftyNineMinutesAgo
+            })
           })
         );
         stubUserDataClient.get.mockResolvedValue(userData);
@@ -205,11 +205,11 @@ describe("userRouter", () => {
         const userData = generateUserDataForBusiness(
           generateBusiness({
             profileData: generateProfileData({
-              industryId: "home-contractor",
+              industryId: "home-contractor"
             }),
             licenseData: generateLicenseData({
-              lastUpdatedISO: sixtyOneMinutesAgo,
-            }),
+              lastUpdatedISO: sixtyOneMinutesAgo
+            })
           })
         );
         stubUserDataClient.get.mockResolvedValue(userData);
@@ -225,11 +225,11 @@ describe("userRouter", () => {
         const userData = generateUserDataForBusiness(
           generateBusiness({
             profileData: generateProfileData({
-              industryId: "home-contractor",
+              industryId: "home-contractor"
             }),
             licenseData: generateLicenseData({
-              lastUpdatedISO: sixtyOneMinutesAgo,
-            }),
+              lastUpdatedISO: sixtyOneMinutesAgo
+            })
           })
         );
         stubUserDataClient.get.mockResolvedValue(userData);
@@ -249,7 +249,7 @@ describe("userRouter", () => {
       it("does not update business name search if businessNameAvailability is undefined", async () => {
         const userData = generateUserDataForBusiness(
           generateBusiness({
-            formationData: generateFormationData({ businessNameAvailability: undefined }),
+            formationData: generateFormationData({ businessNameAvailability: undefined })
           })
         );
         stubUserDataClient.get.mockResolvedValue(userData);
@@ -264,9 +264,9 @@ describe("userRouter", () => {
             formationData: generateFormationData({
               businessNameAvailability: generateBusinessNameAvailability({
                 status: "AVAILABLE",
-                lastUpdatedTimeStamp: fiftyNineMinutesAgo,
-              }),
-            }),
+                lastUpdatedTimeStamp: fiftyNineMinutesAgo
+              })
+            })
           })
         );
         stubUserDataClient.get.mockResolvedValue(userData);
@@ -282,9 +282,9 @@ describe("userRouter", () => {
               completedFilingPayment: true,
               businessNameAvailability: generateBusinessNameAvailability({
                 status: "AVAILABLE",
-                lastUpdatedTimeStamp: fiftyNineMinutesAgo,
-              }),
-            }),
+                lastUpdatedTimeStamp: fiftyNineMinutesAgo
+              })
+            })
           })
         );
         stubUserDataClient.get.mockResolvedValue(userData);
@@ -300,16 +300,16 @@ describe("userRouter", () => {
               completedFilingPayment: false,
               businessNameAvailability: generateBusinessNameAvailability({
                 status: "AVAILABLE",
-                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-              }),
-            }),
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo
+              })
+            })
           })
         );
         stubUserDataClient.get.mockResolvedValue(userData);
         stubTimeStampBusinessSearch.search.mockResolvedValue(
           generateBusinessNameAvailability({
             status: "UNAVAILABLE",
-            similarNames: ["random-name"],
+            similarNames: ["random-name"]
           })
         );
 
@@ -333,16 +333,16 @@ describe("userRouter", () => {
               completedFilingPayment: false,
               businessNameAvailability: generateBusinessNameAvailability({
                 status: "AVAILABLE",
-                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-              }),
-            }),
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo
+              })
+            })
           })
         );
         stubUserDataClient.get.mockResolvedValue(userData);
         stubTimeStampBusinessSearch.search.mockResolvedValue(
           generateBusinessNameAvailability({
             status: "UNAVAILABLE",
-            similarNames: ["random-name"],
+            similarNames: ["random-name"]
           })
         );
 
@@ -366,9 +366,9 @@ describe("userRouter", () => {
               completedFilingPayment: false,
               businessNameAvailability: generateBusinessNameAvailability({
                 status: "AVAILABLE",
-                lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-              }),
-            }),
+                lastUpdatedTimeStamp: sixtyOneMinutesAgo
+              })
+            })
           })
         );
         stubUserDataClient.get.mockResolvedValue(userData);
@@ -387,12 +387,12 @@ describe("userRouter", () => {
             generateBusiness({
               profileData: generateProfileData({
                 businessPersona: "FOREIGN",
-                needsNexusDbaName: true,
+                needsNexusDbaName: true
               }),
               formationData: generateFormationData({
                 businessNameAvailability: undefined,
-                dbaBusinessNameAvailability: undefined,
-              }),
+                dbaBusinessNameAvailability: undefined
+              })
             })
           );
           stubUserDataClient.get.mockResolvedValue(userData);
@@ -406,14 +406,14 @@ describe("userRouter", () => {
             generateBusiness({
               profileData: generateProfileData({
                 businessPersona: "FOREIGN",
-                needsNexusDbaName: false,
+                needsNexusDbaName: false
               }),
               formationData: generateFormationData({
                 dbaBusinessNameAvailability: generateBusinessNameAvailability({
                   status: "AVAILABLE",
-                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-                }),
-              }),
+                  lastUpdatedTimeStamp: sixtyOneMinutesAgo
+                })
+              })
             })
           );
           stubUserDataClient.get.mockResolvedValue(userData);
@@ -427,21 +427,21 @@ describe("userRouter", () => {
             generateBusiness({
               profileData: generateProfileData({
                 businessPersona: "FOREIGN",
-                needsNexusDbaName: false,
+                needsNexusDbaName: false
               }),
               formationData: generateFormationData({
                 businessNameAvailability: generateBusinessNameAvailability({
                   status: "AVAILABLE",
-                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-                }),
-              }),
+                  lastUpdatedTimeStamp: sixtyOneMinutesAgo
+                })
+              })
             })
           );
           stubUserDataClient.get.mockResolvedValue(userData);
           stubTimeStampBusinessSearch.search.mockResolvedValue(
             generateBusinessNameAvailability({
               status: "UNAVAILABLE",
-              similarNames: ["random-name"],
+              similarNames: ["random-name"]
             })
           );
 
@@ -457,25 +457,25 @@ describe("userRouter", () => {
             generateBusiness({
               profileData: generateProfileData({
                 businessPersona: "FOREIGN",
-                needsNexusDbaName: false,
+                needsNexusDbaName: false
               }),
               formationData: generateFormationData({
                 businessNameAvailability: generateBusinessNameAvailability({
                   status: "AVAILABLE",
-                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
+                  lastUpdatedTimeStamp: sixtyOneMinutesAgo
                 }),
                 dbaBusinessNameAvailability: generateBusinessNameAvailability({
                   status: "AVAILABLE",
-                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-                }),
-              }),
+                  lastUpdatedTimeStamp: sixtyOneMinutesAgo
+                })
+              })
             })
           );
           stubUserDataClient.get.mockResolvedValue(userData);
           stubTimeStampBusinessSearch.search.mockResolvedValue(
             generateBusinessNameAvailability({
               status: "UNAVAILABLE",
-              similarNames: ["random-name"],
+              similarNames: ["random-name"]
             })
           );
 
@@ -492,26 +492,26 @@ describe("userRouter", () => {
             generateBusiness({
               profileData: generateProfileData({
                 businessPersona: "FOREIGN",
-                needsNexusDbaName: true,
+                needsNexusDbaName: true
               }),
               formationData: generateFormationData({
                 completedFilingPayment: false,
                 dbaBusinessNameAvailability: generateBusinessNameAvailability({
                   status: "AVAILABLE",
-                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
+                  lastUpdatedTimeStamp: sixtyOneMinutesAgo
                 }),
                 businessNameAvailability: generateBusinessNameAvailability({
                   status: "AVAILABLE",
-                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-                }),
-              }),
+                  lastUpdatedTimeStamp: sixtyOneMinutesAgo
+                })
+              })
             })
           );
           stubUserDataClient.get.mockResolvedValue(userData);
           stubTimeStampBusinessSearch.search.mockResolvedValue(
             generateBusinessNameAvailability({
               status: "UNAVAILABLE",
-              similarNames: ["random-name"],
+              similarNames: ["random-name"]
             })
           );
 
@@ -528,22 +528,22 @@ describe("userRouter", () => {
             generateBusiness({
               profileData: generateProfileData({
                 businessPersona: "FOREIGN",
-                needsNexusDbaName: true,
+                needsNexusDbaName: true
               }),
               formationData: generateFormationData({
                 completedFilingPayment: false,
                 dbaBusinessNameAvailability: generateBusinessNameAvailability({
                   status: "AVAILABLE",
-                  lastUpdatedTimeStamp: sixtyOneMinutesAgo,
-                }),
-              }),
+                  lastUpdatedTimeStamp: sixtyOneMinutesAgo
+                })
+              })
             })
           );
           stubUserDataClient.get.mockResolvedValue(userData);
           stubTimeStampBusinessSearch.search.mockResolvedValue(
             generateBusinessNameAvailability({
               status: "UNAVAILABLE",
-              similarNames: ["random-name"],
+              similarNames: ["random-name"]
             })
           );
 
@@ -588,7 +588,7 @@ describe("userRouter", () => {
       const dateOneDayAgo = dayjs().subtract(1, "day").toISOString();
       const userData = generateUserData({
         lastUpdatedISO: dateOneDayAgo,
-        user: generateUser({ id: "123" }),
+        user: generateUser({ id: "123" })
       });
       stubUserDataClient.put.mockResolvedValue(userData);
 
@@ -611,11 +611,11 @@ describe("userRouter", () => {
           profileData: generateProfileData({
             dateOfFormation: formationDate,
             entityId: undefined,
-            legalStructureId: "limited-liability-company",
+            legalStructureId: "limited-liability-company"
           }),
           taxFilingData: generateTaxFilingData({
-            filings: [],
-          }),
+            filings: []
+          })
         }),
         { user: generateUser({ id: "123" }) }
       );
@@ -631,7 +631,7 @@ describe("userRouter", () => {
         generateAnnualFilings([
           getFirstAnnualFiling(formationDate),
           getSecondAnnualFiling(formationDate),
-          getThirdAnnualFiling(formationDate),
+          getThirdAnnualFiling(formationDate)
         ])
       );
     });
@@ -641,7 +641,7 @@ describe("userRouter", () => {
       const newIndustryUserData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({ industryId: "cannabis" }),
-          taskItemChecklist: { "some-id": true },
+          taskItemChecklist: { "some-id": true }
         }),
         { user: generateUser({ id: "123" }) }
       );
@@ -650,8 +650,8 @@ describe("userRouter", () => {
         ...business,
         profileData: {
           ...business.profileData,
-          industryId: "home-contractor",
-        },
+          industryId: "home-contractor"
+        }
       }));
 
       stubUserDataClient.get.mockResolvedValue(updatedIndustryUserData);
@@ -673,7 +673,7 @@ describe("userRouter", () => {
       const newIndustryUserData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({ industryId: "cannabis" }),
-          taskItemChecklist: { "some-id": true },
+          taskItemChecklist: { "some-id": true }
         }),
         { user: generateUser({ id: "123" }) }
       );
@@ -726,13 +726,13 @@ describe("userRouter", () => {
         const formationData = generateFormationData({});
         const completedFormationData = {
           ...formationData,
-          getFilingResponse: generateGetFilingResponse({ success: true }),
+          getFilingResponse: generateGetFilingResponse({ success: true })
         };
 
         const newLegalStructureUserData = generateUserDataForBusiness(
           generateBusiness({
             profileData: generateProfileData({ legalStructureId: "c-corporation" }),
-            formationData: completedFormationData,
+            formationData: completedFormationData
           }),
           { user: generateUser({ id: "123" }) }
         );
@@ -743,8 +743,8 @@ describe("userRouter", () => {
             ...business,
             profileData: {
               ...business.profileData,
-              legalStructureId: "limited-liability-company",
-            },
+              legalStructureId: "limited-liability-company"
+            }
           })
         );
 
@@ -774,8 +774,8 @@ describe("userRouter", () => {
             profileData: generateProfileData({ legalStructureId: "limited-liability-company" }),
             formationData: generateFormationData({
               formationResponse: generateFormationSubmitResponse({}),
-              getFilingResponse: generateGetFilingResponse({ success: false }),
-            }),
+              getFilingResponse: generateGetFilingResponse({ success: false })
+            })
           }),
           { user: generateUser({ id: "123" }) }
         );
@@ -786,8 +786,8 @@ describe("userRouter", () => {
           ...business,
           profileData: {
             ...business.profileData,
-            legalStructureId: "c-corporation",
-          },
+            legalStructureId: "c-corporation"
+          }
         }));
 
         stubUserDataClient.put.mockResolvedValue(newUserData);
@@ -809,7 +809,7 @@ describe("userRouter", () => {
           formationResponse: undefined,
           getFilingResponse: undefined,
           completedFilingPayment: false,
-          lastVisitedPageIndex: 0,
+          lastVisitedPageIndex: 0
         });
       });
     });
@@ -820,7 +820,7 @@ describe("userRouter", () => {
         stubEncryptionDecryptionClient.encryptValue.mockResolvedValue("my cool encrypted value");
 
         const oldUserData = generateUserData({
-          user: generateUser({ id: "123" }),
+          user: generateUser({ id: "123" })
         });
 
         const updatedUserData = generateUserDataForBusiness(
@@ -828,8 +828,8 @@ describe("userRouter", () => {
             profileData: generateProfileData({
               ...getCurrentBusiness(oldUserData).profileData,
               taxId: "123456789123",
-              encryptedTaxId: undefined,
-            }),
+              encryptedTaxId: undefined
+            })
           }),
           { user: oldUserData.user }
         );
@@ -843,7 +843,7 @@ describe("userRouter", () => {
         expect(profileDataPut).toEqual({
           ...getCurrentBusiness(updatedUserData).profileData,
           taxId: "*******89123",
-          encryptedTaxId: "my cool encrypted value",
+          encryptedTaxId: "my cool encrypted value"
         });
       });
 
@@ -853,8 +853,8 @@ describe("userRouter", () => {
         const oldUserData = generateUserDataForBusiness(
           generateBusiness({
             profileData: generateProfileData({
-              taxId: "*******89123",
-            }),
+              taxId: "*******89123"
+            })
           }),
           { user: generateUser({ id: "123" }) }
         );
@@ -863,8 +863,8 @@ describe("userRouter", () => {
           ...business,
           profileData: {
             ...business.profileData,
-            taxId: "*******89123",
-          },
+            taxId: "*******89123"
+          }
         }));
 
         stubUserDataClient.get.mockResolvedValue(oldUserData);

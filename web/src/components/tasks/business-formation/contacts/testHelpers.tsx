@@ -2,7 +2,7 @@ import { generateFormationDbaContent } from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
-  preparePage,
+  preparePage
 } from "@/test/helpers/helpers-formation";
 import {
   BusinessUser,
@@ -11,11 +11,11 @@ import {
   generateFormationFormData,
   generateUser,
   ProfileData,
-  PublicFilingLegalType,
+  PublicFilingLegalType
 } from "@businessnjgovnavigator/shared";
 
 export const displayContent = {
-  formationDbaContent: generateFormationDbaContent({}),
+  formationDbaContent: generateFormationDbaContent({})
 };
 
 export const getPageHelper = async (
@@ -30,23 +30,23 @@ export const getPageHelper = async (
       legalStructureId: castPublicFilingLegalTypeToFormationType(
         profileData.legalStructureId as PublicFilingLegalType,
         profileData.businessPersona
-      ),
+      )
     }),
     businessNameAvailability: undefined,
     dbaBusinessNameAvailability: undefined,
     formationResponse: undefined,
     getFilingResponse: undefined,
     completedFilingPayment: false,
-    lastVisitedPageIndex: 0,
+    lastVisitedPageIndex: 0
   };
   const user = initialUser ? generateUser(initialUser) : generateUser({});
   const page = preparePage({
     business: {
       profileData,
-      formationData,
+      formationData
     },
     displayContent,
-    user,
+    user
   });
 
   if (isForeign) {

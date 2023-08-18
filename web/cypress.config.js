@@ -14,13 +14,13 @@ export default defineConfig({
       accessibility: 89,
       "best-practices": 90,
       seo: 90,
-      pwa: 0,
-    },
+      pwa: 0
+    }
   },
   reporter: "junit",
   reporterOptions: {
     mochaFile: "cypress/results/web-tests-[hash].xml",
-    toConsole: true,
+    toConsole: true
   },
   e2e: {
     // We've imported your old cypress plugins here.
@@ -39,7 +39,7 @@ export default defineConfig({
         log(message) {
           console.log(message);
           return null;
-        },
+        }
       });
 
       config = dotenvPlugin(config);
@@ -49,8 +49,8 @@ export default defineConfig({
     specPattern: "cypress/e2e/**/*.{js,jsx,ts,tsx}",
     retries: {
       runMode: 2,
-      openMode: 0,
+      openMode: 0
     },
-    video: false,
-  },
+    video: false
+  }
 });

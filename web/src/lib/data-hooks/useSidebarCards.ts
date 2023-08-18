@@ -15,7 +15,7 @@ export const useSidebarCards = (): {
       });
     await updateQueue
       .queuePreferences({
-        visibleSidebarCards: [...allCardsExceptDesired, id],
+        visibleSidebarCards: [...allCardsExceptDesired, id]
       })
       .update();
   };
@@ -29,7 +29,7 @@ export const useSidebarCards = (): {
       });
     await updateQueue
       .queuePreferences({
-        visibleSidebarCards: [...allCardsExceptIdToHide],
+        visibleSidebarCards: [...allCardsExceptIdToHide]
       })
       .update();
   };

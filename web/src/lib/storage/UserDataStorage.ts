@@ -110,6 +110,6 @@ export const UserDataStorageFactory = (): UserDataStorage => {
     deleteCurrentUser,
     delete: _delete,
     setRegistrationStatus,
-    getRegistrationStatus,
+    getRegistrationStatus
   };
 };

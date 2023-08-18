@@ -18,9 +18,9 @@ export const migrate_v44_to_v45 = (v44Data: v44UserData): v45UserData => {
     preferences: {
       ...v44Data.preferences,
       hiddenCertificationIds: [],
-      hiddenFundingIds: [],
+      hiddenFundingIds: []
     },
-    version: 45,
+    version: 45
   };
 };
 
@@ -153,7 +153,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v45FormationData {

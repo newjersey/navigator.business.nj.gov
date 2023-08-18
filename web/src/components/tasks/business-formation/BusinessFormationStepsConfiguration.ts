@@ -5,7 +5,7 @@ export const BusinessFormationStepsConfiguration: { name: FormationStepNames; st
   { name: "Business", stepIndex: 1 },
   { name: "Contacts", stepIndex: 2 },
   { name: "Billing", stepIndex: 3 },
-  { name: "Review", stepIndex: 4 },
+  { name: "Review", stepIndex: 4 }
 ];
 
 export const LookupStepIndexByName = (name: FormationStepNames): number => {

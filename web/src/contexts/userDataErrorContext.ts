@@ -8,5 +8,5 @@ export interface UserDataErrorContextType {
 
 export const UserDataErrorContext = createContext<UserDataErrorContextType>({
   userDataError: undefined,
-  setUserDataError: () => {},
+  setUserDataError: () => {}
 });

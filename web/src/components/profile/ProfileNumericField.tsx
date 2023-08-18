@@ -14,11 +14,11 @@ export const ProfileNumericField = <T,>({ minLength, maxLength, ...props }: Prop
   const validationText =
     minLength === undefined
       ? templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {
-          length: maxLength.toString(),
+          length: maxLength.toString()
         })
       : templateEval(Config.onboardingDefaults.errorTextMinimumRangeNumericField, {
           min: minLength.toString(),
-          max: maxLength.toString(),
+          max: maxLength.toString()
         });
   return (
     <OnboardingField

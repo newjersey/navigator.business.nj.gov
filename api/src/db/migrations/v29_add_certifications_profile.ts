@@ -16,9 +16,9 @@ export const migrate_v28_to_v29 = (v28Data: v28UserData): v29UserData => {
     ...v28Data,
     profileData: {
       ...v28Data.profileData,
-      certificationIds: [],
+      certificationIds: []
     },
-    version: 29,
+    version: 29
   };
 };
 

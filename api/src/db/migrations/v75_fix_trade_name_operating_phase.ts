@@ -26,9 +26,9 @@ export const migrate_v74_to_v75 = (v74Data: v74UserData): v75UserData => {
     ...v74Data,
     profileData: {
       ...v74Data.profileData,
-      operatingPhase: newOperatingPhase,
+      operatingPhase: newOperatingPhase
     },
-    version: 75,
+    version: 75
   };
 };
 
@@ -192,7 +192,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v75FormationData {
@@ -257,7 +257,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY",
+  "LIMITED LIABILITY COMPANY"
 ] as const;
 
 const llpBusinessSuffix = [
@@ -266,7 +266,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P.",
+  "R.L.L.P."
 ] as const;
 
 export const corpBusinessSuffix = [
@@ -279,7 +279,7 @@ export const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC.",
+  "INC."
 ] as const;
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
@@ -321,7 +321,7 @@ export const generatev75User = (overrides: Partial<v75BusinessUser>): v75Busines
     abExperience: "ExperienceA",
     myNJUserKey: undefined,
     intercomHash: undefined,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -336,7 +336,7 @@ export const generatev75ProfileData = (overrides: Partial<v75ProfileData>): v75P
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`,
+      id: `some-id-${randomInt()}`
     },
     liquorLicense: true,
     requiresCpa: false,
@@ -352,7 +352,7 @@ export const generatev75ProfileData = (overrides: Partial<v75ProfileData>): v75P
     documents: {
       formationDoc: `some-formation-doc-${randomInt()}`,
       standingDoc: `some-standing-doc-${randomInt()}`,
-      certifiedDoc: `some-certified-doc-${randomInt()}`,
+      certifiedDoc: `some-certified-doc-${randomInt()}`
     },
     ownershipTypeIds: [],
     existingEmployees: undefined,
@@ -367,7 +367,7 @@ export const generatev75ProfileData = (overrides: Partial<v75ProfileData>): v75P
     certifiedInteriorDesigner: false,
     providesStaffingService: false,
     operatingPhase: undefined,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -408,6 +408,6 @@ export const generatev75FormationFormData = (
     contactFirstName: "",
     contactLastName: "",
     contactPhoneNumber: "",
-    ...overrides,
+    ...overrides
   };
 };

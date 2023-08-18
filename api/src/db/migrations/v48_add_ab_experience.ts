@@ -18,9 +18,9 @@ export const migrate_v47_to_v48 = (v47Data: v47UserData): v48UserData => {
     ...v47Data,
     user: {
       ...v47Data.user,
-      abExperience: Math.random() % 2 === 0 ? "ExperienceA" : "ExperienceB",
+      abExperience: Math.random() % 2 === 0 ? "ExperienceA" : "ExperienceB"
     },
-    version: 48,
+    version: 48
   };
 };
 
@@ -161,7 +161,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v48FormationData {

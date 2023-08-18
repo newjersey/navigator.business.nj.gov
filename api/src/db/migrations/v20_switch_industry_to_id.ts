@@ -20,9 +20,9 @@ export const migrate_v19_to_v20 = (v19Data: v19UserData): v20UserData => {
     ...v19Data,
     onboardingData: {
       ...updatedOnboardingData,
-      industryId: industryId,
+      industryId: industryId
     },
-    version: 20,
+    version: 20
   };
 };
 

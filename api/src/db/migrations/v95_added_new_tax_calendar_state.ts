@@ -17,7 +17,7 @@ export interface v95UserData {
 export const migrate_v94_to_v95 = (v94Data: v94UserData): v95UserData => {
   return {
     ...v94Data,
-    version: 95,
+    version: 95
   };
 };
 
@@ -201,7 +201,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v95FormationData {
@@ -275,7 +275,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY",
+  "LIMITED LIABILITY COMPANY"
 ] as const;
 
 const llpBusinessSuffix = [
@@ -284,7 +284,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P.",
+  "R.L.L.P."
 ] as const;
 
 export const corpBusinessSuffix = [
@@ -297,7 +297,7 @@ export const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC.",
+  "INC."
 ] as const;
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
@@ -341,7 +341,7 @@ export const generatev95User = (overrides: Partial<v95BusinessUser>): v95Busines
     myNJUserKey: undefined,
     intercomHash: undefined,
     abExperience: "ExperienceA",
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -388,7 +388,7 @@ export const createEmptyv95FormationFormData = (): v95FormationFormData => {
     certifiedCopyOfFormationDocument: false,
     contactFirstName: "",
     contactLastName: "",
-    contactPhoneNumber: "",
+    contactPhoneNumber: ""
   };
 };
 
@@ -408,7 +408,7 @@ export const generatev95IndustrySpecificData = (
     carService: undefined,
     interstateTransport: false,
     isChildcareForSixOrMore: undefined,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -425,7 +425,7 @@ export const generatev95ProfileData = (overrides: Partial<v95ProfileData>): v95P
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`,
+      id: `some-id-${randomInt()}`
     },
     dateOfFormation: undefined,
     entityId: randomInt(10).toString(),
@@ -436,7 +436,7 @@ export const generatev95ProfileData = (overrides: Partial<v95ProfileData>): v95P
     documents: {
       certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
       formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
-      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
+      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`
     },
     existingEmployees: randomInt(7).toString(),
     taxPin: randomInt(4).toString(),
@@ -447,7 +447,7 @@ export const generatev95ProfileData = (overrides: Partial<v95ProfileData>): v95P
     nexusDbaName: undefined,
     nexusLocationInNewJersey: undefined,
     operatingPhase: "NEEDS_TO_FORM",
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -459,7 +459,7 @@ export const v95TaxFilingDataGenerator = (overrides: Partial<v95TaxFilingData>):
     lastUpdatedISO: undefined,
     registered: false,
     filings: [],
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -480,15 +480,15 @@ export const v95UserDataGenerator = (overrides: Partial<v95UserData>): v95UserDa
       visibleSidebarCards: ["welcome"],
       returnToLink: "",
       isCalendarFullView: true,
-      isHideableRoadmapOpen: false,
+      isHideableRoadmapOpen: false
     },
     taxFilingData: v95TaxFilingDataGenerator({}),
     formationData: {
       formationFormData: createEmptyv95FormationFormData(),
       formationResponse: undefined,
       getFilingResponse: undefined,
-      completedFilingPayment: false,
+      completedFilingPayment: false
     },
-    ...overrides,
+    ...overrides
   };
 };

@@ -22,7 +22,7 @@ export const SidebarPageLayout = ({
   divider = true,
   outlineBox = true,
   stackNav,
-  belowBoxComponent,
+  belowBoxComponent
 }: SidebarPageLayoutProps): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
 

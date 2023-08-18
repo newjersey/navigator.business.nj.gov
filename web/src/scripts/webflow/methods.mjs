@@ -25,7 +25,7 @@ const getAllItems = async (id) => {
         method: "get",
         url: `https://api.webflow.com/collections/${id}/items?offset=${responseItems.length}`,
         headers,
-        responseType: "json",
+        responseType: "json"
       })
     ).data;
     responseItems = [...responseItems, ...data.items];
@@ -40,7 +40,7 @@ const getCollection = async (id) => {
     method: "get",
     url: `https://api.webflow.com/collections/${id}`,
     headers,
-    responseType: "json",
+    responseType: "json"
   });
 };
 
@@ -49,7 +49,7 @@ const getAllCollections = async () => {
     method: "get",
     url: `https://api.webflow.com/sites/${siteId}/collections`,
     headers,
-    responseType: "json",
+    responseType: "json"
   });
 };
 
@@ -62,10 +62,10 @@ const createItem = (item, collectionId, draft = true) => {
       fields: {
         _archived: false,
         _draft: draft,
-        ...item,
-      },
+        ...item
+      }
     },
-    responseType: "json",
+    responseType: "json"
   });
 };
 
@@ -76,10 +76,10 @@ const modifyItem = (id, collectionId, body, method = "patch") => {
     headers,
     data: {
       fields: {
-        ...body,
-      },
+        ...body
+      }
     },
-    responseType: "json",
+    responseType: "json"
   });
 };
 
@@ -88,7 +88,7 @@ const deleteItem = (item, collectionId, unPublish = false) => {
     method: "delete",
     url: `https://api.webflow.com/collections/${collectionId}/items/${item._id}`,
     params: { live: unPublish },
-    headers,
+    headers
   });
 };
 

@@ -49,8 +49,8 @@ const sixDigitRenameCodes = [
     fieldName: "BFS Industries",
     convert: (value) => {
       return value?.split(",") ?? undefined;
-    },
-  },
+    }
+  }
 ];
 
 const airtableSelectAll = () => {

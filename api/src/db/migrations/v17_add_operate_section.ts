@@ -16,10 +16,10 @@ export const migrate_v16_to_v17 = (v16Data: v16UserData): v17UserData => {
     ...v16Data,
     onboardingData: {
       ...v16Data.onboardingData,
-      dateOfFormation: undefined,
+      dateOfFormation: undefined
     },
     taxFilings: [],
-    version: 17,
+    version: 17
   };
 };
 

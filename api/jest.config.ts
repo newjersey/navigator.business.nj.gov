@@ -6,10 +6,10 @@ export default async (): Promise<Config.InitialOptions> => {
     ...require("jest-dynalite/jest-preset"),
     ...require("ts-jest/jest-preset"),
     moduleNameMapper: {
-      "@shared/(.*)": "<rootDir>/../shared/src/$1",
+      "@shared/(.*)": "<rootDir>/../shared/src/$1"
     },
     verbose: true,
     globalSetup: "<rootDir>/src/setupTests.ts",
-    globalTeardown: "<rootDir>/src/teardownTests.ts",
+    globalTeardown: "<rootDir>/src/teardownTests.ts"
   };
 };

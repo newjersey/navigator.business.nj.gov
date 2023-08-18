@@ -15,7 +15,7 @@ export const getLicenseCalendarEvents = (
     events.push({
       dueDate: expirationDate.format(defaultDateFormat),
       licenseEventSubtype: "expiration",
-      calendarEventType: "LICENSE",
+      calendarEventType: "LICENSE"
     });
   }
   const renewalDate = expirationDate.add(30, "days");
@@ -24,7 +24,7 @@ export const getLicenseCalendarEvents = (
     events.push({
       dueDate: renewalDate.format(defaultDateFormat),
       licenseEventSubtype: "renewal",
-      calendarEventType: "LICENSE",
+      calendarEventType: "LICENSE"
     });
   }
 

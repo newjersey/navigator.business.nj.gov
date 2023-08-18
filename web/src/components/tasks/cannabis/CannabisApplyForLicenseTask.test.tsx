@@ -10,14 +10,14 @@ import {
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData,
+  WithStatefulUserData
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
   generateBusiness,
   generateProfileData,
   generateUserData,
-  generateUserDataForBusiness,
+  generateUserDataForBusiness
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
@@ -54,7 +54,7 @@ describe("<CannabisApplyForLicenseTask />", () => {
   it("renders application questions tab with unlocked-by alert", async () => {
     const task = generateTask({
       name: "Header",
-      unlockedBy: [generateTaskLink({ name: "Do this first", urlSlug: "do-this-first" })],
+      unlockedBy: [generateTaskLink({ name: "Do this first", urlSlug: "do-this-first" })]
     });
     useMockRoadmapTask(task);
 
@@ -69,7 +69,7 @@ describe("<CannabisApplyForLicenseTask />", () => {
 
   it("save microbusiness selection to userData", () => {
     const business = generateBusiness({
-      profileData: generateProfileData({ cannabisMicrobusiness: undefined }),
+      profileData: generateProfileData({ cannabisMicrobusiness: undefined })
     });
     renderPage(generateTask({}), business);
     fireEvent.click(screen.getByTestId("microbusiness-radio-true"));
@@ -89,7 +89,7 @@ describe("<CannabisApplyForLicenseTask />", () => {
 
   it("checks diversely-owned if user is minority/woman", () => {
     const business = generateBusiness({
-      taskItemChecklist: { [minorityWomanPriorityStatus]: true },
+      taskItemChecklist: { [minorityWomanPriorityStatus]: true }
     });
     renderPage(generateTask({}), business);
     expect(diverselyOwnedCheckbox()).toBeChecked();
@@ -99,7 +99,7 @@ describe("<CannabisApplyForLicenseTask />", () => {
 
   it("checks diversely-owned if user is veteran", () => {
     const business = generateBusiness({
-      taskItemChecklist: { [vetPriorityStatus]: true },
+      taskItemChecklist: { [vetPriorityStatus]: true }
     });
     renderPage(generateTask({}), business);
     expect(diverselyOwnedCheckbox().checked).toEqual(true);
@@ -109,7 +109,7 @@ describe("<CannabisApplyForLicenseTask />", () => {
 
   it("checks impact-zone if user has impact-zone priority", () => {
     const business = generateBusiness({
-      taskItemChecklist: { [impactPriorityStatus]: true },
+      taskItemChecklist: { [impactPriorityStatus]: true }
     });
     renderPage(generateTask({}), business);
     expect(diverselyOwnedCheckbox().checked).toEqual(false);
@@ -119,7 +119,7 @@ describe("<CannabisApplyForLicenseTask />", () => {
 
   it("checks sbe if user has sbe priority", () => {
     const business = generateBusiness({
-      taskItemChecklist: { [sbePriorityStatus]: true },
+      taskItemChecklist: { [sbePriorityStatus]: true }
     });
     renderPage(generateTask({}), business);
     expect(diverselyOwnedCheckbox().checked).toEqual(false);
@@ -131,8 +131,8 @@ describe("<CannabisApplyForLicenseTask />", () => {
     const business = generateBusiness({
       taskItemChecklist: {
         [sbePriorityStatus]: true,
-        [vetPriorityStatus]: true,
-      },
+        [vetPriorityStatus]: true
+      }
     });
     renderPage(generateTask({}), business);
     expect(diverselyOwnedCheckbox().checked).toEqual(true);
@@ -143,8 +143,8 @@ describe("<CannabisApplyForLicenseTask />", () => {
   it("lets user uncheck an checked priority status", () => {
     const business = generateBusiness({
       taskItemChecklist: {
-        [sbePriorityStatus]: true,
-      },
+        [sbePriorityStatus]: true
+      }
     });
     renderPage(generateTask({}), business);
     expect(sbeCheckbox().checked).toEqual(true);
@@ -156,8 +156,8 @@ describe("<CannabisApplyForLicenseTask />", () => {
     const business = generateBusiness({
       taskItemChecklist: {
         [minorityWomanPriorityStatus]: true,
-        [sbePriorityStatus]: false,
-      },
+        [sbePriorityStatus]: false
+      }
     });
     renderPage(generateTask({}), business);
     expect(sbeCheckbox().checked).toEqual(false);
@@ -174,8 +174,8 @@ describe("<CannabisApplyForLicenseTask />", () => {
     const business = generateBusiness({
       taskItemChecklist: {
         [minorityWomanPriorityStatus]: true,
-        [sbePriorityStatus]: false,
-      },
+        [sbePriorityStatus]: false
+      }
     });
     renderPage(generateTask({}), business);
     expect(sbeCheckbox().checked).toEqual(false);
@@ -191,12 +191,12 @@ describe("<CannabisApplyForLicenseTask />", () => {
   describe("requirements tab", () => {
     it("does not show unlocked-by alert on requirements tab", async () => {
       const business = generateBusiness({
-        taskProgress: { "annual-license-cannabis": "NOT_STARTED" },
+        taskProgress: { "annual-license-cannabis": "NOT_STARTED" }
       });
       const task = generateTask({
         id: "annual-license-cannabis",
         name: "Header",
-        unlockedBy: [generateTaskLink({ name: "Do this first", urlSlug: "do-this-first" })],
+        unlockedBy: [generateTaskLink({ name: "Do this first", urlSlug: "do-this-first" })]
       });
 
       renderPage(task, business);
@@ -206,18 +206,18 @@ describe("<CannabisApplyForLicenseTask />", () => {
 
     it("updates taskProgress to from not_started to in-progress when View Requirements is clicked", () => {
       const business = generateBusiness({
-        taskProgress: { "annual-license-cannabis": "NOT_STARTED" },
+        taskProgress: { "annual-license-cannabis": "NOT_STARTED" }
       });
       renderPage(generateTask({ id: "annual-license-cannabis" }), business);
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
       expect(currentBusiness().taskProgress).toEqual({
-        "annual-license-cannabis": "IN_PROGRESS",
+        "annual-license-cannabis": "IN_PROGRESS"
       });
     });
 
     it("does not update taskProgress when already completed", () => {
       const business = generateBusiness({
-        taskProgress: { "annual-license-cannabis": "COMPLETED" },
+        taskProgress: { "annual-license-cannabis": "COMPLETED" }
       });
       renderPage(generateTask({ id: "annual-license-cannabis" }), business);
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
@@ -255,7 +255,7 @@ describe("<CannabisApplyForLicenseTask />", () => {
 
     it("shows requirements for diversely-owned when checkbox is checked", () => {
       const business = generateBusiness({
-        taskItemChecklist: { [minorityWomanPriorityStatus]: true },
+        taskItemChecklist: { [minorityWomanPriorityStatus]: true }
       });
       renderPage(generateTask({}), business);
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
@@ -267,7 +267,7 @@ describe("<CannabisApplyForLicenseTask />", () => {
 
     it("shows requirements for SBE when checkbox is checked", () => {
       const business = generateBusiness({
-        taskItemChecklist: { [sbePriorityStatus]: true },
+        taskItemChecklist: { [sbePriorityStatus]: true }
       });
       renderPage(generateTask({}), business);
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
@@ -279,7 +279,7 @@ describe("<CannabisApplyForLicenseTask />", () => {
 
     it("shows requirements for impact zone when checkbox is checked", () => {
       const business = generateBusiness({
-        taskItemChecklist: { [impactPriorityStatus]: true },
+        taskItemChecklist: { [impactPriorityStatus]: true }
       });
       renderPage(generateTask({}), business);
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));

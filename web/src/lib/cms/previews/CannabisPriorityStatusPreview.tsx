@@ -18,7 +18,7 @@ const CannabisPriorityStatusPreview = (props: PreviewProps): ReactElement => {
   const priorityStatusTypes = {
     type1: config.cannabisPriorityStatus.minorityWomenOrVeteran,
     type2: config.cannabisPriorityStatus.impactZone,
-    type3: config.cannabisPriorityStatus.socialEquity,
+    type3: config.cannabisPriorityStatus.socialEquity
   };
 
   return (

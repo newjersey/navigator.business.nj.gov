@@ -1,15 +1,15 @@
 export const cmsCollections = [
   {
     label: "🟥 BUSINESS FORMATION",
-    children: ["Biz Form - Config", "Biz Form - DBA Tasks", "Nexus"],
+    children: ["Biz Form - Config", "Biz Form - DBA Tasks", "Nexus"]
   },
   {
     label: "🟧 CERTIFICATION OPPS",
-    children: ["Cert Opps - Content", "Cert Opps - Archive"],
+    children: ["Cert Opps - Content", "Cert Opps - Archive"]
   },
   {
     label: "🟨 FUNDING OPPS",
-    children: ["Fund Opps - Content", "Fund Opps - Archived"],
+    children: ["Fund Opps - Content", "Fund Opps - Archived"]
   },
   {
     label: "🟩 ROADMAPS",
@@ -17,8 +17,8 @@ export const cmsCollections = [
       "Roadmaps - Industries",
       "Roadmaps - Add-ons",
       "Roadmaps - Non Essential Questions",
-      "Roadmaps - Settings",
-    ],
+      "Roadmaps - Settings"
+    ]
   },
   {
     label: "🟦 TASKS",
@@ -32,16 +32,16 @@ export const cmsCollections = [
       "Tasks - EIN",
       "Tasks - Tax ID",
       "Tasks - NAICS Code",
-      "Tasks - Business Structure",
-    ],
+      "Tasks - Business Structure"
+    ]
   },
   {
     label: "🟪 CALENDAR",
-    children: ["License Expiration / Renewal Events", "Taxes Filings - All", "Tax Access Modal Config"],
+    children: ["License Expiration / Renewal Events", "Taxes Filings - All", "Tax Access Modal Config"]
   },
   {
     label: "🟥 DASHBOARD",
-    children: ["Dashboard - Config", "Sidebar Cards Content"],
+    children: ["Dashboard - Config", "Sidebar Cards Content"]
   },
   {
     label: "🟧 MISC",
@@ -52,7 +52,7 @@ export const cmsCollections = [
       "Profile Page",
       "Post Onboarding Content",
       "Contextual Information",
-      "404 Page",
-    ],
-  },
+      "404 Page"
+    ]
+  }
 ];

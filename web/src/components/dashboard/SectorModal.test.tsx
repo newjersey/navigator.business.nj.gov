@@ -32,8 +32,8 @@ describe("<SectorModal />", () => {
       profileData: generateProfileData({
         industryId: "generic",
         businessPersona: "STARTING",
-        sectorId: undefined,
-      }),
+        sectorId: undefined
+      })
     });
 
     useMockBusiness(business);
@@ -51,8 +51,8 @@ describe("<SectorModal />", () => {
         sectorId: undefined,
         industryId: undefined,
         ownershipTypeIds: [],
-        existingEmployees: undefined,
-      }),
+        existingEmployees: undefined
+      })
     });
 
     useMockBusiness(business);
@@ -69,8 +69,8 @@ describe("<SectorModal />", () => {
     const business = generateBusiness({
       profileData: generateProfileData({
         sectorId: undefined,
-        industryId: "generic",
-      }),
+        industryId: "generic"
+      })
     });
 
     useMockBusiness(business);

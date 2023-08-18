@@ -247,7 +247,7 @@ export const arrayOfCountriesShortCodes = [
   "YE",
   "ZM",
   "ZW",
-  "AX",
+  "AX"
 ] as const;
 
 export type CountriesShortCodes = (typeof arrayOfCountriesShortCodes)[number];
@@ -506,5 +506,5 @@ export const arrayOfCountriesObjects: CountriesObject[] = [
   { name: "Yemen", shortCode: "YE" },
   { name: "Zambia", shortCode: "ZM" },
   { name: "Zimbabwe", shortCode: "ZW" },
-  { name: "Åland Islands", shortCode: "AX" },
+  { name: "Åland Islands", shortCode: "AX" }
 ];

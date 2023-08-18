@@ -23,8 +23,8 @@ export const loadAllFundingUrlSlugs = (): PathParams<FundingUrlSlugParam>[] => {
   return fileNames.map((fileName) => {
     return {
       params: {
-        fundingUrlSlug: loadFundingByFileName(fileName).urlSlug,
-      },
+        fundingUrlSlug: loadFundingByFileName(fileName).urlSlug
+      }
     };
   });
 };

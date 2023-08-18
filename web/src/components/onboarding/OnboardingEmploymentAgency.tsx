@@ -13,7 +13,7 @@ export const OnboardingEmploymentAgency = (): ReactElement => {
     getProfileConfig({
       config: Config,
       persona: state.flow,
-      fieldName: "employmentAgency",
+      fieldName: "employmentAgency"
     });
 
   return (

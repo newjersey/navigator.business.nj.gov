@@ -10,7 +10,7 @@ export const useContentModifiedByUserData = (content: string): string => {
     condition: () => business?.profileData.businessPersona === "FOREIGN",
     modificationMap: {
       oos: "out-of-state",
-      OoS: "Out-of-State",
-    },
+      OoS: "Out-of-State"
+    }
   });
 };

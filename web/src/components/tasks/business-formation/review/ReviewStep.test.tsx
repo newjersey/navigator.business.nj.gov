@@ -5,7 +5,7 @@ import { generateFormationDbaContent } from "@/test/factories";
 import {
   generateFormationProfileData,
   preparePage,
-  useSetupInitialMocks,
+  useSetupInitialMocks
 } from "@/test/helpers/helpers-formation";
 import { withMarkup } from "@/test/helpers/helpers-testing-library-selectors";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
@@ -21,7 +21,7 @@ import {
   generateMunicipality,
   ProfileData,
   PublicFilingLegalType,
-  randomInt,
+  randomInt
 } from "@businessnjgovnavigator/shared";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import * as materialUi from "@mui/material";
@@ -30,7 +30,7 @@ import { fireEvent, screen, within } from "@testing-library/react";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    useMediaQuery: jest.fn()
   };
 }
 
@@ -44,7 +44,7 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn(),
+  searchBusinessName: jest.fn()
 }));
 
 describe("Formation - ReviewStep", () => {
@@ -64,23 +64,23 @@ describe("Formation - ReviewStep", () => {
         legalStructureId: castPublicFilingLegalTypeToFormationType(
           profileData.legalStructureId as PublicFilingLegalType,
           profileData.businessPersona
-        ),
+        )
       }),
       formationResponse: undefined,
       getFilingResponse: undefined,
       completedFilingPayment: false,
       businessNameAvailability: undefined,
       dbaBusinessNameAvailability: undefined,
-      lastVisitedPageIndex: 0,
+      lastVisitedPageIndex: 0
     };
     const page = preparePage({
       business: {
         profileData,
-        formationData,
+        formationData
       },
       displayContent: {
-        formationDbaContent: generateFormationDbaContent({}),
-      },
+        formationDbaContent: generateFormationDbaContent({})
+      }
     });
 
     if (isForeign) {
@@ -91,7 +91,7 @@ describe("Formation - ReviewStep", () => {
 
   it("displays business name entered in step 1 as part of business designator line", async () => {
     const initialProfileData: Partial<ProfileData> = {
-      businessName: "name in profile",
+      businessName: "name in profile"
     };
     const formationFormData = { businessName: "name entered in step 1" };
     await renderStep(initialProfileData, formationFormData);
@@ -109,7 +109,7 @@ describe("Formation - ReviewStep", () => {
 
   it("displays not entered on the business designator line if name is empty", async () => {
     const initialProfileData: Partial<ProfileData> = {
-      businessName: "",
+      businessName: ""
     };
     const formationFormData = { businessName: "" };
     await renderStep(initialProfileData, formationFormData);
@@ -119,11 +119,11 @@ describe("Formation - ReviewStep", () => {
 
   it("always displays the total share of stock if legal type is corporation", async () => {
     const initialProfileData: Partial<ProfileData> = {
-      legalStructureId: "c-corporation",
+      legalStructureId: "c-corporation"
     };
     const formationFormData = {
       businessTotalStock: undefined,
-      legalType: "c-corporation" as FormationLegalType,
+      legalType: "c-corporation" as FormationLegalType
     };
     await renderStep(initialProfileData, formationFormData);
     const legalStockSection = screen.getByTestId("review-total-business-stock");
@@ -135,11 +135,11 @@ describe("Formation - ReviewStep", () => {
 
   it("doesn't display the total share of stock if legal type is not corporation", async () => {
     const initialProfileData: Partial<ProfileData> = {
-      legalStructureId: "limited-liability-company",
+      legalStructureId: "limited-liability-company"
     };
     const formationFormData = {
       businessTotalStock: undefined,
-      legalType: "limited-liability-company" as FormationLegalType,
+      legalType: "limited-liability-company" as FormationLegalType
     };
     await renderStep(initialProfileData, formationFormData);
     expect(
@@ -150,14 +150,14 @@ describe("Formation - ReviewStep", () => {
   it("doesn't display the primary business address if user has not inputted anything", async () => {
     const initialProfileData: Partial<ProfileData> = {
       legalStructureId: "limited-liability-company",
-      municipality: undefined,
+      municipality: undefined
     };
     const formationFormData = {
       addressMunicipality: undefined,
       addressZipCode: "",
       addressCountry: undefined,
       addressLine1: "",
-      addressLine2: "",
+      addressLine2: ""
     };
     await renderStep(initialProfileData, formationFormData);
     expect(screen.queryByText(Config.formation.sections.addressHeader)).not.toBeInTheDocument();
@@ -166,14 +166,14 @@ describe("Formation - ReviewStep", () => {
   it("displays the primary business address if user has inputted any address field", async () => {
     const initialProfileData: Partial<ProfileData> = {
       legalStructureId: "limited-liability-company",
-      municipality: undefined,
+      municipality: undefined
     };
     const formationFormData = {
       addressMunicipality: undefined,
       addressZipCode: "",
       addressCountry: undefined,
       addressLine1: "address-line-1",
-      addressLine2: "",
+      addressLine2: ""
     };
     await renderStep(initialProfileData, formationFormData);
     expect(screen.getByText(Config.formation.sections.addressHeader)).toBeInTheDocument();
@@ -182,7 +182,7 @@ describe("Formation - ReviewStep", () => {
   it("displays the primary business address section for foreign corporations even when no address input has been made", async () => {
     const initialProfileData: Partial<ProfileData> = {
       businessPersona: "FOREIGN",
-      legalStructureId: "c-corporation",
+      legalStructureId: "c-corporation"
     };
     const formationData: Partial<FormationFormData> = {
       businessName: "nexus-business",
@@ -191,7 +191,7 @@ describe("Formation - ReviewStep", () => {
       addressZipCode: "",
       addressCountry: "US",
       addressLine2: "",
-      addressLine1: "",
+      addressLine1: ""
     };
     await renderStep(initialProfileData, formationData);
     expect(screen.getByText(Config.formation.sections.addressHeader)).toBeInTheDocument();
@@ -367,7 +367,7 @@ describe("Formation - ReviewStep", () => {
       expect(
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         screen.queryByText(arrayOfCountriesObjects.find((cu) => cu.shortCode === "US")!.name, {
-          exact: false,
+          exact: false
         })
       ).not.toBeInTheDocument();
     });
@@ -389,7 +389,7 @@ describe("Formation - ReviewStep", () => {
         {
           addressState: { name: "Alabama", shortCode: "AL" },
           businessLocationType: "US",
-          foreignStateOfFormation: "Alaska",
+          foreignStateOfFormation: "Alaska"
         }
       );
       expect(screen.getByText("Alabama", { exact: false })).toBeInTheDocument();
@@ -408,7 +408,7 @@ describe("Formation - ReviewStep", () => {
         { businessPersona: "FOREIGN" },
         {
           addressCity: "Roflcopterville",
-          businessLocationType: randomInt() % 2 ? "INTL" : "US",
+          businessLocationType: randomInt() % 2 ? "INTL" : "US"
         }
       );
       expect(screen.getByText("Roflcopterville", { exact: false })).toBeInTheDocument();
@@ -419,11 +419,11 @@ describe("Formation - ReviewStep", () => {
         {
           businessPersona: "STARTING",
           municipality: generateMunicipality({
-            displayName: "Some city",
-          }),
+            displayName: "Some city"
+          })
         },
         {
-          businessLocationType: "NJ",
+          businessLocationType: "NJ"
         }
       );
       expect(screen.getByText("Some city", { exact: false })).toBeInTheDocument();
@@ -465,7 +465,7 @@ describe("Formation - ReviewStep", () => {
           canGetDistribution: false,
           getDistributionTerms: "get distro terms",
           canMakeDistribution: true,
-          makeDistributionTerms: "make distro terms",
+          makeDistributionTerms: "make distro terms"
         }
       );
       const getByMarkup = withMarkup(screen.getByText);
@@ -497,7 +497,7 @@ describe("Formation - ReviewStep", () => {
           canGetDistribution: false,
           getDistributionTerms: "get distro terms",
           canMakeDistribution: true,
-          makeDistributionTerms: "make distro terms",
+          makeDistributionTerms: "make distro terms"
         }
       );
       expect(screen.queryByText(Config.formation.partnershipRights.label)).not.toBeInTheDocument();
@@ -554,7 +554,7 @@ describe("Formation - ReviewStep", () => {
         {
           officialFormationDocument: true,
           certifiedCopyOfFormationDocument: true,
-          certificateOfStanding: false,
+          certificateOfStanding: false
         }
       );
       const formationDocLabel = Config.formation.fields.officialFormationDocument.label;
@@ -641,11 +641,11 @@ describe("Formation - ReviewStep", () => {
     describe.each([
       {
         radio: "nonprofitBoardMemberQualificationsSpecified",
-        terms: "nonprofitBoardMemberQualificationsTerms",
+        terms: "nonprofitBoardMemberQualificationsTerms"
       },
       { radio: "nonprofitBoardMemberRightsSpecified", terms: "nonprofitBoardMemberRightsTerms" },
       { radio: "nonprofitTrusteesMethodSpecified", terms: "nonprofitTrusteesMethodTerms" },
-      { radio: "nonprofitAssetDistributionSpecified", terms: "nonprofitAssetDistributionTerms" },
+      { radio: "nonprofitAssetDistributionSpecified", terms: "nonprofitAssetDistributionTerms" }
     ])("provisions radio questions", (args) => {
       it(`does not display ${args.radio} when no board members`, async () => {
         await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: false, [args.radio]: "IN_FORM" });
@@ -680,7 +680,7 @@ describe("Formation - ReviewStep", () => {
           { legalStructureId },
           {
             hasNonprofitBoardMembers: true,
-            [args.radio]: undefined,
+            [args.radio]: undefined
           }
         );
         const radioReviewSection = within(screen.getByTestId(args.radio));
@@ -697,7 +697,7 @@ describe("Formation - ReviewStep", () => {
           {
             hasNonprofitBoardMembers: true,
             [args.radio]: "IN_FORM",
-            [args.terms]: terms,
+            [args.terms]: terms
           }
         );
         const radioReviewSection = within(screen.getByTestId(args.radio));
@@ -718,7 +718,7 @@ describe("Formation - ReviewStep", () => {
           {
             hasNonprofitBoardMembers: true,
             [args.radio]: "IN_FORM",
-            [args.terms]: "",
+            [args.terms]: ""
           }
         );
         const termsReviewSection = within(screen.getByTestId(`${args.radio}-terms`));

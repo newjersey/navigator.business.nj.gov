@@ -19,12 +19,12 @@ export const migrate_v40_to_v41 = (v40Data: v40UserData): v41UserData => {
       ...v40Data.preferences,
       roadmapOpenSections: v40Data.preferences.roadmapOpenSections.filter((it) => {
         return it !== "OPERATE";
-      }) as v41SectionType[],
+      }) as v41SectionType[]
     },
     taxFilingData: {
-      filings: v40Data.taxFilingData.filings,
+      filings: v40Data.taxFilingData.filings
     },
-    version: 41,
+    version: 41
   };
 };
 
@@ -152,7 +152,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v41FormationData {

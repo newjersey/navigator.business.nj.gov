@@ -17,9 +17,9 @@ export const migrate_v32_to_v33 = (v32Data: v32UserData): v33UserData => {
     ...v32Data,
     formationData: {
       formationFormData: createEmptyFormationFormData(),
-      formationResponse: undefined,
+      formationResponse: undefined
     },
-    version: 33,
+    version: 33
   };
 };
 
@@ -148,7 +148,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v33FormationData {
@@ -232,6 +232,6 @@ const createEmptyFormationFormData = (): v33FormationFormData => {
     corpWatchNotification: false,
     officialFormationDocument: true,
     certificateOfStanding: false,
-    certifiedCopyOfFormationDocument: false,
+    certifiedCopyOfFormationDocument: false
   };
 };

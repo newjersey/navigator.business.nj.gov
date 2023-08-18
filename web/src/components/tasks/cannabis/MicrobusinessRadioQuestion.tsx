@@ -16,7 +16,7 @@ export const MicrobusinessRadioQuestion = (): ReactElement => {
     const isMicrobusiness = event.target.value === "true";
     await updateQueue
       .queueProfileData({
-        cannabisMicrobusiness: isMicrobusiness,
+        cannabisMicrobusiness: isMicrobusiness
       })
       .update();
 

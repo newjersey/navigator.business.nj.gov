@@ -27,7 +27,7 @@ export const getIncompleteTaskCount = (
 const getTaskCountForStatus = ({
   business,
   roadmap,
-  complete,
+  complete
 }: {
   complete: boolean;
   roadmap: Roadmap | undefined;
@@ -64,6 +64,6 @@ const getTaskCountForStatus = ({
   return {
     required: requiredTotalTaskCountForStatus,
     optional: optionalTaskCountForStatus,
-    total: requiredTotalTaskCountForStatus + optionalTaskCountForStatus,
+    total: requiredTotalTaskCountForStatus + optionalTaskCountForStatus
   };
 };

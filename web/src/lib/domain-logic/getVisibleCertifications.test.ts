@@ -5,7 +5,7 @@ import { getVisibleCertifications } from "./getVisibleCertifications";
 describe("getVisibleCertifications", () => {
   it("returns an array of all certifications when there is no matching id in hiddenCertificationIds", () => {
     const business = generateBusiness({
-      preferences: generatePreferences({ hiddenCertificationIds: ["three"] }),
+      preferences: generatePreferences({ hiddenCertificationIds: ["three"] })
     });
     const certifications = [generateCertification({ id: "one" }), generateCertification({ id: "two" })];
 
@@ -14,7 +14,7 @@ describe("getVisibleCertifications", () => {
 
   it("returns an array of filtered certifications when there is a matching id in hiddenCertificationIds", () => {
     const business = generateBusiness({
-      preferences: generatePreferences({ hiddenCertificationIds: ["two"] }),
+      preferences: generatePreferences({ hiddenCertificationIds: ["two"] })
     });
 
     const cert1 = generateCertification({ id: "one" });

@@ -50,7 +50,7 @@ export const BillingStep = (): ReactElement => {
             errorBarType="ALWAYS"
             fieldName={"contactPhoneNumber"}
             numericProps={{
-              maxLength: 10,
+              maxLength: 10
             }}
             visualFilter={getPhoneNumberFormat}
           />

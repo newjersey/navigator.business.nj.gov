@@ -20,9 +20,9 @@ export const migrate_v20_to_v21 = (v20Data: v20UserData): v21UserData => {
       entityId: undefined,
       employerId: undefined,
       taxId: undefined,
-      notes: "",
+      notes: ""
     },
-    version: 21,
+    version: 21
   };
 };
 
@@ -122,7 +122,7 @@ export const generatev21User = (overrides: Partial<v21BusinessUser>): v21Busines
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -135,7 +135,7 @@ export const generatev21OnboardingData = (overrides: Partial<v21OnboardingData>)
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`,
+      id: `some-id-${randomInt()}`
     },
     liquorLicense: true,
     homeBasedBusiness: true,
@@ -145,6 +145,6 @@ export const generatev21OnboardingData = (overrides: Partial<v21OnboardingData>)
     employerId: undefined,
     taxId: undefined,
     notes: "",
-    ...overrides,
+    ...overrides
   };
 };

@@ -10,41 +10,41 @@ export default (cognitoArn: string, vpcConfig: FnType["vpc"]): FnType => {
         http: {
           method: "ANY",
           path: "/api/self-reg",
-          cors: true,
-        },
+          cors: true
+        }
       },
       {
         http: {
           method: "ANY",
           path: "/api/external/{proxy+}",
-          cors: true,
-        },
+          cors: true
+        }
       },
       {
         http: {
           method: "ANY",
           path: "/api/guest/{proxy+}",
-          cors: true,
-        },
+          cors: true
+        }
       },
       {
         http: {
           method: "ANY",
           path: "/api/mgmt/{proxy+}",
-          cors: true,
-        },
+          cors: true
+        }
       },
       {
         http: {
           method: "ANY",
           path: "/{proxy+}",
           authorizer: {
-            arn: cognitoArn,
+            arn: cognitoArn
           },
-          cors: true,
-        },
-      },
+          cors: true
+        }
+      }
     ],
-    vpc: vpcConfig,
+    vpc: vpcConfig
   };
 };

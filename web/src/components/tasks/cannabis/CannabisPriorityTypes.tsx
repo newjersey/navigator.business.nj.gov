@@ -6,7 +6,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
   noneOfTheAbovePriorityId,
   PriorityType,
-  priorityTypesObj,
+  priorityTypesObj
 } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { Task } from "@/lib/types/types";
 import { templateEval, useMountEffect } from "@/lib/utils/helpers";
@@ -17,7 +17,7 @@ const priorityTypes = [
   ...priorityTypesObj.minorityOrWomen,
   ...priorityTypesObj.veteran,
   ...priorityTypesObj.impactZone,
-  ...priorityTypesObj.socialEquity,
+  ...priorityTypesObj.socialEquity
 ];
 
 interface Props {
@@ -103,13 +103,13 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
       updateQueue
         .queueTaskItemChecklist({
           ...unselectPriorityTasks,
-          [noneOfTheAbovePriorityId]: true,
+          [noneOfTheAbovePriorityId]: true
         })
         .update();
     } else {
       updateQueue
         .queueTaskItemChecklist({
-          [noneOfTheAbovePriorityId]: false,
+          [noneOfTheAbovePriorityId]: false
         })
         .update();
     }

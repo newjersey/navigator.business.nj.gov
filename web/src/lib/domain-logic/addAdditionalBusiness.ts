@@ -7,7 +7,7 @@ export const addAdditionalBusiness = (userData: UserData): UserData => {
     currentBusinessId: additionalBusiness.id,
     businesses: {
       ...userData.businesses,
-      [additionalBusiness.id]: additionalBusiness,
-    },
+      [additionalBusiness.id]: additionalBusiness
+    }
   };
 };

@@ -17,14 +17,14 @@ export const migrate_v8_to_v9 = (v8Data: v8UserData): v9UserData => {
         completedSearch: v8Data.licenseSearchData.completedSearch,
         lastCheckedStatus: parseDate(0).toISOString(),
         status: "UNKNOWN",
-        items: [],
+        items: []
       }
     : undefined;
 
   return {
     ...v8Data,
     licenseData,
-    version: 9,
+    version: 9
   };
 };
 

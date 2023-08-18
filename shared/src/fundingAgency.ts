@@ -11,7 +11,7 @@ export const LookupFundingAgencyById = (id: string): FundingAgency => {
       return x.id === id;
     }) ?? {
       id: "",
-      name: "",
+      name: ""
     }
   );
 };

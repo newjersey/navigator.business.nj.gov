@@ -9,12 +9,12 @@ import {
   generateMunicipality,
   generateProfileData,
   generateTaxFilingData,
-  ProfileData,
+  ProfileData
 } from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,
   generateUser,
-  generateUserDataForBusiness,
+  generateUserDataForBusiness
 } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { screen, waitFor, within } from "@testing-library/react";
@@ -24,7 +24,7 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
-  postGetAnnualFilings: jest.fn(),
+  postGetAnnualFilings: jest.fn()
 }));
 
 const mockApi = api as jest.Mocked<typeof api>;
@@ -37,9 +37,9 @@ const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
       profileData: generateProfileData({
         businessPersona: "OWNING",
         operatingPhase: "GUEST_MODE_OWNING",
-        ...overrides,
+        ...overrides
       }),
-      onboardingFormProgress: "UNSTARTED",
+      onboardingFormProgress: "UNSTARTED"
     })
   );
 };
@@ -131,12 +131,12 @@ describe("onboarding - owning a business", () => {
         legalStructureId: undefined,
         sectorId: "clean-energy",
         industryId: "generic",
-        operatingPhase: "GUEST_MODE_OWNING",
+        operatingPhase: "GUEST_MODE_OWNING"
       },
       preferences: {
         ...initialBusiness.preferences,
-        visibleSidebarCards: [],
-      },
+        visibleSidebarCards: []
+      }
     });
   });
 
@@ -144,8 +144,8 @@ describe("onboarding - owning a business", () => {
     const business = generateBusiness({
       profileData: generateProfileData({
         businessPersona: "OWNING",
-        sectorId: "clean-energy",
-      }),
+        sectorId: "clean-energy"
+      })
     });
 
     const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
@@ -162,9 +162,9 @@ describe("onboarding - owning a business", () => {
         businesses: {
           [userData.currentBusinessId]: {
             ...userData.businesses[userData.currentBusinessId],
-            taxFilingData: { ...taxData, filings: [] },
-          },
-        },
+            taxFilingData: { ...taxData, filings: [] }
+          }
+        }
       });
     });
 
@@ -172,9 +172,9 @@ describe("onboarding - owning a business", () => {
       taxFilingData: taxData,
       profileData: generateProfileData({
         businessPersona: "OWNING",
-        legalStructureId: undefined,
+        legalStructureId: undefined
       }),
-      onboardingFormProgress: "COMPLETED",
+      onboardingFormProgress: "COMPLETED"
     });
 
     const { page } = renderPage({ userData: generateUserDataForBusiness(initialBusiness) });
@@ -187,7 +187,7 @@ describe("onboarding - owning a business", () => {
     await waitFor(() => {
       expect(currentBusiness()).toEqual({
         ...initialBusiness,
-        taxFilingData: { ...taxData, filings: [] },
+        taxFilingData: { ...taxData, filings: [] }
       });
     });
   });

@@ -13,7 +13,7 @@ import { useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData,
+  WithStatefulUserData
 } from "@/test/mock/withStatefulUserData";
 import { generateUserData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -40,7 +40,7 @@ describe("<CannabisPriorityStatusTask />", () => {
     ...priorityTypesObj.minorityOrWomen,
     ...priorityTypesObj.veteran,
     ...priorityTypesObj.impactZone,
-    ...priorityTypesObj.socialEquity,
+    ...priorityTypesObj.socialEquity
   ];
 
   beforeEach(() => {
@@ -52,7 +52,7 @@ describe("<CannabisPriorityStatusTask />", () => {
     const task = generateTask({
       id: "123",
       name: "Header",
-      unlockedBy: [generateTaskLink({ name: "Do this first", urlSlug: "do-this-first" })],
+      unlockedBy: [generateTaskLink({ name: "Do this first", urlSlug: "do-this-first" })]
     });
     useMockRoadmapTask(task);
 
@@ -67,12 +67,12 @@ describe("<CannabisPriorityStatusTask />", () => {
   it("renders requirements button when checkbox is selected", async () => {
     const randomPriorityType = randomElementFromArray([
       ...allPriorityTypes,
-      noneOfTheAbovePriorityId,
+      noneOfTheAbovePriorityId
     ]) as string;
 
     const task = generateTask({
       id: "123",
-      name: "Header",
+      name: "Header"
     });
     useMockRoadmapTask(task);
     renderPage(task);
@@ -91,7 +91,7 @@ describe("<CannabisPriorityStatusTask />", () => {
 
     const task = generateTask({
       id: "123",
-      name: "Header",
+      name: "Header"
     });
     useMockRoadmapTask(task);
     renderPage(task);
@@ -111,7 +111,7 @@ describe("<CannabisPriorityStatusTask />", () => {
 
     const task = generateTask({
       id: "123",
-      name: "Header",
+      name: "Header"
     });
     useMockRoadmapTask(task);
 
@@ -129,7 +129,7 @@ describe("<CannabisPriorityStatusTask />", () => {
   it("deselects none of the above checkbox", async () => {
     const task = generateTask({
       id: "123",
-      name: "Header",
+      name: "Header"
     });
     useMockRoadmapTask(task);
 
@@ -145,7 +145,7 @@ describe("<CannabisPriorityStatusTask />", () => {
 
     const task = generateTask({
       id: "123",
-      name: "Header",
+      name: "Header"
     });
     useMockRoadmapTask(task);
 
@@ -164,7 +164,7 @@ describe("<CannabisPriorityStatusTask />", () => {
 
     const task = generateTask({
       id: "123",
-      name: "Header",
+      name: "Header"
     });
     useMockRoadmapTask(task);
 
@@ -185,7 +185,7 @@ describe("<CannabisPriorityStatusTask />", () => {
   it("selects no priority status checkbox and clicks complete task button", async () => {
     const task = generateTask({
       id: "123",
-      name: "Header",
+      name: "Header"
     });
     useMockRoadmapTask(task);
 
@@ -213,7 +213,7 @@ describe("<CannabisPriorityStatusTask />", () => {
 
       const task = generateTask({
         id: "123",
-        name: "Header",
+        name: "Header"
       });
       useMockRoadmapTask(task);
 
@@ -235,7 +235,7 @@ describe("<CannabisPriorityStatusTask />", () => {
       const task = generateTask({
         id: "123",
         name: "Header",
-        contentMd: `Content\n- []{${randomSocialEquityPriorityType}}}Random Priority Type Checkbox`,
+        contentMd: `Content\n- []{${randomSocialEquityPriorityType}}}Random Priority Type Checkbox`
       });
       useMockRoadmapTask(task);
 
@@ -259,7 +259,7 @@ describe("<CannabisPriorityStatusTask />", () => {
 
       const task = generateTask({
         id: "123",
-        name: "Header",
+        name: "Header"
       });
       useMockRoadmapTask(task);
 
@@ -282,12 +282,12 @@ describe("<CannabisPriorityStatusTask />", () => {
 
     it("minority/women is only type - displays MWBE content and CTA", async () => {
       const randomMinorityOrWomentPriorityType = randomElementFromArray([
-        ...priorityTypesObj.minorityOrWomen,
+        ...priorityTypesObj.minorityOrWomen
       ]);
 
       const task = generateTask({
         id: "123",
-        name: "Header",
+        name: "Header"
       });
       useMockRoadmapTask(task);
 
@@ -315,12 +315,12 @@ describe("<CannabisPriorityStatusTask />", () => {
       const randomPriorityType = randomElementFromArray([
         ...priorityTypesObj.veteran,
         ...priorityTypesObj.socialEquity,
-        ...priorityTypesObj.minorityOrWomen,
+        ...priorityTypesObj.minorityOrWomen
       ]);
 
       const task = generateTask({
         id: "123",
-        name: "Header",
+        name: "Header"
       });
       useMockRoadmapTask(task);
 
@@ -337,7 +337,7 @@ describe("<CannabisPriorityStatusTask />", () => {
 
     it("social equity + minority/women - displays CTAs in dropdown", async () => {
       const randomMinorityOrWomentPriorityType = randomElementFromArray([
-        ...priorityTypesObj.minorityOrWomen,
+        ...priorityTypesObj.minorityOrWomen
       ]);
       const randomVeteranPriorityType = randomElementFromArray([...priorityTypesObj.veteran]);
       const randomSocialEquityPriorityType = randomElementFromArray(priorityTypesObj.socialEquity);
@@ -345,7 +345,7 @@ describe("<CannabisPriorityStatusTask />", () => {
 
       const task = generateTask({
         id: "123",
-        name: "Header",
+        name: "Header"
       });
       useMockRoadmapTask(task);
 
@@ -391,7 +391,7 @@ describe("<CannabisPriorityStatusTask />", () => {
       const randomVeteranType = randomElementFromArray([...priorityTypesObj.veteran]);
 
       const eligibilityPhrase = templateEval(C.phrase1, {
-        type1: Config.cannabisPriorityStatus.minorityWomenOrVeteran,
+        type1: Config.cannabisPriorityStatus.minorityWomenOrVeteran
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -409,7 +409,7 @@ describe("<CannabisPriorityStatusTask />", () => {
       const randomImpactZonePriorityType = randomElementFromArray([...priorityTypesObj.impactZone]);
 
       const eligibilityPhrase = templateEval(C.phrase1, {
-        type1: Config.cannabisPriorityStatus.impactZone,
+        type1: Config.cannabisPriorityStatus.impactZone
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -425,7 +425,7 @@ describe("<CannabisPriorityStatusTask />", () => {
       const randomSocialEquityPriorityType = randomElementFromArray([...priorityTypesObj.socialEquity]);
 
       const eligibilityPhrase = templateEval(C.phrase1, {
-        type1: Config.cannabisPriorityStatus.socialEquity,
+        type1: Config.cannabisPriorityStatus.socialEquity
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -443,7 +443,7 @@ describe("<CannabisPriorityStatusTask />", () => {
 
       const eligibilityPhrase = templateEval(C.phrase2, {
         type1: Config.cannabisPriorityStatus.minorityWomenOrVeteran,
-        type2: Config.cannabisPriorityStatus.impactZone,
+        type2: Config.cannabisPriorityStatus.impactZone
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -463,7 +463,7 @@ describe("<CannabisPriorityStatusTask />", () => {
 
       const eligibilityPhrase = templateEval(C.phrase2, {
         type1: Config.cannabisPriorityStatus.minorityWomenOrVeteran,
-        type2: Config.cannabisPriorityStatus.socialEquity,
+        type2: Config.cannabisPriorityStatus.socialEquity
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -485,7 +485,7 @@ describe("<CannabisPriorityStatusTask />", () => {
       const eligibilityPhrase = templateEval(C.phrase3, {
         type1: Config.cannabisPriorityStatus.minorityWomenOrVeteran,
         type2: Config.cannabisPriorityStatus.impactZone,
-        type3: Config.cannabisPriorityStatus.socialEquity,
+        type3: Config.cannabisPriorityStatus.socialEquity
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();

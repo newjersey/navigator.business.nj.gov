@@ -6,7 +6,7 @@ import {
   ProfileData,
   TaskProgress,
   TaxFilingData,
-  UserData,
+  UserData
 } from "@businessnjgovnavigator/shared";
 import { FormationData, FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 
@@ -22,7 +22,7 @@ export class UpdateQueueFactory implements UpdateQueue {
   queue(userData: Partial<UserData>): UpdateQueue {
     this.internalQueue = {
       ...this.internalQueue,
-      ...userData,
+      ...userData
     };
     return this;
   }
@@ -30,7 +30,7 @@ export class UpdateQueueFactory implements UpdateQueue {
   queueSwitchBusiness(id: string): UpdateQueue {
     this.internalQueue = {
       ...this.internalQueue,
-      currentBusinessId: id,
+      currentBusinessId: id
     };
     return this;
   }
@@ -42,9 +42,9 @@ export class UpdateQueueFactory implements UpdateQueue {
         ...this.internalQueue.businesses,
         [this.internalQueue.currentBusinessId]: {
           ...this.currentBusiness(),
-          ...business,
-        },
-      },
+          ...business
+        }
+      }
     };
     return this;
   }
@@ -54,8 +54,8 @@ export class UpdateQueueFactory implements UpdateQueue {
       ...this.internalQueue,
       user: {
         ...this.internalQueue.user,
-        ...user,
-      },
+        ...user
+      }
     };
     return this;
   }
@@ -69,10 +69,10 @@ export class UpdateQueueFactory implements UpdateQueue {
           ...this.currentBusiness(),
           profileData: {
             ...this.currentBusiness().profileData,
-            ...profileData,
-          },
-        },
-      },
+            ...profileData
+          }
+        }
+      }
     };
     return this;
   }
@@ -86,10 +86,10 @@ export class UpdateQueueFactory implements UpdateQueue {
           ...this.currentBusiness(),
           formationData: {
             ...this.currentBusiness().formationData,
-            ...formationData,
-          },
-        },
-      },
+            ...formationData
+          }
+        }
+      }
     };
     return this;
   }
@@ -105,11 +105,11 @@ export class UpdateQueueFactory implements UpdateQueue {
             ...this.currentBusiness().formationData,
             formationFormData: {
               ...this.currentBusiness().formationData.formationFormData,
-              ...formationFormData,
-            },
-          },
-        },
-      },
+              ...formationFormData
+            }
+          }
+        }
+      }
     };
     return this;
   }
@@ -123,10 +123,10 @@ export class UpdateQueueFactory implements UpdateQueue {
           ...this.currentBusiness(),
           taskProgress: {
             ...this.currentBusiness().taskProgress,
-            ...taskProgress,
-          },
-        },
-      },
+            ...taskProgress
+          }
+        }
+      }
     };
     return this;
   }
@@ -140,10 +140,10 @@ export class UpdateQueueFactory implements UpdateQueue {
           ...this.currentBusiness(),
           preferences: {
             ...this.currentBusiness().preferences,
-            ...preferences,
-          },
-        },
-      },
+            ...preferences
+          }
+        }
+      }
     };
     return this;
   }
@@ -157,10 +157,10 @@ export class UpdateQueueFactory implements UpdateQueue {
           ...this.currentBusiness(),
           taxFilingData: {
             ...this.currentBusiness().taxFilingData,
-            ...taxFilingData,
-          },
-        },
-      },
+            ...taxFilingData
+          }
+        }
+      }
     };
     return this;
   }
@@ -174,10 +174,10 @@ export class UpdateQueueFactory implements UpdateQueue {
           ...this.currentBusiness(),
           taskItemChecklist: {
             ...this.currentBusiness().taskItemChecklist,
-            ...taskItemChecklist,
-          },
-        },
-      },
+            ...taskItemChecklist
+          }
+        }
+      }
     };
     return this;
   }

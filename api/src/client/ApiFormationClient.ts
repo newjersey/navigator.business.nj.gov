@@ -10,7 +10,7 @@ import {
   GetFilingResponse,
   InputFile,
   PaymentType,
-  SignerTitle,
+  SignerTitle
 } from "@shared/formationData";
 import { StateNames, StateShortCodes } from "@shared/states";
 import { UserData } from "@shared/userData";
@@ -43,8 +43,8 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
     return axios
       .post(`${config.baseUrl}/PrepareFiling`, postBody, {
         headers: {
-          "Content-Type": foreignGoodStandingFile ? "text/plain" : "application/json",
-        },
+          "Content-Type": foreignGoodStandingFile ? "text/plain" : "application/json"
+        }
       })
       .then((response) => {
         logger.LogInfo(
@@ -58,7 +58,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
             formationId: successResponse.Id,
             redirect: successResponse.PayUrl.RedirectToUrl,
             errors: [],
-            lastUpdatedISO: getCurrentDateISOString(),
+            lastUpdatedISO: getCurrentDateISOString()
           };
         } else {
           let errors = [] as FormationSubmitError[];
@@ -71,7 +71,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
               return {
                 field: splitErrorField(error.Name),
                 message: error.ErrorMessage,
-                type: "FIELD",
+                type: "FIELD"
               };
             });
           } else {
@@ -83,7 +83,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
             token: undefined,
             redirect: undefined,
             lastUpdatedISO: getCurrentDateISOString(),
-            errors,
+            errors
           };
         }
       })
@@ -97,7 +97,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
           formationId: undefined,
           redirect: undefined,
           errors: [{ field: "", message: "Unknown Error", type: "UNKNOWN" }],
-          lastUpdatedISO: getCurrentDateISOString(),
+          lastUpdatedISO: getCurrentDateISOString()
         };
       });
   };
@@ -106,7 +106,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
     const postBody = {
       Account: config.account,
       Key: config.key,
-      FormationId: formationId,
+      FormationId: formationId
     };
     logger.LogInfo(
       `GetFiling - NICUSA - Id:${logId} - Request Sent to ${
@@ -128,7 +128,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
             confirmationNumber: successResponse.ConfirmationNumber,
             formationDoc: successResponse.FormationDoc,
             standingDoc: successResponse.StandingDoc,
-            certifiedDoc: successResponse.CertifiedDoc,
+            certifiedDoc: successResponse.CertifiedDoc
           };
         } else {
           return {
@@ -138,7 +138,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
             confirmationNumber: "",
             formationDoc: "",
             standingDoc: "",
-            certifiedDoc: "",
+            certifiedDoc: ""
           };
         }
       })
@@ -153,7 +153,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
           confirmationNumber: "",
           formationDoc: "",
           standingDoc: "",
-          certifiedDoc: "",
+          certifiedDoc: ""
         };
       });
   };
@@ -221,30 +221,30 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
               LimitedCanMakeDistributionTerms: formationFormData.makeDistributionTerms,
               GeneralPartnerWithdrawal: formationFormData.withdrawals,
               DissolutionPlan: formationFormData.dissolution,
-              AdditionalProvisions: additionalProvisions,
-            },
+              AdditionalProvisions: additionalProvisions
+            }
           };
         }
         case "foreign-limited-partnership": {
           return {
             AdditionalForeignLimitedPartnership: {
               AggregateAmount: formationFormData.combinedInvestment,
-              AdditionalProvisions: additionalProvisions,
-            },
+              AdditionalProvisions: additionalProvisions
+            }
           };
         }
         case "limited-liability-company": {
           return {
             AdditionalLimitedLiabilityCompany: {
-              OtherProvisions: additionalProvisions,
-            },
+              OtherProvisions: additionalProvisions
+            }
           };
         }
         case "limited-liability-partnership": {
           return {
             AdditionalLimitedLiabilityPartnership: {
-              OtherProvisions: additionalProvisions,
-            },
+              OtherProvisions: additionalProvisions
+            }
           };
         }
         case "nonprofit":
@@ -280,8 +280,8 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
               AssetDistribution: isInFormAndTerms(
                 formationFormData.nonprofitAssetDistributionSpecified,
                 formationFormData.nonprofitAssetDistributionTerms
-              ),
-            },
+              )
+            }
           };
         }
 
@@ -289,8 +289,8 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
           if (["c-corporation", "s-corporation"].includes(toFormationLegalStructure())) {
             return {
               AdditionalCCorpOrProfessionalCorp: {
-                AdditionalProvisions: additionalProvisions,
-              },
+                AdditionalProvisions: additionalProvisions
+              }
             };
           }
       }
@@ -312,7 +312,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       ForeignGoodStandingFile: foreignGoodStandingFile
         ? {
             Extension: foreignGoodStandingFile.fileType,
-            Content: foreignGoodStandingFile.base64Contents,
+            Content: foreignGoodStandingFile.base64Contents
           }
         : undefined,
       Payer: {
@@ -324,7 +324,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
           : formationFormData.addressMunicipality?.name ?? formationFormData.addressCity ?? "",
         StateAbbreviation: isForeign ? undefined : formationFormData.addressState?.shortCode,
         ZipCode: isForeign ? "" : formationFormData.addressZipCode,
-        Email: userData.user.email,
+        Email: userData.user.email
       },
       Formation: {
         Gov2GoAnnualReports: formationFormData.annualReportNotification,
@@ -358,12 +358,12 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
             State: formationFormData.addressState?.name,
             Province: formationFormData.addressProvince,
             Zipcode: formationFormData.addressZipCode,
-            Country: formationFormData.addressCountry,
+            Country: formationFormData.addressCountry
           },
           TotalShares:
             formationFormData.businessTotalStock.length > 0
               ? Number.parseInt(formationFormData.businessTotalStock)
-              : undefined,
+              : undefined
         },
         ...getAdditionalProvisions(),
         CompanyProfit: isDomesticNonProfit || isVeteranNonprofit ? "NonProfit" : "Profit",
@@ -379,9 +379,9 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
                 City: formationFormData.agentOfficeAddressMunicipality!.name,
                 State: "New Jersey",
                 Zipcode: formationFormData.agentOfficeAddressZipCode,
-                Country: "US",
+                Country: "US"
               }
-            : undefined,
+            : undefined
         },
         MemberAttestation: isCorp && !isForeignCorp ? true : undefined,
         Members:
@@ -395,8 +395,8 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
                     City: member.addressMunicipality?.name ?? member.addressCity ?? "",
                     State: member.addressState?.name,
                     Zipcode: member.addressZipCode,
-                    Country: "US",
-                  },
+                    Country: "US"
+                  }
                 };
               })
             : formationFormData.members?.map((member) => {
@@ -408,8 +408,8 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
                     City: member.addressMunicipality?.name ?? member.addressCity ?? "",
                     State: member.addressState?.name,
                     Zipcode: member.addressZipCode,
-                    Country: "US",
-                  },
+                    Country: "US"
+                  }
                 };
               }),
         Incorporators: isCorp
@@ -422,8 +422,8 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
                   City: signer.addressMunicipality?.name ?? signer.addressCity ?? "",
                   State: signer.addressState?.name,
                   Zipcode: signer.addressZipCode,
-                  Country: "US",
-                },
+                  Country: "US"
+                }
               };
             })
           : undefined,
@@ -432,7 +432,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
               return {
                 Name: signer.name,
                 Title: signer.title,
-                Signed: signer.signature,
+                Signed: signer.signature
               };
             }) ?? []
           : // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -440,20 +440,20 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
               return {
                 Name: signer.name,
                 Title: signer.title,
-                Signed: signer.signature,
+                Signed: signer.signature
               };
             }) ?? [],
 
         ContactFirstName: formationFormData.contactFirstName,
         ContactLastName: formationFormData.contactLastName,
-        ContactPhoneNumber: formationFormData.contactPhoneNumber,
-      },
+        ContactPhoneNumber: formationFormData.contactPhoneNumber
+      }
     };
   };
 
   return {
     form,
-    getCompletedFiling,
+    getCompletedFiling
   };
 };
 
@@ -609,56 +609,56 @@ type FormationFields = {
 const BusinessTypeMap: Record<FormationLegalType | "veteran-nonprofit", FormationFields> = {
   "limited-liability-company": {
     businessType: "DomesticLimitedLiabilityCompany",
-    shortDescription: "LLC",
+    shortDescription: "LLC"
   },
   "limited-liability-partnership": {
     businessType: "DomesticLimitedLiabilityPartnership",
-    shortDescription: "LLP",
+    shortDescription: "LLP"
   },
   "limited-partnership": {
     businessType: "DomesticLimitedPartnership",
-    shortDescription: "LP",
+    shortDescription: "LP"
   },
   "c-corporation": {
     businessType: "DomesticForProfitCorporation",
-    shortDescription: "DP",
+    shortDescription: "DP"
   },
   "s-corporation": {
     businessType: "DomesticForProfitCorporation",
-    shortDescription: "DP",
+    shortDescription: "DP"
   },
   nonprofit: {
     businessType: "DomesticNonProfitCorporation",
-    shortDescription: "NP",
+    shortDescription: "NP"
   },
   "veteran-nonprofit": {
     businessType: "DomesticNonProfitVeteranCorporation",
-    shortDescription: "NV",
+    shortDescription: "NV"
   },
   "foreign-nonprofit": {
     businessType: "ForeignNonProfitCorporation",
-    shortDescription: "NF",
+    shortDescription: "NF"
   },
   "foreign-limited-partnership": {
     businessType: "ForeignLimitedPartnership",
-    shortDescription: "LF",
+    shortDescription: "LF"
   },
   "foreign-limited-liability-company": {
     businessType: "ForeignLimitedLiabilityCompany",
-    shortDescription: "FLC",
+    shortDescription: "FLC"
   },
   "foreign-limited-liability-partnership": {
     businessType: "ForeignLimitedLiabilityPartnership",
-    shortDescription: "FLP",
+    shortDescription: "FLP"
   },
   "foreign-c-corporation": {
     businessType: "ForeignForProfitCorporation",
-    shortDescription: "FR",
+    shortDescription: "FR"
   },
   "foreign-s-corporation": {
     businessType: "ForeignForProfitCorporation",
-    shortDescription: "FR",
-  },
+    shortDescription: "FR"
+  }
 };
 
 export type ApiResponse = {

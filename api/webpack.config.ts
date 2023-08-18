@@ -19,24 +19,24 @@ export default {
     cacheWithContext: false,
     plugins: [
       new TsconfigPathsPlugin({
-        configFile: "./tsconfig.paths.json",
-      }),
-    ],
+        configFile: "./tsconfig.paths.json"
+      })
+    ]
   },
   output: {
     libraryTarget: "commonjs",
     path: path.join(__dirname, ".webpack"),
-    filename: "[name].js",
+    filename: "[name].js"
   },
   optimization: {
-    concatenateModules: false,
+    concatenateModules: false
   },
   target: "node",
   externals: [
     nodeExternals(),
     nodeExternals({
-      modulesDir: path.resolve(__dirname, "../node_modules"),
-    }),
+      modulesDir: path.resolve(__dirname, "../node_modules")
+    })
   ],
   module: {
     rules: [
@@ -48,15 +48,15 @@ export default {
           [
             path.resolve(__dirname, "node_modules"),
             path.resolve(__dirname, ".serverless"),
-            path.resolve(__dirname, ".webpack"),
-          ],
+            path.resolve(__dirname, ".webpack")
+          ]
         ],
         options: {
           transpileOnly: true,
-          experimentalWatchApi: true,
-        },
-      },
-    ],
+          experimentalWatchApi: true
+        }
+      }
+    ]
   },
-  plugins: [],
+  plugins: []
 };

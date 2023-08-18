@@ -6,7 +6,7 @@ import {
   Municipality,
   MunicipalityDetail,
   ProfileData,
-  UserData,
+  UserData
 } from "@businessnjgovnavigator/shared";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 import { useEffect, useRef } from "react";
@@ -18,10 +18,13 @@ export const useMountEffect = (fun: () => void): void => {
 
 export const groupBy = <T>(array: T[], predicate: (value: T, index: number, array: T[]) => string): T[][] =>
   Object.values(
-    array.reduce((acc, value, index, array) => {
-      (acc[predicate(value, index, array)] ||= []).push(value);
-      return acc;
-    }, {} as { [key: string]: T[] })
+    array.reduce(
+      (acc, value, index, array) => {
+        (acc[predicate(value, index, array)] ||= []).push(value);
+        return acc;
+      },
+      {} as { [key: string]: T[] }
+    )
   );
 
 export const useOnWindowResize = (fun: () => void): void => {
@@ -127,13 +130,13 @@ export const OnboardingStatusLookup = (
     SUCCESS: {
       body: config.profileDefaults.default.successTextBody,
       header: config.profileDefaults.default.successTextHeader,
-      variant: "success",
+      variant: "success"
     },
     ERROR: {
       body: config.profileDefaults.default.errorTextBody,
       header: config.profileDefaults.default.errorTextHeader,
-      variant: "error",
-    },
+      variant: "error"
+    }
   };
 };
 
@@ -154,10 +157,13 @@ export const validateEmail = (email: string): boolean => {
 };
 
 export const flipObject = <T extends string | number | symbol>(obj: Record<string, T>): Record<T, string> => {
-  return Object.keys(obj).reduce((acc, key) => {
-    acc[obj[key]] = key;
-    return acc;
-  }, {} as Record<T, string>);
+  return Object.keys(obj).reduce(
+    (acc, key) => {
+      acc[obj[key]] = key;
+      return acc;
+    },
+    {} as Record<T, string>
+  );
 };
 
 export const getPhoneNumberFormat = (phoneNumber: string): string => {
@@ -213,7 +219,7 @@ export const mapMunicipalityDetailToMunicipality = (municipalityDetail: Municipa
     displayName: municipalityDetail.townDisplayName,
     id: municipalityDetail.id,
     name: municipalityDetail.townName,
-    county: municipalityDetail.countyName,
+    county: municipalityDetail.countyName
   };
 };
 

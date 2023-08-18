@@ -12,7 +12,7 @@ describe("migrate_v1_to_v2", () => {
     const formData = generateV1FormData({
       businessName: { businessName: "Applebees" },
       businessStructure: { businessStructure: "Sole Proprietorship" },
-      businessType: { businessType: "cosmetology" },
+      businessType: { businessType: "cosmetology" }
     });
 
     const v1: v1UserData = { user, formData, formProgress, taskProgress, version: 1 };
@@ -25,8 +25,8 @@ describe("migrate_v1_to_v2", () => {
       onboardingData: {
         businessName: "Applebees",
         industry: "cosmetology",
-        legalStructure: "Sole Proprietorship",
-      },
+        legalStructure: "Sole Proprietorship"
+      }
     });
   });
 

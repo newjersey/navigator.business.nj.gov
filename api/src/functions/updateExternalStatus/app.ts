@@ -25,14 +25,14 @@ export default async function handler(): Promise<void> {
     dynamoDb = DynamoDBDocumentClient.from(
       new DynamoDBClient({
         region: "localhost",
-        endpoint: `http://${dynamoDbEndpoint}:${DYNAMO_OFFLINE_PORT}`,
+        endpoint: `http://${dynamoDbEndpoint}:${DYNAMO_OFFLINE_PORT}`
       }),
       dynamoDbTranslateConfig
     );
   } else {
     dynamoDb = DynamoDBDocumentClient.from(
       new DynamoDBClient({
-        region: "us-east-1",
+        region: "us-east-1"
       }),
       dynamoDbTranslateConfig
     );
@@ -61,7 +61,7 @@ export default async function handler(): Promise<void> {
     apiKey: GOV_DELIVERY_API_KEY,
     logWriter: logger,
     siteUrl: "navigator.business.nj.gov",
-    urlQuestion: GOV_DELIVERY_URL_QUESTION_ID,
+    urlQuestion: GOV_DELIVERY_URL_QUESTION_ID
   });
 
   const airtableUserTestingClient = AirtableUserTestingClient(
@@ -69,7 +69,7 @@ export default async function handler(): Promise<void> {
       apiKey: AIRTABLE_API_KEY,
       baseId: AIRTABLE_USER_RESEARCH_BASE_ID,
       baseUrl: AIRTABLE_BASE_URL,
-      usersTableName: AIRTABLE_USERS_TABLE,
+      usersTableName: AIRTABLE_USERS_TABLE
     },
     logger
   );

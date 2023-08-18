@@ -5,7 +5,7 @@ import {
   FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
-  useSetupInitialMocks,
+  useSetupInitialMocks
 } from "@/test/helpers/helpers-formation";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { mockPush } from "@/test/mock/mockRouter";
@@ -25,7 +25,7 @@ import {
   ProfileData,
   PublicFilingLegalType,
   randomElementFromArray,
-  randomPublicFilingLegalType,
+  randomPublicFilingLegalType
 } from "@businessnjgovnavigator/shared";
 import { publicFilingLegalTypes } from "@businessnjgovnavigator/shared/formationData";
 import * as materialUi from "@mui/material";
@@ -34,7 +34,7 @@ import { fireEvent, screen, within } from "@testing-library/react";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    useMediaQuery: jest.fn()
   };
 }
 
@@ -48,12 +48,12 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn(),
+  searchBusinessName: jest.fn()
 }));
 
 describe("Formation - BusinessStep", () => {
   const displayContent = {
-    formationDbaContent: generateFormationDbaContent({}),
+    formationDbaContent: generateFormationDbaContent({})
   };
 
   beforeEach(() => {
@@ -73,19 +73,19 @@ describe("Formation - BusinessStep", () => {
         legalStructureId: castPublicFilingLegalTypeToFormationType(
           profileData.legalStructureId as PublicFilingLegalType,
           initialProfileData.businessPersona
-        ),
+        )
       }),
       formationResponse: undefined,
       getFilingResponse: undefined,
       completedFilingPayment: false,
       businessNameAvailability: undefined,
       dbaBusinessNameAvailability: undefined,
-      lastVisitedPageIndex: 0,
+      lastVisitedPageIndex: 0
     };
     const page = preparePage({
       business: generateBusiness({ profileData, formationData }),
       displayContent,
-      municipalities,
+      municipalities
     });
     if (isForeign) {
       await page.submitNexusBusinessNameStep();
@@ -111,7 +111,7 @@ describe("Formation - BusinessStep", () => {
 
   it("routes to profile page when edit legal structure button is clicked", async () => {
     useMockRoadmap({
-      tasks: [generateTask({ id: businessStructureTaskId, urlSlug: "business-structure-url-slug" })],
+      tasks: [generateTask({ id: businessStructureTaskId, urlSlug: "business-structure-url-slug" })]
     });
     await getPageHelper({}, {});
 
@@ -128,7 +128,7 @@ describe("Formation - BusinessStep", () => {
     const page = await getPageHelper(
       {
         legalStructureId: "limited-liability-company",
-        municipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
+        municipality: generateMunicipality({ displayName: "Newark", name: "Newark" })
       },
       {
         businessSuffix: "LTD LIABILITY CO",
@@ -137,7 +137,7 @@ describe("Formation - BusinessStep", () => {
         addressLine2: "suite 102",
         addressState: { name: "New Jersey", shortCode: "NJ" },
         addressZipCode: "07601",
-        businessPurpose: "some cool purpose",
+        businessPurpose: "some cool purpose"
       }
     );
 
@@ -157,7 +157,7 @@ describe("Formation - BusinessStep", () => {
     const page = await getPageHelper(
       {
         legalStructureId: "limited-liability-company",
-        businessPersona: "FOREIGN",
+        businessPersona: "FOREIGN"
       },
       {
         businessSuffix: "LTD LIABILITY CO",
@@ -170,7 +170,7 @@ describe("Formation - BusinessStep", () => {
         addressState: { shortCode: "DC", name: "District of Columbia" },
         addressZipCode: "20011",
         addressCity: "Washington",
-        businessPurpose: "some cool purpose",
+        businessPurpose: "some cool purpose"
       }
     );
 
@@ -194,7 +194,7 @@ describe("Formation - BusinessStep", () => {
     const page = await getPageHelper(
       {
         legalStructureId: "limited-liability-company",
-        businessPersona: "FOREIGN",
+        businessPersona: "FOREIGN"
       },
       {
         businessSuffix: "LTD LIABILITY CO",
@@ -208,7 +208,7 @@ describe("Formation - BusinessStep", () => {
         addressCountry: "FR",
         addressZipCode: "2033011",
         addressCity: "Paris",
-        businessPurpose: "some cool purpose",
+        businessPurpose: "some cool purpose"
       }
     );
 
@@ -290,7 +290,7 @@ describe("Formation - BusinessStep", () => {
       await getPageHelper(
         {
           businessPersona: "FOREIGN",
-          legalStructureId: randomPublicFilingLegalType((value) => value !== "limited-partnership"),
+          legalStructureId: randomPublicFilingLegalType((value) => value !== "limited-partnership")
         },
         { provisions: [] }
       );
@@ -301,7 +301,7 @@ describe("Formation - BusinessStep", () => {
       await getPageHelper(
         {
           businessPersona: "FOREIGN",
-          legalStructureId: randomPublicFilingLegalType((value) => value === "limited-partnership"),
+          legalStructureId: randomPublicFilingLegalType((value) => value === "limited-partnership")
         },
         { provisions: [] }
       );
@@ -348,7 +348,7 @@ describe("Formation - BusinessStep", () => {
       const page = await getPageHelper(
         {},
         {
-          provisions: ["provision1", "provision2", "provision3"],
+          provisions: ["provision1", "provision2", "provision3"]
         }
       );
       const removeProvision2Button = screen.getAllByLabelText("remove provision")[1];
@@ -356,7 +356,7 @@ describe("Formation - BusinessStep", () => {
       await page.submitBusinessStep();
       expect(currentBusiness().formationData.formationFormData.provisions).toEqual([
         "provision1",
-        "provision3",
+        "provision3"
       ]);
     });
 
@@ -416,7 +416,7 @@ describe("Formation - BusinessStep", () => {
     for (const legalStructureId of [
       "limited-liability-partnership",
       "limited-liability-company",
-      "limited-partnership",
+      "limited-partnership"
     ]) {
       it(`should not render for foreign${legalStructureId}`, async () => {
         await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
@@ -443,7 +443,7 @@ describe("Formation - BusinessStep", () => {
     for (const legalStructureId of [
       "limited-liability-partnership",
       "limited-liability-company",
-      "limited-partnership",
+      "limited-partnership"
     ]) {
       it(`should not render for foreign${legalStructureId}`, async () => {
         await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
@@ -541,7 +541,7 @@ describe("Formation - BusinessStep", () => {
       await page.submitBusinessStep(true);
       expect(currentBusiness().formationData.formationFormData.addressState).toEqual({
         name: "Alabama",
-        shortCode: "AL",
+        shortCode: "AL"
       });
     });
 
@@ -857,7 +857,7 @@ describe("Formation - BusinessStep", () => {
       await getPageHelper(
         {
           municipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
-          businessPersona: "STARTING",
+          businessPersona: "STARTING"
         },
         {}
       );
@@ -1105,7 +1105,7 @@ describe("Formation - BusinessStep", () => {
         {
           hasNonprofitBoardMembers: true,
           nonprofitBoardMemberQualificationsSpecified: undefined,
-          legalType: "nonprofit",
+          legalType: "nonprofit"
         }
       );
       await attemptApiSubmission(page);
@@ -1122,7 +1122,7 @@ describe("Formation - BusinessStep", () => {
           hasNonprofitBoardMembers: true,
           nonprofitBoardMemberQualificationsSpecified: "IN_FORM",
           nonprofitBoardMemberQualificationsTerms: "",
-          legalType: "nonprofit",
+          legalType: "nonprofit"
         }
       );
       await attemptApiSubmission(page);
@@ -1138,7 +1138,7 @@ describe("Formation - BusinessStep", () => {
         {
           hasNonprofitBoardMembers: true,
           nonprofitBoardMemberRightsSpecified: undefined,
-          legalType: "nonprofit",
+          legalType: "nonprofit"
         }
       );
       await attemptApiSubmission(page);
@@ -1155,7 +1155,7 @@ describe("Formation - BusinessStep", () => {
           hasNonprofitBoardMembers: true,
           nonprofitBoardMemberRightsSpecified: "IN_FORM",
           legalType: "nonprofit",
-          nonprofitBoardMemberRightsTerms: "",
+          nonprofitBoardMemberRightsTerms: ""
         }
       );
       await attemptApiSubmission(page);
@@ -1171,7 +1171,7 @@ describe("Formation - BusinessStep", () => {
         {
           hasNonprofitBoardMembers: true,
           nonprofitTrusteesMethodSpecified: undefined,
-          legalType: "nonprofit",
+          legalType: "nonprofit"
         }
       );
       await attemptApiSubmission(page);
@@ -1188,7 +1188,7 @@ describe("Formation - BusinessStep", () => {
           hasNonprofitBoardMembers: true,
           nonprofitTrusteesMethodSpecified: "IN_FORM",
           nonprofitTrusteesMethodTerms: "",
-          legalType: "nonprofit",
+          legalType: "nonprofit"
         }
       );
       await attemptApiSubmission(page);
@@ -1204,7 +1204,7 @@ describe("Formation - BusinessStep", () => {
         {
           hasNonprofitBoardMembers: true,
           nonprofitAssetDistributionSpecified: undefined,
-          legalType: "nonprofit",
+          legalType: "nonprofit"
         }
       );
       await attemptApiSubmission(page);
@@ -1221,7 +1221,7 @@ describe("Formation - BusinessStep", () => {
           hasNonprofitBoardMembers: true,
           nonprofitAssetDistributionSpecified: "IN_FORM",
           nonprofitAssetDistributionTerms: "",
-          legalType: "nonprofit",
+          legalType: "nonprofit"
         }
       );
       await attemptApiSubmission(page);

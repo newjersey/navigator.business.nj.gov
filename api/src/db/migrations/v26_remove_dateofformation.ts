@@ -17,7 +17,7 @@ export const migrate_v25_to_v26 = (v25Data: v25UserData): v26UserData => {
   return {
     ...v25Data,
     profileData: rest,
-    version: 26,
+    version: 26
   };
 };
 

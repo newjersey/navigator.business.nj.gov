@@ -32,13 +32,13 @@ export const ProfileMunicipality = (props: Props): ReactElement => {
     getProfileConfig({
       config: Config,
       persona: state.flow,
-      fieldName: fieldName,
+      fieldName: fieldName
     });
 
   RegisterForOnSubmit(() =>
     isMunicipalityRequired({
       legalStructureId: state.profileData.legalStructureId,
-      operatingPhase: state.profileData.operatingPhase,
+      operatingPhase: state.profileData.operatingPhase
     }) || props.required
       ? state.profileData[fieldName] !== undefined
       : true
@@ -48,7 +48,7 @@ export const ProfileMunicipality = (props: Props): ReactElement => {
     if (
       isMunicipalityRequired({
         legalStructureId: state.profileData.legalStructureId,
-        operatingPhase: state.profileData.operatingPhase,
+        operatingPhase: state.profileData.operatingPhase
       }) ||
       props.required
     ) {
@@ -66,7 +66,7 @@ export const ProfileMunicipality = (props: Props): ReactElement => {
   const onSelect = (value: Municipality | undefined): void => {
     setProfileData({
       ...state.profileData,
-      municipality: value,
+      municipality: value
     });
   };
 

@@ -13,6 +13,6 @@ export const setMockDocumentsResponse = (documents: ProfileDocuments | undefined
     documents,
     checkData: () => {
       return Promise.resolve();
-    },
+    }
   });
 };

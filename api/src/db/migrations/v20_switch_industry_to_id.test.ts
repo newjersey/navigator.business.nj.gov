@@ -16,10 +16,10 @@ describe("migrate_v19_to_v20", () => {
       licenseData: undefined,
       preferences: {
         roadmapOpenSections: ["PLAN", "START"],
-        roadmapOpenSteps: [],
+        roadmapOpenSteps: []
       },
       taxFilings: [],
-      version: 19,
+      version: 19
     };
 
     expect(v19.onboardingData.industry).toEqual("restaurant");

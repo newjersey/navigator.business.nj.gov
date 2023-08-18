@@ -25,9 +25,9 @@ export const migrate_v24_to_v25 = (v24Data: v24UserData): v25UserData => {
     ...v24Data,
     user: {
       ...v24Data.user,
-      intercomHash,
+      intercomHash
     },
-    version: 25,
+    version: 25
   };
 
   return userData;

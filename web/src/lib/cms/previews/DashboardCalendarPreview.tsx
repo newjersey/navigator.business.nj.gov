@@ -8,12 +8,12 @@ import { generateOperateReference } from "@/test/factories";
 import {
   defaultDateFormat,
   generateBusiness,
-  generateTaxFilingCalendarEvent,
+  generateTaxFilingCalendarEvent
 } from "@businessnjgovnavigator/shared/index";
 import {
   generatePreferences,
   generateProfileData,
-  generateTaxFilingData,
+  generateTaxFilingData
 } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import dayjs from "dayjs";
@@ -26,50 +26,50 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
   const emptyFilingsUserData = generateBusiness({
     profileData: generateProfileData({
       operatingPhase: "UP_AND_RUNNING",
-      legalStructureId: "general-partnership",
+      legalStructureId: "general-partnership"
     }),
     taxFilingData: generateTaxFilingData({
-      filings: [],
-    }),
+      filings: []
+    })
   });
 
   const filingsBusiness = generateBusiness({
     profileData: generateProfileData({
       operatingPhase: "UP_AND_RUNNING",
-      legalStructureId: "general-partnership",
+      legalStructureId: "general-partnership"
     }),
     taxFilingData: generateTaxFilingData({
       filings: [
         generateTaxFilingCalendarEvent({ identifier: "1", dueDate: dayjs().format(defaultDateFormat) }),
         generateTaxFilingCalendarEvent({
           identifier: "2",
-          dueDate: dayjs().add(1, "month").format(defaultDateFormat),
+          dueDate: dayjs().add(1, "month").format(defaultDateFormat)
         }),
         generateTaxFilingCalendarEvent({ identifier: "3", dueDate: dayjs().format(defaultDateFormat) }),
-        generateTaxFilingCalendarEvent({ identifier: "4", dueDate: dayjs().format(defaultDateFormat) }),
-      ],
-    }),
+        generateTaxFilingCalendarEvent({ identifier: "4", dueDate: dayjs().format(defaultDateFormat) })
+      ]
+    })
   });
 
   const filingsBusinessGrid = {
     ...filingsBusiness,
     preferences: generatePreferences({
-      isCalendarFullView: true,
-    }),
+      isCalendarFullView: true
+    })
   };
 
   const filingsBusinessList = {
     ...filingsBusiness,
     preferences: generatePreferences({
-      isCalendarFullView: false,
-    }),
+      isCalendarFullView: false
+    })
   };
 
   const operateReferences = {
     "1": generateOperateReference({ name: "Tax 1" }),
     "2": generateOperateReference({ name: "Tax 2" }),
     "3": generateOperateReference({ name: "Tax 3" }),
-    "4": generateOperateReference({ name: "Tax 4" }),
+    "4": generateOperateReference({ name: "Tax 4" })
   };
 
   return (

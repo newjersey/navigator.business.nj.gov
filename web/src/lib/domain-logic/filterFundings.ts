@@ -4,7 +4,7 @@ import {
   arrayOfOwnershipTypes,
   Business,
   getCurrentDate,
-  parseDateWithFormat,
+  parseDateWithFormat
 } from "@businessnjgovnavigator/shared";
 
 export const filterFundings = (fundings: Funding[], business: Business): Funding[] => {

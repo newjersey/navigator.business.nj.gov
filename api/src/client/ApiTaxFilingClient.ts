@@ -5,7 +5,7 @@ import {
   TaxFilingLookupResponse,
   TaxFilingOnboardingResponse,
   TaxFilingResult,
-  TaxIdentifierToIdsRecord,
+  TaxIdentifierToIdsRecord
 } from "../domain/types";
 import { LogWriterType } from "../libs/logWriter";
 
@@ -19,7 +19,7 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
 
   const taxIdMap: TaxIdentifierToIdsRecord = {
     "cr-1orcnr-11": ["cr-1orcnr-1"],
-    "cr-1orcnr-12": ["cr-1orcnr-1"],
+    "cr-1orcnr-12": ["cr-1orcnr-1"]
   };
 
   const lookup = async (props: { taxId: string; businessName: string }): Promise<TaxFilingLookupResponse> => {
@@ -29,13 +29,13 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
       Data: [
         {
           Name: "taxpayer-id",
-          Value: props.taxId,
+          Value: props.taxId
         },
         {
           Name: "tax-business-name",
-          Value: props.businessName,
-        },
-      ],
+          Value: props.businessName
+        }
+      ]
     };
     logger.LogInfo(
       `TaxFiling Lookup - NICUSA - Id:${logId} - Request Sent to ${
@@ -68,7 +68,7 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
         state: "SUCCESS",
         filings: flattenDeDupAndConvertTaxFilings(apiResponse.Results ?? [], taxIdMap),
         taxCity: city?.Value ?? "",
-        naicsCode: naicsCode?.Value ?? "",
+        naicsCode: naicsCode?.Value ?? ""
       };
     } catch (error) {
       const axiosError = error as AxiosError;
@@ -121,19 +121,19 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
           Data: [
             {
               SchemaFieldSlug: "tax-return-type",
-              Value: "tax-calendar-reminder",
+              Value: "tax-calendar-reminder"
             },
             {
               SchemaFieldSlug: "taxpayer-id",
-              Value: props.taxId,
+              Value: props.taxId
             },
             {
               SchemaFieldSlug: "tax-business-name",
-              Value: props.businessName,
-            },
-          ],
-        },
-      ],
+              Value: props.businessName
+            }
+          ]
+        }
+      ]
     };
     logger.LogInfo(
       `TaxFiling Onboarding - NICUSA - Id:${logId} - Request Sent to ${
@@ -172,7 +172,7 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
 
   return {
     lookup,
-    onboarding,
+    onboarding
   };
 };
 

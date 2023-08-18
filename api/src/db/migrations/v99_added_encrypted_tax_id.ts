@@ -18,9 +18,9 @@ export const migrate_v98_to_v99 = (v98Data: v98UserData): v99UserData => {
     ...v98Data,
     profileData: {
       ...v98Data.profileData,
-      encryptedTaxId: undefined,
+      encryptedTaxId: undefined
     },
-    version: 99,
+    version: 99
   };
 };
 
@@ -204,7 +204,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v99FormationData {
@@ -311,7 +311,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY",
+  "LIMITED LIABILITY COMPANY"
 ] as const;
 
 const llpBusinessSuffix = [
@@ -320,7 +320,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P.",
+  "R.L.L.P."
 ] as const;
 
 export const lpBusinessSuffix = ["LIMITED PARTNERSHIP", "LP", "L.P."] as const;
@@ -335,7 +335,7 @@ const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC.",
+  "INC."
 ] as const;
 
 const foreignCorpBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
@@ -344,7 +344,7 @@ const AllBusinessSuffixes = [
   ...llcBusinessSuffix,
   ...llpBusinessSuffix,
   ...lpBusinessSuffix,
-  ...foreignCorpBusinessSuffix,
+  ...foreignCorpBusinessSuffix
 ] as const;
 
 type v99BusinessSuffix = (typeof AllBusinessSuffixes)[number];

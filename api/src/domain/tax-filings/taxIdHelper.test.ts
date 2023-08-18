@@ -12,7 +12,7 @@ describe("Tax-Filings Helpers", () => {
     "cr-1orcnr-11": ["cr-1orcnr-1"],
     "cr-1orcnr-12": ["cr-1orcnr-1"],
     "st-250_350": ["st-250", "st-350"],
-    "nj-927_927-w": ["nj-927_927-w", "nj-927-w"],
+    "nj-927_927-w": ["nj-927_927-w", "nj-927-w"]
   };
 
   describe("getTaxIds", () => {
@@ -30,7 +30,7 @@ describe("Tax-Filings Helpers", () => {
       "cr-1orcnr-11": ["cr-1orcnr-1"],
       "cr-1orcnr-12": ["cr-1orcnr-1"],
       "st-250_350": ["st-250", "st-350"],
-      "nj-927_927-w": ["nj-927_927-w", "nj-927-w"],
+      "nj-927_927-w": ["nj-927_927-w", "nj-927-w"]
     };
 
     it("merges filings", () => {
@@ -45,7 +45,7 @@ describe("Tax-Filings Helpers", () => {
           filings.map((i) => {
             return i.identifier;
           })
-        ),
+        )
       ];
       expect(ids).toEqual(["cr-1orcnr-1"]);
     });
@@ -62,7 +62,7 @@ describe("Tax-Filings Helpers", () => {
           filings.map((i) => {
             return i.identifier;
           })
-        ),
+        )
       ];
       expect(ids).toEqual(["st-250", "st-350"]);
     });
@@ -79,7 +79,7 @@ describe("Tax-Filings Helpers", () => {
           filings.map((i) => {
             return i.identifier;
           })
-        ),
+        )
       ];
       expect(ids).toEqual(["nj-927_927-w", "nj-927-w"]);
     });

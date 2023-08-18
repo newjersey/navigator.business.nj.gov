@@ -15,9 +15,9 @@ export const migrate_v15_to_v16 = (v15Data: v15UserData): v16UserData => {
     ...v15Data,
     preferences: {
       roadmapOpenSections: ["PLAN", "START"],
-      roadmapOpenSteps: [],
+      roadmapOpenSteps: []
     },
-    version: 16,
+    version: 16
   };
 };
 

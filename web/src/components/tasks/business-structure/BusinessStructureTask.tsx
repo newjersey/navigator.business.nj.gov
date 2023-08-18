@@ -41,7 +41,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
   const {
     FormFuncWrapper,
     onSubmit,
-    state: formContextState,
+    state: formContextState
   } = useFormContextHelper(createProfileFieldErrorMap());
 
   useEffect(() => {
@@ -85,7 +85,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
         operatingPhase:
           profileData.operatingPhase === "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
             ? "GUEST_MODE"
-            : profileData.operatingPhase,
+            : profileData.operatingPhase
       })
       .queueTaskProgress({ [props.task.id]: "NOT_STARTED" });
 
@@ -98,7 +98,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
       operatingPhase:
         profileData.operatingPhase === "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
           ? "GUEST_MODE"
-          : profileData.operatingPhase,
+          : profileData.operatingPhase
     };
     setProfileData(updatedProfileState);
   };
@@ -138,10 +138,10 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
             value={{
               state: {
                 profileData: profileData,
-                flow: getFlow(profileData),
+                flow: getFlow(profileData)
               },
               setProfileData,
-              onBack: (): void => {},
+              onBack: (): void => {}
             }}
           >
             <LegalStructureRadio taskId={props.task.id} />
@@ -160,7 +160,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
             <div className={`flex ${isLargeScreen ? "flex-row" : "flex-column"}`} data-testid="success-alert">
               <Content>
                 {templateEval(Config.businessStructureTask.successMessage, {
-                  legalStructure: LookupLegalStructureById(business.profileData.legalStructureId).name,
+                  legalStructure: LookupLegalStructureById(business.profileData.legalStructureId).name
                 })}
               </Content>
               {canEdit() ? (

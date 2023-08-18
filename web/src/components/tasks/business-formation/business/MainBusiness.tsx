@@ -92,7 +92,7 @@ export const MainBusiness = (): ReactElement => {
               numericProps={{
                 minLength: 1,
                 trimLeadingZeroes: true,
-                maxLength: 11,
+                maxLength: 11
               }}
               required={true}
               fieldName={"businessTotalStock"}

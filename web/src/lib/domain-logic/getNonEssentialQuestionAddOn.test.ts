@@ -5,9 +5,9 @@ jest.mock("../../../../content/src/roadmaps/nonEssentialQuestions.json", () => (
     {
       id: "test-non-essential",
       questionText: "Test Question?",
-      addOn: "testAddOn",
-    },
-  ],
+      addOn: "testAddOn"
+    }
+  ]
 }));
 
 describe("getNonEssentialQuestionAddOn", () => {

@@ -7,14 +7,14 @@ import { dynamoDbTranslateConfig, DynamoUserDataClient } from "./DynamoUserDataC
 
 // references jest-dynalite-config values
 const dbConfig = {
-  tableName: "users-table-test",
+  tableName: "users-table-test"
 };
 
 describe("DynamoUserDataClient", () => {
   const config = {
     endpoint: process.env.MOCK_DYNAMODB_ENDPOINT,
     sslEnabled: false,
-    region: "local",
+    region: "local"
   };
 
   let client: DynamoDBDocumentClient;

@@ -3,7 +3,7 @@ import { loadAllTaskUrlSlugs, loadTaskByFileName, loadTaskByUrlSlug } from "./lo
 
 jest.mock("fs");
 jest.mock("process", () => ({
-  cwd: (): string => "/test",
+  cwd: (): string => "/test"
 }));
 
 describe("loadTasks", () => {
@@ -59,8 +59,8 @@ describe("loadTasks", () => {
 
       const dependencyFile = JSON.stringify({
         dependencies: [
-          { licenseTask: "license1", licenseTaskDependencies: ["license2"], taskDependencies: ["taskMd"] },
-        ],
+          { licenseTask: "license1", licenseTaskDependencies: ["license2"], taskDependencies: ["taskMd"] }
+        ]
       });
 
       mockReadDirReturnOnce(["task1.md"]);
@@ -83,8 +83,8 @@ describe("loadTasks", () => {
         contentMd: "\n# I am a header1\n\nI am a text content1",
         unlockedBy: [
           { name: "Some Task Name", urlSlug: "some-url-slug", filename: "taskMd", id: "some-id" },
-          { name: "Some License Name2", urlSlug: "some-url-slug-2", filename: "license2", id: "some-id-2" },
-        ],
+          { name: "Some License Name2", urlSlug: "some-url-slug-2", filename: "license2", id: "some-id-2" }
+        ]
       });
     });
   });
@@ -130,7 +130,7 @@ describe("loadTasks", () => {
         expect.arrayContaining([
           { params: { taskUrlSlug: "some-url-slug-1" } },
           { params: { taskUrlSlug: "some-url-slug-2" } },
-          { params: { taskUrlSlug: "some-url-slug-3" } },
+          { params: { taskUrlSlug: "some-url-slug-3" } }
         ])
       );
     });
@@ -181,8 +181,8 @@ describe("loadTasks", () => {
       const dependencyFile = JSON.stringify({
         dependencies: [
           { task: "task2", taskDependencies: ["task3"] },
-          { task: "task1", taskDependencies: ["task2"] },
-        ],
+          { task: "task1", taskDependencies: ["task2"] }
+        ]
       });
 
       mockReadDirReturnOnce(["task1.md", "task2.md", "task3.md"]);
@@ -204,8 +204,8 @@ describe("loadTasks", () => {
         requiresLocation: true,
         contentMd: "\n# I am a header2\n\nI am a text content2",
         unlockedBy: [
-          { name: "Some Task Name3", urlSlug: "some-url-slug-3", filename: "task3", id: "some-id-3" },
-        ],
+          { name: "Some Task Name3", urlSlug: "some-url-slug-3", filename: "task3", id: "some-id-3" }
+        ]
       });
     });
 
@@ -252,7 +252,7 @@ describe("loadTasks", () => {
         "I am a text content2";
 
       const dependencyFile = JSON.stringify({
-        dependencies: [{ licenseTask: "license1", licenseTaskDependencies: ["license2"] }],
+        dependencies: [{ licenseTask: "license1", licenseTaskDependencies: ["license2"] }]
       });
 
       mockReadDirReturnOnce(["task1.md"]);
@@ -275,8 +275,8 @@ describe("loadTasks", () => {
         requiresLocation: true,
         contentMd: "\n# I am a header1\n\nI am a text content1",
         unlockedBy: [
-          { name: "Some License Name2", urlSlug: "some-url-slug-2", filename: "license2", id: "some-id-2" },
-        ],
+          { name: "Some License Name2", urlSlug: "some-url-slug-2", filename: "license2", id: "some-id-2" }
+        ]
       });
     });
   });

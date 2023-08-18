@@ -5,7 +5,7 @@ export const generateAnnualFilings = (dueDates: string[]): TaxFilingCalendarEven
   return dueDates.map((dueDate: string) => ({
     identifier: "ANNUAL_FILING",
     calendarEventType: "TAX-FILING",
-    dueDate,
+    dueDate
   }));
 };
 

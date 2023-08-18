@@ -3,13 +3,13 @@ import {
   FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
-  useSetupInitialMocks,
+  useSetupInitialMocks
 } from "@/test/helpers/helpers-formation";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   castPublicFilingLegalTypeToFormationType,
   FormationFormData,
-  PublicFilingLegalType,
+  PublicFilingLegalType
 } from "@businessnjgovnavigator/shared/formationData";
 import { generateBusiness, generateFormationFormData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
@@ -19,7 +19,7 @@ import { displayContent } from "../contacts/testHelpers";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    useMediaQuery: jest.fn()
   };
 }
 
@@ -31,7 +31,7 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn(),
+  searchBusinessName: jest.fn()
 }));
 
 const getPageHelper = async (
@@ -43,7 +43,7 @@ const getPageHelper = async (
       legalStructureId: castPublicFilingLegalTypeToFormationType(
         profileData.legalStructureId as PublicFilingLegalType,
         "STARTING"
-      ),
+      )
     }),
     formationResponse: undefined,
     getFilingResponse: undefined,
@@ -51,7 +51,7 @@ const getPageHelper = async (
     businessNameSearch: undefined,
     businessNameAvailability: undefined,
     dbaBusinessNameAvailability: undefined,
-    lastVisitedPageIndex: 0,
+    lastVisitedPageIndex: 0
   };
 
   const business = generateBusiness({ profileData, formationData });
@@ -73,7 +73,7 @@ describe("<MainBusinessAddressNj />", () => {
     addressLine1: "",
     addressLine2: "",
     addressMunicipality: undefined,
-    addressZipCode: "",
+    addressZipCode: ""
   };
 
   it("shows option header and expand button", () => {
@@ -128,11 +128,11 @@ describe("<MainBusinessAddressNj />", () => {
     it.each([
       ["addressLine1", ""],
       ["addressMunicipality", undefined],
-      ["addressZipCode", ""],
+      ["addressZipCode", ""]
     ])("shows an error on submission when missing address field", async (field, initialValue) => {
       const page = await getPageHelper({
         [field]: initialValue,
-        legalType: "limited-liability-company",
+        legalType: "limited-liability-company"
       });
       await attemptApiSubmission(page);
 

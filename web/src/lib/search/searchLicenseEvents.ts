@@ -8,7 +8,7 @@ export const searchLicenseEvents = (licenseEvents: LicenseEvent[], term: string)
   for (const item of licenseEvents) {
     let match: Match = {
       filename: item.filename,
-      snippets: [],
+      snippets: []
     };
 
     const content = item.contentMd.toLowerCase();
@@ -21,7 +21,7 @@ export const searchLicenseEvents = (licenseEvents: LicenseEvent[], term: string)
     const labelledTexts = [
       { content: filename, label: "Filename" },
       { content: callToActionLink, label: "CTA Link" },
-      { content: callToActionText, label: "CTA Text" },
+      { content: callToActionText, label: "CTA Text" }
     ];
 
     match = findMatchInBlock(blockTexts, term, match);

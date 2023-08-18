@@ -19,9 +19,9 @@ describe("migrate_v4_to_v5", () => {
       taskProgress: {},
       onboardingData: {
         ...onboardingData,
-        liquorLicense: false,
+        liquorLicense: false
       },
-      version: 5,
+      version: 5
     });
   });
 });

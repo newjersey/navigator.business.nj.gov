@@ -46,14 +46,14 @@ if (IS_OFFLINE) {
   dynamoDb = DynamoDBDocumentClient.from(
     new DynamoDBClient({
       region: "localhost",
-      endpoint: `http://${dynamoDbEndpoint}:${DYNAMO_OFFLINE_PORT}`,
+      endpoint: `http://${dynamoDbEndpoint}:${DYNAMO_OFFLINE_PORT}`
     }),
     dynamoDbTranslateConfig
   );
 } else {
   dynamoDb = DynamoDBDocumentClient.from(
     new DynamoDBClient({
-      region: "us-east-1",
+      region: "us-east-1"
     }),
     dynamoDbTranslateConfig
   );
@@ -99,13 +99,13 @@ const AWS_CRYPTO_CONTEXT_ORIGIN = process.env.AWS_CRYPTO_CONTEXT_ORIGIN || "";
 const AWSEncryptionDecryptionClient = AWSEncryptionDecryptionFactory(AWS_CRYPTO_KEY, {
   stage: AWS_CRYPTO_CONTEXT_STAGE,
   purpose: AWS_CRYPTO_CONTEXT_PURPOSE,
-  origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+  origin: AWS_CRYPTO_CONTEXT_ORIGIN
 });
 
 const taxFilingClient = ApiTaxFilingClient(
   {
     baseUrl: GOV2GO_REGISTRATION_BASE_URL,
-    apiKey: GOV2GO_REGISTRATION_API_KEY,
+    apiKey: GOV2GO_REGISTRATION_API_KEY
   },
   logger
 );
@@ -115,7 +115,7 @@ const govDeliveryNewsletterClient = GovDeliveryNewsletterClient({
   apiKey: GOV_DELIVERY_API_KEY,
   logWriter: logger,
   siteUrl: "navigator.business.nj.gov",
-  urlQuestion: GOV_DELIVERY_URL_QUESTION_ID,
+  urlQuestion: GOV_DELIVERY_URL_QUESTION_ID
 });
 
 const airtableUserTestingClient = AirtableUserTestingClient(
@@ -123,7 +123,7 @@ const airtableUserTestingClient = AirtableUserTestingClient(
     apiKey: AIRTABLE_API_KEY,
     baseId: AIRTABLE_USER_RESEARCH_BASE_ID,
     baseUrl: AIRTABLE_BASE_URL,
-    usersTableName: AIRTABLE_USERS_TABLE,
+    usersTableName: AIRTABLE_USERS_TABLE
   },
   logger
 );
@@ -143,7 +143,7 @@ const myNJSelfRegClient = MyNJSelfRegClientFactory(
   {
     serviceToken: process.env.MYNJ_SERVICE_TOKEN || "",
     roleName: process.env.MYNJ_ROLE_NAME || "",
-    serviceUrl: process.env.MYNJ_SERVICE_URL || "",
+    serviceUrl: process.env.MYNJ_SERVICE_URL || ""
   },
   logger
 );
@@ -154,7 +154,7 @@ const apiFormationClient = ApiFormationClient(
   {
     account: FORMATION_API_ACCOUNT,
     key: FORMATION_API_KEY,
-    baseUrl: FORMATION_API_BASE_URL,
+    baseUrl: FORMATION_API_BASE_URL
   },
   logger
 );

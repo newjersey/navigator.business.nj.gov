@@ -26,7 +26,7 @@ export const WithStatefulProfileFormContext = ({ children }: { children: ReactNo
 
 export const WithStatefulProfileData = ({
   children,
-  initialData,
+  initialData
 }: {
   children: ReactNode;
   initialData: ProfileData;
@@ -45,10 +45,10 @@ export const WithStatefulProfileData = ({
           state: {
             page: 1,
             flow: getFlow(genericData),
-            profileData: genericData,
+            profileData: genericData
           },
           onBack: jest.fn(),
-          setProfileData: setGenericData,
+          setProfileData: setGenericData
         }}
       >
         {children}

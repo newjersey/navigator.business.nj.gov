@@ -82,7 +82,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
         text: Config.cannabisPriorityStatus.socialEquityButtonText,
         onClick: () => {
           return openInNewTab(Config.cannabisPriorityStatus.socialEquityButtonLink);
-        },
+        }
       });
     }
     if (displayMWPriorityType || displayVeteranPriorityType) {
@@ -90,7 +90,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
         text: Config.cannabisPriorityStatus.certificationButtonText,
         onClick: () => {
           return openInNewTab(Config.cannabisPriorityStatus.certificationButtonLink);
-        },
+        }
       });
     }
     if (showTaskCompleteButton()) {

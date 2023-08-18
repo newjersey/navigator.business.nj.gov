@@ -18,8 +18,8 @@ export const ProfileNonEssentialQuestion = (props: Props): ReactElement => {
       ...state.profileData,
       nonEssentialRadioAnswers: {
         ...state.profileData.nonEssentialRadioAnswers,
-        [props.essentialQuestionId]: event.target.value === "true",
-      },
+        [props.essentialQuestionId]: event.target.value === "true"
+      }
     });
   };
 

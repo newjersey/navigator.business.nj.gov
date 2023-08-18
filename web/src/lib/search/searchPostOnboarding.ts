@@ -8,7 +8,7 @@ export const searchPostOnboarding = (postOnboardings: PostOnboardingFile[], term
   for (const item of postOnboardings) {
     let match: Match = {
       filename: item.filename,
-      snippets: [],
+      snippets: []
     };
 
     const content = item.contentMd.toLowerCase();
@@ -20,7 +20,7 @@ export const searchPostOnboarding = (postOnboardings: PostOnboardingFile[], term
 
     const labelledTexts = [
       { content: filename, label: "Filename" },
-      { content: question, label: "question" },
+      { content: question, label: "question" }
     ];
 
     match = findMatchInBlock(blockTexts, term, match);

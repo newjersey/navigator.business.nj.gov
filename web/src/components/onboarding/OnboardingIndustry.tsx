@@ -32,7 +32,7 @@ export const OnboardingIndustry = <T,>(props: Props<T>): ReactElement => {
     getProfileConfig({
       config: Config,
       persona: state.flow,
-      fieldName: fieldName,
+      fieldName: fieldName
     });
 
   const isValid = (value: string | undefined): boolean => !!value && value.length > 0;

@@ -74,7 +74,7 @@ export const PrimaryButtonDropdown = (props: Props): ReactElement => {
           <Grow
             {...TransitionProps}
             style={{
-              transformOrigin: "left top",
+              transformOrigin: "left top"
             }}
           >
             <Paper>

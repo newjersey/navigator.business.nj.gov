@@ -3,7 +3,7 @@ import {
   generatev55ProfileData,
   generatev55User,
   v55ProfileData,
-  v55UserData,
+  v55UserData
 } from "./v55_marketing_and_pr";
 import { migrate_v55_to_v56 } from "./v56_cleaning_janatorial";
 
@@ -47,18 +47,18 @@ describe("migrate_v55_to_v56", () => {
         roadmapOpenSections: ["PLAN", "START"],
         roadmapOpenSteps: [],
         hiddenCertificationIds: [],
-        hiddenFundingIds: [],
+        hiddenFundingIds: []
       },
       taskItemChecklist: {},
       taxFilingData: {
-        filings: [],
+        filings: []
       },
       formationData: {
         formationFormData: generatev55FormationFormData({}),
         formationResponse: undefined,
-        getFilingResponse: undefined,
+        getFilingResponse: undefined
       },
-      version: 53,
+      version: 53
     };
   };
 });

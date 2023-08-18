@@ -6,7 +6,7 @@ import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import {
   generateBusiness,
   generateFormationData,
-  generateGetFilingResponse,
+  generateGetFilingResponse
 } from "@businessnjgovnavigator/shared/test";
 import { ReactElement } from "react";
 
@@ -16,8 +16,8 @@ const FormationSuccessPreview = (props: PreviewProps): ReactElement => {
 
   const business = generateBusiness({
     formationData: generateFormationData({
-      getFilingResponse: generateGetFilingResponse({}),
-    }),
+      getFilingResponse: generateGetFilingResponse({})
+    })
   });
 
   return (

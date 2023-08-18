@@ -4,7 +4,7 @@ import fs from "fs";
 
 jest.mock("fs");
 jest.mock("process", () => ({
-  cwd: (): string => "/test",
+  cwd: (): string => "/test"
 }));
 
 describe("loadOperateReferences", () => {
@@ -89,28 +89,28 @@ describe("loadOperateReferences", () => {
       "some-filing-id-1": {
         name: "Some Filing Name1",
         urlSlug: "some-filing-url-slug-1",
-        urlPath: "/filings/some-filing-url-slug-1",
+        urlPath: "/filings/some-filing-url-slug-1"
       },
       "some-filing-id-2": {
         name: "Some Filing Name2",
         urlSlug: "some-filing-url-slug-2",
-        urlPath: "/filings/some-filing-url-slug-2",
+        urlPath: "/filings/some-filing-url-slug-2"
       },
       "some-funding-id-1": {
         name: "Some Funding Name1",
         urlSlug: "some-funding-url-slug-1",
-        urlPath: "/funding/some-funding-url-slug-1",
+        urlPath: "/funding/some-funding-url-slug-1"
       },
       "some-funding-id-2": {
         name: "Some Funding Name2",
         urlSlug: "some-funding-url-slug-2",
-        urlPath: "/funding/some-funding-url-slug-2",
+        urlPath: "/funding/some-funding-url-slug-2"
       },
       "some-cert-id-1": {
         name: "Some Certification Name1",
         urlSlug: "some-cert-url-slug-1",
-        urlPath: "/certification/some-cert-url-slug-1",
-      },
+        urlPath: "/certification/some-cert-url-slug-1"
+      }
     };
 
     expect(loadOperateReferences()).toEqual(expectedOperateReferences);

@@ -22,13 +22,13 @@ export const migrate_v52_to_v53 = (v52Data: v52UserData): v53UserData => {
       ...v52Data.profileData,
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      cannabisMicrobusiness: v52Data.cannabisMicrobusiness ?? undefined,
+      cannabisMicrobusiness: v52Data.cannabisMicrobusiness ?? undefined
     },
     taskItemChecklist: {
       ...v52Data.taskItemChecklist,
-      "general-dvob": vetOwnedValue,
+      "general-dvob": vetOwnedValue
     },
-    version: 53,
+    version: 53
   };
 };
 
@@ -172,7 +172,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v53FormationData {

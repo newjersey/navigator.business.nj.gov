@@ -9,14 +9,14 @@ export default {
       label: "Icon Type",
       required: true,
       widget: "select",
-      options: allInlineIconTypes,
+      options: allInlineIconTypes
     },
     {
       name: "body",
       label: "Body Text",
       required: true,
-      widget: "markdown",
-    },
+      widget: "markdown"
+    }
   ],
 
   pattern: /:::icon[^:]+:::/g,
@@ -48,6 +48,6 @@ export default {
 
   toPreview: (obj: { type: string; body: string }): string => {
     return `:::icon{ type="${obj.type}" } \n ${obj.body.trim()}\n:::`;
-  },
+  }
 };
 1;

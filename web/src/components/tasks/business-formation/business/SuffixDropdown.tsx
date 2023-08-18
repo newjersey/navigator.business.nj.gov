@@ -17,7 +17,7 @@ export const SuffixDropdown = (): ReactElement => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        businessSuffix: event.target.value as BusinessSuffix,
+        businessSuffix: event.target.value as BusinessSuffix
       };
     });
   };

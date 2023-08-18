@@ -6,7 +6,7 @@ import {
   generateCertification,
   generateFunding,
   generateSidebarCardContent,
-  getProfileDataForUnfilteredOpportunities,
+  getProfileDataForUnfilteredOpportunities
 } from "@/test/factories";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -14,7 +14,7 @@ import { useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData
 import {
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData,
+  WithStatefulUserData
 } from "@/test/mock/withStatefulUserData";
 import { Business, generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared";
 import { generatePreferences, generateProfileData } from "@businessnjgovnavigator/shared/test";
@@ -36,8 +36,8 @@ describe("<SidebarCardsContainer />", () => {
   const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>): RoadmapDisplayContent => {
     return {
       sidebarDisplayContent: sidebar ?? {
-        welcome: generateSidebarCardContent({}),
-      },
+        welcome: generateSidebarCardContent({})
+      }
     };
   };
 
@@ -79,7 +79,7 @@ describe("<SidebarCardsContainer />", () => {
   describe("nudges", () => {
     it("renders content for visible card", () => {
       const sidebarCards = {
-        fakeCard: generateSidebarCardContent({ contentMd: "FakeCardContent" }),
+        fakeCard: generateSidebarCardContent({ contentMd: "FakeCardContent" })
       };
 
       useMockBusiness({ preferences: generatePreferences({ visibleSidebarCards: ["fakeCard"] }) });
@@ -92,12 +92,12 @@ describe("<SidebarCardsContainer />", () => {
       const sidebarCards = {
         "fake-above-card": generateSidebarCardContent({
           id: "fake-above-card",
-          section: "above-opportunities",
-        }),
+          section: "above-opportunities"
+        })
       };
 
       useMockBusiness({
-        preferences: generatePreferences({ visibleSidebarCards: ["fake-above-card"] }),
+        preferences: generatePreferences({ visibleSidebarCards: ["fake-above-card"] })
       });
 
       renderPage({ sidebarCards });
@@ -109,12 +109,12 @@ describe("<SidebarCardsContainer />", () => {
       const sidebarCards = {
         "fake-below-card": generateSidebarCardContent({
           id: "fake-below-card",
-          section: "below-opportunities",
-        }),
+          section: "below-opportunities"
+        })
       };
 
       useMockBusiness({
-        preferences: generatePreferences({ visibleSidebarCards: ["fake-below-card"] }),
+        preferences: generatePreferences({ visibleSidebarCards: ["fake-below-card"] })
       });
 
       renderPage({ sidebarCards });
@@ -125,16 +125,16 @@ describe("<SidebarCardsContainer />", () => {
     it("removes successful registration card when it's closed", async () => {
       const business = generateBusiness({
         preferences: generatePreferences({
-          visibleSidebarCards: ["fake-visible-card"],
-        }),
+          visibleSidebarCards: ["fake-visible-card"]
+        })
       });
 
       const sidebarCards = {
         "fake-visible-card": generateSidebarCardContent({
           id: "fake-visible-card",
           contentMd: "FakeContent",
-          hasCloseButton: true,
-        }),
+          hasCloseButton: true
+        })
       };
 
       renderWithBusiness(business, { sidebarCards });
@@ -156,19 +156,19 @@ describe("<SidebarCardsContainer />", () => {
       useMockBusiness({
         profileData: generateProfileData({
           operatingPhase: "FORMED_AND_REGISTERED",
-          ownershipTypeIds: ["disabled-veteran", "minority-owned"],
-        }),
+          ownershipTypeIds: ["disabled-veteran", "minority-owned"]
+        })
       });
 
       const certifications = [
         generateCertification({
           name: "Cert 1",
-          applicableOwnershipTypes: ["disabled-veteran", "minority-owned"],
+          applicableOwnershipTypes: ["disabled-veteran", "minority-owned"]
         }),
         generateCertification({
           name: "Cert 2",
-          applicableOwnershipTypes: ["disabled-veteran", "minority-owned"],
-        }),
+          applicableOwnershipTypes: ["disabled-veteran", "minority-owned"]
+        })
       ];
 
       renderPage({ certifications });
@@ -181,19 +181,19 @@ describe("<SidebarCardsContainer />", () => {
       useMockBusiness({
         profileData: generateProfileData({
           operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
-          ownershipTypeIds: ["disabled-veteran", "minority-owned"],
-        }),
+          ownershipTypeIds: ["disabled-veteran", "minority-owned"]
+        })
       });
 
       const certifications = [
         generateCertification({
           name: "Cert 1",
-          applicableOwnershipTypes: ["disabled-veteran", "minority-owned"],
+          applicableOwnershipTypes: ["disabled-veteran", "minority-owned"]
         }),
         generateCertification({
           name: "Cert 2",
-          applicableOwnershipTypes: ["disabled-veteran", "minority-owned"],
-        }),
+          applicableOwnershipTypes: ["disabled-veteran", "minority-owned"]
+        })
       ];
 
       renderPage({ certifications });
@@ -206,14 +206,14 @@ describe("<SidebarCardsContainer />", () => {
       useMockBusiness({
         profileData: generateProfileData({
           operatingPhase: "FORMED_AND_REGISTERED",
-          ownershipTypeIds: ["disabled-veteran"],
-        }),
+          ownershipTypeIds: ["disabled-veteran"]
+        })
       });
 
       const certifications = [
         generateCertification({ name: "Cert 1", applicableOwnershipTypes: ["disabled-veteran"] }),
         generateCertification({ name: "Cert 2", applicableOwnershipTypes: [] }),
-        generateCertification({ name: "Cert 3", applicableOwnershipTypes: ["minority-owned"] }),
+        generateCertification({ name: "Cert 3", applicableOwnershipTypes: ["minority-owned"] })
       ];
 
       renderPage({ certifications });
@@ -239,8 +239,8 @@ describe("<SidebarCardsContainer />", () => {
           municipality: undefined,
           existingEmployees: "1",
           sectorId: "construction",
-          operatingPhase: "UP_AND_RUNNING",
-        }),
+          operatingPhase: "UP_AND_RUNNING"
+        })
       });
 
       const fundings = [
@@ -248,7 +248,7 @@ describe("<SidebarCardsContainer />", () => {
         generateFunding({ name: "Funding 2", sector: ["construction"], status: "rolling application" }),
         generateFunding({ name: "Funding 3", sector: ["cannabis"], status: "rolling application" }),
         generateFunding({ name: "Funding 4", sector: [], status: "deadline" }),
-        generateFunding({ name: "Funding 5", sector: [], status: "first come, first serve" }),
+        generateFunding({ name: "Funding 5", sector: [], status: "first come, first serve" })
       ];
 
       renderWithBusiness(business, { fundings });
@@ -272,12 +272,12 @@ describe("<SidebarCardsContainer />", () => {
           municipality: undefined,
           existingEmployees: "1",
           sectorId: "construction",
-          operatingPhase: "FORMED_AND_REGISTERED",
-        }),
+          operatingPhase: "FORMED_AND_REGISTERED"
+        })
       });
 
       const fundings = [
-        generateFunding({ name: "Funding 1", sector: ["construction"], status: "rolling application" }),
+        generateFunding({ name: "Funding 1", sector: ["construction"], status: "rolling application" })
       ];
 
       renderWithBusiness(business, { fundings });
@@ -288,7 +288,7 @@ describe("<SidebarCardsContainer />", () => {
     it("links to task page for fundings", () => {
       useMockProfileData(getProfileDataForUnfilteredOpportunities());
       const fundings = [
-        generateFunding({ urlSlug: "opp", name: "Funding Opp", status: "rolling application" }),
+        generateFunding({ urlSlug: "opp", name: "Funding Opp", status: "rolling application" })
       ];
       renderPage({ fundings });
       expect(screen.getByText("Funding Opp")).toHaveAttribute("href", "/funding/opp");
@@ -297,13 +297,13 @@ describe("<SidebarCardsContainer />", () => {
     it("displays link to learn more about fundings when user is UP_AND_RUNNING", () => {
       const business = generateBusiness({
         profileData: generateProfileData({
-          operatingPhase: "UP_AND_RUNNING",
-        }),
+          operatingPhase: "UP_AND_RUNNING"
+        })
       });
       renderWithBusiness(business, { fundings: [] });
       expect(
         screen.getByText(markdownToText(Config.dashboardDefaults.learnMoreFundingOpportunities), {
-          exact: false,
+          exact: false
         })
       ).toBeInTheDocument();
     });
@@ -311,13 +311,13 @@ describe("<SidebarCardsContainer />", () => {
     it("does not display link to learn more about fundings when user is not UP_AND_RUNNING", () => {
       const business = generateBusiness({
         profileData: generateProfileData({
-          operatingPhase: "FORMED_AND_REGISTERED",
-        }),
+          operatingPhase: "FORMED_AND_REGISTERED"
+        })
       });
       renderWithBusiness(business, { fundings: [] });
       expect(
         screen.queryByText(markdownToText(Config.dashboardDefaults.learnMoreFundingOpportunities), {
-          exact: false,
+          exact: false
         })
       ).not.toBeInTheDocument();
     });
@@ -334,7 +334,7 @@ describe("<SidebarCardsContainer />", () => {
     it("moves an opportunity to/from Hidden accordion when hide/unhide is clicked", () => {
       renderWithBusiness(generateBusiness({ profileData: getProfileDataForUnfilteredOpportunities() }), {
         certifications,
-        fundings,
+        fundings
       });
 
       let cert1 = within(screen.getByTestId("cert1-id"));
@@ -367,8 +367,8 @@ describe("<SidebarCardsContainer />", () => {
         profileData: getProfileDataForUnfilteredOpportunities(),
         preferences: generatePreferences({
           hiddenCertificationIds: [],
-          hiddenFundingIds: [],
-        }),
+          hiddenFundingIds: []
+        })
       });
 
       renderWithBusiness(business, { certifications, fundings });
@@ -383,8 +383,8 @@ describe("<SidebarCardsContainer />", () => {
         profileData: getProfileDataForUnfilteredOpportunities(),
         preferences: generatePreferences({
           hiddenCertificationIds: [],
-          hiddenFundingIds: ["fund1-id"],
-        }),
+          hiddenFundingIds: ["fund1-id"]
+        })
       });
 
       renderWithBusiness(business, { certifications, fundings });
@@ -399,8 +399,8 @@ describe("<SidebarCardsContainer />", () => {
         profileData: getProfileDataForUnfilteredOpportunities(),
         preferences: generatePreferences({
           hiddenCertificationIds: ["cert1-id"],
-          hiddenFundingIds: ["fund1-id"],
-        }),
+          hiddenFundingIds: ["fund1-id"]
+        })
       });
 
       renderWithBusiness(business, { certifications, fundings });
@@ -411,12 +411,12 @@ describe("<SidebarCardsContainer />", () => {
       const business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
-          ownershipTypeIds: ["veteran-owned", "disabled-veteran", "minority-owned", "woman-owned"],
+          ownershipTypeIds: ["veteran-owned", "disabled-veteran", "minority-owned", "woman-owned"]
         }),
         preferences: generatePreferences({
           hiddenCertificationIds: ["cert1-id"],
-          hiddenFundingIds: ["fund1-id"],
-        }),
+          hiddenFundingIds: ["fund1-id"]
+        })
       });
 
       renderWithBusiness(business, { certifications, fundings });
@@ -426,12 +426,12 @@ describe("<SidebarCardsContainer />", () => {
     it("only counts hidden certifications before fundings are unlocked", () => {
       const business = generateBusiness({
         profileData: generateProfileData({
-          operatingPhase: "FORMED_AND_REGISTERED",
+          operatingPhase: "FORMED_AND_REGISTERED"
         }),
         preferences: generatePreferences({
           hiddenCertificationIds: ["cert1-id"],
-          hiddenFundingIds: ["fund1-id"],
-        }),
+          hiddenFundingIds: ["fund1-id"]
+        })
       });
 
       renderWithBusiness(business, { certifications, fundings });
@@ -443,12 +443,12 @@ describe("<SidebarCardsContainer />", () => {
     it("counts both hidden fundings and certifications after fundings are unlocked", () => {
       const business = generateBusiness({
         profileData: generateProfileData({
-          operatingPhase: "UP_AND_RUNNING",
+          operatingPhase: "UP_AND_RUNNING"
         }),
         preferences: generatePreferences({
           hiddenCertificationIds: ["cert1-id"],
-          hiddenFundingIds: ["fund1-id"],
-        }),
+          hiddenFundingIds: ["fund1-id"]
+        })
       });
 
       renderWithBusiness(business, { certifications, fundings });

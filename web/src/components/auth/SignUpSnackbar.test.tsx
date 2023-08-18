@@ -20,7 +20,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    useMediaQuery: jest.fn()
   };
 }
 
@@ -42,7 +42,7 @@ describe("SignUpSnackbar", () => {
     render(
       withAuthAlert(<SignUpSnackbar />, isAuthenticated, {
         registrationAlertIsVisible,
-        setRegistrationAlertIsVisible,
+        setRegistrationAlertIsVisible
       })
     );
   };

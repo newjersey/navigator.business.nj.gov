@@ -18,13 +18,13 @@ export const NexusUnavailable = (props: UnavailableProps): ReactElement => {
   };
 
   const [textBeforeButton, textAfterButton] = templateEval(Config.nexusNameSearch.unavailableText, {
-    name: props.submittedName,
+    name: props.submittedName
   }).split("${searchAgainButton}");
 
   const inlineParagraphComponent = {
     p: (props: { children: string[] }): ReactElement => {
       return <div className="display-inline">{props.children}</div>;
-    },
+    }
   };
 
   return (

@@ -22,7 +22,7 @@ export const OnboardingLocationInNewJersey = <T,>(props: FormContextFieldProps<T
     getProfileConfig({
       config: Config,
       persona: state.flow,
-      fieldName: "nexusLocationInNewJersey",
+      fieldName: "nexusLocationInNewJersey"
     });
 
   RegisterForOnSubmit(() => state.profileData["nexusLocationInNewJersey"] !== undefined);
@@ -33,7 +33,7 @@ export const OnboardingLocationInNewJersey = <T,>(props: FormContextFieldProps<T
     setProfileData({
       ...state.profileData,
       nexusLocationInNewJersey: hasLocationInNJ,
-      homeBasedBusiness: hasLocationInNJ ? false : state.profileData.homeBasedBusiness,
+      homeBasedBusiness: hasLocationInNJ ? false : state.profileData.homeBasedBusiness
     });
   };
   return (

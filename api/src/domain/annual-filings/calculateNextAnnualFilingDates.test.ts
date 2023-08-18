@@ -8,7 +8,7 @@ jest.mock("@shared/dateHelpers", () => {
     getCurrentDate: jest.fn(),
     parseDateWithFormat: jest.fn((x, y) => {
       return dayjs(x, y);
-    }),
+    })
   };
 });
 const currentDateMock = (getCurrentDateModule as jest.Mocked<typeof getCurrentDateModule>).getCurrentDate;
@@ -23,7 +23,7 @@ describe("calculateNextAnnualFilingDates", () => {
       expect(calculateNextAnnualFilingDates("2021-03-01")).toEqual([
         "2022-03-31",
         "2023-03-31",
-        "2024-03-31",
+        "2024-03-31"
       ]);
     });
 
@@ -31,7 +31,7 @@ describe("calculateNextAnnualFilingDates", () => {
       expect(calculateNextAnnualFilingDates("2020-06-01")).toEqual([
         "2022-06-30",
         "2023-06-30",
-        "2024-06-30",
+        "2024-06-30"
       ]);
     });
 
@@ -39,7 +39,7 @@ describe("calculateNextAnnualFilingDates", () => {
       expect(calculateNextAnnualFilingDates("2001-04-01")).toEqual([
         "2022-04-30",
         "2023-04-30",
-        "2024-04-30",
+        "2024-04-30"
       ]);
     });
 
@@ -47,7 +47,7 @@ describe("calculateNextAnnualFilingDates", () => {
       expect(calculateNextAnnualFilingDates("2020-11-01")).toEqual([
         "2021-11-30",
         "2022-11-30",
-        "2023-11-30",
+        "2023-11-30"
       ]);
     });
 
@@ -55,7 +55,7 @@ describe("calculateNextAnnualFilingDates", () => {
       expect(calculateNextAnnualFilingDates("2021-10-01")).toEqual([
         "2022-10-31",
         "2023-10-31",
-        "2024-10-31",
+        "2024-10-31"
       ]);
     });
 
@@ -63,7 +63,7 @@ describe("calculateNextAnnualFilingDates", () => {
       expect(calculateNextAnnualFilingDates("2020-10-01")).toEqual([
         "2021-10-31",
         "2022-10-31",
-        "2023-10-31",
+        "2023-10-31"
       ]);
     });
 
@@ -71,7 +71,7 @@ describe("calculateNextAnnualFilingDates", () => {
       expect(calculateNextAnnualFilingDates("2001-10-01")).toEqual([
         "2021-10-31",
         "2022-10-31",
-        "2023-10-31",
+        "2023-10-31"
       ]);
     });
 
@@ -79,7 +79,7 @@ describe("calculateNextAnnualFilingDates", () => {
       expect(calculateNextAnnualFilingDates("2030-08-29")).toEqual([
         "2031-08-31",
         "2032-08-31",
-        "2033-08-31",
+        "2033-08-31"
       ]);
     });
 
@@ -87,7 +87,7 @@ describe("calculateNextAnnualFilingDates", () => {
       expect(calculateNextAnnualFilingDates("2021-11-01")).toEqual([
         "2022-11-30",
         "2023-11-30",
-        "2024-11-30",
+        "2024-11-30"
       ]);
     });
   });
@@ -101,7 +101,7 @@ describe("calculateNextAnnualFilingDates", () => {
       expect(calculateNextAnnualFilingDates("2021-10-01")).toEqual([
         "2022-10-31",
         "2023-10-31",
-        "2024-10-31",
+        "2024-10-31"
       ]);
     });
 
@@ -109,7 +109,7 @@ describe("calculateNextAnnualFilingDates", () => {
       expect(calculateNextAnnualFilingDates("2020-10-01")).toEqual([
         "2021-10-31",
         "2022-10-31",
-        "2023-10-31",
+        "2023-10-31"
       ]);
     });
   });
@@ -123,7 +123,7 @@ describe("calculateNextAnnualFilingDates", () => {
       expect(calculateNextAnnualFilingDates("2021-11-01")).toEqual([
         "2022-11-30",
         "2023-11-30",
-        "2024-11-30",
+        "2024-11-30"
       ]);
     });
 
@@ -131,7 +131,7 @@ describe("calculateNextAnnualFilingDates", () => {
       expect(calculateNextAnnualFilingDates("2020-10-01")).toEqual([
         "2022-10-31",
         "2023-10-31",
-        "2024-10-31",
+        "2024-10-31"
       ]);
     });
   });

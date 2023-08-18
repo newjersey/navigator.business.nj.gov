@@ -9,7 +9,7 @@ import {
   generateTaxFilingCalendarEvent,
   generateTaxFilingData,
   getCurrentDate,
-  randomInt,
+  randomInt
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -49,7 +49,7 @@ describe("filing page", () => {
       taxRates: `taxRates-${id}`,
       additionalInfo: `additionalInfo-${id}`,
       agency: randomInt() % 2 ? "New Jersey Division of Taxation" : undefined,
-      ...overrides,
+      ...overrides
     };
   };
 
@@ -63,10 +63,10 @@ describe("filing page", () => {
           generateTaxFilingCalendarEvent({}),
           generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
-            dueDate: dueDate.format(defaultDateFormat),
-          }),
-        ],
-      }),
+            dueDate: dueDate.format(defaultDateFormat)
+          })
+        ]
+      })
     });
 
     const filing = generateFiling({
@@ -82,7 +82,7 @@ describe("filing page", () => {
       treasuryLink: undefined,
       taxRates: undefined,
       additionalInfo: undefined,
-      agency: undefined,
+      agency: undefined
     });
 
     renderFilingPage(filing);
@@ -110,10 +110,10 @@ describe("filing page", () => {
         filings: [
           generateTaxFilingCalendarEvent({
             identifier: "filing id",
-            dueDate: dueDate.format(defaultDateFormat),
-          }),
-        ],
-      }),
+            dueDate: dueDate.format(defaultDateFormat)
+          })
+        ]
+      })
     });
 
     const filing = generateFiling({ id: "filing id" });
@@ -129,9 +129,9 @@ describe("filing page", () => {
       taxFilingData: generateTaxFilingData({
         filings: [
           generateTaxFilingCalendarEvent({}),
-          generateTaxFilingCalendarEvent({ identifier: "filing-identifier-1" }),
-        ],
-      }),
+          generateTaxFilingCalendarEvent({ identifier: "filing-identifier-1" })
+        ]
+      })
     });
 
     const filing: Filing = generateFiling({
@@ -143,7 +143,7 @@ describe("filing page", () => {
       treasuryLink: "https://www.google.com",
       taxRates: "tax rate stuff",
       additionalInfo: "additional info stuff",
-      agency: "New Jersey Division of Taxation",
+      agency: "New Jersey Division of Taxation"
     });
 
     renderFilingPage(filing);
@@ -167,14 +167,14 @@ describe("filing page", () => {
       taxFilingData: generateTaxFilingData({
         filings: [
           generateTaxFilingCalendarEvent({}),
-          generateTaxFilingCalendarEvent({ identifier: "filing-identifier-1" }),
-        ],
-      }),
+          generateTaxFilingCalendarEvent({ identifier: "filing-identifier-1" })
+        ]
+      })
     });
 
     const filing: Filing = generateFiling({
       urlSlug: "filing-identifier-1",
-      agency: "Internal Revenue Service (IRS)",
+      agency: "Internal Revenue Service (IRS)"
     });
 
     renderFilingPage(filing);
@@ -190,43 +190,43 @@ describe("filing page", () => {
         filings: [
           generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
-            dueDate: getCurrentDate().add(2, "month").format(defaultDateFormat),
+            dueDate: getCurrentDate().add(2, "month").format(defaultDateFormat)
           }),
           generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
-            dueDate: getCurrentDate().add(3, "month").format(defaultDateFormat),
+            dueDate: getCurrentDate().add(3, "month").format(defaultDateFormat)
           }),
           generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
-            dueDate: getCurrentDate().add(8, "month").format(defaultDateFormat),
+            dueDate: getCurrentDate().add(8, "month").format(defaultDateFormat)
           }),
           generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
-            dueDate: getCurrentDate().add(1, "month").format(defaultDateFormat),
+            dueDate: getCurrentDate().add(1, "month").format(defaultDateFormat)
           }),
           generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
-            dueDate: closestDate.format(defaultDateFormat),
+            dueDate: closestDate.format(defaultDateFormat)
           }),
           generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
-            dueDate: getCurrentDate().add(7, "month").format(defaultDateFormat),
+            dueDate: getCurrentDate().add(7, "month").format(defaultDateFormat)
           }),
           generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
-            dueDate: getCurrentDate().add(4, "month").format(defaultDateFormat),
+            dueDate: getCurrentDate().add(4, "month").format(defaultDateFormat)
           }),
           generateTaxFilingCalendarEvent({
             identifier: "filing-identifier-1",
-            dueDate: getCurrentDate().add(6, "month").format(defaultDateFormat),
-          }),
-        ],
-      }),
+            dueDate: getCurrentDate().add(6, "month").format(defaultDateFormat)
+          })
+        ]
+      })
     });
 
     const filing: Filing = generateFiling({
       id: "filing-identifier-1",
-      agency: "Internal Revenue Service (IRS)",
+      agency: "Internal Revenue Service (IRS)"
     });
 
     renderFilingPage(filing);
@@ -238,12 +238,12 @@ describe("filing page", () => {
   it("contains a tooltip with a note regarding filing date in the annual report", async () => {
     useMockBusiness({
       taxFilingData: generateTaxFilingData({
-        filings: [generateTaxFilingCalendarEvent({ identifier: "annual-report" })],
-      }),
+        filings: [generateTaxFilingCalendarEvent({ identifier: "annual-report" })]
+      })
     });
 
     const filing: Filing = generateFiling({
-      urlSlug: "annual-report",
+      urlSlug: "annual-report"
     });
 
     renderFilingPage(filing);

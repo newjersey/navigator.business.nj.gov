@@ -10,7 +10,7 @@ import { screen, waitFor } from "@testing-library/react";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    useMediaQuery: jest.fn()
   };
 }
 
@@ -24,7 +24,7 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn(),
+  searchBusinessName: jest.fn()
 }));
 
 describe("Formation - Registered Agent Field", () => {
@@ -38,7 +38,7 @@ describe("Formation - Registered Agent Field", () => {
       {},
       {
         agentNumber: "123465798",
-        agentNumberOrManual: "NUMBER",
+        agentNumberOrManual: "NUMBER"
       }
     );
     expect(page.getInputElementByLabel("Agent number").value).toBe("123465798");
@@ -54,7 +54,7 @@ describe("Formation - Registered Agent Field", () => {
         agentOfficeAddressLine1: "123 agent address",
         agentOfficeAddressLine2: "agent suite 201",
         agentOfficeAddressMunicipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
-        agentOfficeAddressZipCode: "99887",
+        agentOfficeAddressZipCode: "99887"
       }
     );
 
@@ -99,11 +99,11 @@ describe("Formation - Registered Agent Field", () => {
         agentNumberOrManual: "MANUAL_ENTRY",
         agentEmail: "original@example.com",
         agentName: "Original Name",
-        agentUseAccountInfo: false,
+        agentUseAccountInfo: false
       },
       {
         name: "New Name",
-        email: "new@example.com",
+        email: "new@example.com"
       }
     );
 
@@ -127,11 +127,11 @@ describe("Formation - Registered Agent Field", () => {
         agentNumberOrManual: "MANUAL_ENTRY",
         agentEmail: "original@example.com",
         agentName: "Original Name",
-        agentUseAccountInfo: false,
+        agentUseAccountInfo: false
       },
       {
         name: "New Name",
-        email: "new@example.com",
+        email: "new@example.com"
       }
     );
 
@@ -153,7 +153,7 @@ describe("Formation - Registered Agent Field", () => {
         agentOfficeAddressLine2: "Old Add 456",
         agentOfficeAddressMunicipality: generateMunicipality({
           name: "Old Test City",
-          displayName: "Old Test City",
+          displayName: "Old Test City"
         }),
         agentOfficeAddressZipCode: "07001",
         addressLine1: "New Add 123",
@@ -161,7 +161,7 @@ describe("Formation - Registered Agent Field", () => {
         addressZipCode: "07002",
         addressState: { shortCode: "NJ", name: "New Jersey" },
         addressCountry: "US",
-        agentUseAccountInfo: false,
+        agentUseAccountInfo: false
       }
     );
 
@@ -197,7 +197,7 @@ describe("Formation - Registered Agent Field", () => {
         addressZipCode: "",
         addressState: { shortCode: "NJ", name: "New Jersey" },
         addressCountry: "US",
-        agentUseAccountInfo: false,
+        agentUseAccountInfo: false
       }
     );
 
@@ -218,7 +218,7 @@ describe("Formation - Registered Agent Field", () => {
         agentNumberOrManual: "MANUAL_ENTRY",
         agentOfficeAddressLine1: "",
         addressLine1: "",
-        agentUseAccountInfo: false,
+        agentUseAccountInfo: false
       }
     );
 
@@ -233,7 +233,7 @@ describe("Formation - Registered Agent Field", () => {
         agentNumberOrManual: "MANUAL_ENTRY",
         agentOfficeAddressZipCode: "",
         addressZipCode: "",
-        agentUseAccountInfo: false,
+        agentUseAccountInfo: false
       }
     );
 
@@ -261,7 +261,7 @@ describe("Formation - Registered Agent Field", () => {
         addressZipCode: "07002",
         addressState: { shortCode: "NJ", name: "New Jersey" },
         addressCountry: "US",
-        agentUseBusinessAddress: false,
+        agentUseBusinessAddress: false
       }
     );
 
@@ -286,7 +286,7 @@ describe("Formation - Registered Agent Field", () => {
       {},
       {
         agentOfficeAddressZipCode: "",
-        agentNumberOrManual: "MANUAL_ENTRY",
+        agentNumberOrManual: "MANUAL_ENTRY"
       }
     );
 
@@ -303,7 +303,7 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentNumberOrManual: "MANUAL_ENTRY",
-          agentEmail: "",
+          agentEmail: ""
         }
       );
 
@@ -319,7 +319,7 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentNumberOrManual: "MANUAL_ENTRY",
-          agentEmail: "",
+          agentEmail: ""
         }
       );
 
@@ -335,7 +335,7 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentNumberOrManual: "MANUAL_ENTRY",
-          agentEmail: "",
+          agentEmail: ""
         }
       );
 
@@ -351,7 +351,7 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentNumber: "",
-          agentNumberOrManual: "NUMBER",
+          agentNumberOrManual: "NUMBER"
         }
       );
       await attemptApiSubmission(page);
@@ -365,7 +365,7 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentName: "",
-          agentNumberOrManual: "MANUAL_ENTRY",
+          agentNumberOrManual: "MANUAL_ENTRY"
         }
       );
       await attemptApiSubmission(page);
@@ -377,7 +377,7 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentEmail: "",
-          agentNumberOrManual: "MANUAL_ENTRY",
+          agentNumberOrManual: "MANUAL_ENTRY"
         }
       );
       await attemptApiSubmission(page);
@@ -389,7 +389,7 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentOfficeAddressLine1: "",
-          agentNumberOrManual: "MANUAL_ENTRY",
+          agentNumberOrManual: "MANUAL_ENTRY"
         }
       );
       await attemptApiSubmission(page);
@@ -403,7 +403,7 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentOfficeAddressMunicipality: undefined,
-          agentNumberOrManual: "MANUAL_ENTRY",
+          agentNumberOrManual: "MANUAL_ENTRY"
         }
       );
       await attemptApiSubmission(page);
@@ -417,7 +417,7 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentOfficeAddressZipCode: "",
-          agentNumberOrManual: "MANUAL_ENTRY",
+          agentNumberOrManual: "MANUAL_ENTRY"
         }
       );
       await attemptApiSubmission(page);

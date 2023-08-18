@@ -33,7 +33,7 @@ export const migrate_v120_to_v121 = (v120Data: v120UserData): v121UserData => {
         .map((business) => migrate_v120Business_to_v121Business(business))
         .map((currBusiness) => [currBusiness.id, currBusiness])
     ),
-    version: 121,
+    version: 121
   };
 };
 
@@ -53,9 +53,9 @@ const migrate_v120Business_to_v121Business = (v120BusinessData: v120Business): v
         nonprofitTrusteesMethodTerms: "",
         nonprofitAssetDistributionSpecified: undefined,
         nonprofitAssetDistributionTerms: "",
-        isVeteranNonprofit: undefined,
-      },
-    },
+        isVeteranNonprofit: undefined
+      }
+    }
   };
 };
 
@@ -254,7 +254,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 type v121NameAvailabilityStatus =
@@ -399,7 +399,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY",
+  "LIMITED LIABILITY COMPANY"
 ] as const;
 
 const llpBusinessSuffix = [
@@ -408,7 +408,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P.",
+  "R.L.L.P."
 ] as const;
 
 export const lpBusinessSuffix = ["LIMITED PARTNERSHIP", "LP", "L.P."] as const;
@@ -423,7 +423,7 @@ const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC.",
+  "INC."
 ] as const;
 
 export const nonprofitBusinessSuffix = [
@@ -433,7 +433,7 @@ export const nonprofitBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC.",
+  "INC."
 ] as const;
 
 const foreignCorpBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
@@ -444,7 +444,7 @@ export const AllBusinessSuffixes = [
   ...lpBusinessSuffix,
   ...corpBusinessSuffix,
   ...foreignCorpBusinessSuffix,
-  ...nonprofitBusinessSuffix,
+  ...nonprofitBusinessSuffix
 ] as const;
 
 type v121BusinessSuffix = (typeof AllBusinessSuffixes)[number];
@@ -484,7 +484,7 @@ export const generateV121UserData = (overrides: Partial<v121UserData>): v121User
     versionWhenCreated: -1,
     businesses: {},
     currentBusinessId: "",
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -499,7 +499,7 @@ export const generateV121BusinessUser = (overrides: Partial<v121BusinessUser>): 
     myNJUserKey: undefined,
     intercomHash: undefined,
     abExperience: "ExperienceA",
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -517,7 +517,7 @@ export const generateV121Business = (overrides: Partial<v121Business>): v121Busi
     taskItemChecklist: {},
     licenseData: undefined,
     taxFilingData: generateV121TaxFilingData({}),
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -547,7 +547,7 @@ export const generateV121ProfileData = (overrides: Partial<v121ProfileData>): v1
     documents: {
       certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
       formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
-      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
+      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`
     },
     taxPin: randomInt(4).toString(),
     sectorId: undefined,
@@ -557,11 +557,11 @@ export const generateV121ProfileData = (overrides: Partial<v121ProfileData>): v1
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`,
+      id: `some-id-${randomInt()}`
     },
     responsibleOwnerName: `some-owner-name-${randomInt()}`,
     tradeName: `some-trade-name-${randomInt()}`,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -585,7 +585,7 @@ export const generateV121IndustrySpecificData = (
     petCareHousing: undefined,
     isInterstateLogisticsApplicable: undefined,
     isInterstateMovingApplicable: undefined,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -600,7 +600,7 @@ export const generateV121Preferences = (overrides: Partial<v121Preferences>): v1
     isCalendarFullView: true,
     isHideableRoadmapOpen: false,
     phaseNewlyChanged: false,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -616,7 +616,7 @@ export const generateV121FormationData = (
     businessNameAvailability: undefined,
     lastVisitedPageIndex: 0,
     dbaBusinessNameAvailability: undefined,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -688,7 +688,7 @@ export const generateV121FormationFormData = (
     willPracticeLaw: false,
     isVeteranNonprofit: false,
     legalType: "",
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -698,7 +698,7 @@ export const generateV121Municipality = (overrides: Partial<v121Municipality>): 
     name: `some-name-${randomInt()}`,
     county: `some-county-${randomInt()}`,
     id: `some-id-${randomInt()}`,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -712,7 +712,7 @@ export const generateV121FormationMember = (overrides: Partial<v121FormationMemb
     addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
     addressCountry: `some-county`,
     businessLocationType: undefined,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -724,6 +724,6 @@ export const generateV121TaxFilingData = (overrides: Partial<v121TaxFilingData>)
     lastUpdatedISO: undefined,
     registeredISO: undefined,
     filings: [],
-    ...overrides,
+    ...overrides
   };
 };

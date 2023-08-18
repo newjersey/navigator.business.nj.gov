@@ -121,7 +121,7 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
             <Grow
               {...TransitionProps}
               style={{
-                transformOrigin: placement === "bottom" ? "center top" : "center bottom",
+                transformOrigin: placement === "bottom" ? "center top" : "center bottom"
               }}
             >
               <Box className="drop-shadow-xl">

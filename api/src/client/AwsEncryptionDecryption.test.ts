@@ -38,7 +38,7 @@ describe("AWSEncryptionDecryption", () => {
     client = AWSEncryptionDecryptionFactory("some-key", {
       stage: "some-stage",
       purpose: "some-purpose",
-      origin: "some-origin",
+      origin: "some-origin"
     });
   });
 
@@ -50,8 +50,8 @@ describe("AWSEncryptionDecryption", () => {
       encryptionContext: {
         stage: "some-stage",
         purpose: "some-purpose",
-        origin: "some-origin",
-      },
+        origin: "some-origin"
+      }
     });
     expect(mockAWSCrypto.optionsCalledWith).toEqual("REQUIRE_ENCRYPT_REQUIRE_DECRYPT");
   });
@@ -91,15 +91,15 @@ jest.mock("@aws-crypto/client-node", (): MockAWSCryptoType => {
               encryptionContext: {
                 stage: "some-stage",
                 purpose: "some-purpose",
-                origin: "some-origin",
-              },
-            },
+                origin: "some-origin"
+              }
+            }
           };
         });
       };
       return { encrypt, decrypt };
     },
-    KmsKeyringNode: function MockKeyRingNode(): any {},
+    KmsKeyringNode: function MockKeyRingNode(): any {}
   };
 });
 
@@ -110,6 +110,6 @@ jest.mock("@aws-sdk/util-base64-node", (): MockAWSBase64 => {
     },
     toBase64: function mockToBase64(value: string): string {
       return value;
-    },
+    }
   };
 });

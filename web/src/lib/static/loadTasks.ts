@@ -20,14 +20,14 @@ export const loadAllTaskUrlSlugs = (): PathParams<TaskUrlSlugParam>[] => {
   return [
     ...taskFileNames.map((fileName) => ({
       params: {
-        taskUrlSlug: loadUrlSlugByFilename(fileName, tasksDirectory),
-      },
+        taskUrlSlug: loadUrlSlugByFilename(fileName, tasksDirectory)
+      }
     })),
     ...licenseFileNames.map((fileName) => ({
       params: {
-        taskUrlSlug: loadUrlSlugByFilename(fileName, licenseDirectory),
-      },
-    })),
+        taskUrlSlug: loadUrlSlugByFilename(fileName, licenseDirectory)
+      }
+    }))
   ];
 };
 
@@ -36,7 +36,7 @@ export const loadAllTasks = (): Task[] => {
   const licenseFileNames = fs.readdirSync(licenseDirectory);
   return [
     ...taskFileNames.map((fileName) => loadTaskByFileName(fileName, tasksDirectory)),
-    ...licenseFileNames.map((fileName) => loadTaskByFileName(fileName, licenseDirectory)),
+    ...licenseFileNames.map((fileName) => loadTaskByFileName(fileName, licenseDirectory))
   ];
 };
 
@@ -83,7 +83,7 @@ export const loadTaskByFileName = (fileName: string, directory: string): Task =>
   return {
     ...taskWithoutLinks,
     unlockedBy: unlockedByTaskLinks,
-    filename: fileNameWithoutMd,
+    filename: fileNameWithoutMd
   } as Task;
 };
 
@@ -101,6 +101,6 @@ const loadTaskLinkByFilename = (fileName: string): TaskLink => {
     name: taskWithoutLinks.name,
     urlSlug: taskWithoutLinks.urlSlug,
     filename: fileName,
-    id: taskWithoutLinks.id,
+    id: taskWithoutLinks.id
   };
 };

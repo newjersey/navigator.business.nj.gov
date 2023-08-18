@@ -7,7 +7,7 @@ import {
   Funding,
   OperateReference,
   RoadmapDisplayContent,
-  SidebarCardContent,
+  SidebarCardContent
 } from "@/lib/types/types";
 import DashboardPage from "@/pages/dashboard";
 import {
@@ -19,7 +19,7 @@ import {
   operatingPhasesDisplayingHomeBasedPrompt,
   operatingPhasesNotDisplayingHomeBasedPrompt,
   randomHomeBasedIndustry,
-  randomNonHomeBasedIndustry,
+  randomNonHomeBasedIndustry
 } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
@@ -30,7 +30,7 @@ import {
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData,
+  WithStatefulUserData
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
@@ -42,7 +42,7 @@ import {
   generateUserDataForBusiness,
   getCurrentDate,
   OperatingPhases,
-  RegistrationStatus,
+  RegistrationStatus
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhase } from "@businessnjgovnavigator/shared/src/operatingPhase";
 import { generatePreferences } from "@businessnjgovnavigator/shared/test";
@@ -53,7 +53,7 @@ import { act, fireEvent, render, screen, waitFor, within } from "@testing-librar
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn(),
+    useMediaQuery: jest.fn()
   };
 }
 
@@ -74,8 +74,8 @@ const setDesktopScreen = (value: boolean): void => {
 const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>): RoadmapDisplayContent => {
   return {
     sidebarDisplayContent: sidebar ?? {
-      welcome: generateSidebarCardContent({}),
-    },
+      welcome: generateSidebarCardContent({})
+    }
   };
 };
 
@@ -91,7 +91,7 @@ describe("dashboard page", () => {
 
   const renderDashboardPage = ({
     sidebarDisplayContent,
-    operateReferences,
+    operateReferences
   }: {
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     operateReferences?: Record<string, OperateReference>;
@@ -134,7 +134,7 @@ describe("dashboard page", () => {
     certifications,
     registrationAlertIsVisible,
     registrationAlertStatus,
-    setRegistrationAlertIsVisible,
+    setRegistrationAlertIsVisible
   }: {
     isAuthenticated?: IsAuthenticated;
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
@@ -168,7 +168,7 @@ describe("dashboard page", () => {
         {
           registrationAlertIsVisible: registrationAlertIsVisible ?? false,
           registrationAlertStatus,
-          setRegistrationAlertIsVisible,
+          setRegistrationAlertIsVisible
         }
       )
     );
@@ -205,18 +205,18 @@ describe("dashboard page", () => {
         generateStep({
           name: "step1",
           timeEstimate: "1-2 weeks",
-          stepNumber: 1,
+          stepNumber: 1
         }),
         generateStep({
           name: "step2",
-          stepNumber: 2,
-        }),
+          stepNumber: 2
+        })
       ],
       tasks: [
         generateTask({ name: "task1", stepNumber: 1 }),
         generateTask({ name: "task2", stepNumber: 1 }),
-        generateTask({ name: "task3", stepNumber: 2 }),
-      ],
+        generateTask({ name: "task3", stepNumber: 2 })
+      ]
     });
 
     renderDashboardPage({});
@@ -236,13 +236,13 @@ describe("dashboard page", () => {
       tasks: [
         generateTask({ id: "task1", name: "task1", stepNumber: 1 }),
         generateTask({ id: "task2", name: "task2", stepNumber: 1 }),
-        generateTask({ id: "task3", name: "task3", stepNumber: 2 }),
-      ],
+        generateTask({ id: "task3", name: "task3", stepNumber: 2 })
+      ]
     });
 
     useMockBusiness({
       taskProgress: { task1: "IN_PROGRESS", task2: "COMPLETED" },
-      onboardingFormProgress: "COMPLETED",
+      onboardingFormProgress: "COMPLETED"
     });
 
     renderDashboardPage({});
@@ -258,8 +258,8 @@ describe("dashboard page", () => {
         generateStep({ name: "step1", section: "PLAN" }),
         generateStep({ name: "step2", section: "START" }),
         generateStep({ name: "step3", section: "PLAN" }),
-        generateStep({ name: "step4", section: "START" }),
-      ],
+        generateStep({ name: "step4", section: "START" })
+      ]
     });
 
     renderDashboardPage({});
@@ -283,16 +283,16 @@ describe("dashboard page", () => {
     useMockRoadmap({
       steps: [
         generateStep({ name: "step1", section: "PLAN" }),
-        generateStep({ name: "step2", section: "START" }),
-      ],
+        generateStep({ name: "step2", section: "START" })
+      ]
     });
 
     useMockBusiness({
       preferences: generatePreferences({
-        roadmapOpenSections: ["PLAN", "START"],
+        roadmapOpenSections: ["PLAN", "START"]
       }),
       taxFilingData: generateTaxFilingData({}),
-      onboardingFormProgress: "COMPLETED",
+      onboardingFormProgress: "COMPLETED"
     });
 
     renderDashboardPage({});
@@ -310,13 +310,13 @@ describe("dashboard page", () => {
     useMockRouter({ query: { fromOnboarding: "false" } });
 
     const sidebarDisplayContent = {
-      "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
+      "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" })
     };
     renderPageWithAuthAlert({
       registrationAlertIsVisible: true,
       sidebarDisplayContent,
       isAuthenticated: IsAuthenticated.FALSE,
-      setRegistrationAlertIsVisible,
+      setRegistrationAlertIsVisible
     });
 
     expect(screen.getByText("NotRegisteredContent")).toBeInTheDocument();
@@ -378,19 +378,19 @@ describe("dashboard page", () => {
     const dueDate = getCurrentDate().add(1, "days");
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
-      dueDate: dueDate.format(defaultDateFormat),
+      dueDate: dueDate.format(defaultDateFormat)
     });
     useMockBusiness({
       profileData: generateProfileData({ operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES" }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
-      onboardingFormProgress: "COMPLETED",
+      onboardingFormProgress: "COMPLETED"
     });
     const operateReferences: Record<string, OperateReference> = {
       "annual-report": {
         name: "Annual Report",
         urlSlug: "annual-report-url",
-        urlPath: "annual_report-url-path",
-      },
+        urlPath: "annual_report-url-path"
+      }
     };
     renderDashboardPage({ operateReferences });
 
@@ -405,14 +405,14 @@ describe("dashboard page", () => {
 
     useMockBusiness({
       profileData: generateProfileData({ dateOfFormation: dateOfFormation }),
-      taxFilingData: generateTaxFilingData({ filings: [] }),
+      taxFilingData: generateTaxFilingData({ filings: [] })
     });
     const operateReferences: Record<string, OperateReference> = {
       "annual-report": {
         name: "Annual Report",
         urlSlug: "annual-report-url",
-        urlPath: "annual_report-url-path",
-      },
+        urlPath: "annual_report-url-path"
+      }
     };
     renderDashboardPage({ operateReferences });
 
@@ -423,18 +423,18 @@ describe("dashboard page", () => {
     const dueDate = getCurrentDate().add(12, "months");
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
-      dueDate: dueDate.format(defaultDateFormat),
+      dueDate: dueDate.format(defaultDateFormat)
     });
     useMockBusiness({
       profileData: generateProfileData({ dateOfFormation: undefined }),
-      taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
+      taxFilingData: generateTaxFilingData({ filings: [annualReport] })
     });
     const operateReferences: Record<string, OperateReference> = {
       "annual-report": {
         name: "Annual Report",
         urlSlug: "annual-report-url",
-        urlPath: "annual_report-url-path",
-      },
+        urlPath: "annual_report-url-path"
+      }
     };
     renderDashboardPage({ operateReferences });
 
@@ -463,7 +463,7 @@ describe("dashboard page", () => {
 
     useMockBusiness({
       profileData: generateProfileData({ operatingPhase: randomOperatingPhase.id }),
-      onboardingFormProgress: "COMPLETED",
+      onboardingFormProgress: "COMPLETED"
     });
     renderDashboardPage({});
 
@@ -497,9 +497,9 @@ describe("dashboard page", () => {
                 industryId: randomHomeBasedIndustry(),
                 homeBasedBusiness: undefined,
                 businessPersona: generateBusinessPersona(),
-                operatingPhase: operatingPhase,
+                operatingPhase: operatingPhase
               }),
-              onboardingFormProgress: "COMPLETED",
+              onboardingFormProgress: "COMPLETED"
             });
             useMockBusiness(business);
 
@@ -526,9 +526,9 @@ describe("dashboard page", () => {
                 homeBasedBusiness: undefined,
                 industryId: randomNonHomeBasedIndustry(),
                 businessPersona: generateBusinessPersona(),
-                operatingPhase: operatingPhase,
+                operatingPhase: operatingPhase
               }),
-              onboardingFormProgress: "COMPLETED",
+              onboardingFormProgress: "COMPLETED"
             });
             useMockBusiness(business);
 
@@ -547,9 +547,9 @@ describe("dashboard page", () => {
               profileData: generateProfileData({
                 industryId: randomHomeBasedIndustry(),
                 homeBasedBusiness: undefined,
-                operatingPhase: operatingPhase,
+                operatingPhase: operatingPhase
               }),
-              onboardingFormProgress: "COMPLETED",
+              onboardingFormProgress: "COMPLETED"
             });
             useMockBusiness(business);
             renderStatefulPage(business);
@@ -569,9 +569,9 @@ describe("dashboard page", () => {
               profileData: generateProfileData({
                 industryId: randomHomeBasedIndustry(),
                 homeBasedBusiness: undefined,
-                operatingPhase: operatingPhase,
+                operatingPhase: operatingPhase
               }),
-              onboardingFormProgress: "COMPLETED",
+              onboardingFormProgress: "COMPLETED"
             });
             useMockBusiness(business);
             renderStatefulPage(business);
@@ -582,7 +582,7 @@ describe("dashboard page", () => {
                 { query: { deferredQuestionAnswered: "true" } },
                 undefined,
                 {
-                  shallow: true,
+                  shallow: true
                 }
               );
             });
@@ -601,9 +601,9 @@ describe("dashboard page", () => {
                 industryId: randomHomeBasedIndustry(),
                 homeBasedBusiness: undefined,
                 businessPersona: generateBusinessPersona(),
-                operatingPhase: operatingPhase,
+                operatingPhase: operatingPhase
               }),
-              onboardingFormProgress: "COMPLETED",
+              onboardingFormProgress: "COMPLETED"
             });
             useMockBusiness(business);
 
@@ -626,7 +626,7 @@ describe("dashboard page", () => {
       renderStatefulPage(
         generateBusiness({
           preferences: generatePreferences({ phaseNewlyChanged: true }),
-          onboardingFormProgress: "COMPLETED",
+          onboardingFormProgress: "COMPLETED"
         })
       );
       await waitFor(() => {
@@ -647,7 +647,7 @@ describe("dashboard page", () => {
       renderStatefulPage(
         generateBusiness({
           preferences: generatePreferences({ phaseNewlyChanged: true }),
-          onboardingFormProgress: "COMPLETED",
+          onboardingFormProgress: "COMPLETED"
         })
       );
 
@@ -665,7 +665,7 @@ describe("dashboard page", () => {
       renderStatefulPage(
         generateBusiness({
           preferences: generatePreferences({ phaseNewlyChanged: true }),
-          onboardingFormProgress: "COMPLETED",
+          onboardingFormProgress: "COMPLETED"
         })
       );
 
@@ -688,15 +688,15 @@ describe("dashboard page", () => {
     useMockRoadmap({
       steps: [
         generateStep({ name: "step1", section: "PLAN" }),
-        generateStep({ name: "step2", section: "START" }),
-      ],
+        generateStep({ name: "step2", section: "START" })
+      ]
     });
 
     useMockBusiness({
       profileData: generateProfileData({
-        operatingPhase: "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
+        operatingPhase: "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
       }),
-      onboardingFormProgress: "COMPLETED",
+      onboardingFormProgress: "COMPLETED"
     });
 
     renderDashboardPage({});

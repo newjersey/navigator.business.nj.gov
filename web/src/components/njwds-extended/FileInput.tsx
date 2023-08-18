@@ -20,7 +20,7 @@ interface Props {
 
 const FileTypeToInputString: Record<AcceptedFileType, string> = {
   PDF: "application/pdf",
-  PNG: "image/png",
+  PNG: "image/png"
 };
 
 const InputStringToFileType = flipObject(FileTypeToInputString) as Record<string, AcceptedFileType>;
@@ -50,7 +50,7 @@ export const FileInput = ({
   helperText,
   maxFileSize,
   value,
-  onChange,
+  onChange
 }: Props): ReactElement => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const fileInput = require("../../../../node_modules/@uswds/uswds/packages/usa-file-input/src");
@@ -90,7 +90,7 @@ export const FileInput = ({
           base64Contents: (event.target.result as string).split(",")[1],
           sizeInBytes: uploadedFile.size,
           fileType: InputStringToFileType[uploadedFile.type],
-          filename: uploadedFile.name,
+          filename: uploadedFile.name
         });
         setFileUploadError({ hasError: false, errorMessage: "" });
       };
@@ -112,7 +112,7 @@ export const FileInput = ({
           e.stopImmediatePropagation();
           setFileUploadError({
             hasError: true,
-            errorMessage: templateEval(acceptedFileTypes.errorMessage, { fileName: selectedFile.name }),
+            errorMessage: templateEval(acceptedFileTypes.errorMessage, { fileName: selectedFile.name })
           });
         } else if (maxFileSize && size && selectedFile.size > size) {
           e.stopImmediatePropagation();
@@ -120,8 +120,8 @@ export const FileInput = ({
             hasError: true,
             errorMessage: templateEval(maxFileSize.errorMessage, {
               fileName: selectedFile.name,
-              maxFileSize: `${maxFileSize.maxSizeInMegabytes}`,
-            }),
+              maxFileSize: `${maxFileSize.maxSizeInMegabytes}`
+            })
           });
         }
       }
@@ -142,7 +142,7 @@ export const FileInput = ({
       const file = base64ToFile({
         base64Contents: value.base64Contents,
         filename: value.filename,
-        type: FileTypeToInputString[value.fileType],
+        type: FileTypeToInputString[value.fileType]
       });
 
       const dT = new DataTransfer();

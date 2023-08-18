@@ -4,11 +4,11 @@
 import {
   clickDeferredSaveButton,
   completeBusinessStructureTask,
-  waitForUserDataMountUpdate,
+  waitForUserDataMountUpdate
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import {
   completeExistingBusinessOnboarding,
-  completeNewBusinessOnboarding,
+  completeNewBusinessOnboarding
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
@@ -43,7 +43,7 @@ describe("Dashboard [feature] [all] [group2]", () => {
         const legalStructureId = "general-partnership";
 
         completeNewBusinessOnboarding({
-          industry,
+          industry
         });
 
         completeBusinessStructureTask({ legalStructureId });
@@ -77,7 +77,7 @@ describe("Dashboard [feature] [all] [group2]", () => {
         const legalStructureId = "general-partnership";
 
         completeNewBusinessOnboarding({
-          industry,
+          industry
         });
 
         waitForUserDataMountUpdate();
@@ -118,7 +118,7 @@ describe("Dashboard [feature] [all] [group2]", () => {
         const legalStructureId = "general-partnership";
 
         completeNewBusinessOnboarding({
-          industry,
+          industry
         });
 
         completeBusinessStructureTask({ legalStructureId });
@@ -147,7 +147,7 @@ describe("Dashboard [feature] [all] [group2]", () => {
         const legalStructureId = "general-partnership";
 
         completeNewBusinessOnboarding({
-          industry,
+          industry
         });
 
         completeBusinessStructureTask({ legalStructureId });

@@ -103,8 +103,8 @@ export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Pro
     ? {
         props: {
           deadLinks: await findDeadLinks(),
-          noAuth: true,
-        },
+          noAuth: true
+        }
       }
     : { notFound: true };
 };

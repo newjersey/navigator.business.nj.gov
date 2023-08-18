@@ -3,7 +3,7 @@ import { FilingsCalendarSingleGrid } from "@/components/filings-calendar/Filings
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import {
   isCalendarMonthLessThanCurrentMonth,
-  sortFilterCalendarEventsWithinAYear,
+  sortFilterCalendarEventsWithinAYear
 } from "@/lib/domain-logic/filterCalendarEvents";
 import { OperateReference } from "@/lib/types/types";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";

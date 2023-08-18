@@ -6,12 +6,12 @@ import {
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData,
+  WithStatefulUserData
 } from "@/test/mock/withStatefulUserData";
 import {
   generateBusiness,
   generateProfileData,
-  generateUserDataForBusiness,
+  generateUserDataForBusiness
 } from "@businessnjgovnavigator/shared";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";

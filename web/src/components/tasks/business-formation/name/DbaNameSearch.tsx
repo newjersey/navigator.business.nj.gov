@@ -31,7 +31,7 @@ export const DbaNameSearch = (): ReactElement => {
         config={{
           searchButtonText: Config.nexusNameSearch.dbaNameSearchSubmitButton,
           searchButtonTestId: "search-dba-availability",
-          inputLabel: Config.nexusNameSearch.dbaNameSearchLabel,
+          inputLabel: Config.nexusNameSearch.dbaNameSearchLabel
         }}
       />
     </>

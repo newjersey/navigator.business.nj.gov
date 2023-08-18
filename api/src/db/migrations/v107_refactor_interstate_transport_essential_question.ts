@@ -34,9 +34,9 @@ export const migrate_v106_to_v107 = (v106Data: v106UserData): v107UserData => {
     profileData: {
       ...v106Data.profileData,
       isInterstateLogisticsApplicable: getLogisticsResponse(),
-      isInterstateMovingApplicable: getMovingResponse(),
+      isInterstateMovingApplicable: getMovingResponse()
     },
-    version: 107,
+    version: 107
   };
 };
 
@@ -225,7 +225,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v107FormationData {
@@ -332,7 +332,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY",
+  "LIMITED LIABILITY COMPANY"
 ] as const;
 
 const llpBusinessSuffix = [
@@ -341,7 +341,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P.",
+  "R.L.L.P."
 ] as const;
 
 export const lpBusinessSuffix = ["LIMITED PARTNERSHIP", "LP", "L.P."] as const;
@@ -356,7 +356,7 @@ const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC.",
+  "INC."
 ] as const;
 
 const foreignCorpBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
@@ -365,7 +365,7 @@ const AllBusinessSuffixes = [
   ...llcBusinessSuffix,
   ...llpBusinessSuffix,
   ...lpBusinessSuffix,
-  ...foreignCorpBusinessSuffix,
+  ...foreignCorpBusinessSuffix
 ] as const;
 
 type v107BusinessSuffix = (typeof AllBusinessSuffixes)[number];

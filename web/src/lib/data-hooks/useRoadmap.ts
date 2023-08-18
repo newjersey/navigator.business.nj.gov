@@ -81,7 +81,7 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
     const current = sectionOfTask(taskId) as SectionType;
     return {
       current,
-      next: nextUncompletedSection(current),
+      next: nextUncompletedSection(current)
     };
   };
 

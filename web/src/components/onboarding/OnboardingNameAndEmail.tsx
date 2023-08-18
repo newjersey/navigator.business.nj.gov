@@ -6,7 +6,7 @@ import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextField
 import {
   FullNameErrorVariant,
   getFullNameErrorVariant,
-  isFullNameValid,
+  isFullNameValid
 } from "@/lib/domain-logic/isFullNameValid";
 import { FormContextFieldProps } from "@/lib/types/types";
 import { validateEmail } from "@/lib/utils/helpers";
@@ -38,7 +38,7 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
     TOO_LONG: Config.selfRegistration.errorTextFullNameLength,
     MUST_START_WITH_LETTER: Config.selfRegistration.errorTextFullNameStartWithLetter,
     CONTAINS_ILLEGAL_CHAR: Config.selfRegistration.errorTextFullNameSpecialCharacter,
-    NO_ERROR: "",
+    NO_ERROR: ""
   };
 
   const updateEmailState = (value: string): void => {

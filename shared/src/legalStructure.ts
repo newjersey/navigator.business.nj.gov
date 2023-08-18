@@ -28,7 +28,7 @@ export const LookupLegalStructureById = (id: string | undefined): LegalStructure
       requiresPublicFiling: false,
       hasTradeName: false,
       onboardingOrder: 0,
-      elementsToDisplay: new Set<ElementsToDisplay>(["entityId", "formationDate"]),
+      elementsToDisplay: new Set<ElementsToDisplay>(["entityId", "formationDate"])
     }
   );
 };
@@ -41,7 +41,7 @@ export const LegalStructures: LegalStructure[] = [
     requiresPublicFiling: false,
     onboardingOrder: 30,
     hasTradeName: true,
-    elementsToDisplay: new Set(["taxIdDisclaimer", "responsibleOwnerName"]),
+    elementsToDisplay: new Set(["taxIdDisclaimer", "responsibleOwnerName"])
   },
   {
     id: "general-partnership",
@@ -50,7 +50,7 @@ export const LegalStructures: LegalStructure[] = [
     requiresPublicFiling: false,
     hasTradeName: true,
     onboardingOrder: 20,
-    elementsToDisplay: new Set(["taxIdDisclaimer", "responsibleOwnerName"]),
+    elementsToDisplay: new Set(["taxIdDisclaimer", "responsibleOwnerName"])
   },
   {
     id: "limited-partnership",
@@ -65,8 +65,8 @@ export const LegalStructures: LegalStructure[] = [
       "formationDocuments",
       "formationDate",
       "entityId",
-      "dbaName",
-    ]),
+      "dbaName"
+    ])
   },
   {
     id: "limited-liability-partnership",
@@ -81,8 +81,8 @@ export const LegalStructures: LegalStructure[] = [
       "formationDocuments",
       "formationDate",
       "entityId",
-      "dbaName",
-    ]),
+      "dbaName"
+    ])
   },
   {
     id: "limited-liability-company",
@@ -97,8 +97,8 @@ export const LegalStructures: LegalStructure[] = [
       "formationDocuments",
       "formationDate",
       "entityId",
-      "dbaName",
-    ]),
+      "dbaName"
+    ])
   },
   {
     id: "c-corporation",
@@ -113,8 +113,8 @@ export const LegalStructures: LegalStructure[] = [
       "formationDocuments",
       "formationDate",
       "entityId",
-      "dbaName",
-    ]),
+      "dbaName"
+    ])
   },
   {
     id: "nonprofit",
@@ -129,8 +129,8 @@ export const LegalStructures: LegalStructure[] = [
       "formationDocuments",
       "formationDate",
       "entityId",
-      "dbaName",
-    ]),
+      "dbaName"
+    ])
   },
   {
     id: "s-corporation",
@@ -145,7 +145,7 @@ export const LegalStructures: LegalStructure[] = [
       "formationDocuments",
       "formationDate",
       "entityId",
-      "dbaName",
-    ]),
-  },
+      "dbaName"
+    ])
+  }
 ];

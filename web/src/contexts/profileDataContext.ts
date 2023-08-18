@@ -18,8 +18,8 @@ export const ProfileDataContext = createContext<ProfileDataContextType>({
   state: {
     page: 1,
     profileData: createEmptyProfileData(),
-    flow: "STARTING",
+    flow: "STARTING"
   },
   setProfileData: () => {},
-  onBack: () => {},
+  onBack: () => {}
 });

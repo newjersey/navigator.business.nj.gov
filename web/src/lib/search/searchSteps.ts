@@ -8,7 +8,7 @@ export const searchSteps = (steps: Step[], term: string, params: { filename: str
   for (const step of steps) {
     let match: Match = {
       filename: params.filename,
-      snippets: [],
+      snippets: []
     };
 
     const name = step.name.toLowerCase();
@@ -16,7 +16,7 @@ export const searchSteps = (steps: Step[], term: string, params: { filename: str
 
     const labelledTexts = [
       { content: description, label: "Description" },
-      { content: name, label: "Name" },
+      { content: name, label: "Name" }
     ];
 
     match = findMatchInLabelledText(labelledTexts, term, match);

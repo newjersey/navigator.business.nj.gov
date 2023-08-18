@@ -1,7 +1,7 @@
 import {
   LookupLegalStructureById,
   LookupOperatingPhaseById,
-  OperatingPhaseId,
+  OperatingPhaseId
 } from "@businessnjgovnavigator/shared";
 
 export const isMunicipalityRequired = (params: {

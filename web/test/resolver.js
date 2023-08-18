@@ -8,6 +8,6 @@ module.exports = (path, options) => {
         delete pkg["module"];
       }
       return pkg;
-    },
+    }
   });
 };

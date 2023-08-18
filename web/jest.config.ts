@@ -17,7 +17,7 @@ export default async (): Promise<Config.InitialOptions> => {
       "@/pages/(.*)": "<rootDir>/src/pages/$1",
       "@/styles/(.*)": "<rootDir>/src/styles/$1",
       "@businessnjgovnavigator/shared/(.*)": "<rootDir>/../shared/lib/shared/src/$1",
-      "@businessnjgovnavigator/content/(.*)": "<rootDir>/../content/src/$1",
+      "@businessnjgovnavigator/content/(.*)": "<rootDir>/../content/src/$1"
     },
     resolver: `${__dirname}/test/resolver.js`,
     transformIgnorePatterns: [`<rootDir>/node_modules/(?!(${esModules.join("|")}))`],
@@ -29,13 +29,13 @@ export default async (): Promise<Config.InitialOptions> => {
           jsc: {
             transform: {
               react: {
-                runtime: "automatic",
-              },
-            },
-          },
-        },
-      ],
-    },
+                runtime: "automatic"
+              }
+            }
+          }
+        }
+      ]
+    }
   };
 };
 
@@ -47,5 +47,5 @@ process.env = Object.assign(process.env, {
   FEATURE_BUSINESS_FNP: "true",
   FEATURE_BUSINESS_NP: "true",
   FEATURE_EXPORT_PDF: "true",
-  WEBFLOW_API_TOKEN: 12345678910,
+  WEBFLOW_API_TOKEN: 12345678910
 });

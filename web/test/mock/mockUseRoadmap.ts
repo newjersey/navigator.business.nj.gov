@@ -21,7 +21,7 @@ export const setMockRoadmapResponse = (params: {
     sectionNamesInRoadmap: [...sectionNames],
     isSectionCompleted: params.isSectionCompletedFn ?? jest.fn(),
     currentAndNextSection:
-      params.currentAndNextSection ?? ((): CurrentAndNextSection => ({ current: "PLAN", next: "START" })),
+      params.currentAndNextSection ?? ((): CurrentAndNextSection => ({ current: "PLAN", next: "START" }))
   });
 };
 
@@ -29,6 +29,6 @@ export const useMockRoadmapTask = (overrides: Partial<Task>): void => {
   const mockTask = generateTask(overrides);
   useMockRoadmap({
     steps: [generateStep({ stepNumber: mockTask.stepNumber })],
-    tasks: [mockTask],
+    tasks: [mockTask]
   });
 };

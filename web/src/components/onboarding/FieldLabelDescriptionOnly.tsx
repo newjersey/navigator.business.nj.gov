@@ -19,7 +19,7 @@ export const FieldLabelDescriptionOnly = (props: Props): ReactElement => {
     config: Config,
     persona: state.flow,
     fieldName: props.fieldName,
-    onboarding: true,
+    onboarding: true
   });
 
   const description = contentFromConfig.description;

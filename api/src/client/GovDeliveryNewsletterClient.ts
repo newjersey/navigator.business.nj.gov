@@ -32,8 +32,8 @@ export const GovDeliveryNewsletterClient = (config: GovDeliveryNewsletterClientC
           e: email,
           t: config.topic,
           k: config.apiKey,
-          ...(config.urlQuestion ? { [config.urlQuestion]: config.siteUrl } : {}),
-        },
+          ...(config.urlQuestion ? { [config.urlQuestion]: config.siteUrl } : {})
+        }
       })
       .then((response) => {
         config.logWriter.LogInfo(
@@ -75,18 +75,18 @@ export const GovDeliveryNewsletterClient = (config: GovDeliveryNewsletterClientC
         }
         return {
           success,
-          status,
+          status
         };
       })
       .catch((error: AxiosError) => {
         config.logWriter.LogError(`NewsletterResponse - GovDelivery - Id:${logId} - Error`, error);
         return {
           success: false,
-          status: "CONNECTION_ERROR",
+          status: "CONNECTION_ERROR"
         };
       });
   };
   return {
-    add,
+    add
   };
 };

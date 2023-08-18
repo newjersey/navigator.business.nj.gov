@@ -6,7 +6,7 @@ describe("<HorizontalStepper />", () => {
     it("has ERROR state when step hasError and is not currentStep", () => {
       const steps = [
         { name: "", hasError: true, isComplete: false },
-        { name: "", hasError: false, isComplete: true },
+        { name: "", hasError: false, isComplete: true }
       ];
       render(<HorizontalStepper steps={steps} currentStep={1} onStepClicked={(): void => {}} />);
       expect(screen.getByTestId("stepper-0").dataset.state).toEqual("ERROR");
@@ -15,7 +15,7 @@ describe("<HorizontalStepper />", () => {
     it("has ERROR state when step hasError even if isComplete", () => {
       const steps = [
         { name: "", hasError: true, isComplete: true },
-        { name: "", hasError: false, isComplete: true },
+        { name: "", hasError: false, isComplete: true }
       ];
       render(<HorizontalStepper steps={steps} currentStep={1} onStepClicked={(): void => {}} />);
       expect(screen.getByTestId("stepper-0").dataset.state).toEqual("ERROR");
@@ -30,7 +30,7 @@ describe("<HorizontalStepper />", () => {
     it("has INCOMPLETE state when step not hasError and and not isComplete and not currentStep", () => {
       const steps = [
         { name: "", hasError: false, isComplete: false },
-        { name: "", hasError: false, isComplete: false },
+        { name: "", hasError: false, isComplete: false }
       ];
       render(<HorizontalStepper steps={steps} currentStep={1} onStepClicked={(): void => {}} />);
       expect(screen.getByTestId("stepper-0").dataset.state).toEqual("INCOMPLETE");
@@ -45,7 +45,7 @@ describe("<HorizontalStepper />", () => {
     it("has COMPLETE state when step not hasError and and isComplete and not currentStep", () => {
       const steps = [
         { name: "", hasError: false, isComplete: true },
-        { name: "", hasError: false, isComplete: false },
+        { name: "", hasError: false, isComplete: false }
       ];
       render(<HorizontalStepper steps={steps} currentStep={1} onStepClicked={(): void => {}} />);
       expect(screen.getByTestId("stepper-0").dataset.state).toEqual("COMPLETE");

@@ -14,7 +14,7 @@ import {
   ApiTaxFilingLookupRequest,
   ApiTaxFilingLookupResponse,
   ApiTaxFilingOnboardingRequest,
-  ApiTaxFilingOnboardingResponse,
+  ApiTaxFilingOnboardingResponse
 } from "./ApiTaxFilingClient";
 
 jest.mock("axios");
@@ -31,7 +31,7 @@ const generateTaxIdAndBusinessNameAndEmail = (
   return {
     ...generateTaxIdAndBusinessName({}),
     email: `some-email-${randomInt()}@whatever.com`,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -48,13 +48,13 @@ const generateSuccessfulApiTaxFilingLookupResponse = (
       { Name: "tax-business-name", Value: `Some, Name-${randomInt()}` },
       { Name: "tax-name-control", Value: "Some" },
       { Name: "naics-code", Value: naicsCode ?? randomInt(6).toString() },
-      { Name: "tax-city", Value: taxCity ?? `Some-City-${randomInt()}` },
+      { Name: "tax-city", Value: taxCity ?? `Some-City-${randomInt()}` }
     ],
     Errors: null,
     Results: ["st-50/450", "st-51/451", "nj-927/927-w"].map((Id) => {
       return generateTaxFilingResult({ Id });
     }),
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -66,7 +66,7 @@ const generateErroredApiTaxFilingLookupResponse = (
     PENDING:
       "There is no specific tax eligibility for this business at the moment but please do come back to check later since we get weekly updates.",
     FAILED: "No matching record found for the business. Please verify your Taxpayer ID and Business Name.",
-    UNREGISTERED: "This business has not been onboarded to Gov2Go Tax calendar Service so far",
+    UNREGISTERED: "This business has not been onboarded to Gov2Go Tax calendar Service so far"
   };
   return {
     ApiKey: `some-ApiKey-${randomInt()}`,
@@ -74,11 +74,11 @@ const generateErroredApiTaxFilingLookupResponse = (
     Errors: [
       {
         Error: stateErrorMap[state],
-        Field: "Results",
-      },
+        Field: "Results"
+      }
     ],
     Results: null,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -90,7 +90,7 @@ const generateSuccessfulApiTaxFilingOnboardingResponse = (
     Errors: [],
     Notice: "You are signed up for the Tax Calendar Reminder Service.",
     StatusCode: 200,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -105,13 +105,13 @@ const generateErroredApiTaxFilingOnboardingResponse = (
         ? [
             {
               Error: `some-error-content-${randomInt()}`,
-              Field: randomInt() % 2 === 0 ? "Taxpayer ID" : "Business Name",
-            },
+              Field: randomInt() % 2 === 0 ? "Taxpayer ID" : "Business Name"
+            }
           ]
         : [],
     Notice: null,
     StatusCode: statusCode as 400 | 500,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -139,18 +139,18 @@ describe("ApiTaxFilingClient", () => {
         Data: [
           {
             Name: "taxpayer-id",
-            Value: taxIdAndBusinessNameAndEmail.taxId,
+            Value: taxIdAndBusinessNameAndEmail.taxId
           },
           {
             Name: "tax-business-name",
-            Value: taxIdAndBusinessNameAndEmail.businessName,
-          },
-        ],
+            Value: taxIdAndBusinessNameAndEmail.businessName
+          }
+        ]
       };
 
       await client.lookup({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
-        businessName: taxIdAndBusinessNameAndEmail.businessName,
+        businessName: taxIdAndBusinessNameAndEmail.businessName
       });
       expect(mockAxios.post).toHaveBeenCalledWith(`${config.baseUrl}/lookup`, postBody);
     });
@@ -159,12 +159,12 @@ describe("ApiTaxFilingClient", () => {
       const Results = [
         generateTaxFilingResult({
           Id: "test-id",
-          Values: generateTaxFilingDates(1),
-        }),
+          Values: generateTaxFilingDates(1)
+        })
       ];
       const stubResponse = generateSuccessfulApiTaxFilingLookupResponse(
         {
-          Results,
+          Results
         },
         "testville",
         "123456"
@@ -172,7 +172,7 @@ describe("ApiTaxFilingClient", () => {
       mockAxios.post.mockResolvedValue({ data: stubResponse });
       const response = await client.lookup({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
-        businessName: taxIdAndBusinessNameAndEmail.businessName,
+        businessName: taxIdAndBusinessNameAndEmail.businessName
       });
       expect(response).toEqual({
         state: "SUCCESS",
@@ -180,11 +180,11 @@ describe("ApiTaxFilingClient", () => {
           {
             identifier: "test-id",
             dueDate: dateToShortISO(Results[0].Values[0]),
-            calendarEventType: "TAX-FILING",
-          },
+            calendarEventType: "TAX-FILING"
+          }
         ],
         taxCity: "testville",
-        naicsCode: "123456",
+        naicsCode: "123456"
       });
     });
 
@@ -193,11 +193,11 @@ describe("ApiTaxFilingClient", () => {
       mockAxios.post.mockRejectedValue({ response: { data: stubResponse, status: 400 } });
       const response = await client.lookup({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
-        businessName: taxIdAndBusinessNameAndEmail.businessName,
+        businessName: taxIdAndBusinessNameAndEmail.businessName
       });
       expect(response).toEqual({
         state: "FAILED",
-        filings: [],
+        filings: []
       });
     });
 
@@ -206,11 +206,11 @@ describe("ApiTaxFilingClient", () => {
       mockAxios.post.mockRejectedValue({ response: { data: stubResponse, status: 400 } });
       const response = await client.lookup({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
-        businessName: taxIdAndBusinessNameAndEmail.businessName,
+        businessName: taxIdAndBusinessNameAndEmail.businessName
       });
       expect(response).toEqual({
         state: "PENDING",
-        filings: [],
+        filings: []
       });
     });
 
@@ -219,11 +219,11 @@ describe("ApiTaxFilingClient", () => {
       mockAxios.post.mockRejectedValue({ response: { data: stubResponse, status: 400 } });
       const response = await client.lookup({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
-        businessName: taxIdAndBusinessNameAndEmail.businessName,
+        businessName: taxIdAndBusinessNameAndEmail.businessName
       });
       expect(response).toEqual({
         state: "UNREGISTERED",
-        filings: [],
+        filings: []
       });
     });
 
@@ -231,11 +231,11 @@ describe("ApiTaxFilingClient", () => {
       mockAxios.post.mockRejectedValue({});
       const response = await client.lookup({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
-        businessName: taxIdAndBusinessNameAndEmail.businessName,
+        businessName: taxIdAndBusinessNameAndEmail.businessName
       });
       expect(response).toEqual({
         state: "API_ERROR",
-        filings: [],
+        filings: []
       });
     });
   });
@@ -253,25 +253,25 @@ describe("ApiTaxFilingClient", () => {
             Data: [
               {
                 SchemaFieldSlug: "tax-return-type",
-                Value: "tax-calendar-reminder",
+                Value: "tax-calendar-reminder"
               },
               {
                 SchemaFieldSlug: "taxpayer-id",
-                Value: taxIdAndBusinessNameAndEmail.taxId,
+                Value: taxIdAndBusinessNameAndEmail.taxId
               },
               {
                 SchemaFieldSlug: "tax-business-name",
-                Value: taxIdAndBusinessNameAndEmail.businessName,
-              },
-            ],
-          },
-        ],
+                Value: taxIdAndBusinessNameAndEmail.businessName
+              }
+            ]
+          }
+        ]
       };
 
       await client.onboarding({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
         email: taxIdAndBusinessNameAndEmail.email,
-        businessName: taxIdAndBusinessNameAndEmail.businessName,
+        businessName: taxIdAndBusinessNameAndEmail.businessName
       });
       expect(mockAxios.post).toHaveBeenCalledWith(`${config.baseUrl}/onboard`, postBody);
     });
@@ -282,7 +282,7 @@ describe("ApiTaxFilingClient", () => {
       const response = await client.onboarding({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
         email: taxIdAndBusinessNameAndEmail.email,
-        businessName: taxIdAndBusinessNameAndEmail.businessName,
+        businessName: taxIdAndBusinessNameAndEmail.businessName
       });
       expect(response).toEqual({ state: "SUCCESS" });
     });
@@ -290,7 +290,7 @@ describe("ApiTaxFilingClient", () => {
     it("returns failed state on api lookup error with errorField as formFailure when api return Taxpayer ID", async () => {
       const stubResponse = generateErroredApiTaxFilingOnboardingResponse(
         {
-          Errors: [{ Error: "some-error-string", Field: "Taxpayer ID" }],
+          Errors: [{ Error: "some-error-string", Field: "Taxpayer ID" }]
         },
         400
       );
@@ -298,7 +298,7 @@ describe("ApiTaxFilingClient", () => {
       const response = await client.onboarding({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
         email: taxIdAndBusinessNameAndEmail.email,
-        businessName: taxIdAndBusinessNameAndEmail.businessName,
+        businessName: taxIdAndBusinessNameAndEmail.businessName
       });
       expect(response).toEqual({ state: "FAILED", errorField: "formFailure" });
     });
@@ -306,7 +306,7 @@ describe("ApiTaxFilingClient", () => {
     it("returns failed state on api lookup error with errorField as businessName when api return Business Name", async () => {
       const stubResponse = generateErroredApiTaxFilingOnboardingResponse(
         {
-          Errors: [{ Error: "some-error-string", Field: "Business Name" }],
+          Errors: [{ Error: "some-error-string", Field: "Business Name" }]
         },
         400
       );
@@ -314,7 +314,7 @@ describe("ApiTaxFilingClient", () => {
       const response = await client.onboarding({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
         email: taxIdAndBusinessNameAndEmail.email,
-        businessName: taxIdAndBusinessNameAndEmail.businessName,
+        businessName: taxIdAndBusinessNameAndEmail.businessName
       });
       expect(response).toEqual({ state: "FAILED", errorField: "businessName" });
     });
@@ -325,7 +325,7 @@ describe("ApiTaxFilingClient", () => {
       const response = await client.onboarding({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
         email: taxIdAndBusinessNameAndEmail.email,
-        businessName: taxIdAndBusinessNameAndEmail.businessName,
+        businessName: taxIdAndBusinessNameAndEmail.businessName
       });
       expect(response).toEqual({ state: "API_ERROR" });
     });
@@ -336,7 +336,7 @@ describe("ApiTaxFilingClient", () => {
       const response = await client.onboarding({
         taxId: taxIdAndBusinessNameAndEmail.taxId,
         email: taxIdAndBusinessNameAndEmail.email,
-        businessName: taxIdAndBusinessNameAndEmail.businessName,
+        businessName: taxIdAndBusinessNameAndEmail.businessName
       });
       expect(response).toEqual({ state: "API_ERROR" });
     });

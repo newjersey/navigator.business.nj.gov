@@ -14,7 +14,7 @@ export interface v18UserData {
 export const migrate_v17_to_v18 = (v17Data: v17UserData): v18UserData => {
   return {
     ...v17Data,
-    version: 18,
+    version: 18
   };
 };
 

@@ -22,9 +22,9 @@ export const migrate_v58_to_v59 = (v58Data: v58UserData): v59UserData => {
     ...v58Data,
     preferences: {
       ...v58Data.preferences,
-      visibleRoadmapSidebarCards: [...removedWelcomeCard, "welcome"],
+      visibleRoadmapSidebarCards: [...removedWelcomeCard, "welcome"]
     },
-    version: 59,
+    version: 59
   };
 };
 
@@ -169,7 +169,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v59FormationData {

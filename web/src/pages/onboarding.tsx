@@ -28,13 +28,13 @@ import {
   OnboardingErrors,
   OnboardingStatus,
   Page,
-  ProfileError,
+  ProfileError
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   sendOnboardingOnSubmitEvents,
   setAnalyticsDimensions,
-  setRegistrationDimension,
+  setRegistrationDimension
 } from "@/lib/utils/analytics-helpers";
 import { getFlow, OnboardingStatusLookup, scrollToTop } from "@/lib/utils/helpers";
 import {
@@ -44,7 +44,7 @@ import {
   getTimeout,
   industryQueryParamIsValid,
   mapFlowQueryToPersona,
-  pageQueryParamisValid,
+  pageQueryParamisValid
 } from "@/lib/utils/onboardingPageHelpers";
 import {
   createEmptyProfileData,
@@ -52,7 +52,7 @@ import {
   Municipality,
   ProfileData,
   TaskProgress,
-  UserData,
+  UserData
 } from "@businessnjgovnavigator/shared/";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
@@ -93,13 +93,13 @@ const OnboardingPage = (props: Props): ReactElement => {
     REQUIRED_EXISTING_BUSINESS: configFields.businessPersona.default.errorTextRequired,
     REQUIRED_FOREIGN_BUSINESS_TYPE: configFields.foreignBusinessTypeIds.default.errorTextRequired,
     REQUIRED_NEXUS_LOCATION_IN_NJ: configFields.nexusLocationInNewJersey.default.errorTextRequired,
-    REQUIRED_REVIEW_INFO_BELOW: Config.profileDefaults.default.errorTextBody,
+    REQUIRED_REVIEW_INFO_BELOW: Config.profileDefaults.default.errorTextBody
   };
 
   const {
     FormFuncWrapper,
     onSubmit,
-    state: formContextState,
+    state: formContextState
   } = useFormContextHelper(createProfileFieldErrorMap<OnboardingErrors>());
 
   const onboardingFlows = useMemo(() => {
@@ -112,8 +112,8 @@ const OnboardingPage = (props: Props): ReactElement => {
           ...onboardingFlows[flow],
           pages: onboardingFlows[flow].pages.filter((it) => {
             return it.name !== pageName;
-          }),
-        },
+          })
+        }
       };
     };
 
@@ -205,7 +205,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     const newProfileData: ProfileData = {
       ...business.profileData,
       businessPersona: "STARTING",
-      industryId: industryId,
+      industryId: industryId
     };
 
     setProfileData(newProfileData);
@@ -217,7 +217,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     const flowType = mapFlowQueryToPersona[flow as QUERY_PARAMS_VALUES["flow"]];
     const newProfileData: ProfileData = {
       ...profileData,
-      businessPersona: flowType,
+      businessPersona: flowType
     };
 
     setProfileData(newProfileData);
@@ -255,7 +255,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           operatingPhase: profileData.businessPersona === "OWNING" ? "GUEST_MODE_OWNING" : "GUEST_MODE",
           interstateLogistics: profileData.interstateLogistics,
           interstateMoving: profileData.interstateMoving,
-          sectorId: profileData.sectorId,
+          sectorId: profileData.sectorId
         };
 
         setProfileData(newProfileData);
@@ -276,7 +276,7 @@ const OnboardingPage = (props: Props): ReactElement => {
             const nextCurrentPage = page.current + 1;
             setPage({
               current: nextCurrentPage,
-              previous: page.current,
+              previous: page.current
             });
             routeToPage(nextCurrentPage);
             headerRef.current?.focus();
@@ -304,11 +304,11 @@ const OnboardingPage = (props: Props): ReactElement => {
                 ...newProfileData,
                 operatingPhase: isRemoteSellerWorker
                   ? "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
-                  : newProfileData.operatingPhase,
+                  : newProfileData.operatingPhase
               },
-              onboardingFormProgress: "COMPLETED",
-            },
-          },
+              onboardingFormProgress: "COMPLETED"
+            }
+          }
         };
 
         newUserData = await api.postGetAnnualFilings(newUserData);
@@ -320,7 +320,7 @@ const OnboardingPage = (props: Props): ReactElement => {
               ? preferences.visibleSidebarCards.filter((cardId: string) => {
                   return cardId !== "task-progress";
                 })
-              : [...preferences.visibleSidebarCards, "task-progress"],
+              : [...preferences.visibleSidebarCards, "task-progress"]
         });
 
         if (newProfileData.legalStructureId) {
@@ -334,7 +334,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           pathname: ROUTES.dashboard,
           query: isAdditionalBusiness
             ? { [QUERIES.fromAdditionalBusiness]: "true" }
-            : { [QUERIES.fromOnboarding]: "true" },
+            : { [QUERIES.fromOnboarding]: "true" }
         });
       }
     },
@@ -363,7 +363,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       const previousPage = page.current - 1;
       setPage({
         current: previousPage,
-        previous: page.current,
+        previous: page.current
       });
       routeToPage(previousPage);
       headerRef.current?.focus();
@@ -376,8 +376,8 @@ const OnboardingPage = (props: Props): ReactElement => {
       condition: () => isAdditionalBusiness,
       modificationMap: {
         Additional: "Additional",
-        additional: "additional",
-      },
+        additional: "additional"
+      }
     });
 
     return (
@@ -400,10 +400,10 @@ const OnboardingPage = (props: Props): ReactElement => {
             state: {
               page: page.current,
               profileData: profileData,
-              flow: currentFlow,
+              flow: currentFlow
             },
             setProfileData,
-            onBack,
+            onBack
           }}
         >
           <NextSeo
@@ -486,8 +486,8 @@ const OnboardingPage = (props: Props): ReactElement => {
 export const getStaticProps = (): GetStaticPropsResult<Props> => {
   return {
     props: {
-      municipalities: loadAllMunicipalities(),
-    },
+      municipalities: loadAllMunicipalities()
+    }
   };
 };
 

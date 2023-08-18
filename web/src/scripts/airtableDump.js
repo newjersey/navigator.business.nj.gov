@@ -11,7 +11,7 @@ const airtableBaseId = process.env.AIRTABLE_BASE_ID || "";
 const table = "Municipalities";
 Airtable.configure({
   endpointUrl: "https://api.airtable.com",
-  apiKey: airtableApiKey,
+  apiKey: airtableApiKey
 });
 
 const base = Airtable.base(airtableBaseId);
@@ -50,7 +50,7 @@ const airtableToMunicipalityDetail = (airtableMunicipality) => {
     countyName: airtableMunicipality["County Name"][0],
     countyClerkPhone: airtableMunicipality["County Clerk Phone"][0],
     countyClerkWebsite: airtableMunicipality["County Clerks Office Webpage"][0],
-    countyWebsite: airtableMunicipality["County Website"][0],
+    countyWebsite: airtableMunicipality["County Website"][0]
   };
 };
 
@@ -65,7 +65,7 @@ const airtableSelectAll = () => {
           for (const record of records) {
             all.push({
               id: record._rawJson.id,
-              ...record._rawJson.fields,
+              ...record._rawJson.fields
             });
           }
           fetchNextPage();

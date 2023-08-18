@@ -20,12 +20,12 @@ export const migrate_v34_to_v35 = (v34Data: v34UserData): v35UserData => {
       formationResponse: v34Data.formationData.formationResponse
         ? {
             ...v34Data.formationData.formationResponse,
-            formationId: undefined,
+            formationId: undefined
           }
         : undefined,
-      getFilingResponse: undefined,
+      getFilingResponse: undefined
     },
-    version: 35,
+    version: 35
   };
 };
 
@@ -154,7 +154,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING",
+  "QUESTION_WARNING"
 ] as const;
 
 interface v35FormationData {

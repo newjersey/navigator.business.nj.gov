@@ -14,9 +14,9 @@ export const migrate_v4_to_v5 = (v4Data: v4UserData): v5UserData => {
     ...v4Data,
     onboardingData: {
       ...v4Data.onboardingData,
-      liquorLicense: false,
+      liquorLicense: false
     },
-    version: 5,
+    version: 5
   };
 };
 
@@ -64,7 +64,7 @@ export const generateV5User = (overrides: Partial<v5BusinessUser>): v5BusinessUs
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
-    ...overrides,
+    ...overrides
   };
 };
 
@@ -77,9 +77,9 @@ export const generateV5OnboardingData = (overrides: Partial<v5OnboardingData>): 
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`,
+      id: `some-id-${randomInt()}`
     },
     liquorLicense: true,
-    ...overrides,
+    ...overrides
   };
 };

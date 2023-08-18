@@ -24,7 +24,7 @@ export const Header = (): ReactElement => {
   const getHeader = (): string => {
     return userData?.user.name
       ? templateEval(Config.headerDefaults.defaultHeaderText, {
-          name: userData.user.name,
+          name: userData.user.name
         })
       : Config.headerDefaults.noUserNameHeaderText;
   };

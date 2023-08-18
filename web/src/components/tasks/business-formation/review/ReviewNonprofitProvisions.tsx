@@ -16,7 +16,7 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
 
   const showQuestionAnswer = ({
     fieldName,
-    value,
+    value
   }: {
     fieldName: FormationFields;
     value: InFormInBylaws;
@@ -52,11 +52,11 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
   const provisionsToDisplay: Array<{ radioField: FormationFields; termsField: FormationFields }> = [
     {
       radioField: "nonprofitBoardMemberQualificationsSpecified",
-      termsField: "nonprofitBoardMemberQualificationsTerms",
+      termsField: "nonprofitBoardMemberQualificationsTerms"
     },
     { radioField: "nonprofitBoardMemberRightsSpecified", termsField: "nonprofitBoardMemberRightsTerms" },
     { radioField: "nonprofitTrusteesMethodSpecified", termsField: "nonprofitTrusteesMethodTerms" },
-    { radioField: "nonprofitAssetDistributionSpecified", termsField: "nonprofitAssetDistributionTerms" },
+    { radioField: "nonprofitAssetDistributionSpecified", termsField: "nonprofitAssetDistributionTerms" }
   ];
 
   return (
@@ -85,7 +85,7 @@ export const ReviewNonprofitProvisions = (): ReactElement => {
                 {hasNonprofitBoardMembers &&
                   showQuestionAnswer({
                     fieldName: radioField,
-                    value: radioValue,
+                    value: radioValue
                   })}
               </div>
 

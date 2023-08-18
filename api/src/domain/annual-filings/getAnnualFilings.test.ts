@@ -7,7 +7,7 @@ import {
   getFirstAnnualFiling,
   getSecondAnnualFiling,
   getThirdAnnualFiling,
-  modifyCurrentBusiness,
+  modifyCurrentBusiness
 } from "@shared/test";
 import { generateAnnualFilings } from "../../../test/helpers";
 import { getAnnualFilings } from "./getAnnualFilings";
@@ -21,11 +21,11 @@ describe("getAnnualFilings", () => {
         profileData: generateProfileData({
           dateOfFormation: "2021-03-01",
           entityId: undefined,
-          legalStructureId: "limited-liability-company",
+          legalStructureId: "limited-liability-company"
         }),
         taxFilingData: generateTaxFilingData({
-          filings: [],
-        }),
+          filings: []
+        })
       })
     );
 
@@ -37,9 +37,9 @@ describe("getAnnualFilings", () => {
         filings: generateAnnualFilings([
           getFirstAnnualFiling(formationDate),
           getSecondAnnualFiling(formationDate),
-          getThirdAnnualFiling(formationDate),
-        ]),
-      },
+          getThirdAnnualFiling(formationDate)
+        ])
+      }
     }));
 
     expect(response).toEqual(expectedUserData);
@@ -53,11 +53,11 @@ describe("getAnnualFilings", () => {
         profileData: generateProfileData({
           dateOfFormation: formationDate,
           entityId: undefined,
-          legalStructureId: "limited-liability-company",
+          legalStructureId: "limited-liability-company"
         }),
         taxFilingData: generateTaxFilingData({
-          filings: [generateTaxFilingCalendarEvent({ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" })],
-        }),
+          filings: [generateTaxFilingCalendarEvent({ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" })]
+        })
       })
     );
 
@@ -69,9 +69,9 @@ describe("getAnnualFilings", () => {
         filings: generateAnnualFilings([
           getFirstAnnualFiling(formationDate),
           getSecondAnnualFiling(formationDate),
-          getThirdAnnualFiling(formationDate),
-        ]),
-      },
+          getThirdAnnualFiling(formationDate)
+        ])
+      }
     }));
 
     expect(response).toEqual(expectedUserData);
@@ -85,11 +85,11 @@ describe("getAnnualFilings", () => {
         profileData: generateProfileData({
           dateOfFormation: formationDate,
           entityId: undefined,
-          legalStructureId: undefined,
+          legalStructureId: undefined
         }),
         taxFilingData: generateTaxFilingData({
-          filings: [],
-        }),
+          filings: []
+        })
       })
     );
 
@@ -101,9 +101,9 @@ describe("getAnnualFilings", () => {
         filings: generateAnnualFilings([
           getFirstAnnualFiling(formationDate),
           getSecondAnnualFiling(formationDate),
-          getThirdAnnualFiling(formationDate),
-        ]),
-      },
+          getThirdAnnualFiling(formationDate)
+        ])
+      }
     }));
 
     expect(response).toEqual(expectedUserData);
@@ -115,18 +115,18 @@ describe("getAnnualFilings", () => {
         profileData: generateProfileData({
           dateOfFormation: "2021-03-01",
           entityId: undefined,
-          legalStructureId: "sole-proprietorship",
+          legalStructureId: "sole-proprietorship"
         }),
         taxFilingData: generateTaxFilingData({
-          filings: [generateTaxFilingCalendarEvent({ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" })],
-        }),
+          filings: [generateTaxFilingCalendarEvent({ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" })]
+        })
       })
     );
 
     const response = getAnnualFilings(postedUserData);
     const expectedUserData = modifyCurrentBusiness(response, (business) => ({
       ...business,
-      taxFilingData: generateTaxFilingData({ filings: [] }),
+      taxFilingData: generateTaxFilingData({ filings: [] })
     }));
 
     expect(response).toEqual(expectedUserData);
