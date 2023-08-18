@@ -196,7 +196,7 @@
     "lint-staged": "13.2.3",
     "nc": "git+https://github.com/dsueltenfuss/nc.git",
     "prettier": "2.8.8",
-    "prettier-plugin-organize-imports": "3.2.2",
+    "prettier-plugin-organize-imports": "3.2.3",
     "raw-loader": "4.0.2",
     "require-from-string": "2.0.2",
     "rimraf": "5.0.1",
