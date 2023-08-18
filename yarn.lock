@@ -4299,7 +4299,7 @@ __metadata:
     simple-oauth2: 5.0.0
     slick-carousel: ^1.8.1
     storybook-addon-designs: 6.3.1
-    storybook-addon-pseudo-states: 2.1.0
+    storybook-addon-pseudo-states: 1.15.5
     style-loader: 3.3.3
     supertest: 6.3.3
     swr: 1.3.0
@@ -4481,7 +4481,7 @@ __metadata:
     sass: 1.63.6
     sass-loader: 13.3.2
     slick-carousel: ^1.8.1
-    storybook-addon-pseudo-states: 2.1.0
+    storybook-addon-pseudo-states: 1.15.5
     style-loader: 3.3.3
     swr: 1.3.0
     ts-jest: 29.1.1
@@ -33818,15 +33818,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook-addon-pseudo-states@npm:2.1.0":
-  version: 2.1.0
-  resolution: "storybook-addon-pseudo-states@npm:2.1.0"
+"storybook-addon-pseudo-states@npm:1.15.5":
+  version: 1.15.5
+  resolution: "storybook-addon-pseudo-states@npm:1.15.5"
   peerDependencies:
-    "@storybook/components": ^7.0.0
-    "@storybook/core-events": ^7.0.0
-    "@storybook/manager-api": ^7.0.0
-    "@storybook/preview-api": ^7.0.0
-    "@storybook/theming": ^7.0.0
+    "@storybook/addons": ^6.5.0
+    "@storybook/api": ^6.5.0
+    "@storybook/components": ^6.5.0
+    "@storybook/core-events": ^6.5.0
+    "@storybook/theming": ^6.5.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
   peerDependenciesMeta:
@@ -33834,7 +33834,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: a58c8ea2a58275e95264ebf92d2f7eb20d738b6caf18c64844f245723dc8e5c144d8c165ec353c7c24914a3982a277d3b26e90268b7b74d987e24e6cf53195e6
+  checksum: 5ba5022ee5082a1b9ce3bc244172f059a20f5c0824ce37306e4169c880613be2513e1bf13d1dce4fee458a02eb09ebd4638273d2f80e4ef23fe9f1e315f3deed
   languageName: node
   linkType: hard
 
