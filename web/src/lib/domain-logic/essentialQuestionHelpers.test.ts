@@ -1,6 +1,6 @@
 import {
   getEssentialQuestion,
-  getIsApplicableToFunctionByFieldName
+  getIsApplicableToFunctionByFieldName,
 } from "@/lib/domain-logic/essentialQuestions";
 
 jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
@@ -14,12 +14,12 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
       industryOnboardingQuestions: {
         isPetCareHousingApplicable: true,
         willSellPetCareItems: true,
-        isCpaRequiredApplicable: true
+        isCpaRequiredApplicable: true,
       },
       isEnabled: true,
       additionalSearchTerms: "",
       id: "multipleEqId",
-      description: ""
+      description: "",
     },
     {
       naicsCodes: "000000",
@@ -39,12 +39,12 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
         isCpaRequiredApplicable: true,
         willSellPetCareItems: true,
         isChildcareForSixOrMore: true,
-        isPetCareHousingApplicable: true
+        isPetCareHousingApplicable: true,
       },
       isEnabled: true,
       additionalSearchTerms: "",
       id: "fake-industry-with-eq",
-      description: ""
+      description: "",
     },
     {
       naicsCodes: "000000",
@@ -56,9 +56,9 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
       isEnabled: true,
       additionalSearchTerms: "",
       id: "fake-industry-with-no-eq",
-      description: ""
-    }
-  ]
+      description: "",
+    },
+  ],
 }));
 
 describe("hasEssentialQuestion", () => {

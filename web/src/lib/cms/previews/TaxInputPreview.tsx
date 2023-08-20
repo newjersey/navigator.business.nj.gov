@@ -13,7 +13,7 @@ const TaxInputPreview = (props: PreviewProps): ReactElement => {
 
   const task = generateTask({
     name: "Name is controlled by Task Metadata",
-    contentMd: "Body content is controlled by Task Metadata"
+    contentMd: "Body content is controlled by Task Metadata",
   });
 
   return (

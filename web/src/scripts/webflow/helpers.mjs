@@ -40,7 +40,7 @@ export const contentToStrings = (content) => {
           delete node.properties;
           delete node.tagName;
         }
-      }
+      },
     })
     .use(rehypeFormat)
     .use(rehypeStringify, { allowDangerousHtml: true })

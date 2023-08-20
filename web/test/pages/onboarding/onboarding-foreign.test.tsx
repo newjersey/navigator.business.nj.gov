@@ -6,13 +6,13 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
-  userDataWasNotUpdated
+  userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
 import {
   industryIdsWithRequiredEssentialQuestion,
   mockEmptyApiSignups,
   renderPage,
-  runNonprofitOnboardingTests
+  runNonprofitOnboardingTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import { generateProfileData, ProfileData } from "@businessnjgovnavigator/shared/";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
@@ -27,7 +27,7 @@ jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn()
 jest.mock("@/lib/api-client/apiClient", () => ({
   postNewsletter: jest.fn(),
   postUserTesting: jest.fn(),
-  postGetAnnualFilings: jest.fn()
+  postGetAnnualFilings: jest.fn(),
 }));
 
 const Config = getMergedConfig();
@@ -38,7 +38,7 @@ const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
   return generateUserDataForBusiness(
     generateBusiness({
       profileData: generateProfileData(overrides),
-      onboardingFormProgress: "UNSTARTED"
+      onboardingFormProgress: "UNSTARTED",
     })
   );
 };
@@ -75,7 +75,7 @@ describe("onboarding - foreign business", () => {
 
     beforeEach(() => {
       userData = generateTestUserData({
-        businessPersona: "FOREIGN"
+        businessPersona: "FOREIGN",
       });
       useMockRouter({ isReady: true, query: { page: "2" } });
     });
@@ -231,7 +231,7 @@ describe("onboarding - foreign business", () => {
       const userData = generateTestUserData({
         businessPersona: "FOREIGN",
         foreignBusinessType: "REMOTE_SELLER",
-        foreignBusinessTypeIds: ["revenueInNJ"]
+        foreignBusinessTypeIds: ["revenueInNJ"],
       });
 
       useMockRouter({ isReady: true, query: { page: "2" } });
@@ -247,7 +247,7 @@ describe("onboarding - foreign business", () => {
       const userData = generateTestUserData({
         operatingPhase: "GUEST_MODE",
         businessPersona: "FOREIGN",
-        foreignBusinessType: "REMOTE_SELLER"
+        foreignBusinessType: "REMOTE_SELLER",
       });
 
       useMockRouter({ isReady: true, query: { page: "3" } });
@@ -265,7 +265,7 @@ describe("onboarding - foreign business", () => {
       const userData = generateTestUserData({
         businessPersona: "FOREIGN",
         foreignBusinessType: "REMOTE_WORKER",
-        foreignBusinessTypeIds: ["employeesInNJ"]
+        foreignBusinessTypeIds: ["employeesInNJ"],
       });
 
       useMockRouter({ isReady: true, query: { page: "2" } });
@@ -281,7 +281,7 @@ describe("onboarding - foreign business", () => {
       const userData = generateTestUserData({
         operatingPhase: "GUEST_MODE",
         businessPersona: "FOREIGN",
-        foreignBusinessType: "REMOTE_WORKER"
+        foreignBusinessType: "REMOTE_WORKER",
       });
 
       useMockRouter({ isReady: true, query: { page: "3" } });
@@ -301,7 +301,7 @@ describe("onboarding - foreign business", () => {
       userData = generateTestUserData({
         industryId: undefined,
         businessPersona: "FOREIGN",
-        foreignBusinessType: "NEXUS"
+        foreignBusinessType: "NEXUS",
       });
       useMockRouter({ isReady: true, query: { page: "3" } });
     });
@@ -338,7 +338,7 @@ describe("onboarding - foreign business", () => {
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
           industryId: industryId,
-          ...emptyIndustrySpecificData
+          ...emptyIndustrySpecificData,
         });
         useMockRouter({ isReady: true, query: { page: "3" } });
         const { page } = renderPage({ userData });
@@ -362,7 +362,7 @@ describe("onboarding - foreign business", () => {
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
           industryId: industryId,
-          ...emptyIndustrySpecificData
+          ...emptyIndustrySpecificData,
         });
         useMockRouter({ isReady: true, query: { page: "3" } });
         const { page } = renderPage({ userData });
@@ -381,7 +381,7 @@ describe("onboarding - foreign business", () => {
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
           industryId: industryId,
-          ...emptyIndustrySpecificData
+          ...emptyIndustrySpecificData,
         });
         useMockRouter({ isReady: true, query: { page: "3" } });
         const { page } = renderPage({ userData });
@@ -411,7 +411,7 @@ describe("onboarding - foreign business", () => {
         businessPersona: "FOREIGN",
         foreignBusinessType: "NEXUS",
         municipality: undefined,
-        homeBasedBusiness: undefined
+        homeBasedBusiness: undefined,
       });
       useMockRouter({ isReady: true, query: { page: "4" } });
     });
@@ -457,7 +457,7 @@ describe("onboarding - foreign business", () => {
       const userData = generateTestUserData({
         operatingPhase: "GUEST_MODE",
         businessPersona: "FOREIGN",
-        foreignBusinessType: "NEXUS"
+        foreignBusinessType: "NEXUS",
       });
 
       useMockRouter({ isReady: true, query: { page: "5" } });

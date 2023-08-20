@@ -3,7 +3,7 @@ import {
   castPublicFilingLegalTypeToFormationType,
   FormationLegalType,
   PublicFilingLegalType,
-  publicFilingLegalTypes
+  publicFilingLegalTypes,
 } from "@businessnjgovnavigator/shared";
 
 export const allowFormation = (
@@ -17,7 +17,7 @@ export const allowFormation = (
     "foreign-s-corporation": process.env.FEATURE_BUSINESS_FCORP === "true",
     "foreign-c-corporation": process.env.FEATURE_BUSINESS_FCORP === "true",
     "foreign-nonprofit": process.env.FEATURE_BUSINESS_FNP === "true",
-    nonprofit: process.env.FEATURE_BUSINESS_NP === "true"
+    nonprofit: process.env.FEATURE_BUSINESS_NP === "true",
   };
 
   if (publicFilingLegalTypes.includes(legalStructureId as PublicFilingLegalType)) {

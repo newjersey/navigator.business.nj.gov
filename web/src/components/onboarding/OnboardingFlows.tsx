@@ -30,14 +30,16 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
               <OnboardingSectors<OnboardingErrors> errorTypes={["REQUIRED_REVIEW_INFO_BELOW"]} />
             </div>
           </>
-        )
-      }
-    ]
+        ),
+      },
+    ],
   },
   STARTING: {
     pages: [
       {
-        component: <OnboardingBusinessPersona<OnboardingErrors> errorTypes={["REQUIRED_EXISTING_BUSINESS"]} />
+        component: (
+          <OnboardingBusinessPersona<OnboardingErrors> errorTypes={["REQUIRED_EXISTING_BUSINESS"]} />
+        ),
       },
       {
         name: "industry-page",
@@ -54,14 +56,16 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
               />
             </div>
           </>
-        )
-      }
-    ]
+        ),
+      },
+    ],
   },
   FOREIGN: {
     pages: [
       {
-        component: <OnboardingBusinessPersona<OnboardingErrors> errorTypes={["REQUIRED_EXISTING_BUSINESS"]} />
+        component: (
+          <OnboardingBusinessPersona<OnboardingErrors> errorTypes={["REQUIRED_EXISTING_BUSINESS"]} />
+        ),
       },
 
       {
@@ -72,7 +76,7 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
               errorTypes={["REQUIRED_FOREIGN_BUSINESS_TYPE"]}
             />
           </>
-        )
+        ),
       },
       {
         name: "industry-page",
@@ -89,7 +93,7 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
               />
             </div>
           </>
-        )
+        ),
       },
       {
         name: "municipality-page",
@@ -98,8 +102,8 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
             <FieldLabelOnboarding fieldName="nexusLocationInNewJersey" />
             <OnboardingLocationInNewJersey<OnboardingErrors> errorTypes={["REQUIRED_NEXUS_LOCATION_IN_NJ"]} />
           </>
-        )
-      }
-    ]
-  }
+        ),
+      },
+    ],
+  },
 };

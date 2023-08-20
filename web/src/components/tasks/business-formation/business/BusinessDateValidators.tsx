@@ -4,7 +4,7 @@ import {
   defaultDateFormat,
   FormationLegalType,
   getCurrentDate,
-  parseDateWithFormat
+  parseDateWithFormat,
 } from "@businessnjgovnavigator/shared/index";
 import dayjs from "dayjs";
 

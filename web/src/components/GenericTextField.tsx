@@ -12,7 +12,7 @@ import {
   HTMLInputTypeAttribute,
   ReactElement,
   RefObject,
-  useMemo
+  useMemo,
 } from "react";
 
 export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFieldProps<T> {
@@ -109,14 +109,14 @@ export const GenericTextField = forwardRef(
         return ![
           validMinimumValue(returnedValue),
           returnedValue.length <= (maxLength ?? Number.POSITIVE_INFINITY),
-          props.additionalValidationIsValid ? props.additionalValidationIsValid(returnedValue) : true
+          props.additionalValidationIsValid ? props.additionalValidationIsValid(returnedValue) : true,
         ].some((i) => {
           return !i;
         });
       };
       fieldOptions = {
         ...fieldOptions,
-        inputProps: { ...fieldOptions?.inputProps, inputMode: "numeric" }
+        inputProps: { ...fieldOptions?.inputProps, inputMode: "numeric" },
       };
     }
 
@@ -164,7 +164,7 @@ export const GenericTextField = forwardRef(
           sx={{ width: 1, ...fieldOptions?.sx }}
           inputProps={{
             ...fieldOptions?.inputProps,
-            "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName)
+            "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
           }}
           InputProps={props.inputProps}
           type={props.type}

@@ -247,5 +247,5 @@ export const Migrations: MigrationFunction[] = [
   migrate_v118_to_v119,
   migrate_v119_to_v120,
   migrate_v120_to_v121,
-  migrate_v121_to_v122
+  migrate_v121_to_v122,
 ];

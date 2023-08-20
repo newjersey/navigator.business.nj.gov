@@ -4,7 +4,7 @@ import {
   generateTaxFilingData,
   generateTaxIdAndBusinessName,
   generateUserDataForBusiness,
-  modifyCurrentBusiness
+  modifyCurrentBusiness,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
 import { Express } from "express";
@@ -16,7 +16,7 @@ import { getSignedInUserId } from "./userRouter";
 
 jest.mock("./userRouter", () => {
   return {
-    getSignedInUserId: jest.fn()
+    getSignedInUserId: jest.fn(),
   };
 });
 const fakeSignedInUserId = getSignedInUserId as jest.Mock;
@@ -32,7 +32,7 @@ describe("taxFilingRouter", () => {
   );
   const responseUserData: UserData = modifyCurrentBusiness(userData, (business) => ({
     ...business,
-    taxFilingData: generateTaxFilingData({ state: "SUCCESS" })
+    taxFilingData: generateTaxFilingData({ state: "SUCCESS" }),
   }));
 
   beforeEach(async () => {
@@ -45,17 +45,17 @@ describe("taxFilingRouter", () => {
       put: jest.fn(),
       getNeedNewsletterUsers: jest.fn(),
       getNeedToAddToUserTestingUsers: jest.fn(),
-      getNeedTaxIdEncryptionUsers: jest.fn()
+      getNeedTaxIdEncryptionUsers: jest.fn(),
     };
 
     apiTaxFilingClient = {
       lookup: jest.fn(),
-      onboarding: jest.fn()
+      onboarding: jest.fn(),
     };
 
     stubEncryptionDecryptionClient = {
       encryptValue: jest.fn(),
-      decryptValue: jest.fn()
+      decryptValue: jest.fn(),
     };
     stubUserDataClient.get.mockResolvedValue(userData);
     stubUserDataClient.put.mockImplementation((userData) => {
@@ -75,7 +75,7 @@ describe("taxFilingRouter", () => {
     it("returns userData", async () => {
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({
         businessName: "my-cool-business",
-        taxId: "123456789000"
+        taxId: "123456789000",
       });
       apiTaxFilingClient.lookup.mockResolvedValue(responseUserData);
       const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
@@ -89,7 +89,7 @@ describe("taxFilingRouter", () => {
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({
         businessName: "my-cool-business",
         taxId: "123456789000",
-        encryptedTaxId: undefined
+        encryptedTaxId: undefined,
       });
       apiTaxFilingClient.lookup.mockResolvedValue(responseUserData);
       const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
@@ -97,7 +97,7 @@ describe("taxFilingRouter", () => {
       expect(apiTaxFilingClient.lookup).toHaveBeenCalledWith({
         userData,
         taxId: "123456789000",
-        businessName: "my-cool-business"
+        businessName: "my-cool-business",
       });
       expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
       expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
@@ -108,7 +108,7 @@ describe("taxFilingRouter", () => {
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({
         businessName: "my-cool-business",
         taxId: "123456789000",
-        encryptedTaxId: "some-encrypted-value"
+        encryptedTaxId: "some-encrypted-value",
       });
       apiTaxFilingClient.lookup.mockResolvedValue(responseUserData);
       const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
@@ -116,7 +116,7 @@ describe("taxFilingRouter", () => {
       expect(apiTaxFilingClient.lookup).toHaveBeenCalledWith({
         userData,
         taxId: "123456789000",
-        businessName: "my-cool-business"
+        businessName: "my-cool-business",
       });
       expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
       expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
@@ -127,7 +127,7 @@ describe("taxFilingRouter", () => {
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({
         businessName: "my-cool-business",
         taxId: "*****89000",
-        encryptedTaxId: undefined
+        encryptedTaxId: undefined,
       });
       apiTaxFilingClient.lookup.mockResolvedValue(responseUserData);
       const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
@@ -138,7 +138,7 @@ describe("taxFilingRouter", () => {
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({
         businessName: "my-cool-business",
         taxId: "*****89000",
-        encryptedTaxId: "some-encrypted-value"
+        encryptedTaxId: "some-encrypted-value",
       });
       apiTaxFilingClient.lookup.mockResolvedValue(responseUserData);
       stubEncryptionDecryptionClient.decryptValue.mockResolvedValue("123456789000");
@@ -148,7 +148,7 @@ describe("taxFilingRouter", () => {
       expect(apiTaxFilingClient.lookup).toHaveBeenCalledWith({
         userData,
         taxId: "123456789000",
-        businessName: "my-cool-business"
+        businessName: "my-cool-business",
       });
       expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
       expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
@@ -195,14 +195,14 @@ describe("taxFilingRouter", () => {
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({
         businessName: "my-cool-business",
         taxId: "123456789000",
-        encryptedTaxId: undefined
+        encryptedTaxId: undefined,
       });
       apiTaxFilingClient.onboarding.mockResolvedValue(responseUserData);
       const response = await request(app).post(`/onboarding`).send(taxIdAndBusinessName);
       expect(response.body).toEqual(responseUserData);
       expect(apiTaxFilingClient.onboarding).toHaveBeenCalledWith({
         userData,
-        ...taxIdAndBusinessName
+        ...taxIdAndBusinessName,
       });
       expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
       expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
@@ -213,7 +213,7 @@ describe("taxFilingRouter", () => {
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({
         businessName: "my-cool-business",
         taxId: "*****89000",
-        encryptedTaxId: "some-encrypted-value"
+        encryptedTaxId: "some-encrypted-value",
       });
       stubEncryptionDecryptionClient.decryptValue.mockResolvedValue("123456789000");
       apiTaxFilingClient.onboarding.mockResolvedValue(responseUserData);
@@ -222,7 +222,7 @@ describe("taxFilingRouter", () => {
       expect(apiTaxFilingClient.onboarding).toHaveBeenCalledWith({
         userData,
         taxId: "123456789000",
-        businessName: "my-cool-business"
+        businessName: "my-cool-business",
       });
       expect(stubEncryptionDecryptionClient.decryptValue).toHaveBeenCalledWith("some-encrypted-value");
       expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);

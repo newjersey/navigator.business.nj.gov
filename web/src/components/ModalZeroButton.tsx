@@ -32,7 +32,7 @@ export const ModalZeroButton = (props: Props): ReactElement => {
             className="margin-left-auto"
             onClick={props.close}
             sx={{
-              color: "#757575"
+              color: "#757575",
             }}
           >
             <Icon className="usa-icon--size-4">close</Icon>

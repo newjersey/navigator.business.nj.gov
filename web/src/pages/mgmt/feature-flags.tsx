@@ -25,7 +25,7 @@ const FeatureFlagsPage = (props: Props): ReactElement => {
       featuresWithSuffixes.map((it) => {
         return it.split("_").slice(1, -1).join("_");
       })
-    )
+    ),
   ];
 
   const authedView = (
@@ -78,8 +78,8 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
   return {
     props: {
       envVars: JSON.stringify(process.env),
-      noAuth: true
-    }
+      noAuth: true,
+    },
   };
 };
 

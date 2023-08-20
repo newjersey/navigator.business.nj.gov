@@ -56,7 +56,7 @@ export const withAuthAlert = (
         registrationAlertStatus: context?.registrationAlertStatus ?? undefined,
         setRegistrationAlertStatus: context?.setRegistrationAlertStatus || jest.fn(),
         setRegistrationAlertIsVisible: context?.setRegistrationAlertIsVisible || jest.fn(),
-        setRegistrationModalIsVisible: context?.setRegistrationModalIsVisible || jest.fn()
+        setRegistrationModalIsVisible: context?.setRegistrationModalIsVisible || jest.fn(),
       }}
     >
       {subject}
@@ -85,7 +85,7 @@ export const withRoadmap = (params: {
     <RoadmapContext.Provider
       value={{
         roadmap: params.initialRoadmap,
-        setRoadmap: params.mockSetRoadmapFunction || jest.fn()
+        setRoadmap: params.mockSetRoadmapFunction || jest.fn(),
       }}
     >
       {params.component}

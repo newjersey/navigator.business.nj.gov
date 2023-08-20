@@ -7,7 +7,7 @@ import {
   generateProfileData,
   getCurrentDate,
   LicenseEventSubtype,
-  LookupIndustryById
+  LookupIndustryById,
 } from "@businessnjgovnavigator/shared";
 import { generateLicenseData } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -36,7 +36,7 @@ describe("license page", () => {
 
     useMockBusiness({
       licenseData: generateLicenseData({ expirationISO: expirationDate.toISOString() }),
-      profileData: generateProfileData({ industryId: "home-contractor" })
+      profileData: generateProfileData({ industryId: "home-contractor" }),
     });
 
     const license = generateLicenseEvent({
@@ -44,7 +44,7 @@ describe("license page", () => {
       filename: "filename-1",
       callToActionLink: "cta-link-1",
       callToActionText: "cta-text-1",
-      contentMd: "content-1"
+      contentMd: "content-1",
     });
 
     const licenseName = LookupIndustryById("home-contractor").licenseType;
@@ -68,7 +68,7 @@ describe("license page", () => {
 
     useMockBusiness({
       licenseData: generateLicenseData({ expirationISO: expirationDate.toISOString() }),
-      profileData: generateProfileData({ industryId: "home-contractor" })
+      profileData: generateProfileData({ industryId: "home-contractor" }),
     });
 
     const license = generateLicenseEvent({
@@ -76,7 +76,7 @@ describe("license page", () => {
       filename: "filename-1",
       callToActionLink: "cta-link-1",
       callToActionText: "cta-text-1",
-      contentMd: "content-1"
+      contentMd: "content-1",
     });
     const licenseName = LookupIndustryById("home-contractor").licenseType;
 

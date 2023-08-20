@@ -7,11 +7,11 @@ import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { BusinessFormationSteps } from "@/components/tasks/business-formation/BusinessFormationSteps";
 import {
   BusinessFormationStepsConfiguration,
-  LookupNameByStepIndex
+  LookupNameByStepIndex,
 } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import {
   getFieldByApiField,
-  UNKNOWN_API_ERROR_FIELD
+  UNKNOWN_API_ERROR_FIELD,
 } from "@/components/tasks/business-formation/getFieldForApiField";
 import { validatedFieldsForUser } from "@/components/tasks/business-formation/validatedFieldsForUser";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
@@ -84,7 +84,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
       return {
         name: value.name,
         hasError: doesStepHaveError(value.name, overrides),
-        isComplete: isStepCompleted(value.name)
+        isComplete: isStepCompleted(value.name),
       };
     });
 
@@ -146,7 +146,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     updateQueue.queueFormationData({
       formationFormData: formationFormDataToSave,
       businessNameAvailability: state.businessNameAvailability,
-      lastVisitedPageIndex: newStep
+      lastVisitedPageIndex: newStep,
     });
 
     queueFormationChangesInProfile();
@@ -166,7 +166,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
       }
 
       updateQueue.queueProfileData({
-        municipality: updateQueue.currentBusiness().formationData.formationFormData.addressMunicipality
+        municipality: updateQueue.currentBusiness().formationData.formationFormData.addressMunicipality,
       });
     }
 
@@ -175,7 +175,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
       updateQueue.currentBusiness().formationData.businessNameAvailability?.status === "AVAILABLE"
     ) {
       updateQueue.queueProfileData({
-        businessName: updateQueue.currentBusiness().formationData.formationFormData.businessName
+        businessName: updateQueue.currentBusiness().formationData.formationFormData.businessName,
       });
     }
   };
@@ -201,7 +201,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
       formationFormDataToSubmit = {
         ...formationFormDataToSubmit,
         signers: filteredSigners,
-        incorporators: filteredIncorporators
+        incorporators: filteredIncorporators,
       };
     }
 
@@ -280,7 +280,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   const submitToApi = async (): Promise<void> => {
     if (!business || !updateQueue) return;
     updateQueue.queueFormationData({
-      formationFormData: filterEmptyFormData(state.formationFormData)
+      formationFormData: filterEmptyFormData(state.formationFormData),
     });
 
     setIsLoading(true);

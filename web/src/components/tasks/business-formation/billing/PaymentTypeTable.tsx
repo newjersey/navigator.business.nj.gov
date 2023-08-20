@@ -53,14 +53,14 @@ export const PaymentTypeTable = (): ReactElement => {
   }, [
     state.formationFormData.certificateOfStanding,
     state.formationFormData.paymentType,
-    state.formationFormData.certifiedCopyOfFormationDocument
+    state.formationFormData.certifiedCopyOfFormationDocument,
   ]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        paymentType: event.target.value as PaymentType
+        paymentType: event.target.value as PaymentType,
       };
     });
     setFieldsInteracted([FIELD]);

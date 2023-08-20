@@ -129,5 +129,5 @@ export interface ConfigContextType {
 
 export const ConfigContext = createContext<ConfigContextType>({
   config: merged,
-  setOverrides: () => {}
+  setOverrides: () => {},
 });

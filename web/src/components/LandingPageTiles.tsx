@@ -23,7 +23,7 @@ export const LandingPageTiles = (props: Props): ReactElement => {
   if (props.isWelcomePage) {
     landingPageConfig = {
       ...landingPageConfig,
-      ...Config.landingPageExperienceWelcome
+      ...Config.landingPageExperienceWelcome,
     };
   }
 
@@ -35,7 +35,7 @@ export const LandingPageTiles = (props: Props): ReactElement => {
   const setFlowAndRouteUser = (flow: "starting" | "out-of-state" | "up-and-running"): void => {
     routeWithQuery(router, {
       path: ROUTES.onboarding,
-      queries: { [QUERIES.flow]: flow }
+      queries: { [QUERIES.flow]: flow },
     });
   };
 
@@ -46,44 +46,44 @@ export const LandingPageTiles = (props: Props): ReactElement => {
       tileText2: landingPageConfig.landingPageGetStartedTileLine2,
       dataTestId: "get-started-tile",
       onClick: routeToOnboarding,
-      isPrimary: true
+      isPrimary: true,
     },
     {
       imgPath: "/img/briefcase-icon.svg",
       tileText: landingPageConfig.landingPageRegisterBizTile,
       dataTestId: "register-biz-tile",
-      onClick: (): void => setFlowAndRouteUser("starting")
+      onClick: (): void => setFlowAndRouteUser("starting"),
     },
     {
       imgPath: "/img/payTaxes-icon.svg",
       tileText: landingPageConfig.landingPageTaxesTile,
       dataTestId: "pay-taxes-tile",
-      onClick: (): void => setFlowAndRouteUser("up-and-running")
+      onClick: (): void => setFlowAndRouteUser("up-and-running"),
     },
     {
       imgPath: "/img/outOfState-icon.svg",
       dataTestId: "out-of-state-tile",
       tileText: landingPageConfig.landingPageOutOfStateTile,
-      onClick: (): void => setFlowAndRouteUser("out-of-state")
+      onClick: (): void => setFlowAndRouteUser("out-of-state"),
     },
     {
       imgPath: "/img/eligibleFunding-icon.svg",
       dataTestId: "eligible-funding-tile",
       tileText: landingPageConfig.landingPageFundingTile,
-      onClick: (): void => setFlowAndRouteUser("up-and-running")
+      onClick: (): void => setFlowAndRouteUser("up-and-running"),
     },
     {
       imgPath: "/img/startBusiness-icon.svg",
       dataTestId: "start-biz-tile",
       tileText: landingPageConfig.landingPageStartBizTile,
-      onClick: (): void => setFlowAndRouteUser("starting")
+      onClick: (): void => setFlowAndRouteUser("starting"),
     },
     {
       imgPath: "/img/runBusiness-icon.svg",
       dataTestId: "run-biz-tile",
       tileText: landingPageConfig.landingPageTileRunBizTile,
-      onClick: (): void => setFlowAndRouteUser("up-and-running")
-    }
+      onClick: (): void => setFlowAndRouteUser("up-and-running"),
+    },
   ];
 
   const filterActionTiles = (actionTiles: ActionTile[]): ActionTile[] =>
@@ -113,7 +113,7 @@ export const LandingPageTiles = (props: Props): ReactElement => {
             const actionTileObj = {
               ...actionTile,
               key: `landing-page-tiles-key-${index}`,
-              className: "landing-page-tiles"
+              className: "landing-page-tiles",
             };
             return <LandingPageActionTile {...actionTileObj} key={actionTileObj.key} />;
           })}

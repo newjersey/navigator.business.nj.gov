@@ -64,14 +64,14 @@ const Home = (props: Props): ReactElement => {
     if (landingPageExperience === "ExperienceB") {
       landingPageConfig = {
         ...landingPageConfig,
-        ...Config.landingPageExperienceB
+        ...Config.landingPageExperienceB,
       };
     }
   }
   if (props.isWelcomePage) {
     landingPageConfig = {
       ...landingPageConfig,
-      ...Config.landingPageExperienceWelcome
+      ...Config.landingPageExperienceWelcome,
     };
   }
   useEffect(() => {

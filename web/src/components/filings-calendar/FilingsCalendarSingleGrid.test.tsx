@@ -8,7 +8,7 @@ import {
   generateTaxFilingCalendarEvent,
   generateTaxFilingData,
   LookupIndustryById,
-  parseDateWithFormat
+  parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
 import { generateLicenseData } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -23,7 +23,7 @@ const month: number = Number.parseInt(currentDate.month().toString());
 function mockShared(): typeof shared {
   return {
     ...jest.requireActual("@businessnjgovnavigator/shared"),
-    getCurrentDate: (): Dayjs => currentDate
+    getCurrentDate: (): Dayjs => currentDate,
   };
 }
 
@@ -31,42 +31,42 @@ jest.mock("@businessnjgovnavigator/shared", () => mockShared());
 
 const taxFilingOne = generateTaxFilingCalendarEvent({
   identifier: "tax-filing-one",
-  dueDate: currentDate.format(defaultDateFormat)
+  dueDate: currentDate.format(defaultDateFormat),
 });
 
 const taxFilingTwo = generateTaxFilingCalendarEvent({
   identifier: "tax-filing-two",
-  dueDate: currentDate.format(defaultDateFormat)
+  dueDate: currentDate.format(defaultDateFormat),
 });
 
 const taxFilingThree = generateTaxFilingCalendarEvent({
   identifier: "tax-filing-three",
-  dueDate: currentDate.format(defaultDateFormat)
+  dueDate: currentDate.format(defaultDateFormat),
 });
 
 const operateReferences: Record<string, OperateReference> = {
   "tax-filing-one": {
     name: "Tax Filing One",
     urlSlug: "tax-filing-one-url",
-    urlPath: "tax-filing-one-url-path"
+    urlPath: "tax-filing-one-url-path",
   },
   "tax-filing-two": {
     name: "Tax Filing Two",
     urlSlug: "tax-filing-two-url",
-    urlPath: "tax-filing-two-url-path"
+    urlPath: "tax-filing-two-url-path",
   },
   "tax-filing-three": {
     name: "Tax Filing Three",
     urlSlug: "tax-filing-three-url",
-    urlPath: "tax-filing-three-url-path"
-  }
+    urlPath: "tax-filing-three-url-path",
+  },
 };
 
 describe("<FilingsCalendarSingleGrid />", () => {
   it("renders a tax filings", () => {
     const taxFilingData = generateTaxFilingData({ filings: [taxFilingOne] });
     const business = generateBusiness({
-      taxFilingData: taxFilingData
+      taxFilingData: taxFilingData,
     });
     render(
       <FilingsCalendarSingleGrid
@@ -85,10 +85,10 @@ describe("<FilingsCalendarSingleGrid />", () => {
         filings: [
           generateTaxFilingCalendarEvent({
             identifier: "tax-filing-old",
-            dueDate: currentDate.subtract(1, "month").format(defaultDateFormat)
-          })
-        ]
-      })
+            dueDate: currentDate.subtract(1, "month").format(defaultDateFormat),
+          }),
+        ],
+      }),
     });
     render(
       <FilingsCalendarSingleGrid
@@ -97,8 +97,8 @@ describe("<FilingsCalendarSingleGrid />", () => {
           "tax-filing-old": {
             name: "Tax Filing Old",
             urlSlug: "tax-filing-old-url",
-            urlPath: "tax-filing-old-url-path"
-          }
+            urlPath: "tax-filing-old-url-path",
+          },
         }}
         num={month - 1}
         activeYear={year}
@@ -113,10 +113,10 @@ describe("<FilingsCalendarSingleGrid />", () => {
         filings: [
           generateTaxFilingCalendarEvent({
             identifier: "tax-filing-old",
-            dueDate: currentDate.add(1, "year").subtract(1, "month").format(defaultDateFormat)
-          })
-        ]
-      })
+            dueDate: currentDate.add(1, "year").subtract(1, "month").format(defaultDateFormat),
+          }),
+        ],
+      }),
     });
     render(
       <FilingsCalendarSingleGrid
@@ -125,8 +125,8 @@ describe("<FilingsCalendarSingleGrid />", () => {
           "tax-filing-old": {
             name: "Tax Filing Old",
             urlSlug: "tax-filing-old-url",
-            urlPath: "tax-filing-old-url-path"
-          }
+            urlPath: "tax-filing-old-url-path",
+          },
         }}
         num={month - 1}
         activeYear={currentDate.add(1, "year").year().toString()}
@@ -138,7 +138,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
   it("does not render tax filing when on a future year", () => {
     const taxFilingData = generateTaxFilingData({ filings: [taxFilingOne] });
     const business = generateBusiness({
-      taxFilingData: taxFilingData
+      taxFilingData: taxFilingData,
     });
     render(
       <FilingsCalendarSingleGrid
@@ -156,7 +156,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
     const licenseData = generateLicenseData({ expirationISO: currentDate.add(4, "days").toISOString() });
     const business = generateBusiness({
       licenseData,
-      profileData: generateProfileData({ industryId: "cosmetology" })
+      profileData: generateProfileData({ industryId: "cosmetology" }),
     });
     render(
       <FilingsCalendarSingleGrid
@@ -175,11 +175,11 @@ describe("<FilingsCalendarSingleGrid />", () => {
 
   it("renders a licenseEvent renewal task", () => {
     const licenseData = generateLicenseData({
-      expirationISO: currentDate.add(4, "days").toISOString()
+      expirationISO: currentDate.add(4, "days").toISOString(),
     });
     const business = generateBusiness({
       licenseData,
-      profileData: generateProfileData({ industryId: "cosmetology" })
+      profileData: generateProfileData({ industryId: "cosmetology" }),
     });
     render(
       <FilingsCalendarSingleGrid
@@ -197,11 +197,11 @@ describe("<FilingsCalendarSingleGrid />", () => {
 
   it("renders both license events in same month (on the 1st and 31st)", () => {
     const licenseData = generateLicenseData({
-      expirationISO: currentDate.add(1, "year").month(1).day(1).toISOString()
+      expirationISO: currentDate.add(1, "year").month(1).day(1).toISOString(),
     });
     const business = generateBusiness({
       licenseData,
-      profileData: generateProfileData({ industryId: "cosmetology" })
+      profileData: generateProfileData({ industryId: "cosmetology" }),
     });
     render(
       <FilingsCalendarSingleGrid
@@ -224,7 +224,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
 
   it("does not render expand collapse button when there are only two tax filings", () => {
     const business = generateBusiness({
-      taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo] })
+      taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo] }),
     });
     render(
       <FilingsCalendarSingleGrid
@@ -244,19 +244,19 @@ describe("<FilingsCalendarSingleGrid />", () => {
   it("shows a licenseEvent and exactly 2 tax filings in order by due date", () => {
     const first = {
       ...taxFilingOne,
-      dueDate: currentDate.toISOString()
+      dueDate: currentDate.toISOString(),
     };
     const last = {
       ...taxFilingTwo,
-      dueDate: currentDate.add(2, "days").toISOString()
+      dueDate: currentDate.add(2, "days").toISOString(),
     };
     const business = generateBusiness({
       licenseData: generateLicenseData({
         expirationISO: currentDate.add(1, "days").toISOString(),
-        status: "ACTIVE"
+        status: "ACTIVE",
       }),
       taxFilingData: generateTaxFilingData({ filings: [last, first] }),
-      profileData: generateProfileData({ industryId: "home-contractor" })
+      profileData: generateProfileData({ industryId: "home-contractor" }),
     });
     render(
       <FilingsCalendarSingleGrid
@@ -283,23 +283,23 @@ describe("<FilingsCalendarSingleGrid />", () => {
   it("shows a licenseEvent and 2+ tax filings in order by due date", () => {
     const first = {
       ...taxFilingOne,
-      dueDate: currentDate.toISOString()
+      dueDate: currentDate.toISOString(),
     };
     const second = {
       ...taxFilingTwo,
-      dueDate: currentDate.add(1, "day").toISOString()
+      dueDate: currentDate.add(1, "day").toISOString(),
     };
     const last = {
       ...taxFilingThree,
-      dueDate: currentDate.add(3, "days").toISOString()
+      dueDate: currentDate.add(3, "days").toISOString(),
     };
     const business = generateBusiness({
       licenseData: generateLicenseData({
         expirationISO: currentDate.add(2, "days").toISOString(),
-        status: "ACTIVE"
+        status: "ACTIVE",
       }),
       taxFilingData: generateTaxFilingData({ filings: [first, last, second] }),
-      profileData: generateProfileData({ industryId: "home-contractor" })
+      profileData: generateProfileData({ industryId: "home-contractor" }),
     });
     render(
       <FilingsCalendarSingleGrid
@@ -326,7 +326,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
 
   it("shows and hides the additional tax filings when the view more / view less button is clicked", () => {
     const business = generateBusiness({
-      taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo, taxFilingThree] })
+      taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo, taxFilingThree] }),
     });
     render(
       <FilingsCalendarSingleGrid

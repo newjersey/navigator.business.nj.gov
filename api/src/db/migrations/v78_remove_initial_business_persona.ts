@@ -21,13 +21,13 @@ export const migrate_v77_to_v78 = (v77Data: v77UserData): v78UserData => {
     ...v77Data,
     profileData: {
       ...rest,
-      businessPersona: initialOnboardingFlow
+      businessPersona: initialOnboardingFlow,
     },
     preferences: {
       ...restPreferences,
-      visibleSidebarCards: visibleRoadmapSidebarCards
+      visibleSidebarCards: visibleRoadmapSidebarCards,
     },
-    version: 78
+    version: 78,
   };
 };
 
@@ -190,7 +190,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v78FormationData {
@@ -255,7 +255,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -264,7 +264,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const corpBusinessSuffix = [
@@ -277,7 +277,7 @@ export const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;

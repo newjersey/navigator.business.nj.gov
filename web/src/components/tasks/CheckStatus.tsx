@@ -16,9 +16,9 @@ const useStyles = makeStyles(() => {
     zipCodeField: {
       "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
         {
-          display: "none"
-        }
-    }
+          display: "none",
+        },
+    },
   });
 });
 
@@ -31,7 +31,7 @@ interface Props {
 const LicenseSearchErrorLookup: Record<LicenseSearchError, string> = {
   NOT_FOUND: Config.licenseSearchTask.errorTextNotFound,
   FIELDS_REQUIRED: Config.licenseSearchTask.errorTextFieldsRequired,
-  SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed
+  SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
 };
 
 export const CheckStatus = (props: Props): ReactElement => {
@@ -48,7 +48,7 @@ export const CheckStatus = (props: Props): ReactElement => {
       setFormValues((prevValues) => {
         return {
           ...prevValues,
-          name: business.profileData.businessName
+          name: business.profileData.businessName,
         };
       });
     }
@@ -67,7 +67,7 @@ export const CheckStatus = (props: Props): ReactElement => {
       setFormValues((prevValues) => {
         return {
           ...prevValues,
-          [key]: event.target.value
+          [key]: event.target.value,
         };
       });
     };
@@ -97,7 +97,7 @@ export const CheckStatus = (props: Props): ReactElement => {
             variant="outlined"
             inputProps={{
               id: "business-name",
-              "data-testid": "business-name"
+              "data-testid": "business-name",
             }}
           />
         </div>
@@ -109,7 +109,7 @@ export const CheckStatus = (props: Props): ReactElement => {
             variant="outlined"
             inputProps={{
               id: "address-1",
-              "data-testid": "address-1"
+              "data-testid": "address-1",
             }}
           />
         </div>
@@ -121,7 +121,7 @@ export const CheckStatus = (props: Props): ReactElement => {
             variant="outlined"
             inputProps={{
               id: "address-2",
-              "data-testid": "address-2"
+              "data-testid": "address-2",
             }}
           />
         </div>
@@ -135,7 +135,7 @@ export const CheckStatus = (props: Props): ReactElement => {
               inputProps={{
                 id: "zipcode",
                 "data-testid": "zipcode",
-                type: "number"
+                type: "number",
               }}
               className={`${classes.zipCodeField}`}
             />
@@ -150,8 +150,8 @@ export const CheckStatus = (props: Props): ReactElement => {
                 id: "state",
                 "data-testid": "state",
                 style: {
-                  color: "#1b1b1b"
-                }
+                  color: "#1b1b1b",
+                },
               }}
               disabled
             />

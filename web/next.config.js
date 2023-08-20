@@ -3,7 +3,7 @@
 const CopyPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true"
+  enabled: process.env.ANALYZE === "true",
 });
 module.exports = withBundleAnalyzer({
   env: {
@@ -32,14 +32,14 @@ module.exports = withBundleAnalyzer({
     AB_TESTING_EXPERIENCE_B_PERCENTAGE: process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE,
     SHOW_DISABLED_INDUSTRIES: process.env.SHOW_DISABLED_INDUSTRIES ?? "false",
     DISABLE_GTM: process.env.DISABLE_GTM,
-    OUTAGE_ALERT_CONFIG_URL: process.env.OUTAGE_ALERT_CONFIG_URL
+    OUTAGE_ALERT_CONFIG_URL: process.env.OUTAGE_ALERT_CONFIG_URL,
   },
   staticPageGenerationTimeout: 120,
   webpack: (config) => {
     config.module.rules.push(
       {
         test: /\.md$/,
-        use: "raw-loader"
+        use: "raw-loader",
       },
       {
         test: /\.(ts)x?$/,
@@ -49,10 +49,10 @@ module.exports = withBundleAnalyzer({
             options: {
               transpileOnly: true,
               experimentalWatchApi: true,
-              onlyCompileBundledFiles: true
-            }
-          }
-        ]
+              onlyCompileBundledFiles: true,
+            },
+          },
+        ],
       }
     );
 
@@ -60,7 +60,7 @@ module.exports = withBundleAnalyzer({
       new CleanWebpackPlugin({
         dry: false,
         cleanOnceBeforeBuildPatterns: ["../public/vendor"],
-        dangerouslyAllowCleanPatternsOutsideProject: true
+        dangerouslyAllowCleanPatternsOutsideProject: true,
       })
     );
 
@@ -69,16 +69,16 @@ module.exports = withBundleAnalyzer({
         patterns: [
           {
             from: "../node_modules/@newjersey/njwds/dist/img",
-            to: "../public/vendor/img"
+            to: "../public/vendor/img",
           },
           {
             from: "../node_modules/@newjersey/njwds/dist/js",
-            to: "../public/vendor/js"
-          }
-        ]
+            to: "../public/vendor/js",
+          },
+        ],
       })
     );
 
     return config;
-  }
+  },
 });

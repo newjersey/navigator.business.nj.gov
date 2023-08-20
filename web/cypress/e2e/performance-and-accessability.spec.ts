@@ -5,7 +5,7 @@ import {
   completeBusinessStructureTask,
   defaultPa11yThresholds,
   lighthouseDesktopConfig,
-  lighthouseMobileConfig
+  lighthouseMobileConfig,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
@@ -88,7 +88,7 @@ describe("Performance and Accessibility - Dashboard [all] [group3]", () => {
     const industry = LookupIndustryById("e-commerce");
 
     completeNewBusinessOnboarding({
-      industry
+      industry,
     });
 
     onDashboardPage.getEditProfileLink().should("exist");
@@ -111,7 +111,7 @@ describe("Performance and Accessibility - Roadmap Tasks [all] [group3]", () => {
       const legalStructureId = "general-partnership";
 
       completeNewBusinessOnboarding({
-        industry
+        industry,
       });
       completeBusinessStructureTask({ legalStructureId });
 

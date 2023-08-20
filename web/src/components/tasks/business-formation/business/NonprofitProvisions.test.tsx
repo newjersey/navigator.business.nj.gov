@@ -7,7 +7,7 @@ import {
   FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
-  useSetupInitialMocks
+  useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
@@ -20,7 +20,7 @@ import { screen } from "@testing-library/react";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn()
+    useMediaQuery: jest.fn(),
   };
 }
 const Config = getMergedConfig();
@@ -33,7 +33,7 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn()
+  searchBusinessName: jest.fn(),
 }));
 
 describe("<NonprofitProvisions />", () => {
@@ -50,19 +50,19 @@ describe("<NonprofitProvisions />", () => {
     const profileData = generateFormationProfileData(initialProfileData);
     const formationData = {
       formationFormData: generateFormationFormData(formationFormData, {
-        legalStructureId: "nonprofit"
+        legalStructureId: "nonprofit",
       }),
       formationResponse: undefined,
       getFilingResponse: undefined,
       completedFilingPayment: false,
       businessNameAvailability: undefined,
       dbaBusinessNameAvailability: undefined,
-      lastVisitedPageIndex: 0
+      lastVisitedPageIndex: 0,
     };
     const page = preparePage({
       business: generateBusiness({ profileData, formationData }),
       displayContent,
-      municipalities
+      municipalities,
     });
     await page.stepperClickToBusinessStep();
     return page;
@@ -71,11 +71,11 @@ describe("<NonprofitProvisions />", () => {
   const provisions = [
     {
       radio: "nonprofitBoardMemberQualificationsSpecified",
-      terms: "nonprofitBoardMemberQualificationsTerms"
+      terms: "nonprofitBoardMemberQualificationsTerms",
     },
     { radio: "nonprofitBoardMemberRightsSpecified", terms: "nonprofitBoardMemberRightsTerms" },
     { radio: "nonprofitTrusteesMethodSpecified", terms: "nonprofitTrusteesMethodTerms" },
-    { radio: "nonprofitAssetDistributionSpecified", terms: "nonprofitAssetDistributionTerms" }
+    { radio: "nonprofitAssetDistributionSpecified", terms: "nonprofitAssetDistributionTerms" },
   ];
 
   describe("hasNonprofitBoardMembers", () => {
@@ -86,7 +86,7 @@ describe("<NonprofitProvisions />", () => {
           hasNonprofitBoardMembers: true,
           nonprofitBoardMemberQualificationsSpecified: "IN_FORM",
           nonprofitBoardMemberQualificationsTerms: "some terms here",
-          nonprofitBoardMemberRightsSpecified: "IN_BYLAWS"
+          nonprofitBoardMemberRightsSpecified: "IN_BYLAWS",
         }
       );
       page.chooseRadio(`hasNonprofitBoardMembers-false`);
@@ -117,7 +117,7 @@ describe("<NonprofitProvisions />", () => {
         { legalStructureId: "nonprofit" },
         {
           hasNonprofitBoardMembers: true,
-          nonprofitBoardMemberRightsSpecified: "IN_BYLAWS"
+          nonprofitBoardMemberRightsSpecified: "IN_BYLAWS",
         }
       );
       page.chooseRadio("nonprofitBoardMemberRightsSpecified-IN_FORM");

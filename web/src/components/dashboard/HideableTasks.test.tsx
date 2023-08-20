@@ -7,7 +7,7 @@ import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/
 import {
   generateBusiness,
   generatePreferences,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -35,10 +35,10 @@ describe("<HideableTasks />", () => {
   it("displays number of hidden tasks when hide toggle is clicked", async () => {
     const tasks = [generateTask({}), generateTask({})];
     const content = templateEval(Config.dashboardDefaults.hiddenTasksText, {
-      count: String(tasks.length)
+      count: String(tasks.length),
     });
     const business = generateBusiness({
-      preferences: generatePreferences({ isHideableRoadmapOpen: true })
+      preferences: generatePreferences({ isHideableRoadmapOpen: true }),
     });
 
     useMockRoadmap({ tasks: tasks });
@@ -54,16 +54,16 @@ describe("<HideableTasks />", () => {
   it("displays roadmap tasks when show toggle is clicked", async () => {
     const tasks = [generateTask({}), generateTask({})];
     const hiddenTasksContent = templateEval(Config.dashboardDefaults.hiddenTasksText, {
-      count: String(tasks.length)
+      count: String(tasks.length),
     });
 
     const business = generateBusiness({
-      preferences: generatePreferences({ isHideableRoadmapOpen: false })
+      preferences: generatePreferences({ isHideableRoadmapOpen: false }),
     });
 
     useMockRoadmap({
       steps: [generateStep({ stepNumber: 1, section: "PLAN" })],
-      tasks: tasks
+      tasks: tasks,
     });
 
     renderHideableTask(business);

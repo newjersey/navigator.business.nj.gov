@@ -19,7 +19,7 @@ const allForeignBusinessTypeIdsOrdered = [
   "employeesInNJ",
   "transactionsInNJ",
   "revenueInNJ",
-  "none"
+  "none",
 ] as const;
 
 interface Props<T> extends FormContextFieldProps<T> {
@@ -39,7 +39,7 @@ export const OnboardingForeignBusinessType = <T,>(props: Props<T>): ReactElement
     getProfileConfig({
       config: Config,
       persona: state.flow,
-      fieldName: "foreignBusinessTypeIds"
+      fieldName: "foreignBusinessTypeIds",
     });
 
   const isValid = (ids: string[]): boolean => ids.length > 0;
@@ -67,7 +67,7 @@ export const OnboardingForeignBusinessType = <T,>(props: Props<T>): ReactElement
       ...state.profileData,
       industryId: foreignBusinessType === "NEXUS" ? state.profileData.industryId : undefined,
       foreignBusinessType,
-      foreignBusinessTypeIds: ids
+      foreignBusinessTypeIds: ids,
     });
   };
   return (

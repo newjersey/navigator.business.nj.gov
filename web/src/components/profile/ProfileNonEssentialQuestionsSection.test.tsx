@@ -18,7 +18,7 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
       nonEssentialQuestionsIds: ["test-question-1", "test-question-2"],
       naicsCodes: "",
       isEnabled: true,
-      industryOnboardingQuestions: {}
+      industryOnboardingQuestions: {},
     },
     {
       id: "test-industry-with-no-non-essential-questions",
@@ -29,13 +29,13 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
       nonEssentialQuestionsIds: [],
       naicsCodes: "",
       isEnabled: true,
-      industryOnboardingQuestions: {}
-    }
-  ]
+      industryOnboardingQuestions: {},
+    },
+  ],
 }));
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({
-  getNonEssentialQuestionText: jest.fn()
+  getNonEssentialQuestionText: jest.fn(),
 }));
 
 const mockGetNonEssentialQuestionText = (
@@ -49,7 +49,7 @@ describe("ProfileNonEssentialQuestionsSection", () => {
     render(
       <WithStatefulProfileData
         initialData={generateProfileData({
-          ...profileData
+          ...profileData,
         })}
       >
         <ProfileNonEssentialQuestionsSection />
@@ -70,7 +70,7 @@ describe("ProfileNonEssentialQuestionsSection", () => {
       .mockReturnValueOnce("Non Essential Question 2?");
 
     renderComponent({
-      industryId: "test-industry-with-non-essential-questions"
+      industryId: "test-industry-with-non-essential-questions",
     });
 
     expect(

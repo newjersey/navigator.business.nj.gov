@@ -31,9 +31,9 @@ describe("addToUserTesting", () => {
         ...userData.user,
         externalStatus: {
           ...userData.user.externalStatus,
-          userTesting: { success: true, status: "SUCCESS" }
-        }
-      }
+          userTesting: { success: true, status: "SUCCESS" },
+        },
+      },
     });
   });
 });

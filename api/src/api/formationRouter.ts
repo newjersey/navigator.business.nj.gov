@@ -33,8 +33,8 @@ export const formationRouterFactory = (
           ...business,
           formationData: {
             ...business.formationData,
-            formationResponse: formationResponse
-          }
+            formationResponse: formationResponse,
+          },
         }));
         await userDataClient.put(userDataWithResponse);
         res.json(userDataWithResponse);
@@ -66,7 +66,7 @@ export const formationRouterFactory = (
         let documents: ProfileDocuments = {
           certifiedDoc: "",
           formationDoc: "",
-          standingDoc: ""
+          standingDoc: "",
         };
 
         if (getFilingResponse.success && config.shouldSaveDocuments) {
@@ -103,7 +103,7 @@ export const formationRouterFactory = (
           documents = {
             formationDoc,
             certifiedDoc,
-            standingDoc
+            standingDoc,
           };
         }
 
@@ -112,7 +112,7 @@ export const formationRouterFactory = (
           taskProgress,
           formationData: {
             ...business.formationData,
-            getFilingResponse
+            getFilingResponse,
           },
           profileData: {
             ...business.profileData,
@@ -121,9 +121,9 @@ export const formationRouterFactory = (
             businessName,
             documents: {
               ...business.profileData.documents,
-              ...documents
-            }
-          }
+              ...documents,
+            },
+          },
         }));
         await userDataClient.put(userDataWithResponse);
         res.json(userDataWithResponse);

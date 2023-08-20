@@ -21,7 +21,7 @@ import analytics from "@/lib/utils/analytics";
 import {
   BusinessUser,
   createEmptyUser,
-  decideABExperience
+  decideABExperience,
 } from "@businessnjgovnavigator/shared/businessUser";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
@@ -48,7 +48,7 @@ const AccountSetupPage = (): ReactElement => {
   const {
     FormFuncWrapper,
     onSubmit,
-    state: formContextState
+    state: formContextState,
   } = useFormContextHelper(createProfileFieldErrorMap<OnboardingErrors>());
 
   FormFuncWrapper(

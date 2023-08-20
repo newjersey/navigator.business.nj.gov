@@ -76,7 +76,7 @@ const getUpdatedSectorNames = async () => {
       ...item,
       name: sectors.find((sector) => {
         return sector.id == item.slug;
-      }).name
+      }).name,
     };
   });
 };
@@ -89,7 +89,7 @@ const getSortedSectors = async () => {
   return [allIndustryItem, ...orderBy(getOverlappingSectorsFunc(current), ["name"], "asc")].map((e, i) => {
     return {
       ...e,
-      rank: i + 1
+      rank: i + 1,
     };
   });
 };
@@ -150,7 +150,7 @@ export {
   getUnUsedSectors,
   getNewSectors,
   getCurrentSectors,
-  allIndustryId
+  allIndustryId,
 };
 // eslint-disable-next-line no-empty
 if (

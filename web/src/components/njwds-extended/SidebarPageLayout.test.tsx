@@ -9,7 +9,7 @@ import { render, screen } from "@testing-library/react";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn()
+    useMediaQuery: jest.fn(),
   };
 }
 

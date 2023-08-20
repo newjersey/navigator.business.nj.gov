@@ -3,7 +3,7 @@ import {
   generatev76ProfileData,
   generatev76User,
   v76Preferences,
-  v76UserData
+  v76UserData,
 } from "./v76_fix_trade_name_operating_phase_round_2";
 import { migrate_v76_to_v77 } from "./v77_remove_graduation_card";
 
@@ -31,16 +31,16 @@ const makeUserData = (preferences: Partial<v76Preferences>): v76UserData => {
       hiddenCertificationIds: [],
       hiddenFundingIds: [],
       visibleRoadmapSidebarCards: [],
-      ...preferences
+      ...preferences,
     },
     taxFilingData: {
-      filings: []
+      filings: [],
     },
     formationData: {
       formationFormData: generatev76FormationFormData({}),
       formationResponse: undefined,
-      getFilingResponse: undefined
+      getFilingResponse: undefined,
     },
-    version: 76
+    version: 76,
   };
 };

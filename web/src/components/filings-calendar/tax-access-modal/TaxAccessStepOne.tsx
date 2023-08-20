@@ -36,7 +36,7 @@ export const TaxAccessStepOne = (props: Props): ReactElement => {
     FormFuncWrapper,
     onSubmit,
     state: formContextState,
-    isValid
+    isValid,
   } = useFormContextHelper(createReducedFieldStates(fields));
 
   FormFuncWrapper(async () => {
@@ -69,10 +69,10 @@ export const TaxAccessStepOne = (props: Props): ReactElement => {
           value={{
             state: {
               profileData: profileData,
-              flow: "OWNING"
+              flow: "OWNING",
             },
             setProfileData,
-            onBack: (): void => {}
+            onBack: (): void => {},
           }}
         >
           <WithErrorBar hasError={!isValid()} type="ALWAYS">

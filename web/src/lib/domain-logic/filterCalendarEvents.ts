@@ -2,7 +2,7 @@ import {
   CalendarEvent,
   defaultDateFormat,
   getCurrentDate,
-  parseDateWithFormat
+  parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
 import { getJanOfYear } from "@businessnjgovnavigator/shared/index";
 

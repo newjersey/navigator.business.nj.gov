@@ -18,8 +18,8 @@ const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
   const business = generateBusiness({
     profileData: {
       ...createEmptyProfileData(),
-      legalStructureId: "limited-liability-company"
-    }
+      legalStructureId: "limited-liability-company",
+    },
   });
 
   return (

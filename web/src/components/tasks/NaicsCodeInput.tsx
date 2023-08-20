@@ -25,7 +25,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   type NaicsErrorTypes = "length" | "invalid";
   const errorMessages: Record<NaicsErrorTypes, string> = {
     invalid: Config.determineNaicsCode.invalidValidationErrorText,
-    length: Config.determineNaicsCode.lengthValidationErrorText
+    length: Config.determineNaicsCode.lengthValidationErrorText,
   };
   const LENGTH = 6;
   const [naicsCode, setNaicsCode] = useState<string>("");
@@ -211,7 +211,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
               value={naicsCode}
               ariaLabel="Save NAICS Code"
               fieldOptions={{
-                inputProps: { style: { backgroundColor: "white" } }
+                inputProps: { style: { backgroundColor: "white" } },
               }}
               error={isInvalid !== undefined}
               handleChange={handleChange}

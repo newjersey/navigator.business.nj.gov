@@ -21,7 +21,7 @@ describe("analytics-helpers", () => {
       it("fires yes_require_liquor_license events", () => {
         const userData = generateProfileData({
           industryId: randomElementFromArray(liquorLicenseApplicableIndustries).id,
-          liquorLicense: true
+          liquorLicense: true,
         });
         sendOnboardingOnSubmitEvents(userData, "industry-page");
         expect(mockAnalytic.eventRunner.track).toHaveBeenCalledTimes(1);
@@ -29,15 +29,15 @@ describe("analytics-helpers", () => {
           event: "form_submits",
           form_name: "industry_essential_questions",
           questions: {
-            require_liquor_license: "yes"
-          }
+            require_liquor_license: "yes",
+          },
         });
       });
 
       it("fires no_dont_require_liquor_license event", () => {
         const userData = generateProfileData({
           industryId: randomElementFromArray(liquorLicenseApplicableIndustries).id,
-          liquorLicense: false
+          liquorLicense: false,
         });
         sendOnboardingOnSubmitEvents(userData, "industry-page");
         expect(mockAnalytic.eventRunner.track).toHaveBeenCalledTimes(1);
@@ -45,15 +45,15 @@ describe("analytics-helpers", () => {
           event: "form_submits",
           form_name: "industry_essential_questions",
           questions: {
-            require_liquor_license: "no"
-          }
+            require_liquor_license: "no",
+          },
         });
       });
 
       it("does not fire analytics when page is not the industry-page", () => {
         const userData = generateProfileData({
           industryId: randomElementFromArray(liquorLicenseApplicableIndustries).id,
-          liquorLicense: false
+          liquorLicense: false,
         });
         sendOnboardingOnSubmitEvents(userData);
         expect(mockAnalytic.eventRunner.track).toHaveBeenCalledTimes(0);

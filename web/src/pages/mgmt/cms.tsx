@@ -111,7 +111,7 @@ const CMS = dynamic(
       registerAsCannabisLicensePreview(CMS, [
         "cannabisLicense-1",
         "cannabisLicenseAnnual-2",
-        "cannabisLicenseConditional-2"
+        "cannabisLicenseConditional-2",
       ]);
 
       // ----- Formation -----
@@ -194,7 +194,7 @@ const Admin = (): ReactElement => {
           const container = element?.parentElement?.closest(".css-1rsca1y-ControlContainer");
           return {
             element: container,
-            label: container?.children[0].textContent
+            label: container?.children[0].textContent,
           };
         };
 
@@ -224,7 +224,7 @@ const Admin = (): ReactElement => {
 
 export function getStaticProps(): GetStaticPropsResult<{ noAuth: boolean }> {
   return {
-    props: { noAuth: true }
+    props: { noAuth: true },
   };
 }
 

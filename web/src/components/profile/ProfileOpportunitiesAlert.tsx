@@ -20,7 +20,7 @@ export const ProfileOpportunitiesAlert = (): ReactElement => {
     const contentFromConfig = getProfileConfig({
       config: Config,
       persona: state.flow,
-      fieldName: field
+      fieldName: field,
     });
     return contentFromConfig.header;
   };

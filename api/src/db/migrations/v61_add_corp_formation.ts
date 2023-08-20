@@ -27,19 +27,19 @@ export const migrate_v60_to_v61 = (v60Data: v60UserData): v61UserData => {
           ...v60Data.formationData.formationFormData.additionalSigners.map((signer) => {
             return {
               ...createEmptyFormationAddress(),
-              ...signer
+              ...signer,
             };
-          })
+          }),
         ],
         members: v60Data.formationData.formationFormData.members.map((member) => {
           return {
             ...member,
-            signature: false
+            signature: false,
           };
-        })
-      }
+        }),
+      },
     },
-    version: 61
+    version: 61,
   };
 };
 
@@ -184,7 +184,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v61FormationData {
@@ -247,7 +247,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -256,7 +256,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const corpBusinessSuffix = [
@@ -269,7 +269,7 @@ export const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 export const createEmptyFormationAddress = (): v61FormationAddress => {
@@ -280,7 +280,7 @@ export const createEmptyFormationAddress = (): v61FormationAddress => {
     addressCity: "",
     addressState: "",
     addressZipCode: "",
-    signature: false
+    signature: false,
   };
 };
 
@@ -321,7 +321,7 @@ export const generatev61User = (overrides: Partial<v61BusinessUser>): v61Busines
     userTesting: false,
     externalStatus: {},
     abExperience: "ExperienceA",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -339,7 +339,7 @@ export const generatev61ProfileData = (overrides: Partial<v61ProfileData>): v61P
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     liquorLicense: true,
     requiresCpa: false,
@@ -355,7 +355,7 @@ export const generatev61ProfileData = (overrides: Partial<v61ProfileData>): v61P
     taxPin: undefined,
     sectorId: undefined,
     naicsCode: "",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -372,7 +372,7 @@ export const generatev61FormationFormData = (
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     businessAddressState: "",
     businessAddressZipCode: "",
@@ -399,6 +399,6 @@ export const generatev61FormationFormData = (
     businessPurpose: "",
     businessTotalStock: "",
     provisions: [],
-    ...overrides
+    ...overrides,
   };
 };

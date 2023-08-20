@@ -13,9 +13,9 @@ describe("migrate_v98_to_v99", () => {
       ...v98,
       profileData: {
         ...v98.profileData,
-        encryptedId: undefined
+        encryptedId: undefined,
       },
-      version: 99
+      version: 99,
     });
   });
 });

@@ -111,6 +111,6 @@ export const post = async <T, R>(url: string, data: R, auth = true): Promise<T> 
 const authConfig = async (): Promise<AxiosRequestConfig> => {
   const token = await getCurrentToken();
   return {
-    headers: { Authorization: `Bearer ${token}` }
+    headers: { Authorization: `Bearer ${token}` },
   };
 };

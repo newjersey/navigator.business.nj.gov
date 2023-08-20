@@ -18,7 +18,7 @@ export const newsletterStatusList = [
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
   "RESPONSE_WARNING",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 export type v31NewsletterStatus = (typeof newsletterStatusList)[number];
@@ -41,9 +41,9 @@ export const migrate_v30_to_v31 = (v30Data: v30UserData): v31UserData => {
     ...v30Data,
     user: {
       ...v30Data.user,
-      externalStatus: {}
+      externalStatus: {},
     },
-    version: 31
+    version: 31,
   };
 };
 

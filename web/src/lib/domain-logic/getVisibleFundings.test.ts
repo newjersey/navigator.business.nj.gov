@@ -5,7 +5,7 @@ import { getVisibleFundings } from "./getVisibleFundings";
 describe("getVisibleFundings", () => {
   it("returns an array of all fundings when there is no matching id in hiddenFundingIds", () => {
     const business = generateBusiness({
-      preferences: generatePreferences({ hiddenFundingIds: ["three"] })
+      preferences: generatePreferences({ hiddenFundingIds: ["three"] }),
     });
     const certifications = [generateFunding({ id: "one" }), generateFunding({ id: "two" })];
 
@@ -14,7 +14,7 @@ describe("getVisibleFundings", () => {
 
   it("returns an array of filtered fundings when there is a matching id in hiddenFundingIds", () => {
     const business = generateBusiness({
-      preferences: generatePreferences({ hiddenFundingIds: ["two"] })
+      preferences: generatePreferences({ hiddenFundingIds: ["two"] }),
     });
     const cert1 = generateFunding({ id: "one" });
     const cert2 = generateFunding({ id: "two" });

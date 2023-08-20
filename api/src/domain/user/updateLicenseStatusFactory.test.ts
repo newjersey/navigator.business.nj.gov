@@ -8,7 +8,7 @@ import {
   generateNameAndAddress,
   generateProfileData,
   generateUserDataForBusiness,
-  modifyCurrentBusiness
+  modifyCurrentBusiness,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
 import { UpdateLicenseStatus } from "../types";
@@ -29,11 +29,11 @@ describe("updateLicenseStatus", () => {
     userData = generateUserDataForBusiness(
       generateBusiness({
         profileData: generateProfileData({
-          industryId: "home-contractor"
+          industryId: "home-contractor",
         }),
         licenseData: generateLicenseData({
-          lastUpdatedISO: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString()
-        })
+          lastUpdatedISO: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
+        }),
       })
     );
   });
@@ -47,7 +47,7 @@ describe("updateLicenseStatus", () => {
         name: nameAndAddress.name,
         addressLine1: nameAndAddress.addressLine1,
         addressLine2: nameAndAddress.addressLine2,
-        zipCode: nameAndAddress.zipCode
+        zipCode: nameAndAddress.zipCode,
       },
       "Home Improvement Contractors"
     );
@@ -58,14 +58,14 @@ describe("updateLicenseStatus", () => {
     stubSearchLicenseStatus.mockResolvedValue({
       status: "ACTIVE",
       expirationISO: "2020-01-01T00:00:00.000Z",
-      checklistItems: checklistItems
+      checklistItems: checklistItems,
     });
 
     userData = modifyCurrentBusiness(userData, (business) => ({
       ...business,
       licenseData: generateLicenseData({
-        expirationISO: getCurrentDate().add(1, "year").subtract(1, "minute").toISOString()
-      })
+        expirationISO: getCurrentDate().add(1, "year").subtract(1, "minute").toISOString(),
+      }),
     }));
 
     const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
@@ -119,7 +119,7 @@ describe("updateLicenseStatus", () => {
   it("updates the license task status to IN_PROGRESS when license is pending", async () => {
     stubSearchLicenseStatus.mockResolvedValue({
       status: "PENDING",
-      checklistItems: []
+      checklistItems: [],
     });
 
     const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
@@ -139,7 +139,7 @@ describe("updateLicenseStatus", () => {
   it("updates the license task status to COMPLETED when license is active", async () => {
     stubSearchLicenseStatus.mockResolvedValue({
       status: "ACTIVE",
-      checklistItems: []
+      checklistItems: [],
     });
 
     const resultUserData = await updateLicenseStatus(userData, nameAndAddress);

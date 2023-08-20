@@ -6,7 +6,7 @@ import { capitalizeFirstLetter, kebabSnakeSentenceToCamelCase } from "@/lib/util
 import {
   randomHomeBasedIndustry,
   randomNegativeFilteredIndustry,
-  randomNonHomeBasedIndustry
+  randomNonHomeBasedIndustry,
 } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
@@ -15,7 +15,7 @@ import {
   createEmptyProfileData,
   emptyIndustrySpecificData,
   industrySpecificDataChoices,
-  ProfileData
+  ProfileData,
 } from "@businessnjgovnavigator/shared/profileData";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -113,7 +113,7 @@ describe("<OnboardingIndustry />", () => {
         it(`displays ${el.fieldName} for ${validIndustryId.id} as a ${persona} when industry is changed from a previous industry of ${nonValidIndustryId.id}`, () => {
           const profileData = {
             ...createEmptyProfileData(),
-            industryId: nonValidIndustryId.id
+            industryId: nonValidIndustryId.id,
           };
           renderComponent(profileData);
           expect(
@@ -124,7 +124,7 @@ describe("<OnboardingIndustry />", () => {
           expect(screen.getByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`)).toContainHTML(
             renderToStaticMarkup(
               Content({
-                children: fieldContent.description
+                children: fieldContent.description,
               })
             )
           );
@@ -146,7 +146,7 @@ describe("<OnboardingIndustry />", () => {
         } if they select a different industry`, () => {
           const profileData = {
             ...createEmptyProfileData(),
-            industryId: nonValidIndustryId.id
+            industryId: nonValidIndustryId.id,
           };
           renderComponent(profileData);
           selectIndustry(validIndustryId.id);

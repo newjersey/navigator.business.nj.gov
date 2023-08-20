@@ -78,7 +78,7 @@ export const Tag = (props: Props): ReactElement => {
     fixedWidth,
     disableUppercase,
     radius,
-    props.className
+    props.className,
   ]
     .map((i) => {
       return i?.trim();

@@ -4,7 +4,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import {
   isCalendarMonthLessThanCurrentMonth,
   sortCalendarEventsEarliestToLatest,
-  sortFilterCalendarEventsWithinAYear
+  sortFilterCalendarEventsWithinAYear,
 } from "@/lib/domain-logic/filterCalendarEvents";
 import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarEvents";
 import { OperateReference } from "@/lib/types/types";
@@ -15,7 +15,7 @@ import {
   getJanOfYear,
   LicenseCalendarEvent,
   parseDateWithFormat,
-  TaxFilingCalendarEvent
+  TaxFilingCalendarEvent,
 } from "@businessnjgovnavigator/shared";
 import { ReactElement, ReactNode, useState } from "react";
 import { UnStyledButton } from "../njwds-extended/UnStyledButton";
@@ -53,7 +53,7 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
   );
   const sortedCalendarEvents = sortCalendarEventsEarliestToLatest([
     ...thisMonthFilings,
-    ...thisMonthLicenseEvents
+    ...thisMonthLicenseEvents,
   ]);
   const visibleEvents = sortedCalendarEvents.slice(0, NUM_OF_FILINGS_ALWAYS_VIEWABLE);
   const remainingEvents = sortedCalendarEvents.slice(NUM_OF_FILINGS_ALWAYS_VIEWABLE);

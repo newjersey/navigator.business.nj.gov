@@ -155,7 +155,7 @@ export const NavBarDesktop = (): ReactElement => {
                   <Grow
                     {...TransitionProps}
                     style={{
-                      transformOrigin: placement.startsWith("bottom") ? "center top" : "center bottom"
+                      transformOrigin: placement.startsWith("bottom") ? "center top" : "center bottom",
                     }}
                   >
                     <Paper>

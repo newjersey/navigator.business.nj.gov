@@ -11,7 +11,7 @@ export const fetchContextualInfo = async (id: string): Promise<ContextualInfo> =
     return {
       isVisible: false,
       header: "Content Not Found",
-      markdown: ""
+      markdown: "",
     };
   }
 };

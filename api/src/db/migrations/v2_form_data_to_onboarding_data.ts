@@ -28,9 +28,9 @@ export const migrate_v1_to_v2 = (v1Data: v1UserData): v2UserData => {
     onboardingData: {
       businessName,
       industry: industry as v2Industry,
-      legalStructure
+      legalStructure,
     },
-    version: 2
+    version: 2,
   };
 };
 
@@ -70,7 +70,7 @@ export const generateV2OnboardingData = (overrides: Partial<v2OnboardingData>): 
     businessName: `some-business-name-${randomInt()}`,
     industry: "restaurant",
     legalStructure: "Sole Proprietorship",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -79,6 +79,6 @@ export const generateV2User = (overrides: Partial<v2BusinessUser>): v2BusinessUs
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };

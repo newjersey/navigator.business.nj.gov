@@ -7,6 +7,6 @@ export const switchCurrentBusiness = (userData: UserData, newCurrentBusinessId: 
 
   return {
     ...userData,
-    currentBusinessId: newCurrentBusinessId
+    currentBusinessId: newCurrentBusinessId,
   };
 };

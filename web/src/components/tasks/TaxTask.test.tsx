@@ -6,7 +6,7 @@ import { templateEval } from "@/lib/utils/helpers";
 import {
   generateTask,
   randomPublicFilingLegalStructure,
-  randomTradeNameLegalStructure
+  randomTradeNameLegalStructure,
 } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
@@ -16,7 +16,7 @@ import {
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
@@ -24,7 +24,7 @@ import {
   generateProfileData,
   generateTaxFilingData,
   generateUserDataForBusiness,
-  randomInt
+  randomInt,
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -37,7 +37,7 @@ const Config = getMergedConfig();
 
 const WithStatefulBusiness = ({
   children,
-  initialBusiness
+  initialBusiness,
 }: {
   children: ReactNode;
   initialBusiness: Business;
@@ -86,7 +86,7 @@ describe("<TaxTask />", () => {
   it("shows disabled taxId when taxCalendar is PENDING or SUCCESS", () => {
     const business = generateBusiness({
       profileData: generateProfileData({ taxId: "*******89123", encryptedTaxId: "some-encrypted-value" }),
-      taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" })
+      taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" }),
     });
     render(
       <WithStatefulBusiness initialBusiness={business}>
@@ -118,7 +118,7 @@ describe("<TaxTask />", () => {
     beforeEach(() => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ taxId: "" }),
-        taskProgress: { [taskId]: "NOT_STARTED" }
+        taskProgress: { [taskId]: "NOT_STARTED" },
       });
     });
 
@@ -130,7 +130,7 @@ describe("<TaxTask />", () => {
     it("updates the progress of the task to IN_PROGRESS if there is a pre-existing 9 digit tax id", async () => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ taxId: "123456789" }),
-        taskProgress: { [taskId]: "COMPLETED" }
+        taskProgress: { [taskId]: "COMPLETED" },
       });
       renderPage();
       await waitFor(() => {
@@ -141,7 +141,7 @@ describe("<TaxTask />", () => {
     it("renders the split field if there is a pre-existing 9 digit tax id", async () => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ taxId: "123456789" }),
-        taskProgress: { [taskId]: "COMPLETED" }
+        taskProgress: { [taskId]: "COMPLETED" },
       });
       renderPage();
       await waitFor(() => {
@@ -163,7 +163,7 @@ describe("<TaxTask />", () => {
       const expectedErrorMessage = templateEval(
         Config.profileDefaults.fields.taxId.default.errorTextRequired,
         {
-          length: "12"
+          length: "12",
         }
       );
       fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123123123" } });
@@ -199,7 +199,7 @@ describe("<TaxTask />", () => {
     beforeEach(() => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ taxId: "*******89123", encryptedTaxId: "some-encrypted-value" }),
-        taskProgress: { [taskId]: "COMPLETED" }
+        taskProgress: { [taskId]: "COMPLETED" },
       });
     });
 
@@ -228,7 +228,7 @@ describe("<TaxTask />", () => {
     beforeEach(() => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ taxId: "" }),
-        taskProgress: { [taskId]: "NOT_STARTED" }
+        taskProgress: { [taskId]: "NOT_STARTED" },
       });
     });
 
@@ -259,8 +259,8 @@ describe("<TaxTask />", () => {
     it("shows disclaimer for trade name legal structure", () => {
       const initialBusiness = generateBusiness({
         profileData: generateProfileData({
-          legalStructureId: randomTradeNameLegalStructure()
-        })
+          legalStructureId: randomTradeNameLegalStructure(),
+        }),
       });
       renderComponent(initialBusiness);
 
@@ -272,8 +272,8 @@ describe("<TaxTask />", () => {
     it("does not show disclaimer for public filing legal structure", () => {
       const initialBusiness = generateBusiness({
         profileData: generateProfileData({
-          legalStructureId: randomPublicFilingLegalStructure()
-        })
+          legalStructureId: randomPublicFilingLegalStructure(),
+        }),
       });
       renderComponent(initialBusiness);
 

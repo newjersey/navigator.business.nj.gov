@@ -7,7 +7,7 @@ export const ProfileTradeName = (props: Omit<OnboardingProps, "fieldName" | "inp
       fieldName="tradeName"
       inputWidth="default"
       fieldOptions={{
-        inputProps: { "data-testid": "tradeName" }
+        inputProps: { "data-testid": "tradeName" },
       }}
       {...props}
     />

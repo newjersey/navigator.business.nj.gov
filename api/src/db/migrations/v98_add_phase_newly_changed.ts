@@ -19,9 +19,9 @@ export const migrate_v97_to_v98 = (v97Data: v97UserData): v98UserData => {
     ...v97Data,
     preferences: {
       ...v97Data.preferences,
-      phaseNewlyChanged: false
+      phaseNewlyChanged: false,
     },
-    version: 98
+    version: 98,
   };
 };
 
@@ -206,7 +206,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v98FormationData {
@@ -313,7 +313,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -322,7 +322,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const lpBusinessSuffix = ["LIMITED PARTNERSHIP", "LP", "L.P."] as const;
@@ -337,7 +337,7 @@ const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 const foreignCorpBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
@@ -346,7 +346,7 @@ const AllBusinessSuffixes = [
   ...llcBusinessSuffix,
   ...llpBusinessSuffix,
   ...lpBusinessSuffix,
-  ...foreignCorpBusinessSuffix
+  ...foreignCorpBusinessSuffix,
 ] as const;
 
 type v98BusinessSuffix = (typeof AllBusinessSuffixes)[number];
@@ -388,7 +388,7 @@ export const v98generatorUser = (overrides: Partial<v98BusinessUser>): v98Busine
     myNJUserKey: undefined,
     intercomHash: undefined,
     abExperience: "ExperienceA",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -400,7 +400,7 @@ export const v98generateFormationAddress = (overrides: Partial<v98FormationAddre
     addressState: { shortCode: "NJ", name: "new-jersey" },
     addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
     addressCountry: `some-county`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -413,7 +413,7 @@ export const v98generateFormationMember = (overrides: Partial<v98FormationMember
     addressState: { shortCode: "123", name: "new-jersey" },
     addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
     addressCountry: `some-county`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -423,7 +423,7 @@ export const generateMunicipality = (overrides: Partial<v98Municipality>): v98Mu
     name: `some-name-${randomInt()}`,
     county: `some-county-${randomInt()}`,
     id: `some-id-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -432,7 +432,7 @@ export const allFormationLegalTypes = [
   "limited-liability-company",
   "limited-partnership",
   "c-corporation",
-  "s-corporation"
+  "s-corporation",
 ];
 
 export const v98generateFormationFormData = (
@@ -484,7 +484,7 @@ export const v98generateFormationFormData = (
     getDistributionTerms: `some-getDistributionTerms-text-${randomInt()}`,
     canMakeDistribution: !!(randomInt() % 2),
     makeDistributionTerms: `some-makeDistributionTerms-text-${randomInt()}`,
-    ...overrides
+    ...overrides,
   } as v98FormationFormData;
 };
 
@@ -504,7 +504,7 @@ export const v98generatorIndustrySpecificData = (
     carService: undefined,
     interstateTransport: false,
     isChildcareForSixOrMore: undefined,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -521,7 +521,7 @@ export const v98generatorProfileData = (overrides: Partial<v98ProfileData>): v98
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     dateOfFormation: undefined,
     entityId: randomInt(10).toString(),
@@ -532,7 +532,7 @@ export const v98generatorProfileData = (overrides: Partial<v98ProfileData>): v98
     documents: {
       certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
       formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
-      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`
+      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
     },
     existingEmployees: randomInt(7).toString(),
     taxPin: randomInt(4).toString(),
@@ -543,7 +543,7 @@ export const v98generatorProfileData = (overrides: Partial<v98ProfileData>): v98
     nexusDbaName: undefined,
     nexusLocationInNewJersey: undefined,
     operatingPhase: "NEEDS_TO_FORM",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -555,7 +555,7 @@ export const v98TaxFilingDataGenerator = (overrides: Partial<v98TaxFilingData>):
     lastUpdatedISO: undefined,
     registeredISO: undefined,
     filings: [],
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -568,7 +568,7 @@ export const v98FormationData = (
     formationResponse: undefined,
     getFilingResponse: undefined,
     completedFilingPayment: false,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -591,10 +591,10 @@ export const v98UserDataGenerator = (overrides: Partial<v98UserData>): v98UserDa
       visibleSidebarCards: ["welcome"],
       returnToLink: "",
       isCalendarFullView: true,
-      isHideableRoadmapOpen: false
+      isHideableRoadmapOpen: false,
     },
     taxFilingData: v98TaxFilingDataGenerator({}),
     formationData: v98FormationData({}, profileData.legalStructureId ?? ""),
-    ...overrides
+    ...overrides,
   };
 };

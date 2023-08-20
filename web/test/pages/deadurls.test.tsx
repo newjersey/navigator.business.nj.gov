@@ -25,18 +25,18 @@ jest.mock("broken-link-checker", () => {
         if (pageUrl.includes("task1")) {
           handlers.link({
             url: { original: "http://www.example.com" },
-            broken: true
+            broken: true,
           });
         } else {
           handlers.link({
             url: { original: "" },
-            broken: false
+            broken: false,
           });
         }
         handlers.end();
       };
       return { enqueue };
-    }
+    },
   };
 });
 
@@ -45,7 +45,7 @@ describe("DeadUrls page", () => {
     render(
       <DeadUrlsPage
         deadLinks={{
-          deadLink1: ["http://www.deadlink.com"]
+          deadLink1: ["http://www.deadlink.com"],
         }}
         noAuth={true}
       />
@@ -66,7 +66,7 @@ describe("DeadUrls page", () => {
     render(
       <DeadUrlsPage
         deadLinks={{
-          deadLink1: ["http://www.deadlink.com"]
+          deadLink1: ["http://www.deadlink.com"],
         }}
         noAuth={true}
       />

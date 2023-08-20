@@ -4,7 +4,7 @@ import {
   generateMunicipality,
   generatePreferences,
   generateProfileData,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@shared/test";
 import { updateSidebarCards } from "./updateSidebarCards";
 
@@ -17,11 +17,11 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_FORM"
+            operatingPhase: "NEEDS_TO_FORM",
           }),
           preferences: generatePreferences({
-            visibleSidebarCards: ["not-registered"]
-          })
+            visibleSidebarCards: ["not-registered"],
+          }),
         })
       );
 
@@ -38,11 +38,11 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_FORM"
+            operatingPhase: "NEEDS_TO_FORM",
           }),
           preferences: generatePreferences({
-            visibleSidebarCards: ["not-registered"]
-          })
+            visibleSidebarCards: ["not-registered"],
+          }),
         })
       );
 
@@ -64,9 +64,9 @@ describe("updateRoadmapSidebarCards", () => {
           taskProgress: { [taskId]: "NOT_STARTED" },
 
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_FORM"
+            operatingPhase: "NEEDS_TO_FORM",
           }),
-          preferences: generatePreferences({ visibleSidebarCards: [] })
+          preferences: generatePreferences({ visibleSidebarCards: [] }),
         })
       );
 
@@ -80,9 +80,9 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES"
+            operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
           }),
-          preferences: generatePreferences({ visibleSidebarCards: ["formation-nudge"] })
+          preferences: generatePreferences({ visibleSidebarCards: ["formation-nudge"] }),
         })
       );
 
@@ -98,9 +98,9 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES"
+            operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
           }),
-          preferences: generatePreferences({ visibleSidebarCards: [] })
+          preferences: generatePreferences({ visibleSidebarCards: [] }),
         })
       );
       const updatedUserData = updateSidebarCards(userData);
@@ -113,9 +113,9 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "FORMED_AND_REGISTERED"
+            operatingPhase: "FORMED_AND_REGISTERED",
           }),
-          preferences: generatePreferences({ visibleSidebarCards: ["registered-for-taxes-nudge"] })
+          preferences: generatePreferences({ visibleSidebarCards: ["registered-for-taxes-nudge"] }),
         })
       );
       const updatedUserData = updateSidebarCards(userData);
@@ -130,9 +130,9 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "FORMED_AND_REGISTERED"
+            operatingPhase: "FORMED_AND_REGISTERED",
           }),
-          preferences: generatePreferences({ visibleSidebarCards: [] })
+          preferences: generatePreferences({ visibleSidebarCards: [] }),
         })
       );
       const updatedUserData = updateSidebarCards(userData);
@@ -146,9 +146,9 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES"
+            operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
           }),
-          preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] })
+          preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] }),
         })
       );
       const updatedUserData = updateSidebarCards(userData);
@@ -171,9 +171,9 @@ describe("updateRoadmapSidebarCards", () => {
         generateBusiness({
           profileData: generateProfileData({
             operatingPhase,
-            homeBasedBusiness: undefined
+            homeBasedBusiness: undefined,
           }),
-          preferences: generatePreferences({ visibleSidebarCards: [] })
+          preferences: generatePreferences({ visibleSidebarCards: [] }),
         })
       );
       const updatedUserData = updateSidebarCards(userData);
@@ -189,9 +189,9 @@ describe("updateRoadmapSidebarCards", () => {
           generateBusiness({
             profileData: generateProfileData({
               operatingPhase,
-              homeBasedBusiness: undefined
+              homeBasedBusiness: undefined,
             }),
-            preferences: generatePreferences({ visibleSidebarCards: [] })
+            preferences: generatePreferences({ visibleSidebarCards: [] }),
           })
         );
         const updatedUserData = updateSidebarCards(userData);
@@ -212,9 +212,9 @@ describe("updateRoadmapSidebarCards", () => {
               dateOfFormation: "2020-01-01",
               municipality: generateMunicipality({}),
               ownershipTypeIds: ["none"],
-              existingEmployees: "12"
+              existingEmployees: "12",
             }),
-            preferences: generatePreferences({ visibleSidebarCards: [] })
+            preferences: generatePreferences({ visibleSidebarCards: [] }),
           })
         );
         const updatedUserData = updateSidebarCards(userData);
@@ -231,9 +231,9 @@ describe("updateRoadmapSidebarCards", () => {
         generateBusiness({
           profileData: generateProfileData({
             operatingPhase: "UP_AND_RUNNING",
-            industryId: "generic"
+            industryId: "generic",
           }),
-          preferences: generatePreferences({ visibleSidebarCards: ["task-progress"] })
+          preferences: generatePreferences({ visibleSidebarCards: ["task-progress"] }),
         })
       );
 

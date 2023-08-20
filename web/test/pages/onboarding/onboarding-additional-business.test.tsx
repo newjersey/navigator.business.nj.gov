@@ -8,7 +8,7 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentBusiness,
   currentUserData,
-  setupStatefulUserDataContext
+  setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
 import { mockSuccessfulApiSignups, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
@@ -21,7 +21,7 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postNewsletter: jest.fn(),
   postUserTesting: jest.fn(),
-  postGetAnnualFilings: jest.fn()
+  postGetAnnualFilings: jest.fn(),
 }));
 
 const mockApi = api as jest.Mocked<typeof api>;
@@ -58,7 +58,7 @@ describe("onboarding - additional business", () => {
 
     const previousBusinessName = getNavBarBusinessTitle(initialBusiness, IsAuthenticated.TRUE);
     const expectedText = templateEval(Config.onboardingDefaults.returnToPreviousBusiness, {
-      previousBusiness: previousBusinessName
+      previousBusiness: previousBusinessName,
     });
 
     fireEvent.click(screen.getByText(expectedText));
@@ -93,7 +93,7 @@ describe("onboarding - additional business", () => {
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalledWith({
         pathname: ROUTES.dashboard,
-        query: { [QUERIES.fromAdditionalBusiness]: "true" }
+        query: { [QUERIES.fromAdditionalBusiness]: "true" },
       });
     });
 
@@ -117,14 +117,14 @@ describe("onboarding - additional business", () => {
             sectorId: "retail-trade-and-ecommerce",
             homeBasedBusiness: undefined,
             municipality: undefined,
-            isNonprofitOnboardingRadio: false
+            isNonprofitOnboardingRadio: false,
           },
           preferences: {
             ...emptyBusiness.preferences,
-            visibleSidebarCards: ["task-progress"]
-          }
-        }
-      }
+            visibleSidebarCards: ["task-progress"],
+          },
+        },
+      },
     };
 
     expect(currentUserData()).toEqual(expectedUserData);

@@ -19,7 +19,7 @@ export const migrate_v85_to_v86 = (v85Data: v85UserData): v86UserData => {
   return {
     ...v85Data,
     taxFilingData: { lastUpdatedISO, ...taxFiling },
-    version: 86
+    version: 86,
   };
 };
 
@@ -191,7 +191,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v86FormationData {
@@ -257,7 +257,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -266,7 +266,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const corpBusinessSuffix = [
@@ -279,7 +279,7 @@ export const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
@@ -321,7 +321,7 @@ export const generatev86User = (overrides: Partial<v86BusinessUser>): v86Busines
     myNJUserKey: undefined,
     intercomHash: undefined,
     abExperience: "ExperienceA",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -335,7 +335,7 @@ export const generatev86ProfileData = (overrides: Partial<v86ProfileData>): v86P
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     liquorLicense: true,
     requiresCpa: false,
@@ -351,7 +351,7 @@ export const generatev86ProfileData = (overrides: Partial<v86ProfileData>): v86P
     documents: {
       formationDoc: `some-formation-doc-${randomInt()}`,
       standingDoc: `some-standing-doc-${randomInt()}`,
-      certifiedDoc: `some-certified-doc-${randomInt()}`
+      certifiedDoc: `some-certified-doc-${randomInt()}`,
     },
     ownershipTypeIds: [],
     existingEmployees: undefined,
@@ -366,7 +366,7 @@ export const generatev86ProfileData = (overrides: Partial<v86ProfileData>): v86P
     certifiedInteriorDesigner: false,
     providesStaffingService: false,
     operatingPhase: undefined,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -407,6 +407,6 @@ export const generatev86FormationFormData = (
     contactFirstName: "",
     contactLastName: "",
     contactPhoneNumber: "",
-    ...overrides
+    ...overrides,
   };
 };

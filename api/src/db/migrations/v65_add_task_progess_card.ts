@@ -18,10 +18,10 @@ export const migrate_v64_to_v65 = (v64Data: v64UserData): v65UserData => {
     ...v64Data,
     preferences: {
       ...v64Data.preferences,
-      visibleRoadmapSidebarCards: [...v64Data.preferences.visibleRoadmapSidebarCards, "task-progress"]
+      visibleRoadmapSidebarCards: [...v64Data.preferences.visibleRoadmapSidebarCards, "task-progress"],
     },
 
-    version: 65
+    version: 65,
   };
 };
 
@@ -172,7 +172,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v65FormationData {
@@ -237,7 +237,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -246,7 +246,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const corpBusinessSuffix = [
@@ -259,7 +259,7 @@ export const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;

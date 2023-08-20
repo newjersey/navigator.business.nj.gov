@@ -32,7 +32,7 @@ const ExportPage = (): ReactElement => {
             exportComponentsAsPDF({
               componentIds: roadmap ? ["roadmap", ...roadmap.tasks.map((task) => task.id)] : [],
               prePdfProcessingCallback: () => setDownloadIndicator(true),
-              postPdfProcessingCallback: () => setDownloadIndicator(false)
+              postPdfProcessingCallback: () => setDownloadIndicator(false),
             });
           }}
           dataTestId="downloadPdf"

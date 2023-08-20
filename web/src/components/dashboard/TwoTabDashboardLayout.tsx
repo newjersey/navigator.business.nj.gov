@@ -42,24 +42,24 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
 
   const tabStyling = {
     "& .MuiTabs-indicator": {
-      display: "none"
+      display: "none",
     },
     "& :focus": {
-      outline: "none !important"
+      outline: "none !important",
     },
     "& .Mui-selected": {
       style: {
-        color: "#FFFFFF"
-      }
+        color: "#FFFFFF",
+      },
     },
-    minHeight: "auto"
+    minHeight: "auto",
   };
   const unselectedButtonStyling = {
     textTransform: "none",
     color: "#5c5c5c !important",
     borderRadius: "8px",
     padding: "8px",
-    minHeight: "44px"
+    minHeight: "44px",
   };
   const selectedButtonStyling = {
     backgroundColor: "white",
@@ -68,7 +68,7 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
     textTransform: "none",
     color: "#1b1b1b !important",
     padding: "8px",
-    minHeight: "44px"
+    minHeight: "44px",
   };
 
   const getContentWithCardCount = (): string => {
@@ -92,7 +92,7 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
     }
 
     return templateEval(Config.dashboardDefaults.mobileSecondTabText, {
-      count: count.toString()
+      count: count.toString(),
     });
   };
 

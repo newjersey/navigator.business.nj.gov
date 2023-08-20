@@ -32,7 +32,7 @@ const splitElementIntoImages = async (
       width: pageWidthInPx,
       height: Math.floor(Math.min(totalHeight - i * pageHeightInPx, pageHeightInPx)),
       y: i === 0 ? 0 : i * pageHeightInPx - carryOverPixels,
-      windowWidth: Math.ceil(Math.max(element.offsetHeight, pageWidthInPx))
+      windowWidth: Math.ceil(Math.max(element.offsetHeight, pageWidthInPx)),
     });
     result.canvas = canvas.toDataURL("image/png");
 
@@ -48,7 +48,7 @@ export const exportComponentsAsPDF = async (props: Props): Promise<void> => {
     hotfixes: ["px_scaling"],
     orientation: "p",
     unit: "px",
-    format: "a4"
+    format: "a4",
   });
 
   const margin = 40;

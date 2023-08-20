@@ -33,7 +33,7 @@ export const statefulDataHelpers = (
     },
     dataUpdatedNTimes: (): number => {
       return getNumberOfMockCalls(spy);
-    }
+    },
   };
 };
 
@@ -94,5 +94,5 @@ export const StatefulDataContext = createContext<StatefulDataContextType>({
   genericData: undefined,
   update: () => {
     return Promise.resolve();
-  }
+  },
 });

@@ -5,7 +5,7 @@ import analytics from "@/lib/utils/analytics";
 import {
   generateOperateReference,
   publicFilingLegalStructures,
-  tradeNameLegalStructures
+  tradeNameLegalStructures,
 } from "@/test/factories";
 import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -13,7 +13,7 @@ import { useMockProfileData } from "@/test/mock/mockUseUserData";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
@@ -25,14 +25,14 @@ import {
   LookupIndustryById,
   OperatingPhases,
   randomInt,
-  TaxFilingCalendarEvent
+  TaxFilingCalendarEvent,
 } from "@businessnjgovnavigator/shared/index";
 import {
   generateLicenseData,
   generatePreferences,
   generateProfileData,
   generateTaxFilingData,
-  randomLegalStructure
+  randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
@@ -42,7 +42,7 @@ import dayjs from "dayjs";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn()
+    useMediaQuery: jest.fn(),
   };
 }
 
@@ -53,10 +53,10 @@ function setupMockAnalytics(): typeof analytics {
       ...jest.requireActual("@/lib/utils/analytics").default.event,
       share_calendar_feedback: {
         click: {
-          open_live_chat: jest.fn()
-        }
-      }
-    }
+          open_live_chat: jest.fn(),
+        },
+      },
+    },
   };
 }
 
@@ -100,7 +100,7 @@ describe("<FilingsCalendar />", () => {
     const dueDate = getCurrentDate().startOf("month");
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
-      dueDate: dueDate.format(defaultDateFormat)
+      dueDate: dueDate.format(defaultDateFormat),
     });
 
     const business = generateBusiness({
@@ -109,18 +109,18 @@ describe("<FilingsCalendar />", () => {
           OperatingPhases.filter((obj) => {
             return obj.displayCalendarType === "FULL";
           })
-        ).id
+        ).id,
       }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
-      preferences: generatePreferences({ isCalendarFullView: true })
+      preferences: generatePreferences({ isCalendarFullView: true }),
     });
 
     const operateReferences: Record<string, OperateReference> = {
       "annual-report": {
         name: "Annual Report",
         urlSlug: "annual-report-url",
-        urlPath: "annual_report-url-path"
-      }
+        urlPath: "annual_report-url-path",
+      },
     };
 
     renderFilingsCalendar(operateReferences, business);
@@ -134,13 +134,13 @@ describe("<FilingsCalendar />", () => {
     const farDueDate = getCurrentDate().add(2, "years");
     const farReport = generateTaxFilingCalendarEvent({
       identifier: "whatever",
-      dueDate: farDueDate.format(defaultDateFormat)
+      dueDate: farDueDate.format(defaultDateFormat),
     });
     const recentDueDate = getCurrentDate().add(2, "months");
 
     const recentReport = generateTaxFilingCalendarEvent({
       identifier: "whatever2",
-      dueDate: recentDueDate.format(defaultDateFormat)
+      dueDate: recentDueDate.format(defaultDateFormat),
     });
 
     const business = generateBusiness({
@@ -149,23 +149,23 @@ describe("<FilingsCalendar />", () => {
           OperatingPhases.filter((obj) => {
             return obj.displayCalendarType === "LIST";
           })
-        ).id
+        ).id,
       }),
       taxFilingData: generateTaxFilingData({ filings: [farReport, recentReport] }),
-      preferences: generatePreferences({ isCalendarFullView: false })
+      preferences: generatePreferences({ isCalendarFullView: false }),
     });
 
     const operateReferences: Record<string, OperateReference> = {
       whatever: {
         name: "Whatever Report",
         urlSlug: "whatever-url",
-        urlPath: "whatever-url-path"
+        urlPath: "whatever-url-path",
       },
       whatever2: {
         name: "Whatever2 Report",
         urlSlug: "whatever2-url",
-        urlPath: "whatever2-url-path"
-      }
+        urlPath: "whatever2-url-path",
+      },
     };
 
     renderFilingsCalendar(operateReferences, business);
@@ -179,12 +179,12 @@ describe("<FilingsCalendar />", () => {
 
     const farReport = generateTaxFilingCalendarEvent({
       identifier: "whatever",
-      dueDate: recentDueDate.format(defaultDateFormat)
+      dueDate: recentDueDate.format(defaultDateFormat),
     });
 
     const recentReport = generateTaxFilingCalendarEvent({
       identifier: "whatever2",
-      dueDate: recentDueDate.format(defaultDateFormat)
+      dueDate: recentDueDate.format(defaultDateFormat),
     });
 
     const business = generateBusiness({
@@ -193,23 +193,23 @@ describe("<FilingsCalendar />", () => {
           OperatingPhases.filter((obj) => {
             return obj.displayCalendarType === "LIST";
           })
-        ).id
+        ).id,
       }),
       taxFilingData: generateTaxFilingData({ filings: [farReport, recentReport] }),
-      preferences: generatePreferences({ isCalendarFullView: false })
+      preferences: generatePreferences({ isCalendarFullView: false }),
     });
 
     const operateReferences: Record<string, OperateReference> = {
       whatever: {
         name: "Whatever Report",
         urlSlug: "whatever-url",
-        urlPath: "whatever-url-path"
+        urlPath: "whatever-url-path",
       },
       whatever2: {
         name: "Whatever2 Report",
         urlSlug: "whatever2-url",
-        urlPath: "whatever2-url-path"
-      }
+        urlPath: "whatever2-url-path",
+      },
     };
 
     renderFilingsCalendar(operateReferences, business);
@@ -225,7 +225,7 @@ describe("<FilingsCalendar />", () => {
   it("displays calendar content when there are filings inside of the year", () => {
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
-      dueDate: getCurrentDate().add(2, "months").format(defaultDateFormat)
+      dueDate: getCurrentDate().add(2, "months").format(defaultDateFormat),
     });
 
     const business = generateBusiness({
@@ -234,18 +234,18 @@ describe("<FilingsCalendar />", () => {
           OperatingPhases.filter((obj) => {
             return obj.displayCalendarType === "FULL" && obj.displayCalendarToggleButton;
           })
-        ).id
+        ).id,
       }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
-      preferences: generatePreferences({ isCalendarFullView: true })
+      preferences: generatePreferences({ isCalendarFullView: true }),
     });
 
     const operateReferences: Record<string, OperateReference> = {
       "annual-report": {
         name: "Annual Report",
         urlSlug: "annual-report-url",
-        urlPath: "annual_report-url-path"
-      }
+        urlPath: "annual_report-url-path",
+      },
     };
 
     renderFilingsCalendar(operateReferences, business);
@@ -261,7 +261,7 @@ describe("<FilingsCalendar />", () => {
   it("displays calendar content when there are filings in two years", () => {
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
-      dueDate: getCurrentDate().add(2, "years").format(defaultDateFormat)
+      dueDate: getCurrentDate().add(2, "years").format(defaultDateFormat),
     });
 
     const business = generateBusiness({
@@ -270,18 +270,18 @@ describe("<FilingsCalendar />", () => {
           OperatingPhases.filter((obj) => {
             return obj.displayCalendarType === "FULL" && obj.displayCalendarToggleButton;
           })
-        ).id
+        ).id,
       }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
-      preferences: generatePreferences({ isCalendarFullView: true })
+      preferences: generatePreferences({ isCalendarFullView: true }),
     });
 
     const operateReferences: Record<string, OperateReference> = {
       "annual-report": {
         name: "Annual Report",
         urlSlug: "annual-report-url",
-        urlPath: "annual_report-url-path"
-      }
+        urlPath: "annual_report-url-path",
+      },
     };
 
     renderFilingsCalendar(operateReferences, business);
@@ -300,7 +300,7 @@ describe("<FilingsCalendar />", () => {
   it("displays empty calendar content when there are filings in two years", () => {
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
-      dueDate: getCurrentDate().add(2, "years").format(defaultDateFormat)
+      dueDate: getCurrentDate().add(2, "years").format(defaultDateFormat),
     });
 
     const business = generateBusiness({
@@ -309,18 +309,18 @@ describe("<FilingsCalendar />", () => {
           OperatingPhases.filter((obj) => {
             return obj.displayCalendarType === "FULL" && obj.displayCalendarToggleButton;
           })
-        ).id
+        ).id,
       }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
-      preferences: generatePreferences({ isCalendarFullView: true })
+      preferences: generatePreferences({ isCalendarFullView: true }),
     });
 
     const operateReferences: Record<string, OperateReference> = {
       "annual-report": {
         name: "Annual Report",
         urlSlug: "annual-report-url",
-        urlPath: "annual_report-url-path"
-      }
+        urlPath: "annual_report-url-path",
+      },
     };
 
     renderFilingsCalendar(operateReferences, business);
@@ -349,10 +349,10 @@ describe("<FilingsCalendar />", () => {
           OperatingPhases.filter((obj) => {
             return obj.displayCalendarType === "FULL" && obj.displayCalendarToggleButton;
           })
-        ).id
+        ).id,
       }),
       taxFilingData: generateTaxFilingData({ filings: [] }),
-      preferences: generatePreferences({ isCalendarFullView: true })
+      preferences: generatePreferences({ isCalendarFullView: true }),
     });
 
     renderFilingsCalendar({}, business);
@@ -366,18 +366,18 @@ describe("<FilingsCalendar />", () => {
           OperatingPhases.filter((obj) => {
             return obj.displayCalendarType === "FULL";
           })
-        ).id
+        ).id,
       }),
       taxFilingData: generateTaxFilingData({ filings: [] }),
-      preferences: generatePreferences({ isCalendarFullView: true })
+      preferences: generatePreferences({ isCalendarFullView: true }),
     });
 
     const operateReferences: Record<string, OperateReference> = {
       "annual-report": {
         name: "Annual Report",
         urlSlug: "annual-report-url",
-        urlPath: "annual_report-url-path"
-      }
+        urlPath: "annual_report-url-path",
+      },
     };
 
     renderFilingsCalendar(operateReferences, business);
@@ -397,7 +397,7 @@ describe("<FilingsCalendar />", () => {
       (legalStructureId) => {
         const business = generateBusiness({
           profileData: generateProfileData({ dateOfFormation: undefined, legalStructureId }),
-          taxFilingData: generateTaxFilingData({ filings: [] })
+          taxFilingData: generateTaxFilingData({ filings: [] }),
         });
         renderFilingsCalendar({}, business);
         expect(screen.getByTestId("formation-date-prompt")).toBeInTheDocument();
@@ -410,11 +410,11 @@ describe("<FilingsCalendar />", () => {
         const business = generateBusiness({
           profileData: generateProfileData({ dateOfFormation: undefined, legalStructureId }),
           taxFilingData: generateTaxFilingData({
-            filings: [generateTaxFilingCalendarEvent({ identifier: "filing1" })]
-          })
+            filings: [generateTaxFilingCalendarEvent({ identifier: "filing1" })],
+          }),
         });
         const operateReferences: Record<string, OperateReference> = {
-          filing1: generateOperateReference({})
+          filing1: generateOperateReference({}),
         };
         useMockProfileData({ dateOfFormation: undefined, legalStructureId });
         renderFilingsCalendar(operateReferences, business);
@@ -427,7 +427,7 @@ describe("<FilingsCalendar />", () => {
       (legalStructureId) => {
         const business = generateBusiness({
           profileData: generateProfileData({ dateOfFormation: "2023-01-01", legalStructureId }),
-          taxFilingData: generateTaxFilingData({ filings: [] })
+          taxFilingData: generateTaxFilingData({ filings: [] }),
         });
         renderFilingsCalendar({}, business);
         expect(screen.queryByTestId("formation-date-prompt")).not.toBeInTheDocument();
@@ -437,7 +437,7 @@ describe("<FilingsCalendar />", () => {
     it.each(tradeNameLegalStructures)("does not show formation date prompt if %s", (legalStructureId) => {
       const business = generateBusiness({
         profileData: generateProfileData({ legalStructureId }),
-        taxFilingData: generateTaxFilingData({ filings: [] })
+        taxFilingData: generateTaxFilingData({ filings: [] }),
       });
       renderFilingsCalendar({}, business);
       expect(screen.queryByTestId("formation-date-prompt")).not.toBeInTheDocument();
@@ -448,7 +448,7 @@ describe("<FilingsCalendar />", () => {
     const dueDate = getCurrentDate().add(2, "months");
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
-      dueDate: dueDate.format(defaultDateFormat)
+      dueDate: dueDate.format(defaultDateFormat),
     });
 
     const business = generateBusiness({
@@ -457,18 +457,18 @@ describe("<FilingsCalendar />", () => {
           OperatingPhases.filter((obj) => {
             return obj.displayCalendarType === "LIST";
           })
-        ).id
+        ).id,
       }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
-      preferences: generatePreferences({ isCalendarFullView: false })
+      preferences: generatePreferences({ isCalendarFullView: false }),
     });
 
     const operateReferences: Record<string, OperateReference> = {
       "annual-report": {
         name: "Annual Report",
         urlSlug: "annual-report-url",
-        urlPath: "annual_report-url-path"
-      }
+        urlPath: "annual_report-url-path",
+      },
     };
 
     renderFilingsCalendar(operateReferences, business);
@@ -488,26 +488,26 @@ describe("<FilingsCalendar />", () => {
           OperatingPhases.filter((obj) => {
             return obj.displayCalendarType === "LIST";
           })
-        ).id
+        ).id,
       }),
       licenseData: generateLicenseData({ expirationISO: expirationDate.toISOString() }),
       taxFilingData: generateTaxFilingData({
         filings: [
           generateTaxFilingCalendarEvent({
             identifier: "annual-report",
-            dueDate: getCurrentDate().add(1, "months").format(defaultDateFormat)
-          })
-        ]
+            dueDate: getCurrentDate().add(1, "months").format(defaultDateFormat),
+          }),
+        ],
       }),
-      preferences: generatePreferences({ isCalendarFullView: false })
+      preferences: generatePreferences({ isCalendarFullView: false }),
     });
 
     const operateReferences: Record<string, OperateReference> = {
       "annual-report": {
         name: "Annual Report",
         urlSlug: "annual-report-url",
-        urlPath: "annual_report-url-path"
-      }
+        urlPath: "annual_report-url-path",
+      },
     };
 
     renderFilingsCalendar(operateReferences, business);
@@ -523,7 +523,7 @@ describe("<FilingsCalendar />", () => {
   it("sends analytics when feedback modal link is clicked", () => {
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
-      dueDate: getCurrentDate().format(defaultDateFormat)
+      dueDate: getCurrentDate().format(defaultDateFormat),
     });
 
     const business = generateBusiness({
@@ -532,17 +532,17 @@ describe("<FilingsCalendar />", () => {
           OperatingPhases.filter((obj) => {
             return obj.displayCalendarType === "FULL";
           })
-        ).id
+        ).id,
       }),
-      taxFilingData: generateTaxFilingData({ filings: [annualReport] })
+      taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
     });
 
     const operateReferences: Record<string, OperateReference> = {
       "annual-report": {
         name: "Annual Report",
         urlSlug: "annual-report-url",
-        urlPath: "annual_report-url-path"
-      }
+        urlPath: "annual_report-url-path",
+      },
     };
     renderFilingsCalendar(operateReferences, business);
     fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarFeedbackButtonText));
@@ -558,7 +558,7 @@ describe("<FilingsCalendar />", () => {
       const dueDate = getCurrentDate().add(2, "months");
       const annualReport = generateTaxFilingCalendarEvent({
         identifier: "annual-report",
-        dueDate: dueDate.format(defaultDateFormat)
+        dueDate: dueDate.format(defaultDateFormat),
       });
 
       const business = generateBusiness({
@@ -568,17 +568,17 @@ describe("<FilingsCalendar />", () => {
             OperatingPhases.filter((obj) => {
               return obj.displayTaxAccessButton === true && obj.displayCalendarType !== "NONE";
             })
-          ).id
+          ).id,
         }),
-        taxFilingData: generateTaxFilingData({ filings: [annualReport] })
+        taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
       });
 
       const operateReferences: Record<string, OperateReference> = {
         "annual-report": {
           name: "Annual Report",
           urlSlug: "annual-report-url",
-          urlPath: "annual_report-url-path"
-        }
+          urlPath: "annual_report-url-path",
+        },
       };
 
       renderFilingsCalendar(operateReferences, business);
@@ -588,7 +588,7 @@ describe("<FilingsCalendar />", () => {
 
     it("displays button on filings calendar for TradeName", () => {
       const whateverReport = generateTaxFilingCalendarEvent({
-        identifier: "whatever-report"
+        identifier: "whatever-report",
       });
       const business = generateBusiness({
         profileData: generateProfileData({
@@ -597,17 +597,17 @@ describe("<FilingsCalendar />", () => {
             OperatingPhases.filter((obj) => {
               return obj.displayTaxAccessButton === true && obj.displayCalendarType !== "NONE";
             })
-          ).id
+          ).id,
         }),
-        taxFilingData: generateTaxFilingData({ filings: [whateverReport] })
+        taxFilingData: generateTaxFilingData({ filings: [whateverReport] }),
       });
 
       const operateReferences: Record<string, OperateReference> = {
         "whatever-report": {
           name: "Whatever",
           urlSlug: "whatever-report-url",
-          urlPath: "whatever_report-url-path"
-        }
+          urlPath: "whatever_report-url-path",
+        },
       };
 
       renderFilingsCalendar(operateReferences, business);
@@ -619,7 +619,7 @@ describe("<FilingsCalendar />", () => {
       const dueDate = getCurrentDate().add(2, "months");
       const annualReport = generateTaxFilingCalendarEvent({
         identifier: "annual-report",
-        dueDate: dueDate.format(defaultDateFormat)
+        dueDate: dueDate.format(defaultDateFormat),
       });
 
       const business = generateBusiness({
@@ -629,17 +629,17 @@ describe("<FilingsCalendar />", () => {
             OperatingPhases.filter((obj) => {
               return obj.displayTaxAccessButton !== true && obj.displayCalendarType !== "NONE";
             })
-          ).id
+          ).id,
         }),
-        taxFilingData: generateTaxFilingData({ filings: [annualReport] })
+        taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
       });
 
       const operateReferences: Record<string, OperateReference> = {
         "annual-report": {
           name: "Annual Report",
           urlSlug: "annual-report-url",
-          urlPath: "annual_report-url-path"
-        }
+          urlPath: "annual_report-url-path",
+        },
       };
 
       renderFilingsCalendar(operateReferences, business);
@@ -651,8 +651,8 @@ describe("<FilingsCalendar />", () => {
       const business = generateBusiness({
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
-          operatingPhase: "GUEST_MODE_OWNING"
-        })
+          operatingPhase: "GUEST_MODE_OWNING",
+        }),
       });
       renderFilingsCalendar({}, business);
       expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
@@ -662,9 +662,9 @@ describe("<FilingsCalendar />", () => {
       const business = generateBusiness({
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
-          operatingPhase: "GUEST_MODE_OWNING"
+          operatingPhase: "GUEST_MODE_OWNING",
         }),
-        taxFilingData: generateTaxFilingData({ filings: [generateTaxFilingCalendarEvent({})] })
+        taxFilingData: generateTaxFilingData({ filings: [generateTaxFilingCalendarEvent({})] }),
       });
       renderFilingsCalendar({}, business);
       expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
@@ -683,7 +683,7 @@ describe("<FilingsCalendar />", () => {
       dueDate = getCurrentDate().add(2, "months");
       annualReport = generateTaxFilingCalendarEvent({
         identifier: "annual-report",
-        dueDate: dueDate.format(defaultDateFormat)
+        dueDate: dueDate.format(defaultDateFormat),
       });
 
       business = generateBusiness({
@@ -692,14 +692,14 @@ describe("<FilingsCalendar />", () => {
             OperatingPhases.filter((obj) => {
               return obj.displayCalendarType === "FULL";
             })
-          ).id
+          ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
-        preferences: generatePreferences({ isCalendarFullView: true })
+        preferences: generatePreferences({ isCalendarFullView: true }),
       });
 
       operateReferences = {
-        "annual-report": generateOperateReference({})
+        "annual-report": generateOperateReference({}),
       };
     });
 
@@ -722,13 +722,13 @@ describe("<FilingsCalendar />", () => {
       const pastDueDate = getCurrentDate().subtract(1, "months");
       const pastReport = generateTaxFilingCalendarEvent({
         identifier: "past",
-        dueDate: pastDueDate.format(defaultDateFormat)
+        dueDate: pastDueDate.format(defaultDateFormat),
       });
 
       const futureDueDate = getCurrentDate().add(2, "months");
       const futureReport = generateTaxFilingCalendarEvent({
         identifier: "future",
-        dueDate: futureDueDate.format(defaultDateFormat)
+        dueDate: futureDueDate.format(defaultDateFormat),
       });
 
       const business = generateBusiness({
@@ -737,14 +737,14 @@ describe("<FilingsCalendar />", () => {
             OperatingPhases.filter((obj) => {
               return obj.displayCalendarType === "LIST" || obj.displayCalendarType === "FULL";
             })
-          ).id
+          ).id,
         }),
-        taxFilingData: generateTaxFilingData({ filings: [pastReport, futureReport] })
+        taxFilingData: generateTaxFilingData({ filings: [pastReport, futureReport] }),
       });
 
       const operateReferences: Record<string, OperateReference> = {
         past: generateOperateReference({}),
-        future: generateOperateReference({})
+        future: generateOperateReference({}),
       };
 
       renderFilingsCalendar(operateReferences, business);
@@ -766,7 +766,7 @@ describe("<FilingsCalendar />", () => {
       dueDate = getCurrentDate().add(2, "months");
       annualReport = generateTaxFilingCalendarEvent({
         identifier: "annual-report",
-        dueDate: dueDate.format(defaultDateFormat)
+        dueDate: dueDate.format(defaultDateFormat),
       });
 
       business = generateBusiness({
@@ -775,14 +775,14 @@ describe("<FilingsCalendar />", () => {
             OperatingPhases.filter((obj) => {
               return obj.displayCalendarType === "FULL" && obj.displayCalendarToggleButton;
             })
-          ).id
+          ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
-        preferences: generatePreferences({ isCalendarFullView: true })
+        preferences: generatePreferences({ isCalendarFullView: true }),
       });
 
       operateReferences = {
-        "annual-report": generateOperateReference({})
+        "annual-report": generateOperateReference({}),
       };
     });
 
@@ -813,10 +813,10 @@ describe("<FilingsCalendar />", () => {
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => obj.displayCalendarToggleButton)
-          ).id
+          ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
-        preferences: generatePreferences({ isCalendarFullView: false })
+        preferences: generatePreferences({ isCalendarFullView: false }),
       });
 
       renderFilingsCalendar(operateReferences, business);
@@ -828,10 +828,10 @@ describe("<FilingsCalendar />", () => {
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => !obj.displayCalendarToggleButton)
-          ).id
+          ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
-        preferences: generatePreferences({ isCalendarFullView: false })
+        preferences: generatePreferences({ isCalendarFullView: false }),
       });
 
       renderFilingsCalendar(operateReferences, business);
@@ -850,7 +850,7 @@ describe("<FilingsCalendar />", () => {
           dueDate = dates.add(2, "months").add(i, "day");
           annualReport = generateTaxFilingCalendarEvent({
             identifier: `annual-report-${i}`,
-            dueDate: dueDate.format(defaultDateFormat)
+            dueDate: dueDate.format(defaultDateFormat),
           });
           filings.push(annualReport);
           operateReferences[`annual-report-${i}`] = generateOperateReference({});
@@ -863,10 +863,10 @@ describe("<FilingsCalendar />", () => {
             OperatingPhases.filter((obj) => {
               return obj.displayCalendarType === "FULL" && obj.displayCalendarToggleButton;
             })
-          ).id
+          ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: filings }),
-        preferences: generatePreferences({ isCalendarFullView: false })
+        preferences: generatePreferences({ isCalendarFullView: false }),
       });
 
       renderFilingsCalendar(operateReferences, business);

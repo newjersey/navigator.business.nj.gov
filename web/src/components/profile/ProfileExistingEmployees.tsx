@@ -19,7 +19,7 @@ export const ProfileExistingEmployees = (props: Props): ReactElement => {
     getProfileConfig({
       config: Config,
       persona: state.flow,
-      fieldName: fieldName
+      fieldName: fieldName,
     });
 
   return (

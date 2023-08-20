@@ -28,7 +28,7 @@ export const modifyCurrentBusiness = (
     ...userData,
     businesses: {
       ...userData.businesses,
-      [userData.currentBusinessId]: modificationFunction(userData.businesses[userData.currentBusinessId])
-    }
+      [userData.currentBusinessId]: modificationFunction(userData.businesses[userData.currentBusinessId]),
+    },
   };
 };

@@ -8,8 +8,8 @@
     "build": "node ./build.js",
     "clean": "rimraf lib",
     "dev": "yarn build",
-    "prettier": "prettier --write . --ignore-path=./.eslintignore --trailing-comma none",
-    "prettier:check": "prettier . --check --ignore-path=./.eslintignore --trailing-comma none",
+    "prettier": "prettier --write . --ignore-path=./.eslintignore --trailing-comma es5",
+    "prettier:check": "prettier . --check --ignore-path=./.eslintignore --trailing-comma es5",
     "spellcheck": "cspell '**/*.md' '**/*.json' --config ../cspell.json"
   },
   "prettier": {

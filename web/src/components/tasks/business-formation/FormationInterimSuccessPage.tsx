@@ -48,7 +48,7 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
             >
               {Config.formation.interimSuccessPage.buttonText}
             </UnStyledButton>
-          )
+          ),
         }}
       >
         {Config.formation.interimSuccessPage.bodyText}

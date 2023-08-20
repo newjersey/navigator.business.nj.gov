@@ -13,5 +13,5 @@ export const IntercomContext = createContext<IntercomContextType>({
   setOperatingPhaseId: () => {},
   setLegalStructureId: () => {},
   setIndustryId: () => {},
-  setBusinessPersona: () => {}
+  setBusinessPersona: () => {},
 });

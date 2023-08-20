@@ -9,7 +9,7 @@ const entityWithAddress = (address: string): LicenseEntity => {
   return generateLicenseEntity({
     checkoffStatus: "Completed",
     licenseStatus: "Active",
-    addressLine1: address
+    addressLine1: address,
   });
 };
 
@@ -19,7 +19,7 @@ describe("searchLicenseStatus", () => {
 
   beforeEach(() => {
     stubLicenseStatusClient = {
-      search: jest.fn()
+      search: jest.fn(),
     };
 
     searchLicenseStatus = searchLicenseStatusFactory(stubLicenseStatusClient);
@@ -29,7 +29,7 @@ describe("searchLicenseStatus", () => {
     stubLicenseStatusClient.search.mockResolvedValue([]);
     const nameAndAddress = generateNameAndAddress({
       name: "Crystal",
-      zipCode: "12345"
+      zipCode: "12345",
     });
     await expect(searchLicenseStatus(nameAndAddress, "Home improvement")).rejects.toEqual(
       new Error("NO_MATCH")
@@ -41,7 +41,7 @@ describe("searchLicenseStatus", () => {
     stubLicenseStatusClient.search.mockResolvedValue([]);
     const nameAndAddress = generateNameAndAddress({
       name: " Crystal, LLC   ",
-      zipCode: "12345"
+      zipCode: "12345",
     });
     await expect(searchLicenseStatus(nameAndAddress, "Home improvement")).rejects.toEqual(
       new Error("NO_MATCH")
@@ -55,7 +55,7 @@ describe("searchLicenseStatus", () => {
         addressLine1: "1234 Main St",
         applicationNumber: "SOME OLDER APPLICATION NUMBER",
         checklistItem: "OLDER APPLICATION",
-        issueDate: "20080404 000000.000"
+        issueDate: "20080404 000000.000",
       }),
       generateLicenseEntity({
         addressLine1: "1234 Main St",
@@ -63,22 +63,22 @@ describe("searchLicenseStatus", () => {
         checklistItem: "Item 1",
         checkoffStatus: "Completed",
         licenseStatus: "Pending",
-        issueDate: "20210404 000000.000"
+        issueDate: "20210404 000000.000",
       }),
       generateLicenseEntity({
         addressLine1: "SOMETHING ELSE",
-        applicationNumber: "45678"
+        applicationNumber: "45678",
       }),
       generateLicenseEntity({
         applicationNumber: "12345",
         checklistItem: "Item 2",
         checkoffStatus: "Completed",
-        issueDate: "20210404 000000.000"
-      })
+        issueDate: "20210404 000000.000",
+      }),
     ]);
 
     const nameAndAddress = generateNameAndAddress({
-      addressLine1: "1234 Main St"
+      addressLine1: "1234 Main St",
     });
 
     const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
@@ -87,12 +87,12 @@ describe("searchLicenseStatus", () => {
       expect.arrayContaining([
         {
           title: "Item 1",
-          status: "ACTIVE"
+          status: "ACTIVE",
         },
         {
           title: "Item 2",
-          status: "ACTIVE"
-        }
+          status: "ACTIVE",
+        },
       ])
     );
   });
@@ -103,7 +103,7 @@ describe("searchLicenseStatus", () => {
         addressLine1: "1234 Main St",
         applicationNumber: "SOME OLDER ACTIVE APPLICATION NUMBER",
         checklistItem: "OLDER ACTIVE APPLICATION",
-        issueDate: "20080404 000000.000"
+        issueDate: "20080404 000000.000",
       }),
       generateLicenseEntity({
         addressLine1: "1234 Main St",
@@ -111,18 +111,18 @@ describe("searchLicenseStatus", () => {
         checklistItem: "Item 1",
         checkoffStatus: "Completed",
         licenseStatus: "Expired",
-        issueDate: "20210404 000000.000"
+        issueDate: "20210404 000000.000",
       }),
       generateLicenseEntity({
         applicationNumber: "12345",
         checklistItem: "Item 2",
         checkoffStatus: "Completed",
-        issueDate: "20210404 000000.000"
-      })
+        issueDate: "20210404 000000.000",
+      }),
     ]);
 
     const nameAndAddress = generateNameAndAddress({
-      addressLine1: "1234 Main St"
+      addressLine1: "1234 Main St",
     });
 
     const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
@@ -131,12 +131,12 @@ describe("searchLicenseStatus", () => {
       expect.arrayContaining([
         {
           title: "Item 1",
-          status: "ACTIVE"
+          status: "ACTIVE",
         },
         {
           title: "Item 2",
-          status: "ACTIVE"
-        }
+          status: "ACTIVE",
+        },
       ])
     );
   });
@@ -147,7 +147,7 @@ describe("searchLicenseStatus", () => {
         addressLine1: "1234 Main St",
         applicationNumber: "SOME OLDER APPLICATION NUMBER WITH AN ISSUE DATE",
         checklistItem: "ACTIVE OLDER APPLICATION WITH AN ISSUE DATE",
-        issueDate: "20180327 000000.000"
+        issueDate: "20180327 000000.000",
       }),
       generateLicenseEntity({
         addressLine1: "1234 Main St",
@@ -157,12 +157,12 @@ describe("searchLicenseStatus", () => {
         licenseStatus: "Expired",
         issueDate: undefined,
         dateThisStatus: "20210405 000000.000",
-        expirationDate: undefined
-      })
+        expirationDate: undefined,
+      }),
     ]);
 
     const nameAndAddress = generateNameAndAddress({
-      addressLine1: "1234 Main St"
+      addressLine1: "1234 Main St",
     });
 
     const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
@@ -171,8 +171,8 @@ describe("searchLicenseStatus", () => {
       expect.arrayContaining([
         {
           title: "Item 1",
-          status: "ACTIVE"
-        }
+          status: "ACTIVE",
+        },
       ])
     );
   });
@@ -187,12 +187,12 @@ describe("searchLicenseStatus", () => {
         licenseStatus: "ACTIVE",
         issueDate: undefined,
         dateThisStatus: undefined,
-        expirationDate: "20210505 000000.000"
-      })
+        expirationDate: "20210505 000000.000",
+      }),
     ]);
 
     const nameAndAddress = generateNameAndAddress({
-      addressLine1: "1234 Main St"
+      addressLine1: "1234 Main St",
     });
 
     const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
@@ -209,12 +209,12 @@ describe("searchLicenseStatus", () => {
         licenseStatus: "ACTIVE",
         issueDate: undefined,
         dateThisStatus: undefined,
-        expirationDate: "20210"
-      })
+        expirationDate: "20210",
+      }),
     ]);
 
     const nameAndAddress = generateNameAndAddress({
-      addressLine1: "1234 Main St"
+      addressLine1: "1234 Main St",
     });
 
     const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
@@ -231,12 +231,12 @@ describe("searchLicenseStatus", () => {
         licenseStatus: "ACTIVE",
         issueDate: undefined,
         dateThisStatus: undefined,
-        expirationDate: undefined
-      })
+        expirationDate: undefined,
+      }),
     ]);
 
     const nameAndAddress = generateNameAndAddress({
-      addressLine1: "1234 Main St"
+      addressLine1: "1234 Main St",
     });
 
     const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
@@ -249,7 +249,7 @@ describe("searchLicenseStatus", () => {
         addressLine1: "1234 Main St",
         applicationNumber: "SOME OLDER APPLICATION NUMBER WITH AN ISSUE DATE",
         checklistItem: "ACTIVE OLDER APPLICATION WITH AN ISSUE DATE",
-        issueDate: "20210327 000000.000"
+        issueDate: "20210327 000000.000",
       }),
       generateLicenseEntity({
         addressLine1: "1234 Main St",
@@ -259,12 +259,12 @@ describe("searchLicenseStatus", () => {
         licenseStatus: "Expired",
         issueDate: undefined,
         dateThisStatus: undefined,
-        expirationDate: "20210505 000000.000"
-      })
+        expirationDate: "20210505 000000.000",
+      }),
     ]);
 
     const nameAndAddress = generateNameAndAddress({
-      addressLine1: "1234 Main St"
+      addressLine1: "1234 Main St",
     });
 
     const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
@@ -273,8 +273,8 @@ describe("searchLicenseStatus", () => {
       expect.arrayContaining([
         {
           title: "Item 1",
-          status: "ACTIVE"
-        }
+          status: "ACTIVE",
+        },
       ])
     );
   });
@@ -282,7 +282,7 @@ describe("searchLicenseStatus", () => {
   const queryWithAddress = async (address: string): Promise<LicenseStatusResult> => {
     return await searchLicenseStatus(
       generateNameAndAddress({
-        addressLine1: address
+        addressLine1: address,
       }),
       "Home improvement"
     );
@@ -317,18 +317,18 @@ describe("searchLicenseStatus", () => {
         addressLine1: "1234 Main St",
         applicationNumber: "12345",
         checklistItem: "Item 1",
-        checkoffStatus: "Completed"
+        checkoffStatus: "Completed",
       }),
       generateLicenseEntity({
         addressLine1: "1234 Main St",
         applicationNumber: "12345",
         checklistItem: "Item 2",
-        checkoffStatus: "Unchecked"
-      })
+        checkoffStatus: "Unchecked",
+      }),
     ]);
 
     const nameAndAddress = generateNameAndAddress({
-      addressLine1: "1234 Main St"
+      addressLine1: "1234 Main St",
     });
 
     const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
@@ -336,12 +336,12 @@ describe("searchLicenseStatus", () => {
       expect.arrayContaining([
         {
           title: "Item 1",
-          status: "ACTIVE"
+          status: "ACTIVE",
         },
         {
           title: "Item 2",
-          status: "PENDING"
-        }
+          status: "PENDING",
+        },
       ])
     );
   });
@@ -352,26 +352,26 @@ describe("searchLicenseStatus", () => {
         addressLine1: "1234 Main St",
         applicationNumber: "12345",
         checklistItem: "Item 1",
-        checkoffStatus: "Completed"
+        checkoffStatus: "Completed",
       }),
       generateLicenseEntity({
         addressLine1: "1234 Main St",
         applicationNumber: "12345",
         checklistItem: "Item 2",
-        checkoffStatus: "Not Applicable"
-      })
+        checkoffStatus: "Not Applicable",
+      }),
     ]);
 
     const nameAndAddress = generateNameAndAddress({
-      addressLine1: "1234 Main St"
+      addressLine1: "1234 Main St",
     });
 
     const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
     expect(result.checklistItems).toEqual([
       {
         title: "Item 1",
-        status: "ACTIVE"
-      }
+        status: "ACTIVE",
+      },
     ]);
   });
 

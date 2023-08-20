@@ -24,7 +24,7 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
         className="grid-col-12"
         config={{
           searchButtonText: Config.searchBusinessNameTask.searchButtonText,
-          searchButtonTestId: "search-availability"
+          searchButtonTestId: "search-availability",
         }}
       />
     </div>

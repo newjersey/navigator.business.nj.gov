@@ -12,8 +12,8 @@ describe("orderBusinessIdsByDateCreated", () => {
       businesses: {
         [middle.id]: middle,
         [oldest.id]: oldest,
-        [newest.id]: newest
-      }
+        [newest.id]: newest,
+      },
     });
 
     const result = orderBusinessIdsByDateCreated(userData);

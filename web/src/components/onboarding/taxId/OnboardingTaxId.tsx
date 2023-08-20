@@ -65,7 +65,7 @@ export const OnboardingTaxId = (props: Props): ReactElement => {
       hideText: Config.tax.hideButtonText,
       useOverrideText: !isTabletAndUp,
       showOverrideText: Config.tax.showButtonTextMobile,
-      hideOverrideText: Config.tax.hideButtonTextMobile
+      hideOverrideText: Config.tax.hideButtonTextMobile,
     });
   };
 
@@ -82,7 +82,7 @@ export const OnboardingTaxId = (props: Props): ReactElement => {
 
   const getDecryptedTaxId = async (): Promise<string> => {
     return decryptTaxId({
-      encryptedTaxId: state.profileData.encryptedTaxId as string
+      encryptedTaxId: state.profileData.encryptedTaxId as string,
     });
   };
 

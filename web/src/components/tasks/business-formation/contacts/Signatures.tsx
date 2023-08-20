@@ -6,7 +6,7 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import {
   createSignedEmptyFormationObject,
-  needsSignerTypeFunc
+  needsSignerTypeFunc,
 } from "@/components/tasks/business-formation/contacts/helpers";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -18,7 +18,7 @@ import {
   BusinessSignerTypeMap,
   createEmptyFormationSigner,
   FormationSigner,
-  SignerTitle
+  SignerTitle,
 } from "@businessnjgovnavigator/shared";
 import { Checkbox, FormHelperText, MenuItem, Select, useMediaQuery } from "@mui/material";
 import { ChangeEvent, ReactElement, ReactNode, useContext, useMemo } from "react";
@@ -53,8 +53,8 @@ export const Signatures = (): ReactElement => {
           return {
             ...previousFormationData,
             signers: [
-              createSignedEmptyFormationObject(previousFormationData.legalType, createEmptyFormationSigner)
-            ]
+              createSignedEmptyFormationObject(previousFormationData.legalType, createEmptyFormationSigner),
+            ],
           };
         });
   });
@@ -65,8 +65,8 @@ export const Signatures = (): ReactElement => {
         ...previousFormationData,
         signers: [
           ...(state.formationFormData.signers ?? []),
-          createSignedEmptyFormationObject(previousFormationData.legalType, createEmptyFormationSigner)
-        ]
+          createSignedEmptyFormationObject(previousFormationData.legalType, createEmptyFormationSigner),
+        ],
       };
     });
   };
@@ -78,7 +78,7 @@ export const Signatures = (): ReactElement => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        signers
+        signers,
       };
     });
   };
@@ -87,12 +87,12 @@ export const Signatures = (): ReactElement => {
     const signers = [...(state.formationFormData.signers ?? [])];
     signers[index] = {
       ...signers[index],
-      title: value
+      title: value,
     };
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        signers
+        signers,
       };
     });
   };
@@ -101,12 +101,12 @@ export const Signatures = (): ReactElement => {
     const signers = [...(state.formationFormData.signers ?? [])];
     signers[index] = {
       ...signers[index],
-      name: value
+      name: value,
     };
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        signers
+        signers,
       };
     });
   };
@@ -115,12 +115,12 @@ export const Signatures = (): ReactElement => {
     const signers = [...(state.formationFormData.signers ?? [])];
     signers[index] = {
       ...signers[index],
-      signature: event.target.checked
+      signature: event.target.checked,
     };
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        signers
+        signers,
       };
     });
   };
@@ -162,7 +162,7 @@ export const Signatures = (): ReactElement => {
 
   const renderDeleteColumn = ({
     visible,
-    onClick
+    onClick,
   }: {
     visible: boolean;
     onClick?: () => void;
@@ -212,7 +212,7 @@ export const Signatures = (): ReactElement => {
           }}
           inputProps={{
             "aria-label": `Signer title ${index}`,
-            "data-testid": `signer-title-${index}`
+            "data-testid": `signer-title-${index}`,
           }}
           renderValue={(selected): ReactNode => {
             if (!selected) {
@@ -332,7 +332,7 @@ export const Signatures = (): ReactElement => {
                     <ModifiedContent>{`${Config.formation.fields.signers.signColumnLabel}`}</ModifiedContent>
                   </strong>
                   {renderSignatureColumn({
-                    index: 0
+                    index: 0,
                   })}
                 </div>
               </WithErrorBar>
@@ -371,12 +371,12 @@ export const Signatures = (): ReactElement => {
                     </div>
 
                     {renderSignatureColumn({
-                      index: index
+                      index: index,
                     })}
                     {isTabletAndUp &&
                       renderDeleteColumn({
                         visible: true,
-                        onClick: (): void => removeSigner(index)
+                        onClick: (): void => removeSigner(index),
                       })}
                   </div>
                   {!isTabletAndUp && (

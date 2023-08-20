@@ -20,7 +20,7 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
     const currentBusiness = getCurrentBusiness(request.userData);
     const { state, filings, taxCity, naicsCode } = await apiTaxFilingClient.lookup({
       taxId: request.taxId,
-      businessName: request.businessName
+      businessName: request.businessName,
     });
 
     const shouldSwitchToCalendarGridView = (): boolean => {
@@ -41,7 +41,7 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
     if (naicsCode) {
       profileDataToReturn = {
         ...currentBusiness.profileData,
-        naicsCode: naicsCode
+        naicsCode: naicsCode,
       };
     }
 
@@ -54,8 +54,8 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
             name: record.townName,
             county: record.countyName,
             id: record.id,
-            displayName: record.townDisplayName
-          }
+            displayName: record.townDisplayName,
+          },
         };
       }
     }
@@ -65,7 +65,7 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
       profileData: profileDataToReturn,
       preferences: {
         ...business.preferences,
-        isCalendarFullView: shouldSwitchToCalendarGridView() ? true : business.preferences.isCalendarFullView
+        isCalendarFullView: shouldSwitchToCalendarGridView() ? true : business.preferences.isCalendarFullView,
       },
       taxFilingData: {
         ...business.taxFilingData,
@@ -74,8 +74,8 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
         registeredISO: state === "SUCCESS" ? business.taxFilingData.registeredISO ?? now : undefined,
         errorField: state === "SUCCESS" ? undefined : business.taxFilingData.errorField,
         state: state,
-        filings: state === "SUCCESS" ? filings : business.taxFilingData.filings
-      }
+        filings: state === "SUCCESS" ? filings : business.taxFilingData.filings,
+      },
     }));
   };
 
@@ -83,7 +83,7 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
     const response = await apiTaxFilingClient.onboarding({
       taxId: request.taxId,
       email: request.userData.user.email,
-      businessName: request.businessName
+      businessName: request.businessName,
     });
 
     switch (response.state) {
@@ -99,8 +99,8 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
             registeredISO: undefined,
             state: response.state,
             errorField: response.errorField,
-            businessName: request.businessName
-          }
+            businessName: request.businessName,
+          },
         }));
       }
     }

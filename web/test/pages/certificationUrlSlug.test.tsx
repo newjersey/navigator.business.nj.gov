@@ -7,7 +7,7 @@ describe("certification page", () => {
     const certification = generateCertification({
       name: "Some Cert Name",
       callToActionText: "Click here",
-      contentMd: "Some content description"
+      contentMd: "Some content description",
     });
 
     render(<CertificationPage certification={certification} />);

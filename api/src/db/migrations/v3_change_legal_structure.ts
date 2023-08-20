@@ -18,7 +18,7 @@ export const migrate_v2_to_v3 = (v2Data: v2UserData): v3UserData => {
     "Limited Liability Company (LLC)": "limited-liability-company",
     "C-Corporation": "c-corporation",
     "S-Corporation": "s-corporation",
-    "B-Corporation": "b-corporation"
+    "B-Corporation": "b-corporation",
   };
 
   return {
@@ -27,9 +27,9 @@ export const migrate_v2_to_v3 = (v2Data: v2UserData): v3UserData => {
       ...v2Data.onboardingData,
       legalStructure: v2Data.onboardingData.legalStructure
         ? legalStructureMapping[v2Data.onboardingData.legalStructure]
-        : undefined
+        : undefined,
     },
-    version: 3
+    version: 3,
   };
 };
 
@@ -68,7 +68,7 @@ export const generateV3OnboardingData = (overrides: Partial<v3OnboardingData>): 
     businessName: `some-business-name-${randomInt()}`,
     industry: "restaurant",
     legalStructure: "sole-proprietorship",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -77,6 +77,6 @@ export const generateV3User = (overrides: Partial<v3BusinessUser>): v3BusinessUs
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };

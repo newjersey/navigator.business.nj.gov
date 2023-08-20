@@ -8,7 +8,7 @@ import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import {
   CertificationUrlSlugParam,
   loadAllCertificationUrlSlugs,
-  loadCertificationByUrlSlug
+  loadCertificationByUrlSlug,
 } from "@/lib/static/loadCertifications";
 import { Certification } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
@@ -60,19 +60,19 @@ export const getStaticPaths = (): GetStaticPathsResult<CertificationUrlSlugParam
   const paths = loadAllCertificationUrlSlugs();
   return {
     paths,
-    fallback: false
+    fallback: false,
   };
 };
 
 export const getStaticProps = ({
-  params
+  params,
 }: {
   params: CertificationUrlSlugParam;
 }): GetStaticPropsResult<Props> => {
   return {
     props: {
-      certification: loadCertificationByUrlSlug(params.certificationUrlSlug)
-    }
+      certification: loadCertificationByUrlSlug(params.certificationUrlSlug),
+    },
   };
 };
 

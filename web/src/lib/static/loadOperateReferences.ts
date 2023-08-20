@@ -16,26 +16,26 @@ export const loadOperateReferences = (): Record<string, OperateReference> => {
   const filingFileContents = filingFilenames.map((fileName) => {
     return {
       ...loadFilingByFileName(fileName),
-      origin: "filings" as Origin
+      origin: "filings" as Origin,
     };
   });
   const fundingFileContents = fundingFilenames.map((fileName) => {
     return {
       ...loadFundingByFileName(fileName),
-      origin: "funding" as Origin
+      origin: "funding" as Origin,
     };
   });
   const certificationFileContents = certFilenames.map((fileName) => {
     return {
       ...loadCertificationByFileName(fileName),
-      origin: "certification" as Origin
+      origin: "certification" as Origin,
     };
   });
 
   const allContents: FileProperties[] = [
     ...filingFileContents,
     ...fundingFileContents,
-    ...certificationFileContents
+    ...certificationFileContents,
   ];
 
   return allContents.reduce(
@@ -43,7 +43,7 @@ export const loadOperateReferences = (): Record<string, OperateReference> => {
       acc[curr.id] = {
         name: curr.name,
         urlSlug: curr.urlSlug,
-        urlPath: `/${curr.origin}/${curr.urlSlug}`
+        urlPath: `/${curr.origin}/${curr.urlSlug}`,
       };
       return acc;
     },

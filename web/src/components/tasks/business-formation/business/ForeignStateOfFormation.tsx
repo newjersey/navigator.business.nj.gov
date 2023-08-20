@@ -17,7 +17,7 @@ export const ForeignStateOfFormation = (): ReactElement => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        foreignStateOfFormation: stateObject?.name
+        foreignStateOfFormation: stateObject?.name,
       };
     });
   };

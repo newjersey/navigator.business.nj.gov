@@ -19,9 +19,9 @@ export const migrate_v48_to_v49 = (v48Data: v48UserData): v49UserData => {
     ...v48Data,
     profileData: {
       ...v48Data.profileData,
-      cannabisMicrobusiness: undefined
+      cannabisMicrobusiness: undefined,
     },
-    version: 49
+    version: 49,
   };
 };
 
@@ -164,7 +164,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v49FormationData {
@@ -258,7 +258,7 @@ export const generatev49User = (overrides: Partial<v49BusinessUser>): v49Busines
     userTesting: false,
     externalStatus: {},
     abExperience: "ExperienceA",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -273,7 +273,7 @@ export const generatev49ProfileData = (overrides: Partial<v49ProfileData>): v49P
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     liquorLicense: true,
     homeBasedBusiness: true,
@@ -292,9 +292,9 @@ export const generatev49ProfileData = (overrides: Partial<v49ProfileData>): v49P
     documents: {
       formationDoc: "",
       standingDoc: "",
-      certifiedDoc: ""
+      certifiedDoc: "",
     },
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -329,6 +329,6 @@ export const generatev49FormationFormData = (
     contactFirstName: "",
     contactLastName: "",
     contactPhoneNumber: "",
-    ...overrides
+    ...overrides,
   };
 };

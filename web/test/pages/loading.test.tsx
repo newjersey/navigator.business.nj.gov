@@ -11,18 +11,18 @@ import {
   generateUseUserDataResponse,
   setMockUserDataResponse,
   useMockBusiness,
-  useMockProfileData
+  useMockProfileData,
 } from "@/test/mock/mockUseUserData";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   generateBusiness,
   generatePreferences,
   generateProfileData,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
@@ -33,10 +33,10 @@ function setupMockAnalytics(): typeof analytics {
       ...jest.requireActual("@/lib/utils/analytics").default.event,
       landing_page: {
         arrive: {
-          get_unlinked_myNJ_account_modal: jest.fn()
-        }
-      }
-    }
+          get_unlinked_myNJ_account_modal: jest.fn(),
+        },
+      },
+    },
   };
 }
 
@@ -81,7 +81,7 @@ describe("loading page", () => {
   it("redirects to onboarding if user has not yet completed onboarding", () => {
     useMockBusiness({
       onboardingFormProgress: "UNSTARTED",
-      profileData: generateProfileData({ businessPersona: "STARTING" })
+      profileData: generateProfileData({ businessPersona: "STARTING" }),
     });
     render(<LoadingPage />);
     expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
@@ -91,7 +91,7 @@ describe("loading page", () => {
     const business = generateBusiness({
       profileData: generateProfileData({ businessPersona: "STARTING" }),
       preferences: generatePreferences({ returnToLink: "/tasks/some-task" }),
-      onboardingFormProgress: "COMPLETED"
+      onboardingFormProgress: "COMPLETED",
     });
     setupStatefulUserDataContext();
     render(

@@ -49,7 +49,7 @@ export const migrate_v96_to_v97 = (v96Data: v96UserData): v97UserData => {
             return {
               name: signer.name,
               signature: signer.signature,
-              title: v97businessSignerTypeMap[props.profileData.legalStructureId ?? ""][0]
+              title: v97businessSignerTypeMap[props.profileData.legalStructureId ?? ""][0],
             };
           }),
       incorporators: ["s-corporation", "c-corporation", "limited-partnership"].includes(
@@ -62,7 +62,7 @@ export const migrate_v96_to_v97 = (v96Data: v96UserData): v97UserData => {
                 return state.name === signer.addressState;
               }),
               addressCountry: "US",
-              title: v97businessSignerTypeMap[props.profileData.legalStructureId ?? ""][0]
+              title: v97businessSignerTypeMap[props.profileData.legalStructureId ?? ""][0],
             };
           })
         : undefined,
@@ -76,7 +76,7 @@ export const migrate_v96_to_v97 = (v96Data: v96UserData): v97UserData => {
               addressState: arrayOfStateObjects.find((state) => {
                 return state.name === member.addressState;
               }),
-              addressCountry: "US"
+              addressCountry: "US",
             };
           }),
       addressLine1: businessAddressLine1,
@@ -84,7 +84,7 @@ export const migrate_v96_to_v97 = (v96Data: v96UserData): v97UserData => {
       addressZipCode: businessAddressZipCode,
       addressState: { name: "New Jersey", shortCode: "NJ" },
       addressCountry: "US",
-      addressMunicipality: businessAddressCity
+      addressMunicipality: businessAddressCity,
     };
   }
 
@@ -92,9 +92,9 @@ export const migrate_v96_to_v97 = (v96Data: v96UserData): v97UserData => {
     ...props,
     formationData: {
       ...remainingFormation,
-      formationFormData: updatedFormationFormData
+      formationFormData: updatedFormationFormData,
     },
-    version: 97
+    version: 97,
   };
 };
 
@@ -110,7 +110,7 @@ const v97businessSignerTypeMap: Record<string, v97SignerTitle[]> = {
   "foreign-limited-liability-partnership": ["Authorized Representative", "General Partner"],
   "foreign-limited-partnership": ["Authorized Representative", "General Partner"],
   "foreign-c-corporation": ["President", "Vice-President", "Chairman of the Board", "CEO"],
-  "foreign-s-corporation": ["President", "Vice-President", "Chairman of the Board", "CEO"]
+  "foreign-s-corporation": ["President", "Vice-President", "Chairman of the Board", "CEO"],
 };
 
 type v97TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
@@ -291,7 +291,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v97FormationData {
@@ -398,7 +398,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -407,7 +407,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const lpBusinessSuffix = ["LIMITED PARTNERSHIP", "LP", "L.P."] as const;
@@ -422,7 +422,7 @@ const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 const foreignCorpBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
@@ -431,7 +431,7 @@ const AllBusinessSuffixes = [
   ...llcBusinessSuffix,
   ...llpBusinessSuffix,
   ...lpBusinessSuffix,
-  ...foreignCorpBusinessSuffix
+  ...foreignCorpBusinessSuffix,
 ] as const;
 
 type v97BusinessSuffix = (typeof AllBusinessSuffixes)[number];
@@ -515,7 +515,7 @@ const arrayOfStateObjects = [
   { shortCode: "WA", name: "Washington" },
   { shortCode: "WI", name: "Wisconsin" },
   { shortCode: "WV", name: "West Virginia" },
-  { shortCode: "WY", name: "Wyoming" }
+  { shortCode: "WY", name: "Wyoming" },
 ];
 
 // ---------------- v97 factories ----------------
@@ -531,7 +531,7 @@ export const v97generatorUser = (overrides: Partial<v97BusinessUser>): v97Busine
     myNJUserKey: undefined,
     intercomHash: undefined,
     abExperience: "ExperienceA",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -543,7 +543,7 @@ export const v97generateFormationAddress = (overrides: Partial<v97FormationAddre
     addressState: { shortCode: "NJ", name: "new-jersey" },
     addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
     addressCountry: `some-county`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -556,7 +556,7 @@ export const v97generateFormationMember = (overrides: Partial<v97FormationMember
     addressState: { shortCode: "123", name: "new-jersey" },
     addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
     addressCountry: `some-county`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -566,7 +566,7 @@ export const generateMunicipality = (overrides: Partial<v97Municipality>): v97Mu
     name: `some-name-${randomInt()}`,
     county: `some-county-${randomInt()}`,
     id: `some-id-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -575,7 +575,7 @@ export const allFormationLegalTypes = [
   "limited-liability-company",
   "limited-partnership",
   "c-corporation",
-  "s-corporation"
+  "s-corporation",
 ];
 
 export const createEmptyFormationFormData = (): v97FormationFormData => {
@@ -628,7 +628,7 @@ export const createEmptyFormationFormData = (): v97FormationFormData => {
     contactPhoneNumber: "",
     foreignDateOfFormation: undefined,
     foreignStateOfFormation: undefined,
-    foreignGoodStandingFile: undefined
+    foreignGoodStandingFile: undefined,
   };
 };
 
@@ -681,7 +681,7 @@ export const v97generateFormationFormData = (
     getDistributionTerms: `some-getDistributionTerms-text-${randomInt()}`,
     canMakeDistribution: !!(randomInt() % 2),
     makeDistributionTerms: `some-makeDistributionTerms-text-${randomInt()}`,
-    ...overrides
+    ...overrides,
   } as v97FormationFormData;
 };
 
@@ -701,7 +701,7 @@ export const v97generatorIndustrySpecificData = (
     carService: undefined,
     interstateTransport: false,
     isChildcareForSixOrMore: undefined,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -718,7 +718,7 @@ export const v97generatorProfileData = (overrides: Partial<v97ProfileData>): v97
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     dateOfFormation: undefined,
     entityId: randomInt(10).toString(),
@@ -729,7 +729,7 @@ export const v97generatorProfileData = (overrides: Partial<v97ProfileData>): v97
     documents: {
       certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
       formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
-      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`
+      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
     },
     existingEmployees: randomInt(7).toString(),
     taxPin: randomInt(4).toString(),
@@ -740,7 +740,7 @@ export const v97generatorProfileData = (overrides: Partial<v97ProfileData>): v97
     nexusDbaName: undefined,
     nexusLocationInNewJersey: undefined,
     operatingPhase: "NEEDS_TO_FORM",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -752,7 +752,7 @@ export const v97TaxFilingDataGenerator = (overrides: Partial<v97TaxFilingData>):
     lastUpdatedISO: undefined,
     registeredISO: undefined,
     filings: [],
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -765,7 +765,7 @@ export const v97FormationData = (
     formationResponse: undefined,
     getFilingResponse: undefined,
     completedFilingPayment: false,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -787,10 +787,10 @@ export const v97UserDataGenerator = (overrides: Partial<v97UserData>): v97UserDa
       visibleSidebarCards: ["welcome"],
       returnToLink: "",
       isCalendarFullView: true,
-      isHideableRoadmapOpen: false
+      isHideableRoadmapOpen: false,
     },
     taxFilingData: v97TaxFilingDataGenerator({}),
     formationData: v97FormationData({}, profileData.legalStructureId ?? ""),
-    ...overrides
+    ...overrides,
   };
 };

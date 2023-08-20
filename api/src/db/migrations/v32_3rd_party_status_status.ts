@@ -40,7 +40,7 @@ export const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 export const migrate_v31_to_v32 = (v31Data: v31UserData): v32UserData => {
@@ -53,12 +53,12 @@ export const migrate_v31_to_v32 = (v31Data: v31UserData): v32UserData => {
         userTesting: v31Data.user.externalStatus.userTesting
           ? {
               success: v31Data.user.externalStatus.userTesting.success,
-              status: v31Data.user.externalStatus.userTesting.success ? "SUCCESS" : "CONNECTION_ERROR"
+              status: v31Data.user.externalStatus.userTesting.success ? "SUCCESS" : "CONNECTION_ERROR",
             }
-          : undefined
-      }
+          : undefined,
+      },
     },
-    version: 32
+    version: 32,
   };
 };
 

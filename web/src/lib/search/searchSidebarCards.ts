@@ -8,7 +8,7 @@ export const searchSidebarCards = (sidebarCards: SidebarCardContent[], term: str
   for (const card of sidebarCards) {
     let match: Match = {
       filename: card.id,
-      snippets: []
+      snippets: [],
     };
 
     const content = card.contentMd.toLowerCase();
@@ -25,7 +25,7 @@ export const searchSidebarCards = (sidebarCards: SidebarCardContent[], term: str
       { content: header, label: "Header" },
       { content: notStartedHeader, label: "Not Started Header" },
       { content: completedHeader, label: "Completed Header" },
-      { content: ctaText, label: "CTA Text" }
+      { content: ctaText, label: "CTA Text" },
     ];
 
     match = findMatchInBlock(blockTexts, term, match);

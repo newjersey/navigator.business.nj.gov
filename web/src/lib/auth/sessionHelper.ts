@@ -62,11 +62,11 @@ export const configureAmplify = (): void => {
       scope: ["email", "profile", "openid", "aws.cognito.signin.user.admin"],
       redirectSignIn: process.env.REDIRECT_URL,
       redirectSignOut: process.env.REDIRECT_URL,
-      responseType: "code"
+      responseType: "code",
     },
     refreshHandlers: {
-      myNJ: refreshToken
-    }
+      myNJ: refreshToken,
+    },
   });
 };
 
@@ -86,7 +86,7 @@ export const getSignedS3Link = async (value: string, expires?: number): Promise<
   const presigner = new S3RequestPresigner({
     credentials,
     region: process.env.AWS_REGION || "us-east-1",
-    sha256: Sha256
+    sha256: Sha256,
   });
 
   const url = await presigner.presign(new HttpRequest(parseUrl(value)), { expiresIn: expires ?? 900 });
@@ -106,7 +106,7 @@ export const getCurrentUser = async (): Promise<BusinessUser> => {
     const user = await Auth.currentAuthenticatedUser();
     const credentials = await Auth.currentUserCredentials();
     await Auth.updateUserAttributes(user, {
-      "custom:identityId": credentials.identityId
+      "custom:identityId": credentials.identityId,
     });
   }
   return cognitoPayloadToBusinessUser(cognitoPayload);
@@ -123,7 +123,7 @@ const cognitoPayloadToBusinessUser = (cognitoPayload: CognitoIdPayload): Busines
     externalStatus: {},
     userTesting: false,
     receiveNewsletter: false,
-    abExperience: ABStorageFactory().getExperience() ?? "ExperienceA"
+    abExperience: ABStorageFactory().getExperience() ?? "ExperienceA",
   };
 };
 
@@ -136,20 +136,20 @@ export const refreshToken = async (): Promise<CognitoRefreshAuth> => {
       {
         ClientId: process.env.COGNITO_WEB_CLIENT_ID,
         AuthFlow: "REFRESH_TOKEN_AUTH",
-        AuthParameters: { REFRESH_TOKEN: token }
+        AuthParameters: { REFRESH_TOKEN: token },
       },
       {
         headers: {
           "X-Amz-Target": "AWSCognitoIdentityProviderService.InitiateAuth",
-          "Content-Type": "application/x-amz-json-1.1"
-        }
+          "Content-Type": "application/x-amz-json-1.1",
+        },
       }
     )
     .then((response: AxiosResponse<CognitoRefreshAuthResult>) => {
       return {
         token: response.data.AuthenticationResult.AccessToken,
         expires_at: response.data.AuthenticationResult.ExpiresIn,
-        identity_id: response.data.AuthenticationResult.IdToken
+        identity_id: response.data.AuthenticationResult.IdToken,
       };
     });
 };

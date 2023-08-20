@@ -19,7 +19,7 @@ export const ReviewSignatures = (): ReactElement => {
     const field = isCorp ? "incorporators" : "signers";
     return {
       header: Config.formation.fields[field].label,
-      label: Config.formation.sections.review.nameLabel
+      label: Config.formation.sections.review.nameLabel,
     };
   };
 

@@ -38,13 +38,13 @@ export const MiniRoadmap = (props: Props): ReactElement => {
           .queuePreferences({
             roadmapOpenSteps: openSteps.filter((openStep) => {
               return openStep !== stepNumber;
-            })
+            }),
           })
           .update();
       } else {
         await updateQueue
           .queuePreferences({
-            roadmapOpenSteps: [...openSteps, stepNumber]
+            roadmapOpenSteps: [...openSteps, stepNumber],
           })
           .update();
       }

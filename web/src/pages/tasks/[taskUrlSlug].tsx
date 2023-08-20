@@ -27,7 +27,7 @@ import {
   businessStructureTaskId,
   formationTaskId,
   hasCompletedBusinessStructure,
-  Municipality
+  Municipality,
 } from "@businessnjgovnavigator/shared/";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -49,7 +49,7 @@ const TaskPage = (props: Props): ReactElement => {
     const currentUrlSlugIndex = arrayOfTasks.indexOf(props.task.urlSlug);
     return {
       previousUrlSlug: arrayOfTasks[currentUrlSlugIndex - 1],
-      nextUrlSlug: arrayOfTasks[currentUrlSlugIndex + 1]
+      nextUrlSlug: arrayOfTasks[currentUrlSlugIndex + 1],
     };
   }, [props.task.urlSlug, roadmap]);
 
@@ -140,7 +140,7 @@ const TaskPage = (props: Props): ReactElement => {
                 displayContent={props.displayContent}
               />
             ),
-            default: <TaskBody task={props.task} />
+            default: <TaskBody task={props.task} />,
           })}
         </TaskSidebarPageLayout>
       </PageSkeleton>
@@ -152,7 +152,7 @@ export const getStaticPaths = (): GetStaticPathsResult<TaskUrlSlugParam> => {
   const paths = loadAllTaskUrlSlugs();
   return {
     paths,
-    fallback: false
+    fallback: false,
   };
 };
 
@@ -161,8 +161,8 @@ export const getStaticProps = ({ params }: { params: TaskUrlSlugParam }): GetSta
     props: {
       task: loadTaskByUrlSlug(params.taskUrlSlug),
       displayContent: loadTasksDisplayContent(),
-      municipalities: loadAllMunicipalities()
-    }
+      municipalities: loadAllMunicipalities(),
+    },
   };
 };
 

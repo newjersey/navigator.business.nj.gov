@@ -12,7 +12,7 @@ import { render, screen } from "@testing-library/react";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn()
+    useMediaQuery: jest.fn(),
   };
 }
 
@@ -27,7 +27,7 @@ describe("<TaskSidebarPageLayout />", () => {
     useMockRouter({});
     useMockBusiness(generateBusiness({}));
     useMockRoadmap({
-      steps: [generateStep({ section: "PLAN" }), generateStep({ section: "START" })]
+      steps: [generateStep({ section: "PLAN" }), generateStep({ section: "START" })],
     });
     (useMediaQuery as jest.Mock).mockImplementation(() => {
       return true;

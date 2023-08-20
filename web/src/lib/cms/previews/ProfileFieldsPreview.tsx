@@ -33,7 +33,7 @@ import { createProfileFieldErrorMap, ProfileContentField } from "@/lib/types/typ
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/";
 import {
   IndustrySpecificData,
-  industrySpecificDataChoices
+  industrySpecificDataChoices,
 } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement } from "react";
 

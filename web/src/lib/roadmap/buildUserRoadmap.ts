@@ -11,7 +11,7 @@ import {
   fetchMunicipalityById,
   LookupIndustryById,
   LookupLegalStructureById,
-  ProfileData
+  ProfileData,
 } from "@businessnjgovnavigator/shared";
 
 export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadmap> => {
@@ -27,7 +27,7 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
   const addOns: string[] = [
     ...getForeignAddOns(profileData),
     ...getIndustryBasedAddOns(profileData, industryId),
-    ...getLegalStructureAddOns(profileData)
+    ...getLegalStructureAddOns(profileData),
   ];
 
   let roadmap = await buildRoadmap({ industryId: industryId, addOns });
@@ -231,7 +231,7 @@ const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: str
     municipality: municipality.townName,
     county: municipality.countyName,
     countyClerkPhone: municipality.countyClerkPhone,
-    countyClerkWebsite: municipality.countyClerkWebsite
+    countyClerkWebsite: municipality.countyClerkWebsite,
   });
 };
 
@@ -246,7 +246,7 @@ const cleanupMunicipalitySpecificData = (roadmap: Roadmap): Roadmap => {
     municipality: "",
     county: "",
     countyClerkPhone: "",
-    countyClerkWebsite: ""
+    countyClerkWebsite: "",
   });
 };
 
@@ -255,7 +255,7 @@ const removeTask = (roadmap: Roadmap, taskId: string): Roadmap => {
     ...roadmap,
     tasks: roadmap.tasks.filter((task) => {
       return task.id !== taskId;
-    })
+    }),
   };
 };
 

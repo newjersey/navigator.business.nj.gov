@@ -60,7 +60,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
       },
       icon: <ButtonIcon svgFilename="login" sizePx="25px" />,
       itemText: Config.navigationDefaults.logInButton,
-      key: "loginMenuItem"
+      key: "loginMenuItem",
     });
   };
 
@@ -72,7 +72,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
       },
       icon: <ButtonIcon svgFilename="logout" sizePx="25px" />,
       itemText: Config.navigationDefaults.logoutButton,
-      key: "logoutMenuItem"
+      key: "logoutMenuItem",
     });
   };
 
@@ -85,7 +85,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
       },
       icon: <ButtonIcon svgFilename="profile" sizePx="25px" />,
       itemText: Config.navigationDefaults.myNJAccountText,
-      key: "myNjMenuItem"
+      key: "myNjMenuItem",
     });
   };
 
@@ -95,7 +95,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
         onClick: (): void => {
           routeWithQuery(router, {
             path: ROUTES.onboarding,
-            queries: { [QUERIES.additionalBusiness]: "true" }
+            queries: { [QUERIES.additionalBusiness]: "true" },
           });
           props.handleClose();
         },
@@ -103,9 +103,9 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
         hoverIcon: <ButtonIcon svgFilename="add-business-plus-hover" sizePx="25px" />,
         itemText: Config.navigationDefaults.addBusinessButton,
         key: "addBusinessMenuItem",
-        dataTestid: "addBusinessMenuItem"
+        dataTestid: "addBusinessMenuItem",
       }),
-      <hr className="margin-0 hr-2px" key={"add-break-1"} />
+      <hr className="margin-0 hr-2px" key={"add-break-1"} />,
     ];
   };
 
@@ -117,7 +117,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
       },
       icon: <ButtonIcon svgFilename="profile" sizePx="25px" />,
       itemText: Config.navigationDefaults.navBarGuestRegistrationText,
-      key: "registerMenuItem"
+      key: "registerMenuItem",
     });
   };
 
@@ -127,7 +127,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
         router.push(ROUTES.onboarding);
       },
       itemText: Config.navigationDefaults.registerButton,
-      key: "getStartedMenuItem"
+      key: "getStartedMenuItem",
     });
   };
 
@@ -150,8 +150,8 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
           itemText: getNavBarBusinessTitle(userData.businesses[businessId], state.isAuthenticated),
           dataTestid: `business-title-${i}`,
           key: `business-title-${businessId}`,
-          className: `profile-menu-item ${isCurrent ? "current" : ""}`
-        })
+          className: `profile-menu-item ${isCurrent ? "current" : ""}`,
+        }),
       ];
 
       if (isCurrent) {
@@ -164,7 +164,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
           itemText: Config.navigationDefaults.profileLinkText,
           key: `profile-title-${businessId}`,
           dataTestid: `profile-link`,
-          className: `profile-menu-item ${isCurrent ? "current" : ""}`
+          className: `profile-menu-item ${isCurrent ? "current" : ""}`,
         });
         businessMenuItems.push(profileLink);
       }

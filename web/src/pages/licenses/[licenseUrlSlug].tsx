@@ -13,7 +13,7 @@ import {
   LicenseEventSubtype,
   LookupIndustryById,
   parseDate,
-  parseDateWithFormat
+  parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -30,11 +30,11 @@ interface LicenseElementProps {
 export const LicenseElement = (props: LicenseElementProps): ReactElement => {
   const titles: Record<LicenseEventSubtype, string> = {
     expiration: Config.licenseEventDefaults.expirationTitleLabel,
-    renewal: Config.licenseEventDefaults.renewalTitleLabel
+    renewal: Config.licenseEventDefaults.renewalTitleLabel,
   };
   const dateText: Record<LicenseEventSubtype, string> = {
     expiration: Config.licenseEventDefaults.beforeExpirationDateText,
-    renewal: Config.licenseEventDefaults.beforeRenewalDateText
+    renewal: Config.licenseEventDefaults.beforeRenewalDateText,
   };
 
   return (
@@ -104,7 +104,7 @@ export const getStaticPaths = (): GetStaticPathsResult<LicenseUrlSlugParam> => {
   const paths = loadAllLicenseUrlSlugs();
   return {
     paths,
-    fallback: false
+    fallback: false,
   };
 };
 
@@ -113,8 +113,8 @@ export const getStaticProps = ({ params }: { params: LicenseUrlSlugParam }): Get
   return {
     props: {
       license: loadLicenseByUrlSlug(params.licenseUrlSlug),
-      licenseEventType
-    }
+      licenseEventType,
+    },
   };
 };
 

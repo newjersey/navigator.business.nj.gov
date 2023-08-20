@@ -29,7 +29,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
     FormFuncWrapper,
     onSubmit,
     isValid,
-    state: formContextState
+    state: formContextState,
   } = useFormContextHelper(createProfileFieldErrorMap());
 
   useEffect(() => {
@@ -63,10 +63,10 @@ export const FormationDateModal = (props: Props): ReactElement => {
         value={{
           state: {
             profileData: profileData,
-            flow: "STARTING"
+            flow: "STARTING",
           },
           setProfileData,
-          onBack: (): void => {}
+          onBack: (): void => {},
         }}
       >
         <ModalTwoButton
@@ -88,7 +88,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
                 header: Config.formationDateModal.fieldLabel,
                 description: Config.formationDateModal.fieldDescription,
                 headerNotBolded: "",
-                postDescription: ""
+                postDescription: "",
               }}
             />
 

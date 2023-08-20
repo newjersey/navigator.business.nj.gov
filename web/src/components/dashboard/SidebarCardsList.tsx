@@ -57,7 +57,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
                 });
               }}
               sx={{
-                backgroundColor: `#F9FBFB`
+                backgroundColor: `#F9FBFB`,
               }}
             >
               <AccordionSummary
@@ -70,7 +70,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
                   <div className="flex flex-align-center margin-0-override text-normal">
                     <div className="inline">
                       {templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, {
-                        count: String(hiddenOpportunitiesCount())
+                        count: String(hiddenOpportunitiesCount()),
                       })}
                     </div>
                   </div>

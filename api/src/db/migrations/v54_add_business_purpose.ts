@@ -21,10 +21,10 @@ export const migrate_v53_to_v54 = (v53Data: v53UserData): v54UserData => {
       ...v53Data.formationData,
       formationFormData: {
         ...v53Data.formationData.formationFormData,
-        businessPurpose: ""
-      }
+        businessPurpose: "",
+      },
     },
-    version: 54
+    version: 54,
   };
 };
 
@@ -168,7 +168,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v54FormationData {
@@ -262,7 +262,7 @@ export const generatev54User = (overrides: Partial<v54BusinessUser>): v54Busines
     userTesting: false,
     externalStatus: {},
     abExperience: "ExperienceA",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -280,7 +280,7 @@ export const generatev54ProfileData = (overrides: Partial<v54ProfileData>): v54P
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     liquorLicense: true,
     requiresCpa: false,
@@ -296,7 +296,7 @@ export const generatev54ProfileData = (overrides: Partial<v54ProfileData>): v54P
     taxPin: undefined,
     sectorId: undefined,
     naicsCode: "",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -332,6 +332,6 @@ export const generatev54FormationFormData = (
     contactLastName: "",
     contactPhoneNumber: "",
     businessPurpose: "",
-    ...overrides
+    ...overrides,
   };
 };

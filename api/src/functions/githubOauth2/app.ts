@@ -9,19 +9,19 @@ const {
   CMS_OAUTH_CLIENT_SECRET = "",
   CMS_OAUTH_HOST = "https://github.com",
   CMS_OAUTH_TOKEN_PATH = "/login/oauth/access_token",
-  CMS_OAUTH_AUTHORIZE_PATH = "/login/oauth/authorize"
+  CMS_OAUTH_AUTHORIZE_PATH = "/login/oauth/authorize",
 } = process.env;
 
 export const oauthConfig: ModuleOptions = Object.freeze({
   client: Object.freeze({
     id: CMS_OAUTH_CLIENT_ID,
-    secret: CMS_OAUTH_CLIENT_SECRET
+    secret: CMS_OAUTH_CLIENT_SECRET,
   }),
   auth: Object.freeze({
     tokenHost: CMS_OAUTH_HOST,
     tokenPath: CMS_OAUTH_TOKEN_PATH,
-    authorizePath: CMS_OAUTH_AUTHORIZE_PATH
-  })
+    authorizePath: CMS_OAUTH_AUTHORIZE_PATH,
+  }),
 });
 
 const app = setupExpress(true, false);
@@ -34,7 +34,7 @@ app.get("/api/cms/auth", (req, res) => {
   const url = authorizationCode.authorizeURL({
     redirect_uri: `https://${host}/dev/api/cms/callback`,
     scope: `repo,user`,
-    state: randomState()
+    state: randomState(),
   });
 
   res.writeHead(301, { Location: url });
@@ -50,7 +50,7 @@ app.get("/api/cms/callback", async (req, res) => {
 
     const accessToken = await authorizationCode.getToken({
       code,
-      redirect_uri: `https://${host}/dev/api/cms/callback`
+      redirect_uri: `https://${host}/dev/api/cms/callback`,
     });
 
     res.setHeader("Content-Type", "text/html");
@@ -58,7 +58,7 @@ app.get("/api/cms/callback", async (req, res) => {
     res.status(200).send(
       renderResponse("success", {
         token: accessToken.token["access_token"],
-        provider: "github"
+        provider: "github",
       })
     );
   } catch (error) {

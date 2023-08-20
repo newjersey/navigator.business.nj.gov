@@ -39,13 +39,13 @@ export const SectionAccordion = (props: Props): ReactElement => {
         ?.queuePreferences({
           roadmapOpenSections: roadmapOpenSections?.filter((roadmapOpenSection) => {
             return roadmapOpenSection !== props.sectionType;
-          })
+          }),
         })
         .update();
     } else {
       await updateQueue
         ?.queuePreferences({
-          roadmapOpenSections: [...roadmapOpenSections, props.sectionType]
+          roadmapOpenSections: [...roadmapOpenSections, props.sectionType],
         })
         .update();
     }

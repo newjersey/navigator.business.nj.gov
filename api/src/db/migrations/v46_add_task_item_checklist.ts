@@ -17,7 +17,7 @@ export const migrate_v45_to_v46 = (v45Data: v45UserData): v46UserData => {
   return {
     ...v45Data,
     taskItemChecklist: {},
-    version: 46
+    version: 46,
   };
 };
 
@@ -150,7 +150,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v46FormationData {

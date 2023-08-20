@@ -67,7 +67,7 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
     ...business,
     preferences: {
       ...business.preferences,
-      visibleSidebarCards: cards
-    }
+      visibleSidebarCards: cards,
+    },
   }));
 };

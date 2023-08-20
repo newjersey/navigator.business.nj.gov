@@ -19,7 +19,7 @@ const colors = {
   "accent-cool-lightest": "usa-button btn-accent-cool-lightest",
   "accent-cool-darker": "usa-button btn-accent-cool-darker",
   "accent-cooler": "usa-button btn-accent-cooler",
-  info: "usa-button btn-info"
+  info: "usa-button btn-info",
 };
 
 export const PrimaryButton = forwardRef(function PrimaryButton(

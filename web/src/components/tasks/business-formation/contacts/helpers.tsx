@@ -2,7 +2,7 @@ import {
   BusinessSignerTypeMap,
   FormationIncorporator,
   FormationLegalType,
-  FormationSigner
+  FormationSigner,
 } from "@businessnjgovnavigator/shared/formationData";
 
 export const needsSignerTypeFunc = (legalType: FormationLegalType): boolean => {
@@ -14,5 +14,5 @@ export const createSignedEmptyFormationObject = <T extends FormationSigner | For
   defaultFunc: () => T
 ): T => ({
   ...defaultFunc(),
-  title: needsSignerTypeFunc(legalType) ? undefined : BusinessSignerTypeMap[legalType][0]
+  title: needsSignerTypeFunc(legalType) ? undefined : BusinessSignerTypeMap[legalType][0],
 });

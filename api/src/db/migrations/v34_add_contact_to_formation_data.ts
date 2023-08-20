@@ -20,11 +20,11 @@ export const migrate_v33_to_v34 = (v33Data: v33UserData): v34UserData => {
         ...v33Data.formationData.formationFormData,
         contactFirstName: "",
         contactLastName: "",
-        contactPhoneNumber: ""
+        contactPhoneNumber: "",
       },
-      formationResponse: v33Data.formationData.formationResponse
+      formationResponse: v33Data.formationData.formationResponse,
     },
-    version: 34
+    version: 34,
   };
 };
 
@@ -153,7 +153,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v34FormationData {

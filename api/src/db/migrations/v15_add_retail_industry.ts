@@ -12,7 +12,7 @@ export interface v15UserData {
 export const migrate_v14_to_v15 = (v14Data: v14UserData): v15UserData => {
   return {
     ...v14Data,
-    version: 15
+    version: 15,
   };
 };
 

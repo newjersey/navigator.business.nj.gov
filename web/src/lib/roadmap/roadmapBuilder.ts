@@ -4,7 +4,7 @@ import { SectionType } from "@businessnjgovnavigator/shared";
 
 export const buildRoadmap = async ({
   industryId,
-  addOns
+  addOns,
 }: {
   industryId: string | undefined;
   addOns: string[];
@@ -17,7 +17,7 @@ export const buildRoadmap = async ({
     steps: results.map((step: GenericStep) => {
       return { ...step };
     }),
-    tasks: []
+    tasks: [],
   };
 
   roadmapBuilder = await (industryId
@@ -109,7 +109,7 @@ const addTasksFromAddOn = (builder: RoadmapBuilder, addOns: AddOn[]): RoadmapBui
     if (!task) continue;
     builder.tasks = [
       ...builder.tasks,
-      { filename: task, weight: addOn.weight, stepNumber: addOn.step, required: addOn.required }
+      { filename: task, weight: addOn.weight, stepNumber: addOn.step, required: addOn.required },
     ];
   }
 
@@ -147,10 +147,10 @@ const convertToRoadmap = async (roadmapBuilder: RoadmapBuilder): Promise<Roadmap
         return {
           ...(await fetchTaskByFilename(task.filename)),
           stepNumber: task.stepNumber,
-          required: task.required
+          required: task.required,
         };
       })
-    )
+    ),
   };
 
   const allFilenames = new Set(
@@ -166,9 +166,9 @@ const convertToRoadmap = async (roadmapBuilder: RoadmapBuilder): Promise<Roadmap
         ...task,
         unlockedBy: task.unlockedBy.filter((it) => {
           return allFilenames.has(it.filename);
-        })
+        }),
       };
-    })
+    }),
   };
 };
 

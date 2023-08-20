@@ -5,21 +5,21 @@ export default {
     {
       name: "preFormat",
       label: "preFormat",
-      widget: "hidden"
+      widget: "hidden",
     },
     {
       name: "preContext",
       label: "Pre-Context Markdown",
       widget: "markdown",
       required: false,
-      minimal: true
+      minimal: true,
     },
     {
       name: "title",
       label: "Context Info Title",
       required: true,
 
-      widget: "string"
+      widget: "string",
     },
     {
       name: "contextId",
@@ -30,7 +30,7 @@ export default {
       search_fields: ["{{filename}}"],
       options_length: 500,
       value_field: "{{filename}}",
-      display_fields: ["{{filename}}"]
+      display_fields: ["{{filename}}"],
     },
 
     {
@@ -39,13 +39,13 @@ export default {
       buttons: ["bold", "italic", "code", "link"],
       widget: "markdown",
       required: false,
-      minimal: true
+      minimal: true,
     },
     {
       name: "postFormat",
       label: "postFormat",
-      widget: "hidden"
-    }
+      widget: "hidden",
+    },
   ],
 
   pattern: /(^\**)(.*)`(.*)\|(.*)`(.*?)(\**$)/,
@@ -59,7 +59,7 @@ export default {
       title: match[3],
       contextId: match[4],
       postContext: match[5],
-      postFormat: match[6]
+      postFormat: match[6],
     };
   },
   // Function to create a text block from an instance of this component
@@ -87,5 +87,5 @@ export default {
     return `${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${obj.contextId || ""}\` ${(
       obj.postContext || ""
     ).trim()}`;
-  }
+  },
 };

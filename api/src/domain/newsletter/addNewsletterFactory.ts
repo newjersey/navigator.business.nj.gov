@@ -10,9 +10,9 @@ export const addNewsletterFactory = (newsletterClient: NewsletterClient): AddNew
         ...userData.user,
         externalStatus: {
           ...userData.user.externalStatus,
-          newsletter
-        }
-      }
+          newsletter,
+        },
+      },
     };
     return user;
   };

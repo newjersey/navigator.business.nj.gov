@@ -11,7 +11,7 @@ import {
   LookupOperatingPhaseById,
   OperatingPhaseId,
   ProfileData,
-  UserData
+  UserData,
 } from "@businessnjgovnavigator/shared";
 
 type RegistrationProgress = "Not Started" | "Began Onboarding" | "Onboarded Guest" | "Fully Registered";
@@ -52,7 +52,7 @@ export const setUserId = (user_id: string, queue = false): DimensionQueueFactory
 
 export const phaseChangeAnalytics = ({
   oldUserData,
-  newUserData
+  newUserData,
 }: {
   oldUserData: UserData;
   newUserData: UserData;
@@ -153,7 +153,7 @@ const sendEssentialQuestionEvents = (newProfileData: ProfileData): void => {
     requiresCpa: "offer_public_accounting",
     realEstateAppraisalManagement: "real_estate_appraisal",
     petCareHousing: "pet_care_housing",
-    willSellPetCareItems: "pet_care_sell_items"
+    willSellPetCareItems: "pet_care_sell_items",
   };
 
   let eventQuestions: Partial<Questions> = {};
@@ -169,12 +169,12 @@ const sendEssentialQuestionEvents = (newProfileData: ProfileData): void => {
     if (typeof newProfileData[question.fieldName] === "boolean") {
       eventQuestions = {
         ...eventQuestions,
-        [questionName]: newProfileData[question.fieldName] ? "yes" : "no"
+        [questionName]: newProfileData[question.fieldName] ? "yes" : "no",
       };
     } else if (question.fieldName === "cannabisLicenseType") {
       eventQuestions = {
         ...eventQuestions,
-        [questionName]: newProfileData[question.fieldName] === "CONDITIONAL" ? "conditional" : "annual"
+        [questionName]: newProfileData[question.fieldName] === "CONDITIONAL" ? "conditional" : "annual",
       };
     } else if (question.fieldName === "carService") {
       eventQuestions = {
@@ -184,7 +184,7 @@ const sendEssentialQuestionEvents = (newProfileData: ProfileData): void => {
             ? "taxi_size"
             : newProfileData[question.fieldName] === "HIGH_CAPACITY"
             ? "large_size"
-            : "both_sizes"
+            : "both_sizes",
       };
     }
   });
@@ -192,7 +192,7 @@ const sendEssentialQuestionEvents = (newProfileData: ProfileData): void => {
   analytics.eventRunner.track({
     event: "form_submits",
     form_name: "industry_essential_questions",
-    questions: eventQuestions
+    questions: eventQuestions,
   });
 };
 

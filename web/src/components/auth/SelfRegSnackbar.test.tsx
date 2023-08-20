@@ -30,7 +30,7 @@ describe("SelfRegSnackbar", () => {
     render(
       withAuthAlert(<SelfRegSnackbar />, isAuthenticated, {
         registrationAlertStatus,
-        setRegistrationAlertStatus
+        setRegistrationAlertStatus,
       })
     );
   };

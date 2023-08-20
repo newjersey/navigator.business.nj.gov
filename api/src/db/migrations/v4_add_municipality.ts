@@ -14,9 +14,9 @@ export const migrate_v3_to_v4 = (v3Data: v3UserData): v4UserData => {
     ...v3Data,
     onboardingData: {
       ...v3Data.onboardingData,
-      municipality: undefined
+      municipality: undefined,
     },
-    version: 4
+    version: 4,
   };
 };
 
@@ -63,7 +63,7 @@ export const generateV4User = (overrides: Partial<v4BusinessUser>): v4BusinessUs
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -76,8 +76,8 @@ export const generateV4OnboardingData = (overrides: Partial<v4OnboardingData>): 
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
-    ...overrides
+    ...overrides,
   };
 };

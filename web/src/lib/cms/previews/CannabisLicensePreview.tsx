@@ -22,8 +22,8 @@ const CannabisLicensePreview = (props: PreviewProps): ReactElement => {
       "general-minority-owned": true,
       "general-dvob": true,
       "cannabis-business-in-impact-zone": true,
-      "cannabis-economically-disadvantaged-social-equity": true
-    }
+      "cannabis-economically-disadvantaged-social-equity": true,
+    },
   });
 
   return (

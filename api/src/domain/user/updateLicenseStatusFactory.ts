@@ -28,7 +28,7 @@ const update = (
       "moving-company-license": args.taskStatus,
       "architect-license": args.taskStatus,
       "hvac-license": args.taskStatus,
-      "appraiser-license": args.taskStatus
+      "appraiser-license": args.taskStatus,
     },
     licenseData: {
       nameAndAddress: args.nameAndAddress,
@@ -36,8 +36,8 @@ const update = (
       expirationISO: args.licenseStatusResult.expirationISO,
       lastUpdatedISO: getCurrentDateISOString(),
       status: args.licenseStatusResult.status,
-      items: args.licenseStatusResult.checklistItems
-    }
+      items: args.licenseStatusResult.checklistItems,
+    },
   }));
 };
 
@@ -57,7 +57,7 @@ export const updateLicenseStatusFactory = (searchLicenseStatus: SearchLicenseSta
           nameAndAddress: nameAndAddress,
           taskStatus: taskStatus,
           licenseStatusResult: licenseStatusResult,
-          completed: true
+          completed: true,
         });
       })
       .catch(async (error: Error) => {
@@ -66,7 +66,7 @@ export const updateLicenseStatusFactory = (searchLicenseStatus: SearchLicenseSta
             nameAndAddress: nameAndAddress,
             taskStatus: "NOT_STARTED",
             licenseStatusResult: { status: "UNKNOWN", checklistItems: [] },
-            completed: false
+            completed: false,
           });
         } else {
           throw error;

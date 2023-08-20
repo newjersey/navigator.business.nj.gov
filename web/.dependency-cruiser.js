@@ -4,356 +4,356 @@ module.exports = {
   allowed: [
     {
       from: {},
-      to: { path: "@aws-amplify/auth" }
+      to: { path: "@aws-amplify/auth" },
     },
     {
       from: {},
-      to: { path: "@aws-amplify/core" }
+      to: { path: "@aws-amplify/core" },
     },
     {
       from: {},
-      to: { path: "jspdf" }
+      to: { path: "jspdf" },
     },
     {
       from: {},
-      to: { path: "html2canvas" }
+      to: { path: "html2canvas" },
     },
     {
       from: {},
-      to: { path: "@aws-crypto/sha256-browser" }
+      to: { path: "@aws-crypto/sha256-browser" },
     },
     {
       from: {},
-      to: { path: "@aws-sdk/protocol-http" }
+      to: { path: "@aws-sdk/protocol-http" },
     },
     {
       from: {},
-      to: { path: "@aws-sdk/s3-request-presigner" }
+      to: { path: "@aws-sdk/s3-request-presigner" },
     },
     {
       from: {},
-      to: { path: "@aws-sdk/url-parser" }
+      to: { path: "@aws-sdk/url-parser" },
     },
     {
       from: {},
-      to: { path: "@aws-sdk/util-format-url" }
+      to: { path: "@aws-sdk/util-format-url" },
     },
     {
       from: {},
-      to: { path: "@businessnjgovnavigator/content/fieldConfig/config.json" }
+      to: { path: "@businessnjgovnavigator/content/fieldConfig/config.json" },
     },
     {
       from: {},
-      to: { path: "@businessnjgovnavigator/content/roadmaps/steps.json" }
+      to: { path: "@businessnjgovnavigator/content/roadmaps/steps.json" },
     },
     {
       from: {},
-      to: { path: "@businessnjgovnavigator/content/roadmaps/task-dependencies.json" }
+      to: { path: "@businessnjgovnavigator/content/roadmaps/task-dependencies.json" },
     },
     {
       from: {},
-      to: { path: "@businessnjgovnavigator/shared" }
+      to: { path: "@businessnjgovnavigator/shared" },
     },
     {
       from: {},
-      to: { path: "@businessnjgovnavigator/shared/dateHelpers" }
+      to: { path: "@businessnjgovnavigator/shared/dateHelpers" },
     },
     {
       from: {},
-      to: { path: "@jest/types" }
+      to: { path: "@jest/types" },
     },
     {
       from: {},
-      to: { path: "js-yaml" }
+      to: { path: "js-yaml" },
     },
     {
       from: {},
-      to: { path: "@mui/lab" }
+      to: { path: "@mui/lab" },
     },
     {
       from: {},
-      to: { path: "@mui/material" }
+      to: { path: "@mui/material" },
     },
     {
       from: {},
-      to: { path: "@mui/styles/*" }
+      to: { path: "@mui/styles/*" },
     },
     {
       from: {},
-      to: { path: "@mui/x-date-pickers" }
+      to: { path: "@mui/x-date-pickers" },
     },
     {
       from: {},
-      to: { path: "@storybook/react" }
+      to: { path: "@storybook/react" },
     },
     {
       from: {},
-      to: { path: "@testing-library/jest-dom/extend-expect" }
+      to: { path: "@testing-library/jest-dom/extend-expect" },
     },
     {
       from: {},
-      to: { path: "@testing-library/react" }
+      to: { path: "@testing-library/react" },
     },
     {
       from: {},
-      to: { path: "@testing-library/user-event" }
+      to: { path: "@testing-library/user-event" },
     },
     {
       from: {},
-      to: { path: "@uswds/uswds" }
+      to: { path: "@uswds/uswds" },
     },
     {
       from: {},
-      to: { path: "axios" }
+      to: { path: "axios" },
     },
     {
       from: {},
-      to: { path: "broken-link-checker" }
+      to: { path: "broken-link-checker" },
     },
     {
       from: {},
-      to: { path: "fast-deep-equal/es6/react" }
+      to: { path: "fast-deep-equal/es6/react" },
     },
     {
       from: { path: "lib" },
-      to: { path: "fs" }
+      to: { path: "fs" },
     },
     {
       from: { path: "scripts" },
-      to: { path: "fs" }
+      to: { path: "fs" },
     },
     {
       from: { path: "scripts" },
-      to: { path: "airtable" }
+      to: { path: "airtable" },
     },
     {
       from: {},
-      to: { path: "focus-trap-react" }
+      to: { path: "focus-trap-react" },
     },
     {
       from: {},
-      to: { path: "gray-matter" }
+      to: { path: "gray-matter" },
     },
     {
       from: {},
-      to: { path: "lodash" }
+      to: { path: "lodash" },
     },
     {
       from: {},
-      to: { path: "markdown-truncate" }
+      to: { path: "markdown-truncate" },
     },
     {
       from: {},
-      to: { path: "netlify-cms-app" }
+      to: { path: "netlify-cms-app" },
     },
     {
       from: {},
-      to: { path: "next" }
+      to: { path: "next" },
     },
     {
       from: {},
-      to: { path: "next-seo" }
+      to: { path: "next-seo" },
     },
     {
       from: {},
-      to: { path: "next/app" }
+      to: { path: "next/app" },
     },
     {
       from: {},
-      to: { path: "next/document" }
+      to: { path: "next/document" },
     },
     {
       from: {},
-      to: { path: "next/dynamic" }
+      to: { path: "next/dynamic" },
     },
     {
       from: {},
-      to: { path: "next/link" }
+      to: { path: "next/link" },
     },
     {
       from: {},
-      to: { path: "next/router" }
+      to: { path: "next/router" },
     },
     {
       from: {},
-      to: { path: "next/script" }
+      to: { path: "next/script" },
     },
     {
       from: {},
-      to: { path: "path" }
+      to: { path: "path" },
     },
     {
       from: {},
-      to: { path: "querystring" }
+      to: { path: "querystring" },
     },
     {
       from: {},
-      to: { path: "react" }
+      to: { path: "react" },
     },
     {
       from: {},
-      to: { path: "react-dom" }
+      to: { path: "react-dom" },
     },
     {
       from: {},
-      to: { path: "react-dom/test-utils" }
+      to: { path: "react-dom/test-utils" },
     },
     {
       from: {},
-      to: { path: "react-transition-group" }
+      to: { path: "react-transition-group" },
     },
     {
       from: {},
-      to: { path: "rehype-react" }
+      to: { path: "rehype-react" },
     },
     {
       from: {},
-      to: { path: "remark-gfm" }
+      to: { path: "remark-gfm" },
     },
     {
       from: {},
-      to: { path: "rehype-format" }
+      to: { path: "rehype-format" },
     },
     {
       from: {},
-      to: { path: "rehype-raw" }
+      to: { path: "rehype-raw" },
     },
     {
       from: {},
-      to: { path: "unist-util-visit" }
+      to: { path: "unist-util-visit" },
     },
     {
       from: {},
-      to: { path: "remark-directive" }
+      to: { path: "remark-directive" },
     },
     {
       from: {},
-      to: { path: "@types" }
+      to: { path: "@types" },
     },
     {
       from: {},
-      to: { path: "rehype-rewrite" }
+      to: { path: "rehype-rewrite" },
     },
     {
       from: {},
-      to: { path: "rehype-stringify" }
+      to: { path: "rehype-stringify" },
     },
     {
       from: {},
-      to: { path: "remark-parse" }
+      to: { path: "remark-parse" },
     },
     {
       from: {},
-      to: { path: "remark-rehype" }
+      to: { path: "remark-rehype" },
     },
     {
       from: {},
-      to: { path: "remove-markdown" }
+      to: { path: "remove-markdown" },
     },
     {
       from: {},
-      to: { path: "unified" }
+      to: { path: "unified" },
     },
     {
       from: {},
-      to: { path: "storybook-addon-designs" }
+      to: { path: "storybook-addon-designs" },
     },
     {
       from: {},
-      to: { path: "swr" }
+      to: { path: "swr" },
     },
     {
       from: {},
-      to: { path: "url" }
+      to: { path: "url" },
     },
     {
       from: { path: "components" },
-      to: { path: "lib" }
+      to: { path: "lib" },
     },
     {
       from: { path: "lib/cms/previews" },
-      to: { path: "pages" }
+      to: { path: "pages" },
     },
     {
       from: { path: "components" },
-      to: { path: "components" }
+      to: { path: "components" },
     },
     {
       from: { path: "components" },
-      to: { path: "styles" }
+      to: { path: "styles" },
     },
     {
       from: { path: "lib" },
-      to: { path: "lib" }
+      to: { path: "lib" },
     },
     {
       from: { path: "lib" },
-      to: { path: "components" }
+      to: { path: "components" },
     },
     {
       from: { path: "pages" },
-      to: { path: "components" }
+      to: { path: "components" },
     },
     {
       from: { path: "pages" },
-      to: { path: "lib" }
+      to: { path: "lib" },
     },
     {
       from: { path: "pages" },
-      to: { path: "pages" }
+      to: { path: "pages" },
     },
     {
       from: { path: "pages" },
-      to: { path: "styles" }
+      to: { path: "styles" },
     },
     {
       from: { path: "pages" },
-      to: { path: "njwds" }
+      to: { path: "njwds" },
     },
     {
       from: {},
-      to: { path: "test" }
+      to: { path: "test" },
     },
     {
       from: { path: "test" },
-      to: {}
+      to: {},
     },
     {
       from: {},
-      to: { path: "../content" }
+      to: { path: "../content" },
     },
     {
       from: {},
-      to: { path: "dayjs" }
+      to: { path: "dayjs" },
     },
     {
       from: { path: "../shared" },
-      to: { path: "uuid" }
+      to: { path: "uuid" },
     },
     {
       from: { path: "" },
-      to: { path: "contexts" }
+      to: { path: "contexts" },
     },
     {
       from: { path: "context" },
-      to: { path: "lib" }
+      to: { path: "lib" },
     },
     {
       from: { path: "../shared/src" },
-      to: { path: "../shared/src" }
+      to: { path: "../shared/src" },
     },
     {
       from: { path: "src/scripts" },
-      to: { path: "src/scripts" }
+      to: { path: "src/scripts" },
     },
     {
       from: { path: "src/scripts" },
-      to: { path: "../shared" }
+      to: { path: "../shared" },
     },
     {
       from: {},
-      to: { path: "@aws-amplify/auth" }
-    }
+      to: { path: "@aws-amplify/auth" },
+    },
   ],
   forbidden: [
     /* rules from the 'recommended' preset: */
@@ -365,8 +365,8 @@ module.exports = {
         "your solution (i.e. use dependency inversion, make sure the modules have a single responsibility) ",
       from: {},
       to: {
-        circular: true
-      }
+        circular: true,
+      },
     },
     {
       name: "no-orphans",
@@ -384,10 +384,10 @@ module.exports = {
           "\\.d\\.ts$", // TypeScript declaration files
           "(^|/)tsconfig\\.json$", // TypeScript config
           "(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$", // other configs
-          "src/pages/healthz.tsx" // healthcheck page
-        ]
+          "src/pages/healthz.tsx", // healthcheck page
+        ],
       },
-      to: {}
+      to: {},
     },
     {
       name: "no-deprecated-core",
@@ -418,9 +418,9 @@ module.exports = {
           "^(constants)$",
           "^(sys)$",
           "^(_linklist)$",
-          "^(_stream_wrap)$"
-        ]
-      }
+          "^(_stream_wrap)$",
+        ],
+      },
     },
     {
       name: "not-to-deprecated",
@@ -430,8 +430,8 @@ module.exports = {
       severity: "error",
       from: {},
       to: {
-        dependencyTypes: ["deprecated"]
-      }
+        dependencyTypes: ["deprecated"],
+      },
     },
     {
       name: "no-non-package-json",
@@ -444,8 +444,8 @@ module.exports = {
       from: {},
       to: {
         dependencyTypes: ["npm-no-pkg", "npm-unknown"],
-        pathNot: ["njwds"]
-      }
+        pathNot: ["njwds"],
+      },
     },
     {
       name: "not-to-unresolvable",
@@ -455,8 +455,8 @@ module.exports = {
       severity: "error",
       from: {},
       to: {
-        couldNotResolve: true
-      }
+        couldNotResolve: true,
+      },
     },
     {
       name: "no-duplicate-dep-types",
@@ -471,8 +471,8 @@ module.exports = {
         // as it's pretty common to have a type import be a type only import
         // _and_ (e.g.) a devDependency - don't consider type-only dependency
         // types for this rule
-        dependencyTypesNot: ["type-only"]
-      }
+        dependencyTypesNot: ["type-only"],
+      },
     },
 
     /* rules you might want to tweak for your specific situation: */
@@ -485,8 +485,8 @@ module.exports = {
       severity: "error",
       from: {},
       to: {
-        path: "\\.(spec|test)\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$"
-      }
+        path: "\\.(spec|test)\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$",
+      },
     },
     {
       name: "not-to-dev-dep",
@@ -499,12 +499,12 @@ module.exports = {
         "from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration",
       from: {
         path: "^(src)",
-        pathNot: "\\.(spec|test)\\.(js|mjs|cjs|ts|tsx|ls|coffee|litcoffee|coffee\\.md)$"
+        pathNot: "\\.(spec|test)\\.(js|mjs|cjs|ts|tsx|ls|coffee|litcoffee|coffee\\.md)$",
       },
       to: {
         dependencyTypes: ["npm-dev"],
-        pathNot: ["airtable"]
-      }
+        pathNot: ["airtable"],
+      },
     },
     {
       name: "optional-deps-used",
@@ -516,8 +516,8 @@ module.exports = {
         "depdency-cruiser configuration.",
       from: {},
       to: {
-        dependencyTypes: ["npm-optional"]
-      }
+        dependencyTypes: ["npm-optional"],
+      },
     },
     {
       name: "peer-deps-used",
@@ -529,30 +529,30 @@ module.exports = {
       severity: "error",
       from: {},
       to: {
-        dependencyTypes: ["npm-peer"]
-      }
-    }
+        dependencyTypes: ["npm-peer"],
+      },
+    },
   ],
   options: {
     doNotFollow: {
       path: "node_modules",
-      dependencyTypes: ["npm", "npm-dev", "npm-optional", "npm-peer", "npm-bundled", "npm-no-pkg"]
+      dependencyTypes: ["npm", "npm-dev", "npm-optional", "npm-peer", "npm-bundled", "npm-no-pkg"],
     },
     tsPreCompilationDeps: true,
     tsConfig: {
-      fileName: "tsconfig.json"
+      fileName: "tsconfig.json",
     },
     enhancedResolveOptions: {
       exportsFields: ["exports"],
-      conditionNames: ["import", "require", "node", "default"]
+      conditionNames: ["import", "require", "node", "default"],
     },
     reporterOptions: {
       dot: {
-        collapsePattern: "node_modules/[^/]+"
+        collapsePattern: "node_modules/[^/]+",
       },
       archi: {
-        collapsePattern: "^(packages|src|lib|app|bin|test(s?)|spec(s?))/[^/]+|node_modules/[^/]+"
-      }
-    }
-  }
+        collapsePattern: "^(packages|src|lib|app|bin|test(s?)|spec(s?))/[^/]+|node_modules/[^/]+",
+      },
+    },
+  },
 };

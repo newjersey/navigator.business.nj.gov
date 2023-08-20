@@ -23,8 +23,8 @@ export const loadAllFilingUrlSlugs = (): PathParams<FilingUrlSlugParam>[] => {
   return fileNames.map((fileName) => {
     return {
       params: {
-        filingUrlSlug: loadUrlSlugByFilename(fileName, filingsDir)
-      }
+        filingUrlSlug: loadUrlSlugByFilename(fileName, filingsDir),
+      },
     };
   });
 };

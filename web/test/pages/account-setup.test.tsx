@@ -10,7 +10,7 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentUserData,
   setupStatefulUserDataContext,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { createPageHelpers, PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
 import { createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
@@ -27,21 +27,21 @@ function setupMockAnalytics(): typeof analytics {
       ...jest.requireActual("@/lib/utils/analytics").default.event,
       finish_setup_on_myNewJersey_button: {
         submit: {
-          go_to_myNJ_registration: jest.fn()
-        }
+          go_to_myNJ_registration: jest.fn(),
+        },
       },
       guest_snackbar: {
         click: {
-          go_to_NavigatorAccount_setup: jest.fn()
-        }
-      }
-    }
+          go_to_NavigatorAccount_setup: jest.fn(),
+        },
+      },
+    },
   };
 }
 
 jest.mock("@/lib/api-client/apiClient", () => ({
   postNewsletter: jest.fn(),
-  postUserTesting: jest.fn()
+  postUserTesting: jest.fn(),
 }));
 jest.mock("@/lib/auth/signinHelper", () => ({ onSelfRegister: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
@@ -66,9 +66,9 @@ describe("Account Setup page", () => {
           ...request.user,
           externalStatus: {
             ...request.user.externalStatus,
-            newsletter: { status: "SUCCESS", success: true }
-          }
-        }
+            newsletter: { status: "SUCCESS", success: true },
+          },
+        },
       });
     });
 
@@ -79,9 +79,9 @@ describe("Account Setup page", () => {
           ...request.user,
           externalStatus: {
             ...request.user.externalStatus,
-            userTesting: { status: "SUCCESS", success: true }
-          }
-        }
+            userTesting: { status: "SUCCESS", success: true },
+          },
+        },
       });
     });
   });
@@ -89,7 +89,7 @@ describe("Account Setup page", () => {
   const emptyUser = createEmptyUser();
   const renderPage = ({
     userData,
-    isAuthenticated
+    isAuthenticated,
   }: {
     userData?: UserData | null;
     isAuthenticated?: IsAuthenticated;
@@ -230,7 +230,7 @@ describe("Account Setup page", () => {
       name: "My Name",
       receiveNewsletter: false,
       userTesting: true,
-      externalStatus: { userTesting: { status: "SUCCESS", success: true } }
+      externalStatus: { userTesting: { status: "SUCCESS", success: true } },
     };
 
     await waitFor(() => {
@@ -253,7 +253,7 @@ describe("Account Setup page", () => {
       name: "My Name",
       receiveNewsletter: true,
       userTesting: false,
-      externalStatus: { newsletter: { status: "SUCCESS", success: true } }
+      externalStatus: { newsletter: { status: "SUCCESS", success: true } },
     };
 
     await waitFor(() => {
@@ -277,8 +277,8 @@ describe("Account Setup page", () => {
       userTesting: true,
       externalStatus: {
         newsletter: { status: "SUCCESS", success: true },
-        userTesting: { status: "SUCCESS", success: true }
-      }
+        userTesting: { status: "SUCCESS", success: true },
+      },
     };
     await waitFor(() => {
       expect(currentUserData().user).toEqual(businessUser);

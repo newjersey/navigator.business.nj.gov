@@ -18,7 +18,7 @@ describe("taxDecryptionRouter", () => {
         return new Promise((resolve) => {
           resolve(`decrypted ${value}`);
         });
-      })
+      }),
     };
 
     app = setupExpress(false);

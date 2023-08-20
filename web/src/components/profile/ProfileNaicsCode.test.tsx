@@ -10,7 +10,7 @@ import {
   generateProfileData,
   generateTaxFilingData,
   generateUserDataForBusiness,
-  TaxFilingState
+  TaxFilingState,
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
@@ -21,7 +21,7 @@ const Config = getMergedConfig();
 const renderComponent = (businessOverrides: Partial<Business>): void => {
   const data = generateProfileData({
     businessPersona: "STARTING",
-    ...businessOverrides.profileData
+    ...businessOverrides.profileData,
   });
   render(
     <ThemeProvider theme={createTheme()}>
@@ -29,10 +29,10 @@ const renderComponent = (businessOverrides: Partial<Business>): void => {
         value={{
           state: {
             profileData: data,
-            flow: getFlow(data)
+            flow: getFlow(data),
           },
           setProfileData: (): void => {},
-          onBack: (): void => {}
+          onBack: (): void => {},
         }}
       >
         <WithStatefulUserData
@@ -86,9 +86,9 @@ describe("<ProfileNaicsCode />", () => {
     it("doesn't display Edit text and displays tooltip when there is a naics code and tax filing state is success", () => {
       renderComponent({
         profileData: generateProfileData({
-          naicsCode: "624410"
+          naicsCode: "624410",
         }),
-        taxFilingData: generateTaxFilingData({ state: "SUCCESS" })
+        taxFilingData: generateTaxFilingData({ state: "SUCCESS" }),
       });
       expect(screen.queryByText(configForField.editText)).not.toBeInTheDocument();
       expect(screen.getByTestId("naics-code-tooltip")).toBeInTheDocument();
@@ -100,9 +100,9 @@ describe("<ProfileNaicsCode />", () => {
         it(`displays Edit text and doesn't display tooltip when tax filing state is ${state}`, () => {
           renderComponent({
             profileData: generateProfileData({
-              naicsCode: "624410"
+              naicsCode: "624410",
             }),
-            taxFilingData: generateTaxFilingData({ state: state as TaxFilingState })
+            taxFilingData: generateTaxFilingData({ state: state as TaxFilingState }),
           });
           expect(screen.getByText(configForField.editText)).toBeInTheDocument();
           expect(screen.queryByTestId("naics-code-tooltip")).not.toBeInTheDocument();
@@ -116,8 +116,8 @@ describe("<ProfileNaicsCode />", () => {
       profileData: generateProfileData({
         naicsCode: "624410",
         operatingPhase: "UP_AND_RUNNING_OWNING",
-        businessPersona: "OWNING"
-      })
+        businessPersona: "OWNING",
+      }),
     });
     expect(screen.queryByText(configForField.editText)).not.toBeInTheDocument();
     expect(screen.getByTestId("naics-code-tooltip")).toBeInTheDocument();
@@ -128,11 +128,11 @@ describe("<ProfileNaicsCode />", () => {
       profileData: generateProfileData({
         naicsCode: "624410",
         businessPersona: "FOREIGN",
-        foreignBusinessType: "NEXUS"
+        foreignBusinessType: "NEXUS",
       }),
       taxFilingData: generateTaxFilingData({
-        state: "SUCCESS"
-      })
+        state: "SUCCESS",
+      }),
     });
     expect(screen.queryByText(configForField.editText)).not.toBeInTheDocument();
     expect(screen.getByTestId("naics-code-tooltip")).toBeInTheDocument();

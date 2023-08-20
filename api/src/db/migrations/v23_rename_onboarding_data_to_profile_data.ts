@@ -15,9 +15,9 @@ export const migrate_v22_to_v23 = (v22Data: v22UserData): v23UserData => {
   const userData = {
     ...v22Data,
     profileData: {
-      ...v22Data.onboardingData
+      ...v22Data.onboardingData,
     },
-    version: 23
+    version: 23,
   };
 
   return userData;

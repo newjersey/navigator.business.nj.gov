@@ -8,13 +8,13 @@ import {
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   generateBusiness,
   generatePreferences,
   generateProfileData,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -48,9 +48,9 @@ describe("<SidebarCardFundingNudge />", () => {
       renderWithBusiness({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          industryId: "cannabis"
+          industryId: "cannabis",
         }),
-        preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] })
+        preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] }),
       });
 
       fireEvent.click(screen.getByTestId("cta-funding-nudge"));
@@ -63,9 +63,9 @@ describe("<SidebarCardFundingNudge />", () => {
       renderWithBusiness({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          industryId: "generic"
+          industryId: "generic",
         }),
-        preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] })
+        preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] }),
       });
 
       fireEvent.click(screen.getByTestId("cta-funding-nudge"));
@@ -81,9 +81,9 @@ describe("<SidebarCardFundingNudge />", () => {
       renderWithBusiness({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          industryId: "generic"
+          industryId: "generic",
         }),
-        preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] })
+        preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] }),
       });
 
       fireEvent.click(screen.getByTestId("cta-funding-nudge"));

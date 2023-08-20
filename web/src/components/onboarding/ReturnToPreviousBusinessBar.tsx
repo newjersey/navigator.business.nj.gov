@@ -31,7 +31,7 @@ export const ReturnToPreviousBusinessBar = (props: Props): ReactElement | null =
         removeBusiness({
           userData,
           newCurrentBusinessId: props.previousBusiness.id,
-          idToRemove: userData.currentBusinessId
+          idToRemove: userData.currentBusinessId,
         })
       )
       .update();
@@ -52,7 +52,7 @@ export const ReturnToPreviousBusinessBar = (props: Props): ReactElement | null =
           </div>
           <div className="margin-left-2 margin-y-auto font-sans-xs text-accent-cool-darker underline">
             {templateEval(Config.onboardingDefaults.returnToPreviousBusiness, {
-              previousBusiness: businessName
+              previousBusiness: businessName,
             })}
           </div>
         </UnStyledButton>

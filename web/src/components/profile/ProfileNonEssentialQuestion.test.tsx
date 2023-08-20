@@ -6,7 +6,7 @@ import { createEmptyProfileData, generateProfileData, ProfileData } from "@busin
 import { fireEvent, render, screen, within } from "@testing-library/react";
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({
-  getNonEssentialQuestionText: jest.fn()
+  getNonEssentialQuestionText: jest.fn(),
 }));
 
 const mockGetNonEssentialQuestionText = (
@@ -24,7 +24,7 @@ describe("ProfileNonEssentialQuestion", () => {
 
   const renderEssentialQuestion = ({
     essentialQuestionId,
-    profileData
+    profileData,
   }: {
     essentialQuestionId: string;
     profileData?: Partial<ProfileData>;
@@ -59,7 +59,7 @@ describe("ProfileNonEssentialQuestion", () => {
   it("updates profile data with true if answered yes", () => {
     renderEssentialQuestion({
       essentialQuestionId: "cool-test-id",
-      profileData: { nonEssentialRadioAnswers: { "cool-test-id": false } }
+      profileData: { nonEssentialRadioAnswers: { "cool-test-id": false } },
     });
     fireEvent.click(screen.getByTestId("cool-test-id-radio-yes"));
     expect(currentProfileData().nonEssentialRadioAnswers).toEqual({ "cool-test-id": true });
@@ -68,7 +68,7 @@ describe("ProfileNonEssentialQuestion", () => {
   it("updates profile data with false if answered no", () => {
     renderEssentialQuestion({
       essentialQuestionId: "cool-test-id",
-      profileData: { nonEssentialRadioAnswers: { "cool-test-id": true } }
+      profileData: { nonEssentialRadioAnswers: { "cool-test-id": true } },
     });
     fireEvent.click(screen.getByTestId("cool-test-id-radio-no"));
     expect(currentProfileData().nonEssentialRadioAnswers).toEqual({ "cool-test-id": false });

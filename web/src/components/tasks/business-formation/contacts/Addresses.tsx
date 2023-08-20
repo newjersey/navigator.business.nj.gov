@@ -58,7 +58,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
     const addresses = [...props.addressData];
     addresses[index] = {
       ...addresses[index],
-      signature: event.target.checked
+      signature: event.target.checked,
     };
     props.setData(addresses);
   };
@@ -67,7 +67,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
     onChange,
     checked,
     fieldName,
-    index
+    index,
   }: {
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     checked: boolean;
@@ -139,7 +139,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                         },
                         checked: it.signature,
                         fieldName: props.fieldName,
-                        index
+                        index,
                       })}
                     </td>
                   ) : (
@@ -232,7 +232,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                                   },
                                   checked: it.signature,
                                   fieldName: props.fieldName,
-                                  index
+                                  index,
                                 })}
                               </div>
                             </>

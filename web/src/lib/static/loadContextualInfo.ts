@@ -36,7 +36,7 @@ const loadContextualInfo = (dir: string): ContextualInfoFile[] => {
     const fileNameWithoutMd = fileName.split(".md")[0];
     return {
       ...convertContextualInfoMd(fileContents),
-      filename: fileNameWithoutMd
+      filename: fileNameWithoutMd,
     };
   });
 };

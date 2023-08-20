@@ -3,7 +3,7 @@ import {
   generateNameAndAddress,
   generateTaxIdAndBusinessName,
   generateUser,
-  generateUserData
+  generateUserData,
 } from "@businessnjgovnavigator/shared/test";
 import axios from "axios";
 import {
@@ -14,14 +14,14 @@ import {
   postNewsletter,
   postTaxFilingsLookup,
   postTaxFilingsOnboarding,
-  postUserData
+  postUserData,
 } from "./apiClient";
 
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
 jest.mock("@/lib/auth/sessionHelper", () => ({
-  getCurrentToken: (): string => "some-token"
+  getCurrentToken: (): string => "some-token",
 }));
 
 describe("apiClient", () => {
@@ -34,7 +34,7 @@ describe("apiClient", () => {
     mockAxios.get.mockResolvedValue({ data: userData });
     expect(await getUserData("123")).toEqual(userData);
     expect(mockAxios.get).toHaveBeenCalledWith("/api/users/123", {
-      headers: { Authorization: "Bearer some-token" }
+      headers: { Authorization: "Bearer some-token" },
     });
   });
 
@@ -43,7 +43,7 @@ describe("apiClient", () => {
     mockAxios.post.mockResolvedValue({ data: userData });
     expect(await postUserData(userData)).toEqual(userData);
     expect(mockAxios.post).toHaveBeenCalledWith("/api/users", userData, {
-      headers: { Authorization: "Bearer some-token" }
+      headers: { Authorization: "Bearer some-token" },
     });
   });
 
@@ -51,7 +51,7 @@ describe("apiClient", () => {
     mockAxios.get.mockResolvedValue({ data: { value: "something" } });
     expect(await get("/some/url")).toEqual({ value: "something" });
     expect(mockAxios.get).toHaveBeenCalledWith("/api/some/url", {
-      headers: { Authorization: "Bearer some-token" }
+      headers: { Authorization: "Bearer some-token" },
     });
   });
 
@@ -60,7 +60,7 @@ describe("apiClient", () => {
     const nameAndAddress = generateNameAndAddress({});
     await checkLicenseStatus(nameAndAddress);
     expect(mockAxios.post).toHaveBeenCalledWith("/api/license-status", nameAndAddress, {
-      headers: { Authorization: "Bearer some-token" }
+      headers: { Authorization: "Bearer some-token" },
     });
   });
 
@@ -69,7 +69,7 @@ describe("apiClient", () => {
     const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
     await postTaxFilingsOnboarding(taxIdAndBusinessName);
     expect(mockAxios.post).toHaveBeenCalledWith("/api/taxFilings/onboarding", taxIdAndBusinessName, {
-      headers: { Authorization: "Bearer some-token" }
+      headers: { Authorization: "Bearer some-token" },
     });
   });
 
@@ -78,7 +78,7 @@ describe("apiClient", () => {
     const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
     await postTaxFilingsLookup(taxIdAndBusinessName);
     expect(mockAxios.post).toHaveBeenCalledWith("/api/taxFilings/lookup", taxIdAndBusinessName, {
-      headers: { Authorization: "Bearer some-token" }
+      headers: { Authorization: "Bearer some-token" },
     });
   });
 

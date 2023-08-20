@@ -29,7 +29,7 @@ export const SectorModal = (props: Props): ReactElement => {
   const {
     FormFuncWrapper,
     onSubmit,
-    state: formContextState
+    state: formContextState,
   } = useFormContextHelper(createProfileFieldErrorMap());
 
   useMountEffectWhenDefined(() => {
@@ -55,10 +55,10 @@ export const SectorModal = (props: Props): ReactElement => {
         value={{
           state: {
             profileData: profileData,
-            flow: "OWNING"
+            flow: "OWNING",
           },
           setProfileData,
-          onBack: (): void => {}
+          onBack: (): void => {},
         }}
       >
         <ModalTwoButton

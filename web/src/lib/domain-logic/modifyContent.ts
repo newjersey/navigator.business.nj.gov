@@ -3,7 +3,7 @@ import { templateEval, templateEvalWithExtraSpaceRemoval } from "@/lib/utils/hel
 export const modifyContent = ({
   content,
   condition,
-  modificationMap
+  modificationMap,
 }: {
   content: string;
   condition: () => boolean;
@@ -15,11 +15,11 @@ export const modifyContent = ({
     if (content.includes(`\${${modifier}}`)) {
       if (condition()) {
         result = templateEval(content, {
-          [modifier]: modificationMap[modifier]
+          [modifier]: modificationMap[modifier],
         });
       } else {
         result = templateEvalWithExtraSpaceRemoval(content, {
-          [modifier]: ""
+          [modifier]: "",
         });
       }
     }

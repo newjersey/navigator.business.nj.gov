@@ -3,7 +3,7 @@ import {
   generateStep,
   generateTask,
   operatingPhasesDisplayingBusinessStructurePrompt,
-  operatingPhasesNotDisplayingBusinessStructurePrompt
+  operatingPhasesNotDisplayingBusinessStructurePrompt,
 } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -11,13 +11,13 @@ import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   generateBusiness,
   generatePreferences,
   generateProfileData,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -39,17 +39,17 @@ describe("<MiniRoadmap />", () => {
       steps: [
         generateStep({
           name: "step1",
-          stepNumber: 1
+          stepNumber: 1,
         }),
         generateStep({
           name: "step2",
-          stepNumber: 2
-        })
+          stepNumber: 2,
+        }),
       ],
       tasks: [
         generateTask({ name: "task1", id: "task1", stepNumber: 1 }),
-        generateTask({ name: "task2", id: "task2", stepNumber: 2 })
-      ]
+        generateTask({ name: "task2", id: "task2", stepNumber: 2 }),
+      ],
     });
   });
 
@@ -84,9 +84,9 @@ describe("<MiniRoadmap />", () => {
         generateStep({ name: "step1", section: "PLAN", stepNumber: 1 }),
         generateStep({ name: "step2", section: "START", stepNumber: 2 }),
         generateStep({ name: "step3", section: "PLAN", stepNumber: 3 }),
-        generateStep({ name: "step4", section: "START", stepNumber: 4 })
+        generateStep({ name: "step4", section: "START", stepNumber: 4 }),
       ],
-      tasks: [generateTask({ id: "task1", stepNumber: 1 })]
+      tasks: [generateTask({ id: "task1", stepNumber: 1 })],
     });
 
     renderMiniRoadMap("task1");
@@ -110,14 +110,14 @@ describe("<MiniRoadmap />", () => {
     useMockRoadmap({
       steps: [
         generateStep({ name: "step1", section: "PLAN" }),
-        generateStep({ name: "step2", section: "START" })
-      ]
+        generateStep({ name: "step2", section: "START" }),
+      ],
     });
 
     useMockBusiness({
       preferences: generatePreferences({
-        roadmapOpenSections: ["PLAN", "START"]
-      })
+        roadmapOpenSections: ["PLAN", "START"],
+      }),
     });
 
     renderMiniRoadMap("task3");
@@ -136,15 +136,15 @@ describe("<MiniRoadmap />", () => {
         useMockRoadmap({
           steps: [
             generateStep({ name: "step1", section: "PLAN" }),
-            generateStep({ name: "step2", section: "START" })
-          ]
+            generateStep({ name: "step2", section: "START" }),
+          ],
         });
 
         useMockBusiness({
           preferences: generatePreferences({
-            roadmapOpenSections: ["PLAN", "START"]
+            roadmapOpenSections: ["PLAN", "START"],
           }),
-          profileData: generateProfileData({ operatingPhase: operatingPhase })
+          profileData: generateProfileData({ operatingPhase: operatingPhase }),
         });
       });
 
@@ -163,15 +163,15 @@ describe("<MiniRoadmap />", () => {
       useMockRoadmap({
         steps: [
           generateStep({ name: "step1", section: "PLAN" }),
-          generateStep({ name: "step2", section: "START" })
-        ]
+          generateStep({ name: "step2", section: "START" }),
+        ],
       });
 
       useMockBusiness({
         preferences: generatePreferences({
-          roadmapOpenSections: ["PLAN", "START"]
+          roadmapOpenSections: ["PLAN", "START"],
         }),
-        profileData: generateProfileData({ operatingPhase: operatingPhase })
+        profileData: generateProfileData({ operatingPhase: operatingPhase }),
       });
 
       renderMiniRoadMap("task3");
@@ -191,8 +191,8 @@ describe("<MiniRoadmap />", () => {
     const business = generateBusiness({
       preferences: generatePreferences({
         roadmapOpenSections: ["PLAN", "START"],
-        roadmapOpenSteps: [2]
-      })
+        roadmapOpenSteps: [2],
+      }),
     });
 
     beforeEach(() => {
@@ -201,18 +201,18 @@ describe("<MiniRoadmap />", () => {
           generateStep({
             name: "step1",
             stepNumber: 1,
-            section: "PLAN"
+            section: "PLAN",
           }),
           generateStep({
             name: "step2",
             stepNumber: 2,
-            section: "START"
-          })
+            section: "START",
+          }),
         ],
         tasks: [
           generateTask({ name: "task1", id: "task1", stepNumber: 1 }),
-          generateTask({ name: "task2", id: "task2", stepNumber: 2 })
-        ]
+          generateTask({ name: "task2", id: "task2", stepNumber: 2 }),
+        ],
       });
     });
 

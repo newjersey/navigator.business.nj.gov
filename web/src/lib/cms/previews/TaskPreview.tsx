@@ -6,7 +6,7 @@ import { Task } from "@/lib/types/types";
 import {
   generateBusiness,
   generateMunicipality,
-  generateProfileData
+  generateProfileData,
 } from "@businessnjgovnavigator/shared/test";
 import { ReactElement } from "react";
 
@@ -16,8 +16,8 @@ const TaskPreview = (props: PreviewProps): ReactElement => {
 
   const fakeBusinessWithMunicipality = generateBusiness({
     profileData: generateProfileData({
-      municipality: generateMunicipality({})
-    })
+      municipality: generateMunicipality({}),
+    }),
   });
 
   return (

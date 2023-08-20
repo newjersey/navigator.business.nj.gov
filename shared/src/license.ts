@@ -65,6 +65,6 @@ export const createEmptyNameAndAddress = (): NameAndAddress => {
     name: "",
     addressLine1: "",
     addressLine2: "",
-    zipCode: ""
+    zipCode: "",
   };
 };

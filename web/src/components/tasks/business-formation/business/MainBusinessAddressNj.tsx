@@ -23,7 +23,7 @@ export const MainBusinessAddressNj = (): ReactElement => {
       state.formationFormData.addressLine1,
       state.formationFormData.addressLine2,
       state.formationFormData.addressMunicipality,
-      state.formationFormData.addressZipCode
+      state.formationFormData.addressZipCode,
     ];
     return fields.some((value) => !!value);
   };
@@ -35,7 +35,7 @@ export const MainBusinessAddressNj = (): ReactElement => {
       return {
         ...previousState,
         addressState: { name: "New Jersey", shortCode: "NJ" },
-        addressCountry: "US"
+        addressCountry: "US",
       };
     });
   });

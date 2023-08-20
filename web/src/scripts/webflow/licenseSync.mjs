@@ -11,7 +11,7 @@ import {
   loadAllNavigatorLicenses,
   loadAllNavigatorWebflowLicenses,
   loadNavigatorLicense,
-  writeMarkdownString
+  writeMarkdownString,
 } from "../licenseLoader.mjs";
 import { argsInclude, contentToStrings, getHtml, wait } from "./helpers.mjs";
 import { LicenseClassificationLookup } from "./licenseClassifications.mjs";
@@ -25,7 +25,7 @@ export const LookupTaskAgencyById = (id) => {
       return x.id === id;
     }) ?? {
       id: "",
-      name: ""
+      name: "",
     }
   );
 };
@@ -56,8 +56,8 @@ const LookupIndustryById = (id) => {
         isInterstateMovingApplicable: undefined,
         isChildcareForSixOrMore: undefined,
         willSellPetCareItems: undefined,
-        isPetCareHousingApplicable: undefined
-      }
+        isPetCareHousingApplicable: undefined,
+      },
     }
   );
 };
@@ -94,7 +94,7 @@ const getLicenseFromMd = (licenseMd) => {
     "license-classification": licenseMd.webflowType
       ? LicenseClassificationLookup[licenseMd.webflowType]
       : undefined,
-    "summary-description": getHtml(contentToStrings(licenseMd.summaryDescriptionMd))
+    "summary-description": getHtml(contentToStrings(licenseMd.summaryDescriptionMd)),
   };
 };
 
@@ -158,7 +158,7 @@ const updateLicenseWithWebflowId = (webflowId, filename) => {
   const mdObject = loadNavigatorLicense(`${filename}.md`);
   const updatedMdObject = {
     ...mdObject,
-    webflowId: webflowId
+    webflowId: webflowId,
   };
   const stringifiedFile = writeMarkdownString(updatedMdObject);
 

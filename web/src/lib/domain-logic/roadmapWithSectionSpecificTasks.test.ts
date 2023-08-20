@@ -8,7 +8,7 @@ describe("roadmapWithSectionSpecificTasks", () => {
     generateStep({ section: "START", stepNumber: 3 }),
     generateStep({ section: "START", stepNumber: 4 }),
     generateStep({ section: undefined, stepNumber: 5 }),
-    generateStep({ section: undefined, stepNumber: 6 })
+    generateStep({ section: undefined, stepNumber: 6 }),
   ];
 
   const planTasks = [generateTask({ stepNumber: 1 }), generateTask({ stepNumber: 2 })];
@@ -20,7 +20,7 @@ describe("roadmapWithSectionSpecificTasks", () => {
   it("returns roadmap with tasks in plan section", () => {
     const roadmap = {
       steps: steps,
-      tasks: [...planTasks, ...startTasks, ...otherTasks]
+      tasks: [...planTasks, ...startTasks, ...otherTasks],
     };
     const result = roadmapWithSectionSpecificTasks(roadmap, "PLAN");
     expect(result).toEqual({ steps: [...steps], tasks: [...planTasks] });
@@ -29,7 +29,7 @@ describe("roadmapWithSectionSpecificTasks", () => {
   it("returns roadmap with tasks in start section", () => {
     const roadmap = {
       steps: steps,
-      tasks: [...planTasks, ...startTasks, ...otherTasks]
+      tasks: [...planTasks, ...startTasks, ...otherTasks],
     };
     const result = roadmapWithSectionSpecificTasks(roadmap, "START");
     expect(result).toEqual({ steps: [...steps], tasks: [...startTasks] });

@@ -20,9 +20,9 @@ export const migrate_v104_to_v105 = (v104Data: v104UserData): v105UserData => {
     ...v104Data,
     profileData: {
       ...v104Data.profileData,
-      willSellPetCareItems: v104Data.profileData.industryId === "petcare" ? true : undefined
+      willSellPetCareItems: v104Data.profileData.industryId === "petcare" ? true : undefined,
     },
-    version: 105
+    version: 105,
   };
 };
 
@@ -208,7 +208,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v105FormationData {
@@ -315,7 +315,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -324,7 +324,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const lpBusinessSuffix = ["LIMITED PARTNERSHIP", "LP", "L.P."] as const;
@@ -339,7 +339,7 @@ const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 const foreignCorpBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
@@ -348,7 +348,7 @@ const AllBusinessSuffixes = [
   ...llcBusinessSuffix,
   ...llpBusinessSuffix,
   ...lpBusinessSuffix,
-  ...foreignCorpBusinessSuffix
+  ...foreignCorpBusinessSuffix,
 ] as const;
 
 type v105BusinessSuffix = (typeof AllBusinessSuffixes)[number];
@@ -390,7 +390,7 @@ export const generateV105User = (overrides: Partial<v105BusinessUser>): v105Busi
     myNJUserKey: undefined,
     intercomHash: undefined,
     abExperience: "ExperienceA",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -403,7 +403,7 @@ export const generateV105FormationMember = (overrides: Partial<v105FormationMemb
     addressState: { shortCode: "123", name: "new-jersey" },
     addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
     addressCountry: `some-county`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -413,7 +413,7 @@ export const generateV105Municipality = (overrides: Partial<v105Municipality>): 
     name: `some-name-${randomInt()}`,
     county: `some-county-${randomInt()}`,
     id: `some-id-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -422,7 +422,7 @@ export const allFormationLegalTypes = [
   "limited-liability-company",
   "limited-partnership",
   "c-corporation",
-  "s-corporation"
+  "s-corporation",
 ];
 
 export const generateV105FormationFormData = (
@@ -474,7 +474,7 @@ export const generateV105FormationFormData = (
     getDistributionTerms: `some-getDistributionTerms-text-${randomInt()}`,
     canMakeDistribution: !!(randomInt() % 2),
     makeDistributionTerms: `some-makeDistributionTerms-text-${randomInt()}`,
-    ...overrides
+    ...overrides,
   } as v105FormationFormData;
 };
 
@@ -495,7 +495,7 @@ export const generateV105IndustrySpecificData = (
     interstateTransport: false,
     isChildcareForSixOrMore: undefined,
     willSellPetCareItems: undefined,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -512,7 +512,7 @@ export const generateV105ProfileData = (overrides: Partial<v105ProfileData>): v1
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     dateOfFormation: undefined,
     entityId: randomInt(10).toString(),
@@ -524,7 +524,7 @@ export const generateV105ProfileData = (overrides: Partial<v105ProfileData>): v1
     documents: {
       certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
       formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
-      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`
+      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
     },
     existingEmployees: randomInt(7).toString(),
     taxPin: randomInt(4).toString(),
@@ -536,7 +536,7 @@ export const generateV105ProfileData = (overrides: Partial<v105ProfileData>): v1
     needsNexusDbaName: true,
     nexusLocationInNewJersey: undefined,
     operatingPhase: "NEEDS_TO_FORM",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -548,7 +548,7 @@ export const generateV105TaxFilingData = (overrides: Partial<v105TaxFilingData>)
     lastUpdatedISO: undefined,
     registeredISO: undefined,
     filings: [],
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -561,7 +561,7 @@ export const generateV105FormationData = (
     formationResponse: undefined,
     getFilingResponse: undefined,
     completedFilingPayment: false,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -579,7 +579,7 @@ export const generateV105UserData = (overrides: Partial<v105UserData>): v105User
     lastUpdatedISO: "",
     taxFilingData: generateV105TaxFilingData({}),
     formationData: generateV105FormationData({}, profileData.legalStructureId ?? ""),
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -593,6 +593,6 @@ export const generateV105Preferences = (overrides: Partial<v105Preferences>): v1
     returnToLink: "",
     isCalendarFullView: true,
     isHideableRoadmapOpen: false,
-    ...overrides
+    ...overrides,
   };
 };

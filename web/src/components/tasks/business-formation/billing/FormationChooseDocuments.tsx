@@ -29,7 +29,7 @@ export const FormationChooseDocuments = (): ReactElement => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     state.formationFormData.certificateOfStanding,
-    state.formationFormData.certifiedCopyOfFormationDocument
+    state.formationFormData.certifiedCopyOfFormationDocument,
   ]);
 
   const handleCertificateOfStandingClick = (): void => {
@@ -37,7 +37,7 @@ export const FormationChooseDocuments = (): ReactElement => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        certificateOfStanding: !state.formationFormData.certificateOfStanding
+        certificateOfStanding: !state.formationFormData.certificateOfStanding,
       };
     });
   };
@@ -47,7 +47,7 @@ export const FormationChooseDocuments = (): ReactElement => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        certifiedCopyOfFormationDocument: !state.formationFormData.certifiedCopyOfFormationDocument
+        certifiedCopyOfFormationDocument: !state.formationFormData.certifiedCopyOfFormationDocument,
       };
     });
   };

@@ -4,7 +4,7 @@ import {
   generatev75User,
   v75ProfileData,
   v75TaskProgress,
-  v75UserData
+  v75UserData,
 } from "./v75_fix_trade_name_operating_phase";
 import { migrate_v75_to_v76 } from "./v76_fix_trade_name_operating_phase_round_2";
 
@@ -13,7 +13,7 @@ describe("migrate_v75_to_v76", () => {
     const profileData = generatev75ProfileData({
       businessPersona: "STARTING",
       operatingPhase: "NEEDS_TO_FORM",
-      legalStructureId: "general-partnership"
+      legalStructureId: "general-partnership",
     });
     const taskProgress = {} as Record<string, v75TaskProgress>;
     const v75 = makeUserData(profileData, taskProgress);
@@ -26,7 +26,7 @@ describe("migrate_v75_to_v76", () => {
     const profileData = generatev75ProfileData({
       businessPersona: "STARTING",
       operatingPhase: "NEEDS_TO_FORM",
-      legalStructureId: "limited-liability-company"
+      legalStructureId: "limited-liability-company",
     });
     const taskProgress = {} as Record<string, v75TaskProgress>;
     const v75 = makeUserData(profileData, taskProgress);
@@ -52,16 +52,16 @@ const makeUserData = (
       roadmapOpenSteps: [],
       hiddenCertificationIds: [],
       hiddenFundingIds: [],
-      visibleRoadmapSidebarCards: []
+      visibleRoadmapSidebarCards: [],
     },
     taxFilingData: {
-      filings: []
+      filings: [],
     },
     formationData: {
       formationFormData: generatev75FormationFormData({}),
       formationResponse: undefined,
-      getFilingResponse: undefined
+      getFilingResponse: undefined,
     },
-    version: 75
+    version: 75,
   };
 };

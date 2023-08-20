@@ -6,7 +6,7 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import {
   getIsApplicableToFunctionByFieldName,
-  getResetIndustrySpecificData
+  getResetIndustrySpecificData,
 } from "@/lib/domain-logic/essentialQuestions";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
@@ -17,7 +17,7 @@ import {
   Industries,
   Industry,
   isIndustryIdGeneric,
-  LookupIndustryById
+  LookupIndustryById,
 } from "@businessnjgovnavigator/shared";
 import { Autocomplete, createFilterOptions, FilterOptionsState, TextField } from "@mui/material";
 import { orderBy } from "lodash";
@@ -40,7 +40,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
     getProfileConfig({
       config: Config,
       persona: state.flow,
-      fieldName: "industryId"
+      fieldName: "industryId",
     });
 
   const IndustriesOrdered: Industry[] = orderBy(
@@ -78,7 +78,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       nonEssentialRadioAnswers: {},
       industryId: industryId,
       sectorId: newSector,
-      naicsCode: state.profileData.industryId === industryId ? state.profileData.naicsCode : ""
+      naicsCode: state.profileData.industryId === industryId ? state.profileData.naicsCode : "",
     });
   };
 
@@ -98,7 +98,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       matchFrom: "any",
       stringify: (option: Industry) => {
         return `${option.name} ${option.description} ${option.additionalSearchTerms}`;
-      }
+      },
     });
     const industriesList = filterOptions(options, state);
 
@@ -165,7 +165,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
               inputProps={{
                 "aria-label": "Industry",
                 "data-testid": "industryid",
-                ...params.inputProps
+                ...params.inputProps,
               }}
               value={searchText}
               onChange={handleSearchBoxChange}

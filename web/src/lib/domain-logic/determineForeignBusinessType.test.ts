@@ -16,7 +16,7 @@ describe("determineForeignBusinessType", () => {
         "employeeOrContractorInNJ",
         "revenueInNJ",
         "transactionsInNJ",
-        "employeesInNJ"
+        "employeesInNJ",
       ])
     ).toEqual("NEXUS");
   });
@@ -56,7 +56,7 @@ describe("determineForeignBusinessType", () => {
         "companyOperatedVehiclesInNJ",
         "revenueInNJ",
         "transactionsInNJ",
-        "employeesInNJ"
+        "employeesInNJ",
       ])
     ).toEqual("NEXUS");
   });

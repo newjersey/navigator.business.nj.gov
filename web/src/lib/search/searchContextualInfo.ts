@@ -8,7 +8,7 @@ export const searchContextualInfo = (contextualInfo: ContextualInfoFile[], term:
   for (const info of contextualInfo) {
     let match: Match = {
       filename: info.filename,
-      snippets: []
+      snippets: [],
     };
 
     const content = info.markdown.toLowerCase();
@@ -19,7 +19,7 @@ export const searchContextualInfo = (contextualInfo: ContextualInfoFile[], term:
 
     const labelledTexts = [
       { content: filename, label: "Filename" },
-      { content: header, label: "Header" }
+      { content: header, label: "Header" },
     ];
 
     match = findMatchInBlock(blockTexts, term, match);

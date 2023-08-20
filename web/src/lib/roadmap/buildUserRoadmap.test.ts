@@ -8,17 +8,17 @@ import {
   generateMunicipality,
   generateMunicipalityDetail,
   generateProfileData,
-  Industries
+  Industries,
 } from "@businessnjgovnavigator/shared";
 import * as fetchMunicipalityById from "@businessnjgovnavigator/shared/domain-logic/fetchMunicipalityById";
 import {
   createEmptyProfileData,
   emptyIndustrySpecificData,
-  ProfileData
+  ProfileData,
 } from "@businessnjgovnavigator/shared/profileData";
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionAddOn", () => ({
-  getNonEssentialQuestionAddOn: jest.fn()
+  getNonEssentialQuestionAddOn: jest.fn(),
 }));
 
 const mockGetNonEssentialQuestionAddOn = (
@@ -37,14 +37,14 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
       nonEssentialQuestionsIds: ["non-essential-question-1", "non-essential-question-2"],
       naicsCodes: "",
       isEnabled: true,
-      industryOnboardingQuestions: {}
-    }
-  ]
+      industryOnboardingQuestions: {},
+    },
+  ],
 }));
 
 jest.mock("@/lib/roadmap/roadmapBuilder", () => ({ buildRoadmap: jest.fn() }));
 jest.mock("@businessnjgovnavigator/shared/domain-logic/fetchMunicipalityById", () => ({
-  fetchMunicipalityById: jest.fn()
+  fetchMunicipalityById: jest.fn(),
 }));
 
 const mockRoadmapBuilder = (roadmapBuilderModule as jest.Mocked<typeof roadmapBuilderModule>).buildRoadmap;
@@ -56,7 +56,7 @@ const generateStartingProfile = (overrides: Partial<ProfileData>): ProfileData =
   return generateProfileData({
     businessPersona: "STARTING",
     ...emptyIndustrySpecificData,
-    ...overrides
+    ...overrides,
   });
 };
 
@@ -66,7 +66,7 @@ const createEmptyNexusProfile = (overrides: Partial<ProfileData>): ProfileData =
     businessPersona: "FOREIGN",
     foreignBusinessType: "NEXUS",
     ...emptyIndustrySpecificData,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -81,7 +81,7 @@ describe("buildUserRoadmap", () => {
       const profileData: ProfileData = {
         ...createEmptyProfileData(),
         businessPersona: "FOREIGN",
-        foreignBusinessType: "REMOTE_WORKER"
+        foreignBusinessType: "REMOTE_WORKER",
       };
 
       await buildUserRoadmap(profileData);
@@ -92,7 +92,7 @@ describe("buildUserRoadmap", () => {
       const profileData: ProfileData = {
         ...createEmptyProfileData(),
         businessPersona: "FOREIGN",
-        foreignBusinessType: "REMOTE_SELLER"
+        foreignBusinessType: "REMOTE_SELLER",
       };
 
       await buildUserRoadmap(profileData);
@@ -126,7 +126,7 @@ describe("buildUserRoadmap", () => {
     it("removes register-for-ein task from roadmap for nexus", async () => {
       mockRoadmapBuilder.mockResolvedValue(
         generateRoadmap({
-          tasks: [generateTask({ id: "register-for-ein" })]
+          tasks: [generateTask({ id: "register-for-ein" })],
         })
       );
 
@@ -138,7 +138,7 @@ describe("buildUserRoadmap", () => {
     it("removes business-plan task from roadmap for nexus", async () => {
       mockRoadmapBuilder.mockResolvedValue(
         generateRoadmap({
-          tasks: [generateTask({ id: "business-plan" })]
+          tasks: [generateTask({ id: "business-plan" })],
         })
       );
 
@@ -183,7 +183,7 @@ describe("buildUserRoadmap", () => {
       const profileData = createEmptyNexusProfile({
         industryId: "generic",
         homeBasedBusiness: false,
-        nexusLocationInNewJersey: false
+        nexusLocationInNewJersey: false,
       });
       await buildUserRoadmap(profileData);
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
@@ -193,7 +193,7 @@ describe("buildUserRoadmap", () => {
       const profileData = createEmptyNexusProfile({
         industryId: "generic",
         homeBasedBusiness: false,
-        nexusLocationInNewJersey: false
+        nexusLocationInNewJersey: false,
       });
       await buildUserRoadmap(profileData);
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
@@ -203,7 +203,7 @@ describe("buildUserRoadmap", () => {
       const profileData = createEmptyNexusProfile({
         industryId: "generic",
         homeBasedBusiness: false,
-        nexusLocationInNewJersey: undefined
+        nexusLocationInNewJersey: undefined,
       });
       await buildUserRoadmap(profileData);
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("permanent-location-business");
@@ -213,7 +213,7 @@ describe("buildUserRoadmap", () => {
       const profileData = createEmptyNexusProfile({
         industryId: "generic",
         homeBasedBusiness: false,
-        nexusLocationInNewJersey: true
+        nexusLocationInNewJersey: true,
       });
       await buildUserRoadmap(profileData);
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("permanent-location-business");
@@ -308,7 +308,7 @@ describe("buildUserRoadmap", () => {
             const profileData: ProfileData = {
               ...createEmptyProfileData(),
               industryId: industry.id,
-              providesStaffingService: true
+              providesStaffingService: true,
             };
 
             await buildUserRoadmap(profileData);
@@ -320,7 +320,7 @@ describe("buildUserRoadmap", () => {
             const profileData: ProfileData = {
               ...createEmptyProfileData(),
               industryId: industry.id,
-              providesStaffingService: false
+              providesStaffingService: false,
             };
 
             await buildUserRoadmap(profileData);
@@ -335,7 +335,7 @@ describe("buildUserRoadmap", () => {
           const profileData: ProfileData = {
             ...createEmptyProfileData(),
             industryId: "interior-designer",
-            certifiedInteriorDesigner: false
+            certifiedInteriorDesigner: false,
           };
 
           await buildUserRoadmap(profileData);
@@ -347,7 +347,7 @@ describe("buildUserRoadmap", () => {
           const profileData: ProfileData = {
             ...createEmptyProfileData(),
             industryId: "interior-designer",
-            certifiedInteriorDesigner: true
+            certifiedInteriorDesigner: true,
           };
 
           await buildUserRoadmap(profileData);
@@ -361,7 +361,7 @@ describe("buildUserRoadmap", () => {
           await buildUserRoadmap(
             generateStartingProfile({
               realEstateAppraisalManagement: true,
-              industryId: "real-estate-appraisals"
+              industryId: "real-estate-appraisals",
             })
           );
           expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain(
@@ -373,7 +373,7 @@ describe("buildUserRoadmap", () => {
           await buildUserRoadmap(
             generateStartingProfile({
               realEstateAppraisalManagement: false,
-              industryId: "real-estate-appraisals"
+              industryId: "real-estate-appraisals",
             })
           );
           expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("real-estate-appraiser");
@@ -383,7 +383,7 @@ describe("buildUserRoadmap", () => {
           await buildUserRoadmap(
             generateStartingProfile({
               realEstateAppraisalManagement: false,
-              industryId: "generic"
+              industryId: "generic",
             })
           );
           expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("real-estate-appraiser");
@@ -508,8 +508,8 @@ describe("buildUserRoadmap", () => {
           generateStartingProfile({
             industryId: "non-essential-question-industry",
             nonEssentialRadioAnswers: {
-              "non-essential-question-1": true
-            }
+              "non-essential-question-1": true,
+            },
           })
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("non-essential-add-on-1");
@@ -524,8 +524,8 @@ describe("buildUserRoadmap", () => {
             industryId: "non-essential-question-industry",
             nonEssentialRadioAnswers: {
               "non-essential-question-1": true,
-              "non-essential-question-2": false
-            }
+              "non-essential-question-2": false,
+            },
           })
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("non-essential-add-on-2");
@@ -537,8 +537,8 @@ describe("buildUserRoadmap", () => {
           generateStartingProfile({
             industryId: "non-essential-question-industry",
             nonEssentialRadioAnswers: {
-              "question-not-contained-in-industry": true
-            }
+              "question-not-contained-in-industry": true,
+            },
           })
         );
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(
@@ -557,7 +557,7 @@ describe("buildUserRoadmap", () => {
           townName: "Cool Town",
           townDisplayName: "Cool Town (NJ)",
           countyClerkWebsite: "www.cooltownclerk.com",
-          countyClerkPhone: "123-456-7890"
+          countyClerkPhone: "123-456-7890",
         })
       );
 
@@ -571,9 +571,9 @@ describe("buildUserRoadmap", () => {
               contentMd:
                 "You can find your city or town clerk through either " +
                 "the [${municipality} website](${municipalityWebsite}) or by contacting " +
-                "your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}."
-            })
-          ]
+                "your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.",
+            }),
+          ],
         })
       );
 
@@ -600,9 +600,9 @@ describe("buildUserRoadmap", () => {
               contentMd:
                 "You can find your city or town clerk through either " +
                 "the [${municipality} website](${municipalityWebsite}) or by contacting " +
-                "your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}."
-            })
-          ]
+                "your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.",
+            }),
+          ],
         })
       );
 
@@ -624,7 +624,7 @@ describe("buildUserRoadmap", () => {
     it("replaces placeholder with user NAICS code", async () => {
       mockRoadmapBuilder.mockResolvedValue(
         generateRoadmap({
-          tasks: [generateTask({ contentMd: "NAICS code ${naicsCode}" })]
+          tasks: [generateTask({ contentMd: "NAICS code ${naicsCode}" })],
         })
       );
 
@@ -646,14 +646,14 @@ describe("buildUserRoadmap", () => {
         generateRoadmap({
           tasks: [
             generateTask({ contentMd: "NAICS code ${naicsCode}" }),
-            generateTask({ contentMd: "Visit the ${municipality} Website" })
-          ]
+            generateTask({ contentMd: "Visit the ${municipality} Website" }),
+          ],
         })
       );
 
       const profileData = generateStartingProfile({
         naicsCode: "123456",
-        municipality: generateMunicipality({ id: "1234" })
+        municipality: generateMunicipality({ id: "1234" }),
       });
       const roadmap = await buildUserRoadmap(profileData);
 
@@ -668,7 +668,7 @@ describe("buildUserRoadmap", () => {
     it("replaces placeholder with empty text if user has no NAICS code", async () => {
       mockRoadmapBuilder.mockResolvedValue(
         generateRoadmap({
-          tasks: [generateTask({ contentMd: "NAICS code ${naicsCode}" })]
+          tasks: [generateTask({ contentMd: "NAICS code ${naicsCode}" })],
         })
       );
 

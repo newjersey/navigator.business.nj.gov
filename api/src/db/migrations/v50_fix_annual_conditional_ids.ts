@@ -25,13 +25,13 @@ export const migrate_v49_to_v50 = (v49Data: v49UserData): v50UserData => {
         taskProgress: {
           ...v49Data.taskProgress,
           "annual-license-cannabis": cannabisTaskStatus,
-          "conditional-permit-cannabis": "NOT_STARTED"
+          "conditional-permit-cannabis": "NOT_STARTED",
         },
-        version: 50
+        version: 50,
       }
     : {
         ...v49Data,
-        version: 50
+        version: 50,
       };
 };
 
@@ -174,7 +174,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v50FormationData {
@@ -267,7 +267,7 @@ export const generatev50User = (overrides: Partial<v50BusinessUser>): v50Busines
     userTesting: false,
     externalStatus: {},
     abExperience: "ExperienceA",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -284,7 +284,7 @@ export const generatev50ProfileData = (overrides: Partial<v50ProfileData>): v50P
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     liquorLicense: true,
     homeBasedBusiness: true,
@@ -299,7 +299,7 @@ export const generatev50ProfileData = (overrides: Partial<v50ProfileData>): v50P
     taxPin: undefined,
     sectorId: undefined,
     cannabisMicrobusiness: undefined,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -334,6 +334,6 @@ export const generatev50FormationFormData = (
     contactFirstName: "",
     contactLastName: "",
     contactPhoneNumber: "",
-    ...overrides
+    ...overrides,
   };
 };

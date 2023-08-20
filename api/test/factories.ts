@@ -3,7 +3,7 @@ import {
   NewsletterResponse,
   NewsletterStatus,
   newsletterStatusList,
-  UserTestingResponse
+  UserTestingResponse,
 } from "@shared/businessUser";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
 import {
@@ -11,7 +11,7 @@ import {
   FormationData,
   FormationFormData,
   InputFile,
-  PublicFilingLegalType
+  PublicFilingLegalType,
 } from "@shared/formationData";
 import { randomInt, randomIntFromInterval } from "@shared/intHelpers";
 import { LicenseData, LicenseEntity } from "@shared/license";
@@ -24,7 +24,7 @@ import {
   generateNameAndAddress,
   generateProfileData,
   generateUserDataForBusiness,
-  randomPublicFilingLegalType
+  randomPublicFilingLegalType,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
 import { SelfRegResponse, TaxFilingResult } from "src/domain/types";
@@ -47,7 +47,7 @@ export const generateTaxFilingResult = (overrides: Partial<TaxFilingResult>): Ta
     Content: `some-content-${randomInt()}`,
     Id: `some-Id-${randomInt()}`,
     Values: generateTaxFilingDates(randomIntFromInterval("4", "12")),
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -58,7 +58,7 @@ export const generateFormationUserData = (
 ): UserData => {
   const _profileData = generateProfileData({
     legalStructureId: randomPublicFilingLegalType(),
-    ...profileData
+    ...profileData,
   });
   const legalStructureId = castPublicFilingLegalTypeToFormationType(
     _profileData.legalStructureId as PublicFilingLegalType,
@@ -67,9 +67,9 @@ export const generateFormationUserData = (
   const _formationData = generateFormationData(
     {
       formationFormData: generateFormationFormData(formationFormData, {
-        legalStructureId
+        legalStructureId,
       }),
-      ...formationData
+      ...formationData,
     },
     legalStructureId
   );
@@ -84,7 +84,7 @@ export const generateInputFile = (overrides: Partial<InputFile>): InputFile => {
     fileType: randomElementFromArray(["PNG", "PDF"]),
     sizeInBytes: randomInt(),
     filename: `some-filename-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -106,7 +106,7 @@ export const generateLicenseEntity = (overrides: Partial<LicenseEntity>): Licens
     checklistItem: `some-item-${randomInt()}`,
     checkoffStatus: "Completed",
     dateThisStatus: `20100430 000000.000${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -117,7 +117,7 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
     items: [generateLicenseStatusItem({})],
     status: randomElementFromArray(["PENDING", "ACTIVE", "EXPIRED"]),
     lastUpdatedISO: getCurrentDateISOString(),
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -125,7 +125,7 @@ export const generateSelfRegResponse = (overrides: Partial<SelfRegResponse>): Se
   return {
     myNJUserKey: `some-mynj-key-${randomInt()}`,
     authRedirectURL: `some-redirect-url-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -145,7 +145,7 @@ export const generateExternalStatus = (overrides: Partial<ExternalStatus>): Exte
   return {
     newsletter: generateNewsletterResponse({}),
     userTesting: generateUserTestingResponse({}),
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -154,7 +154,7 @@ export const generateNewsletterResponse = (overrides: Partial<NewsletterResponse
   return {
     success: !failed,
     status: randomNewsletterStatus(failed),
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -163,6 +163,6 @@ export const generateUserTestingResponse = (overrides: Partial<UserTestingRespon
   return {
     success: !failed,
     status: failed ? "CONNECTION_ERROR" : "SUCCESS",
-    ...overrides
+    ...overrides,
   };
 };

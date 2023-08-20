@@ -49,7 +49,7 @@ export const SnackbarAlert = (props: Props): ReactElement => {
                 position: "absolute",
                 right: 0,
                 top: 15,
-                color: "#757575"
+                color: "#757575",
               }}
             >
               <Icon className="usa-icon--size-3">close</Icon>

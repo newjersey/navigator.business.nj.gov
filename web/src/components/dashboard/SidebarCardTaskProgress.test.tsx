@@ -21,7 +21,7 @@ describe("<SidebarCardTaskProgress />", () => {
 
   it("inserts users percentDone into header text", () => {
     const card = generateSidebarCardContent({
-      header: "Hey kid, you're ${percentDone} done"
+      header: "Hey kid, you're ${percentDone} done",
     });
 
     useMockRoadmap(
@@ -30,8 +30,8 @@ describe("<SidebarCardTaskProgress />", () => {
         tasks: [
           generateTask({ id: "task1", stepNumber: 1 }),
           generateTask({ id: "task2", stepNumber: 1 }),
-          generateTask({ id: "task3", stepNumber: 2 })
-        ]
+          generateTask({ id: "task3", stepNumber: 2 }),
+        ],
       })
     );
 
@@ -40,8 +40,8 @@ describe("<SidebarCardTaskProgress />", () => {
         taskProgress: {
           task1: "COMPLETED",
           task2: "IN_PROGRESS",
-          "some-other-task": "NOT_STARTED"
-        }
+          "some-other-task": "NOT_STARTED",
+        },
       })
     );
     render(<SidebarCardTaskProgress card={card} />);
@@ -57,23 +57,23 @@ describe("<SidebarCardTaskProgress />", () => {
             generateTask({ required: true, id: "requiredTask1", stepNumber: 1 }),
             generateTask({ required: false, id: "optionalTask1", stepNumber: 1 }),
             generateTask({ required: true, id: "requiredTask2", stepNumber: 2 }),
-            generateTask({ required: false, id: "optionalTask2", stepNumber: 2 })
-          ]
+            generateTask({ required: false, id: "optionalTask2", stepNumber: 2 }),
+          ],
         })
       );
     });
 
     it("uses plural phrase when multiple optional tasks are incomplete", () => {
       const card = generateSidebarCardContent({
-        contentMd: "You have ${numberOptionalTasks} left"
+        contentMd: "You have ${numberOptionalTasks} left",
       });
 
       useMockBusiness(
         generateBusiness({
           taskProgress: {
             optionalTask1: "IN_PROGRESS",
-            optionalTask2: "NOT_STARTED"
-          }
+            optionalTask2: "NOT_STARTED",
+          },
         })
       );
 
@@ -84,15 +84,15 @@ describe("<SidebarCardTaskProgress />", () => {
 
     it("uses singular phrase when a single optional task is incomplete", () => {
       const card = generateSidebarCardContent({
-        contentMd: "You have ${numberOptionalTasks} left"
+        contentMd: "You have ${numberOptionalTasks} left",
       });
 
       useMockBusiness(
         generateBusiness({
           taskProgress: {
             optionalTask1: "COMPLETED",
-            optionalTask2: "NOT_STARTED"
-          }
+            optionalTask2: "NOT_STARTED",
+          },
         })
       );
 
@@ -104,15 +104,15 @@ describe("<SidebarCardTaskProgress />", () => {
 
     it("uses plural phrase when multiple required tasks are incomplete", () => {
       const card = generateSidebarCardContent({
-        contentMd: "You have ${numberRequiredTasks} left"
+        contentMd: "You have ${numberRequiredTasks} left",
       });
 
       useMockBusiness(
         generateBusiness({
           taskProgress: {
             requiredTask1: "IN_PROGRESS",
-            requiredTask2: "NOT_STARTED"
-          }
+            requiredTask2: "NOT_STARTED",
+          },
         })
       );
 
@@ -124,15 +124,15 @@ describe("<SidebarCardTaskProgress />", () => {
 
     it("uses singular phrase when a single required task is incomplete", () => {
       const card = generateSidebarCardContent({
-        contentMd: "You have ${numberRequiredTasks} left"
+        contentMd: "You have ${numberRequiredTasks} left",
       });
 
       useMockBusiness(
         generateBusiness({
           taskProgress: {
             requiredTask1: "COMPLETED",
-            requiredTask2: "NOT_STARTED"
-          }
+            requiredTask2: "NOT_STARTED",
+          },
         })
       );
 
@@ -144,7 +144,7 @@ describe("<SidebarCardTaskProgress />", () => {
 
     it("uses plural phrases when zero tasks are incomplete", () => {
       const card = generateSidebarCardContent({
-        contentMd: "You have ${numberOptionalTasks} and ${numberRequiredTasks} left"
+        contentMd: "You have ${numberOptionalTasks} and ${numberRequiredTasks} left",
       });
 
       useMockBusiness(
@@ -153,17 +153,17 @@ describe("<SidebarCardTaskProgress />", () => {
             optionalTask1: "COMPLETED",
             optionalTask2: "COMPLETED",
             requiredTask1: "COMPLETED",
-            requiredTask2: "COMPLETED"
-          }
+            requiredTask2: "COMPLETED",
+          },
         })
       );
 
       render(<SidebarCardTaskProgress card={card} />);
       const requiredExpectedPhrase = templateEval(Config.taskProgressCard.requiredTasksPlural, {
-        numTasks: "0"
+        numTasks: "0",
       });
       const optionalExpectedPhrase = templateEval(Config.taskProgressCard.optionalTasksPlural, {
-        numTasks: "0"
+        numTasks: "0",
       });
 
       expect(
@@ -180,14 +180,14 @@ describe("<SidebarCardTaskProgress />", () => {
   it("shows completed header if all tasks are completed", () => {
     const card = generateSidebarCardContent({
       header: "Hey kid, you're ${percentDone} done",
-      completedHeader: "All done!"
+      completedHeader: "All done!",
     });
 
     useMockBusiness(generateBusiness({ taskProgress: { Task1: "COMPLETED" } }));
     useMockRoadmap(
       generateRoadmap({
         steps: [generateStep({ stepNumber: 1 })],
-        tasks: [generateTask({ stepNumber: 1, id: "Task1" })]
+        tasks: [generateTask({ stepNumber: 1, id: "Task1" })],
       })
     );
     render(<SidebarCardTaskProgress card={card} />);
@@ -198,13 +198,13 @@ describe("<SidebarCardTaskProgress />", () => {
   it("displays not started header if no tasks are completed", () => {
     const card = generateSidebarCardContent({
       header: "Hey kid, you're ${percentDone} done",
-      notStartedHeader: "Get to work"
+      notStartedHeader: "Get to work",
     });
     useMockBusiness(generateBusiness({ taskProgress: {} }));
     useMockRoadmap(
       generateRoadmap({
         steps: [generateStep({ stepNumber: 1 })],
-        tasks: [generateTask({ stepNumber: 1, id: "Task1" })]
+        tasks: [generateTask({ stepNumber: 1, id: "Task1" })],
       })
     );
     render(<SidebarCardTaskProgress card={card} />);

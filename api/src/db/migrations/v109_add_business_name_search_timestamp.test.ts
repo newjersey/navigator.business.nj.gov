@@ -1,6 +1,6 @@
 import {
   generateV108FormationData,
-  generateV108UserData
+  generateV108UserData,
 } from "./v108_add_business_name_search_to_formation_data";
 import { migrate_v108_to_v109 } from "./v109_add_business_name_search_timestamp";
 
@@ -12,12 +12,12 @@ describe("migrate_v108_to_v109", () => {
           businessNameSearch: {
             businessNameAvailability: {
               status: "AVAILABLE",
-              similarNames: []
-            }
-          }
+              similarNames: [],
+            },
+          },
         },
         "LLC"
-      )
+      ),
     });
     const v109 = migrate_v108_to_v109(v108);
     expect(v109).toEqual({
@@ -26,21 +26,21 @@ describe("migrate_v108_to_v109", () => {
         ...v108.formationData,
         businessNameAvailability: {
           ...v108.formationData.businessNameSearch?.businessNameAvailability,
-          lastUpdatedTimeStamp: "2000-01-01T00:00:00.000Z"
-        }
+          lastUpdatedTimeStamp: "2000-01-01T00:00:00.000Z",
+        },
       },
-      version: 109
+      version: 109,
     });
   });
 
   it("only updates the version number for users who don't have businessNameSearch data", () => {
     const v108 = generateV108UserData({
-      formationData: generateV108FormationData({ businessNameSearch: undefined }, "LLC")
+      formationData: generateV108FormationData({ businessNameSearch: undefined }, "LLC"),
     });
     const v109 = migrate_v108_to_v109(v108);
     expect(v109).toEqual({
       ...v108,
-      version: 109
+      version: 109,
     });
   });
 });

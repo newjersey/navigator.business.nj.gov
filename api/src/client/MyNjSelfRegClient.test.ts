@@ -16,7 +16,7 @@ describe("MyNJSelfRegClient", () => {
     serviceToken: "some-service-token",
     roleName: "some-role-name",
     serviceUrl: "some-service-url",
-    getCertHttpsAgent: jest.fn()
+    getCertHttpsAgent: jest.fn(),
   };
 
   beforeEach(() => {
@@ -51,7 +51,7 @@ describe("MyNJSelfRegClient", () => {
       url: config.serviceUrl,
       data: expectedBody,
       headers: { "Content-Type": "text/xml;encoding=UTF-8" },
-      httpsAgent: undefined
+      httpsAgent: undefined,
     });
   });
 
@@ -73,7 +73,7 @@ describe("MyNJSelfRegClient", () => {
       url: config.serviceUrl,
       data: expectedBody,
       headers: { "Content-Type": "text/xml;encoding=UTF-8" },
-      httpsAgent: undefined
+      httpsAgent: undefined,
     });
   });
 
@@ -82,7 +82,7 @@ describe("MyNJSelfRegClient", () => {
     const selfRegResponse = await client.grant(generateUser({}));
     expect(selfRegResponse).toEqual({
       authRedirectURL: "https://myt1.state.nj.us/signup/SignupLinked?oid=some-grant-stuff-here",
-      myNJUserKey: "123456"
+      myNJUserKey: "123456",
     });
   });
 
@@ -91,7 +91,7 @@ describe("MyNJSelfRegClient", () => {
     const selfRegResponse = await client.resume("some-id");
     expect(selfRegResponse).toEqual({
       authRedirectURL: "https://myt1.state.nj.us/signup/SignupLinked?oid=some-resume-stuff-here",
-      myNJUserKey: ""
+      myNJUserKey: "",
     });
   });
 

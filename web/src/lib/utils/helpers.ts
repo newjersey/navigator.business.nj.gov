@@ -6,7 +6,7 @@ import {
   Municipality,
   MunicipalityDetail,
   ProfileData,
-  UserData
+  UserData,
 } from "@businessnjgovnavigator/shared";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 import { useEffect, useRef } from "react";
@@ -130,13 +130,13 @@ export const OnboardingStatusLookup = (
     SUCCESS: {
       body: config.profileDefaults.default.successTextBody,
       header: config.profileDefaults.default.successTextHeader,
-      variant: "success"
+      variant: "success",
     },
     ERROR: {
       body: config.profileDefaults.default.errorTextBody,
       header: config.profileDefaults.default.errorTextHeader,
-      variant: "error"
-    }
+      variant: "error",
+    },
   };
 };
 
@@ -219,7 +219,7 @@ export const mapMunicipalityDetailToMunicipality = (municipalityDetail: Municipa
     displayName: municipalityDetail.townDisplayName,
     id: municipalityDetail.id,
     name: municipalityDetail.townName,
-    county: municipalityDetail.countyName
+    county: municipalityDetail.countyName,
   };
 };
 

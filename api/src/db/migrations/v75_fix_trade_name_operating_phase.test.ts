@@ -4,7 +4,7 @@ import {
   generatev74User,
   v74ProfileData,
   v74TaskProgress,
-  v74UserData
+  v74UserData,
 } from "./v74_change_register_for_taxes_foreign_id";
 import { migrate_v74_to_v75 } from "./v75_fix_trade_name_operating_phase";
 
@@ -13,7 +13,7 @@ describe("migrate_v74_to_v75", () => {
     const profileData = generatev74ProfileData({
       businessPersona: "STARTING",
       operatingPhase: "NEEDS_TO_FORM",
-      legalStructureId: "general-partnership"
+      legalStructureId: "general-partnership",
     });
     const taskProgress = {} as Record<string, v74TaskProgress>;
     const v74 = makeUserData(profileData, taskProgress);
@@ -26,7 +26,7 @@ describe("migrate_v74_to_v75", () => {
     const profileData = generatev74ProfileData({
       businessPersona: "STARTING",
       operatingPhase: "NEEDS_TO_FORM",
-      legalStructureId: "limited-liability-company"
+      legalStructureId: "limited-liability-company",
     });
     const taskProgress = {} as Record<string, v74TaskProgress>;
     const v74 = makeUserData(profileData, taskProgress);
@@ -52,16 +52,16 @@ const makeUserData = (
       roadmapOpenSteps: [],
       hiddenCertificationIds: [],
       hiddenFundingIds: [],
-      visibleRoadmapSidebarCards: []
+      visibleRoadmapSidebarCards: [],
     },
     taxFilingData: {
-      filings: []
+      filings: [],
     },
     formationData: {
       formationFormData: generatev74FormationFormData({}),
       formationResponse: undefined,
-      getFilingResponse: undefined
+      getFilingResponse: undefined,
     },
-    version: 74
+    version: 74,
   };
 };

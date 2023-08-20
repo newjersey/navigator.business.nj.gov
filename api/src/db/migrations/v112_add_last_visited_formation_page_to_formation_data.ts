@@ -22,9 +22,9 @@ export const migrate_v111_to_v112 = (v111Data: v111UserData): v112UserData => {
     ...v111Data,
     formationData: {
       ...v111Data.formationData,
-      lastVisitedPageIndex: 0
+      lastVisitedPageIndex: 0,
     },
-    version: 112
+    version: 112,
   };
 };
 
@@ -213,7 +213,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 type v112NameAvailabilityStatus =
@@ -340,7 +340,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -349,7 +349,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const lpBusinessSuffix = ["LIMITED PARTNERSHIP", "LP", "L.P."] as const;
@@ -364,7 +364,7 @@ const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 const foreignCorpBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
@@ -373,7 +373,7 @@ const AllBusinessSuffixes = [
   ...llcBusinessSuffix,
   ...llpBusinessSuffix,
   ...lpBusinessSuffix,
-  ...foreignCorpBusinessSuffix
+  ...foreignCorpBusinessSuffix,
 ] as const;
 
 type v112BusinessSuffix = (typeof AllBusinessSuffixes)[number];
@@ -415,7 +415,7 @@ export const generateV112User = (overrides: Partial<v112BusinessUser>): v112Busi
     myNJUserKey: undefined,
     intercomHash: undefined,
     abExperience: "ExperienceA",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -428,7 +428,7 @@ export const generateV112FormationMember = (overrides: Partial<v112FormationMemb
     addressState: { shortCode: "123", name: "new-jersey" },
     addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
     addressCountry: `some-county`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -438,7 +438,7 @@ export const generateV112Municipality = (overrides: Partial<v112Municipality>): 
     name: `some-name-${randomInt()}`,
     county: `some-county-${randomInt()}`,
     id: `some-id-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -447,7 +447,7 @@ export const allFormationLegalTypes = [
   "limited-liability-company",
   "limited-partnership",
   "c-corporation",
-  "s-corporation"
+  "s-corporation",
 ];
 
 export const generateV112FormationFormData = (
@@ -499,7 +499,7 @@ export const generateV112FormationFormData = (
     getDistributionTerms: `some-getDistributionTerms-text-${randomInt()}`,
     canMakeDistribution: !!(randomInt() % 2),
     makeDistributionTerms: `some-makeDistributionTerms-text-${randomInt()}`,
-    ...overrides
+    ...overrides,
   } as v112FormationFormData;
 };
 
@@ -523,7 +523,7 @@ export const generateV112IndustrySpecificData = (
     petCareHousing: undefined,
     isInterstateLogisticsApplicable: undefined,
     isInterstateMovingApplicable: undefined,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -540,7 +540,7 @@ export const generateV112ProfileData = (overrides: Partial<v112ProfileData>): v1
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     dateOfFormation: undefined,
     entityId: randomInt(10).toString(),
@@ -552,7 +552,7 @@ export const generateV112ProfileData = (overrides: Partial<v112ProfileData>): v1
     documents: {
       certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
       formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
-      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`
+      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
     },
     existingEmployees: randomInt(7).toString(),
     taxPin: randomInt(4).toString(),
@@ -564,7 +564,7 @@ export const generateV112ProfileData = (overrides: Partial<v112ProfileData>): v1
     needsNexusDbaName: true,
     nexusLocationInNewJersey: undefined,
     operatingPhase: "NEEDS_TO_FORM",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -576,7 +576,7 @@ export const generateV112TaxFilingData = (overrides: Partial<v112TaxFilingData>)
     lastUpdatedISO: undefined,
     registeredISO: undefined,
     filings: [],
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -591,7 +591,7 @@ export const generateV112FormationData = (
     completedFilingPayment: false,
     businessNameAvailability: undefined,
     lastVisitedPageIndex: 0,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -611,7 +611,7 @@ export const generateV112UserData = (overrides: Partial<v112UserData>): v112User
     lastUpdatedISO: "",
     taxFilingData: generateV112TaxFilingData({}),
     formationData: generateV112FormationData({}, profileData.legalStructureId ?? ""),
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -625,6 +625,6 @@ export const generateV112Preferences = (overrides: Partial<v112Preferences>): v1
     returnToLink: "",
     isCalendarFullView: true,
     isHideableRoadmapOpen: false,
-    ...overrides
+    ...overrides,
   };
 };

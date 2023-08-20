@@ -13,7 +13,7 @@ import {
   generateFormationSigner,
   generateFormationUSAddress,
   generateProfileData,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@shared/test";
 import axios from "axios";
 import { generateFormationUserData, generateInputFile } from "../../test/factories";
@@ -24,7 +24,7 @@ import {
   ApiFormationClient,
   ApiGetFilingResponse,
   ApiResponse,
-  ApiSubmission
+  ApiSubmission,
 } from "./ApiFormationClient";
 
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
@@ -40,9 +40,9 @@ const generateApiResponse = (overrides: Partial<ApiResponse>): ApiResponse => {
     PayUrl: {
       PortalPayId: `some-pay-id-${Math.random()}`,
       RedirectToUrl: `some-redirect-url-${Math.random()}`,
-      StatusCode: 1
+      StatusCode: 1,
     },
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -51,7 +51,7 @@ const generateApiError = (overrides: Partial<ApiError>): ApiError => {
     Valid: false,
     ErrorMessage: `some-error-message-${Math.random()}`,
     Name: `some-error-name-${Math.random()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -65,7 +65,7 @@ const stubGenerateApiResponse = (overrides: Partial<ApiGetFilingResponse>): ApiG
     FormationDoc: `some-FormationDoc-${Math.random()}`,
     StandingDoc: `some-StandingDoc-${Math.random()}`,
     CertifiedDoc: `some-CertifiedDoc-${Math.random()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -89,7 +89,7 @@ describe("ApiFormationClient", () => {
         mockAxios.post.mockResolvedValue({ data: stubResponse });
         const members = [
           generateFormationMember(generateFormationNJAddress({})),
-          generateFormationMember(generateFormationUSAddress({}))
+          generateFormationMember(generateFormationUSAddress({})),
         ];
 
         const formationFormData = generateFormationFormData(
@@ -101,19 +101,19 @@ describe("ApiFormationClient", () => {
               generateFormationSigner({
                 name: "faraz",
                 signature: true,
-                title: "Authorized Representative"
+                title: "Authorized Representative",
               }),
               generateFormationSigner({
                 name: "anne",
                 signature: true,
-                title: "Authorized Representative"
+                title: "Authorized Representative",
               }),
               generateFormationSigner({
                 name: "mike",
                 signature: false,
-                title: "Authorized Representative"
-              })
-            ]
+                title: "Authorized Representative",
+              }),
+            ],
           },
 
           { legalStructureId: "limited-liability-company" }
@@ -142,7 +142,7 @@ describe("ApiFormationClient", () => {
               City: formationFormData.addressMunicipality?.name,
               StateAbbreviation: "NJ",
               ZipCode: formationFormData.addressZipCode,
-              Email: userData.user.email
+              Email: userData.user.email,
             },
             Formation: {
               Gov2GoAnnualReports: formationFormData.annualReportNotification,
@@ -168,11 +168,11 @@ describe("ApiFormationClient", () => {
                   City: formationFormData.addressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: formationFormData.addressZipCode,
-                  Country: "US"
-                }
+                  Country: "US",
+                },
               },
               AdditionalLimitedLiabilityCompany: {
-                OtherProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }]
+                OtherProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }],
               },
               CompanyProfit: "Profit",
               RegisteredAgent: {
@@ -185,8 +185,8 @@ describe("ApiFormationClient", () => {
                   City: formationFormData.agentOfficeAddressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: formationFormData.agentOfficeAddressZipCode,
-                  Country: "US"
-                }
+                  Country: "US",
+                },
               },
               Members: [
                 {
@@ -197,8 +197,8 @@ describe("ApiFormationClient", () => {
                     City: members[0].addressMunicipality?.name,
                     State: "New Jersey",
                     Zipcode: members[0].addressZipCode,
-                    Country: "US"
-                  }
+                    Country: "US",
+                  },
                 },
                 {
                   Name: members[1].name,
@@ -208,31 +208,31 @@ describe("ApiFormationClient", () => {
                     City: members[1].addressCity,
                     State: members[1].addressState?.name,
                     Zipcode: members[1].addressZipCode,
-                    Country: "US"
-                  }
-                }
+                    Country: "US",
+                  },
+                },
               ],
               Signers: [
                 {
                   Name: "faraz",
                   Title: "Authorized Representative",
-                  Signed: true
+                  Signed: true,
                 },
                 {
                   Name: "anne",
                   Title: "Authorized Representative",
-                  Signed: true
+                  Signed: true,
                 },
                 {
                   Name: "mike",
                   Title: "Authorized Representative",
-                  Signed: false
-                }
+                  Signed: false,
+                },
               ],
               ContactFirstName: formationFormData.contactFirstName,
               ContactLastName: formationFormData.contactLastName,
-              ContactPhoneNumber: formationFormData.contactPhoneNumber
-            }
+              ContactPhoneNumber: formationFormData.contactPhoneNumber,
+            },
           },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -252,19 +252,19 @@ describe("ApiFormationClient", () => {
               generateFormationSigner({
                 name: "faraz",
                 signature: true,
-                title: "Authorized Representative"
+                title: "Authorized Representative",
               }),
               generateFormationSigner({
                 name: "anne",
                 signature: true,
-                title: "General Partner"
+                title: "General Partner",
               }),
               generateFormationSigner({
                 name: "mike",
                 signature: false,
-                title: "Authorized Representative"
-              })
-            ]
+                title: "Authorized Representative",
+              }),
+            ],
           },
           { legalStructureId: "foreign-limited-liability-company" }
         );
@@ -292,7 +292,7 @@ describe("ApiFormationClient", () => {
               City: "",
               StateAbbreviation: undefined,
               ZipCode: "",
-              Email: userData.user.email
+              Email: userData.user.email,
             },
             Formation: {
               Gov2GoAnnualReports: formationFormData.annualReportNotification,
@@ -325,8 +325,8 @@ describe("ApiFormationClient", () => {
                   Zipcode: formationFormData.addressZipCode,
                   Country: formationFormData.addressCountry,
                   Province:
-                    formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince
-                }
+                    formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince,
+                },
               },
               CompanyProfit: "Profit",
               RegisteredAgent: {
@@ -339,31 +339,31 @@ describe("ApiFormationClient", () => {
                   City: formationFormData.agentOfficeAddressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: formationFormData.agentOfficeAddressZipCode,
-                  Country: "US"
-                }
+                  Country: "US",
+                },
               },
               Members: undefined,
               Signers: [
                 {
                   Name: "faraz",
                   Title: "Authorized Representative",
-                  Signed: true
+                  Signed: true,
                 },
                 {
                   Name: "anne",
                   Title: "General Partner",
-                  Signed: true
+                  Signed: true,
                 },
                 {
                   Name: "mike",
                   Title: "Authorized Representative",
-                  Signed: false
-                }
+                  Signed: false,
+                },
               ],
               ContactFirstName: formationFormData.contactFirstName,
               ContactLastName: formationFormData.contactLastName,
-              ContactPhoneNumber: formationFormData.contactPhoneNumber
-            }
+              ContactPhoneNumber: formationFormData.contactPhoneNumber,
+            },
           },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -380,19 +380,19 @@ describe("ApiFormationClient", () => {
             name: "faraz",
             signature: true,
             title: "Incorporator",
-            ...generateFormationNJAddress({})
+            ...generateFormationNJAddress({}),
           }),
           generateFormationIncorporator({
             name: "anne",
             signature: false,
             title: "Incorporator",
-            ...generateFormationUSAddress({})
-          })
+            ...generateFormationUSAddress({}),
+          }),
         ];
 
         const members = [
           generateFormationMember(generateFormationNJAddress({})),
-          generateFormationMember(generateFormationUSAddress({}))
+          generateFormationMember(generateFormationUSAddress({})),
         ];
 
         const formationFormData = generateFormationFormData(
@@ -401,7 +401,7 @@ describe("ApiFormationClient", () => {
             agentNumberOrManual: "MANUAL_ENTRY",
             provisions: ["provision1", "provision2"],
             incorporators,
-            members
+            members,
           },
 
           { legalStructureId }
@@ -430,7 +430,7 @@ describe("ApiFormationClient", () => {
               City: formationFormData.addressMunicipality?.name,
               StateAbbreviation: formationFormData.addressState?.shortCode,
               ZipCode: formationFormData.addressZipCode,
-              Email: userData.user.email
+              Email: userData.user.email,
             },
             Formation: {
               Gov2GoAnnualReports: formationFormData.annualReportNotification,
@@ -457,11 +457,11 @@ describe("ApiFormationClient", () => {
                   City: formationFormData.addressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: formationFormData.addressZipCode,
-                  Country: "US"
-                }
+                  Country: "US",
+                },
               },
               AdditionalCCorpOrProfessionalCorp: {
-                AdditionalProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }]
+                AdditionalProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }],
               },
               CompanyProfit: "Profit",
               MemberAttestation: true,
@@ -475,8 +475,8 @@ describe("ApiFormationClient", () => {
                   City: formationFormData.agentOfficeAddressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: formationFormData.agentOfficeAddressZipCode,
-                  Country: "US"
-                }
+                  Country: "US",
+                },
               },
               Members: [
                 {
@@ -487,8 +487,8 @@ describe("ApiFormationClient", () => {
                     City: members[0].addressMunicipality?.name,
                     State: "New Jersey",
                     Zipcode: members[0].addressZipCode,
-                    Country: "US"
-                  }
+                    Country: "US",
+                  },
                 },
                 {
                   Name: members[1].name,
@@ -498,9 +498,9 @@ describe("ApiFormationClient", () => {
                     City: members[1].addressCity,
                     State: members[1].addressState?.name,
                     Zipcode: members[1].addressZipCode,
-                    Country: "US"
-                  }
-                }
+                    Country: "US",
+                  },
+                },
               ],
               Incorporators: [
                 {
@@ -511,8 +511,8 @@ describe("ApiFormationClient", () => {
                     City: incorporators[0].addressMunicipality?.name,
                     State: "New Jersey",
                     Zipcode: incorporators[0].addressZipCode,
-                    Country: "US"
-                  }
+                    Country: "US",
+                  },
                 },
                 {
                   Name: "anne",
@@ -522,26 +522,26 @@ describe("ApiFormationClient", () => {
                     City: incorporators[1].addressCity,
                     State: incorporators[1].addressState?.name,
                     Zipcode: incorporators[1].addressZipCode,
-                    Country: "US"
-                  }
-                }
+                    Country: "US",
+                  },
+                },
               ],
               Signers: [
                 {
                   Name: "faraz",
                   Title: "Incorporator",
-                  Signed: true
+                  Signed: true,
                 },
                 {
                   Name: "anne",
                   Title: "Incorporator",
-                  Signed: false
-                }
+                  Signed: false,
+                },
               ],
               ContactFirstName: formationFormData.contactFirstName,
               ContactLastName: formationFormData.contactLastName,
-              ContactPhoneNumber: formationFormData.contactPhoneNumber
-            }
+              ContactPhoneNumber: formationFormData.contactPhoneNumber,
+            },
           },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -557,9 +557,9 @@ describe("ApiFormationClient", () => {
           generateFormationSigner({
             name: "Mike",
             title: "Chairman of the Board",
-            signature: true
+            signature: true,
           }),
-          generateFormationSigner({ name: "Dave", title: "CEO", signature: true })
+          generateFormationSigner({ name: "Dave", title: "CEO", signature: true }),
         ];
         const formationFormData = generateFormationFormData(
           {
@@ -570,7 +570,7 @@ describe("ApiFormationClient", () => {
             provisions: undefined,
             members: undefined,
             incorporators: undefined,
-            signers
+            signers,
           },
 
           { legalStructureId: `foreign-${legalStructureId}` }
@@ -596,7 +596,7 @@ describe("ApiFormationClient", () => {
             FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
             ForeignGoodStandingFile: {
               Extension: foreignGoodStandingFile.fileType,
-              Content: foreignGoodStandingFile.base64Contents
+              Content: foreignGoodStandingFile.base64Contents,
             },
             Payer: {
               CompanyName: formationFormData.businessName,
@@ -605,7 +605,7 @@ describe("ApiFormationClient", () => {
               City: "",
               StateAbbreviation: undefined,
               ZipCode: "",
-              Email: userData.user.email
+              Email: userData.user.email,
             },
             Formation: {
               Gov2GoAnnualReports: formationFormData.annualReportNotification,
@@ -640,8 +640,8 @@ describe("ApiFormationClient", () => {
                   Zipcode: formationFormData.addressZipCode,
                   Country: formationFormData.addressCountry,
                   Province:
-                    formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince
-                }
+                    formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince,
+                },
               },
               CompanyProfit: "Profit",
               MemberAttestation: undefined,
@@ -655,8 +655,8 @@ describe("ApiFormationClient", () => {
                   City: formationFormData.agentOfficeAddressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: formationFormData.agentOfficeAddressZipCode,
-                  Country: "US"
-                }
+                  Country: "US",
+                },
               },
               Members: undefined,
               Incorporators: undefined,
@@ -664,28 +664,28 @@ describe("ApiFormationClient", () => {
                 {
                   Name: "Faraz",
                   Title: "President",
-                  Signed: true
+                  Signed: true,
                 },
                 {
                   Name: "Anne",
                   Title: "Vice-President",
-                  Signed: true
+                  Signed: true,
                 },
                 {
                   Name: "Mike",
                   Title: "Chairman of the Board",
-                  Signed: true
+                  Signed: true,
                 },
                 {
                   Name: "Dave",
                   Title: "CEO",
-                  Signed: true
-                }
+                  Signed: true,
+                },
               ],
               ContactFirstName: formationFormData.contactFirstName,
               ContactLastName: formationFormData.contactLastName,
-              ContactPhoneNumber: formationFormData.contactPhoneNumber
-            }
+              ContactPhoneNumber: formationFormData.contactPhoneNumber,
+            },
           },
           { headers: { "Content-Type": "text/plain" } }
         );
@@ -790,19 +790,19 @@ describe("ApiFormationClient", () => {
               generateFormationSigner({
                 name: "faraz",
                 signature: true,
-                title: "Authorized Partner"
+                title: "Authorized Partner",
               }),
               generateFormationSigner({
                 name: "anne",
                 signature: true,
-                title: "Authorized Partner"
+                title: "Authorized Partner",
               }),
               generateFormationSigner({
                 name: "mike",
                 signature: false,
-                title: "Authorized Partner"
-              })
-            ]
+                title: "Authorized Partner",
+              }),
+            ],
           },
 
           { legalStructureId: "limited-liability-partnership" }
@@ -812,9 +812,9 @@ describe("ApiFormationClient", () => {
           generateBusiness({
             profileData: generateProfileData({
               legalStructureId: "limited-liability-partnership",
-              businessPersona: "STARTING"
+              businessPersona: "STARTING",
             }),
-            formationData: generateFormationData({ formationFormData })
+            formationData: generateFormationData({ formationFormData }),
           })
         );
 
@@ -835,7 +835,7 @@ describe("ApiFormationClient", () => {
               City: formationFormData.addressMunicipality?.name,
               StateAbbreviation: "NJ",
               ZipCode: formationFormData.addressZipCode,
-              Email: userData.user.email
+              Email: userData.user.email,
             },
             Formation: {
               Gov2GoAnnualReports: formationFormData.annualReportNotification,
@@ -861,11 +861,11 @@ describe("ApiFormationClient", () => {
                   City: formationFormData.addressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: formationFormData.addressZipCode,
-                  Country: "US"
-                }
+                  Country: "US",
+                },
               },
               AdditionalLimitedLiabilityPartnership: {
-                OtherProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }]
+                OtherProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }],
               },
               CompanyProfit: "Profit",
               RegisteredAgent: {
@@ -878,31 +878,31 @@ describe("ApiFormationClient", () => {
                   City: formationFormData.agentOfficeAddressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: formationFormData.agentOfficeAddressZipCode,
-                  Country: "US"
-                }
+                  Country: "US",
+                },
               },
               Members: [],
               Signers: [
                 {
                   Name: "faraz",
                   Title: "Authorized Partner",
-                  Signed: true
+                  Signed: true,
                 },
                 {
                   Name: "anne",
                   Title: "Authorized Partner",
-                  Signed: true
+                  Signed: true,
                 },
                 {
                   Name: "mike",
                   Title: "Authorized Partner",
-                  Signed: false
-                }
+                  Signed: false,
+                },
               ],
               ContactFirstName: formationFormData.contactFirstName,
               ContactLastName: formationFormData.contactLastName,
-              ContactPhoneNumber: formationFormData.contactPhoneNumber
-            }
+              ContactPhoneNumber: formationFormData.contactPhoneNumber,
+            },
           },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -923,14 +923,14 @@ describe("ApiFormationClient", () => {
               generateFormationSigner({
                 name: "faraz",
                 title: "Authorized Representative",
-                signature: true
+                signature: true,
               }),
               generateFormationSigner({
                 name: "anne",
                 title: "General Partner",
-                signature: true
-              })
-            ]
+                signature: true,
+              }),
+            ],
           },
           { legalStructureId: "foreign-limited-liability-partnership" }
         );
@@ -939,9 +939,9 @@ describe("ApiFormationClient", () => {
           generateBusiness({
             profileData: generateProfileData({
               legalStructureId: "limited-liability-partnership",
-              businessPersona: "FOREIGN"
+              businessPersona: "FOREIGN",
             }),
-            formationData: generateFormationData({ formationFormData })
+            formationData: generateFormationData({ formationFormData }),
           })
         );
         const currentBusiness = getCurrentBusiness(userData);
@@ -962,7 +962,7 @@ describe("ApiFormationClient", () => {
               City: "",
               StateAbbreviation: undefined,
               ZipCode: "",
-              Email: userData.user.email
+              Email: userData.user.email,
             },
             Formation: {
               Gov2GoAnnualReports: formationFormData.annualReportNotification,
@@ -995,8 +995,8 @@ describe("ApiFormationClient", () => {
                   Zipcode: formationFormData.addressZipCode,
                   Country: formationFormData.addressCountry,
                   Province:
-                    formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince
-                }
+                    formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince,
+                },
               },
               CompanyProfit: "Profit",
               RegisteredAgent: {
@@ -1009,26 +1009,26 @@ describe("ApiFormationClient", () => {
                   City: formationFormData.agentOfficeAddressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: formationFormData.agentOfficeAddressZipCode,
-                  Country: "US"
-                }
+                  Country: "US",
+                },
               },
               Members: undefined,
               Signers: [
                 {
                   Name: "faraz",
                   Title: "Authorized Representative",
-                  Signed: true
+                  Signed: true,
                 },
                 {
                   Name: "anne",
                   Title: "General Partner",
-                  Signed: true
-                }
+                  Signed: true,
+                },
               ],
               ContactFirstName: formationFormData.contactFirstName,
               ContactLastName: formationFormData.contactLastName,
-              ContactPhoneNumber: formationFormData.contactPhoneNumber
-            }
+              ContactPhoneNumber: formationFormData.contactPhoneNumber,
+            },
           },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -1044,20 +1044,20 @@ describe("ApiFormationClient", () => {
             name: "faraz",
             signature: true,
             title: "General Partner",
-            ...generateFormationNJAddress({})
+            ...generateFormationNJAddress({}),
           }),
           generateFormationIncorporator({
             name: "anne",
             signature: true,
             title: "General Partner",
-            ...generateFormationUSAddress({})
+            ...generateFormationUSAddress({}),
           }),
           generateFormationIncorporator({
             name: "mike",
             signature: true,
             title: "General Partner",
-            ...generateFormationUSAddress({})
-          })
+            ...generateFormationUSAddress({}),
+          }),
         ];
         const formationFormData = generateFormationFormData(
           {
@@ -1074,7 +1074,7 @@ describe("ApiFormationClient", () => {
             makeDistributionTerms: "make distro terms",
             members: undefined,
             signers: undefined,
-            incorporators
+            incorporators,
           },
           { legalStructureId: "limited-partnership" }
         );
@@ -1083,9 +1083,9 @@ describe("ApiFormationClient", () => {
           generateBusiness({
             profileData: generateProfileData({
               legalStructureId: "limited-partnership",
-              businessPersona: "STARTING"
+              businessPersona: "STARTING",
             }),
-            formationData: generateFormationData({ formationFormData })
+            formationData: generateFormationData({ formationFormData }),
           })
         );
         const currentBusiness = getCurrentBusiness(userData);
@@ -1106,7 +1106,7 @@ describe("ApiFormationClient", () => {
               City: formationFormData.addressMunicipality?.name,
               StateAbbreviation: "NJ",
               ZipCode: formationFormData.addressZipCode,
-              Email: userData.user.email
+              Email: userData.user.email,
             },
             Formation: {
               Gov2GoAnnualReports: formationFormData.annualReportNotification,
@@ -1132,8 +1132,8 @@ describe("ApiFormationClient", () => {
                   City: formationFormData.addressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: formationFormData.addressZipCode,
-                  Country: "US"
-                }
+                  Country: "US",
+                },
               },
               AdditionalLimitedPartnership: {
                 AdditionalProvisions: [],
@@ -1145,7 +1145,7 @@ describe("ApiFormationClient", () => {
                 LimitedCanGetDistribution: "Yes",
                 LimitedCanGetDistributionTerms: "get distro terms",
                 LimitedCanMakeDistribution: "No",
-                LimitedCanMakeDistributionTerms: "make distro terms"
+                LimitedCanMakeDistributionTerms: "make distro terms",
               },
               CompanyProfit: "Profit",
               RegisteredAgent: {
@@ -1158,8 +1158,8 @@ describe("ApiFormationClient", () => {
                   City: formationFormData.agentOfficeAddressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: formationFormData.agentOfficeAddressZipCode,
-                  Country: "US"
-                }
+                  Country: "US",
+                },
               },
               Members: [
                 {
@@ -1170,8 +1170,8 @@ describe("ApiFormationClient", () => {
                     City: incorporators[0].addressMunicipality?.name,
                     State: "New Jersey",
                     Zipcode: incorporators[0].addressZipCode,
-                    Country: "US"
-                  }
+                    Country: "US",
+                  },
                 },
                 {
                   Name: incorporators[1].name,
@@ -1181,8 +1181,8 @@ describe("ApiFormationClient", () => {
                     City: incorporators[1].addressCity,
                     State: incorporators[1].addressState?.name,
                     Zipcode: incorporators[1].addressZipCode,
-                    Country: "US"
-                  }
+                    Country: "US",
+                  },
                 },
                 {
                   Name: incorporators[2].name,
@@ -1192,31 +1192,31 @@ describe("ApiFormationClient", () => {
                     City: incorporators[2].addressCity,
                     State: incorporators[2].addressState?.name,
                     Zipcode: incorporators[2].addressZipCode,
-                    Country: "US"
-                  }
-                }
+                    Country: "US",
+                  },
+                },
               ],
               Signers: [
                 {
                   Name: incorporators[0].name,
                   Title: "General Partner",
-                  Signed: true
+                  Signed: true,
                 },
                 {
                   Name: incorporators[1].name,
                   Title: "General Partner",
-                  Signed: true
+                  Signed: true,
                 },
                 {
                   Name: incorporators[2].name,
                   Title: "General Partner",
-                  Signed: true
-                }
+                  Signed: true,
+                },
               ],
               ContactFirstName: formationFormData.contactFirstName,
               ContactLastName: formationFormData.contactLastName,
-              ContactPhoneNumber: formationFormData.contactPhoneNumber
-            }
+              ContactPhoneNumber: formationFormData.contactPhoneNumber,
+            },
           },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -1232,14 +1232,14 @@ describe("ApiFormationClient", () => {
             name: "faraz",
             signature: true,
             title: "General Partner",
-            ...generateFormationNJAddress({})
-          })
+            ...generateFormationNJAddress({}),
+          }),
         ];
 
         const members = [
           generateFormationMember({}),
           generateFormationMember({}),
-          generateFormationMember({})
+          generateFormationMember({}),
         ];
         const formationFormData = generateFormationFormData(
           {
@@ -1252,7 +1252,7 @@ describe("ApiFormationClient", () => {
             members,
             signers: undefined,
             incorporators,
-            isVeteranNonprofit: false
+            isVeteranNonprofit: false,
           },
           { legalStructureId: "nonprofit" }
         );
@@ -1261,9 +1261,9 @@ describe("ApiFormationClient", () => {
           generateBusiness({
             profileData: generateProfileData({
               legalStructureId: "nonprofit",
-              businessPersona: "STARTING"
+              businessPersona: "STARTING",
             }),
-            formationData: generateFormationData({ formationFormData })
+            formationData: generateFormationData({ formationFormData }),
           })
         );
         const currentBusiness = getCurrentBusiness(userData);
@@ -1284,7 +1284,7 @@ describe("ApiFormationClient", () => {
               City: formationFormData.addressMunicipality?.name,
               StateAbbreviation: "NJ",
               ZipCode: formationFormData.addressZipCode,
-              Email: userData.user.email
+              Email: userData.user.email,
             },
             Formation: {
               Gov2GoAnnualReports: formationFormData.annualReportNotification,
@@ -1310,15 +1310,15 @@ describe("ApiFormationClient", () => {
                   City: formationFormData.addressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: formationFormData.addressZipCode,
-                  Country: "US"
-                }
+                  Country: "US",
+                },
               },
               AdditionalDomesticNonProfitCorp: {
                 HasMembers: "Yes",
                 MemberTermsProvisionLocation: "Bylaw",
                 MemberClassPermissionsProvisionLocation: "Bylaw",
                 TrusteeElectionProcessProvisionLocation: "Bylaw",
-                AssetDistributionProvisionLocation: "Bylaw"
+                AssetDistributionProvisionLocation: "Bylaw",
               },
               CompanyProfit: "NonProfit",
               RegisteredAgent: {
@@ -1331,8 +1331,8 @@ describe("ApiFormationClient", () => {
                   City: formationFormData.agentOfficeAddressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: formationFormData.agentOfficeAddressZipCode,
-                  Country: "US"
-                }
+                  Country: "US",
+                },
               },
               Members: [
                 {
@@ -1343,8 +1343,8 @@ describe("ApiFormationClient", () => {
                     City: members[0].addressCity,
                     State: members[0].addressState?.name,
                     Zipcode: members[0].addressZipCode,
-                    Country: "US"
-                  }
+                    Country: "US",
+                  },
                 },
                 {
                   Name: members[1].name,
@@ -1354,8 +1354,8 @@ describe("ApiFormationClient", () => {
                     City: members[1].addressCity,
                     State: members[1].addressState?.name,
                     Zipcode: members[1].addressZipCode,
-                    Country: "US"
-                  }
+                    Country: "US",
+                  },
                 },
                 {
                   Name: members[2].name,
@@ -1365,21 +1365,21 @@ describe("ApiFormationClient", () => {
                     City: members[2].addressCity,
                     State: members[2].addressState?.name,
                     Zipcode: members[2].addressZipCode,
-                    Country: "US"
-                  }
-                }
+                    Country: "US",
+                  },
+                },
               ],
               Signers: [
                 {
                   Name: incorporators[0].name,
                   Title: "General Partner",
-                  Signed: true
-                }
+                  Signed: true,
+                },
               ],
               ContactFirstName: formationFormData.contactFirstName,
               ContactLastName: formationFormData.contactLastName,
-              ContactPhoneNumber: formationFormData.contactPhoneNumber
-            }
+              ContactPhoneNumber: formationFormData.contactPhoneNumber,
+            },
           },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -1393,14 +1393,14 @@ describe("ApiFormationClient", () => {
             name: "faraz",
             signature: true,
             title: "General Partner",
-            ...generateFormationNJAddress({})
-          })
+            ...generateFormationNJAddress({}),
+          }),
         ];
 
         const members = [
           generateFormationMember({}),
           generateFormationMember({}),
-          generateFormationMember({})
+          generateFormationMember({}),
         ];
         const formationFormData = generateFormationFormData(
           {
@@ -1418,7 +1418,7 @@ describe("ApiFormationClient", () => {
             members,
             signers: undefined,
             incorporators,
-            isVeteranNonprofit: false
+            isVeteranNonprofit: false,
           },
           { legalStructureId: "nonprofit" }
         );
@@ -1427,9 +1427,9 @@ describe("ApiFormationClient", () => {
           generateBusiness({
             profileData: generateProfileData({
               legalStructureId: "nonprofit",
-              businessPersona: "STARTING"
+              businessPersona: "STARTING",
             }),
-            formationData: generateFormationData({ formationFormData })
+            formationData: generateFormationData({ formationFormData }),
           })
         );
         const currentBusiness = getCurrentBusiness(userData);
@@ -1450,7 +1450,7 @@ describe("ApiFormationClient", () => {
               City: formationFormData.addressMunicipality?.name,
               StateAbbreviation: "NJ",
               ZipCode: formationFormData.addressZipCode,
-              Email: userData.user.email
+              Email: userData.user.email,
             },
             Formation: {
               Gov2GoAnnualReports: formationFormData.annualReportNotification,
@@ -1476,8 +1476,8 @@ describe("ApiFormationClient", () => {
                   City: formationFormData.addressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: formationFormData.addressZipCode,
-                  Country: "US"
-                }
+                  Country: "US",
+                },
               },
               AdditionalDomesticNonProfitCorp: {
                 HasMembers: "Yes",
@@ -1488,7 +1488,7 @@ describe("ApiFormationClient", () => {
                 TrusteeElectionProcessProvisionLocation: "Herein",
                 TrusteeElectionProcess: "Trustees can serve up to 2 terms.",
                 AssetDistributionProvisionLocation: "Herein",
-                AssetDistribution: "Asset distribution requires three signers."
+                AssetDistribution: "Asset distribution requires three signers.",
               },
               CompanyProfit: "NonProfit",
               RegisteredAgent: {
@@ -1501,8 +1501,8 @@ describe("ApiFormationClient", () => {
                   City: formationFormData.agentOfficeAddressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: formationFormData.agentOfficeAddressZipCode,
-                  Country: "US"
-                }
+                  Country: "US",
+                },
               },
               Members: [
                 {
@@ -1513,8 +1513,8 @@ describe("ApiFormationClient", () => {
                     City: members[0].addressCity,
                     State: members[0].addressState?.name,
                     Zipcode: members[0].addressZipCode,
-                    Country: "US"
-                  }
+                    Country: "US",
+                  },
                 },
                 {
                   Name: members[1].name,
@@ -1524,8 +1524,8 @@ describe("ApiFormationClient", () => {
                     City: members[1].addressCity,
                     State: members[1].addressState?.name,
                     Zipcode: members[1].addressZipCode,
-                    Country: "US"
-                  }
+                    Country: "US",
+                  },
                 },
                 {
                   Name: members[2].name,
@@ -1535,21 +1535,21 @@ describe("ApiFormationClient", () => {
                     City: members[2].addressCity,
                     State: members[2].addressState?.name,
                     Zipcode: members[2].addressZipCode,
-                    Country: "US"
-                  }
-                }
+                    Country: "US",
+                  },
+                },
               ],
               Signers: [
                 {
                   Name: incorporators[0].name,
                   Title: "General Partner",
-                  Signed: true
-                }
+                  Signed: true,
+                },
               ],
               ContactFirstName: formationFormData.contactFirstName,
               ContactLastName: formationFormData.contactLastName,
-              ContactPhoneNumber: formationFormData.contactPhoneNumber
-            }
+              ContactPhoneNumber: formationFormData.contactPhoneNumber,
+            },
           },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -1563,14 +1563,14 @@ describe("ApiFormationClient", () => {
             name: "faraz",
             signature: true,
             title: "General Partner",
-            ...generateFormationNJAddress({})
-          })
+            ...generateFormationNJAddress({}),
+          }),
         ];
 
         const members = [
           generateFormationMember({}),
           generateFormationMember({}),
-          generateFormationMember({})
+          generateFormationMember({}),
         ];
         const formationFormData = generateFormationFormData(
           {
@@ -1583,7 +1583,7 @@ describe("ApiFormationClient", () => {
             isVeteranNonprofit: true,
             members,
             signers: undefined,
-            incorporators
+            incorporators,
           },
           { legalStructureId: "nonprofit" }
         );
@@ -1592,9 +1592,9 @@ describe("ApiFormationClient", () => {
           generateBusiness({
             profileData: generateProfileData({
               legalStructureId: "nonprofit",
-              businessPersona: "STARTING"
+              businessPersona: "STARTING",
             }),
-            formationData: generateFormationData({ formationFormData })
+            formationData: generateFormationData({ formationFormData }),
           })
         );
         const currentBusiness = getCurrentBusiness(userData);
@@ -1614,7 +1614,7 @@ describe("ApiFormationClient", () => {
               City: formationFormData.addressMunicipality?.name,
               StateAbbreviation: "NJ",
               ZipCode: formationFormData.addressZipCode,
-              Email: userData.user.email
+              Email: userData.user.email,
             },
             Formation: {
               Gov2GoAnnualReports: formationFormData.annualReportNotification,
@@ -1640,15 +1640,15 @@ describe("ApiFormationClient", () => {
                   City: formationFormData.addressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: formationFormData.addressZipCode,
-                  Country: "US"
-                }
+                  Country: "US",
+                },
               },
               AdditionalDomesticNonProfitCorp: {
                 HasMembers: "Yes",
                 MemberTermsProvisionLocation: "Bylaw",
                 MemberClassPermissionsProvisionLocation: "Bylaw",
                 TrusteeElectionProcessProvisionLocation: "Bylaw",
-                AssetDistributionProvisionLocation: "Bylaw"
+                AssetDistributionProvisionLocation: "Bylaw",
               },
               CompanyProfit: "NonProfit",
               RegisteredAgent: {
@@ -1661,8 +1661,8 @@ describe("ApiFormationClient", () => {
                   City: formationFormData.agentOfficeAddressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: formationFormData.agentOfficeAddressZipCode,
-                  Country: "US"
-                }
+                  Country: "US",
+                },
               },
               Members: [
                 {
@@ -1673,8 +1673,8 @@ describe("ApiFormationClient", () => {
                     City: members[0].addressCity,
                     State: members[0].addressState?.name,
                     Zipcode: members[0].addressZipCode,
-                    Country: "US"
-                  }
+                    Country: "US",
+                  },
                 },
                 {
                   Name: members[1].name,
@@ -1684,8 +1684,8 @@ describe("ApiFormationClient", () => {
                     City: members[1].addressCity,
                     State: members[1].addressState?.name,
                     Zipcode: members[1].addressZipCode,
-                    Country: "US"
-                  }
+                    Country: "US",
+                  },
                 },
                 {
                   Name: members[2].name,
@@ -1695,21 +1695,21 @@ describe("ApiFormationClient", () => {
                     City: members[2].addressCity,
                     State: members[2].addressState?.name,
                     Zipcode: members[2].addressZipCode,
-                    Country: "US"
-                  }
-                }
+                    Country: "US",
+                  },
+                },
               ],
               Signers: [
                 {
                   Name: incorporators[0].name,
                   Title: "General Partner",
-                  Signed: true
-                }
+                  Signed: true,
+                },
               ],
               ContactFirstName: formationFormData.contactFirstName,
               ContactLastName: formationFormData.contactLastName,
-              ContactPhoneNumber: formationFormData.contactPhoneNumber
-            }
+              ContactPhoneNumber: formationFormData.contactPhoneNumber,
+            },
           },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -1772,7 +1772,7 @@ describe("ApiFormationClient", () => {
         formationId: stubResponse.Id,
         redirect: stubResponse.PayUrl.RedirectToUrl,
         errors: [],
-        lastUpdatedISO: expect.anything()
+        lastUpdatedISO: expect.anything(),
       });
       expect(parseDate(response.lastUpdatedISO).isSame(getCurrentDate(), "minute")).toBe(true);
     });
@@ -1791,16 +1791,16 @@ describe("ApiFormationClient", () => {
         redirect: undefined,
         errors: [
           { field: "Payer Email", message: stubError1.ErrorMessage, type: "FIELD" },
-          { field: "Registered Agent", message: stubError2.ErrorMessage, type: "FIELD" }
+          { field: "Registered Agent", message: stubError2.ErrorMessage, type: "FIELD" },
         ],
-        lastUpdatedISO: expect.anything()
+        lastUpdatedISO: expect.anything(),
       });
       expect(parseDate(response.lastUpdatedISO).isSame(getCurrentDate(), "minute")).toBe(true);
     });
 
     it("responds with generic response error when un-parseable failure", async () => {
       mockAxios.post.mockResolvedValue({
-        data: "Unexpected error: An error occurred while updating the entries."
+        data: "Unexpected error: An error occurred while updating the entries.",
       });
 
       const userData = generateFormationUserData({}, {}, {});
@@ -1811,7 +1811,7 @@ describe("ApiFormationClient", () => {
         token: undefined,
         redirect: undefined,
         errors: [{ field: "", message: "Response Error", type: "RESPONSE" }],
-        lastUpdatedISO: expect.anything()
+        lastUpdatedISO: expect.anything(),
       });
       expect(parseDate(response.lastUpdatedISO).isSame(getCurrentDate(), "minute")).toBe(true);
     });
@@ -1826,7 +1826,7 @@ describe("ApiFormationClient", () => {
         token: undefined,
         redirect: undefined,
         errors: [{ field: "", message: "Unknown Error", type: "UNKNOWN" }],
-        lastUpdatedISO: expect.anything()
+        lastUpdatedISO: expect.anything(),
       });
       expect(parseDate(response.lastUpdatedISO).isSame(getCurrentDate(), "minute")).toBe(true);
     });
@@ -1842,7 +1842,7 @@ describe("ApiFormationClient", () => {
       expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/GetCompletedFiling", {
         Account: "12345",
         Key: "abcdef",
-        FormationId: "formation-id-123"
+        FormationId: "formation-id-123",
       });
 
       expect(response).toEqual({
@@ -1852,7 +1852,7 @@ describe("ApiFormationClient", () => {
         confirmationNumber: stubResponse.ConfirmationNumber,
         formationDoc: stubResponse.FormationDoc,
         standingDoc: stubResponse.StandingDoc,
-        certifiedDoc: stubResponse.CertifiedDoc
+        certifiedDoc: stubResponse.CertifiedDoc,
       });
     });
   });

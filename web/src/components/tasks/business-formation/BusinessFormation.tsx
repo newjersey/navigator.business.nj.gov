@@ -33,7 +33,7 @@ import {
   getCurrentDateFormatted,
   InputFile,
   NameAvailability,
-  PublicFilingLegalType
+  PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared/";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 import { useRouter } from "next/router";
@@ -108,16 +108,16 @@ export const BusinessFormation = (props: Props): ReactElement => {
       contactLastName: business.formationData.formationFormData.contactLastName || splitName.lastName,
       businessLocationType: isForeign
         ? business.formationData.formationFormData.businessLocationType ?? "US"
-        : "NJ"
+        : "NJ",
     });
     if (business.formationData.businessNameAvailability) {
       setBusinessNameAvailability({
-        ...business.formationData.businessNameAvailability
+        ...business.formationData.businessNameAvailability,
       });
     }
     if (business.formationData.dbaBusinessNameAvailability) {
       setDbaBusinessNameAvailability({
-        ...business.formationData.dbaBusinessNameAvailability
+        ...business.formationData.dbaBusinessNameAvailability,
       });
     }
 
@@ -161,7 +161,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
         updateQueue
           .queueFormationData({
-            completedFilingPayment: true
+            completedFilingPayment: true,
           })
           .update()
           .then(() => {
@@ -263,7 +263,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
           interactedFields,
           hasBeenSubmitted,
           hasSetStateFirstTime,
-          foreignGoodStandingFile
+          foreignGoodStandingFile,
         },
         setFormationFormData,
         setBusinessNameAvailability,
@@ -272,7 +272,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         setShowResponseAlert,
         setFieldsInteracted,
         setHasBeenSubmitted,
-        setForeignGoodStandingFile
+        setForeignGoodStandingFile,
       }}
     >
       <div className="flex flex-column minh-38" data-testid="formation-form">

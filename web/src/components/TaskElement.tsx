@@ -25,13 +25,13 @@ export const TaskElement = (props: Props): ReactElement => {
   const deferredLocationQuestion = {
     before: "",
     innerContent: "",
-    after: ""
+    after: "",
   };
 
   const postOnboardingQuestion = {
     before: "",
     innerContent: "",
-    after: ""
+    after: "",
   };
 
   const getPostOnboardingQuestion = (task: Task): ReactElement => {
@@ -46,7 +46,7 @@ export const TaskElement = (props: Props): ReactElement => {
           taskId={task.id}
         />
       ),
-      default: <></>
+      default: <></>,
     });
   };
 

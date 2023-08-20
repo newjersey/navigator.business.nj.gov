@@ -61,7 +61,7 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
           <div className="margin-right-1">
             <Content>
               {templateEval(Config.deferredLocation.successText, {
-                city: business.profileData.municipality.displayName
+                city: business.profileData.municipality.displayName,
               })}
             </Content>
           </div>

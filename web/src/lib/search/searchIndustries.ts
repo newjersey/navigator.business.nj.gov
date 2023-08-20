@@ -8,7 +8,7 @@ export const searchIndustries = (industries: Industry[], term: string): Match[] 
   for (const industry of industries) {
     let match: Match = {
       filename: industry.id,
-      snippets: []
+      snippets: [],
     };
 
     const name = industry.name.toLowerCase();

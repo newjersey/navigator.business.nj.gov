@@ -16,7 +16,7 @@ export const migrate_v36_to_v37 = (v36Data: v36UserData): v37UserData => {
   return {
     ...v36Data,
     profileData: { ...v36Data.profileData, dateOfFormation: undefined },
-    version: 37
+    version: 37,
   };
 };
 
@@ -146,7 +146,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v37FormationData {

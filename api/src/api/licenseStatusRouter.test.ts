@@ -4,7 +4,7 @@ import {
   generateLicenseData,
   generateLicenseStatusItem,
   generateNameAndAddress,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@shared/test";
 import { Express } from "express";
 import { UserDataClient } from "src/domain/types";
@@ -15,7 +15,7 @@ import { getSignedInUserId } from "./userRouter";
 
 jest.mock("./userRouter", () => {
   return {
-    getSignedInUserId: jest.fn()
+    getSignedInUserId: jest.fn(),
   };
 });
 const fakeSignedInUserId = getSignedInUserId as jest.Mock;
@@ -36,7 +36,7 @@ describe("licenseStatusRouter", () => {
       findByEmail: jest.fn(),
       getNeedNewsletterUsers: jest.fn(),
       getNeedToAddToUserTestingUsers: jest.fn(),
-      getNeedTaxIdEncryptionUsers: jest.fn()
+      getNeedTaxIdEncryptionUsers: jest.fn(),
     };
     stubUserDataClient.put.mockImplementation((userData) => {
       return Promise.resolve(userData);
@@ -54,7 +54,7 @@ describe("licenseStatusRouter", () => {
   it("returns user data with updated license status", async () => {
     const licenseData = generateLicenseData({
       items: [generateLicenseStatusItem({})],
-      status: "PENDING"
+      status: "PENDING",
     });
     const userData = generateUserDataForBusiness(generateBusiness({ licenseData }));
     stubUpdateLicenseStatus.mockResolvedValue(userData);
@@ -72,7 +72,7 @@ describe("licenseStatusRouter", () => {
   it("returns 404 if license status is unknown", async () => {
     const licenseData = generateLicenseData({
       items: [],
-      status: "UNKNOWN"
+      status: "UNKNOWN",
     });
     const userData = generateUserDataForBusiness(generateBusiness({ licenseData }));
     stubUpdateLicenseStatus.mockResolvedValue(userData);

@@ -12,7 +12,7 @@ describe("migrate_v52_to_v53", () => {
     const v52 = makeUserData(profileData);
     v52.taskItemChecklist = {
       "general-veteran-owned": true,
-      "something-else": true
+      "something-else": true,
     };
     const v53 = migrate_v52_to_v53(v52);
 
@@ -32,18 +32,18 @@ describe("migrate_v52_to_v53", () => {
         roadmapOpenSections: ["PLAN", "START"],
         roadmapOpenSteps: [],
         hiddenCertificationIds: [],
-        hiddenFundingIds: []
+        hiddenFundingIds: [],
       },
       taskItemChecklist: {},
       taxFilingData: {
-        filings: []
+        filings: [],
       },
       formationData: {
         formationFormData: generatev50FormationFormData({}),
         formationResponse: undefined,
-        getFilingResponse: undefined
+        getFilingResponse: undefined,
       },
-      version: 53
+      version: 53,
     };
   };
 });

@@ -24,7 +24,7 @@ export const migrate_v93_to_v94 = (v93Data: v93UserData): v94UserData => {
             ...v93Data.formationData.formationResponse,
             errors: v93Data.formationData.formationResponse.errors.flatMap((err) => {
               return (err as v94FormationSubmitError).type ? [err as v94FormationSubmitError] : [];
-            })
+            }),
           }
         : undefined,
       formationFormData: {
@@ -37,10 +37,10 @@ export const migrate_v93_to_v94 = (v93Data: v93UserData): v94UserData => {
         canGetDistribution: castedV93FormationFormData.canGetDistribution,
         getDistributionTerms: castedV93FormationFormData.getDistributionTerms ?? "",
         canMakeDistribution: castedV93FormationFormData.canMakeDistribution,
-        makeDistributionTerms: castedV93FormationFormData.makeDistributionTerms ?? ""
-      }
+        makeDistributionTerms: castedV93FormationFormData.makeDistributionTerms ?? "",
+      },
     },
-    version: 94
+    version: 94,
   };
 };
 
@@ -222,7 +222,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v94FormationData {
@@ -296,7 +296,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -305,7 +305,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const corpBusinessSuffix = [
@@ -318,7 +318,7 @@ export const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;

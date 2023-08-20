@@ -22,7 +22,7 @@ const getTaxIdsToFilingsRecord = (
         return {
           identifier,
           dueDate: dateToShortISO(value),
-          calendarEventType: "TAX-FILING"
+          calendarEventType: "TAX-FILING",
         };
       });
       return accumulator;

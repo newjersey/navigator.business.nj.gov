@@ -27,7 +27,7 @@ export const SidebarCard = (props: Props): ReactElement => {
             headerText={props.card.header}
             bodyText={props.card.contentMd}
           />
-        )
+        ),
       })}
     </>
   );

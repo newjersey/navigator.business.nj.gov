@@ -8,7 +8,7 @@ export const ProfileResponsibleOwnerName = (
     <OnboardingField
       fieldName="responsibleOwnerName"
       fieldOptions={{
-        inputProps: { "data-testid": "responsibleOwnerName" }
+        inputProps: { "data-testid": "responsibleOwnerName" },
       }}
       inputWidth="default"
       {...props}

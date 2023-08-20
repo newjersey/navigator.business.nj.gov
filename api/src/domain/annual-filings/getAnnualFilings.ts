@@ -24,7 +24,7 @@ export const getAnnualFilings = (userData: UserData): UserData => {
         (dueDate: string) => ({
           identifier: "ANNUAL_FILING",
           calendarEventType: "TAX-FILING" as const,
-          dueDate
+          dueDate,
         })
       )
     );
@@ -32,6 +32,6 @@ export const getAnnualFilings = (userData: UserData): UserData => {
 
   return modifyCurrentBusiness(userData, (business) => ({
     ...business,
-    taxFilingData: { ...business.taxFilingData, filings }
+    taxFilingData: { ...business.taxFilingData, filings },
   }));
 };

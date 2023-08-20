@@ -19,12 +19,12 @@ describe("sortFundings", () => {
     const funding1 = generateFunding({
       name: "bca",
       status: "deadline",
-      certifications: [randomFundingCertification()]
+      certifications: [randomFundingCertification()],
     });
     const funding2 = generateFunding({
       name: "bca",
       status: "deadline",
-      certifications: [randomFundingCertification()]
+      certifications: [randomFundingCertification()],
     });
     const fundings = [funding1, funding2];
 

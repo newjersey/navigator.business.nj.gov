@@ -9,13 +9,13 @@ describe("remove business", () => {
       currentBusinessId: firstBusiness.id,
       businesses: {
         [firstBusiness.id]: firstBusiness,
-        [secondBusiness.id]: secondBusiness
-      }
+        [secondBusiness.id]: secondBusiness,
+      },
     });
     const newUserData = removeBusiness({
       userData,
       idToRemove: secondBusiness.id,
-      newCurrentBusinessId: firstBusiness.id
+      newCurrentBusinessId: firstBusiness.id,
     });
 
     expect(Object.keys(newUserData.businesses)).toHaveLength(1);
@@ -30,13 +30,13 @@ describe("remove business", () => {
       currentBusinessId: firstBusiness.id,
       businesses: {
         [firstBusiness.id]: firstBusiness,
-        [secondBusiness.id]: secondBusiness
-      }
+        [secondBusiness.id]: secondBusiness,
+      },
     });
     const newUserData = removeBusiness({
       userData,
       idToRemove: firstBusiness.id,
-      newCurrentBusinessId: secondBusiness.id
+      newCurrentBusinessId: secondBusiness.id,
     });
 
     expect(Object.keys(newUserData.businesses)).toHaveLength(1);

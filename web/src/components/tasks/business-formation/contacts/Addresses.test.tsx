@@ -7,7 +7,7 @@ import {
   FormationLegalType,
   generateFormationIncorporator,
   generateFormationUSAddress,
-  generateMunicipality
+  generateMunicipality,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
@@ -15,7 +15,7 @@ import { fireEvent, screen, waitFor } from "@testing-library/react";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn()
+    useMediaQuery: jest.fn(),
   };
 }
 
@@ -29,7 +29,7 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn()
+  searchBusinessName: jest.fn(),
 }));
 
 describe("Formation - Addresses", () => {
@@ -49,7 +49,7 @@ describe("Formation - Addresses", () => {
           page.clickAddNewIncorporator();
           const signer = generateFormationIncorporator(
             {
-              ...generateFormationUSAddress({})
+              ...generateFormationUSAddress({}),
             },
             legalStructureId
           );
@@ -63,7 +63,7 @@ describe("Formation - Addresses", () => {
           page.checkSignerBox(0, "incorporators");
           await page.submitContactsStep();
           expect(currentBusiness().formationData.formationFormData.incorporators).toEqual([
-            { ...signer, signature: true, title: signer.title }
+            { ...signer, signature: true, title: signer.title },
           ]);
         });
 
@@ -72,7 +72,7 @@ describe("Formation - Addresses", () => {
             generateFormationIncorporator(
               {
                 signature: true,
-                ...generateFormationUSAddress({})
+                ...generateFormationUSAddress({}),
               },
               legalStructureId
             ),
@@ -80,10 +80,10 @@ describe("Formation - Addresses", () => {
               {
                 signature: true,
                 title: "Incorporator",
-                ...generateFormationUSAddress({})
+                ...generateFormationUSAddress({}),
               },
               legalStructureId
-            )
+            ),
           ];
           const page = await getPageHelper({ legalStructureId }, { incorporators });
           const nameTd = screen.getByText(incorporators[1].name, { exact: false });
@@ -129,7 +129,7 @@ describe("Formation - Addresses", () => {
               {
                 signature: true,
                 title: "Incorporator",
-                ...generateFormationUSAddress({})
+                ...generateFormationUSAddress({}),
               },
               legalStructureId
             ),
@@ -137,10 +137,10 @@ describe("Formation - Addresses", () => {
               {
                 signature: true,
                 title: "Incorporator",
-                ...generateFormationUSAddress({})
+                ...generateFormationUSAddress({}),
               },
               legalStructureId
-            )
+            ),
           ];
           const page = await getPageHelper({ legalStructureId }, { incorporators });
           const nameTd = screen.getByText(incorporators[1].name, { exact: false });
@@ -155,7 +155,7 @@ describe("Formation - Addresses", () => {
             generateFormationIncorporator(
               {
                 signature: true,
-                ...generateFormationUSAddress({})
+                ...generateFormationUSAddress({}),
               },
               legalStructureId
             )
@@ -169,10 +169,10 @@ describe("Formation - Addresses", () => {
             generateFormationIncorporator(
               {
                 name: "",
-                ...generateFormationUSAddress({})
+                ...generateFormationUSAddress({}),
               },
               legalStructureId
-            )
+            ),
           ];
           const page = await getPageHelper({ legalStructureId }, { incorporators });
           await attemptApiSubmission(page);
@@ -209,7 +209,7 @@ describe("Formation - Addresses", () => {
         const page = await getPageHelper(
           {
             legalStructureId: "limited-partnership",
-            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" })
+            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
           },
           {
             contactFirstName: "John",
@@ -217,7 +217,7 @@ describe("Formation - Addresses", () => {
             addressLine1: "123 Address",
             addressLine2: "business suite 201",
             addressState: { shortCode: "NJ", name: "New Jersey" },
-            addressZipCode: "07601"
+            addressZipCode: "07601",
           }
         );
         page.clickAddNewIncorporator();

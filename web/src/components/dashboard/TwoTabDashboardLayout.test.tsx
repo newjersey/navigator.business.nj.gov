@@ -5,7 +5,7 @@ import { templateEval } from "@/lib/utils/helpers";
 import {
   generateCertification,
   generateFunding,
-  getProfileDataForUnfilteredOpportunities
+  getProfileDataForUnfilteredOpportunities,
 } from "@/test/factories";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
@@ -24,7 +24,7 @@ describe("<TwoTabDashboardLayout />", () => {
 
   const renderPage = ({
     certificationsArray,
-    fundingsArray
+    fundingsArray,
   }: {
     certificationsArray?: Certification[];
     fundingsArray?: Funding[];
@@ -52,7 +52,7 @@ describe("<TwoTabDashboardLayout />", () => {
     fireEvent.click(
       screen.getByText(
         templateEval(Config.dashboardDefaults.mobileSecondTabText, {
-          count: "0"
+          count: "0",
         })
       )
     );
@@ -71,8 +71,8 @@ describe("<TwoTabDashboardLayout />", () => {
         preferences: generatePreferences({ visibleSidebarCards: ["not-registered"] }),
         profileData: {
           ...getProfileDataForUnfilteredOpportunities(),
-          operatingPhase: randomElementFromArray(operatingPhases).id
-        }
+          operatingPhase: randomElementFromArray(operatingPhases).id,
+        },
       });
 
       renderPage({});
@@ -80,7 +80,7 @@ describe("<TwoTabDashboardLayout />", () => {
       expect(
         screen.getByText(
           templateEval(Config.dashboardDefaults.mobileSecondTabText, {
-            count: "1"
+            count: "1",
           })
         )
       ).toBeInTheDocument();
@@ -96,8 +96,8 @@ describe("<TwoTabDashboardLayout />", () => {
         profileData: {
           ...getProfileDataForUnfilteredOpportunities(),
           operatingPhase: randomElementFromArray(operatingPhases).id,
-          ownershipTypeIds: ["disabled-veteran", "minority-owned"]
-        }
+          ownershipTypeIds: ["disabled-veteran", "minority-owned"],
+        },
       });
 
       renderPage({});
@@ -105,7 +105,7 @@ describe("<TwoTabDashboardLayout />", () => {
       expect(
         screen.getByText(
           templateEval(Config.dashboardDefaults.mobileSecondTabText, {
-            count: "4"
+            count: "4",
           })
         )
       ).toBeInTheDocument();
@@ -122,8 +122,8 @@ describe("<TwoTabDashboardLayout />", () => {
           ...getProfileDataForUnfilteredOpportunities(),
 
           operatingPhase: randomElementFromArray(operatingPhases).id,
-          ownershipTypeIds: ["disabled-veteran", "minority-owned"]
-        }
+          ownershipTypeIds: ["disabled-veteran", "minority-owned"],
+        },
       });
 
       renderPage({});
@@ -131,7 +131,7 @@ describe("<TwoTabDashboardLayout />", () => {
       expect(
         screen.getByText(
           templateEval(Config.dashboardDefaults.mobileSecondTabText, {
-            count: "6"
+            count: "6",
           })
         )
       ).toBeInTheDocument();
@@ -142,21 +142,21 @@ describe("<TwoTabDashboardLayout />", () => {
 const certs = [
   generateCertification({
     name: "Cert 1",
-    applicableOwnershipTypes: ["veteran-owned"]
+    applicableOwnershipTypes: ["veteran-owned"],
   }),
   generateCertification({
     name: "Cert 2",
-    applicableOwnershipTypes: ["disabled-veteran"]
+    applicableOwnershipTypes: ["disabled-veteran"],
   }),
   generateCertification({
     name: "Cert 3",
-    applicableOwnershipTypes: ["minority-owned"]
+    applicableOwnershipTypes: ["minority-owned"],
   }),
   generateCertification({
     name: "Cert 4",
-    applicableOwnershipTypes: ["woman-owned"]
+    applicableOwnershipTypes: ["woman-owned"],
   }),
-  generateCertification({ name: "Cert 5", applicableOwnershipTypes: [] })
+  generateCertification({ name: "Cert 5", applicableOwnershipTypes: [] }),
 ];
 
 const fundings = [
@@ -164,12 +164,12 @@ const fundings = [
     name: "Funding 4",
     sector: [],
     status: "deadline",
-    certifications: ["minority-owned"]
+    certifications: ["minority-owned"],
   }),
   generateFunding({
     name: "Funding 5",
     sector: [],
     status: "first come, first serve",
-    certifications: ["disabled-veteran"]
-  })
+    certifications: ["disabled-veteran"],
+  }),
 ];

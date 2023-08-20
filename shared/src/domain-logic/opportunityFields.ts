@@ -5,7 +5,7 @@ export const OPPORTUNITY_FIELDS: (keyof ProfileData)[] = [
   "existingEmployees",
   "municipality",
   "homeBasedBusiness",
-  "ownershipTypeIds"
+  "ownershipTypeIds",
 ];
 
 export const REPORT_FIELDS: (keyof ProfileData)[] = ["dateOfFormation"];

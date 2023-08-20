@@ -41,9 +41,9 @@ export const NonprofitProvisions = (): ReactElement => {
                 inputProps: {
                   maxLength: 400,
                   sx: {
-                    padding: "1rem"
-                  }
-                }
+                    padding: "1rem",
+                  },
+                },
               }}
             />
           </div>
@@ -61,7 +61,7 @@ export const NonprofitProvisions = (): ReactElement => {
       true: Config.formation.nonprofitProvisions.radioYesText,
       false: Config.formation.nonprofitProvisions.radioNoText,
       IN_FORM: Config.formation.nonprofitProvisions.radioInFormText,
-      IN_BYLAWS: Config.formation.nonprofitProvisions.radioInBylawsText
+      IN_BYLAWS: Config.formation.nonprofitProvisions.radioInBylawsText,
     };
 
     return labelMap[value];
@@ -71,7 +71,7 @@ export const NonprofitProvisions = (): ReactElement => {
     fieldName,
     title,
     values,
-    onChange
+    onChange,
   }: {
     fieldName: FormationFields;
     title: string;
@@ -131,7 +131,7 @@ export const NonprofitProvisions = (): ReactElement => {
           nonprofitTrusteesMethodSpecified: undefined,
           nonprofitTrusteesMethodTerms: "",
           nonprofitAssetDistributionSpecified: undefined,
-          nonprofitAssetDistributionTerms: ""
+          nonprofitAssetDistributionTerms: "",
         });
         setFieldsInteracted(["hasNonprofitBoardMembers"]);
         setFieldsInteracted(
@@ -143,11 +143,11 @@ export const NonprofitProvisions = (): ReactElement => {
             "nonprofitTrusteesMethodSpecified",
             "nonprofitTrusteesMethodTerms",
             "nonprofitAssetDistributionSpecified",
-            "nonprofitAssetDistributionTerms"
+            "nonprofitAssetDistributionTerms",
           ],
           { setToUninteracted: true }
         );
-      }
+      },
     });
   };
 
@@ -161,10 +161,10 @@ export const NonprofitProvisions = (): ReactElement => {
         const value = e.target.value;
         setFormationFormData({
           ...state.formationFormData,
-          [fieldName]: value
+          [fieldName]: value,
         });
         setFieldsInteracted([fieldName]);
-      }
+      },
     });
   };
 

@@ -10,7 +10,7 @@ const toggleMock = jest.fn();
 
 const renderButton = ({
   status,
-  useOverrideText
+  useOverrideText,
 }: {
   status: "text-view" | "password-view";
   useOverrideText?: boolean;

@@ -13,7 +13,7 @@ export const ProfileNexusBusinessNameField = (): ReactElement => {
     getProfileConfig({
       config: Config,
       persona: state.flow,
-      fieldName: "nexusBusinessName"
+      fieldName: "nexusBusinessName",
     });
 
   const renderUserEmptyBusinessName = (): ReactNode => {

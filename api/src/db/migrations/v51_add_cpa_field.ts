@@ -18,9 +18,9 @@ export const migrate_v50_to_v51 = (v50Data: v50UserData): v51UserData => {
     ...v50Data,
     profileData: {
       ...v50Data.profileData,
-      requiresCpa: v50Data.profileData.industryId === "certified-public-accountant" ? true : false
+      requiresCpa: v50Data.profileData.industryId === "certified-public-accountant" ? true : false,
     },
-    version: 51
+    version: 51,
   };
 };
 
@@ -162,7 +162,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v51FormationData {

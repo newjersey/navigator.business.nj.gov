@@ -18,7 +18,7 @@ import {
   FormationSigner,
   incorporationLegalStructures,
   PublicFilingLegalType,
-  publicFilingLegalTypes
+  publicFilingLegalTypes,
 } from "../formationData";
 import { randomInt, randomIntFromInterval } from "../intHelpers";
 import { Municipality } from "../municipality";
@@ -30,7 +30,7 @@ export const generateMunicipality = (overrides: Partial<Municipality>): Municipa
     name: `some-name-${randomInt()}`,
     county: `some-county-${randomInt()}`,
     id: `some-id-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -49,7 +49,7 @@ export const generateFormationUSAddress = (overrides: Partial<FormationAddress>)
     addressZipCode: randomInt(5).toString(),
     addressMunicipality: undefined,
     addressProvince: undefined,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -68,7 +68,7 @@ export const generateFormationForeignAddress = (overrides: Partial<FormationAddr
     ).shortCode,
     addressProvince: `some-address-province-${randomInt()}`,
     addressZipCode: randomInt(11).toString(),
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -83,7 +83,7 @@ export const generateFormationNJAddress = (overrides: Partial<FormationAddress>)
     addressCountry: "US",
     addressState: { shortCode: "NJ", name: "New Jersey" },
     addressZipCode: `0${randomIntFromInterval("07001", "08999")}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -91,7 +91,7 @@ export const generateFormationMember = (overrides: Partial<FormationMember>): Fo
   return {
     name: `some-members-name-${randomInt()}`,
     ...generateFormationUSAddress({}),
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -117,7 +117,7 @@ export const generateFormationSigner = (
     name: `some-signer-name-${randomInt()}`,
     signature: false,
     title: randomElementFromArray(BusinessSignerTypeMap[legalStructureId ?? randomFormationLegalType()]),
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -138,7 +138,7 @@ export const generateFormationIncorporator = (
     ...generateFormationSigner({}, legalStructureId),
     name: `some-incorporator-name-${randomInt()}`,
     ...generateFormationUSAddress({}),
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -146,7 +146,7 @@ export const generateBusinessNameAvailability = (overrides: Partial<NameAvailabi
   return {
     ...generateBusinessNameAvailabilityResponse({}),
     lastUpdatedTimeStamp: getCurrentDateISOString(),
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -158,12 +158,12 @@ export const generateBusinessNameAvailabilityResponse = (
     "DESIGNATOR_ERROR",
     "SPECIAL_CHARACTER_ERROR",
     "UNAVAILABLE",
-    "RESTRICTED_ERROR"
+    "RESTRICTED_ERROR",
   ];
   return {
     similarNames: [`some-name-${randomInt()}`],
     status: randomElementFromArray(statusValues),
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -207,12 +207,12 @@ export const generateFormationFormData = (
       ? undefined
       : [
           generateFormationSigner({ signature: true }, legalStructureId),
-          generateFormationSigner({ signature: true }, legalStructureId)
+          generateFormationSigner({ signature: true }, legalStructureId),
         ],
     incorporators: usesIncorporation
       ? [
           generateFormationIncorporator({ signature: true }, legalStructureId),
-          generateFormationIncorporator({ signature: true }, legalStructureId)
+          generateFormationIncorporator({ signature: true }, legalStructureId),
         ]
       : undefined,
     paymentType: randomInt() % 2 ? "ACH" : "CC",
@@ -246,6 +246,6 @@ export const generateFormationFormData = (
     foreignDateOfFormation: isForeign ? getCurrentDate().add(1, "days").format(defaultDateFormat) : undefined,
     willPracticeLaw: isCorp ? !!(randomInt() % 2) : undefined,
     isVeteranNonprofit: isNonprofit ? !!(randomInt() % 2) : undefined,
-    ...overrides
+    ...overrides,
   };
 };

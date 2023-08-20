@@ -6,7 +6,7 @@ import Profile from "@/pages/profile";
 import {
   randomHomeBasedIndustry,
   randomPublicFilingLegalStructure,
-  randomTradeNameLegalStructure
+  randomTradeNameLegalStructure,
 } from "@/test/factories";
 import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -15,7 +15,7 @@ import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   businessPersonas,
@@ -25,7 +25,7 @@ import {
   Industry,
   OperatingPhase,
   OperatingPhases,
-  randomInt
+  randomInt,
 } from "@businessnjgovnavigator/shared/index";
 import { generateTaxFilingData, randomFilteredIndustry } from "@businessnjgovnavigator/shared/test";
 
@@ -35,7 +35,7 @@ import {
   generateBusinessForProfile,
   renderPage,
   selectByText,
-  selectByValue
+  selectByValue,
 } from "@/test/pages/profile/profile-helpers";
 import { Business, BusinessPersona, generateBusiness, ProfileData } from "@businessnjgovnavigator/shared";
 import { render, screen, waitFor } from "@testing-library/react";
@@ -50,10 +50,10 @@ function setupMockAnalytics(): typeof analytics {
       ...jest.requireActual("@/lib/utils/analytics").default.event,
       profile_location_question: {
         submit: {
-          location_entered_for_first_time: jest.fn()
-        }
-      }
-    }
+          location_entered_for_first_time: jest.fn(),
+        },
+      },
+    },
   };
 }
 
@@ -69,7 +69,7 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
       nonEssentialQuestionsIds: ["test-question-1", "test-question-2"],
       naicsCodes: "",
       isEnabled: true,
-      industryOnboardingQuestions: {}
+      industryOnboardingQuestions: {},
     },
     {
       id: "test-industry-with-no-non-essential-questions",
@@ -80,9 +80,9 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
       nonEssentialQuestionsIds: [],
       naicsCodes: "",
       isEnabled: true,
-      industryOnboardingQuestions: {}
-    }
-  ]
+      industryOnboardingQuestions: {},
+    },
+  ],
 }));
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
@@ -130,8 +130,8 @@ describe("profile - shared", () => {
       profileData: generateProfileData({
         industryId: randomHomeBasedIndustry(),
         operatingPhase: randomElementFromArray(defaultDescOperatingPhases as OperatingPhase[]).id,
-        nexusLocationInNewJersey: false
-      })
+        nexusLocationInNewJersey: false,
+      }),
     });
 
     renderPage({ business, setRegistrationModalIsVisible });
@@ -152,8 +152,8 @@ describe("profile - shared", () => {
       profileData: generateProfileData({
         industryId: randomHomeBasedIndustry(),
         operatingPhase: randomElementFromArray(altDescOperatingPhases as OperatingPhase[]).id,
-        nexusLocationInNewJersey: false
-      })
+        nexusLocationInNewJersey: false,
+      }),
     });
 
     renderPage({ business, setRegistrationModalIsVisible });
@@ -169,8 +169,8 @@ describe("profile - shared", () => {
   it("sends analytics when municipality entered for first time", async () => {
     const initialBusiness = generateBusinessForProfile({
       profileData: generateProfileData({
-        municipality: undefined
-      })
+        municipality: undefined,
+      }),
     });
 
     const newark = generateMunicipality({ displayName: "Newark" });
@@ -190,8 +190,8 @@ describe("profile - shared", () => {
 
     const initialBusiness = generateBusinessForProfile({
       profileData: generateProfileData({
-        municipality: generateMunicipality({ displayName: "Jersey City" })
-      })
+        municipality: generateMunicipality({ displayName: "Jersey City" }),
+      }),
     });
 
     renderPage({ business: initialBusiness, municipalities: [newark], setRegistrationModalIsVisible });
@@ -215,9 +215,9 @@ describe("profile - shared", () => {
                 taxId: "*******89123",
                 encryptedTaxId: "some-encrypted-value",
                 businessPersona,
-                foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["NONE"] : undefined
+                foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["NONE"] : undefined,
               }),
-              taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" })
+              taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" }),
             });
 
             renderPage({ business, setRegistrationModalIsVisible });
@@ -243,8 +243,8 @@ describe("profile - shared", () => {
                   businessPersona: businessPersona,
                   nexusLocationInNewJersey: true,
                   foreignBusinessType,
-                  foreignBusinessTypeIds: ["NEXUS"]
-                })
+                  foreignBusinessTypeIds: ["NEXUS"],
+                }),
               });
               renderPage({ business, setRegistrationModalIsVisible });
               chooseTab("numbers");
@@ -258,8 +258,8 @@ describe("profile - shared", () => {
         it("does not show disclaimer for public filing legal structure", () => {
           const business = generateBusinessForProfile({
             profileData: generateProfileData({
-              legalStructureId: randomPublicFilingLegalStructure()
-            })
+              legalStructureId: randomPublicFilingLegalStructure(),
+            }),
           });
           renderPage({ business, setRegistrationModalIsVisible });
           chooseTab("numbers");
@@ -282,8 +282,8 @@ describe("profile - shared", () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           operatingPhase,
-          dateOfFormation: undefined
-        })
+          dateOfFormation: undefined,
+        }),
       });
       renderPage({ business, setRegistrationModalIsVisible });
 
@@ -294,8 +294,8 @@ describe("profile - shared", () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           operatingPhase,
-          dateOfFormation: undefined
-        })
+          dateOfFormation: undefined,
+        }),
       });
       renderPage({ business, setRegistrationModalIsVisible });
 
@@ -311,8 +311,8 @@ describe("profile - shared", () => {
           foreignBusinessType: profileData.businessPersona === "FOREIGN" ? "NEXUS" : undefined,
           nexusLocationInNewJersey: profileData.businessPersona === "FOREIGN" ? false : undefined,
           foreignBusinessTypeIds:
-            profileData.businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : undefined
-        })
+            profileData.businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : undefined,
+        }),
       });
     };
 
@@ -324,8 +324,8 @@ describe("profile - shared", () => {
           businessPersona: businessPersona as BusinessPersona,
           nonEssentialRadioAnswers: {
             "test-question-1": true,
-            "test-question-2": true
-          }
+            "test-question-2": true,
+          },
         });
         renderPage({ business, setRegistrationModalIsVisible });
         selectByValue("Industry", "test-industry-with-no-non-essential-questions");
@@ -343,7 +343,7 @@ describe("profile - shared", () => {
         ? {
             foreignBusinessType: "NEXUS",
             foreignBusinessTypeIds: ["NEXUS"],
-            nexusLocationInNewJersey: true
+            nexusLocationInNewJersey: true,
           }
         : {};
     };
@@ -357,9 +357,9 @@ describe("profile - shared", () => {
               businessPersona: businessPersona as BusinessPersona,
               municipality: generateMunicipality({ displayName: "Trenton" }),
               industryId: "cannabis",
-              ...getProfileDataMixin(businessPersona as BusinessPersona)
-            })
-          })
+              ...getProfileDataMixin(businessPersona as BusinessPersona),
+            }),
+          }),
         });
         expect(screen.getByText(Config.profileDefaults.default.cannabisLocationAlert)).toBeInTheDocument();
       }
@@ -377,9 +377,9 @@ describe("profile - shared", () => {
               businessPersona: businessPersona as BusinessPersona,
               municipality: generateMunicipality({ displayName: "Trenton" }),
               industryId: industry.id,
-              ...getProfileDataMixin(businessPersona as BusinessPersona)
-            })
-          })
+              ...getProfileDataMixin(businessPersona as BusinessPersona),
+            }),
+          }),
         });
         expect(
           screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert)
@@ -391,9 +391,9 @@ describe("profile - shared", () => {
       renderPage({
         business: generateBusinessForProfile({
           profileData: generateProfileData({
-            businessPersona: "OWNING"
-          })
-        })
+            businessPersona: "OWNING",
+          }),
+        }),
       });
       expect(
         screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert)

@@ -16,10 +16,10 @@ describe("migrate_v22_to_v23", () => {
       licenseData: undefined,
       preferences: {
         roadmapOpenSections: ["PLAN", "START"],
-        roadmapOpenSteps: []
+        roadmapOpenSteps: [],
       },
       taxFilings: [],
-      version: 22
+      version: 22,
     };
 
     expect(v22.onboardingData.businessName).toBeDefined();

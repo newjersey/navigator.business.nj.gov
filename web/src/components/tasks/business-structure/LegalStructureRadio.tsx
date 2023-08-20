@@ -11,7 +11,7 @@ import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import {
   LegalStructure,
   LegalStructures,
-  LookupLegalStructureById
+  LookupLegalStructureById,
 } from "@businessnjgovnavigator/shared/index";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { orderBy } from "lodash";
@@ -30,7 +30,7 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
     getProfileConfig({
       config: Config,
       persona: state.flow,
-      fieldName: "legalStructureId"
+      fieldName: "legalStructureId",
     });
 
   const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
@@ -57,7 +57,7 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
       operatingPhase:
         state.profileData.operatingPhase === "GUEST_MODE"
           ? "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
-          : state.profileData.operatingPhase
+          : state.profileData.operatingPhase,
     });
   };
 

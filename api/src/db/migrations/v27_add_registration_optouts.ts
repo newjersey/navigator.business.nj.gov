@@ -17,9 +17,9 @@ export const migrate_v26_to_v27 = (v26Data: v26UserData): v27UserData => {
     user: {
       ...v26Data.user,
       receiveNewsletter: false,
-      userTesting: false
+      userTesting: false,
     },
-    version: 27
+    version: 27,
   };
 };
 

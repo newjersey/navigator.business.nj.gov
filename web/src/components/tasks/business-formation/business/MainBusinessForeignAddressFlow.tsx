@@ -6,7 +6,7 @@ import { useMountEffect } from "@/lib/utils/helpers";
 import {
   createEmptyFormationAddress,
   FormationAddress,
-  FormationBusinessLocationType
+  FormationBusinessLocationType,
 } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { ReactElement, useContext } from "react";
@@ -22,7 +22,7 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
       setFormationFormData((previousState) => {
         return {
           ...previousState,
-          addressCountry: "US"
+          addressCountry: "US",
         };
       });
     }
@@ -31,7 +31,7 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
   const onChange = (value: FlowBusinessLocationType): void => {
     let resetAddress = createEmptyFormationAddress();
     setFieldsInteracted(Object.keys(createEmptyFormationAddress()) as (keyof FormationAddress)[], {
-      setToUninteracted: true
+      setToUninteracted: true,
     });
 
     if (value === "US") {
@@ -42,7 +42,7 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
       return {
         ...previousState,
         ...resetAddress,
-        businessLocationType: value
+        businessLocationType: value,
       };
     });
   };

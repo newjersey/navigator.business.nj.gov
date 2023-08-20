@@ -37,10 +37,10 @@ export const selfRegRouterFactory = (
       user: {
         ...userData.user,
         myNJUserKey: myNJUserKey,
-        intercomHash: hash
+        intercomHash: hash,
       },
       dateCreatedISO: dayjs().toISOString(),
-      lastUpdatedISO: dayjs().toISOString()
+      lastUpdatedISO: dayjs().toISOString(),
     });
   };
 

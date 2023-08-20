@@ -19,7 +19,7 @@ export const SidebarCardFundingNudge = (props: Props): ReactElement => {
     if (!business) return;
     await updateQueue
       ?.queueProfileData({
-        operatingPhase: "UP_AND_RUNNING"
+        operatingPhase: "UP_AND_RUNNING",
       })
       .update();
     routeShallowWithQuery(router, QUERIES.fromFunding, "true");

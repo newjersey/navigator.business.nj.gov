@@ -9,7 +9,7 @@ export const searchFundings = (fundings: Funding[], term: string): Match[] => {
   for (const funding of fundings) {
     let match: Match = {
       filename: funding.filename,
-      snippets: []
+      snippets: [],
     };
 
     const content = funding.contentMd.toLowerCase();
@@ -41,7 +41,7 @@ export const searchFundings = (fundings: Funding[], term: string): Match[] => {
       { content: frequency, label: "Program Frequency" },
       { content: stage, label: "Stage" },
       { content: purpose, label: "Program Purpose" },
-      { content: contact, label: "Agency Contact" }
+      { content: contact, label: "Agency Contact" },
     ];
 
     const listTexts = [
@@ -49,7 +49,7 @@ export const searchFundings = (fundings: Funding[], term: string): Match[] => {
       { content: agencyNames, label: "Agency Names" },
       { content: certs, label: "Certification" },
       { content: counties, label: "County" },
-      { content: sectors, label: "Sector" }
+      { content: sectors, label: "Sector" },
     ];
 
     match = findMatchInBlock(blockTexts, term, match);

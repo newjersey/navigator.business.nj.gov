@@ -22,7 +22,7 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logger: LogWriterTy
 
   const makeRequest = async (body: string, type: "GRANT" | "RESUME"): Promise<SelfRegResponse> => {
     const headers = {
-      "Content-Type": "text/xml;encoding=UTF-8"
+      "Content-Type": "text/xml;encoding=UTF-8",
     };
 
     logger.LogInfo(
@@ -35,7 +35,7 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logger: LogWriterTy
       method: "post",
       url: config.serviceUrl,
       data: body,
-      headers: headers
+      headers: headers,
     })
       .then(async (xmlResponse) => {
         const response = await xml2js.parseStringPromise(xmlResponse.data);
@@ -63,7 +63,7 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logger: LogWriterTy
 
         return {
           authRedirectURL: authURL[0],
-          myNJUserKey: authId[0]
+          myNJUserKey: authId[0],
         };
       })
       .catch((error) => {
@@ -112,6 +112,6 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logger: LogWriterTy
 
   return {
     grant,
-    resume
+    resume,
   };
 };

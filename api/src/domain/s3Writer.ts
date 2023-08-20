@@ -9,7 +9,7 @@ export const uploadFile = async function (
   bucket: string
 ): Promise<PutObjectCommandOutput> {
   const s3 = new S3Client({
-    region: "us-east-1"
+    region: "us-east-1",
   });
   const hashSum = createHash("md5");
   hashSum.update(fileContent);
@@ -19,7 +19,7 @@ export const uploadFile = async function (
     Bucket: bucket,
     ContentEncoding: "binary",
     ContentType: fileType,
-    ContentMD5: hashSum.digest("base64")
+    ContentMD5: hashSum.digest("base64"),
   };
   const command = new PutObjectCommand(params);
   return s3.send(command);
@@ -31,7 +31,7 @@ export const getFileFromURL = async function (URI: string): Promise<AxiosRespons
     try {
       axios
         .get(encodeURI(URI), {
-          responseType: "arraybuffer"
+          responseType: "arraybuffer",
         })
         .then((response) => {
           resolve(response);

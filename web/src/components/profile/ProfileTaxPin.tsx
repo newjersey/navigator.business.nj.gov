@@ -18,7 +18,7 @@ export const ProfileTaxPin = (props: Props): ReactElement => {
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["taxPin"]["default"] = getProfileConfig({
     config: Config,
     persona: state.flow,
-    fieldName: fieldName
+    fieldName: fieldName,
   });
 
   return (

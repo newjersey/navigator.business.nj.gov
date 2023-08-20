@@ -26,6 +26,6 @@ export const ABStorageFactory = (): ABStorage => {
 
   return {
     getExperience,
-    setExperience
+    setExperience,
   };
 };

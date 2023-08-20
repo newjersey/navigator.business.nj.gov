@@ -7,7 +7,7 @@ export const DbaFormationStepsConfiguration: {
 }[] = [
   { name: "Business Name", stepIndex: 0, disableStepper: true },
   { name: "DBA Resolution", stepIndex: 1 },
-  { name: "Authorize Business", stepIndex: 2 }
+  { name: "Authorize Business", stepIndex: 2 },
 ];
 
 export const LookupDbaStepIndexByName = (name: DbaStepNames): number | undefined => {

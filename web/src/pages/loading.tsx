@@ -93,7 +93,7 @@ const LoadingPage = (): ReactElement => {
 
 export function getStaticProps(): GetStaticPropsResult<{ noAuth: boolean }> {
   return {
-    props: { noAuth: true }
+    props: { noAuth: true },
   };
 }
 

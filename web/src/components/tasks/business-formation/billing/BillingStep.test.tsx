@@ -7,7 +7,7 @@ import {
   FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
-  useSetupInitialMocks
+  useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import {
   BusinessUser,
@@ -16,7 +16,7 @@ import {
   generateBusiness,
   generateFormationFormData,
   generateUser,
-  ProfileData
+  ProfileData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen } from "@testing-library/react";
@@ -24,7 +24,7 @@ import { fireEvent, screen } from "@testing-library/react";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn()
+    useMediaQuery: jest.fn(),
   };
 }
 
@@ -38,12 +38,12 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn()
+  searchBusinessName: jest.fn(),
 }));
 
 describe("Formation - BillingStep", () => {
   const displayContent: TasksDisplayContent = {
-    formationDbaContent: generateFormationDbaContent({})
+    formationDbaContent: generateFormationDbaContent({}),
   };
 
   beforeEach(() => {
@@ -62,24 +62,24 @@ describe("Formation - BillingStep", () => {
     const profileData = generateFormationProfileData(initialProfileData);
     const formationData = {
       formationFormData: generateFormationFormData(formationFormData, {
-        legalStructureId: profileData.legalStructureId as FormationLegalType
+        legalStructureId: profileData.legalStructureId as FormationLegalType,
       }),
       formationResponse: undefined,
       getFilingResponse: undefined,
       completedFilingPayment: false,
       businessNameAvailability: undefined,
       dbaBusinessNameAvailability: undefined,
-      lastVisitedPageIndex: 0
+      lastVisitedPageIndex: 0,
     };
     const user = initialUser ? generateUser(initialUser) : generateUser({});
     // eslint-disable-next-line testing-library/render-result-naming-convention
     const page = preparePage({
       business: generateBusiness({
         profileData,
-        formationData
+        formationData,
       }),
       displayContent,
-      user
+      user,
     });
 
     await page.stepperClickToBillingStep();
@@ -98,7 +98,7 @@ describe("Formation - BillingStep", () => {
         corpWatchNotification: true,
         officialFormationDocument: true,
         certificateOfStanding: false,
-        certifiedCopyOfFormationDocument: true
+        certifiedCopyOfFormationDocument: true,
       }
     );
 
@@ -142,7 +142,7 @@ describe("Formation - BillingStep", () => {
             paymentType: undefined,
             officialFormationDocument: true,
             certificateOfStanding: true,
-            certifiedCopyOfFormationDocument: false
+            certifiedCopyOfFormationDocument: false,
           }
         );
         const officialFormationCost = Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
@@ -162,7 +162,7 @@ describe("Formation - BillingStep", () => {
             paymentType: undefined,
             officialFormationDocument: true,
             certificateOfStanding: true,
-            certifiedCopyOfFormationDocument: false
+            certifiedCopyOfFormationDocument: false,
           }
         );
 
@@ -195,7 +195,7 @@ describe("Formation - BillingStep", () => {
         paymentType: undefined,
         officialFormationDocument: true,
         certificateOfStanding: false,
-        certifiedCopyOfFormationDocument: false
+        certifiedCopyOfFormationDocument: false,
       }
     );
 
@@ -233,7 +233,7 @@ describe("Formation - BillingStep", () => {
       {},
       {
         contactFirstName: "",
-        contactLastName: ""
+        contactLastName: "",
       },
       { name: "Mike Jones" }
     );
@@ -247,7 +247,7 @@ describe("Formation - BillingStep", () => {
       {},
       {
         contactFirstName: "Actual",
-        contactLastName: "Name"
+        contactLastName: "Name",
       },
       { name: "Some Wrong Name" }
     );

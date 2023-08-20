@@ -6,7 +6,7 @@ import {
   v67GetFilingResponse,
   v67ProfileData,
   v67TaskProgress,
-  v67UserData
+  v67UserData,
 } from "./v67_add_graduation_card";
 import { migrate_v67_to_v68 } from "./v68_complete_formation_task_if_success";
 
@@ -16,14 +16,14 @@ describe("migrate_v67_to_v68", () => {
     const getFilingResponse = generatev67GetFilingResponse({ success: true });
     const taskProgress = {
       "form-business-entity": "IN_PROGRESS",
-      "other-task": "NOT_STARTED"
+      "other-task": "NOT_STARTED",
     } as Record<string, v67TaskProgress>;
     const v67 = makeUserData(profileData, getFilingResponse, taskProgress);
     const v68 = migrate_v67_to_v68(v67);
 
     expect(v68.taskProgress).toEqual({
       "form-business-entity": "COMPLETED",
-      "other-task": "NOT_STARTED"
+      "other-task": "NOT_STARTED",
     });
   });
 
@@ -32,14 +32,14 @@ describe("migrate_v67_to_v68", () => {
     const getFilingResponse = generatev67GetFilingResponse({ success: false });
     const taskProgress = {
       "form-business-entity": "IN_PROGRESS",
-      "other-task": "NOT_STARTED"
+      "other-task": "NOT_STARTED",
     } as Record<string, v67TaskProgress>;
     const v67 = makeUserData(profileData, getFilingResponse, taskProgress);
     const v68 = migrate_v67_to_v68(v67);
 
     expect(v68.taskProgress).toEqual({
       "form-business-entity": "IN_PROGRESS",
-      "other-task": "NOT_STARTED"
+      "other-task": "NOT_STARTED",
     });
   });
 });
@@ -61,16 +61,16 @@ const makeUserData = (
       roadmapOpenSteps: [],
       hiddenCertificationIds: [],
       hiddenFundingIds: [],
-      visibleRoadmapSidebarCards: []
+      visibleRoadmapSidebarCards: [],
     },
     taxFilingData: {
-      filings: []
+      filings: [],
     },
     formationData: {
       formationFormData: generatev67FormationFormData({}),
       formationResponse: undefined,
-      getFilingResponse: getFilingResponse
+      getFilingResponse: getFilingResponse,
     },
-    version: 67
+    version: 67,
   };
 };

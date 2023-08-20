@@ -20,9 +20,9 @@ export const migrate_v80_to_v81 = (v80Data: v80UserData): v81UserData => {
     formationData: {
       ...v80Data.formationData,
       completedFilingPayment:
-        v80Data.formationData.getFilingResponse?.confirmationNumber !== undefined || false
+        v80Data.formationData.getFilingResponse?.confirmationNumber !== undefined || false,
     },
-    version: 81
+    version: 81,
   };
 };
 
@@ -187,7 +187,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v81FormationData {
@@ -253,7 +253,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -262,7 +262,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const corpBusinessSuffix = [
@@ -275,7 +275,7 @@ export const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
@@ -317,7 +317,7 @@ export const generatev81User = (overrides: Partial<v81BusinessUser>): v81Busines
     myNJUserKey: undefined,
     intercomHash: undefined,
     abExperience: "ExperienceA",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -331,7 +331,7 @@ export const generatev81ProfileData = (overrides: Partial<v81ProfileData>): v81P
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     liquorLicense: true,
     requiresCpa: false,
@@ -347,7 +347,7 @@ export const generatev81ProfileData = (overrides: Partial<v81ProfileData>): v81P
     documents: {
       formationDoc: `some-formation-doc-${randomInt()}`,
       standingDoc: `some-standing-doc-${randomInt()}`,
-      certifiedDoc: `some-certified-doc-${randomInt()}`
+      certifiedDoc: `some-certified-doc-${randomInt()}`,
     },
     ownershipTypeIds: [],
     existingEmployees: undefined,
@@ -362,7 +362,7 @@ export const generatev81ProfileData = (overrides: Partial<v81ProfileData>): v81P
     certifiedInteriorDesigner: false,
     providesStaffingService: false,
     operatingPhase: undefined,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -403,6 +403,6 @@ export const generatev81FormationFormData = (
     contactFirstName: "",
     contactLastName: "",
     contactPhoneNumber: "",
-    ...overrides
+    ...overrides,
   };
 };

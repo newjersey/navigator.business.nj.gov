@@ -55,7 +55,7 @@ export const SignUpModal = (): ReactElement => {
             position: "absolute",
             right: 10,
             top: 12,
-            color: "#757575"
+            color: "#757575",
           }}
         >
           <Icon className="usa-icon--size-4">close</Icon>
@@ -80,7 +80,7 @@ export const SignUpModal = (): ReactElement => {
             flexDirection: "column",
             marginX: "auto",
             width: "fit-content",
-            marginY: 1
+            marginY: 1,
           }}
         >
           <Content

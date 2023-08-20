@@ -21,8 +21,8 @@ export const encryptTaxIdFactory = (encryptionDecryptionClient: EncryptionDecryp
       profileData: {
         ...business.profileData,
         taxId: maskedTaxId,
-        encryptedTaxId: encryptedTaxId
-      }
+        encryptedTaxId: encryptedTaxId,
+      },
     }));
   };
 };

@@ -25,7 +25,7 @@ describe("WebserviceLicenseStatusClient", () => {
     expect(mockAxios.post).toHaveBeenCalledWith("www.example.com/ws/simple/queryLicenseStatus", {
       zipCode: "12345",
       businessName: "some-name",
-      licenseType: "some-license-type"
+      licenseType: "some-license-type",
     });
   });
 

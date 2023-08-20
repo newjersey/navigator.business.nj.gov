@@ -4,7 +4,7 @@ import { generateFunding } from "@/test/factories";
 import {
   generateBusiness,
   generateMunicipality,
-  generateProfileData
+  generateProfileData,
 } from "@businessnjgovnavigator/shared/test";
 
 describe("filterFundings", () => {
@@ -14,33 +14,33 @@ describe("filterFundings", () => {
         homeBasedBusiness: true,
         municipality: undefined,
         existingEmployees: "0",
-        sectorId: undefined
-      })
+        sectorId: undefined,
+      }),
     });
     const funding1 = generateFunding({
       homeBased: "yes",
       employeesRequired: "n/a",
-      status: "rolling application"
+      status: "rolling application",
     });
     const funding2 = generateFunding({
       homeBased: "no",
       employeesRequired: "n/a",
-      status: "rolling application"
+      status: "rolling application",
     });
     const funding3 = generateFunding({
       homeBased: "unknown",
       employeesRequired: "n/a",
-      status: "rolling application"
+      status: "rolling application",
     });
     const funding4 = generateFunding({
       homeBased: "yes",
       employeesRequired: "50",
-      status: "rolling application"
+      status: "rolling application",
     });
     const funding5 = generateFunding({
       homeBased: "yes",
       employeesRequired: "n/a",
-      publishStageArchive: "Do Not Publish"
+      publishStageArchive: "Do Not Publish",
     });
     const fundings = [funding1, funding2, funding3, funding4, funding5];
     const result = filterFundings(fundings, business);
@@ -54,33 +54,33 @@ describe("filterFundings", () => {
         homeBasedBusiness: false,
         municipality: undefined,
         existingEmployees: "0",
-        sectorId: undefined
-      })
+        sectorId: undefined,
+      }),
     });
     const funding1 = generateFunding({
       homeBased: "yes",
       employeesRequired: "n/a",
-      status: "rolling application"
+      status: "rolling application",
     });
     const funding2 = generateFunding({
       homeBased: "no",
       employeesRequired: "n/a",
-      status: "rolling application"
+      status: "rolling application",
     });
     const funding3 = generateFunding({
       homeBased: "unknown",
       employeesRequired: "n/a",
-      status: "rolling application"
+      status: "rolling application",
     });
     const funding4 = generateFunding({
       homeBased: "yes",
       employeesRequired: "50",
-      status: "rolling application"
+      status: "rolling application",
     });
     const funding5 = generateFunding({
       homeBased: "yes",
       employeesRequired: "n/a",
-      publishStageArchive: "Do Not Publish"
+      publishStageArchive: "Do Not Publish",
     });
     const fundings = [funding1, funding2, funding3, funding4, funding5];
 
@@ -96,8 +96,8 @@ describe("filterFundings", () => {
           homeBasedBusiness: false,
           municipality: generateMunicipality({ county: "Atlantic" }),
           sectorId: undefined,
-          existingEmployees: "1"
-        })
+          existingEmployees: "1",
+        }),
       });
 
       const funding1 = generateFunding({ county: ["Atlantic"], status: "rolling application" });
@@ -109,7 +109,7 @@ describe("filterFundings", () => {
       const funding7 = generateFunding({
         county: ["All", "Camden"],
         status: "rolling application",
-        publishStageArchive: "Do Not Publish"
+        publishStageArchive: "Do Not Publish",
       });
       const fundings = [funding1, funding2, funding3, funding4, funding5, funding6, funding7];
 
@@ -124,8 +124,8 @@ describe("filterFundings", () => {
           homeBasedBusiness: false,
           municipality: undefined,
           sectorId: undefined,
-          existingEmployees: "1"
-        })
+          existingEmployees: "1",
+        }),
       });
 
       const funding1 = generateFunding({ county: ["Atlantic"], status: "rolling application" });
@@ -137,7 +137,7 @@ describe("filterFundings", () => {
       const funding7 = generateFunding({
         county: ["All", "Camden"],
         status: "rolling application",
-        publishStageArchive: "Do Not Publish"
+        publishStageArchive: "Do Not Publish",
       });
       const fundings = [funding1, funding2, funding3, funding4, funding5, funding6, funding7];
 
@@ -155,17 +155,17 @@ describe("filterFundings", () => {
         homeBasedBusiness: false,
         municipality: undefined,
         existingEmployees: "1",
-        sectorId: undefined
-      })
+        sectorId: undefined,
+      }),
     });
     const funding1 = generateFunding({
       employeesRequired: "n/a",
       status: "deadline",
-      dueDate: "07/01/2022"
+      dueDate: "07/01/2022",
     });
     const funding2 = generateFunding({
       employeesRequired: "n/a",
-      status: "rolling application"
+      status: "rolling application",
     });
 
     const fundings = [funding1, funding2];
@@ -181,18 +181,18 @@ describe("filterFundings", () => {
         homeBasedBusiness: false,
         municipality: undefined,
         existingEmployees: "1",
-        sectorId: undefined
-      })
+        sectorId: undefined,
+      }),
     });
     const funding1 = generateFunding({
       employeesRequired: "n/a",
       status: "deadline",
-      dueDate: "07/01/2050"
+      dueDate: "07/01/2050",
     });
 
     const funding2 = generateFunding({
       employeesRequired: "n/a",
-      status: "rolling application"
+      status: "rolling application",
     });
 
     const fundings = [funding1, funding2];
@@ -208,23 +208,23 @@ describe("filterFundings", () => {
         homeBasedBusiness: false,
         municipality: undefined,
         existingEmployees: "1",
-        sectorId: undefined
-      })
+        sectorId: undefined,
+      }),
     });
     const funding1 = generateFunding({
       employeesRequired: "n/a",
       status: "rolling application",
-      publishStageArchive: "Do Not Publish"
+      publishStageArchive: "Do Not Publish",
     });
     const funding2 = generateFunding({
       employeesRequired: "n/a",
       status: "rolling application",
-      publishStageArchive: null
+      publishStageArchive: null,
     });
     const funding3 = generateFunding({
       employeesRequired: "200",
       status: "rolling application",
-      publishStageArchive: "Do Not Publish"
+      publishStageArchive: "Do Not Publish",
     });
     const fundings = [funding1, funding2, funding3];
 
@@ -240,15 +240,15 @@ describe("filterFundings", () => {
           homeBasedBusiness: false,
           municipality: undefined,
           existingEmployees: "0",
-          sectorId: undefined
-        })
+          sectorId: undefined,
+        }),
       });
       const funding1 = generateFunding({ employeesRequired: "n/a", status: "rolling application" });
       const funding2 = generateFunding({ employeesRequired: "yes", status: "rolling application" });
       const funding3 = generateFunding({
         employeesRequired: "n/a",
         status: "rolling application",
-        publishStageArchive: "Do Not Publish"
+        publishStageArchive: "Do Not Publish",
       });
       const fundings = [funding1, funding2, funding3];
 
@@ -263,15 +263,15 @@ describe("filterFundings", () => {
           homeBasedBusiness: false,
           municipality: undefined,
           existingEmployees: "00",
-          sectorId: undefined
-        })
+          sectorId: undefined,
+        }),
       });
       const funding1 = generateFunding({ employeesRequired: "n/a", status: "rolling application" });
       const funding2 = generateFunding({ employeesRequired: "yes", status: "rolling application" });
       const funding3 = generateFunding({
         employeesRequired: "n/a",
         status: "rolling application",
-        publishStageArchive: null
+        publishStageArchive: null,
       });
       const fundings = [funding1, funding2, funding3];
 
@@ -286,18 +286,18 @@ describe("filterFundings", () => {
           homeBasedBusiness: false,
           municipality: undefined,
           existingEmployees: "0123",
-          sectorId: undefined
-        })
+          sectorId: undefined,
+        }),
       });
       const funding1 = generateFunding({
         employeesRequired: "n/a",
         status: "rolling application",
-        certifications: null
+        certifications: null,
       });
       const funding2 = generateFunding({
         employeesRequired: "yes",
         status: "rolling application",
-        certifications: null
+        certifications: null,
       });
       const fundings = [funding1, funding2];
 
@@ -312,8 +312,8 @@ describe("filterFundings", () => {
           homeBasedBusiness: false,
           municipality: undefined,
           existingEmployees: undefined,
-          sectorId: undefined
-        })
+          sectorId: undefined,
+        }),
       });
       const funding1 = generateFunding({ employeesRequired: "n/a", status: "rolling application" });
       const funding2 = generateFunding({ employeesRequired: "yes", status: "rolling application" });
@@ -331,8 +331,8 @@ describe("filterFundings", () => {
         homeBasedBusiness: false,
         municipality: undefined,
         existingEmployees: "1",
-        sectorId: "construction"
-      })
+        sectorId: "construction",
+      }),
     });
 
     const funding1 = generateFunding({ sector: ["construction"], status: "rolling application" });
@@ -340,7 +340,7 @@ describe("filterFundings", () => {
     const funding3 = generateFunding({ sector: ["construction", "cannabis"], status: "rolling application" });
     const funding4 = generateFunding({
       sector: ["cannabis", "manufacturing"],
-      status: "rolling application"
+      status: "rolling application",
     });
     const funding5 = generateFunding({ sector: ["Construction"], status: "rolling application" });
     const fundings = [funding1, funding2, funding3, funding4, funding5];
@@ -352,7 +352,7 @@ describe("filterFundings", () => {
 
   describe("certifications", () => {
     const funding1 = generateFunding({
-      certifications: ["woman-owned"]
+      certifications: ["woman-owned"],
     });
     const funding2 = generateFunding({ certifications: ["minority-owned"] });
     const funding3 = generateFunding({ certifications: ["veteran-owned"] });
@@ -372,8 +372,8 @@ describe("filterFundings", () => {
           homeBasedBusiness: false,
           sectorId: undefined,
           existingEmployees: undefined,
-          municipality: undefined
-        })
+          municipality: undefined,
+        }),
       });
 
       const result = filterFundings([funding8, funding9], business);
@@ -388,8 +388,8 @@ describe("filterFundings", () => {
           homeBasedBusiness: false,
           sectorId: undefined,
           existingEmployees: undefined,
-          municipality: undefined
-        })
+          municipality: undefined,
+        }),
       });
 
       const result = filterFundings(listOfFundingTypes, business);
@@ -404,8 +404,8 @@ describe("filterFundings", () => {
           homeBasedBusiness: false,
           sectorId: undefined,
           existingEmployees: SMALL_BUSINESS_MAX_EMPLOYEE_COUNT.toString(),
-          municipality: undefined
-        })
+          municipality: undefined,
+        }),
       });
 
       const result = filterFundings(listOfFundingTypes, business);
@@ -422,8 +422,8 @@ describe("filterFundings", () => {
           homeBasedBusiness: false,
           sectorId: undefined,
           existingEmployees: (SMALL_BUSINESS_MAX_EMPLOYEE_COUNT - 1).toString(),
-          municipality: undefined
-        })
+          municipality: undefined,
+        }),
       });
 
       const result = filterFundings(listOfFundingTypes, business);
@@ -444,8 +444,8 @@ describe("filterFundings", () => {
           homeBasedBusiness: false,
           sectorId: undefined,
           existingEmployees: (SMALL_BUSINESS_MAX_EMPLOYEE_COUNT - 1).toString(),
-          municipality: undefined
-        })
+          municipality: undefined,
+        }),
       });
 
       const result = filterFundings([funding], business);
@@ -462,8 +462,8 @@ describe("filterFundings", () => {
           homeBasedBusiness: false,
           sectorId: undefined,
           existingEmployees: (SMALL_BUSINESS_MAX_EMPLOYEE_COUNT - 1).toString(),
-          municipality: undefined
-        })
+          municipality: undefined,
+        }),
       });
 
       const result = filterFundings([funding], business);
@@ -480,8 +480,8 @@ describe("filterFundings", () => {
           homeBasedBusiness: false,
           sectorId: undefined,
           existingEmployees: (SMALL_BUSINESS_MAX_EMPLOYEE_COUNT - 1).toString(),
-          municipality: undefined
-        })
+          municipality: undefined,
+        }),
       });
 
       const result = filterFundings([funding], business);
@@ -499,8 +499,8 @@ describe("filterFundings", () => {
         homeBasedBusiness: false,
         sectorId: undefined,
         existingEmployees: (SMALL_BUSINESS_MAX_EMPLOYEE_COUNT - 1).toString(),
-        municipality: undefined
-      })
+        municipality: undefined,
+      }),
     });
 
     const result = filterFundings([funding], business);
@@ -517,8 +517,8 @@ describe("filterFundings", () => {
         homeBasedBusiness: false,
         sectorId: undefined,
         existingEmployees: (SMALL_BUSINESS_MAX_EMPLOYEE_COUNT - 1).toString(),
-        municipality: undefined
-      })
+        municipality: undefined,
+      }),
     });
 
     const result = filterFundings([funding], business);

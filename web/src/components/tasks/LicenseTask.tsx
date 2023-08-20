@@ -45,7 +45,7 @@ export const LicenseTask = (props: Props): ReactElement => {
     if (business.licenseData?.completedSearch) {
       setLicenseStatusResult({
         status: business.licenseData.status,
-        checklistItems: business.licenseData.items
+        checklistItems: business.licenseData.items,
       });
     }
   }, business);
@@ -82,7 +82,7 @@ export const LicenseTask = (props: Props): ReactElement => {
         if (!resultLicenseData) return;
         setLicenseStatusResult({
           status: resultLicenseData.status,
-          checklistItems: resultLicenseData.items
+          checklistItems: resultLicenseData.items,
         });
         setError(undefined);
       })
@@ -106,7 +106,7 @@ export const LicenseTask = (props: Props): ReactElement => {
     borderColor: "divider",
     fontSize: "14px",
     fontWeight: "600",
-    color: "#757575"
+    color: "#757575",
   };
 
   return (

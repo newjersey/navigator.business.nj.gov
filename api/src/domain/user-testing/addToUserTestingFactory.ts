@@ -12,9 +12,9 @@ export const addToUserTestingFactory = (userTestingClient: UserTestingClient): A
         ...userData.user,
         externalStatus: {
           ...userData.user.externalStatus,
-          userTesting
-        }
-      }
+          userTesting,
+        },
+      },
     };
     return user;
   };

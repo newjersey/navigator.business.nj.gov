@@ -47,7 +47,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
     "addressLine2",
     "addressCity",
     "addressState",
-    "addressZipCode"
+    "addressZipCode",
   ] as const;
 
   type ErrorFields = (typeof validatedFields)[number];
@@ -80,7 +80,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
         label = templateEval(Config.formation.general.maximumLengthErrorText, {
           // // eslint-disable-next-line @typescript-eslint/no-explicit-any
           field: (Config.formation.addressModal as any)[params.dataField].label,
-          maxLen: params.maxLen.toString()
+          maxLen: params.maxLen.toString(),
         });
       }
       return { label, invalid: !isValid };
@@ -92,35 +92,35 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           required: true,
           maxLen: 35,
           labelWhenMissing: Config.formation.addressModal.addressLine1.error,
-          dataField: "addressLine1"
+          dataField: "addressLine1",
         });
       case "addressLine2":
         return fieldWithMaxLength({
           required: false,
           maxLen: 35,
           labelWhenMissing: "",
-          dataField: "addressLine2"
+          dataField: "addressLine2",
         });
       case "addressCity":
         return fieldWithMaxLength({
           required: true,
           maxLen: 30,
           labelWhenMissing: Config.formation.addressModal.addressCity.error,
-          dataField: "addressCity"
+          dataField: "addressCity",
         });
       case "addressName":
         return fieldWithMaxLength({
           required: true,
           maxLen: 50,
           labelWhenMissing: Config.formation.addressModal.name.error,
-          dataField: "name"
+          dataField: "name",
         });
       case "addressState":
         return { invalid: !data.addressState, label: Config.formation.addressModal.addressState.error };
       case "addressZipCode":
         return {
           invalid: !data.addressZipCode || data.addressZipCode.length < 5,
-          label: Config.formation.addressModal.addressZipCode.error
+          label: Config.formation.addressModal.addressZipCode.error,
         };
       default:
         return { invalid: false, label: "" };
@@ -162,7 +162,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
     if (checked) {
       const data = {
         ...addressData,
-        ...props.defaultAddress
+        ...props.defaultAddress,
       };
       setAddressData(data);
 
@@ -389,7 +389,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                       <GenericTextField
                         inputWidth="full"
                         numericProps={{
-                          maxLength: 5
+                          maxLength: 5,
                         }}
                         disabled={shouldBeDisabled("addressZipCode")}
                         fieldName={"addressZipCode"}

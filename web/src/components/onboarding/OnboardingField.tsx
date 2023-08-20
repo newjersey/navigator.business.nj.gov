@@ -22,7 +22,7 @@ export const OnboardingField = <T,>({ fieldName, className, ...props }: Onboardi
   const contentFromConfig = getProfileConfig({
     config: Config,
     persona: state.flow,
-    fieldName: fieldName
+    fieldName: fieldName,
   });
 
   const handleChange = (value: string): void => {
@@ -33,7 +33,7 @@ export const OnboardingField = <T,>({ fieldName, className, ...props }: Onboardi
 
     setProfileData({
       ...state.profileData,
-      [fieldName]: value
+      [fieldName]: value,
     });
   };
 
