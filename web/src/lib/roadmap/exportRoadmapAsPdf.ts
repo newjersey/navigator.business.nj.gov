@@ -10,7 +10,7 @@ const splitElementIntoImages = async (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   element: any,
   pageWidthInPx: number,
-  pageHeightInPx: number
+  pageHeightInPx: number,
 ): Promise<{ totalHeight: number; canvas: string }[]> => {
   const scaleFactor = pageWidthInPx / element.offsetWidth;
   const totalHeight = element.offsetHeight / scaleFactor;
@@ -32,7 +32,7 @@ const splitElementIntoImages = async (
       width: pageWidthInPx,
       height: Math.floor(Math.min(totalHeight - i * pageHeightInPx, pageHeightInPx)),
       y: i === 0 ? 0 : i * pageHeightInPx - carryOverPixels,
-      windowWidth: Math.ceil(Math.max(element.offsetHeight, pageWidthInPx))
+      windowWidth: Math.ceil(Math.max(element.offsetHeight, pageWidthInPx)),
     });
     result.canvas = canvas.toDataURL("image/png");
 
@@ -48,7 +48,7 @@ export const exportComponentsAsPDF = async (props: Props): Promise<void> => {
     hotfixes: ["px_scaling"],
     orientation: "p",
     unit: "px",
-    format: "a4"
+    format: "a4",
   });
 
   const margin = 40;
@@ -75,7 +75,7 @@ export const exportComponentsAsPDF = async (props: Props): Promise<void> => {
         Math.min(image.totalHeight - j * pdfPageHeight, pdfPageHeight),
         undefined,
         "FAST",
-        0
+        0,
       );
     }
   }

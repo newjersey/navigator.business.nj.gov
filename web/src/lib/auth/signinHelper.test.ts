@@ -6,7 +6,7 @@ import { generateUser, generateUserData } from "@businessnjgovnavigator/shared/"
 import {
   generateBusiness,
   generatePreferences,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { waitFor } from "@testing-library/react";
@@ -22,7 +22,7 @@ const originalModule = jest.requireActual("@/lib/storage/UserDataStorage");
 
 jest.mock("./sessionHelper", () => ({
   getCurrentUser: jest.fn(),
-  triggerSignOut: jest.fn().mockResolvedValue({})
+  triggerSignOut: jest.fn().mockResolvedValue({}),
 }));
 
 const mockSession = session as jest.Mocked<typeof session>;
@@ -30,7 +30,7 @@ const mockSession = session as jest.Mocked<typeof session>;
 jest.mock("@/lib/api-client/apiClient", () => ({
   getUserData: jest.fn(),
   postUserData: jest.fn(),
-  postSelfReg: jest.fn()
+  postSelfReg: jest.fn(),
 }));
 const mockApi = api as jest.Mocked<typeof api>;
 
@@ -45,7 +45,7 @@ describe("SigninHelper", () => {
     mockUserDataStorage.UserDataStorageFactory.mockImplementation(() => ({
       ...originalModule.UserDataStorageFactory(),
       getCurrentUserData: mockGetCurrentUserData,
-      delete: mockDelete
+      delete: mockDelete,
     }));
   });
 
@@ -59,7 +59,7 @@ describe("SigninHelper", () => {
 
       expect(mockDispatch).toHaveBeenCalledWith({
         type: "LOGIN",
-        user: user
+        user: user,
       });
     });
   });
@@ -87,7 +87,7 @@ describe("SigninHelper", () => {
 
     it("does not use a returnToLink if path is account-setup", async () => {
       const business = generateBusiness({
-        preferences: generatePreferences({ returnToLink: "" })
+        preferences: generatePreferences({ returnToLink: "" }),
       });
       userData = generateUserDataForBusiness(business);
       updateQueue = new UpdateQueueFactory(userData, update);
@@ -101,17 +101,17 @@ describe("SigninHelper", () => {
             ...userData.businesses[userData.currentBusinessId],
             preferences: {
               ...userData.businesses[userData.currentBusinessId].preferences,
-              returnToLink: "/tasks/some-url"
-            }
-          }
-        }
+              returnToLink: "/tasks/some-url",
+            },
+          },
+        },
       });
     });
 
     it("posts userData to api self-reg with current pathname included when returnToLink is empty", async () => {
       fakeRouter = { replace: mockPush, asPath: ROUTES.accountSetup };
       const business = generateBusiness({
-        preferences: generatePreferences({ returnToLink: "" })
+        preferences: generatePreferences({ returnToLink: "" }),
       });
 
       userData = generateUserDataForBusiness(business);
@@ -127,16 +127,16 @@ describe("SigninHelper", () => {
             ...userData.businesses[userData.currentBusinessId],
             preferences: {
               ...userData.businesses[userData.currentBusinessId].preferences,
-              returnToLink: ""
-            }
-          }
-        }
+              returnToLink: "",
+            },
+          },
+        },
       });
     });
 
     it("posts userData to api self-reg with the returnToLink if exists", async () => {
       const business = generateBusiness({
-        preferences: generatePreferences({ returnToLink: "/pathname?query=true" })
+        preferences: generatePreferences({ returnToLink: "/pathname?query=true" }),
       });
       userData = generateUserDataForBusiness(business);
       updateQueue = new UpdateQueueFactory(userData, update);
@@ -149,10 +149,10 @@ describe("SigninHelper", () => {
             ...userData.businesses[userData.currentBusinessId],
             preferences: {
               ...userData.businesses[userData.currentBusinessId].preferences,
-              returnToLink: "/pathname?query=true"
-            }
-          }
-        }
+              returnToLink: "/pathname?query=true",
+            },
+          },
+        },
       });
     });
 
@@ -160,7 +160,7 @@ describe("SigninHelper", () => {
       const returnedUserData = generateUserData({});
       mockApi.postSelfReg.mockResolvedValue({
         userData: returnedUserData,
-        authRedirectURL: "/some-url"
+        authRedirectURL: "/some-url",
       });
       await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
       await waitFor(() => {
@@ -201,7 +201,7 @@ describe("SigninHelper", () => {
       expect(userStorageMock).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalledWith({
         type: "LOGIN_GUEST",
-        user: user
+        user: user,
       });
     });
 
@@ -261,7 +261,7 @@ describe("SigninHelper", () => {
       expect(userStorageMock).toHaveBeenCalledWith(user.id);
       expect(mockDispatch).toHaveBeenCalledWith({
         type: "LOGOUT",
-        user: undefined
+        user: undefined,
       });
       expect(mockPush).toHaveBeenCalledWith(ROUTES.landing);
     });

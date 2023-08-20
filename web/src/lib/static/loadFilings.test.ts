@@ -3,7 +3,7 @@ import { loadAllFilingUrlSlugs, loadFilingByUrlSlug } from "./loadFilings";
 
 jest.mock("fs");
 jest.mock("process", () => ({
-  cwd: (): string => "/test"
+  cwd: (): string => "/test",
 }));
 
 describe("loadFilings", () => {
@@ -45,8 +45,8 @@ describe("loadFilings", () => {
       expect(allFilingUrlSlugs).toEqual(
         expect.arrayContaining([
           { params: { filingUrlSlug: "some-url-slug-1" } },
-          { params: { filingUrlSlug: "some-url-slug-2" } }
-        ])
+          { params: { filingUrlSlug: "some-url-slug-2" } },
+        ]),
       );
     });
   });
@@ -95,7 +95,7 @@ describe("loadFilings", () => {
         urlSlug: "some-url-slug-2",
         callToActionLink: "www.example2.com",
         callToActionText: "",
-        contentMd: "\n# I am a header2\n\nI am a text content2"
+        contentMd: "\n# I am a header2\n\nI am a text content2",
       });
     });
   });

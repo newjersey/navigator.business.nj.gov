@@ -23,7 +23,7 @@ import {
   createEmptyProfileData,
   getCurrentBusiness,
   LookupLegalStructureById,
-  ProfileData
+  ProfileData,
 } from "@businessnjgovnavigator/shared";
 import { Backdrop, CircularProgress } from "@mui/material";
 import { ReactElement, useState } from "react";
@@ -54,7 +54,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
     FormFuncWrapper,
     onSubmit,
     isValid,
-    state: formContextState
+    state: formContextState,
   } = useFormContextHelper(createReducedFieldStates(fields));
 
   useMountEffectWhenDefined(() => {
@@ -66,15 +66,15 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
     if (has_CMS_ONLY_fakeError) {
       formContextState.reducer({
         type: FieldStateActionKind.VALIDATION,
-        payload: { field: "businessName", invalid: true }
+        payload: { field: "businessName", invalid: true },
       });
       formContextState.reducer({
         type: FieldStateActionKind.VALIDATION,
-        payload: { field: "taxId", invalid: true }
+        payload: { field: "taxId", invalid: true },
       });
       formContextState.reducer({
         type: FieldStateActionKind.VALIDATION,
-        payload: { field: "responsibleOwnerName", invalid: true }
+        payload: { field: "responsibleOwnerName", invalid: true },
       });
     }
   });
@@ -82,20 +82,20 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
   const errorMessages: Partial<Record<ProfileFields, string>> = {
     businessName: Config.taxAccess.modalBusinessFieldErrorName,
     responsibleOwnerName: Config.taxAccess.modalResponsibleOwnerFieldErrorName,
-    taxId: Config.taxAccess.modalTaxFieldErrorName
+    taxId: Config.taxAccess.modalTaxFieldErrorName,
   };
 
   const canMoveToPrevStep = business?.profileData.businessPersona === "OWNING";
 
   const displayBusinessName = (): boolean => {
     return LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
-      "businessName"
+      "businessName",
     );
   };
 
   const displayResponsibleOwnerName = (): boolean => {
     return LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
-      "responsibleOwnerName"
+      "responsibleOwnerName",
     );
   };
 
@@ -158,24 +158,24 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
         const userDataToSet = await postTaxFilingsOnboarding({
           taxId: profileData.taxId as string,
           businessName: businessNameToSubmitToTaxApi,
-          encryptedTaxId: encryptedTaxId as string
+          encryptedTaxId: encryptedTaxId as string,
         });
 
         updateQueue.queue(userDataToSet).queueProfileData({
           taxId: profileData.taxId,
-          encryptedTaxId: encryptedTaxId
+          encryptedTaxId: encryptedTaxId,
         });
 
         if (getCurrentBusiness(userDataToSet).taxFilingData.state === "SUCCESS") {
           if (displayBusinessName()) {
             updateQueue.queueProfileData({
-              businessName: profileData.businessName
+              businessName: profileData.businessName,
             });
           }
 
           if (displayResponsibleOwnerName()) {
             updateQueue.queueProfileData({
-              responsibleOwnerName: profileData.responsibleOwnerName
+              responsibleOwnerName: profileData.responsibleOwnerName,
             });
           }
         }
@@ -207,17 +207,17 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
         if (taxFilingData.errorField === "businessName" && displayBusinessName()) {
           formContextState.reducer({
             type: FieldStateActionKind.VALIDATION,
-            payload: { field: "businessName", invalid: true }
+            payload: { field: "businessName", invalid: true },
           });
         } else if (taxFilingData.errorField === "businessName" && displayResponsibleOwnerName()) {
           formContextState.reducer({
             type: FieldStateActionKind.VALIDATION,
-            payload: { field: "responsibleOwnerName", invalid: true }
+            payload: { field: "responsibleOwnerName", invalid: true },
           });
         } else {
           formContextState.reducer({
             type: FieldStateActionKind.VALIDATION,
-            payload: { field: fields, invalid: true }
+            payload: { field: fields, invalid: true },
           });
         }
         setOnAPIfailed("FAILED");
@@ -230,7 +230,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
         setIsLoading(false);
       }
     },
-    () => analytics.event.tax_calendar_modal.submit.tax_calendar_modal_validation_error()
+    () => analytics.event.tax_calendar_modal.submit.tax_calendar_modal_validation_error(),
   );
 
   const onClose = (): void => {
@@ -250,10 +250,10 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
         value={{
           state: {
             profileData: profileData,
-            flow: "OWNING"
+            flow: "OWNING",
           },
           setProfileData,
-          onBack: (): void => {}
+          onBack: (): void => {},
         }}
       >
         <Backdrop sx={{ zIndex: 20000 }} open={isLoading}>
@@ -302,7 +302,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                   header: Config.taxAccess.modalBusinessFieldHeader,
                   description: Config.taxAccess.modalBusinessFieldMarkdown,
                   headerNotBolded: "",
-                  postDescription: ""
+                  postDescription: "",
                 }}
               />
               <ProfileBusinessName validationText={Config.taxAccess.failedBusinessFieldHelper} required />
@@ -320,7 +320,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                   header: Config.taxAccess.modalBusinessOwnerName,
                   description: Config.taxAccess.modalBusinessOwnerDescription,
                   headerNotBolded: "",
-                  postDescription: ""
+                  postDescription: "",
                 }}
               />
               <ProfileResponsibleOwnerName
@@ -342,10 +342,10 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                   description: Config.taxAccess.modalTaxIdMarkdown,
                   headerNotBolded: "",
                   postDescription: LookupLegalStructureById(
-                    business?.profileData.legalStructureId
+                    business?.profileData.legalStructureId,
                   ).elementsToDisplay.has("taxIdDisclaimer")
                     ? Config.profileDefaults.fields.taxId.default.disclaimerMd
-                    : undefined
+                    : undefined,
                 }}
               />
             </div>

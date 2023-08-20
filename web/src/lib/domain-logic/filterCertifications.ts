@@ -4,7 +4,7 @@ import { Business } from "@businessnjgovnavigator/shared";
 
 export const filterCertifications = (
   certifications: Certification[],
-  business: Business
+  business: Business,
 ): Certification[] => {
   return certifications.filter((it) => {
     let allowedCertification = true;

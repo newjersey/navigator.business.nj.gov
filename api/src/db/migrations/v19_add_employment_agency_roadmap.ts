@@ -15,7 +15,7 @@ export interface v19UserData {
 export const migrate_v18_to_v19 = (v18Data: v18UserData): v19UserData => {
   return {
     ...v18Data,
-    version: 19
+    version: 19,
   };
 };
 
@@ -122,7 +122,7 @@ export const generatev19User = (overrides: Partial<v19BusinessUser>): v19Busines
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -135,12 +135,12 @@ export const generatev19OnboardingData = (overrides: Partial<v19OnboardingData>)
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     liquorLicense: true,
     homeBasedBusiness: true,
     constructionRenovationPlan: undefined,
     dateOfFormation: undefined,
-    ...overrides
+    ...overrides,
   };
 };

@@ -22,22 +22,22 @@ describe("<ContextualInfoLink />", () => {
     mockFetchContextualInfo.mockResolvedValue({
       isVisible: false,
       header: "some header content",
-      markdown: "some markdown content"
+      markdown: "some markdown content",
     });
     const setContent = jest.fn();
     render(
       withContextualInfo(
         <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
         { isVisible: false, header: "", markdown: "" },
-        setContent
-      )
+        setContent,
+      ),
     );
     fireEvent.click(screen.getByText("legal structure"));
     await waitFor(() => {
       return expect(setContent).toHaveBeenCalledWith({
         isVisible: true,
         header: "some header content",
-        markdown: "some markdown content"
+        markdown: "some markdown content",
       });
     });
   });
@@ -46,22 +46,22 @@ describe("<ContextualInfoLink />", () => {
     mockFetchContextualInfo.mockResolvedValue({
       isVisible: false,
       header: "some header content",
-      markdown: "some markdown content"
+      markdown: "some markdown content",
     });
     const setContent = jest.fn();
     render(
       withContextualInfo(
         <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
         { isVisible: false, header: "", markdown: "" },
-        setContent
-      )
+        setContent,
+      ),
     );
     fireEvent.click(screen.getByText("legal structure"));
     await waitFor(() => {
       return expect(setContent).toHaveBeenCalledWith({
         isVisible: true,
         header: "some header content",
-        markdown: "some markdown content"
+        markdown: "some markdown content",
       });
     });
     fireEvent.click(screen.getByText("legal structure"));

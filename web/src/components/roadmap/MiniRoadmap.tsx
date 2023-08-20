@@ -19,7 +19,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
   const { updateQueue, business } = useUserData();
 
   const displayBusinessStructurePrompt = LookupOperatingPhaseById(
-    business?.profileData.operatingPhase
+    business?.profileData.operatingPhase,
   ).displayBusinessStructurePrompt;
   const completedBusinessStructure = hasCompletedBusinessStructure(business);
 
@@ -38,18 +38,18 @@ export const MiniRoadmap = (props: Props): ReactElement => {
           .queuePreferences({
             roadmapOpenSteps: openSteps.filter((openStep) => {
               return openStep !== stepNumber;
-            })
+            }),
           })
           .update();
       } else {
         await updateQueue
           .queuePreferences({
-            roadmapOpenSteps: [...openSteps, stepNumber]
+            roadmapOpenSteps: [...openSteps, stepNumber],
           })
           .update();
       }
     },
-    [updateQueue, business]
+    [updateQueue, business],
   );
 
   return (

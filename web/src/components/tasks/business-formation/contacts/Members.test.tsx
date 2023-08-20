@@ -7,7 +7,7 @@ import { generateStateItem } from "@/test/factories";
 import {
   FormationPageHelpers,
   setDesktopScreen,
-  useSetupInitialMocks
+  useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
@@ -15,7 +15,7 @@ import {
   FormationMember,
   generateFormationMember,
   generateFormationUSAddress,
-  generateMunicipality
+  generateMunicipality,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
@@ -23,7 +23,7 @@ import { fireEvent, screen, waitFor } from "@testing-library/react";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn()
+    useMediaQuery: jest.fn(),
   };
 }
 
@@ -37,7 +37,7 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn()
+  searchBusinessName: jest.fn(),
 }));
 
 describe("Formation - Members Field", () => {
@@ -81,8 +81,8 @@ describe("Formation - Members Field", () => {
           expect(
             screen.getByText(
               `${members[1].addressLine1}, ${members[1].addressLine2}, ${members[1].addressCity}, ${members[1].addressState?.name} ${members[1].addressZipCode}`,
-              { exact: false }
-            )
+              { exact: false },
+            ),
           ).toBeInTheDocument();
           // eslint-disable-next-line testing-library/no-node-access
           fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="edit"]') as Element);
@@ -105,7 +105,7 @@ describe("Formation - Members Field", () => {
           expect(
             newMembers?.findIndex((member) => {
               return member.name === newName;
-            })
+            }),
           ).toEqual(1);
         });
 
@@ -125,7 +125,7 @@ describe("Formation - Members Field", () => {
           expect(
             newMembers?.find((member) => {
               return member === members[1];
-            })
+            }),
           ).toBeFalsy();
         });
 
@@ -162,17 +162,17 @@ describe("Formation - Members Field", () => {
             addressLine2: Array(36).fill("A").join(""),
             addressCity: Array(31).fill("A").join(""),
             addressState: generateStateItem(),
-            addressZipCode: "08100"
+            addressZipCode: "08100",
           });
           page.clickAddressSubmit();
 
           const maxLengthMessage = (
             modalField: keyof typeof Config.formation.addressModal,
-            len: string
+            len: string,
           ): string =>
             templateEval(Config.formation.general.maximumLengthErrorText, {
               field: Config.formation.addressModal[modalField].label,
-              maxLen: len
+              maxLen: len,
             });
 
           expect(screen.getByText(maxLengthMessage("addressLine1", "35"))).toBeInTheDocument();
@@ -184,7 +184,7 @@ describe("Formation - Members Field", () => {
             addressLine2: Array(35).fill("A").join(""),
             addressCity: Array(30).fill("A").join(""),
             addressState: generateStateItem(),
-            addressZipCode: "08100"
+            addressZipCode: "08100",
           });
           expect(screen.queryByText(maxLengthMessage("addressLine1", "35"))).not.toBeInTheDocument();
           expect(screen.queryByText(maxLengthMessage("addressLine2", "35"))).not.toBeInTheDocument();
@@ -204,7 +204,7 @@ describe("Formation - Members Field", () => {
           fireEvent.click(screen.getByText(Config.formation.general.backButtonText));
           await waitFor(() => {
             return expect(
-              screen.queryByText(Config.formation.general.backButtonText)
+              screen.queryByText(Config.formation.general.backButtonText),
             ).not.toBeInTheDocument();
           });
           await page.openAddressModal("members");
@@ -216,8 +216,8 @@ describe("Formation - Members Field", () => {
           const page = await getPageHelper(
             { legalStructureId },
             {
-              members: nineMembers
-            }
+              members: nineMembers,
+            },
           );
 
           expect(screen.getByText(nextButtonText, { exact: false })).toBeInTheDocument();
@@ -228,7 +228,7 @@ describe("Formation - Members Field", () => {
 
           await waitFor(() => {
             return expect(
-              screen.queryByText(Config.formation.general.backButtonText)
+              screen.queryByText(Config.formation.general.backButtonText),
             ).not.toBeInTheDocument();
           });
           expect(screen.queryByText(nextButtonText, { exact: false })).not.toBeInTheDocument();
@@ -255,8 +255,8 @@ describe("Formation - Members Field", () => {
             municipality: generateMunicipality({
               displayName: "Hampton Borough",
               name: "Hampton",
-              ...generateFormationUSAddress({})
-            })
+              ...generateFormationUSAddress({}),
+            }),
           },
           {
             members: [],
@@ -266,8 +266,8 @@ describe("Formation - Members Field", () => {
             addressLine2: "business suite 201",
             addressCountry: "US",
             addressState: { shortCode: "NJ", name: "New Jersey" },
-            addressZipCode: "07601"
-          }
+            addressZipCode: "07601",
+          },
         );
         await page.openAddressModal("members");
 
@@ -284,7 +284,7 @@ describe("Formation - Members Field", () => {
         const page = await getPageHelper(
           {
             legalStructureId,
-            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" })
+            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
           },
           {
             members: [generateFormationMember({})],
@@ -294,8 +294,8 @@ describe("Formation - Members Field", () => {
             addressLine2: "business suite 201",
             addressCountry: "US",
             addressState: { shortCode: "NJ", name: "New Jersey" },
-            addressZipCode: "07601"
-          }
+            addressZipCode: "07601",
+          },
         );
         await page.openAddressModal("members");
 
@@ -315,8 +315,8 @@ describe("Formation - Members Field", () => {
             municipality: generateMunicipality({
               displayName: "Hampton Borough",
               name: "Hampton",
-              ...generateFormationUSAddress({})
-            })
+              ...generateFormationUSAddress({}),
+            }),
           },
           {
             members: [],
@@ -326,8 +326,8 @@ describe("Formation - Members Field", () => {
             addressLine2: "business suite 201",
             addressCountry: "US",
             addressState: { shortCode: "NJ", name: "New Jersey" },
-            addressZipCode: "07601"
-          }
+            addressZipCode: "07601",
+          },
         );
         await page.openAddressModal("members");
 
@@ -348,14 +348,14 @@ describe("Formation - Members Field", () => {
         const page = await getPageHelper(
           {
             legalStructureId,
-            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" })
+            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
           },
           {
             members: [],
             addressLine1: "123 Address",
             addressLine2: "",
-            addressZipCode: ""
-          }
+            addressZipCode: "",
+          },
         );
         await page.openAddressModal("members");
 
@@ -371,12 +371,12 @@ describe("Formation - Members Field", () => {
       it("shows inline validation for missing fields with checkbox", async () => {
         const page = await getPageHelper(
           {
-            legalStructureId
+            legalStructureId,
           },
           {
             members: [],
-            addressLine1: ""
-          }
+            addressLine1: "",
+          },
         );
         await page.openAddressModal("members");
 
@@ -387,24 +387,24 @@ describe("Formation - Members Field", () => {
       it("unselects checkbox when interacting with non-disabled fields", async () => {
         const page = await getPageHelper(
           {
-            legalStructureId
+            legalStructureId,
           },
           {
             members: [],
             addressLine1: "123 Address",
             addressLine2: "",
-            addressZipCode: ""
-          }
+            addressZipCode: "",
+          },
         );
         await page.openAddressModal("members");
 
         page.selectCheckbox(Config.formation.fields.members.addressCheckboxText);
         expect(
-          page.getInputElementByLabel(Config.formation.fields.members.addressCheckboxText).checked
+          page.getInputElementByLabel(Config.formation.fields.members.addressCheckboxText).checked,
         ).toEqual(true);
         page.fillText("Address zip code", "12345");
         expect(
-          page.getInputElementByLabel(Config.formation.fields.members.addressCheckboxText).checked
+          page.getInputElementByLabel(Config.formation.fields.members.addressCheckboxText).checked,
         ).toEqual(false);
         expect(page.getInputElementByLabel("Address line1").disabled).toBe(false);
         expect(page.getInputElementByLabel("Address line2").disabled).toEqual(false);

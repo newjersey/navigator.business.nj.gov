@@ -73,8 +73,8 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
         isInterstateMovingApplicable: undefined,
         isChildcareForSixOrMore: undefined,
         willSellPetCareItems: undefined,
-        isPetCareHousingApplicable: undefined
-      }
+        isPetCareHousingApplicable: undefined,
+      },
     }
   );
 };

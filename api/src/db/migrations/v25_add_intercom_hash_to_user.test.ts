@@ -4,7 +4,7 @@ import {
   generatev24User,
   v24EntityIdStatus,
   v24TaxFiling,
-  v24UserData
+  v24UserData,
 } from "./v24_restructure_tax_filings";
 import { migrate_v24_to_v25 } from "./v25_add_intercom_hash_to_user";
 
@@ -13,11 +13,11 @@ describe("migrate_v24_to_v25", () => {
   const taskProgress = {};
   const preferences = {
     roadmapOpenSections: [],
-    roadmapOpenSteps: []
+    roadmapOpenSteps: [],
   };
   const taxFilingData = {
     entityIdStatus: "UNKNOWN" as v24EntityIdStatus,
-    filings: [] as v24TaxFiling[]
+    filings: [] as v24TaxFiling[],
   };
 
   it("hashes existing myNJkey and adds as intercom hash", () => {
@@ -34,7 +34,7 @@ describe("migrate_v24_to_v25", () => {
       formProgress,
       taskProgress,
       licenseData: undefined,
-      version: 24
+      version: 24,
     };
 
     const v25 = migrate_v24_to_v25(v24);
@@ -53,7 +53,7 @@ describe("migrate_v24_to_v25", () => {
       formProgress,
       taskProgress,
       licenseData: undefined,
-      version: 24
+      version: 24,
     };
 
     const v25 = migrate_v24_to_v25(v24);

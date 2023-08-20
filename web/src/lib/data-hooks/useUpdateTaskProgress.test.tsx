@@ -8,12 +8,12 @@ import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadm
 import {
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   generateBusiness,
   generatePreferences,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { act, render } from "@testing-library/react";
@@ -30,7 +30,7 @@ describe("useUpdateTaskProgress", () => {
   });
 
   const setupHook = (
-    business: Business
+    business: Business,
   ): {
     queueUpdateTaskProgress: (taskId: string, newValue: TaskProgress) => void;
     congratulatoryModal: ReactNode;
@@ -38,7 +38,7 @@ describe("useUpdateTaskProgress", () => {
   } => {
     const returnVal = {
       congratulatoryModal: <></>,
-      queueUpdateTaskProgress: (): void => {}
+      queueUpdateTaskProgress: (): void => {},
     };
     const updateQueueReturnVal = { updateQueue: undefined };
 
@@ -51,17 +51,17 @@ describe("useUpdateTaskProgress", () => {
     render(
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
         <TestComponent />
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
     return {
       ...returnVal,
-      updateQueue: updateQueueReturnVal.updateQueue!
+      updateQueue: updateQueueReturnVal.updateQueue!,
     };
   };
 
   it("updates task progress", async () => {
     const initialBusiness = generateBusiness({
-      taskProgress: { "some-id": "COMPLETED" }
+      taskProgress: { "some-id": "COMPLETED" },
     });
     const { queueUpdateTaskProgress, updateQueue } = setupHook(initialBusiness);
     queueUpdateTaskProgress("some-other-id", "IN_PROGRESS");
@@ -70,7 +70,7 @@ describe("useUpdateTaskProgress", () => {
     });
     expect(currentBusiness().taskProgress).toEqual({
       "some-id": "COMPLETED",
-      "some-other-id": "IN_PROGRESS"
+      "some-other-id": "IN_PROGRESS",
     });
   });
 
@@ -84,18 +84,18 @@ describe("useUpdateTaskProgress", () => {
     const roadmap = generateRoadmap({
       steps: [
         generateStep({ stepNumber: 1, section: "PLAN" }),
-        generateStep({ stepNumber: 2, section: "START" })
+        generateStep({ stepNumber: 2, section: "START" }),
       ],
-      tasks: [planTask, startTask]
+      tasks: [planTask, startTask],
     });
 
     it("closes all roadmap sections when all sections complete", async () => {
       const business = generateBusiness({
         taskProgress: {
           [planTaskId]: "COMPLETED",
-          [startTaskId]: "NOT_STARTED"
+          [startTaskId]: "NOT_STARTED",
         },
-        preferences: generatePreferences({ roadmapOpenSections: ["START"] })
+        preferences: generatePreferences({ roadmapOpenSections: ["START"] }),
       });
 
       setMockRoadmapResponse({
@@ -104,7 +104,7 @@ describe("useUpdateTaskProgress", () => {
           .fn()
           .mockReturnValueOnce(false) // was section prev completed
           .mockReturnValueOnce(true), // is section now completed
-        currentAndNextSection: () => ({ current: "START", next: undefined })
+        currentAndNextSection: () => ({ current: "START", next: undefined }),
       });
 
       const { queueUpdateTaskProgress, updateQueue } = setupHook(business);
@@ -117,7 +117,7 @@ describe("useUpdateTaskProgress", () => {
 
       expect(currentBusiness().taskProgress).toEqual({
         [planTaskId]: "COMPLETED",
-        [startTaskId]: "COMPLETED"
+        [startTaskId]: "COMPLETED",
       });
 
       expect(currentBusiness().preferences.roadmapOpenSections).toEqual([]);
@@ -127,9 +127,9 @@ describe("useUpdateTaskProgress", () => {
       const business = generateBusiness({
         taskProgress: {
           [planTaskId]: "NOT_STARTED",
-          [startTaskId]: "NOT_STARTED"
+          [startTaskId]: "NOT_STARTED",
         },
-        preferences: generatePreferences({ roadmapOpenSections: ["PLAN", "START"] })
+        preferences: generatePreferences({ roadmapOpenSections: ["PLAN", "START"] }),
       });
 
       setMockRoadmapResponse({
@@ -138,7 +138,7 @@ describe("useUpdateTaskProgress", () => {
           .fn()
           .mockReturnValueOnce(false) // was section prev completed
           .mockReturnValueOnce(true), // is section now completed
-        currentAndNextSection: () => ({ current: "PLAN", next: "START" })
+        currentAndNextSection: () => ({ current: "PLAN", next: "START" }),
       });
 
       const { queueUpdateTaskProgress, updateQueue } = setupHook(business);
@@ -151,7 +151,7 @@ describe("useUpdateTaskProgress", () => {
 
       expect(currentBusiness().taskProgress).toEqual({
         [planTaskId]: "COMPLETED",
-        [startTaskId]: "NOT_STARTED"
+        [startTaskId]: "NOT_STARTED",
       });
 
       expect(currentBusiness().preferences.roadmapOpenSections).toEqual(["START"]);

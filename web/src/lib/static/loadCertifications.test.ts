@@ -5,7 +5,7 @@ import fs from "fs";
 jest.mock("fs");
 
 jest.mock("process", () => ({
-  cwd: (): string => "/test"
+  cwd: (): string => "/test",
 }));
 
 describe("loadFundings", () => {
@@ -57,7 +57,7 @@ describe("loadFundings", () => {
             callToActionText: "Click here 1",
             contentMd: "Some content description 1",
             descriptionMd: "*some cool* description",
-            agency: ["NJEDA"]
+            agency: ["NJEDA"],
           },
           {
             id: "some-id-2",
@@ -67,9 +67,9 @@ describe("loadFundings", () => {
             callToActionLink: "https://www.example.com/2",
             callToActionText: "Click here 2",
             contentMd: "Some content description 2",
-            descriptionMd: ""
-          }
-        ])
+            descriptionMd: "",
+          },
+        ]),
       );
     });
   });
@@ -104,8 +104,8 @@ describe("loadFundings", () => {
       expect(allUrlSlugs).toEqual(
         expect.arrayContaining([
           { params: { fundingUrlSlug: "some-url-slug-1" } },
-          { params: { fundingUrlSlug: "some-url-slug-2" } }
-        ])
+          { params: { fundingUrlSlug: "some-url-slug-2" } },
+        ]),
       );
     });
   });
@@ -148,7 +148,7 @@ describe("loadFundings", () => {
         callToActionLink: "https://www.example.com/2",
         callToActionText: "Click here 2",
         contentMd: "Some content description 2",
-        descriptionMd: ""
+        descriptionMd: "",
       });
     });
   });

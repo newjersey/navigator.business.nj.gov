@@ -33,7 +33,7 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
         label={Config.formation.fields.businessStartDate.label}
         labelContextualInfo={Config.formation.fields.businessStartDate.labelContextualInfo}
         value={parseDateWithFormat(state.formationFormData.businessStartDate, defaultDateFormat).format(
-          defaultDisplayDateFormat
+          defaultDisplayDateFormat,
         )}
       />
       {state.formationFormData.businessLocationType !== "NJ" && (
@@ -50,7 +50,7 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
               state.formationFormData.foreignDateOfFormation
                 ? parseDateWithFormat(
                     state.formationFormData.foreignDateOfFormation,
-                    defaultDateFormat
+                    defaultDateFormat,
                   ).format(defaultDisplayDateFormat)
                 : undefined
             }

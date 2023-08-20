@@ -9,7 +9,7 @@ import {
   castPublicFilingLegalTypeToFormationType,
   FormationLegalType,
   generateFormationSigner,
-  PublicFilingLegalType
+  PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen } from "@testing-library/react";
@@ -17,7 +17,7 @@ import { fireEvent, screen } from "@testing-library/react";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn()
+    useMediaQuery: jest.fn(),
   };
 }
 
@@ -31,7 +31,7 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn()
+  searchBusinessName: jest.fn(),
 }));
 
 describe("Formation - Signatures", () => {
@@ -42,7 +42,7 @@ describe("Formation - Signatures", () => {
 
   const legalStructureIds: PublicFilingLegalType[] = [
     "limited-liability-company",
-    "limited-liability-partnership"
+    "limited-liability-partnership",
   ];
 
   legalStructureIds.map((legalStructureId) => {
@@ -61,17 +61,17 @@ describe("Formation - Signatures", () => {
           generateFormationSigner(
             {
               name: "Red Skull",
-              signature: true
+              signature: true,
             },
-            legalStructureId
+            legalStructureId,
           ),
           generateFormationSigner(
             {
               name: "V",
-              signature: true
+              signature: true,
             },
-            legalStructureId
-          )
+            legalStructureId,
+          ),
         ]);
       });
 
@@ -91,10 +91,10 @@ describe("Formation - Signatures", () => {
           generateFormationSigner(
             {
               name: "Red Skull",
-              signature: true
+              signature: true,
             },
-            legalStructureId
-          )
+            legalStructureId,
+          ),
         ]);
       });
 
@@ -110,7 +110,7 @@ describe("Formation - Signatures", () => {
       it("fires validations when signers do not fill out the signature field", async () => {
         const page = await getPageHelper(
           { legalStructureId },
-          { signers: [generateFormationSigner({ name: "" }, legalStructureId)] }
+          { signers: [generateFormationSigner({ name: "" }, legalStructureId)] },
         );
         await attemptApiSubmission(page);
         const signerErrorText = (): HTMLElement | null => {
@@ -128,19 +128,19 @@ describe("Formation - Signatures", () => {
             signers: [
               generateFormationSigner(
                 { name: Array(51).fill("A").join(","), signature: true },
-                legalStructureId
-              )
-            ]
-          }
+                legalStructureId,
+              ),
+            ],
+          },
         );
         await attemptApiSubmission(page);
         const signerErrorText = (): HTMLElement | null => {
           return screen.queryByText(
             templateEval(Config.formation.general.maximumLengthErrorText, {
               field: Config.formation.fields.signers.label,
-              maxLen: "50"
+              maxLen: "50",
             }),
-            { exact: false }
+            { exact: false },
           );
         };
         expect(signerErrorText()).toBeInTheDocument();
@@ -151,12 +151,12 @@ describe("Formation - Signatures", () => {
       it("fires validations when signers do not check the sign checkbox", async () => {
         const page = await getPageHelper(
           { legalStructureId },
-          { signers: [generateFormationSigner({ signature: false }, legalStructureId)] }
+          { signers: [generateFormationSigner({ signature: false }, legalStructureId)] },
         );
         await attemptApiSubmission(page);
         const signerCheckboxErrorText = (): HTMLElement | null => {
           return screen.queryByText(Config.formation.fields.signers.errorBannerCheckbox, {
-            exact: false
+            exact: false,
           });
         };
         expect(signerCheckboxErrorText()).toBeInTheDocument();
@@ -171,16 +171,16 @@ describe("Formation - Signatures", () => {
           {
             signers: [
               generateFormationSigner({ name: "", signature: true }, legalStructureId),
-              generateFormationSigner({ name: "some name", signature: true }, legalStructureId)
-            ]
-          }
+              generateFormationSigner({ name: "some name", signature: true }, legalStructureId),
+            ],
+          },
         );
         await attemptApiSubmission(page);
         expect(
-          screen.getByText(Config.formation.fields.signers.errorInlineFirstSignerName)
+          screen.getByText(Config.formation.fields.signers.errorInlineFirstSignerName),
         ).toBeInTheDocument();
         expect(
-          screen.queryByText(Config.formation.fields.signers.errorInlineAdditionalSignerName)
+          screen.queryByText(Config.formation.fields.signers.errorInlineAdditionalSignerName),
         ).not.toBeInTheDocument();
       });
 
@@ -190,16 +190,16 @@ describe("Formation - Signatures", () => {
           {
             signers: [
               generateFormationSigner({ name: "some name", signature: true }, legalStructureId),
-              generateFormationSigner({ name: "", signature: true }, legalStructureId)
-            ]
-          }
+              generateFormationSigner({ name: "", signature: true }, legalStructureId),
+            ],
+          },
         );
         await attemptApiSubmission(page);
         expect(
-          screen.getByText(Config.formation.fields.signers.errorInlineAdditionalSignerName)
+          screen.getByText(Config.formation.fields.signers.errorInlineAdditionalSignerName),
         ).toBeInTheDocument();
         expect(
-          screen.queryByText(Config.formation.fields.signers.errorInlineFirstSignerName)
+          screen.queryByText(Config.formation.fields.signers.errorInlineFirstSignerName),
         ).not.toBeInTheDocument();
       });
     });
@@ -208,13 +208,13 @@ describe("Formation - Signatures", () => {
       describe(`for ${legalStructureId}`, () => {
         const legalType: FormationLegalType = castPublicFilingLegalTypeToFormationType(
           legalStructureId,
-          "FOREIGN"
+          "FOREIGN",
         );
 
         it("fires validations when signers do not fill out the type field", async () => {
           const page = await getPageHelper(
             { businessPersona: "FOREIGN", legalStructureId },
-            { signers: [generateFormationSigner({ title: undefined })] }
+            { signers: [generateFormationSigner({ title: undefined })] },
           );
 
           await attemptApiSubmission(page);
@@ -230,11 +230,11 @@ describe("Formation - Signatures", () => {
         it("selects a signer type", async () => {
           const page = await getPageHelper(
             { businessPersona: "FOREIGN", legalStructureId },
-            { signers: undefined }
+            { signers: undefined },
           );
           const signers = [
             generateFormationSigner({ signature: true }, legalType),
-            generateFormationSigner({ signature: true }, legalType)
+            generateFormationSigner({ signature: true }, legalType),
           ];
           page.fillText("Signer 0", signers[0].name);
           page.selectByText("Signer title 0", signers[0].title);

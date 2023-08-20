@@ -19,9 +19,9 @@ describe("migrate_v3_to_v4", () => {
       taskProgress: {},
       onboardingData: {
         ...onboardingData,
-        municipality: undefined
+        municipality: undefined,
       },
-      version: 4
+      version: 4,
     });
   });
 });

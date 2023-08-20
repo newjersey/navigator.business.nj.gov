@@ -14,7 +14,7 @@ describe("migrate_v11_to_v12", () => {
       formProgress,
       taskProgress,
       licenseData: undefined,
-      version: 11
+      version: 11,
     };
 
     const v12 = migrate_v11_to_v12(v11);
@@ -30,7 +30,7 @@ describe("migrate_v11_to_v12", () => {
       formProgress,
       taskProgress,
       licenseData: undefined,
-      version: 11
+      version: 11,
     };
 
     const v12 = migrate_v11_to_v12(v11);

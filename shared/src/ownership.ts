@@ -10,7 +10,7 @@ export const LookupOwnershipTypeById = (id: string): OwnershipType => {
       return x.id === id;
     }) ?? {
       id: "",
-      name: ""
+      name: "",
     }
   );
 };

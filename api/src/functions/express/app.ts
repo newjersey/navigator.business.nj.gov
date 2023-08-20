@@ -46,16 +46,16 @@ if (IS_OFFLINE) {
   dynamoDb = DynamoDBDocumentClient.from(
     new DynamoDBClient({
       region: "localhost",
-      endpoint: `http://${dynamoDbEndpoint}:${DYNAMO_OFFLINE_PORT}`
+      endpoint: `http://${dynamoDbEndpoint}:${DYNAMO_OFFLINE_PORT}`,
     }),
-    dynamoDbTranslateConfig
+    dynamoDbTranslateConfig,
   );
 } else {
   dynamoDb = DynamoDBDocumentClient.from(
     new DynamoDBClient({
-      region: "us-east-1"
+      region: "us-east-1",
     }),
-    dynamoDbTranslateConfig
+    dynamoDbTranslateConfig,
   );
 }
 
@@ -99,15 +99,15 @@ const AWS_CRYPTO_CONTEXT_ORIGIN = process.env.AWS_CRYPTO_CONTEXT_ORIGIN || "";
 const AWSEncryptionDecryptionClient = AWSEncryptionDecryptionFactory(AWS_CRYPTO_KEY, {
   stage: AWS_CRYPTO_CONTEXT_STAGE,
   purpose: AWS_CRYPTO_CONTEXT_PURPOSE,
-  origin: AWS_CRYPTO_CONTEXT_ORIGIN
+  origin: AWS_CRYPTO_CONTEXT_ORIGIN,
 });
 
 const taxFilingClient = ApiTaxFilingClient(
   {
     baseUrl: GOV2GO_REGISTRATION_BASE_URL,
-    apiKey: GOV2GO_REGISTRATION_API_KEY
+    apiKey: GOV2GO_REGISTRATION_API_KEY,
   },
-  logger
+  logger,
 );
 const govDeliveryNewsletterClient = GovDeliveryNewsletterClient({
   baseUrl: GOV_DELIVERY_BASE_URL,
@@ -115,7 +115,7 @@ const govDeliveryNewsletterClient = GovDeliveryNewsletterClient({
   apiKey: GOV_DELIVERY_API_KEY,
   logWriter: logger,
   siteUrl: "navigator.business.nj.gov",
-  urlQuestion: GOV_DELIVERY_URL_QUESTION_ID
+  urlQuestion: GOV_DELIVERY_URL_QUESTION_ID,
 });
 
 const airtableUserTestingClient = AirtableUserTestingClient(
@@ -123,9 +123,9 @@ const airtableUserTestingClient = AirtableUserTestingClient(
     apiKey: AIRTABLE_API_KEY,
     baseId: AIRTABLE_USER_RESEARCH_BASE_ID,
     baseUrl: AIRTABLE_BASE_URL,
-    usersTableName: AIRTABLE_USERS_TABLE
+    usersTableName: AIRTABLE_USERS_TABLE,
   },
-  logger
+  logger,
 );
 
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
@@ -143,9 +143,9 @@ const myNJSelfRegClient = MyNJSelfRegClientFactory(
   {
     serviceToken: process.env.MYNJ_SERVICE_TOKEN || "",
     roleName: process.env.MYNJ_ROLE_NAME || "",
-    serviceUrl: process.env.MYNJ_SERVICE_URL || ""
+    serviceUrl: process.env.MYNJ_SERVICE_URL || "",
   },
-  logger
+  logger,
 );
 const fakeSelfRegClient = FakeSelfRegClientFactory();
 const selfRegClient = process.env.USE_FAKE_SELF_REG === "true" ? fakeSelfRegClient : myNJSelfRegClient;
@@ -154,9 +154,9 @@ const apiFormationClient = ApiFormationClient(
   {
     account: FORMATION_API_ACCOUNT,
     key: FORMATION_API_KEY,
-    baseUrl: FORMATION_API_BASE_URL
+    baseUrl: FORMATION_API_BASE_URL,
   },
-  logger
+  logger,
 );
 const shouldSaveDocuments = !(process.env.SKIP_SAVE_DOCUMENTS_TO_S3 === "true");
 
@@ -169,12 +169,12 @@ app.use(
     updateSidebarCards,
     updateOperatingPhase,
     AWSEncryptionDecryptionClient,
-    timeStampToBusinessSearch
-  )
+    timeStampToBusinessSearch,
+  ),
 );
 app.use(
   "/api/external",
-  externalEndpointRouterFactory(userDataClient, addGovDeliveryNewsletter, addToAirtableUserTesting)
+  externalEndpointRouterFactory(userDataClient, addGovDeliveryNewsletter, addToAirtableUserTesting),
 );
 app.use("/api/guest", guestRouterFactory(timeStampToBusinessSearch));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus, userDataClient));
@@ -182,7 +182,7 @@ app.use("/api", selfRegRouterFactory(userDataClient, selfRegClient));
 app.use("/api", formationRouterFactory(apiFormationClient, userDataClient, { shouldSaveDocuments }));
 app.use(
   "/api/taxFilings",
-  taxFilingRouterFactory(userDataClient, taxFilingInterface, AWSEncryptionDecryptionClient)
+  taxFilingRouterFactory(userDataClient, taxFilingInterface, AWSEncryptionDecryptionClient),
 );
 app.use("/api", taxDecryptionRouterFactory(AWSEncryptionDecryptionClient));
 
@@ -194,7 +194,7 @@ app.post("/api/mgmt/auth", (req, res) => {
     logger.LogInfo(
       `MgmtAuth - Id:${logger.GetId()} - FAILED-AUTH request: '${req.body.password}' password: '${
         process.env.ADMIN_PASSWORD
-      }'`
+      }'`,
     );
     res.status(401).send();
   }

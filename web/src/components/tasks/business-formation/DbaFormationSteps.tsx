@@ -8,14 +8,14 @@ import { ReactElement } from "react";
 export const DbaFormationSteps: { component: ReactElement; step: DbaStepNames }[] = [
   {
     component: <NexusSearchBusinessNameStep />,
-    step: DbaFormationStepsConfiguration[0].name
+    step: DbaFormationStepsConfiguration[0].name,
   },
   {
     component: <DbaResolution />,
-    step: DbaFormationStepsConfiguration[1].name
+    step: DbaFormationStepsConfiguration[1].name,
   },
   {
     component: <Authorization />,
-    step: DbaFormationStepsConfiguration[2].name
-  }
+    step: DbaFormationStepsConfiguration[2].name,
+  },
 ];

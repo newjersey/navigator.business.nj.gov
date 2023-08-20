@@ -20,7 +20,7 @@ export const PostOnboardingRadioQuestion = (props: Props): ReactElement => {
     question: "",
     radioNo: "",
     radioYes: "",
-    radioNoContent: ""
+    radioNoContent: "",
   });
 
   const checkboxes = postOnboardingCheckboxes[props.postOnboardingQuestionId];
@@ -51,7 +51,7 @@ export const PostOnboardingRadioQuestion = (props: Props): ReactElement => {
   }, [props.postOnboardingQuestionId]);
 
   const handleRadioChange = async (
-    event: React.ChangeEvent<{ name?: string; value: string }>
+    event: React.ChangeEvent<{ name?: string; value: string }>,
   ): Promise<void> => {
     if (!updateQueue || !business) {
       return;
@@ -61,7 +61,7 @@ export const PostOnboardingRadioQuestion = (props: Props): ReactElement => {
       const uncheckedCheckboxes = checkboxes.reduce((acc, checkboxId) => {
         return {
           ...acc,
-          [checkboxId]: false
+          [checkboxId]: false,
         };
       }, {});
 
@@ -70,10 +70,10 @@ export const PostOnboardingRadioQuestion = (props: Props): ReactElement => {
 
     await updateQueue
       .queueProfileData({
-        [props.onboardingKey]: event.target.value === "true"
+        [props.onboardingKey]: event.target.value === "true",
       })
       .queueTaskProgress({
-        [props.taskId]: event.target.value === "true" ? "IN_PROGRESS" : "COMPLETED"
+        [props.taskId]: event.target.value === "true" ? "IN_PROGRESS" : "COMPLETED",
       })
       .update();
   };

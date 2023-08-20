@@ -4,13 +4,13 @@ import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadm
 import {
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { SectionType } from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,
   generatePreferences,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -29,7 +29,7 @@ describe("<SectionAccordion />", () => {
     render(
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
         <SectionAccordion sectionType={type}>BODY CONTENT</SectionAccordion>
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
   };
 
@@ -38,9 +38,9 @@ describe("<SectionAccordion />", () => {
       "PLAN",
       generateBusiness({
         preferences: generatePreferences({
-          roadmapOpenSections: []
-        })
-      })
+          roadmapOpenSections: [],
+        }),
+      }),
     );
 
     expect(within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")).not.toBeVisible();
@@ -61,9 +61,9 @@ describe("<SectionAccordion />", () => {
       "PLAN",
       generateBusiness({
         preferences: generatePreferences({
-          roadmapOpenSections: ["PLAN", "START"]
-        })
-      })
+          roadmapOpenSections: ["PLAN", "START"],
+        }),
+      }),
     );
 
     const sectionPlan = screen.getByTestId("plan-header");
@@ -73,7 +73,7 @@ describe("<SectionAccordion />", () => {
     expect(currentBusiness().preferences.roadmapOpenSections).toEqual(["START"]);
     fireEvent.click(sectionPlan);
     expect(currentBusiness().preferences.roadmapOpenSections).toEqual(
-      expect.arrayContaining(["PLAN", "START"])
+      expect.arrayContaining(["PLAN", "START"]),
     );
   });
 

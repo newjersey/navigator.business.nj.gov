@@ -5,7 +5,7 @@ export const splitFullName = (name: string | undefined): SplitName => {
   const words = name.split(" ");
   return {
     firstName: words.shift() || "",
-    lastName: words.join(" ")
+    lastName: words.join(" "),
   };
 };
 

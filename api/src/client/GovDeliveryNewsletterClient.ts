@@ -24,7 +24,7 @@ export const GovDeliveryNewsletterClient = (config: GovDeliveryNewsletterClientC
   const add = (email: string): Promise<NewsletterResponse> => {
     const url = `${config.baseUrl}/api/add_script_subscription`;
     config.logWriter.LogInfo(
-      `NewsletterResponse - GovDelivery - Id:${logId} - Request Sent. url: ${url}. email: ${email}`
+      `NewsletterResponse - GovDelivery - Id:${logId} - Request Sent. url: ${url}. email: ${email}`,
     );
     return axios
       .get(url, {
@@ -32,14 +32,14 @@ export const GovDeliveryNewsletterClient = (config: GovDeliveryNewsletterClientC
           e: email,
           t: config.topic,
           k: config.apiKey,
-          ...(config.urlQuestion ? { [config.urlQuestion]: config.siteUrl } : {})
-        }
+          ...(config.urlQuestion ? { [config.urlQuestion]: config.siteUrl } : {}),
+        },
       })
       .then((response) => {
         config.logWriter.LogInfo(
           `NewsletterResponse - GovDelivery - - Id:${logId} Response Received. Status: ${response.status} : ${
             response.statusText
-          }. Data: ${JSON.stringify(response.data)}`
+          }. Data: ${JSON.stringify(response.data)}`,
         );
         let status: NewsletterStatus;
         const data: GovDeliveryResponse =
@@ -75,18 +75,18 @@ export const GovDeliveryNewsletterClient = (config: GovDeliveryNewsletterClientC
         }
         return {
           success,
-          status
+          status,
         };
       })
       .catch((error: AxiosError) => {
         config.logWriter.LogError(`NewsletterResponse - GovDelivery - Id:${logId} - Error`, error);
         return {
           success: false,
-          status: "CONNECTION_ERROR"
+          status: "CONNECTION_ERROR",
         };
       });
   };
   return {
-    add
+    add,
   };
 };

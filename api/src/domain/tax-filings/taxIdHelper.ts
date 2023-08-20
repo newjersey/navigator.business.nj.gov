@@ -14,7 +14,7 @@ type TaxIdsToFilingsRecord = Record<string, TaxFilingCalendarEvent[]>;
 
 const getTaxIdsToFilingsRecord = (
   result: TaxFilingResult,
-  taxIdentifierToIdsRecord?: TaxIdentifierToIdsRecord
+  taxIdentifierToIdsRecord?: TaxIdentifierToIdsRecord,
 ): TaxIdsToFilingsRecord => {
   return getTaxIds(result.Id, taxIdentifierToIdsRecord).reduce(
     (accumulator: TaxIdsToFilingsRecord, identifier: string) => {
@@ -22,18 +22,18 @@ const getTaxIdsToFilingsRecord = (
         return {
           identifier,
           dueDate: dateToShortISO(value),
-          calendarEventType: "TAX-FILING"
+          calendarEventType: "TAX-FILING",
         };
       });
       return accumulator;
     },
-    {}
+    {},
   );
 };
 
 export const flattenDeDupAndConvertTaxFilings = (
   results: TaxFilingResult[],
-  taxIdentifierToIdsRecord?: TaxIdentifierToIdsRecord
+  taxIdentifierToIdsRecord?: TaxIdentifierToIdsRecord,
 ): TaxFilingCalendarEvent[] => {
   const arrayOfFilingsRecords = results.map((result) => {
     return getTaxIdsToFilingsRecord(result, taxIdentifierToIdsRecord);

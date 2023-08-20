@@ -15,8 +15,8 @@
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --max-warnings 0 --fix",
     "snapshot:update": "jest --updateSnapshot",
-    "prettier": "prettier --write . --ignore-path=./.eslintignore --trailing-comma none",
-    "prettier:check": "prettier . --check --ignore-path=./.eslintignore --trailing-comma none",
+    "prettier": "prettier --write . --ignore-path=./.eslintignore ",
+    "prettier:check": "prettier . --check --ignore-path=./.eslintignore ",
     "test": "jest",
     "typecheck": "tsc --noemit"
   },

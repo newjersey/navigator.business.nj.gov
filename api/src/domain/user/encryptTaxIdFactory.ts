@@ -13,7 +13,7 @@ export const encryptTaxIdFactory = (encryptionDecryptionClient: EncryptionDecryp
     }
     const maskedTaxId = maskTaxId(currentBusiness.profileData.taxId as string);
     const encryptedTaxId = await encryptionDecryptionClient.encryptValue(
-      currentBusiness.profileData.taxId as string
+      currentBusiness.profileData.taxId as string,
     );
 
     return modifyCurrentBusiness(userData, (business) => ({
@@ -21,8 +21,8 @@ export const encryptTaxIdFactory = (encryptionDecryptionClient: EncryptionDecryp
       profileData: {
         ...business.profileData,
         taxId: maskedTaxId,
-        encryptedTaxId: encryptedTaxId
-      }
+        encryptedTaxId: encryptedTaxId,
+      },
     }));
   };
 };

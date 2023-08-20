@@ -8,7 +8,7 @@ const debug = false;
 export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
   fieldName: keyof T,
   context?: Context<FormContextType<T, FieldError>>,
-  errorTypes?: FieldError[]
+  errorTypes?: FieldError[],
 ): {
   RegisterForOnSubmit: (isValidFunc: () => boolean) => void;
   Validate: (invalid: boolean) => void;
@@ -20,7 +20,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
       RegisterForOnSubmit: (isValidFunc: () => boolean): void => {},
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       Validate: (invalid: boolean): void => {},
-      isFormFieldInValid: false
+      isFormFieldInValid: false,
     };
   }
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -48,7 +48,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
         fieldStates[fieldName].updated !== undefined &&
         reducer({
           type: FieldStateActionKind.VALIDATION,
-          payload: { field: fieldName, invalid: !isValidFunc(), errorTypes }
+          payload: { field: fieldName, invalid: !isValidFunc(), errorTypes },
         });
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [runValidations]);
@@ -58,7 +58,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
     debug && console.log("custom validation");
     reducer({
       type: FieldStateActionKind.VALIDATION,
-      payload: { field: fieldName, invalid: invalid, errorTypes }
+      payload: { field: fieldName, invalid: invalid, errorTypes },
     });
   };
 
@@ -68,12 +68,12 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
       return fieldStates[fieldName].invalid === true;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [fieldStates[fieldName].invalid]
+    [fieldStates[fieldName].invalid],
   );
 
   return {
     RegisterForOnSubmit,
     Validate,
-    isFormFieldInValid
+    isFormFieldInValid,
   };
 };

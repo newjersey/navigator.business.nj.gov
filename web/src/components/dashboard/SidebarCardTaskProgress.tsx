@@ -5,7 +5,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
   getCompletedTaskCount,
   getIncompleteTaskCount,
-  getTotalTaskCount
+  getTotalTaskCount,
 } from "@/lib/domain-logic/roadmapTaskCounters";
 import { roadmapWithSectionSpecificTasks } from "@/lib/domain-logic/roadmapWithSectionSpecificTasks";
 import { SidebarCardContent } from "@/lib/types/types";
@@ -22,8 +22,8 @@ const BorderLinearProgress = styled(LinearProgress)(() => {
     border: "1px solid #0076D6",
     backgroundColor: "#D9E8F6",
     [`& .${linearProgressClasses.determinate}`]: {
-      backgroundColor: "#2378C3"
-    }
+      backgroundColor: "#2378C3",
+    },
   };
 });
 
@@ -55,7 +55,7 @@ export const SidebarCardTaskProgress = (props: Props): ReactElement => {
 
     return {
       required: requiredTaskPhrase,
-      optional: optionalTaskPhrase
+      optional: optionalTaskPhrase,
     };
   };
 
@@ -82,7 +82,7 @@ export const SidebarCardTaskProgress = (props: Props): ReactElement => {
     const { optional, required } = constructIncompleteTaskPhrase();
     return templateEval(props.card.contentMd, {
       numberOptionalTasks: optional,
-      numberRequiredTasks: required
+      numberRequiredTasks: required,
     });
   };
 

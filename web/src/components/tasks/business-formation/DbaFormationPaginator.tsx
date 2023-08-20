@@ -36,9 +36,9 @@ export const DbaFormationPaginator = (): ReactElement => {
       return {
         name: value.name,
         hasError: false,
-        isComplete: index === 0
+        isComplete: index === 0,
       };
-    })
+    }),
   );
 
   useMountEffect(() => {
@@ -67,7 +67,7 @@ export const DbaFormationPaginator = (): ReactElement => {
 
   const onMoveToStep = async (
     stepIndex: number,
-    config: { moveType: "NEXT_BUTTON" | "STEPPER" }
+    config: { moveType: "NEXT_BUTTON" | "STEPPER" },
   ): Promise<void> => {
     if (!updateQueue) return;
     onStepChangeAnalytics(business?.formationData.formationFormData, stepIndex, config.moveType);
@@ -91,7 +91,7 @@ export const DbaFormationPaginator = (): ReactElement => {
   const onStepChangeAnalytics = (
     formationFormData: FormationFormData | undefined,
     nextStepIndex: number,
-    moveType: "NEXT_BUTTON" | "STEPPER"
+    moveType: "NEXT_BUTTON" | "STEPPER",
   ): void => {
     if (!formationFormData) {
       return;

@@ -7,8 +7,8 @@ describe("migrate_v117_to_v118", () => {
       profileData: generateV117ProfileData({
         businessPersona: "FOREIGN",
         foreignBusinessType: "REMOTE_SELLER",
-        operatingPhase: "NEEDS_BUSINESS_STRUCTURE"
-      })
+        operatingPhase: "NEEDS_BUSINESS_STRUCTURE",
+      }),
     });
 
     expect(migrate_v117_to_v118(v117UserData).profileData.operatingPhase).toEqual("NEEDS_TO_FORM");
@@ -19,8 +19,8 @@ describe("migrate_v117_to_v118", () => {
       profileData: generateV117ProfileData({
         businessPersona: "FOREIGN",
         foreignBusinessType: "REMOTE_WORKER",
-        operatingPhase: "NEEDS_BUSINESS_STRUCTURE"
-      })
+        operatingPhase: "NEEDS_BUSINESS_STRUCTURE",
+      }),
     });
 
     expect(migrate_v117_to_v118(v117UserData).profileData.operatingPhase).toEqual("NEEDS_TO_FORM");
@@ -31,8 +31,8 @@ describe("migrate_v117_to_v118", () => {
       profileData: generateV117ProfileData({
         businessPersona: "FOREIGN",
         foreignBusinessType: "NEXUS",
-        operatingPhase: "NEEDS_BUSINESS_STRUCTURE"
-      })
+        operatingPhase: "NEEDS_BUSINESS_STRUCTURE",
+      }),
     });
 
     expect(migrate_v117_to_v118(v117UserData).profileData.operatingPhase).toEqual("NEEDS_BUSINESS_STRUCTURE");

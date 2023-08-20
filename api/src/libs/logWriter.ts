@@ -21,8 +21,8 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
       name: `NavigatorCloudWatch-WinstonLogging${groupName}${logStream}`,
       logGroupName: `/${groupName}/${logStream}`,
       logStreamName: `${logStream}-${getCurrentDateFormatted("YYYYMMDD")}`,
-      awsRegion: region || process.env.AWS_REGION
-    })
+      awsRegion: region || process.env.AWS_REGION,
+    }),
   );
 
   const LogError = async (message: string, details?: AxiosError): Promise<void> => {
@@ -63,6 +63,6 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
   return {
     LogError,
     LogInfo,
-    GetId
+    GetId,
   };
 };

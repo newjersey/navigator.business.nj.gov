@@ -21,8 +21,8 @@ export const ProfileNaicsCode = (): ReactElement => {
     {
       config: Config,
       persona: state.flow,
-      fieldName: "naicsCode"
-    }
+      fieldName: "naicsCode",
+    },
   );
 
   const naicsTaskUrl = useMemo(() => {

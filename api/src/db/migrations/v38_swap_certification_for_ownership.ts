@@ -19,7 +19,7 @@ export const migrate_v37_to_v38 = (v37Data: v37UserData): v38UserData => {
   return {
     ...v37Data,
     profileData: { ...profileData, ownershipTypeIds: [] },
-    version: 38
+    version: 38,
   };
 };
 
@@ -149,7 +149,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v38FormationData {

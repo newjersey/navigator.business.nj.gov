@@ -4,11 +4,11 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const webflowLicenseDir = path.resolve(
-  `${path.dirname(fileURLToPath(import.meta.url))}/../../../content/src/webflow-licenses`
+  `${path.dirname(fileURLToPath(import.meta.url))}/../../../content/src/webflow-licenses`,
 );
 
 const navigatorLicenseDir = path.resolve(
-  `${path.dirname(fileURLToPath(import.meta.url))}/../../../content/src/roadmaps/license-tasks`
+  `${path.dirname(fileURLToPath(import.meta.url))}/../../../content/src/roadmaps/license-tasks`,
 );
 
 const convertLicenseMd = (mdContents, filename) => {
@@ -18,7 +18,7 @@ const convertLicenseMd = (mdContents, filename) => {
   return {
     ...oppGrayMatter,
     contentMd: matterResult.content,
-    filename: filename
+    filename: filename,
   };
 };
 

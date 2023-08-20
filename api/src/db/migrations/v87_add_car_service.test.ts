@@ -3,7 +3,7 @@ import {
   generatev86ProfileData,
   generatev86User,
   v86ProfileData,
-  v86UserData
+  v86UserData,
 } from "./v86_tax_filing_var_rename";
 import { migrate_v86_to_v87 } from "./v87_add_car_service";
 
@@ -46,17 +46,17 @@ const makeUserData = (profileData: Partial<v86ProfileData>): v86UserData => {
       visibleSidebarCards: ["welcome"],
       returnToLink: "",
       isCalendarFullView: true,
-      isHideableRoadmapOpen: true
+      isHideableRoadmapOpen: true,
     },
     taxFilingData: {
-      filings: []
+      filings: [],
     },
     formationData: {
       formationFormData: generatev86FormationFormData({}),
       formationResponse: undefined,
       getFilingResponse: undefined,
-      completedFilingPayment: false
+      completedFilingPayment: false,
     },
-    version: 86
+    version: 86,
   };
 };

@@ -18,7 +18,7 @@ describe("useAuthAlertPage", () => {
   const setupHookWithAuth = ({
     hook,
     isAuth,
-    registrationModalIsVisible
+    registrationModalIsVisible,
   }: {
     hook: () => void;
     isAuth: IsAuthenticated;
@@ -33,10 +33,10 @@ describe("useAuthAlertPage", () => {
       withAuth(
         withAuthAlert(<TestComponent />, isAuth ?? IsAuthenticated.TRUE, {
           registrationModalIsVisible: registrationModalIsVisible ?? false,
-          setRegistrationAlertIsVisible
+          setRegistrationAlertIsVisible,
         }),
-        { isAuthenticated: isAuth }
-      )
+        { isAuthenticated: isAuth },
+      ),
     );
   };
 
@@ -45,7 +45,7 @@ describe("useAuthAlertPage", () => {
       setupHookWithAuth({
         hook: useAuthAlertPage,
         isAuth: IsAuthenticated.FALSE,
-        registrationModalIsVisible: true
+        registrationModalIsVisible: true,
       });
       expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(false);
     });
@@ -54,7 +54,7 @@ describe("useAuthAlertPage", () => {
       setupHookWithAuth({
         hook: useAuthAlertPage,
         isAuth: IsAuthenticated.FALSE,
-        registrationModalIsVisible: false
+        registrationModalIsVisible: false,
       });
       expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(true);
     });
@@ -64,7 +64,7 @@ describe("useAuthAlertPage", () => {
       setupHookWithAuth({
         hook: useAuthAlertPage,
         isAuth: IsAuthenticated.FALSE,
-        registrationModalIsVisible: true
+        registrationModalIsVisible: true,
       });
       expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(false);
     });
@@ -74,7 +74,7 @@ describe("useAuthAlertPage", () => {
       setupHookWithAuth({
         hook: useAuthAlertPage,
         isAuth: IsAuthenticated.FALSE,
-        registrationModalIsVisible: false
+        registrationModalIsVisible: false,
       });
       expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(true);
     });
@@ -83,7 +83,7 @@ describe("useAuthAlertPage", () => {
       setupHookWithAuth({
         hook: useAuthAlertPage,
         isAuth: IsAuthenticated.UNKNOWN,
-        registrationModalIsVisible: false
+        registrationModalIsVisible: false,
       });
       expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(false);
     });
@@ -92,7 +92,7 @@ describe("useAuthAlertPage", () => {
       setupHookWithAuth({
         hook: useAuthAlertPage,
         isAuth: IsAuthenticated.TRUE,
-        registrationModalIsVisible: false
+        registrationModalIsVisible: false,
       });
       expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(false);
     });

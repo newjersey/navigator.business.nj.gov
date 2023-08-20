@@ -11,7 +11,7 @@ const table = "Users";
 
 Airtable.configure({
   endpointUrl: "https://api.airtable.com",
-  apiKey: airtableApiKey
+  apiKey: airtableApiKey,
 });
 
 const base = Airtable.base(airtableBaseId);
@@ -62,7 +62,7 @@ const airtableSelectAll = () => {
           for (const record of records) {
             all.push({
               id: record._rawJson.id,
-              ...record._rawJson.fields
+              ...record._rawJson.fields,
             });
           }
           fetchNextPage();
@@ -73,7 +73,7 @@ const airtableSelectAll = () => {
           } else {
             resolve(all);
           }
-        }
+        },
       );
   });
 };

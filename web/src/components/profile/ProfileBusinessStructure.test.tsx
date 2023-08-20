@@ -8,7 +8,7 @@ import {
   generateBusiness,
   generateProfileData,
   generateUserDataForBusiness,
-  LookupLegalStructureById
+  LookupLegalStructureById,
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
@@ -25,7 +25,7 @@ const renderComponent = (business: Business): void => {
           <ProfileBusinessStructure />
         </WithStatefulProfileData>
       </WithStatefulUserData>
-    </ThemeProvider>
+    </ThemeProvider>,
   );
 };
 
@@ -42,13 +42,13 @@ describe("<ProfileBusinessStructure />", () => {
     useMockRoadmapTask({ id: "business-structure", urlSlug: "some-business-structure-url" });
     renderComponent(
       generateBusiness({
-        profileData: generateProfileData({ legalStructureId: undefined })
-      })
+        profileData: generateProfileData({ legalStructureId: undefined }),
+      }),
     );
 
     expect(screen.getByText(configForField.addText)).toHaveAttribute(
       "href",
-      "/tasks/some-business-structure-url"
+      "/tasks/some-business-structure-url",
     );
   });
 
@@ -56,20 +56,20 @@ describe("<ProfileBusinessStructure />", () => {
     useMockRoadmapTask({ id: "business-structure", urlSlug: "some-business-structure-url" });
     renderComponent(
       generateBusiness({
-        profileData: generateProfileData({ legalStructureId: "c-corporation" })
-      })
+        profileData: generateProfileData({ legalStructureId: "c-corporation" }),
+      }),
     );
     expect(screen.getByText(configForField.editText)).toHaveAttribute(
       "href",
-      "/tasks/some-business-structure-url"
+      "/tasks/some-business-structure-url",
     );
   });
 
   it("displays Not Entered text when user has no legal structure", () => {
     renderComponent(
       generateBusiness({
-        profileData: generateProfileData({ legalStructureId: undefined })
-      })
+        profileData: generateProfileData({ legalStructureId: undefined }),
+      }),
     );
     expect(screen.getByText(configForField.notEnteredText)).toBeInTheDocument();
   });
@@ -77,8 +77,8 @@ describe("<ProfileBusinessStructure />", () => {
   it("displays business structure when exists", () => {
     renderComponent(
       generateBusiness({
-        profileData: generateProfileData({ legalStructureId: "c-corporation" })
-      })
+        profileData: generateProfileData({ legalStructureId: "c-corporation" }),
+      }),
     );
     expect(screen.queryByTestId("not-entered")).not.toBeInTheDocument();
     expect(screen.getByText(LookupLegalStructureById("c-corporation").name)).toBeInTheDocument();

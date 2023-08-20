@@ -8,5 +8,5 @@ export interface RoadmapContextType {
 
 export const RoadmapContext = createContext<RoadmapContextType>({
   roadmap: undefined,
-  setRoadmap: () => {}
+  setRoadmap: () => {},
 });

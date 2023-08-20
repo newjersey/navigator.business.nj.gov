@@ -19,8 +19,8 @@ const DeferredLocationPreview = (props: PreviewProps): ReactElement => {
           CMS_ONLY_showSuccessBanner={true}
           CMS_ONLY_fakeBusiness={generateBusiness({
             profileData: generateProfileData({
-              municipality: generateMunicipality({ displayName: "Newark" })
-            })
+              municipality: generateMunicipality({ displayName: "Newark" }),
+            }),
           })}
         />
       </div>

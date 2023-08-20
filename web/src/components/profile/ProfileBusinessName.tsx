@@ -2,13 +2,13 @@ import { OnboardingField, OnboardingProps } from "@/components/onboarding/Onboar
 import { ReactElement } from "react";
 
 export const ProfileBusinessName = (
-  props: Omit<OnboardingProps, "fieldName" | "inputWidth">
+  props: Omit<OnboardingProps, "fieldName" | "inputWidth">,
 ): ReactElement => {
   return (
     <OnboardingField
       fieldName="businessName"
       fieldOptions={{
-        inputProps: { "data-testid": "businessName" }
+        inputProps: { "data-testid": "businessName" },
       }}
       inputWidth="default"
       {...props}

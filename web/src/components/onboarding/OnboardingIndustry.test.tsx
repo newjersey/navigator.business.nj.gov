@@ -6,7 +6,7 @@ import { capitalizeFirstLetter, kebabSnakeSentenceToCamelCase } from "@/lib/util
 import {
   randomHomeBasedIndustry,
   randomNegativeFilteredIndustry,
-  randomNonHomeBasedIndustry
+  randomNonHomeBasedIndustry,
 } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
@@ -15,7 +15,7 @@ import {
   createEmptyProfileData,
   emptyIndustrySpecificData,
   industrySpecificDataChoices,
-  ProfileData
+  ProfileData,
 } from "@businessnjgovnavigator/shared/profileData";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -33,7 +33,7 @@ describe("<OnboardingIndustry />", () => {
     render(
       <WithStatefulProfileData initialData={profileData || createEmptyProfileData()}>
         <OnboardingIndustry />
-      </WithStatefulProfileData>
+      </WithStatefulProfileData>,
     );
   };
 
@@ -105,39 +105,39 @@ describe("<OnboardingIndustry />", () => {
         const chooseRadioWithContent = (div: HTMLElement, choice: string): void => {
           fireEvent.click(
             within(div).getByText(
-              fieldContent[`radioButton${capitalizeFirstLetter(kebabSnakeSentenceToCamelCase(choice))}Text`]
-            )
+              fieldContent[`radioButton${capitalizeFirstLetter(kebabSnakeSentenceToCamelCase(choice))}Text`],
+            ),
           );
         };
 
         it(`displays ${el.fieldName} for ${validIndustryId.id} as a ${persona} when industry is changed from a previous industry of ${nonValidIndustryId.id}`, () => {
           const profileData = {
             ...createEmptyProfileData(),
-            industryId: nonValidIndustryId.id
+            industryId: nonValidIndustryId.id,
           };
           renderComponent(profileData);
           expect(
-            screen.queryByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`)
+            screen.queryByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`),
           ).not.toBeInTheDocument();
 
           selectIndustry(validIndustryId.id);
           expect(screen.getByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`)).toContainHTML(
             renderToStaticMarkup(
               Content({
-                children: fieldContent.description
-              })
-            )
+                children: fieldContent.description,
+              }),
+            ),
           );
           choices.map((choice) => {
             chooseRadioWithContent(
               screen.getByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`),
-              choice.toString()
+              choice.toString(),
             );
             expect(currentProfileData()[el.fieldName]).toEqual(choice);
           });
           selectIndustry("generic");
           expect(
-            screen.queryByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`)
+            screen.queryByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`),
           ).not.toBeInTheDocument();
         });
 
@@ -146,7 +146,7 @@ describe("<OnboardingIndustry />", () => {
         } if they select a different industry`, () => {
           const profileData = {
             ...createEmptyProfileData(),
-            industryId: nonValidIndustryId.id
+            industryId: nonValidIndustryId.id,
           };
           renderComponent(profileData);
           selectIndustry(validIndustryId.id);
@@ -155,7 +155,7 @@ describe("<OnboardingIndustry />", () => {
           });
           chooseRadioWithContent(
             screen.getByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`),
-            nonDefaultChoice?.toString() ?? ""
+            nonDefaultChoice?.toString() ?? "",
           );
           expect(currentProfileData()[el.fieldName]).toEqual(nonDefaultChoice);
           selectIndustry("generic");
@@ -166,7 +166,7 @@ describe("<OnboardingIndustry />", () => {
           render(
             <WithStatefulProfileData initialData={generateProfileData({ industryId: validIndustryId.id })}>
               <OnboardingIndustry onboardingFieldLabel={false} />
-            </WithStatefulProfileData>
+            </WithStatefulProfileData>,
           );
           expect(screen.getAllByTestId("FieldLabelProfile")[0]).toBeInTheDocument();
         });
@@ -175,7 +175,7 @@ describe("<OnboardingIndustry />", () => {
           render(
             <WithStatefulProfileData initialData={generateProfileData({ industryId: validIndustryId.id })}>
               <OnboardingIndustry onboardingFieldLabel={true} />
-            </WithStatefulProfileData>
+            </WithStatefulProfileData>,
           );
           expect(screen.getAllByTestId("FieldLabelOnboarding")[0]).toBeInTheDocument();
         });

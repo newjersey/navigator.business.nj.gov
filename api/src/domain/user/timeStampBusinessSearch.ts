@@ -7,13 +7,13 @@ export const timeStampBusinessSearch = (businessNameClient: BusinessNameClient):
     const result = await businessNameClient.search(businessName).then((result: NameAvailabilityResponse) => {
       return {
         ...result,
-        similarNames: result.similarNames.slice(0, 10)
+        similarNames: result.similarNames.slice(0, 10),
       };
     });
 
     return {
       ...result,
-      lastUpdatedTimeStamp: getCurrentDateISOString()
+      lastUpdatedTimeStamp: getCurrentDateISOString(),
     };
   };
   return { search };

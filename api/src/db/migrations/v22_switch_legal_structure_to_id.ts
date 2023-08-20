@@ -21,9 +21,9 @@ export const migrate_v21_to_v22 = (v21Data: v21UserData): v22UserData => {
     ...v21Data,
     onboardingData: {
       ...updatedOnboardingData,
-      legalStructureId: legalStructureId
+      legalStructureId: legalStructureId,
     },
-    version: 22
+    version: 22,
   };
 };
 
@@ -115,7 +115,7 @@ export const generatev22User = (overrides: Partial<v22BusinessUser>): v22Busines
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -128,7 +128,7 @@ export const generatev22OnboardingData = (overrides: Partial<v22OnboardingData>)
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     liquorLicense: true,
     homeBasedBusiness: true,
@@ -138,6 +138,6 @@ export const generatev22OnboardingData = (overrides: Partial<v22OnboardingData>)
     employerId: undefined,
     taxId: undefined,
     notes: "",
-    ...overrides
+    ...overrides,
   };
 };

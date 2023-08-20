@@ -71,7 +71,7 @@ export const Content = (props: ContentProps): ReactElement => {
     del: (delProps: any): ReactElement => {
       return props.customComponents ? props.customComponents[delProps.children] : delProps.children;
     },
-    ...props.overrides
+    ...props.overrides,
   };
 
   return (
@@ -97,14 +97,14 @@ const Link = (onClick?: (url?: string) => void): any => {
         </a>
       );
     },
-    { displayName: "Link" }
+    { displayName: "Link" },
   );
 };
 
 export const ExternalLink = ({
   children,
   href,
-  onClick
+  onClick,
 }: {
   children: string;
   href: string;

@@ -2,13 +2,13 @@ import { OnboardingField, OnboardingProps } from "@/components/onboarding/Onboar
 import { ReactElement } from "react";
 
 export const ProfileResponsibleOwnerName = (
-  props: Omit<OnboardingProps, "fieldName" | "inputWidth">
+  props: Omit<OnboardingProps, "fieldName" | "inputWidth">,
 ): ReactElement => {
   return (
     <OnboardingField
       fieldName="responsibleOwnerName"
       fieldOptions={{
-        inputProps: { "data-testid": "responsibleOwnerName" }
+        inputProps: { "data-testid": "responsibleOwnerName" },
       }}
       inputWidth="default"
       {...props}

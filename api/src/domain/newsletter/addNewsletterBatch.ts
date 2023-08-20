@@ -8,7 +8,7 @@ type AddNewsletterBatchResponse = {
 
 export const addNewsletterBatch = async (
   addNewsletter: AddNewsletter,
-  userDataClient: UserDataClient
+  userDataClient: UserDataClient,
 ): Promise<AddNewsletterBatchResponse> => {
   const results = await userDataClient.getNeedNewsletterUsers();
   let success = 0;
@@ -27,7 +27,7 @@ export const addNewsletterBatch = async (
         })
         .catch(() => {
           failed += 1;
-        })
+        }),
     );
   }
 

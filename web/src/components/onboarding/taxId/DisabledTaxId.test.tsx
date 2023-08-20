@@ -10,7 +10,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
-  decryptTaxId: jest.fn()
+  decryptTaxId: jest.fn(),
 }));
 const mockApi = api as jest.Mocked<typeof api>;
 
@@ -19,7 +19,7 @@ const Config = getMergedConfig();
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn()
+    useMediaQuery: jest.fn(),
   };
 }
 
@@ -35,7 +35,7 @@ const renderComponent = (profileData: ProfileData): void => {
       <ThemeProvider theme={createTheme()}>
         <DisabledTaxId />
       </ThemeProvider>
-    </WithStatefulProfileData>
+    </WithStatefulProfileData>,
   );
 };
 
@@ -46,7 +46,7 @@ describe("<DisabledTaxId />", () => {
     jest.resetAllMocks();
     setLargeScreen(true);
     profileData = generateProfileData({
-      businessPersona: "STARTING"
+      businessPersona: "STARTING",
     });
   });
 
@@ -55,7 +55,7 @@ describe("<DisabledTaxId />", () => {
     renderComponent({
       ...profileData,
       taxId: "********9000",
-      encryptedTaxId: "some-encrypted-value"
+      encryptedTaxId: "some-encrypted-value",
     });
     fireEvent.click(screen.getByText(Config.tax.showButtonText));
     expect(mockApi.decryptTaxId).toHaveBeenCalledWith({ encryptedTaxId: "some-encrypted-value" });
@@ -69,7 +69,7 @@ describe("<DisabledTaxId />", () => {
     renderComponent({
       ...profileData,
       taxId: "********9000",
-      encryptedTaxId: "some-encrypted-value"
+      encryptedTaxId: "some-encrypted-value",
     });
     expect(screen.queryByText(Config.tax.hideButtonText)).not.toBeInTheDocument();
     expect(screen.getByTestId("disabled-tax-id-value")).toHaveTextContent("****-****-****");
@@ -86,7 +86,7 @@ describe("<DisabledTaxId />", () => {
     renderComponent({
       ...profileData,
       taxId: "********9000",
-      encryptedTaxId: "some-encrypted-value"
+      encryptedTaxId: "some-encrypted-value",
     });
     expect(screen.queryByText(Config.tax.hideButtonTextMobile)).not.toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.tax.showButtonTextMobile));

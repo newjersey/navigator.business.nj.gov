@@ -14,7 +14,7 @@ export const withAuth = (
     user?: BusinessUser;
     dispatch?: Dispatch<AuthAction>;
     isAuthenticated?: IsAuthenticated;
-  }
+  },
 ): ReactElement => {
   const isAuthenticated =
     context.isAuthenticated || (context.user ? IsAuthenticated.TRUE : IsAuthenticated.FALSE);
@@ -26,7 +26,7 @@ export const withAuth = (
 export const withContextualInfo = (
   subject: ReactElement,
   contextualInfo: ContextualInfo,
-  setContextualInfo: Dispatch<SetStateAction<ContextualInfo>>
+  setContextualInfo: Dispatch<SetStateAction<ContextualInfo>>,
 ): ReactElement => {
   return (
     <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
@@ -45,7 +45,7 @@ export const withAuthAlert = (
     setRegistrationAlertStatus?: (value: RegistrationStatus | undefined) => void;
     setRegistrationAlertIsVisible?: (value: boolean) => void;
     setRegistrationModalIsVisible?: (value: boolean) => void;
-  }
+  },
 ): ReactElement => {
   return (
     <AuthAlertContext.Provider
@@ -56,7 +56,7 @@ export const withAuthAlert = (
         registrationAlertStatus: context?.registrationAlertStatus ?? undefined,
         setRegistrationAlertStatus: context?.setRegistrationAlertStatus || jest.fn(),
         setRegistrationAlertIsVisible: context?.setRegistrationAlertIsVisible || jest.fn(),
-        setRegistrationModalIsVisible: context?.setRegistrationModalIsVisible || jest.fn()
+        setRegistrationModalIsVisible: context?.setRegistrationModalIsVisible || jest.fn(),
       }}
     >
       {subject}
@@ -67,7 +67,7 @@ export const withAuthAlert = (
 export const withUserDataError = (
   subject: ReactElement,
   userDataError: UserDataError | undefined,
-  setUserDataError?: (userDataError: UserDataError | undefined) => void
+  setUserDataError?: (userDataError: UserDataError | undefined) => void,
 ): ReactElement => {
   return (
     <UserDataErrorContext.Provider value={{ userDataError, setUserDataError: setUserDataError || jest.fn() }}>
@@ -85,7 +85,7 @@ export const withRoadmap = (params: {
     <RoadmapContext.Provider
       value={{
         roadmap: params.initialRoadmap,
-        setRoadmap: params.mockSetRoadmapFunction || jest.fn()
+        setRoadmap: params.mockSetRoadmapFunction || jest.fn(),
       }}
     >
       {params.component}

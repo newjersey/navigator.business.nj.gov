@@ -9,12 +9,12 @@ import {
   generateBusiness,
   generateLicenseData,
   generateProfileData,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import {
   generateLicenseStatusItem,
   generateNameAndAddress,
-  generateUserData
+  generateUserData,
 } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -31,7 +31,7 @@ describe("<LicenseTask />", () => {
     render(
       <ThemeProvider theme={createTheme()}>
         <LicenseTask task={task} />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
   };
 
@@ -41,7 +41,7 @@ describe("<LicenseTask />", () => {
         <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
           <LicenseTask task={task} />
         </WithStatefulUserData>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
   };
 
@@ -57,8 +57,8 @@ describe("<LicenseTask />", () => {
     const business = generateBusiness({
       taskProgress: { [task.id]: "IN_PROGRESS" },
       licenseData: generateLicenseData({
-        completedSearch: false
-      })
+        completedSearch: false,
+      }),
     });
     renderTaskWithStatefulData(business);
 
@@ -75,8 +75,8 @@ describe("<LicenseTask />", () => {
     const business = generateBusiness({
       taskProgress: { [task.id]: "IN_PROGRESS" },
       licenseData: generateLicenseData({
-        completedSearch: true
-      })
+        completedSearch: true,
+      }),
     });
     renderTaskWithStatefulData(business);
     expect(screen.getByTestId("IN_PROGRESS")).toBeInTheDocument();
@@ -108,9 +108,9 @@ describe("<LicenseTask />", () => {
         licenseData: generateLicenseData({
           completedSearch: false,
           nameAndAddress: generateNameAndAddress({
-            name: "My Cool Nail Salon"
-          })
-        })
+            name: "My Cool Nail Salon",
+          }),
+        }),
       });
 
       renderTask();
@@ -122,10 +122,10 @@ describe("<LicenseTask />", () => {
         licenseData: generateLicenseData({
           completedSearch: true,
           nameAndAddress: generateNameAndAddress({
-            name: "My Cool Nail Salon"
+            name: "My Cool Nail Salon",
           }),
-          status: "ACTIVE"
-        })
+          status: "ACTIVE",
+        }),
       });
 
       renderTask();
@@ -143,10 +143,10 @@ describe("<LicenseTask />", () => {
             name: "Applebees",
             addressLine1: "123 Main St",
             addressLine2: "Apt 1",
-            zipCode: "12345"
+            zipCode: "12345",
           }),
-          completedSearch: false
-        })
+          completedSearch: false,
+        }),
       });
       renderTask();
       await waitFor(() => {
@@ -160,9 +160,9 @@ describe("<LicenseTask />", () => {
     it("fills name from user data when no licenseData", async () => {
       useMockBusiness({
         profileData: generateProfileData({
-          businessName: "Applebees"
+          businessName: "Applebees",
         }),
-        licenseData: undefined
+        licenseData: undefined,
       });
 
       renderTask();
@@ -194,7 +194,7 @@ describe("<LicenseTask />", () => {
         name: "My Cool Nail Salon",
         addressLine1: "123 Main St",
         addressLine2: "Suite 1",
-        zipCode: "12345"
+        zipCode: "12345",
       });
     });
 
@@ -314,11 +314,11 @@ describe("<LicenseTask />", () => {
             licenseData: generateLicenseData({
               items: [
                 generateLicenseStatusItem({ title: "application fee", status: "PENDING" }),
-                generateLicenseStatusItem({ title: "board approval", status: "ACTIVE" })
-              ]
-            })
-          })
-        )
+                generateLicenseStatusItem({ title: "board approval", status: "ACTIVE" }),
+              ],
+            }),
+          }),
+        ),
       );
 
       fireEvent.submit(screen.getByTestId("check-status-submit"));
@@ -339,9 +339,9 @@ describe("<LicenseTask />", () => {
             name: "My Cool Nail Salon",
             addressLine1: "123 Main St",
             addressLine2: "Suite 1",
-            zipCode: "12345"
-          })
-        })
+            zipCode: "12345",
+          }),
+        }),
       });
 
       renderTask();

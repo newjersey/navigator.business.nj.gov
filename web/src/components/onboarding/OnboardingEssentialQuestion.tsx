@@ -21,7 +21,7 @@ export const OnboardingEssentialQuestion = <T,>(props: Props<T>): ReactElement =
   const { RegisterForOnSubmit, isFormFieldInValid } = useFormContextFieldHelpers(
     props.essentialQuestion.fieldName,
     profileFormContext,
-    props.errorTypes
+    props.errorTypes,
   );
 
   const { Config } = useConfig();

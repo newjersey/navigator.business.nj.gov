@@ -28,7 +28,7 @@ export const checkLicenseStatus = (nameAndAddress: NameAndAddress): Promise<User
 export const postBusinessFormation = (
   userData: UserData,
   returnUrl: string,
-  foreignGoodStandingFile: InputFile | undefined
+  foreignGoodStandingFile: InputFile | undefined,
 ): Promise<UserData> => {
   return post(`/formation`, { userData, returnUrl, foreignGoodStandingFile });
 };
@@ -111,6 +111,6 @@ export const post = async <T, R>(url: string, data: R, auth = true): Promise<T> 
 const authConfig = async (): Promise<AxiosRequestConfig> => {
   const token = await getCurrentToken();
   return {
-    headers: { Authorization: `Bearer ${token}` }
+    headers: { Authorization: `Bearer ${token}` },
   };
 };

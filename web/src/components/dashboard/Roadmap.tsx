@@ -11,7 +11,7 @@ export const Roadmap = (): ReactElement => {
   const { updateQueue } = useUserData();
 
   const displayBusinessStructurePrompt = LookupOperatingPhaseById(
-    updateQueue?.currentBusiness().profileData.operatingPhase
+    updateQueue?.currentBusiness().profileData.operatingPhase,
   ).displayBusinessStructurePrompt;
 
   const completedBusinessStructure = hasCompletedBusinessStructure(updateQueue?.currentBusiness());

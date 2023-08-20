@@ -12,9 +12,9 @@ describe("shouldAddToNewsletter", () => {
     const userData = generateUserData({
       user: generateUser({
         externalStatus: generateExternalStatus({
-          newsletter: generateNewsletterResponse({ success: true })
-        })
-      })
+          newsletter: generateNewsletterResponse({ success: true }),
+        }),
+      }),
     });
     expect(shouldAddToNewsletter(userData)).toEqual(false);
   });
@@ -23,16 +23,16 @@ describe("shouldAddToNewsletter", () => {
     const userData = generateUserData({
       user: generateUser({
         externalStatus: generateExternalStatus({
-          newsletter: generateNewsletterResponse({ success: false })
-        })
-      })
+          newsletter: generateNewsletterResponse({ success: false }),
+        }),
+      }),
     });
     expect(shouldAddToNewsletter(userData)).toEqual(false);
   });
 
   it("does add newsletter if no status exists yet", async () => {
     const userData = generateUserData({
-      user: generateUser({ externalStatus: {} })
+      user: generateUser({ externalStatus: {} }),
     });
     expect(shouldAddToNewsletter(userData)).toEqual(true);
   });

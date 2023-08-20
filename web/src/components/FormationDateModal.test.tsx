@@ -6,7 +6,7 @@ import {
   currentBusiness,
   setupStatefulUserDataContext,
   triggerQueueUpdate,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
@@ -15,7 +15,7 @@ import {
   generateMunicipality,
   generateProfileData,
   generateUserDataForBusiness,
-  getCurrentDate
+  getCurrentDate,
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
 
@@ -38,8 +38,8 @@ describe("<FormationDateModal />", () => {
       ...business,
       profileData: {
         ...business.profileData,
-        municipality: business.profileData.municipality === undefined ? undefined : municipality
-      }
+        municipality: business.profileData.municipality === undefined ? undefined : municipality,
+      },
     };
 
     render(
@@ -47,7 +47,7 @@ describe("<FormationDateModal />", () => {
         <WithStatefulUserData initialUserData={generateUserDataForBusiness(businessWithMunicipality)}>
           <FormationDateModal isOpen={true} close={(): void => {}} onSave={(): void => {}} />
         </WithStatefulUserData>
-      </MunicipalitiesContext.Provider>
+      </MunicipalitiesContext.Provider>,
     );
   };
 
@@ -84,7 +84,7 @@ describe("<FormationDateModal />", () => {
     fireEvent.click(screen.getByText(Config.formationDateModal.cancelButtonText));
     triggerQueueUpdate();
     expect(currentBusiness().profileData.dateOfFormation).toEqual(
-      initialBusiness.profileData.dateOfFormation
+      initialBusiness.profileData.dateOfFormation,
     );
   });
 
@@ -112,9 +112,9 @@ describe("<FormationDateModal />", () => {
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
           nexusLocationInNewJersey: true,
-          municipality: undefined
-        })
-      })
+          municipality: undefined,
+        }),
+      }),
     );
     expect(screen.getByText("Location")).toBeInTheDocument();
   });
@@ -126,9 +126,9 @@ describe("<FormationDateModal />", () => {
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
           nexusLocationInNewJersey: false,
-          municipality: undefined
-        })
-      })
+          municipality: undefined,
+        }),
+      }),
     );
     expect(screen.queryByLabelText("Location")).not.toBeInTheDocument();
   });
@@ -136,11 +136,11 @@ describe("<FormationDateModal />", () => {
   it("shows error when user saves without entering location", () => {
     renderComponent(generateBusiness({ profileData: generateProfileData({ municipality: undefined }) }));
     expect(
-      screen.queryByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
+      screen.queryByText(Config.profileDefaults.fields.municipality.default.errorTextRequired),
     ).not.toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
     expect(
-      screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
+      screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired),
     ).toBeInTheDocument();
   });
 });

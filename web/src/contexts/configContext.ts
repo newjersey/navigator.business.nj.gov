@@ -58,9 +58,9 @@ const merged = JSON.parse(
       BusinessStructureTask,
       BusinessStructurePrompt,
       AccountSetup,
-      ExportPdf
-    )
-  )
+      ExportPdf,
+    ),
+  ),
 );
 
 export type ConfigType = typeof ConfigOriginal &
@@ -118,7 +118,7 @@ export const getMergedConfig = (): ConfigType => {
     TaxAccess,
     AccountSetup,
     BusinessStructureTask,
-    ExportPdf
+    ExportPdf,
   );
 };
 
@@ -129,5 +129,5 @@ export interface ConfigContextType {
 
 export const ConfigContext = createContext<ConfigContextType>({
   config: merged,
-  setOverrides: () => {}
+  setOverrides: () => {},
 });

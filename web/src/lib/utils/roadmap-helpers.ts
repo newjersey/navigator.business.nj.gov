@@ -9,7 +9,7 @@ export const getTaskFromRoadmap = (roadmap: Roadmap | undefined, taskId: string)
 export const getModifiedTaskContent = (
   roadmap: Roadmap | undefined,
   task: Task,
-  field: KeysOfType<Task, string>
+  field: KeysOfType<Task, string>,
 ): string => {
   const taskInRoadmap = getTaskFromRoadmap(roadmap, task.id);
   if (taskInRoadmap && taskInRoadmap[field] !== task[field]) {
@@ -21,7 +21,7 @@ export const getModifiedTaskContent = (
 export const getModifiedTaskBooleanUndefined = (
   roadmap: Roadmap | undefined,
   task: Task,
-  field: KeysOfType<Task, boolean | undefined>
+  field: KeysOfType<Task, boolean | undefined>,
 ): boolean | undefined => {
   const taskInRoadmap = getTaskFromRoadmap(roadmap, task.id);
   if (taskInRoadmap && taskInRoadmap[field] !== task[field]) {

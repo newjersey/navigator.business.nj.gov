@@ -13,7 +13,7 @@ export const FormationChooseNotifications = (): ReactElement => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        annualReportNotification: !state.formationFormData.annualReportNotification
+        annualReportNotification: !state.formationFormData.annualReportNotification,
       };
     });
   };
@@ -23,7 +23,7 @@ export const FormationChooseNotifications = (): ReactElement => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        corpWatchNotification: !state.formationFormData.corpWatchNotification
+        corpWatchNotification: !state.formationFormData.corpWatchNotification,
       };
     });
   };

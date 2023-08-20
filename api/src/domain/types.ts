@@ -28,7 +28,7 @@ export interface FormationClient {
   form: (
     userData: UserData,
     returnUrl: string,
-    foreignGoodStandingFile?: InputFile
+    foreignGoodStandingFile?: InputFile,
   ) => Promise<FormationSubmitResponse>;
   getCompletedFiling: (formationId: string) => Promise<GetFilingResponse>;
 }
@@ -96,7 +96,7 @@ export type SelfRegResponse = {
 export type SearchBusinessName = (name: string) => Promise<NameAvailability>;
 export type SearchLicenseStatus = (
   nameAndAddress: NameAndAddress,
-  licenseType: string
+  licenseType: string,
 ) => Promise<LicenseStatusResult>;
 export type UpdateLicenseStatus = (userData: UserData, nameAndAddress: NameAndAddress) => Promise<UserData>;
 export type UpdateOperatingPhase = (userData: UserData) => UserData;

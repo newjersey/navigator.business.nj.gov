@@ -5,14 +5,14 @@ import {
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import {
   generateBusiness,
   generateProfileData,
   generateUserData,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -28,7 +28,7 @@ describe("<TaxAccessModal />", () => {
         initialUserData={business ? generateUserDataForBusiness(business) : generateUserData({})}
       >
         <TaxAccessModal isOpen={true} close={(): void => {}} onSuccess={(): void => {}} />
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
   };
 
@@ -42,9 +42,9 @@ describe("<TaxAccessModal />", () => {
       renderModal(
         generateBusiness({
           profileData: generateProfileData({
-            businessPersona: persona as BusinessPersona
-          })
-        })
+            businessPersona: persona as BusinessPersona,
+          }),
+        }),
       );
       expect(screen.queryByText(Config.taxAccess.stepOneHeader)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.stepTwoHeader)).not.toBeInTheDocument();
@@ -62,8 +62,8 @@ describe("<TaxAccessModal />", () => {
       undefinedLegalStructureBusiness = generateBusiness({
         profileData: generateProfileData({
           businessPersona: "OWNING",
-          legalStructureId: undefined
-        })
+          legalStructureId: undefined,
+        }),
       });
     });
 
@@ -97,13 +97,13 @@ describe("<TaxAccessModal />", () => {
       renderModal(undefinedLegalStructureBusiness);
       expect(screen.queryByText(Config.taxAccess.stepOneErrorBanner)).not.toBeInTheDocument();
       expect(
-        screen.queryByText(Config.profileDefaults.fields.legalStructureId.default.errorTextRequired)
+        screen.queryByText(Config.profileDefaults.fields.legalStructureId.default.errorTextRequired),
       ).not.toBeInTheDocument();
 
       fireEvent.blur(screen.getByLabelText("Business structure"));
       expect(screen.getByText(Config.taxAccess.stepOneErrorBanner)).toBeInTheDocument();
       expect(
-        screen.getByText(Config.profileDefaults.fields.legalStructureId.default.errorTextRequired)
+        screen.getByText(Config.profileDefaults.fields.legalStructureId.default.errorTextRequired),
       ).toBeInTheDocument();
     });
 
@@ -112,7 +112,7 @@ describe("<TaxAccessModal />", () => {
       fireEvent.click(screen.getByText(Config.taxAccess.stepOneNextButton));
       expect(screen.getByText(Config.taxAccess.stepOneErrorBanner)).toBeInTheDocument();
       expect(
-        screen.getByText(Config.profileDefaults.fields.legalStructureId.default.errorTextRequired)
+        screen.getByText(Config.profileDefaults.fields.legalStructureId.default.errorTextRequired),
       ).toBeInTheDocument();
       expect(screen.getByText(Config.taxAccess.stepOneHeader)).toBeInTheDocument();
       expect(userDataWasNotUpdated()).toBe(true);
@@ -124,9 +124,9 @@ describe("<TaxAccessModal />", () => {
       renderModal(
         generateBusiness({
           profileData: generateProfileData({
-            businessPersona: "OWNING"
-          })
-        })
+            businessPersona: "OWNING",
+          }),
+        }),
       );
       expect(screen.queryByText(Config.taxAccess.stepOneHeader)).not.toBeInTheDocument();
       expect(screen.getByText(Config.taxAccess.stepTwoHeader)).toBeInTheDocument();
@@ -138,9 +138,9 @@ describe("<TaxAccessModal />", () => {
       renderModal(
         generateBusiness({
           profileData: generateProfileData({
-            businessPersona: "OWNING"
-          })
-        })
+            businessPersona: "OWNING",
+          }),
+        }),
       );
       fireEvent.click(screen.getByText(Config.taxAccess.stepTwoBackButton));
       expect(screen.getByText(Config.taxAccess.stepOneHeader)).toBeInTheDocument();

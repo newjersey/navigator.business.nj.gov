@@ -101,8 +101,8 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
           path: ROUTES.dashboard,
           queries: {
             [QUERIES.fromFormBusinessEntity]: isFormationTask(props.taskId) ? "true" : "false",
-            [QUERIES.fromTaxRegistration]: isTaxTask(props.taskId) ? "true" : "false"
-          }
+            [QUERIES.fromTaxRegistration]: isTaxTask(props.taskId) ? "true" : "false",
+          },
         });
       })
       .catch(() => {});
@@ -130,14 +130,14 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
             border: "border-base-light",
             bg: "bg-base-lightest",
             textColor: "",
-            hover: ""
+            hover: "",
           };
         } else {
           return {
             border: "border-base",
             bg: "bg-white",
             textColor: "",
-            hover: "task-checkbox-base-lighter"
+            hover: "task-checkbox-base-lighter",
           };
         }
       case "IN_PROGRESS":
@@ -146,14 +146,14 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
             border: "border-accent-cool-light",
             bg: "bg-accent-cool-lightest",
             textColor: "text-accent-cool-dark",
-            hover: ""
+            hover: "",
           };
         } else {
           return {
             border: "border-accent-cool-dark",
             bg: "bg-white",
             textColor: "text-accent-cool-dark",
-            hover: "task-checkbox-accent-cool-lighter"
+            hover: "task-checkbox-accent-cool-lighter",
           };
         }
       case "COMPLETED":
@@ -162,14 +162,14 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
             border: "border-primary-more-light",
             bg: "bg-primary-more-light",
             textColor: "text-white",
-            hover: ""
+            hover: "",
           };
         } else {
           return {
             border: "border-primary-light",
             bg: "bg-primary-light",
             textColor: "text-white",
-            hover: "task-checkbox-primary-lightest"
+            hover: "task-checkbox-primary-lightest",
           };
         }
     }

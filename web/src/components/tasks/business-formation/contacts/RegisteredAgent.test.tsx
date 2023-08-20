@@ -10,7 +10,7 @@ import { screen, waitFor } from "@testing-library/react";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn()
+    useMediaQuery: jest.fn(),
   };
 }
 
@@ -24,7 +24,7 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn()
+  searchBusinessName: jest.fn(),
 }));
 
 describe("Formation - Registered Agent Field", () => {
@@ -38,8 +38,8 @@ describe("Formation - Registered Agent Field", () => {
       {},
       {
         agentNumber: "123465798",
-        agentNumberOrManual: "NUMBER"
-      }
+        agentNumberOrManual: "NUMBER",
+      },
     );
     expect(page.getInputElementByLabel("Agent number").value).toBe("123465798");
   });
@@ -54,8 +54,8 @@ describe("Formation - Registered Agent Field", () => {
         agentOfficeAddressLine1: "123 agent address",
         agentOfficeAddressLine2: "agent suite 201",
         agentOfficeAddressMunicipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
-        agentOfficeAddressZipCode: "99887"
-      }
+        agentOfficeAddressZipCode: "99887",
+      },
     );
 
     await waitFor(() => {
@@ -71,7 +71,7 @@ describe("Formation - Registered Agent Field", () => {
   it("hides same-business-address checkbox for foreign legal structures", async () => {
     await getPageHelper({ businessPersona: "FOREIGN" }, { agentNumberOrManual: "MANUAL_ENTRY" });
     expect(
-      screen.queryByLabelText(Config.formation.registeredAgent.sameAddressCheckbox)
+      screen.queryByLabelText(Config.formation.registeredAgent.sameAddressCheckbox),
     ).not.toBeInTheDocument();
   });
 
@@ -99,12 +99,12 @@ describe("Formation - Registered Agent Field", () => {
         agentNumberOrManual: "MANUAL_ENTRY",
         agentEmail: "original@example.com",
         agentName: "Original Name",
-        agentUseAccountInfo: false
+        agentUseAccountInfo: false,
       },
       {
         name: "New Name",
-        email: "new@example.com"
-      }
+        email: "new@example.com",
+      },
     );
 
     expect(page.getInputElementByLabel("Agent name").value).toEqual("Original Name");
@@ -127,12 +127,12 @@ describe("Formation - Registered Agent Field", () => {
         agentNumberOrManual: "MANUAL_ENTRY",
         agentEmail: "original@example.com",
         agentName: "Original Name",
-        agentUseAccountInfo: false
+        agentUseAccountInfo: false,
       },
       {
         name: "New Name",
-        email: "new@example.com"
-      }
+        email: "new@example.com",
+      },
     );
 
     page.selectCheckbox(Config.formation.registeredAgent.sameContactCheckbox);
@@ -153,7 +153,7 @@ describe("Formation - Registered Agent Field", () => {
         agentOfficeAddressLine2: "Old Add 456",
         agentOfficeAddressMunicipality: generateMunicipality({
           name: "Old Test City",
-          displayName: "Old Test City"
+          displayName: "Old Test City",
         }),
         agentOfficeAddressZipCode: "07001",
         addressLine1: "New Add 123",
@@ -161,8 +161,8 @@ describe("Formation - Registered Agent Field", () => {
         addressZipCode: "07002",
         addressState: { shortCode: "NJ", name: "New Jersey" },
         addressCountry: "US",
-        agentUseAccountInfo: false
-      }
+        agentUseAccountInfo: false,
+      },
     );
 
     expect(page.getInputElementByLabel("Agent office address line1").value).toEqual("Old Add 123");
@@ -197,8 +197,8 @@ describe("Formation - Registered Agent Field", () => {
         addressZipCode: "",
         addressState: { shortCode: "NJ", name: "New Jersey" },
         addressCountry: "US",
-        agentUseAccountInfo: false
-      }
+        agentUseAccountInfo: false,
+      },
     );
 
     page.selectCheckbox(Config.formation.registeredAgent.sameAddressCheckbox);
@@ -218,8 +218,8 @@ describe("Formation - Registered Agent Field", () => {
         agentNumberOrManual: "MANUAL_ENTRY",
         agentOfficeAddressLine1: "",
         addressLine1: "",
-        agentUseAccountInfo: false
-      }
+        agentUseAccountInfo: false,
+      },
     );
 
     page.selectCheckbox(Config.formation.registeredAgent.sameAddressCheckbox);
@@ -233,17 +233,17 @@ describe("Formation - Registered Agent Field", () => {
         agentNumberOrManual: "MANUAL_ENTRY",
         agentOfficeAddressZipCode: "",
         addressZipCode: "",
-        agentUseAccountInfo: false
-      }
+        agentUseAccountInfo: false,
+      },
     );
 
     page.selectCheckbox(Config.formation.registeredAgent.sameAddressCheckbox);
     expect(page.getInputElementByLabel(Config.formation.registeredAgent.sameAddressCheckbox).checked).toEqual(
-      true
+      true,
     );
     page.fillText("Agent office address zip code", "12345");
     expect(page.getInputElementByLabel(Config.formation.registeredAgent.sameAddressCheckbox).checked).toEqual(
-      false
+      false,
     );
     expect(page.getInputElementByLabel("Agent office address line1").disabled).toEqual(false);
     expect(page.getInputElementByLabel("Agent office address line2").disabled).toEqual(false);
@@ -261,15 +261,15 @@ describe("Formation - Registered Agent Field", () => {
         addressZipCode: "07002",
         addressState: { shortCode: "NJ", name: "New Jersey" },
         addressCountry: "US",
-        agentUseBusinessAddress: false
-      }
+        agentUseBusinessAddress: false,
+      },
     );
 
     page.selectCheckbox(Config.formation.registeredAgent.sameAddressCheckbox);
     page.selectCheckbox(Config.formation.registeredAgent.sameAddressCheckbox);
 
     expect(page.getInputElementByLabel(Config.formation.registeredAgent.sameAddressCheckbox).checked).toEqual(
-      false
+      false,
     );
     expect(page.getInputElementByLabel("Agent office address line1").value).toEqual("New Add 123");
     expect(page.getInputElementByLabel("Agent office address line2").value).toEqual("New Add 456");
@@ -286,8 +286,8 @@ describe("Formation - Registered Agent Field", () => {
       {},
       {
         agentOfficeAddressZipCode: "",
-        agentNumberOrManual: "MANUAL_ENTRY"
-      }
+        agentNumberOrManual: "MANUAL_ENTRY",
+      },
     );
 
     page.fillText("Agent office address zip code", "22222");
@@ -303,8 +303,8 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentNumberOrManual: "MANUAL_ENTRY",
-          agentEmail: ""
-        }
+          agentEmail: "",
+        },
       );
 
       page.fillText("Agent email", "deeb.gmail");
@@ -319,8 +319,8 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentNumberOrManual: "MANUAL_ENTRY",
-          agentEmail: ""
-        }
+          agentEmail: "",
+        },
       );
 
       page.fillText("Agent email", "deeb@");
@@ -335,8 +335,8 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentNumberOrManual: "MANUAL_ENTRY",
-          agentEmail: ""
-        }
+          agentEmail: "",
+        },
       );
 
       page.fillText("Agent email", "lol@deeb.gmail");
@@ -351,8 +351,8 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentNumber: "",
-          agentNumberOrManual: "NUMBER"
-        }
+          agentNumberOrManual: "NUMBER",
+        },
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.agentNumber.label);
@@ -365,8 +365,8 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentName: "",
-          agentNumberOrManual: "MANUAL_ENTRY"
-        }
+          agentNumberOrManual: "MANUAL_ENTRY",
+        },
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.agentName.label);
@@ -377,8 +377,8 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentEmail: "",
-          agentNumberOrManual: "MANUAL_ENTRY"
-        }
+          agentNumberOrManual: "MANUAL_ENTRY",
+        },
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.agentEmail.label);
@@ -389,12 +389,12 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentOfficeAddressLine1: "",
-          agentNumberOrManual: "MANUAL_ENTRY"
-        }
+          agentNumberOrManual: "MANUAL_ENTRY",
+        },
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.agentOfficeAddressLine1.label
+        Config.formation.fields.agentOfficeAddressLine1.label,
       );
     });
 
@@ -403,12 +403,12 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentOfficeAddressMunicipality: undefined,
-          agentNumberOrManual: "MANUAL_ENTRY"
-        }
+          agentNumberOrManual: "MANUAL_ENTRY",
+        },
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.agentOfficeAddressMunicipality.label
+        Config.formation.fields.agentOfficeAddressMunicipality.label,
       );
     });
 
@@ -417,12 +417,12 @@ describe("Formation - Registered Agent Field", () => {
         {},
         {
           agentOfficeAddressZipCode: "",
-          agentNumberOrManual: "MANUAL_ENTRY"
-        }
+          agentNumberOrManual: "MANUAL_ENTRY",
+        },
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.agentOfficeAddressZipCode.label
+        Config.formation.fields.agentOfficeAddressZipCode.label,
       );
     });
   });

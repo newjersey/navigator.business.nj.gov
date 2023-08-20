@@ -8,7 +8,7 @@ import {
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
@@ -20,14 +20,14 @@ import {
   getCurrentBusiness,
   getCurrentDateISOString,
   OperatingPhases,
-  UserData
+  UserData,
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
   generateGetFilingResponse,
   generateProfileData,
   generateTaxFilingData,
-  randomLegalStructure
+  randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
@@ -35,7 +35,7 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postTaxFilingsOnboarding: jest.fn(),
-  postTaxFilingsLookup: jest.fn()
+  postTaxFilingsLookup: jest.fn(),
 }));
 const mockApi = api as jest.Mocked<typeof api>;
 
@@ -50,7 +50,7 @@ const renderComponent = (initialUserData?: UserData): void => {
         onSuccess={(): void => {}}
         moveToPrevStep={(): void => {}}
       />
-    </WithStatefulUserData>
+    </WithStatefulUserData>,
   );
 };
 
@@ -61,9 +61,9 @@ const mockApiResponse = (userData: UserData, overrides: Partial<Business>): void
       ...userData.businesses,
       [userData.currentBusinessId]: {
         ...userData.businesses[userData.currentBusinessId],
-        ...overrides
-      }
-    }
+        ...overrides,
+      },
+    },
   });
 };
 
@@ -88,7 +88,7 @@ describe("<TaxAccessStepTwo />", () => {
       completedFilingPayment: false,
       businessNameAvailability: undefined,
       dbaBusinessNameAvailability: undefined,
-      lastVisitedPageIndex: 0
+      lastVisitedPageIndex: 0,
     };
 
     const legalStructureId = params.publicFiling
@@ -98,9 +98,9 @@ describe("<TaxAccessStepTwo />", () => {
       formationData = generateFormationData(
         {
           completedFilingPayment: !!params.formedInNavigator,
-          getFilingResponse: generateGetFilingResponse({ success: params.formedInNavigator })
+          getFilingResponse: generateGetFilingResponse({ success: params.formedInNavigator }),
         },
-        legalStructureId as FormationLegalType
+        legalStructureId as FormationLegalType,
       );
     }
 
@@ -111,16 +111,16 @@ describe("<TaxAccessStepTwo />", () => {
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => {
               return obj.displayTaxAccessButton;
-            })
+            }),
           ).id,
           taxId: params.taxId ? `*${params.taxId.slice(1)}` : "",
           encryptedTaxId: params.taxId ? `encrypted-${params.taxId}` : "",
           businessName: params.businessName || "",
-          responsibleOwnerName: params.responsibleOwnerName || ""
+          responsibleOwnerName: params.responsibleOwnerName || "",
         }),
         formationData: formationData,
-        taxFilingData: generateTaxFilingData({ state: undefined })
-      })
+        taxFilingData: generateTaxFilingData({ state: undefined }),
+      }),
     );
   };
 
@@ -128,19 +128,19 @@ describe("<TaxAccessStepTwo />", () => {
     const userDataWithPrefilledFields = generateTaxFilingUserData({
       publicFiling: true,
       taxId: "123456789123",
-      businessName: "MrFakesHotDogBonanza"
+      businessName: "MrFakesHotDogBonanza",
     });
 
     const userDataMissingTaxId = generateTaxFilingUserData({
       publicFiling: true,
       taxId: "",
-      businessName: "MrFakesHotDogBonanza"
+      businessName: "MrFakesHotDogBonanza",
     });
 
     const userDataMissingBusinessName = generateTaxFilingUserData({
       publicFiling: true,
       taxId: "123456789123",
-      businessName: ""
+      businessName: "",
     });
 
     const taxIdDisplayFormat = "*23-456-789/123";
@@ -150,7 +150,7 @@ describe("<TaxAccessStepTwo />", () => {
     it("pre-populates fields with userData values", () => {
       renderComponent(userDataWithPrefilledFields);
       expect((screen.queryByLabelText("Business name") as HTMLInputElement)?.value).toEqual(
-        "MrFakesHotDogBonanza"
+        "MrFakesHotDogBonanza",
       );
       expect((screen.queryByLabelText("Tax id") as HTMLInputElement)?.value).toEqual(taxIdDisplayFormat);
     });
@@ -167,7 +167,7 @@ describe("<TaxAccessStepTwo />", () => {
         publicFiling: true,
         formedInNavigator: true,
         taxId: "123456789123",
-        businessName: "MrFakesHotDogBonanza"
+        businessName: "MrFakesHotDogBonanza",
       });
 
       renderComponent(userDataWithNavigatorFormation);
@@ -182,19 +182,19 @@ describe("<TaxAccessStepTwo />", () => {
 
       mockApiResponse(userDataWithPrefilledFields, {
         profileData: {
-          ...business.profileData
+          ...business.profileData,
         },
         taxFilingData: generateTaxFilingData({
           state: "FAILED",
           businessName: business.profileData.businessName,
-          errorField: undefined
-        })
+          errorField: undefined,
+        }),
       });
       fireEvent.change(screen.getByLabelText("Business name"), {
-        target: { value: "zoom" }
+        target: { value: "zoom" },
       });
       fireEvent.change(screen.getByLabelText("Tax id"), {
-        target: { value: "999888777666" }
+        target: { value: "999888777666" },
       });
       clickSave();
       await waitFor(() => {
@@ -211,19 +211,19 @@ describe("<TaxAccessStepTwo />", () => {
       mockApiResponse(userDataWithPrefilledFields, {
         profileData: {
           ...business.profileData,
-          municipality: undefined
+          municipality: undefined,
         },
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
           businessName: business.profileData.businessName,
-          errorField: undefined
-        })
+          errorField: undefined,
+        }),
       });
       fireEvent.change(screen.getByLabelText("Business name"), {
-        target: { value: "zoom" }
+        target: { value: "zoom" },
       });
       fireEvent.change(screen.getByLabelText("Tax id"), {
-        target: { value: "999888777666" }
+        target: { value: "999888777666" },
       });
       clickSave();
       await waitFor(() => {
@@ -243,7 +243,7 @@ describe("<TaxAccessStepTwo />", () => {
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.modalBusinessFieldErrorName);
       expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.modalTaxFieldErrorName);
       expect(screen.getByRole("alert")).not.toHaveTextContent(
-        Config.taxAccess.modalResponsibleOwnerFieldErrorName
+        Config.taxAccess.modalResponsibleOwnerFieldErrorName,
       );
       expect(screen.getByText(Config.taxAccess.failedBusinessFieldHelper)).toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.failedTaxIdHelper)).not.toBeInTheDocument();
@@ -260,7 +260,7 @@ describe("<TaxAccessStepTwo />", () => {
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.modalTaxFieldErrorName);
       expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.modalBusinessFieldErrorName);
       expect(screen.getByRole("alert")).not.toHaveTextContent(
-        Config.taxAccess.modalResponsibleOwnerFieldErrorName
+        Config.taxAccess.modalResponsibleOwnerFieldErrorName,
       );
       expect(screen.queryByText(Config.taxAccess.failedBusinessFieldHelper)).not.toBeInTheDocument();
       expect(screen.getByText(Config.taxAccess.failedTaxIdHelper)).toBeInTheDocument();
@@ -271,7 +271,7 @@ describe("<TaxAccessStepTwo />", () => {
       const userDataMissingBoth = generateTaxFilingUserData({
         publicFiling: true,
         taxId: "123",
-        businessName: ""
+        businessName: "",
       });
 
       renderComponent(userDataMissingBoth);
@@ -283,7 +283,7 @@ describe("<TaxAccessStepTwo />", () => {
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.modalBusinessFieldErrorName);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.modalTaxFieldErrorName);
       expect(screen.getByRole("alert")).not.toHaveTextContent(
-        Config.taxAccess.modalResponsibleOwnerFieldErrorName
+        Config.taxAccess.modalResponsibleOwnerFieldErrorName,
       );
       expect(screen.getByText(Config.taxAccess.failedBusinessFieldHelper)).toBeInTheDocument();
       expect(screen.getByText(Config.taxAccess.failedTaxIdHelper)).toBeInTheDocument();
@@ -295,9 +295,9 @@ describe("<TaxAccessStepTwo />", () => {
       const business = getCurrentBusiness(userDataWithPrefilledFields);
       mockApiResponse(userDataWithPrefilledFields, {
         profileData: {
-          ...business.profileData
+          ...business.profileData,
         },
-        taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: undefined })
+        taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: undefined }),
       });
 
       clickSave();
@@ -317,9 +317,9 @@ describe("<TaxAccessStepTwo />", () => {
       const business = getCurrentBusiness(userDataWithPrefilledFields);
       mockApiResponse(userDataWithPrefilledFields, {
         profileData: {
-          ...business.profileData
+          ...business.profileData,
         },
-        taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: "businessName" })
+        taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: "businessName" }),
       });
       clickSave();
       await screen.findByRole("alert");
@@ -343,8 +343,8 @@ describe("<TaxAccessStepTwo />", () => {
       mockApiResponse(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
-          registeredISO: getCurrentDateISOString()
-        })
+          registeredISO: getCurrentDateISOString(),
+        }),
       });
       renderComponent(userDataWithPrefilledFields);
       clickSave();
@@ -354,7 +354,7 @@ describe("<TaxAccessStepTwo />", () => {
       expect(mockApi.postTaxFilingsOnboarding).toHaveBeenCalledWith({
         taxId: business.profileData.taxId,
         businessName: business.profileData.businessName,
-        encryptedTaxId: business.profileData.encryptedTaxId
+        encryptedTaxId: business.profileData.encryptedTaxId,
       });
     });
 
@@ -363,7 +363,7 @@ describe("<TaxAccessStepTwo />", () => {
       mockApiResponse(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
-          registeredISO: getCurrentDateISOString()
+          registeredISO: getCurrentDateISOString(),
         }),
         profileData: {
           ...business.profileData,
@@ -371,10 +371,10 @@ describe("<TaxAccessStepTwo />", () => {
             name: "Absecon",
             displayName: "",
             county: "",
-            id: ""
+            id: "",
           },
-          naicsCode: "123456"
-        }
+          naicsCode: "123456",
+        },
       });
 
       renderComponent(userDataWithPrefilledFields);
@@ -392,19 +392,19 @@ describe("<TaxAccessStepTwo />", () => {
     const userDataWithPrefilledFields = generateTaxFilingUserData({
       publicFiling: false,
       taxId: "123456789123",
-      responsibleOwnerName: "FirstName LastName"
+      responsibleOwnerName: "FirstName LastName",
     });
 
     const userDataMissingTaxId = generateTaxFilingUserData({
       publicFiling: false,
       taxId: "",
-      responsibleOwnerName: "FirstName LastName"
+      responsibleOwnerName: "FirstName LastName",
     });
 
     const userDataMissingResponsibleOwnerName = generateTaxFilingUserData({
       publicFiling: false,
       taxId: "123456789123",
-      responsibleOwnerName: ""
+      responsibleOwnerName: "",
     });
 
     const taxIdDisplayFormat = "*23-456-789/123";
@@ -414,7 +414,7 @@ describe("<TaxAccessStepTwo />", () => {
     it("pre-populates fields with userData values", () => {
       renderComponent(userDataWithPrefilledFields);
       expect((screen.queryByLabelText("Responsible owner name") as HTMLInputElement)?.value).toEqual(
-        "FirstName LastName"
+        "FirstName LastName",
       );
       expect((screen.queryByLabelText("Tax id") as HTMLInputElement)?.value).toEqual(taxIdDisplayFormat);
     });
@@ -431,17 +431,17 @@ describe("<TaxAccessStepTwo />", () => {
     it("updates taxId and responsibleOwnerName on submit", async () => {
       mockApiResponse(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({
-          state: "SUCCESS"
-        })
+          state: "SUCCESS",
+        }),
       });
 
       renderComponent(userDataWithPrefilledFields);
 
       fireEvent.change(screen.getByLabelText("Responsible owner name"), {
-        target: { value: "zoom" }
+        target: { value: "zoom" },
       });
       fireEvent.change(screen.getByLabelText("Tax id"), {
-        target: { value: "123456789000" }
+        target: { value: "123456789000" },
       });
       clickSave();
       await waitFor(() => {
@@ -458,7 +458,7 @@ describe("<TaxAccessStepTwo />", () => {
 
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.stepTwoErrorBanner);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.taxAccess.modalResponsibleOwnerFieldErrorName
+        Config.taxAccess.modalResponsibleOwnerFieldErrorName,
       );
       expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.modalTaxFieldErrorName);
       expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.modalBusinessFieldErrorName);
@@ -477,7 +477,7 @@ describe("<TaxAccessStepTwo />", () => {
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.modalTaxFieldErrorName);
       expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.modalBusinessFieldErrorName);
       expect(screen.getByRole("alert")).not.toHaveTextContent(
-        Config.taxAccess.modalResponsibleOwnerFieldErrorName
+        Config.taxAccess.modalResponsibleOwnerFieldErrorName,
       );
       expect(screen.queryByText(Config.taxAccess.failedBusinessFieldHelper)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.failedResponsibleOwnerFieldHelper)).not.toBeInTheDocument();
@@ -489,14 +489,14 @@ describe("<TaxAccessStepTwo />", () => {
       const userDataMissingBoth = generateTaxFilingUserData({
         publicFiling: false,
         taxId: "",
-        responsibleOwnerName: ""
+        responsibleOwnerName: "",
       });
 
       renderComponent(userDataMissingBoth);
       clickSave();
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.stepTwoErrorBanner);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.taxAccess.modalResponsibleOwnerFieldErrorName
+        Config.taxAccess.modalResponsibleOwnerFieldErrorName,
       );
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.modalTaxFieldErrorName);
       expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxAccess.modalBusinessFieldErrorName);
@@ -522,17 +522,17 @@ describe("<TaxAccessStepTwo />", () => {
       mockApiResponse(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: undefined }),
         profileData: {
-          ...business.profileData
-        }
+          ...business.profileData,
+        },
       });
       clickSave();
       await screen.findByRole("alert");
 
       expect(screen.getByRole("alert")).toHaveTextContent(
-        markdownToText(Config.taxAccess.failedErrorMessageHeader)
+        markdownToText(Config.taxAccess.failedErrorMessageHeader),
       );
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.taxAccess.modalResponsibleOwnerFieldErrorName
+        Config.taxAccess.modalResponsibleOwnerFieldErrorName,
       );
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.modalTaxFieldErrorName);
       expect(screen.getByText(Config.taxAccess.failedTaxIdHelper)).toBeInTheDocument();
@@ -546,14 +546,14 @@ describe("<TaxAccessStepTwo />", () => {
       mockApiResponse(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: "businessName" }),
         profileData: {
-          ...business.profileData
-        }
+          ...business.profileData,
+        },
       });
       clickSave();
       await screen.findByRole("alert");
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxAccess.failedErrorMessageHeader);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.taxAccess.modalResponsibleOwnerFieldErrorName
+        Config.taxAccess.modalResponsibleOwnerFieldErrorName,
       );
       expect(screen.getByText(Config.taxAccess.failedResponsibleOwnerFieldHelper)).toBeInTheDocument();
       expect(screen.queryByText(Config.taxAccess.failedBusinessFieldHelper)).not.toBeInTheDocument();
@@ -564,7 +564,7 @@ describe("<TaxAccessStepTwo />", () => {
       mockApiResponse(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
-          registeredISO: getCurrentDateISOString()
+          registeredISO: getCurrentDateISOString(),
         }),
         profileData: {
           ...business.profileData,
@@ -572,10 +572,10 @@ describe("<TaxAccessStepTwo />", () => {
             name: "Absecon",
             displayName: "",
             county: "",
-            id: ""
+            id: "",
           },
-          naicsCode: "123456"
-        }
+          naicsCode: "123456",
+        },
       });
 
       renderComponent(userDataWithPrefilledFields);
@@ -586,7 +586,7 @@ describe("<TaxAccessStepTwo />", () => {
       expect(mockApi.postTaxFilingsOnboarding).toHaveBeenCalledWith({
         taxId: business.profileData.taxId,
         businessName: business.profileData.responsibleOwnerName,
-        encryptedTaxId: business.profileData.encryptedTaxId
+        encryptedTaxId: business.profileData.encryptedTaxId,
       });
     });
 
@@ -595,12 +595,12 @@ describe("<TaxAccessStepTwo />", () => {
       mockApiResponse(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
-          registeredISO: getCurrentDateISOString()
+          registeredISO: getCurrentDateISOString(),
         }),
         profileData: {
           ...business.profileData,
-          naicsCode: "123456"
-        }
+          naicsCode: "123456",
+        },
       });
 
       renderComponent(userDataWithPrefilledFields);
@@ -618,7 +618,7 @@ describe("<TaxAccessStepTwo />", () => {
       mockApiResponse(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
-          registeredISO: getCurrentDateISOString()
+          registeredISO: getCurrentDateISOString(),
         }),
         profileData: {
           ...business.profileData,
@@ -626,9 +626,9 @@ describe("<TaxAccessStepTwo />", () => {
             name: "testville",
             displayName: "Testville",
             county: "testCounty",
-            id: "testville-id"
-          }
-        }
+            id: "testville-id",
+          },
+        },
       });
 
       renderComponent(userDataWithPrefilledFields);
@@ -641,7 +641,7 @@ describe("<TaxAccessStepTwo />", () => {
         name: "testville",
         displayName: "Testville",
         county: "testCounty",
-        id: "testville-id"
+        id: "testville-id",
       });
     });
   });
@@ -664,10 +664,10 @@ describe("<TaxAccessStepTwo />", () => {
             ...userData.businesses[userData.currentBusinessId],
             profileData: {
               ...userData.businesses[userData.currentBusinessId].profileData,
-              taxId: "123456789"
-            }
-          }
-        }
+              taxId: "123456789",
+            },
+          },
+        },
       };
 
       renderComponent(nineDigitData);
@@ -675,8 +675,8 @@ describe("<TaxAccessStepTwo />", () => {
       mockApiResponse(userData, {
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
-          registeredISO: getCurrentDateISOString()
-        })
+          registeredISO: getCurrentDateISOString(),
+        }),
       });
 
       fireEvent.click(screen.getByLabelText("Tax id location"));
@@ -692,17 +692,17 @@ describe("<TaxAccessStepTwo />", () => {
         renderComponent(userData);
         mockApiResponse(userData, {
           taxFilingData: generateTaxFilingData({
-            state: "API_ERROR"
-          })
+            state: "API_ERROR",
+          }),
         });
         clickSave();
         await screen.findByRole("alert");
         expect(screen.getByRole("alert")).toHaveTextContent(
-          markdownToText(Config.taxAccess.failedUnknownMarkdown)
+          markdownToText(Config.taxAccess.failedUnknownMarkdown),
         );
         expect(screen.queryByText(Config.taxAccess.failedBusinessFieldHelper)).not.toBeInTheDocument();
         expect(
-          screen.queryByText(Config.taxAccess.failedResponsibleOwnerFieldHelper)
+          screen.queryByText(Config.taxAccess.failedResponsibleOwnerFieldHelper),
         ).not.toBeInTheDocument();
         expect(screen.queryByText(Config.taxAccess.failedTaxIdHelper)).not.toBeInTheDocument();
       });
@@ -713,11 +713,11 @@ describe("<TaxAccessStepTwo />", () => {
         clickSave();
         await screen.findByRole("alert");
         expect(screen.getByRole("alert")).toHaveTextContent(
-          markdownToText(Config.taxAccess.failedUnknownMarkdown)
+          markdownToText(Config.taxAccess.failedUnknownMarkdown),
         );
         expect(screen.queryByText(Config.taxAccess.failedBusinessFieldHelper)).not.toBeInTheDocument();
         expect(
-          screen.queryByText(Config.taxAccess.failedResponsibleOwnerFieldHelper)
+          screen.queryByText(Config.taxAccess.failedResponsibleOwnerFieldHelper),
         ).not.toBeInTheDocument();
         expect(screen.queryByText(Config.taxAccess.failedTaxIdHelper)).not.toBeInTheDocument();
       });

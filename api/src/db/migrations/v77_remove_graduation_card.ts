@@ -23,9 +23,9 @@ export const migrate_v76_to_v77 = (v76Data: v76UserData): v77UserData => {
     ...v76Data,
     preferences: {
       ...v76Data.preferences,
-      visibleRoadmapSidebarCards: updatedCards
+      visibleRoadmapSidebarCards: updatedCards,
     },
-    version: 77
+    version: 77,
   };
 };
 
@@ -189,7 +189,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v77FormationData {
@@ -254,7 +254,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -263,7 +263,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const corpBusinessSuffix = [
@@ -276,7 +276,7 @@ export const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
@@ -318,7 +318,7 @@ export const generatev77User = (overrides: Partial<v77BusinessUser>): v77Busines
     abExperience: "ExperienceA",
     myNJUserKey: undefined,
     intercomHash: undefined,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -333,7 +333,7 @@ export const generatev77ProfileData = (overrides: Partial<v77ProfileData>): v77P
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     liquorLicense: true,
     requiresCpa: false,
@@ -349,7 +349,7 @@ export const generatev77ProfileData = (overrides: Partial<v77ProfileData>): v77P
     documents: {
       formationDoc: `some-formation-doc-${randomInt()}`,
       standingDoc: `some-standing-doc-${randomInt()}`,
-      certifiedDoc: `some-certified-doc-${randomInt()}`
+      certifiedDoc: `some-certified-doc-${randomInt()}`,
     },
     ownershipTypeIds: [],
     existingEmployees: undefined,
@@ -364,12 +364,12 @@ export const generatev77ProfileData = (overrides: Partial<v77ProfileData>): v77P
     certifiedInteriorDesigner: false,
     providesStaffingService: false,
     operatingPhase: undefined,
-    ...overrides
+    ...overrides,
   };
 };
 
 export const generatev77FormationFormData = (
-  overrides: Partial<v77FormationFormData>
+  overrides: Partial<v77FormationFormData>,
 ): v77FormationFormData => {
   return {
     businessName: "",
@@ -405,6 +405,6 @@ export const generatev77FormationFormData = (
     contactFirstName: "",
     contactLastName: "",
     contactPhoneNumber: "",
-    ...overrides
+    ...overrides,
   };
 };

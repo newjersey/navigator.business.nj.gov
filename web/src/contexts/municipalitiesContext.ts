@@ -6,5 +6,5 @@ export interface MunicipalitiesContextType {
 }
 
 export const MunicipalitiesContext = createContext<MunicipalitiesContextType>({
-  municipalities: []
+  municipalities: [],
 });

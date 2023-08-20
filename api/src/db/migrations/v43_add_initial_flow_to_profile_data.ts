@@ -27,9 +27,9 @@ export const migrate_v42_to_v43 = (v42Data: v42UserData): v43UserData => {
     ...v42Data,
     profileData: {
       ...v42Data.profileData,
-      initialOnboardingFlow: getOnboardingFlow(v42Data.profileData.hasExistingBusiness)
+      initialOnboardingFlow: getOnboardingFlow(v42Data.profileData.hasExistingBusiness),
     },
-    version: 43
+    version: 43,
   };
 };
 
@@ -159,7 +159,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v43FormationData {

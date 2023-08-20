@@ -4,7 +4,7 @@ import {
   generateMunicipality,
   generatePreferences,
   generateProfileData,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@shared/test";
 import { updateSidebarCards } from "./updateSidebarCards";
 
@@ -17,20 +17,20 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_FORM"
+            operatingPhase: "NEEDS_TO_FORM",
           }),
           preferences: generatePreferences({
-            visibleSidebarCards: ["not-registered"]
-          })
-        })
+            visibleSidebarCards: ["not-registered"],
+          }),
+        }),
       );
 
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        "not-registered"
+        "not-registered",
       );
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
-        "formation-nudge"
+        "formation-nudge",
       );
     });
 
@@ -38,20 +38,20 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_FORM"
+            operatingPhase: "NEEDS_TO_FORM",
           }),
           preferences: generatePreferences({
-            visibleSidebarCards: ["not-registered"]
-          })
-        })
+            visibleSidebarCards: ["not-registered"],
+          }),
+        }),
       );
 
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        "not-registered"
+        "not-registered",
       );
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
-        "formation-nudge"
+        "formation-nudge",
       );
     });
   });
@@ -64,15 +64,15 @@ describe("updateRoadmapSidebarCards", () => {
           taskProgress: { [taskId]: "NOT_STARTED" },
 
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_FORM"
+            operatingPhase: "NEEDS_TO_FORM",
           }),
-          preferences: generatePreferences({ visibleSidebarCards: [] })
-        })
+          preferences: generatePreferences({ visibleSidebarCards: [] }),
+        }),
       );
 
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
-        "formation-nudge"
+        "formation-nudge",
       );
     });
 
@@ -80,15 +80,15 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES"
+            operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
           }),
-          preferences: generatePreferences({ visibleSidebarCards: ["formation-nudge"] })
-        })
+          preferences: generatePreferences({ visibleSidebarCards: ["formation-nudge"] }),
+        }),
       );
 
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        "formation-nudge"
+        "formation-nudge",
       );
     });
   });
@@ -98,14 +98,14 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES"
+            operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
           }),
-          preferences: generatePreferences({ visibleSidebarCards: [] })
-        })
+          preferences: generatePreferences({ visibleSidebarCards: [] }),
+        }),
       );
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
-        "registered-for-taxes-nudge"
+        "registered-for-taxes-nudge",
       );
     });
 
@@ -113,14 +113,14 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "FORMED_AND_REGISTERED"
+            operatingPhase: "FORMED_AND_REGISTERED",
           }),
-          preferences: generatePreferences({ visibleSidebarCards: ["registered-for-taxes-nudge"] })
-        })
+          preferences: generatePreferences({ visibleSidebarCards: ["registered-for-taxes-nudge"] }),
+        }),
       );
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        "registered-for-taxes-nudge"
+        "registered-for-taxes-nudge",
       );
     });
   });
@@ -130,14 +130,14 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "FORMED_AND_REGISTERED"
+            operatingPhase: "FORMED_AND_REGISTERED",
           }),
-          preferences: generatePreferences({ visibleSidebarCards: [] })
-        })
+          preferences: generatePreferences({ visibleSidebarCards: [] }),
+        }),
       );
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        "formation-nudge"
+        "formation-nudge",
       );
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain("funding-nudge");
     });
@@ -146,24 +146,24 @@ describe("updateRoadmapSidebarCards", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES"
+            operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
           }),
-          preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] })
-        })
+          preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] }),
+        }),
       );
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        "funding-nudge"
+        "funding-nudge",
       );
     });
   });
 
   describe("go-to-profile nudge", () => {
     const phasesWhereGoToProfileNudgeTrue = OperatingPhases.filter((it) => it.displayGoToProfileNudge).map(
-      (it) => it.id
+      (it) => it.id,
     );
     const phasesWhereGoToProfileNudgeFalse = OperatingPhases.filter((it) => !it.displayGoToProfileNudge).map(
-      (it) => it.id
+      (it) => it.id,
     );
 
     it.each(phasesWhereGoToProfileNudgeFalse)("does not add go-to-profile nudge for %s", (operatingPhase) => {
@@ -171,14 +171,14 @@ describe("updateRoadmapSidebarCards", () => {
         generateBusiness({
           profileData: generateProfileData({
             operatingPhase,
-            homeBasedBusiness: undefined
+            homeBasedBusiness: undefined,
           }),
-          preferences: generatePreferences({ visibleSidebarCards: [] })
-        })
+          preferences: generatePreferences({ visibleSidebarCards: [] }),
+        }),
       );
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        "go-to-profile"
+        "go-to-profile",
       );
     });
 
@@ -189,16 +189,16 @@ describe("updateRoadmapSidebarCards", () => {
           generateBusiness({
             profileData: generateProfileData({
               operatingPhase,
-              homeBasedBusiness: undefined
+              homeBasedBusiness: undefined,
             }),
-            preferences: generatePreferences({ visibleSidebarCards: [] })
-          })
+            preferences: generatePreferences({ visibleSidebarCards: [] }),
+          }),
         );
         const updatedUserData = updateSidebarCards(userData);
         expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
-          "go-to-profile"
+          "go-to-profile",
         );
-      }
+      },
     );
 
     it.each(phasesWhereGoToProfileNudgeTrue)(
@@ -212,16 +212,16 @@ describe("updateRoadmapSidebarCards", () => {
               dateOfFormation: "2020-01-01",
               municipality: generateMunicipality({}),
               ownershipTypeIds: ["none"],
-              existingEmployees: "12"
+              existingEmployees: "12",
             }),
-            preferences: generatePreferences({ visibleSidebarCards: [] })
-          })
+            preferences: generatePreferences({ visibleSidebarCards: [] }),
+          }),
         );
         const updatedUserData = updateSidebarCards(userData);
         expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-          "go-to-profile"
+          "go-to-profile",
         );
-      }
+      },
     );
   });
 
@@ -231,15 +231,15 @@ describe("updateRoadmapSidebarCards", () => {
         generateBusiness({
           profileData: generateProfileData({
             operatingPhase: "UP_AND_RUNNING",
-            industryId: "generic"
+            industryId: "generic",
           }),
-          preferences: generatePreferences({ visibleSidebarCards: ["task-progress"] })
-        })
+          preferences: generatePreferences({ visibleSidebarCards: ["task-progress"] }),
+        }),
       );
 
       const updatedUserData = updateSidebarCards(userData);
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        "task-progress"
+        "task-progress",
       );
     });
   });

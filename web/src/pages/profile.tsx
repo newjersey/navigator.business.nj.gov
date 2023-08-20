@@ -67,7 +67,7 @@ import {
   LookupOperatingPhaseById,
   Municipality,
   naicsCodeTaskId,
-  ProfileData
+  ProfileData,
 } from "@businessnjgovnavigator/shared";
 import { hasCompletedFormation } from "@businessnjgovnavigator/shared/";
 import dayjs from "dayjs";
@@ -106,7 +106,7 @@ const ProfilePage = (props: Props): ReactElement => {
     onSubmit,
     tab: profileTab,
     onTabChange: setProfileTab,
-    state: formContextState
+    state: formContextState,
   } = useFormContextHelper(createProfileFieldErrorMap(), props.CMS_ONLY_tab ?? profileTabs[0]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -214,7 +214,7 @@ const ProfilePage = (props: Props): ReactElement => {
     },
     (isValid, _errors, pageChange) => {
       !isValid && pageChange && setAlert("ERROR");
-    }
+    },
   );
 
   const sendOnSaveAnalytics = (prevProfileData: ProfileData, newProfileData: ProfileData): void => {
@@ -254,7 +254,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const shouldShowNexusBusinessNameElements = (): boolean => {
     if (!business) return false;
     return LookupLegalStructureById(business.profileData.legalStructureId).elementsToDisplay.has(
-      "nexusBusinessElements"
+      "nexusBusinessElements",
     );
   };
 
@@ -264,7 +264,7 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   const displayOpportunityAlert = LookupOperatingPhaseById(
-    profileData.operatingPhase
+    profileData.operatingPhase,
   ).displayProfileOpportunityAlert;
 
   const shouldLockMunicipality = (): boolean => {
@@ -272,7 +272,7 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   const displayAltHomeBasedBusinessDescription = LookupOperatingPhaseById(
-    business?.profileData.operatingPhase
+    business?.profileData.operatingPhase,
   ).displayAltHomeBasedBusinessDescription;
 
   const displayHomedBaseBusinessQuestion = (): boolean => {
@@ -396,7 +396,7 @@ const ProfilePage = (props: Props): ReactElement => {
           )}
         </ProfileField>
       </>
-    )
+    ),
   };
 
   const foreignBusinessElements: Record<ProfileTabs, ReactNode> = {
@@ -438,7 +438,7 @@ const ProfilePage = (props: Props): ReactElement => {
           </div>
         </ProfileField>
       </>
-    )
+    ),
   };
 
   const startingNewBusinessElements: Record<ProfileTabs, ReactNode> = {
@@ -458,7 +458,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField
           fieldName="documents"
           isVisible={LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
-            "formationDocuments"
+            "formationDocuments",
           )}
         >
           <Documents />
@@ -558,7 +558,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField
           fieldName="entityId"
           isVisible={LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
-            "entityId"
+            "entityId",
           )}
           locked={shouldLockFormationFields}
         >
@@ -583,7 +583,7 @@ const ProfilePage = (props: Props): ReactElement => {
           </div>
         </ProfileField>
       </>
-    )
+    ),
   };
 
   const owningBusinessElements: Record<ProfileTabs, ReactNode> = {
@@ -625,7 +625,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField
           fieldName="dateOfFormation"
           isVisible={LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(
-            "formationDate"
+            "formationDate",
           )}
         >
           <ProfileDateOfFormation futureAllowed={false} />
@@ -692,7 +692,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <ProfileTaxPin handleChangeOverride={showRegistrationModalForGuest()} />
         </ProfileField>
       </>
-    )
+    ),
   };
 
   return (
@@ -702,10 +702,10 @@ const ProfilePage = (props: Props): ReactElement => {
           value={{
             state: {
               profileData: profileData,
-              flow: getFlow(profileData)
+              flow: getFlow(profileData),
             },
             setProfileData,
-            onBack
+            onBack,
           }}
         >
           <PageSkeleton>
@@ -792,8 +792,8 @@ const ProfilePage = (props: Props): ReactElement => {
 export const getStaticProps = (): GetStaticPropsResult<Props> => {
   return {
     props: {
-      municipalities: loadAllMunicipalities()
-    }
+      municipalities: loadAllMunicipalities(),
+    },
   };
 };
 

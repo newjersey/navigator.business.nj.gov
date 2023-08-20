@@ -8,7 +8,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn()
+    useMediaQuery: jest.fn(),
   };
 }
 
@@ -28,7 +28,7 @@ const renderToolTip = (): void => {
           <Icon>help_outline</Icon>
         </div>
       </ArrowTooltip>
-    </ThemeProvider>
+    </ThemeProvider>,
   );
 };
 

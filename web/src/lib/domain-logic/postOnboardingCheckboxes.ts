@@ -6,6 +6,6 @@ export const postOnboardingCheckboxes: Record<PostOnboardingQuestionId, Checkbox
     "construction-renovation-site-drawings",
     "construction-renovation-utilities",
     "construction-renovation-permits",
-    "construction-renovation-contractors"
-  ]
+    "construction-renovation-contractors",
+  ],
 };

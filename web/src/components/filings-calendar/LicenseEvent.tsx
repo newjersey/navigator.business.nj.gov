@@ -15,7 +15,7 @@ export const LicenseEvent = (props: Props): ReactElement | null => {
 
   const titles: Record<LicenseEventSubtype, string> = {
     expiration: Config.licenseEventDefaults.expirationTitleLabel,
-    renewal: Config.licenseEventDefaults.renewalTitleLabel
+    renewal: Config.licenseEventDefaults.renewalTitleLabel,
   };
 
   const licenseName = LookupIndustryById(props.industryId).licenseType;

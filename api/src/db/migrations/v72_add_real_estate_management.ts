@@ -21,10 +21,10 @@ export const migrate_v71_to_v72 = (v71Data: v71UserData): v72UserData => {
     ...v71Data,
     profileData: {
       ...v71Data.profileData,
-      realEstateAppraisalManagement: false
+      realEstateAppraisalManagement: false,
     },
     taskProgress,
-    version: 72
+    version: 72,
   };
 };
 
@@ -180,7 +180,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v72FormationData {
@@ -245,7 +245,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -254,7 +254,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const corpBusinessSuffix = [
@@ -267,7 +267,7 @@ export const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
@@ -309,7 +309,7 @@ export const generatev72User = (overrides: Partial<v72BusinessUser>): v72Busines
     abExperience: "ExperienceA",
     myNJUserKey: undefined,
     intercomHash: undefined,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -324,7 +324,7 @@ export const generatev72ProfileData = (overrides: Partial<v72ProfileData>): v72P
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     liquorLicense: true,
     requiresCpa: false,
@@ -340,7 +340,7 @@ export const generatev72ProfileData = (overrides: Partial<v72ProfileData>): v72P
     documents: {
       formationDoc: `some-formation-doc-${randomInt()}`,
       standingDoc: `some-standing-doc-${randomInt()}`,
-      certifiedDoc: `some-certified-doc-${randomInt()}`
+      certifiedDoc: `some-certified-doc-${randomInt()}`,
     },
     ownershipTypeIds: [],
     existingEmployees: undefined,
@@ -354,12 +354,12 @@ export const generatev72ProfileData = (overrides: Partial<v72ProfileData>): v72P
     realEstateAppraisalManagement: false,
     certifiedInteriorDesigner: false,
     providesStaffingService: false,
-    ...overrides
+    ...overrides,
   };
 };
 
 export const generatev72FormationFormData = (
-  overrides: Partial<v72FormationFormData>
+  overrides: Partial<v72FormationFormData>,
 ): v72FormationFormData => {
   return {
     businessName: "",
@@ -395,12 +395,12 @@ export const generatev72FormationFormData = (
     contactFirstName: "",
     contactLastName: "",
     contactPhoneNumber: "",
-    ...overrides
+    ...overrides,
   };
 };
 
 export const generatev72GetFilingResponse = (
-  overrides: Partial<v72GetFilingResponse>
+  overrides: Partial<v72GetFilingResponse>,
 ): v72GetFilingResponse => {
   return {
     success: true,
@@ -410,6 +410,6 @@ export const generatev72GetFilingResponse = (
     formationDoc: "",
     standingDoc: "",
     certifiedDoc: "",
-    ...overrides
+    ...overrides,
   };
 };

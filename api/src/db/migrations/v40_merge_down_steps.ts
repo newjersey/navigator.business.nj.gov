@@ -32,11 +32,11 @@ export const migrate_v39_to_v40 = (v39Data: v39UserData): v40UserData => {
         ...new Set(
           v39Data.preferences.roadmapOpenSteps.map((value) => {
             return determineOpenSteps(value);
-          })
-        )
-      ]
+          }),
+        ),
+      ],
     },
-    version: 40
+    version: 40,
   };
 };
 
@@ -167,7 +167,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v40FormationData {

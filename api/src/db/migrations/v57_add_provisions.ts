@@ -20,10 +20,10 @@ export const migrate_v56_to_v57 = (v56Data: v56UserData): v57UserData => {
       ...v56Data.formationData,
       formationFormData: {
         ...v56Data.formationData.formationFormData,
-        provisions: []
-      }
+        provisions: [],
+      },
     },
-    version: 57
+    version: 57,
   };
 };
 
@@ -168,7 +168,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v57FormationData {

@@ -18,7 +18,7 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
       nonEssentialQuestionsIds: ["test-question-1", "test-question-2"],
       naicsCodes: "",
       isEnabled: true,
-      industryOnboardingQuestions: {}
+      industryOnboardingQuestions: {},
     },
     {
       id: "test-industry-with-no-non-essential-questions",
@@ -29,13 +29,13 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
       nonEssentialQuestionsIds: [],
       naicsCodes: "",
       isEnabled: true,
-      industryOnboardingQuestions: {}
-    }
-  ]
+      industryOnboardingQuestions: {},
+    },
+  ],
 }));
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionText", () => ({
-  getNonEssentialQuestionText: jest.fn()
+  getNonEssentialQuestionText: jest.fn(),
 }));
 
 const mockGetNonEssentialQuestionText = (
@@ -49,18 +49,18 @@ describe("ProfileNonEssentialQuestionsSection", () => {
     render(
       <WithStatefulProfileData
         initialData={generateProfileData({
-          ...profileData
+          ...profileData,
         })}
       >
         <ProfileNonEssentialQuestionsSection />
-      </WithStatefulProfileData>
+      </WithStatefulProfileData>,
     );
   };
 
   it("doesn't display section if industry doesn't have any non essential questions", () => {
     renderComponent({ industryId: "test-industry-with-no-non-essential-questions" });
     expect(
-      screen.queryByText(Config.profileDefaults.fields.nonEssentialQuestions.default.header)
+      screen.queryByText(Config.profileDefaults.fields.nonEssentialQuestions.default.header),
     ).not.toBeInTheDocument();
   });
 
@@ -70,11 +70,11 @@ describe("ProfileNonEssentialQuestionsSection", () => {
       .mockReturnValueOnce("Non Essential Question 2?");
 
     renderComponent({
-      industryId: "test-industry-with-non-essential-questions"
+      industryId: "test-industry-with-non-essential-questions",
     });
 
     expect(
-      screen.getByText(Config.profileDefaults.fields.nonEssentialQuestions.default.header)
+      screen.getByText(Config.profileDefaults.fields.nonEssentialQuestions.default.header),
     ).toBeInTheDocument();
     expect(screen.getByText("Non Essential Question 1?")).toBeInTheDocument();
     expect(screen.getByText("Non Essential Question 2?")).toBeInTheDocument();

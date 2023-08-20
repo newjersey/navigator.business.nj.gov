@@ -11,7 +11,7 @@ export const OutageAlertBar = (): ReactElement => {
   const [outageConfig, setOutageConfig] = useState<OutageConfig>({
     FEATURE_ENABLE_OUTAGE_ALERT_BAR: false,
     OUTAGE_ALERT_MESSAGE: "",
-    OUTAGE_ALERT_TYPE: undefined
+    OUTAGE_ALERT_TYPE: undefined,
   });
 
   const isEnabled = outageConfig.FEATURE_ENABLE_OUTAGE_ALERT_BAR;

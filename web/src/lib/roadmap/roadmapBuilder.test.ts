@@ -6,7 +6,7 @@ describe("roadmapBuilder", () => {
   it("uses foreign steps when industry is undefined", async () => {
     const roadmap = await buildRoadmap({
       industryId: undefined,
-      addOns: ["tea"]
+      addOns: ["tea"],
     });
 
     expect(roadmap.steps[0].name).toEqual("Foreign Step 1 Name");
@@ -15,7 +15,7 @@ describe("roadmapBuilder", () => {
   it("does not break with empty roadmap", async () => {
     const roadmap = await buildRoadmap({
       industryId: undefined,
-      addOns: []
+      addOns: [],
     });
 
     expect(roadmap.steps).toHaveLength(0);
@@ -24,31 +24,31 @@ describe("roadmapBuilder", () => {
   it("builds a roadmap with task add-ons only when industry is undefined", async () => {
     const roadmap = await buildRoadmap({
       industryId: undefined,
-      addOns: ["tea"]
+      addOns: ["tea"],
     });
     expect(
       roadmap.tasks.map((it) => {
         return it.id;
-      })
+      }),
     ).toEqual(expect.arrayContaining(["tea-task-1-id"]));
   });
 
   it("builds a roadmap with license task add-ons only when industry is undefined", async () => {
     const roadmap = await buildRoadmap({
       industryId: undefined,
-      addOns: ["license-addon"]
+      addOns: ["license-addon"],
     });
     expect(
       roadmap.tasks.map((it) => {
         return it.id;
-      })
+      }),
     ).toEqual(expect.arrayContaining(["license-task-1-id"]));
   });
 
   it("removes any steps that have no tasks", async () => {
     const roadmap = await buildRoadmap({
       industryId: undefined,
-      addOns: ["tea"]
+      addOns: ["tea"],
     });
 
     expect(roadmap.steps).toHaveLength(3);
@@ -57,7 +57,7 @@ describe("roadmapBuilder", () => {
   it("builds a generic roadmap with generic tasks only, and removes empty step 5", async () => {
     const roadmap = await buildRoadmap({
       industryId: "standard",
-      addOns: []
+      addOns: [],
     });
     expect(roadmap).toEqual(expectedGenericRoadmap);
   });
@@ -65,7 +65,7 @@ describe("roadmapBuilder", () => {
   it("prioritizes a task over a license task when building a roadmap with add-ons", async () => {
     const roadmap = await buildRoadmap({
       industryId: "coffee",
-      addOns: ["task-and-license-addon"]
+      addOns: ["task-and-license-addon"],
     });
     const roadmapIds = roadmap.tasks.map((it) => {
       return it.id;
@@ -77,25 +77,25 @@ describe("roadmapBuilder", () => {
   it("builds a roadmap with license task add-ons", async () => {
     const roadmap = await buildRoadmap({
       industryId: "coffee",
-      addOns: ["license-addon"]
+      addOns: ["license-addon"],
     });
     expect(
       roadmap.tasks.map((it) => {
         return it.id;
-      })
+      }),
     ).toEqual(expect.arrayContaining(["license-task-1-id"]));
   });
 
   it("adds tasks from multiple add-ons", async () => {
     const roadmap = await buildRoadmap({
       industryId: "coffee",
-      addOns: ["tea"]
+      addOns: ["tea"],
     });
 
     expect(
       roadmap.tasks.map((it) => {
         return { id: it.id, stepNumber: it.stepNumber };
-      })
+      }),
     ).toEqual(
       expect.arrayContaining([
         { id: "generic-task-1-id", stepNumber: 1 },
@@ -104,41 +104,41 @@ describe("roadmapBuilder", () => {
         { id: "coffee-task-2-id", stepNumber: 1 },
         { id: "tea-task-1-id", stepNumber: 1 },
         { id: "coffee-task-3-id", stepNumber: 2 },
-        { id: "tea-task-2-id", stepNumber: 2 }
-      ])
+        { id: "tea-task-2-id", stepNumber: 2 },
+      ]),
     );
   });
 
   it("applies modifications to tasks after add-ons", async () => {
     const roadmap = await buildRoadmap({
       industryId: "coffee",
-      addOns: []
+      addOns: [],
     });
 
     expect(
       roadmap.tasks.map((it) => {
         return { id: it.id, stepNumber: it.stepNumber };
-      })
+      }),
     ).toEqual([
       { id: "generic-task-1-id", stepNumber: 1 },
       { id: "coffee-task-2-id", stepNumber: 1 },
       { id: "coffee-task-1-id", stepNumber: 1 },
       { id: "generic-task-2-id", stepNumber: 1 },
       { id: "coffee-task-3-id", stepNumber: 2 },
-      { id: "coffee-task-4-id", stepNumber: 3 }
+      { id: "coffee-task-4-id", stepNumber: 3 },
     ]);
   });
 
   it("orders tasks in a step by weight", async () => {
     const roadmap = await buildRoadmap({
       industryId: "standard",
-      addOns: ["weighted"]
+      addOns: ["weighted"],
     });
 
     expect(
       roadmap.tasks.map((it) => {
         return { id: it.id, stepNumber: it.stepNumber };
-      })
+      }),
     ).toEqual([
       { id: "weighted-task-0-id", stepNumber: 1 },
       { id: "generic-task-1-id", stepNumber: 1 },
@@ -146,14 +146,14 @@ describe("roadmapBuilder", () => {
       { id: "weighted-task-10-id", stepNumber: 1 },
       { id: "generic-task-3-id", stepNumber: 2 },
       { id: "weighted-task-9-id", stepNumber: 2 },
-      { id: "generic-task-4-id", stepNumber: 3 }
+      { id: "generic-task-4-id", stepNumber: 3 },
     ]);
   });
 
   it("includes step 5 if it has tasks", async () => {
     const roadmap = await buildRoadmap({
       industryId: "standard",
-      addOns: ["mocha"]
+      addOns: ["mocha"],
     });
 
     expect(
@@ -161,14 +161,14 @@ describe("roadmapBuilder", () => {
         .map((it) => {
           return it.id;
         })
-        .includes("mocha-task-5-id")
+        .includes("mocha-task-5-id"),
     ).toBeTruthy();
   });
 
   it("adds unlockedBy to tasks from dependencies file without duplicate url-slugs", async () => {
     const roadmap = await buildRoadmap({
       industryId: "standard",
-      addOns: ["blocking"]
+      addOns: ["blocking"],
     });
 
     const blockedTask = roadmap.tasks.find((it) => {
@@ -179,21 +179,21 @@ describe("roadmapBuilder", () => {
         name: "Blocking Task 2",
         urlSlug: "blocking-task-2-url-slug",
         filename: "blocking-task-2",
-        id: "blocking-task-2-id"
+        id: "blocking-task-2-id",
       },
       {
         name: "Blocking Task 1 Duplicate",
         urlSlug: "blocking-task-1-url-slug",
         filename: "blocking-task-1-duplicate",
-        id: "blocking-task-1-id"
-      }
+        id: "blocking-task-1-id",
+      },
     ]);
   });
 
   it("adds tasks from addOns with required when required is true", async () => {
     const roadmap = await buildRoadmap({
       industryId: undefined,
-      addOns: ["tea"]
+      addOns: ["tea"],
     });
     const requiredTask = roadmap.tasks.find((it) => {
       return it.required === true;
@@ -210,22 +210,22 @@ const expectedGenericRoadmap: Roadmap = {
       name: "Step 1 Name",
       section: "PLAN",
       timeEstimate: "1 month",
-      description: "Step 1 description"
+      description: "Step 1 description",
     },
     {
       stepNumber: 2,
       name: "Step 2 Name",
       section: "START",
       timeEstimate: "3 months",
-      description: "Step 2 description"
+      description: "Step 2 description",
     },
     {
       stepNumber: 3,
       name: "Step 3 Name",
       timeEstimate: "4 months",
       section: "START",
-      description: "Step 3 description"
-    }
+      description: "Step 3 description",
+    },
   ],
   tasks: [
     {
@@ -237,7 +237,7 @@ const expectedGenericRoadmap: Roadmap = {
       callToActionLink: "www.generic-task-1.com",
       callToActionText: "Generic Task 1 CTA",
       contentMd: `${EOL}Generic Task 1 Contents${EOL}`,
-      unlockedBy: []
+      unlockedBy: [],
     },
     {
       id: "generic-task-2-id",
@@ -248,7 +248,7 @@ const expectedGenericRoadmap: Roadmap = {
       callToActionLink: "www.generic-task-2.com",
       callToActionText: "Generic Task 2 CTA",
       contentMd: `${EOL}Generic Task 2 Contents${EOL}`,
-      unlockedBy: []
+      unlockedBy: [],
     },
     {
       id: "generic-task-3-id",
@@ -259,7 +259,7 @@ const expectedGenericRoadmap: Roadmap = {
       callToActionLink: "www.generic-task-3.com",
       callToActionText: "Generic Task 3 CTA",
       contentMd: `${EOL}Generic Task 3 Contents${EOL}`,
-      unlockedBy: []
+      unlockedBy: [],
     },
     {
       id: "generic-task-4-id",
@@ -270,7 +270,7 @@ const expectedGenericRoadmap: Roadmap = {
       callToActionLink: "www.generic-task-4.com",
       callToActionText: "Generic Task 4 CTA",
       contentMd: `${EOL}Generic Task 4 Contents${EOL}`,
-      unlockedBy: []
-    }
-  ]
+      unlockedBy: [],
+    },
+  ],
 };

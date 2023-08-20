@@ -8,13 +8,13 @@ import { ReactElement, useState } from "react";
 const useStylesBootstrap = makeStyles((theme: Theme) => {
   return {
     arrow: {
-      color: theme.palette.common.black
+      color: theme.palette.common.black,
     },
     tooltip: {
       backgroundColor: theme.palette.common.black,
       fontSize: "1em",
-      padding: ".5em .75em"
-    }
+      padding: ".5em .75em",
+    },
   };
 });
 
@@ -36,7 +36,7 @@ export const ArrowTooltip = (props: TooltipProps): ReactElement => {
               classes={classes}
               onOpen={analytics.event.tooltip.mouseover.view_tooltip}
               PopperProps={{
-                disablePortal: true
+                disablePortal: true,
               }}
               onClose={(): void => setOpen(false)}
               open={open}

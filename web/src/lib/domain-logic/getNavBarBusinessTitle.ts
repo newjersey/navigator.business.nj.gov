@@ -4,7 +4,7 @@ import { Business, LookupIndustryById, LookupLegalStructureById } from "@busines
 
 export const getNavBarBusinessTitle = (
   business: Business | undefined,
-  isAuthenticated: IsAuthenticated
+  isAuthenticated: IsAuthenticated,
 ): string => {
   const Config = getMergedConfig();
   if (!business || isAuthenticated === IsAuthenticated.FALSE) {

@@ -6,12 +6,12 @@ const BASIC_AUTH_USERNAME = process.env.BASIC_AUTH_USERNAME;
 const BASIC_AUTH_PASSWORD = process.env.BASIC_AUTH_PASSWORD;
 
 export const config = {
-  matcher: "/((?!_next/static|_next/image|_next/data|js|img|vendor|intercom|favicon.ico|healthz).*)"
+  matcher: "/((?!_next/static|_next/image|_next/data|js|img|vendor|intercom|favicon.ico|healthz).*)",
 };
 
 export function middleware(req: NextRequest): NextResponse {
   const authenticated = req.cookies.has(
-    `CognitoIdentityServiceProvider.${process.env.COGNITO_WEB_CLIENT_ID}.LastAuthUser`
+    `CognitoIdentityServiceProvider.${process.env.COGNITO_WEB_CLIENT_ID}.LastAuthUser`,
   );
 
   if (process.env.USE_BASIC_AUTH !== "true" || authenticated) {

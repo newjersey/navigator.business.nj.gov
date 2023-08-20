@@ -6,7 +6,7 @@ import { getSignedInUserId } from "./userRouter";
 const getTaxId = async (
   encryptionDecryptionClient: EncryptionDecryptionClient,
   taxId: string,
-  encryptedTaxId: string | undefined
+  encryptedTaxId: string | undefined,
 ): Promise<string> => {
   if (taxId.includes(maskingCharacter)) {
     if (encryptedTaxId) {
@@ -21,7 +21,7 @@ const getTaxId = async (
 export const taxFilingRouterFactory = (
   userDataClient: UserDataClient,
   taxFilingInterface: TaxFilingInterface,
-  encryptionDecryptionClient: EncryptionDecryptionClient
+  encryptionDecryptionClient: EncryptionDecryptionClient,
 ): Router => {
   const router = Router();
 

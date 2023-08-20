@@ -36,7 +36,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
         const updatedUserData = await postTaxFilingsLookup({
           businessName: business.taxFilingData.businessName as string,
           taxId: business.profileData.taxId as string,
-          encryptedTaxId: business.profileData.encryptedTaxId as string
+          encryptedTaxId: business.profileData.encryptedTaxId as string,
         });
 
         updateQueue?.queue(updatedUserData).update();

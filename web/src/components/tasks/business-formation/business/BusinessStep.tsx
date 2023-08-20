@@ -14,7 +14,7 @@ export const BusinessStep = (): ReactElement => {
 
   const isForeign = useMemo(
     () => state.formationFormData.businessLocationType !== "NJ",
-    [state.formationFormData.businessLocationType]
+    [state.formationFormData.businessLocationType],
   );
 
   const isNonprofit = state.formationFormData.legalType === "nonprofit";
@@ -87,14 +87,14 @@ export const BusinessStep = (): ReactElement => {
     addressSection(),
     lpSection(),
     businessPurposeSection(),
-    additionalProvisionsSection()
+    additionalProvisionsSection(),
   ];
 
   const nonprofitOrder: (ReactElement | null)[] = [
     <MainBusiness key={"main-business"} />,
     additionalProvisionsSection(),
     businessPurposeSection(),
-    addressSection()
+    addressSection(),
   ];
 
   const elementsToDisplay = isNonprofit ? nonprofitOrder : defaultOrder;

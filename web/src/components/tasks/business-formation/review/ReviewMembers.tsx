@@ -19,7 +19,7 @@ export const ReviewMembers = (): ReactElement => {
       header: isNonProfit ? Config.formation.fields.trustees.label : Config.formation.fields[field].label,
       label: isNonProfit
         ? Config.formation.fields.trustees.trusteeFullName
-        : Config.formation.sections.review.nameLabel
+        : Config.formation.sections.review.nameLabel,
     };
   };
 

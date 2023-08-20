@@ -18,7 +18,7 @@ describe("<CongratulatoryModal />", () => {
     render(<CongratulatoryModal nextSectionType="START" open={true} handleClose={(): void => {}} />);
 
     const link = screen.queryByText(
-      `${Config.sectionHeaders["START"]} ${Config.dashboardDefaults.congratulatoryModalLinkText}`
+      `${Config.sectionHeaders["START"]} ${Config.dashboardDefaults.congratulatoryModalLinkText}`,
     );
     expect(link).toBeInTheDocument();
     fireEvent.click(link as HTMLElement);
@@ -29,7 +29,7 @@ describe("<CongratulatoryModal />", () => {
     render(<CongratulatoryModal nextSectionType={undefined} open={true} handleClose={(): void => {}} />);
 
     const link = screen.queryByText(
-      `${Config.sectionHeaders["START"]} ${Config.dashboardDefaults.congratulatoryModalLinkText}`
+      `${Config.sectionHeaders["START"]} ${Config.dashboardDefaults.congratulatoryModalLinkText}`,
     );
     expect(link).not.toBeInTheDocument();
   });

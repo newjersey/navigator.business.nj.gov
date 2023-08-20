@@ -7,6 +7,6 @@ export default async (): Promise<Config.InitialOptions> => {
     // eslint-disable-next-line unicorn/prefer-module
     ...require("ts-jest/jest-preset"),
     verbose: true,
-    rootDir: "src"
+    rootDir: "src",
   };
 };

@@ -3,11 +3,11 @@ import {
   emptyIndustrySpecificData,
   Industry,
   IndustrySpecificData,
-  LookupIndustryById
+  LookupIndustryById,
 } from "@businessnjgovnavigator/shared";
 
 export const getResetIndustrySpecificData = (
-  industryId: string | undefined
+  industryId: string | undefined,
 ): Partial<IndustrySpecificData> => {
   const industry = LookupIndustryById(industryId);
   return EssentialQuestions.filter((eQ) => {
@@ -18,7 +18,7 @@ export const getResetIndustrySpecificData = (
 };
 
 export const getIsApplicableToFunctionByFieldName = (
-  fieldName: ProfileContentField
+  fieldName: ProfileContentField,
 ): ((industryId: string | undefined) => boolean) => {
   return (industryId: string | undefined): boolean => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -71,7 +71,7 @@ export const EssentialQuestions: EssentialQuestion[] = [
     isQuestionApplicableToIndustry: (industry): boolean => {
       return !!industry.industryOnboardingQuestions.isInterstateLogisticsApplicable;
     },
-    fieldName: "interstateLogistics"
+    fieldName: "interstateLogistics",
   }),
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
@@ -79,76 +79,76 @@ export const EssentialQuestions: EssentialQuestion[] = [
       return !!industry.industryOnboardingQuestions.isInterstateMovingApplicable;
     },
     fieldName: "interstateMoving",
-    ariaLabel: "Moves Goods Across State Lines"
+    ariaLabel: "Moves Goods Across State Lines",
   }),
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
     isQuestionApplicableToIndustry: (industry): boolean => {
       return !!industry.industryOnboardingQuestions.isCarServiceApplicable;
     },
-    fieldName: "carService"
+    fieldName: "carService",
   }),
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
     isQuestionApplicableToIndustry: (industry): boolean => {
       return !!industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable;
     },
-    fieldName: "certifiedInteriorDesigner"
+    fieldName: "certifiedInteriorDesigner",
   }),
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
     isQuestionApplicableToIndustry: (industry): boolean => {
       return !!industry.industryOnboardingQuestions.isChildcareForSixOrMore;
     },
-    fieldName: "isChildcareForSixOrMore"
+    fieldName: "isChildcareForSixOrMore",
   }),
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
     isQuestionApplicableToIndustry: (industry): boolean => {
       return !!industry.industryOnboardingQuestions.isPetCareHousingApplicable;
     },
-    fieldName: "petCareHousing"
+    fieldName: "petCareHousing",
   }),
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
     isQuestionApplicableToIndustry: (industry): boolean => {
       return !!industry.industryOnboardingQuestions.willSellPetCareItems;
     },
-    fieldName: "willSellPetCareItems"
+    fieldName: "willSellPetCareItems",
   }),
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
     isQuestionApplicableToIndustry: (industry): boolean => {
       return !!industry.industryOnboardingQuestions.isCpaRequiredApplicable;
     },
-    fieldName: "requiresCpa"
+    fieldName: "requiresCpa",
   }),
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: false,
     isQuestionApplicableToIndustry: (industry): boolean => {
       return !!industry.industryOnboardingQuestions.isCannabisLicenseTypeApplicable;
     },
-    fieldName: "cannabisLicenseType"
+    fieldName: "cannabisLicenseType",
   }),
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
     isQuestionApplicableToIndustry: (industry): boolean => {
       return !!industry.industryOnboardingQuestions.isLiquorLicenseApplicable;
     },
-    fieldName: "liquorLicense"
+    fieldName: "liquorLicense",
   }),
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
     isQuestionApplicableToIndustry: (industry): boolean => {
       return !!industry.industryOnboardingQuestions.isProvidesStaffingServicesApplicable;
     },
-    fieldName: "providesStaffingService"
+    fieldName: "providesStaffingService",
   }),
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
     isQuestionApplicableToIndustry: (industry): boolean => {
       return !!industry.industryOnboardingQuestions.isRealEstateAppraisalManagementApplicable;
     },
-    fieldName: "realEstateAppraisalManagement"
-  })
+    fieldName: "realEstateAppraisalManagement",
+  }),
 ];

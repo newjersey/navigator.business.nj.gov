@@ -73,7 +73,7 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
   };
 
   const currentAndNextSection = (
-    taskId: string
+    taskId: string,
   ): {
     current: SectionType;
     next: SectionType | undefined;
@@ -81,13 +81,13 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
     const current = sectionOfTask(taskId) as SectionType;
     return {
       current,
-      next: nextUncompletedSection(current)
+      next: nextUncompletedSection(current),
     };
   };
 
   const isSectionCompleted = (
     section: SectionType,
-    taskProgressOverride?: Record<string, TaskProgress>
+    taskProgressOverride?: Record<string, TaskProgress>,
   ): boolean => {
     if (!business) return false;
     return tasksInSection(section).every((task) => {

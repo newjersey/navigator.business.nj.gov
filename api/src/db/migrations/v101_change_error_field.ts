@@ -20,18 +20,18 @@ export const migrate_v100_to_v101 = (v100Data: v100UserData): v101UserData => {
     return {
       ...v100Data,
       taxFilingData: { ...v100Data.taxFilingData, errorField: "businessName" },
-      version: 101
+      version: 101,
     };
   } else if (v100Data.taxFilingData.errorField && v100Data.taxFilingData.errorField === "Taxpayer ID") {
     return {
       ...v100Data,
       taxFilingData: { ...v100Data.taxFilingData, errorField: "formFailure" },
-      version: 101
+      version: 101,
     };
   } else {
     return {
       ...v100Data,
-      version: 101
+      version: 101,
     } as v101UserData;
   }
 };
@@ -216,7 +216,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v101FormationData {
@@ -323,7 +323,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -332,7 +332,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const lpBusinessSuffix = ["LIMITED PARTNERSHIP", "LP", "L.P."] as const;
@@ -347,7 +347,7 @@ const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 const foreignCorpBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
@@ -356,7 +356,7 @@ const AllBusinessSuffixes = [
   ...llcBusinessSuffix,
   ...llpBusinessSuffix,
   ...lpBusinessSuffix,
-  ...foreignCorpBusinessSuffix
+  ...foreignCorpBusinessSuffix,
 ] as const;
 
 type v101BusinessSuffix = (typeof AllBusinessSuffixes)[number];
@@ -399,12 +399,12 @@ export const generatrv101User = (overrides: Partial<v101BusinessUser>): v101Busi
     myNJUserKey: undefined,
     intercomHash: undefined,
     abExperience: "ExperienceA",
-    ...overrides
+    ...overrides,
   };
 };
 
 export const generateV101FormationAddress = (
-  overrides: Partial<v101FormationAddress>
+  overrides: Partial<v101FormationAddress>,
 ): v101FormationAddress => {
   return {
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -413,7 +413,7 @@ export const generateV101FormationAddress = (
     addressState: { shortCode: "NJ", name: "new-jersey" },
     addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
     addressCountry: `some-county`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -426,7 +426,7 @@ export const generateV101FormationMember = (overrides: Partial<v101FormationMemb
     addressState: { shortCode: "123", name: "new-jersey" },
     addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
     addressCountry: `some-county`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -436,7 +436,7 @@ export const generateV101Municipality = (overrides: Partial<v101Municipality>): 
     name: `some-name-${randomInt()}`,
     county: `some-county-${randomInt()}`,
     id: `some-id-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -445,12 +445,12 @@ export const allFormationLegalTypes = [
   "limited-liability-company",
   "limited-partnership",
   "c-corporation",
-  "s-corporation"
+  "s-corporation",
 ];
 
 export const generateV101FormationFormData = (
   overrides: Partial<v101FormationFormData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v101FormationFormData => {
   const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
 
@@ -497,12 +497,12 @@ export const generateV101FormationFormData = (
     getDistributionTerms: `some-getDistributionTerms-text-${randomInt()}`,
     canMakeDistribution: !!(randomInt() % 2),
     makeDistributionTerms: `some-makeDistributionTerms-text-${randomInt()}`,
-    ...overrides
+    ...overrides,
   } as v101FormationFormData;
 };
 
 export const generateV101IndustrySpecificData = (
-  overrides: Partial<v101IndustrySpecificData>
+  overrides: Partial<v101IndustrySpecificData>,
 ): v101IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -517,7 +517,7 @@ export const generateV101IndustrySpecificData = (
     carService: undefined,
     interstateTransport: false,
     isChildcareForSixOrMore: undefined,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -534,7 +534,7 @@ export const generateV101ProfileData = (overrides: Partial<v101ProfileData>): v1
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     dateOfFormation: undefined,
     entityId: randomInt(10).toString(),
@@ -546,7 +546,7 @@ export const generateV101ProfileData = (overrides: Partial<v101ProfileData>): v1
     documents: {
       certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
       formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
-      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`
+      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
     },
     existingEmployees: randomInt(7).toString(),
     taxPin: randomInt(4).toString(),
@@ -557,7 +557,7 @@ export const generateV101ProfileData = (overrides: Partial<v101ProfileData>): v1
     nexusDbaName: undefined,
     nexusLocationInNewJersey: undefined,
     operatingPhase: "NEEDS_TO_FORM",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -569,20 +569,20 @@ export const generateV101TaxFilingData = (overrides: Partial<v101TaxFilingData>)
     lastUpdatedISO: undefined,
     registeredISO: undefined,
     filings: [],
-    ...overrides
+    ...overrides,
   };
 };
 
 export const generateV101FormationData = (
   overrides: Partial<v101FormationData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v101FormationData => {
   return {
     formationFormData: generateV101FormationFormData({}, legalStructureId),
     formationResponse: undefined,
     getFilingResponse: undefined,
     completedFilingPayment: false,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -600,7 +600,7 @@ export const generateV101UserData = (overrides: Partial<v101UserData>): v101User
     lastUpdatedISO: "",
     taxFilingData: generateV101TaxFilingData({}),
     formationData: generateV101FormationData({}, profileData.legalStructureId ?? ""),
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -614,6 +614,6 @@ export const generateV101Preferences = (overrides: Partial<v101Preferences>): v1
     returnToLink: "",
     isCalendarFullView: true,
     isHideableRoadmapOpen: false,
-    ...overrides
+    ...overrides,
   };
 };

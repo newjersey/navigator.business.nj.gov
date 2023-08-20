@@ -3,7 +3,7 @@ import {
   RoadmapDisplayContent,
   SidebarCardContent,
   TasksDisplayContent,
-  TaskWithoutLinks
+  TaskWithoutLinks,
 } from "@/lib/types/types";
 import { getMarkdown } from "@/lib/utils/markdownReader";
 import fs from "fs";
@@ -18,20 +18,20 @@ export const loadRoadmapSideBarDisplayContent = (): RoadmapDisplayContent => {
     (acc, cur) => {
       const fileContents: string = fs.readFileSync(
         path.join(displayContentDir, "roadmap-sidebar-cards", cur),
-        "utf8"
+        "utf8",
       );
       const markdownContents = getMarkdown(fileContents);
       const displayContent: SidebarCardContent = {
         contentMd: markdownContents.content,
-        ...(markdownContents.grayMatter as RoadmapCardGrayMatter)
+        ...(markdownContents.grayMatter as RoadmapCardGrayMatter),
       };
       return { ...acc, [displayContent.id]: displayContent };
     },
-    {} as Record<string, SidebarCardContent>
+    {} as Record<string, SidebarCardContent>,
   );
 
   return {
-    sidebarDisplayContent: sideBarDisplayContent
+    sidebarDisplayContent: sideBarDisplayContent,
   };
 };
 
@@ -48,20 +48,20 @@ const getDbaTasks = (): FormationDbaContent => {
     const markdown = getMarkdown(loadFile(filename));
     return {
       contentMd: markdown.content,
-      ...(markdown.grayMatter as Record<string, string>)
+      ...(markdown.grayMatter as Record<string, string>),
     } as TaskWithoutLinks;
   };
 
   return {
     DbaResolution: getTask("dba-resolution-foreign.md"),
     Authorize: getTask("authorize-business-entity.md"),
-    Formation: getTask("form-business-entity.md")
+    Formation: getTask("form-business-entity.md"),
   };
 };
 
 export const loadTasksDisplayContent = (): TasksDisplayContent => {
   return {
-    formationDbaContent: getDbaTasks()
+    formationDbaContent: getDbaTasks(),
   };
 };
 

@@ -3,7 +3,7 @@ import { Certification } from "../types/types";
 
 export const getVisibleCertifications = (
   certifications: Certification[],
-  business: Business
+  business: Business,
 ): Certification[] => {
   return certifications.filter((it) => {
     return !business?.preferences.hiddenCertificationIds.includes(it.id);

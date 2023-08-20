@@ -19,7 +19,7 @@ export const makeSnippet = (text: string, term: string): string => {
 export const findMatchInLabelledText = (
   labelledTexts: LabelledContent[],
   term: string,
-  match: Match
+  match: Match,
 ): Match => {
   for (const labelledText of labelledTexts) {
     if (labelledText.content?.includes(term)) {

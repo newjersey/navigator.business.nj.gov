@@ -26,7 +26,7 @@ export const useUserData = (): UseUserDataResponse => {
   const { data, error, mutate } = useSWR<UserData | undefined>(state.user?.id || null, api.getUserData, {
     isPaused: () => {
       return state.isAuthenticated !== IsAuthenticated.TRUE;
-    }
+    },
   });
   const dataExists = !!data;
   const { setOperatingPhaseId, setLegalStructureId, setIndustryId, setBusinessPersona } =
@@ -44,7 +44,7 @@ export const useUserData = (): UseUserDataResponse => {
     setLegalStructureId,
     setIndustryId,
     setBusinessPersona,
-    data?.businesses
+    data?.businesses,
   ]);
 
   useEffect(() => {
@@ -67,8 +67,8 @@ export const useUserData = (): UseUserDataResponse => {
         ...state.user,
         name: data.user.name,
         myNJUserKey: data.user.myNJUserKey,
-        intercomHash: data.user.intercomHash
-      }
+        intercomHash: data.user.intercomHash,
+      },
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataExists]);
@@ -163,7 +163,7 @@ export const useUserData = (): UseUserDataResponse => {
     error: userDataError,
     refresh: refresh,
     updateQueue: updateQueue,
-    createUpdateQueue: createUpdateQueue
+    createUpdateQueue: createUpdateQueue,
   };
 };
 

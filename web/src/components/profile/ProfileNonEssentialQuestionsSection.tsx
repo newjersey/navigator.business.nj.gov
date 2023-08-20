@@ -17,7 +17,7 @@ export const ProfileNonEssentialQuestionsSection = (): ReactElement => {
     const questionIds = LookupIndustryById(state.profileData.industryId).nonEssentialQuestionsIds;
     for (const question of questionIds) {
       nonEssentialQuestionsArray.push(
-        <ProfileNonEssentialQuestion key={question} essentialQuestionId={question} />
+        <ProfileNonEssentialQuestion key={question} essentialQuestionId={question} />,
       );
     }
 

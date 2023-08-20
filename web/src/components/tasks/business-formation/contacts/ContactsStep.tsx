@@ -12,7 +12,7 @@ import {
   corpLegalStructures,
   createEmptyFormationIncorporator,
   FormationIncorporator,
-  incorporationLegalStructures
+  incorporationLegalStructures,
 } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
 
@@ -24,7 +24,7 @@ export const ContactsStep = (): ReactElement => {
   const shouldShowMembers = (): boolean => {
     return (
       [...corpLegalStructures, "limited-liability-company", "nonprofit"].includes(
-        state.formationFormData.legalType
+        state.formationFormData.legalType,
       ) && state.formationFormData.businessLocationType === "NJ"
     );
   };
@@ -60,7 +60,7 @@ export const ContactsStep = (): ReactElement => {
             createEmptyAddress={(): FormationIncorporator => {
               return createSignedEmptyFormationObject(
                 state.formationFormData.legalType,
-                createEmptyFormationIncorporator
+                createEmptyFormationIncorporator,
               );
             }}
             fieldName={"incorporators"}
@@ -69,7 +69,7 @@ export const ContactsStep = (): ReactElement => {
               setFormationFormData((previousFormationData) => {
                 return {
                   ...previousFormationData,
-                  incorporators: incorporators
+                  incorporators: incorporators,
                 };
               });
             }}
@@ -82,7 +82,7 @@ export const ContactsStep = (): ReactElement => {
                     addressLine1: state.formationFormData.addressLine1,
                     addressLine2: state.formationFormData.addressLine2,
                     addressState: state.formationFormData.addressState,
-                    addressZipCode: state.formationFormData.addressZipCode
+                    addressZipCode: state.formationFormData.addressZipCode,
                   }
                 : undefined
             }
@@ -96,7 +96,7 @@ export const ContactsStep = (): ReactElement => {
               snackbarBody: Config.formation.fields.incorporators.successSnackbarBody,
               modalTitle: Config.formation.fields.incorporators.modalTitle,
               modalSaveButton: Config.formation.fields.incorporators.addButtonText,
-              error: Config.formation.fields.incorporators.error
+              error: Config.formation.fields.incorporators.error,
             }}
             legalType={state.formationFormData.legalType}
             hasError={doesFieldHaveError("signers") || doesFieldHaveError("incorporators")}

@@ -9,7 +9,7 @@ const postOnboardingDir = path.join(
   "content",
   "src",
   "display-content",
-  "post-onboarding"
+  "post-onboarding",
 );
 
 export const loadAllPostOnboarding = (): PostOnboardingFile[] => {

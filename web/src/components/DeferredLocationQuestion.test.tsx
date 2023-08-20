@@ -8,14 +8,14 @@ import { selectLocationByText } from "@/test/helpers/helpers-testing-library-sel
 import {
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
 import {
   generateBusiness,
   generateMunicipality,
   generateProfileData,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -27,10 +27,10 @@ function setupMockAnalytics(): typeof analytics {
       ...jest.requireActual("@/lib/utils/analytics").default.event,
       task_location_question: {
         submit: {
-          location_entered_for_first_time: jest.fn()
-        }
-      }
-    }
+          location_entered_for_first_time: jest.fn(),
+        },
+      },
+    },
   };
 }
 
@@ -52,7 +52,7 @@ describe("<DeferredLocationQuestion />", () => {
   const renderComponent = ({
     initialBusiness,
     innerContent,
-    municipalities
+    municipalities,
   }: {
     initialBusiness: Business;
     innerContent?: string;
@@ -68,8 +68,8 @@ describe("<DeferredLocationQuestion />", () => {
           </MunicipalitiesContext.Provider>
         ),
         initialRoadmap: generateRoadmap({}),
-        mockSetRoadmapFunction: setRoadmap
-      })
+        mockSetRoadmapFunction: setRoadmap,
+      }),
     );
   };
 
@@ -99,7 +99,7 @@ describe("<DeferredLocationQuestion />", () => {
       renderComponent({
         initialBusiness: business,
         innerContent: "inner-content",
-        municipalities: [newark, absecon]
+        municipalities: [newark, absecon],
       });
 
       selectLocationByText("Newark");
@@ -151,7 +151,7 @@ describe("<DeferredLocationQuestion />", () => {
     it("sends analytics when municipality entered for first time", async () => {
       await selectNewarkAndSave();
       expect(
-        mockAnalytics.event.task_location_question.submit.location_entered_for_first_time
+        mockAnalytics.event.task_location_question.submit.location_entered_for_first_time,
       ).toHaveBeenCalled();
     });
   });

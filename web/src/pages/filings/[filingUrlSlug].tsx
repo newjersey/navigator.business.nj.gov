@@ -15,7 +15,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   defaultDateFormat,
   parseDateWithFormat,
-  TaxFilingCalendarEvent
+  TaxFilingCalendarEvent,
 } from "@businessnjgovnavigator/shared";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
@@ -30,7 +30,7 @@ export const taxFilingMethodMap: Record<TaxFilingMethod, string> = {
   online: Config.filingDefaults.onlineTaxFilingMethod,
   "paper-or-by-mail-only": Config.filingDefaults.paperOrMailOnlyTaxFilingMethod,
   "online-required": Config.filingDefaults.onlineRequiredTaxFilingMethod,
-  "online-or-phone": Config.filingDefaults.onlineOrPhoneTaxFilingMethod
+  "online-or-phone": Config.filingDefaults.onlineOrPhoneTaxFilingMethod,
 };
 
 export const FilingElement = (props: {
@@ -186,7 +186,7 @@ export const FilingElement = (props: {
 const FilingPage = (props: Props): ReactElement => {
   const { business } = useUserData();
   const matchingFiling = sortCalendarEventsEarliestToLatest(business?.taxFilingData.filings ?? []).find(
-    (it: TaxFilingCalendarEvent) => it.identifier === props.filing.id
+    (it: TaxFilingCalendarEvent) => it.identifier === props.filing.id,
   );
 
   return (
@@ -206,15 +206,15 @@ export const getStaticPaths = (): GetStaticPathsResult<FilingUrlSlugParam> => {
   const paths = loadAllFilingUrlSlugs();
   return {
     paths,
-    fallback: false
+    fallback: false,
   };
 };
 
 export const getStaticProps = ({ params }: { params: FilingUrlSlugParam }): GetStaticPropsResult<Props> => {
   return {
     props: {
-      filing: loadFilingByUrlSlug(params.filingUrlSlug)
-    }
+      filing: loadFilingByUrlSlug(params.filingUrlSlug),
+    },
   };
 };
 

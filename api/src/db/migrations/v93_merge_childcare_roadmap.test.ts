@@ -8,7 +8,7 @@ describe("migrate_v92_to_v93", () => {
     expect(v93).toEqual({
       ...v92,
       profileData: { ...v92.profileData, industryId: "daycare", isChildcareForSixOrMore: false },
-      version: 93
+      version: 93,
     });
   });
 
@@ -18,7 +18,7 @@ describe("migrate_v92_to_v93", () => {
     expect(v93).toEqual({
       ...v92,
       profileData: { ...v92.profileData, industryId: "daycare", isChildcareForSixOrMore: true },
-      version: 93
+      version: 93,
     });
   });
 
@@ -28,7 +28,7 @@ describe("migrate_v92_to_v93", () => {
     expect(v93).toEqual({
       ...v92,
       profileData: { ...v92.profileData, industryId: "generic", isChildcareForSixOrMore: undefined },
-      version: 93
+      version: 93,
     });
   });
 });

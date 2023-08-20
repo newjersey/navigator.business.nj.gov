@@ -7,7 +7,7 @@ import {
   FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
-  useSetupInitialMocks
+  useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import {
   BusinessUser,
@@ -16,7 +16,7 @@ import {
   generateBusiness,
   generateFormationFormData,
   generateUser,
-  ProfileData
+  ProfileData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen } from "@testing-library/react";
@@ -24,7 +24,7 @@ import { fireEvent, screen } from "@testing-library/react";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn()
+    useMediaQuery: jest.fn(),
   };
 }
 
@@ -38,12 +38,12 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn()
+  searchBusinessName: jest.fn(),
 }));
 
 describe("Formation - BillingStep", () => {
   const displayContent: TasksDisplayContent = {
-    formationDbaContent: generateFormationDbaContent({})
+    formationDbaContent: generateFormationDbaContent({}),
   };
 
   beforeEach(() => {
@@ -57,29 +57,29 @@ describe("Formation - BillingStep", () => {
   const getPageHelper = async (
     initialProfileData: Partial<ProfileData>,
     formationFormData: Partial<FormationFormData>,
-    initialUser?: Partial<BusinessUser>
+    initialUser?: Partial<BusinessUser>,
   ): Promise<FormationPageHelpers> => {
     const profileData = generateFormationProfileData(initialProfileData);
     const formationData = {
       formationFormData: generateFormationFormData(formationFormData, {
-        legalStructureId: profileData.legalStructureId as FormationLegalType
+        legalStructureId: profileData.legalStructureId as FormationLegalType,
       }),
       formationResponse: undefined,
       getFilingResponse: undefined,
       completedFilingPayment: false,
       businessNameAvailability: undefined,
       dbaBusinessNameAvailability: undefined,
-      lastVisitedPageIndex: 0
+      lastVisitedPageIndex: 0,
     };
     const user = initialUser ? generateUser(initialUser) : generateUser({});
     // eslint-disable-next-line testing-library/render-result-naming-convention
     const page = preparePage({
       business: generateBusiness({
         profileData,
-        formationData
+        formationData,
       }),
       displayContent,
-      user
+      user,
     });
 
     await page.stepperClickToBillingStep();
@@ -98,8 +98,8 @@ describe("Formation - BillingStep", () => {
         corpWatchNotification: true,
         officialFormationDocument: true,
         certificateOfStanding: false,
-        certifiedCopyOfFormationDocument: true
-      }
+        certifiedCopyOfFormationDocument: true,
+      },
     );
 
     expect(screen.getByText(Config.formation.fields.paymentType.creditCardLabel)).toBeInTheDocument();
@@ -107,25 +107,25 @@ describe("Formation - BillingStep", () => {
     expect(page.getInputElementByLabel("Contact last name").value).toBe("Smith");
     expect(page.getInputElementByLabel("Contact phone number").value).toBe("(602) 415-3214");
     expect(
-      page.getInputElementByLabel(Config.formation.fields.annualReportNotification.checkboxText).checked
+      page.getInputElementByLabel(Config.formation.fields.annualReportNotification.checkboxText).checked,
     ).toBe(true);
     expect(
-      page.getInputElementByLabel(Config.formation.fields.corpWatchNotification.checkboxText).checked
+      page.getInputElementByLabel(Config.formation.fields.corpWatchNotification.checkboxText).checked,
     ).toBe(true);
 
     expect(
-      page.getInputElementByParentTestId("officialFormationDocument-checkbox", { type: "checkbox" }).checked
+      page.getInputElementByParentTestId("officialFormationDocument-checkbox", { type: "checkbox" }).checked,
     ).toBe(true);
     expect(
-      page.getInputElementByParentTestId("certificateOfStanding-checkbox", { type: "checkbox" }).checked
+      page.getInputElementByParentTestId("certificateOfStanding-checkbox", { type: "checkbox" }).checked,
     ).toBe(false);
     expect(
       page.getInputElementByParentTestId("certifiedCopyOfFormationDocument-checkbox", { type: "checkbox" })
-        .checked
+        .checked,
     ).toBe(true);
 
     expect(page.getInputElementByLabel(Config.formation.fields.paymentType.creditCardLabel).checked).toBe(
-      true
+      true,
     );
     expect(page.getInputElementByLabel(Config.formation.fields.paymentType.achLabel).checked).toBe(false);
   });
@@ -142,8 +142,8 @@ describe("Formation - BillingStep", () => {
             paymentType: undefined,
             officialFormationDocument: true,
             certificateOfStanding: true,
-            certifiedCopyOfFormationDocument: false
-          }
+            certifiedCopyOfFormationDocument: false,
+          },
         );
         const officialFormationCost = Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
         const standingCost = Number.parseInt(Config.formation.fields.certificateOfStanding.cost);
@@ -162,13 +162,13 @@ describe("Formation - BillingStep", () => {
             paymentType: undefined,
             officialFormationDocument: true,
             certificateOfStanding: true,
-            certifiedCopyOfFormationDocument: false
-          }
+            certifiedCopyOfFormationDocument: false,
+          },
         );
 
         const officialFormationCost = Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
         const standingCost = Number.parseInt(
-          (Config.formation.fields.certificateOfStanding.overrides as any)[legalStructureId].cost
+          (Config.formation.fields.certificateOfStanding.overrides as any)[legalStructureId].cost,
         );
         const expectedTotal = officialFormationCost + standingCost;
 
@@ -184,7 +184,7 @@ describe("Formation - BillingStep", () => {
     const certificateStandingCost = Number.parseInt(Config.formation.fields.certificateOfStanding.cost);
 
     const ccInitialCost = Number.parseFloat(
-      Config.formation.fields.paymentType.paymentCosts.creditCardInitial
+      Config.formation.fields.paymentType.paymentCosts.creditCardInitial,
     );
     const ccExtraCost = Number.parseFloat(Config.formation.fields.paymentType.paymentCosts.creditCardExtra);
     const achCost = Number.parseFloat(Config.formation.fields.paymentType.paymentCosts.ach);
@@ -195,21 +195,21 @@ describe("Formation - BillingStep", () => {
         paymentType: undefined,
         officialFormationDocument: true,
         certificateOfStanding: false,
-        certifiedCopyOfFormationDocument: false
-      }
+        certifiedCopyOfFormationDocument: false,
+      },
     );
 
     expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(officialFormationCost.toString());
     page.selectCheckboxByTestId("certificateOfStanding");
     expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(
-      (officialFormationCost + certificateStandingCost).toString()
+      (officialFormationCost + certificateStandingCost).toString(),
     );
     page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
     expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(
-      (officialFormationCost + certificateStandingCost + certifiedCopyCost).toString()
+      (officialFormationCost + certificateStandingCost + certifiedCopyCost).toString(),
     );
     expect(screen.getByLabelText(totalLabel)).toHaveTextContent(
-      (officialFormationCost + certificateStandingCost + certifiedCopyCost).toString()
+      (officialFormationCost + certificateStandingCost + certifiedCopyCost).toString(),
     );
     page.selectCheckboxByTestId("certificateOfStanding");
     const finalTotal = officialFormationCost + certifiedCopyCost;
@@ -219,12 +219,12 @@ describe("Formation - BillingStep", () => {
 
     fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel));
     expect(screen.getByLabelText(totalLabel)).toHaveTextContent(
-      (finalTotal + ccInitialCost + ccExtraCost).toString()
+      (finalTotal + ccInitialCost + ccExtraCost).toString(),
     );
     fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.achLabel));
     const numberOfDocuments = 2;
     expect(screen.getByLabelText(totalLabel)).toHaveTextContent(
-      (finalTotal + achCost * numberOfDocuments).toString()
+      (finalTotal + achCost * numberOfDocuments).toString(),
     );
   });
 
@@ -233,9 +233,9 @@ describe("Formation - BillingStep", () => {
       {},
       {
         contactFirstName: "",
-        contactLastName: ""
+        contactLastName: "",
       },
-      { name: "Mike Jones" }
+      { name: "Mike Jones" },
     );
 
     expect(page.getInputElementByLabel("Contact first name").value).toEqual("Mike");
@@ -247,9 +247,9 @@ describe("Formation - BillingStep", () => {
       {},
       {
         contactFirstName: "Actual",
-        contactLastName: "Name"
+        contactLastName: "Name",
       },
-      { name: "Some Wrong Name" }
+      { name: "Some Wrong Name" },
     );
 
     expect(page.getInputElementByLabel("Contact first name").value).toEqual("Actual");

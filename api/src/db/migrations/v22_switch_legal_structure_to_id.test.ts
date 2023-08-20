@@ -16,10 +16,10 @@ describe("migrate_v21_to_v22", () => {
       licenseData: undefined,
       preferences: {
         roadmapOpenSections: ["PLAN", "START"],
-        roadmapOpenSteps: []
+        roadmapOpenSteps: [],
       },
       taxFilings: [],
-      version: 19
+      version: 19,
     };
 
     expect(v21.onboardingData.legalStructure).toEqual("limited-liability-company");

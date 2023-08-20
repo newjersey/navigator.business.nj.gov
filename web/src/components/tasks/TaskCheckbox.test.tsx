@@ -4,7 +4,7 @@ import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { generateUserData } from "@businessnjgovnavigator/shared/";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
@@ -26,7 +26,7 @@ describe("<TaskCheckbox />", () => {
   const renderTaskCheckbox = ({
     checklistItemId,
     initialBusiness,
-    isAuthenticated
+    isAuthenticated,
   }: {
     checklistItemId: string;
     initialBusiness?: Business;
@@ -42,8 +42,8 @@ describe("<TaskCheckbox />", () => {
           <TaskCheckbox checklistItemId={checklistItemId} />
         </WithStatefulUserData>,
         isAuthenticated ?? IsAuthenticated.TRUE,
-        { registrationModalIsVisible: false, setRegistrationModalIsVisible }
-      )
+        { registrationModalIsVisible: false, setRegistrationModalIsVisible },
+      ),
     );
   };
 
@@ -53,9 +53,9 @@ describe("<TaskCheckbox />", () => {
       initialBusiness: generateBusiness({
         taskItemChecklist: {
           "some-id": true,
-          "some-other-id": false
-        }
-      })
+          "some-other-id": false,
+        },
+      }),
     });
     expect(screen.getByRole("checkbox") as HTMLInputElement).toBeChecked();
   });
@@ -65,9 +65,9 @@ describe("<TaskCheckbox />", () => {
       checklistItemId: "some-id",
       initialBusiness: generateBusiness({
         taskItemChecklist: {
-          "some-id": false
-        }
-      })
+          "some-id": false,
+        },
+      }),
     });
     fireEvent.click(screen.getByRole("checkbox"));
     expect(screen.getByRole("checkbox") as HTMLInputElement).toBeChecked();
@@ -77,7 +77,7 @@ describe("<TaskCheckbox />", () => {
   it("opens registration modal when guest mode user tries to change state", () => {
     renderTaskCheckbox({
       checklistItemId: "some-id",
-      isAuthenticated: IsAuthenticated.FALSE
+      isAuthenticated: IsAuthenticated.FALSE,
     });
     fireEvent.click(screen.getByRole("checkbox"));
     expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);

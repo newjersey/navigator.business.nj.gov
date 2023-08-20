@@ -13,14 +13,14 @@ export const ProfileOpportunitiesAlert = (): ReactElement => {
   const unansweredOpportunityFields = getFieldsForProfile(state.profileData.legalStructureId).filter(
     (field) => {
       return !isFieldAnswered(field, state.profileData);
-    }
+    },
   );
 
   const getLabel = (field: ProfileContentField): string => {
     const contentFromConfig = getProfileConfig({
       config: Config,
       persona: state.flow,
-      fieldName: field
+      fieldName: field,
     });
     return contentFromConfig.header;
   };

@@ -25,13 +25,13 @@ describe("SelfRegSnackbar", () => {
   const setRegistrationAlertStatus = jest.fn();
   const setupHookWithAuth = (
     isAuthenticated: IsAuthenticated,
-    registrationAlertStatus: RegistrationStatus
+    registrationAlertStatus: RegistrationStatus,
   ): void => {
     render(
       withAuthAlert(<SelfRegSnackbar />, isAuthenticated, {
         registrationAlertStatus,
-        setRegistrationAlertStatus
-      })
+        setRegistrationAlertStatus,
+      }),
     );
   };
 
@@ -56,10 +56,10 @@ describe("SelfRegSnackbar", () => {
   it("shows duplicate registration error snackbar alert when user had failed the registration process", () => {
     setupHookWithAuth(IsAuthenticated.FALSE, "DUPLICATE_ERROR");
     expect(
-      screen.getByText(markdownToText(Config.selfRegistration.errorTextDuplicateSignUp))
+      screen.getByText(markdownToText(Config.selfRegistration.errorTextDuplicateSignUp)),
     ).toBeInTheDocument();
     expect(
-      screen.queryByText(markdownToText(Config.navigationDefaults.guestSuccessTitle))
+      screen.queryByText(markdownToText(Config.navigationDefaults.guestSuccessTitle)),
     ).not.toBeInTheDocument();
     expect(screen.queryByTestId("congratulations-logo")).not.toBeInTheDocument();
   });
@@ -68,7 +68,7 @@ describe("SelfRegSnackbar", () => {
     setupHookWithAuth(IsAuthenticated.FALSE, "RESPONSE_ERROR");
     expect(screen.getByText(markdownToText(Config.selfRegistration.errorTextGeneric))).toBeInTheDocument();
     expect(
-      screen.queryByText(markdownToText(Config.navigationDefaults.guestSuccessTitle))
+      screen.queryByText(markdownToText(Config.navigationDefaults.guestSuccessTitle)),
     ).not.toBeInTheDocument();
     expect(screen.queryByTestId("congratulations-logo")).not.toBeInTheDocument();
   });

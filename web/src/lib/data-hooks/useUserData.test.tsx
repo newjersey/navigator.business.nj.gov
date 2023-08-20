@@ -17,7 +17,7 @@ jest.mock("@/lib/utils/analytics-helpers", () => ({ setAnalyticsDimensions: jest
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   getUserData: jest.fn(),
-  postUserData: jest.fn()
+  postUserData: jest.fn(),
 }));
 const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
 const mockAnalyticsHelpers = analyticsHelpers as jest.Mocked<typeof analyticsHelpers>;
@@ -41,7 +41,7 @@ describe("useUserData", () => {
 
   const setupHook = async (
     currentUser: BusinessUser | undefined,
-    isAuthenticated?: IsAuthenticated
+    isAuthenticated?: IsAuthenticated,
   ): Promise<UseUserDataResponse> => {
     const returnVal = generateUseUserDataResponse({});
 
@@ -59,7 +59,7 @@ describe("useUserData", () => {
           <RoadmapContext.Provider
             value={{
               roadmap: generateRoadmap({}),
-              setRoadmap: mockSetRoadmap
+              setRoadmap: mockSetRoadmap,
             }}
           >
             {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
@@ -67,11 +67,11 @@ describe("useUserData", () => {
               <TestComponent />
             </SWRConfig>
           </RoadmapContext.Provider>,
-          { user: currentUser, dispatch: mockDispatch, isAuthenticated }
+          { user: currentUser, dispatch: mockDispatch, isAuthenticated },
         ),
         undefined,
-        mockSetError
-      )
+        mockSetError,
+      ),
     );
     await waitFor(() => {
       expect(returnVal.updateQueue).toBeDefined();
@@ -147,7 +147,7 @@ describe("useUserData", () => {
 
       const expectedProfileData = {
         ...newUserData.businesses[newUserData.currentBusinessId].profileData,
-        businessName: "some new name"
+        businessName: "some new name",
       };
 
       await waitFor(() => {
@@ -182,8 +182,8 @@ describe("useUserData", () => {
         type: "UPDATE_USER",
         user: {
           ...currentUser,
-          myNJUserKey: currentUserData.user.myNJUserKey
-        }
+          myNJUserKey: currentUserData.user.myNJUserKey,
+        },
       });
     });
 

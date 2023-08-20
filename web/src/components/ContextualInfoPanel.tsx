@@ -13,7 +13,7 @@ export const ContextualInfoPanel = (): ReactElement => {
     setContextualInfo((prevContextualInfo: ContextualInfo) => {
       return {
         ...prevContextualInfo,
-        isVisible: false
+        isVisible: false,
       };
     });
 
@@ -21,7 +21,7 @@ export const ContextualInfoPanel = (): ReactElement => {
       setContextualInfo((prevContextualInfo: ContextualInfo) => {
         return {
           ...prevContextualInfo,
-          markdown: ""
+          markdown: "",
         };
       });
     }, 300);

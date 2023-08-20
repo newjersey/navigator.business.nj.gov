@@ -7,7 +7,7 @@ import {
   generateRoadmap,
   generateStep,
   generateTask,
-  randomPublicFilingLegalStructure
+  randomPublicFilingLegalStructure,
 } from "@/test/factories";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -20,7 +20,7 @@ import {
   generateProfileData,
   generateUser,
   generateUserData,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
@@ -30,7 +30,7 @@ import {
   screen,
   waitFor,
   waitForElementToBeRemoved,
-  within
+  within,
 } from "@testing-library/react";
 import { ReactNode } from "react";
 
@@ -39,7 +39,7 @@ const Config = getMergedConfig();
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn()
+    useMediaQuery: jest.fn(),
   };
 }
 
@@ -54,7 +54,7 @@ jest.mock(
   "next/link",
   () =>
     ({ children }: { children: ReactNode }): ReactNode =>
-      children
+      children,
 );
 
 const setLargeScreen = (value: boolean): void => {
@@ -67,8 +67,8 @@ const generateOnboardingBusiness = (): Business => {
       businessName: "",
       tradeName: "",
       industryId: undefined,
-      legalStructureId: undefined
-    })
+      legalStructureId: undefined,
+    }),
   });
 };
 
@@ -78,9 +78,9 @@ const generateGuestBusiness = (overrides?: Partial<Business>): Business => {
       businessName: "",
       tradeName: "",
       industryId: "cannabis",
-      legalStructureId: "limited-liability-company"
+      legalStructureId: "limited-liability-company",
     }),
-    ...overrides
+    ...overrides,
   });
 };
 
@@ -92,9 +92,9 @@ const generateBusinessNamedBusiness = (overrides?: Partial<Business>): Business 
       businessName: businessName,
       tradeName: "",
       industryId: "cannabis",
-      legalStructureId: "limited-liability-company"
+      legalStructureId: "limited-liability-company",
     }),
-    ...overrides
+    ...overrides,
   });
 };
 
@@ -109,8 +109,8 @@ describe("<NavBar />", () => {
     setLargeScreen(false);
     render(
       withAuth(<NavBar landingPage={false} task={undefined} showSidebar={true} />, {
-        isAuthenticated: IsAuthenticated.TRUE
-      })
+        isAuthenticated: IsAuthenticated.TRUE,
+      }),
     );
 
     expect(screen.getByText(businessName)).toBeInTheDocument();
@@ -121,8 +121,8 @@ describe("<NavBar />", () => {
     setLargeScreen(false);
     render(
       withAuth(<NavBar landingPage={false} task={undefined} showSidebar={false} />, {
-        isAuthenticated: IsAuthenticated.TRUE
-      })
+        isAuthenticated: IsAuthenticated.TRUE,
+      }),
     );
 
     expect(screen.queryByText(businessName)).not.toBeInTheDocument();
@@ -157,8 +157,8 @@ describe("<NavBar />", () => {
         setLargeScreen(true);
         render(
           withAuth(<NavBar landingPage={false} showSidebar={false} />, {
-            isAuthenticated: IsAuthenticated.FALSE
-          })
+            isAuthenticated: IsAuthenticated.FALSE,
+          }),
         );
       };
 
@@ -187,8 +187,8 @@ describe("<NavBar />", () => {
         setLargeScreen(false);
         render(
           withAuth(<NavBar landingPage={false} showSidebar={false} />, {
-            isAuthenticated: IsAuthenticated.FALSE
-          })
+            isAuthenticated: IsAuthenticated.FALSE,
+          }),
         );
         fireEvent.click(screen.getByTestId("nav-menu-open"));
       };
@@ -212,8 +212,8 @@ describe("<NavBar />", () => {
       setLargeScreen(true);
       render(
         withAuth(<NavBar landingPage={false} task={undefined} showSidebar={false} />, {
-          isAuthenticated: IsAuthenticated.TRUE
-        })
+          isAuthenticated: IsAuthenticated.TRUE,
+        }),
       );
     };
 
@@ -272,21 +272,21 @@ describe("<NavBar />", () => {
       const firstBusiness = generateBusiness({
         profileData: generateProfileData({
           businessName: "first-biz",
-          legalStructureId: randomPublicFilingLegalStructure()
-        })
+          legalStructureId: randomPublicFilingLegalStructure(),
+        }),
       });
       const secondBusiness = generateBusiness({
         profileData: generateProfileData({
           businessName: "second-biz",
-          legalStructureId: randomPublicFilingLegalStructure()
-        })
+          legalStructureId: randomPublicFilingLegalStructure(),
+        }),
       });
       const userData = generateUserData({
         currentBusinessId: firstBusiness.id,
         businesses: {
           [firstBusiness.id]: firstBusiness,
-          [secondBusiness.id]: secondBusiness
-        }
+          [secondBusiness.id]: secondBusiness,
+        },
       });
       useMockUserData(userData);
 
@@ -313,8 +313,8 @@ describe("<NavBar />", () => {
       setLargeScreen(true);
       render(
         withAuth(<NavBar landingPage={false} task={undefined} showSidebar={false} />, {
-          isAuthenticated: IsAuthenticated.FALSE
-        })
+          isAuthenticated: IsAuthenticated.FALSE,
+        }),
       );
     };
 
@@ -390,8 +390,8 @@ describe("<NavBar />", () => {
           <WithStatefulUserData initialUserData={userData}>
             <NavBar landingPage={false} showSidebar={false} />
           </WithStatefulUserData>,
-          { user, isAuthenticated: IsAuthenticated.FALSE }
-        )
+          { user, isAuthenticated: IsAuthenticated.FALSE },
+        ),
       );
       fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestText));
 
@@ -400,12 +400,12 @@ describe("<NavBar />", () => {
         email: "email@example.com",
         name: "My Name",
         receiveNewsletter: false,
-        userTesting: true
+        userTesting: true,
       };
 
       mockApi.postSelfReg.mockResolvedValue({
         authRedirectURL: "www.example.com",
-        userData: { ...userData, user: businessUser }
+        userData: { ...userData, user: businessUser },
       });
 
       fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText));
@@ -422,8 +422,8 @@ describe("<NavBar />", () => {
       setLargeScreen(false);
       render(
         withAuth(<NavBar landingPage={false} task={undefined} showSidebar={false} />, {
-          isAuthenticated: IsAuthenticated.TRUE
-        })
+          isAuthenticated: IsAuthenticated.TRUE,
+        }),
       );
       fireEvent.click(screen.getByTestId("nav-menu-open"));
     };
@@ -450,8 +450,8 @@ describe("<NavBar />", () => {
       render(
         withAuth(
           <NavBar landingPage={navBarSettings.isLanding} task={generateTask({})} showSidebar={true} />,
-          { isAuthenticated: navBarSettings.isAuthenticated ?? IsAuthenticated.FALSE }
-        )
+          { isAuthenticated: navBarSettings.isAuthenticated ?? IsAuthenticated.FALSE },
+        ),
       );
       fireEvent.click(screen.getByTestId("nav-menu-open"));
     };
@@ -474,7 +474,7 @@ describe("<NavBar />", () => {
         renderMobileTaskNav({ isLanding: true });
         expect(screen.getByText(Config.navigationDefaults.registerButton)).toBeInTheDocument();
         expect(
-          screen.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)
+          screen.queryByText(Config.navigationDefaults.navBarGuestRegistrationText),
         ).not.toBeInTheDocument();
       });
     });
@@ -511,8 +511,8 @@ describe("<NavBar />", () => {
 
         expect(
           within(screen.getByTestId("nav-bar-popup-menu")).queryByText(
-            Config.navigationDefaults.navBarGuestText
-          )
+            Config.navigationDefaults.navBarGuestText,
+          ),
         ).toBeVisible();
         expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).toBeVisible();
       });
@@ -529,8 +529,8 @@ describe("<NavBar />", () => {
             <WithStatefulUserData initialUserData={userData}>
               <NavBar landingPage={false} task={undefined} showSidebar={false} />
             </WithStatefulUserData>,
-            { user, isAuthenticated: IsAuthenticated.FALSE }
-          )
+            { user, isAuthenticated: IsAuthenticated.FALSE },
+          ),
         );
         fireEvent.click(screen.getByTestId("nav-menu-open"));
 
@@ -539,12 +539,12 @@ describe("<NavBar />", () => {
           email: "email@example.com",
           name: "My Name",
           receiveNewsletter: false,
-          userTesting: true
+          userTesting: true,
         };
 
         mockApi.postSelfReg.mockResolvedValue({
           authRedirectURL: "www.example.com",
-          userData: { ...userData, user: businessUser }
+          userData: { ...userData, user: businessUser },
         });
 
         fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText));
@@ -561,9 +561,9 @@ describe("<NavBar />", () => {
           generateRoadmap({
             steps: [
               generateStep({ name: "step1", section: "PLAN" }),
-              generateStep({ name: "step2", section: "START" })
-            ]
-          })
+              generateStep({ name: "step2", section: "START" }),
+            ],
+          }),
         );
         renderMobileTaskNav({});
         expect(screen.getByText("step1")).toBeInTheDocument();
@@ -577,16 +577,16 @@ describe("<NavBar />", () => {
           generateRoadmap({
             steps: [
               generateStep({ name: "step1", section: "PLAN" }),
-              generateStep({ name: "step2", section: "START" })
-            ]
-          })
+              generateStep({ name: "step2", section: "START" }),
+            ],
+          }),
         );
 
         render(
           withAuth(
             <NavBar landingPage={false} task={generateTask({})} showSidebar={true} hideMiniRoadmap={true} />,
-            { isAuthenticated: IsAuthenticated.TRUE }
-          )
+            { isAuthenticated: IsAuthenticated.TRUE },
+          ),
         );
         fireEvent.click(screen.getByTestId("nav-menu-open"));
 
@@ -600,8 +600,8 @@ describe("<NavBar />", () => {
         useMockRoadmap(
           generateRoadmap({
             steps: [generateStep({ name: "step1", stepNumber: 1 })],
-            tasks: [generateTask({ name: "task1", stepNumber: 1 })]
-          })
+            tasks: [generateTask({ name: "task1", stepNumber: 1 })],
+          }),
         );
         renderMobileTaskNav({});
         fireEvent.click(screen.getByText("step1"));

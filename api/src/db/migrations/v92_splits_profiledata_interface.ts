@@ -17,7 +17,7 @@ export interface v92UserData {
 export const migrate_v91_to_v92 = (v91Data: v91UserData): v92UserData => {
   return {
     ...v91Data,
-    version: 92
+    version: 92,
   };
 };
 
@@ -198,7 +198,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v92FormationData {
@@ -264,7 +264,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -273,7 +273,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const corpBusinessSuffix = [
@@ -286,7 +286,7 @@ export const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
@@ -329,7 +329,7 @@ export const generatev92User = (overrides: Partial<v92BusinessUser>): v92Busines
     myNJUserKey: undefined,
     intercomHash: undefined,
     abExperience: "ExperienceA",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -367,12 +367,12 @@ export const createEmptyv92FormationFormData = (): v92FormationFormData => {
     certifiedCopyOfFormationDocument: false,
     contactFirstName: "",
     contactLastName: "",
-    contactPhoneNumber: ""
+    contactPhoneNumber: "",
   };
 };
 
 export const generatev92IndustrySpecificData = (
-  overrides: Partial<v92IndustrySpecificData>
+  overrides: Partial<v92IndustrySpecificData>,
 ): v92IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -386,7 +386,7 @@ export const generatev92IndustrySpecificData = (
     realEstateAppraisalManagement: false,
     carService: undefined,
     interstateTransport: false,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -403,7 +403,7 @@ export const generatev92ProfileData = (overrides: Partial<v92ProfileData>): v92P
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     dateOfFormation: undefined,
     entityId: randomInt(10).toString(),
@@ -414,7 +414,7 @@ export const generatev92ProfileData = (overrides: Partial<v92ProfileData>): v92P
     documents: {
       certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
       formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
-      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`
+      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
     },
     existingEmployees: randomInt(7).toString(),
     taxPin: randomInt(4).toString(),
@@ -425,7 +425,7 @@ export const generatev92ProfileData = (overrides: Partial<v92ProfileData>): v92P
     nexusDbaName: undefined,
     nexusLocationInNewJersey: undefined,
     operatingPhase: "NEEDS_TO_FORM",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -446,20 +446,20 @@ export const v92UserDataGenerator = (overrides: Partial<v92ProfileData>): v92Use
       visibleSidebarCards: ["welcome"],
       returnToLink: "",
       isCalendarFullView: true,
-      isHideableRoadmapOpen: false
+      isHideableRoadmapOpen: false,
     },
     taxFilingData: {
       state: undefined,
       businessName: undefined,
       lastUpdatedISO: undefined,
       registered: false,
-      filings: []
+      filings: [],
     },
     formationData: {
       formationFormData: createEmptyv92FormationFormData(),
       formationResponse: undefined,
       getFilingResponse: undefined,
-      completedFilingPayment: false
-    }
+      completedFilingPayment: false,
+    },
   };
 };

@@ -80,7 +80,7 @@ export const LandingPageSlider = (props: Props): ReactElement => {
         <>
           <span></span>
         </>
-      )
+      ),
   };
 
   return (
@@ -92,7 +92,7 @@ export const LandingPageSlider = (props: Props): ReactElement => {
             key: `landing-page-slider-key-${index}`,
             className: "landing-page-slide",
             isActive: activeTile === index,
-            reference: index === 0 ? cardRef : undefined
+            reference: index === 0 ? cardRef : undefined,
           };
           return <LandingPageActionTile {...actionTileObj} key={actionTileObj.key} />;
         })}

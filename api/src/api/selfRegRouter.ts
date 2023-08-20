@@ -6,7 +6,7 @@ import { SelfRegClient, UserDataClient } from "../domain/types";
 
 export const selfRegRouterFactory = (
   userDataClient: UserDataClient,
-  selfRegClient: SelfRegClient
+  selfRegClient: SelfRegClient,
 ): Router => {
   const router = Router();
 
@@ -37,10 +37,10 @@ export const selfRegRouterFactory = (
       user: {
         ...userData.user,
         myNJUserKey: myNJUserKey,
-        intercomHash: hash
+        intercomHash: hash,
       },
       dateCreatedISO: dayjs().toISOString(),
-      lastUpdatedISO: dayjs().toISOString()
+      lastUpdatedISO: dayjs().toISOString(),
     });
   };
 

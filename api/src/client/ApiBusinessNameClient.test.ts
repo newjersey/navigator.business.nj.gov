@@ -21,12 +21,12 @@ describe("ApiBusinessNameClient", () => {
     const mockResponse: ApiNameAvailabilityResponse = {
       Available: true,
       Reason: "some reason",
-      Similars: []
+      Similars: [],
     };
     mockAxios.get.mockResolvedValue({ data: mockResponse });
     expect(await client.search("name")).toEqual({
       status: "AVAILABLE",
-      similarNames: []
+      similarNames: [],
     });
     expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/Available?q=name");
   });
@@ -35,12 +35,12 @@ describe("ApiBusinessNameClient", () => {
     const mockResponse: ApiNameAvailabilityResponse = {
       Available: false,
       Reason: "contains business designators",
-      Similars: []
+      Similars: [],
     };
     mockAxios.get.mockResolvedValue({ data: mockResponse });
     expect(await client.search("name")).toEqual({
       status: "DESIGNATOR_ERROR",
-      similarNames: []
+      similarNames: [],
     });
     expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/Available?q=name");
   });
@@ -49,13 +49,13 @@ describe("ApiBusinessNameClient", () => {
     const mockResponse: ApiNameAvailabilityResponse = {
       Available: false,
       Reason: "contains the restricted word 'thingy' whatevers",
-      Similars: []
+      Similars: [],
     };
     mockAxios.get.mockResolvedValue({ data: mockResponse });
     expect(await client.search("name")).toEqual({
       status: "RESTRICTED_ERROR",
       invalidWord: "thingy",
-      similarNames: []
+      similarNames: [],
     });
     expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/Available?q=name");
   });
@@ -64,12 +64,12 @@ describe("ApiBusinessNameClient", () => {
     const mockResponse: ApiNameAvailabilityResponse = {
       Available: false,
       Reason: "contains invalid special character",
-      Similars: []
+      Similars: [],
     };
     mockAxios.get.mockResolvedValue({ data: mockResponse });
     expect(await client.search("name")).toEqual({
       status: "SPECIAL_CHARACTER_ERROR",
-      similarNames: []
+      similarNames: [],
     });
     expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/Available?q=name");
   });
@@ -78,12 +78,12 @@ describe("ApiBusinessNameClient", () => {
     const mockResponse: ApiNameAvailabilityResponse = {
       Available: false,
       Reason: "some reason",
-      Similars: ["name 1", "name 2"]
+      Similars: ["name 1", "name 2"],
     };
     mockAxios.get.mockResolvedValue({ data: mockResponse });
     expect(await client.search("name")).toEqual({
       status: "UNAVAILABLE",
-      similarNames: ["name 1", "name 2"]
+      similarNames: ["name 1", "name 2"],
     });
     expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/Available?q=name");
   });

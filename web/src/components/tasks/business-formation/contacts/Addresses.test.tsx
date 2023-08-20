@@ -7,7 +7,7 @@ import {
   FormationLegalType,
   generateFormationIncorporator,
   generateFormationUSAddress,
-  generateMunicipality
+  generateMunicipality,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
@@ -15,7 +15,7 @@ import { fireEvent, screen, waitFor } from "@testing-library/react";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn()
+    useMediaQuery: jest.fn(),
   };
 }
 
@@ -29,7 +29,7 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
   getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn()
+  searchBusinessName: jest.fn(),
 }));
 
 describe("Formation - Addresses", () => {
@@ -49,9 +49,9 @@ describe("Formation - Addresses", () => {
           page.clickAddNewIncorporator();
           const signer = generateFormationIncorporator(
             {
-              ...generateFormationUSAddress({})
+              ...generateFormationUSAddress({}),
             },
-            legalStructureId
+            legalStructureId,
           );
           page.fillText("Address name", signer.name);
           page.fillText("Address line1", signer.addressLine1);
@@ -63,7 +63,7 @@ describe("Formation - Addresses", () => {
           page.checkSignerBox(0, "incorporators");
           await page.submitContactsStep();
           expect(currentBusiness().formationData.formationFormData.incorporators).toEqual([
-            { ...signer, signature: true, title: signer.title }
+            { ...signer, signature: true, title: signer.title },
           ]);
         });
 
@@ -72,18 +72,18 @@ describe("Formation - Addresses", () => {
             generateFormationIncorporator(
               {
                 signature: true,
-                ...generateFormationUSAddress({})
+                ...generateFormationUSAddress({}),
               },
-              legalStructureId
+              legalStructureId,
             ),
             generateFormationIncorporator(
               {
                 signature: true,
                 title: "Incorporator",
-                ...generateFormationUSAddress({})
+                ...generateFormationUSAddress({}),
               },
-              legalStructureId
-            )
+              legalStructureId,
+            ),
           ];
           const page = await getPageHelper({ legalStructureId }, { incorporators });
           const nameTd = screen.getByText(incorporators[1].name, { exact: false });
@@ -91,8 +91,8 @@ describe("Formation - Addresses", () => {
           expect(
             screen.getByText(
               `${incorporators[1].addressLine1}, ${incorporators[1].addressLine2}, ${incorporators[1].addressCity}, ${incorporators[1].addressState?.name} ${incorporators[1].addressZipCode}`,
-              { exact: false }
-            )
+              { exact: false },
+            ),
           ).toBeInTheDocument();
           // eslint-disable-next-line testing-library/no-node-access
           fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="edit"]') as Element);
@@ -101,7 +101,7 @@ describe("Formation - Addresses", () => {
           expect(page.getInputElementByLabel("Address line2").value).toBe(incorporators[1].addressLine2);
           expect(page.getInputElementByLabel("Address city").value).toBe(incorporators[1].addressCity);
           expect(page.getInputElementByLabel("Address state").value).toBe(
-            incorporators[1].addressState?.shortCode
+            incorporators[1].addressState?.shortCode,
           );
           expect(page.getInputElementByLabel("Address zip code").value).toBe(incorporators[1].addressZipCode);
           const newName = "Luke Potter";
@@ -109,7 +109,7 @@ describe("Formation - Addresses", () => {
           page.clickAddressSubmit();
           await waitFor(() => {
             expect(
-              screen.getByText(Config.formation.fields.incorporators.successSnackbarBody)
+              screen.getByText(Config.formation.fields.incorporators.successSnackbarBody),
             ).toBeInTheDocument();
           });
           expect(screen.getByText(newName, { exact: false })).toBeInTheDocument();
@@ -119,7 +119,7 @@ describe("Formation - Addresses", () => {
           expect(
             newIncorporators?.findIndex((signer) => {
               return signer.name === newName;
-            })
+            }),
           ).toEqual(1);
         });
 
@@ -129,18 +129,18 @@ describe("Formation - Addresses", () => {
               {
                 signature: true,
                 title: "Incorporator",
-                ...generateFormationUSAddress({})
+                ...generateFormationUSAddress({}),
               },
-              legalStructureId
+              legalStructureId,
             ),
             generateFormationIncorporator(
               {
                 signature: true,
                 title: "Incorporator",
-                ...generateFormationUSAddress({})
+                ...generateFormationUSAddress({}),
               },
-              legalStructureId
-            )
+              legalStructureId,
+            ),
           ];
           const page = await getPageHelper({ legalStructureId }, { incorporators });
           const nameTd = screen.getByText(incorporators[1].name, { exact: false });
@@ -155,10 +155,10 @@ describe("Formation - Addresses", () => {
             generateFormationIncorporator(
               {
                 signature: true,
-                ...generateFormationUSAddress({})
+                ...generateFormationUSAddress({}),
               },
-              legalStructureId
-            )
+              legalStructureId,
+            ),
           );
           await getPageHelper({ legalStructureId }, { incorporators });
           expect(screen.queryByText(Config.formation.fields.signers.addButtonText)).not.toBeInTheDocument();
@@ -169,10 +169,10 @@ describe("Formation - Addresses", () => {
             generateFormationIncorporator(
               {
                 name: "",
-                ...generateFormationUSAddress({})
+                ...generateFormationUSAddress({}),
               },
-              legalStructureId
-            )
+              legalStructureId,
+            ),
           ];
           const page = await getPageHelper({ legalStructureId }, { incorporators });
           await attemptApiSubmission(page);
@@ -201,7 +201,7 @@ describe("Formation - Addresses", () => {
           expect(signerCheckboxErrorText()).not.toBeInTheDocument();
           await page.submitContactsStep();
         });
-      })
+      }),
     );
 
     describe("default checkbox behavior", () => {
@@ -209,7 +209,7 @@ describe("Formation - Addresses", () => {
         const page = await getPageHelper(
           {
             legalStructureId: "limited-partnership",
-            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" })
+            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
           },
           {
             contactFirstName: "John",
@@ -217,8 +217,8 @@ describe("Formation - Addresses", () => {
             addressLine1: "123 Address",
             addressLine2: "business suite 201",
             addressState: { shortCode: "NJ", name: "New Jersey" },
-            addressZipCode: "07601"
-          }
+            addressZipCode: "07601",
+          },
         );
         page.clickAddNewIncorporator();
         fireEvent.click(screen.getByTestId("default-checkbox"));

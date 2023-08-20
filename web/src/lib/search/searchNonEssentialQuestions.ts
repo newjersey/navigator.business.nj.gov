@@ -4,14 +4,14 @@ import { NonEssentialQuestion } from "@/lib/types/types";
 
 export const searchNonEssentialQuestions = (
   nonEssentialQuestions: NonEssentialQuestion[],
-  term: string
+  term: string,
 ): Match[] => {
   const matches: Match[] = [];
 
   for (const nonEssentialQuestion of nonEssentialQuestions) {
     let match: Match = {
       filename: "Non Essential Questions",
-      snippets: []
+      snippets: [],
     };
 
     const id = nonEssentialQuestion.id.toLowerCase();
@@ -21,7 +21,7 @@ export const searchNonEssentialQuestions = (
     const labelledTexts = [
       { content: id, label: "ID" },
       { content: questionText, label: "Question" },
-      { content: addOn, label: "Add On" }
+      { content: addOn, label: "Add On" },
     ];
 
     match = findMatchInLabelledText(labelledTexts, term, match);

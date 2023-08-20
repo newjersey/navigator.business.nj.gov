@@ -17,16 +17,16 @@ const fundingTypeMap = [
   {
     name: "Technical Assistance",
     slug: "technical assistance",
-    id: "cd5cfe0d3b986f16857bee1546a6b35a"
+    id: "cd5cfe0d3b986f16857bee1546a6b35a",
   },
   { name: "Loan", slug: "loan", id: "73274288235e87d48ca9b0227694455f" },
   { name: "Tax Credit", slug: "tax credit", id: "7d7a4a42eb088f70a3286137d4956ed9" },
   {
     name: "Hiring & Employee Training Support",
     slug: "hiring and employee training support",
-    id: "c2384f35dc0ef1fe9ff53866504d6cfe"
+    id: "c2384f35dc0ef1fe9ff53866504d6cfe",
   },
-  { name: "Tax Exemption", slug: "tax exemption", id: "2c5989291051fa966295bd3cd6722fe6" }
+  { name: "Tax Exemption", slug: "tax exemption", id: "2c5989291051fa966295bd3cd6722fe6" },
 ];
 
 const getCertificationsOptions = async () => {
@@ -42,18 +42,18 @@ const fundingCertificationsMap = [
   {
     name: "Small Business Enterprise",
     slug: "small-business-enterprise",
-    id: "63efbad363a8a73927b7996c"
+    id: "63efbad363a8a73927b7996c",
   },
   {
     name: "Disadvantaged Business Enterprise",
     slug: "disadvantaged-business-enterprise",
-    id: "63efbae005c01736a1f89343"
+    id: "63efbae005c01736a1f89343",
   },
   {
     name: "Emerging Small Business Enterprise",
     slug: "emerging-small-business-enterprise",
-    id: "63efbaeeae8cb961785aa8e8"
-  }
+    id: "63efbaeeae8cb961785aa8e8",
+  },
 ];
 
 const getAgencyOptions = async () => {
@@ -71,18 +71,18 @@ const agencyMap = {
   "nj-public-utilities": {
     name: "NJ Board of Public Utilities",
     slug: "NJ Board of Public Utilities",
-    id: "15b93a9c93d07ea5929717526eb37704"
+    id: "15b93a9c93d07ea5929717526eb37704",
   },
   "nj-treasury": {
     name: "NJ Department of Treasury",
     slug: "NJ Department of Treasury",
-    id: "b96fca38c289eabd7cda9bc33be8996a"
+    id: "b96fca38c289eabd7cda9bc33be8996a",
   },
   "nj-bac": {
     name: "New Jersey Business Action Center",
     slug: "New Jersey Business Action Center",
-    id: "529992b90dbeaba3826e4afa761c1c8e"
-  }
+    id: "529992b90dbeaba3826e4afa761c1c8e",
+  },
 };
 
 const getFundingOptions = async () => {
@@ -96,16 +96,16 @@ const fundingStatusMap = [
   {
     name: "Rolling Application",
     slug: "rolling application",
-    id: "d9e4ad4201a1644abbcad6666bace0bc"
+    id: "d9e4ad4201a1644abbcad6666bace0bc",
   },
   {
     name: "First Come, First Serve",
     slug: "first come, first serve",
-    id: "c44fb3cfdfb8a5b52d694a578d0338c1"
+    id: "c44fb3cfdfb8a5b52d694a578d0338c1",
   },
   { name: "Deadline", slug: "deadline", id: "f8f3b6be7e7062b37365aa256928f47b" },
   { name: "Opening Soon", slug: "opening soon", id: "092a680902d359a5febce1189eec5aca" },
-  { name: "Closed", slug: "closed", id: "d81ba489e3c255947bb4f67cb7012f6f" }
+  { name: "Closed", slug: "closed", id: "d81ba489e3c255947bb4f67cb7012f6f" },
 ];
 
 const fundingCollectionId = "6112e6b88aa567fdbc725ffc";
@@ -140,7 +140,7 @@ const contentMdToObject = (content) => {
   return {
     "program-overview": getHtml(lines, 0, eligibilityIndex),
     eligibility: getHtml(lines, eligibilityIndex + 1, benefitIndex),
-    benefit: getHtml(lines, benefitIndex + 1, -1)
+    benefit: getHtml(lines, benefitIndex + 1, -1),
   };
 };
 
@@ -196,7 +196,7 @@ const getFundingFromMd = (i, sectors) => {
       (cert) =>
         fundingCertificationsMap.find((v) => {
           return v.slug === cert;
-        })?.id
+        })?.id,
     ) ?? [];
 
   return {
@@ -211,7 +211,7 @@ const getFundingFromMd = (i, sectors) => {
     "last-updated": new Date(Date.now()).toISOString(),
     "funding-status": status,
     "funding-type": fundingType,
-    "industry-reference": industryReferenceArray.length > 0 ? industryReferenceArray : [allIndustryId]
+    "industry-reference": industryReferenceArray.length > 0 ? industryReferenceArray : [allIndustryId],
   };
 };
 
@@ -220,7 +220,7 @@ const getOverlappingFundingsFunc = (currentFundings) => {
     return new Set(
       getFilteredFundings().map((i) => {
         return i.id;
-      })
+      }),
     ).has(item.slug);
   });
 };
@@ -235,7 +235,7 @@ const getNewFundings = async () => {
   const currentIdArray = new Set(
     current.map((sec) => {
       return sec.slug;
-    })
+    }),
   );
   return getFilteredFundings()
     .filter((i) => {
@@ -268,7 +268,7 @@ const deleteFundings = async () => {
   await Promise.all(
     fundings.map(async (item) => {
       return await deleteFunding(item);
-    })
+    }),
   );
 };
 
@@ -282,7 +282,7 @@ const updateFundings = async () => {
       fundings.find((i) => {
         return i.id === item.slug;
       }),
-      sectors
+      sectors,
     );
     console.info(`Attempting to modify ${funding.slug}`);
     try {
@@ -296,7 +296,7 @@ const updateFundings = async () => {
   return Promise.all(
     overlappingFundings.map(async (item) => {
       return await modify(item);
-    })
+    }),
   );
 };
 const createNewFundings = async () => {
@@ -313,7 +313,7 @@ const createNewFundings = async () => {
   return await Promise.all(
     newFundings.map(async (item) => {
       return await create(item);
-    })
+    }),
   );
 };
 
@@ -374,5 +374,5 @@ export {
   getFundingTypeOptions,
   getAgencyOptions,
   getFundingOptions,
-  agencyMap
+  agencyMap,
 };

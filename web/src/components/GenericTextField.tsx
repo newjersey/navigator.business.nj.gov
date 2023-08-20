@@ -12,7 +12,7 @@ import {
   HTMLInputTypeAttribute,
   ReactElement,
   RefObject,
-  useMemo
+  useMemo,
 } from "react";
 
 export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFieldProps<T> {
@@ -49,7 +49,7 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
 export const GenericTextField = forwardRef(
   <T,>(
     props: GenericTextFieldProps<T>,
-    ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined
+    ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined,
   ): ReactElement => {
     const widthStyling =
       props.inputWidth === "reduced"
@@ -65,13 +65,13 @@ export const GenericTextField = forwardRef(
 
     const value = useMemo(
       () => (visualFilter ? visualFilter(props.value?.toString() ?? "") : props.value?.toString() ?? ""),
-      [props.value, visualFilter]
+      [props.value, visualFilter],
     );
 
     const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
       props.fieldName,
       props.formContext,
-      props.errorTypes
+      props.errorTypes,
     );
 
     if (props.numericProps) {
@@ -109,14 +109,14 @@ export const GenericTextField = forwardRef(
         return ![
           validMinimumValue(returnedValue),
           returnedValue.length <= (maxLength ?? Number.POSITIVE_INFINITY),
-          props.additionalValidationIsValid ? props.additionalValidationIsValid(returnedValue) : true
+          props.additionalValidationIsValid ? props.additionalValidationIsValid(returnedValue) : true,
         ].some((i) => {
           return !i;
         });
       };
       fieldOptions = {
         ...fieldOptions,
-        inputProps: { ...fieldOptions?.inputProps, inputMode: "numeric" }
+        inputProps: { ...fieldOptions?.inputProps, inputMode: "numeric" },
       };
     }
 
@@ -164,12 +164,12 @@ export const GenericTextField = forwardRef(
           sx={{ width: 1, ...fieldOptions?.sx }}
           inputProps={{
             ...fieldOptions?.inputProps,
-            "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName)
+            "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
           }}
           InputProps={props.inputProps}
           type={props.type}
         />
       </div>
     );
-  }
+  },
 );

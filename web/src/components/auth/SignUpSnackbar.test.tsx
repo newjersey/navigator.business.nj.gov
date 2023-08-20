@@ -20,7 +20,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn()
+    useMediaQuery: jest.fn(),
   };
 }
 
@@ -42,8 +42,8 @@ describe("SignUpSnackbar", () => {
     render(
       withAuthAlert(<SignUpSnackbar />, isAuthenticated, {
         registrationAlertIsVisible,
-        setRegistrationAlertIsVisible
-      })
+        setRegistrationAlertIsVisible,
+      }),
     );
   };
 
@@ -61,21 +61,21 @@ describe("SignUpSnackbar", () => {
   it("does not show registration alert when registrationAlertIsVisible is false", () => {
     setupHookWithAuth(IsAuthenticated.FALSE, false);
     expect(
-      screen.queryByText(markdownToText(Config.navigationDefaults.guestAlertTitle))
+      screen.queryByText(markdownToText(Config.navigationDefaults.guestAlertTitle)),
     ).not.toBeInTheDocument();
   });
 
   it("does not show registration alert when user is authenticated", () => {
     setupHookWithAuth(IsAuthenticated.TRUE, false);
     expect(
-      screen.queryByText(markdownToText(Config.navigationDefaults.guestAlertTitle))
+      screen.queryByText(markdownToText(Config.navigationDefaults.guestAlertTitle)),
     ).not.toBeInTheDocument();
   });
 
   it("does not show registration alert when user is unknown", () => {
     setupHookWithAuth(IsAuthenticated.UNKNOWN, false);
     expect(
-      screen.queryByText(markdownToText(Config.navigationDefaults.guestAlertTitle))
+      screen.queryByText(markdownToText(Config.navigationDefaults.guestAlertTitle)),
     ).not.toBeInTheDocument();
   });
 

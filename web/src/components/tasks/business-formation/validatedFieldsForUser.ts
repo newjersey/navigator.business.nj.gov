@@ -4,7 +4,7 @@ import {
   FieldsForErrorHandling,
   FormationFields,
   FormationFormData,
-  incorporationLegalStructures
+  incorporationLegalStructures,
 } from "@businessnjgovnavigator/shared/formationData";
 
 export const validatedFieldsForUser = (formationFormData: FormationFormData): FieldsForErrorHandling[] => {
@@ -18,13 +18,13 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fi
     "paymentType",
     "contactFirstName",
     "contactLastName",
-    "contactPhoneNumber"
+    "contactPhoneNumber",
   ];
 
   const foreignValidatedFields: FormationFields[] = [
     "addressCity",
     "foreignDateOfFormation",
-    "foreignStateOfFormation"
+    "foreignStateOfFormation",
   ];
 
   switch (formationFormData.businessLocationType) {
@@ -50,7 +50,7 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fi
       "agentOfficeAddressLine1",
       "agentOfficeAddressLine2",
       "agentOfficeAddressMunicipality",
-      "agentOfficeAddressZipCode"
+      "agentOfficeAddressZipCode",
     ];
   }
 
@@ -74,7 +74,7 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fi
       "isVeteranNonprofit",
       "hasNonprofitBoardMembers",
       "members",
-      "incorporators"
+      "incorporators",
     ];
 
     if (formationFormData.hasNonprofitBoardMembers) {
@@ -109,7 +109,7 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fi
       "dissolution",
       "canCreateLimitedPartner",
       "canGetDistribution",
-      "canMakeDistribution"
+      "canMakeDistribution",
     ];
 
     if (formationFormData.canCreateLimitedPartner) {

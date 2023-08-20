@@ -38,7 +38,7 @@ const fieldToApiFieldMapping: Record<string, string> = {
   dissolution: "Limited Partnership - Dissolution Plan",
   businessName: "Business Information - Business Name",
   willPracticeLaw: "Business Information - Will Practice Law",
-  foreignGoodStandingFile: "Business Information - Foreign Certificate of Good Standing"
+  foreignGoodStandingFile: "Business Information - Foreign Certificate of Good Standing",
 };
 
 const apiFieldToFieldMapping = invert(fieldToApiFieldMapping);

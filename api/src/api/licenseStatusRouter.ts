@@ -7,7 +7,7 @@ import { getSignedInUserId } from "./userRouter";
 
 export const licenseStatusRouterFactory = (
   updateLicenseStatus: UpdateLicenseStatus,
-  userDataClient: UserDataClient
+  userDataClient: UserDataClient,
 ): Router => {
   const router = Router();
 

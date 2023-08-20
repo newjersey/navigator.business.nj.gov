@@ -8,7 +8,7 @@ type AddToUserTestingBatchResponse = {
 
 export const addToUserTestingBatch = async (
   addToUserTesting: AddToUserTesting,
-  userDataClient: UserDataClient
+  userDataClient: UserDataClient,
 ): Promise<AddToUserTestingBatchResponse> => {
   const results = await userDataClient.getNeedToAddToUserTestingUsers();
   let success = 0;
@@ -27,7 +27,7 @@ export const addToUserTestingBatch = async (
         })
         .catch(() => {
           failed += 1;
-        })
+        }),
     );
   }
 

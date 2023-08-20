@@ -11,7 +11,7 @@ const airtableBaseId = process.env.AIRTABLE_BASE_ID || "";
 const table = "Funding Program";
 Airtable.configure({
   endpointUrl: "https://api.airtable.com",
-  apiKey: airtableApiKey
+  apiKey: airtableApiKey,
 });
 
 const base = Airtable.base(airtableBaseId);
@@ -67,7 +67,7 @@ const airtableToOpportunity = async (airtableOpp) => {
     mwvb: convertMWVB(airtableOpp["Filter: MWVB"] ?? ""),
     preferenceForOpportunityZone:
       airtableOpp["Is preference given to businesses in an opportunity zone?"] ?? "",
-    county: airtableOpp["Filter: County"] ?? []
+    county: airtableOpp["Filter: County"] ?? [],
   };
 };
 
@@ -194,7 +194,7 @@ const getDescriptionAndCTA = (airtableOpp) => {
   const descriptionAndCTA = {
     callToActionLink: airtableOpp["Call to Action URL"],
     callToActionText: "Learn more",
-    description: airtableOpp["Description (Public)"]
+    description: airtableOpp["Description (Public)"],
   };
   if (!descriptionAndCTA.callToActionLink.startsWith("http")) {
     descriptionAndCTA.callToActionLink = "";
@@ -269,7 +269,7 @@ const airtableSelectAll = () => {
           for (const record of records) {
             all.push({
               id: record._rawJson.id,
-              ...record._rawJson.fields
+              ...record._rawJson.fields,
             });
           }
           fetchNextPage();
@@ -281,7 +281,7 @@ const airtableSelectAll = () => {
           } else {
             resolve(all);
           }
-        }
+        },
       );
   });
 };

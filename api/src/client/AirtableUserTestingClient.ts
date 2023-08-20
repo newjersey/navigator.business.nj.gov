@@ -14,11 +14,11 @@ type AirtableConfig = {
 
 export const AirtableUserTestingClient = (
   config: AirtableConfig,
-  logWriter: LogWriterType
+  logWriter: LogWriterType,
 ): UserTestingClient => {
   Airtable.configure({
     endpointUrl: config.baseUrl,
-    apiKey: config.apiKey
+    apiKey: config.apiKey,
   });
 
   const logId = logWriter.GetId();
@@ -34,22 +34,22 @@ export const AirtableUserTestingClient = (
         Industry: profileData.industryId,
         Sector: profileData.sectorId,
         "Registration Date": getCurrentDateFormatted("YYYY-MM-DD"),
-        Source: "Opted In Navigator"
+        Source: "Opted In Navigator",
       };
       logWriter.LogInfo(
         `UserResearch - Airtable - Id:${logId} - Request Sent to base ${config.baseId} table ${
           config.usersTableName
-        }. data: ${JSON.stringify(fields)}`
+        }. data: ${JSON.stringify(fields)}`,
       );
       base(config.usersTableName).create([{ fields }], (err: unknown, res: unknown) => {
         if (err) {
           logWriter.LogInfo(
-            `UserResearchClient - Airtable - Id:${logId} - Error Received: ${JSON.stringify(err)}`
+            `UserResearchClient - Airtable - Id:${logId} - Error Received: ${JSON.stringify(err)}`,
           );
           return resolve({ success: false, status: "RESPONSE_ERROR" });
         }
         logWriter.LogInfo(
-          `UserResearchClient - Airtable - Id:${logId} - Response Received: ${JSON.stringify(res)}`
+          `UserResearchClient - Airtable - Id:${logId} - Response Received: ${JSON.stringify(res)}`,
         );
         return resolve({ success: true, status: "SUCCESS" });
       });

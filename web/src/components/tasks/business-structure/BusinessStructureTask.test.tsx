@@ -9,7 +9,7 @@ import {
   currentBusiness,
   setupStatefulUserDataContext,
   triggerQueueUpdate,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import {
@@ -17,7 +17,7 @@ import {
   generateFormationData,
   generateProfileData,
   generateUserDataForBusiness,
-  randomLegalStructure
+  randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -46,7 +46,7 @@ describe("<BusinessStructureTask />", () => {
         <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
           <BusinessStructureTask task={task} />
         </WithStatefulUserData>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
   };
 
@@ -64,7 +64,7 @@ describe("<BusinessStructureTask />", () => {
   it("shows completed tooltip text on task progress checkbox when task is completed", async () => {
     const business = generateBusiness({
       taskProgress: { [taskId]: "COMPLETED" },
-      formationData: generateFormationData({ completedFilingPayment: true })
+      formationData: generateFormationData({ completedFilingPayment: true }),
     });
     renderTask(business);
     expect(screen.queryByText(Config.businessStructureTask.completedTooltip)).not.toBeInTheDocument();
@@ -91,22 +91,22 @@ describe("<BusinessStructureTask />", () => {
   it("shows successful business structure alert when business has a legal structure", () => {
     const legalStructure = randomLegalStructure();
     const business = generateBusiness({
-      profileData: generateProfileData({ legalStructureId: legalStructure.id })
+      profileData: generateProfileData({ legalStructureId: legalStructure.id }),
     });
     renderTask(business);
     const successMessage = templateEval(Config.businessStructureTask.successMessage, {
-      legalStructure: legalStructure.name
+      legalStructure: legalStructure.name,
     });
     useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
     expect(screen.getByTestId("success-alert")).toContainHTML(
-      renderToStaticMarkup(Content({ children: successMessage }))
+      renderToStaticMarkup(Content({ children: successMessage })),
     );
   });
 
   it("shows radio question when edit button is clicked in alter", () => {
     const legalStructure = randomLegalStructure();
     const business = generateBusiness({
-      profileData: generateProfileData({ legalStructureId: legalStructure.id })
+      profileData: generateProfileData({ legalStructureId: legalStructure.id }),
     });
     renderTask(business);
     fireEvent.click(screen.getByText(Config.taskDefaults.editText));
@@ -118,7 +118,7 @@ describe("<BusinessStructureTask />", () => {
     const legalStructure = randomLegalStructure();
     const business = generateBusiness({
       profileData: generateProfileData({ legalStructureId: legalStructure.id }),
-      formationData: generateFormationData({ completedFilingPayment: true })
+      formationData: generateFormationData({ completedFilingPayment: true }),
     });
     renderTask(business);
     expect(screen.queryByText(Config.taskDefaults.editText)).not.toBeInTheDocument();
@@ -149,7 +149,7 @@ describe("<BusinessStructureTask />", () => {
   it("allows saving without changes", async () => {
     const legalStructure = randomLegalStructure();
     const business = generateBusiness({
-      profileData: generateProfileData({ legalStructureId: legalStructure.id })
+      profileData: generateProfileData({ legalStructureId: legalStructure.id }),
     });
     renderTask(business);
 
@@ -166,7 +166,7 @@ describe("<BusinessStructureTask />", () => {
     const legalStructure = randomLegalStructure();
     const business = generateBusiness({
       profileData: generateProfileData({ legalStructureId: legalStructure.id }),
-      taskProgress: { [taskId]: "COMPLETED" }
+      taskProgress: { [taskId]: "COMPLETED" },
     });
     renderTask(business);
     fireEvent.click(screen.getByText(Config.taskDefaults.editText));
@@ -184,7 +184,7 @@ describe("<BusinessStructureTask />", () => {
   it("updates task progress to completed when saving", async () => {
     const business = generateBusiness({
       profileData: generateProfileData({ legalStructureId: undefined }),
-      taskProgress: { [taskId]: "IN_PROGRESS" }
+      taskProgress: { [taskId]: "IN_PROGRESS" },
     });
     renderTask(business);
     fireEvent.click(screen.getByLabelText("limited-liability-company"));
@@ -196,7 +196,7 @@ describe("<BusinessStructureTask />", () => {
 
   it("updates operating phase from GUEST_MODE to GUEST_MODE_WITH_BUSINESS_STRUCTURE when business structure is saved", async () => {
     const business = generateBusiness({
-      profileData: generateProfileData({ legalStructureId: undefined, operatingPhase: "GUEST_MODE" })
+      profileData: generateProfileData({ legalStructureId: undefined, operatingPhase: "GUEST_MODE" }),
     });
     renderTask(business);
     fireEvent.click(screen.getByLabelText("limited-liability-company"));
@@ -210,8 +210,8 @@ describe("<BusinessStructureTask />", () => {
     const business = generateBusiness({
       profileData: generateProfileData({
         legalStructureId: undefined,
-        operatingPhase: "NEEDS_BUSINESS_STRUCTURE"
-      })
+        operatingPhase: "NEEDS_BUSINESS_STRUCTURE",
+      }),
     });
     renderTask(business);
     fireEvent.click(screen.getByLabelText("limited-liability-company"));
@@ -225,7 +225,7 @@ describe("<BusinessStructureTask />", () => {
   it("updates task progress to in-progress when business structure radio is selected", async () => {
     const business = generateBusiness({
       profileData: generateProfileData({ legalStructureId: undefined }),
-      taskProgress: { [taskId]: "NOT_STARTED" }
+      taskProgress: { [taskId]: "NOT_STARTED" },
     });
     renderTask(business);
     fireEvent.click(screen.getByLabelText("limited-liability-company"));
@@ -241,7 +241,7 @@ describe("<BusinessStructureTask />", () => {
   it("renders error message and alert when save button is clicked without a radio being selected and removed when selected", async () => {
     const business = generateBusiness({
       profileData: generateProfileData({ legalStructureId: undefined }),
-      taskProgress: { [taskId]: "NOT_STARTED" }
+      taskProgress: { [taskId]: "NOT_STARTED" },
     });
     renderTask(business);
 
@@ -265,7 +265,7 @@ describe("<BusinessStructureTask />", () => {
 
     const business = generateBusiness({
       profileData: generateProfileData({ legalStructureId: legalStructure.id }),
-      taskProgress: { [taskId]: "COMPLETED" }
+      taskProgress: { [taskId]: "COMPLETED" },
     });
     renderTask(business);
     fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
@@ -284,9 +284,9 @@ describe("<BusinessStructureTask />", () => {
     const business = generateBusiness({
       profileData: generateProfileData({
         legalStructureId: legalStructure.id,
-        operatingPhase: "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
+        operatingPhase: "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
       }),
-      taskProgress: { [taskId]: "COMPLETED" }
+      taskProgress: { [taskId]: "COMPLETED" },
     });
     renderTask(business);
     fireEvent.click(screen.getByText(Config.taskDefaults.removeText));

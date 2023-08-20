@@ -11,7 +11,7 @@ import {
   currentBusiness,
   setupStatefulUserDataContext,
   userDataUpdatedNTimes,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
@@ -22,14 +22,14 @@ import {
   generateUserDataForBusiness,
   getCurrentDateISOString,
   OperatingPhases,
-  UserData
+  UserData,
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
   generateGetFilingResponse,
   generateProfileData,
   generateTaxFilingData,
-  randomLegalStructure
+  randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -38,7 +38,7 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postTaxFilingsOnboarding: jest.fn(),
-  postTaxFilingsLookup: jest.fn()
+  postTaxFilingsLookup: jest.fn(),
 }));
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;
@@ -52,7 +52,7 @@ const renderFilingsCalendarTaxAccess = (initialUserData?: UserData): void => {
       <WithStatefulUserData initialUserData={initialUserData}>
         <FilingsCalendarTaxAccess />
       </WithStatefulUserData>
-    </ThemeProvider>
+    </ThemeProvider>,
   );
 };
 
@@ -63,8 +63,8 @@ const renderUnauthenticatedFilingsCalendarTaxAccess = (business: Business): void
         <FilingsCalendarTaxAccess />
       </WithStatefulUserData>,
       IsAuthenticated.FALSE,
-      { registrationModalIsVisible: false, setRegistrationModalIsVisible }
-    )
+      { registrationModalIsVisible: false, setRegistrationModalIsVisible },
+    ),
   );
 };
 
@@ -75,9 +75,9 @@ const modifyUserData = (userData: UserData, overrides: Partial<Business>): UserD
       ...userData.businesses,
       [userData.currentBusinessId]: {
         ...userData.businesses[userData.currentBusinessId],
-        ...overrides
-      }
-    }
+        ...overrides,
+      },
+    },
   };
 };
 
@@ -112,16 +112,16 @@ describe("<FilingsCalendarTaxAccess />", () => {
       completedFilingPayment: false,
       businessNameAvailability: undefined,
       dbaBusinessNameAvailability: undefined,
-      lastVisitedPageIndex: 0
+      lastVisitedPageIndex: 0,
     };
 
     if (params.publicFiling) {
       formationData = generateFormationData(
         {
           completedFilingPayment: !!params.formedInNavigator,
-          getFilingResponse: generateGetFilingResponse({ success: params.formedInNavigator })
+          getFilingResponse: generateGetFilingResponse({ success: params.formedInNavigator }),
         },
-        legalStructureId as FormationLegalType
+        legalStructureId as FormationLegalType,
       );
     }
 
@@ -132,7 +132,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => {
               return obj.displayTaxAccessButton;
-            })
+            }),
           ).id,
           taxId: params.taxId ? `*${params.taxId.slice(1)}` : "",
           encryptedTaxId: params.taxId ? `encrypted-${params.taxId}` : "",
@@ -140,11 +140,11 @@ describe("<FilingsCalendarTaxAccess />", () => {
           responsibleOwnerName: params.responsibleOwnerName || "",
           municipality: params.municipalityName
             ? { name: params.municipalityName, county: "", id: "", displayName: "" }
-            : undefined
+            : undefined,
         }),
         formationData: formationData,
-        taxFilingData: generateTaxFilingData({ state: undefined })
-      })
+        taxFilingData: generateTaxFilingData({ state: undefined }),
+      }),
     );
   };
 
@@ -152,8 +152,8 @@ describe("<FilingsCalendarTaxAccess />", () => {
     it("opens the sign up modal when button is clicked in up and running guest mode", async () => {
       const business = generateBusiness({
         profileData: generateProfileData({
-          operatingPhase: "GUEST_MODE_OWNING"
-        })
+          operatingPhase: "GUEST_MODE_OWNING",
+        }),
       });
 
       renderUnauthenticatedFilingsCalendarTaxAccess(business);
@@ -167,14 +167,14 @@ describe("<FilingsCalendarTaxAccess />", () => {
     it("updates userData with return link when the button is clicked in up and running guest mode", async () => {
       const business = generateBusiness({
         profileData: generateProfileData({
-          operatingPhase: "GUEST_MODE_OWNING"
-        })
+          operatingPhase: "GUEST_MODE_OWNING",
+        }),
       });
       renderUnauthenticatedFilingsCalendarTaxAccess(business);
       openModal();
       await waitFor(() => {
         return expect(currentBusiness().preferences.returnToLink).toEqual(
-          `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true`
+          `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true`,
         );
       });
     });
@@ -183,9 +183,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "GUEST_MODE_OWNING"
-          })
-        })
+            operatingPhase: "GUEST_MODE_OWNING",
+          }),
+        }),
       );
       useMockRouter({ query: { openTaxFilingsModal: "true" }, isReady: true });
       renderFilingsCalendarTaxAccess(userData);
@@ -197,14 +197,14 @@ describe("<FilingsCalendarTaxAccess />", () => {
   const userDataWithPrefilledFields = generateTaxFilingUserData({
     publicFiling: true,
     taxId: "123456789123",
-    businessName: "MrFakesHotDogBonanza"
+    businessName: "MrFakesHotDogBonanza",
   });
 
   const pendingStateUserData: UserData = modifyUserData(userDataWithPrefilledFields, {
     taxFilingData: generateTaxFilingData({
       registeredISO: getCurrentDateISOString(),
-      state: "PENDING"
-    })
+      state: "PENDING",
+    }),
   });
 
   it("opens tax access modal when on button click", () => {
@@ -218,9 +218,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
       modifyUserData(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
-          registeredISO: getCurrentDateISOString()
-        })
-      })
+          registeredISO: getCurrentDateISOString(),
+        }),
+      }),
     );
 
     renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
@@ -238,9 +238,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
       modifyUserData(userDataWithPrefilledFields, {
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
-          registeredISO: getCurrentDateISOString()
-        })
-      })
+          registeredISO: getCurrentDateISOString(),
+        }),
+      }),
     );
 
     renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
@@ -263,9 +263,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
       renderFilingsCalendarTaxAccess(
         modifyUserData(userDataWithPrefilledFields, {
           taxFilingData: generateTaxFilingData({
-            registeredISO: undefined
-          })
-        })
+            registeredISO: undefined,
+          }),
+        }),
       );
       expect(mockApi.postTaxFilingsLookup).not.toHaveBeenCalled();
     });
@@ -275,9 +275,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
       renderFilingsCalendarTaxAccess(
         modifyUserData(userDataWithPrefilledFields, {
           taxFilingData: generateTaxFilingData({
-            registeredISO: getCurrentDateISOString()
-          })
-        })
+            registeredISO: getCurrentDateISOString(),
+          }),
+        }),
       );
 
       expect(mockApi.postTaxFilingsLookup).toHaveBeenCalled();
@@ -292,9 +292,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
           taxFilingData: generateTaxFilingData({
             state: "FAILED",
             registeredISO: undefined,
-            errorField: undefined
-          })
-        })
+            errorField: undefined,
+          }),
+        }),
       );
       expect(mockApi.postTaxFilingsLookup).not.toHaveBeenCalled();
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
@@ -306,9 +306,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
         modifyUserData(userDataWithPrefilledFields, {
           taxFilingData: generateTaxFilingData({
             state: undefined,
-            registeredISO: undefined
-          })
-        })
+            registeredISO: undefined,
+          }),
+        }),
       );
       expect(mockApi.postTaxFilingsLookup).not.toHaveBeenCalled();
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
@@ -319,8 +319,8 @@ describe("<FilingsCalendarTaxAccess />", () => {
       mockApiResponse(pendingStateUserData, {
         taxFilingData: generateTaxFilingData({
           registeredISO: getCurrentDateISOString(),
-          state: "SUCCESS"
-        })
+          state: "SUCCESS",
+        }),
       });
 
       renderFilingsCalendarTaxAccess(pendingStateUserData);
@@ -340,8 +340,8 @@ describe("<FilingsCalendarTaxAccess />", () => {
       mockApiResponse(pendingStateUserData, {
         taxFilingData: generateTaxFilingData({
           registeredISO: getCurrentDateISOString(),
-          state: "API_ERROR"
-        })
+          state: "API_ERROR",
+        }),
       });
 
       renderFilingsCalendarTaxAccess(pendingStateUserData);
@@ -361,8 +361,8 @@ describe("<FilingsCalendarTaxAccess />", () => {
       mockApiResponse(pendingStateUserData, {
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
-          registeredISO: getCurrentDateISOString()
-        })
+          registeredISO: getCurrentDateISOString(),
+        }),
       });
       renderFilingsCalendarTaxAccess(pendingStateUserData);
 

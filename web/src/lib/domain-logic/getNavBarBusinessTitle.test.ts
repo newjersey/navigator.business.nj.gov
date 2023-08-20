@@ -7,7 +7,7 @@ import {
   generateBusiness,
   LookupIndustryById,
   LookupLegalStructureById,
-  ProfileData
+  ProfileData,
 } from "@businessnjgovnavigator/shared";
 import { generateProfileData } from "@businessnjgovnavigator/shared/test";
 
@@ -18,14 +18,14 @@ const name = "some cool name";
 const publicFilingProfile = (): Partial<ProfileData> => {
   return {
     tradeName: "",
-    legalStructureId: "limited-liability-company"
+    legalStructureId: "limited-liability-company",
   };
 };
 
 const tradeNameProfile = (): Partial<ProfileData> => {
   return {
     businessName: "",
-    legalStructureId: "sole-proprietorship"
+    legalStructureId: "sole-proprietorship",
   };
 };
 
@@ -45,8 +45,8 @@ describe("getNavBarBusinessTitle", () => {
             businessPersona: businessPersona as BusinessPersona,
             businessName: name,
             tradeName: "",
-            legalStructureId: undefined
-          })
+            legalStructureId: undefined,
+          }),
         });
         const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
         expect(navBarBusinessTitle).toEqual(name);
@@ -58,8 +58,8 @@ describe("getNavBarBusinessTitle", () => {
             businessPersona: businessPersona as BusinessPersona,
             businessName: "",
             tradeName: name,
-            legalStructureId: undefined
-          })
+            legalStructureId: undefined,
+          }),
         });
         const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
         expect(navBarBusinessTitle).toEqual(name);
@@ -73,12 +73,12 @@ describe("getNavBarBusinessTitle", () => {
               businessPersona: businessPersona as BusinessPersona,
               businessName: name,
               tradeName: "some trade name",
-              legalStructureId: undefined
-            })
+              legalStructureId: undefined,
+            }),
           });
           const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(name);
-        }
+        },
       );
     });
 
@@ -89,8 +89,8 @@ describe("getNavBarBusinessTitle", () => {
             profileData: generateProfileData({
               ...publicFilingProfile(),
               businessPersona: "STARTING",
-              businessName: name
-            })
+              businessName: name,
+            }),
           });
           const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(name);
@@ -103,8 +103,8 @@ describe("getNavBarBusinessTitle", () => {
             profileData: generateProfileData({
               ...publicFilingProfile(),
               businessPersona: "OWNING",
-              businessName: name
-            })
+              businessName: name,
+            }),
           });
           const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(name);
@@ -119,8 +119,8 @@ describe("getNavBarBusinessTitle", () => {
             profileData: generateProfileData({
               ...tradeNameProfile(),
               businessPersona: "STARTING",
-              tradeName: name
-            })
+              tradeName: name,
+            }),
           });
           const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(name);
@@ -133,8 +133,8 @@ describe("getNavBarBusinessTitle", () => {
             profileData: generateProfileData({
               ...tradeNameProfile(),
               businessPersona: "OWNING",
-              tradeName: name
-            })
+              tradeName: name,
+            }),
           });
           const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(name);
@@ -152,14 +152,14 @@ describe("getNavBarBusinessTitle", () => {
               ...publicFilingProfile(),
               industryId: "cannabis",
               businessPersona: "STARTING",
-              businessName: undefined
-            })
+              businessName: undefined,
+            }),
           });
           const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(
             `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
               LookupIndustryById(business?.profileData?.industryId).name
-            } ${LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation}`
+            } ${LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation}`,
           );
         });
 
@@ -169,14 +169,14 @@ describe("getNavBarBusinessTitle", () => {
               ...publicFilingProfile(),
               industryId: "generic",
               businessPersona: "STARTING",
-              businessName: undefined
-            })
+              businessName: undefined,
+            }),
           });
           const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(
             `${Config.navigationDefaults.navBarUnnamedOwnedBusinessText} ${
               LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation
-            }`
+            }`,
           );
         });
       });
@@ -187,14 +187,14 @@ describe("getNavBarBusinessTitle", () => {
             profileData: generateProfileData({
               ...publicFilingProfile(),
               businessPersona: "OWNING",
-              businessName: undefined
-            })
+              businessName: undefined,
+            }),
           });
           const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(
             `${Config.navigationDefaults.navBarUnnamedOwnedBusinessText} ${
               LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation
-            }`
+            }`,
           );
         });
       });
@@ -207,14 +207,14 @@ describe("getNavBarBusinessTitle", () => {
             profileData: generateProfileData({
               ...tradeNameProfile(),
               businessPersona: "STARTING",
-              tradeName: undefined
-            })
+              tradeName: undefined,
+            }),
           });
           const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(
             `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
               LookupIndustryById(business?.profileData?.industryId).name
-            } ${LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation}`
+            } ${LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation}`,
           );
         });
       });
@@ -225,14 +225,14 @@ describe("getNavBarBusinessTitle", () => {
             profileData: generateProfileData({
               ...tradeNameProfile(),
               businessPersona: "OWNING",
-              tradeName: undefined
-            })
+              tradeName: undefined,
+            }),
           });
           const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(
             `${Config.navigationDefaults.navBarUnnamedOwnedBusinessText} ${
               LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation
-            }`
+            }`,
           );
         });
       });
@@ -249,14 +249,14 @@ describe("getNavBarBusinessTitle", () => {
             industryId: "home-contractor",
             legalStructureId: undefined,
             tradeName: undefined,
-            businessName: undefined
-          })
+            businessName: undefined,
+          }),
         });
         const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
         expect(navBarBusinessTitle).toEqual(
           `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
             LookupIndustryById(business?.profileData?.industryId).name
-          }`
+          }`,
         );
       });
 
@@ -268,8 +268,8 @@ describe("getNavBarBusinessTitle", () => {
             industryId: "generic",
             legalStructureId: undefined,
             tradeName: undefined,
-            businessName: undefined
-          })
+            businessName: undefined,
+          }),
         });
         const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
         expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedOwnedBusinessText);
@@ -284,8 +284,8 @@ describe("getNavBarBusinessTitle", () => {
             businessPersona: "OWNING",
             legalStructureId: undefined,
             tradeName: undefined,
-            businessName: undefined
-          })
+            businessName: undefined,
+          }),
         });
         const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
         expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedOwnedBusinessText);
@@ -301,8 +301,8 @@ describe("getNavBarBusinessTitle", () => {
           legalStructureId: undefined,
           tradeName: undefined,
           businessName: undefined,
-          industryId: undefined
-        })
+          industryId: undefined,
+        }),
       });
       const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
       expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedOwnedBusinessText);
@@ -318,14 +318,14 @@ describe("getNavBarBusinessTitle", () => {
               businessName: undefined,
               tradeName: undefined,
               businessPersona: "FOREIGN",
-              foreignBusinessType: foreignBusinessType as ForeignBusinessType
-            })
+              foreignBusinessType: foreignBusinessType as ForeignBusinessType,
+            }),
           });
           const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(
-            Config.navigationDefaults.navBarUnnamedForeignRemoteSellerWorkerText
+            Config.navigationDefaults.navBarUnnamedForeignRemoteSellerWorkerText,
           );
-        }
+        },
       );
     });
   });

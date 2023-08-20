@@ -8,7 +8,7 @@ import {
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { formationTaskId, generateProfileData } from "@businessnjgovnavigator/shared/";
 import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/test";
@@ -30,7 +30,7 @@ describe("<SidebarCardFormationNudge />", () => {
     render(
       <WithStatefulUserData initialUserData={generateUserData(business)}>
         <SidebarCardFormationNudge card={card} />
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
   };
 
@@ -46,9 +46,9 @@ describe("<SidebarCardFormationNudge />", () => {
     it("opens the modal when the user clicks the formation nudge", () => {
       renderWithBusiness({
         profileData: generateProfileData({
-          businessPersona: "STARTING"
+          businessPersona: "STARTING",
         }),
-        preferences: generatePreferences({ visibleSidebarCards: ["formation-nudge"] })
+        preferences: generatePreferences({ visibleSidebarCards: ["formation-nudge"] }),
       });
 
       fireEvent.click(screen.getByTestId("cta-formation-nudge"));
@@ -76,7 +76,7 @@ describe("<SidebarCardFormationNudge />", () => {
       expect(screen.queryByTestId(Config.formationDateModal.header)).not.toBeInTheDocument();
       await waitFor(() => {
         return expect(mockPush).toHaveBeenCalledWith({ query: { fromForming: "true" } }, undefined, {
-          shallow: true
+          shallow: true,
         });
       });
     });

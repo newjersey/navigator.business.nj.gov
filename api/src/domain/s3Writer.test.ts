@@ -8,7 +8,7 @@ const mockAxios = axios as jest.Mocked<typeof axios>;
 
 const mockS3Upload = jest.fn(async () => {
   return {
-    $metadata: { httpStatusCode: 200 }
+    $metadata: { httpStatusCode: 200 },
   };
 });
 
@@ -18,9 +18,9 @@ jest.mock("@aws-sdk/client-s3", () => {
     ...originalModule,
     S3Client: jest.fn().mockImplementation(() => {
       return {
-        send: mockS3Upload
+        send: mockS3Upload,
       };
-    })
+    }),
   };
 });
 
@@ -38,20 +38,20 @@ describe("s3Writer", () => {
       Bucket: "testBucket",
       ContentEncoding: "binary",
       ContentType: "application/pdf",
-      ContentMD5: hashSum.digest("base64")
+      ContentMD5: hashSum.digest("base64"),
     };
 
     const response = await saveFileFromUrl(
       "https://whatever.com/thing.pdf",
       "us-east-1:1234/zzz.pdf",
-      "testBucket"
+      "testBucket",
     );
     expect(mockS3Upload).toHaveBeenCalledWith(
-      expect.objectContaining({ input: expect.objectContaining(params) })
+      expect.objectContaining({ input: expect.objectContaining(params) }),
     );
     expect(response).toEqual("https://testBucket.s3.us-east-1.amazonaws.com/us-east-1%3A1234/zzz.pdf");
     expect(mockAxios.get).toHaveBeenCalledWith("https://whatever.com/thing.pdf", {
-      responseType: "arraybuffer"
+      responseType: "arraybuffer",
     });
   });
 });

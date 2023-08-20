@@ -44,14 +44,14 @@ describe("<LandingPageTiles />", () => {
           config: {
             ...Config,
             landingPageExperienceWelcome: {
-              landingPageTaxesTile: "lol"
-            } as unknown as typeof Config.landingPageExperienceWelcome
+              landingPageTaxesTile: "lol",
+            } as unknown as typeof Config.landingPageExperienceWelcome,
           },
-          setOverrides: (): undefined => void {}
+          setOverrides: (): undefined => void {},
         }}
       >
         <LandingPageTiles isWelcomePage={true} />
-      </ConfigContext.Provider>
+      </ConfigContext.Provider>,
     );
     expect(screen.getByText("lol")).toBeInTheDocument();
   });

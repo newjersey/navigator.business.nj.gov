@@ -28,7 +28,7 @@ export const IsVeteranNonprofit = (): ReactElement => {
             setFormationFormData((previousState) => {
               return {
                 ...previousState,
-                isVeteranNonprofit: JSON.parse(e.target.value)
+                isVeteranNonprofit: JSON.parse(e.target.value),
               };
             })
           }

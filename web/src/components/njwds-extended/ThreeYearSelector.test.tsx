@@ -9,7 +9,7 @@ function mockShared(): typeof shared {
     ...jest.requireActual("@businessnjgovnavigator/shared"),
     getCurrentDate: (): Dayjs => {
       return parseDateWithFormat(`2024-02-15`, "YYYY-MM-DD");
-    }
+    },
   };
 }
 

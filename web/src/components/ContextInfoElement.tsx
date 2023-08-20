@@ -7,7 +7,7 @@ import React, { forwardRef, ReactElement } from "react";
 export const ContextInfoElement = forwardRef(
   (
     props: { isVisible: boolean; header: string; markdown: string; close?: () => void },
-    ref?: React.LegacyRef<any>
+    ref?: React.LegacyRef<any>,
   ): ReactElement => {
     return (
       <aside
@@ -27,5 +27,5 @@ export const ContextInfoElement = forwardRef(
         <Content>{props.markdown}</Content>
       </aside>
     );
-  }
+  },
 );

@@ -18,5 +18,5 @@ export const TaskProgressTagLookup: Record<TaskProgress, ReactElement> = {
     <Tag backgroundColor="primary-lightest" dataTestid="COMPLETED" isFixedWidth>
       {Config.taskProgress.COMPLETED}
     </Tag>
-  )
+  ),
 };

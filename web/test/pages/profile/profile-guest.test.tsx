@@ -11,7 +11,7 @@ import {
   clickSave,
   fillText,
   getBusinessProfileInputFieldName,
-  renderPage
+  renderPage,
 } from "@/test/pages/profile/profile-helpers";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
@@ -39,8 +39,8 @@ describe("profile - guest mode", () => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          legalStructureId: "limited-liability-company"
-        })
+          legalStructureId: "limited-liability-company",
+        }),
       });
     });
 
@@ -50,7 +50,7 @@ describe("profile - guest mode", () => {
   describe("when owning a business", () => {
     beforeEach(() => {
       initialBusiness = generateBusiness({
-        profileData: generateProfileData({ businessPersona: "OWNING" })
+        profileData: generateProfileData({ businessPersona: "OWNING" }),
       });
     });
 
@@ -60,7 +60,7 @@ describe("profile - guest mode", () => {
       renderPage({
         business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
-        setRegistrationModalIsVisible
+        setRegistrationModalIsVisible,
       });
       chooseTab("numbers");
       fireEvent.change(screen.getByLabelText("Tax pin"), { target: { value: "123456789" } });
@@ -73,7 +73,7 @@ describe("profile - guest mode", () => {
       renderPage({
         business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
-        setRegistrationModalIsVisible
+        setRegistrationModalIsVisible,
       });
       const inputFieldName = getBusinessProfileInputFieldName(initialBusiness);
       fillText(inputFieldName, "Cool Computers");
@@ -87,7 +87,7 @@ describe("profile - guest mode", () => {
       renderPage({
         business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
-        setRegistrationModalIsVisible
+        setRegistrationModalIsVisible,
       });
       chooseTab("numbers");
       fireEvent.change(screen.getByLabelText("Employer id"), { target: { value: "123456789" } });
@@ -98,7 +98,7 @@ describe("profile - guest mode", () => {
       renderPage({
         business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
-        setRegistrationModalIsVisible
+        setRegistrationModalIsVisible,
       });
       chooseTab("numbers");
       fireEvent.change(screen.getByLabelText("Entity id"), { target: { value: "123456789" } });
@@ -109,7 +109,7 @@ describe("profile - guest mode", () => {
       renderPage({
         business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
-        setRegistrationModalIsVisible
+        setRegistrationModalIsVisible,
       });
       chooseTab("numbers");
       fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789" } });
@@ -120,7 +120,7 @@ describe("profile - guest mode", () => {
       renderPage({
         business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
-        setRegistrationModalIsVisible
+        setRegistrationModalIsVisible,
       });
       chooseTab("notes");
       fireEvent.change(screen.getByLabelText("Notes"), { target: { value: "some note" } });

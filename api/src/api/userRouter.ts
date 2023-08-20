@@ -15,7 +15,7 @@ import {
   UpdateLicenseStatus,
   UpdateOperatingPhase,
   UpdateSidebarCards,
-  UserDataClient
+  UserDataClient,
 } from "../domain/types";
 import { encryptTaxIdFactory } from "../domain/user/encryptTaxIdFactory";
 
@@ -50,7 +50,7 @@ const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean => {
 const clearTaskItemChecklists = (userData: UserData): UserData => {
   return modifyCurrentBusiness(userData, (business) => ({
     ...business,
-    taskItemChecklist: {}
+    taskItemChecklist: {},
   }));
 };
 
@@ -117,7 +117,7 @@ export const userRouterFactory = (
   updateRoadmapSidebarCards: UpdateSidebarCards,
   updateOperatingPhase: UpdateOperatingPhase,
   encryptionDecryptionClient: EncryptionDecryptionClient,
-  timeStampBusinessSearch: TimeStampBusinessSearch
+  timeStampBusinessSearch: TimeStampBusinessSearch,
 ): Router => {
   const router = Router();
   const encryptTaxId = encryptTaxIdFactory(encryptionDecryptionClient);
@@ -213,8 +213,8 @@ export const userRouterFactory = (
           ...business,
           profileData: {
             ...business.profileData,
-            legalStructureId: oldBusiness.profileData.legalStructureId
-          }
+            legalStructureId: oldBusiness.profileData.legalStructureId,
+          },
         }));
       }
 
@@ -227,8 +227,8 @@ export const userRouterFactory = (
           formationFormData: createEmptyFormationFormData(),
           businessNameAvailability: undefined,
           dbaBusinessNameAvailability: undefined,
-          lastVisitedPageIndex: 0
-        }
+          lastVisitedPageIndex: 0,
+        },
       }));
     }
 
@@ -246,7 +246,7 @@ export const userRouterFactory = (
       externalStatus: {},
       receiveNewsletter: true,
       userTesting: true,
-      abExperience: decideABExperience()
+      abExperience: decideABExperience(),
     });
 
     userDataClient
@@ -276,7 +276,7 @@ export const userRouterFactory = (
         status: response.status,
         similarNames: response.similarNames ?? [],
         lastUpdatedTimeStamp: response.lastUpdatedTimeStamp,
-        invalidWord: response.invalidWord
+        invalidWord: response.invalidWord,
       };
 
       const nameIsAvailable = response.status === "AVAILABLE";
@@ -286,7 +286,7 @@ export const userRouterFactory = (
         ...business,
         profileData: {
           ...business.profileData,
-          needsNexusDbaName
+          needsNexusDbaName,
         },
         formationData: {
           ...business.formationData,
@@ -295,8 +295,8 @@ export const userRouterFactory = (
             : nameAvailability,
           dbaBusinessNameAvailability: needsDba
             ? nameAvailability
-            : business.formationData.dbaBusinessNameAvailability
-        }
+            : business.formationData.dbaBusinessNameAvailability,
+        },
       }));
     } catch {
       return userData;
@@ -323,6 +323,6 @@ const setLastUpdatedISO = (userData: UserData): UserData => {
   const updatedUserData: UserData = { ...userData, lastUpdatedISO: getCurrentDateISOString() };
   return modifyCurrentBusiness(updatedUserData, (business) => ({
     ...business,
-    lastUpdatedISO: getCurrentDateISOString()
+    lastUpdatedISO: getCurrentDateISOString(),
   }));
 };

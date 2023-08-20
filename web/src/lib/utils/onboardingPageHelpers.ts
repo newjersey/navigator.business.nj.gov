@@ -9,7 +9,7 @@ import { getFlow, templateEval } from "./helpers";
 export const mapFlowQueryToPersona: Record<QUERY_PARAMS_VALUES["flow"], FlowType> = {
   starting: "STARTING",
   "out-of-state": "FOREIGN",
-  "up-and-running": "OWNING"
+  "up-and-running": "OWNING",
 };
 
 export const industryQueryParamIsValid = (industryId: string | undefined): boolean => {
@@ -23,7 +23,7 @@ export const flowQueryParamIsValid = (flow: string): boolean => {
 export const pageQueryParamisValid = (
   onboardingFlows: Record<FlowType, OnboardingFlow>,
   business: Business,
-  page: number
+  page: number,
 ): boolean => {
   const hasAnsweredBusinessPersona = business?.profileData.businessPersona !== undefined;
   const flow = getFlow(business.profileData);
@@ -34,7 +34,7 @@ export const pageQueryParamisValid = (
 
 export const evalHeaderStepsTemplate = (page: Page): string => {
   return templateEval(Config.onboardingDefaults.stepXTemplate, {
-    currentPage: page.current.toString()
+    currentPage: page.current.toString(),
   });
 };
 

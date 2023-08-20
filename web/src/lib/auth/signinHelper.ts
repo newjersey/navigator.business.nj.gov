@@ -11,7 +11,7 @@ import {
   setAnalyticsDimensions,
   setOnLoadDimensions,
   setRegistrationDimension,
-  setUserId
+  setUserId,
 } from "@/lib/utils/analytics-helpers";
 import { createEmptyUser, getCurrentBusiness, UserData } from "@businessnjgovnavigator/shared/";
 import { Dispatch } from "react";
@@ -22,7 +22,7 @@ export const onSignIn = async (dispatch: Dispatch<AuthAction>): Promise<void> =>
   const user = await session.getCurrentUser();
   dispatch({
     type: "LOGIN",
-    user: user
+    user: user,
   });
 
   const userData = await api.getUserData(user.id);
@@ -39,7 +39,7 @@ export const onSelfRegister = (
   router: SelfRegRouter,
   updateQueue: UpdateQueue | undefined,
   userData: UserData | undefined,
-  setRegistrationAlertStatus: AuthAlertContextType["setRegistrationAlertStatus"]
+  setRegistrationAlertStatus: AuthAlertContextType["setRegistrationAlertStatus"],
 ): void => {
   if (!userData || !updateQueue) {
     return;
@@ -59,10 +59,10 @@ export const onSelfRegister = (
           ...userData.businesses[userData.currentBusinessId],
           preferences: {
             ...userData.businesses[userData.currentBusinessId].preferences,
-            returnToLink: route
-          }
-        }
-      }
+            returnToLink: route,
+          },
+        },
+      },
     })
     .then(async (response) => {
       await updateQueue.queue(response.userData).update();
@@ -80,7 +80,7 @@ export const onSelfRegister = (
 export const onGuestSignIn = async (
   push: (url: string) => Promise<boolean>,
   pathname: string,
-  dispatch: Dispatch<AuthAction>
+  dispatch: Dispatch<AuthAction>,
 ): Promise<void> => {
   const userDataStorage = UserDataStorageFactory();
   const abStorage = ABStorageFactory();
@@ -92,7 +92,7 @@ export const onGuestSignIn = async (
   const user = userData?.user || createEmptyUser(abStorage.getExperience());
   dispatch({
     type: "LOGIN_GUEST",
-    user: user
+    user: user,
   });
   setABExperienceDimension(user.abExperience, true);
   setUserId(user.id, true);
@@ -133,7 +133,7 @@ export const onGuestSignIn = async (
 
 export const onSignOut = async (
   push: (url: string) => Promise<boolean>,
-  dispatch: Dispatch<AuthAction>
+  dispatch: Dispatch<AuthAction>,
 ): Promise<void> => {
   analytics.event.roadmap_logout_button.click.log_out();
   const user = await session.getCurrentUser();
@@ -144,7 +144,7 @@ export const onSignOut = async (
   await triggerSignOut();
   dispatch({
     type: "LOGOUT",
-    user: undefined
+    user: undefined,
   });
   push(ROUTES.landing);
 };

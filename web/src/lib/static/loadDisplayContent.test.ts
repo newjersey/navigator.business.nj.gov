@@ -3,7 +3,7 @@ import { loadRoadmapSideBarDisplayContent, loadTasksDisplayContent } from "./loa
 
 jest.mock("fs");
 jest.mock("process", () => ({
-  cwd: (): string => "/test"
+  cwd: (): string => "/test",
 }));
 
 describe("loadDisplayContent", () => {
@@ -39,7 +39,7 @@ describe("loadDisplayContent", () => {
         headerBackgroundColor: "accent-cooler-lightest",
         hasCloseButton: false,
         weight: 1,
-        contentMd: "**Welcome!**"
+        contentMd: "**Welcome!**",
       });
     });
   });
@@ -49,7 +49,7 @@ describe("loadDisplayContent", () => {
       const introParagraph = "### I am a header\n\nI am a description";
       mockedFs.readFileSync.mockReturnValue(introParagraph);
       expect(loadTasksDisplayContent().formationDbaContent.Authorize.contentMd).toEqual(
-        "### I am a header\n\nI am a description"
+        "### I am a header\n\nI am a description",
       );
     });
   });

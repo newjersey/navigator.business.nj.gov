@@ -42,7 +42,7 @@ import {
   SidebarCardContent,
   Step,
   Task,
-  WebflowLicense
+  WebflowLicense,
 } from "@/lib/types/types";
 import NonEssentialQuestions from "@businessnjgovnavigator/content/roadmaps/nonEssentialQuestions.json";
 import ForeignSteps from "@businessnjgovnavigator/content/roadmaps/steps-foreign.json";
@@ -121,15 +121,15 @@ const SearchContentPage = (props: Props): ReactElement => {
 
     const defaultStepsMatches = searchSteps(Steps.steps as Step[], lowercaseTerm, { filename: "Steps" });
     const foreignStepsMatches = searchSteps(ForeignSteps.steps as Step[], lowercaseTerm, {
-      filename: "Steps - Dakota"
+      filename: "Steps - Dakota",
     });
     setStepsMatches([...defaultStepsMatches, ...foreignStepsMatches]);
 
     setNonEssentialQuestionsMatches(
       searchNonEssentialQuestions(
         NonEssentialQuestions.nonEssentialQuestionsArray as NonEssentialQuestion[],
-        lowercaseTerm
-      )
+        lowercaseTerm,
+      ),
     );
 
     setWebflowLicenseMatches(searchWebflowLicenses(props.webflowLicenses, lowercaseTerm));
@@ -160,7 +160,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...webflowLicenseMatches,
         ...archivedContextualInfoMatches,
         ...contextualInfoMatches,
-        ...groupedConfigMatches
+        ...groupedConfigMatches,
       ].length === 0
     );
   };
@@ -168,35 +168,35 @@ const SearchContentPage = (props: Props): ReactElement => {
   const taskCollection = {
     "Tasks - All": taskMatches,
     "License Tasks (Navigator with Webflow mappings)": licenseTaskMatches,
-    "Webflow Licenses": webflowLicenseMatches
+    "Webflow Licenses": webflowLicenseMatches,
   };
 
   const certCollection = {
     "Cert Opps - Content": certMatches,
-    "Cert Opps - Archive": certArchiveMatches
+    "Cert Opps - Archive": certArchiveMatches,
   };
 
   const fundingCollection = {
-    "Fund Opps - Content": fundingMatches
+    "Fund Opps - Content": fundingMatches,
   };
 
   const roadmapsCollection = {
     "Roadmaps - Settings": stepsMatches,
-    "Roadmaps - Non Essential Question": nonEssentialQuestionsMatches
+    "Roadmaps - Non Essential Question": nonEssentialQuestionsMatches,
   };
 
   const calendarCollection = {
     "Taxes Filings - All": filingMatches,
-    "License Expiration / Renewal Events": licenseEventMatches
+    "License Expiration / Renewal Events": licenseEventMatches,
   };
 
   const dashboardCollection = {
-    "Sidebar Cards Content": sidebarCardMatches
+    "Sidebar Cards Content": sidebarCardMatches,
   };
 
   const miscCollection = {
     "Contextual Information": contextualInfoMatches,
-    "Post Onboarding Content": postOnboardingMatches
+    "Post Onboarding Content": postOnboardingMatches,
   };
 
   const authedView = (
@@ -265,8 +265,8 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       archivedContextualInfo: loadAllArchivedContextualInfo(),
       postOnboarding: loadAllPostOnboarding(),
       licenseEvents: loadAllLicenses(),
-      cmsConfig: loadCmsConfig()
-    }
+      cmsConfig: loadCmsConfig(),
+    },
   };
 };
 

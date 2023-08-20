@@ -4,168 +4,168 @@ module.exports = {
   allowed: [
     {
       from: {},
-      to: { path: "@serverless/typescript" }
+      to: { path: "@serverless/typescript" },
     },
     {
       from: {},
-      to: { path: "@aws-sdk/client-s3" }
+      to: { path: "@aws-sdk/client-s3" },
     },
     {
       from: {},
-      to: { path: "@aws-sdk/util-dynamodb" }
+      to: { path: "@aws-sdk/util-dynamodb" },
     },
     {
       from: {},
-      to: { path: "@aws-sdk/lib-dynamodb" }
+      to: { path: "@aws-sdk/lib-dynamodb" },
     },
     {
       from: {},
-      to: { path: "@aws-sdk/client-dynamodb" }
+      to: { path: "@aws-sdk/client-dynamodb" },
     },
     {
       from: {},
-      to: { path: "@aws-crypto/client-node" }
+      to: { path: "@aws-crypto/client-node" },
     },
     {
       from: {},
-      to: { path: "@aws-sdk/util-base64-node" }
+      to: { path: "@aws-sdk/util-base64-node" },
     },
     {
       from: {},
-      to: { path: "util" }
+      to: { path: "util" },
     },
     {
       from: {},
-      to: { path: "simple-oauth2" }
+      to: { path: "simple-oauth2" },
     },
     {
       from: {},
-      to: { path: "body-parser" }
+      to: { path: "body-parser" },
     },
     {
       from: {},
-      to: { path: "supertest" }
+      to: { path: "supertest" },
     },
     {
       from: {},
-      to: { path: "winston" }
+      to: { path: "winston" },
     },
     {
       from: {},
-      to: { path: "winston-cloudwatch" }
+      to: { path: "winston-cloudwatch" },
     },
     {
       from: { path: "src/db" },
-      to: { path: "fs" }
+      to: { path: "fs" },
     },
     {
       from: { path: "src/db" },
-      to: { path: "path" }
+      to: { path: "path" },
     },
     {
       from: {},
-      to: { path: "https" }
+      to: { path: "https" },
     },
     {
       from: {},
-      to: { path: "xml2js" }
+      to: { path: "xml2js" },
     },
     {
       from: {},
-      to: { path: "express" }
+      to: { path: "express" },
     },
     {
       from: {},
-      to: { path: "crypto" }
+      to: { path: "crypto" },
     },
     {
       from: {},
-      to: { path: "dayjs" }
+      to: { path: "dayjs" },
     },
     {
       from: {},
-      to: { path: "airtable" }
+      to: { path: "airtable" },
     },
     {
       from: {},
-      to: { path: "axios" }
+      to: { path: "axios" },
     },
     {
       from: {},
-      to: { path: "cors" }
+      to: { path: "cors" },
     },
     {
       from: {},
-      to: { path: "dedent" }
+      to: { path: "dedent" },
     },
     {
       from: {},
-      to: { path: "jsonwebtoken" }
+      to: { path: "jsonwebtoken" },
     },
     {
       from: {},
-      to: { path: "serverless-http" }
+      to: { path: "serverless-http" },
     },
     {
       from: { path: "src/functions" },
-      to: { path: "lodash" }
+      to: { path: "lodash" },
     },
     {
       from: { path: "src/api" },
-      to: { path: "lodash" }
+      to: { path: "lodash" },
     },
     {
       from: { path: "src/libs" },
-      to: { path: "helmet" }
+      to: { path: "helmet" },
     },
     {
       from: {},
-      to: { path: "../shared" }
+      to: { path: "../shared" },
     },
     {
       from: { path: "src/db" },
-      to: { path: "src/db" }
+      to: { path: "src/db" },
     },
     {
       from: { path: "src/libs" },
-      to: { path: "src/libs" }
+      to: { path: "src/libs" },
     },
     {
       from: { path: "src/api" },
-      to: { path: "src/api" }
+      to: { path: "src/api" },
     },
     {
       from: {},
-      to: { path: "src/domain" }
+      to: { path: "src/domain" },
     },
     {
       from: { path: "src/client" },
-      to: { path: "src/client" }
+      to: { path: "src/client" },
     },
     {
       from: { path: "src/client" },
-      to: { path: "src/libs" }
+      to: { path: "src/libs" },
     },
     {
       from: { path: "src/functions" },
-      to: { path: "src/" }
+      to: { path: "src/" },
     },
     {
       from: { path: "../shared" },
-      to: { path: "content" }
+      to: { path: "content" },
     },
     {
       from: { path: "../shared" },
-      to: { path: "uuid" }
+      to: { path: "uuid" },
     },
     {
       from: { path: "src/db/migrations" },
-      to: { path: "uuid" }
+      to: { path: "uuid" },
     },
     {
       from: {},
-      to: { path: "test" }
-    }
+      to: { path: "test" },
+    },
   ],
   forbidden: [
     /* rules from the 'recommended' preset: */
@@ -177,8 +177,8 @@ module.exports = {
         "your solution (i.e. use dependency inversion, make sure the modules have a single responsibility) ",
       from: {},
       to: {
-        circular: true
-      }
+        circular: true,
+      },
     },
     {
       name: "no-orphans",
@@ -196,10 +196,10 @@ module.exports = {
           "\\.d\\.ts$", // TypeScript declaration files
           "(^|/)tsconfig\\.json$", // TypeScript config
           "(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$", // other configs,
-          "(^|/)(setup|teardown)Tests\\.(js|cjs|mjs|ts|json)$" // jest configs
-        ]
+          "(^|/)(setup|teardown)Tests\\.(js|cjs|mjs|ts|json)$", // jest configs
+        ],
       },
-      to: {}
+      to: {},
     },
     {
       name: "no-deprecated-core",
@@ -230,9 +230,9 @@ module.exports = {
           "^(constants)$",
           "^(sys)$",
           "^(_linklist)$",
-          "^(_stream_wrap)$"
-        ]
-      }
+          "^(_stream_wrap)$",
+        ],
+      },
     },
     {
       name: "not-to-deprecated",
@@ -242,8 +242,8 @@ module.exports = {
       severity: "error",
       from: {},
       to: {
-        dependencyTypes: ["deprecated"]
-      }
+        dependencyTypes: ["deprecated"],
+      },
     },
     {
       name: "no-non-package-json",
@@ -255,8 +255,8 @@ module.exports = {
         "in your package.json.",
       from: {},
       to: {
-        dependencyTypes: ["npm-no-pkg", "npm-unknown"]
-      }
+        dependencyTypes: ["npm-no-pkg", "npm-unknown"],
+      },
     },
     {
       name: "not-to-unresolvable",
@@ -266,8 +266,8 @@ module.exports = {
       severity: "error",
       from: {},
       to: {
-        couldNotResolve: true
-      }
+        couldNotResolve: true,
+      },
     },
     {
       name: "no-duplicate-dep-types",
@@ -282,8 +282,8 @@ module.exports = {
         // as it's pretty common to have a type import be a type only import
         // _and_ (e.g.) a devDependency - don't consider type-only dependency
         // types for this rule
-        dependencyTypesNot: ["type-only"]
-      }
+        dependencyTypesNot: ["type-only"],
+      },
     },
 
     /* rules you might want to tweak for your specific situation: */
@@ -296,8 +296,8 @@ module.exports = {
       severity: "error",
       from: {},
       to: {
-        path: "\\.(spec|test)\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$"
-      }
+        path: "\\.(spec|test)\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$",
+      },
     },
     {
       name: "not-to-dev-dep",
@@ -310,11 +310,11 @@ module.exports = {
         "from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration",
       from: {
         path: "^(src)",
-        pathNot: "\\.(spec|test)\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$"
+        pathNot: "\\.(spec|test)\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$",
       },
       to: {
-        dependencyTypes: ["npm-dev"]
-      }
+        dependencyTypes: ["npm-dev"],
+      },
     },
     {
       name: "optional-deps-used",
@@ -326,8 +326,8 @@ module.exports = {
         "depdency-cruiser configuration.",
       from: {},
       to: {
-        dependencyTypes: ["npm-optional"]
-      }
+        dependencyTypes: ["npm-optional"],
+      },
     },
     {
       name: "peer-deps-used",
@@ -339,30 +339,30 @@ module.exports = {
       severity: "error",
       from: {},
       to: {
-        dependencyTypes: ["npm-peer"]
-      }
-    }
+        dependencyTypes: ["npm-peer"],
+      },
+    },
   ],
   options: {
     doNotFollow: {
       path: "node_modules",
-      dependencyTypes: ["npm", "npm-dev", "npm-optional", "npm-peer", "npm-bundled", "npm-no-pkg"]
+      dependencyTypes: ["npm", "npm-dev", "npm-optional", "npm-peer", "npm-bundled", "npm-no-pkg"],
     },
     tsPreCompilationDeps: true,
     tsConfig: {
-      fileName: "tsconfig.json"
+      fileName: "tsconfig.json",
     },
     enhancedResolveOptions: {
       exportsFields: ["exports"],
-      conditionNames: ["import", "require", "node", "default"]
+      conditionNames: ["import", "require", "node", "default"],
     },
     reporterOptions: {
       dot: {
-        collapsePattern: "node_modules/[^/]+"
+        collapsePattern: "node_modules/[^/]+",
       },
       archi: {
-        collapsePattern: "^(packages|src|lib|app|bin|test(s?)|spec(s?))/[^/]+|node_modules/[^/]+"
-      }
-    }
-  }
+        collapsePattern: "^(packages|src|lib|app|bin|test(s?)|spec(s?))/[^/]+|node_modules/[^/]+",
+      },
+    },
+  },
 };

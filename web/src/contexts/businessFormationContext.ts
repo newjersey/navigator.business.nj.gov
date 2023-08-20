@@ -4,7 +4,7 @@ import {
   FieldsForErrorHandling,
   FormationFormData,
   InputFile,
-  NameAvailability
+  NameAvailability,
 } from "@businessnjgovnavigator/shared";
 import { createContext } from "react";
 
@@ -44,7 +44,7 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
     foreignGoodStandingFile: undefined,
     hasSetStateFirstTime: false,
     businessNameAvailability: undefined,
-    dbaBusinessNameAvailability: undefined
+    dbaBusinessNameAvailability: undefined,
   },
   setFormationFormData: () => {},
   setStepIndex: () => {},
@@ -53,5 +53,5 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
   setHasBeenSubmitted: () => {},
   setBusinessNameAvailability: () => {},
   setDbaBusinessNameAvailability: () => {},
-  setForeignGoodStandingFile: () => {}
+  setForeignGoodStandingFile: () => {},
 });

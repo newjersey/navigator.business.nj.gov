@@ -21,10 +21,10 @@ export const migrate_v66_to_v67 = (v66Data: v66UserData): v67UserData => {
     ...v66Data,
     preferences: {
       ...v66Data.preferences,
-      visibleRoadmapSidebarCards: [...v66Data.preferences.visibleRoadmapSidebarCards, ...graduationCard]
+      visibleRoadmapSidebarCards: [...v66Data.preferences.visibleRoadmapSidebarCards, ...graduationCard],
     },
 
-    version: 67
+    version: 67,
   };
 };
 
@@ -177,7 +177,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v67FormationData {
@@ -242,7 +242,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -251,7 +251,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const corpBusinessSuffix = [
@@ -264,7 +264,7 @@ export const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
@@ -306,7 +306,7 @@ export const generatev67User = (overrides: Partial<v67BusinessUser>): v67Busines
     abExperience: "ExperienceA",
     myNJUserKey: undefined,
     intercomHash: undefined,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -321,7 +321,7 @@ export const generatev67ProfileData = (overrides: Partial<v67ProfileData>): v67P
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     liquorLicense: true,
     requiresCpa: false,
@@ -337,7 +337,7 @@ export const generatev67ProfileData = (overrides: Partial<v67ProfileData>): v67P
     documents: {
       formationDoc: `some-formation-doc-${randomInt()}`,
       standingDoc: `some-standing-doc-${randomInt()}`,
-      certifiedDoc: `some-certified-doc-${randomInt()}`
+      certifiedDoc: `some-certified-doc-${randomInt()}`,
     },
     ownershipTypeIds: [],
     existingEmployees: undefined,
@@ -348,12 +348,12 @@ export const generatev67ProfileData = (overrides: Partial<v67ProfileData>): v67P
     foreignBusinessTypeIds: [],
     nexusLocationInNewJersey: undefined,
     nexusDbaName: undefined,
-    ...overrides
+    ...overrides,
   };
 };
 
 export const generatev67FormationFormData = (
-  overrides: Partial<v67FormationFormData>
+  overrides: Partial<v67FormationFormData>,
 ): v67FormationFormData => {
   return {
     businessName: "",
@@ -389,12 +389,12 @@ export const generatev67FormationFormData = (
     contactFirstName: "",
     contactLastName: "",
     contactPhoneNumber: "",
-    ...overrides
+    ...overrides,
   };
 };
 
 export const generatev67GetFilingResponse = (
-  overrides: Partial<v67GetFilingResponse>
+  overrides: Partial<v67GetFilingResponse>,
 ): v67GetFilingResponse => {
   return {
     success: true,
@@ -404,6 +404,6 @@ export const generatev67GetFilingResponse = (
     formationDoc: "",
     standingDoc: "",
     certifiedDoc: "",
-    ...overrides
+    ...overrides,
   };
 };

@@ -21,7 +21,7 @@ describe("<SectorModal />", () => {
 
   const renderSectorModal = (onContinue?: jest.Mock): { page: PageHelpers } => {
     render(
-      <SectorModal open={true} handleClose={(): void => {}} onContinue={onContinue ?? ((): void => {})} />
+      <SectorModal open={true} handleClose={(): void => {}} onContinue={onContinue ?? ((): void => {})} />,
     );
     const page = createPageHelpers();
     return { page };
@@ -32,8 +32,8 @@ describe("<SectorModal />", () => {
       profileData: generateProfileData({
         industryId: "generic",
         businessPersona: "STARTING",
-        sectorId: undefined
-      })
+        sectorId: undefined,
+      }),
     });
 
     useMockBusiness(business);
@@ -51,8 +51,8 @@ describe("<SectorModal />", () => {
         sectorId: undefined,
         industryId: undefined,
         ownershipTypeIds: [],
-        existingEmployees: undefined
-      })
+        existingEmployees: undefined,
+      }),
     });
 
     useMockBusiness(business);
@@ -61,7 +61,7 @@ describe("<SectorModal />", () => {
     submitSectorModal();
     expect(onContinue).not.toHaveBeenCalled();
     expect(
-      screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
+      screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
     ).toBeInTheDocument();
   });
 
@@ -69,8 +69,8 @@ describe("<SectorModal />", () => {
     const business = generateBusiness({
       profileData: generateProfileData({
         sectorId: undefined,
-        industryId: "generic"
-      })
+        industryId: "generic",
+      }),
     });
 
     useMockBusiness(business);

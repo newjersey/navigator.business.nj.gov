@@ -14,7 +14,7 @@ export const getAnnualFilings = (userData: UserData): UserData => {
 
   if (currentBusiness.profileData.legalStructureId) {
     requiresPublicFiling = LookupLegalStructureById(
-      currentBusiness.profileData.legalStructureId
+      currentBusiness.profileData.legalStructureId,
     ).requiresPublicFiling;
   }
 
@@ -24,14 +24,14 @@ export const getAnnualFilings = (userData: UserData): UserData => {
         (dueDate: string) => ({
           identifier: "ANNUAL_FILING",
           calendarEventType: "TAX-FILING" as const,
-          dueDate
-        })
-      )
+          dueDate,
+        }),
+      ),
     );
   }
 
   return modifyCurrentBusiness(userData, (business) => ({
     ...business,
-    taxFilingData: { ...business.taxFilingData, filings }
+    taxFilingData: { ...business.taxFilingData, filings },
   }));
 };

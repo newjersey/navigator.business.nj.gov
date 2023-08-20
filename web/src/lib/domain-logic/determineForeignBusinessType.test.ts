@@ -16,8 +16,8 @@ describe("determineForeignBusinessType", () => {
         "employeeOrContractorInNJ",
         "revenueInNJ",
         "transactionsInNJ",
-        "employeesInNJ"
-      ])
+        "employeesInNJ",
+      ]),
     ).toEqual("NEXUS");
   });
 
@@ -28,7 +28,7 @@ describe("determineForeignBusinessType", () => {
     expect(determineForeignBusinessType(["officeInNJ", "transactionsInNJ"])).toEqual("NEXUS");
     expect(determineForeignBusinessType(["officeInNJ", "revenueInNJ"])).toEqual("NEXUS");
     expect(
-      determineForeignBusinessType(["officeInNJ", "revenueInNJ", "transactionsInNJ", "employeesInNJ"])
+      determineForeignBusinessType(["officeInNJ", "revenueInNJ", "transactionsInNJ", "employeesInNJ"]),
     ).toEqual("NEXUS");
   });
 
@@ -39,7 +39,7 @@ describe("determineForeignBusinessType", () => {
     expect(determineForeignBusinessType(["propertyInNJ", "transactionsInNJ"])).toEqual("NEXUS");
     expect(determineForeignBusinessType(["propertyInNJ", "revenueInNJ"])).toEqual("NEXUS");
     expect(
-      determineForeignBusinessType(["propertyInNJ", "revenueInNJ", "transactionsInNJ", "employeesInNJ"])
+      determineForeignBusinessType(["propertyInNJ", "revenueInNJ", "transactionsInNJ", "employeesInNJ"]),
     ).toEqual("NEXUS");
   });
 
@@ -48,7 +48,7 @@ describe("determineForeignBusinessType", () => {
 
     expect(determineForeignBusinessType(["companyOperatedVehiclesInNJ", "employeesInNJ"])).toEqual("NEXUS");
     expect(determineForeignBusinessType(["companyOperatedVehiclesInNJ", "transactionsInNJ"])).toEqual(
-      "NEXUS"
+      "NEXUS",
     );
     expect(determineForeignBusinessType(["companyOperatedVehiclesInNJ", "revenueInNJ"])).toEqual("NEXUS");
     expect(
@@ -56,8 +56,8 @@ describe("determineForeignBusinessType", () => {
         "companyOperatedVehiclesInNJ",
         "revenueInNJ",
         "transactionsInNJ",
-        "employeesInNJ"
-      ])
+        "employeesInNJ",
+      ]),
     ).toEqual("NEXUS");
   });
 
@@ -66,7 +66,7 @@ describe("determineForeignBusinessType", () => {
     expect(determineForeignBusinessType(["propertyInNJ"])).toEqual("NEXUS");
     expect(determineForeignBusinessType(["companyOperatedVehiclesInNJ"])).toEqual("NEXUS");
     expect(
-      determineForeignBusinessType(["officeInNJ", "propertyInNJ", "companyOperatedVehiclesInNJ"])
+      determineForeignBusinessType(["officeInNJ", "propertyInNJ", "companyOperatedVehiclesInNJ"]),
     ).toEqual("NEXUS");
   });
 
@@ -76,7 +76,7 @@ describe("determineForeignBusinessType", () => {
     expect(determineForeignBusinessType(["employeesInNJ", "transactionsInNJ"])).toEqual("REMOTE_WORKER");
     expect(determineForeignBusinessType(["employeesInNJ", "revenueInNJ"])).toEqual("REMOTE_WORKER");
     expect(determineForeignBusinessType(["employeesInNJ", "revenueInNJ", "transactionsInNJ"])).toEqual(
-      "REMOTE_WORKER"
+      "REMOTE_WORKER",
     );
   });
 

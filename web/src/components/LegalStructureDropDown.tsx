@@ -8,7 +8,7 @@ import { FormContextFieldProps } from "@/lib/types/types";
 import {
   LegalStructure,
   LegalStructures,
-  LookupLegalStructureById
+  LookupLegalStructureById,
 } from "@businessnjgovnavigator/shared/index";
 import { FormControl, FormHelperText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { orderBy } from "lodash";
@@ -25,7 +25,7 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
   const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
     "legalStructureId",
     profileFormContext,
-    props.errorTypes
+    props.errorTypes,
   );
 
   const isValid = (): boolean => state.profileData.legalStructureId !== undefined;
@@ -40,14 +40,14 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
     LegalStructures,
     (legalStructure: LegalStructure) => {
       return legalStructure.name;
-    }
+    },
   );
 
   const handleLegalStructure = (event: SelectChangeEvent): void => {
     if (event.target.value) {
       setProfileData({
         ...state.profileData,
-        legalStructureId: event.target.value
+        legalStructureId: event.target.value,
       });
       Validate(false);
     }
@@ -86,7 +86,7 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
             name="legal-structure"
             inputProps={{
               "aria-label": "Business structure",
-              "data-testid": "legal-structure"
+              "data-testid": "legal-structure",
             }}
             renderValue={renderValue}
             disabled={props.disabled}

@@ -3,7 +3,7 @@ import { loadAllLicenseUrlSlugs, loadLicenseByUrlSlug } from "./loadLicenses";
 
 jest.mock("fs");
 jest.mock("process", () => ({
-  cwd: (): string => "/test"
+  cwd: (): string => "/test",
 }));
 
 describe("loadLicenses", () => {
@@ -41,8 +41,8 @@ describe("loadLicenses", () => {
           { params: { licenseUrlSlug: "some-url-slug-1-expiration" } },
           { params: { licenseUrlSlug: "some-url-slug-1-renewal" } },
           { params: { licenseUrlSlug: "some-url-slug-2-expiration" } },
-          { params: { licenseUrlSlug: "some-url-slug-2-renewal" } }
-        ])
+          { params: { licenseUrlSlug: "some-url-slug-2-renewal" } },
+        ]),
       );
     });
   });
@@ -82,7 +82,7 @@ describe("loadLicenses", () => {
         urlSlug: "some-url-slug-2",
         callToActionLink: "www.example2.com",
         callToActionText: "",
-        contentMd: "\n# I am a header2\n\nI am a text content2"
+        contentMd: "\n# I am a header2\n\nI am a text content2",
       });
     });
   });

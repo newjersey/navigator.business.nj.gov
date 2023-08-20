@@ -4,7 +4,7 @@ import { loadAllMunicipalities } from "./loadMunicipalities";
 
 jest.mock("fs");
 jest.mock("process", () => ({
-  cwd: (): string => "/test"
+  cwd: (): string => "/test",
 }));
 
 describe("loadMunicipalities", () => {
@@ -19,14 +19,14 @@ describe("loadMunicipalities", () => {
       id: "123",
       countyName: "Bergen",
       townDisplayName: "Newark (Bergen County)",
-      townName: "Newark"
+      townName: "Newark",
     });
 
     const municipality2 = generateMunicipalityDetail({});
 
     const json = JSON.stringify({
       [municipality1.id]: municipality1,
-      [municipality2.id]: municipality2
+      [municipality2.id]: municipality2,
     });
 
     mockedFs.readFileSync.mockReturnValue(json);
@@ -37,7 +37,7 @@ describe("loadMunicipalities", () => {
       name: "Newark",
       displayName: "Newark (Bergen County)",
       county: "Bergen",
-      id: "123"
+      id: "123",
     });
   });
 });

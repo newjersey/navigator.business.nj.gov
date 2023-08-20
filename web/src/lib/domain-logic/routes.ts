@@ -8,7 +8,7 @@ export const ROUTES = {
   onboarding: "/onboarding",
   unsupported: "/unsupported",
   welcome: "/welcome",
-  accountSetup: "/account-setup"
+  accountSetup: "/account-setup",
 };
 
 export interface QUERY_PARAMS_VALUES {
@@ -52,13 +52,13 @@ export enum QUERIES {
   code = "code",
   openTaxFilingsModal = "openTaxFilingsModal",
   flow = "flow",
-  source = "source"
+  source = "source",
 }
 
 export const routeShallowWithQuery = <K extends keyof QUERY_PARAMS_VALUES>(
   router: NextRouter,
   query: K,
-  value: QUERY_PARAMS_VALUES[K]
+  value: QUERY_PARAMS_VALUES[K],
 ): void => {
   router.push({ query: { [query]: value } }, undefined, { shallow: true });
 };
@@ -68,18 +68,18 @@ export const routeWithQuery = <K extends keyof QUERY_PARAMS_VALUES>(
   config: {
     path: string;
     queries: Record<K, QUERY_PARAMS_VALUES[K]>;
-  }
+  },
 ): void => {
   router.push({
     pathname: config.path,
-    query: config.queries
+    query: config.queries,
   });
 };
 
 export const checkQueryValue = <K extends keyof QUERY_PARAMS_VALUES>(
   router: NextRouter,
   query: K,
-  value: QUERY_PARAMS_VALUES[K]
+  value: QUERY_PARAMS_VALUES[K],
 ): boolean => {
   return router.query[query] === value;
 };

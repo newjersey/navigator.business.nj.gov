@@ -8,7 +8,7 @@ import {
   camelCaseToKebabCase,
   camelCaseToSentence,
   capitalizeFirstLetter,
-  kebabSnakeSentenceToCamelCase
+  kebabSnakeSentenceToCamelCase,
 } from "@/lib/utils/cases-helpers";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
@@ -23,7 +23,7 @@ export const OnboardingNonprofit = (): ReactElement => {
   const contentFromConfig = getProfileConfig({
     config: Config,
     persona: state.flow,
-    fieldName: fieldName as keyof typeof profileFieldsFromConfig
+    fieldName: fieldName as keyof typeof profileFieldsFromConfig,
   });
 
   RegisterForOnSubmit(() => state.profileData[fieldName] !== undefined);
@@ -33,7 +33,7 @@ export const OnboardingNonprofit = (): ReactElement => {
     setProfileData({
       ...state.profileData,
       [fieldName]: value,
-      legalStructureId: value ? "nonprofit" : undefined
+      legalStructureId: value ? "nonprofit" : undefined,
     });
   };
 

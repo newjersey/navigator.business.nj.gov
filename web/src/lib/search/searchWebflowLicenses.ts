@@ -9,7 +9,7 @@ export const searchWebflowLicenses = (licenses: WebflowLicense[], term: string):
   for (const license of licenses) {
     let match: Match = {
       filename: license.filename,
-      snippets: []
+      snippets: [],
     };
 
     const content = license.contentMd?.toLowerCase();
@@ -30,7 +30,7 @@ export const searchWebflowLicenses = (licenses: WebflowLicense[], term: string):
       { content: agency, label: "Agency" },
       { content: division, label: "Division" },
       { content: classification, label: "Classification" },
-      { content: industry, label: "Industry" }
+      { content: industry, label: "Industry" },
     ];
 
     match = findMatchInBlock(blockTexts, term, match);

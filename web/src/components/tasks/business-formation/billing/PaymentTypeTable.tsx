@@ -15,10 +15,10 @@ export const PaymentTypeTable = (): ReactElement => {
 
   const achPaymentCost = Number.parseFloat(Config.formation.fields.paymentType.paymentCosts.ach);
   const ccPaymentCostExtra = Number.parseFloat(
-    Config.formation.fields.paymentType.paymentCosts.creditCardExtra
+    Config.formation.fields.paymentType.paymentCosts.creditCardExtra,
   );
   const ccPaymentCostInitial = Number.parseFloat(
-    Config.formation.fields.paymentType.paymentCosts.creditCardInitial
+    Config.formation.fields.paymentType.paymentCosts.creditCardInitial,
   );
 
   const officialFormationCost = getCost("officialFormationDocument", state.formationFormData.legalType);
@@ -47,20 +47,20 @@ export const PaymentTypeTable = (): ReactElement => {
     setTotalCost(
       costs.reduce((a, b) => {
         return a + b;
-      }, 0)
+      }, 0),
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     state.formationFormData.certificateOfStanding,
     state.formationFormData.paymentType,
-    state.formationFormData.certifiedCopyOfFormationDocument
+    state.formationFormData.certifiedCopyOfFormationDocument,
   ]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        paymentType: event.target.value as PaymentType
+        paymentType: event.target.value as PaymentType,
       };
     });
     setFieldsInteracted([FIELD]);

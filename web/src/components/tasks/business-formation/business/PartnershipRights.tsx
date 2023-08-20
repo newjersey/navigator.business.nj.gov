@@ -30,9 +30,9 @@ export const PartnershipRights = (): ReactElement => {
             inputProps: {
               maxLength: 400,
               sx: {
-                padding: "1rem"
-              }
-            }
+                padding: "1rem",
+              },
+            },
           }}
         />
         <div className="text-base-dark margin-top-1 margin-bottom-2">
@@ -56,7 +56,7 @@ export const PartnershipRights = (): ReactElement => {
             onChange={(e): void => {
               setFormationFormData({
                 ...state.formationFormData,
-                [fieldName]: JSON.parse(e.target.value)
+                [fieldName]: JSON.parse(e.target.value),
               });
               setFieldsInteracted([fieldName]);
             }}

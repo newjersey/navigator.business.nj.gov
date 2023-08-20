@@ -25,13 +25,13 @@ export const OnboardingSectors = <T,>(props: Props<T>): ReactElement => {
   const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
     "sectorId",
     profileFormContext,
-    props.errorTypes
+    props.errorTypes,
   );
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["sectorId"]["default"] = getProfileConfig({
     config: Config,
     persona: state.flow,
-    fieldName: "sectorId"
+    fieldName: "sectorId",
   });
 
   const SectorsOrdered: SectorType[] = orderBy(sectors, (SectorType: SectorType) => {
@@ -44,7 +44,7 @@ export const OnboardingSectors = <T,>(props: Props<T>): ReactElement => {
 
   const handleSectorSelect = (
     event: React.SyntheticEvent<Element, Event>,
-    value: SectorType | null
+    value: SectorType | null,
   ): void => {
     if (!value) {
       setSearchText("");
@@ -106,7 +106,7 @@ export const OnboardingSectors = <T,>(props: Props<T>): ReactElement => {
               inputProps={{
                 "aria-label": "Sector",
                 "data-testid": "sectorId",
-                ...params.inputProps
+                ...params.inputProps,
               }}
               onBlur={onValidation}
               onSubmit={onValidation}

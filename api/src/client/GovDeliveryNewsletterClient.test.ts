@@ -6,13 +6,13 @@ import { GovDeliveryNewsletterClient, GovDeliveryResponse } from "./GovDeliveryN
 
 const generateGovDeliveryResponse = (
   overrides: Partial<GovDeliveryResponse>,
-  failed = !!(randomInt() % 2)
+  failed = !!(randomInt() % 2),
 ): GovDeliveryResponse => {
   return {
     citizen_id: failed ? undefined : randomInt(),
     topic_id: "topic1234",
     message: `Subscriber profile ${failed ? "failed" : "successfully created."}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -32,7 +32,7 @@ describe("GovDeliveryNewsletterClient", () => {
       apiKey: "key1234",
       logWriter: logger,
       siteUrl: "navigator.com",
-      urlQuestion: "q_1234"
+      urlQuestion: "q_1234",
     });
     jest.resetAllMocks();
   });
@@ -42,7 +42,7 @@ describe("GovDeliveryNewsletterClient", () => {
     mockAxios.get.mockResolvedValue({ data: returnedData });
     expect(await client.add("testuser@xyz.com")).toEqual({ success: true, status: "SUCCESS" });
     expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/api/add_script_subscription", {
-      params: { e: "testuser@xyz.com", t: "123", k: "key1234", q_1234: "navigator.com" }
+      params: { e: "testuser@xyz.com", t: "123", k: "key1234", q_1234: "navigator.com" },
     });
   });
 
@@ -52,7 +52,7 @@ describe("GovDeliveryNewsletterClient", () => {
     mockAxios.get.mockResolvedValue({ data: `(${JSON.stringify(returnedData)})` });
     expect(await client.add("testuser@xyz.com")).toEqual({ success: true, status: "SUCCESS" });
     expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/api/add_script_subscription", {
-      params: { e: "testuser@xyz.com", t: "123", k: "key1234", q_1234: "navigator.com" }
+      params: { e: "testuser@xyz.com", t: "123", k: "key1234", q_1234: "navigator.com" },
     });
   });
 
@@ -65,7 +65,7 @@ describe("GovDeliveryNewsletterClient", () => {
     const response = {
       errors: { email: ["Email is invalid"] },
       topic_id: "NJTHING",
-      message: "There were problems creating the email profile."
+      message: "There were problems creating the email profile.",
     };
     mockAxios.get.mockResolvedValue({ data: response });
     expect(await client.add("testuser@xyz.com")).toEqual({ success: false, status: "EMAIL_ERROR" });
@@ -82,7 +82,7 @@ describe("GovDeliveryNewsletterClient", () => {
       errors: { email: ["Unable to subscribe test@evotest.govdelivery.com to topic NJTHING"] },
       topic_id: "NJTHING",
       message: "There were problems assigning the email profile to the requested topic.",
-      citizen_id: 19200
+      citizen_id: 19200,
     };
     mockAxios.get.mockResolvedValue({ data: response });
     expect(await client.add("testuser@xyz.com")).toEqual({ success: false, status: "TOPIC_ERROR" });
@@ -93,7 +93,7 @@ describe("GovDeliveryNewsletterClient", () => {
       errors: { email: ["Unable update responses for test@sink.govdelivery.com"] },
       topic_id: "NJTHING",
       message: "Subscriber profile successfully created.",
-      citizen_id: 19227
+      citizen_id: 19227,
     };
     mockAxios.get.mockResolvedValue({ data: response });
     expect(await client.add("testuser@xyz.com")).toEqual({ success: true, status: "QUESTION_WARNING" });
@@ -104,7 +104,7 @@ describe("GovDeliveryNewsletterClient", () => {
       errors: { email: ["Lorem Ipsum"] },
       topic_id: "NJTHING",
       message: "Subscriber profile successfully created.",
-      citizen_id: 19227
+      citizen_id: 19227,
     };
     mockAxios.get.mockResolvedValue({ data: response });
     expect(await client.add("testuser@xyz.com")).toEqual({ success: true, status: "RESPONSE_WARNING" });

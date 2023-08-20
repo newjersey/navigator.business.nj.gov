@@ -10,7 +10,7 @@ export const Authorization = (): ReactElement => {
 
   const getFormattedBody = (): ReactElement => {
     const [beforeIndentation, after] = state.dbaContent.Authorize.contentMd.split(
-      "${beginIndentationSection}"
+      "${beginIndentationSection}",
     );
     const [indentedSection, afterIndentation] = after.split("${endIndentationSection}");
 

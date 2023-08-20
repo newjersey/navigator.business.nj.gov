@@ -72,7 +72,7 @@ const getFilenames = (): Filenames => {
     fundings: fs.readdirSync(fundingsDir),
     certifications: fs.readdirSync(certificationsDir),
     licenses: fs.readdirSync(licensesDir),
-    licenseTasks: fs.readdirSync(licenseTasksDir)
+    licenseTasks: fs.readdirSync(licenseTasksDir),
   };
 };
 
@@ -101,7 +101,7 @@ const getContents = (filenames: Filenames): FileContents => {
       }),
       ...addOns.map((i) => {
         return i.modifications;
-      })
+      }),
     ],
     contextualInfos: filenames.contextualInfos.map((it) => {
       return matter(fs.readFileSync(path.join(displayContentDir, "contextual-information", it), "utf8"))
@@ -110,13 +110,13 @@ const getContents = (filenames: Filenames): FileContents => {
     displayContents: filenames.displayContents.map((it) => {
       return matter(fs.readFileSync(it, "utf8")).content;
     }),
-    fieldConfigs
+    fieldConfigs,
   };
 };
 
 const isReferencedInAMarkdown = async (
   contextualInfoFilename: string,
-  markdowns: string[]
+  markdowns: string[],
 ): Promise<boolean> => {
   let contained = false;
   const contextualInfoId = contextualInfoFilename.split(".md")[0];
@@ -240,7 +240,7 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     }),
     ...filenames.certifications.map((it) => {
       return `/certification/${it.split(".md")[0]}`;
-    })
+    }),
   ];
 
   const deadLinks = pages.reduce(
@@ -248,7 +248,7 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
       acc[cur] = [];
       return acc;
     },
-    {} as Record<string, string[]>
+    {} as Record<string, string[]>,
   );
 
   const templateEvals = [
@@ -256,7 +256,7 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     "municipality",
     "county",
     "countyClerkPhone",
-    "countyClerkWebsite"
+    "countyClerkWebsite",
   ];
 
   const isTemplateLink = (url: string): boolean => {
@@ -291,8 +291,8 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
             },
             end: (): void => {
               resolve({});
-            }
-          }
+            },
+          },
         );
         const url = new URL(process.env.REDIRECT_URL || "");
         htmlUrlChecker.enqueue(`${url.origin}${page}`, {});

@@ -23,7 +23,7 @@ export const ContextualInfoButton = (props: Props): ReactElement => {
         ...contextualInfo,
         isVisible: true,
         markdown: cachedContent.markdown,
-        header: cachedContent.header
+        header: cachedContent.header,
       });
     } else {
       const content = await fetchContextualInfo(props.id);
@@ -33,7 +33,7 @@ export const ContextualInfoButton = (props: Props): ReactElement => {
         ...contextualInfo,
         isVisible: true,
         header: content.header,
-        markdown: content.markdown
+        markdown: content.markdown,
       });
     }
   };

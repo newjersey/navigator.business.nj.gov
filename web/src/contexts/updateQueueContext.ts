@@ -8,5 +8,5 @@ export interface UpdateQueueContextType {
 
 export const UpdateQueueContext = createContext<UpdateQueueContextType>({
   updateQueue: undefined,
-  setUpdateQueue: () => {}
+  setUpdateQueue: () => {},
 });

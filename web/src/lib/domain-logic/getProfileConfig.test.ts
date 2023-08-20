@@ -13,11 +13,11 @@ describe("getProfileConfig", () => {
             header: "header",
             description: "default description",
             errorTextRequired: "error",
-            headerContextualInfo: "default header contextual info"
-          }
-        }
-      }
-    }
+            headerContextualInfo: "default header contextual info",
+          },
+        },
+      },
+    },
   };
 
   const testConfigDefaultWithOverride = {
@@ -28,16 +28,16 @@ describe("getProfileConfig", () => {
             header: "header",
             description: "default description",
             errorTextRequired: "error",
-            headerContextualInfo: "default header contextual info"
+            headerContextualInfo: "default header contextual info",
           },
           overrides: {
             OWNING: {
-              description: "default-owning-description"
-            }
-          }
-        }
-      }
-    }
+              description: "default-owning-description",
+            },
+          },
+        },
+      },
+    },
   };
   const testConfigDefaultWithOverridesAndOboarding = {
     profileDefaults: {
@@ -47,22 +47,22 @@ describe("getProfileConfig", () => {
             header: "header",
             description: "default description",
             errorTextRequired: "error",
-            headerContextualInfo: "default header contextual info"
+            headerContextualInfo: "default header contextual info",
           },
           onboarding: {
             default: {
               header: "onboarding header",
-              description: "onboarding default description"
-            }
+              description: "onboarding default description",
+            },
           },
           overrides: {
             OWNING: {
-              description: "default-owning-description"
-            }
-          }
-        }
-      }
-    }
+              description: "default-owning-description",
+            },
+          },
+        },
+      },
+    },
   };
 
   const testConfigDefaultWithOverridesAndOboardingWithOverrides = {
@@ -73,27 +73,27 @@ describe("getProfileConfig", () => {
             header: "header",
             description: "default description",
             errorTextRequired: "error",
-            headerContextualInfo: "default header contextual info"
+            headerContextualInfo: "default header contextual info",
           },
           onboarding: {
             default: {
               header: "onboarding header",
-              description: "onboarding default description"
+              description: "onboarding default description",
             },
             overrides: {
               OWNING: {
-                description: "onboarding-owning-description"
-              }
-            }
+                description: "onboarding-owning-description",
+              },
+            },
           },
           overrides: {
             OWNING: {
-              description: "default-owning-description"
-            }
-          }
-        }
-      }
-    }
+              description: "default-owning-description",
+            },
+          },
+        },
+      },
+    },
   };
 
   it("gets default value when no persona passed", () => {
@@ -101,14 +101,14 @@ describe("getProfileConfig", () => {
 
     const result = getProfileConfig({
       config: mergedConfigForTest,
-      fieldName: "businessName"
+      fieldName: "businessName",
     });
 
     expect(result).toEqual({
       header: "header",
       description: "default description",
       errorTextRequired: "error",
-      headerContextualInfo: "default header contextual info"
+      headerContextualInfo: "default header contextual info",
     });
   });
 
@@ -117,14 +117,14 @@ describe("getProfileConfig", () => {
     const result = getProfileConfig({
       config: mergedConfigForTest,
       fieldName: "businessName",
-      persona: "OWNING"
+      persona: "OWNING",
     });
 
     expect(result).toEqual({
       header: "header",
       description: "default-owning-description",
       errorTextRequired: "error",
-      headerContextualInfo: "default header contextual info"
+      headerContextualInfo: "default header contextual info",
     });
   });
 
@@ -133,34 +133,34 @@ describe("getProfileConfig", () => {
     const result = getProfileConfig({
       config: mergedConfigForTest,
       fieldName: "businessName",
-      persona: "FOREIGN"
+      persona: "FOREIGN",
     });
 
     expect(result).toEqual({
       header: "header",
       description: "default description",
       errorTextRequired: "error",
-      headerContextualInfo: "default header contextual info"
+      headerContextualInfo: "default header contextual info",
     });
   });
 
   it("gets default onboarding value when persona does not have overrides", () => {
     const mergedConfigForTest: ConfigType = merge(
       Config,
-      testConfigDefaultWithOverridesAndOboardingWithOverrides
+      testConfigDefaultWithOverridesAndOboardingWithOverrides,
     );
     const result = getProfileConfig({
       config: mergedConfigForTest,
       fieldName: "businessName",
       persona: "FOREIGN",
-      onboarding: true
+      onboarding: true,
     });
 
     expect(result).toEqual({
       header: "onboarding header",
       description: "onboarding default description",
       errorTextRequired: "error",
-      headerContextualInfo: "default header contextual info"
+      headerContextualInfo: "default header contextual info",
     });
   });
 
@@ -169,34 +169,34 @@ describe("getProfileConfig", () => {
     const result = getProfileConfig({
       config: mergedConfigForTest,
       fieldName: "businessName",
-      onboarding: true
+      onboarding: true,
     });
 
     expect(result).toEqual({
       header: "onboarding header",
       description: "onboarding default description",
       errorTextRequired: "error",
-      headerContextualInfo: "default header contextual info"
+      headerContextualInfo: "default header contextual info",
     });
   });
 
   it("gets onboarding value with persona override", () => {
     const mergedConfigForTest: ConfigType = merge(
       Config,
-      testConfigDefaultWithOverridesAndOboardingWithOverrides
+      testConfigDefaultWithOverridesAndOboardingWithOverrides,
     );
     const result = getProfileConfig({
       config: mergedConfigForTest,
       fieldName: "businessName",
       persona: "OWNING",
-      onboarding: true
+      onboarding: true,
     });
 
     expect(result).toEqual({
       header: "onboarding header",
       description: "onboarding-owning-description",
       errorTextRequired: "error",
-      headerContextualInfo: "default header contextual info"
+      headerContextualInfo: "default header contextual info",
     });
   });
 });

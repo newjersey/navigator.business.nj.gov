@@ -33,7 +33,7 @@ import {
   getCurrentDateFormatted,
   InputFile,
   NameAvailability,
-  PublicFilingLegalType
+  PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared/";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 import { useRouter } from "next/router";
@@ -52,7 +52,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const [formationFormData, setFormationFormData] = useState<FormationFormData>(
-    createEmptyFormationFormData()
+    createEmptyFormationFormData(),
   );
   const [stepIndex, setStepIndex] = useState(0);
   const [interactedFields, setInteractedFields] = useState<FieldsForErrorHandling[]>([]);
@@ -62,7 +62,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [hasSetStateFirstTime, setHasSetStateFirstTime] = useState<boolean>(false);
   const getCompletedFilingApiCallOccurred = useRef<boolean>(false);
   const [businessNameAvailability, setBusinessNameAvailability] = useState<NameAvailability | undefined>(
-    undefined
+    undefined,
   );
   const [dbaBusinessNameAvailability, setDbaBusinessNameAvailability] = useState<
     NameAvailability | undefined
@@ -72,7 +72,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const legalStructureId: FormationLegalType = useMemo(() => {
     return castPublicFilingLegalTypeToFormationType(
       (business?.profileData.legalStructureId ?? defaultFormationLegalType) as PublicFilingLegalType,
-      business?.profileData.businessPersona
+      business?.profileData.businessPersona,
     );
   }, [business?.profileData.businessPersona, business?.profileData.legalStructureId]);
 
@@ -80,7 +80,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
   const isValidLegalStructure = useMemo(
     () => allowFormation(business?.profileData.legalStructureId, business?.profileData.businessPersona),
-    [business?.profileData.legalStructureId, business?.profileData.businessPersona]
+    [business?.profileData.legalStructureId, business?.profileData.businessPersona],
   );
 
   const getBusinessStartDate = (date: string | undefined, legalType: FormationLegalType): string => {
@@ -100,7 +100,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         business.formationData.formationFormData.businessName ?? business.profileData.businessName,
       businessStartDate: getBusinessStartDate(
         business.formationData.formationFormData.businessStartDate,
-        legalStructureId
+        legalStructureId,
       ),
       addressMunicipality: business.profileData.municipality,
       legalType: legalStructureId,
@@ -108,16 +108,16 @@ export const BusinessFormation = (props: Props): ReactElement => {
       contactLastName: business.formationData.formationFormData.contactLastName || splitName.lastName,
       businessLocationType: isForeign
         ? business.formationData.formationFormData.businessLocationType ?? "US"
-        : "NJ"
+        : "NJ",
     });
     if (business.formationData.businessNameAvailability) {
       setBusinessNameAvailability({
-        ...business.formationData.businessNameAvailability
+        ...business.formationData.businessNameAvailability,
       });
     }
     if (business.formationData.dbaBusinessNameAvailability) {
       setDbaBusinessNameAvailability({
-        ...business.formationData.dbaBusinessNameAvailability
+        ...business.formationData.dbaBusinessNameAvailability,
       });
     }
 
@@ -161,7 +161,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
         updateQueue
           .queueFormationData({
-            completedFilingPayment: true
+            completedFilingPayment: true,
           })
           .update()
           .then(() => {
@@ -176,7 +176,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
   const setFieldsInteracted = (
     fields: FieldsForErrorHandling[],
-    config?: { setToUninteracted: boolean }
+    config?: { setToUninteracted: boolean },
   ): void => {
     setInteractedFields((prevState) => {
       const prevStateFieldRemoved = prevState.filter((it) => {
@@ -263,7 +263,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
           interactedFields,
           hasBeenSubmitted,
           hasSetStateFirstTime,
-          foreignGoodStandingFile
+          foreignGoodStandingFile,
         },
         setFormationFormData,
         setBusinessNameAvailability,
@@ -272,7 +272,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         setShowResponseAlert,
         setFieldsInteracted,
         setHasBeenSubmitted,
-        setForeignGoodStandingFile
+        setForeignGoodStandingFile,
       }}
     >
       <div className="flex flex-column minh-38" data-testid="formation-form">

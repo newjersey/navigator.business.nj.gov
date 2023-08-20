@@ -17,7 +17,7 @@ export const Provisions = (): ReactElement => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        provisions: [""]
+        provisions: [""],
       };
     });
   };
@@ -29,7 +29,7 @@ export const Provisions = (): ReactElement => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        provisions: newProvisions
+        provisions: newProvisions,
       };
     });
   };
@@ -41,7 +41,7 @@ export const Provisions = (): ReactElement => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        provisions: newProvisions
+        provisions: newProvisions,
       };
     });
   };
@@ -50,7 +50,7 @@ export const Provisions = (): ReactElement => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        provisions: [...(state.formationFormData.provisions ?? []), ""]
+        provisions: [...(state.formationFormData.provisions ?? []), ""],
       };
     });
   };
@@ -93,9 +93,9 @@ export const Provisions = (): ReactElement => {
                     inputProps: {
                       maxLength: MAX_CHARS,
                       sx: {
-                        padding: "1rem"
-                      }
-                    }
+                        padding: "1rem",
+                      },
+                    },
                   }}
                 />
               </div>

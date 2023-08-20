@@ -2,7 +2,7 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import {
   arrayOfOwnershipTypes,
   LookupOwnershipTypeById,
-  OwnershipType
+  OwnershipType,
 } from "@businessnjgovnavigator/shared";
 import { Checkbox, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { ReactElement, ReactNode, useContext } from "react";
@@ -23,7 +23,7 @@ export const ProfileOwnership = (): ReactElement => {
 
     setProfileData({
       ...state.profileData,
-      ownershipTypeIds: values
+      ownershipTypeIds: values,
     });
   };
 
@@ -49,7 +49,7 @@ export const ProfileOwnership = (): ReactElement => {
             }}
             inputProps={{
               "aria-label": "Ownership",
-              "data-testid": "ownership"
+              "data-testid": "ownership",
             }}
           >
             {arrayOfOwnershipTypes.map((ownership: OwnershipType) => {

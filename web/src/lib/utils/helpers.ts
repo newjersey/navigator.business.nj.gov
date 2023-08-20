@@ -6,7 +6,7 @@ import {
   Municipality,
   MunicipalityDetail,
   ProfileData,
-  UserData
+  UserData,
 } from "@businessnjgovnavigator/shared";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 import { useEffect, useRef } from "react";
@@ -23,8 +23,8 @@ export const groupBy = <T>(array: T[], predicate: (value: T, index: number, arra
         (acc[predicate(value, index, array)] ||= []).push(value);
         return acc;
       },
-      {} as { [key: string]: T[] }
-    )
+      {} as { [key: string]: T[] },
+    ),
   );
 
 export const useOnWindowResize = (fun: () => void): void => {
@@ -100,7 +100,7 @@ export const scrollToTop = (props?: { smooth?: boolean }): void => {
 
 export const scrollToTopOfElement = (
   element: HTMLDivElement | null,
-  { isDesktop }: { isDesktop: boolean }
+  { isDesktop }: { isDesktop: boolean },
 ): void => {
   let y = 0;
   if (element) {
@@ -123,20 +123,20 @@ interface AlertProps {
 }
 
 export const OnboardingStatusLookup = (
-  configOverrides?: ConfigType
+  configOverrides?: ConfigType,
 ): Record<OnboardingStatus, AlertProps> => {
   const config = configOverrides ?? getMergedConfig();
   return {
     SUCCESS: {
       body: config.profileDefaults.default.successTextBody,
       header: config.profileDefaults.default.successTextHeader,
-      variant: "success"
+      variant: "success",
     },
     ERROR: {
       body: config.profileDefaults.default.errorTextBody,
       header: config.profileDefaults.default.errorTextHeader,
-      variant: "error"
-    }
+      variant: "error",
+    },
   };
 };
 
@@ -152,7 +152,7 @@ export const getUserNameOrEmail = (userData: UserData | undefined): string => {
 
 export const validateEmail = (email: string): boolean => {
   return !!/^(([^\s"(),.:;<>@[\\\]]+(\.[^\s"(),.:;<>@[\\\]]+)*)|(".+"))@((\[(?:\d{1,3}\.){3}\d{1,3}])|(([\dA-Za-z-]+\.)+[A-Za-z]{2,}))$/.test(
-    String(email).toLowerCase()
+    String(email).toLowerCase(),
   );
 };
 
@@ -162,7 +162,7 @@ export const flipObject = <T extends string | number | symbol>(obj: Record<strin
       acc[obj[key]] = key;
       return acc;
     },
-    {} as Record<T, string>
+    {} as Record<T, string>,
   );
 };
 
@@ -219,7 +219,7 @@ export const mapMunicipalityDetailToMunicipality = (municipalityDetail: Municipa
     displayName: municipalityDetail.townDisplayName,
     id: municipalityDetail.id,
     name: municipalityDetail.townName,
-    county: municipalityDetail.countyName
+    county: municipalityDetail.countyName,
   };
 };
 
@@ -228,7 +228,7 @@ export const isForeignCorporation = (legalStructure: FormationLegalType): boolea
 };
 
 export const getConfigFieldByLegalStructure = (
-  legalType: FormationLegalType
+  legalType: FormationLegalType,
 ): "directors" | "trustees" | "members" => {
   switch (legalType) {
     case "c-corporation":

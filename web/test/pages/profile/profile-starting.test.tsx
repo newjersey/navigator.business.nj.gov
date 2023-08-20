@@ -8,7 +8,7 @@ import {
   allLegalStructuresOfType,
   randomHomeBasedIndustry,
   randomNonHomeBasedIndustry,
-  randomPublicFilingLegalStructure
+  randomPublicFilingLegalStructure,
 } from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -18,11 +18,11 @@ import {
   currentBusiness,
   setupStatefulUserDataContext,
   userDataUpdatedNTimes,
-  userDataWasNotUpdated
+  userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
 import {
   industryIdsWithOutEssentialQuestion,
-  industryIdsWithRequiredEssentialQuestion
+  industryIdsWithRequiredEssentialQuestion,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   Business,
@@ -39,7 +39,7 @@ import {
   naicsCodeTaskId,
   OperatingPhaseId,
   OperatingPhases,
-  UserData
+  UserData,
 } from "@businessnjgovnavigator/shared/index";
 import { generateFormationData, generateTaxFilingData } from "@businessnjgovnavigator/shared/test";
 
@@ -64,7 +64,7 @@ import {
   removeLocationAndSave,
   renderPage,
   selectByText,
-  selectByValue
+  selectByValue,
 } from "@/test/pages/profile/profile-helpers";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
@@ -79,10 +79,10 @@ function setupMockAnalytics(): typeof analytics {
       ...jest.requireActual("@/lib/utils/analytics").default.event,
       profile_location_question: {
         submit: {
-          location_entered_for_first_time: jest.fn()
-        }
-      }
-    }
+          location_entered_for_first_time: jest.fn(),
+        },
+      },
+    },
   };
 }
 
@@ -109,19 +109,19 @@ describe("profile - starting business", () => {
     });
     businessFromSetup = generateBusinessForProfile({
       profileData: generateProfileData({
-        businessPersona: "STARTING"
-      })
+        businessPersona: "STARTING",
+      }),
     });
   });
 
   describe("locks fields when formation getFiling success", () => {
     const legalStructure = "limited-liability-company";
     const municipality = generateMunicipality({
-      displayName: "some-cool-town"
+      displayName: "some-cool-town",
     });
     const startingBusiness = generateBusinessForProfile({
       formationData: generateFormationData({
-        completedFilingPayment: true
+        completedFilingPayment: true,
       }),
       profileData: generateProfileData({
         dateOfFormation: "2020-01-02",
@@ -129,8 +129,8 @@ describe("profile - starting business", () => {
         legalStructureId: legalStructure,
         entityId: "some-id",
         businessName: "some-name",
-        municipality: municipality
-      })
+        municipality: municipality,
+      }),
     });
 
     it("locks businessName", () => {
@@ -152,11 +152,11 @@ describe("profile - starting business", () => {
       renderPage({ business: startingBusiness, setRegistrationModalIsVisible });
       expect(screen.getByTestId("info")).toBeInTheDocument();
       expect(
-        screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header)
+        screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header),
       ).toBeInTheDocument();
       expect(screen.getByText(LookupLegalStructureById(legalStructure).name)).toBeInTheDocument();
       expect(
-        screen.queryByText(Config.profileDefaults.default.lockedFieldTooltipText)
+        screen.queryByText(Config.profileDefaults.default.lockedFieldTooltipText),
       ).not.toBeInTheDocument();
 
       expect(screen.queryByText("business-structure-task-link")).not.toBeInTheDocument();
@@ -171,8 +171,8 @@ describe("profile - starting business", () => {
       const initialBusiness = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          dateOfFormation: ""
-        })
+          dateOfFormation: "",
+        }),
       });
       const newark = generateMunicipality({ displayName: "Newark" });
       renderPage({ business: initialBusiness, municipalities: [newark], setRegistrationModalIsVisible });
@@ -182,7 +182,7 @@ describe("profile - starting business", () => {
 
     it("displays when populated", () => {
       const initialBusiness = generateBusinessForProfile({
-        profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "2020-01-01" })
+        profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "2020-01-01" }),
       });
       const newark = generateMunicipality({ displayName: "Newark" });
       renderPage({ business: initialBusiness, municipalities: [newark], setRegistrationModalIsVisible });
@@ -194,8 +194,8 @@ describe("profile - starting business", () => {
         const initialBusiness = generateBusinessForProfile({
           profileData: generateProfileData({
             businessPersona: "STARTING",
-            dateOfFormation: "2017-10-01"
-          })
+            dateOfFormation: "2017-10-01",
+          }),
         });
         const newark = generateMunicipality({ displayName: "Newark" });
         renderPage({ business: initialBusiness, municipalities: [newark], setRegistrationModalIsVisible });
@@ -208,8 +208,8 @@ describe("profile - starting business", () => {
         const initialBusiness = generateBusinessForProfile({
           profileData: generateProfileData({
             businessPersona: "STARTING",
-            dateOfFormation: "2017-10-01"
-          })
+            dateOfFormation: "2017-10-01",
+          }),
         });
         const newark = generateMunicipality({ displayName: "Newark" });
 
@@ -219,7 +219,7 @@ describe("profile - starting business", () => {
         clickSave();
 
         fireEvent.click(
-          within(screen.getByRole("dialog")).getByText(Config.formationDateDeletionModal.cancelButtonText)
+          within(screen.getByRole("dialog")).getByText(Config.formationDateDeletionModal.cancelButtonText),
         );
 
         expect(userDataWasNotUpdated()).toBe(true);
@@ -229,8 +229,8 @@ describe("profile - starting business", () => {
         const initialBusiness = generateBusinessForProfile({
           profileData: generateProfileData({
             businessPersona: "STARTING",
-            dateOfFormation: "2017-10-01"
-          })
+            dateOfFormation: "2017-10-01",
+          }),
         });
         const newark = generateMunicipality({ displayName: "Newark" });
 
@@ -240,7 +240,7 @@ describe("profile - starting business", () => {
         clickSave();
 
         fireEvent.click(
-          within(screen.getByRole("dialog")).getByText(Config.formationDateDeletionModal.deleteButtonText)
+          within(screen.getByRole("dialog")).getByText(Config.formationDateDeletionModal.deleteButtonText),
         );
 
         await waitFor(() => {
@@ -290,8 +290,8 @@ describe("profile - starting business", () => {
       profileData: {
         ...emptyBusiness.profileData,
         taxId: "",
-        businessPersona: "STARTING"
-      }
+        businessPersona: "STARTING",
+      },
     };
     const inputFieldName = getBusinessProfileInputFieldName(initialBusiness);
     const newark = generateMunicipality({ displayName: "Newark" });
@@ -326,13 +326,13 @@ describe("profile - starting business", () => {
         municipality: newark,
         taxId: "023456790123",
         employerId: "023456780",
-        notes: "whats appppppp"
+        notes: "whats appppppp",
       },
       taskProgress: {
         [einTaskId]: "COMPLETED",
-        [naicsCodeTaskId]: "NOT_STARTED"
+        [naicsCodeTaskId]: "NOT_STARTED",
       },
-      taskItemChecklist: {}
+      taskItemChecklist: {},
     });
   });
 
@@ -341,7 +341,7 @@ describe("profile - starting business", () => {
     mockApi.postGetAnnualFilings.mockImplementation((userData: UserData) => {
       const modifiedUserData = modifyCurrentBusiness(userData, (business) => ({
         ...business,
-        taxFilingData: { ...taxData, filings: [] }
+        taxFilingData: { ...taxData, filings: [] },
       }));
       return Promise.resolve(modifiedUserData);
     });
@@ -356,7 +356,7 @@ describe("profile - starting business", () => {
 
     expect(currentBusiness()).toEqual({
       ...initialBusiness,
-      taxFilingData: { ...taxData, filings: [] }
+      taxFilingData: { ...taxData, filings: [] },
     });
   });
 
@@ -365,10 +365,10 @@ describe("profile - starting business", () => {
       business: generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          employerId: undefined
-        })
+          employerId: undefined,
+        }),
       }),
-      setRegistrationModalIsVisible
+      setRegistrationModalIsVisible,
     });
     chooseTab("numbers");
     fillText("Employer id", "02-3456780");
@@ -388,8 +388,8 @@ describe("profile - starting business", () => {
         profileData: generateProfileData({
           legalStructureId: params.legalStructureId,
           operatingPhase: params.operatingPhase,
-          businessPersona: "STARTING"
-        })
+          businessPersona: "STARTING",
+        }),
       });
       renderPage({ municipalities: [newark], business, setRegistrationModalIsVisible });
     };
@@ -398,13 +398,13 @@ describe("profile - starting business", () => {
       renderPage({
         business: generateBusinessForProfile({
           profileData: generateProfileData({
-            municipality: generateMunicipality({ displayName: "Trenton" })
+            municipality: generateMunicipality({ displayName: "Trenton" }),
           }),
           taxFilingData: generateTaxFilingData({
-            state: "SUCCESS"
-          })
+            state: "SUCCESS",
+          }),
         }),
-        setRegistrationModalIsVisible
+        setRegistrationModalIsVisible,
       });
       expect(screen.getByText("Trenton")).toBeInTheDocument();
       expect(screen.getByTestId("locked-municipality")).toBeInTheDocument();
@@ -415,7 +415,7 @@ describe("profile - starting business", () => {
         const allPublicFilingLegalStructures = allLegalStructuresOfType({ type: "publicFiling" }).map(
           (it) => {
             return it.id;
-          }
+          },
         );
         const operatingPhases: OperatingPhaseId[] = ["GUEST_MODE", "NEEDS_TO_FORM"];
 
@@ -424,7 +424,7 @@ describe("profile - starting business", () => {
             it(`allows saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
               renderWithLegalStructureAndPhase({
                 legalStructureId: legalStructure,
-                operatingPhase: operatingPhase
+                operatingPhase: operatingPhase,
               });
               removeLocationAndSave();
               await expectLocationSavedAsUndefined();
@@ -444,7 +444,7 @@ describe("profile - starting business", () => {
             it(`allows saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
               renderWithLegalStructureAndPhase({
                 legalStructureId: legalStructure,
-                operatingPhase: operatingPhase
+                operatingPhase: operatingPhase,
               });
               removeLocationAndSave();
               await expectLocationSavedAsUndefined();
@@ -459,7 +459,7 @@ describe("profile - starting business", () => {
         const allPublicFilingLegalStructures = allLegalStructuresOfType({ type: "publicFiling" }).map(
           (it) => {
             return it.id;
-          }
+          },
         );
         const operatingPhases: OperatingPhaseId[] = ["NEEDS_TO_REGISTER_FOR_TAXES", "FORMED_AND_REGISTERED"];
         for (const legalStructure of allPublicFilingLegalStructures) {
@@ -467,7 +467,7 @@ describe("profile - starting business", () => {
             it(`prevents saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
               renderWithLegalStructureAndPhase({
                 legalStructureId: legalStructure,
-                operatingPhase: operatingPhase
+                operatingPhase: operatingPhase,
               });
               removeLocationAndSave();
               expectLocationNotSavedAndError();
@@ -484,7 +484,7 @@ describe("profile - starting business", () => {
           it(`prevents saving with empty location for ${legalStructure}`, async () => {
             renderWithLegalStructureAndPhase({
               legalStructureId: legalStructure,
-              operatingPhase: "FORMED_AND_REGISTERED"
+              operatingPhase: "FORMED_AND_REGISTERED",
             });
             removeLocationAndSave();
             expectLocationNotSavedAndError();
@@ -498,8 +498,8 @@ describe("profile - starting business", () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({
         legalStructureId: "general-partnership",
-        businessPersona: "STARTING"
-      })
+        businessPersona: "STARTING",
+      }),
     });
     renderPage({ business, setRegistrationModalIsVisible });
     chooseTab("numbers");
@@ -511,8 +511,8 @@ describe("profile - starting business", () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({
         legalStructureId: "general-partnership",
-        businessPersona: "STARTING"
-      })
+        businessPersona: "STARTING",
+      }),
     });
     renderPage({ business, setRegistrationModalIsVisible });
     chooseTab("numbers");
@@ -522,8 +522,8 @@ describe("profile - starting business", () => {
     await waitFor(() => {
       expect(
         screen.getByText(
-          templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, { length: "9" })
-        )
+          templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, { length: "9" }),
+        ),
       ).toBeInTheDocument();
     });
     expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
@@ -531,7 +531,7 @@ describe("profile - starting business", () => {
 
   it("user is able to go back to dashboard", async () => {
     const business = generateBusinessForProfile({
-      profileData: generateProfileData({ businessPersona: "STARTING" })
+      profileData: generateProfileData({ businessPersona: "STARTING" }),
     });
     renderPage({ business, setRegistrationModalIsVisible });
     clickBack();
@@ -544,8 +544,8 @@ describe("profile - starting business", () => {
     describe("when the tax ID is initially 9 digits in length", () => {
       const businessWith9TaxId = generateBusinessForProfile({
         profileData: generateProfileData({
-          taxId: "123456789"
-        })
+          taxId: "123456789",
+        }),
       });
 
       it("will save if tax ID does not change", async () => {
@@ -569,7 +569,7 @@ describe("profile - starting business", () => {
           return expect(userDataWasNotUpdated()).toEqual(true);
         });
         expect(
-          screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+          screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired),
         ).toBeInTheDocument();
         expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
       });
@@ -589,9 +589,9 @@ describe("profile - starting business", () => {
               ...businessWith9TaxId.taxFilingData,
               filings: [],
               state: undefined,
-              registeredISO: undefined
+              registeredISO: undefined,
             },
-            profileData: { ...businessWith9TaxId.profileData, taxId: "123456789123" }
+            profileData: { ...businessWith9TaxId.profileData, taxId: "123456789123" },
           });
         });
       });
@@ -609,9 +609,9 @@ describe("profile - starting business", () => {
               ...businessWith9TaxId.taxFilingData,
               filings: [],
               state: undefined,
-              registeredISO: undefined
+              registeredISO: undefined,
             },
-            profileData: { ...businessWith9TaxId.profileData, taxId: "" }
+            profileData: { ...businessWith9TaxId.profileData, taxId: "" },
           });
         });
       });
@@ -620,8 +620,8 @@ describe("profile - starting business", () => {
     describe("when the tax ID is initially 12 digits in length", () => {
       const businessWith12TaxId = generateBusinessForProfile({
         profileData: generateProfileData({
-          taxId: "123456789123"
-        })
+          taxId: "123456789123",
+        }),
       });
 
       it("will save if tax ID does not change", async () => {
@@ -659,9 +659,9 @@ describe("profile - starting business", () => {
               ...businessWith12TaxId.taxFilingData,
               filings: [],
               state: undefined,
-              registeredISO: undefined
+              registeredISO: undefined,
             },
-            profileData: { ...businessWith12TaxId.profileData, taxId: "666666666666" }
+            profileData: { ...businessWith12TaxId.profileData, taxId: "666666666666" },
           });
         });
       });
@@ -670,8 +670,8 @@ describe("profile - starting business", () => {
     describe("when the tax ID is initially 0  in length", () => {
       const businessWithEmptyTaxId = generateBusinessForProfile({
         profileData: generateProfileData({
-          taxId: ""
-        })
+          taxId: "",
+        }),
       });
 
       it("will save if tax ID does not change", async () => {
@@ -709,9 +709,9 @@ describe("profile - starting business", () => {
               ...businessWithEmptyTaxId.taxFilingData,
               filings: [],
               state: undefined,
-              registeredISO: undefined
+              registeredISO: undefined,
             },
-            profileData: { ...businessWithEmptyTaxId.profileData, taxId: "123456789123" }
+            profileData: { ...businessWithEmptyTaxId.profileData, taxId: "123456789123" },
           });
         });
       });
@@ -730,9 +730,9 @@ describe("profile - starting business", () => {
         taxId: "123456790",
         notes: "whats appppppp",
         municipality: generateMunicipality({
-          displayName: "Newark"
-        })
-      })
+          displayName: "Newark",
+        }),
+      }),
     });
 
     renderPage({ business, setRegistrationModalIsVisible });
@@ -750,7 +750,7 @@ describe("profile - starting business", () => {
 
   it("returns user to dashboard from un-saved changes modal", async () => {
     const initialBusiness = generateBusinessForProfile({
-      profileData: generateProfileData({ businessPersona: "STARTING" })
+      profileData: generateProfileData({ businessPersona: "STARTING" }),
     });
     const newark = generateMunicipality({ displayName: "Newark" });
     renderPage({ business: initialBusiness, municipalities: [newark], setRegistrationModalIsVisible });
@@ -772,8 +772,8 @@ describe("profile - starting business", () => {
       const initialBusiness = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES"
-        })
+          operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
+        }),
       });
       renderPage({ business: initialBusiness, setRegistrationModalIsVisible });
 
@@ -785,8 +785,8 @@ describe("profile - starting business", () => {
       const initialBusiness = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          operatingPhase: "FORMED_AND_REGISTERED"
-        })
+          operatingPhase: "FORMED_AND_REGISTERED",
+        }),
       });
       renderPage({ business: initialBusiness, setRegistrationModalIsVisible });
 
@@ -798,8 +798,8 @@ describe("profile - starting business", () => {
       const initialBusiness = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          operatingPhase: "FORMED_AND_REGISTERED"
-        })
+          operatingPhase: "FORMED_AND_REGISTERED",
+        }),
       });
       renderPage({ business: initialBusiness, setRegistrationModalIsVisible });
 
@@ -809,7 +809,7 @@ describe("profile - starting business", () => {
 
       await waitFor(() => {
         expect(
-          screen.getByText(Config.profileDefaults.fields.existingEmployees.default.errorTextRequired)
+          screen.getByText(Config.profileDefaults.fields.existingEmployees.default.errorTextRequired),
         ).toBeInTheDocument();
       });
     });
@@ -820,10 +820,10 @@ describe("profile - starting business", () => {
       business: generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          industryId: "generic"
-        })
+          industryId: "generic",
+        }),
       }),
-      setRegistrationModalIsVisible
+      setRegistrationModalIsVisible,
     });
     expect(screen.getByLabelText("Sector")).toBeInTheDocument();
   });
@@ -838,10 +838,10 @@ describe("profile - starting business", () => {
             businessPersona: "STARTING",
             industryId: "generic",
             legalStructureId: "limited-liability-partnership",
-            sectorId: undefined
-          })
+            sectorId: undefined,
+          }),
         }),
-        setRegistrationModalIsVisible
+        setRegistrationModalIsVisible,
       });
       expect(screen.getByLabelText("Sector")).toBeInTheDocument();
       chooseTab("numbers");
@@ -849,9 +849,9 @@ describe("profile - starting business", () => {
       const header = screen.getByTestId("profile-header");
       expect(within(header).getByText(Config.profileDefaults.default.profileTabRefTitle)).toBeInTheDocument();
       expect(
-        within(header).queryByText(Config.profileDefaults.default.profileTabInfoTitle)
+        within(header).queryByText(Config.profileDefaults.default.profileTabInfoTitle),
       ).not.toBeInTheDocument();
-    }
+    },
   );
 
   it.each(OperatingPhases.filter((it) => it.sectorRequired).map((it) => it.id))(
@@ -863,22 +863,22 @@ describe("profile - starting business", () => {
             operatingPhase: phase,
             businessPersona: "STARTING",
             industryId: "generic",
-            sectorId: undefined
-          })
+            sectorId: undefined,
+          }),
         }),
-        setRegistrationModalIsVisible
+        setRegistrationModalIsVisible,
       });
       expect(screen.getByLabelText("Sector")).toBeInTheDocument();
       chooseTab("numbers");
       expect(screen.getByLabelText("Sector")).toBeInTheDocument();
       const header = screen.getByTestId("profile-header");
       expect(
-        within(header).getByText(Config.profileDefaults.default.profileTabInfoTitle)
+        within(header).getByText(Config.profileDefaults.default.profileTabInfoTitle),
       ).toBeInTheDocument();
       expect(
-        within(header).queryByText(Config.profileDefaults.default.profileTabRefTitle)
+        within(header).queryByText(Config.profileDefaults.default.profileTabRefTitle),
       ).not.toBeInTheDocument();
-    }
+    },
   );
 
   it.each(industryIdsWithOutEssentialQuestion.filter((industry) => industry !== "generic"))(
@@ -893,18 +893,18 @@ describe("profile - starting business", () => {
           sectorId: undefined,
           operatingPhase: "UP_AND_RUNNING",
           legalStructureId: "limited-liability-company",
-          ...emptyIndustrySpecificData
+          ...emptyIndustrySpecificData,
         }),
-        onboardingFormProgress: "COMPLETED"
+        onboardingFormProgress: "COMPLETED",
       });
       renderPage({
         business,
-        setRegistrationModalIsVisible
+        setRegistrationModalIsVisible,
       });
       fireEvent.blur(screen.queryByLabelText("Sector") as HTMLElement);
       await waitFor(() => {
         expect(
-          screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
+          screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
         ).toBeInTheDocument();
       });
       selectByValue("Industry", newIndustry);
@@ -925,16 +925,16 @@ describe("profile - starting business", () => {
             sectorId: LookupIndustryById(newIndustry).defaultSectorId,
             homeBasedBusiness: isHomeBasedBusinessApplicable(newIndustry) ? undefined : false,
             naicsCode: "",
-            nonEssentialRadioAnswers: expect.anything()
+            nonEssentialRadioAnswers: expect.anything(),
           },
           taskProgress: {
             ...business.taskProgress,
-            [naicsCodeTaskId]: "NOT_STARTED"
+            [naicsCodeTaskId]: "NOT_STARTED",
           },
-          taskItemChecklist: {}
-        })
+          taskItemChecklist: {},
+        }),
       );
-    }
+    },
   );
 
   it("prevents user from saving if in up-and-running and sector is not selected", async () => {
@@ -943,8 +943,8 @@ describe("profile - starting business", () => {
         businessPersona: "STARTING",
         industryId: "generic",
         operatingPhase: "UP_AND_RUNNING",
-        sectorId: undefined
-      })
+        sectorId: undefined,
+      }),
     });
     renderPage({ business, setRegistrationModalIsVisible });
     fireEvent.blur(screen.getByLabelText("Sector") as HTMLElement);
@@ -952,7 +952,7 @@ describe("profile - starting business", () => {
     clickSave();
     await waitFor(() => {
       expect(
-        screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
+        screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired),
       ).toBeInTheDocument();
     });
     expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
@@ -969,8 +969,8 @@ describe("profile - starting business", () => {
             businessPersona: "STARTING",
             operatingPhase: phase,
             businessName: "",
-            legalStructureId: "limited-liability-company"
-          })
+            legalStructureId: "limited-liability-company",
+          }),
         });
         renderPage({ business, setRegistrationModalIsVisible });
         fireEvent.blur(screen.getByLabelText("Business name") as HTMLElement);
@@ -978,7 +978,7 @@ describe("profile - starting business", () => {
         clickSave();
         await waitFor(() => {
           expect(
-            screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
+            screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired),
           ).toBeInTheDocument();
         });
         expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
@@ -992,8 +992,8 @@ describe("profile - starting business", () => {
             businessPersona: "STARTING",
             operatingPhase: phase,
             businessName: "",
-            legalStructureId: "limited-liability-company"
-          })
+            legalStructureId: "limited-liability-company",
+          }),
         });
         renderPage({ business, setRegistrationModalIsVisible });
         fireEvent.blur(screen.getByLabelText("Business name") as HTMLElement);
@@ -1012,10 +1012,10 @@ describe("profile - starting business", () => {
       business: generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          industryId: randomHomeBasedIndustry()
-        })
+          industryId: randomHomeBasedIndustry(),
+        }),
       }),
-      setRegistrationModalIsVisible
+      setRegistrationModalIsVisible,
     });
     expect(screen.getByLabelText("Home based business")).toBeInTheDocument();
   });
@@ -1025,10 +1025,10 @@ describe("profile - starting business", () => {
       business: generateBusinessForProfile({
         profileData: generateProfileData({
           industryId: randomNonHomeBasedIndustry(),
-          businessPersona: "STARTING"
-        })
+          businessPersona: "STARTING",
+        }),
       }),
-      setRegistrationModalIsVisible
+      setRegistrationModalIsVisible,
     });
     expect(screen.queryByLabelText("Home based business")).not.toBeInTheDocument();
 
@@ -1041,10 +1041,10 @@ describe("profile - starting business", () => {
       business: generateBusinessForProfile({
         profileData: generateProfileData({
           industryId: undefined,
-          businessPersona: "STARTING"
-        })
+          businessPersona: "STARTING",
+        }),
       }),
-      setRegistrationModalIsVisible
+      setRegistrationModalIsVisible,
     });
     expect(screen.getByLabelText("Home based business")).toBeInTheDocument();
   });
@@ -1053,16 +1053,16 @@ describe("profile - starting business", () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({
         industryId: randomNonHomeBasedIndustry(),
-        businessPersona: "STARTING"
-      })
+        businessPersona: "STARTING",
+      }),
     });
     renderPage({ business, setRegistrationModalIsVisible });
 
     expect(
-      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
+      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description),
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
+      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription),
     ).not.toBeInTheDocument();
   });
 
@@ -1072,15 +1072,15 @@ describe("profile - starting business", () => {
       profileData: generateProfileData({
         businessPersona: "STARTING",
         industryId: "car-service",
-        ...emptyIndustrySpecificData
-      })
+        ...emptyIndustrySpecificData,
+      }),
     });
     renderPage({ business, setRegistrationModalIsVisible });
     clickSave();
 
     await waitFor(() => {
       expect(
-        screen.getByText(Config.profileDefaults.default.essentialQuestionInlineText)
+        screen.getByText(Config.profileDefaults.default.essentialQuestionInlineText),
       ).toBeInTheDocument();
     });
   });
@@ -1089,11 +1089,11 @@ describe("profile - starting business", () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({
         industryId: "cosmetology",
-        businessPersona: "STARTING"
+        businessPersona: "STARTING",
       }),
       taskProgress: {
-        [naicsCodeTaskId]: "COMPLETED"
-      }
+        [naicsCodeTaskId]: "COMPLETED",
+      },
     });
     renderPage({ business, setRegistrationModalIsVisible });
     selectByValue("Industry", "e-commerce");
@@ -1109,12 +1109,12 @@ describe("profile - starting business", () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({
         industryId: "cosmetology",
-        businessPersona: "STARTING"
+        businessPersona: "STARTING",
       }),
       taskProgress: {
-        [naicsCodeTaskId]: "COMPLETED"
+        [naicsCodeTaskId]: "COMPLETED",
       },
-      taskItemChecklist: { key1: true }
+      taskItemChecklist: { key1: true },
     });
     renderPage({ business, setRegistrationModalIsVisible });
     selectByValue("Industry", "e-commerce");
@@ -1133,17 +1133,17 @@ describe("profile - starting business", () => {
         profileData: generateProfileData({
           businessPersona: "STARTING",
           industryId: industryId,
-          ...emptyIndustrySpecificData
-        })
+          ...emptyIndustrySpecificData,
+        }),
       });
       renderPage({ business, setRegistrationModalIsVisible });
       clickSave();
       await waitFor(() => {
         expect(
-          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0]
+          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0],
         ).toBeInTheDocument();
       });
-    }
+    },
   );
 
   describe("Document Section", () => {
@@ -1151,8 +1151,8 @@ describe("profile - starting business", () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          legalStructureId: "limited-liability-company"
-        })
+          legalStructureId: "limited-liability-company",
+        }),
       });
       renderPage({ business, setRegistrationModalIsVisible });
       chooseTab("documents");
@@ -1163,8 +1163,8 @@ describe("profile - starting business", () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          legalStructureId: "sole-proprietorship"
-        })
+          legalStructureId: "sole-proprietorship",
+        }),
       });
       renderPage({ business, setRegistrationModalIsVisible });
       expect(screen.queryByTestId("documents")).not.toBeInTheDocument();
@@ -1174,33 +1174,33 @@ describe("profile - starting business", () => {
     it("shows placeholder text if there are no documents", () => {
       const business = generateBusinessForProfile({
         formationData: generateFormationData({
-          getFilingResponse: generateGetFilingResponse({ success: true })
+          getFilingResponse: generateGetFilingResponse({ success: true }),
         }),
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "limited-liability-company",
-          documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" }
-        })
+          documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" },
+        }),
       });
       renderPage({ business, setRegistrationModalIsVisible });
       chooseTab("documents");
       expect(
         screen.getByText(Config.profileDefaults.fields.documents.default.placeholder.split("[")[0], {
-          exact: false
-        })
+          exact: false,
+        }),
       ).toBeInTheDocument();
     });
 
     it("shows document links", () => {
       const business = generateBusinessForProfile({
         formationData: generateFormationData({
-          getFilingResponse: generateGetFilingResponse({ success: true })
+          getFilingResponse: generateGetFilingResponse({ success: true }),
         }),
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "limited-liability-company",
-          documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol" }
-        })
+          documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol" },
+        }),
       });
       renderPage({ business, setRegistrationModalIsVisible });
       chooseTab("documents");
@@ -1214,45 +1214,45 @@ describe("profile - starting business", () => {
       setMockDocumentsResponse({
         formationDoc: "testForm.pdf",
         certifiedDoc: "testCert.pdf",
-        standingDoc: "testStand.pdf"
+        standingDoc: "testStand.pdf",
       });
       const business = generateBusinessForProfile({
         formationData: generateFormationData({
-          getFilingResponse: generateGetFilingResponse({ success: true })
+          getFilingResponse: generateGetFilingResponse({ success: true }),
         }),
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "limited-liability-company",
-          documents: { certifiedDoc: "pz.zip", formationDoc: "whatever.pdf", standingDoc: "lol" }
-        })
+          documents: { certifiedDoc: "pz.zip", formationDoc: "whatever.pdf", standingDoc: "lol" },
+        }),
       });
       renderPage({ business, setRegistrationModalIsVisible });
       chooseTab("documents");
 
       expect(screen.getByText(Config.profileDefaults.default.formationDocFileTitle)).toHaveAttribute(
         "href",
-        "testForm.pdf"
+        "testForm.pdf",
       );
       expect(screen.getByText(Config.profileDefaults.default.standingDocFileTitle)).toHaveAttribute(
         "href",
-        "testStand.pdf"
+        "testStand.pdf",
       );
       expect(screen.getByText(Config.profileDefaults.default.certificationDocFileTitle)).toHaveAttribute(
         "href",
-        "testCert.pdf"
+        "testCert.pdf",
       );
     });
 
     it("hides document links if they do not exist", () => {
       const business = generateBusinessForProfile({
         formationData: generateFormationData({
-          getFilingResponse: generateGetFilingResponse({ success: true })
+          getFilingResponse: generateGetFilingResponse({ success: true }),
         }),
         profileData: generateProfileData({
           businessPersona: "STARTING",
           legalStructureId: "limited-liability-company",
-          documents: { certifiedDoc: "pp.zip", formationDoc: "whatever.pdf", standingDoc: "" }
-        })
+          documents: { certifiedDoc: "pp.zip", formationDoc: "whatever.pdf", standingDoc: "" },
+        }),
       });
 
       renderPage({ business, setRegistrationModalIsVisible });
@@ -1269,8 +1269,8 @@ describe("profile - starting business", () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          legalStructureId: "sole-proprietorship"
-        })
+          legalStructureId: "sole-proprietorship",
+        }),
       });
       renderPage({ business, setRegistrationModalIsVisible });
       expect(screen.getByTestId("tradeName")).toBeInTheDocument();
@@ -1280,8 +1280,8 @@ describe("profile - starting business", () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          legalStructureId: "limited-liability-company"
-        })
+          legalStructureId: "limited-liability-company",
+        }),
       });
       renderPage({ business, setRegistrationModalIsVisible });
       expect(screen.queryByTestId("tradeName")).not.toBeInTheDocument();
@@ -1293,8 +1293,8 @@ describe("profile - starting business", () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          legalStructureId: "general-partnership"
-        })
+          legalStructureId: "general-partnership",
+        }),
       });
       renderPage({ business, setRegistrationModalIsVisible });
       expect(screen.getByTestId("responsibleOwnerName")).toBeInTheDocument();
@@ -1304,8 +1304,8 @@ describe("profile - starting business", () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          legalStructureId: "limited-liability-partnership"
-        })
+          legalStructureId: "limited-liability-partnership",
+        }),
       });
       renderPage({ business, setRegistrationModalIsVisible });
       expect(screen.queryByTestId("responsibleOwnerName")).not.toBeInTheDocument();
@@ -1315,15 +1315,15 @@ describe("profile - starting business", () => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          legalStructureId: "sole-proprietorship"
+          legalStructureId: "sole-proprietorship",
         }),
         taxFilingData: generateTaxFilingData({
-          state: "PENDING"
-        })
+          state: "PENDING",
+        }),
       });
       renderPage({ business, setRegistrationModalIsVisible });
       expect(
-        screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.header)
+        screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.header),
       ).toBeInTheDocument();
       expect(screen.queryByTestId("responsibleOwnerName")).not.toBeInTheDocument();
     });

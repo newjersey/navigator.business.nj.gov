@@ -11,14 +11,14 @@ describe("timeStampBusinessSearch", () => {
   beforeEach(async () => {
     jest.resetAllMocks();
     stubBusinessNameClient = {
-      search: jest.fn()
+      search: jest.fn(),
     };
     searchAndAddTimeStamp = await timeStampBusinessSearch(stubBusinessNameClient);
   });
 
   it("calls the business name client and adds the current iso date", async () => {
     const nameAvailability: NameAvailabilityResponse = generateBusinessNameAvailabilityResponse({
-      status: "AVAILABLE"
+      status: "AVAILABLE",
     });
     stubBusinessNameClient.search.mockResolvedValue(nameAvailability);
 
@@ -31,7 +31,7 @@ describe("timeStampBusinessSearch", () => {
   it("limits similar names returned to 10", async () => {
     const nameAvailability: NameAvailabilityResponse = generateBusinessNameAvailabilityResponse({
       status: "UNAVAILABLE",
-      similarNames: Array.from({ length: 20 }).fill("abc") as string[]
+      similarNames: Array.from({ length: 20 }).fill("abc") as string[],
     });
 
     stubBusinessNameClient.search.mockResolvedValue(nameAvailability);

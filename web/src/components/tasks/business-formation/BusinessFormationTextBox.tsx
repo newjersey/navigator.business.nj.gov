@@ -37,7 +37,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        [props.fieldName]: ""
+        [props.fieldName]: "",
       };
     });
   };
@@ -85,9 +85,9 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
                   inputProps: {
                     maxLength: props.maxChars,
                     sx: {
-                      padding: "1rem"
-                    }
-                  }
+                      padding: "1rem",
+                    },
+                  },
                 }}
               />
             </div>

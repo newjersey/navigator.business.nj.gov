@@ -4,7 +4,7 @@ import { Business } from "@businessnjgovnavigator/shared/userData";
 export const isStepCompleted = (
   roadmap: Roadmap | undefined,
   step: Step,
-  business: Business | undefined
+  business: Business | undefined,
 ): boolean => {
   if (!roadmap) {
     return false;

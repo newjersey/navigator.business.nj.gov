@@ -52,7 +52,7 @@ export const CountryDropdown = (props: Props): ReactElement => {
     trim: true,
     stringify: (option: CountriesObject) => {
       return props.useFullName ? option.name : option.shortCode;
-    }
+    },
   });
 
   const filteredCountries = (): CountriesObject[] =>
@@ -110,7 +110,7 @@ export const CountryDropdown = (props: Props): ReactElement => {
             inputProps={{
               "aria-label": camelCaseToSentence(props.fieldName),
               "data-testid": props.fieldName,
-              ...params.inputProps
+              ...params.inputProps,
             }}
             onSubmit={onValidation}
             autoComplete={props.autoComplete ? "country" : "no"}

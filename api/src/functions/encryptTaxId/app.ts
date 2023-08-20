@@ -20,16 +20,16 @@ export default async function handler(): Promise<void> {
     dynamoDb = DynamoDBDocumentClient.from(
       new DynamoDBClient({
         region: "localhost",
-        endpoint: `http://${dynamoDbEndpoint}:${DYNAMO_OFFLINE_PORT}`
+        endpoint: `http://${dynamoDbEndpoint}:${DYNAMO_OFFLINE_PORT}`,
       }),
-      dynamoDbTranslateConfig
+      dynamoDbTranslateConfig,
     );
   } else {
     dynamoDb = DynamoDBDocumentClient.from(
       new DynamoDBClient({
-        region: "us-east-1"
+        region: "us-east-1",
       }),
-      dynamoDbTranslateConfig
+      dynamoDbTranslateConfig,
     );
   }
 
@@ -43,7 +43,7 @@ export default async function handler(): Promise<void> {
   const AWSEncryptionDecryptionClient = AWSEncryptionDecryptionFactory(AWS_CRYPTO_KEY, {
     stage: AWS_CRYPTO_CONTEXT_STAGE,
     purpose: AWS_CRYPTO_CONTEXT_PURPOSE,
-    origin: AWS_CRYPTO_CONTEXT_ORIGIN
+    origin: AWS_CRYPTO_CONTEXT_ORIGIN,
   });
 
   const encryptTaxId = encryptTaxIdFactory(AWSEncryptionDecryptionClient);

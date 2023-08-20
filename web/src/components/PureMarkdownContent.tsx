@@ -23,7 +23,7 @@ export const PureMarkdownContent = (props: Props): ReactElement => {
     .use(rehypeReact, {
       createElement: React.createElement,
       Fragment: React.Fragment,
-      components: props.components
+      components: props.components,
     })
     .processSync(props.children).result;
   return <>{markdown}</>;

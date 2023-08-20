@@ -7,14 +7,14 @@ import {
   generateTaskLink,
   operatingPhasesDisplayingBusinessStructurePrompt,
   operatingPhasesNotDisplayingBusinessStructurePrompt,
-  randomPublicFilingLegalType
+  randomPublicFilingLegalType,
 } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
@@ -23,7 +23,7 @@ import {
   generateMunicipality,
   generateProfileData,
   generateUserDataForBusiness,
-  LookupTaskAgencyById
+  LookupTaskAgencyById,
 } from "@businessnjgovnavigator/shared";
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import * as materialUi from "@mui/material";
@@ -33,7 +33,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
-    useMediaQuery: jest.fn()
+    useMediaQuery: jest.fn(),
   };
 }
 
@@ -56,7 +56,7 @@ const renderPage = (task: Task, initialBusiness?: Business): void => {
       >
         <TaskPage task={task} displayContent={createEmptyTaskDisplayContent()} municipalities={[]} />
       </WithStatefulUserData>
-    </materialUi.ThemeProvider>
+    </materialUi.ThemeProvider>,
   );
 };
 
@@ -81,7 +81,7 @@ describe("task page", () => {
         "|---|\n" +
         "| destination: city clerk |\n",
       callToActionLink: "www.example.com",
-      callToActionText: "Submit The Form Here"
+      callToActionText: "Submit The Form Here",
     });
 
     renderPage(task);
@@ -97,7 +97,7 @@ describe("task page", () => {
   it("does not show button if no link available", () => {
     const task = generateTask({
       callToActionText: "Submit it Here",
-      callToActionLink: ""
+      callToActionLink: "",
     });
 
     renderPage(task);
@@ -107,7 +107,7 @@ describe("task page", () => {
   it("shows default text if call to action has link but no text", () => {
     const task = generateTask({
       callToActionText: "",
-      callToActionLink: "www.example.com"
+      callToActionLink: "www.example.com",
     });
 
     renderPage(task);
@@ -120,7 +120,7 @@ describe("task page", () => {
       name: "original name",
       contentMd: "original description",
       callToActionText: "original call to action",
-      stepNumber: 1
+      stepNumber: 1,
     });
 
     useMockRoadmapTask({
@@ -128,7 +128,7 @@ describe("task page", () => {
       name: "a whole brand new name",
       contentMd: "a whole brand new description",
       callToActionText: "a whole brand new call to action",
-      stepNumber: 1
+      stepNumber: 1,
     });
 
     renderPage(task);
@@ -175,7 +175,7 @@ describe("task page", () => {
 
   it("displays agencyId as its name and agencyAdditionalContext comma separated when both defined", () => {
     renderPage(
-      generateTask({ agencyId: "nj-consumer-affairs", agencyAdditionalContext: "Board of Something" })
+      generateTask({ agencyId: "nj-consumer-affairs", agencyAdditionalContext: "Board of Something" }),
     );
     expect(screen.getByText(`${Config.taskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
     const agencyName = LookupTaskAgencyById("nj-consumer-affairs").name;
@@ -191,7 +191,7 @@ describe("task page", () => {
   it("loads License task screen for register-consumer-affairs", () => {
     renderPage(
       generateTask({ id: "register-consumer-affairs" }),
-      generateBusiness({ licenseData: undefined })
+      generateBusiness({ licenseData: undefined }),
     );
     expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
@@ -235,8 +235,8 @@ describe("task page", () => {
     renderPage(
       generateTask({
         postOnboardingQuestion: "construction-renovation",
-        contentMd: "some content\n\n${postOnboardingQuestion}\n\nmore content"
-      })
+        contentMd: "some content\n\n${postOnboardingQuestion}\n\nmore content",
+      }),
     );
     await waitFor(() => {
       expect(screen.getByTestId("construction-renovation")).toBeInTheDocument();
@@ -252,8 +252,8 @@ describe("task page", () => {
       generateTask({
         postOnboardingQuestion: "construction-renovation",
         contentMd: "some content\n\nmore content",
-        requiresLocation: false
-      })
+        requiresLocation: false,
+      }),
     );
     await waitFor(() => {
       expect(screen.getByTestId("construction-renovation")).toBeInTheDocument();
@@ -265,14 +265,14 @@ describe("task page", () => {
 
   it("toggles radio button for post-onboarding question", async () => {
     const initialBusiness = generateBusiness({
-      profileData: generateProfileData({ constructionRenovationPlan: undefined })
+      profileData: generateProfileData({ constructionRenovationPlan: undefined }),
     });
     renderPage(
       generateTask({
         postOnboardingQuestion: "construction-renovation",
-        requiresLocation: false
+        requiresLocation: false,
       }),
-      initialBusiness
+      initialBusiness,
     );
 
     await waitFor(() => {
@@ -302,9 +302,9 @@ describe("task page", () => {
         steps: [
           generateStep({ stepNumber: 1 }),
           generateStep({ stepNumber: 2 }),
-          generateStep({ stepNumber: 3 })
+          generateStep({ stepNumber: 3 }),
         ],
-        tasks: [taskOne, taskTwo, taskThree]
+        tasks: [taskOne, taskTwo, taskThree],
       });
     });
 
@@ -344,10 +344,10 @@ describe("task page", () => {
       useMockRoadmap({
         steps: [
           generateStep({
-            stepNumber: 1
-          })
+            stepNumber: 1,
+          }),
         ],
-        tasks: [task, doThisFirstTask, alsoThisOneTask]
+        tasks: [task, doThisFirstTask, alsoThisOneTask],
       });
     };
 
@@ -356,21 +356,21 @@ describe("task page", () => {
       useMockRoadmapWithTask(task);
       renderPage(task);
       expect(
-        screen.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false })
+        screen.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false }),
       ).not.toBeInTheDocument();
       expect(
-        screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
+        screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false }),
       ).not.toBeInTheDocument();
     });
 
     it("shows an alert with link when this task is unlocked by one other task", () => {
       const task = generateTask({
-        unlockedBy: [generateTaskLink({ name: "Do this first", urlSlug: "do-this-first" })]
+        unlockedBy: [generateTaskLink({ name: "Do this first", urlSlug: "do-this-first" })],
       });
       useMockRoadmapWithTask(task);
       renderPage(task);
       expect(
-        screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
+        screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false }),
       ).not.toBeInTheDocument();
       expect(screen.getByText(Config.taskDefaults.unlockedBySingular, { exact: false })).toBeInTheDocument();
       expect(screen.getByText("Do this first", { exact: false })).toBeInTheDocument();
@@ -381,8 +381,8 @@ describe("task page", () => {
       const task = generateTask({
         unlockedBy: [
           generateTaskLink({ name: "Do this first", urlSlug: "do-this-first" }),
-          generateTaskLink({ name: "Also this one", urlSlug: "also-this-one" })
-        ]
+          generateTaskLink({ name: "Also this one", urlSlug: "also-this-one" }),
+        ],
       });
 
       useMockRoadmapWithTask(task);
@@ -390,7 +390,7 @@ describe("task page", () => {
 
       expect(screen.getByText(Config.taskDefaults.unlockedByPlural, { exact: false })).toBeInTheDocument();
       expect(
-        screen.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false })
+        screen.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false }),
       ).not.toBeInTheDocument();
       expect(screen.getByText("Do this first", { exact: false })).toBeInTheDocument();
       expect(screen.getByText("Also this one", { exact: false })).toBeInTheDocument();
@@ -402,8 +402,8 @@ describe("task page", () => {
       renderPage(
         generateTask({
           id: "this-task",
-          unlockedBy: [generateTaskLink({ name: "NOT ON ROADMAP TASK" })]
-        })
+          unlockedBy: [generateTaskLink({ name: "NOT ON ROADMAP TASK" })],
+        }),
       );
 
       expect(screen.queryByText("NOT ON ROADMAP TASK", { exact: false })).not.toBeInTheDocument();
@@ -413,15 +413,15 @@ describe("task page", () => {
       const task = generateTask({
         unlockedBy: [
           generateTaskLink({ name: "Do this first", urlSlug: "do-this-first", id: "do-this-first" }),
-          generateTaskLink({ name: "Also this one", urlSlug: "also-this-one" })
-        ]
+          generateTaskLink({ name: "Also this one", urlSlug: "also-this-one" }),
+        ],
       });
 
       useMockRoadmapWithTask(task);
       renderPage(task, generateBusiness({ taskProgress: { "do-this-first": "COMPLETED" } }));
 
       expect(
-        screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
+        screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false }),
       ).not.toBeInTheDocument();
       expect(screen.getByText(Config.taskDefaults.unlockedBySingular, { exact: false })).toBeInTheDocument();
       expect(screen.queryByText("Do this first", { exact: false })).not.toBeInTheDocument();
@@ -436,9 +436,9 @@ describe("task page", () => {
         taskProgress: {},
         profileData: generateProfileData({
           legalStructureId: randomPublicFilingLegalType(),
-          businessPersona: "STARTING"
-        })
-      })
+          businessPersona: "STARTING",
+        }),
+      }),
     );
 
     expect(screen.queryByTestId("nextAndPreviousButtons")).not.toBeInTheDocument();
@@ -451,9 +451,9 @@ describe("task page", () => {
         taskProgress: {},
         profileData: generateProfileData({
           legalStructureId: randomPublicFilingLegalType(),
-          businessPersona: "FOREIGN"
-        })
-      })
+          businessPersona: "FOREIGN",
+        }),
+      }),
     );
 
     expect(screen.queryByTestId("nextAndPreviousButtons")).not.toBeInTheDocument();
@@ -467,13 +467,13 @@ describe("task page", () => {
         generateTask({ id: businessStructureTaskId }),
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase
+            operatingPhase,
           }),
-          taskProgress: { [businessStructureTaskId]: "NOT_STARTED" }
-        })
+          taskProgress: { [businessStructureTaskId]: "NOT_STARTED" },
+        }),
       );
       expect(screen.queryByTestId("nextUrlSlugButton")).not.toBeInTheDocument();
-    }
+    },
   );
 
   it.each(operatingPhasesNotDisplayingBusinessStructurePrompt)(
@@ -484,14 +484,14 @@ describe("task page", () => {
         generateTask({ id: businessStructureTaskId }),
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase
+            operatingPhase,
           }),
-          taskProgress: { [businessStructureTaskId]: "COMPLETED" }
-        })
+          taskProgress: { [businessStructureTaskId]: "COMPLETED" },
+        }),
       );
 
       expect(screen.getByTestId("nextUrlSlugButton")).toBeInTheDocument();
-    }
+    },
   );
 
   describe("deferred location question", () => {
@@ -506,12 +506,12 @@ describe("task page", () => {
       const task = generateTask({
         requiresLocation: true,
         contentMd: contentWithLocationSection,
-        postOnboardingQuestion: undefined
+        postOnboardingQuestion: undefined,
       });
       const businessWithoutMunicipality = generateBusiness({
         profileData: generateProfileData({
-          municipality: undefined
-        })
+          municipality: undefined,
+        }),
       });
 
       renderPage(task, businessWithoutMunicipality);
@@ -523,12 +523,12 @@ describe("task page", () => {
       const task = generateTask({
         requiresLocation: true,
         contentMd: contentWithLocationSection,
-        postOnboardingQuestion: undefined
+        postOnboardingQuestion: undefined,
       });
       const businessWithMunicipality = generateBusiness({
         profileData: generateProfileData({
-          municipality: generateMunicipality({})
-        })
+          municipality: generateMunicipality({}),
+        }),
       });
 
       renderPage(task, businessWithMunicipality);
@@ -540,7 +540,7 @@ describe("task page", () => {
       const task = generateTask({
         requiresLocation: false,
         contentMd: contentWithLocationSection,
-        postOnboardingQuestion: undefined
+        postOnboardingQuestion: undefined,
       });
       renderPage(task);
       expect(screen.queryByTestId("deferred-location-task")).not.toBeInTheDocument();
@@ -551,8 +551,8 @@ describe("task page", () => {
         generateTask({
           requiresLocation: true,
           contentMd: contentWithLocationSection,
-          postOnboardingQuestion: undefined
-        })
+          postOnboardingQuestion: undefined,
+        }),
       );
       await screen.findByTestId("deferred-location-task");
       expect(screen.getByText("some content")).toBeInTheDocument();

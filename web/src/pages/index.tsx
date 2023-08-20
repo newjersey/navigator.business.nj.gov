@@ -64,14 +64,14 @@ const Home = (props: Props): ReactElement => {
     if (landingPageExperience === "ExperienceB") {
       landingPageConfig = {
         ...landingPageConfig,
-        ...Config.landingPageExperienceB
+        ...Config.landingPageExperienceB,
       };
     }
   }
   if (props.isWelcomePage) {
     landingPageConfig = {
       ...landingPageConfig,
-      ...Config.landingPageExperienceWelcome
+      ...Config.landingPageExperienceWelcome,
     };
   }
   useEffect(() => {
@@ -100,7 +100,7 @@ const Home = (props: Props): ReactElement => {
     supportingText: string,
     imageSrc: string,
     imageAlt: string,
-    reverseOrder?: boolean
+    reverseOrder?: boolean,
   ): ReactElement => {
     return (
       <div className={`${isDesktopAndUp ? "landing-two-column-row" : "landing-one-column-row"}`}>
@@ -196,20 +196,20 @@ const Home = (props: Props): ReactElement => {
             landingPageConfig.section5FirstHeaderText,
             landingPageConfig.section5FirstSupportingText,
             "/img/Landing-step-by-step.svg",
-            "step by step guide"
+            "step by step guide",
           )}
           {renderTwoColumnRow(
             landingPageConfig.section5SecondHeaderText,
             landingPageConfig.section5SecondSupportingText,
             "/img/Landing-funding-and-certifications.svg",
             "funding and certifications opportunities",
-            true
+            true,
           )}
           {renderTwoColumnRow(
             landingPageConfig.section5ThirdHeaderText,
             landingPageConfig.section5ThirdSupportingText,
             "/img/Landing-and-more.svg",
-            "and more tools and features"
+            "and more tools and features",
           )}
         </section>
 

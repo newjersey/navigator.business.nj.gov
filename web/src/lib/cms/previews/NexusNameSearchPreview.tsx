@@ -23,7 +23,7 @@ const NexusNameSearchPreview = (props: PreviewProps): ReactElement => {
           nameAvailability={{
             status: "UNAVAILABLE",
             similarNames: [],
-            lastUpdatedTimeStamp: "2023-04-03T20:08:58Z"
+            lastUpdatedTimeStamp: "2023-04-03T20:08:58Z",
           }}
           resetSearch={(): void => {}}
         />
@@ -33,7 +33,7 @@ const NexusNameSearchPreview = (props: PreviewProps): ReactElement => {
           nameAvailability={{
             status: "UNAVAILABLE",
             similarNames: ["name 1", "name 2"],
-            lastUpdatedTimeStamp: "2023-04-03T20:08:58Z"
+            lastUpdatedTimeStamp: "2023-04-03T20:08:58Z",
           }}
           resetSearch={(): void => {}}
         />

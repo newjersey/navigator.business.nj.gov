@@ -5,25 +5,25 @@ import { LogWriterType } from "../libs/logWriter";
 
 export const WebserviceLicenseStatusClient = (
   baseUrl: string,
-  logWriter: LogWriterType
+  logWriter: LogWriterType,
 ): LicenseStatusClient => {
   const search = (name: string, zipCode: string, licenseType: string): Promise<LicenseEntity[]> => {
     const url = `${baseUrl}/ws/simple/queryLicenseStatus`;
     const logId = logWriter.GetId();
     logWriter.LogInfo(
-      `License Status Search - Request Sent.- Id:${logId}  url: ${url}. Business Name: ${name}. License Type: ${licenseType}. ZipCode: ${zipCode}`
+      `License Status Search - Request Sent.- Id:${logId}  url: ${url}. Business Name: ${name}. License Type: ${licenseType}. ZipCode: ${zipCode}`,
     );
     return axios
       .post(url, {
         zipCode: zipCode,
         businessName: name,
-        licenseType: licenseType
+        licenseType: licenseType,
       })
       .then((response) => {
         logWriter.LogInfo(
           `License Status Search - Response Received.- Id:${logId}  Status: ${response.status} : ${
             response.statusText
-          }. Data: ${JSON.stringify(response.data)}`
+          }. Data: ${JSON.stringify(response.data)}`,
         );
         return response.data || [];
       })
@@ -34,6 +34,6 @@ export const WebserviceLicenseStatusClient = (
   };
 
   return {
-    search
+    search,
   };
 };

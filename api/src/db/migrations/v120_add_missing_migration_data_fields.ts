@@ -30,9 +30,9 @@ export const migrate_v119_to_v120 = (v119Data: v119UserData): v120UserData => {
     businesses: Object.fromEntries(
       Object.values(v119Data.businesses)
         .map((business) => migrate_v119Business_to_v120Business(business))
-        .map((currBusiness) => [currBusiness.id, currBusiness])
+        .map((currBusiness) => [currBusiness.id, currBusiness]),
     ),
-    version: 120
+    version: 120,
   };
 };
 
@@ -44,20 +44,20 @@ const migrate_v119Business_to_v120Business = (v119BusinessData: v119Business): v
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       responsibleOwnerName: (v119BusinessData.profileData as any).responsibleOwnerName ?? "",
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      tradeName: (v119BusinessData.profileData as any).tradeName ?? ""
+      tradeName: (v119BusinessData.profileData as any).tradeName ?? "",
     },
     preferences: {
       ...v119BusinessData.preferences,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      phaseNewlyChanged: (v119BusinessData.preferences as any).phaseNewlyChanged ?? false
+      phaseNewlyChanged: (v119BusinessData.preferences as any).phaseNewlyChanged ?? false,
     },
     taxFilingData: {
       ...v119BusinessData.taxFilingData,
       filings: v119BusinessData.taxFilingData.filings.map((filing: v119TaxFiling) => ({
         ...filing,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        calendarEventType: (filing as any).calendarEventType || "TAX-FILING"
-      }))
+        calendarEventType: (filing as any).calendarEventType || "TAX-FILING",
+      })),
     },
     formationData: {
       ...v119BusinessData.formationData,
@@ -74,17 +74,17 @@ const migrate_v119Business_to_v120Business = (v119BusinessData: v119Business): v
         members: v119BusinessData.formationData.formationFormData.members?.map((member) => ({
           ...member,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          businessLocationType: (member as any).businessLocationType
+          businessLocationType: (member as any).businessLocationType,
         })),
         incorporators: v119BusinessData.formationData.formationFormData.incorporators?.map(
           (incorporator) => ({
             ...incorporator,
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            businessLocationType: (incorporator as any).businessLocationType
-          })
-        )
-      }
-    }
+            businessLocationType: (incorporator as any).businessLocationType,
+          }),
+        ),
+      },
+    },
   };
 };
 
@@ -283,7 +283,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 type v120NameAvailabilityStatus =
@@ -416,7 +416,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -425,7 +425,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const lpBusinessSuffix = ["LIMITED PARTNERSHIP", "LP", "L.P."] as const;
@@ -440,7 +440,7 @@ const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 const foreignCorpBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
@@ -449,7 +449,7 @@ const AllBusinessSuffixes = [
   ...llcBusinessSuffix,
   ...llpBusinessSuffix,
   ...lpBusinessSuffix,
-  ...foreignCorpBusinessSuffix
+  ...foreignCorpBusinessSuffix,
 ] as const;
 
 type v120BusinessSuffix = (typeof AllBusinessSuffixes)[number];

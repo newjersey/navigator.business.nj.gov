@@ -23,8 +23,8 @@ export const Documents = (props: Props): ReactElement => {
     {
       config: Config,
       persona: state.flow,
-      fieldName: "documents"
-    }
+      fieldName: "documents",
+    },
   );
 
   const listOfDocuments = useMemo(() => {

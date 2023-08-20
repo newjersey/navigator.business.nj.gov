@@ -13,7 +13,7 @@ export const ProfileNexusDBANameField = (props: Props): ReactElement => {
     <OnboardingField
       fieldName={"nexusDbaName"}
       fieldOptions={{
-        inputProps: { "data-testid": "nexusDBAName" }
+        inputProps: { "data-testid": "nexusDBAName" },
       }}
       inputWidth="default"
       {...props}

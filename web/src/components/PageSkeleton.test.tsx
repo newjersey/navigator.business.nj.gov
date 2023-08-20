@@ -15,7 +15,7 @@ describe("<PageSkeleton />", () => {
     render(
       <PageSkeleton>
         <></>
-      </PageSkeleton>
+      </PageSkeleton>,
     );
 
     expect(screen.queryByTestId("reportAnIssueBar")).not.toBeInTheDocument();
@@ -27,7 +27,7 @@ describe("<PageSkeleton />", () => {
     render(
       <PageSkeleton>
         <></>
-      </PageSkeleton>
+      </PageSkeleton>,
     );
 
     expect(screen.getByTestId("reportAnIssueBar")).toBeInTheDocument();

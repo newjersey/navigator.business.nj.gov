@@ -19,7 +19,7 @@ export const fetchTaskByFilename = async (filename: string): Promise<Task> => {
   return {
     ...taskWithoutLinks,
     unlockedBy: unlockedByTaskLinks,
-    filename: filename
+    filename: filename,
   };
 };
 
@@ -29,7 +29,7 @@ export const fetchTaskLinkByFilename = async (filename: string): Promise<TaskLin
     name: taskWithoutLinks.name,
     urlSlug: taskWithoutLinks.urlSlug,
     filename: filename,
-    id: taskWithoutLinks.id
+    id: taskWithoutLinks.id,
   };
 };
 

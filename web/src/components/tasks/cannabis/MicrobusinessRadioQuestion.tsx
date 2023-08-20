@@ -10,13 +10,13 @@ export const MicrobusinessRadioQuestion = (): ReactElement => {
   const { Config } = useConfig();
 
   const handleRadioChange = async (
-    event: React.ChangeEvent<{ name?: string; value: string }>
+    event: React.ChangeEvent<{ name?: string; value: string }>,
   ): Promise<void> => {
     if (!business || !updateQueue) return;
     const isMicrobusiness = event.target.value === "true";
     await updateQueue
       .queueProfileData({
-        cannabisMicrobusiness: isMicrobusiness
+        cannabisMicrobusiness: isMicrobusiness,
       })
       .update();
 

@@ -10,7 +10,7 @@ describe("cms", () => {
     it("allows editing all config fields in the CMS", () => {
       const cmsConfig = fs.readFileSync(
         path.join(process.cwd(), "web", "public", "mgmt", "config.yml"),
-        "utf8"
+        "utf8",
       );
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment

@@ -7,13 +7,13 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentBusiness,
   getLastCalledWithConfig,
-  setupStatefulUserDataContext
+  setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
 import {
   industriesWithEssentialQuestion,
   industriesWithOutEssentialQuestion,
   mockSuccessfulApiSignups,
-  renderPage
+  renderPage,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import { createEmptyProfileData, generateProfileData } from "@businessnjgovnavigator/shared/";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
@@ -23,7 +23,7 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
-  postGetAnnualFilings: jest.fn()
+  postGetAnnualFilings: jest.fn(),
 }));
 
 const Config = getMergedConfig();
@@ -48,9 +48,9 @@ describe("onboarding - shared", () => {
     const business = generateBusiness({
       profileData: generateProfileData({
         businessPersona: "STARTING",
-        legalStructureId: "c-corporation"
+        legalStructureId: "c-corporation",
       }),
-      onboardingFormProgress: "UNSTARTED"
+      onboardingFormProgress: "UNSTARTED",
     });
 
     renderPage({ userData: generateUserDataForBusiness(business) });
@@ -143,7 +143,7 @@ describe("onboarding - shared", () => {
   it("resets non-shared information when switching from starting flow to owning flow", async () => {
     const business = generateBusiness({
       onboardingFormProgress: "UNSTARTED",
-      profileData: createEmptyProfileData()
+      profileData: createEmptyProfileData(),
     });
     const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
 
@@ -155,7 +155,7 @@ describe("onboarding - shared", () => {
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
     expect(screen.getByTestId("business-persona-owning")).toBeInTheDocument();
     expect(
-      screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" }))
+      screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" })),
     ).toBeInTheDocument();
     page.chooseRadio("business-persona-owning");
     page.clickNext();
@@ -175,14 +175,14 @@ describe("onboarding - shared", () => {
       employerId: undefined,
       taxId: undefined,
       notes: "",
-      operatingPhase: "GUEST_MODE_OWNING"
+      operatingPhase: "GUEST_MODE_OWNING",
     });
   });
 
   it("does not reset information when re-visiting page 1 but not switching the answer", async () => {
     const business = generateBusiness({
       onboardingFormProgress: "UNSTARTED",
-      profileData: createEmptyProfileData()
+      profileData: createEmptyProfileData(),
     });
     const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
 

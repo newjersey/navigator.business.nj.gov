@@ -31,7 +31,7 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
   const [priorityStatusState, setPriorityStatusState] = useState<Record<PriorityApplicationType, boolean>>({
     diverselyOwned: false,
     socialEquity: false,
-    impactZone: false
+    impactZone: false,
   });
   const [noPriorityStatus, setNoPriorityStatus] = useState<boolean>(false);
 
@@ -64,13 +64,13 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
     setPriorityStatusState({
       diverselyOwned: minorityOrWomenPriorityTypeSelected || veteranPriorityTypeSelected,
       impactZone: impactZonePriorityTypeSelected,
-      socialEquity: socialEquityPriorityTypeSelected
+      socialEquity: socialEquityPriorityTypeSelected,
     });
     setNoPriorityStatus(
       !minorityOrWomenPriorityTypeSelected &&
         !veteranPriorityTypeSelected &&
         !impactZonePriorityTypeSelected &&
-        !socialEquityPriorityTypeSelected
+        !socialEquityPriorityTypeSelected,
     );
   }, business);
 
@@ -78,7 +78,7 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
     setPriorityStatusState((current) => {
       return {
         ...current,
-        [type]: checked
+        [type]: checked,
       };
     });
   };

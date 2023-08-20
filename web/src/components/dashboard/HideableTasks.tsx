@@ -22,7 +22,7 @@ export const HideableTasks = (): ReactElement => {
 
     updateQueue
       .queuePreferences({
-        isHideableRoadmapOpen: !business.preferences.isHideableRoadmapOpen
+        isHideableRoadmapOpen: !business.preferences.isHideableRoadmapOpen,
       })
       .update();
   };
@@ -62,7 +62,7 @@ export const HideableTasks = (): ReactElement => {
       ) : (
         <div className="text-base">
           {templateEval(Config.dashboardDefaults.hiddenTasksText, {
-            count: String(hiddenTasksCount())
+            count: String(hiddenTasksCount()),
           })}
         </div>
       )}

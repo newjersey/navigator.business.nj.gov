@@ -14,9 +14,9 @@ export const migrate_v12_to_v13 = (v12Data: v12UserData): v13UserData => {
     ...v12Data,
     onboardingData: {
       constructionRenovationPlan: undefined,
-      ...v12Data.onboardingData
+      ...v12Data.onboardingData,
     },
-    version: 13
+    version: 13,
   };
 };
 

@@ -44,7 +44,7 @@ export const NavBarDesktop = (): ReactElement => {
   };
 
   const handleClose = (
-    event?: MouseEvent | TouchEvent | React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>
+    event?: MouseEvent | TouchEvent | React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>,
   ): void => {
     if (event && anchorRef.current && anchorRef.current.contains(event.target as Node)) {
       return;
@@ -89,7 +89,7 @@ export const NavBarDesktop = (): ReactElement => {
                           router,
                           updateQueue,
                           updateQueue?.current(),
-                          setRegistrationAlertStatus
+                          setRegistrationAlertStatus,
                         );
                       }}
                     >
@@ -155,7 +155,7 @@ export const NavBarDesktop = (): ReactElement => {
                   <Grow
                     {...TransitionProps}
                     style={{
-                      transformOrigin: placement.startsWith("bottom") ? "center top" : "center bottom"
+                      transformOrigin: placement.startsWith("bottom") ? "center top" : "center bottom",
                     }}
                   >
                     <Paper>

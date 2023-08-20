@@ -2,7 +2,7 @@ import {
   camelCaseToKebabCase,
   camelCaseToSentence,
   capitalizeFirstLetter,
-  kebabSnakeSentenceToCamelCase
+  kebabSnakeSentenceToCamelCase,
 } from "@/lib/utils/cases-helpers";
 
 describe("cases-helpers", () => {

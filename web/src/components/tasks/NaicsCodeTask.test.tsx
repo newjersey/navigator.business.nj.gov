@@ -11,7 +11,7 @@ import {
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
@@ -21,7 +21,7 @@ import {
   generateUserDataForBusiness,
   LookupIndustryById,
   OperatingPhaseId,
-  TaxFilingState
+  TaxFilingState,
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -75,15 +75,15 @@ describe("<NaicsCodeTask />", () => {
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
-          IsAuthenticated.TRUE
-        )
+          IsAuthenticated.TRUE,
+        ),
       );
     };
 
     beforeEach(() => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ naicsCode: "", industryId: validIndustryId }),
-        taskProgress: { [taskId]: "NOT_STARTED" }
+        taskProgress: { [taskId]: "NOT_STARTED" },
       });
     });
 
@@ -103,7 +103,7 @@ describe("<NaicsCodeTask />", () => {
       })!.SixDigitDescription!;
 
       const expectedUrl = templateEval(Config.determineNaicsCode.naicsDescriptionURL, {
-        code: validNaicsCode
+        code: validNaicsCode,
       });
 
       expect(screen.getByText(description)).toHaveAttribute("href", expectedUrl);
@@ -176,15 +176,15 @@ describe("<NaicsCodeTask />", () => {
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
-          IsAuthenticated.TRUE
-        )
+          IsAuthenticated.TRUE,
+        ),
       );
     };
 
     beforeEach(() => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ naicsCode: "", industryId: "" }),
-        taskProgress: { [taskId]: "NOT_STARTED" }
+        taskProgress: { [taskId]: "NOT_STARTED" },
       });
     });
 
@@ -197,7 +197,7 @@ describe("<NaicsCodeTask />", () => {
     it("shows the correct save button text", async () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
-        target: { value: "12345" }
+        target: { value: "12345" },
       });
 
       expect(screen.getByText(`${Config.determineNaicsCode.saveButtonText}`)).toBeInTheDocument();
@@ -206,7 +206,7 @@ describe("<NaicsCodeTask />", () => {
     it("enters and saves NAICS code", async () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
-        target: { value: validNaicsCode }
+        target: { value: validNaicsCode },
       });
       fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
       await waitFor(() => {
@@ -217,7 +217,7 @@ describe("<NaicsCodeTask />", () => {
     it("shows error on length validation failure", () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
-        target: { value: "12345" }
+        target: { value: "12345" },
       });
       fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
       expect(screen.getByText(Config.determineNaicsCode.lengthValidationErrorText)).toBeInTheDocument();
@@ -227,7 +227,7 @@ describe("<NaicsCodeTask />", () => {
     it("shows error on invalid code failure on input", () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
-        target: { value: "123457" }
+        target: { value: "123457" },
       });
       expect(screen.getByText(Config.determineNaicsCode.invalidValidationErrorText)).toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
@@ -238,21 +238,21 @@ describe("<NaicsCodeTask />", () => {
     it("hides error for invalid code failure on input", () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
-        target: { value: "123457" }
+        target: { value: "123457" },
       });
       expect(screen.getByText(Config.determineNaicsCode.invalidValidationErrorText)).toBeInTheDocument();
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
-        target: { value: "12345" }
+        target: { value: "12345" },
       });
       expect(
-        screen.queryByText(Config.determineNaicsCode.invalidValidationErrorText)
+        screen.queryByText(Config.determineNaicsCode.invalidValidationErrorText),
       ).not.toBeInTheDocument();
     });
 
     it("displays code with success message on save", async () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
-        target: { value: validNaicsCode }
+        target: { value: validNaicsCode },
       });
       fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
       await waitFor(() => {
@@ -264,7 +264,7 @@ describe("<NaicsCodeTask />", () => {
     it("sets task status to COMPLETED on save", async () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
-        target: { value: validNaicsCode }
+        target: { value: validNaicsCode },
       });
       fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
       await waitFor(() => {
@@ -286,12 +286,12 @@ describe("<NaicsCodeTask />", () => {
         profileData: {
           ...initialBusiness.profileData,
           operatingPhase: params?.operatingPhaseId ?? initialBusiness.profileData.operatingPhase,
-          businessPersona: params?.businessPersona ?? initialBusiness.profileData.businessPersona
+          businessPersona: params?.businessPersona ?? initialBusiness.profileData.businessPersona,
         },
         taxFilingData: {
           ...initialBusiness.taxFilingData,
-          state: params?.taxFilingState ?? initialBusiness.taxFilingData.state
-        }
+          state: params?.taxFilingState ?? initialBusiness.taxFilingData.state,
+        },
       };
       render(
         withAuthAlert(
@@ -300,15 +300,15 @@ describe("<NaicsCodeTask />", () => {
               <NaicsCodeTask task={task} />
             </WithStatefulUserData>
           </ThemeProvider>,
-          IsAuthenticated.TRUE
-        )
+          IsAuthenticated.TRUE,
+        ),
       );
     };
 
     beforeEach(() => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ naicsCode: validNaicsCode }),
-        taskProgress: { [taskId]: "COMPLETED" }
+        taskProgress: { [taskId]: "COMPLETED" },
       });
     });
 
@@ -399,8 +399,8 @@ describe("<NaicsCodeTask />", () => {
             <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,
-          { registrationModalIsVisible: false, setRegistrationModalIsVisible }
-        )
+          { registrationModalIsVisible: false, setRegistrationModalIsVisible },
+        ),
       );
     };
 
@@ -408,7 +408,7 @@ describe("<NaicsCodeTask />", () => {
       setRegistrationModalIsVisible = jest.fn();
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ naicsCode: "", industryId: "" }),
-        taskProgress: { [taskId]: "NOT_STARTED" }
+        taskProgress: { [taskId]: "NOT_STARTED" },
       });
     });
 
@@ -420,7 +420,7 @@ describe("<NaicsCodeTask />", () => {
     it("opens registration modal on save button click", async () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
-        target: { value: validNaicsCode }
+        target: { value: validNaicsCode },
       });
       fireEvent.click(screen.getByText(`Register & ${Config.determineNaicsCode.saveButtonText}`));
       await waitFor(() => {

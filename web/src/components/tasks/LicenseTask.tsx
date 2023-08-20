@@ -45,7 +45,7 @@ export const LicenseTask = (props: Props): ReactElement => {
     if (business.licenseData?.completedSearch) {
       setLicenseStatusResult({
         status: business.licenseData.status,
-        checklistItems: business.licenseData.items
+        checklistItems: business.licenseData.items,
       });
     }
   }, business);
@@ -82,7 +82,7 @@ export const LicenseTask = (props: Props): ReactElement => {
         if (!resultLicenseData) return;
         setLicenseStatusResult({
           status: resultLicenseData.status,
-          checklistItems: resultLicenseData.items
+          checklistItems: resultLicenseData.items,
         });
         setError(undefined);
       })
@@ -106,7 +106,7 @@ export const LicenseTask = (props: Props): ReactElement => {
     borderColor: "divider",
     fontSize: "14px",
     fontWeight: "600",
-    color: "#757575"
+    color: "#757575",
   };
 
   return (
@@ -143,7 +143,7 @@ export const LicenseTask = (props: Props): ReactElement => {
                       analytics.event.task_primary_call_to_action.click.open_external_website(
                         Config.licenseSearchTask.primaryCTAFirstLineText,
                         callToActionLink,
-                        "start_application"
+                        "start_application",
                       );
                     }}
                     className="usa-button width-100 margin-bottom-2"
@@ -161,7 +161,7 @@ export const LicenseTask = (props: Props): ReactElement => {
                   onClick={(): void => {
                     analytics.event.task_button_i_already_submitted.click.view_status_tab(
                       "check_status",
-                      "start_application"
+                      "start_application",
                     );
                     setTabIndex(STATUS_TAB_INDEX);
                   }}

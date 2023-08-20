@@ -21,7 +21,7 @@ export const MainBusiness = (): ReactElement => {
   const { doSomeFieldsHaveError, doesFieldHaveError } = useFormationErrors();
   const isForeign = useMemo(
     () => state.formationFormData.businessLocationType !== "NJ",
-    [state.formationFormData.businessLocationType]
+    [state.formationFormData.businessLocationType],
   );
 
   return (
@@ -92,7 +92,7 @@ export const MainBusiness = (): ReactElement => {
               numericProps={{
                 minLength: 1,
                 trimLeadingZeroes: true,
-                maxLength: 11
+                maxLength: 11,
               }}
               required={true}
               fieldName={"businessTotalStock"}

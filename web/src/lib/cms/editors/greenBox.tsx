@@ -6,8 +6,8 @@ export default {
       name: "body",
       label: "Body Text",
       required: true,
-      widget: "markdown"
-    }
+      widget: "markdown",
+    },
   ],
 
   pattern: /:::greenBox[^:]+:::/g,
@@ -20,7 +20,7 @@ export default {
     const endLength = ":::".length;
     const body = string.slice(startLength, -1 * endLength);
     return {
-      body: body
+      body: body,
     };
   },
   // Function to create a text block from an instance of this component
@@ -30,5 +30,5 @@ export default {
 
   toPreview: (obj: { body: string }): string => {
     return `:::greenBox \n ${obj.body ? obj.body.trim() : ""}\n:::`;
-  }
+  },
 };

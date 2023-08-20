@@ -21,16 +21,16 @@ export const migrate_v101_to_v102 = (v101Data: v101UserData): v102UserData => {
       const newVal = val === "tax-registration-nudge" ? "registered-for-taxes-nudge" : val;
       return [...acc, newVal];
     },
-    []
+    [],
   );
 
   return {
     ...v101Data,
     preferences: {
       ...v101Data.preferences,
-      visibleSidebarCards
+      visibleSidebarCards,
     },
-    version: 102
+    version: 102,
   };
 };
 
@@ -214,7 +214,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v102FormationData {
@@ -321,7 +321,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -330,7 +330,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const lpBusinessSuffix = ["LIMITED PARTNERSHIP", "LP", "L.P."] as const;
@@ -345,7 +345,7 @@ const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 const foreignCorpBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
@@ -354,7 +354,7 @@ const AllBusinessSuffixes = [
   ...llcBusinessSuffix,
   ...llpBusinessSuffix,
   ...lpBusinessSuffix,
-  ...foreignCorpBusinessSuffix
+  ...foreignCorpBusinessSuffix,
 ] as const;
 
 type v102BusinessSuffix = (typeof AllBusinessSuffixes)[number];
@@ -397,12 +397,12 @@ export const generateV102User = (overrides: Partial<v102BusinessUser>): v102Busi
     myNJUserKey: undefined,
     intercomHash: undefined,
     abExperience: "ExperienceA",
-    ...overrides
+    ...overrides,
   };
 };
 
 export const generateV102FormationAddress = (
-  overrides: Partial<v102FormationAddress>
+  overrides: Partial<v102FormationAddress>,
 ): v102FormationAddress => {
   return {
     addressLine1: `some-members-address-1-${randomInt()}`,
@@ -411,7 +411,7 @@ export const generateV102FormationAddress = (
     addressState: { shortCode: "NJ", name: "new-jersey" },
     addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
     addressCountry: `some-county`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -424,7 +424,7 @@ export const generateV102FormationMember = (overrides: Partial<v102FormationMemb
     addressState: { shortCode: "123", name: "new-jersey" },
     addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
     addressCountry: `some-county`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -434,7 +434,7 @@ export const generateV102Municipality = (overrides: Partial<v102Municipality>): 
     name: `some-name-${randomInt()}`,
     county: `some-county-${randomInt()}`,
     id: `some-id-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -443,12 +443,12 @@ export const allFormationLegalTypes = [
   "limited-liability-company",
   "limited-partnership",
   "c-corporation",
-  "s-corporation"
+  "s-corporation",
 ];
 
 export const generateV102FormationFormData = (
   overrides: Partial<v102FormationFormData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v102FormationFormData => {
   const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
 
@@ -495,12 +495,12 @@ export const generateV102FormationFormData = (
     getDistributionTerms: `some-getDistributionTerms-text-${randomInt()}`,
     canMakeDistribution: !!(randomInt() % 2),
     makeDistributionTerms: `some-makeDistributionTerms-text-${randomInt()}`,
-    ...overrides
+    ...overrides,
   } as v102FormationFormData;
 };
 
 export const generateV102IndustrySpecificData = (
-  overrides: Partial<v102IndustrySpecificData>
+  overrides: Partial<v102IndustrySpecificData>,
 ): v102IndustrySpecificData => {
   return {
     liquorLicense: false,
@@ -515,7 +515,7 @@ export const generateV102IndustrySpecificData = (
     carService: undefined,
     interstateTransport: false,
     isChildcareForSixOrMore: undefined,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -532,7 +532,7 @@ export const generateV102ProfileData = (overrides: Partial<v102ProfileData>): v1
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     dateOfFormation: undefined,
     entityId: randomInt(10).toString(),
@@ -544,7 +544,7 @@ export const generateV102ProfileData = (overrides: Partial<v102ProfileData>): v1
     documents: {
       certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
       formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
-      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`
+      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
     },
     existingEmployees: randomInt(7).toString(),
     taxPin: randomInt(4).toString(),
@@ -555,7 +555,7 @@ export const generateV102ProfileData = (overrides: Partial<v102ProfileData>): v1
     nexusDbaName: undefined,
     nexusLocationInNewJersey: undefined,
     operatingPhase: "NEEDS_TO_FORM",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -567,20 +567,20 @@ export const generateV102TaxFilingData = (overrides: Partial<v102TaxFilingData>)
     lastUpdatedISO: undefined,
     registeredISO: undefined,
     filings: [],
-    ...overrides
+    ...overrides,
   };
 };
 
 export const generateV102FormationData = (
   overrides: Partial<v102FormationData>,
-  legalStructureId: string
+  legalStructureId: string,
 ): v102FormationData => {
   return {
     formationFormData: generateV102FormationFormData({}, legalStructureId),
     formationResponse: undefined,
     getFilingResponse: undefined,
     completedFilingPayment: false,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -598,7 +598,7 @@ export const generateV102UserData = (overrides: Partial<v102UserData>): v102User
     lastUpdatedISO: "",
     taxFilingData: generateV102TaxFilingData({}),
     formationData: generateV102FormationData({}, profileData.legalStructureId ?? ""),
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -612,6 +612,6 @@ export const generateV102Preferences = (overrides: Partial<v102Preferences>): v1
     returnToLink: "",
     isCalendarFullView: true,
     isHideableRoadmapOpen: false,
-    ...overrides
+    ...overrides,
   };
 };

@@ -5,13 +5,13 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentBusiness,
   currentUserData,
-  setupStatefulUserDataContext
+  setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
 import {
   industryIdsWithRequiredEssentialQuestion,
   mockSuccessfulApiSignups,
   renderPage,
-  runNonprofitOnboardingTests
+  runNonprofitOnboardingTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   createEmptyUser,
@@ -21,7 +21,7 @@ import {
   generateUserData,
   LookupIndustryById,
   ProfileData,
-  UserData
+  UserData,
 } from "@businessnjgovnavigator/shared/";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
@@ -31,7 +31,7 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
-  postGetAnnualFilings: jest.fn()
+  postGetAnnualFilings: jest.fn(),
 }));
 
 const Config = getMergedConfig();
@@ -41,10 +41,10 @@ const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
     generateBusiness({
       profileData: generateProfileData({
         businessPersona: "STARTING",
-        ...overrides
+        ...overrides,
       }),
-      onboardingFormProgress: "UNSTARTED"
-    })
+      onboardingFormProgress: "UNSTARTED",
+    }),
   );
 };
 
@@ -76,7 +76,7 @@ describe("onboarding - starting a business", () => {
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalledWith({
           pathname: ROUTES.dashboard,
-          query: { [QUERIES.fromOnboarding]: "true" }
+          query: { [QUERIES.fromOnboarding]: "true" },
         });
       });
     });
@@ -86,7 +86,7 @@ describe("onboarding - starting a business", () => {
       async (industryId) => {
         const userData = generateTestUserData({
           industryId: industryId,
-          ...emptyIndustrySpecificData
+          ...emptyIndustrySpecificData,
         });
         useMockRouter({ isReady: true, query: { page: "2" } });
         const { page } = renderPage({ userData });
@@ -95,9 +95,9 @@ describe("onboarding - starting a business", () => {
         expect(screen.getByTestId("step-2")).toBeInTheDocument();
         expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
         expect(
-          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0]
+          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0],
         ).toBeInTheDocument();
-      }
+      },
     );
 
     it.each(industryIdsWithRequiredEssentialQuestion)(
@@ -105,7 +105,7 @@ describe("onboarding - starting a business", () => {
       async (industryId) => {
         const userData = generateTestUserData({
           industryId: industryId,
-          ...emptyIndustrySpecificData
+          ...emptyIndustrySpecificData,
         });
         useMockRouter({ isReady: true, query: { page: "2" } });
         const { page } = renderPage({ userData });
@@ -115,10 +115,10 @@ describe("onboarding - starting a business", () => {
         await waitFor(() => {
           expect(mockPush).toHaveBeenCalledWith({
             pathname: ROUTES.dashboard,
-            query: { [QUERIES.fromOnboarding]: "true" }
+            query: { [QUERIES.fromOnboarding]: "true" },
           });
         });
-      }
+      },
     );
 
     it.each(industryIdsWithRequiredEssentialQuestion)(
@@ -126,7 +126,7 @@ describe("onboarding - starting a business", () => {
       async (industryId) => {
         const userData = generateTestUserData({
           industryId: industryId,
-          ...emptyIndustrySpecificData
+          ...emptyIndustrySpecificData,
         });
         useMockRouter({ isReady: true, query: { page: "2" } });
         const { page } = renderPage({ userData });
@@ -134,13 +134,13 @@ describe("onboarding - starting a business", () => {
         page.clickNext();
         expect(screen.getByTestId("step-2")).toBeInTheDocument();
         expect(
-          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0]
+          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0],
         ).toBeInTheDocument();
         page.chooseEssentialQuestionRadio(industryId, 0);
         expect(
-          screen.queryByText(Config.profileDefaults.default.essentialQuestionInlineText)
+          screen.queryByText(Config.profileDefaults.default.essentialQuestionInlineText),
         ).not.toBeInTheDocument();
-      }
+      },
     );
   });
 
@@ -176,10 +176,10 @@ describe("onboarding - starting a business", () => {
           profileData: generateProfileData({
             businessPersona: "STARTING",
             businessName: "Applebees",
-            industryId: "cosmetology"
-          })
-        })
-      }
+            industryId: "cosmetology",
+          }),
+        }),
+      },
     });
 
     const { page } = renderPage({ userData });
@@ -215,20 +215,20 @@ describe("onboarding - starting a business", () => {
             sectorId: "retail-trade-and-ecommerce",
             homeBasedBusiness: undefined,
             municipality: undefined,
-            isNonprofitOnboardingRadio: false
+            isNonprofitOnboardingRadio: false,
           },
           preferences: {
             ...initialUserData.businesses[businessId].preferences,
-            visibleSidebarCards: []
-          }
-        }
-      }
+            visibleSidebarCards: [],
+          },
+        },
+      },
     };
 
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalledWith({
         pathname: ROUTES.dashboard,
-        query: { [QUERIES.fromOnboarding]: "true" }
+        query: { [QUERIES.fromOnboarding]: "true" },
       });
     });
 
@@ -239,10 +239,10 @@ describe("onboarding - starting a business", () => {
           ...expectedUserData.businesses[businessId],
           preferences: {
             ...expectedUserData.businesses[businessId].preferences,
-            visibleSidebarCards: ["task-progress"]
-          }
-        }
-      }
+            visibleSidebarCards: ["task-progress"],
+          },
+        },
+      },
     });
   });
 

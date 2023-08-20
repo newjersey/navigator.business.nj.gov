@@ -39,7 +39,7 @@ export const NexusFormationFlow = (): ReactElement => {
   const onStepChangeAnalytics = (
     formationFormData: FormationFormData | undefined,
     nextStepIndex: number,
-    moveType: "NEXT_BUTTON" | "STEPPER"
+    moveType: "NEXT_BUTTON" | "STEPPER",
   ): void => {
     if (!formationFormData) {
       return;
@@ -52,7 +52,7 @@ export const NexusFormationFlow = (): ReactElement => {
 
   const onMoveToStep = async (
     stepIndex: number,
-    config: { moveType: "NEXT_BUTTON" | "STEPPER" }
+    config: { moveType: "NEXT_BUTTON" | "STEPPER" },
   ): Promise<void> => {
     onStepChangeAnalytics(business?.formationData.formationFormData, stepIndex, config.moveType);
     moveToStep(stepIndex);
@@ -71,7 +71,7 @@ export const NexusFormationFlow = (): ReactElement => {
                   return {
                     name: value.name,
                     hasError: false,
-                    isComplete: index === 0
+                    isComplete: index === 0,
                   };
                 })}
                 currentStep={state.stepIndex}

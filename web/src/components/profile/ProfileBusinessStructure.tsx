@@ -25,7 +25,7 @@ export const ProfileBusinessStructure = (): ReactElement => {
     getProfileConfig({
       config: Config,
       persona: state.flow,
-      fieldName: "legalStructureId"
+      fieldName: "legalStructureId",
     });
 
   const businessStructureTaskUrl = useMemo(() => {

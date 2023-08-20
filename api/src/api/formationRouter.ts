@@ -19,7 +19,7 @@ type FormationPostBody = {
 export const formationRouterFactory = (
   formationClient: FormationClient,
   userDataClient: UserDataClient,
-  config: { shouldSaveDocuments: boolean }
+  config: { shouldSaveDocuments: boolean },
 ): Router => {
   const router = Router();
 
@@ -33,8 +33,8 @@ export const formationRouterFactory = (
           ...business,
           formationData: {
             ...business.formationData,
-            formationResponse: formationResponse
-          }
+            formationResponse: formationResponse,
+          },
         }));
         await userDataClient.put(userDataWithResponse);
         res.json(userDataWithResponse);
@@ -66,7 +66,7 @@ export const formationRouterFactory = (
         let documents: ProfileDocuments = {
           certifiedDoc: "",
           formationDoc: "",
-          standingDoc: ""
+          standingDoc: "",
         };
 
         if (getFilingResponse.success && config.shouldSaveDocuments) {
@@ -78,7 +78,7 @@ export const formationRouterFactory = (
           const formationDoc = await saveFileFromUrl(
             getFilingResponse.formationDoc,
             `${signedInUser["custom:identityId"]}/formationDoc-${Date.now()}.pdf`,
-            process.env.DOCUMENT_S3_BUCKET as string
+            process.env.DOCUMENT_S3_BUCKET as string,
           );
 
           let certifiedDoc = "";
@@ -88,7 +88,7 @@ export const formationRouterFactory = (
             certifiedDoc = await saveFileFromUrl(
               getFilingResponse.certifiedDoc,
               `${signedInUser["custom:identityId"]}/certifiedDoc-${Date.now()}.pdf`,
-              process.env.DOCUMENT_S3_BUCKET as string
+              process.env.DOCUMENT_S3_BUCKET as string,
             );
           }
 
@@ -96,14 +96,14 @@ export const formationRouterFactory = (
             standingDoc = await saveFileFromUrl(
               getFilingResponse.standingDoc,
               `${signedInUser["custom:identityId"]}/standingDoc-${Date.now()}.pdf`,
-              process.env.DOCUMENT_S3_BUCKET as string
+              process.env.DOCUMENT_S3_BUCKET as string,
             );
           }
 
           documents = {
             formationDoc,
             certifiedDoc,
-            standingDoc
+            standingDoc,
           };
         }
 
@@ -112,7 +112,7 @@ export const formationRouterFactory = (
           taskProgress,
           formationData: {
             ...business.formationData,
-            getFilingResponse
+            getFilingResponse,
           },
           profileData: {
             ...business.profileData,
@@ -121,9 +121,9 @@ export const formationRouterFactory = (
             businessName,
             documents: {
               ...business.profileData.documents,
-              ...documents
-            }
-          }
+              ...documents,
+            },
+          },
         }));
         await userDataClient.put(userDataWithResponse);
         res.json(userDataWithResponse);

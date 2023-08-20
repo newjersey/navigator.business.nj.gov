@@ -10,13 +10,13 @@ import {
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
   generateBusiness,
   generateProfileData,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
@@ -54,15 +54,15 @@ describe("<EinTask />", () => {
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <EinTask task={task} />
           </WithStatefulUserData>,
-          IsAuthenticated.TRUE
-        )
+          IsAuthenticated.TRUE,
+        ),
       );
     };
 
     beforeEach(() => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ employerId: "" }),
-        taskProgress: { [taskId]: "NOT_STARTED" }
+        taskProgress: { [taskId]: "NOT_STARTED" },
       });
     });
 
@@ -74,7 +74,7 @@ describe("<EinTask />", () => {
     it("enters and saves EIN", async () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Save your EIN"), {
-        target: { value: "123456789" }
+        target: { value: "123456789" },
       });
       fireEvent.click(screen.getByText(Config.ein.saveButtonText));
       await waitFor(() => {
@@ -85,10 +85,10 @@ describe("<EinTask />", () => {
     it("shows error on length validation failure", () => {
       renderPage();
       const expectedErrorMessage = templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {
-        length: "9"
+        length: "9",
       });
       fireEvent.change(screen.getByLabelText("Save your EIN"), {
-        target: { value: "12345" }
+        target: { value: "12345" },
       });
       fireEvent.click(screen.getByText(Config.ein.saveButtonText));
       expect(screen.getByText(expectedErrorMessage)).toBeInTheDocument();
@@ -98,7 +98,7 @@ describe("<EinTask />", () => {
     it("displays code with success message on save", async () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Save your EIN"), {
-        target: { value: "123456789" }
+        target: { value: "123456789" },
       });
       fireEvent.click(screen.getByText(Config.ein.saveButtonText));
       await waitFor(() => {
@@ -109,7 +109,7 @@ describe("<EinTask />", () => {
     it("sets task status to COMPLETED on save", async () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Save your EIN"), {
-        target: { value: "123456789" }
+        target: { value: "123456789" },
       });
       fireEvent.click(screen.getByText(Config.ein.saveButtonText));
       await waitFor(() => {
@@ -127,15 +127,15 @@ describe("<EinTask />", () => {
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <EinTask task={task} />
           </WithStatefulUserData>,
-          IsAuthenticated.TRUE
-        )
+          IsAuthenticated.TRUE,
+        ),
       );
     };
 
     beforeEach(() => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ employerId: "123456789" }),
-        taskProgress: { [taskId]: "COMPLETED" }
+        taskProgress: { [taskId]: "COMPLETED" },
       });
     });
 
@@ -185,15 +185,15 @@ describe("<EinTask />", () => {
             <EinTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,
-          { registrationModalIsVisible: false, setRegistrationModalIsVisible }
-        )
+          { registrationModalIsVisible: false, setRegistrationModalIsVisible },
+        ),
       );
     };
 
     beforeEach(() => {
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ employerId: "" }),
-        taskProgress: { [taskId]: "NOT_STARTED" }
+        taskProgress: { [taskId]: "NOT_STARTED" },
       });
     });
 
@@ -205,7 +205,7 @@ describe("<EinTask />", () => {
     it("opens registration modal on save button click", async () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Save your EIN"), {
-        target: { value: "123456789" }
+        target: { value: "123456789" },
       });
       fireEvent.click(screen.getByText(`Register & ${Config.ein.saveButtonText}`));
       await waitFor(() => {

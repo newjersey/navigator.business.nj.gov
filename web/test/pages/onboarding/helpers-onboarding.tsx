@@ -4,7 +4,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
   EssentialQuestions,
   getEssentialQuestion,
-  hasEssentialQuestion
+  hasEssentialQuestion,
 } from "@/lib/domain-logic/essentialQuestions";
 import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
 import Onboarding from "@/pages/onboarding";
@@ -26,7 +26,7 @@ import {
   Industries,
   industrySpecificDataChoices,
   Municipality,
-  UserData
+  UserData,
 } from "@businessnjgovnavigator/shared/";
 import { createTheme, ThemeProvider } from "@mui/material";
 import {
@@ -36,7 +36,7 @@ import {
   screen,
   waitFor,
   waitForElementToBeRemoved,
-  within
+  within,
 } from "@testing-library/react";
 
 const mockApi = api as jest.Mocked<typeof api>;
@@ -46,7 +46,7 @@ export const renderPage = ({
   municipalities,
   userData,
   user,
-  isAuthenticated
+  isAuthenticated,
 }: {
   municipalities?: Municipality[];
   userData?: UserData | null;
@@ -65,8 +65,8 @@ export const renderPage = ({
           <Onboarding municipalities={municipalities || []} />
         </ThemeProvider>
       </WithStatefulUserData>,
-      { user: currentUser, isAuthenticated }
-    )
+      { user: currentUser, isAuthenticated },
+    ),
   );
   const page = createPageHelpers();
   return { page };
@@ -189,7 +189,7 @@ export const createPageHelpers = (): PageHelpers => {
 
   const chooseEssentialQuestionRadio = (
     industryId: string,
-    indexOfIndustrySpecificDataChoices: number
+    indexOfIndustrySpecificDataChoices: number,
   ): void => {
     const essentialQuestions = getEssentialQuestion(industryId);
 
@@ -198,8 +198,8 @@ export const createPageHelpers = (): PageHelpers => {
         industrySpecificDataChoices[essentialQuestion.fieldName][indexOfIndustrySpecificDataChoices];
       fireEvent.click(
         screen.getByTestId(
-          `${camelCaseToKebabCase(essentialQuestion.fieldName)}-radio-${value.toString().toLowerCase()}`
-        )
+          `${camelCaseToKebabCase(essentialQuestion.fieldName)}-radio-${value.toString().toLowerCase()}`,
+        ),
       );
     }
   };
@@ -224,14 +224,14 @@ export const createPageHelpers = (): PageHelpers => {
     getConfirmEmailValue,
     visitStep,
     checkByLabelText,
-    chooseEssentialQuestionRadio
+    chooseEssentialQuestionRadio,
   };
 };
 
 export const runNonprofitOnboardingTests = ({
   businessPersona,
   industryPage,
-  lastPage
+  lastPage,
 }: {
   businessPersona: BusinessPersona;
   industryPage: number;
@@ -246,10 +246,10 @@ export const runNonprofitOnboardingTests = ({
         profileData: {
           ...initialUserData.businesses[initialUserData.currentBusinessId].profileData,
           businessPersona,
-          foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined
-        }
-      }
-    }
+          foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
+        },
+      },
+    },
   };
 
   it("sets legal structure undefined if nonprofit is kept as default No", async () => {
@@ -289,9 +289,9 @@ export const runNonprofitOnboardingTests = ({
           foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
           legalStructureId: "nonprofit",
           isNonprofitOnboardingRadio: true,
-          nexusLocationInNewJersey: businessPersona === "FOREIGN" ? true : undefined
-        })
-      })
+          nexusLocationInNewJersey: businessPersona === "FOREIGN" ? true : undefined,
+        }),
+      }),
     );
     const { page } = renderPage({ userData: filledInUserData });
 
@@ -313,9 +313,9 @@ export const runNonprofitOnboardingTests = ({
           foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
           legalStructureId: undefined,
           isNonprofitOnboardingRadio: false,
-          nexusLocationInNewJersey: businessPersona === "FOREIGN" ? true : undefined
-        })
-      })
+          nexusLocationInNewJersey: businessPersona === "FOREIGN" ? true : undefined,
+        }),
+      }),
     );
     const { page } = renderPage({ userData: filledInUserData });
 
@@ -349,21 +349,21 @@ export const industriesWithOutEssentialQuestion = Industries.filter((industry) =
 });
 
 export const industryIdsWithOutEssentialQuestion = industriesWithOutEssentialQuestion.map(
-  (industry) => industry.id
+  (industry) => industry.id,
 );
 
 export const industryIdsWithEssentialQuestion = industriesWithEssentialQuestion.map(
-  (industry) => industry.id
+  (industry) => industry.id,
 );
 
 export const industryIdsWithRequiredEssentialQuestion = industryIdsWithEssentialQuestion.filter(
   (industry) => {
     const applicableQuestions = EssentialQuestions.filter((question) =>
-      question.isQuestionApplicableToIndustryId(industry)
+      question.isQuestionApplicableToIndustryId(industry),
     );
     const someQuestionsStartAsUndefined = applicableQuestions.some((question) => {
       return emptyIndustrySpecificData[question.fieldName] === undefined;
     });
     return someQuestionsStartAsUndefined;
-  }
+  },
 );

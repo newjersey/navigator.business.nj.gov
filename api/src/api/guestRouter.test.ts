@@ -10,7 +10,7 @@ import {
   getFirstAnnualFiling,
   getSecondAnnualFiling,
   getThirdAnnualFiling,
-  modifyCurrentBusiness
+  modifyCurrentBusiness,
 } from "@shared/test";
 import { Express } from "express";
 import request from "supertest";
@@ -43,11 +43,11 @@ describe("guestRouter", () => {
         profileData: generateProfileData({
           dateOfFormation: formationDate,
           entityId: undefined,
-          legalStructureId: "limited-liability-company"
+          legalStructureId: "limited-liability-company",
         }),
         taxFilingData: generateTaxFilingData({
-          filings: []
-        })
+          filings: [],
+        }),
       });
       const postedUserData = generateUserDataForBusiness(business, { user: generateUser({ id: "123" }) });
 
@@ -59,9 +59,9 @@ describe("guestRouter", () => {
           filings: generateAnnualFilings([
             getFirstAnnualFiling(formationDate),
             getSecondAnnualFiling(formationDate),
-            getThirdAnnualFiling(formationDate)
-          ])
-        }
+            getThirdAnnualFiling(formationDate),
+          ]),
+        },
       }));
       expect(response.body).toEqual(expectedUserData);
     });
@@ -70,7 +70,7 @@ describe("guestRouter", () => {
   describe("GET /business-name-availability", () => {
     it("returns the availability status", async () => {
       const result: NameAvailability = generateBusinessNameAvailability({
-        status: "AVAILABLE"
+        status: "AVAILABLE",
       });
       timeStampBusinessSearch.search.mockResolvedValue(result);
 

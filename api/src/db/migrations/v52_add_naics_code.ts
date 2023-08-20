@@ -19,9 +19,9 @@ export const migrate_v51_to_v52 = (v51Data: v51UserData): v52UserData => {
     ...v51Data,
     profileData: {
       ...v51Data.profileData,
-      naicsCode: ""
+      naicsCode: "",
     },
-    version: 52
+    version: 52,
   };
 };
 
@@ -165,7 +165,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v52FormationData {
@@ -258,7 +258,7 @@ export const generatev52User = (overrides: Partial<v52BusinessUser>): v52Busines
     userTesting: false,
     externalStatus: {},
     abExperience: "ExperienceA",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -275,7 +275,7 @@ export const generatev52ProfileData = (overrides: Partial<v52ProfileData>): v52P
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     liquorLicense: true,
     requiresCpa: false,
@@ -291,12 +291,12 @@ export const generatev52ProfileData = (overrides: Partial<v52ProfileData>): v52P
     taxPin: undefined,
     sectorId: undefined,
     naicsCode: "",
-    ...overrides
+    ...overrides,
   };
 };
 
 export const generatev52FormationFormData = (
-  overrides: Partial<v52FormationFormData>
+  overrides: Partial<v52FormationFormData>,
 ): v52FormationFormData => {
   return {
     businessSuffix: undefined,
@@ -326,6 +326,6 @@ export const generatev52FormationFormData = (
     contactFirstName: "",
     contactLastName: "",
     contactPhoneNumber: "",
-    ...overrides
+    ...overrides,
   };
 };

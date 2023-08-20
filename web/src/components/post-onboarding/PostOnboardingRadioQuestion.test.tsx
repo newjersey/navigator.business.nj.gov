@@ -3,13 +3,13 @@ import * as fetchPostOnboardingModule from "@/lib/async-content-fetchers/fetchPo
 import {
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import {
   generateBusiness,
   generateProfileData,
-  generateUserDataForBusiness
+  generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -24,8 +24,8 @@ jest.mock("@/lib/async-content-fetchers/fetchPostOnboarding", () => ({ fetchPost
 jest.mock("@/lib/domain-logic/postOnboardingCheckboxes", () => {
   return {
     postOnboardingCheckboxes: {
-      "some-post-onboarding-id": ["checkbox-1", "checkbox-2"]
-    }
+      "some-post-onboarding-id": ["checkbox-1", "checkbox-2"],
+    },
   };
 });
 const mockFetchPostOnboarding = (fetchPostOnboardingModule as jest.Mocked<typeof fetchPostOnboardingModule>)
@@ -45,8 +45,8 @@ describe("<PostOnboardingRadioQuestion />", () => {
             taskId={taskId}
           />
         </WithStatefulUserData>,
-        IsAuthenticated.TRUE
-      )
+        IsAuthenticated.TRUE,
+      ),
     );
   };
 
@@ -57,7 +57,7 @@ describe("<PostOnboardingRadioQuestion />", () => {
 
   it("sets given profileKey based on radio button toggle", async () => {
     const initialBusiness = generateBusiness({
-      profileData: generateProfileData({ constructionRenovationPlan: undefined })
+      profileData: generateProfileData({ constructionRenovationPlan: undefined }),
     });
 
     mockFetchPostOnboarding.mockResolvedValue(generatePostOnboarding({}));
@@ -88,14 +88,14 @@ describe("<PostOnboardingRadioQuestion />", () => {
         profileData: generateProfileData({ constructionRenovationPlan: true }),
         taskItemChecklist: {},
         taskProgress: {
-          [taskId]: "NOT_STARTED"
-        }
+          [taskId]: "NOT_STARTED",
+        },
       });
 
       mockFetchPostOnboarding.mockResolvedValue(
         generatePostOnboarding({
-          contentMd: "- []{checkbox-1} content1\n" + "- []{checkbox-2} content2\n"
-        })
+          contentMd: "- []{checkbox-1} content1\n" + "- []{checkbox-2} content2\n",
+        }),
       );
 
       renderComponent(initialBusiness, "constructionRenovationPlan");

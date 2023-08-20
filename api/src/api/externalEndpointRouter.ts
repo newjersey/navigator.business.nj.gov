@@ -8,7 +8,7 @@ import { getSignedInUserId } from "./userRouter";
 export const externalEndpointRouterFactory = (
   userDataClient: UserDataClient,
   addNewsletter: AddNewsletter,
-  addToUserTesting: AddToUserTesting
+  addToUserTesting: AddToUserTesting,
 ): Router => {
   const router = Router();
 

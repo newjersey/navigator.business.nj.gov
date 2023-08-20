@@ -3,7 +3,7 @@ import {
   generatev77ProfileData,
   generatev77User,
   v77ProfileData,
-  v77UserData
+  v77UserData,
 } from "./v77_remove_graduation_card";
 import { migrate_v77_to_v78 } from "./v78_remove_initial_business_persona";
 
@@ -30,16 +30,16 @@ const makeUserData = (profileData: Partial<v77ProfileData>): v77UserData => {
       roadmapOpenSteps: [],
       hiddenCertificationIds: [],
       hiddenFundingIds: [],
-      visibleRoadmapSidebarCards: []
+      visibleRoadmapSidebarCards: [],
     },
     taxFilingData: {
-      filings: []
+      filings: [],
     },
     formationData: {
       formationFormData: generatev77FormationFormData({}),
       formationResponse: undefined,
-      getFilingResponse: undefined
+      getFilingResponse: undefined,
     },
-    version: 76
+    version: 76,
   };
 };

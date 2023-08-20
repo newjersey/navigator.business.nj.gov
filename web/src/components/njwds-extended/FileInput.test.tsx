@@ -18,7 +18,7 @@ describe("<FileInput />", () => {
         helperText="input-label"
         onChange={mockOnChange}
         value={undefined}
-      />
+      />,
     );
 
     const uploader = screen.getByTestId("file-input");
@@ -32,7 +32,7 @@ describe("<FileInput />", () => {
         fileType: "PNG",
         sizeInBytes: file.size,
         base64Contents,
-        filename: "cool.png"
+        filename: "cool.png",
       });
     });
   });
@@ -46,13 +46,13 @@ describe("<FileInput />", () => {
       <FileInput
         maxFileSize={{
           errorMessage: errorMessageFileSize,
-          maxSizeInMegabytes: 0.4
+          maxSizeInMegabytes: 0.4,
         }}
         errorMessageRequired="error-message-required"
         helperText="input-label"
         onChange={mockOnChange}
         value={undefined}
-      />
+      />,
     );
 
     const uploader = screen.getByTestId("file-input");
@@ -69,13 +69,13 @@ describe("<FileInput />", () => {
       <FileInput
         acceptedFileTypes={{
           fileTypes: ["PDF"],
-          errorMessage: Config.formation.fields.foreignGoodStandingFile.errorMessageFileType
+          errorMessage: Config.formation.fields.foreignGoodStandingFile.errorMessageFileType,
         }}
         errorMessageRequired="error-message-required"
         helperText="input-label"
         onChange={mockOnChange}
         value={undefined}
-      />
+      />,
     );
 
     const uploader = screen.getByTestId("file-input");

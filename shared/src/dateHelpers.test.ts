@@ -5,7 +5,7 @@ import {
   getLicenseDate,
   isDateAfterCurrentDate,
   parseDate,
-  parseDateWithFormat
+  parseDateWithFormat,
 } from "./dateHelpers";
 import { defaultDateFormat } from "./defaultConstants";
 import { randomInt } from "./intHelpers";
@@ -58,7 +58,7 @@ describe("dateHelpers", () => {
         expirationDate: `20091231 000000.000${randomInt()}`,
         checklistItem: `some-item-${randomInt()}`,
         checkoffStatus: "Completed",
-        dateThisStatus: `20100430 000000.000${randomInt()}`
+        dateThisStatus: `20100430 000000.000${randomInt()}`,
       };
     });
 
@@ -69,7 +69,7 @@ describe("dateHelpers", () => {
     it("returns date this status when issue date is not populated", () => {
       licenceData.issueDate = "";
       expect(getLicenseDate(licenceData)).toEqual(
-        parseDateWithFormat(licenceData.dateThisStatus, "YYYYMMDD X")
+        parseDateWithFormat(licenceData.dateThisStatus, "YYYYMMDD X"),
       );
     });
 
@@ -77,7 +77,7 @@ describe("dateHelpers", () => {
       licenceData.issueDate = "";
       licenceData.dateThisStatus = "";
       expect(getLicenseDate(licenceData)).toEqual(
-        parseDateWithFormat(licenceData.expirationDate, "YYYYMMDD X")
+        parseDateWithFormat(licenceData.expirationDate, "YYYYMMDD X"),
       );
     });
   });

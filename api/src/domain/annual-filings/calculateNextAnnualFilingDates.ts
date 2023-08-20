@@ -27,6 +27,6 @@ export const calculateNextAnnualFilingDates = (dateOfFormation: string): string[
   return [
     baseFilingDate.format(defaultDateFormat),
     baseFilingDate.add(1, "year").format(defaultDateFormat),
-    baseFilingDate.add(2, "year").format(defaultDateFormat)
+    baseFilingDate.add(2, "year").format(defaultDateFormat),
   ];
 };

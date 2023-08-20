@@ -6,7 +6,7 @@ import {
   generateProfileData,
   generateUserData,
   generateUserDataForBusiness,
-  ProfileData
+  ProfileData,
 } from "@businessnjgovnavigator/shared/";
 import { generateBusiness } from "@businessnjgovnavigator/shared/test";
 import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
@@ -34,7 +34,7 @@ export const useMockUserDataError = (error: UserDataError): void => {
 export const useMockProfileData = (profileData: Partial<ProfileData>): void => {
   const business = generateBusiness({
     profileData: generateProfileData(profileData),
-    onboardingFormProgress: "COMPLETED"
+    onboardingFormProgress: "COMPLETED",
   });
 
   const userData = generateUserDataForBusiness(business);
@@ -54,7 +54,7 @@ export const generateUseUserDataResponse = (overrides: Partial<UseUserDataRespon
     updateQueue: new UpdateQueueFactory(userData, jest.fn().mockResolvedValue({})),
     createUpdateQueue: jest.fn().mockResolvedValue({}),
     hasCompletedFetch: true,
-    ...overrides
+    ...overrides,
   };
 };
 

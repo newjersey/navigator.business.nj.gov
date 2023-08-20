@@ -9,7 +9,7 @@ import {
   generateProfileData,
   generateUserData,
   generateUserDataForBusiness,
-  modifyCurrentBusiness
+  modifyCurrentBusiness,
 } from "@shared/test";
 import { Express } from "express";
 import request from "supertest";
@@ -23,13 +23,13 @@ import { getSignedInUser, getSignedInUserId } from "./userRouter";
 jest.mock("./userRouter", () => {
   return {
     getSignedInUserId: jest.fn(),
-    getSignedInUser: jest.fn()
+    getSignedInUser: jest.fn(),
   };
 });
 
 jest.mock("../domain/s3Writer.ts", () => {
   return {
-    saveFileFromUrl: jest.fn()
+    saveFileFromUrl: jest.fn(),
   };
 });
 
@@ -50,11 +50,11 @@ describe("formationRouter", () => {
       "custom:myNJUserKey": "1234myNJUserKey",
       "custom:identityId": "us-east-1:identityId",
       email: "whatever@gmail.com",
-      identities: undefined
+      identities: undefined,
     });
     stubFormationClient = {
       form: jest.fn(),
-      getCompletedFiling: jest.fn()
+      getCompletedFiling: jest.fn(),
     };
     stubUserDataClient = {
       get: jest.fn(),
@@ -62,7 +62,7 @@ describe("formationRouter", () => {
       put: jest.fn(),
       getNeedNewsletterUsers: jest.fn(),
       getNeedToAddToUserTestingUsers: jest.fn(),
-      getNeedTaxIdEncryptionUsers: jest.fn()
+      getNeedTaxIdEncryptionUsers: jest.fn(),
     };
     app = setupExpress(false);
     app.use(formationRouterFactory(stubFormationClient, stubUserDataClient, { shouldSaveDocuments: true }));
@@ -84,7 +84,7 @@ describe("formationRouter", () => {
       const response = await request(app).post(`/formation`).send({
         userData: userData,
         returnUrl: "some-url",
-        foreignGoodStandingFile
+        foreignGoodStandingFile,
       });
 
       expect(stubFormationClient.form).toHaveBeenCalledWith(userData, "some-url", foreignGoodStandingFile);
@@ -94,8 +94,8 @@ describe("formationRouter", () => {
         ...business,
         formationData: {
           ...business.formationData,
-          formationResponse: formationResponse
-        }
+          formationResponse: formationResponse,
+        },
       }));
       expect(response.body).toEqual(expectedResponse);
     });
@@ -108,15 +108,15 @@ describe("formationRouter", () => {
       const userData = generateUserData({});
       await request(app).post(`/formation`).send({
         userData: userData,
-        returnUrl: "some-url"
+        returnUrl: "some-url",
       });
 
       const expectedResponse = modifyCurrentBusiness(userData, (business) => ({
         ...business,
         formationData: {
           ...business.formationData,
-          formationResponse: formationResponse
-        }
+          formationResponse: formationResponse,
+        },
       }));
 
       expect(stubUserDataClient.put).toHaveBeenCalledWith(expectedResponse);
@@ -128,7 +128,7 @@ describe("formationRouter", () => {
       const userData = generateUserData({});
       await request(app).post(`/formation`).send({
         userData: userData,
-        returnUrl: "some-url"
+        returnUrl: "some-url",
       });
 
       expect(stubUserDataClient.put).toHaveBeenCalledWith(userData);
@@ -159,16 +159,16 @@ describe("formationRouter", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           formationData: generateFormationData({
-            formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" })
+            formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
           }),
           profileData: generateProfileData({
             documents: {
               certifiedDoc: "",
               formationDoc: "",
-              standingDoc: ""
-            }
-          })
-        })
+              standingDoc: "",
+            },
+          }),
+        }),
       );
       stubUserDataClient.get.mockResolvedValue(userData);
       const response = await request(app).get(`/completed-filing`).send();
@@ -179,11 +179,11 @@ describe("formationRouter", () => {
         ...business,
         formationData: {
           ...business.formationData,
-          getFilingResponse: getFilingResponse
+          getFilingResponse: getFilingResponse,
         },
         taskProgress: {
           ...business.taskProgress,
-          [formationTaskId]: "COMPLETED"
+          [formationTaskId]: "COMPLETED",
         },
         profileData: {
           ...business.profileData,
@@ -194,14 +194,14 @@ describe("formationRouter", () => {
             ...business.profileData.documents,
             formationDoc: `http://us-east-1:identityId/formationDoc-1487076708000.pdf`,
             certifiedDoc: `http://us-east-1:identityId/certifiedDoc-1487076708000.pdf`,
-            standingDoc: `http://us-east-1:identityId/standingDoc-1487076708000.pdf`
-          }
-        }
+            standingDoc: `http://us-east-1:identityId/standingDoc-1487076708000.pdf`,
+          },
+        },
       }));
       expect(fakeSaveFileFromUrl).toHaveBeenCalledWith(
         getFilingResponse.formationDoc,
         `us-east-1:identityId/formationDoc-1487076708000.pdf`,
-        undefined
+        undefined,
       );
       expect(response.body).toEqual(expectedNewUserData);
       expect(stubUserDataClient.put).toHaveBeenCalledWith(expectedNewUserData);
@@ -215,16 +215,16 @@ describe("formationRouter", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           formationData: generateFormationData({
-            formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" })
+            formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
           }),
           profileData: generateProfileData({
             documents: {
               certifiedDoc: "",
               formationDoc: "",
-              standingDoc: ""
-            }
-          })
-        })
+              standingDoc: "",
+            },
+          }),
+        }),
       );
       stubUserDataClient.get.mockResolvedValue(userData);
       await request(app).get(`/completed-filing`).send();
@@ -233,8 +233,8 @@ describe("formationRouter", () => {
         ...business,
         formationData: {
           ...business.formationData,
-          getFilingResponse: getFilingResponse
-        }
+          getFilingResponse: getFilingResponse,
+        },
       }));
 
       expect(stubUserDataClient.put).toHaveBeenCalledWith(expectedUserData);
@@ -247,16 +247,16 @@ describe("formationRouter", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           formationData: generateFormationData({
-            formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" })
+            formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
           }),
           profileData: generateProfileData({
             documents: {
               certifiedDoc: "",
               formationDoc: "",
-              standingDoc: ""
-            }
-          })
-        })
+              standingDoc: "",
+            },
+          }),
+        }),
       );
       stubUserDataClient.get.mockResolvedValue(userData);
       await request(app).get(`/completed-filing`).send();
@@ -265,11 +265,11 @@ describe("formationRouter", () => {
         ...business,
         formationData: {
           ...business.formationData,
-          getFilingResponse: getFilingResponse
+          getFilingResponse: getFilingResponse,
         },
         taskProgress: {
           ...business.taskProgress,
-          [formationTaskId]: "COMPLETED"
+          [formationTaskId]: "COMPLETED",
         },
         profileData: {
           ...business.profileData,
@@ -279,25 +279,25 @@ describe("formationRouter", () => {
           documents: {
             ...business.profileData.documents,
             formationDoc: `http://us-east-1:identityId/formationDoc-1487076708000.pdf`,
-            standingDoc: `http://us-east-1:identityId/standingDoc-1487076708000.pdf`
-          }
-        }
+            standingDoc: `http://us-east-1:identityId/standingDoc-1487076708000.pdf`,
+          },
+        },
       }));
 
       expect(fakeSaveFileFromUrl).toHaveBeenCalledWith(
         getFilingResponse.formationDoc,
         `us-east-1:identityId/formationDoc-1487076708000.pdf`,
-        process.env.DOCUMENT_S3_BUCKET
+        process.env.DOCUMENT_S3_BUCKET,
       );
       expect(fakeSaveFileFromUrl).toHaveBeenCalledWith(
         getFilingResponse.standingDoc,
         `us-east-1:identityId/standingDoc-1487076708000.pdf`,
-        process.env.DOCUMENT_S3_BUCKET
+        process.env.DOCUMENT_S3_BUCKET,
       );
       expect(fakeSaveFileFromUrl).not.toHaveBeenCalledWith(
         getFilingResponse.certifiedDoc,
         `us-east-1:identityId/certifiedDoc-1487076708000.pdf`,
-        process.env.DOCUMENT_S3_BUCKET
+        process.env.DOCUMENT_S3_BUCKET,
       );
       expect(stubUserDataClient.put).toHaveBeenCalledWith(expectedNewUserData);
     });

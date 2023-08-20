@@ -25,30 +25,30 @@ export const ProfileMunicipality = (props: Props): ReactElement => {
   const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
     fieldName,
     profileFormContext,
-    props.errorTypes
+    props.errorTypes,
   );
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["municipality"]["default"] =
     getProfileConfig({
       config: Config,
       persona: state.flow,
-      fieldName: fieldName
+      fieldName: fieldName,
     });
 
   RegisterForOnSubmit(() =>
     isMunicipalityRequired({
       legalStructureId: state.profileData.legalStructureId,
-      operatingPhase: state.profileData.operatingPhase
+      operatingPhase: state.profileData.operatingPhase,
     }) || props.required
       ? state.profileData[fieldName] !== undefined
-      : true
+      : true,
   );
 
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
     if (
       isMunicipalityRequired({
         legalStructureId: state.profileData.legalStructureId,
-        operatingPhase: state.profileData.operatingPhase
+        operatingPhase: state.profileData.operatingPhase,
       }) ||
       props.required
     ) {
@@ -66,7 +66,7 @@ export const ProfileMunicipality = (props: Props): ReactElement => {
   const onSelect = (value: Municipality | undefined): void => {
     setProfileData({
       ...state.profileData,
-      municipality: value
+      municipality: value,
     });
   };
 

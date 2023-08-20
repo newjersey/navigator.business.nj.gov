@@ -6,7 +6,7 @@ import {
   generateBusiness,
   generateProfileData,
   generateUserDataForBusiness,
-  randomFilteredIndustry
+  randomFilteredIndustry,
 } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
 
@@ -20,7 +20,7 @@ describe("<CannabisLocationAlert />", () => {
     render(
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
         <CannabisLocationAlert />
-      </WithStatefulUserData>
+      </WithStatefulUserData>,
     );
   };
 

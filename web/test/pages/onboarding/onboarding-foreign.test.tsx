@@ -6,13 +6,13 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
-  userDataWasNotUpdated
+  userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
 import {
   industryIdsWithRequiredEssentialQuestion,
   mockEmptyApiSignups,
   renderPage,
-  runNonprofitOnboardingTests
+  runNonprofitOnboardingTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import { generateProfileData, ProfileData } from "@businessnjgovnavigator/shared/";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
@@ -27,7 +27,7 @@ jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn()
 jest.mock("@/lib/api-client/apiClient", () => ({
   postNewsletter: jest.fn(),
   postUserTesting: jest.fn(),
-  postGetAnnualFilings: jest.fn()
+  postGetAnnualFilings: jest.fn(),
 }));
 
 const Config = getMergedConfig();
@@ -38,8 +38,8 @@ const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
   return generateUserDataForBusiness(
     generateBusiness({
       profileData: generateProfileData(overrides),
-      onboardingFormProgress: "UNSTARTED"
-    })
+      onboardingFormProgress: "UNSTARTED",
+    }),
   );
 };
 
@@ -56,7 +56,7 @@ describe("onboarding - foreign business", () => {
     it("uses special template eval for step 1 label", () => {
       renderPage({});
       expect(
-        screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" }))
+        screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" })),
       ).toBeInTheDocument();
     });
 
@@ -65,7 +65,7 @@ describe("onboarding - foreign business", () => {
       useMockRouter({ isReady: true, query: { page: "2" } });
       renderPage({ userData });
       expect(
-        screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "2" }))
+        screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "2" })),
       ).toBeInTheDocument();
     });
   });
@@ -75,7 +75,7 @@ describe("onboarding - foreign business", () => {
 
     beforeEach(() => {
       userData = generateTestUserData({
-        businessPersona: "FOREIGN"
+        businessPersona: "FOREIGN",
       });
       useMockRouter({ isReady: true, query: { page: "2" } });
     });
@@ -88,11 +88,11 @@ describe("onboarding - foreign business", () => {
     it("sets user as Nexus (and displays alert) when employeeOrContractorInNJ checkbox checked", async () => {
       const { page } = renderPage({ userData });
       expect(
-        screen.queryByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.NEXUS)
+        screen.queryByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.NEXUS),
       ).not.toBeInTheDocument();
       page.checkByLabelText(employeeOrContractorInNJ);
       expect(
-        screen.getByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.NEXUS)
+        screen.getByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.NEXUS),
       ).toBeInTheDocument();
 
       await page.visitStep(3);
@@ -103,11 +103,11 @@ describe("onboarding - foreign business", () => {
     it("sets user as Remote Workers (and displays alert) when employeesInNJ checkbox checked", async () => {
       const { page } = renderPage({ userData });
       expect(
-        screen.queryByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.REMOTE_WORKER)
+        screen.queryByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.REMOTE_WORKER),
       ).not.toBeInTheDocument();
       page.checkByLabelText(employeesInNJ);
       expect(
-        screen.getByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.REMOTE_WORKER)
+        screen.getByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.REMOTE_WORKER),
       ).toBeInTheDocument();
 
       page.clickNext();
@@ -121,11 +121,11 @@ describe("onboarding - foreign business", () => {
     it("sets user as Remote Seller (and displays alert) when revenueInNJ checkbox checked", async () => {
       const { page } = renderPage({ userData });
       expect(
-        screen.queryByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.REMOTE_SELLER)
+        screen.queryByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.REMOTE_SELLER),
       ).not.toBeInTheDocument();
       page.checkByLabelText(revenueInNJ);
       expect(
-        screen.getByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.REMOTE_SELLER)
+        screen.getByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.REMOTE_SELLER),
       ).toBeInTheDocument();
       page.clickNext();
       await waitFor(() => {
@@ -138,11 +138,11 @@ describe("onboarding - foreign business", () => {
     it("sets user as Remote Seller (and displays alert) when transactionsInNJ checkbox checked", async () => {
       const { page } = renderPage({ userData });
       expect(
-        screen.queryByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.REMOTE_SELLER)
+        screen.queryByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.REMOTE_SELLER),
       ).not.toBeInTheDocument();
       page.checkByLabelText(transactionsInNJ);
       expect(
-        screen.getByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.REMOTE_SELLER)
+        screen.getByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.REMOTE_SELLER),
       ).toBeInTheDocument();
 
       page.clickNext();
@@ -162,7 +162,7 @@ describe("onboarding - foreign business", () => {
         expect(screen.getByTestId("step-2")).toBeInTheDocument();
       });
       expect(
-        screen.getByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.errorTextRequired)
+        screen.getByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.errorTextRequired),
       ).toBeInTheDocument();
     });
 
@@ -175,7 +175,7 @@ describe("onboarding - foreign business", () => {
         expect(mockPush).toHaveBeenCalled();
       });
       expect(
-        screen.queryByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.errorTextRequired)
+        screen.queryByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.errorTextRequired),
       ).not.toBeInTheDocument();
     });
 
@@ -231,7 +231,7 @@ describe("onboarding - foreign business", () => {
       const userData = generateTestUserData({
         businessPersona: "FOREIGN",
         foreignBusinessType: "REMOTE_SELLER",
-        foreignBusinessTypeIds: ["revenueInNJ"]
+        foreignBusinessTypeIds: ["revenueInNJ"],
       });
 
       useMockRouter({ isReady: true, query: { page: "2" } });
@@ -247,7 +247,7 @@ describe("onboarding - foreign business", () => {
       const userData = generateTestUserData({
         operatingPhase: "GUEST_MODE",
         businessPersona: "FOREIGN",
-        foreignBusinessType: "REMOTE_SELLER"
+        foreignBusinessType: "REMOTE_SELLER",
       });
 
       useMockRouter({ isReady: true, query: { page: "3" } });
@@ -265,7 +265,7 @@ describe("onboarding - foreign business", () => {
       const userData = generateTestUserData({
         businessPersona: "FOREIGN",
         foreignBusinessType: "REMOTE_WORKER",
-        foreignBusinessTypeIds: ["employeesInNJ"]
+        foreignBusinessTypeIds: ["employeesInNJ"],
       });
 
       useMockRouter({ isReady: true, query: { page: "2" } });
@@ -281,7 +281,7 @@ describe("onboarding - foreign business", () => {
       const userData = generateTestUserData({
         operatingPhase: "GUEST_MODE",
         businessPersona: "FOREIGN",
-        foreignBusinessType: "REMOTE_WORKER"
+        foreignBusinessType: "REMOTE_WORKER",
       });
 
       useMockRouter({ isReady: true, query: { page: "3" } });
@@ -301,7 +301,7 @@ describe("onboarding - foreign business", () => {
       userData = generateTestUserData({
         industryId: undefined,
         businessPersona: "FOREIGN",
-        foreignBusinessType: "NEXUS"
+        foreignBusinessType: "NEXUS",
       });
       useMockRouter({ isReady: true, query: { page: "3" } });
     });
@@ -309,7 +309,7 @@ describe("onboarding - foreign business", () => {
     it("displays step 3", () => {
       renderPage({ userData });
       expect(
-        screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "3" }))
+        screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "3" })),
       ).toBeInTheDocument();
     });
 
@@ -338,7 +338,7 @@ describe("onboarding - foreign business", () => {
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
           industryId: industryId,
-          ...emptyIndustrySpecificData
+          ...emptyIndustrySpecificData,
         });
         useMockRouter({ isReady: true, query: { page: "3" } });
         const { page } = renderPage({ userData });
@@ -350,9 +350,9 @@ describe("onboarding - foreign business", () => {
         expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
         expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
         expect(
-          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0]
+          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0],
         ).toBeInTheDocument();
-      }
+      },
     );
 
     it.each(industryIdsWithRequiredEssentialQuestion)(
@@ -362,7 +362,7 @@ describe("onboarding - foreign business", () => {
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
           industryId: industryId,
-          ...emptyIndustrySpecificData
+          ...emptyIndustrySpecificData,
         });
         useMockRouter({ isReady: true, query: { page: "3" } });
         const { page } = renderPage({ userData });
@@ -371,7 +371,7 @@ describe("onboarding - foreign business", () => {
         await page.visitStep(4);
 
         expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
-      }
+      },
     );
 
     it.each(industryIdsWithRequiredEssentialQuestion)(
@@ -381,7 +381,7 @@ describe("onboarding - foreign business", () => {
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
           industryId: industryId,
-          ...emptyIndustrySpecificData
+          ...emptyIndustrySpecificData,
         });
         useMockRouter({ isReady: true, query: { page: "3" } });
         const { page } = renderPage({ userData });
@@ -391,13 +391,13 @@ describe("onboarding - foreign business", () => {
         });
         expect(screen.getByTestId("step-3")).toBeInTheDocument();
         expect(
-          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0]
+          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0],
         ).toBeInTheDocument();
         page.chooseEssentialQuestionRadio(industryId, 0);
         expect(
-          screen.queryByText(Config.profileDefaults.default.essentialQuestionInlineText)
+          screen.queryByText(Config.profileDefaults.default.essentialQuestionInlineText),
         ).not.toBeInTheDocument();
-      }
+      },
     );
   });
 
@@ -411,7 +411,7 @@ describe("onboarding - foreign business", () => {
         businessPersona: "FOREIGN",
         foreignBusinessType: "NEXUS",
         municipality: undefined,
-        homeBasedBusiness: undefined
+        homeBasedBusiness: undefined,
       });
       useMockRouter({ isReady: true, query: { page: "4" } });
     });
@@ -420,8 +420,8 @@ describe("onboarding - foreign business", () => {
       renderPage({ userData });
       expect(
         screen.getByText(
-          markdownToText(Config.profileDefaults.fields.nexusLocationInNewJersey.default.header)
-        )
+          markdownToText(Config.profileDefaults.fields.nexusLocationInNewJersey.default.header),
+        ),
       ).toBeInTheDocument();
     });
 
@@ -444,10 +444,10 @@ describe("onboarding - foreign business", () => {
       expect(screen.getByTestId("step-4")).toBeInTheDocument();
       expect(screen.queryByTestId("step-5")).not.toBeInTheDocument();
       expect(screen.getByTestId("banner-alert-REQUIRED_NEXUS_LOCATION_IN_NJ")).toHaveTextContent(
-        Config.profileDefaults.fields.nexusLocationInNewJersey.default.errorTextRequired
+        Config.profileDefaults.fields.nexusLocationInNewJersey.default.errorTextRequired,
       );
       expect(screen.getByTestId("location-in-new-jersey")).toHaveTextContent(
-        Config.profileDefaults.fields.nexusLocationInNewJersey.default.errorTextRequired
+        Config.profileDefaults.fields.nexusLocationInNewJersey.default.errorTextRequired,
       );
     });
   });
@@ -457,7 +457,7 @@ describe("onboarding - foreign business", () => {
       const userData = generateTestUserData({
         operatingPhase: "GUEST_MODE",
         businessPersona: "FOREIGN",
-        foreignBusinessType: "NEXUS"
+        foreignBusinessType: "NEXUS",
       });
 
       useMockRouter({ isReady: true, query: { page: "5" } });

@@ -13,8 +13,8 @@
     "lint": "yarn workspaces foreach run lint",
     "lint:fix": "yarn workspaces foreach run lint:fix",
     "lint:staged": "lint-staged",
-    "prettier": "prettier --write . --ignore-path=./.eslintignore --trailing-comma none",
-    "prettier:check": "prettier --check . --ignore-path=./.eslintignore --trailing-comma none",
+    "prettier": "prettier --write . --ignore-path=./.eslintignore ",
+    "prettier:check": "prettier --check . --ignore-path=./.eslintignore ",
     "start:dev": "yarn workspaces foreach -ptvi run dev",
     "spellcheck": "yarn workspaces foreach -v run spellcheck",
     "sync:deps": "yarnw-sync-deps --fix",
@@ -246,9 +246,9 @@
   "lint-staged": {
     "*.{js,ts,tsx}": [
       "eslint --fix",
-      "prettier --write --trailing-comma none"
+      "prettier --write "
     ],
-    "*.{css,md,scss,yml}": "prettier --write --trailing-comma none"
+    "*.{css,md,scss,yml}": "prettier --write "
   },
   "prettier": {
     "printWidth": 110,

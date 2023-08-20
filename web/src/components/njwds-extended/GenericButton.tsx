@@ -26,7 +26,7 @@ export interface GenericButtonProps {
 
 export const GenericButton = forwardRef(function GenericButton(
   props: GenericButtonProps,
-  ref?: Ref<HTMLButtonElement> | undefined
+  ref?: Ref<HTMLButtonElement> | undefined,
 ): ReactElement {
   const isUnBolded = props.isUnBolded ? "text-normal" : "";
   const disabledClass = "usa-button--disabled";
@@ -61,7 +61,7 @@ export const GenericButton = forwardRef(function GenericButton(
     showDisabledClass,
     fullWidth,
     isVerticalPaddingRemoved,
-    isTextNoWrap
+    isTextNoWrap,
   ]
     .map((i) => {
       return i?.trim();

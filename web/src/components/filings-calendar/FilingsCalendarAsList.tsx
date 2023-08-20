@@ -32,14 +32,14 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
 
   const licenseCalendarEvents = getLicenseCalendarEvents(
     props.business?.licenseData,
-    Number.parseInt(props.activeYear)
+    Number.parseInt(props.activeYear),
   );
 
   const sortedFilteredEventsWithinAYear: Array<TaxFilingCalendarEvent | LicenseCalendarEvent> = props.business
     ?.taxFilingData.filings
     ? sortFilterCalendarEventsWithinAYear(
         [...licenseCalendarEvents, ...props.business.taxFilingData.filings],
-        props.activeYear
+        props.activeYear,
       )
     : [];
 
@@ -63,7 +63,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
       }
       return true;
     }),
-    (value) => value.dueDate
+    (value) => value.dueDate,
   );
 
   const visibleEvents = eventsGroupedByDate.slice(0, numberOfVisibleCalendarEntries);

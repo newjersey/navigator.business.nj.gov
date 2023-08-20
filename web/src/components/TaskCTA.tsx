@@ -33,7 +33,7 @@ export const TaskCTA = (props: Props): ReactElement => {
             onClick={(): void =>
               analytics.event.task_primary_call_to_action.click.open_external_website(
                 props.text || Config.taskDefaults.defaultCallToActionText,
-                props.link as string
+                props.link as string,
               )
             }
           >

@@ -10,7 +10,7 @@ describe("funding page", () => {
       callToActionText: "Click here",
       contentMd: "Some content description",
       dueDate: "07/01/2025",
-      status: "deadline"
+      status: "deadline",
     });
 
     render(<FundingPage funding={funding} />);
@@ -23,7 +23,7 @@ describe("funding page", () => {
 
   it("looks up and shows the agency name if one exists", () => {
     const funding = generateFunding({
-      agency: ["njeda"]
+      agency: ["njeda"],
     });
 
     render(<FundingPage funding={funding} />);
@@ -35,7 +35,7 @@ describe("funding page", () => {
 
   it("comma-separates multiple agencies", () => {
     const funding = generateFunding({
-      agency: ["njeda", "njdol"]
+      agency: ["njeda", "njdol"],
     });
 
     render(<FundingPage funding={funding} />);
@@ -52,7 +52,7 @@ describe("funding page", () => {
       contentMd: "Some content description",
       dueDate: "07/01/2025",
       status: "deadline",
-      agency: []
+      agency: [],
     });
 
     render(<FundingPage funding={funding} />);
@@ -68,7 +68,7 @@ describe("funding page", () => {
         contentMd: "Some content description",
         dueDate: "",
         status: "first come, first serve",
-        agency: []
+        agency: [],
       });
 
       render(<FundingPage funding={funding} />);
@@ -83,7 +83,7 @@ describe("funding page", () => {
         contentMd: "Some content description",
         dueDate: "",
         status: "deadline",
-        agency: []
+        agency: [],
       });
 
       render(<FundingPage funding={funding} />);
@@ -98,7 +98,7 @@ describe("funding page", () => {
         contentMd: "Some content description",
         dueDate: "07/25/2030",
         status: "deadline",
-        agency: []
+        agency: [],
       });
 
       render(<FundingPage funding={funding} />);

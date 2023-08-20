@@ -31,7 +31,7 @@ export const triggerQueueUpdate = (): void => {
 
 export const WithStatefulUserData = ({
   children,
-  initialUserData
+  initialUserData,
 }: {
   children: ReactNode;
   initialUserData: UserData | undefined;
@@ -65,7 +65,7 @@ export const setupStatefulUserDataContext = (): void => {
       hasCompletedFetch: true,
       updateQueue: updateQueue,
       createUpdateQueue,
-      refresh: jest.fn()
+      refresh: jest.fn(),
     };
   });
 };

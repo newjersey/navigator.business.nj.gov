@@ -12,14 +12,14 @@ type TaskCount = { required: number; optional: number; total: number };
 
 export const getCompletedTaskCount = (
   roadmap: Roadmap | undefined,
-  business: Business | undefined
+  business: Business | undefined,
 ): TaskCount => {
   return getTaskCountForStatus({ business, roadmap, complete: true });
 };
 
 export const getIncompleteTaskCount = (
   roadmap: Roadmap | undefined,
-  business: Business | undefined
+  business: Business | undefined,
 ): TaskCount => {
   return getTaskCountForStatus({ business, roadmap, complete: false });
 };
@@ -27,7 +27,7 @@ export const getIncompleteTaskCount = (
 const getTaskCountForStatus = ({
   business,
   roadmap,
-  complete
+  complete,
 }: {
   complete: boolean;
   roadmap: Roadmap | undefined;
@@ -64,6 +64,6 @@ const getTaskCountForStatus = ({
   return {
     required: requiredTotalTaskCountForStatus,
     optional: optionalTaskCountForStatus,
-    total: requiredTotalTaskCountForStatus + optionalTaskCountForStatus
+    total: requiredTotalTaskCountForStatus + optionalTaskCountForStatus,
   };
 };

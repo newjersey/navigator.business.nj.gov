@@ -112,7 +112,7 @@ describe("findDeadLinks", () => {
         "/licenses/licenses-renewal": [],
         "/licenses/licenses-expiration": [],
         "/funding/fundings": [],
-        "/certification/certifications": []
+        "/certification/certifications": [],
       });
     });
   });
@@ -125,7 +125,7 @@ jest.mock("broken-link-checker", () => {
       handlers: {
         link?: ((result: any) => void) | undefined;
         end?: (() => void) | undefined;
-      }
+      },
     ): any {
       const enqueue = (pageUrl: any): any => {
         if (!handlers.link || !handlers.end) {
@@ -134,17 +134,17 @@ jest.mock("broken-link-checker", () => {
         if (pageUrl.includes("task1")) {
           handlers.link({
             url: { original: "http://www.example.com" },
-            broken: true
+            broken: true,
           });
         } else {
           handlers.link({
             url: { original: "" },
-            broken: false
+            broken: false,
           });
         }
         handlers.end();
       };
       return { enqueue };
-    }
+    },
   };
 });

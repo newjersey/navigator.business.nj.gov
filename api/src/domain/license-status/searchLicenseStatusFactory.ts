@@ -34,7 +34,7 @@ export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusCli
       .map((it) => {
         return {
           title: it.checklistItem,
-          status: it.checkoffStatus === "Completed" ? "ACTIVE" : "PENDING"
+          status: it.checkoffStatus === "Completed" ? "ACTIVE" : "PENDING",
         };
       });
 
@@ -45,7 +45,7 @@ export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusCli
     return {
       status: determineLicenseStatus(match.licenseStatus),
       expirationISO: expirationDate?.toISOString(),
-      checklistItems: items
+      checklistItems: items,
     };
   };
 };

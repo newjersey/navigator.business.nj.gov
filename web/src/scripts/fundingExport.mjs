@@ -4,7 +4,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const fundingDir = path.resolve(
-  `${path.dirname(fileURLToPath(import.meta.url))}/../../../content/src/fundings`
+  `${path.dirname(fileURLToPath(import.meta.url))}/../../../content/src/fundings`,
 );
 
 const convertFundingMd = (oppMdContents, filename) => {
@@ -14,7 +14,7 @@ const convertFundingMd = (oppMdContents, filename) => {
   return {
     contentMd: matterResult.content,
     filename: filename,
-    ...oppGrayMatter
+    ...oppGrayMatter,
   };
 };
 
@@ -37,7 +37,7 @@ export const exportFundings = () => {
   const fundings = loadAllFundings();
   const writeStream = fs.createWriteStream("fundings.csv");
   writeStream.write(
-    `id,name,filename,urlSlug,callToActionLink,callToActionText,fundingType,programPurpose,agency,agencyContact,publishStageArchive,openDate,dueDate,status,programFrequency,businessStage,employeesRequired,homeBased,certifications,preferenceForOpportunityZone,county,sector,contentMd\n`
+    `id,name,filename,urlSlug,callToActionLink,callToActionText,fundingType,programPurpose,agency,agencyContact,publishStageArchive,openDate,dueDate,status,programFrequency,businessStage,employeesRequired,homeBased,certifications,preferenceForOpportunityZone,county,sector,contentMd\n`,
   );
   for (const funding of fundings) {
     writeStream.write(
@@ -51,7 +51,7 @@ export const exportFundings = () => {
         funding.employeesRequired
       }","${funding.homeBased}","${funding.certifications}","${funding.preferenceForOpportunityZone}","${
         funding.county
-      }","${funding.sector}","${funding.contentMd.trim()}"\n`
+      }","${funding.sector}","${funding.contentMd.trim()}"\n`,
     );
   }
 };

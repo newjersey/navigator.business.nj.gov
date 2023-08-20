@@ -31,7 +31,7 @@ export const MatchCollection = (props: Props): ReactElement => {
     (acc: number, curr: Match[]) => {
       return acc + curr.length;
     },
-    0
+    0,
   );
 
   const totalMatches = countAllMatchesInCollections + configMatchesInThisCollection.length;

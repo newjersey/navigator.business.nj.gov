@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 import { createItem, deleteItem, getAllItems, modifyItem } from "./methods.mjs";
 
 const sectorDir = path.resolve(
-  `${path.dirname(fileURLToPath(import.meta.url))}/../../../../content/src/mappings`
+  `${path.dirname(fileURLToPath(import.meta.url))}/../../../../content/src/mappings`,
 );
 const getSectors = () => {
   return JSON.parse(fs.readFileSync(path.join(sectorDir, "sectors.json"), "utf8")).arrayOfSectors;
@@ -26,7 +26,7 @@ const getOverlappingSectorsFunc = (currentSectors) => {
     return new Set(
       getSectors().map((_item) => {
         return _item.id;
-      })
+      }),
     ).has(item.slug);
   });
 };
@@ -39,7 +39,7 @@ const getUpdatedSectors = async () => {
   const sectorNames = new Set(
     getSectors().map((_item) => {
       return _item.name;
-    })
+    }),
   );
   return [...(await getOverlappingSectors())].filter((item) => {
     return !sectorNames.has(item.name);
@@ -51,7 +51,7 @@ const getNewSectors = async () => {
   const currentIdArray = new Set(
     current.map((sec) => {
       return sec.slug;
-    })
+    }),
   );
   return getSectors()
     .filter((i) => {
@@ -76,7 +76,7 @@ const getUpdatedSectorNames = async () => {
       ...item,
       name: sectors.find((sector) => {
         return sector.id == item.slug;
-      }).name
+      }).name,
     };
   });
 };
@@ -89,7 +89,7 @@ const getSortedSectors = async () => {
   return [allIndustryItem, ...orderBy(getOverlappingSectorsFunc(current), ["name"], "asc")].map((e, i) => {
     return {
       ...e,
-      rank: i + 1
+      rank: i + 1,
     };
   });
 };
@@ -150,7 +150,7 @@ export {
   getUnUsedSectors,
   getNewSectors,
   getCurrentSectors,
-  allIndustryId
+  allIndustryId,
 };
 // eslint-disable-next-line no-empty
 if (

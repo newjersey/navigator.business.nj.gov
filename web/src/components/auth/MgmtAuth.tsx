@@ -50,7 +50,7 @@ export const MgmtAuth = (props: Props): ReactElement => {
         onKeyPress={handleKeyPress}
         inputProps={{
           id: "password",
-          "data-testid": "mgmt-password-field"
+          "data-testid": "mgmt-password-field",
         }}
       />
       <button onClick={onSubmit} className="usa-button margin-top-2" data-testid="mgmt-submit-bttn">

@@ -46,6 +46,6 @@ export const BrowserStorageFactory = (type?: StorageType): BrowserStorage => {
     set,
     keys,
     clear,
-    delete: _delete
+    delete: _delete,
   };
 };

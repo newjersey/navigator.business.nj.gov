@@ -17,9 +17,9 @@ export const migrate_v43_to_v44 = (v43Data: v43UserData): v44UserData => {
     ...v43Data,
     profileData: {
       ...v43Data.profileData,
-      cannabisLicenseType: undefined
+      cannabisLicenseType: undefined,
     },
-    version: 44
+    version: 44,
   };
 };
 
@@ -150,7 +150,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v44FormationData {

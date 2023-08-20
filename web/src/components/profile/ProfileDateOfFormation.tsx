@@ -11,7 +11,7 @@ import {
   DateObject,
   defaultDateFormat,
   getCurrentDate,
-  parseDate
+  parseDate,
 } from "@businessnjgovnavigator/shared";
 import { TextFieldProps } from "@mui/material";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -37,14 +37,14 @@ export const ProfileDateOfFormation = (props: Props): ReactElement => {
 
   const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
     fieldName,
-    profileFormContext
+    profileFormContext,
   );
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["dateOfFormation"]["default"] =
     getProfileConfig({
       config: Config,
       persona: state.flow,
-      fieldName: fieldName
+      fieldName: fieldName,
     });
 
   const errorText = props.errorTextOverride || contentFromConfig.errorTextRequired;
@@ -63,7 +63,7 @@ export const ProfileDateOfFormation = (props: Props): ReactElement => {
     setDateValue(date);
     setProfileData({
       ...state.profileData,
-      [fieldName]: date?.isValid() ? date?.date(1).format(defaultDateFormat) : undefined
+      [fieldName]: date?.isValid() ? date?.date(1).format(defaultDateFormat) : undefined,
     });
   };
 
@@ -99,10 +99,10 @@ export const ProfileDateOfFormation = (props: Props): ReactElement => {
               fieldOptions={{
                 ...params,
                 inputProps: {
-                  ...params.inputProps
+                  ...params.inputProps,
                 },
                 error: isFormFieldInValid,
-                sx: { svg: { fill: "#4b7600" } }
+                sx: { svg: { fill: "#4b7600" } },
               }}
             />
           );

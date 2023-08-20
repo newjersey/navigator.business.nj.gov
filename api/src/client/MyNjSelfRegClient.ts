@@ -22,20 +22,20 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logger: LogWriterTy
 
   const makeRequest = async (body: string, type: "GRANT" | "RESUME"): Promise<SelfRegResponse> => {
     const headers = {
-      "Content-Type": "text/xml;encoding=UTF-8"
+      "Content-Type": "text/xml;encoding=UTF-8",
     };
 
     logger.LogInfo(
       `myNJ Self-Reg - Id:${logId} - Request Sent to ${config.serviceUrl} data: ${JSON.stringify(
-        body
-      )} headers: ${JSON.stringify(headers)}`
+        body,
+      )} headers: ${JSON.stringify(headers)}`,
     );
 
     return axios({
       method: "post",
       url: config.serviceUrl,
       data: body,
-      headers: headers
+      headers: headers,
     })
       .then(async (xmlResponse) => {
         const response = await xml2js.parseStringPromise(xmlResponse.data);
@@ -52,18 +52,18 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logger: LogWriterTy
 
         if (!success || success[0] !== "true") {
           logger.LogError(
-            `myNJ Self-Reg - Id:${logId} - Error Response Received. Data: Success: ${success} AuthId: ${authId}. Errors: ${errors}`
+            `myNJ Self-Reg - Id:${logId} - Error Response Received. Data: Success: ${success} AuthId: ${authId}. Errors: ${errors}`,
           );
           throw errors;
         } else {
           logger.LogInfo(
-            `myNJ Self-Reg - Id:${logId} - Response Received. Data: Success: ${success} AuthId: ${authId}. Errors: ${errors}`
+            `myNJ Self-Reg - Id:${logId} - Response Received. Data: Success: ${success} AuthId: ${authId}. Errors: ${errors}`,
           );
         }
 
         return {
           authRedirectURL: authURL[0],
-          myNJUserKey: authId[0]
+          myNJUserKey: authId[0],
         };
       })
       .catch((error) => {
@@ -112,6 +112,6 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logger: LogWriterTy
 
   return {
     grant,
-    resume
+    resume,
   };
 };

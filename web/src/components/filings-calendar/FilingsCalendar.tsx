@@ -16,7 +16,7 @@ import {
   Business,
   getCurrentDate,
   LookupLegalStructureById,
-  LookupOperatingPhaseById
+  LookupOperatingPhaseById,
 } from "@businessnjgovnavigator/shared/index";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useState } from "react";
@@ -46,7 +46,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     if (!business) return false;
     return (
       LookupLegalStructureById(business.profileData.legalStructureId).elementsToDisplay.has(
-        "formationDate"
+        "formationDate",
       ) && !business.profileData.dateOfFormation
     );
   };
@@ -93,7 +93,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
       updateQueue
         .queuePreferences({
-          isCalendarFullView: !business.preferences.isCalendarFullView
+          isCalendarFullView: !business.preferences.isCalendarFullView,
         })
         .update();
     };
@@ -146,7 +146,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                 years={[
                   currentYear,
                   currentDate.add(1, "year").year().toString(),
-                  currentDate.add(2, "year").year().toString()
+                  currentDate.add(2, "year").year().toString(),
                 ]}
                 onChange={(year): void => setActiveYear(year)}
               />

@@ -18,7 +18,7 @@ import {
   TaskWithoutLinks,
   TaxAgency,
   TaxFilingMethod,
-  WebflowLicense
+  WebflowLicense,
 } from "@/lib/types/types";
 import matter from "gray-matter";
 
@@ -29,7 +29,7 @@ export const convertContextualInfoMd = (contentMdContents: string): ContextualIn
   return {
     isVisible: false,
     markdown: matterResult.content,
-    ...contentGrayMatter
+    ...contentGrayMatter,
   };
 };
 
@@ -42,7 +42,7 @@ export const convertPostOnboardingMd = (contentMdContents: string, filename: str
     radioYes: grayMatter.radioYes,
     radioNo: grayMatter.radioNo,
     radioNoContent: grayMatter.radioNoContent,
-    filename
+    filename,
   };
 };
 
@@ -52,7 +52,7 @@ export const convertTaskMd = (taskMdContents: string): TaskWithoutLinks => {
 
   return {
     contentMd: matterResult.content,
-    ...taskGrayMatter
+    ...taskGrayMatter,
   };
 };
 
@@ -62,7 +62,7 @@ export const convertLicenseMd = (taskMdContents: string, filename: string): Lice
   return {
     contentMd: matterResult.content,
     filename,
-    ...taskGrayMatter
+    ...taskGrayMatter,
   };
 };
 
@@ -72,7 +72,7 @@ export const convertFilingMd = (taskMdContents: string, filename: string): Filin
   return {
     contentMd: matterResult.content,
     filename,
-    ...taskGrayMatter
+    ...taskGrayMatter,
   };
 };
 
@@ -84,7 +84,7 @@ export const convertFundingMd = (oppMdContents: string, filename: string): Fundi
     contentMd: matterResult.content,
     filename: filename,
     ...oppGrayMatter,
-    descriptionMd: oppGrayMatter.descriptionMd ?? ""
+    descriptionMd: oppGrayMatter.descriptionMd ?? "",
   };
 };
 
@@ -96,7 +96,7 @@ export const convertCertificationMd = (mdContents: string, filename: string): Ce
     contentMd: matterResult.content,
     filename: filename,
     ...grayMatter,
-    descriptionMd: grayMatter.descriptionMd ?? ""
+    descriptionMd: grayMatter.descriptionMd ?? "",
   };
 };
 
@@ -107,7 +107,7 @@ export const convertWebflowLicenseMd = (mdContents: string, filename: string): W
   return {
     contentMd: matterResult.content,
     filename: filename,
-    ...grayMatter
+    ...grayMatter,
   };
 };
 
@@ -116,7 +116,7 @@ export const getMarkdown = (mdContents: string): MarkdownResult => {
 
   return {
     content: matterResult.content,
-    grayMatter: matterResult.data
+    grayMatter: matterResult.data,
   };
 };
 

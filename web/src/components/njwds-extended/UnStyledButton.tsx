@@ -67,5 +67,5 @@ export const UnStyledButton = forwardRef(
         </div>
       </button>
     );
-  }
+  },
 );

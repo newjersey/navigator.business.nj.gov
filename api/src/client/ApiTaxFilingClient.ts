@@ -5,7 +5,7 @@ import {
   TaxFilingLookupResponse,
   TaxFilingOnboardingResponse,
   TaxFilingResult,
-  TaxIdentifierToIdsRecord
+  TaxIdentifierToIdsRecord,
 } from "../domain/types";
 import { LogWriterType } from "../libs/logWriter";
 
@@ -19,7 +19,7 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
 
   const taxIdMap: TaxIdentifierToIdsRecord = {
     "cr-1orcnr-11": ["cr-1orcnr-1"],
-    "cr-1orcnr-12": ["cr-1orcnr-1"]
+    "cr-1orcnr-12": ["cr-1orcnr-1"],
   };
 
   const lookup = async (props: { taxId: string; businessName: string }): Promise<TaxFilingLookupResponse> => {
@@ -29,25 +29,25 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
       Data: [
         {
           Name: "taxpayer-id",
-          Value: props.taxId
+          Value: props.taxId,
         },
         {
           Name: "tax-business-name",
-          Value: props.businessName
-        }
-      ]
+          Value: props.businessName,
+        },
+      ],
     };
     logger.LogInfo(
       `TaxFiling Lookup - NICUSA - Id:${logId} - Request Sent to ${
         config.baseUrl
-      }/lookup data: ${JSON.stringify(postBody)}`
+      }/lookup data: ${JSON.stringify(postBody)}`,
     );
 
     try {
       const response = await axios.post(`${config.baseUrl}/lookup`, postBody);
 
       logger.LogInfo(
-        `TaxFiling Lookup - NICUSA - Id:${logId} - Response received: ${JSON.stringify(response.data)}`
+        `TaxFiling Lookup - NICUSA - Id:${logId} - Response received: ${JSON.stringify(response.data)}`,
       );
 
       const apiResponse = response.data as ApiTaxFilingLookupResponse;
@@ -68,14 +68,14 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
         state: "SUCCESS",
         filings: flattenDeDupAndConvertTaxFilings(apiResponse.Results ?? [], taxIdMap),
         taxCity: city?.Value ?? "",
-        naicsCode: naicsCode?.Value ?? ""
+        naicsCode: naicsCode?.Value ?? "",
       };
     } catch (error) {
       const axiosError = error as AxiosError;
       if (axiosError.response?.status === 400) {
         const apiResponse = axiosError.response?.data as ApiTaxFilingLookupResponse;
         logger.LogInfo(
-          `TaxFiling Lookup - NICUSA - Id:${logId} - Response received: ${JSON.stringify(apiResponse)}`
+          `TaxFiling Lookup - NICUSA - Id:${logId} - Response received: ${JSON.stringify(apiResponse)}`,
         );
         if (
           apiResponse.Errors?.some((error) => {
@@ -101,7 +101,7 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
         throw error;
       } else {
         logger.LogError(
-          `TaxFiling Lookup - NICUSA - Id:${logId} - Unknown error received: ${JSON.stringify(error)}`
+          `TaxFiling Lookup - NICUSA - Id:${logId} - Unknown error received: ${JSON.stringify(error)}`,
         );
         return { state: "API_ERROR", filings: [] };
       }
@@ -121,31 +121,31 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
           Data: [
             {
               SchemaFieldSlug: "tax-return-type",
-              Value: "tax-calendar-reminder"
+              Value: "tax-calendar-reminder",
             },
             {
               SchemaFieldSlug: "taxpayer-id",
-              Value: props.taxId
+              Value: props.taxId,
             },
             {
               SchemaFieldSlug: "tax-business-name",
-              Value: props.businessName
-            }
-          ]
-        }
-      ]
+              Value: props.businessName,
+            },
+          ],
+        },
+      ],
     };
     logger.LogInfo(
       `TaxFiling Onboarding - NICUSA - Id:${logId} - Request Sent to ${
         config.baseUrl
-      }/onboarding data: ${JSON.stringify(postBody)}`
+      }/onboarding data: ${JSON.stringify(postBody)}`,
     );
 
     try {
       const response = await axios.post(`${config.baseUrl}/onboard`, postBody);
 
       logger.LogInfo(
-        `TaxFiling Onboarding - NICUSA - Id:${logId} - Response received: ${JSON.stringify(response.data)}`
+        `TaxFiling Onboarding - NICUSA - Id:${logId} - Response received: ${JSON.stringify(response.data)}`,
       );
 
       const apiResponse = response.data as ApiTaxFilingOnboardingResponse;
@@ -164,7 +164,7 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
         }
       }
       logger.LogError(
-        `TaxFiling Onboarding - NICUSA - Id:${logId} - Unknown error received: ${JSON.stringify(error)}`
+        `TaxFiling Onboarding - NICUSA - Id:${logId} - Unknown error received: ${JSON.stringify(error)}`,
       );
       return { state: "API_ERROR" };
     }
@@ -172,7 +172,7 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
 
   return {
     lookup,
-    onboarding
+    onboarding,
   };
 };
 

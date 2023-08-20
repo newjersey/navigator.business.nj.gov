@@ -40,7 +40,7 @@ export const OnboardingSplitTaxId = ({
 
   const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
     fieldName,
-    profileFormContext
+    profileFormContext,
   );
 
   RegisterForOnSubmit(
@@ -48,7 +48,7 @@ export const OnboardingSplitTaxId = ({
       isValid() &&
       (additionalValidationIsValid && !!state.profileData.taxId
         ? additionalValidationIsValid(state.profileData.taxId)
-        : true)
+        : true),
   );
 
   const locationBoxRef = useRef<HTMLDivElement>(null);
@@ -57,7 +57,7 @@ export const OnboardingSplitTaxId = ({
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["taxId"]["default"] = getProfileConfig({
     config: Config,
     persona: state.flow,
-    fieldName: "taxId"
+    fieldName: "taxId",
   });
 
   const updateSplitTaxId = (taxId: string): void => {
@@ -95,7 +95,7 @@ export const OnboardingSplitTaxId = ({
             value={taxIdValue}
             formContext={taxIdFormContext}
             fieldOptions={{
-              FormHelperTextProps: { sx: { whiteSpace: "nowrap" } }
+              FormHelperTextProps: { sx: { whiteSpace: "nowrap" } },
             }}
             fieldName={fieldName as string}
             error={isFormFieldInValid}

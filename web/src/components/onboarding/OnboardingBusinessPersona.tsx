@@ -17,7 +17,7 @@ export const OnboardingBusinessPersona = <T,>(props: FormContextFieldProps<T>): 
   const { RegisterForOnSubmit, Validate } = useFormContextFieldHelpers(
     "businessPersona",
     profileFormContext,
-    props.errorTypes
+    props.errorTypes,
   );
 
   RegisterForOnSubmit(() => state.profileData.businessPersona !== undefined);
@@ -25,7 +25,7 @@ export const OnboardingBusinessPersona = <T,>(props: FormContextFieldProps<T>): 
     Validate(false);
     setProfileData({
       ...state.profileData,
-      businessPersona: event.target.value as BusinessPersona
+      businessPersona: event.target.value as BusinessPersona,
     });
   };
 
@@ -33,7 +33,7 @@ export const OnboardingBusinessPersona = <T,>(props: FormContextFieldProps<T>): 
     getProfileConfig({
       config: Config,
       persona: state.flow,
-      fieldName: "businessPersona"
+      fieldName: "businessPersona",
     });
 
   return (

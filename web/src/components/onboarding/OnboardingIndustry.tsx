@@ -23,7 +23,7 @@ export const OnboardingIndustry = <T,>(props: Props<T>): ReactElement => {
   const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
     fieldName,
     profileFormContext,
-    props.errorTypes
+    props.errorTypes,
   );
 
   const { Config } = useConfig();
@@ -32,7 +32,7 @@ export const OnboardingIndustry = <T,>(props: Props<T>): ReactElement => {
     getProfileConfig({
       config: Config,
       persona: state.flow,
-      fieldName: fieldName
+      fieldName: fieldName,
     });
 
   const isValid = (value: string | undefined): boolean => !!value && value.length > 0;

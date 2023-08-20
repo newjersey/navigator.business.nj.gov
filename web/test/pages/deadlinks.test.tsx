@@ -14,7 +14,7 @@ jest.mock("broken-link-checker", () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         link?: ((result: any) => void) | undefined;
         end?: (() => void) | undefined;
-      }
+      },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ): any {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,18 +25,18 @@ jest.mock("broken-link-checker", () => {
         if (pageUrl.includes("task1")) {
           handlers.link({
             url: { original: "http://www.example.com" },
-            broken: true
+            broken: true,
           });
         } else {
           handlers.link({
             url: { original: "" },
-            broken: false
+            broken: false,
           });
         }
         handlers.end();
       };
       return { enqueue };
-    }
+    },
   };
 });
 

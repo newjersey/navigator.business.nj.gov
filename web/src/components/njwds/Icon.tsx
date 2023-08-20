@@ -15,7 +15,7 @@ export const Icon = (props: Props): ReactElement => {
       focusable="false"
       role="img"
       dangerouslySetInnerHTML={{
-        __html: `<use xlink:href="/vendor/img/sprite.svg#${props.children}"></use>`
+        __html: `<use xlink:href="/vendor/img/sprite.svg#${props.children}"></use>`,
       }}
     />
   );

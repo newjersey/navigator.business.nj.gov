@@ -24,7 +24,7 @@ export const PracticesLaw = (props: Props): ReactElement => {
           setFormationFormData((previousState) => {
             return {
               ...previousState,
-              willPracticeLaw: JSON.parse(e.target.value)
+              willPracticeLaw: JSON.parse(e.target.value),
             };
           })
         }

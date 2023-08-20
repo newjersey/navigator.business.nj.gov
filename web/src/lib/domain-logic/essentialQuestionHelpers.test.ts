@@ -1,6 +1,6 @@
 import {
   getEssentialQuestion,
-  getIsApplicableToFunctionByFieldName
+  getIsApplicableToFunctionByFieldName,
 } from "@/lib/domain-logic/essentialQuestions";
 
 jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
@@ -14,12 +14,12 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
       industryOnboardingQuestions: {
         isPetCareHousingApplicable: true,
         willSellPetCareItems: true,
-        isCpaRequiredApplicable: true
+        isCpaRequiredApplicable: true,
       },
       isEnabled: true,
       additionalSearchTerms: "",
       id: "multipleEqId",
-      description: ""
+      description: "",
     },
     {
       naicsCodes: "000000",
@@ -39,12 +39,12 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
         isCpaRequiredApplicable: true,
         willSellPetCareItems: true,
         isChildcareForSixOrMore: true,
-        isPetCareHousingApplicable: true
+        isPetCareHousingApplicable: true,
       },
       isEnabled: true,
       additionalSearchTerms: "",
       id: "fake-industry-with-eq",
-      description: ""
+      description: "",
     },
     {
       naicsCodes: "000000",
@@ -56,9 +56,9 @@ jest.mock("../../../../shared/lib/content/lib/industry.json", () => ({
       isEnabled: true,
       additionalSearchTerms: "",
       id: "fake-industry-with-no-eq",
-      description: ""
-    }
-  ]
+      description: "",
+    },
+  ],
 }));
 
 describe("hasEssentialQuestion", () => {
@@ -102,7 +102,7 @@ describe("hasEssentialQuestion", () => {
 
       it("returns false when industry is not cannabis", () => {
         expect(
-          getIsApplicableToFunctionByFieldName("cannabisLicenseType")("fake-industry-with-no-eq")
+          getIsApplicableToFunctionByFieldName("cannabisLicenseType")("fake-industry-with-no-eq"),
         ).toEqual(false);
       });
 
@@ -112,7 +112,7 @@ describe("hasEssentialQuestion", () => {
 
       it("returns true when industry is cannabis", () => {
         expect(getIsApplicableToFunctionByFieldName("cannabisLicenseType")("fake-industry-with-eq")).toEqual(
-          true
+          true,
         );
       });
     });
@@ -124,19 +124,19 @@ describe("hasEssentialQuestion", () => {
 
       it("returns false when industry does not have a certified interior designer option", () => {
         expect(
-          getIsApplicableToFunctionByFieldName("certifiedInteriorDesigner")("fake-industry-with-no-eq")
+          getIsApplicableToFunctionByFieldName("certifiedInteriorDesigner")("fake-industry-with-no-eq"),
         ).toEqual(false);
       });
 
       it("returns false when industry does not exist", () => {
         expect(getIsApplicableToFunctionByFieldName("certifiedInteriorDesigner")("fake-industry")).toEqual(
-          false
+          false,
         );
       });
 
       it("returns true when industry has a certified interior designer option", () => {
         expect(
-          getIsApplicableToFunctionByFieldName("certifiedInteriorDesigner")("fake-industry-with-eq")
+          getIsApplicableToFunctionByFieldName("certifiedInteriorDesigner")("fake-industry-with-eq"),
         ).toEqual(true);
       });
     });
@@ -144,25 +144,25 @@ describe("hasEssentialQuestion", () => {
     describe("isRealEstateAppraisalManagementApplicable", () => {
       it("returns false when no industry is supplied", () => {
         expect(getIsApplicableToFunctionByFieldName("realEstateAppraisalManagement")(undefined)).toEqual(
-          false
+          false,
         );
       });
 
       it("returns false when industry does not have a real estate appraisal option", () => {
         expect(
-          getIsApplicableToFunctionByFieldName("realEstateAppraisalManagement")("fake-industry-with-no-eq")
+          getIsApplicableToFunctionByFieldName("realEstateAppraisalManagement")("fake-industry-with-no-eq"),
         ).toEqual(false);
       });
 
       it("returns false when industry does not exist", () => {
         expect(
-          getIsApplicableToFunctionByFieldName("realEstateAppraisalManagement")("fake-industry")
+          getIsApplicableToFunctionByFieldName("realEstateAppraisalManagement")("fake-industry"),
         ).toEqual(false);
       });
 
       it("returns true when industry has a real estate appraisal option", () => {
         expect(
-          getIsApplicableToFunctionByFieldName("realEstateAppraisalManagement")("fake-industry-with-eq")
+          getIsApplicableToFunctionByFieldName("realEstateAppraisalManagement")("fake-industry-with-eq"),
         ).toEqual(true);
       });
     });
@@ -174,19 +174,19 @@ describe("hasEssentialQuestion", () => {
 
       it("returns false when industry does not have a staffing service option", () => {
         expect(
-          getIsApplicableToFunctionByFieldName("providesStaffingService")("fake-industry-with-no-eq")
+          getIsApplicableToFunctionByFieldName("providesStaffingService")("fake-industry-with-no-eq"),
         ).toEqual(false);
       });
 
       it("returns false when industry does not exist", () => {
         expect(getIsApplicableToFunctionByFieldName("providesStaffingService")("fake-industry")).toEqual(
-          false
+          false,
         );
       });
 
       it("returns true when industry has a staffing service option", () => {
         expect(
-          getIsApplicableToFunctionByFieldName("providesStaffingService")("fake-industry-with-eq")
+          getIsApplicableToFunctionByFieldName("providesStaffingService")("fake-industry-with-eq"),
         ).toEqual(true);
       });
     });
@@ -198,7 +198,7 @@ describe("hasEssentialQuestion", () => {
 
       it("returns false when industry does not have a liquor license option", () => {
         expect(getIsApplicableToFunctionByFieldName("liquorLicense")("fake-industry-with-no-eq")).toEqual(
-          false
+          false,
         );
       });
 
@@ -218,7 +218,7 @@ describe("hasEssentialQuestion", () => {
 
       it("returns false when industry does not fall under moving company", () => {
         expect(getIsApplicableToFunctionByFieldName("interstateMoving")("fake-industry-with-no-eq")).toEqual(
-          false
+          false,
         );
       });
 
@@ -228,7 +228,7 @@ describe("hasEssentialQuestion", () => {
 
       it("returns true when industry is a moving company", () => {
         expect(getIsApplicableToFunctionByFieldName("interstateMoving")("fake-industry-with-eq")).toEqual(
-          true
+          true,
         );
       });
     });
@@ -240,7 +240,7 @@ describe("hasEssentialQuestion", () => {
 
       it("returns false when industry does not fall under logistics company", () => {
         expect(
-          getIsApplicableToFunctionByFieldName("interstateLogistics")("fake-industry-with-no-eq")
+          getIsApplicableToFunctionByFieldName("interstateLogistics")("fake-industry-with-no-eq"),
         ).toEqual(false);
       });
 
@@ -250,7 +250,7 @@ describe("hasEssentialQuestion", () => {
 
       it("returns true when industry is a logistics company", () => {
         expect(getIsApplicableToFunctionByFieldName("interstateLogistics")("fake-industry-with-eq")).toEqual(
-          true
+          true,
         );
       });
     });
@@ -262,7 +262,7 @@ describe("hasEssentialQuestion", () => {
 
       it("returns false when industry does not have a CPA option", () => {
         expect(getIsApplicableToFunctionByFieldName("requiresCpa")("fake-industry-with-no-eq")).toEqual(
-          false
+          false,
         );
       });
 
@@ -282,7 +282,7 @@ describe("hasEssentialQuestion", () => {
 
       it("returns false when industry does not have a willSellPetCareItems option", () => {
         expect(
-          getIsApplicableToFunctionByFieldName("willSellPetCareItems")("fake-industry-with-no-eq")
+          getIsApplicableToFunctionByFieldName("willSellPetCareItems")("fake-industry-with-no-eq"),
         ).toEqual(false);
       });
 
@@ -292,7 +292,7 @@ describe("hasEssentialQuestion", () => {
 
       it("returns true when industry is the pet care industry", () => {
         expect(getIsApplicableToFunctionByFieldName("willSellPetCareItems")("fake-industry-with-eq")).toEqual(
-          true
+          true,
         );
       });
     });
@@ -304,19 +304,19 @@ describe("hasEssentialQuestion", () => {
 
       it("returns false when industry does not exist", () => {
         expect(getIsApplicableToFunctionByFieldName("isChildcareForSixOrMore")("fake-industry")).toEqual(
-          false
+          false,
         );
       });
 
       it("returns false when industry does not provide childcare for six or more", () => {
         expect(
-          getIsApplicableToFunctionByFieldName("isChildcareForSixOrMore")("fake-industry-with-no-eq")
+          getIsApplicableToFunctionByFieldName("isChildcareForSixOrMore")("fake-industry-with-no-eq"),
         ).toEqual(false);
       });
 
       it("returns true when industry provides childcare for six or more children", () => {
         expect(
-          getIsApplicableToFunctionByFieldName("isChildcareForSixOrMore")("fake-industry-with-eq")
+          getIsApplicableToFunctionByFieldName("isChildcareForSixOrMore")("fake-industry-with-eq"),
         ).toEqual(true);
       });
     });
@@ -328,7 +328,7 @@ describe("hasEssentialQuestion", () => {
 
       it("returns false when industry does not have a petCareHousing option", () => {
         expect(getIsApplicableToFunctionByFieldName("petCareHousing")("fake-industry-with-no-eq")).toEqual(
-          false
+          false,
         );
       });
 

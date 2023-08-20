@@ -25,13 +25,13 @@ export const SelfRegSnackbar = (): ReactElement => {
   const alertMap: Record<AlertStatus, AlertVariant> = {
     SUCCESS: "success",
     DUPLICATE_ERROR: "error",
-    RESPONSE_ERROR: "error"
+    RESPONSE_ERROR: "error",
   };
 
   const contentMap: Record<AlertStatus, string> = {
     SUCCESS: Config.navigationDefaults.guestSuccessBody,
     DUPLICATE_ERROR: Config.selfRegistration.errorTextDuplicateSignUp,
-    RESPONSE_ERROR: Config.selfRegistration.errorTextGeneric
+    RESPONSE_ERROR: Config.selfRegistration.errorTextGeneric,
   };
 
   if (!registrationAlertStatus || registrationAlertStatus === "IN_PROGRESS") {
@@ -72,7 +72,7 @@ export const SelfRegSnackbar = (): ReactElement => {
               position: "absolute",
               right: 0,
               top: 0,
-              color: "#757575"
+              color: "#757575",
             }}
           >
             <Icon className="usa-icon--size-4">close</Icon>

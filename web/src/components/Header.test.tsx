@@ -27,7 +27,7 @@ describe("<Header />", () => {
     render(
       <ThemeProvider theme={createTheme()}>
         <Header />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
   };
 
@@ -38,9 +38,9 @@ describe("<Header />", () => {
           <Header />
         </ThemeProvider>,
         {
-          isAuthenticated: isAuthenticated
-        }
-      )
+          isAuthenticated: isAuthenticated,
+        },
+      ),
     );
   };
 
@@ -55,7 +55,7 @@ describe("<Header />", () => {
   it("displays guest mode content when user is not authenticated and routes to profile page on button click", () => {
     useMockProfileData({
       businessName: "Business Name",
-      legalStructureId: randomPublicFilingLegalStructure()
+      legalStructureId: randomPublicFilingLegalStructure(),
     });
     renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
 
@@ -96,7 +96,7 @@ describe("<Header />", () => {
     useMockProfileData({
       businessName: businessName,
       tradeName: "tradeName",
-      legalStructureId: randomPublicFilingLegalStructure()
+      legalStructureId: randomPublicFilingLegalStructure(),
     });
     renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
 
@@ -108,7 +108,7 @@ describe("<Header />", () => {
     useMockProfileData({
       businessName: "businessName",
       tradeName: tradeName,
-      legalStructureId: randomTradeNameLegalStructure()
+      legalStructureId: randomTradeNameLegalStructure(),
     });
     renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
     expect(screen.getByText(tradeName)).toBeInTheDocument();
@@ -124,7 +124,7 @@ describe("<Header />", () => {
     useMockUserData({ user: generateUser({ name: "Ada Lovelace" }) });
     renderHeader();
     const expectedHeaderText = templateEval(Config.headerDefaults.defaultHeaderText, {
-      name: "Ada Lovelace"
+      name: "Ada Lovelace",
     });
     expect(screen.getByText(expectedHeaderText)).toBeInTheDocument();
   });

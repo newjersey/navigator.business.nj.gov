@@ -2,7 +2,7 @@
 import {
   generateFormationMember,
   generateFormationSigner,
-  generateMunicipality
+  generateMunicipality,
 } from "@businessnjgovnavigator/cypress/support/helpers/factories";
 import { completeBusinessStructureTask } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import { completeNewBusinessOnboarding } from "@businessnjgovnavigator/cypress/support/helpers/helpers-onboarding";
@@ -43,12 +43,12 @@ describe("Business Formation [feature] [all] [group2]", () => {
     const agentOfficeAddressZipCode = "07666";
     const members: FormationFormData["members"] = [
       generateFormationMember({ addressZipCode: "07333" }),
-      generateFormationMember({ addressZipCode: "07996" })
+      generateFormationMember({ addressZipCode: "07996" }),
     ];
     const signers: FormationFormData["signers"] = [
       generateFormationSigner({}, legalStructureId),
       generateFormationSigner({}, legalStructureId),
-      generateFormationSigner({}, legalStructureId)
+      generateFormationSigner({}, legalStructureId),
     ];
     const contactFirstName = "Joe";
     const contactLastName = "Smith";
@@ -59,7 +59,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
     const paymentType: FormationFormData["paymentType"] = "ACH";
 
     completeNewBusinessOnboarding({
-      industry
+      industry,
     });
     completeBusinessStructureTask({ legalStructureId });
 
@@ -72,7 +72,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
       addressLine1,
       addressLine2,
       addressMunicipality,
-      addressZipCode
+      addressZipCode,
     });
     typeBusinessPurpose(businessPurpose);
     typeProvisions(provisions);
@@ -87,7 +87,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
       agentOfficeAddressLine1,
       agentOfficeAddressLine2,
       agentOfficeAddressMunicipality,
-      agentOfficeAddressZipCode
+      agentOfficeAddressZipCode,
     });
 
     addMembersToFormation(members);
@@ -97,7 +97,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
     typeBillingContactInfo({
       contactFirstName,
       contactLastName,
-      contactPhoneNumber
+      contactPhoneNumber,
     });
     selectServices({ certificateOfStanding, certifiedCopyOfFormationDocument, paymentType });
     onBusinessFormationPage.clickContinueToNextTab();
@@ -117,7 +117,7 @@ const submitBusinessNameSearchAndContinue = (name: string): void => {
 
 const typeDesignatorAndStartDate = ({
   businessSuffix,
-  businessStartDate
+  businessStartDate,
 }: Partial<FormationFormData>): void => {
   if (businessSuffix) {
     onBusinessFormationPage.selectBusinessDesignator(businessSuffix);
@@ -136,7 +136,7 @@ const typeBusinessAddress = ({
   addressLine1,
   addressLine2,
   addressMunicipality,
-  addressZipCode
+  addressZipCode,
 }: Partial<FormationFormData>): void => {
   if (addressLine1) {
     onBusinessFormationPage.typeBusinessAddressLine1(addressLine1 as string);
@@ -196,7 +196,7 @@ const selectAndTypeRegisteredAgent = ({
   agentOfficeAddressLine1,
   agentOfficeAddressLine2,
   agentOfficeAddressMunicipality,
-  agentOfficeAddressZipCode
+  agentOfficeAddressZipCode,
 }: Partial<AdditionalFormation>): void => {
   if (agentNumberOrManual === "NUMBER") {
     onBusinessFormationPage.getRegisteredAgentNumberRadio().check();
@@ -312,7 +312,7 @@ const addSigners = (signers: FormationFormData["signers"] = []): void => {
 const typeBillingContactInfo = ({
   contactFirstName,
   contactLastName,
-  contactPhoneNumber
+  contactPhoneNumber,
 }: Partial<FormationFormData>): void => {
   if (contactFirstName) {
     onBusinessFormationPage.typeContactFirstName(contactFirstName);
@@ -331,8 +331,8 @@ const typeBillingContactInfo = ({
         "contain",
         `(${contactPhoneNumber.slice(0, 3)}) ${contactPhoneNumber.slice(3, 6)}-${contactPhoneNumber.slice(
           6,
-          10
-        )}`
+          10,
+        )}`,
       );
   }
 };
@@ -340,7 +340,7 @@ const typeBillingContactInfo = ({
 const selectServices = ({
   certificateOfStanding,
   certifiedCopyOfFormationDocument,
-  paymentType
+  paymentType,
 }: Partial<FormationFormData>): void => {
   if (certificateOfStanding) {
     onBusinessFormationPage.getCertificateOfStanding().check();

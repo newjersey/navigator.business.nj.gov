@@ -7,7 +7,7 @@ import { WithStatefulProfileFormContext } from "@/test/mock/withStatefulProfileD
 import {
   currentBusiness,
   userDataWasNotUpdated,
-  WithStatefulUserData
+  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   einTaskId,
@@ -15,7 +15,7 @@ import {
   generateMunicipality,
   generateProfileData,
   generateUserDataForBusiness,
-  TaskProgress
+  TaskProgress,
 } from "@businessnjgovnavigator/shared";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
@@ -38,7 +38,7 @@ export const renderPage = ({
   municipalities,
   business,
   isAuthenticated,
-  setRegistrationModalIsVisible
+  setRegistrationModalIsVisible,
 }: {
   municipalities?: Municipality[];
   business?: Business;
@@ -55,8 +55,8 @@ export const renderPage = ({
     business ??
     generateBusiness({
       profileData: generateProfileData({
-        municipality: genericTown
-      })
+        municipality: genericTown,
+      }),
     });
 
   render(
@@ -69,8 +69,8 @@ export const renderPage = ({
         </WithStatefulProfileFormContext>
       </ThemeProvider>,
       isAuthenticated ?? IsAuthenticated.TRUE,
-      { registrationModalIsVisible: false, setRegistrationModalIsVisible }
-    )
+      { registrationModalIsVisible: false, setRegistrationModalIsVisible },
+    ),
   );
 };
 
@@ -157,7 +157,7 @@ export const expectLocationSavedAsUndefined = async (): Promise<void> => {
 export const expectLocationNotSavedAndError = (): void => {
   expect(userDataWasNotUpdated()).toBe(true);
   expect(
-    screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
+    screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired),
   ).toBeInTheDocument();
   expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
 };

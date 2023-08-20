@@ -26,10 +26,10 @@ export const migrate_v59_to_v60 = (v59Data: v59UserData): v60UserData => {
         ...v59Data.formationData.formationFormData,
         signer: v59Data.formationData.formationFormData.signer as unknown as v60FormationSigner,
         additionalSigners: v59Data.formationData.formationFormData
-          .additionalSigners as unknown as v60FormationSigner[]
-      }
+          .additionalSigners as unknown as v60FormationSigner[],
+      },
     },
-    version: 60
+    version: 60,
   };
 };
 
@@ -174,7 +174,7 @@ const newsletterStatusList = [
   "RESPONSE_WARNING",
   "RESPONSE_ERROR",
   "RESPONSE_FAIL",
-  "QUESTION_WARNING"
+  "QUESTION_WARNING",
 ] as const;
 
 interface v60FormationData {
@@ -240,7 +240,7 @@ const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 const llpBusinessSuffix = [
@@ -249,7 +249,7 @@ const llpBusinessSuffix = [
   "L.L.P.",
   "Registered Limited Liability Partnership",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix] as const;

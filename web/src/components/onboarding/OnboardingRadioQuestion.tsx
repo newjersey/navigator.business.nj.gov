@@ -8,7 +8,7 @@ import {
   camelCaseToKebabCase,
   camelCaseToSentence,
   capitalizeFirstLetter,
-  kebabSnakeSentenceToCamelCase
+  kebabSnakeSentenceToCamelCase,
 } from "@/lib/utils/cases-helpers";
 import { ProfileData } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
@@ -36,7 +36,7 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
   const contentFromConfig = getProfileConfig({
     config: Config,
     persona: state.flow,
-    fieldName: fieldName as keyof typeof profileFieldsFromConfig
+    fieldName: fieldName as keyof typeof profileFieldsFromConfig,
   });
 
   props.required && RegisterForOnSubmit(() => state.profileData[props.fieldName] !== undefined);
@@ -48,7 +48,7 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
     }) as T;
     setProfileData({
       ...state.profileData,
-      [props.fieldName]: value
+      [props.fieldName]: value,
     });
     props.onChange && props.onChange(value);
     Validate(false);
@@ -81,7 +81,7 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
                       ? props.labels[val.toString()]
                       : contentFromConfig[
                           `radioButton${capitalizeFirstLetter(
-                            kebabSnakeSentenceToCamelCase(val.toString())
+                            kebabSnakeSentenceToCamelCase(val.toString()),
                           )}Text`
                         ]
                   }

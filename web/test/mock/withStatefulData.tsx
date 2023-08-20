@@ -14,7 +14,7 @@ import { createContext, ReactElement, ReactNode, useEffect, useState } from "rea
 type GenericData = Record<string, any>;
 
 export const statefulDataHelpers = (
-  spy: jest.Mock
+  spy: jest.Mock,
 ): {
   getLastCalledWithConfig: () => { local?: boolean };
   currentData: () => GenericData;
@@ -33,7 +33,7 @@ export const statefulDataHelpers = (
     },
     dataUpdatedNTimes: (): number => {
       return getNumberOfMockCalls(spy);
-    }
+    },
   };
 };
 
@@ -94,5 +94,5 @@ export const StatefulDataContext = createContext<StatefulDataContextType>({
   genericData: undefined,
   update: () => {
     return Promise.resolve();
-  }
+  },
 });

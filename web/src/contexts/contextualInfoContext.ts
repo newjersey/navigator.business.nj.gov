@@ -15,7 +15,7 @@ export const ContextualInfoContext = createContext<ContextualInfoContextType>({
   contextualInfo: {
     isVisible: false,
     header: "",
-    markdown: ""
+    markdown: "",
   },
-  setContextualInfo: () => {}
+  setContextualInfo: () => {},
 });

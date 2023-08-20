@@ -14,7 +14,7 @@ export const migrate_v6_to_v7 = (v6Data: v6UserData): v7UserData => {
   return {
     ...v6Data,
     licenseSearchData: undefined,
-    version: 7
+    version: 7,
   };
 };
 
@@ -75,7 +75,7 @@ export const generateV7User = (overrides: Partial<v7BusinessUser>): v7BusinessUs
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -88,10 +88,10 @@ export const generateV7OnboardingData = (overrides: Partial<v7OnboardingData>): 
       name: `some-name-${randomInt()}`,
       displayName: `some-display-name-${randomInt()}`,
       county: `some-county-${randomInt()}`,
-      id: `some-id-${randomInt()}`
+      id: `some-id-${randomInt()}`,
     },
     liquorLicense: true,
     homeBasedBusiness: true,
-    ...overrides
+    ...overrides,
   };
 };

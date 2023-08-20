@@ -71,7 +71,7 @@ commands:
           command: yarn workspace @businessnjgovnavigator/web typecheck:cypress
       - run:
           name: Run Prettier
-          command: yarn prettier:check --trailing-comma none
+          command: yarn prettier:check
       - run:
           name: Run Linting
           command: yarn lint

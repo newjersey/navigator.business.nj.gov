@@ -31,8 +31,8 @@ describe("SignUpModal", () => {
     render(
       withAuthAlert(<SignUpModal />, isAuthenticated, {
         registrationModalIsVisible,
-        setRegistrationModalIsVisible
-      })
+        setRegistrationModalIsVisible,
+      }),
     );
   };
 

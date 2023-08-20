@@ -16,9 +16,9 @@ export const migrate_v27_to_v28 = (v27Data: v27UserData): v28UserData => {
     ...v27Data,
     profileData: {
       ...v27Data.profileData,
-      hasExistingBusiness: false
+      hasExistingBusiness: false,
     },
-    version: 28
+    version: 28,
   };
 };
 

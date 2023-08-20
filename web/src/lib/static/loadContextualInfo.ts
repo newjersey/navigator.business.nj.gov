@@ -9,7 +9,7 @@ const contextualInfoDir = path.join(
   "content",
   "src",
   "display-content",
-  "contextual-information"
+  "contextual-information",
 );
 const archivedContextualInfoDir = path.join(
   process.cwd(),
@@ -17,7 +17,7 @@ const archivedContextualInfoDir = path.join(
   "content",
   "src",
   "display-content",
-  "archived-contextual-info"
+  "archived-contextual-info",
 );
 
 export const loadAllContextualInfo = (): ContextualInfoFile[] => {
@@ -36,7 +36,7 @@ const loadContextualInfo = (dir: string): ContextualInfoFile[] => {
     const fileNameWithoutMd = fileName.split(".md")[0];
     return {
       ...convertContextualInfoMd(fileContents),
-      filename: fileNameWithoutMd
+      filename: fileNameWithoutMd,
     };
   });
 };

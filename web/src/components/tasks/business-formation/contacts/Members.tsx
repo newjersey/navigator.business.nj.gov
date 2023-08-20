@@ -5,7 +5,7 @@ import { getConfigFieldByLegalStructure } from "@/lib/utils/helpers";
 import {
   corpLegalStructures,
   createEmptyFormationMember,
-  FormationMember
+  FormationMember,
 } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
@@ -29,7 +29,7 @@ export const Members = (props: Props): ReactElement => {
         addressLine1: state.formationFormData.addressLine1,
         addressLine2: state.formationFormData.addressLine2,
         addressState: state.formationFormData.addressState,
-        addressZipCode: state.formationFormData.addressZipCode
+        addressZipCode: state.formationFormData.addressZipCode,
       };
 
   const configField = getConfigFieldByLegalStructure(state.formationFormData.legalType);
@@ -45,7 +45,7 @@ export const Members = (props: Props): ReactElement => {
     modalSaveButton: Config.formation.fields[configField].modalSaveButton,
     defaultCheckbox: isCorp ? undefined : Config.formation.fields.members.addressCheckboxText,
     placeholder: Config.formation.fields[configField].placeholder ?? "",
-    error: Config.formation.fields[configField].error ?? ""
+    error: Config.formation.fields[configField].error ?? "",
   };
 
   return (

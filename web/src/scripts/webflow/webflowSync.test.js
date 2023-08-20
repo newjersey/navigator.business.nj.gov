@@ -10,7 +10,7 @@ import {
   deleteFundings,
   getNewFundings,
   getUnUsedFundings,
-  updateFundings
+  updateFundings,
 } from "./fundingSync.mjs";
 import {
   allIndustryId,
@@ -21,7 +21,7 @@ import {
   getSortedSectors,
   getUnUsedSectors,
   getUpdatedSectorNames,
-  updateSectorNames
+  updateSectorNames,
 } from "./sectorSync.mjs";
 
 const adjustDateByDay = (dayValue) => {
@@ -69,12 +69,12 @@ const fundingMd = [
       "clean-energy",
       "professional-scientific-and-technical-services",
       "manufacturing",
-      "other-services"
+      "other-services",
     ],
     openDate: "",
     dueDate: adjustDateByDay(5),
     programPurpose: "",
-    agencyContact: ""
+    agencyContact: "",
   },
   {
     contentMd:
@@ -114,7 +114,7 @@ const fundingMd = [
     county: ["All"],
     sector: ["construction", "utilities"],
     openDate: "",
-    dueDate: ""
+    dueDate: "",
   },
   {
     contentMd:
@@ -152,8 +152,8 @@ const fundingMd = [
     openDate: "",
     dueDate: "",
     programPurpose: "",
-    agencyContact: ""
-  }
+    agencyContact: "",
+  },
 ];
 
 const fundings = [
@@ -175,7 +175,7 @@ const fundings = [
     "industry-reference": ["61c48e1c25e5672fad13ed46", "61c48e23def87f031aed93aa"],
     "funding-status": "c44fb3cfdfb8a5b52d694a578d0338c1",
     _cid: "6112e6b88aa567fdbc725ffc",
-    _id: "62c5bc16a8f618275698c979"
+    _id: "62c5bc16a8f618275698c979",
   },
   {
     _archived: false,
@@ -195,7 +195,7 @@ const fundings = [
     slug: "nj-accelerate",
     "industry-reference": ["61c48e1b3257cc374781ee12"],
     "funding-status": "d9e4ad4201a1644abbcad6666bace0bc",
-    _id: "62c5bc1639c27700c64f4a70"
+    _id: "62c5bc1639c27700c64f4a70",
   },
   {
     _archived: false,
@@ -216,22 +216,22 @@ const fundings = [
       "61c48e1c72d22f453124a797",
       "61c48e22349da39322e4df2e",
       "61c48e200aeeec7a2af2497a",
-      "62c54ce61497b56914905141"
+      "62c54ce61497b56914905141",
     ],
     "funding-status": "c44fb3cfdfb8a5b52d694a578d0338c1",
-    _id: "62c5bc16d0a8cf081867afa2"
-  }
+    _id: "62c5bc16d0a8cf081867afa2",
+  },
 ];
 
 const webflowSectors = [
   {
     name: "All Industries",
     slug: "all-industries",
-    _id: allIndustryId
+    _id: allIndustryId,
   },
   ...arrayOfSectors.map((i) => {
     return { _id: randomInt(10), name: i.name, slug: i.id };
-  })
+  }),
 ];
 
 jest.mock("../fundingExport.mjs");
@@ -240,7 +240,7 @@ jest.mock("fs", () => {
   const original = jest.requireActual("fs");
   return {
     ...original,
-    readFileSync: jest.fn()
+    readFileSync: jest.fn(),
   };
 });
 
@@ -294,8 +294,8 @@ describe("webflow syncing", () => {
             data: {
               items: webflowSectors.filter((i) => {
                 return i.slug !== "utilities";
-              })
-            }
+              }),
+            },
           };
         }
       });
@@ -310,8 +310,8 @@ describe("webflow syncing", () => {
             data: {
               items: webflowSectors.filter((i) => {
                 return i.slug !== "utilities";
-              })
-            }
+              }),
+            },
           };
         }
       });
@@ -326,14 +326,14 @@ describe("webflow syncing", () => {
             _archived: false,
             _draft: false,
             name: "Utilities",
-            slug: "utilities"
-          }
+            slug: "utilities",
+          },
         },
         responseType: "json",
         headers: {
           Authorization: "Bearer 12345678910",
-          "content-type": "application/json"
-        }
+          "content-type": "application/json",
+        },
       });
     });
 
@@ -344,8 +344,8 @@ describe("webflow syncing", () => {
             ...arrayOfSectors.filter((i) => {
               return i.id !== "utilities";
             }),
-            { name: "Electric, Gas, and Oil suppliers", id: "utilities" }
-          ]
+            { name: "Electric, Gas, and Oil suppliers", id: "utilities" },
+          ],
         });
       });
       const updatedSectors = await getUpdatedSectorNames();
@@ -359,8 +359,8 @@ describe("webflow syncing", () => {
             ...arrayOfSectors.filter((i) => {
               return i.id !== "utilities";
             }),
-            { name: "Electric, Gas, and Oil suppliers", id: "utilities" }
-          ]
+            { name: "Electric, Gas, and Oil suppliers", id: "utilities" },
+          ],
         });
       });
       await updateSectorNames();
@@ -373,7 +373,7 @@ describe("webflow syncing", () => {
         }`,
         data: { fields: { name: "Electric, Gas, and Oil suppliers" } },
         responseType: "json",
-        headers: { Authorization: "Bearer 12345678910" }
+        headers: { Authorization: "Bearer 12345678910" },
       });
     });
 
@@ -382,7 +382,7 @@ describe("webflow syncing", () => {
         return JSON.stringify({
           arrayOfSectors: arrayOfSectors.filter((i) => {
             return i.id !== "utilities";
-          })
+          }),
         });
       });
       const unUsedSectors = await getUnUsedSectors();
@@ -393,7 +393,7 @@ describe("webflow syncing", () => {
       expect(
         unUsedSectors.find((i) => {
           return i.slug === "all-industries";
-        })
+        }),
       ).toBeFalsy();
       expect(unUsedSectors.length).toEqual(1);
     });
@@ -403,7 +403,7 @@ describe("webflow syncing", () => {
         return JSON.stringify({
           arrayOfSectors: arrayOfSectors.filter((i) => {
             return i.id !== "utilities";
-          })
+          }),
         });
       });
       const unUsedSectors = await getUnUsedSectors();
@@ -415,7 +415,7 @@ describe("webflow syncing", () => {
         method: "delete",
         url: `https://api.webflow.com/collections/61c21253f7640b5f5ce829a4/items/${utilitiesSector._id}`,
         params: { live: false },
-        headers: { Authorization: "Bearer 12345678910" }
+        headers: { Authorization: "Bearer 12345678910" },
       });
     });
 
@@ -423,7 +423,7 @@ describe("webflow syncing", () => {
       axios.mockImplementation((request) => {
         if (request.url.includes("61c21253f7640b5f5ce829a4") && request.method === "get") {
           return {
-            data: { items: [...webflowSectors, { name: "Zzzzzzz", slug: "zzzzzz", _id: randomInt(10) }] }
+            data: { items: [...webflowSectors, { name: "Zzzzzzz", slug: "zzzzzz", _id: randomInt(10) }] },
           };
         }
       });
@@ -435,18 +435,18 @@ describe("webflow syncing", () => {
       expect(
         updatedSectors.find((e) => {
           return e.slug === "all-industries";
-        })
+        }),
       ).toMatchObject({
         slug: "all-industries",
-        rank: 1
+        rank: 1,
       });
       expect(
         updatedSectors.find((e) => {
           return e.slug === "zzzzzz";
-        })
+        }),
       ).toMatchObject({
         slug: "zzzzzz",
-        rank: updatedSectors.length
+        rank: updatedSectors.length,
       });
     });
   });
@@ -496,7 +496,7 @@ describe("webflow syncing", () => {
         expect(contentMdToObject(sampleMd)).toEqual({
           benefit: "<p>benefit section</p>",
           eligibility: "<p>eligibility stuff</p> <ul> <li>bullet</li> </ul>",
-          "program-overview": "<p>Summary</p>"
+          "program-overview": "<p>Summary</p>",
         });
       });
 
@@ -515,7 +515,7 @@ describe("webflow syncing", () => {
           ">\n" +
           "> benefit section\n";
         expect(contentMdToObject(sampleMd)["program-overview"]).toEqual(
-          "<p>Qualified Incentive Track Summary</p>"
+          "<p>Qualified Incentive Track Summary</p>",
         );
       });
 
@@ -547,8 +547,8 @@ describe("webflow syncing", () => {
             data: {
               items: fundings.filter((item) => {
                 return item.slug !== "clean-tech-research-development-rd-voucher-program";
-              })
-            }
+              }),
+            },
           };
         }
       });
@@ -565,8 +565,8 @@ describe("webflow syncing", () => {
             data: {
               items: fundings.filter((item) => {
                 return item.slug !== "nj-accelerate";
-              })
-            }
+              }),
+            },
           };
         }
       });
@@ -575,12 +575,12 @@ describe("webflow syncing", () => {
           ...fundingMd.find((i) => {
             return i.id === "nj-accelerate";
           }),
-          agency: ["lol"]
-        }
+          agency: ["lol"],
+        },
       ]);
 
       await expect(getNewFundings()).rejects.toThrow(
-        "Agency Types are mis-matched, please check with webflow"
+        "Agency Types are mis-matched, please check with webflow",
       );
     });
 
@@ -594,8 +594,8 @@ describe("webflow syncing", () => {
             data: {
               items: fundings.filter((item) => {
                 return item.slug !== "nj-accelerate";
-              })
-            }
+              }),
+            },
           };
         }
       });
@@ -604,12 +604,12 @@ describe("webflow syncing", () => {
           ...fundingMd.find((i) => {
             return i.id === "nj-accelerate";
           }),
-          fundingType: "lol"
-        }
+          fundingType: "lol",
+        },
       ]);
 
       await expect(getNewFundings()).rejects.toThrow(
-        "Funding Types are mis-matched, please check with webflow"
+        "Funding Types are mis-matched, please check with webflow",
       );
     });
 
@@ -623,8 +623,8 @@ describe("webflow syncing", () => {
             data: {
               items: fundings.filter((item) => {
                 return item.slug !== "nj-accelerate";
-              })
-            }
+              }),
+            },
           };
         }
       });
@@ -647,8 +647,8 @@ describe("webflow syncing", () => {
             data: {
               items: fundings.filter((item) => {
                 return item.slug !== "nj-accelerate";
-              })
-            }
+              }),
+            },
           };
         }
       });
@@ -668,14 +668,14 @@ describe("webflow syncing", () => {
             "application-close-date": null,
             "start-date": null,
             "last-updated": currentDate.toISOString(),
-            ...rest
-          }
+            ...rest,
+          },
         },
         responseType: "json",
         headers: {
           Authorization: "Bearer 12345678910",
-          "content-type": "application/json"
-        }
+          "content-type": "application/json",
+        },
       });
     });
 
@@ -683,7 +683,7 @@ describe("webflow syncing", () => {
       loadAllFundings.mockReturnValue(
         fundingMd.filter((i) => {
           return i.id !== "nj-accelerate";
-        })
+        }),
       );
       const unUsedFundings = await getUnUsedFundings();
       expect(unUsedFundings).toMatchObject([{ slug: "nj-accelerate" }]);
@@ -698,8 +698,8 @@ describe("webflow syncing", () => {
           ...fundingMd.find((i) => {
             return i.id === "nj-accelerate";
           }),
-          dueDate: adjustDateByDay(-5)
-        }
+          dueDate: adjustDateByDay(-5),
+        },
       ]);
       const unUsedFundings = await getUnUsedFundings();
       expect(unUsedFundings).toMatchObject([{ slug: "nj-accelerate" }]);
@@ -714,8 +714,8 @@ describe("webflow syncing", () => {
           ...fundingMd.find((i) => {
             return i.id === "nj-accelerate";
           }),
-          publishStageArchive: "Do Not Publish"
-        }
+          publishStageArchive: "Do Not Publish",
+        },
       ]);
       const unUsedFundings = await getUnUsedFundings();
       expect(unUsedFundings).toMatchObject([{ slug: "nj-accelerate" }]);
@@ -725,7 +725,7 @@ describe("webflow syncing", () => {
       loadAllFundings.mockReturnValue(
         fundingMd.filter((i) => {
           return i.id !== "nj-accelerate";
-        })
+        }),
       );
       await deleteFundings();
       expect(axios).toHaveBeenLastCalledWith({
@@ -736,11 +736,11 @@ describe("webflow syncing", () => {
           })._id
         }`,
         params: {
-          live: false
+          live: false,
         },
         headers: {
-          Authorization: "Bearer 12345678910"
-        }
+          Authorization: "Bearer 12345678910",
+        },
       });
     });
 
@@ -757,10 +757,10 @@ describe("webflow syncing", () => {
                   ...fundings.find((item) => {
                     return item.slug === "nj-accelerate";
                   }),
-                  agency: ["njdol"]
-                }
-              ]
-            }
+                  agency: ["njdol"],
+                },
+              ],
+            },
           };
         }
       });
@@ -769,8 +769,8 @@ describe("webflow syncing", () => {
           ...fundingMd.find((i) => {
             return i.id === "nj-accelerate";
           }),
-          agency: ["njdep"]
-        }
+          agency: ["njdep"],
+        },
       ]);
       await updateFundings();
       const { _archived, _draft, _id, ...rest } = fundings.find((item) => {
@@ -791,13 +791,13 @@ describe("webflow syncing", () => {
             "last-updated": currentDate.toISOString(),
             "application-close-date": null,
             "start-date": null,
-            agency: agencyMap["njdep"].id
-          }
+            agency: agencyMap["njdep"].id,
+          },
         },
         responseType: "json",
         headers: {
-          Authorization: "Bearer 12345678910"
-        }
+          Authorization: "Bearer 12345678910",
+        },
       });
     });
   });

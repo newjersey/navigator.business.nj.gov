@@ -10,7 +10,7 @@ export const defaultFormationLegalType: PublicFilingLegalType = "limited-liabili
 
 export const castPublicFilingLegalTypeToFormationType = (
   legalStructureId: PublicFilingLegalType,
-  persona: BusinessPersona | undefined
+  persona: BusinessPersona | undefined,
 ): FormationLegalType => {
   return `${persona === "FOREIGN" ? foreignLegalTypePrefix : ""}${legalStructureId}` as FormationLegalType;
 };
@@ -32,7 +32,7 @@ export const publicFilingLegalTypes = [
   "limited-partnership",
   "c-corporation",
   "s-corporation",
-  "nonprofit"
+  "nonprofit",
 ] as const;
 
 export type PublicFilingLegalType = (typeof publicFilingLegalTypes)[number];
@@ -49,7 +49,7 @@ export const allFormationLegalTypes = [
   "foreign-limited-liability-company",
   "foreign-limited-partnership",
   "foreign-c-corporation",
-  "foreign-s-corporation"
+  "foreign-s-corporation",
 ] as const;
 
 export type FormationLegalType = (typeof allFormationLegalTypes)[number];
@@ -67,7 +67,7 @@ export const BusinessSignerTypeMap: Record<FormationLegalType, SignerTitle[]> = 
   "foreign-limited-liability-partnership": ["Authorized Representative", "General Partner"],
   "foreign-limited-partnership": ["Authorized Representative", "General Partner"],
   "foreign-c-corporation": ["President", "Vice-President", "Chairman of the Board", "CEO"],
-  "foreign-s-corporation": ["President", "Vice-President", "Chairman of the Board", "CEO"]
+  "foreign-s-corporation": ["President", "Vice-President", "Chairman of the Board", "CEO"],
 };
 
 export interface FormationData {
@@ -214,7 +214,7 @@ export const createEmptyFormationAddress = (): FormationAddress => {
     addressZipCode: "",
     addressProvince: undefined,
     addressCountry: undefined,
-    businessLocationType: undefined
+    businessLocationType: undefined,
   };
 };
 
@@ -222,7 +222,7 @@ export const createEmptyFormationSigner = (): FormationSigner => {
   return {
     name: "",
     signature: false,
-    title: ""
+    title: "",
   };
 };
 
@@ -231,14 +231,14 @@ export const createEmptyFormationMember = (): FormationMember => {
     name: "",
     ...createEmptyFormationAddress(),
     addressCountry: "US",
-    businessLocationType: "US"
+    businessLocationType: "US",
   };
 };
 
 export const createEmptyFormationIncorporator = (): FormationIncorporator => {
   return {
     ...createEmptyFormationSigner(),
-    ...createEmptyFormationMember()
+    ...createEmptyFormationMember(),
   };
 };
 
@@ -296,7 +296,7 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     foreignDateOfFormation: undefined,
     foreignStateOfFormation: undefined,
     willPracticeLaw: undefined,
-    isVeteranNonprofit: undefined
+    isVeteranNonprofit: undefined,
   };
 };
 
@@ -310,7 +310,7 @@ export const llcBusinessSuffix = [
   "LTD LIABILITY COMPANY",
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
-  "LIMITED LIABILITY COMPANY"
+  "LIMITED LIABILITY COMPANY",
 ] as const;
 
 export type LlcBusinessSuffix = (typeof llcBusinessSuffix)[number];
@@ -321,7 +321,7 @@ export const llpBusinessSuffix = [
   "L.L.P.",
   "REGISTERED LIMITED LIABILITY PARTNERSHIP",
   "RLLP",
-  "R.L.L.P."
+  "R.L.L.P.",
 ] as const;
 
 export const lpBusinessSuffix = ["LIMITED PARTNERSHIP", "LP", "L.P."] as const;
@@ -336,7 +336,7 @@ export const corpBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 export const nonprofitBusinessSuffix = [
@@ -346,7 +346,7 @@ export const nonprofitBusinessSuffix = [
   "CORP",
   "CORP.",
   "INC",
-  "INC."
+  "INC.",
 ] as const;
 
 export const foreignCorpBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
@@ -367,7 +367,7 @@ export const AllBusinessSuffixes = [
   ...lpBusinessSuffix,
   ...corpBusinessSuffix,
   ...foreignCorpBusinessSuffix,
-  ...nonprofitBusinessSuffix
+  ...nonprofitBusinessSuffix,
 ] as const;
 
 export type BusinessSuffix = (typeof AllBusinessSuffixes)[number];
@@ -392,19 +392,19 @@ export const BusinessSuffixMap: Record<
   "foreign-limited-liability-partnership": llpBusinessSuffix as unknown as LlpBusinessSuffix[],
   "foreign-limited-partnership": lpBusinessSuffix as unknown as LpBusinessSuffix[],
   "foreign-c-corporation": foreignCorpBusinessSuffix as unknown as ForeignCorpBusinessSuffix[],
-  "foreign-s-corporation": foreignCorpBusinessSuffix as unknown as ForeignCorpBusinessSuffix[]
+  "foreign-s-corporation": foreignCorpBusinessSuffix as unknown as ForeignCorpBusinessSuffix[],
 };
 
 export const corpLegalStructures: FormationLegalType[] = ["s-corporation", "c-corporation"];
 
 export const foreignCorpLegalStructures: FormationLegalType[] = [
   "foreign-c-corporation",
-  "foreign-s-corporation"
+  "foreign-s-corporation",
 ];
 export const incorporationLegalStructures: FormationLegalType[] = [
   ...corpLegalStructures,
   "limited-partnership",
-  "nonprofit"
+  "nonprofit",
 ];
 
 export type AcceptedFileType = "PDF" | "PNG";

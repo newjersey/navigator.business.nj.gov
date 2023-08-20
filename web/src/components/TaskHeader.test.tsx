@@ -10,12 +10,12 @@ import {
   formationTaskId,
   generateBusiness,
   generateUserDataForBusiness,
-  TaskProgress
+  TaskProgress,
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
   generateGetFilingResponse,
-  generateUserData
+  generateUserData,
 } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -32,7 +32,7 @@ const renderTaskHeader = (task: Task, business?: Business): void => {
       >
         <TaskHeader task={task} />
       </WithStatefulUserData>
-    </ThemeProvider>
+    </ThemeProvider>,
   );
 };
 
@@ -62,7 +62,7 @@ describe("<TaskHeader />", () => {
     const taskStaticGeneration = generateTask({ id, required: true });
     useMockRoadmap({
       steps: [generateStep({ stepNumber: 1, section: "PLAN" })],
-      tasks: [taskInRoadmap]
+      tasks: [taskInRoadmap],
     });
     renderTaskHeader(taskStaticGeneration);
     expect(screen.queryByText(Config.taskDefaults.requiredLabelText)).not.toBeInTheDocument();
@@ -72,7 +72,7 @@ describe("<TaskHeader />", () => {
     const task = generateTask({ id: formationTaskId });
     const taskProgress: Record<string, TaskProgress> = { [formationTaskId]: "COMPLETED" };
     const formationData = generateFormationData({
-      getFilingResponse: generateGetFilingResponse({ success: true })
+      getFilingResponse: generateGetFilingResponse({ success: true }),
     });
     renderTaskHeader(task, generateBusiness({ taskProgress, formationData }));
 

@@ -25,7 +25,7 @@ export const TaskBody = (props: Props): ReactElement => {
     ...props.task,
     contentMd: addNaicsCodeData(getModifiedTaskContent(roadmap, props.task, "contentMd")),
     callToActionLink: getModifiedTaskContent(roadmap, props.task, "callToActionLink"),
-    callToActionText: getModifiedTaskContent(roadmap, props.task, "callToActionText")
+    callToActionText: getModifiedTaskContent(roadmap, props.task, "callToActionText"),
   };
 
   return <TaskElement task={updatedTask}>{<UnlockedBy task={props.task} />}</TaskElement>;

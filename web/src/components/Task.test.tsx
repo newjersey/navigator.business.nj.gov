@@ -9,7 +9,7 @@ describe("<Task />", () => {
     render(
       <ThemeProvider theme={createTheme()}>
         <Task task={task} />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
     expect(screen.getByText("task 1")).toHaveAttribute("href", "/tasks/url-slug-1");
   });
@@ -20,7 +20,7 @@ describe("<Task />", () => {
     render(
       <ThemeProvider theme={createTheme()}>
         <Task task={task} />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
 
     expect(screen.getByTestId("required task")).toBeInTheDocument();

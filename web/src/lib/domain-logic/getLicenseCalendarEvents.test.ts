@@ -18,8 +18,8 @@ describe("getLicenseCalendarEvent", () => {
       getLicenseCalendarEvents(
         generateLicenseData({ expirationISO: undefined }),
         currentDate.year(),
-        currentDate.month()
-      )
+        currentDate.month(),
+      ),
     ).toEqual([]);
   });
 
@@ -29,14 +29,14 @@ describe("getLicenseCalendarEvent", () => {
       getLicenseCalendarEvents(
         generateLicenseData({ expirationISO: tenthOfMonthDate.toISOString() }),
         currentDate.year(),
-        currentDate.month()
-      )
+        currentDate.month(),
+      ),
     ).toEqual([
       {
         dueDate: tenthOfMonthDate.format(defaultDateFormat),
         licenseEventSubtype: "expiration",
-        calendarEventType: "LICENSE"
-      }
+        calendarEventType: "LICENSE",
+      },
     ]);
   });
 
@@ -46,14 +46,14 @@ describe("getLicenseCalendarEvent", () => {
       getLicenseCalendarEvents(
         generateLicenseData({ expirationISO: tenthOfMonthDate.toISOString() }),
         currentDate.year(),
-        currentDate.add(1, "month").month()
-      )
+        currentDate.add(1, "month").month(),
+      ),
     ).toEqual([
       {
         dueDate: tenthOfMonthDate.add(30, "days").format(defaultDateFormat),
         licenseEventSubtype: "renewal",
-        calendarEventType: "LICENSE"
-      }
+        calendarEventType: "LICENSE",
+      },
     ]);
   });
 
@@ -61,19 +61,19 @@ describe("getLicenseCalendarEvent", () => {
     expect(
       getLicenseCalendarEvents(
         generateLicenseData({ expirationISO: currentDate.toISOString() }),
-        currentDate.year()
-      )
+        currentDate.year(),
+      ),
     ).toEqual([
       {
         dueDate: currentDate.format(defaultDateFormat),
         licenseEventSubtype: "expiration",
-        calendarEventType: "LICENSE"
+        calendarEventType: "LICENSE",
       },
       {
         dueDate: currentDate.add(30, "days").format(defaultDateFormat),
         licenseEventSubtype: "renewal",
-        calendarEventType: "LICENSE"
-      }
+        calendarEventType: "LICENSE",
+      },
     ]);
   });
 
@@ -82,14 +82,14 @@ describe("getLicenseCalendarEvent", () => {
     expect(
       getLicenseCalendarEvents(
         generateLicenseData({ expirationISO: tenthOfDecemberDate.toISOString() }),
-        currentDate.year()
-      )
+        currentDate.year(),
+      ),
     ).toEqual([
       {
         dueDate: tenthOfDecemberDate.format(defaultDateFormat),
         licenseEventSubtype: "expiration",
-        calendarEventType: "LICENSE"
-      }
+        calendarEventType: "LICENSE",
+      },
     ]);
   });
 });

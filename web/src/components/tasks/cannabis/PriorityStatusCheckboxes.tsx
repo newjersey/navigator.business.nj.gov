@@ -17,7 +17,7 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
 
   const handleCheckbox = (
     event: React.ChangeEvent<HTMLInputElement>,
-    type: PriorityApplicationType
+    type: PriorityApplicationType,
   ): void => {
     if (event.target.checked) {
       setEligibleModalIsOpenWith(type);

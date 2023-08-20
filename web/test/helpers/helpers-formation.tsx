@@ -9,7 +9,7 @@ import {
   defaultDisplayDateFormat,
   FormationSignedAddress,
   Task,
-  TasksDisplayContent
+  TasksDisplayContent,
 } from "@/lib/types/types";
 import { generateTask, randomPublicFilingLegalType } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
@@ -35,12 +35,12 @@ import {
   ProfileData,
   PublicFilingLegalType,
   publicFilingLegalTypes,
-  randomInt
+  randomInt,
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
   generateProfileData,
-  generateUserData
+  generateUserData,
 } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -57,7 +57,7 @@ export const generateFormationProfileData = (data: Partial<ProfileData>): Profil
   return generateProfileData({
     legalStructureId: randomPublicFilingLegalType(),
     businessPersona: "STARTING",
-    ...data
+    ...data,
   });
 };
 
@@ -87,7 +87,7 @@ export const preparePage = ({
   task,
   isAuthenticated,
   setRegistrationModalIsVisible,
-  user
+  user,
 }: PreparePageParams): FormationPageHelpers => {
   const profileData = generateFormationProfileData({ ...business.profileData });
   const isValid = publicFilingLegalTypes.includes(profileData.legalStructureId as PublicFilingLegalType);
@@ -99,31 +99,31 @@ export const preparePage = ({
           { ...business.formationData },
           castPublicFilingLegalTypeToFormationType(
             profileData.legalStructureId as PublicFilingLegalType,
-            profileData.businessPersona
-          )
+            profileData.businessPersona,
+          ),
         )
       : generateFormationData({
           ...business.formationData,
-          formationFormData: createEmptyFormationFormData()
-        })
+          formationFormData: createEmptyFormationFormData(),
+        }),
   });
   const internalMunicipalities = [
     profileData?.municipality ?? generateMunicipality({ displayName: "GenericTown" }),
-    ...(municipalities ?? [])
+    ...(municipalities ?? []),
   ];
   initialBusiness.formationData.formationFormData.addressMunicipality &&
     internalMunicipalities.push(initialBusiness.formationData.formationFormData.addressMunicipality);
   initialBusiness.formationData.formationFormData.agentOfficeAddressMunicipality &&
     internalMunicipalities.push(
-      initialBusiness.formationData.formationFormData.agentOfficeAddressMunicipality
+      initialBusiness.formationData.formationFormData.agentOfficeAddressMunicipality,
     );
 
   const userData = generateUserData({
     user: generateUser(user ?? {}),
     businesses: {
-      [initialBusiness.id]: initialBusiness
+      [initialBusiness.id]: initialBusiness,
     },
-    currentBusinessId: initialBusiness.id
+    currentBusinessId: initialBusiness.id,
   });
 
   render(
@@ -138,9 +138,9 @@ export const preparePage = ({
       isAuthenticated ?? IsAuthenticated.TRUE,
       {
         registrationModalIsVisible: false,
-        setRegistrationModalIsVisible: setRegistrationModalIsVisible ?? jest.fn()
-      }
-    )
+        setRegistrationModalIsVisible: setRegistrationModalIsVisible ?? jest.fn(),
+      },
+    ),
   );
   return createFormationPageHelpers();
 };
@@ -156,10 +156,10 @@ export const mockApiResponse = (response?: FormationSubmitResponse): void => {
           ...userData.businesses[userData.currentBusinessId],
           formationData: {
             ...userData.businesses[userData.currentBusinessId].formationData,
-            formationResponse: response
-          }
-        }
-      }
+            formationResponse: response,
+          },
+        },
+      },
     });
   });
 };
@@ -412,7 +412,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     const additionalSigner = within(screen.getByTestId(`${type}-${index}`));
     return (
       additionalSigner.getByLabelText(
-        `${Config.formation.fields.signers.signColumnLabel}*`
+        `${Config.formation.fields.signers.signColumnLabel}*`,
       ) as HTMLInputElement
     ).checked;
   };
@@ -435,7 +435,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
 
   const fillAndSubmitAddressModal = async (
     overrides: Partial<FormationSignedAddress>,
-    fieldName: string
+    fieldName: string,
   ): Promise<void> => {
     await openAddressModal(fieldName);
     await fillAddressModal(overrides);
@@ -465,7 +465,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
 
   const selectDate = (
     value: DateObject,
-    fieldType: "Business start date" | "Foreign date of formation"
+    fieldType: "Business start date" | "Foreign date of formation",
   ): void => {
     fillText(fieldType, value.format(defaultDisplayDateFormat));
     fireEvent.blur(screen.getByLabelText(fieldType));
@@ -534,6 +534,6 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     getStepStateInStepper,
     completeRequiredBillingFields,
     uploadFile,
-    completeWillPracticeLaw
+    completeWillPracticeLaw,
   };
 };

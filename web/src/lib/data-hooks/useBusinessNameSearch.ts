@@ -9,7 +9,7 @@ import { FormEvent, useContext, useState } from "react";
 
 export const useBusinessNameSearch = ({
   isBusinessFormation,
-  isDba
+  isDba,
 }: {
   isBusinessFormation: boolean;
   isDba: boolean;
@@ -22,7 +22,7 @@ export const useBusinessNameSearch = ({
   onChangeNameField: (value: string) => void;
   onBlurNameField: (value: string) => void;
   searchBusinessName: (
-    event?: FormEvent<HTMLFormElement>
+    event?: FormEvent<HTMLFormElement>,
   ) => Promise<{ nameAvailability: NameAvailability; submittedName: string }>;
   setCurrentName: (name: string) => void;
   resetSearch: () => void;
@@ -33,7 +33,7 @@ export const useBusinessNameSearch = ({
     setFormationFormData,
     setFieldsInteracted,
     setBusinessNameAvailability,
-    setDbaBusinessNameAvailability
+    setDbaBusinessNameAvailability,
   } = useContext(BusinessFormationContext);
   const [currentName, setCurrentName] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -53,7 +53,7 @@ export const useBusinessNameSearch = ({
   const emptyNameAvailability: NameAvailability = {
     similarNames: [],
     status: undefined,
-    lastUpdatedTimeStamp: ""
+    lastUpdatedTimeStamp: "",
   };
 
   useMountEffectWhenDefined(() => {
@@ -76,7 +76,7 @@ export const useBusinessNameSearch = ({
   const onBlurNameField = (): void => {
     setFormationFormData({
       ...state.formationFormData,
-      businessName: currentName
+      businessName: currentName,
     });
     setNameAvailability(emptyNameAvailability);
   };
@@ -90,7 +90,7 @@ export const useBusinessNameSearch = ({
   };
 
   const searchBusinessName = async (
-    event?: FormEvent<HTMLFormElement>
+    event?: FormEvent<HTMLFormElement>,
   ): Promise<{ nameAvailability: NameAvailability; submittedName: string }> => {
     if (event) {
       event.preventDefault();
@@ -119,7 +119,7 @@ export const useBusinessNameSearch = ({
         if (!isDba) {
           setFormationFormData({
             ...state.formationFormData,
-            businessName: currentName
+            businessName: currentName,
           });
         }
         setNameAvailability({ ...result });
@@ -147,6 +147,6 @@ export const useBusinessNameSearch = ({
     onChangeNameField,
     onBlurNameField,
     searchBusinessName,
-    resetSearch
+    resetSearch,
   };
 };

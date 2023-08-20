@@ -2,7 +2,7 @@ import { Router } from "express";
 import { EncryptionDecryptionClient } from "../domain/types";
 
 export const taxDecryptionRouterFactory = (
-  encryptionDecryptionClient: EncryptionDecryptionClient
+  encryptionDecryptionClient: EncryptionDecryptionClient,
 ): Router => {
   const router = Router();
 

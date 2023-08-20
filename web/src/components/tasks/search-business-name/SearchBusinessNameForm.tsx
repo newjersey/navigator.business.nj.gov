@@ -40,10 +40,10 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     updateButtonClicked,
     onChangeNameField,
     searchBusinessName,
-    resetSearch
+    resetSearch,
   } = useBusinessNameSearch({
     isBusinessFormation: !!props.isBusinessFormation,
-    isDba: props.isDba || false
+    isDba: props.isDba || false,
   });
 
   const { Config } = useConfig();
@@ -53,7 +53,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     setFormationFormData,
     setBusinessNameAvailability,
     setDbaBusinessNameAvailability,
-    setFieldsInteracted
+    setFieldsInteracted,
   } = useContext(BusinessFormationContext);
 
   const setNameAvailability = props.isDba ? setDbaBusinessNameAvailability : setBusinessNameAvailability;
@@ -61,13 +61,13 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
   const FIELD_NAME = "businessName";
   const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
     BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,
-    SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed
+    SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
   };
 
   const emptyNameAvailability: NameAvailability = {
     similarNames: [],
     status: undefined,
-    lastUpdatedTimeStamp: ""
+    lastUpdatedTimeStamp: "",
   };
 
   const Unavailable = props.unavailable;
@@ -75,7 +75,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
 
   const handleBusinessNameAvailability = (
     nameAvailability: NameAvailability,
-    submittedName: string
+    submittedName: string,
   ): void => {
     const validName = ["AVAILABLE", "UNAVAILABLE"].includes(nameAvailability.status ?? "");
     if (!updateQueue || !validName) return;
@@ -85,35 +85,35 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     setFieldsInteracted([FIELD_NAME]);
     updateQueue
       .queueFormationData({
-        businessNameAvailability: nameAvailability
+        businessNameAvailability: nameAvailability,
       })
       .queueFormationFormData({ businessName: submittedName })
       .queueProfileData({
         businessName: submittedName,
         nexusDbaName: emptyProfileData.nexusDbaName,
-        needsNexusDbaName
+        needsNexusDbaName,
       })
       .update();
 
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        businessName: submittedName
+        businessName: submittedName,
       };
     });
   };
 
   const handleDbaBusinessNameAvailability = (
     nameAvailability: NameAvailability,
-    submittedName: string
+    submittedName: string,
   ): void => {
     if (!updateQueue || nameAvailability.status !== "AVAILABLE") return;
     updateQueue
       .queueFormationData({
-        dbaBusinessNameAvailability: nameAvailability
+        dbaBusinessNameAvailability: nameAvailability,
       })
       .queueProfileData({
-        nexusDbaName: submittedName
+        nexusDbaName: submittedName,
       })
       .update();
   };
@@ -121,7 +121,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
   const doSearch = useCallback(
     async (
       event: FormEvent<HTMLFormElement> | undefined,
-      { isInitialSubmit }: { isInitialSubmit: boolean }
+      { isInitialSubmit }: { isInitialSubmit: boolean },
     ): Promise<void> => {
       searchBusinessName(event)
         .then(async ({ nameAvailability, submittedName }) => {
@@ -136,7 +136,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
         .catch(() => {});
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [searchBusinessName]
+    [searchBusinessName],
   );
 
   const resetNameAvailability = (): void => {
@@ -145,10 +145,10 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
       updateQueue
         .queueFormationData({
           businessNameAvailability: emptyNameAvailability,
-          dbaBusinessNameAvailability: emptyNameAvailability
+          dbaBusinessNameAvailability: emptyNameAvailability,
         })
         .queueProfileData({
-          nexusDbaName: ""
+          nexusDbaName: "",
         })
         .update();
     }
@@ -208,7 +208,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
                     }}
                     variant="outlined"
                     inputProps={{
-                      "aria-label": props.config.inputLabel ?? "Search business name"
+                      "aria-label": props.config.inputLabel ?? "Search business name",
                     }}
                   />
                 </div>
@@ -249,7 +249,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
           <Alert variant="error" dataTestid="special-character-error-text">
             <Content className="font-sans-xs">
               {templateEval(Config.formation.fields.businessName.alertSpecialCharacters, {
-                name: props.businessName
+                name: props.businessName,
               })}
             </Content>
           </Alert>
@@ -259,7 +259,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
             <Content className="font-sans-xs">
               {templateEval(Config.formation.fields.businessName.alertRestrictedWord, {
                 name: currentName,
-                word: props.nameAvailability.invalidWord ?? "*unknown*"
+                word: props.nameAvailability.invalidWord ?? "*unknown*",
               })}
             </Content>
           </Alert>

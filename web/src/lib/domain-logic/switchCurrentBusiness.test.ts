@@ -9,8 +9,8 @@ describe("switch business", () => {
       currentBusinessId: firstBusiness.id,
       businesses: {
         [firstBusiness.id]: firstBusiness,
-        [secondBusiness.id]: secondBusiness
-      }
+        [secondBusiness.id]: secondBusiness,
+      },
     });
     const newUserData = switchCurrentBusiness(userData, secondBusiness.id);
 

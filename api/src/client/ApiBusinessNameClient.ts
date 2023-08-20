@@ -15,7 +15,7 @@ export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType)
         logWriter.LogInfo(
           `Business Name Search - NICUSA - Id:${logId} -Response Received. Status: ${response.status} : ${
             response.statusText
-          }. Data: ${JSON.stringify(response.data)}`
+          }. Data: ${JSON.stringify(response.data)}`,
         );
         let responseStatus: NameAvailabilityStatus;
         let invalidWord;
@@ -36,7 +36,7 @@ export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType)
         return {
           status: responseStatus,
           invalidWord,
-          similarNames: response.data.Similars
+          similarNames: response.data.Similars,
         };
       })
       .catch((error: AxiosError) => {
@@ -46,7 +46,7 @@ export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType)
   };
 
   return {
-    search
+    search,
   };
 };
 

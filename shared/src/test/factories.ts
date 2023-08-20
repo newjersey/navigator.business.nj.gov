@@ -10,7 +10,7 @@ import {
   FormationSubmitResponse,
   GetFilingResponse,
   PublicFilingLegalType,
-  publicFilingLegalTypes
+  publicFilingLegalTypes,
 } from "../formationData";
 import { Industries, Industry } from "../industry";
 import { randomInt } from "../intHelpers";
@@ -24,7 +24,7 @@ import { Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";
 
 export const generateFormationSubmitResponse = (
-  overrides: Partial<FormationSubmitResponse>
+  overrides: Partial<FormationSubmitResponse>,
 ): FormationSubmitResponse => {
   return {
     success: !!(randomInt() % 2),
@@ -33,7 +33,7 @@ export const generateFormationSubmitResponse = (
     redirect: `some-redirect-${randomInt()}`,
     errors: [],
     lastUpdatedISO: getCurrentDateISOString(),
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -46,13 +46,13 @@ export const generateGetFilingResponse = (overrides: Partial<GetFilingResponse>)
     formationDoc: `some-formation-doc-${randomInt()}`,
     standingDoc: `some-standing-doc-${randomInt()}`,
     certifiedDoc: `some-certified-doc-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
 export const generateFormationData = (
   overrides: Partial<FormationData>,
-  legalStructureId?: FormationLegalType
+  legalStructureId?: FormationLegalType,
 ): FormationData => {
   return {
     formationFormData: generateFormationFormData({}, { legalStructureId }),
@@ -62,7 +62,7 @@ export const generateFormationData = (
     getFilingResponse: undefined,
     completedFilingPayment: false,
     lastVisitedPageIndex: 0,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -82,7 +82,7 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
     isCalendarFullView: !(randomInt() % 2),
     isHideableRoadmapOpen: !(randomInt() % 2),
     phaseNewlyChanged: false,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -92,18 +92,18 @@ export const generateNameAndAddress = (overrides: Partial<NameAndAddress>): Name
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
     zipCode: `some-zipcode-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };
 
 export const generateTaxIdAndBusinessName = (
-  overrides: Partial<TaxFilingLookUpRequest>
+  overrides: Partial<TaxFilingLookUpRequest>,
 ): TaxFilingLookUpRequest => {
   return {
     businessName: `some-name-${randomInt()}`,
     taxId: `${randomInt(12)}`,
     encryptedTaxId: "some-encrypted-value",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -111,7 +111,7 @@ export const generateLicenseStatusResult = (overrides: Partial<LicenseStatusResu
   return {
     status: "PENDING",
     checklistItems: [generateLicenseStatusItem({})],
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -119,18 +119,18 @@ export const generateLicenseStatusItem = (overrides: Partial<LicenseStatusItem>)
   return {
     title: `some-title-${randomInt()}`,
     status: "ACTIVE",
-    ...overrides
+    ...overrides,
   };
 };
 
 export const generateTaxFilingCalendarEvent = (
-  overrides: Partial<TaxFilingCalendarEvent>
+  overrides: Partial<TaxFilingCalendarEvent>,
 ): TaxFilingCalendarEvent => {
   return {
     identifier: `some-identifier-${randomInt()}`,
     dueDate: getCurrentDateFormatted(defaultDateFormat),
     calendarEventType: "TAX-FILING",
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -153,7 +153,7 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
     status: "PENDING",
     lastUpdatedISO: getCurrentDateISOString(),
     expirationISO: getCurrentDate().add(1, "year").toISOString(),
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -166,13 +166,13 @@ export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => 
     receiveNewsletter: true,
     userTesting: true,
     abExperience: randomInt() % 2 === 0 ? "ExperienceA" : "ExperienceB",
-    ...overrides
+    ...overrides,
   };
 };
 
 export const randomFilteredIndustry = (
   function_: (industry: Industry) => boolean,
-  { isEnabled = true }
+  { isEnabled = true },
 ): Industry => {
   const filteredIndustries = Industries.filter((x: Industry) => {
     return function_(x) && x.isEnabled === isEnabled;
@@ -190,7 +190,7 @@ export const randomIndustry = (canHavePermanentLocation = false): Industry => {
 
 export const generateIndustrySpecificData = (
   overrides: Partial<IndustrySpecificData>,
-  industry?: Industry
+  industry?: Industry,
 ): IndustrySpecificData => {
   const _industry = industry ?? randomIndustry();
   return {
@@ -209,13 +209,13 @@ export const generateIndustrySpecificData = (
     isChildcareForSixOrMore: !(randomInt() % 2),
     petCareHousing: !(randomInt() % 2),
     willSellPetCareItems: !(randomInt() % 2),
-    ...overrides
+    ...overrides,
   };
 };
 
 export const generateProfileData = (
   overrides: Partial<ProfileData>,
-  canHavePermanentLocation?: boolean
+  canHavePermanentLocation?: boolean,
 ): ProfileData => {
   const id = `some-id-${randomInt()}`;
   const persona = randomInt() % 2 ? "STARTING" : "OWNING";
@@ -241,7 +241,7 @@ export const generateProfileData = (
     documents: {
       certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
       formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
-      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`
+      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
     },
     existingEmployees: randomInt(7).toString(),
     taxPin: randomInt(4).toString(),
@@ -255,7 +255,7 @@ export const generateProfileData = (
     operatingPhase: "NEEDS_TO_FORM",
     isNonprofitOnboardingRadio: legalStructure === "nonprofit",
     nonEssentialRadioAnswers: {},
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -272,14 +272,14 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
       ? new Date(Date.now()).toISOString()
       : undefined,
     filings: [generateTaxFilingCalendarEvent({})],
-    ...overrides
+    ...overrides,
   };
 };
 
 export const generateBusiness = (overrides: Partial<Business>): Business => {
   const profileData = overrides.profileData ?? generateProfileData({});
   const formationData: FormationData = publicFilingLegalTypes.includes(
-    profileData.legalStructureId as PublicFilingLegalType
+    profileData.legalStructureId as PublicFilingLegalType,
   )
     ? generateFormationData({}, profileData.legalStructureId as FormationLegalType)
     : {
@@ -289,7 +289,7 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
         formationResponse: undefined,
         getFilingResponse: undefined,
         completedFilingPayment: false,
-        lastVisitedPageIndex: 0
+        lastVisitedPageIndex: 0,
       };
 
   return {
@@ -304,7 +304,7 @@ export const generateBusiness = (overrides: Partial<Business>): Business => {
     taxFilingData: generateTaxFilingData({}),
     profileData,
     formationData,
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -319,9 +319,9 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     currentBusinessId: overrides.currentBusinessId ?? id,
     businesses: {
       ...overrides.businesses,
-      [id]: generateBusiness({ id })
+      [id]: generateBusiness({ id }),
     },
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -334,9 +334,9 @@ export const generateUserDataForBusiness = (business: Business, overrides?: Part
     user: generateUser({}),
     currentBusinessId: business.id,
     businesses: {
-      [business.id]: business
+      [business.id]: business,
     },
-    ...overrides
+    ...overrides,
   };
 };
 
@@ -351,6 +351,6 @@ export const generateMunicipalityDetail = (overrides: Partial<MunicipalityDetail
     countyClerkPhone: `some-phone-${randomInt()}`,
     countyClerkWebsite: `some-clerk-webpage-${randomInt()}`,
     countyWebsite: `some-county-website-${randomInt()}`,
-    ...overrides
+    ...overrides,
   };
 };

@@ -4,7 +4,7 @@ import { merge } from "lodash";
 import { useEffect, useState } from "react";
 
 export const usePreviewConfig = (
-  props: PreviewProps
+  props: PreviewProps,
 ): { config: ConfigType; setConfig: (config: ConfigType) => void } => {
   const [config, setConfig] = useState<ConfigType>(getMergedConfig());
 

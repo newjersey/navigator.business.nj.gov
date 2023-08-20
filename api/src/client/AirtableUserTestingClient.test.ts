@@ -29,9 +29,9 @@ describe("AirtableUserTestingClient", () => {
         apiKey: "some-api-key",
         baseId: "some-base-id",
         baseUrl: "some-base-url",
-        usersTableName: "some-users-table"
+        usersTableName: "some-users-table",
       },
-      logger
+      logger,
     );
   });
 
@@ -52,9 +52,9 @@ describe("AirtableUserTestingClient", () => {
           Industry: profileData.industryId,
           Sector: profileData.sectorId,
           "Registration Date": getCurrentDateFormatted("YYYY-MM-DD"),
-          Source: "Opted In Navigator"
-        }
-      }
+          Source: "Opted In Navigator",
+        },
+      },
     ]);
   });
 });
@@ -77,6 +77,6 @@ jest.mock("airtable", (): MockAirtableType => {
         return { create };
       };
     },
-    configure: function MockConfigure(): any {}
+    configure: function MockConfigure(): any {},
   };
 });

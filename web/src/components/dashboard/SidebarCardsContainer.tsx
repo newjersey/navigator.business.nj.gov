@@ -29,7 +29,7 @@ export const SidebarCardsContainer = (props: Props): ReactElement => {
 
   const visibleSortedCertifications = getVisibleCertifications(
     filteredSortedCertifications,
-    business as Business
+    business as Business,
   );
 
   const hiddenSortedCertifications = sortCertifications(
@@ -41,7 +41,7 @@ export const SidebarCardsContainer = (props: Props): ReactElement => {
       })
       .filter((it) => {
         return it !== undefined;
-      }) as Certification[]
+      }) as Certification[],
   );
 
   const hiddenSortedFundings = sortFundings(
@@ -53,7 +53,7 @@ export const SidebarCardsContainer = (props: Props): ReactElement => {
       })
       .filter((it) => {
         return it !== undefined;
-      }) as Funding[]
+      }) as Funding[],
   );
 
   const displayFundingCards = (): boolean => {

@@ -15,14 +15,14 @@ const NaicsLookupPreview = (props: PreviewProps): ReactElement => {
 
   const task = generateTask({
     name: "Name is controlled by Task Metadata",
-    contentMd: "Body content is controlled by Task Metadata"
+    contentMd: "Body content is controlled by Task Metadata",
   });
 
   const business = generateBusiness({
     profileData: generateProfileData({
       naicsCode: "",
-      industryId: "cannabis"
-    })
+      industryId: "cannabis",
+    }),
   });
 
   return (

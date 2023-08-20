@@ -93,8 +93,8 @@ const TaxAccessModalPreview = (props: PreviewProps): ReactElement => {
           CMS_ONLY_fakeBusiness={generateBusiness({
             profileData: generateProfileData({
               businessPersona: "OWNING",
-              legalStructureId: randomPublicFilingLegalStructure()
-            })
+              legalStructureId: randomPublicFilingLegalStructure(),
+            }),
           })}
         />
 
@@ -107,8 +107,8 @@ const TaxAccessModalPreview = (props: PreviewProps): ReactElement => {
           CMS_ONLY_fakeBusiness={generateBusiness({
             profileData: generateProfileData({
               businessPersona: "OWNING",
-              legalStructureId: randomTradeNameLegalStructure()
-            })
+              legalStructureId: randomTradeNameLegalStructure(),
+            }),
           })}
         />
       </div>

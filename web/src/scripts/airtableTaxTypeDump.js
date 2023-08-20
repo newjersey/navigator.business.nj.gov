@@ -12,7 +12,7 @@ const airtableBaseId = process.env.AIRTABLE_BASE_ID || "";
 const table = "Table 1";
 Airtable.configure({
   endpointUrl: "https://api.airtable.com",
-  apiKey: airtableApiKey
+  apiKey: airtableApiKey,
 });
 
 const base = Airtable.base(airtableBaseId);
@@ -55,7 +55,7 @@ const airtableToOpportunity = (airtableOpp) => {
     additionalInfo: airtableOpp["Additional Info"]?.trim() ?? "",
     filingMethod: convertFilingMethod(airtableOpp["Can Be filed Online (Filing Method)"] ?? ""),
     filingDetails: airtableOpp["Filing Details"]?.trim() ?? "",
-    agency: airtableOpp["Managing Agency"] ?? ""
+    agency: airtableOpp["Managing Agency"] ?? "",
   };
 };
 
@@ -122,7 +122,7 @@ const airtableSelectAll = () => {
           for (const record of records) {
             all.push({
               id: record._rawJson.id,
-              ...record._rawJson.fields
+              ...record._rawJson.fields,
             });
           }
           fetchNextPage();
@@ -134,7 +134,7 @@ const airtableSelectAll = () => {
           } else {
             resolve(all);
           }
-        }
+        },
       );
   });
 };

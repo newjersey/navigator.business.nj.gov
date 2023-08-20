@@ -47,7 +47,7 @@ export const industrySpecificDataChoices: IndustrySpecificDataChoices = {
   interstateMoving: booleanChoice,
   isChildcareForSixOrMore: booleanChoice,
   petCareHousing: booleanChoice,
-  willSellPetCareItems: booleanChoice
+  willSellPetCareItems: booleanChoice,
 };
 
 export const emptyIndustrySpecificData: IndustrySpecificData = {
@@ -65,7 +65,7 @@ export const emptyIndustrySpecificData: IndustrySpecificData = {
   interstateMoving: false,
   isChildcareForSixOrMore: undefined,
   petCareHousing: undefined,
-  willSellPetCareItems: undefined
+  willSellPetCareItems: undefined,
 };
 
 export interface ProfileData extends IndustrySpecificData {
@@ -126,7 +126,7 @@ export const emptyProfileData: ProfileData = {
   operatingPhase: "GUEST_MODE",
   isNonprofitOnboardingRadio: false,
   nonEssentialRadioAnswers: {},
-  ...emptyIndustrySpecificData
+  ...emptyIndustrySpecificData,
 };
 
 export const createEmptyProfileData = (): ProfileData => {

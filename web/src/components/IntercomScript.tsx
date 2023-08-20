@@ -10,7 +10,7 @@ export const IntercomScript = ({
   operatingPhaseId,
   legalStructureId,
   industryId,
-  businessPersona
+  businessPersona,
 }: {
   user?: BusinessUser;
   operatingPhaseId?: OperatingPhaseId;

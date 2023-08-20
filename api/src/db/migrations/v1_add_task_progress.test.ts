@@ -12,7 +12,7 @@ describe("migrate_v0_to_v1", () => {
       formData,
       formProgress,
       taskProgress: {},
-      version: 1
+      version: 1,
     });
   });
 });
