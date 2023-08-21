@@ -67,7 +67,7 @@ export class OnboardingPage {
   }
 
   getIndustryDropdown() {
-    return cy.get('[data-testid="industryid"]');
+    return cy.get('[data-testid="industryId"]');
   }
 
   getBusinessFormationDatePicker() {
@@ -173,7 +173,7 @@ export class OnboardingPage {
   selectIndustry(industry: string) {
     const industryValue = LookupIndustryById(industry).name;
     this.getIndustryDropdown().click();
-    cy.get('[data-testid="industry-name"]').contains(industryValue).click();
+    cy.get('[data-testid="option"]').contains(industryValue).click();
   }
 
   selectIndustrySector(sectorId: string) {
