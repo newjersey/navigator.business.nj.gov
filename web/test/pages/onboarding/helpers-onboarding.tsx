@@ -140,7 +140,7 @@ export const createPageHelpers = (): PageHelpers => {
   };
 
   const getIndustryValue = (): string => {
-    return (screen.queryByTestId("industryid") as HTMLInputElement)?.value;
+    return (screen.queryByTestId("industryId") as HTMLInputElement)?.value;
   };
 
   const getRadioGroup = (sectionAriaLabel: string): HTMLElement => {

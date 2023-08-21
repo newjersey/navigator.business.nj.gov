@@ -164,7 +164,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
               id="industryId"
               inputProps={{
                 "aria-label": "Industry",
-                "data-testid": "industryid",
+                "data-testid": "industryId",
                 ...params.inputProps,
               }}
               value={searchText}
