@@ -13,13 +13,13 @@ import { render, screen } from "@testing-library/react";
 const Config = getMergedConfig();
 
 describe("<CannabisLocationAlert />", () => {
-  const renderWithBusiness = (industryId: string): void => {
+  const renderWithBusiness = (industryId?: string): void => {
     const profileData = generateProfileData({ industryId });
     const business = generateBusiness({ profileData });
 
     render(
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
-        <CannabisLocationAlert />
+        <CannabisLocationAlert industryId={industryId} />
       </WithStatefulUserData>
     );
   };
@@ -38,6 +38,11 @@ describe("<CannabisLocationAlert />", () => {
     const industry = randomFilteredIndustry(filter, { isEnabled: true });
 
     renderWithBusiness(industry.id);
+    expect(screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert)).not.toBeInTheDocument();
+  });
+
+  it("is NOT displayed when industry is undefined", () => {
+    renderWithBusiness();
     expect(screen.queryByText(Config.profileDefaults.default.cannabisLocationAlert)).not.toBeInTheDocument();
   });
 });

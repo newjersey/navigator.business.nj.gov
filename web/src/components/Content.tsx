@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { ContextualInfoLink } from "@/components/ContextualInfoLink";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { Alert } from "@/components/njwds-extended/Alert";
@@ -8,6 +9,7 @@ import { PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import { InlineIconType } from "@/lib/cms/types";
 import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifiedByUserData";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { FormControlLabel } from "@mui/material";
 import { CSSProperties, ReactElement } from "react";
@@ -22,6 +24,7 @@ interface ContentProps {
 }
 
 export const Content = (props: ContentProps): ReactElement => {
+  const { business } = useUserData();
   const updatedContent = useContentModifiedByUserData(props.children);
 
   const isTest = process.env.NODE_ENV === "test";
@@ -60,6 +63,9 @@ export const Content = (props: ContentProps): ReactElement => {
         </Alert>
       );
     },
+    cannabisLocationAlert: (): ReactElement => (
+      <CannabisLocationAlert industryId={business?.profileData.industryId} />
+    ),
     icon: InlineIcon,
     table: OutlineBox,
     li: ListOrCheckbox,

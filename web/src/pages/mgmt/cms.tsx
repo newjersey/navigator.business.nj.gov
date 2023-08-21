@@ -1,3 +1,4 @@
+import CannabisLocationAlert from "@/lib/cms/editors/cannabisLocationAlert";
 import ContextEditor from "@/lib/cms/editors/context-info";
 import GreenBox from "@/lib/cms/editors/greenBox";
 import IconWidgetEditor from "@/lib/cms/editors/icon";
@@ -67,6 +68,8 @@ const CMS = dynamic(
       CMS.registerEditorComponent(AlertEditor);
       // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(Note);
+      // @ts-expect-error: No type definition available
+      CMS.registerEditorComponent(CannabisLocationAlert);
       // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(GreenBox);
       // @ts-expect-error: No type definition available
