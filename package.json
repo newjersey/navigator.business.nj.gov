@@ -146,7 +146,7 @@
     "@types/js-yaml": "4.0.5",
     "@types/jsonwebtoken": "9.0.2",
     "@types/lodash": "4.14.197",
-    "@types/node": "16.18.40",
+    "@types/node": "16.18.41",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "@types/react-slick": "^0.23.10",
