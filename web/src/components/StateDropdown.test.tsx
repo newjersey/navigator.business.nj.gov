@@ -15,6 +15,12 @@ describe("<StateDropdown />", () => {
     expect(screen.getByText("GU")).toBeInTheDocument();
   });
 
+  it("renders list without NJ", () => {
+    render(<StateDropdown value={undefined} fieldName={"test"} onSelect={(): void => {}} excludeNJ={true} />);
+    fireEvent.click(screen.getByTestId("test"));
+    expect(screen.queryByText("NJ")).not.toBeInTheDocument();
+  });
+
   it("renders list without US Territories", () => {
     render(
       <StateDropdown
