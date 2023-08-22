@@ -197,17 +197,19 @@ describe("<EinTask />", () => {
       });
     });
 
-    it("prepends register to the Save button", async () => {
-      renderPage();
-      expect(screen.getByText(`Register & ${Config.ein.saveButtonText}`)).toBeInTheDocument();
-    });
-
-    it("opens registration modal on save button click", async () => {
+    it("opens registration modal when the field is edited", async () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Save your EIN"), {
         target: { value: "123456789" },
       });
-      fireEvent.click(screen.getByText(`Register & ${Config.ein.saveButtonText}`));
+      await waitFor(() => {
+        return expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+      });
+    });
+
+    it("opens registration modal when the save button is clicked", async () => {
+      renderPage();
+      fireEvent.click(screen.getByText(Config.ein.saveButtonText));
       await waitFor(() => {
         return expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
       });
