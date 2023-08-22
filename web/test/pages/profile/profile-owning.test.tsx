@@ -3,7 +3,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
-import { randomPublicFilingLegalStructure, randomTradeNameLegalStructure } from "@/test/factories";
+import { randomPublicFilingLegalStructure } from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -14,7 +14,6 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   defaultDateFormat,
-  emptyProfileData,
   generateMunicipality,
   generateProfileData,
   getCurrentDate,
@@ -474,152 +473,6 @@ describe("profile - owning existing business", () => {
         screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.header)
       ).toBeInTheDocument();
       expect(screen.queryByTestId("responsibleOwnerName")).not.toBeInTheDocument();
-    });
-  });
-
-  describe("profile opportunities alert", () => {
-    const ProfileConfig = Config.profileDefaults.fields;
-
-    it("only displays alert on info tab", () => {
-      const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          operatingPhase: "UP_AND_RUNNING_OWNING",
-          dateOfFormation: undefined,
-        }),
-      });
-      renderPage({ business });
-      expect(screen.getByTestId("opp-alert")).toBeInTheDocument();
-      chooseTab("numbers");
-      expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
-    });
-
-    it("does display date of formation question when legal structure is undefined", () => {
-      const business = generateBusinessForProfile({
-        profileData: {
-          ...emptyProfileData,
-          operatingPhase: "UP_AND_RUNNING_OWNING",
-          businessPersona: "OWNING",
-        },
-      });
-      renderPage({ business });
-      expect(
-        within(screen.getByTestId("opp-alert")).getByText(
-          Config.profileDefaults.fields.dateOfFormation.default.header
-        )
-      ).toBeInTheDocument();
-      expect(
-        within(screen.getByTestId("effective-date")).getByText(
-          Config.profileDefaults.fields.dateOfFormation.default.header
-        )
-      ).toBeInTheDocument();
-    });
-
-    it("does not display date of formation question when it is a Trade Name legal structure", () => {
-      const business = generateBusinessForProfile({
-        profileData: {
-          ...emptyProfileData,
-          operatingPhase: "UP_AND_RUNNING_OWNING",
-          businessPersona: "OWNING",
-          legalStructureId: randomTradeNameLegalStructure(),
-        },
-      });
-      renderPage({ business });
-      expect(
-        screen.queryByText(Config.profileDefaults.fields.dateOfFormation.default.header)
-      ).not.toBeInTheDocument();
-      expect(screen.queryByTestId("effective-date")).not.toBeInTheDocument();
-    });
-
-    it("does display date of formation question when it is a not a Trade Name legal structure", () => {
-      const business = generateBusinessForProfile({
-        profileData: {
-          ...emptyProfileData,
-          operatingPhase: "UP_AND_RUNNING_OWNING",
-          businessPersona: "OWNING",
-          legalStructureId: randomPublicFilingLegalStructure(),
-        },
-      });
-      renderPage({ business });
-      expect(
-        within(screen.getByTestId("opp-alert")).getByText(
-          Config.profileDefaults.fields.dateOfFormation.default.header
-        )
-      ).toBeInTheDocument();
-      expect(
-        within(screen.getByTestId("effective-date")).getByText(
-          Config.profileDefaults.fields.dateOfFormation.default.header
-        )
-      ).toBeInTheDocument();
-    });
-
-    it("lists each unanswered funding/certification question", () => {
-      const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          operatingPhase: "UP_AND_RUNNING_OWNING",
-          dateOfFormation: undefined,
-          existingEmployees: undefined,
-          municipality: undefined,
-          homeBasedBusiness: undefined,
-          legalStructureId: randomPublicFilingLegalStructure(),
-          ownershipTypeIds: [],
-        }),
-      });
-      renderPage({ business });
-
-      expect(screen.getByTestId("opp-alert")).toHaveTextContent(ProfileConfig.dateOfFormation.default.header);
-      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
-        ProfileConfig.existingEmployees.overrides.OWNING.header
-      );
-      expect(screen.getByTestId("opp-alert")).toHaveTextContent(ProfileConfig.municipality.default.header);
-      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
-        ProfileConfig.homeBasedBusiness.default.header
-      );
-      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
-        ProfileConfig.ownershipTypeIds.overrides.OWNING.header
-      );
-    });
-
-    it("removes question from alert when it gets answered", () => {
-      const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          operatingPhase: "UP_AND_RUNNING_OWNING",
-          dateOfFormation: undefined,
-          existingEmployees: undefined,
-          legalStructureId: randomPublicFilingLegalStructure(),
-        }),
-      });
-      renderPage({ business });
-
-      expect(screen.getByTestId("opp-alert")).toHaveTextContent(ProfileConfig.dateOfFormation.default.header);
-      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
-        ProfileConfig.existingEmployees.overrides.OWNING.header
-      );
-
-      fillText("Existing employees", "12");
-
-      expect(screen.getByTestId("opp-alert")).toHaveTextContent(ProfileConfig.dateOfFormation.default.header);
-      expect(screen.getByTestId("opp-alert")).not.toHaveTextContent(
-        ProfileConfig.existingEmployees.overrides.OWNING.header
-      );
-    });
-
-    it("does not display alert if all funding/certification questions are answered", () => {
-      const business = generateBusinessForProfile({
-        profileData: generateProfileData({
-          operatingPhase: "UP_AND_RUNNING_OWNING",
-          dateOfFormation: "2023-03-01",
-          municipality: generateMunicipality({}),
-          homeBasedBusiness: true,
-          ownershipTypeIds: ["none"],
-          existingEmployees: undefined,
-        }),
-      });
-      renderPage({ business });
-      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
-        ProfileConfig.existingEmployees.overrides.OWNING.header
-      );
-      fillText("Existing employees", "12");
-      expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
     });
   });
 

@@ -10,11 +10,14 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  BusinessPersona,
   einTaskId,
   generateBusiness,
   generateMunicipality,
   generateProfileData,
   generateUserDataForBusiness,
+  OperatingPhases,
+  ProfileData,
   TaskProgress,
 } from "@businessnjgovnavigator/shared";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
@@ -161,3 +164,20 @@ export const expectLocationNotSavedAndError = (): void => {
   ).toBeInTheDocument();
   expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
 };
+
+export const getForeignNexusProfileFields = (businessPersona: BusinessPersona): Partial<ProfileData> => {
+  return businessPersona === "FOREIGN"
+    ? {
+        foreignBusinessType: "NEXUS",
+        foreignBusinessTypeIds: ["NEXUS"],
+        nexusLocationInNewJersey: true,
+      }
+    : {};
+};
+export const phasesWhereGoToProfileShows = OperatingPhases.filter(
+  (it) => it.displayProfileOpportunityAlert
+).map((it) => it.id);
+
+export const phasesWhereGoToProfileDoesNotShow = OperatingPhases.filter(
+  (it) => !it.displayProfileOpportunityAlert
+).map((it) => it.id);
