@@ -6,6 +6,7 @@ import { ModifiedContent } from "@/components/ModifiedContent";
 import { StateDropdown } from "@/components/StateDropdown";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { templateEval } from "@/lib/utils/helpers";
 import { FormationIncorporator, FormationMember, StateObject } from "@businessnjgovnavigator/shared";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
@@ -33,6 +34,8 @@ interface Props<T extends FormationMember | FormationIncorporator> {
 export const AddressModal = <T extends FormationMember | FormationIncorporator>(
   props: Props<T>
 ): ReactElement => {
+  const { business } = useUserData();
+  const isStarting = business?.profileData.businessPersona === "STARTING";
   const { Config } = useConfig();
   const [useDefaultAddress, setUseDefaultAddress] = useState<boolean>(false);
   const [addressData, setAddressData] = useState<T>(props.createEmptyAddress());
@@ -378,6 +381,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                         disabled={shouldBeDisabled("addressState")}
                         onValidation={onValidation}
                         required={true}
+                        excludeTerritories={isStarting}
                       />
                     </div>
                     <div className="grid-col-7">
