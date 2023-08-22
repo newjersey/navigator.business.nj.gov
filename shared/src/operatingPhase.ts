@@ -213,7 +213,7 @@ export const OperatingPhases: OperatingPhase[] = [
     municipalityRequiredForTradeName: true,
     municipalityRequiredForPublicFiling: true,
     businessNameRequired: true,
-    displayProfileOpportunityAlert: false,
+    displayProfileOpportunityAlert: true,
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: false,
     sectorRequired: true,

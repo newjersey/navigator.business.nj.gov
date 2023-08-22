@@ -19,6 +19,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   businessPersonas,
+  emptyProfileData,
   ForeignBusinessType,
   generateMunicipality,
   generateProfileData,
@@ -32,13 +33,17 @@ import { generateTaxFilingData, randomFilteredIndustry } from "@businessnjgovnav
 import {
   chooseTab,
   clickSave,
+  fillText,
   generateBusinessForProfile,
+  getForeignNexusProfileFields,
+  phasesWhereGoToProfileDoesNotShow,
+  phasesWhereGoToProfileShows,
   renderPage,
   selectByText,
   selectByValue,
 } from "@/test/pages/profile/profile-helpers";
 import { Business, BusinessPersona, generateBusiness, ProfileData } from "@businessnjgovnavigator/shared";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
 const mockApi = api as jest.Mocked<typeof api>;
@@ -93,6 +98,7 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const personas: BusinessPersona[] = ["STARTING", "FOREIGN"];
 
 describe("profile - shared", () => {
   let setRegistrationModalIsVisible: jest.Mock;
@@ -271,14 +277,7 @@ describe("profile - shared", () => {
   });
 
   describe("profile opportunities alert", () => {
-    const phasesWhereAlertTrue = OperatingPhases.filter((it) => it.displayProfileOpportunityAlert).map(
-      (it) => it.id
-    );
-    const phasesWhereAlertFalse = OperatingPhases.filter((it) => !it.displayProfileOpportunityAlert).map(
-      (it) => it.id
-    );
-
-    it.each(phasesWhereAlertTrue)("displays alert for %s", (operatingPhase) => {
+    it.each(phasesWhereGoToProfileShows)("displays alert for %s", (operatingPhase) => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           operatingPhase,
@@ -290,7 +289,7 @@ describe("profile - shared", () => {
       expect(screen.getByTestId("opp-alert")).toBeInTheDocument();
     });
 
-    it.each(phasesWhereAlertFalse)("does not display alert for %s", (operatingPhase) => {
+    it.each(phasesWhereGoToProfileDoesNotShow)("does not display alert for %s", (operatingPhase) => {
       const business = generateBusinessForProfile({
         profileData: generateProfileData({
           operatingPhase,
@@ -300,6 +299,93 @@ describe("profile - shared", () => {
       renderPage({ business, setRegistrationModalIsVisible });
 
       expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
+    });
+
+    it("does display date of formation question when legal structure is undefined", () => {
+      const business = generateBusinessForProfile({
+        profileData: {
+          ...emptyProfileData,
+          operatingPhase: "UP_AND_RUNNING_OWNING",
+          businessPersona: "OWNING",
+        },
+      });
+      renderPage({ business });
+      expect(
+        within(screen.getByTestId("opp-alert")).getByText(
+          Config.profileDefaults.fields.dateOfFormation.default.header
+        )
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("effective-date")).getByText(
+          Config.profileDefaults.fields.dateOfFormation.default.header
+        )
+      ).toBeInTheDocument();
+    });
+
+    it("does not display date of formation question when it is a Trade Name legal structure", () => {
+      const business = generateBusinessForProfile({
+        profileData: {
+          ...emptyProfileData,
+          operatingPhase: "UP_AND_RUNNING_OWNING",
+          businessPersona: "OWNING",
+          legalStructureId: randomTradeNameLegalStructure(),
+        },
+      });
+      renderPage({ business });
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.dateOfFormation.default.header)
+      ).not.toBeInTheDocument();
+      expect(screen.queryByTestId("effective-date")).not.toBeInTheDocument();
+    });
+
+    it("does display date of formation question when it is a not a Trade Name legal structure", () => {
+      const business = generateBusinessForProfile({
+        profileData: {
+          ...emptyProfileData,
+          operatingPhase: "UP_AND_RUNNING_OWNING",
+          businessPersona: "OWNING",
+          legalStructureId: randomPublicFilingLegalStructure(),
+        },
+      });
+      renderPage({ business });
+      expect(
+        within(screen.getByTestId("opp-alert")).getByText(
+          Config.profileDefaults.fields.dateOfFormation.default.header
+        )
+      ).toBeInTheDocument();
+      expect(
+        within(screen.getByTestId("effective-date")).getByText(
+          Config.profileDefaults.fields.dateOfFormation.default.header
+        )
+      ).toBeInTheDocument();
+    });
+
+    it("removes question from alert when it gets answered", () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          operatingPhase: "UP_AND_RUNNING_OWNING",
+          dateOfFormation: undefined,
+          existingEmployees: undefined,
+          legalStructureId: randomPublicFilingLegalStructure(),
+        }),
+      });
+      renderPage({ business });
+
+      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
+        Config.profileDefaults.fields.dateOfFormation.default.header
+      );
+      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
+        Config.profileDefaults.fields.existingEmployees.overrides.OWNING.header
+      );
+
+      fillText("Existing employees", "12");
+
+      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
+        Config.profileDefaults.fields.dateOfFormation.default.header
+      );
+      expect(screen.getByTestId("opp-alert")).not.toHaveTextContent(
+        Config.profileDefaults.fields.existingEmployees.overrides.OWNING.header
+      );
     });
   });
 
@@ -316,12 +402,12 @@ describe("profile - shared", () => {
       });
     };
 
-    it.each(["STARTING", "FOREIGN"])(
+    it.each(personas)(
       "resets non essential questions if industry is changed when %s",
-      async (businessPersona: string) => {
+      async (businessPersona: BusinessPersona) => {
         const business = generateBusinessForNonEssentialQuestionTest({
           industryId: "test-industry-with-non-essential-questions",
-          businessPersona: businessPersona as BusinessPersona,
+          businessPersona: businessPersona,
           nonEssentialRadioAnswers: {
             "test-question-1": true,
             "test-question-2": true,
@@ -338,26 +424,16 @@ describe("profile - shared", () => {
   });
 
   describe("location", () => {
-    const getProfileDataMixin = (businessPersona: BusinessPersona): Partial<ProfileData> => {
-      return businessPersona === "FOREIGN"
-        ? {
-            foreignBusinessType: "NEXUS",
-            foreignBusinessTypeIds: ["NEXUS"],
-            nexusLocationInNewJersey: true,
-          }
-        : {};
-    };
-
-    it.each(["STARTING", "FOREIGN"])(
+    it.each(personas)(
       "displays a warning alert for cannabis businesses when %s",
-      async (businessPersona: string) => {
+      async (businessPersona: BusinessPersona) => {
         renderPage({
           business: generateBusinessForProfile({
             profileData: generateProfileData({
-              businessPersona: businessPersona as BusinessPersona,
+              businessPersona: businessPersona,
               municipality: generateMunicipality({ displayName: "Trenton" }),
               industryId: "cannabis",
-              ...getProfileDataMixin(businessPersona as BusinessPersona),
+              ...getForeignNexusProfileFields(businessPersona),
             }),
           }),
         });
@@ -365,19 +441,19 @@ describe("profile - shared", () => {
       }
     );
 
-    it.each(["STARTING", "FOREIGN"])(
+    it.each(personas)(
       "should NOT display a warning alert for non-cannabis businesses when %s",
-      async (businessPersona: string) => {
+      async (businessPersona: BusinessPersona) => {
         const filter = (industry: Industry): boolean => industry.id !== "cannabis";
         const industry = randomFilteredIndustry(filter, { isEnabled: true });
 
         renderPage({
           business: generateBusinessForProfile({
             profileData: generateProfileData({
-              businessPersona: businessPersona as BusinessPersona,
+              businessPersona: businessPersona,
               municipality: generateMunicipality({ displayName: "Trenton" }),
               industryId: industry.id,
-              ...getProfileDataMixin(businessPersona as BusinessPersona),
+              ...getForeignNexusProfileFields(businessPersona),
             }),
           }),
         });
