@@ -370,16 +370,16 @@ const OnboardingPage = (props: Props): ReactElement => {
     }
   };
 
-  const header = (): ReactElement => {
-    const pageTitle = modifyContent({
-      content: Config.onboardingDefaults.pageTitle,
-      condition: () => isAdditionalBusiness,
-      modificationMap: {
-        Additional: "Additional",
-        additional: "additional",
-      },
-    });
+  const pageTitle = modifyContent({
+    content: Config.onboardingDefaults.pageTitle,
+    condition: () => isAdditionalBusiness,
+    modificationMap: {
+      Additional: "Additional",
+      additional: "additional",
+    },
+  });
 
+  const header = (): ReactElement => {
     return (
       <div className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-1">
         <h1 ref={headerRef}>
@@ -391,7 +391,6 @@ const OnboardingPage = (props: Props): ReactElement => {
       </div>
     );
   };
-
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
       <profileFormContext.Provider value={formContextState}>
@@ -406,11 +405,7 @@ const OnboardingPage = (props: Props): ReactElement => {
             onBack,
           }}
         >
-          <NextSeo
-            title={`Business.NJ.gov Navigator - ${
-              Config.onboardingDefaults.pageTitle
-            } ${evalHeaderStepsTemplate(page)}`}
-          />
+          <NextSeo title={`Business.NJ.gov Navigator - ${pageTitle} ${evalHeaderStepsTemplate(page)}`} />
           <PageSkeleton>
             <NavBar />
             <ReturnToPreviousBusinessBar previousBusiness={previousBusiness} />
