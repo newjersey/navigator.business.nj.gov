@@ -10,7 +10,7 @@ import {
   generateMunicipality,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
-import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -231,6 +231,18 @@ describe("Formation - Addresses", () => {
         page.fillText("Address name", "The Dude");
       });
     });
+  });
+
+  it("does not include US Territories in state dropdown for users starting a new business", async () => {
+    const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { incorporators: [] });
+    page.clickAddNewIncorporator();
+
+    const listBox = await page.getListBoxForInputElementByTestId("addressState");
+
+    expect(within(listBox).getByText("NJ")).toBeInTheDocument();
+    expect(within(listBox).queryByText("AS")).not.toBeInTheDocument();
+    expect(within(listBox).queryByText("VI")).not.toBeInTheDocument();
+    expect(within(listBox).queryByText("GU")).not.toBeInTheDocument();
   });
 
   const attemptApiSubmission = async (page: FormationPageHelpers): Promise<void> => {

@@ -13,6 +13,7 @@ interface Props {
   error?: boolean;
   validationText?: string;
   excludeNJ?: boolean;
+  excludeTerritories?: boolean;
   useFullName?: boolean;
   validationLabel?: string;
   autoComplete?: boolean;
@@ -55,12 +56,23 @@ export const StateDropdown = (props: Props): ReactElement => {
     },
   });
 
-  const filteredStates = (): StateObject[] =>
-    props.excludeNJ
-      ? states.filter((stateObject) => {
-          return stateObject.shortCode !== "NJ";
-        })
-      : states;
+  const filteredStates = (): StateObject[] => {
+    let result = states;
+    if (props.excludeNJ) {
+      result = result.filter((stateObject) => {
+        return stateObject.shortCode !== "NJ";
+      });
+    }
+
+    if (props.excludeTerritories) {
+      result = result.filter((stateObject) => {
+        return (
+          stateObject.shortCode !== "AS" && stateObject.shortCode !== "VI" && stateObject.shortCode !== "GU"
+        );
+      });
+    }
+    return result;
+  };
 
   const getState = (value: string | undefined): StateObject | undefined => {
     return filteredStates().find((state: StateObject) => {
