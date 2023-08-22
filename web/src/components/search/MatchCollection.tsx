@@ -22,9 +22,8 @@ export const MatchCollection = (props: Props): ReactElement => {
   const collectionTitle = cmsCollections.find((it) => it.children.includes(firstLabel))?.label;
 
   const configMatchesInThisCollection = props.groupedConfigMatches.filter((configMatch) => {
-    const cmsHeaderForMatch = cmsCollections.find((it) =>
-      it.children.includes(configMatch.cmsCollectionName)
-    )?.label;
+    const cmsHeaderForMatch = cmsCollections.find((it) => it.children.includes(configMatch.cmsCollectionName))
+      ?.label;
     return cmsHeaderForMatch === collectionTitle;
   });
 

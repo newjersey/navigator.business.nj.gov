@@ -14,18 +14,21 @@ const displayContentDir = path.join(process.cwd(), "..", "content", "src", "disp
 export const loadRoadmapSideBarDisplayContent = (): RoadmapDisplayContent => {
   const fileNames = fs.readdirSync(path.join(displayContentDir, "roadmap-sidebar-cards"));
 
-  const sideBarDisplayContent = fileNames.reduce((acc, cur) => {
-    const fileContents: string = fs.readFileSync(
-      path.join(displayContentDir, "roadmap-sidebar-cards", cur),
-      "utf8"
-    );
-    const markdownContents = getMarkdown(fileContents);
-    const displayContent: SidebarCardContent = {
-      contentMd: markdownContents.content,
-      ...(markdownContents.grayMatter as RoadmapCardGrayMatter),
-    };
-    return { ...acc, [displayContent.id]: displayContent };
-  }, {} as Record<string, SidebarCardContent>);
+  const sideBarDisplayContent = fileNames.reduce(
+    (acc, cur) => {
+      const fileContents: string = fs.readFileSync(
+        path.join(displayContentDir, "roadmap-sidebar-cards", cur),
+        "utf8"
+      );
+      const markdownContents = getMarkdown(fileContents);
+      const displayContent: SidebarCardContent = {
+        contentMd: markdownContents.content,
+        ...(markdownContents.grayMatter as RoadmapCardGrayMatter),
+      };
+      return { ...acc, [displayContent.id]: displayContent };
+    },
+    {} as Record<string, SidebarCardContent>
+  );
 
   return {
     sidebarDisplayContent: sideBarDisplayContent,

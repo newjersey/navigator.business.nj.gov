@@ -195,7 +195,7 @@
     "kill-port": "1.6.1",
     "lint-staged": "13.3.0",
     "nc": "git+https://github.com/dsueltenfuss/nc.git",
-    "prettier": "2.8.8",
+    "prettier": "3.0.2",
     "prettier-plugin-organize-imports": "3.2.3",
     "raw-loader": "4.0.2",
     "require-from-string": "2.0.2",
@@ -251,6 +251,7 @@
     "*.{css,md,scss,yml}": "prettier --write"
   },
   "prettier": {
+    "trailingComma": "es5",
     "printWidth": 110,
     "endOfLine": "auto"
   },

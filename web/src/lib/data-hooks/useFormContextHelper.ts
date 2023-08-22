@@ -7,7 +7,7 @@ const debug = false;
 export const useFormContextHelper = <
   T extends ReducedFieldStates<keyof T, FieldError>,
   Tab = unknown,
-  FieldError = Exclude<T[keyof T]["errorTypes"], undefined>[number]
+  FieldError = Exclude<T[keyof T]["errorTypes"], undefined>[number],
 >(
   initState: T,
   initTab?: Tab

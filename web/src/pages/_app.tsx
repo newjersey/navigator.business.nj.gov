@@ -100,10 +100,13 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
   Hub.listen("auth", listener);
 
-  useMountEffectWhenDefined(() => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    setOnLoadDimensions(updateQueue!.current());
-  }, updateQueue?.current);
+  useMountEffectWhenDefined(
+    () => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      setOnLoadDimensions(updateQueue!.current());
+    },
+    updateQueue?.current
+  );
 
   useMountEffect(() => {
     if (!pageProps.noAuth) {

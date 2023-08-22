@@ -243,10 +243,13 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     }),
   ];
 
-  const deadLinks = pages.reduce((acc, cur) => {
-    acc[cur] = [];
-    return acc;
-  }, {} as Record<string, string[]>);
+  const deadLinks = pages.reduce(
+    (acc, cur) => {
+      acc[cur] = [];
+      return acc;
+    },
+    {} as Record<string, string[]>
+  );
 
   const templateEvals = [
     "municipalityWebsite",

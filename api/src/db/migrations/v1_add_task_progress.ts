@@ -76,7 +76,7 @@ interface v1BusinessForm {
         zipCode?: string;
         license?: boolean;
         [k: string]: unknown;
-      }[]
+      }[],
     ];
     [k: string]: unknown;
   };

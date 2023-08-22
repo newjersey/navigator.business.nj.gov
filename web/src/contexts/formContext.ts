@@ -49,7 +49,7 @@ export const createFormContext = <T>(): Context<FormContextType<T>> =>
   createContext<FormContextType<T>>({
     fieldStates: {} as ReducedFieldStates<keyof T>,
     runValidations: false,
-    reducer: () => ({} as ReducedFieldStates<keyof T>),
+    reducer: () => ({}) as ReducedFieldStates<keyof T>,
   });
 
 export const genericFormContext =

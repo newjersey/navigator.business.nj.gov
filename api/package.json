@@ -27,6 +27,7 @@
     "node": ">=18.16.0"
   },
   "prettier": {
+    "trailingComma": "es5",
     "printWidth": 110,
     "endOfLine": "auto"
   },
@@ -86,7 +87,7 @@
     "jest": "29.6.2",
     "jest-dynalite": "3.6.1",
     "jest-junit": "16.0.0",
-    "prettier": "2.8.8",
+    "prettier": "3.0.2",
     "prettier-plugin-organize-imports": "3.2.3",
     "rimraf": "5.0.1",
     "serverless": "3.34.0",

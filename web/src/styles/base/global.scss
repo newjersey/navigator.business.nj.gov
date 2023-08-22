@@ -156,7 +156,9 @@ ol {
   margin-left: 8px;
   margin-right: 20px;
   box-sizing: border-box;
-  font-feature-settings: "tnum" 1, "kern" 1;
+  font-feature-settings:
+    "tnum" 1,
+    "kern" 1;
   display: inline-block;
 }
 

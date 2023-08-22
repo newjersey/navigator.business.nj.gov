@@ -109,10 +109,13 @@ export type ReducedFieldStates<K extends string | number | symbol, FieldError = 
 export const createReducedFieldStates = <K extends string | number | symbol, FieldError = FieldErrorType>(
   fields: K[]
 ): ReducedFieldStates<K, FieldError> => {
-  return fields.reduce((p, c: K) => {
-    p[c] = { invalid: false };
-    return p;
-  }, {} as ReducedFieldStates<K, FieldError>);
+  return fields.reduce(
+    (p, c: K) => {
+      p[c] = { invalid: false };
+      return p;
+    },
+    {} as ReducedFieldStates<K, FieldError>
+  );
 };
 
 const allProfileFields = Object.keys(profileFieldsFromConfig) as ProfileFields[];
