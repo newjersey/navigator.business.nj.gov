@@ -36,6 +36,19 @@ export const ReviewStep = (): ReactElement => {
   const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
   const isNonProfit = state.formationFormData.legalType === "nonprofit";
 
+  const getProvisionsAndPurposeSections = (): ReactElement => {
+    return (
+      <>
+        {hasProvisions && <ReviewProvisions />}
+        {hasPurpose && (
+          <ReviewSubSection header={Config.formation.fields.businessPurpose.label}>
+            <ReviewText fieldName={"businessPurpose"} isExpandable={true} />
+          </ReviewSubSection>
+        )}
+      </>
+    );
+  };
+
   return (
     <>
       <div data-testid="review-step">
@@ -53,12 +66,7 @@ export const ReviewStep = (): ReactElement => {
           {isNonProfit && (
             <>
               <ReviewNonprofitProvisions />
-              {hasProvisions && <ReviewProvisions />}
-              {isNonProfit && hasPurpose && (
-                <ReviewSubSection header={Config.formation.fields.businessPurpose.label}>
-                  <ReviewText fieldName={"businessPurpose"} isExpandable={true} />
-                </ReviewSubSection>
-              )}
+              {getProvisionsAndPurposeSections()}
             </>
           )}
           {shouldDisplayAddressSection(state.formationFormData) && <ReviewMainBusinessLocation />}
@@ -76,17 +84,12 @@ export const ReviewStep = (): ReactElement => {
               </ReviewSubSection>
             </>
           )}
-          {!isNonProfit && hasProvisions && <ReviewProvisions />}
-          {!isNonProfit && hasPurpose && (
-            <ReviewSubSection header={Config.formation.fields.businessPurpose.label}>
-              <ReviewText fieldName={"businessPurpose"} isExpandable={true} />
-            </ReviewSubSection>
-          )}
+          {!isNonProfit && getProvisionsAndPurposeSections()}
         </ReviewSection>
         <ReviewSection stepName={"Contacts"} testId="edit-contacts-step">
           <ReviewRegisteredAgent />
           {(isNonProfit || isCorp || (!isLP && hasMembers)) && <ReviewMembers />}
-          {<ReviewSignatures />}
+          <ReviewSignatures />
         </ReviewSection>
         <ReviewSection stepName={"Billing"} testId="edit-billing-step">
           <ReviewBillingContact />
