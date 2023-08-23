@@ -13,7 +13,7 @@ export const MenuOptionSelected = (props: Props): ReactElement => {
         <div className="padding-right-05">
           <Icon>check</Icon>
         </div>
-        <div className="text-bold" data-testid="industry-name">
+        <div className="text-bold" data-testid="option">
           {props.children}
         </div>
       </div>

@@ -8,7 +8,7 @@ interface Props {
 export const MenuOptionUnselected = (props: Props): ReactElement => {
   return (
     <>
-      <div className="padding-left-205 text-wrap" data-testid="industry-name">
+      <div className="padding-left-205 text-wrap" data-testid="option">
         {props.children}
       </div>
 

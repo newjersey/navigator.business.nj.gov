@@ -39,9 +39,9 @@ export const FieldLabelProfile = (props: Props): ReactElement => {
 
   return (
     <>
-      <div className="flex flex-row fac">
+      <div className="flex flex-row fac margin-bottom-05">
         {isHeaderInConfig && showHeader && (
-          <div role="heading" aria-level={3} className="text-bold margin-bottom-05">
+          <div role="heading" aria-level={3} className="text-bold">
             {contentFromConfig.headerContextualInfo ? (
               <ContextualInfoButton
                 text={contentFromConfig.header}
@@ -59,12 +59,12 @@ export const FieldLabelProfile = (props: Props): ReactElement => {
           </div>
         )}
         {showLockedTooltip && (
-          <div className="margin-left-1 margin-bottom-2">
+          <div className="margin-left-1">
             <ArrowTooltip
               title={Config.profileDefaults.default.lockedFieldTooltipText}
               data-testid={`${props.fieldName}-locked-tooltip`}
             >
-              <div className="fdr fac  font-body-lg">
+              <div className="fdr fac font-body-lg">
                 <Icon>help_outline</Icon>
               </div>
             </ArrowTooltip>
