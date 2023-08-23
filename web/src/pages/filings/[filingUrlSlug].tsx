@@ -194,7 +194,7 @@ const FilingPage = (props: Props): ReactElement => {
       <NextSeo title={`Business.NJ.gov Navigator - ${props.filing.name}`} />
       <PageSkeleton>
         <NavBar showSidebar={true} hideMiniRoadmap={true} />
-        <TaskSidebarPageLayout>
+        <TaskSidebarPageLayout hideMiniRoadmap={true}>
           <FilingElement filing={props.filing} dueDate={matchingFiling?.dueDate ?? ""} />
         </TaskSidebarPageLayout>
       </PageSkeleton>
