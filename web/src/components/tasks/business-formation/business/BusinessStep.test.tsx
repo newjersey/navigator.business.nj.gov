@@ -395,6 +395,18 @@ describe("Formation - BusinessStep", () => {
       );
     });
 
+    it("does not include New Jersey in the foreign state of formation dropdown", async () => {
+      const page = await getPageHelper(
+        { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
+        { foreignStateOfFormation: undefined }
+      );
+
+      const listBox = await page.getListBoxForInputElementByTestId("foreignStateOfFormation");
+
+      expect(within(listBox).queryByText("New Jersey")).not.toBeInTheDocument();
+      expect(within(listBox).getByText("Ohio")).toBeInTheDocument();
+    });
+
     it("displays error on field validation", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },

@@ -196,6 +196,7 @@ export type FormationPageHelpers = {
   getInputElementByLabel: (label: string) => HTMLInputElement;
   getInputElementByTestId: (testId: string) => HTMLInputElement;
   getInputElementByParentTestId: (testId: string, params: { type: string }) => HTMLInputElement;
+  getListBoxForInputElementByTestId: (testId: string) => Promise<HTMLInputElement>;
   selectByText: (label: string, value: string) => void;
   selectCheckbox: (label: string) => void;
   selectCheckboxByTestId: (testId: string) => void;
@@ -494,6 +495,14 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     }
   };
 
+  const getListBoxForInputElementByTestId = async (testId: string): Promise<HTMLInputElement> => {
+    fireEvent.click(screen.getByTestId(testId));
+    await waitFor(() => {
+      expect(screen.getByRole("listbox")).toBeInTheDocument();
+    });
+    return screen.getByRole("listbox") as HTMLInputElement;
+  };
+
   return {
     fillText,
     fillAndSubmitBusinessNameStep,
@@ -503,6 +512,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     submitContactsStep,
     submitNexusBusinessNameStep,
     fillAndSubmitNexusBusinessNameStep,
+    getListBoxForInputElementByTestId,
     submitBillingStep,
     submitReviewStep,
     searchBusinessName,

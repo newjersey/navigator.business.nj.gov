@@ -31,7 +31,12 @@ export const generateFormationUSAddress = (overrides: Partial<FormationAddress>)
     addressCity: `some-address-city-${randomInt()}`,
     addressState: randomElementFromArray(
       states.filter((state) => {
-        return state.shortCode !== "NJ";
+        return (
+          state.shortCode !== "NJ" &&
+          state.shortCode !== "AS" &&
+          state.shortCode !== "VI" &&
+          state.shortCode !== "GU"
+        );
       })
     ),
     addressCountry: "US",
