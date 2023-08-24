@@ -1142,7 +1142,7 @@ collections:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Description", name: "descriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
+      - { label: "Url Slug / Filename", name: "urlSlug", widget: "write-once-read-only" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -1183,7 +1183,7 @@ collections:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Description", name: "descriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
+      - { label: "Url Slug / Filename", name: "urlSlug", widget: "write-once-read-only" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -1228,7 +1228,7 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "File Name", name: "filename", widget: "slug" }
+      - { label: "File Name", name: "filename", widget: "write-once-read-only" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Url Slug", name: "urlSlug", widget: "string" }
       - { label: "Id", name: "id", widget: "string" }
@@ -1377,7 +1377,7 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "File Name", name: "filename", widget: "slug" }
+      - { label: "File Name", name: "filename", widget: "write-once-read-only" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Url Slug", name: "urlSlug", widget: "string" }
       - { label: "Id", name: "id", widget: "string" }
@@ -4808,7 +4808,7 @@ collections:
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
+      - { label: "Filename", name: "slug", widget: "write-once-read-only", required: false }
       - { label: "Question Copy", name: "radioQuestion", widget: "string", required: false }
       - { label: "Yes Button Copy", name: "radioYes", widget: "string", required: false }
       - { label: "No Button Copy", name: "radioNo", widget: "string", required: false }
@@ -4830,7 +4830,7 @@ collections:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Header", name: "header", widget: "string" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
+      - { label: "Filename", name: "slug", widget: "write-once-read-only", required: false }
 
   - name: "page-not-found-error"
     label: "404 Page"
