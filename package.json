@@ -194,7 +194,7 @@
     "jest-environment-jsdom": "29.6.4",
     "jest-junit": "16.0.0",
     "kill-port": "1.6.1",
-    "lint-staged": "13.3.0",
+    "lint-staged": "14.0.1",
     "nc": "git+https://github.com/dsueltenfuss/nc.git",
     "prettier": "2.8.8",
     "prettier-plugin-organize-imports": "3.2.3",
