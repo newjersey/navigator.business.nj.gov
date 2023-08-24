@@ -1,6 +1,6 @@
 import React, { Component, createRef, ReactElement } from "react";
 
-type SlugProps = {
+type WriteOnceReadOnlyProps = {
   onChange: (e: string) => void;
   entry?: object;
   forID?: string;
@@ -10,16 +10,16 @@ type SlugProps = {
   setActiveStyle: () => void;
   setInactiveStyle: () => void;
 };
-type SlugState = {
+type WriteOnceReadOnlyState = {
   entry_object: object;
   value: string;
   _sel: number | null;
 };
 
-class SlugControl extends Component<SlugProps, SlugState> {
+class WriteOnceReadOnlyControl extends Component<WriteOnceReadOnlyProps, WriteOnceReadOnlyState> {
   private el = createRef<HTMLInputElement>();
 
-  constructor(props: SlugProps) {
+  constructor(props: WriteOnceReadOnlyProps) {
     super(props);
     const entry_object = JSON.parse(JSON.stringify(this.props.entry));
     this.state = {
@@ -61,7 +61,7 @@ class SlugControl extends Component<SlugProps, SlugState> {
         id={forID}
         className={classNameWrapper}
         value={value ?? this.state.value}
-        disabled={!!this.state.value}
+        disabled={!!this.state.value} // This is the key line that makes this unique and uneditable in the CMS specifically
         onChange={this.handleChange}
         onFocus={setActiveStyle}
         onBlur={setInactiveStyle}
@@ -70,4 +70,4 @@ class SlugControl extends Component<SlugProps, SlugState> {
   }
 }
 
-export { SlugControl };
+export { WriteOnceReadOnlyControl };
