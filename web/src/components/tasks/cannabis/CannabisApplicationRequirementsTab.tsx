@@ -54,7 +54,7 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
         )}
         {(props.CMS_ONLY_isConditional || props.task.id === "conditional-permit-cannabis") && (
           <>
-            <Accordion expanded={true} className="margin-top-2">
+            <Accordion defaultExpanded={true} className="margin-top-2">
               <AccordionSummary
                 aria-controls={`${Config.cannabisApplyForLicense.generalApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
@@ -74,7 +74,7 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
         {(props.CMS_ONLY_isAnnual || business?.profileData.cannabisMicrobusiness) && (
           <>
             <hr />
-            <Accordion defaultExpanded={props.CMS_ONLY_isAnnual} className="margin-top-2">
+            <Accordion defaultExpanded={true} className="margin-top-2">
               <AccordionSummary
                 aria-controls={`${Config.cannabisApplyForLicense.microbusinessApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
@@ -94,7 +94,7 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
         {hasPriorityStatus && (
           <>
             <hr />
-            <Accordion defaultExpanded={props.CMS_ONLY_isAnnual ? true : false} className="margin-top-2">
+            <Accordion defaultExpanded={true} className="margin-top-2">
               <AccordionSummary
                 aria-controls={`${Config.cannabisApplyForLicense.priorityStatusApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
