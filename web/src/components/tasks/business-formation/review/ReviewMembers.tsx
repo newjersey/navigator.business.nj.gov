@@ -91,5 +91,9 @@ export const ReviewMembers = (): ReactElement => {
     }
   };
 
-  return <ReviewSubSection header={getConfig().header}>{members()}</ReviewSubSection>;
+  return (
+    <ReviewSubSection testId={"review-members"} header={getConfig().header}>
+      {members()}
+    </ReviewSubSection>
+  );
 };

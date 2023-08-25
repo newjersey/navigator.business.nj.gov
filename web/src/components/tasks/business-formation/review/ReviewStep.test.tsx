@@ -17,8 +17,10 @@ import {
   FormationLegalType,
   generateFormationFormData,
   generateFormationIncorporator,
+  generateFormationMember,
   generateFormationSigner,
   generateMunicipality,
+  LegalStructures,
   ProfileData,
   PublicFilingLegalType,
   randomInt,
@@ -221,11 +223,6 @@ describe("Formation - ReviewStep", () => {
     expect(screen.getByTestId("agent-manual-entry")).toBeInTheDocument();
   });
 
-  it("does not display members section within review step when members do not exist", async () => {
-    await renderStep({ legalStructureId: "limited-liability-company" }, { members: [] });
-    expect(screen.queryByTestId("members-step")).not.toBeInTheDocument();
-  });
-
   it("displays empty directors section within review step when legal type is corporation", async () => {
     await renderStep({ legalStructureId: "c-corporation" }, { members: [] });
     expect(screen.getByTestId("empty-members-section")).toBeInTheDocument();
@@ -263,11 +260,6 @@ describe("Formation - ReviewStep", () => {
   it("does not display foreign state of formation within review step when non-foreign", async () => {
     await renderStep({ businessPersona: "STARTING" }, {});
     expect(screen.queryByTestId("foreign-state-of-formation")).not.toBeInTheDocument();
-  });
-
-  it("does not display members section within review step when foreign", async () => {
-    await renderStep({ businessPersona: "FOREIGN" }, {});
-    expect(screen.queryByTestId("members-step")).not.toBeInTheDocument();
   });
 
   it("displays provisions on review step", async () => {
@@ -349,6 +341,58 @@ describe("Formation - ReviewStep", () => {
     expect(
       reviewSignersSection.getByText(`${Config.formation.addressModal.name.label}:`)
     ).toBeInTheDocument();
+  });
+
+  describe("members", () => {
+    it("does not display members section within review step when members do not exist", async () => {
+      await renderStep({ legalStructureId: "limited-liability-company" }, { members: [] });
+      expect(screen.queryByTestId("members-step")).not.toBeInTheDocument();
+    });
+
+    it("does not display members section within review step when foreign", async () => {
+      await renderStep({ businessPersona: "FOREIGN" }, {});
+      expect(screen.queryByTestId("members-step")).not.toBeInTheDocument();
+    });
+
+    const nonTradeNamelegalStructures = LegalStructures.filter((legalStructure) => {
+      if (legalStructure.hasTradeName) return false;
+      return true;
+    });
+
+    const legalStructureIds = nonTradeNamelegalStructures.map((legalStructure) => legalStructure.id);
+
+    const shouldShowMembersSectionNoMembers = (legalStructure: string): boolean => {
+      if (["nonprofit", "c-corporation", "s-corporation"].includes(legalStructure)) return true;
+      return false;
+    };
+
+    it.each(legalStructureIds)(
+      "conditionally renders the members section when there are NO members and the legalStructure is %s",
+      async (legalStructure) => {
+        await renderStep({ legalStructureId: legalStructure }, { members: [] });
+        if (shouldShowMembersSectionNoMembers(legalStructure)) {
+          /* eslint-disable-next-line jest/no-conditional-expect */
+          expect(screen.getByTestId("review-members")).toBeInTheDocument();
+        } else {
+          /* eslint-disable-next-line jest/no-conditional-expect */
+          expect(screen.queryByTestId("review-members")).not.toBeInTheDocument();
+        }
+      }
+    );
+
+    it.each(legalStructureIds)(
+      "conditionally renders the members section when there are members and the legalStructure is %s",
+      async (legalStructure) => {
+        await renderStep({ legalStructureId: legalStructure }, { members: [generateFormationMember({})] });
+        if (legalStructure === "limited-partnership") {
+          /* eslint-disable-next-line jest/no-conditional-expect */
+          expect(screen.queryByTestId("review-members")).not.toBeInTheDocument();
+        } else {
+          /* eslint-disable-next-line jest/no-conditional-expect */
+          expect(screen.getByTestId("review-members")).toBeInTheDocument();
+        }
+      }
+    );
   });
 
   describe("address", () => {
