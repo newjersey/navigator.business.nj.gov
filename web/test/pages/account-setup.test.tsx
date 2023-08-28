@@ -100,7 +100,7 @@ describe("Account Setup page", () => {
         <WithStatefulUserData initialUserData={initialUserData}>
           <AccountSetupPage />
         </WithStatefulUserData>,
-        { user: emptyUser, isAuthenticated }
+        { isAuthenticated }
       )
     );
     const page = createPageHelpers();

@@ -1,6 +1,6 @@
 import { AuthAlertContextType } from "@/contexts/authAlertContext";
 import * as api from "@/lib/api-client/apiClient";
-import { AuthAction } from "@/lib/auth/AuthContext";
+import { ActiveUser, AuthAction } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
@@ -19,10 +19,10 @@ import * as session from "./sessionHelper";
 import { triggerSignOut } from "./sessionHelper";
 
 export const onSignIn = async (dispatch: Dispatch<AuthAction>): Promise<void> => {
-  const user = await session.getCurrentUser();
+  const user = await session.getActiveUser();
   dispatch({
     type: "LOGIN",
-    user: user,
+    activeUser: user,
   });
 
   const userData = await api.getUserData(user.id);
@@ -89,13 +89,22 @@ export const onGuestSignIn = async (
     userDataStorage.deleteCurrentUser();
     userData = undefined;
   }
-  const user = userData?.user || createEmptyUser(abStorage.getExperience());
+  const emptyUser = createEmptyUser();
+  const activeUser: ActiveUser = userData?.user
+    ? {
+        email: userData.user.email,
+        id: userData.user.id,
+      }
+    : {
+        email: emptyUser.email,
+        id: emptyUser.id,
+      };
   dispatch({
     type: "LOGIN_GUEST",
-    user: user,
+    activeUser: activeUser,
   });
-  setABExperienceDimension(user.abExperience, true);
-  setUserId(user.id, true);
+  setABExperienceDimension(abStorage.getExperience() || emptyUser.abExperience, true);
+  setUserId(activeUser.id, true);
   if (userData) {
     setAnalyticsDimensions(getCurrentBusiness(userData).profileData, true);
     if (getCurrentBusiness(userData).onboardingFormProgress === "UNSTARTED") {
@@ -136,7 +145,7 @@ export const onSignOut = async (
   dispatch: Dispatch<AuthAction>
 ): Promise<void> => {
   analytics.event.roadmap_logout_button.click.log_out();
-  const user = await session.getCurrentUser();
+  const user = await session.getActiveUser();
 
   const userDataStorage = UserDataStorageFactory();
   userDataStorage.delete(user.id);
@@ -144,7 +153,7 @@ export const onSignOut = async (
   await triggerSignOut();
   dispatch({
     type: "LOGOUT",
-    user: undefined,
+    activeUser: undefined,
   });
   push(ROUTES.landing);
 };

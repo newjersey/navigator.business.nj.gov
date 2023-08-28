@@ -5,7 +5,7 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { AuthContext } from "@/contexts/authContext";
-import { getCurrentUser, triggerSignIn } from "@/lib/auth/sessionHelper";
+import { getActiveUser, triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn } from "@/lib/auth/signinHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -32,8 +32,8 @@ const LoadingPage = (): ReactElement => {
       return;
     }
     if (router.query[QUERIES.code]) {
-      getCurrentUser().then((currentUser) => {
-        dispatch({ type: "LOGIN", user: currentUser });
+      getActiveUser().then((currentUser) => {
+        dispatch({ type: "LOGIN", activeUser: currentUser });
       });
     } else if (router.asPath.includes(signInSamlError)) {
       setShowLoginErrorModal(true);

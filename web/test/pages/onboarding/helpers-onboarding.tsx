@@ -14,7 +14,6 @@ import { currentBusiness, WithStatefulUserData } from "@/test/mock/withStatefulU
 import {
   BusinessPersona,
   businessStructureTaskId,
-  BusinessUser,
   createEmptyUser,
   createEmptyUserData,
   DateObject,
@@ -45,15 +44,13 @@ const Config = getMergedConfig();
 export const renderPage = ({
   municipalities,
   userData,
-  user,
   isAuthenticated,
 }: {
   municipalities?: Municipality[];
   userData?: UserData | null;
-  user?: BusinessUser;
   isAuthenticated?: IsAuthenticated;
 }): { page: PageHelpers } => {
-  const currentUser = user ?? userData?.user ?? generateUser({});
+  const currentUser = userData?.user ?? generateUser({});
   render(
     withAuth(
       <WithStatefulUserData
@@ -65,7 +62,7 @@ export const renderPage = ({
           <Onboarding municipalities={municipalities || []} />
         </ThemeProvider>
       </WithStatefulUserData>,
-      { user: currentUser, isAuthenticated }
+      { activeUser: currentUser, isAuthenticated }
     )
   );
   const page = createPageHelpers();

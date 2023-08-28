@@ -18,16 +18,20 @@ import useSWR from "swr";
 const NOT_YET_FETCHED = "NOT_YET_FETCHED";
 
 export const useUserData = (): UseUserDataResponse => {
-  const { state, dispatch } = useContext(AuthContext);
+  const { state } = useContext(AuthContext);
   const { updateQueue, setUpdateQueue } = useContext(UpdateQueueContext);
   const { userDataError, setUserDataError } = useContext(UserDataErrorContext);
   const { setRoadmap } = useContext(RoadmapContext);
   const fetchedUserId = useRef<string | undefined>(NOT_YET_FETCHED);
-  const { data, error, mutate } = useSWR<UserData | undefined>(state.user?.id || null, api.getUserData, {
-    isPaused: () => {
-      return state.isAuthenticated !== IsAuthenticated.TRUE;
-    },
-  });
+  const { data, error, mutate } = useSWR<UserData | undefined>(
+    state.activeUser?.id || null,
+    api.getUserData,
+    {
+      isPaused: () => {
+        return state.isAuthenticated !== IsAuthenticated.TRUE;
+      },
+    }
+  );
   const dataExists = !!data;
   const { setOperatingPhaseId, setLegalStructureId, setIndustryId, setBusinessPersona } =
     useContext(IntercomContext);
@@ -56,22 +60,6 @@ export const useUserData = (): UseUserDataResponse => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, updateQueue]);
-
-  useEffect(() => {
-    if (!data || !state.user || state.isAuthenticated !== IsAuthenticated.TRUE) {
-      return;
-    }
-    dispatch({
-      type: "UPDATE_USER",
-      user: {
-        ...state.user,
-        name: data.user.name,
-        myNJUserKey: data.user.myNJUserKey,
-        intercomHash: data.user.intercomHash,
-      },
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataExists]);
 
   useEffect(() => {
     if (error && dataExists && state.isAuthenticated === IsAuthenticated.TRUE) {
@@ -150,7 +138,7 @@ export const useUserData = (): UseUserDataResponse => {
   const calculateHasFetched = (): boolean => {
     if (state.isAuthenticated === IsAuthenticated.UNKNOWN) return false;
     if (fetchedUserId.current === NOT_YET_FETCHED) return false;
-    if (state.user?.id === undefined) return false;
+    if (state.activeUser?.id === undefined) return false;
     if (data && !updateQueue) return false;
     return true;
   };

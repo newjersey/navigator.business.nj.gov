@@ -2,6 +2,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { onGuestSignIn, onSelfRegister, onSignIn, onSignOut, SelfRegRouter } from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import * as UserDataStorage from "@/lib/storage/UserDataStorage";
+import { generateActiveUser } from "@/test/factories";
 import { generateUser, generateUserData } from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,
@@ -21,7 +22,7 @@ const mockUserDataStorage = UserDataStorage as jest.Mocked<typeof UserDataStorag
 const originalModule = jest.requireActual("@/lib/storage/UserDataStorage");
 
 jest.mock("./sessionHelper", () => ({
-  getCurrentUser: jest.fn(),
+  getActiveUser: jest.fn(),
   triggerSignOut: jest.fn().mockResolvedValue({}),
 }));
 
@@ -53,13 +54,13 @@ describe("SigninHelper", () => {
     it("dispatches current user login", async () => {
       mockApi.getUserData.mockResolvedValue(generateUserData({}));
 
-      const user = generateUser({});
-      mockSession.getCurrentUser.mockResolvedValue(user);
+      const activeUser = generateActiveUser({});
+      mockSession.getActiveUser.mockResolvedValue(activeUser);
       await onSignIn(mockDispatch);
 
       expect(mockDispatch).toHaveBeenCalledWith({
         type: "LOGIN",
-        user: user,
+        activeUser: activeUser,
       });
     });
   });
@@ -201,7 +202,10 @@ describe("SigninHelper", () => {
       expect(userStorageMock).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalledWith({
         type: "LOGIN_GUEST",
-        user: user,
+        activeUser: {
+          email: user.email,
+          id: user.id,
+        },
       });
     });
 
@@ -210,7 +214,7 @@ describe("SigninHelper", () => {
       mockGetCurrentUserData.mockImplementation(() => {
         return userData;
       });
-      mockSession.getCurrentUser.mockImplementation(() => {
+      mockSession.getActiveUser.mockImplementation(() => {
         throw new Error("New");
       });
       await onGuestSignIn(mockPush, ROUTES.landing, mockDispatch);
@@ -221,7 +225,7 @@ describe("SigninHelper", () => {
       mockGetCurrentUserData.mockImplementation(() => {
         return undefined;
       });
-      mockSession.getCurrentUser.mockImplementation(() => {
+      mockSession.getActiveUser.mockImplementation(() => {
         throw new Error("New");
       });
       await onGuestSignIn(mockPush, ROUTES.dashboard, mockDispatch);
@@ -232,7 +236,7 @@ describe("SigninHelper", () => {
       mockGetCurrentUserData.mockImplementation(() => {
         return undefined;
       });
-      mockSession.getCurrentUser.mockImplementation(() => {
+      mockSession.getActiveUser.mockImplementation(() => {
         throw new Error("New");
       });
       await onGuestSignIn(mockPush, ROUTES.onboarding, mockDispatch);
@@ -243,7 +247,7 @@ describe("SigninHelper", () => {
       mockGetCurrentUserData.mockImplementation(() => {
         return undefined;
       });
-      mockSession.getCurrentUser.mockImplementation(() => {
+      mockSession.getActiveUser.mockImplementation(() => {
         throw new Error("New");
       });
       await onGuestSignIn(mockPush, ROUTES.welcome, mockDispatch);
@@ -254,7 +258,7 @@ describe("SigninHelper", () => {
   describe("onSignOut", () => {
     it("dispatches a logout with undefined user", async () => {
       const user = generateUser({});
-      mockSession.getCurrentUser.mockResolvedValue(user);
+      mockSession.getActiveUser.mockResolvedValue(user);
       const userStorageMock = mockDelete.mockImplementation(() => {});
       await onSignOut(mockPush, mockDispatch);
       expect(mockSession.triggerSignOut).toHaveBeenCalled();

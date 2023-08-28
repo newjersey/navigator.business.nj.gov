@@ -1,7 +1,6 @@
-import { BusinessUser } from "@businessnjgovnavigator/shared/";
 import { Dispatch, Reducer } from "react";
 
-export type UserActionType = "LOGIN" | "LOGOUT" | "UPDATE_USER" | "LOGIN_GUEST" | "UPDATE_GUEST";
+export type UserActionType = "LOGIN" | "LOGOUT" | "LOGIN_GUEST";
 
 export enum IsAuthenticated {
   TRUE = "TRUE",
@@ -9,14 +8,19 @@ export enum IsAuthenticated {
   UNKNOWN = "UNKNOWN",
 }
 
+export interface ActiveUser {
+  id: string;
+  email: string;
+}
+
 export interface AuthState {
-  user: BusinessUser | undefined;
+  activeUser: ActiveUser | undefined;
   isAuthenticated: IsAuthenticated;
 }
 
 export interface AuthAction {
   type: UserActionType;
-  user: BusinessUser | undefined;
+  activeUser: ActiveUser | undefined;
 }
 
 export interface AuthContextType {
@@ -30,28 +34,18 @@ export const authReducer: AuthReducer = (state: AuthState, action: AuthAction): 
   switch (action.type) {
     case "LOGIN":
       return {
-        user: action.user,
+        activeUser: action.activeUser,
         isAuthenticated: IsAuthenticated.TRUE,
       };
     case "LOGIN_GUEST":
       return {
-        user: action.user,
-        isAuthenticated: IsAuthenticated.FALSE,
-      };
-    case "UPDATE_GUEST":
-      return {
-        user: action.user,
+        activeUser: action.activeUser,
         isAuthenticated: IsAuthenticated.FALSE,
       };
     case "LOGOUT":
       return {
-        user: undefined,
+        activeUser: undefined,
         isAuthenticated: IsAuthenticated.FALSE,
-      };
-    case "UPDATE_USER":
-      return {
-        user: action.user,
-        isAuthenticated: IsAuthenticated.TRUE,
       };
   }
 };
