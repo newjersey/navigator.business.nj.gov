@@ -2867,8 +2867,36 @@ collections:
           options: ["above-opportunities", "below-opportunities"],
         }
 
+  - name: "quick-actions-label"
+    label: "🟧 QUICK ACTIONS"
+    folder: "content/src"
+    fields:
+      - { name: "" }
+
+  - name: "quick-actions"
+    label: "Quick Actions"
+    folder: "content/src/quick-actions"
+    summary: "{{filename}} - {{name}}"
+    identifier_field: "{{filename}}"
+    slug: "{{fields.filename}}"
+    delete: true
+    sortable_fields: ["name", "filename"]
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - { label: "Filename", name: "filename", widget: "nospace", required: false }
+      - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+      - { label: "Name/Title", name: "name", widget: "string" }
+      - { label: "ID", name: "id", widget: "string" }
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Form", name: "form", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+
   - name: "misc-label"
-    label: "🟧 MISC"
+    label: "🟨 MISC"
     folder: "content/src"
     fields:
       - { name: "" }
