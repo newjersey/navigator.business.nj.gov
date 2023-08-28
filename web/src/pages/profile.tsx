@@ -23,6 +23,7 @@ import { ProfileBusinessStructure } from "@/components/profile/ProfileBusinessSt
 import { ProfileDateOfFormation } from "@/components/profile/ProfileDateOfFormation";
 import { ProfileEmployerId } from "@/components/profile/ProfileEmployerId";
 import { ProfileEntityId } from "@/components/profile/ProfileEntityId";
+import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileExistingEmployees } from "@/components/profile/ProfileExistingEmployees";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { ProfileMunicipality } from "@/components/profile/ProfileMunicipality";
@@ -107,6 +108,7 @@ const ProfilePage = (props: Props): ReactElement => {
     tab: profileTab,
     onTabChange: setProfileTab,
     state: formContextState,
+    getInvalidFieldIds,
   } = useFormContextHelper(createProfileFieldErrorMap(), props.CMS_ONLY_tab ?? profileTabs[0]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -293,6 +295,7 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
+        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField fieldName="foreignBusinessTypeIds">
@@ -403,6 +406,7 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
+        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField fieldName="foreignBusinessTypeIds">
@@ -468,6 +472,7 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
+        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField
@@ -600,6 +605,7 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
+        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField fieldName="businessName" isVisible={!shouldShowTradeNameElements()}>

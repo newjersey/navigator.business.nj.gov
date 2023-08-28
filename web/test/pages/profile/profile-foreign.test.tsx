@@ -104,9 +104,7 @@ describe("profile-foreign", () => {
       renderPage({ business });
       clickSave();
       await waitFor(() => {
-        expect(
-          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0]
-        ).toBeInTheDocument();
+        expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
       });
     }
   );

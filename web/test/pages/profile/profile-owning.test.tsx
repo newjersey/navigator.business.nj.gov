@@ -476,6 +476,28 @@ describe("profile - owning existing business", () => {
     });
   });
 
+  describe("profile error alert", () => {
+    it("displays alert with header when sector has an error", async () => {
+      const business = generateBusinessForProfile({
+        profileData: generateProfileData({
+          industryId: "generic",
+          businessPersona: "OWNING",
+          sectorId: undefined,
+          operatingPhase: "UP_AND_RUNNING_OWNING",
+        }),
+      });
+      renderPage({ business });
+      clickSave();
+      const profileAlert = screen.getByTestId("profile-error-alert");
+      await waitFor(() => {
+        expect(profileAlert).toBeInTheDocument();
+      });
+      expect(
+        within(profileAlert).getByText(Config.profileDefaults.fields.sectorId.default.header)
+      ).toBeInTheDocument();
+    });
+  });
+
   const getSectorIDValue = (): string => {
     return (screen.queryByLabelText("Sector") as HTMLInputElement)?.value;
   };
