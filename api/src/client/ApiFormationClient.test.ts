@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getCurrentDate, getCurrentDateISOString, parseDate, parseDateWithFormat } from "@shared/dateHelpers";
 import { defaultDateFormat } from "@shared/defaultConstants";
-import { formationApiDateFormat, FormationLegalType } from "@shared/formationData";
+import { formationApiDateFormat, FormationFormData, FormationLegalType } from "@shared/formationData";
 import { randomInt } from "@shared/intHelpers";
 import {
   generateBusiness,
@@ -28,6 +28,7 @@ import {
 } from "./ApiFormationClient";
 
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+import { UserData } from "@shared/userData";
 
 jest.mock("axios");
 jest.mock("winston");
@@ -1224,6 +1225,19 @@ describe("ApiFormationClient", () => {
     });
 
     describe("when Nonprofit", () => {
+      // eslint-disable-next-line unicorn/consistent-function-scoping
+      const getUserDataForNonProfit = (formationFormData: FormationFormData): UserData => {
+        return generateUserDataForBusiness(
+          generateBusiness({
+            profileData: generateProfileData({
+              legalStructureId: "nonprofit",
+              businessPersona: "STARTING",
+            }),
+            formationData: generateFormationData({ formationFormData }),
+          })
+        );
+      };
+
       it("posts to the endpoint with the api formation object when nonprofit provisions are IN_BYLAWS", async () => {
         const stubResponse = generateApiResponse({});
         mockAxios.post.mockResolvedValue({ data: stubResponse });
@@ -1257,15 +1271,7 @@ describe("ApiFormationClient", () => {
           { legalStructureId: "nonprofit" }
         );
 
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              legalStructureId: "nonprofit",
-              businessPersona: "STARTING",
-            }),
-            formationData: generateFormationData({ formationFormData }),
-          })
-        );
+        const userData = getUserDataForNonProfit(formationFormData);
         const currentBusiness = getCurrentBusiness(userData);
 
         await client.form(userData, "hostname.com/form-business");
@@ -1385,23 +1391,9 @@ describe("ApiFormationClient", () => {
         );
       });
 
-      it("posts to the endpoint with the api formation object when nonprofit provisions are IN_FORM", async () => {
+      it("posts to the endpoint with nonprofit provisions when they are IN_FORM", async () => {
         const stubResponse = generateApiResponse({});
         mockAxios.post.mockResolvedValue({ data: stubResponse });
-        const incorporators = [
-          generateFormationIncorporator({
-            name: "faraz",
-            signature: true,
-            title: "General Partner",
-            ...generateFormationNJAddress({}),
-          }),
-        ];
-
-        const members = [
-          generateFormationMember({}),
-          generateFormationMember({}),
-          generateFormationMember({}),
-        ];
         const formationFormData = generateFormationFormData(
           {
             agentNumberOrManual: "MANUAL_ENTRY",
@@ -1415,303 +1407,57 @@ describe("ApiFormationClient", () => {
             nonprofitTrusteesMethodTerms: "Trustees can serve up to 2 terms.",
             nonprofitAssetDistributionSpecified: "IN_FORM",
             nonprofitAssetDistributionTerms: "Asset distribution requires three signers.",
-            members,
+            members: [generateFormationMember({})],
             signers: undefined,
-            incorporators,
+            incorporators: [generateFormationIncorporator({})],
             isVeteranNonprofit: false,
           },
           { legalStructureId: "nonprofit" }
         );
 
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              legalStructureId: "nonprofit",
-              businessPersona: "STARTING",
-            }),
-            formationData: generateFormationData({ formationFormData }),
-          })
-        );
-        const currentBusiness = getCurrentBusiness(userData);
-
+        const userData = getUserDataForNonProfit(formationFormData);
         await client.form(userData, "hostname.com/form-business");
 
-        expect(mockAxios.post).toHaveBeenCalledWith(
-          "example.com/formation/PrepareFiling",
-          {
-            Account: "12345",
-            Key: "abcdef",
-            ReturnUrl: "hostname.com/form-business?completeFiling=true",
-            FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
-            Payer: {
-              CompanyName: formationFormData.businessName,
-              Address1: formationFormData.addressLine1,
-              Address2: formationFormData.addressLine2,
-              City: formationFormData.addressMunicipality?.name,
-              StateAbbreviation: "NJ",
-              ZipCode: formationFormData.addressZipCode,
-              Email: userData.user.email,
-            },
-            Formation: {
-              Gov2GoAnnualReports: formationFormData.annualReportNotification,
-              Gov2GoCorpWatch: formationFormData.corpWatchNotification,
-              ShortGoodStanding: formationFormData.certificateOfStanding,
-              Certified: formationFormData.certifiedCopyOfFormationDocument,
-              PayerEmail: userData.user.email,
-              SelectPaymentType: formationFormData.paymentType,
-              BusinessInformation: {
-                CompanyOrigin: "Domestic",
-                Business: "DomesticNonProfitCorporation",
-                BusinessName: formationFormData.businessName,
-                BusinessDesignator: formationFormData.businessSuffix,
-                Naic: currentBusiness.profileData.naicsCode,
-                BusinessPurpose: formationFormData.businessPurpose,
-                EffectiveFilingDate: parseDateWithFormat(
-                  formationFormData.businessStartDate,
-                  defaultDateFormat
-                ).format(formationApiDateFormat),
-                MainAddress: {
-                  Address1: formationFormData.addressLine1,
-                  Address2: formationFormData.addressLine2,
-                  City: formationFormData.addressMunicipality?.name,
-                  State: "New Jersey",
-                  Zipcode: formationFormData.addressZipCode,
-                  Country: "US",
-                },
-              },
-              AdditionalDomesticNonProfitCorp: {
-                HasMembers: "Yes",
-                MemberTermsProvisionLocation: "Herein",
-                MemberTerms: "Board members should have at 1 year of industry experience.",
-                MemberClassPermissionsProvisionLocation: "Herein",
-                MemberClassPermissions: "Board members can serve up to 3 terms.",
-                TrusteeElectionProcessProvisionLocation: "Herein",
-                TrusteeElectionProcess: "Trustees can serve up to 2 terms.",
-                AssetDistributionProvisionLocation: "Herein",
-                AssetDistribution: "Asset distribution requires three signers.",
-              },
-              CompanyProfit: "NonProfit",
-              RegisteredAgent: {
-                Id: undefined,
-                Email: formationFormData.agentEmail,
-                Name: formationFormData.agentName,
-                Location: {
-                  Address1: formationFormData.agentOfficeAddressLine1,
-                  Address2: formationFormData.agentOfficeAddressLine2,
-                  City: formationFormData.agentOfficeAddressMunicipality?.name,
-                  State: "New Jersey",
-                  Zipcode: formationFormData.agentOfficeAddressZipCode,
-                  Country: "US",
-                },
-              },
-              Members: [
-                {
-                  Name: members[0].name,
-                  Location: {
-                    Address1: members[0].addressLine1,
-                    Address2: members[0].addressLine2,
-                    City: members[0].addressCity,
-                    State: members[0].addressState?.name,
-                    Zipcode: members[0].addressZipCode,
-                    Country: "US",
-                  },
-                },
-                {
-                  Name: members[1].name,
-                  Location: {
-                    Address1: members[1].addressLine1,
-                    Address2: members[1].addressLine2,
-                    City: members[1].addressCity,
-                    State: members[1].addressState?.name,
-                    Zipcode: members[1].addressZipCode,
-                    Country: "US",
-                  },
-                },
-                {
-                  Name: members[2].name,
-                  Location: {
-                    Address1: members[2].addressLine1,
-                    Address2: members[2].addressLine2,
-                    City: members[2].addressCity,
-                    State: members[2].addressState?.name,
-                    Zipcode: members[2].addressZipCode,
-                    Country: "US",
-                  },
-                },
-              ],
-              Signers: [
-                {
-                  Name: incorporators[0].name,
-                  Title: "General Partner",
-                  Signed: true,
-                },
-              ],
-              ContactFirstName: formationFormData.contactFirstName,
-              ContactLastName: formationFormData.contactLastName,
-              ContactPhoneNumber: formationFormData.contactPhoneNumber,
-            },
-          },
-          { headers: { "Content-Type": "application/json" } }
+        const lastIndex = mockAxios.post.mock.calls.length - 1;
+        const lastSubmittedData = mockAxios.post.mock.calls[lastIndex][1] as ApiSubmission;
+
+        expect(lastSubmittedData.Formation.BusinessInformation.Business).toEqual(
+          "DomesticNonProfitCorporation"
         );
+
+        expect(lastSubmittedData.Formation.AdditionalDomesticNonProfitCorp).toEqual({
+          HasMembers: "Yes",
+          MemberTermsProvisionLocation: "Herein",
+          MemberTerms: "Board members should have at 1 year of industry experience.",
+          MemberClassPermissionsProvisionLocation: "Herein",
+          MemberClassPermissions: "Board members can serve up to 3 terms.",
+          TrusteeElectionProcessProvisionLocation: "Herein",
+          TrusteeElectionProcess: "Trustees can serve up to 2 terms.",
+          AssetDistributionProvisionLocation: "Herein",
+          AssetDistribution: "Asset distribution requires three signers.",
+        });
       });
 
-      it("posts to the endpoint with the api formation object when veteran-owned", async () => {
+      it("posts to the endpoint with business as DomesticNonProfitVeteranCorporation when veteran-owned", async () => {
         const stubResponse = generateApiResponse({});
         mockAxios.post.mockResolvedValue({ data: stubResponse });
-        const incorporators = [
-          generateFormationIncorporator({
-            name: "faraz",
-            signature: true,
-            title: "General Partner",
-            ...generateFormationNJAddress({}),
-          }),
-        ];
 
-        const members = [
-          generateFormationMember({}),
-          generateFormationMember({}),
-          generateFormationMember({}),
-        ];
         const formationFormData = generateFormationFormData(
           {
-            agentNumberOrManual: "MANUAL_ENTRY",
-            hasNonprofitBoardMembers: true,
-            nonprofitBoardMemberQualificationsSpecified: "IN_BYLAWS",
-            nonprofitBoardMemberRightsSpecified: "IN_BYLAWS",
-            nonprofitTrusteesMethodSpecified: "IN_BYLAWS",
-            nonprofitAssetDistributionSpecified: "IN_BYLAWS",
             isVeteranNonprofit: true,
-            members,
-            signers: undefined,
-            incorporators,
           },
           { legalStructureId: "nonprofit" }
         );
 
-        const userData = generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              legalStructureId: "nonprofit",
-              businessPersona: "STARTING",
-            }),
-            formationData: generateFormationData({ formationFormData }),
-          })
-        );
-        const currentBusiness = getCurrentBusiness(userData);
+        const userData = getUserDataForNonProfit(formationFormData);
+
         await client.form(userData, "hostname.com/form-business");
 
-        expect(mockAxios.post).toHaveBeenCalledWith(
-          "example.com/formation/PrepareFiling",
-          {
-            Account: "12345",
-            Key: "abcdef",
-            ReturnUrl: "hostname.com/form-business?completeFiling=true",
-            FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
-            Payer: {
-              CompanyName: formationFormData.businessName,
-              Address1: formationFormData.addressLine1,
-              Address2: formationFormData.addressLine2,
-              City: formationFormData.addressMunicipality?.name,
-              StateAbbreviation: "NJ",
-              ZipCode: formationFormData.addressZipCode,
-              Email: userData.user.email,
-            },
-            Formation: {
-              Gov2GoAnnualReports: formationFormData.annualReportNotification,
-              Gov2GoCorpWatch: formationFormData.corpWatchNotification,
-              ShortGoodStanding: formationFormData.certificateOfStanding,
-              Certified: formationFormData.certifiedCopyOfFormationDocument,
-              PayerEmail: userData.user.email,
-              SelectPaymentType: formationFormData.paymentType,
-              BusinessInformation: {
-                CompanyOrigin: "Domestic",
-                Business: "DomesticNonProfitVeteranCorporation",
-                BusinessName: formationFormData.businessName,
-                BusinessDesignator: formationFormData.businessSuffix,
-                Naic: currentBusiness.profileData.naicsCode,
-                BusinessPurpose: formationFormData.businessPurpose,
-                EffectiveFilingDate: parseDateWithFormat(
-                  formationFormData.businessStartDate,
-                  defaultDateFormat
-                ).format(formationApiDateFormat),
-                MainAddress: {
-                  Address1: formationFormData.addressLine1,
-                  Address2: formationFormData.addressLine2,
-                  City: formationFormData.addressMunicipality?.name,
-                  State: "New Jersey",
-                  Zipcode: formationFormData.addressZipCode,
-                  Country: "US",
-                },
-              },
-              AdditionalDomesticNonProfitCorp: {
-                HasMembers: "Yes",
-                MemberTermsProvisionLocation: "Bylaw",
-                MemberClassPermissionsProvisionLocation: "Bylaw",
-                TrusteeElectionProcessProvisionLocation: "Bylaw",
-                AssetDistributionProvisionLocation: "Bylaw",
-              },
-              CompanyProfit: "NonProfit",
-              RegisteredAgent: {
-                Id: undefined,
-                Email: formationFormData.agentEmail,
-                Name: formationFormData.agentName,
-                Location: {
-                  Address1: formationFormData.agentOfficeAddressLine1,
-                  Address2: formationFormData.agentOfficeAddressLine2,
-                  City: formationFormData.agentOfficeAddressMunicipality?.name,
-                  State: "New Jersey",
-                  Zipcode: formationFormData.agentOfficeAddressZipCode,
-                  Country: "US",
-                },
-              },
-              Members: [
-                {
-                  Name: members[0].name,
-                  Location: {
-                    Address1: members[0].addressLine1,
-                    Address2: members[0].addressLine2,
-                    City: members[0].addressCity,
-                    State: members[0].addressState?.name,
-                    Zipcode: members[0].addressZipCode,
-                    Country: "US",
-                  },
-                },
-                {
-                  Name: members[1].name,
-                  Location: {
-                    Address1: members[1].addressLine1,
-                    Address2: members[1].addressLine2,
-                    City: members[1].addressCity,
-                    State: members[1].addressState?.name,
-                    Zipcode: members[1].addressZipCode,
-                    Country: "US",
-                  },
-                },
-                {
-                  Name: members[2].name,
-                  Location: {
-                    Address1: members[2].addressLine1,
-                    Address2: members[2].addressLine2,
-                    City: members[2].addressCity,
-                    State: members[2].addressState?.name,
-                    Zipcode: members[2].addressZipCode,
-                    Country: "US",
-                  },
-                },
-              ],
-              Signers: [
-                {
-                  Name: incorporators[0].name,
-                  Title: "General Partner",
-                  Signed: true,
-                },
-              ],
-              ContactFirstName: formationFormData.contactFirstName,
-              ContactLastName: formationFormData.contactLastName,
-              ContactPhoneNumber: formationFormData.contactPhoneNumber,
-            },
-          },
-          { headers: { "Content-Type": "application/json" } }
+        const lastIndex = mockAxios.post.mock.calls.length - 1;
+        const lastSubmittedData = mockAxios.post.mock.calls[lastIndex][1] as ApiSubmission;
+
+        expect(lastSubmittedData.Formation.BusinessInformation.Business).toEqual(
+          "DomesticNonProfitVeteranCorporation"
         );
       });
     });
