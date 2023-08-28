@@ -48,7 +48,7 @@ export const OnboardingEssentialQuestion = <T,>(props: Props<T>): ReactElement =
         />
         {isFormFieldInValid && (
           <div className="text-error-dark text-bold margin-top-05">
-            {Config.profileDefaults.default.essentialQuestionInlineText}
+            {Config.siteWideErrorMessages.errorRadioButton}
           </div>
         )}
       </WithErrorBar>

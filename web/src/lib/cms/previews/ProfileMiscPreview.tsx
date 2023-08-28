@@ -49,7 +49,7 @@ const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
 
         <hr className="margin-y-4" />
         <h2>Essential Question Inline Error Text</h2>
-        {config.profileDefaults.default.essentialQuestionInlineText}
+        {config.siteWideErrorMessages.errorRadioButton}
         <hr className="margin-y-4" />
 
         <h2 className="margin-bottom-4">Misc Buttons & Labels:</h2>

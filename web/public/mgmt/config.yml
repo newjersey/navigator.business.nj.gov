@@ -3514,6 +3514,7 @@ collections:
               - { label: Error - No Data, name: errorTextNoData, widget: string }
               - { label: Error - Cached Only, name: errorTextCachedOnly, widget: string }
               - { label: Error - Update Failed, name: errorTextUpdateFailed, widget: string }
+              - { label: Error - Radio Button, name: errorRadioButton, widget: string }
           - label: Task Defaults
             name: taskDefaults
             collapsed: true
@@ -4691,11 +4692,6 @@ collections:
               - { label: Error Alert - Header, name: errorTextHeader, widget: string }
               - { label: Error Alert - Body, name: errorTextBody, widget: string }
               - { label: Essential Question Alert - Body, name: essentialQuestionAlertText, widget: string }
-              - {
-                  label: Essential Question Inline Error Text,
-                  name: essentialQuestionInlineText,
-                  widget: string,
-                }
               - { label: Page Title, name: pageTitle, widget: string }
               - { label: Save Button Text, name: saveButtonText, widget: string }
               - { label: Back Button Text, name: backButtonText, widget: string }
@@ -4713,6 +4709,17 @@ collections:
               - { label: Locked Field Tooltip Text, name: lockedFieldTooltipText, widget: string }
               - { label: Profile Completion Alert, name: profileCompletionAlert, widget: markdown }
               - { label: Cannabis Location Alert, name: cannabisLocationAlert, widget: string }
+              - { label: Profile Error Alert Title, name: profileErrorAlert, widget: string }
+              - {
+                  label: Profile Error Alert Single Field Text,
+                  name: profileErrorAlertOneField,
+                  widget: string,
+                }
+              - {
+                  label: Profile Error Multiple Fields Text,
+                  name: profileErrorAlertMultipleFields,
+                  widget: string,
+                }
 
   - name: "post-onboarding-content"
     label: "Post Onboarding Content"

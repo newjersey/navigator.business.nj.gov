@@ -1066,25 +1066,6 @@ describe("profile - starting business", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("prevents user from saving when petcare is selected as industry, but essential question is not answered", async () => {
-    const business = generateBusinessForProfile({
-      onboardingFormProgress: "UNSTARTED",
-      profileData: generateProfileData({
-        businessPersona: "STARTING",
-        industryId: "car-service",
-        ...emptyIndustrySpecificData,
-      }),
-    });
-    renderPage({ business, setRegistrationModalIsVisible });
-    clickSave();
-
-    await waitFor(() => {
-      expect(
-        screen.getByText(Config.profileDefaults.default.essentialQuestionInlineText)
-      ).toBeInTheDocument();
-    });
-  });
-
   it("resets naicsCode task and data when the industry is changed and page is saved", async () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({
@@ -1139,9 +1120,7 @@ describe("profile - starting business", () => {
       renderPage({ business, setRegistrationModalIsVisible });
       clickSave();
       await waitFor(() => {
-        expect(
-          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0]
-        ).toBeInTheDocument();
+        expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
       });
     }
   );
