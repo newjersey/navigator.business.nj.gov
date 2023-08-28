@@ -10,11 +10,9 @@ import { ReactElement, useContext } from "react";
 export const ProfileOpportunitiesAlert = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);
   const { Config } = useConfig();
-  const unansweredOpportunityFields = getFieldsForProfile(state.profileData.legalStructureId).filter(
-    (field) => {
-      return !isFieldAnswered(field, state.profileData);
-    }
-  );
+  const unansweredOpportunityFields = getFieldsForProfile(state.profileData).filter((field) => {
+    return !isFieldAnswered(field, state.profileData);
+  });
 
   const getLabel = (field: ProfileContentField): string => {
     const contentFromConfig = getProfileConfig({
