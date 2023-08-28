@@ -390,7 +390,7 @@ describe("<NavBar />", () => {
           <WithStatefulUserData initialUserData={userData}>
             <NavBar landingPage={false} showSidebar={false} />
           </WithStatefulUserData>,
-          { user, isAuthenticated: IsAuthenticated.FALSE }
+          { isAuthenticated: IsAuthenticated.FALSE }
         )
       );
       fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestText));
@@ -529,7 +529,7 @@ describe("<NavBar />", () => {
             <WithStatefulUserData initialUserData={userData}>
               <NavBar landingPage={false} task={undefined} showSidebar={false} />
             </WithStatefulUserData>,
-            { user, isAuthenticated: IsAuthenticated.FALSE }
+            { isAuthenticated: IsAuthenticated.FALSE }
           )
         );
         fireEvent.click(screen.getByTestId("nav-menu-open"));

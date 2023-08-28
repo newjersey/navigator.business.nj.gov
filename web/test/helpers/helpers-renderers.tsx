@@ -3,23 +3,23 @@ import { AuthContext } from "@/contexts/authContext";
 import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
-import { AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
+import { ActiveUser, AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
 import { Roadmap, UserDataError } from "@/lib/types/types";
-import { BusinessUser, RegistrationStatus } from "@businessnjgovnavigator/shared/";
+import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { Dispatch, ReactElement, SetStateAction } from "react";
 
 export const withAuth = (
   subject: ReactElement,
   context: {
-    user?: BusinessUser;
+    activeUser?: ActiveUser;
     dispatch?: Dispatch<AuthAction>;
     isAuthenticated?: IsAuthenticated;
   }
 ): ReactElement => {
   const isAuthenticated =
-    context.isAuthenticated || (context.user ? IsAuthenticated.TRUE : IsAuthenticated.FALSE);
+    context.isAuthenticated || (context.activeUser ? IsAuthenticated.TRUE : IsAuthenticated.FALSE);
   const dispatch = context.dispatch || jest.fn();
-  const state: AuthState = { isAuthenticated, user: context.user };
+  const state: AuthState = { isAuthenticated, activeUser: context.activeUser };
   return <AuthContext.Provider value={{ state, dispatch }}>{subject}</AuthContext.Provider>;
 };
 

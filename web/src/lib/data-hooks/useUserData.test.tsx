@@ -67,7 +67,7 @@ describe("useUserData", () => {
               <TestComponent />
             </SWRConfig>
           </RoadmapContext.Provider>,
-          { user: currentUser, dispatch: mockDispatch, isAuthenticated }
+          { activeUser: currentUser, dispatch: mockDispatch, isAuthenticated }
         ),
         undefined,
         mockSetError
@@ -168,23 +168,6 @@ describe("useUserData", () => {
       });
 
       expect(mockApi.getUserData).toHaveBeenCalled();
-    });
-
-    it("update auth state when data is initially loaded", async () => {
-      const currentUser = generateUser({});
-      const currentUserData = generateUserData({ user: { ...currentUser, myNJUserKey: "1234" } });
-      mockApi.getUserData.mockResolvedValue(currentUserData);
-      const { refresh } = await setupHook(currentUser, IsAuthenticated.TRUE);
-      await act(() => {
-        return refresh();
-      });
-      expect(mockDispatch).toHaveBeenCalledWith({
-        type: "UPDATE_USER",
-        user: {
-          ...currentUser,
-          myNJUserKey: currentUserData.user.myNJUserKey,
-        },
-      });
     });
 
     it("sets error to NO_DATA when api call fails with no cache", async () => {

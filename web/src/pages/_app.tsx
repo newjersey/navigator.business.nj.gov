@@ -4,7 +4,7 @@ import "@newjersey/njwds/dist/css/styles.css";
 import "../styles/main.scss";
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 import { AuthReducer, authReducer } from "@/lib/auth/AuthContext";
-import { getCurrentUser } from "@/lib/auth/sessionHelper";
+import { getActiveUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
 import { Roadmap, UpdateQueue, UserDataError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
@@ -107,11 +107,11 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
   useMountEffect(() => {
     if (!pageProps.noAuth) {
-      getCurrentUser()
-        .then((currentUser) => {
+      getActiveUser()
+        .then((activeUser) => {
           dispatch({
             type: "LOGIN",
-            user: currentUser,
+            activeUser: activeUser,
           });
         })
         .catch(() => {
@@ -141,7 +141,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       <Script src="/intercom/settings.js" />
       <Script src="/intercom/init.js" />
       <IntercomScript
-        user={state.user}
+        user={updateQueue?.current().user}
         operatingPhaseId={operatingPhaseId}
         legalStructureId={legalStructureId}
         industryId={industryId}

@@ -4,7 +4,7 @@ import Home from "@/pages/index";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { setMockUserDataResponse, useMockBusiness } from "@/test/mock/mockUseUserData";
-import { generateProfileData, generateUser } from "@businessnjgovnavigator/shared";
+import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { render } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
@@ -23,19 +23,19 @@ describe("HomePage", () => {
       onboardingFormProgress: "COMPLETED",
       profileData: generateProfileData({ businessPersona: "STARTING" }),
     });
-    render(withAuth(<Home />, { user: generateUser({}) }));
+    render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.TRUE }));
     expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
   });
 
   it("redirects to onboarding page when user has not completed onboarding flow", () => {
     useMockBusiness({ onboardingFormProgress: "UNSTARTED" });
-    render(withAuth(<Home />, { user: generateUser({}) }));
+    render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.TRUE }));
     expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
   });
 
   it("redirects to dashboard page when it is unknown if user has completed onboarding flow or not", () => {
     setMockUserDataResponse({ error: "NO_DATA", userData: undefined });
-    render(withAuth(<Home />, { user: generateUser({}) }));
+    render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.TRUE }));
     expect(mockPush).toHaveBeenCalledWith(`${ROUTES.dashboard}?error=true`);
   });
 
