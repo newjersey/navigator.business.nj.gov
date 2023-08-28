@@ -476,4 +476,30 @@ describe("profile - shared", () => {
       ).not.toBeInTheDocument();
     });
   });
+
+  describe("profile error alert", () => {
+    it.each(["STARTING", "FOREIGN"])(
+      "displays alert with the header if industry field has an error when %s",
+      async (businessPersona) => {
+        const business = generateBusinessForProfile({
+          profileData: generateProfileData({
+            businessPersona: businessPersona as BusinessPersona,
+            industryId: undefined,
+            foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
+            nexusLocationInNewJersey: businessPersona === "FOREIGN" ? false : undefined,
+            foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : undefined,
+          }),
+        });
+        renderPage({ business, setRegistrationModalIsVisible });
+        clickSave();
+        const profileAlert = screen.getByTestId("profile-error-alert");
+        await waitFor(() => {
+          expect(profileAlert).toBeInTheDocument();
+        });
+        expect(
+          within(profileAlert).getByText(Config.profileDefaults.fields.industryId.default.header)
+        ).toBeInTheDocument();
+      }
+    );
+  });
 });

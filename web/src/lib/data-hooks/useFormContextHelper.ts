@@ -20,6 +20,7 @@ export const useFormContextHelper = <
   onTabChange: (tab: Tab) => void;
   isValid: () => boolean;
   getErrors: () => FieldError[];
+  getInvalidFieldIds: () => string[];
   tab: Tab;
   state: FormContextType<T>;
 } => {
@@ -86,6 +87,12 @@ export const useFormContextHelper = <
     Object.values(fieldStates)
       .filter((k) => (k as FieldStatus<FieldError>).invalid && (k as FieldStatus<FieldError>).updated)
       .flatMap((k) => (k as FieldStatus<FieldError>).errorTypes ?? []);
+
+  const getInvalidFieldIds = (): string[] => {
+    return Object.keys(fieldStates).filter((field) => {
+      return fieldStates[field as keyof T].invalid;
+    });
+  };
 
   const FormFuncWrapper: (
     onSubmitFunc: () => void | Promise<void>,
@@ -167,6 +174,7 @@ export const useFormContextHelper = <
     onTabChange,
     isValid,
     getErrors,
+    getInvalidFieldIds,
     state: {
       fieldStates,
       runValidations: submitted || stagingTab !== undefined,

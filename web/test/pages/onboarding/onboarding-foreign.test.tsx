@@ -349,9 +349,7 @@ describe("onboarding - foreign business", () => {
         expect(screen.getByTestId("step-3")).toBeInTheDocument();
         expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
         expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
-        expect(
-          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0]
-        ).toBeInTheDocument();
+        expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
       }
     );
 
@@ -390,13 +388,9 @@ describe("onboarding - foreign business", () => {
           page.clickNext();
         });
         expect(screen.getByTestId("step-3")).toBeInTheDocument();
-        expect(
-          screen.getAllByText(Config.profileDefaults.default.essentialQuestionInlineText)[0]
-        ).toBeInTheDocument();
+        expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
         page.chooseEssentialQuestionRadio(industryId, 0);
-        expect(
-          screen.queryByText(Config.profileDefaults.default.essentialQuestionInlineText)
-        ).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.siteWideErrorMessages.errorRadioButton)).not.toBeInTheDocument();
       }
     );
   });

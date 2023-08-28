@@ -322,7 +322,7 @@
           "header": "Industry",
           "headerContextualInfo": "",
           "description": "",
-          "errorTextRequired": "Select a industry.",
+          "errorTextRequired": "Select an industry.",
           "searchAffirmation": "_\"**${searchText}**\" falls under the industries below:_"
         },
         "onboarding": {
@@ -392,6 +392,9 @@
       }
     },
     "default": {
+      "profileErrorAlert": "Complete ${fieldText} to access your dashboard:",
+      "profileErrorAlertOneField": "the field",
+      "profileErrorAlertMultipleFields": "these fields",
       "lockedFieldTooltipText": "This information cannot be changed because it was submitted to the NJ Department of Treasury.",
       "errorTextHeader": "Error",
       "backButtonText": "Cancel",
@@ -408,7 +411,6 @@
       "errorTextBody": "Review your information in the fields marked below.",
       "escapeModalHeader": "Are you sure you want to continue?",
       "profileTabNoteTitle": "Notes",
-      "essentialQuestionInlineText": "Make a selection by clicking on a button.",
       "saveButtonText": "Save",
       "escapeModalReturn": "Continue without saving",
       "successTextHeader": "Business Profile Saved",
