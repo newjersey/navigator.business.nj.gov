@@ -1,11 +1,10 @@
-import { ABStorageFactory } from "@/lib/storage/ABStorage";
+import { ActiveUser } from "@/lib/auth/AuthContext";
 import { Auth } from "@aws-amplify/auth";
 import { Sha256 } from "@aws-crypto/sha256-browser";
 import { HttpRequest } from "@aws-sdk/protocol-http";
 import { S3RequestPresigner } from "@aws-sdk/s3-request-presigner";
 import { parseUrl } from "@aws-sdk/url-parser";
 import { formatUrl } from "@aws-sdk/util-format-url";
-import { BusinessUser } from "@businessnjgovnavigator/shared/";
 import axios, { AxiosResponse } from "axios";
 
 type CognitoIdPayload = {
@@ -98,7 +97,7 @@ export const getCurrentToken = async (): Promise<string> => {
   return cognitoSession.getIdToken().getJwtToken();
 };
 
-export const getCurrentUser = async (): Promise<BusinessUser> => {
+export const getActiveUser = async (): Promise<ActiveUser> => {
   configureAmplify();
   const cognitoSession = await Auth.currentSession();
   const cognitoPayload = cognitoSession.getIdToken().decodePayload() as CognitoIdPayload;
@@ -109,21 +108,16 @@ export const getCurrentUser = async (): Promise<BusinessUser> => {
       "custom:identityId": credentials.identityId,
     });
   }
-  return cognitoPayloadToBusinessUser(cognitoPayload);
+  return cognitoPayloadToActiveUser(cognitoPayload);
 };
 
-const cognitoPayloadToBusinessUser = (cognitoPayload: CognitoIdPayload): BusinessUser => {
+const cognitoPayloadToActiveUser = (cognitoPayload: CognitoIdPayload): ActiveUser => {
   const myNJIdentityPayload = cognitoPayload.identities?.find((it) => {
     return it.providerName === "myNJ";
   });
   return {
-    name: undefined,
     id: myNJIdentityPayload?.userId || cognitoPayload.sub,
     email: cognitoPayload.email,
-    externalStatus: {},
-    userTesting: false,
-    receiveNewsletter: false,
-    abExperience: ABStorageFactory().getExperience() ?? "ExperienceA",
   };
 };
 

@@ -54,6 +54,7 @@ import {
   TaskProgress,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
@@ -145,7 +146,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       if (
         !router.isReady ||
         hasHandledRouting.current ||
-        !state.user ||
+        !state.activeUser ||
         state.isAuthenticated === IsAuthenticated.UNKNOWN ||
         !hasCompletedFetch
       ) {
@@ -168,7 +169,12 @@ const OnboardingPage = (props: Props): ReactElement => {
         setProfileData(currentUserData.businesses[currentUserData.currentBusinessId].profileData);
         setCurrentFlow(getFlow(currentUserData));
       } else {
-        currentUserData = createEmptyUserData(state.user);
+        const emptyUser = {
+          ...createEmptyUser(),
+          email: state.activeUser.email,
+          id: state.activeUser.id,
+        };
+        currentUserData = createEmptyUserData(emptyUser);
         setRegistrationDimension("Began Onboarding");
         await createUpdateQueue(currentUserData);
         setProfileData(currentUserData.businesses[currentUserData.currentBusinessId].profileData);
@@ -196,7 +202,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.isReady, state.user, state.isAuthenticated, hasCompletedFetch]);
+  }, [router.isReady, state.activeUser, state.isAuthenticated, hasCompletedFetch]);
 
   const setIndustryAndRouteToPage = async (
     business: Business,

@@ -1,3 +1,4 @@
+import { ActiveUser } from "@/lib/auth/AuthContext";
 import {
   AllCounties,
   Certification,
@@ -339,6 +340,14 @@ export const generateOutageConfig = (overrides: Partial<OutageConfig>): OutageCo
     FEATURE_ENABLE_OUTAGE_ALERT_BAR: randomInt() % 2 === 0,
     OUTAGE_ALERT_MESSAGE: `some-message-${randomInt()}`,
     OUTAGE_ALERT_TYPE: randomElementFromArray(["ALL", "LOGGED_IN_ONLY", "UNREGISTERED_ONLY"]),
+    ...overrides,
+  };
+};
+
+export const generateActiveUser = (overrides: Partial<ActiveUser>): ActiveUser => {
+  return {
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
     ...overrides,
   };
 };
