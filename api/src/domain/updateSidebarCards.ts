@@ -47,10 +47,6 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
     hideCard("funding-nudge");
   }
 
-  if (operatingPhase === "UP_AND_RUNNING") {
-    hideCard("task-progress");
-  }
-
   if (LookupOperatingPhaseById(operatingPhase).displayGoToProfileNudge) {
     const isEveryOpportunityFieldAnswered = getFieldsForProfile(currentBusiness.profileData).every(
       (field) => {

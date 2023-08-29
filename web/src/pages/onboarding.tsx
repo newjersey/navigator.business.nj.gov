@@ -318,16 +318,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         };
 
         newUserData = await api.postGetAnnualFilings(newUserData);
-        const preferences = newUserData.businesses[newUserData.currentBusinessId].preferences;
-
-        updateQueue.queue(newUserData).queuePreferences({
-          visibleSidebarCards:
-            newProfileData.businessPersona === "OWNING"
-              ? preferences.visibleSidebarCards.filter((cardId: string) => {
-                  return cardId !== "task-progress";
-                })
-              : [...preferences.visibleSidebarCards, "task-progress"],
-        });
+        updateQueue.queue(newUserData);
 
         if (newProfileData.legalStructureId) {
           const completed: TaskProgress = "COMPLETED";
