@@ -17,7 +17,7 @@ import {
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { screen, waitFor, within } from "@testing-library/react";
+import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -68,18 +68,17 @@ describe("onboarding - owning a business", () => {
       expect(screen.getByLabelText("Sector")).toBeInTheDocument();
     });
 
-    it("prevents user from moving after Step 1 if you have not entered a sector", async () => {
-      const userData = generateTestUserData({ sectorId: undefined });
-      useMockRouter({ isReady: true, query: { page: "1" } });
-      const { page } = renderPage({ userData });
-      page.clickNext();
+    it("does not allow OWNING user persona to move past Step 1 if user has not entered a sector", async () => {
+      const { page } = renderPage({ userData: undefined });
+      page.chooseRadio("business-persona-owning");
+      fireEvent.click(screen.getByTestId("next"));
       await waitFor(() => {
-        expect(screen.getByTestId("step-1")).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
+        ).toBeInTheDocument();
       });
-      expect(
-        screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
-      ).toBeInTheDocument();
       expect(screen.getByTestId("banner-alert-REQUIRED_REVIEW_INFO_BELOW")).toBeInTheDocument();
+      expect(screen.getByTestId("step-1")).toBeInTheDocument();
     });
 
     it("allows user to move past Step 1 if you have entered a sector", async () => {
