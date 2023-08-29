@@ -1,3 +1,41 @@
+# [5.25.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.24.0...v5.25.0) (2023-08-29)
+
+
+### Bug Fixes
+
+* [[#185153256](https://github.com/newjersey/navigator.business.nj.gov/issues/185153256)] config text for veteran ([67a9a92](https://github.com/newjersey/navigator.business.nj.gov/commit/67a9a92954e8cc564e1f6c18b038a6a8f4418bc8))
+* [[#185307864](https://github.com/newjersey/navigator.business.nj.gov/issues/185307864)] non essential question text styling ([47bdf83](https://github.com/newjersey/navigator.business.nj.gov/commit/47bdf83f315ae8b21cbe76ddd91a9ed6f7e8d48c))
+* [[#185307864](https://github.com/newjersey/navigator.business.nj.gov/issues/185307864)] only adds task if non essential question id is in industry file ([371f75f](https://github.com/newjersey/navigator.business.nj.gov/commit/371f75fdd43dfa48ba6d1f4d696e666ecea5ee8d))
+* [[#185307864](https://github.com/newjersey/navigator.business.nj.gov/issues/185307864)] test to check the optional suffix is being added to question text ([9266346](https://github.com/newjersey/navigator.business.nj.gov/commit/926634658add848542bbf752224dd9ffed90f49e))
+* [[#185362965](https://github.com/newjersey/navigator.business.nj.gov/issues/185362965)] green box bug fix ([2d14697](https://github.com/newjersey/navigator.business.nj.gov/commit/2d14697d8d1b050621b3db58550d471ee2bcc92d))
+* [[#185522114](https://github.com/newjersey/navigator.business.nj.gov/issues/185522114)] Board of Directors and Trustees incorrectly labeled as Members in error banner ([c4b94f7](https://github.com/newjersey/navigator.business.nj.gov/commit/c4b94f711afe9aefbe5f5064ec2a3adbc5390fd6))
+* 185681556 sidebar test removal ([6ff6014](https://github.com/newjersey/navigator.business.nj.gov/commit/6ff60146d11208d0ca348defcbfa766e64ef52b2))
+* date logic in getLicenseCalendarEvent tests should not depend on current date ([52c544f](https://github.com/newjersey/navigator.business.nj.gov/commit/52c544f4aecc248e12b84eccfac25557d3df1739))
+* flaky formation nonprofit api test ([4341e60](https://github.com/newjersey/navigator.business.nj.gov/commit/4341e60cbd49e47dd59c6665665885e9a4d235aa))
+* flaky formation test ([c7cd813](https://github.com/newjersey/navigator.business.nj.gov/commit/c7cd813985d9db0bdb3363634c4eee27ff72d798))
+* updating filterFundings to handle undefined certification values ([2739256](https://github.com/newjersey/navigator.business.nj.gov/commit/27392564348f760f6f5ad3fd1c37d0138655b37f))
+
+
+### Features
+
+* [[#184770173](https://github.com/newjersey/navigator.business.nj.gov/issues/184770173)] update postOnboarding to change task status with checkboxes ([5179715](https://github.com/newjersey/navigator.business.nj.gov/commit/517971563879abd1401f28aa737c1f1ed4afdf59))
+* [[#185153256](https://github.com/newjersey/navigator.business.nj.gov/issues/185153256)] non-profit formation ([6d0537c](https://github.com/newjersey/navigator.business.nj.gov/commit/6d0537cd825b92da0616f60535cd9cf745cc0a4b))
+* [[#185166887](https://github.com/newjersey/navigator.business.nj.gov/issues/185166887)] move name/email to deferred onboarding ([a4bd05e](https://github.com/newjersey/navigator.business.nj.gov/commit/a4bd05e6410208f08c060f3c787e0298db6dee4a))
+* [[#185307864](https://github.com/newjersey/navigator.business.nj.gov/issues/185307864)] non essential questions for poppy and dakota nexus ([8a7ac86](https://github.com/newjersey/navigator.business.nj.gov/commit/8a7ac8677ff82e3e1bf18ad8c41f0af3e1e132fb))
+* [[#185355762](https://github.com/newjersey/navigator.business.nj.gov/issues/185355762)] update broken link checker ([0d3bfd6](https://github.com/newjersey/navigator.business.nj.gov/commit/0d3bfd6a3dbeb43cb0d64f5967491992349ffe36))
+* [[#185355762](https://github.com/newjersey/navigator.business.nj.gov/issues/185355762)] update broken link checker to account for basic auth ([03f5bc9](https://github.com/newjersey/navigator.business.nj.gov/commit/03f5bc9b5032a08f40c641aff6910e179aa51d5e))
+* [[#185355762](https://github.com/newjersey/navigator.business.nj.gov/issues/185355762)] update broken link checker to account for basic auth accross all environments ([33220ff](https://github.com/newjersey/navigator.business.nj.gov/commit/33220ff68023acc18e941d0e6ebfeeee10b9333c))
+* [[#185355762](https://github.com/newjersey/navigator.business.nj.gov/issues/185355762)] update broken link checker to only run locally and allow for file download ([c20feb2](https://github.com/newjersey/navigator.business.nj.gov/commit/c20feb27ead42e3446797e8837d79c6cea7c5087))
+* [[#185617818](https://github.com/newjersey/navigator.business.nj.gov/issues/185617818)] left align description & text fields beneath nubered lists ([4a07129](https://github.com/newjersey/navigator.business.nj.gov/commit/4a07129678b2c1c1af5fcce985adcefe404842ed))
+* [[#185617818](https://github.com/newjersey/navigator.business.nj.gov/issues/185617818)] left align description text and fields beneath numbered lists ([3d8a859](https://github.com/newjersey/navigator.business.nj.gov/commit/3d8a859927df8894851a526c500c17b7a66510dd))
+* [[#185617852](https://github.com/newjersey/navigator.business.nj.gov/issues/185617852)] increase help button padding ([60eae91](https://github.com/newjersey/navigator.business.nj.gov/commit/60eae9108ecddd7aff495a8477024d67d46d766a))
+* [[#185617852](https://github.com/newjersey/navigator.business.nj.gov/issues/185617852)] increase help button padding mobile ([0e915da](https://github.com/newjersey/navigator.business.nj.gov/commit/0e915da5596fa06c825442fe6fc12e8261ef193f))
+* [[#185680966](https://github.com/newjersey/navigator.business.nj.gov/issues/185680966)] dakota remote worker/seller navbar text ([6cf51c7](https://github.com/newjersey/navigator.business.nj.gov/commit/6cf51c7697539efe5e219d5c5b7c558285edb64d))
+* [[#185681496](https://github.com/newjersey/navigator.business.nj.gov/issues/185681496)] remove home-based prompt for up-and-running ([9994ec0](https://github.com/newjersey/navigator.business.nj.gov/commit/9994ec00d65c1acf84cff253851edf688261a06a))
+* [[#185681556](https://github.com/newjersey/navigator.business.nj.gov/issues/185681556)] remove welecome card ([57759b1](https://github.com/newjersey/navigator.business.nj.gov/commit/57759b13012f2ba92492423f9facc1c1bf3cf8e9))
+* 185681556 remove sidebarcontainer tests for welcome ([dc07825](https://github.com/newjersey/navigator.business.nj.gov/commit/dc07825c2c2210ee7719268ad443e6e6a1a81b0d))
+* 185800334 bolder headers for non profit questions and alignment fix ([6d6e61f](https://github.com/newjersey/navigator.business.nj.gov/commit/6d6e61f64f887ee7ca3f6da6c04ba1b100679f2f))
+
 # [5.24.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.23.5...v5.24.0) (2023-08-02)
 
 
