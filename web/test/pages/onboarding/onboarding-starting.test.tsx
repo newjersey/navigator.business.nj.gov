@@ -226,18 +226,7 @@ describe("onboarding - starting a business", () => {
       });
     });
 
-    expect(currentUserData()).toEqual({
-      ...expectedUserData,
-      businesses: {
-        [businessId]: {
-          ...expectedUserData.businesses[businessId],
-          preferences: {
-            ...expectedUserData.businesses[businessId].preferences,
-            visibleSidebarCards: ["task-progress"],
-          },
-        },
-      },
-    });
+    expect(currentUserData()).toEqual(expectedUserData);
   });
 
   it("removes required fields error when user goes back", async () => {

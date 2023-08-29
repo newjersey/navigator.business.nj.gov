@@ -3,7 +3,6 @@ import { SidebarCardFundingNudge } from "@/components/dashboard/SidebarCardFundi
 import { SidebarCardGeneric } from "@/components/dashboard/SidebarCardGeneric";
 import { SidebarCardGoToProfileNudge } from "@/components/dashboard/SidebarCardGoToProfileNudge";
 import { SidebarCardRegisteredForTaxesNudge } from "@/components/dashboard/SidebarCardRegisteredForTaxesNudge";
-import { SidebarCardTaskProgress } from "@/components/dashboard/SidebarCardTaskProgress";
 import { SidebarCardContent } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
@@ -16,7 +15,6 @@ export const SidebarCard = (props: Props): ReactElement => {
   return (
     <>
       {rswitch(props.card.id, {
-        "task-progress": <SidebarCardTaskProgress card={props.card} />,
         "funding-nudge": <SidebarCardFundingNudge card={props.card} />,
         "formation-nudge": <SidebarCardFormationNudge card={props.card} />,
         "registered-for-taxes-nudge": <SidebarCardRegisteredForTaxesNudge card={props.card} />,

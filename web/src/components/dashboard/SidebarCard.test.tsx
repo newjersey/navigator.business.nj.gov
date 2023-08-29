@@ -17,12 +17,6 @@ describe("<SidebarCard />", () => {
     useMockRouter({});
   });
 
-  it("renders SidebarCardTaskProgress for id task-progress", () => {
-    const card = generateSidebarCardContent({ id: "task-progress" });
-    render(<SidebarCard card={card} />);
-    expect(screen.getByRole("progressbar")).toBeInTheDocument();
-  });
-
   it("renders SidebarCardFundingNudge for id funding-nudge", () => {
     const card = generateSidebarCardContent({ id: "funding-nudge", ctaText: "Click me" });
     render(<SidebarCard card={card} />);

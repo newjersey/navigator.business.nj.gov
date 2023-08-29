@@ -268,23 +268,4 @@ describe("updateRoadmapSidebarCards", () => {
       }
     );
   });
-
-  describe("when operatingPhase is UP_AND_RUNNING", () => {
-    it("removes task-progress card", () => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase: "UP_AND_RUNNING",
-            industryId: "generic",
-          }),
-          preferences: generatePreferences({ visibleSidebarCards: ["task-progress"] }),
-        })
-      );
-
-      const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        "task-progress"
-      );
-    });
-  });
 });
