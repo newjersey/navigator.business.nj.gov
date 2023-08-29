@@ -21,12 +21,16 @@ export const searchCertifications = (certifications: Certification[], term: stri
     const agencyNames = cert.agency
       ? cert.agency.map((it) => LookupFundingAgencyById(it).name.toLowerCase())
       : [];
+    const filename = cert.filename.toLowerCase();
+    const urlSlug = cert.urlSlug.toLowerCase();
 
     const blockTexts = [content, description];
     const labelledTexts = [
       { content: cta, label: "CTA Text" },
       { content: ctaLink, label: "CTA Link" },
       { content: name, label: "Name" },
+      { content: filename, label: "Filename" },
+      { content: urlSlug, label: "Url Slug" },
     ];
 
     const listTexts = [
