@@ -2,7 +2,6 @@
   "naicsCodes": "621399",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": [],
   "roadmapSteps": [
     {
       "step": 1,
@@ -49,6 +48,7 @@
     }
   ],
   "name": "Acupuncture",
+  "nonEssentialQuestionsIds": [],
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true

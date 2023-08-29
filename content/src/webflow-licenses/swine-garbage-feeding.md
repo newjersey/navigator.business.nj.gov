@@ -1,13 +1,13 @@
 ---
-id: "swine-garbage-feeding"
-webflowId: "5f7728e690d9ac36621309d2"
-urlSlug: "swine-garbage-feeding"
-webflowName: "Swine, Garbage-Feeding"
-callToActionLink: "http://liberty.state.nj.us/agriculture/divisions/ah/news/regulations.html"
-callToActionText: ""
+urlSlug: swine-garbage-feeding
+webflowName: Swine, Garbage-Feeding
 agencyId: agriculture
-agencyAdditionalContext: "Division of Animal Health"
-divisionPhone: "(609) 671-6400"
-webflowIndustry: "Swine"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Division of Animal Health
+callToActionText: ""
+callToActionLink: https://www.nj.gov/agriculture/divisions/ah/
+webflowIndustry: Swine
+divisionPhone: (609) 671-6400
+id: swine-garbage-feeding
+webflowId: 5f7728e690d9ac36621309d2
+licenseCertificationClassification: LICENSE
 ---

@@ -1,12 +1,12 @@
 ---
-id: "fire-extinguisher-inspection-servicing"
-webflowId: "640b846803e093f277dd74e6"
-urlSlug: "fire-extinguisher-inspection-servicing"
-webflowName: "Fire Extinguisher Inspection & Servicing"
-filename: "fire-extinguisher-inspection-servicing"
-callToActionLink: "https://www.nj.gov/dca/divisions/dfs/forms/"
+filename: fire-extinguisher-inspection-servicing
+urlSlug: fire-extinguisher-inspection-servicing
+webflowName: Fire Extinguisher Inspection & Servicing
 agencyId: nj-community-affairs
-divisionPhone: "609-984-7860"
-webflowIndustry: "Fire Extinguisher"
-licenseCertificationClassification: "CONTACT"
+callToActionLink: https://firesolutions.dca.nj.gov/
+webflowIndustry: Fire Extinguisher
+divisionPhone: 609-984-7860
+id: fire-extinguisher-inspection-servicing
+webflowId: 640b846803e093f277dd74e6
+licenseCertificationClassification: CONTACT
 ---

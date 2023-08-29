@@ -1,13 +1,13 @@
 ---
-id: "art-school"
-webflowId: "5f7729308075e8dcb1a8d93e"
-urlSlug: "art-school"
-webflowName: "Art School"
-callToActionLink: "http://nj.gov/education/cte/ppcs/"
-callToActionText: ""
+urlSlug: art-school
+webflowName: Art School
 agencyId: education
 agencyAdditionalContext: ""
-divisionPhone: "(609) 376-3500"
-webflowIndustry: "Art School"
-licenseCertificationClassification: "CERTIFICATE OF APPROVAL"
+callToActionText: ""
+callToActionLink: https://nj.gov/education/cte/postsec/ppcs/
+webflowIndustry: Art School
+divisionPhone: (609) 376-3500
+id: art-school
+webflowId: 5f7729308075e8dcb1a8d93e
+licenseCertificationClassification: CERTIFICATE OF APPROVAL
 ---

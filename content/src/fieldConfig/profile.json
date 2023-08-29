@@ -240,14 +240,6 @@
           "altDescription": "Do you plan to be a `home-based business|home-based-business` ?"
         }
       },
-      "isNonprofitOnboardingRadio": {
-        "default": {
-          "header": "Nonprofit",
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Is your business a nonprofit?"
-        }
-      },
       "legalStructureId": {
         "default": {
           "header": "Business Structure",
@@ -296,9 +288,9 @@
       },
       "employerId": {
         "default": {
-          "header": "Employer Identification Number",
+          "header": "Employer Identification Number (EIN)",
           "headerContextualInfo": "ein",
-          "headerNotBolded": "(EIN)",
+          "headerNotBolded": "",
           "description": ""
         }
       },
@@ -315,6 +307,14 @@
         "default": {
           "header": "",
           "placeholder": "If you are an LLC, Corporation, or LLP, we will automatically add your formation documents once you [Form Your Business](/tasks/form-business-entity) on our site."
+        }
+      },
+      "isNonprofitOnboardingRadio": {
+        "default": {
+          "header": "Nonprofit",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Is your business a nonprofit?"
         }
       },
       "industryId": {

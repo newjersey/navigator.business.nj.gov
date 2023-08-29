@@ -1,12 +1,12 @@
 ---
-id: "osha"
-webflowId: "640b84673aebab12cc4b4495"
-urlSlug: "osha"
-webflowName: "OSHA"
-filename: "osha"
-callToActionLink: "http://osha.gov/oshdir/nj.html"
+filename: osha
+urlSlug: osha
+webflowName: OSHA
 agencyAdditionalContext: "OSHA: Occupational Safety and Health Administration"
-divisionPhone: "(212) 337-2378"
-webflowIndustry: "OSHA"
-licenseCertificationClassification: "CONTACT"
+callToActionLink: https://www.osha.gov/stateplans/nj
+webflowIndustry: OSHA
+divisionPhone: (212) 337-2378
+id: osha
+webflowId: 640b84673aebab12cc4b4495
+licenseCertificationClassification: CONTACT
 ---
