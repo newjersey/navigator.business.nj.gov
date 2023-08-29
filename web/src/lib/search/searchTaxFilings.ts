@@ -22,6 +22,8 @@ export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
     const id = filing.id?.toLowerCase();
     const info = filing.additionalInfo?.toLowerCase();
     const frequency = filing.frequency?.toLowerCase();
+    const filename = filing.filename.toLowerCase();
+    const urlSlug = filing.urlSlug.toLowerCase();
 
     const blockTexts = [content];
     if (details) {
@@ -39,6 +41,8 @@ export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
       { content: id, label: "ID" },
       { content: info, label: "Additional Info" },
       { content: frequency, label: "Frequency" },
+      { content: filename, label: "Filename" },
+      { content: urlSlug, label: "Url Slug" },
     ];
 
     match = findMatchInBlock(blockTexts, term, match);

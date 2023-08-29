@@ -20,6 +20,8 @@ export const searchTasks = (tasks: Task[], term: string): Match[] => {
     const agencyContext = task.agencyAdditionalContext?.toLowerCase();
     const formName = task.formName?.toLowerCase();
     const summary = task.summaryDescriptionMd?.toLowerCase();
+    const filename = task.filename.toLowerCase();
+    const urlSlug = task.urlSlug.toLowerCase();
 
     const blockTexts = [content, summary];
     const labelledTexts = [
@@ -29,6 +31,8 @@ export const searchTasks = (tasks: Task[], term: string): Match[] => {
       { content: agency, label: "Agency" },
       { content: agencyContext, label: "Agency Additional Context" },
       { content: formName, label: "Form Name" },
+      { content: filename, label: "Filename" },
+      { content: urlSlug, label: "Url Slug" },
     ];
 
     match = findMatchInBlock(blockTexts, term, match);

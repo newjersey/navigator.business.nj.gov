@@ -30,6 +30,8 @@ export const searchFundings = (fundings: Funding[], term: string): Match[] => {
     const purpose = funding.programPurpose?.toLowerCase();
     const contact = funding.agencyContact?.toLowerCase();
     const sectors = funding.sector ? funding.sector.map((it) => it.toLowerCase()) : [];
+    const filename = funding.filename.toLowerCase();
+    const urlSlug = funding.urlSlug.toLowerCase();
 
     const blockTexts = [content, description];
     const labelledTexts = [
@@ -42,6 +44,8 @@ export const searchFundings = (fundings: Funding[], term: string): Match[] => {
       { content: stage, label: "Stage" },
       { content: purpose, label: "Program Purpose" },
       { content: contact, label: "Agency Contact" },
+      { content: filename, label: "Filename" },
+      { content: urlSlug, label: "Url Slug" },
     ];
 
     const listTexts = [

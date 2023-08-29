@@ -21,6 +21,8 @@ export const searchWebflowLicenses = (licenses: WebflowLicense[], term: string):
     const classification = license.licenseCertificationClassification?.toLowerCase();
     const industry = license.webflowIndustry?.toLowerCase();
     const summary = license.summaryDescriptionMd?.toLowerCase();
+    const filename = license.filename.toLowerCase();
+    const urlSlug = license.urlSlug.toLowerCase();
 
     const blockTexts = [content, summary];
     const labelledTexts = [
@@ -31,6 +33,8 @@ export const searchWebflowLicenses = (licenses: WebflowLicense[], term: string):
       { content: division, label: "Division" },
       { content: classification, label: "Classification" },
       { content: industry, label: "Industry" },
+      { content: filename, label: "Filename" },
+      { content: urlSlug, label: "Url Slug" },
     ];
 
     match = findMatchInBlock(blockTexts, term, match);
