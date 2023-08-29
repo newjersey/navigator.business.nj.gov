@@ -1,18 +1,28 @@
 import { SignUpSnackbar } from "@/components/auth/SignUpSnackbar";
+import { Content } from "@/components/Content";
 import { getMergedConfig } from "@/contexts/configContext";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { ActiveUser, IsAuthenticated } from "@/lib/auth/AuthContext";
+import { generateActiveUser } from "@/test/factories";
+import { withAuth, withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
+import {
+  currentBusiness,
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
+import { generateBusiness, generateUserData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { renderToStaticMarkup } from "react-dom/server";
 
 const Config = getMergedConfig();
 
 jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
 jest.mock("@mui/material", () => mockMaterialUI());
@@ -30,64 +40,143 @@ const setLargeScreen = (value: boolean): void => {
   });
 };
 
-describe("SignUpSnackbar", () => {
+describe("<SignUpSnackbar />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
-    useMockBusiness({});
+    setupStatefulUserDataContext();
   });
 
   const setRegistrationAlertIsVisible = jest.fn();
-  const setupHookWithAuth = (isAuthenticated: IsAuthenticated, registrationAlertIsVisible = true): void => {
+
+  const renderWithAuth = ({
+    isAuthenticated,
+    registrationAlertIsVisible,
+  }: {
+    isAuthenticated: IsAuthenticated;
+    registrationAlertIsVisible?: boolean | undefined;
+  }): void => {
     render(
-      withAuthAlert(<SignUpSnackbar />, isAuthenticated, {
-        registrationAlertIsVisible,
-        setRegistrationAlertIsVisible,
-      })
+      withAuthAlert(
+        <WithStatefulUserData initialUserData={generateUserData({})}>
+          <SignUpSnackbar />
+        </WithStatefulUserData>,
+        isAuthenticated,
+        {
+          registrationAlertIsVisible: registrationAlertIsVisible ?? true,
+          setRegistrationAlertIsVisible,
+        }
+      )
+    );
+  };
+
+  const renderWithAuthAndUser = ({
+    isAuthenticated,
+    activeUser,
+  }: {
+    isAuthenticated: IsAuthenticated;
+    activeUser: ActiveUser;
+  }): void => {
+    render(
+      withAuth(
+        withAuthAlert(
+          <WithStatefulUserData initialUserData={generateUserData({})}>
+            <SignUpSnackbar />
+          </WithStatefulUserData>,
+          isAuthenticated,
+          {
+            registrationAlertIsVisible: true,
+            setRegistrationAlertIsVisible,
+          }
+        ),
+        { activeUser, isAuthenticated }
+      )
     );
   };
 
   it("shows registration alert when user is in guest mode", () => {
-    setupHookWithAuth(IsAuthenticated.FALSE);
+    renderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
     expect(screen.getByText(markdownToText(Config.navigationDefaults.guestAlertTitle))).toBeInTheDocument();
   });
 
   it("is able to close registration alert when user is in guest mode", () => {
-    setupHookWithAuth(IsAuthenticated.FALSE);
+    renderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
     fireEvent.click(screen.getByLabelText("close"));
     expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(false);
   });
 
   it("does not show registration alert when registrationAlertIsVisible is false", () => {
-    setupHookWithAuth(IsAuthenticated.FALSE, false);
+    renderWithAuth({ isAuthenticated: IsAuthenticated.FALSE, registrationAlertIsVisible: false });
     expect(
       screen.queryByText(markdownToText(Config.navigationDefaults.guestAlertTitle))
     ).not.toBeInTheDocument();
   });
 
-  it("does not show registration alert when user is authenticated", () => {
-    setupHookWithAuth(IsAuthenticated.TRUE, false);
-    expect(
-      screen.queryByText(markdownToText(Config.navigationDefaults.guestAlertTitle))
-    ).not.toBeInTheDocument();
+  it("shows the not-registered card on close", () => {
+    renderWithAuthAndUser({
+      activeUser: generateActiveUser({ encounteredMyNjLinkingError: false }),
+      isAuthenticated: IsAuthenticated.FALSE,
+    });
+    fireEvent.click(screen.getByLabelText("close"));
+    expect(currentBusiness().preferences.visibleSidebarCards).toContain("not-registered");
+    expect(currentBusiness().preferences.visibleSidebarCards).not.toContain(
+      "not-registered-existing-account"
+    );
   });
 
-  it("does not show registration alert when user is unknown", () => {
-    setupHookWithAuth(IsAuthenticated.UNKNOWN, false);
-    expect(
-      screen.queryByText(markdownToText(Config.navigationDefaults.guestAlertTitle))
-    ).not.toBeInTheDocument();
+  it("shows the not-registered-existing-account card on close if user encounteredMyNjLinkingError=true", () => {
+    renderWithAuthAndUser({
+      activeUser: generateActiveUser({ encounteredMyNjLinkingError: true }),
+      isAuthenticated: IsAuthenticated.FALSE,
+    });
+    fireEvent.click(screen.getByLabelText("close"));
+    expect(currentBusiness().preferences.visibleSidebarCards).toContain("not-registered-existing-account");
+    expect(currentBusiness().preferences.visibleSidebarCards).not.toContain("not-registered");
   });
 
   it("icon logo on mobile", async () => {
     setLargeScreen(false);
-    setupHookWithAuth(IsAuthenticated.FALSE);
+    renderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
     expect(screen.queryByAltText("registration")).not.toBeInTheDocument();
   });
 
   it("icon logo on desktop", () => {
     setLargeScreen(true);
-    setupHookWithAuth(IsAuthenticated.FALSE);
+    renderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
     expect(screen.getByAltText("registration")).toBeInTheDocument();
+  });
+
+  it("displays default content if user encounteredMyNjLinkingError is not true", () => {
+    renderWithAuthAndUser({
+      activeUser: generateActiveUser({ encounteredMyNjLinkingError: false }),
+      isAuthenticated: IsAuthenticated.FALSE,
+    });
+    useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
+    expect(screen.getByTestId("self-reg-snackbar")).toContainHTML(
+      renderToStaticMarkup(Content({ children: Config.navigationDefaults.guestAlertBody }))
+    );
+    expect(screen.getByTestId("self-reg-snackbar")).not.toContainHTML(
+      renderToStaticMarkup(Content({ children: Config.navigationDefaults.guestAlertBodyExistingAccount }))
+    );
+    expect(screen.getByText(Config.navigationDefaults.guestAlertTitle)).toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.navigationDefaults.guestAlertTitleExistingAccount)
+    ).not.toBeInTheDocument();
+  });
+
+  it("displays existingAccount content if user encounteredMyNjLinkingError is true", () => {
+    renderWithAuthAndUser({
+      activeUser: generateActiveUser({ encounteredMyNjLinkingError: true }),
+      isAuthenticated: IsAuthenticated.FALSE,
+    });
+    useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
+    expect(screen.getByTestId("self-reg-snackbar")).toContainHTML(
+      renderToStaticMarkup(Content({ children: Config.navigationDefaults.guestAlertBodyExistingAccount }))
+    );
+    expect(screen.getByTestId("self-reg-snackbar")).not.toContainHTML(
+      renderToStaticMarkup(Content({ children: Config.navigationDefaults.guestAlertBody }))
+    );
+    expect(screen.getByText(Config.navigationDefaults.guestAlertTitleExistingAccount)).toBeInTheDocument();
+    expect(screen.queryByText(Config.navigationDefaults.guestAlertTitle)).not.toBeInTheDocument();
   });
 });

@@ -18,24 +18,26 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { createProfileFieldErrorMap, OnboardingErrors } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import {
-  BusinessUser,
-  createEmptyUser,
-  decideABExperience,
-} from "@businessnjgovnavigator/shared/businessUser";
+import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { BusinessUser, createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
 const AccountSetupPage = (): ReactElement => {
   useAuthAlertPage();
   const { Config } = useConfig();
-  const { updateQueue } = useUserData();
-  const [user, setUser] = useState<BusinessUser>(createEmptyUser(decideABExperience()));
+  const { updateQueue, userData } = useUserData();
+  const [user, setUser] = useState<BusinessUser>(createEmptyUser());
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const router = useRouter();
   const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
   const { state } = useContext(AuthContext);
   const queryAnalyticsOccurred = useRef<boolean>(false);
+
+  useMountEffectWhenDefined(() => {
+    if (!userData) return;
+    setUser(userData.user);
+  }, userData);
 
   useEffect(() => {
     (async (): Promise<void> => {
@@ -104,14 +106,19 @@ const AccountSetupPage = (): ReactElement => {
     }
   };
 
+  const getContent = (): typeof Config.accountSetup.default => {
+    if (state.activeUser?.encounteredMyNjLinkingError) return Config.accountSetup.existingAccount;
+    return Config.accountSetup.default;
+  };
+
   return (
     <PageSkeleton>
       <NavBar logoOnly="NAVIGATOR_MYNJ_LOGO" />
       <main id="main" className="padding-top-0 desktop:padding-top-8">
         <SingleColumnContainer isSmallerWidth>
-          <h1>{Config.accountSetup.header}</h1>
+          <h1>{getContent().header}</h1>
           {showAlert && <Alert variant="error">{Config.accountSetup.errorAlert}</Alert>}
-          <Content>{Config.accountSetup.body}</Content>
+          <Content>{getContent().body}</Content>
           <profileFormContext.Provider value={formContextState}>
             <OnboardingNameAndEmail user={user} setUser={setUser} />
 
@@ -124,7 +131,7 @@ const AccountSetupPage = (): ReactElement => {
                 isSubmitButton={true}
                 isRightMarginRemoved={true}
               >
-                {Config.accountSetup.submitButton}
+                {getContent().submitButton}
               </PrimaryButton>
             </div>
           </profileFormContext.Provider>

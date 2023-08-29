@@ -1,9 +1,7 @@
-import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import * as sessionHelper from "@/lib/auth/sessionHelper";
 import * as signinHelper from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import analytics from "@/lib/utils/analytics";
 import LoadingPage, { signInSamlError } from "@/pages/loading";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -24,34 +22,17 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-
-function setupMockAnalytics(): typeof analytics {
-  return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
-    event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
-      landing_page: {
-        arrive: {
-          get_unlinked_myNJ_account_modal: jest.fn(),
-        },
-      },
-    },
-  };
-}
+import { render, waitFor } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
 jest.mock("@/lib/auth/signinHelper", () => ({ onGuestSignIn: jest.fn() }));
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+jest.mock("@/lib/auth/signinHelper", () => ({ onGuestSignIn: jest.fn() }));
 
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 const mockSessionHelper = sessionHelper as jest.Mocked<typeof sessionHelper>;
 const mockSigninHelper = signinHelper as jest.Mocked<typeof signinHelper>;
-
-const Config = getMergedConfig();
 
 describe("loading page", () => {
   beforeEach(() => {
@@ -105,18 +86,19 @@ describe("loading page", () => {
     expect(mockPush).toHaveBeenCalledWith("/tasks/some-task");
   });
 
-  it("shows modal when user has signin error and redirects user to onboarding", async () => {
+  it("saves triggers guest signin with encounteredError param when user has signin error", async () => {
     setMockUserDataResponse(generateUseUserDataResponse({ userData: undefined }));
     useMockRouter({ isReady: true, asPath: signInSamlError });
     mockSigninHelper.onGuestSignIn.mockResolvedValue();
-    render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
-    expect(mockSessionHelper.triggerSignIn).not.toHaveBeenCalled();
-    expect(screen.getByText(Config.selfRegistration.loginErrorModalTitle)).toBeInTheDocument();
-    expect(mockAnalytics.event.landing_page.arrive.get_unlinked_myNJ_account_modal).toHaveBeenCalled();
 
-    fireEvent.click(screen.getByText(Config.selfRegistration.loginErrorModalContinueButton));
-    await waitFor(() => {
-      return expect(mockSigninHelper.onGuestSignIn).toHaveBeenCalled();
-    });
+    render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
+
+    expect(mockSessionHelper.triggerSignIn).not.toHaveBeenCalled();
+    return expect(mockSigninHelper.onGuestSignIn).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.anything(),
+      expect.anything(),
+      { encounteredMyNjLinkingError: true }
+    );
   });
 });

@@ -28,6 +28,10 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
     hideCard("not-registered");
   }
 
+  if (operatingPhase !== "GUEST_MODE" && cards.includes("not-registered-existing-account")) {
+    hideCard("not-registered-existing-account");
+  }
+
   if (operatingPhase === "NEEDS_TO_FORM") {
     showCard("formation-nudge");
   } else {

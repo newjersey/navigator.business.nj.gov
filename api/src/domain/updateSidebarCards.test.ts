@@ -34,6 +34,27 @@ describe("updateRoadmapSidebarCards", () => {
       );
     });
 
+    it("removes not-registered-existing-account card and adds formation nudge card", async () => {
+      const userData = generateUserDataForBusiness(
+        generateBusiness({
+          profileData: generateProfileData({
+            operatingPhase: "NEEDS_TO_FORM",
+          }),
+          preferences: generatePreferences({
+            visibleSidebarCards: ["not-registered-existing-account"],
+          }),
+        })
+      );
+
+      const updatedUserData = updateSidebarCards(userData);
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+        "not-registered-existing-account"
+      );
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
+        "formation-nudge"
+      );
+    });
+
     it("leaves existing cards except for not registered when adding formation nudge card", async () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
@@ -41,7 +62,7 @@ describe("updateRoadmapSidebarCards", () => {
             operatingPhase: "NEEDS_TO_FORM",
           }),
           preferences: generatePreferences({
-            visibleSidebarCards: ["not-registered"],
+            visibleSidebarCards: ["other-card", "not-registered"],
           }),
         })
       );
@@ -53,6 +74,29 @@ describe("updateRoadmapSidebarCards", () => {
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
         "formation-nudge"
       );
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain("other-card");
+    });
+
+    it("leaves existing cards except for not-registered-existing-account when adding formation nudge card", async () => {
+      const userData = generateUserDataForBusiness(
+        generateBusiness({
+          profileData: generateProfileData({
+            operatingPhase: "NEEDS_TO_FORM",
+          }),
+          preferences: generatePreferences({
+            visibleSidebarCards: ["other-card", "not-registered-existing-account"],
+          }),
+        })
+      );
+
+      const updatedUserData = updateSidebarCards(userData);
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+        "not-registered-existing-account"
+      );
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
+        "formation-nudge"
+      );
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain("other-card");
     });
   });
 

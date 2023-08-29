@@ -3,6 +3,7 @@ import { AlertVariant } from "@/components/njwds-extended/Alert";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -13,6 +14,7 @@ import { ReactElement, useContext, useEffect } from "react";
 export const SelfRegSnackbar = (): ReactElement => {
   const { isAuthenticated, registrationAlertStatus, setRegistrationAlertStatus } =
     useContext(AuthAlertContext);
+  const { state } = useContext(AuthContext);
 
   useEffect(() => {
     if (registrationAlertStatus === "IN_PROGRESS" && isAuthenticated === IsAuthenticated.TRUE) {
@@ -32,6 +34,12 @@ export const SelfRegSnackbar = (): ReactElement => {
     SUCCESS: Config.navigationDefaults.guestSuccessBody,
     DUPLICATE_ERROR: Config.selfRegistration.errorTextDuplicateSignUp,
     RESPONSE_ERROR: Config.selfRegistration.errorTextGeneric,
+  };
+
+  const getTitle = (): string => {
+    return state.activeUser?.encounteredMyNjLinkingError
+      ? Config.navigationDefaults.guestSuccessTitleExistingAccount
+      : Config.navigationDefaults.guestSuccessTitle;
   };
 
   if (!registrationAlertStatus || registrationAlertStatus === "IN_PROGRESS") {
@@ -61,7 +69,7 @@ export const SelfRegSnackbar = (): ReactElement => {
         )}
         <div>
           {alertMap[registrationAlertStatus] === "success" ? (
-            <Content className="padding-right-2">{Config.navigationDefaults.guestSuccessTitle}</Content>
+            <h3 className="padding-right-2">{getTitle()}</h3>
           ) : (
             <></>
           )}

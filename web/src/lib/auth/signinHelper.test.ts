@@ -1,8 +1,11 @@
 import * as api from "@/lib/api-client/apiClient";
+import { AuthAction } from "@/lib/auth/AuthContext";
 import { onGuestSignIn, onSelfRegister, onSignIn, onSignOut, SelfRegRouter } from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import * as AccountLinkingErrorStorage from "@/lib/storage/AccountLinkingErrorStorage";
 import * as UserDataStorage from "@/lib/storage/UserDataStorage";
 import { generateActiveUser } from "@/test/factories";
+import { getLastCalledWith } from "@/test/helpers/helpers-utilities";
 import { generateUser, generateUserData } from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,
@@ -18,7 +21,11 @@ import * as session from "./sessionHelper";
 const mockGetCurrentUserData = jest.fn();
 const mockDelete = jest.fn();
 jest.mock("@/lib/storage/UserDataStorage");
+jest.mock("@/lib/storage/AccountLinkingErrorStorage");
 const mockUserDataStorage = UserDataStorage as jest.Mocked<typeof UserDataStorage>;
+const mockAccountLinkingErrorStorage = AccountLinkingErrorStorage as jest.Mocked<
+  typeof AccountLinkingErrorStorage
+>;
 const originalModule = jest.requireActual("@/lib/storage/UserDataStorage");
 
 jest.mock("./sessionHelper", () => ({
@@ -47,6 +54,11 @@ describe("SigninHelper", () => {
       ...originalModule.UserDataStorageFactory(),
       getCurrentUserData: mockGetCurrentUserData,
       delete: mockDelete,
+    }));
+
+    mockAccountLinkingErrorStorage.AccountLinkingErrorStorageFactory.mockImplementation(() => ({
+      setEncounteredMyNjLinkingError: jest.fn(),
+      getEncounteredMyNjLinkingError: jest.fn(),
     }));
   });
 
@@ -209,6 +221,50 @@ describe("SigninHelper", () => {
       });
     });
 
+    it("dispatches empty user with encounteredMyNjLinkingError when param is true", async () => {
+      mockGetCurrentUserData.mockImplementation(() => {
+        return undefined;
+      });
+      await onGuestSignIn(mockPush, ROUTES.landing, mockDispatch, { encounteredMyNjLinkingError: true });
+      expect(
+        getLastCalledWith<unknown, AuthAction>(mockDispatch)[0].activeUser?.encounteredMyNjLinkingError
+      ).toEqual(true);
+    });
+
+    it("gets account linking error from storage when param encounteredMyNjLinkingError param is undefined", async () => {
+      mockGetCurrentUserData.mockImplementation(() => {
+        return undefined;
+      });
+
+      const mockGetFn = jest.fn().mockReturnValue(true);
+
+      mockAccountLinkingErrorStorage.AccountLinkingErrorStorageFactory.mockImplementation(() => ({
+        setEncounteredMyNjLinkingError: jest.fn(),
+        getEncounteredMyNjLinkingError: mockGetFn,
+      }));
+
+      await onGuestSignIn(mockPush, ROUTES.landing, mockDispatch);
+      expect(mockGetFn).toHaveBeenCalled();
+      expect(
+        getLastCalledWith<unknown, AuthAction>(mockDispatch)[0].activeUser?.encounteredMyNjLinkingError
+      ).toEqual(true);
+    });
+
+    it("saves account linking error to storage", async () => {
+      mockGetCurrentUserData.mockImplementation(() => {
+        return undefined;
+      });
+      const mockSetFn = jest.fn();
+
+      mockAccountLinkingErrorStorage.AccountLinkingErrorStorageFactory.mockImplementation(() => ({
+        setEncounteredMyNjLinkingError: mockSetFn,
+        getEncounteredMyNjLinkingError: jest.fn(),
+      }));
+
+      await onGuestSignIn(mockPush, ROUTES.landing, mockDispatch, { encounteredMyNjLinkingError: true });
+      expect(mockSetFn).toHaveBeenCalledWith(true);
+    });
+
     it("redirect user to onboarding if still in progress", async () => {
       const userData = generateUserDataForBusiness(generateBusiness({ onboardingFormProgress: "UNSTARTED" }));
       mockGetCurrentUserData.mockImplementation(() => {
@@ -257,7 +313,7 @@ describe("SigninHelper", () => {
 
   describe("onSignOut", () => {
     it("dispatches a logout with undefined user", async () => {
-      const user = generateUser({});
+      const user = generateActiveUser({});
       mockSession.getActiveUser.mockResolvedValue(user);
       const userStorageMock = mockDelete.mockImplementation(() => {});
       await onSignOut(mockPush, mockDispatch);
