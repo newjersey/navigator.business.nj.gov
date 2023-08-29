@@ -17,7 +17,7 @@ describe("businessUser", () => {
     it("returns the passed in AB Experience", () => {
       process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE = "0";
 
-      const user = createEmptyUser("ExperienceB");
+      const user = createEmptyUser({ abExperience: "ExperienceB" });
       expect(user.abExperience).toBe("ExperienceB");
     });
 

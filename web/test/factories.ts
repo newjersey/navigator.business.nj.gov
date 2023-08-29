@@ -348,6 +348,7 @@ export const generateActiveUser = (overrides: Partial<ActiveUser>): ActiveUser =
   return {
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
+    encounteredMyNjLinkingError: false,
     ...overrides,
   };
 };

@@ -11,6 +11,7 @@ export enum IsAuthenticated {
 export interface ActiveUser {
   id: string;
   email: string;
+  encounteredMyNjLinkingError?: boolean | undefined;
 }
 
 export interface AuthState {

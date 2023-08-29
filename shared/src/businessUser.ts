@@ -39,10 +39,10 @@ export const emptyBusinessUser: BusinessUser = {
   abExperience: decideABExperience(),
 };
 
-export const createEmptyUser = (abExperience?: ABExperience): BusinessUser => {
+export const createEmptyUser = (parameters?: { abExperience?: ABExperience }): BusinessUser => {
   return {
     ...emptyBusinessUser,
-    abExperience: abExperience ?? decideABExperience(),
+    abExperience: parameters?.abExperience ?? decideABExperience(),
   };
 };
 

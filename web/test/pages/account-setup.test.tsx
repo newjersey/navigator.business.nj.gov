@@ -1,12 +1,14 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { ActiveUser, IsAuthenticated } from "@/lib/auth/AuthContext";
 import * as signinHelper from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import AccountSetupPage from "@/pages/account-setup";
+import { generateActiveUser } from "@/test/factories";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -14,7 +16,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { createPageHelpers, PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
 import { createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
-import { generateUserData } from "@businessnjgovnavigator/shared/test";
+import { generateUser, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 
@@ -90,9 +92,11 @@ describe("Account Setup page", () => {
   const renderPage = ({
     userData,
     isAuthenticated,
+    activeUser,
   }: {
     userData?: UserData | null;
     isAuthenticated?: IsAuthenticated;
+    activeUser?: ActiveUser;
   }): { page: PageHelpers } => {
     const initialUserData = { ...(userData || generateUserData({})), user: emptyUser };
     render(
@@ -100,7 +104,7 @@ describe("Account Setup page", () => {
         <WithStatefulUserData initialUserData={initialUserData}>
           <AccountSetupPage />
         </WithStatefulUserData>,
-        { isAuthenticated }
+        { activeUser: activeUser, isAuthenticated }
       )
     );
     const page = createPageHelpers();
@@ -114,6 +118,34 @@ describe("Account Setup page", () => {
   it("redirects to dashboard if user is authenticated", () => {
     renderPage({ isAuthenticated: IsAuthenticated.TRUE });
     expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
+  });
+
+  it("sets user info from userData if exists", () => {
+    useMockUserData(generateUserData({ user: generateUser({ name: "Firsty Lasty" }) }));
+    const { page } = renderPage({ isAuthenticated: IsAuthenticated.FALSE });
+    expect(page.getFullNameValue()).toEqual("Firsty Lasty");
+  });
+
+  it("displays default content if user encounteredMyNjLinkingError is not true", () => {
+    renderPage({
+      activeUser: generateActiveUser({ encounteredMyNjLinkingError: false }),
+      isAuthenticated: IsAuthenticated.FALSE,
+    });
+    expect(screen.getByText(Config.accountSetup.default.header)).toBeInTheDocument();
+    expect(screen.getByText(Config.accountSetup.default.submitButton)).toBeInTheDocument();
+    expect(screen.queryByText(Config.accountSetup.existingAccount.header)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.accountSetup.existingAccount.submitButton)).not.toBeInTheDocument();
+  });
+
+  it("displays existingAccount content if user encounteredMyNjLinkingError is true", () => {
+    renderPage({
+      activeUser: generateActiveUser({ encounteredMyNjLinkingError: true }),
+      isAuthenticated: IsAuthenticated.FALSE,
+    });
+    expect(screen.getByText(Config.accountSetup.existingAccount.header)).toBeInTheDocument();
+    expect(screen.getByText(Config.accountSetup.existingAccount.submitButton)).toBeInTheDocument();
+    expect(screen.queryByText(Config.accountSetup.default.header)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.accountSetup.default.submitButton)).not.toBeInTheDocument();
   });
 
   it("prevents user from registering if the email is not matching", () => {

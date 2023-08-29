@@ -544,20 +544,6 @@ export default {
         },
       },
     },
-    landing_page: {
-      arrive: {
-        get_unlinked_myNJ_account_modal: () => {
-          eventRunner.track({
-            event: "account_clicks",
-            legacy_event_action: "arrive",
-            legacy_event_category: "landing_page",
-            legacy_event_label: "get_unlinked_myNJ_account_modal",
-            clicked: "get_unlinked_myNJ_account_modal",
-            item: "landing_page",
-          });
-        },
-      },
-    },
     guest_snackbar: {
       click: {
         go_to_NavigatorAccount_setup: () => {

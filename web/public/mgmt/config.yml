@@ -2801,10 +2801,23 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: Header, name: header, widget: string }
-              - { label: Body, name: body, widget: markdown }
-              - { label: Submit Button, name: submitButton, widget: string }
               - { label: Error Alert, name: errorAlert, widget: string }
+              - label: Default
+                name: default
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: Header, name: header, widget: string }
+                  - { label: Body, name: body, widget: markdown }
+                  - { label: Submit Button, name: submitButton, widget: string }
+              - label: With Existing Account
+                name: existingAccount
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: Header, name: header, widget: string }
+                  - { label: Body, name: body, widget: markdown }
+                  - { label: Submit Button, name: submitButton, widget: string }
 
   - name: "roadmap-sidebar-card"
     label: "Sidebar Cards Content"
@@ -3405,8 +3418,23 @@ collections:
                 }
               - { label: Guest Alert Title, name: guestAlertTitle, widget: string }
               - { label: Guest Alert Body, name: guestAlertBody, widget: text }
+              - {
+                  label: Existing Account Guest Alert Title,
+                  name: guestAlertTitleExistingAccount,
+                  widget: string,
+                }
+              - {
+                  label: Existing Account Guest Alert Body,
+                  name: guestAlertBodyExistingAccount,
+                  widget: text,
+                }
               - { label: Guest Success Snackbar Title, name: guestSuccessTitle, widget: string }
               - { label: Guest Success Snackbar Body, name: guestSuccessBody, widget: string }
+              - {
+                  label: Existing Account Guest Success Snackbar Title,
+                  name: guestSuccessTitleExistingAccount,
+                  widget: string,
+                }
               - { label: Guest Alert Modal Title, name: guestModalTitle, widget: string }
               - { label: Guest Alert Modal Body, name: guestModalBody, widget: text }
               - { label: Guest Alert Button, name: guestModalButtonText, widget: string }
@@ -3511,13 +3539,6 @@ collections:
               - { label: Error - Generic, name: errorTextGeneric, widget: string }
               - { label: Newsletter Label, name: newsletterCheckboxLabel, widget: string }
               - { label: User Testing Label, name: userTestingCheckboxLabel, widget: string }
-              - { label: Login Error Modal - Title, name: loginErrorModalTitle, widget: string }
-              - {
-                  label: Login Error Modal - Continue Button,
-                  name: loginErrorModalContinueButton,
-                  widget: string,
-                }
-              - { label: Login Error Modal - Body, name: loginErrorModalBody, widget: markdown }
           - label: Shared Header Defaults
             name: headerDefaults
             collapsed: true

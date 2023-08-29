@@ -3,6 +3,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { ActiveUser, AuthAction } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
+import { AccountLinkingErrorStorageFactory } from "@/lib/storage/AccountLinkingErrorStorage";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import { UpdateQueue } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
@@ -80,30 +81,40 @@ export const onSelfRegister = (
 export const onGuestSignIn = async (
   push: (url: string) => Promise<boolean>,
   pathname: string,
-  dispatch: Dispatch<AuthAction>
+  dispatch: Dispatch<AuthAction>,
+  params?: { encounteredMyNjLinkingError: boolean }
 ): Promise<void> => {
   const userDataStorage = UserDataStorageFactory();
   const abStorage = ABStorageFactory();
+  const accountLinkingErrorStorage = AccountLinkingErrorStorageFactory();
   let userData = userDataStorage.getCurrentUserData();
   if (userData?.user.myNJUserKey) {
     userDataStorage.deleteCurrentUser();
     userData = undefined;
   }
+
   const emptyUser = createEmptyUser();
   const activeUser: ActiveUser = userData?.user
     ? {
         email: userData.user.email,
         id: userData.user.id,
+        encounteredMyNjLinkingError:
+          params?.encounteredMyNjLinkingError ?? accountLinkingErrorStorage.getEncounteredMyNjLinkingError(),
       }
     : {
         email: emptyUser.email,
         id: emptyUser.id,
+        encounteredMyNjLinkingError:
+          params?.encounteredMyNjLinkingError ?? accountLinkingErrorStorage.getEncounteredMyNjLinkingError(),
       };
   dispatch({
     type: "LOGIN_GUEST",
     activeUser: activeUser,
   });
   setABExperienceDimension(abStorage.getExperience() || emptyUser.abExperience, true);
+  if (params?.encounteredMyNjLinkingError) {
+    accountLinkingErrorStorage.setEncounteredMyNjLinkingError(params.encounteredMyNjLinkingError);
+  }
   setUserId(activeUser.id, true);
   if (userData) {
     setAnalyticsDimensions(getCurrentBusiness(userData).profileData, true);
@@ -118,18 +129,15 @@ export const onGuestSignIn = async (
       case ROUTES.welcome: {
         setRegistrationDimension("Not Started");
         push(ROUTES.welcome);
-
         break;
       }
       case ROUTES.onboarding: {
         setRegistrationDimension("Began Onboarding");
-
         break;
       }
       case ROUTES.loading: {
         setRegistrationDimension("Began Onboarding");
         push(ROUTES.onboarding);
-
         break;
       }
       default: {

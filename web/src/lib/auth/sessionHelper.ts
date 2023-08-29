@@ -1,4 +1,5 @@
 import { ActiveUser } from "@/lib/auth/AuthContext";
+import { AccountLinkingErrorStorageFactory } from "@/lib/storage/AccountLinkingErrorStorage";
 import { Auth } from "@aws-amplify/auth";
 import { Sha256 } from "@aws-crypto/sha256-browser";
 import { HttpRequest } from "@aws-sdk/protocol-http";
@@ -108,16 +109,21 @@ export const getActiveUser = async (): Promise<ActiveUser> => {
       "custom:identityId": credentials.identityId,
     });
   }
-  return cognitoPayloadToActiveUser(cognitoPayload);
+  const encounteredMyNjLinkingError = AccountLinkingErrorStorageFactory().getEncounteredMyNjLinkingError();
+  return cognitoPayloadToActiveUser(cognitoPayload, { encounteredMyNjLinkingError });
 };
 
-const cognitoPayloadToActiveUser = (cognitoPayload: CognitoIdPayload): ActiveUser => {
+const cognitoPayloadToActiveUser = (
+  cognitoPayload: CognitoIdPayload,
+  params: { encounteredMyNjLinkingError: boolean | undefined }
+): ActiveUser => {
   const myNJIdentityPayload = cognitoPayload.identities?.find((it) => {
     return it.providerName === "myNJ";
   });
   return {
     id: myNJIdentityPayload?.userId || cognitoPayload.sub,
     email: cognitoPayload.email,
+    encounteredMyNjLinkingError: params.encounteredMyNjLinkingError,
   };
 };
 
