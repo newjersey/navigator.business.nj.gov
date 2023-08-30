@@ -378,42 +378,18 @@ describe("<NavBar />", () => {
       });
     });
 
-    it("sends user to selfRegistration when registration button is clicked", async () => {
+    it("sends user to account-setup when registration button is clicked", async () => {
       setLargeScreen(true);
-      setupStatefulUserDataContext();
-      const user = generateUser({ name: "John Smith", email: "test@example.com" });
-      const business = generateBusinessNamedBusiness({});
-      const userData = generateUserDataForBusiness(business, { user });
+      useMockBusiness({});
 
       render(
-        withAuth(
-          <WithStatefulUserData initialUserData={userData}>
-            <NavBar landingPage={false} showSidebar={false} />
-          </WithStatefulUserData>,
-          { isAuthenticated: IsAuthenticated.FALSE }
-        )
+        withAuth(<NavBar landingPage={false} showSidebar={false} />, {
+          isAuthenticated: IsAuthenticated.FALSE,
+        })
       );
       fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestText));
-
-      const businessUser = {
-        ...user,
-        email: "email@example.com",
-        name: "My Name",
-        receiveNewsletter: false,
-        userTesting: true,
-      };
-
-      mockApi.postSelfReg.mockResolvedValue({
-        authRedirectURL: "www.example.com",
-        userData: { ...userData, user: businessUser },
-      });
-
       fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText));
-
-      await waitFor(() => {
-        expect(mockApi.postSelfReg).toHaveBeenCalledWith(userData);
-      });
-      expect(mockPush).toHaveBeenCalled();
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.accountSetup);
     });
   });
 

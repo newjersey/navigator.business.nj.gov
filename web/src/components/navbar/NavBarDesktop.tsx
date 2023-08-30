@@ -6,7 +6,6 @@ import { Icon } from "@/components/njwds/Icon";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { AuthContext } from "@/contexts/authContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
-import { onSelfRegister } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getBusinessIconColor } from "@/lib/domain-logic/getBusinessIconColor";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
@@ -85,12 +84,7 @@ export const NavBarDesktop = (): ReactElement => {
                       style="default"
                       onClick={(): void => {
                         analytics.event.guest_menu.click.go_to_NavigatorAccount_setup();
-                        onSelfRegister(
-                          router,
-                          updateQueue,
-                          updateQueue?.current(),
-                          setRegistrationAlertStatus
-                        );
+                        router.push(ROUTES.accountSetup);
                       }}
                     >
                       {Config.navigationDefaults.navBarGuestRegistrationText}
