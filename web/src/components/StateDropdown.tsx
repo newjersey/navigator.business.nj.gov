@@ -14,6 +14,7 @@ interface Props {
   validationText?: string;
   excludeNJ?: boolean;
   excludeTerritories?: boolean;
+  includeOutsideUSA?: boolean;
   useFullName?: boolean;
   validationLabel?: string;
   autoComplete?: boolean;
@@ -58,6 +59,12 @@ export const StateDropdown = (props: Props): ReactElement => {
 
   const filteredStates = (): StateObject[] => {
     let result = states;
+    if (!props.includeOutsideUSA) {
+      result = result.filter((stateObject) => {
+        return stateObject.shortCode !== "Outside of the USA";
+      });
+    }
+
     if (props.excludeNJ) {
       result = result.filter((stateObject) => {
         return stateObject.shortCode !== "NJ";
