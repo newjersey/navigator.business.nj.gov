@@ -32,6 +32,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "@smithy/node-http-handler" },
+    },
+    {
+      from: {},
       to: { path: "util" },
     },
     {

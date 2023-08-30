@@ -1,6 +1,8 @@
 import { PutObjectCommand, PutObjectCommandOutput, S3Client } from "@aws-sdk/client-s3";
+import { NodeHttpHandler } from "@smithy/node-http-handler";
 import axios, { AxiosResponse } from "axios";
 import { createHash } from "node:crypto";
+import * as https from "node:https";
 
 export const uploadFile = async function (
   fullName: string,
@@ -10,6 +12,11 @@ export const uploadFile = async function (
 ): Promise<PutObjectCommandOutput> {
   const s3 = new S3Client({
     region: "us-east-1",
+    requestHandler: new NodeHttpHandler({
+      httpsAgent: new https.Agent({
+        secureProtocol: "TLSv1_2_method",
+      }),
+    }),
   });
   const hashSum = createHash("md5");
   hashSum.update(fileContent);
