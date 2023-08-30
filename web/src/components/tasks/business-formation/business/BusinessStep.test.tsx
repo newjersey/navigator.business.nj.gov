@@ -407,6 +407,17 @@ describe("Formation - BusinessStep", () => {
       expect(within(listBox).getByText("Ohio")).toBeInTheDocument();
     });
 
+    it("includes 'Outside of the USA' in the foreign state of formation dropdown", async () => {
+      const page = await getPageHelper(
+        { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
+        { foreignStateOfFormation: undefined }
+      );
+
+      const listBox = await page.getListBoxForInputElementByTestId("foreignStateOfFormation");
+
+      expect(within(listBox).getByText("Outside of the USA")).toBeInTheDocument();
+    });
+
     it("displays error on field validation", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },

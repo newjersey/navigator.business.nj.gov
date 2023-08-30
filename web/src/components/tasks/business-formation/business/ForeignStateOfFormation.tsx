@@ -37,6 +37,7 @@ export const ForeignStateOfFormation = (): ReactElement => {
         required
         error={doesFieldHaveError(FIELD)}
         onSelect={handleChange}
+        includeOutsideUSA={true}
       />
     </>
   );
