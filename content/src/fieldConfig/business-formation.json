@@ -454,16 +454,25 @@
     },
     "legalStructure": {
       "warningModalContinueButton": "Continue",
-      "limited-liability-company": "LLC",
-      "s-corporation": "Domestic Corporation",
-      "limited-liability-partnership": "LLP",
-      "limited-partnership": "LP",
+      "foreignLabels": {
+        "limited-liability-company": "Foreign LLC",
+        "s-corporation": "Foreign Corporation",
+        "limited-liability-partnership": "Foreign LLP",
+        "limited-partnership": "Foreign LP",
+        "c-corporation": "Foreign Corporation",
+        "nonprofit": "Non-Profit Foreign Corporation"
+      },
+      "domesticLabels": {
+        "limited-liability-company": "LLC",
+        "s-corporation": "Domestic Corporation",
+        "limited-liability-partnership": "LLP",
+        "limited-partnership": "LP",
+        "c-corporation": "Domestic Corporation",
+        "nonprofit": "Non-Profit Domestic Corporation"
+      },
       "warningModalBody": "If you change your proposed business structure in your business profile, you might need to complete a different form. Don't worry, once you update your profile we'll tell you which form you need and where to complete it.",
       "label": "Business Structure",
-      "foreignPrefaceText": "Foreign",
       "warningModalCancelButton": "Cancel",
-      "c-corporation": "Domestic Corporation",
-      "nonprofit": "Non-Profit Domestic Corporation",
       "warningModalHeader": "You Might Need a Different Form",
       "contextualInfo": "business-structure-learn-more"
     },
