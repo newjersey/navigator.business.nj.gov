@@ -3,7 +3,6 @@ import { NavBarPopupMenu } from "@/components/navbar/NavBarPopupMenu";
 import { NavigatorLogo } from "@/components/navbar/NavigatorLogo";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { AuthContext } from "@/contexts/authContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -18,10 +17,9 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 export const NavBarDesktop = (): ReactElement => {
-  const { business, updateQueue, userData } = useUserData();
+  const { business, userData } = useUserData();
   const { state } = useContext(AuthContext);
   const router = useRouter();
-  const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
 
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLButtonElement | null>(null);
