@@ -45,14 +45,14 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
 
   const legalStructureName = (): string => {
     if (!business || !business.profileData.legalStructureId) return "";
-    const preface =
-      business?.profileData.businessPersona === "FOREIGN"
-        ? `${Config.formation.legalStructure.foreignPrefaceText} `
-        : "";
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const legalStructure = (Config.formation.legalStructure as any)[business.profileData.legalStructureId];
-    return `${preface} ${legalStructure}`;
+    if (business.profileData.businessPersona === "FOREIGN") {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return (Config.formation.legalStructure.foreignLabels as any)[business.profileData.legalStructureId];
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return (Config.formation.legalStructure.domesticLabels as any)[business.profileData.legalStructureId];
+    }
   };
 
   if (!business) {

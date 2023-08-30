@@ -901,12 +901,28 @@ collections:
                 collapsed: true
                 widget: object
                 fields:
-                  - { label: "LLC", name: "limited-liability-company", widget: "string" }
-                  - { label: "LP", name: "limited-partnership", widget: "string" }
-                  - { label: "LLP", name: "limited-liability-partnership", widget: "string" }
-                  - { label: "C-Corp", name: "c-corporation", widget: "string" }
-                  - { label: "S-Corp", name: "s-corporation", widget: "string" }
-                  - { label: "Foreign preface", name: "foreignPrefaceText", widget: "string" }
+                  - label: Domestic Labels
+                    name: domesticLabels
+                    collapsed: false
+                    widget: object
+                    fields:
+                      - { label: "LLC", name: "limited-liability-company", widget: "string" }
+                      - { label: "LP", name: "limited-partnership", widget: "string" }
+                      - { label: "LLP", name: "limited-liability-partnership", widget: "string" }
+                      - { label: "C-Corp", name: "c-corporation", widget: "string" }
+                      - { label: "S-Corp", name: "s-corporation", widget: "string" }
+                      - { label: "Nonprofit", name: "nonprofit", widget: "string" }
+                  - label: Foreign Labels
+                    name: foreignLabels
+                    collapsed: false
+                    widget: object
+                    fields:
+                      - { label: "LLC", name: "limited-liability-company", widget: "string" }
+                      - { label: "LP", name: "limited-partnership", widget: "string" }
+                      - { label: "LLP", name: "limited-liability-partnership", widget: "string" }
+                      - { label: "C-Corp", name: "c-corporation", widget: "string" }
+                      - { label: "S-Corp", name: "s-corporation", widget: "string" }
+                      - { label: "Nonprofit", name: "nonprofit", widget: "string" }
                   - { label: "Business structure", name: "label", widget: "markdown" }
                   - {
                       label: "Review step contextual info",
