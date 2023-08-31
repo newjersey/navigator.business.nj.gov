@@ -12,7 +12,9 @@ interface Props {
   borderSmall?: boolean;
 }
 
-export type AlertVariant = "info" | "success" | "warning" | "error" | "note";
+export const AlertVariants = ["info", "success", "warning", "error", "note"] as const;
+
+export type AlertVariant = (typeof AlertVariants)[number];
 
 export const Alert = (props: Props): ReactElement => {
   const { variant, children, noIcon, heading, rounded, dataTestid } = props;
