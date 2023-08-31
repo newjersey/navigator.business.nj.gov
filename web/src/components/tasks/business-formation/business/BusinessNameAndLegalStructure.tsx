@@ -9,6 +9,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { extractConfig } from "@/lib/domain-logic/extractConfig";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
@@ -47,11 +48,15 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
     if (!business || !business.profileData.legalStructureId) return "";
 
     if (business.profileData.businessPersona === "FOREIGN") {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return (Config.formation.legalStructure.foreignLabels as any)[business.profileData.legalStructureId];
+      return extractConfig(
+        Config.formation.legalStructure.foreignLabels,
+        business.profileData.legalStructureId
+      );
     } else {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return (Config.formation.legalStructure.domesticLabels as any)[business.profileData.legalStructureId];
+      return extractConfig(
+        Config.formation.legalStructure.domesticLabels,
+        business.profileData.legalStructureId
+      );
     }
   };
 
