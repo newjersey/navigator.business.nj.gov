@@ -86,7 +86,7 @@ describe("loading page", () => {
     expect(mockPush).toHaveBeenCalledWith("/tasks/some-task");
   });
 
-  it("saves triggers guest signin with encounteredError param when user has signin error", async () => {
+  it("triggers onGuestSignIn with encounteredMyNjLinkingError param when user has signin error", async () => {
     setMockUserDataResponse(generateUseUserDataResponse({ userData: undefined }));
     useMockRouter({ isReady: true, asPath: signInSamlError });
     mockSigninHelper.onGuestSignIn.mockResolvedValue();
@@ -94,11 +94,11 @@ describe("loading page", () => {
     render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
 
     expect(mockSessionHelper.triggerSignIn).not.toHaveBeenCalled();
-    return expect(mockSigninHelper.onGuestSignIn).toHaveBeenCalledWith(
-      expect.anything(),
-      expect.anything(),
-      expect.anything(),
-      { encounteredMyNjLinkingError: true }
-    );
+    return expect(mockSigninHelper.onGuestSignIn).toHaveBeenCalledWith({
+      push: expect.anything(),
+      pathname: expect.anything(),
+      dispatch: expect.anything(),
+      encounteredMyNjLinkingError: true,
+    });
   });
 });
