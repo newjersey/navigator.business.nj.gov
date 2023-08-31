@@ -87,7 +87,7 @@ ol {
 
 .usa-link:visited,
 .usa-prose > a:visited {
-  color: $primary-darker !important;
+  color: $accent-cool-darkest !important;
 }
 
 .fit-screen-content {
@@ -211,7 +211,7 @@ ol {
 .usa-alert__text a,
 .usa-link,
 .usa-prose > a {
-  color: $primary !important;
+  color: $accent-cool-darkest !important;
 
   @media all and (max-width: $sm) {
     word-wrap: anywhere !important;
@@ -232,22 +232,23 @@ ol {
 
 .usa-link:visited,
 .usa-prose > a:visited {
-  color: $primary !important;
+  color: $accent-cool-darkest !important;
 }
 
 .usa-link:focus,
-.usa-prose > a:focus {
-  outline: 0.25rem solid $primary !important;
+.usa-prose > a:focus,
+.usa-prose a:focus {
+  outline: 0.25rem solid $accent-cool-darkest !important;
 }
 
 .usa-link:hover,
 .usa-prose > a:hover {
-  color: $primary-dark !important;
+  color: $accent-cool-more-dark !important;
 }
 
 .usa-link:active,
 .usa-prose > a:active {
-  color: $primary-darker !important;
+  color: $accent-cool-darkest !important;
 }
 
 @media all and (min-width: $xs) {
