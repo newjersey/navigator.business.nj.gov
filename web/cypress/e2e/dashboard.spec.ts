@@ -4,7 +4,6 @@
 import {
   clickDeferredSaveButton,
   completeBusinessStructureTask,
-  waitForUserDataMountUpdate,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import {
   completeExistingBusinessOnboarding,
@@ -80,7 +79,6 @@ describe("Dashboard [feature] [all] [group2]", () => {
           industry,
         });
 
-        waitForUserDataMountUpdate();
         completeBusinessStructureTask({ legalStructureId });
 
         // answer deferred question to get local-requirements task
