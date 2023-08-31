@@ -45,6 +45,7 @@ export const generateFormationUSAddress = (overrides: Partial<FormationAddress>)
           state.shortCode !== "NJ" &&
           state.shortCode !== "AS" &&
           state.shortCode !== "VI" &&
+          state.shortCode !== "Outside of the USA" &&
           state.shortCode !== "GU"
         );
       })
