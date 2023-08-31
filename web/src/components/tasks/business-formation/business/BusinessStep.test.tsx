@@ -819,68 +819,27 @@ describe("Formation - BusinessStep", () => {
   });
 
   describe("profile data information", () => {
-    it("displays llc legal structure from profile data", async () => {
-      const legalStructureId = "limited-liability-company";
-      await getPageHelper({ legalStructureId }, {});
-      const displayLegalStructure = screen.getByTestId("legal-structure");
-      expect(displayLegalStructure).toHaveTextContent(
-        Config.formation.legalStructure.domesticLabels[legalStructureId]
-      );
-    });
+    it.each(publicFilingLegalTypes)(
+      "displays domestic legal structure label for %s",
+      async (legalStructureId) => {
+        await getPageHelper({ legalStructureId, businessPersona: "STARTING" }, {});
+        const displayLegalStructure = screen.getByTestId("legal-structure");
+        expect(displayLegalStructure).toHaveTextContent(
+          Config.formation.legalStructure.domesticLabels[legalStructureId]
+        );
+      }
+    );
 
-    it("displays llp legal structure from profile data", async () => {
-      const legalStructureId = "limited-liability-partnership";
-      await getPageHelper({ legalStructureId }, {});
-      const displayLegalStructure = screen.getByTestId("legal-structure");
-      expect(displayLegalStructure).toHaveTextContent(
-        Config.formation.legalStructure.domesticLabels[legalStructureId]
-      );
-    });
-
-    it("displays lp legal structure from profile data", async () => {
-      const legalStructureId = "limited-partnership";
-      await getPageHelper({ legalStructureId }, {});
-      const displayLegalStructure = screen.getByTestId("legal-structure");
-      expect(displayLegalStructure).toHaveTextContent(
-        Config.formation.legalStructure.domesticLabels[legalStructureId]
-      );
-    });
-
-    it("displays sCorp legal structure from profile data", async () => {
-      const legalStructureId = "s-corporation";
-      await getPageHelper({ legalStructureId }, {});
-      const displayLegalStructure = screen.getByTestId("legal-structure");
-      expect(displayLegalStructure).toHaveTextContent(
-        Config.formation.legalStructure.domesticLabels[legalStructureId]
-      );
-    });
-
-    it("displays cCorp legal structure from profile data", async () => {
-      const legalStructureId = "c-corporation";
-      await getPageHelper({ legalStructureId }, {});
-      const displayLegalStructure = screen.getByTestId("legal-structure");
-      expect(displayLegalStructure).toHaveTextContent(
-        Config.formation.legalStructure.domesticLabels[legalStructureId]
-      );
-    });
-
-    it("displays foreign label for legal structure for FOREIGN persona", async () => {
-      const legalStructureId = randomPublicFilingLegalType();
-      await getPageHelper({ legalStructureId, businessPersona: "FOREIGN" }, {});
-      const displayLegalStructure = screen.getByTestId("legal-structure");
-      expect(displayLegalStructure).toHaveTextContent(
-        Config.formation.legalStructure.foreignLabels[legalStructureId]
-      );
-    });
-
-    it("displays domestic label ahead of legal structure for STARTING persona", async () => {
-      const legalStructureId = randomPublicFilingLegalType();
-      await getPageHelper({ legalStructureId, businessPersona: "STARTING" }, {});
-      const displayLegalStructure = screen.getByTestId("legal-structure");
-      expect(displayLegalStructure).toHaveTextContent(
-        Config.formation.legalStructure.domesticLabels[legalStructureId]
-      );
-    });
+    it.each(publicFilingLegalTypes)(
+      "displays foreign legal structure label for %s",
+      async (legalStructureId) => {
+        await getPageHelper({ legalStructureId, businessPersona: "FOREIGN" }, {});
+        const displayLegalStructure = screen.getByTestId("legal-structure");
+        expect(displayLegalStructure).toHaveTextContent(
+          Config.formation.legalStructure.foreignLabels[legalStructureId]
+        );
+      }
+    );
 
     it("displays business name from name check step and overrides profile", async () => {
       const page = await getPageHelper({ businessName: "some cool name" }, {});
