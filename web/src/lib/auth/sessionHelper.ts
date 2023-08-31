@@ -110,20 +110,23 @@ export const getActiveUser = async (): Promise<ActiveUser> => {
     });
   }
   const encounteredMyNjLinkingError = AccountLinkingErrorStorageFactory().getEncounteredMyNjLinkingError();
-  return cognitoPayloadToActiveUser(cognitoPayload, { encounteredMyNjLinkingError });
+  return cognitoPayloadToActiveUser({ cognitoPayload, encounteredMyNjLinkingError });
 };
 
-const cognitoPayloadToActiveUser = (
-  cognitoPayload: CognitoIdPayload,
-  params: { encounteredMyNjLinkingError: boolean | undefined }
-): ActiveUser => {
+const cognitoPayloadToActiveUser = ({
+  cognitoPayload,
+  encounteredMyNjLinkingError,
+}: {
+  cognitoPayload: CognitoIdPayload;
+  encounteredMyNjLinkingError?: boolean | undefined;
+}): ActiveUser => {
   const myNJIdentityPayload = cognitoPayload.identities?.find((it) => {
     return it.providerName === "myNJ";
   });
   return {
     id: myNJIdentityPayload?.userId || cognitoPayload.sub,
     email: cognitoPayload.email,
-    encounteredMyNjLinkingError: params.encounteredMyNjLinkingError,
+    encounteredMyNjLinkingError,
   };
 };
 
