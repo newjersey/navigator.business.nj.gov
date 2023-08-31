@@ -115,7 +115,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
           });
         })
         .catch(() => {
-          onGuestSignIn(router.push, router.pathname, dispatch);
+          onGuestSignIn({ push: router.push, pathname: router.pathname, dispatch });
         });
     }
   });

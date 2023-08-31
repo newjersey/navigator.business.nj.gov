@@ -36,12 +36,17 @@ export type SelfRegRouter = {
   asPath: string | undefined;
 };
 
-export const onSelfRegister = (
-  router: SelfRegRouter,
-  updateQueue: UpdateQueue | undefined,
-  userData: UserData | undefined,
-  setRegistrationAlertStatus: AuthAlertContextType["setRegistrationAlertStatus"]
-): void => {
+export const onSelfRegister = ({
+  router,
+  updateQueue,
+  userData,
+  setRegistrationAlertStatus,
+}: {
+  router: SelfRegRouter;
+  updateQueue: UpdateQueue | undefined;
+  userData: UserData | undefined;
+  setRegistrationAlertStatus: AuthAlertContextType["setRegistrationAlertStatus"];
+}): void => {
   if (!userData || !updateQueue) {
     return;
   }
@@ -78,12 +83,17 @@ export const onSelfRegister = (
     });
 };
 
-export const onGuestSignIn = async (
-  push: (url: string) => Promise<boolean>,
-  pathname: string,
-  dispatch: Dispatch<AuthAction>,
-  params?: { encounteredMyNjLinkingError: boolean }
-): Promise<void> => {
+export const onGuestSignIn = async ({
+  push,
+  pathname,
+  dispatch,
+  encounteredMyNjLinkingError,
+}: {
+  push: (url: string) => Promise<boolean>;
+  pathname: string;
+  dispatch: Dispatch<AuthAction>;
+  encounteredMyNjLinkingError?: boolean | undefined;
+}): Promise<void> => {
   const userDataStorage = UserDataStorageFactory();
   const abStorage = ABStorageFactory();
   const accountLinkingErrorStorage = AccountLinkingErrorStorageFactory();
@@ -99,21 +109,21 @@ export const onGuestSignIn = async (
         email: userData.user.email,
         id: userData.user.id,
         encounteredMyNjLinkingError:
-          params?.encounteredMyNjLinkingError ?? accountLinkingErrorStorage.getEncounteredMyNjLinkingError(),
+          encounteredMyNjLinkingError ?? accountLinkingErrorStorage.getEncounteredMyNjLinkingError(),
       }
     : {
         email: emptyUser.email,
         id: emptyUser.id,
         encounteredMyNjLinkingError:
-          params?.encounteredMyNjLinkingError ?? accountLinkingErrorStorage.getEncounteredMyNjLinkingError(),
+          encounteredMyNjLinkingError ?? accountLinkingErrorStorage.getEncounteredMyNjLinkingError(),
       };
   dispatch({
     type: "LOGIN_GUEST",
     activeUser: activeUser,
   });
   setABExperienceDimension(abStorage.getExperience() || emptyUser.abExperience, true);
-  if (params?.encounteredMyNjLinkingError) {
-    accountLinkingErrorStorage.setEncounteredMyNjLinkingError(params.encounteredMyNjLinkingError);
+  if (encounteredMyNjLinkingError) {
+    accountLinkingErrorStorage.setEncounteredMyNjLinkingError(encounteredMyNjLinkingError);
   }
   setUserId(activeUser.id, true);
   if (userData) {

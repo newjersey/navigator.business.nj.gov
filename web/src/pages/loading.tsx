@@ -29,7 +29,12 @@ const LoadingPage = (): ReactElement => {
         dispatch({ type: "LOGIN", activeUser: currentUser });
       });
     } else if (router.asPath.includes(signInSamlError)) {
-      onGuestSignIn(router.push, router.pathname, dispatch, { encounteredMyNjLinkingError: true });
+      onGuestSignIn({
+        push: router.push,
+        pathname: router.pathname,
+        dispatch,
+        encounteredMyNjLinkingError: true,
+      });
     } else {
       triggerSignIn();
     }

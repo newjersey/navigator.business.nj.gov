@@ -94,7 +94,12 @@ describe("SigninHelper", () => {
 
     it("sets registration alert to IN_PROGRESS", async () => {
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
-      await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
+      await onSelfRegister({
+        router: fakeRouter,
+        updateQueue,
+        userData,
+        setRegistrationAlertStatus: mockSetAlertStatus,
+      });
       expect(mockSetAlertStatus).toHaveBeenCalledWith("IN_PROGRESS");
     });
 
@@ -106,7 +111,12 @@ describe("SigninHelper", () => {
       updateQueue = new UpdateQueueFactory(userData, update);
 
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
-      await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
+      await onSelfRegister({
+        router: fakeRouter,
+        updateQueue,
+        userData,
+        setRegistrationAlertStatus: mockSetAlertStatus,
+      });
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
         ...userData,
         businesses: {
@@ -131,7 +141,12 @@ describe("SigninHelper", () => {
       updateQueue = new UpdateQueueFactory(userData, update);
 
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
-      await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
+      await onSelfRegister({
+        router: fakeRouter,
+        updateQueue,
+        userData,
+        setRegistrationAlertStatus: mockSetAlertStatus,
+      });
 
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
         ...userData,
@@ -154,7 +169,12 @@ describe("SigninHelper", () => {
       userData = generateUserDataForBusiness(business);
       updateQueue = new UpdateQueueFactory(userData, update);
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
-      await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
+      await onSelfRegister({
+        router: fakeRouter,
+        updateQueue,
+        userData,
+        setRegistrationAlertStatus: mockSetAlertStatus,
+      });
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
         ...userData,
         businesses: {
@@ -175,7 +195,12 @@ describe("SigninHelper", () => {
         userData: returnedUserData,
         authRedirectURL: "/some-url",
       });
-      await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
+      await onSelfRegister({
+        router: fakeRouter,
+        updateQueue,
+        userData,
+        setRegistrationAlertStatus: mockSetAlertStatus,
+      });
       await waitFor(() => {
         return expect(mockPush).toHaveBeenCalledWith("/some-url");
       });
@@ -184,7 +209,12 @@ describe("SigninHelper", () => {
 
     it("sets alert to DUPLICATE_ERROR on 409 response code", async () => {
       mockApi.postSelfReg.mockRejectedValue(409);
-      await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
+      await onSelfRegister({
+        router: fakeRouter,
+        updateQueue,
+        userData,
+        setRegistrationAlertStatus: mockSetAlertStatus,
+      });
       await waitFor(() => {
         return expect(mockSetAlertStatus).toHaveBeenCalledWith("DUPLICATE_ERROR");
       });
@@ -194,7 +224,12 @@ describe("SigninHelper", () => {
 
     it("sets alert to RESPONSE_ERROR on generic error", async () => {
       mockApi.postSelfReg.mockRejectedValue(500);
-      await onSelfRegister(fakeRouter, updateQueue, userData, mockSetAlertStatus);
+      await onSelfRegister({
+        router: fakeRouter,
+        updateQueue,
+        userData,
+        setRegistrationAlertStatus: mockSetAlertStatus,
+      });
       await waitFor(() => {
         return expect(mockSetAlertStatus).toHaveBeenCalledWith("RESPONSE_ERROR");
       });
@@ -210,7 +245,7 @@ describe("SigninHelper", () => {
       const userStorageMock = mockGetCurrentUserData.mockImplementation(() => {
         return userData;
       });
-      await onGuestSignIn(mockPush, ROUTES.landing, mockDispatch);
+      await onGuestSignIn({ push: mockPush, pathname: ROUTES.landing, dispatch: mockDispatch });
       expect(userStorageMock).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalledWith({
         type: "LOGIN_GUEST",
@@ -225,7 +260,12 @@ describe("SigninHelper", () => {
       mockGetCurrentUserData.mockImplementation(() => {
         return undefined;
       });
-      await onGuestSignIn(mockPush, ROUTES.landing, mockDispatch, { encounteredMyNjLinkingError: true });
+      await onGuestSignIn({
+        push: mockPush,
+        pathname: ROUTES.landing,
+        dispatch: mockDispatch,
+        encounteredMyNjLinkingError: true,
+      });
       expect(
         getLastCalledWith<unknown, AuthAction>(mockDispatch)[0].activeUser?.encounteredMyNjLinkingError
       ).toEqual(true);
@@ -243,7 +283,7 @@ describe("SigninHelper", () => {
         getEncounteredMyNjLinkingError: mockGetFn,
       }));
 
-      await onGuestSignIn(mockPush, ROUTES.landing, mockDispatch);
+      await onGuestSignIn({ push: mockPush, pathname: ROUTES.landing, dispatch: mockDispatch });
       expect(mockGetFn).toHaveBeenCalled();
       expect(
         getLastCalledWith<unknown, AuthAction>(mockDispatch)[0].activeUser?.encounteredMyNjLinkingError
@@ -261,7 +301,12 @@ describe("SigninHelper", () => {
         getEncounteredMyNjLinkingError: jest.fn(),
       }));
 
-      await onGuestSignIn(mockPush, ROUTES.landing, mockDispatch, { encounteredMyNjLinkingError: true });
+      await onGuestSignIn({
+        push: mockPush,
+        pathname: ROUTES.landing,
+        dispatch: mockDispatch,
+        encounteredMyNjLinkingError: true,
+      });
       expect(mockSetFn).toHaveBeenCalledWith(true);
     });
 
@@ -273,7 +318,7 @@ describe("SigninHelper", () => {
       mockSession.getActiveUser.mockImplementation(() => {
         throw new Error("New");
       });
-      await onGuestSignIn(mockPush, ROUTES.landing, mockDispatch);
+      await onGuestSignIn({ push: mockPush, pathname: ROUTES.landing, dispatch: mockDispatch });
       expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
     });
 
@@ -284,7 +329,7 @@ describe("SigninHelper", () => {
       mockSession.getActiveUser.mockImplementation(() => {
         throw new Error("New");
       });
-      await onGuestSignIn(mockPush, ROUTES.dashboard, mockDispatch);
+      await onGuestSignIn({ push: mockPush, pathname: ROUTES.dashboard, dispatch: mockDispatch });
       expect(mockPush).toHaveBeenCalledWith(ROUTES.landing);
     });
 
@@ -295,7 +340,7 @@ describe("SigninHelper", () => {
       mockSession.getActiveUser.mockImplementation(() => {
         throw new Error("New");
       });
-      await onGuestSignIn(mockPush, ROUTES.onboarding, mockDispatch);
+      await onGuestSignIn({ push: mockPush, pathname: ROUTES.onboarding, dispatch: mockDispatch });
       expect(mockPush).not.toHaveBeenCalledWith(ROUTES.landing);
     });
 
@@ -306,7 +351,7 @@ describe("SigninHelper", () => {
       mockSession.getActiveUser.mockImplementation(() => {
         throw new Error("New");
       });
-      await onGuestSignIn(mockPush, ROUTES.welcome, mockDispatch);
+      await onGuestSignIn({ push: mockPush, pathname: ROUTES.welcome, dispatch: mockDispatch });
       expect(mockPush).not.toHaveBeenCalledWith(ROUTES.landing);
     });
   });

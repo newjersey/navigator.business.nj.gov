@@ -70,7 +70,7 @@ const AccountSetupPage = (): ReactElement => {
 
       await updateQueue.queue(userDataWithUser).update();
       analytics.event.finish_setup_on_myNewJersey_button.submit.go_to_myNJ_registration();
-      onSelfRegister(router, updateQueue, userDataWithUser, setRegistrationAlertStatus);
+      onSelfRegister({ router, updateQueue, userData: userDataWithUser, setRegistrationAlertStatus });
     },
     (isValid) => {
       if (isValid) {
