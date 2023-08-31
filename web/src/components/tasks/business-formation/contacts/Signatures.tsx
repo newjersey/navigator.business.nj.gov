@@ -8,6 +8,7 @@ import {
   createSignedEmptyFormationObject,
   needsSignerTypeFunc,
 } from "@/components/tasks/business-formation/contacts/helpers";
+import { FormationField } from "@/components/tasks/business-formation/FormationField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -262,20 +263,22 @@ export const Signatures = (): ReactElement => {
             </strong>
           </div>
         )}
-        <GenericTextField
-          inputWidth="full"
-          value={state.formationFormData.signers[index].name}
-          handleChange={(value: string): void => handleSignerChange(value, index)}
-          error={hasError && doesRowHaveError(index)}
-          onValidation={(): void => {
-            setFieldsInteracted([FIELD_NAME]);
-          }}
-          validationText={getInlineValidationText()}
-          fieldName="signer"
-          className={`margin-top-0`}
-          ariaLabel={`Signer ${index}`}
-          required={true}
-        />
+        <FormationField fieldName="signer">
+          <GenericTextField
+            inputWidth="full"
+            value={state.formationFormData.signers[index].name}
+            handleChange={(value: string): void => handleSignerChange(value, index)}
+            error={hasError && doesRowHaveError(index)}
+            onValidation={(): void => {
+              setFieldsInteracted([FIELD_NAME]);
+            }}
+            validationText={getInlineValidationText()}
+            fieldName="signer"
+            className={`margin-top-0`}
+            ariaLabel={`Signer ${index}`}
+            required={true}
+          />
+        </FormationField>
       </>
     );
   };

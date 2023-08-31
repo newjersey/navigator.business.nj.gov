@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
+import { FormationField } from "@/components/tasks/business-formation/FormationField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -28,24 +29,26 @@ export const NonprofitProvisions = (): ReactElement => {
       <div className="margin-top-1">
         <div className="grid-row">
           <div className="grid-col">
-            <BusinessFormationTextField
-              fieldName={fieldName}
-              required={true}
-              errorBarType="ALWAYS"
-              validationText={Config.formation.general.genericErrorText}
-              label={Config.formation.nonprofitProvisions.description}
-              fieldOptions={{
-                multiline: true,
-                rows: 3,
-                className: "override-padding",
-                inputProps: {
-                  maxLength: 400,
-                  sx: {
-                    padding: "1rem",
+            <FormationField fieldName={fieldName}>
+              <BusinessFormationTextField
+                fieldName={fieldName}
+                required={true}
+                errorBarType="ALWAYS"
+                validationText={Config.formation.general.genericErrorText}
+                label={Config.formation.nonprofitProvisions.description}
+                fieldOptions={{
+                  multiline: true,
+                  rows: 3,
+                  className: "override-padding",
+                  inputProps: {
+                    maxLength: 400,
+                    sx: {
+                      padding: "1rem",
+                    },
                   },
-                },
-              }}
-            />
+                }}
+              />
+            </FormationField>
           </div>
         </div>
         <div className="text-base-dark margin-top-1 margin-bottom-2">
@@ -84,28 +87,30 @@ export const NonprofitProvisions = (): ReactElement => {
         <strong>
           <Content>{title}</Content>
         </strong>
-        <FormControl error={hasError}>
-          <RadioGroup
-            aria-label={camelCaseToSentence(fieldName)}
-            name={camelCaseToSentence(fieldName)}
-            value={state.formationFormData[fieldName]?.toString() ?? ""}
-            onChange={onChange}
-            row
-          >
-            {values.map((value) => (
-              <FormControlLabel
-                key={`${fieldName}-${value}`}
-                style={{ alignItems: "center" }}
-                value={value}
-                control={
-                  <Radio data-testid={`${fieldName}-${value}`} color={hasError ? "error" : "primary"} />
-                }
-                label={getRadioLabel(value)}
-              />
-            ))}
-          </RadioGroup>
-          <FormHelperText>{hasError ? Config.formation.general.genericErrorText : ""}</FormHelperText>
-        </FormControl>
+        <FormationField fieldName={fieldName}>
+          <FormControl error={hasError}>
+            <RadioGroup
+              aria-label={camelCaseToSentence(fieldName)}
+              name={camelCaseToSentence(fieldName)}
+              value={state.formationFormData[fieldName]?.toString() ?? ""}
+              onChange={onChange}
+              row
+            >
+              {values.map((value) => (
+                <FormControlLabel
+                  key={`${fieldName}-${value}`}
+                  style={{ alignItems: "center" }}
+                  value={value}
+                  control={
+                    <Radio data-testid={`${fieldName}-${value}`} color={hasError ? "error" : "primary"} />
+                  }
+                  label={getRadioLabel(value)}
+                />
+              ))}
+            </RadioGroup>
+            <FormHelperText>{hasError ? Config.formation.general.genericErrorText : ""}</FormHelperText>
+          </FormControl>
+        </FormationField>
       </WithErrorBar>
     );
   };

@@ -1,4 +1,5 @@
 import { getCost } from "@/components/tasks/business-formation/billing/getCost";
+import { FormationField } from "@/components/tasks/business-formation/FormationField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -9,7 +10,7 @@ import { FormHelperText, Radio } from "@mui/material";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 
 export const PaymentTypeTable = (): ReactElement => {
-  const FIELD = "paymentType";
+  const fieldName = "paymentType";
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
 
@@ -63,112 +64,118 @@ export const PaymentTypeTable = (): ReactElement => {
         paymentType: event.target.value as PaymentType,
       };
     });
-    setFieldsInteracted([FIELD]);
+    setFieldsInteracted([fieldName]);
   };
 
-  const hasError = doesFieldHaveError(FIELD);
+  const hasError = doesFieldHaveError(fieldName);
 
   return (
-    <WithErrorBar hasError={hasError} type="ALWAYS">
-      <table className="business-formation-table business-formation-payment">
-        <thead>
-          <tr>
-            <th className="text-bold">{Config.formation.fields.paymentType.label}</th>
-            <th></th>
-            <th></th>
-          </tr>
-          <tr>
-            <th colSpan={3}>
-              {hasError ? (
-                <FormHelperText className={"text-error-dark"}>
-                  {Config.formation.fields.paymentType.error}
-                </FormHelperText>
-              ) : (
-                " "
-              )}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className={"padding-1"}>
-              <Radio
-                id="paymentTypeCreditCardRadio"
-                color={hasError ? "error" : "primary"}
-                checked={state.formationFormData.paymentType === "CC"}
-                onChange={handleChange}
-                value="CC"
-                name="radio-buttons"
-              />
-            </td>
-            <td>
-              <label
-                htmlFor="paymentTypeCreditCardRadio"
-                className={
-                  hasError
-                    ? "text-error-dark"
-                    : state.formationFormData.paymentType === "CC"
-                    ? "text-primary-dark text-bold"
-                    : ""
-                }
+    <FormationField fieldName={fieldName}>
+      <WithErrorBar hasError={hasError} type="ALWAYS">
+        <table className="business-formation-table business-formation-payment">
+          <thead>
+            <tr>
+              <th className="text-bold">{Config.formation.fields.paymentType.label}</th>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr>
+              <th colSpan={3}>
+                {hasError ? (
+                  <FormHelperText className={"text-error-dark"}>
+                    {Config.formation.fields.paymentType.error}
+                  </FormHelperText>
+                ) : (
+                  " "
+                )}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className={"padding-1"}>
+                <Radio
+                  id="paymentTypeCreditCardRadio"
+                  color={hasError ? "error" : "primary"}
+                  checked={state.formationFormData.paymentType === "CC"}
+                  onChange={handleChange}
+                  value="CC"
+                  name="radio-buttons"
+                />
+              </td>
+              <td>
+                <label
+                  htmlFor="paymentTypeCreditCardRadio"
+                  className={
+                    hasError
+                      ? "text-error-dark"
+                      : state.formationFormData.paymentType === "CC"
+                      ? "text-primary-dark text-bold"
+                      : ""
+                  }
+                >
+                  <div data-testid={"paymentTypeCreditCardLabel"}>
+                    {Config.formation.fields.paymentType.creditCardLabel}
+                  </div>
+                </label>
+              </td>
+              <td
+                className={state.formationFormData.paymentType === "CC" ? "text-primary-dark text-bold" : ""}
               >
-                <div data-testid={"paymentTypeCreditCardLabel"}>
-                  {Config.formation.fields.paymentType.creditCardLabel}
+                {getDollarValue(creditCardCost)}
+              </td>
+            </tr>
+            <tr>
+              <td className={"padding-1"}>
+                <Radio
+                  id="paymentTypeACHRadio"
+                  color={hasError ? "error" : "primary"}
+                  checked={state.formationFormData.paymentType === "ACH"}
+                  onChange={handleChange}
+                  value="ACH"
+                  name="radio-buttons"
+                />
+              </td>
+              <td>
+                <label
+                  htmlFor="paymentTypeACHRadio"
+                  className={
+                    doesFieldHaveError(fieldName)
+                      ? "text-error-dark"
+                      : state.formationFormData.paymentType === "ACH"
+                      ? "text-primary-dark text-bold"
+                      : ""
+                  }
+                >
+                  <div data-testid={"paymentTypeACHLabel"}>
+                    {Config.formation.fields.paymentType.achLabel}
+                  </div>
+                </label>
+              </td>
+              <td
+                className={state.formationFormData.paymentType === "ACH" ? "text-primary-dark text-bold" : ""}
+              >
+                {getDollarValue(achCost)}
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colSpan={1}>
+                <div className="text-align-left">
+                  <span className="text-bold r">{Config.formation.fields.paymentType.costTotalLabel}</span>{" "}
                 </div>
-              </label>
-            </td>
-            <td className={state.formationFormData.paymentType === "CC" ? "text-primary-dark text-bold" : ""}>
-              {getDollarValue(creditCardCost)}
-            </td>
-          </tr>
-          <tr>
-            <td className={"padding-1"}>
-              <Radio
-                id="paymentTypeACHRadio"
-                color={hasError ? "error" : "primary"}
-                checked={state.formationFormData.paymentType === "ACH"}
-                onChange={handleChange}
-                value="ACH"
-                name="radio-buttons"
-              />
-            </td>
-            <td>
-              <label
-                htmlFor="paymentTypeACHRadio"
-                className={
-                  doesFieldHaveError(FIELD)
-                    ? "text-error-dark"
-                    : state.formationFormData.paymentType === "ACH"
-                    ? "text-primary-dark text-bold"
-                    : ""
-                }
-              >
-                <div data-testid={"paymentTypeACHLabel"}>{Config.formation.fields.paymentType.achLabel}</div>
-              </label>
-            </td>
-            <td
-              className={state.formationFormData.paymentType === "ACH" ? "text-primary-dark text-bold" : ""}
-            >
-              {getDollarValue(achCost)}
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colSpan={1}>
-              <div className="text-align-left">
-                <span className="text-bold r">{Config.formation.fields.paymentType.costTotalLabel}</span>{" "}
-              </div>
-            </td>
-            <td colSpan={1}></td>
-            <td colSpan={1}>
-              <div className="text-align-right text-bold" aria-label={"Total"}>
-                {getDollarValue(totalCost)}
-              </div>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
-    </WithErrorBar>
+              </td>
+              <td colSpan={1}></td>
+              <td colSpan={1}>
+                <div className="text-align-right text-bold" aria-label={"Total"}>
+                  {getDollarValue(totalCost)}
+                </div>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </WithErrorBar>
+    </FormationField>
   );
 };
