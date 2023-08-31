@@ -6,6 +6,7 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { StateDropdown } from "@/components/StateDropdown";
 import { FormationMunicipality } from "@/components/tasks/business-formation/business/FormationMunicipality";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
+import { FormationField } from "@/components/tasks/business-formation/FormationField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -65,22 +66,26 @@ export const MainBusinessAddressNj = (): ReactElement => {
       {isExpanded && (
         <>
           <CannabisLocationAlert industryId={business?.profileData.industryId} />
-          <BusinessFormationTextField
-            label={Config.formation.fields.addressLine1.label}
-            fieldName="addressLine1"
-            required={true}
-            className={"margin-bottom-2"}
-            errorBarType="ALWAYS"
-            validationText={getFieldErrorLabel("addressLine1")}
-          />
-          <BusinessFormationTextField
-            label={Config.formation.fields.addressLine2.label}
-            secondaryLabel={Config.formation.general.optionalLabel}
-            errorBarType="ALWAYS"
-            fieldName="addressLine2"
-            validationText={getFieldErrorLabel("addressLine2")}
-            className="margin-bottom-2"
-          />
+          <FormationField fieldName="addressLine1">
+            <BusinessFormationTextField
+              label={Config.formation.fields.addressLine1.label}
+              fieldName="addressLine1"
+              required={true}
+              className={"margin-bottom-2"}
+              errorBarType="ALWAYS"
+              validationText={getFieldErrorLabel("addressLine1")}
+            />
+          </FormationField>
+          <FormationField fieldName="addressLine2">
+            <BusinessFormationTextField
+              label={Config.formation.fields.addressLine2.label}
+              secondaryLabel={Config.formation.general.optionalLabel}
+              errorBarType="ALWAYS"
+              fieldName="addressLine2"
+              validationText={getFieldErrorLabel("addressLine2")}
+              className="margin-bottom-2"
+            />
+          </FormationField>
           <WithErrorBar
             hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressMunicipality"])}
             type="DESKTOP-ONLY"
@@ -102,23 +107,27 @@ export const MainBusinessAddressNj = (): ReactElement => {
                       <strong>
                         <ModifiedContent>{Config.formation.fields.addressState.label}</ModifiedContent>
                       </strong>
-                      <StateDropdown
-                        fieldName="addressState"
-                        value={"New Jersey"}
-                        validationText={Config.formation.fields.addressState.error}
-                        disabled={true}
-                        onSelect={(): void => {}}
-                      />
+                      <FormationField fieldName="addressState">
+                        <StateDropdown
+                          fieldName="addressState"
+                          value={"New Jersey"}
+                          validationText={Config.formation.fields.addressState.error}
+                          disabled={true}
+                          onSelect={(): void => {}}
+                        />
+                      </FormationField>
                     </div>
                     <div className="grid-col-7">
-                      <BusinessFormationTextField
-                        label={Config.formation.fields.addressZipCode.label}
-                        numericProps={{ maxLength: 5 }}
-                        required={true}
-                        errorBarType="NEVER"
-                        fieldName={"addressZipCode"}
-                        validationText={getFieldErrorLabel("addressZipCode")}
-                      />
+                      <FormationField fieldName="addressZipCode">
+                        <BusinessFormationTextField
+                          label={Config.formation.fields.addressZipCode.label}
+                          numericProps={{ maxLength: 5 }}
+                          required={true}
+                          errorBarType="NEVER"
+                          fieldName={"addressZipCode"}
+                          validationText={getFieldErrorLabel("addressZipCode")}
+                        />
+                      </FormationField>
                     </div>
                   </div>
                 </WithErrorBar>

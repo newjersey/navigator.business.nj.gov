@@ -4,6 +4,7 @@ import { MainBusinessForeignAddressFlow } from "@/components/tasks/business-form
 import { PartnershipRights } from "@/components/tasks/business-formation/business/PartnershipRights";
 import { Provisions } from "@/components/tasks/business-formation/business/Provisions";
 import { BusinessFormationTextBox } from "@/components/tasks/business-formation/BusinessFormationTextBox";
+import { FormationField } from "@/components/tasks/business-formation/FormationField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { Fragment, ReactElement, useContext, useMemo } from "react";
@@ -27,31 +28,37 @@ export const BusinessStep = (): ReactElement => {
     return (
       <>
         <hr className="margin-y-2" aria-hidden={true} />
-        <BusinessFormationTextBox
-          maxChars={400}
-          fieldName={"combinedInvestment"}
-          required={true}
-          title={Config.formation.fields.combinedInvestment.label}
-          contentMd={Config.formation.fields.combinedInvestment.body}
-        />
+        <FormationField fieldName="combinedInvestment">
+          <BusinessFormationTextBox
+            maxChars={400}
+            fieldName="combinedInvestment"
+            required={true}
+            title={Config.formation.fields.combinedInvestment.label}
+            contentMd={Config.formation.fields.combinedInvestment.body}
+          />
+        </FormationField>
         <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
-        <BusinessFormationTextBox
-          maxChars={400}
-          fieldName={"withdrawals"}
-          required={true}
-          title={Config.formation.fields.withdrawals.label}
-          contentMd={Config.formation.fields.withdrawals.body}
-        />
+        <FormationField fieldName="withdrawals">
+          <BusinessFormationTextBox
+            maxChars={400}
+            fieldName="withdrawals"
+            required={true}
+            title={Config.formation.fields.withdrawals.label}
+            contentMd={Config.formation.fields.withdrawals.body}
+          />
+        </FormationField>
         <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
         <PartnershipRights />
         <hr className="margin-bottom-2 margin-top-2" aria-hidden={true} />
-        <BusinessFormationTextBox
-          maxChars={400}
-          fieldName={"dissolution"}
-          required={true}
-          title={Config.formation.fields.dissolution.label}
-          contentMd={Config.formation.fields.dissolution.body}
-        />
+        <FormationField fieldName="dissolution">
+          <BusinessFormationTextBox
+            maxChars={400}
+            fieldName="dissolution"
+            required={true}
+            title={Config.formation.fields.dissolution.label}
+            contentMd={Config.formation.fields.dissolution.body}
+          />
+        </FormationField>
       </>
     );
   };
@@ -59,15 +66,17 @@ export const BusinessStep = (): ReactElement => {
   const businessPurposeSection = (): ReactElement => (
     <>
       <hr className="margin-y-2" aria-hidden={true} key={"business-line-2"} />
-      <BusinessFormationTextBox
-        maxChars={300}
-        fieldName={"businessPurpose"}
-        required={false}
-        inputLabel={Config.formation.fields.businessPurpose.label}
-        addButtonText={Config.formation.fields.businessPurpose.addButtonText}
-        title={Config.formation.fields.businessPurpose.label}
-        contentMd={Config.formation.fields.businessPurpose.body}
-      />
+      <FormationField fieldName="businessPurpose">
+        <BusinessFormationTextBox
+          maxChars={300}
+          fieldName="businessPurpose"
+          required={false}
+          inputLabel={Config.formation.fields.businessPurpose.label}
+          addButtonText={Config.formation.fields.businessPurpose.addButtonText}
+          title={Config.formation.fields.businessPurpose.label}
+          contentMd={Config.formation.fields.businessPurpose.body}
+        />
+      </FormationField>
       <hr className="margin-y-2" aria-hidden={true} key={"business-line-3"} />
     </>
   );

@@ -4,6 +4,7 @@ import { createSignedEmptyFormationObject } from "@/components/tasks/business-fo
 import { Members } from "@/components/tasks/business-formation/contacts/Members";
 import { RegisteredAgent } from "@/components/tasks/business-formation/contacts/RegisteredAgent";
 import { Signatures } from "@/components/tasks/business-formation/contacts/Signatures";
+import { FormationField } from "@/components/tasks/business-formation/FormationField";
 import { getErrorStateForField } from "@/components/tasks/business-formation/getErrorStateForField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -46,7 +47,9 @@ export const ContactsStep = (): ReactElement => {
         {shouldShowMembers() && (
           <>
             <hr className="margin-top-0 margin-bottom-3" />
-            <Members hasError={doesFieldHaveError("members")} />
+            <FormationField fieldName="members">
+              <Members hasError={doesFieldHaveError("members")} />
+            </FormationField>
           </>
         )}
         <hr className="margin-top-0 margin-bottom-3" />
@@ -56,51 +59,53 @@ export const ContactsStep = (): ReactElement => {
           </Alert>
         )}
         {incorporationLegalStructures.includes(state.formationFormData.legalType) ? (
-          <Addresses<FormationIncorporator>
-            createEmptyAddress={(): FormationIncorporator => {
-              return createSignedEmptyFormationObject(
-                state.formationFormData.legalType,
-                createEmptyFormationIncorporator
-              );
-            }}
-            fieldName={"incorporators"}
-            addressData={state.formationFormData.incorporators ?? []}
-            setData={(incorporators): void => {
-              setFormationFormData((previousFormationData) => {
-                return {
-                  ...previousFormationData,
-                  incorporators: incorporators,
-                };
-              });
-            }}
-            defaultAddress={
-              "limited-partnership" === state.formationFormData.legalType
-                ? {
-                    addressCity:
-                      state.formationFormData.addressMunicipality?.name ??
-                      state.formationFormData.addressCity,
-                    addressLine1: state.formationFormData.addressLine1,
-                    addressLine2: state.formationFormData.addressLine2,
-                    addressState: state.formationFormData.addressState,
-                    addressZipCode: state.formationFormData.addressZipCode,
-                  }
-                : undefined
-            }
-            needSignature={true}
-            displayContent={{
-              description: getDescription("incorporators"),
-              header: Config.formation.fields.incorporators.label,
-              placeholder: Config.formation.fields.incorporators.placeholder ?? "",
-              newButtonText: Config.formation.fields.incorporators.addButtonText,
-              snackbarHeader: Config.formation.fields.incorporators.successSnackbarHeader,
-              snackbarBody: Config.formation.fields.incorporators.successSnackbarBody,
-              modalTitle: Config.formation.fields.incorporators.modalTitle,
-              modalSaveButton: Config.formation.fields.incorporators.addButtonText,
-              error: Config.formation.fields.incorporators.error,
-            }}
-            legalType={state.formationFormData.legalType}
-            hasError={doesFieldHaveError("signers") || doesFieldHaveError("incorporators")}
-          />
+          <FormationField fieldName="incorporators">
+            <Addresses<FormationIncorporator>
+              createEmptyAddress={(): FormationIncorporator => {
+                return createSignedEmptyFormationObject(
+                  state.formationFormData.legalType,
+                  createEmptyFormationIncorporator
+                );
+              }}
+              fieldName="incorporators"
+              addressData={state.formationFormData.incorporators ?? []}
+              setData={(incorporators): void => {
+                setFormationFormData((previousFormationData) => {
+                  return {
+                    ...previousFormationData,
+                    incorporators: incorporators,
+                  };
+                });
+              }}
+              defaultAddress={
+                "limited-partnership" === state.formationFormData.legalType
+                  ? {
+                      addressCity:
+                        state.formationFormData.addressMunicipality?.name ??
+                        state.formationFormData.addressCity,
+                      addressLine1: state.formationFormData.addressLine1,
+                      addressLine2: state.formationFormData.addressLine2,
+                      addressState: state.formationFormData.addressState,
+                      addressZipCode: state.formationFormData.addressZipCode,
+                    }
+                  : undefined
+              }
+              needSignature={true}
+              displayContent={{
+                description: getDescription("incorporators"),
+                header: Config.formation.fields.incorporators.label,
+                placeholder: Config.formation.fields.incorporators.placeholder ?? "",
+                newButtonText: Config.formation.fields.incorporators.addButtonText,
+                snackbarHeader: Config.formation.fields.incorporators.successSnackbarHeader,
+                snackbarBody: Config.formation.fields.incorporators.successSnackbarBody,
+                modalTitle: Config.formation.fields.incorporators.modalTitle,
+                modalSaveButton: Config.formation.fields.incorporators.addButtonText,
+                error: Config.formation.fields.incorporators.error,
+              }}
+              legalType={state.formationFormData.legalType}
+              hasError={doesFieldHaveError("signers") || doesFieldHaveError("incorporators")}
+            />
+          </FormationField>
         ) : (
           <Signatures />
         )}

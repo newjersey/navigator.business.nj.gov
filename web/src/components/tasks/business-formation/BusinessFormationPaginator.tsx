@@ -1,4 +1,5 @@
 import { AutosaveSpinner } from "@/components/AutosaveSpinner";
+import { FieldEntryAlert } from "@/components/FieldEntryAlert";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { HelpButton } from "@/components/njwds-extended/HelpButton";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
@@ -458,32 +459,32 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
         );
       });
 
+      const fieldsWithErrors = dedupedFieldErrors.map((fieldError) => {
+        let configFieldName = fieldError.field as ConfigFormationFields;
+
+        if (fieldError.field === "members") {
+          configFieldName = getConfigFieldByLegalStructure(state.formationFormData.legalType);
+        }
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const label = (Config.formation.fields as any)[configFieldName].label;
+        return {
+          name: configFieldName,
+          label,
+          children: getApiErrorMessage(fieldError.field) && (
+            <ul>
+              <li>{getApiErrorMessage(fieldError.field)}</li>
+            </ul>
+          ),
+        };
+      });
+
       return (
-        <Alert variant="error">
-          <div>{Config.formation.errorBanner.errorOnStep}</div>
-          <ul>
-            {dedupedFieldErrors.map((fieldError) => {
-              let configFieldName = fieldError.field as ConfigFormationFields;
-
-              if (fieldError.field === "members") {
-                configFieldName = getConfigFieldByLegalStructure(state.formationFormData.legalType);
-              }
-
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              const label = (Config.formation.fields as any)[configFieldName].label;
-              return (
-                <li key={label}>
-                  {label}
-                  {getApiErrorMessage(fieldError.field) && (
-                    <ul>
-                      <li>{getApiErrorMessage(fieldError.field)}</li>
-                    </ul>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </Alert>
+        <FieldEntryAlert
+          alertMessage={Config.formation.errorBanner.errorOnStep}
+          fields={fieldsWithErrors}
+          variant="error"
+        />
       );
     }
 
