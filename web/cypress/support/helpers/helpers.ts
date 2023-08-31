@@ -60,19 +60,3 @@ export const randomTradeNameLegalStructure = (): string => {
 export const clickDeferredSaveButton = () => {
   return cy.get(`button[data-testid="deferred-question-save"]`).click();
 };
-
-export const waitForUserDataMountUpdate = () => {
-  cy.intercept({
-    method: "POST",
-    url: "/local/api/users",
-  }).as("updateOnMount");
-
-  cy.intercept({
-    method: "GET",
-    url: "/local/api/users/**",
-  }).as("getAfterUpdateOnMount");
-
-  cy.wait("@updateOnMount");
-  cy.wait("@getAfterUpdateOnMount");
-  cy.wait(100);
-};
