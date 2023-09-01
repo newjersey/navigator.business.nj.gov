@@ -6,6 +6,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Opportunity } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import truncateMarkdown from "markdown-truncate";
@@ -48,6 +49,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
       return;
     }
     const propertyToUpdate = props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
+    analytics.event.for_you_card_hide_button.click.hide_card();
     await updateQueue
       .queuePreferences({
         [propertyToUpdate]: [...business.preferences[propertyToUpdate], props.opportunity.id],
@@ -60,6 +62,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
       return;
     }
     const propertyToUpdate = props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
+    analytics.event.for_you_card_unhide_button.click.unhide_card();
     await updateQueue
       .queuePreferences({
         [propertyToUpdate]: business.preferences[propertyToUpdate].filter((it: string) => {

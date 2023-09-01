@@ -1,8 +1,41 @@
 import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
+import { getMergedConfig } from "@/contexts/configContext";
+import analytics from "@/lib/utils/analytics";
 import { generateOpportunity } from "@/test/factories";
-import { render, screen } from "@testing-library/react";
+import { useMockBusiness } from "@/test/mock/mockUseUserData";
+import { generatePreferences } from "@businessnjgovnavigator/shared/";
+import { fireEvent, render, screen } from "@testing-library/react";
+
+jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+
+const Config = getMergedConfig();
+const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+function setupMockAnalytics(): typeof analytics {
+  return {
+    ...jest.requireActual("@/lib/utils/analytics").default,
+    event: {
+      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      for_you_card_hide_button: {
+        click: {
+          hide_card: jest.fn(),
+        },
+      },
+      for_you_card_unhide_button: {
+        click: {
+          unhide_card: jest.fn(),
+        },
+      },
+    },
+  };
+}
 
 describe("OpportunityCard", () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+    useMockBusiness({});
+  });
+
   it("renders the name", () => {
     const opportunity = generateOpportunity({ name: "Test Name for Card" });
     render(<OpportunityCard opportunity={opportunity} urlPath="funding" />);
@@ -69,5 +102,20 @@ describe("OpportunityCard", () => {
     const opportunity = generateOpportunity({ descriptionMd: linkContent });
     render(<OpportunityCard opportunity={opportunity} urlPath="funding" />);
     expect(screen.getByText("a li")).toBeInTheDocument();
+  });
+
+  it("fires hide_card analytics when hide button is clicked", () => {
+    render(<OpportunityCard opportunity={generateOpportunity({ id: "123" })} urlPath="funding" />);
+    fireEvent.click(screen.getByText(Config.dashboardDefaults.hideOpportunityText));
+    expect(mockAnalytics.event.for_you_card_hide_button.click.hide_card).toHaveBeenCalledTimes(1);
+    expect(mockAnalytics.event.for_you_card_unhide_button.click.unhide_card).not.toHaveBeenCalled();
+  });
+
+  it("fires unhide_card analytics when unhide button is clicked", () => {
+    useMockBusiness({ preferences: generatePreferences({ hiddenFundingIds: ["123"] }) });
+    render(<OpportunityCard opportunity={generateOpportunity({ id: "123" })} urlPath="funding" />);
+    fireEvent.click(screen.getByText(Config.dashboardDefaults.unHideOpportunityText));
+    expect(mockAnalytics.event.for_you_card_hide_button.click.hide_card).not.toHaveBeenCalled();
+    expect(mockAnalytics.event.for_you_card_unhide_button.click.unhide_card).toHaveBeenCalledTimes(1);
   });
 });
