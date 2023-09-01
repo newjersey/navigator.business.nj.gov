@@ -482,8 +482,10 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
       return (
         <FieldEntryAlert
           alertMessage={Config.formation.errorBanner.errorOnStep}
+          alertProps={{
+            variant: "error",
+          }}
           fields={fieldsWithErrors}
-          variant="error"
         />
       );
     }
