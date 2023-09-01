@@ -30,9 +30,11 @@ export const ProfileOpportunitiesAlert = (): ReactElement => {
   return (
     <FieldEntryAlert
       alertMessage={Config.profileDefaults.default.profileCompletionAlert}
+      alertProps={{
+        dataTestid: "opp-alert",
+        variant: "info",
+      }}
       fields={unansweredFields}
-      testId="opp-alert"
-      variant="info"
     />
   );
 };

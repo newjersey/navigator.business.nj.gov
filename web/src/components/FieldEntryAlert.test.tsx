@@ -10,15 +10,25 @@ describe("<FieldEntryAlert/>", () => {
     render(
       <FieldEntryAlert
         alertMessage={alertMessage}
+        alertProps={{
+          variant: "error",
+        }}
         fields={[{ name: "field-name", label: "Field Name" }]}
-        variant="error"
       />
     );
     expect(screen.getByText(alertMessage)).toBeInTheDocument();
   });
 
   it("does not render when fields is an empty array", () => {
-    render(<FieldEntryAlert alertMessage={alertMessage} fields={[]} variant="error" />);
+    render(
+      <FieldEntryAlert
+        alertMessage={alertMessage}
+        alertProps={{
+          variant: "error",
+        }}
+        fields={[]}
+      />
+    );
     expect(screen.queryByText(alertMessage)).not.toBeInTheDocument();
   });
 
@@ -26,9 +36,11 @@ describe("<FieldEntryAlert/>", () => {
     render(
       <FieldEntryAlert
         alertMessage={alertMessage}
+        alertProps={{
+          dataTestid: "field-entry-alert",
+          variant,
+        }}
         fields={[{ name: "field-name", label: "Field Name" }]}
-        variant={variant}
-        testId="field-entry-alert"
       />
     );
     expect(screen.getByTestId("field-entry-alert")).toHaveClass(`usa-alert--${variant}`);
@@ -53,9 +65,11 @@ describe("<FieldEntryAlert/>", () => {
     render(
       <FieldEntryAlert
         alertMessage={alertMessage}
+        alertProps={{
+          dataTestid: "field-entry-alert",
+          variant: "info",
+        }}
         fields={fields}
-        variant="info"
-        testId="field-entry-alert"
       />
     );
 

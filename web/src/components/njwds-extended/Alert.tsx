@@ -1,8 +1,7 @@
 import { ReactElement, ReactNode } from "react";
 
-interface Props {
+export interface AlertProps {
   variant: AlertVariant;
-  children: ReactNode;
   noIcon?: boolean;
   heading?: string;
   rounded?: boolean;
@@ -10,6 +9,10 @@ interface Props {
   className?: string;
   borderRight?: boolean;
   borderSmall?: boolean;
+}
+
+interface Props extends AlertProps {
+  children: ReactNode;
 }
 
 export const AlertVariants = ["info", "success", "warning", "error", "note"] as const;
