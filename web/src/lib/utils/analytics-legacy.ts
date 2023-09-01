@@ -109,7 +109,9 @@ export type LegacyEventCategory =
   | "roadmap_logout_button"
   | "landing_page_hero_log_in"
   | "finish_setup_on_myNewJersey_button"
-  | "landing_page";
+  | "landing_page"
+  | "for_you_card_hide_button"
+  | "for_you_card_unhide_button";
 
 export type LegacyEventAction =
   | "click"
@@ -223,4 +225,7 @@ export type LegacyEventLabel =
   | "social_equity_business"
   | "business_exists_but_not_in_Gov2Go"
   | "get_unlinked_myNJ_account"
-  | "go_to_myNJ_registration";
+  | "go_to_myNJ_registration"
+  | "hide_card"
+  | "unhide_card"
+  | "unhide_cards";

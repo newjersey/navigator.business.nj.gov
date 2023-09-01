@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { LegacyEventAction, LegacyEventCategory, LegacyEventLabel } from "@/lib/utils/analytics-legacy";
 import analytics from "./analytics-base";
+
 export const GTM_ID = process.env.GOOGLE_TAG_MANAGER_ID;
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -214,6 +215,8 @@ type Item =
   | "roadmap_logout_button"
   | "landing_page_hero_log_in"
   | "go_to_profile_nudge_button"
+  | "opportunity_card"
+  | "hidden_opportunities_section"
   | "link_with_myNJ"
   | "landing_page";
 
@@ -1932,6 +1935,44 @@ export default {
             legacy_event_label: "open_live_chat",
             click_text: "report_something_that_is_broken",
             clicked_to: "live_chat",
+          });
+        },
+      },
+    },
+    for_you_card_hide_button: {
+      click: {
+        hide_card: () => {
+          eventRunner.track({
+            legacy_event_category: "for_you_card_hide_button",
+            legacy_event_action: "click",
+            legacy_event_label: "hide_card",
+            event: "link_clicks",
+            click_text: "hide",
+            item: "opportunity_card",
+          });
+        },
+      },
+    },
+    for_you_card_unhide_button: {
+      click: {
+        unhide_card: () => {
+          eventRunner.track({
+            legacy_event_category: "for_you_card_unhide_button",
+            legacy_event_action: "click",
+            legacy_event_label: "unhide_card",
+            event: "link_clicks",
+            click_text: "unhide",
+            item: "opportunity_card",
+          });
+        },
+        unhide_cards: () => {
+          eventRunner.track({
+            legacy_event_category: "for_you_card_unhide_button",
+            legacy_event_action: "click",
+            legacy_event_label: "unhide_cards",
+            event: "navigation_clicks",
+            clicked: "expand_contract",
+            item: "hidden_opportunities_section",
           });
         },
       },
