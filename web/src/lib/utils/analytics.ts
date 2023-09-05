@@ -214,6 +214,7 @@ type Item =
   | "roadmap_logout_button"
   | "landing_page_hero_log_in"
   | "go_to_profile_nudge_button"
+  | "link_with_myNJ"
   | "landing_page";
 
 type BooleanResponseOption = "yes" | "no";
@@ -458,6 +459,19 @@ export default {
   },
   dimensions: dimensionRunner,
   event: {
+    landing_page: {
+      arrive: {
+        get_unlinked_myNJ_account: () => {
+          eventRunner.track({
+            legacy_event_action: "arrive",
+            legacy_event_category: "landing_page",
+            legacy_event_label: "get_unlinked_myNJ_account",
+            event: "navigation_clicks",
+            item: "link_with_myNJ",
+          });
+        },
+      },
+    },
     landing_page_hero_log_in: {
       click: {
         go_to_myNJ_login: () => {

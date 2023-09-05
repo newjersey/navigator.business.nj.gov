@@ -2,6 +2,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import * as sessionHelper from "@/lib/auth/sessionHelper";
 import * as signinHelper from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import analytics from "@/lib/utils/analytics";
 import LoadingPage, { signInSamlError } from "@/pages/loading";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -30,7 +31,22 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
 jest.mock("@/lib/auth/signinHelper", () => ({ onGuestSignIn: jest.fn() }));
 jest.mock("@/lib/auth/signinHelper", () => ({ onGuestSignIn: jest.fn() }));
+jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
+function setupMockAnalytics(): typeof analytics {
+  return {
+    ...jest.requireActual("@/lib/utils/analytics").default,
+    event: {
+      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      landing_page: {
+        arrive: {
+          get_unlinked_myNJ_account: jest.fn(),
+        },
+      },
+    },
+  };
+}
+const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 const mockSessionHelper = sessionHelper as jest.Mocked<typeof sessionHelper>;
 const mockSigninHelper = signinHelper as jest.Mocked<typeof signinHelper>;
 
@@ -94,6 +110,7 @@ describe("loading page", () => {
     render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
 
     expect(mockSessionHelper.triggerSignIn).not.toHaveBeenCalled();
+    expect(mockAnalytics.event.landing_page.arrive.get_unlinked_myNJ_account).toHaveBeenCalled();
     return expect(mockSigninHelper.onGuestSignIn).toHaveBeenCalledWith({
       push: expect.anything(),
       pathname: expect.anything(),

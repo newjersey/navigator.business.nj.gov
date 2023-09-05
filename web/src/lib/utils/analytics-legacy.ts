@@ -222,4 +222,5 @@ export type LegacyEventLabel =
   | "show_feedback_modal"
   | "social_equity_business"
   | "business_exists_but_not_in_Gov2Go"
+  | "get_unlinked_myNJ_account"
   | "go_to_myNJ_registration";

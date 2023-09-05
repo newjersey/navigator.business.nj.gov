@@ -7,6 +7,7 @@ import { getActiveUser, triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { onboardingCompleted } from "@businessnjgovnavigator/shared";
 import { GetStaticPropsResult } from "next";
@@ -29,6 +30,7 @@ const LoadingPage = (): ReactElement => {
         dispatch({ type: "LOGIN", activeUser: currentUser });
       });
     } else if (router.asPath.includes(signInSamlError)) {
+      analytics.event.landing_page.arrive.get_unlinked_myNJ_account();
       onGuestSignIn({
         push: router.push,
         pathname: router.pathname,
