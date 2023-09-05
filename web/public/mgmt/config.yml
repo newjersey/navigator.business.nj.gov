@@ -2252,7 +2252,6 @@ collections:
             summary: "{{cannabisApplyForLicense}}"
             fields:
               - { label: Application Page Helper Text, name: applicationPageHelperText, widget: string }
-              - { label: Application Needs Header, name: applicationNeedsHeader, widget: string }
               - { label: General Application Needs, name: generalApplicationNeeds, widget: string }
               - { label: General Annual Requirements, name: annualGeneralRequirements, widget: markdown }
               - {
