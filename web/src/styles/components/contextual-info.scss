@@ -67,7 +67,7 @@
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
   visibility: hidden;
-  z-index: 400;
+  z-index: 600;
 
   &.is-visible {
     opacity: 0.2;
