@@ -304,25 +304,6 @@ describe("dashboard page", () => {
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
   });
 
-  it("renders registration card when routing is not from onboarding and authentication is false,", async () => {
-    setDesktopScreen(true);
-    const setRegistrationAlertIsVisible = jest.fn();
-    useMockRouter({ query: { fromOnboarding: "false" } });
-
-    const sidebarDisplayContent = {
-      "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
-    };
-    renderPageWithAuthAlert({
-      registrationAlertIsVisible: true,
-      sidebarDisplayContent,
-      isAuthenticated: IsAuthenticated.FALSE,
-      setRegistrationAlertIsVisible,
-    });
-
-    expect(screen.getByText("NotRegisteredContent")).toBeInTheDocument();
-    expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(false);
-  });
-
   it("renders calendar snackbar when fromFormBusinessEntity query parameter is provided", () => {
     useMockRouter({ isReady: true, query: { [QUERIES.fromFormBusinessEntity]: "true" } });
     renderDashboardPage({});

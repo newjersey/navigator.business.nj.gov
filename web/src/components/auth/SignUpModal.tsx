@@ -47,7 +47,9 @@ export const SignUpModal = (): ReactElement => {
       data-testid={"self-reg-modal"}
     >
       <DialogTitle sx={{ p: 5, paddingRight: 10 }}>
-        <h2>{Config.navigationDefaults.guestModalTitle}</h2>
+        <div role="heading" aria-level={2} className="h3-styling">
+          {Config.navigationDefaults.guestModalTitle}
+        </div>
         <IconButton
           aria-label="close"
           onClick={(): void => setRegistrationModalIsVisible(false)}
