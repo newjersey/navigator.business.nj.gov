@@ -1,14 +1,6 @@
-import { SignUpSnackbar } from "@/components/auth/SignUpSnackbar";
 import { getMergedConfig } from "@/contexts/configContext";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-import {
-  Certification,
-  Funding,
-  OperateReference,
-  RoadmapDisplayContent,
-  SidebarCardContent,
-} from "@/lib/types/types";
+import { OperateReference, RoadmapDisplayContent, SidebarCardContent } from "@/lib/types/types";
 import DashboardPage from "@/pages/dashboard";
 import {
   generateBusinessPersona,
@@ -21,7 +13,6 @@ import {
   randomHomeBasedIndustry,
   randomNonHomeBasedIndustry,
 } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -42,7 +33,6 @@ import {
   generateUserDataForBusiness,
   getCurrentDate,
   OperatingPhases,
-  RegistrationStatus,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhase } from "@businessnjgovnavigator/shared/src/operatingPhase";
 import { generatePreferences } from "@businessnjgovnavigator/shared/test";
@@ -124,53 +114,6 @@ describe("dashboard page", () => {
           />
         </ThemeProvider>
       </WithStatefulUserData>
-    );
-  };
-
-  const renderPageWithAuthAlert = ({
-    isAuthenticated,
-    sidebarDisplayContent,
-    fundings,
-    certifications,
-    registrationAlertIsVisible,
-    registrationAlertStatus,
-    setRegistrationAlertIsVisible,
-  }: {
-    isAuthenticated?: IsAuthenticated;
-    sidebarDisplayContent?: Record<string, SidebarCardContent>;
-    fundings?: Funding[];
-    certifications?: Certification[];
-    registrationAlertIsVisible?: boolean;
-    registrationAlertStatus?: RegistrationStatus;
-    setRegistrationAlertIsVisible?: jest.Mock<() => void>;
-  }): void => {
-    setupStatefulUserDataContext();
-
-    render(
-      withAuthAlert(
-        <WithStatefulUserData
-          initialUserData={generateUserDataForBusiness(
-            generateBusiness({ onboardingFormProgress: "COMPLETED" })
-          )}
-        >
-          <ThemeProvider theme={createTheme()}>
-            <SignUpSnackbar />
-            <DashboardPage
-              operateReferences={{}}
-              displayContent={createDisplayContent(sidebarDisplayContent)}
-              fundings={fundings ?? []}
-              certifications={certifications ?? []}
-              municipalities={[]}
-            />
-          </ThemeProvider>
-        </WithStatefulUserData>,
-        isAuthenticated ?? IsAuthenticated.TRUE,
-        {
-          registrationAlertIsVisible: registrationAlertIsVisible ?? false,
-          registrationAlertStatus,
-          setRegistrationAlertIsVisible,
-        }
-      )
     );
   };
 
