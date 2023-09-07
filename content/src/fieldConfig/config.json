@@ -32,7 +32,7 @@
     "userTestingCheckboxLabel": "I am willing to be contacted to provide feedback on Business.NJ.gov.",
     "signUpTitleText": "Create account",
     "errorTextRequiredFields": "Please fill in all fields.",
-    "errorTextDuplicateSignUp": "This email is already registered, please login instead.",
+    "errorTextDuplicateSignUp": "This email is already registered. Please login instead.",
     "errorTextFullName": "Full name is required",
     "signUpDescriptionText": "To get started, please enter your name and email address below.",
     "errorTextFullNameLength": "Full name must be 50 characters or fewer",
