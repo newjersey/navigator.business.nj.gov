@@ -9,6 +9,7 @@ import {
   getProfileDataForUnfilteredOpportunities,
 } from "@/test/factories";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData";
 import {
@@ -21,6 +22,7 @@ import { generatePreferences, generateProfileData } from "@businessnjgovnavigato
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
@@ -30,6 +32,7 @@ describe("<SidebarCardsContainer />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRoadmap({});
+    useMockRouter({});
     setupStatefulUserDataContext();
   });
 
@@ -223,11 +226,12 @@ describe("<SidebarCardsContainer />", () => {
       expect(screen.queryByText("Cert 3")).not.toBeInTheDocument();
     });
 
-    it("links to task page for certifications", () => {
+    it("routes to a specific certification page for certifications", () => {
       useMockProfileData(getProfileDataForUnfilteredOpportunities());
       const certifications = [generateCertification({ urlSlug: "cert1", name: "Cert 1" })];
       renderPage({ certifications });
-      expect(screen.getByText("Cert 1")).toHaveAttribute("href", "/certification/cert1");
+      fireEvent.click(screen.getByText("Cert 1"));
+      expect(mockPush).toHaveBeenCalledWith("/certification/cert1");
     });
   });
 
@@ -291,7 +295,8 @@ describe("<SidebarCardsContainer />", () => {
         generateFunding({ urlSlug: "opp", name: "Funding Opp", status: "rolling application" }),
       ];
       renderPage({ fundings });
-      expect(screen.getByText("Funding Opp")).toHaveAttribute("href", "/funding/opp");
+      fireEvent.click(screen.getByText("Funding Opp"));
+      expect(mockPush).toHaveBeenCalledWith("/funding/opp");
     });
 
     it("displays link to learn more about fundings when user is UP_AND_RUNNING", () => {

@@ -2,10 +2,12 @@ import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
 import { getMergedConfig } from "@/contexts/configContext";
 import analytics from "@/lib/utils/analytics";
 import { generateOpportunity } from "@/test/factories";
+import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generatePreferences } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen } from "@testing-library/react";
 
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
@@ -26,6 +28,11 @@ function setupMockAnalytics(): typeof analytics {
           unhide_card: jest.fn(),
         },
       },
+      opportunity_card: {
+        click: {
+          go_to_opportunity_screen: jest.fn(),
+        },
+      },
     },
   };
 }
@@ -34,6 +41,7 @@ describe("OpportunityCard", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockBusiness({});
+    useMockRouter({});
   });
 
   it("renders the name", () => {
@@ -109,6 +117,17 @@ describe("OpportunityCard", () => {
     fireEvent.click(screen.getByText(Config.dashboardDefaults.hideOpportunityText));
     expect(mockAnalytics.event.for_you_card_hide_button.click.hide_card).toHaveBeenCalledTimes(1);
     expect(mockAnalytics.event.for_you_card_unhide_button.click.unhide_card).not.toHaveBeenCalled();
+  });
+
+  it("fires opportunity_card analytics when title with link is clicked", () => {
+    render(
+      <OpportunityCard
+        opportunity={generateOpportunity({ name: "fundingName", urlSlug: "slug" })}
+        urlPath="funding"
+      />
+    );
+    fireEvent.click(screen.getByText("fundingName"));
+    expect(mockAnalytics.event.opportunity_card.click.go_to_opportunity_screen).toHaveBeenCalledTimes(1);
   });
 
   it("fires unhide_card analytics when unhide button is clicked", () => {

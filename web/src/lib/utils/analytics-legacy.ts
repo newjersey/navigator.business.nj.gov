@@ -1,4 +1,5 @@
 export type LegacyEventCategory =
+  | "opportunity_card"
   | "contextual_link"
   | "external_link"
   | "task_primary_call_to_action"
@@ -126,6 +127,7 @@ export type LegacyEventAction =
   | "response";
 
 export type LegacyEventLabel =
+  | "go_to_opportunity_screen"
   | "view_sidebar"
   | "open_external_website"
   | "selected_not_started_status"
