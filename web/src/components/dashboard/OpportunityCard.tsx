@@ -10,6 +10,7 @@ import analytics from "@/lib/utils/analytics";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import truncateMarkdown from "markdown-truncate";
+import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
 interface Props {
@@ -23,6 +24,7 @@ const MAX_CONTENT_CHARS = 150;
 export const OpportunityCard = (props: Props): ReactElement => {
   const { updateQueue, business } = useUserData();
   const { Config } = useConfig();
+  const router = useRouter();
 
   const TYPE_TO_LABEL: Record<"funding" | "certification", ReactElement> = {
     funding: <Tag backgroundColor="accent-semi-cool-light">{Config.dashboardDefaults.fundingTagText}</Tag>,
@@ -72,6 +74,12 @@ export const OpportunityCard = (props: Props): ReactElement => {
       .update();
   };
 
+  const routeToPage = (): void => {
+    const url = `/${props.urlPath}/${props.opportunity.urlSlug}`;
+    analytics.event.opportunity_card.click.go_to_opportunity_screen();
+    router.push(url);
+  };
+
   return (
     <div
       data-testid={props.opportunity.id}
@@ -101,9 +109,9 @@ export const OpportunityCard = (props: Props): ReactElement => {
         </div>
       </div>
       <div className="text-normal font-body-md margin-bottom-105">
-        <a className="usa-link" href={`/${props.urlPath}/${props.opportunity.urlSlug}`}>
+        <UnStyledButton style={"default"} isUnderline onClick={routeToPage}>
           {props.opportunity.name}
-        </a>
+        </UnStyledButton>
       </div>
       <OpportunityCardStatus dueDate={props.opportunity.dueDate} status={props.opportunity.status} />
       <div className="override-p-2xs text-base-dark">

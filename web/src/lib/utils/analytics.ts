@@ -1953,6 +1953,19 @@ export default {
         },
       },
     },
+    opportunity_card: {
+      click: {
+        go_to_opportunity_screen: () => {
+          eventRunner.track({
+            legacy_event_category: "opportunity_card",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_opportunity_screen",
+            event: "link_clicks",
+            item: "opportunity_card",
+          });
+        },
+      },
+    },
     for_you_card_unhide_button: {
       click: {
         unhide_card: () => {
