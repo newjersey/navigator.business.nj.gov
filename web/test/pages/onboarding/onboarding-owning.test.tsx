@@ -81,6 +81,24 @@ describe("onboarding - owning a business", () => {
       expect(screen.getByTestId("step-1")).toBeInTheDocument();
     });
 
+    it("updates operating phase when user changes their persona", async () => {
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          operatingPhase: "GUEST_MODE",
+        }),
+      });
+
+      const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
+      page.chooseRadio("business-persona-owning");
+      page.chooseRadio("business-persona-starting");
+      page.clickNext();
+
+      await waitFor(() => {
+        expect(currentBusiness().profileData.operatingPhase).toBe("GUEST_MODE");
+      });
+    });
+
     it("allows user to move past Step 1 if you have entered a sector", async () => {
       const userData = generateTestUserData({ sectorId: undefined });
       useMockRouter({ isReady: true, query: { page: "1" } });
