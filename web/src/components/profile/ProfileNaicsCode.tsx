@@ -58,7 +58,7 @@ export const ProfileNaicsCode = (): ReactElement => {
             </ArrowTooltip>
           </div>
         ) : (
-          <a className="margin-left-2" href={naicsTaskUrl}>
+          <a className="text-accent-cool-darker margin-left-2" href={naicsTaskUrl}>
             {state.profileData.naicsCode ? contentFromConfig.editText : contentFromConfig.addText}
           </a>
         )}

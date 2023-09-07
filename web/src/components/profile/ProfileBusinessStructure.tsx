@@ -39,7 +39,7 @@ export const ProfileBusinessStructure = (): ReactElement => {
         <FieldLabelProfile fieldName="legalStructureId" />
         {!isFormed && (
           <a
-            className="margin-left-2"
+            className="text-accent-cool-darker margin-left-2"
             href={businessStructureTaskUrl}
             data-testid={"business-structure-task-link"}
           >

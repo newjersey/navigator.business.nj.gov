@@ -210,7 +210,8 @@ ol {
 
 .usa-alert__text a,
 .usa-link,
-.usa-prose > a {
+.usa-prose > a,
+p > a {
   color: $accent-cool-darkest !important;
 
   @media all and (max-width: $sm) {
@@ -235,6 +236,7 @@ ol {
   color: $accent-cool-darkest !important;
 }
 
+.usa-button--unstyled:focus,
 .usa-link:focus,
 .usa-prose > a:focus,
 .usa-prose a:focus {
