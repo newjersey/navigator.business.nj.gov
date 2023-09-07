@@ -179,7 +179,7 @@ const accentSemiCool = (
     {renderColor("accent-semi-cool-extra-light", "#effffb")}
     {renderColor("accent-semi-cool-lightest", "#defff8")}
     {renderColor("accent-semi-cool-light", "#BDFFF2")}
-    {renderColor("accent-semi-cool-vivid", "#009f7f")}
+    {renderColor("accent-semi-cool-vivid", "#00BF91")}
     {renderColor("accent-semi-cool", "#009f7f")}
   </div>
 );
