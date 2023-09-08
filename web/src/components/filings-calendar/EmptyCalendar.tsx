@@ -6,9 +6,9 @@ export const EmptyCalendar = (): ReactElement => {
   const { Config } = useConfig();
 
   return (
-    <div data-testid="empty-calendar" className="padding-y-0">
-      <div className="flex flex-column space-between fac text-align-center flex-desktop:grid-col usa-prose padding-y-205 padding-x-3">
-        <Content>{Config.dashboardDefaults.emptyCalendarTitleText}</Content>
+    <div data-testid="empty-calendar">
+      <Content>{Config.dashboardDefaults.emptyCalendarTitleText}</Content>
+      <div className="flex flex-column fac padding-top-205">
         <img className="padding-y-2" src={`/img/empty-trophy-illustration.png`} alt="empty calendar" />
       </div>
     </div>
