@@ -41,6 +41,7 @@ const neutralBase = (
 const primary = (
   <div className="flex flex-row margin-top-4">
     <div className="h1-styling margin-right-4 width-card-lg">Primary</div>
+    {renderColor("primary-extra-extra-light", "#fbfdf9")}
     {renderColor("primary-extra-light", "#f2f7eb")}
     {renderColor("primary-lightest", "#d9e9bf")}
     {renderColor("primary-lighter", "#c5ee93")}
