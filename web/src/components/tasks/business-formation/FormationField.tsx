@@ -1,4 +1,4 @@
-import { ReactElement } from "rehype-react/lib";
+import { ReactElement } from "react";
 
 interface Props {
   fieldName: string;

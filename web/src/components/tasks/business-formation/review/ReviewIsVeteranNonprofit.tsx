@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { ReviewLineItem } from "@/components/tasks/business-formation/review/section/ReviewLineItem";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement } from "rehype-react/lib";
+import { ReactElement } from "react";
 
 interface Props {
   value: boolean | undefined;
