@@ -101,11 +101,8 @@ const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 const personas: BusinessPersona[] = ["STARTING", "FOREIGN"];
 
 describe("profile - shared", () => {
-  let setRegistrationModalIsVisible: jest.Mock;
-
   beforeEach(() => {
     jest.resetAllMocks();
-    setRegistrationModalIsVisible = jest.fn();
     useMockRouter({});
     useMockRoadmap({});
     setupStatefulUserDataContext();
@@ -140,7 +137,7 @@ describe("profile - shared", () => {
       }),
     });
 
-    renderPage({ business, setRegistrationModalIsVisible });
+    renderPage({ business });
 
     expect(
       screen.getByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
@@ -162,7 +159,7 @@ describe("profile - shared", () => {
       }),
     });
 
-    renderPage({ business, setRegistrationModalIsVisible });
+    renderPage({ business });
 
     expect(
       screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
@@ -180,7 +177,7 @@ describe("profile - shared", () => {
     });
 
     const newark = generateMunicipality({ displayName: "Newark" });
-    renderPage({ business: initialBusiness, municipalities: [newark], setRegistrationModalIsVisible });
+    renderPage({ business: initialBusiness, municipalities: [newark] });
     selectByText("Location", newark.displayName);
     clickSave();
     await waitFor(() => {
@@ -200,7 +197,7 @@ describe("profile - shared", () => {
       }),
     });
 
-    renderPage({ business: initialBusiness, municipalities: [newark], setRegistrationModalIsVisible });
+    renderPage({ business: initialBusiness, municipalities: [newark] });
     selectByText("Location", newark.displayName);
     clickSave();
     await waitFor(() => {
@@ -226,7 +223,7 @@ describe("profile - shared", () => {
               taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" }),
             });
 
-            renderPage({ business, setRegistrationModalIsVisible });
+            renderPage({ business });
             chooseTab("numbers");
             expect(screen.queryByLabelText("Tax id")).not.toBeInTheDocument();
             expect(screen.getByTestId("disabled-tax-id-value")).toHaveTextContent("****-****-****");
@@ -252,7 +249,7 @@ describe("profile - shared", () => {
                   foreignBusinessTypeIds: ["NEXUS"],
                 }),
               });
-              renderPage({ business, setRegistrationModalIsVisible });
+              renderPage({ business });
               chooseTab("numbers");
               expect(screen.getByTestId("tax-disclaimer")).toHaveTextContent(
                 markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
@@ -267,7 +264,7 @@ describe("profile - shared", () => {
               legalStructureId: randomPublicFilingLegalStructure(),
             }),
           });
-          renderPage({ business, setRegistrationModalIsVisible });
+          renderPage({ business });
           chooseTab("numbers");
 
           expect(screen.queryByTestId("tax-disclaimer")).not.toBeInTheDocument();
@@ -284,7 +281,7 @@ describe("profile - shared", () => {
           dateOfFormation: undefined,
         }),
       });
-      renderPage({ business, setRegistrationModalIsVisible });
+      renderPage({ business });
 
       expect(screen.getByTestId("opp-alert")).toBeInTheDocument();
     });
@@ -296,7 +293,7 @@ describe("profile - shared", () => {
           dateOfFormation: undefined,
         }),
       });
-      renderPage({ business, setRegistrationModalIsVisible });
+      renderPage({ business });
 
       expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
     });
@@ -413,7 +410,7 @@ describe("profile - shared", () => {
             "test-question-2": true,
           },
         });
-        renderPage({ business, setRegistrationModalIsVisible });
+        renderPage({ business });
         selectByValue("Industry", "test-industry-with-no-non-essential-questions");
         clickSave();
         await waitFor(() => {
@@ -490,7 +487,7 @@ describe("profile - shared", () => {
             foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : undefined,
           }),
         });
-        renderPage({ business, setRegistrationModalIsVisible });
+        renderPage({ business });
         clickSave();
         const profileAlert = screen.getByTestId("profile-error-alert");
         await waitFor(() => {

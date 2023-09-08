@@ -2,7 +2,7 @@
 
 import { OnboardingField, OnboardingProps } from "@/components/onboarding/OnboardingField";
 import { TaxIdDisplayStatus } from "@/components/onboarding/taxId/OnboardingTaxIdHelpers";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
@@ -24,11 +24,11 @@ export const OnboardingSingleTaxId = ({
 
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { state, setProfileData } = useContext(ProfileDataContext);
-  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
 
   const handleChange = (value: string): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      setRegistrationModalIsVisible(true);
+      setShowNeedsAccountModal(true);
     }
     if (handleChangeOverride) {
       handleChangeOverride(value);

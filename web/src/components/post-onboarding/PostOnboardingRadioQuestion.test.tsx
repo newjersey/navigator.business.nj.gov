@@ -16,7 +16,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { generatePostOnboarding } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -37,7 +37,7 @@ describe("<PostOnboardingRadioQuestion />", () => {
 
   const renderComponent = (initialBusiness: Business, onboardingKey: keyof ProfileData): void => {
     render(
-      withAuthAlert(
+      withNeedsAccountContext(
         <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
           <PostOnboardingRadioQuestion
             postOnboardingQuestionId={postOnboardingQuestionId}

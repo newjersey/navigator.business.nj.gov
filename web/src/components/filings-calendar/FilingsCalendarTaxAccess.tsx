@@ -2,7 +2,7 @@ import { Content } from "@/components/Content";
 import { TaxAccessModal } from "@/components/filings-calendar/tax-access-modal/TaxAccessModal";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { postTaxFilingsLookup } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -22,8 +22,8 @@ const isBeforeTheFollowingSaturday = (registeredISO: string | undefined): boolea
 export const FilingsCalendarTaxAccess = (): ReactElement => {
   const { updateQueue, business } = useUserData();
   const { Config } = useConfig();
-  const { isAuthenticated, setRegistrationModalIsVisible, registrationModalIsVisible } =
-    useContext(AuthAlertContext);
+  const { isAuthenticated, setShowNeedsAccountModal, showNeedsAccountModal } =
+    useContext(NeedsAccountContext);
   const [showTaxModal, setShowTaxModal] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const router = useRouter();
@@ -56,12 +56,12 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
 
   useEffect(() => {
     if (!business) return;
-    if (!registrationModalIsVisible && prevModalIsVisible.current === true) {
+    if (!showNeedsAccountModal && prevModalIsVisible.current === true) {
       updateQueue?.queuePreferences({ returnToLink: "" }).update();
     }
-    prevModalIsVisible.current = registrationModalIsVisible;
+    prevModalIsVisible.current = showNeedsAccountModal;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [registrationModalIsVisible]);
+  }, [showNeedsAccountModal]);
 
   const openRegisterOrTaxModal = (): void => {
     if (!business) return;
@@ -70,7 +70,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
         ?.queuePreferences({ returnToLink: `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true` })
         .update();
       analytics.event.tax_calendar_banner_button.click.show_myNJ_registration_prompt_modal();
-      setRegistrationModalIsVisible(true);
+      setShowNeedsAccountModal(true);
     } else {
       analytics.event.tax_calendar_banner_button.click.show_tax_calendar_modal();
       setShowTaxModal(true);

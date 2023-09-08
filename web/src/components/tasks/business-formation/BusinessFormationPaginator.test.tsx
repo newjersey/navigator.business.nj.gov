@@ -21,7 +21,7 @@ import {
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
-import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { mockPush } from "@/test/mock/mockRouter";
 import {
   currentBusiness,
@@ -165,22 +165,22 @@ describe("<BusinessFormationPaginator />", () => {
 
   describe("when in guest mode", () => {
     const guestModeNextButtonText = `Register & ${Config.formation.general.initialNextButtonText}`;
-    let setRegistrationModalIsVisible: jest.Mock;
+    let setShowNeedsAccountModal: jest.Mock;
 
     beforeEach(() => {
-      setRegistrationModalIsVisible = jest.fn();
+      setShowNeedsAccountModal = jest.fn();
     });
 
     const renderAsGuest = (): void => {
       render(
-        withAuthAlert(
+        withNeedsAccountContext(
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
             <MunicipalitiesContext.Provider value={{ municipalities: [] }}>
               <BusinessFormation task={generateTask({})} displayContent={displayContent} />
             </MunicipalitiesContext.Provider>
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,
-          { registrationModalIsVisible: false, setRegistrationModalIsVisible }
+          { showNeedsAccountModal: false, setShowNeedsAccountModal }
         )
       );
     };
@@ -190,17 +190,17 @@ describe("<BusinessFormationPaginator />", () => {
       expect(screen.getByText(guestModeNextButtonText)).toBeInTheDocument();
     });
 
-    it("shows registration modal when clicking continue button from step one", () => {
+    it("shows Needs Account modal when clicking continue button from step one", () => {
       renderAsGuest();
       fireEvent.click(screen.getByText(guestModeNextButtonText));
-      expect(setRegistrationModalIsVisible).toHaveBeenCalled();
+      expect(setShowNeedsAccountModal).toHaveBeenCalled();
       expect(screen.queryByTestId("business-step")).not.toBeInTheDocument();
     });
 
-    it("shows registration modal when clicking a step in the stepper", () => {
+    it("shows Needs Account modal when clicking a step in the stepper", () => {
       renderAsGuest();
       fireEvent.click(screen.getByTestId(`stepper-1`));
-      expect(setRegistrationModalIsVisible).toHaveBeenCalled();
+      expect(setShowNeedsAccountModal).toHaveBeenCalled();
       expect(screen.queryByTestId("business-step")).not.toBeInTheDocument();
     });
   });

@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { Icon } from "@/components/njwds/Icon";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { AuthContext } from "@/contexts/authContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { useSidebarCards } from "@/lib/data-hooks/useSidebarCards";
 import { MediaQueries } from "@/lib/PageSizes";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -11,16 +11,16 @@ import { ReactElement, useContext } from "react";
 
 export const SignUpSnackbar = (): ReactElement => {
   const { showCard } = useSidebarCards();
-  const { registrationAlertIsVisible, setRegistrationAlertIsVisible } = useContext(AuthAlertContext);
+  const { showNeedsAccountSnackbar, setShowNeedsAccountSnackbar } = useContext(NeedsAccountContext);
   const { state } = useContext(AuthContext);
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 
-  if (!registrationAlertIsVisible) {
+  if (!showNeedsAccountSnackbar) {
     return <></>;
   }
 
   const handleClose = async (): Promise<void> => {
-    setRegistrationAlertIsVisible(false);
+    setShowNeedsAccountSnackbar(false);
     if (state.activeUser?.encounteredMyNjLinkingError) {
       await showCard("not-registered-existing-account");
     } else {
@@ -42,8 +42,8 @@ export const SignUpSnackbar = (): ReactElement => {
 
   return (
     <SnackbarAlert
-      isOpen={registrationAlertIsVisible}
-      close={(): void => setRegistrationAlertIsVisible(false)}
+      isOpen={showNeedsAccountSnackbar}
+      close={(): void => setShowNeedsAccountSnackbar(false)}
       variant="info"
       noIcon={true}
       autoHideDuration={null}

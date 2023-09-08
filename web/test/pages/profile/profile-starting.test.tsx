@@ -94,12 +94,10 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 describe("profile - starting business", () => {
-  let setRegistrationModalIsVisible: jest.Mock;
   let businessFromSetup: Business;
 
   beforeEach(() => {
     jest.resetAllMocks();
-    setRegistrationModalIsVisible = jest.fn();
     useMockRouter({});
     useMockRoadmap({});
     setupStatefulUserDataContext();
@@ -134,14 +132,14 @@ describe("profile - starting business", () => {
     });
 
     it("locks businessName", () => {
-      renderPage({ business: startingBusiness, setRegistrationModalIsVisible });
+      renderPage({ business: startingBusiness });
       expect(screen.getByText(Config.profileDefaults.fields.businessName.default.header)).toBeInTheDocument();
       expect(within(screen.getByTestId("main")).getByText("some-name")).toBeInTheDocument();
       expect(screen.queryByLabelText("Business name")).not.toBeInTheDocument();
     });
 
     it("locks entityID", () => {
-      renderPage({ business: startingBusiness, setRegistrationModalIsVisible });
+      renderPage({ business: startingBusiness });
       chooseTab("numbers");
       expect(screen.getByText(Config.profileDefaults.fields.entityId.default.header)).toBeInTheDocument();
       expect(screen.getByText("some-id")).toBeInTheDocument();
@@ -149,7 +147,7 @@ describe("profile - starting business", () => {
     });
 
     it("locks legalStructure for STARTING business Persona", async () => {
-      renderPage({ business: startingBusiness, setRegistrationModalIsVisible });
+      renderPage({ business: startingBusiness });
       expect(screen.getByTestId("info")).toBeInTheDocument();
       expect(
         screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header)
@@ -175,7 +173,7 @@ describe("profile - starting business", () => {
         }),
       });
       const newark = generateMunicipality({ displayName: "Newark" });
-      renderPage({ business: initialBusiness, municipalities: [newark], setRegistrationModalIsVisible });
+      renderPage({ business: initialBusiness, municipalities: [newark] });
       chooseTab("numbers");
       expect(getDateOfFormation()).toBeUndefined();
     });
@@ -185,7 +183,7 @@ describe("profile - starting business", () => {
         profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "2020-01-01" }),
       });
       const newark = generateMunicipality({ displayName: "Newark" });
-      renderPage({ business: initialBusiness, municipalities: [newark], setRegistrationModalIsVisible });
+      renderPage({ business: initialBusiness, municipalities: [newark] });
       expect(getDateOfFormation()).toBe("01/2020");
     });
 
@@ -198,7 +196,7 @@ describe("profile - starting business", () => {
           }),
         });
         const newark = generateMunicipality({ displayName: "Newark" });
-        renderPage({ business: initialBusiness, municipalities: [newark], setRegistrationModalIsVisible });
+        renderPage({ business: initialBusiness, municipalities: [newark] });
         fillText("Date of formation", "");
         clickSave();
         expect(getDateOfFormation()).toBe("");
@@ -213,7 +211,7 @@ describe("profile - starting business", () => {
         });
         const newark = generateMunicipality({ displayName: "Newark" });
 
-        renderPage({ business: initialBusiness, municipalities: [newark], setRegistrationModalIsVisible });
+        renderPage({ business: initialBusiness, municipalities: [newark] });
         fillText("Date of formation", "");
 
         clickSave();
@@ -234,7 +232,7 @@ describe("profile - starting business", () => {
         });
         const newark = generateMunicipality({ displayName: "Newark" });
 
-        renderPage({ business: initialBusiness, municipalities: [newark], setRegistrationModalIsVisible });
+        renderPage({ business: initialBusiness, municipalities: [newark] });
         fillText("Date of formation", "");
 
         clickSave();
@@ -252,12 +250,12 @@ describe("profile - starting business", () => {
   });
 
   it("displays business info tab", () => {
-    renderPage({ business: businessFromSetup, setRegistrationModalIsVisible });
+    renderPage({ business: businessFromSetup });
     expect(screen.getByTestId("info")).toBeInTheDocument();
   });
 
   it("redirects user to dashboard with success query string on save", async () => {
-    renderPage({ business: businessFromSetup, setRegistrationModalIsVisible });
+    renderPage({ business: businessFromSetup });
     fillText("Industry", "All Other Businesses");
     clickSave();
     await waitFor(() => {
@@ -266,7 +264,7 @@ describe("profile - starting business", () => {
   });
 
   it("prevents user from going back to dashboard if there are unsaved changes", () => {
-    renderPage({ business: businessFromSetup, setRegistrationModalIsVisible });
+    renderPage({ business: businessFromSetup });
     const inputFieldName = getBusinessProfileInputFieldName(businessFromSetup);
     fillText(inputFieldName, "Cool Computers");
     clickBack();
@@ -274,7 +272,7 @@ describe("profile - starting business", () => {
   });
 
   it("returns user to profile page from un-saved changes modal", () => {
-    renderPage({ business: businessFromSetup, setRegistrationModalIsVisible });
+    renderPage({ business: businessFromSetup });
     const inputFieldName = getBusinessProfileInputFieldName(businessFromSetup);
     fillText(inputFieldName, "Cool Computers");
     clickBack();
@@ -295,7 +293,7 @@ describe("profile - starting business", () => {
     };
     const inputFieldName = getBusinessProfileInputFieldName(initialBusiness);
     const newark = generateMunicipality({ displayName: "Newark" });
-    renderPage({ business: initialBusiness, municipalities: [newark], setRegistrationModalIsVisible });
+    renderPage({ business: initialBusiness, municipalities: [newark] });
     fillText(inputFieldName, "Cool Computers");
     selectByText("Location", newark.displayName);
     selectByValue("Industry", "e-commerce");
@@ -347,7 +345,7 @@ describe("profile - starting business", () => {
     });
 
     const initialBusiness = generateBusinessForProfile({ taxFilingData: taxData });
-    renderPage({ business: initialBusiness, setRegistrationModalIsVisible });
+    renderPage({ business: initialBusiness });
     clickSave();
 
     await waitFor(() => {
@@ -368,7 +366,6 @@ describe("profile - starting business", () => {
           employerId: undefined,
         }),
       }),
-      setRegistrationModalIsVisible,
     });
     chooseTab("numbers");
     fillText("Employer id", "02-3456780");
@@ -391,7 +388,7 @@ describe("profile - starting business", () => {
           businessPersona: "STARTING",
         }),
       });
-      renderPage({ municipalities: [newark], business, setRegistrationModalIsVisible });
+      renderPage({ municipalities: [newark], business });
     };
 
     it("locks the location field when it is populated and tax filing state is SUCCESS", () => {
@@ -404,7 +401,6 @@ describe("profile - starting business", () => {
             state: "SUCCESS",
           }),
         }),
-        setRegistrationModalIsVisible,
       });
       expect(screen.getByText("Trenton")).toBeInTheDocument();
       expect(screen.getByTestId("locked-municipality")).toBeInTheDocument();
@@ -501,7 +497,7 @@ describe("profile - starting business", () => {
         businessPersona: "STARTING",
       }),
     });
-    renderPage({ business, setRegistrationModalIsVisible });
+    renderPage({ business });
     chooseTab("numbers");
     expect(screen.queryByText(Config.profileDefaults.fields.entityId.default.header)).not.toBeInTheDocument();
     expect(screen.queryByLabelText("Entity id")).not.toBeInTheDocument();
@@ -514,7 +510,7 @@ describe("profile - starting business", () => {
         businessPersona: "STARTING",
       }),
     });
-    renderPage({ business, setRegistrationModalIsVisible });
+    renderPage({ business });
     chooseTab("numbers");
     fillText("Employer id", "123490");
     fireEvent.blur(screen.queryByLabelText("Employer id") as HTMLElement);
@@ -533,7 +529,7 @@ describe("profile - starting business", () => {
     const business = generateBusinessForProfile({
       profileData: generateProfileData({ businessPersona: "STARTING" }),
     });
-    renderPage({ business, setRegistrationModalIsVisible });
+    renderPage({ business });
     clickBack();
     await waitFor(() => {
       return expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
@@ -549,7 +545,7 @@ describe("profile - starting business", () => {
       });
 
       it("will save if tax ID does not change", async () => {
-        renderPage({ business: businessWith9TaxId, setRegistrationModalIsVisible });
+        renderPage({ business: businessWith9TaxId });
         chooseTab("numbers");
         fireEvent.change(screen.getByLabelText("Tax id"));
         fireEvent.blur(screen.getByLabelText("Tax id"));
@@ -560,7 +556,7 @@ describe("profile - starting business", () => {
       });
 
       it("will not save if tax ID changes to a different 9 digit tax Id", async () => {
-        renderPage({ business: businessWith9TaxId, setRegistrationModalIsVisible });
+        renderPage({ business: businessWith9TaxId });
         chooseTab("numbers");
         fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "666666666" } });
         fireEvent.blur(screen.getByLabelText("Tax id"));
@@ -575,7 +571,7 @@ describe("profile - starting business", () => {
       });
 
       it("will save if Tax ID changes to 12 digits in length", async () => {
-        renderPage({ business: businessWith9TaxId, setRegistrationModalIsVisible });
+        renderPage({ business: businessWith9TaxId });
         chooseTab("numbers");
         fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789" } });
         fireEvent.blur(screen.getByLabelText("Tax id"));
@@ -597,7 +593,7 @@ describe("profile - starting business", () => {
       });
 
       it("will save if tax ID changes to 0 digits in length", async () => {
-        renderPage({ business: businessWith9TaxId, setRegistrationModalIsVisible });
+        renderPage({ business: businessWith9TaxId });
         chooseTab("numbers");
         fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "" } });
         fireEvent.blur(screen.getByLabelText("Tax id"));
@@ -625,7 +621,7 @@ describe("profile - starting business", () => {
       });
 
       it("will save if tax ID does not change", async () => {
-        renderPage({ business: businessWith12TaxId, setRegistrationModalIsVisible });
+        renderPage({ business: businessWith12TaxId });
         chooseTab("numbers");
         fireEvent.click(screen.getByLabelText("Tax id"));
         fireEvent.blur(screen.getByLabelText("Tax id"));
@@ -636,7 +632,7 @@ describe("profile - starting business", () => {
       });
 
       it("will not save if tax ID is less than 12 digits in length", async () => {
-        renderPage({ business: businessWith12TaxId, setRegistrationModalIsVisible });
+        renderPage({ business: businessWith12TaxId });
         chooseTab("numbers");
         fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789" } });
         fireEvent.blur(screen.getByLabelText("Tax id"));
@@ -647,7 +643,7 @@ describe("profile - starting business", () => {
       });
 
       it("will save if Tax ID changes to a different 12 digits", async () => {
-        renderPage({ business: businessWith12TaxId, setRegistrationModalIsVisible });
+        renderPage({ business: businessWith12TaxId });
         chooseTab("numbers");
         fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "666666666666" } });
         fireEvent.blur(screen.getByLabelText("Tax id"));
@@ -675,7 +671,7 @@ describe("profile - starting business", () => {
       });
 
       it("will save if tax ID does not change", async () => {
-        renderPage({ business: businessWithEmptyTaxId, setRegistrationModalIsVisible });
+        renderPage({ business: businessWithEmptyTaxId });
         chooseTab("numbers");
         fireEvent.click(screen.getByLabelText("Tax id"));
         fireEvent.blur(screen.getByLabelText("Tax id"));
@@ -686,7 +682,7 @@ describe("profile - starting business", () => {
       });
 
       it("will not save if tax ID is less than 12 digits in length", async () => {
-        renderPage({ business: businessWithEmptyTaxId, setRegistrationModalIsVisible });
+        renderPage({ business: businessWithEmptyTaxId });
         chooseTab("numbers");
         fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789" } });
         fireEvent.blur(screen.getByLabelText("Tax id"));
@@ -697,7 +693,7 @@ describe("profile - starting business", () => {
       });
 
       it("will save if Tax ID changes to 12 digits in length", async () => {
-        renderPage({ business: businessWithEmptyTaxId, setRegistrationModalIsVisible });
+        renderPage({ business: businessWithEmptyTaxId });
         chooseTab("numbers");
         fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789123" } });
         fireEvent.blur(screen.getByLabelText("Tax id"));
@@ -735,7 +731,7 @@ describe("profile - starting business", () => {
       }),
     });
 
-    renderPage({ business, setRegistrationModalIsVisible });
+    renderPage({ business });
     expect(getBusinessNameValue()).toEqual("Applebees");
 
     expect(getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);
@@ -753,7 +749,7 @@ describe("profile - starting business", () => {
       profileData: generateProfileData({ businessPersona: "STARTING" }),
     });
     const newark = generateMunicipality({ displayName: "Newark" });
-    renderPage({ business: initialBusiness, municipalities: [newark], setRegistrationModalIsVisible });
+    renderPage({ business: initialBusiness, municipalities: [newark] });
     selectByText("Location", newark.displayName);
     clickBack();
     fireEvent.click(screen.getByText(Config.profileDefaults.default.escapeModalReturn));
@@ -775,7 +771,7 @@ describe("profile - starting business", () => {
           operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
         }),
       });
-      renderPage({ business: initialBusiness, setRegistrationModalIsVisible });
+      renderPage({ business: initialBusiness });
 
       expect(screen.queryByLabelText("Existing employees")).not.toBeInTheDocument();
       expect(screen.queryByLabelText("Ownership")).not.toBeInTheDocument();
@@ -788,7 +784,7 @@ describe("profile - starting business", () => {
           operatingPhase: "FORMED_AND_REGISTERED",
         }),
       });
-      renderPage({ business: initialBusiness, setRegistrationModalIsVisible });
+      renderPage({ business: initialBusiness });
 
       expect(screen.getByLabelText("Existing employees")).toBeInTheDocument();
       expect(screen.getByLabelText("Ownership")).toBeInTheDocument();
@@ -801,7 +797,7 @@ describe("profile - starting business", () => {
           operatingPhase: "FORMED_AND_REGISTERED",
         }),
       });
-      renderPage({ business: initialBusiness, setRegistrationModalIsVisible });
+      renderPage({ business: initialBusiness });
 
       fillText("Existing employees", "");
       fireEvent.blur(screen.queryByLabelText("Existing employees") as HTMLElement);
@@ -823,7 +819,6 @@ describe("profile - starting business", () => {
           industryId: "generic",
         }),
       }),
-      setRegistrationModalIsVisible,
     });
     expect(screen.getByLabelText("Sector")).toBeInTheDocument();
   });
@@ -841,7 +836,6 @@ describe("profile - starting business", () => {
             sectorId: undefined,
           }),
         }),
-        setRegistrationModalIsVisible,
       });
       expect(screen.getByLabelText("Sector")).toBeInTheDocument();
       chooseTab("numbers");
@@ -866,7 +860,6 @@ describe("profile - starting business", () => {
             sectorId: undefined,
           }),
         }),
-        setRegistrationModalIsVisible,
       });
       expect(screen.getByLabelText("Sector")).toBeInTheDocument();
       chooseTab("numbers");
@@ -897,10 +890,7 @@ describe("profile - starting business", () => {
         }),
         onboardingFormProgress: "COMPLETED",
       });
-      renderPage({
-        business,
-        setRegistrationModalIsVisible,
-      });
+      renderPage({ business });
       fireEvent.blur(screen.queryByLabelText("Sector") as HTMLElement);
       await waitFor(() => {
         expect(
@@ -946,7 +936,7 @@ describe("profile - starting business", () => {
         sectorId: undefined,
       }),
     });
-    renderPage({ business, setRegistrationModalIsVisible });
+    renderPage({ business });
     fireEvent.blur(screen.getByLabelText("Sector") as HTMLElement);
 
     clickSave();
@@ -972,7 +962,7 @@ describe("profile - starting business", () => {
             legalStructureId: "limited-liability-company",
           }),
         });
-        renderPage({ business, setRegistrationModalIsVisible });
+        renderPage({ business });
         fireEvent.blur(screen.getByLabelText("Business name") as HTMLElement);
 
         clickSave();
@@ -995,7 +985,7 @@ describe("profile - starting business", () => {
             legalStructureId: "limited-liability-company",
           }),
         });
-        renderPage({ business, setRegistrationModalIsVisible });
+        renderPage({ business });
         fireEvent.blur(screen.getByLabelText("Business name") as HTMLElement);
 
         clickSave();
@@ -1015,7 +1005,6 @@ describe("profile - starting business", () => {
           industryId: randomHomeBasedIndustry(),
         }),
       }),
-      setRegistrationModalIsVisible,
     });
     expect(screen.getByLabelText("Home based business")).toBeInTheDocument();
   });
@@ -1028,7 +1017,6 @@ describe("profile - starting business", () => {
           businessPersona: "STARTING",
         }),
       }),
-      setRegistrationModalIsVisible,
     });
     expect(screen.queryByLabelText("Home based business")).not.toBeInTheDocument();
 
@@ -1044,7 +1032,6 @@ describe("profile - starting business", () => {
           businessPersona: "STARTING",
         }),
       }),
-      setRegistrationModalIsVisible,
     });
     expect(screen.getByLabelText("Home based business")).toBeInTheDocument();
   });
@@ -1056,7 +1043,7 @@ describe("profile - starting business", () => {
         businessPersona: "STARTING",
       }),
     });
-    renderPage({ business, setRegistrationModalIsVisible });
+    renderPage({ business });
 
     expect(
       screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
@@ -1076,7 +1063,7 @@ describe("profile - starting business", () => {
         [naicsCodeTaskId]: "COMPLETED",
       },
     });
-    renderPage({ business, setRegistrationModalIsVisible });
+    renderPage({ business });
     selectByValue("Industry", "e-commerce");
     clickSave();
 
@@ -1097,7 +1084,7 @@ describe("profile - starting business", () => {
       },
       taskItemChecklist: { key1: true },
     });
-    renderPage({ business, setRegistrationModalIsVisible });
+    renderPage({ business });
     selectByValue("Industry", "e-commerce");
     clickSave();
 
@@ -1117,7 +1104,7 @@ describe("profile - starting business", () => {
           ...emptyIndustrySpecificData,
         }),
       });
-      renderPage({ business, setRegistrationModalIsVisible });
+      renderPage({ business });
       clickSave();
       await waitFor(() => {
         expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
@@ -1133,7 +1120,7 @@ describe("profile - starting business", () => {
           legalStructureId: "limited-liability-company",
         }),
       });
-      renderPage({ business, setRegistrationModalIsVisible });
+      renderPage({ business });
       chooseTab("documents");
       expect(screen.getByTestId("profileContent-documents")).toBeInTheDocument();
     });
@@ -1145,7 +1132,7 @@ describe("profile - starting business", () => {
           legalStructureId: "sole-proprietorship",
         }),
       });
-      renderPage({ business, setRegistrationModalIsVisible });
+      renderPage({ business });
       expect(screen.queryByTestId("documents")).not.toBeInTheDocument();
       expect(screen.queryByTestId("profileContent-documents")).not.toBeInTheDocument();
     });
@@ -1161,7 +1148,7 @@ describe("profile - starting business", () => {
           documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" },
         }),
       });
-      renderPage({ business, setRegistrationModalIsVisible });
+      renderPage({ business });
       chooseTab("documents");
       expect(
         screen.getByText(Config.profileDefaults.fields.documents.default.placeholder.split("[")[0], {
@@ -1181,7 +1168,7 @@ describe("profile - starting business", () => {
           documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol" },
         }),
       });
-      renderPage({ business, setRegistrationModalIsVisible });
+      renderPage({ business });
       chooseTab("documents");
       expect(screen.queryByText("test12345")).not.toBeInTheDocument();
       expect(screen.getByText(Config.profileDefaults.default.formationDocFileTitle)).toBeInTheDocument();
@@ -1205,7 +1192,7 @@ describe("profile - starting business", () => {
           documents: { certifiedDoc: "pz.zip", formationDoc: "whatever.pdf", standingDoc: "lol" },
         }),
       });
-      renderPage({ business, setRegistrationModalIsVisible });
+      renderPage({ business });
       chooseTab("documents");
 
       expect(screen.getByText(Config.profileDefaults.default.formationDocFileTitle)).toHaveAttribute(
@@ -1234,7 +1221,7 @@ describe("profile - starting business", () => {
         }),
       });
 
-      renderPage({ business, setRegistrationModalIsVisible });
+      renderPage({ business });
       chooseTab("documents");
 
       expect(screen.getByText(Config.profileDefaults.default.formationDocFileTitle)).toBeInTheDocument();
@@ -1251,7 +1238,7 @@ describe("profile - starting business", () => {
           legalStructureId: "sole-proprietorship",
         }),
       });
-      renderPage({ business, setRegistrationModalIsVisible });
+      renderPage({ business });
       expect(screen.getByTestId("tradeName")).toBeInTheDocument();
     });
 
@@ -1262,7 +1249,7 @@ describe("profile - starting business", () => {
           legalStructureId: "limited-liability-company",
         }),
       });
-      renderPage({ business, setRegistrationModalIsVisible });
+      renderPage({ business });
       expect(screen.queryByTestId("tradeName")).not.toBeInTheDocument();
     });
   });
@@ -1275,7 +1262,7 @@ describe("profile - starting business", () => {
           legalStructureId: "general-partnership",
         }),
       });
-      renderPage({ business, setRegistrationModalIsVisible });
+      renderPage({ business });
       expect(screen.getByTestId("responsibleOwnerName")).toBeInTheDocument();
     });
 
@@ -1286,7 +1273,7 @@ describe("profile - starting business", () => {
           legalStructureId: "limited-liability-partnership",
         }),
       });
-      renderPage({ business, setRegistrationModalIsVisible });
+      renderPage({ business });
       expect(screen.queryByTestId("responsibleOwnerName")).not.toBeInTheDocument();
     });
 
@@ -1300,7 +1287,7 @@ describe("profile - starting business", () => {
           state: "PENDING",
         }),
       });
-      renderPage({ business, setRegistrationModalIsVisible });
+      renderPage({ business });
       expect(
         screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.header)
       ).toBeInTheDocument();

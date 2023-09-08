@@ -42,8 +42,8 @@ import { ProfileTaxPin } from "@/components/profile/ProfileTaxPin";
 import { ProfileTradeName } from "@/components/profile/ProfileTradeName";
 import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { profileFormContext } from "@/contexts/profileFormContext";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
@@ -97,7 +97,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const userDataFromHook = useUserData();
   const updateQueue = userDataFromHook.updateQueue;
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
-  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
   const businessPersona: BusinessPersona = props.CMS_ONLY_businessPersona ?? profileData.businessPersona;
   const foreignBusinessType: ForeignBusinessType =
@@ -155,7 +155,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const showRegistrationModalForGuest = (): (() => void) | undefined => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
       return () => {
-        return setRegistrationModalIsVisible(true);
+        return setShowNeedsAccountModal(true);
       };
     }
     return undefined;

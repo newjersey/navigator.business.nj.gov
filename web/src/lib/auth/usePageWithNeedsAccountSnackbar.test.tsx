@@ -1,28 +1,28 @@
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { useAuthAlertPage } from "@/lib/auth/useAuthAlertPage";
-import { withAuth, withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { usePageWithNeedsAccountSnackbar } from "@/lib/auth/usePageWithNeedsAccountSnackbar";
+import { withAuth, withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { render } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 
-describe("useAuthAlertPage", () => {
-  let setRegistrationAlertIsVisible: jest.Mock;
+describe("usePageWithNeedsAccountSnackbar", () => {
+  let setShowNeedsAccountSnackbar: jest.Mock;
 
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({ isReady: true, asPath: "", query: { fromOnboarding: "true" } });
-    setRegistrationAlertIsVisible = jest.fn();
+    setShowNeedsAccountSnackbar = jest.fn();
   });
 
   const setupHookWithAuth = ({
     hook,
     isAuth,
-    registrationModalIsVisible,
+    showNeedsAccountModal,
   }: {
     hook: () => void;
     isAuth: IsAuthenticated;
-    registrationModalIsVisible?: boolean;
+    showNeedsAccountModal?: boolean;
   }): void => {
     function TestComponent(): null {
       hook();
@@ -31,9 +31,9 @@ describe("useAuthAlertPage", () => {
 
     render(
       withAuth(
-        withAuthAlert(<TestComponent />, isAuth ?? IsAuthenticated.TRUE, {
-          registrationModalIsVisible: registrationModalIsVisible ?? false,
-          setRegistrationAlertIsVisible,
+        withNeedsAccountContext(<TestComponent />, isAuth ?? IsAuthenticated.TRUE, {
+          showNeedsAccountModal: showNeedsAccountModal ?? false,
+          setShowNeedsAccountSnackbar,
         }),
         { isAuthenticated: isAuth }
       )
@@ -43,58 +43,58 @@ describe("useAuthAlertPage", () => {
   describe("useAuthAlertPage", () => {
     it("hides alert when modal is visible", () => {
       setupHookWithAuth({
-        hook: useAuthAlertPage,
+        hook: usePageWithNeedsAccountSnackbar,
         isAuth: IsAuthenticated.FALSE,
-        registrationModalIsVisible: true,
+        showNeedsAccountModal: true,
       });
-      expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(false);
+      expect(setShowNeedsAccountSnackbar).toHaveBeenCalledWith(false);
     });
 
     it("shows alert when user is not authed", () => {
       setupHookWithAuth({
-        hook: useAuthAlertPage,
+        hook: usePageWithNeedsAccountSnackbar,
         isAuth: IsAuthenticated.FALSE,
-        registrationModalIsVisible: false,
+        showNeedsAccountModal: false,
       });
-      expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(true);
+      expect(setShowNeedsAccountSnackbar).toHaveBeenCalledWith(true);
     });
 
     it("closes alert when user is not authed and is not routed from onboarding", () => {
       useMockRouter({ isReady: true, query: {} });
       setupHookWithAuth({
-        hook: useAuthAlertPage,
+        hook: usePageWithNeedsAccountSnackbar,
         isAuth: IsAuthenticated.FALSE,
-        registrationModalIsVisible: true,
+        showNeedsAccountModal: true,
       });
-      expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(false);
+      expect(setShowNeedsAccountSnackbar).toHaveBeenCalledWith(false);
     });
 
     it("closes alert when user is not authed and is routed from onboarding", () => {
       useMockRouter({ isReady: true, query: { fromOnboarding: "true" } });
       setupHookWithAuth({
-        hook: useAuthAlertPage,
+        hook: usePageWithNeedsAccountSnackbar,
         isAuth: IsAuthenticated.FALSE,
-        registrationModalIsVisible: false,
+        showNeedsAccountModal: false,
       });
-      expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(true);
+      expect(setShowNeedsAccountSnackbar).toHaveBeenCalledWith(true);
     });
 
     it("does not show alert when user auth is unknown", () => {
       setupHookWithAuth({
-        hook: useAuthAlertPage,
+        hook: usePageWithNeedsAccountSnackbar,
         isAuth: IsAuthenticated.UNKNOWN,
-        registrationModalIsVisible: false,
+        showNeedsAccountModal: false,
       });
-      expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(false);
+      expect(setShowNeedsAccountSnackbar).toHaveBeenCalledWith(false);
     });
 
     it("does not show alert when user is authed", () => {
       setupHookWithAuth({
-        hook: useAuthAlertPage,
+        hook: usePageWithNeedsAccountSnackbar,
         isAuth: IsAuthenticated.TRUE,
-        registrationModalIsVisible: false,
+        showNeedsAccountModal: false,
       });
-      expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(false);
+      expect(setShowNeedsAccountSnackbar).toHaveBeenCalledWith(false);
     });
   });
 });

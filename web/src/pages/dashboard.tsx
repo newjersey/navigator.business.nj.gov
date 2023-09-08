@@ -13,7 +13,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
-import { useAuthAlertPage } from "@/lib/auth/useAuthAlertPage";
+import { usePageWithNeedsAccountSnackbar } from "@/lib/auth/usePageWithNeedsAccountSnackbar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useQueryControlledAlert } from "@/lib/data-hooks/useQueryControlledAlert";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
@@ -43,7 +43,7 @@ interface Props {
 }
 
 const DashboardPage = (props: Props): ReactElement => {
-  useAuthAlertPage();
+  usePageWithNeedsAccountSnackbar();
   const { business, updateQueue } = useUserData();
   const router = useRouter();
   const { roadmap } = useRoadmap();

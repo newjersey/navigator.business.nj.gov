@@ -1,8 +1,8 @@
 import { ButtonIcon } from "@/components/ButtonIcon";
 import { NavMenuItem } from "@/components/navbar/NavMenuItem";
 import { Icon } from "@/components/njwds/Icon";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { AuthContext } from "@/contexts/authContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSelfRegister, onSignOut } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -35,7 +35,7 @@ export interface Props {
 export const NavBarPopupMenu = (props: Props): ReactElement => {
   const { userData, updateQueue } = useUserData();
   const { state, dispatch } = useContext(AuthContext);
-  const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
+  const { setRegistrationStatus } = useContext(NeedsAccountContext);
 
   const router = useRouter();
 
@@ -113,7 +113,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
     return NavMenuItem({
       onClick: (): void => {
         analytics.event.guest_menu.click.go_to_NavigatorAccount_setup();
-        onSelfRegister({ router, updateQueue, userData, setRegistrationAlertStatus });
+        onSelfRegister({ router, updateQueue, userData, setRegistrationStatus });
       },
       icon: <ButtonIcon svgFilename="profile" sizePx="25px" />,
       itemText: Config.navigationDefaults.navBarGuestRegistrationText,

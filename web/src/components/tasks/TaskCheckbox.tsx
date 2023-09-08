@@ -1,4 +1,4 @@
-import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Checkbox, CheckboxProps } from "@mui/material";
@@ -11,7 +11,7 @@ interface Props {
 
 export const TaskCheckbox = (props: Props): ReactElement => {
   const { updateQueue, business } = useUserData();
-  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
 
   const checklistItemStatus = business?.taskItemChecklist[props.checklistItemId] ?? false;
 
@@ -21,7 +21,7 @@ export const TaskCheckbox = (props: Props): ReactElement => {
     }
 
     if (isAuthenticated !== IsAuthenticated.TRUE) {
-      setRegistrationModalIsVisible(true);
+      setShowNeedsAccountModal(true);
       return;
     }
 

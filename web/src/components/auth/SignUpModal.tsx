@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -16,12 +16,12 @@ import { ReactElement, useContext } from "react";
 export const SignUpModal = (): ReactElement => {
   const { business } = useUserData();
   const router = useRouter();
-  const { isAuthenticated, registrationModalIsVisible, setRegistrationModalIsVisible } =
-    useContext(AuthAlertContext);
+  const { isAuthenticated, showNeedsAccountModal, setShowNeedsAccountModal } =
+    useContext(NeedsAccountContext);
 
   useMountEffectWhenDefined(() => {
     if (isAuthenticated === IsAuthenticated.TRUE) {
-      setRegistrationModalIsVisible(false);
+      setShowNeedsAccountModal(false);
     }
   }, isAuthenticated);
 
@@ -35,15 +35,15 @@ export const SignUpModal = (): ReactElement => {
     } else {
       analytics.event.guest_modal.click.go_to_NavigatorAccount_setup();
     }
-    setRegistrationModalIsVisible(false);
+    setShowNeedsAccountModal(false);
     router.push(ROUTES.accountSetup);
   };
 
   return (
     <Dialog
-      open={registrationModalIsVisible}
+      open={showNeedsAccountModal}
       maxWidth="xs"
-      onClose={(): void => setRegistrationModalIsVisible(false)}
+      onClose={(): void => setShowNeedsAccountModal(false)}
       data-testid={"self-reg-modal"}
     >
       <DialogTitle sx={{ p: 5, paddingRight: 10 }}>
@@ -52,7 +52,7 @@ export const SignUpModal = (): ReactElement => {
         </div>
         <IconButton
           aria-label="close"
-          onClick={(): void => setRegistrationModalIsVisible(false)}
+          onClick={(): void => setShowNeedsAccountModal(false)}
           sx={{
             position: "absolute",
             right: 10,

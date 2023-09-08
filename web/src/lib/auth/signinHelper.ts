@@ -1,4 +1,4 @@
-import { AuthAlertContextType } from "@/contexts/authAlertContext";
+import { NeedsAccountContextType } from "@/contexts/needsAccountContext";
 import * as api from "@/lib/api-client/apiClient";
 import { ActiveUser, AuthAction } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
@@ -40,17 +40,17 @@ export const onSelfRegister = ({
   router,
   updateQueue,
   userData,
-  setRegistrationAlertStatus,
+  setRegistrationStatus,
 }: {
   router: SelfRegRouter;
   updateQueue: UpdateQueue | undefined;
   userData: UserData | undefined;
-  setRegistrationAlertStatus: AuthAlertContextType["setRegistrationAlertStatus"];
+  setRegistrationStatus: NeedsAccountContextType["setRegistrationStatus"];
 }): void => {
   if (!userData || !updateQueue) {
     return;
   }
-  setRegistrationAlertStatus("IN_PROGRESS");
+  setRegistrationStatus("IN_PROGRESS");
 
   const route = router.asPath?.includes(ROUTES.accountSetup)
     ? ""
@@ -76,9 +76,9 @@ export const onSelfRegister = ({
     })
     .catch((error) => {
       if (error === 409) {
-        setRegistrationAlertStatus("DUPLICATE_ERROR");
+        setRegistrationStatus("DUPLICATE_ERROR");
       } else {
-        setRegistrationAlertStatus("RESPONSE_ERROR");
+        setRegistrationStatus("RESPONSE_ERROR");
       }
     });
 };

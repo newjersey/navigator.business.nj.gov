@@ -81,26 +81,26 @@ describe("SigninHelper", () => {
     let userData: UserData;
     let updateQueue: UpdateQueue;
     let update: jest.Mock;
-    let mockSetAlertStatus: jest.Mock;
+    let mockSetRegistrationStatus: jest.Mock;
     let fakeRouter: SelfRegRouter;
 
     beforeEach(() => {
       userData = generateUserData({});
       update = jest.fn();
       updateQueue = new UpdateQueueFactory(userData, update);
-      mockSetAlertStatus = jest.fn();
+      mockSetRegistrationStatus = jest.fn();
       fakeRouter = { replace: mockPush, asPath: "/tasks/some-url" };
     });
 
-    it("sets registration alert to IN_PROGRESS", async () => {
+    it("sets registration status to IN_PROGRESS", async () => {
       mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
       await onSelfRegister({
         router: fakeRouter,
         updateQueue,
         userData,
-        setRegistrationAlertStatus: mockSetAlertStatus,
+        setRegistrationStatus: mockSetRegistrationStatus,
       });
-      expect(mockSetAlertStatus).toHaveBeenCalledWith("IN_PROGRESS");
+      expect(mockSetRegistrationStatus).toHaveBeenCalledWith("IN_PROGRESS");
     });
 
     it("does not use a returnToLink if path is account-setup", async () => {
@@ -115,7 +115,7 @@ describe("SigninHelper", () => {
         router: fakeRouter,
         updateQueue,
         userData,
-        setRegistrationAlertStatus: mockSetAlertStatus,
+        setRegistrationStatus: mockSetRegistrationStatus,
       });
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
         ...userData,
@@ -145,7 +145,7 @@ describe("SigninHelper", () => {
         router: fakeRouter,
         updateQueue,
         userData,
-        setRegistrationAlertStatus: mockSetAlertStatus,
+        setRegistrationStatus: mockSetRegistrationStatus,
       });
 
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
@@ -173,7 +173,7 @@ describe("SigninHelper", () => {
         router: fakeRouter,
         updateQueue,
         userData,
-        setRegistrationAlertStatus: mockSetAlertStatus,
+        setRegistrationStatus: mockSetRegistrationStatus,
       });
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
         ...userData,
@@ -199,7 +199,7 @@ describe("SigninHelper", () => {
         router: fakeRouter,
         updateQueue,
         userData,
-        setRegistrationAlertStatus: mockSetAlertStatus,
+        setRegistrationStatus: mockSetRegistrationStatus,
       });
       await waitFor(() => {
         return expect(mockPush).toHaveBeenCalledWith("/some-url");
@@ -213,10 +213,10 @@ describe("SigninHelper", () => {
         router: fakeRouter,
         updateQueue,
         userData,
-        setRegistrationAlertStatus: mockSetAlertStatus,
+        setRegistrationStatus: mockSetRegistrationStatus,
       });
       await waitFor(() => {
-        return expect(mockSetAlertStatus).toHaveBeenCalledWith("DUPLICATE_ERROR");
+        return expect(mockSetRegistrationStatus).toHaveBeenCalledWith("DUPLICATE_ERROR");
       });
       expect(update).not.toHaveBeenCalled();
       expect(mockPush).not.toHaveBeenCalled();
@@ -228,10 +228,10 @@ describe("SigninHelper", () => {
         router: fakeRouter,
         updateQueue,
         userData,
-        setRegistrationAlertStatus: mockSetAlertStatus,
+        setRegistrationStatus: mockSetRegistrationStatus,
       });
       await waitFor(() => {
-        return expect(mockSetAlertStatus).toHaveBeenCalledWith("RESPONSE_ERROR");
+        return expect(mockSetRegistrationStatus).toHaveBeenCalledWith("RESPONSE_ERROR");
       });
       expect(update).not.toHaveBeenCalled();
       expect(mockPush).not.toHaveBeenCalled();

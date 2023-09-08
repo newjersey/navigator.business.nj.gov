@@ -8,7 +8,7 @@ import {
   randomPublicFilingLegalStructure,
   randomTradeNameLegalStructure,
 } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulProfileFormContext } from "@/test/mock/withStatefulProfileData";
@@ -106,7 +106,7 @@ describe("<TaxTask />", () => {
 
     const renderPage = (): void => {
       render(
-        withAuthAlert(
+        withNeedsAccountContext(
           <WithStatefulBusiness initialBusiness={initialBusiness}>
             <TaxTask task={task} />
           </WithStatefulBusiness>,
@@ -187,7 +187,7 @@ describe("<TaxTask />", () => {
 
     const renderPage = (): void => {
       render(
-        withAuthAlert(
+        withNeedsAccountContext(
           <WithStatefulBusiness initialBusiness={initialBusiness}>
             <TaxTask task={task} />
           </WithStatefulBusiness>,
@@ -211,16 +211,16 @@ describe("<TaxTask />", () => {
 
   describe("guest mode", () => {
     let initialBusiness: Business;
-    const setRegistrationModalIsVisible = jest.fn();
+    const setShowNeedsAccountModal = jest.fn();
 
     const renderPage = (): void => {
       render(
-        withAuthAlert(
+        withNeedsAccountContext(
           <WithStatefulBusiness initialBusiness={initialBusiness}>
             <TaxTask task={task} />
           </WithStatefulBusiness>,
           IsAuthenticated.FALSE,
-          { registrationModalIsVisible: false, setRegistrationModalIsVisible }
+          { showNeedsAccountModal: false, setShowNeedsAccountModal }
         )
       );
     };
@@ -237,12 +237,12 @@ describe("<TaxTask />", () => {
       expect(screen.getByText(`Register & ${Config.tax.saveButtonText}`)).toBeInTheDocument();
     });
 
-    it("opens registration modal on save button click", async () => {
+    it("opens Needs Account modal on save button click", async () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789123" } });
       fireEvent.click(screen.getByText(`Register & ${Config.tax.saveButtonText}`));
       await waitFor(() => {
-        return expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+        return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
       });
     });
   });

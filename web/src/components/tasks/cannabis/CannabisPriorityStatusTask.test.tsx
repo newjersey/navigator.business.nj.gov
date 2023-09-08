@@ -7,7 +7,7 @@ import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/c
 import { Task } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateTask, generateTaskLink } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
@@ -26,7 +26,7 @@ const C = Config.cannabisPriorityStatus;
 
 const renderPage = (task: Task): void => {
   render(
-    withAuthAlert(
+    withNeedsAccountContext(
       <WithStatefulUserData initialUserData={generateUserData({})}>
         <CannabisPriorityStatusTask task={task} />
       </WithStatefulUserData>,

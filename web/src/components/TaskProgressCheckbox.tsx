@@ -6,7 +6,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { TaskStatusTaxRegistrationSnackbar } from "@/components/TaskStatusTaxRegistrationSnackbar";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
@@ -29,7 +29,7 @@ type ModalTypes = "formation" | "formation-unset" | "registered-for-taxes-unset"
 
 export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const { business, updateQueue } = useUserData();
-  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { queueUpdateTaskProgress, congratulatoryModal } = useUpdateTaskProgress();
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState<boolean>(false);
   const [currentOpenModal, setCurrentOpenModal] = useState<ModalTypes | undefined>(undefined);
@@ -56,7 +56,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
     if (!updateQueue) return;
     let redirectOnSuccess = config?.redirectOnSuccess;
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      setRegistrationModalIsVisible(true);
+      setShowNeedsAccountModal(true);
       return;
     }
     const nextStatus = getNextStatus();
