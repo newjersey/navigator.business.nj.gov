@@ -56,7 +56,7 @@ describe("profile - guest mode", () => {
 
     opensModalWhenEditingNonGuestModeProfileFields();
 
-    it("opens registration modal when user tries to change Tax PIN", () => {
+    it("opens Needs Account modal when user tries to change Tax PIN", () => {
       renderPage({
         business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
@@ -83,7 +83,7 @@ describe("profile - guest mode", () => {
       });
     });
 
-    it("opens registration modal when user tries to change EIN", () => {
+    it("opens Needs Account modal when user tries to change EIN", () => {
       renderPage({
         business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
@@ -94,7 +94,7 @@ describe("profile - guest mode", () => {
       expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
 
-    it("opens registration modal when user tries to change entity ID", () => {
+    it("opens Needs Account modal when user tries to change entity ID", () => {
       renderPage({
         business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
@@ -105,7 +105,7 @@ describe("profile - guest mode", () => {
       expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
 
-    it("opens registration modal when user tries to change NJ Tax ID", () => {
+    it("opens Needs Account modal when user tries to change NJ Tax ID", () => {
       renderPage({
         business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
@@ -116,7 +116,7 @@ describe("profile - guest mode", () => {
       expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
 
-    it("opens registration modal when user tries to change Notes", () => {
+    it("opens Needs Account modal when user tries to change Notes", () => {
       renderPage({
         business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,

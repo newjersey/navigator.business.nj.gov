@@ -3450,10 +3450,10 @@ collections:
                   name: guestSuccessTitleExistingAccount,
                   widget: string,
                 }
-              - { label: Guest Alert Modal Title, name: guestModalTitle, widget: string }
-              - { label: Guest Alert Modal Body, name: guestModalBody, widget: text }
-              - { label: Guest Alert Button, name: guestModalButtonText, widget: string }
-              - { label: Guest Alert Sub Button text, name: guestModalSubText, widget: string }
+              - { label: Needs Account Modal Title, name: needsAccountModalTitle, widget: string }
+              - { label: Needs Account Modal Body, name: needsAccountModalBody, widget: text }
+              - { label: Guest Alert Button, name: needsAccountModalButtonText, widget: string }
+              - { label: Guest Alert Sub Button text, name: needsAccountModalSubText, widget: string }
               - { label: Add Business Button, name: addBusinessButton, widget: string }
           - label: Onboarding Defaults
             name: onboardingDefaults

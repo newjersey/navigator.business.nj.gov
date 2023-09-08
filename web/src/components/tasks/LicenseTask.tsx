@@ -1,4 +1,4 @@
-import { SignUpModalWrapper } from "@/components/auth/SignUpModalWrapper";
+import { NeedsAccountModalWrapper } from "@/components/auth/NeedsAccountModalWrapper";
 import { Content } from "@/components/Content";
 import { TaskHeader } from "@/components/TaskHeader";
 import { CheckStatus } from "@/components/tasks/CheckStatus";
@@ -110,7 +110,7 @@ export const LicenseTask = (props: Props): ReactElement => {
   };
 
   return (
-    <SignUpModalWrapper>
+    <NeedsAccountModalWrapper>
       <div className="flex flex-column">
         <TaskHeader
           task={props.task}
@@ -191,6 +191,6 @@ export const LicenseTask = (props: Props): ReactElement => {
           </TabContext>
         </Box>
       </div>
-    </SignUpModalWrapper>
+    </NeedsAccountModalWrapper>
   );
 };

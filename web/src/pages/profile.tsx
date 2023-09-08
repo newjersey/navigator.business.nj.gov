@@ -152,7 +152,7 @@ const ProfilePage = (props: Props): ReactElement => {
     }
   };
 
-  const showRegistrationModalForGuest = (): (() => void) | undefined => {
+  const showNeedsAccountModalForGuest = (): (() => void) | undefined => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
       return () => {
         return setShowNeedsAccountModal(true);
@@ -370,7 +370,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="notes" />
 
         <ProfileField fieldName="notes">
-          <ProfileNotes handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileNotes handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
       </>
     ),
@@ -387,7 +387,7 @@ const ProfilePage = (props: Props): ReactElement => {
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
-              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
+              <OnboardingTaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
             )}
           </div>
           {business?.profileData.naicsCode && (
@@ -420,7 +420,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="notes" />
 
         <ProfileField fieldName="notes">
-          <ProfileNotes handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileNotes handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
       </>
     ),
@@ -437,7 +437,7 @@ const ProfilePage = (props: Props): ReactElement => {
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
-              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
+              <OnboardingTaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
             )}
           </div>
         </ProfileField>
@@ -451,7 +451,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="notes" />
 
         <ProfileField fieldName="notes">
-          <ProfileNotes handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileNotes handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
       </>
     ),
@@ -567,11 +567,11 @@ const ProfilePage = (props: Props): ReactElement => {
           )}
           locked={shouldLockFormationFields}
         >
-          <ProfileEntityId handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileEntityId handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
 
         <ProfileField fieldName="employerId">
-          <ProfileEmployerId handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileEmployerId handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
 
         <ProfileField fieldName="taxId" noLabel={true}>
@@ -583,7 +583,7 @@ const ProfilePage = (props: Props): ReactElement => {
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
-              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
+              <OnboardingTaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
             )}
           </div>
         </ProfileField>
@@ -597,7 +597,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="notes" />
 
         <ProfileField fieldName="notes">
-          <ProfileNotes handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileNotes handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
       </>
     ),
@@ -673,11 +673,11 @@ const ProfilePage = (props: Props): ReactElement => {
         )}
 
         <ProfileField fieldName="entityId">
-          <ProfileEntityId handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileEntityId handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
 
         <ProfileField fieldName="employerId">
-          <ProfileEmployerId handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileEmployerId handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
 
         <ProfileField fieldName="taxId" noLabel={true}>
@@ -689,13 +689,13 @@ const ProfilePage = (props: Props): ReactElement => {
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
-              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
+              <OnboardingTaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
             )}
           </div>
         </ProfileField>
 
         <ProfileField fieldName="taxPin">
-          <ProfileTaxPin handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileTaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
       </>
     ),

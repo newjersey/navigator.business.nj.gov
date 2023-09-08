@@ -381,7 +381,7 @@ describe("<NexusFormationFlow />", () => {
           expect(screen.getByText(guestModeNextButtonText)).toBeInTheDocument();
         });
 
-        it("shows registration modal when clicking continue button from step one", async () => {
+        it("shows Needs Account modal when clicking continue button from step one", async () => {
           fillText("Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
           fireEvent.click(screen.getByText(guestModeNextButtonText));

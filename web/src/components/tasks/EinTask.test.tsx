@@ -197,7 +197,7 @@ describe("<EinTask />", () => {
       });
     });
 
-    it("opens registration modal when the field is edited", async () => {
+    it("opens Needs Account modal when the field is edited", async () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Save your EIN"), {
         target: { value: "123456789" },
