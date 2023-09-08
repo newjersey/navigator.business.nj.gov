@@ -3,7 +3,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { selectDate } from "@/test/helpers/helpers-testing-library-selectors";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -33,12 +33,12 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 
 const Config = getMergedConfig();
-let setRegistrationModalIsVisible: jest.Mock;
+let setShowNeedsAccountModal: jest.Mock;
 
 describe("<TaskProgressCheckbox />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    setRegistrationModalIsVisible = jest.fn();
+    setShowNeedsAccountModal = jest.fn();
     useMockRoadmap({});
     useMockRouter({});
     setupStatefulUserDataContext();
@@ -58,14 +58,14 @@ describe("<TaskProgressCheckbox />", () => {
 
   const renderTaskCheckboxWithAuthAlert = (taskId: string, initialBusiness: Business): void => {
     render(
-      withAuthAlert(
+      withNeedsAccountContext(
         <MunicipalitiesContext.Provider value={{ municipalities: [] }}>
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <TaskProgressCheckbox taskId={taskId} disabledTooltipText={undefined} />
           </WithStatefulUserData>
         </MunicipalitiesContext.Provider>,
         IsAuthenticated.FALSE,
-        { registrationModalIsVisible: false, setRegistrationModalIsVisible }
+        { showNeedsAccountModal: false, setShowNeedsAccountModal: setShowNeedsAccountModal }
       )
     );
   };
@@ -118,11 +118,11 @@ describe("<TaskProgressCheckbox />", () => {
     await screen.findByText(Config.taskDefaults.taskProgressSuccessSnackbarBody);
   });
 
-  it("opens registration modal for guest mode user when checkbox is clicked", async () => {
+  it("opens Needs Account modal for guest mode user when checkbox is clicked", async () => {
     renderTaskCheckboxWithAuthAlert("123", generateBusiness({}));
     fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
     await waitFor(() => {
-      return expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+      return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
   });
 

@@ -4,7 +4,7 @@ import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Icon } from "@/components/njwds/Icon";
 import { DisabledTaxId } from "@/components/onboarding/taxId/DisabledTaxId";
 import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { profileFormContext } from "@/contexts/profileFormContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -24,7 +24,7 @@ interface Props {
 
 export const TaxInput = (props: Props): ReactElement => {
   const { business, updateQueue } = useUserData();
-  const { isAuthenticated } = useContext(AuthAlertContext);
+  const { isAuthenticated } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
   const [profileData, setProfileData] = useState<ProfileData>(
     business?.profileData ?? createEmptyProfileData()

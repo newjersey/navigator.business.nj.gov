@@ -1,6 +1,6 @@
 import { GenericTextField } from "@/components/GenericTextField";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
@@ -22,7 +22,7 @@ export const EinInput = (props: Props): ReactElement => {
   const [isInvalid, setIsInvalid] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [employerId, setEmployerId] = useState<string>("");
-  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { business, updateQueue } = useUserData();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
 
@@ -33,7 +33,7 @@ export const EinInput = (props: Props): ReactElement => {
 
   const handleChange = (value: string): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      setRegistrationModalIsVisible(true);
+      setShowNeedsAccountModal(true);
       return;
     }
     setEmployerId(value);
@@ -41,7 +41,7 @@ export const EinInput = (props: Props): ReactElement => {
 
   const save = async (): Promise<void> => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      setRegistrationModalIsVisible(true);
+      setShowNeedsAccountModal(true);
       return;
     }
 

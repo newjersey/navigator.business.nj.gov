@@ -5,13 +5,13 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
 import { PageSkeleton } from "@/components/PageSkeleton";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { AuthContext } from "@/contexts/authContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { profileFormContext } from "@/contexts/profileFormContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { onSelfRegister } from "@/lib/auth/signinHelper";
-import { useAuthAlertPage } from "@/lib/auth/useAuthAlertPage";
+import { usePageWithNeedsAccountSnackbar } from "@/lib/auth/usePageWithNeedsAccountSnackbar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -24,13 +24,13 @@ import { useRouter } from "next/router";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
 const AccountSetupPage = (): ReactElement => {
-  useAuthAlertPage();
+  usePageWithNeedsAccountSnackbar();
   const { Config } = useConfig();
   const { updateQueue, userData } = useUserData();
   const [user, setUser] = useState<BusinessUser>(createEmptyUser());
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const router = useRouter();
-  const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
+  const { setRegistrationStatus } = useContext(NeedsAccountContext);
   const { state } = useContext(AuthContext);
   const queryAnalyticsOccurred = useRef<boolean>(false);
 
@@ -70,7 +70,7 @@ const AccountSetupPage = (): ReactElement => {
 
       await updateQueue.queue(userDataWithUser).update();
       analytics.event.finish_setup_on_myNewJersey_button.submit.go_to_myNJ_registration();
-      onSelfRegister({ router, updateQueue, userData: userDataWithUser, setRegistrationAlertStatus });
+      onSelfRegister({ router, updateQueue, userData: userDataWithUser, setRegistrationStatus });
     },
     (isValid) => {
       if (isValid) {

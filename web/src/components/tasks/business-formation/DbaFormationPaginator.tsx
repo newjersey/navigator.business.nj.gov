@@ -8,8 +8,8 @@ import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { TaskCTA } from "@/components/TaskCTA";
 import { DbaFormationSteps } from "@/components/tasks/business-formation/DbaFormationSteps";
 import { DbaFormationStepsConfiguration } from "@/components/tasks/business-formation/DbaFormationStepsConfiguration";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -23,7 +23,7 @@ import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from
 export const DbaFormationPaginator = (): ReactElement => {
   const { business, updateQueue } = useUserData();
   const { state, setStepIndex } = useContext(BusinessFormationContext);
-  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
 
   const stepperRef = useRef<HTMLDivElement>(null);
@@ -77,7 +77,7 @@ export const DbaFormationPaginator = (): ReactElement => {
       !isDba &&
       isAuthenticated === IsAuthenticated.FALSE
     ) {
-      setRegistrationModalIsVisible(true);
+      setShowNeedsAccountModal(true);
       return;
     }
     setStepperState((stepperState) => {

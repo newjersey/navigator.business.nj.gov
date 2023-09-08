@@ -4,7 +4,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { randomPublicFilingLegalType } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
@@ -44,7 +44,7 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;
 
 const Config = getMergedConfig();
-let setRegistrationModalIsVisible: jest.Mock;
+let setShowNeedsAccountModal: jest.Mock;
 
 const renderFilingsCalendarTaxAccess = (initialUserData?: UserData): void => {
   render(
@@ -58,12 +58,12 @@ const renderFilingsCalendarTaxAccess = (initialUserData?: UserData): void => {
 
 const renderUnauthenticatedFilingsCalendarTaxAccess = (business: Business): void => {
   render(
-    withAuthAlert(
+    withNeedsAccountContext(
       <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
         <FilingsCalendarTaxAccess />
       </WithStatefulUserData>,
       IsAuthenticated.FALSE,
-      { registrationModalIsVisible: false, setRegistrationModalIsVisible }
+      { showNeedsAccountModal: false, setShowNeedsAccountModal }
     )
   );
 };
@@ -88,7 +88,7 @@ const mockApiResponse = (userData: UserData, overrides: Partial<Business>): void
 describe("<FilingsCalendarTaxAccess />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    setRegistrationModalIsVisible = jest.fn();
+    setShowNeedsAccountModal = jest.fn();
     setupStatefulUserDataContext();
     useMockRouter({});
   });
@@ -149,7 +149,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
   };
 
   describe("guest mode / query param behavior", () => {
-    it("opens the sign up modal when button is clicked in up and running guest mode", async () => {
+    it("opens the Needs Account modal when button is clicked in up and running guest mode", async () => {
       const business = generateBusiness({
         profileData: generateProfileData({
           operatingPhase: "GUEST_MODE_OWNING",
@@ -160,7 +160,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       openModal();
       expect(screen.queryByTestId("modal-content")).not.toBeInTheDocument();
       await waitFor(() => {
-        return expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+        return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
       });
     });
 

@@ -2,7 +2,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ProfileTabs } from "@/lib/types/types";
 import Profile from "@/pages/profile";
-import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { WithStatefulProfileFormContext } from "@/test/mock/withStatefulProfileData";
 import {
   currentBusiness,
@@ -41,13 +41,13 @@ export const renderPage = ({
   municipalities,
   business,
   isAuthenticated,
-  setRegistrationModalIsVisible,
+  setShowNeedsAccountModal,
 }: {
   municipalities?: Municipality[];
   business?: Business;
   isAuthenticated?: IsAuthenticated;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setRegistrationModalIsVisible?: jest.Mock<any, any, any>;
+  setShowNeedsAccountModal?: jest.Mock<any, any, any>;
 }): void => {
   const genericTown =
     business && business.profileData.municipality
@@ -63,7 +63,7 @@ export const renderPage = ({
     });
 
   render(
-    withAuthAlert(
+    withNeedsAccountContext(
       <ThemeProvider theme={createTheme()}>
         <WithStatefulProfileFormContext>
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
@@ -72,7 +72,7 @@ export const renderPage = ({
         </WithStatefulProfileFormContext>
       </ThemeProvider>,
       isAuthenticated ?? IsAuthenticated.TRUE,
-      { registrationModalIsVisible: false, setRegistrationModalIsVisible }
+      { showNeedsAccountModal: false, setShowNeedsAccountModal: setShowNeedsAccountModal ?? jest.fn() }
     )
   );
 };

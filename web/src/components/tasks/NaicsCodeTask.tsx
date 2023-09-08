@@ -3,7 +3,7 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { NaicsCodeDisplay } from "@/components/tasks/NaicsCodeDisplay";
 import { NaicsCodeInput } from "@/components/tasks/NaicsCodeInput";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
@@ -18,7 +18,7 @@ interface Props {
 export const NaicsCodeTask = (props: Props): ReactElement => {
   const [showInput, setShowInput] = useState<boolean>(true);
   const { business, updateQueue } = useUserData();
-  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
 
   useMountEffectWhenDefined(() => {
     if (!business) return;
@@ -52,7 +52,7 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
 
   const onSave = (): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      setRegistrationModalIsVisible(true);
+      setShowNeedsAccountModal(true);
       return;
     }
     setShowInput(false);

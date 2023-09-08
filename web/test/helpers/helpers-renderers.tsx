@@ -1,6 +1,6 @@
-import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { AuthContext } from "@/contexts/authContext";
 import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { ActiveUser, AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -35,32 +35,32 @@ export const withContextualInfo = (
   );
 };
 
-export const withAuthAlert = (
+export const withNeedsAccountContext = (
   subject: ReactElement,
   isAuthenticated: IsAuthenticated,
   context?: {
-    registrationAlertIsVisible?: boolean;
-    registrationModalIsVisible?: boolean;
-    registrationAlertStatus?: RegistrationStatus;
-    setRegistrationAlertStatus?: (value: RegistrationStatus | undefined) => void;
-    setRegistrationAlertIsVisible?: (value: boolean) => void;
-    setRegistrationModalIsVisible?: (value: boolean) => void;
+    showNeedsAccountSnackbar?: boolean;
+    showNeedsAccountModal?: boolean;
+    registrationStatus?: RegistrationStatus;
+    setRegistrationStatus?: (value: RegistrationStatus | undefined) => void;
+    setShowNeedsAccountSnackbar?: (value: boolean) => void;
+    setShowNeedsAccountModal?: (value: boolean) => void;
   }
 ): ReactElement => {
   return (
-    <AuthAlertContext.Provider
+    <NeedsAccountContext.Provider
       value={{
         isAuthenticated,
-        registrationAlertIsVisible: context?.registrationAlertIsVisible ?? false,
-        registrationModalIsVisible: context?.registrationModalIsVisible ?? false,
-        registrationAlertStatus: context?.registrationAlertStatus ?? undefined,
-        setRegistrationAlertStatus: context?.setRegistrationAlertStatus || jest.fn(),
-        setRegistrationAlertIsVisible: context?.setRegistrationAlertIsVisible || jest.fn(),
-        setRegistrationModalIsVisible: context?.setRegistrationModalIsVisible || jest.fn(),
+        showNeedsAccountSnackbar: context?.showNeedsAccountSnackbar ?? false,
+        showNeedsAccountModal: context?.showNeedsAccountModal ?? false,
+        registrationStatus: context?.registrationStatus ?? undefined,
+        setRegistrationStatus: context?.setRegistrationStatus || jest.fn(),
+        setShowNeedsAccountSnackbar: context?.setShowNeedsAccountSnackbar || jest.fn(),
+        setShowNeedsAccountModal: context?.setShowNeedsAccountModal || jest.fn(),
       }}
     >
       {subject}
-    </AuthAlertContext.Provider>
+    </NeedsAccountContext.Provider>
   );
 };
 

@@ -15,8 +15,8 @@ import {
   UNKNOWN_API_ERROR_FIELD,
 } from "@/components/tasks/business-formation/getFieldForApiField";
 import { validatedFieldsForUser } from "@/components/tasks/business-formation/validatedFieldsForUser";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -39,7 +39,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   const { updateQueue, business } = useUserData();
   const { state, setStepIndex, setHasBeenSubmitted, setFormationFormData, setFieldsInteracted } =
     useContext(BusinessFormationContext);
-  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
   const { doesStepHaveError, isStepCompleted, allCurrentErrorsForStep, getApiErrorMessage } =
     useFormationErrors();
@@ -114,7 +114,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     config: { moveType: "PREVIOUS_BUTTON" | "NEXT_BUTTON" | "STEPPER" }
   ): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      setRegistrationModalIsVisible(true);
+      setShowNeedsAccountModal(true);
       return;
     }
 

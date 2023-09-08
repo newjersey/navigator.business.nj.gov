@@ -22,11 +22,11 @@ jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn()
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("profile - guest mode", () => {
-  let setRegistrationModalIsVisible: jest.Mock;
+  let setShowNeedsAccountModal: jest.Mock;
 
   beforeEach(() => {
     jest.resetAllMocks();
-    setRegistrationModalIsVisible = jest.fn();
+    setShowNeedsAccountModal = jest.fn();
     useMockRouter({});
     useMockRoadmap({});
     setupStatefulUserDataContext();
@@ -60,11 +60,11 @@ describe("profile - guest mode", () => {
       renderPage({
         business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
-        setRegistrationModalIsVisible,
+        setShowNeedsAccountModal,
       });
       chooseTab("numbers");
       fireEvent.change(screen.getByLabelText("Tax pin"), { target: { value: "123456789" } });
-      expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+      expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
   });
 
@@ -73,7 +73,7 @@ describe("profile - guest mode", () => {
       renderPage({
         business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
-        setRegistrationModalIsVisible,
+        setShowNeedsAccountModal,
       });
       const inputFieldName = getBusinessProfileInputFieldName(initialBusiness);
       fillText(inputFieldName, "Cool Computers");
@@ -87,44 +87,44 @@ describe("profile - guest mode", () => {
       renderPage({
         business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
-        setRegistrationModalIsVisible,
+        setShowNeedsAccountModal,
       });
       chooseTab("numbers");
       fireEvent.change(screen.getByLabelText("Employer id"), { target: { value: "123456789" } });
-      expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+      expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
 
     it("opens registration modal when user tries to change entity ID", () => {
       renderPage({
         business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
-        setRegistrationModalIsVisible,
+        setShowNeedsAccountModal,
       });
       chooseTab("numbers");
       fireEvent.change(screen.getByLabelText("Entity id"), { target: { value: "123456789" } });
-      expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+      expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
 
     it("opens registration modal when user tries to change NJ Tax ID", () => {
       renderPage({
         business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
-        setRegistrationModalIsVisible,
+        setShowNeedsAccountModal,
       });
       chooseTab("numbers");
       fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789" } });
-      expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+      expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
 
     it("opens registration modal when user tries to change Notes", () => {
       renderPage({
         business: initialBusiness,
         isAuthenticated: IsAuthenticated.FALSE,
-        setRegistrationModalIsVisible,
+        setShowNeedsAccountModal,
       });
       chooseTab("notes");
       fireEvent.change(screen.getByLabelText("Notes"), { target: { value: "some note" } });
-      expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+      expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
     });
   }
 });

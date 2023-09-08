@@ -2,7 +2,7 @@ import { SelfRegSnackbar } from "@/components/auth/SelfRegSnackbar";
 import { getMergedConfig } from "@/contexts/configContext";
 import { ActiveUser, IsAuthenticated } from "@/lib/auth/AuthContext";
 import { generateActiveUser } from "@/test/factories";
-import { withAuth, withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { withAuth, withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
@@ -23,19 +23,19 @@ describe("SelfRegSnackbar", () => {
     useMockBusiness({});
   });
 
-  const setRegistrationAlertStatus = jest.fn();
+  const setRegistrationStatus = jest.fn();
 
   const setupHookWithAuth = ({
     isAuthenticated,
-    registrationAlertStatus,
+    registrationStatus,
   }: {
     isAuthenticated: IsAuthenticated;
-    registrationAlertStatus: RegistrationStatus;
+    registrationStatus: RegistrationStatus;
   }): void => {
     render(
-      withAuthAlert(<SelfRegSnackbar />, isAuthenticated, {
-        registrationAlertStatus,
-        setRegistrationAlertStatus,
+      withNeedsAccountContext(<SelfRegSnackbar />, isAuthenticated, {
+        registrationStatus,
+        setRegistrationStatus: setRegistrationStatus,
       })
     );
   };
@@ -49,9 +49,9 @@ describe("SelfRegSnackbar", () => {
   }): void => {
     render(
       withAuth(
-        withAuthAlert(<SelfRegSnackbar />, isAuthenticated, {
-          registrationAlertStatus: "SUCCESS",
-          setRegistrationAlertStatus,
+        withNeedsAccountContext(<SelfRegSnackbar />, isAuthenticated, {
+          registrationStatus: "SUCCESS",
+          setRegistrationStatus: setRegistrationStatus,
         }),
         { activeUser, isAuthenticated }
       )
@@ -59,12 +59,12 @@ describe("SelfRegSnackbar", () => {
   };
 
   it("updates registration status when user is authenticated and had completed the registration process", () => {
-    setupHookWithAuth({ isAuthenticated: IsAuthenticated.TRUE, registrationAlertStatus: "IN_PROGRESS" });
-    expect(setRegistrationAlertStatus).toHaveBeenCalledWith("SUCCESS");
+    setupHookWithAuth({ isAuthenticated: IsAuthenticated.TRUE, registrationStatus: "IN_PROGRESS" });
+    expect(setRegistrationStatus).toHaveBeenCalledWith("SUCCESS");
   });
 
   it("shows registration success snackbar when user is authenticated and had completed the registration process", () => {
-    setupHookWithAuth({ isAuthenticated: IsAuthenticated.TRUE, registrationAlertStatus: "SUCCESS" });
+    setupHookWithAuth({ isAuthenticated: IsAuthenticated.TRUE, registrationStatus: "SUCCESS" });
     expect(screen.getByText(markdownToText(Config.navigationDefaults.guestSuccessBody))).toBeInTheDocument();
     expect(screen.getByText(markdownToText(Config.navigationDefaults.guestSuccessTitle))).toBeInTheDocument();
     expect(screen.getByTestId("congratulations-logo")).toBeInTheDocument();
@@ -72,12 +72,12 @@ describe("SelfRegSnackbar", () => {
   });
 
   it("does not show registration success snackbar when user is not authenticated and had not completed the registration process", () => {
-    setupHookWithAuth({ isAuthenticated: IsAuthenticated.FALSE, registrationAlertStatus: "IN_PROGRESS" });
+    setupHookWithAuth({ isAuthenticated: IsAuthenticated.FALSE, registrationStatus: "IN_PROGRESS" });
     expect(screen.queryByTestId("reg-snackbar")).not.toBeInTheDocument();
   });
 
   it("shows duplicate registration error snackbar alert when user had failed the registration process", () => {
-    setupHookWithAuth({ isAuthenticated: IsAuthenticated.FALSE, registrationAlertStatus: "DUPLICATE_ERROR" });
+    setupHookWithAuth({ isAuthenticated: IsAuthenticated.FALSE, registrationStatus: "DUPLICATE_ERROR" });
     expect(
       screen.getByText(markdownToText(Config.selfRegistration.errorTextDuplicateSignUp))
     ).toBeInTheDocument();
@@ -88,7 +88,7 @@ describe("SelfRegSnackbar", () => {
   });
 
   it("shows general registration error snackbar alert when user had failed the registration process", () => {
-    setupHookWithAuth({ isAuthenticated: IsAuthenticated.FALSE, registrationAlertStatus: "RESPONSE_ERROR" });
+    setupHookWithAuth({ isAuthenticated: IsAuthenticated.FALSE, registrationStatus: "RESPONSE_ERROR" });
     expect(screen.getByText(markdownToText(Config.selfRegistration.errorTextGeneric))).toBeInTheDocument();
     expect(
       screen.queryByText(markdownToText(Config.navigationDefaults.guestSuccessTitle))

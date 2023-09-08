@@ -12,7 +12,7 @@ import {
   TasksDisplayContent,
 } from "@/lib/types/types";
 import { generateTask, randomPublicFilingLegalType } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -76,7 +76,7 @@ type PreparePageParams = {
   municipalities?: Municipality[];
   task?: Task;
   isAuthenticated?: IsAuthenticated;
-  setRegistrationModalIsVisible?: (value: boolean) => void;
+  setShowNeedsAccountModal?: (value: boolean) => void;
   user?: Partial<BusinessUser>;
 };
 
@@ -86,7 +86,7 @@ export const preparePage = ({
   municipalities,
   task,
   isAuthenticated,
-  setRegistrationModalIsVisible,
+  setShowNeedsAccountModal,
   user,
 }: PreparePageParams): FormationPageHelpers => {
   const profileData = generateFormationProfileData({ ...business.profileData });
@@ -127,7 +127,7 @@ export const preparePage = ({
   });
 
   render(
-    withAuthAlert(
+    withNeedsAccountContext(
       <MunicipalitiesContext.Provider value={{ municipalities: internalMunicipalities }}>
         <WithStatefulUserData initialUserData={userData}>
           <ThemeProvider theme={createTheme()}>
@@ -137,8 +137,8 @@ export const preparePage = ({
       </MunicipalitiesContext.Provider>,
       isAuthenticated ?? IsAuthenticated.TRUE,
       {
-        registrationModalIsVisible: false,
-        setRegistrationModalIsVisible: setRegistrationModalIsVisible ?? jest.fn(),
+        showNeedsAccountModal: false,
+        setShowNeedsAccountModal: setShowNeedsAccountModal ?? jest.fn(),
       }
     )
   );

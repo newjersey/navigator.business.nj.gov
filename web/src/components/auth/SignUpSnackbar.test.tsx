@@ -3,7 +3,7 @@ import { Content } from "@/components/Content";
 import { getMergedConfig } from "@/contexts/configContext";
 import { ActiveUser, IsAuthenticated } from "@/lib/auth/AuthContext";
 import { generateActiveUser } from "@/test/factories";
-import { withAuth, withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { withAuth, withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
@@ -47,24 +47,24 @@ describe("<SignUpSnackbar />", () => {
     setupStatefulUserDataContext();
   });
 
-  const setRegistrationAlertIsVisible = jest.fn();
+  const setShowNeedsAccountSnackbar = jest.fn();
 
   const renderWithAuth = ({
     isAuthenticated,
-    registrationAlertIsVisible,
+    showNeedsAccountSnackbar,
   }: {
     isAuthenticated: IsAuthenticated;
-    registrationAlertIsVisible?: boolean | undefined;
+    showNeedsAccountSnackbar?: boolean | undefined;
   }): void => {
     render(
-      withAuthAlert(
+      withNeedsAccountContext(
         <WithStatefulUserData initialUserData={generateUserData({})}>
           <SignUpSnackbar />
         </WithStatefulUserData>,
         isAuthenticated,
         {
-          registrationAlertIsVisible: registrationAlertIsVisible ?? true,
-          setRegistrationAlertIsVisible,
+          showNeedsAccountSnackbar: showNeedsAccountSnackbar ?? true,
+          setShowNeedsAccountSnackbar,
         }
       )
     );
@@ -79,14 +79,14 @@ describe("<SignUpSnackbar />", () => {
   }): void => {
     render(
       withAuth(
-        withAuthAlert(
+        withNeedsAccountContext(
           <WithStatefulUserData initialUserData={generateUserData({})}>
             <SignUpSnackbar />
           </WithStatefulUserData>,
           isAuthenticated,
           {
-            registrationAlertIsVisible: true,
-            setRegistrationAlertIsVisible,
+            showNeedsAccountSnackbar: true,
+            setShowNeedsAccountSnackbar,
           }
         ),
         { activeUser, isAuthenticated }
@@ -94,19 +94,19 @@ describe("<SignUpSnackbar />", () => {
     );
   };
 
-  it("shows registration alert when user is in guest mode", () => {
+  it("shows Needs Account snackbar when user is in guest mode", () => {
     renderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
     expect(screen.getByText(markdownToText(Config.navigationDefaults.guestAlertTitle))).toBeInTheDocument();
   });
 
-  it("is able to close registration alert when user is in guest mode", () => {
+  it("is able to close Needs Account Snackbar when user is in guest mode", () => {
     renderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
     fireEvent.click(screen.getByLabelText("close"));
-    expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(false);
+    expect(setShowNeedsAccountSnackbar).toHaveBeenCalledWith(false);
   });
 
-  it("does not show registration alert when registrationAlertIsVisible is false", () => {
-    renderWithAuth({ isAuthenticated: IsAuthenticated.FALSE, registrationAlertIsVisible: false });
+  it("does not show Needs Account Snackbar when showNeedsAccountSnackbar is false", () => {
+    renderWithAuth({ isAuthenticated: IsAuthenticated.FALSE, showNeedsAccountSnackbar: false });
     expect(
       screen.queryByText(markdownToText(Config.navigationDefaults.guestAlertTitle))
     ).not.toBeInTheDocument();
