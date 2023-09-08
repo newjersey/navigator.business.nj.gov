@@ -135,7 +135,7 @@ describe("Formation - ContactsStep", () => {
       expect(screen.getByText("160 Something Ave", { exact: false })).toBeInTheDocument();
       expect(screen.getByText("Apt 1", { exact: false })).toBeInTheDocument();
       expect(screen.getByText("Miami", { exact: false })).toBeInTheDocument();
-      expect(screen.getByText("Florida", { exact: false })).toBeInTheDocument();
+      expect(screen.getByTestId("incorporators-0")).toHaveTextContent("Florida");
       expect(screen.getByText("32003", { exact: false })).toBeInTheDocument();
       expect(page.getSignerBox(0, "incorporators")).toEqual(true);
     });
