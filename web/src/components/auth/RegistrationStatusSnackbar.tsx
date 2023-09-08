@@ -11,7 +11,7 @@ import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { IconButton } from "@mui/material";
 import { ReactElement, useContext, useEffect } from "react";
 
-export const SelfRegSnackbar = (): ReactElement => {
+export const RegistrationStatusSnackbar = (): ReactElement => {
   const { isAuthenticated, registrationStatus, setRegistrationStatus } = useContext(NeedsAccountContext);
   const { state } = useContext(AuthContext);
   const { Config } = useConfig();
@@ -31,15 +31,15 @@ export const SelfRegSnackbar = (): ReactElement => {
   };
 
   const contentMap: Record<AlertStatus, string> = {
-    SUCCESS: Config.navigationDefaults.guestSuccessBody,
+    SUCCESS: Config.navigationDefaults.accountSuccessSnackbarBody,
     DUPLICATE_ERROR: Config.selfRegistration.errorTextDuplicateSignUp,
     RESPONSE_ERROR: Config.selfRegistration.errorTextGeneric,
   };
 
   const getSuccessTitle = (): string => {
     return state.activeUser?.encounteredMyNjLinkingError
-      ? Config.navigationDefaults.guestSuccessTitleExistingAccount
-      : Config.navigationDefaults.guestSuccessTitle;
+      ? Config.navigationDefaults.accountSuccessSnackbarTitleExistingAccount
+      : Config.navigationDefaults.accountSuccessSnackbarTitle;
   };
 
   if (!registrationStatus || registrationStatus === "IN_PROGRESS") {

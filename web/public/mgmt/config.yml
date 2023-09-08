@@ -3443,11 +3443,11 @@ collections:
                   name: needsAccountSnackbarBodyExistingAccount,
                   widget: text,
                 }
-              - { label: Guest Success Snackbar Title, name: guestSuccessTitle, widget: string }
-              - { label: Guest Success Snackbar Body, name: guestSuccessBody, widget: string }
+              - { label: Account Success Snackbar Title, name: accountSuccessSnackbarTitle, widget: string }
+              - { label: Account Success Snackbar Body, name: accountSuccessSnackbarBody, widget: string }
               - {
-                  label: Existing Account Guest Success Snackbar Title,
-                  name: guestSuccessTitleExistingAccount,
+                  label: Existing Account Success Snackbar Title,
+                  name: accountSuccessSnackbarTitleExistingAccount,
                   widget: string,
                 }
               - { label: Needs Account Modal Title, name: needsAccountModalTitle, widget: string }

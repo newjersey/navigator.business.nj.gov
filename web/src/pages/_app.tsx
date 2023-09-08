@@ -22,7 +22,7 @@ import { SWRConfig } from "swr";
 import { BusinessPersona, OperatingPhaseId, RegistrationStatus } from "@businessnjgovnavigator/shared";
 import { NeedsAccountSnackbar } from "@/components/auth/NeedsAccountSnackbar";
 import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
-import { SelfRegSnackbar } from "@/components/auth/SelfRegSnackbar";
+import { RegistrationStatusSnackbar } from "@/components/auth/RegistrationStatusSnackbar";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
@@ -174,7 +174,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                           <Component {...pageProps} />
                           <NeedsAccountSnackbar />
                           <NeedsAccountModal />
-                          <SelfRegSnackbar />
+                          <RegistrationStatusSnackbar />
                         </NeedsAccountContext.Provider>
                       </RoadmapContext.Provider>
                     </ContextualInfoContext.Provider>
