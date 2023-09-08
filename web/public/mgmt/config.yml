@@ -3431,16 +3431,16 @@ collections:
                   name: navBarUnnamedDbaBusinessText,
                   widget: string,
                 }
-              - { label: Guest Alert Title, name: guestAlertTitle, widget: string }
-              - { label: Guest Alert Body, name: guestAlertBody, widget: text }
+              - { label: Needs Account Snackbar Title, name: needsAccountSnackbarTitle, widget: string }
+              - { label: Needs Account Snackbar Body, name: needsAccountSnackbarBody, widget: text }
               - {
-                  label: Existing Account Guest Alert Title,
-                  name: guestAlertTitleExistingAccount,
+                  label: Needs Account Snackbar Title - Existing myNJ Account,
+                  name: needsAccountSnackbarTitleExistingAccount,
                   widget: string,
                 }
               - {
-                  label: Existing Account Guest Alert Body,
-                  name: guestAlertBodyExistingAccount,
+                  label: Needs Account Snackbar Body - Existing myNJ Account,
+                  name: needsAccountSnackbarBodyExistingAccount,
                   widget: text,
                 }
               - { label: Guest Success Snackbar Title, name: guestSuccessTitle, widget: string }
@@ -3452,8 +3452,8 @@ collections:
                 }
               - { label: Needs Account Modal Title, name: needsAccountModalTitle, widget: string }
               - { label: Needs Account Modal Body, name: needsAccountModalBody, widget: text }
-              - { label: Guest Alert Button, name: needsAccountModalButtonText, widget: string }
-              - { label: Guest Alert Sub Button text, name: needsAccountModalSubText, widget: string }
+              - { label: Needs Account Modal Button, name: needsAccountModalButtonText, widget: string }
+              - { label: Needs Account Modal Sub Button text, name: needsAccountModalSubText, widget: string }
               - { label: Add Business Button, name: addBusinessButton, widget: string }
           - label: Onboarding Defaults
             name: onboardingDefaults
