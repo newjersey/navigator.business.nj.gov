@@ -1,4 +1,4 @@
-import { SelfRegSnackbar } from "@/components/auth/SelfRegSnackbar";
+import { RegistrationStatusSnackbar } from "@/components/auth/RegistrationStatusSnackbar";
 import { getMergedConfig } from "@/contexts/configContext";
 import { ActiveUser, IsAuthenticated } from "@/lib/auth/AuthContext";
 import { generateActiveUser } from "@/test/factories";
@@ -16,7 +16,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
 
-describe("SelfRegSnackbar", () => {
+describe("<RegistrationStatusSnackbar />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
@@ -33,9 +33,9 @@ describe("SelfRegSnackbar", () => {
     registrationStatus: RegistrationStatus;
   }): void => {
     render(
-      withNeedsAccountContext(<SelfRegSnackbar />, isAuthenticated, {
+      withNeedsAccountContext(<RegistrationStatusSnackbar />, isAuthenticated, {
         registrationStatus,
-        setRegistrationStatus: setRegistrationStatus,
+        setRegistrationStatus,
       })
     );
   };
@@ -49,9 +49,9 @@ describe("SelfRegSnackbar", () => {
   }): void => {
     render(
       withAuth(
-        withNeedsAccountContext(<SelfRegSnackbar />, isAuthenticated, {
+        withNeedsAccountContext(<RegistrationStatusSnackbar />, isAuthenticated, {
           registrationStatus: "SUCCESS",
-          setRegistrationStatus: setRegistrationStatus,
+          setRegistrationStatus,
         }),
         { activeUser, isAuthenticated }
       )
@@ -65,8 +65,12 @@ describe("SelfRegSnackbar", () => {
 
   it("shows registration success snackbar when user is authenticated and had completed the registration process", () => {
     setupHookWithAuth({ isAuthenticated: IsAuthenticated.TRUE, registrationStatus: "SUCCESS" });
-    expect(screen.getByText(markdownToText(Config.navigationDefaults.guestSuccessBody))).toBeInTheDocument();
-    expect(screen.getByText(markdownToText(Config.navigationDefaults.guestSuccessTitle))).toBeInTheDocument();
+    expect(
+      screen.getByText(markdownToText(Config.navigationDefaults.accountSuccessSnackbarBody))
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(markdownToText(Config.navigationDefaults.accountSuccessSnackbarTitle))
+    ).toBeInTheDocument();
     expect(screen.getByTestId("congratulations-logo")).toBeInTheDocument();
     expect(screen.getByTestId("reg-snackbar")).toBeInTheDocument();
   });
@@ -82,7 +86,7 @@ describe("SelfRegSnackbar", () => {
       screen.getByText(markdownToText(Config.selfRegistration.errorTextDuplicateSignUp))
     ).toBeInTheDocument();
     expect(
-      screen.queryByText(markdownToText(Config.navigationDefaults.guestSuccessTitle))
+      screen.queryByText(markdownToText(Config.navigationDefaults.accountSuccessSnackbarTitle))
     ).not.toBeInTheDocument();
     expect(screen.queryByTestId("congratulations-logo")).not.toBeInTheDocument();
   });
@@ -91,7 +95,7 @@ describe("SelfRegSnackbar", () => {
     setupHookWithAuth({ isAuthenticated: IsAuthenticated.FALSE, registrationStatus: "RESPONSE_ERROR" });
     expect(screen.getByText(markdownToText(Config.selfRegistration.errorTextGeneric))).toBeInTheDocument();
     expect(
-      screen.queryByText(markdownToText(Config.navigationDefaults.guestSuccessTitle))
+      screen.queryByText(markdownToText(Config.navigationDefaults.accountSuccessSnackbarTitle))
     ).not.toBeInTheDocument();
     expect(screen.queryByTestId("congratulations-logo")).not.toBeInTheDocument();
   });
@@ -101,9 +105,9 @@ describe("SelfRegSnackbar", () => {
       activeUser: generateActiveUser({ encounteredMyNjLinkingError: false }),
       isAuthenticated: IsAuthenticated.TRUE,
     });
-    expect(screen.getByText(Config.navigationDefaults.guestSuccessTitle)).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationDefaults.accountSuccessSnackbarTitle)).toBeInTheDocument();
     expect(
-      screen.queryByText(Config.navigationDefaults.guestSuccessTitleExistingAccount)
+      screen.queryByText(Config.navigationDefaults.accountSuccessSnackbarTitleExistingAccount)
     ).not.toBeInTheDocument();
   });
 
@@ -112,7 +116,9 @@ describe("SelfRegSnackbar", () => {
       activeUser: generateActiveUser({ encounteredMyNjLinkingError: true }),
       isAuthenticated: IsAuthenticated.TRUE,
     });
-    expect(screen.getByText(Config.navigationDefaults.guestSuccessTitleExistingAccount)).toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationDefaults.guestSuccessTitle)).not.toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationDefaults.accountSuccessSnackbarTitleExistingAccount)
+    ).toBeInTheDocument();
+    expect(screen.queryByText(Config.navigationDefaults.accountSuccessSnackbarTitle)).not.toBeInTheDocument();
   });
 });
