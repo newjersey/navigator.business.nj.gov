@@ -69,7 +69,7 @@ export const templateEval = (template: string, args: Record<string, string>): st
   let newTemplate = template;
   for (const key of Object.keys(args)) {
     const pattern = `\\\${${key}}`;
-    newTemplate = newTemplate.replace(new RegExp(pattern, "g"), args[key]);
+    newTemplate = newTemplate.replaceAll(new RegExp(pattern, "g"), args[key]);
   }
   return newTemplate;
 };
@@ -78,7 +78,7 @@ export const templateEvalWithExtraSpaceRemoval = (template: string, args: Record
   let newTemplate = template;
   for (const key of Object.keys(args)) {
     const pattern = `\\\${${key}} `;
-    newTemplate = newTemplate.replace(new RegExp(pattern, "g"), args[key]);
+    newTemplate = newTemplate.replaceAll(new RegExp(pattern, "g"), args[key]);
   }
   return newTemplate;
 };

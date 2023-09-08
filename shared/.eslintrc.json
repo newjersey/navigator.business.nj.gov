@@ -28,7 +28,8 @@
           "camelCase": true
         }
       }
-    ]
+    ],
+    "unicorn/prefer-at": "off"
   },
   "overrides": [
     {
