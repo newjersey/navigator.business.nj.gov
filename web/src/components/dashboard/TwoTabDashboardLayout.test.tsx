@@ -9,6 +9,7 @@ import {
 } from "@/test/factories";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
+import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import { OperatingPhases } from "@businessnjgovnavigator/shared/operatingPhase";
 import { generatePreferences } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -68,7 +69,7 @@ describe("<TwoTabDashboardLayout />", () => {
       });
 
       useMockBusiness({
-        preferences: generatePreferences({ visibleSidebarCards: ["not-registered"] }),
+        preferences: generatePreferences({ visibleSidebarCards: [SIDEBAR_CARDS.notRegistered] }),
         profileData: {
           ...getProfileDataForUnfilteredOpportunities(),
           operatingPhase: randomElementFromArray(operatingPhases).id,
@@ -92,7 +93,7 @@ describe("<TwoTabDashboardLayout />", () => {
       });
 
       useMockBusiness({
-        preferences: generatePreferences({ visibleSidebarCards: ["not-registered"] }),
+        preferences: generatePreferences({ visibleSidebarCards: [SIDEBAR_CARDS.notRegistered] }),
         profileData: {
           ...getProfileDataForUnfilteredOpportunities(),
           operatingPhase: randomElementFromArray(operatingPhases).id,
@@ -117,7 +118,7 @@ describe("<TwoTabDashboardLayout />", () => {
       });
 
       useMockBusiness({
-        preferences: generatePreferences({ visibleSidebarCards: ["not-registered"] }),
+        preferences: generatePreferences({ visibleSidebarCards: [SIDEBAR_CARDS.notRegistered] }),
         profileData: {
           ...getProfileDataForUnfilteredOpportunities(),
 

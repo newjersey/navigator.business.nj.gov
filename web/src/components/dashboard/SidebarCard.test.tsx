@@ -3,6 +3,7 @@ import { generateSidebarCardContent } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
+import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -18,7 +19,7 @@ describe("<SidebarCard />", () => {
   });
 
   it("renders SidebarCardFundingNudge for id funding-nudge", () => {
-    const card = generateSidebarCardContent({ id: "funding-nudge", ctaText: "Click me" });
+    const card = generateSidebarCardContent({ id: SIDEBAR_CARDS.fundingNudge, ctaText: "Click me" });
     render(<SidebarCard card={card} />);
     expect(screen.getByTestId("cta-funding-nudge")).toBeInTheDocument();
   });

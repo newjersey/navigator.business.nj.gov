@@ -9,6 +9,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { getCurrentDateISOString } from "@businessnjgovnavigator/shared/dateHelpers";
+import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import {
   Business,
   generateTaxFilingCalendarEvent,
@@ -44,7 +45,7 @@ describe("<SidebarCardRegisteredForTaxesNudge />", () => {
       jest.resetAllMocks();
       useMockRouter({});
       setupStatefulUserDataContext();
-      card = generateSidebarCardContent({ id: "registered-for-taxes-nudge" });
+      card = generateSidebarCardContent({ id: SIDEBAR_CARDS.registeredForTaxes });
       mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(generateRoadmap({}));
     });
 
