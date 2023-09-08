@@ -2608,17 +2608,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-validator-identifier@npm:^7.22.15":
+"@babel/helper-validator-identifier@npm:^7.22.15, @babel/helper-validator-identifier@npm:^7.22.5":
   version: 7.22.15
   resolution: "@babel/helper-validator-identifier@npm:7.22.15"
   checksum: eb0bee4bda664c0959924bc1ad5611eacfce806f46612202dd164fef1df8fef1a11682a1e7615288987100e9fb304982b6e2a4ff07ffe842ab8765b95ed1118c
-  languageName: node
-  linkType: hard
-
-"@babel/helper-validator-identifier@npm:^7.22.5":
-  version: 7.22.5
-  resolution: "@babel/helper-validator-identifier@npm:7.22.5"
-  checksum: 7f0f30113474a28298c12161763b49de5018732290ca4de13cdaefd4fd0d635a6fe3f6686c37a02905fb1e64f21a5ee2b55140cf7b070e729f1bd66866506aea
   languageName: node
   linkType: hard
 
@@ -4161,7 +4154,7 @@ __metadata:
     "@testing-library/user-event": 14.4.3
     "@types/broken-link-checker": 0.7.1
     "@types/cors": 2.8.14
-    "@types/cypress-dotenv": 2.0.0
+    "@types/cypress-dotenv": 2.0.1
     "@types/dedent": 0.7.0
     "@types/express": 4.17.17
     "@types/jest": 29.5.3
@@ -4374,7 +4367,7 @@ __metadata:
     "@testing-library/react": 13.4.0
     "@testing-library/user-event": 14.4.3
     "@types/broken-link-checker": 0.7.1
-    "@types/cypress-dotenv": 2.0.0
+    "@types/cypress-dotenv": 2.0.1
     "@types/jest": 29.5.3
     "@types/js-yaml": 4.0.5
     "@types/lodash": 4.14.197
@@ -10167,12 +10160,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/cypress-dotenv@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@types/cypress-dotenv@npm:2.0.0"
+"@types/cypress-dotenv@npm:2.0.1":
+  version: 2.0.1
+  resolution: "@types/cypress-dotenv@npm:2.0.1"
   dependencies:
     dotenv: ^8.2.0
-  checksum: d8bb37dd1c10b7d59e1df44697dcf225c0b1715574357074ac30c56135d122c143931c238fc52eb269e15ada986fe2c1dc600d8cb7dce28726f97bdab2c87fce
+  checksum: a711b571856c70be584d76ac55842ad0990029fb9692c6e6f5a4a70a299e93ca9a43ab59a784c73ab716b2760b489308e88a42da9a73af742a93ad8decfb6079
   languageName: node
   linkType: hard
 
