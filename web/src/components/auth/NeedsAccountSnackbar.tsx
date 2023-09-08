@@ -6,6 +6,7 @@ import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { useSidebarCards } from "@/lib/data-hooks/useSidebarCards";
 import { MediaQueries } from "@/lib/PageSizes";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import { IconButton, useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
@@ -22,9 +23,9 @@ export const NeedsAccountSnackbar = (): ReactElement => {
   const handleClose = async (): Promise<void> => {
     setShowNeedsAccountSnackbar(false);
     if (state.activeUser?.encounteredMyNjLinkingError) {
-      await showCard("not-registered-existing-account");
+      await showCard(SIDEBAR_CARDS.notRegisteredExistingAccount);
     } else {
-      await showCard("not-registered");
+      await showCard(SIDEBAR_CARDS.notRegistered);
     }
   };
 

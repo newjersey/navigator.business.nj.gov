@@ -5,6 +5,7 @@ import { SidebarCardGoToProfileNudge } from "@/components/dashboard/SidebarCardG
 import { SidebarCardRegisteredForTaxesNudge } from "@/components/dashboard/SidebarCardRegisteredForTaxesNudge";
 import { SidebarCardContent } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
+import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import { ReactElement } from "react";
 
 type Props = {
@@ -15,10 +16,10 @@ export const SidebarCard = (props: Props): ReactElement => {
   return (
     <>
       {rswitch(props.card.id, {
-        "funding-nudge": <SidebarCardFundingNudge card={props.card} />,
-        "formation-nudge": <SidebarCardFormationNudge card={props.card} />,
-        "registered-for-taxes-nudge": <SidebarCardRegisteredForTaxesNudge card={props.card} />,
-        "go-to-profile": <SidebarCardGoToProfileNudge card={props.card} />,
+        [SIDEBAR_CARDS.fundingNudge]: <SidebarCardFundingNudge card={props.card} />,
+        [SIDEBAR_CARDS.formationNudge]: <SidebarCardFormationNudge card={props.card} />,
+        [SIDEBAR_CARDS.registeredForTaxes]: <SidebarCardRegisteredForTaxesNudge card={props.card} />,
+        [SIDEBAR_CARDS.goToProfile]: <SidebarCardGoToProfileNudge card={props.card} />,
         default: (
           <SidebarCardGeneric
             card={props.card}

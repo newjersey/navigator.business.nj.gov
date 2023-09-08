@@ -10,6 +10,7 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import {
   generateBusiness,
   generatePreferences,
@@ -27,6 +28,7 @@ const Config = getMergedConfig();
 
 describe("<SidebarCardFundingNudge />", () => {
   let card: SidebarCardContent;
+  const { fundingNudge } = SIDEBAR_CARDS;
 
   const renderWithBusiness = (business: Partial<Business>): void => {
     render(
@@ -40,7 +42,7 @@ describe("<SidebarCardFundingNudge />", () => {
     jest.resetAllMocks();
     useMockRouter({});
     setupStatefulUserDataContext();
-    card = generateSidebarCardContent({ id: "funding-nudge" });
+    card = generateSidebarCardContent({ id: fundingNudge });
   });
 
   describe("when clicking funding button for non-generic industry", () => {
@@ -50,7 +52,7 @@ describe("<SidebarCardFundingNudge />", () => {
           businessPersona: "STARTING",
           industryId: "cannabis",
         }),
-        preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] }),
+        preferences: generatePreferences({ visibleSidebarCards: [fundingNudge] }),
       });
 
       fireEvent.click(screen.getByTestId("cta-funding-nudge"));
@@ -65,7 +67,7 @@ describe("<SidebarCardFundingNudge />", () => {
           businessPersona: "STARTING",
           industryId: "generic",
         }),
-        preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] }),
+        preferences: generatePreferences({ visibleSidebarCards: [fundingNudge] }),
       });
 
       fireEvent.click(screen.getByTestId("cta-funding-nudge"));
@@ -83,7 +85,7 @@ describe("<SidebarCardFundingNudge />", () => {
           businessPersona: "STARTING",
           industryId: "generic",
         }),
-        preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] }),
+        preferences: generatePreferences({ visibleSidebarCards: [fundingNudge] }),
       });
 
       fireEvent.click(screen.getByTestId("cta-funding-nudge"));

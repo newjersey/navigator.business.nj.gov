@@ -12,6 +12,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import { generateBusiness, generateUserData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
@@ -120,9 +121,9 @@ describe("<NeedsAccountSnackbar />", () => {
       isAuthenticated: IsAuthenticated.FALSE,
     });
     fireEvent.click(screen.getByLabelText("close"));
-    expect(currentBusiness().preferences.visibleSidebarCards).toContain("not-registered");
+    expect(currentBusiness().preferences.visibleSidebarCards).toContain(SIDEBAR_CARDS.notRegistered);
     expect(currentBusiness().preferences.visibleSidebarCards).not.toContain(
-      "not-registered-existing-account"
+      SIDEBAR_CARDS.notRegisteredExistingAccount
     );
   });
 
@@ -132,8 +133,10 @@ describe("<NeedsAccountSnackbar />", () => {
       isAuthenticated: IsAuthenticated.FALSE,
     });
     fireEvent.click(screen.getByLabelText("close"));
-    expect(currentBusiness().preferences.visibleSidebarCards).toContain("not-registered-existing-account");
-    expect(currentBusiness().preferences.visibleSidebarCards).not.toContain("not-registered");
+    expect(currentBusiness().preferences.visibleSidebarCards).toContain(
+      SIDEBAR_CARDS.notRegisteredExistingAccount
+    );
+    expect(currentBusiness().preferences.visibleSidebarCards).not.toContain(SIDEBAR_CARDS.notRegistered);
   });
 
   it("icon logo on mobile", async () => {
