@@ -139,7 +139,7 @@
     "@testing-library/react": "13.4.0",
     "@testing-library/user-event": "14.4.3",
     "@types/broken-link-checker": "0.7.1",
-    "@types/cors": "2.8.13",
+    "@types/cors": "2.8.14",
     "@types/cypress-dotenv": "2.0.0",
     "@types/dedent": "0.7.0",
     "@types/express": "4.17.17",
