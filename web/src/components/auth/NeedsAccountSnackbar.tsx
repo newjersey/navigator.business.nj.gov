@@ -9,7 +9,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { IconButton, useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
-export const SignUpSnackbar = (): ReactElement => {
+export const NeedsAccountSnackbar = (): ReactElement => {
   const { showCard } = useSidebarCards();
   const { showNeedsAccountSnackbar, setShowNeedsAccountSnackbar } = useContext(NeedsAccountContext);
   const { state } = useContext(AuthContext);
@@ -30,14 +30,14 @@ export const SignUpSnackbar = (): ReactElement => {
 
   const getTitle = (): string => {
     return state.activeUser?.encounteredMyNjLinkingError
-      ? Config.navigationDefaults.guestAlertTitleExistingAccount
-      : Config.navigationDefaults.guestAlertTitle;
+      ? Config.navigationDefaults.needsAccountSnackbarTitleExistingAccount
+      : Config.navigationDefaults.needsAccountSnackbarTitle;
   };
 
   const getBody = (): string => {
     return state.activeUser?.encounteredMyNjLinkingError
-      ? Config.navigationDefaults.guestAlertBodyExistingAccount
-      : Config.navigationDefaults.guestAlertBody;
+      ? Config.navigationDefaults.needsAccountSnackbarBodyExistingAccount
+      : Config.navigationDefaults.needsAccountSnackbarBody;
   };
 
   return (

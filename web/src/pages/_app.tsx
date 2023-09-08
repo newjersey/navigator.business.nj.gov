@@ -20,7 +20,7 @@ import { ReactElement, useEffect, useReducer, useState } from "react";
 import SEO from "../../next-seo.config";
 import { SWRConfig } from "swr";
 import { BusinessPersona, OperatingPhaseId, RegistrationStatus } from "@businessnjgovnavigator/shared";
-import { SignUpSnackbar } from "@/components/auth/SignUpSnackbar";
+import { NeedsAccountSnackbar } from "@/components/auth/NeedsAccountSnackbar";
 import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
 import { SelfRegSnackbar } from "@/components/auth/SelfRegSnackbar";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
@@ -172,7 +172,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                         >
                           <ContextualInfoPanel />
                           <Component {...pageProps} />
-                          <SignUpSnackbar />
+                          <NeedsAccountSnackbar />
                           <NeedsAccountModal />
                           <SelfRegSnackbar />
                         </NeedsAccountContext.Provider>

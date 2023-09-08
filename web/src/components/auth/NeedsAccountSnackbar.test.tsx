@@ -1,4 +1,4 @@
-import { SignUpSnackbar } from "@/components/auth/SignUpSnackbar";
+import { NeedsAccountSnackbar } from "@/components/auth/NeedsAccountSnackbar";
 import { Content } from "@/components/Content";
 import { getMergedConfig } from "@/contexts/configContext";
 import { ActiveUser, IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -40,7 +40,7 @@ const setLargeScreen = (value: boolean): void => {
   });
 };
 
-describe("<SignUpSnackbar />", () => {
+describe("<NeedsAccountSnackbar />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
@@ -59,7 +59,7 @@ describe("<SignUpSnackbar />", () => {
     render(
       withNeedsAccountContext(
         <WithStatefulUserData initialUserData={generateUserData({})}>
-          <SignUpSnackbar />
+          <NeedsAccountSnackbar />
         </WithStatefulUserData>,
         isAuthenticated,
         {
@@ -81,7 +81,7 @@ describe("<SignUpSnackbar />", () => {
       withAuth(
         withNeedsAccountContext(
           <WithStatefulUserData initialUserData={generateUserData({})}>
-            <SignUpSnackbar />
+            <NeedsAccountSnackbar />
           </WithStatefulUserData>,
           isAuthenticated,
           {
@@ -96,7 +96,9 @@ describe("<SignUpSnackbar />", () => {
 
   it("shows Needs Account snackbar when user is in guest mode", () => {
     renderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
-    expect(screen.getByText(markdownToText(Config.navigationDefaults.guestAlertTitle))).toBeInTheDocument();
+    expect(
+      screen.getByText(markdownToText(Config.navigationDefaults.needsAccountSnackbarTitle))
+    ).toBeInTheDocument();
   });
 
   it("is able to close Needs Account Snackbar when user is in guest mode", () => {
@@ -108,7 +110,7 @@ describe("<SignUpSnackbar />", () => {
   it("does not show Needs Account Snackbar when showNeedsAccountSnackbar is false", () => {
     renderWithAuth({ isAuthenticated: IsAuthenticated.FALSE, showNeedsAccountSnackbar: false });
     expect(
-      screen.queryByText(markdownToText(Config.navigationDefaults.guestAlertTitle))
+      screen.queryByText(markdownToText(Config.navigationDefaults.needsAccountSnackbarTitle))
     ).not.toBeInTheDocument();
   });
 
@@ -153,14 +155,16 @@ describe("<SignUpSnackbar />", () => {
     });
     useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
     expect(screen.getByTestId("self-reg-snackbar")).toContainHTML(
-      renderToStaticMarkup(Content({ children: Config.navigationDefaults.guestAlertBody }))
+      renderToStaticMarkup(Content({ children: Config.navigationDefaults.needsAccountSnackbarBody }))
     );
     expect(screen.getByTestId("self-reg-snackbar")).not.toContainHTML(
-      renderToStaticMarkup(Content({ children: Config.navigationDefaults.guestAlertBodyExistingAccount }))
+      renderToStaticMarkup(
+        Content({ children: Config.navigationDefaults.needsAccountSnackbarBodyExistingAccount })
+      )
     );
-    expect(screen.getByText(Config.navigationDefaults.guestAlertTitle)).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationDefaults.needsAccountSnackbarTitle)).toBeInTheDocument();
     expect(
-      screen.queryByText(Config.navigationDefaults.guestAlertTitleExistingAccount)
+      screen.queryByText(Config.navigationDefaults.needsAccountSnackbarTitleExistingAccount)
     ).not.toBeInTheDocument();
   });
 
@@ -171,12 +175,16 @@ describe("<SignUpSnackbar />", () => {
     });
     useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
     expect(screen.getByTestId("self-reg-snackbar")).toContainHTML(
-      renderToStaticMarkup(Content({ children: Config.navigationDefaults.guestAlertBodyExistingAccount }))
+      renderToStaticMarkup(
+        Content({ children: Config.navigationDefaults.needsAccountSnackbarBodyExistingAccount })
+      )
     );
     expect(screen.getByTestId("self-reg-snackbar")).not.toContainHTML(
-      renderToStaticMarkup(Content({ children: Config.navigationDefaults.guestAlertBody }))
+      renderToStaticMarkup(Content({ children: Config.navigationDefaults.needsAccountSnackbarBody }))
     );
-    expect(screen.getByText(Config.navigationDefaults.guestAlertTitleExistingAccount)).toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationDefaults.guestAlertTitle)).not.toBeInTheDocument();
+    expect(
+      screen.getByText(Config.navigationDefaults.needsAccountSnackbarTitleExistingAccount)
+    ).toBeInTheDocument();
+    expect(screen.queryByText(Config.navigationDefaults.needsAccountSnackbarTitle)).not.toBeInTheDocument();
   });
 });
