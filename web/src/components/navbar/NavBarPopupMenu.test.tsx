@@ -1,4 +1,4 @@
-/* eslint-disable testing-library/no-render-in-setup */
+/* eslint-disable testing-library/no-render-in-lifecycle */
 import { NavBarPopupMenu, Props as NavBarPopupMenuProps } from "@/components/navbar/NavBarPopupMenu";
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";

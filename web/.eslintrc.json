@@ -72,7 +72,8 @@
     "unicorn/no-null": "off",
     "unicorn/no-array-method-this-argument": "off",
     "unicorn/prefer-ternary": "off",
-    "unicorn/switch-case-braces": "off"
+    "unicorn/switch-case-braces": "off",
+    "unicorn/prefer-at": "off"
   },
   "overrides": [
     {

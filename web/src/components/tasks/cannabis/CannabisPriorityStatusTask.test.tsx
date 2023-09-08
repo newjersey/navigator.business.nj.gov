@@ -1,4 +1,4 @@
-/* eslint-disable testing-library/no-render-in-setup */
+/* eslint-disable testing-library/no-render-in-lifecycle */
 
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { getMergedConfig } from "@/contexts/configContext";
