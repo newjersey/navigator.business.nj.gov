@@ -21,7 +21,7 @@ import SEO from "../../next-seo.config";
 import { SWRConfig } from "swr";
 import { BusinessPersona, OperatingPhaseId, RegistrationStatus } from "@businessnjgovnavigator/shared";
 import { SignUpSnackbar } from "@/components/auth/SignUpSnackbar";
-import { SignUpModal } from "@/components/auth/SignUpModal";
+import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
 import { SelfRegSnackbar } from "@/components/auth/SelfRegSnackbar";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import { RoadmapContext } from "@/contexts/roadmapContext";
@@ -173,7 +173,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                           <ContextualInfoPanel />
                           <Component {...pageProps} />
                           <SignUpSnackbar />
-                          <SignUpModal />
+                          <NeedsAccountModal />
                           <SelfRegSnackbar />
                         </NeedsAccountContext.Provider>
                       </RoadmapContext.Provider>

@@ -13,7 +13,7 @@ import { Box, Dialog, DialogContent, DialogTitle, IconButton } from "@mui/materi
 import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 
-export const SignUpModal = (): ReactElement => {
+export const NeedsAccountModal = (): ReactElement => {
   const { business } = useUserData();
   const router = useRouter();
   const { isAuthenticated, showNeedsAccountModal, setShowNeedsAccountModal } =
@@ -48,7 +48,7 @@ export const SignUpModal = (): ReactElement => {
     >
       <DialogTitle sx={{ p: 5, paddingRight: 10 }}>
         <div role="heading" aria-level={2} className="h3-styling">
-          {Config.navigationDefaults.guestModalTitle}
+          {Config.navigationDefaults.needsAccountModalTitle}
         </div>
         <IconButton
           aria-label="close"
@@ -65,12 +65,12 @@ export const SignUpModal = (): ReactElement => {
       </DialogTitle>
 
       <DialogContent dividers={false} sx={{ paddingX: 5, paddingBottom: 3 }}>
-        <Content>{Config.navigationDefaults.guestModalBody}</Content>
+        <Content>{Config.navigationDefaults.needsAccountModalBody}</Content>
       </DialogContent>
       <DialogContent dividers={false} sx={{ paddingX: 5 }}>
         <Box>
           <PrimaryButton isColor="primary" isFullWidthOnDesktop onClick={linkToAccountSetup}>
-            {Config.navigationDefaults.guestModalButtonText}
+            {Config.navigationDefaults.needsAccountModalButtonText}
           </PrimaryButton>
         </Box>
       </DialogContent>
@@ -91,7 +91,7 @@ export const SignUpModal = (): ReactElement => {
               triggerSignIn();
             }}
           >
-            {Config.navigationDefaults.guestModalSubText}
+            {Config.navigationDefaults.needsAccountModalSubText}
           </Content>
         </Box>
       </DialogContent>

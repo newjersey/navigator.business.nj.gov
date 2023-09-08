@@ -1,4 +1,4 @@
-import { SignUpModal } from "@/components/auth/SignUpModal";
+import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import * as session from "@/lib/auth/sessionHelper";
@@ -18,7 +18,7 @@ jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
 
 const mockSession = session as jest.Mocked<typeof session>;
 
-describe("SignUpModal", () => {
+describe("<NeedsAccount Modal />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
@@ -29,21 +29,21 @@ describe("SignUpModal", () => {
 
   const setupHookWithAuth = (isAuthenticated: IsAuthenticated, showNeedsAccountModal = true): void => {
     render(
-      withNeedsAccountContext(<SignUpModal />, isAuthenticated, {
+      withNeedsAccountContext(<NeedsAccountModal />, isAuthenticated, {
         showNeedsAccountModal: showNeedsAccountModal,
         setShowNeedsAccountModal: setShowNeedsAccountModal,
       })
     );
   };
 
-  it("shows Needs Account snackbar when user is in guest mode", () => {
+  it("shows Needs Account modal when user is in guest mode", () => {
     setupHookWithAuth(IsAuthenticated.FALSE);
-    expect(screen.getByText(Config.navigationDefaults.guestModalBody)).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationDefaults.needsAccountModalBody)).toBeInTheDocument();
   });
 
   it("does not show Needs Account modal when user is in guest mode and it's disabled", () => {
     setupHookWithAuth(IsAuthenticated.FALSE, false);
-    expect(screen.queryByText(Config.navigationDefaults.guestModalBody)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.navigationDefaults.needsAccountModalBody)).not.toBeInTheDocument();
   });
 
   it("returns user to previous page when modal is closed", () => {
@@ -54,24 +54,24 @@ describe("SignUpModal", () => {
 
   it("does not show Needs Account snackbar when user is authenticated", () => {
     setupHookWithAuth(IsAuthenticated.TRUE);
-    expect(screen.queryByText(Config.navigationDefaults.guestModalBody)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.navigationDefaults.needsAccountModalBody)).not.toBeInTheDocument();
   });
 
   it("routes to account setup when link is clicked", async () => {
     setupHookWithAuth(IsAuthenticated.FALSE);
-    fireEvent.click(screen.getByText(Config.navigationDefaults.guestModalButtonText));
+    fireEvent.click(screen.getByText(Config.navigationDefaults.needsAccountModalButtonText));
     expect(mockPush).toHaveBeenCalledWith(ROUTES.accountSetup);
   });
 
   it("closes modal when link to account setup is clicked", () => {
     setupHookWithAuth(IsAuthenticated.FALSE);
-    fireEvent.click(screen.getByText(Config.navigationDefaults.guestModalButtonText));
+    fireEvent.click(screen.getByText(Config.navigationDefaults.needsAccountModalButtonText));
     expect(setShowNeedsAccountModal).toHaveBeenCalledWith(false);
   });
 
   it("goes to myNJ when Log-in link is clicked", () => {
     setupHookWithAuth(IsAuthenticated.FALSE);
-    fireEvent.click(screen.getByText(markdownToText(Config.navigationDefaults.guestModalSubText)));
+    fireEvent.click(screen.getByText(markdownToText(Config.navigationDefaults.needsAccountModalSubText)));
     expect(mockSession.triggerSignIn).toHaveBeenCalled();
   });
 });
