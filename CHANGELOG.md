@@ -1,3 +1,10 @@
+# [5.27.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.26.0...v5.27.0) (2023-09-11)
+
+
+### Features
+
+* [[#186003099](https://github.com/newjersey/navigator.business.nj.gov/issues/186003099)] update Lt. Governor in banner ([9c3b72a](https://github.com/newjersey/navigator.business.nj.gov/commit/9c3b72ab7315737fa506a4596e81b224ae60cfed))
+
 # [5.26.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.25.0...v5.26.0) (2023-09-05)
 
 
