@@ -681,12 +681,22 @@ collections:
                       - { label: "Error banner - checkbox", name: "errorBannerCheckbox", widget: "string" }
                       - {
                           label: "Error inline - first signer name",
-                          name: "errorInlineFirstSignerName",
+                          name: "errorInlineSignerName",
                           widget: "string",
                         }
                       - {
                           label: "Error inline - additional signer name",
                           name: "errorInlineAdditionalSignerName",
+                          widget: "string",
+                        }
+                      - {
+                          label: "Error inline - Name and Signature Missing",
+                          name: "errorInlineNameAndSignature",
+                          widget: "string",
+                        }
+                      - {
+                          label: "Error inline - Signature Missing",
+                          name: "errorInlineSignature",
                           widget: "string",
                         }
                       - {
