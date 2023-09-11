@@ -1,3 +1,4 @@
+import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { ActiveUser, IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -15,7 +16,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { createPageHelpers, PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
-import { createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
+import { createEmptyUser, RegistrationStatus } from "@businessnjgovnavigator/shared/businessUser";
 import { generateUser, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -93,16 +94,30 @@ describe("Account Setup page", () => {
     userData,
     isAuthenticated,
     activeUser,
+    registrationAlertStatus,
   }: {
     userData?: UserData | null;
     isAuthenticated?: IsAuthenticated;
     activeUser?: ActiveUser;
+    registrationAlertStatus?: RegistrationStatus | undefined;
   }): { page: PageHelpers } => {
     const initialUserData = { ...(userData || generateUserData({})), user: emptyUser };
     render(
       withAuth(
         <WithStatefulUserData initialUserData={initialUserData}>
-          <AccountSetupPage />
+          <AuthAlertContext.Provider
+            value={{
+              isAuthenticated: isAuthenticated ?? IsAuthenticated.FALSE,
+              registrationAlertIsVisible: false,
+              registrationModalIsVisible: false,
+              registrationAlertStatus: registrationAlertStatus,
+              setRegistrationAlertStatus: () => undefined,
+              setRegistrationAlertIsVisible: () => undefined,
+              setRegistrationModalIsVisible: () => undefined,
+            }}
+          >
+            <AccountSetupPage />
+          </AuthAlertContext.Provider>
         </WithStatefulUserData>,
         { activeUser: activeUser, isAuthenticated }
       )
@@ -268,6 +283,12 @@ describe("Account Setup page", () => {
     await waitFor(() => {
       expect(currentUserData().user).toEqual(businessUser);
     });
+  });
+
+  it("shows email already registered inline error when receiving the registrationAlertStatus as DUPLICATE_ERROR", () => {
+    renderPage({ isAuthenticated: IsAuthenticated.FALSE, registrationAlertStatus: "DUPLICATE_ERROR" });
+
+    expect(screen.getByText(Config.selfRegistration.errorTextDuplicateSignUp)).toBeInTheDocument();
   });
 
   it("allows a user to uncheck to opt out of user testing", async () => {
