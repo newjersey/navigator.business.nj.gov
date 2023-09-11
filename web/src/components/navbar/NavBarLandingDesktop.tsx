@@ -1,13 +1,14 @@
 import { AuthButton } from "@/components/AuthButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
 export const NavBarLandingDesktop = (): ReactElement => {
   const router = useRouter();
+  const { Config } = useConfig();
 
   return (
     <div className="position-sticky top-0 z-500 bg-white">

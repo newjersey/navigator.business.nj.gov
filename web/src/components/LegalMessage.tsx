@@ -1,9 +1,11 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement } from "react";
 
 export const LegalMessage = (): ReactElement => {
+  const { Config } = useConfig();
+
   return (
     <div className="bg-base-lightest">
       <div className="grid-container-widescreen desktop:padding-x-7">

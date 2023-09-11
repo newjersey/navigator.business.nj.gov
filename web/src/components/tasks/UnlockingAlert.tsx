@@ -1,6 +1,6 @@
 import { Alert, AlertVariant } from "@/components/njwds-extended/Alert";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { TaskLink } from "@/lib/types/types";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement } from "react";
 
 interface Props {
@@ -14,6 +14,8 @@ interface Props {
 }
 
 export const UnlockingAlert = (props: Props): ReactElement => {
+  const { Config } = useConfig();
+
   if (props.taskLinks.length === 0 && !props.isLoading) {
     return <></>;
   }

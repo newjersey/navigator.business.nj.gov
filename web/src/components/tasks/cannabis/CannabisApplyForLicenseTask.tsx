@@ -4,12 +4,12 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { CannabisApplicationQuestionsTab } from "@/components/tasks/cannabis/CannabisApplicationQuestionsTab";
 import { CannabisApplicationRequirementsTab } from "@/components/tasks/cannabis/CannabisApplicationRequirementsTab";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { PriorityApplicationType, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useState } from "react";
 
@@ -25,6 +25,7 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
   const userDataFromHook = useUserData();
   const updateQueue = userDataFromHook.updateQueue;
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
+  const { Config } = useConfig();
 
   const [displayFirstTab, setDisplayFirstTab] = useState<boolean>(true);
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState(false);

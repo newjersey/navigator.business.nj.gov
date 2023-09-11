@@ -13,6 +13,7 @@ import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
 import { TaxTask } from "@/components/tasks/TaxTask";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { allowFormation } from "@/lib/domain-logic/allowFormation";
@@ -22,7 +23,6 @@ import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/
 import { Task, TasksDisplayContent } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
 import { getTaskFromRoadmap, getUrlSlugs } from "@/lib/utils/roadmap-helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   businessStructureTaskId,
   formationTaskId,
@@ -52,6 +52,7 @@ const TaskPage = (props: Props): ReactElement => {
       nextUrlSlug: arrayOfTasks[currentUrlSlugIndex + 1],
     };
   }, [props.task.urlSlug, roadmap]);
+  const { Config } = useConfig();
 
   const renderNextAndPreviousButtons = (): ReactElement | undefined => {
     const isValidLegalStructure = allowFormation(

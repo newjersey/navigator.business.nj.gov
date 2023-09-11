@@ -1,8 +1,8 @@
 import { UnlockingAlert } from "@/components/tasks/UnlockingAlert";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement } from "react";
 
 interface Props {
@@ -12,6 +12,7 @@ interface Props {
 
 export const UnlockedBy = (props: Props): ReactElement => {
   const { business } = useUserData();
+  const { Config } = useConfig();
 
   const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
 

@@ -3,14 +3,15 @@ import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthContext } from "@/contexts/authContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useSidebarCards } from "@/lib/data-hooks/useSidebarCards";
 import { MediaQueries } from "@/lib/PageSizes";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import { IconButton, useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export const NeedsAccountSnackbar = (): ReactElement => {
+  const { Config } = useConfig();
   const { showCard } = useSidebarCards();
   const { showNeedsAccountSnackbar, setShowNeedsAccountSnackbar } = useContext(NeedsAccountContext);
   const { state } = useContext(AuthContext);

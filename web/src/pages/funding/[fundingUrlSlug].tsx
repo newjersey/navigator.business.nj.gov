@@ -4,13 +4,13 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { MediaQueries } from "@/lib/PageSizes";
 import { FundingUrlSlugParam, loadAllFundingUrlSlugs, loadFundingByUrlSlug } from "@/lib/static/loadFundings";
 import { Funding } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/fundingAgency";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
@@ -23,6 +23,7 @@ interface Props {
 
 export const FundingElement = (props: { funding: Funding }): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
+  const { Config } = useConfig();
 
   const { business } = useUserData();
 

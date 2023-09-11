@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/filename-case */
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, ReactNode } from "react";
 
 interface Props {
@@ -12,6 +12,8 @@ interface Props {
 }
 
 export const TaskCTA = (props: Props): ReactElement => {
+  const { Config } = useConfig();
+
   if (props.onClick) {
     return (
       <div className="flex flex-justify-end flex-column-reverse mobile-lg:flex-row bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg">
