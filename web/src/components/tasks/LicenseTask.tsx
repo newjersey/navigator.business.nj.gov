@@ -5,13 +5,13 @@ import { CheckStatus } from "@/components/tasks/CheckStatus";
 import { LicenseStatusReceipt } from "@/components/tasks/LicenseStatusReceipt";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import * as api from "@/lib/api-client/apiClient";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { LicenseSearchError, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LicenseStatusResult, NameAndAddress, UserData } from "@businessnjgovnavigator/shared/";
 import { TabContext, TabList, TabPanel } from "@mui/lab/";
 import { Box, Tab } from "@mui/material";
@@ -32,6 +32,7 @@ export const LicenseTask = (props: Props): ReactElement => {
   const [licenseStatusResult, setLicenseStatusResult] = useState<LicenseStatusResult | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { business, refresh } = useUserData();
+  const { Config } = useConfig();
 
   const allFieldsHaveValues = (nameAndAddress: NameAndAddress): boolean => {
     return !!(nameAndAddress.name && nameAndAddress.addressLine1 && nameAndAddress.zipCode);

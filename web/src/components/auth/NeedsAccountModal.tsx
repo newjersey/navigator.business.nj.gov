@@ -4,11 +4,11 @@ import { Icon } from "@/components/njwds/Icon";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Box, Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
@@ -18,6 +18,7 @@ export const NeedsAccountModal = (): ReactElement => {
   const router = useRouter();
   const { isAuthenticated, showNeedsAccountModal, setShowNeedsAccountModal } =
     useContext(NeedsAccountContext);
+  const { Config } = useConfig();
 
   useMountEffectWhenDefined(() => {
     if (isAuthenticated === IsAuthenticated.TRUE) {

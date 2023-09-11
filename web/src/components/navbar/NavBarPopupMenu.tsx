@@ -5,6 +5,7 @@ import { AuthContext } from "@/contexts/authContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSelfRegister, onSignOut } from "@/lib/auth/signinHelper";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getBusinessIconColor } from "@/lib/domain-logic/getBusinessIconColor";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
@@ -13,7 +14,6 @@ import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import { switchCurrentBusiness } from "@/lib/domain-logic/switchCurrentBusiness";
 import analytics from "@/lib/utils/analytics";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { MenuItem, MenuList } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
@@ -35,6 +35,7 @@ export interface Props {
 export const NavBarPopupMenu = (props: Props): ReactElement => {
   const { userData, updateQueue } = useUserData();
   const { state, dispatch } = useContext(AuthContext);
+  const { Config } = useConfig();
   const { setRegistrationStatus } = useContext(NeedsAccountContext);
 
   const router = useRouter();

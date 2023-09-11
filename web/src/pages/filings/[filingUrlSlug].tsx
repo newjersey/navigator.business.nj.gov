@@ -7,11 +7,11 @@ import { Icon } from "@/components/njwds/Icon";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
+import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { sortCalendarEventsEarliestToLatest } from "@/lib/domain-logic/filterCalendarEvents";
 import { FilingUrlSlugParam, loadAllFilingUrlSlugs, loadFilingByUrlSlug } from "@/lib/static/loadFilings";
 import { Filing, TaxFilingMethod } from "@/lib/types/types";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   defaultDateFormat,
   parseDateWithFormat,
@@ -26,6 +26,7 @@ interface Props {
   filing: Filing;
 }
 
+const Config = getMergedConfig();
 export const taxFilingMethodMap: Record<TaxFilingMethod, string> = {
   online: Config.filingDefaults.onlineTaxFilingMethod,
   "paper-or-by-mail-only": Config.filingDefaults.paperOrMailOnlyTaxFilingMethod,
