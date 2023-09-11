@@ -14,7 +14,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { MediaQueries } from "@/lib/PageSizes";
-import { useMountEffect } from "@/lib/utils/helpers";
+import { templateEval, useMountEffect } from "@/lib/utils/helpers";
 import {
   BusinessSignerTypeMap,
   createEmptyFormationSigner,
@@ -245,13 +245,54 @@ export const Signatures = (): ReactElement => {
       return;
     }
 
+    const isMissingNameAndSignature = (): boolean =>
+      (hasError &&
+        state.formationFormData.signers &&
+        state.formationFormData.signers[index].name.length === 0 &&
+        !state.formationFormData.signers[index].signature) ??
+      false;
+
+    const isMissingName = (): boolean =>
+      (state.formationFormData.signers && state.formationFormData.signers[index].name.length === 0) ?? false;
+
+    const isMissingSignature = (): boolean =>
+      (state.formationFormData.signers && !state.formationFormData.signers[index].signature) ?? false;
+
+    const SIGNER_NAME_MAX_LEN = 50;
+    const isTooLong = (): boolean =>
+      (state.formationFormData.signers &&
+        state.formationFormData.signers[index].name.length > SIGNER_NAME_MAX_LEN) ??
+      false;
+
+    const signerNameIsTooLongLabel: string = templateEval(Config.formation.general.maximumLengthErrorText, {
+      field: Config.formation.fields.signers.label,
+      maxLen: SIGNER_NAME_MAX_LEN.toString(),
+    });
+
     const getInlineValidationText = (): string => {
-      if (state.formationFormData.signers && state.formationFormData.signers[index].name.length === 0) {
+      if (isTooLong()) {
+        return signerNameIsTooLongLabel;
+      } else if (isMissingNameAndSignature()) {
+        return Config.formation.fields.signers.errorInlineNameAndSignature;
+      } else if (isMissingName()) {
+        return Config.formation.fields.signers.errorInlineSignerName;
+      } else if (isMissingSignature()) {
+        return Config.formation.fields.signers.errorInlineSignature;
+      } else {
+        return "";
+      }
+    };
+
+    const getInlineValidationTextWithSignerType = (): string => {
+      if (isTooLong()) {
+        return signerNameIsTooLongLabel;
+      } else if (isMissingName()) {
         return index > 0
           ? Config.formation.fields.signers.errorInlineAdditionalSignerName
-          : Config.formation.fields.signers.errorInlineFirstSignerName;
+          : Config.formation.fields.signers.errorInlineSignerName;
+      } else {
+        return "";
       }
-      return "";
     };
 
     return (
@@ -272,7 +313,9 @@ export const Signatures = (): ReactElement => {
             onValidation={(): void => {
               setFieldsInteracted([FIELD_NAME]);
             }}
-            validationText={getInlineValidationText()}
+            validationText={
+              needsSignerType ? getInlineValidationTextWithSignerType() : getInlineValidationText()
+            }
             fieldName="signer"
             className={`margin-top-0`}
             ariaLabel={`Signer ${index}`}

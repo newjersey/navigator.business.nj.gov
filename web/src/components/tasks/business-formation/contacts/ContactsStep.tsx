@@ -1,11 +1,9 @@
-import { Alert } from "@/components/njwds-extended/Alert";
 import { Addresses } from "@/components/tasks/business-formation/contacts/Addresses";
 import { createSignedEmptyFormationObject } from "@/components/tasks/business-formation/contacts/helpers";
 import { Members } from "@/components/tasks/business-formation/contacts/Members";
 import { RegisteredAgent } from "@/components/tasks/business-formation/contacts/RegisteredAgent";
 import { Signatures } from "@/components/tasks/business-formation/contacts/Signatures";
 import { FormationField } from "@/components/tasks/business-formation/FormationField";
-import { getErrorStateForField } from "@/components/tasks/business-formation/getErrorStateForField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
@@ -53,11 +51,6 @@ export const ContactsStep = (): ReactElement => {
           </>
         )}
         <hr className="margin-top-0 margin-bottom-3" />
-        {doesFieldHaveError("signers") && (
-          <Alert variant="error">
-            {getErrorStateForField({ field: "signers", formationFormData: state.formationFormData }).label}
-          </Alert>
-        )}
         {incorporationLegalStructures.includes(state.formationFormData.legalType) ? (
           <FormationField fieldName="incorporators">
             <Addresses<FormationIncorporator>
