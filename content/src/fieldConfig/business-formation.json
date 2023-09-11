@@ -131,7 +131,6 @@
       "signers": {
         "addButtonText": "Add New Signer",
         "signColumnLabel": "Sign*",
-        "errorInlineFirstSignerName": "Enter a signer.",
         "overrides": {
           "limited-liability-partnership": {
             "description": "Authorized Partner(s) should sign below by adding their full name. You can have up to 10 signers listed."
@@ -153,7 +152,10 @@
         "tableHeader": "Name,Address,Sign*,Actions",
         "titleLabel": "Title",
         "description": "Authorized Representative(s) should sign below by adding their full name. You can have up to 10 signers listed.",
-        "errorInlineAdditionalSignerName": "Enter the first and last name of each signer."
+        "errorInlineSignerName": "Enter a signer's name.",
+        "errorInlineAdditionalSignerName": "Enter the first and last name of each signer.",
+        "errorInlineNameAndSignature": "Enter a signer’s name and click the checkbox to authorize their signature.",
+        "errorInlineSignature": "Click the checkbox to authorize the signer’s signature."
       },
       "addressLine1": {
         "label": "Address Line 1",
