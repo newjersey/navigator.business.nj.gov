@@ -27,6 +27,7 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
   valueFilter?: (value: string) => string;
   handleChange?: (value: string) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
   onChange?: (value: string) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
+  onFocus?: () => void;
   error?: boolean;
   validationText?: string;
   disabled?: boolean;
@@ -168,6 +169,7 @@ export const GenericTextField = forwardRef(
           }}
           InputProps={props.inputProps}
           type={props.type}
+          onFocus={props.onFocus}
         />
       </div>
     );
