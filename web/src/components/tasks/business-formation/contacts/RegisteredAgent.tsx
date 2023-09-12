@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
+import { MunicipalityDropdown } from "@/components/data-fields/MunicipalityDropdown";
 import { ModifiedContent } from "@/components/ModifiedContent";
-import { MunicipalityDropdown } from "@/components/profile/MunicipalityDropdown";
 import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { FormationField } from "@/components/tasks/business-formation/FormationField";
@@ -10,8 +10,8 @@ import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { Municipality } from "@businessnjgovnavigator/shared";
 import { FormationFields } from "@businessnjgovnavigator/shared/formationData";
-import { Municipality } from "@businessnjgovnavigator/shared/index";
 import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext, useEffect } from "react";
 

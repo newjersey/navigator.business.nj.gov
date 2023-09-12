@@ -10,7 +10,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/index";
+import { getCurrentDate, parseDate } from "@businessnjgovnavigator/shared";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 

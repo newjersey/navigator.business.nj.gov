@@ -1,5 +1,5 @@
+import { HomeBasedBusiness } from "@/components/data-fields/HomeBasedBusiness";
 import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuestion";
-import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { getMergedConfig } from "@/contexts/configContext";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
@@ -37,7 +37,7 @@ describe("<DeferredOnboardingQuestion />", () => {
         )}
       >
         <DeferredOnboardingQuestion label="" onSave={onSave || jest.fn()}>
-          <OnboardingHomeBasedBusiness />
+          <HomeBasedBusiness />
         </DeferredOnboardingQuestion>
       </WithStatefulUserData>
     );

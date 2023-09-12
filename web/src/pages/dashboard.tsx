@@ -3,12 +3,12 @@ import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
 import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout";
+import { HomeBasedBusiness } from "@/components/data-fields/HomeBasedBusiness";
 import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuestion";
+import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { Header } from "@/components/Header";
 import { NavBar } from "@/components/navbar/NavBar";
-import { FieldLabelDescriptionOnly } from "@/components/onboarding/FieldLabelDescriptionOnly";
-import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
@@ -171,7 +171,7 @@ const DashboardPage = (props: Props): ReactElement => {
                   }
                   onSave={(): void => routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true")}
                 >
-                  <OnboardingHomeBasedBusiness />
+                  <HomeBasedBusiness />
                 </DeferredOnboardingQuestion>
               )}
             </div>

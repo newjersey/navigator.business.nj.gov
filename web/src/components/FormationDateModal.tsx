@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
+import { DateOfFormation } from "@/components/data-fields/DateOfFormation";
+import { MunicipalityField } from "@/components/data-fields/MunicipalityField";
+import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
-import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
-import { ProfileDateOfFormation } from "@/components/profile/ProfileDateOfFormation";
-import { ProfileMunicipality } from "@/components/profile/ProfileMunicipality";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { profileFormContext } from "@/contexts/profileFormContext";
@@ -92,7 +92,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
               }}
             />
 
-            <ProfileDateOfFormation
+            <DateOfFormation
               required={true}
               disabled={false}
               futureAllowed={true}
@@ -108,7 +108,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
               className="margin-top-3"
             >
               <FieldLabelModal fieldName="municipality" />
-              <ProfileMunicipality required />
+              <MunicipalityField required />
             </WithErrorBar>
           )}
         </ModalTwoButton>

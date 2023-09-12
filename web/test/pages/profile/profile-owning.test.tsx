@@ -20,7 +20,7 @@ import {
   LookupOwnershipTypeById,
   LookupSectorTypeById,
   randomInt,
-} from "@businessnjgovnavigator/shared/index";
+} from "@businessnjgovnavigator/shared";
 import { generateTaxFilingData, randomLegalStructure } from "@businessnjgovnavigator/shared/test";
 
 import analytics from "@/lib/utils/analytics";

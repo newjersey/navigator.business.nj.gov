@@ -1,9 +1,9 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
+import { DisabledTaxId } from "@/components/data-fields/tax-id/DisabledTaxId";
+import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Icon } from "@/components/njwds/Icon";
-import { DisabledTaxId } from "@/components/onboarding/taxId/DisabledTaxId";
-import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { profileFormContext } from "@/contexts/profileFormContext";
@@ -126,7 +126,7 @@ export const TaxInput = (props: Props): ReactElement => {
               </Alert>
             ) : (
               <>
-                <OnboardingTaxId required />
+                <TaxId required />
                 <div className="tablet:margin-top-05 tablet:margin-left-2">
                   <SecondaryButton
                     isColor="primary"

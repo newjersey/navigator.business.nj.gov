@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
+import { MunicipalityField } from "@/components/data-fields/MunicipalityField";
 import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuestion";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { ProfileMunicipality } from "@/components/profile/ProfileMunicipality";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
@@ -87,7 +87,7 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
     <div className="bg-base-extra-light margin-top-2" data-testid="deferred-location-task">
       {shouldShowQuestion ? (
         <DeferredOnboardingQuestion label={label} onSave={onSaveNewLocation} isTaskPage>
-          <ProfileMunicipality hideErrorLabel={true} />
+          <MunicipalityField hideErrorLabel={true} />
         </DeferredOnboardingQuestion>
       ) : (
         <div data-testid="deferred-location-content" className="padding-3">

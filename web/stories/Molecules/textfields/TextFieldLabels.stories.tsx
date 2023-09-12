@@ -1,12 +1,12 @@
+import { BusinessStructure } from "@/components/data-fields/BusinessStructure";
+import { NaicsCode } from "@/components/data-fields/NaicsCode";
+import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
+import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
+import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboarding";
+import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModifiedContent } from "@/components/ModifiedContent";
-import { FieldLabelDescriptionOnly } from "@/components/onboarding/FieldLabelDescriptionOnly";
-import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
-import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
-import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
-import { ProfileBusinessStructure } from "@/components/profile/ProfileBusinessStructure";
 import { ProfileField } from "@/components/profile/ProfileField";
-import { ProfileNaicsCode } from "@/components/profile/ProfileNaicsCode";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
@@ -160,14 +160,14 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
                     LookupLegalStructureById(legalStructureId).name
                   }
                 >
-                  <ProfileBusinessStructure />
+                  <BusinessStructure />
                 </ProfileField>
               </div>
 
               <div>ProfileField Component With Add Button</div>
               <div className={"border margin-bottom-4"}>
                 <ProfileField fieldName="naicsCode" noLabel={true}>
-                  <ProfileNaicsCode />
+                  <NaicsCode />
                 </ProfileField>
               </div>
             </ProfileDataContext.Provider>

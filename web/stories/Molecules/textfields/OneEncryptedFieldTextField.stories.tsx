@@ -1,6 +1,6 @@
+import { TaxId } from "@/components/data-fields/tax-id/TaxId";
+import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
 import { GenericTextField } from "@/components/GenericTextField";
-import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
-import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
@@ -70,7 +70,7 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
                   }}
                 />
               </div>
-              <OnboardingTaxId required />
+              <TaxId required />
             </WithErrorBar>
 
             <WithErrorBar hasError type="ALWAYS" className="margin-top-2">
@@ -86,7 +86,7 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
                   }}
                 />
               </div>
-              <OnboardingTaxId validationText={config.taxAccess.failedTaxIdHelper} required error />
+              <TaxId validationText={config.taxAccess.failedTaxIdHelper} required error />
             </WithErrorBar>
           </ProfileDataContext.Provider>
         </ConfigContext.Provider>

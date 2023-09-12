@@ -5,7 +5,7 @@ import {
   FormationLegalType,
   getCurrentDate,
   parseDateWithFormat,
-} from "@businessnjgovnavigator/shared/index";
+} from "@businessnjgovnavigator/shared";
 import dayjs from "dayjs";
 
 const Config = getMergedConfig();
