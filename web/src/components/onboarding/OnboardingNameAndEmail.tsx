@@ -1,6 +1,6 @@
 import { GenericTextField } from "@/components/GenericTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
@@ -24,7 +24,7 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
   const [email, setEmail] = useState<string>(props.user.email || "");
   const [confirmEmail, setConfirmEmail] = useState<string | undefined>(props.user.email || undefined);
   const { Config } = useConfig();
-  const { registrationAlertStatus, setRegistrationAlertStatus } = useContext(AuthAlertContext);
+  const { registrationStatus, setRegistrationStatus } = useContext(NeedsAccountContext);
 
   const emailFormContextHelpers = useFormContextFieldHelpers("email", profileFormContext, props.errorTypes);
 
@@ -72,11 +72,11 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
   };
 
   const getEmailError = (): boolean => {
-    return emailFormContextHelpers.isFormFieldInValid || registrationAlertStatus === "DUPLICATE_ERROR";
+    return emailFormContextHelpers.isFormFieldInValid || registrationStatus === "DUPLICATE_ERROR";
   };
 
   const getEmailValidationText = (emailInput: { isConfirmEmail: boolean }): string => {
-    if (registrationAlertStatus === "DUPLICATE_ERROR") {
+    if (registrationStatus === "DUPLICATE_ERROR") {
       if (emailInput.isConfirmEmail) {
         return Config.selfRegistration.errorTextDuplicateSignUp;
       }
@@ -86,8 +86,8 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
   };
 
   const resetRegistrationErrorOnFocus = (): void => {
-    if (registrationAlertStatus === "DUPLICATE_ERROR") {
-      setRegistrationAlertStatus(undefined);
+    if (registrationStatus === "DUPLICATE_ERROR") {
+      setRegistrationStatus(undefined);
     }
   };
 
@@ -113,7 +113,7 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
           />
         </WithErrorBar>
       </div>
-      <WithErrorBar hasError={registrationAlertStatus === "DUPLICATE_ERROR"} type="ALWAYS">
+      <WithErrorBar hasError={registrationStatus === "DUPLICATE_ERROR"} type="ALWAYS">
         <div className="margin-top-2">
           <WithErrorBar hasError={getEmailError()} type="ALWAYS">
             <label htmlFor="email" className="text-bold">

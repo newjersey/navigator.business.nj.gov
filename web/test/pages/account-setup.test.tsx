@@ -1,4 +1,3 @@
-import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { ActiveUser, IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -7,7 +6,7 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import AccountSetupPage from "@/pages/account-setup";
 import { generateActiveUser } from "@/test/factories";
-import { withAuth } from "@/test/helpers/helpers-renderers";
+import { withAuth, withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
@@ -94,36 +93,43 @@ describe("Account Setup page", () => {
     userData,
     isAuthenticated,
     activeUser,
-    registrationAlertStatus,
   }: {
     userData?: UserData | null;
     isAuthenticated?: IsAuthenticated;
     activeUser?: ActiveUser;
-    registrationAlertStatus?: RegistrationStatus | undefined;
   }): { page: PageHelpers } => {
     const initialUserData = { ...(userData || generateUserData({})), user: emptyUser };
     render(
       withAuth(
         <WithStatefulUserData initialUserData={initialUserData}>
-          <AuthAlertContext.Provider
-            value={{
-              isAuthenticated: isAuthenticated ?? IsAuthenticated.FALSE,
-              registrationAlertIsVisible: false,
-              registrationModalIsVisible: false,
-              registrationAlertStatus: registrationAlertStatus,
-              setRegistrationAlertStatus: () => undefined,
-              setRegistrationAlertIsVisible: () => undefined,
-              setRegistrationModalIsVisible: () => undefined,
-            }}
-          >
-            <AccountSetupPage />
-          </AuthAlertContext.Provider>
+          <AccountSetupPage />
         </WithStatefulUserData>,
         { activeUser: activeUser, isAuthenticated }
       )
     );
     const page = createPageHelpers();
     return { page };
+  };
+
+  const renderNeedsAccountContextPage = ({
+    userData,
+    registrationStatus,
+    isAuthenticated,
+  }: {
+    userData?: UserData | null;
+    isAuthenticated?: IsAuthenticated;
+    registrationStatus?: RegistrationStatus | undefined;
+  }): void => {
+    const initialUserData = { ...(userData || generateUserData({})), user: emptyUser };
+    render(
+      withNeedsAccountContext(
+        <WithStatefulUserData initialUserData={initialUserData}>
+          <AccountSetupPage />
+        </WithStatefulUserData>,
+        isAuthenticated ?? IsAuthenticated.FALSE,
+        { registrationStatus }
+      )
+    );
   };
 
   const clickSubmit = (): void => {
@@ -285,8 +291,11 @@ describe("Account Setup page", () => {
     });
   });
 
-  it("shows email already registered inline error when receiving the registrationAlertStatus as DUPLICATE_ERROR", () => {
-    renderPage({ isAuthenticated: IsAuthenticated.FALSE, registrationAlertStatus: "DUPLICATE_ERROR" });
+  it("shows email already registered inline error when receiving the registrationStatus as DUPLICATE_ERROR", () => {
+    renderNeedsAccountContextPage({
+      isAuthenticated: IsAuthenticated.FALSE,
+      registrationStatus: "DUPLICATE_ERROR",
+    });
 
     expect(screen.getByText(Config.selfRegistration.errorTextDuplicateSignUp)).toBeInTheDocument();
   });
