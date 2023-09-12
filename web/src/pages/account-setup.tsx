@@ -1,9 +1,9 @@
 import { Content } from "@/components/Content";
+import { NameAndEmail } from "@/components/data-fields/NameAndEmail";
 import { NavBar } from "@/components/navbar/NavBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { AuthContext } from "@/contexts/authContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
@@ -120,7 +120,7 @@ const AccountSetupPage = (): ReactElement => {
           {showAlert && <Alert variant="error">{Config.accountSetup.errorAlert}</Alert>}
           <Content>{getContent().body}</Content>
           <profileFormContext.Provider value={formContextState}>
-            <OnboardingNameAndEmail user={user} setUser={setUser} />
+            <NameAndEmail user={user} setUser={setUser} />
 
             <hr className="margin-top-4 margin-bottom-2" />
             <div className="float-right fdr margin-bottom-8">

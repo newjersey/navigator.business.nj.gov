@@ -1,5 +1,5 @@
+import { defaultDateFormat, LicenseCalendarEvent, LicenseData } from "@businessnjgovnavigator/shared";
 import { parseDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { defaultDateFormat, LicenseCalendarEvent, LicenseData } from "@businessnjgovnavigator/shared/index";
 
 export const getLicenseCalendarEvents = (
   licenseData: LicenseData | undefined,

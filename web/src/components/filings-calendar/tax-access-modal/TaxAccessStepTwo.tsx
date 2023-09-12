@@ -1,11 +1,11 @@
 import { Content } from "@/components/Content";
+import { BusinessName } from "@/components/data-fields/BusinessName";
+import { ResponsibleOwnerName } from "@/components/data-fields/ResponsibleOwnerName";
+import { TaxId } from "@/components/data-fields/tax-id/TaxId";
+import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
 import { TaxAccessModalBody } from "@/components/filings-calendar/tax-access-modal/TaxAccessModalBody";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
-import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
-import { ProfileBusinessName } from "@/components/profile/ProfileBusinessName";
-import { ProfileResponsibleOwnerName } from "@/components/profile/ProfileResponsibleOwnerName";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { FieldStateActionKind } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -305,7 +305,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                   postDescription: "",
                 }}
               />
-              <ProfileBusinessName validationText={Config.taxAccess.failedBusinessFieldHelper} required />
+              <BusinessName validationText={Config.taxAccess.failedBusinessFieldHelper} required />
             </WithErrorBar>
           )}
           {displayResponsibleOwnerName() && (
@@ -323,7 +323,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                   postDescription: "",
                 }}
               />
-              <ProfileResponsibleOwnerName
+              <ResponsibleOwnerName
                 validationText={Config.taxAccess.failedResponsibleOwnerFieldHelper}
                 required
               />
@@ -349,11 +349,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
                 }}
               />
             </div>
-            <OnboardingTaxId
-              validationText={Config.taxAccess.failedTaxIdHelper}
-              required
-              inputWidth={"full"}
-            />
+            <TaxId validationText={Config.taxAccess.failedTaxIdHelper} required inputWidth={"full"} />
           </WithErrorBar>
         </ModalTwoButton>
       </ProfileDataContext.Provider>

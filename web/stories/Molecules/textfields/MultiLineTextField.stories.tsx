@@ -1,5 +1,5 @@
+import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboarding";
 import { GenericTextField } from "@/components/GenericTextField";
-import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";

@@ -18,7 +18,7 @@ import {
   OperatingPhaseId,
   ProfileData,
   TaxFilingData,
-} from "@businessnjgovnavigator/shared/index";
+} from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
   generateTaxFilingData,

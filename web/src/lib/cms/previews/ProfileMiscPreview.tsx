@@ -1,5 +1,5 @@
 import { Alert } from "@/components/njwds-extended/Alert";
-import { EscapeModal } from "@/components/profile/EscapeModal";
+import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
 import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
@@ -29,7 +29,7 @@ const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
         <div ref={ref} style={{ pointerEvents: "all" }}>
           <button onClick={(): void => setModalOpen(true)}>Open Modal</button>
         </div>
-        <EscapeModal
+        <ProfileEscapeModal
           isOpen={modalOpen}
           close={(): void => setModalOpen(false)}
           primaryButtonOnClick={(): void => setModalOpen(false)}

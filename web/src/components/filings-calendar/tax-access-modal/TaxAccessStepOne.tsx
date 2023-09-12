@@ -1,8 +1,8 @@
+import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
 import { TaxAccessModalBody } from "@/components/filings-calendar/tax-access-modal/TaxAccessModalBody";
 import { LegalStructureDropDown } from "@/components/LegalStructureDropDown";
 import { ModalOneButton } from "@/components/ModalOneButton";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { FieldLabelDescriptionOnly } from "@/components/onboarding/FieldLabelDescriptionOnly";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { FieldStateActionKind } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";

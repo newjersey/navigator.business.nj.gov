@@ -27,7 +27,7 @@ import {
   OperatingPhase,
   OperatingPhases,
   randomInt,
-} from "@businessnjgovnavigator/shared/index";
+} from "@businessnjgovnavigator/shared";
 import { generateTaxFilingData, randomFilteredIndustry } from "@businessnjgovnavigator/shared/test";
 
 import {

@@ -26,7 +26,7 @@ import {
   OperatingPhases,
   randomInt,
   TaxFilingCalendarEvent,
-} from "@businessnjgovnavigator/shared/index";
+} from "@businessnjgovnavigator/shared";
 import {
   generateLicenseData,
   generatePreferences,

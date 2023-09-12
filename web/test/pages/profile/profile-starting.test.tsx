@@ -40,7 +40,7 @@ import {
   OperatingPhaseId,
   OperatingPhases,
   UserData,
-} from "@businessnjgovnavigator/shared/index";
+} from "@businessnjgovnavigator/shared";
 import { generateFormationData, generateTaxFilingData } from "@businessnjgovnavigator/shared/test";
 
 import analytics from "@/lib/utils/analytics";
