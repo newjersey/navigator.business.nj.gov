@@ -4,7 +4,7 @@ import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Icon } from "@/components/njwds/Icon";
 import { DisabledTaxId } from "@/components/onboarding/taxId/DisabledTaxId";
 import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { profileFormContext } from "@/contexts/profileFormContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -15,7 +15,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { createProfileFieldErrorMap, Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { useMediaQuery } from "@mui/material";
+import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { ReactElement, ReactNode, useContext, useEffect, useState } from "react";
 
 interface Props {
@@ -24,7 +24,7 @@ interface Props {
 
 export const TaxInput = (props: Props): ReactElement => {
   const { business, updateQueue } = useUserData();
-  const { isAuthenticated } = useContext(AuthAlertContext);
+  const { isAuthenticated } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
   const [profileData, setProfileData] = useState<ProfileData>(
     business?.profileData ?? createEmptyProfileData()
@@ -96,7 +96,7 @@ export const TaxInput = (props: Props): ReactElement => {
         {Config.tax.lockedPostText}
       </div>
       <div className={"text-wrap margin-bottom-1"}>
-        <ArrowTooltip title={Config.profileDefaults.lockedFieldTooltipText}>
+        <ArrowTooltip title={Config.profileDefaults.default.lockedFieldTooltipText}>
           <div className="fdr fac  font-body-lg">
             <Icon>help_outline</Icon>
           </div>
@@ -115,33 +115,34 @@ export const TaxInput = (props: Props): ReactElement => {
             flow: "STARTING",
           },
           setProfileData,
-          setUser: (): void => {},
           onBack: (): void => {},
         }}
       >
         <div className={isTabletAndUp ? "flex flex-row" : ""}>
-          {shouldLockTaxId ? (
-            <Alert variant="success" className="width-100">
-              <DisabledTaxId template={DisabledElement} />
-            </Alert>
-          ) : (
-            <>
-              <OnboardingTaxId required />
-              <div className="tablet:margin-top-05 tablet:margin-left-2">
-                <SecondaryButton
-                  isColor="primary"
-                  onClick={onSubmit}
-                  isLoading={isLoading}
-                  isSubmitButton={true}
-                  isRightMarginRemoved={true}
-                  isTextNoWrap={isTabletAndUp}
-                  isFullWidthOnDesktop={!isTabletAndUp}
-                >
-                  {saveButtonText}
-                </SecondaryButton>
-              </div>
-            </>
-          )}
+          <ThemeProvider theme={createTheme()}>
+            {shouldLockTaxId ? (
+              <Alert variant="success" className="width-100">
+                <DisabledTaxId template={DisabledElement} />
+              </Alert>
+            ) : (
+              <>
+                <OnboardingTaxId required />
+                <div className="tablet:margin-top-05 tablet:margin-left-2">
+                  <SecondaryButton
+                    isColor="primary"
+                    onClick={onSubmit}
+                    isLoading={isLoading}
+                    isSubmitButton={true}
+                    isRightMarginRemoved={true}
+                    isTextNoWrap={isTabletAndUp}
+                    isFullWidthOnDesktop={!isTabletAndUp}
+                  >
+                    {saveButtonText}
+                  </SecondaryButton>
+                </div>
+              </>
+            )}
+          </ThemeProvider>
         </div>
       </ProfileDataContext.Provider>
     </profileFormContext.Provider>

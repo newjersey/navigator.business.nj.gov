@@ -77,7 +77,7 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
     roadmapOpenSteps: [randomInt()],
     hiddenFundingIds: [],
     hiddenCertificationIds: [],
-    visibleSidebarCards: ["welcome"],
+    visibleSidebarCards: [],
     returnToLink: "",
     isCalendarFullView: !(randomInt() % 2),
     isHideableRoadmapOpen: !(randomInt() % 2),
@@ -254,6 +254,7 @@ export const generateProfileData = (
     needsNexusDbaName: false,
     operatingPhase: "NEEDS_TO_FORM",
     isNonprofitOnboardingRadio: legalStructure === "nonprofit",
+    nonEssentialRadioAnswers: {},
     ...overrides,
   };
 };

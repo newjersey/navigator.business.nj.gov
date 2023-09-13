@@ -16,6 +16,7 @@ export const searchFundings = (fundings: Funding[], term: string): Match[] => {
     const name = funding.name.toLowerCase();
     const description = funding.descriptionMd.toLowerCase();
     const cta = funding.callToActionText?.toLowerCase();
+    const ctaLink = funding.callToActionLink?.toLowerCase();
     const agencyIDs = funding.agency ? funding.agency.map((it) => it.toLowerCase()) : [];
     const agencyNames = funding.agency
       ? funding.agency.map((it) => LookupFundingAgencyById(it).name.toLowerCase())
@@ -27,12 +28,15 @@ export const searchFundings = (fundings: Funding[], term: string): Match[] => {
     const certs = funding.certifications ? funding.certifications.map((it) => it.toLowerCase()) : [];
     const counties = funding.county ? funding.county.map((it) => it.toLowerCase()) : [];
     const purpose = funding.programPurpose?.toLowerCase();
-    const contact = funding.agencyContact.toLowerCase();
+    const contact = funding.agencyContact?.toLowerCase();
     const sectors = funding.sector ? funding.sector.map((it) => it.toLowerCase()) : [];
+    const filename = funding.filename.toLowerCase();
+    const urlSlug = funding.urlSlug.toLowerCase();
 
     const blockTexts = [content, description];
     const labelledTexts = [
       { content: cta, label: "CTA Text" },
+      { content: ctaLink, label: "CTA Link" },
       { content: name, label: "Name" },
       { content: fundingType, label: "Funding Type" },
       { content: status, label: "Status" },
@@ -40,6 +44,8 @@ export const searchFundings = (fundings: Funding[], term: string): Match[] => {
       { content: stage, label: "Stage" },
       { content: purpose, label: "Program Purpose" },
       { content: contact, label: "Agency Contact" },
+      { content: filename, label: "Filename" },
+      { content: urlSlug, label: "Url Slug" },
     ];
 
     const listTexts = [

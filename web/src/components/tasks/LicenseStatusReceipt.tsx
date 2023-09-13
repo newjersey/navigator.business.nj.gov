@@ -1,7 +1,7 @@
 import { Icon } from "@/components/njwds/Icon";
+import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LicenseStatus, LicenseStatusItem } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useEffect, useState } from "react";
 
@@ -20,6 +20,7 @@ type PermitTheme = {
   headerIconColor: string;
 };
 
+const Config = getMergedConfig();
 const pendingPermitTheme: PermitTheme = {
   gradient: "gradient-blue",
   bgColor: "bg-info-extra-light",

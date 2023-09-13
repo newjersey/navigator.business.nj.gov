@@ -48,6 +48,7 @@
     }
   ],
   "name": "Acupuncture",
+  "nonEssentialQuestionsIds": [],
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true

@@ -4,6 +4,7 @@ import { SidebarCard } from "@/components/dashboard/SidebarCard";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, ReactNode, useState } from "react";
@@ -44,7 +45,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
   };
 
   const hiddenCardsAccordion = (): ReactNode => {
-    if (props.displayCertifications) {
+    if (props.displayCertifications || props.displayFundings) {
       return (
         <>
           <hr className="margin-top-3 bg-cool-lighter" aria-hidden={true} />
@@ -52,6 +53,9 @@ export const SidebarCardsList = (props: Props): ReactElement => {
             <Accordion
               expanded={hiddenAccordionIsOpen}
               onChange={(): void => {
+                if (!hiddenAccordionIsOpen) {
+                  analytics.event.for_you_card_unhide_button.click.unhide_cards();
+                }
                 setHiddenAccordionIsOpen((prevAccordionStatus) => {
                   return !prevAccordionStatus;
                 });

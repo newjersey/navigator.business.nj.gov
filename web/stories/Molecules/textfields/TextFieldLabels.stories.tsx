@@ -7,9 +7,9 @@ import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { ProfileBusinessStructure } from "@/components/profile/ProfileBusinessStructure";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { ProfileNaicsCode } from "@/components/profile/ProfileNaicsCode";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { profileFormContext } from "@/contexts/profileFormContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -86,15 +86,15 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
       }}
     >
       <profileFormContext.Provider value={formContextState}>
-        <AuthAlertContext.Provider
+        <NeedsAccountContext.Provider
           value={{
             isAuthenticated: IsAuthenticated.UNKNOWN,
-            registrationAlertStatus: undefined,
-            registrationAlertIsVisible: false,
-            setRegistrationAlertStatus: () => {},
-            setRegistrationAlertIsVisible: () => {},
-            registrationModalIsVisible: false,
-            setRegistrationModalIsVisible: () => {},
+            registrationStatus: undefined,
+            showNeedsAccountSnackbar: false,
+            setRegistrationStatus: () => {},
+            setShowNeedsAccountSnackbar: () => {},
+            showNeedsAccountModal: false,
+            setShowNeedsAccountModal: () => {},
           }}
         >
           <ConfigContext.Provider value={{ config: Config, setOverrides: setConfig }}>
@@ -105,7 +105,6 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
                   flow: "OWNING",
                 },
                 setProfileData,
-                setUser: (): void => {},
                 onBack: (): void => {},
               }}
             >
@@ -173,7 +172,7 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
               </div>
             </ProfileDataContext.Provider>
           </ConfigContext.Provider>
-        </AuthAlertContext.Provider>
+        </NeedsAccountContext.Provider>
       </profileFormContext.Provider>
     </BusinessFormationContext.Provider>
   );

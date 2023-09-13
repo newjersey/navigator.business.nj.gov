@@ -11,6 +11,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { formationTaskId, generateProfileData } from "@businessnjgovnavigator/shared/";
+import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import { generatePreferences, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -39,7 +40,7 @@ describe("<SidebarCardFormationNudge />", () => {
       jest.resetAllMocks();
       useMockRouter({});
       setupStatefulUserDataContext();
-      card = generateSidebarCardContent({ id: "formation-nudge" });
+      card = generateSidebarCardContent({ id: SIDEBAR_CARDS.formationNudge });
       mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(generateRoadmap({}));
     });
 
@@ -48,7 +49,7 @@ describe("<SidebarCardFormationNudge />", () => {
         profileData: generateProfileData({
           businessPersona: "STARTING",
         }),
-        preferences: generatePreferences({ visibleSidebarCards: ["formation-nudge"] }),
+        preferences: generatePreferences({ visibleSidebarCards: [SIDEBAR_CARDS.formationNudge] }),
       });
 
       fireEvent.click(screen.getByTestId("cta-formation-nudge"));

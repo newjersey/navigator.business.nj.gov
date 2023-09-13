@@ -5,7 +5,7 @@ import NaicsCodes from "@/lib/static/records/naics2022.json";
 import { NaicsCodeObject, Task } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateTask } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   currentBusiness,
@@ -71,7 +71,7 @@ describe("<NaicsCodeTask />", () => {
 
     const renderPage = (): void => {
       render(
-        withAuthAlert(
+        withNeedsAccountContext(
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
@@ -172,7 +172,7 @@ describe("<NaicsCodeTask />", () => {
 
     const renderPage = (): void => {
       render(
-        withAuthAlert(
+        withNeedsAccountContext(
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
@@ -294,7 +294,7 @@ describe("<NaicsCodeTask />", () => {
         },
       };
       render(
-        withAuthAlert(
+        withNeedsAccountContext(
           <ThemeProvider theme={createTheme()}>
             <WithStatefulUserData initialUserData={generateUserDataForBusiness(business)}>
               <NaicsCodeTask task={task} />
@@ -390,22 +390,22 @@ describe("<NaicsCodeTask />", () => {
 
   describe("guest mode", () => {
     let initialBusiness: Business;
-    let setRegistrationModalIsVisible: jest.Mock;
+    let setShowNeedsAccountModal: jest.Mock;
 
     const renderPage = (): void => {
       render(
-        withAuthAlert(
+        withNeedsAccountContext(
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,
-          { registrationModalIsVisible: false, setRegistrationModalIsVisible }
+          { showNeedsAccountModal: false, setShowNeedsAccountModal }
         )
       );
     };
 
     beforeEach(() => {
-      setRegistrationModalIsVisible = jest.fn();
+      setShowNeedsAccountModal = jest.fn();
       initialBusiness = generateBusiness({
         profileData: generateProfileData({ naicsCode: "", industryId: "" }),
         taskProgress: { [taskId]: "NOT_STARTED" },
@@ -417,14 +417,14 @@ describe("<NaicsCodeTask />", () => {
       expect(screen.getByText(`Register & ${Config.determineNaicsCode.saveButtonText}`)).toBeInTheDocument();
     });
 
-    it("opens registration modal on save button click", async () => {
+    it("opens Needs Account modal on save button click", async () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: validNaicsCode },
       });
       fireEvent.click(screen.getByText(`Register & ${Config.determineNaicsCode.saveButtonText}`));
       await waitFor(() => {
-        return expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+        return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
       });
     });
   });

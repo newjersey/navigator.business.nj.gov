@@ -3,7 +3,7 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { EinDisplay } from "@/components/tasks/EinDisplay";
 import { EinInput } from "@/components/tasks/EinInput";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -19,7 +19,7 @@ interface Props {
 export const EinTask = (props: Props): ReactElement => {
   const [showInput, setShowInput] = useState<boolean>(true);
   const { business, updateQueue } = useUserData();
-  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
 
   useMountEffectWhenDefined(() => {
@@ -50,7 +50,7 @@ export const EinTask = (props: Props): ReactElement => {
 
   const onSave = (): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      setRegistrationModalIsVisible(true);
+      setShowNeedsAccountModal(true);
       return;
     }
     setShowInput(false);
@@ -64,7 +64,7 @@ export const EinTask = (props: Props): ReactElement => {
       <TaskHeader task={props.task} />
       <UnlockedBy task={props.task} />
       <Content>{preInputContent}</Content>
-      <div className="margin-left-5 margin-top-1">
+      <div className="margin-left-3ch margin-top-1">
         <Content>{Config.ein.descriptionText}</Content>
         {showInput && <EinInput isAuthenticated={isAuthenticated} onSave={onSave} task={props.task} />}
         {!showInput && (

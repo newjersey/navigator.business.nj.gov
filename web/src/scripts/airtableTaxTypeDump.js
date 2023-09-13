@@ -104,7 +104,7 @@ const writeMarkdownString = (opportunity) => {
 const toPipeCase = (str) => {
   return str
     .trim()
-    .replace(/[!"#$%&()*+,./:;<=>?@^_`{}~-]/g, "")
+    .replaceAll(/[!"#$%&()*+,./:;<=>?@^_`{}~-]/g, "")
     .replace("  ", " ")
     .toLowerCase()
     .split(" ")

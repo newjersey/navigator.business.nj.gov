@@ -311,12 +311,12 @@ describe("<BusinessFormation />", () => {
     page.fillText("Agent office address zip code", "08002");
 
     const member: FormationMember = {
-      name: "Joe Biden",
-      addressLine1: "1600 Pennsylvania Ave NW",
+      name: "Ava Curie",
+      addressLine1: "160 Something Ave",
       addressLine2: "Office of the President",
-      addressCity: "Washington",
-      addressState: { shortCode: "DC", name: "District of Columbia" },
-      addressZipCode: "20500",
+      addressCity: "Apt 1",
+      addressState: { shortCode: "FL", name: "Florida" },
+      addressZipCode: "32003",
       addressCountry: "US",
       businessLocationType: "US",
     };
@@ -762,11 +762,11 @@ describe("<BusinessFormation />", () => {
     expect(screen.queryByText(Config.formation.fields.members.placeholder)).not.toBeInTheDocument();
 
     const incorporators: FormationIncorporator = {
-      name: "Joe Biden",
+      name: "Jane Parks",
       addressLine1: "1600 Pennsylvania Ave NW",
       addressLine2: "Office of the President",
-      addressCity: "Washington",
-      addressState: { shortCode: "DC", name: "District of Columbia" },
+      addressCity: "New Orleans",
+      addressState: { shortCode: "LA", name: "Louisiana" },
       addressZipCode: "20500",
       addressCountry: "US",
       title: "General Partner",
@@ -853,12 +853,12 @@ describe("<BusinessFormation />", () => {
     });
 
     const member: FormationMember = {
-      name: "Joe Biden",
-      addressLine1: "1600 Pennsylvania Ave NW",
+      name: "Emily Jones",
+      addressLine1: "160 Something Ave",
       addressLine2: "Office of the President",
-      addressCity: "Washington",
-      addressState: { shortCode: "DC", name: "District of Columbia" },
-      addressZipCode: "20500",
+      addressCity: "3rd Floor",
+      addressState: { shortCode: "FL", name: "Florida" },
+      addressZipCode: "34997",
       addressCountry: "US",
       businessLocationType: "US",
     };

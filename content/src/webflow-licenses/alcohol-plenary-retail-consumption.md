@@ -1,13 +1,13 @@
 ---
-id: "alcohol-plenary-retail-consumption"
-webflowId: "5f77296690d9ac40531309de"
-urlSlug: "alcohol-plenary-retail-consumption"
-webflowName: "Alcohol Plenary Retail Consumption"
-callToActionLink: "http://nj.gov/oag/abc/licensing-files.html"
-callToActionText: ""
+urlSlug: alcohol-plenary-retail-consumption
+webflowName: Alcohol Plenary Retail Consumption
 agencyId: law-public-safety
-agencyAdditionalContext: "Division of Alcoholic Beverage Control"
-divisionPhone: "(609) 984-2830"
-webflowIndustry: "Alcohol Retail Consumption"
-licenseCertificationClassification: "REGISTRATION"
+agencyAdditionalContext: Division of Alcoholic Beverage Control
+callToActionText: ""
+callToActionLink: https://www.njoag.gov/about/divisions-and-offices/division-of-alcoholic-beverage-control-home/posse-online-licensing-system/
+webflowIndustry: Alcohol Retail Consumption
+divisionPhone: (609) 984-2830
+id: alcohol-plenary-retail-consumption
+webflowId: 5f77296690d9ac40531309de
+licenseCertificationClassification: REGISTRATION
 ---

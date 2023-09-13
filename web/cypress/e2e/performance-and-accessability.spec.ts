@@ -64,28 +64,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         cy.pa11y(defaultPa11yThresholds);
       });
     });
-    describe("Step 3", () => {
-      it("should pass the audits", () => {
-        cy.url().should("include", "onboarding?page=1");
-
-        onOnboardingPage.selectBusinessPersona("STARTING");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.selectIndustry("e-commerce");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=3");
-        onOnboardingPage.typeFullName("Michael Smith");
-        onOnboardingPage.typeEmail("MichaelSmith@gmail.com");
-        onOnboardingPage.typeConfirmEmail("MichaelSmith@gmail.com");
-        onOnboardingPage.toggleNewsletterCheckbox(false);
-        onOnboardingPage.toggleContactMeCheckbox(false);
-
-        cy.lighthouse(undefined, lighthouseDesktopConfig);
-        cy.pa11y(defaultPa11yThresholds);
-      });
-    });
   });
 
   describe("Onboarding - owning flow", () => {
@@ -94,42 +72,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         cy.url().should("include", "onboarding?page=1");
 
         onOnboardingPage.selectBusinessPersona("OWNING");
-        cy.lighthouse(undefined, lighthouseDesktopConfig);
-        cy.pa11y(defaultPa11yThresholds);
-      });
-    });
-
-    describe("Step 2", () => {
-      it("should pass the audits", () => {
-        cy.url().should("include", "onboarding?page=1");
-
-        onOnboardingPage.selectBusinessPersona("OWNING");
-        onOnboardingPage.selectIndustrySector("clean-energy");
-
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=2");
-
-        cy.lighthouse(undefined, lighthouseDesktopConfig);
-        cy.pa11y(defaultPa11yThresholds);
-      });
-    });
-
-    describe("Step 3", () => {
-      it("should pass the audits", () => {
-        cy.url().should("include", "onboarding?page=1");
-
-        onOnboardingPage.selectBusinessPersona("OWNING");
-        onOnboardingPage.selectIndustrySector("clean-energy");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.typeFullName("Michael Smith");
-        onOnboardingPage.typeEmail("MichaelSmith@gmail.com");
-        onOnboardingPage.typeConfirmEmail("MichaelSmith@gmail.com");
-        onOnboardingPage.toggleNewsletterCheckbox(true);
-        onOnboardingPage.toggleContactMeCheckbox(true);
-
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
       });

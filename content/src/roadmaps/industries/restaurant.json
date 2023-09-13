@@ -7,6 +7,7 @@
     "isLiquorLicenseApplicable": true
   },
   "isEnabled": true,
+  "nonEssentialQuestionsIds": [],
   "roadmapSteps": [
     {
       "step": 1,

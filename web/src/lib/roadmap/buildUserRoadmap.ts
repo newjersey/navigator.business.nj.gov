@@ -1,5 +1,7 @@
+import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { getIsApplicableToFunctionByFieldName } from "@/lib/domain-logic/essentialQuestions";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
+import { getNonEssentialQuestionAddOn } from "@/lib/domain-logic/getNonEssentialQuestionAddOn";
 import { isInterstateLogisticsApplicable } from "@/lib/domain-logic/isInterstateLogisticsApplicable";
 import { isInterstateMovingApplicable } from "@/lib/domain-logic/isInterstateMovingApplicable";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
@@ -162,6 +164,19 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("reseller");
   }
 
+  if (industry.nonEssentialQuestionsIds) {
+    for (const questionId in profileData.nonEssentialRadioAnswers) {
+      const addOnToAdd = getNonEssentialQuestionAddOn(questionId);
+      if (
+        addOnToAdd &&
+        profileData.nonEssentialRadioAnswers[questionId] &&
+        industry.nonEssentialQuestionsIds.includes(questionId)
+      ) {
+        addOns.push(addOnToAdd);
+      }
+    }
+  }
+
   return addOns;
 };
 
@@ -196,8 +211,12 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
 
   if (profileData.legalStructureId === "nonprofit") {
     addOns.push("nonprofit");
-  }
 
+    const allowNonprofitFormation = allowFormation(profileData.legalStructureId, profileData.businessPersona);
+    if (!allowNonprofitFormation) {
+      addOns.push("nonprofit-legacy");
+    }
+  }
   return addOns;
 };
 

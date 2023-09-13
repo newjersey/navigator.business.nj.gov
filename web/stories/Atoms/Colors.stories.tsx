@@ -41,11 +41,13 @@ const neutralBase = (
 const primary = (
   <div className="flex flex-row margin-top-4">
     <div className="h1-styling margin-right-4 width-card-lg">Primary</div>
+    {renderColor("primary-extra-extra-light", "#fbfdf9")}
     {renderColor("primary-extra-light", "#f2f7eb")}
     {renderColor("primary-lightest", "#d9e9bf")}
     {renderColor("primary-lighter", "#c5ee93")}
     {renderColor("primary-more-light", "#bfd89a")}
     {renderColor("primary-light", "#7fb135")}
+    {renderColor("primary-light-vivid", "#81bd00")}
     {renderColor("primary-vivid", "#6a7d00")}
     {renderColor("primary", "#4b7600")}
     {renderColor("primary-dark", "#466c04")}
@@ -167,7 +169,7 @@ const accentCooler = (
 const accentHot = (
   <div className="flex flex-row margin-top-4">
     <div className="h1-styling margin-right-4 width-card-lg">Accent Hot</div>
-    {renderColor("accent-extra-hot-light", "#fae8e0")}
+    {renderColor("accent-hot-extra-light", "#fae8e0")}
     {renderColor("accent-hot", "#be4e1e")}
   </div>
 );
@@ -178,6 +180,7 @@ const accentSemiCool = (
     {renderColor("accent-semi-cool-extra-light", "#effffb")}
     {renderColor("accent-semi-cool-lightest", "#defff8")}
     {renderColor("accent-semi-cool-light", "#BDFFF2")}
+    {renderColor("accent-semi-cool-vivid", "#00BF91")}
     {renderColor("accent-semi-cool", "#009f7f")}
   </div>
 );

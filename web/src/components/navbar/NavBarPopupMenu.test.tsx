@@ -1,4 +1,4 @@
-/* eslint-disable testing-library/no-render-in-setup */
+/* eslint-disable testing-library/no-render-in-lifecycle */
 import { NavBarPopupMenu, Props as NavBarPopupMenuProps } from "@/components/navbar/NavBarPopupMenu";
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -12,7 +12,6 @@ import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  BusinessUser,
   generateBusiness,
   generateProfileData,
   generateUserData,
@@ -58,7 +57,6 @@ describe("<NavBarPopupMenu />", () => {
   const renderNavBarPopupMenu = (params: {
     props: Partial<NavBarPopupMenuProps>;
     userData?: UserData;
-    user?: BusinessUser;
     isAuthenticated?: IsAuthenticated;
   }): void => {
     render(
@@ -72,7 +70,7 @@ describe("<NavBarPopupMenu />", () => {
             {...params.props}
           />
         </WithStatefulUserData>,
-        { user: params.user, isAuthenticated: params.isAuthenticated ?? IsAuthenticated.TRUE }
+        { isAuthenticated: params.isAuthenticated ?? IsAuthenticated.TRUE }
       )
     );
   };

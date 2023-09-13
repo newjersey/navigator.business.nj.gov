@@ -49,6 +49,7 @@
     }
   ],
   "name": "Retail",
+  "nonEssentialQuestionsIds": [],
   "industryOnboardingQuestions": {
     "canBeReseller": true
   },

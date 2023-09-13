@@ -1,4 +1,5 @@
 export type LegacyEventCategory =
+  | "opportunity_card"
   | "contextual_link"
   | "external_link"
   | "task_primary_call_to_action"
@@ -101,8 +102,6 @@ export type LegacyEventCategory =
   | "roadmap_profile_edit_button"
   | "landing_page_navbar_log_in"
   | "onboarding_header_login"
-  | "guest_modal"
-  | "guest_menu"
   | "guest_header_login"
   | "guest_toast"
   | "guest_modal"
@@ -110,7 +109,10 @@ export type LegacyEventCategory =
   | "guest_header_register"
   | "roadmap_logout_button"
   | "landing_page_hero_log_in"
-  | "landing_page";
+  | "finish_setup_on_myNewJersey_button"
+  | "landing_page"
+  | "for_you_card_hide_button"
+  | "for_you_card_unhide_button";
 
 export type LegacyEventAction =
   | "click"
@@ -125,6 +127,7 @@ export type LegacyEventAction =
   | "response";
 
 export type LegacyEventLabel =
+  | "go_to_opportunity_screen"
   | "view_sidebar"
   | "open_external_website"
   | "selected_not_started_status"
@@ -142,7 +145,7 @@ export type LegacyEventLabel =
   | "formation_status_set_to_complete"
   | "tax_registration_status_set_to_complete"
   | "show_tax_registration_date_modal"
-  | "go_to_myNJ_registration"
+  | "go_to_NavigatorAccount_setup"
   | "go_to_date_detail_screen"
   | "go_to_onboarding"
   | "go_to_onboarding "
@@ -223,4 +226,8 @@ export type LegacyEventLabel =
   | "show_feedback_modal"
   | "social_equity_business"
   | "business_exists_but_not_in_Gov2Go"
-  | "go_to_myNJ_registration";
+  | "get_unlinked_myNJ_account"
+  | "go_to_myNJ_registration"
+  | "hide_card"
+  | "unhide_card"
+  | "unhide_cards";

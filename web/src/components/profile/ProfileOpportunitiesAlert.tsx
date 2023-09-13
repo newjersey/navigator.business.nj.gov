@@ -1,5 +1,4 @@
-import { Content } from "@/components/Content";
-import { Alert } from "@/components/njwds-extended/Alert";
+import { FieldEntryAlert } from "@/components/FieldEntryAlert";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
@@ -10,11 +9,9 @@ import { ReactElement, useContext } from "react";
 export const ProfileOpportunitiesAlert = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);
   const { Config } = useConfig();
-  const unansweredOpportunityFields = getFieldsForProfile(state.profileData.legalStructureId).filter(
-    (field) => {
-      return !isFieldAnswered(field, state.profileData);
-    }
-  );
+  const unansweredOpportunityFields = getFieldsForProfile(state.profileData).filter((field) => {
+    return !isFieldAnswered(field, state.profileData);
+  });
 
   const getLabel = (field: ProfileContentField): string => {
     const contentFromConfig = getProfileConfig({
@@ -25,20 +22,19 @@ export const ProfileOpportunitiesAlert = (): ReactElement => {
     return contentFromConfig.header;
   };
 
-  if (unansweredOpportunityFields.length === 0) {
-    return <></>;
-  }
+  const unansweredFields = unansweredOpportunityFields.map((field) => ({
+    name: field,
+    label: getLabel(field as ProfileContentField),
+  }));
 
   return (
-    <Alert variant="info" dataTestid="opp-alert">
-      <Content>{Config.profileDefaults.profileCompletionAlert}</Content>
-      <ul>
-        {unansweredOpportunityFields.map((field) => (
-          <li key={field} data-testid={`question-${field}-alert-text`}>
-            <a href={`#question-${field}`}>{getLabel(field as ProfileContentField)}</a>
-          </li>
-        ))}
-      </ul>
-    </Alert>
+    <FieldEntryAlert
+      alertMessage={Config.profileDefaults.default.profileCompletionAlert}
+      alertProps={{
+        dataTestid: "opp-alert",
+        variant: "info",
+      }}
+      fields={unansweredFields}
+    />
   );
 };

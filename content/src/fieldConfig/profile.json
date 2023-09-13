@@ -41,6 +41,14 @@
           }
         }
       },
+      "nonEssentialQuestions": {
+        "default": {
+          "header": "Based, on your industry, answer additional questions to personalize your experience.",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "optionalText": "(Optional)"
+        }
+      },
       "certifiedInteriorDesigner": {
         "default": {
           "header": "Certified Interior Designer",
@@ -232,14 +240,6 @@
           "altDescription": "Do you plan to be a `home-based business|home-based-business` ?"
         }
       },
-      "isNonprofitOnboardingRadio": {
-        "default": {
-          "header": "Nonprofit",
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Is your business a nonprofit?"
-        }
-      },
       "legalStructureId": {
         "default": {
           "header": "Business Structure",
@@ -288,9 +288,9 @@
       },
       "employerId": {
         "default": {
-          "header": "Employer Identification Number",
+          "header": "Employer Identification Number (EIN)",
           "headerContextualInfo": "ein",
-          "headerNotBolded": "(EIN)",
+          "headerNotBolded": "",
           "description": ""
         }
       },
@@ -309,12 +309,20 @@
           "placeholder": "If you are an LLC, Corporation, or LLP, we will automatically add your formation documents once you [Form Your Business](/tasks/form-business-entity) on our site."
         }
       },
+      "isNonprofitOnboardingRadio": {
+        "default": {
+          "header": "Nonprofit",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Is your business a nonprofit?"
+        }
+      },
       "industryId": {
         "default": {
           "header": "Industry",
           "headerContextualInfo": "",
           "description": "",
-          "errorTextRequired": "Select a industry.",
+          "errorTextRequired": "Select an industry.",
           "searchAffirmation": "_\"**${searchText}**\" falls under the industries below:_"
         },
         "onboarding": {
@@ -382,6 +390,33 @@
           "description": "Are you looking to start an appraisal management company?"
         }
       }
+    },
+    "default": {
+      "profileErrorAlert": "Complete ${fieldText} to access your dashboard:",
+      "profileErrorAlertOneField": "the field",
+      "profileErrorAlertMultipleFields": "these fields",
+      "lockedFieldTooltipText": "This information cannot be changed because it was submitted to the NJ Department of Treasury.",
+      "errorTextHeader": "Error",
+      "backButtonText": "Cancel",
+      "pageTitle": "### Business Profile",
+      "escapeModalEscape": "Go back",
+      "escapeModalBody": "You have unsaved changes that will be lost.",
+      "standingDocFileTitle": "Certificate of Good Standing",
+      "profileTabDocsTitle": "Reference Documents",
+      "profileTabRefTitle": "Reference Numbers",
+      "successTextBody": "Based on your answers you may see updates to your Navigator experience.",
+      "essentialQuestionAlertText": "Complete all required fields.",
+      "formationDocFileTitle": "Official Formation Document",
+      "profileCompletionAlert": "Complete the information below to customize your certifications, funding opportunities, and annual report deadline:",
+      "errorTextBody": "Review your information in the fields marked below.",
+      "escapeModalHeader": "Are you sure you want to continue?",
+      "profileTabNoteTitle": "Notes",
+      "saveButtonText": "Save",
+      "escapeModalReturn": "Continue without saving",
+      "successTextHeader": "Business Profile Saved",
+      "certificationDocFileTitle": "Certified Copy of Formation",
+      "profileTabInfoTitle": "Business Information",
+      "cannabisLocationAlert": "Check if your local government allows a cannabis license."
     }
   }
 }

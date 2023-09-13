@@ -3,6 +3,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import {
   BusinessPersona,
+  ForeignBusinessType,
   generateBusiness,
   LookupIndustryById,
   LookupLegalStructureById,
@@ -138,6 +139,38 @@ describe("getNavBarBusinessTitle", () => {
           const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
           expect(navBarBusinessTitle).toEqual(name);
         });
+      });
+    });
+
+    describe("Nexus DBA", () => {
+      it("shows unnamed dba when the nexusDbaName is empty and needsNexusDbaName is true", () => {
+        const business = generateBusiness({
+          profileData: generateProfileData({
+            businessPersona: "FOREIGN",
+            foreignBusinessType: "NEXUS",
+            businessName: "test business Name",
+            needsNexusDbaName: true,
+            nexusDbaName: "",
+          }),
+        });
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+        expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedDbaBusinessText);
+      });
+
+      it("shows the dba name when the user has entered a DBA name", () => {
+        const dbaName = "dbaName";
+
+        const business = generateBusiness({
+          profileData: generateProfileData({
+            businessPersona: "FOREIGN",
+            foreignBusinessType: "NEXUS",
+            businessName: "test business Name",
+            needsNexusDbaName: true,
+            nexusDbaName: dbaName,
+          }),
+        });
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+        expect(navBarBusinessTitle).toEqual(dbaName);
       });
     });
   });
@@ -305,6 +338,27 @@ describe("getNavBarBusinessTitle", () => {
       });
       const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
       expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedOwnedBusinessText);
+    });
+
+    describe("FOREIGN", () => {
+      it.each(["REMOTE_SELLER", "REMOTE_WORKER"])(
+        "shows Unnamed Out-of-State Business when FOREIGN and %s",
+        (foreignBusinessType) => {
+          const business = generateBusiness({
+            profileData: generateProfileData({
+              legalStructureId: undefined,
+              businessName: undefined,
+              tradeName: undefined,
+              businessPersona: "FOREIGN",
+              foreignBusinessType: foreignBusinessType as ForeignBusinessType,
+            }),
+          });
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+          expect(navBarBusinessTitle).toEqual(
+            Config.navigationDefaults.navBarUnnamedForeignRemoteSellerWorkerText
+          );
+        }
+      );
     });
   });
 });

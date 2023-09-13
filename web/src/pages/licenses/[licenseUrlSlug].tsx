@@ -4,10 +4,10 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { LicenseUrlSlugParam, loadAllLicenseUrlSlugs, loadLicenseByUrlSlug } from "@/lib/static/loadLicenses";
 import { LicenseEvent } from "@/lib/types/types";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   defaultDateFormat,
   LicenseEventSubtype,
@@ -28,6 +28,8 @@ interface LicenseElementProps {
 }
 
 export const LicenseElement = (props: LicenseElementProps): ReactElement => {
+  const { Config } = useConfig();
+
   const titles: Record<LicenseEventSubtype, string> = {
     expiration: Config.licenseEventDefaults.expirationTitleLabel,
     renewal: Config.licenseEventDefaults.renewalTitleLabel,

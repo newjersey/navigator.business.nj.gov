@@ -30,3 +30,5 @@
 - [ ] I have checked for and removed instances of unused config from CMS
 - [ ] I have pruned any instances of unused code
 - [ ] I have not added any markdown to labels, titles and button text in config
+- [ ] If I added/updated any values in `userData` (including `profileData`, `formationData` etc), then I added a new migration file
+- [ ] If I added any new collections to the CMS config, then I updated the search tool and `cmsCollections.ts`

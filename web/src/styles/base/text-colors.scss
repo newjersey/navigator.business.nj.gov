@@ -14,12 +14,19 @@
   color: $base-darkest !important;
 }
 
+.text-primary-extra-extra-light {
+  color: $primary-extra-extra-light !important;
+}
 .text-primary {
   color: $primary !important;
 }
 
 .text-primary-lightest {
   color: $primary-lightest !important;
+}
+
+.text-primary-light-vivid {
+  color: $primary-light-vivid !important;
 }
 
 .text-primary-more-light {
@@ -168,8 +175,8 @@
   color: $accent-cooler-darker !important;
 }
 
-.text-accent-extra-hot-light {
-  color: $accent-extra-hot-light !important;
+.text-accent-hot-extra-light {
+  color: $accent-hot-extra-light !important;
 }
 
 .text-accent-hot {
@@ -183,11 +190,12 @@
 .text-accent-semi-cool-lightest {
   color: $accent-semi-cool-lightest !important;
 }
-
 .text-accent-semi-cool-light {
   color: $accent-semi-cool-light !important;
 }
-
+.text-accent-semi-cool-vivid {
+  color: $accent-semi-cool-vivid !important;
+}
 .text-accent-semi-cool {
   color: $accent-semi-cool !important;
 }

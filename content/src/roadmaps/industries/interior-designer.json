@@ -6,6 +6,7 @@
     "isCertifiedInteriorDesignerApplicable": true
   },
   "canHavePermanentLocation": true,
+  "nonEssentialQuestionsIds": [],
   "roadmapSteps": [
     {
       "step": 1,

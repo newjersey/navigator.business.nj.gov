@@ -1,3 +1,4 @@
+import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { Content } from "@/components/Content";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { Alert } from "@/components/njwds-extended/Alert";
@@ -5,16 +6,19 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { StateDropdown } from "@/components/StateDropdown";
 import { FormationMunicipality } from "@/components/tasks/business-formation/business/FormationMunicipality";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
+import { FormationField } from "@/components/tasks/business-formation/FormationField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { ReactElement, useContext, useState } from "react";
 
 export const MainBusinessAddressNj = (): ReactElement => {
   const { Config } = useConfig();
   const { setFormationFormData, state } = useContext(BusinessFormationContext);
+  const { business } = useUserData();
   const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useFormationErrors();
 
   const doAnyFieldsHaveAValue = (): boolean => {
@@ -45,7 +49,10 @@ export const MainBusinessAddressNj = (): ReactElement => {
         data-testid={"main-business-address-container-header"}
         className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2"
       >
-        <h3 className="margin-bottom-0">{Config.formation.sections.addressHeader} </h3>
+        <div role="heading" aria-level={2} className="h3-styling margin-0-override">
+          {Config.formation.sections.addressHeader}{" "}
+          <span className="text-normal font-body-lg">{Config.formation.general.optionalLabel}</span>
+        </div>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
             <div data-testid={"add-address-button"}>
@@ -58,22 +65,27 @@ export const MainBusinessAddressNj = (): ReactElement => {
       </div>
       {isExpanded && (
         <>
-          <BusinessFormationTextField
-            label={Config.formation.fields.addressLine1.label}
-            fieldName="addressLine1"
-            required={true}
-            className={"margin-bottom-2"}
-            errorBarType="ALWAYS"
-            validationText={getFieldErrorLabel("addressLine1")}
-          />
-          <BusinessFormationTextField
-            label={Config.formation.fields.addressLine2.label}
-            secondaryLabel={Config.formation.general.optionalLabel}
-            errorBarType="ALWAYS"
-            fieldName="addressLine2"
-            validationText={getFieldErrorLabel("addressLine2")}
-            className="margin-bottom-2"
-          />
+          <CannabisLocationAlert industryId={business?.profileData.industryId} />
+          <FormationField fieldName="addressLine1">
+            <BusinessFormationTextField
+              label={Config.formation.fields.addressLine1.label}
+              fieldName="addressLine1"
+              required={true}
+              className={"margin-bottom-2"}
+              errorBarType="ALWAYS"
+              validationText={getFieldErrorLabel("addressLine1")}
+            />
+          </FormationField>
+          <FormationField fieldName="addressLine2">
+            <BusinessFormationTextField
+              label={Config.formation.fields.addressLine2.label}
+              secondaryLabel={Config.formation.general.optionalLabel}
+              errorBarType="ALWAYS"
+              fieldName="addressLine2"
+              validationText={getFieldErrorLabel("addressLine2")}
+              className="margin-bottom-2"
+            />
+          </FormationField>
           <WithErrorBar
             hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressMunicipality"])}
             type="DESKTOP-ONLY"
@@ -85,32 +97,40 @@ export const MainBusinessAddressNj = (): ReactElement => {
                   <FormationMunicipality />
                 </WithErrorBar>
               </div>
-              <div className="margin-top-2 tablet:margin-top-0 grid-col-5 tablet:grid-col-2">
+              <div className="grid-col-12 tablet:grid-col-6 margin-top-2 tablet:margin-top-0">
                 <WithErrorBar
                   hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
                   type="MOBILE-ONLY"
                 >
-                  <strong>
-                    <ModifiedContent>{Config.formation.fields.addressState.label}</ModifiedContent>
-                  </strong>
-                  <StateDropdown
-                    fieldName="addressState"
-                    value={"New Jersey"}
-                    validationText={Config.formation.fields.addressState.error}
-                    disabled={true}
-                    onSelect={(): void => {}}
-                  />
+                  <div className="grid-row grid-gap-1">
+                    <div className="grid-col-5">
+                      <strong>
+                        <ModifiedContent>{Config.formation.fields.addressState.label}</ModifiedContent>
+                      </strong>
+                      <FormationField fieldName="addressState">
+                        <StateDropdown
+                          fieldName="addressState"
+                          value={"New Jersey"}
+                          validationText={Config.formation.fields.addressState.error}
+                          disabled={true}
+                          onSelect={(): void => {}}
+                        />
+                      </FormationField>
+                    </div>
+                    <div className="grid-col-7">
+                      <FormationField fieldName="addressZipCode">
+                        <BusinessFormationTextField
+                          label={Config.formation.fields.addressZipCode.label}
+                          numericProps={{ maxLength: 5 }}
+                          required={true}
+                          errorBarType="NEVER"
+                          fieldName={"addressZipCode"}
+                          validationText={getFieldErrorLabel("addressZipCode")}
+                        />
+                      </FormationField>
+                    </div>
+                  </div>
                 </WithErrorBar>
-              </div>
-              <div className="margin-top-2 tablet:margin-top-0 grid-col-7 tablet:grid-col-4">
-                <BusinessFormationTextField
-                  label={Config.formation.fields.addressZipCode.label}
-                  numericProps={{ maxLength: 5 }}
-                  required={true}
-                  errorBarType="NEVER"
-                  fieldName={"addressZipCode"}
-                  validationText={getFieldErrorLabel("addressZipCode")}
-                />
               </div>
             </div>
           </WithErrorBar>

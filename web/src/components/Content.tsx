@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { ContextualInfoLink } from "@/components/ContextualInfoLink";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Icon } from "@/components/njwds/Icon";
 import { PureMarkdownContent } from "@/components/PureMarkdownContent";
-import { SelfRegLink } from "@/components/SelfRegLink";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import { InlineIconType } from "@/lib/cms/types";
 import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifiedByUserData";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { FormControlLabel } from "@mui/material";
 import { CSSProperties, ReactElement } from "react";
@@ -23,6 +24,7 @@ interface ContentProps {
 }
 
 export const Content = (props: ContentProps): ReactElement => {
+  const { business } = useUserData();
   const updatedContent = useContentModifiedByUserData(props.children);
 
   const isTest = process.env.NODE_ENV === "test";
@@ -44,6 +46,16 @@ export const Content = (props: ContentProps): ReactElement => {
       return <HorizontalLine />;
     },
     blockquote: GreenBox,
+    greenBox: (props: any): ReactElement => {
+      return <GreenBox>{props.children}</GreenBox>;
+    },
+    note: (props: any): ReactElement => {
+      return (
+        <Alert variant="note" borderRight={true} borderSmall={true}>
+          {props.children}
+        </Alert>
+      );
+    },
     infoAlert: (props: any): ReactElement => {
       return (
         <Alert variant="info" heading={props.header}>
@@ -51,6 +63,9 @@ export const Content = (props: ContentProps): ReactElement => {
         </Alert>
       );
     },
+    cannabisLocationAlert: (): ReactElement => (
+      <CannabisLocationAlert industryId={business?.profileData.industryId} />
+    ),
     icon: InlineIcon,
     table: OutlineBox,
     li: ListOrCheckbox,
@@ -81,8 +96,6 @@ const Link = (onClick?: (url?: string) => void): any => {
             {props.children[0]}
           </ExternalLink>
         );
-      } else if (props.href.startsWith("/self-register")) {
-        return <SelfRegLink href={props.href}>{props.children}</SelfRegLink>;
       }
       return (
         <a href={props.href} onClick={(): void => (onClick ? onClick(props.href) : undefined)}>

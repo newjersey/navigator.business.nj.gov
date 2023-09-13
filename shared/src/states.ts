@@ -54,6 +54,7 @@ export const arrayOfStateNames = [
   "Wisconsin",
   "West Virginia",
   "Wyoming",
+  "Outside of the USA",
 ] as const;
 
 export const arrayOfStateShortCodes = [
@@ -112,6 +113,7 @@ export const arrayOfStateShortCodes = [
   "WI",
   "WV",
   "WY",
+  "Outside of the USA",
 ] as const;
 
 export type StateNames = (typeof arrayOfStateNames)[number];
@@ -178,4 +180,5 @@ export const arrayOfStateObjects: StateObject[] = [
   { shortCode: "WI", name: "Wisconsin" },
   { shortCode: "WV", name: "West Virginia" },
   { shortCode: "WY", name: "Wyoming" },
+  { shortCode: "Outside of the USA", name: "Outside of the USA" },
 ];

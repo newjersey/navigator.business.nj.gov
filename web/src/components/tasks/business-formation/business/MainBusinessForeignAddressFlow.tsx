@@ -1,6 +1,8 @@
+import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { MainBusinessIntl } from "@/components/tasks/business-formation/business/MainBusinessAddressIntl";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMountEffect } from "@/lib/utils/helpers";
 import {
   createEmptyFormationAddress,
@@ -12,9 +14,10 @@ import { ReactElement, useContext } from "react";
 import { MainBusinessUs } from "./MainBusinessAddressUs";
 
 export const MainBusinessForeignAddressFlow = (): ReactElement => {
-  const { state, setFieldsInteracted, setFormationFormData } = useContext(BusinessFormationContext);
   type FlowBusinessLocationType = Exclude<FormationBusinessLocationType, "NJ">;
   const { Config } = useConfig();
+  const { state, setFieldsInteracted, setFormationFormData } = useContext(BusinessFormationContext);
+  const { business } = useUserData();
 
   useMountEffect(() => {
     if (state.formationFormData.businessLocationType === "US") {
@@ -51,6 +54,7 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
       <h3 className="margin-bottom-3" data-testid="main-business-address-container-header">
         {Config.formation.sections.addressHeader}
       </h3>
+      <CannabisLocationAlert industryId={business?.profileData.industryId} />
       <FormControl variant="outlined" fullWidth className="padding-bottom-2">
         <RadioGroup
           aria-label={"Foreign address type"}

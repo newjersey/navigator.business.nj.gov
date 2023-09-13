@@ -31,7 +31,6 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
     <div className="flex flex-column">
       <div className="margin-bottom-4">
         <Content>{Config.cannabisApplyForLicense.applicationPageHelperText}</Content>
-        <h2 className="margin-top-2 text-normal">{Config.cannabisApplyForLicense.applicationNeedsHeader}</h2>
         <hr />
         {(props.CMS_ONLY_isAnnual || props.task.id === "annual-license-cannabis") && (
           <>
@@ -40,9 +39,9 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
                 aria-controls={`${Config.cannabisApplyForLicense.generalApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
               >
-                <h3 className="text-normal margin-y-3">
+                <div role="heading" aria-level={2} className="h3-styling margin-y-3-override">
                   {Config.cannabisApplyForLicense.generalApplicationNeeds}
-                </h3>
+                </div>
               </AccordionSummary>
               <AccordionDetails>
                 <div data-testid="annualGeneralRequirements">
@@ -54,14 +53,14 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
         )}
         {(props.CMS_ONLY_isConditional || props.task.id === "conditional-permit-cannabis") && (
           <>
-            <Accordion expanded={true} className="margin-top-2">
+            <Accordion defaultExpanded={true} className="margin-top-2">
               <AccordionSummary
                 aria-controls={`${Config.cannabisApplyForLicense.generalApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
               >
-                <h3 className="text-normal margin-y-3">
+                <div role="heading" aria-level={2} className="h3-styling margin-y-3-override">
                   {Config.cannabisApplyForLicense.generalApplicationNeeds}
-                </h3>
+                </div>
               </AccordionSummary>
               <AccordionDetails>
                 <div data-testid="conditionalGeneralRequirements">
@@ -74,14 +73,14 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
         {(props.CMS_ONLY_isAnnual || business?.profileData.cannabisMicrobusiness) && (
           <>
             <hr />
-            <Accordion defaultExpanded={props.CMS_ONLY_isAnnual} className="margin-top-2">
+            <Accordion defaultExpanded={true} className="margin-top-2">
               <AccordionSummary
                 aria-controls={`${Config.cannabisApplyForLicense.microbusinessApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
               >
-                <h3 className="text-normal margin-y-3">
+                <div role="heading" aria-level={2} className="h3-styling margin-y-3-override">
                   {Config.cannabisApplyForLicense.microbusinessApplicationNeeds}
-                </h3>
+                </div>
               </AccordionSummary>
               <AccordionDetails>
                 <div data-testid="microbusinessRequirements">
@@ -94,14 +93,14 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
         {hasPriorityStatus && (
           <>
             <hr />
-            <Accordion defaultExpanded={props.CMS_ONLY_isAnnual ? true : false} className="margin-top-2">
+            <Accordion defaultExpanded={true} className="margin-top-2">
               <AccordionSummary
                 aria-controls={`${Config.cannabisApplyForLicense.priorityStatusApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
               >
-                <h3 className="text-normal margin-y-3">
+                <div role="heading" aria-level={2} className="h3-styling margin-y-3-override">
                   {Config.cannabisApplyForLicense.priorityStatusApplicationNeeds}
-                </h3>
+                </div>
               </AccordionSummary>
               <AccordionDetails>
                 {props.priorityStatusState.diverselyOwned && (

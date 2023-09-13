@@ -22,7 +22,7 @@ const RoadmapPage = (): ReactElement => {
 
   return (
     <PageSkeleton>
-      <NavBar logoOnly={true} />
+      <NavBar logoOnly="NAVIGATOR_LOGO" />
       <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
         <SingleColumnContainer>
           <div className="margin-top-6">

@@ -13,7 +13,6 @@ import {
   mockEmptyApiSignups,
   renderPage,
   runNonprofitOnboardingTests,
-  runSelfRegPageTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import { generateProfileData, ProfileData } from "@businessnjgovnavigator/shared/";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
@@ -111,7 +110,10 @@ describe("onboarding - foreign business", () => {
         screen.getByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.REMOTE_WORKER)
       ).toBeInTheDocument();
 
-      await page.visitStep(3);
+      page.clickNext();
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalled();
+      });
       expect(currentBusiness().profileData.foreignBusinessType).toEqual("REMOTE_WORKER");
       expect(currentBusiness().profileData.foreignBusinessTypeIds).toEqual(["employeesInNJ"]);
     });
@@ -125,7 +127,10 @@ describe("onboarding - foreign business", () => {
       expect(
         screen.getByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.REMOTE_SELLER)
       ).toBeInTheDocument();
-      await page.visitStep(3);
+      page.clickNext();
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalled();
+      });
       expect(currentBusiness().profileData.foreignBusinessType).toEqual("REMOTE_SELLER");
       expect(currentBusiness().profileData.foreignBusinessTypeIds).toEqual(["revenueInNJ"]);
     });
@@ -140,7 +145,10 @@ describe("onboarding - foreign business", () => {
         screen.getByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.REMOTE_SELLER)
       ).toBeInTheDocument();
 
-      await page.visitStep(3);
+      page.clickNext();
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalled();
+      });
       expect(currentBusiness().profileData.foreignBusinessType).toEqual("REMOTE_SELLER");
       expect(currentBusiness().profileData.foreignBusinessTypeIds).toEqual(["transactionsInNJ"]);
     });
@@ -149,13 +157,10 @@ describe("onboarding - foreign business", () => {
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
 
-      act(() => {
-        return page.clickNext();
-      });
+      page.clickNext();
       await waitFor(() => {
         expect(screen.getByTestId("step-2")).toBeInTheDocument();
       });
-      expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
       expect(
         screen.getByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.errorTextRequired)
       ).toBeInTheDocument();
@@ -165,12 +170,10 @@ describe("onboarding - foreign business", () => {
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
       page.checkByLabelText(transactionsInNJ);
-      await page.visitStep(3);
-
+      page.clickNext();
       await waitFor(() => {
-        expect(screen.getByTestId("step-3")).toBeInTheDocument();
+        expect(mockPush).toHaveBeenCalled();
       });
-      expect(screen.queryByTestId("step-2")).not.toBeInTheDocument();
       expect(
         screen.queryByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.errorTextRequired)
       ).not.toBeInTheDocument();
@@ -224,18 +227,20 @@ describe("onboarding - foreign business", () => {
   });
 
   describe("Remote Seller onboarding", () => {
-    it("skips the industry, legal structure, and location questions", () => {
+    it("skips the industry, legal structure, and location questions", async () => {
       const userData = generateTestUserData({
         businessPersona: "FOREIGN",
         foreignBusinessType: "REMOTE_SELLER",
+        foreignBusinessTypeIds: ["revenueInNJ"],
       });
 
-      useMockRouter({ isReady: true, query: { page: "3" } });
-      renderPage({ userData });
-      expect(
-        screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "3" }))
-      ).toBeInTheDocument();
-      expect(screen.getByText(Config.selfRegistration.nameFieldLabel)).toBeInTheDocument();
+      useMockRouter({ isReady: true, query: { page: "2" } });
+      const { page } = renderPage({ userData });
+      page.clickNext();
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalled();
+      });
+      expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
     });
 
     it("sets operating phase to GUEST_MODE_WITH_BUSINESS_STRUCTURE to prevent prompt", async () => {
@@ -256,18 +261,20 @@ describe("onboarding - foreign business", () => {
   });
 
   describe("REMOTE_WORKER onboarding", () => {
-    it("skips the industry, legal structure, and location questions", () => {
+    it("skips the industry, legal structure, and location questions", async () => {
       const userData = generateTestUserData({
         businessPersona: "FOREIGN",
         foreignBusinessType: "REMOTE_WORKER",
+        foreignBusinessTypeIds: ["employeesInNJ"],
       });
 
-      useMockRouter({ isReady: true, query: { page: "3" } });
-      renderPage({ userData });
-      expect(
-        screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "3" }))
-      ).toBeInTheDocument();
-      expect(screen.getByText(Config.selfRegistration.nameFieldLabel)).toBeInTheDocument();
+      useMockRouter({ isReady: true, query: { page: "2" } });
+      const { page } = renderPage({ userData });
+      page.clickNext();
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalled();
+      });
+      expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
     });
 
     it("sets operating phase to GUEST_MODE_WITH_BUSINESS_STRUCTURE to prevent prompt", async () => {
@@ -342,9 +349,7 @@ describe("onboarding - foreign business", () => {
         expect(screen.getByTestId("step-3")).toBeInTheDocument();
         expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
         expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
-        expect(
-          screen.getAllByText(Config.profileDefaults.essentialQuestionInlineText)[0]
-        ).toBeInTheDocument();
+        expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
       }
     );
 
@@ -383,13 +388,9 @@ describe("onboarding - foreign business", () => {
           page.clickNext();
         });
         expect(screen.getByTestId("step-3")).toBeInTheDocument();
-        expect(
-          screen.getAllByText(Config.profileDefaults.essentialQuestionInlineText)[0]
-        ).toBeInTheDocument();
+        expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
         page.chooseEssentialQuestionRadio(industryId, 0);
-        expect(
-          screen.queryByText(Config.profileDefaults.essentialQuestionInlineText)
-        ).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.siteWideErrorMessages.errorRadioButton)).not.toBeInTheDocument();
       }
     );
   });
@@ -421,7 +422,10 @@ describe("onboarding - foreign business", () => {
     it("sets homeBasedBusiness to false when YES is selected for Location In New Jersey", async () => {
       const { page } = renderPage({ userData });
       page.chooseRadio("location-in-new-jersey-true");
-      await page.visitStep(5);
+      page.clickNext();
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalled();
+      });
       expect(currentBusiness().profileData.homeBasedBusiness).toEqual(false);
       expect(currentBusiness().profileData.nexusLocationInNewJersey).toEqual(true);
     });
@@ -460,11 +464,7 @@ describe("onboarding - foreign business", () => {
     });
   });
 
-  describe("validates self-reg step for non-nexus", () => {
-    runSelfRegPageTests({ businessPersona: "FOREIGN", selfRegPage: "3" });
-  });
-
   describe("nonprofit onboarding tests", () => {
-    runNonprofitOnboardingTests({ businessPersona: "FOREIGN", industryPage: 3, selfRegPage: 5 });
+    runNonprofitOnboardingTests({ businessPersona: "FOREIGN", industryPage: 3, lastPage: 4 });
   });
 });

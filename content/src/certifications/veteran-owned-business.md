@@ -1,8 +1,7 @@
 ---
 descriptionMd: A `Veteran|veteran` -Owned Business (VOB) certification may not
   provide an advantage for New Jersey State contracts. Learn more about
-  [government
-  contracts](https://business.nj.gov/pages/contract-with-new-jersey).
+  [government contracts](https://business.nj.gov/pages/government-contracting).
 urlSlug: veteran-owned-business
 name: Get Certified as a Veteran-Owned Business
 id: veteran-owned-business

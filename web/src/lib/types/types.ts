@@ -169,7 +169,7 @@ export type Funding = {
   county: County[];
   sector: string[];
   programPurpose: string | null | undefined;
-  agencyContact: string;
+  agencyContact: string | null | undefined;
   isNonprofitOnly: boolean | undefined | null;
 };
 
@@ -195,6 +195,17 @@ export interface Opportunity {
   descriptionMd: string;
   dueDate?: string;
   status?: string;
+}
+
+export interface QuickAction {
+  id: string;
+  name: string;
+  urlSlug: string;
+  filename: string;
+  contentMd: string;
+  callToActionLink: string | undefined;
+  callToActionText: string | undefined;
+  form: string | undefined;
 }
 
 export type FundingType =
@@ -532,3 +543,9 @@ export type OutageConfig = {
   OUTAGE_ALERT_MESSAGE: string;
   OUTAGE_ALERT_TYPE: OutageAlertType;
 };
+
+export interface NonEssentialQuestion {
+  id: string;
+  questionText: string;
+  addOn: string;
+}

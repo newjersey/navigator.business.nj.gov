@@ -1,3 +1,4 @@
+import { ActiveUser } from "@/lib/auth/AuthContext";
 import {
   AllCounties,
   Certification,
@@ -15,6 +16,7 @@ import {
   OperateReference,
   Opportunity,
   OutageConfig,
+  PostOnboarding,
   Roadmap,
   SidebarCardContent,
   Step,
@@ -322,11 +324,31 @@ export const generateLicenseEvent = (overrides: Partial<LicenseEvent>): LicenseE
   };
 };
 
+export const generatePostOnboarding = (overrides: Partial<PostOnboarding>): PostOnboarding => {
+  return {
+    question: `some-question-${randomInt()}`,
+    contentMd: `some-yes-content-${randomInt()}`,
+    radioYes: "Yes",
+    radioNo: "No",
+    radioNoContent: `some-no-content-${randomInt()}`,
+    ...overrides,
+  };
+};
+
 export const generateOutageConfig = (overrides: Partial<OutageConfig>): OutageConfig => {
   return {
     FEATURE_ENABLE_OUTAGE_ALERT_BAR: randomInt() % 2 === 0,
     OUTAGE_ALERT_MESSAGE: `some-message-${randomInt()}`,
     OUTAGE_ALERT_TYPE: randomElementFromArray(["ALL", "LOGGED_IN_ONLY", "UNREGISTERED_ONLY"]),
+    ...overrides,
+  };
+};
+
+export const generateActiveUser = (overrides: Partial<ActiveUser>): ActiveUser => {
+  return {
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    encounteredMyNjLinkingError: false,
     ...overrides,
   };
 };

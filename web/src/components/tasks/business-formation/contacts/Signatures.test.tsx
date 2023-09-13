@@ -8,6 +8,7 @@ import {
   BusinessSignerTypeMap,
   castPublicFilingLegalTypeToFormationType,
   FormationLegalType,
+  generateFormationFormData,
   generateFormationSigner,
   PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
@@ -45,83 +46,125 @@ describe("Formation - Signatures", () => {
     "limited-liability-partnership",
   ];
 
-  legalStructureIds.map((legalStructureId) => {
-    describe(`for ${legalStructureId}`, () => {
-      it("adds additional signer", async () => {
-        const page = await getPageHelper({ legalStructureId }, { signers: [] });
-        page.fillText("Signer 0", "Red Skull");
-        page.checkSignerBox(0, "signers");
+  describe("starting legal structures", () => {
+    it.each([...legalStructureIds])("adds additional signer for %s", async (legalStructureId) => {
+      const page = await getPageHelper({ legalStructureId }, { signers: [] });
+      page.fillText("Signer 0", "Red Skull");
+      page.checkSignerBox(0, "signers");
 
-        page.clickAddNewSigner();
-        page.fillText("Signer 1", "V");
-        page.checkSignerBox(1, "signers");
+      page.clickAddNewSigner();
+      page.fillText("Signer 1", "V");
+      page.checkSignerBox(1, "signers");
 
-        await page.submitContactsStep();
-        expect(currentBusiness().formationData.formationFormData.signers).toEqual([
-          generateFormationSigner(
-            {
-              name: "Red Skull",
-              signature: true,
-            },
-            legalStructureId
-          ),
-          generateFormationSigner(
-            {
-              name: "V",
-              signature: true,
-            },
-            legalStructureId
-          ),
-        ]);
-      });
+      await page.submitContactsStep();
+      expect(currentBusiness().formationData.formationFormData.signers).toEqual([
+        generateFormationSigner(
+          {
+            name: "Red Skull",
+            signature: true,
+          },
+          legalStructureId
+        ),
+        generateFormationSigner(
+          {
+            name: "V",
+            signature: true,
+          },
+          legalStructureId
+        ),
+      ]);
+    });
 
-      it("deletes an additional signer", async () => {
-        const page = await getPageHelper({ legalStructureId }, { signers: [] });
-        page.fillText("Signer 0", "Red Skull");
-        page.checkSignerBox(0, "signers");
+    it.each([...legalStructureIds])("deletes an additional signer for %s", async (legalStructureId) => {
+      const page = await getPageHelper({ legalStructureId }, { signers: [] });
+      page.fillText("Signer 0", "Red Skull");
+      page.checkSignerBox(0, "signers");
 
-        page.clickAddNewSigner();
-        page.fillText("Signer 1", "V");
-        page.checkSignerBox(1, "signers");
+      page.clickAddNewSigner();
+      page.fillText("Signer 1", "V");
+      page.checkSignerBox(1, "signers");
 
-        fireEvent.click(screen.getAllByLabelText("delete additional signer")[0]);
+      fireEvent.click(screen.getAllByLabelText("delete additional signer")[0]);
 
-        await page.submitContactsStep();
-        expect(currentBusiness().formationData.formationFormData.signers).toEqual([
-          generateFormationSigner(
-            {
-              name: "Red Skull",
-              signature: true,
-            },
-            legalStructureId
-          ),
-        ]);
-      });
+      await page.submitContactsStep();
+      expect(currentBusiness().formationData.formationFormData.signers).toEqual([
+        generateFormationSigner(
+          {
+            name: "Red Skull",
+            signature: true,
+          },
+          legalStructureId
+        ),
+      ]);
+    });
 
-      it("does not add more than 9 additional signers", async () => {
+    it.each([...legalStructureIds])(
+      "does not add more than 9 additional signers for %s",
+      async (legalStructureId) => {
         const signers = Array(9).fill(generateFormationSigner({}, legalStructureId));
         const page = await getPageHelper({ legalStructureId }, { signers });
 
         expect(screen.getByText(Config.formation.fields.signers.addButtonText)).toBeInTheDocument();
         page.clickAddNewSigner();
         expect(screen.queryByText(Config.formation.fields.signers.addButtonText)).not.toBeInTheDocument();
-      });
+      }
+    );
 
-      it("fires validations when signers do not fill out the signature field", async () => {
-        const page = await getPageHelper(
-          { legalStructureId },
-          { signers: [generateFormationSigner({ name: "" }, legalStructureId)] }
-        );
+    it.each([...legalStructureIds])(
+      "displays inline error to both enter name and sign if both are missing for %s",
+      async (legalStructureId) => {
+        const formationFormData = generateFormationFormData({ signers: undefined }, { legalStructureId });
+        const page = await getPageHelper({ legalStructureId }, formationFormData);
         await attemptApiSubmission(page);
-        const signerErrorText = (): HTMLElement | null => {
-          return screen.queryByText(Config.formation.fields.signers.errorBannerSignerName);
-        };
-        expect(signerErrorText()).toBeInTheDocument();
-        page.fillText("Signer 0", "Elrond");
-        expect(signerErrorText()).not.toBeInTheDocument();
-      });
+        expect(
+          screen.getByText(Config.formation.fields.signers.errorInlineNameAndSignature)
+        ).toBeInTheDocument();
+      }
+    );
 
-      it("fires validations when signer name longer than 50 chars", async () => {
+    it.each([...legalStructureIds])(
+      "displays inline error to enter name if only name is missing for %s",
+      async (legalStructureId) => {
+        const formationFormData = generateFormationFormData(
+          {
+            signers: [
+              generateFormationSigner({
+                name: "",
+                signature: true,
+              }),
+            ],
+          },
+          { legalStructureId }
+        );
+        const page = await getPageHelper({ legalStructureId }, formationFormData);
+        await attemptApiSubmission(page);
+        expect(screen.getByText(Config.formation.fields.signers.errorInlineSignerName)).toBeInTheDocument();
+      }
+    );
+
+    it.each([...legalStructureIds])(
+      "displays inline error to sign if only signature is missing for %s",
+      async (legalStructureId) => {
+        const formationFormData = generateFormationFormData(
+          {
+            signers: [
+              generateFormationSigner({
+                name: "Reginald Von Harris",
+                signature: false,
+              }),
+            ],
+          },
+          { legalStructureId }
+        );
+        const page = await getPageHelper({ legalStructureId }, formationFormData);
+        await attemptApiSubmission(page);
+        expect(screen.getByText(Config.formation.fields.signers.errorInlineSignature)).toBeInTheDocument();
+      }
+    );
+
+    it.each([...legalStructureIds])(
+      "displays inline error when signer name longer than 50 chars for %s",
+      async (legalStructureId) => {
         const page = await getPageHelper(
           { legalStructureId },
           {
@@ -146,110 +189,115 @@ describe("Formation - Signatures", () => {
         expect(signerErrorText()).toBeInTheDocument();
         page.fillText("Signer 0", "Elrond");
         expect(signerErrorText()).not.toBeInTheDocument();
-      });
+      }
+    );
+  });
 
-      it("fires validations when signers do not check the sign checkbox", async () => {
+  describe("foreign legal structures", () => {
+    const legalType = (legalStructureId: PublicFilingLegalType): FormationLegalType =>
+      castPublicFilingLegalTypeToFormationType(legalStructureId, "FOREIGN");
+
+    it.each([...legalStructureIds])("selects a signer type for %s", async (legalStructureId) => {
+      const page = await getPageHelper(
+        { businessPersona: "FOREIGN", legalStructureId },
+        { signers: undefined }
+      );
+      const signers = [
+        generateFormationSigner({ signature: true }, legalType(legalStructureId)),
+        generateFormationSigner({ signature: true }, legalType(legalStructureId)),
+      ];
+      page.fillText("Signer 0", signers[0].name);
+      page.selectByText("Signer title 0", signers[0].title);
+      page.checkSignerBox(0, "signers");
+
+      page.clickAddNewSigner();
+      page.fillText("Signer 1", signers[1].name);
+      page.selectByText("Signer title 1", signers[1].title);
+      page.checkSignerBox(1, "signers");
+
+      await page.submitContactsStep();
+      expect(currentBusiness().formationData.formationFormData.signers).toEqual(signers);
+    });
+
+    it.each([...legalStructureIds])(
+      "displays inline error when signer name longer than 50 chars for %s",
+      async (legalStructureId) => {
         const page = await getPageHelper(
           { legalStructureId },
-          { signers: [generateFormationSigner({ signature: false }, legalStructureId)] }
+          {
+            signers: [
+              generateFormationSigner(
+                { name: Array(51).fill("A").join(","), signature: true },
+                legalStructureId
+              ),
+            ],
+          }
         );
         await attemptApiSubmission(page);
-        const signerCheckboxErrorText = (): HTMLElement | null => {
-          return screen.queryByText(Config.formation.fields.signers.errorBannerCheckbox, {
-            exact: false,
-          });
+        const signerErrorText = (): HTMLElement | null => {
+          return screen.queryByText(
+            templateEval(Config.formation.general.maximumLengthErrorText, {
+              field: Config.formation.fields.signers.label,
+              maxLen: "50",
+            }),
+            { exact: false }
+          );
         };
-        expect(signerCheckboxErrorText()).toBeInTheDocument();
-        page.selectCheckbox(`${Config.formation.fields.signers.signColumnLabel}*`);
-        expect(signerCheckboxErrorText()).not.toBeInTheDocument();
+        expect(signerErrorText()).toBeInTheDocument();
+        page.fillText("Signer 0", "Elrond");
+        expect(signerErrorText()).not.toBeInTheDocument();
+      }
+    );
+
+    it.each([...legalStructureIds])(
+      "displays inline error when name and type is missing for %s",
+      async (legalStructureId) => {
+        const page = await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { signers: [] });
+
+        await attemptApiSubmission(page);
+        const singerNameErrorType = (): HTMLElement | null => {
+          return screen.queryByText(Config.formation.fields.signers.errorInlineSignerName);
+        };
+        const signerTitleErrorType = (): HTMLElement | null => {
+          return screen.queryByText(Config.formation.fields.signers.errorInlineSignerTitle);
+        };
+        expect(singerNameErrorType()).toBeInTheDocument();
+        expect(signerTitleErrorType()).toBeInTheDocument();
+      }
+    );
+
+    it.each([...legalStructureIds])(
+      "displays inline error when signers do not fill out the type field for %s",
+      async (legalStructureId) => {
+        const page = await getPageHelper(
+          { businessPersona: "FOREIGN", legalStructureId },
+          { signers: [generateFormationSigner({ title: undefined })] }
+        );
+
+        await attemptApiSubmission(page);
+        const signerTypeErrorText = (): HTMLElement | null => {
+          return screen.queryByText(Config.formation.fields.signers.errorInlineSignerTitle);
+        };
+        expect(signerTypeErrorText()).toBeInTheDocument();
+        page.selectByText("Signer title 0", BusinessSignerTypeMap[legalType(legalStructureId)][0]);
+        expect(signerTypeErrorText()).not.toBeInTheDocument();
         await page.submitContactsStep();
-      });
+      }
+    );
 
-      it("shows inline error message for missing primary signer", async () => {
-        const page = await getPageHelper(
-          { legalStructureId },
-          {
-            signers: [
-              generateFormationSigner({ name: "", signature: true }, legalStructureId),
-              generateFormationSigner({ name: "some name", signature: true }, legalStructureId),
-            ],
-          }
-        );
+    it.each([...legalStructureIds])(
+      "displays inline error when name is missing for second signer for %s",
+      async (legalStructureId) => {
+        const page = await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, { signers: [] });
+
+        page.clickAddNewSigner();
         await attemptApiSubmission(page);
-        expect(
-          screen.getByText(Config.formation.fields.signers.errorInlineFirstSignerName)
-        ).toBeInTheDocument();
-        expect(
-          screen.queryByText(Config.formation.fields.signers.errorInlineAdditionalSignerName)
-        ).not.toBeInTheDocument();
-      });
-
-      it("shows inline error message for missing additional signer", async () => {
-        const page = await getPageHelper(
-          { legalStructureId },
-          {
-            signers: [
-              generateFormationSigner({ name: "some name", signature: true }, legalStructureId),
-              generateFormationSigner({ name: "", signature: true }, legalStructureId),
-            ],
-          }
-        );
-        await attemptApiSubmission(page);
-        expect(
-          screen.getByText(Config.formation.fields.signers.errorInlineAdditionalSignerName)
-        ).toBeInTheDocument();
-        expect(
-          screen.queryByText(Config.formation.fields.signers.errorInlineFirstSignerName)
-        ).not.toBeInTheDocument();
-      });
-    });
-
-    describe("foreign legal structures", () => {
-      describe(`for ${legalStructureId}`, () => {
-        const legalType: FormationLegalType = castPublicFilingLegalTypeToFormationType(
-          legalStructureId,
-          "FOREIGN"
-        );
-
-        it("fires validations when signers do not fill out the type field", async () => {
-          const page = await getPageHelper(
-            { businessPersona: "FOREIGN", legalStructureId },
-            { signers: [generateFormationSigner({ title: undefined })] }
-          );
-
-          await attemptApiSubmission(page);
-          const signerTypeErrorText = (): HTMLElement | null => {
-            return screen.queryByText(Config.formation.fields.signers.errorBannerSignerTitle);
-          };
-          expect(signerTypeErrorText()).toBeInTheDocument();
-          page.selectByText("Signer title 0", BusinessSignerTypeMap[legalType][0]);
-          expect(signerTypeErrorText()).not.toBeInTheDocument();
-          await page.submitContactsStep();
-        });
-
-        it("selects a signer type", async () => {
-          const page = await getPageHelper(
-            { businessPersona: "FOREIGN", legalStructureId },
-            { signers: undefined }
-          );
-          const signers = [
-            generateFormationSigner({ signature: true }, legalType),
-            generateFormationSigner({ signature: true }, legalType),
-          ];
-          page.fillText("Signer 0", signers[0].name);
-          page.selectByText("Signer title 0", signers[0].title);
-          page.checkSignerBox(0, "signers");
-
-          page.clickAddNewSigner();
-          page.fillText("Signer 1", signers[1].name);
-          page.selectByText("Signer title 1", signers[1].title);
-          page.checkSignerBox(1, "signers");
-
-          await page.submitContactsStep();
-          expect(currentBusiness().formationData.formationFormData.signers).toEqual(signers);
-        });
-      });
-    });
+        const additionalSignerNameErrorText = (): HTMLElement | null => {
+          return screen.queryByText(Config.formation.fields.signers.errorInlineAdditionalSignerName);
+        };
+        expect(additionalSignerNameErrorText()).toBeInTheDocument();
+      }
+    );
   });
 
   const attemptApiSubmission = async (page: FormationPageHelpers): Promise<void> => {

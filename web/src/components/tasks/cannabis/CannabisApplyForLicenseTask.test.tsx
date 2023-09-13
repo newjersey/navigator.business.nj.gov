@@ -4,7 +4,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { Task } from "@/lib/types/types";
 import { generateTask, generateTaskLink } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
   currentBusiness,
@@ -28,7 +28,7 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 const renderPage = (task: Task, business?: Business): void => {
   render(
-    withAuthAlert(
+    withNeedsAccountContext(
       <WithStatefulUserData
         initialUserData={business ? generateUserDataForBusiness(business) : generateUserData({})}
       >

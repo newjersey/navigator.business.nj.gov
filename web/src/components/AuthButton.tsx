@@ -3,8 +3,8 @@ import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSignOut } from "@/lib/auth/signinHelper";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 
@@ -15,6 +15,7 @@ interface Props {
 export const AuthButton = (props?: Props): ReactElement => {
   const { state, dispatch } = useContext(AuthContext);
   const router = useRouter();
+  const { Config } = useConfig();
 
   const loginButton = (): ReactElement => {
     return (

@@ -14,16 +14,16 @@ export const inputManipulator = (initial: string): InputManipulator => {
   return {
     value: initial,
     stripPunctuation: function (): InputManipulator {
-      this.value = this.value.replace(/[!"#$%()*+,./:;<=>?@^_`{}~-]/g, "");
+      this.value = this.value.replaceAll(/[!"#$%()*+,./:;<=>?@^_`{}~-]/g, "");
       return this;
     },
     trimPunctuation: function (): InputManipulator {
       const startsOrEndsWithPunctuation = /^[\s!"#$%()*+,.:;<=-_`{}~]+|[\s!"#$%()*+,.:;<=-_`{}~]+$/g;
-      this.value = this.value.replace(startsOrEndsWithPunctuation, "");
+      this.value = this.value.replaceAll(startsOrEndsWithPunctuation, "");
       return this;
     },
     stripWhitespace: function (): InputManipulator {
-      this.value = this.value.replace(/\s+/g, "");
+      this.value = this.value.replaceAll(/\s+/g, "");
       return this;
     },
     removeArticles: function (): InputManipulator {
@@ -58,5 +58,5 @@ export const inputManipulator = (initial: string): InputManipulator => {
 
 const removeWords = (value: string, words: string[]): string => {
   const regexString = words.join("|");
-  return value.replace(new RegExp(`\\b(${regexString})\\b`, "gi"), " ").replace(/\s{2,}/g, " ");
+  return value.replaceAll(new RegExp(`\\b(${regexString})\\b`, "gi"), " ").replaceAll(/\s{2,}/g, " ");
 };

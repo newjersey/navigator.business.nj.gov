@@ -11,13 +11,36 @@ export const getNavBarBusinessTitle = (
     return Config.navigationDefaults.navBarGuestText;
   }
 
-  const { businessName, tradeName, legalStructureId, industryId, businessPersona } = business.profileData;
+  const {
+    businessName,
+    tradeName,
+    legalStructureId,
+    industryId,
+    businessPersona,
+    foreignBusinessType,
+    needsNexusDbaName,
+    nexusDbaName,
+  } = business.profileData;
+
+  const isRemoteWorkerOrSeller = (): boolean => {
+    return foreignBusinessType === "REMOTE_SELLER" || foreignBusinessType === "REMOTE_WORKER";
+  };
+
   const determineName = (): string => {
+    if (needsNexusDbaName) {
+      if (nexusDbaName === "") {
+        return Config.navigationDefaults.navBarUnnamedDbaBusinessText;
+      }
+      if (nexusDbaName !== "") {
+        return nexusDbaName;
+      }
+    }
+
     if (legalStructureId) {
       return LookupLegalStructureById(legalStructureId).hasTradeName ? tradeName : businessName;
-    } else {
-      return businessName || tradeName || "";
     }
+
+    return businessName || tradeName || "";
   };
 
   const name = determineName();
@@ -31,6 +54,10 @@ export const getNavBarBusinessTitle = (
     } else {
       return Config.navigationDefaults.navBarUnnamedOwnedBusinessText;
     }
+  }
+
+  if (businessPersona === "FOREIGN" && isRemoteWorkerOrSeller()) {
+    return Config.navigationDefaults.navBarUnnamedForeignRemoteSellerWorkerText;
   }
 
   if (legalStructureId && industryId) {

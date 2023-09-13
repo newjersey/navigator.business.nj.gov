@@ -1,8 +1,9 @@
 ---
-slug: surety-bond
 header: Surety Bond
+slug: surety-bond
 ---
+A surety bond is a financially-backed promise by one party that the second party will provide services to a customer.
 
-A surety bond is a contract giving a financial guarantee to the customer that the contractor will complete the agreed upon tasks and act in accordance with the terms established by the bond.
-
-The customer can make a claim to recover losses if the contractor fails to fulfill the task. If the claim is valid, the insurance company will pay reparation up to the bond amount and will expect the contractor to reimburse them for the claim paid.
+The customer can make a claim to recover losses under one or both of the following conditions:
+* The contractor doesn't complete the tasks
+* The contractor does not follow the terms stated in the bond

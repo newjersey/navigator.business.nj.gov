@@ -244,11 +244,9 @@ export const BusinessFormation = (props: Props): ReactElement => {
     if (isForeign) {
       return Config.formation.intro.foreign;
     }
-
     if (props.searchOnly) {
       return props.task?.contentMd || "";
     }
-
     return Config.formation.intro.default;
   };
 

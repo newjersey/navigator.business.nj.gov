@@ -4,7 +4,6 @@
 import {
   clickDeferredSaveButton,
   completeBusinessStructureTask,
-  waitForUserDataMountUpdate,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import {
   completeExistingBusinessOnboarding,
@@ -80,7 +79,6 @@ describe("Dashboard [feature] [all] [group2]", () => {
           industry,
         });
 
-        waitForUserDataMountUpdate();
         completeBusinessStructureTask({ legalStructureId });
 
         // answer deferred question to get local-requirements task
@@ -101,6 +99,7 @@ describe("Dashboard [feature] [all] [group2]", () => {
 
         // tasks screen
         cy.get('[data-task="register-trade-name"]').click({ force: true });
+        cy.wait(1000);
         cy.get('[data-legal-structure="general-partnership"]').should("not.exist");
         cy.get('[data-task-id="register-trade-name"]').should("exist");
 

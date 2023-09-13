@@ -1,6 +1,9 @@
+import CannabisLocationAlert from "@/lib/cms/editors/cannabisLocationAlert";
 import ContextEditor from "@/lib/cms/editors/context-info";
+import GreenBox from "@/lib/cms/editors/greenBox";
 import IconWidgetEditor from "@/lib/cms/editors/icon";
 import AlertEditor from "@/lib/cms/editors/infoAlert";
+import Note from "@/lib/cms/editors/note";
 import { NoSpaceControl } from "@/lib/cms/fields/nospacefield";
 import { SlugControl } from "@/lib/cms/fields/slugfield";
 import { applyTheme } from "@/lib/cms/helpers/applyTheme";
@@ -33,6 +36,7 @@ import TaskPreview from "@/lib/cms/previews/TaskPreview";
 import TaxInputPreview from "@/lib/cms/previews/TaxInputPreview";
 import { useMountEffect } from "@/lib/utils/helpers";
 
+import AccountSetupPreview from "@/lib/cms/previews/AccountSetupPreview";
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
 import TaxAccessModalPreview from "@/lib/cms/previews/TaxAccessModalPreview";
 import { GetStaticPropsResult } from "next";
@@ -62,6 +66,12 @@ const CMS = dynamic(
       CMS.registerEditorComponent(ContextEditor);
       // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(AlertEditor);
+      // @ts-expect-error: No type definition available
+      CMS.registerEditorComponent(Note);
+      // @ts-expect-error: No type definition available
+      CMS.registerEditorComponent(CannabisLocationAlert);
+      // @ts-expect-error: No type definition available
+      CMS.registerEditorComponent(GreenBox);
       // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(IconWidgetEditor);
 
@@ -116,6 +126,7 @@ const CMS = dynamic(
       registerPreview(CMS, "dashboard-config-calendar", DashboardCalendarPreview);
       registerPreview(CMS, "dashboard-config-modals", DashboardModalsPreview);
       registerPreview(CMS, "dashboard-config-tabs", DashboardTabsPreview);
+      registerPreview(CMS, "account-setup-page", AccountSetupPreview);
 
       registerPreview(CMS, "deferred-location-config", DeferredLocationPreview);
 

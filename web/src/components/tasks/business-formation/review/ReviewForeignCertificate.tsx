@@ -2,7 +2,7 @@ import { ReviewNotEntered } from "@/components/tasks/business-formation/review/s
 import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { InputFile } from "@businessnjgovnavigator/shared/formationData";
-import { ReactElement } from "rehype-react/lib";
+import { ReactElement } from "react";
 
 interface Props {
   foreignGoodStandingFile: InputFile | undefined;

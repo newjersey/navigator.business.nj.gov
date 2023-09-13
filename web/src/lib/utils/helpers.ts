@@ -45,6 +45,8 @@ export const useMountEffectWhenDefined = (fun: () => void, thingToBeDefined: unk
 
 export const useScrollToPathAnchor = (): void => {
   useEffect(() => {
+    if (window.location.pathname === "/mgmt/cms") return;
+
     const path = window.location.hash;
     if (path && path.includes("#")) {
       const id = path.replace("#", "");
@@ -67,7 +69,7 @@ export const templateEval = (template: string, args: Record<string, string>): st
   let newTemplate = template;
   for (const key of Object.keys(args)) {
     const pattern = `\\\${${key}}`;
-    newTemplate = newTemplate.replace(new RegExp(pattern, "g"), args[key]);
+    newTemplate = newTemplate.replaceAll(new RegExp(pattern, "g"), args[key]);
   }
   return newTemplate;
 };
@@ -76,7 +78,7 @@ export const templateEvalWithExtraSpaceRemoval = (template: string, args: Record
   let newTemplate = template;
   for (const key of Object.keys(args)) {
     const pattern = `\\\${${key}} `;
-    newTemplate = newTemplate.replace(new RegExp(pattern, "g"), args[key]);
+    newTemplate = newTemplate.replaceAll(new RegExp(pattern, "g"), args[key]);
   }
   return newTemplate;
 };
@@ -123,13 +125,13 @@ export const OnboardingStatusLookup = (
   const config = configOverrides ?? getMergedConfig();
   return {
     SUCCESS: {
-      body: config.profileDefaults.successTextBody,
-      header: config.profileDefaults.successTextHeader,
+      body: config.profileDefaults.default.successTextBody,
+      header: config.profileDefaults.default.successTextHeader,
       variant: "success",
     },
     ERROR: {
-      body: config.profileDefaults.errorTextBody,
-      header: config.profileDefaults.errorTextHeader,
+      body: config.profileDefaults.default.errorTextBody,
+      header: config.profileDefaults.default.errorTextHeader,
       variant: "error",
     },
   };
@@ -217,4 +219,18 @@ export const mapMunicipalityDetailToMunicipality = (municipalityDetail: Municipa
 
 export const isForeignCorporation = (legalStructure: FormationLegalType): boolean => {
   return ["foreign-c-corporation", "foreign-s-corporation"].includes(legalStructure);
+};
+
+export const getConfigFieldByLegalStructure = (
+  legalType: FormationLegalType
+): "directors" | "trustees" | "members" => {
+  switch (legalType) {
+    case "c-corporation":
+    case "s-corporation":
+      return "directors";
+    case "nonprofit":
+      return "trustees";
+    default:
+      return "members";
+  }
 };

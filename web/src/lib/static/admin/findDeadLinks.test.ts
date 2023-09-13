@@ -31,7 +31,15 @@ describe("findDeadLinks", () => {
       // @ts-ignore
       .mockReturnValueOnce(["display-subfolder-item1.md", "display-subfolder-item2.ts"])
       // @ts-ignore
-      .mockReturnValueOnce(["config.json"]);
+      .mockReturnValueOnce(["config.json"])
+      // @ts-ignore
+      .mockReturnValueOnce(["fundings.md"])
+      // @ts-ignore
+      .mockReturnValueOnce(["certifications.md"])
+      // @ts-ignore
+      .mockReturnValueOnce(["licenses.md"])
+      // @ts-ignore
+      .mockReturnValueOnce(["licenseTasks.md"]);
 
     const task1 = "Task 1 contents";
     const task2 = "Task 2 contents with `contextual info|info1` in it";
@@ -48,6 +56,10 @@ describe("findDeadLinks", () => {
     const display1 = "Display contents with `contextual info|info3` in it";
     const displaySubfolderItem1 = "Display contents with `contextual info|info4` in it";
     const config = '{"testheader":"test"}';
+    const fundings = "Funding Content";
+    const certifications = "Certification Content";
+    const licenses = "License Content";
+    const licenseTasks = "LicenseTask Content";
 
     mockedFs.readFileSync
       .mockReturnValueOnce(industry1)
@@ -63,7 +75,11 @@ describe("findDeadLinks", () => {
       .mockReturnValueOnce(deadInfo)
       .mockReturnValueOnce(display1)
       .mockReturnValueOnce(displaySubfolderItem1)
-      .mockReturnValueOnce(config);
+      .mockReturnValueOnce(config)
+      .mockReturnValueOnce(fundings)
+      .mockReturnValueOnce(certifications)
+      .mockReturnValueOnce(licenses)
+      .mockReturnValueOnce(licenseTasks);
   });
 
   describe("findDeadTasks", () => {
@@ -88,9 +104,15 @@ describe("findDeadLinks", () => {
         "/onboarding?page=1": [],
         "/onboarding?page=2": [],
         "/onboarding?page=3": [],
-        "/onboarding?page=4": [],
         "/profile": [],
         "/dashboard": [],
+        "/welcome": [],
+        "/unsupported": [],
+        "/tasks/licenseTasks": [],
+        "/licenses/licenses-renewal": [],
+        "/licenses/licenses-expiration": [],
+        "/funding/fundings": [],
+        "/certification/certifications": [],
       });
     });
   });

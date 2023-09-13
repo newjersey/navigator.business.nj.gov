@@ -363,15 +363,15 @@ describe("<NexusFormationFlow />", () => {
 
       describe("when in guest mode", () => {
         const guestModeNextButtonText = `Register & ${Config.formation.general.initialNextButtonText}`;
-        let setRegistrationModalIsVisible: jest.Mock;
+        let setShowNeedsAccountModal: jest.Mock;
 
         beforeEach(() => {
-          setRegistrationModalIsVisible = jest.fn();
+          setShowNeedsAccountModal = jest.fn();
           page = preparePage({
             business: initialBusiness,
             displayContent,
             isAuthenticated: IsAuthenticated.FALSE,
-            setRegistrationModalIsVisible,
+            setShowNeedsAccountModal,
           });
         });
 
@@ -381,11 +381,11 @@ describe("<NexusFormationFlow />", () => {
           expect(screen.getByText(guestModeNextButtonText)).toBeInTheDocument();
         });
 
-        it("shows registration modal when clicking continue button from step one", async () => {
+        it("shows Needs Account modal when clicking continue button from step one", async () => {
           fillText("Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
           fireEvent.click(screen.getByText(guestModeNextButtonText));
-          expect(setRegistrationModalIsVisible).toHaveBeenCalled();
+          expect(setShowNeedsAccountModal).toHaveBeenCalled();
           expect(screen.queryByTestId("business-step")).not.toBeInTheDocument();
         });
       });

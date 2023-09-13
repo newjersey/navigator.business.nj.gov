@@ -9,6 +9,7 @@ export interface Industry {
   readonly additionalSearchTerms?: string;
   readonly defaultSectorId?: string;
   readonly roadmapSteps: AddOn[];
+  readonly nonEssentialQuestionsIds: string[];
   readonly modifications?: TaskModification[];
   readonly naicsCodes?: string;
   readonly isEnabled: boolean;
@@ -55,6 +56,7 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
       description: "",
       canHavePermanentLocation: true,
       roadmapSteps: [],
+      nonEssentialQuestionsIds: [],
       naicsCodes: "",
       isEnabled: false,
       industryOnboardingQuestions: {

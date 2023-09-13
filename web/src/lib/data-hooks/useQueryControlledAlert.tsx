@@ -17,7 +17,7 @@ interface QueryControlledAlertConfig {
 
 export const useQueryControlledAlert = (config: QueryControlledAlertConfig): ReactElement => {
   const router = useRouter();
-  const [registrationAlertIsVisible, setRegistrationAlertIsVisible] = useState<boolean>(false);
+  const [alertIsVisible, setAlertIsVisible] = useState<boolean>(false);
   const effectOccurred = useRef<boolean>(false);
 
   const redirect = useCallback(() => {
@@ -31,22 +31,22 @@ export const useQueryControlledAlert = (config: QueryControlledAlertConfig): Rea
     if (router.query[config.queryKey] === "true") {
       if (config.delayInMilliseconds) {
         setTimeout(() => {
-          return setRegistrationAlertIsVisible(true);
+          return setAlertIsVisible(true);
         }, config.delayInMilliseconds);
       } else {
-        setRegistrationAlertIsVisible(true);
+        setAlertIsVisible(true);
       }
       redirect();
       effectOccurred.current = true;
     }
-  }, [router, setRegistrationAlertIsVisible, config.queryKey, config.delayInMilliseconds, redirect]);
+  }, [router, setAlertIsVisible, config.queryKey, config.delayInMilliseconds, redirect]);
 
   return (
     <SnackbarAlert
       variant={config.variant}
-      isOpen={registrationAlertIsVisible}
+      isOpen={alertIsVisible}
       close={(): void => {
-        setRegistrationAlertIsVisible(false);
+        setAlertIsVisible(false);
         redirect();
       }}
       heading={config.headerText}

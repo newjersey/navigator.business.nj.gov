@@ -4,7 +4,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { Task } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateTask } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   currentBusiness,
@@ -50,7 +50,7 @@ describe("<EinTask />", () => {
 
     const renderPage = (): void => {
       render(
-        withAuthAlert(
+        withNeedsAccountContext(
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <EinTask task={task} />
           </WithStatefulUserData>,
@@ -123,7 +123,7 @@ describe("<EinTask />", () => {
 
     const renderPage = (): void => {
       render(
-        withAuthAlert(
+        withNeedsAccountContext(
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <EinTask task={task} />
           </WithStatefulUserData>,
@@ -176,16 +176,16 @@ describe("<EinTask />", () => {
 
   describe("guest mode", () => {
     let initialBusiness: Business;
-    const setRegistrationModalIsVisible = jest.fn();
+    const setShowNeedsAccountModal = jest.fn();
 
     const renderPage = (): void => {
       render(
-        withAuthAlert(
+        withNeedsAccountContext(
           <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
             <EinTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,
-          { registrationModalIsVisible: false, setRegistrationModalIsVisible }
+          { showNeedsAccountModal: false, setShowNeedsAccountModal }
         )
       );
     };
@@ -197,19 +197,21 @@ describe("<EinTask />", () => {
       });
     });
 
-    it("prepends register to the Save button", async () => {
-      renderPage();
-      expect(screen.getByText(`Register & ${Config.ein.saveButtonText}`)).toBeInTheDocument();
-    });
-
-    it("opens registration modal on save button click", async () => {
+    it("opens Needs Account modal when the field is edited", async () => {
       renderPage();
       fireEvent.change(screen.getByLabelText("Save your EIN"), {
         target: { value: "123456789" },
       });
-      fireEvent.click(screen.getByText(`Register & ${Config.ein.saveButtonText}`));
       await waitFor(() => {
-        return expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+        return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
+      });
+    });
+
+    it("opens Needs Account modal when the save button is clicked", async () => {
+      renderPage();
+      fireEvent.click(screen.getByText(Config.ein.saveButtonText));
+      await waitFor(() => {
+        return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
       });
     });
   });

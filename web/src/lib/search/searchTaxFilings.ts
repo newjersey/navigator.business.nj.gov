@@ -16,11 +16,14 @@ export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
     const rates = filing.taxRates?.toLowerCase();
     const name = filing.name.toLowerCase();
     const cta = filing.callToActionText?.toLowerCase();
+    const ctaLink = filing.callToActionLink?.toLowerCase();
     const agency = filing.agency?.toLowerCase();
     const method = filing.filingMethod?.toLowerCase();
     const id = filing.id?.toLowerCase();
     const info = filing.additionalInfo?.toLowerCase();
     const frequency = filing.frequency?.toLowerCase();
+    const filename = filing.filename.toLowerCase();
+    const urlSlug = filing.urlSlug.toLowerCase();
 
     const blockTexts = [content];
     if (details) {
@@ -31,12 +34,15 @@ export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
     }
     const labelledTexts = [
       { content: cta, label: "CTA Text" },
+      { content: ctaLink, label: "CTA Link" },
       { content: name, label: "Task name" },
       { content: agency, label: "Agency" },
       { content: method, label: "Filing Method" },
       { content: id, label: "ID" },
       { content: info, label: "Additional Info" },
       { content: frequency, label: "Frequency" },
+      { content: filename, label: "Filename" },
+      { content: urlSlug, label: "Url Slug" },
     ];
 
     match = findMatchInBlock(blockTexts, term, match);

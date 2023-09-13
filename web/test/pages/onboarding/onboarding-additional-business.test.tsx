@@ -119,10 +119,6 @@ describe("onboarding - additional business", () => {
             municipality: undefined,
             isNonprofitOnboardingRadio: false,
           },
-          preferences: {
-            ...emptyBusiness.preferences,
-            visibleSidebarCards: ["welcome", "task-progress"],
-          },
         },
       },
     };

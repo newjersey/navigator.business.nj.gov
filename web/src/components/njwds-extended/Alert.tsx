@@ -1,16 +1,23 @@
 import { ReactElement, ReactNode } from "react";
 
-interface Props {
+export interface AlertProps {
   variant: AlertVariant;
-  children: ReactNode;
   noIcon?: boolean;
   heading?: string;
   rounded?: boolean;
   dataTestid?: string;
   className?: string;
+  borderRight?: boolean;
+  borderSmall?: boolean;
 }
 
-export type AlertVariant = "info" | "success" | "warning" | "error";
+interface Props extends AlertProps {
+  children: ReactNode;
+}
+
+export const AlertVariants = ["info", "success", "warning", "error", "note"] as const;
+
+export type AlertVariant = (typeof AlertVariants)[number];
 
 export const Alert = (props: Props): ReactElement => {
   const { variant, children, noIcon, heading, rounded, dataTestid } = props;
@@ -19,7 +26,17 @@ export const Alert = (props: Props): ReactElement => {
   const roundedClass = rounded ? " radius-md" : "";
   const alertRole = variant === "error" ? { role: "alert" } : {};
   const defaultClassNames = "usa-alert margin-y-2 usa-alert--slim";
-  const className = [defaultClassNames, roundedClass, variantClass, noIconClass, props.className ?? ""]
+  const borderRight = props.borderRight ? "alert-border-right" : "";
+  const borderSmall = props.borderSmall ? "alert-border-small" : "";
+  const className = [
+    defaultClassNames,
+    roundedClass,
+    variantClass,
+    borderRight,
+    borderSmall,
+    noIconClass,
+    props.className ?? "",
+  ]
     .map((i) => {
       return i?.trim();
     })

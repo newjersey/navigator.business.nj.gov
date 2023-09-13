@@ -45,7 +45,7 @@ export const ProfileTabNav = (props: Props): ReactElement => {
   return (
     <div className="width-100 font-body-md">
       <div className="bg-base-lightest padding-y-2 padding-x-3 border-2px border-base-lighter">
-        <Content>{Config.profileDefaults.pageTitle}</Content>
+        <Content>{Config.profileDefaults.default.pageTitle}</Content>
       </div>
 
       {shouldShowInfo() && <ProfileTab {...props} tab="info" />}

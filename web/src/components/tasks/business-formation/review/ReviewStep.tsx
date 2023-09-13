@@ -5,8 +5,10 @@ import { ReviewBillingContact } from "@/components/tasks/business-formation/revi
 import { ReviewBillingServices } from "@/components/tasks/business-formation/review/ReviewBillingServices";
 import { ReviewBusinessSuffixAndStartDate } from "@/components/tasks/business-formation/review/ReviewBusinessSuffixAndStartDate";
 import { ReviewForeignCertificate } from "@/components/tasks/business-formation/review/ReviewForeignCertificate";
+import { ReviewIsVeteranNonprofit } from "@/components/tasks/business-formation/review/ReviewIsVeteranNonprofit";
 import { ReviewMainBusinessLocation } from "@/components/tasks/business-formation/review/ReviewMainBusinessLocation";
 import { ReviewMembers } from "@/components/tasks/business-formation/review/ReviewMembers";
+import { ReviewNonprofitProvisions } from "@/components/tasks/business-formation/review/ReviewNonprofitProvisions";
 import { ReviewPartnership } from "@/components/tasks/business-formation/review/ReviewPartnership";
 import { ReviewProvisions } from "@/components/tasks/business-formation/review/ReviewProvisions";
 import { ReviewRegisteredAgent } from "@/components/tasks/business-formation/review/ReviewRegisteredAgent";
@@ -32,16 +34,39 @@ export const ReviewStep = (): ReactElement => {
   const hasPurpose = !!state.formationFormData.businessPurpose;
   const hasMembers = (state.formationFormData.members?.length ?? 0) > 0;
   const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
+  const isNonProfit = state.formationFormData.legalType === "nonprofit";
+
+  const getProvisionsAndPurposeSections = (): ReactElement => {
+    return (
+      <>
+        {hasProvisions && <ReviewProvisions />}
+        {hasPurpose && (
+          <ReviewSubSection header={Config.formation.fields.businessPurpose.label}>
+            <ReviewText fieldName={"businessPurpose"} isExpandable={true} />
+          </ReviewSubSection>
+        )}
+      </>
+    );
+  };
+
   return (
     <>
       <div data-testid="review-step">
         <ReviewSection stepName={"Business"} testId="edit-business-name-step">
           <BusinessNameAndLegalStructure isReviewStep />
           <ReviewBusinessSuffixAndStartDate />
+          {isNonProfit && <ReviewIsVeteranNonprofit value={state.formationFormData.isVeteranNonprofit} />}
           {isForeignCorporation(state.formationFormData.legalType) && (
             <>
+              <hr className="margin-y-205" />
               <ReviewWillPracticeLaw willPracticeLaw={state.formationFormData.willPracticeLaw} />
               <ReviewForeignCertificate foreignGoodStandingFile={state.foreignGoodStandingFile} />
+            </>
+          )}
+          {isNonProfit && (
+            <>
+              <ReviewNonprofitProvisions />
+              {getProvisionsAndPurposeSections()}
             </>
           )}
           {shouldDisplayAddressSection(state.formationFormData) && <ReviewMainBusinessLocation />}
@@ -59,17 +84,12 @@ export const ReviewStep = (): ReactElement => {
               </ReviewSubSection>
             </>
           )}
-          {hasProvisions && <ReviewProvisions />}
-          {hasPurpose && (
-            <ReviewSubSection header={Config.formation.fields.businessPurpose.label}>
-              <ReviewText fieldName={"businessPurpose"} isExpandable={true} />
-            </ReviewSubSection>
-          )}
+          {!isNonProfit && getProvisionsAndPurposeSections()}
         </ReviewSection>
         <ReviewSection stepName={"Contacts"} testId="edit-contacts-step">
           <ReviewRegisteredAgent />
-          {(isCorp || (!isLP && hasMembers)) && <ReviewMembers />}
-          {<ReviewSignatures />}
+          {(isNonProfit || isCorp || (!isLP && hasMembers)) && <ReviewMembers />}
+          <ReviewSignatures />
         </ReviewSection>
         <ReviewSection stepName={"Billing"} testId="edit-billing-step">
           <ReviewBillingContact />

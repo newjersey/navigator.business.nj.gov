@@ -34,7 +34,8 @@
     "unicorn/prefer-module": "off",
     "unicorn/no-array-reduce": "off",
     "unicorn/switch-case-braces": "off",
-    "unicorn/new-for-builtins": "off"
+    "unicorn/new-for-builtins": "off",
+    "unicorn/prefer-at": "off"
   },
   "overrides": [
     {
@@ -62,7 +63,8 @@
         "unicorn/numeric-separators-style": "off",
         "unicorn/prefer-module": "off",
         "unicorn/no-array-reduce": "off",
-        "unicorn/switch-case-braces": "off"
+        "unicorn/switch-case-braces": "off",
+        "unicorn/prefer-at": "off"
       }
     },
     {
@@ -81,7 +83,8 @@
         "unicorn/numeric-separators-style": "off",
         "unicorn/prefer-module": "off",
         "unicorn/no-array-reduce": "off",
-        "unicorn/switch-case-braces": "off"
+        "unicorn/switch-case-braces": "off",
+        "unicorn/prefer-at": "off"
       }
     }
   ]

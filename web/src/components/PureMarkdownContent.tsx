@@ -35,19 +35,18 @@ function customRemarkPlugin():
   return (tree: any) => {
     visit(tree, (node) => {
       if (node.type === "containerDirective") {
-        if (node.name === "infoAlert") {
-          const data = node.data || (node.data = {});
-          data.hName = "infoAlert";
-          data.hProperties = {
-            header: node.attributes.header,
-          };
-        }
-        if (node.name === "icon") {
-          const data = node.data || (node.data = {});
-          data.hName = "icon";
-          data.hProperties = {
-            type: node.attributes.type,
-          };
+        const data = node.data || (node.data = {});
+        data.hName = node.name;
+        switch (node.name) {
+          case "cannabisLocationAlert":
+          case "greenBox":
+          case "infoAlert":
+          case "note":
+            data.hProperties = { header: node.attributes.header };
+            break;
+          case "icon":
+            data.hProperties = { type: node.attributes.type };
+            break;
         }
       } else {
         return;

@@ -66,7 +66,6 @@ export const FormationDateModal = (props: Props): ReactElement => {
             flow: "STARTING",
           },
           setProfileData,
-          setUser: (): void => {},
           onBack: (): void => {},
         }}
       >
@@ -98,6 +97,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
               disabled={false}
               futureAllowed={true}
               errorTextOverride={Config.formationDateModal.dateOfFormationErrorText}
+              inputWidth="full"
             />
           </WithErrorBar>
 

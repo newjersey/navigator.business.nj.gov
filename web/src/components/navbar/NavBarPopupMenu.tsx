@@ -1,10 +1,11 @@
 import { ButtonIcon } from "@/components/ButtonIcon";
 import { NavMenuItem } from "@/components/navbar/NavMenuItem";
 import { Icon } from "@/components/njwds/Icon";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { AuthContext } from "@/contexts/authContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSelfRegister, onSignOut } from "@/lib/auth/signinHelper";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getBusinessIconColor } from "@/lib/domain-logic/getBusinessIconColor";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
@@ -13,7 +14,6 @@ import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import { switchCurrentBusiness } from "@/lib/domain-logic/switchCurrentBusiness";
 import analytics from "@/lib/utils/analytics";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { MenuItem, MenuList } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
@@ -35,7 +35,8 @@ export interface Props {
 export const NavBarPopupMenu = (props: Props): ReactElement => {
   const { userData, updateQueue } = useUserData();
   const { state, dispatch } = useContext(AuthContext);
-  const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
+  const { Config } = useConfig();
+  const { setRegistrationStatus } = useContext(NeedsAccountContext);
 
   const router = useRouter();
 
@@ -112,8 +113,8 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
   const registerMenuItem = (): ReactElement => {
     return NavMenuItem({
       onClick: (): void => {
-        analytics.event.guest_menu.click.go_to_myNJ_registration();
-        onSelfRegister(router, updateQueue, userData, setRegistrationAlertStatus);
+        analytics.event.guest_menu.click.go_to_NavigatorAccount_setup();
+        onSelfRegister({ router, updateQueue, userData, setRegistrationStatus });
       },
       icon: <ButtonIcon svgFilename="profile" sizePx="25px" />,
       itemText: Config.navigationDefaults.navBarGuestRegistrationText,

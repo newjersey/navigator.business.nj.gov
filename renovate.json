@@ -16,6 +16,10 @@
       "automergeStrategy": "rebase"
     },
     {
+      "matchPackageNames": ["@aws-amplify/core", "@aws-amplify/auth"],
+      "automerge": false
+    },
+    {
       "matchPackagePrefixes": ["cypress"],
       "groupName": "cypress"
     },

@@ -38,7 +38,7 @@ export const SnackbarAlert = (props: Props): ReactElement => {
             rounded
             dataTestid={props.dataTestid}
           >
-            <div className="padding-top-05">{props.children}</div>
+            <div>{props.children}</div>
           </Alert>
           {props.closeIcon && (
             <IconButton

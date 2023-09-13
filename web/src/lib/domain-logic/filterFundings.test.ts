@@ -360,8 +360,26 @@ describe("filterFundings", () => {
     const funding5 = generateFunding({ certifications: ["small-business-enterprise"] });
     const funding6 = generateFunding({ certifications: ["disadvantaged-business-enterprise"] });
     const funding7 = generateFunding({ certifications: ["emerging-small-business-enterprise"] });
+    const funding8 = generateFunding({ certifications: undefined });
+    const funding9 = generateFunding({ certifications: null });
 
     const listOfFundingTypes = [funding1, funding2, funding3, funding4, funding5, funding6, funding7];
+
+    it("returns an funding when certifications is null or undefined", () => {
+      const business = generateBusiness({
+        profileData: generateProfileData({
+          ownershipTypeIds: ["woman-owned", "veteran-owned"],
+          homeBasedBusiness: false,
+          sectorId: undefined,
+          existingEmployees: undefined,
+          municipality: undefined,
+        }),
+      });
+
+      const result = filterFundings([funding8, funding9], business);
+      expect(result.length).toEqual(2);
+      expect(result).toEqual(expect.arrayContaining([funding8, funding9]));
+    });
 
     it("does not return ownership types funding's when applicable ownership types do not match", () => {
       const business = generateBusiness({

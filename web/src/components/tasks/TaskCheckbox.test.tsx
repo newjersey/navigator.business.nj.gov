@@ -1,6 +1,6 @@
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -15,11 +15,11 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("<TaskCheckbox />", () => {
-  let setRegistrationModalIsVisible: jest.Mock;
+  let setShowNeedsAccountModal: jest.Mock;
 
   beforeEach(() => {
     jest.resetAllMocks();
-    setRegistrationModalIsVisible = jest.fn();
+    setShowNeedsAccountModal = jest.fn();
     setupStatefulUserDataContext();
   });
 
@@ -33,7 +33,7 @@ describe("<TaskCheckbox />", () => {
     isAuthenticated?: IsAuthenticated;
   }): void => {
     render(
-      withAuthAlert(
+      withNeedsAccountContext(
         <WithStatefulUserData
           initialUserData={
             initialBusiness ? generateUserDataForBusiness(initialBusiness) : generateUserData({})
@@ -42,7 +42,7 @@ describe("<TaskCheckbox />", () => {
           <TaskCheckbox checklistItemId={checklistItemId} />
         </WithStatefulUserData>,
         isAuthenticated ?? IsAuthenticated.TRUE,
-        { registrationModalIsVisible: false, setRegistrationModalIsVisible }
+        { showNeedsAccountModal: false, setShowNeedsAccountModal }
       )
     );
   };
@@ -74,12 +74,12 @@ describe("<TaskCheckbox />", () => {
     expect(currentBusiness().taskItemChecklist["some-id"]).toBe(true);
   });
 
-  it("opens registration modal when guest mode user tries to change state", () => {
+  it("opens Needs Account modal when guest mode user tries to change state", () => {
     renderTaskCheckbox({
       checklistItemId: "some-id",
       isAuthenticated: IsAuthenticated.FALSE,
     });
     fireEvent.click(screen.getByRole("checkbox"));
-    expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+    expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
   });
 });

@@ -41,7 +41,13 @@ export const generateFormationUSAddress = (overrides: Partial<FormationAddress>)
     addressCity: `some-address-city-${randomInt()}`,
     addressState: randomElementFromArray(
       states.filter((state) => {
-        return state.shortCode !== "NJ";
+        return (
+          state.shortCode !== "NJ" &&
+          state.shortCode !== "AS" &&
+          state.shortCode !== "VI" &&
+          state.shortCode !== "Outside of the USA" &&
+          state.shortCode !== "GU"
+        );
       })
     ),
     addressCountry: "US",
@@ -176,6 +182,7 @@ export const generateFormationFormData = (
   const legalStructureId = options?.legalStructureId ?? randomFormationLegalType();
   const isForeign = legalStructureId.includes(foreignLegalTypePrefix);
   const isCorp = corpLegalStructures.includes(legalStructureId);
+  const isNonprofit = legalStructureId === "nonprofit";
   const usesIncorporation = incorporationLegalStructures.includes(legalStructureId);
   let businessAddress = generateFormationNJAddress({});
   if (isForeign) {
@@ -232,9 +239,19 @@ export const generateFormationFormData = (
     getDistributionTerms: `some-getDistributionTerms-text-${randomInt()}`,
     canMakeDistribution: !!(randomInt() % 2),
     makeDistributionTerms: `some-makeDistributionTerms-text-${randomInt()}`,
+    hasNonprofitBoardMembers: !!(randomInt() % 2),
+    nonprofitBoardMemberQualificationsSpecified: randomInt() % 2 ? "IN_BYLAWS" : "IN_FORM",
+    nonprofitBoardMemberQualificationsTerms: `some-nonprofitBoardMemberQualificationsTerms-text-${randomInt()}`,
+    nonprofitBoardMemberRightsSpecified: randomInt() % 2 ? "IN_BYLAWS" : "IN_FORM",
+    nonprofitBoardMemberRightsTerms: `some-nonprofitBoardMemberRightsTerms-text-${randomInt()}`,
+    nonprofitTrusteesMethodSpecified: randomInt() % 2 ? "IN_BYLAWS" : "IN_FORM",
+    nonprofitTrusteesMethodTerms: `some-nonprofitTrusteesMethodTerms-text-${randomInt()}`,
+    nonprofitAssetDistributionSpecified: randomInt() % 2 ? "IN_BYLAWS" : "IN_FORM",
+    nonprofitAssetDistributionTerms: `some-nonprofitAssetDistributionTerms-text-${randomInt()}`,
     foreignStateOfFormation: isForeign ? randomElementFromArray(states).name : undefined,
     foreignDateOfFormation: isForeign ? getCurrentDate().add(1, "days").format(defaultDateFormat) : undefined,
-    willPracticeLaw: undefined,
+    willPracticeLaw: isCorp ? !!(randomInt() % 2) : undefined,
+    isVeteranNonprofit: isNonprofit ? !!(randomInt() % 2) : undefined,
     ...overrides,
   };
 };

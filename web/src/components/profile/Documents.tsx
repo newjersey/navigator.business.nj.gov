@@ -40,7 +40,7 @@ export const Documents = (props: Props): ReactElement => {
           {business?.profileData.documents.formationDoc ? (
             <li>
               <a href={documents?.formationDoc ?? "#"} target="_blank" rel="noreferrer noopener">
-                {Config.profileDefaults.formationDocFileTitle}
+                {Config.profileDefaults.default.formationDocFileTitle}
               </a>{" "}
               (PDF)
             </li>
@@ -51,7 +51,7 @@ export const Documents = (props: Props): ReactElement => {
             <li>
               <a href={documents?.certifiedDoc ?? "#"} target="_blank" rel="noreferrer noopener">
                 {" "}
-                {Config.profileDefaults.certificationDocFileTitle}
+                {Config.profileDefaults.default.certificationDocFileTitle}
               </a>{" "}
               (PDF)
             </li>
@@ -62,7 +62,7 @@ export const Documents = (props: Props): ReactElement => {
             <li>
               <a href={documents?.standingDoc ?? "#"} target="_blank" rel="noreferrer noopener">
                 {" "}
-                {Config.profileDefaults.standingDocFileTitle}
+                {Config.profileDefaults.default.standingDocFileTitle}
               </a>{" "}
               (PDF)
             </li>

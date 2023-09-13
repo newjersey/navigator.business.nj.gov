@@ -1,3 +1,93 @@
+# [5.27.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.26.0...v5.27.0) (2023-09-11)
+
+
+### Features
+
+* [[#186003099](https://github.com/newjersey/navigator.business.nj.gov/issues/186003099)] update Lt. Governor in banner ([9c3b72a](https://github.com/newjersey/navigator.business.nj.gov/commit/9c3b72ab7315737fa506a4596e81b224ae60cfed))
+
+# [5.26.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.25.0...v5.26.0) (2023-09-05)
+
+
+### Bug Fixes
+
+* [[#184643298](https://github.com/newjersey/navigator.business.nj.gov/issues/184643298)] fix profile opportunities alert ([bfa4ea7](https://github.com/newjersey/navigator.business.nj.gov/commit/bfa4ea7b986cc21c4b94ff2d1d9a999abdc61f20))
+* [[#185403995](https://github.com/newjersey/navigator.business.nj.gov/issues/185403995)] wait for fetch before handling onboarding reroute ([588d72b](https://github.com/newjersey/navigator.business.nj.gov/commit/588d72b7f3ff576111191ca88b52091bb68c4280))
+* [[#185698190](https://github.com/newjersey/navigator.business.nj.gov/issues/185698190)] DBA name takes precident for dropdown and unnamed DBA state for DBA flow ([1f81a25](https://github.com/newjersey/navigator.business.nj.gov/commit/1f81a255a38c2d19ab4c01b636d44e73eaf8e732))
+* [[#185698190](https://github.com/newjersey/navigator.business.nj.gov/issues/185698190)] Formation name check for DBA is now info alert instead of error ([cf38a59](https://github.com/newjersey/navigator.business.nj.gov/commit/cf38a591fcf5632d7b4f5f5bf2e9aaede23eb0e4))
+* [[#185789032](https://github.com/newjersey/navigator.business.nj.gov/issues/185789032)] fix page onboarding page title string interpolation ([3c6c597](https://github.com/newjersey/navigator.business.nj.gov/commit/3c6c5977a42b2efbf42830020412c507c3c861fa))
+* [[#185834243](https://github.com/newjersey/navigator.business.nj.gov/issues/185834243)] add environment variables for staging and prod for FNP and NP feature flags ([48750fa](https://github.com/newjersey/navigator.business.nj.gov/commit/48750fa6904705c9b46ff4b8715e69de79a2a7f8))
+* [[#185853749](https://github.com/newjersey/navigator.business.nj.gov/issues/185853749)] close myNJ modal after link to account setup ([83f5b70](https://github.com/newjersey/navigator.business.nj.gov/commit/83f5b70b81fa144c59c94736a77e405e84e958fd))
+* [[#185863859](https://github.com/newjersey/navigator.business.nj.gov/issues/185863859)] remove materialUI default required asterisk from Radio components ([d0a10dc](https://github.com/newjersey/navigator.business.nj.gov/commit/d0a10dc4eb57b6ade75940b0f2a94b02b5187999))
+* [[#185885539](https://github.com/newjersey/navigator.business.nj.gov/issues/185885539)] fix margin issue to align locked icons on profile ([3ad502f](https://github.com/newjersey/navigator.business.nj.gov/commit/3ad502feafb35bb2a21a1fbffde53398253106d9))
+* [[#185902802](https://github.com/newjersey/navigator.business.nj.gov/issues/185902802)] wrote migration to deal with deleted successful-registration card ([fedf7c3](https://github.com/newjersey/navigator.business.nj.gov/commit/fedf7c3a9149d2b313fcfb72e0e52dda5414feb8))
+* delete edd.md ([e0e09c7](https://github.com/newjersey/navigator.business.nj.gov/commit/e0e09c73f2454e2668a289f8c03447254e4b4e24))
+* **deps:** update aws-amplify ([afa5f85](https://github.com/newjersey/navigator.business.nj.gov/commit/afa5f8575d8905431cc16ba6cb8bb9b33756b9be))
+* **deps:** update aws-sdk ([4ba6592](https://github.com/newjersey/navigator.business.nj.gov/commit/4ba65928041946a0b2b50aa5fda691a11a193a1c))
+* **deps:** update dependency @aws-crypto/client-node to v4 ([59ac361](https://github.com/newjersey/navigator.business.nj.gov/commit/59ac361c1ace66bfd4e4948575d2ba5776679e95))
+* **deps:** update dependency xml2js to v0.6.2 ([139a3e3](https://github.com/newjersey/navigator.business.nj.gov/commit/139a3e31b2e7aadc787a03c18c0cc1162161ebcb))
+* **deps:** update material-ui ([23088ba](https://github.com/newjersey/navigator.business.nj.gov/commit/23088ba81ba512df6234bdf5184ac1fd352c4f1d))
+* incorrect contextual info ([68effc2](https://github.com/newjersey/navigator.business.nj.gov/commit/68effc2370182957d754cc69a6d5c543ec76d259))
+
+
+### Features
+
+* [[#184643298](https://github.com/newjersey/navigator.business.nj.gov/issues/184643298)] Add go to profile nudge for Dakota Nexus and poppy formation ([caaea02](https://github.com/newjersey/navigator.business.nj.gov/commit/caaea02f4375f724d1cc9a5a71a3111f510d6272))
+* [[#184662027](https://github.com/newjersey/navigator.business.nj.gov/issues/184662027)] profile error alert ([9f1503b](https://github.com/newjersey/navigator.business.nj.gov/commit/9f1503b52d7e5ed0e1890d624b80ceb07c2e7ec9))
+* [[#184702075](https://github.com/newjersey/navigator.business.nj.gov/issues/184702075)] remove mini-roadmap for filings page ([53909d0](https://github.com/newjersey/navigator.business.nj.gov/commit/53909d088e873af938a9e652cb5a206336426b37))
+* [[#184749103](https://github.com/newjersey/navigator.business.nj.gov/issues/184749103)] remove US Territories from formation state dropdown ([2f7fa38](https://github.com/newjersey/navigator.business.nj.gov/commit/2f7fa3813175a86f06bc3ebbab71f69b29b7dabf))
+* [[#184992602](https://github.com/newjersey/navigator.business.nj.gov/issues/184992602)] add cannabis location alert to biz formation ([c5cb0ca](https://github.com/newjersey/navigator.business.nj.gov/commit/c5cb0ca377a7cc54071bf7c234b1056ae10d304c))
+* [[#184992602](https://github.com/newjersey/navigator.business.nj.gov/issues/184992602)] create cannabis location alert CMS component ([685f02c](https://github.com/newjersey/navigator.business.nj.gov/commit/685f02c33e770f18523b6a2de875d7507216f71f))
+* [[#185167184](https://github.com/newjersey/navigator.business.nj.gov/issues/185167184)] add Note block to cms ([0bffa03](https://github.com/newjersey/navigator.business.nj.gov/commit/0bffa03813e30dcd8f4a8135d769065c33b42920))
+* [[#185424624](https://github.com/newjersey/navigator.business.nj.gov/issues/185424624)] add quick actions to cms ([7abe5b9](https://github.com/newjersey/navigator.business.nj.gov/commit/7abe5b904a32728ab941cea5f90c581a2786438f))
+* [[#185676804](https://github.com/newjersey/navigator.business.nj.gov/issues/185676804)] left-aligned side nav items in profile on small screens ([4b40ea8](https://github.com/newjersey/navigator.business.nj.gov/commit/4b40ea85b58398dea53d0e06e176d385c0a37951))
+* [[#185757071](https://github.com/newjersey/navigator.business.nj.gov/issues/185757071)] EIN task updated to trigger modal on edit ([5d97a05](https://github.com/newjersey/navigator.business.nj.gov/commit/5d97a05047b12c06d7a9513ab071ec3fa7977063))
+* remove-account-creation-card-[#185681589](https://github.com/newjersey/navigator.business.nj.gov/issues/185681589) ([1a4926e](https://github.com/newjersey/navigator.business.nj.gov/commit/1a4926e390ddb2ac241e318441f75ccb15f4eed8))
+
+
+### Reverts
+
+* Revert "fix(deps): update aws-amplify" ([db18b64](https://github.com/newjersey/navigator.business.nj.gov/commit/db18b64f25acadb9aac4392d9f24005ac05f1999))
+* Revert "fix(deps): update aws-amplify" ([d36a9f8](https://github.com/newjersey/navigator.business.nj.gov/commit/d36a9f8ca5ebc70f8b5c377a19eb572a0d981f9e))
+* Revert "chore(deps): update dependency storybook-addon-pseudo-states to v2" ([2a850ad](https://github.com/newjersey/navigator.business.nj.gov/commit/2a850ad5fb3ae9a5b6b1cc052214eba67606310a))
+
+# [5.25.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.24.0...v5.25.0) (2023-08-29)
+
+
+### Bug Fixes
+
+* [[#185153256](https://github.com/newjersey/navigator.business.nj.gov/issues/185153256)] config text for veteran ([67a9a92](https://github.com/newjersey/navigator.business.nj.gov/commit/67a9a92954e8cc564e1f6c18b038a6a8f4418bc8))
+* [[#185307864](https://github.com/newjersey/navigator.business.nj.gov/issues/185307864)] non essential question text styling ([47bdf83](https://github.com/newjersey/navigator.business.nj.gov/commit/47bdf83f315ae8b21cbe76ddd91a9ed6f7e8d48c))
+* [[#185307864](https://github.com/newjersey/navigator.business.nj.gov/issues/185307864)] only adds task if non essential question id is in industry file ([371f75f](https://github.com/newjersey/navigator.business.nj.gov/commit/371f75fdd43dfa48ba6d1f4d696e666ecea5ee8d))
+* [[#185307864](https://github.com/newjersey/navigator.business.nj.gov/issues/185307864)] test to check the optional suffix is being added to question text ([9266346](https://github.com/newjersey/navigator.business.nj.gov/commit/926634658add848542bbf752224dd9ffed90f49e))
+* [[#185362965](https://github.com/newjersey/navigator.business.nj.gov/issues/185362965)] green box bug fix ([2d14697](https://github.com/newjersey/navigator.business.nj.gov/commit/2d14697d8d1b050621b3db58550d471ee2bcc92d))
+* [[#185522114](https://github.com/newjersey/navigator.business.nj.gov/issues/185522114)] Board of Directors and Trustees incorrectly labeled as Members in error banner ([c4b94f7](https://github.com/newjersey/navigator.business.nj.gov/commit/c4b94f711afe9aefbe5f5064ec2a3adbc5390fd6))
+* 185681556 sidebar test removal ([6ff6014](https://github.com/newjersey/navigator.business.nj.gov/commit/6ff60146d11208d0ca348defcbfa766e64ef52b2))
+* date logic in getLicenseCalendarEvent tests should not depend on current date ([52c544f](https://github.com/newjersey/navigator.business.nj.gov/commit/52c544f4aecc248e12b84eccfac25557d3df1739))
+* flaky formation nonprofit api test ([4341e60](https://github.com/newjersey/navigator.business.nj.gov/commit/4341e60cbd49e47dd59c6665665885e9a4d235aa))
+* flaky formation test ([c7cd813](https://github.com/newjersey/navigator.business.nj.gov/commit/c7cd813985d9db0bdb3363634c4eee27ff72d798))
+* updating filterFundings to handle undefined certification values ([2739256](https://github.com/newjersey/navigator.business.nj.gov/commit/27392564348f760f6f5ad3fd1c37d0138655b37f))
+
+
+### Features
+
+* [[#184770173](https://github.com/newjersey/navigator.business.nj.gov/issues/184770173)] update postOnboarding to change task status with checkboxes ([5179715](https://github.com/newjersey/navigator.business.nj.gov/commit/517971563879abd1401f28aa737c1f1ed4afdf59))
+* [[#185153256](https://github.com/newjersey/navigator.business.nj.gov/issues/185153256)] non-profit formation ([6d0537c](https://github.com/newjersey/navigator.business.nj.gov/commit/6d0537cd825b92da0616f60535cd9cf745cc0a4b))
+* [[#185166887](https://github.com/newjersey/navigator.business.nj.gov/issues/185166887)] move name/email to deferred onboarding ([a4bd05e](https://github.com/newjersey/navigator.business.nj.gov/commit/a4bd05e6410208f08c060f3c787e0298db6dee4a))
+* [[#185307864](https://github.com/newjersey/navigator.business.nj.gov/issues/185307864)] non essential questions for poppy and dakota nexus ([8a7ac86](https://github.com/newjersey/navigator.business.nj.gov/commit/8a7ac8677ff82e3e1bf18ad8c41f0af3e1e132fb))
+* [[#185355762](https://github.com/newjersey/navigator.business.nj.gov/issues/185355762)] update broken link checker ([0d3bfd6](https://github.com/newjersey/navigator.business.nj.gov/commit/0d3bfd6a3dbeb43cb0d64f5967491992349ffe36))
+* [[#185355762](https://github.com/newjersey/navigator.business.nj.gov/issues/185355762)] update broken link checker to account for basic auth ([03f5bc9](https://github.com/newjersey/navigator.business.nj.gov/commit/03f5bc9b5032a08f40c641aff6910e179aa51d5e))
+* [[#185355762](https://github.com/newjersey/navigator.business.nj.gov/issues/185355762)] update broken link checker to account for basic auth accross all environments ([33220ff](https://github.com/newjersey/navigator.business.nj.gov/commit/33220ff68023acc18e941d0e6ebfeeee10b9333c))
+* [[#185355762](https://github.com/newjersey/navigator.business.nj.gov/issues/185355762)] update broken link checker to only run locally and allow for file download ([c20feb2](https://github.com/newjersey/navigator.business.nj.gov/commit/c20feb27ead42e3446797e8837d79c6cea7c5087))
+* [[#185617818](https://github.com/newjersey/navigator.business.nj.gov/issues/185617818)] left align description & text fields beneath nubered lists ([4a07129](https://github.com/newjersey/navigator.business.nj.gov/commit/4a07129678b2c1c1af5fcce985adcefe404842ed))
+* [[#185617818](https://github.com/newjersey/navigator.business.nj.gov/issues/185617818)] left align description text and fields beneath numbered lists ([3d8a859](https://github.com/newjersey/navigator.business.nj.gov/commit/3d8a859927df8894851a526c500c17b7a66510dd))
+* [[#185617852](https://github.com/newjersey/navigator.business.nj.gov/issues/185617852)] increase help button padding ([60eae91](https://github.com/newjersey/navigator.business.nj.gov/commit/60eae9108ecddd7aff495a8477024d67d46d766a))
+* [[#185617852](https://github.com/newjersey/navigator.business.nj.gov/issues/185617852)] increase help button padding mobile ([0e915da](https://github.com/newjersey/navigator.business.nj.gov/commit/0e915da5596fa06c825442fe6fc12e8261ef193f))
+* [[#185680966](https://github.com/newjersey/navigator.business.nj.gov/issues/185680966)] dakota remote worker/seller navbar text ([6cf51c7](https://github.com/newjersey/navigator.business.nj.gov/commit/6cf51c7697539efe5e219d5c5b7c558285edb64d))
+* [[#185681496](https://github.com/newjersey/navigator.business.nj.gov/issues/185681496)] remove home-based prompt for up-and-running ([9994ec0](https://github.com/newjersey/navigator.business.nj.gov/commit/9994ec00d65c1acf84cff253851edf688261a06a))
+* [[#185681556](https://github.com/newjersey/navigator.business.nj.gov/issues/185681556)] remove welecome card ([57759b1](https://github.com/newjersey/navigator.business.nj.gov/commit/57759b13012f2ba92492423f9facc1c1bf3cf8e9))
+* 185681556 remove sidebarcontainer tests for welcome ([dc07825](https://github.com/newjersey/navigator.business.nj.gov/commit/dc07825c2c2210ee7719268ad443e6e6a1a81b0d))
+* 185800334 bolder headers for non profit questions and alignment fix ([6d6e61f](https://github.com/newjersey/navigator.business.nj.gov/commit/6d6e61f64f887ee7ca3f6da6c04ba1b100679f2f))
+
 # [5.24.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.23.5...v5.24.0) (2023-08-02)
 
 

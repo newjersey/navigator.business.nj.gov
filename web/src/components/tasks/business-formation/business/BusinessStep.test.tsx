@@ -24,6 +24,7 @@ import {
   Municipality,
   ProfileData,
   PublicFilingLegalType,
+  randomElementFromArray,
   randomPublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
 import { publicFilingLegalTypes } from "@businessnjgovnavigator/shared/formationData";
@@ -392,6 +393,29 @@ describe("Formation - BusinessStep", () => {
       expect(currentBusiness().formationData.formationFormData.foreignStateOfFormation).toEqual(
         "Virgin Islands"
       );
+    });
+
+    it("does not include New Jersey in the foreign state of formation dropdown", async () => {
+      const page = await getPageHelper(
+        { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
+        { foreignStateOfFormation: undefined }
+      );
+
+      const listBox = await page.getListBoxForInputElementByTestId("foreignStateOfFormation");
+
+      expect(within(listBox).queryByText("New Jersey")).not.toBeInTheDocument();
+      expect(within(listBox).getByText("Ohio")).toBeInTheDocument();
+    });
+
+    it("includes 'Outside of the USA' in the foreign state of formation dropdown", async () => {
+      const page = await getPageHelper(
+        { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
+        { foreignStateOfFormation: undefined }
+      );
+
+      const listBox = await page.getListBoxForInputElementByTestId("foreignStateOfFormation");
+
+      expect(within(listBox).getByText("Outside of the USA")).toBeInTheDocument();
     });
 
     it("displays error on field validation", async () => {
@@ -795,50 +819,27 @@ describe("Formation - BusinessStep", () => {
   });
 
   describe("profile data information", () => {
-    it("displays llc legal structure from profile data", async () => {
-      const legalStructureId = "limited-liability-company";
-      await getPageHelper({ legalStructureId }, {});
-      const displayLegalStructure = screen.getByTestId("legal-structure");
-      expect(displayLegalStructure).toHaveTextContent(Config.formation.legalStructure[legalStructureId]);
-    });
+    it.each(publicFilingLegalTypes)(
+      "displays domestic legal structure label for %s",
+      async (legalStructureId) => {
+        await getPageHelper({ legalStructureId, businessPersona: "STARTING" }, {});
+        const displayLegalStructure = screen.getByTestId("legal-structure");
+        expect(displayLegalStructure).toHaveTextContent(
+          Config.formation.legalStructure.domesticLabels[legalStructureId]
+        );
+      }
+    );
 
-    it("displays llp legal structure from profile data", async () => {
-      const legalStructureId = "limited-liability-partnership";
-      await getPageHelper({ legalStructureId }, {});
-      const displayLegalStructure = screen.getByTestId("legal-structure");
-      expect(displayLegalStructure).toHaveTextContent(Config.formation.legalStructure[legalStructureId]);
-    });
-
-    it("displays lp legal structure from profile data", async () => {
-      const legalStructureId = "limited-partnership";
-      await getPageHelper({ legalStructureId }, {});
-      const displayLegalStructure = screen.getByTestId("legal-structure");
-      expect(displayLegalStructure).toHaveTextContent(Config.formation.legalStructure[legalStructureId]);
-    });
-
-    it("displays sCorp legal structure from profile data", async () => {
-      const legalStructureId = "s-corporation";
-      await getPageHelper({ legalStructureId }, {});
-      const displayLegalStructure = screen.getByTestId("legal-structure");
-      expect(displayLegalStructure).toHaveTextContent(Config.formation.legalStructure[legalStructureId]);
-    });
-
-    it("displays cCorp legal structure from profile data", async () => {
-      const legalStructureId = "c-corporation";
-      await getPageHelper({ legalStructureId }, {});
-      const displayLegalStructure = screen.getByTestId("legal-structure");
-      expect(displayLegalStructure).toHaveTextContent(Config.formation.legalStructure[legalStructureId]);
-    });
-
-    it("displays foreign label ahead of legal structure from profile data", async () => {
-      const legalStructureId = randomPublicFilingLegalType();
-      await getPageHelper({ legalStructureId, businessPersona: "FOREIGN" }, {});
-      const displayLegalStructure = screen.getByTestId("legal-structure");
-      const name = Config.formation.legalStructure[legalStructureId];
-      expect(displayLegalStructure).toHaveTextContent(
-        `${Config.formation.legalStructure.foreignPrefaceText} ${name}`
-      );
-    });
+    it.each(publicFilingLegalTypes)(
+      "displays foreign legal structure label for %s",
+      async (legalStructureId) => {
+        await getPageHelper({ legalStructureId, businessPersona: "FOREIGN" }, {});
+        const displayLegalStructure = screen.getByTestId("legal-structure");
+        expect(displayLegalStructure).toHaveTextContent(
+          Config.formation.legalStructure.foreignLabels[legalStructureId]
+        );
+      }
+    );
 
     it("displays business name from name check step and overrides profile", async () => {
       const page = await getPageHelper({ businessName: "some cool name" }, {});
@@ -864,6 +865,39 @@ describe("Formation - BusinessStep", () => {
     });
   });
 
+  describe("nonprofit veteran question", () => {
+    it("shows veteran question for nonprofit legal type", async () => {
+      await getPageHelper({ legalStructureId: "nonprofit" }, {});
+      expect(screen.getByLabelText("Is veteran nonprofit")).toBeInTheDocument();
+    });
+
+    it("does not show veteran question for legal types that are not nonprofit", async () => {
+      const legalTypesNotNonprofit = publicFilingLegalTypes.filter((it) => it !== "nonprofit");
+      await getPageHelper({ legalStructureId: randomElementFromArray(legalTypesNotNonprofit) }, {});
+      expect(screen.queryByLabelText("Is veteran nonprofit")).not.toBeInTheDocument();
+    });
+
+    it("saves data to formationData", async () => {
+      const page = await getPageHelper({ legalStructureId: "nonprofit" }, { isVeteranNonprofit: undefined });
+      page.chooseRadio("is-veteran-nonprofit-yes");
+      await page.submitBusinessStep(true);
+      expect(currentBusiness().formationData.formationFormData.isVeteranNonprofit).toEqual(true);
+    });
+  });
+
+  describe("nonprofit provisions", () => {
+    it("shows nonprofit provisions for nonprofit legal type", async () => {
+      await getPageHelper({ legalStructureId: "nonprofit" }, {});
+      expect(screen.getByLabelText("Has nonprofit board members")).toBeInTheDocument();
+    });
+
+    it("does not show nonprofit provisions for legal types that are not nonprofit", async () => {
+      const legalTypesNotNonprofit = publicFilingLegalTypes.filter((it) => it !== "nonprofit");
+      await getPageHelper({ legalStructureId: randomElementFromArray(legalTypesNotNonprofit) }, {});
+      expect(screen.queryByLabelText("Has nonprofit board members")).not.toBeInTheDocument();
+    });
+  });
+
   describe("required fields", () => {
     const attemptApiSubmission = async (page: FormationPageHelpers): Promise<void> => {
       await page.stepperClickToReviewStep();
@@ -871,26 +905,26 @@ describe("Formation - BusinessStep", () => {
       await page.stepperClickToBusinessStep();
     };
 
-    it("Business suffix", async () => {
+    it("displays Business Suffix error label when Business Suffix is undefined", async () => {
       const page = await getPageHelper({}, { businessSuffix: undefined });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.businessSuffix.label);
     });
 
-    it("Withdrawals", async () => {
+    it("displays Withdrawals error label when Withdrawals is empty", async () => {
       const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { withdrawals: "" });
       await attemptApiSubmission(page);
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.withdrawals.label);
     });
 
-    it("Dissolution", async () => {
+    it("displays Dissolution error label when Dissolution is empty", async () => {
       const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { dissolution: "" });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.dissolution.label);
     });
 
-    it("Combined Investment", async () => {
+    it("displays Combined Investment error label when Combined Investment is empty", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
         { combinedInvestment: "" }
@@ -899,7 +933,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.combinedInvestment.label);
     });
 
-    it("Partnership Rights can create Limited Partner", async () => {
+    it("displays error label when Partnership Rights can create Limited Partner is undefined", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
         { canCreateLimitedPartner: undefined }
@@ -911,10 +945,10 @@ describe("Formation - BusinessStep", () => {
       );
     });
 
-    it("Partnership Rights Limited Partner Terms", async () => {
+    it("displays error label when Partnership Rights Limited Partner Terms is empty", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
-        { canCreateLimitedPartner: undefined, createLimitedPartnerTerms: "" }
+        { canCreateLimitedPartner: true, createLimitedPartnerTerms: "" }
       );
       fireEvent.click(screen.getByTestId("canCreateLimitedPartner-true"));
       await attemptApiSubmission(page);
@@ -923,7 +957,7 @@ describe("Formation - BusinessStep", () => {
       );
     });
 
-    it("Partnership Rights can make distribution", async () => {
+    it("displays error label when Partnership Rights can make distribution is undefined", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
         { canMakeDistribution: undefined }
@@ -934,10 +968,10 @@ describe("Formation - BusinessStep", () => {
       );
     });
 
-    it("Partnership Rights make distribution terms", async () => {
+    it("displays error label when Partnership Rights make distribution terms is empty", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
-        { canMakeDistribution: undefined, makeDistributionTerms: "" }
+        { canMakeDistribution: true, makeDistributionTerms: "" }
       );
       fireEvent.click(screen.getByTestId("canMakeDistribution-true"));
       await attemptApiSubmission(page);
@@ -946,7 +980,7 @@ describe("Formation - BusinessStep", () => {
       );
     });
 
-    it("Partnership Rights can get distribution", async () => {
+    it("displays error label when Partnership Rights can get distribution is undefined", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
         { canGetDistribution: undefined }
@@ -957,24 +991,24 @@ describe("Formation - BusinessStep", () => {
       );
     });
 
-    it("Partnership Rights get distribution terms", async () => {
+    it("displays error label when Partnership Rights get distribution terms is empty", async () => {
       const page = await getPageHelper(
         { legalStructureId: "limited-partnership" },
-        { canGetDistribution: undefined, getDistributionTerms: "" }
+        { canGetDistribution: true, getDistributionTerms: "" }
       );
       fireEvent.click(screen.getByTestId("canGetDistribution-true"));
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.getDistributionTerms.label);
     });
 
-    it("Total Shares", async () => {
+    it("displays error label when Total Shares is empty", async () => {
       const page = await getPageHelper({ legalStructureId: "c-corporation" }, { businessTotalStock: "" });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.businessTotalStock.label);
       expect(screen.getByText(Config.formation.fields.businessTotalStock.error)).toBeInTheDocument();
     });
 
-    it("Foreign date of formation", async () => {
+    it("displays error label when Foreign Date of Formation is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
         { foreignDateOfFormation: undefined }
@@ -986,7 +1020,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByText(Config.formation.fields.foreignDateOfFormation.error)).toBeInTheDocument();
     });
 
-    it("Foreign state of formation", async () => {
+    it("displays error label when Foreign State of Formation is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
         { foreignStateOfFormation: undefined }
@@ -998,19 +1032,19 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByText(Config.formation.fields.foreignStateOfFormation.error)).toBeInTheDocument();
     });
 
-    it("Address line1", async () => {
+    it("displays error label when Address line1 is empty", async () => {
       const page = await getPageHelper({ businessPersona: "FOREIGN" }, { addressLine1: "" });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressLine1.label);
     });
 
-    it("Address zip code", async () => {
+    it("displays error label when Address zip code is empty", async () => {
       const page = await getPageHelper({ businessPersona: "FOREIGN" }, { addressZipCode: "" });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressZipCode.label);
     });
 
-    it("Address province", async () => {
+    it("displays error label when Address province is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
         { addressProvince: undefined, businessLocationType: "INTL" }
@@ -1019,7 +1053,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressProvince.label);
     });
 
-    it("Address country", async () => {
+    it("displays error label when Address country is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
         { addressCountry: undefined, businessLocationType: "INTL" }
@@ -1028,7 +1062,7 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressCountry.label);
     });
 
-    it("Address city", async () => {
+    it("displays error label when Address city is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
         { addressCity: undefined, businessLocationType: "INTL" }
@@ -1037,13 +1071,164 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressCity.label);
     });
 
-    it("Address state", async () => {
+    it("displays error label when Address state is undefined", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
         { addressState: undefined, businessLocationType: "US" }
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressState.label);
+    });
+
+    it("displays error label when isVeteranNonprofit is undefined", async () => {
+      const page = await getPageHelper({ legalStructureId: "nonprofit" }, { isVeteranNonprofit: undefined });
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.isVeteranNonprofit.label);
+      expect(screen.getByText(Config.formation.fields.isVeteranNonprofit.error)).toBeInTheDocument();
+    });
+
+    it("displays error label when hasNonprofitBoardMembers is undefined", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        { hasNonprofitBoardMembers: undefined, legalType: "nonprofit" }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.hasNonprofitBoardMembers.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
+    });
+
+    it("displays error label when nonprofitBoardMemberQualificationsSpecified is undefined", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitBoardMemberQualificationsSpecified: undefined,
+          legalType: "nonprofit",
+        }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.nonprofitBoardMemberQualificationsSpecified.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
+    });
+
+    it("displays error label when nonprofitBoardMemberQualificationsTerms is empty", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitBoardMemberQualificationsSpecified: "IN_FORM",
+          nonprofitBoardMemberQualificationsTerms: "",
+          legalType: "nonprofit",
+        }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.nonprofitBoardMemberQualificationsTerms.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
+    });
+
+    it("displays error label when nonprofitBoardMemberRightsSpecified is undefined", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitBoardMemberRightsSpecified: undefined,
+          legalType: "nonprofit",
+        }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.nonprofitBoardMemberRightsSpecified.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
+    });
+
+    it("displays error label when nonprofitBoardMemberRightsTerms is empty", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitBoardMemberRightsSpecified: "IN_FORM",
+          legalType: "nonprofit",
+          nonprofitBoardMemberRightsTerms: "",
+        }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.nonprofitBoardMemberRightsSpecified.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
+    });
+
+    it("displays error label when nonprofitTrusteesMethodSpecified is undefined", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitTrusteesMethodSpecified: undefined,
+          legalType: "nonprofit",
+        }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.nonprofitTrusteesMethodSpecified.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
+    });
+
+    it("displays error label when nonprofitTrusteesMethodTerms is empty", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitTrusteesMethodSpecified: "IN_FORM",
+          nonprofitTrusteesMethodTerms: "",
+          legalType: "nonprofit",
+        }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.nonprofitTrusteesMethodTerms.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
+    });
+
+    it("displays error label when nonprofitAssetDistributionSpecified is undefined", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitAssetDistributionSpecified: undefined,
+          legalType: "nonprofit",
+        }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.nonprofitAssetDistributionSpecified.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
+    });
+
+    it("displays error label when nonprofitAssetDistributionTerms is empty", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "nonprofit" },
+        {
+          hasNonprofitBoardMembers: true,
+          nonprofitAssetDistributionSpecified: "IN_FORM",
+          nonprofitAssetDistributionTerms: "",
+          legalType: "nonprofit",
+        }
+      );
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.formation.fields.nonprofitAssetDistributionTerms.label
+      );
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
     });
   });
 });

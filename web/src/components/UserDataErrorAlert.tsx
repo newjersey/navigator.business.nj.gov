@@ -1,9 +1,10 @@
 import { Alert } from "@/components/njwds-extended/Alert";
+import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { UserDataError } from "@/lib/types/types";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement } from "react";
 
+const Config = getMergedConfig();
 const UserDataErrorLookup: Record<UserDataError, string> = {
   NO_DATA: Config.siteWideErrorMessages.errorTextNoData,
   CACHED_ONLY: Config.siteWideErrorMessages.errorTextCachedOnly,

@@ -1,12 +1,12 @@
 ---
-id: "flea-market-swap-meet-kiosk"
-webflowId: "5f77296ab0544f884636617a"
-urlSlug: "flea-market-swap-meet-kiosk"
-webflowName: "Flea Market (Swap meet/Kiosk )"
-callToActionLink: "http://state.nj.us/treasury/taxation/businesses.shtml"
+urlSlug: flea-market-swap-meet-kiosk
+webflowName: Flea Market (Swap meet/Kiosk )
+agencyId: nj-taxation
 callToActionText: ""
-agencyId: "nj-taxation"
-divisionPhone: "(609) 292-6400"
-webflowIndustry: "Flea Swap"
-licenseCertificationClassification: "CERTIFICATE OF AUTHORITY"
+callToActionLink: https://www.state.nj.us/treasury/taxation/pdf/pubs/sales/anj15.pdf
+webflowIndustry: Flea Swap
+divisionPhone: (609) 292-6400
+id: flea-market-swap-meet-kiosk
+webflowId: 5f77296ab0544f884636617a
+licenseCertificationClassification: CERTIFICATE OF AUTHORITY
 ---

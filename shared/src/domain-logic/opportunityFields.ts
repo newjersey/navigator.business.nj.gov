@@ -1,18 +1,39 @@
 import { LookupLegalStructureById } from "../legalStructure";
 import { ProfileData } from "../profileData";
 
-export const OPPORTUNITY_FIELDS: (keyof ProfileData)[] = [
+const OPPORTUNITY_FIELDS: (keyof ProfileData)[] = [
   "existingEmployees",
   "municipality",
   "homeBasedBusiness",
   "ownershipTypeIds",
 ];
 
-export const REPORT_FIELDS: (keyof ProfileData)[] = ["dateOfFormation"];
+const REPORT_FIELDS: (keyof ProfileData)[] = ["dateOfFormation"];
 
-export const FIELDS_FOR_PROFILE = [...REPORT_FIELDS, ...OPPORTUNITY_FIELDS];
-export const getFieldsForProfile = (legalStructureId?: string): (keyof ProfileData)[] => {
-  return FIELDS_FOR_PROFILE.filter((field) => {
+const FIELDS_FOR_FOREIGN_NEXUS_NJ_LOCATION: (keyof ProfileData)[] = ["municipality"];
+const FIELDS_FOR_FOREIGN_NEXUS_NOT_NJ_LOCATION: (keyof ProfileData)[] = ["homeBasedBusiness"];
+const ALL_FIELDS_FOR_FOREIGN_NEXUS_NJ_LOCATION = [...FIELDS_FOR_FOREIGN_NEXUS_NJ_LOCATION, ...REPORT_FIELDS];
+const ALL_FIELDS_FOR_FOREIGN_NEXUS_NOT_NJ_LOCATION = [
+  ...FIELDS_FOR_FOREIGN_NEXUS_NOT_NJ_LOCATION,
+  ...REPORT_FIELDS,
+];
+const FIELDS_FOR_PROFILE = [...REPORT_FIELDS, ...OPPORTUNITY_FIELDS];
+
+export const getFieldsForProfile = (profileData: ProfileData): (keyof ProfileData)[] => {
+  if (profileData.businessPersona === "FOREIGN" && profileData.foreignBusinessType === "NEXUS") {
+    return profileData.nexusLocationInNewJersey
+      ? filterByLegalStructure(ALL_FIELDS_FOR_FOREIGN_NEXUS_NJ_LOCATION, profileData.legalStructureId)
+      : filterByLegalStructure(ALL_FIELDS_FOR_FOREIGN_NEXUS_NOT_NJ_LOCATION, profileData.legalStructureId);
+  } else {
+    return filterByLegalStructure(FIELDS_FOR_PROFILE, profileData.legalStructureId);
+  }
+};
+
+const filterByLegalStructure = (
+  profileKeys: (keyof ProfileData)[],
+  legalStructureId?: string
+): (keyof ProfileData)[] => {
+  return profileKeys.filter((field) => {
     if (field === "dateOfFormation" && legalStructureId) {
       return LookupLegalStructureById(legalStructureId).elementsToDisplay.has("formationDate");
     }

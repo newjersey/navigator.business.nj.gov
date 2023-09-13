@@ -25,6 +25,8 @@ export const OnboardingBusinessPersona = <T,>(props: FormContextFieldProps<T>): 
     Validate(false);
     setProfileData({
       ...state.profileData,
+      operatingPhase:
+        (event.target.value as BusinessPersona) === "OWNING" ? "GUEST_MODE_OWNING" : "GUEST_MODE",
       businessPersona: event.target.value as BusinessPersona,
     });
   };

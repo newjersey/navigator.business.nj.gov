@@ -9,6 +9,7 @@ import {
   getProfileDataForUnfilteredOpportunities,
 } from "@/test/factories";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData";
 import {
@@ -21,6 +22,7 @@ import { generatePreferences, generateProfileData } from "@businessnjgovnavigato
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
@@ -30,6 +32,7 @@ describe("<SidebarCardsContainer />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRoadmap({});
+    useMockRouter({});
     setupStatefulUserDataContext();
   });
 
@@ -77,62 +80,62 @@ describe("<SidebarCardsContainer />", () => {
   };
 
   describe("nudges", () => {
-    it("renders the welcome card", () => {
+    it("renders content for visible card", () => {
       const sidebarCards = {
-        welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
+        fakeCard: generateSidebarCardContent({ contentMd: "FakeCardContent" }),
       };
 
-      useMockBusiness({ preferences: generatePreferences({ visibleSidebarCards: ["welcome"] }) });
+      useMockBusiness({ preferences: generatePreferences({ visibleSidebarCards: ["fakeCard"] }) });
 
       renderPage({ sidebarCards });
-      expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
+      expect(screen.getByText("FakeCardContent")).toBeInTheDocument();
     });
 
     it("renders a card in the top section if set to above-opportunities", () => {
       const sidebarCards = {
-        "welcome-up-and-running": generateSidebarCardContent({
-          id: "welcome-up-and-running",
+        "fake-above-card": generateSidebarCardContent({
+          id: "fake-above-card",
           section: "above-opportunities",
         }),
       };
 
       useMockBusiness({
-        preferences: generatePreferences({ visibleSidebarCards: ["welcome-up-and-running"] }),
+        preferences: generatePreferences({ visibleSidebarCards: ["fake-above-card"] }),
       });
 
       renderPage({ sidebarCards });
       const topCardSection = screen.getByTestId("top-cards");
-      expect(within(topCardSection).getByTestId("welcome-up-and-running")).toBeInTheDocument();
+      expect(within(topCardSection).getByTestId("fake-above-card")).toBeInTheDocument();
     });
 
     it("renders a card in the bottom section if set to below-opportunities", () => {
       const sidebarCards = {
-        "welcome-up-and-running": generateSidebarCardContent({
-          id: "welcome-up-and-running",
+        "fake-below-card": generateSidebarCardContent({
+          id: "fake-below-card",
           section: "below-opportunities",
         }),
       };
 
       useMockBusiness({
-        preferences: generatePreferences({ visibleSidebarCards: ["welcome-up-and-running"] }),
+        preferences: generatePreferences({ visibleSidebarCards: ["fake-below-card"] }),
       });
 
       renderPage({ sidebarCards });
       const bottomCardSection = screen.getByTestId("bottom-cards");
-      expect(within(bottomCardSection).getByTestId("welcome-up-and-running")).toBeInTheDocument();
+      expect(within(bottomCardSection).getByTestId("fake-below-card")).toBeInTheDocument();
     });
 
     it("removes successful registration card when it's closed", async () => {
       const business = generateBusiness({
         preferences: generatePreferences({
-          visibleSidebarCards: ["successful-registration"],
+          visibleSidebarCards: ["fake-visible-card"],
         }),
       });
 
       const sidebarCards = {
-        "successful-registration": generateSidebarCardContent({
-          id: "successful-registration",
-          contentMd: "SuccessContent",
+        "fake-visible-card": generateSidebarCardContent({
+          id: "fake-visible-card",
+          contentMd: "FakeContent",
           hasCloseButton: true,
         }),
       };
@@ -140,15 +143,13 @@ describe("<SidebarCardsContainer />", () => {
       renderWithBusiness(business, { sidebarCards });
 
       await waitFor(() => {
-        expect(screen.getByText("SuccessContent")).toBeInTheDocument();
+        expect(screen.getByText("FakeContent")).toBeInTheDocument();
       });
 
-      fireEvent.click(
-        within(screen.getByTestId("successful-registration") as HTMLElement).getByLabelText("Close")
-      );
+      fireEvent.click(within(screen.getByTestId("fake-visible-card") as HTMLElement).getByLabelText("Close"));
 
       await waitFor(() => {
-        expect(screen.queryByText("SuccessContent")).not.toBeInTheDocument();
+        expect(screen.queryByText("FakeContent")).not.toBeInTheDocument();
       });
     });
   });
@@ -225,11 +226,12 @@ describe("<SidebarCardsContainer />", () => {
       expect(screen.queryByText("Cert 3")).not.toBeInTheDocument();
     });
 
-    it("links to task page for certifications", () => {
+    it("routes to a specific certification page for certifications", () => {
       useMockProfileData(getProfileDataForUnfilteredOpportunities());
       const certifications = [generateCertification({ urlSlug: "cert1", name: "Cert 1" })];
       renderPage({ certifications });
-      expect(screen.getByText("Cert 1")).toHaveAttribute("href", "/certification/cert1");
+      fireEvent.click(screen.getByText("Cert 1"));
+      expect(mockPush).toHaveBeenCalledWith("/certification/cert1");
     });
   });
 
@@ -293,7 +295,8 @@ describe("<SidebarCardsContainer />", () => {
         generateFunding({ urlSlug: "opp", name: "Funding Opp", status: "rolling application" }),
       ];
       renderPage({ fundings });
-      expect(screen.getByText("Funding Opp")).toHaveAttribute("href", "/funding/opp");
+      fireEvent.click(screen.getByText("Funding Opp"));
+      expect(mockPush).toHaveBeenCalledWith("/funding/opp");
     });
 
     it("displays link to learn more about fundings when user is UP_AND_RUNNING", () => {

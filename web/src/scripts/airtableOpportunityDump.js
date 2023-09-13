@@ -215,8 +215,8 @@ const writeMarkdownString = (opportunity) => {
     `callToActionText: "${opportunity.callToActionText}"\n` +
     `type: "${opportunity.type}"\n` +
     `fundingType: "${opportunity.fundingType}"\n` +
-    `benefits: "${opportunity.benefits.replace(/"/g, '\\"')}"\n` +
-    `eligibility: "${opportunity.eligibility.replace(/"/g, '\\"')}"\n` +
+    `benefits: "${opportunity.benefits.replaceAll('"', '\\"')}"\n` +
+    `eligibility: "${opportunity.eligibility.replaceAll('"', '\\"')}"\n` +
     `publishStageArchive: "${opportunity.publishStageArchive}"\n` +
     `industry:  [${opportunity.industry
       .map((it) => {
@@ -251,7 +251,7 @@ const writeMarkdownString = (opportunity) => {
 const toPipeCase = (str) => {
   return str
     .trim()
-    .replace(/[!"#$%&()*+,./:;<=>?@^_`{}~-]/g, "")
+    .replaceAll(/[!"#$%&()*+,./:;<=>?@^_`{}~-]/g, "")
     .replace("  ", " ")
     .toLowerCase()
     .split(" ")

@@ -1,0 +1,14 @@
+{
+  "nonEssentialQuestionsArray":  [
+    {
+      "id": "sell-milk",
+      "questionText": "Will you sell milk?",
+      "addOn": "sell-milk"
+    },
+    {
+      "id": "pierce-ears",
+      "questionText": "Will you pierce ears?",
+      "addOn": "pierce-ears"
+    }
+  ]
+}

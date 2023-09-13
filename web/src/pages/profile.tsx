@@ -1,3 +1,4 @@
+import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { CircularIndicator } from "@/components/CircularIndicator";
 import { FormationDateDeletionModal } from "@/components/FormationDateDeletionModal";
 import { NavBar } from "@/components/navbar/NavBar";
@@ -22,12 +23,14 @@ import { ProfileBusinessStructure } from "@/components/profile/ProfileBusinessSt
 import { ProfileDateOfFormation } from "@/components/profile/ProfileDateOfFormation";
 import { ProfileEmployerId } from "@/components/profile/ProfileEmployerId";
 import { ProfileEntityId } from "@/components/profile/ProfileEntityId";
+import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileExistingEmployees } from "@/components/profile/ProfileExistingEmployees";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { ProfileMunicipality } from "@/components/profile/ProfileMunicipality";
 import { ProfileNaicsCode } from "@/components/profile/ProfileNaicsCode";
 import { ProfileNexusBusinessNameField } from "@/components/profile/ProfileNexusBusinessNameField";
 import { ProfileNexusDBANameField } from "@/components/profile/ProfileNexusDBANameField";
+import { ProfileNonEssentialQuestionsSection } from "@/components/profile/ProfileNonEssentialQuestionsSection";
 import { ProfileNotes } from "@/components/profile/ProfileNotes";
 import { ProfileOpportunitiesAlert } from "@/components/profile/ProfileOpportunitiesAlert";
 import { ProfileOwnership } from "@/components/profile/ProfileOwnership";
@@ -39,8 +42,8 @@ import { ProfileTaxPin } from "@/components/profile/ProfileTaxPin";
 import { ProfileTradeName } from "@/components/profile/ProfileTradeName";
 import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { profileFormContext } from "@/contexts/profileFormContext";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
@@ -80,9 +83,6 @@ interface Props {
   CMS_ONLY_foreignBusinessType?: ForeignBusinessType; // for CMS only
   CMS_ONLY_tab?: ProfileTabs; // for CMS only
   CMS_ONLY_fakeBusiness?: Business; // for CMS only
-  CMS_ONLY_showEscapeModal?: boolean; // for CMS only
-  CMS_ONLY_showSuccessAlert?: boolean; // for CMS only
-  CMS_ONLY_showErrorAlert?: boolean; // for CMS only
 }
 
 const ProfilePage = (props: Props): ReactElement => {
@@ -97,7 +97,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const userDataFromHook = useUserData();
   const updateQueue = userDataFromHook.updateQueue;
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
-  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
   const businessPersona: BusinessPersona = props.CMS_ONLY_businessPersona ?? profileData.businessPersona;
   const foreignBusinessType: ForeignBusinessType =
@@ -108,6 +108,7 @@ const ProfilePage = (props: Props): ReactElement => {
     tab: profileTab,
     onTabChange: setProfileTab,
     state: formContextState,
+    getInvalidFieldIds,
   } = useFormContextHelper(createProfileFieldErrorMap(), props.CMS_ONLY_tab ?? profileTabs[0]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -151,10 +152,10 @@ const ProfilePage = (props: Props): ReactElement => {
     }
   };
 
-  const showRegistrationModalForGuest = (): (() => void) | undefined => {
+  const showNeedsAccountModalForGuest = (): (() => void) | undefined => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
       return () => {
-        return setRegistrationModalIsVisible(true);
+        return setShowNeedsAccountModal(true);
       };
     }
     return undefined;
@@ -294,6 +295,7 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
+        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField fieldName="foreignBusinessTypeIds">
@@ -317,6 +319,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileField fieldName="industryId">
           <OnboardingIndustry />
+          <ProfileNonEssentialQuestionsSection />
         </ProfileField>
 
         <ProfileField
@@ -346,6 +349,7 @@ const ProfilePage = (props: Props): ReactElement => {
           isVisible={profileData.nexusLocationInNewJersey}
           locked={shouldLockMunicipality()}
         >
+          <CannabisLocationAlert industryId={business?.profileData.industryId} />
           <ProfileMunicipality />
         </ProfileField>
 
@@ -354,6 +358,7 @@ const ProfilePage = (props: Props): ReactElement => {
           displayAltDescription={displayAltHomeBasedBusinessDescription}
           isVisible={displayHomedBaseBusinessQuestion()}
           hideHeader={true}
+          boldAltDescription={true}
         >
           <OnboardingHomeBasedBusiness />
         </ProfileField>
@@ -365,7 +370,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="notes" />
 
         <ProfileField fieldName="notes">
-          <ProfileNotes handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileNotes handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
       </>
     ),
@@ -382,7 +387,7 @@ const ProfilePage = (props: Props): ReactElement => {
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
-              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
+              <OnboardingTaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
             )}
           </div>
           {business?.profileData.naicsCode && (
@@ -401,6 +406,7 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
+        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField fieldName="foreignBusinessTypeIds">
@@ -414,7 +420,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="notes" />
 
         <ProfileField fieldName="notes">
-          <ProfileNotes handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileNotes handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
       </>
     ),
@@ -431,7 +437,7 @@ const ProfilePage = (props: Props): ReactElement => {
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
-              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
+              <OnboardingTaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
             )}
           </div>
         </ProfileField>
@@ -445,7 +451,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="notes" />
 
         <ProfileField fieldName="notes">
-          <ProfileNotes handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileNotes handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
       </>
     ),
@@ -466,6 +472,7 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
+        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField
@@ -487,6 +494,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
         <ProfileField fieldName="industryId">
           <OnboardingIndustry />
+          <ProfileNonEssentialQuestionsSection />
         </ProfileField>
         <ProfileField
           fieldName="sectorId"
@@ -512,6 +520,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
 
         <ProfileField fieldName="municipality" locked={shouldLockMunicipality()}>
+          <CannabisLocationAlert industryId={business?.profileData.industryId} />
           <ProfileMunicipality />
         </ProfileField>
         <ProfileField
@@ -519,6 +528,7 @@ const ProfilePage = (props: Props): ReactElement => {
           isVisible={displayHomedBaseBusinessQuestion()}
           displayAltDescription={displayAltHomeBasedBusinessDescription}
           hideHeader={true}
+          boldAltDescription={true}
         >
           <OnboardingHomeBasedBusiness />
         </ProfileField>
@@ -557,11 +567,11 @@ const ProfilePage = (props: Props): ReactElement => {
           )}
           locked={shouldLockFormationFields}
         >
-          <ProfileEntityId handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileEntityId handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
 
         <ProfileField fieldName="employerId">
-          <ProfileEmployerId handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileEmployerId handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
 
         <ProfileField fieldName="taxId" noLabel={true}>
@@ -573,7 +583,7 @@ const ProfilePage = (props: Props): ReactElement => {
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
-              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
+              <OnboardingTaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
             )}
           </div>
         </ProfileField>
@@ -587,7 +597,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="notes" />
 
         <ProfileField fieldName="notes">
-          <ProfileNotes handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileNotes handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
       </>
     ),
@@ -595,6 +605,7 @@ const ProfilePage = (props: Props): ReactElement => {
     info: (
       <>
         <ProfileTabHeader tab="info" />
+        <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
 
         <ProfileField fieldName="businessName" isVisible={!shouldShowTradeNameElements()}>
@@ -639,6 +650,7 @@ const ProfilePage = (props: Props): ReactElement => {
           isVisible={displayHomedBaseBusinessQuestion()}
           displayAltDescription={displayAltHomeBasedBusinessDescription}
           hideHeader={true}
+          boldAltDescription={true}
         >
           <OnboardingHomeBasedBusiness />
         </ProfileField>
@@ -661,11 +673,11 @@ const ProfilePage = (props: Props): ReactElement => {
         )}
 
         <ProfileField fieldName="entityId">
-          <ProfileEntityId handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileEntityId handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
 
         <ProfileField fieldName="employerId">
-          <ProfileEmployerId handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileEmployerId handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
 
         <ProfileField fieldName="taxId" noLabel={true}>
@@ -677,13 +689,13 @@ const ProfilePage = (props: Props): ReactElement => {
             {hasSubmittedTaxData ? (
               <DisabledTaxId />
             ) : (
-              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
+              <OnboardingTaxId handleChangeOverride={showNeedsAccountModalForGuest()} />
             )}
           </div>
         </ProfileField>
 
         <ProfileField fieldName="taxPin">
-          <ProfileTaxPin handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileTaxPin handleChangeOverride={showNeedsAccountModalForGuest()} />
         </ProfileField>
       </>
     ),
@@ -698,7 +710,6 @@ const ProfilePage = (props: Props): ReactElement => {
               profileData: profileData,
               flow: getFlow(profileData),
             },
-            setUser: (): void => {},
             setProfileData,
             onBack,
           }}
@@ -756,7 +767,7 @@ const ProfilePage = (props: Props): ReactElement => {
                                 onClick={(): Promise<void> => onBack()}
                                 dataTestId="back"
                               >
-                                {Config.profileDefaults.backButtonText}
+                                {Config.profileDefaults.default.backButtonText}
                               </SecondaryButton>
                               <PrimaryButton
                                 isColor="primary"
@@ -766,7 +777,7 @@ const ProfilePage = (props: Props): ReactElement => {
                                 dataTestId="save"
                                 isLoading={isLoading}
                               >
-                                {Config.profileDefaults.saveButtonText}
+                                {Config.profileDefaults.default.saveButtonText}
                               </PrimaryButton>
                             </div>
                           </div>

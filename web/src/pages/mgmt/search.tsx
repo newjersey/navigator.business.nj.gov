@@ -11,7 +11,9 @@ import { searchContextualInfo } from "@/lib/search/searchContextualInfo";
 import { searchFundings } from "@/lib/search/searchFundings";
 import { searchIndustries } from "@/lib/search/searchIndustries";
 import { searchLicenseEvents } from "@/lib/search/searchLicenseEvents";
+import { searchNonEssentialQuestions } from "@/lib/search/searchNonEssentialQuestions";
 import { searchPostOnboarding } from "@/lib/search/searchPostOnboarding";
+import { searchQuickActions } from "@/lib/search/searchQuickActions";
 import { searchSidebarCards } from "@/lib/search/searchSidebarCards";
 import { searchSteps } from "@/lib/search/searchSteps";
 import { searchTasks } from "@/lib/search/searchTasks";
@@ -27,6 +29,7 @@ import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllLicenses } from "@/lib/static/loadLicenses";
 import { loadAllPostOnboarding } from "@/lib/static/loadPostOnboarding";
+import { loadAllQuickActions } from "@/lib/static/loadQuickActions";
 import { loadAllLicenseTasks, loadAllTasksOnly } from "@/lib/static/loadTasks";
 import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
 import {
@@ -35,13 +38,16 @@ import {
   Filing,
   Funding,
   LicenseEvent,
+  NonEssentialQuestion,
   PostOnboardingFile,
+  QuickAction,
   RoadmapDisplayContent,
   SidebarCardContent,
   Step,
   Task,
   WebflowLicense,
 } from "@/lib/types/types";
+import NonEssentialQuestions from "@businessnjgovnavigator/content/roadmaps/nonEssentialQuestions.json";
 import ForeignSteps from "@businessnjgovnavigator/content/roadmaps/steps-foreign.json";
 import Steps from "@businessnjgovnavigator/content/roadmaps/steps.json";
 import { Industries } from "@businessnjgovnavigator/shared";
@@ -65,6 +71,7 @@ interface Props {
   archivedContextualInfo: ContextualInfoFile[];
   postOnboarding: PostOnboardingFile[];
   licenseEvents: LicenseEvent[];
+  quickActions: QuickAction[];
   cmsConfig: any;
 }
 
@@ -80,8 +87,10 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [fundingMatches, setFundingMatches] = useState<Match[]>([]);
   const [industryMatches, setIndustryMatches] = useState<Match[]>([]);
   const [stepsMatches, setStepsMatches] = useState<Match[]>([]);
+  const [nonEssentialQuestionsMatches, setNonEssentialQuestionsMatches] = useState<Match[]>([]);
   const [webflowLicenseMatches, setWebflowLicenseMatches] = useState<Match[]>([]);
   const [filingMatches, setFilingMatches] = useState<Match[]>([]);
+  const [quickActionMatches, setQuickActionMatches] = useState<Match[]>([]);
   const [sidebarCardMatches, setSidebarCardMatches] = useState<Match[]>([]);
   const [contextualInfoMatches, setContextualInfoMatches] = useState<Match[]>([]);
   const [archivedContextualInfoMatches, setArchivedContextualInfoMatches] = useState<Match[]>([]);
@@ -114,12 +123,20 @@ const SearchContentPage = (props: Props): ReactElement => {
     setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
     setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
     setIndustryMatches(searchIndustries(Industries, lowercaseTerm));
+    setQuickActionMatches(searchQuickActions(props.quickActions, lowercaseTerm));
 
     const defaultStepsMatches = searchSteps(Steps.steps as Step[], lowercaseTerm, { filename: "Steps" });
     const foreignStepsMatches = searchSteps(ForeignSteps.steps as Step[], lowercaseTerm, {
       filename: "Steps - Dakota",
     });
     setStepsMatches([...defaultStepsMatches, ...foreignStepsMatches]);
+
+    setNonEssentialQuestionsMatches(
+      searchNonEssentialQuestions(
+        NonEssentialQuestions.nonEssentialQuestionsArray as NonEssentialQuestion[],
+        lowercaseTerm
+      )
+    );
 
     setWebflowLicenseMatches(searchWebflowLicenses(props.webflowLicenses, lowercaseTerm));
     setFilingMatches(searchTaxFilings(props.filings, lowercaseTerm));
@@ -142,6 +159,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...fundingMatches,
         ...industryMatches,
         ...stepsMatches,
+        ...nonEssentialQuestionsMatches,
         ...filingMatches,
         ...licenseEventMatches,
         ...sidebarCardMatches,
@@ -149,6 +167,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...archivedContextualInfoMatches,
         ...contextualInfoMatches,
         ...groupedConfigMatches,
+        ...quickActionMatches,
       ].length === 0
     );
   };
@@ -170,6 +189,7 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const roadmapsCollection = {
     "Roadmaps - Settings": stepsMatches,
+    "Roadmaps - Non Essential Question": nonEssentialQuestionsMatches,
   };
 
   const calendarCollection = {
@@ -184,6 +204,10 @@ const SearchContentPage = (props: Props): ReactElement => {
   const miscCollection = {
     "Contextual Information": contextualInfoMatches,
     "Post Onboarding Content": postOnboardingMatches,
+  };
+
+  const quickActionCollection = {
+    "Quick Actions": quickActionMatches,
   };
 
   const authedView = (
@@ -214,6 +238,10 @@ const SearchContentPage = (props: Props): ReactElement => {
       <MatchCollection matchedCollections={calendarCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={dashboardCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={miscCollection} groupedConfigMatches={groupedConfigMatches} />
+      <MatchCollection
+        matchedCollections={quickActionCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
     </div>
   );
 
@@ -252,6 +280,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       archivedContextualInfo: loadAllArchivedContextualInfo(),
       postOnboarding: loadAllPostOnboarding(),
       licenseEvents: loadAllLicenses(),
+      quickActions: loadAllQuickActions(),
       cmsConfig: loadCmsConfig(),
     },
   };

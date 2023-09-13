@@ -18,7 +18,7 @@ import {
   Industry,
   isIndustryIdGeneric,
   LookupIndustryById,
-} from "@businessnjgovnavigator/shared/";
+} from "@businessnjgovnavigator/shared";
 import { Autocomplete, createFilterOptions, FilterOptionsState, TextField } from "@mui/material";
 import { orderBy } from "lodash";
 import { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
@@ -75,6 +75,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       ...getResetIndustrySpecificData(industryId),
       homeBasedBusiness,
       cannabisLicenseType,
+      nonEssentialRadioAnswers: {},
       industryId: industryId,
       sectorId: newSector,
       naicsCode: state.profileData.industryId === industryId ? state.profileData.naicsCode : "",
@@ -163,7 +164,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
               id="industryId"
               inputProps={{
                 "aria-label": "Industry",
-                "data-testid": "industryid",
+                "data-testid": "industryId",
                 ...params.inputProps,
               }}
               value={searchText}

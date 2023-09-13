@@ -1,4 +1,5 @@
 import { AutosaveSpinner } from "@/components/AutosaveSpinner";
+import { FieldEntryAlert } from "@/components/FieldEntryAlert";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { HelpButton } from "@/components/njwds-extended/HelpButton";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
@@ -14,8 +15,8 @@ import {
   UNKNOWN_API_ERROR_FIELD,
 } from "@/components/tasks/business-formation/getFieldForApiField";
 import { validatedFieldsForUser } from "@/components/tasks/business-formation/validatedFieldsForUser";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -24,7 +25,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { FormationStepNames, StepperStep } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
+import { getConfigFieldByLegalStructure, scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
 import { Business, FormationFormData, getCurrentBusiness } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
@@ -38,7 +39,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   const { updateQueue, business } = useUserData();
   const { state, setStepIndex, setHasBeenSubmitted, setFormationFormData, setFieldsInteracted } =
     useContext(BusinessFormationContext);
-  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
   const { doesStepHaveError, isStepCompleted, allCurrentErrorsForStep, getApiErrorMessage } =
     useFormationErrors();
@@ -49,6 +50,8 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   const errorAlertRef = useRef<HTMLDivElement>(null);
   const isMounted = useRef(false);
   const isDesktop = useMediaQuery(MediaQueries.desktopAndUp);
+
+  type ConfigFormationFields = keyof typeof Config.formation.fields;
 
   useEffect(() => {
     if (isMounted.current) {
@@ -111,7 +114,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     config: { moveType: "PREVIOUS_BUTTON" | "NEXT_BUTTON" | "STEPPER" }
   ): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      setRegistrationModalIsVisible(true);
+      setShowNeedsAccountModal(true);
       return;
     }
 
@@ -456,26 +459,34 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
         );
       });
 
+      const fieldsWithErrors = dedupedFieldErrors.map((fieldError) => {
+        let configFieldName = fieldError.field as ConfigFormationFields;
+
+        if (fieldError.field === "members") {
+          configFieldName = getConfigFieldByLegalStructure(state.formationFormData.legalType);
+        }
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const label = (Config.formation.fields as any)[configFieldName].label;
+        return {
+          name: configFieldName,
+          label,
+          children: getApiErrorMessage(fieldError.field) && (
+            <ul>
+              <li>{getApiErrorMessage(fieldError.field)}</li>
+            </ul>
+          ),
+        };
+      });
+
       return (
-        <Alert variant="error">
-          <div>{Config.formation.errorBanner.errorOnStep}</div>
-          <ul>
-            {dedupedFieldErrors.map((fieldError) => {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              const label = (Config.formation.fields as any)[fieldError.field].label;
-              return (
-                <li key={label}>
-                  {label}
-                  {getApiErrorMessage(fieldError.field) && (
-                    <ul>
-                      <li>{getApiErrorMessage(fieldError.field)}</li>
-                    </ul>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </Alert>
+        <FieldEntryAlert
+          alertMessage={Config.formation.errorBanner.errorOnStep}
+          alertProps={{
+            variant: "error",
+          }}
+          fields={fieldsWithErrors}
+        />
       );
     }
 

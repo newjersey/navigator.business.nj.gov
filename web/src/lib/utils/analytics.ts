@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { LegacyEventAction, LegacyEventCategory, LegacyEventLabel } from "@/lib/utils/analytics-legacy";
 import analytics from "./analytics-base";
+
 export const GTM_ID = process.env.GOOGLE_TAG_MANAGER_ID;
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -102,7 +103,7 @@ type Clicked =
   | "expand_contract"
   | "go_to_profile_screen"
   | "go_to_myNJ_login"
-  | "go_to_myNJ_registration"
+  | "go_to_NavigatorAccount_setup"
   | "log_out"
   | "unlinked_myNJ_account"
   | "get_unlinked_myNJ_account_modal";
@@ -134,6 +135,7 @@ type Action =
   | "go_to_myNJ_registration"
   | "go_to_filing_detail_screen"
   | "go_to_profile_screen"
+  | "go_to_NavigatorAccount_setup"
   | "return_from_myNJ_registration";
 
 type ClickText =
@@ -165,6 +167,7 @@ type FormName =
   | "cannabis_license"
   | "industry_essential_questions"
   | "name_search"
+  | "account_setup"
   | "task_address_form";
 
 type OnTabName =
@@ -208,10 +211,13 @@ type Item =
   | "landing_page_navbar_log_in"
   | "guest_modal"
   | "guest_menu"
-  | "guest_toast"
+  | "guest_snackbar"
   | "roadmap_logout_button"
   | "landing_page_hero_log_in"
   | "go_to_profile_nudge_button"
+  | "opportunity_card"
+  | "hidden_opportunities_section"
+  | "link_with_myNJ"
   | "landing_page";
 
 type BooleanResponseOption = "yes" | "no";
@@ -456,6 +462,19 @@ export default {
   },
   dimensions: dimensionRunner,
   event: {
+    landing_page: {
+      arrive: {
+        get_unlinked_myNJ_account: () => {
+          eventRunner.track({
+            legacy_event_action: "arrive",
+            legacy_event_category: "landing_page",
+            legacy_event_label: "get_unlinked_myNJ_account",
+            event: "navigation_clicks",
+            item: "link_with_myNJ",
+          });
+        },
+      },
+    },
     landing_page_hero_log_in: {
       click: {
         go_to_myNJ_login: () => {
@@ -542,43 +561,29 @@ export default {
         },
       },
     },
-    landing_page: {
-      arrive: {
-        get_unlinked_myNJ_account_modal: () => {
-          eventRunner.track({
-            event: "account_clicks",
-            legacy_event_action: "arrive",
-            legacy_event_category: "landing_page",
-            legacy_event_label: "get_unlinked_myNJ_account_modal",
-            clicked: "get_unlinked_myNJ_account_modal",
-            item: "landing_page",
-          });
-        },
-      },
-    },
     guest_snackbar: {
       click: {
-        go_to_myNJ_registration: () => {
+        go_to_NavigatorAccount_setup: () => {
           eventRunner.track({
             event: "account_clicks",
             legacy_event_action: "click",
             legacy_event_category: "guest_snackbar",
-            legacy_event_label: "go_to_myNJ_registration",
-            clicked: "go_to_myNJ_registration",
-            item: "guest_toast",
+            legacy_event_label: "go_to_NavigatorAccount_setup",
+            clicked: "go_to_NavigatorAccount_setup",
+            item: "guest_snackbar",
           });
         },
       },
     },
     guest_modal: {
       click: {
-        go_to_myNJ_registration: () => {
+        go_to_NavigatorAccount_setup: () => {
           eventRunner.track({
             event: "account_clicks",
             legacy_event_action: "click",
             legacy_event_category: "guest_modal",
-            legacy_event_label: "go_to_myNJ_registration",
-            clicked: "go_to_myNJ_registration",
+            legacy_event_label: "go_to_NavigatorAccount_setup",
+            clicked: "go_to_NavigatorAccount_setup",
             item: "guest_modal",
           });
         },
@@ -596,13 +601,13 @@ export default {
     },
     guest_menu: {
       click: {
-        go_to_myNJ_registration: () => {
+        go_to_NavigatorAccount_setup: () => {
           eventRunner.track({
             event: "account_clicks",
             legacy_event_action: "click",
             legacy_event_category: "guest_menu",
-            legacy_event_label: "go_to_myNJ_registration",
-            clicked: "go_to_myNJ_registration",
+            legacy_event_label: "go_to_NavigatorAccount_setup",
+            clicked: "go_to_NavigatorAccount_setup",
             item: "guest_menu",
           });
         },
@@ -1797,13 +1802,13 @@ export default {
     },
     myNJ_prompt_modal_complete_button: {
       click: {
-        go_to_myNJ_registration: () => {
+        go_to_NavigatorAccount_setup: () => {
           eventRunner.track({
             event: "graduation_phase_interactions",
             legacy_event_action: "click",
             legacy_event_category: "myNJ_prompt_modal_complete_button",
-            legacy_event_label: "go_to_myNJ_registration",
-            action: "go_to_myNJ_registration",
+            legacy_event_label: "go_to_NavigatorAccount_setup",
+            action: "go_to_NavigatorAccount_setup",
             item: "myNJ_prompt_modal_complete_button",
           });
         },
@@ -1934,6 +1939,57 @@ export default {
         },
       },
     },
+    for_you_card_hide_button: {
+      click: {
+        hide_card: () => {
+          eventRunner.track({
+            legacy_event_category: "for_you_card_hide_button",
+            legacy_event_action: "click",
+            legacy_event_label: "hide_card",
+            event: "link_clicks",
+            click_text: "hide",
+            item: "opportunity_card",
+          });
+        },
+      },
+    },
+    opportunity_card: {
+      click: {
+        go_to_opportunity_screen: () => {
+          eventRunner.track({
+            legacy_event_category: "opportunity_card",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_opportunity_screen",
+            event: "link_clicks",
+            item: "opportunity_card",
+          });
+        },
+      },
+    },
+    for_you_card_unhide_button: {
+      click: {
+        unhide_card: () => {
+          eventRunner.track({
+            legacy_event_category: "for_you_card_unhide_button",
+            legacy_event_action: "click",
+            legacy_event_label: "unhide_card",
+            event: "link_clicks",
+            click_text: "unhide",
+            item: "opportunity_card",
+          });
+        },
+        unhide_cards: () => {
+          eventRunner.track({
+            legacy_event_category: "for_you_card_unhide_button",
+            legacy_event_action: "click",
+            legacy_event_label: "unhide_cards",
+            event: "navigation_clicks",
+            clicked: "expand_contract",
+            item: "hidden_opportunities_section",
+          });
+        },
+      },
+    },
     go_to_profile_nudge: {
       click: {
         go_to_profile: () => {
@@ -1944,6 +2000,20 @@ export default {
             legacy_event_label: "go_to_profile",
             action: "go_to_profile_screen",
             item: "go_to_profile_nudge_button",
+          });
+        },
+      },
+    },
+    finish_setup_on_myNewJersey_button: {
+      submit: {
+        go_to_myNJ_registration: () => {
+          eventRunner.track({
+            legacy_event_category: "finish_setup_on_myNewJersey_button",
+            legacy_event_action: "submit",
+            legacy_event_label: "go_to_myNJ_registration",
+            event: "form_submits",
+            form_name: "account_setup",
+            action: "go_to_myNJ_registration",
           });
         },
       },

@@ -1,5 +1,6 @@
 import { GenericTextField } from "@/components/GenericTextField";
-import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { WithErrorBar } from "@/components/WithErrorBar";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
@@ -10,22 +11,29 @@ import {
 } from "@/lib/domain-logic/isFullNameValid";
 import { FormContextFieldProps } from "@/lib/types/types";
 import { validateEmail } from "@/lib/utils/helpers";
+import { BusinessUser } from "@businessnjgovnavigator/shared/businessUser";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement, useContext, useState } from "react";
 
-export const OnboardingNameAndEmail = <T,>(props: FormContextFieldProps<T>): ReactElement => {
-  const { state, setUser } = useContext(ProfileDataContext);
-  const [email, setEmail] = useState<string>(state.user?.email || "");
-  const [confirmEmail, setConfirmEmail] = useState<string | undefined>(state.user?.email || undefined);
+interface Props extends FormContextFieldProps {
+  user: BusinessUser;
+  setUser: (user: BusinessUser) => void;
+}
+
+export const OnboardingNameAndEmail = (props: Props): ReactElement => {
+  const [email, setEmail] = useState<string>(props.user.email || "");
+  const [confirmEmail, setConfirmEmail] = useState<string | undefined>(props.user.email || undefined);
   const { Config } = useConfig();
+  const { registrationStatus, setRegistrationStatus } = useContext(NeedsAccountContext);
 
-  const { Validate, isFormFieldInValid, RegisterForOnSubmit } = useFormContextFieldHelpers(
-    "email",
-    profileFormContext,
-    props.errorTypes
+  const emailFormContextHelpers = useFormContextFieldHelpers("email", profileFormContext, props.errorTypes);
+
+  const nameFormContextHelpers = useFormContextFieldHelpers("name", profileFormContext, props.errorTypes);
+
+  emailFormContextHelpers.RegisterForOnSubmit(() =>
+    props.user.email ? validateEmail(props.user.email) : false
   );
-
-  RegisterForOnSubmit(() => (state.user?.email ? validateEmail(state.user.email) : false));
+  nameFormContextHelpers.RegisterForOnSubmit(() => getFullNameErrorVariant(props.user.name) === "NO_ERROR");
 
   const FullNameErrorMessageLookup: Record<FullNameErrorVariant, string> = {
     MISSING: Config.selfRegistration.errorTextFullName,
@@ -36,19 +44,19 @@ export const OnboardingNameAndEmail = <T,>(props: FormContextFieldProps<T>): Rea
   };
 
   const updateEmailState = (value: string): void => {
-    state.user && setUser({ ...state.user, email: value });
+    props.setUser({ ...props.user, email: value });
   };
 
   const handleUserTesting = (value: boolean): void => {
-    state.user && setUser({ ...state.user, userTesting: value });
+    props.setUser({ ...props.user, userTesting: value });
   };
 
   const handleNewsletter = (value: boolean): void => {
-    state.user && setUser({ ...state.user, receiveNewsletter: value });
+    props.setUser({ ...props.user, receiveNewsletter: value });
   };
 
   const handleName = (value: string): void => {
-    state.user && setUser({ ...state.user, name: value });
+    props.setUser({ ...props.user, name: value });
   };
 
   const handleEmail = (confirm = false) => {
@@ -63,60 +71,97 @@ export const OnboardingNameAndEmail = <T,>(props: FormContextFieldProps<T>): Rea
     };
   };
 
+  const getEmailError = (): boolean => {
+    return emailFormContextHelpers.isFormFieldInValid || registrationStatus === "DUPLICATE_ERROR";
+  };
+
+  const getEmailValidationText = (emailInput: { isConfirmEmail: boolean }): string => {
+    if (registrationStatus === "DUPLICATE_ERROR") {
+      if (emailInput.isConfirmEmail) {
+        return Config.selfRegistration.errorTextDuplicateSignUp;
+      }
+      return "";
+    }
+    return Config.selfRegistration.errorTextEmailsNotMatching;
+  };
+
+  const resetRegistrationErrorOnFocus = (): void => {
+    if (registrationStatus === "DUPLICATE_ERROR") {
+      setRegistrationStatus(undefined);
+    }
+  };
+
   return (
     <div className="tablet:padding-y-2">
       <p className="padding-bottom-1">{Config.selfRegistration.signUpDescriptionText}</p>
       <div className="margin-top-2">
-        <label htmlFor="name">{Config.selfRegistration.nameFieldLabel}</label>
-        <GenericTextField
-          value={state.user?.name}
-          formContext={profileFormContext}
-          fieldName={"name"}
-          validationText={FullNameErrorMessageLookup[getFullNameErrorVariant(state.user?.name)]}
-          required={true}
-          handleChange={handleName}
-          additionalValidationIsValid={isFullNameValid}
-          inputWidth="default"
-        />
+        <WithErrorBar hasError={nameFormContextHelpers.isFormFieldInValid} type="ALWAYS">
+          <label htmlFor="name" className="text-bold">
+            {Config.selfRegistration.nameFieldLabel}
+          </label>
+          <GenericTextField
+            value={props.user.name}
+            formContext={profileFormContext}
+            fieldName={"name"}
+            error={nameFormContextHelpers.isFormFieldInValid}
+            validationText={FullNameErrorMessageLookup[getFullNameErrorVariant(props.user.name)]}
+            required={true}
+            handleChange={handleName}
+            additionalValidationIsValid={isFullNameValid}
+            inputWidth="default"
+            onFocus={resetRegistrationErrorOnFocus}
+          />
+        </WithErrorBar>
       </div>
-      <div className="margin-top-2">
-        <label htmlFor="email">{Config.selfRegistration.emailFieldLabel}</label>
-        <GenericTextField
-          value={email}
-          fieldName={"email"}
-          error={isFormFieldInValid}
-          handleChange={handleEmail()}
-          onValidation={(_, invalid): void => Validate(invalid)}
-          validationText={Config.selfRegistration.errorTextEmailsNotMatching}
-          required={true}
-          additionalValidationIsValid={(value): boolean => {
-            return confirmEmail ? value === confirmEmail : true && validateEmail(value);
-          }}
-          inputWidth="default"
-        />
-      </div>
-      <div className="margin-y-2">
-        <label htmlFor="confirm-email">{Config.selfRegistration.confirmEmailFieldLabel}</label>
-        <GenericTextField
-          value={confirmEmail}
-          error={isFormFieldInValid}
-          handleChange={handleEmail(true)}
-          onValidation={(_, invalid): void => Validate(invalid)}
-          required={true}
-          additionalValidationIsValid={(value): boolean => {
-            return value === email && validateEmail(value);
-          }}
-          validationText={Config.selfRegistration.errorTextEmailsNotMatching}
-          fieldName={"confirm-email"}
-          inputWidth="default"
-        />
-      </div>
+      <WithErrorBar hasError={registrationStatus === "DUPLICATE_ERROR"} type="ALWAYS">
+        <div className="margin-top-2">
+          <WithErrorBar hasError={getEmailError()} type="ALWAYS">
+            <label htmlFor="email" className="text-bold">
+              {Config.selfRegistration.emailFieldLabel}
+            </label>
+            <GenericTextField
+              value={email}
+              fieldName={"email"}
+              error={getEmailError()}
+              handleChange={handleEmail()}
+              onValidation={(_, invalid): void => emailFormContextHelpers.Validate(invalid)}
+              validationText={getEmailValidationText({ isConfirmEmail: false })}
+              required={true}
+              additionalValidationIsValid={(value): boolean => {
+                return confirmEmail ? value === confirmEmail : true && validateEmail(value);
+              }}
+              inputWidth="default"
+              onFocus={resetRegistrationErrorOnFocus}
+            />
+          </WithErrorBar>
+        </div>
+        <div className="margin-y-2">
+          <WithErrorBar hasError={getEmailError()} type="ALWAYS">
+            <label htmlFor="confirm-email" className="text-bold">
+              {Config.selfRegistration.confirmEmailFieldLabel}
+            </label>
+            <GenericTextField
+              value={confirmEmail}
+              error={getEmailError()}
+              handleChange={handleEmail(true)}
+              onValidation={(_, invalid): void => emailFormContextHelpers.Validate(invalid)}
+              required={true}
+              additionalValidationIsValid={(value): boolean => {
+                return value === email && validateEmail(value);
+              }}
+              validationText={getEmailValidationText({ isConfirmEmail: true })}
+              fieldName={"confirm-email"}
+              inputWidth="default"
+            />
+          </WithErrorBar>
+        </div>
+      </WithErrorBar>
       <FormGroup>
         <FormControlLabel
           label={Config.selfRegistration.newsletterCheckboxLabel}
           control={
             <Checkbox
-              checked={state.user?.receiveNewsletter}
+              checked={props.user.receiveNewsletter}
               onChange={(event): void => handleNewsletter(event.target.checked)}
               id="newsletterCheckbox"
             />
@@ -126,7 +171,7 @@ export const OnboardingNameAndEmail = <T,>(props: FormContextFieldProps<T>): Rea
           label={Config.selfRegistration.userTestingCheckboxLabel}
           control={
             <Checkbox
-              checked={state.user?.userTesting}
+              checked={props.user.userTesting}
               onChange={(event): void => handleUserTesting(event.target.checked)}
               id="contactMeCheckbox"
             />

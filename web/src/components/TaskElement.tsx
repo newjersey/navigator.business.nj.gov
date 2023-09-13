@@ -1,12 +1,12 @@
 import { Content } from "@/components/Content";
 import { DeferredLocationQuestion } from "@/components/DeferredLocationQuestion";
 import { HorizontalLine } from "@/components/HorizontalLine";
-import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
+import { PostOnboardingRadioQuestion } from "@/components/post-onboarding/PostOnboardingRadioQuestion";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { Task } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, ReactNode } from "react";
@@ -18,6 +18,7 @@ interface Props {
 }
 
 export const TaskElement = (props: Props): ReactElement => {
+  const { Config } = useConfig();
   const hasPostOnboardingQuestion = !!props.task.postOnboardingQuestion;
   const shouldShowDeferredQuestion = props.task.requiresLocation;
   let hasDeferredLocationQuestion = false;
@@ -40,7 +41,11 @@ export const TaskElement = (props: Props): ReactElement => {
     }
     return rswitch(task.postOnboardingQuestion, {
       "construction-renovation": (
-        <RadioQuestion id="construction-renovation" onboardingKey="constructionRenovationPlan" />
+        <PostOnboardingRadioQuestion
+          postOnboardingQuestionId="construction-renovation"
+          onboardingKey="constructionRenovationPlan"
+          taskId={task.id}
+        />
       ),
       default: <></>,
     });

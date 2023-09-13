@@ -49,7 +49,7 @@ export const ProfileNaicsCode = (): ReactElement => {
         {shouldLockField() ? (
           <div className="margin-left-2">
             <ArrowTooltip
-              title={Config.profileDefaults.lockedFieldTooltipText}
+              title={Config.profileDefaults.default.lockedFieldTooltipText}
               data-testid="naics-code-tooltip"
             >
               <div className="fdr fac font-body-lg">
@@ -58,7 +58,7 @@ export const ProfileNaicsCode = (): ReactElement => {
             </ArrowTooltip>
           </div>
         ) : (
-          <a className="margin-left-2" href={naicsTaskUrl}>
+          <a className="text-accent-cool-darker margin-left-2" href={naicsTaskUrl}>
             {state.profileData.naicsCode ? contentFromConfig.editText : contentFromConfig.addText}
           </a>
         )}

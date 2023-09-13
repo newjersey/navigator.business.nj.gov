@@ -1,8 +1,8 @@
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { scrollToTop } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useContext } from "react";
 
 interface Props {
@@ -12,6 +12,7 @@ interface Props {
 
 export const OnboardingButtonGroup = (props: Props): ReactElement => {
   const { state, onBack } = useContext(ProfileDataContext);
+  const { Config } = useConfig();
 
   const back = (event: React.MouseEvent): void => {
     event.preventDefault();

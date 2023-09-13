@@ -88,62 +88,58 @@ export const OnboardingSplitTaxId = ({
 
   return (
     <taxIdFormContext.Provider value={formContextState}>
-      <div className={isTabletAndUp ? "flex flex-row" : "flex flex-column"}>
-        <div className="grid-row">
-          <div className="grid-col">
-            <GenericTextField
-              ref={taxIdBoxRef}
-              value={taxIdValue}
-              formContext={taxIdFormContext}
-              fieldOptions={{
-                FormHelperTextProps: { sx: { whiteSpace: "nowrap" } },
-              }}
-              fieldName={fieldName as string}
-              error={isFormFieldInValid}
-              visualFilter={formatTaxId}
-              numericProps={{ minLength: 9, maxLength: 9 }}
-              validationText={validationText ?? contentFromConfig.errorTextRequired ?? ""}
-              handleChange={(value): void => {
-                handleChange(value, "taxId");
-              }}
-              onValidation={(fieldName: string, invalid: boolean): void => Validate(invalid)}
-              disabled={props.taxIdDisplayStatus === "password-view"}
-              type={props.taxIdDisplayStatus === "text-view" ? "text" : "password"}
-              allowMasking={true}
-              inputWidth={"reduced"}
-              {...props}
-            />
-          </div>
-          <div className="grid-row">
-            <span className="padding-x-2 padding-bottom-2 padding-top-1">/</span>
-            <GenericTextField
-              inputWidth={"full"}
-              ref={locationBoxRef}
-              value={locationValue}
-              formContext={taxIdFormContext}
-              className={"grid-col flex-fill"}
-              error={isFormFieldInValid}
-              fieldOptions={{ sx: { textAlignLast: "center", maxWidth: "4em" } }}
-              fieldName={"taxIdLocation"}
-              numericProps={{ minLength: 3, maxLength: 3 }}
-              handleChange={(value): void => {
-                handleChange(value, "taxIdLocation");
-              }}
-              onValidation={(fieldName: string, invalid: boolean): void => Validate(invalid)}
-              disabled={props.taxIdDisplayStatus === "password-view"}
-              type={props.taxIdDisplayStatus === "text-view" ? "text" : "password"}
-              allowMasking={true}
-              {...props}
-            />
-          </div>
+      <div className="grid-row">
+        <div className="grid-col-7 tablet:grid-col-7">
+          <GenericTextField
+            ref={taxIdBoxRef}
+            value={taxIdValue}
+            formContext={taxIdFormContext}
+            fieldOptions={{
+              FormHelperTextProps: { sx: { whiteSpace: "nowrap" } },
+            }}
+            fieldName={fieldName as string}
+            error={isFormFieldInValid}
+            visualFilter={formatTaxId}
+            numericProps={{ minLength: 9, maxLength: 9 }}
+            validationText={validationText ?? contentFromConfig.errorTextRequired ?? ""}
+            handleChange={(value): void => {
+              handleChange(value, "taxId");
+            }}
+            onValidation={(fieldName: string, invalid: boolean): void => Validate(invalid)}
+            disabled={props.taxIdDisplayStatus === "password-view"}
+            type={props.taxIdDisplayStatus === "text-view" ? "text" : "password"}
+            allowMasking={true}
+            inputWidth={"reduced"}
+            {...props}
+          />
         </div>
-
-        <div
-          className={
-            isTabletAndUp ? "padding-top-1 margin-left-3" : "flex flex-justify-center margin-bottom-3"
-          }
-        >
-          {props.getShowHideToggleButton(updateSplitTaxId)}
+        <div className="grid-col-5 tablet:grid-col-3 flex">
+          <span className="padding-x-2 padding-top-2">/</span>
+          <GenericTextField
+            inputWidth={"full"}
+            ref={locationBoxRef}
+            value={locationValue}
+            formContext={taxIdFormContext}
+            className={"grid-col flex-fill"}
+            error={isFormFieldInValid}
+            fieldName={"taxIdLocation"}
+            numericProps={{ minLength: 3, maxLength: 3 }}
+            handleChange={(value): void => {
+              handleChange(value, "taxIdLocation");
+            }}
+            onValidation={(fieldName: string, invalid: boolean): void => Validate(invalid)}
+            disabled={props.taxIdDisplayStatus === "password-view"}
+            type={props.taxIdDisplayStatus === "text-view" ? "text" : "password"}
+            allowMasking={true}
+            {...props}
+          />
+        </div>
+        <div className="grid-col-12 tablet:grid-col-2">
+          <div
+            className={isTabletAndUp ? "margin-top-2 margin-left-3" : "flex flex-justify-center margin-y-2"}
+          >
+            {props.getShowHideToggleButton(updateSplitTaxId)}
+          </div>
         </div>
       </div>
     </taxIdFormContext.Provider>

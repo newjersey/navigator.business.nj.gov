@@ -1,10 +1,12 @@
 import { OnboardingFlow } from "@/components/onboarding/OnboardingFlows";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { getMergedConfig } from "@/contexts/configContext";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { QUERY_PARAMS_VALUES } from "../domain-logic/routes";
 import { FlowType, Page } from "../types/types";
 import { getFlow, templateEval } from "./helpers";
+
+const Config = getMergedConfig();
 
 export const mapFlowQueryToPersona: Record<QUERY_PARAMS_VALUES["flow"], FlowType> = {
   starting: "STARTING",

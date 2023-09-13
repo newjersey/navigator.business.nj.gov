@@ -4,7 +4,7 @@ import "@newjersey/njwds/dist/css/styles.css";
 import "../styles/main.scss";
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 import { AuthReducer, authReducer } from "@/lib/auth/AuthContext";
-import { getCurrentUser } from "@/lib/auth/sessionHelper";
+import { getActiveUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
 import { Roadmap, UpdateQueue, UserDataError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
@@ -20,12 +20,12 @@ import { ReactElement, useEffect, useReducer, useState } from "react";
 import SEO from "../../next-seo.config";
 import { SWRConfig } from "swr";
 import { BusinessPersona, OperatingPhaseId, RegistrationStatus } from "@businessnjgovnavigator/shared";
-import { SignUpSnackbar } from "@/components/auth/SignUpSnackbar";
-import { SignUpModal } from "@/components/auth/SignUpModal";
-import { SelfRegSnackbar } from "@/components/auth/SelfRegSnackbar";
+import { NeedsAccountSnackbar } from "@/components/auth/NeedsAccountSnackbar";
+import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
+import { RegistrationStatusSnackbar } from "@/components/auth/RegistrationStatusSnackbar";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import { RoadmapContext } from "@/contexts/roadmapContext";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { AuthContext, initialState } from "@/contexts/authContext";
@@ -36,7 +36,7 @@ import { IntercomScript } from "@/components/IntercomScript";
 import { setOnLoadDimensions } from "@/lib/utils/analytics-helpers";
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
-AuthAlertContext.displayName = "Authentication Snackbar";
+NeedsAccountContext.displayName = "Needs Account";
 ContextualInfoContext.displayName = "Contextual Info";
 UserDataErrorContext.displayName = "User Data Error";
 
@@ -44,17 +44,17 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
   const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>(undefined);
   const [roadmap, setRoadmap] = useState<Roadmap | undefined>(undefined);
-  const [registrationAlertStatus, _setRegistrationAlertStatus] = useState<RegistrationStatus | undefined>(
+  const [registrationStatus, setRegistrationStatus] = useState<RegistrationStatus | undefined>(
     UserDataStorageFactory().getRegistrationStatus()
   );
 
-  const setRegistrationAlertStatus = (value: RegistrationStatus | undefined): void => {
-    _setRegistrationAlertStatus(value);
+  const setRegistrationStatusInStateAndStorage = (value: RegistrationStatus | undefined): void => {
+    setRegistrationStatus(value);
     UserDataStorageFactory().setRegistrationStatus(value);
   };
 
-  const [authSnackbar, setAuthSnackbar] = useState<boolean>(false);
-  const [authModal, setAuthModal] = useState<boolean>(false);
+  const [showNeedsAccountSnackbar, setShowNeedsAccountSnackbar] = useState<boolean>(false);
+  const [showNeedsAccountModal, setShowNeedsAccountModal] = useState<boolean>(false);
   const [contextualInfo, setContextualInfo] = useState<ContextualInfo>({
     isVisible: false,
     header: "",
@@ -107,15 +107,15 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
   useMountEffect(() => {
     if (!pageProps.noAuth) {
-      getCurrentUser()
-        .then((currentUser) => {
+      getActiveUser()
+        .then((activeUser) => {
           dispatch({
             type: "LOGIN",
-            user: currentUser,
+            activeUser: activeUser,
           });
         })
         .catch(() => {
-          onGuestSignIn(router.push, router.pathname, dispatch);
+          onGuestSignIn({ push: router.push, pathname: router.pathname, dispatch });
         });
     }
   });
@@ -141,7 +141,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       <Script src="/intercom/settings.js" />
       <Script src="/intercom/init.js" />
       <IntercomScript
-        user={state.user}
+        user={updateQueue?.current().user}
         operatingPhaseId={operatingPhaseId}
         legalStructureId={legalStructureId}
         industryId={industryId}
@@ -159,23 +159,23 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                   <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
                     <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
                       <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
-                        <AuthAlertContext.Provider
+                        <NeedsAccountContext.Provider
                           value={{
                             isAuthenticated: state.isAuthenticated,
-                            registrationAlertIsVisible: authSnackbar,
-                            registrationModalIsVisible: authModal,
-                            registrationAlertStatus,
-                            setRegistrationAlertStatus,
-                            setRegistrationAlertIsVisible: setAuthSnackbar,
-                            setRegistrationModalIsVisible: setAuthModal,
+                            showNeedsAccountSnackbar,
+                            showNeedsAccountModal,
+                            registrationStatus: registrationStatus,
+                            setRegistrationStatus: setRegistrationStatusInStateAndStorage,
+                            setShowNeedsAccountSnackbar,
+                            setShowNeedsAccountModal,
                           }}
                         >
                           <ContextualInfoPanel />
                           <Component {...pageProps} />
-                          <SignUpSnackbar />
-                          <SignUpModal />
-                          <SelfRegSnackbar />
-                        </AuthAlertContext.Provider>
+                          <NeedsAccountSnackbar />
+                          <NeedsAccountModal />
+                          <RegistrationStatusSnackbar />
+                        </NeedsAccountContext.Provider>
                       </RoadmapContext.Provider>
                     </ContextualInfoContext.Provider>
                   </UserDataErrorContext.Provider>

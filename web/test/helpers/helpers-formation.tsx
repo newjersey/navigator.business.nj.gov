@@ -12,7 +12,7 @@ import {
   TasksDisplayContent,
 } from "@/lib/types/types";
 import { generateTask, randomPublicFilingLegalType } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -76,9 +76,8 @@ type PreparePageParams = {
   municipalities?: Municipality[];
   task?: Task;
   isAuthenticated?: IsAuthenticated;
-  setRegistrationModalIsVisible?: (value: boolean) => void;
+  setShowNeedsAccountModal?: (value: boolean) => void;
   user?: Partial<BusinessUser>;
-  searchOnly?: boolean;
 };
 
 export const preparePage = ({
@@ -87,9 +86,8 @@ export const preparePage = ({
   municipalities,
   task,
   isAuthenticated,
-  setRegistrationModalIsVisible,
+  setShowNeedsAccountModal,
   user,
-  searchOnly,
 }: PreparePageParams): FormationPageHelpers => {
   const profileData = generateFormationProfileData({ ...business.profileData });
   const isValid = publicFilingLegalTypes.includes(profileData.legalStructureId as PublicFilingLegalType);
@@ -129,22 +127,18 @@ export const preparePage = ({
   });
 
   render(
-    withAuthAlert(
+    withNeedsAccountContext(
       <MunicipalitiesContext.Provider value={{ municipalities: internalMunicipalities }}>
         <WithStatefulUserData initialUserData={userData}>
           <ThemeProvider theme={createTheme()}>
-            <BusinessFormation
-              task={task ?? generateTask({})}
-              displayContent={displayContent}
-              searchOnly={searchOnly}
-            />
+            <BusinessFormation task={task ?? generateTask({})} displayContent={displayContent} />
           </ThemeProvider>
         </WithStatefulUserData>
       </MunicipalitiesContext.Provider>,
       isAuthenticated ?? IsAuthenticated.TRUE,
       {
-        registrationModalIsVisible: false,
-        setRegistrationModalIsVisible: setRegistrationModalIsVisible ?? jest.fn(),
+        showNeedsAccountModal: false,
+        setShowNeedsAccountModal: setShowNeedsAccountModal ?? jest.fn(),
       }
     )
   );
@@ -202,6 +196,7 @@ export type FormationPageHelpers = {
   getInputElementByLabel: (label: string) => HTMLInputElement;
   getInputElementByTestId: (testId: string) => HTMLInputElement;
   getInputElementByParentTestId: (testId: string, params: { type: string }) => HTMLInputElement;
+  getListBoxForInputElementByTestId: (testId: string) => Promise<HTMLInputElement>;
   selectByText: (label: string, value: string) => void;
   selectCheckbox: (label: string) => void;
   selectCheckboxByTestId: (testId: string) => void;
@@ -375,8 +370,8 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     });
   };
 
-  const chooseRadio = (value: string): void => {
-    fireEvent.click(screen.getByTestId(value));
+  const chooseRadio = (testId: string): void => {
+    fireEvent.click(screen.getByTestId(testId));
   };
 
   const getInputElementByLabel = (label: string): HTMLInputElement => {
@@ -500,6 +495,14 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     }
   };
 
+  const getListBoxForInputElementByTestId = async (testId: string): Promise<HTMLInputElement> => {
+    fireEvent.click(screen.getByTestId(testId));
+    await waitFor(() => {
+      expect(screen.getByRole("listbox")).toBeInTheDocument();
+    });
+    return screen.getByRole("listbox") as HTMLInputElement;
+  };
+
   return {
     fillText,
     fillAndSubmitBusinessNameStep,
@@ -509,6 +512,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     submitContactsStep,
     submitNexusBusinessNameStep,
     fillAndSubmitNexusBusinessNameStep,
+    getListBoxForInputElementByTestId,
     submitBillingStep,
     submitReviewStep,
     searchBusinessName,

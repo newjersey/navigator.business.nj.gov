@@ -502,7 +502,7 @@ collections:
                     widget: object
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
-                      - { label: "Contextual Label", name: "contextualLabel", widget: "string" }
+                      - { label: "Contextual Label", name: "contextualLabel", widget: "markdown" }
                       - { label: "Helper Text", name: "helperText", widget: "string" }
                       - { label: "Error Message - File Size", name: "errorMessageFileSize", widget: "string" }
                       - { label: "Error Message - File Type", name: "errorMessageFileType", widget: "string" }
@@ -554,6 +554,68 @@ collections:
                       - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Address checkbox label", name: "addressCheckboxText", widget: "string" }
                       - { label: "Expand text", name: "expandText", widget: "string" }
+                  - label: Nonprofit Provisions - Board Members
+                    name: hasNonprofitBoardMembers
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Body", name: "body", widget: "markdown" }
+                      - { label: "Review Label", name: "reviewLabel", widget: "string" }
+                      - { label: "Yes Review Text", name: "yesReviewText", widget: "markdown" }
+                      - { label: "No Review Text", name: "noReviewText", widget: "markdown" }
+                  - label: Nonprofit Provisions - Board Member Qualifications
+                    name: nonprofitBoardMemberQualificationsSpecified
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Body", name: "body", widget: "string" }
+                  - label: Nonprofit Provisions - Board Member Qualifications Terms
+                    name: nonprofitBoardMemberQualificationsTerms
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                  - label: Nonprofit Provisions - Board Member Rights
+                    name: nonprofitBoardMemberRightsSpecified
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Body", name: "body", widget: "string" }
+                  - label: Nonprofit Provisions - Board Member Rights Terms
+                    name: nonprofitBoardMemberRightsTerms
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                  - label: Nonprofit Provisions - Trustees
+                    name: nonprofitTrusteesMethodSpecified
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Body", name: "body", widget: "string" }
+                  - label: Nonprofit Provisions - Trustees Terms
+                    name: nonprofitTrusteesMethodTerms
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                  - label: Nonprofit Provisions - Asset Distribution
+                    name: nonprofitAssetDistributionSpecified
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Body", name: "body", widget: "string" }
+                  - label: Nonprofit Provisions - Asset Distribution Terms
+                    name: nonprofitAssetDistributionTerms
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
                   - label: Payment Type
                     name: paymentType
                     collapsed: true
@@ -619,12 +681,22 @@ collections:
                       - { label: "Error banner - checkbox", name: "errorBannerCheckbox", widget: "string" }
                       - {
                           label: "Error inline - first signer name",
-                          name: "errorInlineFirstSignerName",
+                          name: "errorInlineSignerName",
                           widget: "string",
                         }
                       - {
                           label: "Error inline - additional signer name",
                           name: "errorInlineAdditionalSignerName",
+                          widget: "string",
+                        }
+                      - {
+                          label: "Error inline - Name and Signature Missing",
+                          name: "errorInlineNameAndSignature",
+                          widget: "string",
+                        }
+                      - {
+                          label: "Error inline - Signature Missing",
+                          name: "errorInlineSignature",
                           widget: "string",
                         }
                       - {
@@ -658,6 +730,35 @@ collections:
                             widget: object
                             fields:
                               - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Trustees
+                    name: trustees
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Add Button Text", name: "addButtonText", widget: "string" }
+                      - { label: "Error", name: "error", widget: "string" }
+                      - { label: "Success snackbar - body", name: "successSnackbarBody", widget: "string" }
+                      - { label: "Modal Title", name: "modalTitle", widget: "string" }
+                      - { label: "Subheader", name: "subheader", widget: "string" }
+                      - { label: "Trustee Full Name", name: "trusteeFullName", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - {
+                          label: "Success snackbar - header",
+                          name: "successSnackbarHeader",
+                          widget: "string",
+                        }
+                      - { label: "Modal save button", name: "modalSaveButton", widget: "string" }
+                      - { label: "Description", name: "description", widget: "string" }
+                  - label: Will Practice Law
+                    name: willPracticeLaw
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Radio No Text", name: "radioNoText", widget: "string" }
+                      - { label: "Radio Yes Text", name: "radioYesText", widget: "string" }
+                      - { label: "Error", name: "error", widget: "string" }
                   - label: Withdrawals
                     name: withdrawals
                     collapsed: true
@@ -665,6 +766,18 @@ collections:
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
                       - { label: "Body", name: "body", widget: "markdown" }
+                  - label: Veteran Nonprofit
+                    name: isVeteranNonprofit
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                      - { label: "Radio no text", name: "radioNoText", widget: "string" }
+                      - { label: "Radio yes text", name: "radioYesText", widget: "string" }
+                      - { label: "Error", name: "error", widget: "string" }
+                      - { label: "Review Text - Yes", name: "reviewTextYes", widget: "markdown" }
+                      - { label: "Review Text - No", name: "reviewTextNo", widget: "markdown" }
               - label: Address Modal
                 name: addressModal
                 collapsed: true
@@ -798,12 +911,28 @@ collections:
                 collapsed: true
                 widget: object
                 fields:
-                  - { label: "LLC", name: "limited-liability-company", widget: "string" }
-                  - { label: "LP", name: "limited-partnership", widget: "string" }
-                  - { label: "LLP", name: "limited-liability-partnership", widget: "string" }
-                  - { label: "C-Corp", name: "c-corporation", widget: "string" }
-                  - { label: "S-Corp", name: "s-corporation", widget: "string" }
-                  - { label: "Foreign preface", name: "foreignPrefaceText", widget: "string" }
+                  - label: Domestic Labels
+                    name: domesticLabels
+                    collapsed: false
+                    widget: object
+                    fields:
+                      - { label: "LLC", name: "limited-liability-company", widget: "string" }
+                      - { label: "LP", name: "limited-partnership", widget: "string" }
+                      - { label: "LLP", name: "limited-liability-partnership", widget: "string" }
+                      - { label: "C-Corp", name: "c-corporation", widget: "string" }
+                      - { label: "S-Corp", name: "s-corporation", widget: "string" }
+                      - { label: "Nonprofit", name: "nonprofit", widget: "string" }
+                  - label: Foreign Labels
+                    name: foreignLabels
+                    collapsed: false
+                    widget: object
+                    fields:
+                      - { label: "LLC", name: "limited-liability-company", widget: "string" }
+                      - { label: "LP", name: "limited-partnership", widget: "string" }
+                      - { label: "LLP", name: "limited-liability-partnership", widget: "string" }
+                      - { label: "C-Corp", name: "c-corporation", widget: "string" }
+                      - { label: "S-Corp", name: "s-corporation", widget: "string" }
+                      - { label: "Nonprofit", name: "nonprofit", widget: "string" }
                   - { label: "Business structure", name: "label", widget: "markdown" }
                   - {
                       label: "Review step contextual info",
@@ -857,8 +986,19 @@ collections:
                       name: "partialAddressErrorText",
                       widget: "string",
                     }
-                  - { label: "View more button text", name: "viewMoreButtonText", widget: "string" }
-                  - { label: "View less button text", name: "viewLessButtonText", widget: "string" }
+                  - { label: "Read more button text", name: "viewMoreButtonText", widget: "string" }
+                  - { label: "Read less button text", name: "viewLessButtonText", widget: "string" }
+              - label: Nonprofit Provisions
+                name: nonprofitProvisions
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: "Provisions", name: "label", widget: "string" }
+                  - { label: "Description", name: "description", widget: "string" }
+                  - { label: "Radio no text", name: "radioNoText", widget: "string" }
+                  - { label: "Radio yes text", name: "radioYesText", widget: "string" }
+                  - { label: "Radio in bylaws text", name: "radioInBylawsText", widget: "string" }
+                  - { label: "Radio in form text", name: "radioInFormText", widget: "string" }
               - label: Intro Paragraph
                 name: intro
                 collapsed: true
@@ -1489,6 +1629,16 @@ collections:
             name: isCannabisLicenseTypeApplicable
             widget: boolean
             required: false
+      - label: Non Essential Questions
+        name: nonEssentialQuestionsIds
+        widget: relation
+        multiple: true
+        required: false
+        default: []
+        collection: "nonEssentialQuestionsCollection"
+        search_fields: ["nonEssentialQuestionsArray.*.id"]
+        value_field: "nonEssentialQuestionsArray.*.id"
+        display_fields: ["nonEssentialQuestionsArray.*.id"]
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list
@@ -1550,12 +1700,19 @@ collections:
   - name: addons
     label: "Roadmaps - Add-ons"
     folder: "content/src/roadmaps/add-ons"
+    slug: "{{id}}"
+    identifier_field: "{{id}}"
     extension: "json"
-    identifier_field: "{{filename}}"
+    create: true
+    delete: true
+    format: "json"
     summary: "{{filename}}"
     editor:
       preview: false
     fields:
+      - label: Filename
+        name: id
+        widget: string
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list
@@ -1614,6 +1771,36 @@ collections:
             value_field: "{{filename}}"
             display_fields: ["{{filename}}"]
             options_length: 500
+  - name: "nonEssentialQuestionsCollection"
+    label: "Roadmaps - Non Essential Questions"
+    editor:
+      preview: false
+    files:
+      - label: "Non Essential Questions"
+        name: "nonEssentialQuestionsArray"
+        file: "content/src/roadmaps/nonEssentialQuestions.json"
+        fields:
+          - label: Non Essential Questions
+            name: nonEssentialQuestionsArray
+            widget: list
+            create: true
+            summary: "{{id}}"
+            fields:
+              - label: ID
+                name: id
+                widget: string
+              - label: Question
+                name: questionText
+                widget: string
+              - label: Add On
+                name: addOn
+                widget: "relation"
+                collection: "addons"
+                search_fields: ["{{filename}}"]
+                value_field: "{{filename}}"
+                display_fields: ["{{filename}}"]
+                options_length: 500
+
   - name: "settings"
     label: "Roadmaps - Settings"
     editor:
@@ -2075,7 +2262,6 @@ collections:
             summary: "{{cannabisApplyForLicense}}"
             fields:
               - { label: Application Page Helper Text, name: applicationPageHelperText, widget: string }
-              - { label: Application Needs Header, name: applicationNeedsHeader, widget: string }
               - { label: General Application Needs, name: generalApplicationNeeds, widget: string }
               - { label: General Annual Requirements, name: annualGeneralRequirements, widget: markdown }
               - {
@@ -2354,24 +2540,6 @@ collections:
     fields:
       - { name: "" }
 
-  - name: "export-pdf-config"
-    label: "Export Pdf Config"
-    delete: false
-    create: false
-    files:
-      - label: "Export Pdf Config"
-        name: "export-pdf"
-        file: "content/src/fieldConfig/export-pdf.json"
-        editor:
-          preview: true
-        fields:
-          - label: "Tax Access Modal"
-            name: taxAccess
-            collapsed: false
-            widget: object
-            fields:
-              - { label: Download Button Text, name: downloadButtonText, widget: text }
-
   - name: "tax-access-modal-config"
     label: "Tax Access Modal Config"
     delete: false
@@ -2647,6 +2815,34 @@ collections:
                 }
               - { label: Mobile View - First Tab Text, name: mobileFirstTabText, widget: string }
               - { label: Mobile View - Second Tab Text, name: mobileSecondTabText, widget: string }
+      - label: "Account Setup Page"
+        name: "account-setup-page"
+        file: "content/src/fieldConfig/account-setup-page.json"
+        editor:
+          preview: true
+        fields:
+          - label: Account Setup
+            name: accountSetup
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Error Alert, name: errorAlert, widget: string }
+              - label: Default
+                name: default
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: Header, name: header, widget: string }
+                  - { label: Body, name: body, widget: markdown }
+                  - { label: Submit Button, name: submitButton, widget: string }
+              - label: With Existing Account
+                name: existingAccount
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: Header, name: header, widget: string }
+                  - { label: Body, name: body, widget: markdown }
+                  - { label: Submit Button, name: submitButton, widget: string }
 
   - name: "roadmap-sidebar-card"
     label: "Sidebar Cards Content"
@@ -2672,8 +2868,7 @@ collections:
           name: "imgPath",
           widget: "select",
           required: false,
-          options:
-            ["/img/congratulations-purple.svg", "/img/check-mark-circular-blue.svg", "/img/nudge-icon.svg"],
+          options: ["/img/congratulations-purple.svg", "/img/nudge-icon.svg"],
         }
       - { label: "Content", name: "body", widget: "markdown" }
       - {
@@ -2710,11 +2905,57 @@ collections:
           options: ["above-opportunities", "below-opportunities"],
         }
 
-  - name: "misc-label"
-    label: "🟧 MISC"
+  - name: "quick-actions-label"
+    label: "🟧 QUICK ACTIONS"
     folder: "content/src"
     fields:
       - { name: "" }
+
+  - name: "quick-actions"
+    label: "Quick Actions"
+    folder: "content/src/quick-actions"
+    summary: "{{filename}} - {{name}}"
+    identifier_field: "{{filename}}"
+    slug: "{{fields.filename}}"
+    delete: true
+    sortable_fields: ["name", "filename"]
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - { label: "Filename", name: "filename", widget: "nospace", required: false }
+      - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+      - { label: "Name/Title", name: "name", widget: "string" }
+      - { label: "ID", name: "id", widget: "string" }
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Form", name: "form", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+
+  - name: "misc-label"
+    label: "🟨 MISC"
+    folder: "content/src"
+    fields:
+      - { name: "" }
+
+  - name: "export-pdf-config"
+    label: "Export Pdf Config"
+    delete: false
+    create: false
+    files:
+      - label: "Export Pdf Config"
+        name: "export-pdf"
+        file: "content/src/fieldConfig/export-pdf.json"
+        editor:
+          preview: false
+        fields:
+          - label: "Export PDF"
+            name: exportPdf
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Download Button Text, name: downloadButtonText, widget: string }
 
   - name: "mappings"
     label: "Dropdown Mappings"
@@ -2786,7 +3027,6 @@ collections:
               - label: Id
                 name: id
                 widget: hidden
-
   - name: "config"
     label: "General Config"
     editor:
@@ -3191,14 +3431,39 @@ collections:
                   name: navBarUnnamedOwnedBusinessText,
                   widget: string,
                 }
-              - { label: Guest Alert Title, name: guestAlertTitle, widget: string }
-              - { label: Guest Alert Body, name: guestAlertBody, widget: text }
-              - { label: Guest Success Snackbar Title, name: guestSuccessTitle, widget: string }
-              - { label: Guest Success Snackbar Body, name: guestSuccessBody, widget: string }
-              - { label: Guest Alert Modal Title, name: guestModalTitle, widget: string }
-              - { label: Guest Alert Modal Body, name: guestModalBody, widget: text }
-              - { label: Guest Alert Button, name: guestModalButtonText, widget: string }
-              - { label: Guest Alert Sub Button text, name: guestModalSubText, widget: string }
+              - {
+                  label: Navbar Unnamed Business FOREIGN REMOTE_SELLER/REMOTE_WORKER text,
+                  name: navBarUnnamedForeignRemoteSellerWorkerText,
+                  widget: string,
+                }
+              - {
+                  label: Navbar Unnamed Business FOREIGN DBA unnamed text,
+                  name: navBarUnnamedDbaBusinessText,
+                  widget: string,
+                }
+              - { label: Needs Account Snackbar Title, name: needsAccountSnackbarTitle, widget: string }
+              - { label: Needs Account Snackbar Body, name: needsAccountSnackbarBody, widget: text }
+              - {
+                  label: Needs Account Snackbar Title - Existing myNJ Account,
+                  name: needsAccountSnackbarTitleExistingAccount,
+                  widget: string,
+                }
+              - {
+                  label: Needs Account Snackbar Body - Existing myNJ Account,
+                  name: needsAccountSnackbarBodyExistingAccount,
+                  widget: text,
+                }
+              - { label: Account Success Snackbar Title, name: accountSuccessSnackbarTitle, widget: string }
+              - { label: Account Success Snackbar Body, name: accountSuccessSnackbarBody, widget: string }
+              - {
+                  label: Existing Account Success Snackbar Title,
+                  name: accountSuccessSnackbarTitleExistingAccount,
+                  widget: string,
+                }
+              - { label: Needs Account Modal Title, name: needsAccountModalTitle, widget: string }
+              - { label: Needs Account Modal Body, name: needsAccountModalBody, widget: text }
+              - { label: Needs Account Modal Button, name: needsAccountModalButtonText, widget: string }
+              - { label: Needs Account Modal Sub Button text, name: needsAccountModalSubText, widget: string }
               - { label: Add Business Button, name: addBusinessButton, widget: string }
           - label: Onboarding Defaults
             name: onboardingDefaults
@@ -3299,13 +3564,6 @@ collections:
               - { label: Error - Generic, name: errorTextGeneric, widget: string }
               - { label: Newsletter Label, name: newsletterCheckboxLabel, widget: string }
               - { label: User Testing Label, name: userTestingCheckboxLabel, widget: string }
-              - { label: Login Error Modal - Title, name: loginErrorModalTitle, widget: string }
-              - {
-                  label: Login Error Modal - Continue Button,
-                  name: loginErrorModalContinueButton,
-                  widget: string,
-                }
-              - { label: Login Error Modal - Body, name: loginErrorModalBody, widget: markdown }
           - label: Shared Header Defaults
             name: headerDefaults
             collapsed: true
@@ -3330,6 +3588,7 @@ collections:
               - { label: Error - No Data, name: errorTextNoData, widget: string }
               - { label: Error - Cached Only, name: errorTextCachedOnly, widget: string }
               - { label: Error - Update Failed, name: errorTextUpdateFailed, widget: string }
+              - { label: Error - Radio Button, name: errorRadioButton, widget: string }
           - label: Task Defaults
             name: taskDefaults
             collapsed: true
@@ -4225,6 +4484,20 @@ collections:
                         widget: object
                         fields:
                           - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Non Essential Questions
+                    name: nonEssentialQuestions
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - { label: "Radio Button - Yes", name: "radioButtonTrueText", widget: "string" }
+                          - { label: "Radio Button - No", name: "radioButtonFalseText", widget: "string" }
+                          - { label: "Optional Suffix", name: "optionalText", widget: "string" }
                   - label: Responsible Owner Name
                     name: responsibleOwnerName
                     collapsed: true
@@ -4472,8 +4745,9 @@ collections:
                           - { label: "Description", name: "description", widget: "markdown" }
 
       - label: "Profile / Onboarding Page Misc"
-        name: "profile-misc"
+        name: "default"
         file: "content/src/fieldConfig/config.json"
+        widget: object
         editor:
           preview: true
         fields:
@@ -4492,11 +4766,6 @@ collections:
               - { label: Error Alert - Header, name: errorTextHeader, widget: string }
               - { label: Error Alert - Body, name: errorTextBody, widget: string }
               - { label: Essential Question Alert - Body, name: essentialQuestionAlertText, widget: string }
-              - {
-                  label: Essential Question Inline Error Text,
-                  name: essentialQuestionInlineText,
-                  widget: string,
-                }
               - { label: Page Title, name: pageTitle, widget: string }
               - { label: Save Button Text, name: saveButtonText, widget: string }
               - { label: Back Button Text, name: backButtonText, widget: string }
@@ -4513,6 +4782,18 @@ collections:
                 }
               - { label: Locked Field Tooltip Text, name: lockedFieldTooltipText, widget: string }
               - { label: Profile Completion Alert, name: profileCompletionAlert, widget: markdown }
+              - { label: Cannabis Location Alert, name: cannabisLocationAlert, widget: string }
+              - { label: Profile Error Alert Title, name: profileErrorAlert, widget: string }
+              - {
+                  label: Profile Error Alert Single Field Text,
+                  name: profileErrorAlertOneField,
+                  widget: string,
+                }
+              - {
+                  label: Profile Error Multiple Fields Text,
+                  name: profileErrorAlertMultipleFields,
+                  widget: string,
+                }
 
   - name: "post-onboarding-content"
     label: "Post Onboarding Content"

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { getMergedConfig } from "@/contexts/configContext";
 import { generateFormationDbaContent } from "@/test/factories";
 import {
@@ -15,8 +17,10 @@ import {
   FormationLegalType,
   generateFormationFormData,
   generateFormationIncorporator,
+  generateFormationMember,
   generateFormationSigner,
   generateMunicipality,
+  LegalStructures,
   ProfileData,
   PublicFilingLegalType,
   randomInt,
@@ -219,11 +223,6 @@ describe("Formation - ReviewStep", () => {
     expect(screen.getByTestId("agent-manual-entry")).toBeInTheDocument();
   });
 
-  it("does not display members section within review step when members do not exist", async () => {
-    await renderStep({ legalStructureId: "limited-liability-company" }, { members: [] });
-    expect(screen.queryByTestId("members-step")).not.toBeInTheDocument();
-  });
-
   it("displays empty directors section within review step when legal type is corporation", async () => {
     await renderStep({ legalStructureId: "c-corporation" }, { members: [] });
     expect(screen.getByTestId("empty-members-section")).toBeInTheDocument();
@@ -261,11 +260,6 @@ describe("Formation - ReviewStep", () => {
   it("does not display foreign state of formation within review step when non-foreign", async () => {
     await renderStep({ businessPersona: "STARTING" }, {});
     expect(screen.queryByTestId("foreign-state-of-formation")).not.toBeInTheDocument();
-  });
-
-  it("does not display members section within review step when foreign", async () => {
-    await renderStep({ businessPersona: "FOREIGN" }, {});
-    expect(screen.queryByTestId("members-step")).not.toBeInTheDocument();
   });
 
   it("displays provisions on review step", async () => {
@@ -347,6 +341,58 @@ describe("Formation - ReviewStep", () => {
     expect(
       reviewSignersSection.getByText(`${Config.formation.addressModal.name.label}:`)
     ).toBeInTheDocument();
+  });
+
+  describe("members", () => {
+    it("does not display members section within review step when members do not exist", async () => {
+      await renderStep({ legalStructureId: "limited-liability-company" }, { members: [] });
+      expect(screen.queryByTestId("members-step")).not.toBeInTheDocument();
+    });
+
+    it("does not display members section within review step when foreign", async () => {
+      await renderStep({ businessPersona: "FOREIGN" }, {});
+      expect(screen.queryByTestId("members-step")).not.toBeInTheDocument();
+    });
+
+    const nonTradeNamelegalStructures = LegalStructures.filter((legalStructure) => {
+      if (legalStructure.hasTradeName) return false;
+      return true;
+    });
+
+    const legalStructureIds = nonTradeNamelegalStructures.map((legalStructure) => legalStructure.id);
+
+    const shouldShowMembersSectionNoMembers = (legalStructure: string): boolean => {
+      if (["nonprofit", "c-corporation", "s-corporation"].includes(legalStructure)) return true;
+      return false;
+    };
+
+    it.each(legalStructureIds)(
+      "conditionally renders the members section when there are NO members and the legalStructure is %s",
+      async (legalStructure) => {
+        await renderStep({ legalStructureId: legalStructure }, { members: [] });
+        if (shouldShowMembersSectionNoMembers(legalStructure)) {
+          /* eslint-disable-next-line jest/no-conditional-expect */
+          expect(screen.getByTestId("review-members")).toBeInTheDocument();
+        } else {
+          /* eslint-disable-next-line jest/no-conditional-expect */
+          expect(screen.queryByTestId("review-members")).not.toBeInTheDocument();
+        }
+      }
+    );
+
+    it.each(legalStructureIds)(
+      "conditionally renders the members section when there are members and the legalStructure is %s",
+      async (legalStructure) => {
+        await renderStep({ legalStructureId: legalStructure }, { members: [generateFormationMember({})] });
+        if (legalStructure === "limited-partnership") {
+          /* eslint-disable-next-line jest/no-conditional-expect */
+          expect(screen.queryByTestId("review-members")).not.toBeInTheDocument();
+        } else {
+          /* eslint-disable-next-line jest/no-conditional-expect */
+          expect(screen.getByTestId("review-members")).toBeInTheDocument();
+        }
+      }
+    );
   });
 
   describe("address", () => {
@@ -567,6 +613,164 @@ describe("Formation - ReviewStep", () => {
       );
       const phoneNumberField = within(screen.getByTestId("contact-phone-number-field"));
       expect(phoneNumberField.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
+    });
+  });
+
+  describe("when nonprofit", () => {
+    const legalStructureId = "nonprofit";
+
+    it("displays yes for Is Veteran Nonprofit", async () => {
+      await renderStep({ legalStructureId }, { isVeteranNonprofit: true });
+      const getByMarkup = withMarkup(screen.getByText);
+      expect(
+        getByMarkup(markdownToText(Config.formation.fields.isVeteranNonprofit.reviewTextYes))
+      ).toBeInTheDocument();
+    });
+
+    it("displays no for Is Veteran Nonprofit", async () => {
+      await renderStep({ legalStructureId }, { isVeteranNonprofit: false });
+      const getByMarkup = withMarkup(screen.getByText);
+      expect(
+        getByMarkup(markdownToText(Config.formation.fields.isVeteranNonprofit.reviewTextNo))
+      ).toBeInTheDocument();
+    });
+
+    it("displays Not Entered for Is Veteran Nonprofit when undefined", async () => {
+      await renderStep({ legalStructureId }, { isVeteranNonprofit: undefined });
+      const queryByMarkup = withMarkup(screen.queryByText);
+      expect(
+        queryByMarkup(markdownToText(Config.formation.fields.isVeteranNonprofit.reviewTextNo))
+      ).not.toBeInTheDocument();
+      expect(
+        queryByMarkup(markdownToText(Config.formation.fields.isVeteranNonprofit.reviewTextYes))
+      ).not.toBeInTheDocument();
+      const section = within(screen.getByTestId("isVeteranNonprofit"));
+      expect(section.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
+    });
+
+    it("displays the Provisions section", async () => {
+      await renderStep({ legalStructureId }, {});
+      expect(screen.getByText(Config.formation.fields.provisions.label)).toBeInTheDocument();
+    });
+
+    it("displays yes for board members in the Provisions section", async () => {
+      await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: true });
+      const getByMarkup = withMarkup(screen.getByText);
+      expect(
+        getByMarkup(markdownToText(Config.formation.fields.hasNonprofitBoardMembers.yesReviewText))
+      ).toBeInTheDocument();
+    });
+
+    it("displays no for board members in the Provisions section", async () => {
+      await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: false });
+      const getByMarkup = withMarkup(screen.getByText);
+      expect(
+        getByMarkup(markdownToText(Config.formation.fields.hasNonprofitBoardMembers.noReviewText))
+      ).toBeInTheDocument();
+    });
+
+    it("displays Not Entered for board members in the Provisions section when undefined", async () => {
+      await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: undefined });
+      const queryByMarkup = withMarkup(screen.queryByText);
+      expect(
+        queryByMarkup(markdownToText(Config.formation.fields.hasNonprofitBoardMembers.yesReviewText))
+      ).not.toBeInTheDocument();
+      expect(
+        queryByMarkup(markdownToText(Config.formation.fields.hasNonprofitBoardMembers.noReviewText))
+      ).not.toBeInTheDocument();
+      const boardMemberSection = within(screen.getByTestId("hasNonprofitBoardMembers"));
+      expect(boardMemberSection.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
+    });
+
+    describe.each([
+      {
+        radio: "nonprofitBoardMemberQualificationsSpecified",
+        terms: "nonprofitBoardMemberQualificationsTerms",
+      },
+      { radio: "nonprofitBoardMemberRightsSpecified", terms: "nonprofitBoardMemberRightsTerms" },
+      { radio: "nonprofitTrusteesMethodSpecified", terms: "nonprofitTrusteesMethodTerms" },
+      { radio: "nonprofitAssetDistributionSpecified", terms: "nonprofitAssetDistributionTerms" },
+    ])("provisions radio questions", (args) => {
+      it(`does not display ${args.radio} when no board members`, async () => {
+        await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: false, [args.radio]: "IN_FORM" });
+        expect(
+          screen.queryByText(((Config.formation.fields as any)[args.radio] as any).body)
+        ).not.toBeInTheDocument();
+      });
+
+      it(`displays as IN_BYLAWS for ${args.radio}`, async () => {
+        await renderStep({ legalStructureId }, { hasNonprofitBoardMembers: true, [args.radio]: "IN_BYLAWS" });
+        const radioReviewSection = within(screen.getByTestId(args.radio));
+        expect(
+          radioReviewSection.getByText(((Config.formation.fields as any)[args.radio] as any).body)
+        ).toBeInTheDocument();
+        expect(
+          radioReviewSection.getByText(
+            `${Config.formation.nonprofitProvisions.radioInBylawsText.toLowerCase()}.`
+          )
+        ).toBeInTheDocument();
+      });
+
+      it("does not display terms when not IN_FORM", async () => {
+        await renderStep(
+          { legalStructureId },
+          { hasNonprofitBoardMembers: true, [args.radio]: "IN_BYLAWS", [args.terms]: "some-random-terms" }
+        );
+        expect(screen.queryByText("some-random-terms")).not.toBeInTheDocument();
+      });
+
+      it(`displays Not Entered when radio unanswered for ${args.radio}`, async () => {
+        await renderStep(
+          { legalStructureId },
+          {
+            hasNonprofitBoardMembers: true,
+            [args.radio]: undefined,
+          }
+        );
+        const radioReviewSection = within(screen.getByTestId(args.radio));
+        expect(
+          radioReviewSection.getByText(((Config.formation.fields as any)[args.radio] as any).body)
+        ).toBeInTheDocument();
+        expect(radioReviewSection.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
+      });
+
+      it(`displays as IN_FORM for ${args.radio}`, async () => {
+        const terms = "some-random-terms";
+        await renderStep(
+          { legalStructureId },
+          {
+            hasNonprofitBoardMembers: true,
+            [args.radio]: "IN_FORM",
+            [args.terms]: terms,
+          }
+        );
+        const radioReviewSection = within(screen.getByTestId(args.radio));
+        expect(
+          radioReviewSection.getByText(((Config.formation.fields as any)[args.radio] as any).body)
+        ).toBeInTheDocument();
+        expect(
+          radioReviewSection.getByText(
+            `${Config.formation.nonprofitProvisions.radioInFormText.toLowerCase()}.`
+          )
+        ).toBeInTheDocument();
+        expect(screen.getByText(terms)).toBeInTheDocument();
+      });
+
+      it(`displays Not Entered for empty terms when IN_FORM`, async () => {
+        await renderStep(
+          { legalStructureId },
+          {
+            hasNonprofitBoardMembers: true,
+            [args.radio]: "IN_FORM",
+            [args.terms]: "",
+          }
+        );
+        const termsReviewSection = within(screen.getByTestId(`${args.radio}-terms`));
+        expect(termsReviewSection.getByText(Config.formation.general.notEntered)).toBeInTheDocument();
+        expect(
+          termsReviewSection.getByText(`${Config.formation.nonprofitProvisions.description}:`)
+        ).toBeInTheDocument();
+      });
     });
   });
 });

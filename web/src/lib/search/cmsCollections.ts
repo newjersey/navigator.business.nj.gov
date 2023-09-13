@@ -13,7 +13,12 @@ export const cmsCollections = [
   },
   {
     label: "🟩 ROADMAPS",
-    children: ["Roadmaps - Industries", "Roadmaps - Add-ons", "Roadmaps - Settings"],
+    children: [
+      "Roadmaps - Industries",
+      "Roadmaps - Add-ons",
+      "Roadmaps - Non Essential Questions",
+      "Roadmaps - Settings",
+    ],
   },
   {
     label: "🟦 TASKS",
@@ -39,8 +44,13 @@ export const cmsCollections = [
     children: ["Dashboard - Config", "Sidebar Cards Content"],
   },
   {
-    label: "🟧 MISC",
+    label: "🟧 QUICK ACTIONS",
+    children: ["Quick Actions"],
+  },
+  {
+    label: "🟨 MISC",
     children: [
+      "Export Pdf Config",
       "Dropdown Mappings",
       "General Config",
       "Profile Page",

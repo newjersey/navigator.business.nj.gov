@@ -1,10 +1,10 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { AuthContext } from "@/contexts/authContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { getCurrentDateInNewJersey } from "@businessnjgovnavigator/shared/";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { useRouter } from "next/router";
@@ -12,7 +12,7 @@ import { ReactElement, useContext } from "react";
 
 export const Header = (): ReactElement => {
   const { state } = useContext(AuthContext);
-
+  const { Config } = useConfig();
   const { business, userData } = useUserData();
   const router = useRouter();
 

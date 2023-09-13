@@ -1,8 +1,8 @@
 import { Icon } from "@/components/njwds/Icon";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import React, { ReactElement } from "react";
@@ -25,6 +25,7 @@ export const SidebarPageLayout = ({
   belowBoxComponent,
 }: SidebarPageLayoutProps): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
+  const { Config } = useConfig();
 
   const backButton = (
     <Link href={ROUTES.dashboard} passHref>
@@ -34,10 +35,10 @@ export const SidebarPageLayout = ({
         className="usa-link fdr fac margin-top-3 margin-bottom-3 usa-link-hover-override desktop:margin-top-0 desktop:margin-bottom-4"
         onClick={analytics.event.task_back_to_roadmap.click.view_roadmap}
       >
-        <div className="circle-3 bg-primary icon-green-bg-color-hover">
+        <div className="circle-3 bg-accent-cool-darkest icon-blue-bg-color-hover">
           <Icon className="text-white usa-icon--size-3">arrow_back</Icon>
         </div>
-        <div className="margin-left-2 margin-y-auto text-primary font-sans-xs usa-link text-green-color-hover">
+        <div className="margin-left-2 margin-y-auto text-accent-cool-darkest font-sans-xs usa-link text-blue-color-hover">
           {Config.taskDefaults.backToRoadmapText}
         </div>
       </a>

@@ -1,14 +1,6 @@
-import { SignUpSnackbar } from "@/components/auth/SignUpSnackbar";
 import { getMergedConfig } from "@/contexts/configContext";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-import {
-  Certification,
-  Funding,
-  OperateReference,
-  RoadmapDisplayContent,
-  SidebarCardContent,
-} from "@/lib/types/types";
+import { OperateReference, RoadmapDisplayContent, SidebarCardContent } from "@/lib/types/types";
 import DashboardPage from "@/pages/dashboard";
 import {
   generateBusinessPersona,
@@ -17,12 +9,10 @@ import {
   generateTask,
   operatingPhasesDisplayingAltHomeBasedBusinessDescription,
   operatingPhasesDisplayingHomeBasedPrompt,
-  operatingPhasesNotDisplayingAltHomeBasedBusinessDescription,
   operatingPhasesNotDisplayingHomeBasedPrompt,
   randomHomeBasedIndustry,
   randomNonHomeBasedIndustry,
 } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -43,7 +33,6 @@ import {
   generateUserDataForBusiness,
   getCurrentDate,
   OperatingPhases,
-  RegistrationStatus,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhase } from "@businessnjgovnavigator/shared/src/operatingPhase";
 import { generatePreferences } from "@businessnjgovnavigator/shared/test";
@@ -128,53 +117,6 @@ describe("dashboard page", () => {
     );
   };
 
-  const renderPageWithAuthAlert = ({
-    isAuthenticated,
-    sidebarDisplayContent,
-    fundings,
-    certifications,
-    registrationAlertIsVisible,
-    registrationAlertStatus,
-    setRegistrationAlertIsVisible,
-  }: {
-    isAuthenticated?: IsAuthenticated;
-    sidebarDisplayContent?: Record<string, SidebarCardContent>;
-    fundings?: Funding[];
-    certifications?: Certification[];
-    registrationAlertIsVisible?: boolean;
-    registrationAlertStatus?: RegistrationStatus;
-    setRegistrationAlertIsVisible?: jest.Mock<() => void>;
-  }): void => {
-    setupStatefulUserDataContext();
-
-    render(
-      withAuthAlert(
-        <WithStatefulUserData
-          initialUserData={generateUserDataForBusiness(
-            generateBusiness({ onboardingFormProgress: "COMPLETED" })
-          )}
-        >
-          <ThemeProvider theme={createTheme()}>
-            <SignUpSnackbar />
-            <DashboardPage
-              operateReferences={{}}
-              displayContent={createDisplayContent(sidebarDisplayContent)}
-              fundings={fundings ?? []}
-              certifications={certifications ?? []}
-              municipalities={[]}
-            />
-          </ThemeProvider>
-        </WithStatefulUserData>,
-        isAuthenticated ?? IsAuthenticated.TRUE,
-        {
-          registrationAlertIsVisible: registrationAlertIsVisible ?? false,
-          registrationAlertStatus,
-          setRegistrationAlertIsVisible,
-        }
-      )
-    );
-  };
-
   it("shows loading page if page has not loaded yet", () => {
     setMockUserDataResponse({ userData: undefined });
     renderDashboardPage({});
@@ -197,7 +139,7 @@ describe("dashboard page", () => {
     useMockProfileData({});
     useMockRouter({ isReady: true, query: { success: "true" } });
     renderDashboardPage({});
-    expect(screen.getByText(Config.profileDefaults.successTextHeader)).toBeInTheDocument();
+    expect(screen.getByText(Config.profileDefaults.default.successTextHeader)).toBeInTheDocument();
   });
 
   it("shows steps and tasks from roadmap", () => {
@@ -303,30 +245,6 @@ describe("dashboard page", () => {
 
     expect(within(sectionStart).getByText("step2")).toBeVisible();
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
-  });
-
-  it("renders registration card when routing is not from onboarding and authentication is false,", async () => {
-    setDesktopScreen(true);
-    const setRegistrationAlertIsVisible = jest.fn();
-    useMockRouter({ query: { fromOnboarding: "false" } });
-
-    const sidebarDisplayContent = {
-      "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
-      welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
-    };
-    renderPageWithAuthAlert({
-      registrationAlertIsVisible: true,
-      sidebarDisplayContent,
-      isAuthenticated: IsAuthenticated.FALSE,
-      setRegistrationAlertIsVisible,
-    });
-
-    expect(screen.getByText("NotRegisteredContent")).toBeInTheDocument();
-
-    await waitFor(() => {
-      expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
-    });
-    expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(false);
   });
 
   it("renders calendar snackbar when fromFormBusinessEntity query parameter is provided", () => {
@@ -493,54 +411,8 @@ describe("dashboard page", () => {
   });
 
   describe("deferred onboarding question", () => {
-    describe.each(operatingPhasesNotDisplayingAltHomeBasedBusinessDescription)(
-      "operatingPhasesNotDisplayingAltHomeBasedBusinessDescription",
-      (operatingPhase) => {
-        describe(`${operatingPhase}`, () => {
-          it("shows home-based business question with default description when applicable to industry and not yet answered", () => {
-            const business = generateBusiness({
-              profileData: generateProfileData({
-                industryId: randomHomeBasedIndustry(),
-                homeBasedBusiness: undefined,
-                businessPersona: generateBusinessPersona(),
-                operatingPhase: operatingPhase,
-              }),
-              onboardingFormProgress: "COMPLETED",
-            });
-            useMockBusiness(business);
-
-            renderDashboardPage({});
-            expect(
-              screen.getByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
-            ).toBeInTheDocument();
-            expect(
-              screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
-            ).not.toBeInTheDocument();
-          });
-
-          it("does not show home-based business question when already answered", () => {
-            const business = generateBusiness({
-              profileData: generateProfileData({
-                industryId: randomHomeBasedIndustry(),
-                homeBasedBusiness: false,
-                operatingPhase: operatingPhase,
-              }),
-            });
-            useMockBusiness(business);
-            renderDashboardPage({});
-            expect(
-              screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
-            ).not.toBeInTheDocument();
-            expect(
-              screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
-            ).not.toBeInTheDocument();
-          });
-        });
-      }
-    );
-
     describe.each(operatingPhasesNotDisplayingHomeBasedPrompt)(
-      "operatingPhasesNotDisplayingHomeBasedPrompt",
+      "phases not displaying home-based prompt",
       (operatingPhase) => {
         describe(`${operatingPhase}`, () => {
           it("does not show home-based business question when not applicable to operating phase", () => {
@@ -569,7 +441,7 @@ describe("dashboard page", () => {
     );
 
     describe.each(operatingPhasesDisplayingHomeBasedPrompt)(
-      "operatingPhasesDisplayingHomeBasedPrompt",
+      "phases displaying home-based prompt",
       (operatingPhase) => {
         describe(`${operatingPhase}`, () => {
           it("does not show home-based business question when not applicable to industry", () => {
@@ -644,7 +516,7 @@ describe("dashboard page", () => {
     );
 
     describe.each(operatingPhasesDisplayingAltHomeBasedBusinessDescription)(
-      "operatingPhasesDisplayingAltHomeBasedBusinessDescription",
+      "phases displaying home-based prompt with alt description",
       (operatingPhase) => {
         describe(`${operatingPhase}`, () => {
           it("shows home-based business question with alt description when applicable to industry and not yet answered", () => {

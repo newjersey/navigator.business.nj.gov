@@ -37,7 +37,7 @@ $icon-offset: 45px;
     background-color: $white;
 
     &.current {
-      background-color: #fbfdf9;
+      background-color: $primary-extra-extra-light;
     }
   }
 }
@@ -50,7 +50,7 @@ $icon-offset: 45px;
   background-color: $white;
 
   &.current {
-    background-color: #fbfdf9;
+    background-color: $primary-extra-extra-light;
   }
 
   &:hover {

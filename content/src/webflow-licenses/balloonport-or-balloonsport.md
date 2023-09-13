@@ -1,13 +1,13 @@
 ---
-id: "balloonport-or-balloonsport"
-webflowId: "5f772967b4710ff2113c37bd"
-urlSlug: "balloonport-or-balloonsport"
-webflowName: "Balloonport Or Balloonsport"
-callToActionLink: "www.nj.gov/transportation/"
-callToActionText: ""
+urlSlug: balloonport-or-balloonsport
+webflowName: Balloonport Or Balloonsport
 agencyId: njdot
-agencyAdditionalContext: "Aviation"
-divisionPhone: "(609) 530-2900"
-webflowIndustry: "Balloon"
-licenseCertificationClassification: "LICENSE"
+agencyAdditionalContext: Aviation
+callToActionText: ""
+callToActionLink: https://www.nj.gov/transportation/
+webflowIndustry: Balloon
+divisionPhone: (609) 530-2900
+id: balloonport-or-balloonsport
+webflowId: 5f772967b4710ff2113c37bd
+licenseCertificationClassification: LICENSE
 ---

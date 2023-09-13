@@ -1,10 +1,10 @@
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { LicenseSearchError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyNameAndAddress, NameAndAddress } from "@businessnjgovnavigator/shared/";
 import { TextField } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
@@ -28,6 +28,7 @@ interface Props {
   isLoading: boolean;
 }
 
+const Config = getMergedConfig();
 const LicenseSearchErrorLookup: Record<LicenseSearchError, string> = {
   NOT_FOUND: Config.licenseSearchTask.errorTextNotFound,
   FIELDS_REQUIRED: Config.licenseSearchTask.errorTextFieldsRequired,

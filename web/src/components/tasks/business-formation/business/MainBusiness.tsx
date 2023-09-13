@@ -1,10 +1,13 @@
+import { PracticesLaw } from "@/components/tasks/business-formation/business//PracticesLaw";
 import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/business/BusinessNameAndLegalStructure";
+import { ForeignCertificate } from "@/components/tasks/business-formation/business/ForeignCertificate";
 import { ForeignStateOfFormation } from "@/components/tasks/business-formation/business/ForeignStateOfFormation";
 import { FormationDate } from "@/components/tasks/business-formation/business/FormationDate";
-import { MainBusinessAddressNj } from "@/components/tasks/business-formation/business/MainBusinessAddressNj";
-import { MainBusinessForeignAddressFlow } from "@/components/tasks/business-formation/business/MainBusinessForeignAddressFlow";
+import { IsVeteranNonprofit } from "@/components/tasks/business-formation/business/IsVeteranNonprofit";
+import { NonprofitProvisions } from "@/components/tasks/business-formation/business/NonprofitProvisions";
 import { SuffixDropdown } from "@/components/tasks/business-formation/business/SuffixDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
+import { FormationField } from "@/components/tasks/business-formation/FormationField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -12,8 +15,6 @@ import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { isForeignCorporation } from "@/lib/utils/helpers";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext, useMemo } from "react";
-import { ForeignCertificate } from "./ForeignCertificate";
-import { PracticesLaw } from "./PracticesLaw";
 
 export const MainBusiness = (): ReactElement => {
   const { Config } = useConfig();
@@ -25,7 +26,7 @@ export const MainBusiness = (): ReactElement => {
   );
 
   return (
-    <div className={"margin-bottom-4"}>
+    <div className={"margin-bottom-2"}>
       <BusinessNameAndLegalStructure />
       <WithErrorBar
         hasError={doSomeFieldsHaveError(["businessSuffix", "businessStartDate"])}
@@ -34,12 +35,16 @@ export const MainBusiness = (): ReactElement => {
         <div className="grid-row grid-gap-1">
           <div className="margin-top-2 tablet:grid-col-6">
             <WithErrorBar hasError={doesFieldHaveError("businessSuffix")} type="MOBILE-ONLY">
-              <SuffixDropdown />
+              <FormationField fieldName="businessSuffix">
+                <SuffixDropdown />
+              </FormationField>
             </WithErrorBar>
           </div>
           <div className="margin-top-2 tablet:grid-col-6">
             <WithErrorBar hasError={doesFieldHaveError("businessStartDate")} type="MOBILE-ONLY">
-              <FormationDate fieldName="businessStartDate" />
+              <FormationField fieldName="businessStartDate">
+                <FormationDate fieldName="businessStartDate" />
+              </FormationField>
             </WithErrorBar>
           </div>
         </div>
@@ -53,12 +58,16 @@ export const MainBusiness = (): ReactElement => {
             <div className="grid-row grid-gap-1">
               <div className="margin-top-2 tablet:grid-col-6">
                 <WithErrorBar hasError={doesFieldHaveError("foreignStateOfFormation")} type="MOBILE-ONLY">
-                  <ForeignStateOfFormation />
+                  <FormationField fieldName="foreignStateOfFormation">
+                    <ForeignStateOfFormation />
+                  </FormationField>
                 </WithErrorBar>
               </div>
               <div className="margin-top-2 tablet:grid-col-6">
                 <WithErrorBar hasError={doesFieldHaveError("foreignDateOfFormation")} type="MOBILE-ONLY">
-                  <FormationDate fieldName="foreignDateOfFormation" />
+                  <FormationField fieldName="foreignDateOfFormation">
+                    <FormationDate fieldName="foreignDateOfFormation" />
+                  </FormationField>
                 </WithErrorBar>
               </div>
             </div>
@@ -67,33 +76,47 @@ export const MainBusiness = (): ReactElement => {
           {isForeignCorporation(state.formationFormData.legalType) && (
             <>
               <WithErrorBar hasError={doesFieldHaveError("willPracticeLaw")} type="ALWAYS">
-                <PracticesLaw hasError={doesFieldHaveError("willPracticeLaw")} />
+                <FormationField fieldName="willPracticeLaw">
+                  <PracticesLaw hasError={doesFieldHaveError("willPracticeLaw")} />
+                </FormationField>
               </WithErrorBar>
-              <ForeignCertificate hasError={doesFieldHaveError("foreignGoodStandingFile")} />
+              <FormationField fieldName="foreignGoodStandingFile">
+                <ForeignCertificate hasError={doesFieldHaveError("foreignGoodStandingFile")} />
+              </FormationField>
             </>
           )}
+        </>
+      )}
+      {state.formationFormData.legalType === "nonprofit" && (
+        <>
+          <div className="grid-row">
+            <IsVeteranNonprofit />
+          </div>
+          <hr className="margin-y-2" />
+          <NonprofitProvisions />
         </>
       )}
       {corpLegalStructures.includes(state.formationFormData.legalType) && (
         <div className="grid-row grid-gap-1">
           <div className="margin-top-2 tablet:grid-col-6">
-            <BusinessFormationTextField
-              errorBarType="ALWAYS"
-              label={Config.formation.fields.businessTotalStock.label}
-              numericProps={{
-                minLength: 1,
-                trimLeadingZeroes: true,
-                maxLength: 11,
-              }}
-              required={true}
-              fieldName={"businessTotalStock"}
-              validationText={Config.formation.fields.businessTotalStock.error}
-            />
+            <FormationField fieldName="businessTotalStock">
+              <BusinessFormationTextField
+                errorBarType="ALWAYS"
+                label={Config.formation.fields.businessTotalStock.label}
+                numericProps={{
+                  minLength: 1,
+                  trimLeadingZeroes: true,
+                  maxLength: 11,
+                }}
+                required={true}
+                fieldName={"businessTotalStock"}
+                validationText={Config.formation.fields.businessTotalStock.error}
+              />
+            </FormationField>
           </div>
         </div>
       )}
-      <hr className="margin-bottom-4 margin-top-4" aria-hidden={true} />
-      {isForeign ? <MainBusinessForeignAddressFlow /> : <MainBusinessAddressNj />}
+      <hr className="margin-y-2" aria-hidden={true} key={"business-line-1"} />
     </div>
   );
 };
