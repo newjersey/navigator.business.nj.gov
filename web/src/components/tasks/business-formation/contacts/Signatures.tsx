@@ -269,27 +269,19 @@ export const Signatures = (): ReactElement => {
       maxLen: SIGNER_NAME_MAX_LEN.toString(),
     });
 
-    const getInlineValidationText = (): string => {
+    const getInlineValidationText = (needsSignerType: boolean): string => {
       if (isTooLong()) {
         return signerNameIsTooLongLabel;
       } else if (isMissingNameAndSignature()) {
         return Config.formation.fields.signers.errorInlineNameAndSignature;
+      } else if (isMissingName() && needsSignerType) {
+        return index > 0
+          ? Config.formation.fields.signers.errorInlineAdditionalSignerName
+          : Config.formation.fields.signers.errorInlineSignerName;
       } else if (isMissingName()) {
         return Config.formation.fields.signers.errorInlineSignerName;
       } else if (isMissingSignature()) {
         return Config.formation.fields.signers.errorInlineSignature;
-      } else {
-        return "";
-      }
-    };
-
-    const getInlineValidationTextWithSignerType = (): string => {
-      if (isTooLong()) {
-        return signerNameIsTooLongLabel;
-      } else if (isMissingName()) {
-        return index > 0
-          ? Config.formation.fields.signers.errorInlineAdditionalSignerName
-          : Config.formation.fields.signers.errorInlineSignerName;
       } else {
         return "";
       }
@@ -313,9 +305,7 @@ export const Signatures = (): ReactElement => {
             onValidation={(): void => {
               setFieldsInteracted([FIELD_NAME]);
             }}
-            validationText={
-              needsSignerType ? getInlineValidationTextWithSignerType() : getInlineValidationText()
-            }
+            validationText={getInlineValidationText(needsSignerType)}
             fieldName="signer"
             className={`margin-top-0`}
             ariaLabel={`Signer ${index}`}
