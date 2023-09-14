@@ -1,4 +1,5 @@
 ---
+displayname: hvac-license
 filename: hvac-license
 urlSlug: hvac-license
 name: Get an HVACR License
@@ -42,7 +43,6 @@ webflowId: 5f772993a195c8849e15b18f
 - W2s for every year of work experience for up to four years
 - A copy of a Certificate of Insurance showing the purchase of a $3,000 `surety bond|surety-bond` and a minimum of $500,000 in liability insurance
 - Detailed information and police records if you answered “yes” to any of the questions related to moral character and criminal background
-
 
 > **Once completed you will have:**
 >

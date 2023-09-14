@@ -2,6 +2,8 @@
 urlSlug: aircraft-dealers-mechanic
 webflowName: Aircraft Dealers/ Mechanic
 agencyAdditionalContext: Federal Aviation Administration
+filename: aircraft-dealers-mechanic
+displayname: aircraft-dealers-mechanic
 callToActionText: ""
 callToActionLink: https://www.faa.gov/licenses_certificates/aircraft_certification
 webflowIndustry: Aircraft Dealer

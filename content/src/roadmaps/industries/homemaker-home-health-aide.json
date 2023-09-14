@@ -1,4 +1,5 @@
 {
+  "displayname": "homemaker-home-health-aide",
   "naicsCodes": "621610",
   "canHavePermanentLocation": true,
   "defaultSectorId": "health-care-and-social-assistance",

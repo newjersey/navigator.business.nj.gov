@@ -1,4 +1,6 @@
 ---
+filename: cable-operator
+displayname: cable-operator
 id: "cable-operator"
 webflowId: "5f7728e8e8bf505df2317897"
 urlSlug: "cable-operator"

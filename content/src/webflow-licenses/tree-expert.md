@@ -1,6 +1,7 @@
 ---
 filename: tree-expert
 urlSlug: tree-expert
+displayname: tree-expert
 webflowName: Tree Expert
 agencyAdditionalContext: New Jersey Board of Tree Experts
 callToActionLink: https://www.njbte.org/

@@ -1,4 +1,6 @@
 ---
+filename: technical-school-adult
+displayname: technical-school-adult
 id: "technical-school-adult"
 webflowId: "5f77295428e8559bb31958c2"
 urlSlug: "technical-school-adult"

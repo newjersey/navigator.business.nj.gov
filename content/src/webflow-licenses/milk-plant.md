@@ -1,4 +1,6 @@
 ---
+filename: milk-plant
+displayname: milk-plant
 id: "milk-plant"
 webflowId: "5f7729446f3d8d215775ef32"
 urlSlug: "milk-plant"

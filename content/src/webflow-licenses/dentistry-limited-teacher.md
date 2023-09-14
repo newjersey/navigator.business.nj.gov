@@ -1,4 +1,5 @@
 ---
+displayname: dentistry-limited-teacher
 id: "dentistry-limited-teacher"
 webflowId: "640b8468eee03445f3f163d6"
 urlSlug: "dentistry-limited-teacher"

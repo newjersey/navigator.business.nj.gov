@@ -1,4 +1,6 @@
 ---
+filename: home-builder
+displayname: home-builder
 id: "home-builder"
 webflowId: "5f772991dd6a498ff29b606a"
 urlSlug: "home-builder"

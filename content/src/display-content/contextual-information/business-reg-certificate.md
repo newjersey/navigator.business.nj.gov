@@ -1,4 +1,6 @@
 ---
+filename: business-reg-certificate
+displayname: business-reg-certificate
 header: Business Registration Certificate
 ---
 

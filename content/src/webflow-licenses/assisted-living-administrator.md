@@ -1,4 +1,6 @@
 ---
+filename: assisted-living-administrator
+displayname: assisted-living-administrator
 id: "assisted-living-administrator"
 webflowId: "5f77293bde9e063d927f599f"
 urlSlug: "assisted-living-administrator"

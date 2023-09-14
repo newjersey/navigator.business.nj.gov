@@ -1,4 +1,6 @@
 ---
+filename: inflatable-rides
+displayname: inflatable-rides
 id: "inflatable-rides"
 webflowId: "5f7729946f3d8d50bc75ef39"
 urlSlug: "inflatable-rides"

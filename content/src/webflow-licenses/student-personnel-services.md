@@ -1,4 +1,6 @@
 ---
+filename: student-personnel-services
+displayname: student-personnel-services
 id: "student-personnel-services"
 webflowId: "5f772936a6bfb5096202ee00"
 urlSlug: "student-personnel-services"

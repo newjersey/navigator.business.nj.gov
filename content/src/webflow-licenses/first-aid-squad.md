@@ -1,4 +1,6 @@
 ---
+filename: first-aid-squad
+displayname: first-aid-squad
 id: "first-aid-squad"
 webflowId: "5f7729493862544011bb0e45"
 urlSlug: "first-aid-squad"

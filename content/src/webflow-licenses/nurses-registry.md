@@ -1,4 +1,5 @@
 ---
+displayname: nurses-registry
 id: "nurses-registry"
 webflowId: "640b8467ea016663dd808039"
 urlSlug: "nurses-registry"

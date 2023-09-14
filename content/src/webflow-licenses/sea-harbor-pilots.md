@@ -1,4 +1,6 @@
 ---
+filename: sea-harbor-pilots
+displayname: sea-harbor-pilots
 id: "sea-harbor-pilots"
 webflowId: "5f7729681a08091ea8bb2ecc"
 urlSlug: "sea-harbor-pilots"

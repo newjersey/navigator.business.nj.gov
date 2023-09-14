@@ -2,6 +2,8 @@
 urlSlug: pilot
 webflowName: Pilot
 agencyAdditionalContext: Federal Aviation Administration
+filename: pilot
+displayname: pilot
 callToActionText: ""
 callToActionLink: https://www.faa.gov/
 webflowIndustry: Pilot

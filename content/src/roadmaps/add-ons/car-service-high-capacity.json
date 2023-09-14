@@ -1,34 +1,36 @@
 {
-    "roadmapSteps": [
-        {
-            "step": 3,
-            "weight": 15,
-            "task": "transport-insurance",
-            "required": true
-          },
-          {
-            "step": 3,
-            "weight": 20,
-            "task": "transportation-entity-id",
-            "required": true
-          },
-          {
-            "step": 3,
-            "weight": 25,
-            "task": "transportation-inspection",
-            "required": true
-          },
-          {
-            "step": 3,
-            "weight": 30,
-            "task": "transportation-cpcn",
-            "required": true
-          },
-          {
-            "step": 4,
-            "weight": 10,
-            "task": "transportation-assessment-usdot",
-            "required": true
-          }
-    ]
+  "displayname": "car-service-high-capacity",
+  "filename": "car-service-high-capacity",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "transport-insurance",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 20,
+      "task": "transportation-entity-id",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 25,
+      "task": "transportation-inspection",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 30,
+      "task": "transportation-cpcn",
+      "required": true
+    },
+    {
+      "step": 4,
+      "weight": 10,
+      "task": "transportation-assessment-usdot",
+      "required": true
+    }
+  ]
 }

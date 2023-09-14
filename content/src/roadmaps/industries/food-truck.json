@@ -1,4 +1,5 @@
 {
+  "displayname": "food-truck",
   "naicsCodes": "722330",
   "canHavePermanentLocation": false,
   "defaultSectorId": "accommodation-and-food-services",

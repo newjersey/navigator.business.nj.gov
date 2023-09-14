@@ -1,6 +1,7 @@
 ---
+displayname: trade-name-registration
 urlSlug: trade-name-registration
-filename: trade-name-registration
+filename: register-trade-name
 name: Register Your Trade Name
 id: register-trade-name
 callToActionLink: ${countyClerkWebsite}

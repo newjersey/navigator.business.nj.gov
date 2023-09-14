@@ -1,4 +1,5 @@
 ---
+displayname: register-for-taxes-foreign
 urlSlug: register-for-taxes
 filename: register-for-taxes-foreign
 name: Register Your Business for Tax and/or Employer Purposes

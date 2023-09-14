@@ -1,4 +1,6 @@
 ---
+filename: toxicology-laboratory
+displayname: toxicology-laboratory
 id: "toxicology-laboratory"
 webflowId: "5f772921eb55581671feb59c"
 urlSlug: "toxicology-laboratory"

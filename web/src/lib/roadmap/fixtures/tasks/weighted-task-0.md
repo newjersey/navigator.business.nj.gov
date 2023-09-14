@@ -1,4 +1,6 @@
 ---
+filename: weighted-task-0
+displayname: weighted-task-0
 id: "weighted-task-0-id"
 urlSlug: "weighted-task-0-url-slug"
 name: "Weighted Task 0"

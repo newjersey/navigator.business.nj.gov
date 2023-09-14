@@ -1,4 +1,5 @@
 ---
+displayname: kosher-foods
 id: "kosher-foods"
 webflowId: "640b8468ea9ad6c649e22e06"
 urlSlug: "kosher-foods"

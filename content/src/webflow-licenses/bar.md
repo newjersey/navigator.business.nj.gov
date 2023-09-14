@@ -1,6 +1,8 @@
 ---
 urlSlug: bar
 webflowName: Bar
+filename: bar
+displayname: bar
 agencyId: law-public-safety
 agencyAdditionalContext: Division of Alcoholic Beverage, Control Licensing Bureau
 callToActionText: ""

@@ -1,5 +1,6 @@
 ---
-filename: conditional-cannabis-license
+displayname: conditional-cannabis-license
+filename: conditional-permit-cannabis
 urlSlug: conditional-cannabis-license
 name: Apply for Your Conditional Cannabis License
 webflowName: "Cannabis: Conditional License"

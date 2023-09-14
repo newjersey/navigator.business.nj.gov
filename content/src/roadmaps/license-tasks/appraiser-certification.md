@@ -1,5 +1,6 @@
 ---
-filename: real-estate-appraiser-certification
+displayname: real-estate-appraiser-certification
+filename: appraiser-certification
 urlSlug: appraiser-certification
 name: Apply for Your Real Estate Appraiser Certification
 webflowName: "Real Estate Appraisal: Real Estate Appraiser Certification"

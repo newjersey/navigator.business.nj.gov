@@ -1,4 +1,5 @@
 ---
+displayname: electrical-business-license
 filename: electrical-business-license
 urlSlug: electrical-business-license
 name: Get Your Electrical Contracting Business Permit

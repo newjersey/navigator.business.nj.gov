@@ -1,4 +1,6 @@
 ---
+filename: auction
+displayname: auction
 id: "auction"
 webflowId: "5f7728db2400617eff7834b5"
 urlSlug: "auction"

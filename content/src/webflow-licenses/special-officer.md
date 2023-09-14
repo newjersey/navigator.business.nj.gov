@@ -1,6 +1,8 @@
 ---
 urlSlug: special-officer
 webflowName: Special Officer
+filename: special-officer
+displayname: special-officer
 agencyId: law-public-safety
 agencyAdditionalContext: Division of Criminal Justice, Police Training Commission
 callToActionText: ""

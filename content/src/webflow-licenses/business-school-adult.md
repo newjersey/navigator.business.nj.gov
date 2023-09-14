@@ -1,6 +1,8 @@
 ---
 urlSlug: business-school-adult
 webflowName: Business School (Adult)
+filename: business-school-adult
+displayname: business-school-adult
 agencyId: education
 agencyAdditionalContext: ""
 callToActionText: ""

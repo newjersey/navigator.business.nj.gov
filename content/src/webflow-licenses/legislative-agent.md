@@ -1,4 +1,6 @@
 ---
+filename: legislative-agent
+displayname: legislative-agent
 id: "legislative-agent"
 webflowId: "5f772961ef496213b346d0df"
 urlSlug: "legislative-agent"

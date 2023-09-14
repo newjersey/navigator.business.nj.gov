@@ -1,4 +1,6 @@
 ---
+filename: apiary-bee-hive
+displayname: apiary-bee-hive
 id: "apiary-bee-hive"
 webflowId: "5f7728e0486eeb444bc2560c"
 urlSlug: "apiary-bee-hive"

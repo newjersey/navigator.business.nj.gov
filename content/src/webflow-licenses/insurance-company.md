@@ -1,4 +1,6 @@
 ---
+filename: insurance-company
+displayname: insurance-company
 id: "insurance-company"
 webflowId: "5f772927147ced714f26bf3b"
 urlSlug: "insurance-company"

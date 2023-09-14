@@ -1,5 +1,6 @@
 ---
-filename: cosmetology-shop-license
+displayname: cosmetology-shop-license
+filename: apply-for-shop-license
 urlSlug: cosmetology-shop-license
 name: Apply for Your Cosmetology Shop License
 webflowName: "Cosmetology: License to Operate a New Shop, Relocate, or to

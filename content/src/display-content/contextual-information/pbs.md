@@ -1,4 +1,6 @@
 ---
+filename: pbs
+displayname: pbs
 header: Premier Business Services
 ---
 

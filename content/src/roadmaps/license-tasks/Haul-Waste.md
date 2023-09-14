@@ -1,5 +1,6 @@
 ---
-filename: haul-waste
+displayname: haul-waste
+filename: Haul-Waste
 urlSlug: haul-waste
 name: Obtain Your Waste Hauling Decal, if Applicable
 webflowName: "Home Improvement Contractor: Waste Hauling Decal"

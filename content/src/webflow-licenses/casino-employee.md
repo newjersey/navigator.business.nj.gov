@@ -1,4 +1,6 @@
 ---
+filename: casino-employee
+displayname: casino-employee
 id: "casino-employee"
 webflowId: "5f77295eecb74e2d8423aad8"
 urlSlug: "casino-employee"

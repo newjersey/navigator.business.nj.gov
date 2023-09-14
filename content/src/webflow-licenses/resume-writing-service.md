@@ -1,4 +1,5 @@
 ---
+displayname: resume-writing-service
 id: "resume-writing-service"
 webflowId: "640b84671f67e1707d5475a7"
 urlSlug: "resume-writing-service"

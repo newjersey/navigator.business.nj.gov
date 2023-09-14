@@ -1,4 +1,6 @@
 ---
+filename: home-financing
+displayname: home-financing
 id: "home-financing"
 webflowId: "5f772925a195c88e2715b184"
 urlSlug: "home-financing"

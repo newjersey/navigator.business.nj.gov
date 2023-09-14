@@ -1,4 +1,5 @@
 ---
+displayname: colleges-universities
 id: "colleges-universities"
 webflowId: "640b846780e3b7e6950bd7d7"
 urlSlug: "colleges-universities"

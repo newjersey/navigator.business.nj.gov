@@ -3,6 +3,8 @@ urlSlug: copyright-service
 webflowName: Copyright Service
 agencyId: nj-revenue-enterprise-services
 agencyAdditionalContext: Business Tax Registration
+filename: copyright-service
+displayname: copyright-service
 callToActionText: ""
 callToActionLink: https://nj.gov/treasury/taxation/businesses/index.shtml
 webflowIndustry: Copyright

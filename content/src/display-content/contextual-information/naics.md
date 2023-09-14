@@ -1,4 +1,6 @@
 ---
+filename: naics
+displayname: naics
 header: NAICS Code
 ---
 

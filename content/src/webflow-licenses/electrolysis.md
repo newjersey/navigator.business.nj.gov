@@ -1,4 +1,6 @@
 ---
+filename: electrolysis
+displayname: electrolysis
 id: "electrolysis"
 webflowId: "5f772987d2749ad7699cf7dd"
 urlSlug: "electrolysis"

@@ -1,4 +1,6 @@
 ---
+filename: generic-task-2
+displayname: generic-task-2
 id: "generic-task-2-id"
 urlSlug: "generic-task-2-url-slug"
 name: "Generic Task 2"

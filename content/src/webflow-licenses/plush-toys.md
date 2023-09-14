@@ -1,4 +1,6 @@
 ---
+filename: plush-toys
+displayname: plush-toys
 id: "plush-toys"
 webflowId: "5f772945a6bfb572e902ee02"
 urlSlug: "plush-toys"

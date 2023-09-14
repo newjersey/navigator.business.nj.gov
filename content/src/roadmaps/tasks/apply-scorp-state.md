@@ -1,4 +1,6 @@
 ---
+displayname: apply-scorp-state
+filename: apply-scorp-state
 urlSlug: apply-for-scorp-state
 name: Apply for an S Corporation Status with the State
 id: apply-scorp-state

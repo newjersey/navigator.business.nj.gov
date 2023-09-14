@@ -1,4 +1,5 @@
 ---
+displayname: cannabis-site-requirements
 urlSlug: cannabis-site-requirements
 filename: cannabis-site-requirements
 name: Determine Cannabis Site Requirements
@@ -6,11 +7,13 @@ id: cannabis-site-requirements
 callToActionLink: ""
 callToActionText: ""
 ---
+
 Speak to your local government to determine specific requirements for your site and business. Your site should also comply with New Jersey's [Cannabis Regulatory Commission (CRC) site requirements (p.59)](https://www.nj.gov/cannabis/documents/CREAMM%20Act.PDF)
 
-Prior to opening, your business site will need to be inspected and approved locally and by NJCRC to ensure customer and employee safety. 
+Prior to opening, your business site will need to be inspected and approved locally and by NJCRC to ensure customer and employee safety.
 
 ---
+
 ### Safety Permits
 
 1. **Fire prevention permits:** Talk to your fire department to make sure your space meets requirements, like working sprinklers, extinguishers, and signage
@@ -18,8 +21,8 @@ Prior to opening, your business site will need to be inspected and approved loca
 3. **Construction permits:** Check with your local government's building/construction department for permit requirements prior to starting renovations. Find out the [requirements for a construction permit](https://business.nj.gov/pages/building-permits-and-inspections) at your site.
 4. **`Certificate of occupancy or approval|certificate-occupancy`:** Speak to your local building/construction department to certify that your space is safe for occupancy.
 
->**Once completed, you will know:**
+> **Once completed, you will know:**
 >
->- The permits your local government requires
->- The process for meeting requirements from your local government and NJCRC
->- The time it takes to receive any permits or licenses
+> - The permits your local government requires
+> - The process for meeting requirements from your local government and NJCRC
+> - The time it takes to receive any permits or licenses

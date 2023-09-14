@@ -1,4 +1,6 @@
 ---
+filename: pesticide-applicator
+displayname: pesticide-applicator
 id: "pesticide-applicator"
 webflowId: "5f7729127fe89d5e4205478f"
 urlSlug: "pesticide-applicator"

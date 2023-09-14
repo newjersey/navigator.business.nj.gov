@@ -1,4 +1,6 @@
 ---
+filename: hydrostatic-test-water-discharges-permit
+displayname: hydrostatic-test-water-discharges-permit
 id: "hydrostatic-test-water-discharges-permit"
 webflowId: "5f77290a8e9f8750706859b4"
 urlSlug: "hydrostatic-test-water-discharges-permit"

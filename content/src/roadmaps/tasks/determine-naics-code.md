@@ -1,6 +1,7 @@
 ---
+displayname: naics-code-determination
 urlSlug: naics-code-determination
-filename: naics-code-determination
+filename: determine-naics-code
 name: Determine Your NAICS Code
 id: determine-naics-code
 ---

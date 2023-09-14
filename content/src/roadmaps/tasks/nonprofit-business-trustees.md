@@ -1,4 +1,5 @@
 ---
+displayname: nonprofit-business-trustees
 urlSlug: nonprofit-business-trustees
 filename: nonprofit-business-trustees
 name: "Appoint Trustees "

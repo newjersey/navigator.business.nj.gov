@@ -1,4 +1,6 @@
 ---
+filename: certified-pool-operator
+displayname: certified-pool-operator
 id: "certified-pool-operator"
 webflowId: "5f77293cdf77ded7fce1a4c5"
 urlSlug: "certified-pool-operator"

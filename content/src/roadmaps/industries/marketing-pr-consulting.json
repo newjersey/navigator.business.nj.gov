@@ -1,8 +1,9 @@
 {
+  "displayname": "marketing-pr-consulting",
   "naicsCodes": "541613,541820",
   "canHavePermanentLocation": true,
   "defaultSectorId": "digital-and-print-media",
-  "industryOnboardingQuestions" : {
+  "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "isProvidesStaffingServicesApplicable": true
   },
@@ -52,5 +53,5 @@
   "name": "Marketing and PR Consulting",
   "additionalSearchTerms": "marketing, advertising, consultant, press, communications, Image management, consultant, advertising, communications, media, promotions",
   "id": "marketing-pr-consulting",
-  "description": "Expert advice to improve the client’s business exposure"
+  "description": "Expert advice to improve the client's business exposure"
 }

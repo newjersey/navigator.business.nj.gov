@@ -1,4 +1,5 @@
 ---
+displayname: trucking-insurance
 urlSlug: trucking-insurance
 filename: trucking-insurance
 name: Get a Commercial Insurance Policy

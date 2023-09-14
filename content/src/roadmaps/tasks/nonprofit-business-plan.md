@@ -1,4 +1,5 @@
 ---
+displayname: nonprofit-business-plan
 urlSlug: nonprofit-business-plan
 filename: nonprofit-business-plan
 name: Write Your Business Plan

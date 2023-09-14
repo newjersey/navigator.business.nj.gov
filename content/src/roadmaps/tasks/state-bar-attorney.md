@@ -1,4 +1,5 @@
 ---
+displayname: state-bar-attorney
 urlSlug: state-bar-attorney
 filename: state-bar-attorney
 name: Apply for Admission to Your State Bar Association

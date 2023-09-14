@@ -1,4 +1,5 @@
 ---
+displayname: martial-arts-karate
 id: "martial-arts-karate"
 webflowId: "640b84672c7bed45835ac402"
 urlSlug: "martial-arts-karate"

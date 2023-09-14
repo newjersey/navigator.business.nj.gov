@@ -1,4 +1,6 @@
 ---
+filename: toys-manufacture
+displayname: toys-manufacture
 id: "toys-manufacture"
 webflowId: "5f7728dcf17efb1a0ceefb2e"
 urlSlug: "toys-manufacture"

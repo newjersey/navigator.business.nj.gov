@@ -1,4 +1,6 @@
 ---
+displayname: search-licenses
+filename: search-licenses
 id: "search-licenses"
 urlSlug: "search-licenses"
 name: "Search Licenses"

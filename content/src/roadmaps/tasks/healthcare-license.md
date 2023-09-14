@@ -1,4 +1,5 @@
 ---
+displayname: healthcare-license
 urlSlug: healthcare-license
 filename: healthcare-license
 name: Ensure Your Staff is Licensed

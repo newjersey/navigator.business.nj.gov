@@ -1,4 +1,6 @@
 ---
+filename: shellfish-special-permit-programs
+displayname: shellfish-special-permit-programs
 id: "shellfish-special-permit-programs"
 webflowId: "5f77291e3862541895bb0e3f"
 urlSlug: "shellfish-special-permit-programs"

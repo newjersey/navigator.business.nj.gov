@@ -1,4 +1,6 @@
 ---
+filename: beautician-cosmetologist-beauty-school-teacher
+displayname: beautician-cosmetologist-beauty-school-teacher
 id: "beautician-cosmetologist-beauty-school-teacher"
 webflowId: "5f7729755ef8c17e89019ec7"
 urlSlug: "beautician-cosmetologist-beauty-school-teacher"

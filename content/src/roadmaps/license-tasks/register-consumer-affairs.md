@@ -1,5 +1,6 @@
 ---
-filename: home-improvement-contractor-license
+displayname: home-improvement-contractor-license
+filename: register-consumer-affairs
 urlSlug: hic-license
 name: Obtain a Home Improvement Contractor Registration
 webflowName: "Home Contractor: Home Improvement Contractor Registration"

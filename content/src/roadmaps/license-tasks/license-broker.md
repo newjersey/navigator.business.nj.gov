@@ -1,5 +1,6 @@
 ---
-filename: broker-license
+displayname: broker-license
+filename: license-broker
 urlSlug: broker-license
 name: Obtain Your Real Estate Broker License
 webflowName: "Real Estate Broker: Real Estate Broker License"

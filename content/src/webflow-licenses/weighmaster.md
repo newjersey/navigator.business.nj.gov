@@ -1,4 +1,5 @@
 ---
+displayname: weighmaster
 id: "weighmaster"
 webflowId: "640b8467644d30bd8fc4d2a8"
 urlSlug: "weighmaster"

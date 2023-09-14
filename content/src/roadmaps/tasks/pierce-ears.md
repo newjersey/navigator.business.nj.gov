@@ -1,4 +1,6 @@
 ---
+displayname: pierce-ears
+filename: pierce-ears
 urlSlug: pierce-ears
 name: Piercing Task
 id: pierce-ears

@@ -1,4 +1,5 @@
 ---
+displayname: vending-machines
 id: "vending-machines"
 webflowId: "640b84681c5d2a5b3824aa45"
 urlSlug: "vending-machines"

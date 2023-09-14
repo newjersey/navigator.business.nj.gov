@@ -1,4 +1,6 @@
 ---
+filename: teacher-special-education
+displayname: teacher-special-education
 id: "teacher-special-education"
 webflowId: "5f77293becb74e1a5123aad0"
 urlSlug: "teacher-special-education"

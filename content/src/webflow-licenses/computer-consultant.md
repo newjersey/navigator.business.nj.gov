@@ -1,4 +1,5 @@
 ---
+displayname: computer-consultant
 id: "computer-consultant"
 webflowId: "640b8467d8764ddb06b0c736"
 urlSlug: "computer-consultant"

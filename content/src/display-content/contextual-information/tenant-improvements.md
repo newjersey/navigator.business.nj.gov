@@ -1,4 +1,6 @@
 ---
+filename: tenant-improvements
+displayname: tenant-improvements
 header: Tenant Improvements
 ---
 

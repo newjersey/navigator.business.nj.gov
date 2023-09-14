@@ -1,4 +1,5 @@
 ---
+displayname: petcare-license
 filename: petcare-license
 urlSlug: petcare-license
 name: Obtain an Animal Facilities License, if Required

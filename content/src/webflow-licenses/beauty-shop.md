@@ -1,4 +1,6 @@
 ---
+filename: beauty-shop
+displayname: beauty-shop
 id: "beauty-shop"
 webflowId: "5f77297590d9ace0871309df"
 urlSlug: "beauty-shop"

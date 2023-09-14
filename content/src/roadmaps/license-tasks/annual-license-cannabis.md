@@ -1,5 +1,6 @@
 ---
-filename: annual-cannabis-license
+displayname: annual-cannabis-license
+filename: annual-license-cannabis
 urlSlug: annual-cannabis-license
 name: Apply for Your Annual Cannabis License
 webflowName: "Cannabis: Annual License"

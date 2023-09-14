@@ -1,4 +1,5 @@
 {
+  "displayname": "notary-public",
   "naicsCodes": "541120",
   "defaultSectorId": "other-services",
   "industryOnboardingQuestions": {
@@ -57,5 +58,5 @@
   "isEnabled": true,
   "additionalSearchTerms": "signing agent, mobile notary, notary service, loan signing, remote online notary",
   "id": "notary-public",
-  "description": "Serves as a witnesses to the signing of documents and verifies signers’ identities"
+  "description": "Serves as a witnesses to the signing of documents and verifies signers' identities"
 }

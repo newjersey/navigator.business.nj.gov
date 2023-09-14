@@ -1,4 +1,6 @@
 ---
+filename: mortuary-funeral-home
+displayname: mortuary-funeral-home
 id: "mortuary-funeral-home"
 webflowId: "5f77299d8075e8b742a8d972"
 urlSlug: "mortuary-funeral-home"

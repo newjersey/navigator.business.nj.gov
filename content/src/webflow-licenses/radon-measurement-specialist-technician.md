@@ -1,4 +1,6 @@
 ---
+filename: radon-measurement-specialist-technician
+displayname: radon-measurement-specialist-technician
 id: "radon-measurement-specialist-technician"
 webflowId: "5f77291ceb55581b71feb59b"
 urlSlug: "radon-measurement-specialist-technician"

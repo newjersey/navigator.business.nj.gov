@@ -1,4 +1,6 @@
 ---
+displayname: search-business-name
+filename: search-business-name
 urlSlug: search-business-name
 name: Search for Available Business Names
 id: search-business-name

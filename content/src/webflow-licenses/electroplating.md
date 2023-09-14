@@ -1,4 +1,6 @@
 ---
+filename: electroplating
+displayname: electroplating
 id: "electroplating"
 webflowId: "5f772950d2749a6ec39cf7d8"
 urlSlug: "electroplating"

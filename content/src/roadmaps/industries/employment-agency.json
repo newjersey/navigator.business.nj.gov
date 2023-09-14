@@ -1,8 +1,9 @@
 {
+  "displayname": "employment-agency",
   "naicsCodes": "561311",
   "canHavePermanentLocation": true,
   "defaultSectorId": "administrative-and-employment-services",
-  "industryOnboardingQuestions" : {
+  "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true
   },

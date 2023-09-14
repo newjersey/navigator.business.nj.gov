@@ -1,4 +1,6 @@
 ---
+filename: warehouses-refrigerated-or-wholesale
+displayname: warehouses-refrigerated-or-wholesale
 id: "warehouses-refrigerated-or-wholesale"
 webflowId: "5f77294790d9ac7ae51309da"
 urlSlug: "warehouses-refrigerated-or-wholesale"

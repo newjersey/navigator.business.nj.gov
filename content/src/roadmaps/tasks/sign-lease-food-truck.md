@@ -1,4 +1,6 @@
 ---
+displayname: sign-lease-food-truck
+filename: sign-lease-food-truck
 urlSlug: sign-lease
 name: Sign Your Location Contract
 id: sign-lease

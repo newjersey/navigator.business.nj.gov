@@ -1,8 +1,9 @@
 {
+  "displayname": "engineering",
   "naicsCodes": "541330",
   "canHavePermanentLocation": true,
   "defaultSectorId": "construction",
-  "industryOnboardingQuestions" : {
+  "industryOnboardingQuestions": {
     "canBeHomeBased": true
   },
   "nonEssentialQuestionsIds": [],

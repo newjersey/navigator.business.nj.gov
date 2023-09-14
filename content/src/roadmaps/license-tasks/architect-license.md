@@ -1,4 +1,5 @@
 ---
+displayname: architect-license
 filename: architect-license
 urlSlug: architect-license
 name: Apply for Your Architect License

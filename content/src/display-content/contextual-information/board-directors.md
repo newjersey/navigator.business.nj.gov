@@ -1,4 +1,6 @@
 ---
+filename: board-directors
+displayname: board-directors
 slug: board-directors
 header: Board of Directors
 ---

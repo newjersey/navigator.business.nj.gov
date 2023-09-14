@@ -1,4 +1,6 @@
 ---
+filename: hog-dealer-broker
+displayname: hog-dealer-broker
 id: "hog-dealer-broker"
 webflowId: "5f7728e1240061e2267834b7"
 urlSlug: "hog-dealer-broker"

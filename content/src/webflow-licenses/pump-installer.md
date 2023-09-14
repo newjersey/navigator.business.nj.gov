@@ -1,4 +1,6 @@
 ---
+filename: pump-installer
+displayname: pump-installer
 id: "pump-installer"
 webflowId: "5f77291ac8aaf5e912c9b52a"
 urlSlug: "pump-installer"

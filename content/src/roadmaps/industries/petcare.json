@@ -1,4 +1,5 @@
 {
+  "displayname": "petcare",
   "naicsCodes": "812910",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,

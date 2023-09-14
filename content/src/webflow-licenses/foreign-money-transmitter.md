@@ -1,4 +1,6 @@
 ---
+filename: foreign-money-transmitter
+displayname: foreign-money-transmitter
 id: "foreign-money-transmitter"
 webflowId: "5f772925b0544f50e8366149"
 urlSlug: "foreign-money-transmitter"

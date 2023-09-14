@@ -1,4 +1,6 @@
 ---
+filename: associate-counselor
+displayname: associate-counselor
 id: "associate-counselor"
 webflowId: "5f772971b0544f24ac36617d"
 urlSlug: "associate-counselor"

@@ -2,6 +2,7 @@
 filename: fire-extinguisher-inspection-servicing
 urlSlug: fire-extinguisher-inspection-servicing
 webflowName: Fire Extinguisher Inspection & Servicing
+displayname: fire-extinguisher-inspection-servicing
 agencyId: nj-community-affairs
 callToActionLink: https://firesolutions.dca.nj.gov/
 webflowIndustry: Fire Extinguisher

@@ -1,12 +1,13 @@
 {
-    "roadmapSteps": [
-      {
-        "step": 3,
-        "weight": 20,
-        "licenseTask": "appraiser-license",
-        "required": true
-      }
-    ],
-    "licenseType": "Real Estate Appraisers"
-  }
-  
+  "displayname": "real-estate-appraiser",
+  "filename": "real-estate-appraiser",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 20,
+      "licenseTask": "appraiser-license",
+      "required": true
+    }
+  ],
+  "licenseType": "Real Estate Appraisers"
+}

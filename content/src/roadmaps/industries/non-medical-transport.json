@@ -1,8 +1,9 @@
 {
+  "displayname": "non-medical-transport",
   "naicsCodes": "485999",
   "canHavePermanentLocation": true,
   "defaultSectorId": "health-care-and-social-assistance",
-  "industryOnboardingQuestions" : {
+  "industryOnboardingQuestions": {
     "canBeHomeBased": true
   },
   "isEnabled": true,

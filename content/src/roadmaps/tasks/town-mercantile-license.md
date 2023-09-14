@@ -1,4 +1,6 @@
 ---
+displayname: town-mercantile-license
+filename: town-mercantile-license
 urlSlug: town-mercantile-license
 name: Get Your Mercantile License if Your Town Requires it
 id: check-local-requirements

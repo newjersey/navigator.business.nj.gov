@@ -1,4 +1,5 @@
 ---
+displayname: car-rental-vehicle-registration
 notesMd: "06/29/23: This task is part of the Car Rental industry, which has not
   yet been enabled and does not appear in Navigator."
 filename: car-rental-vehicle-registration
@@ -17,7 +18,6 @@ agencyId: nj-motor-vehicle
 id: car-rental-vehicle-registration
 webflowId: 648b6ec51357186bad913247
 ---
-
 
 ---
 

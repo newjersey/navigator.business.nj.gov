@@ -1,4 +1,6 @@
 ---
+filename: limited-partners
+displayname: limited-partners
 header: Limited Partners
 slug: limited-partners
 ---

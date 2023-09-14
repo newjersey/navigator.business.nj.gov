@@ -1,4 +1,6 @@
 ---
+filename: apparel-registered-number
+displayname: apparel-registered-number
 id: "apparel-registered-number"
 webflowId: "5f77294d614a2d184ad207a6"
 urlSlug: "apparel-registered-number"

@@ -1,8 +1,11 @@
 ---
+filename: name-reservation
+displayname: name-reservation
 header: Name Reservation
 slug: name-reservation
 ---
-You can reserve a business name with the New Jersey Department of Treasury. 
+
+You can reserve a business name with the New Jersey Department of Treasury.
 
 Names are reserved for six months, **BUT YOU WILL NOT be able to register online with that business name until the six months expire.** Once you reserve your business name, you can only form with that name by submitting a paper application or waiting for the six months reservation to expire.
 

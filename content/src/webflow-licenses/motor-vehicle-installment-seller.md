@@ -1,4 +1,6 @@
 ---
+filename: motor-vehicle-installment-seller
+displayname: motor-vehicle-installment-seller
 id: "motor-vehicle-installment-seller"
 webflowId: "5f77292a2f04da3bc158b5ee"
 urlSlug: "motor-vehicle-installment-seller"

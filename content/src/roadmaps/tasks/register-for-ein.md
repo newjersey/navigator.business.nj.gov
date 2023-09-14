@@ -1,6 +1,7 @@
 ---
+displayname: ein-registration
 urlSlug: ein-registration
-filename: ein-registration
+filename: register-for-ein
 name: Get Your EIN from the IRS
 id: register-for-ein
 callToActionLink: ""

@@ -1,4 +1,6 @@
 ---
+filename: refrigeration-plant-engineer
+displayname: refrigeration-plant-engineer
 id: "refrigeration-plant-engineer"
 webflowId: "5f7729530b0d006dc1f25224"
 urlSlug: "refrigeration-plant-engineer"

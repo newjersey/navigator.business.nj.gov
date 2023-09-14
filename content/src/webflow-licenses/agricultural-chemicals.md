@@ -1,4 +1,6 @@
 ---
+filename: agricultural-chemicals
+displayname: agricultural-chemicals
 id: "agricultural-chemicals"
 webflowId: "5f7728fae10dec0d72024f10"
 urlSlug: "agricultural-chemicals"

@@ -1,4 +1,6 @@
 ---
+filename: microbusiness-cannabis
+displayname: microbusiness-cannabis
 slug: microbusiness-cannabis
 header: Microbusiness for Cannabis Application
 ---

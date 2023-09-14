@@ -1,4 +1,6 @@
 ---
+filename: license-lender
+displayname: license-lender
 id: "license-lender"
 webflowId: "5f772928e8bf5078ed31789c"
 urlSlug: "license-lender"

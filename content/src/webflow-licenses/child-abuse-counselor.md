@@ -1,4 +1,6 @@
 ---
+filename: child-abuse-counselor
+displayname: child-abuse-counselor
 id: "child-abuse-counselor"
 webflowId: "5f772980eb5558041efeb5a3"
 urlSlug: "child-abuse-counselor"

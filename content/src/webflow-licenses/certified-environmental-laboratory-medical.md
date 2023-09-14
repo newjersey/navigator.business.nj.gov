@@ -1,4 +1,6 @@
 ---
+filename: certified-environmental-laboratory-medical
+displayname: certified-environmental-laboratory-medical
 id: "certified-environmental-laboratory-medical"
 webflowId: "5f77293c0b0d004731f25220"
 urlSlug: "certified-environmental-laboratory-medical"

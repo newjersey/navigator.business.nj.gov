@@ -1,6 +1,7 @@
 ---
+displayname: insurance-policy-home-contractor
 urlSlug: insurance-policy
-filename: insurance-policy-home-contractor
+filename: get-insurance-home-contractor
 name: Get an Insurance Policy
 id: research-insurance-needs
 callToActionLink: ""

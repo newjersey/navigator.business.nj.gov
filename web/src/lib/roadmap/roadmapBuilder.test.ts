@@ -230,6 +230,7 @@ const expectedGenericRoadmap: Roadmap = {
   tasks: [
     {
       id: "generic-task-1-id",
+      displayname: "generic-task-1",
       filename: "generic-task-1",
       stepNumber: 1,
       name: "Generic Task 1",
@@ -241,6 +242,7 @@ const expectedGenericRoadmap: Roadmap = {
     },
     {
       id: "generic-task-2-id",
+      displayname: "generic-task-2",
       filename: "generic-task-2",
       stepNumber: 1,
       name: "Generic Task 2",
@@ -254,6 +256,7 @@ const expectedGenericRoadmap: Roadmap = {
       id: "generic-task-3-id",
       name: "Generic Task 3",
       stepNumber: 2,
+      displayname: "generic-task-3",
       filename: "generic-task-3",
       urlSlug: "generic-task-3-url-slug",
       callToActionLink: "www.generic-task-3.com",
@@ -265,6 +268,7 @@ const expectedGenericRoadmap: Roadmap = {
       id: "generic-task-4-id",
       name: "Generic Task 4",
       stepNumber: 3,
+      displayname: "generic-task-4",
       filename: "generic-task-4",
       urlSlug: "generic-task-4-url-slug",
       callToActionLink: "www.generic-task-4.com",

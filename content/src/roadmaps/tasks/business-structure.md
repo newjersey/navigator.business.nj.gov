@@ -1,4 +1,6 @@
 ---
+displayname: business-structure
+filename: business-structure
 urlSlug: business-structure
 name: Select Your Business Structure
 id: business-structure

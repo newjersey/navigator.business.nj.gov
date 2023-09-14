@@ -1,4 +1,6 @@
 ---
+filename: socially-economically-disadvantaged
+displayname: socially-economically-disadvantaged
 header: Socially and Economically Disadvantaged Individuals
 slug: socially-economically-disadvantaged
 ---

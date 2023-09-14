@@ -1,4 +1,6 @@
 ---
+filename: apparel-business
+displayname: apparel-business
 id: "apparel-business"
 webflowId: "5f77294d90d9accc271309db"
 urlSlug: "apparel-business"

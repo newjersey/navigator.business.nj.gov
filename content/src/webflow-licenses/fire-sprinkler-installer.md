@@ -1,6 +1,8 @@
 ---
 urlSlug: fire-sprinkler-installer
 webflowName: Fire Sprinkler/Installer
+filename: fire-sprinkler-installer
+displayname: fire-sprinkler-installer
 agencyId: nj-community-affairs
 agencyAdditionalContext: Division of Fire Safety Contractor Certification Unit
 callToActionText: ""

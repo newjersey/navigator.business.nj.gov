@@ -1,4 +1,6 @@
 ---
+filename: solid-waste
+displayname: solid-waste
 id: "solid-waste"
 webflowId: "5f77291f4bc7777822a6e235"
 urlSlug: "solid-waste"

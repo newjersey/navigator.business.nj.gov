@@ -1,22 +1,24 @@
 {
-    "roadmapSteps": [
-      {
-        "step": 4,
-        "weight": 19,
-        "task": "trucking-boc3",
-        "required": true
-      },
-      {
-        "step": 4,
-        "weight": 21,
-        "task": "trucking-usdot",
-        "required": true
-      },
-      {
-        "step": 4,
-        "weight": 23,
-        "task": "trucking-irp",
-        "required": true
-      }
-    ]
-  }
+  "displayname": "interstate-logistics",
+  "filename": "interstate-logistics",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 19,
+      "task": "trucking-boc3",
+      "required": true
+    },
+    {
+      "step": 4,
+      "weight": 21,
+      "task": "trucking-usdot",
+      "required": true
+    },
+    {
+      "step": 4,
+      "weight": 23,
+      "task": "trucking-irp",
+      "required": true
+    }
+  ]
+}

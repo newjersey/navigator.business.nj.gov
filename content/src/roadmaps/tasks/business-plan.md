@@ -1,4 +1,6 @@
 ---
+displayname: business-plan
+filename: business-plan
 urlSlug: business-plan
 name: Write Your Business Plan
 id: business-plan
@@ -6,7 +8,7 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-Your business plan guides your business and helps you make decisions around operations, staffing, marketing, and financing. Learn [how to structure your business plan](https://business.nj.gov/pages/create-a-business-plan). 
+Your business plan guides your business and helps you make decisions around operations, staffing, marketing, and financing. Learn [how to structure your business plan](https://business.nj.gov/pages/create-a-business-plan).
 
 ---
 
@@ -19,10 +21,10 @@ Your business plan guides your business and helps you make decisions around oper
 5. [The Latin American Economic Development Association of Southern New Jersey](http://www.laeda.com/) offers support to all entrepreneurs
 6. [UCEDC](https://ucedc.com/) provides low cost or free classes and paid business mentoring services
 
->**Once completed, you will have:**
+> **Once completed, you will have:**
 >
->- A business plan 
+> - A business plan
 
->**What if I don't make a business plan?**
+> **What if I don't make a business plan?**
 >
->Data shows that businesses with a plan are more successful. In addition, some state licenses may require you to have a business plan.
+> Data shows that businesses with a plan are more successful. In addition, some state licenses may require you to have a business plan.

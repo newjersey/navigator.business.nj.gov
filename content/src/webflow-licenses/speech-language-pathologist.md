@@ -1,4 +1,6 @@
 ---
+filename: speech-language-pathologist
+displayname: speech-language-pathologist
 id: "speech-language-pathologist"
 webflowId: "5f7729dc9999441a99959e70"
 urlSlug: "speech-language-pathologist"

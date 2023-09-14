@@ -1,4 +1,6 @@
 ---
+filename: social-worker-licensed
+displayname: social-worker-licensed
 id: "social-worker-licensed"
 webflowId: "5f7729dc1b42b9eccdbf1ce3"
 urlSlug: "social-worker-licensed"

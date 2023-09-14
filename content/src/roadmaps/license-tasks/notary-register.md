@@ -1,5 +1,6 @@
 ---
-filename: notary-certificate
+displayname: notary-certificate
+filename: notary-register
 urlSlug: notary-certificate
 name: Register as a Notary Public
 webflowName: "Notary Public: Notary Public Certificate"

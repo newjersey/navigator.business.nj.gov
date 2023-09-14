@@ -1,4 +1,5 @@
 ---
+displayname: music-playing-in-public-restaurant
 id: "music-playing-in-public-restaurant"
 webflowId: "640b8467886244d1c42626c5"
 urlSlug: "music-playing-in-public-restaurant"

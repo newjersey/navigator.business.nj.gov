@@ -1,4 +1,5 @@
 {
+  "displayname": "courier",
   "naicsCodes": "492110, 491110, 492210",
   "canHavePermanentLocation": true,
   "defaultSectorId": "other-services",
