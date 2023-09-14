@@ -1,4 +1,6 @@
 ---
+filename: general-real-estate-appraiser
+displayname: general-real-estate-appraiser
 id: "general-real-estate-appraiser"
 webflowId: "5f77298fdd6a4934209b6069"
 urlSlug: "general-real-estate-appraiser"

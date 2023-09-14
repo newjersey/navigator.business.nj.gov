@@ -1,4 +1,5 @@
 ---
+displayname: trucking-irp
 urlSlug: trucking-irp
 filename: trucking-irp
 name: File Your International Registration Plan (IRP)
@@ -6,7 +7,8 @@ id: trucking-irp
 callToActionLink: https://www.state.nj.us/mvc/pdf/business/irpqui1.pdf
 callToActionText: File My IRP
 ---
-You need to register your fleet with the International Registration Plan (IRP) in the state where you formed your business to be able to haul loads across state lines. 
+
+You need to register your fleet with the International Registration Plan (IRP) in the state where you formed your business to be able to haul loads across state lines.
 
 The IRP is a reciprocity agreement between all states in the U.S. and Canada.
 

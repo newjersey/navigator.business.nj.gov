@@ -1,4 +1,6 @@
 ---
+filename: dental-assistant
+displayname: dental-assistant
 id: "dental-assistant"
 webflowId: "5f772983a6bfb5e72b02ee16"
 urlSlug: "dental-assistant"

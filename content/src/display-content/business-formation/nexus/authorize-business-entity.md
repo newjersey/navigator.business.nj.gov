@@ -1,12 +1,13 @@
 ---
 urlSlug: authorize-business-entity
 filename: authorize-business-entity
+displayname: authorize-business-entity
 name: Authorize Your Business Entity
 id: authorize-business-entity
 callToActionLink: https://www.nj.gov/treasury/revenue/pdf/2000.pdf
 callToActionText: Authorize My Business
-required: true
 agencyId: nj-revenue-enterprise-services
+required: true
 ---
 
 You must register your business name and `authorize|certificate-formation` your `business structure|business-structure-learn-more` with the State.

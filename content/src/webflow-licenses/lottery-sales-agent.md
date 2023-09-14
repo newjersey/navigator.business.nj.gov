@@ -2,6 +2,8 @@
 urlSlug: lottery-sales-agent
 webflowName: Lottery Sales Agent
 agencyId: nj-taxation
+filename: lottery-sales-agent
+displayname: lottery-sales-agent
 callToActionText: ""
 callToActionLink: https://retailerweb.njlottery.com/RetailerWizard/#/home
 webflowIndustry: Lottery Agent

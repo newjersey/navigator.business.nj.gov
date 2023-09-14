@@ -1,4 +1,6 @@
 ---
+filename: waste-transporter-regular-collector-medical
+displayname: waste-transporter-regular-collector-medical
 id: "waste-transporter-regular-collector-medical"
 webflowId: "5f7729218075e8683aa8d93c"
 urlSlug: "waste-transporter-regular-collector-medical"

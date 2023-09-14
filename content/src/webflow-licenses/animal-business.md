@@ -1,4 +1,6 @@
 ---
+filename: animal-business
+displayname: animal-business
 id: "animal-business"
 webflowId: "5f7728fa8fbb22441c6ec083"
 urlSlug: "animal-business"

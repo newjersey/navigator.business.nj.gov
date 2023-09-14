@@ -1,4 +1,6 @@
 ---
+filename: nursery
+displayname: nursery
 id: "nursery"
 webflowId: "5f7728e35ddf765f3e3ac42e"
 urlSlug: "nursery"

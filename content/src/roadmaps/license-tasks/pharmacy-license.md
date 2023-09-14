@@ -1,5 +1,6 @@
 ---
-filename: pharmacy-permit
+displayname: pharmacy-permit
+filename: pharmacy-license
 urlSlug: pharmacy-license
 name: Apply for Your Pharmacy Permit
 webflowName: "Pharmacy: Pharmacy Permit"

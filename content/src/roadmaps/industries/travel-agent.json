@@ -1,4 +1,5 @@
 {
+  "displayname": "travel-agent",
   "naicsCodes": "561510",
   "canHavePermanentLocation": true,
   "defaultSectorId": "other-services",

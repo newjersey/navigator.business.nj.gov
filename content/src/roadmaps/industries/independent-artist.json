@@ -1,4 +1,5 @@
 {
+  "displayname": "independent-artist",
   "defaultSectorId": "arts-entertainment-and-recreation",
   "canHavePermanentLocation": true,
   "nonEssentialQuestionsIds": [],

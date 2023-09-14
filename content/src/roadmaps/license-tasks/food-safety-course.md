@@ -1,4 +1,5 @@
 ---
+displayname: food-safety-course
 filename: food-safety-course
 urlSlug: food-safety-course
 name: Complete Food Safety Course

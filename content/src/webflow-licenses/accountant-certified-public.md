@@ -1,4 +1,6 @@
 ---
+filename: accountant-certified-public
+displayname: accountant-certified-public
 id: "accountant-certified-public"
 webflowId: "5f77296e147ced31b326bf44"
 urlSlug: "accountant-certified-public"

@@ -1,4 +1,6 @@
 ---
+filename: rehabilitation-hospital
+displayname: rehabilitation-hospital
 id: "rehabilitation-hospital"
 webflowId: "5f772945e022948cdceaa5c6"
 urlSlug: "rehabilitation-hospital"

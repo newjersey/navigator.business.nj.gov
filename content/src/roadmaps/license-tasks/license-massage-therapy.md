@@ -1,5 +1,6 @@
 ---
-filename: massage-therapy-license
+displayname: massage-therapy-license
+filename: license-massage-therapy
 urlSlug: massage-therapy-license
 name: Get a Massage Therapy Business License
 webflowName: "Massage Therapy: Massage Therapy Business License"

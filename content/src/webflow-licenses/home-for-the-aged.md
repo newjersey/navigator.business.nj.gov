@@ -1,4 +1,6 @@
 ---
+filename: home-for-the-aged
+displayname: home-for-the-aged
 id: "home-for-the-aged"
 webflowId: "5f772942c8aaf5cca3c9b52f"
 urlSlug: "home-for-the-aged"

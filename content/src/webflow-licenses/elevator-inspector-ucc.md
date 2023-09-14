@@ -1,4 +1,6 @@
 ---
+filename: elevator-inspector-ucc
+displayname: elevator-inspector-ucc
 id: "elevator-inspector-ucc"
 webflowId: "5f772988a195c80a3815b18a"
 urlSlug: "elevator-inspector-ucc"

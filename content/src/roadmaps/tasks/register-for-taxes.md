@@ -1,6 +1,7 @@
 ---
+displayname: tax-registration
 urlSlug: tax-registration
-filename: tax-registration
+filename: register-for-taxes
 name: Register Your Business for State Taxes and Employer Purposes
 id: register-for-taxes
 callToActionLink: ""

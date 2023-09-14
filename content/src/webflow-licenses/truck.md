@@ -1,4 +1,6 @@
 ---
+filename: truck
+displayname: truck
 id: "truck"
 webflowId: "5f77295b486eeb0fdbc25617"
 urlSlug: "truck"

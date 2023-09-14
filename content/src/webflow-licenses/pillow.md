@@ -1,4 +1,6 @@
 ---
+filename: pillow
+displayname: pillow
 id: "pillow"
 webflowId: "5f772944ecb74e645523aad2"
 urlSlug: "pillow"

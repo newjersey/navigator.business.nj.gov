@@ -1,4 +1,5 @@
 ---
+displayname: theatrical-agent
 id: "theatrical-agent"
 webflowId: "640b846729baf00000ffd09a"
 urlSlug: "theatrical-agent"

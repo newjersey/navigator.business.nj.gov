@@ -1,4 +1,5 @@
 ---
+displayname: nonprofit-tax-exempt
 urlSlug: nonprofit-tax-exempt
 filename: nonprofit-tax-exempt
 name: Apply for Tax-Exempt Status with the IRS

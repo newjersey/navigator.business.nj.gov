@@ -1,4 +1,6 @@
 ---
+filename: cosmetology-instructor
+displayname: cosmetology-instructor
 id: "cosmetology-instructor"
 webflowId: "5f77298224006193297834be"
 urlSlug: "cosmetology-instructor"

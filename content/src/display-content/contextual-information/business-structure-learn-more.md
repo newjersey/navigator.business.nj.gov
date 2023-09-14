@@ -1,4 +1,6 @@
 ---
+filename: business-structure-learn-more
+displayname: business-structure-learn-more
 header: Business Structures
 ---
 
@@ -22,7 +24,7 @@ In a general partnership, two or more people share ownership of a single busines
 
 A C Corporation (C Corp) is more complex than other business types and is generally suggested for larger, established companies with multiple employees. It is a separate entity from those who own it, meaning it can be taxed (or sued) independently from its owners. In a C Corp, the owners are called shareholders. They elect a board of directors to oversee major policies and decisions, and appoint officers who carry out the daily operations of the business.
 
-If you are interested in becoming an [S Corporation](https://business.nj.gov/pages/s-corporation-s-corp), you must first register as a C Corporation.** S corporations are not a business structure but a tax status. S corporations are entities that choose to pass corporate income, some losses, deductions, and credits to their shareholders for federal tax purposes. This allows S corporations to avoid double taxation on the corporate income. Shareholders of S corporations report the flow-through of income and losses on their personal tax returns to be assessed at their individual income tax rates.
+If you are interested in becoming an [S Corporation](https://business.nj.gov/pages/s-corporation-s-corp), you must first register as a C Corporation.\*\* S corporations are not a business structure but a tax status. S corporations are entities that choose to pass corporate income, some losses, deductions, and credits to their shareholders for federal tax purposes. This allows S corporations to avoid double taxation on the corporate income. Shareholders of S corporations report the flow-through of income and losses on their personal tax returns to be assessed at their individual income tax rates.
 
 [Limited Partnership (LP) and Limited Liability Partnership (LLP)](https://business.nj.gov/pages/llp-lp)
 

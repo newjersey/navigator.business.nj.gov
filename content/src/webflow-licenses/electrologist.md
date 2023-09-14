@@ -1,4 +1,6 @@
 ---
+filename: electrologist
+displayname: electrologist
 id: "electrologist"
 webflowId: "5f772987a6bfb508d702ee17"
 urlSlug: "electrologist"

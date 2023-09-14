@@ -1,4 +1,6 @@
 ---
+filename: grain-dealer
+displayname: grain-dealer
 id: "grain-dealer"
 webflowId: "5f7728e11a08098953bb2ec3"
 urlSlug: "grain-dealer"

@@ -1,4 +1,6 @@
 ---
+filename: coffee-task-2
+displayname: coffee-task-2
 id: "coffee-task-2-id"
 urlSlug: "coffee-task-2-url-slug"
 name: "Coffee Task 2"

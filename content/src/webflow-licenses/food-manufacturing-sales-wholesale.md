@@ -1,4 +1,6 @@
 ---
+filename: food-manufacturing-sales-wholesale
+displayname: food-manufacturing-sales-wholesale
 id: "food-manufacturing-sales-wholesale"
 webflowId: "5f772940b4710f56bc3c37b6"
 urlSlug: "food-manufacturing-sales-wholesale"

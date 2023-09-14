@@ -1,4 +1,6 @@
 ---
+filename: music-entertainment
+displayname: music-entertainment
 id: "music-entertainment"
 webflowId: "5f77299e24006164047834c1"
 urlSlug: "music-entertainment"

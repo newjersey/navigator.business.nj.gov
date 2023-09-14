@@ -1,4 +1,5 @@
 {
+  "displayname": "graphic-design",
   "naicsCodes": "541430",
   "canHavePermanentLocation": true,
   "defaultSectorId": "digital-and-print-media",
@@ -8,7 +9,7 @@
   },
   "isEnabled": true,
   "nonEssentialQuestionsIds": [],
-"roadmapSteps": [
+  "roadmapSteps": [
     {
       "step": 1,
       "weight": 1,

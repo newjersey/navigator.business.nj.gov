@@ -1,4 +1,6 @@
 ---
+filename: hay-dealer
+displayname: hay-dealer
 id: "hay-dealer"
 webflowId: "5f7728e1147ced043026bf2d"
 urlSlug: "hay-dealer"

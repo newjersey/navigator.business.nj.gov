@@ -1,4 +1,6 @@
 ---
+filename: home-based-business
+displayname: home-based-business
 header: Home-based Business
 ---
 

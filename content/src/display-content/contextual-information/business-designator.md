@@ -1,4 +1,6 @@
 ---
+filename: business-designator
+displayname: business-designator
 slug: business-designator
 header: Business Designator
 ---

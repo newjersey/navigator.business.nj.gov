@@ -1,4 +1,6 @@
 ---
+filename: advisor-investment
+displayname: advisor-investment
 id: "advisor-investment"
 webflowId: "5f77296ff17efb0a3aeefb3d"
 urlSlug: "advisor-investment"

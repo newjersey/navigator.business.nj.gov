@@ -1,4 +1,5 @@
 ---
+displayname: detective-agency-license
 filename: detective-agency-license
 urlSlug: detective-agency-license
 name: Obtain Your Detective Agency License

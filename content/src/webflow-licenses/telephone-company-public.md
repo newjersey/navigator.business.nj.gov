@@ -1,4 +1,6 @@
 ---
+filename: telephone-company-public
+displayname: telephone-company-public
 id: "telephone-company-public"
 webflowId: "5f7728f2a6bfb52e9902edfb"
 urlSlug: "telephone-company-public"

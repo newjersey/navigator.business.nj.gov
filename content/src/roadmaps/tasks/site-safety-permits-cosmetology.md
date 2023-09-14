@@ -1,4 +1,6 @@
 ---
+displayname: site-safety-permits-cosmetology
+filename: site-safety-permits-cosmetology
 urlSlug: site-safety-permits
 name: Obtain Site Safety Permits
 id: certificate-of-occupancy

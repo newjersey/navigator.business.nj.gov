@@ -1,4 +1,5 @@
 {
+  "displayname": "daycare",
   "naicsCodes": "624410",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": false,

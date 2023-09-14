@@ -1,4 +1,6 @@
 ---
+filename: public-accountant
+displayname: public-accountant
 id: "public-accountant"
 webflowId: "5f7729d2bf676810c4c1c9b4"
 urlSlug: "public-accountant"

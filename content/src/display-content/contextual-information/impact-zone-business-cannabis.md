@@ -1,4 +1,6 @@
 ---
+filename: impact-zone-business-cannabis
+displayname: impact-zone-business-cannabis
 header: Impact Zone Businesses
 slug: impactzonebusiness-cannabis
 ---

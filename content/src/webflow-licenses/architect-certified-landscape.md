@@ -1,4 +1,6 @@
 ---
+filename: architect-certified-landscape
+displayname: architect-certified-landscape
 id: "architect-certified-landscape"
 webflowId: "5f772971e022945585eaa5cb"
 urlSlug: "architect-certified-landscape"

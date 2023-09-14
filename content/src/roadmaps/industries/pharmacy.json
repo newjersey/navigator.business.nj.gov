@@ -1,9 +1,9 @@
 {
+  "displayname": "pharmacy",
   "naicsCodes": "456110",
   "canHavePermanentLocation": true,
   "defaultSectorId": "health-care-and-social-assistance",
-  "industryOnboardingQuestions": {
-  },
+  "industryOnboardingQuestions": {},
   "isEnabled": true,
   "nonEssentialQuestionsIds": [],
   "roadmapSteps": [

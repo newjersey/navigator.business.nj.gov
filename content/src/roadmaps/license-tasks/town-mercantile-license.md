@@ -1,4 +1,5 @@
 ---
+displayname: town-mercantile-license
 agencyId: municipal-clerk
 requiresLocation: true
 filename: town-mercantile-license

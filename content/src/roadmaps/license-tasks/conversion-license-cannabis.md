@@ -1,4 +1,5 @@
 ---
+displayname: conversion-license-cannabis
 filename: conversion-license-cannabis
 urlSlug: conversion-license
 name: Submit Your Cannabis Conversion License

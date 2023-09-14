@@ -1,6 +1,6 @@
 ---
-urlSlug: alcoholic-beverage-transportation
-webflowName: Alcoholic Beverage Transportation
+filename: alcoholic-beverage-transportation
+displayname: alcoholic-beverage-transportation
 agencyId: law-public-safety
 agencyAdditionalContext: Division of Alcoholic Beverage Control
 callToActionText: ""

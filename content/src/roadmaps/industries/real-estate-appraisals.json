@@ -1,7 +1,8 @@
 {
+  "displayname": "real-estate-appraisals",
   "defaultSectorId": "real-estate",
   "canHavePermanentLocation": true,
-  "industryOnboardingQuestions" : {
+  "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "isRealEstateAppraisalManagementApplicable": true
   },

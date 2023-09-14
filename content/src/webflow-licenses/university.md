@@ -1,4 +1,5 @@
 ---
+displayname: university
 id: "university"
 webflowId: "640b8468826e9bc3df767c12"
 urlSlug: "university"

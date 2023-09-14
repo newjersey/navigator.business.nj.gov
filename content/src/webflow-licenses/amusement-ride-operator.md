@@ -1,4 +1,6 @@
 ---
+filename: amusement-ride-operator
+displayname: amusement-ride-operator
 id: "amusement-ride-operator"
 webflowId: "5f772970614a2d922cd207b3"
 urlSlug: "amusement-ride-operator"

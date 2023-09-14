@@ -1,4 +1,6 @@
 ---
+displayname: liquor-license-availability
+filename: liquor-license-availability
 urlSlug: liquor-license-availability
 name: Confirm Liquor License Availability
 id: liquor-license-availability

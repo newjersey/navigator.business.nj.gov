@@ -1,4 +1,5 @@
 ---
+displayname: weighing-measuring-equipment-repairer
 id: "weighing-measuring-equipment-repairer"
 webflowId: "640b84678862444f752626c7"
 urlSlug: "weighing-measuring-equipment-repairer"

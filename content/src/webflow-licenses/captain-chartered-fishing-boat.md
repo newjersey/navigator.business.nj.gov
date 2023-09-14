@@ -1,4 +1,6 @@
 ---
+filename: captain-chartered-fishing-boat
+displayname: captain-chartered-fishing-boat
 id: "captain-chartered-fishing-boat"
 webflowId: "5f7728dcd2749a2bfb9cf7d2"
 urlSlug: "captain-chartered-fishing-boat"

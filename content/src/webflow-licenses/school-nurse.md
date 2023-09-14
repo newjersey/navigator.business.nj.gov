@@ -1,4 +1,6 @@
 ---
+filename: school-nurse
+displayname: school-nurse
 id: "school-nurse"
 webflowId: "5f7729365ddf76c0d73ac433"
 urlSlug: "school-nurse"

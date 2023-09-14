@@ -2,6 +2,7 @@
 filename: osha
 urlSlug: osha
 webflowName: OSHA
+displayname: osha
 agencyAdditionalContext: "OSHA: Occupational Safety and Health Administration"
 callToActionLink: https://www.osha.gov/stateplans/nj
 webflowIndustry: OSHA

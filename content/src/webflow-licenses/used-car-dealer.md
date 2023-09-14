@@ -1,4 +1,6 @@
 ---
+filename: used-car-dealer
+displayname: used-car-dealer
 id: "used-car-dealer"
 webflowId: "5f77295becb74e34c123aad6"
 urlSlug: "used-car-dealer"

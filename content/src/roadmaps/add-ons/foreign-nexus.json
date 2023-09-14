@@ -1,13 +1,15 @@
 {
-    "roadmapSteps": [],
-    "modifications": [
-      {
-        "taskToReplaceFilename": "register-for-taxes",
-        "replaceWithFilename": "register-for-taxes-foreign"
-      },
-      {
-        "taskToReplaceFilename": "get-insurance",
-        "replaceWithFilename": "research-insurance-needs-foreign"
-      }
-    ]
+  "displayname": "foreign-nexus",
+  "filename": "foreign-nexus",
+  "roadmapSteps": [],
+  "modifications": [
+    {
+      "taskToReplaceFilename": "register-for-taxes",
+      "replaceWithFilename": "register-for-taxes-foreign"
+    },
+    {
+      "taskToReplaceFilename": "get-insurance",
+      "replaceWithFilename": "research-insurance-needs-foreign"
+    }
+  ]
 }

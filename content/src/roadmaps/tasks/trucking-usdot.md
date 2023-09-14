@@ -1,4 +1,5 @@
 ---
+displayname: trucking-usdot
 urlSlug: trucking-usdot
 filename: trucking-usdot
 name: Register Your Vehicle with the U.S. Department of Transportation

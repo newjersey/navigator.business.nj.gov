@@ -1,4 +1,6 @@
 ---
+filename: firearms-retail-wholesale-and-manufacture
+displayname: firearms-retail-wholesale-and-manufacture
 id: "firearms-retail-wholesale-and-manufacture"
 webflowId: "5f7729604ad0ae6bffa54a58"
 urlSlug: "firearms-retail-wholesale-and-manufacture"

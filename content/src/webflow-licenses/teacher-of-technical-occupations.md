@@ -1,4 +1,6 @@
 ---
+filename: teacher-of-technical-occupations
+displayname: teacher-of-technical-occupations
 id: "teacher-of-technical-occupations"
 webflowId: "5f772939e8bf50b6f031789e"
 urlSlug: "teacher-of-technical-occupations"

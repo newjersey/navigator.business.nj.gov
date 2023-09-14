@@ -1,8 +1,9 @@
 {
+  "displayname": "photography",
   "naicsCodes": "541921",
   "canHavePermanentLocation": true,
   "defaultSectorId": "digital-and-print-media",
-  "industryOnboardingQuestions" : {
+  "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true
   },

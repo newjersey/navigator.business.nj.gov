@@ -1,4 +1,6 @@
 ---
+filename: freight-rail-freight-tariff
+displayname: freight-rail-freight-tariff
 id: "freight-rail-freight-tariff"
 webflowId: "5f77295738625436d2bb0e46"
 urlSlug: "freight-rail-freight-tariff"

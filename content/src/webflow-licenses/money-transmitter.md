@@ -1,4 +1,6 @@
 ---
+filename: money-transmitter
+displayname: money-transmitter
 id: "money-transmitter"
 webflowId: "5f77292ad9d237ac296f48bb"
 urlSlug: "money-transmitter"

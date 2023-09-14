@@ -1,4 +1,5 @@
 ---
+displayname: taxi-authorization-local
 urlSlug: taxi-authorization-local
 filename: taxi-authorization-local
 name: Get Authorization from Your Local Government

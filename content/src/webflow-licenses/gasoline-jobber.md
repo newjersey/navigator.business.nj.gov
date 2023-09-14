@@ -1,4 +1,6 @@
 ---
+filename: gasoline-jobber
+displayname: gasoline-jobber
 id: "gasoline-jobber"
 webflowId: "5f77296a5ef8c1d6df019ec5"
 urlSlug: "gasoline-jobber"

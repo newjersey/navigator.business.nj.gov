@@ -1,4 +1,5 @@
 ---
+displayname: restaurant
 id: "restaurant"
 webflowId: "640b8468eee0342502f163d7"
 urlSlug: "restaurant"

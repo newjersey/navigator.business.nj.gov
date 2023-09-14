@@ -1,5 +1,6 @@
 ---
-filename: acupuncture-license
+displayname: acupuncture-license
+filename: license-acupuncture
 urlSlug: acupuncture-license
 name: Apply for an Acupuncturist License, if Applicable
 webflowName: "Acupuncture: Acupuncturist License"

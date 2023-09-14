@@ -1,4 +1,6 @@
 ---
+filename: solid-waste-transporter
+displayname: solid-waste-transporter
 id: "solid-waste-transporter"
 webflowId: "5f7729208fbb2239cc6ec085"
 urlSlug: "solid-waste-transporter"

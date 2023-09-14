@@ -1,4 +1,6 @@
 ---
+filename: incorporator
+displayname: incorporator
 slug: incorporator
 header: Incorporator
 ---

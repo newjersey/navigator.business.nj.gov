@@ -1,4 +1,6 @@
 ---
+filename: bus-equipment
+displayname: bus-equipment
 id: "bus-equipment"
 webflowId: "5f772967f17efbd994eefb3c"
 urlSlug: "bus-equipment"

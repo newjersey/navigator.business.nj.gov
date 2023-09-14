@@ -1,4 +1,6 @@
 ---
+filename: blue-seal
+displayname: blue-seal
 id: "blue-seal"
 webflowId: "5f77294fb4710f2cf13c37bb"
 urlSlug: "blue-seal"

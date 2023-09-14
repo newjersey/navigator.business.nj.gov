@@ -1,4 +1,6 @@
 ---
+filename: private-inspection-facility
+displayname: private-inspection-facility
 id: "private-inspection-facility"
 webflowId: "5f7729585ef8c11c86019ec4"
 urlSlug: "private-inspection-facility"

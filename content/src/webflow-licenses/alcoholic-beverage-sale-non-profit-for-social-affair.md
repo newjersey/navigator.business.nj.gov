@@ -1,6 +1,6 @@
 ---
-urlSlug: alcoholic-beverage-sale-non-profit-for-social-affair
-webflowName: Alcoholic Beverage Sale (Non-Profit) For Social Affair
+filename: alcoholic-beverage-sale-non-profit-for-social-affair
+displayname: alcoholic-beverage-sale-non-profit-for-social-affair
 agencyId: law-public-safety
 agencyAdditionalContext: Division of Alcoholic Beverage Control
 callToActionText: ""

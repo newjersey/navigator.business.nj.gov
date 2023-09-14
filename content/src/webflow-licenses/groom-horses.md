@@ -1,4 +1,6 @@
 ---
+filename: groom-horses
+displayname: groom-horses
 id: "groom-horses"
 webflowId: "5f7729606f3d8d585a75ef34"
 urlSlug: "groom-horses"

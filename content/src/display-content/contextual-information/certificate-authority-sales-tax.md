@@ -1,4 +1,6 @@
 ---
+filename: certificate-authority-sales-tax
+displayname: certificate-authority-sales-tax
 header: NJ Certificate of Authority for Sales Tax
 ---
 

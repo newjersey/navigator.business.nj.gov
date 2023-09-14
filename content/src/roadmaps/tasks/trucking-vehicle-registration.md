@@ -1,4 +1,5 @@
 ---
+displayname: trucking-vehicle-registration
 urlSlug: trucking-vehicle-registration
 filename: trucking-vehicle-registration
 name: Register Your Truck

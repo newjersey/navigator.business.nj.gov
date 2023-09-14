@@ -1,5 +1,6 @@
 ---
-filename: appraiser-company-registration
+displayname: appraiser-company-registration
+filename: appraiser-company-register
 urlSlug: appraiser-company-registration
 name: Register Your Appraisal Management Company
 webflowName: "Real Estate Appraisal: Management Company Registration"

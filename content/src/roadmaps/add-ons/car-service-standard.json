@@ -1,22 +1,24 @@
 {
-    "roadmapSteps": [
-        {
-            "step": 3,
-            "weight": 15,
-            "task": "taxi-insurance",
-            "required": true
-        },
-        {
-            "step": 3,
-            "weight": 20,
-            "task": "taxi-authorization-local",
-            "required": true
-        },
-        {
-            "step": 3,
-            "weight": 25,
-            "task": "taxi-driver-certification",
-            "required": true
-        }
-    ]
+  "displayname": "car-service-standard",
+  "filename": "car-service-standard",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "taxi-insurance",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 20,
+      "task": "taxi-authorization-local",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 25,
+      "task": "taxi-driver-certification",
+      "required": true
+    }
+  ]
 }

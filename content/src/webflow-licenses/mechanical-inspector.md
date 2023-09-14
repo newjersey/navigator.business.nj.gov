@@ -1,4 +1,6 @@
 ---
+filename: mechanical-inspector
+displayname: mechanical-inspector
 id: "mechanical-inspector"
 webflowId: "5f77299b3862544648bb0e4c"
 urlSlug: "mechanical-inspector"

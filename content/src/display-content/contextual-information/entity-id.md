@@ -1,4 +1,6 @@
 ---
+filename: entity-id
+displayname: entity-id
 header: Entity ID
 ---
 

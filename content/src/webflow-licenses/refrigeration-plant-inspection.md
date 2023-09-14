@@ -1,4 +1,6 @@
 ---
+filename: refrigeration-plant-inspection
+displayname: refrigeration-plant-inspection
 id: "refrigeration-plant-inspection"
 webflowId: "5f772953240061999f7834bb"
 urlSlug: "refrigeration-plant-inspection"

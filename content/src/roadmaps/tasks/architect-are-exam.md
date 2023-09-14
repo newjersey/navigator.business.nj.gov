@@ -1,4 +1,5 @@
 ---
+displayname: architect-are-exam
 urlSlug: architect-are-exam
 filename: architect-are-exam
 name: "Take Your Architect’s Registration Exam "

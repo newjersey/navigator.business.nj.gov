@@ -1,6 +1,8 @@
 ---
 urlSlug: airport-landing-field-strip-heliport-sea-plane-base
 webflowName: Airport, Landing Field & Strip, Heliport, Sea Plane Base
+filename: airport-landing-field-strip-heliport-sea-plane-base
+displayname: airport-landing-field-strip-heliport-sea-plane-base
 agencyAdditionalContext: Federal Aviation Administration
 callToActionText: ""
 callToActionLink: https://www.faa.gov/licenses_certificates/aircraft_certification

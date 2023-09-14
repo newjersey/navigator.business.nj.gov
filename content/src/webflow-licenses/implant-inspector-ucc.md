@@ -1,4 +1,6 @@
 ---
+filename: implant-inspector-ucc
+displayname: implant-inspector-ucc
 id: "implant-inspector-ucc"
 webflowId: "5f7729941a0809f031bb2ed0"
 urlSlug: "implant-inspector-ucc"

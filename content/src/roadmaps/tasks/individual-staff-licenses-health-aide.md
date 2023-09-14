@@ -1,4 +1,6 @@
 ---
+displayname: individual-staff-licenses-health-aide
+filename: individual-staff-licenses-health-aide
 urlSlug: individual-staff-licenses-health-aide
 name: Ensure Your Staff is Licensed
 id: individual-staff-licenses-health-aide

@@ -1,4 +1,5 @@
 ---
+displayname: annual-license-cannabis
 urlSlug: annual-license-cannabis
 filename: annual-license-cannabis
 name: Apply for Your Annual Cannabis License

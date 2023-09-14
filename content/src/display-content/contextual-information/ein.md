@@ -1,4 +1,6 @@
 ---
+filename: ein
+displayname: ein
 header: Employer Identification Number
 ---
 

@@ -1,4 +1,6 @@
 ---
+filename: drugs-manufacture-wholesale-to-medical-professionals
+displayname: drugs-manufacture-wholesale-to-medical-professionals
 id: "drugs-manufacture-wholesale-to-medical-professionals"
 webflowId: "5f77293e4ad0aedffea54a57"
 urlSlug: "drugs-manufacture-wholesale-to-medical-professionals"

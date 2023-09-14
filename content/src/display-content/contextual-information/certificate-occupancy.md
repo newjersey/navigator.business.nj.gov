@@ -1,4 +1,6 @@
 ---
+filename: certificate-occupancy
+displayname: certificate-occupancy
 header: Certificate of Approval
 ---
 

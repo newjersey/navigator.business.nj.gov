@@ -1,5 +1,6 @@
 ---
-filename: certified-accountant-license
+displayname: certified-accountant-license
+filename: register-firm-accounting
 urlSlug: CPA-license
 name: Apply for a Certified Public Accountant License
 webflowName: "Accountant: Certified Public Accountant License"
