@@ -221,6 +221,10 @@ export const isForeignCorporation = (legalStructure: FormationLegalType): boolea
   return ["foreign-c-corporation", "foreign-s-corporation"].includes(legalStructure);
 };
 
+export const isForeignCorporationOrNonprofit = (legalStructure: FormationLegalType): boolean => {
+  return ["foreign-c-corporation", "foreign-s-corporation", "foreign-nonprofit"].includes(legalStructure);
+};
+
 export const getConfigFieldByLegalStructure = (
   legalType: FormationLegalType
 ): "directors" | "trustees" | "members" => {

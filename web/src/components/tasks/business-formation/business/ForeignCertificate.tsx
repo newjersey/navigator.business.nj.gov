@@ -16,7 +16,6 @@ export const ForeignCertificate = (props: Props): ReactElement => {
 
   return (
     <>
-      <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
       <FormControl variant="outlined" fullWidth className="padding-bottom-1">
         <h3 data-testid="foreign-certificate-of-good-standing-header" className="margin-0-override">
           <Content className="h3-styling margin-0-override">

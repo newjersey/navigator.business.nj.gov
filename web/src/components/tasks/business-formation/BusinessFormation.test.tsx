@@ -952,4 +952,243 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.annualReportNotification).toEqual(true);
     expect(formationFormData.corpWatchNotification).toEqual(false);
   }, 60000);
+
+  it("fills multi-step form, submits, and updates userData when nonprofit", async () => {
+    const legalStructureId = "nonprofit";
+    const profileData = generateFormationProfileData({ legalStructureId });
+    const formationData = generateEmptyFormationData();
+    const page = preparePage({
+      business: { profileData, formationData },
+      displayContent,
+      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
+    });
+
+    const trustee: FormationMember = {
+      name: "Emily Jones",
+      addressLine1: "160 Something Ave",
+      addressLine2: "Office of the President",
+      addressCity: "3rd Floor",
+      addressState: { shortCode: "FL", name: "Florida" },
+      addressZipCode: "34997",
+      addressCountry: "US",
+      businessLocationType: "US",
+    };
+
+    await page.fillAndSubmitBusinessNameStep("Pizza Joint");
+
+    page.selectByText("Business suffix", "A NJ NONPROFIT CORPORATION");
+    const threeDaysFromNow = getCurrentDate().add(3, "days");
+    page.selectDate(threeDaysFromNow, "Business start date");
+    page.chooseRadio("is-veteran-nonprofit-yes");
+
+    page.fillText("Address line1", "1234 main street");
+    page.fillText("Address line2", "Suite 304");
+    page.fillText("Address zip code", "08001");
+    page.selectByText("Address municipality", "Newark");
+
+    page.chooseRadio("hasNonprofitBoardMembers-true");
+    page.chooseRadio("nonprofitBoardMemberQualificationsSpecified-IN_BYLAWS");
+    page.chooseRadio("nonprofitBoardMemberRightsSpecified-IN_BYLAWS");
+    page.chooseRadio("nonprofitTrusteesMethodSpecified-IN_BYLAWS");
+    page.chooseRadio("nonprofitAssetDistributionSpecified-IN_FORM");
+    page.fillText("Nonprofit asset distribution terms", "some terms here");
+
+    fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
+    page.fillText("Business purpose", "to take over the world");
+
+    await page.submitBusinessStep();
+
+    page.chooseRadio("registered-agent-manual");
+    page.fillText("Agent name", "Hugo Weaving");
+    page.fillText("Agent email", "name@example.com");
+    page.fillText("Agent office address line1", "400 Pennsylvania Ave");
+    page.fillText("Agent office address line2", "Suite 101");
+    page.selectByText("Agent office address municipality", "Newark");
+    page.fillText("Agent office address zip code", "08002");
+
+    expect(screen.getByText(Config.formation.fields.trustees.placeholder)).toBeInTheDocument();
+    await page.fillAndSubmitAddressModal(trustee, "members");
+
+    expect(screen.getByText(Config.formation.fields.incorporators.placeholder)).toBeInTheDocument();
+    await page.fillAndSubmitAddressModal(trustee, "incorporators");
+    page.checkSignerBox(0, "incorporators");
+
+    await page.submitContactsStep();
+
+    page.fillText("Contact first name", "John");
+    page.fillText("Contact last name", "Smith");
+    page.fillText("Contact phone number", "123A45a678 90");
+    fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel));
+    page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
+
+    page.selectCheckboxByTestId("certificateOfStanding");
+    page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
+
+    const expectedTotalCost =
+      Number.parseInt(Config.formation.fields.certificateOfStanding.cost) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.overrides.nonprofit.cost);
+
+    expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
+
+    await page.submitBillingStep();
+    await page.submitReviewStep();
+
+    const formationFormData = currentBusiness().formationData.formationFormData;
+    await waitFor(() => {
+      expect(formationFormData.businessName).toEqual("Pizza Joint");
+    });
+    expect(formationFormData.businessSuffix).toEqual("A NJ NONPROFIT CORPORATION");
+    expect(formationFormData.businessStartDate).toEqual(threeDaysFromNow.format(defaultDateFormat));
+    expect(formationFormData.addressLine1).toEqual("1234 main street");
+    expect(formationFormData.addressLine2).toEqual("Suite 304");
+    expect(formationFormData.addressState).toEqual({ name: "New Jersey", shortCode: "NJ" });
+    expect(formationFormData.addressZipCode).toEqual("08001");
+    expect(formationFormData.agentNumberOrManual).toEqual("MANUAL_ENTRY");
+    expect(formationFormData.agentNumber).toEqual("");
+    expect(formationFormData.agentName).toEqual("Hugo Weaving");
+    expect(formationFormData.agentEmail).toEqual("name@example.com");
+    expect(formationFormData.agentOfficeAddressLine1).toEqual("400 Pennsylvania Ave");
+    expect(formationFormData.agentOfficeAddressLine2).toEqual("Suite 101");
+    expect(formationFormData.agentOfficeAddressMunicipality?.name).toEqual("Newark");
+    expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
+    expect(formationFormData.businessPurpose).toEqual("to take over the world");
+    expect(formationFormData.members).toEqual([trustee]);
+    expect(formationFormData.incorporators).toEqual([
+      {
+        ...trustee,
+        title: "Incorporator",
+        signature: true,
+      },
+    ]);
+    expect(formationFormData.contactFirstName).toEqual("John");
+    expect(formationFormData.contactLastName).toEqual("Smith");
+    expect(formationFormData.contactPhoneNumber).toEqual("1234567890");
+    expect(formationFormData.paymentType).toEqual("CC");
+    expect(formationFormData.officialFormationDocument).toEqual(true);
+    expect(formationFormData.certificateOfStanding).toEqual(true);
+    expect(formationFormData.certifiedCopyOfFormationDocument).toEqual(true);
+    expect(formationFormData.annualReportNotification).toEqual(true);
+    expect(formationFormData.corpWatchNotification).toEqual(false);
+
+    expect(formationFormData.isVeteranNonprofit).toEqual(true);
+    expect(formationFormData.hasNonprofitBoardMembers).toEqual(true);
+    expect(formationFormData.nonprofitBoardMemberRightsSpecified).toEqual("IN_BYLAWS");
+    expect(formationFormData.nonprofitBoardMemberQualificationsSpecified).toEqual("IN_BYLAWS");
+    expect(formationFormData.nonprofitTrusteesMethodSpecified).toEqual("IN_BYLAWS");
+    expect(formationFormData.nonprofitAssetDistributionSpecified).toEqual("IN_FORM");
+    expect(formationFormData.nonprofitAssetDistributionTerms).toEqual("some terms here");
+  }, 60000);
+
+  it("fills multi-step form, submits, and updates userData when foreign nonprofit", async () => {
+    const legalStructureId = "nonprofit";
+    const profileData = generateFormationProfileData({
+      legalStructureId,
+      businessPersona: "FOREIGN",
+    });
+    const formationData = generateEmptyFormationData();
+    const page = preparePage({
+      business: { profileData, formationData },
+      displayContent,
+      municipalities: [generateMunicipality({ displayName: "Newark", name: "Newark" })],
+    });
+
+    await page.fillAndSubmitNexusBusinessNameStep("Pizza Joint");
+
+    page.selectByText("Business suffix", "A NJ NONPROFIT CORPORATION");
+    const threeDaysFromNow = getCurrentDate().add(3, "days");
+
+    page.selectDate(threeDaysFromNow, "Foreign date of formation");
+    page.fillText("Foreign state of formation", "MA");
+    page.selectDate(threeDaysFromNow, "Business start date");
+
+    fireEvent.click(screen.getByTestId("address-radio-intl"));
+    page.fillText("Address line1", "1234 main street");
+    page.fillText("Address line2", "Suite 304");
+    page.fillText("Address zip code", "0800231");
+    page.fillText("Address country", "Canada");
+    page.fillText("Address province", "Quebec");
+
+    fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
+    page.fillText("Business purpose", "to take over the world");
+
+    await page.submitBusinessStep();
+
+    page.chooseRadio("registered-agent-manual");
+    page.fillText("Agent name", "Hugo Weaving");
+    page.fillText("Agent email", "name@example.com");
+    page.fillText("Agent office address line1", "400 Pennsylvania Ave");
+    page.fillText("Agent office address line2", "Suite 101");
+    page.selectByText("Agent office address municipality", "Newark");
+    page.fillText("Agent office address zip code", "08002");
+
+    page.fillText("Signer 0", "Elrond");
+    page.selectByText("Signer title 0", "Chairman of the Board");
+    page.checkSignerBox(0, "signers");
+
+    await page.submitContactsStep();
+
+    page.fillText("Contact first name", "John");
+    page.fillText("Contact last name", "Smith");
+    page.fillText("Contact phone number", "123A45a678 90");
+    fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel));
+    page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
+
+    page.selectCheckboxByTestId("certificateOfStanding");
+    page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
+
+    const expectedTotalCost =
+      Number.parseInt(Config.formation.fields.certificateOfStanding.overrides["foreign-nonprofit"].cost) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
+
+    expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
+
+    await page.submitBillingStep();
+    await page.submitReviewStep();
+
+    const formationFormData = currentBusiness().formationData.formationFormData;
+    await waitFor(() => {
+      expect(formationFormData.businessName).toEqual("Pizza Joint");
+    });
+    expect(formationFormData.businessSuffix).toEqual("A NJ NONPROFIT CORPORATION");
+    expect(formationFormData.businessStartDate).toEqual(threeDaysFromNow.format(defaultDateFormat));
+    expect(formationFormData.addressLine1).toEqual("1234 main street");
+    expect(formationFormData.addressLine2).toEqual("Suite 304");
+    expect(formationFormData.addressCountry).toEqual("CA");
+    expect(formationFormData.addressZipCode).toEqual("0800231");
+    expect(formationFormData.addressProvince).toEqual("Quebec");
+    expect(formationFormData.agentNumberOrManual).toEqual("MANUAL_ENTRY");
+    expect(formationFormData.agentNumber).toEqual("");
+    expect(formationFormData.agentName).toEqual("Hugo Weaving");
+    expect(formationFormData.agentEmail).toEqual("name@example.com");
+    expect(formationFormData.agentOfficeAddressLine1).toEqual("400 Pennsylvania Ave");
+    expect(formationFormData.agentOfficeAddressLine2).toEqual("Suite 101");
+    expect(formationFormData.agentOfficeAddressMunicipality?.name).toEqual("Newark");
+    expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
+    expect(formationFormData.businessPurpose).toEqual("to take over the world");
+    expect(formationFormData.signers).toEqual([
+      {
+        title: "Chairman of the Board",
+        name: "Elrond",
+        signature: true,
+      },
+    ]);
+    expect(formationFormData.contactFirstName).toEqual("John");
+    expect(formationFormData.contactLastName).toEqual("Smith");
+    expect(formationFormData.contactPhoneNumber).toEqual("1234567890");
+    expect(formationFormData.paymentType).toEqual("CC");
+    expect(formationFormData.officialFormationDocument).toEqual(true);
+    expect(formationFormData.certificateOfStanding).toEqual(true);
+    expect(formationFormData.certifiedCopyOfFormationDocument).toEqual(true);
+    expect(formationFormData.annualReportNotification).toEqual(true);
+    expect(formationFormData.corpWatchNotification).toEqual(false);
+
+    expect(formationFormData.isVeteranNonprofit).toEqual(undefined);
+    expect(formationFormData.hasNonprofitBoardMembers).toEqual(undefined);
+    expect(formationFormData.nonprofitBoardMemberRightsSpecified).toEqual(undefined);
+    expect(formationFormData.nonprofitBoardMemberQualificationsSpecified).toEqual(undefined);
+    expect(formationFormData.nonprofitTrusteesMethodSpecified).toEqual(undefined);
+    expect(formationFormData.nonprofitAssetDistributionSpecified).toEqual(undefined);
+  }, 60000);
 });
