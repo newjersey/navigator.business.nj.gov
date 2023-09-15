@@ -1,3 +1,36 @@
+# [5.28.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.27.0...v5.28.0) (2023-09-15)
+
+
+### Bug Fixes
+
+* [[#183536833](https://github.com/newjersey/navigator.business.nj.gov/issues/183536833)] inline error for missing signature for dakota nexus ([6baf460](https://github.com/newjersey/navigator.business.nj.gov/commit/6baf460220e4b5732709ba4237aaf5039e0fc964))
+* [[#185834867](https://github.com/newjersey/navigator.business.nj.gov/issues/185834867)] add test coverage for change in persona and operating phase ([cc72856](https://github.com/newjersey/navigator.business.nj.gov/commit/cc72856cbf66ac75c340ab23d10eaec7d9a0b54d))
+* [[#185834867](https://github.com/newjersey/navigator.business.nj.gov/issues/185834867)] make sector required for Oscar personas ([99feb36](https://github.com/newjersey/navigator.business.nj.gov/commit/99feb3629407ed54bbf78e9ecaa902995bf94867))
+* [[#185940232](https://github.com/newjersey/navigator.business.nj.gov/issues/185940232)] differentiate foreign and domestic legal type labels for formation ([321e6c9](https://github.com/newjersey/navigator.business.nj.gov/commit/321e6c99397ffee7fd14637f4c173e7abeb7628d))
+* [[#185940288](https://github.com/newjersey/navigator.business.nj.gov/issues/185940288)] allow Outside of the USA selection for foreign state of formation ([deba953](https://github.com/newjersey/navigator.business.nj.gov/commit/deba9536ebf1daea3a6236efa75690ae4f09b11c))
+* [[#185940509](https://github.com/newjersey/navigator.business.nj.gov/issues/185940509)] navbar account link text routes to account-setup page ([2811d73](https://github.com/newjersey/navigator.business.nj.gov/commit/2811d73519fe6f5ef5053cf4453ad7368941c77b))
+* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] prevent not-registered card from showing after registration ([57aa19a](https://github.com/newjersey/navigator.business.nj.gov/commit/57aa19abdf2d49addbd10485139a869b963c2db8))
+* **deps:** update dependency rehype-stringify to v9.0.4 ([fde6bb5](https://github.com/newjersey/navigator.business.nj.gov/commit/fde6bb574adca00df224a9fa7f097c7d7c7af46d))
+* remove flaky wait from dashboard test ([dcc2000](https://github.com/newjersey/navigator.business.nj.gov/commit/dcc2000fa92d0904a0f0e632439eb678cb4bfd3d))
+
+
+### Features
+
+* [[#183536833](https://github.com/newjersey/navigator.business.nj.gov/issues/183536833)] signers and checkbox error message ([387b607](https://github.com/newjersey/navigator.business.nj.gov/commit/387b6072789b99e10c0eee18ed3f218593bd78b2))
+* [[#184415884](https://github.com/newjersey/navigator.business.nj.gov/issues/184415884)] analytics added to cert and funding cards ([1337a60](https://github.com/newjersey/navigator.business.nj.gov/commit/1337a607f2d9fd4652a1d973de66cb139046828f))
+* [[#184432488](https://github.com/newjersey/navigator.business.nj.gov/issues/184432488)] create FieldEntryAlert component ([6c583ee](https://github.com/newjersey/navigator.business.nj.gov/commit/6c583eeb5aca40b9daebbd200a13b195459c2f48))
+* [[#184432488](https://github.com/newjersey/navigator.business.nj.gov/issues/184432488)] use FieldEntryAlert in formation task ([3ccc1f6](https://github.com/newjersey/navigator.business.nj.gov/commit/3ccc1f64b61d5adeb88b78242333b272448f8d18))
+* [[#184432488](https://github.com/newjersey/navigator.business.nj.gov/issues/184432488)] use FieldEntryAlert in profile ([f4fdfed](https://github.com/newjersey/navigator.business.nj.gov/commit/f4fdfed1656c5b46bbc25dac86654e91afac0226))
+* [[#184432499](https://github.com/newjersey/navigator.business.nj.gov/issues/184432499)] add accent-cool-darkest to additional links and unstyled buttons ([2267b5c](https://github.com/newjersey/navigator.business.nj.gov/commit/2267b5c5377f2edf36ef2eb7d7cfebeeb1036ba3))
+* [[#184432499](https://github.com/newjersey/navigator.business.nj.gov/issues/184432499)] replace all links with blue accent-cool-darkest ([1e8b392](https://github.com/newjersey/navigator.business.nj.gov/commit/1e8b392dc37dcb926158d7ec3932a3a2a142cc0c))
+* [[#184432499](https://github.com/newjersey/navigator.business.nj.gov/issues/184432499)] update FieldEntryAlert component to take all Alert props ([6f58592](https://github.com/newjersey/navigator.business.nj.gov/commit/6f58592359622199956e9a02a829108f09e51361))
+* [[#184779281](https://github.com/newjersey/navigator.business.nj.gov/issues/184779281)] show modified content for users who encounter existing myNJ account issue ([65578ca](https://github.com/newjersey/navigator.business.nj.gov/commit/65578ca371e5d31c56cba1cfcdb90bac47ef59c7))
+* [[#185455538](https://github.com/newjersey/navigator.business.nj.gov/issues/185455538)] adjusted error alert when email is taken ([c76687d](https://github.com/newjersey/navigator.business.nj.gov/commit/c76687d79e5f83d57bd53fdcb00d41b9b360b0f8))
+* [[#185872551](https://github.com/newjersey/navigator.business.nj.gov/issues/185872551)] remove task-progress card ([8c2eafa](https://github.com/newjersey/navigator.business.nj.gov/commit/8c2eafa383b1e87afe30e6aeddcb9606511fc0da))
+* [[#186003099](https://github.com/newjersey/navigator.business.nj.gov/issues/186003099)] update Lt. Governor in banner ([c7f34f5](https://github.com/newjersey/navigator.business.nj.gov/commit/c7f34f5aa8f842a498938ffb548d36f914e07ddf))
+* [[#186003172](https://github.com/newjersey/navigator.business.nj.gov/issues/186003172)] added inline error for taken email on registration page ([b883ac4](https://github.com/newjersey/navigator.business.nj.gov/commit/b883ac4b2ab7ed19e476ee89ad92c9305b81f5d6))
+* [[#186003172](https://github.com/newjersey/navigator.business.nj.gov/issues/186003172)] revised email taken inline error with new renmaing from main ([6979feb](https://github.com/newjersey/navigator.business.nj.gov/commit/6979feb90ca170fb7526e36b96330f859259d8ec))
+
 # [5.27.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.26.0...v5.27.0) (2023-09-11)
 
 
