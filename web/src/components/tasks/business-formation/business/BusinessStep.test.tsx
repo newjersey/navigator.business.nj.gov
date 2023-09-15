@@ -429,8 +429,8 @@ describe("Formation - BusinessStep", () => {
   });
 
   describe("Foreign Certificate of Good Standing", () => {
-    for (const legalStructureId of ["c-corporation", "s-corporation"]) {
-      it(`should render for foreign${legalStructureId}`, async () => {
+    for (const legalStructureId of ["c-corporation", "s-corporation", "nonprofit"]) {
+      it(`should render for foreign ${legalStructureId}`, async () => {
         await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
         expect(screen.getByTestId("foreign-certificate-of-good-standing-header")).toBeInTheDocument();
       });
@@ -441,7 +441,7 @@ describe("Formation - BusinessStep", () => {
       "limited-liability-company",
       "limited-partnership",
     ]) {
-      it(`should not render for foreign${legalStructureId}`, async () => {
+      it(`should not render for foreign ${legalStructureId}`, async () => {
         await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
         expect(screen.queryByTestId("foreign-certificate-of-good-standing-header")).not.toBeInTheDocument();
       });
@@ -457,7 +457,7 @@ describe("Formation - BusinessStep", () => {
 
   describe("Will Practice Law", () => {
     for (const legalStructureId of ["c-corporation", "s-corporation"]) {
-      it(`should render for foreign${legalStructureId}`, async () => {
+      it(`should render for foreign ${legalStructureId}`, async () => {
         await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
         expect(screen.getByTestId("will-practice-law-label")).toBeInTheDocument();
       });
@@ -467,8 +467,9 @@ describe("Formation - BusinessStep", () => {
       "limited-liability-partnership",
       "limited-liability-company",
       "limited-partnership",
+      "nonprofit",
     ]) {
-      it(`should not render for foreign${legalStructureId}`, async () => {
+      it(`should not render for foreign ${legalStructureId}`, async () => {
         await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
         expect(screen.queryByTestId("will-practice-law-label")).not.toBeInTheDocument();
       });
@@ -889,6 +890,11 @@ describe("Formation - BusinessStep", () => {
     it("shows nonprofit provisions for nonprofit legal type", async () => {
       await getPageHelper({ legalStructureId: "nonprofit" }, {});
       expect(screen.getByLabelText("Has nonprofit board members")).toBeInTheDocument();
+    });
+
+    it("does not show nonprofit provisions for foreign nonprofit legal type", async () => {
+      await getPageHelper({ legalStructureId: "nonprofit", businessPersona: "FOREIGN" }, {});
+      expect(screen.queryByLabelText("Has nonprofit board members")).not.toBeInTheDocument();
     });
 
     it("does not show nonprofit provisions for legal types that are not nonprofit", async () => {

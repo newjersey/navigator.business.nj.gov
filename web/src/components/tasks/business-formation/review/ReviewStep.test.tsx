@@ -773,4 +773,28 @@ describe("Formation - ReviewStep", () => {
       });
     });
   });
+
+  describe("when foreign corporation", () => {
+    it("displays foreign cert of good standing", async () => {
+      await renderStep({ businessPersona: "FOREIGN", legalStructureId: "c-corporation" }, {});
+      expect(screen.getByText(Config.formation.fields.foreignGoodStandingFile.label)).toBeInTheDocument();
+    });
+
+    it("displays will practice law", async () => {
+      await renderStep({ businessPersona: "FOREIGN", legalStructureId: "c-corporation" }, {});
+      expect(screen.getByText(Config.formation.fields.willPracticeLaw.label)).toBeInTheDocument();
+    });
+  });
+
+  describe("when foreign nonprofit", () => {
+    it("displays foreign cert of good standing", async () => {
+      await renderStep({ businessPersona: "FOREIGN", legalStructureId: "nonprofit" }, {});
+      expect(screen.getByText(Config.formation.fields.foreignGoodStandingFile.label)).toBeInTheDocument();
+    });
+
+    it("does not display will practice law", async () => {
+      await renderStep({ businessPersona: "FOREIGN", legalStructureId: "nonprofit" }, {});
+      expect(screen.queryByText(Config.formation.fields.willPracticeLaw.label)).not.toBeInTheDocument();
+    });
+  });
 });
