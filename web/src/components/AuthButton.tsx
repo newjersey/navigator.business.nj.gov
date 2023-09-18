@@ -42,7 +42,7 @@ export const AuthButton = (props?: Props): ReactElement => {
           onSignOut(router.push, dispatch);
         }}
       >
-        <span className={props?.landing ? "text-primary" : "text-base"}>
+        <span className={props?.landing ? "text-accent-cool-darker" : "text-base"}>
           {Config.navigationDefaults.logoutButton}
         </span>
       </UnStyledButton>
