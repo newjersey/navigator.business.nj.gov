@@ -137,7 +137,7 @@
     "@testing-library/dom": "8.20.1",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "13.4.0",
-    "@testing-library/user-event": "14.5.0",
+    "@testing-library/user-event": "14.5.1",
     "@types/broken-link-checker": "0.7.1",
     "@types/cors": "2.8.14",
     "@types/cypress-dotenv": "2.0.1",
