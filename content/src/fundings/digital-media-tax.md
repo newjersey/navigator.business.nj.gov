@@ -16,7 +16,7 @@ programFrequency: reoccuring
 businessStage: operating
 employeesRequired: n/a
 homeBased: yes
-certifications: null
+certifications: []
 preferenceForOpportunityZone: ""
 county:
   - Atlantic

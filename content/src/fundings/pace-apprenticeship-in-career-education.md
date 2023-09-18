@@ -21,7 +21,7 @@ agencyContact: james.manning@dol.nj.gov
 businessStage: both
 employeesRequired: yes
 homeBased: no
-certifications: null
+certifications: []
 preferenceForOpportunityZone: no
 county:
   - All

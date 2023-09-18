@@ -292,12 +292,12 @@ describe("filterFundings", () => {
       const funding1 = generateFunding({
         employeesRequired: "n/a",
         status: "rolling application",
-        certifications: null,
+        certifications: [],
       });
       const funding2 = generateFunding({
         employeesRequired: "yes",
         status: "rolling application",
-        certifications: null,
+        certifications: [],
       });
       const fundings = [funding1, funding2];
 
@@ -360,12 +360,11 @@ describe("filterFundings", () => {
     const funding5 = generateFunding({ certifications: ["small-business-enterprise"] });
     const funding6 = generateFunding({ certifications: ["disadvantaged-business-enterprise"] });
     const funding7 = generateFunding({ certifications: ["emerging-small-business-enterprise"] });
-    const funding8 = generateFunding({ certifications: undefined });
-    const funding9 = generateFunding({ certifications: null });
+    const funding8 = generateFunding({ certifications: [] });
 
     const listOfFundingTypes = [funding1, funding2, funding3, funding4, funding5, funding6, funding7];
 
-    it("returns an funding when certifications is null or undefined", () => {
+    it("returns a generic funding when certifications are not defined", () => {
       const business = generateBusiness({
         profileData: generateProfileData({
           ownershipTypeIds: ["woman-owned", "veteran-owned"],
@@ -376,9 +375,9 @@ describe("filterFundings", () => {
         }),
       });
 
-      const result = filterFundings([funding8, funding9], business);
-      expect(result.length).toEqual(2);
-      expect(result).toEqual(expect.arrayContaining([funding8, funding9]));
+      const result = filterFundings([funding8], business);
+      expect(result.length).toEqual(1);
+      expect(result).toEqual(expect.arrayContaining([funding8]));
     });
 
     it("does not return ownership types funding's when applicable ownership types do not match", () => {
