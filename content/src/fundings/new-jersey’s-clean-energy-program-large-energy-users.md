@@ -24,7 +24,7 @@ agencyContact: LEUP@NJCleanEnergy.com
 businessStage: both
 employeesRequired: n/a
 homeBased: no
-certifications: null
+certifications: []
 preferenceForOpportunityZone: no
 county:
   - All

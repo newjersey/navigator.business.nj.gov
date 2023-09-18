@@ -58,7 +58,7 @@ export const filterFundings = (fundings: Funding[], business: Business): Funding
       return false;
     }
 
-    if (it.certifications !== undefined && it.certifications !== null) {
+    if (it.certifications) {
       if (it.certifications.length > 0 && business.profileData.ownershipTypeIds.length > 0) {
         const ownershipTypeIds = new Set(arrayOfOwnershipTypes.map((ownershipType) => ownershipType.id));
         const ownershipTypeCerts = it.certifications.filter((cert) => ownershipTypeIds.has(cert));

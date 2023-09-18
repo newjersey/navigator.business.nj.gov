@@ -24,7 +24,7 @@ agencyContact: ahimmel@njeda.com
 businessStage: both
 employeesRequired: n/a
 homeBased: no
-certifications: null
+certifications: []
 preferenceForOpportunityZone: yes
 county:
   - All

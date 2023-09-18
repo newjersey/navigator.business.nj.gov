@@ -61,7 +61,7 @@ const fundingMd = [
     businessStage: "early-stage",
     employeesRequired: "yes",
     homeBased: "yes",
-    certifications: null,
+    certifications: [],
     preferenceForOpportunityZone: "",
     county: ["All"],
     sector: [
