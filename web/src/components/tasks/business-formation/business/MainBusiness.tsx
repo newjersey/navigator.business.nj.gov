@@ -26,7 +26,7 @@ export const MainBusiness = (): ReactElement => {
   );
 
   return (
-    <div className={"margin-bottom-2"}>
+    <div>
       <BusinessNameAndLegalStructure />
       <WithErrorBar
         hasError={doSomeFieldsHaveError(["businessSuffix", "businessStartDate"])}
@@ -96,7 +96,7 @@ export const MainBusiness = (): ReactElement => {
           <div className="grid-row">
             <IsVeteranNonprofit />
           </div>
-          <hr className="margin-y-2" />
+          <hr className="margin-y-3" />
           <NonprofitProvisions />
         </>
       )}
@@ -120,7 +120,7 @@ export const MainBusiness = (): ReactElement => {
           </div>
         </div>
       )}
-      <hr className="margin-y-2" aria-hidden={true} key={"business-line-1"} />
+      <hr className="margin-y-3" aria-hidden={true} key={"business-line-1"} />
     </div>
   );
 };

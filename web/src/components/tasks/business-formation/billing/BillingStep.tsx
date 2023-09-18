@@ -17,7 +17,6 @@ export const BillingStep = (): ReactElement => {
   return (
     <div data-testid="billing-step">
       <h3>{Config.formation.sections.contactInfoHeader}</h3>
-
       <WithErrorBar
         hasError={doSomeFieldsHaveError(["contactFirstName", "contactLastName"])}
         type="DESKTOP-ONLY"
@@ -63,16 +62,14 @@ export const BillingStep = (): ReactElement => {
           </FormationField>
         </div>
       </div>
-      <hr className="margin-y-4" />
-
+      <hr className="margin-y-3" />
       <h3>{Config.formation.sections.servicesHeader}</h3>
       <Content>{Config.formation.sections.servicesDescription}</Content>
       <FormationChooseDocuments />
-
       <PaymentTypeTable />
-      <hr className="margin-top-4" />
+      <hr className="margin-y-3" />
       <FormationChooseNotifications />
-      <div className="margin-top-1">
+      <div className="margin-y-1">
         <Content>{Config.formation.general.paymentDisclaimer}</Content>
       </div>
     </div>
