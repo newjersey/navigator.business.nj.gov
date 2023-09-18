@@ -27,7 +27,7 @@ export const BusinessStep = (): ReactElement => {
     if (state.formationFormData.legalType !== "limited-partnership") return null;
     return (
       <>
-        <hr className="margin-y-2" aria-hidden={true} />
+        <hr className="margin-y-3" aria-hidden={true} />
         <FormationField fieldName="combinedInvestment">
           <BusinessFormationTextBox
             maxChars={400}
@@ -37,7 +37,7 @@ export const BusinessStep = (): ReactElement => {
             contentMd={Config.formation.fields.combinedInvestment.body}
           />
         </FormationField>
-        <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
+        <hr className="margin-y-3" aria-hidden={true} />
         <FormationField fieldName="withdrawals">
           <BusinessFormationTextBox
             maxChars={400}
@@ -47,9 +47,9 @@ export const BusinessStep = (): ReactElement => {
             contentMd={Config.formation.fields.withdrawals.body}
           />
         </FormationField>
-        <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
+        <hr className="margin-y-3" aria-hidden={true} />
         <PartnershipRights />
-        <hr className="margin-bottom-2 margin-top-2" aria-hidden={true} />
+        <hr className="margin-y-3" aria-hidden={true} />
         <FormationField fieldName="dissolution">
           <BusinessFormationTextBox
             maxChars={400}
@@ -65,7 +65,7 @@ export const BusinessStep = (): ReactElement => {
 
   const businessPurposeSection = (): ReactElement => (
     <>
-      <hr className="margin-y-2" aria-hidden={true} key={"business-line-2"} />
+      <hr className="margin-y-3" aria-hidden={true} key={"business-line-2"} />
       <FormationField fieldName="businessPurpose">
         <BusinessFormationTextBox
           maxChars={300}
@@ -77,7 +77,7 @@ export const BusinessStep = (): ReactElement => {
           contentMd={Config.formation.fields.businessPurpose.body}
         />
       </FormationField>
-      <hr className="margin-y-2" aria-hidden={true} key={"business-line-3"} />
+      <hr className="margin-y-3" aria-hidden={true} key={"business-line-3"} />
     </>
   );
 

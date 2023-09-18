@@ -134,7 +134,7 @@ export const RegisteredAgent = (): ReactElement => {
     <>
       <h3>{Config.formation.registeredAgent.label}</h3>
       <Content>{Config.formation.registeredAgent.sectionDescription}</Content>
-      <div id="registeredAgent" className="margin-bottom-3">
+      <div id="registeredAgent">
         <FormControl fullWidth>
           <RadioGroup
             aria-label="Registered Agent"

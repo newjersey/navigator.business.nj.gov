@@ -44,13 +44,13 @@ export const ContactsStep = (): ReactElement => {
         <RegisteredAgent />
         {shouldShowMembers() && (
           <>
-            <hr className="margin-top-0 margin-bottom-3" />
+            <hr className="margin-y-3" />
             <FormationField fieldName="members">
               <Members hasError={doesFieldHaveError("members")} />
             </FormationField>
           </>
         )}
-        <hr className="margin-top-0 margin-bottom-3" />
+        <hr className="margin-y-3" />
         {incorporationLegalStructures.includes(state.formationFormData.legalType) ? (
           <FormationField fieldName="incorporators">
             <Addresses<FormationIncorporator>
