@@ -64,6 +64,8 @@ export const SidebarCardsContainer = (props: Props): ReactElement => {
     return LookupOperatingPhaseById(business?.profileData.operatingPhase).displayCertifications;
   };
 
+  console.log('cards in container', business?.preferences.visibleSidebarCards)
+
   const visibleCardsOrderedByWeight = business
     ? business.preferences.visibleSidebarCards
         .map((id: string) => {

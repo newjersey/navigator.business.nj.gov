@@ -20,6 +20,7 @@ export class UpdateQueueFactory implements UpdateQueue {
   }
 
   queue(userData: Partial<UserData>): UpdateQueue {
+    console.log('queueing new userData', userData)
     this.internalQueue = {
       ...this.internalQueue,
       ...userData,
@@ -36,6 +37,7 @@ export class UpdateQueueFactory implements UpdateQueue {
   }
 
   queueBusiness(business: Partial<Business>): UpdateQueue {
+    console.log('queueing new business', business)
     this.internalQueue = {
       ...this.internalQueue,
       businesses: {
@@ -132,6 +134,7 @@ export class UpdateQueueFactory implements UpdateQueue {
   }
 
   queuePreferences(preferences: Partial<Preferences>): UpdateQueue {
+    console.log('queueing new preferences', preferences)
     this.internalQueue = {
       ...this.internalQueue,
       businesses: {

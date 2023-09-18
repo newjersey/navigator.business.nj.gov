@@ -71,6 +71,7 @@ export const onSelfRegister = ({
       },
     })
     .then(async (response) => {
+      console.log('self reg response queued up', response.userData)
       await updateQueue.queue(response.userData).update();
       await router.replace(response.authRedirectURL);
     })

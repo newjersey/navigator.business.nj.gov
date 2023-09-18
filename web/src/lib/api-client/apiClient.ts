@@ -77,6 +77,7 @@ export const postSelfReg = (userData: UserData): Promise<SelfRegResponse> => {
   return axios
     .post(`${apiBaseUrl}/api/self-reg`, userData)
     .then((response) => {
+      console.log('response returned from self reg', response.data)
       return response.data;
     })
     .catch((error: AxiosError) => {
