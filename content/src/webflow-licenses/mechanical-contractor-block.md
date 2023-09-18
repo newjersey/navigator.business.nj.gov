@@ -1,4 +1,5 @@
 ---
+displayname: mechanical-contractor-block
 id: "mechanical-contractor-block"
 webflowId: "640b846780e3b782900bd7d6"
 urlSlug: "mechanical-contractor-block"

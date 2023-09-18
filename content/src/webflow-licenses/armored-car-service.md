@@ -1,4 +1,6 @@
 ---
+filename: armored-car-service
+displayname: armored-car-service
 id: "armored-car-service"
 webflowId: "5f77295cdd6a4917a69b6066"
 urlSlug: "armored-car-service"

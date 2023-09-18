@@ -1,4 +1,6 @@
 ---
+filename: inspector-hotels-multiple-dwellings
+displayname: inspector-hotels-multiple-dwellings
 id: "inspector-hotels-multiple-dwellings"
 webflowId: "5f7729945adcc85451b64a81"
 urlSlug: "inspector-hotels-multiple-dwellings"

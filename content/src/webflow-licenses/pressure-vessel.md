@@ -1,4 +1,6 @@
 ---
+filename: pressure-vessel
+displayname: pressure-vessel
 id: "pressure-vessel"
 webflowId: "5f77295290d9accc911309dc"
 urlSlug: "pressure-vessel"

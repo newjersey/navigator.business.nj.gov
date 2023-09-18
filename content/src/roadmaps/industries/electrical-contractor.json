@@ -1,4 +1,5 @@
 {
+  "displayname": "electrical-contractor",
   "naicsCodes": "238210",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,

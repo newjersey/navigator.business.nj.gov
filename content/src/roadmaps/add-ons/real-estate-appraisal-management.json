@@ -1,17 +1,18 @@
 {
-    "roadmapSteps": [
-      {
-        "step": 3,
-        "weight": 20,
-        "licenseTask": "appraiser-certification",
-        "required": true
-      },
-      {
-        "step": 3,
-        "weight": 21,
-        "licenseTask": "appraiser-company-register",
-        "required": true
-      }
-    ]
-  }
-  
+  "displayname": "real-estate-appraisal-management",
+  "filename": "real-estate-appraisal-management",
+  "roadmapSteps": [
+    {
+      "step": 3,
+      "weight": 20,
+      "licenseTask": "appraiser-certification",
+      "required": true
+    },
+    {
+      "step": 3,
+      "weight": 21,
+      "licenseTask": "appraiser-company-register",
+      "required": true
+    }
+  ]
+}

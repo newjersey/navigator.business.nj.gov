@@ -1,5 +1,6 @@
 ---
-filename: accounting-license
+displayname: accounting-license
+filename: license-accounting
 urlSlug: accounting-license
 name: Register Your Accounting Firm
 webflowName: "Accountant: Public Accounting Firm"

@@ -1,7 +1,10 @@
 ---
+filename: remote-worker
+displayname: remote-worker
 header: Remote Worker
 slug: remote-worker
 ---
+
 Out-of-State businesses with one or more employees that have been paid wages of $1,000 or more within a calendar year, while performing services within the State have remote workers.
 
 Any business with employees is required to withhold and remit for the Federal Insurance Contribution Act (FICA), the Federal Unemployment and Temporary Disability Act (FUTA) at New Jersey’s rate, Unemployment Insurance (UI), Temporary Disability Insurance (TDI), Family Leave Insurance (FLI), NJ Income Tax, and the Workforce Development Partnership Fund (WDPF).

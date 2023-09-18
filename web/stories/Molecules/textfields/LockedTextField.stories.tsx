@@ -4,7 +4,7 @@ import { ProfileField } from "@/components/profile/ProfileField";
 import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { generateProfileData } from "@businessnjgovnavigator/shared/index";
+import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useState } from "react";

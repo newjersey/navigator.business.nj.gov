@@ -1,4 +1,6 @@
 ---
+filename: pig-dealer-broker
+displayname: pig-dealer-broker
 id: "pig-dealer-broker"
 webflowId: "5f7728e3e10dec67d3024f0f"
 urlSlug: "pig-dealer-broker"

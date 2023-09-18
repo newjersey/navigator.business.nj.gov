@@ -1,4 +1,6 @@
 ---
+filename: private-detective-investigator-2
+displayname: private-detective-investigator-2
 id: "private-detective-investigator-2"
 webflowId: "5f77296338625456e5bb0e47"
 urlSlug: "private-detective-investigator-2"

@@ -1,4 +1,5 @@
 ---
+displayname: certified-interior-designer
 id: "certified-interior-designer"
 webflowId: "648b6ec5e143e52467f1c8f2"
 urlSlug: "certified-interior-designer"

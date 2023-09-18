@@ -1,4 +1,5 @@
 ---
+displayname: trucking-cdl
 urlSlug: trucking-cdl
 filename: trucking-cdl
 name: Apply for a Commercial Driver's License and Ensure Your Drivers are Licensed

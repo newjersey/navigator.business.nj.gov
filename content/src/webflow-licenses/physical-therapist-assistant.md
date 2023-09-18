@@ -1,4 +1,6 @@
 ---
+filename: physical-therapist-assistant
+displayname: physical-therapist-assistant
 id: "physical-therapist-assistant"
 webflowId: "5f7729c1d20a7f5a503604e6"
 urlSlug: "physical-therapist-assistant"

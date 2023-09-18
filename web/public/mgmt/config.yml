@@ -29,7 +29,7 @@ collections:
   - name: "business-formation-dba-tasks"
     label: "Biz Form - DBA Tasks"
     folder: "content/src/display-content/business-formation/nexus"
-    summary: "{{filename}} - {{name}}"
+    summary: "{{displayname}} - {{name}}"
     identifier_field: "{{filename}}"
     slug: "{{fields.filename}}"
     delete: true
@@ -41,9 +41,10 @@ collections:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
-      - { label: "Filename", name: "filename", widget: "nospace", required: false }
+      - { label: "Filename", name: "filename", widget: "write-once-read-only" }
+      - { label: "Display Name", name: "displayname", widget: "nospace" }
       - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "nospace" }
+      - { label: "Id", name: "id", widget: "write-once-read-only" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - label: Agency
@@ -264,10 +265,10 @@ collections:
                           required: true,
                           widget: "relation",
                           collection: "contextual-information",
-                          search_fields: ["{{filename}}"],
+                          search_fields: ["{{displayname}}"],
                           options_length: 500,
                           value_field: "{{filename}}",
-                          display_fields: ["{{filename}}"],
+                          display_fields: ["{{displayname}}"],
                         }
                       - { label: "Inline error - future", name: "errorFuture", widget: "string" }
                       - { label: "Inline error - today", name: "errorToday", widget: "string" }
@@ -285,10 +286,10 @@ collections:
                           required: true,
                           widget: "relation",
                           collection: "contextual-information",
-                          search_fields: ["{{filename}}"],
+                          search_fields: ["{{displayname}}"],
                           options_length: 500,
                           value_field: "{{filename}}",
-                          display_fields: ["{{filename}}"],
+                          display_fields: ["{{displayname}}"],
                         }
                       - { label: "Inline error", name: "error", widget: "string" }
                   - label: Business Total Stock
@@ -355,10 +356,10 @@ collections:
                           required: true,
                           widget: "relation",
                           collection: "contextual-information",
-                          search_fields: ["{{filename}}"],
+                          search_fields: ["{{displayname}}"],
                           options_length: 500,
                           value_field: "{{filename}}",
-                          display_fields: ["{{filename}}"],
+                          display_fields: ["{{displayname}}"],
                         }
                       - { label: "Cost", name: "cost", widget: "string" }
                   - label: Document - Certified Copy of Formation
@@ -373,10 +374,10 @@ collections:
                           required: true,
                           widget: "relation",
                           collection: "contextual-information",
-                          search_fields: ["{{filename}}"],
+                          search_fields: ["{{displayname}}"],
                           options_length: 500,
                           value_field: "{{filename}}",
-                          display_fields: ["{{filename}}"],
+                          display_fields: ["{{displayname}}"],
                         }
                       - { label: "Cost", name: "cost", widget: "string" }
                   - label: Document - Certificate of Good Standing
@@ -391,10 +392,10 @@ collections:
                           required: true,
                           widget: "relation",
                           collection: "contextual-information",
-                          search_fields: ["{{filename}}"],
+                          search_fields: ["{{displayname}}"],
                           options_length: 500,
                           value_field: "{{filename}}",
-                          display_fields: ["{{filename}}"],
+                          display_fields: ["{{displayname}}"],
                         }
                       - { label: "Cost", name: "cost", widget: "string" }
                       - label: Overrides
@@ -416,6 +417,12 @@ collections:
                               - { label: "Cost", name: "cost", widget: "string" }
                           - label: Limited Partnership (LP)
                             name: "limited-partnership"
+                            collapsed: false
+                            widget: object
+                            fields:
+                              - { label: "Cost", name: "cost", widget: "string" }
+                          - label: Foreign Nonprofit
+                            name: "foreign-nonprofit"
                             collapsed: false
                             widget: object
                             fields:
@@ -940,10 +947,10 @@ collections:
                       required: true,
                       widget: "relation",
                       collection: "contextual-information",
-                      search_fields: ["{{filename}}"],
+                      search_fields: ["{{displayname}}"],
                       options_length: 500,
                       value_field: "{{filename}}",
-                      display_fields: ["{{filename}}"],
+                      display_fields: ["{{displayname}}"],
                     }
                   - {
                       label: "Warning modal - cancel button",
@@ -1142,7 +1149,7 @@ collections:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Description", name: "descriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
+      - { label: "Url Slug / Filename", name: "urlSlug", widget: "write-once-read-only" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -1183,7 +1190,7 @@ collections:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Description", name: "descriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
+      - { label: "Url Slug / Filename", name: "urlSlug", widget: "write-once-read-only" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -1228,7 +1235,7 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "File Name", name: "filename", widget: "slug" }
+      - { label: "File Name", name: "filename", widget: "write-once-read-only" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Url Slug", name: "urlSlug", widget: "string" }
       - { label: "Id", name: "id", widget: "string" }
@@ -1377,7 +1384,7 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "File Name", name: "filename", widget: "slug" }
+      - { label: "File Name", name: "filename", widget: "write-once-read-only" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Url Slug", name: "urlSlug", widget: "string" }
       - { label: "Id", name: "id", widget: "string" }
@@ -1525,7 +1532,7 @@ collections:
     create: true
     delete: true
     format: "json"
-    summary: "{{filename}}"
+    summary: "{{displayname}}"
     editor:
       preview: false
     fields:
@@ -1564,7 +1571,10 @@ collections:
         required: false
       - label: Id / Filename
         name: id
-        widget: string
+        widget: write-once-read-only
+      - label: "Display Name"
+        name: "displayname"
+        widget: "string"
       - label: Onboarding Questions
         name: industryOnboardingQuestions
         widget: object
@@ -1658,18 +1668,18 @@ collections:
             name: task
             widget: "relation"
             collection: "tasks"
-            search_fields: ["{{filename}}", "name", "urlSlug"]
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
             value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
+            display_fields: ["{{displayname}}"]
             required: false
             options_length: 500
           - label: License Task (this or Task is required)
             name: licenseTask
             widget: "relation"
             collection: "license-tasks"
-            search_fields: ["{{filename}}", "name", "urlSlug"]
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
             value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
+            display_fields: ["{{displayname}}"]
             required: false
             options_length: 500
           - label: "Required"
@@ -1685,17 +1695,17 @@ collections:
             name: taskToReplaceFilename
             widget: "relation"
             collection: "tasks"
-            search_fields: ["{{filename}}", "name", "urlSlug"]
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
             value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
+            display_fields: ["{{displayname}}"]
             options_length: 500
           - label: Modified Task
             name: replaceWithFilename
             widget: "relation"
             collection: "tasks"
-            search_fields: ["{{filename}}", "name", "urlSlug"]
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
             value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
+            display_fields: ["{{displayname}}"]
             options_length: 500
   - name: addons
     label: "Roadmaps - Add-ons"
@@ -1706,12 +1716,15 @@ collections:
     create: true
     delete: true
     format: "json"
-    summary: "{{filename}}"
+    summary: "{{displayname}}"
     editor:
       preview: false
     fields:
       - label: Filename
         name: id
+        widget: write-once-read-only
+      - label: Displayname
+        name: displayname
         widget: string
       - label: Roadmap Steps
         name: roadmapSteps
@@ -1732,18 +1745,18 @@ collections:
             name: task
             widget: "relation"
             collection: "tasks"
-            search_fields: ["{{filename}}", "name", "urlSlug"]
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
             value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
+            display_fields: ["{{displayname}}"]
             required: false
             options_length: 500
           - label: License Task (this or Task is required)
             name: licenseTask
             widget: "relation"
             collection: "license-tasks"
-            search_fields: ["{{filename}}", "name", "urlSlug"]
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
             value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
+            display_fields: ["{{displayname}}"]
             required: false
             options_length: 500
           - label: "Required"
@@ -1759,17 +1772,17 @@ collections:
             name: taskToReplaceFilename
             widget: "relation"
             collection: "tasks"
-            search_fields: ["{{filename}}", "name", "urlSlug"]
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
             value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
+            display_fields: ["{{displayname}}"]
             options_length: 500
           - label: Modified Task
             name: replaceWithFilename
             widget: "relation"
             collection: "tasks"
-            search_fields: ["{{filename}}", "name", "urlSlug"]
+            search_fields: ["{{displayname}}", "name", "urlSlug"]
             value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
+            display_fields: ["{{displayname}}"]
             options_length: 500
   - name: "nonEssentialQuestionsCollection"
     label: "Roadmaps - Non Essential Questions"
@@ -1796,9 +1809,9 @@ collections:
                 name: addOn
                 widget: "relation"
                 collection: "addons"
-                search_fields: ["{{filename}}"]
+                search_fields: ["{{displayname}}"]
                 value_field: "{{filename}}"
-                display_fields: ["{{filename}}"]
+                display_fields: ["{{displayname}}"]
                 options_length: 500
 
   - name: "settings"
@@ -1873,27 +1886,27 @@ collections:
                 name: task
                 widget: "relation"
                 collection: "tasks"
-                search_fields: ["{{filename}}", "name", "urlSlug"]
+                search_fields: ["{{displayname}}", "name", "urlSlug"]
                 value_field: "{{filename}}"
-                display_fields: ["{{filename}}"]
+                display_fields: ["{{displayname}}"]
                 required: false
                 options_length: 500
               - label: License Task (this or Task is required)
                 name: licenseTask
                 widget: "relation"
                 collection: "license-tasks"
-                search_fields: ["{{filename}}", "name", "urlSlug"]
+                search_fields: ["{{displayname}}", "name", "urlSlug"]
                 value_field: "{{filename}}"
-                display_fields: ["{{filename}}"]
+                display_fields: ["{{displayname}}"]
                 required: false
                 options_length: 500
               - label: Task Dependencies
                 name: taskDependencies
                 widget: "relation"
                 collection: "tasks"
-                search_fields: ["{{filename}}", "name", "urlSlug"]
+                search_fields: ["{{displayname}}", "name", "urlSlug"]
                 value_field: "{{filename}}"
-                display_fields: ["{{filename}}"]
+                display_fields: ["{{displayname}}"]
                 multiple: true
                 required: false
                 options_length: 500
@@ -1901,9 +1914,9 @@ collections:
                 name: licenseTaskDependencies
                 widget: "relation"
                 collection: "license-tasks"
-                search_fields: ["{{filename}}", "name", "urlSlug"]
+                search_fields: ["{{displayname}}", "name", "urlSlug"]
                 value_field: "{{filename}}"
-                display_fields: ["{{filename}}"]
+                display_fields: ["{{displayname}}"]
                 multiple: true
                 required: false
                 options_length: 500
@@ -1944,7 +1957,7 @@ collections:
   - name: "tasks"
     label: "Tasks - All"
     folder: "content/src/roadmaps/tasks"
-    summary: "{{filename}} - {{name}}"
+    summary: "{{displayname}} - {{name}}"
     identifier_field: "{{filename}}"
     slug: "{{fields.filename}}"
     delete: true
@@ -1956,9 +1969,10 @@ collections:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
-      - { label: "Filename", name: "filename", widget: "nospace", required: false }
+      - { label: "Filename", name: "filename", widget: "write-once-read-only" }
+      - { label: "Display Name", name: "displayname", widget: "nospace" }
       - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "nospace" }
+      - { label: "Id", name: "id", widget: "write-once-read-only" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - {
@@ -2004,7 +2018,7 @@ collections:
   - name: "license-tasks"
     label: "License Tasks (Navigator with Webflow mappings)"
     folder: "content/src/roadmaps/license-tasks"
-    summary: "{{filename}} - {{name}}"
+    summary: "{{displayname}} - {{name}}"
     identifier_field: "{{filename}}"
     slug: "{{fields.filename}}"
     delete: true
@@ -2014,7 +2028,8 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "Filename", name: "filename", widget: "nospace", required: false }
+      - { label: "Filename", name: "filename", widget: "write-once-read-only" }
+      - { label: "Display Name", name: "displayname", widget: "nospace" }
       - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
       - { label: "Title (Navigator)", name: "name", widget: "string" }
       - { label: "Title (Webflow)", name: "webflowName", widget: "string" }
@@ -2081,7 +2096,7 @@ collections:
   - name: "webflow-licenses"
     label: "Webflow Licenses"
     folder: "content/src/webflow-licenses"
-    summary: "{{filename}} - {{name}}"
+    summary: "{{displayname}} - {{name}}"
     identifier_field: "{{filename}}"
     slug: "{{fields.filename}}"
     delete: false
@@ -2091,7 +2106,8 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "Filename", name: "filename", widget: "nospace", required: false }
+      - { label: "Filename", name: "filename", widget: "write-once-read-only" }
+      - { label: "Display Name", name: "displayname", widget: "nospace" }
       - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
       - { label: "Title (Navigator)", name: "name", widget: "string", required: false }
       - { label: "Title (Webflow)", name: "webflowName", widget: "string", required: false }
@@ -2639,7 +2655,7 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
+      - { label: "Url Slug / Filename", name: "urlSlug", widget: "write-once-read-only" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Extension", name: "extension", widget: "boolean", required: false }
       - { label: "Content", name: "body", widget: "markdown" }
@@ -3783,10 +3799,10 @@ collections:
                               required: false,
                               widget: "relation",
                               collection: "contextual-information",
-                              search_fields: ["{{filename}}"],
+                              search_fields: ["{{displayname}}"],
                               options_length: 500,
                               value_field: "{{filename}}",
-                              display_fields: ["{{filename}}"],
+                              display_fields: ["{{displayname}}"],
                             }
                           - {
                               label: "Error Text (Oscar Onboarding Only)",
@@ -3843,10 +3859,10 @@ collections:
                               required: false,
                               widget: "relation",
                               collection: "contextual-information",
-                              search_fields: ["{{filename}}"],
+                              search_fields: ["{{displayname}}"],
                               options_length: 500,
                               value_field: "{{filename}}",
-                              display_fields: ["{{filename}}"],
+                              display_fields: ["{{displayname}}"],
                             }
                           - {
                               label: "Error Text (when not set)",
@@ -3888,10 +3904,10 @@ collections:
                               required: false,
                               widget: "relation",
                               collection: "contextual-information",
-                              search_fields: ["{{filename}}"],
+                              search_fields: ["{{displayname}}"],
                               options_length: 500,
                               value_field: "{{filename}}",
-                              display_fields: ["{{filename}}"],
+                              display_fields: ["{{displayname}}"],
                             }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
                           - {
@@ -4000,10 +4016,10 @@ collections:
                               required: false,
                               widget: "relation",
                               collection: "contextual-information",
-                              search_fields: ["{{filename}}"],
+                              search_fields: ["{{displayname}}"],
                               options_length: 500,
                               value_field: "{{filename}}",
-                              display_fields: ["{{filename}}"],
+                              display_fields: ["{{displayname}}"],
                             }
                           - {
                               label: "Error Text (when not set)",
@@ -4045,10 +4061,10 @@ collections:
                               required: false,
                               widget: "relation",
                               collection: "contextual-information",
-                              search_fields: ["{{filename}}"],
+                              search_fields: ["{{displayname}}"],
                               options_length: 500,
                               value_field: "{{filename}}",
-                              display_fields: ["{{filename}}"],
+                              display_fields: ["{{displayname}}"],
                             }
                           - {
                               label: "Error Text (when not provided)",
@@ -4101,10 +4117,10 @@ collections:
                               required: false,
                               widget: "relation",
                               collection: "contextual-information",
-                              search_fields: ["{{filename}}"],
+                              search_fields: ["{{displayname}}"],
                               options_length: 500,
                               value_field: "{{filename}}",
-                              display_fields: ["{{filename}}"],
+                              display_fields: ["{{displayname}}"],
                             }
                           - {
                               label: "Header Not Bolded",
@@ -4147,10 +4163,10 @@ collections:
                               required: false,
                               widget: "relation",
                               collection: "contextual-information",
-                              search_fields: ["{{filename}}"],
+                              search_fields: ["{{displayname}}"],
                               options_length: 500,
                               value_field: "{{filename}}",
-                              display_fields: ["{{filename}}"],
+                              display_fields: ["{{displayname}}"],
                             }
                           - {
                               label: "Error Text (when not set)",
@@ -4187,10 +4203,10 @@ collections:
                               required: false,
                               widget: "relation",
                               collection: "contextual-information",
-                              search_fields: ["{{filename}}"],
+                              search_fields: ["{{displayname}}"],
                               options_length: 500,
                               value_field: "{{filename}}",
-                              display_fields: ["{{filename}}"],
+                              display_fields: ["{{displayname}}"],
                             }
                           - {
                               label: "Error Text (when not selected)",
@@ -4239,10 +4255,10 @@ collections:
                               required: false,
                               widget: "relation",
                               collection: "contextual-information",
-                              search_fields: ["{{filename}}"],
+                              search_fields: ["{{displayname}}"],
                               options_length: 500,
                               value_field: "{{filename}}",
-                              display_fields: ["{{filename}}"],
+                              display_fields: ["{{displayname}}"],
                             }
                           - {
                               label: "Error Text (when not selected)",
@@ -4291,10 +4307,10 @@ collections:
                               required: false,
                               widget: "relation",
                               collection: "contextual-information",
-                              search_fields: ["{{filename}}"],
+                              search_fields: ["{{displayname}}"],
                               options_length: 500,
                               value_field: "{{filename}}",
-                              display_fields: ["{{filename}}"],
+                              display_fields: ["{{displayname}}"],
                             }
                           - { label: "Description", name: "description", widget: "string", required: false }
                           - { label: "Error Text", name: "errorTextRequired", widget: "string" }
@@ -4315,10 +4331,10 @@ collections:
                               required: false,
                               widget: "relation",
                               collection: "contextual-information",
-                              search_fields: ["{{filename}}"],
+                              search_fields: ["{{displayname}}"],
                               options_length: 500,
                               value_field: "{{filename}}",
-                              display_fields: ["{{filename}}"],
+                              display_fields: ["{{displayname}}"],
                             }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
                           - {
@@ -4354,10 +4370,10 @@ collections:
                               required: false,
                               widget: "relation",
                               collection: "contextual-information",
-                              search_fields: ["{{filename}}"],
+                              search_fields: ["{{displayname}}"],
                               options_length: 500,
                               value_field: "{{filename}}",
-                              display_fields: ["{{filename}}"],
+                              display_fields: ["{{displayname}}"],
                             }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
                   - label: Employer ID
@@ -4377,10 +4393,10 @@ collections:
                               required: false,
                               widget: "relation",
                               collection: "contextual-information",
-                              search_fields: ["{{filename}}"],
+                              search_fields: ["{{displayname}}"],
                               options_length: 500,
                               value_field: "{{filename}}",
-                              display_fields: ["{{filename}}"],
+                              display_fields: ["{{displayname}}"],
                             }
                           - {
                               label: "Header (not bolded)",
@@ -4406,10 +4422,10 @@ collections:
                               required: false,
                               widget: "relation",
                               collection: "contextual-information",
-                              search_fields: ["{{filename}}"],
+                              search_fields: ["{{displayname}}"],
                               options_length: 500,
                               value_field: "{{filename}}",
-                              display_fields: ["{{filename}}"],
+                              display_fields: ["{{displayname}}"],
                             }
                           - { label: "Edit Text", name: "editText", widget: "string" }
                           - { label: "Add Text", name: "addText", widget: "string" }
@@ -4431,10 +4447,10 @@ collections:
                               required: false,
                               widget: "relation",
                               collection: "contextual-information",
-                              search_fields: ["{{filename}}"],
+                              search_fields: ["{{displayname}}"],
                               options_length: 500,
                               value_field: "{{filename}}",
-                              display_fields: ["{{filename}}"],
+                              display_fields: ["{{displayname}}"],
                             }
                           - { label: "Error Text", name: "errorTextRequired", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
@@ -4455,10 +4471,10 @@ collections:
                               required: false,
                               widget: "relation",
                               collection: "contextual-information",
-                              search_fields: ["{{filename}}"],
+                              search_fields: ["{{displayname}}"],
                               options_length: 500,
                               value_field: "{{filename}}",
-                              display_fields: ["{{filename}}"],
+                              display_fields: ["{{displayname}}"],
                             }
                           - { label: "Error Text", name: "errorTextRequired", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
@@ -4589,10 +4605,10 @@ collections:
                               required: false,
                               widget: "relation",
                               collection: "contextual-information",
-                              search_fields: ["{{filename}}"],
+                              search_fields: ["{{displayname}}"],
                               options_length: 500,
                               value_field: "{{filename}}",
-                              display_fields: ["{{filename}}"],
+                              display_fields: ["{{displayname}}"],
                             }
                           - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
                           - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
@@ -4808,7 +4824,7 @@ collections:
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
+      - { label: "Filename", name: "slug", widget: "write-once-read-only" }
       - { label: "Question Copy", name: "radioQuestion", widget: "string", required: false }
       - { label: "Yes Button Copy", name: "radioYes", widget: "string", required: false }
       - { label: "No Button Copy", name: "radioNo", widget: "string", required: false }
@@ -4819,7 +4835,7 @@ collections:
   - name: "contextual-information"
     label: "Contextual Information"
     folder: "content/src/display-content/contextual-information"
-    summary: "{{filename}}"
+    summary: "{{displayname}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
     delete: true
@@ -4830,7 +4846,8 @@ collections:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Header", name: "header", widget: "string" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
+      - { label: "Filename", name: "slug", widget: "write-once-read-only" }
+      - { label: "Display Name", name: "displayname", widget: "nospace" }
 
   - name: "page-not-found-error"
     label: "404 Page"

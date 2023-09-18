@@ -1,4 +1,6 @@
 ---
+filename: crop-duster
+displayname: crop-duster
 id: "crop-duster"
 webflowId: "5f7728fc147cedda2126bf2f"
 urlSlug: "crop-duster"

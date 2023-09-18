@@ -1,4 +1,6 @@
 ---
+filename: home-repair-contractor-financing
+displayname: home-repair-contractor-financing
 id: "home-repair-contractor-financing"
 webflowId: "5f77292690d9ac51101309d8"
 urlSlug: "home-repair-contractor-financing"

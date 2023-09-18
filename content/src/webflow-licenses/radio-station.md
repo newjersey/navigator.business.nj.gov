@@ -1,4 +1,6 @@
 ---
+filename: radio-station
+displayname: radio-station
 id: "radio-station"
 webflowId: "5f7728dfeb5558675efeb56c"
 urlSlug: "radio-station"

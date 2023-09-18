@@ -1,5 +1,5 @@
-import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
-import { LockedProfileField } from "@/components/onboarding/LockedProfileField";
+import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
+import { ProfileLockedField } from "@/components/profile/ProfileLockedField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { profileFormContext } from "@/contexts/profileFormContext";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
@@ -28,7 +28,7 @@ export const ProfileField = (props: Props): ReactElement => {
     <>
       <div className="margin-y-4 text-field-width-default" id={`question-${props.fieldName}`}>
         {props.locked ? (
-          <LockedProfileField fieldName={props.fieldName} valueFormatter={props.lockedValueFormatter} />
+          <ProfileLockedField fieldName={props.fieldName} valueFormatter={props.lockedValueFormatter} />
         ) : (
           <WithErrorBar hasError={isFormFieldInValid} type={"ALWAYS"}>
             {!props.noLabel && (

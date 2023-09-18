@@ -1,4 +1,5 @@
 ---
+displayname: trainer-athletic
 id: "trainer-athletic"
 webflowId: "640b846766674dcb0613a123"
 urlSlug: "trainer-athletic"

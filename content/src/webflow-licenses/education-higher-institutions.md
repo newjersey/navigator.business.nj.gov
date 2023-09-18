@@ -1,4 +1,5 @@
 ---
+displayname: education-higher-institutions
 id: "education-higher-institutions"
 webflowId: "640b8468e10ad956fbb3ede4"
 urlSlug: "education-higher-institutions"

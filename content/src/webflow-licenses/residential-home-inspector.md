@@ -1,4 +1,5 @@
 ---
+displayname: residential-home-inspector
 id: "residential-home-inspector"
 webflowId: "640b8467d908efc4e86d2423"
 urlSlug: "residential-home-inspector"

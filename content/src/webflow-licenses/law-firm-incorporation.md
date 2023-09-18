@@ -1,4 +1,6 @@
 ---
+filename: law-firm-incorporation
+displayname: law-firm-incorporation
 id: "law-firm-incorporation"
 webflowId: "5f77296be02294215feaa5ca"
 urlSlug: "law-firm-incorporation"

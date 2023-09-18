@@ -1,6 +1,8 @@
 ---
 urlSlug: media-specialist
 webflowName: Media Specialist
+filename: media-specialist
+displayname: media-specialist
 agencyId: education
 agencyAdditionalContext: Division of Licensing, Office of Teacher Certification and Academic Credentials
 callToActionText: ""

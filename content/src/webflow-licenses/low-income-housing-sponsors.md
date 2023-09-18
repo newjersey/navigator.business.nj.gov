@@ -1,4 +1,6 @@
 ---
+filename: low-income-housing-sponsors
+displayname: low-income-housing-sponsors
 id: "low-income-housing-sponsors"
 webflowId: "5f772999306c6cee60066f9e"
 urlSlug: "low-income-housing-sponsors"

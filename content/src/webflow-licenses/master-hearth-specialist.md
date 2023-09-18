@@ -1,4 +1,5 @@
 ---
+displayname: master-hearth-specialist
 id: "master-hearth-specialist"
 webflowId: "640b8467d59cf92c8abe1d32"
 urlSlug: "master-hearth-specialist"

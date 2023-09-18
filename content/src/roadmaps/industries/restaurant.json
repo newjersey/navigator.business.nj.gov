@@ -1,4 +1,5 @@
 {
+  "displayname": "restaurant",
   "naicsCodes": "722511, 722310, 722320, 722410, 722513, 722514, 722515",
   "canHavePermanentLocation": true,
   "defaultSectorId": "accommodation-and-food-services",

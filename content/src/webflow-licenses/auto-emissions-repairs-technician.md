@@ -1,4 +1,6 @@
 ---
+filename: auto-emissions-repairs-technician
+displayname: auto-emissions-repairs-technician
 id: "auto-emissions-repairs-technician"
 webflowId: "5f7728fbd2749aec8e9cf7d4"
 urlSlug: "auto-emissions-repairs-technician"

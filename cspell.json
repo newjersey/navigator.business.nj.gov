@@ -145,7 +145,11 @@
     "UCEDC",
     "SSAE",
     "PCAOB",
-    "mwvb"
+    "mwvb",
+    "Displayname",
+    "displayname",
+    "ccorp",
+    "corpwatch"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }

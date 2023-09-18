@@ -5,7 +5,7 @@ import IconWidgetEditor from "@/lib/cms/editors/icon";
 import AlertEditor from "@/lib/cms/editors/infoAlert";
 import Note from "@/lib/cms/editors/note";
 import { NoSpaceControl } from "@/lib/cms/fields/nospacefield";
-import { SlugControl } from "@/lib/cms/fields/slugfield";
+import { WriteOnceReadOnlyControl } from "@/lib/cms/fields/writeoncereadonlyfield";
 import { applyTheme } from "@/lib/cms/helpers/applyTheme";
 import CannabisEligibilityModalPreview from "@/lib/cms/previews/CannabisEligibilityModalPreview";
 import CannabisLicensePreview from "@/lib/cms/previews/CannabisLicensePreview";
@@ -59,7 +59,7 @@ const CMS = dynamic(
       // @ts-expect-error: No type definition available
       CMS.init({ CMS_CONFIG });
       // @ts-expect-error: No type definition available
-      CMS.registerWidget("slug", SlugControl);
+      CMS.registerWidget("write-once-read-only", WriteOnceReadOnlyControl);
       // @ts-expect-error: No type definition available
       CMS.registerWidget("nospace", NoSpaceControl);
       // @ts-expect-error: No type definition available

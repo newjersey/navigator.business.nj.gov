@@ -1,4 +1,6 @@
 ---
+filename: plants-buy-out-of-state-to-seed-in-nj
+displayname: plants-buy-out-of-state-to-seed-in-nj
 id: "plants-buy-out-of-state-to-seed-in-nj"
 webflowId: "5f7728e42edc678a57b4a6fd"
 urlSlug: "plants-buy-out-of-state-to-seed-in-nj"

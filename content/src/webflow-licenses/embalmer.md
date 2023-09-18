@@ -1,4 +1,6 @@
 ---
+filename: embalmer
+displayname: embalmer
 id: "embalmer"
 webflowId: "5f77298aa195c8653915b18b"
 urlSlug: "embalmer"

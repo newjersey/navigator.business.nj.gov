@@ -5,11 +5,7 @@ import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { FormContextFieldProps } from "@/lib/types/types";
-import {
-  LegalStructure,
-  LegalStructures,
-  LookupLegalStructureById,
-} from "@businessnjgovnavigator/shared/index";
+import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
 import { FormControl, FormHelperText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { orderBy } from "lodash";
 import { ReactElement, ReactNode, useContext } from "react";

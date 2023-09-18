@@ -1,4 +1,6 @@
 ---
+filename: x-ray-machines
+displayname: x-ray-machines
 id: "x-ray-machines"
 webflowId: "5f77292f147ced096726bf3f"
 urlSlug: "x-ray-machines"

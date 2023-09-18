@@ -1,6 +1,7 @@
 ---
+displayname: DBA-resolution-foreign
 urlSlug: DBA-resolution
-filename: DBA-resolution-foreign
+filename: dba-resolution-foreign
 name: Get a Resolution Adopting Your DBA Name
 id: DBA-resolution-foreign
 ---

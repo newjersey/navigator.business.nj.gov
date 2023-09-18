@@ -321,4 +321,12 @@ describe("validatedFieldsForUser", () => {
       expect(validatedFieldsForUser(formationFormData)).toContain("foreignGoodStandingFile");
     });
   });
+
+  describe("foreign nonprofit", () => {
+    it("requires 'certificate of good standing' field", () => {
+      const formationFormData = generateFormationFormData({}, { legalStructureId: "foreign-nonprofit" });
+      expect(validatedFieldsForUser(formationFormData)).toContain("foreignGoodStandingFile");
+      expect(validatedFieldsForUser(formationFormData)).not.toContain("willPracticeLaw");
+    });
+  });
 });

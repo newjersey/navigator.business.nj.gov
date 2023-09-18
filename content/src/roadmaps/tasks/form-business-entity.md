@@ -1,6 +1,7 @@
 ---
+displayname: business-entity-auth
 urlSlug: business-entity-auth
-filename: business-entity-auth
+filename: form-business-entity
 name: Authorize Your Business Entity
 id: form-business-entity
 callToActionLink: https://www.njportal.com/DOR/BusinessFormation/CompanyInformation/BusinessName

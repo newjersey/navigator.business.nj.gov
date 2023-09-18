@@ -1,4 +1,5 @@
 ---
+displayname: security-alarms
 id: "security-alarms"
 webflowId: "640b84676976aa3de7dd0926"
 urlSlug: "security-alarms"

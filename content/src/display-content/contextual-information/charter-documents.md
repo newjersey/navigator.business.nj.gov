@@ -1,4 +1,6 @@
 ---
+filename: charter-documents
+displayname: charter-documents
 header: Charter Documents
 ---
 

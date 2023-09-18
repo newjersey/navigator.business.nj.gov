@@ -1,4 +1,6 @@
 ---
+filename: bed-breakfast
+displayname: bed-breakfast
 id: "bed-breakfast"
 webflowId: "5f772976a67e4a03785c0f38"
 urlSlug: "bed-breakfast"

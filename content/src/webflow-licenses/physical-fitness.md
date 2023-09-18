@@ -1,4 +1,6 @@
 ---
+filename: physical-fitness
+displayname: physical-fitness
 id: "physical-fitness"
 webflowId: "5f7729b37fe89dccb6054798"
 urlSlug: "physical-fitness"

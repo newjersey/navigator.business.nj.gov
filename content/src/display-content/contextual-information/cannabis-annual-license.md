@@ -1,4 +1,6 @@
 ---
+filename: cannabis-annual-license
+displayname: cannabis-annual-license
 header: Annual License
 ---
 

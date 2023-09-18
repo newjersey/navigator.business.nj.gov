@@ -1,5 +1,6 @@
 ---
-filename: food-truck-license
+displayname: food-truck-license
+filename: apply-for-food-truck-license
 urlSlug: food-truck-license
 name: Apply for Your Food Truck License
 webflowName: "Food Truck: Food Truck License"

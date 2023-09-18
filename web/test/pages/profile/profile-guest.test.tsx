@@ -3,7 +3,7 @@ import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
-import { Business, generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/index";
+import { Business, generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared";
 
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {

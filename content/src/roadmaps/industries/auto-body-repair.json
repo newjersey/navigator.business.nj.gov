@@ -1,4 +1,5 @@
 {
+  "displayname": "auto-body-repair",
   "naicsCodes": "811121, 811111, 811198, 811114",
   "canHavePermanentLocation": true,
   "defaultSectorId": "other-services",

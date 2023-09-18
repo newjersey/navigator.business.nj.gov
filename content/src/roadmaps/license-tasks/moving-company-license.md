@@ -1,4 +1,5 @@
 ---
+displayname: moving-company-license
 filename: moving-company-license
 urlSlug: moving-company-license
 name: Apply for a Public Movers License

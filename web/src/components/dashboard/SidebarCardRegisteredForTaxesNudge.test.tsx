@@ -8,14 +8,14 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { getCurrentDateISOString } from "@businessnjgovnavigator/shared/dateHelpers";
-import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import {
   Business,
   generateTaxFilingCalendarEvent,
   generateUserDataForBusiness,
   taxTaskId,
-} from "@businessnjgovnavigator/shared/index";
+} from "@businessnjgovnavigator/shared";
+import { getCurrentDateISOString } from "@businessnjgovnavigator/shared/dateHelpers";
+import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import {
   generateBusiness,
   generateProfileData,

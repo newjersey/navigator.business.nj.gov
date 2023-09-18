@@ -1,4 +1,6 @@
 ---
+filename: remote-seller
+displayname: remote-seller
 slug: remote-seller
 header: Remote Seller
 ---

@@ -1,4 +1,5 @@
 ---
+displayname: marketing-consultant
 id: "marketing-consultant"
 webflowId: "640b84672c7bedccd55ac41a"
 urlSlug: "marketing-consultant"

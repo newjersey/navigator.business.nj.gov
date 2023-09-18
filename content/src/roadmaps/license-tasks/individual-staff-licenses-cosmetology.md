@@ -1,5 +1,6 @@
 ---
-filename: cosmetology-individual-staff-license
+displayname: cosmetology-individual-staff-license
+filename: individual-staff-licenses-cosmetology
 urlSlug: cosmetology-individual-staff-license
 name: Get Your Individual License and Ensure Your Staff is Licensed
 webflowName: "Cosmetology: Individual and Staff License"

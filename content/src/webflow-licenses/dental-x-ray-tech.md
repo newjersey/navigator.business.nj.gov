@@ -1,4 +1,6 @@
 ---
+filename: dental-x-ray-tech
+displayname: dental-x-ray-tech
 id: "dental-x-ray-tech"
 webflowId: "5f7728fc1a08091cedbb2ec6"
 urlSlug: "dental-x-ray-tech"

@@ -1,4 +1,6 @@
 ---
+filename: radiologic-technologist
+displayname: radiologic-technologist
 id: "radiologic-technologist"
 webflowId: "5f77291b614a2d58ced207a2"
 urlSlug: "radiologic-technologist"

@@ -1,4 +1,5 @@
 ---
+displayname: daycare-license
 filename: daycare-license
 urlSlug: daycare-license
 name: Obtain Your Child Care Center License

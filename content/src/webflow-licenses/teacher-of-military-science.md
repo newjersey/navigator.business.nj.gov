@@ -1,4 +1,6 @@
 ---
+filename: teacher-of-military-science
+displayname: teacher-of-military-science
 id: "teacher-of-military-science"
 webflowId: "5f7729382edc67b82eb4a703"
 urlSlug: "teacher-of-military-science"

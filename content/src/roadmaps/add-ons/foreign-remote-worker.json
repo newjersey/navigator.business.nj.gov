@@ -1,4 +1,6 @@
 {
+  "displayname": "foreign-remote-worker",
+  "filename": "foreign-remote-worker",
   "roadmapSteps": [
     {
       "step": 1,

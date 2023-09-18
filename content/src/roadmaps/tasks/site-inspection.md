@@ -1,4 +1,6 @@
 ---
+displayname: site-inspection
+filename: site-inspection
 urlSlug: site-inspection
 name: Pass Your Cosmetology Site Inspection
 id: board-inspection
@@ -12,6 +14,6 @@ To complete your requirements as a cosmetology business, an inspector from the N
 
 ---
 
->**Once you complete this task, you will have:**
+> **Once you complete this task, you will have:**
 >
->- A cosmetology shop license
+> - A cosmetology shop license

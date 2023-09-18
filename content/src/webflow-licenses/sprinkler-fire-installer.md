@@ -2,6 +2,7 @@
 filename: sprinkler-fire-installer
 urlSlug: sprinkler-fire-installer
 webflowName: Sprinkler (Fire) Installer
+displayname: sprinkler-fire-installer
 agencyId: nj-community-affairs
 callToActionLink: https://firesolutions.dca.nj.gov/
 webflowIndustry: Sprinkler Installer

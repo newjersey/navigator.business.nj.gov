@@ -1,5 +1,6 @@
 ---
-filename: real-estate-appraiser-license
+displayname: real-estate-appraiser-license
+filename: appraiser-license
 urlSlug: appraiser-license
 name: Apply for Your Appraiser License
 webflowName: "Real Estate Appraisal: Real Estate Appraiser License"

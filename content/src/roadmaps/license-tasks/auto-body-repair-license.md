@@ -1,4 +1,6 @@
 ---
+displayname: auto-body-repair-license
+filename: auto-body-repair-license
 urlSlug: auto-body-repair-license
 name: Get Your Auto-Body Repair License
 webflowName: "Auto-Body Repair: Business License"

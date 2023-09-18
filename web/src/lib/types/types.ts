@@ -309,6 +309,7 @@ export interface Step {
 
 export interface Task {
   id: string;
+  displayname?: string;
   filename: string;
   stepNumber?: number;
   name: string;

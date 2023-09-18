@@ -1,4 +1,6 @@
 ---
+filename: authorized-partner
+displayname: authorized-partner
 slug: authorized-partner
 header: Authorized Partner
 ---

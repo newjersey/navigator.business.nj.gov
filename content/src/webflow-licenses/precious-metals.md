@@ -1,4 +1,5 @@
 ---
+displayname: precious-metals
 id: "precious-metals"
 webflowId: "640b8467ee255a77836ba0e4"
 urlSlug: "precious-metals"

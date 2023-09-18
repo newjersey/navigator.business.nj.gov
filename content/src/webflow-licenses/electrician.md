@@ -1,4 +1,5 @@
 ---
+displayname: electrician
 id: "electrician"
 webflowId: "640b8467ee255a2c926ba0e3"
 urlSlug: "electrician"

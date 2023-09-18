@@ -1,6 +1,7 @@
 ---
+displayname: site-requirements-cosmetology
 urlSlug: site-requirements-cosmetology
-filename: site-requirements-cosmetology
+filename: check-site-requirements-cosmetology
 name: Determine Site Requirements for Your Cosmetology Business
 id: check-site-requirements
 callToActionLink: ""

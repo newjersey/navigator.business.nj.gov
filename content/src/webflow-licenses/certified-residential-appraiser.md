@@ -1,4 +1,6 @@
 ---
+filename: certified-residential-appraiser
+displayname: certified-residential-appraiser
 id: "certified-residential-appraiser"
 webflowId: "5f77297fe8bf50347b3178a3"
 urlSlug: "certified-residential-appraiser"

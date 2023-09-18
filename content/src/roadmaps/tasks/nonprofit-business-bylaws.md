@@ -1,4 +1,5 @@
 ---
+displayname: nonprofit-business-bylaws
 urlSlug: nonprofit-business-bylaws
 filename: nonprofit-business-bylaws
 name: "Write Your Bylaws "

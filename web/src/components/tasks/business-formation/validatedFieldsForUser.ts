@@ -1,4 +1,4 @@
-import { isForeignCorporation } from "@/lib/utils/helpers";
+import { isForeignCorporation, isForeignCorporationOrNonprofit } from "@/lib/utils/helpers";
 import {
   corpLegalStructures,
   FieldsForErrorHandling,
@@ -64,8 +64,12 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fi
     validatedFields = [...validatedFields, "businessTotalStock", "members"];
   }
 
+  if (isForeignCorporationOrNonprofit(formationFormData.legalType)) {
+    validatedFields = [...validatedFields, "foreignGoodStandingFile"];
+  }
+
   if (isForeignCorporation(formationFormData.legalType)) {
-    validatedFields = [...validatedFields, "willPracticeLaw", "foreignGoodStandingFile"];
+    validatedFields = [...validatedFields, "willPracticeLaw"];
   }
 
   if (formationFormData.legalType === "nonprofit") {

@@ -1,9 +1,11 @@
 ---
+filename: substantial-renovation
+displayname: substantial-renovation
 header: Substantial Renovation
 slug: substantial renovation
 ---
-Substantial renovation (gut rehab) defined as one of the following: 
 
+Substantial renovation (gut rehab) defined as one of the following:
 
 1. Change of use and reconstruction of an existing building
 2. Construction work of a nature requiring that the building or portion of the building within be out of service for at least 30 consecutive days

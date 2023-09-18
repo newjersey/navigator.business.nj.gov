@@ -1,6 +1,6 @@
+import { TaxId } from "@/components/data-fields/tax-id/TaxId";
+import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
 import { GenericTextField } from "@/components/GenericTextField";
-import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
-import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
@@ -9,7 +9,7 @@ import { profileFormContext } from "@/contexts/profileFormContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { createProfileFieldErrorMap } from "@/lib/types/types";
-import { generateProfileData } from "@businessnjgovnavigator/shared/index";
+import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useState } from "react";
@@ -67,7 +67,7 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
                 headerNotBolded: "UnBoldedHeader Text",
               }}
             />
-            <OnboardingTaxId validationText={config.taxAccess.failedTaxIdHelper} required />
+            <TaxId validationText={config.taxAccess.failedTaxIdHelper} required />
 
             <WithErrorBar hasError type="ALWAYS" className="margin-top-2">
               <FieldLabelModal
@@ -80,7 +80,7 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
                   headerNotBolded: "UnBoldedHeader Text",
                 }}
               />
-              <OnboardingTaxId validationText={config.taxAccess.failedTaxIdHelper} required error />
+              <TaxId validationText={config.taxAccess.failedTaxIdHelper} required error />
             </WithErrorBar>
           </ProfileDataContext.Provider>
         </ConfigContext.Provider>

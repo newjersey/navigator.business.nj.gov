@@ -1,6 +1,7 @@
 ---
+displayname: insurance-needs-hic-research
 urlSlug: insurance-needs-research
-filename: insurance-needs-hic-research
+filename: research-insurance-needs-home-contractor
 name: Research Your Insurance Needs
 id: research-insurance-needs-home-contractor
 callToActionLink: ""

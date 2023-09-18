@@ -1,6 +1,8 @@
 ---
 urlSlug: alcohol-beverage-home-brewer-brw
 webflowName: Alcohol Beverage Home Brewer (BRW)
+filename: alcohol-beverage-home-brewer-brw
+displayname: alcohol-beverage-home-brewer-brw
 agencyId: law-public-safety
 agencyAdditionalContext: Division of Alcoholic Beverage Control
 callToActionText: ""

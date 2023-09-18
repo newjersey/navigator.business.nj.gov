@@ -1,4 +1,5 @@
 ---
+displayname: home-baker-license
 filename: home-baker-license
 urlSlug: home-baker-license
 name: Apply for a Cottage Food Operator Permit

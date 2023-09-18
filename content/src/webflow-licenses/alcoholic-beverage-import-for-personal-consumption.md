@@ -1,6 +1,6 @@
 ---
-urlSlug: alcoholic-beverage-import-for-personal-consumption
-webflowName: Alcoholic Beverage Import for Personal Consumption
+filename: alcoholic-beverage-import-for-personal-consumption
+displayname: alcoholic-beverage-import-for-personal-consumption
 agencyId: law-public-safety
 agencyAdditionalContext: Division of Alcoholic Beverage Control
 callToActionText: ""

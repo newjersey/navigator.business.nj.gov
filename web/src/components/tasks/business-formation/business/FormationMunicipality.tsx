@@ -1,4 +1,4 @@
-import { MunicipalityDropdown } from "@/components/profile/MunicipalityDropdown";
+import { MunicipalityDropdown } from "@/components/data-fields/MunicipalityDropdown";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";

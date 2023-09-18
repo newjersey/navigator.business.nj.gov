@@ -1,4 +1,5 @@
 ---
+displayname: labor-laws
 urlSlug: employer-requirements
 filename: labor-laws
 name: Prepare for Employees in New Jersey

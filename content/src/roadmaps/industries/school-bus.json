@@ -1,4 +1,5 @@
 {
+  "displayname": "school-bus",
   "naicsCodes": "485999, 485210, 485310, 485320, 485410, 485510",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,

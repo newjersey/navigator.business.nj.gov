@@ -1,4 +1,6 @@
 ---
+filename: cosmetology-school
+displayname: cosmetology-school
 id: "cosmetology-school"
 webflowId: "5f7729826f3d8d857775ef37"
 urlSlug: "cosmetology-school"

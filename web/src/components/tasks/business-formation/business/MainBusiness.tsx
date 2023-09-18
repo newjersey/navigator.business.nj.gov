@@ -12,7 +12,7 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { isForeignCorporation } from "@/lib/utils/helpers";
+import { isForeignCorporation, isForeignCorporationOrNonprofit } from "@/lib/utils/helpers";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext, useMemo } from "react";
 
@@ -26,7 +26,7 @@ export const MainBusiness = (): ReactElement => {
   );
 
   return (
-    <div className={"margin-bottom-2"}>
+    <div>
       <BusinessNameAndLegalStructure />
       <WithErrorBar
         hasError={doSomeFieldsHaveError(["businessSuffix", "businessStartDate"])}
@@ -74,16 +74,20 @@ export const MainBusiness = (): ReactElement => {
           </WithErrorBar>
 
           {isForeignCorporation(state.formationFormData.legalType) && (
-            <>
-              <WithErrorBar hasError={doesFieldHaveError("willPracticeLaw")} type="ALWAYS">
-                <FormationField fieldName="willPracticeLaw">
-                  <PracticesLaw hasError={doesFieldHaveError("willPracticeLaw")} />
-                </FormationField>
-              </WithErrorBar>
-              <FormationField fieldName="foreignGoodStandingFile">
-                <ForeignCertificate hasError={doesFieldHaveError("foreignGoodStandingFile")} />
+            <WithErrorBar hasError={doesFieldHaveError("willPracticeLaw")} type="ALWAYS">
+              <FormationField fieldName="willPracticeLaw">
+                <PracticesLaw hasError={doesFieldHaveError("willPracticeLaw")} />
+                <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
               </FormationField>
-            </>
+            </WithErrorBar>
+          )}
+          {isForeignCorporationOrNonprofit(state.formationFormData.legalType) && (
+            <FormationField fieldName="foreignGoodStandingFile">
+              {!isForeignCorporation(state.formationFormData.legalType) && (
+                <hr className="margin-bottom-2 margin-top-3" aria-hidden={true} />
+              )}
+              <ForeignCertificate hasError={doesFieldHaveError("foreignGoodStandingFile")} />
+            </FormationField>
           )}
         </>
       )}
@@ -92,7 +96,7 @@ export const MainBusiness = (): ReactElement => {
           <div className="grid-row">
             <IsVeteranNonprofit />
           </div>
-          <hr className="margin-y-2" />
+          <hr className="margin-y-3" />
           <NonprofitProvisions />
         </>
       )}
@@ -116,7 +120,7 @@ export const MainBusiness = (): ReactElement => {
           </div>
         </div>
       )}
-      <hr className="margin-y-2" aria-hidden={true} key={"business-line-1"} />
+      <hr className="margin-y-3" aria-hidden={true} key={"business-line-1"} />
     </div>
   );
 };

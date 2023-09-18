@@ -1,4 +1,6 @@
 ---
+filename: cannabis-conditional-license
+displayname: cannabis-conditional-license
 header: Conditional & Conversion Licenses
 ---
 

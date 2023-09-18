@@ -1,4 +1,6 @@
 ---
+displayname: spray-paint-booth-permit-auto-body-repair
+filename: spray-paint-booth-permit-auto-body-repair
 urlSlug: spray-paint-permit
 name: Obtain Your Spray Paint Booth Permits, if Needed
 webflowName: "Auto-Body Repair: Spray Paint Booth Permit"

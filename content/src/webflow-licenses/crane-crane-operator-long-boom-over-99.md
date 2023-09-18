@@ -1,4 +1,6 @@
 ---
+filename: crane-crane-operator-long-boom-over-99
+displayname: crane-crane-operator-long-boom-over-99
 id: "crane-crane-operator-long-boom-over-99"
 webflowId: "5f77294f24006134967834ba"
 urlSlug: "crane-crane-operator-long-boom-over-99"

@@ -1,11 +1,11 @@
-import { FieldLabelDescriptionOnly } from "@/components/onboarding/FieldLabelDescriptionOnly";
-import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
-import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBusinessPersona";
-import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
-import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
-import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
-import { OnboardingNonprofit } from "@/components/onboarding/OnboardingNonprofit";
-import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
+import { BusinessPersonaQuestion } from "@/components/data-fields/BusinessPersonaQuestion";
+import { ForeignBusinessTypeField } from "@/components/data-fields/ForeignBusinessTypeField";
+import { Industry } from "@/components/data-fields/Industry";
+import { LocationInNewJersey } from "@/components/data-fields/LocationInNewJersey";
+import { NonprofitQuestion } from "@/components/data-fields/NonprofitQuestion";
+import { Sectors } from "@/components/data-fields/Sectors";
+import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
+import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboarding";
 import { FlowType, OnboardingErrors } from "@/lib/types/types";
 import { ReactNode } from "react";
 
@@ -24,10 +24,10 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
       {
         component: (
           <>
-            <OnboardingBusinessPersona<OnboardingErrors> errorTypes={["REQUIRED_EXISTING_BUSINESS"]} />
+            <BusinessPersonaQuestion<OnboardingErrors> errorTypes={["REQUIRED_EXISTING_BUSINESS"]} />
             <div className="padding-top-3">
               <FieldLabelDescriptionOnly fieldName="sectorId" />
-              <OnboardingSectors<OnboardingErrors> errorTypes={["REQUIRED_REVIEW_INFO_BELOW"]} />
+              <Sectors<OnboardingErrors> errorTypes={["REQUIRED_REVIEW_INFO_BELOW"]} />
             </div>
           </>
         ),
@@ -37,19 +37,17 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
   STARTING: {
     pages: [
       {
-        component: (
-          <OnboardingBusinessPersona<OnboardingErrors> errorTypes={["REQUIRED_EXISTING_BUSINESS"]} />
-        ),
+        component: <BusinessPersonaQuestion<OnboardingErrors> errorTypes={["REQUIRED_EXISTING_BUSINESS"]} />,
       },
       {
         name: "industry-page",
         component: (
           <>
             <FieldLabelOnboarding fieldName="isNonprofitOnboardingRadio" />
-            <OnboardingNonprofit />
+            <NonprofitQuestion />
             <div className="padding-top-3">
               <FieldLabelOnboarding fieldName="industryId" />
-              <OnboardingIndustry<OnboardingErrors>
+              <Industry<OnboardingErrors>
                 essentialQuestionErrorTypes={["REQUIRED_ESSENTIAL_QUESTION"]}
                 errorTypes={["ALERT_BAR"]}
                 onboardingFieldLabel
@@ -63,18 +61,14 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
   FOREIGN: {
     pages: [
       {
-        component: (
-          <OnboardingBusinessPersona<OnboardingErrors> errorTypes={["REQUIRED_EXISTING_BUSINESS"]} />
-        ),
+        component: <BusinessPersonaQuestion<OnboardingErrors> errorTypes={["REQUIRED_EXISTING_BUSINESS"]} />,
       },
 
       {
         component: (
           <>
             <FieldLabelOnboarding fieldName="foreignBusinessTypeIds" />
-            <OnboardingForeignBusinessType<OnboardingErrors>
-              errorTypes={["REQUIRED_FOREIGN_BUSINESS_TYPE"]}
-            />
+            <ForeignBusinessTypeField<OnboardingErrors> errorTypes={["REQUIRED_FOREIGN_BUSINESS_TYPE"]} />
           </>
         ),
       },
@@ -83,10 +77,10 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
         component: (
           <>
             <FieldLabelOnboarding fieldName="isNonprofitOnboardingRadio" />
-            <OnboardingNonprofit />
+            <NonprofitQuestion />
             <div className="padding-top-3">
               <FieldLabelOnboarding fieldName="industryId" />
-              <OnboardingIndustry<OnboardingErrors>
+              <Industry<OnboardingErrors>
                 essentialQuestionErrorTypes={["REQUIRED_ESSENTIAL_QUESTION"]}
                 errorTypes={["ALERT_BAR"]}
                 onboardingFieldLabel
@@ -100,7 +94,7 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
         component: (
           <>
             <FieldLabelOnboarding fieldName="nexusLocationInNewJersey" />
-            <OnboardingLocationInNewJersey<OnboardingErrors> errorTypes={["REQUIRED_NEXUS_LOCATION_IN_NJ"]} />
+            <LocationInNewJersey<OnboardingErrors> errorTypes={["REQUIRED_NEXUS_LOCATION_IN_NJ"]} />
           </>
         ),
       },

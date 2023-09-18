@@ -21,7 +21,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { shouldDisplayAddressSection } from "@/lib/utils/formation-helpers";
-import { isForeignCorporation } from "@/lib/utils/helpers";
+import { isForeignCorporation, isForeignCorporationOrNonprofit } from "@/lib/utils/helpers";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useContext } from "react";
 
@@ -56,10 +56,12 @@ export const ReviewStep = (): ReactElement => {
           <BusinessNameAndLegalStructure isReviewStep />
           <ReviewBusinessSuffixAndStartDate />
           {isNonProfit && <ReviewIsVeteranNonprofit value={state.formationFormData.isVeteranNonprofit} />}
-          {isForeignCorporation(state.formationFormData.legalType) && (
+          {isForeignCorporationOrNonprofit(state.formationFormData.legalType) && (
             <>
               <hr className="margin-y-205" />
-              <ReviewWillPracticeLaw willPracticeLaw={state.formationFormData.willPracticeLaw} />
+              {isForeignCorporation(state.formationFormData.legalType) && (
+                <ReviewWillPracticeLaw willPracticeLaw={state.formationFormData.willPracticeLaw} />
+              )}
               <ReviewForeignCertificate foreignGoodStandingFile={state.foreignGoodStandingFile} />
             </>
           )}

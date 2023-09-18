@@ -1,4 +1,6 @@
 ---
+filename: aviation-fuel
+displayname: aviation-fuel
 id: "aviation-fuel"
 webflowId: "5f772968d2749ac3fe9cf7da"
 urlSlug: "aviation-fuel"

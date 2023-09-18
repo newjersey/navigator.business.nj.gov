@@ -1,4 +1,6 @@
 ---
+filename: cheese-plant
+displayname: cheese-plant
 id: "cheese-plant"
 webflowId: "5f77293d8fbb22d3816ec089"
 urlSlug: "cheese-plant"

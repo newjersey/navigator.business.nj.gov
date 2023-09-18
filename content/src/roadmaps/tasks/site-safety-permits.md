@@ -1,4 +1,6 @@
 ---
+displayname: site-safety-permits
+filename: site-safety-permits
 urlSlug: site-safety-permits
 name: Obtain Your Site Safety Permits
 id: certificate-of-occupancy

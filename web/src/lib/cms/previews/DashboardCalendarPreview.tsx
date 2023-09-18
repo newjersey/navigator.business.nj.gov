@@ -9,7 +9,7 @@ import {
   defaultDateFormat,
   generateBusiness,
   generateTaxFilingCalendarEvent,
-} from "@businessnjgovnavigator/shared/index";
+} from "@businessnjgovnavigator/shared";
 import {
   generatePreferences,
   generateProfileData,

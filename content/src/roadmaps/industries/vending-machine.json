@@ -1,4 +1,5 @@
 {
+  "displayname": "vending-machine",
   "naicsCodes": "445132, 454210",
   "defaultSectorId": "accommodation-and-food-services",
   "industryOnboardingQuestions": {

@@ -1,4 +1,6 @@
 ---
+filename: tea-task-1
+displayname: tea-task-1
 id: "tea-task-1-id"
 urlSlug: "tea-task-1-url-slug"
 name: "Tea Task 1"

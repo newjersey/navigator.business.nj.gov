@@ -1,4 +1,6 @@
 ---
+filename: invalid-coach
+displayname: invalid-coach
 id: "invalid-coach"
 webflowId: "5f77294a5ddf7683313ac435"
 urlSlug: "invalid-coach"

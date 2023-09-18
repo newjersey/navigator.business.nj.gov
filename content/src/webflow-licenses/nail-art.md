@@ -1,4 +1,5 @@
 ---
+displayname: nail-art
 id: "nail-art"
 webflowId: "640b84671da319900d07e179"
 urlSlug: "nail-art"

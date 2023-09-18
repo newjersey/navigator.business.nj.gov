@@ -1,6 +1,8 @@
 ---
 urlSlug: fire-protection-sub-code-ucc
 webflowName: Fire Protection Sub code (UCC)
+filename: fire-protection-sub-code-ucc
+displayname: fire-protection-sub-code-ucc
 agencyId: nj-community-affairs
 agencyAdditionalContext: Division of Fire Safety Contractor Certification Unit
 callToActionText: ""

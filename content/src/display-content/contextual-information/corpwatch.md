@@ -1,4 +1,6 @@
 ---
+filename: corpwatch
+displayname: corpwatch
 header: CorpWatch
 ---
 

@@ -1,4 +1,6 @@
 ---
+filename: homeless-shelter
+displayname: homeless-shelter
 id: "homeless-shelter"
 webflowId: "5f7729925ef8c11c45019ec8"
 urlSlug: "homeless-shelter"

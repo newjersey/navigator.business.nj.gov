@@ -1,8 +1,9 @@
 {
+  "displayname": "printing-business",
   "naicsCodes": "323111, 323117, 323113",
   "canHavePermanentLocation": true,
   "defaultSectorId": "digital-and-print-media",
-  "industryOnboardingQuestions" : {
+  "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true
   },

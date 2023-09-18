@@ -1,4 +1,5 @@
 {
+  "displayname": "certified-public-accountant",
   "naicsCodes": "541211",
   "canHavePermanentLocation": true,
   "defaultSectorId": "finance-and-insurance",

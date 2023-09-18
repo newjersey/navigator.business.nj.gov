@@ -1,4 +1,5 @@
 ---
+displayname: cosmetology-teacher-license
 id: "undefined"
 webflowId: "64ca743aafbb5a2c98163f9a"
 urlSlug: "cosmetology-teacher-license"

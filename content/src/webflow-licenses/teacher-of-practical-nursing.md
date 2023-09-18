@@ -1,4 +1,6 @@
 ---
+filename: teacher-of-practical-nursing
+displayname: teacher-of-practical-nursing
 id: "teacher-of-practical-nursing"
 webflowId: "5f77293990d9ac342c1309d9"
 urlSlug: "teacher-of-practical-nursing"

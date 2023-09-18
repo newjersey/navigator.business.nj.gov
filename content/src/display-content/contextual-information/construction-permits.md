@@ -1,4 +1,6 @@
 ---
+filename: construction-permits
+displayname: construction-permits
 header: Construction Permits
 ---
 

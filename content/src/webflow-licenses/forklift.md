@@ -1,4 +1,5 @@
 ---
+displayname: forklift
 id: "forklift"
 webflowId: "640b84677bfdab3457e1cefc"
 urlSlug: "forklift"

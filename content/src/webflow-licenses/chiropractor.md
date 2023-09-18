@@ -1,4 +1,6 @@
 ---
+filename: chiropractor
+displayname: chiropractor
 id: "chiropractor"
 webflowId: "5f7729804ad0ae1e87a54a59"
 urlSlug: "chiropractor"

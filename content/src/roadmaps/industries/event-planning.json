@@ -1,4 +1,5 @@
 {
+  "displayname": "event-planning",
   "naicsCodes": "561920, 561990, 711320, 532289",
   "canHavePermanentLocation": true,
   "defaultSectorId": "other-services",

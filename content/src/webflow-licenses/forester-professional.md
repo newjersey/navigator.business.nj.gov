@@ -1,4 +1,6 @@
 ---
+filename: forester-professional
+displayname: forester-professional
 id: "forester-professional"
 webflowId: "5f7729018150be2dc1f3be20"
 urlSlug: "forester-professional"

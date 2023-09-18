@@ -1,4 +1,5 @@
 {
+  "displayname": "logistics",
   "naicsCodes": "493110, 493190, 493120, 493130",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
@@ -46,7 +47,7 @@
   ],
   "name": "Logistics",
   "industryOnboardingQuestions": {
-  "isInterstateLogisticsApplicable": true
+    "isInterstateLogisticsApplicable": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "freight, trucking, movers, box truck company, transportation, truck driving, hauling, truck haul, logistics, trucking company, ",

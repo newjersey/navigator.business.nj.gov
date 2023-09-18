@@ -1,4 +1,6 @@
 ---
+filename: funeral-director-funeral-home
+displayname: funeral-director-funeral-home
 id: "funeral-director-funeral-home"
 webflowId: "5f77298e38625475f6bb0e4a"
 urlSlug: "funeral-director-funeral-home"

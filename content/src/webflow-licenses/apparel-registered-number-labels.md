@@ -1,4 +1,6 @@
 ---
+filename: apparel-registered-number-labels
+displayname: apparel-registered-number-labels
 id: "apparel-registered-number-labels"
 webflowId: "5f77294d0b0d004d7ef25221"
 urlSlug: "apparel-registered-number-labels"

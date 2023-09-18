@@ -1,6 +1,8 @@
 ---
 urlSlug: drop-zone-parachuting
 webflowName: Drop Zone (Parachuting)
+filename: drop-zone-parachuting
+displayname: drop-zone-parachuting
 agencyId: njdot
 agencyAdditionalContext: Division of Aeronautics
 callToActionText: ""

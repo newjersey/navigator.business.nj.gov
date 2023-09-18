@@ -1,4 +1,6 @@
 ---
+filename: non-public-real-estate-school
+displayname: non-public-real-estate-school
 id: "non-public-real-estate-school"
 webflowId: "5f77292a5ef8c1c035019ec0"
 urlSlug: "non-public-real-estate-school"

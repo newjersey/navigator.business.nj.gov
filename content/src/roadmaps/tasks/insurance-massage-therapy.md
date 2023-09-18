@@ -1,4 +1,5 @@
 ---
+displayname: insurance-massage-therapy
 urlSlug: insurance-massage-therapy
 filename: insurance-massage-therapy
 name: Obtain an Insurance Policy
