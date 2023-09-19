@@ -18,6 +18,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { addAdditionalBusiness } from "@/lib/domain-logic/addAdditionalBusiness";
+import { hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import { QUERIES, QUERY_PARAMS_VALUES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -29,6 +30,7 @@ import {
   OnboardingStatus,
   Page,
   ProfileError,
+  UpdateQueue,
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
@@ -154,6 +156,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
 
       hasHandledRouting.current = true;
+      let localUpdateQueue = updateQueue;
 
       let currentUserData = updateQueue?.current();
       if (currentUserData) {
@@ -176,7 +179,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         };
         currentUserData = createEmptyUserData(emptyUser);
         setRegistrationDimension("Began Onboarding");
-        await createUpdateQueue(currentUserData);
+        localUpdateQueue = await createUpdateQueue(currentUserData);
         setProfileData(currentUserData.businesses[currentUserData.currentBusinessId].profileData);
       }
 
@@ -190,11 +193,24 @@ const OnboardingPage = (props: Props): ReactElement => {
         const queryFlow = router.query[QUERIES.flow] as string;
 
         if (industryQueryParamIsValid(queryIndustryId)) {
-          await setIndustryAndRouteToPage(currentBusiness, queryIndustryId);
+          const newProfileData: ProfileData = {
+            ...currentBusiness.profileData,
+            businessPersona: "STARTING",
+            industryId: queryIndustryId,
+          };
+
+          setProfileData(newProfileData);
+          localUpdateQueue?.queueProfileData(newProfileData);
+
+          if (hasEssentialQuestion(queryIndustryId)) {
+            setPage({ current: 2, previous: 1 });
+          } else {
+            completeOnboarding(newProfileData, localUpdateQueue);
+          }
         } else if (pageQueryParamisValid(onboardingFlows, currentBusiness, queryPage)) {
           setPage({ current: queryPage, previous: queryPage - 1 });
         } else if (flowQueryParamIsValid(queryFlow)) {
-          await setBusinessPersonaAndRouteToPage(queryFlow);
+          await setBusinessPersonaAndRouteToPage(queryFlow, localUpdateQueue);
         } else {
           setPage({ current: 1, previous: 1 });
           routeToPage(1);
@@ -204,22 +220,10 @@ const OnboardingPage = (props: Props): ReactElement => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady, state.activeUser, state.isAuthenticated, hasCompletedFetch]);
 
-  const setIndustryAndRouteToPage = async (
-    business: Business,
-    industryId: string | undefined
+  const setBusinessPersonaAndRouteToPage = async (
+    flow: string,
+    updateQueue: UpdateQueue | undefined
   ): Promise<void> => {
-    const newProfileData: ProfileData = {
-      ...business.profileData,
-      businessPersona: "STARTING",
-      industryId: industryId,
-    };
-
-    setProfileData(newProfileData);
-    setPage({ current: 2, previous: 1 });
-    await updateQueue?.queueProfileData(newProfileData);
-  };
-
-  const setBusinessPersonaAndRouteToPage = async (flow: string): Promise<void> => {
     const flowType = mapFlowQueryToPersona[flow as QUERY_PARAMS_VALUES["flow"]];
     const newProfileData: ProfileData = {
       ...profileData,
@@ -234,6 +238,59 @@ const OnboardingPage = (props: Props): ReactElement => {
       setPage({ current: 2, previous: 1 });
     }
     await updateQueue?.queueProfileData(newProfileData);
+  };
+
+  const completeOnboarding = async (
+    newProfileData: ProfileData,
+    updateQueue: UpdateQueue | undefined
+  ): Promise<void> => {
+    if (!updateQueue) return;
+
+    setRegistrationDimension("Onboarded Guest");
+    if (isAdditionalBusiness) {
+      analytics.event.onboarding_last_step_save_additional_business_button.click.finish_additional_business_onboarding();
+    } else {
+      analytics.event.onboarding_last_step.submit.finish_onboarding();
+    }
+
+    const isRemoteSellerWorker =
+      newProfileData.businessPersona === "FOREIGN" &&
+      (newProfileData.foreignBusinessType === "REMOTE_SELLER" ||
+        newProfileData.foreignBusinessType === "REMOTE_WORKER");
+
+    let newUserData: UserData = {
+      ...updateQueue.current(),
+      businesses: {
+        ...updateQueue.current().businesses,
+        [updateQueue.current().currentBusinessId]: {
+          ...updateQueue.currentBusiness(),
+          profileData: {
+            ...newProfileData,
+            operatingPhase: isRemoteSellerWorker
+              ? "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
+              : newProfileData.operatingPhase,
+          },
+          onboardingFormProgress: "COMPLETED",
+        },
+      },
+    };
+
+    newUserData = await api.postGetAnnualFilings(newUserData);
+    updateQueue.queue(newUserData);
+
+    if (newProfileData.legalStructureId) {
+      const completed: TaskProgress = "COMPLETED";
+      updateQueue.queueTaskProgress({ [businessStructureTaskId]: completed });
+    }
+
+    await updateQueue.update();
+
+    await router.push({
+      pathname: ROUTES.dashboard,
+      query: isAdditionalBusiness
+        ? { [QUERIES.fromAdditionalBusiness]: "true" }
+        : { [QUERIES.fromOnboarding]: "true" },
+    });
   };
 
   FormFuncWrapper(
@@ -288,51 +345,7 @@ const OnboardingPage = (props: Props): ReactElement => {
             headerRef.current?.focus();
           });
       } else {
-        setRegistrationDimension("Onboarded Guest");
-        if (isAdditionalBusiness) {
-          analytics.event.onboarding_last_step_save_additional_business_button.click.finish_additional_business_onboarding();
-        } else {
-          analytics.event.onboarding_last_step.submit.finish_onboarding();
-        }
-
-        const isRemoteSellerWorker =
-          newProfileData.businessPersona === "FOREIGN" &&
-          (newProfileData.foreignBusinessType === "REMOTE_SELLER" ||
-            newProfileData.foreignBusinessType === "REMOTE_WORKER");
-
-        let newUserData: UserData = {
-          ...updateQueue.current(),
-          businesses: {
-            ...updateQueue.current().businesses,
-            [updateQueue.current().currentBusinessId]: {
-              ...updateQueue.currentBusiness(),
-              profileData: {
-                ...newProfileData,
-                operatingPhase: isRemoteSellerWorker
-                  ? "GUEST_MODE_WITH_BUSINESS_STRUCTURE"
-                  : newProfileData.operatingPhase,
-              },
-              onboardingFormProgress: "COMPLETED",
-            },
-          },
-        };
-
-        newUserData = await api.postGetAnnualFilings(newUserData);
-        updateQueue.queue(newUserData);
-
-        if (newProfileData.legalStructureId) {
-          const completed: TaskProgress = "COMPLETED";
-          updateQueue.queueTaskProgress({ [businessStructureTaskId]: completed });
-        }
-
-        await updateQueue.update();
-
-        await router.push({
-          pathname: ROUTES.dashboard,
-          query: isAdditionalBusiness
-            ? { [QUERIES.fromAdditionalBusiness]: "true" }
-            : { [QUERIES.fromOnboarding]: "true" },
-        });
+        completeOnboarding(newProfileData, updateQueue);
       }
     },
     (isValid, errors) => {
