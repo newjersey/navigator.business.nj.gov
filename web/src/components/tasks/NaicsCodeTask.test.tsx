@@ -24,7 +24,7 @@ import {
   TaxFilingState,
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -417,14 +417,56 @@ describe("<NaicsCodeTask />", () => {
       expect(screen.getByText(`Register & ${Config.determineNaicsCode.saveButtonText}`)).toBeInTheDocument();
     });
 
-    it("opens Needs Account modal on save button click", async () => {
+    it("opens Needs Account modal on save button click", () => {
       renderPage();
-      fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
-        target: { value: validNaicsCode },
-      });
       fireEvent.click(screen.getByText(`Register & ${Config.determineNaicsCode.saveButtonText}`));
-      await waitFor(() => {
-        return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
+      expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
+    });
+
+    it("opens Needs Account modal on NAICS Code radio button click", () => {
+      initialBusiness = generateBusiness({
+        profileData: generateProfileData({ naicsCode: "", industryId: "acupuncture" }),
+      });
+      renderPage();
+
+      fireEvent.click(screen.getByTestId("naics-radio-621399"));
+
+      expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
+      expect(within(screen.getByTestId("naics-radio-621399")).getByRole("radio")).not.toBeChecked();
+    });
+
+    it("opens Needs Account modal on NAICS Code input radio button click", () => {
+      initialBusiness = generateBusiness({
+        profileData: generateProfileData({ naicsCode: "", industryId: "acupuncture" }),
+      });
+      renderPage();
+
+      fireEvent.click(screen.getByTestId("naics-radio-input"));
+
+      expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
+      expect(within(screen.getByTestId("naics-radio-input")).getByRole("radio")).not.toBeChecked();
+    });
+
+    it("keeps task progress as NOT_STARTED when radio button is clicked", () => {
+      initialBusiness = generateBusiness({
+        profileData: generateProfileData({ naicsCode: "", industryId: "acupuncture" }),
+      });
+      renderPage();
+      fireEvent.click(screen.getByTestId("naics-radio-621399"));
+      expect(userDataWasNotUpdated()).toBe(true);
+    });
+
+    describe("guest mode - generic industry", () => {
+      it("opens modal when a user types in NAICS code input field", () => {
+        initialBusiness = generateBusiness({
+          profileData: generateProfileData({ naicsCode: "", industryId: "generic" }),
+        });
+        renderPage();
+
+        fireEvent.change(screen.getByLabelText("Save NAICS Code"), { target: { value: "123456" } });
+
+        expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
+        expect(screen.getByLabelText("Save NAICS Code")).toHaveValue("");
       });
     });
   });

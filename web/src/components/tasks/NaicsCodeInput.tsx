@@ -1,6 +1,7 @@
 import { Content, ExternalLink } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
@@ -10,7 +11,7 @@ import { NaicsCodeObject, Task } from "@/lib/types/types";
 import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Business, LookupIndustryById } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { ReactElement, useMemo, useState } from "react";
+import React, { ReactElement, useContext, useMemo, useState } from "react";
 
 interface Props {
   onSave: () => void;
@@ -33,6 +34,8 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   const [isInvalid, setIsInvalid] = useState<NaicsErrorTypes | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [displayInputState, setDisplayInput] = useState<boolean>(false);
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
+
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
   const userDataFromHook = useUserData();
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
@@ -70,6 +73,11 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   }, business);
 
   const saveNaicsCode = async (): Promise<void> => {
+    if (isAuthenticated !== IsAuthenticated.TRUE) {
+      setShowNeedsAccountModal(true);
+      return;
+    }
+
     if (!updateQueue) {
       return;
     }
@@ -101,6 +109,11 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   };
 
   const handleChange = (value: string): void => {
+    if (isAuthenticated !== IsAuthenticated.TRUE) {
+      setShowNeedsAccountModal(true);
+      return;
+    }
+
     setNaicsCode(value);
     if (value.length === LENGTH) {
       if (getCode(value)) {
@@ -141,8 +154,12 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
               name={"naics-radio-group"}
               value={naicsCode}
               onChange={(event: React.ChangeEvent<{ name?: string; value: string }>): void => {
-                setNaicsCode(event.target.value);
                 if (displayInput) setDisplayInput(false);
+                if (isAuthenticated !== IsAuthenticated.TRUE) {
+                  setShowNeedsAccountModal(true);
+                  return;
+                }
+                setNaicsCode(event.target.value);
                 setInProgress();
               }}
               data-testid="post-onboarding-radio-btn"
@@ -178,10 +195,13 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
                 labelPlacement="end"
                 data-testid="naics-radio-input"
                 onChange={(): void => {
+                  if (isAuthenticated !== IsAuthenticated.TRUE) {
+                    setShowNeedsAccountModal(true);
+                    return;
+                  }
                   setDisplayInput(true);
                   setNaicsCode("");
                   setIsInvalid(undefined);
-                  setInProgress();
                 }}
                 value=""
                 checked={displayInput}
