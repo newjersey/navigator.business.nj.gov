@@ -61,6 +61,6 @@ Use the online [Business Charter Amendment Service](https://www.njportal.com/dor
 
  **Obtain a New Business Registration Certificate (BRC)**
 
-If you have updated your business registry account(s) with a new trade or alternate name, or a new business location, you need to obtain a new `BRC|business-reg-certificate` for public contracting purposes.  
+If you have updated your business registry account(s) with a new trade or alternate name, or a new business location, you need to obtain a new `BRC|business-reg-certificate` for public contracting purposes.
 
 Use the online [BRC Service](https://www1.state.nj.us/TYTR_BRC/jsp/BRCLoginJsp.jsp) to download an updated BRC.
