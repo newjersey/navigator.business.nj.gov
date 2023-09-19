@@ -1,3 +1,17 @@
+# [5.29.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.28.0...v5.29.0) (2023-09-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency uuid to v9.0.1 ([864c8fb](https://github.com/newjersey/navigator.business.nj.gov/commit/864c8fbc1711ee3a83f58bc3eebe9fb59197d101))
+* **deps:** update material-ui ([eb6e2d7](https://github.com/newjersey/navigator.business.nj.gov/commit/eb6e2d79b47baec57b1b4f9fe9d98ca1e5ca3772))
+
+
+### Features
+
+* [[#184890110](https://github.com/newjersey/navigator.business.nj.gov/issues/184890110)] added displayname to MD files and made filename readonly in CMS ([585e319](https://github.com/newjersey/navigator.business.nj.gov/commit/585e319c1e165c35c51dd8c979a91c4c6c56cf5e))
+* [[#184890110](https://github.com/newjersey/navigator.business.nj.gov/issues/184890110)] renamed slug widget to be writeoncereadonly widget as its more descriptive ([86c5e17](https://github.com/newjersey/navigator.business.nj.gov/commit/86c5e170f98b1ddc1aeea1901e39e6e4d1af5bd9))
+
 # [5.28.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.27.0...v5.28.0) (2023-09-15)
 
 
