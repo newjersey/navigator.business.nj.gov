@@ -37,23 +37,8 @@ export default {
   },
 } as ComponentMeta<typeof GenericTextField>;
 
-const Template: ComponentStory<typeof GenericTextField> = (props) => {
+const Template: ComponentStory<typeof GenericTextField> = () => {
   const mergedConfig = getMergedConfig();
-  mergedConfig.profileDefaults.fields.legalStructureId.onboarding = {
-    ...mergedConfig.profileDefaults.fields.legalStructureId.onboarding,
-    default: {
-      ...mergedConfig.profileDefaults.fields.legalStructureId.onboarding.default,
-      header: "Header Text",
-    },
-    overrides: {
-      ...mergedConfig.profileDefaults.fields.legalStructureId.onboarding.overrides,
-
-      OWNING: {
-        ...mergedConfig.profileDefaults.fields.legalStructureId.onboarding.overrides.OWNING,
-        description: "Description Text \n \n Second Paragraph",
-      },
-    },
-  };
   const [Config, setConfig] = useState<ConfigType>(mergedConfig);
   const [profileData, setProfileData] = useState<ProfileData>(
     generateProfileData({ taxId: "2", naicsCode: "" })
@@ -123,31 +108,29 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
 
               <div>FieldLabelDescriptionOnly Component</div>
               <div className={"border margin-bottom-4"}>
-                <FieldLabelDescriptionOnly fieldName="legalStructureId" />
+                <FieldLabelDescriptionOnly fieldName="industryId" />
               </div>
 
               <div>FieldLabelOnboarding Component</div>
               <div className={"border margin-bottom-4"}>
-                <FieldLabelOnboarding fieldName="legalStructureId" />
+                <FieldLabelOnboarding fieldName="industryId" />
               </div>
 
               <div>FieldLabelProfile Component</div>
               <div className={"border margin-bottom-4"}>
-                <FieldLabelProfile fieldName="legalStructureId" />
+                <FieldLabelProfile fieldName="industryId" />
               </div>
 
               <div>FieldLabelFormation Component</div>
               <div className={"border margin-bottom-4"}>
                 <strong>
-                  <ModifiedContent>
-                    {Config.profileDefaults.fields.legalStructureId.onboarding.default.header}
-                  </ModifiedContent>
+                  <ModifiedContent>{Config.profileDefaults.fields.industryId.default.header}</ModifiedContent>
                 </strong>
               </div>
 
               <div>ProfileField Component</div>
               <div className={"border margin-bottom-4"}>
-                <ProfileField fieldName="legalStructureId">Children content is displayed here</ProfileField>
+                <ProfileField fieldName="industryId">Children content is displayed here</ProfileField>
               </div>
 
               <div>ProfileField Component When Locked</div>

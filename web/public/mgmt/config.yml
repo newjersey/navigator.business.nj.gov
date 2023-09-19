@@ -3735,7 +3735,7 @@ collections:
     delete: false
     create: false
     files:
-      - label: "All Profile Fields"
+      - label: "All Profile Config"
         name: "profile-fields"
         file: "content/src/fieldConfig/profile.json"
         editor:
@@ -3952,40 +3952,6 @@ collections:
                                   name: "limited-partnership",
                                   widget: "markdown",
                                 }
-                      - label: Onboarding Specific
-                        name: "onboarding"
-                        collapsed: false
-                        widget: object
-                        fields:
-                          - label: Default
-                            name: "default"
-                            collapsed: false
-                            widget: object
-                            fields:
-                              - {
-                                  label: "Description",
-                                  name: "description",
-                                  widget: "markdown",
-                                  required: false,
-                                }
-                          - label: Overrides
-                            name: "overrides"
-                            collapsed: true
-                            widget: object
-                            fields:
-                              - label: OWNING
-                                name: "OWNING"
-                                collapsed: true
-                                widget: object
-                                fields:
-                                  - { label: "Description", name: "description", widget: "markdown" }
-                              - label: FOREIGN
-                                name: "FOREIGN"
-                                collapsed: true
-                                widget: object
-                                fields:
-                                  - { label: "Header", name: "header", widget: "string" }
-                                  - { label: "Description", name: "description", widget: "markdown" }
                   - label: Onboarding Nonprofit Radio
                     name: isNonprofitOnboardingRadio
                     collapsed: true
@@ -4760,57 +4726,52 @@ collections:
                           - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
                           - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
-
-      - label: "Profile / Onboarding Page Misc"
-        name: "default"
-        file: "content/src/fieldConfig/config.json"
-        widget: object
-        editor:
-          preview: true
-        fields:
-          - label: Profile / Onboarding Defaults
-            name: profileDefaults
-            collapsed: false
-            widget: object
-            summary: "{{profileDefaults}}"
-            fields:
-              - { label: Escape Modal - Header, name: escapeModalHeader, widget: string }
-              - { label: Escape Model - Body, name: escapeModalBody, widget: string }
-              - { label: Escape Modal - Return, name: escapeModalReturn, widget: string }
-              - { label: Escape Modal - Escape, name: escapeModalEscape, widget: string }
-              - { label: Success Alert - Header, name: successTextHeader, widget: string }
-              - { label: Success Alert - Body, name: successTextBody, widget: string }
-              - { label: Error Alert - Header, name: errorTextHeader, widget: string }
-              - { label: Error Alert - Body, name: errorTextBody, widget: string }
-              - { label: Essential Question Alert - Body, name: essentialQuestionAlertText, widget: string }
-              - { label: Page Title, name: pageTitle, widget: string }
-              - { label: Save Button Text, name: saveButtonText, widget: string }
-              - { label: Back Button Text, name: backButtonText, widget: string }
-              - { label: Info Tab Title, name: profileTabInfoTitle, widget: string }
-              - { label: Reference Numbers Tab Title, name: profileTabRefTitle, widget: string }
-              - { label: Docs Tab Title, name: profileTabDocsTitle, widget: string }
-              - { label: Notes Tab Title, name: profileTabNoteTitle, widget: string }
-              - { label: Formation Doc Label, name: formationDocFileTitle, widget: string }
-              - { label: Good Standing Doc Label, name: standingDocFileTitle, widget: string }
-              - {
-                  label: Certified Copy of Formation Doc Label,
-                  name: certificationDocFileTitle,
-                  widget: string,
-                }
-              - { label: Locked Field Tooltip Text, name: lockedFieldTooltipText, widget: string }
-              - { label: Profile Completion Alert, name: profileCompletionAlert, widget: markdown }
-              - { label: Cannabis Location Alert, name: cannabisLocationAlert, widget: string }
-              - { label: Profile Error Alert Title, name: profileErrorAlert, widget: string }
-              - {
-                  label: Profile Error Alert Single Field Text,
-                  name: profileErrorAlertOneField,
-                  widget: string,
-                }
-              - {
-                  label: Profile Error Multiple Fields Text,
-                  name: profileErrorAlertMultipleFields,
-                  widget: string,
-                }
+              - label: Profile / Onboarding Defaults
+                name: default
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: Escape Modal - Header, name: escapeModalHeader, widget: string }
+                  - { label: Escape Model - Body, name: escapeModalBody, widget: string }
+                  - { label: Escape Modal - Return, name: escapeModalReturn, widget: string }
+                  - { label: Escape Modal - Escape, name: escapeModalEscape, widget: string }
+                  - { label: Success Alert - Header, name: successTextHeader, widget: string }
+                  - { label: Success Alert - Body, name: successTextBody, widget: string }
+                  - { label: Error Alert - Header, name: errorTextHeader, widget: string }
+                  - { label: Error Alert - Body, name: errorTextBody, widget: string }
+                  - {
+                      label: Essential Question Alert - Body,
+                      name: essentialQuestionAlertText,
+                      widget: string,
+                    }
+                  - { label: Page Title, name: pageTitle, widget: string }
+                  - { label: Save Button Text, name: saveButtonText, widget: string }
+                  - { label: Back Button Text, name: backButtonText, widget: string }
+                  - { label: Info Tab Title, name: profileTabInfoTitle, widget: string }
+                  - { label: Reference Numbers Tab Title, name: profileTabRefTitle, widget: string }
+                  - { label: Docs Tab Title, name: profileTabDocsTitle, widget: string }
+                  - { label: Notes Tab Title, name: profileTabNoteTitle, widget: string }
+                  - { label: Formation Doc Label, name: formationDocFileTitle, widget: string }
+                  - { label: Good Standing Doc Label, name: standingDocFileTitle, widget: string }
+                  - {
+                      label: Certified Copy of Formation Doc Label,
+                      name: certificationDocFileTitle,
+                      widget: string,
+                    }
+                  - { label: Locked Field Tooltip Text, name: lockedFieldTooltipText, widget: string }
+                  - { label: Profile Completion Alert, name: profileCompletionAlert, widget: markdown }
+                  - { label: Cannabis Location Alert, name: cannabisLocationAlert, widget: string }
+                  - { label: Profile Error Alert Title, name: profileErrorAlert, widget: string }
+                  - {
+                      label: Profile Error Alert Single Field Text,
+                      name: profileErrorAlertOneField,
+                      widget: string,
+                    }
+                  - {
+                      label: Profile Error Multiple Fields Text,
+                      name: profileErrorAlertMultipleFields,
+                      widget: string,
+                    }
 
   - name: "post-onboarding-content"
     label: "Post Onboarding Content"

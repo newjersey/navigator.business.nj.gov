@@ -259,31 +259,6 @@
             "sole-proprietorship": "In a sole proprietorship you alone own the company and are responsible for its assets and liabilities. [Learn more about Sole Proprietorships.](https://business.nj.gov/pages/sole-proprietorship) ",
             "nonprofit": "Nonprofits are a type of C Corporation, but unlike a for-profit corporation, a nonprofit organization has a mission to benefit the public rather than generating profit. Nonprofits belong to the public, are governed by a board of trustees, and can qualify for tax-exemption. [Learn more about Nonprofits.](https://business.nj.gov/pages/nonprofit)"
           }
-        },
-        "onboarding": {
-          "default": {
-            "header": "Which Business Structure Will You Choose?",
-            "headerContextualInfo": "",
-            "description": "Your business’ `business structure|business-structure-learn-more` can have a large impact on taxes, financing, liability, and closure of your business. We strongly suggest doing research on the best business structure for your business.  \nSelect a business structure for your profile below. Making a selection will not form your business, it will help us create your personalized guide. You can change your intended business structure anytime before formally filing it with the NJ Department of Treasury."
-          },
-          "overrides": {
-            "OWNING": {
-              "description": "What is your `business structure|business-structure-learn-more` ?"
-            },
-            "FOREIGN": {
-              "header": "Business Structure of Your Existing Out-of-State Business",
-              "description": "Please select the business structure used when you registered your business in your home state. You can find your business structure on your original `Certificate of Formation|certificate-formation` .",
-              "optionContent": {
-                "general-partnership": "",
-                "c-corporation": "",
-                "limited-liability-company": "",
-                "limited-liability-partnership": "",
-                "limited-partnership": "",
-                "s-corporation": "",
-                "sole-proprietorship": ""
-              }
-            }
-          }
         }
       },
       "employerId": {

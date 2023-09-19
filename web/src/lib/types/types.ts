@@ -339,7 +339,7 @@ export interface WebflowLicense {
   id: string;
   webflowId: string;
   filename: string;
-  urlSlug: string;
+  urlSlug?: string;
   webflowName?: string;
   callToActionLink?: string;
   callToActionText?: string;
