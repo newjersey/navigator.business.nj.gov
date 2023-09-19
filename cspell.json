@@ -149,7 +149,9 @@
     "Displayname",
     "displayname",
     "ccorp",
-    "corpwatch"
+    "corpwatch",
+    "STIN",
+    "FEIN"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
