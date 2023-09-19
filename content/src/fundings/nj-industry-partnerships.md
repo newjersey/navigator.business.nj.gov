@@ -23,7 +23,7 @@ agencyContact: ""
 businessStage: both
 employeesRequired: yes
 homeBased: yes
-certifications: null
+certifications: []
 preferenceForOpportunityZone: no
 county:
   - All

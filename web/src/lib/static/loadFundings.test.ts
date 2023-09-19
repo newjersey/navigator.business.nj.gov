@@ -34,7 +34,7 @@ describe("loadFundings", () => {
         "businessStage: operating\n" +
         "employeesRequired: n/a\n" +
         "homeBased: yes\n" +
-        "certifications: null\n" +
+        "certifications: []\n" +
         "preferenceForOpportunityZone: null\n" +
         "county:\n" +
         "  - All\n" +
@@ -79,7 +79,7 @@ describe("loadFundings", () => {
             businessStage: "operating",
             employeesRequired: "n/a",
             homeBased: "yes",
-            certifications: null,
+            certifications: [],
             preferenceForOpportunityZone: null,
             county: ["All"],
             sector: ["cannabis"],

@@ -1314,6 +1314,7 @@ collections:
         widget: "select"
         multiple: true
         required: false
+        default: []
         options:
           - { label: "Women Owned", value: "woman-owned" }
           - { label: "Minority Owned", value: "minority-owned" }

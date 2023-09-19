@@ -16,7 +16,7 @@ programFrequency: ongoing
 businessStage: operating
 employeesRequired: yes
 homeBased: no
-certifications: null
+certifications: []
 preferenceForOpportunityZone: ""
 county:
   - All
