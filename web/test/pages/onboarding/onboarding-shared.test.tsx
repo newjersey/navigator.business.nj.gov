@@ -1,5 +1,6 @@
 import { onboardingFlows } from "@/components/onboarding/OnboardingFlows";
 import { getMergedConfig } from "@/contexts/configContext";
+import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import * as mockRouter from "@/test/mock/mockRouter";
@@ -88,19 +89,22 @@ describe("onboarding - shared", () => {
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
   });
 
-  it("routes to industry page when industry without essential question is set by using industry query string", async () => {
+  it("routes to dashboard page when industry WITHOUT essential question is set by using industry query string", async () => {
     const industry = randomElementFromArray(industriesWithOutEssentialQuestion).id;
     useMockRouter({ isReady: true, query: { industry } });
-    const { page } = renderPage({});
-    expect(screen.getByTestId("step-2")).toBeInTheDocument();
-    page.clickNext();
+    renderPage({});
     await waitFor(() => {
-      expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
+      expect(mockPush).toHaveBeenCalledWith({
+        pathname: ROUTES.dashboard,
+        query: { [QUERIES.fromOnboarding]: "true" },
+      });
     });
+    expect(currentBusiness().profileData.businessPersona).toEqual("STARTING");
     expect(currentBusiness().profileData.industryId).toEqual(industry);
+    expect(currentBusiness().onboardingFormProgress).toEqual("COMPLETED");
   });
 
-  it("routes to the industry page when industry with essential question is set by using industry query string", async () => {
+  it("routes to the onboarding industry page when industry WITH essential question is set by using industry query string", async () => {
     const industry = randomElementFromArray(industriesWithEssentialQuestion).id;
     useMockRouter({ isReady: true, query: { industry } });
     const { page } = renderPage({});
