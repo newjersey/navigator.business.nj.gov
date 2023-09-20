@@ -45,6 +45,7 @@ describe("getCost", () => {
       "c-corporation",
       "limited-partnership",
       "foreign-nonprofit",
+      "nonprofit",
     ];
     const defaultCostIds = allFormationLegalTypes.filter((it) => !overriddenCostIds.includes(it));
 
