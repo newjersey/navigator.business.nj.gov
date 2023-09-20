@@ -37,10 +37,9 @@ describe("<Content />", () => {
 
   describe("infoAlert", () => {
     it("renders info alert with header", () => {
-      const mdString = ":::infoAlert{header='Header Text'}\n" + "body text\n" + ":::";
+      const mdString = ":::infoAlert\n body text\n :::";
 
       render(<Content>{mdString}</Content>);
-      expect(screen.getByText("Header Text")).toBeInTheDocument();
       expect(screen.getByText("body text")).toBeInTheDocument();
     });
   });

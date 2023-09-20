@@ -41,5 +41,6 @@ webflowId: 5f77296c2edc674c7cb4a708
 > **After Receiving Your Notary Public Commission Certificate:**
 > Within three months, take your notary public commission certificate and oath qualification certificate to the office of the county clerk where you reside (for non‐residents, where you are employed in New Jersey) to swear to the Oath of Office.
 
-:::infoAlert{ header="Required for Advertisements" }
+:::infoAlert
 A notary public who is not licensed as an attorney-at-law must provide a statement in any advertisements stating that they're not an attorney licensed to practice law and cannot offer legal advice.
+:::
