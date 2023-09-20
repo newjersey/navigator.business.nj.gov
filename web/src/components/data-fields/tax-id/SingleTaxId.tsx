@@ -2,9 +2,7 @@
 
 import { DataField, DataFieldProps } from "@/components/data-fields/DataField";
 import { TaxIdDisplayStatus } from "@/components/data-fields/tax-id/TaxIdHelpers";
-import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
 import { MediaQueries } from "@/lib/PageSizes";
 import { InputAdornment, useMediaQuery } from "@mui/material";
@@ -20,12 +18,8 @@ export const SingleTaxId = ({ handleChangeOverride, validationText, ...props }: 
 
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { state, setProfileData } = useContext(ProfileDataContext);
-  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
 
   const handleChange = (value: string): void => {
-    if (isAuthenticated === IsAuthenticated.FALSE) {
-      setShowNeedsAccountModal(true);
-    }
     if (handleChangeOverride) {
       handleChangeOverride(value);
       return;
