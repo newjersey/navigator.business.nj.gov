@@ -1,7 +1,7 @@
 ---
 urlSlug: agreement-vending-machine
 filename: agreement-vending-machine-1
-displayname: agreement-vending-machine-display-test
+displayname: agreement-vending-machine
 name: Sign a Location Agreement
 id: agreement-vending-machine
 industryId: vending-machine
