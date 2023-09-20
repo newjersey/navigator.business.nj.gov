@@ -239,11 +239,28 @@ describe("<TaxTask />", () => {
 
     it("opens Needs Account modal on save button click", async () => {
       renderPage();
-      fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789123" } });
       fireEvent.click(screen.getByText(`Register & ${Config.tax.saveButtonText}`));
       await waitFor(() => {
         return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
       });
+      expect(userDataWasNotUpdated()).toBe(true);
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+      ).not.toBeInTheDocument();
+    });
+
+    it("opens Needs Account modal when trying to enter tax input data, and does not show inline errors or update userData", async () => {
+      renderPage();
+      fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "1" } });
+      fireEvent.blur(screen.getByLabelText("Tax id"));
+      await waitFor(() => {
+        return expect(setShowNeedsAccountModal).toHaveBeenCalledWith(true);
+      });
+      expect(userDataWasNotUpdated()).toBe(true);
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+      ).not.toBeInTheDocument();
+      expect(screen.getByLabelText("Tax id")).toHaveValue("");
     });
   });
 
