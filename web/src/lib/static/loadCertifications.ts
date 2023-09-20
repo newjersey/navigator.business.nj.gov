@@ -1,4 +1,3 @@
-import { PathParams } from "@/lib/static/loadFilings";
 import { Certification } from "@/lib/types/types";
 import { convertCertificationMd } from "@/lib/utils/markdownReader";
 import fs from "fs";
@@ -8,6 +7,7 @@ import { getFileNameByUrlSlug } from "./helpers";
 const certificationDir = path.join(process.cwd(), "..", "content", "src", "certifications");
 const archivedCertificationDir = path.join(process.cwd(), "..", "content", "src", "archived-certifications");
 
+type PathParams<P> = { params: P; locale?: string };
 export type CertificationUrlSlugParam = {
   certificationUrlSlug: string;
 };

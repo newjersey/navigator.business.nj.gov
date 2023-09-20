@@ -4,7 +4,7 @@ import path from "path";
 import { convertFilingMd } from "../utils/markdownReader";
 import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "./helpers";
 
-export type PathParams<P> = { params: P; locale?: string };
+type PathParams<P> = { params: P; locale?: string };
 export type FilingUrlSlugParam = {
   filingUrlSlug: string;
 };

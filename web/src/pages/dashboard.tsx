@@ -1,5 +1,6 @@
 import { CircularIndicator } from "@/components/CircularIndicator";
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
+import { QuickActionTile } from "@/components/dashboard/QuickActionTile";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
 import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout";
@@ -26,7 +27,14 @@ import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayConten
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
-import { Certification, Funding, OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
+import { loadAllQuickActions } from "@/lib/static/loadQuickActions";
+import {
+  Certification,
+  Funding,
+  OperateReference,
+  QuickAction,
+  RoadmapDisplayContent,
+} from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { LookupOperatingPhaseById, Municipality } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
@@ -40,6 +48,7 @@ interface Props {
   fundings: Funding[];
   certifications: Certification[];
   municipalities: Municipality[];
+  quickActions: QuickAction[];
 }
 
 const DashboardPage = (props: Props): ReactElement => {
@@ -122,6 +131,8 @@ const DashboardPage = (props: Props): ReactElement => {
     dataTestId: "fromAdditionalBusiness-alert",
   });
 
+  const operatingPhase = LookupOperatingPhaseById(business?.profileData.operatingPhase);
+
   useMountEffectWhenDefined(() => {
     (async (): Promise<void> => {
       if (business?.onboardingFormProgress !== "COMPLETED") {
@@ -146,7 +157,7 @@ const DashboardPage = (props: Props): ReactElement => {
     return (
       isHomeBasedBusinessApplicable(business.profileData.industryId) &&
       business.profileData.homeBasedBusiness === undefined &&
-      LookupOperatingPhaseById(business.profileData.operatingPhase).displayHomeBasedPrompt
+      operatingPhase.displayHomeBasedPrompt
     );
   };
 
@@ -163,10 +174,7 @@ const DashboardPage = (props: Props): ReactElement => {
                   label={
                     <FieldLabelDescriptionOnly
                       fieldName="homeBasedBusiness"
-                      isAltDescriptionDisplayed={
-                        LookupOperatingPhaseById(business?.profileData.operatingPhase)
-                          .displayAltHomeBasedBusinessDescription
-                      }
+                      isAltDescriptionDisplayed={operatingPhase.displayAltHomeBasedBusinessDescription}
                     />
                   }
                   onSave={(): void => routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true")}
@@ -175,17 +183,23 @@ const DashboardPage = (props: Props): ReactElement => {
                 </DeferredOnboardingQuestion>
               )}
             </div>
-            {LookupOperatingPhaseById(business?.profileData.operatingPhase).displayRoadmapTasks && (
+            {operatingPhase.displayQuickActions && (
+              <div className="grid-row margin-bottom-4">
+                {props.quickActions.map((quickAction) => (
+                  <QuickActionTile key={quickAction.id} name={quickAction.name} url={quickAction.urlSlug} />
+                ))}
+              </div>
+            )}
+            {operatingPhase.displayRoadmapTasks && (
               <>
                 <hr className="margin-bottom-3" />
                 <Roadmap />
               </>
             )}
-            {LookupOperatingPhaseById(business?.profileData.operatingPhase).displayCalendarType !==
-              "NONE" && <FilingsCalendar operateReferences={props.operateReferences} />}
-            {LookupOperatingPhaseById(business?.profileData.operatingPhase).displayHideableRoadmapTasks && (
-              <HideableTasks />
+            {operatingPhase.displayCalendarType !== "NONE" && (
+              <FilingsCalendar operateReferences={props.operateReferences} />
             )}
+            {operatingPhase.displayHideableRoadmapTasks && <HideableTasks />}
           </>
         ) : (
           <CircularIndicator />
@@ -250,6 +264,7 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
       fundings: loadAllFundings(),
       certifications: loadAllCertifications(),
       municipalities: loadAllMunicipalities(),
+      quickActions: loadAllQuickActions(),
     },
   };
 };

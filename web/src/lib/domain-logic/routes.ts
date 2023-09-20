@@ -7,6 +7,7 @@ export const ROUTES = {
   dashboard: "/dashboard",
   onboarding: "/onboarding",
   unsupported: "/unsupported",
+  quickActions: "/actions",
   welcome: "/welcome",
   accountSetup: "/account-setup",
 };

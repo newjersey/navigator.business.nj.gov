@@ -1,0 +1,17 @@
+.quick-action-tile {
+  padding-right: 0;
+  padding-left: 0;
+  padding-top: 0.25rem;
+
+  @media all and (min-width: $sm) {
+    padding-top: 0;
+
+    &:nth-child(odd) {
+      padding-right: 0.25rem;
+    }
+
+    &:nth-child(even) {
+      padding-left: 0.25rem;
+    }
+  }
+}

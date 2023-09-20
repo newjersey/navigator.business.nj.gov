@@ -1,4 +1,3 @@
-import { PathParams } from "@/lib/static/loadFilings";
 import { Funding } from "@/lib/types/types";
 import { convertFundingMd } from "@/lib/utils/markdownReader";
 import fs from "fs";
@@ -7,6 +6,7 @@ import { getFileNameByUrlSlug } from "./helpers";
 
 const fundingDir = path.join(process.cwd(), "..", "content", "src", "fundings");
 
+type PathParams<P> = { params: P; locale?: string };
 export type FundingUrlSlugParam = {
   fundingUrlSlug: string;
 };

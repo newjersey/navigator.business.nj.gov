@@ -39,7 +39,9 @@ describe("findDeadLinks", () => {
       // @ts-ignore
       .mockReturnValueOnce(["licenses.md"])
       // @ts-ignore
-      .mockReturnValueOnce(["licenseTasks.md"]);
+      .mockReturnValueOnce(["licenseTasks.md"])
+      // @ts-ignore
+      .mockReturnValueOnce(["quickAction.md"]);
 
     const task1 = "Task 1 contents";
     const task2 = "Task 2 contents with `contextual info|info1` in it";
@@ -60,6 +62,7 @@ describe("findDeadLinks", () => {
     const certifications = "Certification Content";
     const licenses = "License Content";
     const licenseTasks = "LicenseTask Content";
+    const quickAction = "QuickAction Content";
 
     mockedFs.readFileSync
       .mockReturnValueOnce(industry1)
@@ -79,7 +82,8 @@ describe("findDeadLinks", () => {
       .mockReturnValueOnce(fundings)
       .mockReturnValueOnce(certifications)
       .mockReturnValueOnce(licenses)
-      .mockReturnValueOnce(licenseTasks);
+      .mockReturnValueOnce(licenseTasks)
+      .mockReturnValueOnce(quickAction);
   });
 
   describe("findDeadTasks", () => {
@@ -113,6 +117,7 @@ describe("findDeadLinks", () => {
         "/licenses/licenses-expiration": [],
         "/funding/fundings": [],
         "/certification/certifications": [],
+        "/actions/quickAction": [],
       });
     });
   });
