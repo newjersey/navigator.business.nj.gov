@@ -330,6 +330,9 @@
           "limited-partnership": {
             "cost": "25"
           },
+          "nonprofit": {
+            "cost": "25"
+          },
           "foreign-nonprofit": {
             "cost": "25"
           }

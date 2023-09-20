@@ -421,6 +421,12 @@ collections:
                             widget: object
                             fields:
                               - { label: "Cost", name: "cost", widget: "string" }
+                          - label: Nonprofit
+                            name: "nonprofit"
+                            collapsed: false
+                            widget: object
+                            fields:
+                              - { label: "Cost", name: "cost", widget: "string" }
                           - label: Foreign Nonprofit
                             name: "foreign-nonprofit"
                             collapsed: false
