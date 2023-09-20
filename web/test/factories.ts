@@ -17,6 +17,7 @@ import {
   Opportunity,
   OutageConfig,
   PostOnboarding,
+  QuickAction,
   Roadmap,
   SidebarCardContent,
   Step,
@@ -271,6 +272,20 @@ export const generateFunding = (overrides: Partial<Funding>): Funding => {
     programPurpose: `some-purpose-${randomInt()}`,
     agencyContact: `some-contact-${randomInt()}`,
     isNonprofitOnly: false,
+    ...overrides,
+  };
+};
+
+export const generateQuickAction = (overrides: Partial<QuickAction>): QuickAction => {
+  return {
+    id: `some-id-${randomInt()}`,
+    filename: `some-filename-${randomInt()}`,
+    name: `some-name-${randomInt()}`,
+    urlSlug: `some-url-slug-${randomInt()}`,
+    callToActionLink: `some-cta-link-${randomInt()}`,
+    callToActionText: `some-cta-text-${randomInt()}`,
+    contentMd: `some-content-${randomInt()}`,
+    form: `some-form-${randomInt()}`,
     ...overrides,
   };
 };
