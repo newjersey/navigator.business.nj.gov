@@ -1025,7 +1025,7 @@ describe("<BusinessFormation />", () => {
     page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      Number.parseInt(Config.formation.fields.certificateOfStanding.cost) +
+      Number.parseInt(Config.formation.fields.certificateOfStanding.overrides.nonprofit.cost) +
       Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
       Number.parseInt(Config.formation.fields.officialFormationDocument.overrides.nonprofit.cost);
 
