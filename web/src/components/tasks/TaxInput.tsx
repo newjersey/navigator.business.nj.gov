@@ -24,7 +24,7 @@ interface Props {
 
 export const TaxInput = (props: Props): ReactElement => {
   const { business, updateQueue } = useUserData();
-  const { isAuthenticated } = useContext(NeedsAccountContext);
+  const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
   const [profileData, setProfileData] = useState<ProfileData>(
     business?.profileData ?? createEmptyProfileData()
@@ -106,6 +106,23 @@ export const TaxInput = (props: Props): ReactElement => {
     </div>
   );
 
+  const getNeedsAccountModalFunction = (): (() => void) | undefined => {
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      return () => {
+        return setShowNeedsAccountModal(true);
+      };
+    }
+    return undefined;
+  };
+
+  const onSave = (): void => {
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      setShowNeedsAccountModal(true);
+    } else {
+      onSubmit();
+    }
+  };
+
   return (
     <profileFormContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
@@ -126,11 +143,14 @@ export const TaxInput = (props: Props): ReactElement => {
               </Alert>
             ) : (
               <>
-                <TaxId required />
+                <TaxId
+                  required={isAuthenticated === IsAuthenticated.TRUE}
+                  handleChangeOverride={getNeedsAccountModalFunction()}
+                />
                 <div className="tablet:margin-top-05 tablet:margin-left-2">
                   <SecondaryButton
                     isColor="primary"
-                    onClick={onSubmit}
+                    onClick={onSave}
                     isLoading={isLoading}
                     isSubmitButton={true}
                     isRightMarginRemoved={true}
