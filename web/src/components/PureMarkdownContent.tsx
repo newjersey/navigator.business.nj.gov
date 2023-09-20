@@ -40,7 +40,6 @@ function customRemarkPlugin():
         switch (node.name) {
           case "cannabisLocationAlert":
           case "greenBox":
-          case "infoAlert":
           case "note":
             data.hProperties = { header: node.attributes.header };
             break;

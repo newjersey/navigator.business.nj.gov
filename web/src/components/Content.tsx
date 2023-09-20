@@ -57,11 +57,7 @@ export const Content = (props: ContentProps): ReactElement => {
       );
     },
     infoAlert: (props: any): ReactElement => {
-      return (
-        <Alert variant="info" heading={props.header}>
-          {props.children}
-        </Alert>
-      );
+      return <Alert variant="info">{props.children}</Alert>;
     },
     cannabisLocationAlert: (): ReactElement => (
       <CannabisLocationAlert industryId={business?.profileData.industryId} />
