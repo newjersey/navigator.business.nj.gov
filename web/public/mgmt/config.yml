@@ -3811,11 +3811,6 @@ collections:
                               value_field: "{{filename}}",
                               display_fields: ["{{displayname}}"],
                             }
-                          - {
-                              label: "Error Text (Oscar Onboarding Only)",
-                              name: "errorTextRequired",
-                              widget: "string",
-                            }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
                       - label: Onboarding Specific
                         name: "onboarding"
@@ -4140,11 +4135,6 @@ collections:
                               options_length: 500,
                               value_field: "{{filename}}",
                               display_fields: ["{{displayname}}"],
-                            }
-                          - {
-                              label: "Error Text (when not set)",
-                              name: "errorTextRequired",
-                              widget: "string",
                             }
                           - { label: "Description", name: "description", widget: "markdown", required: false }
                       - label: Overrides

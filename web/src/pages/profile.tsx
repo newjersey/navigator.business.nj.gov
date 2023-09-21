@@ -248,11 +248,6 @@ const ProfilePage = (props: Props): ReactElement => {
     }
   };
 
-  const isBusinessNameRequired = (): boolean => {
-    if (!business) return false;
-    return LookupOperatingPhaseById(business.profileData.operatingPhase).businessNameRequired;
-  };
-
   const shouldShowNexusBusinessNameElements = (): boolean => {
     if (!business) return false;
     return LookupLegalStructureById(business.profileData.legalStructureId).elementsToDisplay.has(
@@ -480,7 +475,7 @@ const ProfilePage = (props: Props): ReactElement => {
           locked={shouldLockFormationFields}
           isVisible={!shouldShowTradeNameElements()}
         >
-          <BusinessName required={isBusinessNameRequired()} />
+          <BusinessName />
         </ProfileField>
         <ProfileField
           fieldName="responsibleOwnerName"
@@ -548,7 +543,7 @@ const ProfilePage = (props: Props): ReactElement => {
               .displayCompanyDemographicProfileFields
           }
         >
-          <ExistingEmployees required />
+          <ExistingEmployees />
         </ProfileField>
       </>
     ),

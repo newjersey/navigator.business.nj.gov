@@ -67,7 +67,7 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
               inputWidth={"reduced"}
               required={true}
               error
-              validationText={mergedConfig.profileDefaults.fields.businessName.default.errorTextRequired}
+              validationText={mergedConfig.profileDefaults.fields.dateOfFormation.default.errorTextRequired}
             />
           </ProfileField>
         </WithErrorBar>
