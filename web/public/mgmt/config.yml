@@ -3059,6 +3059,10 @@ collections:
         name: "config"
         file: "content/src/fieldConfig/config.json"
         fields:
+          - label: Skip to main content
+            name: skipToMainContent
+            collapsed: true
+            widget: string
           - label: Beta Bar
             name: betaBar
             collapsed: true

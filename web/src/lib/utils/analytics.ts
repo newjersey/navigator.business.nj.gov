@@ -218,7 +218,8 @@ type Item =
   | "opportunity_card"
   | "hidden_opportunities_section"
   | "link_with_myNJ"
-  | "landing_page";
+  | "landing_page"
+  | "skip_to_main_content";
 
 type BooleanResponseOption = "yes" | "no";
 
@@ -1921,6 +1922,20 @@ export default {
             legacy_event_label: "open_live_chat",
             click_text: "share_feedback",
             clicked_to: "live_chat",
+          });
+        },
+      },
+    },
+    skip_to_main_content: {
+      click: {
+        skip_to_main_content: () => {
+          eventRunner.track({
+            event: "link_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "skip_to_main_content_button",
+            legacy_event_label: "skip_to_main_content",
+            click_text: "skip to main content",
+            item: "skip_to_main_content",
           });
         },
       },

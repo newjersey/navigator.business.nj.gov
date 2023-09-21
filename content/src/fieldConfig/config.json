@@ -21,6 +21,9 @@
     "requiredTasksSingular": "${numTasks} required task",
     "requiredTasksPlural": "${numTasks} required tasks"
   },
+  "skipToMainContent": {
+    "buttonText": "Skip to main content"
+  },
   "betaBar": {
     "betaModalButtonText": "Share your feedback!",
     "betaMainText": "This site is in beta."
