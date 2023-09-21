@@ -11,7 +11,7 @@ If your business registration information has changed since you last updated you
 
 Depending on the type of changes, this may include updating your business charter or obtaining a new `Business Registration Certificate (BRC)|business-reg-certificate` .
 
-**Update Your Tax and Employer Information**
+Update Your Tax and Employer Information
 
 Use the DORES’ online [Registry Change Service](https://www20.state.nj.us/TYTR_REGC/servlet/common/Login) to make the following changes to your tax and employer information:
 
@@ -26,9 +26,8 @@ Use the DORES’ online [Registry Change Service](https://www20.state.nj.us/TYTR
 
 * `Taxpayer ID|tax-id` 
 
-<contextual link>PIN
-
- `EIN|ein` 
+* PIN
+*  `EIN|ein` 
 
 **Update Your Business Registration**
 
