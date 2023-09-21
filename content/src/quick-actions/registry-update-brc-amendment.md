@@ -27,8 +27,7 @@ Use the DORES’ online [Registry Change Service](https://www20.state.nj.us/TYTR
 * `Taxpayer ID|tax-id` 
 
 * PIN
-
-* `EIN|ein` 
+*  `EIN|ein` 
 
 **Update Your Business Registration**
 
