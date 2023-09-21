@@ -73,4 +73,8 @@ describe("DynamicsAccessTokenClient", () => {
     mockAxios.post.mockResolvedValue({ data: {} });
     expect(await client.getAccessToken()).toEqual("");
   });
+
+  it("throws an error if the request fails", () => {
+    mockAxios.post.mockRejectedValue({ status: 400 });
+  });
 });

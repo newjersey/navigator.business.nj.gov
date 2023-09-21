@@ -26,7 +26,7 @@ export const DynamicsAccessTokenClient = (logWriter: LogWriterType): AccessToken
       })
       .catch((error: AxiosError) => {
         logWriter.LogError(`Dynamics Access Token Client - Id:${logId} - Error:`, error);
-        throw error.response?.status;
+        //throw error.response?.status;
       });
   };
 
@@ -34,3 +34,24 @@ export const DynamicsAccessTokenClient = (logWriter: LogWriterType): AccessToken
     getAccessToken,
   };
 };
+
+
+const result = async function (){
+  try {
+    const data = await doAsync();
+  }
+  catch (err) {
+    console.log(err)
+  }
+
+}
+
+const a = ()=>{
+
+  throw => value
+
+  throw new Error('message')
+
+  catch*()
+  // parent catch, execute that
+}
