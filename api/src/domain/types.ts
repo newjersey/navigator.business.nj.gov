@@ -61,8 +61,46 @@ export type EncryptTaxId = (userData: UserData) => Promise<UserData>;
 export type AddNewsletter = (userData: UserData) => Promise<UserData>;
 export type AddToUserTesting = (userData: UserData) => Promise<UserData>;
 
+export interface AccessTokenClient {
+  getAccessToken: () => Promise<string>;
+}
+
+export interface BusinessIdClient {
+  getBusinessId: (accessToken: string, nameToSearch: string) => Promise<string>;
+}
+
+export interface BusinessAddressClient {
+  getBusinessAddresses: (accessToken: string, businessId: string) => Promise<BusinessAddressResponse[]>;
+}
+
+export type BusinessAddressResponse = {
+  addressLine1: string;
+  addressCity: string;
+  addressState: string;
+  addressCounty: string;
+  addressZipCode: string;
+};
+
+export interface LicenseApplicationIdClient {
+  getLicenseApplicationId: (
+    accessToken: string,
+    businessId: string,
+    industryName: string
+  ) => Promise<LicenseApplicationIdResponse>;
+}
+
+export type LicenseApplicationIdResponse = {
+  applicationNumber: string;
+  licenseNumber: string;
+  issueDate: string;
+  expirationDate: string;
+  applicationId: string;
+  licenseStatusCode: string;
+};
+
 export interface LicenseStatusClient {
   search: (name: string, zipCode: string, licenseType: string) => Promise<LicenseEntity[]>;
+  //determineLicenseStatus: (licenseStatus: string) => LicenseStatus;
 }
 
 export interface UserTestingClient {

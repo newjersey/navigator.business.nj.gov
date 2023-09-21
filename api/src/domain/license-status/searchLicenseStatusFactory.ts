@@ -51,6 +51,7 @@ export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusCli
 };
 
 export const determineLicenseStatus = (value: string): LicenseStatus => {
+  // add new filter mappings
   switch (value) {
     case "Active":
       return "ACTIVE";

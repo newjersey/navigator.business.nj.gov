@@ -29,9 +29,39 @@ export const WebserviceLicenseStatusClient = (
       })
       .catch((error: AxiosError) => {
         logWriter.LogError(`License Status Search - Id:${logId} - Error:`, error);
+        console.log(error.response?.status);
         throw error.response?.status;
       });
   };
+
+  // const determineLicenseStatus = (licenseStatus: string): LicenseStatus => {
+  //   switch (licenseStatus) {
+  //     case "Active":
+  //       return "ACTIVE";
+  //     case "Pending":
+  //       return "PENDING";
+  //     case "Expired":
+  //       return "EXPIRED";
+  //     case "Barred":
+  //       return "BARRED";
+  //     case "Out of Business":
+  //       return "OUT_OF_BUSINESS";
+  //     case "Reinstatement Pending":
+  //       return "REINSTATEMENT_PENDING";
+  //     case "Closed":
+  //       return "CLOSED";
+  //     case "Deleted":
+  //       return "DELETED";
+  //     case "Denied":
+  //       return "DENIED";
+  //     case "Voluntary Surrender":
+  //       return "VOLUNTARY_SURRENDER";
+  //     case "Withdrawn":
+  //       return "WITHDRAWN";
+  //     default:
+  //       return "UNKNOWN";
+  //   }
+  // };
 
   return {
     search,

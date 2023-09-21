@@ -23,7 +23,14 @@ export type LicenseStatus =
   | "DELETED"
   | "DENIED"
   | "VOLUNTARY_SURRENDER"
-  | "WITHDRAWN";
+  | "WITHDRAWN"
+  | "DRAFT"
+  | "SUBMITTED"
+  | "UNDER_INTERNAL_REVIEW"
+  | "SPECIAL_REVIEW"
+  | "PENDING_DEFICIENCIES"
+  | "DEFICIENCIES_SUBMITTED"
+  | "CHECKLIST_COMPLETED";
 
 export interface LicenseData {
   nameAndAddress: NameAndAddress;
