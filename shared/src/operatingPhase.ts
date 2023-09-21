@@ -11,7 +11,6 @@ export interface OperatingPhase {
   readonly displayAltHomeBasedBusinessDescription: boolean;
   readonly municipalityRequiredForTradeName: boolean;
   readonly municipalityRequiredForPublicFiling: boolean;
-  readonly businessNameRequired: boolean;
   readonly displayProfileOpportunityAlert: boolean;
   readonly sectorRequired: boolean;
   readonly displayBusinessStructurePrompt: boolean;
@@ -49,7 +48,6 @@ export const LookupOperatingPhaseById = (id: OperatingPhaseId | undefined): Oper
       displayAltHomeBasedBusinessDescription: false,
       municipalityRequiredForTradeName: true,
       municipalityRequiredForPublicFiling: true,
-      businessNameRequired: false,
       displayProfileOpportunityAlert: false,
       sectorRequired: false,
       displayBusinessStructurePrompt: false,
@@ -74,7 +72,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayAltHomeBasedBusinessDescription: true,
     municipalityRequiredForTradeName: false,
     municipalityRequiredForPublicFiling: false,
-    businessNameRequired: false,
     displayProfileOpportunityAlert: false,
     displayBusinessStructurePrompt: true,
     displayHomeBasedPrompt: false,
@@ -95,7 +92,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayAltHomeBasedBusinessDescription: true,
     municipalityRequiredForTradeName: false,
     municipalityRequiredForPublicFiling: false,
-    businessNameRequired: false,
     displayProfileOpportunityAlert: false,
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: true,
@@ -116,7 +112,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayAltHomeBasedBusinessDescription: true,
     municipalityRequiredForTradeName: false,
     municipalityRequiredForPublicFiling: false,
-    businessNameRequired: false,
     displayProfileOpportunityAlert: true,
     sectorRequired: true,
     displayBusinessStructurePrompt: false,
@@ -137,7 +132,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayAltHomeBasedBusinessDescription: true,
     municipalityRequiredForTradeName: true,
     municipalityRequiredForPublicFiling: true,
-    businessNameRequired: true,
     displayProfileOpportunityAlert: false,
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: true,
@@ -158,7 +152,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayAltHomeBasedBusinessDescription: true,
     municipalityRequiredForTradeName: false, // situation never occurs
     municipalityRequiredForPublicFiling: false,
-    businessNameRequired: false,
     displayProfileOpportunityAlert: false,
     sectorRequired: false,
     displayBusinessStructurePrompt: false,
@@ -179,7 +172,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayAltHomeBasedBusinessDescription: true,
     municipalityRequiredForTradeName: false, // situation never occurs
     municipalityRequiredForPublicFiling: false,
-    businessNameRequired: false,
     displayProfileOpportunityAlert: false,
     displayBusinessStructurePrompt: true,
     displayHomeBasedPrompt: false,
@@ -200,7 +192,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayAltHomeBasedBusinessDescription: true,
     municipalityRequiredForTradeName: false,
     municipalityRequiredForPublicFiling: true,
-    businessNameRequired: false,
     displayProfileOpportunityAlert: false,
     sectorRequired: false,
     displayBusinessStructurePrompt: false,
@@ -221,7 +212,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayAltHomeBasedBusinessDescription: false,
     municipalityRequiredForTradeName: true,
     municipalityRequiredForPublicFiling: true,
-    businessNameRequired: true,
     displayProfileOpportunityAlert: true,
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: false,
@@ -242,7 +232,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayAltHomeBasedBusinessDescription: false,
     municipalityRequiredForTradeName: false,
     municipalityRequiredForPublicFiling: false,
-    businessNameRequired: false,
     displayProfileOpportunityAlert: true,
     sectorRequired: true,
     displayBusinessStructurePrompt: false,

@@ -790,11 +790,12 @@ describe("profile - starting business", () => {
       expect(screen.getByLabelText("Ownership")).toBeInTheDocument();
     });
 
-    it("prevents user from saving if existing employees field is empty", async () => {
+    it("allows user to save if existing employees field is empty", async () => {
       const initialBusiness = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           operatingPhase: "FORMED_AND_REGISTERED",
+          existingEmployees: "1",
         }),
       });
       renderPage({ business: initialBusiness });
@@ -804,9 +805,7 @@ describe("profile - starting business", () => {
       clickSave();
 
       await waitFor(() => {
-        expect(
-          screen.getByText(Config.profileDefaults.fields.existingEmployees.default.errorTextRequired)
-        ).toBeInTheDocument();
+        expect(currentBusiness().profileData.existingEmployees).toEqual("");
       });
     });
   });
@@ -948,34 +947,10 @@ describe("profile - starting business", () => {
     expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
   });
 
-  describe("business name required", () => {
-    const required: OperatingPhaseId[] = ["FORMED_AND_REGISTERED", "UP_AND_RUNNING"];
-    const notRequired: OperatingPhaseId[] = ["GUEST_MODE", "NEEDS_TO_FORM", "NEEDS_TO_REGISTER_FOR_TAXES"];
+  describe("business name not required", () => {
+    const allOperatingPhases: OperatingPhaseId[] = OperatingPhases.map((it) => it.id);
 
-    for (const phase of required) {
-      it(`prevents user from saving if business name in ${phase} phase`, async () => {
-        const business = generateBusinessForProfile({
-          profileData: generateProfileData({
-            businessPersona: "STARTING",
-            operatingPhase: phase,
-            businessName: "",
-            legalStructureId: "limited-liability-company",
-          }),
-        });
-        renderPage({ business });
-        fireEvent.blur(screen.getByLabelText("Business name") as HTMLElement);
-
-        clickSave();
-        await waitFor(() => {
-          expect(
-            screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
-          ).toBeInTheDocument();
-        });
-        expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
-      });
-    }
-
-    for (const phase of notRequired) {
+    for (const phase of allOperatingPhases) {
       it(`allows user to save with empty business name in ${phase} phase`, async () => {
         const business = generateBusinessForProfile({
           profileData: generateProfileData({
