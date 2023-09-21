@@ -4,6 +4,7 @@ import { LegalMessage } from "@/components/LegalMessage";
 import { Banner } from "@/components/njwds/Banner";
 import { OutageAlertBar } from "@/components/OutageAlertBar";
 import { ReportAnIssueBar } from "@/components/ReportAnIssueBar";
+import { SkipToMainContent } from "@/components/SkipToMainContent";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import React, { ReactElement } from "react";
 
@@ -18,13 +19,7 @@ export const PageSkeleton = (props: Props): ReactElement => {
   return (
     <>
       <section aria-label="Official government website">
-        {!props.landingPage && (
-          <div>
-            <a className="skip-link" href="#main">
-              Skip to main content
-            </a>
-          </div>
-        )}
+        {!props.landingPage && <SkipToMainContent />}
         <Banner />
         <OutageAlertBar />
         <BetaBar />

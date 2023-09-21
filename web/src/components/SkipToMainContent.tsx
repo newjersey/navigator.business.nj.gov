@@ -1,0 +1,19 @@
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import analytics from "@/lib/utils/analytics";
+import { ReactElement } from "react";
+
+export const SkipToMainContent = (): ReactElement => {
+  const { Config } = useConfig();
+
+  return (
+    <div>
+      <a
+        className="skip-link"
+        href="#main"
+        onClick={analytics.event.skip_to_main_content.click.skip_to_main_content}
+      >
+        {Config.skipToMainContent.buttonText}
+      </a>
+    </div>
+  );
+};
