@@ -17,6 +17,7 @@ export interface OperatingPhase {
   readonly displayBusinessStructurePrompt: boolean;
   readonly displayHomeBasedPrompt: boolean;
   readonly displayGoToProfileNudge: boolean;
+  readonly displayQuickActions: boolean;
 }
 
 export type OperatingPhaseId =
@@ -54,6 +55,7 @@ export const LookupOperatingPhaseById = (id: OperatingPhaseId | undefined): Oper
       displayBusinessStructurePrompt: false,
       displayHomeBasedPrompt: false,
       displayGoToProfileNudge: false,
+      displayQuickActions: false,
     }
   );
 };
@@ -78,6 +80,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayHomeBasedPrompt: false,
     sectorRequired: false,
     displayGoToProfileNudge: false,
+    displayQuickActions: false,
   },
   {
     id: "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
@@ -98,6 +101,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayHomeBasedPrompt: true,
     sectorRequired: false,
     displayGoToProfileNudge: false,
+    displayQuickActions: false,
   },
   {
     id: "GUEST_MODE_OWNING",
@@ -118,6 +122,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: false,
     displayGoToProfileNudge: true,
+    displayQuickActions: true,
   },
   {
     id: "FORMED_AND_REGISTERED",
@@ -138,6 +143,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayHomeBasedPrompt: true,
     sectorRequired: false,
     displayGoToProfileNudge: false,
+    displayQuickActions: false,
   },
   {
     id: "NEEDS_TO_FORM",
@@ -158,6 +164,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: true,
     displayGoToProfileNudge: false,
+    displayQuickActions: false,
   },
   {
     id: "NEEDS_BUSINESS_STRUCTURE",
@@ -178,6 +185,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayHomeBasedPrompt: false,
     sectorRequired: false,
     displayGoToProfileNudge: false,
+    displayQuickActions: false,
   },
   {
     id: "NEEDS_TO_REGISTER_FOR_TAXES",
@@ -198,6 +206,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: true,
     displayGoToProfileNudge: false,
+    displayQuickActions: false,
   },
   {
     id: "UP_AND_RUNNING",
@@ -218,6 +227,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayHomeBasedPrompt: false,
     sectorRequired: true,
     displayGoToProfileNudge: true,
+    displayQuickActions: true,
   },
   {
     id: "UP_AND_RUNNING_OWNING",
@@ -238,5 +248,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayBusinessStructurePrompt: false,
     displayHomeBasedPrompt: false,
     displayGoToProfileNudge: true,
+    displayQuickActions: true,
   },
 ];

@@ -1,9 +1,10 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-import { OperateReference, RoadmapDisplayContent, SidebarCardContent } from "@/lib/types/types";
+import { OperateReference, QuickAction, RoadmapDisplayContent, SidebarCardContent } from "@/lib/types/types";
 import DashboardPage from "@/pages/dashboard";
 import {
   generateBusinessPersona,
+  generateQuickAction,
   generateSidebarCardContent,
   generateStep,
   generateTask,
@@ -82,9 +83,11 @@ describe("dashboard page", () => {
   const renderDashboardPage = ({
     sidebarDisplayContent,
     operateReferences,
+    quickActions,
   }: {
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     operateReferences?: Record<string, OperateReference>;
+    quickActions?: QuickAction[] | undefined;
   }): void => {
     render(
       <ThemeProvider theme={createTheme()}>
@@ -94,6 +97,7 @@ describe("dashboard page", () => {
           fundings={[]}
           certifications={[]}
           municipalities={[]}
+          quickActions={quickActions ?? []}
         />
       </ThemeProvider>
     );
@@ -111,6 +115,7 @@ describe("dashboard page", () => {
             fundings={[]}
             certifications={[]}
             municipalities={[]}
+            quickActions={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>
@@ -605,6 +610,34 @@ describe("dashboard page", () => {
       setDesktopScreen(true);
       renderStatefulPage(generateBusiness({ preferences: generatePreferences({ phaseNewlyChanged: true }) }));
       expect(screen.queryByTestId("for-you-indicator")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("quick actions", () => {
+    const operatingPhasesWithQuickActions = OperatingPhases.filter((phase: OperatingPhase) => {
+      return phase.displayQuickActions;
+    }).map((phase) => phase.id);
+
+    const operatingPhasesWithoutQuickActions = OperatingPhases.filter((phase: OperatingPhase) => {
+      return !phase.displayQuickActions;
+    }).map((phase) => phase.id);
+
+    it.each(operatingPhasesWithoutQuickActions)("does not display quick actions for %s", (phase) => {
+      useMockProfileData({ operatingPhase: phase });
+      renderDashboardPage({ quickActions: [generateQuickAction({ name: "some quick action" })] });
+      expect(screen.queryByText("some quick action")).not.toBeInTheDocument();
+    });
+
+    it.each(operatingPhasesWithQuickActions)("displays all quick actions for %s", (phase) => {
+      useMockProfileData({ operatingPhase: phase });
+      renderDashboardPage({
+        quickActions: [
+          generateQuickAction({ name: "some quick action" }),
+          generateQuickAction({ name: "another quick action" }),
+        ],
+      });
+      expect(screen.getByText("another quick action")).toBeInTheDocument();
+      expect(screen.getByText("some quick action")).toBeInTheDocument();
     });
   });
 

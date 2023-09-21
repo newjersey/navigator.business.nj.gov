@@ -11,6 +11,7 @@ export * from "./domain-logic/hasCompletedBusinessStructure";
 export * from "./domain-logic/hasCompletedFormation";
 export * from "./domain-logic/onboarding";
 export * from "./domain-logic/opportunityFields";
+export * from "./domain-logic/sidebarCards";
 export * from "./domain-logic/taskIds";
 export * from "./formationData";
 export * from "./fundingAgency";
