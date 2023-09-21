@@ -36,7 +36,7 @@ Use the amended [Business Registration Application](https://www.nj.gov/treasury/
 * A registered trade or alternate name 
 * A change of ownership (General Partnerships or Sole Proprietorships), officers (Corporations), or members (Limited Liability Companies)
 
-### Required Information
+#### Required Information
 
 * `EIN |EIN` (“FEIN” in the form)
 * Reason for amendment
