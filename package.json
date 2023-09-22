@@ -97,12 +97,12 @@
     "unist-util-visit": "4.1.2",
     "uuid": "9.0.1",
     "winston": "3.10.0",
-    "winston-cloudwatch": "6.1.1",
+    "winston-cloudwatch": "6.2.0",
     "xml2js": "0.6.2"
   },
   "devDependencies": {
     "@aws-sdk/types": "3.413.0",
-    "@babel/core": "7.22.19",
+    "@babel/core": "7.22.20",
     "@businessnjgovnavigator/shared": "*",
     "@commitlint/cli": "17.7.1",
     "@commitlint/config-conventional": "17.7.0",
@@ -170,7 +170,7 @@
     "cross-env": "7.0.3",
     "cspell": "7.3.6",
     "css-loader": "6.8.1",
-    "cypress": "12.17.4",
+    "cypress": "13.2.0",
     "cypress-dotenv": "2.0.0",
     "cypress-wait-until": "2.0.1",
     "dependency-cruiser": "13.1.5",

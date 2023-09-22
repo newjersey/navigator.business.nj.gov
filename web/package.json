@@ -89,7 +89,7 @@
     "unist-util-visit": "4.1.2"
   },
   "devDependencies": {
-    "@babel/core": "7.22.19",
+    "@babel/core": "7.22.20",
     "@cypress-audit/lighthouse": "1.4.2",
     "@cypress-audit/pa11y": "1.4.2",
     "@jest/types": "29.6.3",
@@ -141,7 +141,7 @@
     "cross-env": "7.0.3",
     "cspell": "7.3.6",
     "css-loader": "6.8.1",
-    "cypress": "12.17.4",
+    "cypress": "13.2.0",
     "cypress-dotenv": "2.0.0",
     "cypress-wait-until": "2.0.1",
     "dependency-cruiser": "13.1.5",
