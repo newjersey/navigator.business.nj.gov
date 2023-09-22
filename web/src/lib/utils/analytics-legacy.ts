@@ -113,6 +113,7 @@ export type LegacyEventCategory =
   | "landing_page"
   | "for_you_card_hide_button"
   | "for_you_card_unhide_button"
+  | "quick_action_button"
   | "skip_to_main_content_button";
 
 export type LegacyEventAction =
@@ -232,4 +233,5 @@ export type LegacyEventLabel =
   | "hide_card"
   | "unhide_card"
   | "unhide_cards"
+  | "go_to_quick_action_screen"
   | "skip_to_main_content";
