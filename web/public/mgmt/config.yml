@@ -2489,7 +2489,6 @@ collections:
                   hint: This field supports Markdown,
                 }
               - { label: naics.com Link, name: naicsLink, widget: string, hint: This field supports Markdown }
-              - { label: Input Label, name: inputLabel, widget: string, hint: This field supports Markdown }
               - { label: Save Button Text, name: saveButtonText, widget: string }
               - { label: Invalid Validation Error Text, name: invalidValidationErrorText, widget: string }
               - { label: Length Validation Error Text, name: lengthValidationErrorText, widget: string }
@@ -2506,6 +2505,40 @@ collections:
                   widget: string,
                 }
               - { label: NAICS Description External URL, name: naicsDescriptionURL, widget: string }
+
+      - label: "NAICS Code Input"
+        name: "naics-code-input"
+        file: "content/src/fieldConfig/profile.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: "profileDefaults"
+            collapsed: false
+            widget: object
+            fields:
+              - label: Fields
+                name: "fields"
+                collapsed: false
+                widget: object
+                fields:
+                  - label: NAICS Code
+                    name: naicsCode
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header (shared on profile/task)", name: "header", widget: "string" }
+                          - {
+                              label: "Alt Description Text - Renders On Task Page",
+                              name: "altDescription",
+                              widget: "string",
+                            }
+
   - name: "business-structure-section"
     label: "Tasks - Business Structure"
     delete: false
@@ -4407,6 +4440,11 @@ collections:
                           - { label: "Edit Text", name: "editText", widget: "string" }
                           - { label: "Add Text", name: "addText", widget: "string" }
                           - { label: "Not Entered Text", name: "notEnteredText", widget: "string" }
+                          - {
+                              label: "Alt Description Text - Renders On Task Page",
+                              name: "altDescription",
+                              widget: "string",
+                            }
                   - label: Date of Formation
                     name: dateOfFormation
                     collapsed: true

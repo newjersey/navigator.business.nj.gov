@@ -105,7 +105,6 @@ const CMS = dynamic(
       registerPreview(CMS, "nexus-name-search", NexusNameSearchPreview);
       registerPreview(CMS, "nexus-dba-formation", NexusDbaFormationPreview);
 
-      registerPreview(CMS, "naics-code-lookup", NaicsLookupPreview);
       registerPreview(CMS, "ein-input-section", EinInputPreview);
       registerPreview(CMS, "tax-input-section", TaxInputPreview);
       registerPreview(CMS, "business-structure-selection", BusinessStructurePreview);
@@ -122,6 +121,10 @@ const CMS = dynamic(
       // ----- Formation -----
       registerPreview(CMS, "business-formation-interim-success-page", FormationInterimSuccessPreview);
       registerPreview(CMS, "business-formation-success-page", FormationSuccessPreview);
+
+      // Naics Code
+      registerPreview(CMS, "naics-code-lookup", NaicsLookupPreview);
+      registerPreview(CMS, "naics-code-input", NaicsLookupPreview);
 
       // ----- Config --------
       registerPreview(CMS, "dashboard-config-snackbars", DashboardSnackbarsPreview);
