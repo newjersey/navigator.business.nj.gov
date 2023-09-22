@@ -1,4 +1,5 @@
 import { ROUTES } from "@/lib/domain-logic/routes";
+import analytics from "@/lib/utils/analytics";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
@@ -11,6 +12,7 @@ export const QuickActionTile = (props: Props): ReactElement => {
   const router = useRouter();
 
   const routeToAction = (): void => {
+    analytics.event.quick_action_button.click.go_to_quick_action_screen();
     router.push(`${ROUTES.quickActions}/${props.url}`);
   };
 
