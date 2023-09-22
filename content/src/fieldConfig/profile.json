@@ -129,7 +129,6 @@
         "default": {
           "header": "Business Name",
           "headerContextualInfo": "",
-          "errorTextRequired": "Please enter your business name.",
           "description": ""
         }
       },
@@ -310,8 +309,7 @@
       "existingEmployees": {
         "default": {
           "header": "Current Number of NJ Employees",
-          "description": "If you have no employees right now enter 0. You can change this as you add employees.",
-          "errorTextRequired": "Please enter number of NJ employees or enter 0."
+          "description": "If you have no employees right now enter 0. You can change this as you add employees."
         },
         "overrides": {
           "OWNING": {
