@@ -1,88 +1,38 @@
-import { Content } from "@/components/Content";
-import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
-import { FormationField } from "@/components/tasks/business-formation/FormationField";
-import { WithErrorBar } from "@/components/WithErrorBar";
+import { FormationRadio } from "@/components/tasks/business-formation/business/FormationRadio";
+import { FormationTextArea } from "@/components/tasks/business-formation/business/FormationTextArea";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { FormationFields, FormationTextField } from "@businessnjgovnavigator/shared";
-import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from "@mui/material";
 import { ReactElement, ReactNode, useContext } from "react";
 
 export const PartnershipRights = (): ReactElement => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { Config } = useConfig();
-  const { doesFieldHaveError } = useFormationErrors();
 
-  const getTextField = (fieldName: FormationTextField): ReactNode => {
+  const getTextArea = (fieldName: FormationTextField): ReactNode => {
     return (
-      <div className="margin-top-1">
-        <FormationField fieldName={fieldName}>
-          <BusinessFormationTextField
-            fieldName={fieldName}
-            required={true}
-            errorBarType="ALWAYS"
-            validationText={Config.formation.general.genericErrorText}
-            label={Config.formation.partnershipRights.description}
-            fieldOptions={{
-              multiline: true,
-              rows: 3,
-              className: "override-padding",
-              inputProps: {
-                maxLength: 400,
-                sx: {
-                  padding: "1rem",
-                },
-              },
-            }}
-          />
-        </FormationField>
-        <div className="text-base-dark margin-top-1 margin-bottom-2">
-          {(state.formationFormData[fieldName] as string)?.length ?? 0} / {400}{" "}
-          {Config.formation.general.charactersLabel}
-        </div>
-      </div>
+      <FormationTextArea
+        fieldName={fieldName}
+        label={Config.formation.partnershipRights.description}
+        maxChars={400}
+      />
     );
   };
 
   const getRadio = (fieldName: FormationFields, title: string): ReactNode => {
-    const hasError = doesFieldHaveError(fieldName);
     return (
-      <WithErrorBar className="margin-top-2" hasError={hasError} type="ALWAYS">
-        <Content>{title}</Content>
-        <FormationField fieldName={fieldName}>
-          <FormControl error={hasError}>
-            <RadioGroup
-              aria-label={camelCaseToSentence(fieldName)}
-              name={camelCaseToSentence(fieldName)}
-              value={state.formationFormData[fieldName]?.toString() ?? ""}
-              onChange={(e): void => {
-                setFormationFormData({
-                  ...state.formationFormData,
-                  [fieldName]: JSON.parse(e.target.value),
-                });
-                setFieldsInteracted([fieldName]);
-              }}
-              row
-            >
-              <FormControlLabel
-                style={{ alignItems: "center" }}
-                value={"true"}
-                control={<Radio data-testid={`${fieldName}-true`} color={hasError ? "error" : "primary"} />}
-                label={Config.formation.partnershipRights.radioYesText}
-              />
-              <FormControlLabel
-                style={{ alignItems: "center" }}
-                value={"false"}
-                control={<Radio color={hasError ? "error" : "primary"} data-testid={`${fieldName}-false`} />}
-                label={Config.formation.partnershipRights.radioNoText}
-              />
-            </RadioGroup>
-            <FormHelperText>{hasError ? Config.formation.general.genericErrorText : ""}</FormHelperText>
-          </FormControl>
-        </FormationField>
-      </WithErrorBar>
+      <FormationRadio
+        fieldName={fieldName}
+        title={title}
+        values={["true", "false"]}
+        onChange={(e): void => {
+          setFormationFormData({
+            ...state.formationFormData,
+            [fieldName]: JSON.parse(e.target.value),
+          });
+          setFieldsInteracted([fieldName]);
+        }}
+      />
     );
   };
 
@@ -95,13 +45,13 @@ export const PartnershipRights = (): ReactElement => {
       </div>
 
       {getRadio("canCreateLimitedPartner", Config.formation.fields.canCreateLimitedPartner.body)}
-      {state.formationFormData.canCreateLimitedPartner && getTextField("createLimitedPartnerTerms")}
+      {state.formationFormData.canCreateLimitedPartner && getTextArea("createLimitedPartnerTerms")}
 
       {getRadio("canGetDistribution", Config.formation.fields.canGetDistribution.body)}
-      {state.formationFormData.canGetDistribution && getTextField("getDistributionTerms")}
+      {state.formationFormData.canGetDistribution && getTextArea("getDistributionTerms")}
 
       {getRadio("canMakeDistribution", Config.formation.fields.canMakeDistribution.body)}
-      {state.formationFormData.canMakeDistribution && getTextField("makeDistributionTerms")}
+      {state.formationFormData.canMakeDistribution && getTextArea("makeDistributionTerms")}
     </>
   );
 };
