@@ -66,21 +66,18 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
       <TaskHeader task={props.task} />
       <UnlockedBy task={props.task} />
       <Content>{preLookupContent}</Content>
-      {showInput && (
-        <div className="margin-y-4 bg-base-extra-light padding-2 radius-lg">
+      <div className="margin-y-4 bg-base-extra-light padding-3 radius-lg">
+        {showInput ? (
           <NaicsCodeInput onSave={onSave} task={props.task} isAuthenticated={isAuthenticated} />
-        </div>
-      )}
-      {!showInput && (
-        <div className="margin-y-4 bg-base-extra-light padding-2 radius-lg">
+        ) : (
           <NaicsCodeDisplay
             onEdit={onEdit}
             onRemove={onRemove}
             code={business?.profileData.naicsCode || ""}
             lockField={shouldLockField()}
           />
-        </div>
-      )}
+        )}
+      </div>
       <Content>{postLookupContent}</Content>
     </div>
   );

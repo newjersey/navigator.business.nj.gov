@@ -158,6 +158,11 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
           <FieldLabelOnboarding fieldName="naicsCode" />
           <NaicsCode />
 
+          <div className="margin-top-3">
+            <h4>----Input Label On Naics Code Task----</h4>
+            <FieldLabelProfile fieldName={"naicsCode"} isAltDescriptionDisplayed ignoreContextualInfo />
+          </div>
+
           <hr className="margin-y-4" />
           <FieldLabelOnboarding fieldName="dateOfFormation" />
           <DateOfFormation futureAllowed={false} />

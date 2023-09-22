@@ -207,7 +207,8 @@
           "headerContextualInfo": "naics",
           "editText": "Edit",
           "addText": "Add",
-          "notEnteredText": "Not entered"
+          "notEnteredText": "Not entered",
+          "altDescription": "Save your 6-digit NAICS code here so you can reference it later:"
         }
       },
       "isChildcareForSixOrMore": {

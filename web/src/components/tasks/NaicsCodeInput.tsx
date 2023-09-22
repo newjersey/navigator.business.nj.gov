@@ -1,9 +1,11 @@
 import { Content, ExternalLink } from "@/components/Content";
+import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { GenericTextField } from "@/components/GenericTextField";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { WithErrorBar } from "@/components/WithErrorBar";
+import { getMergedConfig } from "@/contexts/configContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
@@ -21,57 +23,70 @@ interface Props {
   CMS_ONLY_displayInput?: boolean; // for CMS only
 }
 
+type NaicsErrorTypes = "length" | "invalid";
+
+const Config = getMergedConfig();
+const errorMessages: Record<NaicsErrorTypes, string> = {
+  invalid: Config.determineNaicsCode.invalidValidationErrorText,
+  length: Config.determineNaicsCode.lengthValidationErrorText,
+};
+
+const REQUIRED_LENGTH = 6;
+
 export const NaicsCodeInput = (props: Props): ReactElement => {
-  const { Config } = useConfig();
-  type NaicsErrorTypes = "length" | "invalid";
-  const errorMessages: Record<NaicsErrorTypes, string> = {
-    invalid: Config.determineNaicsCode.invalidValidationErrorText,
-    length: Config.determineNaicsCode.lengthValidationErrorText,
-  };
-  const LENGTH = 6;
+  const userDataFromHook = useUserData();
+  const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
+  const updateQueue = userDataFromHook.updateQueue;
+  const { queueUpdateTaskProgress } = useUpdateTaskProgress();
+
   const [naicsCode, setNaicsCode] = useState<string>("");
   const [industryCodes, setIndustryCodes] = useState<string[]>([]);
   const [isInvalid, setIsInvalid] = useState<NaicsErrorTypes | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [displayInputState, setDisplayInput] = useState<boolean>(false);
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
-
-  const { queueUpdateTaskProgress } = useUpdateTaskProgress();
-  const userDataFromHook = useUserData();
-  const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
   const displayInput = props.CMS_ONLY_displayInput ?? displayInputState;
-  const updateQueue = userDataFromHook.updateQueue;
+  const saveButtonText =
+    props.isAuthenticated === IsAuthenticated.FALSE
+      ? `Register & ${Config.determineNaicsCode.saveButtonText}`
+      : Config.determineNaicsCode.saveButtonText;
 
   const getCode = (code: string): NaicsCodeObject | undefined => {
     return (NaicsCodes as NaicsCodeObject[]).find((element) => {
       return element?.SixDigitCode?.toString() === code;
     });
   };
-
   const getDescriptions = (codes: string[]): NaicsCodeObject[] => {
     return (NaicsCodes as NaicsCodeObject[]).filter((element) => {
       return codes.includes(element?.SixDigitCode?.toString() ?? "");
     });
   };
-
-  useMountEffectWhenDefined(() => {
-    if (!business) return;
-    setNaicsCode(business.profileData.naicsCode);
-    const industryNaicsCodes =
-      LookupIndustryById(business.profileData.industryId)
-        .naicsCodes?.replace(/\s/g, "")
-        .split(",")
-        .filter((value) => {
-          return value.length > 0;
-        }) ?? [];
-    setIndustryCodes(industryNaicsCodes);
-    const hasExistingCode = business.profileData.naicsCode.length > 0;
-    const existingCodeIsIndustryCode = industryNaicsCodes.includes(business.profileData.naicsCode);
-    if (industryNaicsCodes.length === 0 || (hasExistingCode && !existingCodeIsIndustryCode)) {
-      setDisplayInput(true);
+  const descriptions = useMemo(() => {
+    return getDescriptions(industryCodes ?? []);
+  }, [industryCodes]);
+  const getIndustryNaicsCodes = (industryId: string | undefined): string[] =>
+    LookupIndustryById(industryId)
+      .naicsCodes?.replace(/\s/g, "")
+      .split(",")
+      .filter((value) => {
+        return value.length > 0;
+      }) ?? [];
+  const handleTextInputChange = (value: string): void => {
+    if (isAuthenticated !== IsAuthenticated.TRUE) {
+      setShowNeedsAccountModal(true);
+      return;
     }
-  }, business);
-
+    setNaicsCode(value);
+    if (value.length === REQUIRED_LENGTH) {
+      if (getCode(value)) {
+        setIsInvalid(undefined);
+      } else {
+        setIsInvalid("invalid");
+      }
+    } else {
+      setIsInvalid(undefined);
+    }
+  };
   const saveNaicsCode = async (): Promise<void> => {
     if (isAuthenticated !== IsAuthenticated.TRUE) {
       setShowNeedsAccountModal(true);
@@ -82,7 +97,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
       return;
     }
 
-    if (naicsCode?.length !== LENGTH) {
+    if (naicsCode?.length !== REQUIRED_LENGTH) {
       setIsInvalid("length");
       return;
     }
@@ -107,25 +122,6 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
         setIsLoading(false);
       });
   };
-
-  const handleChange = (value: string): void => {
-    if (isAuthenticated !== IsAuthenticated.TRUE) {
-      setShowNeedsAccountModal(true);
-      return;
-    }
-
-    setNaicsCode(value);
-    if (value.length === LENGTH) {
-      if (getCode(value)) {
-        setIsInvalid(undefined);
-      } else {
-        setIsInvalid("invalid");
-      }
-    } else {
-      setIsInvalid(undefined);
-    }
-  };
-
   const setInProgress = (): void => {
     if (!updateQueue) {
       return;
@@ -133,19 +129,24 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
     updateQueue.queueTaskProgress({ [props.task.id]: "IN_PROGRESS" }).update();
   };
 
-  let saveButtonText = Config.determineNaicsCode.saveButtonText;
-  if (props.isAuthenticated === IsAuthenticated.FALSE) {
-    saveButtonText = `Register & ${saveButtonText}`;
-  }
+  useMountEffectWhenDefined(() => {
+    if (!business) return;
+    setNaicsCode(business.profileData.naicsCode);
+    setIndustryCodes(getIndustryNaicsCodes(business.profileData.industryId));
 
-  const descriptions = useMemo(() => {
-    return getDescriptions(industryCodes ?? []);
-  }, [industryCodes]);
+    if (
+      getIndustryNaicsCodes(business.profileData.industryId).length === 0 ||
+      (business.profileData.naicsCode.length > 0 &&
+        !getIndustryNaicsCodes(business.profileData.industryId).includes(business.profileData.naicsCode))
+    ) {
+      setDisplayInput(true);
+    }
+  }, business);
 
   return (
     <>
       <h2 className="text-normal">{Config.determineNaicsCode.findCodeHeader}</h2>
-      {industryCodes.length > 0 ? (
+      {industryCodes.length > 0 && (
         <>
           <Content>{Config.determineNaicsCode.suggestedCodeBodyText}</Content>
           <FormControl variant="outlined" fullWidth className="tablet:margin-left-205 margin-top-2">
@@ -211,11 +212,9 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
             </RadioGroup>
           </FormControl>
         </>
-      ) : (
-        <> </>
       )}
-      {displayInput ? (
-        <div className="tablet:margin-left-6">
+      {displayInput && (
+        <div className="tablet:margin-left-0">
           <Content>{Config.determineNaicsCode.findCodeBodyText}</Content>
           <ul>
             <li>
@@ -223,26 +222,26 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
             </li>
           </ul>
           <div>
-            <Content>{Config.determineNaicsCode.inputLabel}</Content>
-            <GenericTextField
-              inputWidth="reduced"
-              fieldName="naicsCode"
-              numericProps={{ maxLength: LENGTH }}
-              value={naicsCode}
-              ariaLabel="Save NAICS Code"
-              fieldOptions={{
-                inputProps: { style: { backgroundColor: "white" } },
-              }}
-              error={isInvalid !== undefined}
-              handleChange={handleChange}
-              validationText={errorMessages[isInvalid ?? "length"]}
-            />
+            <WithErrorBar hasError={!!isInvalid} type={"ALWAYS"}>
+              <FieldLabelProfile fieldName={"naicsCode"} isAltDescriptionDisplayed ignoreContextualInfo />
+              <GenericTextField
+                inputWidth="reduced"
+                fieldName="naicsCode"
+                numericProps={{ maxLength: REQUIRED_LENGTH }}
+                value={naicsCode}
+                ariaLabel="Save NAICS Code"
+                fieldOptions={{
+                  inputProps: { style: { backgroundColor: "white" } },
+                }}
+                error={isInvalid !== undefined}
+                handleChange={handleTextInputChange}
+                validationText={errorMessages[isInvalid ?? "length"]}
+              />
+            </WithErrorBar>
           </div>
         </div>
-      ) : (
-        <></>
       )}
-      {displayInput || naicsCode !== "" ? (
+      {(displayInput || naicsCode !== "") && (
         <>
           <hr className="margin-y-2" />
           <div className="flex flex-row margin-left-auto">
@@ -251,8 +250,6 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
             </SecondaryButton>
           </div>
         </>
-      ) : (
-        <></>
       )}
     </>
   );
