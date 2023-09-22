@@ -30,10 +30,14 @@ export const taxFilingRouterFactory = (
     const { encryptedTaxId, taxId, businessName } = req.body;
     try {
       const plainTextTaxId = await getTaxId(encryptionDecryptionClient, taxId, encryptedTaxId);
-      let userData = await userDataClient.get(userId);
-      userData = await taxFilingInterface.lookup({ userData, taxId: plainTextTaxId, businessName });
-      userData = await userDataClient.put(userData);
-      res.json(userData);
+      const userData = await userDataClient.get(userId);
+      const userDataWithTaxFilingData = await taxFilingInterface.lookup({
+        userData,
+        taxId: plainTextTaxId,
+        businessName,
+      });
+      const updatedUserData = await userDataClient.put(userDataWithTaxFilingData);
+      res.json(updatedUserData);
     } catch (error) {
       res.status(500).json({ error });
     }
@@ -44,10 +48,14 @@ export const taxFilingRouterFactory = (
     const { encryptedTaxId, taxId, businessName } = req.body;
     try {
       const plainTextTaxId = await getTaxId(encryptionDecryptionClient, taxId, encryptedTaxId);
-      let userData = await userDataClient.get(userId);
-      userData = await taxFilingInterface.onboarding({ userData, taxId: plainTextTaxId, businessName });
-      userData = await userDataClient.put(userData);
-      res.json(userData);
+      const userData = await userDataClient.get(userId);
+      const userDataWithTaxFilingData = await taxFilingInterface.onboarding({
+        userData,
+        taxId: plainTextTaxId,
+        businessName,
+      });
+      const updatedUserData = await userDataClient.put(userDataWithTaxFilingData);
+      res.json(updatedUserData);
     } catch (error) {
       res.status(500).json({ error });
     }

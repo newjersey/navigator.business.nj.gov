@@ -166,15 +166,15 @@ export const userRouterFactory = (
       userData = clearTaskItemChecklists(userData);
     }
 
-    userData = await updateLegalStructureIfNeeded(userData);
-    userData = getAnnualFilings(userData);
-    userData = updateOperatingPhase(userData);
-    userData = updateRoadmapSidebarCards(userData);
-    userData = await encryptTaxId(userData);
-    userData = setLastUpdatedISO(userData);
+    const userDataWithUpdatedLegalStructure = await updateLegalStructureIfNeeded(userData);
+    const userDataWithAnnualFilings = getAnnualFilings(userDataWithUpdatedLegalStructure);
+    const userDataWithUpdatedOperatingPhase = updateOperatingPhase(userDataWithAnnualFilings);
+    const userDataWithUpdatedSidebarCards = updateRoadmapSidebarCards(userDataWithUpdatedOperatingPhase);
+    const userDataWithEncryptedTaxId = await encryptTaxId(userDataWithUpdatedSidebarCards);
+    const userDataWithUpdatedISO = setLastUpdatedISO(userDataWithEncryptedTaxId);
 
     userDataClient
-      .put(userData)
+      .put(userDataWithUpdatedISO)
       .then((result: UserData) => {
         res.json(result);
       })
