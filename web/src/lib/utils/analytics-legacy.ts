@@ -112,7 +112,8 @@ export type LegacyEventCategory =
   | "finish_setup_on_myNewJersey_button"
   | "landing_page"
   | "for_you_card_hide_button"
-  | "for_you_card_unhide_button";
+  | "for_you_card_unhide_button"
+  | "skip_to_main_content_button";
 
 export type LegacyEventAction =
   | "click"
@@ -230,4 +231,5 @@ export type LegacyEventLabel =
   | "go_to_myNJ_registration"
   | "hide_card"
   | "unhide_card"
-  | "unhide_cards";
+  | "unhide_cards"
+  | "skip_to_main_content";
