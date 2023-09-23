@@ -510,9 +510,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-cloudwatch-logs@npm:3.414.0":
-  version: 3.414.0
-  resolution: "@aws-sdk/client-cloudwatch-logs@npm:3.414.0"
+"@aws-sdk/client-cloudwatch-logs@npm:3.417.0":
+  version: 3.417.0
+  resolution: "@aws-sdk/client-cloudwatch-logs@npm:3.417.0"
   dependencies:
     "@aws-crypto/sha256-browser": 3.0.0
     "@aws-crypto/sha256-js": 3.0.0
@@ -551,7 +551,8 @@ __metadata:
     "@smithy/util-retry": ^2.0.0
     "@smithy/util-utf8": ^2.0.0
     tslib: ^2.5.0
-  checksum: 166d56a9f02b5894c5a6437f49982ff1546da60b314eefb5d1edfda48a7e7303421528c8a9b302fd5a997c413e7559f5c4fb9eb755f845bf7f5c0f26686a0e19
+    uuid: ^8.3.2
+  checksum: 9b786f5854c619c1b782b18a4bce5dcaf25e1ad2027a84118257d71de9d3eae484cbca948ac81099dff3df6c6908148fd4005b01f7367bee13fbd78e34ae847d
   languageName: node
   linkType: hard
 
@@ -594,15 +595,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-dynamodb@npm:3.415.0":
-  version: 3.415.0
-  resolution: "@aws-sdk/client-dynamodb@npm:3.415.0"
+"@aws-sdk/client-dynamodb@npm:3.417.0":
+  version: 3.417.0
+  resolution: "@aws-sdk/client-dynamodb@npm:3.417.0"
   dependencies:
     "@aws-crypto/sha256-browser": 3.0.0
     "@aws-crypto/sha256-js": 3.0.0
     "@aws-sdk/client-sts": 3.414.0
     "@aws-sdk/credential-provider-node": 3.414.0
-    "@aws-sdk/middleware-endpoint-discovery": 3.415.0
+    "@aws-sdk/middleware-endpoint-discovery": 3.417.0
     "@aws-sdk/middleware-host-header": 3.413.0
     "@aws-sdk/middleware-logger": 3.413.0
     "@aws-sdk/middleware-recursion-detection": 3.413.0
@@ -638,7 +639,7 @@ __metadata:
     "@smithy/util-waiter": ^2.0.7
     tslib: ^2.5.0
     uuid: ^8.3.2
-  checksum: a0a18331c50fa3b99f3f3cf7658ca011d471bfc0c9a28aff220f29936f29045f6d5e5d776b688fd3a4544903644d0443709519f45b7033af031efdf4fce3ea23
+  checksum: 0e8cf3a4a8db8d6cf7dd9950b5d872cd9913cfdc9d221dd5303cb288fda11475289906db2eea0356c6464ba24ed9d769979cd2ee74cd8920a2b305767fa57a23
   languageName: node
   linkType: hard
 
@@ -735,9 +736,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-s3@npm:3.414.0":
-  version: 3.414.0
-  resolution: "@aws-sdk/client-s3@npm:3.414.0"
+"@aws-sdk/client-s3@npm:3.417.0":
+  version: 3.417.0
+  resolution: "@aws-sdk/client-s3@npm:3.417.0"
   dependencies:
     "@aws-crypto/sha1-browser": 3.0.0
     "@aws-crypto/sha256-browser": 3.0.0
@@ -794,7 +795,7 @@ __metadata:
     "@smithy/util-waiter": ^2.0.7
     fast-xml-parser: 4.2.5
     tslib: ^2.5.0
-  checksum: 37a7c7ba216e4526675d322e5b85362e52839f991b10381755f139537e5e37554d50809852ef42af707f15161d14081daf77660ecbaa63bc3caf2203b65c16d9
+  checksum: 298654db3c2429a35ca4a02b9fe8edc238d8366d446f65c32b79f0bae739de04e571b3958b948ff9ae45127ef74bfa92ca6b82b928931c5bb764e33dce1177c8
   languageName: node
   linkType: hard
 
@@ -1308,15 +1309,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/lib-dynamodb@npm:3.415.0":
-  version: 3.415.0
-  resolution: "@aws-sdk/lib-dynamodb@npm:3.415.0"
+"@aws-sdk/lib-dynamodb@npm:3.417.0":
+  version: 3.417.0
+  resolution: "@aws-sdk/lib-dynamodb@npm:3.417.0"
   dependencies:
-    "@aws-sdk/util-dynamodb": 3.415.0
+    "@aws-sdk/util-dynamodb": 3.417.0
     tslib: ^2.5.0
   peerDependencies:
     "@aws-sdk/client-dynamodb": ^3.0.0
-  checksum: bdf191dc7d779f8f7c459dcd311afef650854cac01c64c858dfa8687913b9fc603dbfc578cb8fd4b3f1de6194c33f1d04ba7e9f2e2501f36b24824505ecc8fbb
+  checksum: ddc6c6995545fd16e2bb175d0708a55797af4fb93060c22ede0ab3e586f96b6954dd98805a2985f2ea3bf45dfe3e22e91c72eed361f16f1252864f25f8020157
   languageName: node
   linkType: hard
 
@@ -1346,9 +1347,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/middleware-endpoint-discovery@npm:3.415.0":
-  version: 3.415.0
-  resolution: "@aws-sdk/middleware-endpoint-discovery@npm:3.415.0"
+"@aws-sdk/middleware-endpoint-discovery@npm:3.417.0":
+  version: 3.417.0
+  resolution: "@aws-sdk/middleware-endpoint-discovery@npm:3.417.0"
   dependencies:
     "@aws-sdk/endpoint-cache": 3.310.0
     "@aws-sdk/types": 3.413.0
@@ -1356,7 +1357,7 @@ __metadata:
     "@smithy/protocol-http": ^3.0.3
     "@smithy/types": ^2.3.1
     tslib: ^2.5.0
-  checksum: f8c92466b505ae3c5820f4dfb9bfb60faace70001ab777b4f261eddc52afdc9f08ed8cf73d5a624f97e96383396d33ff02bf9cb48d575bf83cb8a38db9751af9
+  checksum: 47c13fbb8996685385e2054a48e94ef0c902bbbb011a59fce1c3db72f34413277c4b564057461c1ecc9ea84c0c1787a7db89367fbd68fa16140715a90c4d77dc
   languageName: node
   linkType: hard
 
@@ -1783,9 +1784,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/s3-request-presigner@npm:3.414.0":
-  version: 3.414.0
-  resolution: "@aws-sdk/s3-request-presigner@npm:3.414.0"
+"@aws-sdk/s3-request-presigner@npm:3.417.0":
+  version: 3.417.0
+  resolution: "@aws-sdk/s3-request-presigner@npm:3.417.0"
   dependencies:
     "@aws-sdk/signature-v4-multi-region": 3.413.0
     "@aws-sdk/types": 3.413.0
@@ -1795,7 +1796,7 @@ __metadata:
     "@smithy/smithy-client": ^2.1.4
     "@smithy/types": ^2.3.1
     tslib: ^2.5.0
-  checksum: 7b27969dfb2b01bb3712fc8f34b4fe236172aa9acfba06fe05ff3f122718e841c22ce2e11f8d378d6a13a60350432038efa82c9106a8c4a3cb5f46ed0dd412e5
+  checksum: 94c924fb725130200f2694203a8138ba76c7182398e886068b341034aeefd1596b2cb938299eacabd80e53eb47c121eb65067875a169c39d657cf212f51571bb
   languageName: node
   linkType: hard
 
@@ -2118,14 +2119,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/util-dynamodb@npm:3.415.0":
-  version: 3.415.0
-  resolution: "@aws-sdk/util-dynamodb@npm:3.415.0"
+"@aws-sdk/util-dynamodb@npm:3.417.0":
+  version: 3.417.0
+  resolution: "@aws-sdk/util-dynamodb@npm:3.417.0"
   dependencies:
     tslib: ^2.5.0
   peerDependencies:
     "@aws-sdk/client-dynamodb": ^3.0.0
-  checksum: e01bc477e7158a33b2984810835d042556a64e1196b6e3a7eb61e0d22c8c9020abeed17c01e22de167ac7c6323e63851724a6b3e2e92bf7357a24015dedc0c36
+  checksum: cbb5cd30c9b24063d1b6a0078dc88981ec27ebf101d7aa6d02f22a16735f2b7d933c1761dce9e0c6052b59a9b8b327956372eca2467338209b1d5af51cafc906
   languageName: node
   linkType: hard
 
@@ -4067,14 +4068,14 @@ __metadata:
   resolution: "@businessnjgovnavigator/api@workspace:api"
   dependencies:
     "@aws-crypto/client-node": 4.0.0
-    "@aws-sdk/client-cloudwatch-logs": 3.414.0
-    "@aws-sdk/client-dynamodb": 3.415.0
-    "@aws-sdk/client-s3": 3.414.0
-    "@aws-sdk/lib-dynamodb": 3.415.0
+    "@aws-sdk/client-cloudwatch-logs": 3.417.0
+    "@aws-sdk/client-dynamodb": 3.417.0
+    "@aws-sdk/client-s3": 3.417.0
+    "@aws-sdk/lib-dynamodb": 3.417.0
     "@aws-sdk/smithy-client": 3.370.0
     "@aws-sdk/types": 3.413.0
     "@aws-sdk/util-base64-node": 3.209.0
-    "@aws-sdk/util-dynamodb": 3.415.0
+    "@aws-sdk/util-dynamodb": 3.417.0
     "@businessnjgovnavigator/shared": "*"
     "@jest/types": 29.6.3
     "@serverless/typescript": 3.30.1
@@ -4160,17 +4161,17 @@ __metadata:
     "@aws-amplify/core": 5.8.1
     "@aws-crypto/client-node": 4.0.0
     "@aws-crypto/sha256-browser": 4.0.0
-    "@aws-sdk/client-cloudwatch-logs": 3.414.0
-    "@aws-sdk/client-dynamodb": 3.415.0
-    "@aws-sdk/client-s3": 3.414.0
-    "@aws-sdk/lib-dynamodb": 3.415.0
+    "@aws-sdk/client-cloudwatch-logs": 3.417.0
+    "@aws-sdk/client-dynamodb": 3.417.0
+    "@aws-sdk/client-s3": 3.417.0
+    "@aws-sdk/lib-dynamodb": 3.417.0
     "@aws-sdk/protocol-http": 3.370.0
-    "@aws-sdk/s3-request-presigner": 3.414.0
+    "@aws-sdk/s3-request-presigner": 3.417.0
     "@aws-sdk/smithy-client": 3.370.0
     "@aws-sdk/types": 3.413.0
     "@aws-sdk/url-parser": 3.370.0
     "@aws-sdk/util-base64-node": 3.209.0
-    "@aws-sdk/util-dynamodb": 3.415.0
+    "@aws-sdk/util-dynamodb": 3.417.0
     "@aws-sdk/util-format-url": 3.413.0
     "@babel/core": 7.22.20
     "@businessnjgovnavigator/content": "*"
@@ -4392,7 +4393,7 @@ __metadata:
     "@aws-amplify/core": 5.8.1
     "@aws-crypto/sha256-browser": 4.0.0
     "@aws-sdk/protocol-http": 3.370.0
-    "@aws-sdk/s3-request-presigner": 3.414.0
+    "@aws-sdk/s3-request-presigner": 3.417.0
     "@aws-sdk/url-parser": 3.370.0
     "@aws-sdk/util-format-url": 3.413.0
     "@babel/core": 7.22.20
