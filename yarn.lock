@@ -4100,7 +4100,7 @@ __metadata:
     cors: 2.8.5
     cross-env: 7.0.3
     dayjs: 1.11.10
-    dedent: 0.7.0
+    dedent: 1.5.1
     dependency-cruiser: 13.1.5
     eslint: 8.49.0
     eslint-config-prettier: 9.0.0
@@ -4262,7 +4262,7 @@ __metadata:
     cypress-dotenv: 2.0.0
     cypress-wait-until: 2.0.1
     dayjs: 1.11.10
-    dedent: 0.7.0
+    dedent: 1.5.1
     dependency-cruiser: 13.1.5
     dotenv: 16.3.1
     eslint: 8.49.0
@@ -16380,14 +16380,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dedent@npm:0.7.0, dedent@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "dedent@npm:0.7.0"
-  checksum: 87de191050d9a40dd70cad01159a0bcf05ecb59750951242070b6abf9569088684880d00ba92a955b4058804f16eeaf91d604f283929b4f614d181cd7ae633d2
-  languageName: node
-  linkType: hard
-
-"dedent@npm:^1.0.0":
+"dedent@npm:1.5.1, dedent@npm:^1.0.0":
   version: 1.5.1
   resolution: "dedent@npm:1.5.1"
   peerDependencies:
@@ -16396,6 +16389,13 @@ __metadata:
     babel-plugin-macros:
       optional: true
   checksum: c3c300a14edf1bdf5a873f9e4b22e839d62490bc5c8d6169c1f15858a1a76733d06a9a56930e963d677a2ceeca4b6b0894cc5ea2f501aa382ca5b92af3413c2a
+  languageName: node
+  linkType: hard
+
+"dedent@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "dedent@npm:0.7.0"
+  checksum: 87de191050d9a40dd70cad01159a0bcf05ecb59750951242070b6abf9569088684880d00ba92a955b4058804f16eeaf91d604f283929b4f614d181cd7ae633d2
   languageName: node
   linkType: hard
 
