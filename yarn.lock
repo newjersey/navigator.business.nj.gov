@@ -4113,7 +4113,7 @@ __metadata:
     prettier: 2.8.8
     prettier-plugin-organize-imports: 3.2.3
     rimraf: 5.0.1
-    serverless: 3.35.0
+    serverless: 3.35.2
     serverless-dynamodb: 0.2.43
     serverless-http: 3.2.0
     serverless-offline: 12.0.4
@@ -4319,7 +4319,7 @@ __metadata:
     sass: 1.67.0
     sass-loader: 13.3.2
     semantic-release: 19.0.5
-    serverless: 3.35.0
+    serverless: 3.35.2
     serverless-dynamodb: 0.2.43
     serverless-http: 3.2.0
     serverless-offline: 12.0.4
@@ -7876,7 +7876,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/dashboard-plugin@npm:^7.0.1":
+"@serverless/dashboard-plugin@npm:^7.0.2":
   version: 7.0.3
   resolution: "@serverless/dashboard-plugin@npm:7.0.3"
   dependencies:
@@ -32618,11 +32618,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless@npm:3.35.0":
-  version: 3.35.0
-  resolution: "serverless@npm:3.35.0"
+"serverless@npm:3.35.2":
+  version: 3.35.2
+  resolution: "serverless@npm:3.35.2"
   dependencies:
-    "@serverless/dashboard-plugin": ^7.0.1
+    "@serverless/dashboard-plugin": ^7.0.2
     "@serverless/platform-client": ^4.4.0
     "@serverless/utils": ^6.13.1
     abort-controller: ^3.0.0
@@ -32681,7 +32681,7 @@ __metadata:
   bin:
     serverless: bin/serverless.js
     sls: bin/serverless.js
-  checksum: 30f7142cd79f93b087f99a2f92d5a19a8fcc41dc9f4e11fb872f187ab8cce7a3590aa9d6127310c9e5262811790b279ffb618c6712419acf37175d314bc681f4
+  checksum: c783b709b91941c3bb70fba51668a759aeba831bc4c829ff8329d5fe33823f322ce877750caf485aa52f6e4ab1c9204b23ef42cd06997a760a8db65ed0e5b641
   languageName: node
   linkType: hard
 
