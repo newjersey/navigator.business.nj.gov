@@ -1,11 +1,13 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { AuthContext } from "@/contexts/authContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import { getCurrentDateInNewJersey } from "@businessnjgovnavigator/shared/";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
@@ -22,6 +24,17 @@ export const Header = (): ReactElement => {
   };
 
   const getHeader = (): string => {
+    if (
+      state.isAuthenticated === IsAuthenticated.FALSE &&
+      business?.profileData.businessPersona === "STARTING"
+    ) {
+      return business?.profileData.industryId === "generic"
+        ? Config.headerDefaults.genericStarterKitText
+        : templateEval(Config.headerDefaults.starterKitText, {
+            industry: LookupIndustryById(business?.profileData.industryId).name,
+          });
+    }
+
     return userData?.user.name
       ? templateEval(Config.headerDefaults.defaultHeaderText, {
           name: userData.user.name,

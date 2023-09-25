@@ -3632,6 +3632,8 @@ collections:
             fields:
               - { label: Header - No User Name, name: noUserNameHeaderText, widget: string }
               - { label: Header - with User Name, name: defaultHeaderText, widget: string }
+              - { label: Starter Kit Header - Generic Industry, name: genericStarterKitText, widget: string }
+              - { label: Starter Kit Header - Other Industries, name: starterKitText, widget: string }
               - { label: NJ Date Text, name: newJerseyDateBodyText, widget: string }
               - {
                   label: Guest Mode - To Profile Button Text,
