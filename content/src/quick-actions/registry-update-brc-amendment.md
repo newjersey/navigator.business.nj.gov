@@ -12,6 +12,8 @@ If your business registration information has changed since you last updated you
 
 Depending on the type of changes, this may include updating your business charter or obtaining a new `Business Registration Certificate (BRC)|business-reg-certificate` .
 
+---
+
 ### Update Your Tax and Employer Information
 
 Use the DORES’ online [Registry Change Service](https://www20.state.nj.us/TYTR_REGC/servlet/common/Login) to make the following changes to your tax and employer information:
@@ -57,6 +59,8 @@ Use the online [Business Charter Amendment Service](https://www.njportal.com/dor
 - Filing a merger or consolidation
 
 You need to make these changes if your business is a Corporation, Limited Partnership (LP), Limited Liability Company (LLC), or Limited Liability Partnership (LLP).
+
+---
 
 ### Obtain a New Business Registration Certificate (BRC)
 
