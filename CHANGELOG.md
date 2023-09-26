@@ -1,3 +1,35 @@
+# [5.30.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.29.0...v5.30.0) (2023-09-26)
+
+
+### Bug Fixes
+
+* [[#186092347](https://github.com/newjersey/navigator.business.nj.gov/issues/186092347)] Business Name and Number of Employees no longer required in profile ([f57118a](https://github.com/newjersey/navigator.business.nj.gov/commit/f57118a38f5d9ba80fa223330ca0f15a35feab75))
+* **deps:** update aws-sdk to v3.413.0 ([2515207](https://github.com/newjersey/navigator.business.nj.gov/commit/2515207352abe01ce0d0f1838bbab8b3adabde63))
+* **deps:** update aws-sdk to v3.414.0 ([004c6f3](https://github.com/newjersey/navigator.business.nj.gov/commit/004c6f396a0395b73da574afa6b99de24de9efe2))
+* **deps:** update aws-sdk to v3.415.0 ([ae8cd9f](https://github.com/newjersey/navigator.business.nj.gov/commit/ae8cd9ff293039eed3eba375f7460388fb475db9))
+* **deps:** update aws-sdk to v3.417.0 ([e9c9a8f](https://github.com/newjersey/navigator.business.nj.gov/commit/e9c9a8f982470ba1cee4a9aca0be04bf2d67c7cf))
+* **deps:** update dependency @smithy/node-http-handler to v2.1.3 ([061b7a8](https://github.com/newjersey/navigator.business.nj.gov/commit/061b7a84df177c36951740f3e67805c848e9f417))
+* **deps:** update dependency @smithy/node-http-handler to v2.1.4 ([9197243](https://github.com/newjersey/navigator.business.nj.gov/commit/9197243ed1b2bc93ed89f17bdd823640a1cff960))
+* **deps:** update dependency @smithy/node-http-handler to v2.1.5 ([00688be](https://github.com/newjersey/navigator.business.nj.gov/commit/00688be7a1dc410f912b0ab79db1c01974e2d63f))
+* **deps:** update dependency dayjs to v1.11.10 ([e4a1f9b](https://github.com/newjersey/navigator.business.nj.gov/commit/e4a1f9b5efa429fcb9424b704e70a84ac5b709ae))
+* **deps:** update dependency jsonwebtoken to v9.0.2 ([b2fb3c8](https://github.com/newjersey/navigator.business.nj.gov/commit/b2fb3c8f08de044631a7a100a8ddb2b5bc5ac170))
+* **deps:** update dependency winston-cloudwatch to v6.2.0 ([6a7f8e5](https://github.com/newjersey/navigator.business.nj.gov/commit/6a7f8e54e1113959cd5c7690146feda4a0e45b50))
+* **deps:** update material-ui ([e93abe3](https://github.com/newjersey/navigator.business.nj.gov/commit/e93abe3c896a1d62a59f582990a8c5ce9d0a57b5))
+
+
+### Features
+
+* [[#184226156](https://github.com/newjersey/navigator.business.nj.gov/issues/184226156)] add analytics event to 'skip to main content' ([8228468](https://github.com/newjersey/navigator.business.nj.gov/commit/8228468160abb597e1ebf7456339ec9aa7240201))
+* [[#184376697](https://github.com/newjersey/navigator.business.nj.gov/issues/184376697)] Remove Header Text Field from Info Alert Block ([d385c1c](https://github.com/newjersey/navigator.business.nj.gov/commit/d385c1c54fb704c551ecf5efd6fe33a75cfc6eeb))
+* [[#185167013](https://github.com/newjersey/navigator.business.nj.gov/issues/185167013)] enable foreign nonprofit formation ([2f8d2f2](https://github.com/newjersey/navigator.business.nj.gov/commit/2f8d2f2112bfd577bdd550f062a9d77399211084))
+* [[#185481806](https://github.com/newjersey/navigator.business.nj.gov/issues/185481806)] add BRC quick action ([c468d41](https://github.com/newjersey/navigator.business.nj.gov/commit/c468d41b092118fe343c02f1c245ebdfbc69cdd2))
+* [[#185801876](https://github.com/newjersey/navigator.business.nj.gov/issues/185801876)] display modal on NAICS code task for guest mode users ([d238500](https://github.com/newjersey/navigator.business.nj.gov/commit/d238500568ef0fe6f7951f2205b52d7eb698e081))
+* [[#185801983](https://github.com/newjersey/navigator.business.nj.gov/issues/185801983)] register for taxes task should not allow edits or submition in guest mode ([2ee5683](https://github.com/newjersey/navigator.business.nj.gov/commit/2ee5683c763790c21105b753b21602b2311d3b09))
+* [[#185872113](https://github.com/newjersey/navigator.business.nj.gov/issues/185872113)] mini roadmap design updates ([fc528e2](https://github.com/newjersey/navigator.business.nj.gov/commit/fc528e2482f587f58068be59e11fa8d33f91023e))
+* [[#186025115](https://github.com/newjersey/navigator.business.nj.gov/issues/186025115)] skip onboarding for industry query strings without essential questions ([eefcc59](https://github.com/newjersey/navigator.business.nj.gov/commit/eefcc5924fb69ed490ae694f14dfba5e2d8fde5f))
+* [[#186052121](https://github.com/newjersey/navigator.business.nj.gov/issues/186052121)] cost of cert of good standing for domestic nonprofit ([d5ae4f4](https://github.com/newjersey/navigator.business.nj.gov/commit/d5ae4f4391696d7d0cc758e87b945894602b03c9))
+* [[#186099467](https://github.com/newjersey/navigator.business.nj.gov/issues/186099467)] display starter kit header text for guest mode users ([749f4e8](https://github.com/newjersey/navigator.business.nj.gov/commit/749f4e8ef6dba4fc8d29c14d605804deb32f4506))
+
 # [5.29.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.28.0...v5.29.0) (2023-09-19)
 
 
