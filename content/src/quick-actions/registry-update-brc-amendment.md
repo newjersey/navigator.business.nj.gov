@@ -8,11 +8,13 @@ name: Update Your New Jersey Business Registry Account
 id: registry-update-brc-amendment
 ---
 
-If your business registration information has changed since you last updated your New Jersey Tax/Employer ID or your public business registry account, you must report those changes to the New Jersey Division of Revenue and Enterprise Services (DORES).
+If your business registration information has changed since you last updated your `New Jersey Tax/Employer ID|tax-id` or your public business registry account, you must report those changes to the New Jersey Division of Revenue and Enterprise Services (DORES).
 
 Depending on the type of changes, this may include updating your business charter or obtaining a new `Business Registration Certificate (BRC)|business-reg-certificate` .
 
-**Update Your Tax and Employer Information**
+---
+
+### Update Your Tax and Employer Information
 
 Use the DORES’ online [Registry Change Service](https://www20.state.nj.us/TYTR_REGC/servlet/common/Login) to make the following changes to your tax and employer information:
 
@@ -20,18 +22,16 @@ Use the DORES’ online [Registry Change Service](https://www20.state.nj.us/TYTR
 - A change to your business’ state tax or employer payroll responsibilities
 - A change in your business’ operational months
 - Authorization request to submit tax/employer payments via electronic funds transfer or update your saved payment information
-- Report your business as the managerial member of a <new contextual information>combined group
-- Report a newly acquired Employer Identification Number (EIN) to update a temporary State Tax Identification Number (STIN)
+- Report your business as the managerial member of a `combined group|combined-group`
+- Report a newly acquired `Employer Identification Number (EIN)|ein` to update a temporary State Tax Identification Number (STIN)
 
 #### Required Information
 
 - `Taxpayer ID|tax-id`
+- PIN
+- `EIN|ein`
 
-<contextual link>PIN
-
-`EIN|ein`
-
-**Update Your Business Registration**
+### Update Your Business Registration
 
 Use the amended [Business Registration Application](https://www.nj.gov/treasury/revenue/pdf/2000.pdf) (p.17-19) to report the following business registration changes:
 
@@ -39,18 +39,18 @@ Use the amended [Business Registration Application](https://www.nj.gov/treasury/
 - A registered trade or alternate name
 - A change of ownership (General Partnerships or Sole Proprietorships), officers (Corporations), or members (Limited Liability Companies)
 
-**Required Information**
+#### Required Information
 
-- <contextual link>EIN (“FEIN” in the form)
+- `EIN|ein` (“FEIN” in the form)
 - Reason for amendment
 - Trade name
 - NJ business code
 - Town code
-- NAICS code
+- `NAICS code|naics`
 - Date of incorporation
 - Standard industrial code
 
-**Update Your Business Charter**
+### Update Your Business Charter
 
 Use the online [Business Charter Amendment Service](https://www.njportal.com/dor/businessamendments) to file changes and amendments to your business charter, such as:
 
@@ -60,7 +60,9 @@ Use the online [Business Charter Amendment Service](https://www.njportal.com/dor
 
 You need to make these changes if your business is a Corporation, Limited Partnership (LP), Limited Liability Company (LLC), or Limited Liability Partnership (LLP).
 
-**Obtain a New Business Registration Certificate (BRC)**
+---
+
+### Obtain a New Business Registration Certificate (BRC)
 
 If you have updated your business registry account(s) with a new trade or alternate name, or a new business location, you need to obtain a new `BRC|business-reg-certificate` for public contracting purposes.
 

@@ -1,5 +1,4 @@
 {
-  "displayname": "acupuncture",
   "naicsCodes": "621399",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
@@ -50,6 +49,7 @@
   ],
   "name": "Acupuncture",
   "nonEssentialQuestionsIds": [],
+  "displayname": "acupuncture",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true
