@@ -15,7 +15,7 @@ export const Banner = (): ReactElement => {
             <div className="grid-col-auto">
               <div className="text-white">
                 <ul>
-                  <li>Governor Phil Murphy &bull; Lt. Governor Tahesha Way, Esq.</li>
+                  <li>Governor Phil Murphy &bull; Lt. Governor Tahesha Way</li>
                   <li>
                     <a href="https://nj.gov/subscribe/" target="_blank" rel="noreferrer">
                       <svg
