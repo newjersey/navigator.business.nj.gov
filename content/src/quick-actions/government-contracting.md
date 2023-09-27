@@ -15,28 +15,35 @@ The Division of Purchase and Property (DPP), within the Department of the Treasu
 Register with NJSTART to find bidding opportunities for goods and services through the DPP.
 
 #### Registration Requirements
+
 Registration is a two-part process.
 
 1. Complete your pre-registration by submitting the following information:
-   - EIN or Social Security number (SSN)
-   - Business name
-   - Email address
+
+   *  `EIN|ein` or Social Security number (SSN)
+   * Business name
+   * Email address
       
+
  You will then receive an email with your Vendor ID number and login link.
 
 2. Complete your registration by providing the following information:
-- Tax ID<link to contextual data>
-- Business name
-- Profile administrator’s information (name, title, address, etc.). The administrator maintains and updates the business profile (also known as “vendor profile”) 
-- Primary business function 
-- Business formation
-- Electronic funds transfer certification
-- Tax ID certification statement
-- NIGP commodity code <contextual information: NIPG stands for the National Institute of Governmental Purchasing. A commodity code is a classification for identifying commodities (basic goods or products that can be traded, bought, or sold) and services in procurement systems.>
 
-<green box> Once completed, you will have: 
-A confirmation email
+*  `Tax ID|tax-id` 
+* Business name
+* Profile administrator’s information (name, title, address, etc.). The administrator maintains and updates the business profile (also known as “vendor profile”) 
+* Primary business function 
+* Business formation
+* Electronic funds transfer certification
+* Tax ID certification statement
+* NIGP commodity code <contextual information: NIPG stands for the National Institute of Governmental Purchasing. A commodity code is a classification for identifying commodities (basic goods or products that can be traded, bought, or sold) and services in procurement systems.>
 
-<info alert>  On the Vendor page, click on the Vendors Quick Reference Guides tab. Next,  click on the Registration Guide for more information about registering. 
+:::greenBox 
+ Once completed, you will have: 
 
+* A confirmation email
+  :::
 
+:::infoAlert 
+ On the Vendor page, click on the Vendors Quick Reference Guides tab. Next,  click on the Registration Guide for more information about registering.
+:::
