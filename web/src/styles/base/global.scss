@@ -236,6 +236,12 @@ p > a {
   color: $accent-cool-darkest !important;
 }
 
+.usa-prose p + h2,
+.usa-prose p + h3,
+.usa-prose p + h4 {
+  margin-top: 1rem !important;
+}
+
 .usa-button--unstyled:focus,
 .usa-link:focus,
 .usa-prose > a:focus,
