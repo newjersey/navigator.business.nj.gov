@@ -18,7 +18,7 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
-  const { RegisterForOnSubmit, Validate, isFormFieldInvalid } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     "legalStructureId",
     ProfileFormContext,
     props.errorTypes
@@ -27,7 +27,7 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
   const isValid = (): boolean => state.profileData.legalStructureId !== undefined;
 
   const performValidation = (): void => {
-    Validate(!isValid());
+    setIsValid(isValid());
   };
 
   RegisterForOnSubmit(isValid);
@@ -45,7 +45,7 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
         ...state.profileData,
         legalStructureId: event.target.value,
       });
-      Validate(false);
+      setIsValid(true);
     }
   };
 

@@ -38,7 +38,7 @@ export const SplitTaxId = ({
 
   const { isValid, state: formContextState } = useFormContextHelper(taxIdFormContextErrorMap);
 
-  const { RegisterForOnSubmit, Validate, isFormFieldInvalid } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     fieldName,
     ProfileFormContext
   );
@@ -105,7 +105,7 @@ export const SplitTaxId = ({
             handleChange={(value): void => {
               handleChange(value, "taxId");
             }}
-            onValidation={(fieldName: string, invalid: boolean): void => Validate(invalid)}
+            onValidation={(fieldName: string, invalid: boolean): void => setIsValid(!invalid)}
             disabled={props.taxIdDisplayStatus === "password-view"}
             type={props.taxIdDisplayStatus === "text-view" ? "text" : "password"}
             allowMasking={true}
@@ -127,7 +127,7 @@ export const SplitTaxId = ({
             handleChange={(value): void => {
               handleChange(value, "taxIdLocation");
             }}
-            onValidation={(fieldName: string, invalid: boolean): void => Validate(invalid)}
+            onValidation={(fieldName: string, invalid: boolean): void => setIsValid(!invalid)}
             disabled={props.taxIdDisplayStatus === "password-view"}
             type={props.taxIdDisplayStatus === "text-view" ? "text" : "password"}
             allowMasking={true}

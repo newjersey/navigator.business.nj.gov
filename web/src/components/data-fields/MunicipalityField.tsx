@@ -22,7 +22,7 @@ export const MunicipalityField = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const fieldName = "municipality";
 
-  const { RegisterForOnSubmit, Validate, isFormFieldInvalid } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     fieldName,
     ProfileFormContext,
     props.errorTypes
@@ -53,14 +53,14 @@ export const MunicipalityField = (props: Props): ReactElement => {
       props.required
     ) {
       const valid = event.target.value.length > 0;
-      Validate(!valid);
+      setIsValid(valid);
     } else {
-      Validate(false);
+      setIsValid(true);
     }
   };
 
   const handleChange = (): void => {
-    return Validate(false);
+    return setIsValid(true);
   };
 
   const onSelect = (value: Municipality | undefined): void => {

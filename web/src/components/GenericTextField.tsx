@@ -69,7 +69,7 @@ export const GenericTextField = forwardRef(
       [props.value, visualFilter]
     );
 
-    const { RegisterForOnSubmit, Validate, isFormFieldInvalid } = useFormContextFieldHelpers(
+    const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
       props.fieldName,
       props.formContext,
       props.errorTypes
@@ -121,19 +121,19 @@ export const GenericTextField = forwardRef(
       };
     }
 
-    const isFieldInvalid = (currentValue: string): boolean => {
+    const isFieldValid = (currentValue: string): boolean => {
       const value = valueFilter ? valueFilter(currentValue) : currentValue;
-      const invalidAdditional = additionalValidationIsValid ? !additionalValidationIsValid(value) : false;
-      const invalidRequired = props.required ? !value.trim() : false;
-      return invalidAdditional || invalidRequired;
+      const isValidAdditional = additionalValidationIsValid ? additionalValidationIsValid(value) : true;
+      const isValidRequired = props.required ? !!value.trim() : true;
+      return isValidAdditional && isValidRequired;
     };
 
-    RegisterForOnSubmit(() => !isFieldInvalid(value));
+    RegisterForOnSubmit(() => isFieldValid(value));
 
     const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
-      const invalid = isFieldInvalid(event.target.value);
-      Validate(invalid);
-      props.onValidation && props.onValidation(props.fieldName, invalid, event.target.value);
+      const isValid = isFieldValid(event.target.value);
+      setIsValid(isValid);
+      props.onValidation && props.onValidation(props.fieldName, !isValid, event.target.value);
     };
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {

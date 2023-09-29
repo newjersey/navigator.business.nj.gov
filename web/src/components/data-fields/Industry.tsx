@@ -20,7 +20,7 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
   const { state } = useContext(ProfileDataContext);
   const fieldName = "industryId";
 
-  const { RegisterForOnSubmit, Validate, isFormFieldInvalid } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     fieldName,
     ProfileFormContext,
     props.errorTypes
@@ -58,8 +58,8 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
         error={isFormFieldInvalid}
         validationLabel="Error"
         validationText={contentFromConfig.errorTextRequired}
-        handleChange={(): void => Validate(false)}
-        onValidation={(event): void => Validate(!isValid(event.target.value))}
+        handleChange={(): void => setIsValid(true)}
+        onValidation={(event): void => setIsValid(!isValid(event.target.value))}
       />
       {state.profileData.industryId === "home-contractor" && (
         <div

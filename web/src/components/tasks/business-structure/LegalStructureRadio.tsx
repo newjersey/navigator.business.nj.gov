@@ -29,7 +29,7 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
       fieldName: "legalStructureId",
     });
 
-  const { RegisterForOnSubmit, Validate, isFormFieldInvalid } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     "legalStructureId",
     ProfileFormContext,
     undefined
@@ -45,7 +45,7 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
   );
 
   const handleLegalStructure = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
-    Validate(false);
+    setIsValid(true);
     queueUpdateTaskProgress(props.taskId, "IN_PROGRESS");
     setProfileData({
       ...state.profileData,

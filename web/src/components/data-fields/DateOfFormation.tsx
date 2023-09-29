@@ -35,7 +35,7 @@ export const DateOfFormation = (props: Props): ReactElement => {
   const [dateValue, setDateValue] = React.useState<DateObject | null>(null);
   const [dateError, setDateError] = React.useState<boolean>(false);
 
-  const { RegisterForOnSubmit, Validate, isFormFieldInvalid } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     fieldName,
     ProfileFormContext
   );
@@ -57,7 +57,7 @@ export const DateOfFormation = (props: Props): ReactElement => {
     ((dateValue === null && !props.required) || (dateValue?.isValid() && !dateError)) ?? false;
 
   RegisterForOnSubmit(isValid);
-  const onValidation = (): void => Validate(!isValid());
+  const onValidation = (): void => setIsValid(isValid());
 
   const handleChange = (date: DateObject | null): void => {
     setDateValue(date);
