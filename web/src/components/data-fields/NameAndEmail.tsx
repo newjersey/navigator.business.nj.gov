@@ -124,7 +124,7 @@ export const NameAndEmail = (props: Props): ReactElement => {
               fieldName={"email"}
               error={getEmailError()}
               handleChange={handleEmail()}
-              onValidation={(_, invalid): void => emailFormContextHelpers.Validate(invalid)}
+              onValidation={(_, invalid): void => emailFormContextHelpers.setIsValid(!invalid)}
               validationText={getEmailValidationText({ isConfirmEmail: false })}
               required={true}
               additionalValidationIsValid={(value): boolean => {
@@ -144,7 +144,7 @@ export const NameAndEmail = (props: Props): ReactElement => {
               value={confirmEmail}
               error={getEmailError()}
               handleChange={handleEmail(true)}
-              onValidation={(_, invalid): void => emailFormContextHelpers.Validate(invalid)}
+              onValidation={(_, invalid): void => emailFormContextHelpers.setIsValid(!invalid)}
               required={true}
               additionalValidationIsValid={(value): boolean => {
                 return value === email && validateEmail(value);

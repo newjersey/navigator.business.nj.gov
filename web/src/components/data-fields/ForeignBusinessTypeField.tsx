@@ -29,7 +29,7 @@ export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
-  const { RegisterForOnSubmit, Validate } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, setIsValid } = useFormContextFieldHelpers(
     "foreignBusinessTypeIds",
     ProfileFormContext,
     props.errorTypes
@@ -60,7 +60,7 @@ export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement => {
             return it !== event.target.value;
           });
     }
-    isValid(ids) && Validate(false);
+    isValid(ids) && setIsValid(true);
 
     const foreignBusinessType = determineForeignBusinessType(ids);
     setProfileData({

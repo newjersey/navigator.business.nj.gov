@@ -12,7 +12,7 @@ export const LocationInNewJersey = <T,>(props: FormContextFieldProps<T>): ReactE
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
-  const { RegisterForOnSubmit, Validate, isFormFieldInvalid } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     "nexusLocationInNewJersey",
     ProfileFormContext,
     props.errorTypes
@@ -29,7 +29,7 @@ export const LocationInNewJersey = <T,>(props: FormContextFieldProps<T>): ReactE
   const handleSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
     let hasLocationInNJ;
     event.target.value === "true" ? (hasLocationInNJ = true) : (hasLocationInNJ = false);
-    Validate(false);
+    setIsValid(true);
     setProfileData({
       ...state.profileData,
       nexusLocationInNewJersey: hasLocationInNJ,

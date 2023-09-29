@@ -11,7 +11,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
   errorTypes?: FieldError[]
 ): {
   RegisterForOnSubmit: (isValidFunc: () => boolean) => void;
-  Validate: (invalid: boolean) => void;
+  setIsValid: (isValid: boolean) => void;
   isFormFieldInvalid: boolean;
 } => {
   if (!context) {
@@ -19,7 +19,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       RegisterForOnSubmit: (isValidFunc: () => boolean): void => {},
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      Validate: (invalid: boolean): void => {},
+      setIsValid: (isValid: boolean): void => {},
       isFormFieldInvalid: false,
     };
   }
@@ -54,11 +54,11 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
     }, [runValidations]);
   };
 
-  const Validate = (invalid: boolean): void => {
+  const setIsValid = (isValid: boolean): void => {
     debug && console.log("custom validation");
     reducer({
       type: FieldStateActionKind.VALIDATION,
-      payload: { field: fieldName, invalid: invalid, errorTypes },
+      payload: { field: fieldName, invalid: !isValid, errorTypes },
     });
   };
 
@@ -73,7 +73,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
 
   return {
     RegisterForOnSubmit,
-    Validate,
+    setIsValid: setIsValid,
     isFormFieldInvalid: isFormFieldInValid,
   };
 };

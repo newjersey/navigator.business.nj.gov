@@ -31,7 +31,7 @@ export const RadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): Reac
   const { Config } = useConfig();
   const fieldName = props.contentFieldName ?? props.fieldName;
 
-  const { RegisterForOnSubmit, Validate } = useFormContextFieldHelpers(props.fieldName, ProfileFormContext);
+  const { RegisterForOnSubmit, setIsValid } = useFormContextFieldHelpers(props.fieldName, ProfileFormContext);
 
   const contentFromConfig = getProfileConfig({
     config: Config,
@@ -51,7 +51,7 @@ export const RadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): Reac
       [props.fieldName]: value,
     });
     props.onChange && props.onChange(value);
-    Validate(false);
+    setIsValid(true);
   };
 
   return (

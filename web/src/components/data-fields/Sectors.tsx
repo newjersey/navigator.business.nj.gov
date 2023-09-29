@@ -22,7 +22,7 @@ export const Sectors = <T,>(props: Props<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
-  const { RegisterForOnSubmit, Validate, isFormFieldInvalid } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(
     "sectorId",
     ProfileFormContext,
     props.errorTypes
@@ -67,7 +67,7 @@ export const Sectors = <T,>(props: Props<T>): ReactElement => {
     return isRequiredForPhase ? existsAndIsValid : true;
   };
 
-  const onValidation = (): void => Validate(!isValid());
+  const onValidation = (): void => setIsValid(isValid());
 
   RegisterForOnSubmit(isValid);
 

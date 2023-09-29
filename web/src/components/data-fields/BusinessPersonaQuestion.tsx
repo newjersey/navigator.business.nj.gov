@@ -14,7 +14,7 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
-  const { RegisterForOnSubmit, Validate } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, setIsValid } = useFormContextFieldHelpers(
     "businessPersona",
     ProfileFormContext,
     props.errorTypes
@@ -22,7 +22,7 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
 
   RegisterForOnSubmit(() => state.profileData.businessPersona !== undefined);
   const handleSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
-    Validate(false);
+    setIsValid(true);
     setProfileData({
       ...state.profileData,
       operatingPhase:
