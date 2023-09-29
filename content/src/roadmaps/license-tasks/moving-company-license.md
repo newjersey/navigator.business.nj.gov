@@ -6,7 +6,7 @@ filename: moving-company-license
 displayname: movers-warehousemen-license
 urlSlug: movers-warehousemen-license
 name: Apply for Your Public Movers License and/or Warehousemen License
-webflowName: "Moving Company: Public Movers and or Warehousemen License"
+webflowName: "Moving Company: Public Movers and/or Warehousemen License"
 summaryDescriptionMd: >-
   If you transport or warehouse household goods, special commodities, or
   commercial goods for compensation within New Jersey, you need a public movers
