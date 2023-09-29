@@ -10,7 +10,7 @@ webflowName: "Moving Company: Public Movers License"
 summaryDescriptionMd: >-
   If you transport or warehouse household goods, special commodities, or
   commercial goods for compensation within New Jersey, you need a public movers
-  license and/or a  warehousemen license.
+  license and/or a warehousemen license.
 
 
   Indicate the type of license you require in the application: moving (PM), moving and warehousing (PC), or warehousing only (PW). *Please note that a self-storage or delivery company does not require a state license*.
