@@ -1,7 +1,7 @@
 import { GenericTextField } from "@/components/GenericTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import {
@@ -26,9 +26,9 @@ export const NameAndEmail = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { registrationStatus, setRegistrationStatus } = useContext(NeedsAccountContext);
 
-  const emailFormContextHelpers = useFormContextFieldHelpers("email", profileFormContext, props.errorTypes);
+  const emailFormContextHelpers = useFormContextFieldHelpers("email", ProfileFormContext, props.errorTypes);
 
-  const nameFormContextHelpers = useFormContextFieldHelpers("name", profileFormContext, props.errorTypes);
+  const nameFormContextHelpers = useFormContextFieldHelpers("name", ProfileFormContext, props.errorTypes);
 
   emailFormContextHelpers.RegisterForOnSubmit(() =>
     props.user.email ? validateEmail(props.user.email) : false
@@ -101,7 +101,7 @@ export const NameAndEmail = (props: Props): ReactElement => {
           </label>
           <GenericTextField
             value={props.user.name}
-            formContext={profileFormContext}
+            formContext={ProfileFormContext}
             fieldName={"name"}
             error={nameFormContextHelpers.isFormFieldInValid}
             validationText={FullNameErrorMessageLookup[getFullNameErrorVariant(props.user.name)]}

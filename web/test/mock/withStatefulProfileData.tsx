@@ -1,5 +1,5 @@
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { getFlow } from "@/lib/utils/helpers";
@@ -21,7 +21,7 @@ export const profileDataUpdatedNTimes = helpers.dataUpdatedNTimes;
 
 export const WithStatefulProfileFormContext = ({ children }: { children: ReactNode }): ReactElement => {
   const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
-  return <profileFormContext.Provider value={formContextState}>{children}</profileFormContext.Provider>;
+  return <ProfileFormContext.Provider value={formContextState}>{children}</ProfileFormContext.Provider>;
 };
 
 export const WithStatefulProfileData = ({

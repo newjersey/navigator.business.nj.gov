@@ -4,7 +4,7 @@ import { HomeContractor } from "@/components/data-fields/HomeContractor";
 import { IndustryDropdown } from "@/components/data-fields/IndustryDropdown";
 import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
@@ -22,7 +22,7 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
 
   const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
     fieldName,
-    profileFormContext,
+    ProfileFormContext,
     props.errorTypes
   );
 

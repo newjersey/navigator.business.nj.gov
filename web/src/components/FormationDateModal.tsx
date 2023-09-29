@@ -5,7 +5,7 @@ import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -58,7 +58,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
   });
 
   return (
-    <profileFormContext.Provider value={formContextState}>
+    <ProfileFormContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -113,6 +113,6 @@ export const FormationDateModal = (props: Props): ReactElement => {
           )}
         </ModalTwoButton>
       </ProfileDataContext.Provider>
-    </profileFormContext.Provider>
+    </ProfileFormContext.Provider>
   );
 };

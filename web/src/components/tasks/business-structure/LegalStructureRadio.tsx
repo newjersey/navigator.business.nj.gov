@@ -3,7 +3,7 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
@@ -31,7 +31,7 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
 
   const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
     "legalStructureId",
-    profileFormContext,
+    ProfileFormContext,
     undefined
   );
 

@@ -23,7 +23,7 @@ import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { LegalStructureRadio } from "@/components/tasks/business-structure/LegalStructureRadio";
 import { ConfigContext } from "@/contexts/configContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
@@ -44,7 +44,7 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
   const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <profileFormContext.Provider value={formContextState}>
+      <ProfileFormContext.Provider value={formContextState}>
         <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
           <BusinessPersonaQuestion />
           <hr className="margin-y-4" />
@@ -194,7 +194,7 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
             );
           })}
         </div>
-      </profileFormContext.Provider>
+      </ProfileFormContext.Provider>
     </ConfigContext.Provider>
   );
 };

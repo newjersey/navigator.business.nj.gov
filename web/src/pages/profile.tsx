@@ -45,7 +45,7 @@ import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -697,7 +697,7 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   return (
-    <profileFormContext.Provider value={formContextState}>
+    <ProfileFormContext.Provider value={formContextState}>
       <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
         <ProfileDataContext.Provider
           value={{
@@ -786,7 +786,7 @@ const ProfilePage = (props: Props): ReactElement => {
           </PageSkeleton>
         </ProfileDataContext.Provider>
       </MunicipalitiesContext.Provider>
-    </profileFormContext.Provider>
+    </ProfileFormContext.Provider>
   );
 };
 

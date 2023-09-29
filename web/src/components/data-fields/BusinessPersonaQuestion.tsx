@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
@@ -16,7 +16,7 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
 
   const { RegisterForOnSubmit, Validate } = useFormContextFieldHelpers(
     "businessPersona",
-    profileFormContext,
+    ProfileFormContext,
     props.errorTypes
   );
 

@@ -1,4 +1,4 @@
 import { createFormContext } from "@/contexts/formContext";
 import { ProfileFieldErrorMap } from "@/lib/types/types";
 
-export const profileFormContext = createFormContext<ProfileFieldErrorMap>();
+export const ProfileFormContext = createFormContext<ProfileFieldErrorMap>();

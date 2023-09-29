@@ -6,7 +6,7 @@ import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Icon } from "@/components/njwds/Icon";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
@@ -124,7 +124,7 @@ export const TaxInput = (props: Props): ReactElement => {
   };
 
   return (
-    <profileFormContext.Provider value={formContextState}>
+    <ProfileFormContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -165,6 +165,6 @@ export const TaxInput = (props: Props): ReactElement => {
           </ThemeProvider>
         </div>
       </ProfileDataContext.Provider>
-    </profileFormContext.Provider>
+    </ProfileFormContext.Provider>
   );
 };

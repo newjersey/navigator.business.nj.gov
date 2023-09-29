@@ -1,7 +1,7 @@
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { FormContextFieldProps } from "@/lib/types/types";
@@ -20,7 +20,7 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
 
   const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
     "legalStructureId",
-    profileFormContext,
+    ProfileFormContext,
     props.errorTypes
   );
 

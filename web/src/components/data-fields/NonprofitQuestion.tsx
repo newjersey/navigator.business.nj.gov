@@ -1,5 +1,5 @@
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
@@ -18,7 +18,7 @@ export const NonprofitQuestion = (): ReactElement => {
   const { Config } = useConfig();
   const fieldName = "isNonprofitOnboardingRadio";
 
-  const { RegisterForOnSubmit } = useFormContextFieldHelpers(fieldName, profileFormContext);
+  const { RegisterForOnSubmit } = useFormContextFieldHelpers(fieldName, ProfileFormContext);
 
   const contentFromConfig = getProfileConfig({
     config: Config,

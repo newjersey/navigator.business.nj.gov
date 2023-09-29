@@ -1,6 +1,6 @@
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -82,7 +82,7 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
   );
 
   return (
-    <profileFormContext.Provider value={formContextState}>
+    <ProfileFormContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -95,6 +95,6 @@ export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
       >
         {props.isTaskPage ? onTaskPage : onDashboard}
       </ProfileDataContext.Provider>
-    </profileFormContext.Provider>
+    </ProfileFormContext.Provider>
   );
 };
