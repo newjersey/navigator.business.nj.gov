@@ -1,7 +1,7 @@
 ---
 notesMd: "Draft:
   https://docs.google.com/document/d/1qycUgskcIPRt-SfnpSaJ8d4T_Zt1Y126yJ1mQMhcJ\
-  OA/edit#heading=h.g66ztih46inw"
+  OA/edit"
 filename: moving-company-license
 displayname: movers-warehousemen-license
 urlSlug: movers-warehousemen-license
@@ -16,7 +16,6 @@ summaryDescriptionMd: >-
   Indicate the type of license you require in the application: moving (PM), moving and warehousing (PC), or warehousing only (PW). *Please note that a self-storage or delivery company does not require a state license*.
 industryId:
   - moving-company
-callToActionText: Apply for My Public Movers and/or Warehousemen License
 callToActionLink: https://www.njconsumeraffairs.gov/pmw/Pages/applications.aspx
 webflowIndustry: ""
 licenseCertificationClassification: ""
@@ -24,6 +23,7 @@ agencyId: nj-consumer-affairs
 agencyAdditionalContext: ""
 divisionPhone: (973) 504-6512
 id: moving-company-license
+callToActionText: Apply for My Public Movers and/or Warehousemen License
 webflowId: 640b84670945bdf4cfd63f2c
 ---
 - - -
