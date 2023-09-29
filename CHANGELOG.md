@@ -1,3 +1,10 @@
+# [5.31.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.30.0...v5.31.0) (2023-09-29)
+
+
+### Features
+
+* [[#186136868](https://github.com/newjersey/navigator.business.nj.gov/issues/186136868)] remove esq from top banner ([2338b95](https://github.com/newjersey/navigator.business.nj.gov/commit/2338b9511ceaac2ac351d26f0df7ce40e1cc54c1))
+
 # [5.30.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.29.0...v5.30.0) (2023-09-26)
 
 
