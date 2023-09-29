@@ -38,7 +38,7 @@ export const SplitTaxId = ({
 
   const { isValid, state: formContextState } = useFormContextHelper(taxIdFormContextErrorMap);
 
-  const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, Validate, isFormFieldInvalid } = useFormContextFieldHelpers(
     fieldName,
     ProfileFormContext
   );
@@ -98,7 +98,7 @@ export const SplitTaxId = ({
               FormHelperTextProps: { sx: { whiteSpace: "nowrap" } },
             }}
             fieldName={fieldName as string}
-            error={isFormFieldInValid}
+            error={isFormFieldInvalid}
             visualFilter={formatTaxId}
             numericProps={{ minLength: 9, maxLength: 9 }}
             validationText={validationText ?? contentFromConfig.errorTextRequired ?? ""}
@@ -121,7 +121,7 @@ export const SplitTaxId = ({
             value={locationValue}
             formContext={taxIdFormContext}
             className={"grid-col flex-fill"}
-            error={isFormFieldInValid}
+            error={isFormFieldInvalid}
             fieldName={"taxIdLocation"}
             numericProps={{ minLength: 3, maxLength: 3 }}
             handleChange={(value): void => {

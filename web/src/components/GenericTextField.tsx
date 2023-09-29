@@ -69,7 +69,7 @@ export const GenericTextField = forwardRef(
       [props.value, visualFilter]
     );
 
-    const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
+    const { RegisterForOnSubmit, Validate, isFormFieldInvalid } = useFormContextFieldHelpers(
       props.fieldName,
       props.formContext,
       props.errorTypes
@@ -146,7 +146,7 @@ export const GenericTextField = forwardRef(
       }
     };
 
-    const error = props.error ?? isFormFieldInValid;
+    const error = props.error ?? isFormFieldInvalid;
     return (
       <div className={`${widthStyling} ${props.className ?? ""} ${error ? "error" : ""}`}>
         <TextField

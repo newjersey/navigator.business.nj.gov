@@ -35,7 +35,7 @@ export const DateOfFormation = (props: Props): ReactElement => {
   const [dateValue, setDateValue] = React.useState<DateObject | null>(null);
   const [dateError, setDateError] = React.useState<boolean>(false);
 
-  const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, Validate, isFormFieldInvalid } = useFormContextFieldHelpers(
     fieldName,
     ProfileFormContext
   );
@@ -94,14 +94,14 @@ export const DateOfFormation = (props: Props): ReactElement => {
               fieldName={fieldName}
               onValidation={onValidation}
               validationText={errorText}
-              error={isFormFieldInValid}
+              error={isFormFieldInvalid}
               inputProps={params.InputProps}
               fieldOptions={{
                 ...params,
                 inputProps: {
                   ...params.inputProps,
                 },
-                error: isFormFieldInValid,
+                error: isFormFieldInvalid,
                 sx: { svg: { fill: "#4b7600" } },
               }}
             />

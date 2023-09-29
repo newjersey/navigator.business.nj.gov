@@ -18,7 +18,7 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
-  const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, Validate, isFormFieldInvalid } = useFormContextFieldHelpers(
     "legalStructureId",
     ProfileFormContext,
     props.errorTypes
@@ -72,7 +72,7 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
   return (
     <>
       <div className="text-field-width-default">
-        <FormControl variant="outlined" fullWidth error={isFormFieldInValid}>
+        <FormControl variant="outlined" fullWidth error={isFormFieldInvalid}>
           <Select
             fullWidth
             displayEmpty
@@ -97,7 +97,7 @@ export const LegalStructureDropDown = <T,>(props: Props<T>): ReactElement => {
           </Select>
         </FormControl>
         <FormHelperText className={"text-error-dark"}>
-          {isFormFieldInValid && Config.profileDefaults.fields.legalStructureId.default.errorTextRequired}
+          {isFormFieldInvalid && Config.profileDefaults.fields.legalStructureId.default.errorTextRequired}
         </FormHelperText>
       </div>
     </>
