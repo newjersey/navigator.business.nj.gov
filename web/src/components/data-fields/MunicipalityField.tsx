@@ -22,7 +22,7 @@ export const MunicipalityField = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const fieldName = "municipality";
 
-  const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, Validate, isFormFieldInvalid } = useFormContextFieldHelpers(
     fieldName,
     ProfileFormContext,
     props.errorTypes
@@ -76,7 +76,7 @@ export const MunicipalityField = (props: Props): ReactElement => {
       ariaLabel="Location"
       onValidation={onValidation}
       fieldName={fieldName}
-      error={isFormFieldInValid}
+      error={isFormFieldInvalid}
       validationLabel="Error"
       handleChange={handleChange}
       value={state.profileData.municipality}

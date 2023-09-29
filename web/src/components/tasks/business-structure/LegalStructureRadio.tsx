@@ -29,7 +29,7 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
       fieldName: "legalStructureId",
     });
 
-  const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, Validate, isFormFieldInvalid } = useFormContextFieldHelpers(
     "legalStructureId",
     ProfileFormContext,
     undefined
@@ -67,7 +67,7 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
 
   return (
     <>
-      {isFormFieldInValid && (
+      {isFormFieldInvalid && (
         <div className={"padding-bottom-1"}>
           <Alert variant="error" dataTestid="business-structure-alert">
             {Config.businessStructurePrompt.businessStructureNotSelectedAlertText}
@@ -75,7 +75,7 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
         </div>
       )}
       <h3>{Config.businessStructureTask.radioQuestionHeader}</h3>
-      <WithErrorBar hasError={isFormFieldInValid} type="ALWAYS">
+      <WithErrorBar hasError={isFormFieldInvalid} type="ALWAYS">
         <div className="margin-top-3">
           <FormControl variant="outlined" fullWidth>
             <RadioGroup
@@ -94,7 +94,7 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
                       key={legalStructure.id}
                       data-testid={legalStructure.id}
                       value={legalStructure.id}
-                      control={<Radio color={isFormFieldInValid ? "error" : "primary"} />}
+                      control={<Radio color={isFormFieldInvalid ? "error" : "primary"} />}
                       label={makeLabel(legalStructure.id)}
                     />
 
@@ -110,7 +110,7 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
               })}
             </RadioGroup>
           </FormControl>
-          {isFormFieldInValid && (
+          {isFormFieldInvalid && (
             <div className="text-error-dark text-bold" data-testid="business-structure-error">
               {contentFromConfig.errorTextRequired}
             </div>

@@ -72,7 +72,7 @@ export const NameAndEmail = (props: Props): ReactElement => {
   };
 
   const getEmailError = (): boolean => {
-    return emailFormContextHelpers.isFormFieldInValid || registrationStatus === "DUPLICATE_ERROR";
+    return emailFormContextHelpers.isFormFieldInvalid || registrationStatus === "DUPLICATE_ERROR";
   };
 
   const getEmailValidationText = (emailInput: { isConfirmEmail: boolean }): string => {
@@ -95,7 +95,7 @@ export const NameAndEmail = (props: Props): ReactElement => {
     <div className="tablet:padding-y-2">
       <p className="padding-bottom-1">{Config.selfRegistration.signUpDescriptionText}</p>
       <div className="margin-top-2">
-        <WithErrorBar hasError={nameFormContextHelpers.isFormFieldInValid} type="ALWAYS">
+        <WithErrorBar hasError={nameFormContextHelpers.isFormFieldInvalid} type="ALWAYS">
           <label htmlFor="name" className="text-bold">
             {Config.selfRegistration.nameFieldLabel}
           </label>
@@ -103,7 +103,7 @@ export const NameAndEmail = (props: Props): ReactElement => {
             value={props.user.name}
             formContext={ProfileFormContext}
             fieldName={"name"}
-            error={nameFormContextHelpers.isFormFieldInValid}
+            error={nameFormContextHelpers.isFormFieldInvalid}
             validationText={FullNameErrorMessageLookup[getFullNameErrorVariant(props.user.name)]}
             required={true}
             handleChange={handleName}

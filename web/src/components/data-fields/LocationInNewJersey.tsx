@@ -12,7 +12,7 @@ export const LocationInNewJersey = <T,>(props: FormContextFieldProps<T>): ReactE
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
-  const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, Validate, isFormFieldInvalid } = useFormContextFieldHelpers(
     "nexusLocationInNewJersey",
     ProfileFormContext,
     props.errorTypes
@@ -57,7 +57,7 @@ export const LocationInNewJersey = <T,>(props: FormContextFieldProps<T>): ReactE
               data-testid="location-in-new-jersey-true"
               value={true}
               label={contentFromConfig.radioButtonYesText}
-              control={<Radio color={isFormFieldInValid ? "error" : "primary"} />}
+              control={<Radio color={isFormFieldInvalid ? "error" : "primary"} />}
             />
             <FormControlLabel
               style={{ alignItems: "center" }}
@@ -65,12 +65,12 @@ export const LocationInNewJersey = <T,>(props: FormContextFieldProps<T>): ReactE
               data-testid="location-in-new-jersey-false"
               value={false}
               label={contentFromConfig.radioButtonNoText}
-              control={<Radio color={isFormFieldInValid ? "error" : "primary"} />}
+              control={<Radio color={isFormFieldInvalid ? "error" : "primary"} />}
             />
           </RadioGroup>
         </FormControl>
         <FormHelperText className={"text-error-dark"}>
-          {isFormFieldInValid ? contentFromConfig.errorTextRequired : ""}
+          {isFormFieldInvalid ? contentFromConfig.errorTextRequired : ""}
         </FormHelperText>
       </div>
     </>

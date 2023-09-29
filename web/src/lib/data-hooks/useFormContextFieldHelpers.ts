@@ -12,7 +12,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
 ): {
   RegisterForOnSubmit: (isValidFunc: () => boolean) => void;
   Validate: (invalid: boolean) => void;
-  isFormFieldInValid: boolean;
+  isFormFieldInvalid: boolean;
 } => {
   if (!context) {
     return {
@@ -20,7 +20,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
       RegisterForOnSubmit: (isValidFunc: () => boolean): void => {},
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       Validate: (invalid: boolean): void => {},
-      isFormFieldInValid: false,
+      isFormFieldInvalid: false,
     };
   }
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -74,6 +74,6 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
   return {
     RegisterForOnSubmit,
     Validate,
-    isFormFieldInValid,
+    isFormFieldInvalid: isFormFieldInValid,
   };
 };

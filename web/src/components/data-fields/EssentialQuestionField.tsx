@@ -18,7 +18,7 @@ interface Props<T> extends FormContextFieldProps<T> {
 export const EssentialQuestionField = <T,>(props: Props<T>): ReactElement => {
   const { state } = useContext(ProfileDataContext);
 
-  const { RegisterForOnSubmit, isFormFieldInValid } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, isFormFieldInvalid } = useFormContextFieldHelpers(
     props.essentialQuestion.fieldName,
     ProfileFormContext,
     props.errorTypes
@@ -31,7 +31,7 @@ export const EssentialQuestionField = <T,>(props: Props<T>): ReactElement => {
     <div
       data-testid={`industry-specific-${state.profileData.industryId}-${props.essentialQuestion.fieldName}`}
     >
-      <WithErrorBar hasError={isFormFieldInValid} type="ALWAYS" className="margin-top-2">
+      <WithErrorBar hasError={isFormFieldInvalid} type="ALWAYS" className="margin-top-2">
         {props.onboardingFieldLabel ? (
           <div data-testid={"FieldLabelOnboarding"}>
             <FieldLabelOnboarding fieldName={props.essentialQuestion.fieldName as ProfileContentField} />
@@ -46,7 +46,7 @@ export const EssentialQuestionField = <T,>(props: Props<T>): ReactElement => {
           {...props.essentialQuestion}
           choices={industrySpecificDataChoices[props.essentialQuestion.fieldName]}
         />
-        {isFormFieldInValid && (
+        {isFormFieldInvalid && (
           <div className="text-error-dark text-bold margin-top-05">
             {Config.siteWideErrorMessages.errorRadioButton}
           </div>

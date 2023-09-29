@@ -22,7 +22,7 @@ export const Sectors = <T,>(props: Props<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
-  const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
+  const { RegisterForOnSubmit, Validate, isFormFieldInvalid } = useFormContextFieldHelpers(
     "sectorId",
     ProfileFormContext,
     props.errorTypes
@@ -113,8 +113,8 @@ export const Sectors = <T,>(props: Props<T>): ReactElement => {
               value={searchText}
               onChange={handleChange}
               variant="outlined"
-              error={isFormFieldInValid}
-              helperText={isFormFieldInValid ? contentFromConfig.errorTextRequired : ""}
+              error={isFormFieldInvalid}
+              helperText={isFormFieldInvalid ? contentFromConfig.errorTextRequired : ""}
             />
           );
         }}
