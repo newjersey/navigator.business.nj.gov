@@ -1,26 +1,27 @@
 ---
+notesMd: "Draft:
+  https://docs.google.com/document/d/1qycUgskcIPRt-SfnpSaJ8d4T_Zt1Y126yJ1mQMhcJ\
+  OA/edit#heading=h.g66ztih46inw"
 filename: moving-company-license
 displayname: movers-warehousemen-license
 urlSlug: movers-warehousemen-license
 name: Apply for Your Public Movers License and/or Warehousemen License
 webflowName: "Moving Company: Public Movers License"
-summaryDescriptionMd: >+
+summaryDescriptionMd: >-
   If you transport or warehouse household goods, special commodities, or
   commercial goods for compensation within New Jersey, you need a public movers
   license. 
 
 
-  Indicate the type of license you require in the application: moving (PM), moving and warehousing (PC), or warehousing only (PW). Please note that a self-storage or delivery company does not require a state license.
-
+  Indicate the type of license you require in the application: moving (PM), moving and warehousing (PC), or warehousing only (PW). *Please note that a self-storage or delivery company does not require a state license*.
 industryId:
   - moving-company
-callToActionText: Apply for My Public Movers License
+callToActionText: Apply for My Public Movers and/or Warehousemen License
 callToActionLink: https://www.njconsumeraffairs.gov/pmw/Pages/applications.aspx
 webflowIndustry: ""
 licenseCertificationClassification: ""
 agencyId: nj-consumer-affairs
-agencyAdditionalContext: Office of Consumer Protection, Regulated Business
-  Section, Public Movers and Warehousemen
+agencyAdditionalContext: ""
 divisionPhone: (973) 504-6512
 id: moving-company-license
 webflowId: 640b84670945bdf4cfd63f2c
@@ -32,34 +33,40 @@ webflowId: 640b84670945bdf4cfd63f2c
 - Moving: You must own or have a minimum one-year lease on your moving vehicle 
 - Warehousing: You must own or lease a warehouse
 
-#### Application Requirements (Moving)
+### Application Requirements (Moving)
 - Business name
 - Business structure
 - Business address
 - Registered agent (called “Designated agent” in the application)
 - Type(s) of license you are applying for (see explanation above)
 - Moving vehicle parking address (may be out-of-state)
-- <contextual info>EIN or Social Security number (SSN) 
-Name and contact information for all company officers and owners with 10% ownership or more
-Copy of tariff (formal schedule of rates, services, and terms and conditions)
-Financial statement (assets and liabilities at the time of application)
-Copy of vehicle registration or lease
-Copy of Workers’ Compensation Insurance (if more than one full-time employee)
-Insurance form E (Bodily Injury & Property Damage)
-Insurance form H (Cargo Liability)
-Copy of all forms and brochures the company will use with customers
-Applicable fees paid
-Application Requirements (Warehousing)
-Warehouse address
-Warehouse lease or deed
-Certificate of occupancy
-Fire code approval
-Building schematic
-Warehouse insurance (Warehousemen Legal Liability Insurance)
-Warehouse section in tariff
-Once completed, you will have:
-A public movers license and/or a warehousemen license
-<info alert> Your license must always be displayed at your business location.
+- `EIN|ein` or Social Security number (SSN) 
+- Name and contact information for all company officers and owners with 10% ownership or more
+- Copy of tariff (formal schedule of rates, services, and terms and conditions)
+- Financial statement (assets and liabilities at the time of application)
+- Copy of vehicle registration or lease
+- Copy of `Workers’ Compensation Insurance|workers-comp` (if more than one full-time employee)
+- Insurance form E (Bodily Injury & Property Damage)
+- Insurance form H (Cargo Liability)
+- Copy of all forms and brochures the company will use with customers
+- Applicable fees paid
+
+### Application Requirements (Warehousing)
+- Warehouse address
+- Warehouse lease or deed
+- Certificate of occupancy
+- Fire code approval
+- Building schematic
+- Warehouse insurance (Warehousemen Legal Liability Insurance)
+- Warehouse section in tariff
+
+> **Once completed, you will have**:
+>
+>- A public movers license and/or a warehousemen license
+
+:::infoAlert
+Your license must always be displayed at your business location.
+:::
 
 
 
