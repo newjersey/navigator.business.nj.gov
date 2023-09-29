@@ -7,7 +7,7 @@ slug: socially-economically-disadvantaged
 
 For certification purposes, the New Jersey Department of Transportation defines a socially disadvantaged individual as an individual who self-identifies as:
 
-- A women
+- A woman
 - Black/African American
 - Hispanic/Latino
 - Native American
