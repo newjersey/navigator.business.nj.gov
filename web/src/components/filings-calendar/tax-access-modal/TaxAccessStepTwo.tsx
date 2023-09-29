@@ -9,7 +9,7 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { FieldStateActionKind } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { postTaxFilingsOnboarding } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
@@ -245,7 +245,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
   if (profileData.legalStructureId === undefined) return <></>;
 
   return (
-    <profileFormContext.Provider value={formContextState}>
+    <ProfileFormContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -353,6 +353,6 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
           </WithErrorBar>
         </ModalTwoButton>
       </ProfileDataContext.Provider>
-    </profileFormContext.Provider>
+    </ProfileFormContext.Provider>
   );
 };

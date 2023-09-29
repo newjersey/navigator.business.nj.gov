@@ -7,7 +7,7 @@ import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer"
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { AuthContext } from "@/contexts/authContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { onSelfRegister } from "@/lib/auth/signinHelper";
@@ -119,7 +119,7 @@ const AccountSetupPage = (): ReactElement => {
           <h1>{getContent().header}</h1>
           {showAlert && <Alert variant="error">{Config.accountSetup.errorAlert}</Alert>}
           <Content>{getContent().body}</Content>
-          <profileFormContext.Provider value={formContextState}>
+          <ProfileFormContext.Provider value={formContextState}>
             <NameAndEmail user={user} setUser={setUser} />
 
             <hr className="margin-top-4 margin-bottom-2" />
@@ -134,7 +134,7 @@ const AccountSetupPage = (): ReactElement => {
                 {getContent().submitButton}
               </PrimaryButton>
             </div>
-          </profileFormContext.Provider>
+          </ProfileFormContext.Provider>
         </SingleColumnContainer>
       </main>
     </PageSkeleton>

@@ -5,7 +5,7 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { createProfileFieldErrorMap } from "@/lib/types/types";
@@ -32,7 +32,7 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
   const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
 
   return (
-    <profileFormContext.Provider value={formContextState}>
+    <ProfileFormContext.Provider value={formContextState}>
       <NeedsAccountContext.Provider
         value={{
           isAuthenticated: IsAuthenticated.UNKNOWN,
@@ -91,7 +91,7 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
           </ProfileDataContext.Provider>
         </ConfigContext.Provider>
       </NeedsAccountContext.Provider>
-    </profileFormContext.Provider>
+    </ProfileFormContext.Provider>
   );
 };
 

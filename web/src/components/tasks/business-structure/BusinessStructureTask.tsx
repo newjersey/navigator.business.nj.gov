@@ -9,7 +9,7 @@ import { LegalStructureRadio } from "@/components/tasks/business-structure/Legal
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
@@ -133,7 +133,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
       <UnlockedBy task={props.task} />
       <Content>{preLookupContent}</Content>
       {showRadioQuestion && (
-        <profileFormContext.Provider value={formContextState}>
+        <ProfileFormContext.Provider value={formContextState}>
           <ProfileDataContext.Provider
             value={{
               state: {
@@ -151,7 +151,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
               </SecondaryButton>
             </div>
           </ProfileDataContext.Provider>
-        </profileFormContext.Provider>
+        </ProfileFormContext.Provider>
       )}
       {business && !showRadioQuestion && (
         <>

@@ -1,6 +1,6 @@
 import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileContentField } from "@/lib/types/types";
@@ -41,7 +41,7 @@ export const DataField = <T,>({ fieldName, className, ...props }: DataFieldProps
     <div className={className}>
       <GenericTextField
         value={state.profileData[fieldName] as string | undefined}
-        formContext={profileFormContext}
+        formContext={ProfileFormContext}
         fieldName={fieldName as string}
         {...props}
         validationText={props.validationText ?? contentFromConfig.errorTextRequired ?? ""}

@@ -3,7 +3,7 @@ import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboar
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { EssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
@@ -20,7 +20,7 @@ export const EssentialQuestionField = <T,>(props: Props<T>): ReactElement => {
 
   const { RegisterForOnSubmit, isFormFieldInValid } = useFormContextFieldHelpers(
     props.essentialQuestion.fieldName,
-    profileFormContext,
+    ProfileFormContext,
     props.errorTypes
   );
 

@@ -11,7 +11,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { createEmptyDbaDisplayContent, createProfileFieldErrorMap } from "@/lib/types/types";
@@ -70,7 +70,7 @@ const Template: ComponentStory<typeof GenericTextField> = () => {
         setForeignGoodStandingFile: () => {},
       }}
     >
-      <profileFormContext.Provider value={formContextState}>
+      <ProfileFormContext.Provider value={formContextState}>
         <NeedsAccountContext.Provider
           value={{
             isAuthenticated: IsAuthenticated.UNKNOWN,
@@ -156,7 +156,7 @@ const Template: ComponentStory<typeof GenericTextField> = () => {
             </ProfileDataContext.Provider>
           </ConfigContext.Provider>
         </NeedsAccountContext.Provider>
-      </profileFormContext.Provider>
+      </ProfileFormContext.Provider>
     </BusinessFormationContext.Provider>
   );
 };

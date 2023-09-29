@@ -11,7 +11,7 @@ import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AuthContext } from "@/contexts/authContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { profileFormContext } from "@/contexts/profileFormContext";
+import { ProfileFormContext } from "@/contexts/profileFormContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -403,7 +403,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   };
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
-      <profileFormContext.Provider value={formContextState}>
+      <ProfileFormContext.Provider value={formContextState}>
         <ProfileDataContext.Provider
           value={{
             state: {
@@ -483,7 +483,7 @@ const OnboardingPage = (props: Props): ReactElement => {
             </main>
           </PageSkeleton>
         </ProfileDataContext.Provider>
-      </profileFormContext.Provider>
+      </ProfileFormContext.Provider>
     </MunicipalitiesContext.Provider>
   );
 };

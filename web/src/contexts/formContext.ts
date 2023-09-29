@@ -1,4 +1,4 @@
-import { FieldErrorType, FieldStatus, ReducedFieldStates } from "@/lib/types/types";
+import { FieldErrorType, ReducedFieldStates } from "@/lib/types/types";
 import { Context, createContext, Reducer } from "react";
 
 export enum FieldStateActionKind {
@@ -51,6 +51,3 @@ export const createFormContext = <T>(): Context<FormContextType<T>> =>
     runValidations: false,
     reducer: () => ({} as ReducedFieldStates<keyof T>),
   });
-
-export const genericFormContext =
-  createFormContext<Record<string | number | symbol, FieldStatus<FieldErrorType>>>();
