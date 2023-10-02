@@ -76,7 +76,6 @@ export const MainBusinessUs = (): ReactElement => {
                             addressState: stateObject,
                           };
                         });
-                        setFieldsInteracted(["addressState"]);
                       }}
                     />
                   </FormationField>
