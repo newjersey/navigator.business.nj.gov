@@ -660,8 +660,8 @@ collections:
                           - { label: "Credit card initial", name: "creditCardInitial", widget: "string" }
                           - { label: "Credit card extra", name: "creditCardExtra", widget: "string" }
                           - { label: "ACH", name: "ach", widget: "string" }
-                  - label: Provisions
-                    name: provisions
+                  - label: Additional Provisions
+                    name: additionalProvisions
                     collapsed: true
                     widget: object
                     fields:

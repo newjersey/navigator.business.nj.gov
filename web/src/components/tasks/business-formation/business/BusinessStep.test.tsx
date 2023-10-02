@@ -292,9 +292,9 @@ describe("Formation - BusinessStep", () => {
           businessPersona: "FOREIGN",
           legalStructureId: randomPublicFilingLegalType((value) => value !== "limited-partnership"),
         },
-        { provisions: [] }
+        { additionalProvisions: [] }
       );
-      expect(screen.queryByText(Config.formation.fields.provisions.label)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields.additionalProvisions.label)).not.toBeInTheDocument();
     });
 
     it("shows provisions when forming as a foreign business and the legalStructureId is foreign-limited-partnership", async () => {
@@ -303,42 +303,50 @@ describe("Formation - BusinessStep", () => {
           businessPersona: "FOREIGN",
           legalStructureId: randomPublicFilingLegalType((value) => value === "limited-partnership"),
         },
-        { provisions: [] }
+        { additionalProvisions: [] }
       );
-      expect(screen.getByText(Config.formation.fields.provisions.label)).toBeInTheDocument();
-      expect(screen.getByText(Config.formation.fields.provisions.addButtonText)).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.additionalProvisions.label)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.additionalProvisions.addButtonText)
+      ).toBeInTheDocument();
       expect(screen.queryByLabelText("remove provision")).not.toBeInTheDocument();
       expect(screen.queryByLabelText("provision 0")).not.toBeInTheDocument();
     });
 
     it("keeps provisions closed by default when page loads", async () => {
-      await getPageHelper({}, { provisions: [] });
-      expect(screen.getByText(Config.formation.fields.provisions.label)).toBeInTheDocument();
-      expect(screen.getByText(Config.formation.fields.provisions.addButtonText)).toBeInTheDocument();
+      await getPageHelper({}, { additionalProvisions: [] });
+      expect(screen.getByText(Config.formation.fields.additionalProvisions.label)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.additionalProvisions.addButtonText)
+      ).toBeInTheDocument();
       expect(screen.queryByLabelText("remove provision")).not.toBeInTheDocument();
       expect(screen.queryByLabelText("provision 0")).not.toBeInTheDocument();
     });
 
     it("shows provisions open if exists", async () => {
-      await getPageHelper({}, { provisions: ["provision1", "provision2"] });
-      expect(screen.queryByText(Config.formation.fields.provisions.addButtonText)).not.toBeInTheDocument();
+      await getPageHelper({}, { additionalProvisions: ["provision1", "provision2"] });
+      expect(
+        screen.queryByText(Config.formation.fields.additionalProvisions.addButtonText)
+      ).not.toBeInTheDocument();
       expect(screen.queryAllByLabelText("remove provision")).toHaveLength(2);
       expect(screen.getByLabelText("Provisions 0")).toBeInTheDocument();
       expect(screen.getByLabelText("Provisions 1")).toBeInTheDocument();
     });
 
     it("opens provisions when Add button clicked", async () => {
-      await getPageHelper({}, { provisions: [] });
-      fireEvent.click(screen.getByText(Config.formation.fields.provisions.addButtonText));
-      expect(screen.queryByText(Config.formation.fields.provisions.addButtonText)).not.toBeInTheDocument();
+      await getPageHelper({}, { additionalProvisions: [] });
+      fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addButtonText));
+      expect(
+        screen.queryByText(Config.formation.fields.additionalProvisions.addButtonText)
+      ).not.toBeInTheDocument();
       expect(screen.getByLabelText("remove provision")).toBeInTheDocument();
       expect(screen.getByLabelText("Provisions 0")).toBeInTheDocument();
     });
 
     it("adds more provisions when Add More button clicked", async () => {
-      await getPageHelper({}, { provisions: [] });
-      fireEvent.click(screen.getByText(Config.formation.fields.provisions.addButtonText));
-      fireEvent.click(screen.getByText(Config.formation.fields.provisions.addAnotherButtonText));
+      await getPageHelper({}, { additionalProvisions: [] });
+      fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addButtonText));
+      fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addAnotherButtonText));
       expect(screen.queryAllByLabelText("remove provision")).toHaveLength(2);
       expect(screen.getByLabelText("Provisions 0")).toBeInTheDocument();
       expect(screen.getByLabelText("Provisions 1")).toBeInTheDocument();
@@ -348,21 +356,21 @@ describe("Formation - BusinessStep", () => {
       const page = await getPageHelper(
         {},
         {
-          provisions: ["provision1", "provision2", "provision3"],
+          additionalProvisions: ["provision1", "provision2", "provision3"],
         }
       );
       const removeProvision2Button = screen.getAllByLabelText("remove provision")[1];
       fireEvent.click(removeProvision2Button);
       await page.submitBusinessStep();
-      expect(currentBusiness().formationData.formationFormData.provisions).toEqual([
+      expect(currentBusiness().formationData.formationFormData.additionalProvisions).toEqual([
         "provision1",
         "provision3",
       ]);
     });
 
     it("updates char count in real time", async () => {
-      const page = await getPageHelper({}, { provisions: [] });
-      fireEvent.click(screen.getByText(Config.formation.fields.provisions.addButtonText));
+      const page = await getPageHelper({}, { additionalProvisions: [] });
+      fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addButtonText));
       expect(screen.getByText("0 / 3000", { exact: false })).toBeInTheDocument();
       page.fillText("Provisions 0", "some provision");
       const charLength = "some provision".length;
@@ -371,10 +379,10 @@ describe("Formation - BusinessStep", () => {
 
     it("does not allow adding more than 10 provisions", async () => {
       const nineProvisions = Array(9).fill("some provision");
-      await getPageHelper({}, { provisions: nineProvisions });
-      fireEvent.click(screen.getByText(Config.formation.fields.provisions.addAnotherButtonText));
+      await getPageHelper({}, { additionalProvisions: nineProvisions });
+      fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addAnotherButtonText));
       expect(
-        screen.queryByText(Config.formation.fields.provisions.addAnotherButtonText)
+        screen.queryByText(Config.formation.fields.additionalProvisions.addAnotherButtonText)
       ).not.toBeInTheDocument();
     });
   });

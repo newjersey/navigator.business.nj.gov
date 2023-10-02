@@ -27,6 +27,7 @@ import { migrate_v120_to_v121 } from "./v121_add_nonprofit_formation_fields";
 import { migrate_v121_to_v122 } from "./v122_remove_welcome_and_welcomeupandrunning_sidecards";
 import { migrate_v122_to_v123 } from "./v123_remove_account_creation_sidecards";
 import { migrate_v123_to_v124 } from "./v124_remove_task_progress_sidebar_card";
+import { migrate_v124_to_v125 } from "./v125_rename_provisions_to_additional_provisions";
 import { migrate_v11_to_v12 } from "./v12_remove_scorp";
 import { migrate_v12_to_v13 } from "./v13_add_construction_renovation_plan";
 import { migrate_v13_to_v14 } from "./v14_add_cleaning_aid_industry";
@@ -252,4 +253,5 @@ export const Migrations: MigrationFunction[] = [
   migrate_v121_to_v122,
   migrate_v122_to_v123,
   migrate_v123_to_v124,
+  migrate_v124_to_v125,
 ];

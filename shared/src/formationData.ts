@@ -132,7 +132,7 @@ export interface FormationFormData extends FormationAddress {
   readonly nonprofitTrusteesMethodTerms: string;
   readonly nonprofitAssetDistributionSpecified: InFormInBylaws;
   readonly nonprofitAssetDistributionTerms: string;
-  readonly provisions: string[] | undefined;
+  readonly additionalProvisions: string[] | undefined;
   readonly agentNumberOrManual: "NUMBER" | "MANUAL_ENTRY";
   readonly agentNumber: string;
   readonly agentName: string;
@@ -187,7 +187,7 @@ export type FormationTextField = Exclude<
   | "agentUseAccountInfo"
   | "agentUseBusinessAddress"
   | "agentOfficeAddressMunicipality"
-  | "provisions"
+  | "additionalProvisions"
   | "businessName"
   | "canCreateLimitedPartner"
   | "canGetDistribution"
@@ -269,7 +269,7 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     nonprofitTrusteesMethodTerms: "",
     nonprofitAssetDistributionSpecified: undefined,
     nonprofitAssetDistributionTerms: "",
-    provisions: undefined,
+    additionalProvisions: undefined,
     agentNumberOrManual: "NUMBER",
     agentNumber: "",
     agentName: "",

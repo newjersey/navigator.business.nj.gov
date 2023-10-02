@@ -4,18 +4,18 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext } from "react";
 
-export const ReviewProvisions = (): ReactElement => {
+export const ReviewAdditionalProvisions = (): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
 
   return (
-    <ReviewSubSection header={Config.formation.fields.provisions.label}>
+    <ReviewSubSection header={Config.formation.fields.additionalProvisions.label}>
       <div className="" data-testid="provisions">
-        {state.formationFormData.provisions?.map((provision, index) => {
+        {state.formationFormData.additionalProvisions?.map((provision, index) => {
           return (
             <div className="margin-bottom-2" key={index}>
               <div className="text-bold margin-bottom-05">
-                {index + 1}. {Config.formation.fields.provisions.secondaryLabel}
+                {index + 1}. {Config.formation.fields.additionalProvisions.secondaryLabel}
               </div>
               <ExpandCollapseString
                 text={provision}

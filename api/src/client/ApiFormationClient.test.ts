@@ -96,7 +96,7 @@ describe("ApiFormationClient", () => {
         const formationFormData = generateFormationFormData(
           {
             agentNumberOrManual: "MANUAL_ENTRY",
-            provisions: ["provision1", "provision2"],
+            additionalProvisions: ["provision1", "provision2"],
             members,
             signers: [
               generateFormationSigner({
@@ -247,7 +247,7 @@ describe("ApiFormationClient", () => {
             agentNumberOrManual: "MANUAL_ENTRY",
             foreignDateOfFormation: "2022/10/20",
             foreignStateOfFormation: "Massachusetts",
-            provisions: ["provision1", "provision2"],
+            additionalProvisions: ["provision1", "provision2"],
             members: undefined,
             signers: [
               generateFormationSigner({
@@ -400,7 +400,7 @@ describe("ApiFormationClient", () => {
           {
             businessTotalStock: "1234",
             agentNumberOrManual: "MANUAL_ENTRY",
-            provisions: ["provision1", "provision2"],
+            additionalProvisions: ["provision1", "provision2"],
             incorporators,
             members,
           },
@@ -568,7 +568,7 @@ describe("ApiFormationClient", () => {
             agentNumberOrManual: "MANUAL_ENTRY",
             foreignDateOfFormation: "2022/10/20",
             foreignStateOfFormation: "Massachusetts",
-            provisions: undefined,
+            additionalProvisions: undefined,
             members: undefined,
             incorporators: undefined,
             signers,
@@ -785,7 +785,7 @@ describe("ApiFormationClient", () => {
         const formationFormData = generateFormationFormData(
           {
             agentNumberOrManual: "MANUAL_ENTRY",
-            provisions: ["provision1", "provision2"],
+            additionalProvisions: ["provision1", "provision2"],
             members: [],
             signers: [
               generateFormationSigner({
@@ -918,7 +918,7 @@ describe("ApiFormationClient", () => {
             foreignDateOfFormation: "2022/10/20",
             foreignStateOfFormation: "Massachusetts",
             agentNumberOrManual: "MANUAL_ENTRY",
-            provisions: [],
+            additionalProvisions: [],
             members: undefined,
             signers: [
               generateFormationSigner({
@@ -1063,7 +1063,7 @@ describe("ApiFormationClient", () => {
         const formationFormData = generateFormationFormData(
           {
             agentNumberOrManual: "MANUAL_ENTRY",
-            provisions: [],
+            additionalProvisions: [],
             withdrawals: "withdrawl",
             dissolution: "dissolution",
             combinedInvestment: "combined investment",

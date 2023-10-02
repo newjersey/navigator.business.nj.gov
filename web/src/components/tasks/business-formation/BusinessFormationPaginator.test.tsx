@@ -274,12 +274,14 @@ describe("<BusinessFormationPaginator />", () => {
         const page = preparePage({ business, displayContent });
         await page.stepperClickToBusinessStep();
 
-        fireEvent.click(screen.getByText(Config.formation.fields.provisions.addButtonText));
-        fireEvent.click(screen.getByText(Config.formation.fields.provisions.addAnotherButtonText));
-        fireEvent.click(screen.getByText(Config.formation.fields.provisions.addAnotherButtonText));
+        fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addButtonText));
+        fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addAnotherButtonText));
+        fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addAnotherButtonText));
         page.fillText("Provisions 2", "provision2");
         switchStepFunction();
-        expect(currentBusiness().formationData.formationFormData.provisions).toEqual(["provision2"]);
+        expect(currentBusiness().formationData.formationFormData.additionalProvisions).toEqual([
+          "provision2",
+        ]);
         await page.stepperClickToBusinessStep();
         expect(screen.getByLabelText("remove provision")).toBeInTheDocument();
       });
@@ -2158,12 +2160,14 @@ describe("<BusinessFormationPaginator />", () => {
         jest.advanceTimersByTime(1000);
       });
 
-      fireEvent.click(screen.getByText(Config.formation.fields.provisions.addButtonText));
+      fireEvent.click(screen.getByText(Config.formation.fields.additionalProvisions.addButtonText));
 
-      await waitFor(() => expect(currentBusiness().formationData.formationFormData.provisions).toEqual([""]));
+      await waitFor(() =>
+        expect(currentBusiness().formationData.formationFormData.additionalProvisions).toEqual([""])
+      );
       await page.stepperClickToContactsStep();
       await page.stepperClickToBusinessStep();
-      expect(currentBusiness().formationData.formationFormData.provisions).toEqual([]);
+      expect(currentBusiness().formationData.formationFormData.additionalProvisions).toEqual([]);
     });
 
     it("does not autosave if a field has changed but less than 1 second has passed", () => {

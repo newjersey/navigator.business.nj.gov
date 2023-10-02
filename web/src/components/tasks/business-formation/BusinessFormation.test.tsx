@@ -481,7 +481,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
     expect(formationFormData.businessPurpose).toEqual("to take over the world");
     expect(formationFormData.members).toEqual(undefined);
-    expect(formationFormData.provisions).toEqual(undefined);
+    expect(formationFormData.additionalProvisions).toEqual(undefined);
     expect(formationFormData.signers).toEqual([
       {
         title: "General Partner",
@@ -695,7 +695,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
     expect(formationFormData.businessPurpose).toEqual("to take over the world");
     expect(formationFormData.members).toEqual(undefined);
-    expect(formationFormData.provisions).toEqual(undefined);
+    expect(formationFormData.additionalProvisions).toEqual(undefined);
     expect(formationFormData.signers).toEqual([
       {
         title: "General Partner",

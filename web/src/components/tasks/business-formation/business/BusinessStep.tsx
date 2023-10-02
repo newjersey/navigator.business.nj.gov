@@ -1,8 +1,8 @@
+import { AdditionalProvisions } from "@/components/tasks/business-formation/business/AdditionalProvisions";
 import { MainBusiness } from "@/components/tasks/business-formation/business/MainBusiness";
 import { MainBusinessAddressNj } from "@/components/tasks/business-formation/business/MainBusinessAddressNj";
 import { MainBusinessForeignAddressFlow } from "@/components/tasks/business-formation/business/MainBusinessForeignAddressFlow";
 import { PartnershipRights } from "@/components/tasks/business-formation/business/PartnershipRights";
-import { Provisions } from "@/components/tasks/business-formation/business/Provisions";
 import { BusinessFormationTextBox } from "@/components/tasks/business-formation/BusinessFormationTextBox";
 import { FormationField } from "@/components/tasks/business-formation/FormationField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -88,7 +88,7 @@ export const BusinessStep = (): ReactElement => {
     )
       return null;
 
-    return <Provisions />;
+    return <AdditionalProvisions />;
   };
 
   const defaultOrder: (ReactElement | null)[] = [

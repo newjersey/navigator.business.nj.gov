@@ -7,41 +7,42 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext } from "react";
 
-export const Provisions = (): ReactElement => {
+export const AdditionalProvisions = (): ReactElement => {
   const MAX_CHARS = 3000;
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
-  const isExpanded = state.formationFormData.provisions && state.formationFormData.provisions.length > 0;
+  const isExpanded =
+    state.formationFormData.additionalProvisions && state.formationFormData.additionalProvisions.length > 0;
 
   const handleAddButtonClick = (): void => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        provisions: [""],
+        additionalProvisions: [""],
       };
     });
   };
 
   const handleProvisionChange = (value: string, index: number): void => {
-    setFieldsInteracted(["provisions"]);
-    const newProvisions = [...(state.formationFormData.provisions ?? [])];
+    setFieldsInteracted(["additionalProvisions"]);
+    const newProvisions = [...(state.formationFormData.additionalProvisions ?? [])];
     newProvisions[index] = value;
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        provisions: newProvisions,
+        additionalProvisions: newProvisions,
       };
     });
   };
 
   const removeProvision = (index: number): void => {
-    const newProvisions = [...(state.formationFormData.provisions ?? [])];
+    const newProvisions = [...(state.formationFormData.additionalProvisions ?? [])];
     newProvisions.splice(index, 1);
 
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        provisions: newProvisions,
+        additionalProvisions: newProvisions,
       };
     });
   };
@@ -50,7 +51,7 @@ export const Provisions = (): ReactElement => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
-        provisions: [...(state.formationFormData.provisions ?? []), ""],
+        additionalProvisions: [...(state.formationFormData.additionalProvisions ?? []), ""],
       };
     });
   };
@@ -59,23 +60,25 @@ export const Provisions = (): ReactElement => {
     <>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
         <div role="heading" aria-level={2} className="h3-styling margin-0-override">
-          {Config.formation.fields.provisions.label}{" "}
+          {Config.formation.fields.additionalProvisions.label}{" "}
           <span className="text-normal font-body-lg">{Config.formation.general.optionalLabel}</span>
         </div>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
             <UnStyledButton style="default" onClick={handleAddButtonClick} dataTestid="show-provisions">
-              {Config.formation.fields.provisions.addButtonText}
+              {Config.formation.fields.additionalProvisions.addButtonText}
             </UnStyledButton>
           )}
         </div>
       </div>
-      {isExpanded && <Content className="margin-bottom-2">{Config.formation.fields.provisions.body}</Content>}
-      {state.formationFormData.provisions?.map((provision: string, index: number) => {
+      {isExpanded && (
+        <Content className="margin-bottom-2">{Config.formation.fields.additionalProvisions.body}</Content>
+      )}
+      {state.formationFormData.additionalProvisions?.map((provision: string, index: number) => {
         return (
           <div key={index}>
             <strong>
-              <ModifiedContent>{Config.formation.fields.provisions.secondaryLabel}</ModifiedContent>
+              <ModifiedContent>{Config.formation.fields.additionalProvisions.secondaryLabel}</ModifiedContent>
             </strong>
             <span className="margin-left-05">{Config.formation.general.optionalLabel}</span>
             <div className="grid-row">
@@ -117,17 +120,19 @@ export const Provisions = (): ReactElement => {
           </div>
         );
       })}
-      {isExpanded && state.formationFormData.provisions && state.formationFormData.provisions.length < 10 && (
-        <UnStyledButton
-          onClick={handleAddAnother}
-          className="margin-top-2"
-          style="default"
-          dataTestid="add-new-provision"
-        >
-          <Icon>add</Icon>
-          {Config.formation.fields.provisions.addAnotherButtonText}
-        </UnStyledButton>
-      )}
+      {isExpanded &&
+        state.formationFormData.additionalProvisions &&
+        state.formationFormData.additionalProvisions.length < 10 && (
+          <UnStyledButton
+            onClick={handleAddAnother}
+            className="margin-top-2"
+            style="default"
+            dataTestid="add-new-provision"
+          >
+            <Icon>add</Icon>
+            {Config.formation.fields.additionalProvisions.addAnotherButtonText}
+          </UnStyledButton>
+        )}
     </>
   );
 };

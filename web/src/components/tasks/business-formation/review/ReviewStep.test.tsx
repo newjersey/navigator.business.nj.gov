@@ -263,17 +263,17 @@ describe("Formation - ReviewStep", () => {
   });
 
   it("displays provisions on review step", async () => {
-    await renderStep({}, { provisions: ["provision1", "provision2"] });
+    await renderStep({}, { additionalProvisions: ["provision1", "provision2"] });
     expect(screen.getByTestId("provisions")).toBeInTheDocument();
     expect(screen.getByText("provision1")).toBeInTheDocument();
     expect(screen.getByText("provision2")).toBeInTheDocument();
     expect(
-      screen.getAllByText(Config.formation.fields.provisions.secondaryLabel, { exact: false })
+      screen.getAllByText(Config.formation.fields.additionalProvisions.secondaryLabel, { exact: false })
     ).toHaveLength(2);
   });
 
   it("does not display provisions within review step when they are empty", async () => {
-    await renderStep({}, { provisions: [] });
+    await renderStep({}, { additionalProvisions: [] });
     expect(screen.queryByTestId("provisions")).not.toBeInTheDocument();
   });
 
@@ -650,7 +650,7 @@ describe("Formation - ReviewStep", () => {
 
     it("displays the Provisions section", async () => {
       await renderStep({ legalStructureId }, {});
-      expect(screen.getByText(Config.formation.fields.provisions.label)).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.additionalProvisions.label)).toBeInTheDocument();
     });
 
     it("displays yes for board members in the Provisions section", async () => {

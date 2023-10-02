@@ -204,7 +204,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
 
     const getAdditionalProvisions = (): Provisions => {
       const additionalProvisions =
-        formationFormData.provisions?.map((it: string) => {
+        formationFormData.additionalProvisions?.map((it: string) => {
           return { Provision: it };
         }) ?? [];
 

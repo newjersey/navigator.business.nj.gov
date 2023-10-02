@@ -24,7 +24,7 @@ export default {
 
 const Template: ComponentStory<typeof GenericTextField> = (props) => {
   const mergedConfig = getMergedConfig();
-  mergedConfig.formation.fields.provisions.label = "Text Area Header";
+  mergedConfig.formation.fields.additionalProvisions.label = "Text Area Header";
   const [config, setConfig] = useState<ConfigType>(mergedConfig);
 
   const [profileData, setProfileData] = useState<ProfileData>(

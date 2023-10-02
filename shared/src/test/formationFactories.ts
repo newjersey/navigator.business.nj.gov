@@ -196,7 +196,7 @@ export const generateFormationFormData = (
     businessStartDate: getCurrentDate().add(1, "days").format(defaultDateFormat),
     businessTotalStock: isCorp ? randomInt().toString() ?? "" : "",
     businessPurpose: `some-purpose-${randomInt()}`,
-    provisions: [`some-provision-${randomInt()}`],
+    additionalProvisions: [`some-provision-${randomInt()}`],
     agentNumberOrManual: randomInt() % 2 ? "NUMBER" : "MANUAL_ENTRY",
     agentNumber: `some-agent-number-${randomInt()}`,
     agentName: `some-agent-name-${randomInt()}`,

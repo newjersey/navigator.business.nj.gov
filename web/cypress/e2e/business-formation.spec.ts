@@ -31,7 +31,10 @@ describe("Business Formation [feature] [all] [group2]", () => {
     const addressMunicipality = generateMunicipality({ displayName: "Allendale" });
     const addressZipCode = "07005";
     const businessPurpose = "My Business Purpose...";
-    const provisions: FormationFormData["provisions"] = ["My Provision 1", "My Provision 2"];
+    const additionalProvisions: FormationFormData["additionalProvisions"] = [
+      "My Provision 1",
+      "My Provision 2",
+    ];
     const agentNumberOrManual: FormationFormData["agentNumberOrManual"] = "MANUAL_ENTRY";
     const registeredAgentSameAsAccountCheckbox = false;
     const agentName = "John Doe";
@@ -75,7 +78,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
       addressZipCode,
     });
     typeBusinessPurpose(businessPurpose);
-    typeProvisions(provisions);
+    typeProvisions(additionalProvisions);
     onBusinessFormationPage.clickContinueToNextTab();
 
     selectAndTypeRegisteredAgent({
@@ -172,13 +175,13 @@ const typeBusinessPurpose = (businessPurpose: FormationFormData["businessPurpose
   onBusinessFormationPage.getBusinessPurpose().invoke("prop", "value").should("contain", businessPurpose);
 };
 
-const typeProvisions = (provisions: FormationFormData["provisions"]): void => {
+const typeProvisions = (provisions: FormationFormData["additionalProvisions"]): void => {
   if (!provisions) {
     return;
   }
   onBusinessFormationPage.clickAddProvisions();
-  for (const [index, privision] of provisions.entries()) {
-    onBusinessFormationPage.typeProvision(privision, index);
+  for (const [index, provision] of provisions.entries()) {
+    onBusinessFormationPage.typeProvision(provision, index);
     onBusinessFormationPage.getProvision(index).invoke("prop", "value").should("contain", provisions[index]);
     if (index + 1 < provisions.length) {
       onBusinessFormationPage.clickAddNewProvision();
