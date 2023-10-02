@@ -13,7 +13,6 @@ export const ForeignStateOfFormation = (): ReactElement => {
   const { doesFieldHaveError } = useFormationErrors();
 
   const handleChange = (stateObject: StateObject | undefined): void => {
-    setFieldsInteracted([FIELD]);
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
