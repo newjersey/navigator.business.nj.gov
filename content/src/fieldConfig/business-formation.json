@@ -419,7 +419,7 @@
         "label": "State",
         "error": "Enter a state."
       },
-      "provisions": {
+      "additionalProvisions": {
         "label": "Additional Provisions/Articles",
         "secondaryLabel": "Provision/Article",
         "body": "Provisions help you prevent personal legal liabilities and clarify board members' rights and duties to the company to prevent misunderstandings. You can list up to 10 provisions; consider including the information on operations, finances, `class of shares|shares-class` structure, and details on the rights of the Board of Directors.",

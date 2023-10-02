@@ -185,10 +185,10 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     let formationFormDataToSubmit = { ...formationFormData };
 
     if (isStep("Business")) {
-      const filteredProvisions = formationFormData.provisions?.filter((it) => {
+      const filteredProvisions = formationFormData.additionalProvisions?.filter((it) => {
         return it !== "";
       });
-      formationFormDataToSubmit = { ...formationFormDataToSubmit, provisions: filteredProvisions };
+      formationFormDataToSubmit = { ...formationFormDataToSubmit, additionalProvisions: filteredProvisions };
     }
 
     if (isStep("Contacts")) {
@@ -252,7 +252,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     const { formationFormData } = business.formationData;
 
     analytics.event.business_formation_provisions.submit.provisions_submitted_with_formation(
-      formationFormData.provisions?.length ?? 0
+      formationFormData.additionalProvisions?.length ?? 0
     );
 
     if (formationFormData.businessPurpose.trim().length > 0) {
