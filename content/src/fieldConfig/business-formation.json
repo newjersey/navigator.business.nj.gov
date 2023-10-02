@@ -26,7 +26,9 @@
       "viewMoreButtonText": "Read more",
       "amendmentInfo": "#### Review your information before submitting to the New Jersey Division of Revenue and Enterprise Services.\n If you need to make a change after submitting, you must file an [amendment online.](https://www.njportal.com/dor/businessamendments)",
       "viewLessButtonText": "Read less",
-      "genericErrorText": "This field requires information."
+      "genericErrorText": "This field requires information.",
+      "radioNoText": "No",
+      "radioYesText": "Yes"
     },
     "intro": {
       "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.\n\nInterested in `reserving your business name temporarily|name-reservation` before registering?",
@@ -265,8 +267,6 @@
       "isVeteranNonprofit": {
         "label": "Non-Profit Veteran Corporation",
         "description": "Is your Domestic Non-Profit a `Veteran Corporation|veteran-corporation`?",
-        "radioNoText": "No",
-        "radioYesText": "Yes",
         "error": "Select 'Yes' or 'No'.",
         "reviewTextYes": "**Yes**, my Domestic Non-Profit is a Veteran Corporation.",
         "reviewTextNo": "**No**, my Domestic Non-Profit is not a Veteran Corporation."
@@ -494,8 +494,6 @@
     "nonprofitProvisions": {
       "label": "Provisions",
       "description": "Specify form",
-      "radioNoText": "No",
-      "radioYesText": "Yes",
       "radioInBylawsText": "In the bylaws",
       "radioInFormText": "In this form"
     }

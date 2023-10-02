@@ -17,6 +17,8 @@ interface Props {
   title: string;
   values: InFormBylawsRadioType[] | TrueFalseRadioType[];
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  errorMessage?: string | undefined;
+  overrideLabelMap?: Record<InFormBylawsRadioType, string> | Record<TrueFalseRadioType, string>;
 }
 
 export const FormationRadio = (props: Props): ReactElement => {
@@ -25,13 +27,15 @@ export const FormationRadio = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const hasError = doesFieldHaveError(props.fieldName);
+  const errorMessage = props.errorMessage ?? Config.formation.general.genericErrorText;
 
   const getRadioLabel = (value: InFormBylawsRadioType | TrueFalseRadioType): string => {
     const labelMap = {
-      true: Config.formation.nonprofitProvisions.radioYesText,
-      false: Config.formation.nonprofitProvisions.radioNoText,
+      true: Config.formation.general.radioYesText,
+      false: Config.formation.general.radioNoText,
       IN_FORM: Config.formation.nonprofitProvisions.radioInFormText,
       IN_BYLAWS: Config.formation.nonprofitProvisions.radioInBylawsText,
+      ...props.overrideLabelMap,
     };
 
     return labelMap[value];
@@ -63,7 +67,7 @@ export const FormationRadio = (props: Props): ReactElement => {
               />
             ))}
           </RadioGroup>
-          <FormHelperText>{hasError ? Config.formation.general.genericErrorText : ""}</FormHelperText>
+          <FormHelperText>{hasError ? errorMessage : ""}</FormHelperText>
         </FormControl>
       </FormationField>
     </WithErrorBar>

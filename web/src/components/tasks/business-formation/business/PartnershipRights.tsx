@@ -32,6 +32,10 @@ export const PartnershipRights = (): ReactElement => {
           });
           setFieldsInteracted([fieldName]);
         }}
+        overrideLabelMap={{
+          true: Config.formation.partnershipRights.radioYesText,
+          false: Config.formation.partnershipRights.radioNoText,
+        }}
       />
     );
   };

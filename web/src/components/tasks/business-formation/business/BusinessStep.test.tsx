@@ -467,7 +467,7 @@ describe("Formation - BusinessStep", () => {
     for (const legalStructureId of ["c-corporation", "s-corporation"]) {
       it(`should render for foreign ${legalStructureId}`, async () => {
         await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
-        expect(screen.getByTestId("will-practice-law-label")).toBeInTheDocument();
+        expect(screen.getByText(Config.formation.fields.willPracticeLaw.label)).toBeInTheDocument();
       });
     }
 
@@ -479,14 +479,14 @@ describe("Formation - BusinessStep", () => {
     ]) {
       it(`should not render for foreign ${legalStructureId}`, async () => {
         await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
-        expect(screen.queryByTestId("will-practice-law-label")).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.formation.fields.willPracticeLaw.label)).not.toBeInTheDocument();
       });
     }
 
     for (const legalStructureId of publicFilingLegalTypes) {
       it(`should not render for ${legalStructureId}`, async () => {
         await getPageHelper({ businessPersona: "OWNING", legalStructureId }, {});
-        expect(screen.queryByTestId("will-practice-law-label")).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.formation.fields.willPracticeLaw.label)).not.toBeInTheDocument();
       });
     }
   });
@@ -888,7 +888,7 @@ describe("Formation - BusinessStep", () => {
 
     it("saves data to formationData", async () => {
       const page = await getPageHelper({ legalStructureId: "nonprofit" }, { isVeteranNonprofit: undefined });
-      page.chooseRadio("is-veteran-nonprofit-yes");
+      page.chooseRadio("isVeteranNonprofit-true");
       await page.submitBusinessStep(true);
       expect(currentBusiness().formationData.formationFormData.isVeteranNonprofit).toEqual(true);
     });

@@ -489,9 +489,9 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
 
   const completeWillPracticeLaw = (response = false): void => {
     if (response) {
-      fireEvent.click(screen.getByTestId("practice-law-yes"));
+      fireEvent.click(screen.getByTestId("willPracticeLaw-true"));
     } else {
-      fireEvent.click(screen.getByTestId("practice-law-no"));
+      fireEvent.click(screen.getByTestId("willPracticeLaw-false"));
     }
   };
 

@@ -786,8 +786,6 @@ collections:
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
-                      - { label: "Radio no text", name: "radioNoText", widget: "string" }
-                      - { label: "Radio yes text", name: "radioYesText", widget: "string" }
                       - { label: "Error", name: "error", widget: "string" }
                       - { label: "Review Text - Yes", name: "reviewTextYes", widget: "markdown" }
                       - { label: "Review Text - No", name: "reviewTextNo", widget: "markdown" }
@@ -1001,6 +999,8 @@ collections:
                     }
                   - { label: "Read more button text", name: "viewMoreButtonText", widget: "string" }
                   - { label: "Read less button text", name: "viewLessButtonText", widget: "string" }
+                  - { label: "Radio no text", name: "radioNoText", widget: "string" }
+                  - { label: "Radio yes text", name: "radioYesText", widget: "string" }
               - label: Nonprofit Provisions
                 name: nonprofitProvisions
                 collapsed: true
@@ -1008,8 +1008,6 @@ collections:
                 fields:
                   - { label: "Provisions", name: "label", widget: "string" }
                   - { label: "Description", name: "description", widget: "string" }
-                  - { label: "Radio no text", name: "radioNoText", widget: "string" }
-                  - { label: "Radio yes text", name: "radioYesText", widget: "string" }
                   - { label: "Radio in bylaws text", name: "radioInBylawsText", widget: "string" }
                   - { label: "Radio in form text", name: "radioInFormText", widget: "string" }
               - label: Intro Paragraph

@@ -1,4 +1,3 @@
-import { PracticesLaw } from "@/components/tasks/business-formation/business//PracticesLaw";
 import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/business/BusinessNameAndLegalStructure";
 import { ForeignCertificate } from "@/components/tasks/business-formation/business/ForeignCertificate";
 import { ForeignStateOfFormation } from "@/components/tasks/business-formation/business/ForeignStateOfFormation";
@@ -6,6 +5,7 @@ import { FormationDate } from "@/components/tasks/business-formation/business/Fo
 import { IsVeteranNonprofit } from "@/components/tasks/business-formation/business/IsVeteranNonprofit";
 import { NonprofitProvisions } from "@/components/tasks/business-formation/business/NonprofitProvisions";
 import { SuffixDropdown } from "@/components/tasks/business-formation/business/SuffixDropdown";
+import { WillPracticeLaw } from "@/components/tasks/business-formation/business/WillPracticeLaw";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { FormationField } from "@/components/tasks/business-formation/FormationField";
 import { WithErrorBar } from "@/components/WithErrorBar";
@@ -76,7 +76,7 @@ export const MainBusiness = (): ReactElement => {
           {isForeignCorporation(state.formationFormData.legalType) && (
             <WithErrorBar hasError={doesFieldHaveError("willPracticeLaw")} type="ALWAYS">
               <FormationField fieldName="willPracticeLaw">
-                <PracticesLaw hasError={doesFieldHaveError("willPracticeLaw")} />
+                <WillPracticeLaw />
                 <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
               </FormationField>
             </WithErrorBar>

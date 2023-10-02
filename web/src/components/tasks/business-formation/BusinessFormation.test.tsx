@@ -979,7 +979,7 @@ describe("<BusinessFormation />", () => {
     page.selectByText("Business suffix", "A NJ NONPROFIT CORPORATION");
     const threeDaysFromNow = getCurrentDate().add(3, "days");
     page.selectDate(threeDaysFromNow, "Business start date");
-    page.chooseRadio("is-veteran-nonprofit-yes");
+    page.chooseRadio("isVeteranNonprofit-true");
 
     page.fillText("Address line1", "1234 main street");
     page.fillText("Address line2", "Suite 304");
