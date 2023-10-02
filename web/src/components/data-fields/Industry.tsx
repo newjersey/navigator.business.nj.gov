@@ -59,7 +59,7 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
         validationLabel="Error"
         validationText={contentFromConfig.errorTextRequired}
         handleChange={(): void => setIsValid(true)}
-        onValidation={(event): void => setIsValid(!isValid(event.target.value))}
+        onValidation={(event): void => setIsValid(isValid(event.target.value))}
       />
       {state.profileData.industryId === "home-contractor" && (
         <div
