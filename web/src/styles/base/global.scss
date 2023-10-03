@@ -129,6 +129,10 @@ ol {
   transform: translateY(0%);
 }
 
+.font-weight-normal {
+  font-weight: normal !important;
+}
+
 .usa-link-hover-override:hover {
   .icon-green-bg-color-hover {
     background-color: $primary-dark;

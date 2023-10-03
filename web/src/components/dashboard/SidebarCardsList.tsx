@@ -3,10 +3,13 @@ import { SidebarCard } from "@/components/dashboard/SidebarCard";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getForYouCardCount } from "@/lib/domain-logic/getForYouCardCount";
+import { MediaQueries } from "@/lib/PageSizes";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab, templateEval } from "@/lib/utils/helpers";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from "@mui/material";
 import { ReactElement, ReactNode, useState } from "react";
 
 interface Props {
@@ -23,6 +26,7 @@ interface Props {
 export const SidebarCardsList = (props: Props): ReactElement => {
   const [hiddenAccordionIsOpen, setHiddenAccordionIsOpen] = useState<boolean>(false);
   const { Config } = useConfig();
+  const { business } = useUserData();
 
   const hiddenOpportunitiesCount = (): number => {
     if (props.displayCertifications && props.displayFundings) {
@@ -43,6 +47,8 @@ export const SidebarCardsList = (props: Props): ReactElement => {
       props.certifications.length + props.fundings.length === 0
     );
   };
+
+  const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 
   const hiddenCardsAccordion = (): ReactNode => {
     if (props.displayCertifications || props.displayFundings) {
@@ -119,8 +125,18 @@ export const SidebarCardsList = (props: Props): ReactElement => {
 
   return (
     <>
-      <h2 className="h1-styling margin-top-0">{Config.dashboardDefaults.sidebarHeading}</h2>
-      <hr className="margin-top-2 margin-bottom-3 bg-cool-lighter" aria-hidden={true} />
+      {isDesktopAndUp && (
+        <>
+          <h2 className="h2-styling margin-top-0 font-weight-normal">
+            {" "}
+            {Config.dashboardDefaults.sidebarHeading}
+            <span data-testid="for-you-counter" className="margin-left-05 text-base">
+              ({getForYouCardCount(business, props.certifications, props.fundings)})
+            </span>
+          </h2>
+          <hr className="margin-top-2 margin-bottom-3 bg-cool-lighter" aria-hidden={true} />
+        </>
+      )}
       <div>
         <div data-testid="top-cards">
           {props.topCards.map((card) => {
