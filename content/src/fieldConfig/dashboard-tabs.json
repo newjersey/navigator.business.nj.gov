@@ -4,6 +4,7 @@
     "hiddenOpportunitiesHeader": "View Hidden Items (${count})",
     "unHideOpportunityText": "Unhide",
     "sidebarHeading": "For You",
+    "completeRequiredTasksText": "You don't have any \"For You\" items yet.\n\nOnce you have completed **all required tasks**, you can apply for state certifications, get funding, and more.",
     "emptyOpportunitiesHeader": "We're looking for State opportunities you may be eligible for, but have not found a match yet.",
     "emptyOpportunitiesText": "If you're seeing this, you might have hidden all items. Don't worry, you can view all hidden items below.",
     "fundingTagText": "Funding",
