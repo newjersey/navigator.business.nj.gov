@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
 import { SidebarCard } from "@/components/dashboard/SidebarCard";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
@@ -12,7 +13,7 @@ import { openInNewTab, templateEval } from "@/lib/utils/helpers";
 import { Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from "@mui/material";
 import { ReactElement, ReactNode, useState } from "react";
 
-interface Props {
+export interface SidebarCardsListProps {
   topCards: SidebarCardContent[];
   bottomCards: SidebarCardContent[];
   fundings: Funding[];
@@ -23,7 +24,7 @@ interface Props {
   displayCertifications: boolean;
 }
 
-export const SidebarCardsList = (props: Props): ReactElement => {
+export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => {
   const [hiddenAccordionIsOpen, setHiddenAccordionIsOpen] = useState<boolean>(false);
   const { Config } = useConfig();
   const { business } = useUserData();
@@ -40,7 +41,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
     }
   };
 
-  const showEmptyState = (): boolean => {
+  const showEmptyOpportunitiesMsg = (): boolean => {
     return (
       props.displayCertifications &&
       props.displayFundings &&
@@ -49,6 +50,13 @@ export const SidebarCardsList = (props: Props): ReactElement => {
   };
 
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
+  const showCompleteRequiredTasksMsg = (): boolean => {
+    return (
+      !props.displayCertifications &&
+      !props.displayFundings &&
+      props.topCards.length + props.bottomCards.length === 0
+    );
+  };
 
   const hiddenCardsAccordion = (): ReactNode => {
     if (props.displayCertifications || props.displayFundings) {
@@ -137,6 +145,14 @@ export const SidebarCardsList = (props: Props): ReactElement => {
           <hr className="margin-top-2 margin-bottom-3 bg-cool-lighter" aria-hidden={true} />
         </>
       )}
+      {showCompleteRequiredTasksMsg() && (
+        <div data-testid="complete-required-tasks-msg" className="fdc fac">
+          <div className="text-center margin-bottom-3">
+            <Content>{Config.dashboardDefaults.completeRequiredTasksText}</Content>
+          </div>
+          <img src={`img/for-you-section.svg`} aria-hidden="true" alt={""} />
+        </div>
+      )}
       <div>
         <div data-testid="top-cards">
           {props.topCards.map((card) => {
@@ -153,10 +169,10 @@ export const SidebarCardsList = (props: Props): ReactElement => {
             props.fundings.map((funding) => {
               return <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />;
             })}
-          {showEmptyState() && (
+          {showEmptyOpportunitiesMsg() && (
             <div className="fdc fac margin-y-3">
-              <h3 className="text-normal">{Config.dashboardDefaults.emptyOpportunitiesHeader}</h3>
-              <img src={`/img/signpost.svg`} className="" alt="" />
+              <div className="text-bold text-center">{Config.dashboardDefaults.emptyOpportunitiesHeader}</div>
+              <img src={`/img/for-you-section.svg`} aria-hidden="true" alt="" />
               <p className="text-center">{Config.dashboardDefaults.emptyOpportunitiesText}</p>
             </div>
           )}
