@@ -31,6 +31,11 @@
   cursor: pointer;
 }
 
+.small-transparent {
+  font-size: 0.88rem;
+  padding: 1px 0.5rem;
+}
+
 .hide-unhide-button:hover {
   border: 1px solid #5c5c5c !important;
   color: #5c5c5c !important;
@@ -97,6 +102,17 @@
   }
   &:active {
     background-color: $info-darker !important;
+  }
+}
+
+.btn-success-extra-light {
+  color: $primary-dark !important;
+  background: $success-extra-light;
+  &:hover {
+    background-color: $success-lighter !important;
+  }
+  &:active {
+    background-color: $primary-lighter !important;
   }
 }
 

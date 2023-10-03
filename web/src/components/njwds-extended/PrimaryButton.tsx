@@ -4,10 +4,10 @@ import { forwardRef, ReactElement, Ref } from "react";
 export type PrimaryButtonColors =
   | "primary"
   | "secondary"
-  | "accent-cool-lightest"
   | "accent-cool-darker"
   | "accent-cooler"
-  | "info";
+  | "info"
+  | "success-extra-light";
 
 interface Props extends GenericButtonProps {
   isColor: PrimaryButtonColors;
@@ -16,10 +16,10 @@ interface Props extends GenericButtonProps {
 const colors = {
   primary: "usa-button",
   secondary: "usa-button usa-button--secondary",
-  "accent-cool-lightest": "usa-button btn-accent-cool-lightest",
   "accent-cool-darker": "usa-button btn-accent-cool-darker",
   "accent-cooler": "usa-button btn-accent-cooler",
   info: "usa-button btn-info",
+  "success-extra-light": "usa-button btn-success-extra-light",
 };
 
 export const PrimaryButton = forwardRef(function PrimaryButton(

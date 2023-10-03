@@ -1,10 +1,8 @@
-import { ButtonIcon } from "@/components/ButtonIcon";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 export default {
-  title: "Molecules/Button/Feedback",
-  component: PrimaryButton,
+  title: "Molecules/Button/Tertiary",
   parameters: {
     design: {
       type: "figma",
@@ -17,18 +15,9 @@ const Template: ComponentStory<typeof PrimaryButton> = ({ children, ...args }) =
   <PrimaryButton {...args}>{children}</PrimaryButton>
 );
 
-export const Small = Template.bind({});
+export const Link = Template.bind({});
 
-Small.args = {
-  isColor: "secondary",
-  isUnBolded: true,
-  isSmallerText: true,
-  isNotFullWidthOnMobile: true,
-  children: (
-    <>
-      <ButtonIcon svgFilename="lightbulb-on-warning-light" sizePx="16px" />
-      <span className="text-left">Text Here</span>
-    </>
-  ),
-  isVerticalPaddingRemoved: true,
+Link.args = {
+  isColor: "success-extra-light",
+  children: "Button",
 };

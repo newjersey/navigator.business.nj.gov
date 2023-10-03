@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { OpportunityCardStatus } from "@/components/dashboard/OpportunityCardStatus";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
@@ -90,9 +91,9 @@ export const OpportunityCard = (props: Props): ReactElement => {
       <div className="fdr margin-bottom-105">
         <div>{TYPE_TO_LABEL[props.urlPath]}</div>
         <div className="mla">
-          <UnStyledButton
-            style={"transparentBgColor"}
-            className={"usa-tag text-normal text-base border-1px border-base-light hide-unhide-button"}
+          <SecondaryButton
+            size={"small"}
+            isColor={"border-base-light"}
             onClick={(): void => {
               isHidden() ? unhideSelf() : hideSelf();
             }}
@@ -105,7 +106,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
                   : Config.dashboardDefaults.hideOpportunityText}
               </span>
             </div>
-          </UnStyledButton>
+          </SecondaryButton>
         </div>
       </div>
       <div className="text-normal font-body-md margin-bottom-105">

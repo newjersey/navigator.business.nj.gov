@@ -4,6 +4,7 @@ import { EmptyCalendar } from "@/components/filings-calendar/EmptyCalendar";
 import { FilingsCalendarAsList } from "@/components/filings-calendar/FilingsCalendarAsList";
 import { FilingsCalendarGrid } from "@/components/filings-calendar/FilingsCalendarGrid";
 import { FilingsCalendarTaxAccess } from "@/components/filings-calendar/FilingsCalendarTaxAccess";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ThreeYearSelector } from "@/components/njwds-extended/ThreeYearSelector";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
@@ -100,10 +101,10 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
     if (displayToggleButton) {
       return (
-        <UnStyledButton
-          style={"transparentBgColor"}
+        <SecondaryButton
+          size={"regular"}
+          isColor={"border-base-light"}
           isRightMarginRemoved
-          className="font-body-2xs padding-x-1 text-normal text-base border-1px border-base-light hide-unhide-button padding-y-11px"
           onClick={handleCalendarOnClick}
         >
           {business?.preferences.isCalendarFullView ? (
@@ -117,7 +118,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
               {Config.dashboardDefaults.calendarGridViewButton}
             </>
           )}
-        </UnStyledButton>
+        </SecondaryButton>
       );
     }
 
