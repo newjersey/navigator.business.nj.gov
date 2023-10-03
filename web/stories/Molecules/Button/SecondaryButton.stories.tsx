@@ -5,7 +5,6 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 export default {
   title: "Molecules/Button/Secondary",
   component: SecondaryButton,
-  decorators: [(Story) => <div className="width-mobile">{Story()}</div>],
   parameters: {
     design: {
       type: "figma",

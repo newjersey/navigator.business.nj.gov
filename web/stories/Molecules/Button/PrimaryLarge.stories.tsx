@@ -4,7 +4,6 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 export default {
   title: "Molecules/Button/PrimaryLarge",
   component: PrimaryButton,
-  decorators: [(Story) => <div className="width-mobile">{Story()}</div>],
   parameters: {
     design: {
       type: "figma",
@@ -29,14 +28,6 @@ export const SecondaryColor = Template.bind({});
 
 SecondaryColor.args = {
   isColor: "secondary",
-  children: "button",
-  isLargeButton: true,
-};
-
-export const AccentCoolLightestColor = Template.bind({});
-
-AccentCoolLightestColor.args = {
-  isColor: "accent-cool-lightest",
   children: "button",
   isLargeButton: true,
 };

@@ -19,7 +19,6 @@ export interface GenericButtonProps {
   isFullWidthOnDesktop?: boolean;
   isVerticalPaddingRemoved?: boolean;
   isUnBolded?: boolean;
-  isTextAlignedLeft?: boolean;
   isLargeButton?: boolean;
   isTextNoWrap?: boolean;
 }
@@ -90,12 +89,7 @@ export const GenericButton = forwardRef(function GenericButton(
           </div>
         </div>
       ) : (
-        <div
-          ref={widthRef}
-          className={`display-flex flex-row flex-align-center ${
-            props.isTextAlignedLeft ? "flex-justify-start" : "flex-justify-center"
-          }`}
-        >
+        <div ref={widthRef} className={`display-flex flex-row flex-align-center`}>
           {props.children}
         </div>
       )}

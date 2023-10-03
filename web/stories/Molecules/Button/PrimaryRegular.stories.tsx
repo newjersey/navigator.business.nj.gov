@@ -1,10 +1,10 @@
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { Icon } from "@/components/njwds/Icon";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 export default {
   title: "Molecules/Button/PrimaryRegular",
   component: PrimaryButton,
-  decorators: [(Story) => <div className="width-mobile">{Story()}</div>],
   parameters: {
     design: {
       type: "figma",
@@ -24,25 +24,16 @@ PrimaryColor.args = {
   children: "button",
 };
 
-export const SecondaryColor = Template.bind({});
+export const IconRight = Template.bind({});
 
-SecondaryColor.args = {
-  isColor: "secondary",
-  children: "button",
-};
-
-export const AccentCoolLightestColor = Template.bind({});
-
-AccentCoolLightestColor.args = {
-  isColor: "accent-cool-lightest",
-  children: "button",
-};
-
-export const AccentCoolDarkerColor = Template.bind({});
-
-AccentCoolDarkerColor.args = {
-  isColor: "accent-cool-darker",
-  children: "button",
+IconRight.args = {
+  isColor: "primary",
+  children: (
+    <>
+      <>Button</>
+      <Icon className="usa-icon--size-3 margin-left-05">arrow_drop_down</Icon>
+    </>
+  ),
 };
 
 export const AccentCoolerColor = Template.bind({});
