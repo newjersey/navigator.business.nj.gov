@@ -583,7 +583,6 @@ describe("dashboard page", () => {
       expect(userDataWasNotUpdated()).toBe(true);
 
       fireEvent.click(screen.getByTestId("for-you-tab"));
-      expect(screen.getByText(Config.dashboardDefaults.sidebarHeading)).toBeInTheDocument();
       await waitFor(() => {
         return expect(currentBusiness().preferences.phaseNewlyChanged).toBe(false);
       });

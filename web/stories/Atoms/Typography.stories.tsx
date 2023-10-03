@@ -188,6 +188,14 @@ const Template = ({}) => (
     <div>{renderFiveColumns(h5)}</div>
     <div>{renderFiveColumns(h6)}</div>
     <hr />
+    <div className="grid-container width-tablet-lg">
+      <div className={`grid-row padding-1`}>
+        <div className="grid-col-2 margin-right-3">H Element Text Normal</div>
+        <div className="grid-col-auto">
+          <h3 className={"font-weight-normal"}>This is heading text with normal font weight</h3>
+        </div>
+      </div>
+    </div>
     <div>{renderTwoColumn(h3TextWithContextualLink)}</div>
     <div>{renderTwoColumn(h3TextWithBoldedContextualLink)}</div>
     <div>{renderTwoColumn(h3TextWithLink)}</div>
