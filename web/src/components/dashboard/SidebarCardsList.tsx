@@ -1,11 +1,11 @@
-import { Content } from "@/components/Content";
 import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
 import { SidebarCard } from "@/components/dashboard/SidebarCard";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { templateEval } from "@/lib/utils/helpers";
+import { openInNewTab, templateEval } from "@/lib/utils/helpers";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, ReactNode, useState } from "react";
 
@@ -104,7 +104,14 @@ export const SidebarCardsList = (props: Props): ReactElement => {
       <>
         <hr className="margin-top-3 bg-cool-lighter" aria-hidden={true} />
         <div className="margin-y-205 weight-unset-override">
-          <Content>{Config.dashboardDefaults.learnMoreFundingOpportunities}</Content>
+          <PrimaryButton
+            isColor={"accent-cooler"}
+            isRightMarginRemoved={true}
+            isFullWidthOnDesktop={true}
+            onClick={(): void => openInNewTab(Config.dashboardDefaults.learnMoreFundingOpportunitiesLink)}
+          >
+            {Config.dashboardDefaults.learnMoreFundingOpportunitiesText}
+          </PrimaryButton>
         </div>
       </>
     );

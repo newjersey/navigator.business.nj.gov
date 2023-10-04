@@ -8,7 +8,6 @@ import {
   generateSidebarCardContent,
   getProfileDataForUnfilteredOpportunities,
 } from "@/test/factories";
-import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData";
@@ -307,9 +306,7 @@ describe("<SidebarCardsContainer />", () => {
       });
       renderWithBusiness(business, { fundings: [] });
       expect(
-        screen.getByText(markdownToText(Config.dashboardDefaults.learnMoreFundingOpportunities), {
-          exact: false,
-        })
+        screen.getByText(Config.dashboardDefaults.learnMoreFundingOpportunitiesText)
       ).toBeInTheDocument();
     });
 
@@ -321,9 +318,7 @@ describe("<SidebarCardsContainer />", () => {
       });
       renderWithBusiness(business, { fundings: [] });
       expect(
-        screen.queryByText(markdownToText(Config.dashboardDefaults.learnMoreFundingOpportunities), {
-          exact: false,
-        })
+        screen.queryByText(Config.dashboardDefaults.learnMoreFundingOpportunitiesText)
       ).not.toBeInTheDocument();
     });
   });
