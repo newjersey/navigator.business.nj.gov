@@ -8,7 +8,8 @@
     "emptyOpportunitiesText": "If you're seeing this, you might have hidden all items. Don't worry, you can view all hidden items below.",
     "fundingTagText": "Funding",
     "certificationTagText": "Certification",
-    "learnMoreFundingOpportunities": "Learn about other [Funding Opportunities](https://business.nj.gov/funding)",
+    "learnMoreFundingOpportunitiesText": "Learn About Other Funding Opportunities",
+    "learnMoreFundingOpportunitiesLink": "https://business.nj.gov/funding",
     "mobileFirstTabText": "Tasks",
     "mobileSecondTabText": "For You (${count})"
   }

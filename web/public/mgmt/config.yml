@@ -2862,10 +2862,14 @@ collections:
               - { label: Funding Tag Text, name: fundingTagText, widget: string }
               - { label: Certification Tag Text, name: certificationTagText, widget: string }
               - {
-                  label: Learn More Funding Opportunities Text,
-                  name: learnMoreFundingOpportunities,
+                  label: Learn More Funding Opportunities Button Text,
+                  name: learnMoreFundingOpportunitiesText,
                   widget: string,
-                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Learn More Funding Opportunities Link,
+                  name: learnMoreFundingOpportunitiesLink,
+                  widget: no-space,
                 }
               - { label: Mobile View - First Tab Text, name: mobileFirstTabText, widget: string }
               - { label: Mobile View - Second Tab Text, name: mobileSecondTabText, widget: string }
