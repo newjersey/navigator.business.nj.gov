@@ -103,7 +103,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
     return (
       <>
         <hr className="margin-top-3 bg-cool-lighter" aria-hidden={true} />
-        <div className="margin-y-205 weight-unset-override">
+        <div className="margin-y-3 weight-unset-override">
           <PrimaryButton
             isColor={"accent-cooler"}
             isRightMarginRemoved={true}
