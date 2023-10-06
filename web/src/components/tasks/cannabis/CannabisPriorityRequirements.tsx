@@ -6,7 +6,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
-import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { openInNewTab, useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, ReactNode, useState } from "react";
 
@@ -69,10 +69,6 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
       !displaySocialEquityPriorityType &&
       !displayNoPriorityType
     );
-  };
-
-  const openInNewTab = (link: string): void => {
-    window.open(link, "_ blank");
   };
 
   const renderCTAButtons = (): ReactNode => {
