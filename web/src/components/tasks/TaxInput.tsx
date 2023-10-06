@@ -154,7 +154,6 @@ export const TaxInput = (props: Props): ReactElement => {
                     isLoading={isLoading}
                     isSubmitButton={true}
                     isRightMarginRemoved={true}
-                    isTextNoWrap={isTabletAndUp}
                     isFullWidthOnDesktop={!isTabletAndUp}
                   >
                     {saveButtonText}

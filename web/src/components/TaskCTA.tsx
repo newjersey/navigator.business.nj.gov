@@ -1,7 +1,10 @@
 /* eslint-disable unicorn/filename-case */
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { ReverseOrderInMobile } from "@/components/ReverseOrderInMobile";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
+import { useMediaQuery } from "@mui/material";
 import { ReactElement, ReactNode } from "react";
 
 interface Props {
@@ -13,14 +16,25 @@ interface Props {
 
 export const TaskCTA = (props: Props): ReactElement => {
   const { Config } = useConfig();
+  const isMobileAndUp = useMediaQuery(MediaQueries.mobileAndUp);
 
   if (props.onClick) {
     return (
-      <div className="flex flex-justify-end flex-column-reverse mobile-lg:flex-row bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg">
-        {props.children}
-        <PrimaryButton isColor="primary" isRightMarginRemoved={true} onClick={props.onClick}>
-          {props.text || Config.taskDefaults.defaultCallToActionText}
-        </PrimaryButton>
+      <div
+        className={`bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg ${
+          isMobileAndUp ? "flex flex-column flex-align-end" : ""
+        }`}
+      >
+        <div>
+          <ReverseOrderInMobile>
+            <>
+              {props.children}
+              <PrimaryButton isColor="primary" isRightMarginRemoved={true} onClick={props.onClick}>
+                {props.text || Config.taskDefaults.defaultCallToActionText}
+              </PrimaryButton>
+            </>
+          </ReverseOrderInMobile>
+        </div>
       </div>
     );
   }

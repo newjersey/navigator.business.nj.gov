@@ -5,6 +5,7 @@ import { HelpButton } from "@/components/njwds-extended/HelpButton";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { ReverseOrderInMobile } from "@/components/ReverseOrderInMobile";
 import { BusinessFormationSteps } from "@/components/tasks/business-formation/BusinessFormationSteps";
 import {
   BusinessFormationStepsConfiguration,
@@ -344,7 +345,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     if (props.searchOnly) return null;
     return (
       <div className="margin-top-2 ">
-        <div className="flex fdc mobile-lg:flex-row fac bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg">
+        <div className="bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg">
           <div className="flex fac margin-bottom-2 mobile-lg:margin-bottom-0">
             <AutosaveSpinner
               saveEveryXSeconds={1}
@@ -356,23 +357,21 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
               }}
             />
           </div>
-          <div className="flex mobile-lg:fac flex-column-reverse mobile-lg:flex-row flex-justify-end width-100">
-            <HelpButton />
-
-            {shouldDisplayPreviousButton() && (
-              <div className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-105">
-                <SecondaryButton
-                  isColor="primary"
-                  onClick={onPreviousButtonClick}
-                  dataTestId="previous-button"
-                  isRightMarginRemoved={true}
-                >
-                  {Config.formation.general.previousButtonText}
-                </SecondaryButton>
-              </div>
-            )}
-
-            <div>
+          <ReverseOrderInMobile>
+            <>
+              <HelpButton />
+              {shouldDisplayPreviousButton() && (
+                <div className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-105">
+                  <SecondaryButton
+                    isColor="primary"
+                    onClick={onPreviousButtonClick}
+                    dataTestId="previous-button"
+                    isRightMarginRemoved={true}
+                  >
+                    {Config.formation.general.previousButtonText}
+                  </SecondaryButton>
+                </div>
+              )}
               <PrimaryButton
                 isColor="primary"
                 onClick={(): void => {
@@ -384,8 +383,8 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
               >
                 {getNextButtonText()}
               </PrimaryButton>
-            </div>
-          </div>
+            </>
+          </ReverseOrderInMobile>
         </div>
       </div>
     );

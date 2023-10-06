@@ -11,6 +11,9 @@ export type PrimaryButtonColors =
 
 interface Props extends GenericButtonProps {
   isColor: PrimaryButtonColors;
+  isUnBolded?: boolean;
+  isSmallerText?: boolean;
+  isLargeButton?: boolean;
 }
 
 const colors = {
@@ -26,5 +29,14 @@ export const PrimaryButton = forwardRef(function PrimaryButton(
   props: Props,
   ref: Ref<HTMLButtonElement>
 ): ReactElement {
-  return <GenericButton {...props} className={colors[props.isColor]} ref={ref} />;
+  return (
+    <GenericButton
+      {...props}
+      className={`${colors[props.isColor]} 
+      ${props.isUnBolded ? "text-normal" : ""}  
+      ${props.isSmallerText ? "font-body-2xs" : ""} 
+      ${props.isLargeButton ? "usa-button--big" : ""}`}
+      ref={ref}
+    />
+  );
 });

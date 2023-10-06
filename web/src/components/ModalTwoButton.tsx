@@ -1,7 +1,9 @@
 import { ModalZeroButton } from "@/components/ModalZeroButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { Breakpoint } from "@mui/material";
+import { ReverseOrderInMobile } from "@/components/ReverseOrderInMobile";
+import { MediaQueries } from "@/lib/PageSizes";
+import { Breakpoint, useMediaQuery } from "@mui/material";
 import { ReactElement, ReactNode } from "react";
 
 interface Props {
@@ -18,13 +20,17 @@ interface Props {
 }
 
 export const ModalTwoButton = (props: Props): ReactElement => {
+  const isMobileAndUp = useMediaQuery(MediaQueries.mobileAndUp);
+
   const buttonNode = (
     <div
-      className="padding-x-4 padding-y-3 bg-base-lightest display-flex flex-column flex-justify-center mobile-lg:flex-row"
+      className={`padding-x-4 padding-y-3 bg-base-lightest ${
+        isMobileAndUp ? "flex flex-column flex-align-end" : ""
+      }`}
       data-testid="modal-content"
     >
-      <div className="mobile-lg:margin-left-auto display-flex flex-column-reverse mobile-lg:flex-row">
-        <div className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-1">
+      <ReverseOrderInMobile>
+        <>
           <SecondaryButton
             isColor="primary"
             dataTestId="modal-button-secondary"
@@ -32,17 +38,19 @@ export const ModalTwoButton = (props: Props): ReactElement => {
           >
             {props.secondaryButtonText}
           </SecondaryButton>
-        </div>
-        <PrimaryButton
-          isColor="primary"
-          isRightMarginRemoved={true}
-          isLoading={props.isLoading}
-          onClick={props.primaryButtonOnClick}
-          dataTestId="modal-button-primary"
-        >
-          {props.primaryButtonText}
-        </PrimaryButton>
-      </div>
+          <div className="margin-bottom-2 mobile-lg:margin-bottom-0">
+            <PrimaryButton
+              isColor="primary"
+              isRightMarginRemoved={true}
+              isLoading={props.isLoading}
+              onClick={props.primaryButtonOnClick}
+              dataTestId="modal-button-primary"
+            >
+              {props.primaryButtonText}
+            </PrimaryButton>
+          </div>
+        </>
+      </ReverseOrderInMobile>
     </div>
   );
 

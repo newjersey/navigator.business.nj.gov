@@ -27,15 +27,15 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
           }}
         >
           <div
-            className={`fdr fac padding-y-1 padding-left-1 padding-right-4 hover:bg-base-lightest ${
+            className={`fdr fac padding-y-1 padding-left-1 padding-right-4 text-semibold-hover text-underline-hover ${
               props.active
-                ? "bg-base-lightest bg-chevron text-primary-dark text-bold h5-styling"
+                ? "bg-cool-lighter bg-chevron text-primary-dark text-bold h5-styling"
                 : "h6-styling"
             }`}
             data-task={props.task.id}
           >
             {taskProgress === "COMPLETED" ? (
-              <Icon className="margin-right-1 checked-task text-primary">check_circle</Icon>
+              <Icon className="margin-right-1 checked-task text-success">check_circle</Icon>
             ) : (
               <div className={`substep-unchecked margin-right-1 ${props.active ? "active" : ""}`} />
             )}

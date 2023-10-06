@@ -5,6 +5,7 @@ import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 
+import { ReverseOrderInMobile } from "@/components/ReverseOrderInMobile";
 import { TaskCTA } from "@/components/TaskCTA";
 import { DbaFormationSteps } from "@/components/tasks/business-formation/DbaFormationSteps";
 import { DbaFormationStepsConfiguration } from "@/components/tasks/business-formation/DbaFormationStepsConfiguration";
@@ -153,8 +154,10 @@ export const DbaFormationPaginator = (): ReactElement => {
   const ButtonWrapper = (props: { children: ReactNode }): ReactElement => {
     return (
       <div className="margin-top-2 width-100">
-        <div className="flex fac flex-justify-end flex-column-reverse mobile-lg:flex-row bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
-          {props.children}
+        <div className="bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg">
+          <ReverseOrderInMobile>
+            <>{props.children}</>
+          </ReverseOrderInMobile>
         </div>
       </div>
     );

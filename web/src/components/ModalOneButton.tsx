@@ -18,19 +18,17 @@ interface Props {
 export const ModalOneButton = (props: Props): ReactElement => {
   const buttonNode = (
     <div
-      className="padding-x-4 padding-y-3 bg-base-lightest display-flex flex-column flex-justify-center mobile-lg:flex-row"
+      className="padding-x-4 padding-y-3 bg-base-lightest flex flex-column flex-align-end"
       data-testid="modal-content"
     >
-      <div className="mobile-lg:margin-left-auto display-flex flex-column-reverse mobile-lg:flex-row">
-        <PrimaryButton
-          isColor="primary"
-          isRightMarginRemoved={true}
-          isLoading={props.isLoading}
-          onClick={props.primaryButtonOnClick}
-        >
-          {props.primaryButtonText}
-        </PrimaryButton>
-      </div>
+      <PrimaryButton
+        isColor="primary"
+        isRightMarginRemoved={true}
+        isLoading={props.isLoading}
+        onClick={props.primaryButtonOnClick}
+      >
+        {props.primaryButtonText}
+      </PrimaryButton>
     </div>
   );
 
