@@ -1,6 +1,19 @@
 import { GenericButton, GenericButtonProps } from "@/components/njwds-extended/GenericButton";
 import { ReactElement } from "react";
-interface Props extends GenericButtonProps {
+
+type OmitGenericButtonProps = Omit<
+  GenericButtonProps,
+  | "isUnBolded"
+  | "isSmallerText"
+  | "isLargeButton"
+  | "id"
+  | "isAriaControls"
+  | "isAriaExpanded"
+  | "isAriaHaspopup"
+  | "className"
+>;
+
+interface Props extends OmitGenericButtonProps {
   isColor: "primary" | "border-base-light";
   size?: "small" | "regular";
 }
