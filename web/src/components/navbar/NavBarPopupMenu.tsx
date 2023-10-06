@@ -13,7 +13,7 @@ import { orderBusinessIdsByDateCreated } from "@/lib/domain-logic/orderBusinessI
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import { switchCurrentBusiness } from "@/lib/domain-logic/switchCurrentBusiness";
 import analytics from "@/lib/utils/analytics";
-import { getUserNameOrEmail } from "@/lib/utils/helpers";
+import { getUserNameOrEmail, openInNewTab } from "@/lib/utils/helpers";
 import { MenuItem, MenuList } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
@@ -81,7 +81,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
     return NavMenuItem({
       onClick: (): void => {
         analytics.event.account_menu_myNJ_account.click.go_to_myNJ_home();
-        window.open(process.env.MYNJ_PROFILE_LINK || "", "_ blank");
+        openInNewTab(process.env.MYNJ_PROFILE_LINK || "");
         props.handleClose();
       },
       icon: <ButtonIcon svgFilename="profile" sizePx="25px" />,

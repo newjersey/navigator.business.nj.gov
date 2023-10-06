@@ -16,7 +16,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
-import { scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
+import { openInNewTab, scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
@@ -206,7 +206,7 @@ export const DbaFormationPaginator = (): ReactElement => {
           title={Config.DbaFormationTask.dbaCtaModalHeader}
           primaryButtonText={Config.DbaFormationTask.dbaCtaModalContinueButtonText}
           primaryButtonOnClick={(): void => {
-            window.open(state.dbaContent.Authorize.callToActionLink, "_ blank");
+            openInNewTab(state.dbaContent.Authorize.callToActionLink);
           }}
           secondaryButtonText={Config.DbaFormationTask.dbaCtaModalCancelButtonText}
         >

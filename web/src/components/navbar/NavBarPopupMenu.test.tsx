@@ -254,7 +254,7 @@ describe("<NavBarPopupMenu />", () => {
         process.env.MYNJ_PROFILE_LINK = profileLink;
 
         fireEvent.click(screen.getByText(Config.navigationDefaults.myNJAccountText));
-        expect(openMock).toHaveBeenCalledWith(profileLink, "_ blank");
+        expect(openMock).toHaveBeenCalledWith(profileLink, "_blank", "noopener noreferrer");
       });
 
       it("sends user to landing when logout button is clicked", async () => {
