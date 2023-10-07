@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { withDesign } from "storybook-addon-designs";
 
 export default {
-  title: "WIP/Alerts/DefaultAlerts",
+  title: "Molecules/Alerts",
   component: Alert,
   decorators: [withDesign, (story) => <div className="border width-tablet">{story()}</div>],
   parameters: {
@@ -41,4 +41,12 @@ export const SuccessAlert = Template.bind({});
 SuccessAlert.args = {
   ...defaultArgs,
   variant: "success",
+};
+
+export const NoteAlert = Template.bind({});
+NoteAlert.args = {
+  ...defaultArgs,
+  variant: "note",
+  borderRight: true,
+  borderSmall: true,
 };
