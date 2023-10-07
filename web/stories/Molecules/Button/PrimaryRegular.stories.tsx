@@ -28,6 +28,7 @@ export const IconRight = Template.bind({});
 
 IconRight.args = {
   isColor: "primary",
+  isReducedPaddingRight: true,
   children: (
     <>
       <>Button</>

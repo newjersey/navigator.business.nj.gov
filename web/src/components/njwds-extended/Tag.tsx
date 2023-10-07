@@ -21,6 +21,7 @@ interface Props {
   isLowerCase?: boolean;
   isRadiusMd?: boolean;
   isWrappingText?: boolean;
+  isSmallerVerticalPadding?: boolean;
 }
 
 export const Tag = (props: Props): ReactElement => {
@@ -64,11 +65,12 @@ export const Tag = (props: Props): ReactElement => {
   }
 
   const defaultStyle =
-    "flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px";
+    "flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2";
   const textWrap = props.isWrappingText ? "text-wrap display-block" : "text-no-wrap";
   const fixedWidth = props.isFixedWidth ? "tag-fixed-width" : "";
   const disableUppercase = props.isLowerCase ? "text-no-uppercase" : "";
   const radius = props.isRadiusMd ? "radius-md" : "";
+  const verticalPadding = props.isSmallerVerticalPadding ? "padding-y-2px" : "padding-y-05";
 
   const className = [
     defaultStyle,
@@ -78,6 +80,7 @@ export const Tag = (props: Props): ReactElement => {
     fixedWidth,
     disableUppercase,
     radius,
+    verticalPadding,
     props.className,
   ]
     .map((i) => {

@@ -65,9 +65,14 @@ export const FilingElement = (props: {
                 ) : (
                   <></>
                 )}
-                {props.filing.extension && (
+                {true && (
                   <div className="margin-left-4">
-                    <Tag backgroundColor="accent-cooler-lightest" data-testid="extension" isLowerCase>
+                    <Tag
+                      backgroundColor="accent-cooler-lightest"
+                      data-testid="extension"
+                      isLowerCase
+                      isSmallerVerticalPadding
+                    >
                       {Config.filingDefaults.extensionTagText}
                     </Tag>
                   </div>

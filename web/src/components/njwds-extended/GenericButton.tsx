@@ -19,6 +19,7 @@ export interface GenericButtonProps {
   isNotFullWidthOnMobile?: boolean;
   isFullWidthOnDesktop?: boolean;
   isVerticalPaddingRemoved?: boolean;
+  isReducedPaddingRight?: boolean;
 }
 
 export const GenericButton = forwardRef(function GenericButton(
@@ -32,6 +33,7 @@ export const GenericButton = forwardRef(function GenericButton(
   const isNotFullWidthOnMobile = props.isNotFullWidthOnMobile ? "width-auto" : "";
   const isVerticalPaddingRemoved = props.isVerticalPaddingRemoved ? "padding-y-0" : "padding-y-11px";
   const intercomButton = props.isIntercomEnabled ? "intercom-button" : "";
+  const isReducedPaddingRight = props.isReducedPaddingRight ? "padding-right-1" : "";
 
   const widthRef = useRef<HTMLInputElement | null>(null);
   const [width, setWidth] = useState<number>();
@@ -51,6 +53,7 @@ export const GenericButton = forwardRef(function GenericButton(
     showDisabledClass,
     fullWidth,
     isVerticalPaddingRemoved,
+    isReducedPaddingRight,
   ]
     .map((i) => {
       return i?.trim();
