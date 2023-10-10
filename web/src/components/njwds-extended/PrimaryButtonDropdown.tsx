@@ -1,4 +1,4 @@
-import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { GenericButton } from "@/components/njwds-extended/GenericButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
@@ -48,8 +48,8 @@ export const PrimaryButtonDropdown = (props: Props): ReactElement => {
 
   return (
     <>
-      <PrimaryButton
-        isColor="primary"
+      <GenericButton
+        className="usa-button"
         ref={anchorRef}
         id="composition-button"
         isAriaControls={open ? "composition-menu" : undefined}
@@ -61,7 +61,7 @@ export const PrimaryButtonDropdown = (props: Props): ReactElement => {
           {props.children}
           <Icon className="usa-icon--size-3 margin-left-05 margin-right-neg-1">{"arrow_drop_down"}</Icon>
         </>
-      </PrimaryButton>
+      </GenericButton>
       <Popper
         open={open}
         anchorEl={anchorRef.current}
