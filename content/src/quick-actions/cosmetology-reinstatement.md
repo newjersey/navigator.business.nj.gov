@@ -1,13 +1,13 @@
 ---
 notesMd: https://docs.google.com/document/d/1nQqUnYjcXEgTAM_V99lvujz4hP4QxOGnyb8qagP5W8M/edit
-filename: cosmetology-reinstatement
-urlSlug: cosmetology-reinstatement
-name: Reinstate Your Cosmetology License
-id: " Reinstate Your Cosmetology License"
+filename: cosmetology-reinstatement-reactivation
+urlSlug: cosmetology-reinstatement-reactivation
+name: Reinstate or Reactivate Your Cosmetology License
+id: cosmetology-reinstatement-reactivation
 callToActionText: " Reinstate My Cosmetology License "
 callToActionLink: https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx
 ---
-You need to submit a reinstatement application if:
+You need to submit a reinstatement/reactivation application if:
 
 *  Your cosmetology license has expired 
 *  You placed an inactive status on your license
