@@ -1,7 +1,9 @@
 import { getMergedConfig } from "@/contexts/configContext";
+import * as fetchPostOnboardingModule from "@/lib/async-content-fetchers/fetchPostOnboarding";
 import { createEmptyTaskDisplayContent, Task } from "@/lib/types/types";
 import TaskPage from "@/pages/tasks/[taskUrlSlug]";
 import {
+  generatePostOnboarding,
   generateStep,
   generateTask,
   generateTaskLink,
@@ -43,6 +45,10 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/async-content-fetchers/fetchPostOnboarding", () => ({ fetchPostOnboarding: jest.fn() }));
+
+const mockFetchPostOnboarding = (fetchPostOnboardingModule as jest.Mocked<typeof fetchPostOnboardingModule>)
+  .fetchPostOnboarding;
 
 const setLargeScreen = (value = true): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => value);
@@ -232,6 +238,10 @@ describe("task page", () => {
   });
 
   it("loads construction post-onboarding question for task in template body", async () => {
+    mockFetchPostOnboarding.mockResolvedValue(
+      generatePostOnboarding({ filename: "construction-renovation" })
+    );
+
     renderPage(
       generateTask({
         postOnboardingQuestion: "construction-renovation",
@@ -248,6 +258,10 @@ describe("task page", () => {
   });
 
   it("loads post-onboarding question for task at the bottom if not in template body", async () => {
+    mockFetchPostOnboarding.mockResolvedValue(
+      generatePostOnboarding({ filename: "construction-renovation" })
+    );
+
     renderPage(
       generateTask({
         postOnboardingQuestion: "construction-renovation",
@@ -264,6 +278,10 @@ describe("task page", () => {
   });
 
   it("toggles radio button for post-onboarding question", async () => {
+    mockFetchPostOnboarding.mockResolvedValue(
+      generatePostOnboarding({ filename: "construction-renovation" })
+    );
+
     const initialBusiness = generateBusiness({
       profileData: generateProfileData({ constructionRenovationPlan: undefined }),
     });

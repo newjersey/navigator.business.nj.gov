@@ -1,5 +1,4 @@
 import { PostOnboardingRadioQuestion } from "@/components/post-onboarding/PostOnboardingRadioQuestion";
-import * as fetchPostOnboardingModule from "@/lib/async-content-fetchers/fetchPostOnboarding";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -15,12 +14,12 @@ import { Business } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { PostOnboarding } from "@/lib/types/types";
 import { generatePostOnboarding } from "@/test/factories";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/async-content-fetchers/fetchPostOnboarding", () => ({ fetchPostOnboarding: jest.fn() }));
 jest.mock("@/lib/domain-logic/postOnboardingCheckboxes", () => {
   return {
     postOnboardingCheckboxes: {
@@ -28,19 +27,21 @@ jest.mock("@/lib/domain-logic/postOnboardingCheckboxes", () => {
     },
   };
 });
-const mockFetchPostOnboarding = (fetchPostOnboardingModule as jest.Mocked<typeof fetchPostOnboardingModule>)
-  .fetchPostOnboarding;
 
 describe("<PostOnboardingRadioQuestion />", () => {
-  const postOnboardingQuestionId = "some-post-onboarding-id";
   const taskId = "some-task-id";
+  const defaultPostOnboardingQuestion = generatePostOnboarding({ filename: "some-post-onboarding-id" });
 
-  const renderComponent = (initialBusiness: Business, onboardingKey: keyof ProfileData): void => {
+  const renderComponent = (
+    initialBusiness: Business,
+    onboardingKey: keyof ProfileData,
+    postOnboardingQuestion?: PostOnboarding | undefined
+  ): void => {
     render(
       withNeedsAccountContext(
         <WithStatefulUserData initialUserData={generateUserDataForBusiness(initialBusiness)}>
           <PostOnboardingRadioQuestion
-            postOnboardingQuestionId={postOnboardingQuestionId}
+            postOnboardingQuestion={postOnboardingQuestion ?? defaultPostOnboardingQuestion}
             onboardingKey={onboardingKey}
             taskId={taskId}
           />
@@ -60,11 +61,10 @@ describe("<PostOnboardingRadioQuestion />", () => {
       profileData: generateProfileData({ constructionRenovationPlan: undefined }),
     });
 
-    mockFetchPostOnboarding.mockResolvedValue(generatePostOnboarding({}));
     renderComponent(initialBusiness, "constructionRenovationPlan");
 
     await waitFor(() => {
-      expect(screen.getByTestId(postOnboardingQuestionId)).toBeInTheDocument();
+      expect(screen.getByTestId(defaultPostOnboardingQuestion.filename)).toBeInTheDocument();
     });
 
     expect(screen.queryByTestId("post-onboarding-false-content")).not.toBeInTheDocument();
@@ -92,15 +92,14 @@ describe("<PostOnboardingRadioQuestion />", () => {
         },
       });
 
-      mockFetchPostOnboarding.mockResolvedValue(
-        generatePostOnboarding({
-          contentMd: "- []{checkbox-1} content1\n" + "- []{checkbox-2} content2\n",
-        })
-      );
+      const postOnboardingQuestion = generatePostOnboarding({
+        filename: "some-post-onboarding-id",
+        contentMd: "- []{checkbox-1} content1\n" + "- []{checkbox-2} content2\n",
+      });
 
-      renderComponent(initialBusiness, "constructionRenovationPlan");
+      renderComponent(initialBusiness, "constructionRenovationPlan", postOnboardingQuestion);
       await waitFor(() => {
-        expect(screen.getByTestId(postOnboardingQuestionId)).toBeInTheDocument();
+        expect(screen.getByTestId(postOnboardingQuestion.filename)).toBeInTheDocument();
       });
     };
 
