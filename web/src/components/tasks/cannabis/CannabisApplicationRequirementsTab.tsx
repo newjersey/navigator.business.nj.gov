@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Icon } from "@/components/njwds/Icon";
+import { ReverseOrderInMobile } from "@/components/ReverseOrderInMobile";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityTypes";
@@ -135,19 +136,23 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
         style={{ marginTop: "auto" }}
         className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 flex-column mobile-lg:flex-row radius-bottom-lg"
       >
-        <SecondaryButton isColor="primary" dataTestId="backButton" onClick={props.onBack}>
-          {Config.cannabisPriorityStatus.backButtonText}
-        </SecondaryButton>
-        <a
-          className="mobile-lg:margin-top-0 margin-top-1"
-          href={props.task.callToActionLink}
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          <PrimaryButton isColor="primary" dataTestId="certificationButton" isRightMarginRemoved>
-            {props.task.callToActionText}
-          </PrimaryButton>
-        </a>
+        <ReverseOrderInMobile>
+          <>
+            <SecondaryButton isColor="primary" dataTestId="backButton" onClick={props.onBack}>
+              {Config.cannabisPriorityStatus.backButtonText}
+            </SecondaryButton>
+            <a
+              className="mobile-lg:margin-bottom-0 margin-bottom-1"
+              href={props.task.callToActionLink}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <PrimaryButton isColor="primary" dataTestId="certificationButton" isRightMarginRemoved>
+                {props.task.callToActionText}
+              </PrimaryButton>
+            </a>
+          </>
+        </ReverseOrderInMobile>
       </div>
     </div>
   );

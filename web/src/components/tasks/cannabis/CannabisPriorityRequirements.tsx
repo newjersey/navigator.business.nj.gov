@@ -3,6 +3,7 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { PrimaryButtonDropdown } from "@/components/njwds-extended/PrimaryButtonDropdown";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Icon } from "@/components/njwds/Icon";
+import { ReverseOrderInMobile } from "@/components/ReverseOrderInMobile";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
@@ -207,12 +208,16 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
         style={{ marginTop: "auto" }}
         className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-bottom-neg-4 flex-column mobile-lg:flex-row radius-bottom-lg"
       >
-        <div className="mobile-lg:margin-bottom-0 margin-bottom-1">
-          <SecondaryButton isColor="primary" dataTestId="backButton" onClick={props.onBack}>
-            {Config.cannabisPriorityStatus.backButtonText}
-          </SecondaryButton>
-        </div>
-        {renderCTAButtons()}
+        <ReverseOrderInMobile>
+          <>
+            <div className="mobile-lg:margin-top-0 margin-top-1">
+              <SecondaryButton isColor="primary" dataTestId="backButton" onClick={props.onBack}>
+                {Config.cannabisPriorityStatus.backButtonText}
+              </SecondaryButton>
+            </div>
+            {renderCTAButtons()}
+          </>
+        </ReverseOrderInMobile>
       </div>
     </>
   );
