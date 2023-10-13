@@ -1,9 +1,15 @@
 ---
+slug: construction-renovation
 radioQuestion: Do you plan to do any renovations or construction on your
   commercial/industrial space?
 radioYes: Yes
 radioNo: No
 radioNoContent: No further action is required.
+ctaYesDropdownText: Additional Tasks
+ctaYesText1: An example dropdown item
+ctaYesLink1: https://www.example.com
+ctaYesText2: Another example dropdown item
+ctaYesLink2: https://www.example.com
 ---
 
 ### Site Considerations
