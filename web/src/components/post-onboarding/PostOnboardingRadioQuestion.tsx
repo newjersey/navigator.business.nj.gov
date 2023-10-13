@@ -1,29 +1,21 @@
 import { Content } from "@/components/Content";
-import { fetchPostOnboarding } from "@/lib/async-content-fetchers/fetchPostOnboarding";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { postOnboardingCheckboxes } from "@/lib/domain-logic/postOnboardingCheckboxes";
 import { PostOnboarding } from "@/lib/types/types";
 import { ProfileData } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { ReactElement, useEffect, useMemo, useState } from "react";
+import React, { ReactElement, useEffect, useMemo } from "react";
 
 interface Props {
-  postOnboardingQuestionId: keyof typeof postOnboardingCheckboxes;
+  postOnboardingQuestion: PostOnboarding;
   onboardingKey: keyof ProfileData;
   taskId: string;
 }
 
 export const PostOnboardingRadioQuestion = (props: Props): ReactElement => {
   const { updateQueue, business } = useUserData();
-  const [onboardingQuestion, setOnboardingQuestion] = useState<PostOnboarding>({
-    contentMd: "",
-    question: "",
-    radioNo: "",
-    radioYes: "",
-    radioNoContent: "",
-  });
 
-  const checkboxes = postOnboardingCheckboxes[props.postOnboardingQuestionId];
+  const checkboxes = postOnboardingCheckboxes[props.postOnboardingQuestion.filename];
   const selectedCheckboxes = useMemo(() => {
     return checkboxes.filter((key) => business?.taskItemChecklist[key] === true).join(",");
   }, [business?.taskItemChecklist, checkboxes]);
@@ -43,12 +35,6 @@ export const PostOnboardingRadioQuestion = (props: Props): ReactElement => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCheckboxes]);
-
-  useEffect(() => {
-    fetchPostOnboarding(props.postOnboardingQuestionId).then((postOnboarding) => {
-      setOnboardingQuestion(postOnboarding);
-    });
-  }, [props.postOnboardingQuestionId]);
 
   const handleRadioChange = async (
     event: React.ChangeEvent<{ name?: string; value: string }>
@@ -80,22 +66,22 @@ export const PostOnboardingRadioQuestion = (props: Props): ReactElement => {
 
   return (
     <>
-      {onboardingQuestion.question && (
+      {props.postOnboardingQuestion.question && (
         <>
           <div className="margin-top-205">
             <div
               role="heading"
               aria-level={2}
-              data-testid={props.postOnboardingQuestionId}
+              data-testid={props.postOnboardingQuestion.filename}
               className="h4-styling "
             >
-              {onboardingQuestion.question}
+              {props.postOnboardingQuestion.question}
             </div>
           </div>
           <FormControl fullWidth>
             <RadioGroup
-              aria-label={onboardingQuestion.question}
-              name={props.postOnboardingQuestionId}
+              aria-label={props.postOnboardingQuestion.question}
+              name={props.postOnboardingQuestion.filename}
               value={business?.profileData[props.onboardingKey] ?? ""}
               onChange={handleRadioChange}
               row
@@ -107,7 +93,7 @@ export const PostOnboardingRadioQuestion = (props: Props): ReactElement => {
                 data-testid="post-onboarding-radio-true"
                 value={true}
                 control={<Radio color="primary" />}
-                label={onboardingQuestion.radioYes}
+                label={props.postOnboardingQuestion.radioYes}
               />
               <FormControlLabel
                 style={{ alignItems: "center" }}
@@ -115,20 +101,20 @@ export const PostOnboardingRadioQuestion = (props: Props): ReactElement => {
                 data-testid="post-onboarding-radio-false"
                 value={false}
                 control={<Radio color="primary" />}
-                label={onboardingQuestion.radioNo}
+                label={props.postOnboardingQuestion.radioNo}
               />
             </RadioGroup>
           </FormControl>
           {business?.profileData[props.onboardingKey] && (
             <div data-testid="post-onboarding-true-content">
               <hr className="margin-y-2" />
-              <Content>{onboardingQuestion.contentMd}</Content>
+              <Content>{props.postOnboardingQuestion.contentMd}</Content>
             </div>
           )}
           {business?.profileData[props.onboardingKey] === false && (
             <div data-testid="post-onboarding-false-content">
               <hr className="margin-y-2" />
-              <Content>{onboardingQuestion.radioNoContent}</Content>
+              <Content>{props.postOnboardingQuestion.radioNoContent}</Content>
             </div>
           )}
         </>

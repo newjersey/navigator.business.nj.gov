@@ -4,12 +4,14 @@ import { HorizontalLine } from "@/components/HorizontalLine";
 import { PostOnboardingRadioQuestion } from "@/components/post-onboarding/PostOnboardingRadioQuestion";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
+import { fetchPostOnboarding } from "@/lib/async-content-fetchers/fetchPostOnboarding";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { Task } from "@/lib/types/types";
+import { postOnboardingCheckboxes } from "@/lib/domain-logic/postOnboardingCheckboxes";
+import { PostOnboarding, Task } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
 import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
 import { Business } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode, useEffect, useState } from "react";
 
 interface Props {
   task: Task;
@@ -22,6 +24,7 @@ export const TaskElement = (props: Props): ReactElement => {
   const hasPostOnboardingQuestion = !!props.task.postOnboardingQuestion;
   const shouldShowDeferredQuestion = props.task.requiresLocation;
   let hasDeferredLocationQuestion = false;
+  const [postOnboardingQuestion, setPostOnboardingQuestion] = useState<PostOnboarding | undefined>(undefined);
 
   const deferredLocationQuestion = {
     before: "",
@@ -29,33 +32,47 @@ export const TaskElement = (props: Props): ReactElement => {
     after: "",
   };
 
-  const postOnboardingQuestion = {
+  const postOnboardingQuestionContent = {
     before: "",
     innerContent: "",
     after: "",
   };
 
-  const getPostOnboardingQuestion = (task: Task): ReactElement => {
-    if (!task.postOnboardingQuestion) {
+  const renderPostOnboardingQuestion = (): ReactElement => {
+    if (!postOnboardingQuestion || !props.task.postOnboardingQuestion) {
       return <></>;
     }
-    return rswitch(task.postOnboardingQuestion, {
+
+    return rswitch(props.task.postOnboardingQuestion, {
       "construction-renovation": (
         <PostOnboardingRadioQuestion
-          postOnboardingQuestionId="construction-renovation"
+          postOnboardingQuestion={postOnboardingQuestion}
           onboardingKey="constructionRenovationPlan"
-          taskId={task.id}
+          taskId={props.task.id}
         />
       ),
       default: <></>,
     });
   };
 
+  useEffect(() => {
+    if (
+      !props.task.postOnboardingQuestion ||
+      !Object.keys(postOnboardingCheckboxes).includes(props.task.postOnboardingQuestion)
+    ) {
+      return;
+    }
+
+    fetchPostOnboarding(props.task.postOnboardingQuestion).then((postOnboarding) => {
+      setPostOnboardingQuestion(postOnboarding);
+    });
+  }, [hasPostOnboardingQuestion, props.task.id, props.task.postOnboardingQuestion]);
+
   if (props.task.contentMd) {
     const [beforePostOnboarding, afterPostOnboarding] =
       props.task.contentMd.split("{postOnboardingQuestion}");
-    postOnboardingQuestion.before = beforePostOnboarding;
-    postOnboardingQuestion.after = afterPostOnboarding;
+    postOnboardingQuestionContent.before = beforePostOnboarding;
+    postOnboardingQuestionContent.after = afterPostOnboarding;
     hasDeferredLocationQuestion =
       props.task.contentMd.includes("${beginLocationDependentSection}") &&
       props.task.contentMd.includes("${endLocationDependentSection}");
@@ -107,9 +124,9 @@ export const TaskElement = (props: Props): ReactElement => {
 
         {hasPostOnboardingQuestion && (
           <>
-            <Content>{postOnboardingQuestion.before}</Content>
-            {getPostOnboardingQuestion(props.task)}
-            {postOnboardingQuestion.after && <Content>{postOnboardingQuestion.after}</Content>}
+            <Content>{postOnboardingQuestionContent.before}</Content>
+            {renderPostOnboardingQuestion()}
+            {postOnboardingQuestionContent.after && <Content>{postOnboardingQuestionContent.after}</Content>}
           </>
         )}
 
