@@ -1,10 +1,10 @@
 ---
 id: go-to-profile
-ctaText: "Go to Profile"
+ctaText: ""
 borderColor: primary-light
 hasCloseButton: false
 weight: 3
-section: "above-opportunities"
+section: above-opportunities
 ---
 
-Customize your certifications, funding opportunities, and annual report deadline.
+[Go to Profile](/profile) to customize your certifications, funding opportunities, and annual report deadline.
