@@ -76,6 +76,9 @@
 .border-secondary-darker {
   border-color: $secondary-darker !important;
 }
+.border-secondary-vivid-dark {
+  border-color: $secondary-vivid-dark !important;
+}
 
 .border-accent-cool-lightest {
   border-color: $accent-cool-lightest !important;
@@ -91,6 +94,9 @@
 }
 .border-accent-cool-dark {
   border-color: $accent-cool-dark !important;
+}
+.border-accent-cool-dark-medium {
+  border-color: $accent-cool-dark-medium !important;
 }
 .border-accent-cool-darker {
   border-color: $accent-cool-darker !important;
@@ -151,6 +157,9 @@
 }
 .border-info-dark {
   border-color: $info-dark !important;
+}
+.border-info-dark-medium {
+  border-color: $info-dark-medium !important;
 }
 .border-info-darker {
   border-color: $info-darker !important;
@@ -223,7 +232,6 @@
 .border-accent-cooler {
   border-color: $accent-cooler !important;
 }
-
 .border-accent-hot-extra-light {
   border-color: $accent-hot-extra-light !important;
 }
