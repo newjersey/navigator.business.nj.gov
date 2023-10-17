@@ -1,14 +1,9 @@
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { filterCertifications } from "@/lib/domain-logic/filterCertifications";
-import { filterFundings } from "@/lib/domain-logic/filterFundings";
-import { getVisibleCertifications } from "@/lib/domain-logic/getVisibleCertifications";
-import { getVisibleFundings } from "@/lib/domain-logic/getVisibleFundings";
+import { getForYouCardCount } from "@/lib/domain-logic/getForYouCardCount";
 import { Certification, Funding } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
-import { Business } from "@businessnjgovnavigator/shared/userData";
 import { TabContext, TabList, TabPanel } from "@mui/lab/";
 import Tab from "@mui/material/Tab";
 import * as React from "react";
@@ -71,31 +66,6 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
     minHeight: "44px",
   };
 
-  const getContentWithCardCount = (): string => {
-    let count = 0;
-    if (LookupOperatingPhaseById(business?.profileData.operatingPhase).displayCertifications) {
-      count += getVisibleCertifications(
-        filterCertifications(props.certifications, business as Business),
-        business as Business
-      ).length;
-    }
-
-    if (LookupOperatingPhaseById(business?.profileData.operatingPhase).displayFundings) {
-      count += getVisibleFundings(
-        filterFundings(props.fundings, business as Business),
-        business as Business
-      ).length;
-    }
-
-    if (business?.preferences.visibleSidebarCards.length) {
-      count += business?.preferences.visibleSidebarCards.length;
-    }
-
-    return templateEval(Config.dashboardDefaults.mobileSecondTabText, {
-      count: count.toString(),
-    });
-  };
-
   const getIndicator = (): ReactNode => {
     if (!business?.preferences.phaseNewlyChanged) {
       return <></>;
@@ -122,7 +92,9 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
                 data-testid="for-you-tab"
                 label={
                   <div className="fdr fjc">
-                    {getContentWithCardCount()}
+                    {templateEval(Config.dashboardDefaults.mobileSecondTabText, {
+                      count: getForYouCardCount(business, props.certifications, props.fundings).toString(),
+                    })}
                     {getIndicator()}
                   </div>
                 }

@@ -94,7 +94,11 @@ const Link = (onClick?: (url?: string) => void): any => {
         );
       }
       return (
-        <a href={props.href} onClick={(): void => (onClick ? onClick(props.href) : undefined)}>
+        <a
+          href={props.href}
+          className="usa-link"
+          onClick={(): void => (onClick ? onClick(props.href) : undefined)}
+        >
           {props.children[0]}
         </a>
       );
