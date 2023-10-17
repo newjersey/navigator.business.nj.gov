@@ -22,8 +22,8 @@ export const SidebarCardGoToProfileNudge = (props: Props): ReactElement => {
       card={props.card}
       headerText={props.card.header}
       bodyText={props.card.contentMd}
-      ctaOnClick={onClick}
-      layout="row"
+      preBodySpanButtonText={"Go to your profile"}
+      preBodyButtonOnClick={onClick}
     />
   );
 };

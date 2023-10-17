@@ -4,10 +4,7 @@ header: ""
 hasCloseButton: false
 ctaText: ""
 weight: 1
-imgPath: ""
-color: primary
-headerBackgroundColor: null
-borderColor: primary-light
+preBodySpanButtonText: ""
 section: above-opportunities
 ---
 

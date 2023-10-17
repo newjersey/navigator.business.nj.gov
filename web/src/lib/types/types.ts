@@ -463,11 +463,8 @@ export type SidebarCardContent = {
   header?: string;
   notStartedHeader?: string;
   completedHeader?: string;
-  imgPath: string | null;
   ctaText?: string;
-  color: string;
-  headerBackgroundColor: string | null;
-  borderColor: string;
+  preBodySpanButtonText?: string;
   hasCloseButton: boolean;
   weight: number;
   section: "above-opportunities" | "below-opportunities";

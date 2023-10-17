@@ -37,6 +37,10 @@
   color: $accent-cool-lightest !important;
 }
 
+.text-accent-cool-dark-medium {
+  color: $accent-cool-dark-medium !important;
+}
+
 .text-accent-cool-darker {
   color: $accent-cool-darker !important;
 }
@@ -91,6 +95,10 @@
 
 .text-info-dark {
   color: $info-dark !important;
+}
+
+.text-info-dark-medium {
+  color: $info-dark-medium !important;
 }
 
 .text-info-darker {
@@ -198,4 +206,8 @@
 }
 .text-accent-semi-cool {
   color: $accent-semi-cool !important;
+}
+
+.text-secondary-vivid-dark {
+  color: $secondary-vivid-dark !important;
 }
