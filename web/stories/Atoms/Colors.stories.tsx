@@ -61,6 +61,7 @@ const secondary = (
     {renderColor("secondary-lighter", "#cfe8ff")}
     {renderColor("secondary-light", "#73b3e7")}
     {renderColor("secondary-vivid", "#0076d6")}
+    {renderColor("secondary-vivid-dark", "#076fce")}
     {renderColor("secondary", "#2378c3")}
     {renderColor("secondary-dark", "#0050d8")}
     {renderColor("secondary-darker", "#162e51")}
@@ -75,6 +76,7 @@ const accentCool = (
     {renderColor("accent-cool-light", "#aacdec")}
     {renderColor("accent-cool", "#73b3e7")}
     {renderColor("accent-cool-dark", "#4f97d1")}
+    {renderColor("accent-cool-dark-medium", "#2c73ad")}
     {renderColor("accent-cool-darker", "#2c608a")}
     {renderColor("accent-cool-darkest", "#38536f")}
     {renderColor("accent-cool-more-dark", "#2e4153")}
@@ -112,6 +114,7 @@ const info = (
     {renderColor("info-light", "#99deea")}
     {renderColor("info", "#00bde3")}
     {renderColor("info-dark", "#009ec1")}
+    {renderColor("info-dark-medium", "#067894")}
     {renderColor("info-darker", "#2e6276")}
     {renderColor("info-darkest", "#134c57")}
   </div>

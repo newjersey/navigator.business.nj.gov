@@ -3,11 +3,13 @@
 @import "base/background-colors";
 @import "base/border-colors";
 @import "base/global";
+@import "base/gradient-colors";
 @import "base/flex";
 @import "base/text-colors";
 @import "base/drop-shadows";
 
 @import "components/alerts.scss";
+@import "src/styles/components/anchor-links";
 @import "components/buttons.scss";
 @import "components/contextual-info.scss";
 @import "components/stepper.scss";

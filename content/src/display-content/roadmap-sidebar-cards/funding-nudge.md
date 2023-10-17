@@ -4,10 +4,7 @@ header: Need Funding?
 hasCloseButton: false
 ctaText: Show Me Funding Opportunities
 weight: 2
-imgPath: /img/nudge-icon.svg
-color: accent-cool-darker
-headerBackgroundColor: accent-cool-lighter
-borderColor: accent-cool-light
+preBodySpanButtonText: ""
 section: above-opportunities
 ---
 

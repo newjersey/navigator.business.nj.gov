@@ -127,6 +127,13 @@
   }
 }
 
+.btn-white {
+  background-color: $white !important;
+  &:active {
+    background-color: $base-lighter !important;
+  }
+}
+
 .btn-profile-hoverstate {
   &:hover,
   & .selected {
