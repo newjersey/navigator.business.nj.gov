@@ -8,6 +8,7 @@
     "build": "yarn verify:node && yarn workspaces foreach -ptvi run build",
     "build:clean": "yarn clean && yarn build",
     "clean": "yarn workspaces foreach -v run clean",
+    "cms:proxy": "yarn dlx netlify-cms-proxy-server",
     "dependency-check": "yarn workspaces foreach -v run dependency-check",
     "invokeNewsletter": "yarn workspace @businessnjgovnavigator/api invokeNewsletter",
     "lint": "yarn workspaces foreach run lint",
