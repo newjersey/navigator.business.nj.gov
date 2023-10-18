@@ -8,10 +8,17 @@ import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
+import { DynamicsAccessTokenClient } from "@client/dynamics/DynamicsAccessTokenClient";
+import { DynamicsBusinessAddressClient } from "@client/dynamics/DynamicsBusinessAddressClient";
+import { DynamicsBusinessIdsClient } from "@client/dynamics/DynamicsBusinessIdsClient";
+import { DynamicsChecklistItemsClient } from "@client/dynamics/DynamicsChecklistItemsClient";
+import { DynamicsLicenseApplicationIdClient } from "@client/dynamics/DynamicsLicenseApplicationIdClient";
+import { DynamicsLicenseStatusClient } from "@client/dynamics/DynamicsLicenseStatusClient";
 import { FakeSelfRegClientFactory } from "@client/fakeSelfRegClient";
 import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient";
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
 import { WebserviceLicenseStatusClient } from "@client/WebserviceLicenseStatusClient";
+import { WebserviceLicenseStatusProcessorClient } from "@client/WebserviceLicenseStatusProcessorClient";
 import { dynamoDbTranslateConfig, DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import { searchLicenseStatusFactory } from "@domain/license-status/searchLicenseStatusFactory";
 import { updateSidebarCards } from "@domain/updateSidebarCards";
@@ -64,7 +71,32 @@ const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
 
 const LICENSE_STATUS_BASE_URL =
   process.env.LICENSE_STATUS_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
-const licenseStatusClient = WebserviceLicenseStatusClient(LICENSE_STATUS_BASE_URL, logger);
+const webServiceLicenseStatusClient = WebserviceLicenseStatusClient(LICENSE_STATUS_BASE_URL, logger);
+const webserviceLicenseStatusProcessorClient = WebserviceLicenseStatusProcessorClient(
+  webServiceLicenseStatusClient
+);
+
+const DCA_DYNAMICS_ORG_URL = process.env.DCA_DYNAMICS_ORG_URL || "";
+
+const dynamicsTokenClient = DynamicsAccessTokenClient(logger, {
+  tenantId: process.env.DCA_DYNAMICS_TENANT_ID || "",
+  orgUrl: DCA_DYNAMICS_ORG_URL,
+  clientId: process.env.DCA_DYNAMICS_CLIENT_ID || "",
+  clientSecret: process.env.DCA_DYNAMICS_SECRET || "",
+});
+
+const dynamicsBusinessIdClient = DynamicsBusinessIdsClient(logger, DCA_DYNAMICS_ORG_URL);
+const dynamicsAddressClient = DynamicsBusinessAddressClient(logger, DCA_DYNAMICS_ORG_URL);
+const dynamicsApplicationIdClient = DynamicsLicenseApplicationIdClient(logger, DCA_DYNAMICS_ORG_URL);
+const dynamicsCheckListItemsClient = DynamicsChecklistItemsClient(logger, DCA_DYNAMICS_ORG_URL);
+
+const dynamicsLicenseStatusClient = DynamicsLicenseStatusClient(logger, {
+  accessTokenClient: dynamicsTokenClient,
+  businessIdClient: dynamicsBusinessIdClient,
+  businessAddressClient: dynamicsAddressClient,
+  licenseApplicationIdClient: dynamicsApplicationIdClient,
+  checklistItemsClient: dynamicsCheckListItemsClient,
+});
 
 const BUSINESS_NAME_BASE_URL =
   process.env.BUSINESS_NAME_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
@@ -135,7 +167,10 @@ const taxFilingInterface = taxFilingsInterfaceFactory(taxFilingClient);
 
 const addGovDeliveryNewsletter = addNewsletterFactory(govDeliveryNewsletterClient);
 const addToAirtableUserTesting = addToUserTestingFactory(airtableUserTestingClient);
-const searchLicenseStatus = searchLicenseStatusFactory(licenseStatusClient);
+const searchLicenseStatus = searchLicenseStatusFactory(
+  webserviceLicenseStatusProcessorClient,
+  dynamicsLicenseStatusClient
+);
 const updateLicenseStatus = updateLicenseStatusFactory(searchLicenseStatus);
 const timeStampToBusinessSearch = timeStampBusinessSearch(businessNameClient);
 

@@ -5,7 +5,10 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { LicenseSearchError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { createEmptyNameAndAddress, NameAndAddress } from "@businessnjgovnavigator/shared/";
+import {
+  createEmptyLicenseSearchNameAndAddress,
+  LicenseSearchNameAndAddress,
+} from "@businessnjgovnavigator/shared/";
 import { TextField } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
 import makeStyles from "@mui/styles/makeStyles";
@@ -23,7 +26,7 @@ const useStyles = makeStyles(() => {
 });
 
 interface Props {
-  onSubmit: (nameAndAddress: NameAndAddress) => void;
+  onSubmit: (nameAndAddress: LicenseSearchNameAndAddress) => void;
   error: LicenseSearchError | undefined;
   isLoading: boolean;
 }
@@ -37,7 +40,9 @@ const LicenseSearchErrorLookup: Record<LicenseSearchError, string> = {
 
 export const CheckStatus = (props: Props): ReactElement => {
   const classes = useStyles();
-  const [formValues, setFormValues] = useState<NameAndAddress>(createEmptyNameAndAddress());
+  const [formValues, setFormValues] = useState<LicenseSearchNameAndAddress>(
+    createEmptyLicenseSearchNameAndAddress()
+  );
   const { business } = useUserData();
 
   useMountEffectWhenDefined(() => {
@@ -62,7 +67,7 @@ export const CheckStatus = (props: Props): ReactElement => {
   };
 
   const handleChangeForKey = (
-    key: keyof NameAndAddress
+    key: keyof LicenseSearchNameAndAddress
   ): ((event: ChangeEvent<HTMLInputElement>) => void) => {
     return (event: ChangeEvent<HTMLInputElement>): void => {
       setFormValues((prevValues) => {

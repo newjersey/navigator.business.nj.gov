@@ -52,6 +52,12 @@ const awsCryptoContextStage = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";
 const awsCryptoContextPurpose = process.env.AWS_CRYPTO_CONTEXT_PURPOSE || "";
 const awsCryptoContextOrigin = process.env.AWS_CRYPTO_CONTEXT_ORIGIN || "";
 
+const dcaDynamicsTenantId = process.env.DCA_DYNAMICS_TENANT_ID || "";
+const dcaDynamicsUrl = process.env.DCA_DYNAMICS_ORG_URL || "";
+const dcaDynamicsClientId = process.env.DCA_DYNAMICS_CLIENT_ID || "";
+const dcaDynamicsSecret = process.env.DCA_DYNAMICS_SECRET || "";
+const featureDynamicsPublicMovers = process.env.FEATURE_DYNAMICS_PUBLIC_MOVERS || "";
+
 const serverlessConfiguration: AWS = {
   useDotenv: true,
   service: "businessnjgov-api",
@@ -174,6 +180,11 @@ const serverlessConfiguration: AWS = {
       AWS_CRYPTO_CONTEXT_STAGE: awsCryptoContextStage,
       AWS_CRYPTO_CONTEXT_PURPOSE: awsCryptoContextPurpose,
       AWS_CRYPTO_CONTEXT_ORIGIN: awsCryptoContextOrigin,
+      DCA_DYNAMICS_TENANT_ID: dcaDynamicsTenantId,
+      DCA_DYNAMICS_ORG_URL: dcaDynamicsUrl,
+      DCA_DYNAMICS_CLIENT_ID: dcaDynamicsClientId,
+      DCA_DYNAMICS_SECRET: dcaDynamicsSecret,
+      FEATURE_DYNAMICS_PUBLIC_MOVERS: featureDynamicsPublicMovers,
     } as AwsLambdaEnvironment,
     logRetentionInDays: 180,
   },

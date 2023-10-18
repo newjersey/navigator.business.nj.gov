@@ -205,7 +205,21 @@
     "errorTextSearchFailed": "Sorry, something went wrong. Please try again later.",
     "withdrawnPermitStatusText": "Withdrawn",
     "outOfBusinessPermitStatusText": "Out of Business",
-    "expiredPermitStatusText": "Expired"
+    "expiredPermitStatusText": "Expired",
+    "draftStatusText": "Draft",
+    "submittedStatusText":"Submitted",
+    "underInternalReviewStatusText":"Under Internal Review",
+    "specialReviewStatusText":"Special Review",
+    "pendingDeficienciesStatusText":"Pending Deficiencies",
+    "deficienciesSubmittedStatusText":"Deficiencies Submitted",
+    "checklistCompletedStatusText":"Checklist Completed",
+    "approvedStatusText":"Approved",
+    "pendingRenewalStatusText":"Pending Renewal",
+    "pendingReinstatementStatusText":"Pending Reinstatement",
+    "inactiveStatusText": "Inactive",
+    "abandonedStatusText": "Abandoned",
+    "suspendedStatusText": "Suspended",
+    "revokedStatusText": "Revoked"
   },
   "fundingDefaults": {
     "issuingAgencyText": "Issuing Agency"

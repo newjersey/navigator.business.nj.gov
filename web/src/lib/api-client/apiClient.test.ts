@@ -1,6 +1,6 @@
 import { generateInputFile } from "@/test/factories";
 import {
-  generateNameAndAddress,
+  generateLicenseSearchNameAndAddress,
   generateTaxIdAndBusinessName,
   generateUser,
   generateUserData,
@@ -57,7 +57,7 @@ describe("apiClient", () => {
 
   it("posts license status", async () => {
     mockAxios.post.mockResolvedValue({ data: {} });
-    const nameAndAddress = generateNameAndAddress({});
+    const nameAndAddress = generateLicenseSearchNameAndAddress({});
     await checkLicenseStatus(nameAndAddress);
     expect(mockAxios.post).toHaveBeenCalledWith("/api/license-status", nameAndAddress, {
       headers: { Authorization: "Bearer some-token" },

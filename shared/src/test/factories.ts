@@ -15,7 +15,13 @@ import {
 import { Industries, Industry } from "../industry";
 import { randomInt } from "../intHelpers";
 import { LegalStructure, LegalStructures } from "../legalStructure";
-import { LicenseData, LicenseStatusItem, LicenseStatusResult, NameAndAddress } from "../license";
+import {
+  LicenseData,
+  LicenseSearchAddress,
+  LicenseSearchNameAndAddress,
+  LicenseStatusItem,
+  LicenseStatusResult,
+} from "../license";
 import { MunicipalityDetail } from "../municipality";
 import { IndustrySpecificData, ProfileData } from "../profileData";
 import { arrayOfSectors, SectorType } from "../sector";
@@ -86,9 +92,20 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
   };
 };
 
-export const generateNameAndAddress = (overrides: Partial<NameAndAddress>): NameAndAddress => {
+export const generateLicenseSearchNameAndAddress = (
+  overrides: Partial<LicenseSearchNameAndAddress>
+): LicenseSearchNameAndAddress => {
   return {
     name: `some-name-${randomInt()}`,
+    ...generateLicenseSearchAddress({}),
+    ...overrides,
+  };
+};
+
+export const generateLicenseSearchAddress = (
+  overrides: Partial<LicenseSearchAddress>
+): LicenseSearchAddress => {
+  return {
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
     zipCode: `some-zipcode-${randomInt()}`,
@@ -147,7 +164,7 @@ export const randomLegalStructure = (publicFiling?: {
 
 export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseData => {
   return {
-    nameAndAddress: generateNameAndAddress({}),
+    nameAndAddress: generateLicenseSearchNameAndAddress({}),
     completedSearch: false,
     items: [generateLicenseStatusItem({})],
     status: "PENDING",

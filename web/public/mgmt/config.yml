@@ -3708,6 +3708,29 @@ collections:
                   widget: string,
                 }
               - { label: Status - Withdrawn, name: withdrawnPermitStatusText, widget: string }
+              - { label: Status - Draft, name: draftStatusText, widget: string }
+              - { label: Status - Draft, name: draftStatusText, widget: string }
+              - { label: Status - Submitted, name: submittedStatusText, widget: string }
+              - { label: Status - Under Internal Review, name: underInternalReviewStatusText, widget: string }
+              - { label: Status - Special Review, name: specialReviewStatusText, widget: string }
+              - { label: Status - Pending Deficiencies, name: pendingDeficienciesStatusText, widget: string }
+              - {
+                  label: Status - Deficiencies Submitted,
+                  name: deficienciesSubmittedStatusText,
+                  widget: string,
+                }
+              - { label: Status - Checklist Completed, name: checklistCompletedStatusText, widget: string }
+              - { label: Status - Approved, name: approvedStatusText, widget: string }
+              - { label: Status - Pending Renewal, name: pendingRenewalStatusText, widget: string }
+              - {
+                  label: Status - Pending Reinstatement,
+                  name: pendingReinstatementStatusText,
+                  widget: string,
+                }
+              - { label: Status - Inactive, name: inactiveStatusText, widget: string }
+              - { label: Status - Abandoned, name: abandonedStatusText, widget: string }
+              - { label: Status - Suspended, name: suspendedStatusText, widget: string }
+              - { label: Status - Revoked, name: revokedStatusText, widget: string }
               - { label: Tooltip Text, name: tooltipText, widget: text }
           - label: Task Progress
             name: taskProgress

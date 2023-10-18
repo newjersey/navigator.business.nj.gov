@@ -12,7 +12,7 @@ import { LicenseSearchError, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
-import { LicenseStatusResult, NameAndAddress, UserData } from "@businessnjgovnavigator/shared/";
+import { LicenseSearchNameAndAddress, LicenseStatusResult, UserData } from "@businessnjgovnavigator/shared/";
 import { TabContext, TabList, TabPanel } from "@mui/lab/";
 import { Box, Tab } from "@mui/material";
 import React, { ReactElement, useState } from "react";
@@ -34,7 +34,7 @@ export const LicenseTask = (props: Props): ReactElement => {
   const { business, refresh } = useUserData();
   const { Config } = useConfig();
 
-  const allFieldsHaveValues = (nameAndAddress: NameAndAddress): boolean => {
+  const allFieldsHaveValues = (nameAndAddress: LicenseSearchNameAndAddress): boolean => {
     return !!(nameAndAddress.name && nameAndAddress.addressLine1 && nameAndAddress.zipCode);
   };
 
@@ -66,7 +66,7 @@ export const LicenseTask = (props: Props): ReactElement => {
     setLicenseStatusResult(undefined);
   };
 
-  const onSubmit = (nameAndAddress: NameAndAddress): void => {
+  const onSubmit = (nameAndAddress: LicenseSearchNameAndAddress): void => {
     if (!business || !business.profileData.industryId) return;
 
     if (!allFieldsHaveValues(nameAndAddress)) {
