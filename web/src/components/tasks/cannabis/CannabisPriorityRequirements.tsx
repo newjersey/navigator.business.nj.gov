@@ -7,6 +7,7 @@ import { ReverseOrderInMobile } from "@/components/ReverseOrderInMobile";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
+import { CallToActionHyperlink } from "@/lib/types/types";
 import { openInNewTab, useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, ReactNode, useState } from "react";
@@ -73,10 +74,11 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
   };
 
   const renderCTAButtons = (): ReactNode => {
-    const ctaButtons = [];
+    const ctaButtons: CallToActionHyperlink[] = [];
     if (displaySocialEquityPriorityType) {
       ctaButtons.push({
         text: Config.cannabisPriorityStatus.socialEquityButtonText,
+        destination: Config.cannabisPriorityStatus.socialEquityButtonLink,
         onClick: () => {
           return openInNewTab(Config.cannabisPriorityStatus.socialEquityButtonLink);
         },
@@ -85,6 +87,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
     if (displayMWPriorityType || displayVeteranPriorityType) {
       ctaButtons.push({
         text: Config.cannabisPriorityStatus.certificationButtonText,
+        destination: Config.cannabisPriorityStatus.certificationButtonLink,
         onClick: () => {
           return openInNewTab(Config.cannabisPriorityStatus.certificationButtonLink);
         },
