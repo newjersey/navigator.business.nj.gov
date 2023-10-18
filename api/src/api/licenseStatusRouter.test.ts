@@ -5,8 +5,8 @@ import { setupExpress } from "@libs/express";
 import {
   generateBusiness,
   generateLicenseData,
+  generateLicenseSearchNameAndAddress,
   generateLicenseStatusItem,
-  generateNameAndAddress,
   generateUserDataForBusiness,
 } from "@shared/test";
 import { Express } from "express";
@@ -59,7 +59,7 @@ describe("licenseStatusRouter", () => {
     const userData = generateUserDataForBusiness(generateBusiness({ licenseData }));
     stubUpdateLicenseStatus.mockResolvedValue(userData);
 
-    const nameAndAddress = generateNameAndAddress({});
+    const nameAndAddress = generateLicenseSearchNameAndAddress({});
     stubUserDataClient.get.mockResolvedValue(userData);
     const response = await request(app).post(`/license-status`).send(nameAndAddress);
     expect(response.status).toEqual(200);
@@ -77,14 +77,14 @@ describe("licenseStatusRouter", () => {
     const userData = generateUserDataForBusiness(generateBusiness({ licenseData }));
     stubUpdateLicenseStatus.mockResolvedValue(userData);
 
-    const response = await request(app).post(`/license-status`).send(generateNameAndAddress({}));
+    const response = await request(app).post(`/license-status`).send(generateLicenseSearchNameAndAddress({}));
     expect(stubUserDataClient.put).toHaveBeenCalledWith(userData);
     expect(response.status).toEqual(404);
   });
 
   it("returns 500 if license search errors", async () => {
     stubUpdateLicenseStatus.mockRejectedValue({});
-    const response = await request(app).post(`/license-status`).send(generateNameAndAddress({}));
+    const response = await request(app).post(`/license-status`).send(generateLicenseSearchNameAndAddress({}));
     expect(stubUserDataClient.put).not.toHaveBeenCalled();
     expect(response.status).toEqual(500);
   });

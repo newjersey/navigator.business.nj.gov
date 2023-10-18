@@ -23,10 +23,24 @@ export type LicenseStatus =
   | "DELETED"
   | "DENIED"
   | "VOLUNTARY_SURRENDER"
-  | "WITHDRAWN";
+  | "WITHDRAWN"
+  | "DRAFT"
+  | "SUBMITTED"
+  | "UNDER_INTERNAL_REVIEW"
+  | "SPECIAL_REVIEW"
+  | "PENDING_DEFICIENCIES"
+  | "DEFICIENCIES_SUBMITTED"
+  | "CHECKLIST_COMPLETED"
+  | "APPROVED"
+  | "PENDING_RENEWAL"
+  | "PENDING_REINSTATEMENT"
+  | "INACTIVE"
+  | "ABANDONED"
+  | "SUSPENDED"
+  | "REVOKED";
 
 export interface LicenseData {
-  nameAndAddress: NameAndAddress;
+  nameAndAddress: LicenseSearchNameAndAddress;
   completedSearch: boolean;
   expirationISO?: string;
   lastUpdatedISO: string;
@@ -53,18 +67,21 @@ export type LicenseEntity = {
   dateThisStatus: string;
 };
 
-export type NameAndAddress = {
+export interface LicenseSearchNameAndAddress extends LicenseSearchAddress {
   name: string;
-  addressLine1: string;
-  addressLine2: string;
-  zipCode: string;
-};
+}
 
-export const createEmptyNameAndAddress = (): NameAndAddress => {
+export const createEmptyLicenseSearchNameAndAddress = (): LicenseSearchNameAndAddress => {
   return {
     name: "",
     addressLine1: "",
     addressLine2: "",
     zipCode: "",
   };
+};
+
+export type LicenseSearchAddress = {
+  addressLine1: string;
+  addressLine2: string;
+  zipCode: string;
 };

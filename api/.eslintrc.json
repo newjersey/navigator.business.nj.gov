@@ -47,7 +47,7 @@
       }
     },
     {
-      "files": ["src/client/*", "src/db/*"],
+      "files": ["src/client/*", "src/db/*", "src/client/dynamics/*"],
       "extends": ["plugin:unicorn/recommended"],
       "rules": {
         "unicorn/filename-case": [

@@ -1,7 +1,7 @@
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
-import { LicenseEntity, LicenseStatusResult, NameAndAddress } from "@shared/license";
+import { LicenseEntity, LicenseSearchNameAndAddress, LicenseStatusResult } from "@shared/license";
 import { ProfileData } from "@shared/profileData";
 import { TaxFilingCalendarEvent, TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
 import { UserData } from "@shared/userData";
@@ -94,11 +94,23 @@ export type SelfRegResponse = {
 };
 
 export type SearchBusinessName = (name: string) => Promise<NameAvailability>;
+
+export type SearchLicenseStatusFactory = (licenseType: string) => SearchLicenseStatus;
+
 export type SearchLicenseStatus = (
-  nameAndAddress: NameAndAddress,
+  nameAndAddress: LicenseSearchNameAndAddress,
   licenseType: string
 ) => Promise<LicenseStatusResult>;
-export type UpdateLicenseStatus = (userData: UserData, nameAndAddress: NameAndAddress) => Promise<UserData>;
+
+export type UpdateLicenseStatus = (
+  userData: UserData,
+  nameAndAddress: LicenseSearchNameAndAddress
+) => Promise<UserData>;
+
 export type UpdateOperatingPhase = (userData: UserData) => UserData;
 export type UpdateSidebarCards = (userData: UserData) => UserData;
 export type GetCertHttpsAgent = () => Promise<https.Agent>;
+
+export const NO_MATCH_ERROR = "NO_MATCH";
+export const NO_MAIN_APPS_ERROR = "NO_MAIN_APPS";
+export const MULTIPLE_MAIN_APPS_ERROR = "MULTIPLE_MAIN_APPS";

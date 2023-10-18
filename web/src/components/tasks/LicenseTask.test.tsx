@@ -8,14 +8,11 @@ import {
   Business,
   generateBusiness,
   generateLicenseData,
+  generateLicenseSearchNameAndAddress,
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
-import {
-  generateLicenseStatusItem,
-  generateNameAndAddress,
-  generateUserData,
-} from "@businessnjgovnavigator/shared/test";
+import { generateLicenseStatusItem, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 
@@ -107,7 +104,7 @@ describe("<LicenseTask />", () => {
       useMockBusiness({
         licenseData: generateLicenseData({
           completedSearch: false,
-          nameAndAddress: generateNameAndAddress({
+          nameAndAddress: generateLicenseSearchNameAndAddress({
             name: "My Cool Nail Salon",
           }),
         }),
@@ -121,7 +118,7 @@ describe("<LicenseTask />", () => {
       useMockBusiness({
         licenseData: generateLicenseData({
           completedSearch: true,
-          nameAndAddress: generateNameAndAddress({
+          nameAndAddress: generateLicenseSearchNameAndAddress({
             name: "My Cool Nail Salon",
           }),
           status: "ACTIVE",
@@ -139,7 +136,7 @@ describe("<LicenseTask />", () => {
     it("fills form values from user data if applicable", async () => {
       useMockBusiness({
         licenseData: generateLicenseData({
-          nameAndAddress: generateNameAndAddress({
+          nameAndAddress: generateLicenseSearchNameAndAddress({
             name: "Applebees",
             addressLine1: "123 Main St",
             addressLine2: "Apt 1",
@@ -177,7 +174,15 @@ describe("<LicenseTask />", () => {
 
     it("fills and saves form values and submits license status search with industry", async () => {
       act(() => {
-        mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
+        mockApi.checkLicenseStatus.mockResolvedValue(
+          generateUserDataForBusiness(
+            generateBusiness({
+              licenseData: generateLicenseData({
+                status: "DRAFT",
+              }),
+            })
+          )
+        );
       });
       renderTask();
 
@@ -188,7 +193,7 @@ describe("<LicenseTask />", () => {
 
       fireEvent.submit(screen.getByTestId("check-status-submit"));
       await waitFor(() => {
-        expect(screen.getByText("Pending")).toBeInTheDocument();
+        expect(screen.getByText("Draft")).toBeInTheDocument();
       });
       expect(mockApi.checkLicenseStatus).toHaveBeenCalledWith({
         name: "My Cool Nail Salon",
@@ -335,7 +340,7 @@ describe("<LicenseTask />", () => {
       useMockBusiness({
         licenseData: generateLicenseData({
           completedSearch: true,
-          nameAndAddress: generateNameAndAddress({
+          nameAndAddress: generateLicenseSearchNameAndAddress({
             name: "My Cool Nail Salon",
             addressLine1: "123 Main St",
             addressLine2: "Suite 1",
