@@ -2854,6 +2854,7 @@ collections:
             widget: object
             fields:
               - { label: Sidebar Heading, name: sidebarHeading, widget: string }
+              - { label: Complete Required Tasks Text, name: completeRequiredTasksText, widget: markdown }
               - { label: Empty Opportunities Header, name: emptyOpportunitiesHeader, widget: string }
               - { label: Empty Opportunities Text, name: emptyOpportunitiesText, widget: string }
               - { label: Hide Opportunity Text, name: hideOpportunityText, widget: string }

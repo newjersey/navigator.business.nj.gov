@@ -1,6 +1,7 @@
-import { SidebarCardsList } from "@/components/dashboard/SidebarCardsList";
+import { SidebarCardsList, SidebarCardsListProps } from "@/components/dashboard/SidebarCardsList";
+import { getMergedConfig } from "@/contexts/configContext";
 import analytics from "@/lib/utils/analytics";
-import { generateCertification } from "@/test/factories";
+import { generateCertification, generateFunding, generateSidebarCardContent } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
@@ -33,6 +34,8 @@ function setupMockAnalytics(): typeof analytics {
   };
 }
 
+const Config = getMergedConfig();
+
 describe("<SidebarCardsList />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
@@ -41,6 +44,21 @@ describe("<SidebarCardsList />", () => {
     });
     useMockBusiness({});
   });
+
+  const renderComponent = (overrides: Partial<SidebarCardsListProps>): void => {
+    const sidebarCardsListProps = {
+      topCards: [],
+      bottomCards: [],
+      fundings: [generateFunding({})],
+      hiddenFundings: [generateFunding({})],
+      certifications: [generateCertification({})],
+      hiddenCertifications: [generateCertification({})],
+      displayFundings: false,
+      displayCertifications: false,
+      ...overrides,
+    };
+    render(<SidebarCardsList {...sidebarCardsListProps} />);
+  };
 
   it("fire unhide_cards analytics when accordion is opened when displayFundings is true", () => {
     render(
@@ -76,6 +94,49 @@ describe("<SidebarCardsList />", () => {
     fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
     fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
     expect(mockAnalytics.event.for_you_card_unhide_button.click.unhide_cards).toHaveBeenCalledTimes(1);
+  });
+
+  describe("empty state messaging", () => {
+    it("displays Complete Required Tasks Message when there are no top or bottom cards and display Fundings and Certifications are false", () => {
+      renderComponent({});
+      expect(screen.getByTestId("complete-required-tasks-msg")).toBeInTheDocument();
+      expect(screen.queryByText(Config.dashboardDefaults.emptyOpportunitiesText)).not.toBeInTheDocument();
+    });
+
+    it("does not display Complete Required Tasks Message when displayFundings is true", () => {
+      renderComponent({ displayFundings: true });
+      expect(screen.queryByTestId("complete-required-tasks-msg")).not.toBeInTheDocument();
+    });
+
+    it("does not display Complete Required Tasks Message when displayCertifications is true", () => {
+      renderComponent({ displayCertifications: true });
+      expect(screen.queryByTestId("complete-required-tasks-msg")).not.toBeInTheDocument();
+    });
+
+    it("does not display Complete Required Tasks Message when there are top cards", () => {
+      const topCards = [
+        generateSidebarCardContent({
+          id: "some-fake-top-card",
+          section: "above-opportunities",
+        }),
+      ];
+      renderComponent({ topCards });
+
+      expect(screen.queryByTestId("complete-required-tasks-msg")).not.toBeInTheDocument();
+    });
+
+    it("does not display Complete Required Tasks Message when there are bottom cards", () => {
+      const bottomCards = [
+        generateSidebarCardContent({
+          id: "some-fake-bottom-card",
+          section: "below-opportunities",
+        }),
+      ];
+
+      renderComponent({ bottomCards });
+
+      expect(screen.queryByTestId("complete-required-tasks-msg")).not.toBeInTheDocument();
+    });
   });
 
   describe("SidebarCardsList For You Counter", () => {
