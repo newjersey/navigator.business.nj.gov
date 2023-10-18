@@ -420,6 +420,11 @@ export interface PostOnboarding {
   radioNo: string;
   radioNoContent: string;
   filename: string;
+  callToActionYesText1?: string | undefined;
+  callToActionYesLink1?: string | undefined;
+  callToActionYesText2?: string | undefined;
+  callToActionYesLink2?: string | undefined;
+  callToActionYesDropdownText?: string | undefined;
 }
 
 export interface PostOnboardingFile extends PostOnboarding {
