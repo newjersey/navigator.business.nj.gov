@@ -97,7 +97,7 @@ export const scrollToTop = (props?: { smooth?: boolean }): void => {
 
 export const scrollToTopOfElement = (
   element: HTMLDivElement | null,
-  { isDesktop }: { isDesktop: boolean }
+  { isDesktop, waitTime = 100 }: { isDesktop: boolean; waitTime?: number }
 ): void => {
   let y = 0;
   if (element) {
@@ -109,7 +109,7 @@ export const scrollToTopOfElement = (
   }
   setTimeout(() => {
     return window.scrollTo({ top: y, behavior: "smooth" });
-  }, 100);
+  }, waitTime);
 };
 
 interface AlertProps {
