@@ -419,6 +419,7 @@ export interface PostOnboarding {
   radioYes: string;
   radioNo: string;
   radioNoContent: string;
+  filename: string;
 }
 
 export interface PostOnboardingFile extends PostOnboarding {
