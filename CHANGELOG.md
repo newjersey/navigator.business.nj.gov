@@ -1,3 +1,11 @@
+# [5.34.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.33.0...v5.34.0) (2023-10-20)
+
+
+### Features
+
+* [[#185931949](https://github.com/newjersey/navigator.business.nj.gov/issues/185931949)] For you header updates and counter ([da2cd04](https://github.com/newjersey/navigator.business.nj.gov/commit/da2cd048288e42878307344faf2c7b7f35c189b6))
+* [[#185943408](https://github.com/newjersey/navigator.business.nj.gov/issues/185943408)] add for you section empty message and image ([e62619e](https://github.com/newjersey/navigator.business.nj.gov/commit/e62619e10769bdd0078e3909aab5092e0c2068b5))
+
 # [5.33.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.32.0...v5.33.0) (2023-10-17)
 
 
