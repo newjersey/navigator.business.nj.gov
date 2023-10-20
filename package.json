@@ -22,7 +22,7 @@
     "test": "jest --projects api shared web",
     "test:ci": "jest --ci --reporters=default --reporters=jest-junit --maxWorkers=1 --collectCoverage=true --coverageDirectory=../coverage/ --projects api shared web",
     "typecheck": "yarn workspaces foreach -v run typecheck",
-    "verify:node": "check-node-version --node $(cat .nvmrc) --npm 9.5.1"
+    "verify:node": "check-node-version --node $(cat .nvmrc) --npm 9.8.1"
   },
   "dependencies": {
     "@aws-amplify/auth": "5.6.1",
@@ -233,7 +233,7 @@
     ]
   },
   "engines": {
-    "node": ">=18.16.0"
+    "node": ">=18.18.2"
   },
   "repository": {
     "type": "git",
@@ -305,7 +305,7 @@
       "@semantic-release/git"
     ]
   },
-  "packageManager": "yarn@3.6.3",
+  "packageManager": "yarn@3.6.4",
   "resolutions": {
     "trim@0.0.1": "1.0.1",
     "postcss": "8.4.31",
