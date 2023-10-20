@@ -56,7 +56,7 @@ export const NeedsAccountSnackbar = (): ReactElement => {
       <div className="fin fac padding-y-2">
         {isDesktopAndUp ? (
           <img
-            src={`/img/Group.svg`}
+            src={`/img/needs-account-snackbar-icon.svg`}
             alt="registration"
             style={{ marginRight: "20px", width: "51px", height: "64px" }}
           />
