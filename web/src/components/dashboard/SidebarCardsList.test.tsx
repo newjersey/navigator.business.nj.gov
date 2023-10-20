@@ -1,6 +1,7 @@
 import { SidebarCardsList, SidebarCardsListProps } from "@/components/dashboard/SidebarCardsList";
 import { getMergedConfig } from "@/contexts/configContext";
 import analytics from "@/lib/utils/analytics";
+import * as helpers from "@/lib/utils/helpers";
 import { generateCertification, generateFunding, generateSidebarCardContent } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
@@ -18,6 +19,13 @@ function mockMaterialUI(): typeof materialUi {
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/utils/helpers", () => {
+  return {
+    ...jest.requireActual("@/lib/utils/helpers"),
+    scrollToTopOfElement: jest.fn(),
+  };
+});
+const mockHelpers = helpers as jest.Mocked<typeof helpers>;
 
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 function setupMockAnalytics(): typeof analytics {
@@ -96,7 +104,7 @@ describe("<SidebarCardsList />", () => {
     expect(mockAnalytics.event.for_you_card_unhide_button.click.unhide_cards).toHaveBeenCalledTimes(1);
   });
 
-  describe("empty state messaging", () => {
+  describe("Empty State Messaging", () => {
     it("displays Complete Required Tasks Message when there are no top or bottom cards and display Fundings and Certifications are false", () => {
       renderComponent({});
       expect(screen.getByTestId("complete-required-tasks-msg")).toBeInTheDocument();
@@ -190,6 +198,21 @@ describe("<SidebarCardsList />", () => {
       );
       const forYouCounter = screen.getByTestId("for-you-counter").textContent;
       expect(forYouCounter).toEqual("(1)");
+    });
+  });
+
+  describe("View Hidden Items Accordion", () => {
+    it("calls scrollToTopOfElement when the accordion opens", async () => {
+      renderComponent({ displayFundings: true });
+      fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
+      expect(mockHelpers.scrollToTopOfElement).toHaveBeenCalledTimes(1);
+    });
+
+    it("does not call scrollToTopOfElement when the accordion closes", async () => {
+      renderComponent({ displayCertifications: true });
+      fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
+      fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
+      expect(mockHelpers.scrollToTopOfElement).toHaveBeenCalledTimes(1);
     });
   });
 });

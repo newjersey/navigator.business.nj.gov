@@ -9,9 +9,9 @@ import { getForYouCardCount } from "@/lib/domain-logic/getForYouCardCount";
 import { MediaQueries } from "@/lib/PageSizes";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { openInNewTab, templateEval } from "@/lib/utils/helpers";
+import { openInNewTab, scrollToTopOfElement, templateEval } from "@/lib/utils/helpers";
 import { Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from "@mui/material";
-import { ReactElement, ReactNode, useState } from "react";
+import { ReactElement, ReactNode, useRef, useState } from "react";
 
 export interface SidebarCardsListProps {
   topCards: SidebarCardContent[];
@@ -28,6 +28,7 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
   const [hiddenAccordionIsOpen, setHiddenAccordionIsOpen] = useState<boolean>(false);
   const { Config } = useConfig();
   const { business } = useUserData();
+  const accordionRef = useRef(null);
 
   const hiddenOpportunitiesCount = (): number => {
     if (props.displayCertifications && props.displayFundings) {
@@ -65,10 +66,19 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
           <hr className="margin-top-3 bg-cool-lighter" aria-hidden={true} />
           <div className="desktop:margin-bottom-1">
             <Accordion
+              ref={accordionRef}
               expanded={hiddenAccordionIsOpen}
               onChange={(): void => {
                 if (!hiddenAccordionIsOpen) {
                   analytics.event.for_you_card_unhide_button.click.unhide_cards();
+                  const element = accordionRef.current as unknown as HTMLElement;
+                  if (element) {
+                    const timeForAccordionToOpen = 200;
+                    scrollToTopOfElement(element.parentElement as HTMLDivElement, {
+                      isDesktop: isDesktopAndUp,
+                      waitTime: timeForAccordionToOpen,
+                    });
+                  }
                 }
                 setHiddenAccordionIsOpen((prevAccordionStatus) => {
                   return !prevAccordionStatus;
@@ -136,7 +146,6 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
       {isDesktopAndUp && (
         <>
           <h2 className="h2-styling margin-top-0 font-weight-normal">
-            {" "}
             {Config.dashboardDefaults.sidebarHeading}
             <span data-testid="for-you-counter" className="margin-left-05 text-base">
               ({getForYouCardCount(business, props.certifications, props.fundings)})
