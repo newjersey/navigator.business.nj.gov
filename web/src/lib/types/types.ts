@@ -419,10 +419,22 @@ export interface PostOnboarding {
   radioYes: string;
   radioNo: string;
   radioNoContent: string;
+  filename: string;
+  callToActionYesText1?: string | undefined;
+  callToActionYesLink1?: string | undefined;
+  callToActionYesText2?: string | undefined;
+  callToActionYesLink2?: string | undefined;
+  callToActionYesDropdownText?: string | undefined;
 }
 
 export interface PostOnboardingFile extends PostOnboarding {
   filename: string;
+}
+
+export interface CallToActionHyperlink {
+  text: string;
+  destination: string;
+  onClick: () => void;
 }
 
 export interface SessionHelper {

@@ -343,6 +343,7 @@ export const generatePostOnboarding = (overrides: Partial<PostOnboarding>): Post
   return {
     question: `some-question-${randomInt()}`,
     contentMd: `some-yes-content-${randomInt()}`,
+    filename: `some-filename-${randomInt()}`,
     radioYes: "Yes",
     radioNo: "No",
     radioNoContent: `some-no-content-${randomInt()}`,

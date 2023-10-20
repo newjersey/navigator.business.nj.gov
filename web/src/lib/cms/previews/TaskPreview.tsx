@@ -17,6 +17,7 @@ const TaskPreview = (props: PreviewProps): ReactElement => {
   const fakeBusinessWithMunicipality = generateBusiness({
     profileData: generateProfileData({
       municipality: generateMunicipality({}),
+      constructionRenovationPlan: true,
     }),
   });
 
