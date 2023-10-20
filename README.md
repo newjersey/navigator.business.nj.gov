@@ -37,11 +37,12 @@ Python (for the AWS CLI) installed (details below).
 
 We recommend using WSL2 if developing on Windows.
 
-For pair programming, we recommend Visual Studio Code with the Live Share extension.
+For pair programming, we recommend Visual Studio Code with the Live Share
+extension.
 
 ### Software requirements
 
-- [Node.js 18.x](https://nodejs.org/en/download/) (We recommend using
+- [Node.js 20.x LTS](https://nodejs.org/en/download/) (We recommend using
   [nvm](https://github.com/nvm-sh/nvm#readme) for managing Node.js versions. If
   installing via package manager, we suggest installing `corepack` if available
   separately.)
