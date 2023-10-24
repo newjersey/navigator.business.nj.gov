@@ -25,7 +25,7 @@
 ## Code author checklist
 
 - [ ] I have performed a self-review of my code
-- [ ] I have created and/or updated relevant documentation, if necessary
+- [ ] I have created and/or updated relevant documentation (EX: [Engineering Reference/FAQ](https://docs.google.com/document/d/1X4iWSGmBZdHYZ0jGqkwTR3_yyyqI_TiiJptfc8pi9Po)), if necessary
 - [ ] I have not used any relative imports
 - [ ] I have checked for and removed instances of unused config from CMS
 - [ ] I have pruned any instances of unused code
