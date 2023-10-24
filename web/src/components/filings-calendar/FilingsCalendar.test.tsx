@@ -21,12 +21,12 @@ import {
   generateBusiness,
   generateTaxFilingCalendarEvent,
   generateUserDataForBusiness,
-  getCurrentDate,
   LookupIndustryById,
   OperatingPhases,
   randomInt,
   TaxFilingCalendarEvent,
 } from "@businessnjgovnavigator/shared";
+import * as getCurrentDateModule from "@businessnjgovnavigator/shared/dateHelpers";
 import {
   generateLicenseData,
   generatePreferences,
@@ -37,8 +37,7 @@ import {
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, within } from "@testing-library/react";
-import dayjs from "dayjs";
-
+import dayjs, { Dayjs } from "dayjs";
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
@@ -65,7 +64,17 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+jest.mock("@businessnjgovnavigator/shared/dateHelpers", () => {
+  return {
+    ...jest.requireActual("@businessnjgovnavigator/shared/dateHelpers"),
+    getCurrentDate: jest.fn(),
+  };
+});
+const currentDateMock = (getCurrentDateModule as jest.Mocked<typeof getCurrentDateModule>).getCurrentDate;
 
+const getAprilDateOfThisYear = (): Dayjs => {
+  return dayjs().month(3);
+};
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 const Config = getMergedConfig();
 
@@ -94,10 +103,11 @@ describe("<FilingsCalendar />", () => {
     useMockRouter({});
     setTabletScreen(true);
     setupStatefulUserDataContext();
+    currentDateMock.mockReturnValue(getAprilDateOfThisYear());
   });
 
   it("displays filings calendar with annual report date", () => {
-    const dueDate = getCurrentDate().startOf("month");
+    const dueDate = getAprilDateOfThisYear().startOf("month");
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
       dueDate: dueDate.format(defaultDateFormat),
@@ -131,12 +141,12 @@ describe("<FilingsCalendar />", () => {
   });
 
   it("displays filings only within a year in list view", () => {
-    const farDueDate = getCurrentDate().add(2, "years");
+    const farDueDate = getAprilDateOfThisYear().add(2, "years");
     const farReport = generateTaxFilingCalendarEvent({
       identifier: "whatever",
       dueDate: farDueDate.format(defaultDateFormat),
     });
-    const recentDueDate = getCurrentDate().add(2, "months");
+    const recentDueDate = getAprilDateOfThisYear().add(2, "months");
 
     const recentReport = generateTaxFilingCalendarEvent({
       identifier: "whatever2",
@@ -175,7 +185,7 @@ describe("<FilingsCalendar />", () => {
   });
 
   it("displays filings nested within a date in list view", () => {
-    const recentDueDate = getCurrentDate().add(2, "months");
+    const recentDueDate = getAprilDateOfThisYear().add(2, "months");
 
     const farReport = generateTaxFilingCalendarEvent({
       identifier: "whatever",
@@ -225,7 +235,7 @@ describe("<FilingsCalendar />", () => {
   it("displays calendar content when there are filings inside of the year", () => {
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
-      dueDate: getCurrentDate().add(2, "months").format(defaultDateFormat),
+      dueDate: getAprilDateOfThisYear().add(2, "months").format(defaultDateFormat),
     });
 
     const business = generateBusiness({
@@ -261,7 +271,7 @@ describe("<FilingsCalendar />", () => {
   it("displays calendar content when there are filings in two years", () => {
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
-      dueDate: getCurrentDate().add(2, "years").format(defaultDateFormat),
+      dueDate: getAprilDateOfThisYear().add(2, "years").format(defaultDateFormat),
     });
 
     const business = generateBusiness({
@@ -293,14 +303,14 @@ describe("<FilingsCalendar />", () => {
       screen.queryByText(markdownToText(Config.dashboardDefaults.emptyCalendarTitleText))
     ).not.toBeInTheDocument();
     fireEvent.click(screen.getByTestId("primary-year-selector-dropdown-button"));
-    fireEvent.click(screen.getByText(getCurrentDate().add(2, "years").year().toString()));
+    fireEvent.click(screen.getByText(getAprilDateOfThisYear().add(2, "years").year().toString()));
     expect(screen.getByText(`Annual Report`)).toBeInTheDocument();
   });
 
   it("displays empty calendar content when there are filings in two years", () => {
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
-      dueDate: getCurrentDate().add(2, "years").format(defaultDateFormat),
+      dueDate: getAprilDateOfThisYear().add(2, "years").format(defaultDateFormat),
     });
 
     const business = generateBusiness({
@@ -332,7 +342,7 @@ describe("<FilingsCalendar />", () => {
       markdownToText(Config.dashboardDefaults.calendarEmptyDescriptionMarkdown)
     );
     fireEvent.click(screen.getByTestId("primary-year-selector-dropdown-button"));
-    fireEvent.click(screen.getByText(getCurrentDate().add(2, "years").year().toString()));
+    fireEvent.click(screen.getByText(getAprilDateOfThisYear().add(2, "years").year().toString()));
     expect(screen.getByTestId("filings-calendar")).not.toHaveTextContent(
       markdownToText(Config.dashboardDefaults.calendarEmptyDescriptionMarkdown)
     );
@@ -445,7 +455,7 @@ describe("<FilingsCalendar />", () => {
   });
 
   it("displays filings calendar as list with annual report", () => {
-    const dueDate = getCurrentDate().add(2, "months");
+    const dueDate = getAprilDateOfThisYear().add(2, "months");
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
       dueDate: dueDate.format(defaultDateFormat),
@@ -479,7 +489,7 @@ describe("<FilingsCalendar />", () => {
   });
 
   it("displays filings calendar as list with license events", () => {
-    const expirationDate = getCurrentDate().add(2, "months");
+    const expirationDate = getAprilDateOfThisYear().add(2, "months");
 
     const business = generateBusiness({
       profileData: generateProfileData({
@@ -495,7 +505,7 @@ describe("<FilingsCalendar />", () => {
         filings: [
           generateTaxFilingCalendarEvent({
             identifier: "annual-report",
-            dueDate: getCurrentDate().add(1, "months").format(defaultDateFormat),
+            dueDate: getAprilDateOfThisYear().add(1, "months").format(defaultDateFormat),
           }),
         ],
       }),
@@ -523,7 +533,7 @@ describe("<FilingsCalendar />", () => {
   it("sends analytics when feedback modal link is clicked", () => {
     const annualReport = generateTaxFilingCalendarEvent({
       identifier: "annual-report",
-      dueDate: getCurrentDate().format(defaultDateFormat),
+      dueDate: getAprilDateOfThisYear().format(defaultDateFormat),
     });
 
     const business = generateBusiness({
@@ -555,7 +565,7 @@ describe("<FilingsCalendar />", () => {
     });
 
     it("displays button on filings calendar for PublicFiling", () => {
-      const dueDate = getCurrentDate().add(2, "months");
+      const dueDate = getAprilDateOfThisYear().add(2, "months");
       const annualReport = generateTaxFilingCalendarEvent({
         identifier: "annual-report",
         dueDate: dueDate.format(defaultDateFormat),
@@ -616,7 +626,7 @@ describe("<FilingsCalendar />", () => {
     });
 
     it("hides button on filings calendar when displayTaxAccessButton is false", () => {
-      const dueDate = getCurrentDate().add(2, "months");
+      const dueDate = getAprilDateOfThisYear().add(2, "months");
       const annualReport = generateTaxFilingCalendarEvent({
         identifier: "annual-report",
         dueDate: dueDate.format(defaultDateFormat),
@@ -680,7 +690,7 @@ describe("<FilingsCalendar />", () => {
     beforeEach(() => {
       setTabletScreen(false);
 
-      dueDate = getCurrentDate().add(2, "months");
+      dueDate = getAprilDateOfThisYear().add(2, "months");
       annualReport = generateTaxFilingCalendarEvent({
         identifier: "annual-report",
         dueDate: dueDate.format(defaultDateFormat),
@@ -719,13 +729,13 @@ describe("<FilingsCalendar />", () => {
     });
 
     it("doesn't display past months in list view", () => {
-      const pastDueDate = getCurrentDate().subtract(1, "months");
+      const pastDueDate = getAprilDateOfThisYear().subtract(1, "months");
       const pastReport = generateTaxFilingCalendarEvent({
         identifier: "past",
         dueDate: pastDueDate.format(defaultDateFormat),
       });
 
-      const futureDueDate = getCurrentDate().add(2, "months");
+      const futureDueDate = getAprilDateOfThisYear().add(2, "months");
       const futureReport = generateTaxFilingCalendarEvent({
         identifier: "future",
         dueDate: futureDueDate.format(defaultDateFormat),
@@ -763,7 +773,7 @@ describe("<FilingsCalendar />", () => {
     let operateReferences: Record<string, OperateReference>;
 
     beforeEach(() => {
-      dueDate = getCurrentDate().add(2, "months");
+      dueDate = getAprilDateOfThisYear().add(2, "months");
       annualReport = generateTaxFilingCalendarEvent({
         identifier: "annual-report",
         dueDate: dueDate.format(defaultDateFormat),
@@ -845,7 +855,11 @@ describe("<FilingsCalendar />", () => {
       let annualReport: TaxFilingCalendarEvent;
       const operateReferences: Record<string, OperateReference> = {};
       const filings: TaxFilingCalendarEvent[] = [];
-      [getCurrentDate(), getCurrentDate().add(1, "years"), getCurrentDate().add(2, "years")].map((dates) => {
+      [
+        getAprilDateOfThisYear(),
+        getAprilDateOfThisYear().add(1, "years"),
+        getAprilDateOfThisYear().add(2, "years"),
+      ].map((dates) => {
         for (let i = 0; i < numberOfCalendarEntries; i++) {
           dueDate = dates.add(2, "months").add(i, "day");
           annualReport = generateTaxFilingCalendarEvent({
@@ -903,11 +917,12 @@ describe("<FilingsCalendar />", () => {
 
     it("resets view more button when year is changed", () => {
       renderCalendarWithEntries(12);
+
       expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(5);
       fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarListViewMoreButton));
       expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(10);
       fireEvent.click(screen.getByTestId("primary-year-selector-dropdown-button"));
-      fireEvent.click(screen.getByText(getCurrentDate().add(2, "years").year().toString()));
+      fireEvent.click(screen.getByText(getAprilDateOfThisYear().add(2, "years").year().toString()));
       expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(5);
     });
   });
