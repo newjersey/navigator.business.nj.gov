@@ -4836,6 +4836,26 @@ collections:
       - { label: "No Button Content", name: "radioNoContent", widget: "string", required: false }
       - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
       - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
+      - {
+          label: "CTA (Yes) Dropdown Name",
+          name: "callToActionYesDropdownText",
+          widget: "string",
+          required: false,
+        }
+      - { label: "CTA (Yes) Link 1 Name", name: "callToActionYesText1", widget: "string", required: false }
+      - {
+          label: "CTA (Yes) Link 1 Destination",
+          name: "callToActionYesLink1",
+          widget: "string",
+          required: false,
+        }
+      - { label: "CTA (Yes) Link 2 Name", name: "callToActionYesText2", widget: "string", required: false }
+      - {
+          label: "CTA (Yes) Link 2 Destination",
+          name: "callToActionYesLink2",
+          widget: "string",
+          required: false,
+        }
 
   - name: "contextual-information"
     label: "Contextual Information"

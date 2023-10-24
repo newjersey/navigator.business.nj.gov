@@ -43,6 +43,11 @@ export const convertPostOnboardingMd = (contentMdContents: string, filename: str
     radioYes: grayMatter.radioYes,
     radioNo: grayMatter.radioNo,
     radioNoContent: grayMatter.radioNoContent,
+    callToActionYesText1: grayMatter.callToActionYesText1,
+    callToActionYesLink1: grayMatter.callToActionYesLink1,
+    callToActionYesText2: grayMatter.callToActionYesText2,
+    callToActionYesLink2: grayMatter.callToActionYesLink2,
+    callToActionYesDropdownText: grayMatter.callToActionYesDropdownText,
     filename,
   };
 };
@@ -242,4 +247,9 @@ type PostOnboardingGrayMatter = {
   radioYes: string;
   radioNo: string;
   radioNoContent: string;
+  callToActionYesText1: string;
+  callToActionYesLink1: string;
+  callToActionYesText2: string;
+  callToActionYesLink2: string;
+  callToActionYesDropdownText: string;
 };

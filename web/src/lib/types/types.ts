@@ -426,6 +426,12 @@ export interface PostOnboardingFile extends PostOnboarding {
   filename: string;
 }
 
+export interface CallToActionHyperlink {
+  text: string;
+  destination: string;
+  onClick: () => void;
+}
+
 export interface SessionHelper {
   getCurrentToken: () => Promise<string>;
   getCurrentUser: () => Promise<BusinessUser>;
