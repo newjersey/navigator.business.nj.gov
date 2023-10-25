@@ -13,4 +13,4 @@ section: above-opportunities
 
 ### Link Your myNewJersey Account
 
-To save your progress on the Navigator, [link your existing myNewJersey account](/account-setup).
+To save your progress on your Business.NJ.gov account, [link your existing myNewJersey account](/account-setup).
