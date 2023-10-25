@@ -41,14 +41,6 @@
           }
         }
       },
-      "nonEssentialQuestions": {
-        "default": {
-          "header": "Based, on your industry, answer additional questions to personalize your experience.",
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "optionalText": "(Optional)"
-        }
-      },
       "certifiedInteriorDesigner": {
         "default": {
           "header": "Certified Interior Designer",
@@ -139,6 +131,14 @@
           "headerNotBolded": "(mm/yyyy)",
           "description": "Find your Business Effective Date on your `Certificate of Formation|certificate-formation` .",
           "errorTextRequired": "Your formation should be formatted as MM/YYYY. (This information will help us inform your annual reporting due date.)"
+        }
+      },
+      "nonEssentialQuestions": {
+        "default": {
+          "header": "Based, on your industry, answer additional questions to personalize your experience.",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "optionalText": "(Optional)"
         }
       },
       "businessPersona": {
@@ -366,19 +366,18 @@
       }
     },
     "default": {
-      "profileErrorAlert": "Complete ${fieldText} to access your dashboard:",
-      "profileErrorAlertOneField": "the field",
-      "profileErrorAlertMultipleFields": "these fields",
       "lockedFieldTooltipText": "This information cannot be changed because it was submitted to the NJ Department of Treasury.",
       "errorTextHeader": "Error",
+      "profileErrorAlertMultipleFields": "these fields",
       "backButtonText": "Cancel",
       "pageTitle": "### Business Profile",
       "escapeModalEscape": "Go back",
       "escapeModalBody": "You have unsaved changes that will be lost.",
       "standingDocFileTitle": "Certificate of Good Standing",
+      "profileErrorAlertOneField": "the field",
       "profileTabDocsTitle": "Reference Documents",
       "profileTabRefTitle": "Reference Numbers",
-      "successTextBody": "Based on your answers you may see updates to your Navigator experience.",
+      "successTextBody": "Based on your answers, you may see updates to your Business.NJ.gov account experience.",
       "essentialQuestionAlertText": "Complete all required fields.",
       "formationDocFileTitle": "Official Formation Document",
       "profileCompletionAlert": "Complete the information below to customize your certifications, funding opportunities, and annual report deadline:",
@@ -388,9 +387,10 @@
       "saveButtonText": "Save",
       "escapeModalReturn": "Continue without saving",
       "successTextHeader": "Business Profile Saved",
+      "profileErrorAlert": "Complete ${fieldText} to access your dashboard:",
+      "cannabisLocationAlert": "Check if your local government allows a cannabis license.",
       "certificationDocFileTitle": "Certified Copy of Formation",
-      "profileTabInfoTitle": "Business Information",
-      "cannabisLocationAlert": "Check if your local government allows a cannabis license."
+      "profileTabInfoTitle": "Business Information"
     }
   }
 }
