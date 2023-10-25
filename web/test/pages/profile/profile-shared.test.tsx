@@ -28,7 +28,11 @@ import {
   OperatingPhases,
   randomInt,
 } from "@businessnjgovnavigator/shared";
-import { generateTaxFilingData, randomFilteredIndustry } from "@businessnjgovnavigator/shared/test";
+import {
+  generateFormationData,
+  generateTaxFilingData,
+  randomFilteredIndustry,
+} from "@businessnjgovnavigator/shared/test";
 
 import {
   chooseTab,
@@ -98,7 +102,7 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
-const personas: BusinessPersona[] = ["STARTING", "FOREIGN"];
+const nonOwningPersonas: BusinessPersona[] = ["STARTING", "FOREIGN"];
 
 describe("profile - shared", () => {
   beforeEach(() => {
@@ -386,6 +390,81 @@ describe("profile - shared", () => {
     });
   });
 
+  describe("Special Note Alert for Businesses Formed outside the Navigator", () => {
+    it.each(nonOwningPersonas)(
+      "shows Note alert for %s business that set DateOfFormation but did NOT pay",
+      (persona) => {
+        const business = generateBusinessForProfile({
+          formationData: generateFormationData({
+            completedFilingPayment: false,
+          }),
+          profileData: generateProfileData({
+            dateOfFormation: "2020-8-8",
+            businessPersona: persona as BusinessPersona,
+          }),
+        });
+        renderPage({ business });
+        expect(
+          screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+        ).toBeInTheDocument();
+      }
+    );
+
+    it("shows the Note Alert for OWNING businesses always", () => {
+      const business = generateBusinessForProfile({
+        formationData: generateFormationData({
+          completedFilingPayment: true,
+        }),
+        profileData: generateProfileData({
+          dateOfFormation: undefined,
+          businessPersona: "OWNING",
+        }),
+      });
+      renderPage({ business });
+      expect(
+        screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+      ).toBeInTheDocument();
+    });
+
+    it.each(nonOwningPersonas)(
+      "does NOT show Note Alert for %s business that paid via the Navigator",
+      (persona) => {
+        const business = generateBusinessForProfile({
+          formationData: generateFormationData({
+            completedFilingPayment: true,
+          }),
+          profileData: generateProfileData({
+            dateOfFormation: "2020-8-8",
+            businessPersona: persona as BusinessPersona,
+          }),
+        });
+        renderPage({ business });
+        expect(
+          screen.queryByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+        ).not.toBeInTheDocument();
+      }
+    );
+
+    it.each(nonOwningPersonas)(
+      "does NOT show Note Alert for %s business that have not paid and not formed",
+      (persona) => {
+        const business = generateBusinessForProfile({
+          formationData: generateFormationData({
+            completedFilingPayment: false,
+          }),
+          profileData: generateProfileData({
+            dateOfFormation: undefined,
+            businessPersona: persona as BusinessPersona,
+          }),
+        });
+        renderPage({ business });
+        expect(
+          screen.queryByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+        ).not.toBeInTheDocument();
+      }
+    );
+  });
+
   describe("non essential questions", () => {
     const generateBusinessForNonEssentialQuestionTest = (profileData: Partial<ProfileData>): Business => {
       return generateBusiness({
@@ -399,7 +478,7 @@ describe("profile - shared", () => {
       });
     };
 
-    it.each(personas)(
+    it.each(nonOwningPersonas)(
       "resets non essential questions if industry is changed when %s",
       async (businessPersona: BusinessPersona) => {
         const business = generateBusinessForNonEssentialQuestionTest({
@@ -421,7 +500,7 @@ describe("profile - shared", () => {
   });
 
   describe("location", () => {
-    it.each(personas)(
+    it.each(nonOwningPersonas)(
       "displays a warning alert for cannabis businesses when %s",
       async (businessPersona: BusinessPersona) => {
         renderPage({
@@ -438,7 +517,7 @@ describe("profile - shared", () => {
       }
     );
 
-    it.each(personas)(
+    it.each(nonOwningPersonas)(
       "should NOT display a warning alert for non-cannabis businesses when %s",
       async (businessPersona: BusinessPersona) => {
         const filter = (industry: Industry): boolean => industry.id !== "cannabis";
