@@ -388,9 +388,10 @@
       "escapeModalReturn": "Continue without saving",
       "successTextHeader": "Business Profile Saved",
       "profileErrorAlert": "Complete ${fieldText} to access your dashboard:",
-      "cannabisLocationAlert": "Check if your local government allows a cannabis license.",
       "certificationDocFileTitle": "Certified Copy of Formation",
-      "profileTabInfoTitle": "Business Information"
+      "profileTabInfoTitle": "Business Information",
+      "noteForBusinessesFormedOutsideNavigator": "Your profile helps us recommend requirements and opportunities unique to your business. It does not submit your information for registration purposes.",
+      "cannabisLocationAlert": "Check if your local government allows a cannabis license."
     }
   }
 }

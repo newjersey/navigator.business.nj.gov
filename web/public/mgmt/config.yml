@@ -4791,6 +4791,11 @@ collections:
                   - { label: Save Button Text, name: saveButtonText, widget: string }
                   - { label: Back Button Text, name: backButtonText, widget: string }
                   - { label: Info Tab Title, name: profileTabInfoTitle, widget: string }
+                  - {
+                      label: Note for Businesses Formed Outside Navigator,
+                      name: noteForBusinessesFormedOutsideNavigator,
+                      widget: string,
+                    }
                   - { label: Reference Numbers Tab Title, name: profileTabRefTitle, widget: string }
                   - { label: Docs Tab Title, name: profileTabDocsTitle, widget: string }
                   - { label: Notes Tab Title, name: profileTabNoteTitle, widget: string }
