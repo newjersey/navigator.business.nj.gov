@@ -7,8 +7,6 @@ export interface AlertProps {
   rounded?: boolean;
   dataTestid?: string;
   className?: string;
-  borderRight?: boolean;
-  borderSmall?: boolean;
 }
 
 interface Props extends AlertProps {
@@ -26,17 +24,7 @@ export const Alert = (props: Props): ReactElement => {
   const roundedClass = rounded ? " radius-md" : "";
   const alertRole = variant === "error" ? { role: "alert" } : {};
   const defaultClassNames = "usa-alert margin-y-2 usa-alert--slim";
-  const borderRight = props.borderRight ? "alert-border-right" : "";
-  const borderSmall = props.borderSmall ? "alert-border-small" : "";
-  const className = [
-    defaultClassNames,
-    roundedClass,
-    variantClass,
-    borderRight,
-    borderSmall,
-    noIconClass,
-    props.className ?? "",
-  ]
+  const className = [defaultClassNames, roundedClass, variantClass, noIconClass, props.className ?? ""]
     .map((i) => {
       return i?.trim();
     })

@@ -50,11 +50,7 @@ export const Content = (props: ContentProps): ReactElement => {
       return <GreenBox>{props.children}</GreenBox>;
     },
     note: (props: any): ReactElement => {
-      return (
-        <Alert variant="note" borderRight={true} borderSmall={true}>
-          {props.children}
-        </Alert>
-      );
+      return <Alert variant="note">{props.children}</Alert>;
     },
     infoAlert: (props: any): ReactElement => {
       return <Alert variant="info">{props.children}</Alert>;

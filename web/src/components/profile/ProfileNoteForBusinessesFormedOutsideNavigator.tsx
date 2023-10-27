@@ -16,8 +16,6 @@ export const ProfileNoteForBusinessFormedOutsideNavigator = (props: Props): Reac
   }
 
   return (
-    <Alert variant="note" borderSmall borderRight>
-      {Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator}
-    </Alert>
+    <Alert variant="note">{Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator}</Alert>
   );
 };
