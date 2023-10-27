@@ -8,6 +8,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Opportunity } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import { capitalizeEachWord } from "@/lib/utils/cases-helpers";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import truncateMarkdown from "markdown-truncate";
@@ -28,9 +29,19 @@ export const OpportunityCard = (props: Props): ReactElement => {
   const router = useRouter();
 
   const TYPE_TO_LABEL: Record<"funding" | "certification", ReactElement> = {
-    funding: <Tag backgroundColor="accent-semi-cool-light">{Config.dashboardDefaults.fundingTagText}</Tag>,
+    funding: (
+      <Tag
+        isLowerCase={true}
+        className={"border-accent-semi-cool-500 border"}
+        backgroundColor="accent-semi-cool-light"
+      >
+        {capitalizeEachWord(Config.dashboardDefaults.fundingTagText)}
+      </Tag>
+    ),
     certification: (
-      <Tag backgroundColor="accent-cool-light">{Config.dashboardDefaults.certificationTagText}</Tag>
+      <Tag isLowerCase={true} className={"border-accent-cool border"} backgroundColor="accent-cool-lighter">
+        {capitalizeEachWord(Config.dashboardDefaults.certificationTagText)}
+      </Tag>
     ),
   };
 
@@ -82,42 +93,43 @@ export const OpportunityCard = (props: Props): ReactElement => {
   };
 
   return (
-    <div
-      data-testid={props.opportunity.id}
-      className={`bg-white border-1px border-base-lighter padding-3 radius-md${
-        props.isLast ? "" : " margin-bottom-205"
-      }`}
-    >
-      <div className="fdr margin-bottom-105">
-        <div>{TYPE_TO_LABEL[props.urlPath]}</div>
-        <div className="mla">
-          <SecondaryButton
-            size={"small"}
-            isColor={"border-base-light"}
-            onClick={(): void => {
-              isHidden() ? unhideSelf() : hideSelf();
-            }}
-          >
-            <div className="fdr fac">
-              <Icon>{isHidden() ? "visibility" : "visibility_off"}</Icon>
-              <span className="margin-left-05 line-height-sans-2">
-                {isHidden()
-                  ? Config.dashboardDefaults.unHideOpportunityText
-                  : Config.dashboardDefaults.hideOpportunityText}
-              </span>
-            </div>
-          </SecondaryButton>
+    <>
+      <hr className="bg-cool-lighter" aria-hidden={true} />
+      <div
+        data-testid={props.opportunity.id}
+        className={`${props.isLast ? "" : " margin-bottom-205"} margin-top-3`}
+      >
+        <div className="fdr margin-bottom-105">
+          <div>{TYPE_TO_LABEL[props.urlPath]}</div>
+          <div className="mla">
+            <SecondaryButton
+              size={"small"}
+              isColor={"border-base-light"}
+              onClick={(): void => {
+                isHidden() ? unhideSelf() : hideSelf();
+              }}
+            >
+              <div className="fdr fac">
+                <Icon>{isHidden() ? "visibility" : "visibility_off"}</Icon>
+                <span className="margin-left-05 line-height-sans-2">
+                  {isHidden()
+                    ? Config.dashboardDefaults.unHideOpportunityText
+                    : Config.dashboardDefaults.hideOpportunityText}
+                </span>
+              </div>
+            </SecondaryButton>
+          </div>
+        </div>
+        <div className="text-normal font-body-md margin-bottom-105">
+          <UnStyledButton style={"default"} isUnderline onClick={routeToPage}>
+            {props.opportunity.name}
+          </UnStyledButton>
+        </div>
+        <OpportunityCardStatus dueDate={props.opportunity.dueDate} status={props.opportunity.status} />
+        <div className="override-p-2xs text-base-dark">
+          <Content>{truncatedMd}</Content>
         </div>
       </div>
-      <div className="text-normal font-body-md margin-bottom-105">
-        <UnStyledButton style={"default"} isUnderline onClick={routeToPage}>
-          {props.opportunity.name}
-        </UnStyledButton>
-      </div>
-      <OpportunityCardStatus dueDate={props.opportunity.dueDate} status={props.opportunity.status} />
-      <div className="override-p-2xs text-base-dark">
-        <Content>{truncatedMd}</Content>
-      </div>
-    </div>
+    </>
   );
 };

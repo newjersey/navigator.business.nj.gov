@@ -4,7 +4,7 @@ import { generateSidebarCardContent } from "@/test/factories";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 export default {
-  title: "Molecules/SideBarCards",
+  title: "Molecules/Cards/SideBarCards",
   component: SidebarCardGeneric,
   decorators: [(Story) => <div className="width-mobile-lg">{Story()}</div>],
 

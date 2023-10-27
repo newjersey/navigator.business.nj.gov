@@ -1,6 +1,7 @@
 import {
   camelCaseToKebabCase,
   camelCaseToSentence,
+  capitalizeEachWord,
   capitalizeFirstLetter,
   kebabSnakeSentenceToCamelCase,
 } from "@/lib/utils/cases-helpers";
@@ -39,6 +40,15 @@ describe("cases-helpers", () => {
   describe("camelCaseToKebabCase", () => {
     it("converts camelCase to kebab-case", () => {
       expect(camelCaseToKebabCase("businessAddressLine1")).toEqual("business-address-line1");
+    });
+  });
+
+  describe("capitalizeEachWord", () => {
+    it("capitalizes first letter of each word", () => {
+      expect(capitalizeEachWord("business address")).toEqual("Business Address");
+      expect(capitalizeEachWord("business Address")).toEqual("Business Address");
+      expect(capitalizeEachWord("Business address")).toEqual("Business Address");
+      expect(capitalizeEachWord("Business Address")).toEqual("Business Address");
     });
   });
 });
