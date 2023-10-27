@@ -16,29 +16,9 @@
   border-top-left-radius: 0.25rem;
 }
 
-@mixin note() {
+.usa-alert.usa-alert--note {
   background-color: $base-lightest;
   border-left-color: $secondary;
   border-right-color: $secondary;
   color: $base-darkest;
-}
-
-.usa-alert.usa-alert--note {
-  @include note();
-}
-
-.usa-alert.usa-alert--note.alert-border-small {
-  @include note();
-}
-
-.usa-alert.alert-border-small {
-  border-left: 0.25rem solid;
-}
-
-.alert-border-right {
-  border-right: 0.5rem solid;
-}
-
-.alert-border-small.alert-border-right {
-  border-right: 0.25rem solid;
 }

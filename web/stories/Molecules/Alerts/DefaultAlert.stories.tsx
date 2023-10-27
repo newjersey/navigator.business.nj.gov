@@ -47,6 +47,4 @@ export const NoteAlert = Template.bind({});
 NoteAlert.args = {
   ...defaultArgs,
   variant: "note",
-  borderRight: true,
-  borderSmall: true,
 };
