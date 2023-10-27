@@ -1,3 +1,10 @@
+## [5.34.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.34.0...v5.34.1) (2023-10-26)
+
+
+### Bug Fixes
+
+* delete cosmetology quick action ([8b1cf0b](https://github.com/newjersey/navigator.business.nj.gov/commit/8b1cf0bba39507593b6c2c7d4bcb3ee18127e103))
+
 # [5.34.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.33.0...v5.34.0) (2023-10-20)
 
 
