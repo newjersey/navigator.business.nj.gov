@@ -128,7 +128,7 @@ describe("<NaicsCode />", () => {
       profileData: generateProfileData({
         naicsCode: "624410",
         businessPersona: "FOREIGN",
-        foreignBusinessType: "NEXUS",
+        foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
       }),
       taxFilingData: generateTaxFilingData({
         state: "SUCCESS",

@@ -5,9 +5,10 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import { determineForeignBusinessType } from "@/lib/domain-logic/determineForeignBusinessType";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { FormContextFieldProps } from "@/lib/types/types";
+import { determineForeignBusinessType } from "@businessnjgovnavigator/shared";
+import { ForeignBusinessTypeId } from "@businessnjgovnavigator/shared/";
 import { Checkbox, FormControl, FormControlLabel } from "@mui/material";
 import { ChangeEvent, ReactElement, useContext } from "react";
 
@@ -47,29 +48,40 @@ export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement => {
   RegisterForOnSubmit(() => isValid(state.profileData.foreignBusinessTypeIds));
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const value = event.target.value as ForeignBusinessTypeId;
     let ids = state.profileData.foreignBusinessTypeIds;
 
-    if (ids.includes("none") && event.target.value !== "none") {
-      ids = [event.target.value];
-    } else if (event.target.value === "none" && !ids.includes("none")) {
+    if (ids.includes("none") && value !== "none") {
+      ids = [value];
+    } else if (value === "none" && !ids.includes("none")) {
       ids = ["none"];
     } else {
       ids = event.target.checked
-        ? [...ids, event.target.value]
+        ? [...ids, value]
         : ids.filter((it) => {
-            return it !== event.target.value;
+            return it !== value;
           });
     }
     isValid(ids) && setIsValid(true);
 
-    const foreignBusinessType = determineForeignBusinessType(ids);
     setProfileData({
       ...state.profileData,
-      industryId: foreignBusinessType === "NEXUS" ? state.profileData.industryId : undefined,
-      foreignBusinessType,
+      industryId: determineForeignBusinessType(ids) === "NEXUS" ? state.profileData.industryId : undefined,
       foreignBusinessTypeIds: ids,
     });
   };
+
+  let renderAlertForValidForeignBusiness = determineForeignBusinessType(
+    state.profileData.foreignBusinessTypeIds
+  );
+
+  if (
+    determineForeignBusinessType(state.profileData.foreignBusinessTypeIds) === undefined ||
+    renderAlertForValidForeignBusiness === "NONE"
+  ) {
+    renderAlertForValidForeignBusiness = undefined;
+  }
+
   return (
     <>
       <div className="margin-top-3">
@@ -97,14 +109,13 @@ export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement => {
         </FormControl>
       </div>
 
-      {state.profileData.foreignBusinessType !== undefined &&
-        state.profileData.foreignBusinessType !== "NONE" && (
-          <Alert variant="info">
-            <Content key={state.profileData.foreignBusinessType}>
-              {contentFromConfig[state.profileData.foreignBusinessType]}
-            </Content>
-          </Alert>
-        )}
+      {!!renderAlertForValidForeignBusiness && (
+        <Alert variant="info">
+          <Content key={determineForeignBusinessType(state.profileData.foreignBusinessTypeIds)}>
+            {contentFromConfig[renderAlertForValidForeignBusiness]}
+          </Content>
+        </Alert>
+      )}
     </>
   );
 };

@@ -79,7 +79,7 @@ describe("profile-foreign", () => {
       business: generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "FOREIGN",
-          foreignBusinessType: "NEXUS",
+          foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
           nexusLocationInNewJersey: true,
           industryId: randomHomeBasedIndustry(),
         }),
@@ -95,9 +95,8 @@ describe("profile-foreign", () => {
         onboardingFormProgress: "UNSTARTED",
         profileData: generateProfileData({
           businessPersona: "FOREIGN",
-          foreignBusinessType: "NEXUS",
           industryId: industryId,
-          foreignBusinessTypeIds: ["NEXUS"],
+          foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
           ...emptyIndustrySpecificData,
         }),
       });
@@ -122,8 +121,7 @@ describe("profile-foreign", () => {
       return generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "FOREIGN",
-          foreignBusinessType: "NEXUS",
-          foreignBusinessTypeIds: ["NEXUS"],
+          foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
           legalStructureId: "limited-liability-company",
           ...profileDataOverrides,
         }),
@@ -159,7 +157,7 @@ describe("profile-foreign", () => {
         business: generateBusinessForProfile({
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
-            foreignBusinessType: "NEXUS",
+            foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
             legalStructureId: "limited-liability-company",
             businessName: "",
           }),
@@ -234,8 +232,7 @@ describe("profile-foreign", () => {
             legalStructureId: params.legalStructureId,
             operatingPhase: params.operatingPhase,
             businessPersona: "FOREIGN",
-            foreignBusinessType: "NEXUS",
-            foreignBusinessTypeIds: ["NEXUS"],
+            foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
             nexusLocationInNewJersey: true,
           }),
         });
@@ -249,8 +246,7 @@ describe("profile-foreign", () => {
               municipality: generateMunicipality({ displayName: "Trenton" }),
               legalStructureId: randomLegalStructure().id,
               businessPersona: "FOREIGN",
-              foreignBusinessType: "NEXUS",
-              foreignBusinessTypeIds: ["NEXUS"],
+              foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
               nexusLocationInNewJersey: true,
             }),
             taxFilingData: generateTaxFilingData({
@@ -420,8 +416,7 @@ describe("profile-foreign", () => {
         profileData: generateProfileData({
           dateOfFormation: "2020-01-02",
           businessPersona: "FOREIGN",
-          foreignBusinessType: "NEXUS",
-          foreignBusinessTypeIds: ["NEXUS"],
+          foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
           legalStructureId: legalStructure,
           entityId: "some-id",
           businessName: "some-name",

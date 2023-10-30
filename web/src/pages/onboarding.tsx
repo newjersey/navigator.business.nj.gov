@@ -48,6 +48,7 @@ import {
   mapFlowQueryToPersona,
   pageQueryParamisValid,
 } from "@/lib/utils/onboardingPageHelpers";
+import { determineForeignBusinessType } from "@businessnjgovnavigator/shared";
 import {
   createEmptyProfileData,
   createEmptyUserData,
@@ -121,7 +122,10 @@ const OnboardingPage = (props: Props): ReactElement => {
     };
 
     const removeNexusSpecificPages = (): void => {
-      if (profileData.businessPersona === "FOREIGN" && profileData.foreignBusinessType !== "NEXUS") {
+      if (
+        profileData.businessPersona === "FOREIGN" &&
+        determineForeignBusinessType(profileData.foreignBusinessTypeIds) !== "NEXUS"
+      ) {
         removePageFromFlow("industry-page", "FOREIGN");
         removePageFromFlow("municipality-page", "FOREIGN");
       }
@@ -255,8 +259,8 @@ const OnboardingPage = (props: Props): ReactElement => {
 
     const isRemoteSellerWorker =
       newProfileData.businessPersona === "FOREIGN" &&
-      (newProfileData.foreignBusinessType === "REMOTE_SELLER" ||
-        newProfileData.foreignBusinessType === "REMOTE_WORKER");
+      (determineForeignBusinessType(newProfileData.foreignBusinessTypeIds) === "REMOTE_SELLER" ||
+        determineForeignBusinessType(newProfileData.foreignBusinessTypeIds) === "REMOTE_WORKER");
 
     let newUserData: UserData = {
       ...updateQueue.current(),
@@ -329,7 +333,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       sendOnboardingOnSubmitEvents(newProfileData, currentPage?.name);
       setAnalyticsDimensions(newProfileData);
 
-      if (profileData.foreignBusinessType === "NONE") {
+      if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NONE") {
         await router.push(ROUTES.unsupported);
       } else if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
         updateQueue

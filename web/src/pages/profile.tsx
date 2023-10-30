@@ -62,6 +62,7 @@ import {
   Business,
   BusinessPersona,
   createEmptyProfileData,
+  determineForeignBusinessType,
   einTaskId,
   ForeignBusinessType,
   formationTaskId,
@@ -81,7 +82,6 @@ import { ReactElement, ReactNode, useContext, useState } from "react";
 interface Props {
   municipalities: Municipality[];
   CMS_ONLY_businessPersona?: BusinessPersona; // for CMS only
-  CMS_ONLY_foreignBusinessType?: ForeignBusinessType; // for CMS only
   CMS_ONLY_tab?: ProfileTabs; // for CMS only
   CMS_ONLY_fakeBusiness?: Business; // for CMS only
 }
@@ -101,8 +101,9 @@ const ProfilePage = (props: Props): ReactElement => {
   const { isAuthenticated, setShowNeedsAccountModal } = useContext(NeedsAccountContext);
   const { Config } = useConfig();
   const businessPersona: BusinessPersona = props.CMS_ONLY_businessPersona ?? profileData.businessPersona;
-  const foreignBusinessType: ForeignBusinessType =
-    props.CMS_ONLY_foreignBusinessType ?? profileData.foreignBusinessType;
+  const foreignBusinessType: ForeignBusinessType = determineForeignBusinessType(
+    profileData.foreignBusinessTypeIds
+  );
   const {
     FormFuncWrapper,
     onSubmit,
@@ -278,7 +279,10 @@ const ProfilePage = (props: Props): ReactElement => {
     if (!profileData.industryId) {
       return true;
     }
-    if (profileData.foreignBusinessType === "NEXUS" && profileData.nexusLocationInNewJersey) {
+    if (
+      determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NEXUS" &&
+      profileData.nexusLocationInNewJersey
+    ) {
       return false;
     }
     return isHomeBasedBusinessApplicable(profileData.industryId);
@@ -747,7 +751,6 @@ const ProfilePage = (props: Props): ReactElement => {
                       <ProfileTabNav
                         business={business}
                         businessPersona={businessPersona}
-                        foreignBusinessType={foreignBusinessType}
                         activeTab={profileTab}
                         setProfileTab={(tab: ProfileTabs): void => {
                           setProfileTab(tab);

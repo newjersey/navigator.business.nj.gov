@@ -3,7 +3,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import {
   BusinessPersona,
-  ForeignBusinessType,
+  ForeignBusinessTypeId,
   generateBusiness,
   LookupIndustryById,
   LookupLegalStructureById,
@@ -147,7 +147,7 @@ describe("getNavBarBusinessTitle", () => {
         const business = generateBusiness({
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
-            foreignBusinessType: "NEXUS",
+            foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
             businessName: "test business Name",
             needsNexusDbaName: true,
             nexusDbaName: "",
@@ -163,7 +163,7 @@ describe("getNavBarBusinessTitle", () => {
         const business = generateBusiness({
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
-            foreignBusinessType: "NEXUS",
+            foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
             businessName: "test business Name",
             needsNexusDbaName: true,
             nexusDbaName: dbaName,
@@ -341,16 +341,16 @@ describe("getNavBarBusinessTitle", () => {
     });
 
     describe("FOREIGN", () => {
-      it.each(["REMOTE_SELLER", "REMOTE_WORKER"])(
+      it.each(["employeesInNJ", "revenueInNJ", "transactionsInNJ"])(
         "shows Unnamed Out-of-State Business when FOREIGN and %s",
-        (foreignBusinessType) => {
+        (foreignBusinessTypeId) => {
           const business = generateBusiness({
             profileData: generateProfileData({
               legalStructureId: undefined,
               businessName: undefined,
               tradeName: undefined,
               businessPersona: "FOREIGN",
-              foreignBusinessType: foreignBusinessType as ForeignBusinessType,
+              foreignBusinessTypeIds: [foreignBusinessTypeId] as ForeignBusinessTypeId[],
             }),
           });
           const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);

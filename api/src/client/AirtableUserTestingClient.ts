@@ -2,6 +2,7 @@ import { UserTestingClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { BusinessUser, UserTestingResponse } from "@shared/businessUser";
 import { getCurrentDateFormatted } from "@shared/dateHelpers";
+import { determineForeignBusinessType } from "@shared/domain-logic/determineForeignBusinessType";
 import { ProfileData } from "@shared/profileData";
 import Airtable from "airtable";
 
@@ -30,7 +31,7 @@ export const AirtableUserTestingClient = (
         "Email Address": user.email,
         "First Name": user.name,
         Persona: profileData.businessPersona,
-        "Sub-Persona": profileData.foreignBusinessType,
+        "Sub-Persona": determineForeignBusinessType(profileData.foreignBusinessTypeIds),
         Industry: profileData.industryId,
         Sector: profileData.sectorId,
         "Registration Date": getCurrentDateFormatted("YYYY-MM-DD"),

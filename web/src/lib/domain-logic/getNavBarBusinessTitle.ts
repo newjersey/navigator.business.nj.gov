@@ -1,6 +1,11 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { Business, LookupIndustryById, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
+import {
+  Business,
+  determineForeignBusinessType,
+  LookupIndustryById,
+  LookupLegalStructureById,
+} from "@businessnjgovnavigator/shared";
 
 export const getNavBarBusinessTitle = (
   business: Business | undefined,
@@ -17,13 +22,16 @@ export const getNavBarBusinessTitle = (
     legalStructureId,
     industryId,
     businessPersona,
-    foreignBusinessType,
     needsNexusDbaName,
     nexusDbaName,
+    foreignBusinessTypeIds,
   } = business.profileData;
 
   const isRemoteWorkerOrSeller = (): boolean => {
-    return foreignBusinessType === "REMOTE_SELLER" || foreignBusinessType === "REMOTE_WORKER";
+    return (
+      determineForeignBusinessType(foreignBusinessTypeIds) === "REMOTE_SELLER" ||
+      determineForeignBusinessType(foreignBusinessTypeIds) === "REMOTE_WORKER"
+    );
   };
 
   const determineName = (): string => {

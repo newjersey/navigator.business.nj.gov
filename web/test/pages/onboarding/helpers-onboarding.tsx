@@ -243,7 +243,7 @@ export const runNonprofitOnboardingTests = ({
         profileData: {
           ...initialUserData.businesses[initialUserData.currentBusinessId].profileData,
           businessPersona,
-          foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
+          foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : [],
         },
       },
     },
@@ -283,7 +283,7 @@ export const runNonprofitOnboardingTests = ({
         taskProgress: {},
         profileData: generateProfileData({
           businessPersona,
-          foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
+          foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : [],
           legalStructureId: "nonprofit",
           isNonprofitOnboardingRadio: true,
           nexusLocationInNewJersey: businessPersona === "FOREIGN" ? true : undefined,
@@ -307,7 +307,7 @@ export const runNonprofitOnboardingTests = ({
         onboardingFormProgress: "UNSTARTED",
         profileData: generateProfileData({
           businessPersona,
-          foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
+          foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : [],
           legalStructureId: undefined,
           isNonprofitOnboardingRadio: false,
           nexusLocationInNewJersey: businessPersona === "FOREIGN" ? true : undefined,

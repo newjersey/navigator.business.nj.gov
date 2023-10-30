@@ -3,14 +3,13 @@ import { ProfileTab } from "@/components/profile/ProfileTab";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileTabs } from "@/lib/types/types";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
-import { BusinessPersona, ForeignBusinessType } from "@businessnjgovnavigator/shared/profileData";
+import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
 
 interface Props {
   business: Business | undefined;
   businessPersona: BusinessPersona;
-  foreignBusinessType: ForeignBusinessType;
   activeTab: ProfileTabs;
   setProfileTab: (profileTab: ProfileTabs) => void;
 }

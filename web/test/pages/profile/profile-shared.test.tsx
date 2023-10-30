@@ -18,14 +18,18 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  Business,
+  BusinessPersona,
   businessPersonas,
   emptyProfileData,
-  ForeignBusinessType,
+  ForeignBusinessTypeId,
+  generateBusiness,
   generateMunicipality,
   generateProfileData,
   Industry,
   OperatingPhase,
   OperatingPhases,
+  ProfileData,
   randomInt,
 } from "@businessnjgovnavigator/shared";
 import {
@@ -46,7 +50,6 @@ import {
   selectByText,
   selectByValue,
 } from "@/test/pages/profile/profile-helpers";
-import { Business, BusinessPersona, generateBusiness, ProfileData } from "@businessnjgovnavigator/shared";
 import { render, screen, waitFor, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
@@ -222,7 +225,7 @@ describe("profile - shared", () => {
                 taxId: "*******89123",
                 encryptedTaxId: "some-encrypted-value",
                 businessPersona,
-                foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["NONE"] : undefined,
+                foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["none"] : [],
               }),
               taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" }),
             });
@@ -238,19 +241,18 @@ describe("profile - shared", () => {
 
       describe("disclaimer", () => {
         businessPersonas.map((businessPersona) => {
-          const foreignBusinessTypes: ForeignBusinessType[] = [undefined];
-          if (businessPersona === "FOREIGN") foreignBusinessTypes.push("NEXUS");
-          foreignBusinessTypes.map((foreignBusinessType) => {
+          const foreignBusinessTypeIds: ForeignBusinessTypeId[] = [];
+          if (businessPersona === "FOREIGN") foreignBusinessTypeIds.push("employeeOrContractorInNJ");
+          foreignBusinessTypeIds.map((foreignBusinessTypeId) => {
             it(`shows disclaimer for trade name legal structure for ${businessPersona} ${
-              foreignBusinessType ?? ""
+              foreignBusinessTypeId ?? ""
             } businessPersona`, () => {
               const business = generateBusinessForProfile({
                 profileData: generateProfileData({
                   legalStructureId: randomTradeNameLegalStructure(),
                   businessPersona: businessPersona,
                   nexusLocationInNewJersey: true,
-                  foreignBusinessType,
-                  foreignBusinessTypeIds: ["NEXUS"],
+                  foreignBusinessTypeIds: [foreignBusinessTypeId],
                 }),
               });
               renderPage({ business });
@@ -470,10 +472,9 @@ describe("profile - shared", () => {
       return generateBusiness({
         profileData: generateProfileData({
           ...profileData,
-          foreignBusinessType: profileData.businessPersona === "FOREIGN" ? "NEXUS" : undefined,
           nexusLocationInNewJersey: profileData.businessPersona === "FOREIGN" ? false : undefined,
           foreignBusinessTypeIds:
-            profileData.businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : undefined,
+            profileData.businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : [],
         }),
       });
     };
@@ -561,9 +562,8 @@ describe("profile - shared", () => {
           profileData: generateProfileData({
             businessPersona: businessPersona as BusinessPersona,
             industryId: undefined,
-            foreignBusinessType: businessPersona === "FOREIGN" ? "NEXUS" : undefined,
             nexusLocationInNewJersey: businessPersona === "FOREIGN" ? false : undefined,
-            foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : undefined,
+            foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : [],
           }),
         });
         renderPage({ business });
