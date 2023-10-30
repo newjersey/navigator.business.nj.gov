@@ -2,7 +2,6 @@
 
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { LookupDbaStepIndexByName } from "@/components/tasks/business-formation/DbaFormationStepsConfiguration";
-import { LookupNexusStepIndexByName } from "@/components/tasks/business-formation/NexusFormationStepsConfiguration";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -388,53 +387,6 @@ describe("<NexusFormationFlow />", () => {
           expect(setShowNeedsAccountModal).toHaveBeenCalled();
           expect(screen.queryByTestId("business-step")).not.toBeInTheDocument();
         });
-      });
-    });
-
-    describe("when feature flag is not set", () => {
-      beforeEach(async () => {
-        process.env.FEATURE_BUSINESS_FLC = "false";
-        page = preparePage({
-          business: initialBusiness,
-          displayContent: {
-            ...displayContent,
-            formationDbaContent: {
-              ...displayContent.formationDbaContent,
-              Formation: {
-                ...displayContent.formationDbaContent.Formation,
-                contentMd: "roflcopter",
-                callToActionText: "buttonText",
-              },
-            },
-          },
-        });
-        fillText("My Cool Business");
-        await searchAndGetValue({ status: "AVAILABLE" });
-        clickNext();
-      });
-
-      afterEach(() => {
-        process.env.FEATURE_BUSINESS_FLC = "true";
-      });
-
-      it("displays formationTask content", async () => {
-        expect(screen.getByText("roflcopter")).toBeInTheDocument();
-        expect(screen.getByText("buttonText")).toBeInTheDocument();
-      });
-
-      it("navigates back to name search on stepper click", async () => {
-        fireEvent.click(screen.getByTestId(`stepper-${LookupNexusStepIndexByName("Business Name")}`));
-        expect(screen.getByTestId("nexus-name-step")).toBeInTheDocument();
-      });
-
-      it("marks step 1 complete in  stepper", async () => {
-        expect(page.getStepStateInStepper(LookupNexusStepIndexByName("Business Name"))).toEqual("COMPLETE");
-      });
-
-      it("marks step 2 active in  stepper", async () => {
-        expect(page.getStepStateInStepper(LookupNexusStepIndexByName("Authorize Business"))).toEqual(
-          "INCOMPLETE-ACTIVE"
-        );
       });
     });
   });
