@@ -1,4 +1,4 @@
-import { v88UserData } from "./v88_add_interstate_transport";
+import { v88UserData } from "@db/migrations/v88_add_interstate_transport";
 
 export interface v89UserData {
   user: v89BusinessUser;

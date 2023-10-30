@@ -1,8 +1,8 @@
 import {
   generateV106ProfileData,
   generateV106UserData,
-} from "./v106_add_pet_care_housing_essential_question";
-import { migrate_v106_to_v107 } from "./v107_refactor_interstate_transport_essential_question";
+} from "@db/migrations/v106_add_pet_care_housing_essential_question";
+import { migrate_v106_to_v107 } from "@db/migrations/v107_refactor_interstate_transport_essential_question";
 
 describe("migrate_v106_to_v107", () => {
   describe("interstateLogistics", () => {

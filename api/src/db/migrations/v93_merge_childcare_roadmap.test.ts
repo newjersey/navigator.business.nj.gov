@@ -1,5 +1,5 @@
-import { v92UserDataGenerator } from "./v92_splits_profiledata_interface";
-import { migrate_v92_to_v93 } from "./v93_merge_childcare_roadmaps";
+import { v92UserDataGenerator } from "@db/migrations/v92_splits_profiledata_interface";
+import { migrate_v92_to_v93 } from "@db/migrations/v93_merge_childcare_roadmaps";
 
 describe("migrate_v92_to_v93", () => {
   it("converts the industryId from family-daycare to daycare with isChildcareForSixOrMore set to false", () => {

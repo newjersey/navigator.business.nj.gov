@@ -1,4 +1,4 @@
-import { v16UserData } from "./v16_add_user_preferences";
+import { v16UserData } from "@db/migrations/v16_add_user_preferences";
 
 export interface v17UserData {
   user: v17BusinessUser;

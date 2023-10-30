@@ -1,5 +1,5 @@
+import { AddNewsletter, NewsletterClient } from "@domain/types";
 import { UserData } from "@shared/userData";
-import { AddNewsletter, NewsletterClient } from "../types";
 
 export const addNewsletterFactory = (newsletterClient: NewsletterClient): AddNewsletter => {
   return async (userData: UserData): Promise<UserData> => {

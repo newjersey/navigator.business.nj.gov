@@ -1,5 +1,5 @@
+import { v20UserData } from "@db/migrations/v20_switch_industry_to_id";
 import { randomInt } from "@shared/intHelpers";
-import { v20UserData } from "./v20_switch_industry_to_id";
 
 export interface v21UserData {
   user: v21BusinessUser;

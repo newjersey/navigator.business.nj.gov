@@ -1,4 +1,4 @@
-import { fetchMunicipalityByName } from "./fetchMunicipalityByName";
+import { fetchMunicipalityByName } from "@domain/user/fetchMunicipalityByName";
 
 describe("fetchMunicipalityByName", () => {
   it("returns a record when a valid name is supplied", async () => {

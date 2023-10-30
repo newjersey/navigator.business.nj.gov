@@ -4,8 +4,8 @@ import {
   generatev86User,
   v86ProfileData,
   v86UserData,
-} from "./v86_tax_filing_var_rename";
-import { migrate_v86_to_v87 } from "./v87_add_car_service";
+} from "@db/migrations/v86_tax_filing_var_rename";
+import { migrate_v86_to_v87 } from "@db/migrations/v87_add_car_service";
 
 describe("migrate_v86_to_v87", () => {
   it("updates the car service type to STANDARD and keeps the industryId as car-service as it was car-service before", () => {

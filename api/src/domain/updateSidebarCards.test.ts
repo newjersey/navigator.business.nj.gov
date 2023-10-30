@@ -6,8 +6,8 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@shared/test";
-import { updateSidebarCards } from "./updateSidebarCards";
 
+import { updateSidebarCards } from "@domain/updateSidebarCards";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { SIDEBAR_CARDS } from "@shared/domain-logic/sidebarCards";
 import { OperatingPhases } from "@shared/index";

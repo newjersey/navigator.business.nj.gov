@@ -5,8 +5,8 @@ import {
   v68ProfileData,
   v68TaskProgress,
   v68UserData,
-} from "./v68_complete_formation_task_if_success";
-import { migrate_v68_to_v69 } from "./v69_change_form_business_entity_foreign_id";
+} from "@db/migrations/v68_complete_formation_task_if_success";
+import { migrate_v68_to_v69 } from "@db/migrations/v69_change_form_business_entity_foreign_id";
 
 describe("migrate_v68_to_v69", () => {
   it("sets form-business-entity status to form-business-entity-foreign for nexus users", () => {

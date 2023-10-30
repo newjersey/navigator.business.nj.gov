@@ -1,4 +1,4 @@
-import { v87UserData } from "./v87_add_car_service";
+import { v87UserData } from "@db/migrations/v87_add_car_service";
 
 export interface v88UserData {
   user: v88BusinessUser;

@@ -1,4 +1,4 @@
-import { v12UserData } from "./v12_remove_scorp";
+import { v12UserData } from "@db/migrations/v12_remove_scorp";
 
 export interface v13UserData {
   user: v13BusinessUser;

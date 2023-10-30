@@ -4,8 +4,8 @@ import {
   generatev50User,
   v50ProfileData,
   v50UserData,
-} from "./v50_fix_annual_conditional_ids";
-import { migrate_v50_to_v51 } from "./v51_add_cpa_field";
+} from "@db/migrations/v50_fix_annual_conditional_ids";
+import { migrate_v50_to_v51 } from "@db/migrations/v51_add_cpa_field";
 
 describe("migrate_v50_to_v51", () => {
   const user = generatev50User({});

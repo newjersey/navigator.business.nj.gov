@@ -1,8 +1,8 @@
+import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
+import { SelfRegClient } from "@domain/types";
+import { LogWriter, LogWriterType } from "@libs/logWriter";
 import { generateUser } from "@shared/test";
 import axios from "axios";
-import { SelfRegClient } from "../domain/types";
-import { LogWriter, LogWriterType } from "../libs/logWriter";
-import { MyNJSelfRegClientFactory } from "./MyNjSelfRegClient";
 
 jest.mock("axios");
 jest.mock("winston");

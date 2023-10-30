@@ -1,9 +1,9 @@
+import { getSignedInUserId } from "@api/userRouter";
+import { shouldAddToNewsletter } from "@domain/newsletter/shouldAddToNewsletter";
+import { AddNewsletter, AddToUserTesting, UserDataClient } from "@domain/types";
+import { shouldAddToUserTesting } from "@domain/user-testing/shouldAddToUserTesting";
 import { UserData } from "@shared/userData";
 import { Router } from "express";
-import { shouldAddToNewsletter } from "../domain/newsletter/shouldAddToNewsletter";
-import { AddNewsletter, AddToUserTesting, UserDataClient } from "../domain/types";
-import { shouldAddToUserTesting } from "../domain/user-testing/shouldAddToUserTesting";
-import { getSignedInUserId } from "./userRouter";
 
 export const externalEndpointRouterFactory = (
   userDataClient: UserDataClient,

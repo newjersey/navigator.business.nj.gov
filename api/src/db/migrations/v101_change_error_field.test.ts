@@ -1,5 +1,5 @@
-import { v100TaxFilingDataGenerator, v100UserDataGenerator } from "./v100_add_updated_timestamp";
-import { migrate_v100_to_v101 } from "./v101_change_error_field";
+import { v100TaxFilingDataGenerator, v100UserDataGenerator } from "@db/migrations/v100_add_updated_timestamp";
+import { migrate_v100_to_v101 } from "@db/migrations/v101_change_error_field";
 
 describe("migrate_v100_to_v101", () => {
   beforeEach(async () => {

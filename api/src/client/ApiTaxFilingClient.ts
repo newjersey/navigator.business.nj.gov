@@ -1,13 +1,13 @@
-import axios, { AxiosError } from "axios";
-import { flattenDeDupAndConvertTaxFilings } from "../domain/tax-filings/taxIdHelper";
+import { flattenDeDupAndConvertTaxFilings } from "@domain/tax-filings/taxIdHelper";
 import {
   TaxFilingClient,
   TaxFilingLookupResponse,
   TaxFilingOnboardingResponse,
   TaxFilingResult,
   TaxIdentifierToIdsRecord,
-} from "../domain/types";
-import { LogWriterType } from "../libs/logWriter";
+} from "@domain/types";
+import { LogWriterType } from "@libs/logWriter";
+import axios, { AxiosError } from "axios";
 
 type ApiConfig = {
   apiKey: string;

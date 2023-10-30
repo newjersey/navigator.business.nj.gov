@@ -1,4 +1,4 @@
-import { v40UserData } from "./v40_merge_down_steps";
+import { v40UserData } from "@db/migrations/v40_merge_down_steps";
 
 export interface v41UserData {
   user: v41BusinessUser;

@@ -1,5 +1,5 @@
+import { v71UserData } from "@db/migrations/v71_add_certified_interior_designer";
 import { randomInt } from "@shared/intHelpers";
-import { v71UserData } from "./v71_add_certified_interior_designer";
 
 export interface v72UserData {
   user: v72BusinessUser;

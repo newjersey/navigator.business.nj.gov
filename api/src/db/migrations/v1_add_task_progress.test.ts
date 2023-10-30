@@ -1,5 +1,5 @@
-import { generateV0FormData, generateV0User, v0UserData } from "./v0_user_data";
-import { migrate_v0_to_v1 } from "./v1_add_task_progress";
+import { generateV0FormData, generateV0User, v0UserData } from "@db/migrations/v0_user_data";
+import { migrate_v0_to_v1 } from "@db/migrations/v1_add_task_progress";
 
 describe("migrate_v0_to_v1", () => {
   it("adds version and empty task progress object", () => {

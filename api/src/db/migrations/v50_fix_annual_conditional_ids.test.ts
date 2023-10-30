@@ -1,11 +1,11 @@
-import { generatev42FormationFormData } from "./v42_add_sector_to_profile_data";
+import { generatev42FormationFormData } from "@db/migrations/v42_add_sector_to_profile_data";
 import {
   generatev49ProfileData,
   generatev49User,
   v49ProfileData,
   v49UserData,
-} from "./v49_add_cannabis_microbusiness";
-import { migrate_v49_to_v50 } from "./v50_fix_annual_conditional_ids";
+} from "@db/migrations/v49_add_cannabis_microbusiness";
+import { migrate_v49_to_v50 } from "@db/migrations/v50_fix_annual_conditional_ids";
 
 describe("migrate_v49_to_v50", () => {
   const user = generatev49User({});

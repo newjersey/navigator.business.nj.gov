@@ -1,5 +1,5 @@
+import { EncryptionDecryptionClient } from "@domain/types";
 import { Router } from "express";
-import { EncryptionDecryptionClient } from "../domain/types";
 
 export const taxDecryptionRouterFactory = (
   encryptionDecryptionClient: EncryptionDecryptionClient

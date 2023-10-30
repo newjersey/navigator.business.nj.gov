@@ -1,5 +1,5 @@
-import { generateV117ProfileData, generateV117UserData } from "./v117_add_onboarding_nonprofit";
-import { migrate_v117_to_v118 } from "./v118_set_operating_phase_remote_seller_worker";
+import { generateV117ProfileData, generateV117UserData } from "@db/migrations/v117_add_onboarding_nonprofit";
+import { migrate_v117_to_v118 } from "@db/migrations/v118_set_operating_phase_remote_seller_worker";
 
 describe("migrate_v117_to_v118", () => {
   it("sets operating phase to NEEDS_TO_FORM for Remote Seller if it is NEEDS_BUSINESS_STRUCTURE", () => {

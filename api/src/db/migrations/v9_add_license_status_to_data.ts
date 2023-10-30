@@ -1,5 +1,5 @@
+import { v8UserData } from "@db/migrations/v8_remove_bcorp";
 import { parseDate } from "@shared/dateHelpers";
-import { v8UserData } from "./v8_remove_bcorp";
 
 export interface v9UserData {
   user: v9BusinessUser;

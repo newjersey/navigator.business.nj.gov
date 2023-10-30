@@ -1,6 +1,6 @@
 import { UserData } from "@shared/userData";
-import { AddToUserTesting, UserTestingClient } from "../types";
 
+import { AddToUserTesting, UserTestingClient } from "@domain/types";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 
 export const addToUserTestingFactory = (userTestingClient: UserTestingClient): AddToUserTesting => {

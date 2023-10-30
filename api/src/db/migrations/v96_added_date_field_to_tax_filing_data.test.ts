@@ -1,5 +1,8 @@
-import { v95TaxFilingDataGenerator, v95UserDataGenerator } from "./v95_added_new_tax_calendar_state";
-import { migrate_v95_to_v96 } from "./v96_added_date_field_to_tax_filing_data";
+import {
+  v95TaxFilingDataGenerator,
+  v95UserDataGenerator,
+} from "@db/migrations/v95_added_new_tax_calendar_state";
+import { migrate_v95_to_v96 } from "@db/migrations/v96_added_date_field_to_tax_filing_data";
 
 const dateNow = Date.now();
 const currentDate = new Date(dateNow);

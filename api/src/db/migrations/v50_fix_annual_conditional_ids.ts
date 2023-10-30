@@ -1,5 +1,5 @@
+import { v49UserData } from "@db/migrations/v49_add_cannabis_microbusiness";
 import { randomInt } from "@shared/intHelpers";
-import { v49UserData } from "./v49_add_cannabis_microbusiness";
 
 export interface v50UserData {
   user: v50BusinessUser;

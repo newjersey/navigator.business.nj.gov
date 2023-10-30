@@ -1,6 +1,6 @@
+import { BusinessNameClient, TimeStampBusinessSearch } from "@domain/types";
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
-import { BusinessNameClient, TimeStampBusinessSearch } from "../types";
 
 export const timeStampBusinessSearch = (businessNameClient: BusinessNameClient): TimeStampBusinessSearch => {
   const search = async (businessName: string): Promise<NameAvailability> => {

@@ -1,8 +1,8 @@
+import { calculateNextAnnualFilingDates } from "@domain/annual-filings/calculateNextAnnualFilingDates";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { modifyCurrentBusiness } from "@shared/test";
 import { UserData } from "@shared/userData";
-import { calculateNextAnnualFilingDates } from "./calculateNextAnnualFilingDates";
 
 export const getAnnualFilings = (userData: UserData): UserData => {
   const currentBusiness = getCurrentBusiness(userData);

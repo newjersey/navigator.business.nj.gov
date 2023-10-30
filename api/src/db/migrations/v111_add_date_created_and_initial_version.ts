@@ -1,4 +1,4 @@
-import { v110UserData } from "./v110_rename_form_progress_to_onboarding_form_progress";
+import { v110UserData } from "@db/migrations/v110_rename_form_progress_to_onboarding_form_progress";
 
 export interface v111UserData {
   user: v111BusinessUser;

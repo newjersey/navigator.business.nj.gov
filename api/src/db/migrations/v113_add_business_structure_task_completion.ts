@@ -1,4 +1,4 @@
-import { v112UserData } from "./v112_add_last_visited_formation_page_to_formation_data";
+import { v112UserData } from "@db/migrations/v112_add_last_visited_formation_page_to_formation_data";
 
 export interface v113UserData {
   user: v113BusinessUser;

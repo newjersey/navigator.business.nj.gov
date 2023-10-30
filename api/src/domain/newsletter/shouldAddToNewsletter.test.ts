@@ -1,6 +1,6 @@
+import { shouldAddToNewsletter } from "@domain/newsletter/shouldAddToNewsletter";
 import { generateUser, generateUserData } from "@shared/test";
-import { generateExternalStatus, generateNewsletterResponse } from "../../../test/factories";
-import { shouldAddToNewsletter } from "./shouldAddToNewsletter";
+import { generateExternalStatus, generateNewsletterResponse } from "@test/factories";
 
 describe("shouldAddToNewsletter", () => {
   it("does not add newsletter if receiveNewsletter is false", async () => {

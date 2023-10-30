@@ -1,4 +1,4 @@
-import { v115UserData } from "./v115_rename_tax_filings";
+import { v115UserData } from "@db/migrations/v115_rename_tax_filings";
 
 export interface v116UserData {
   user: v116BusinessUser;

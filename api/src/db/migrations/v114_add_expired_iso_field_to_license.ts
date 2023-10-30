@@ -1,4 +1,4 @@
-import { v113UserData } from "./v113_add_business_structure_task_completion";
+import { v113UserData } from "@db/migrations/v113_add_business_structure_task_completion";
 
 export interface v114UserData {
   user: v114BusinessUser;

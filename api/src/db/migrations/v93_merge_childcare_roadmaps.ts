@@ -1,4 +1,4 @@
-import { v92UserData } from "./v92_splits_profiledata_interface";
+import { v92UserData } from "@db/migrations/v92_splits_profiledata_interface";
 
 export interface v93UserData {
   user: v93BusinessUser;

@@ -6,8 +6,8 @@ import {
   v96generateFormationFormData,
   v96generatorProfileData,
   v96UserDataGenerator,
-} from "./v96_added_date_field_to_tax_filing_data";
-import { migrate_v96_to_v97 } from "./v97_updating_formation_types";
+} from "@db/migrations/v96_added_date_field_to_tax_filing_data";
+import { migrate_v96_to_v97 } from "@db/migrations/v97_updating_formation_types";
 
 describe("migrate_v96_to_v97", () => {
   beforeEach(async () => {

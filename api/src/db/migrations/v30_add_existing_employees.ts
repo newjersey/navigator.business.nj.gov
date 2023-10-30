@@ -1,4 +1,4 @@
-import { v29UserData } from "./v29_add_certifications_profile";
+import { v29UserData } from "@db/migrations/v29_add_certifications_profile";
 
 export interface v30UserData {
   user: v30BusinessUser;

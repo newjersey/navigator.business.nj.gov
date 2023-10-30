@@ -1,5 +1,5 @@
+import { v111UserData } from "@db/migrations/v111_add_date_created_and_initial_version";
 import { randomInt } from "@shared/intHelpers";
-import { v111UserData } from "./v111_add_date_created_and_initial_version";
 
 export interface v112UserData {
   user: v112BusinessUser;

@@ -1,4 +1,4 @@
-import { v47UserData } from "./v47_add_profile_documents";
+import { v47UserData } from "@db/migrations/v47_add_profile_documents";
 
 export interface v48UserData {
   user: v48BusinessUser;

@@ -1,8 +1,8 @@
 import {
   generateV108FormationData,
   generateV108UserData,
-} from "./v108_add_business_name_search_to_formation_data";
-import { migrate_v108_to_v109 } from "./v109_add_business_name_search_timestamp";
+} from "@db/migrations/v108_add_business_name_search_to_formation_data";
+import { migrate_v108_to_v109 } from "@db/migrations/v109_add_business_name_search_timestamp";
 
 describe("migrate_v108_to_v109", () => {
   it("adds a lastUpdatedTimeStamp of Jan 1st 2000 for users who have businessNameSearch data", () => {

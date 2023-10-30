@@ -1,4 +1,4 @@
-import { v81UserData } from "./v81_add_completed_filing_payment";
+import { v81UserData } from "@db/migrations/v81_add_completed_filing_payment";
 
 export interface v82UserData {
   user: v82BusinessUser;

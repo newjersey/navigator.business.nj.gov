@@ -1,4 +1,4 @@
-import { v13UserData } from "./v13_add_construction_renovation_plan";
+import { v13UserData } from "@db/migrations/v13_add_construction_renovation_plan";
 
 export interface v14UserData {
   user: v14BusinessUser;

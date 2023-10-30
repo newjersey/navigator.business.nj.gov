@@ -1,4 +1,4 @@
-import { v79UserData } from "./v79_add_return_to_link";
+import { v79UserData } from "@db/migrations/v79_add_return_to_link";
 
 export interface v80UserData {
   user: v80BusinessUser;

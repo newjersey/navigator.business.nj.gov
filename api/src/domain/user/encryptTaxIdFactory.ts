@@ -1,9 +1,9 @@
+import { EncryptionDecryptionClient, EncryptTaxId } from "@domain/types";
+import { maskTaxId } from "@domain/user/maskTaxId";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { maskingCharacter } from "@shared/profileData";
 import { modifyCurrentBusiness } from "@shared/test";
 import { UserData } from "@shared/userData";
-import { EncryptionDecryptionClient, EncryptTaxId } from "../types";
-import { maskTaxId } from "./maskTaxId";
 
 export const encryptTaxIdFactory = (encryptionDecryptionClient: EncryptionDecryptionClient): EncryptTaxId => {
   return async (userData: UserData): Promise<UserData> => {

@@ -3,19 +3,19 @@ import { randomInt } from "@shared/intHelpers";
 import { TaxFilingLookUpRequest } from "@shared/taxFiling";
 import axios from "axios";
 
+import { TaxFilingClient } from "@domain/types";
+import { LogWriter, LogWriterType } from "@libs/logWriter";
 import { generateTaxIdAndBusinessName } from "@shared/test";
-import { generateTaxFilingDates, generateTaxFilingResult } from "../../test/factories";
-import { TaxFilingClient } from "../domain/types";
-import { LogWriter, LogWriterType } from "../libs/logWriter";
+import { generateTaxFilingDates, generateTaxFilingResult } from "@test/factories";
 
-import { dateToShortISO } from "../domain/tax-filings/taxIdHelper";
 import {
   ApiTaxFilingClient,
   ApiTaxFilingLookupRequest,
   ApiTaxFilingLookupResponse,
   ApiTaxFilingOnboardingRequest,
   ApiTaxFilingOnboardingResponse,
-} from "./ApiTaxFilingClient";
+} from "@client/ApiTaxFilingClient";
+import { dateToShortISO } from "@domain/tax-filings/taxIdHelper";
 
 jest.mock("axios");
 jest.mock("winston");

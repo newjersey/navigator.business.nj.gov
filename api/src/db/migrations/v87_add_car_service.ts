@@ -1,5 +1,5 @@
+import { v86UserData } from "@db/migrations/v86_tax_filing_var_rename";
 import { randomInt } from "@shared/intHelpers";
-import { v86UserData } from "./v86_tax_filing_var_rename";
 
 export interface v87UserData {
   user: v87BusinessUser;

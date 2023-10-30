@@ -1,4 +1,4 @@
-import { v30UserData } from "./v30_add_existing_employees";
+import { v30UserData } from "@db/migrations/v30_add_existing_employees";
 
 export interface v31UserData {
   user: v31BusinessUser;

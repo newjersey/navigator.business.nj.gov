@@ -1,9 +1,9 @@
+import { UserTestingClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { BusinessUser, UserTestingResponse } from "@shared/businessUser";
 import { getCurrentDateFormatted } from "@shared/dateHelpers";
 import { ProfileData } from "@shared/profileData";
 import Airtable from "airtable";
-import { UserTestingClient } from "../domain/types";
 
 type AirtableConfig = {
   apiKey: string;

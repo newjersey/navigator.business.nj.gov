@@ -1,5 +1,5 @@
+import { v102UserData } from "@db/migrations/v102_rename_tax_registration_nudge";
 import { randomInt } from "@shared/intHelpers";
-import { v102UserData } from "./v102_rename_tax_registration_nudge";
 
 export interface v103UserData {
   user: v103BusinessUser;

@@ -1,3 +1,5 @@
+import { FormationClient } from "@domain/types";
+import { LogWriterType } from "@libs/logWriter";
 import { CountriesShortCodes } from "@shared/countries";
 import { getCurrentDateISOString, parseDateWithFormat } from "@shared/dateHelpers";
 import { defaultDateFormat } from "@shared/defaultConstants";
@@ -15,10 +17,8 @@ import {
 import { StateNames, StateShortCodes } from "@shared/states";
 import { UserData } from "@shared/userData";
 import axios from "axios";
-import { FormationClient } from "../domain/types";
-import { LogWriterType } from "../libs/logWriter";
-import { splitErrorField } from "./splitErrorField";
 
+import { splitErrorField } from "@client/splitErrorField";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 
 type ApiConfig = {

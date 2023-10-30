@@ -1,5 +1,5 @@
+import { v107UserData } from "@db/migrations/v107_refactor_interstate_transport_essential_question";
 import { randomInt } from "@shared/intHelpers";
-import { v107UserData } from "./v107_refactor_interstate_transport_essential_question";
 
 export interface v108UserData {
   user: v108BusinessUser;

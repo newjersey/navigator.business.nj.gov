@@ -1,4 +1,4 @@
-import { v36UserData } from "./v36_add_member_to_formation_data";
+import { v36UserData } from "@db/migrations/v36_add_member_to_formation_data";
 
 export interface v37UserData {
   user: v37BusinessUser;

@@ -1,5 +1,5 @@
+import { v21UserData } from "@db/migrations/v21_add_tax_fields";
 import { randomInt } from "@shared/intHelpers";
-import { v21UserData } from "./v21_add_tax_fields";
 
 export interface v22UserData {
   user: v22BusinessUser;

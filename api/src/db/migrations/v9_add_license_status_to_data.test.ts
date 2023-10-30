@@ -5,8 +5,8 @@ import {
   generateV8User,
   v8LicenseSearchData,
   v8UserData,
-} from "./v8_remove_bcorp";
-import { migrate_v8_to_v9 } from "./v9_add_license_status_to_data";
+} from "@db/migrations/v8_remove_bcorp";
+import { migrate_v8_to_v9 } from "@db/migrations/v9_add_license_status_to_data";
 
 describe("migrate_v8_to_v9", () => {
   const user = generateV8User({});

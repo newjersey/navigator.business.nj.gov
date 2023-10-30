@@ -1,5 +1,5 @@
+import { v48UserData } from "@db/migrations/v48_add_ab_experience";
 import { randomInt } from "@shared/intHelpers";
-import { v48UserData } from "./v48_add_ab_experience";
 
 export interface v49UserData {
   user: v49BusinessUser;

@@ -1,5 +1,5 @@
+import { LogWriter, LogWriterType } from "@libs/logWriter";
 import winston from "winston";
-import { LogWriter, LogWriterType } from "./logWriter";
 
 jest.mock("winston");
 const mockWinston = winston as jest.Mocked<typeof winston>;

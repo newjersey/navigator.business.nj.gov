@@ -1,10 +1,10 @@
+import { externalEndpointRouterFactory } from "@api/externalEndpointRouter";
+import { AddNewsletter, AddToUserTesting, UserDataClient } from "@domain/types";
+import { setupExpress } from "@libs/express";
 import { generateUser, generateUserData } from "@shared/test";
 import { Express } from "express";
 import jwt from "jsonwebtoken";
 import request from "supertest";
-import { AddNewsletter, AddToUserTesting, UserDataClient } from "../domain/types";
-import { setupExpress } from "../libs/express";
-import { externalEndpointRouterFactory } from "./externalEndpointRouter";
 
 jest.mock("jsonwebtoken", () => {
   return {

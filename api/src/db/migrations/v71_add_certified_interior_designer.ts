@@ -1,4 +1,4 @@
-import { v70UserData } from "./v70_add_staffing_service";
+import { v70UserData } from "@db/migrations/v70_add_staffing_service";
 
 export interface v71UserData {
   user: v71BusinessUser;

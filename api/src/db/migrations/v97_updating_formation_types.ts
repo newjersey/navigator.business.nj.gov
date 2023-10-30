@@ -1,5 +1,5 @@
+import { v96UserData } from "@db/migrations/v96_added_date_field_to_tax_filing_data";
 import { randomInt } from "@shared/intHelpers";
-import { v96UserData } from "./v96_added_date_field_to_tax_filing_data";
 
 export interface v97UserData {
   user: v97BusinessUser;

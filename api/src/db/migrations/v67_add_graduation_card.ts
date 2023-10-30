@@ -1,5 +1,5 @@
+import { v66UserData } from "@db/migrations/v66_add_nexus_to_profile";
 import { randomInt } from "@shared/intHelpers";
-import { v66UserData } from "./v66_add_nexus_to_profile";
 
 export interface v67UserData {
   user: v67BusinessUser;

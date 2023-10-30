@@ -1,8 +1,7 @@
+import { BusinessNameClient } from "@domain/types";
+import { LogWriterType } from "@libs/logWriter";
 import { NameAvailabilityResponse, NameAvailabilityStatus } from "@shared/businessNameSearch";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { BusinessNameClient } from "../domain/types";
-
-import { LogWriterType } from "../libs/logWriter";
 
 export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType): BusinessNameClient => {
   const search = (name: string): Promise<NameAvailabilityResponse> => {

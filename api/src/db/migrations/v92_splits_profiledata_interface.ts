@@ -1,5 +1,5 @@
+import { v91UserData } from "@db/migrations/v91_consolidate_section_type";
 import { randomInt } from "@shared/intHelpers";
-import { v91UserData } from "./v91_consolidate_section_type";
 
 export interface v92UserData {
   user: v92BusinessUser;

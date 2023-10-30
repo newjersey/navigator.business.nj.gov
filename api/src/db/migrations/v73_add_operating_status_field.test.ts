@@ -5,8 +5,8 @@ import {
   v72ProfileData,
   v72TaskProgress,
   v72UserData,
-} from "./v72_add_real_estate_management";
-import { migrate_v72_to_v73 } from "./v73_add_operating_status_field";
+} from "@db/migrations/v72_add_real_estate_management";
+import { migrate_v72_to_v73 } from "@db/migrations/v73_add_operating_status_field";
 
 describe("migrate_v72_to_v73", () => {
   it("sets an owning user to UP_AND_RUNNING status", () => {

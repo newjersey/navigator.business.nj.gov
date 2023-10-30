@@ -1,5 +1,5 @@
+import { v73UserData } from "@db/migrations/v73_add_operating_status_field";
 import { randomInt } from "@shared/intHelpers";
-import { v73UserData } from "./v73_add_operating_status_field";
 
 export interface v74UserData {
   user: v74BusinessUser;

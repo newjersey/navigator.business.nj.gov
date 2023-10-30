@@ -1,4 +1,4 @@
-import { v56UserData } from "./v56_cleaning_janatorial";
+import { v56UserData } from "@db/migrations/v56_cleaning_janatorial";
 
 export interface v57UserData {
   user: v57BusinessUser;

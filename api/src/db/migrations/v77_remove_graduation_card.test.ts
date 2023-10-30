@@ -4,8 +4,8 @@ import {
   generatev76User,
   v76Preferences,
   v76UserData,
-} from "./v76_fix_trade_name_operating_phase_round_2";
-import { migrate_v76_to_v77 } from "./v77_remove_graduation_card";
+} from "@db/migrations/v76_fix_trade_name_operating_phase_round_2";
+import { migrate_v76_to_v77 } from "@db/migrations/v77_remove_graduation_card";
 
 describe("migrate_v76_to_v77", () => {
   it("removes the graduation card from visibleRoadmapSidebarCards", () => {

@@ -1,8 +1,8 @@
 import {
   generateV112ProfileData,
   generateV112UserData,
-} from "./v112_add_last_visited_formation_page_to_formation_data";
-import { migrate_v112_to_v113 } from "./v113_add_business_structure_task_completion";
+} from "@db/migrations/v112_add_last_visited_formation_page_to_formation_data";
+import { migrate_v112_to_v113 } from "@db/migrations/v113_add_business_structure_task_completion";
 
 describe("migrate_v112_to_v113", () => {
   it("sets business-structure task to complete if legal structure exists", () => {

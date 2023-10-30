@@ -1,4 +1,4 @@
-import { v117UserData } from "./v117_add_onboarding_nonprofit";
+import { v117UserData } from "@db/migrations/v117_add_onboarding_nonprofit";
 
 export interface v118UserData {
   user: v118BusinessUser;

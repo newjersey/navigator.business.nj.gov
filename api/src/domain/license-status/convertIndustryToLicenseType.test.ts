@@ -1,4 +1,7 @@
-import { convertIndustryToLicenseType, industryHasALicenseType } from "./convertIndustryToLicenseType";
+import {
+  convertIndustryToLicenseType,
+  industryHasALicenseType,
+} from "@domain/license-status/convertIndustryToLicenseType";
 
 const testFn = (): void => {
   convertIndustryToLicenseType("restaurant");

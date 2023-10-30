@@ -7,8 +7,8 @@ import {
   v67ProfileData,
   v67TaskProgress,
   v67UserData,
-} from "./v67_add_graduation_card";
-import { migrate_v67_to_v68 } from "./v68_complete_formation_task_if_success";
+} from "@db/migrations/v67_add_graduation_card";
+import { migrate_v67_to_v68 } from "@db/migrations/v68_complete_formation_task_if_success";
 
 describe("migrate_v67_to_v68", () => {
   it("sets formation task status to complete if API filing is success", () => {

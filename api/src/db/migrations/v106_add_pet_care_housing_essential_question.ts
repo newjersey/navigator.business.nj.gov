@@ -1,5 +1,5 @@
+import { v105UserData } from "@db/migrations/v105_add_pet_care_essential_question";
 import { randomInt } from "@shared/intHelpers";
-import { v105UserData } from "./v105_add_pet_care_essential_question";
 
 export interface v106UserData {
   user: v106BusinessUser;

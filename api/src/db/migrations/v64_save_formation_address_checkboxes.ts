@@ -1,4 +1,4 @@
-import { v63UserData } from "./v63_add_foreign_persona";
+import { v63UserData } from "@db/migrations/v63_add_foreign_persona";
 
 export interface v64UserData {
   user: v64BusinessUser;

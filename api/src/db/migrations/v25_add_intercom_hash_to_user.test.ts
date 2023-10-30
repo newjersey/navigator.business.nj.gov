@@ -1,12 +1,12 @@
-import { generateHashedKey } from "../../../test/helpers";
 import {
   generatev24ProfileData,
   generatev24User,
   v24EntityIdStatus,
   v24TaxFiling,
   v24UserData,
-} from "./v24_restructure_tax_filings";
-import { migrate_v24_to_v25 } from "./v25_add_intercom_hash_to_user";
+} from "@db/migrations/v24_restructure_tax_filings";
+import { migrate_v24_to_v25 } from "@db/migrations/v25_add_intercom_hash_to_user";
+import { generateHashedKey } from "@test/helpers";
 
 describe("migrate_v24_to_v25", () => {
   const formProgress = "UNSTARTED";

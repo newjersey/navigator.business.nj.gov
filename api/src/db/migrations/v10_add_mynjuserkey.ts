@@ -1,4 +1,4 @@
-import { v9UserData } from "./v9_add_license_status_to_data";
+import { v9UserData } from "@db/migrations/v9_add_license_status_to_data";
 
 export interface v10UserData {
   user: v10BusinessUser;

@@ -1,4 +1,4 @@
-import { v50UserData } from "./v50_fix_annual_conditional_ids";
+import { v50UserData } from "@db/migrations/v50_fix_annual_conditional_ids";
 
 export interface v51UserData {
   user: v51BusinessUser;

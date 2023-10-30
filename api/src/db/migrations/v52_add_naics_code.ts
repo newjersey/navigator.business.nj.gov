@@ -1,5 +1,5 @@
+import { v51UserData } from "@db/migrations/v51_add_cpa_field";
 import { randomInt } from "@shared/intHelpers";
-import { v51UserData } from "./v51_add_cpa_field";
 
 export interface v52UserData {
   user: v52BusinessUser;

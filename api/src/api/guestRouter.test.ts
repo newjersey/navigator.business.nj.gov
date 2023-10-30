@@ -1,3 +1,6 @@
+import { guestRouterFactory } from "@api/guestRouter";
+import { TimeStampBusinessSearch } from "@domain/types";
+import { setupExpress } from "@libs/express";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import {
@@ -12,12 +15,9 @@ import {
   getThirdAnnualFiling,
   modifyCurrentBusiness,
 } from "@shared/test";
+import { generateAnnualFilings } from "@test/helpers";
 import { Express } from "express";
 import request from "supertest";
-import { generateAnnualFilings } from "../../test/helpers";
-import { TimeStampBusinessSearch } from "../domain/types";
-import { setupExpress } from "../libs/express";
-import { guestRouterFactory } from "./guestRouter";
 
 describe("guestRouter", () => {
   let app: Express;
