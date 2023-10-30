@@ -42,7 +42,6 @@ import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
 interface Props {
   task: Task | undefined;
   displayContent: TasksDisplayContent;
-  searchOnly?: boolean;
 }
 
 export const BusinessFormation = (props: Props): ReactElement => {
@@ -79,8 +78,8 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const isForeign = useMemo(() => legalStructureId.includes(foreignLegalTypePrefix), [legalStructureId]);
 
   const isValidLegalStructure = useMemo(
-    () => allowFormation(business?.profileData.legalStructureId, business?.profileData.businessPersona),
-    [business?.profileData.legalStructureId, business?.profileData.businessPersona]
+    () => allowFormation(business?.profileData.legalStructureId),
+    [business?.profileData.legalStructureId]
   );
 
   const getBusinessStartDate = (date: string | undefined, legalType: FormationLegalType): string => {
@@ -189,7 +188,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     });
   };
 
-  if (!isValidLegalStructure && business?.profileData.businessPersona !== "FOREIGN" && !props.searchOnly) {
+  if (!isValidLegalStructure && business?.profileData.businessPersona !== "FOREIGN") {
     return (
       <div className="flex flex-column space-between minh-38">
         <div>
@@ -244,9 +243,6 @@ export const BusinessFormation = (props: Props): ReactElement => {
     if (isForeign) {
       return Config.formation.intro.foreign;
     }
-    if (props.searchOnly) {
-      return props.task?.contentMd || "";
-    }
     return Config.formation.intro.default;
   };
 
@@ -288,7 +284,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
               </>
             )}
           </div>
-          {isForeign ? <NexusFormationFlow /> : <BusinessFormationPaginator searchOnly={props.searchOnly} />}
+          {isForeign ? <NexusFormationFlow /> : <BusinessFormationPaginator />}
         </>
       </div>
     </BusinessFormationContext.Provider>
