@@ -38,7 +38,7 @@ describe("opportunityFields", () => {
         it("when legal structure that is a trade name", async () => {
           const foreignNexusBusiness = generateProfileData({
             businessPersona: "FOREIGN",
-            foreignBusinessType: "NEXUS",
+            foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
             nexusLocationInNewJersey: true,
             legalStructureId: "general-partnership",
           });
@@ -54,7 +54,7 @@ describe("opportunityFields", () => {
         it("when legal structure that is not a trade name", async () => {
           const foreignNexusBusiness = generateProfileData({
             businessPersona: "FOREIGN",
-            foreignBusinessType: "NEXUS",
+            foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
             nexusLocationInNewJersey: true,
             legalStructureId: "limited-partnership",
           });
@@ -72,7 +72,7 @@ describe("opportunityFields", () => {
         it("when legal structure that is a trade name", async () => {
           const foreignNexusBusiness = generateProfileData({
             businessPersona: "FOREIGN",
-            foreignBusinessType: "NEXUS",
+            foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
             nexusLocationInNewJersey: false,
             legalStructureId: "general-partnership",
           });
@@ -88,7 +88,7 @@ describe("opportunityFields", () => {
         it("when legal structure that is not a trade name", async () => {
           const foreignNexusBusiness = generateProfileData({
             businessPersona: "FOREIGN",
-            foreignBusinessType: "NEXUS",
+            foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
             nexusLocationInNewJersey: false,
             legalStructureId: "limited-partnership",
           });

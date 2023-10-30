@@ -8,6 +8,7 @@ import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { Roadmap } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import {
+  determineForeignBusinessType,
   fetchMunicipalityById,
   LookupIndustryById,
   LookupLegalStructureById,
@@ -38,7 +39,10 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
 
   roadmap = addNaicsCodeData(roadmap, profileData.naicsCode);
 
-  if (profileData.businessPersona === "FOREIGN" && profileData.foreignBusinessType === "NEXUS") {
+  if (
+    profileData.businessPersona === "FOREIGN" &&
+    determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NEXUS"
+  ) {
     roadmap = removeTask(roadmap, "business-plan");
     roadmap = removeTask(roadmap, "register-for-ein");
   }
@@ -56,15 +60,15 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
 const getForeignAddOns = (profileData: ProfileData): string[] => {
   const addOns = [];
 
-  if (profileData.foreignBusinessType === "REMOTE_WORKER") {
+  if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "REMOTE_WORKER") {
     addOns.push("foreign-remote-worker");
   }
 
-  if (profileData.foreignBusinessType === "REMOTE_SELLER") {
+  if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "REMOTE_SELLER") {
     addOns.push("foreign-remote-seller");
   }
 
-  if (profileData.foreignBusinessType === "NEXUS") {
+  if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NEXUS") {
     addOns.push("foreign-nexus");
   }
 

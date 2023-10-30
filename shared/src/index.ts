@@ -5,6 +5,7 @@ export * from "./countries";
 export * from "./dateHelpers";
 export * from "./defaultConstants";
 export * from "./domain-logic/createBusinessId";
+export * from "./domain-logic/determineForeignBusinessType";
 export * from "./domain-logic/fetchMunicipalityById";
 export * from "./domain-logic/getCurrentBusiness";
 export * from "./domain-logic/hasCompletedBusinessStructure";

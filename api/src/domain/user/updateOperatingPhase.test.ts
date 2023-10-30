@@ -60,8 +60,8 @@ describe("updateOperatingPhase", () => {
         generateBusiness({
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
-            foreignBusinessType: "NEXUS",
             operatingPhase: "GUEST_MODE",
+            foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
           }),
         })
       );
@@ -74,7 +74,7 @@ describe("updateOperatingPhase", () => {
         generateBusiness({
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
-            foreignBusinessType: "REMOTE_SELLER",
+            foreignBusinessTypeIds: ["revenueInNJ"],
             operatingPhase: "GUEST_MODE",
           }),
         })
@@ -88,7 +88,7 @@ describe("updateOperatingPhase", () => {
         generateBusiness({
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
-            foreignBusinessType: "REMOTE_WORKER",
+            foreignBusinessTypeIds: ["employeesInNJ"],
             operatingPhase: "GUEST_MODE",
           }),
         })
