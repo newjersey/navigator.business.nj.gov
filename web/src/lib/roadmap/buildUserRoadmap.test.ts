@@ -64,7 +64,7 @@ const createEmptyNexusProfile = (overrides: Partial<ProfileData>): ProfileData =
   return {
     ...createEmptyProfileData(),
     businessPersona: "FOREIGN",
-    foreignBusinessType: "NEXUS",
+    foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
     ...emptyIndustrySpecificData,
     ...overrides,
   };
@@ -81,7 +81,7 @@ describe("buildUserRoadmap", () => {
       const profileData: ProfileData = {
         ...createEmptyProfileData(),
         businessPersona: "FOREIGN",
-        foreignBusinessType: "REMOTE_WORKER",
+        foreignBusinessTypeIds: ["employeesInNJ"],
       };
 
       await buildUserRoadmap(profileData);
@@ -92,7 +92,7 @@ describe("buildUserRoadmap", () => {
       const profileData: ProfileData = {
         ...createEmptyProfileData(),
         businessPersona: "FOREIGN",
-        foreignBusinessType: "REMOTE_SELLER",
+        foreignBusinessTypeIds: ["revenueInNJ"],
       };
 
       await buildUserRoadmap(profileData);

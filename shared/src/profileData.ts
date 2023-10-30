@@ -88,8 +88,7 @@ export interface ProfileData extends IndustrySpecificData {
   readonly taxPin: string | undefined;
   readonly sectorId: string | undefined;
   readonly naicsCode: string;
-  readonly foreignBusinessType: ForeignBusinessType | undefined;
-  readonly foreignBusinessTypeIds: string[];
+  readonly foreignBusinessTypeIds: ForeignBusinessTypeId[];
   readonly nexusLocationInNewJersey: boolean | undefined;
   readonly nexusDbaName: string;
   readonly needsNexusDbaName: boolean;
@@ -118,7 +117,6 @@ export const emptyProfileData: ProfileData = {
   taxPin: undefined,
   sectorId: undefined,
   naicsCode: "",
-  foreignBusinessType: undefined,
   foreignBusinessTypeIds: [],
   nexusDbaName: "",
   needsNexusDbaName: false,
@@ -137,6 +135,15 @@ export type CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 export type CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
 export const businessPersonas = ["STARTING", "OWNING", "FOREIGN"] as const;
 export type BusinessPersona = (typeof businessPersonas)[number] | undefined;
-export type ForeignBusinessType = "REMOTE_WORKER" | "REMOTE_SELLER" | "NEXUS" | "NONE" | undefined;
+
+export type ForeignBusinessTypeId =
+  | "employeeOrContractorInNJ"
+  | "officeInNJ"
+  | "propertyInNJ"
+  | "companyOperatedVehiclesInNJ"
+  | "employeesInNJ"
+  | "revenueInNJ"
+  | "transactionsInNJ"
+  | "none";
 
 export const maskingCharacter = "*";

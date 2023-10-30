@@ -5,6 +5,7 @@ import { camelCaseToSnakeCase } from "@/lib/utils/cases-helpers";
 import {
   ABExperience,
   BusinessPersona,
+  determineForeignBusinessType,
   ForeignBusinessType,
   getCurrentBusiness,
   IndustrySpecificData,
@@ -87,7 +88,9 @@ export const setAnalyticsDimensions = (profileData: ProfileData, queue = false):
   analytics.dimensions.persona(getPersonaDimension(profileData.businessPersona));
   analytics.dimensions.naicsCode(profileData.naicsCode);
   setPhaseDimension(profileData.operatingPhase, true);
-  analytics.dimensions.subPersona(getSubPersonaDimension(profileData.foreignBusinessType));
+  analytics.dimensions.subPersona(
+    getSubPersonaDimension(determineForeignBusinessType(profileData.foreignBusinessTypeIds))
+  );
   !queue && analytics.dimensions.update();
 };
 

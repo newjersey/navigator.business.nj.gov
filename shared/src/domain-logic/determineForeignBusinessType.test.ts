@@ -1,4 +1,4 @@
-import { determineForeignBusinessType } from "@/lib/domain-logic/determineForeignBusinessType";
+import { determineForeignBusinessType } from "./determineForeignBusinessType";
 
 describe("determineForeignBusinessType", () => {
   it("returns undefined when array is empty", () => {
