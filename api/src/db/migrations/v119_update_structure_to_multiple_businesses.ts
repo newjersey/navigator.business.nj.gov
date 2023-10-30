@@ -1,5 +1,5 @@
+import { v118UserData } from "@db/migrations/v118_set_operating_phase_remote_seller_worker";
 import { v4 as uuidv4 } from "uuid";
-import { v118UserData } from "./v118_set_operating_phase_remote_seller_worker";
 
 export interface v119UserData {
   user: v119BusinessUser;

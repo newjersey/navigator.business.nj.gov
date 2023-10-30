@@ -1,8 +1,7 @@
-import { generateUser, generateUserData } from "@shared/test";
-import { AddToUserTesting, UserTestingClient } from "../types";
-import { addToUserTestingFactory } from "./addToUserTestingFactory";
-
+import { AddToUserTesting, UserTestingClient } from "@domain/types";
+import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFactory";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
+import { generateUser, generateUserData } from "@shared/test";
 
 describe("addToUserTesting", () => {
   let stubUserTestingClient: jest.Mocked<UserTestingClient>;

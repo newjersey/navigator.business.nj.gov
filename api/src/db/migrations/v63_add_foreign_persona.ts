@@ -1,4 +1,4 @@
-import { v62UserData } from "./v62_rename_has_existing_business";
+import { v62UserData } from "@db/migrations/v62_rename_has_existing_business";
 
 export interface v63UserData {
   user: v63BusinessUser;

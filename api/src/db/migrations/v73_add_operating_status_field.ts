@@ -1,7 +1,7 @@
+import { v72UserData } from "@db/migrations/v72_add_real_estate_management";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
 import { randomInt } from "@shared/intHelpers";
 import { LookupLegalStructureById } from "@shared/legalStructure";
-import { v72UserData } from "./v72_add_real_estate_management";
 
 export interface v73UserData {
   user: v73BusinessUser;

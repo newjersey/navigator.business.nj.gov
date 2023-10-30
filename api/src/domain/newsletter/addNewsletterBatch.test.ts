@@ -1,8 +1,8 @@
+import { addNewsletterBatch } from "@domain/newsletter/addNewsletterBatch";
+import { addNewsletterFactory } from "@domain/newsletter/addNewsletterFactory";
+import { AddNewsletter, NewsletterClient, UserDataClient } from "@domain/types";
 import { generateUser, generateUserData } from "@shared/test";
 import { UserData } from "@shared/userData";
-import { AddNewsletter, NewsletterClient, UserDataClient } from "../types";
-import { addNewsletterBatch } from "./addNewsletterBatch";
-import { addNewsletterFactory } from "./addNewsletterFactory";
 
 describe("addNewsletterBatch", () => {
   let stubNewsletterClient: jest.Mocked<NewsletterClient>;

@@ -1,5 +1,5 @@
+import { v121Business, v121UserData } from "@db/migrations/v121_add_nonprofit_formation_fields";
 import { randomInt } from "@shared/intHelpers";
-import { v121Business, v121UserData } from "./v121_add_nonprofit_formation_fields";
 
 export interface v122UserData {
   user: v122BusinessUser;

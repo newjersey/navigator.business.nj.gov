@@ -1,4 +1,4 @@
-import { v17UserData } from "./v17_add_operate_section";
+import { v17UserData } from "@db/migrations/v17_add_operate_section";
 
 export interface v18UserData {
   user: v18BusinessUser;

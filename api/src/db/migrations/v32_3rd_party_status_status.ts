@@ -1,4 +1,4 @@
-import { v31UserData } from "./v31_3rd_party_status";
+import { v31UserData } from "@db/migrations/v31_3rd_party_status";
 
 export interface v32UserData {
   user: v32BusinessUser;

@@ -1,4 +1,4 @@
-import { v44UserData } from "./v44_add_cannabis_license_to_profile_data";
+import { v44UserData } from "@db/migrations/v44_add_cannabis_license_to_profile_data";
 
 export interface v45UserData {
   user: v45BusinessUser;

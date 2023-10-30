@@ -1,6 +1,6 @@
+import { shouldAddToUserTesting } from "@domain/user-testing/shouldAddToUserTesting";
 import { generateUser, generateUserData } from "@shared/test";
-import { generateExternalStatus, generateUserTestingResponse } from "../../../test/factories";
-import { shouldAddToUserTesting } from "./shouldAddToUserTesting";
+import { generateExternalStatus, generateUserTestingResponse } from "@test/factories";
 
 describe("shouldAddToUserTesting", () => {
   it("does not add for user-testing if userTesting is false", async () => {

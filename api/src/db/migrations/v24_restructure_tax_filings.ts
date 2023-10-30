@@ -1,6 +1,6 @@
+import { v23UserData } from "@db/migrations/v23_rename_onboarding_data_to_profile_data";
 import { getCurrentDateFormatted } from "@shared/dateHelpers";
 import { randomInt } from "@shared/intHelpers";
-import { v23UserData } from "./v23_rename_onboarding_data_to_profile_data";
 
 export interface v24UserData {
   user: v24BusinessUser;

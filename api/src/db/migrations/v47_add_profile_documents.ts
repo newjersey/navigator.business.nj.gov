@@ -1,4 +1,4 @@
-import { v46UserData } from "./v46_add_task_item_checklist";
+import { v46UserData } from "@db/migrations/v46_add_task_item_checklist";
 
 export interface v47UserData {
   user: v47BusinessUser;

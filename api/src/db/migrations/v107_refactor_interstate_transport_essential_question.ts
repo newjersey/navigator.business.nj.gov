@@ -1,4 +1,4 @@
-import { v106UserData } from "./v106_add_pet_care_housing_essential_question";
+import { v106UserData } from "@db/migrations/v106_add_pet_care_housing_essential_question";
 
 export interface v107UserData {
   user: v107BusinessUser;

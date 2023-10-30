@@ -2,8 +2,8 @@ import {
   generateV121Business,
   generateV121Preferences,
   generateV121UserData,
-} from "./v121_add_nonprofit_formation_fields";
-import { migrate_v121_to_v122 } from "./v122_remove_welcome_and_welcomeupandrunning_sidecards";
+} from "@db/migrations/v121_add_nonprofit_formation_fields";
+import { migrate_v121_to_v122 } from "@db/migrations/v122_remove_welcome_and_welcomeupandrunning_sidecards";
 
 describe("migrate_v121_to_v122", () => {
   it("removes the welcome and welcome-up-and-running from sidebarCards", () => {

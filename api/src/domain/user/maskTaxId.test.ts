@@ -1,4 +1,4 @@
-import { maskTaxId } from "./maskTaxId";
+import { maskTaxId } from "@domain/user/maskTaxId";
 
 describe("taxIdMask", () => {
   it("masks 12 digit taxId", async () => {

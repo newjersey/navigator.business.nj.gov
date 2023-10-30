@@ -1,4 +1,4 @@
-import { v82UserData } from "./v82_add_up_and_running_owning_operating_phase";
+import { v82UserData } from "@db/migrations/v82_add_up_and_running_owning_operating_phase";
 
 export interface v83UserData {
   user: v83BusinessUser;

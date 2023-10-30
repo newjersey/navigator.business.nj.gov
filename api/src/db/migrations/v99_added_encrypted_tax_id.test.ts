@@ -1,5 +1,5 @@
-import { v98generatorProfileData, v98UserDataGenerator } from "./v98_add_phase_newly_changed";
-import { migrate_v98_to_v99 } from "./v99_added_encrypted_tax_id";
+import { v98generatorProfileData, v98UserDataGenerator } from "@db/migrations/v98_add_phase_newly_changed";
+import { migrate_v98_to_v99 } from "@db/migrations/v99_added_encrypted_tax_id";
 
 describe("migrate_v98_to_v99", () => {
   beforeEach(async () => {

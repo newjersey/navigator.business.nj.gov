@@ -1,8 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const AWSCrypto = require("@aws-crypto/client-node");
 import { fromBase64, toBase64 } from "@aws-sdk/util-base64-node";
+import { EncryptionDecryptionClient } from "@domain/types";
 import { TextDecoder } from "node:util";
-import { EncryptionDecryptionClient } from "../domain/types";
 
 type Context = {
   stage: string;

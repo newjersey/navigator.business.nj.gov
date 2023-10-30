@@ -1,5 +1,5 @@
-import { generateV101Preferences, generateV101UserData } from "./v101_change_error_field";
-import { migrate_v101_to_v102 } from "./v102_rename_tax_registration_nudge";
+import { generateV101Preferences, generateV101UserData } from "@db/migrations/v101_change_error_field";
+import { migrate_v101_to_v102 } from "@db/migrations/v102_rename_tax_registration_nudge";
 
 describe("migrate_v101_to_v102", () => {
   it("does nothing when sidebar cards do not contain tax-registration-nudge", () => {

@@ -1,4 +1,4 @@
-import { v15UserData } from "./v15_add_retail_industry";
+import { v15UserData } from "@db/migrations/v15_add_retail_industry";
 
 export interface v16UserData {
   user: v16BusinessUser;

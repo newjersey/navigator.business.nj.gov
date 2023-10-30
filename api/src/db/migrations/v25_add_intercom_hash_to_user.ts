@@ -1,5 +1,5 @@
+import { v24UserData } from "@db/migrations/v24_restructure_tax_filings";
 import { createHmac } from "node:crypto";
-import { v24UserData } from "./v24_restructure_tax_filings";
 
 export interface v25UserData {
   user: v25BusinessUser;

@@ -1,5 +1,5 @@
+import { v116UserData } from "@db/migrations/v116_add_dba_business_name_availability";
 import { randomInt } from "@shared/intHelpers";
-import { v116UserData } from "./v116_add_dba_business_name_availability";
 
 export interface v117UserData {
   user: v117BusinessUser;

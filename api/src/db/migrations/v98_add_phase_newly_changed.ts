@@ -1,5 +1,5 @@
+import { v97UserData } from "@db/migrations/v97_updating_formation_types";
 import { randomInt } from "@shared/intHelpers";
-import { v97UserData } from "./v97_updating_formation_types";
 
 export interface v98UserData {
   user: v98BusinessUser;

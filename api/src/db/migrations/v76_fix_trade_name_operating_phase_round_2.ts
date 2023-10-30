@@ -1,6 +1,6 @@
+import { v75UserData } from "@db/migrations/v75_fix_trade_name_operating_phase";
 import { randomInt } from "@shared/intHelpers";
 import { LookupLegalStructureById } from "@shared/legalStructure";
-import { v75UserData } from "./v75_fix_trade_name_operating_phase";
 
 export interface v76UserData {
   user: v76BusinessUser;

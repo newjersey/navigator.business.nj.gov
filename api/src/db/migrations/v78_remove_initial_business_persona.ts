@@ -1,4 +1,4 @@
-import { v77UserData } from "./v77_remove_graduation_card";
+import { v77UserData } from "@db/migrations/v77_remove_graduation_card";
 
 export interface v78UserData {
   user: v78BusinessUser;

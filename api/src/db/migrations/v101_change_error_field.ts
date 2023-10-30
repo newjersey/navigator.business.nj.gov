@@ -1,5 +1,5 @@
+import { v100UserData } from "@db/migrations/v100_add_updated_timestamp";
 import { randomInt } from "@shared/intHelpers";
-import { v100UserData } from "./v100_add_updated_timestamp";
 
 export interface v101UserData {
   user: v101BusinessUser;

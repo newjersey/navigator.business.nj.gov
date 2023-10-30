@@ -1,4 +1,4 @@
-import { v59UserData } from "./v59_fix_welcome_card_to_preferences";
+import { v59UserData } from "@db/migrations/v59_fix_welcome_card_to_preferences";
 
 export interface v60UserData {
   user: v60BusinessUser;

@@ -1,5 +1,5 @@
+import { v0UserData } from "@db/migrations/v0_user_data";
 import { randomInt } from "@shared/intHelpers";
-import { v0UserData } from "./v0_user_data";
 
 export interface v1UserData {
   user: v1BusinessUser;

@@ -1,5 +1,5 @@
+import { v67UserData } from "@db/migrations/v67_add_graduation_card";
 import { randomInt } from "@shared/intHelpers";
-import { v67UserData } from "./v67_add_graduation_card";
 
 export interface v68UserData {
   user: v68BusinessUser;

@@ -1,4 +1,4 @@
-import { AddToUserTesting, UserDataClient } from "../types";
+import { AddToUserTesting, UserDataClient } from "@domain/types";
 
 type AddToUserTestingBatchResponse = {
   success: number;

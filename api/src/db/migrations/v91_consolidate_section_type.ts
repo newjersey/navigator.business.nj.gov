@@ -1,4 +1,4 @@
-import { v90UserData } from "./v90_home_based_business_can_be_undefined";
+import { v90UserData } from "@db/migrations/v90_home_based_business_can_be_undefined";
 
 export interface v91UserData {
   user: v91BusinessUser;

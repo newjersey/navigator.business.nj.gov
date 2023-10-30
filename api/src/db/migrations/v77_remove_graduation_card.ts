@@ -1,5 +1,5 @@
+import { v76UserData } from "@db/migrations/v76_fix_trade_name_operating_phase_round_2";
 import { randomInt } from "@shared/intHelpers";
-import { v76UserData } from "./v76_fix_trade_name_operating_phase_round_2";
 
 export interface v77UserData {
   user: v77BusinessUser;

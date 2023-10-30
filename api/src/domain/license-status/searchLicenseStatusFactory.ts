@@ -1,7 +1,7 @@
+import { inputManipulator } from "@domain/inputManipulator";
+import { LicenseStatusClient, SearchLicenseStatus } from "@domain/types";
 import { getLicenseDate, parseDateWithFormat } from "@shared/dateHelpers";
 import { LicenseStatus, LicenseStatusItem, LicenseStatusResult, NameAndAddress } from "@shared/license";
-import { inputManipulator } from "../inputManipulator";
-import { LicenseStatusClient, SearchLicenseStatus } from "../types";
 
 export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusClient): SearchLicenseStatus => {
   return async (nameAndAddress: NameAndAddress, licenseType: string): Promise<LicenseStatusResult> => {

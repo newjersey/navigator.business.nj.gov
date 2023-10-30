@@ -1,4 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { taxFilingRouterFactory } from "@api/taxFilingRouter";
+import { getSignedInUserId } from "@api/userRouter";
+import { EncryptionDecryptionClient, TaxFilingInterface, UserDataClient } from "@domain/types";
+import { setupExpress } from "@libs/express";
 import {
   generateBusiness,
   generateTaxFilingData,
@@ -9,10 +13,6 @@ import {
 import { UserData } from "@shared/userData";
 import { Express } from "express";
 import request from "supertest";
-import { EncryptionDecryptionClient, TaxFilingInterface, UserDataClient } from "../domain/types";
-import { setupExpress } from "../libs/express";
-import { taxFilingRouterFactory } from "./taxFilingRouter";
-import { getSignedInUserId } from "./userRouter";
 
 jest.mock("./userRouter", () => {
   return {

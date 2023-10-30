@@ -1,7 +1,7 @@
+import { Migrations } from "@db/migrations/migrations";
 import { CURRENT_VERSION } from "@shared/userData";
 import fs from "node:fs";
 import path from "node:path";
-import { Migrations } from "./migrations";
 
 describe("migrations", () => {
   it("has CURRENT_VERSION number of migrations in the migrations list", () => {

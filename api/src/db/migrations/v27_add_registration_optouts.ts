@@ -1,4 +1,4 @@
-import { v26UserData } from "./v26_remove_dateofformation";
+import { v26UserData } from "@db/migrations/v26_remove_dateofformation";
 
 export interface v27UserData {
   user: v27BusinessUser;

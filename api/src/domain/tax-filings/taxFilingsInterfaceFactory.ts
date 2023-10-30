@@ -1,9 +1,9 @@
+import { TaxFilingClient, TaxFilingInterface } from "@domain/types";
+import { fetchMunicipalityByName } from "@domain/user/fetchMunicipalityByName";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { modifyCurrentBusiness } from "@shared/test";
 import { UserData } from "@shared/userData";
 import dayjs from "dayjs";
-import { TaxFilingClient, TaxFilingInterface } from "../types";
-import { fetchMunicipalityByName } from "../user/fetchMunicipalityByName";
 
 type taxFilingInterfaceRequest = {
   userData: UserData;

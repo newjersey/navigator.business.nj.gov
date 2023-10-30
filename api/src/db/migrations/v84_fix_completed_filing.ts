@@ -1,4 +1,4 @@
-import { v83UserData } from "./v83_add_hideable_roadmap_to_preferences";
+import { v83UserData } from "@db/migrations/v83_add_hideable_roadmap_to_preferences";
 
 export interface v84UserData {
   user: v84BusinessUser;

@@ -1,4 +1,3 @@
-import { randomElementFromArray } from "../../../test/helpers";
 import {
   generatev81FormationFormData,
   generatev81ProfileData,
@@ -6,8 +5,9 @@ import {
   v81OperatingPhase,
   v81ProfileData,
   v81UserData,
-} from "./v81_add_completed_filing_payment";
-import { migrate_v81_to_v82 } from "./v82_add_up_and_running_owning_operating_phase";
+} from "@db/migrations/v81_add_completed_filing_payment";
+import { migrate_v81_to_v82 } from "@db/migrations/v82_add_up_and_running_owning_operating_phase";
+import { randomElementFromArray } from "@test/helpers";
 
 describe("migrate_v81_to_v82", () => {
   it("updates operating phase when operating phase is up_and_running and businessPersona is owning", () => {

@@ -1,5 +1,5 @@
+import { v80UserData } from "@db/migrations/v80_add_calendar_preference";
 import { randomInt } from "@shared/intHelpers";
-import { v80UserData } from "./v80_add_calendar_preference";
 
 export interface v81UserData {
   user: v81BusinessUser;

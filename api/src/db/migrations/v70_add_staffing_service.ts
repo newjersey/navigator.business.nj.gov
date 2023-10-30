@@ -1,4 +1,4 @@
-import { v69UserData } from "./v69_change_form_business_entity_foreign_id";
+import { v69UserData } from "@db/migrations/v69_change_form_business_entity_foreign_id";
 
 export interface v70UserData {
   user: v70BusinessUser;

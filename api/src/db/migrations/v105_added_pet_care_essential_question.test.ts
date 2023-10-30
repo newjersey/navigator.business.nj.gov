@@ -1,5 +1,8 @@
-import { generateV104ProfileData, generateV104UserData } from "./v104_add_needs_nexus_dba_name_field";
-import { migrate_v104_to_v105 } from "./v105_add_pet_care_essential_question";
+import {
+  generateV104ProfileData,
+  generateV104UserData,
+} from "@db/migrations/v104_add_needs_nexus_dba_name_field";
+import { migrate_v104_to_v105 } from "@db/migrations/v105_add_pet_care_essential_question";
 
 describe("migrate_v104_to_v105", () => {
   it("sets the pet care essential question to true for any existing user", () => {

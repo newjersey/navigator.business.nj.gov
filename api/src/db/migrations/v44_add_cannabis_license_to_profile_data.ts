@@ -1,4 +1,4 @@
-import { v43UserData } from "./v43_add_initial_flow_to_profile_data";
+import { v43UserData } from "@db/migrations/v43_add_initial_flow_to_profile_data";
 
 export interface v44UserData {
   user: v44BusinessUser;

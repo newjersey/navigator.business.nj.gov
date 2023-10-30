@@ -1,4 +1,4 @@
-import { v19UserData } from "./v19_add_employment_agency_roadmap";
+import { v19UserData } from "@db/migrations/v19_add_employment_agency_roadmap";
 
 export interface v20UserData {
   user: v20BusinessUser;

@@ -1,4 +1,4 @@
-import { v28UserData } from "./v28_add_has_existing_business_to_profile";
+import { v28UserData } from "@db/migrations/v28_add_has_existing_business_to_profile";
 
 export interface v29UserData {
   user: v29BusinessUser;

@@ -1,4 +1,4 @@
-import { v42UserData } from "./v42_add_sector_to_profile_data";
+import { v42UserData } from "@db/migrations/v42_add_sector_to_profile_data";
 
 export interface v43UserData {
   user: v43BusinessUser;

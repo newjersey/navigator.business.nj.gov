@@ -4,8 +4,8 @@ import {
   generatev77User,
   v77ProfileData,
   v77UserData,
-} from "./v77_remove_graduation_card";
-import { migrate_v77_to_v78 } from "./v78_remove_initial_business_persona";
+} from "@db/migrations/v77_remove_graduation_card";
+import { migrate_v77_to_v78 } from "@db/migrations/v78_remove_initial_business_persona";
 
 describe("migrate_v77_to_v78", () => {
   it("updates the value of businessPersona to match initialOnboardingFlow", () => {

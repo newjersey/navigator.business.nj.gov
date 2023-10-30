@@ -5,8 +5,8 @@ import {
   v73ProfileData,
   v73TaskProgress,
   v73UserData,
-} from "./v73_add_operating_status_field";
-import { migrate_v73_to_v74 } from "./v74_change_register_for_taxes_foreign_id";
+} from "@db/migrations/v73_add_operating_status_field";
+import { migrate_v73_to_v74 } from "@db/migrations/v74_change_register_for_taxes_foreign_id";
 
 describe("migrate_v73_to_v74", () => {
   it("sets register-for-taxes status to register-for-taxes-foreign for nexus users", () => {

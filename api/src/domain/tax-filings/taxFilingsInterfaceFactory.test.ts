@@ -1,3 +1,6 @@
+import { taxFilingsInterfaceFactory } from "@domain/tax-filings/taxFilingsInterfaceFactory";
+import { TaxFilingClient, TaxFilingInterface } from "@domain/types";
+import * as fetchMunicipality from "@domain/user/fetchMunicipalityByName";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { TaxFilingCalendarEvent, TaxFilingLookupState, TaxFilingState } from "@shared/taxFiling";
 import {
@@ -12,9 +15,6 @@ import {
   modifyCurrentBusiness,
 } from "@shared/test";
 import { Business, UserData } from "@shared/userData";
-import { TaxFilingClient, TaxFilingInterface } from "../types";
-import * as fetchMunicipality from "../user/fetchMunicipalityByName";
-import { taxFilingsInterfaceFactory } from "./taxFilingsInterfaceFactory";
 
 jest.mock("../user/fetchMunicipalityByName", () => ({
   fetchMunicipalityByName: jest.fn(),

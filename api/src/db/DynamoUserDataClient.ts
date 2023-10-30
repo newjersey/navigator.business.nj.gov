@@ -4,9 +4,9 @@
 import { ExecuteStatementCommand, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
+import { MigrationFunction, Migrations } from "@db/migrations/migrations";
+import { UserDataClient } from "@domain/types";
 import { CURRENT_VERSION, UserData } from "@shared/userData";
-import { UserDataClient } from "../domain/types";
-import { MigrationFunction, Migrations } from "./migrations/migrations";
 
 const marshallOptions = {
   // Whether to automatically convert empty strings, blobs, and sets to `null`.

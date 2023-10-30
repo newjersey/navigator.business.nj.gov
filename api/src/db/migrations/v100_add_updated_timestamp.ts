@@ -1,5 +1,5 @@
+import { v99UserData } from "@db/migrations/v99_added_encrypted_tax_id";
 import { randomInt } from "@shared/intHelpers";
-import { v99UserData } from "./v99_added_encrypted_tax_id";
 
 export interface v100UserData {
   user: v100BusinessUser;

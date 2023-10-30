@@ -1,4 +1,4 @@
-import { v84UserData } from "./v84_fix_completed_filing";
+import { v84UserData } from "@db/migrations/v84_fix_completed_filing";
 
 export interface v85UserData {
   user: v85BusinessUser;

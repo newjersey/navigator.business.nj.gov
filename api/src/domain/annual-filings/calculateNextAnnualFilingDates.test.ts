@@ -1,7 +1,7 @@
+import { calculateNextAnnualFilingDates } from "@domain/annual-filings/calculateNextAnnualFilingDates";
 import * as getCurrentDateModule from "@shared/dateHelpers";
 import { defaultDateFormat } from "@shared/defaultConstants";
 import dayjs from "dayjs";
-import { calculateNextAnnualFilingDates } from "./calculateNextAnnualFilingDates";
 
 jest.mock("@shared/dateHelpers", () => {
   return {

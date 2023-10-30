@@ -1,4 +1,4 @@
-import { v35UserData } from "./v35_add_formation_getfiling_response";
+import { v35UserData } from "@db/migrations/v35_add_formation_getfiling_response";
 
 export interface v36UserData {
   user: v36BusinessUser;

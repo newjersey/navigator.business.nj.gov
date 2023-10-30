@@ -1,5 +1,5 @@
+import { v18UserData } from "@db/migrations/v18_add_foodtruck_roadmap";
 import { randomInt } from "@shared/intHelpers";
-import { v18UserData } from "./v18_add_foodtruck_roadmap";
 
 export interface v19UserData {
   user: v19BusinessUser;

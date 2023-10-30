@@ -4,7 +4,13 @@
     "paths": {
       "@functions/*": ["src/functions/*"],
       "@libs/*": ["src/libs/*"],
-      "@shared/*": ["../shared/src/*"]
+      "@shared/*": ["../shared/src/*"],
+      "@domain/*": ["src/domain/*"],
+      "@db/*": ["src/db/*"],
+      "@client/*": ["src/client/*"],
+      "@api/*": ["src/api/*"],
+      "@test/*": ["test/*"],
+      "@wiremock/*": ["wiremock/*"]
     }
   }
 }

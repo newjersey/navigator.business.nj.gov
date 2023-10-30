@@ -1,5 +1,5 @@
+import { v65UserData } from "@db/migrations/v65_add_task_progess_card";
 import { randomInt } from "@shared/intHelpers";
-import { v65UserData } from "./v65_add_task_progess_card";
 
 export interface v66UserData {
   user: v66BusinessUser;

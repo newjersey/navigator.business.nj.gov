@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
-import { generateV3OnboardingData, generateV3User, v3UserData } from "./v3_change_legal_structure";
-import { migrate_v3_to_v4 } from "./v4_add_municipality";
+import {
+  generateV3OnboardingData,
+  generateV3User,
+  v3UserData,
+} from "@db/migrations/v3_change_legal_structure";
+import { migrate_v3_to_v4 } from "@db/migrations/v4_add_municipality";
 
 describe("migrate_v3_to_v4", () => {
   const user = generateV3User({});

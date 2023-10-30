@@ -1,3 +1,4 @@
+import { getAnnualFilings } from "@domain/annual-filings/getAnnualFilings";
 import {
   generateBusiness,
   generateProfileData,
@@ -9,8 +10,7 @@ import {
   getThirdAnnualFiling,
   modifyCurrentBusiness,
 } from "@shared/test";
-import { generateAnnualFilings } from "../../../test/helpers";
-import { getAnnualFilings } from "./getAnnualFilings";
+import { generateAnnualFilings } from "@test/helpers";
 
 describe("getAnnualFilings", () => {
   it("calculates 3 new annual filing datea and updates them for dateOfFormation", async () => {

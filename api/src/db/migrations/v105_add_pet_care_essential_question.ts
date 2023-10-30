@@ -1,5 +1,5 @@
+import { v104UserData } from "@db/migrations/v104_add_needs_nexus_dba_name_field";
 import { randomInt } from "@shared/intHelpers";
-import { v104UserData } from "./v104_add_needs_nexus_dba_name_field";
 
 export interface v105UserData {
   user: v105BusinessUser;

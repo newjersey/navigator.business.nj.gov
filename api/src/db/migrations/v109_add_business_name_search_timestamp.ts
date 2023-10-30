@@ -1,4 +1,4 @@
-import { v108UserData } from "./v108_add_business_name_search_to_formation_data";
+import { v108UserData } from "@db/migrations/v108_add_business_name_search_to_formation_data";
 
 export interface v109UserData {
   user: v109BusinessUser;

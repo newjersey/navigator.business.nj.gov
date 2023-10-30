@@ -1,13 +1,13 @@
+import { selfRegRouterFactory } from "@api/selfRegRouter";
+import { SelfRegClient, UserDataClient } from "@domain/types";
+import { setupExpress } from "@libs/express";
 import { generateUser, generateUserData } from "@shared/test";
 import { UserData } from "@shared/userData";
+import { generateSelfRegResponse } from "@test/factories";
+import { generateHashedKey, getLastCalledWith } from "@test/helpers";
 import dayjs from "dayjs";
 import { Express } from "express";
 import request, { Response } from "supertest";
-import { generateSelfRegResponse } from "../../test/factories";
-import { generateHashedKey, getLastCalledWith } from "../../test/helpers";
-import { SelfRegClient, UserDataClient } from "../domain/types";
-import { setupExpress } from "../libs/express";
-import { selfRegRouterFactory } from "./selfRegRouter";
 
 describe("selfRegRouter", () => {
   let app: Express;

@@ -1,3 +1,5 @@
+import { UpdateLicenseStatus } from "@domain/types";
+import { updateLicenseStatusFactory } from "@domain/user/updateLicenseStatusFactory";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import {
@@ -11,8 +13,6 @@ import {
   modifyCurrentBusiness,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
-import { UpdateLicenseStatus } from "../types";
-import { updateLicenseStatusFactory } from "./updateLicenseStatusFactory";
 
 describe("updateLicenseStatus", () => {
   let updateLicenseStatus: UpdateLicenseStatus;
