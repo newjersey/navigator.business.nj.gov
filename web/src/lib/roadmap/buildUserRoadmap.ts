@@ -216,7 +216,7 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
   if (profileData.legalStructureId === "nonprofit") {
     addOns.push("nonprofit");
 
-    const allowNonprofitFormation = allowFormation(profileData.legalStructureId, profileData.businessPersona);
+    const allowNonprofitFormation = allowFormation(profileData.legalStructureId);
     if (!allowNonprofitFormation) {
       addOns.push("nonprofit-legacy");
     }
