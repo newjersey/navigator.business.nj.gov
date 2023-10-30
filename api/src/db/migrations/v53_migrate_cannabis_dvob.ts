@@ -1,4 +1,4 @@
-import { v52UserData } from "./v52_add_naics_code";
+import { v52UserData } from "@db/migrations/v52_add_naics_code";
 
 export interface v53UserData {
   user: v53BusinessUser;

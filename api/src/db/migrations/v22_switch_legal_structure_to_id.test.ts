@@ -1,5 +1,5 @@
-import { generatev21OnboardingData, generatev21User, v21UserData } from "./v21_add_tax_fields";
-import { migrate_v21_to_v22 } from "./v22_switch_legal_structure_to_id";
+import { generatev21OnboardingData, generatev21User, v21UserData } from "@db/migrations/v21_add_tax_fields";
+import { migrate_v21_to_v22 } from "@db/migrations/v22_switch_legal_structure_to_id";
 
 describe("migrate_v21_to_v22", () => {
   const user = generatev21User({});

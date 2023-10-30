@@ -1,7 +1,7 @@
+import { getAnnualFilings } from "@domain/annual-filings/getAnnualFilings";
+import { TimeStampBusinessSearch } from "@domain/types";
 import { UserData } from "@shared/userData";
 import { Router } from "express";
-import { getAnnualFilings } from "../domain/annual-filings/getAnnualFilings";
-import { TimeStampBusinessSearch } from "../domain/types";
 
 export const guestRouterFactory = (timeStampBusinessSearch: TimeStampBusinessSearch): Router => {
   const router = Router();

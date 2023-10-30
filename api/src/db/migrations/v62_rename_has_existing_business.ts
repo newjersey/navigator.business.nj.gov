@@ -1,4 +1,4 @@
-import { v61UserData } from "./v61_add_corp_formation";
+import { v61UserData } from "@db/migrations/v61_add_corp_formation";
 
 export interface v62UserData {
   user: v62BusinessUser;

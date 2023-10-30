@@ -1,4 +1,4 @@
-import { v68UserData } from "./v68_complete_formation_task_if_success";
+import { v68UserData } from "@db/migrations/v68_complete_formation_task_if_success";
 
 export interface v69UserData {
   user: v69BusinessUser;

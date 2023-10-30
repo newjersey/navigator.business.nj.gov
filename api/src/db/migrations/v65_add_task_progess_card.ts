@@ -1,4 +1,4 @@
-import { v64UserData } from "./v64_save_formation_address_checkboxes";
+import { v64UserData } from "@db/migrations/v64_save_formation_address_checkboxes";
 
 export interface v65UserData {
   user: v65BusinessUser;

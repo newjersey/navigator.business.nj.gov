@@ -1,4 +1,4 @@
-import { v39UserData } from "./v39_add_tax_pin";
+import { v39UserData } from "@db/migrations/v39_add_tax_pin";
 
 export interface v40UserData {
   user: v40BusinessUser;

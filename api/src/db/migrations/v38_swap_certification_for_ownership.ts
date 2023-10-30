@@ -1,4 +1,4 @@
-import { v37UserData } from "./v37_add_dateofformation";
+import { v37UserData } from "@db/migrations/v37_add_dateofformation";
 
 export interface v38UserData {
   user: v38BusinessUser;

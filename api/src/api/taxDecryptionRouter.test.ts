@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { taxDecryptionRouterFactory } from "@api/taxDecryptionRouter";
+import { EncryptionDecryptionClient } from "@domain/types";
+import { setupExpress } from "@libs/express";
 import { Express } from "express";
 import request from "supertest";
-import { EncryptionDecryptionClient } from "../domain/types";
-import { setupExpress } from "../libs/express";
-import { taxDecryptionRouterFactory } from "./taxDecryptionRouter";
 
 describe("taxDecryptionRouter", () => {
   let app: Express;

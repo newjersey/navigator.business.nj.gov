@@ -1,4 +1,8 @@
-import { v119Business, v119TaxFiling, v119UserData } from "./v119_update_structure_to_multiple_businesses";
+import {
+  v119Business,
+  v119TaxFiling,
+  v119UserData,
+} from "@db/migrations/v119_update_structure_to_multiple_businesses";
 
 export interface v120UserData {
   user: v120BusinessUser;

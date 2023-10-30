@@ -1,4 +1,4 @@
-import { v57UserData } from "./v57_add_provisions";
+import { v57UserData } from "@db/migrations/v57_add_provisions";
 
 export interface v58UserData {
   user: v58BusinessUser;

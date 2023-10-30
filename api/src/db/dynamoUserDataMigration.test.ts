@@ -5,9 +5,9 @@
 
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
-import { UserDataClient } from "../domain/types";
-import { dynamoDbTranslateConfig, DynamoUserDataClient } from "./DynamoUserDataClient";
+import { UserDataClient } from "@domain/types";
 
+import { dynamoDbTranslateConfig, DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import * as sharedUserData from "@shared/userData";
 
 function setupMockSharedUserData(): typeof sharedUserData {

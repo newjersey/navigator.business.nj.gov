@@ -1,4 +1,4 @@
-import { v78UserData } from "./v78_remove_initial_business_persona";
+import { v78UserData } from "@db/migrations/v78_remove_initial_business_persona";
 
 export interface v79UserData {
   user: v79BusinessUser;

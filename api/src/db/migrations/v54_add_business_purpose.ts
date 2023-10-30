@@ -1,5 +1,5 @@
+import { v53UserData } from "@db/migrations/v53_migrate_cannabis_dvob";
 import { randomInt } from "@shared/intHelpers";
-import { v53UserData } from "./v53_migrate_cannabis_dvob";
 
 export interface v54UserData {
   user: v54BusinessUser;

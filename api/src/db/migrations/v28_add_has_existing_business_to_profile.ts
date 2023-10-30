@@ -1,4 +1,4 @@
-import { v27UserData } from "./v27_add_registration_optouts";
+import { v27UserData } from "@db/migrations/v27_add_registration_optouts";
 
 export interface v28UserData {
   user: v28BusinessUser;

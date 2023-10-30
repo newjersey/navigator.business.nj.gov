@@ -1,10 +1,10 @@
+import { UpdateSidebarCards } from "@domain/types";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { getFieldsForProfile, isFieldAnswered } from "@shared/domain-logic/opportunityFields";
 import { SIDEBAR_CARDS } from "@shared/domain-logic/sidebarCards";
 import { LookupOperatingPhaseById } from "@shared/operatingPhase";
 import { modifyCurrentBusiness } from "@shared/test";
 import { UserData } from "@shared/userData";
-import { UpdateSidebarCards } from "./types";
 
 export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): UserData => {
   const currentBusiness = getCurrentBusiness(userData);

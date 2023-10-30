@@ -1,5 +1,9 @@
-import { generatev11OnboardingData, generatev11User, v11UserData } from "./v11_change_license_statuses";
-import { migrate_v11_to_v12 } from "./v12_remove_scorp";
+import {
+  generatev11OnboardingData,
+  generatev11User,
+  v11UserData,
+} from "@db/migrations/v11_change_license_statuses";
+import { migrate_v11_to_v12 } from "@db/migrations/v12_remove_scorp";
 
 describe("migrate_v11_to_v12", () => {
   const user = generatev11User({});

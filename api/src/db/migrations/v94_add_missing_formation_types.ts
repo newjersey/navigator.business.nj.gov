@@ -1,4 +1,4 @@
-import { v93UserData } from "./v93_merge_childcare_roadmaps";
+import { v93UserData } from "@db/migrations/v93_merge_childcare_roadmaps";
 
 export interface v94UserData {
   user: v94BusinessUser;

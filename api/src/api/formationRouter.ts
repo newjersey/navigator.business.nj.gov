@@ -1,3 +1,7 @@
+import { ExpressRequestBody } from "@api/types";
+import { getSignedInUser, getSignedInUserId } from "@api/userRouter";
+import { saveFileFromUrl } from "@domain/s3Writer";
+import { FormationClient, UserDataClient } from "@domain/types";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
 import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
@@ -5,10 +9,6 @@ import { ProfileDocuments } from "@shared/profileData";
 import { modifyCurrentBusiness } from "@shared/test";
 import { UserData } from "@shared/userData";
 import { Router } from "express";
-import { saveFileFromUrl } from "../domain/s3Writer";
-import { FormationClient, UserDataClient } from "../domain/types";
-import { ExpressRequestBody } from "./types";
-import { getSignedInUser, getSignedInUserId } from "./userRouter";
 
 type FormationPostBody = {
   userData: UserData;

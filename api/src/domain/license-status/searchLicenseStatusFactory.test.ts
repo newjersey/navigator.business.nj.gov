@@ -1,9 +1,12 @@
+import {
+  determineLicenseStatus,
+  searchLicenseStatusFactory,
+} from "@domain/license-status/searchLicenseStatusFactory";
+import { LicenseStatusClient, SearchLicenseStatus } from "@domain/types";
 import { parseDateWithFormat } from "@shared/dateHelpers";
 import { LicenseEntity, LicenseStatusResult } from "@shared/license";
 import { generateNameAndAddress } from "@shared/test";
-import { generateLicenseEntity } from "../../../test/factories";
-import { LicenseStatusClient, SearchLicenseStatus } from "../types";
-import { determineLicenseStatus, searchLicenseStatusFactory } from "./searchLicenseStatusFactory";
+import { generateLicenseEntity } from "@test/factories";
 
 const entityWithAddress = (address: string): LicenseEntity => {
   return generateLicenseEntity({

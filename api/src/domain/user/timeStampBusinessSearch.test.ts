@@ -1,8 +1,8 @@
+import { BusinessNameClient, TimeStampBusinessSearch } from "@domain/types";
+import { timeStampBusinessSearch } from "@domain/user/timeStampBusinessSearch";
 import { NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import { generateBusinessNameAvailabilityResponse } from "@shared/test";
-import { BusinessNameClient, TimeStampBusinessSearch } from "../types";
-import { timeStampBusinessSearch } from "./timeStampBusinessSearch";
 
 describe("timeStampBusinessSearch", () => {
   let stubBusinessNameClient: jest.Mocked<BusinessNameClient>;

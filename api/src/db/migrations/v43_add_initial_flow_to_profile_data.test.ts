@@ -4,8 +4,8 @@ import {
   generatev42User,
   v42ProfileData,
   v42UserData,
-} from "./v42_add_sector_to_profile_data";
-import { migrate_v42_to_v43 } from "./v43_add_initial_flow_to_profile_data";
+} from "@db/migrations/v42_add_sector_to_profile_data";
+import { migrate_v42_to_v43 } from "@db/migrations/v43_add_initial_flow_to_profile_data";
 
 describe("migrate_v42_to_v43", () => {
   const user = generatev42User({});

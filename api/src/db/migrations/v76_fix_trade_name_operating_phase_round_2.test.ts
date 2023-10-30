@@ -5,8 +5,8 @@ import {
   v75ProfileData,
   v75TaskProgress,
   v75UserData,
-} from "./v75_fix_trade_name_operating_phase";
-import { migrate_v75_to_v76 } from "./v76_fix_trade_name_operating_phase_round_2";
+} from "@db/migrations/v75_fix_trade_name_operating_phase";
+import { migrate_v75_to_v76 } from "@db/migrations/v76_fix_trade_name_operating_phase_round_2";
 
 describe("migrate_v75_to_v76", () => {
   it("sets operatingPhase to NEEDS_TO_REGISTER_FOR_TAXES when NEEDS_TO_FORM and has a trade name", () => {

@@ -1,7 +1,7 @@
+import { getSignedInUserId } from "@api/userRouter";
+import { EncryptionDecryptionClient, TaxFilingInterface, UserDataClient } from "@domain/types";
 import { maskingCharacter } from "@shared/profileData";
 import { Router } from "express";
-import { EncryptionDecryptionClient, TaxFilingInterface, UserDataClient } from "../domain/types";
-import { getSignedInUserId } from "./userRouter";
 
 const getTaxId = async (
   encryptionDecryptionClient: EncryptionDecryptionClient,

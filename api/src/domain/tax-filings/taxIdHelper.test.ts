@@ -1,5 +1,10 @@
-import { generateTaxFilingResult } from "../../../test/factories";
-import { dateToShortISO, flattenDeDupAndConvertTaxFilings, getTaxIds, slugifyTaxId } from "./taxIdHelper";
+import {
+  dateToShortISO,
+  flattenDeDupAndConvertTaxFilings,
+  getTaxIds,
+  slugifyTaxId,
+} from "@domain/tax-filings/taxIdHelper";
+import { generateTaxFilingResult } from "@test/factories";
 
 describe("Tax-Filings Helpers", () => {
   describe("dateToShortISO", () => {

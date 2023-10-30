@@ -1,5 +1,5 @@
+import { v6UserData } from "@db/migrations/v6_add_home_based_business";
 import { randomInt } from "@shared/intHelpers";
-import { v6UserData } from "./v6_add_home_based_business";
 
 export interface v7UserData {
   user: v7BusinessUser;

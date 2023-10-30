@@ -1,5 +1,5 @@
+import { v101UserData } from "@db/migrations/v101_change_error_field";
 import { randomInt } from "@shared/intHelpers";
-import { v101UserData } from "./v101_change_error_field";
 
 export interface v102UserData {
   user: v102BusinessUser;

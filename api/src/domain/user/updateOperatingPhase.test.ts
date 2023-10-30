@@ -8,8 +8,8 @@ import {
   generateUserDataForBusiness,
 } from "@shared/test";
 import { TaskProgress, UserData } from "@shared/userData";
-import { updateOperatingPhase } from "./updateOperatingPhase";
 
+import { updateOperatingPhase } from "@domain/user/updateOperatingPhase";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 
 describe("updateOperatingPhase", () => {

@@ -1,4 +1,4 @@
-import { v25UserData } from "./v25_add_intercom_hash_to_user";
+import { v25UserData } from "@db/migrations/v25_add_intercom_hash_to_user";
 
 export interface v26UserData {
   user: v26BusinessUser;

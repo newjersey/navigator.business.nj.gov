@@ -1,5 +1,5 @@
+import { v120Business, v120UserData } from "@db/migrations/v120_add_missing_migration_data_fields";
 import { randomInt } from "@shared/intHelpers";
-import { v120Business, v120UserData } from "./v120_add_missing_migration_data_fields";
 
 export interface v121UserData {
   user: v121BusinessUser;

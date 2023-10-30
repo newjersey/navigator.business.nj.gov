@@ -1,6 +1,6 @@
+import { v74UserData } from "@db/migrations/v74_change_register_for_taxes_foreign_id";
 import { randomInt } from "@shared/intHelpers";
 import { LookupLegalStructureById } from "@shared/legalStructure";
-import { v74UserData } from "./v74_change_register_for_taxes_foreign_id";
 
 export interface v75UserData {
   user: v75BusinessUser;

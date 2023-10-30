@@ -1,4 +1,4 @@
-import { v114UserData } from "./v114_add_expired_iso_field_to_license";
+import { v114UserData } from "@db/migrations/v114_add_expired_iso_field_to_license";
 
 export interface v115UserData {
   user: v115BusinessUser;

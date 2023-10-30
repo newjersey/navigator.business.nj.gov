@@ -1,3 +1,14 @@
+import { getAnnualFilings } from "@domain/annual-filings/getAnnualFilings";
+import { industryHasALicenseType } from "@domain/license-status/convertIndustryToLicenseType";
+import {
+  EncryptionDecryptionClient,
+  TimeStampBusinessSearch,
+  UpdateLicenseStatus,
+  UpdateOperatingPhase,
+  UpdateSidebarCards,
+  UserDataClient,
+} from "@domain/types";
+import { encryptTaxIdFactory } from "@domain/user/encryptTaxIdFactory";
 import { NameAvailability } from "@shared/businessNameSearch";
 import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
@@ -7,17 +18,6 @@ import { modifyCurrentBusiness } from "@shared/test";
 import { createEmptyUserData, UserData } from "@shared/userData";
 import { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
-import { getAnnualFilings } from "../domain/annual-filings/getAnnualFilings";
-import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
-import {
-  EncryptionDecryptionClient,
-  TimeStampBusinessSearch,
-  UpdateLicenseStatus,
-  UpdateOperatingPhase,
-  UpdateSidebarCards,
-  UserDataClient,
-} from "../domain/types";
-import { encryptTaxIdFactory } from "../domain/user/encryptTaxIdFactory";
 
 const getTokenFromHeader = (req: Request): string => {
   if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {

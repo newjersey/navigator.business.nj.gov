@@ -1,5 +1,5 @@
+import { v1UserData } from "@db/migrations/v1_add_task_progress";
 import { randomInt } from "@shared/intHelpers";
-import { v1UserData } from "./v1_add_task_progress";
 
 export interface v2UserData {
   user: v2BusinessUser;

@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { convertIndustryToLicenseType } from "@domain/license-status/convertIndustryToLicenseType";
+import { SearchLicenseStatus, UpdateLicenseStatus } from "@domain/types";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { LicenseStatusResult, NameAndAddress } from "@shared/license";
 import { modifyCurrentBusiness } from "@shared/test";
 import { TaskProgress, UserData } from "@shared/userData";
-import { convertIndustryToLicenseType } from "../license-status/convertIndustryToLicenseType";
-import { SearchLicenseStatus, UpdateLicenseStatus } from "../types";
 
 const update = (
   userData: UserData,

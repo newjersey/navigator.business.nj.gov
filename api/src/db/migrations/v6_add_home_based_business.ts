@@ -1,4 +1,4 @@
-import { v5UserData } from "./v5_add_liquor_license";
+import { v5UserData } from "@db/migrations/v5_add_liquor_license";
 
 export interface v6UserData {
   user: v6BusinessUser;

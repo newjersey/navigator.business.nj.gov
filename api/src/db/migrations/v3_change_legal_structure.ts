@@ -1,5 +1,5 @@
+import { v2LegalStructure, v2UserData } from "@db/migrations/v2_form_data_to_onboarding_data";
 import { randomInt } from "@shared/intHelpers";
-import { v2LegalStructure, v2UserData } from "./v2_form_data_to_onboarding_data";
 
 export interface v3UserData {
   user: v3BusinessUser;

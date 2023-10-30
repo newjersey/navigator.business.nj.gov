@@ -1,4 +1,4 @@
-import { v89UserData } from "./v89_tax_filing_registered_bool";
+import { v89UserData } from "@db/migrations/v89_tax_filing_registered_bool";
 
 export interface v90UserData {
   user: v90BusinessUser;

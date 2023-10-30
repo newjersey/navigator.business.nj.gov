@@ -1,4 +1,4 @@
-import { v14UserData } from "./v14_add_cleaning_aid_industry";
+import { v14UserData } from "@db/migrations/v14_add_cleaning_aid_industry";
 
 export interface v15UserData {
   user: v15BusinessUser;

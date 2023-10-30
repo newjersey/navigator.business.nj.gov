@@ -1,5 +1,5 @@
+import { v94UserData } from "@db/migrations/v94_add_missing_formation_types";
 import { randomInt } from "@shared/intHelpers";
-import { v94UserData } from "./v94_add_missing_formation_types";
 
 export interface v95UserData {
   user: v95BusinessUser;

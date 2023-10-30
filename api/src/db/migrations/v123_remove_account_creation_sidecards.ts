@@ -1,5 +1,8 @@
+import {
+  v122Business,
+  v122UserData,
+} from "@db/migrations/v122_remove_welcome_and_welcomeupandrunning_sidecards";
 import { randomInt } from "@shared/intHelpers";
-import { v122Business, v122UserData } from "./v122_remove_welcome_and_welcomeupandrunning_sidecards";
 
 export interface v123UserData {
   user: v123BusinessUser;

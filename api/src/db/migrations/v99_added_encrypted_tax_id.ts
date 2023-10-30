@@ -1,4 +1,4 @@
-import { v98UserData } from "./v98_add_phase_newly_changed";
+import { v98UserData } from "@db/migrations/v98_add_phase_newly_changed";
 
 export interface v99UserData {
   user: v99BusinessUser;

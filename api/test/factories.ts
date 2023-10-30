@@ -27,8 +27,8 @@ import {
   randomPublicFilingLegalType,
 } from "@shared/test";
 import { UserData } from "@shared/userData";
+import { getRandomDateInBetween, randomElementFromArray } from "@test/helpers";
 import { SelfRegResponse, TaxFilingResult } from "src/domain/types";
-import { getRandomDateInBetween, randomElementFromArray } from "./helpers";
 
 export const generateTaxFilingDates = (numberOfDates: number): string[] => {
   const dateToShortISO = (date: Date): string => {

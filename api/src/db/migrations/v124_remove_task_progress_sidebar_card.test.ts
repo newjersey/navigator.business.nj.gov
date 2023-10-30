@@ -2,8 +2,8 @@ import {
   generateV123Business,
   generateV123Preferences,
   generateV123UserData,
-} from "./v123_remove_account_creation_sidecards";
-import { migrate_v123_to_v124 } from "./v124_remove_task_progress_sidebar_card";
+} from "@db/migrations/v123_remove_account_creation_sidecards";
+import { migrate_v123_to_v124 } from "@db/migrations/v124_remove_task_progress_sidebar_card";
 
 describe("migrate_v123_to_v124", () => {
   it("removes the task-progress card from sidebarCards", () => {

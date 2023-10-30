@@ -1,4 +1,4 @@
-import { v124Business, v124UserData } from "./v124_remove_task_progress_sidebar_card";
+import { v124Business, v124UserData } from "@db/migrations/v124_remove_task_progress_sidebar_card";
 
 export interface v125UserData {
   user: v125BusinessUser;

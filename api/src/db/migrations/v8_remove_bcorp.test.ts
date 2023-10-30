@@ -1,5 +1,5 @@
-import { generateV7OnboardingData, generateV7User, v7UserData } from "./v7_add_license_data";
-import { migrate_v7_to_v8 } from "./v8_remove_bcorp";
+import { generateV7OnboardingData, generateV7User, v7UserData } from "@db/migrations/v7_add_license_data";
+import { migrate_v7_to_v8 } from "@db/migrations/v8_remove_bcorp";
 
 describe("migrate_v7_to_v8", () => {
   const user = generateV7User({});

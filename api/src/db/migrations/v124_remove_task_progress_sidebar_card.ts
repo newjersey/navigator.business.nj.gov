@@ -1,4 +1,4 @@
-import { v123Business, v123UserData } from "./v123_remove_account_creation_sidecards";
+import { v123Business, v123UserData } from "@db/migrations/v123_remove_account_creation_sidecards";
 
 export interface v124UserData {
   user: v124BusinessUser;

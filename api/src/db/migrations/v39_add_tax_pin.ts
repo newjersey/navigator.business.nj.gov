@@ -1,4 +1,4 @@
-import { v38UserData } from "./v38_swap_certification_for_ownership";
+import { v38UserData } from "@db/migrations/v38_swap_certification_for_ownership";
 
 export interface v39UserData {
   user: v39BusinessUser;

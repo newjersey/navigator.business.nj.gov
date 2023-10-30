@@ -1,5 +1,5 @@
+import { v54UserData } from "@db/migrations/v54_add_business_purpose";
 import { randomInt } from "@shared/intHelpers";
-import { v54UserData } from "./v54_add_business_purpose";
 
 export interface v55UserData {
   user: v55BusinessUser;

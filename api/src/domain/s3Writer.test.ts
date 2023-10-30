@@ -1,6 +1,6 @@
+import { saveFileFromUrl } from "@domain/s3Writer";
 import axios from "axios";
 import { createHash } from "node:crypto";
-import { saveFileFromUrl } from "./s3Writer";
 
 jest.mock("axios");
 

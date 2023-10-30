@@ -1,4 +1,4 @@
-import { v45UserData } from "./v45_add_hidden_opportunities_to_preferences";
+import { v45UserData } from "@db/migrations/v45_add_hidden_opportunities_to_preferences";
 
 export interface v46UserData {
   user: v46BusinessUser;

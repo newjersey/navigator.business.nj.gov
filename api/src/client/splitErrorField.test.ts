@@ -1,4 +1,4 @@
-import { splitErrorField } from "./splitErrorField";
+import { splitErrorField } from "@client/splitErrorField";
 
 describe("splitErrorField", () => {
   it("splits on the dot and turns into sentence case", () => {

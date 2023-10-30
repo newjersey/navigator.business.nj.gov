@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as AWSCrypto from "@aws-crypto/client-node";
+import { AWSEncryptionDecryptionFactory } from "@client/AwsEncryptionDecryptionFactory";
+import { EncryptionDecryptionClient } from "@domain/types";
 import { TextEncoder } from "node:util";
-import { EncryptionDecryptionClient } from "../domain/types";
-import { AWSEncryptionDecryptionFactory } from "./AwsEncryptionDecryptionFactory";
 
 type AWSMockContext = {
   stage: string;

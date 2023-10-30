@@ -1,5 +1,5 @@
+import { v60UserData } from "@db/migrations/v60_add_llp_suffix";
 import { randomInt } from "@shared/intHelpers";
-import { v60UserData } from "./v60_add_llp_suffix";
 
 export interface v61UserData {
   user: v61BusinessUser;

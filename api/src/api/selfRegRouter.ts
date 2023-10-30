@@ -1,8 +1,8 @@
+import { SelfRegClient, UserDataClient } from "@domain/types";
 import { UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { Router } from "express";
 import { createHmac } from "node:crypto";
-import { SelfRegClient, UserDataClient } from "../domain/types";
 
 export const selfRegRouterFactory = (
   userDataClient: UserDataClient,
