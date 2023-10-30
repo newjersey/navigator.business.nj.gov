@@ -266,18 +266,6 @@ describe("buildUserRoadmap", () => {
       await buildUserRoadmap(generateStartingProfile({ legalStructureId: "nonprofit" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("nonprofit");
     });
-
-    it("adds nonprofit-legacy when nonprofit feature flag is false", async () => {
-      process.env.FEATURE_BUSINESS_NP = "false";
-      await buildUserRoadmap(generateStartingProfile({ legalStructureId: "nonprofit" }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("nonprofit-legacy");
-    });
-
-    it("does not add nonprofit-legacy when nonprofit feature flag is true", async () => {
-      process.env.FEATURE_BUSINESS_NP = "true";
-      await buildUserRoadmap(generateStartingProfile({ legalStructureId: "nonprofit" }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("nonprofit-legacy");
-    });
   });
 
   describe("industry", () => {

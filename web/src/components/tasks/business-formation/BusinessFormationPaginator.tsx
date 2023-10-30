@@ -32,11 +32,7 @@ import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
-interface Props {
-  searchOnly?: boolean;
-}
-
-export const BusinessFormationPaginator = (props: Props): ReactElement => {
+export const BusinessFormationPaginator = (): ReactElement => {
   const { updateQueue, business } = useUserData();
   const { state, setStepIndex, setHasBeenSubmitted, setFormationFormData, setFieldsInteracted } =
     useContext(BusinessFormationContext);
@@ -342,7 +338,6 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   };
 
   const displayButtons = (): ReactNode => {
-    if (props.searchOnly) return null;
     return (
       <div className="margin-top-2 ">
         <div className="bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg">
@@ -496,15 +491,13 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     <>
       <div ref={errorAlertRef}>{getErrorComponent()}</div>
       <div className="margin-top-3" ref={stepperRef}>
-        {!props.searchOnly && (
-          <HorizontalStepper
-            steps={stepStates}
-            currentStep={state.stepIndex}
-            onStepClicked={(step: number): void => {
-              onMoveToStep(step, { moveType: "STEPPER" });
-            }}
-          />
-        )}
+        <HorizontalStepper
+          steps={stepStates}
+          currentStep={state.stepIndex}
+          onStepClicked={(step: number): void => {
+            onMoveToStep(step, { moveType: "STEPPER" });
+          }}
+        />
       </div>
       <div className="fg1 flex flex-column space-between">
         {BusinessFormationSteps[state.stepIndex].component}

@@ -55,10 +55,7 @@ const TaskPage = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const renderNextAndPreviousButtons = (): ReactElement | undefined => {
-    const isValidLegalStructure = allowFormation(
-      business?.profileData.legalStructureId,
-      business?.profileData.businessPersona
-    );
+    const isValidLegalStructure = allowFormation(business?.profileData.legalStructureId);
     if (props.task.id === formationTaskId && isValidLegalStructure) {
       return undefined;
     }
@@ -127,12 +124,6 @@ const TaskPage = (props: Props): ReactElement => {
               <BusinessFormation
                 task={getTaskFromRoadmap(roadmap, props.task.id)}
                 displayContent={props.displayContent}
-                searchOnly={
-                  !allowFormation(
-                    business?.profileData.legalStructureId,
-                    business?.profileData.businessPersona
-                  )
-                }
               />
             ),
             [formationTaskId]: (
