@@ -1,0 +1,79 @@
+.anchor-element-text-white-override > p > a,
+.anchor-element-text-white-override > p > a:visited,
+.anchor-element-text-white-override > p > a:focus,
+.anchor-element-text-white-override > p > a:hover,
+.anchor-element-text-white-override > p > a:active {
+  color: $white !important;
+}
+
+.usa-link:visited,
+.usa-prose > a:visited {
+  color: $accent-cool-darkest !important;
+}
+
+.usa-link:visited,
+.usa-prose > a:visited {
+  color: $accent-cool-darkest !important;
+}
+
+.usa-button--unstyled:focus,
+.usa-link:focus,
+.usa-prose > a:focus,
+.usa-prose a:focus {
+  outline: 0.25rem solid $accent-cool-darkest !important;
+}
+
+.usa-link:hover,
+.usa-prose > a:hover {
+  color: $accent-cool-more-dark !important;
+}
+
+.usa-link:active,
+.usa-prose > a:active {
+  color: $accent-cool-darkest !important;
+}
+
+.skip-link {
+  background: $white;
+  font-weight: 700;
+  left: 50%;
+  padding: 0.25rem;
+  position: absolute;
+  transform: translateY(-100%);
+  transition: transform 0.3s;
+  z-index: 99999;
+}
+
+.skip-link:focus,
+.skip-link:focus-within {
+  transform: translateY(0%);
+}
+
+.usa-link-hover-override:hover {
+  .icon-green-bg-color-hover {
+    background-color: $primary-dark;
+  }
+
+  .text-green-color-hover {
+    color: $primary-dark;
+  }
+
+  .icon-blue-bg-color-hover {
+    background-color: $accent-cool-darkest;
+  }
+
+  .text-blue-color-hover {
+    color: $accent-cool-darkest;
+  }
+}
+
+.usa-alert__text a,
+.usa-link,
+.usa-prose > a,
+p > a {
+  color: $accent-cool-darkest !important;
+
+  @media all and (max-width: $sm) {
+    word-wrap: anywhere !important;
+  }
+}

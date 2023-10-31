@@ -7,7 +7,8 @@ export type PrimaryButtonColors =
   | "accent-cool-darker"
   | "accent-cooler"
   | "info"
-  | "success-extra-light";
+  | "success-extra-light"
+  | "white";
 
 type OmitGenericButtonProps = Omit<
   GenericButtonProps,
@@ -25,6 +26,7 @@ const colors = {
   "accent-cooler": "usa-button btn-accent-cooler",
   info: "usa-button btn-info",
   "success-extra-light": "usa-button btn-success-extra-light",
+  white: "usa-button text-info-darkest btn-white hover:drop-shadow-md",
 };
 
 export const PrimaryButton = forwardRef(function PrimaryButton(

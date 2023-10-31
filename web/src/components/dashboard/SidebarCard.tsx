@@ -25,6 +25,7 @@ export const SidebarCard = (props: Props): ReactElement => {
             card={props.card}
             headerText={props.card.header}
             bodyText={props.card.contentMd}
+            preBodySpanButtonText={props.card.preBodySpanButtonText}
           />
         ),
       })}

@@ -1,22 +1,18 @@
 // Drop Shadows
 
-$dropShadows: xs 4px 8px $base-extra-light, sm 6px 12px $base-lighter, md 8px 16px $base-lighter,
-  lg 10px 20px $base-lighter, xl 12px 24px $base-lighter;
+$dropShadows: xs 4px 8px, sm 6px 12px, md 8px 16px, lg 10px 20px, xl 12px 24px;
 
 .drop-shadow-none {
   box-shadow: 0 !important;
-  border: 1px solid $base-light;
 }
 
-@each $name, $y, $blur, $color, $borderColor in $dropShadows {
+@each $name, $y, $blur in $dropShadows {
   .drop-shadow-#{$name} {
     box-shadow: 0 $y $blur rgba(0, 0, 0, 0.1);
-    border: 1px solid $borderColor;
   }
 
   .drop-shadow-#{$name}-darker {
     box-shadow: $y $y $blur rgba(0, 0, 0, 0.25);
-    border: 1px solid $borderColor;
   }
 
   .hover\:drop-shadow-#{$name} {

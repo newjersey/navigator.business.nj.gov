@@ -24,6 +24,13 @@ PrimaryColor.args = {
   children: "button",
 };
 
+export const PrimaryWhiteColor = Template.bind({});
+
+PrimaryWhiteColor.args = {
+  isColor: "white",
+  children: "button",
+};
+
 export const IconRight = Template.bind({});
 
 IconRight.args = {
