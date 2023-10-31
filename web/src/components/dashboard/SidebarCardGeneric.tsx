@@ -47,11 +47,11 @@ export const SidebarCardGeneric = (props: Props): ReactElement => {
   return (
     <>
       <div
-        className={`radius-md margin-bottom-3 ${sideBarCardGradientBackground[props.card.id]}`}
+        className={`padding-3 radius-md margin-bottom-3 ${sideBarCardGradientBackground[props.card.id]}`}
         {...{ "data-testid": props.card.id }}
       >
         {props.headerText && (
-          <div className="padding-left-205 padding-top-105 radius-top-md">
+          <div className="radius-top-md">
             <div className="flex flex-justify">
               <h3 className="margin-bottom-0 text-white">
                 <span>
@@ -67,7 +67,7 @@ export const SidebarCardGeneric = (props: Props): ReactElement => {
           </div>
         )}
         <div
-          className={`padding-205 text-base radius-bottom-md text-white ${
+          className={`padding-top-205 text-base radius-bottom-md text-white ${
             !props.card.header && "radius-top-md"
           }`}
         >
