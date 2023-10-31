@@ -1,3 +1,13 @@
+# [5.35.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.34.1...v5.35.0) (2023-10-31)
+
+
+### Features
+
+* [[#185151322](https://github.com/newjersey/navigator.business.nj.gov/issues/185151322)] support CTA dropdowns as well as buttons for tasks with post-onboarding ([b3cd95e](https://github.com/newjersey/navigator.business.nj.gov/commit/b3cd95ed8bb192414956bea6937af47d49b2c055))
+* [[#185151322](https://github.com/newjersey/navigator.business.nj.gov/issues/185151322)] support CTA dropdowns as well as buttons for tasks with post-onboarding ([539f051](https://github.com/newjersey/navigator.business.nj.gov/commit/539f051e25297ffd4c1667b1fd168f78878d62a3))
+* [[#185681031](https://github.com/newjersey/navigator.business.nj.gov/issues/185681031)] added note alert when businesses formed outside the Navigator in profile ([2a5e425](https://github.com/newjersey/navigator.business.nj.gov/commit/2a5e425f03f8bd7d93315ce02a77a04803ef20fc))
+* [[#186352435](https://github.com/newjersey/navigator.business.nj.gov/issues/186352435)] Removed Note Alert's special smaller border and border right props ([5c7a3f0](https://github.com/newjersey/navigator.business.nj.gov/commit/5c7a3f0e776ba0003c8ea1ff1044c9751c769a96))
+
 ## [5.34.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.34.0...v5.34.1) (2023-10-26)
 
 
