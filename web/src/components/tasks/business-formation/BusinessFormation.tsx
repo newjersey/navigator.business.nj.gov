@@ -78,8 +78,8 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const isForeign = useMemo(() => legalStructureId.includes(foreignLegalTypePrefix), [legalStructureId]);
 
   const isValidLegalStructure = useMemo(
-    () => allowFormation(business?.profileData.legalStructureId),
-    [business?.profileData.legalStructureId]
+    () => allowFormation(business?.profileData.legalStructureId, business?.profileData.businessPersona),
+    [business?.profileData.legalStructureId, business?.profileData.businessPersona]
   );
 
   const getBusinessStartDate = (date: string | undefined, legalType: FormationLegalType): string => {

@@ -55,7 +55,10 @@ const TaskPage = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const renderNextAndPreviousButtons = (): ReactElement | undefined => {
-    const isValidLegalStructure = allowFormation(business?.profileData.legalStructureId);
+    const isValidLegalStructure = allowFormation(
+      business?.profileData.legalStructureId,
+      business?.profileData.businessPersona
+    );
     if (props.task.id === formationTaskId && isValidLegalStructure) {
       return undefined;
     }
