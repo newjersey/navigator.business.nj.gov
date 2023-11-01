@@ -1,13 +1,7 @@
 {
-  "displayname": "cosmetology",
   "naicsCodes": "812112, 812199, 812113, 611511, 812111",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "other-services",
-  "industryOnboardingQuestions": {
-    "canBeReseller": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": [],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -56,12 +50,22 @@
     },
     {
       "step": 4,
-      "weight": 9,
+      "weight": 10,
       "licenseTask": "individual-staff-licenses-cosmetology",
       "required": true
+    },
+    {
+      "step": 4,
+      "licenseTask": "cosmetology-license",
+      "weight": 12
     }
   ],
   "name": "Cosmetology",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "cosmetology",
+  "industryOnboardingQuestions": {
+    "canBeReseller": true
+  },
   "modifications": [
     {
       "taskToReplaceFilename": "check-site-requirements",
@@ -76,6 +80,7 @@
       "replaceWithFilename": "evaluate-your-location-cosmetology"
     }
   ],
+  "isEnabled": true,
   "additionalSearchTerms": "cosmetics, beautician, aesthetician, hair salon, barber shop, hair stylist, nail salon, skin care, hair braiding, makeup, studio",
   "id": "cosmetology",
   "licenseType": "Cosmetology and Hairstyling",
