@@ -546,7 +546,7 @@ jobs:
       - deploy-content
     environment:
       STAGE: content
-      MYNJ_PROFILE_LINK: https://myt1.state.nj.us/portal/Desktop
+      MYNJ_PROFILE_LINK: https://myt1.nj.gov/portal/Desktop
 
   deploy-accessibility-testing:
     docker:
@@ -562,7 +562,7 @@ jobs:
       - deploy-accessibility-testing
     environment:
       STAGE: testing
-      MYNJ_PROFILE_LINK: https://myt1.state.nj.us/portal/Desktop
+      MYNJ_PROFILE_LINK: https://myt1.nj.gov/portal/Desktop
 
   deploy-dev:
     docker:
@@ -579,7 +579,7 @@ jobs:
       - store-deploy-cache
     environment:
       STAGE: dev
-      MYNJ_PROFILE_LINK: https://myt1.state.nj.us/portal/Desktop
+      MYNJ_PROFILE_LINK: https://myt1.nj.gov/portal/Desktop
 
   deploy-staging:
     docker:
@@ -592,7 +592,7 @@ jobs:
       - deploy
     environment:
       STAGE: staging
-      MYNJ_PROFILE_LINK: https://myt1.state.nj.us/portal/Desktop
+      MYNJ_PROFILE_LINK: https://myt1.nj.gov/portal/Desktop
 
   deploy-production:
     docker:
@@ -605,7 +605,8 @@ jobs:
       - deploy
     environment:
       STAGE: prod
-      MYNJ_PROFILE_LINK: https://my.state.nj.us/portal/Desktop
+      MYNJ_PROFILE_LINK: https://my.state.nj.us/portal/Desktop # This needs to change when the production SSO/SLO links no longer redirect
+      # MYNJ_PROFILE_LINK: https://my.nj.gov/portal/Desktop
 
   integration-tests:
     parameters:
