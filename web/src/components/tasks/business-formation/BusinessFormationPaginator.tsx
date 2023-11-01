@@ -1,7 +1,7 @@
 import { AutosaveSpinner } from "@/components/AutosaveSpinner";
 import { FieldEntryAlert } from "@/components/FieldEntryAlert";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { HelpButton } from "@/components/njwds-extended/HelpButton";
+import { FormationHelpButton } from "@/components/njwds-extended/FormationHelpButton";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
@@ -354,7 +354,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
           </div>
           <ReverseOrderInMobile>
             <>
-              <HelpButton />
+              <FormationHelpButton />
               {shouldDisplayPreviousButton() && (
                 <div className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-105">
                   <SecondaryButton

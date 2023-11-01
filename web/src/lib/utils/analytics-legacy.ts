@@ -114,7 +114,8 @@ export type LegacyEventCategory =
   | "for_you_card_hide_button"
   | "for_you_card_unhide_button"
   | "quick_action_button"
-  | "skip_to_main_content_button";
+  | "skip_to_main_content_button"
+  | "business_formation_help_button";
 
 export type LegacyEventAction =
   | "click"

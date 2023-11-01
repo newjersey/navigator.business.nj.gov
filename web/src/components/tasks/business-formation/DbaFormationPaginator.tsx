@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
-import { HelpButton } from "@/components/njwds-extended/HelpButton";
+import { FormationHelpButton } from "@/components/njwds-extended/FormationHelpButton";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
@@ -171,14 +171,14 @@ export const DbaFormationPaginator = (): ReactElement => {
     if (state.stepIndex === 0 && nameIsAvailable) {
       return (
         <ButtonWrapper>
-          <HelpButton />
+          <FormationHelpButton />
           <ForwardButton />
         </ButtonWrapper>
       );
     } else if (state.stepIndex === 1) {
       return (
         <ButtonWrapper>
-          <HelpButton />
+          <FormationHelpButton />
           <BackButton />
           <ForwardButton />
         </ButtonWrapper>
@@ -190,7 +190,7 @@ export const DbaFormationPaginator = (): ReactElement => {
           text={state.dbaContent.Authorize.callToActionText}
           onClick={(): void => setShowCtaModal(true)}
         >
-          <HelpButton />
+          <FormationHelpButton />
           <BackButton />
         </TaskCTA>
       );

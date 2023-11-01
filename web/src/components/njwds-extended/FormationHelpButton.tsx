@@ -1,9 +1,10 @@
 import { ButtonIcon } from "@/components/ButtonIcon";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import analytics from "@/lib/utils/analytics";
 import { ReactElement } from "react";
 
-export const HelpButton = (): ReactElement => {
+export const FormationHelpButton = (): ReactElement => {
   const { Config } = useConfig();
 
   return (
@@ -15,6 +16,7 @@ export const HelpButton = (): ReactElement => {
         isIntercomEnabled
         isRightMarginRemoved
         dataTestid={"help-button"}
+        onClick={(): void => analytics.event.business_formation_help_button.click.open_live_chat()}
       >
         <ButtonIcon svgFilename="help-circle-blue" sizePx="25px" />
         {Config.formation.general.helpButtonText}
