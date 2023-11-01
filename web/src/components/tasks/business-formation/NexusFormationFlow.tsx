@@ -59,7 +59,7 @@ export const NexusFormationFlow = (): ReactElement => {
   };
 
   if (state.stepIndex > 0 && isNotDba) {
-    if (allowFormation(business.profileData.legalStructureId)) {
+    if (allowFormation(business.profileData.legalStructureId, business.profileData.businessPersona)) {
       return <BusinessFormationPaginator />;
     } else {
       return (

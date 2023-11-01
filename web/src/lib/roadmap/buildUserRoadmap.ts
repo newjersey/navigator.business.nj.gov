@@ -1,4 +1,3 @@
-import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { getIsApplicableToFunctionByFieldName } from "@/lib/domain-logic/essentialQuestions";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { getNonEssentialQuestionAddOn } from "@/lib/domain-logic/getNonEssentialQuestionAddOn";
@@ -215,11 +214,6 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
 
   if (profileData.legalStructureId === "nonprofit") {
     addOns.push("nonprofit");
-
-    const allowNonprofitFormation = allowFormation(profileData.legalStructureId);
-    if (!allowNonprofitFormation) {
-      addOns.push("nonprofit-legacy");
-    }
   }
   return addOns;
 };
