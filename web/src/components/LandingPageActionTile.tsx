@@ -38,7 +38,7 @@ export const LandingPageActionTile = (props: Props): ReactElement => {
         onClick={props.onClick}
         tabIndex={props.isActive ? undefined : -1}
       >
-        <img src={props.imgPath} alt="" />
+        <img src={props.imgPath} alt="" role="presentation" />
         {setTileText(props, isMobile)}
       </button>
     </div>

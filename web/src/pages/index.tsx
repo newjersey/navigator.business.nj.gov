@@ -162,7 +162,7 @@ const Home = (props: Props): ReactElement => {
               } text-accent-cool-darker`}
             >
               <div className="margin-x-3">
-                <img className="" src="/img/Landing-documents.svg" alt="documents" />
+                <img className="" src="/img/Landing-documents.svg" alt="" role="presentation" />
                 <div className="text-accent-cool-darker width-card margin-top-2">
                   {landingPageConfig.section4FirstIconText}
                 </div>
@@ -173,7 +173,7 @@ const Home = (props: Props): ReactElement => {
                 }`}
               />
               <div className="margin-x-3">
-                <img className="" src="/img/Landing-checkmarks.svg" alt="checklist" />
+                <img className="" src="/img/Landing-checkmarks.svg" alt="" role="presentation" />
                 <div className="text-accent-cool-darker width-card margin-top-2">
                   {landingPageConfig.section4SecondIconText}
                 </div>
@@ -182,7 +182,7 @@ const Home = (props: Props): ReactElement => {
                 className={`arrow ${isDesktopAndUp ? "left width-15 height-10" : "up height-5 margin-y-3"} `}
               />{" "}
               <div className="margin-x-3">
-                <img className="" src="/img/Landing-building.svg" alt="government building" />
+                <img className="" src="/img/Landing-building.svg" alt="" role="presentation" />
                 <div className="text-accent-cool-darker width-card margin-top-2">
                   {landingPageConfig.section4ThirdIconText}
                 </div>
@@ -196,20 +196,20 @@ const Home = (props: Props): ReactElement => {
             landingPageConfig.section5FirstHeaderText,
             landingPageConfig.section5FirstSupportingText,
             "/img/Landing-step-by-step.svg",
-            "step by step guide"
+            "Example step-by-step guide from the My Profile application to check business name availability, get your tax registration from the IRS, and more. A progress bar that shows completion of business formation."
           )}
           {renderTwoColumnRow(
             landingPageConfig.section5SecondHeaderText,
             landingPageConfig.section5SecondSupportingText,
             "/img/Landing-funding-and-certifications.svg",
-            "funding and certifications opportunities",
+            "Two example opportunity cards from the My Profile application as examples: small business lease grant funding details and veteran-owned business certification details.",
             true
           )}
           {renderTwoColumnRow(
             landingPageConfig.section5ThirdHeaderText,
             landingPageConfig.section5ThirdSupportingText,
             "/img/Landing-and-more.svg",
-            "and more tools and features"
+            "Example of the calendar in the My Profile application with upcoming due dates for annual report and license renewal. Example of progress bar with the heading to check available names and form your business."
           )}
         </section>
 
