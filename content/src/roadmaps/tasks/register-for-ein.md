@@ -17,8 +17,6 @@ An `Employer Identification Number (EIN)|ein` is essentially a Social Security N
 
 - - -
 
-
-
 ### Application Requirements
 
 * Your business name
