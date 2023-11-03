@@ -4,7 +4,7 @@ notesMd: "Draft:
   ic/edit#heading=h.5wd6u8mmd0hc"
 filename: registry-update-brc-amendment
 urlSlug: registry-update-brc-amendment
-name: Update Your New Jersey Business Registry Account
+name: Update Your Business Registration Certificate and/or Registry Account
 id: registry-update-brc-amendment
 ---
 
