@@ -66,7 +66,7 @@ export const Hero = (props: Props): ReactElement => {
             </div>
 
             <div className="desktop:grid-col-5 order-first desktop:order-last padding-left-10">
-              <img className="width-100" src="/img/Hero-img-climb.svg" alt="Hero People Climbing" />
+              <img className="width-100" src="/img/Hero-img-climb.svg" alt="" role="presentation" />
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@ export const Hero = (props: Props): ReactElement => {
                   isDesktopAndUp ? "width-80 margin-top-15" : "maxw-tablet margin-auto margin-top-205"
                 } padding-x-4 tablet:padding-x-10 desktop:padding-x-0`}
               >
-                <img src="/img/Landing-Hero-people.png" alt="People" />
+                <img src="/img/Landing-Hero-people.png" alt="" />
               </div>
             </div>
             <div className="desktop:grid-col-7">
@@ -152,7 +152,7 @@ export const Hero = (props: Props): ReactElement => {
                   : "maxw-tablet margin-auto padding-x-4 tablet:padding-x-10 desktop:padding-x-0 margin-top-neg-15"
               } `}
             >
-              <img src="/img/Landing-Hero-people2.png" alt="People" />
+              <img src="/img/Landing-Hero-people2.png" alt="" />
             </div>
           </div>
         </div>
