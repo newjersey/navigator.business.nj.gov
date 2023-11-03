@@ -3709,7 +3709,6 @@ collections:
                 }
               - { label: Status - Withdrawn, name: withdrawnPermitStatusText, widget: string }
               - { label: Status - Draft, name: draftStatusText, widget: string }
-              - { label: Status - Draft, name: draftStatusText, widget: string }
               - { label: Status - Submitted, name: submittedStatusText, widget: string }
               - { label: Status - Under Internal Review, name: underInternalReviewStatusText, widget: string }
               - { label: Status - Special Review, name: specialReviewStatusText, widget: string }
