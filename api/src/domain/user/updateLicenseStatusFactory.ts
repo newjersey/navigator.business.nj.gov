@@ -1,16 +1,22 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { convertIndustryToLicenseType } from "@domain/license-status/convertIndustryToLicenseType";
-import { SearchLicenseStatus, UpdateLicenseStatus } from "@domain/types";
+import {
+  MULTIPLE_MAIN_APPS_ERROR,
+  NO_MAIN_APPS_ERROR,
+  NO_MATCH_ERROR,
+  SearchLicenseStatusFactory,
+  UpdateLicenseStatus,
+} from "@domain/types";
 import { getCurrentDateISOString } from "@shared/dateHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
-import { LicenseStatusResult, NameAndAddress } from "@shared/license";
+import { LicenseSearchNameAndAddress, LicenseStatusResult } from "@shared/license";
 import { modifyCurrentBusiness } from "@shared/test";
 import { TaskProgress, UserData } from "@shared/userData";
 
 const update = (
   userData: UserData,
   args: {
-    nameAndAddress: NameAndAddress;
+    nameAndAddress: LicenseSearchNameAndAddress;
     taskStatus: TaskProgress;
     licenseStatusResult: LicenseStatusResult;
     completed: boolean;
@@ -41,9 +47,12 @@ const update = (
   }));
 };
 
-export const updateLicenseStatusFactory = (searchLicenseStatus: SearchLicenseStatus): UpdateLicenseStatus => {
-  return async (userData: UserData, nameAndAddress: NameAndAddress): Promise<UserData> => {
+export const updateLicenseStatusFactory = (
+  searchLicenseStatusFactory: SearchLicenseStatusFactory
+): UpdateLicenseStatus => {
+  return async (userData: UserData, nameAndAddress: LicenseSearchNameAndAddress): Promise<UserData> => {
     const licenseType = convertIndustryToLicenseType(getCurrentBusiness(userData).profileData.industryId);
+    const searchLicenseStatus = searchLicenseStatusFactory(licenseType);
     return searchLicenseStatus(nameAndAddress, licenseType)
       .then((licenseStatusResult: LicenseStatusResult) => {
         let taskStatus: TaskProgress = "NOT_STARTED";
@@ -61,7 +70,11 @@ export const updateLicenseStatusFactory = (searchLicenseStatus: SearchLicenseSta
         });
       })
       .catch(async (error: Error) => {
-        if (error.message === "NO_MATCH") {
+        if (
+          error.message === NO_MATCH_ERROR ||
+          error.message === NO_MAIN_APPS_ERROR ||
+          error.message === MULTIPLE_MAIN_APPS_ERROR
+        ) {
           return update(userData, {
             nameAndAddress: nameAndAddress,
             taskStatus: "NOT_STARTED",

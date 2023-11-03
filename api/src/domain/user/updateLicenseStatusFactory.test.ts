@@ -1,13 +1,18 @@
-import { UpdateLicenseStatus } from "@domain/types";
+import {
+  MULTIPLE_MAIN_APPS_ERROR,
+  NO_MAIN_APPS_ERROR,
+  NO_MATCH_ERROR,
+  UpdateLicenseStatus,
+} from "@domain/types";
 import { updateLicenseStatusFactory } from "@domain/user/updateLicenseStatusFactory";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import {
   generateBusiness,
   generateLicenseData,
+  generateLicenseSearchNameAndAddress,
   generateLicenseStatusItem,
   generateLicenseStatusResult,
-  generateNameAndAddress,
   generateProfileData,
   generateUserDataForBusiness,
   modifyCurrentBusiness,
@@ -17,15 +22,17 @@ import { UserData } from "@shared/userData";
 describe("updateLicenseStatus", () => {
   let updateLicenseStatus: UpdateLicenseStatus;
 
+  let stubSearchLicenseStatusFactory: jest.Mock;
   let stubSearchLicenseStatus: jest.Mock;
   let userData: UserData;
-  const nameAndAddress = generateNameAndAddress({});
+  const nameAndAddress = generateLicenseSearchNameAndAddress({});
 
   beforeEach(async () => {
     jest.resetAllMocks();
     stubSearchLicenseStatus = jest.fn();
-    updateLicenseStatus = updateLicenseStatusFactory(stubSearchLicenseStatus);
-
+    stubSearchLicenseStatusFactory = jest.fn();
+    updateLicenseStatus = updateLicenseStatusFactory(stubSearchLicenseStatusFactory);
+    stubSearchLicenseStatusFactory.mockImplementation(() => stubSearchLicenseStatus);
     userData = generateUserDataForBusiness(
       generateBusiness({
         profileData: generateProfileData({
@@ -40,7 +47,6 @@ describe("updateLicenseStatus", () => {
 
   it("searches for license status with criteria and license type", async () => {
     stubSearchLicenseStatus.mockResolvedValue(generateLicenseStatusResult({}));
-
     await updateLicenseStatus(userData, nameAndAddress);
     expect(stubSearchLicenseStatus).toHaveBeenCalledWith(
       {
@@ -84,32 +90,35 @@ describe("updateLicenseStatus", () => {
     expect(resultCurrentBusiness.licenseData?.items).toEqual(checklistItems);
   });
 
-  it("updates the license task status to NOT_STARTED & user license data when NO MATCH", async () => {
-    stubSearchLicenseStatus.mockRejectedValue(new Error("NO_MATCH"));
-    const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
-    const resultCurrentBusiness = getCurrentBusiness(resultUserData);
+  it.each([NO_MATCH_ERROR, NO_MAIN_APPS_ERROR, MULTIPLE_MAIN_APPS_ERROR])(
+    "updates the license task status to NOT_STARTED & user license data when %s error",
+    async (error: string) => {
+      stubSearchLicenseStatus.mockRejectedValue(new Error(error));
+      const resultUserData = await updateLicenseStatus(userData, nameAndAddress);
+      const resultCurrentBusiness = getCurrentBusiness(resultUserData);
 
-    expect(resultCurrentBusiness.licenseData?.nameAndAddress).toEqual(nameAndAddress);
-    expect(resultCurrentBusiness.licenseData?.completedSearch).toEqual(false);
-    expect(
-      parseDate(resultCurrentBusiness.licenseData?.lastUpdatedISO as string).isSame(
-        getCurrentDate(),
-        "minute"
-      )
-    ).toEqual(true);
-    expect(resultCurrentBusiness.licenseData?.status).toEqual("UNKNOWN");
-    expect(resultCurrentBusiness.licenseData?.items).toEqual([]);
+      expect(resultCurrentBusiness.licenseData?.nameAndAddress).toEqual(nameAndAddress);
+      expect(resultCurrentBusiness.licenseData?.completedSearch).toEqual(false);
+      expect(
+        parseDate(resultCurrentBusiness.licenseData?.lastUpdatedISO as string).isSame(
+          getCurrentDate(),
+          "minute"
+        )
+      ).toEqual(true);
+      expect(resultCurrentBusiness.licenseData?.status).toEqual("UNKNOWN");
+      expect(resultCurrentBusiness.licenseData?.items).toEqual([]);
 
-    expect(resultCurrentBusiness.taskProgress["apply-for-shop-license"]).toEqual("NOT_STARTED");
-    expect(resultCurrentBusiness.taskProgress["register-consumer-affairs"]).toEqual("NOT_STARTED");
-    expect(resultCurrentBusiness.taskProgress["pharmacy-license"]).toEqual("NOT_STARTED");
-    expect(resultCurrentBusiness.taskProgress["license-accounting"]).toEqual("NOT_STARTED");
-    expect(resultCurrentBusiness.taskProgress["license-massage-therapy"]).toEqual("NOT_STARTED");
-    expect(resultCurrentBusiness.taskProgress["moving-company-license"]).toEqual("NOT_STARTED");
-    expect(resultCurrentBusiness.taskProgress["architect-license"]).toEqual("NOT_STARTED");
-    expect(resultCurrentBusiness.taskProgress["hvac-license"]).toEqual("NOT_STARTED");
-    expect(resultCurrentBusiness.taskProgress["appraiser-license"]).toEqual("NOT_STARTED");
-  });
+      expect(resultCurrentBusiness.taskProgress["apply-for-shop-license"]).toEqual("NOT_STARTED");
+      expect(resultCurrentBusiness.taskProgress["register-consumer-affairs"]).toEqual("NOT_STARTED");
+      expect(resultCurrentBusiness.taskProgress["pharmacy-license"]).toEqual("NOT_STARTED");
+      expect(resultCurrentBusiness.taskProgress["license-accounting"]).toEqual("NOT_STARTED");
+      expect(resultCurrentBusiness.taskProgress["license-massage-therapy"]).toEqual("NOT_STARTED");
+      expect(resultCurrentBusiness.taskProgress["moving-company-license"]).toEqual("NOT_STARTED");
+      expect(resultCurrentBusiness.taskProgress["architect-license"]).toEqual("NOT_STARTED");
+      expect(resultCurrentBusiness.taskProgress["hvac-license"]).toEqual("NOT_STARTED");
+      expect(resultCurrentBusiness.taskProgress["appraiser-license"]).toEqual("NOT_STARTED");
+    }
+  );
 
   it("rejects and still updates user license data when generic error", async () => {
     stubSearchLicenseStatus.mockRejectedValue(new Error("some-error"));

@@ -205,6 +205,11 @@ commands:
             echo 'export USE_BASIC_AUTH=$USE_BASIC_AUTH_DEV' >> $BASH_ENV
             echo 'export BASIC_AUTH_USERNAME=$BASIC_AUTH_USERNAME' >> $BASH_ENV
             echo 'export BASIC_AUTH_PASSWORD=$BASIC_AUTH_PASSWORD' >> $BASH_ENV
+            echo 'export DCA_DYNAMICS_ORG_URL_DEV=$DCA_DYNAMICS_ORG_URL' >> $BASH_ENV
+            echo 'export DCA_DYNAMICS_CLIENT_ID_DEV=$DCA_DYNAMICS_CLIENT_ID' >> $BASH_ENV
+            echo 'export DCA_DYNAMICS_SECRET_DEV=$DCA_DYNAMICS_SECRET' >> $BASH_ENV
+            echo 'export DCA_DYNAMICS_TENANT_ID_DEV=$DCA_DYNAMICS_TENANT_ID' >> $BASH_ENV
+            echo 'export FEATURE_DYNAMICS_PUBLIC_MOVERS_DEV=$FEATURE_DYNAMICS_PUBLIC_MOVERS' >> $BASH_ENV
 
   set-cypress-env-vars:
     steps:
@@ -233,6 +238,11 @@ commands:
             echo 'export AWS_CRYPTO_CONTEXT_PURPOSE=$AWS_CRYPTO_CONTEXT_PURPOSE' >> $BASH_ENV
             echo 'export AWS_CRYPTO_CONTEXT_ORIGIN=$AWS_CRYPTO_CONTEXT_ORIGIN' >> $BASH_ENV
             echo 'export DISABLE_GTM=true' >> $BASH_ENV
+            echo 'export DCA_DYNAMICS_ORG_URL_DEV=$DCA_DYNAMICS_ORG_URL' >> $BASH_ENV
+            echo 'export DCA_DYNAMICS_CLIENT_ID_DEV=$DCA_DYNAMICS_CLIENT_ID' >> $BASH_ENV
+            echo 'export DCA_DYNAMICS_SECRET_DEV=$DCA_DYNAMICS_SECRET' >> $BASH_ENV
+            echo 'export DCA_DYNAMICS_TENANT_ID_DEV=$DCA_DYNAMICS_TENANT_ID' >> $BASH_ENV
+            echo 'export FEATURE_DYNAMICS_PUBLIC_MOVERS_DEV=$FEATURE_DYNAMICS_PUBLIC_MOVERS' >> $BASH_ENV
 
   set-staging-env-vars:
     steps:
@@ -272,6 +282,11 @@ commands:
             echo 'export USE_BASIC_AUTH=$USE_BASIC_AUTH_STAGING' >> $BASH_ENV
             echo 'export BASIC_AUTH_USERNAME=$BASIC_AUTH_USERNAME' >> $BASH_ENV
             echo 'export BASIC_AUTH_PASSWORD=$BASIC_AUTH_PASSWORD' >> $BASH_ENV
+            echo 'export DCA_DYNAMICS_ORG_URL_STAGING=$DCA_DYNAMICS_ORG_URL' >> $BASH_ENV
+            echo 'export DCA_DYNAMICS_CLIENT_ID_STAGING=$DCA_DYNAMICS_CLIENT_ID' >> $BASH_ENV
+            echo 'export DCA_DYNAMICS_SECRET_STAGING=$DCA_DYNAMICS_SECRET' >> $BASH_ENV
+            echo 'export DCA_DYNAMICS_TENANT_ID_STAGING=$DCA_DYNAMICS_TENANT_ID' >> $BASH_ENV
+            echo 'export FEATURE_DYNAMICS_PUBLIC_MOVERS_STAGING=$FEATURE_DYNAMICS_PUBLIC_MOVERS' >> $BASH_ENV
 
   set-prod-env-vars:
     steps:
@@ -309,6 +324,11 @@ commands:
             echo 'export AWS_CRYPTO_CONTEXT_PURPOSE=$AWS_CRYPTO_CONTEXT_PURPOSE' >> $BASH_ENV
             echo 'export AWS_CRYPTO_CONTEXT_ORIGIN=$AWS_CRYPTO_CONTEXT_ORIGIN' >> $BASH_ENV
             echo 'export OUTAGE_ALERT_CONFIG_URL=$OUTAGE_ALERT_CONFIG_URL' >> $BASH_ENV
+            echo 'export DCA_DYNAMICS_ORG_URL_PROD=$DCA_DYNAMICS_ORG_URL' >> $BASH_ENV
+            echo 'export DCA_DYNAMICS_CLIENT_ID_PROD=$DCA_DYNAMICS_CLIENT_ID' >> $BASH_ENV
+            echo 'export DCA_DYNAMICS_SECRET_PROD=$DCA_DYNAMICS_SECRET' >> $BASH_ENV
+            echo 'export DCA_DYNAMICS_TENANT_ID_PROD=$DCA_DYNAMICS_TENANT_ID' >> $BASH_ENV
+            echo 'export FEATURE_DYNAMICS_PUBLIC_MOVERS_PROD=$FEATURE_DYNAMICS_PUBLIC_MOVERS' >> $BASH_ENV
 
   set-content-env-vars:
     steps:

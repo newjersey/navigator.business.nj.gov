@@ -20,8 +20,8 @@ import {
   generateBusiness,
   generateFormationData,
   generateFormationFormData,
+  generateLicenseSearchNameAndAddress,
   generateLicenseStatusItem,
-  generateNameAndAddress,
   generateProfileData,
   generateUserDataForBusiness,
   randomPublicFilingLegalType,
@@ -112,7 +112,7 @@ export const generateLicenseEntity = (overrides: Partial<LicenseEntity>): Licens
 
 export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseData => {
   return {
-    nameAndAddress: generateNameAndAddress({}),
+    nameAndAddress: generateLicenseSearchNameAndAddress({}),
     completedSearch: true,
     items: [generateLicenseStatusItem({})],
     status: randomElementFromArray(["PENDING", "ACTIVE", "EXPIRED"]),

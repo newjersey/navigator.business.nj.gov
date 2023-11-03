@@ -61,16 +61,47 @@ const LicenseStatusLookup: Record<LicenseStatus, string> = {
   VOLUNTARY_SURRENDER: Config.licenseSearchTask.voluntarySurrenderPermitStatusText,
   WITHDRAWN: Config.licenseSearchTask.withdrawnPermitStatusText,
   UNKNOWN: "",
+  DRAFT: Config.licenseSearchTask.draftStatusText,
+  SUBMITTED: Config.licenseSearchTask.submittedStatusText,
+  UNDER_INTERNAL_REVIEW: Config.licenseSearchTask.underInternalReviewStatusText,
+  SPECIAL_REVIEW: Config.licenseSearchTask.specialReviewStatusText,
+  PENDING_DEFICIENCIES: Config.licenseSearchTask.pendingDeficienciesStatusText,
+  DEFICIENCIES_SUBMITTED: Config.licenseSearchTask.deficienciesSubmittedStatusText,
+  CHECKLIST_COMPLETED: Config.licenseSearchTask.checklistCompletedStatusText,
+  APPROVED: Config.licenseSearchTask.approvedStatusText,
+  PENDING_RENEWAL: Config.licenseSearchTask.pendingRenewalStatusText,
+  PENDING_REINSTATEMENT: Config.licenseSearchTask.pendingReinstatementStatusText,
+  INACTIVE: Config.licenseSearchTask.inactiveStatusText,
+  ABANDONED: Config.licenseSearchTask.abandonedStatusText,
+  SUSPENDED: Config.licenseSearchTask.suspendedStatusText,
+  REVOKED: Config.licenseSearchTask.revokedStatusText,
 };
 
 export const LicenseStatusReceipt = (props: Props): ReactElement => {
   const [theme, setTheme] = useState<PermitTheme>(pendingPermitTheme);
   const { business } = useUserData();
 
+  const isPending = (licenseStatus: LicenseStatus): boolean => {
+    const pendingStatus: LicenseStatus[] = [
+      "PENDING",
+      "DRAFT",
+      "SUBMITTED",
+      "UNDER_INTERNAL_REVIEW",
+      "SPECIAL_REVIEW",
+      "PENDING_DEFICIENCIES",
+      "DEFICIENCIES_SUBMITTED",
+      "CHECKLIST_COMPLETED",
+      "APPROVED",
+      "PENDING_RENEWAL",
+      "PENDING_REINSTATEMENT",
+    ];
+    return pendingStatus.includes(licenseStatus);
+  };
+
   useEffect(() => {
     if (props.status === "ACTIVE") {
       setTheme(activePermitTheme);
-    } else if (props.status === "PENDING") {
+    } else if (isPending(props.status)) {
       setTheme(pendingPermitTheme);
     } else {
       setTheme(grayPermitTheme);
