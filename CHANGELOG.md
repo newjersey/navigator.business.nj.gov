@@ -1,3 +1,11 @@
+# [5.36.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.35.0...v5.36.0) (2023-11-03)
+
+
+### Features
+
+* [[#185931982](https://github.com/newjersey/navigator.business.nj.gov/issues/185931982)] action card styling updates ([5a7569b](https://github.com/newjersey/navigator.business.nj.gov/commit/5a7569b353ceb484f001e201b8359a28c2363cc9))
+* [[#185931982](https://github.com/newjersey/navigator.business.nj.gov/issues/185931982)] Action card styling updates ([fbde2fd](https://github.com/newjersey/navigator.business.nj.gov/commit/fbde2fd97a057a408813e8ec7423d3532954d37c))
+
 # [5.35.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.34.1...v5.35.0) (2023-10-31)
 
 
