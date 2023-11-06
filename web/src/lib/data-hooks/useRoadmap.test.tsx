@@ -47,6 +47,22 @@ describe("useRoadmap", () => {
     expect(mockBuildUserRoadmap).toHaveBeenCalledWith(profileData);
   });
 
+  it("doesn't rebuild roadmap when there are steps and tasks", () => {
+    const profileData = generateProfileData({});
+    useMockBusiness({ profileData, onboardingFormProgress: "COMPLETED" });
+
+    setupHook(generateRoadmap({ steps: [generateStep({})], tasks: [generateTask({})] }));
+    expect(mockBuildUserRoadmap).not.toHaveBeenCalled();
+  });
+
+  it("rebuilds roadmap when steps and tasks are empty", () => {
+    const profileData = generateProfileData({});
+    useMockBusiness({ profileData, onboardingFormProgress: "COMPLETED" });
+
+    setupHook(generateRoadmap({ steps: [], tasks: [] }));
+    expect(mockBuildUserRoadmap).toHaveBeenCalledTimes(1);
+  });
+
   it("does not build roadmap when user data is defined and form is UNSTARTED", async () => {
     const profileData = generateProfileData({});
     useMockBusiness({ profileData, onboardingFormProgress: "UNSTARTED" });
