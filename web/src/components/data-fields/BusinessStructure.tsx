@@ -33,6 +33,12 @@ export const BusinessStructure = (): ReactElement => {
     return `/tasks/${urlSlug}`;
   }, [roadmap]);
 
+  const getAddOrEdit = (): string => {
+    return state.profileData.legalStructureId ? contentFromConfig.editText : contentFromConfig.addText;
+  };
+
+  const ariaLabel = `${getAddOrEdit()} ${contentFromConfig.header}`;
+
   return (
     <div data-testid="business-structure">
       <div className="flex flex-row flex-align-center">
@@ -42,8 +48,9 @@ export const BusinessStructure = (): ReactElement => {
             className="text-accent-cool-darker margin-left-2"
             href={businessStructureTaskUrl}
             data-testid={"business-structure-task-link"}
+            aria-label={ariaLabel}
           >
-            {state.profileData.legalStructureId ? contentFromConfig.editText : contentFromConfig.addText}
+            {getAddOrEdit()}
           </a>
         )}
       </div>

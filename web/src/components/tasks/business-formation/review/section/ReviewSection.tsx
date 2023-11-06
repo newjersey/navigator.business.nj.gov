@@ -27,7 +27,13 @@ export const ReviewSection = (props: Props): ReactElement => {
           <h2>{props.stepName}</h2>
         </div>
         <div className="margin-left-2">
-          <UnStyledButton style="default" onClick={onClick} isUnderline dataTestid={props.testId}>
+          <UnStyledButton
+            style="default"
+            onClick={onClick}
+            isUnderline
+            dataTestid={props.testId}
+            ariaLabel={`${Config.formation.general.editButtonText} ${props.stepName}`}
+          >
             {Config.formation.general.editButtonText}
           </UnStyledButton>
         </div>

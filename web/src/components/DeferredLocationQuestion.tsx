@@ -69,13 +69,7 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
             {Config.deferredLocation.editText}
           </UnStyledButton>
           <span className="margin-x-105">|</span>
-          <UnStyledButton
-            style="default"
-            isUnderline
-            onClick={(): void => {
-              onRemoveLocation();
-            }}
-          >
+          <UnStyledButton style="default" isUnderline onClick={onRemoveLocation}>
             {Config.deferredLocation.removeText}
           </UnStyledButton>
         </div>

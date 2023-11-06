@@ -11,7 +11,7 @@ interface Props {
   isSmallerText?: boolean;
   isTextBold?: boolean;
   isIntercomEnabled?: boolean;
-  isAriaLabelApplied?: string;
+  ariaLabel?: string;
 }
 
 // eslint-disable-next-line react/display-name
@@ -56,7 +56,7 @@ export const UnStyledButton = forwardRef(
         ref={ref}
         onClick={props.onClick}
         {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}
-        {...(props.isAriaLabelApplied ? { "aria-label": props.isAriaLabelApplied } : {})}
+        {...(props.ariaLabel ? { "aria-label": props.ariaLabel } : {})}
       >
         <div
           ref={widthRef}

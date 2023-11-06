@@ -41,7 +41,11 @@ export const NexusBusinessNameField = (): ReactElement => {
           <div role="heading" aria-level={3} className="text-bold margin-bottom-05">
             {contentFromConfig.outOfStateNameHeader}
           </div>
-          <a href={`/tasks/${formationTaskId}`} className="margin-left-2">
+          <a
+            href={`/tasks/${formationTaskId}`}
+            className="text-accent-cool-darker margin-left-2"
+            aria-label={`${contentFromConfig.editButton} ${contentFromConfig.outOfStateNameHeader}`}
+          >
             {contentFromConfig.editButton}
           </a>
         </div>

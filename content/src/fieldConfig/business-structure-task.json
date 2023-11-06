@@ -5,6 +5,7 @@
     "saveButton": "Save Business Structure",
     "radioQuestionHeader": "Select a business structure",
     "completedHeader": "Your business structure:",
+    "ariaLabelText": "your business structure",
     "successMessage": "**${legalStructure}** is saved."
   }
 }

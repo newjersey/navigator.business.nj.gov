@@ -2432,6 +2432,12 @@ collections:
                   widget: string,
                   hint: This field supports Markdown,
                 }
+              - {
+                  label: Aria Label Text,
+                  name: ariaLabelText,
+                  widget: string,
+                  hint: This is the text that is populates the Edit/Remove button aria label. It is prepended by "Edit" or "Remove".,
+                }
   - name: "tax-task"
     label: "Tasks - Tax ID"
     delete: false
@@ -2491,6 +2497,12 @@ collections:
               - { label: Invalid Validation Error Text, name: invalidValidationErrorText, widget: string }
               - { label: Length Validation Error Text, name: lengthValidationErrorText, widget: string }
               - { label: Has Saved Code Header, name: hasSavedCodeHeader, widget: string }
+              - {
+                  label: Aria Label Text,
+                  name: ariaLabelText,
+                  widget: string,
+                  hint: This is the text that is populates the Edit/Remove button aria label. It is prepended by "Edit" or "Remove".,
+                }
               - {
                   label: Success Message,
                   name: successMessage,
@@ -2559,6 +2571,12 @@ collections:
               - { label: Header - Complete, name: completedHeader, widget: string }
               - { label: Save Button, name: saveButton, widget: string }
               - { label: SuccessMessage, name: successMessage, widget: string }
+              - {
+                  label: Aria Label Text,
+                  name: ariaLabelText,
+                  widget: string,
+                  hint: This is the text that is populates the Edit/Remove button aria label. It is prepended by "Edit" or "Remove".,
+                }
       - label: "Business Structure Prompt Component"
         name: "business-structure-prompt"
         file: content/src/fieldConfig/business-structure-prompt.json

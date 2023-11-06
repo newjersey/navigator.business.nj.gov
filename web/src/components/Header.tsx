@@ -69,7 +69,7 @@ export const Header = (): ReactElement => {
         isTextBold
         onClick={editOnClick}
         dataTestid="header-link-to-profile"
-        isAriaLabelApplied="Link To Business Profile"
+        ariaLabel="Link To Business Profile"
       >
         {getButtonText()}
       </UnStyledButton>
