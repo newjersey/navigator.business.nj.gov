@@ -41,11 +41,21 @@ export const NaicsCodeDisplay = (props: Props): ReactElement => {
           </ArrowTooltip>
         ) : (
           <>
-            <UnStyledButton style="default" isUnderline onClick={props.onEdit}>
+            <UnStyledButton
+              style="default"
+              isUnderline
+              onClick={props.onEdit}
+              ariaLabel={`${Config.taskDefaults.editText} ${Config.determineNaicsCode.ariaLabelText}`}
+            >
               {Config.taskDefaults.editText}
             </UnStyledButton>
             <span className="margin-x-105">|</span>
-            <UnStyledButton style="default" isUnderline onClick={props.onRemove}>
+            <UnStyledButton
+              style="default"
+              isUnderline
+              onClick={props.onRemove}
+              ariaLabel={`${Config.taskDefaults.removeText} ${Config.determineNaicsCode.ariaLabelText}`}
+            >
               {Config.taskDefaults.removeText}
             </UnStyledButton>
           </>

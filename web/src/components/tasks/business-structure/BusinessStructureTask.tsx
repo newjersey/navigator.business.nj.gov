@@ -170,6 +170,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
                     style="default"
                     isUnderline
                     onClick={setBackToEditing}
+                    ariaLabel={`${Config.taskDefaults.editText} ${Config.businessStructureTask.ariaLabelText}`}
                   >
                     {Config.taskDefaults.editText}
                   </UnStyledButton>
@@ -180,6 +181,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
                     style="default"
                     isUnderline
                     onClick={removeTaskCompletion}
+                    ariaLabel={`${Config.taskDefaults.removeText} ${Config.businessStructureTask.ariaLabelText}`}
                   >
                     {Config.taskDefaults.removeText}
                   </UnStyledButton>

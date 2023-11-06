@@ -4,6 +4,7 @@
     "successMessage": "NAICS code ${code} has been saved.",
     "invalidValidationErrorText": "Your NAICS code is invalid",
     "hasSavedCodeHeader": "Your NAICS Code",
+    "ariaLabelText": "your NAICS code",
     "missingNAICSCodePlaceholder": "(You have not saved a NAICS Code yet)",
     "findCodeHeader": "Find Your NAICS Code",
     "findCodeBodyText": "Use the resource listed below to search and find your NAICS code. **This information is used for data and analysis purposes by State and Federal governments, and does not directly impact your business.**",

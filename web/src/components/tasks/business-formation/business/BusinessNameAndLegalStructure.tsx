@@ -67,12 +67,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
   const legalStructureContextualInfo = (): ReactElement => {
     const label = Config.formation.legalStructure.label;
     const contextualInfo = Config.formation.legalStructure.contextualInfo;
-    return <ContextualInfoButton text={isReviewStep ? `${label}:` : label} id={contextualInfo} />;
-  };
-
-  const businessName = (): string => {
-    const label = Config.formation.fields.businessName.label;
-    return isReviewStep ? `${label}:` : label;
+    return <ContextualInfoButton text={label} id={contextualInfo} />;
   };
 
   const notEnteredBusinessName = (): ReactElement => {
@@ -99,7 +94,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
         <div className="padding-205 flex-half">
           <div>
             <strong>
-              <ModifiedContent>{businessName()}</ModifiedContent>
+              <ModifiedContent>{Config.formation.fields.businessName.label}</ModifiedContent>
             </strong>
           </div>
           <div className="flex">
@@ -116,6 +111,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
                 onClick={(): void => setStepIndex(LookupStepIndexByName("Name"))}
                 isUnderline
                 dataTestid="edit-business-name"
+                ariaLabel={`${Config.formation.general.editButtonText} ${Config.formation.fields.businessName.label}`}
               >
                 {Config.formation.general.editButtonText}
               </UnStyledButton>
@@ -137,6 +133,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
                     onClick={showLegalStructureModal}
                     isUnderline
                     dataTestid="edit-legal-structure"
+                    ariaLabel={`${Config.formation.general.editButtonText} ${Config.formation.legalStructure.label}`}
                   >
                     {Config.formation.general.editButtonText}
                   </UnStyledButton>

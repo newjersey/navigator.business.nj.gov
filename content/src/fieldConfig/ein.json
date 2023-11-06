@@ -2,6 +2,7 @@
   "ein": {
     "descriptionText": "Once you get your 9-digit EIN, save it below for future use.",
     "saveButtonText": "Save",
-    "successText": "EIN \"${ein}\" has been saved."
+    "successText": "EIN \"${ein}\" has been saved.",
+    "ariaLabelText": "your EIN"
   }
 }

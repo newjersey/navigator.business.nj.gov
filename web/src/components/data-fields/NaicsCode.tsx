@@ -42,6 +42,12 @@ export const NaicsCode = (): ReactElement => {
     return shouldLockFieldForStartingAndNexus() || shouldLockFieldForOwning();
   };
 
+  const getAddOrEdit = (): string => {
+    return state.profileData.naicsCode ? contentFromConfig.editText : contentFromConfig.addText;
+  };
+
+  const ariaLabel = `${getAddOrEdit()} ${contentFromConfig.header}`;
+
   return (
     <>
       <div className="flex flex-row flex-align-center">
@@ -58,8 +64,8 @@ export const NaicsCode = (): ReactElement => {
             </ArrowTooltip>
           </div>
         ) : (
-          <a className="text-accent-cool-darker margin-left-2" href={naicsTaskUrl}>
-            {state.profileData.naicsCode ? contentFromConfig.editText : contentFromConfig.addText}
+          <a className="text-accent-cool-darker margin-left-2" href={naicsTaskUrl} aria-label={ariaLabel}>
+            {getAddOrEdit()}
           </a>
         )}
       </div>
