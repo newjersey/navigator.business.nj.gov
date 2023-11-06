@@ -31,8 +31,10 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
     return [...new Set(sections)];
   }, [roadmap]);
 
+  const rebuildRoadmap = !roadmap || roadmap?.steps.length === 0 || roadmap?.tasks.length === 0;
+
   useMountEffectWhenDefined(() => {
-    if (!roadmap) {
+    if (rebuildRoadmap) {
       buildAndSetRoadmap();
     }
   }, business);
