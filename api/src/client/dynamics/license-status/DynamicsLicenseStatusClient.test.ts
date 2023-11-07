@@ -1,3 +1,4 @@
+import { AccessTokenClient } from "@client/dynamics/types";
 import {
   MULTIPLE_MAIN_APPS_ERROR,
   NO_MAIN_APPS_ERROR,
@@ -7,7 +8,6 @@ import {
 import { LogWriter, LogWriterType } from "@libs/logWriter";
 import { DynamicsLicenseStatusClient } from "./DynamicsLicenseStatusClient";
 import {
-  AccessTokenClient,
   BusinessAddressClient,
   BusinessIdClient,
   ChecklistItemsClient,

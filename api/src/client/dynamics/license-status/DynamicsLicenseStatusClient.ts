@@ -1,9 +1,9 @@
+import { AccessTokenClient } from "@client/dynamics/types";
 import { SearchLicenseStatus } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { LicenseSearchNameAndAddress, LicenseStatusResult } from "@shared/license";
 import { searchBusinessAddressesForMatch } from "./searchBusinessAddressesForMatch";
 import {
-  AccessTokenClient,
   BusinessAddressClient,
   BusinessIdClient,
   ChecklistItemsClient,
