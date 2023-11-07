@@ -1,7 +1,33 @@
 {
-	"recommendations": [
-		"dbaeumer.vscode-eslint",
-        "eamodio.gitlens",
-        "firsttris.vscode-jest-runner"
-	]
+  "recommendations": [
+    "avraammavridis.vsc-react-documentation",
+    "bierner.github-markdown-preview",
+    "cardinal90.multi-cursor-case-preserve",
+    "chakrounanas.turbo-console-log",
+    "circleci.circleci",
+    "dbaeumer.vscode-eslint",
+    "dsznajder.es7-react-js-snippets",
+    "eamodio.gitlens",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "firsttris.vscode-jest-runner",
+    "github.remotehub",
+    "github.vscode-pull-request-github",
+    "gruntfuggly.todo-tree",
+    "jock.svg",
+    "mechatroner.rainbow-csv",
+    "ms-azuretools.vscode-docker",
+    "ms-vscode.remote-repositories",
+    "ms-vscode.vscode-js-profile-flame",
+    "ms-vsliveshare.vsliveshare",
+    "oderwat.indent-rainbow",
+    "quicktype.quicktype",
+    "rangav.vscode-thunder-client",
+    "streetsidesoftware.code-spell-checker",
+    "timonwong.shellcheck",
+    "tlahmann.alex-linter",
+    "tyriar.sort-lines",
+    "unifiedjs.vscode-mdx",
+    "usernamehw.errorlens"
+  ]
 }

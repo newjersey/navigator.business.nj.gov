@@ -1,0 +1,39 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cSpell.enabled": false,
+  "cSpell.words": ["businessnjgovnavigator"],
+  "editor.codeActionsOnSave": ["source.organizeImports", "source.formatDocument", "source.fixAll.eslint"],
+  "editor.formatOnSave": true,
+  "editor.rulers": [80, 110],
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 110,
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "$(capture).test.ts, $(capture).test.tsx",
+    "*.tsx": "$(capture).test.ts, $(capture).test.tsx"
+  },
+  "files.exclude": {
+    "**/node_modules": false,
+    "node_modules": true,
+    "**/.next": true,
+    "*[!test]**/node_modules": true
+  },
+  "files.trimTrailingWhitespace": true,
+  "git.allowForcePush": true,
+  "git.autofetch": true,
+  "git.autoStash": true,
+  "git.enableSmartCommit": true,
+  "git.fetchOnPull": true,
+  "git.mergeEditor": true,
+  "git.terminalGitEditor": true,
+  "indentRainbow.indicatorStyle": "light",
+  "jest.autoRun": "off",
+  "terminal.integrated.scrollback": 10000,
+  "todo-tree.filtering.excludeGlobs": ["**/node_modules", "**/dist", "**/.next", "**/compiled"],
+  "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "XXX", "[ ]", "[x]", "TODO-APP"],
+  "typescript.surveys.enabled": false
+}
