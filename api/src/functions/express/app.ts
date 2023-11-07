@@ -9,11 +9,11 @@ import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
 import { DynamicsAccessTokenClient } from "@client/dynamics/DynamicsAccessTokenClient";
-import { DynamicsBusinessAddressClient } from "@client/dynamics/DynamicsBusinessAddressClient";
-import { DynamicsBusinessIdsClient } from "@client/dynamics/DynamicsBusinessIdsClient";
-import { DynamicsChecklistItemsClient } from "@client/dynamics/DynamicsChecklistItemsClient";
-import { DynamicsLicenseApplicationIdClient } from "@client/dynamics/DynamicsLicenseApplicationIdClient";
-import { DynamicsLicenseStatusClient } from "@client/dynamics/DynamicsLicenseStatusClient";
+import { DynamicsBusinessAddressClient } from "@client/dynamics/license-status/DynamicsBusinessAddressClient";
+import { DynamicsBusinessIdsClient } from "@client/dynamics/license-status/DynamicsBusinessIdsClient";
+import { DynamicsChecklistItemsClient } from "@client/dynamics/license-status/DynamicsChecklistItemsClient";
+import { DynamicsLicenseApplicationIdClient } from "@client/dynamics/license-status/DynamicsLicenseApplicationIdClient";
+import { DynamicsLicenseStatusClient } from "@client/dynamics/license-status/DynamicsLicenseStatusClient";
 import { FakeSelfRegClientFactory } from "@client/fakeSelfRegClient";
 import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient";
 import { MyNJSelfRegClientFactory } from "@client/MyNjSelfRegClient";
@@ -76,19 +76,19 @@ const webserviceLicenseStatusProcessorClient = WebserviceLicenseStatusProcessorC
   webServiceLicenseStatusClient
 );
 
-const DCA_DYNAMICS_ORG_URL = process.env.DCA_DYNAMICS_ORG_URL || "";
+const DYNAMICS_LICENSE_STATUS_URL = process.env.DYNAMICS_LICENSE_STATUS_URL || "";
 
 const dynamicsTokenClient = DynamicsAccessTokenClient(logger, {
-  tenantId: process.env.DCA_DYNAMICS_TENANT_ID || "",
-  orgUrl: DCA_DYNAMICS_ORG_URL,
-  clientId: process.env.DCA_DYNAMICS_CLIENT_ID || "",
-  clientSecret: process.env.DCA_DYNAMICS_SECRET || "",
+  tenantId: process.env.DYNAMICS_LICENSE_STATUS_TENANT_ID || "",
+  orgUrl: DYNAMICS_LICENSE_STATUS_URL,
+  clientId: process.env.DYNAMICS_LICENSE_STATUS_CLIENT_ID || "",
+  clientSecret: process.env.DYNAMICS_LICENSE_STATUS_SECRET || "",
 });
 
-const dynamicsBusinessIdClient = DynamicsBusinessIdsClient(logger, DCA_DYNAMICS_ORG_URL);
-const dynamicsAddressClient = DynamicsBusinessAddressClient(logger, DCA_DYNAMICS_ORG_URL);
-const dynamicsApplicationIdClient = DynamicsLicenseApplicationIdClient(logger, DCA_DYNAMICS_ORG_URL);
-const dynamicsCheckListItemsClient = DynamicsChecklistItemsClient(logger, DCA_DYNAMICS_ORG_URL);
+const dynamicsBusinessIdClient = DynamicsBusinessIdsClient(logger, DYNAMICS_LICENSE_STATUS_URL);
+const dynamicsAddressClient = DynamicsBusinessAddressClient(logger, DYNAMICS_LICENSE_STATUS_URL);
+const dynamicsApplicationIdClient = DynamicsLicenseApplicationIdClient(logger, DYNAMICS_LICENSE_STATUS_URL);
+const dynamicsCheckListItemsClient = DynamicsChecklistItemsClient(logger, DYNAMICS_LICENSE_STATUS_URL);
 
 const dynamicsLicenseStatusClient = DynamicsLicenseStatusClient(logger, {
   accessTokenClient: dynamicsTokenClient,

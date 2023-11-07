@@ -1,7 +1,7 @@
+import { AccessTokenClient } from "@client/dynamics/types";
 import { LogWriter, LogWriterType } from "@libs/logWriter";
 import axios from "axios";
 import { DynamicsAccessTokenClient } from "./DynamicsAccessTokenClient";
-import { AccessTokenClient } from "./types";
 
 jest.mock("winston");
 jest.mock("axios");
