@@ -1,6 +1,6 @@
+import { AccessTokenClient } from "@client/dynamics/types";
 import { LogWriterType } from "@libs/logWriter";
 import axios, { AxiosError } from "axios";
-import { AccessTokenClient } from "./types";
 
 type Config = {
   tenantId: string;

@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/no-null */
+import { LogWriter, LogWriterType } from "@libs/logWriter";
 import axios from "axios";
-import { LogWriter, LogWriterType } from "../../libs/logWriter";
 import { DynamicsChecklistItemsClient } from "./DynamicsChecklistItemsClient";
 import { ChecklistItemsClient } from "./types";
 
