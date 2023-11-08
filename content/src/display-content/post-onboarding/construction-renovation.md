@@ -1,4 +1,8 @@
 ---
+notesMd: "Wayback snapshot for broken link [Local (Regional) Code Enforcement
+  Offices]:
+  https://web.archive.org/web/20230311001931/https://www.nj.gov/dca/divisions/c\
+  odes/offices/localcode.html"
 slug: construction-renovation
 radioQuestion: Do you plan to do any renovations or construction on your
   commercial/industrial space?
