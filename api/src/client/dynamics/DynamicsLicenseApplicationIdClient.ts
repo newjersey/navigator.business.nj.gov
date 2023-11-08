@@ -42,7 +42,7 @@ export const DynamicsLicenseApplicationIdClient = (
           )
           .filter(
             (applicationDetails: LicenseApplicationIdApiResponse) =>
-              applicationDetails.rgb_number.slice(-2) === MAIN_APP_END_DIGITS
+              applicationDetails.rgb_number && applicationDetails.rgb_number.slice(-2) === MAIN_APP_END_DIGITS
           );
 
         if (mainActiveApplications.length === 0) {

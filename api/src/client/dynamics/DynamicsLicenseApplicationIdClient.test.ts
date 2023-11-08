@@ -167,6 +167,50 @@ describe("DynamicsLicenseApplicationIdClient", () => {
     });
   });
 
+  it("filters out applications whose rgb_number is null", async () => {
+    const mockLicenseApplicationIdResponse = {
+      value: [
+        {
+          rgb_appnumber: "MLI00001050",
+          rgb_number: "39PM00100100",
+          rgb_startdate: "2022-01-09T05:00:00Z",
+          rgb_versioncode: 100000000,
+          rgb_expirationdate: "2023-01-31T05:00:00Z",
+          statecode: 0,
+          statuscode: 100000007,
+          rgb_applicationid: "299c88b0-7a90-ed11-aad1-001dd804fc82",
+        },
+        {
+          rgb_appnumber: "MLI00001086",
+          rgb_number: null,
+          rgb_startdate: null,
+          rgb_versioncode: 100000000,
+          rgb_expirationdate: null,
+          statecode: 0,
+          statuscode: 100000000,
+          rgb_applicationid: "c3e503d1-eb91-ed11-a81b-001dd806f556",
+        },
+      ],
+    };
+
+    mockAxios.get.mockResolvedValue({ data: mockLicenseApplicationIdResponse });
+    expect(
+      await client.getLicenseApplicationId(mockAccessToken, mockBusinessId, "Public Movers and Warehousemen")
+    ).toEqual({
+      expirationDate: "2023-01-31T05:00:00Z",
+      applicationId: "299c88b0-7a90-ed11-aad1-001dd804fc82",
+      licenseStatus: "PENDING_RENEWAL",
+    });
+    expect(mockAxios.get).toHaveBeenCalledWith(
+      `${ORG_URL}/api/data/v9.2/rgb_applications?$select=rgb_appnumber,rgb_number,rgb_startdate,rgb_versioncode,rgb_expirationdate,statecode,statuscode,rgb_applicationid&$filter=(_rgb_businessid_value eq ${mockBusinessId} and _rgb_apptypeid_value eq ${publicMoversAndWarehousemenLicenseTypeId})&$top=50`,
+      {
+        headers: {
+          Authorization: `Bearer ${mockAccessToken}`,
+        },
+      }
+    );
+  });
+
   it("throws NO_MAIN_APPS error when there are no matching apps whose rgb_number ends with 00", async () => {
     mockAxios.get.mockResolvedValue({
       data: {
