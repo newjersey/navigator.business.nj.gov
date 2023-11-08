@@ -5,6 +5,9 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { FormationTextField } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
+import {useFormContextFieldHelpers} from "@/lib/data-hooks/useFormContextFieldHelpers";
+import {FormationFormContext} from "@/contexts/formationFormContext";
+import {useMountEffect} from "@/lib/utils/helpers";
 
 export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName" | "error" | "inputWidth"> {
   fieldName: FormationTextField;
@@ -14,21 +17,17 @@ export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName"
 }
 
 export const BusinessFormationTextField = ({ className, ...props }: Props): ReactElement => {
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
-  const { doesFieldHaveError } = useFormationErrors();
+  const { state, setFormationFormData } = useContext(BusinessFormationContext);
 
   const handleChange = (value: string): void => {
     props.handleChange && props.handleChange(value);
     setFormationFormData((formationFormData) => ({ ...formationFormData, [props.fieldName]: value }));
   };
 
-  const onValidation = (): void => {
-    setFieldsInteracted([props.fieldName]);
-  };
+  const {isFormFieldInvalid } = useFormContextFieldHelpers(props.fieldName, FormationFormContext);
 
-  const hasError = doesFieldHaveError(props.fieldName);
   return (
-    <WithErrorBar className={className ?? ""} hasError={hasError} type={props.errorBarType}>
+    <WithErrorBar className={className ?? ""} hasError={isFormFieldInvalid} type={props.errorBarType}>
       {props.label && (
         <strong>
           <ModifiedContent>{props.label}</ModifiedContent>
@@ -38,10 +37,11 @@ export const BusinessFormationTextField = ({ className, ...props }: Props): Reac
       <GenericTextField
         inputWidth={"full"}
         value={state.formationFormData[props.fieldName]}
-        onValidation={onValidation}
         {...props}
         handleChange={handleChange}
-        error={hasError}
+        formContext={FormationFormContext}
+        required={props.required}
+        additionalValidationIsValid={props.additionalValidationIsValid}
       />
     </WithErrorBar>
   );

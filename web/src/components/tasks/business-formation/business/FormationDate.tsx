@@ -2,11 +2,10 @@ import { ContextualInfoButton } from "@/components/ContextualInfoButton";
 import {
   getBusinessStartDateHelperText,
   getBusinessStartDateMaxDate,
-  getBusinessStartDateRule,
+  getBusinessStartDateRule, isBusinessStartDateValid,
 } from "@/components/tasks/business-formation/business/BusinessDateValidators";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import {
   advancedDateLibrary,
@@ -19,6 +18,9 @@ import { TextField } from "@mui/material";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { ReactElement, useContext, useMemo } from "react";
+import {useFormContextFieldHelpers} from "@/lib/data-hooks/useFormContextFieldHelpers";
+import {FormationFormContext} from "@/contexts/formationFormContext";
+import {useMountEffect} from "@/lib/utils/helpers";
 
 advancedDateLibrary();
 type Props = {
@@ -27,7 +29,19 @@ type Props = {
 export const FormationDate = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
-  const { doesFieldHaveError } = useFormationErrors();
+  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers(props.fieldName, FormationFormContext);
+
+  const isValid = (date: string | undefined): boolean => {
+    if (date === undefined) return false
+    return isBusinessStartDateValid(date, state.formationFormData.legalType)
+  };
+
+  RegisterForOnSubmit(() => isValid(state.formationFormData[props.fieldName]));
+  const runValidation = (date: string | undefined): void => setIsValid(isValid(date));
+
+  useMountEffect(() => {
+    runValidation(state.formationFormData[props.fieldName])
+  })
 
   const contentProps = useMemo(
     () => ({
@@ -65,6 +79,7 @@ export const FormationDate = (props: Props): ReactElement => {
 
   const handleChange = (value: string): void => {
     setFieldsInteracted([props.fieldName]);
+    runValidation(value)
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
@@ -111,13 +126,11 @@ export const FormationDate = (props: Props): ReactElement => {
                   <TextField
                     {...params}
                     variant="outlined"
-                    error={doesFieldHaveError(props.fieldName)}
+                    error={isFormFieldInvalid}
                     onBlur={(): void => {
                       setFieldsInteracted([props.fieldName]);
                     }}
-                    helperText={
-                      doesFieldHaveError(props.fieldName) && contentProps[props.fieldName].helperText
-                    }
+                    helperText={isFormFieldInvalid && contentProps[props.fieldName].helperText}
                     sx={{
                       svg: { fill: "#4b7600" },
                     }}

@@ -1,6 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { FileInput } from "./FileInput";
+import {templateEval} from "@/lib/utils/helpers";
 
 describe("<FileInput />", () => {
   let file: File;
@@ -60,16 +61,21 @@ describe("<FileInput />", () => {
     fireEvent.change(uploader, { target: { files: [halfMegabyteFile] } });
 
     expect(mockOnChange).not.toHaveBeenCalled();
-    expect(screen.getByText("cool.png exceeds maximum size of 0.4 MB.")).toBeInTheDocument();
+    const expectedMessage = templateEval(errorMessageFileSize, {
+      fileName: "cool.png",
+      maxFileSize: "0.4",
+    })
+    expect(screen.getByText(expectedMessage)).toBeInTheDocument();
   });
 
   it("refuses files of the wrong type", async () => {
     const mockOnChange = jest.fn();
+    const acceptedFileErrorMessage = Config.formation.fields.foreignGoodStandingFile.errorMessageFileType
     render(
       <FileInput
         acceptedFileTypes={{
           fileTypes: ["PDF"],
-          errorMessage: Config.formation.fields.foreignGoodStandingFile.errorMessageFileType,
+          errorMessage: acceptedFileErrorMessage,
         }}
         errorMessageRequired="error-message-required"
         helperText="input-label"
@@ -83,6 +89,7 @@ describe("<FileInput />", () => {
     fireEvent.change(uploader, { target: { files: [file] } });
 
     expect(mockOnChange).not.toHaveBeenCalled();
-    expect(screen.getByText("cool.png file format is not supported.")).toBeInTheDocument();
+    const expectedMessage = templateEval(acceptedFileErrorMessage, { fileName: "cool.png" })
+    expect(screen.getByText(expectedMessage)).toBeInTheDocument();
   });
 });

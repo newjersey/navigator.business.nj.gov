@@ -22,14 +22,14 @@ import {
   BusinessUser,
   castPublicFilingLegalTypeToFormationType,
   createEmptyFormationFormData,
-  DateObject,
+  DateObject, FormationFormData,
   FormationSubmitResponse,
   generateBusiness,
-  generateBusinessNameAvailability,
+  generateBusinessNameAvailability, generateFormationFormData,
   generateFormationIncorporator,
   generateMunicipality,
   generateUser,
-  generateUserDataForBusiness,
+  generateUserDataForBusiness, InputFile,
   Municipality,
   NameAvailability,
   ProfileData,
@@ -44,7 +44,8 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-
+import {ReactNode} from "react";
+import {WithStatefulFormationFormData} from "@/test/mock/withStatefulFormationFormData";
 const Config = getMergedConfig();
 
 export function flushPromises(): Promise<void> {
@@ -79,6 +80,39 @@ type PreparePageParams = {
   setShowNeedsAccountModal?: (value: boolean) => void;
   user?: Partial<BusinessUser>;
 };
+
+export const renderFormationComponent = ({
+    component,
+    formationFormData,
+    initialForeignGoodStandingFile,
+    municipalities
+  }: {
+    component: ReactNode,
+    formationFormData: Partial<FormationFormData>,
+    initialForeignGoodStandingFile?: InputFile | undefined,
+    municipalities?: Municipality[] | undefined
+  }): FormationPageHelpers => {
+
+  const initialFormationFormData = generateFormationFormData(formationFormData)
+
+  const internalMunicipalities = [
+    generateMunicipality({ displayName: "GenericTown" }),
+    ...(municipalities ?? []),
+  ];
+  initialFormationFormData.addressMunicipality && internalMunicipalities.push(initialFormationFormData.addressMunicipality);
+  initialFormationFormData.agentOfficeAddressMunicipality && internalMunicipalities.push(initialFormationFormData.agentOfficeAddressMunicipality);
+
+  render(
+      <MunicipalitiesContext.Provider value={{ municipalities: internalMunicipalities }}>
+        <WithStatefulFormationFormData initialData={initialFormationFormData} initialForeignGoodStandingFile={initialForeignGoodStandingFile}>
+          <ThemeProvider theme={createTheme()}>
+            {component}
+          </ThemeProvider>
+        </WithStatefulFormationFormData>
+      </MunicipalitiesContext.Provider>,
+  );
+  return createFormationPageHelpers();
+}
 
 export const preparePage = ({
   business,

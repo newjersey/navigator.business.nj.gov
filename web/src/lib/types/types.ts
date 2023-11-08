@@ -21,6 +21,7 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { LicenseEventSubtype } from "@businessnjgovnavigator/shared/taxFiling";
 import { Business } from "@businessnjgovnavigator/shared/userData";
+import {FormationFields} from "@businessnjgovnavigator/shared/formationData";
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types
@@ -83,6 +84,7 @@ export type FormationFieldErrorState = {
 };
 
 export const profileFieldsFromConfig = getMergedConfig().profileDefaults.fields;
+export const formationFieldsFromConfig = getMergedConfig().formation.fields;
 
 export type ProfileContentField = Exclude<
   (keyof ProfileData | keyof IndustrySpecificData) & keyof typeof profileFieldsFromConfig,
@@ -116,6 +118,7 @@ export const createReducedFieldStates = <K extends string | number | symbol, Fie
 };
 
 const allProfileFields = Object.keys(profileFieldsFromConfig) as ProfileFields[];
+const allFormationFields = Object.keys(formationFieldsFromConfig) as FieldsForErrorHandling[];
 
 const businessUserDisplayFields = Object.keys(emptyBusinessUser) as (keyof BusinessUser)[];
 const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
@@ -127,7 +130,12 @@ export const profileFields: ProfileFields[] = [
 export const createProfileFieldErrorMap = <FieldError>(): ReducedFieldStates<ProfileFields, FieldError> =>
   createReducedFieldStates<(typeof profileFields)[number], FieldError>(profileFields);
 
-export type ProfileFieldErrorMap = ReducedFieldStates<ProfileFields>;
+export const createFormationFieldErrorMap = <FieldError>(): ReducedFieldStates<FieldsForErrorHandling, FieldError> =>
+  createReducedFieldStates<(typeof allFormationFields)[number], FieldError>(allFormationFields);
+
+export type ProfileFieldErrorMap = ReducedFieldStates<ProfileFields>
+
+export type FormationFieldErrorMap = ReducedFieldStates<FieldsForErrorHandling>
 
 export type RoadmapDisplayContent = {
   sidebarDisplayContent: Record<string, SidebarCardContent>;

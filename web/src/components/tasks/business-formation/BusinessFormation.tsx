@@ -13,7 +13,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { checkQueryValue, QUERIES } from "@/lib/domain-logic/routes";
 import { splitFullName } from "@/lib/domain-logic/splitFullName";
-import { Task, TasksDisplayContent } from "@/lib/types/types";
+import {createProfileFieldErrorMap, profileTabs, Task, TasksDisplayContent} from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 
@@ -38,6 +38,8 @@ import {
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
+import { FormationFormContext } from "@/contexts/formationFormContext";
+import {useFormContextHelper} from "@/lib/data-hooks/useFormContextHelper";
 
 interface Props {
   task: Task | undefined;
@@ -288,7 +290,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
               </>
             )}
           </div>
-          {isForeign ? <NexusFormationFlow /> : <BusinessFormationPaginator searchOnly={props.searchOnly} />}
+            {isForeign ? <NexusFormationFlow /> : <BusinessFormationPaginator searchOnly={props.searchOnly} />}
         </>
       </div>
     </BusinessFormationContext.Provider>

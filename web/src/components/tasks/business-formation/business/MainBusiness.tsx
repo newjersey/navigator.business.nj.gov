@@ -86,7 +86,7 @@ export const MainBusiness = (): ReactElement => {
               {!isForeignCorporation(state.formationFormData.legalType) && (
                 <hr className="margin-bottom-2 margin-top-3" aria-hidden={true} />
               )}
-              <ForeignCertificate hasError={doesFieldHaveError("foreignGoodStandingFile")} />
+              <ForeignCertificate />
             </FormationField>
           )}
         </>

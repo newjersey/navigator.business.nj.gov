@@ -2,17 +2,31 @@ import { ModifiedContent } from "@/components/ModifiedContent";
 import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { StateObject } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
+import {useMountEffect} from "@/lib/utils/helpers";
+import {useFormContextFieldHelpers} from "@/lib/data-hooks/useFormContextFieldHelpers";
+import {FormationFormContext} from "@/contexts/formationFormContext";
 
 export const ForeignStateOfFormation = (): ReactElement => {
   const FIELD = "foreignStateOfFormation";
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
-  const { doesFieldHaveError } = useFormationErrors();
+  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers("foreignGoodStandingFile", FormationFormContext);
+
+  const isValid = (value: string | undefined): boolean => {
+    return value !== undefined
+  };
+
+  RegisterForOnSubmit(() => isValid(state.formationFormData[FIELD]));
+  const runValidation = (value: string | undefined): void => setIsValid(isValid(value));
+
+  useMountEffect(() => {
+    runValidation(state.formationFormData[FIELD])
+  })
 
   const handleChange = (stateObject: StateObject | undefined): void => {
+    runValidation(stateObject?.name)
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
@@ -34,7 +48,7 @@ export const ForeignStateOfFormation = (): ReactElement => {
         value={state.formationFormData.foreignStateOfFormation}
         validationText={Config.formation.fields.foreignStateOfFormation.error}
         required
-        error={doesFieldHaveError(FIELD)}
+        error={isFormFieldInvalid}
         onSelect={handleChange}
         includeOutsideUSA={true}
       />

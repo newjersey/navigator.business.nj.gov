@@ -11,7 +11,7 @@ import {
   forwardRef,
   HTMLInputTypeAttribute,
   ReactElement,
-  RefObject,
+  RefObject, useEffect,
   useMemo,
 } from "react";
 
@@ -23,6 +23,8 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
   formContext?: Context<FormContextType<any>>;
   onValidation?: (fieldName: string, invalid: boolean, value?: string) => void;
   additionalValidationIsValid?: (value: string) => boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  revalidateOnFields?: any[];
   visualFilter?: (value: string) => string;
   valueFilter?: (value: string) => string;
   handleChange?: (value: string) => void | ((value: ChangeEvent<HTMLInputElement>) => void);
@@ -127,6 +129,11 @@ export const GenericTextField = forwardRef(
       const isValidRequired = props.required ? !!value.trim() : true;
       return isValidAdditional && isValidRequired;
     };
+
+    useEffect(() => {
+      if (!props.revalidateOnFields) return;
+      setIsValid(isFieldValid(value))
+    }, props.revalidateOnFields ?? [])
 
     RegisterForOnSubmit(() => isFieldValid(value));
 

@@ -24,13 +24,21 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
-import { FormationStepNames, StepperStep } from "@/lib/types/types";
+import {
+  createFormationFieldErrorMap,
+  createProfileFieldErrorMap,
+  FormationStepNames,
+  profileTabs,
+  StepperStep
+} from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getConfigFieldByLegalStructure, scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
 import { Business, FormationFormData, getCurrentBusiness } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
+import {FormationFormContext} from "@/contexts/formationFormContext";
+import {useFormContextHelper} from "@/lib/data-hooks/useFormContextHelper";
 
 interface Props {
   searchOnly?: boolean;
@@ -53,6 +61,13 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   const isDesktop = useMediaQuery(MediaQueries.desktopAndUp);
 
   type ConfigFormationFields = keyof typeof Config.formation.fields;
+
+  const {
+    FormFuncWrapper,
+    onSubmit,
+    state: formContextState,
+    getInvalidFieldIds,
+  } = useFormContextHelper(createFormationFieldErrorMap());
 
   useEffect(() => {
     if (isMounted.current) {
@@ -118,6 +133,8 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
       setShowNeedsAccountModal(true);
       return;
     }
+
+    console.log('invalid:', getInvalidFieldIds())
 
     const isSubmittingFromFinalStep = stepIndex >= BusinessFormationStepsConfiguration.length;
 
@@ -493,8 +510,8 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   };
 
   return (
-    <>
-      <div ref={errorAlertRef}>{getErrorComponent()}</div>
+  <FormationFormContext.Provider value={formContextState}>
+    <div ref={errorAlertRef}>{getErrorComponent()}</div>
       <div className="margin-top-3" ref={stepperRef}>
         {!props.searchOnly && (
           <HorizontalStepper
@@ -510,6 +527,6 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
         {BusinessFormationSteps[state.stepIndex].component}
         {displayButtons()}
       </div>
-    </>
+    </FormationFormContext.Provider>
   );
 };

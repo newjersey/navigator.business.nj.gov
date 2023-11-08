@@ -4,15 +4,26 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { FormControl } from "@mui/material";
 import { ReactElement, useContext } from "react";
+import {useFormContextFieldHelpers} from "@/lib/data-hooks/useFormContextFieldHelpers";
+import {FormationFormContext} from "@/contexts/formationFormContext";
+import {useMountEffect} from "@/lib/utils/helpers";
+import {InputFile} from "@businessnjgovnavigator/shared/formationData";
 
-interface Props {
-  hasError: boolean;
-}
-
-export const ForeignCertificate = (props: Props): ReactElement => {
-  const { hasError } = props;
+export const ForeignCertificate = (): ReactElement => {
   const { Config } = useConfig();
   const { state, setForeignGoodStandingFile } = useContext(BusinessFormationContext);
+  const { RegisterForOnSubmit, setIsValid, isFormFieldInvalid } = useFormContextFieldHelpers("foreignGoodStandingFile", FormationFormContext);
+
+  const isValid = (file: InputFile | undefined): boolean => {
+    return file !== undefined
+  };
+
+  RegisterForOnSubmit(() => isValid(state.foreignGoodStandingFile));
+  const runValidation = (file: InputFile | undefined): void => setIsValid(isValid(file));
+
+  useMountEffect(() => {
+    runValidation(state.foreignGoodStandingFile)
+  })
 
   return (
     <>
@@ -28,7 +39,7 @@ export const ForeignCertificate = (props: Props): ReactElement => {
             fileTypes: ["PNG", "PDF"],
           }}
           onChange={setForeignGoodStandingFile}
-          hasError={hasError}
+          hasError={isFormFieldInvalid}
           helperText={Config.formation.fields.foreignGoodStandingFile.helperText}
           errorMessageRequired={Config.formation.fields.foreignGoodStandingFile.errorMessageRequired}
           maxFileSize={{

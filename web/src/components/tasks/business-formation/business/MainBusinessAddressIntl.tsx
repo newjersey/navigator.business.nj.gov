@@ -8,6 +8,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { formatIntlPostalCode } from "@/lib/domain-logic/formatIntlPostalCode";
 import { ReactElement, useContext } from "react";
+import {isValidWithAssociatedFields} from "@/components/tasks/business-formation/validation/isValidWithAssociatedFields";
 
 export const MainBusinessIntl = (): ReactElement => {
   const { Config } = useConfig();
@@ -24,6 +25,13 @@ export const MainBusinessIntl = (): ReactElement => {
           className={"margin-bottom-2"}
           errorBarType="ALWAYS"
           validationText={getFieldErrorLabel("addressLine1")}
+          additionalValidationIsValid={(value: string | undefined): boolean => {
+            return isValidWithAssociatedFields({
+              value,
+              formationFormData: state.formationFormData,
+              associatedFields: ["addressZipCode", "addressCity"]
+            })
+          }}
         />
       </FormationField>
       <FormationField fieldName="addressLine2">
@@ -103,6 +111,13 @@ export const MainBusinessIntl = (): ReactElement => {
               required={true}
               fieldName="addressZipCode"
               validationText={Config.formation.fields.addressZipCode.foreign.errorIntl}
+              additionalValidationIsValid={(value: string | undefined): boolean => {
+                return isValidWithAssociatedFields({
+                  value,
+                  formationFormData: state.formationFormData,
+                  associatedFields: ["addressCity", "addressLine1"]
+                })
+              }}
             />
           </FormationField>
         </div>

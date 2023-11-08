@@ -222,8 +222,10 @@ export const generateFormationSubmitError = (
 };
 
 export const generateInputFile = (overrides: Partial<InputFile>): InputFile => {
+  const base64Contents = Buffer.from(`some-base-64-contents-${randomInt()}`, "utf8").toString("base64");
+
   return {
-    base64Contents: `some-base-64-contents-${randomInt()}`,
+    base64Contents,
     fileType: randomElementFromArray(["PNG", "PDF"]),
     sizeInBytes: randomInt(),
     filename: `some-filename-${randomInt()}`,

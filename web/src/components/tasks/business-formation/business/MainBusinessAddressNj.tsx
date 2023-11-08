@@ -14,12 +14,19 @@ import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { ReactElement, useContext, useState } from "react";
+import { isValidWithAssociatedFields } from "../validation/isValidWithAssociatedFields";
+import {useFormContextFieldHelpers} from "@/lib/data-hooks/useFormContextFieldHelpers";
+import {FormationFormContext} from "@/contexts/formationFormContext";
+import {AddressLine1} from "@/components/tasks/business-formation/business/AddressLine1";
+import { AddressZipCode } from "./AddressZipCode";
 
 export const MainBusinessAddressNj = (): ReactElement => {
   const { Config } = useConfig();
   const { setFormationFormData, state } = useContext(BusinessFormationContext);
   const { business } = useUserData();
-  const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useFormationErrors();
+
+  const isAddressZipCodeInvalid = useFormContextFieldHelpers("addressZipCode", FormationFormContext).isFormFieldInvalid
+  const isAddressMunicipalityInvalid = useFormContextFieldHelpers("addressMunicipality", FormationFormContext).isFormFieldInvalid
 
   const doAnyFieldsHaveAValue = (): boolean => {
     const fields = [
@@ -66,40 +73,27 @@ export const MainBusinessAddressNj = (): ReactElement => {
       {isExpanded && (
         <>
           <CannabisLocationAlert industryId={business?.profileData.industryId} />
-          <FormationField fieldName="addressLine1">
-            <BusinessFormationTextField
-              label={Config.formation.fields.addressLine1.label}
-              fieldName="addressLine1"
-              required={true}
-              className={"margin-bottom-2"}
-              errorBarType="ALWAYS"
-              validationText={getFieldErrorLabel("addressLine1")}
-            />
-          </FormationField>
+          <AddressLine1 />
           <FormationField fieldName="addressLine2">
             <BusinessFormationTextField
               label={Config.formation.fields.addressLine2.label}
               secondaryLabel={Config.formation.general.optionalLabel}
               errorBarType="ALWAYS"
               fieldName="addressLine2"
-              validationText={getFieldErrorLabel("addressLine2")}
               className="margin-bottom-2"
             />
           </FormationField>
           <WithErrorBar
-            hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressMunicipality"])}
+            hasError={isAddressMunicipalityInvalid || isAddressZipCodeInvalid}
             type="DESKTOP-ONLY"
           >
             <div className="grid-row grid-gap-1">
               <div className="grid-col-12 tablet:grid-col-6">
-                <WithErrorBar hasError={doesFieldHaveError("addressMunicipality")} type="MOBILE-ONLY">
-                  <span className="text-bold">{Config.formation.fields.addressMunicipality.label}</span>
-                  <FormationMunicipality />
-                </WithErrorBar>
+                <FormationMunicipality />
               </div>
               <div className="grid-col-12 tablet:grid-col-6 margin-top-2 tablet:margin-top-0">
                 <WithErrorBar
-                  hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
+                  hasError={isAddressZipCodeInvalid}
                   type="MOBILE-ONLY"
                 >
                   <div className="grid-row grid-gap-1">
@@ -118,16 +112,7 @@ export const MainBusinessAddressNj = (): ReactElement => {
                       </FormationField>
                     </div>
                     <div className="grid-col-7">
-                      <FormationField fieldName="addressZipCode">
-                        <BusinessFormationTextField
-                          label={Config.formation.fields.addressZipCode.label}
-                          numericProps={{ maxLength: 5 }}
-                          required={true}
-                          errorBarType="NEVER"
-                          fieldName={"addressZipCode"}
-                          validationText={getFieldErrorLabel("addressZipCode")}
-                        />
-                      </FormationField>
+                      <AddressZipCode />
                     </div>
                   </div>
                 </WithErrorBar>

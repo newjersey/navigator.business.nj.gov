@@ -2,11 +2,15 @@ import { FormationRadio } from "@/components/tasks/business-formation/business/F
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext } from "react";
+import {useFormContextFieldHelpers} from "@/lib/data-hooks/useFormContextFieldHelpers";
+import {FormationFormContext} from "@/contexts/formationFormContext";
+import {isBusinessStartDateValid} from "@/components/tasks/business-formation/business/BusinessDateValidators";
+import {useMountEffect} from "@/lib/utils/helpers";
 
+const fieldName = "isVeteranNonprofit";
 export const IsVeteranNonprofit = (): ReactElement => {
   const { Config } = useConfig();
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
-  const fieldName = "isVeteranNonprofit";
+  const { state, setFormationFormData } = useContext(BusinessFormationContext);
 
   return (
     <FormationRadio
@@ -19,7 +23,6 @@ export const IsVeteranNonprofit = (): ReactElement => {
           ...state.formationFormData,
           [fieldName]: valueToSave,
         });
-        setFieldsInteracted([fieldName]);
       }}
       errorMessage={Config.formation.fields.isVeteranNonprofit.error}
     />

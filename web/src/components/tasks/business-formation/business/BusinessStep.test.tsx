@@ -706,8 +706,6 @@ describe("Formation - BusinessStep", () => {
   });
 
   describe("business start date", () => {
-    const fieldLabel = "Business start date";
-
     it("defaults date picker to current date when it has no value", async () => {
       const page = await getPageHelper({}, { businessStartDate: "" });
       expect(screen.getByLabelText("Business start date")).toBeInTheDocument();
@@ -723,107 +721,6 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByLabelText("Business start date")).toHaveValue(
         getCurrentDateFormatted(defaultDisplayDateFormat)
       );
-    });
-
-    describe("businessStartDate validation", () => {
-      describe("90 day limit", () => {
-        const legalStructureIds = ["c-corporation", "s-corporation"];
-        legalStructureIds.map((legalStructureId) =>
-          describe(`${legalStructureId}`, () => {
-            it("shows validation error past date limit", async () => {
-              const page = await getPageHelper({ legalStructureId }, {});
-              page.selectDate(getCurrentDate().add(91, "day"), fieldLabel);
-              expect(
-                screen.getByText(Config.formation.fields.businessStartDate.error90Days)
-              ).toBeInTheDocument();
-            });
-
-            it("shows validation error for previous date", async () => {
-              const page = await getPageHelper({ legalStructureId }, {});
-              page.selectDate(getCurrentDate().subtract(4, "day"), fieldLabel);
-              expect(
-                screen.getByText(Config.formation.fields.businessStartDate.error90Days)
-              ).toBeInTheDocument();
-            });
-
-            it("does not show validation error", async () => {
-              const page = await getPageHelper({ legalStructureId }, {});
-              page.selectDate(getCurrentDate().add(89, "day"), fieldLabel);
-              expect(
-                screen.queryByText(Config.formation.fields.businessStartDate.error90Days)
-              ).not.toBeInTheDocument();
-            });
-          })
-        );
-      });
-
-      describe("30 day limit for limited-partnership", () => {
-        it("shows validation error past date limit", async () => {
-          const page = await getPageHelper({ legalStructureId: "limited-partnership" }, {});
-          page.selectDate(getCurrentDate().add(31, "day"), fieldLabel);
-          expect(screen.getByText(Config.formation.fields.businessStartDate.error30Days)).toBeInTheDocument();
-        });
-
-        it("shows validation error for previous date", async () => {
-          const page = await getPageHelper({ legalStructureId: "limited-partnership" }, {});
-          page.selectDate(getCurrentDate().subtract(4, "day"), fieldLabel);
-          expect(screen.getByText(Config.formation.fields.businessStartDate.error30Days)).toBeInTheDocument();
-        });
-
-        it("does not show validation error", async () => {
-          const page = await getPageHelper({ legalStructureId: "limited-partnership" }, {});
-          page.selectDate(getCurrentDate().add(29, "day"), fieldLabel);
-          expect(
-            screen.queryByText(Config.formation.fields.businessStartDate.error30Days)
-          ).not.toBeInTheDocument();
-        });
-      });
-
-      describe("future date", () => {
-        const legalStructureIds = ["limited-liability-company", "limited-liability-partnership"];
-        legalStructureIds.map((legalStructureId) =>
-          describe(`${legalStructureId}`, () => {
-            it("shows validation error", async () => {
-              const page = await getPageHelper({ legalStructureId }, {});
-              page.selectDate(getCurrentDate().subtract(4, "day"), fieldLabel);
-              expect(
-                screen.getByText(Config.formation.fields.businessStartDate.errorFuture)
-              ).toBeInTheDocument();
-            });
-
-            it("does not show validation error", async () => {
-              const page = await getPageHelper({ legalStructureId }, {});
-              page.selectDate(getCurrentDate().add(120, "day"), fieldLabel);
-              expect(
-                screen.queryByText(Config.formation.fields.businessStartDate.errorFuture)
-              ).not.toBeInTheDocument();
-            });
-          })
-        );
-      });
-
-      describe("current date", () => {
-        const legalStructureIds = ["limited-liability-company"];
-        const businessPersona = "FOREIGN";
-        legalStructureIds.map((legalStructureId) =>
-          describe(`${legalStructureId}`, () => {
-            it("shows field as disabled", async () => {
-              await getPageHelper({ legalStructureId, businessPersona }, {});
-              expect(screen.getByLabelText("Business start date")).toBeDisabled();
-            });
-
-            it("reset to current date", async () => {
-              await getPageHelper(
-                { legalStructureId, businessPersona },
-                { businessStartDate: getCurrentDate().subtract(4, "day").format(defaultDisplayDateFormat) }
-              );
-              expect(screen.getByLabelText("Business start date")).toHaveValue(
-                getCurrentDate().format(defaultDisplayDateFormat)
-              );
-            });
-          })
-        );
-      });
     });
   });
 
