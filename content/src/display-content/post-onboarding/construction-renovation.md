@@ -1,4 +1,9 @@
 ---
+notesMd: >-
+  Wayback snapshot for broken link [Local (Regional) Code Enforcement Offices]:
+  https://web.archive.org/web/20230311001931/https://www.nj.gov/dca/divisions/codes/offices/localcode.html
+
+  changed to new page: https://www.nj.gov/dca/codes/offices/localcode.shtml
 slug: construction-renovation
 radioQuestion: Do you plan to do any renovations or construction on your
   commercial/industrial space?
@@ -9,7 +14,7 @@ callToActionYesDropdownText: Get Started
 callToActionYesText1: Construction Permit Application
 callToActionYesLink1: https://www.nj.gov/dca/divisions/codes/resources/constructionpermitforms.html
 callToActionYesText2: Local (Regional) Code Enforcement Offices
-callToActionYesLink2: https://www.nj.gov/dca/divisions/codes/offices/localcode.html
+callToActionYesLink2: https://www.nj.gov/dca/codes/offices/localcode.shtml
 ---
 
 ### Site Considerations
