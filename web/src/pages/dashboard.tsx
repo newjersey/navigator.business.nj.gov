@@ -39,6 +39,7 @@ import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { LookupOperatingPhaseById, Municipality } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
+import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
@@ -210,6 +211,7 @@ const DashboardPage = (props: Props): ReactElement => {
 
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
+      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${Config.pagesMetadata.dashboard.title}`} />
       <PageSkeleton>
         <NavBar />
         <main id="main">

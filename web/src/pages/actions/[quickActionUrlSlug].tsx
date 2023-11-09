@@ -47,9 +47,10 @@ export const QuickActionElement = (props: { quickAction: QuickAction; preview?: 
 };
 
 const QuickActionPage = (props: Props): ReactElement => {
+  const { Config } = useConfig();
   return (
     <>
-      <NextSeo title={`Business.NJ.gov Navigator - ${props.quickAction.name}`} />
+      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${props.quickAction.name}`} />
       <PageSkeleton>
         <NavBar showSidebar={true} hideMiniRoadmap={true} />
         <TaskSidebarPageLayout hideMiniRoadmap={true}>

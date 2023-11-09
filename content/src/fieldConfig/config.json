@@ -319,6 +319,19 @@
     "savingText": "Saving",
     "savedText": "Saved 1 minute ago"
   },
+  "pagesMetadata": {
+    "home": {
+      "title": "Home"
+    },
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "profile": {
+      "title": "Business Profile"
+    },
+    "titlePrefix": "Business.NJ.gov Navigator",
+    "siteDescription": "Business.NJ.gov Navigator is a tool for starting and managing a business in the State of New Jersey"
+  },
   "headerDefaults": {
     "noUserNameHeaderText": "Hello!",
     "defaultHeaderText": "Hello, ${name}",
