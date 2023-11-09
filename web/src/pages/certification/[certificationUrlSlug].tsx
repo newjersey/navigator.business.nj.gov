@@ -3,6 +3,7 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import {
@@ -43,9 +44,10 @@ export const CertificationElement = (props: { certification: Certification }): R
 };
 
 const CertificationPage = (props: Props): ReactElement => {
+  const { Config } = useConfig();
   return (
     <>
-      <NextSeo title={`Business.NJ.gov Navigator - ${props.certification.name}`} />
+      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${props.certification.name}`} />
       <PageSkeleton>
         <NavBar showSidebar={true} hideMiniRoadmap={true} />
         <TaskSidebarPageLayout hideMiniRoadmap={true}>
