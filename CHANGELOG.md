@@ -1,3 +1,19 @@
+# [5.37.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.36.0...v5.37.0) (2023-11-09)
+
+
+### Bug Fixes
+
+* [[#185893614](https://github.com/newjersey/navigator.business.nj.gov/issues/185893614)] circle ci config env vars ([a04d085](https://github.com/newjersey/navigator.business.nj.gov/commit/a04d085409652aa382277c743c3c00d6415fd920))
+* [[#185893614](https://github.com/newjersey/navigator.business.nj.gov/issues/185893614)] remove duplicate field from licenseSearchTask in CMS ([a847a18](https://github.com/newjersey/navigator.business.nj.gov/commit/a847a183baa79feb6e5af20afc5beef74c3d46dc))
+* [[#186366473](https://github.com/newjersey/navigator.business.nj.gov/issues/186366473)] added Analytics for formation task help button ([f7efe5a](https://github.com/newjersey/navigator.business.nj.gov/commit/f7efe5ae32ac7faa995510ddde6096dd81a45b1c))
+
+
+### Features
+
+* [[#185893614](https://github.com/newjersey/navigator.business.nj.gov/issues/185893614)] license status check migration - public movers ([247f8c4](https://github.com/newjersey/navigator.business.nj.gov/commit/247f8c4b4c9e37c69ffd5a575dc991f9801240d3))
+* [[#186084930](https://github.com/newjersey/navigator.business.nj.gov/issues/186084930)] hide landing page presentational images from screen readers ([5db7e43](https://github.com/newjersey/navigator.business.nj.gov/commit/5db7e4356848f1e77fb1deb671c1fba2889d9a73))
+* [185932083] view hidden items accordion scrolls to top when opened ([7510465](https://github.com/newjersey/navigator.business.nj.gov/commit/7510465901ecf44ec178b202ff3de081ba3ed8f5))
+
 # [5.36.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.35.0...v5.36.0) (2023-11-03)
 
 
