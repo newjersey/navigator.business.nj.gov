@@ -1,12 +1,7 @@
 {
-  "displayname": "architecture",
   "naicsCodes": "541310",
   "defaultSectorId": "construction",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true
-  },
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": [],
   "roadmapSteps": [
     {
       "step": 1,
@@ -64,9 +59,19 @@
       "weight": 30,
       "licenseTask": "authorization-architect-firm",
       "required": true
+    },
+    {
+      "step": 3,
+      "licenseTask": "home-inspector-license",
+      "weight": 1
     }
   ],
   "name": "Architecture",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "architecture",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true
+  },
   "isEnabled": true,
   "additionalSearchTerms": "architect, engineer, consulting, architectural services",
   "id": "architecture",
