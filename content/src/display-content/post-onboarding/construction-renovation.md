@@ -1,6 +1,6 @@
 ---
 notesMd: >-
-  Wayback snapshot for broken link [Local (Regional) Code Enforcement Offices]:
+  Way back snapshot for broken link [Local (Regional) Code Enforcement Offices]:
   https://web.archive.org/web/20230311001931/https://www.nj.gov/dca/divisions/codes/offices/localcode.html
 
   changed to new page: https://www.nj.gov/dca/codes/offices/localcode.shtml
