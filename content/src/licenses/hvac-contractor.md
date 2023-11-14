@@ -12,8 +12,8 @@ callToActionText: Renew My HVACR License
 
 - Certificate of completion for continuing education
 - License number
-- Social Security number (SSN)
 - Registration code
+- Social Security number (SSN)
 - Surety bond
 - Applicable fees paid
 
