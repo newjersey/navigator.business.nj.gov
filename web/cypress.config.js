@@ -2,6 +2,10 @@ import { lighthouse, prepareAudit } from "@cypress-audit/lighthouse";
 import { pa11y } from "@cypress-audit/pa11y";
 import { defineConfig } from "cypress";
 import dotenvPlugin from "cypress-dotenv";
+import dotenv from "dotenv";
+import process from "process";
+
+dotenv.config();
 
 export default defineConfig({
   projectId: "o9nvo8",
@@ -46,6 +50,7 @@ export default defineConfig({
       return config;
     },
     baseUrl: "http://localhost:3000",
+    env: process.env,
     specPattern: "cypress/e2e/**/*.{js,jsx,ts,tsx}",
     retries: {
       runMode: 2,

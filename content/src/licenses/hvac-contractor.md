@@ -1,7 +1,7 @@
 ---
 notesMd: "Drafted in
   https://docs.google.com/document/d/1Wz_sMYY0t3ycS4rmiqeWrNafLwdBStGE_R_ivT3c5\
-  7w/edit?pli=1#heading=h.k5ckr6mdkitr "
+  7w/edit"
 urlSlug: hvac-contractor
 previewType: expiration
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx

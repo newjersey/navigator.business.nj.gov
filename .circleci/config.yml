@@ -93,13 +93,17 @@ commands:
     steps:
       - run:
           name: Start services
-          command: yarn workspace @businessnjgovnavigator/api start & yarn workspace @businessnjgovnavigator/api start:wiremock & yarn workspace @businessnjgovnavigator/web start
+          command: |
+            while true; do
+              date
+              yarn dlx concurrently "yarn workspace @businessnjgovnavigator/api start" "yarn workspace @businessnjgovnavigator/api start:wiremock" "yarn workspace @businessnjgovnavigator/web start"
+            done
           background: true
           no_output_timeout: 30m
       - run:
           name: Run Tests
           no_output_timeout: 30m
-          command: yarn cypress:run --browser=<< parameters.browser >> --record=<< parameters.enable-dashboard >> --env SUITE=<< parameters.suite >>
+          command: date && sleep 30 && date && yarn cypress:run --browser=<< parameters.browser >> --record=<< parameters.enable-dashboard >> --env SUITE=<< parameters.suite >>; date
           working_directory: web
       - store_test_results:
           path: web/cypress/results
