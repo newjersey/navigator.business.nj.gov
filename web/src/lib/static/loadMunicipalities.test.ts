@@ -1,8 +1,9 @@
 import { generateMunicipalityDetail } from "@businessnjgovnavigator/shared";
-import fs from "fs";
+import fs from "fs"; // Object
 import { loadAllMunicipalities } from "./loadMunicipalities";
 
-jest.mock("fs");
+jest.mock("fs"); // Object with Jest Fns
+
 jest.mock("process", () => ({
   cwd: (): string => "/test",
 }));

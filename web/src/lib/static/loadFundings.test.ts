@@ -1,4 +1,5 @@
 import { loadAllFundings, loadAllFundingUrlSlugs, loadFundingByUrlSlug } from "@/lib/static/loadFundings";
+import { mockReadDirReturn } from "@/lib/static/mockHelpers";
 import fs from "fs";
 
 jest.mock("fs");
@@ -54,7 +55,7 @@ describe("loadFundings", () => {
         "---\n" +
         "Some content description 2";
 
-      mockReadDirReturn(["opp1.md", "opp2.md"]);
+      mockReadDirReturn({ value: ["opp1.md", "opp2.md"], mockedFs });
       mockedFs.readFileSync.mockReturnValueOnce(fundingMd1).mockReturnValueOnce(fundingMd2);
       const allFundings = loadAllFundings();
 
@@ -122,7 +123,7 @@ describe("loadFundings", () => {
         "---\n" +
         "Some content description 2";
 
-      mockReadDirReturn(["opp1.md", "opp2.md"]);
+      mockReadDirReturn({ value: ["opp1.md", "opp2.md"], mockedFs });
       mockedFs.readFileSync.mockReturnValueOnce(fundingMd1).mockReturnValueOnce(fundingMd2);
       const allUrlSlugs = loadAllFundingUrlSlugs();
 
@@ -158,7 +159,7 @@ describe("loadFundings", () => {
         "---\n" +
         "Some content description 2";
 
-      mockReadDirReturn(["opp1.md", "opp2.md"]);
+      mockReadDirReturn({ value: ["opp1.md", "opp2.md"], mockedFs });
       mockedFs.readFileSync
         .mockReturnValueOnce(fundingMd1) // read first file in list
         .mockReturnValueOnce(fundingMd2) // read second file in list
@@ -178,10 +179,4 @@ describe("loadFundings", () => {
       });
     });
   });
-
-  const mockReadDirReturn = (value: string[]): void => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    mockedFs.readdirSync.mockReturnValue(value);
-  };
 });

@@ -1,11 +1,11 @@
 import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
-import { QuickAction } from "@/lib/types/types";
+import { QuickActionTask } from "@/lib/types/types";
 
-export const searchQuickActions = (quickActions: QuickAction[], term: string): Match[] => {
+export const searchQuickActionTasks = (quickActionTasks: QuickActionTask[], term: string): Match[] => {
   const matches: Match[] = [];
 
-  for (const quickAction of quickActions) {
+  for (const quickAction of quickActionTasks) {
     let match: Match = {
       filename: quickAction.filename,
       snippets: [],
@@ -15,7 +15,7 @@ export const searchQuickActions = (quickActions: QuickAction[], term: string): M
     const name = quickAction.name.toLowerCase();
     const cta = quickAction.callToActionText?.toLowerCase();
     const ctaLink = quickAction.callToActionLink?.toLowerCase();
-    const filename = quickAction.filename?.toLowerCase();
+    const filename = quickAction.filename.toLowerCase();
     const urlSlug = quickAction.urlSlug.toLowerCase();
     const form = quickAction.form?.toLowerCase();
 

@@ -2955,9 +2955,9 @@ collections:
     fields:
       - { name: "" }
 
-  - name: "quick-actions"
-    label: "Quick Actions"
-    folder: "content/src/quick-actions"
+  - name: "quick-action-tasks"
+    label: "Quick Action Tasks"
+    folder: "content/src/quick-action-tasks"
     summary: "{{filename}} - {{name}}"
     identifier_field: "{{filename}}"
     slug: "{{fields.filename}}"
@@ -2968,14 +2968,42 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "Filename", name: "filename", widget: "nospace", required: false }
-      - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+      - { label: "Filename (disabled after file creation)", name: "filename", widget: "write-once-read-only" }
       - { label: "Name/Title", name: "name", widget: "string" }
-      - { label: "ID", name: "id", widget: "string" }
-      - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Icon"
+        name: icon
+        widget: "select"
+        multiple: false
+        required: true
+        options: ["loop.svg", "capitol.svg"]
+      - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "nospace", required: true }
+      - { label: "Content", name: "body", widget: "markdown", required: true }
       - { label: "Form", name: "form", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+
+  - name: "quick-action-links"
+    label: "Quick Action Links"
+    folder: "content/src/quick-action-links"
+    summary: "{{filename}} - {{name}}"
+    identifier_field: "{{filename}}"
+    slug: "{{fields.filename}}"
+    delete: true
+    sortable_fields: ["name", "filename"]
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - { label: "Filename (disabled after file creation)", name: "filename", widget: "write-once-read-only" }
+      - { label: "Name/Title", name: "name", widget: "string" }
+      - label: "Icon"
+        name: icon
+        widget: "select"
+        multiple: false
+        required: true
+        options: ["loop.svg", "capitol.svg"]
+      - { label: "External Link", name: "externalRoute", widget: "nospace", required: true }
 
   - name: "misc-label"
     label: "🟨 MISC"

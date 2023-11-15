@@ -5,7 +5,7 @@ notesMd: "Draft:
 filename: registry-update-brc-amendment
 urlSlug: registry-update-brc-amendment
 name: Update Your Business Registration Certificate and/or Registry Account
-id: registry-update-brc-amendment
+icon: loop.svg
 ---
 
 If your business registration information has changed since you last updated your `New Jersey Tax/Employer ID|tax-id` or your public business registry account, you must report those changes to the New Jersey Division of Revenue and Enterprise Services (DORES).

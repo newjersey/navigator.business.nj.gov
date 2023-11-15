@@ -2035,13 +2035,13 @@ export default {
     },
     quick_action_button: {
       click: {
-        go_to_quick_action_screen: () => {
+        go_to_quick_action_screen: (fileName: string) => {
           eventRunner.track({
             legacy_event_category: "quick_action_button",
             legacy_event_action: "click",
             legacy_event_label: "go_to_quick_action_screen",
             event: "link_clicks",
-            clicked_to: "quick_action_screen_brc",
+            clicked_to: fileName,
           });
         },
       },
