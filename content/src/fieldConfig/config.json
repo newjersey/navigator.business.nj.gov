@@ -329,8 +329,8 @@
     "profile": {
       "title": "Business Profile"
     },
-    "titlePrefix": "Business.NJ.gov Navigator",
-    "siteDescription": "Business.NJ.gov Navigator is a tool for starting and managing a business in the State of New Jersey"
+    "titlePrefix": "Business.NJ.gov My Account",
+    "siteDescription": "Business.NJ.gov My Account is a tool for starting and managing a business in the State of New Jersey"
   },
   "headerDefaults": {
     "noUserNameHeaderText": "Hello!",
