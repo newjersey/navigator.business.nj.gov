@@ -1,3 +1,4 @@
+import { mockReadDirReturnOnce } from "@/lib/static/mockHelpers";
 import fs from "fs";
 import { loadAllTaskUrlSlugs, loadTaskByFileName, loadTaskByUrlSlug } from "./loadTasks";
 
@@ -63,8 +64,8 @@ describe("loadTasks", () => {
         ],
       });
 
-      mockReadDirReturnOnce(["task1.md"]);
-      mockReadDirReturnOnce(["license1.md", "license2.md"]);
+      mockReadDirReturnOnce({ value: ["task1.md"], mockedFs });
+      mockReadDirReturnOnce({ value: ["license1.md", "license2.md"], mockedFs });
 
       mockedFs.readFileSync
         .mockReturnValueOnce(licenseMd1)
@@ -121,8 +122,8 @@ describe("loadTasks", () => {
         .mockReturnValueOnce(taskMd2)
         .mockReturnValueOnce(licenseMd1);
 
-      mockReadDirReturnOnce(["task1.md", "task2.md"]);
-      mockReadDirReturnOnce(["license1.md"]);
+      mockReadDirReturnOnce({ value: ["task1.md", "task2.md"], mockedFs });
+      mockReadDirReturnOnce({ value: ["license1.md"], mockedFs });
 
       const allTaskUrlSlugs = loadAllTaskUrlSlugs();
       expect(allTaskUrlSlugs).toHaveLength(3);
@@ -185,7 +186,7 @@ describe("loadTasks", () => {
         ],
       });
 
-      mockReadDirReturnOnce(["task1.md", "task2.md", "task3.md"]);
+      mockReadDirReturnOnce({ value: ["task1.md", "task2.md", "task3.md"], mockedFs });
 
       mockedFs.readFileSync
         .mockReturnValueOnce(taskMd1) // read first file in list
@@ -255,8 +256,8 @@ describe("loadTasks", () => {
         dependencies: [{ licenseTask: "license1", licenseTaskDependencies: ["license2"] }],
       });
 
-      mockReadDirReturnOnce(["task1.md"]);
-      mockReadDirReturnOnce(["license1.md", "license2.md"]);
+      mockReadDirReturnOnce({ value: ["task1.md"], mockedFs });
+      mockReadDirReturnOnce({ value: ["license1.md", "license2.md"], mockedFs });
 
       mockedFs.readFileSync
         .mockReturnValueOnce(taskMd) // read first file in list
@@ -280,10 +281,4 @@ describe("loadTasks", () => {
       });
     });
   });
-
-  const mockReadDirReturnOnce = (value: string[]): void => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    mockedFs.readdirSync.mockReturnValueOnce(value);
-  };
 });

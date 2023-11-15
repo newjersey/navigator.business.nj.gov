@@ -1,4 +1,5 @@
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
+import { mockReadDirReturnOnce } from "@/lib/static/mockHelpers";
 import { OperateReference } from "@/lib/types/types";
 import fs from "fs";
 
@@ -74,9 +75,9 @@ describe("loadOperateReferences", () => {
       "---\n" +
       "Some content description 1";
 
-    mockReadDirReturn(["filingMd1.md", "filingMd2.md"]); // read filing dir
-    mockReadDirReturn(["fundingMd1.md", "fundingMd2.md"]); // read funding dir
-    mockReadDirReturn(["certMd1.md"]); // read certification dir
+    mockReadDirReturnOnce({ value: ["filingMd1.md", "filingMd2.md"], mockedFs }); // read filing dir
+    mockReadDirReturnOnce({ value: ["fundingMd1.md", "fundingMd2.md"], mockedFs }); // read funding dir
+    mockReadDirReturnOnce({ value: ["certMd1.md"], mockedFs }); // read certification dir
 
     mockedFs.readFileSync
       .mockReturnValueOnce(filingMd1) // read first file in filings
@@ -115,10 +116,4 @@ describe("loadOperateReferences", () => {
 
     expect(loadOperateReferences()).toEqual(expectedOperateReferences);
   });
-
-  const mockReadDirReturn = (value: string[]): void => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    mockedFs.readdirSync.mockReturnValueOnce(value);
-  };
 });

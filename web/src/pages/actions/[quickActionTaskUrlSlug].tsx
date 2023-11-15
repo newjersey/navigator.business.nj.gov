@@ -4,65 +4,67 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
-import { useConfig } from "@/lib/data-hooks/useConfig";
+import { getMergedConfig } from "@/contexts/configContext";
 import {
-  loadAllQuickActionUrlSlugs,
-  loadQuickActionByUrlSlug,
-  QuickActionUrlSlugParam,
-} from "@/lib/static/loadQuickActions";
-import { QuickAction } from "@/lib/types/types";
+  loadAllQuickActionTaskUrlSlugs,
+  loadQuickActionTaskByUrlSlug,
+  QuickActionTaskUrlSlugParam,
+} from "@/lib/static/loadQuickActionTasks";
+import { QuickActionTask } from "@/lib/types/types";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { ReactElement } from "react";
 
 interface Props {
-  quickAction: QuickAction;
+  quickActionTask: QuickActionTask;
 }
 
-export const QuickActionElement = (props: { quickAction: QuickAction; preview?: boolean }): ReactElement => {
-  const { Config } = useConfig();
+const Config = getMergedConfig();
 
+export const QuickActionElement = (props: Props): ReactElement => {
   return (
     <div className="minh-38">
       <div className="bg-base-extra-light margin-x-neg-4 margin-top-neg-4 radius-top-lg">
         <div className="padding-y-4 margin-x-4 margin-bottom-2">
-          <h1>{props.quickAction.name}</h1>
+          <h1>{props.quickActionTask.name}</h1>
         </div>
       </div>
-      <Content>{props.quickAction.contentMd}</Content>
-      {props.quickAction.form && (
+      <Content>{props.quickActionTask.contentMd}</Content>
+      {props.quickActionTask.form && (
         <>
           <HorizontalLine />
           <span className="h5-styling" data-testid="form-id-header">
             {Config.filingDefaults.formText} &nbsp;
           </span>
-          <span className="h6-styling">{props.quickAction.form}</span>
+          <span className="h6-styling">{props.quickActionTask.form}</span>
         </>
       )}
-      {props.quickAction.callToActionLink && props.quickAction.callToActionText && (
-        <TaskCTA link={props.quickAction.callToActionLink} text={props.quickAction.callToActionText} />
+      {props.quickActionTask.callToActionLink && props.quickActionTask.callToActionText && (
+        <TaskCTA
+          link={props.quickActionTask.callToActionLink}
+          text={props.quickActionTask.callToActionText}
+        />
       )}
     </div>
   );
 };
 
 const QuickActionPage = (props: Props): ReactElement => {
-  const { Config } = useConfig();
   return (
     <>
-      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${props.quickAction.name}`} />
+      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${props.quickActionTask.name}`} />
       <PageSkeleton>
         <NavBar showSidebar={true} hideMiniRoadmap={true} />
         <TaskSidebarPageLayout hideMiniRoadmap={true}>
-          <QuickActionElement quickAction={props.quickAction} />
+          <QuickActionElement quickActionTask={props.quickActionTask} />
         </TaskSidebarPageLayout>
       </PageSkeleton>
     </>
   );
 };
 
-export const getStaticPaths = (): GetStaticPathsResult<QuickActionUrlSlugParam> => {
-  const paths = loadAllQuickActionUrlSlugs();
+export const getStaticPaths = (): GetStaticPathsResult<QuickActionTaskUrlSlugParam> => {
+  const paths = loadAllQuickActionTaskUrlSlugs();
   return {
     paths,
     fallback: false,
@@ -72,11 +74,11 @@ export const getStaticPaths = (): GetStaticPathsResult<QuickActionUrlSlugParam> 
 export const getStaticProps = ({
   params,
 }: {
-  params: QuickActionUrlSlugParam;
+  params: QuickActionTaskUrlSlugParam;
 }): GetStaticPropsResult<Props> => {
   return {
     props: {
-      quickAction: loadQuickActionByUrlSlug(params.quickActionUrlSlug),
+      quickActionTask: loadQuickActionTaskByUrlSlug(params.quickActionTaskUrlSlug),
     },
   };
 };

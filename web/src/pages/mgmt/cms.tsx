@@ -38,7 +38,8 @@ import { useMountEffect } from "@/lib/utils/helpers";
 
 import AccountSetupPreview from "@/lib/cms/previews/AccountSetupPreview";
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
-import QuickActionsPreview from "@/lib/cms/previews/QuickActionsPreview";
+import QuickActionLinkPreview from "@/lib/cms/previews/QuickActionLinkPreview";
+import QuickActionTaskPreview from "@/lib/cms/previews/QuickActionTaskPreview";
 import TaxAccessModalPreview from "@/lib/cms/previews/TaxAccessModalPreview";
 import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
@@ -90,7 +91,10 @@ const CMS = dynamic(
       registerPreview(CMS, "license-calendar-events", LicensesPreview);
 
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);
-      registerPreview(CMS, "quick-actions", QuickActionsPreview);
+
+      // ----- Quick Actions -----
+      registerPreview(CMS, "quick-action-tasks", QuickActionTaskPreview);
+      registerPreview(CMS, "quick-action-links", QuickActionLinkPreview);
 
       // ----- Roadmap Sidebar Card -----
       registerPreview(CMS, "roadmap-sidebar-card", RoadmapSidebarCardPreview);

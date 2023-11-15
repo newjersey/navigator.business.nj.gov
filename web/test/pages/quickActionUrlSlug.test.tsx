@@ -1,17 +1,17 @@
-import QuickActionPage from "@/pages/actions/[quickActionUrlSlug]";
-import { generateQuickAction } from "@/test/factories";
+import QuickActionTaskPage from "@/pages/actions/[quickActionTaskUrlSlug]";
+import { generateQuickActionTask } from "@/test/factories";
 import { render, screen } from "@testing-library/react";
 
 describe("quick action page", () => {
   it("shows the quick action details", () => {
-    const quickAction = generateQuickAction({
+    const quickAction = generateQuickActionTask({
       name: "Some Quick Action Name",
       callToActionText: "Click here",
       contentMd: "Some content description",
       form: "FORM-123",
     });
 
-    render(<QuickActionPage quickAction={quickAction} />);
+    render(<QuickActionTaskPage quickActionTask={quickAction} />);
 
     expect(screen.getByText("Some Quick Action Name")).toBeInTheDocument();
     expect(screen.getByText("Click here")).toBeInTheDocument();

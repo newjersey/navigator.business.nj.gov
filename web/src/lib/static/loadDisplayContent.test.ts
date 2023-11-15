@@ -1,3 +1,4 @@
+import { mockReadDirReturn } from "@/lib/static/mockHelpers";
 import fs from "fs";
 import { loadRoadmapSideBarDisplayContent, loadTasksDisplayContent } from "./loadDisplayContent";
 
@@ -28,7 +29,7 @@ describe("loadDisplayContent", () => {
         "---\n" +
         "**Welcome!**";
 
-      mockReadDirReturn(["welcome.md"]);
+      mockReadDirReturn({ value: ["welcome.md"], mockedFs });
       mockedFs.readFileSync.mockReturnValue(welcomeCard);
 
       expect(loadRoadmapSideBarDisplayContent().sidebarDisplayContent["welcome-id"]).toEqual({
@@ -53,10 +54,4 @@ describe("loadDisplayContent", () => {
       );
     });
   });
-
-  const mockReadDirReturn = (value: string[]): void => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    mockedFs.readdirSync.mockReturnValue(value);
-  };
 });

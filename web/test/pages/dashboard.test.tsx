@@ -1,10 +1,17 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-import { OperateReference, QuickAction, RoadmapDisplayContent, SidebarCardContent } from "@/lib/types/types";
+import {
+  OperateReference,
+  QuickActionLink,
+  QuickActionTask,
+  RoadmapDisplayContent,
+  SidebarCardContent,
+} from "@/lib/types/types";
 import DashboardPage from "@/pages/dashboard";
 import {
   generateBusinessPersona,
-  generateQuickAction,
+  generateQuickActionLink,
+  generateQuickActionTask,
   generateSidebarCardContent,
   generateStep,
   generateTask,
@@ -83,11 +90,13 @@ describe("dashboard page", () => {
   const renderDashboardPage = ({
     sidebarDisplayContent,
     operateReferences,
-    quickActions,
+    quickActionLinks,
+    quickActionTask,
   }: {
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     operateReferences?: Record<string, OperateReference>;
-    quickActions?: QuickAction[] | undefined;
+    quickActionLinks?: QuickActionLink[] | undefined;
+    quickActionTask?: QuickActionTask[] | undefined;
   }): void => {
     render(
       <ThemeProvider theme={createTheme()}>
@@ -97,7 +106,8 @@ describe("dashboard page", () => {
           fundings={[]}
           certifications={[]}
           municipalities={[]}
-          quickActions={quickActions ?? []}
+          quickActionLinks={quickActionLinks ?? []}
+          quickActionTasks={quickActionTask ?? []}
         />
       </ThemeProvider>
     );
@@ -115,7 +125,8 @@ describe("dashboard page", () => {
             fundings={[]}
             certifications={[]}
             municipalities={[]}
-            quickActions={[]}
+            quickActionLinks={[]}
+            quickActionTasks={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>
@@ -278,12 +289,12 @@ describe("dashboard page", () => {
     expect(screen.getByTestId("funding-alert")).toBeInTheDocument();
   });
 
-  it("renders hiddenTasks snackbar after delay when fromFunding query parameter is provided", async () => {
+  it("renders hiddenTasks snackbar after delay when fromFunding query parameter is provided", () => {
     jest.useFakeTimers();
     useMockRouter({ isReady: true, query: { [QUERIES.fromFunding]: "true" } });
 
     renderDashboardPage({});
-    await act(() => {
+    act(() => {
       jest.advanceTimersByTime(6000);
     });
     expect(screen.getByTestId("hiddenTasks-alert")).toBeInTheDocument();
@@ -621,23 +632,69 @@ describe("dashboard page", () => {
       return !phase.displayQuickActions;
     }).map((phase) => phase.id);
 
-    it.each(operatingPhasesWithoutQuickActions)("does not display quick actions for %s", (phase) => {
-      useMockProfileData({ operatingPhase: phase });
-      renderDashboardPage({ quickActions: [generateQuickAction({ name: "some quick action" })] });
-      expect(screen.queryByText("some quick action")).not.toBeInTheDocument();
-    });
-
-    it.each(operatingPhasesWithQuickActions)("displays all quick actions for %s", (phase) => {
+    it.each(operatingPhasesWithoutQuickActions)("does not display quick action section for %s", (phase) => {
       useMockProfileData({ operatingPhase: phase });
       renderDashboardPage({
-        quickActions: [
-          generateQuickAction({ name: "some quick action" }),
-          generateQuickAction({ name: "another quick action" }),
-        ],
+        quickActionLinks: [generateQuickActionLink({})],
+        quickActionTask: [generateQuickActionTask({})],
       });
-      expect(screen.getByText("another quick action")).toBeInTheDocument();
-      expect(screen.getByText("some quick action")).toBeInTheDocument();
+      expect(screen.queryByTestId("quick-actions-section")).not.toBeInTheDocument();
     });
+
+    it.each(operatingPhasesWithQuickActions)("displays quick action section for %s", (phase) => {
+      useMockProfileData({ operatingPhase: phase });
+      renderDashboardPage({
+        quickActionLinks: [generateQuickActionLink({})],
+        quickActionTask: [generateQuickActionTask({})],
+      });
+      expect(screen.getByTestId("quick-actions-section")).toBeInTheDocument();
+    });
+
+    it.each(operatingPhasesWithQuickActions)(
+      "displays registry-update-brc-amendment quick action for %s",
+      async (phase) => {
+        useMockProfileData({ operatingPhase: phase });
+        renderDashboardPage({
+          quickActionTask: [
+            generateQuickActionTask({
+              name: "some name",
+              filename: "registry-update-brc-amendment",
+            }),
+          ],
+        });
+        await waitFor(() => {
+          expect(screen.getByText("some name")).toBeInTheDocument();
+        });
+      }
+    );
+
+    it.each(operatingPhasesWithQuickActions)(
+      "displays state-contracting-external-link quick action when industry id is not home-contractor for %s",
+      (phase) => {
+        useMockProfileData({ operatingPhase: phase, industryId: "some-value" });
+        renderDashboardPage({
+          quickActionLinks: [
+            generateQuickActionLink({
+              name: "some name",
+              filename: "state-contracting-external-link",
+              externalRoute: "some-external-route",
+            }),
+          ],
+        });
+        expect(screen.getByText("some name")).toBeInTheDocument();
+      }
+    );
+
+    it.each(operatingPhasesWithQuickActions)(
+      "does not display state-contracting-external-link quick action when industry id is home-contractor for %s",
+      (phase) => {
+        useMockProfileData({ operatingPhase: phase, industryId: "home-contractor" });
+        renderDashboardPage({
+          quickActionLinks: [generateQuickActionLink({ filename: "state-contracting-external-link" })],
+        });
+        expect(screen.queryByTestId("state-contracting-external-link")).not.toBeInTheDocument();
+      }
+    );
   });
 
   it("displays step2 for guest mode user when business structure task is completed", () => {

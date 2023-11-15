@@ -15,7 +15,8 @@ import {
   LicenseEvent,
   MarkdownResult,
   PostOnboardingFile,
-  QuickAction,
+  QuickActionLink,
+  QuickActionTask,
   TaskWithoutLinks,
   TaxAgency,
   TaxFilingMethod,
@@ -72,11 +73,26 @@ export const convertLicenseMd = (taskMdContents: string, filename: string): Lice
   };
 };
 
-export const convertQuickActionMd = (quickActionMdContents: string, filename: string): QuickAction => {
-  const matterResult = matter(quickActionMdContents);
-  const quickActionGrayMatter = matterResult.data as QuickActionGrayMatter;
+export const convertQuickActionTaskMd = (
+  quickActionTaskMdContents: string,
+  filename: string
+): QuickActionTask => {
+  const matterResult = matter(quickActionTaskMdContents);
+  const quickActionGrayMatter = matterResult.data as QuickActionTaskGrayMatter;
   return {
     contentMd: matterResult.content,
+    filename,
+    ...quickActionGrayMatter,
+  };
+};
+
+export const convertQuickActionLinkMd = (
+  quickActionLinkMdContents: string,
+  filename: string
+): QuickActionLink => {
+  const matterResult = matter(quickActionLinkMdContents);
+  const quickActionGrayMatter = matterResult.data as QuickActionLinkGrayMatter;
+  return {
     filename,
     ...quickActionGrayMatter,
   };
@@ -163,13 +179,19 @@ type LicenseGrayMatter = {
   callToActionText: string;
 };
 
-type QuickActionGrayMatter = {
-  id: string;
+type QuickActionLinkGrayMatter = {
+  name: string;
+  icon: string;
+  externalRoute: string;
+};
+
+type QuickActionTaskGrayMatter = {
   name: string;
   urlSlug: string;
   callToActionLink: string;
   callToActionText: string;
   form: string;
+  icon: string;
 };
 
 type TaskGrayMatter = {
