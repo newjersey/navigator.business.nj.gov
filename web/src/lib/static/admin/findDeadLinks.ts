@@ -18,7 +18,8 @@ const fieldConfigDir = path.join(process.cwd(), "..", "content", "src", "fieldCo
 const fundingsDir = path.join(process.cwd(), "..", "content", "src", "fundings");
 const certificationsDir = path.join(process.cwd(), "..", "content", "src", "certifications");
 const licensesDir = path.join(process.cwd(), "..", "content", "src", "licenses");
-const quickActionsDir = path.join(process.cwd(), "..", "content", "src", "quick-actions");
+const quickActionLinksDir = path.join(process.cwd(), "..", "content", "src", "quick-action-links");
+const quickActionTasksDir = path.join(process.cwd(), "..", "content", "src", "quick-action-tasks");
 
 type Filenames = {
   tasks: string[];
@@ -32,7 +33,8 @@ type Filenames = {
   certifications: string[];
   licenses: string[];
   licenseTasks: string[];
-  quickActions: string[];
+  quickActionLinks: string[];
+  quickActionTasks: string[];
 };
 
 type FileContents = {
@@ -75,7 +77,8 @@ const getFilenames = (): Filenames => {
     certifications: fs.readdirSync(certificationsDir),
     licenses: fs.readdirSync(licensesDir),
     licenseTasks: fs.readdirSync(licenseTasksDir),
-    quickActions: fs.readdirSync(quickActionsDir),
+    quickActionLinks: fs.readdirSync(quickActionLinksDir),
+    quickActionTasks: fs.readdirSync(quickActionTasksDir),
   };
 };
 
@@ -244,8 +247,11 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     ...filenames.certifications.map((it) => {
       return `/certification/${it.split(".md")[0]}`;
     }),
-    ...filenames.quickActions.map((it) => {
-      return `/actions/${it.split(".md")[0]}`;
+    ...filenames.quickActionLinks.map((it) => {
+      return `/quick-action-links/${it.split(".md")[0]}`;
+    }),
+    ...filenames.quickActionTasks.map((it) => {
+      return `/quick-action-tasks/${it.split(".md")[0]}`;
     }),
   ];
 
