@@ -1,8 +1,8 @@
 import { BetaBar } from "@/components/BetaBar";
-import { Footer } from "@/components/Footer";
 import { LegalMessage } from "@/components/LegalMessage";
 import { Banner } from "@/components/njwds/Banner";
 import { OutageAlertBar } from "@/components/OutageAlertBar";
+import { PageFooter } from "@/components/PageFooter";
 import { ReportAnIssueBar } from "@/components/ReportAnIssueBar";
 import { SkipToMainContent } from "@/components/SkipToMainContent";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -28,7 +28,7 @@ export const PageSkeleton = (props: Props): ReactElement => {
       <footer>
         {business?.onboardingFormProgress === "COMPLETED" && <ReportAnIssueBar />}
         {!props.landingPage && <LegalMessage />}
-        <Footer />
+        <PageFooter />
       </footer>
     </>
   );
