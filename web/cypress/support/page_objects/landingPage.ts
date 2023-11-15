@@ -1,6 +1,10 @@
+import { useConfig } from "@/lib/data-hooks/useConfig";
+
+const { Config } = useConfig();
+
 class LandingPage {
   getHowItWorksSection = () => {
-    return cy.get('[aria-label="How it works"]');
+    return cy.get(`[aria-label="${Config.landingPage.section4HeaderText}"]`);
   };
 
   scrollToHowItWorksSection = () => {
@@ -8,7 +12,7 @@ class LandingPage {
   };
 
   getMoreSupportSection = () => {
-    return cy.get('[aria-label="Looking for more support?"]');
+    return cy.get(`[aria-label="${Config.landingPage.section6Header}"]`);
   };
 
   scrollToMoreSupportSection = () => {
