@@ -4,7 +4,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
 
-export const Footer = (): ReactElement => {
+export const PageFooter = (): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const { Config } = useConfig();
 
