@@ -100,7 +100,7 @@ const TaskPage = (props: Props): ReactElement => {
 
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
-      <NextSeo title={`Business.NJ.gov Navigator - ${props.task.name}`} />
+      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${props.task.name}`} />
       <PageSkeleton>
         <NavBar task={props.task} showSidebar={true} />
         <TaskSidebarPageLayout task={props.task} belowBoxComponent={renderNextAndPreviousButtons()}>

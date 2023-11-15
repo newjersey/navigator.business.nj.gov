@@ -1,3 +1,16 @@
+# [5.38.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.37.0...v5.38.0) (2023-11-14)
+
+
+### Bug Fixes
+
+* [[#186429361](https://github.com/newjersey/navigator.business.nj.gov/issues/186429361)] dynamics license status application id filtering to account for null ([e7f37cf](https://github.com/newjersey/navigator.business.nj.gov/commit/e7f37cfa1cf24023c367d38df28513d2b7f9e775))
+
+
+### Features
+
+* [[#186094556](https://github.com/newjersey/navigator.business.nj.gov/issues/186094556)] add more helpful aria-labels to EDIT buttons ([0a5ff73](https://github.com/newjersey/navigator.business.nj.gov/commit/0a5ff73d238fb895ae70a56a756fd59624189bf2))
+* [[#186448388](https://github.com/newjersey/navigator.business.nj.gov/issues/186448388)] add 8081 to clear ports script ([4cdb043](https://github.com/newjersey/navigator.business.nj.gov/commit/4cdb04314ac4982a54cf8bf97bf395815e87b8fe))
+
 # [5.37.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.36.0...v5.37.0) (2023-11-09)
 
 

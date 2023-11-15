@@ -82,9 +82,10 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
 };
 
 const FundingPage = (props: Props): ReactElement => {
+  const { Config } = useConfig();
   return (
     <>
-      <NextSeo title={`Business.NJ.gov Navigator - ${props.funding.name}`} />
+      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${props.funding.name}`} />
       <PageSkeleton>
         <NavBar showSidebar={true} hideMiniRoadmap={true} />
         <TaskSidebarPageLayout hideMiniRoadmap={true}>
