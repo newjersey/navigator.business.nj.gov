@@ -1,5 +1,5 @@
 import { BetaBar } from "@/components/BetaBar";
-import { InnovFooter } from "@/components/InnovFooter";
+import { Footer } from "@/components/Footer";
 import { LegalMessage } from "@/components/LegalMessage";
 import { Banner } from "@/components/njwds/Banner";
 import { OutageAlertBar } from "@/components/OutageAlertBar";
@@ -28,7 +28,7 @@ export const PageSkeleton = (props: Props): ReactElement => {
       <footer>
         {business?.onboardingFormProgress === "COMPLETED" && <ReportAnIssueBar />}
         {!props.landingPage && <LegalMessage />}
-        <InnovFooter />
+        <Footer />
       </footer>
     </>
   );
