@@ -873,6 +873,7 @@ workflows:
             - build
       - integration-tests:
           name: Integration Tests - Group 4
+          enable-dashboard: true
           suite: group4
           filters:
             branches:
