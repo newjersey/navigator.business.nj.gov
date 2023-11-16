@@ -3609,9 +3609,8 @@ collections:
               - { label: Link Two, name: linkTwo, widget: string }
               - { label: Link Three Text, name: linkThreeText, widget: string }
               - { label: Link Three, name: linkThree, widget: string }
-              - { label: Office Text One, name: officeTextOne, widget: string }
-              - { label: Office Text Two, name: officeTextTwo, widget: string }
-              - { label: Office Link Text, name: officeLinkText, widget: string }
+              - { label: Made With Text, name: madeWithText, widget: string }
+              - { label: By The Office of Innovation Text, name: byTheOfficeOfInnovationText, widget: string }
               - { label: Office Link, name: officeLink, widget: string }
               - { label: Credit Text, name: creditText, widget: string }
               - { label: Credit Link Text, name: creditLinkText, widget: string }
