@@ -1,7 +1,7 @@
 import React, { forwardRef, ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
-  style: "default" | "transparentBgColor";
+  style: "default" | "transparentBgColor" | "footerLink";
   className?: string;
   children: React.ReactNode;
   onClick?: (() => void) | ((event: React.MouseEvent) => Promise<void>) | ((event: React.MouseEvent) => void);
@@ -17,10 +17,19 @@ interface Props {
 // eslint-disable-next-line react/display-name
 export const UnStyledButton = forwardRef(
   (props: Props, ref?: React.LegacyRef<HTMLButtonElement>): ReactElement => {
-    const style =
-      props.style === "default"
-        ? "usa-button usa-button--unstyled width-auto font-weight-inherit font-size-inherit"
-        : "usa-button bg-transparent";
+    let style;
+
+    switch (props.style) {
+      case "default":
+        style = "usa-button usa-button--unstyled width-auto font-weight-inherit font-size-inherit";
+        break;
+      case "footerLink":
+        style = "clear-button";
+        break;
+      default:
+        style = "usa-button bg-transparent";
+    }
+
     const disabledClass = "usa-button--disabled";
     const widthRef = useRef<HTMLInputElement | null>(null);
     const [width, setWidth] = useState<number>();
