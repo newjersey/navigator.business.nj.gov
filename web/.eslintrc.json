@@ -11,6 +11,7 @@
   },
   "extends": [
     "eslint:recommended",
+    "plugin:storybook/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:cypress/recommended",
@@ -46,7 +47,12 @@
     "prefer-template": "error",
     "react/jsx-uses-react": "off",
     "react/prop-types": "off",
-    "react/forbid-elements": [1, { "forbid": ["h5", "h6"] }],
+    "react/forbid-elements": [
+      1,
+      {
+        "forbid": ["h5", "h6"]
+      }
+    ],
     "@next/next/no-document-import-in-page": 0,
     "unicorn/filename-case": [
       "error",
@@ -88,7 +94,9 @@
         "plugin:jest-formatting/recommended",
         "plugin:jest-dom/recommended"
       ],
-      "rules": { "jest/expect-expect": "error" }
+      "rules": {
+        "jest/expect-expect": "error"
+      }
     },
     {
       "files": ["**/*.ts", "**/*.tsx"],

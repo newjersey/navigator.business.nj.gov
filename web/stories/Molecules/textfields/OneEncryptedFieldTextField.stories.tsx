@@ -1,6 +1,5 @@
 import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
-import { GenericTextField } from "@/components/GenericTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
@@ -10,23 +9,10 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
-export default {
-  title: "Molecules/TextField/OneEncryptedTextField",
-  component: GenericTextField,
-  decorators: [(Story) => <div className="width-desktop">{Story()}</div>],
-
-  parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/vAa8neaM0JJSmldck5vlBC/BFS-Design-System?type=design&node-id=2759%3A6193&mode=design&t=pO4kgZ2SOAWLzINQ-1",
-    },
-  },
-} as ComponentMeta<typeof GenericTextField>;
-
-const Template: ComponentStory<typeof GenericTextField> = (props) => {
+const Template = () => {
   const [config, setConfig] = useState<ConfigType>(getMergedConfig());
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
@@ -95,5 +81,20 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
   );
 };
 
-export const OneEncryptedTextField = Template.bind({});
-OneEncryptedTextField.args = {};
+const meta: Meta<typeof Template> = {
+  title: "Molecules/TextField/OneEncryptedTextField",
+  component: Template,
+  decorators: [(Story) => <div className="width-desktop">{Story()}</div>],
+
+  parameters: {
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/file/vAa8neaM0JJSmldck5vlBC/BFS-Design-System?type=design&node-id=2759%3A6193&mode=design&t=pO4kgZ2SOAWLzINQ-1",
+    },
+  },
+};
+
+export default meta;
+type Story = StoryObj<typeof Template>;
+
+export const OneEncryptedTextField: Story = {};
