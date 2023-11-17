@@ -4221,7 +4221,7 @@ __metadata:
     "@testing-library/user-event": 14.5.1
     "@types/broken-link-checker": 0.7.3
     "@types/cors": 2.8.16
-    "@types/cypress-dotenv": 2.0.1
+    "@types/cypress-dotenv": 2.0.3
     "@types/dedent": 0.7.0
     "@types/express": 4.17.17
     "@types/jest": 29.5.5
@@ -4434,7 +4434,7 @@ __metadata:
     "@testing-library/react": 13.4.0
     "@testing-library/user-event": 14.5.1
     "@types/broken-link-checker": 0.7.3
-    "@types/cypress-dotenv": 2.0.1
+    "@types/cypress-dotenv": 2.0.3
     "@types/jest": 29.5.5
     "@types/js-yaml": 4.0.6
     "@types/lodash": 4.14.198
@@ -10287,12 +10287,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/cypress-dotenv@npm:2.0.1":
-  version: 2.0.1
-  resolution: "@types/cypress-dotenv@npm:2.0.1"
+"@types/cypress-dotenv@npm:2.0.3":
+  version: 2.0.3
+  resolution: "@types/cypress-dotenv@npm:2.0.3"
   dependencies:
+    "@types/node": "*"
     dotenv: ^8.2.0
-  checksum: a711b571856c70be584d76ac55842ad0990029fb9692c6e6f5a4a70a299e93ca9a43ab59a784c73ab716b2760b489308e88a42da9a73af742a93ad8decfb6079
+  checksum: 2d49b6f769cc1b7a1d5738429fb6428d27d5347865bc580e3c66c5ce284c514316430b1e9da0e0c7764fddfcbe710c5680a99c1b780e5e7807f9cf46d7cae3a6
   languageName: node
   linkType: hard
 
