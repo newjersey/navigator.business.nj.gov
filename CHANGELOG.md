@@ -1,3 +1,12 @@
+# [5.39.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.38.0...v5.39.0) (2023-11-17)
+
+
+### Features
+
+* [[#185555573](https://github.com/newjersey/navigator.business.nj.gov/issues/185555573)] state contracting quick action ([726c63a](https://github.com/newjersey/navigator.business.nj.gov/commit/726c63a3f45a39aeb73229d9c2d2806e0f9dd100))
+* [[#185932019](https://github.com/newjersey/navigator.business.nj.gov/issues/185932019)] opportunity card styling ([d02ac44](https://github.com/newjersey/navigator.business.nj.gov/commit/d02ac449952c522425e08d7fa38aa3c84b1d9e55))
+* [[#186093180](https://github.com/newjersey/navigator.business.nj.gov/issues/186093180)] HTML Page Titles should reference page content ([9db0f16](https://github.com/newjersey/navigator.business.nj.gov/commit/9db0f167785e42578c8ead80d778b26be75f62c8))
+
 # [5.38.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.37.0...v5.38.0) (2023-11-14)
 
 
