@@ -53,7 +53,7 @@
     "@storybook/addon-outline": "6.5.16",
     "@types/mdast": "3.0.12",
     "airtable": "0.12.2",
-    "axios": "1.6.0",
+    "axios": "1.6.1",
     "babel-jest": "29.7.0",
     "body-parser": "1.20.2",
     "broken-link-checker": "0.7.8",
