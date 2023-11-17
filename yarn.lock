@@ -4219,7 +4219,7 @@ __metadata:
     "@testing-library/jest-dom": 5.17.0
     "@testing-library/react": 13.4.0
     "@testing-library/user-event": 14.5.1
-    "@types/broken-link-checker": 0.7.1
+    "@types/broken-link-checker": 0.7.3
     "@types/cors": 2.8.14
     "@types/cypress-dotenv": 2.0.1
     "@types/dedent": 0.7.0
@@ -4433,7 +4433,7 @@ __metadata:
     "@testing-library/jest-dom": 5.17.0
     "@testing-library/react": 13.4.0
     "@testing-library/user-event": 14.5.1
-    "@types/broken-link-checker": 0.7.1
+    "@types/broken-link-checker": 0.7.3
     "@types/cypress-dotenv": 2.0.1
     "@types/jest": 29.5.5
     "@types/js-yaml": 4.0.6
@@ -10236,10 +10236,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/broken-link-checker@npm:0.7.1":
-  version: 0.7.1
-  resolution: "@types/broken-link-checker@npm:0.7.1"
-  checksum: a9736a1d191cc6a3d0707a9c00a0c1d1244e1cc2a9b51060804df93c1774b87a664d2ad025d5565e67571a151982e290d028a06cb46e04b1af404f6b4a35402d
+"@types/broken-link-checker@npm:0.7.3":
+  version: 0.7.3
+  resolution: "@types/broken-link-checker@npm:0.7.3"
+  checksum: fe239fb7af8abba637e893a2b3d139a8f10e8e9031613b576dd0df40c30400ccc6d76bd3b8f2c62f68661f128339ecc569b918fc4c7711aec02ec5f96142e94f
   languageName: node
   linkType: hard
 

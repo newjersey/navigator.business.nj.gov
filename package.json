@@ -139,7 +139,7 @@
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "13.4.0",
     "@testing-library/user-event": "14.5.1",
-    "@types/broken-link-checker": "0.7.1",
+    "@types/broken-link-checker": "0.7.3",
     "@types/cors": "2.8.14",
     "@types/cypress-dotenv": "2.0.1",
     "@types/dedent": "0.7.0",
