@@ -1,19 +1,29 @@
+import { dirname, join } from "path";
+
 const path = require("path");
 
 module.exports = {
   stories: ["../stories/**/*.stories.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
   addons: [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/preset-scss",
-    "storybook-addon-designs",
-    "@storybook/addon-a11y",
-    "storybook-addon-pseudo-states",
-    "@storybook/addon-interactions",
+    getAbsolutePath("@storybook/addon-links"),
+    getAbsolutePath("@storybook/addon-essentials"),
+    getAbsolutePath("@storybook/addon-designs"),
+    getAbsolutePath("@storybook/addon-a11y"),
+    getAbsolutePath("storybook-addon-pseudo-states"),
+    getAbsolutePath("@storybook/addon-interactions"),
   ],
-  framework: "@storybook/react",
+  framework: {
+    name: getAbsolutePath("@storybook/nextjs"),
+    options: {},
+  },
   core: {
-    builder: "webpack5",
+    builder: {
+      name: "@storybook/builder-webpack5",
+      options: {
+        fsCache: true,
+        lazyCompilation: true,
+      },
+    },
   },
   webpackFinal: async (config) => {
     config.resolve.alias = {
@@ -38,3 +48,7 @@ module.exports = {
   },
   staticDirs: ["../public"],
 };
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, "package.json")));
+}
