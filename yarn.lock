@@ -4090,7 +4090,7 @@ __metadata:
     "@types/simple-oauth2": 5.0.7
     "@types/supertest": 2.0.16
     "@types/webpack-node-externals": 3.0.1
-    "@types/xml2js": 0.4.12
+    "@types/xml2js": 0.4.14
     "@typescript-eslint/eslint-plugin": 6.7.2
     "@typescript-eslint/parser": 6.7.2
     airtable: 0.12.2
@@ -4241,7 +4241,7 @@ __metadata:
     "@types/testing-library__jest-dom": 5.14.9
     "@types/uuid": 9.0.7
     "@types/webpack-node-externals": 3.0.1
-    "@types/xml2js": 0.4.12
+    "@types/xml2js": 0.4.14
     "@typescript-eslint/eslint-plugin": 6.7.2
     "@typescript-eslint/parser": 6.7.2
     airtable: 0.12.2
@@ -11040,12 +11040,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/xml2js@npm:0.4.12":
-  version: 0.4.12
-  resolution: "@types/xml2js@npm:0.4.12"
+"@types/xml2js@npm:0.4.14":
+  version: 0.4.14
+  resolution: "@types/xml2js@npm:0.4.14"
   dependencies:
     "@types/node": "*"
-  checksum: 6197f6d51d70ba7e6d3169ef6d58adacfeddeb2d8cfe4d2bb24eda86223c7dd77c82896c3aa3c636b3b1442cebc6d05959d1e65fa206dac2caeb99aa2c943716
+  checksum: df9f106b9953dcdec7ba3304ebc56d6c2f61d49bf556d600bed439f94a1733f73ca0bf2d0f64330b402191622862d9d6058bab9d7e3dcb5b0fe51ebdc4372aac
   languageName: node
   linkType: hard
 
