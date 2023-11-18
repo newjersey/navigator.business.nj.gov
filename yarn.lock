@@ -4235,7 +4235,7 @@ __metadata:
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.5
     "@types/react-transition-group": 4.4.9
-    "@types/remove-markdown": 0.3.1
+    "@types/remove-markdown": 0.3.4
     "@types/simple-oauth2": 5.0.4
     "@types/supertest": 2.0.12
     "@types/testing-library__jest-dom": 5.14.9
@@ -4445,7 +4445,7 @@ __metadata:
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.5
     "@types/react-transition-group": 4.4.9
-    "@types/remove-markdown": 0.3.1
+    "@types/remove-markdown": 0.3.4
     "@types/testing-library__jest-dom": 5.14.9
     "@typescript-eslint/eslint-plugin": 6.7.2
     "@typescript-eslint/parser": 6.7.2
@@ -10798,10 +10798,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/remove-markdown@npm:0.3.1":
-  version: 0.3.1
-  resolution: "@types/remove-markdown@npm:0.3.1"
-  checksum: a673aafa3a3722d959b4ad1d4e95b33f04f037a8bb95a82e843d6005b12b51f9b1bfd5954cd5c8707fbbb2f1d8865f7e632f02f99389ab83d0dcfd2cb1920dbb
+"@types/remove-markdown@npm:0.3.4":
+  version: 0.3.4
+  resolution: "@types/remove-markdown@npm:0.3.4"
+  checksum: a748714a63cb02e96828750e27a679866420bde21411008ae266b6f43c819dea562233714dac0072776d5efd7871d54cf73ac54e3615747cbeddd348bde9e840
   languageName: node
   linkType: hard
 
