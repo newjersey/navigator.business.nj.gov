@@ -69,7 +69,7 @@ describe("updateOperatingPhase", () => {
       expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_BUSINESS_STRUCTURE");
     });
 
-    it("updates to NEEDS_TO_FORM from GUEST_MODE when user is remote seller", () => {
+    it("updates to REMOTE_SELLER_WORKER from GUEST_MODE when user is remote seller", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
@@ -80,10 +80,10 @@ describe("updateOperatingPhase", () => {
         })
       );
       const result = updateOperatingPhase(userData);
-      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("REMOTE_SELLER_WORKER");
     });
 
-    it("updates to NEEDS_TO_FORM from GUEST_MODE when user is remote worker", () => {
+    it("updates to REMOTE_SELLER_WORKER from GUEST_MODE when user is remote worker", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
@@ -94,7 +94,7 @@ describe("updateOperatingPhase", () => {
         })
       );
       const result = updateOperatingPhase(userData);
-      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
+      expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("REMOTE_SELLER_WORKER");
     });
   });
 

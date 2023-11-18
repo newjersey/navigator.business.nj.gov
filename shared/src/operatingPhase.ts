@@ -29,6 +29,7 @@ export type OperatingPhaseId =
   | "FORMED_AND_REGISTERED"
   | "UP_AND_RUNNING"
   | "UP_AND_RUNNING_OWNING"
+  | "REMOTE_SELLER_WORKER"
   | "";
 
 export const LookupOperatingPhaseById = (id: OperatingPhaseId | undefined): OperatingPhase => {
@@ -238,5 +239,25 @@ export const OperatingPhases: OperatingPhase[] = [
     displayHomeBasedPrompt: false,
     displayGoToProfileNudge: true,
     displayQuickActions: true,
+  },
+  {
+    id: "REMOTE_SELLER_WORKER",
+    displayCompanyDemographicProfileFields: false,
+    displayCertifications: false,
+    displayFundings: false,
+    displayCalendarType: "NONE",
+    displayRoadmapTasks: true,
+    displayTaxAccessButton: false,
+    displayCalendarToggleButton: false,
+    displayHideableRoadmapTasks: false,
+    displayAltHomeBasedBusinessDescription: false,
+    municipalityRequiredForTradeName: false,
+    municipalityRequiredForPublicFiling: false,
+    displayProfileOpportunityAlert: false,
+    sectorRequired: false,
+    displayBusinessStructurePrompt: false,
+    displayHomeBasedPrompt: false,
+    displayGoToProfileNudge: false,
+    displayQuickActions: false,
   },
 ];
