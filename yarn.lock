@@ -4239,7 +4239,7 @@ __metadata:
     "@types/simple-oauth2": 5.0.7
     "@types/supertest": 2.0.16
     "@types/testing-library__jest-dom": 5.14.9
-    "@types/uuid": 9.0.4
+    "@types/uuid": 9.0.7
     "@types/webpack-node-externals": 3.0.1
     "@types/xml2js": 0.4.12
     "@typescript-eslint/eslint-plugin": 6.7.2
@@ -4363,7 +4363,7 @@ __metadata:
     "@jest/types": 29.6.3
     "@types/jest": 29.5.8
     "@types/node": 16.18.61
-    "@types/uuid": 9.0.4
+    "@types/uuid": 9.0.7
     "@typescript-eslint/eslint-plugin": 6.7.2
     "@typescript-eslint/parser": 6.7.2
     cross-env: 7.0.3
@@ -10970,10 +10970,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/uuid@npm:9.0.4":
-  version: 9.0.4
-  resolution: "@types/uuid@npm:9.0.4"
-  checksum: 356e2504456eaebbc43a5af5ca6c07d71f5ae5520b5767cb1c62cd0ec55475fc4ee3d16a2874f4a5fce78e40e8583025afd3a7d9ba41f82939de310665f53f0e
+"@types/uuid@npm:9.0.7":
+  version: 9.0.7
+  resolution: "@types/uuid@npm:9.0.7"
+  checksum: c7321194aeba9ea173efd1e721403bdf4e7ae6945f8f8cdbc87c791f4b505ccf3dbc4a8883d90b394ef13b7c2dc778045792b05dbb23b3c746f8ea347804d448
   languageName: node
   linkType: hard
 
