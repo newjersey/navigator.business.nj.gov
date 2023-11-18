@@ -4088,7 +4088,7 @@ __metadata:
     "@types/lodash": 4.14.201
     "@types/node": 16.18.61
     "@types/simple-oauth2": 5.0.4
-    "@types/supertest": 2.0.12
+    "@types/supertest": 2.0.16
     "@types/webpack-node-externals": 3.0.1
     "@types/xml2js": 0.4.12
     "@typescript-eslint/eslint-plugin": 6.7.2
@@ -4237,7 +4237,7 @@ __metadata:
     "@types/react-transition-group": 4.4.9
     "@types/remove-markdown": 0.3.4
     "@types/simple-oauth2": 5.0.4
-    "@types/supertest": 2.0.12
+    "@types/supertest": 2.0.16
     "@types/testing-library__jest-dom": 5.14.9
     "@types/uuid": 9.0.4
     "@types/webpack-node-externals": 3.0.1
@@ -10901,12 +10901,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/supertest@npm:2.0.12":
-  version: 2.0.12
-  resolution: "@types/supertest@npm:2.0.12"
+"@types/supertest@npm:2.0.16":
+  version: 2.0.16
+  resolution: "@types/supertest@npm:2.0.16"
   dependencies:
     "@types/superagent": "*"
-  checksum: f0e2b44f86bec2f708d6a3d0cb209055b487922040773049b0f8c6b557af52d4b5fa904e17dfaa4ce6e610172206bbec7b62420d158fa57b6ffc2de37b1730d3
+  checksum: 2fc998ea698e0467cdbe3bea0ebce2027ea3a45a13e51a6cecb0435f44b486faecf99c34d8702d2d7fe033e6e09fdd2b374af52ecc8d0c69a1deec66b8c0dd52
   languageName: node
   linkType: hard
 
