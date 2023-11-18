@@ -10761,11 +10761,11 @@ __metadata:
   linkType: hard
 
 "@types/react-slick@npm:^0.23.10":
-  version: 0.23.10
-  resolution: "@types/react-slick@npm:0.23.10"
+  version: 0.23.12
+  resolution: "@types/react-slick@npm:0.23.12"
   dependencies:
     "@types/react": "*"
-  checksum: 1e53fe8385e853881741a450d15c52d6433334b671fee4044939037f8e5b83968cb91fd9dbe7e6686e906882ebcf370b81bd55b6688f8e810020e23a968c0385
+  checksum: 5f9934e174046e0a556153b5f68acc12176c8cb8ce7049e407d7d68bf7fed1b45f371b35d13d740fec3158407d2feb38412ab4b925335f34183822660b6e40a3
   languageName: node
   linkType: hard
 
