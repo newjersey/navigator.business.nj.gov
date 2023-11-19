@@ -45,6 +45,11 @@
       "step": 4,
       "licenseTask": "appraiser-certification",
       "weight": 200
+    },
+    {
+      "step": 4,
+      "weight": 210,
+      "licenseTask": "general-appraiser-certification"
     }
   ],
   "name": "Real Estate Appraisals",
