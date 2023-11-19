@@ -1,7 +1,7 @@
 ---
 filename: appraiser-certification
 displayname: real-estate-appraiser-certification
-urlSlug: appraiser-certification
+urlSlug: real-estate-appraiser-certification
 name: Apply for Your Residential Real Property Appraiser Certification
 webflowName: "Real Estate Appraisal: Residential Real Property Appraiser Certification"
 summaryDescriptionMd: >
