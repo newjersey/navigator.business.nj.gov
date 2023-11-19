@@ -103,10 +103,10 @@
   },
   "devDependencies": {
     "@aws-sdk/types": "3.413.0",
-    "@babel/core": "7.22.20",
+    "@babel/core": "7.23.3",
     "@businessnjgovnavigator/shared": "*",
-    "@commitlint/cli": "17.7.1",
-    "@commitlint/config-conventional": "17.7.0",
+    "@commitlint/cli": "17.8.1",
+    "@commitlint/config-conventional": "17.8.1",
     "@cypress-audit/lighthouse": "1.4.2",
     "@cypress-audit/pa11y": "1.4.2",
     "@jest/types": "29.6.3",
