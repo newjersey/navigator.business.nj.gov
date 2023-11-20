@@ -16,9 +16,9 @@ export const QuickActionTaskTile = ({ quickAction }: Props): ReactElement => {
   };
 
   return (
-    <div className="quick-action-tile tablet:grid-col-6">
-      <button className="clear-button " onClick={routeToAction}>
-        <div className="bg-base-extra-light border-base-lightest border-2px radius-md fdr text-align-left fac fjc padding-2">
+    <div className="quick-action-tile desktop:grid-col-6">
+      <button className="clear-button width-100" onClick={routeToAction}>
+        <div className="bg-base-extra-light border-base-lightest border-2px radius-md fdr text-align-left fac padding-2">
           <img
             className="usa-icon--size-4 margin-right-2"
             src={`/img/quick-actions/${quickAction.icon}`}

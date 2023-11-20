@@ -198,7 +198,7 @@ const DashboardPage = (props: Props): ReactElement => {
     }
 
     return (
-      <div className="grid-row grid-gap" data-testid="quick-actions-section">
+      <div className={isDesktopAndUp ? "grid-row grid-gap" : ""} data-testid="quick-actions-section">
         {renderQuickActions}
       </div>
     );
