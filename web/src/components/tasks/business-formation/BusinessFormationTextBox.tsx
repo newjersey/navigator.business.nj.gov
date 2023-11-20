@@ -58,7 +58,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
             <UnStyledButton
-              style="default"
+              style="standard"
               onClick={handleAddButtonClick}
               dataTestid={`show-${props.fieldName}`}
             >
@@ -96,7 +96,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
             ) : (
               <div className="grid-col-auto margin-x-2 margin-top-3 display-flex flex-column flex-justify-center">
                 <UnStyledButton
-                  style="default"
+                  style="standard"
                   onClick={(): void => removeEntry()}
                   className="display-flex flex-column flex-justify-center"
                 >

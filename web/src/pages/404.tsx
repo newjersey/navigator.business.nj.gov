@@ -21,7 +21,7 @@ const PageNotFound = (): ReactElement => {
               <Content>{Config.pageNotFoundError.errorDescriptionPt1}</Content>
               <div className="tablet:display-flex">
                 <Content>{Config.pageNotFoundError.errorDescriptionPt2}</Content>
-                <UnStyledButton className="margin-left-05" style="default" isUnderline isIntercomEnabled>
+                <UnStyledButton className="margin-left-05" style="standard" isUnderline isIntercomEnabled>
                   <Content>{Config.pageNotFoundError.errorChatWithExpert}</Content>
                 </UnStyledButton>
               </div>

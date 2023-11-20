@@ -25,7 +25,7 @@ export const NavBarLandingDesktop = (): ReactElement => {
         />
         <div>
           <UnStyledButton
-            style="default"
+            style="standard"
             onClick={(): void => {
               analytics.event.landing_page_navbar_register.click.go_to_onboarding();
               router.push(ROUTES.onboarding);

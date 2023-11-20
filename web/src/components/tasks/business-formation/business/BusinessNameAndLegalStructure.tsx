@@ -107,7 +107,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
             </div>
             {!isReviewStep && (
               <UnStyledButton
-                style="default"
+                style="standard"
                 onClick={(): void => setStepIndex(LookupStepIndexByName("Name"))}
                 isUnderline
                 dataTestid="edit-business-name"
@@ -129,7 +129,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
               <div>
                 {!isReviewStep && (
                   <UnStyledButton
-                    style="default"
+                    style="standard"
                     onClick={showLegalStructureModal}
                     isUnderline
                     dataTestid="edit-legal-structure"

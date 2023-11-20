@@ -167,7 +167,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
                 <div>
                   <UnStyledButton
                     className={`${isLargeScreen ? "margin-left-2" : ""}`}
-                    style="default"
+                    style="standard"
                     isUnderline
                     onClick={setBackToEditing}
                     ariaLabel={`${Config.taskDefaults.editText} ${Config.businessStructureTask.ariaLabelText}`}
@@ -178,7 +178,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
 
                   <UnStyledButton
                     className="margin-left-1"
-                    style="default"
+                    style="standard"
                     isUnderline
                     onClick={removeTaskCompletion}
                     ariaLabel={`${Config.taskDefaults.removeText} ${Config.businessStructureTask.ariaLabelText}`}

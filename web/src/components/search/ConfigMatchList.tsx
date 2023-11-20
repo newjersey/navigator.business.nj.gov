@@ -43,7 +43,7 @@ export const ConfigMatchList = (props: Props): ReactElement => {
         ))}
       </ul>
       {collapsedMatches.length < props.matches.length && (
-        <UnStyledButton style="default" onClick={toggleExpanded} className="margin-left-2">
+        <UnStyledButton style="standard" onClick={toggleExpanded} className="margin-left-2">
           {expanded ? "Collapse" : "See all"}
         </UnStyledButton>
       )}

@@ -33,7 +33,7 @@ export const NexusUnavailable = (props: UnavailableProps): ReactElement => {
         <Alert variant="info">
           <PureMarkdownContent components={inlineParagraphComponent}>{textBeforeButton}</PureMarkdownContent>{" "}
           <UnStyledButton
-            style="default"
+            style="standard"
             onClick={onClick}
             className="display-inline"
             dataTestid="search-again"

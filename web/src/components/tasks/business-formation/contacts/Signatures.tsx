@@ -173,7 +173,7 @@ export const Signatures = (): ReactElement => {
         <div style={{ height: "56px" }} className="display-flex flex-column flex-justify-center">
           {visible ? (
             <UnStyledButton
-              style="default"
+              style="standard"
               onClick={onClick}
               className="display-flex flex-column flex-justify-center"
             >
@@ -417,7 +417,7 @@ export const Signatures = (): ReactElement => {
                   </div>
                   {!isTabletAndUp && (
                     <UnStyledButton
-                      style="default"
+                      style="standard"
                       className="margin-y-1"
                       isUnderline
                       onClick={(): void => removeSigner(index)}
@@ -432,7 +432,7 @@ export const Signatures = (): ReactElement => {
         })}
 
         {(state.formationFormData.signers?.length ?? 0) < 10 && (
-          <UnStyledButton style="default" onClick={addSignerField} dataTestid="add-new-signer">
+          <UnStyledButton style="standard" onClick={addSignerField} dataTestid="add-new-signer">
             <Icon>add</Icon>{" "}
             <span className="text-underline" style={{ textUnderlinePosition: "under" }}>
               {Config.formation.fields.signers.addButtonText}

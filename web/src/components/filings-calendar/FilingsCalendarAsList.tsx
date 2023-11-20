@@ -111,7 +111,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
 
       {eventsGroupedByDate.length > numberOfVisibleCalendarEntries && (
         <UnStyledButton
-          style="default"
+          style="standard"
           isUnderline
           onClick={(): void => {
             setNumberOfVisibleCalendarEntries((previous) => previous + LIST_VIEW_MORE_INCREMENT);

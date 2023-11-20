@@ -59,7 +59,7 @@ export const SidebarCardGeneric = (props: Props): ReactElement => {
                 </span>
               </h3>
               {props.card.hasCloseButton && (
-                <UnStyledButton style="default" onClick={closeSelf} ariaLabel="Close">
+                <UnStyledButton style="standard" onClick={closeSelf} ariaLabel="Close">
                   <Icon className="font-sans-xl text-white">close</Icon>
                 </UnStyledButton>
               )}
@@ -74,7 +74,7 @@ export const SidebarCardGeneric = (props: Props): ReactElement => {
           {props.preBodySpanButtonText && (
             <div style={{ float: "left" }}>
               <UnStyledButton
-                style="default"
+                style="standard"
                 isTextBold
                 onClick={props.preBodyButtonOnClick}
                 dataTestid={`${props.card.id}-preBodyButtonText`}

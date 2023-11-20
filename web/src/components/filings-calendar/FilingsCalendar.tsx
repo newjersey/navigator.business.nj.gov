@@ -171,7 +171,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
               <div className="h6-styling">
                 <span className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</span>{" "}
                 <UnStyledButton
-                  style="default"
+                  style="standard"
                   isUnderline
                   isIntercomEnabled
                   onClick={(): void => {

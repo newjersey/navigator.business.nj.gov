@@ -1,7 +1,7 @@
 import React, { forwardRef, ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
-  style: "default" | "transparentBgColor" | "footerLink";
+  style: "standard" | "footerLink" | "transparentBgColor";
   className?: string;
   children: React.ReactNode;
   onClick?: (() => void) | ((event: React.MouseEvent) => Promise<void>) | ((event: React.MouseEvent) => void);
@@ -20,7 +20,7 @@ export const UnStyledButton = forwardRef(
     let style;
 
     switch (props.style) {
-      case "default":
+      case "standard":
         style = "usa-button usa-button--unstyled width-auto font-weight-inherit font-size-inherit";
         break;
       case "footerLink":
@@ -43,7 +43,7 @@ export const UnStyledButton = forwardRef(
     }, [height, width, disabledClass]);
 
     const noRightMargin =
-      props.isRightMarginRemoved || props.style === "default" ? "margin-right-0" : "margin-right-2";
+      props.isRightMarginRemoved || props.style === "standard" ? "margin-right-0" : "margin-right-2";
     const underline = props.isUnderline ? "underline" : "";
     const smallText = props.isSmallerText ? "font-body-2xs" : "";
     const textBold = props.isTextBold ? "text-bold" : "";

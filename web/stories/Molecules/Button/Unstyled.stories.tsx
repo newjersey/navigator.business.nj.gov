@@ -22,7 +22,7 @@ const Template: ComponentStory<typeof UnStyledButton> = ({ children, ...args }) 
 export const Link = Template.bind({});
 
 Link.args = {
-  style: "default",
+  style: "standard",
   children: "Link",
   isUnderline: true,
 };
@@ -30,7 +30,7 @@ Link.args = {
 export const MenuLink = Template.bind({});
 
 MenuLink.args = {
-  style: "default",
+  style: "standard",
   children: "Menu Link",
   isUnderline: false,
 };
@@ -38,7 +38,7 @@ MenuLink.args = {
 export const ArrowRightLink = Template.bind({});
 
 ArrowRightLink.args = {
-  style: "default",
+  style: "standard",
   children: (
     <>
       <span className="margin-right-2">Next Task</span>
@@ -51,7 +51,7 @@ ArrowRightLink.args = {
 export const ArrowLeftLink = Template.bind({});
 
 ArrowLeftLink.args = {
-  style: "default",
+  style: "standard",
   children: (
     <>
       <Icon className="usa-icon--size-4">navigate_before</Icon>
@@ -64,7 +64,7 @@ ArrowLeftLink.args = {
 export const ArrowBackLink = Template.bind({});
 
 ArrowBackLink.args = {
-  style: "default",
+  style: "standard",
   children: (
     <>
       <div className="bg-accent-cool-darker circle-3 icon-blue-bg-color-hover">
@@ -82,7 +82,7 @@ ArrowBackLink.args = {
 export const ExternalLink = Template.bind({});
 
 ExternalLink.args = {
-  style: "default",
+  style: "standard",
   children: (
     <>
       <>Link</>

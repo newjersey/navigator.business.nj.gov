@@ -73,7 +73,7 @@ const TaskPage = (props: Props): ReactElement => {
       >
         {previousUrlSlug && (
           <UnStyledButton
-            style="default"
+            style="standard"
             onClick={(): void => {
               router.push(`/tasks/${previousUrlSlug}`);
             }}
@@ -85,7 +85,7 @@ const TaskPage = (props: Props): ReactElement => {
         {nextUrlSlug && !hideNextUrlSlug && (
           <UnStyledButton
             dataTestid={"nextUrlSlugButton"}
-            style="default"
+            style="standard"
             onClick={(): void => {
               router.push(`/tasks/${nextUrlSlug}`);
             }}

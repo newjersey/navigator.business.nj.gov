@@ -20,7 +20,7 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
     <Link href={`/tasks/${props.task.urlSlug}`}>
       <div>
         <UnStyledButton
-          style="default"
+          style="standard"
           onClick={(): void => {
             analytics.event.task_mini_roadmap_task.click.go_to_task(props.task.urlSlug);
             props.onTaskClick && props.onTaskClick();

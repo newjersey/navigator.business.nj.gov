@@ -20,7 +20,7 @@ export const AuthButton = (props?: Props): ReactElement => {
   const loginButton = (): ReactElement => {
     return (
       <UnStyledButton
-        style="default"
+        style="standard"
         dataTestid="login-button"
         isRightMarginRemoved
         onClick={(): void => {
@@ -36,7 +36,7 @@ export const AuthButton = (props?: Props): ReactElement => {
   const logoutButton = (): ReactElement => {
     return (
       <UnStyledButton
-        style="default"
+        style="standard"
         isRightMarginRemoved
         onClick={(): void => {
           onSignOut(router.push, dispatch);

@@ -13,7 +13,7 @@ export const ReportAnIssueBar = (): ReactElement => {
       data-testid="reportAnIssueBar"
     >
       <UnStyledButton
-        style="default"
+        style="standard"
         isIntercomEnabled
         onClick={analytics.event.report_something_that_is_broken.click.open_live_chat}
       >
