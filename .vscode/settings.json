@@ -23,13 +23,6 @@
     "*[!test]**/node_modules": true
   },
   "files.trimTrailingWhitespace": true,
-  "git.allowForcePush": true,
-  "git.autofetch": true,
-  "git.autoStash": true,
-  "git.enableSmartCommit": true,
-  "git.fetchOnPull": true,
-  "git.mergeEditor": true,
-  "git.terminalGitEditor": true,
   "indentRainbow.indicatorStyle": "light",
   "jest.autoRun": "off",
   "terminal.integrated.scrollback": 10000,
