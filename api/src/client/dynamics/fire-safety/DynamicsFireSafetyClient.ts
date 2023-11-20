@@ -1,28 +1,20 @@
+import {
+  FireSafetyInfo,
+  FireSafetyInspection,
+  FireSafetyInspectionClient,
+} from "@client/dynamics/fire-safety/types";
 import { AccessTokenClient } from "@client/dynamics/types";
 import { LogWriterType } from "@libs/logWriter";
-import { FireSafetyInspection, FireSafetyInspectionClient } from "@client/dynamics/fire-safety/types";
-
-
-export type FireSafetyInfo = (
-  address: string
-) => Promise<FireSafetyInspection[]>;
 
 type Config = {
   accessTokenClient: AccessTokenClient;
-  fireSafetyInspectionClient: FireSafetyInspectionClient
+  fireSafetyInspectionClient: FireSafetyInspectionClient;
 };
 
-export const DynamicsFireSafetyClient = (
-  logWriter: LogWriterType,
-  config: Config
-): FireSafetyInfo => {
-  return async (
-    address: string
-  ): Promise<FireSafetyInspection[]> => {
+export const DynamicsFireSafetyClient = (logWriter: LogWriterType, config: Config): FireSafetyInfo => {
+  return async (address: string): Promise<FireSafetyInspection[]> => {
     const accessToken = await config.accessTokenClient.getAccessToken();
 
-    return await config.fireSafetyInspectionClient.getFireSafetyInspectionsByAddress(accessToken, address)
-
+    return await config.fireSafetyInspectionClient.getFireSafetyInspectionsByAddress(accessToken, address);
   };
 };
-
