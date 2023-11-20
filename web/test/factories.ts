@@ -17,7 +17,8 @@ import {
   Opportunity,
   OutageConfig,
   PostOnboarding,
-  QuickAction,
+  QuickActionLink,
+  QuickActionTask,
   Roadmap,
   SidebarCardContent,
   Step,
@@ -273,16 +274,26 @@ export const generateFunding = (overrides: Partial<Funding>): Funding => {
   };
 };
 
-export const generateQuickAction = (overrides: Partial<QuickAction>): QuickAction => {
+export const generateQuickActionTask = (overrides: Partial<QuickActionTask>): QuickActionTask => {
   return {
-    id: `some-id-${randomInt()}`,
     filename: `some-filename-${randomInt()}`,
     name: `some-name-${randomInt()}`,
     urlSlug: `some-url-slug-${randomInt()}`,
+    icon: `some-icon-${randomInt()}`,
     callToActionLink: `some-cta-link-${randomInt()}`,
     callToActionText: `some-cta-text-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
     form: `some-form-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generateQuickActionLink = (overrides: Partial<QuickActionLink>): QuickActionLink => {
+  return {
+    filename: `some-filename-${randomInt()}`,
+    name: `some-name-${randomInt()}`,
+    icon: `some-icon-${randomInt()}`,
+    externalRoute: `some-external-route-${randomInt()}`,
     ...overrides,
   };
 };

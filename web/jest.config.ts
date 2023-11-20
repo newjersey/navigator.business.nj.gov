@@ -8,6 +8,8 @@ export default async (): Promise<Config.InitialOptions> => {
     setupFilesAfterEnv: ["./setupTests.js"],
     testEnvironment: "jsdom",
     testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/", "<rootDir>/cypress/"],
+    rootDir: "./",
+    moduleDirectories: ["node_modules", "<rootDir>"],
     moduleNameMapper: {
       "\\.(scss|sass|css)$": "identity-obj-proxy",
       "@/components/(.*)": "<rootDir>/src/components/$1",

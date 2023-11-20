@@ -1,3 +1,41 @@
+# [5.39.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.38.0...v5.39.0) (2023-11-17)
+
+
+### Features
+
+* [[#185555573](https://github.com/newjersey/navigator.business.nj.gov/issues/185555573)] state contracting quick action ([726c63a](https://github.com/newjersey/navigator.business.nj.gov/commit/726c63a3f45a39aeb73229d9c2d2806e0f9dd100))
+* [[#185932019](https://github.com/newjersey/navigator.business.nj.gov/issues/185932019)] opportunity card styling ([d02ac44](https://github.com/newjersey/navigator.business.nj.gov/commit/d02ac449952c522425e08d7fa38aa3c84b1d9e55))
+* [[#186093180](https://github.com/newjersey/navigator.business.nj.gov/issues/186093180)] HTML Page Titles should reference page content ([9db0f16](https://github.com/newjersey/navigator.business.nj.gov/commit/9db0f167785e42578c8ead80d778b26be75f62c8))
+
+# [5.38.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.37.0...v5.38.0) (2023-11-14)
+
+
+### Bug Fixes
+
+* [[#186429361](https://github.com/newjersey/navigator.business.nj.gov/issues/186429361)] dynamics license status application id filtering to account for null ([e7f37cf](https://github.com/newjersey/navigator.business.nj.gov/commit/e7f37cfa1cf24023c367d38df28513d2b7f9e775))
+
+
+### Features
+
+* [[#186094556](https://github.com/newjersey/navigator.business.nj.gov/issues/186094556)] add more helpful aria-labels to EDIT buttons ([0a5ff73](https://github.com/newjersey/navigator.business.nj.gov/commit/0a5ff73d238fb895ae70a56a756fd59624189bf2))
+* [[#186448388](https://github.com/newjersey/navigator.business.nj.gov/issues/186448388)] add 8081 to clear ports script ([4cdb043](https://github.com/newjersey/navigator.business.nj.gov/commit/4cdb04314ac4982a54cf8bf97bf395815e87b8fe))
+
+# [5.37.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.36.0...v5.37.0) (2023-11-09)
+
+
+### Bug Fixes
+
+* [[#185893614](https://github.com/newjersey/navigator.business.nj.gov/issues/185893614)] circle ci config env vars ([a04d085](https://github.com/newjersey/navigator.business.nj.gov/commit/a04d085409652aa382277c743c3c00d6415fd920))
+* [[#185893614](https://github.com/newjersey/navigator.business.nj.gov/issues/185893614)] remove duplicate field from licenseSearchTask in CMS ([a847a18](https://github.com/newjersey/navigator.business.nj.gov/commit/a847a183baa79feb6e5af20afc5beef74c3d46dc))
+* [[#186366473](https://github.com/newjersey/navigator.business.nj.gov/issues/186366473)] added Analytics for formation task help button ([f7efe5a](https://github.com/newjersey/navigator.business.nj.gov/commit/f7efe5ae32ac7faa995510ddde6096dd81a45b1c))
+
+
+### Features
+
+* [[#185893614](https://github.com/newjersey/navigator.business.nj.gov/issues/185893614)] license status check migration - public movers ([247f8c4](https://github.com/newjersey/navigator.business.nj.gov/commit/247f8c4b4c9e37c69ffd5a575dc991f9801240d3))
+* [[#186084930](https://github.com/newjersey/navigator.business.nj.gov/issues/186084930)] hide landing page presentational images from screen readers ([5db7e43](https://github.com/newjersey/navigator.business.nj.gov/commit/5db7e4356848f1e77fb1deb671c1fba2889d9a73))
+* [185932083] view hidden items accordion scrolls to top when opened ([7510465](https://github.com/newjersey/navigator.business.nj.gov/commit/7510465901ecf44ec178b202ff3de081ba3ed8f5))
+
 # [5.36.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.35.0...v5.36.0) (2023-11-03)
 
 

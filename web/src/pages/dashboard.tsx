@@ -1,6 +1,7 @@
 import { CircularIndicator } from "@/components/CircularIndicator";
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
-import { QuickActionTile } from "@/components/dashboard/QuickActionTile";
+import { QuickActionLinkTile } from "@/components/dashboard/QuickActionTaskLink";
+import { QuickActionTaskTile } from "@/components/dashboard/QuickActionTaskTile";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
 import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout";
@@ -20,6 +21,7 @@ import { useQueryControlledAlert } from "@/lib/data-hooks/useQueryControlledAler
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
+import { isHomeContractorIndustry } from "@/lib/domain-logic/isHomeContractorIndustry";
 import { QUERIES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
@@ -27,18 +29,21 @@ import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayConten
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
-import { loadAllQuickActions } from "@/lib/static/loadQuickActions";
+import { loadAllQuickActionLinks } from "@/lib/static/loadQuickActionLinks";
+import { loadAllQuickActionTasks } from "@/lib/static/loadQuickActionTasks";
 import {
   Certification,
   Funding,
   OperateReference,
-  QuickAction,
+  QuickActionLink,
+  QuickActionTask,
   RoadmapDisplayContent,
 } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { LookupOperatingPhaseById, Municipality } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
+import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
@@ -48,7 +53,8 @@ interface Props {
   fundings: Funding[];
   certifications: Certification[];
   municipalities: Municipality[];
-  quickActions: QuickAction[];
+  quickActionTasks: QuickActionTask[];
+  quickActionLinks: QuickActionLink[];
 }
 
 const DashboardPage = (props: Props): ReactElement => {
@@ -161,6 +167,43 @@ const DashboardPage = (props: Props): ReactElement => {
     );
   };
 
+  const renderQuickActions = (): ReactElement => {
+    const renderQuickActions = [];
+    const isHomeContractor = isHomeContractorIndustry(business?.profileData.industryId);
+
+    const registryUpdateBrcAmendmentQuickAction = props.quickActionTasks.find(
+      (e) => e.filename === "registry-update-brc-amendment"
+    );
+
+    const nonHicStateContractingQuickAction = props.quickActionLinks.find(
+      (e) => e.filename === "state-contracting-external-link"
+    );
+
+    if (registryUpdateBrcAmendmentQuickAction) {
+      renderQuickActions.push(
+        <QuickActionTaskTile
+          quickAction={registryUpdateBrcAmendmentQuickAction}
+          key={registryUpdateBrcAmendmentQuickAction.filename}
+        />
+      );
+    }
+
+    if (nonHicStateContractingQuickAction && !isHomeContractor) {
+      renderQuickActions.push(
+        <QuickActionLinkTile
+          quickAction={nonHicStateContractingQuickAction}
+          key={nonHicStateContractingQuickAction.filename}
+        />
+      );
+    }
+
+    return (
+      <div className="grid-row grid-gap" data-testid="quick-actions-section">
+        {renderQuickActions}
+      </div>
+    );
+  };
+
   const renderRoadmap = (
     <div className="margin-top-0 desktop:margin-top-0">
       <UserDataErrorAlert />
@@ -168,8 +211,8 @@ const DashboardPage = (props: Props): ReactElement => {
       <div className="margin-top-3">
         {roadmap ? (
           <>
-            <div className="margin-bottom-4">
-              {displayHomedBaseBusinessQuestion() && (
+            {displayHomedBaseBusinessQuestion() && (
+              <div className="margin-bottom-4">
                 <DeferredOnboardingQuestion
                   label={
                     <FieldLabelDescriptionOnly
@@ -181,15 +224,11 @@ const DashboardPage = (props: Props): ReactElement => {
                 >
                   <HomeBasedBusiness />
                 </DeferredOnboardingQuestion>
-              )}
-            </div>
-            {operatingPhase.displayQuickActions && (
-              <div className="grid-row margin-bottom-4">
-                {props.quickActions.map((quickAction) => (
-                  <QuickActionTile key={quickAction.id} name={quickAction.name} url={quickAction.urlSlug} />
-                ))}
               </div>
             )}
+
+            {operatingPhase.displayQuickActions && renderQuickActions()}
+
             {operatingPhase.displayRoadmapTasks && (
               <>
                 <hr className="margin-bottom-3" />
@@ -210,6 +249,7 @@ const DashboardPage = (props: Props): ReactElement => {
 
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
+      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${Config.pagesMetadata.dashboard.title}`} />
       <PageSkeleton>
         <NavBar />
         <main id="main">
@@ -264,7 +304,8 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
       fundings: loadAllFundings(),
       certifications: loadAllCertifications(),
       municipalities: loadAllMunicipalities(),
-      quickActions: loadAllQuickActions(),
+      quickActionTasks: loadAllQuickActionTasks(),
+      quickActionLinks: loadAllQuickActionLinks(),
     },
   };
 };

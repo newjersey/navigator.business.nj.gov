@@ -1,3 +1,4 @@
+import { mockReadDirReturn } from "@/lib/static/mockHelpers";
 import fs from "fs";
 import { loadAllLicenseUrlSlugs, loadLicenseByUrlSlug } from "./loadLicenses";
 
@@ -32,7 +33,7 @@ describe("loadLicenses", () => {
 
       mockedFs.readFileSync.mockReturnValueOnce(taskMd1).mockReturnValueOnce(taskMd2);
 
-      mockReadDirReturn(["task1.md", "task2.md"]);
+      mockReadDirReturn({ value: ["task1.md", "task2.md"], mockedFs });
       const allLicenseUrlSlugs = loadAllLicenseUrlSlugs();
 
       expect(allLicenseUrlSlugs).toHaveLength(4);
@@ -71,7 +72,7 @@ describe("loadLicenses", () => {
         "\n" +
         "I am a text content2";
 
-      mockReadDirReturn(["task1.md", "task2.md", "task3.md"]);
+      mockReadDirReturn({ value: ["task1.md", "task2.md", "task3.md"], mockedFs });
       mockedFs.readFileSync
         .mockReturnValueOnce(taskMd1) // read first file in list
         .mockReturnValueOnce(taskMd2) // read second file in list
@@ -86,10 +87,4 @@ describe("loadLicenses", () => {
       });
     });
   });
-
-  const mockReadDirReturn = (value: string[]): void => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    mockedFs.readdirSync.mockReturnValue(value);
-  };
 });

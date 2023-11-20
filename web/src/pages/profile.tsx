@@ -76,6 +76,7 @@ import { hasCompletedFormation } from "@businessnjgovnavigator/shared/";
 import dayjs from "dayjs";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
+import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { ReactElement, ReactNode, useContext, useState } from "react";
 
@@ -722,6 +723,7 @@ const ProfilePage = (props: Props): ReactElement => {
             onBack,
           }}
         >
+          <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${Config.pagesMetadata.profile.title}`} />
           <PageSkeleton>
             <NavBar showSidebar={true} hideMiniRoadmap={true} />
             <main id="main" data-testid={"main"}>

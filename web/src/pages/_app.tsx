@@ -17,7 +17,6 @@ import { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
-import SEO from "../../next-seo.config";
 import { SWRConfig } from "swr";
 import { BusinessPersona, OperatingPhaseId, RegistrationStatus } from "@businessnjgovnavigator/shared";
 import { NeedsAccountSnackbar } from "@/components/auth/NeedsAccountSnackbar";
@@ -34,6 +33,7 @@ import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import { IntercomContext } from "@/contexts/intercomContext";
 import { IntercomScript } from "@/components/IntercomScript";
 import { setOnLoadDimensions } from "@/lib/utils/analytics-helpers";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
 NeedsAccountContext.displayName = "Needs Account";
@@ -47,6 +47,8 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [registrationStatus, setRegistrationStatus] = useState<RegistrationStatus | undefined>(
     UserDataStorageFactory().getRegistrationStatus()
   );
+
+  const { Config } = useConfig();
 
   const setRegistrationStatusInStateAndStorage = (value: RegistrationStatus | undefined): void => {
     setRegistrationStatus(value);
@@ -147,7 +149,10 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         industryId={industryId}
         businessPersona={businessPersona}
       />
-      <DefaultSeo {...SEO} />
+      <DefaultSeo
+        title={Config.pagesMetadata.titlePrefix}
+        description={Config.pagesMetadata.siteDescription}
+      />
       <IntercomContext.Provider
         value={{ setOperatingPhaseId, setLegalStructureId, setIndustryId, setBusinessPersona }}
       >

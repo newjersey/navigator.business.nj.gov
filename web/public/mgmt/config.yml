@@ -2955,9 +2955,9 @@ collections:
     fields:
       - { name: "" }
 
-  - name: "quick-actions"
-    label: "Quick Actions"
-    folder: "content/src/quick-actions"
+  - name: "quick-action-tasks"
+    label: "Quick Action Tasks"
+    folder: "content/src/quick-action-tasks"
     summary: "{{filename}} - {{name}}"
     identifier_field: "{{filename}}"
     slug: "{{fields.filename}}"
@@ -2968,14 +2968,42 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "Filename", name: "filename", widget: "nospace", required: false }
-      - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+      - { label: "Filename (disabled after file creation)", name: "filename", widget: "write-once-read-only" }
       - { label: "Name/Title", name: "name", widget: "string" }
-      - { label: "ID", name: "id", widget: "string" }
-      - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Icon"
+        name: icon
+        widget: "select"
+        multiple: false
+        required: true
+        options: ["loop.svg", "capitol.svg"]
+      - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "nospace", required: true }
+      - { label: "Content", name: "body", widget: "markdown", required: true }
       - { label: "Form", name: "form", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+
+  - name: "quick-action-links"
+    label: "Quick Action Links"
+    folder: "content/src/quick-action-links"
+    summary: "{{filename}} - {{name}}"
+    identifier_field: "{{filename}}"
+    slug: "{{fields.filename}}"
+    delete: true
+    sortable_fields: ["name", "filename"]
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - { label: "Filename (disabled after file creation)", name: "filename", widget: "write-once-read-only" }
+      - { label: "Name/Title", name: "name", widget: "string" }
+      - label: "Icon"
+        name: icon
+        widget: "select"
+        multiple: false
+        required: true
+        options: ["loop.svg", "capitol.svg"]
+      - { label: "External Link", name: "externalRoute", widget: "nospace", required: true }
 
   - name: "misc-label"
     label: "🟨 MISC"
@@ -3092,6 +3120,35 @@ collections:
             fields:
               - { label: Beta Main Text, name: betaMainText, widget: string }
               - { label: Beta Modal Button Text, name: betaModalButtonText, widget: string }
+          - label: Pages Metadata
+            name: pagesMetadata
+            collapsed: true
+            widget: object
+            summary: "{{pagesMetadata}}"
+            fields:
+              - label: Home
+                name: home
+                collapsed: true
+                widget: object
+                summary: "{{home}}"
+                fields:
+                  - { label: Title, name: title, widget: string }
+              - label: Dashboard
+                name: dashboard
+                collapsed: true
+                widget: object
+                summary: "{{dashboard}}"
+                fields:
+                  - { label: Title, name: title, widget: string }
+              - label: Profile
+                name: profile
+                collapsed: true
+                widget: object
+                summary: "{{profile}}"
+                fields:
+                  - { label: Title, name: title, widget: string }
+              - { label: Title Prefix, name: titlePrefix, widget: string }
+              - { label: Site Description, name: siteDescription, widget: string }
           - label: Tax Calendar Defaults
             name: taxCalendar
             collapsed: true
@@ -3552,9 +3609,8 @@ collections:
               - { label: Link Two, name: linkTwo, widget: string }
               - { label: Link Three Text, name: linkThreeText, widget: string }
               - { label: Link Three, name: linkThree, widget: string }
-              - { label: Office Text One, name: officeTextOne, widget: string }
-              - { label: Office Text Two, name: officeTextTwo, widget: string }
-              - { label: Office Link Text, name: officeLinkText, widget: string }
+              - { label: Made With Text, name: madeWithText, widget: string }
+              - { label: By The Office of Innovation Text, name: byTheOfficeOfInnovationText, widget: string }
               - { label: Office Link, name: officeLink, widget: string }
               - { label: Credit Text, name: creditText, widget: string }
               - { label: Credit Link Text, name: creditLinkText, widget: string }

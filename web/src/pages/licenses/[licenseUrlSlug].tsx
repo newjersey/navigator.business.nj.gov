@@ -84,9 +84,11 @@ const LicensePage = (props: Props): ReactElement => {
 
   const licenseName = LookupIndustryById(business?.profileData.industryId).licenseType;
 
+  const { Config } = useConfig();
+
   return (
     <>
-      <NextSeo title={`Business.NJ.gov Navigator - ${licenseName}`} />
+      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${licenseName}`} />
       <PageSkeleton>
         <NavBar showSidebar={true} hideMiniRoadmap={true} />
         <TaskSidebarPageLayout>

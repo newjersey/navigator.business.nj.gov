@@ -831,6 +831,7 @@ workflows:
             - build
       - integration-tests:
           name: Integration Tests - Group 1
+          enable-dashboard: true
           suite: group1
           filters:
             branches:
@@ -845,6 +846,7 @@ workflows:
             - build
       - integration-tests:
           name: Integration Tests - Group 2
+          enable-dashboard: true
           suite: group2
           filters:
             branches:
@@ -859,6 +861,7 @@ workflows:
             - build
       - integration-tests:
           name: Integration Tests - Group 3
+          enable-dashboard: true
           suite: group3
           filters:
             branches:
@@ -873,6 +876,7 @@ workflows:
             - build
       - integration-tests:
           name: Integration Tests - Group 4
+          enable-dashboard: true
           suite: group4
           filters:
             branches:
@@ -887,6 +891,7 @@ workflows:
             - build
       - integration-tests:
           name: Integration Tests - Group 5
+          enable-dashboard: true
           suite: group5
           filters:
             branches:

@@ -15,6 +15,7 @@ import { setABExperienceDimension } from "@/lib/utils/analytics-helpers";
 import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
 import { ABExperience, decideABExperience } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
+import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
@@ -147,95 +148,100 @@ const Home = (props: Props): ReactElement => {
   };
 
   return (
-    <PageSkeleton landingPage={true}>
-      <NavBar landingPage={true} />
-      <main data-testid="main">
-        <Hero isWelcomePage={props.isWelcomePage} />
-        <section ref={sectionHowItWorks} aria-label="How it works">
-          <div className="minh-mobile margin-top-2 desktop:margin-top-neg-205  padding-bottom-6 text-center bg-base-extra-light">
-            <h2 className="text-accent-cool-darker h1-styling margin-bottom-6 padding-top-6">
-              {landingPageConfig.section4HeaderText}
-            </h2>
-            <div
-              className={`flex ${
-                isDesktopAndUp ? "flex-row flex-justify-center" : "flex-column flex-align-center"
-              } text-accent-cool-darker`}
-            >
-              <div className="margin-x-3">
-                <img className="" src="/img/Landing-documents.svg" alt="" role="presentation" />
-                <div className="text-accent-cool-darker width-card margin-top-2">
-                  {landingPageConfig.section4FirstIconText}
-                </div>
-              </div>
-              <div
-                className={`arrow ${
-                  isDesktopAndUp ? "right width-15 height-10" : "down height-5 margin-y-3"
-                }`}
-              />
-              <div className="margin-x-3">
-                <img className="" src="/img/Landing-checkmarks.svg" alt="" role="presentation" />
-                <div className="text-accent-cool-darker width-card margin-top-2">
-                  {landingPageConfig.section4SecondIconText}
-                </div>
-              </div>
-              <div
-                className={`arrow ${isDesktopAndUp ? "left width-15 height-10" : "up height-5 margin-y-3"} `}
-              />{" "}
-              <div className="margin-x-3">
-                <img className="" src="/img/Landing-building.svg" alt="" role="presentation" />
-                <div className="text-accent-cool-darker width-card margin-top-2">
-                  {landingPageConfig.section4ThirdIconText}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section aria-label="Available Tools">
-          {renderTwoColumnRow(
-            landingPageConfig.section5FirstHeaderText,
-            landingPageConfig.section5FirstSupportingText,
-            "/img/Landing-step-by-step.svg",
-            "Example step-by-step guide from the My Profile application to check business name availability, get your tax registration from the IRS, and more. A progress bar that shows completion of business formation."
-          )}
-          {renderTwoColumnRow(
-            landingPageConfig.section5SecondHeaderText,
-            landingPageConfig.section5SecondSupportingText,
-            "/img/Landing-funding-and-certifications.svg",
-            "Two example opportunity cards from the My Profile application as examples: small business lease grant funding details and veteran-owned business certification details.",
-            true
-          )}
-          {renderTwoColumnRow(
-            landingPageConfig.section5ThirdHeaderText,
-            landingPageConfig.section5ThirdSupportingText,
-            "/img/Landing-and-more.svg",
-            "Example of the calendar in the My Profile application with upcoming due dates for annual report and license renewal. Example of progress bar with the heading to check available names and form your business."
-          )}
-        </section>
-
-        <section
-          ref={sectionLookingForSupport}
-          aria-label="Looking for more support?"
-          className={`${isDesktopAndUp ? "landing-support-container" : ""}`}
-        >
-          <div className="bg-base-extra-light padding-x-2 desktop:padding-x-0 desktop:padding-bottom-10">
-            <div className="desktop:grid-container-widescreen flex flex-column flex-align-center">
-              <h2 className="base-darkest margin-top-7 text-center margin-bottom-5 desktop:margin-top-10 desktop:margin-bottom-8">
-                {landingPageConfig.section6Header}
+    <>
+      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${Config.pagesMetadata.home.title}`} />
+      <PageSkeleton landingPage={true}>
+        <NavBar landingPage={true} />
+        <main data-testid="main">
+          <Hero isWelcomePage={props.isWelcomePage} />
+          <section ref={sectionHowItWorks} aria-label={landingPageConfig.section4HeaderText}>
+            <div className="minh-mobile margin-top-2 desktop:margin-top-neg-205  padding-bottom-6 text-center bg-base-extra-light">
+              <h2 className="text-accent-cool-darker h1-styling margin-bottom-6 padding-top-6">
+                {landingPageConfig.section4HeaderText}
               </h2>
-
-              <SupportExploreSignUpChatCards />
-              <div className="green-divider-center width-10 desktop:width-mobile margin-top-2 desktop:margin-top-10"></div>
-              <div className="desktop:margin-x-15 margin-bottom-8 desktop:margin-bottom-3 text-center desktop:padding-x-15">
-                <div className="desktop:padding-x-16">
-                  <LegalMessage />
+              <div
+                className={`flex ${
+                  isDesktopAndUp ? "flex-row flex-justify-center" : "flex-column flex-align-center"
+                } text-accent-cool-darker`}
+              >
+                <div className="margin-x-3">
+                  <img className="" src="/img/Landing-documents.svg" alt="" role="presentation" />
+                  <div className="text-accent-cool-darker width-card margin-top-2">
+                    {landingPageConfig.section4FirstIconText}
+                  </div>
+                </div>
+                <div
+                  className={`arrow ${
+                    isDesktopAndUp ? "right width-15 height-10" : "down height-5 margin-y-3"
+                  }`}
+                />
+                <div className="margin-x-3">
+                  <img className="" src="/img/Landing-checkmarks.svg" alt="" role="presentation" />
+                  <div className="text-accent-cool-darker width-card margin-top-2">
+                    {landingPageConfig.section4SecondIconText}
+                  </div>
+                </div>
+                <div
+                  className={`arrow ${
+                    isDesktopAndUp ? "left width-15 height-10" : "up height-5 margin-y-3"
+                  } `}
+                />{" "}
+                <div className="margin-x-3">
+                  <img className="" src="/img/Landing-building.svg" alt="" role="presentation" />
+                  <div className="text-accent-cool-darker width-card margin-top-2">
+                    {landingPageConfig.section4ThirdIconText}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      </main>
-    </PageSkeleton>
+          </section>
+
+          <section aria-label="Available Tools">
+            {renderTwoColumnRow(
+              landingPageConfig.section5FirstHeaderText,
+              landingPageConfig.section5FirstSupportingText,
+              "/img/Landing-step-by-step.svg",
+              "Example step-by-step guide from the My Profile application to check business name availability, get your tax registration from the IRS, and more. A progress bar that shows completion of business formation."
+            )}
+            {renderTwoColumnRow(
+              landingPageConfig.section5SecondHeaderText,
+              landingPageConfig.section5SecondSupportingText,
+              "/img/Landing-funding-and-certifications.svg",
+              "Two example opportunity cards from the My Profile application as examples: small business lease grant funding details and veteran-owned business certification details.",
+              true
+            )}
+            {renderTwoColumnRow(
+              landingPageConfig.section5ThirdHeaderText,
+              landingPageConfig.section5ThirdSupportingText,
+              "/img/Landing-and-more.svg",
+              "Example of the calendar in the My Profile application with upcoming due dates for annual report and license renewal. Example of progress bar with the heading to check available names and form your business."
+            )}
+          </section>
+
+          <section
+            ref={sectionLookingForSupport}
+            aria-label="Looking for more support?"
+            className={`${isDesktopAndUp ? "landing-support-container" : ""}`}
+          >
+            <div className="bg-base-extra-light padding-x-2 desktop:padding-x-0 desktop:padding-bottom-10">
+              <div className="desktop:grid-container-widescreen flex flex-column flex-align-center">
+                <h2 className="base-darkest margin-top-7 text-center margin-bottom-5 desktop:margin-top-10 desktop:margin-bottom-8">
+                  {landingPageConfig.section6Header}
+                </h2>
+
+                <SupportExploreSignUpChatCards />
+                <div className="green-divider-center width-10 desktop:width-mobile margin-top-2 desktop:margin-top-10"></div>
+                <div className="desktop:margin-x-15 margin-bottom-8 desktop:margin-bottom-3 text-center desktop:padding-x-15">
+                  <div className="desktop:padding-x-16">
+                    <LegalMessage />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </PageSkeleton>
+    </>
   );
 };
 

@@ -1,3 +1,4 @@
+import { mockReadDirReturn } from "@/lib/static/mockHelpers";
 import fs from "fs";
 import { loadAllFilingUrlSlugs, loadFilingByUrlSlug } from "./loadFilings";
 
@@ -38,7 +39,7 @@ describe("loadFilings", () => {
 
       mockedFs.readFileSync.mockReturnValueOnce(taskMd1).mockReturnValueOnce(taskMd2);
 
-      mockReadDirReturn(["task1.md", "task2.md"]);
+      mockReadDirReturn({ value: ["task1.md", "task2.md"], mockedFs });
       const allFilingUrlSlugs = loadAllFilingUrlSlugs();
 
       expect(allFilingUrlSlugs).toHaveLength(2);
@@ -81,7 +82,7 @@ describe("loadFilings", () => {
         "\n" +
         "I am a text content2";
 
-      mockReadDirReturn(["task1.md", "task2.md", "task3.md"]);
+      mockReadDirReturn({ value: ["task1.md", "task2.md", "task3.md"], mockedFs });
       mockedFs.readFileSync
         .mockReturnValueOnce(taskMd1) // read first file in list
         .mockReturnValueOnce(taskMd2) // read second file in list
@@ -99,10 +100,4 @@ describe("loadFilings", () => {
       });
     });
   });
-
-  const mockReadDirReturn = (value: string[]): void => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    mockedFs.readdirSync.mockReturnValue(value);
-  };
 });

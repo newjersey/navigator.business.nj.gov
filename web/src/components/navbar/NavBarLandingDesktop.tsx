@@ -21,7 +21,7 @@ export const NavBarLandingDesktop = (): ReactElement => {
         <img
           className="height-4 margin-y-2"
           src="/img/Navigator-logo@2x.png"
-          alt="Business.NJ.Gov Navigator"
+          alt={Config.pagesMetadata.titlePrefix}
         />
         <div>
           <UnStyledButton

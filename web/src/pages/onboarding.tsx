@@ -419,7 +419,9 @@ const OnboardingPage = (props: Props): ReactElement => {
             onBack,
           }}
         >
-          <NextSeo title={`Business.NJ.gov Navigator - ${pageTitle} ${evalHeaderStepsTemplate(page)}`} />
+          <NextSeo
+            title={`${Config.pagesMetadata.titlePrefix} - ${pageTitle} ${evalHeaderStepsTemplate(page)}`}
+          />
           <PageSkeleton>
             <NavBar />
             <ReturnToPreviousBusinessBar previousBusiness={previousBusiness} />

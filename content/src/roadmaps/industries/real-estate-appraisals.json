@@ -1,12 +1,6 @@
 {
-  "displayname": "real-estate-appraisals",
   "defaultSectorId": "real-estate",
   "canHavePermanentLocation": true,
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "isRealEstateAppraisalManagementApplicable": true
-  },
-  "nonEssentialQuestionsIds": [],
   "roadmapSteps": [
     {
       "step": 1,
@@ -46,9 +40,20 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "licenseTask": "appraiser-certification",
+      "weight": 200
     }
   ],
   "name": "Real Estate Appraisals",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "real-estate-appraisals",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "isRealEstateAppraisalManagementApplicable": true
+  },
   "modifications": [],
   "isEnabled": true,
   "additionalSearchTerms": "appraiser",

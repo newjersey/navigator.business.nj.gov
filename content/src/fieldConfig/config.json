@@ -207,15 +207,15 @@
     "outOfBusinessPermitStatusText": "Out of Business",
     "expiredPermitStatusText": "Expired",
     "draftStatusText": "Draft",
-    "submittedStatusText":"Submitted",
-    "underInternalReviewStatusText":"Under Internal Review",
-    "specialReviewStatusText":"Special Review",
-    "pendingDeficienciesStatusText":"Pending Deficiencies",
-    "deficienciesSubmittedStatusText":"Deficiencies Submitted",
-    "checklistCompletedStatusText":"Checklist Completed",
-    "approvedStatusText":"Approved",
-    "pendingRenewalStatusText":"Pending Renewal",
-    "pendingReinstatementStatusText":"Pending Reinstatement",
+    "submittedStatusText": "Submitted",
+    "underInternalReviewStatusText": "Under Internal Review",
+    "specialReviewStatusText": "Special Review",
+    "pendingDeficienciesStatusText": "Pending Deficiencies",
+    "deficienciesSubmittedStatusText": "Deficiencies Submitted",
+    "checklistCompletedStatusText": "Checklist Completed",
+    "approvedStatusText": "Approved",
+    "pendingRenewalStatusText": "Pending Renewal",
+    "pendingReinstatementStatusText": "Pending Reinstatement",
     "inactiveStatusText": "Inactive",
     "abandonedStatusText": "Abandoned",
     "suspendedStatusText": "Suspended",
@@ -289,8 +289,7 @@
   },
   "footer": {
     "creditLinkText": "Open Source",
-    "officeLinkText": "Office of Innovation",
-    "officeTextTwo": " by the ",
+    "byTheOfficeOfInnovationText": " by the Office of Innovation",
     "linkThree": "https://business.nj.gov/newsletter-signup",
     "creditText": " Powered by ",
     "linkOne": "https://forms.business.nj.gov/feedback/",
@@ -302,7 +301,7 @@
     "officeLink": "https://innovation.nj.gov/",
     "linkOneText": "Give Us Feedback",
     "gitHubLink": "https://github.com/newjersey",
-    "officeTextOne": "Made with ",
+    "madeWithText": "Made with",
     "linkTwoText": "Terms & Privacy Policy"
   },
   "registeredForTaxesModal": {
@@ -318,6 +317,19 @@
   "autosaveDefaults": {
     "savingText": "Saving",
     "savedText": "Saved 1 minute ago"
+  },
+  "pagesMetadata": {
+    "home": {
+      "title": "Home"
+    },
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "profile": {
+      "title": "Business Profile"
+    },
+    "titlePrefix": "Business.NJ.gov My Account",
+    "siteDescription": "Business.NJ.gov My Account is a tool for starting and managing a business in the State of New Jersey"
   },
   "headerDefaults": {
     "noUserNameHeaderText": "Hello!",

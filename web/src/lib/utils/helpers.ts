@@ -102,6 +102,10 @@ export const scrollToTopOfElement = (
   let y = 0;
   if (element) {
     y = window.scrollY + element.getBoundingClientRect().top;
+    if (isDesktop) {
+      const desktopNavBarHeight = 63;
+      y -= desktopNavBarHeight;
+    }
     if (!isDesktop) {
       const mobileNavBarHeight = 47;
       y -= mobileNavBarHeight;

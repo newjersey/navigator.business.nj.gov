@@ -5,11 +5,11 @@ import { ReactElement } from "react";
 
 function getFaviconPath(): string {
   if (process.env.NODE_ENV === "development") {
-    return "/favicon_development.ico";
+    return "/favicon_development";
   } else if (process.env.NODE_ENV === "test") {
-    return "/favicon_test.ico";
+    return "/favicon_test";
   } else {
-    return "/favicon.ico";
+    return "/favicon";
   }
 }
 
@@ -24,7 +24,9 @@ class CustomDocument extends Document {
       <Html lang="en">
         <Head>
           <Script src="/vendor/js/uswds-init.min.js" strategy="beforeInteractive" />
-          <link rel="icon" href={getFaviconPath()} />
+          <link rel="icon" href={`${getFaviconPath()}.ico`} sizes="32x32" />
+          <link rel="icon" href={`${getFaviconPath()}.svg`} type="image/svg+xml" />
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         </Head>
         <body>
           <noscript>

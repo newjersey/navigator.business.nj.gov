@@ -197,15 +197,22 @@ export interface Opportunity {
   status?: string;
 }
 
-export interface QuickAction {
-  id: string;
+export interface QuickActionTask {
   name: string;
-  urlSlug: string;
+  icon: string;
   filename: string;
+  urlSlug: string;
   contentMd: string;
   callToActionLink: string | undefined;
   callToActionText: string | undefined;
   form: string | undefined;
+}
+
+export interface QuickActionLink {
+  name: string;
+  icon: string;
+  filename: string;
+  externalRoute: string;
 }
 
 export type FundingType =

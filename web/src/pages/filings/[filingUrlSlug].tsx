@@ -192,7 +192,7 @@ const FilingPage = (props: Props): ReactElement => {
 
   return (
     <>
-      <NextSeo title={`Business.NJ.gov Navigator - ${props.filing.name}`} />
+      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${props.filing.name}`} />
       <PageSkeleton>
         <NavBar showSidebar={true} hideMiniRoadmap={true} />
         <TaskSidebarPageLayout hideMiniRoadmap={true}>

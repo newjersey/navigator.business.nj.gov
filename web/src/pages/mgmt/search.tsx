@@ -13,7 +13,8 @@ import { searchIndustries } from "@/lib/search/searchIndustries";
 import { searchLicenseEvents } from "@/lib/search/searchLicenseEvents";
 import { searchNonEssentialQuestions } from "@/lib/search/searchNonEssentialQuestions";
 import { searchPostOnboarding } from "@/lib/search/searchPostOnboarding";
-import { searchQuickActions } from "@/lib/search/searchQuickActions";
+import { searchQuickActionLinks } from "@/lib/search/searchQuickActionLinks";
+import { searchQuickActionTasks } from "@/lib/search/searchQuickActionTasks";
 import { searchSidebarCards } from "@/lib/search/searchSidebarCards";
 import { searchSteps } from "@/lib/search/searchSteps";
 import { searchTasks } from "@/lib/search/searchTasks";
@@ -29,7 +30,8 @@ import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllLicenses } from "@/lib/static/loadLicenses";
 import { loadAllPostOnboarding } from "@/lib/static/loadPostOnboarding";
-import { loadAllQuickActions } from "@/lib/static/loadQuickActions";
+import { loadAllQuickActionLinks } from "@/lib/static/loadQuickActionLinks";
+import { loadAllQuickActionTasks } from "@/lib/static/loadQuickActionTasks";
 import { loadAllLicenseTasks, loadAllTasksOnly } from "@/lib/static/loadTasks";
 import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
 import {
@@ -40,7 +42,8 @@ import {
   LicenseEvent,
   NonEssentialQuestion,
   PostOnboardingFile,
-  QuickAction,
+  QuickActionLink,
+  QuickActionTask,
   RoadmapDisplayContent,
   SidebarCardContent,
   Step,
@@ -71,7 +74,8 @@ interface Props {
   archivedContextualInfo: ContextualInfoFile[];
   postOnboarding: PostOnboardingFile[];
   licenseEvents: LicenseEvent[];
-  quickActions: QuickAction[];
+  quickActionTasks: QuickActionTask[];
+  quickActionLinks: QuickActionLink[];
   cmsConfig: any;
 }
 
@@ -90,7 +94,8 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [nonEssentialQuestionsMatches, setNonEssentialQuestionsMatches] = useState<Match[]>([]);
   const [webflowLicenseMatches, setWebflowLicenseMatches] = useState<Match[]>([]);
   const [filingMatches, setFilingMatches] = useState<Match[]>([]);
-  const [quickActionMatches, setQuickActionMatches] = useState<Match[]>([]);
+  const [quickActionTaskMatches, setQuickActionTaskMatches] = useState<Match[]>([]);
+  const [quickActionLinkMatches, setQuickActionLinkMatches] = useState<Match[]>([]);
   const [sidebarCardMatches, setSidebarCardMatches] = useState<Match[]>([]);
   const [contextualInfoMatches, setContextualInfoMatches] = useState<Match[]>([]);
   const [archivedContextualInfoMatches, setArchivedContextualInfoMatches] = useState<Match[]>([]);
@@ -123,7 +128,8 @@ const SearchContentPage = (props: Props): ReactElement => {
     setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
     setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
     setIndustryMatches(searchIndustries(Industries, lowercaseTerm));
-    setQuickActionMatches(searchQuickActions(props.quickActions, lowercaseTerm));
+    setQuickActionLinkMatches(searchQuickActionLinks(props.quickActionLinks, lowercaseTerm));
+    setQuickActionTaskMatches(searchQuickActionTasks(props.quickActionTasks, lowercaseTerm));
 
     const defaultStepsMatches = searchSteps(Steps.steps as Step[], lowercaseTerm, { filename: "Steps" });
     const foreignStepsMatches = searchSteps(ForeignSteps.steps as Step[], lowercaseTerm, {
@@ -167,7 +173,8 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...archivedContextualInfoMatches,
         ...contextualInfoMatches,
         ...groupedConfigMatches,
-        ...quickActionMatches,
+        ...quickActionTaskMatches,
+        ...quickActionLinkMatches,
       ].length === 0
     );
   };
@@ -206,8 +213,12 @@ const SearchContentPage = (props: Props): ReactElement => {
     "Post Onboarding Content": postOnboardingMatches,
   };
 
-  const quickActionCollection = {
-    "Quick Actions": quickActionMatches,
+  const quickActionTaskCollection = {
+    "Quick Action Tasks": quickActionTaskMatches,
+  };
+
+  const quickActionLinkCollection = {
+    "Quick Action Links": quickActionLinkMatches,
   };
 
   const authedView = (
@@ -239,7 +250,11 @@ const SearchContentPage = (props: Props): ReactElement => {
       <MatchCollection matchedCollections={dashboardCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection matchedCollections={miscCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection
-        matchedCollections={quickActionCollection}
+        matchedCollections={quickActionTaskCollection}
+        groupedConfigMatches={groupedConfigMatches}
+      />
+      <MatchCollection
+        matchedCollections={quickActionLinkCollection}
         groupedConfigMatches={groupedConfigMatches}
       />
     </div>
@@ -280,7 +295,8 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       archivedContextualInfo: loadAllArchivedContextualInfo(),
       postOnboarding: loadAllPostOnboarding(),
       licenseEvents: loadAllLicenses(),
-      quickActions: loadAllQuickActions(),
+      quickActionTasks: loadAllQuickActionTasks(),
+      quickActionLinks: loadAllQuickActionLinks(),
       cmsConfig: loadCmsConfig(),
     },
   };

@@ -17,10 +17,10 @@
     "endOfLine": "auto"
   },
   "devDependencies": {
-    "@types/node": "16.18.53",
+    "@types/node": "16.18.61",
     "cross-env": "7.0.3",
-    "cspell": "7.3.6",
+    "cspell": "7.3.9",
     "prettier": "2.8.8",
-    "rimraf": "5.0.1"
+    "rimraf": "5.0.5"
   }
 }
