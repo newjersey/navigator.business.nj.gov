@@ -10,4 +10,6 @@ export type FireSafetyInspection = {
   inspectionFinished: boolean;
   address: string;
   openViolationCount: number;
-}
+};
+
+export type FireSafetyInfo = (address: string) => Promise<FireSafetyInspection[]>;

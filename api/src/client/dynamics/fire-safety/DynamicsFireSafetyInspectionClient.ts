@@ -1,7 +1,6 @@
 import { LogWriterType } from "@libs/logWriter";
-import { FireSafetyInspection } from "./types";
 import axios, { AxiosError } from "axios";
-
+import { FireSafetyInspection } from "./types";
 
 export interface FireSafetyInspectionClient {
   getFireSafetyInspectionsByAddress: (
@@ -18,7 +17,7 @@ export const DynamicsFireSafetyInspectionClient = (
     address: string
   ): Promise<FireSafetyInspection[]> => {
     const logId = logWriter.GetId();
-    logWriter.LogInfo(`Dynamics Business Address Client - Id:${logId}`);
+    logWriter.LogInfo(`Dynamics Fire Safety Inspection Client - Id:${logId}`);
 
     return axios
       .get(
@@ -38,9 +37,9 @@ export const DynamicsFireSafetyInspectionClient = (
             createdOn: response.createdon,
             inspectionFinished: response.ultra_inspectionended,
             address: response.ultra_streetaddress,
-            openViolationCount: response.ultra_numberofopenviolations
-          }
-        })
+            openViolationCount: response.ultra_numberofopenviolations,
+          };
+        });
       })
       .catch((error: AxiosError) => {
         logWriter.LogError(`Dynamics Fire Safety - Id:${logId} - Error:`, error);
@@ -59,4 +58,3 @@ type DynamicsFireSafetyInspectionResponse = {
   ultra_numberofopenviolations: number;
   ultra_streetaddress: string;
 };
-
