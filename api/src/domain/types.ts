@@ -1,5 +1,6 @@
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
+import { FireSafetyInspectionResult } from "@shared/fireSafety";
 import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
 import { LicenseEntity, LicenseSearchNameAndAddress, LicenseStatusResult } from "@shared/license";
 import { ProfileData } from "@shared/profileData";
@@ -106,6 +107,8 @@ export type UpdateLicenseStatus = (
   userData: UserData,
   nameAndAddress: LicenseSearchNameAndAddress
 ) => Promise<UserData>;
+
+export type FireSafetyInspection = (address: string) => Promise<FireSafetyInspectionResult[]>;
 
 export type UpdateOperatingPhase = (userData: UserData) => UserData;
 export type UpdateSidebarCards = (userData: UserData) => UserData;
