@@ -6,8 +6,8 @@ import { Router } from "express";
 export const fireSafetyRouterFactory = (fireSafetyInspection: FireSafetyInspectionStatus): Router => {
   const router = Router();
 
-  router.get("/fire-safety", async (req, res) => {
-    const { address: address } = req.body;
+  router.get("/fire-safety/:address", async (req, res) => {
+    const address = req.params.address as string;
     fireSafetyInspection(address)
       .then(async (inspectionData: FireSafetyInspectionResult[]) => {
         return res.json(inspectionData);
