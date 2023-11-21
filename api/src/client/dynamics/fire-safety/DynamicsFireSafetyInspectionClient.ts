@@ -1,6 +1,6 @@
+import { FireSafetyInspection } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import axios, { AxiosError } from "axios";
-import { FireSafetyInspection } from "./types";
 
 export interface FireSafetyInspectionClient {
   getFireSafetyInspectionsByAddress: (
