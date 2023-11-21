@@ -1,4 +1,4 @@
-import { FireSafetyInspection } from "@domain/types";
+import { FireSafetyInspection } from "@client/dynamics/fire-safety/types";
 import { LogWriterType } from "@libs/logWriter";
 import axios, { AxiosError } from "axios";
 

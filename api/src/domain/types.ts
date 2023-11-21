@@ -108,7 +108,7 @@ export type UpdateLicenseStatus = (
   nameAndAddress: LicenseSearchNameAndAddress
 ) => Promise<UserData>;
 
-export type FireSafetyInspection = (address: string) => Promise<FireSafetyInspectionResult[]>;
+export type FireSafetyInspectionStatus = (address: string) => Promise<FireSafetyInspectionResult[]>;
 
 export type UpdateOperatingPhase = (userData: UserData) => UserData;
 export type UpdateSidebarCards = (userData: UserData) => UserData;
