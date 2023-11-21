@@ -3,7 +3,7 @@
     "uncompletedTooltip": "Select and then save to complete this task.",
     "completedTooltip": "This task is complete. You can edit your business structure selection below.",
     "saveButton": "Save Business Structure",
-    "radioQuestionHeader": "Select a business structure",
+    "radioQuestionHeader": "Select a Business Structure",
     "completedHeader": "Your business structure:",
     "ariaLabelText": "your business structure",
     "successMessage": "**${legalStructure}** is saved."
