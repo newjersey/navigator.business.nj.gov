@@ -5,9 +5,10 @@ urlSlug: entrepreneur-support-program
 id: entrepreneur-support-program
 openDate: ""
 dueDate: ""
-descriptionMd: The NJ Entrepreneur Support Program provides a guarantee of an
-  investor loan advanced for working capital to businesses within NJEDA's
-  targeted industries.
+descriptionMd: The New Jersey Entrepreneur Support Program provides a $5 million
+  fund to guarantee investor loans for working capital, up to a total of
+  $400,000 per business. The loans are meant for entrepreneurial companies to
+  support their working capital.
 callToActionLink: https://www.njeda.gov/njesp/
 callToActionText: Learn more
 fundingType: loan
