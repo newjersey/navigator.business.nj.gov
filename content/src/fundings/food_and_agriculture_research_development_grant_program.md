@@ -51,11 +51,10 @@ The Program’s goal is to support innovation from researchers and entrepreneurs
 
 ### Eligibility
 
-* Corporate headquarters with at least one executive member and 50% of employees located in New Jersey
-* Fewer than 225 total employees at the time of application
-* Aligned with at least one of the [NJEDA’s established targeted industries](https://www.njeda.gov/wp-content/uploads/2023/05/Appendix-C-Targeted-Industries-Definitions.pdf)
-* A valid New Jersey tax clearance certificate from the Division of Taxation
-* Good standing with NJ Workforce Development at time of application
+* Have a New Jersey tax clearance certificate listing New Jersey Commission on Science, Innovation and Technology
+* Have between 1-50 full-time workers at time of application
+* 50% or more of the cumulative hours worked by all workers, founders, and contractors in New Jersey calculated on a full-time equivalent basis of 35 hours per week.
+* Have less than or equal to $5,000,000 in prior year sales revenue (excluding grant revenue)
 
 > **Benefits**
 >
