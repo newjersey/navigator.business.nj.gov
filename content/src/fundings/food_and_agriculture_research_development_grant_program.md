@@ -28,6 +28,9 @@ certifications:
 preferenceForOpportunityZone: yes
 county:
   - All
+  - Atlantic
+  - Mercer
+  - Passaic
 sector:
   - agriculture-forestry-fishing-and-hunting
   - clean-energy
