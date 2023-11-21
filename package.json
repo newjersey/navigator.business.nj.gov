@@ -210,7 +210,7 @@
     "serverless-offline-ssm": "6.2.0",
     "serverless-webpack": "5.13.0",
     "storybook": "7.5.3",
-    "storybook-addon-pseudo-states": "1.15.5",
+    "storybook-addon-pseudo-states": "2.1.2",
     "style-loader": "3.3.3",
     "supertest": "6.3.3",
     "ts-jest": "29.1.1",
