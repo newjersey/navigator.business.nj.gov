@@ -21,7 +21,7 @@ export const DynamicsFireSafetyInspectionClient = (
 
     return axios
       .get(
-        `${orgUrl}/api/data/v9.2/rgb_addresses?$select=createdon,ultra_inspectionended,ultra_numberofopenviolations,ultra_streetaddress&$filter=(ultra_streetaddress eq ${address})&$top=10`,
+        `${orgUrl}/api/data/v9.2/ultra_fireinspections?$select=createdon,ultra_inspectionended,ultra_numberofopenviolations,ultra_streetaddress&$filter=(ultra_streetaddress eq '${address}')&$top=10`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
