@@ -5,12 +5,10 @@ urlSlug: angel-match
 id: angel-match
 openDate: ""
 dueDate: ""
-descriptionMd: >-
-  The Angel Match Program was designed to disburse funding from the State Small
-  Business Credit Initiative (SSBCI), a federal program administered by the US
-  Department of Treasury.\
-
-  This program matches angel investors’ direct investment in early-stage, product-based technology companies within targeted industries. NJEDA's match is on a 1-to-1 basis with an unsecured convertible note ranging from $100,000 to $500,000. Investments must be made by at least two external investors and be structured as preferred equity with a dened price per share
+descriptionMd: The Angel Match Program provides funding from the State Small
+  Business Credit Initiative (SSBCI) by matching angel investors’ direct
+  investment in early-stage, product-based technology companies within targeted
+  industries.
 callToActionLink: www.njeda.gov/AngelMatch/
 callToActionText: Learn more
 fundingType: loan
@@ -20,7 +18,7 @@ programPurpose: Both
 agency:
   - njeda
 agencyContact: angelmatch@njeda.gov
-businessStage: both
+businessStage: early-stage
 employeesRequired: yes
 homeBased: no
 certifications: []
@@ -34,6 +32,22 @@ sector:
   - technology
 publishStageArchive: ""
 ---
-The Angel Match Program was designed to disburse funding from the State Small Business Credit Initiative (SSBCI), a federal program administered by the US Department of Treasury.\
-This program matches angel investors’ direct investment in early-stage, product-based technology companies within targeted industries. NJEDA's match is on a 1-to-1 basis with an unsecured convertible note ranging from $100,000 to $500,000. Investments must be made by at least two external investors and be structured as preferred equity with a dened price per share
----
+The Angel Match Program provides funding from the State Small Business Credit Initiative (SSBCI) by matching angel investors’ direct investment in early-stage, product-based technology companies within targeted industries.
+
+- - -
+
+### Eligibility
+
+* Must have minimum revenues of $100,000 within the trailing 12 months
+* Business must be able to demonstrate a minimum of $100,000 in investment interest from at least 2 investors independent from the company
+* Primary business is commercializing and marketing a product
+* Early stage within an [NJEDA targeted industry](https://www.njeda.gov/wp-content/uploads/2022/11/Appendix-C-Targeted-Industries-Definitions-12.6.22_v2.pdf)
+* Structured as a C-Corporation or LLC
+* Located in physical commercial, co-working, or incubator space in New Jersey
+* A minimum of 2 full-time founders/C-level executives and 50% of full-time employees working in New Jersey
+* No more than 100 total employees working for the company
+* Company must be registered in New Jersey and in good standing as certified by a valid NJ Tax Clearance Certificate
+
+> **Benefits**
+>
+> Convertible note from $100,000 to $500,000 with 10-year maturity, 3% interest rate, and no payments for first 7 years.
