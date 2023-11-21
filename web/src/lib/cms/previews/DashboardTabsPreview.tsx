@@ -20,8 +20,31 @@ const DashboardTabsPreview = (props: PreviewProps): ReactElement => {
           hiddenFundings={[]}
           certifications={[]}
           hiddenCertifications={[]}
+          displayFundings={false}
+          displayCertifications={false}
+        />
+
+        <SidebarCardsList
+          topCards={[]}
+          bottomCards={[]}
+          fundings={[]}
+          hiddenFundings={[]}
+          certifications={[]}
+          hiddenCertifications={[]}
           displayFundings={true}
           displayCertifications={true}
+        />
+
+        <SidebarCardsList
+          topCards={[]}
+          bottomCards={[]}
+          fundings={[]}
+          hiddenFundings={[]}
+          certifications={[]}
+          hiddenCertifications={[]}
+          displayFundings={false}
+          displayCertifications={false}
+          isCMSPreview={true}
         />
 
         <SidebarCardsList

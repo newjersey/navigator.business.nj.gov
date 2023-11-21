@@ -72,7 +72,7 @@ const getNewPhase = ({
   }
 
   if (businessPersona === "FOREIGN" && isRemoteSellerOrWorker) {
-    return "NEEDS_TO_FORM";
+    return "REMOTE_SELLER_WORKER";
   }
 
   if (currentPhase === "GUEST_MODE") {
