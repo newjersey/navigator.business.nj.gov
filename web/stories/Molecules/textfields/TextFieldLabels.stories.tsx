@@ -4,7 +4,6 @@ import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelD
 import { FieldLabelModal } from "@/components/field-labels/FieldLabelModal";
 import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboarding";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
-import { GenericTextField } from "@/components/GenericTextField";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { ProfileField } from "@/components/profile/ProfileField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -21,23 +20,10 @@ import {
   LookupLegalStructureById,
 } from "@businessnjgovnavigator/shared/";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
-export default {
-  title: "Molecules/TextField/TextFieldLabels",
-  component: GenericTextField,
-  decorators: [(Story) => <div className="width-mobile-lg">{Story()}</div>],
-
-  parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/vAa8neaM0JJSmldck5vlBC/BFS-Design-System?type=design&node-id=2759%3A6193&mode=design&t=pO4kgZ2SOAWLzINQ-1",
-    },
-  },
-} as ComponentMeta<typeof GenericTextField>;
-
-const Template: ComponentStory<typeof GenericTextField> = () => {
+const Template = () => {
   const mergedConfig = getMergedConfig();
   const [Config, setConfig] = useState<ConfigType>(mergedConfig);
   const [profileData, setProfileData] = useState<ProfileData>(
@@ -161,5 +147,20 @@ const Template: ComponentStory<typeof GenericTextField> = () => {
   );
 };
 
-export const TextFieldLabels = Template.bind({});
-TextFieldLabels.args = {};
+const meta: Meta<typeof Template> = {
+  title: "Molecules/TextField/TextFieldLabels",
+  component: Template,
+  decorators: [(Story) => <div className="width-mobile-lg">{Story()}</div>],
+
+  parameters: {
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/file/vAa8neaM0JJSmldck5vlBC/BFS-Design-System?type=design&node-id=2759%3A6193&mode=design&t=pO4kgZ2SOAWLzINQ-1",
+    },
+  },
+};
+
+export default meta;
+type Story = StoryObj<typeof Template>;
+
+export const TextFieldLabels: Story = {};

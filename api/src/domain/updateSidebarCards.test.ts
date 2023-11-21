@@ -135,6 +135,22 @@ describe("updateRoadmapSidebarCards", () => {
         formationNudge
       );
     });
+
+    it("does not add formation-nudge if operatingPhase is REMOTE_SELLER_WORKER", () => {
+      const userData = generateUserDataForBusiness(
+        generateBusiness({
+          profileData: generateProfileData({
+            operatingPhase: "REMOTE_SELLER_WORKER",
+          }),
+          preferences: generatePreferences({ visibleSidebarCards: [formationNudge] }),
+        })
+      );
+
+      const updatedUserData = updateSidebarCards(userData);
+      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+        formationNudge
+      );
+    });
   });
 
   describe("tax registration nudge", () => {

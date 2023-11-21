@@ -394,35 +394,6 @@ describe("<SidebarCardsContainer />", () => {
       expect(visibleOpportunities.getByText("Cert 1")).toBeInTheDocument();
     });
 
-    it("displays empty state when all opportunities are hidden", () => {
-      const business = generateBusiness({
-        profileData: getProfileDataForUnfilteredOpportunities(),
-        preferences: generatePreferences({
-          hiddenCertificationIds: ["cert1-id"],
-          hiddenFundingIds: ["fund1-id"],
-        }),
-      });
-
-      renderWithBusiness(business, { certifications, fundings });
-      expect(screen.getByText(Config.dashboardDefaults.emptyOpportunitiesHeader)).toBeInTheDocument();
-    });
-
-    it("doesn't show empty state when all opportunities are hidden if user ungraduates", () => {
-      const business = generateBusiness({
-        profileData: generateProfileData({
-          operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
-          ownershipTypeIds: ["veteran-owned", "disabled-veteran", "minority-owned", "woman-owned"],
-        }),
-        preferences: generatePreferences({
-          hiddenCertificationIds: ["cert1-id"],
-          hiddenFundingIds: ["fund1-id"],
-        }),
-      });
-
-      renderWithBusiness(business, { certifications, fundings });
-      expect(screen.queryByText(Config.dashboardDefaults.emptyOpportunitiesHeader)).not.toBeInTheDocument();
-    });
-
     it("only counts hidden certifications before fundings are unlocked", () => {
       const business = generateBusiness({
         profileData: generateProfileData({

@@ -4,23 +4,10 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
-export default {
-  title: "Molecules/TextField/TextArea",
-  component: GenericTextField,
-  decorators: [(Story) => <div className="width-desktop">{Story()}</div>],
-
-  parameters: {
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/vAa8neaM0JJSmldck5vlBC/BFS-Design-System?type=design&node-id=2759%3A6193&mode=design&t=pO4kgZ2SOAWLzINQ-1",
-    },
-  },
-} as ComponentMeta<typeof GenericTextField>;
-
-const Template: ComponentStory<typeof GenericTextField> = (props) => {
+const Template = () => {
   const mergedConfig = getMergedConfig();
   mergedConfig.profileDefaults.fields.dateOfFormation.default = {
     description:
@@ -98,5 +85,20 @@ const Template: ComponentStory<typeof GenericTextField> = (props) => {
   );
 };
 
-export const TextArea = Template.bind({});
-TextArea.args = {};
+const meta: Meta<typeof Template> = {
+  title: "Molecules/TextField/TextArea",
+  component: Template,
+  decorators: [(Story) => <div className="width-desktop">{Story()}</div>],
+
+  parameters: {
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/file/vAa8neaM0JJSmldck5vlBC/BFS-Design-System?type=design&node-id=2759%3A6193&mode=design&t=pO4kgZ2SOAWLzINQ-1",
+    },
+  },
+};
+
+export default meta;
+type Story = StoryObj<typeof Template>;
+
+export const TextArea: Story = {};

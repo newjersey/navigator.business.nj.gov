@@ -1,8 +1,8 @@
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
-export default {
+const meta: Meta<typeof PrimaryButton> = {
   title: "Molecules/Button/PrimaryRegular",
   component: PrimaryButton,
   parameters: {
@@ -11,48 +11,47 @@ export default {
       url: "https://www.figma.com/file/vAa8neaM0JJSmldck5vlBC/BFS-Design-System-(Sprint-33%2B)?node-id=2421%3A3127&t=k6Nkwsn3QXIhASwW-1",
     },
   },
-} as ComponentMeta<typeof PrimaryButton>;
-
-const Template: ComponentStory<typeof PrimaryButton> = ({ children, ...args }) => (
-  <PrimaryButton {...args}>{children}</PrimaryButton>
-);
-
-export const PrimaryColor = Template.bind({});
-
-PrimaryColor.args = {
-  isColor: "primary",
-  children: "button",
 };
 
-export const PrimaryWhiteColor = Template.bind({});
+export default meta;
+type Story = StoryObj<typeof PrimaryButton>;
 
-PrimaryWhiteColor.args = {
-  isColor: "white",
-  children: "button",
+export const PrimaryColor: Story = {
+  args: {
+    isColor: "primary",
+    children: "button",
+  },
 };
 
-export const IconRight = Template.bind({});
-
-IconRight.args = {
-  isColor: "primary",
-  children: (
-    <>
-      <>Button</>
-      <Icon className="usa-icon--size-3 margin-left-05">arrow_drop_down</Icon>
-    </>
-  ),
+export const PrimaryWhiteColor: Story = {
+  args: {
+    isColor: "white",
+    children: "button",
+  },
 };
 
-export const AccentCoolerColor = Template.bind({});
-
-AccentCoolerColor.args = {
-  isColor: "accent-cooler",
-  children: "button",
+export const IconRight: Story = {
+  args: {
+    isColor: "primary",
+    children: (
+      <>
+        <>Button</>
+        <Icon className="usa-icon--size-3 margin-left-05">arrow_drop_down</Icon>
+      </>
+    ),
+  },
 };
 
-export const InfoColor = Template.bind({});
+export const AccentCoolerColor: Story = {
+  args: {
+    isColor: "accent-cooler",
+    children: "button",
+  },
+};
 
-InfoColor.args = {
-  isColor: "info",
-  children: "button",
+export const InfoColor: Story = {
+  args: {
+    isColor: "info",
+    children: "button",
+  },
 };

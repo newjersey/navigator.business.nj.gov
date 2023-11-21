@@ -1,8 +1,57 @@
-import { withDesign } from "storybook-addon-designs";
+import { Meta, StoryObj } from "@storybook/react";
 
-export default {
+const Template = () => {
+  const renderGradient = (gradientName: string, gradientClass: string) => (
+    <div className="margin-right-1">
+      <div
+        className={`margin-bottom-2 height-10 width-15rem ${gradientClass} text-base-darkest text-bold margin-right-6`}
+      />
+      <div>{gradientName}</div>
+    </div>
+  );
+
+  const PrimaryGradient = (
+    <div className="flex flex-row margin-bottom-2">
+      {renderGradient("primary-gradient", "primary-gradient")}
+      {renderGradient("primary-gradient-reverse", "primary-gradient-reverse")}
+    </div>
+  );
+
+  const SecondaryGradient = (
+    <div className="flex flex-row margin-bottom-2">
+      {renderGradient("secondary-gradient", "secondary-gradient")}
+      {renderGradient("secondary-gradient-reverse", "secondary-gradient-reverse")}
+    </div>
+  );
+
+  const TertiaryGradient = (
+    <div className="flex flex-row margin-bottom-2">
+      {renderGradient("tertiary-gradient", "tertiary-gradient")}
+      {renderGradient("tertiary-gradient-reverse", "tertiary-gradient-reverse")}
+    </div>
+  );
+
+  return (
+    <div>
+      <div className="h1-styling-large margin-y-4">Primary Gradient</div>
+      <div className="margin-y-2">
+        <div>{PrimaryGradient}</div>
+      </div>
+      <div className="h1-styling-large margin-y-4">Secondary Gradient</div>
+      <div className="margin-y-2">
+        <div>{SecondaryGradient}</div>
+      </div>
+      <div className="h1-styling-large margin-y-4">Tertiary Gradient</div>
+      <div className="margin-y-2">
+        <div>{TertiaryGradient}</div>
+      </div>
+    </div>
+  );
+};
+
+const meta: Meta<typeof Template> = {
   title: "Atoms/Gradients",
-  decorators: [withDesign],
+  component: Template,
   parameters: {
     design: {
       type: "figma",
@@ -11,51 +60,7 @@ export default {
   },
 };
 
-const renderGradient = (gradientName: string, gradientClass: string) => (
-  <div className="margin-right-1">
-    <div
-      className={`margin-bottom-2 height-10 width-15rem ${gradientClass} text-base-darkest text-bold margin-right-6`}
-    />
-    <div>{gradientName}</div>
-  </div>
-);
+export default meta;
+type Story = StoryObj<typeof Template>;
 
-const PrimaryGradient = (
-  <div className="flex flex-row margin-bottom-2">
-    {renderGradient("primary-gradient", "primary-gradient")}
-    {renderGradient("primary-gradient-reverse", "primary-gradient-reverse")}
-  </div>
-);
-
-const SecondaryGradient = (
-  <div className="flex flex-row margin-bottom-2">
-    {renderGradient("secondary-gradient", "secondary-gradient")}
-    {renderGradient("secondary-gradient-reverse", "secondary-gradient-reverse")}
-  </div>
-);
-
-const TertiaryGradient = (
-  <div className="flex flex-row margin-bottom-2">
-    {renderGradient("tertiary-gradient", "tertiary-gradient")}
-    {renderGradient("tertiary-gradient-reverse", "tertiary-gradient-reverse")}
-  </div>
-);
-
-const Template = ({}) => (
-  <div>
-    <div className="h1-styling-large margin-y-4">Primary Gradient</div>
-    <div className="margin-y-2">
-      <div>{PrimaryGradient}</div>
-    </div>
-    <div className="h1-styling-large margin-y-4">Secondary Gradient</div>
-    <div className="margin-y-2">
-      <div>{SecondaryGradient}</div>
-    </div>
-    <div className="h1-styling-large margin-y-4">Tertiary Gradient</div>
-    <div className="margin-y-2">
-      <div>{TertiaryGradient}</div>
-    </div>
-  </div>
-);
-
-export const Gradients = Template.bind({});
+export const Gradients: Story = {};

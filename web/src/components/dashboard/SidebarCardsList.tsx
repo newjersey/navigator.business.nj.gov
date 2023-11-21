@@ -10,6 +10,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab, scrollToTopOfElement, templateEval } from "@/lib/utils/helpers";
+import { determineForeignBusinessType } from "@businessnjgovnavigator/shared/index";
 import { Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from "@mui/material";
 import { ReactElement, ReactNode, useRef, useState } from "react";
 
@@ -22,6 +23,7 @@ export interface SidebarCardsListProps {
   hiddenCertifications: Certification[];
   displayFundings: boolean;
   displayCertifications: boolean;
+  isCMSPreview?: boolean;
 }
 
 export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => {
@@ -42,22 +44,7 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
     }
   };
 
-  const showEmptyOpportunitiesMsg = (): boolean => {
-    return (
-      props.displayCertifications &&
-      props.displayFundings &&
-      props.certifications.length + props.fundings.length === 0
-    );
-  };
-
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
-  const showCompleteRequiredTasksMsg = (): boolean => {
-    return (
-      !props.displayCertifications &&
-      !props.displayFundings &&
-      props.topCards.length + props.bottomCards.length === 0
-    );
-  };
 
   const hiddenCardsAccordion = (): ReactNode => {
     if (props.displayCertifications || props.displayFundings) {
@@ -141,6 +128,54 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
     );
   };
 
+  const emptyForYouMessage = (): ReactNode => {
+    const showEmptyOpportunitiesMsg =
+      props.displayCertifications &&
+      props.displayFundings &&
+      props.certifications.length + props.fundings.length === 0;
+
+    const showCompleteRequiredTasksMsg =
+      !props.displayCertifications &&
+      !props.displayFundings &&
+      props.topCards.length + props.bottomCards.length === 0;
+
+    const isRemoteSellerWorker = (): boolean => {
+      if (business) {
+        const foreignBusinessType = determineForeignBusinessType(business.profileData.foreignBusinessTypeIds);
+        return foreignBusinessType === "REMOTE_SELLER" || foreignBusinessType === "REMOTE_WORKER";
+      }
+      return false;
+    };
+
+    const showEmptyForYouMessage =
+      showEmptyOpportunitiesMsg || showCompleteRequiredTasksMsg || isRemoteSellerWorker();
+
+    const getTopText = (): string => {
+      if (isRemoteSellerWorker() || props.isCMSPreview)
+        return Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText;
+      if (showCompleteRequiredTasksMsg) return Config.dashboardDefaults.completeRequiredTasksText;
+      if (showEmptyOpportunitiesMsg) return Config.dashboardDefaults.emptyOpportunitiesHeader;
+      return "";
+    };
+
+    const getBottomText = (): string => {
+      if (showEmptyOpportunitiesMsg) return Config.dashboardDefaults.emptyOpportunitiesText;
+      return "";
+    };
+
+    return (
+      showEmptyForYouMessage && (
+        <div className="fdc fac margin-y-3" data-testid="empty-for-you-message">
+          <div className="text-center margin-bottom-3">
+            <Content>{getTopText()}</Content>
+          </div>
+          <img src={`/img/for-you-section.svg`} aria-hidden="true" alt="" />
+          <p className="text-center">{getBottomText()}</p>
+        </div>
+      )
+    );
+  };
+
   return (
     <>
       {isDesktopAndUp && (
@@ -154,20 +189,13 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
           <hr className="margin-top-2 margin-bottom-3 bg-cool-lighter" aria-hidden={true} />
         </>
       )}
-      {showCompleteRequiredTasksMsg() && (
-        <div data-testid="complete-required-tasks-msg" className="fdc fac">
-          <div className="text-center margin-bottom-3">
-            <Content>{Config.dashboardDefaults.completeRequiredTasksText}</Content>
-          </div>
-          <img src={`img/for-you-section.svg`} aria-hidden="true" alt={""} />
-        </div>
-      )}
       <div>
         <div data-testid="top-cards">
           {props.topCards.map((card) => {
             return <SidebarCard card={card} key={card.id} />;
           })}
         </div>
+        {emptyForYouMessage()}
         <div data-testid="visible-opportunities">
           {props.displayCertifications &&
             props.certifications.map((cert) => {
@@ -178,13 +206,6 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
             props.fundings.map((funding) => {
               return <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />;
             })}
-          {showEmptyOpportunitiesMsg() && (
-            <div className="fdc fac margin-y-3">
-              <div className="text-bold text-center">{Config.dashboardDefaults.emptyOpportunitiesHeader}</div>
-              <img src={`/img/for-you-section.svg`} aria-hidden="true" alt="" />
-              <p className="text-center">{Config.dashboardDefaults.emptyOpportunitiesText}</p>
-            </div>
-          )}
         </div>
         <div data-testid="bottom-cards">
           {props.bottomCards.map((card) => {

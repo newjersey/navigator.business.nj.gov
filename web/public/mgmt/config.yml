@@ -2873,8 +2873,13 @@ collections:
             fields:
               - { label: Sidebar Heading, name: sidebarHeading, widget: string }
               - { label: Complete Required Tasks Text, name: completeRequiredTasksText, widget: markdown }
-              - { label: Empty Opportunities Header, name: emptyOpportunitiesHeader, widget: string }
+              - { label: Empty Opportunities Header, name: emptyOpportunitiesHeader, widget: markdown }
               - { label: Empty Opportunities Text, name: emptyOpportunitiesText, widget: string }
+              - {
+                  label: Empty Opportunities Text - Remote Seller/Worker,
+                  name: emptyOpportunitiesRemoteSellerWorkerText,
+                  widget: markdown,
+                }
               - { label: Hide Opportunity Text, name: hideOpportunityText, widget: string }
               - { label: Hidden Opportunities Header, name: hiddenOpportunitiesHeader, widget: string }
               - { label: Unhide Opportunity Text, name: unHideOpportunityText, widget: string }
