@@ -1,3 +1,27 @@
+# [5.40.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.39.0...v5.40.0) (2023-11-22)
+
+
+### Bug Fixes
+
+* [[#185932083](https://github.com/newjersey/navigator.business.nj.gov/issues/185932083)] update hidden opps to not pass navbar on scroll ([2fb04f2](https://github.com/newjersey/navigator.business.nj.gov/commit/2fb04f25268a968356589a6c4b70a8759905a445))
+* **deps:** update dependency @smithy/node-http-handler to v2.1.9 ([9a3dc8b](https://github.com/newjersey/navigator.business.nj.gov/commit/9a3dc8b18dbc77840c7beebbad6a1c29b411359c))
+* **deps:** update dependency @types/mdast to v4 ([77c7947](https://github.com/newjersey/navigator.business.nj.gov/commit/77c7947194fe68bf818bc39ef0f984fe4231b515))
+* **deps:** update dependency axios to v1 [security] ([cc69a1b](https://github.com/newjersey/navigator.business.nj.gov/commit/cc69a1b38649d198872a58636bfaae857e3ad76c))
+* **deps:** update dependency axios to v1.6.1 ([8814d82](https://github.com/newjersey/navigator.business.nj.gov/commit/8814d825b9729bc0db9b0717ace4a81dfe71e77b))
+* **deps:** update dependency axios to v1.6.2 ([86da27a](https://github.com/newjersey/navigator.business.nj.gov/commit/86da27ac46dc1dbc6eb7790c7c21cf6f511488d7))
+* **deps:** update dependency dedent to v1 ([8e685f0](https://github.com/newjersey/navigator.business.nj.gov/commit/8e685f0f42ef655f2191c679350c817e030982ea))
+* **deps:** update dependency next-seo to v6.4.0 ([dbe8e05](https://github.com/newjersey/navigator.business.nj.gov/commit/dbe8e053b7191c6781bd022de6607613b5eac92d))
+* **deps:** update dependency rehype-format to v5 ([53bb9f9](https://github.com/newjersey/navigator.business.nj.gov/commit/53bb9f983950fca570af8592cea26dc51cfa5c6a))
+* **deps:** update dependency winston to v3.11.0 ([dcdc7bd](https://github.com/newjersey/navigator.business.nj.gov/commit/dcdc7bd8d951a60cab5c3c96599277ceafa31bad))
+* **deps:** update material-ui ([748470f](https://github.com/newjersey/navigator.business.nj.gov/commit/748470f446dbf485e9eb9f4f2078da394ea956d7))
+
+
+### Features
+
+* [[#184606162](https://github.com/newjersey/navigator.business.nj.gov/issues/184606162)] Storybook tags ([6c283a9](https://github.com/newjersey/navigator.business.nj.gov/commit/6c283a907d9d572785713eaf49d2aa45ef30d4cf))
+* [[#186093257](https://github.com/newjersey/navigator.business.nj.gov/issues/186093257)] make made by love innovation footer accessible ([6401523](https://github.com/newjersey/navigator.business.nj.gov/commit/640152370a089da312dc433e6b64e69a167e1fca))
+* [[#186443496](https://github.com/newjersey/navigator.business.nj.gov/issues/186443496)] update favicon and page title ([14c3e81](https://github.com/newjersey/navigator.business.nj.gov/commit/14c3e814e2136e28a2f421fbee0a52361d453dc8))
+
 # [5.39.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.38.0...v5.39.0) (2023-11-17)
 
 
