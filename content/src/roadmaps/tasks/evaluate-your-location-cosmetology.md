@@ -1,7 +1,7 @@
 ---
-displayname: cosmetology-location-eval
 urlSlug: cosmetology-location-eval
 filename: evaluate-your-location-cosmetology
+displayname: cosmetology-location-eval
 name: Evaluate Your Location
 id: identify-potential-lease
 callToActionLink: ""
@@ -21,4 +21,4 @@ Your cosmetology business needs to be inspected to ensure it meets New Jersey's 
 
 > **Once completed, you will have:**
 >
-> - Found a viable shop location
+> - A possible shop location

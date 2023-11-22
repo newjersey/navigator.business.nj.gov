@@ -1,7 +1,7 @@
 ---
 urlSlug: annual-report
 name: Annual Report
-agency: null
+agency: New Jersey Division of Revenue and Enterprise Services
 id: ANNUAL_FILING
 callToActionLink: https://www.njportal.com/DOR/AnnualReports/Business?sessionType=AnnualReport
 callToActionText: File Your Annual Report

@@ -58,7 +58,7 @@
     "navBarUnnamedForeignRemoteSellerWorkerText": "Unnamed Out-of-State Business",
     "navBarGuestText": "Guest",
     "registerButton": "Get Started",
-    "needsAccountSnackbarBody": "Now that you've filled out your business information, you can save your progress and come back later to [link your Business.NJ.gov account with myNewJersey](/account-setup?source=guest_snackbar). ",
+    "needsAccountSnackbarBody": "Now that you've filled out your business information, you can save your progress [link your Business.NJ.gov account with myNewJersey](/account-setup?source=guest_snackbar). ",
     "logInButton": "Log in",
     "needsAccountModalTitle": "Link with myNewJersey to Save Your Progress",
     "logoutButton": "Log out",
@@ -176,10 +176,13 @@
   },
   "licenseSearchTask": {
     "voluntarySurrenderPermitStatusText": "Voluntary Surrender",
+    "draftStatusText": "Draft",
+    "pendingRenewalStatusText": "Pending Renewal",
     "activePermitStatusText": "Active",
     "primaryCTAFirstLineText": "Apply for My License",
     "primaryCTASecondLineText": "with the Division of Consumer Affairs",
     "stateLabel": "State",
+    "checklistCompletedStatusText": "Checklist Completed",
     "errorTextNotFound": "We cannot find your application. Please check the information you've entered.",
     "submitText": "Submit",
     "closedPermitStatusText": "Closed",
@@ -189,37 +192,34 @@
     "tab1Text": "Start Application",
     "businessNameLabel": "Business Name",
     "tab2Text": "Check Status",
+    "inactiveStatusText": "Inactive",
+    "underInternalReviewStatusText": "Under Internal Review",
     "errorTextFieldsRequired": "Please fill in all non-optional fields.",
     "foundText": "Great, we've found your application! Please check the details below:",
+    "specialReviewStatusText": "Special Review",
     "tooltipText": "Your license status will update automatically after the Division of Consumer Affairs has received your application and you enter your identifying information into the “Check Status” tab below.",
     "pendingPermitStatusText": "Pending",
     "secondaryCTASecondLineText": "Check My Application Status",
     "deletedPermitStatusText": "Deleted",
+    "abandonedStatusText": "Abandoned",
+    "deficienciesSubmittedStatusText": "Deficiencies Submitted",
     "deniedPermitStatusText": "Denied",
     "secondaryCTAFirstLineText": "I Submitted My Application",
+    "approvedStatusText": "Approved",
     "address2Label": "Business Address Line 2 (Optional)",
     "address1Label": "Business Address Line 1",
     "barredPermitStatusText": "Barred",
+    "suspendedStatusText": "Suspended",
     "reinstatementPendingPermitStatusText": "Reinstatement Pending",
     "permitStatusText": "Permit Status:",
+    "submittedStatusText": "Submitted",
     "errorTextSearchFailed": "Sorry, something went wrong. Please try again later.",
+    "revokedStatusText": "Revoked",
+    "pendingDeficienciesStatusText": "Pending Deficiencies",
     "withdrawnPermitStatusText": "Withdrawn",
     "outOfBusinessPermitStatusText": "Out of Business",
-    "expiredPermitStatusText": "Expired",
-    "draftStatusText": "Draft",
-    "submittedStatusText": "Submitted",
-    "underInternalReviewStatusText": "Under Internal Review",
-    "specialReviewStatusText": "Special Review",
-    "pendingDeficienciesStatusText": "Pending Deficiencies",
-    "deficienciesSubmittedStatusText": "Deficiencies Submitted",
-    "checklistCompletedStatusText": "Checklist Completed",
-    "approvedStatusText": "Approved",
-    "pendingRenewalStatusText": "Pending Renewal",
     "pendingReinstatementStatusText": "Pending Reinstatement",
-    "inactiveStatusText": "Inactive",
-    "abandonedStatusText": "Abandoned",
-    "suspendedStatusText": "Suspended",
-    "revokedStatusText": "Revoked"
+    "expiredPermitStatusText": "Expired"
   },
   "fundingDefaults": {
     "issuingAgencyText": "Issuing Agency"
@@ -250,6 +250,19 @@
     "heroSupportingText": "Create your free, personalized guide to register and find funding for your New Jersey or out-of-state business.",
     "section5FirstHeaderText": "Starter Kit",
     "heroCallOutFirstLineText": "Succeed"
+  },
+  "pagesMetadata": {
+    "home": {
+      "title": "Home"
+    },
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "profile": {
+      "title": "Business Profile"
+    },
+    "titlePrefix": "Business.NJ.gov My Account",
+    "siteDescription": "Business.NJ.gov My Account is a tool for starting and managing a business in the State of New Jersey"
   },
   "taskDefaults": {
     "requiredLabelText": "Required",
@@ -289,9 +302,9 @@
   },
   "footer": {
     "creditLinkText": "Open Source",
-    "byTheOfficeOfInnovationText": " by the Office of Innovation",
     "linkThree": "https://business.nj.gov/newsletter-signup",
     "creditText": " Powered by ",
+    "madeWithText": "Made with",
     "linkOne": "https://forms.business.nj.gov/feedback/",
     "twitterLink": "https://twitter.com/i/lists/1148625562895826945",
     "linkThreeText": "Sign Up For Our Newsletter",
@@ -301,8 +314,8 @@
     "officeLink": "https://innovation.nj.gov/",
     "linkOneText": "Give Us Feedback",
     "gitHubLink": "https://github.com/newjersey",
-    "madeWithText": "Made with",
-    "linkTwoText": "Terms & Privacy Policy"
+    "linkTwoText": "Terms & Privacy Policy",
+    "byTheOfficeOfInnovationText": " by the Office of Innovation"
   },
   "registeredForTaxesModal": {
     "areYouSureTaxTitle": "Didn't Register Yet?",
@@ -317,19 +330,6 @@
   "autosaveDefaults": {
     "savingText": "Saving",
     "savedText": "Saved 1 minute ago"
-  },
-  "pagesMetadata": {
-    "home": {
-      "title": "Home"
-    },
-    "dashboard": {
-      "title": "Dashboard"
-    },
-    "profile": {
-      "title": "Business Profile"
-    },
-    "titlePrefix": "Business.NJ.gov My Account",
-    "siteDescription": "Business.NJ.gov My Account is a tool for starting and managing a business in the State of New Jersey"
   },
   "headerDefaults": {
     "noUserNameHeaderText": "Hello!",
