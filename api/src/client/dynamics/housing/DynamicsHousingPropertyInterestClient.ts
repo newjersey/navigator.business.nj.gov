@@ -6,7 +6,7 @@ export const DynamicsHousingPropertyInterestClient = (
   logWriter: LogWriterType,
   orgUrl: string
 ): HousingPropertyInterestClient => {
-  const getPropertyInterestsByAddress = async (
+  const getPropertyInterests = async (
     accessToken: string,
     address: string
   ): Promise<HousingPropertyInterest[]> => {
@@ -39,7 +39,7 @@ export const DynamicsHousingPropertyInterestClient = (
   };
 
   return {
-    getPropertyInterestsByAddress,
+    getPropertyInterests,
   };
 };
 

@@ -15,6 +15,6 @@ export const DynamicsFireSafetyClient = (logWriter: LogWriterType, config: Confi
   return async (address: string): Promise<FireSafetyInspection[]> => {
     const accessToken = await config.accessTokenClient.getAccessToken();
 
-    return await config.fireSafetyInspectionClient.getFireSafetyInspectionsByAddress(accessToken, address);
+    return await config.fireSafetyInspectionClient.getFireSafetyInspections(accessToken, address);
   };
 };
