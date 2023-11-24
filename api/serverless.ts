@@ -58,6 +58,16 @@ const dynamicsLicenseStatusClientId = process.env.DYNAMICS_LICENSE_STATUS_CLIENT
 const dynamicsLicenseStatusSecret = process.env.DYNAMICS_LICENSE_STATUS_SECRET || "";
 const featureDynamicsPublicMovers = process.env.FEATURE_DYNAMICS_PUBLIC_MOVERS || "";
 
+const dynamicsFireSafetyURL = process.env.DYNAMICS_FIRE_SAFETY_URL || "";
+const dynamicsFireSafetyClientId = process.env.DYNAMICS_FIRE_SAFETY_CLIENT_ID || "";
+const dynamicsFireSafetySecret = process.env.DYNAMICS_FIRE_SAFETY_SECRET || "";
+const dynamicsFireSafetyTenantId = process.env.DYNAMICS_FIRE_SAFETY_TENANT_ID || "";
+
+const dynamicsHousingURL = process.env.DYNAMICS_HOUSING_URL || "";
+const dynamicsHousingClientId = process.env.DYNAMICS_HOUSING_CLIENT_ID || "";
+const dynamicsHousingSecret = process.env.DYNAMICS_HOUSING_SECRET || "";
+const dynamicsHousingTenantId = process.env.DYNAMICS_HOUSING_TENANT_ID || "";
+
 const serverlessConfiguration: AWS = {
   useDotenv: true,
   service: "businessnjgov-api",
@@ -185,6 +195,14 @@ const serverlessConfiguration: AWS = {
       DYNAMICS_LICENSE_STATUS_CLIENT_ID: dynamicsLicenseStatusClientId,
       DYNAMICS_LICENSE_STATUS_SECRET: dynamicsLicenseStatusSecret,
       FEATURE_DYNAMICS_PUBLIC_MOVERS: featureDynamicsPublicMovers,
+      DYNAMICS_FIRE_SAFETY_URL: dynamicsFireSafetyURL,
+      DYNAMICS_FIRE_SAFETY_CLIENT_ID: dynamicsFireSafetyClientId,
+      DYNAMICS_FIRE_SAFETY_SECRET: dynamicsFireSafetySecret,
+      DYNAMICS_FIRE_SAFETY_TENANT_ID: dynamicsFireSafetyTenantId,
+      DYNAMICS_HOUSING_URL: dynamicsHousingURL,
+      DYNAMICS_HOUSING_CLIENT_ID: dynamicsHousingClientId,
+      DYNAMICS_HOUSING_SECRET: dynamicsHousingSecret,
+      DYNAMICS_HOUSING_TENANT_ID: dynamicsHousingTenantId,
     } as AwsLambdaEnvironment,
     logRetentionInDays: 180,
   },

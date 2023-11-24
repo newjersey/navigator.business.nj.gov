@@ -1,6 +1,8 @@
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
+import { FireSafetyInspectionResult } from "@shared/fireSafety";
 import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
+import { HousingPropertyInterestDetails } from "@shared/housing";
 import { LicenseEntity, LicenseSearchNameAndAddress, LicenseStatusResult } from "@shared/license";
 import { ProfileData } from "@shared/profileData";
 import { TaxFilingCalendarEvent, TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
@@ -110,6 +112,10 @@ export type UpdateLicenseStatus = (
 export type UpdateOperatingPhase = (userData: UserData) => UserData;
 export type UpdateSidebarCards = (userData: UserData) => UserData;
 export type GetCertHttpsAgent = () => Promise<https.Agent>;
+
+export type FireSafetyInspectionStatus = (address: string) => Promise<FireSafetyInspectionResult[]>;
+
+export type HousingPropertyInterestStatus = (address: string) => Promise<HousingPropertyInterestDetails[]>;
 
 export const NO_MATCH_ERROR = "NO_MATCH";
 export const NO_MAIN_APPS_ERROR = "NO_MAIN_APPS";
