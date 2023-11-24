@@ -18,6 +18,6 @@ export const DynamicsHousingClient = (
   return async (address: string): Promise<HousingPropertyInterest[]> => {
     const accessToken = await config.accessTokenClient.getAccessToken();
 
-    return await config.housingPropertyInterestClient.getPropertyInterestsByAddress(accessToken, address);
+    return await config.housingPropertyInterestClient.getPropertyInterests(accessToken, address);
   };
 };
