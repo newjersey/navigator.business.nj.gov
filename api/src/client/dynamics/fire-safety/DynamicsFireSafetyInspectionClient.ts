@@ -3,16 +3,13 @@ import { LogWriterType } from "@libs/logWriter";
 import axios, { AxiosError } from "axios";
 
 export interface FireSafetyInspectionClient {
-  getFireSafetyInspectionsByAddress: (
-    accessToken: string,
-    address: string
-  ) => Promise<FireSafetyInspection[]>;
+  getFireSafetyInspections: (accessToken: string, address: string) => Promise<FireSafetyInspection[]>;
 }
 export const DynamicsFireSafetyInspectionClient = (
   logWriter: LogWriterType,
   orgUrl: string
 ): FireSafetyInspectionClient => {
-  const getFireSafetyInspectionsByAddress = async (
+  const getFireSafetyInspections = async (
     accessToken: string,
     address: string
   ): Promise<FireSafetyInspection[]> => {
@@ -33,12 +30,7 @@ export const DynamicsFireSafetyInspectionClient = (
           `Dynamics Fire Safety Client - Id:${logId} - Response: ${JSON.stringify(response.data)}`
         );
         return response.data.value.map((response: DynamicsFireSafetyInspectionResponse) => {
-          return {
-            createdOn: response.createdon,
-            inspectionFinished: response.ultra_inspectionended,
-            address: response.ultra_streetaddress,
-            openViolationCount: response.ultra_numberofopenviolations,
-          };
+          processDynamicsFireSafetyInspectionResponse(response);
         });
       })
       .catch((error: AxiosError) => {
@@ -48,9 +40,20 @@ export const DynamicsFireSafetyInspectionClient = (
   };
 
   return {
-    getFireSafetyInspectionsByAddress,
+    getFireSafetyInspections,
   };
 };
+
+function processDynamicsFireSafetyInspectionResponse(
+  response: DynamicsFireSafetyInspectionResponse
+): FireSafetyInspection {
+  return {
+    createdOn: response.createdon,
+    inspectionFinished: response.ultra_inspectionended,
+    address: response.ultra_streetaddress,
+    openViolationCount: response.ultra_numberofopenviolations,
+  };
+}
 
 type DynamicsFireSafetyInspectionResponse = {
   createdon: string;

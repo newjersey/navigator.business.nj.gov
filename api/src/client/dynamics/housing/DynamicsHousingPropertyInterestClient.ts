@@ -15,7 +15,7 @@ export const DynamicsHousingPropertyInterestClient = (
 
     return axios
       .get(
-        `${orgUrl}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode&$filter=(ultra_streetaddress eq ${address})&$top=10`,
+        `${orgUrl}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode&$filter=(ultra_streetaddress eq '${address}')&$top=10`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -28,16 +28,9 @@ export const DynamicsHousingPropertyInterestClient = (
             response.data
           )}`
         );
-        return response.data.value.map((response: DynamicsHousingPropertyInterestResponse) => {
-          return {
-            createdOn: response.createdon,
-            isFireSafety: response.ultra_isfiresafetyproperty,
-            isBHIRegistered: response.ultra_isbhiregisteredproperty,
-            address: response.ultra_streetaddress,
-            BHINextInspectionDueDate: response.ultra_bhinextinspectiondue_date,
-            stateCode: response.statecode,
-          };
-        });
+        return response.data.value.map((element: DynamicsHousingPropertyInterestResponse) =>
+          processDynamicsPropertyInterestResponse(element)
+        );
       })
       .catch((error: AxiosError) => {
         logWriter.LogError(`Dynamics Housing Property Interest - Id:${logId} - Error:`, error);
@@ -49,6 +42,19 @@ export const DynamicsHousingPropertyInterestClient = (
     getPropertyInterestsByAddress,
   };
 };
+
+function processDynamicsPropertyInterestResponse(
+  response: DynamicsHousingPropertyInterestResponse
+): HousingPropertyInterest {
+  return {
+    createdOn: response.createdon,
+    isFireSafety: response.ultra_isfiresafetyproperty,
+    isBHIRegistered: response.ultra_isbhiregisteredproperty,
+    address: response.ultra_streetaddress,
+    BHINextInspectionDueDate: response.ultra_bhinextinspectiondue_date,
+    stateCode: response.statecode,
+  };
+}
 
 type DynamicsHousingPropertyInterestResponse = {
   createdon: string;
