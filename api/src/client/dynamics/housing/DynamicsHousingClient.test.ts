@@ -20,7 +20,7 @@ describe("DynamicsHousingClient", () => {
     };
 
     stubHousingPropertyInterestClient = {
-      getPropertyInterestsByAddress: jest.fn(),
+      getPropertyInterests: jest.fn(),
     };
 
     client = DynamicsHousingClient(logger, {
@@ -30,7 +30,7 @@ describe("DynamicsHousingClient", () => {
   });
 
   it("returns property interest data from subclient", async () => {
-    stubHousingPropertyInterestClient.getPropertyInterestsByAddress.mockResolvedValue([
+    stubHousingPropertyInterestClient.getPropertyInterests.mockResolvedValue([
       {
         createdOn: "2024-05-31T10:31:51Z",
         isFireSafety: true,
@@ -72,7 +72,7 @@ describe("DynamicsHousingClient", () => {
   });
 
   it("throws a 400 error when a sub client client throws a 400", async () => {
-    stubHousingPropertyInterestClient.getPropertyInterestsByAddress.mockRejectedValue(new Error("400"));
+    stubHousingPropertyInterestClient.getPropertyInterests.mockRejectedValue(new Error("400"));
     await expect(client("address-2")).rejects.toThrow("400");
   });
 });
