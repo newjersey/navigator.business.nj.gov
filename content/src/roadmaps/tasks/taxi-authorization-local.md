@@ -1,6 +1,7 @@
 ---
 urlSlug: taxi-authorization-local
 filename: taxi-authorization-local
+displayname: taxi-authorization-local
 name: Get Authorization from Your Local Government
 id: taxi-authorization-local
 ---
@@ -25,5 +26,10 @@ Before you can legally operate your car service, you need authorization from the
 
 > **Once completed, you will have:**
 >
-> * A license to operate in the town where you applied\
->   **Note:** The license must be displayed on all the vehicles in your fleet
+> * A license to operate in the town where you applied
+
+
+
+:::infoAlert 
+ The license must be displayed on all the vehicles in your fleet
+:::
