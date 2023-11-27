@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
 import React, { forwardRef, ReactElement } from "react";
 
@@ -23,7 +24,7 @@ export const ContextInfoElement = forwardRef(
         >
           <Icon className="font-sans-xl">close</Icon>
         </button>
-        <h3>{props.header}</h3>
+        <Heading level={3}>{props.header}</Heading>
         <Content>{props.markdown}</Content>
       </aside>
     );

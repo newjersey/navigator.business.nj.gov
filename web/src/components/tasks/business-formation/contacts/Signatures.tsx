@@ -2,6 +2,7 @@
 import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModifiedContent } from "@/components/ModifiedContent";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import {
@@ -337,7 +338,7 @@ export const Signatures = (): ReactElement => {
   return (
     <>
       <div className="grid-col">
-        <h3>{Config.formation.fields.signers.label}</h3>
+        <Heading level={3}>{Config.formation.fields.signers.label}</Heading>
         <Content>{getDescription()}</Content>
         <div className={`grid-row margin-y-2 flex-align-start`}>
           <div className={`grid-col`} data-testid="signers-0">

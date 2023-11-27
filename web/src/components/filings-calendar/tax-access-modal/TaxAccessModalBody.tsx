@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement } from "react";
 
@@ -17,7 +18,11 @@ export const TaxAccessModalBody = (props: Props): ReactElement => {
   return (
     <>
       <div className="margin-y-3">
-        {props.showHeader && <h2 className="h4-styling">{getHeader()}</h2>}
+        {props.showHeader && (
+          <Heading level={2} styleVariant="h4">
+            {getHeader()}
+          </Heading>
+        )}
         <Content>{Config.taxAccess.body}</Content>
       </div>
       <hr className="margin-y-4" />

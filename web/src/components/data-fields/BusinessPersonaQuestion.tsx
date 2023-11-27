@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { ProfileFormContext } from "@/contexts/profileFormContext";
@@ -40,9 +41,9 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
 
   return (
     <>
-      <div role="heading" aria-level={2} className="h3-styling margin-bottom-05-override">
+      <Heading level={2} styleVariant="h3" className="margin-bottom-05-override">
         {contentFromConfig.header}
-      </div>
+      </Heading>
       <Content>{contentFromConfig.description}</Content>
       <FormControl fullWidth>
         <RadioGroup

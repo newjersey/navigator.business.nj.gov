@@ -1,5 +1,6 @@
 import { SecondaryButton } from "@/components//njwds-extended/SecondaryButton";
 import { Roadmap } from "@/components/dashboard/Roadmap";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
@@ -37,7 +38,9 @@ export const HideableTasks = (): ReactElement => {
   return (
     <div className="margin-top-7" data-testid="hideableTasks">
       <div className={`${isTabletAndUp ? "flex flex-align-center" : ""} margin-bottom-205`}>
-        <h2 className="margin-bottom-0 text-medium">{Config.dashboardDefaults.upAndRunningTaskHeader}</h2>
+        <Heading level={2} className="margin-bottom-0 text-medium">
+          {Config.dashboardDefaults.upAndRunningTaskHeader}
+        </Heading>
         <div className={`mla ${isTabletAndUp ? "" : "margin-top-2"}`}>
           <SecondaryButton size={"small"} isColor={"border-base-light"} onClick={handleToggleClick}>
             <div className="fdr fac">

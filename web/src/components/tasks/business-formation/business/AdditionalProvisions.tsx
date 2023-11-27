@@ -1,6 +1,7 @@
 import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModifiedContent } from "@/components/ModifiedContent";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -59,10 +60,10 @@ export const AdditionalProvisions = (): ReactElement => {
   return (
     <>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
-        <div role="heading" aria-level={2} className="h3-styling margin-0-override">
+        <Heading level={2} styleVariant="h3" className="margin-0-override">
           {Config.formation.fields.additionalProvisions.label}{" "}
           <span className="text-normal font-body-lg">{Config.formation.general.optionalLabel}</span>
-        </div>
+        </Heading>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
             <UnStyledButton style="default" onClick={handleAddButtonClick} dataTestid="show-provisions">

@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { MicrobusinessRadioQuestion } from "@/components/tasks/cannabis/MicrobusinessRadioQuestion";
 import { PriorityStatusCheckboxes } from "@/components/tasks/cannabis/PriorityStatusCheckboxes";
@@ -22,15 +23,15 @@ export const CannabisApplicationQuestionsTab = (props: Props): ReactElement => {
       <Content>{Config.cannabisApplyForLicense.applicationQuestionsText}</Content>
       <HorizontalLine />
       <div className="margin-top-2">
-        <div role="heading" aria-level={2} className="h3-styling margin-bottom-2 text-normal">
+        <Heading level={2} styleVariant="h3" className="margin-bottom-2 text-normal">
           {Config.cannabisApplyForLicense.businessSizeHeader}
-        </div>
+        </Heading>
         <MicrobusinessRadioQuestion />
       </div>
       <div className="margin-top-4 margin-bottom-2">
-        <div role="heading" aria-level={2} className="h3-styling margin-bottom-2 text-normal">
+        <Heading level={2} styleVariant="h3" className="margin-bottom-2 text-normal">
           {Config.cannabisApplyForLicense.priorityStatusHeader}
-        </div>
+        </Heading>
         {!props.noPriorityStatus && (
           <>
             <Content>{Config.cannabisApplyForLicense.priorityStatusText}</Content>

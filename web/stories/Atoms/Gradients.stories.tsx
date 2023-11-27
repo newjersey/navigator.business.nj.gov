@@ -1,3 +1,4 @@
+import { Heading } from "@/components/njwds-extended/Heading";
 import { Meta, StoryObj } from "@storybook/react";
 
 const Template = () => {
@@ -33,15 +34,21 @@ const Template = () => {
 
   return (
     <div>
-      <div className="h1-styling-large margin-y-4">Primary Gradient</div>
+      <Heading level={2} styleVariant="h1Large" className="margin-y-4">
+        Primary Gradient
+      </Heading>
       <div className="margin-y-2">
         <div>{PrimaryGradient}</div>
       </div>
-      <div className="h1-styling-large margin-y-4">Secondary Gradient</div>
+      <Heading level={2} styleVariant="h1Large" className="margin-y-4">
+        Secondary Gradient
+      </Heading>
       <div className="margin-y-2">
         <div>{SecondaryGradient}</div>
       </div>
-      <div className="h1-styling-large margin-y-4">Tertiary Gradient</div>
+      <Heading level={2} styleVariant="h1Large" className="margin-y-4">
+        Tertiary Gradient
+      </Heading>
       <div className="margin-y-2">
         <div>{TertiaryGradient}</div>
       </div>

@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { NexusAvailable } from "@/components/tasks/business-formation/name/NexusAvailable";
 import { NexusUnavailable } from "@/components/tasks/business-formation/name/NexusUnavailable";
 import { SearchBusinessNameForm } from "@/components/tasks/search-business-name/SearchBusinessNameForm";
@@ -12,7 +13,7 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
 
   return (
     <div data-testid={"nexus-name-step"}>
-      <h3>{Config.formation.fields.businessName.overrides.foreign.header}</h3>
+      <Heading level={3}>{Config.formation.fields.businessName.overrides.foreign.header}</Heading>
       <Content>{Config.formation.fields.businessName.overrides.foreign.description}</Content>
       <SearchBusinessNameForm
         unavailable={NexusUnavailable}

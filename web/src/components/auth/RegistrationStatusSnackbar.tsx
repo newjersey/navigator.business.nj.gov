@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { AlertVariant } from "@/components/njwds-extended/Alert";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthContext } from "@/contexts/authContext";
@@ -65,7 +66,9 @@ export const RegistrationStatusSnackbar = (): ReactElement => {
             style={{ marginRight: "20px", width: "64px", height: "64px" }}
           />
           <div>
-            <h3 className="padding-right-2">{getSuccessTitle()}</h3>
+            <Heading level={3} className="padding-right-2">
+              {getSuccessTitle()}
+            </Heading>
             <IconButton
               aria-label="close"
               onClick={(): void => setRegistrationStatus(undefined)}

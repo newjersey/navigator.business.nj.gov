@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
@@ -312,7 +313,9 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
         </SnackbarAlert>
       )}
       <div className={`margin-bottom-3 ${styles.membersTable}`} data-testid={`addresses-${props.fieldName}`}>
-        <h3 style={{ display: "inline" }}>{props.displayContent.header}</h3>
+        <Heading level={3} style={{ display: "inline" }}>
+          {props.displayContent.header}
+        </Heading>
         {props.displayContent.subheader && (
           <span className="margin-left-1">
             <span className="h6-styling">{props.displayContent.subheader}</span>

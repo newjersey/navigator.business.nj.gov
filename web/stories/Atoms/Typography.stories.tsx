@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { Meta, StoryObj } from "@storybook/react";
 import { ReactElement } from "react";
 
@@ -73,25 +74,25 @@ const Template = () => {
 
   const h2 = {
     title: <div>H2</div>,
-    usaProseElement: <h2>Hello</h2>,
+    usaProseElement: <Heading level={2}>Hello</Heading>,
     usaProseCSS: <div className="h2-styling">Hello</div>,
-    element: <h2>Hello</h2>,
+    element: <Heading level={2}>Hello</Heading>,
     cSS: <div className="h2-styling">Hello</div>,
   };
 
   const h3 = {
     title: <div>H3</div>,
-    usaProseElement: <h3>Hello</h3>,
+    usaProseElement: <Heading level={3}>Hello</Heading>,
     usaProseCSS: <div className="h3-styling">Hello</div>,
-    element: <h3>Hello</h3>,
+    element: <Heading level={3}>Hello</Heading>,
     cSS: <div className="h3-styling">Hello</div>,
   };
 
   const h4 = {
     title: <div>H4</div>,
-    usaProseElement: <h4>Hello</h4>,
+    usaProseElement: <Heading level={4}>Hello</Heading>,
     usaProseCSS: <div className="h4-styling">Hello</div>,
-    element: <h4>Hello</h4>,
+    element: <Heading level={4}>Hello</Heading>,
     cSS: <div className="h4-styling">Hello</div>,
   };
 
@@ -182,7 +183,9 @@ const Template = () => {
         <div className={`grid-row padding-1`}>
           <div className="grid-col-2 margin-right-3">H Element Text Normal</div>
           <div className="grid-col-auto">
-            <h3 className={"font-weight-normal"}>This is heading text with normal font weight</h3>
+            <Heading level={3} className={"font-weight-normal"}>
+              This is heading text with normal font weight
+            </Heading>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { Content } from "@/components/Content";
 import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
 import { SidebarCard } from "@/components/dashboard/SidebarCard";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -180,12 +181,12 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
     <>
       {isDesktopAndUp && (
         <>
-          <h2 className="h2-styling margin-top-0 font-weight-normal">
+          <Heading level={2} className="margin-top-0 font-weight-normal">
             {Config.dashboardDefaults.sidebarHeading}
             <span data-testid="for-you-counter" className="margin-left-05 text-base">
               ({getForYouCardCount(business, props.certifications, props.fundings)})
             </span>
-          </h2>
+          </Heading>
           <hr className="margin-top-2 margin-bottom-3 bg-cool-lighter" aria-hidden={true} />
         </>
       )}

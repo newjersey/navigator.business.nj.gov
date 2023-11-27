@@ -1,4 +1,5 @@
 import { Alert } from "@/components/njwds-extended/Alert";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
 import { ConfigContext } from "@/contexts/configContext";
@@ -25,7 +26,7 @@ const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <h2>Escape Modal:</h2>
+        <Heading level={2}>Escape Modal:</Heading>
         <div ref={ref} style={{ pointerEvents: "all" }}>
           <button onClick={(): void => setModalOpen(true)}>Open Modal</button>
         </div>
@@ -36,23 +37,25 @@ const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
         />
         <hr className="margin-y-4" />
 
-        <h2>Success Alert:</h2>
+        <Heading level={2}>Success Alert:</Heading>
         <ProfileSnackbarAlert alert="SUCCESS" close={(): void => {}} />
         <hr className="margin-y-4" />
 
-        <h2>Error Alert</h2>
+        <Heading level={2}>Error Alert</Heading>
         <ProfileSnackbarAlert alert="ERROR" close={(): void => {}} />
         <hr className="margin-y-4" />
 
-        <h2>Essential Question Alert Banner</h2>
+        <Heading level={2}>Essential Question Alert Banner</Heading>
         <Alert variant="error">{config.profileDefaults.default.essentialQuestionAlertText}</Alert>
 
         <hr className="margin-y-4" />
-        <h2>Essential Question Inline Error Text</h2>
+        <Heading level={2}>Essential Question Inline Error Text</Heading>
         {config.siteWideErrorMessages.errorRadioButton}
         <hr className="margin-y-4" />
 
-        <h2 className="margin-bottom-4">Misc Buttons & Labels:</h2>
+        <Heading level={2} className="margin-bottom-4">
+          Misc Buttons & Labels:
+        </Heading>
         <Profile
           municipalities={[]}
           CMS_ONLY_tab="documents"
@@ -61,7 +64,7 @@ const ProfilePreviewMisc = (props: PreviewProps): ReactElement => {
         />
         <hr className="margin-y-4" />
 
-        <h2>Cannabis Location Alert: </h2>
+        <Heading level={2}>Cannabis Location Alert: </Heading>
         <Alert variant="warning">{config.profileDefaults.default.cannabisLocationAlert}</Alert>
       </div>
     </ConfigContext.Provider>

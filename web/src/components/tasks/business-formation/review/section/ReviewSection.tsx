@@ -1,3 +1,4 @@
+import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -24,7 +25,7 @@ export const ReviewSection = (props: Props): ReactElement => {
     <>
       <div className={"flex space-between"}>
         <div className={"maxw-mobile-lg margin-bottom-2"}>
-          <h2>{props.stepName}</h2>
+          <Heading level={2}>{props.stepName}</Heading>
         </div>
         <div className="margin-left-2">
           <UnStyledButton

@@ -1,5 +1,6 @@
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
@@ -76,12 +77,12 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         <ThemeProvider theme={createTheme()}>
-          <h2>Empty calendar</h2>
+          <Heading level={2}>Empty calendar</Heading>
           <FilingsCalendar operateReferences={{}} CMS_ONLY_fakeBusiness={emptyFilingsUserData} />
 
           <hr className="margin-top-6" />
 
-          <h2>Calendar with filings, list view</h2>
+          <Heading level={2}>Calendar with filings, list view</Heading>
           <FilingsCalendar
             operateReferences={operateReferences}
             CMS_ONLY_fakeBusiness={filingsBusinessList}
@@ -89,7 +90,7 @@ const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
 
           <hr className="margin-top-6" />
 
-          <h2>Calendar with filings, grid view</h2>
+          <Heading level={2}>Calendar with filings, grid view</Heading>
           <FilingsCalendar
             operateReferences={operateReferences}
             CMS_ONLY_fakeBusiness={filingsBusinessGrid}

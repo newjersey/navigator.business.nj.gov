@@ -1,6 +1,7 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -20,7 +21,9 @@ export const NaicsCodeDisplay = (props: Props): ReactElement => {
 
   return (
     <>
-      <h2 className="text-normal">{Config.determineNaicsCode.hasSavedCodeHeader}</h2>
+      <Heading level={2} className="text-normal">
+        {Config.determineNaicsCode.hasSavedCodeHeader}
+      </Heading>
       <Alert variant="success">
         <Content>{templateEval(Config.determineNaicsCode.successMessage, { code: props.code })}</Content>
       </Alert>

@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
@@ -16,7 +17,7 @@ const NexusDbaFormationPreview = (props: PreviewProps): ReactElement => {
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         <div ref={ref} style={{ pointerEvents: "all" }}>
-          <h2>CTA Modal</h2>
+          <Heading level={2}>CTA Modal</Heading>
           <button onClick={(): void => setModalOpen(true)}>Open CTA Modal</button>
         </div>
 

@@ -1,3 +1,4 @@
+import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
 import { ConfigMatchList } from "@/components/search/ConfigMatchList";
 import { MatchList } from "@/components/search/MatchList";
@@ -46,12 +47,12 @@ export const MatchCollection = (props: Props): ReactElement => {
   return (
     <Accordion expanded={isOpen} onChange={(): void => setIsOpen((prev) => !prev)}>
       <AccordionSummary expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}>
-        <h2 className="margin-y-2">
+        <Heading level={2} className="margin-y-2">
           {collectionTitle}
           <span style={{ fontWeight: 300 }} className="margin-left-1">
             ({totalMatches})
           </span>
-        </h2>
+        </Heading>
       </AccordionSummary>
       <AccordionDetails>
         {Object.keys(props.matchedCollections).map((it) => (

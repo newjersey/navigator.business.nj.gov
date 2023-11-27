@@ -1,3 +1,4 @@
+import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
 import { SectionAccordionContext } from "@/contexts/sectionAccordionContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -19,7 +20,7 @@ export const SectionAccordion = (props: Props): ReactElement => {
   const dropdownIconClasses = props.mini
     ? "usa-icon--size-5 text-base-light"
     : "usa-icon--size-5 margin-left-1";
-  const headerClasses = props.mini ? "h3-styling" : "margin-top-3 tablet:margin-left-3 h3-styling";
+  const headerClasses = props.mini ? "" : "margin-top-3 tablet:margin-left-3";
   const dividerClasses = props.mini ? "margin-y-2" : "margin-y-3";
   const sectionName = props.sectionType.toLowerCase();
   const isOpen = business?.preferences.roadmapOpenSections.includes(props.sectionType) ?? false;
@@ -59,9 +60,13 @@ export const SectionAccordion = (props: Props): ReactElement => {
             data-testid={`${sectionName}-header`}
           >
             <div className="margin-y-05">
-              <h2 className={`flex flex-align-center margin-0-override ${headerClasses}`}>
+              <Heading
+                level={2}
+                styleVariant="h3"
+                className={`flex flex-align-center margin-0-override ${headerClasses}`}
+              >
                 <div className="inline">{Config.sectionHeaders[props.sectionType]}</div>
-              </h2>
+              </Heading>
             </div>
           </AccordionSummary>
           <AccordionDetails>{props.children}</AccordionDetails>

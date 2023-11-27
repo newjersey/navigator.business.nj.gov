@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
@@ -13,7 +14,7 @@ const DashboardSnackbarsPreview = (props: PreviewProps): ReactElement => {
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <h2>Calendar Snackbar</h2>
+        <Heading level={2}>Calendar Snackbar</Heading>
         <SnackbarAlert
           variant="success"
           isOpen={true}
@@ -23,7 +24,7 @@ const DashboardSnackbarsPreview = (props: PreviewProps): ReactElement => {
           <Content>{config.dashboardDefaults.calendarSnackbarBody}</Content>
         </SnackbarAlert>
 
-        <h2>Certifications Snackbar</h2>
+        <Heading level={2}>Certifications Snackbar</Heading>
         <SnackbarAlert
           variant="success"
           isOpen={true}
@@ -33,7 +34,7 @@ const DashboardSnackbarsPreview = (props: PreviewProps): ReactElement => {
           <Content>{config.dashboardDefaults.certificationsSnackbarBody}</Content>
         </SnackbarAlert>
 
-        <h2>Deferred Onboarding Snackbar</h2>
+        <Heading level={2}>Deferred Onboarding Snackbar</Heading>
         <SnackbarAlert
           variant="success"
           isOpen={true}
@@ -43,7 +44,7 @@ const DashboardSnackbarsPreview = (props: PreviewProps): ReactElement => {
           <Content>{config.dashboardDefaults.deferredOnboardingSnackbarBody}</Content>
         </SnackbarAlert>
 
-        <h2>Tax Registration Snackbar</h2>
+        <Heading level={2}>Tax Registration Snackbar</Heading>
         <SnackbarAlert
           variant="success"
           isOpen={true}
@@ -53,7 +54,7 @@ const DashboardSnackbarsPreview = (props: PreviewProps): ReactElement => {
           <Content>{config.dashboardDefaults.taxRegistrationSnackbarBody}</Content>
         </SnackbarAlert>
 
-        <h2>Funding Snackbar</h2>
+        <Heading level={2}>Funding Snackbar</Heading>
         <SnackbarAlert
           variant="success"
           isOpen={true}
@@ -63,7 +64,7 @@ const DashboardSnackbarsPreview = (props: PreviewProps): ReactElement => {
           <Content>{config.dashboardDefaults.fundingSnackbarBody}</Content>
         </SnackbarAlert>
 
-        <h2>Hidden Tasks Snackbar</h2>
+        <Heading level={2}>Hidden Tasks Snackbar</Heading>
         <SnackbarAlert
           variant="success"
           isOpen={true}

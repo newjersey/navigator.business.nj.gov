@@ -1,3 +1,4 @@
+import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
 import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { Breakpoint, Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
@@ -25,7 +26,9 @@ export const ModalZeroButton = (props: Props): ReactElement => {
       disableEnforceFocus={contextualInfo.isVisible}
     >
       <DialogTitle id="modal" className="display-flex flex-row flex-align-center margin-top-1 break-word">
-        <div className="h2-styling padding-x-1 margin-0-override">{props.title}</div>
+        <Heading level={0} styleVariant="h2" className="padding-x-1 margin-0-override">
+          {props.title}
+        </Heading>
         {!props.uncloseable && (
           <IconButton
             aria-label="close"
