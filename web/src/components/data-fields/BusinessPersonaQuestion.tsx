@@ -46,13 +46,11 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
       <Content>{contentFromConfig.description}</Content>
       <FormControl fullWidth>
         <RadioGroup
-          aria-label="Business Persona"
           name="business-persona"
           value={state.profileData.businessPersona ?? ""}
           onChange={handleSelection}
         >
           <FormControlLabel
-            aria-label="Business Status - Starting"
             style={{ alignItems: "center" }}
             labelPlacement="end"
             data-testid="business-persona-starting"
@@ -61,7 +59,6 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
             label={contentFromConfig.radioButtonStartingText}
           />
           <FormControlLabel
-            aria-label="Business Status - Owning"
             style={{ alignItems: "center" }}
             labelPlacement="end"
             data-testid="business-persona-owning"
@@ -70,7 +67,6 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
             label={contentFromConfig.radioButtonOwningText}
           />
           <FormControlLabel
-            aria-label="Business Status - Foreign"
             style={{ alignItems: "center" }}
             labelPlacement="end"
             data-testid="business-persona-foreign"

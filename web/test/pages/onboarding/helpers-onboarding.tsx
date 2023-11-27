@@ -82,8 +82,7 @@ export type PageHelpers = {
   getLegalStructureValue: () => string;
   getSectorIDValue: () => string;
   getIndustryValue: () => string;
-  getRadioGroup: (sectionAriaLabel: string) => HTMLElement;
-  getRadioButton: (sectionAriaLabel: string) => HTMLElement;
+  getRadioButton: (label: string) => HTMLElement;
   getMunicipalityValue: () => string;
   getFullNameValue: () => string;
   getEmailValue: () => string;
@@ -140,12 +139,8 @@ export const createPageHelpers = (): PageHelpers => {
     return (screen.queryByTestId("industryId") as HTMLInputElement)?.value;
   };
 
-  const getRadioGroup = (sectionAriaLabel: string): HTMLElement => {
-    return screen.getByRole("radiogroup", { name: sectionAriaLabel });
-  };
-
-  const getRadioButton = (sectionAriaLabel: string): HTMLElement => {
-    return screen.getByRole("radio", { name: sectionAriaLabel });
+  const getRadioButton = (label: string): HTMLElement => {
+    return screen.getByLabelText(label);
   };
 
   const getMunicipalityValue = (): string => {
@@ -212,7 +207,6 @@ export const createPageHelpers = (): PageHelpers => {
     getDateOfFormationValue,
     getLegalStructureValue,
     getIndustryValue,
-    getRadioGroup,
     getRadioButton,
     getMunicipalityValue,
     getSectorIDValue,
