@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { postOnboardingCheckboxes } from "@/lib/domain-logic/postOnboardingCheckboxes";
 import { PostOnboarding } from "@/lib/types/types";
@@ -69,14 +70,9 @@ export const PostOnboardingRadioQuestion = (props: Props): ReactElement => {
       {props.postOnboardingQuestion.question && (
         <>
           <div className="margin-top-205">
-            <div
-              role="heading"
-              aria-level={2}
-              data-testid={props.postOnboardingQuestion.filename}
-              className="h4-styling "
-            >
+            <Heading level={2} styleVariant="h4" data-testid={props.postOnboardingQuestion.filename}>
               {props.postOnboardingQuestion.question}
-            </div>
+            </Heading>
           </div>
           <FormControl fullWidth>
             <RadioGroup

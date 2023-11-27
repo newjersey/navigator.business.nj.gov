@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { getErrorStateForField } from "@/components/tasks/business-formation/getErrorStateForField";
 import { WithErrorBar } from "@/components/WithErrorBar";
@@ -55,7 +56,7 @@ export const BusinessNameStep = (): ReactElement => {
   return (
     <div data-testid="business-name-step">
       <form onSubmit={doSearch} className="usa-prose grid-container padding-0">
-        <h3>{Config.formation.fields.businessName.header}</h3>
+        <Heading level={3}>{Config.formation.fields.businessName.header}</Heading>
         <Content>{Config.formation.fields.businessName.description}</Content>
         <WithErrorBar hasError={hasError} type="DESKTOP-ONLY">
           <div className="text-bold margin-top-1">{Config.formation.fields.businessName.label}</div>

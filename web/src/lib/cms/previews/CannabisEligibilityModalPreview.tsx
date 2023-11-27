@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
@@ -14,7 +15,7 @@ const CannabisEligibilityModalPreview = (props: PreviewProps): ReactElement => {
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <h2>Eligibility Modal</h2>
+      <Heading level={2}>Eligibility Modal</Heading>
       <button className="margin-2" onClick={(): void => setModalOpen(true)}>
         Open Modal
       </button>

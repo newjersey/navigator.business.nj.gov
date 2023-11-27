@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { FormationSuccessDocument } from "@/components/tasks/business-formation/success/FormationSuccessDocument";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
@@ -23,7 +24,9 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
     <>
       <div className="fdc fac margin-bottom-2" data-testid="formation-success-page">
         <img src={`/img/trophy-illustration.svg`} alt="" />
-        <h2 className="margin-bottom-0">{Config.formation.successPage.header}</h2>
+        <Heading level={2} className="margin-bottom-0">
+          {Config.formation.successPage.header}
+        </Heading>
         <p className="text-center">{Config.formation.successPage.subheader}</p>
         <p className="text-center">{Config.formation.successPage.body}</p>
       </div>

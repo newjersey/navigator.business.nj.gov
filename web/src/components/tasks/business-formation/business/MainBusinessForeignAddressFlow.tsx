@@ -1,4 +1,5 @@
 import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { MainBusinessIntl } from "@/components/tasks/business-formation/business/MainBusinessAddressIntl";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -51,9 +52,9 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
 
   return (
     <>
-      <h3 className="margin-bottom-3" data-testid="main-business-address-container-header">
+      <Heading level={3} className="margin-bottom-3" data-testid="main-business-address-container-header">
         {Config.formation.sections.addressHeader}
-      </h3>
+      </Heading>
       <CannabisLocationAlert industryId={business?.profileData.industryId} />
       <FormControl variant="outlined" fullWidth className="padding-bottom-2">
         <RadioGroup

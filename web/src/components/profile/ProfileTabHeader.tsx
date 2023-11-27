@@ -1,3 +1,4 @@
+import { Heading } from "@/components/njwds-extended/Heading";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileTabs } from "@/lib/types/types";
 import { ReactElement } from "react";
@@ -25,9 +26,9 @@ export const ProfileTabHeader = (props: Props): ReactElement => {
   return (
     <div data-testid="profile-header">
       <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-      <h2 className="margin-bottom-4" style={{ fontWeight: 300 }}>
+      <Heading level={2} className="margin-bottom-4" style={{ fontWeight: 300 }}>
         {getTitle()}
-      </h2>
+      </Heading>
     </div>
   );
 };

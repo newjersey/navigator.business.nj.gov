@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
@@ -48,9 +49,9 @@ export const NeedsAccountModal = (): ReactElement => {
       data-testid={"self-reg-modal"}
     >
       <DialogTitle sx={{ p: 5, paddingRight: 10 }}>
-        <div role="heading" aria-level={2} className="h3-styling">
+        <Heading level={0} styleVariant="h3">
           {Config.navigationDefaults.needsAccountModalTitle}
-        </div>
+        </Heading>
         <IconButton
           aria-label="close"
           onClick={(): void => setShowNeedsAccountModal(false)}

@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { PrimaryButtonDropdown } from "@/components/njwds-extended/PrimaryButtonDropdown";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
@@ -122,7 +123,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
         {!displayNoPriorityType && (
           <>
             <div className="margin-bottom-3">{Config.cannabisPriorityStatus.secondTabDescriptionText}</div>
-            <h2>{Config.cannabisPriorityStatus.secondTabHeaderText}</h2>
+            <Heading level={2}>{Config.cannabisPriorityStatus.secondTabHeaderText}</Heading>
           </>
         )}
         {displayMWPriorityType && (
@@ -133,7 +134,9 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
                 aria-controls={`${Config.cannabisPriorityStatus.minorityOrWomenHeaderText}-content`}
               >
-                <h3 className="margin-y-3">{Config.cannabisPriorityStatus.minorityOrWomenHeaderText}</h3>
+                <Heading level={3} className="margin-y-3">
+                  {Config.cannabisPriorityStatus.minorityOrWomenHeaderText}
+                </Heading>
               </AccordionSummary>
               <AccordionDetails>
                 <Content>{Config.cannabisPriorityStatus.minorityWomenOwnedRequirements}</Content>
@@ -149,7 +152,9 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
                 aria-controls={`${Config.cannabisPriorityStatus.veteranHeaderText}-content`}
               >
-                <h3 className="margin-y-3">{Config.cannabisPriorityStatus.veteranHeaderText}</h3>
+                <Heading level={3} className="margin-y-3">
+                  {Config.cannabisPriorityStatus.veteranHeaderText}
+                </Heading>
               </AccordionSummary>
               <AccordionDetails>
                 <Content>{Config.cannabisPriorityStatus.veteranOwnedRequirements}</Content>
@@ -165,7 +170,9 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
                 aria-controls={`${Config.cannabisPriorityStatus.socialEquityHeaderText}-content`}
               >
-                <h3 className="margin-y-3">{Config.cannabisPriorityStatus.socialEquityHeaderText}</h3>
+                <Heading level={3} className="margin-y-3">
+                  {Config.cannabisPriorityStatus.socialEquityHeaderText}
+                </Heading>
               </AccordionSummary>
               <AccordionDetails>
                 <Content>{Config.cannabisPriorityStatus.socialEquityRequirements}</Content>
@@ -180,7 +187,9 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
               <AccordionSummary
                 aria-controls={`${Config.cannabisPriorityStatus.impactZoneHeaderText}-content`}
               >
-                <h3 className="margin-y-3">{Config.cannabisPriorityStatus.impactZoneHeaderText}</h3>
+                <Heading level={3} className="margin-y-3">
+                  {Config.cannabisPriorityStatus.impactZoneHeaderText}
+                </Heading>
               </AccordionSummary>
               <AccordionDetails>
                 <Content>{Config.cannabisPriorityStatus.impactZoneText}</Content>

@@ -1,4 +1,5 @@
 import { MgmtAuth } from "@/components/auth/MgmtAuth";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageSkeleton } from "@/components/PageSkeleton";
@@ -53,14 +54,14 @@ const DeadUrlsPage = (props: Props): ReactElement => {
   const authedView = (
     <>
       <h1>Dead URLs</h1>
-      <h2>
+      <Heading level={2}>
         NOTE: this only works locally, (ask a dev to run this locally for results
         https://www.pivotaltracker.com/story/show/185355762)
-      </h2>
+      </Heading>
       <PrimaryButton onClick={handleDownloadClick} isColor={"primary"}>
         Click Here to Download, as a txt file
       </PrimaryButton>
-      <h2>Potentially broken links:</h2>
+      <Heading level={2}>Potentially broken links:</Heading>
       {Object.keys(props.deadLinks).map((page, i) => {
         return (
           <div key={i}>

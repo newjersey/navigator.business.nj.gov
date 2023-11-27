@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
@@ -53,11 +54,11 @@ export const SidebarCardGeneric = (props: Props): ReactElement => {
         {props.headerText && (
           <div className="radius-top-md">
             <div className="flex flex-justify">
-              <h3 className="margin-bottom-0 text-white">
+              <Heading level={3} className="margin-bottom-0 text-white">
                 <span>
                   <ModifiedContent>{props.headerText}</ModifiedContent>
                 </span>
-              </h3>
+              </Heading>
               {props.card.hasCloseButton && (
                 <UnStyledButton style="default" onClick={closeSelf} ariaLabel="Close">
                   <Icon className="font-sans-xl text-white">close</Icon>

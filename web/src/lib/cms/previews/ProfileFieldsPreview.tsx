@@ -20,6 +20,7 @@ import { TaxId } from "@/components/data-fields/tax-id/TaxId";
 import { TaxPin } from "@/components/data-fields/TaxPin";
 import { FieldLabelOnboarding } from "@/components/field-labels/FieldLabelOnboarding";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { LegalStructureRadio } from "@/components/tasks/business-structure/LegalStructureRadio";
 import { ConfigContext } from "@/contexts/configContext";
@@ -159,7 +160,7 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
           <NaicsCode />
 
           <div className="margin-top-3">
-            <h4>----Input Label On Naics Code Task----</h4>
+            <Heading level={4}>----Input Label On Naics Code Task----</Heading>
             <FieldLabelProfile fieldName={"naicsCode"} isAltDescriptionDisplayed ignoreContextualInfo />
           </div>
 

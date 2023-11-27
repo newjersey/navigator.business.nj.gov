@@ -2,6 +2,7 @@ import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content, ExternalLink, GreenBox } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { NavBar } from "@/components/navbar/NavBar";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { Icon } from "@/components/njwds/Icon";
 import { PageSkeleton } from "@/components/PageSkeleton";
@@ -146,7 +147,9 @@ export const FilingElement = (props: {
                   .toLowerCase()
                   .replaceAll(" ", "-")}-content`}
               >
-                <h3 className="margin-y-3">{Config.filingDefaults.additionalInfo}</h3>
+                <Heading level={3} className="margin-y-3">
+                  {Config.filingDefaults.additionalInfo}
+                </Heading>
               </AccordionSummary>
               <AccordionDetails>
                 <Content>{props.filing.additionalInfo}</Content>

@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
@@ -30,7 +31,7 @@ export const FormationChooseNotifications = (): ReactElement => {
 
   return (
     <div className="margin-top-3">
-      <h3>{Config.formation.sections.notificationsHeader}</h3>
+      <Heading level={3}>{Config.formation.sections.notificationsHeader}</Heading>
       <Content>{Config.formation.sections.notificationsDescription}</Content>
       <FormGroup>
         <FormControlLabel

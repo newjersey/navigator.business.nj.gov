@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { ContextualInfoButton } from "@/components/ContextualInfoButton";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
@@ -29,7 +30,7 @@ export const FieldLabelOnboarding = (props: Props): ReactElement => {
 
   return (
     <>
-      <div role="heading" aria-level={2} className="h3-styling margin-bottom-05-override">
+      <Heading level={2} styleVariant="h3" className="margin-bottom-05-override">
         {contentFromConfig.headerContextualInfo ? (
           <ContextualInfoButton text={contentFromConfig.header} id={contentFromConfig.headerContextualInfo} />
         ) : (
@@ -41,7 +42,7 @@ export const FieldLabelOnboarding = (props: Props): ReactElement => {
             <span className="text-light">{unboldedHeader}</span>
           </>
         )}
-      </div>
+      </Heading>
       {props.isAltDescriptionDisplayed && altDescription && <Content>{altDescription}</Content>}
       {!props.isAltDescriptionDisplayed && description && <Content>{description}</Content>}
     </>
