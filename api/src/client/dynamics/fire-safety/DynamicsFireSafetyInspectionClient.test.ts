@@ -1,7 +1,9 @@
+/* eslint-disable unicorn/no-null */
+import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { generateLicenseSearchAddress } from "@shared/test";
+import axios from "axios";
 import { DynamicsFireSafetyInspectionClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyInspectionClient";
 import { FireSafetyInspectionClient } from "@client/dynamics/fire-safety/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
-import axios from "axios";
 
 jest.mock("axios");
 jest.mock("winston");
@@ -21,49 +23,51 @@ describe("DynamicsFireSafetyInspectionClient", () => {
   });
 
   const mockAccessToken = "access-granted";
-  const searchAddress = "address-1";
+  const searchAdress = "address-1"
 
-  it("makes a successful get request and returns inspection data", async () => {
+
+  it("makes a succesful get request and returns inspection data", async () => {
     const fireSafetyInspectionMockResponse = {
       value: [
         {
           createdon: "2023-05-31T10:31:51Z",
           ultra_inspectionended: true,
           ultra_numberofopenviolations: 0,
-          ultra_streetaddress: searchAddress,
+          ultra_streetaddress: searchAdress
         },
         {
           createdon: "2023-06-31T10:31:51Z",
           ultra_inspectionended: false,
           ultra_numberofopenviolations: 5,
-          ultra_streetaddress: searchAddress,
+          ultra_streetaddress: searchAdress
         },
       ],
     };
 
     mockAxios.get.mockResolvedValue({ data: fireSafetyInspectionMockResponse });
-    expect(await client.getFireSafetyInspectionsByAddress(mockAccessToken, searchAddress)).toEqual([
+    expect(await client.getFireSafetyInspectionsByAddress(mockAccessToken, searchAdress)).toEqual([
       {
         createdOn: "2023-05-31T10:31:51Z",
         inspectionFinished: true,
-        address: searchAddress,
-        openViolationCount: 0,
+        address: searchAdress,
+        openViolationCount: 0
       },
       {
         createdOn: "2023-06-31T10:31:51Z",
         inspectionFinished: false,
-        address: searchAddress,
-        openViolationCount: 5,
+        address: searchAdress,
+        openViolationCount: 5
       },
     ]);
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `${ORG_URL}/api/data/v9.2/rgb_addresses?$select=createdon,ultra_inspectionended,ultra_numberofopenviolations,ultra_streetaddress&$filter=(ultra_streetaddress eq ${searchAddress})&$top=10`,
+      `${ORG_URL}/api/data/v9.2/rgb_addresses?$select=createdon,ultra_inspectionended,ultra_numberofopenviolations,ultra_streetaddress&$filter=(ultra_streetaddress eq ${searchAdress})&$top=10`,
       {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
         },
       }
     );
+
   });
 
   it("returns an empty array if no matching addresses are found", async () => {
@@ -72,9 +76,9 @@ describe("DynamicsFireSafetyInspectionClient", () => {
     };
 
     mockAxios.get.mockResolvedValue({ data: fireSafetyInspectionMockResponse });
-    expect(await client.getFireSafetyInspectionsByAddress(mockAccessToken, searchAddress)).toEqual([]);
+    expect(await client.getFireSafetyInspectionsByAddress(mockAccessToken, searchAdress)).toEqual([]);
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `${ORG_URL}/api/data/v9.2/rgb_addresses?$select=createdon,ultra_inspectionended,ultra_numberofopenviolations,ultra_streetaddress&$filter=(ultra_streetaddress eq ${searchAddress})&$top=10`,
+      `${ORG_URL}/api/data/v9.2/rgb_addresses?$select=createdon,ultra_inspectionended,ultra_numberofopenviolations,ultra_streetaddress&$filter=(ultra_streetaddress eq ${searchAdress})&$top=10`,
       {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
