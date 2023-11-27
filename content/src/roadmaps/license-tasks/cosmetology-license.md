@@ -1,19 +1,23 @@
 ---
+filename: cosmetology-license
 displayname: cosmetology-license
-id: "undefined"
-webflowId: "64ca743a7c4e7f4f3a3c50f2"
-urlSlug: "cosmetology-license"
-name: "Get Your Cosmetology License "
+urlSlug: cosmetology-license
+name: Get Your Individual License and Ensure Your Staff is Licensed
 webflowName: "Cosmetologist: Cosmetology License"
-filename: "cosmetology-license"
-callToActionLink: "https://www.njconsumeraffairs.gov/cos/Applications/Application-for-Authorization-to-Sit-for-the-Examination-and-for-Licensure.pdf"
-callToActionText: "Apply for My Cosmetology License"
-agencyId: "nj-consumer-affairs"
+summaryDescriptionMd: If the business owner of a cosmetology shop does not have
+  a cosmetology license, the shop manager must have a license and at least two
+  years of experience. Licenses are required for cosmetologists, hairstylists,
+  manicurists, skincare specialists, barbers, hair braiders, and beauticians. It
+  is the shop owner's responsibility to ensure their staff is licensed.
+industryId: cosmetology
+callToActionLink: https://www.njconsumeraffairs.gov/cos/Applications/Application-for-Authorization-to-Sit-for-the-Examination-and-for-Licensure.pdf
+agencyId: nj-consumer-affairs
 agencyAdditionalContext: " Board of Cosmetology and Hairstyling"
-divisionPhone: "(973) 504-6400"
-industryId: "cosmetology"
-licenseCertificationClassification: "undefined"
-summaryDescriptionMd: "If you or an employee wants to work as a cosmetologist, hairstylist, esthetician, or nail technician in New Jersey, you or they need a cosmetology license."
+divisionPhone: (973) 504-6400
+id: undefined
+callToActionText: Apply for My Cosmetology License
+webflowId: 64ca743a7c4e7f4f3a3c50f2
+licenseCertificationClassification: undefined
 ---
 
 ---
@@ -32,6 +36,7 @@ summaryDescriptionMd: "If you or an employee wants to work as a cosmetologist, h
 - Proof of passing the cosmetology licensing examination
 - Applicable fees paid
 
-> **Once completed, you will have**:
+> **Once completed, you will have:**
 >
-> - A cosmetology license
+> - Your individual license or a manager with a license
+> - Confirmed your staff have their cosmetology license
