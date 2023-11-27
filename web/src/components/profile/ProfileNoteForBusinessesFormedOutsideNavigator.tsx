@@ -1,17 +1,19 @@
 import { Alert } from "@/components/njwds-extended/Alert";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { isFormedOutsideNavigator } from "@/lib/domain-logic/isFormedOutsideNavigator";
+import { shouldShowDisclaimerForProfileNotSubmittingData } from "@/lib/domain-logic/shouldShowDisclaimerForProfileNotSubmittingData";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
 
 interface Props {
   business: Business | undefined;
+  isAuthenticated: IsAuthenticated;
 }
 
-export const ProfileNoteForBusinessFormedOutsideNavigator = (props: Props): ReactElement => {
+export const ProfileNoteDisclaimerForSubmittingData = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
-  if (!isFormedOutsideNavigator(props.business)) {
+  if (!shouldShowDisclaimerForProfileNotSubmittingData(props.business, props.isAuthenticated)) {
     return <></>;
   }
 
