@@ -51,7 +51,8 @@
     {
       "step": 4,
       "licenseTask": "cosmetology-license",
-      "weight": 12
+      "weight": 12,
+      "required": true
     }
   ],
   "name": "Cosmetology",
