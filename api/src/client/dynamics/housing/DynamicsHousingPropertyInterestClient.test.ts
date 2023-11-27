@@ -48,7 +48,7 @@ describe("DynamicsHousingPropertyInterestClient", () => {
     };
 
     mockAxios.get.mockResolvedValue({ data: housingPropertyInterestMockResponse });
-    expect(await client.getPropertyInterests(mockAccessToken, searchAddress)).toEqual([
+    expect(await client.getPropertyInterestsByAddress(mockAccessToken, searchAddress)).toEqual([
       {
         createdOn: "2023-05-31T10:31:51Z",
         isFireSafety: true,
@@ -82,7 +82,7 @@ describe("DynamicsHousingPropertyInterestClient", () => {
     };
 
     mockAxios.get.mockResolvedValue({ data: fireSafetyInspectionMockResponse });
-    expect(await client.getPropertyInterests(mockAccessToken, searchAddress)).toEqual([]);
+    expect(await client.getPropertyInterestsByAddress(mockAccessToken, searchAddress)).toEqual([]);
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${ORG_URL}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode&$filter=(ultra_streetaddress eq '${searchAddress}')&$top=10`,
       {
