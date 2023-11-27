@@ -49,7 +49,7 @@
     "@mui/styles": "5.14.18",
     "@mui/x-date-pickers": "5.0.20",
     "@newjersey/njwds": "0.3.0",
-    "@smithy/node-http-handler": "2.1.9",
+    "@smithy/node-http-handler": "2.1.10",
     "@storybook/addon-outline": "7.5.3",
     "@types/mdast": "4.0.3",
     "airtable": "0.12.2",
