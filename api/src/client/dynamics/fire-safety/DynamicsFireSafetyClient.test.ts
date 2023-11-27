@@ -19,7 +19,7 @@ describe("DynamicsFireSafetyClient", () => {
     };
 
     stubFireSafetyInspectionClient = {
-      getFireSafetyInspections: jest.fn(),
+      getFireSafetyInspectionsByAddress: jest.fn(),
     };
 
     client = DynamicsFireSafetyClient(logger, {
@@ -29,7 +29,7 @@ describe("DynamicsFireSafetyClient", () => {
   });
 
   it("returns inspection data from subclient", async () => {
-    stubFireSafetyInspectionClient.getFireSafetyInspections.mockResolvedValue([
+    stubFireSafetyInspectionClient.getFireSafetyInspectionsByAddress.mockResolvedValue([
       {
         createdOn: "2024-05-31T10:31:51Z",
         inspectionFinished: true,
@@ -63,7 +63,7 @@ describe("DynamicsFireSafetyClient", () => {
   });
 
   it("throws a 400 error when a sub client client throws a 400", async () => {
-    stubFireSafetyInspectionClient.getFireSafetyInspections.mockRejectedValue(new Error("400"));
+    stubFireSafetyInspectionClient.getFireSafetyInspectionsByAddress.mockRejectedValue(new Error("400"));
     await expect(client("address-2")).rejects.toThrow("400");
   });
 });

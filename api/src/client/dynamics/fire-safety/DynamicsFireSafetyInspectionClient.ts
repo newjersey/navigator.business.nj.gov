@@ -30,7 +30,7 @@ export const DynamicsFireSafetyInspectionClient = (
           `Dynamics Fire Safety Client - Id:${logId} - Response: ${JSON.stringify(response.data)}`
         );
         return response.data.value.map((response: DynamicsFireSafetyInspectionResponse) => {
-          return processDynamicsFireSafetyInspectionResponse(response);
+          processDynamicsFireSafetyInspectionResponse(response);
         });
       })
       .catch((error: AxiosError) => {
