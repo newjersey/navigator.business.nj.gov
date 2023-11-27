@@ -50,12 +50,6 @@
     },
     {
       "step": 4,
-      "weight": 10,
-      "licenseTask": "individual-staff-licenses-cosmetology",
-      "required": true
-    },
-    {
-      "step": 4,
       "licenseTask": "cosmetology-license",
       "weight": 12
     }
