@@ -1,4 +1,3 @@
-import { fireSafetyRouterFactory } from "@api/fireSafetyRouter";
 import { formationRouterFactory } from "@api/formationRouter";
 import { licenseStatusRouterFactory } from "@api/licenseStatusRouter";
 import { selfRegRouterFactory } from "@api/selfRegRouter";
@@ -10,8 +9,6 @@ import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
 import { DynamicsAccessTokenClient } from "@client/dynamics/DynamicsAccessTokenClient";
-import { DynamicsFireSafetyClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyClient";
-import { DynamicsFireSafetyInspectionClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyInspectionClient";
 import { DynamicsBusinessAddressClient } from "@client/dynamics/license-status/DynamicsBusinessAddressClient";
 import { DynamicsBusinessIdsClient } from "@client/dynamics/license-status/DynamicsBusinessIdsClient";
 import { DynamicsChecklistItemsClient } from "@client/dynamics/license-status/DynamicsChecklistItemsClient";
@@ -99,24 +96,6 @@ const dynamicsLicenseStatusClient = DynamicsLicenseStatusClient(logger, {
   businessAddressClient: dynamicsAddressClient,
   licenseApplicationIdClient: dynamicsApplicationIdClient,
   checklistItemsClient: dynamicsCheckListItemsClient,
-});
-
-const DYNAMICS_FIRE_SAFETY_URL = process.env.DYNAMICS_FIRE_SAFETY_URL || "";
-
-const dynamicsFireSafetyAccessTokenClient = DynamicsAccessTokenClient(logger, {
-  tenantId: process.env.DYNAMICS_FIRE_SAFETY_TENANT_ID || "",
-  orgUrl: DYNAMICS_FIRE_SAFETY_URL,
-  clientId: process.env.DYNAMICS_FIRE_SAFETY_CLIENT_ID || "",
-  clientSecret: process.env.DYNAMICS_FIRE_SAFETY_SECRET || "",
-});
-
-const dynamicsFireSafetyInspectionClient = DynamicsFireSafetyInspectionClient(
-  logger,
-  DYNAMICS_FIRE_SAFETY_URL
-);
-const dynamicsFireSafetyClient = DynamicsFireSafetyClient(logger, {
-  accessTokenClient: dynamicsFireSafetyAccessTokenClient,
-  fireSafetyInspectionClient: dynamicsFireSafetyInspectionClient,
 });
 
 const BUSINESS_NAME_BASE_URL =
@@ -234,7 +213,6 @@ app.use(
 );
 app.use("/api/guest", guestRouterFactory(timeStampToBusinessSearch));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus, userDataClient));
-app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient));
 app.use("/api", selfRegRouterFactory(userDataClient, selfRegClient));
 app.use("/api", formationRouterFactory(apiFormationClient, userDataClient, { shouldSaveDocuments }));
 app.use(
