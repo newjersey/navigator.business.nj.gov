@@ -57,7 +57,7 @@ describe("DynamicsFireSafetyInspectionClient", () => {
       },
     ]);
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `${ORG_URL}/api/data/v9.2/ultra_fireinspections?$select=createdon,ultra_inspectionended,ultra_numberofopenviolations,ultra_streetaddress&$filter=(ultra_streetaddress eq '${searchAddress}')&$top=10`,
+      `${ORG_URL}/api/data/v9.2/ultra_fireinspections?$select=createdon,ultra_inspectionended,ultra_numberofopenviolations,ultra_streetaddress&$filter=(ultra_streetaddress eq ${searchAddress})&$top=10`,
       {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
@@ -74,7 +74,7 @@ describe("DynamicsFireSafetyInspectionClient", () => {
     mockAxios.get.mockResolvedValue({ data: fireSafetyInspectionMockResponse });
     expect(await client.getFireSafetyInspectionsByAddress(mockAccessToken, searchAddress)).toEqual([]);
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `${ORG_URL}/api/data/v9.2/ultra_fireinspections?$select=createdon,ultra_inspectionended,ultra_numberofopenviolations,ultra_streetaddress&$filter=(ultra_streetaddress eq '${searchAddress}')&$top=10`,
+      `${ORG_URL}/api/data/v9.2/ultra_fireinspections?$select=createdon,ultra_inspectionended,ultra_numberofopenviolations,ultra_streetaddress&$filter=(ultra_streetaddress eq ${searchAddress})&$top=10`,
       {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
