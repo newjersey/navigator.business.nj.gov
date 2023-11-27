@@ -1,9 +1,9 @@
-import { FireSafetyInspectionStatus } from "@domain/types";
+import { FireSafetyInspection } from "@domain/types";
 
 import { FireSafetyInspectionResult } from "@shared/fireSafety";
 import { Router } from "express";
 
-export const fireSafetyRouterFactory = (fireSafetyInspection: FireSafetyInspectionStatus): Router => {
+export const fireSafetyRouterFactory = (fireSafetyInspection: FireSafetyInspection): Router => {
   const router = Router();
 
   router.get("/fire-safety", async (req, res) => {
