@@ -36,7 +36,7 @@ import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
 import { ProfileField } from "@/components/profile/ProfileField";
-import { ProfileNoteForBusinessFormedOutsideNavigator } from "@/components/profile/ProfileNoteForBusinessesFormedOutsideNavigator";
+import { ProfileNoteDisclaimerForSubmittingData } from "@/components/profile/ProfileNoteForBusinessesFormedOutsideNavigator";
 import { ProfileOpportunitiesAlert } from "@/components/profile/ProfileOpportunitiesAlert";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
 import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
@@ -299,7 +299,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
-        <ProfileNoteForBusinessFormedOutsideNavigator business={business} />
+        <ProfileNoteDisclaimerForSubmittingData business={business} isAuthenticated={isAuthenticated} />
 
         <ProfileField fieldName="foreignBusinessTypeIds">
           <ForeignBusinessTypeField required />
@@ -412,7 +412,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
-        <ProfileNoteForBusinessFormedOutsideNavigator business={business} />
+        <ProfileNoteDisclaimerForSubmittingData business={business} isAuthenticated={isAuthenticated} />
 
         <ProfileField fieldName="foreignBusinessTypeIds">
           <ForeignBusinessTypeField required />
@@ -480,7 +480,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
-        <ProfileNoteForBusinessFormedOutsideNavigator business={business} />
+        <ProfileNoteDisclaimerForSubmittingData business={business} isAuthenticated={isAuthenticated} />
 
         <ProfileField
           fieldName="businessName"
@@ -615,7 +615,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
-        <ProfileNoteForBusinessFormedOutsideNavigator business={business} />
+        <ProfileNoteDisclaimerForSubmittingData business={business} isAuthenticated={isAuthenticated} />
 
         <ProfileField fieldName="businessName" isVisible={!shouldShowTradeNameElements()}>
           <BusinessName />

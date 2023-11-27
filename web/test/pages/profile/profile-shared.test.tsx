@@ -38,6 +38,7 @@ import {
   randomFilteredIndustry,
 } from "@businessnjgovnavigator/shared/test";
 
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
   chooseTab,
   clickSave,
@@ -393,7 +394,77 @@ describe("profile - shared", () => {
   });
 
   describe("Special Note Alert for Businesses Formed outside the Navigator", () => {
+    it.each(businessPersonas)("shows the Note Alert for all personas when unauthenticated", (persona) => {
+      const business = generateBusinessForProfile({
+        formationData: generateFormationData({
+          completedFilingPayment: false,
+        }),
+        profileData: generateProfileData({
+          dateOfFormation: undefined,
+          businessPersona: persona,
+        }),
+      });
+      renderPage({ business, isAuthenticated: IsAuthenticated.FALSE });
+      expect(
+        screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+      ).toBeInTheDocument();
+    });
+
+    it("shows the Note Alert for OWNING businesses and authenticated", () => {
+      const business = generateBusinessForProfile({
+        formationData: generateFormationData({
+          completedFilingPayment: true,
+        }),
+        profileData: generateProfileData({
+          dateOfFormation: undefined,
+          businessPersona: "OWNING",
+        }),
+      });
+      renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
+      expect(
+        screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+      ).toBeInTheDocument();
+    });
+
     it.each(nonOwningPersonas)(
+      "does NOT show Note Alert for %s business that paid via the Navigator and are authenticated",
+      (persona) => {
+        const business = generateBusinessForProfile({
+          formationData: generateFormationData({
+            completedFilingPayment: true,
+          }),
+          profileData: generateProfileData({
+            dateOfFormation: "2020-8-8",
+            businessPersona: persona as BusinessPersona,
+          }),
+        });
+        renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
+        expect(
+          screen.queryByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+        ).not.toBeInTheDocument();
+      }
+    );
+
+    it.each(nonOwningPersonas)(
+      "does NOT show Note Alert for %s business that have not paid and not formed and are authenticated",
+      (persona) => {
+        const business = generateBusinessForProfile({
+          formationData: generateFormationData({
+            completedFilingPayment: false,
+          }),
+          profileData: generateProfileData({
+            dateOfFormation: undefined,
+            businessPersona: persona as BusinessPersona,
+          }),
+        });
+        renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
+        expect(
+          screen.queryByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
+        ).not.toBeInTheDocument();
+      }
+    );
+
+    it.each(businessPersonas)(
       "shows Note alert for %s business that set DateOfFormation but did NOT pay",
       (persona) => {
         const business = generateBusinessForProfile({
@@ -405,64 +476,10 @@ describe("profile - shared", () => {
             businessPersona: persona as BusinessPersona,
           }),
         });
-        renderPage({ business });
+        renderPage({ business, isAuthenticated: IsAuthenticated.TRUE });
         expect(
           screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
         ).toBeInTheDocument();
-      }
-    );
-
-    it("shows the Note Alert for OWNING businesses always", () => {
-      const business = generateBusinessForProfile({
-        formationData: generateFormationData({
-          completedFilingPayment: true,
-        }),
-        profileData: generateProfileData({
-          dateOfFormation: undefined,
-          businessPersona: "OWNING",
-        }),
-      });
-      renderPage({ business });
-      expect(
-        screen.getByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
-      ).toBeInTheDocument();
-    });
-
-    it.each(nonOwningPersonas)(
-      "does NOT show Note Alert for %s business that paid via the Navigator",
-      (persona) => {
-        const business = generateBusinessForProfile({
-          formationData: generateFormationData({
-            completedFilingPayment: true,
-          }),
-          profileData: generateProfileData({
-            dateOfFormation: "2020-8-8",
-            businessPersona: persona as BusinessPersona,
-          }),
-        });
-        renderPage({ business });
-        expect(
-          screen.queryByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
-        ).not.toBeInTheDocument();
-      }
-    );
-
-    it.each(nonOwningPersonas)(
-      "does NOT show Note Alert for %s business that have not paid and not formed",
-      (persona) => {
-        const business = generateBusinessForProfile({
-          formationData: generateFormationData({
-            completedFilingPayment: false,
-          }),
-          profileData: generateProfileData({
-            dateOfFormation: undefined,
-            businessPersona: persona as BusinessPersona,
-          }),
-        });
-        renderPage({ business });
-        expect(
-          screen.queryByText(Config.profileDefaults.default.noteForBusinessesFormedOutsideNavigator)
-        ).not.toBeInTheDocument();
       }
     );
   });
