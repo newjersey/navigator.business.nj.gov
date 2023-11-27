@@ -177,7 +177,9 @@ describe("onboarding - starting a business", () => {
     });
 
     const { page } = renderPage({ userData });
-    expect(page.getRadioButton("Business Status - Starting")).toBeChecked();
+    expect(
+      page.getRadioButton(Config.profileDefaults.fields.businessPersona.default.radioButtonStartingText)
+    ).toBeChecked();
 
     await page.visitStep(2);
     expect(page.getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);

@@ -165,7 +165,9 @@ describe("onboarding - owning a business", () => {
     });
 
     const { page } = renderPage({ userData: generateUserDataForBusiness(business) });
-    expect(page.getRadioButton("Business Status - Owning")).toBeChecked();
+    expect(
+      page.getRadioButton(Config.profileDefaults.fields.businessPersona.default.radioButtonOwningText)
+    ).toBeChecked();
     expect(page.getSectorIDValue()).toEqual("Clean Energy");
   });
 
@@ -194,7 +196,9 @@ describe("onboarding - owning a business", () => {
     });
 
     const { page } = renderPage({ userData: generateUserDataForBusiness(initialBusiness) });
-    expect(page.getRadioButton("Business Status - Owning")).toBeChecked();
+    expect(
+      page.getRadioButton(Config.profileDefaults.fields.businessPersona.default.radioButtonOwningText)
+    ).toBeChecked();
     page.clickNext();
     await waitFor(() => {
       expect(mockPush).toHaveBeenCalled();
