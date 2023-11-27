@@ -42,7 +42,7 @@ describe("DynamicsFireSafetyInspectionClient", () => {
     };
 
     mockAxios.get.mockResolvedValue({ data: fireSafetyInspectionMockResponse });
-    expect(await client.getFireSafetyInspections(mockAccessToken, searchAddress)).toEqual([
+    expect(await client.getFireSafetyInspectionsByAddress(mockAccessToken, searchAddress)).toEqual([
       {
         createdOn: "2023-05-31T10:31:51Z",
         inspectionFinished: true,
@@ -72,7 +72,7 @@ describe("DynamicsFireSafetyInspectionClient", () => {
     };
 
     mockAxios.get.mockResolvedValue({ data: fireSafetyInspectionMockResponse });
-    expect(await client.getFireSafetyInspections(mockAccessToken, searchAddress)).toEqual([]);
+    expect(await client.getFireSafetyInspectionsByAddress(mockAccessToken, searchAddress)).toEqual([]);
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${ORG_URL}/api/data/v9.2/ultra_fireinspections?$select=createdon,ultra_inspectionended,ultra_numberofopenviolations,ultra_streetaddress&$filter=(ultra_streetaddress eq '${searchAddress}')&$top=10`,
       {
