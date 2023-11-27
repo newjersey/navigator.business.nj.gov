@@ -78,7 +78,7 @@ const webserviceLicenseStatusProcessorClient = WebserviceLicenseStatusProcessorC
 
 const DYNAMICS_LICENSE_STATUS_URL = process.env.DYNAMICS_LICENSE_STATUS_URL || "";
 
-const dynamicsLicenseStatusAccessTokenClient = DynamicsAccessTokenClient(logger, {
+const dynamicsTokenClient = DynamicsAccessTokenClient(logger, {
   tenantId: process.env.DYNAMICS_LICENSE_STATUS_TENANT_ID || "",
   orgUrl: DYNAMICS_LICENSE_STATUS_URL,
   clientId: process.env.DYNAMICS_LICENSE_STATUS_CLIENT_ID || "",
@@ -91,7 +91,7 @@ const dynamicsApplicationIdClient = DynamicsLicenseApplicationIdClient(logger, D
 const dynamicsCheckListItemsClient = DynamicsChecklistItemsClient(logger, DYNAMICS_LICENSE_STATUS_URL);
 
 const dynamicsLicenseStatusClient = DynamicsLicenseStatusClient(logger, {
-  accessTokenClient: dynamicsLicenseStatusAccessTokenClient,
+  accessTokenClient: dynamicsTokenClient,
   businessIdClient: dynamicsBusinessIdClient,
   businessAddressClient: dynamicsAddressClient,
   licenseApplicationIdClient: dynamicsApplicationIdClient,
