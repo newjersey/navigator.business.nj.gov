@@ -668,33 +668,173 @@ describe("dashboard page", () => {
       }
     );
 
-    it.each(operatingPhasesWithQuickActions)(
-      "displays state-contracting-external-link quick action when industry id is not home-contractor for %s",
-      (phase) => {
-        useMockProfileData({ operatingPhase: phase, industryId: "some-value" });
-        renderDashboardPage({
-          quickActionLinks: [
-            generateQuickActionLink({
-              name: "some name",
-              filename: "state-contracting-external-link",
-              externalRoute: "some-external-route",
-            }),
-          ],
-        });
-        expect(screen.getByText("some name")).toBeInTheDocument();
-      }
-    );
+    describe("state-contracting-external-link", () => {
+      it.each(operatingPhasesWithQuickActions)(
+        "displays state-contracting-external-link quick action when business persona is oscar and sector id is not construction for %s",
+        (phase) => {
+          useMockProfileData({ operatingPhase: phase, sectorId: "some-value", businessPersona: "OWNING" });
+          renderDashboardPage({
+            quickActionLinks: [
+              generateQuickActionLink({
+                name: "some name",
+                filename: "state-contracting-external-link",
+                externalRoute: "some-external-route",
+              }),
+            ],
+          });
+          expect(screen.getByText("some name")).toBeInTheDocument();
+        }
+      );
 
-    it.each(operatingPhasesWithQuickActions)(
-      "does not display state-contracting-external-link quick action when industry id is home-contractor for %s",
-      (phase) => {
-        useMockProfileData({ operatingPhase: phase, industryId: "home-contractor" });
-        renderDashboardPage({
-          quickActionLinks: [generateQuickActionLink({ filename: "state-contracting-external-link" })],
-        });
-        expect(screen.queryByTestId("state-contracting-external-link")).not.toBeInTheDocument();
-      }
-    );
+      it.each(operatingPhasesWithQuickActions)(
+        "does not display state-contracting-external-link quick action when business persona is oscar and sector id is construction for %s",
+        (phase) => {
+          useMockProfileData({ operatingPhase: phase, sectorId: "construction", businessPersona: "OWNING" });
+          renderDashboardPage({
+            quickActionLinks: [
+              generateQuickActionLink({
+                name: "some name",
+                filename: "state-contracting-external-link",
+                externalRoute: "some-external-route",
+              }),
+            ],
+          });
+          expect(screen.queryByText("some name")).not.toBeInTheDocument();
+        }
+      );
+
+      it.each(operatingPhasesWithQuickActions)(
+        "displays state-contracting-external-link quick action when business persona is starting, industry id is not HIC and sector id is not construction for %s",
+        (phase) => {
+          useMockProfileData({
+            operatingPhase: phase,
+            sectorId: "some-value",
+            businessPersona: "STARTING",
+            industryId: "generic",
+          });
+          renderDashboardPage({
+            quickActionLinks: [
+              generateQuickActionLink({
+                name: "some name",
+                filename: "state-contracting-external-link",
+                externalRoute: "some-external-route",
+              }),
+            ],
+          });
+          expect(screen.getByText("some name")).toBeInTheDocument();
+        }
+      );
+
+      it.each(operatingPhasesWithQuickActions)(
+        "does not display state-contracting-external-link quick action when business persona is starting, industry id is HIC and sector id is not construction for %s",
+        (phase) => {
+          useMockProfileData({
+            operatingPhase: phase,
+            sectorId: "some-value",
+            businessPersona: "STARTING",
+            industryId: "home-contractor",
+          });
+          renderDashboardPage({
+            quickActionLinks: [
+              generateQuickActionLink({
+                name: "some name",
+                filename: "state-contracting-external-link",
+                externalRoute: "some-external-route",
+              }),
+            ],
+          });
+          expect(screen.queryByText("some name")).not.toBeInTheDocument();
+        }
+      );
+
+      it.each(operatingPhasesWithQuickActions)(
+        "does not display state-contracting-external-link quick action when business persona is poppy, industry id is not HIC and sector id is construction for %s",
+        (phase) => {
+          useMockProfileData({
+            operatingPhase: phase,
+            sectorId: "construction",
+            businessPersona: "STARTING",
+            industryId: "generic",
+          });
+          renderDashboardPage({
+            quickActionLinks: [
+              generateQuickActionLink({
+                name: "some name",
+                filename: "state-contracting-external-link",
+                externalRoute: "some-external-route",
+              }),
+            ],
+          });
+          expect(screen.queryByText("some name")).not.toBeInTheDocument();
+        }
+      );
+
+      it.each(operatingPhasesWithQuickActions)(
+        "displays state-contracting-external-link quick action when business persona is foreign, industry id is not HIC and sector id is not construction for %s",
+        (phase) => {
+          useMockProfileData({
+            operatingPhase: phase,
+            sectorId: "some-value",
+            businessPersona: "FOREIGN",
+            industryId: "generic",
+          });
+          renderDashboardPage({
+            quickActionLinks: [
+              generateQuickActionLink({
+                name: "some name",
+                filename: "state-contracting-external-link",
+                externalRoute: "some-external-route",
+              }),
+            ],
+          });
+          expect(screen.getByText("some name")).toBeInTheDocument();
+        }
+      );
+
+      it.each(operatingPhasesWithQuickActions)(
+        "does not display state-contracting-external-link quick action when business persona is foreign, industry id is HIC and sector id is not construction for %s",
+        (phase) => {
+          useMockProfileData({
+            operatingPhase: phase,
+            sectorId: "some-value",
+            businessPersona: "FOREIGN",
+            industryId: "home-contractor",
+          });
+          renderDashboardPage({
+            quickActionLinks: [
+              generateQuickActionLink({
+                name: "some name",
+                filename: "state-contracting-external-link",
+                externalRoute: "some-external-route",
+              }),
+            ],
+          });
+          expect(screen.queryByText("some name")).not.toBeInTheDocument();
+        }
+      );
+
+      it.each(operatingPhasesWithQuickActions)(
+        "does not display state-contracting-external-link quick action when business persona is foreign, industry id is not HIC and sector id is construction for %s",
+        (phase) => {
+          useMockProfileData({
+            operatingPhase: phase,
+            sectorId: "construction",
+            businessPersona: "FOREIGN",
+            industryId: "generic",
+          });
+          renderDashboardPage({
+            quickActionLinks: [
+              generateQuickActionLink({
+                name: "some name",
+                filename: "state-contracting-external-link",
+                externalRoute: "some-external-route",
+              }),
+            ],
+          });
+          expect(screen.queryByText("some name")).not.toBeInTheDocument();
+        }
+      );
+    });
   });
 
   it("displays step2 for guest mode user when business structure task is completed", () => {

@@ -20,6 +20,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useQueryControlledAlert } from "@/lib/data-hooks/useQueryControlledAlert";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { isConstructionSector } from "@/lib/domain-logic/isConstructionSector";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { isHomeContractorIndustry } from "@/lib/domain-logic/isHomeContractorIndustry";
 import { QUERIES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
@@ -168,9 +169,18 @@ const DashboardPage = (props: Props): ReactElement => {
   };
 
   const renderQuickActions = (): ReactElement => {
-    const renderQuickActions = [];
-    const isHomeContractor = isHomeContractorIndustry(business?.profileData.industryId);
+    const quickActionsArray = [];
+    let renderStateContractingExternalLink;
 
+    if (business?.profileData.businessPersona === "OWNING") {
+      renderStateContractingExternalLink = !isConstructionSector(business?.profileData.sectorId);
+    }
+
+    if (business?.profileData.businessPersona !== "OWNING") {
+      renderStateContractingExternalLink =
+        !isConstructionSector(business?.profileData.sectorId) &&
+        !isHomeContractorIndustry(business?.profileData.industryId);
+    }
     const registryUpdateBrcAmendmentQuickAction = props.quickActionTasks.find(
       (e) => e.filename === "registry-update-brc-amendment"
     );
@@ -180,7 +190,7 @@ const DashboardPage = (props: Props): ReactElement => {
     );
 
     if (registryUpdateBrcAmendmentQuickAction) {
-      renderQuickActions.push(
+      quickActionsArray.push(
         <QuickActionTaskTile
           quickAction={registryUpdateBrcAmendmentQuickAction}
           key={registryUpdateBrcAmendmentQuickAction.filename}
@@ -188,8 +198,8 @@ const DashboardPage = (props: Props): ReactElement => {
       );
     }
 
-    if (nonHicStateContractingQuickAction && !isHomeContractor) {
-      renderQuickActions.push(
+    if (nonHicStateContractingQuickAction && renderStateContractingExternalLink) {
+      quickActionsArray.push(
         <QuickActionLinkTile
           quickAction={nonHicStateContractingQuickAction}
           key={nonHicStateContractingQuickAction.filename}
@@ -199,7 +209,7 @@ const DashboardPage = (props: Props): ReactElement => {
 
     return (
       <div className={isDesktopAndUp ? "grid-row grid-gap" : ""} data-testid="quick-actions-section">
-        {renderQuickActions}
+        {quickActionsArray}
       </div>
     );
   };
