@@ -210,12 +210,6 @@ commands:
             echo 'export DYNAMICS_LICENSE_STATUS_SECRET=$DYNAMICS_LICENSE_STATUS_SECRET_DEV' >> $BASH_ENV
             echo 'export DYNAMICS_LICENSE_STATUS_TENANT_ID=$DYNAMICS_LICENSE_STATUS_TENANT_ID_DEV' >> $BASH_ENV
             echo 'export FEATURE_DYNAMICS_PUBLIC_MOVERS=$FEATURE_DYNAMICS_PUBLIC_MOVERS_DEV' >> $BASH_ENV
-            echo 'export DYNAMICS_FIRE_SAFETY_URL=$DYNAMICS_FIRE_SAFETY_URL_DEV' >> $BASH_ENV
-            echo 'export DYNAMICS_FIRE_SAFETY_CLIENT_ID=$DYNAMICS_FIRE_SAFETY_CLIENT_ID_DEV' >> $BASH_ENV
-            echo 'export DYNAMICS_FIRE_SAFETY_SECRET=$DYNAMICS_FIRE_SAFETY_SECRET_DEV' >> $BASH_ENV
-            echo 'export DYNAMICS_HOUSING_URL=$DYNAMICS_HOUSING_URL_DEV' >> $BASH_ENV
-            echo 'export DYNAMICS_HOUSING_CLIENT_ID=$DYNAMICS_HOUSING_CLIENT_ID_DEV' >> $BASH_ENV
-            echo 'export DYNAMICS_HOUSING_SECRET=$DYNAMICS_HOUSING_SECRET_DEV' >> $BASH_ENV
 
   set-cypress-env-vars:
     steps:
@@ -293,12 +287,6 @@ commands:
             echo 'export DYNAMICS_LICENSE_STATUS_SECRET=$DYNAMICS_LICENSE_STATUS_SECRET_STAGING' >> $BASH_ENV
             echo 'export DYNAMICS_LICENSE_STATUS_TENANT_ID=$DYNAMICS_LICENSE_STATUS_TENANT_ID_STAGING' >> $BASH_ENV
             echo 'export FEATURE_DYNAMICS_PUBLIC_MOVERS=$FEATURE_DYNAMICS_PUBLIC_MOVERS_STAGING' >> $BASH_ENV
-            echo 'export DYNAMICS_FIRE_SAFETY_URL=$DYNAMICS_FIRE_SAFETY_URL_STAGING' >> $BASH_ENV
-            echo 'export DYNAMICS_FIRE_SAFETY_CLIENT_ID=$DYNAMICS_FIRE_SAFETY_CLIENT_ID_STAGING' >> $BASH_ENV
-            echo 'export DYNAMICS_FIRE_SAFETY_SECRET=$DYNAMICS_FIRE_SAFETY_SECRET_STAGING' >> $BASH_ENV
-            echo 'export DYNAMICS_HOUSING_URL=$DYNAMICS_HOUSING_URL_STAGING' >> $BASH_ENV
-            echo 'export DYNAMICS_HOUSING_CLIENT_ID=$DYNAMICS_HOUSING_CLIENT_ID_STAGING' >> $BASH_ENV
-            echo 'export DYNAMICS_HOUSING_SECRET=$DYNAMICS_HOUSING_SECRET_STAGING' >> $BASH_ENV
 
   set-prod-env-vars:
     steps:
@@ -341,12 +329,6 @@ commands:
             echo 'export DYNAMICS_LICENSE_STATUS_SECRET=$DYNAMICS_LICENSE_STATUS_SECRET_PROD' >> $BASH_ENV
             echo 'export DYNAMICS_LICENSE_STATUS_TENANT_ID=$DYNAMICS_LICENSE_STATUS_TENANT_ID_PROD' >> $BASH_ENV
             echo 'export FEATURE_DYNAMICS_PUBLIC_MOVERS=$FEATURE_DYNAMICS_PUBLIC_MOVERS_PROD' >> $BASH_ENV
-            echo 'export DYNAMICS_FIRE_SAFETY_URL=$DYNAMICS_FIRE_SAFETY_URL_PROD' >> $BASH_ENV
-            echo 'export DYNAMICS_FIRE_SAFETY_CLIENT_ID=$DYNAMICS_FIRE_SAFETY_CLIENT_ID_PROD' >> $BASH_ENV
-            echo 'export DYNAMICS_FIRE_SAFETY_SECRET=$DYNAMICS_FIRE_SAFETY_SECRET_PROD' >> $BASH_ENV
-            echo 'export DYNAMICS_HOUSING_URL=$DYNAMICS_HOUSING_URL_PROD' >> $BASH_ENV
-            echo 'export DYNAMICS_HOUSING_CLIENT_ID=$DYNAMICS_HOUSING_CLIENT_ID_PROD' >> $BASH_ENV
-            echo 'export DYNAMICS_HOUSING_SECRET=$DYNAMICS_HOUSING_SECRET_PROD' >> $BASH_ENV
 
   set-content-env-vars:
     steps:
@@ -425,7 +407,7 @@ commands:
       - run:
           name: Install Edge
           command: |
-            if [[ << parameters.browser >> == 'edge' ]]; then
+            if [[ << parameters.browser >> == 'edge' ]]; then 
               curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
               sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
               sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
@@ -441,7 +423,7 @@ commands:
       - run:
           name: Install Firefox
           command: |
-            if [[ << parameters.browser >> == 'firefox' ]]; then
+            if [[ << parameters.browser >> == 'firefox' ]]; then 
               sudo apt install firefox
             fi
 
