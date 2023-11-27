@@ -4395,7 +4395,7 @@ __metadata:
     "@types/jest": 29.5.10
     "@types/jsonwebtoken": 9.0.5
     "@types/lodash": 4.14.202
-    "@types/node": 16.18.61
+    "@types/node": 16.18.65
     "@types/simple-oauth2": 5.0.7
     "@types/supertest": 2.0.16
     "@types/webpack-node-externals": 3.0.4
@@ -4454,7 +4454,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
-    "@types/node": 16.18.61
+    "@types/node": 16.18.65
     cross-env: 7.0.3
     cspell: 8.0.0
     prettier: 2.8.8
@@ -4537,7 +4537,7 @@ __metadata:
     "@types/jsonwebtoken": 9.0.5
     "@types/lodash": 4.14.202
     "@types/mdast": 4.0.3
-    "@types/node": 16.18.61
+    "@types/node": 16.18.65
     "@types/react": 18.2.37
     "@types/react-dom": 18.2.15
     "@types/react-slick": ^0.23.10
@@ -4670,7 +4670,7 @@ __metadata:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 29.6.3
     "@types/jest": 29.5.10
-    "@types/node": 16.18.61
+    "@types/node": 16.18.65
     "@types/uuid": 9.0.7
     "@typescript-eslint/eslint-plugin": 6.7.2
     "@typescript-eslint/parser": 6.7.2
@@ -4746,7 +4746,7 @@ __metadata:
     "@types/js-yaml": 4.0.9
     "@types/lodash": 4.14.202
     "@types/mdast": 4.0.3
-    "@types/node": 16.18.61
+    "@types/node": 16.18.65
     "@types/react": 18.2.37
     "@types/react-dom": 18.2.15
     "@types/react-slick": ^0.23.10
@@ -11353,10 +11353,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:16.18.61, @types/node@npm:^16.18.39":
-  version: 16.18.61
-  resolution: "@types/node@npm:16.18.61"
-  checksum: fdd162829eddc9b0b82a1ec485ba3876428ff3bd94c5869b13f4a36eb2aa9bddd22ea7e8ee3b2faa91a0f70ff08d8fd8d4be7dd0d143f8ee776907d6a1d2ed25
+"@types/node@npm:16.18.65, @types/node@npm:^16.18.39":
+  version: 16.18.65
+  resolution: "@types/node@npm:16.18.65"
+  checksum: c53cd5bfff0b6868c2735c7afb24008b23ce204ce090cc4fd1bbe0515de32f1088d401183ecb1a329ea69ab81591ca4935875d0744abb4bd60f4f85810d8446e
   languageName: node
   linkType: hard
 
