@@ -1,6 +1,5 @@
 import { fireSafetyRouterFactory } from "@api/fireSafetyRouter";
 import { formationRouterFactory } from "@api/formationRouter";
-import { housingRouterFactory } from "@api/housingRouter";
 import { licenseStatusRouterFactory } from "@api/licenseStatusRouter";
 import { selfRegRouterFactory } from "@api/selfRegRouter";
 import { taxDecryptionRouterFactory } from "@api/taxDecryptionRouter";
@@ -13,8 +12,6 @@ import { ApiFormationClient } from "@client/ApiFormationClient";
 import { DynamicsAccessTokenClient } from "@client/dynamics/DynamicsAccessTokenClient";
 import { DynamicsFireSafetyClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyClient";
 import { DynamicsFireSafetyInspectionClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyInspectionClient";
-import { DynamicsHousingClient } from "@client/dynamics/housing/DynamicsHousingClient";
-import { DynamicsHousingPropertyInterestClient } from "@client/dynamics/housing/DynamicsHousingPropertyInterestClient";
 import { DynamicsBusinessAddressClient } from "@client/dynamics/license-status/DynamicsBusinessAddressClient";
 import { DynamicsBusinessIdsClient } from "@client/dynamics/license-status/DynamicsBusinessIdsClient";
 import { DynamicsChecklistItemsClient } from "@client/dynamics/license-status/DynamicsChecklistItemsClient";
@@ -120,24 +117,6 @@ const dynamicsFireSafetyInspectionClient = DynamicsFireSafetyInspectionClient(
 const dynamicsFireSafetyClient = DynamicsFireSafetyClient(logger, {
   accessTokenClient: dynamicsFireSafetyAccessTokenClient,
   fireSafetyInspectionClient: dynamicsFireSafetyInspectionClient,
-});
-
-const DYNAMICS_HOUSING_URL = process.env.DYNAMICS_HOUSING_URL || "";
-
-const dynamicsHousingAccessTokenClient = DynamicsAccessTokenClient(logger, {
-  tenantId: process.env.DYNAMICS_HOUSING_TENANT_ID || "",
-  orgUrl: DYNAMICS_HOUSING_URL,
-  clientId: process.env.DYNAMICS_HOUSING_CLIENT_ID || "",
-  clientSecret: process.env.DYNAMICS_HOUSING_SECRET || "",
-});
-const dynamicsHousingPropertyInterestClient = DynamicsHousingPropertyInterestClient(
-  logger,
-  DYNAMICS_HOUSING_URL
-);
-
-const dynamicsHousingClient = DynamicsHousingClient(logger, {
-  accessTokenClient: dynamicsHousingAccessTokenClient,
-  housingPropertyInterestClient: dynamicsHousingPropertyInterestClient,
 });
 
 const BUSINESS_NAME_BASE_URL =
@@ -256,7 +235,6 @@ app.use(
 app.use("/api/guest", guestRouterFactory(timeStampToBusinessSearch));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus, userDataClient));
 app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient));
-app.use("/api", housingRouterFactory(dynamicsHousingClient));
 app.use("/api", selfRegRouterFactory(userDataClient, selfRegClient));
 app.use("/api", formationRouterFactory(apiFormationClient, userDataClient, { shouldSaveDocuments }));
 app.use(
