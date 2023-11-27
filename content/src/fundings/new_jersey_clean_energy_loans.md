@@ -5,10 +5,10 @@ urlSlug: nj-cels
 id: nj-cels
 openDate: ""
 dueDate: ""
-descriptionMd: New Jersey Clean Energy Loans (NJ CELs) will unlock capital for
-  small businesses, catalyze the deployment of clean energy in New Jersey, and
-  support Minority-, Woman-, and Veteran-owned businesses to participate in the
-  State’s energy transition.
+descriptionMd: New Jersey Clean Energy Loans (NJ CELs) will provide capital for
+  small businesses, encourage clean energy in New Jersey, and support Minority-,
+  Woman-, and Veteran-owned businesses to participate in the State’s energy
+  transition.
 callToActionLink: https://www.njeda.gov/njcels/
 callToActionText: Learn more
 fundingType: loan
@@ -32,7 +32,7 @@ county:
 sector: []
 publishStageArchive: ""
 ---
-New Jersey Clean Energy Loans (NJ CELs) will unlock capital for small businesses, catalyze the deployment of clean energy in New Jersey, and support Minority-, Woman-, and Veteran-owned businesses to participate in the State’s energy transition.
+New Jersey Clean Energy Loans (NJ CELs) will provide capital for small businesses, encourage clean energy in New Jersey, and support Minority-, Woman-, and Veteran-owned businesses to participate in the State’s energy transition.
 
 - - -
 
@@ -45,7 +45,7 @@ New Jersey Clean Energy Loans (NJ CELs) will unlock capital for small businesses
 * Be economically feasible  
 * Be requesting a loan of $500,000 to $20M for the project in total (NJEDA and private financing)  
 * Be requesting 50% or less of the total loan amount from the NJEDA ($250,000-$10M) 
-* Have a term sheet, letter of intent, draft agreement, commitment letter, or similar document from an eligible financial institution. 
+* Have a term sheet, letter of intent, draft agreement, commitment letter, or similar document from an eligible financial institution
 * Not be enrolled in any other state State Small Business Credit Initiative (SSBCI) program 
 
 > **Benefits**
