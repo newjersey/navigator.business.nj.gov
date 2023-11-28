@@ -12,7 +12,7 @@ export const TaskProgressTagLookup: Record<TaskProgress, ReactElement> = {
     </Tag>
   ),
   IN_PROGRESS: (
-    <Tag backgroundColor="accent-cool-lighter" dataTestid="IN_PROGRESS" isFixedWidth>
+    <Tag backgroundColor="accent-cool-lighter-lighttext" dataTestid="IN_PROGRESS" isFixedWidth>
       {Config.taskProgress.IN_PROGRESS}
     </Tag>
   ),

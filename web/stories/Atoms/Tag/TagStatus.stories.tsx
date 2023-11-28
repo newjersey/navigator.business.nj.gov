@@ -20,7 +20,7 @@ const defaultArgs = { children: "Tag Component Text" };
 export const InProgress: Story = {
   args: {
     ...defaultArgs,
-    backgroundColor: "accent-cool-lighter",
+    backgroundColor: "accent-cool-lighter-lighttext",
   },
 };
 
