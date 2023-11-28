@@ -7,6 +7,8 @@ import { ReverseOrderInMobile } from "@/components/njwds-layout/ReverseOrderInMo
 import {
   getQuickActionTaskObj,
   GovernmentContractingSteps,
+  shouldDisplayContinueButton,
+  shouldDisplayPreviousButton,
 } from "@/components/tasks/government-contracting/GovernmentContractingSteps";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { QuickActionTask } from "@/lib/types/types";
@@ -75,14 +77,6 @@ export const GovernmentContractorPaginator = (): ReactElement => {
     );
   };
 
-  const shouldDisplayPreviousButton = (stepIndex: number): boolean => {
-    return stepIndex !== 0;
-  };
-
-  const shouldDisplayContinueButton = (stepIndex: number): boolean => {
-    return stepIndex !== GovernmentContractingSteps.length - 1;
-  };
-
   const stepStates = GovernmentContractingSteps.map((value) => {
     return {
       name: value.name,
@@ -106,8 +100,8 @@ export const GovernmentContractorPaginator = (): ReactElement => {
             <Content>{quickActionTask?.contentMd ?? ""}</Content>
             {quickActionTask?.callToActionLink ? (
               <SingleCtaLink
-                link={quickActionTask?.callToActionLink}
-                text={quickActionTask?.callToActionText}
+                link={quickActionTask.callToActionLink}
+                text={quickActionTask?.callToActionText ?? ""}
                 buttonColor={"outline"}
                 noBackgroundColor={true}
                 alignLeft={true}

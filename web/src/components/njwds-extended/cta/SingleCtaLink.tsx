@@ -15,18 +15,18 @@ interface Props {
   alignLeft?: boolean;
 }
 
-export const SingleCtaLink = ({ props }: Props): ReactElement => {
+export const SingleCtaLink = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   return (
-    <CtaContainer noBackgroundColor={props?.noBackgroundColor}>
-      <ActionBarLayout alignLeft={props?.alignLeft}>
+    <CtaContainer noBackgroundColor={props?.noBackgroundColor || false}>
+      <ActionBarLayout alignLeft={props?.alignLeft || false}>
         <PrimaryButton
           isColor={props?.buttonColor || "primary"}
           isRightMarginRemoved={true}
           onClick={(): void => {
             analytics.event.task_primary_call_to_action.click.open_external_website(
-              props.text || Config.taskDefaults.defaultCallToActionText,
+              props?.text || Config.taskDefaults.defaultCallToActionText,
               props.link as string
             );
             openInNewTab(props.link);

@@ -20,3 +20,11 @@ export const GovernmentContractingSteps: {
 export const getQuickActionTaskObj = async (stepIndex: number): Promise<QuickActionTask> => {
   return await fetchQuickActionByFilename(GovernmentContractingSteps[stepIndex].fileName);
 };
+
+export const shouldDisplayPreviousButton = (stepIndex: number): boolean => {
+  return stepIndex !== 0;
+};
+
+export const shouldDisplayContinueButton = (stepIndex: number): boolean => {
+  return stepIndex !== GovernmentContractingSteps.length - 1;
+};
