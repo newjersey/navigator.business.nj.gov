@@ -7,6 +7,7 @@ export type PrimaryButtonColors =
   | "accent-cool-darker"
   | "accent-cooler"
   | "info"
+  | "outline"
   | "success-extra-light"
   | "white";
 
@@ -27,6 +28,7 @@ const colors = {
   info: "usa-button btn-info",
   "success-extra-light": "usa-button btn-success-extra-light",
   white: "usa-button text-info-darkest btn-white hover:drop-shadow-md",
+  outline: "usa-button usa-button--outline",
 };
 
 export const PrimaryButton = forwardRef(function PrimaryButton(

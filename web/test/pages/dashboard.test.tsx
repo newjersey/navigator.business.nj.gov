@@ -835,6 +835,179 @@ describe("dashboard page", () => {
         }
       );
     });
+
+    describe("government-contracting", () => {
+      it.each(operatingPhasesWithQuickActions)(
+        "displays quick action when business persona is starting and industry id is home-contractor for %s",
+        (phase) => {
+          useMockProfileData({
+            operatingPhase: phase,
+            sectorId: "",
+            businessPersona: "STARTING",
+            industryId: "home-contractor",
+          });
+          renderDashboardPage({
+            quickActionTask: [
+              generateQuickActionTask({
+                name: "some name",
+                filename: "government-contracting",
+              }),
+            ],
+          });
+          expect(screen.getByText("some name")).toBeInTheDocument();
+        }
+      );
+
+      it.each(operatingPhasesWithQuickActions)(
+        "displays quick action when business persona is starting and industry id is generic and sector id is construction for %s",
+        (phase) => {
+          useMockProfileData({
+            operatingPhase: phase,
+            sectorId: "construction",
+            businessPersona: "STARTING",
+            industryId: "generic",
+          });
+          renderDashboardPage({
+            quickActionTask: [
+              generateQuickActionTask({
+                name: "some name",
+                filename: "government-contracting",
+              }),
+            ],
+          });
+          expect(screen.getByText("some name")).toBeInTheDocument();
+        }
+      );
+
+      it.each(operatingPhasesWithQuickActions)(
+        "does not display quick action when business persona is starting and industry id is not generic and sector id is construction for %s",
+        (phase) => {
+          useMockProfileData({
+            operatingPhase: phase,
+            sectorId: "construction",
+            businessPersona: "STARTING",
+            industryId: "some industry",
+          });
+          renderDashboardPage({
+            quickActionTask: [
+              generateQuickActionTask({
+                name: "some name",
+                filename: "government-contracting",
+              }),
+            ],
+          });
+          expect(screen.queryByText("some name")).not.toBeInTheDocument();
+        }
+      );
+
+      it.each(operatingPhasesWithQuickActions)(
+        "displays quick action when business persona is owning and sector id is construction for %s",
+        (phase) => {
+          useMockProfileData({
+            operatingPhase: phase,
+            sectorId: "construction",
+            businessPersona: "OWNING",
+            industryId: "",
+          });
+          renderDashboardPage({
+            quickActionTask: [
+              generateQuickActionTask({
+                name: "some name",
+                filename: "government-contracting",
+              }),
+            ],
+          });
+          expect(screen.getByText("some name")).toBeInTheDocument();
+        }
+      );
+
+      it.each(operatingPhasesWithQuickActions)(
+        "does not display quick action when business persona is owning and sector id is not construction for %s",
+        (phase) => {
+          useMockProfileData({
+            operatingPhase: phase,
+            sectorId: "some sector",
+            businessPersona: "OWNING",
+            industryId: "",
+          });
+          renderDashboardPage({
+            quickActionTask: [
+              generateQuickActionTask({
+                name: "some name",
+                filename: "government-contracting",
+              }),
+            ],
+          });
+          expect(screen.queryByText("some name")).not.toBeInTheDocument();
+        }
+      );
+
+      it.each(operatingPhasesWithQuickActions)(
+        "displays quick action when business persona is foreign nexus, industry id is generic and sector id is construction for %s",
+        (phase) => {
+          useMockProfileData({
+            operatingPhase: phase,
+            sectorId: "construction",
+            businessPersona: "FOREIGN",
+            foreignBusinessTypeIds: ["officeInNJ"],
+            industryId: "generic",
+          });
+          renderDashboardPage({
+            quickActionTask: [
+              generateQuickActionTask({
+                name: "some name",
+                filename: "government-contracting",
+              }),
+            ],
+          });
+          expect(screen.getByText("some name")).toBeInTheDocument();
+        }
+      );
+
+      it.each(operatingPhasesWithQuickActions)(
+        "displays quick action when business persona is foreign nexus and industry id is home-contractor for %s",
+        (phase) => {
+          useMockProfileData({
+            operatingPhase: phase,
+            sectorId: "",
+            businessPersona: "FOREIGN",
+            foreignBusinessTypeIds: ["officeInNJ"],
+            industryId: "home-contractor",
+          });
+          renderDashboardPage({
+            quickActionTask: [
+              generateQuickActionTask({
+                name: "some name",
+                filename: "government-contracting",
+              }),
+            ],
+          });
+          expect(screen.getByText("some name")).toBeInTheDocument();
+        }
+      );
+
+      it.each(operatingPhasesWithQuickActions)(
+        "does not display quick action when business persona is foreign nexus, industry id is not generic and sector id is construction for %s",
+        (phase) => {
+          useMockProfileData({
+            operatingPhase: phase,
+            sectorId: "construction",
+            businessPersona: "FOREIGN",
+            foreignBusinessTypeIds: ["officeInNJ"],
+            industryId: "some-id",
+          });
+          renderDashboardPage({
+            quickActionTask: [
+              generateQuickActionTask({
+                name: "some name",
+                filename: "government-contracting",
+              }),
+            ],
+          });
+          expect(screen.queryByText("some name")).not.toBeInTheDocument();
+        }
+      );
+    });
   });
 
   it("displays step2 for guest mode user when business structure task is completed", () => {
