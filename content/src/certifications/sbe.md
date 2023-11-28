@@ -1,7 +1,6 @@
 ---
 descriptionMd: Having a Small Business Enterprise (SBE) certificate may give you
-  an advantage with [government
-  contracts](https://business.nj.gov/pages/government-contracting).
+  an advantage with government contracts.
 urlSlug: sbe
 name: Get My Small Business Enterprise Certification
 id: sbe
