@@ -1,7 +1,7 @@
 ---
-displayname: healthcare-license
 urlSlug: healthcare-license
 filename: healthcare-license
+displayname: healthcare-license
 name: Ensure Your Staff is Licensed
 id: healthcare-license
 callToActionLink: https://newjersey.mylicense.com/verification/Search.aspx?facility=N
@@ -13,7 +13,7 @@ All healthcare providers in your medical facility need to be licensed medical pr
 
 ---
 
-### Licensing Requirements
+### Licensing Requirements by Role
 
 - [Medical Examiners](https://www.njconsumeraffairs.gov/bme/Pages/applications.aspx)
 - [Midwives](https://www.njconsumeraffairs.gov/mid/Pages/default.aspx)
