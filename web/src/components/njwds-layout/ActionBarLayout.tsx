@@ -4,12 +4,13 @@ import { ReactElement, ReactNode } from "react";
 interface Props {
   children: ReactNode;
   stackOnLeft?: ReactNode;
+  alignLeft?: boolean;
 }
 export const ActionBarLayout = (props: Props): ReactElement => {
   return (
     <div
       className={`mobile-lg:display-flex ${
-        props.stackOnLeft ? "mobile-lg:flex-justify" : "mobile-lg:flex-justify-end"
+        props.stackOnLeft || props.alignLeft ? "mobile-lg:flex-justify" : "mobile-lg:flex-justify-end"
       } `}
     >
       {props.stackOnLeft && (

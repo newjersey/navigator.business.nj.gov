@@ -3744,6 +3744,8 @@ collections:
               - { label: Form Label, name: formNameText, widget: string }
               - { label: Edit Text, name: editText, widget: string }
               - { label: Remove Text, name: removeText, widget: string }
+              - { label: Back, name: backButtonText, widget: string }
+              - { label: Continue Text, name: continueButtonText, widget: string }
           - label: Task - Business Name Search
             name: searchBusinessNameTask
             collapsed: true

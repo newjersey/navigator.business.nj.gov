@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/filename-case */
 import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
-import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { PrimaryButton, PrimaryButtonColors } from "@/components/njwds-extended/PrimaryButton";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
@@ -9,27 +9,30 @@ import { ReactElement } from "react";
 
 interface Props {
   link: string;
-  text: string;
+  text?: string;
+  buttonColor?: PrimaryButtonColors;
+  noBackgroundColor?: boolean;
+  alignLeft?: boolean;
 }
 
-export const SingleCtaLink = ({ link, text }: Props): ReactElement => {
+export const SingleCtaLink = ({ props }: Props): ReactElement => {
   const { Config } = useConfig();
 
   return (
-    <CtaContainer>
-      <ActionBarLayout>
+    <CtaContainer noBackgroundColor={props?.noBackgroundColor}>
+      <ActionBarLayout alignLeft={props?.alignLeft}>
         <PrimaryButton
-          isColor="primary"
+          isColor={props?.buttonColor || "primary"}
           isRightMarginRemoved={true}
           onClick={(): void => {
             analytics.event.task_primary_call_to_action.click.open_external_website(
-              text || Config.taskDefaults.defaultCallToActionText,
-              link as string
+              props.text || Config.taskDefaults.defaultCallToActionText,
+              props.link as string
             );
-            openInNewTab(link);
+            openInNewTab(props.link);
           }}
         >
-          {text || Config.taskDefaults.defaultCallToActionText}
+          {props?.text || Config.taskDefaults.defaultCallToActionText}
         </PrimaryButton>
       </ActionBarLayout>
     </CtaContainer>
