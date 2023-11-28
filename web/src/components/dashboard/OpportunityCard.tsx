@@ -30,16 +30,12 @@ export const OpportunityCard = (props: Props): ReactElement => {
 
   const TYPE_TO_LABEL: Record<"funding" | "certification", ReactElement> = {
     funding: (
-      <Tag
-        isLowerCase={true}
-        className={"border-accent-semi-cool-500 border"}
-        backgroundColor="accent-semi-cool-light"
-      >
+      <Tag isLowerCase={true} backgroundColor="accent-semi-cool-light">
         {capitalizeEachWord(Config.dashboardDefaults.fundingTagText)}
       </Tag>
     ),
     certification: (
-      <Tag isLowerCase={true} className={"border-accent-cool border"} backgroundColor="accent-cool-lighter">
+      <Tag isLowerCase={true} backgroundColor="accent-cool-lighter-border-darktext">
         {capitalizeEachWord(Config.dashboardDefaults.certificationTagText)}
       </Tag>
     ),

@@ -15,12 +15,12 @@ const meta: Meta<typeof Tag> = {
 export default meta;
 type Story = StoryObj<typeof Tag>;
 
-const defaultArgs = { children: "Tag Component Text" };
+const defaultArgs = { children: "Tag Component Text", isLowerCase: true };
 
 export const Certification: Story = {
   args: {
     ...defaultArgs,
-    backgroundColor: "accent-cool-light",
+    backgroundColor: "accent-cool-lighter-border-darktext",
   },
 };
 

@@ -3,7 +3,8 @@ import { ReactElement } from "react";
 export type BgColors =
   | "primary-lightest"
   | "base-lighter"
-  | "accent-cool-lighter"
+  | "accent-cool-lighter-border-darktext"
+  | "accent-cool-lighter-lighttext"
   | "accent-warm-lighter"
   | "white"
   | "accent-cooler-lightest"
@@ -13,7 +14,6 @@ export type BgColors =
 
 interface Props {
   backgroundColor: BgColors;
-  className?: string;
   children: React.ReactNode;
   dataTestid?: string;
   isFixedWidth?: boolean;
@@ -34,26 +34,29 @@ export const Tag = (props: Props): ReactElement => {
     case "base-lighter":
       styling = "bg-base-lighter text-base-dark";
       break;
-    case "accent-cool-lighter":
-      styling = "bg-accent-cool-lighter text-base-darkest";
+    case "accent-cool-lighter-border-darktext":
+      styling = "bg-accent-cool-lighter text-base-darkest border border-accent-cool";
+      break;
+    case "accent-cool-lighter-lighttext":
+      styling = "bg-accent-cool-lighter text-base-darkest text-accent-cool-darker";
       break;
     case "accent-warm-lighter":
       styling = "bg-accent-warm-lighter text-accent-warm-darker";
       break;
     case "white":
-      styling = "bg-white text-base-dark border";
+      styling = "bg-white text-base border";
       break;
     case "accent-cool-light":
       styling = "bg-white text-base-darkest bg-accent-cool-light";
       break;
     case "accent-semi-cool-light":
-      styling = "bg-white text-base-darkest bg-accent-semi-cool-light";
+      styling = "bg-white text-base-darkest bg-accent-semi-cool-light border border-accent-semi-cool-500";
       break;
     case "accent-warm-extra-light":
       styling = "bg-accent-warm-extra-light text-base-dark";
       break;
     case "accent-cooler-lightest":
-      styling = "bg-accent-cooler-lightest text-base-darkest border border-accent-cooler-light";
+      styling = "bg-accent-cooler-lightest text-base-darkest border border-accent-cooler-200";
       break;
   }
 
@@ -78,15 +81,14 @@ export const Tag = (props: Props): ReactElement => {
     fixedWidth,
     disableUppercase,
     radius,
-    props.className,
-  ]
-    .map((i) => {
-      return i?.trim();
-    })
-    .filter((value: string | undefined) => {
-      return value && value.length > 0;
-    })
-    .join(" ");
+  ].reduce((accumulator, current) => {
+    if (current.length === 0) {
+      return accumulator;
+    } else if (accumulator.length === 0) {
+      return current.trim();
+    }
+    return [accumulator, current.trim()].join(" ");
+  }, "");
 
   return (
     <span className={className} {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}>
