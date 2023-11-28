@@ -21,7 +21,7 @@ You will only see the option to renew online 60 days prior to your expiration da
 - Current mailing address
 - Current business address
 - Professional liability insurance in a minimum amount of $1M per occurrence and $3M aggregate per policy year
-- Pay the associated fees for the registration renewal
+- Applicable fees paid for the registration renewal
 
 > **Once completed, you will have:**
 >
