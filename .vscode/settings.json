@@ -3,6 +3,13 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "editor.tabSize": 4
+  },
   "cSpell.enabled": false,
   "cSpell.words": ["businessnjgovnavigator"],
   "editor.codeActionsOnSave": ["source.organizeImports", "source.formatDocument", "source.fixAll.eslint"],
