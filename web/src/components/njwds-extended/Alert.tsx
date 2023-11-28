@@ -1,3 +1,4 @@
+import { Heading } from "@/components/njwds-extended/Heading";
 import { ReactElement, ReactNode } from "react";
 
 export interface AlertProps {
@@ -36,7 +37,11 @@ export const Alert = (props: Props): ReactElement => {
   return (
     <div className={className} {...alertRole} {...(dataTestid ? { "data-testid": dataTestid } : {})}>
       <div className="usa-alert__body">
-        {heading && <h3 className="margin-bottom-0">{heading}</h3>}
+        {heading && (
+          <Heading level={3} className="margin-bottom-0">
+            {heading}
+          </Heading>
+        )}
         <div className="usa-alert__text">{children}</div>
       </div>
     </div>

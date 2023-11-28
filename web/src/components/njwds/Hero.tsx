@@ -1,4 +1,5 @@
 import { LandingPageTiles } from "@/components/LandingPageTiles";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ROUTES } from "@/lib/domain-logic/routes";
@@ -91,9 +92,9 @@ export const Hero = (props: Props): ReactElement => {
                 }`}
               >
                 <div className="border-top-1 border-primary" />
-                <h2 className="h1-styling margin-y-4 desktop:margin-y-3">
+                <Heading level={2} styleVariant="h1" className="margin-y-4 desktop:margin-y-3">
                   {landingPageConfig.section2HeaderText}
-                </h2>
+                </Heading>
                 <div className="font-sans-lg line-height-120 text-base-dark margin-bottom-4 desktop:margin-bottom-3">
                   {landingPageConfig.section2SupportingText}
                 </div>
@@ -127,9 +128,9 @@ export const Hero = (props: Props): ReactElement => {
               }`}
             >
               <div className="border-top-1 border-accent-cool-darker"></div>
-              <h2 className="h1-styling margin-y-4 desktop:margin-y-3">
+              <Heading level={2} styleVariant="h1" className="margin-y-4 desktop:margin-y-3">
                 {landingPageConfig.section3HeaderText}
-              </h2>
+              </Heading>
               <div className="font-sans-lg line-height-120 text-base-dark margin-bottom-4 desktop:margin-bottom-3">
                 {landingPageConfig.section3SupportingText}
               </div>

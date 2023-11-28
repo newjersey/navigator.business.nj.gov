@@ -4,6 +4,7 @@ import { EmptyCalendar } from "@/components/filings-calendar/EmptyCalendar";
 import { FilingsCalendarAsList } from "@/components/filings-calendar/FilingsCalendarAsList";
 import { FilingsCalendarGrid } from "@/components/filings-calendar/FilingsCalendarGrid";
 import { FilingsCalendarTaxAccess } from "@/components/filings-calendar/FilingsCalendarTaxAccess";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ThreeYearSelector } from "@/components/njwds-extended/ThreeYearSelector";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
@@ -130,7 +131,9 @@ export const FilingsCalendar = (props: Props): ReactElement => {
       <div className="calendar-container" data-testid="filings-calendar">
         <div className="flex mobile-lg:flex-align-end flex-justify flex-column mobile-lg:flex-row">
           <div className="flex flex-align-end">
-            <h2 className="margin-bottom-0 text-medium">{Config.dashboardDefaults.calendarHeader}</h2>
+            <Heading level={2} className="margin-bottom-0 text-medium">
+              {Config.dashboardDefaults.calendarHeader}
+            </Heading>
             <div className="margin-top-05 margin-left-1 margin-bottom-05">
               <ArrowTooltip title={Config.dashboardDefaults.calendarTooltip}>
                 <div className="fdr fac font-body-lg text-green" data-testid="calendar-tooltip">

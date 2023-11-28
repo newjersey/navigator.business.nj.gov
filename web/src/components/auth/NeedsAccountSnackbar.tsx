@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthContext } from "@/contexts/authContext";
@@ -64,7 +65,9 @@ export const NeedsAccountSnackbar = (): ReactElement => {
           <></>
         )}
         <div>
-          <h3 className="padding-right-2">{getTitle()}</h3>
+          <Heading level={3} className="padding-right-2">
+            {getTitle()}
+          </Heading>
           <IconButton
             aria-label="close"
             onClick={handleClose}

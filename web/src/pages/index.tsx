@@ -1,5 +1,6 @@
 import { LegalMessage } from "@/components/LegalMessage";
 import { NavBar } from "@/components/navbar/NavBar";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { Hero } from "@/components/njwds/Hero";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { SupportExploreSignUpChatCards } from "@/components/SupportExploreSignUpChatCards";
@@ -114,17 +115,25 @@ const Home = (props: Props): ReactElement => {
             {isDesktopAndUp ? (
               <>
                 <div className="landing-feature-text">
-                  <h2 className="h1-styling text-base-darkest margin-bottom-4 desktop:margin-bottom-3">
+                  <Heading
+                    level={2}
+                    styleVariant="h1"
+                    className="text-base-darkest margin-bottom-4 desktop:margin-bottom-3"
+                  >
                     {headingText}
-                  </h2>
+                  </Heading>
                   <div className="text-base-dark">{supportingText}</div>
                 </div>
               </>
             ) : (
               <>
-                <h2 className="h1-styling text-base-darkest margin-right-2 margin-left-2 margin-top-10">
+                <Heading
+                  level={2}
+                  styleVariant="h1"
+                  className="text-base-darkest margin-right-2 margin-left-2 margin-top-10"
+                >
                   {headingText}
-                </h2>
+                </Heading>
                 <img src={imageSrc} alt={imageAlt} />
               </>
             )}
@@ -156,9 +165,13 @@ const Home = (props: Props): ReactElement => {
           <Hero isWelcomePage={props.isWelcomePage} />
           <section ref={sectionHowItWorks} aria-label={landingPageConfig.section4HeaderText}>
             <div className="minh-mobile margin-top-2 desktop:margin-top-neg-205  padding-bottom-6 text-center bg-base-extra-light">
-              <h2 className="text-accent-cool-darker h1-styling margin-bottom-6 padding-top-6">
+              <Heading
+                level={2}
+                styleVariant="h1"
+                className="text-accent-cool-darker margin-bottom-6 padding-top-6"
+              >
                 {landingPageConfig.section4HeaderText}
-              </h2>
+              </Heading>
               <div
                 className={`flex ${
                   isDesktopAndUp ? "flex-row flex-justify-center" : "flex-column flex-align-center"
@@ -225,9 +238,12 @@ const Home = (props: Props): ReactElement => {
           >
             <div className="bg-base-extra-light padding-x-2 desktop:padding-x-0 desktop:padding-bottom-10">
               <div className="desktop:grid-container-widescreen flex flex-column flex-align-center">
-                <h2 className="base-darkest margin-top-7 text-center margin-bottom-5 desktop:margin-top-10 desktop:margin-bottom-8">
+                <Heading
+                  level={2}
+                  className="base-darkest margin-top-7 text-center margin-bottom-5 desktop:margin-top-10 desktop:margin-bottom-8"
+                >
                   {landingPageConfig.section6Header}
-                </h2>
+                </Heading>
 
                 <SupportExploreSignUpChatCards />
                 <div className="green-divider-center width-10 desktop:width-mobile margin-top-2 desktop:margin-top-10"></div>

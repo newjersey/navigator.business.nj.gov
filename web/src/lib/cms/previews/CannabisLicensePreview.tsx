@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
@@ -31,10 +32,12 @@ const CannabisLicensePreview = (props: PreviewProps): ReactElement => {
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         {tab === "1" && (
           <>
-            <h2>No Priority Status Selected</h2>
+            <Heading level={2}>No Priority Status Selected</Heading>
             <Content>{config.cannabisApplyForLicense.priorityStatusNoneSelectedText}</Content>
             <hr className="margin-y-5" />
-            <h2 className="margin-bottom-5">Priority Status Selected</h2>
+            <Heading level={2} className="margin-bottom-5">
+              Priority Status Selected
+            </Heading>
           </>
         )}
         <CannabisApplyForLicenseTask

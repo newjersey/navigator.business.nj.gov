@@ -1,3 +1,4 @@
+import { Heading } from "@/components/njwds-extended/Heading";
 import { ReactElement, ReactNode } from "react";
 
 interface Props {
@@ -15,7 +16,7 @@ export const ReviewSubSection = (props: Props): ReactElement => {
         className={`flex space-between ${props.marginOverride ?? "margin-top-4"}`}
       >
         <div className={"maxw-mobile-lg"}>
-          <h3>{props.header}</h3>
+          <Heading level={3}>{props.header}</Heading>
         </div>
       </div>
       {props.children}

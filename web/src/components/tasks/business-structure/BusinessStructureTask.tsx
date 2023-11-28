@@ -1,6 +1,7 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
@@ -155,7 +156,9 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
       )}
       {business && !showRadioQuestion && (
         <>
-          <h3>{Config.businessStructureTask.completedHeader}</h3>
+          <Heading level={2} styleVariant="h3">
+            {Config.businessStructureTask.completedHeader}
+          </Heading>
           <Alert variant="success">
             <div className={`flex ${isLargeScreen ? "flex-row" : "flex-column"}`} data-testid="success-alert">
               <Content>

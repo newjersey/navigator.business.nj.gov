@@ -1,3 +1,4 @@
+import { Heading } from "@/components/njwds-extended/Heading";
 import { FormationRadio } from "@/components/tasks/business-formation/business/FormationRadio";
 import { FormationTextArea } from "@/components/tasks/business-formation/business/FormationTextArea";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -43,9 +44,9 @@ export const PartnershipRights = (): ReactElement => {
   return (
     <>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
-        <div role="heading" aria-level={2} className="h3-styling margin-bottom-0">
+        <Heading level={2} styleVariant="h3" className="margin-bottom-0">
           {Config.formation.partnershipRights.label}
-        </div>
+        </Heading>
       </div>
 
       {getRadio("canCreateLimitedPartner", Config.formation.fields.canCreateLimitedPartner.body)}

@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Icon } from "@/components/njwds/Icon";
@@ -40,9 +41,9 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
                 aria-controls={`${Config.cannabisApplyForLicense.generalApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
               >
-                <div role="heading" aria-level={2} className="h3-styling margin-y-3-override">
+                <Heading level={2} styleVariant="h3" className="margin-y-3-override">
                   {Config.cannabisApplyForLicense.generalApplicationNeeds}
-                </div>
+                </Heading>
               </AccordionSummary>
               <AccordionDetails>
                 <div data-testid="annualGeneralRequirements">
@@ -59,9 +60,9 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
                 aria-controls={`${Config.cannabisApplyForLicense.generalApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
               >
-                <div role="heading" aria-level={2} className="h3-styling margin-y-3-override">
+                <Heading level={2} styleVariant="h3" className="margin-y-3-override">
                   {Config.cannabisApplyForLicense.generalApplicationNeeds}
-                </div>
+                </Heading>
               </AccordionSummary>
               <AccordionDetails>
                 <div data-testid="conditionalGeneralRequirements">
@@ -79,9 +80,9 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
                 aria-controls={`${Config.cannabisApplyForLicense.microbusinessApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
               >
-                <div role="heading" aria-level={2} className="h3-styling margin-y-3-override">
+                <Heading level={2} styleVariant="h3" className="margin-y-3-override">
                   {Config.cannabisApplyForLicense.microbusinessApplicationNeeds}
-                </div>
+                </Heading>
               </AccordionSummary>
               <AccordionDetails>
                 <div data-testid="microbusinessRequirements">
@@ -99,9 +100,9 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
                 aria-controls={`${Config.cannabisApplyForLicense.priorityStatusApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
               >
-                <div role="heading" aria-level={2} className="h3-styling margin-y-3-override">
+                <Heading level={2} styleVariant="h3" className="margin-y-3-override">
                   {Config.cannabisApplyForLicense.priorityStatusApplicationNeeds}
-                </div>
+                </Heading>
               </AccordionSummary>
               <AccordionDetails>
                 {props.priorityStatusState.diverselyOwned && (

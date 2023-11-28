@@ -1,3 +1,4 @@
+import { Heading } from "@/components/njwds-extended/Heading";
 import { Meta, StoryObj } from "@storybook/react";
 
 const Template = () => {
@@ -5,7 +6,9 @@ const Template = () => {
   const renderColor = (variable: string) => (
     <div className="bg-white width-mobile-lg height-mobile-lg ">
       <div className="grid-row margin-y-6" key={variable}>
-        <div className="h1-styling ">Shadow ({variable})</div>
+        <Heading level={2} styleVariant="h1">
+          Shadow ({variable})
+        </Heading>
         <div
           className={`drop-shadow-${variable} margin-left-5 width-mobile height-15 bg-success-extra-light`}
         />
@@ -15,7 +18,9 @@ const Template = () => {
 
   return (
     <div className="grid-container">
-      <div className="h1-styling-large margin-y-4">Drop Shadows</div>
+      <Heading level={1} styleVariant="h1Large" className="margin-y-4">
+        Drop Shadows
+      </Heading>
       {shadows.map((shadow) => renderColor(shadow))}
     </div>
   );

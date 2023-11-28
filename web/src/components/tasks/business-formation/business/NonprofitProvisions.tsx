@@ -1,3 +1,4 @@
+import { Heading } from "@/components/njwds-extended/Heading";
 import { FormationRadio } from "@/components/tasks/business-formation/business/FormationRadio";
 import { FormationTextArea } from "@/components/tasks/business-formation/business/FormationTextArea";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -77,9 +78,9 @@ export const NonprofitProvisions = (): ReactElement => {
   return (
     <>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
-        <div role="heading" aria-level={2} className="h3-styling margin-0-override">
+        <Heading level={2} styleVariant="h3" className="margin-0-override">
           {Config.formation.nonprofitProvisions.label}
-        </div>
+        </Heading>
       </div>
 
       <FormationRadio

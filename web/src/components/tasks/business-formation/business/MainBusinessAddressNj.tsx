@@ -2,6 +2,7 @@ import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { Content } from "@/components/Content";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { StateDropdown } from "@/components/StateDropdown";
 import { FormationMunicipality } from "@/components/tasks/business-formation/business/FormationMunicipality";
@@ -49,10 +50,10 @@ export const MainBusinessAddressNj = (): ReactElement => {
         data-testid={"main-business-address-container-header"}
         className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2"
       >
-        <div role="heading" aria-level={2} className="h3-styling margin-0-override">
+        <Heading level={2} styleVariant="h3" className="margin-0-override">
           {Config.formation.sections.addressHeader}{" "}
           <span className="text-normal font-body-lg">{Config.formation.general.optionalLabel}</span>
-        </div>
+        </Heading>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
             <div data-testid={"add-address-button"}>

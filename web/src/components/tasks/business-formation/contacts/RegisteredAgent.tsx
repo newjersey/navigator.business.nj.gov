@@ -1,6 +1,7 @@
 import { Content } from "@/components/Content";
 import { MunicipalityDropdown } from "@/components/data-fields/MunicipalityDropdown";
 import { ModifiedContent } from "@/components/ModifiedContent";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { FormationField } from "@/components/tasks/business-formation/FormationField";
@@ -132,7 +133,7 @@ export const RegisteredAgent = (): ReactElement => {
 
   return (
     <>
-      <h3>{Config.formation.registeredAgent.label}</h3>
+      <Heading level={3}>{Config.formation.registeredAgent.label}</Heading>
       <Content>{Config.formation.registeredAgent.sectionDescription}</Content>
       <div id="registeredAgent">
         <FormControl fullWidth>

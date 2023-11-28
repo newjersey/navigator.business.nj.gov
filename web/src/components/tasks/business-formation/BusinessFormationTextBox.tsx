@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
@@ -45,7 +46,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
   return (
     <>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
-        <h2 className="h3-styling margin-0-override">
+        <Heading level={2} styleVariant="h3" className="margin-0-override">
           {props.title}{" "}
           {props.required ? (
             <></>
@@ -54,7 +55,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
               {props.optionalLabel ?? Config.formation.general.optionalLabel}
             </span>
           )}
-        </h2>
+        </Heading>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
             <UnStyledButton

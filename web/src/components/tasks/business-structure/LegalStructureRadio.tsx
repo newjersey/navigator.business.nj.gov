@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -74,7 +75,9 @@ export const LegalStructureRadio = (props: Props): ReactElement => {
           </Alert>
         </div>
       )}
-      <h3>{Config.businessStructureTask.radioQuestionHeader}</h3>
+      <Heading level={2} styleVariant="h3">
+        {Config.businessStructureTask.radioQuestionHeader}
+      </Heading>
       <WithErrorBar hasError={isFormFieldInvalid} type="ALWAYS">
         <div className="margin-top-3">
           <FormControl variant="outlined" fullWidth>

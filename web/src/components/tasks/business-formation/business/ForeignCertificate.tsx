@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { FileInput } from "@/components/njwds-extended/FileInput";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { FormControl } from "@mui/material";
@@ -17,11 +18,15 @@ export const ForeignCertificate = (props: Props): ReactElement => {
   return (
     <>
       <FormControl variant="outlined" fullWidth className="padding-bottom-1">
-        <h3 data-testid="foreign-certificate-of-good-standing-header" className="margin-0-override">
+        <Heading
+          level={3}
+          data-testid="foreign-certificate-of-good-standing-header"
+          className="margin-0-override"
+        >
           <Content className="h3-styling margin-0-override">
             {Config.formation.fields.foreignGoodStandingFile.contextualLabel}
           </Content>
-        </h3>
+        </Heading>
         <FileInput
           acceptedFileTypes={{
             errorMessage: Config.formation.fields.foreignGoodStandingFile.errorMessageFileType,

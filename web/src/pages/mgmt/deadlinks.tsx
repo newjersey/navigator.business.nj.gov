@@ -1,4 +1,5 @@
 import { MgmtAuth } from "@/components/auth/MgmtAuth";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { findDeadContextualInfo, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
@@ -20,13 +21,15 @@ const DeadLinksPage = (props: Props): ReactElement => {
   const authedView = (
     <>
       <h1>Dead Content</h1>
-      <h2 data-testid="dl-task-header">Tasks not referenced in any roadmap:</h2>
+      <Heading level={2} data-testid="dl-task-header">
+        Tasks not referenced in any roadmap:
+      </Heading>
       <ul>
         {props.deadTasks.map((task, i) => {
           return <li key={i}>{task}</li>;
         })}
       </ul>
-      <h2>Contextual infos not referenced anywhere:</h2>
+      <Heading level={2}>Contextual infos not referenced anywhere:</Heading>
       <ul>
         {props.deadContextualInfo.map((info, i) => {
           return <li key={i}>{info}</li>;

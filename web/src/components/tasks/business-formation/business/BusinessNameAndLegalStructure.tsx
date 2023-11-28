@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { ContextualInfoButton } from "@/components/ContextualInfoButton";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { ModifiedContent } from "@/components/ModifiedContent";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { ReviewNotEntered } from "@/components/tasks/business-formation/review/section/ReviewNotEntered";
@@ -82,7 +83,9 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
     <>
       <div className="flex space-between margin-bottom-2 flex-align-center">
         <div className="maxw-mobile-lg ">
-          <h2 className="h3-styling">{Config.formation.sections.businessNameAndStructureHeader}</h2>
+          <Heading level={2} styleVariant="h3">
+            {Config.formation.sections.businessNameAndStructureHeader}
+          </Heading>
         </div>
       </div>
 

@@ -1,6 +1,7 @@
 import { Content, ExternalLink } from "@/components/Content";
 import { FieldLabelProfile } from "@/components/field-labels/FieldLabelProfile";
 import { GenericTextField } from "@/components/GenericTextField";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { getMergedConfig } from "@/contexts/configContext";
@@ -145,7 +146,9 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
 
   return (
     <>
-      <h2 className="text-normal">{Config.determineNaicsCode.findCodeHeader}</h2>
+      <Heading level={2} className="text-normal">
+        {Config.determineNaicsCode.findCodeHeader}
+      </Heading>
       {industryCodes.length > 0 && (
         <>
           <Content>{Config.determineNaicsCode.suggestedCodeBodyText}</Content>
