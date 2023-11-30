@@ -1,18 +1,22 @@
 ---
 filename: Growing Apprenticeship in Nontraditional Sectors
-urlSlug: gains
 name: Growing Apprenticeship in Nontraditional Sectors
+urlSlug: gains
 id: gains
+openDate: 09/19/2022
+dueDate: 10/28/2022
+descriptionMd: The Growing Apprenticeship in Nontraditional Sectors (GAINS)
+  program aims to promote the expansion and development of USDOL-approved
+  Registered Apprenticeship programs.
 callToActionLink: https://www.nj.gov/labor/research-info/grants.shtml
 callToActionText: Learn more
 fundingType: grant
+programFrequency: reoccuring
+status: deadline
 programPurpose: Both
 agency:
   - njdol
 agencyContact: james.manning@dol.nj.gov
-publishStageArchive: null
-status: deadline
-programFrequency: reoccuring
 businessStage: both
 employeesRequired: yes
 homeBased: no
@@ -21,9 +25,7 @@ preferenceForOpportunityZone: no
 county:
   - All
 sector: []
-openDate: 09/19/2022
-dueDate: 10/28/2022
-descriptionMd: The Growing Apprenticeship in Nontraditional Sectors (GAINS) program aims to promote the expansion and development of [USDOL-approved Registered Apprenticeship](https://www.apprenticeship.gov/employers/registered-apprenticeship-program) programs.
+publishStageArchive: null
 ---
 
 The Growing Apprenticeship in Nontraditional Sectors (GAINS) program aims to promote the expansion and development of [USDOL-approved Registered Apprenticeship](https://www.apprenticeship.gov/employers/registered-apprenticeship-program) programs.

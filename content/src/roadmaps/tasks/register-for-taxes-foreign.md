@@ -1,7 +1,7 @@
 ---
-displayname: register-for-taxes-foreign
 urlSlug: register-for-taxes
 filename: register-for-taxes-foreign
+displayname: register-for-taxes-foreign
 name: Register Your Business for Tax and/or Employer Purposes
 id: register-for-taxes
 callToActionLink: ""
@@ -47,7 +47,7 @@ ${taxInputComponent}
 > - `Business Registration Certificate (BRC)|business-reg-certificate`
 > - `NJ Tax ID|tax-id`
 > - `Business Tax PIN|tax-pin`
-> - Authorization to Collect Sales Tax Certificate (if applicable)
+> - `Certificate of Authority for Sales Tax|certificate-authority-sales-tax` (if applicable)
 
 :::infoAlert
 If you registered online, you will receive an email confirmation where you can download your BRC. It may take up to 72 hours before you can download your BRC on a public site. Your PIN may take longer to receive because it is sent through the mail.

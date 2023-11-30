@@ -1,9 +1,8 @@
 ---
 descriptionMd: While New Jersey state government does not give special
-  consideration to vendors that hold `Minority|minority` or `Women|women` -Owned
-  Business Enterprise (M/WBE) certificates, some State licenses, municipal or
-  federal contracts do give special consideration. Learn more about [government
-  contracts](https://business.nj.gov/pages/government-contracting).
+  consideration to vendors that hold Minority- or Women-Owned Business
+  Enterprise (M/WBE) certificates, some State licenses, municipal or federal
+  contracts do give special consideration.
 urlSlug: mwbe
 name: Obtain a Minority/Women-Owned Business
 id: mwbe

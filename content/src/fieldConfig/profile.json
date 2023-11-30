@@ -281,7 +281,7 @@
       "documents": {
         "default": {
           "header": "",
-          "placeholder": "If you are an LLC, Corporation, or LLP, we will automatically add your formation documents once you [Form Your Business](/tasks/form-business-entity) on our site."
+          "placeholder": "If you are an LLC, Corporation, nonprofit, LP, or LLP, we will automatically add your formation documents once you [Form Your Business](/tasks/form-business-entity) on our site."
         }
       },
       "isNonprofitOnboardingRadio": {
@@ -384,14 +384,14 @@
       "errorTextBody": "Review your information in the fields marked below.",
       "escapeModalHeader": "Are you sure you want to continue?",
       "profileTabNoteTitle": "Notes",
+      "noteForBusinessesFormedOutsideNavigator": "Your profile helps us recommend requirements and opportunities unique to your business. It does not submit your information for registration purposes.",
       "saveButtonText": "Save",
       "escapeModalReturn": "Continue without saving",
       "successTextHeader": "Business Profile Saved",
       "profileErrorAlert": "Complete ${fieldText} to access your dashboard:",
+      "cannabisLocationAlert": "Check if your local government allows a cannabis license.",
       "certificationDocFileTitle": "Certified Copy of Formation",
-      "profileTabInfoTitle": "Business Information",
-      "noteForBusinessesFormedOutsideNavigator": "Your profile helps us recommend requirements and opportunities unique to your business. It does not submit your information for registration purposes.",
-      "cannabisLocationAlert": "Check if your local government allows a cannabis license."
+      "profileTabInfoTitle": "Business Information"
     }
   }
 }

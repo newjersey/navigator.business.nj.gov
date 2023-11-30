@@ -1,8 +1,7 @@
 ---
-descriptionMd: A Disadvantaged Business Enterprise (DBE) certification may
+descriptionMd: "A Disadvantaged Business Enterprise (DBE) certification may
   provide an advantage for New Jersey Department of Transportation's (NJDOT)
-  contracts. *Learn more about [government
-  contracts](https://business.nj.gov/pages/government-contracting).*
+  contracts. "
 urlSlug: dbe
 name: Obtain a Disadvantaged Business Enterprise
 id: dbe
