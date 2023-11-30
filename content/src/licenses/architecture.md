@@ -1,4 +1,7 @@
 ---
+notesMd: "Draft:
+  https://docs.google.com/document/d/1iYheqxgwQKOocjMybAszFBFF2py2HgnRktPGa1Zpl\
+  yY/edit"
 urlSlug: architecture
 previewType: renewal
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
