@@ -7,11 +7,7 @@ previewType: expiration
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 callToActionText: Renew My HIC Registration
 ---
-You must renew your registration before March 31 of this year.
-
-- - -
-
-### Application Requirements
+### Renewal Requirements
 
 * License number
 * Registration code from your renewal notice (sent to you in the mail at least two weeks prior to your expiration date)
