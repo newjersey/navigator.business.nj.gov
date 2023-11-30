@@ -3,7 +3,7 @@ filename: Pace Apprenticeship in Career Education
 name: Pace Apprenticeship in Career Education
 urlSlug: pace-apprentice
 id: pace
-openDate: 11/01/2022
+openDate: ""
 dueDate: ""
 descriptionMd: The Pre-Apprenticeship in Career Education (PACE) program aims to
   better align secondary, post-secondary, adult education, and occupational
