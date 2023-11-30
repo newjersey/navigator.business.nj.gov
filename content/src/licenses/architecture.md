@@ -10,7 +10,7 @@ callToActionText: Renew My Architect License
 ### Renewal Requirements
 - Certificate of completion for continuing education
 - License number
-- Registration code
+- Registration code from your renewal notice (sent to you in the mail at least two weeks prior to your expiration date)
 - Social Security number (SSN)
 - Applicable fees paid
 
