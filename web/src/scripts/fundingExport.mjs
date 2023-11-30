@@ -35,25 +35,22 @@ const loadFundingByFileName = (fileName) => {
 
 export const exportFundings = () => {
   const fundings = loadAllFundings();
-  const writeStream = fs.createWriteStream("fundings.csv");
-  writeStream.write(
-    `id,name,filename,urlSlug,callToActionLink,callToActionText,fundingType,programPurpose,agency,agencyContact,publishStageArchive,openDate,dueDate,status,programFrequency,businessStage,employeesRequired,homeBased,certifications,preferenceForOpportunityZone,county,sector,contentMd\n`
-  );
+  let csvContent = `id,name,filename,urlSlug,callToActionLink,callToActionText,fundingType,programPurpose,agency,agencyContact,publishStageArchive,openDate,dueDate,status,programFrequency,businessStage,employeesRequired,homeBased,certifications,preferenceForOpportunityZone,county,sector,contentMd\n`;
+
   for (const funding of fundings) {
-    writeStream.write(
-      `"${funding.id}","${funding.name}","${funding.filename}","${funding.urlSlug}","${
-        funding.callToActionLink
-      }","${funding.callToActionText}","${funding.fundingType}","${funding.programPurpose}","${
-        funding.agency
-      }","${funding.agencyContact}","${funding.publishStageArchive}","${funding.openDate}","${
-        funding.dueDate
-      }","${funding.status}","${funding.programFrequency}","${funding.businessStage}","${
-        funding.employeesRequired
-      }","${funding.homeBased}","${funding.certifications}","${funding.preferenceForOpportunityZone}","${
-        funding.county
-      }","${funding.sector}","${funding.contentMd.trim()}"\n`
-    );
+    csvContent += `"${funding.id}","${funding.name}","${funding.filename}","${funding.urlSlug}","${
+      funding.callToActionLink
+    }","${funding.callToActionText}","${funding.fundingType}","${funding.programPurpose}","${
+      funding.agency
+    }","${funding.agencyContact}","${funding.publishStageArchive}","${funding.openDate}","${
+      funding.dueDate
+    }","${funding.status}","${funding.programFrequency}","${funding.businessStage}","${
+      funding.employeesRequired
+    }","${funding.homeBased}","${funding.certifications}","${funding.preferenceForOpportunityZone}","${
+      funding.county
+    }","${funding.sector}","${funding.contentMd.trim()}"\n`;
   }
+  fs.writeFileSync("fundings.csv", csvContent);
 };
 
 // eslint-disable-next-line no-undef
