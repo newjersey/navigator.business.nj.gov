@@ -3,7 +3,7 @@ notesMd: "Draft:
   https://docs.google.com/document/d/1zaZpaifJyX8bE7S-y-iEt8Zn_ssZHw4zIi_4QgjU5\
   RE/edit"
 urlSlug: home-contractor
-previewType: expiration
+previewType: renewal
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 callToActionText: Renew My HIC Registration
 ---
