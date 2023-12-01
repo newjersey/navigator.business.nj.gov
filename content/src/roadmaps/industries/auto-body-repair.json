@@ -63,5 +63,6 @@
   "name": "Auto-Body Repair",
   "additionalSearchTerms": "car,auto body shop,auto shop,car center,auto center",
   "id": "auto-body-repair",
-  "description": "A facility for the repair and restoration of vehicles"
+  "description": "A facility for the repair and restoration of vehicles",
+  "webflowId": "656a13624544e5127379fdf2"
 }

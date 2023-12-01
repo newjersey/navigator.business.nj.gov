@@ -57,5 +57,6 @@
   "isEnabled": true,
   "additionalSearchTerms": "acupuncturist, spa, alternative medicine",
   "id": "acupuncture",
-  "description": "Traditional Chinese medicine involving the insertion of needles into the body"
+  "description": "Traditional Chinese medicine involving the insertion of needles into the body",
+  "webflowId": "656a136266a0b2c046a17462"
 }

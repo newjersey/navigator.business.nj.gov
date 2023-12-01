@@ -64,5 +64,6 @@
   "name": "Restaurant",
   "additionalSearchTerms": "cafe, grill",
   "id": "restaurant",
-  "description": "Provides food to patrons"
+  "description": "Provides food to patrons",
+  "webflowId": "656a1362e1f1359c3c90e9eb"
 }

@@ -757,6 +757,21 @@ jobs:
             yarn workspace @businessnjgovnavigator/content build
             yarn workspace @businessnjgovnavigator/web webflow:licenses-ci-sync
 
+  sync-industries:
+    docker:
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-18_18_2
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
+    steps:
+      - bootstrap-code
+      - run:
+          name: Node Industry Sync
+          command: |
+            echo 'export WEBFLOW_API_TOKEN=$WEBFLOW_API_TOKEN' >> $BASH_ENV
+            yarn workspace @businessnjgovnavigator/content build
+            yarn workspace @businessnjgovnavigator/web webflow:industries-ci-sync
+
 parameters:
   run_workflow_builder:
     default: false
@@ -797,6 +812,10 @@ workflows:
           name: webflow-licenses-sync
           requires:
             - production-deploy
+      - sync-industries:
+          name: webflow-industries-sync
+          requires:
+            - production-deploy
 
   webflow-fundings-sync:
     jobs:
@@ -813,6 +832,14 @@ workflows:
             branches:
               only:
                 - /^webflow-licenses-sync-.*/
+
+  webflow-industries-sync:
+    jobs:
+      - sync-industries:
+          filters:
+            branches:
+              only:
+                - /^webflow-industries-sync-.*/
 
   build-and-test:
     jobs:
@@ -836,6 +863,7 @@ workflows:
                 - /^cms/.*/
                 - /^webflow-fundings-sync-.*/
                 - /^webflow-licenses-sync-.*/
+                - /^webflow-industries-sync-.*/
                 - /^new-docker-image$/
       - lint:
           name: Lint
@@ -847,6 +875,7 @@ workflows:
                 - /^cms/.*/
                 - /^webflow-fundings-sync-.*/
                 - /^webflow-licenses-sync-.*/
+                - /^webflow-industries-sync-.*/
           requires:
             - build
       - test:
@@ -859,6 +888,7 @@ workflows:
                 - /^cms/.*/
                 - /^webflow-fundings-sync-.*/
                 - /^webflow-licenses-sync-.*/
+                - /^webflow-industries-sync-.*/
           requires:
             - build
       - integration-tests:
@@ -874,6 +904,7 @@ workflows:
                 - /^cms/.*/
                 - /^webflow-fundings-sync-.*/
                 - /^webflow-licenses-sync-.*/
+                - /^webflow-industries-sync-.*/
           requires:
             - build
       - integration-tests:
@@ -889,6 +920,7 @@ workflows:
                 - /^cms/.*/
                 - /^webflow-fundings-sync-.*/
                 - /^webflow-licenses-sync-.*/
+                - /^webflow-industries-sync-.*/
           requires:
             - build
       - integration-tests:
@@ -904,6 +936,7 @@ workflows:
                 - /^cms/.*/
                 - /^webflow-fundings-sync-.*/
                 - /^webflow-licenses-sync-.*/
+                - /^webflow-industries-sync-.*/
           requires:
             - build
       - integration-tests:
@@ -919,6 +952,7 @@ workflows:
                 - /^cms/.*/
                 - /^webflow-fundings-sync-.*/
                 - /^webflow-licenses-sync-.*/
+                - /^webflow-industries-sync-.*/
           requires:
             - build
       - integration-tests:
@@ -934,6 +968,7 @@ workflows:
                 - /^cms/.*/
                 - /^webflow-fundings-sync-.*/
                 - /^webflow-licenses-sync-.*/
+                - /^webflow-industries-sync-.*/
           requires:
             - build
       - integration-tests:

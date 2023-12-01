@@ -58,5 +58,6 @@
   "isEnabled": true,
   "additionalSearchTerms": "attorney, law office, legal consulting, legal services, legal advice, legal consulting",
   "id": "law-firm",
-  "description": "Offers professional legal services"
+  "description": "Offers professional legal services",
+  "webflowId": "656a13621af61e584bd4e074"
 }
