@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body,
@@ -346,4 +347,8 @@ ol {
 
 .text-no-underline-override {
   text-decoration: none;
+}
+
+.add-spacing-on-ele-scroll {
+  scroll-margin-top: 100px;
 }

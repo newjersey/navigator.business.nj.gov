@@ -1,10 +1,18 @@
 import { FieldEntryAlert } from "@/components/FieldEntryAlert";
 import { AlertVariants } from "@/components/njwds-extended/Alert";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 
 describe("<FieldEntryAlert/>", () => {
   const alertMessage = `This is my alert message ${randomInt()}`;
+
+  beforeEach(() => {
+    jest.resetAllMocks();
+    useMockRouter({});
+  });
 
   it("renders when fields are provided", () => {
     render(
@@ -78,5 +86,24 @@ describe("<FieldEntryAlert/>", () => {
       expect(within(item).getByText(field.label)).toBeInTheDocument();
       expect(within(item).getByRole("link")).toHaveAttribute("href", `#question-${field.name}`);
     }
+  });
+
+  it("calls shallow routing to asPath value", async () => {
+    useMockRouter({ asPath: "welcome/2" });
+    render(
+      <FieldEntryAlert
+        alertMessage={alertMessage}
+        alertProps={{
+          variant: "error",
+        }}
+        fields={[{ name: "field-name", label: "Field Name" }]}
+      />
+    );
+
+    fireEvent.click(screen.getByText("Field Name"));
+
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalledWith("welcome/2", undefined, { shallow: true });
+    });
   });
 });
