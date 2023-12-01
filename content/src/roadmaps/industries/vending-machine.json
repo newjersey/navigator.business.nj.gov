@@ -57,5 +57,6 @@
   "isEnabled": true,
   "additionalSearchTerms": "vending machine service, vending machine business, snack machine, vending machine operator",
   "id": "vending-machine",
-  "description": "Offers small items for purchase through an automated machine"
+  "description": "Offers small items for purchase through an automated machine",
+  "webflowId": "656a1362b4c9c3096676539c"
 }

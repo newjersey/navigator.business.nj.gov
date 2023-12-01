@@ -62,5 +62,6 @@
   "isEnabled": true,
   "additionalSearchTerms": "logistics, shipping, freight moving",
   "id": "freight-forwarding",
-  "description": "Organizes the transportation of goods from a warehouse to its final destination"
+  "description": "Organizes the transportation of goods from a warehouse to its final destination",
+  "webflowId": "656a13623df6c55c9cca76d4"
 }

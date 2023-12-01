@@ -53,5 +53,6 @@
   "name": "Event Planning",
   "additionalSearchTerms": "planner, organizer, coordinator, party planner",
   "id": "event-planning",
-  "description": "Offers coordination services for different types of events"
+  "description": "Offers coordination services for different types of events",
+  "webflowId": "656a13620578cfd34294c820"
 }

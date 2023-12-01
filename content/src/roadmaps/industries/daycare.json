@@ -53,5 +53,6 @@
   "isEnabled": true,
   "additionalSearchTerms": "daycare, childcare, after school program",
   "id": "daycare",
-  "description": "Provides daycare services for 6 or more children in a dedicated space"
+  "description": "Provides daycare services for 6 or more children in a dedicated space",
+  "webflowId": "656a1362065390a761c33567"
 }

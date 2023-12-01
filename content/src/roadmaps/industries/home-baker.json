@@ -59,5 +59,6 @@
   "isEnabled": true,
   "additionalSearchTerms": "cottage foods",
   "id": "home-baker",
-  "description": "Sells baked goods prepared at the baker's home."
+  "description": "Sells baked goods prepared at the baker's home.",
+  "webflowId": "656a1363059ec5def0e98fd9"
 }

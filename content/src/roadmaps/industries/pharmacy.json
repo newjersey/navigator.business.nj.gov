@@ -62,5 +62,6 @@
   "additionalSearchTerms": "pharmaceutics, drugstore, apothecary, chemist medicine",
   "id": "pharmacy",
   "licenseType": "Pharmacy",
-  "description": "A business that prepares and dispenses prescriptions and medicine"
+  "description": "A business that prepares and dispenses prescriptions and medicine",
+  "webflowId": "656a1363a68882853497486e"
 }

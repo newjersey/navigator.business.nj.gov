@@ -60,5 +60,6 @@
   "isEnabled": false,
   "additionalSearchTerms": "electrician",
   "id": "electrical-contractor",
-  "description": "Offers professional services related to electrical work."
+  "description": "Offers professional services related to electrical work.",
+  "webflowId": "656a1363297de0dd0051e8df"
 }
