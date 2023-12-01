@@ -297,7 +297,7 @@ export const Signatures = (): ReactElement => {
             </strong>
           </div>
         )}
-        <FormationField fieldName="signer">
+        <FormationField fieldName="signers">
           <GenericTextField
             inputWidth="full"
             value={state.formationFormData.signers[index].name}
