@@ -14,7 +14,7 @@ You need to submit a reinstatement application if:
  If your license has been expired for over five years, then you need to re-apply for your architect license.
 :::
 
-\### Application Requirements
+### Application Requirements
 
 * Continuing education credits
 * Social Security number (SSN)
@@ -29,8 +29,11 @@ You need to submit a reinstatement application if:
 * A criminal background check, if applicable
 * List of licenses or certificates, past and present, if applicable
 
+
+  :
+
   :::greenBox 
-   **Once completed, you will have:**
+   **Once completed, you will have**:
 
   * The same license number
   :::
