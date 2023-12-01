@@ -3,7 +3,7 @@ filename: authorization-certificate-reintatement
 name: Apply to Reinstate Your Application for a Certificate of Authorization
 icon: loop.svg
 urlSlug: authorization-certificate-reintatement
-callToActionText: " Apply to Reinstate My Application for a Certificate of Authorization "
+callToActionText: " Reinstate My Application for a Certificate of Authorization "
 callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
 ---
 You need to reinstate your certificate of authorization if you did not renew it or you put it in inactive status.
