@@ -1,4 +1,5 @@
 import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarEvents";
+import { randomIntFromInterval } from "@businessnjgovnavigator/shared";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
 import { generateLicenseData } from "@businessnjgovnavigator/shared/test";
@@ -41,12 +42,16 @@ describe("getLicenseCalendarEvent", () => {
   });
 
   it("returns an array containing renewal event when within the month after expiration", () => {
-    const tenthOfMonthDate = dayjs({ year: currentDate.year(), month: currentDate.month(), day: 10 });
+    const validMonthFromJanToNov = randomIntFromInterval("0", "10");
+    const nextMonth = validMonthFromJanToNov + 1;
+
+    const tenthOfMonthDate = dayjs({ year: currentDate.year(), month: validMonthFromJanToNov, day: 10 });
+
     expect(
       getLicenseCalendarEvents(
         generateLicenseData({ expirationISO: tenthOfMonthDate.toISOString() }),
         currentDate.year(),
-        currentDate.add(1, "month").month()
+        nextMonth
       )
     ).toEqual([
       {
