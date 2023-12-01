@@ -10,10 +10,8 @@ You need to submit a reinstatement application if:
 
 *  Your architecture license has been expired for five years or less
 
-:::infoAlert
-
-If your license has been expired for over five years, then you need to re-apply for your architect license.
-
+:::infoAlert 
+ If your license has been expired for over five years, then you need to re-apply for your architect license.
 :::
 
 \### Application Requirements
@@ -31,7 +29,8 @@ If your license has been expired for over five years, then you need to re-apply 
 * A criminal background check, if applicable
 * List of licenses or certificates, past and present, if applicable
 
-  \
-> \*\*Once completed, you will have\*\*: \
->   - The same license number\
->
+  :::greenBox 
+   **Once completed, you will have:**
+
+  * The same license number
+  :::
