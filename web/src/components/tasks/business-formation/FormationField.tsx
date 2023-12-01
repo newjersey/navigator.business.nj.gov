@@ -5,5 +5,9 @@ interface Props {
 }
 
 export const FormationField = (props: React.PropsWithChildren<Props>): ReactElement => {
-  return <div id={`question-${props.fieldName}`}>{props.children}</div>;
+  return (
+    <div id={`question-${props.fieldName}`} className="add-spacing-on-ele-scroll">
+      {props.children}
+    </div>
+  );
 };

@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { Alert, AlertProps } from "@/components/njwds-extended/Alert";
+import { useRouter } from "next/router";
 import { ReactElement, ReactNode } from "react";
 
 interface Props {
@@ -13,6 +14,14 @@ interface Props {
 }
 
 export const FieldEntryAlert = (props: Props): ReactElement => {
+  const router = useRouter();
+
+  const onAnchorClick = (): void => {
+    setTimeout(() => {
+      router.push(router.asPath, undefined, { shallow: true });
+    });
+  };
+
   if (props.fields.length === 0) return <></>;
 
   return (
@@ -21,7 +30,9 @@ export const FieldEntryAlert = (props: Props): ReactElement => {
       <ul>
         {props.fields.map((field) => (
           <li key={field.name} data-testid={`question-${field.name}-alert-text`}>
-            <a href={`#question-${field.name}`}>{field.label}</a>
+            <a href={`#question-${field.name}`} onClick={(): void => onAnchorClick()}>
+              {field.label}
+            </a>
             {field.children}
           </li>
         ))}
