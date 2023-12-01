@@ -1,6 +1,6 @@
 {
   "name": "@businessnjgovnavigator/root",
-  "version": "5.40.0",
+  "version": "5.41.0",
   "description": "This is the development repository for the work-in-progress business navigator from the New Jersey Office of Innovation. For info on the existing [Business.NJ.gov](https://business.nj.gov) site, please see the [bottom of this document](https://github.com/newjersey/navigator.business.nj.gov#businessnjgov)",
   "main": "index.js",
   "private": true,
@@ -148,7 +148,7 @@
     "@types/jsonwebtoken": "9.0.5",
     "@types/lodash": "4.14.202",
     "@types/node": "16.18.65",
-    "@types/react": "18.2.39",
+    "@types/react": "18.2.38",
     "@types/react-dom": "18.2.17",
     "@types/react-slick": "^0.23.10",
     "@types/react-swipeable-views": "0.13.5",

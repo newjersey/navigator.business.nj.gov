@@ -1,3 +1,40 @@
+# [5.41.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.40.0...v5.41.0) (2023-12-01)
+
+
+### Bug Fixes
+
+* [[#186478423](https://github.com/newjersey/navigator.business.nj.gov/issues/186478423)] fix header white colors on sidebar card ([5d603ac](https://github.com/newjersey/navigator.business.nj.gov/commit/5d603acde7f788d440a4ae516105876cdceb5527))
+* [[#186537095](https://github.com/newjersey/navigator.business.nj.gov/issues/186537095)] fix side bar card title to white ([b7958e7](https://github.com/newjersey/navigator.business.nj.gov/commit/b7958e7e7a3889e34ee2b58fda13855c7a411122))
+* [[#186561090](https://github.com/newjersey/navigator.business.nj.gov/issues/186561090)] Govt Contracting quick action showing for construction sector id ([ee39001](https://github.com/newjersey/navigator.business.nj.gov/commit/ee39001ac153684bf8cb640040cb38d8398c032a))
+* **deps:** update dependency @aws-crypto/sha256-browser to v5 ([0b81064](https://github.com/newjersey/navigator.business.nj.gov/commit/0b81064ec179a6793f34a52c07b270eba484b899))
+* **deps:** update dependency @smithy/node-http-handler to v2.1.10 ([d753692](https://github.com/newjersey/navigator.business.nj.gov/commit/d7536924198c42345b0cf882f901a926a66982a7))
+* **deps:** update dependency helmet to v7 ([bc663e8](https://github.com/newjersey/navigator.business.nj.gov/commit/bc663e8dd7212f3a5d170d5c7ab2dd635f6c3bdd))
+
+
+### Features
+
+* [[#184606162](https://github.com/newjersey/navigator.business.nj.gov/issues/184606162)] Storybook Maintenence: Tags ([77e34bc](https://github.com/newjersey/navigator.business.nj.gov/commit/77e34bcc6a679264987d76f4800ecc65c460e142))
+* [[#185757536](https://github.com/newjersey/navigator.business.nj.gov/issues/185757536)] create REMOTE_SELLER_WORKER operating phase ([4433acd](https://github.com/newjersey/navigator.business.nj.gov/commit/4433acd14fe31e261abcf850dac707ccdf077369))
+* [[#186363219](https://github.com/newjersey/navigator.business.nj.gov/issues/186363219)] guest disclaimer in profile margin revisions ([18964c0](https://github.com/newjersey/navigator.business.nj.gov/commit/18964c06c108d6f4e0e024d72901cecee0a2619d))
+* [[#186363219](https://github.com/newjersey/navigator.business.nj.gov/issues/186363219)] Note alert disclaimer in profile for guest mode ([eb0953d](https://github.com/newjersey/navigator.business.nj.gov/commit/eb0953d0bbdc6614a398d003c403f309689ab613))
+* [[#186374749](https://github.com/newjersey/navigator.business.nj.gov/issues/186374749)] remove aria labels from onboarding step one radios ([71a90d2](https://github.com/newjersey/navigator.business.nj.gov/commit/71a90d270e5e1c9cbe7708c309fa5c897d60f019))
+* [[#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)]: DCA Dynamics Fire Safety and Housing Setup ([e070135](https://github.com/newjersey/navigator.business.nj.gov/commit/e070135bc984e32cdd4a25c036b2cfa92181c1fb))
+
+
+### Reverts
+
+* Revert "wip [skip ci]" ([348acce](https://github.com/newjersey/navigator.business.nj.gov/commit/348acce1c80f3d542a3a142824f0d9ed975a05f6))
+* Revert "feat: [#186519052] add fire safety and housing initial connections" ([cf1f223](https://github.com/newjersey/navigator.business.nj.gov/commit/cf1f2236de5b6cdf8097daa1ea02724eaf9ea03b)), closes [#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)
+* Revert "feat: [#186519052] update config files" ([ebffad0](https://github.com/newjersey/navigator.business.nj.gov/commit/ebffad07fdb1f2f4b869dc2d76638ae90be6df8e)), closes [#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)
+* Revert "feat: [#186519052] Add fire safety to api" ([612db28](https://github.com/newjersey/navigator.business.nj.gov/commit/612db28c4f11a8e1cd5d549d71568ed542b0c56a)), closes [#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)
+* Revert "feat: [#186519052] remove relative import" ([67130fd](https://github.com/newjersey/navigator.business.nj.gov/commit/67130fd66dfa40681a23fe3270db72716bdbd051)), closes [#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)
+* Revert "feat: [#186519052] add all values to circleci config" ([980c59c](https://github.com/newjersey/navigator.business.nj.gov/commit/980c59cd3ec7eff3ccaf7e4fac097bf599584047)), closes [#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)
+* Revert "feat: [#186519052] fix name overlap issue" ([bfcca51](https://github.com/newjersey/navigator.business.nj.gov/commit/bfcca51c76d8fc020ada767680cf04612a359996))
+* Revert "feat: [#186519052] restore quotes around address" ([444ed3e](https://github.com/newjersey/navigator.business.nj.gov/commit/444ed3e3f0401fc71a1f2780b587cc0c9b0b481f)), closes [#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)
+* Revert "feat: [#186519052] add housing connection to api" ([bc77216](https://github.com/newjersey/navigator.business.nj.gov/commit/bc7721658496e6c7bb3b74216c38a66fb5abd8db)), closes [#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)
+* Revert "feat: [#186519052] fix param gathering" ([0b21522](https://github.com/newjersey/navigator.business.nj.gov/commit/0b21522cd1a0e0874a62510f19ae796d699e31f6))
+* Revert "feat: [#186519052] pull processing into separate function" ([cff6d25](https://github.com/newjersey/navigator.business.nj.gov/commit/cff6d25a58803fd5a905ef1227abe66fa202eed9)), closes [#186519052](https://github.com/newjersey/navigator.business.nj.gov/issues/186519052)
+
 # [5.40.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.39.0...v5.40.0) (2023-11-22)
 
 
