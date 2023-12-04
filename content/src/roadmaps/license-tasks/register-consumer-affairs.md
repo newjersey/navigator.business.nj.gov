@@ -18,9 +18,9 @@ summaryDescriptionMd: >-
 
 
   :::infoAlert 
-   The [application](https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf) includes a FAQ section.
+   The [Home Improvement Contractor application](https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf) includes a FAQ section.
   :::
-formName: HIC-Form1-Rev
+formName: HIC-Form1
 industryId:
   - home-contractor
 callToActionText: Complete My Home Improvement Contractor Registration
@@ -48,7 +48,7 @@ webflowId: 5f7729927fe89d43ed054794
 * A criminal background check
 * Applicable fees paid
 * Copy of Alternate Name Form if your business has an alternate name
-* `Certificate of Authorit|certificate-formation`y, if applicable
+* `Certificate of Authority|certificate-formation`, if applicable
   Name, address, and phone number of registered agent<insert contextual info>, if applicable
 * Child support information, if applicable
 
@@ -56,7 +56,7 @@ webflowId: 5f7729927fe89d43ed054794
 >
 > * A New Jersey home improvement contractor (NJHIC) number
 > * An official paper registration received by mail (also known as a registration card)
->
+
 > **What if I don't complete this registration?**
 >
 > * Unregistered contractors who sell or make home improvements may be subject to civil penalties and possibly criminal penalties.
