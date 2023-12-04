@@ -8,7 +8,7 @@ id: moving-company-insurance
 
 Insurance will protect your business assets should you be held liable for an incident. It also will be a requirement for licensing with the Division of Consumer Affairs.
 
-To find an insurance broker, speak to your network, local Chamber of Commerce, or supplier. Oftentimes, the best way to find a broker is through word of mouth.
+To find an insurance broker, speak to your network, local Chamber of Commerce, or supplier. Often, the best way to find a broker is through word of mouth.
 
 ---
 
