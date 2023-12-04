@@ -54,7 +54,7 @@ export const SidebarCardGeneric = (props: Props): ReactElement => {
         {props.headerText && (
           <div className="radius-top-md">
             <div className="flex flex-justify">
-              <Heading level={3} className="margin-bottom-0 text-white">
+              <Heading level={3} className="margin-0-override text-white">
                 <span>
                   <ModifiedContent>{props.headerText}</ModifiedContent>
                 </span>
