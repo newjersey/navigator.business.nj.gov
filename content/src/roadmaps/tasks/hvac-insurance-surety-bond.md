@@ -1,7 +1,7 @@
 ---
-displayname: hvac-insurance-surety-bond
 urlSlug: hvac-insurance
 filename: hvac-insurance-surety-bond
+displayname: hvac-insurance-surety-bond
 name: Get an Insurance Policy and Surety Bond
 id: hvac-insurance-surety-bond
 callToActionLink: ""
@@ -10,7 +10,7 @@ callToActionText: ""
 
 You must purchase a $3,000 `surety bond|surety-bond` and Certificate of Liability Insurance in the sum of $500,000 for the duration of your license.
 
-To find an insurance broker, speak to your network, a local Chamber of Commerce, or supplier. Oftentimes, the best way to find a broker is through word of mouth.
+To find an insurance broker, speak to your network, a local Chamber of Commerce, or supplier. Often, the best way to find a broker is through word of mouth.
 
 ---
 
