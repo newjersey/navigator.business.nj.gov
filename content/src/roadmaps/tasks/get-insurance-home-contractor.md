@@ -1,7 +1,7 @@
 ---
-displayname: insurance-policy-home-contractor
 urlSlug: insurance-policy
 filename: get-insurance-home-contractor
+displayname: insurance-policy-home-contractor
 name: Get an Insurance Policy
 id: research-insurance-needs
 callToActionLink: ""
@@ -10,7 +10,7 @@ callToActionText: ""
 
 You need to get commercial general liability insurance to complete your business registration with NJ Division of Consumer Affairs. Insurance will protect your business assets if you are held liable for an incident.
 
-To find an insurance broker, speak to your network, Chamber of Commerce, or supplier. Oftentimes, the best way to find a broker is through word of mouth.
+To find an insurance broker, speak to your network, Chamber of Commerce, or supplier. Often, the best way to find a broker is through word of mouth.
 
 ---
 
