@@ -1,6 +1,6 @@
 import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarEvents";
 import { randomIntFromInterval } from "@businessnjgovnavigator/shared";
-import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
+import { getCurrentDate, getJanOfYear } from "@businessnjgovnavigator/shared/dateHelpers";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
 import { generateLicenseData } from "@businessnjgovnavigator/shared/test";
 import dayjs from "dayjs";
@@ -63,19 +63,21 @@ describe("getLicenseCalendarEvent", () => {
   });
 
   it("returns an array containing all license events within the year", () => {
+    const dateInJanurary = getJanOfYear(currentDate);
+
     expect(
       getLicenseCalendarEvents(
-        generateLicenseData({ expirationISO: currentDate.toISOString() }),
-        currentDate.year()
+        generateLicenseData({ expirationISO: dateInJanurary.toISOString() }),
+        dateInJanurary.year()
       )
     ).toEqual([
       {
-        dueDate: currentDate.format(defaultDateFormat),
+        dueDate: dateInJanurary.format(defaultDateFormat),
         licenseEventSubtype: "expiration",
         calendarEventType: "LICENSE",
       },
       {
-        dueDate: currentDate.add(30, "days").format(defaultDateFormat),
+        dueDate: dateInJanurary.add(30, "days").format(defaultDateFormat),
         licenseEventSubtype: "renewal",
         calendarEventType: "LICENSE",
       },
