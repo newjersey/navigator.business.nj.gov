@@ -1,14 +1,14 @@
 ---
-displayname: taxi-insurance
 urlSlug: taxi-insurance
 filename: taxi-insurance
+displayname: taxi-insurance
 name: Get Your Insurance Policy
 id: taxi-insurance
 ---
 
 Insurance will protect your business assets should you be held liable for an incident.
 
-To find an insurance broker, speak to your network, local Chamber of Commerce, or supplier. Oftentimes, the best way to find a broker is through word of mouth.
+To find an insurance broker, speak to your network, local Chamber of Commerce, or supplier. Often, the best way to find a broker is through word of mouth.
 
 ---
 
