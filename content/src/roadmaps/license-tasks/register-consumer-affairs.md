@@ -49,7 +49,7 @@ webflowId: 5f7729927fe89d43ed054794
 * Applicable fees paid
 * Copy of Alternate Name Form if your business has an alternate name
 * `Certificate of Authority|certificate-formation`, if applicable
-  Name, address, and phone number of registered agent<insert contextual info>, if applicable
+ * Name, address, and phone number of registered agent<insert contextual info>, if applicable
 * Child support information, if applicable
 
 > **Once completed, you will have:**
