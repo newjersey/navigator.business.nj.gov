@@ -1,0 +1,863 @@
+<style>
+  #skf-container {
+    background-color: #3573b2;
+    border-radius: 6px;
+    padding: 30px;
+    font-family: "Public Sans", sans-serif;
+    margin-bottom: 250px;
+  }
+
+  #skf-container h3 {
+    color: #fff;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  #skf-container p {
+    line-height: 20px;
+  }
+
+  #skf-combo-box-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  #skf-combo-box {
+    width: 100%;
+    position: relative;
+    display: flex;
+    padding: 5px 9px;
+    background-color: #fff;
+    flex-direction: row;
+    border: 1px solid #adadad;
+    border-radius: 4px;
+  }
+
+  #skf-combo-box:hover {
+    border: 1px solid #000;
+  }
+
+  #skf-combo-box:focus-within {
+    outline: auto;
+  }
+
+  #skf-input {
+    padding: 7.5px 4px 7.5px 6px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    width: 100%;
+    border: none;
+    border-radius: 3px 0 0 3px;
+  }
+
+  #skf-input:focus-visible {
+    outline: none;
+  }
+
+  #skf-dropdown-button,
+  #skf-combo-box-clear-button {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: #757575;
+    border: none;
+  }
+
+  #skf-dropdown-button {
+    width: 60px;
+  }
+
+  #skf-combo-box-clear-button {
+    display: none;
+  }
+
+  #skf-dropdown-button:hover,
+  #skf-combo-box-clear-button:hover {
+    cursor: pointer;
+  }
+
+  #skf-dropdown {
+    border: none;
+    border-radius: 0 0 4px 4px;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-height: 300px;
+    padding: 0;
+    position: absolute;
+    top: calc(1px + 100%);
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 2px 4px 0px #00000040;
+    z-index: 99;
+  }
+
+  #skf-dropdown a {
+    text-decoration: none;
+  }
+
+  #skf-dropdown li {
+    list-style: none;
+    margin-bottom: 4px;
+    padding: 18px 36px;
+    position: relative;
+  }
+
+  .skf-synonym {
+    background-color: #fff;
+  }
+
+  .skf-synonym p {
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 300;
+    color: #757575;
+    margin: 10px 0;
+  }
+
+  .skf-synonym p span {
+    font-weight: 700;
+  }
+
+  .skf-industry:nth-child(even) {
+    background-color: #f9fbfb;
+  }
+
+  .skf-industry:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+  }
+  .skf-industry-selected,
+  .skf-industry:nth-child(even).skf-industry-selected,
+  .skf-industry.skf-industry-selected:hover {
+    background-color: #e9eee0;
+  }
+
+  .skf-industry-selected::before {
+    content: url("data:image/svg+xml,%3Csvg viewBox='0 0 25 25' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    left: 16px;
+    top: 24px;
+  }
+
+  .skf-industry-selected p {
+    font-weight: 600;
+  }
+
+  .skf-industry-name {
+    color: #1b1b1b;
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  .skf-industry-description {
+    color: #5c5c5c;
+    font-weight: 400;
+    font-size: 13px;
+    margin: 0;
+  }
+
+  #skf-combo-box-button {
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    margin-left: 32px;
+    min-width: 217px;
+    text-align: center;
+    text-decoration: none;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 51px;
+  }
+
+  #skf-combo-box-button:hover {
+    background-color: #fff;
+    color: #3573b2;
+    cursor: pointer;
+  }
+
+  @media screen and (max-width: 700px) {
+    #skf-combo-box-container {
+      flex-direction: column;
+    }
+    #skf-combo-box {
+      max-width: unset;
+    }
+    #skf-combo-box-button {
+      margin: 20px auto 0;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    #skf-combo-box-button {
+      margin: 20px 0 0;
+    }
+  }
+</style>
+<div id="skf-container" onclick="detectClickLocation(event)">
+  <h3>Find Other Starter Kits</h3>
+  <div id="skf-combo-box-container">
+    <div id="skf-combo-box">
+      <input
+        id="skf-input"
+        type="text"
+        onblur="handleInputBlur(event)"
+        onclick="openDropdown()"
+        oninput="handleOnInput()"
+      />
+      <button id="skf-combo-box-clear-button" onclick="clearIndustrySelection()">
+        <svg width="25" height="25" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg">
+          <path xmlns="http://www.w3.org/2000/svg" d="M0 0h24v24H0z" fill="none" />
+          <path
+            xmlns="http://www.w3.org/2000/svg"
+            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+          />
+        </svg>
+      </button>
+      <button id="skf-dropdown-button" onclick="toggleDropdown()" tabindex="0">
+        <svg
+          id="skf-dropdown-arrow"
+          fill="#757575"
+          height="10px"
+          width="10px"
+          version="1.1"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 386.257 386.257"
+          xml:space="preserve"
+        >
+          <polygon points="0,96.879 193.129,289.379 386.257,96.879 " />
+        </svg>
+      </button>
+      <ul id="skf-dropdown" hidden></ul>
+    </div>
+    <a id="skf-combo-box-button">Access My Starter Kit</a>
+  </div>
+</div>
+
+<script>
+  let industries = [];
+  let selectedIndustry = {};
+
+  document.addEventListener("DOMContentLoaded", () => {
+    setIndustryData();
+    populateDropdown(industries);
+  });
+
+  const setIndustryData = () => {
+    const industryNames = Array.from(document.getElementsByClassName("sk-industry-name"));
+    const industryDescriptions = Array.from(document.getElementsByClassName("sk-industry-description"));
+    const industrySynonyms = Array.from(document.getElementsByClassName("sk-industry-synonyms"));
+    const industrySlugs = Array.from(document.getElementsByClassName("sk-industry-slug"));
+
+    industryNames.forEach((name, index) => {
+      const synonyms = industrySynonyms[index].innerText.split(", ").map((synoynm) => synoynm.toLowerCase());
+
+      industries.push({
+        name: name.innerText,
+        description: sanitizeString(industryDescriptions[index].innerText),
+        slug: industrySlugs[index].innerText,
+        synonyms,
+      });
+
+      industries.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+    });
+
+    addGenericIndustryToList(industries);
+    document.getElementsByClassName("sk-industry-items")[0].toggleAttribute("hidden");
+  };
+
+  const addGenericIndustryToList = (industryList) => {
+    industryList.unshift({
+      name: "All Other Businesses",
+      description: "Select this if you do not see your specific industry",
+      slug: "all-other-businesses",
+      synonyms: [],
+    });
+  };
+
+  const sanitizeString = (string) => {
+    return string.replace("'", "’");
+  };
+
+  const populateDropdown = (industries) => {
+    const dropdown = document.getElementById("skf-dropdown");
+    const input = document.getElementById("skf-input");
+    let HTMLString = "";
+
+    if (input.value.length > 0) {
+      HTMLString += `
+      <li class="skf-synonym">
+        <p class="skf-industry-name"><span>"${input.value}"</span> falls under the industries below:</p>
+      </li>`;
+    }
+    industries.forEach((industry) => {
+      const className =
+        industry.name === selectedIndustry?.name ? "skf-industry skf-industry-selected" : "skf-industry";
+      HTMLString += `
+          <li class="${className}" onclick='selectDropdownItem(${JSON.stringify(industry)})'>
+            <p class="skf-industry-name">${industry.name}</p>
+            <p class="skf-industry-description">${industry.description}</p>
+          </li>
+      `;
+    });
+    dropdown.innerHTML = HTMLString;
+  };
+
+  const clearIndustrySelection = () => {
+    const clearButton = document.getElementById("skf-combo-box-clear-button");
+    clearButton.style.display = "none";
+
+    const input = document.getElementById("skf-input");
+    input.value = "";
+    selectedIndustry = {};
+    populateDropdown(industries);
+    setStarterKitLink("");
+  };
+
+  const selectDropdownItem = (industry) => {
+    selectedIndustry = industry;
+    const input = document.getElementById("skf-input");
+    input.value = industry.name;
+    const clearButton = document.getElementById("skf-combo-box-clear-button");
+    clearButton.style.display = "inherit";
+    setStarterKitLink(industry.slug);
+    closeDropdown();
+    populateDropdown(industries);
+  };
+
+  const setStarterKitLink = (slug) => {
+    const button = document.getElementById("skf-combo-box-button");
+    if (slug === "") {
+      button.removeAttribute("href");
+      button.style.display = "none";
+    } else {
+      const url = `https://navigator.business.nj.gov/onboarding?industry=${slug}`;
+      button.setAttribute("href", url);
+      button.style.display = "flex";
+    }
+  };
+
+  const detectClickLocation = (event) => {
+    const comboBox = document.getElementById("skf-combo-box");
+    if (!comboBox.contains(event.target)) {
+      closeDropdown();
+    }
+  };
+
+  const handleInputBlur = (event) => {
+    const input = document.getElementById("skf-input");
+    if (selectedIndustry.name !== undefined) {
+      input.value = selectedIndustry.name;
+    } else {
+      input.value = "";
+    }
+  };
+
+  const handleOnInput = () => {
+    openDropdown();
+    filterDropdown();
+  };
+
+  const openDropdown = () => {
+    const dropdown = document.getElementById("skf-dropdown");
+    const arrow = document.getElementById("skf-dropdown-arrow");
+    dropdown.removeAttribute("hidden");
+    arrow.style.transform = "rotate(180deg)";
+  };
+
+  const closeDropdown = () => {
+    const dropdown = document.getElementById("skf-dropdown");
+    const arrow = document.getElementById("skf-dropdown-arrow");
+    dropdown.setAttribute("hidden", "");
+    arrow.style.transform = "";
+  };
+
+  const toggleDropdown = () => {
+    const dropdown = document.getElementById("skf-dropdown");
+    const arrow = document.getElementById("skf-dropdown-arrow");
+
+    dropdown.toggleAttribute("hidden");
+    arrow.style.transform === "rotate(180deg)"
+      ? (arrow.style.transform = "")
+      : (arrow.style.transform = "rotate(180deg)");
+  };
+
+  const filterDropdown = () => {
+    const input = document.getElementById("skf-input");
+    const dropdown = document.getElementById("skf-dropdown");
+
+    const filteredIndustries = industries.filter((industry, idx) => {
+      const terms = [industry.name.toLowerCase(), ...industry.synonyms];
+
+      for (const term of terms) {
+        if (term.includes(input.value.toLowerCase())) return true;
+      }
+      return false;
+    });
+
+    if (filteredIndustries.length === 0) {
+      addGenericIndustryToList(filteredIndustries);
+    }
+
+    populateDropdown(filteredIndustries);
+  };
+</script>
+
+<!--
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+* DO NOT LOAD INTO WEBFLOW
+*
+* LOCAL TEST DATA ONLY
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+ -->
+
+<!-- <div role="list" class="sk-industry-items">
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Electrical Contractor</div>
+    <div class="sk-industry-description">Offers professional services related to electrical work.</div>
+    <div class="sk-industry-slug">electrical-contractor</div>
+    <div class="sk-industry-synonyms">electrician</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Home Baker</div>
+    <div class="sk-industry-description">Sells baked goods prepared at the baker's home.</div>
+    <div class="sk-industry-slug">home-baker</div>
+    <div class="sk-industry-synonyms">cottage foods</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Non-Medical Transport</div>
+    <div class="sk-industry-description">The transportation of an individual with medical needs</div>
+    <div class="sk-industry-slug">non-medical-transport</div>
+    <div class="sk-industry-synonyms">transportation service,non-emergency transportation</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Logistics</div>
+    <div class="sk-industry-description">Stores commercial goods in a warehouse for transportation</div>
+    <div class="sk-industry-slug">logistics</div>
+    <div class="sk-industry-synonyms">
+      freight, trucking, movers, box truck company, transportation, truck driving, hauling, truck haul,
+      logistics, trucking company,
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Interior Design</div>
+    <div class="sk-industry-description">Plans and executes designs for architectural interiors</div>
+    <div class="sk-industry-slug">interior-designer</div>
+    <div class="sk-industry-synonyms">
+      interior decorating, design studio, interior designer, home interior designer
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Pharmacy</div>
+    <div class="sk-industry-description">
+      A business that prepares and dispenses prescriptions and medicine
+    </div>
+    <div class="sk-industry-slug">pharmacy</div>
+    <div class="sk-industry-synonyms">pharmaceutics, drugstore, apothecary, chemist medicine</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Entertainment</div>
+    <div class="sk-industry-description">
+      Independent artists such as musicians, performers, and other creators.
+    </div>
+    <div class="sk-industry-slug">independent-artist</div>
+    <div class="sk-industry-synonyms">
+      independent artist, writer, performer, content creators, multi media, media streaming, social networks,
+      band, singer
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Engineering</div>
+    <div class="sk-industry-description">Designs and plans the building of systems and structures</div>
+    <div class="sk-industry-slug">engineering</div>
+    <div class="sk-industry-synonyms">engineering consulting, firm, professional services,</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">School Bus</div>
+    <div class="sk-industry-description">
+      Transports children to and from school, day camps, or other activities
+    </div>
+    <div class="sk-industry-slug">school-bus</div>
+    <div class="sk-industry-synonyms">bus, school bus,</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Trucking</div>
+    <div class="sk-industry-description">Offers commercial load-hauling services</div>
+    <div class="sk-industry-slug">trucking</div>
+    <div class="sk-industry-synonyms">
+      freight, trucking, movers, box truck company, transportation, truck driving, hauling, truck haul,
+      logistics, trucking company,
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Legal Services</div>
+    <div class="sk-industry-description">Offers professional legal services</div>
+    <div class="sk-industry-slug">law-firm</div>
+    <div class="sk-industry-synonyms">
+      attorney, law office, legal consulting, legal services, legal advice, legal consulting
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Car Service (Large Capacity Vehicles)</div>
+    <div class="sk-industry-description">
+      Offers transportation services in vehicles with a passenger capacity of more than 10 people
+    </div>
+    <div class="sk-industry-slug">transportation</div>
+    <div class="sk-industry-synonyms">taxi, limo, bus, shuttle, transport van, car service</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Restaurant</div>
+    <div class="sk-industry-description">Provides food to patrons</div>
+    <div class="sk-industry-slug">restaurant</div>
+    <div class="sk-industry-synonyms">cafe, grill</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Lawn Care</div>
+    <div class="sk-industry-description">Offers lawn maintenance services</div>
+    <div class="sk-industry-slug">lawn-care</div>
+    <div class="sk-industry-synonyms">yard, lawn, mowing, maintenance, service, landscape</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Cosmetology</div>
+    <div class="sk-industry-description">Offering hair, nail, or skin related services</div>
+    <div class="sk-industry-slug">cosmetology</div>
+    <div class="sk-industry-synonyms">
+      cosmetics, beautician, aesthetician, hair salon, barber shop, hair stylist, nail salon, skin care, hair
+      braiding, makeup, studio
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Auto-Body Repair</div>
+    <div class="sk-industry-description">A facility for the repair and restoration of vehicles</div>
+    <div class="sk-industry-slug">auto-body-repair</div>
+    <div class="sk-industry-synonyms">car,auto body shop,auto shop,car center,auto center</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">IT Consulting</div>
+    <div class="sk-industry-description">
+      Offers system maintenance, configuration, and troubleshooting services
+    </div>
+    <div class="sk-industry-slug">it-consultant</div>
+    <div class="sk-industry-synonyms">
+      tech support, information technology, tech services, technical services, consulting, software developer,
+      IT professional services, IT support, computer repair
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Massage Therapy</div>
+    <div class="sk-industry-description">
+      Offers soft-tissue bodywork services for health and wellbeing purposes
+    </div>
+    <div class="sk-industry-slug">massage-therapy</div>
+    <div class="sk-industry-synonyms">Masseuse, Spa, Spa services, bodywork, wellness</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Pet Care</div>
+    <div class="sk-industry-description">
+      Provides care, training, grooming, or boarding services to domestic animals.
+    </div>
+    <div class="sk-industry-slug">petcare</div>
+    <div class="sk-industry-synonyms">
+      dog walker, dog groomer, pet groomer, doggy daycare, kennel, boarding, shelter, pound
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Event Planning</div>
+    <div class="sk-industry-description">Offers coordination services for different types of events</div>
+    <div class="sk-industry-slug">event-planning</div>
+    <div class="sk-industry-synonyms">planner, organizer, coordinator, party planner</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Real Estate Investing</div>
+    <div class="sk-industry-description">Buys properties to rent or re-sell</div>
+    <div class="sk-industry-slug">real-estate-investor</div>
+    <div class="sk-industry-synonyms">investor, property investor</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Printing Business</div>
+    <div class="sk-industry-description">Offers printing services for individuals and other companies</div>
+    <div class="sk-industry-slug">printing-business</div>
+    <div class="sk-industry-synonyms">office printing, commercial printing, printing services</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Management Consulting</div>
+    <div class="sk-industry-description">Expert advice to improve the client's business operations</div>
+    <div class="sk-industry-slug">management-consulting</div>
+    <div class="sk-industry-synonyms">
+      operations, consultant, manager consulting, business consulting, manager
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Home Health Aide</div>
+    <div class="sk-industry-description">
+      A business staffing licensed personnel to provide home health care services
+    </div>
+    <div class="sk-industry-slug">homemaker-home-health-aide</div>
+    <div class="sk-industry-synonyms">caregiver, care services</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Vending Machine</div>
+    <div class="sk-industry-description">Offers small items for purchase through an automated machine</div>
+    <div class="sk-industry-slug">vending-machine</div>
+    <div class="sk-industry-synonyms">
+      vending machine service, vending machine business, snack machine, vending machine operator
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Car Service</div>
+    <div class="sk-industry-description">Offers transportation services in vehicles with any capacity</div>
+    <div class="sk-industry-slug">car-service</div>
+    <div class="sk-industry-synonyms">taxi, limo, bus, shuttle, transport van, car service</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Acupuncture</div>
+    <div class="sk-industry-description">
+      Traditional Chinese medicine involving the insertion of needles into the body
+    </div>
+    <div class="sk-industry-slug">acupuncture</div>
+    <div class="sk-industry-synonyms">acupuncturist, spa, alternative medicine</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Real Estate Brokerage</div>
+    <div class="sk-industry-description">Facilitates real estate transactions between buyers and sellers</div>
+    <div class="sk-industry-slug">real-estate-broker</div>
+    <div class="sk-industry-synonyms">real estate broker, brokerage,</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">HVAC Contractor</div>
+    <div class="sk-industry-description">
+      Provides installation, maintenance, and repair services to Heating Ventilation, AC, and Refrigeration
+      systems (HVACR)
+    </div>
+    <div class="sk-industry-slug">hvac-contractor</div>
+    <div class="sk-industry-synonyms">Heating, cooling, AC, Refrigeration, HVAC, HVAC-R, contractor</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Photography</div>
+    <div class="sk-industry-description">Offers portrait and event photography services</div>
+    <div class="sk-industry-slug">photography</div>
+    <div class="sk-industry-synonyms">
+      freelance photographer, professional photographer, photographer, media, event photographer, video
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">All Other Businesses</div>
+    <div class="sk-industry-description">Select this if you don't see your specific industry</div>
+    <div class="sk-industry-slug">generic</div>
+    <div class="sk-industry-synonyms w-dyn-bind-empty"></div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Retail</div>
+    <div class="sk-industry-description">
+      Selling or reselling goods in a brick and mortar location outside of your home
+    </div>
+    <div class="sk-industry-slug">retail</div>
+    <div class="sk-industry-synonyms">
+      clothing, clothing accessories, store, reseller, outlet, shop, thrift store, candle store, crafts/hobby
+      store, clothing store, consignment, boutique, sales, grocery store, food retail, flower shop, florist,
+      custom frames, deli, convenience store, candy store, jewelry store, apparel retail, thrift store, gift
+      shop, bike shop, bookstore, yarn shop, goods retail, accessories retail,
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Car Rental</div>
+    <div class="sk-industry-description">Leases vehicles to customers for less than 90 days.</div>
+    <div class="sk-industry-slug">car-rental</div>
+    <div class="sk-industry-synonyms">vehicle rental</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Real Estate Appraisals</div>
+    <div class="sk-industry-description">Offers property valuation services</div>
+    <div class="sk-industry-slug">real-estate-appraisals</div>
+    <div class="sk-industry-synonyms">appraiser</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Cleaning and Janitorial Services</div>
+    <div class="sk-industry-description">Providing commercial or residential cleaning services</div>
+    <div class="sk-industry-slug">cleaning-janitorial-services</div>
+    <div class="sk-industry-synonyms">
+      cleaning lady, housekeeping, house cleaner, maid service, maid, cleaning company, cleaning crew,
+      commercial cleaning service, cleaning and maintenance, turnover service,
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Notary Public</div>
+    <div class="sk-industry-description">
+      Serves as a witnesses to the signing of documents and verifies signers' identities
+    </div>
+    <div class="sk-industry-slug">notary-public</div>
+    <div class="sk-industry-synonyms">
+      signing agent, mobile notary, notary service, loan signing, remote online notary
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Online Business</div>
+    <div class="sk-industry-description">Retail of goods or services on the internet</div>
+    <div class="sk-industry-slug">e-commerce</div>
+    <div class="sk-industry-synonyms">
+      online store, ecommerce, e-business, retail, online business, merchandise, retail, electronics retail,
+      appliances retail
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Employment Agency</div>
+    <div class="sk-industry-description">
+      A business that finds employment for a job seeker and employees for employers
+    </div>
+    <div class="sk-industry-slug">employment-agency</div>
+    <div class="sk-industry-synonyms">
+      employment office,employment services,temporary agency,employment recruiter,employment center
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Accounting, Bookkeeping, and Tax Preparation</div>
+    <div class="sk-industry-description">
+      Oversees a businesses financial functions like audits and financial statements
+    </div>
+    <div class="sk-industry-slug">certified-public-accountant</div>
+    <div class="sk-industry-synonyms">
+      CPA, accountant, accounting, bookkeeping, certified public accountant, tax preparation, accounting firm,
+      wealth management,
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Travel Agency</div>
+    <div class="sk-industry-description">
+      Coordinates the details of transportation, itinerary and accommodations for travelers
+    </div>
+    <div class="sk-industry-slug">travel-agent</div>
+    <div class="sk-industry-synonyms">home-based travel agent</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Moving Company</div>
+    <div class="sk-industry-description">Transports personal belongings from on location to another</div>
+    <div class="sk-industry-slug">moving-company</div>
+    <div class="sk-industry-synonyms">
+      freight, trucking, movers, box truck company, transportation, truck driving, hauling, truck haul,
+      logistics, trucking company,
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Marketing and PR Consulting</div>
+    <div class="sk-industry-description">Expert advice to improve the client's business exposure</div>
+    <div class="sk-industry-slug">marketing-pr-consulting</div>
+    <div class="sk-industry-synonyms">
+      marketing, advertising, consultant, press, communications, Image management, consultant, advertising,
+      communications, media, promotions
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Home Improvement Contractor</div>
+    <div class="sk-industry-description">
+      Repairing or renovating residential or non-commercial properties
+    </div>
+    <div class="sk-industry-slug">home-contractor</div>
+    <div class="sk-industry-synonyms">
+      renovation, home renovation, home contractor, residential remodeler, home remodeler
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Graphic Design</div>
+    <div class="sk-industry-description">Creates visual content for print and media</div>
+    <div class="sk-industry-slug">graphic-design</div>
+    <div class="sk-industry-synonyms">
+      media services, freelancer, freelance art, visual design, illustrator
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Healthcare</div>
+    <div class="sk-industry-description">Provides licensed health-related services</div>
+    <div class="sk-industry-slug">healthcare</div>
+    <div class="sk-industry-synonyms">
+      doctors office, physician, medical examiners, nurses, nursing, midwives, midwifery, occupational
+      therapy, physical therapy, therapist, optometrists, psychologist, psychoanalyst, family therapy,
+      counseling, marriage counselor, speech therapy, audiologists, dietitian, nutritionist
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Food Truck</div>
+    <div class="sk-industry-description">
+      A vehicle where food or beverages are transported, stored, or prepared for sale at temporary locations
+    </div>
+    <div class="sk-industry-slug">food-truck</div>
+    <div class="sk-industry-synonyms">
+      lunch wagon,food service truck,street food,food cart,fast food cart, food vendor
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Detective Agency</div>
+    <div class="sk-industry-description">Provides investigative services</div>
+    <div class="sk-industry-slug">detective</div>
+    <div class="sk-industry-synonyms">background check, private investigator, PI, private detective</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Courier Service</div>
+    <div class="sk-industry-description">Offers message and package delivery services</div>
+    <div class="sk-industry-slug">courier</div>
+    <div class="sk-industry-synonyms">messenger service, same day delivery service</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Childcare Center</div>
+    <div class="sk-industry-description">
+      Provides daycare services for 6 or more children in a dedicated space
+    </div>
+    <div class="sk-industry-slug">daycare</div>
+    <div class="sk-industry-synonyms">daycare, childcare, after school program</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Freight Forwarding</div>
+    <div class="sk-industry-description">
+      Organizes the transportation of goods from a warehouse to its final destination
+    </div>
+    <div class="sk-industry-slug">freight-forwarding</div>
+    <div class="sk-industry-synonyms">logistics, shipping, freight moving</div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Cannabis</div>
+    <div class="sk-industry-description">A business that manufacturers, delivers, or sells cannabis</div>
+    <div class="sk-industry-slug">cannabis</div>
+    <div class="sk-industry-synonyms">
+      marijuana, ACT, cannabis business, micro license, cultivation, dispensary, grow, retail, pot, weed
+    </div>
+  </div>
+  <div role="listitem" class="w-dyn-item">
+    <div class="sk-industry-name">Architecture</div>
+    <div class="sk-industry-description">Plans, designs, and oversees the construction of buildings</div>
+    <div class="sk-industry-slug">architecture</div>
+    <div class="sk-industry-synonyms">architect, engineer, consulting, architectural services</div>
+  </div>
+</div> -->
