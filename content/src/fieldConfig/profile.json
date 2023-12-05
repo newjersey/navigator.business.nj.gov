@@ -321,7 +321,7 @@
       "municipality": {
         "default": {
           "header": "Location",
-          "description": "Where in New Jersey will your first location be? \n\n**\\Note:** Unincorporated communities are not listed here. You can find your official jurisdiction by [doing a search](https://www.nj.gov/nj/gov/county/localities.html) (you will type in your community into the local name field).*",
+          "description": "Where in New Jersey will your first location be? \n\n**Note:** Unincorporated communities are not listed here. You can find your official jurisdiction by [doing a search](https://www.nj.gov/nj/gov/county/localities.html) (you will type in your community into the local name field).*",
           "errorTextRequired": "Select a location."
         },
         "overrides": {
