@@ -29,7 +29,7 @@ webflowId: 5f772971b0544fd3d536617b
 
 ### Application Requirements (Initial Licensure by Examination)
 
-* A 2x2 passport photo in color taken within the last six months
+* A 2x2 inches passport photo in color taken within the last six months
 * Registration number
 * Social Security number (SSN)
 * Citizenship/immigration status
@@ -44,7 +44,7 @@ webflowId: 5f772971b0544fd3d536617b
 ### Application Requirements (Licensure by Credentials)
 
 * Completed [Architecture Practical Experience](https://www.njconsumeraffairs.gov/arch/applications/Architecture-Practical-Experience-Form-Full.pdf) form
-* A 2x2 passport photo in color taken within the last six months
+* A 2x2 inches passport photo in color taken within the last six months
 * Registration number
 * Social Security number (SSN)
 * Citizenship/immigration status
