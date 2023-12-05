@@ -59,11 +59,6 @@
       "weight": 30,
       "licenseTask": "authorization-architect-firm",
       "required": true
-    },
-    {
-      "step": 3,
-      "licenseTask": "home-inspector-license",
-      "weight": 1
     }
   ],
   "name": "Architecture",
