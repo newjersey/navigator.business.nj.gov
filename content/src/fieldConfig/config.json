@@ -165,14 +165,14 @@
     "areYouSureModalCancelButtonText": "Cancel",
     "dateOfFormationErrorText": "Your effective date must be formatted as MM/YYYY.",
     "header": "Find Your Annual Report Deadline",
-    "areYouSureModalBody": "If you change your task status, you need to resubmit your Business `Effective Date|effective-date` and will lose access to your calendar.",
+    "areYouSureModalBody": "If you change your task status, you need to resubmit your Business's `Effective Date|effective-date` and will lose access to your calendar.",
     "areYouSureModalContinueButtonText": "Continue",
     "lockedStatusTooltipText": "You have successfully completed forming your business in this task.",
     "cancelButtonText": "Cancel",
     "fieldLabel": "NJ Business Effective Date (mm/yyyy)",
     "areYouSureModalHeader": "Didn't Form Yet?",
     "saveButtonText": "Save",
-    "description": "To see your annual report due date, please provide your Business' `effective date|effective-date` (the date you formed your business) below."
+    "description": "To see your annual report due date, please provide your Business's `effective date|effective-date` (the date you formed your business) below."
   },
   "licenseSearchTask": {
     "voluntarySurrenderPermitStatusText": "Voluntary Surrender",
