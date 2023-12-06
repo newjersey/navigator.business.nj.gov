@@ -29,7 +29,7 @@ You are seeing this task because your business either has a `nexus|nexus-busines
 - Owner information
 - Mailing address
 - Business addresses
-- Other taxes you may collect (e.g., motor fuels and cigarette/tobacco taxes). A list will be provided
+- Other taxes you may collect, such as motor fuels and cigarette/tobacco taxes. A list will be provided
 
 ---
 
