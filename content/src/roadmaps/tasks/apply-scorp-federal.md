@@ -1,7 +1,7 @@
 ---
-displayname: scorp-federal-designation
 urlSlug: scorp-federal-designation
 filename: apply-scorp-federal
+displayname: scorp-federal-designation
 name: Obtain Your S Corporation Designation with the Federal Government
 id: apply-scorp-federal
 callToActionLink: https://www.irs.gov/forms-pubs/about-form-2553
@@ -22,4 +22,4 @@ The process to apply for an `S corporation|s-corp` designation starts at the fed
 
 > **Once completed, you will have:**
 >
-> - A letter confirming your business' election to file taxes as an S Corp
+> - A letter confirming your business's election to file taxes as an S Corp
