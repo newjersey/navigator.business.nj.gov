@@ -1,7 +1,7 @@
 ---
-displayname: license-requirements-employment-agency
 urlSlug: license-requirements-employment-agency
 filename: understand-license-requirements-employment-agency
+displayname: license-requirements-employment-agency
 name: "Prepare for Your Employment Agency License "
 id: understand-license-requirements-employment-agency
 callToActionLink: ""
@@ -14,8 +14,8 @@ You need to register your employment agency and obtain a license from the New Je
 
 ### Determine Business Operations
 
-- **Services:** Determine which professional services will be offered by your business (e.g., clerical, accounting, etc.)
-- **Staff:** Identify which industries will receive employee placement from your business (e.g., administrative, accountants, etc.)
+- **Services:** Determine which professional services will be offered by your business (for example, clerical, accounting, etc.)
+- **Staff:** Identify which industries will receive employee placement from your business (for example, administrative, accountants, etc.)
 - **Placement terms:** Determine if your business will offer a one-time placement or temporary placement services
 - **Fees:** Determine the party responsible for the cost of the placement fee
 
