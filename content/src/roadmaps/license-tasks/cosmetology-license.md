@@ -10,14 +10,14 @@ summaryDescriptionMd: If the business owner of a cosmetology shop does not have
   manicurists, skincare specialists, barbers, hair braiders, and beauticians. It
   is the shop owner's responsibility to ensure their staff is licensed.
 industryId: cosmetology
+callToActionText: Apply for My Cosmetology License
 callToActionLink: https://www.njconsumeraffairs.gov/cos/Applications/Application-for-Authorization-to-Sit-for-the-Examination-and-for-Licensure.pdf
+licenseCertificationClassification: undefined
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: " Board of Cosmetology and Hairstyling"
 divisionPhone: (973) 504-6400
 id: undefined
-callToActionText: Apply for My Cosmetology License
 webflowId: 64ca743a7c4e7f4f3a3c50f2
-licenseCertificationClassification: undefined
 ---
 
 ---
@@ -31,7 +31,7 @@ licenseCertificationClassification: undefined
 
 ### Application Requirements
 
-- Proof of age (e.g., birth certificate, passport, driver's license)
+- Proof of age, such as birth certificate, passport, driver's license
 - Proof of completing the required education and training hours
 - Proof of passing the cosmetology licensing examination
 - Applicable fees paid
