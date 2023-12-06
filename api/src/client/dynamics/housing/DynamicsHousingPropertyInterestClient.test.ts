@@ -77,11 +77,11 @@ describe("DynamicsHousingPropertyInterestClient", () => {
   });
 
   it("returns an empty array if no matching addresses are found", async () => {
-    const fireSafetyInspectionMockResponse = {
+    const housingInspectionMockResponse = {
       value: [],
     };
 
-    mockAxios.get.mockResolvedValue({ data: fireSafetyInspectionMockResponse });
+    mockAxios.get.mockResolvedValue({ data: housingInspectionMockResponse });
     expect(await client.getPropertyInterests(mockAccessToken, searchAddress)).toEqual([]);
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${ORG_URL}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode&$filter=(ultra_streetaddress eq '${searchAddress}')&$top=10`,
