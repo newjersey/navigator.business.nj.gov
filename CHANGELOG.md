@@ -1,3 +1,23 @@
+# [5.42.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.41.0...v5.42.0) (2023-12-06)
+
+
+### Bug Fixes
+
+* [[#185757752](https://github.com/newjersey/navigator.business.nj.gov/issues/185757752)] fix scrolling behavior on alert with href routing ([d63557c](https://github.com/newjersey/navigator.business.nj.gov/commit/d63557cc7fa4ad3b1c4eab3659ca2882175fc5a9))
+* [[#186609639](https://github.com/newjersey/navigator.business.nj.gov/issues/186609639)] SidebarCard header margin fixed ([66172b8](https://github.com/newjersey/navigator.business.nj.gov/commit/66172b88b8db6af0a49eec8d1f112f27c47cc482))
+* [[#186612999](https://github.com/newjersey/navigator.business.nj.gov/issues/186612999)] fixed breaking calendar test and removal of smooth scroll ([688531c](https://github.com/newjersey/navigator.business.nj.gov/commit/688531c4b06985963505791a8251a19275647345))
+
+
+### Features
+
+* [[#186569515](https://github.com/newjersey/navigator.business.nj.gov/issues/186569515)] consistent quick action heights ([5763f34](https://github.com/newjersey/navigator.business.nj.gov/commit/5763f3432d465473e3a689e5edb012495519763b))
+
+
+### Reverts
+
+* Revert "chore(deps): update dependency @types/react to v18.2.39" ([7b9c989](https://github.com/newjersey/navigator.business.nj.gov/commit/7b9c9898bd3238a0d1d7fb06b561567c3ab8d081))
+* Revert "chore(deps): update dependency dependency-cruiser to v15" ([4bcb89b](https://github.com/newjersey/navigator.business.nj.gov/commit/4bcb89bc9cb0d4f0a62213ba3b5b567e4f697be6))
+
 # [5.41.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.40.0...v5.41.0) (2023-12-01)
 
 
