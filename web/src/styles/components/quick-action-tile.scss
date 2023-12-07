@@ -1,4 +1,4 @@
-.quick-action-tile {
+.quick-action-tile-spacing {
   margin-top: 1.5rem;
 
   @media (min-width: 64em) {
@@ -14,4 +14,12 @@
       padding-left: 0.75rem;
     }
   }
+}
+
+.quick-action-tile {
+  background-color: $base-extra-light;
+  border: 2px solid $base-lightest;
+}
+.quick-action-tile:hover {
+  background-color: $base-lightest;
 }
