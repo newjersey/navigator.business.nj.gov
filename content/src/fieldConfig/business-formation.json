@@ -421,12 +421,12 @@
         "body": "Board member qualifications are specified"
       },
       "annualReportNotification": {
-        "checkboxText": "I want to be reminded of any annual Reports Filing(s), so that I never miss an Annual Report deadline."
+        "checkboxText": "I want to be reminded of any annual report filing(s), so that I never miss an annual report deadline."
       },
       "businessPurpose": {
         "label": "Business Purpose",
         "addButtonText": "Add Business Purpose",
-        "body": "Describe your business' primary activities but refrain from using any `reserved words.|reserved-words` This allows your business to be searchable on the Public Record."
+        "body": "Describe your business's primary activities but refrain from using any `reserved words.|reserved-words` This allows your business to be searchable on the Public Record."
       },
       "agentOfficeAddressState": {
         "label": "State",
