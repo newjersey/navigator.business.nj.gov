@@ -1,3 +1,10 @@
+## [5.42.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.42.0...v5.42.1) (2023-12-07)
+
+
+### Bug Fixes
+
+* architecture roadmap fixes ([de6cefc](https://github.com/newjersey/navigator.business.nj.gov/commit/de6cefc0828a1971d7f22456f5b4ceb7e89e05e8))
+
 # [5.42.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.41.0...v5.42.0) (2023-12-06)
 
 
