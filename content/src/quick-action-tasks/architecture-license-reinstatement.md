@@ -20,7 +20,7 @@ You need to submit a reinstatement application if:
 * Social Security number (SSN)
 * Taxpayer ID
 * Citizenship/immigration status
-* Employment history that covers each architectural job that was signed and sealed during the period of suspended license 
+* Employment history that covers each architectural job that was signed and sealed during the period of license suspension 
 * Explanation of failure to renew promptly 
 * Notarized affidavit 
 * Applicable fees paid
