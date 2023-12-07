@@ -1,8 +1,8 @@
 ---
-slug: employment-agency-types
 filename: employment-agency-types
-displayname: employment-agency-types
 header: Employment and Personnel Services
+slug: employment-agency-types
+displayname: employment-agency-types
 ---
 
 New Jersey’s Division of Consumer Affairs regulates employment agency services and divides them into several categories:
@@ -18,4 +18,4 @@ New Jersey’s Division of Consumer Affairs regulates employment agency services
 - Resume Services/Agents
 - Temporary Help Service Firms
 
-[Employment and Personnel Services licenses](https://www.njconsumeraffairs.gov/epservices) are issued based on criteria such as the type of services offered and the type of personnel to be placed by your business (e.g., Nurses, Accountants, Administrative Assistants, etc.).
+[Employment and Personnel Services licenses](https://www.njconsumeraffairs.gov/epservices) are issued based on criteria such as the type of services offered and the type of personnel to be placed by your business (e.g., Nurses, Accountants, Administrative Assistants, etc.). 
