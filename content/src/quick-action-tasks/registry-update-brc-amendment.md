@@ -18,7 +18,7 @@ Use the DORES’ online [Registry Change Service](https://www20.state.nj.us/TYTR
 
 - A change in your business location and/or mailing address
 - A change to your business's state tax or employer payroll responsibilities
-- A change in your business’ operational months
+- A change in your business’s operational months
 - Authorization request to submit tax/employer payments via electronic funds transfer or update your saved payment information
 - Report your business as the managerial member of a `combined group|combined-group`
 - Report a newly acquired `Employer Identification Number (EIN)|ein` to update a temporary State Tax Identification Number (STIN)
