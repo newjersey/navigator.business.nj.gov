@@ -1,4 +1,5 @@
 ---
+slug: certificate-formation
 filename: certificate-formation
 displayname: certificate-formation
 header: Certificate of Formation / Certificate of Authority

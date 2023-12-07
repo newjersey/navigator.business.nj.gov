@@ -1,8 +1,8 @@
 ---
+slug: name-reservation
 filename: name-reservation
 displayname: name-reservation
 header: Name Reservation
-slug: name-reservation
 ---
 
 You can reserve a business name with the New Jersey Department of Treasury.

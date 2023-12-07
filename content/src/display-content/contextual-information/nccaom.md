@@ -1,7 +1,7 @@
 ---
+slug: nccaom
 filename: nccaom
 displayname: nccaom
-slug: NCCAOM
 header: NCCAOM
 ---
 

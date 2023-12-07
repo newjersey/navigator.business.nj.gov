@@ -1,4 +1,5 @@
 ---
+slug: Medicaid
 filename: Medicaid
 displayname: Medicaid
 header: Medicaid

@@ -1,4 +1,5 @@
 ---
+slug: charter-documents
 filename: charter-documents
 displayname: charter-documents
 header: Charter Documents

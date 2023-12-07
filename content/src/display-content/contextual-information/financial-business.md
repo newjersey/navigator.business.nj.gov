@@ -1,8 +1,8 @@
 ---
+slug: financial-business
 filename: financial-business
 displayname: financial-business
 header: Financial Business
-slug: financial-business
 ---
 
 Corporations that qualify as financial businesses are those which derive 75% of their gross income from the following financial activities:

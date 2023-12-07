@@ -1,8 +1,8 @@
 ---
+slug: cbt-annually
 filename: cbt-annually
 displayname: cbt-annually
 header: Annual Corporate Business Tax Due Dates
-slug: cbt-annually
 ---
 
 There is a schedule in the CBT instruction book that provides detailed due dates:

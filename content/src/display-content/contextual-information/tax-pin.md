@@ -1,4 +1,5 @@
 ---
+slug: tax-pin
 filename: tax-pin
 displayname: tax-pin
 header: Tax PIN

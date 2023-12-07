@@ -1,7 +1,7 @@
 ---
+slug: surety-bond
 filename: surety-bond
 displayname: surety-bond
-slug: surety-bond
 header: Surety Bond
 ---
 

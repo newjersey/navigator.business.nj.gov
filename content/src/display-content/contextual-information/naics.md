@@ -1,4 +1,5 @@
 ---
+slug: naics
 filename: naics
 displayname: naics
 header: NAICS Code

@@ -1,4 +1,5 @@
 ---
+slug: ada-compliant
 filename: ada-compliant
 displayname: ada-compliant
 header: ADA Compliant Property

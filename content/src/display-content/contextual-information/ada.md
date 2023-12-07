@@ -1,4 +1,5 @@
 ---
+slug: ada
 filename: ada
 displayname: ada
 header: The Americans with Disabilities Act (ADA)

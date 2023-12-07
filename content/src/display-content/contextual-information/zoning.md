@@ -1,4 +1,5 @@
 ---
+slug: zoning
 filename: zoning
 displayname: zoning
 header: Zoning

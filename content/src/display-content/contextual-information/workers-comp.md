@@ -1,4 +1,5 @@
 ---
+slug: workers-comp
 filename: workers-comp
 displayname: workers-comp
 header: Workers' Compensation Insurance
