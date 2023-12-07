@@ -2,7 +2,7 @@
   "dashboardDefaults": {
     "calendarFeedbackButtonText": "Share feedback about the calendar.",
     "calendarTooltip": "This calendar shows you New Jersey tax and reporting due dates unique to your business. Click on any item to learn where to file.",
-    "calendarAddDateMd": "Add your `business effective date|effective-date` to [your profile](/profile#question-dateOfFormation) to see your Annual Report deadline here.",
+    "calendarAddDateMd": "Add your `business effective date|effective-date` to [your profile](/profile#question-dateOfFormation) to see your annual report deadline here.",
     "calendarLegalText": "This calendar is not a complete list of your obligations as a business.",
     "calendarListViewMoreButton": "View More",
     "calendarFilingDueDateLabel": "Due",

@@ -13,7 +13,7 @@ Acquiring commercial real estate in New Jersey involves a series of steps that r
 
 ### Site Selection Considerations
 
-* **Define Your Objectives:** Determine your investment goals and the type of commercial property you want to acquire (e.g., office space, retail, industrial, etc.). Clarifying your objectives will help you focus your search and decision-making.
+* **Define Your Objectives:** Determine your investment goals and the type of commercial property you want to acquire, such as office space, retail, industrial, etc. Clarifying your objectives will help you focus your search and decision-making.
 * **Set a Budget:** Establish a budget for your commercial property purchase. Consider not just the purchase price but also additional costs like closing expenses, due diligence, and potential renovations.
 * **Obtain Financing:** Secure financing for your purchase. This may involve approaching banks, commercial lenders, or private investors to get pre-approved for a loan or establish your funding capacity.
 * **Assemble a Team of Professionals:** Engage key professionals to guide you through the acquisition process, including a commercial real estate broker, a real estate attorney, and potentially a property inspector and appraiser.
