@@ -171,7 +171,7 @@
       },
       "addressLine1": {
         "label": "Address Line 1",
-        "error": "Enter your business' street name and number."
+        "error": "Enter your business's street name and number."
       },
       "nonprofitBoardMemberRightsSpecified": {
         "label": "Provisions - Board Member Rights",
@@ -421,7 +421,7 @@
         "body": "Board member qualifications are specified"
       },
       "annualReportNotification": {
-        "checkboxText": "I want to be reminded of any Annual Reports Filing(s), so that I never miss an Annual Report deadline."
+        "checkboxText": "I want to be reminded of any annual Reports Filing(s), so that I never miss an Annual Report deadline."
       },
       "businessPurpose": {
         "label": "Business Purpose",
