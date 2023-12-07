@@ -12,8 +12,8 @@ export const QuickActionLinkTile = ({ quickAction }: Props): ReactElement => {
   };
 
   return (
-    <div className="quick-action-tile desktop:grid-col-6 flex fa-stretch">
-      <div className="bg-base-extra-light border-base-lightest border-2px radius-md padding-2 fdr fac text-align-left">
+    <div className="quick-action-tile-spacing desktop:grid-col-6 flex fa-stretch">
+      <div className="quick-action-tile radius-md padding-2 fdr fac text-align-left">
         <img
           className="usa-icon--size-4 margin-right-2"
           src={`/img/quick-actions/${quickAction.icon}`}
