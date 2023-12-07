@@ -38,7 +38,7 @@ The Angel Match Program provides funding from the State Small Business Credit In
 
 ### Eligibility
 
-* Must have minimum revenues of $100,000 within the trailing 12 months
+* Must have minimum revenues of $100,000 within the `trailing 12 months|Trailing 12 months (TTM) figures report metrics based on the last 12 months (or four quarters) to date on a rolling basis.`
 * Business must be able to demonstrate a minimum of $100,000 in investment interest from at least two investors independent from the company
 * Primary business is commercializing and marketing a product
 * Early stage within an [NJEDA targeted industry](https://www.njeda.gov/wp-content/uploads/2022/11/Appendix-C-Targeted-Industries-Definitions-12.6.22_v2.pdf)
@@ -50,4 +50,4 @@ The Angel Match Program provides funding from the State Small Business Credit In
 
 > **Benefits**
 >
-> Convertible note from $100,000 to $500,000 with 10-year maturity, 3% interest rate, and no payments for the first seven years.
+> `Convertible note|convertible-note` from $100,000 to $500,000 with 10-year maturity, 3% interest rate, and no payments for the first seven years.
