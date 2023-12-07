@@ -1,8 +1,8 @@
 ---
+slug: impact-zone-business-cannabis
 filename: impact-zone-business-cannabis
 displayname: impact-zone-business-cannabis
 header: Impact Zone Businesses
-slug: impactzonebusiness-cannabis
 ---
 
 Impact Zones are municipalities that have been given this designation based on past criminal marijuana charges and higher concentrations of law enforcement activity, unemployment, and population.

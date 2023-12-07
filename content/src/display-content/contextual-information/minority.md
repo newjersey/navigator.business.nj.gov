@@ -1,7 +1,7 @@
 ---
+slug: minority
 filename: minority
 displayname: minority
-slug: minority
 header: Minority
 ---
 

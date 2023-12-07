@@ -1,8 +1,8 @@
 ---
+slug: substantial-renovation
 filename: substantial-renovation
 displayname: substantial-renovation
 header: Substantial Renovation
-slug: substantial renovation
 ---
 
 Substantial renovation (gut rehab) defined as one of the following:

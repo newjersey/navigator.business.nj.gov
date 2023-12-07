@@ -1,4 +1,5 @@
 ---
+slug: lease-considerations
 filename: lease-considerations
 displayname: lease-considerations
 header: Lease Considerations

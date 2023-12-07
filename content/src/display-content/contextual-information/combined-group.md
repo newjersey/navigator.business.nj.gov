@@ -1,6 +1,6 @@
 ---
-header: Combined Group
 slug: combined-group
+header: Combined Group
 displayname: combined-group
 ---
 

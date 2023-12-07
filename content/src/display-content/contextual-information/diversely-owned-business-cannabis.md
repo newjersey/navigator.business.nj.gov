@@ -1,7 +1,7 @@
 ---
+slug: diversely-owned-business-cannabis
 filename: diversely-owned-business-cannabis
 displayname: diversely-owned-business-cannabis
-slug: diverselyownedbusiness-cannabis
 header: Diversely-Owned Businesses
 ---
 
