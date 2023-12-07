@@ -48,5 +48,5 @@ The Combined Heat and Power - Fuel Cells (CHP-FC) program aims to enhance energy
 >
 > - No more than $4.5M in new incentive commitments can be made towards ≥40% Fuel Cells during Fiscal Year 2023
 > - Of the $4.5M, no single prime mover manufacturer can qualify for a total of $1.5M in incentives for qualifying ≥40% Fuel Cells equipment
-> - Natural gas, hydrogen, biogas, and mixed fuel (e.g., natural gas and biogas) CHP-FC equipment installed on the customer side of the utility meter is eligible for incentives
+> - Natural gas, hydrogen, biogas, and mixed fuel (such as, natural gas and biogas) CHP-FC equipment installed on the customer side of the utility meter is eligible for incentives
 > - 100% renewable fueled projects, including biogas and landfill gas-fueled projects which meet CHP program criteria, are also eligible to receive incentives
