@@ -49,4 +49,4 @@ The Large Energy Users Program (LEUP) encourages large commercial and industrial
 > ### Benefits
 >
 > - There is an entity cap of $4M per fiscal year, and available funding vary by technology
-> - Eligible annual costs include standard costs associated with electric and/or gas delivery and supply (e.g., generation, transmission, distribution, SBC, etc.) and not those that are unique to the customer (e.g., energy management charges)
+> - Eligible annual costs include standard costs associated with electric and/or gas delivery and supply (for example, generation, transmission, distribution, SBC, etc.) and not those that are unique to the customer (e.g., energy management charges)
