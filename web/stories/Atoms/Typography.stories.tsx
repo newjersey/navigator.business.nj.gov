@@ -80,6 +80,22 @@ const Template = () => {
     cSS: <div className="h2-styling">Hello</div>,
   };
 
+  const h2Unbolded = {
+    title: <div>H2 Unbolded</div>,
+    usaProseElement: (
+      <Heading level={2} className="font-weight-normal">
+        Hello
+      </Heading>
+    ),
+    usaProseCSS: <div className="h2-styling font-weight-normal">Hello</div>,
+    element: (
+      <Heading level={2} className="font-weight-normal">
+        Hello
+      </Heading>
+    ),
+    cSS: <div className="h2-styling font-weight-normal">Hello</div>,
+  };
+
   const h3 = {
     title: <div>H3</div>,
     usaProseElement: <Heading level={3}>Hello</Heading>,
@@ -174,6 +190,7 @@ const Template = () => {
       <div>{renderFiveColumns(h1Large)}</div>
       <div>{renderFiveColumns(h1)}</div>
       <div>{renderFiveColumns(h2)}</div>
+      <div>{renderFiveColumns(h2Unbolded)}</div>
       <div>{renderFiveColumns(h3)}</div>
       <div>{renderFiveColumns(h4)}</div>
       <div>{renderFiveColumns(h5)}</div>
