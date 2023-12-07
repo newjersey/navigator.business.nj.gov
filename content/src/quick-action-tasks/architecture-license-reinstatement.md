@@ -30,9 +30,9 @@ You need to submit a reinstatement application if:
 * List of licenses or certificates, past and present, if applicable
 
 
-  :
+  
 
-  :::greenBox 
+ :::greenBox 
    **Once completed, you will have**:
 
   * The same license number
