@@ -5,7 +5,7 @@ import { Meta, StoryObj } from "@storybook/react";
 const meta: Meta<typeof QuickActionTaskTile> = {
   title: "Molecules/QuickAction",
   component: QuickActionTaskTile,
-  decorators: [(Story) => <div className="width-desktop grid-row">{Story()}</div>],
+  decorators: [(Story) => <div className="width-mobile">{Story()}</div>],
   parameters: {
     design: {
       type: "figma",
