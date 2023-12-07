@@ -1,8 +1,8 @@
 ---
+slug: remote-worker
 filename: remote-worker
 displayname: remote-worker
 header: Remote Worker
-slug: remote-worker
 ---
 
 Out-of-State businesses with one or more employees that have been paid wages of $1,000 or more within a calendar year, while performing services within the State have remote workers.

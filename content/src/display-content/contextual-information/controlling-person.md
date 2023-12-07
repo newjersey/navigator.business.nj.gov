@@ -1,8 +1,8 @@
 ---
+slug: controlling-person
 filename: controlling-person
 displayname: controlling-person
 header: Controlling Person
-slug: controlling-person
 ---
 
 A controlling person in a company can be:

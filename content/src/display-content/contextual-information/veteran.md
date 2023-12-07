@@ -1,7 +1,7 @@
 ---
+slug: veteran
 filename: veteran
 displayname: veteran
-slug: Veteran
 header: Veteran
 ---
 

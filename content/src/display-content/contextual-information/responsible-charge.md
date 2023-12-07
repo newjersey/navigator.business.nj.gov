@@ -1,7 +1,7 @@
 ---
+slug: responsible-charge
 filename: responsible-charge
 displayname: responsible-charge
-slug: responsible-charge
 header: Responsible Charge
 ---
 

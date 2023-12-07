@@ -1,7 +1,7 @@
 ---
+slug: eoi-cannabis
 filename: eoi-cannabis
 displayname: eoi-cannabis
-slug: eoi-cannabis
 header: Entity of Interest
 ---
 

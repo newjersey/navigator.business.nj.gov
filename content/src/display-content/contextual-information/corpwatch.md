@@ -1,4 +1,5 @@
 ---
+slug: corpwatch
 filename: corpwatch
 displayname: corpwatch
 header: CorpWatch

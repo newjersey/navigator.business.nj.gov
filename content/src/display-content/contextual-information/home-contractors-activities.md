@@ -1,4 +1,5 @@
 ---
+slug: home-contractors-activities
 filename: home-contractors-activities
 displayname: home-contractors-activities
 header: Are You a Home Improvement Contractor?

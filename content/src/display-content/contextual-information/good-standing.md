@@ -1,4 +1,5 @@
 ---
+slug: good-standing
 filename: good-standing
 displayname: good-standing
 header: Certificate of Good Standing

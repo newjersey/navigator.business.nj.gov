@@ -1,4 +1,5 @@
 ---
+slug: certified-copy
 filename: certified-copy
 displayname: certified-copy
 header: Certified Copy

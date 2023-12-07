@@ -1,8 +1,8 @@
 ---
+slug: socially-economically-disadvantaged
 filename: socially-economically-disadvantaged
 displayname: socially-economically-disadvantaged
 header: Socially and Economically Disadvantaged Individuals
-slug: socially-economically-disadvantaged
 ---
 
 For certification purposes, the New Jersey Department of Transportation defines a socially disadvantaged individual as an individual who self-identifies as:

@@ -1,8 +1,8 @@
 ---
+slug: reserved-words
 filename: reserved-words
 displayname: reserved-words
 header: Reserved Words
-slug: reserved-words
 ---
 
 The N﻿ew Jersey Department of Revenue and Enterprise Services (DORES) does not allow certain words to be used in your business name and business purpose. Words like “bank” that indicate a regulated service require permission from DORES in advance.

@@ -1,8 +1,8 @@
 ---
+slug: ube-attorney
 filename: ube-attorney
 displayname: ube-attorney
 header: Uniform Bar Examination (UBE)
-slug: ube-attorney
 ---
 
 The UBE is a standardized test drafted by the National Conference of Bar Examiners (NCBE). It's uniformly administered, graded, and scored in all participating states.

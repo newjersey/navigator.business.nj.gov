@@ -1,8 +1,8 @@
 ---
+slug: nexus-business
 filename: nexus-business
 displayname: nexus-business
 header: Nexus Business - Operations in New Jersey
-slug: nexus-business
 ---
 
 A nexus business is an out-of-state business (also known as a foreign business) that has operations in New Jersey. If any of the following occurs in New Jersey, you are a nexus business:

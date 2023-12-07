@@ -1,8 +1,8 @@
 ---
+slug: foreign-business
 filename: foreign-business
 displayname: foreign-business
 header: Out-of-State or Foreign Business
-slug: foreign-business
 ---
 
 An out-of-state or foreign business is a business that has already formed outside of New Jersey and is now looking to do business in New Jersey.
