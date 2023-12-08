@@ -79,14 +79,14 @@ export const AutosaveSpinner = (props: Props): ReactElement => {
       return (
         <>
           <CircularProgress size="1.5rem" />
-          <div className="margin-left-1 no-wrap">{Config.autosaveDefaults.savingText}</div>
+          <div className="margin-left-1 no-wrap text-base-dark">{Config.autosaveDefaults.savingText}</div>
         </>
       );
     case "SAVED":
       return (
         <>
           <Icon>check</Icon>
-          <div className="margin-left-1 no-wrap">{Config.autosaveDefaults.savedText}</div>
+          <div className="margin-left-1 no-wrap text-base-dark">{Config.autosaveDefaults.savedText}</div>
         </>
       );
     case "HIDDEN":
