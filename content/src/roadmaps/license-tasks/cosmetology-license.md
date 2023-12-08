@@ -20,16 +20,14 @@ id: undefined
 webflowId: 64ca743a7c4e7f4f3a3c50f2
 ---
 
----
-
-### Eligibility Criteria
+## Eligibility Criteria
 
 - Be at least 17 years old
 - Complete the required 1,200 hours of education and training from an approved school in New Jersey, another state or a foreign country
 - Pass the cosmetology licensing examination
 - Hold a [temporary cosmetology permit](https://www.njconsumeraffairs.gov/cos/Applications/Application-for-a-Temporary-Permit.pdf) (you must obtain a temporary cosmetology permit before a cosmetology license can be issued)
 
-### Application Requirements
+## Application Requirements
 
 - Proof of age, such as birth certificate, passport, driver's license
 - Proof of completing the required education and training hours

@@ -57,6 +57,8 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
             )}
           </div>
         </div>
+        <Content>{props.funding.summaryDescriptionMd}</Content>
+        <HorizontalLine />
         <Content>{addNaicsCodeData(props.funding.contentMd)}</Content>
         {props.funding.agency && props.funding.agency.length > 0 ? (
           <>

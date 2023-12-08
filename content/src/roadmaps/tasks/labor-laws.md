@@ -6,6 +6,7 @@ name: Prepare for Employees in New Jersey
 id: labor-laws
 callToActionLink: https://business.nj.gov/pages/employer-requirements
 callToActionText: Learn About New Jersey's Labor Laws
+summaryDescriptionMd: ""
 ---
 
 Now that you have employees, you must comply with New Jersey's labor laws, including but not limited to:

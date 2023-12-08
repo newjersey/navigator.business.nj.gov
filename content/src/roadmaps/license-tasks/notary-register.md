@@ -21,15 +21,13 @@ webflowType: individual-license
 webflowId: 5f77296c2edc674c7cb4a708
 ---
 
----
-
-### Eligibility Criteria
+## Eligibility Criteria
 
 - Be a resident of New Jersey or regularly employed in New Jersey
 - Be 18 years or older
 - Have no convictions involving dishonesty, or a crime of first or second degree under the laws of any State or the Federal Government
 
-### Application Requirements
+## Application Requirements
 
 - You don’t need any supplemental documents for this application
 

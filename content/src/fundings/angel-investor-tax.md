@@ -30,13 +30,12 @@ sector:
 openDate: ""
 dueDate: ""
 descriptionMd: The New Jersey Angel Investor Tax Credit Program establishes refundable tax credits for qualified investments in New Jersey emerging technology businesses to stimulate investment in the innovation economy.
+summaryDescriptionMd: >-
+  The New Jersey Angel Investor Tax Credit Program establishes refundable tax credits for qualified
+  investments in New Jersey emerging technology businesses to stimulate investment in the innovation economy.
 ---
 
-The New Jersey Angel Investor Tax Credit Program establishes refundable tax credits for qualified investments in New Jersey emerging technology businesses to stimulate investment in the innovation economy.
-
----
-
-### Eligibility
+## Eligibility
 
 - Investors in eligible emerging technology businesses or venture funds in New Jersey
 - Both the investor and the technology company must complete the application no later than 6 months from the date of investment

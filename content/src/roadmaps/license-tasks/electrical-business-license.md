@@ -17,12 +17,12 @@ webflowId: 6414793c685ea9e0d858aa8f
 licenseCertificationClassification: PERMIT
 summaryDescriptionMd: >
   You need a permit to operate an electrical contracting business.
-  Business applications are reviewed monthly. Your application must be received ten days prior to the [Board of Examiners of Electrical Contractors monthly meeting](https://www.njconsumeraffairs.gov/elec/Pages/meetings.aspx) to be reviewed during the current month.
+  Business applications are reviewed monthly. Your application must be received ten days prior to the
+  [Board of Examiners of Electrical Contractors monthly meeting](https://www.njconsumeraffairs.gov/elec/Pages/meetings.aspx)
+  to be reviewed during the current month.
 ---
 
----
-
-### Application Requirements
+## Application Requirements
 
 - `Certificate of formation|certificate-formation`
 - Business address

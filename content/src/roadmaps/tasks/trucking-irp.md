@@ -6,15 +6,13 @@ name: File Your International Registration Plan (IRP)
 id: trucking-irp
 callToActionLink: https://www.state.nj.us/mvc/pdf/business/irpqui1.pdf
 callToActionText: File My IRP
+summaryDescriptionMd: >-
+  You need to register your fleet with the International Registration Plan (IRP) in the state where you formed your business to be able to haul loads across state lines.
+
+  The IRP is a reciprocity agreement between all states in the U.S. and Canada.
 ---
 
-You need to register your fleet with the International Registration Plan (IRP) in the state where you formed your business to be able to haul loads across state lines.
-
-The IRP is a reciprocity agreement between all states in the U.S. and Canada.
-
----
-
-### Application Requirements
+## Application Requirements
 
 - Proof of business address, such as bank statements or a certificate of formation
 - USDoT Number

@@ -22,22 +22,20 @@ webflowType: individual-license
 webflowId: 5f772993a195c8849e15b18f
 ---
 
----
-
-### Eligibility Criteria
+## Eligibility Criteria
 
 - Be 21 years old at a minimum
 - Have education or training in HVACR or related field
 - Have work experience under the supervision of a licensed HVACR contractor
 
-### Education and Work Paths
+## Education and Work Paths
 
 - A bachelor’s degree in the HVACR field and one year of experience
 - A bachelor’s degree in a related field and three years of experience
 - Participated in an HVACR training program and have two years of experience
 - Participated in a four-year long apprenticeship program and have one year of work experience
 
-### Application Requirements
+## Application Requirements
 
 - College transcripts, or signed and sealed training certifications (depending on your education path)
 - W2s for every year of work experience for up to four years

@@ -7,13 +7,11 @@ id: transportation-cpcn
 callToActionLink: https://www.nj.gov/mvc/pdf/business/cpcn.pdf
 callToActionText: File My Certificate
 agencyId: nj-motor-vehicle
+summaryDescriptionMd: >-
+  You need to file a Certificate of Public Convenience and Necessity to register your commercial vehicle.
 ---
 
-You need to file a Certificate of Public Convenience and Necessity to register your commercial vehicle.
-
----
-
-### Application Requirements
+## Application Requirements
 
 - Business name
 - Business physical address

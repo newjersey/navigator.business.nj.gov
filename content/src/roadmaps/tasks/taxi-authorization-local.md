@@ -4,17 +4,15 @@ urlSlug: taxi-authorization-local
 filename: taxi-authorization-local
 name: Get Authorization from Your Local Government
 id: taxi-authorization-local
+summaryDescriptionMd: >-
+  Before you can legally operate your car service, you need authorization from the local government where your business is located. You'll also need to check for potential requirements from local governments in the areas where you plan to operate.
 ---
 
-Before you can legally operate your car service, you need authorization from the local government where your business is located. You'll also need to check for potential requirements from local governments in the areas where you plan to operate.
-
----
-
-### Eligibility Criteria
+## Eligibility Criteria
 
 - Vehicles must be registered with the New Jersey Motor Vehicle Commission
 
-### Application Requirements
+## Application Requirements
 
 - Business name
 - Business address
@@ -27,5 +25,5 @@ Before you can legally operate your car service, you need authorization from the
 
 > **Once completed, you will have:**
 >
-> - A license to operate in the municipalities where you applied.  
+> - A license to operate in the municipalities where you applied.
 >   **Note:** The license must be displayed on all the vehicles in your fleet

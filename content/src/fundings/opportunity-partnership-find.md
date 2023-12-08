@@ -34,13 +34,13 @@ sector:
 openDate: ""
 dueDate: ""
 descriptionMd: Opportunity Partnership helps employers identify an appropriate educational institution or training provider to train employees. The business and the school develop training programs to teach necessary skills. Upon completing the program, trainees must qualify for entry-level positions in your company.
+summaryDescriptionMd: >-
+  Opportunity Partnership helps employers identify an appropriate educational institution or training provider
+  to train employees. The business and the school develop training programs to teach necessary skills. Upon
+  completing the program, trainees must qualify for entry-level positions in your company.
 ---
 
-Opportunity Partnership helps employers identify an appropriate educational institution or training provider to train employees. The business and the school develop training programs to teach necessary skills. Upon completing the program, trainees must qualify for entry-level positions in your company.
-
----
-
-### Eligibility
+## Eligibility
 
 - Any business can be part of the application, though funding is tied to individuals becoming future employees, not businesses
 

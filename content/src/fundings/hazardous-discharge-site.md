@@ -29,13 +29,12 @@ sector:
 openDate: ""
 dueDate: ""
 descriptionMd: The Hazardous Discharge Site Remediation Fund (HDSRF) provides funding for the investigation, remediation, and cleanup of contaminated and underutilized sites.
+summaryDescriptionMd: >-
+  The Hazardous Discharge Site Remediation Fund (HDSRF) provides funding for the investigation, remediation,
+  and cleanup of contaminated and underutilized sites.
 ---
 
-The Hazardous Discharge Site Remediation Fund (HDSRF) provides funding for the investigation, remediation, and cleanup of contaminated and underutilized sites.
-
----
-
-### Eligibility
+## Eligibility
 
 - Businesses, individuals, or municipalities in New Jersey performing remediation or cleanup of contaminated and underutilized sites
 

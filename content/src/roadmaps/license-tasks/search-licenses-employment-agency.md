@@ -17,8 +17,6 @@ summaryDescriptionMd: >
 licenseCertificationClassification: "LICENSE"
 ---
 
----
-
 > **Once completed, you will have:**
 >
 > - A license to operate as an employment agency

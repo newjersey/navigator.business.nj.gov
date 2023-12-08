@@ -8,6 +8,7 @@ callToActionLink: https://nj-crc-public.nls.egov.com/#!/nj-crc/register
 callToActionText: Apply for My Annual Cannabis License
 required: true
 agencyId: nj-cannabis-commission
+summaryDescriptionMd: ""
 ---
 
 This task intentionally left blank. Text here will not be displayed. test

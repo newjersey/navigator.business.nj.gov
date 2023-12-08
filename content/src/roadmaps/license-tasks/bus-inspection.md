@@ -26,13 +26,11 @@ webflowId: 648b6ec5ff1d0d38af2f5a57
 licenseCertificationClassification: ""
 ---
 
----
-
-### Inspection Requirements:
+## Inspection Requirements
 
 - Vehicle title
 
-### Registration Requirements
+## Registration Requirements
 
 - Form SS-14 Authorization to Issue School Bus License Plates (received upon successful vehicle inspection)
 - Copy of the commercial vehicle insurance policy for your vehicle

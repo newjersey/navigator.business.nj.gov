@@ -19,9 +19,7 @@ summaryDescriptionMd: >
   If you own or plan to own a real estate agency, you need a real estate broker license.
 ---
 
----
-
-### Eligibility Criteria
+## Eligibility Criteria
 
 - A real estate agent license
 - A high school education or equivalency
@@ -30,7 +28,7 @@ summaryDescriptionMd: >
 - Completed two 30-hour courses on agency/ethics and office management
 - Passing grades on the broker license exam
 
-### Application Requirements
+## Application Requirements
 
 - A written statement from the supervising broker verifying full-time employment for the applicant for the past three years
 - An applicant ID (found in the licensure exam results form)

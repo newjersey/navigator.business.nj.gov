@@ -18,13 +18,11 @@ summaryDescriptionMd: >
   You need a cottage food operator (home baker) permit to sell food/baked goods prepared in your home. See the [application instructions](https://www.nj.gov/health/forms/cfo-1instr.pdf) and the [Department of Health code for cottage industries](https://www.nj.gov/health/ceohs/phfpp/retailfood/cottagefood.shtml#5) for important information on allowed ingredients, allergens, and labeling requirements.
 ---
 
----
-
-### Eligibility Criteria
+## Eligibility Criteria
 
 - Food protection management certificate from an [accredited program](https://www.nj.gov/health/ceohs/phfpp/retailfood/cottagefood.shtml#5:~:text=FOOD%20PROTECTION%20MANAGER%20CERTIFICATION)
 
-### Application Requirements
+## Application Requirements
 
 - A business name
 - The applicant’s home address

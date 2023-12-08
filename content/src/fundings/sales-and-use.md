@@ -24,13 +24,12 @@ sector: []
 openDate: ""
 dueDate: ""
 descriptionMd: The Sales and Use Tax Exemption Program allows qualified businesses to receive a sales tax exemption certificate for purchases related to the construction and renovation of a new business location.
+summaryDescriptionMd: >-
+  The Sales and Use Tax Exemption Program allows qualified businesses to receive a sales tax exemption
+  certificate for purchases related to the construction and renovation of a new business location.
 ---
 
-The Sales and Use Tax Exemption Program allows qualified businesses to receive a sales tax exemption certificate for purchases related to the construction and renovation of a new business location.
-
----
-
-### Eligibility
+## Eligibility
 
 - Companies must have 1,000 or more employees and relocate at least 500 workers to a new or substantially rehabilitated facility, or
 - Life sciences or manufacturing companies relocating 250 or more employees

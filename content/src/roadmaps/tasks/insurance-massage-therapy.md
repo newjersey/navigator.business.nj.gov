@@ -4,13 +4,11 @@ urlSlug: insurance-massage-therapy
 filename: insurance-massage-therapy
 name: Obtain an Insurance Policy
 id: insurance-massage-therapy
+summaryDescriptionMd: >-
+  To complete your massage therapy business application, you need to obtain two insurance policies.
 ---
 
-To complete your massage therapy business application, you need to obtain two insurance policies.
-
----
-
-### Insurance Requirements
+## Insurance Requirements
 
 - **Professional liability insurance:** To receive your massage therapy license, you must provide proof of professional liability insurance coverage in a minimum amount of $1M per occurrence and $3M aggregate per policy year.
 - **Workers' compensation insurance:** If you plan to have employees, the State of New Jersey requires you to get `workers' comp insurance|workers-comp`.

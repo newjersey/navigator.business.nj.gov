@@ -16,17 +16,16 @@ callToActionText: Apply for My License
 webflowId: 5f7728f5e8bf507c5e317899
 licenseCertificationClassification: LICENSE
 summaryDescriptionMd: >
-  If you have more than six children under your care you must run your child care services outside of your home and will need a child care center license.
+  If you have more than six children under your care you must run your child care services outside of your
+  home and will need a child care center license.
 ---
 
----
-
-### Eligibility
+## Eligibility Criteria
 
 - Have six or more children under your care
 - Have all staff be at least 18 years old
 
-### Application Requirements
+## Application Requirements
 
 - `EIN|ein`
 - `Business registration certificate (BRC)|business-reg-certificate`
@@ -36,7 +35,7 @@ summaryDescriptionMd: >
 - Map of your business location with the location of the outdoor playing area
 - Applicable fees paid
 
-### After the Initial Application
+## After the Initial Application
 
 - You will receive a notice via email to request forms from the State of New Jersey for criminal background checks and Child Abuse Record Information (CARI) checks for all staff and business representatives
 - You will be contacted by a representative from the Office of Licensing to arrange for an official site inspection

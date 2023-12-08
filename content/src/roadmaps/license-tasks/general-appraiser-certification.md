@@ -16,16 +16,14 @@ licenseCertificationClassification: "CERTIFICATION"
 summaryDescriptionMd: "You need a certification to be a general real property appraiser and appraise all types of property. If you are opening an `Appraisal Management Company|appraisal-management-company` you must have a certified appraiser."
 ---
 
----
-
-### Eligibility Criteria
+## Eligibility Criteria
 
 - Have a bachelor’s degree from an accredited university
 - Complete 3,000 hours of relevant work experience in no fewer than 18 months – 1,500 hours must be in non-residential appraisal work
 - Complete 300 classroom hours of appraisal education as specified in the [Required Core Curriculum](https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx) (see “Certified General Appraiser Forms”: “Certified General Real Property Appraiser Criteria” and “Certified General Core Curriculum Education Worksheet”)
 - Successfully pass the AQB (Appraiser Qualifications Board) approved Certified General Real Property Appraiser exam
 
-### Application Requirements
+## Application Requirements
 
 - Social Security number (SSN) or Individual Taxpayer Identification number (ITIN)
 - Mailing address

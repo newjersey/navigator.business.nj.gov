@@ -7,19 +7,19 @@ id: task-test
 callToActionLink: https://dev.navigator.business.nj.gov/mgmt/cms#/collections/business-formation-c-corp
 callToActionText: My CTA Button Goes Here
 formName: this is where you put the form name/number
+summaryDescriptionMd: >-
+  The task definition goes here.
+
+
+  A few sentences with the most important information is enough.
 ---
 
-The task definition goes here.\
-A few sentences with the most important information is enough.
-
----
-
-### Eligibility Criteria
+## Eligibility Criteria
 
 - If related to an individual, age, licensing, education, work experience, etc would be listed here
 - If related to a business, specific permits, licensing, etc. would go here
 
-### Application Requirements
+## Application Requirements
 
 - Identify terms in the application process that need clarification or definition
 - List documentation needed to complete the application (college transcripts, credit report, certificate of good standing, etc.)
@@ -27,7 +27,7 @@ A few sentences with the most important information is enough.
 - End this list with: "pay any associated fees"
 
 :::infoAlert
-t﻿his is how any "notes" are displayed.
+this is how any "notes" are displayed.
 :::
 
 > **Once completed, you will have:**

@@ -28,13 +28,12 @@ sector:
 openDate: ""
 dueDate: ""
 descriptionMd: Edison Innovation VC Growth Fund provides funding to early-stage, emerging technology businesses matched with an outside equity investor within the last 90 days.
+summaryDescriptionMd: >-
+  Edison Innovation VC Growth Fund provides funding to early-stage, emerging technology businesses matched
+  with an outside equity investor within the last 90 days.
 ---
 
-Edison Innovation VC Growth Fund provides funding to early-stage, emerging technology businesses matched with an outside equity investor within the last 90 days.
-
----
-
-### Eligibility
+## Eligibility
 
 - Venture capital supported New Jersey-based technology companies with a minimum trailing 12-month commercial revenues of $500,000
 - This revenue amount must exceed the amount of the potential Edison Innovation Fund investment amount

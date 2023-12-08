@@ -8,13 +8,11 @@ callToActionLink: https://www.njconsumeraffairs.gov/regulations/Chapter-39-State
 callToActionText: "Read the Pharmacy Handbook "
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Pharmacy
+summaryDescriptionMd: >-
+  The State regulates pharmacies for the safety of customers and employees and has released a handbook specifically to help guide pharmacies on State rules.
 ---
 
-The State regulates pharmacies for the safety of customers and employees and has released a handbook specifically to help guide pharmacies on State rules.
-
----
-
-### Handbook Contents
+## Handbook Contents
 
 - Permit application and renewal process
 - Shop requirements (site design, appliances, and library)

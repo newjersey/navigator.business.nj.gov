@@ -6,6 +6,7 @@ urlSlug: "generic-task-3-url-slug"
 name: "Generic Task 3"
 callToActionLink: "www.generic-task-3.com"
 callToActionText: "Generic Task 3 CTA"
+summaryDescriptionMd: "Generic Task 3 Summary"
 ---
 
 Generic Task 3 Contents

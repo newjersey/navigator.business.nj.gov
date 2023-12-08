@@ -7,13 +7,11 @@ id: healthcare-license
 callToActionLink: https://newjersey.mylicense.com/verification/Search.aspx?facility=N
 callToActionText: Verify My Staff's Healthcare Licenses
 agencyId: nj-consumer-affairs
+summaryDescriptionMd: >-
+  All healthcare providers in your medical facility need to be licensed medical professionals.
 ---
 
-All healthcare providers in your medical facility need to be licensed medical professionals.
-
----
-
-### Licensing Requirements by Role
+## Licensing Requirements By Role
 
 - [Medical Examiners](https://www.njconsumeraffairs.gov/bme/Pages/applications.aspx)
 - [Midwives](https://www.njconsumeraffairs.gov/mid/Pages/default.aspx)

@@ -1,5 +1,5 @@
 ---
-filename: Food and Agriculture Research & Development Grant Program
+filename: food-agriculture-grant
 name: Food and Agriculture Research & Development Grant Program
 urlSlug: food-agriculture-grant
 id: food-agriculture-grant
@@ -45,16 +45,17 @@ sector:
   - waste-management-and-Remediation
   - other-services
 publishStageArchive: null
+summaryDescriptionMd: >-
+  The program's goal is to support innovation from researchers and entrepreneurs focused on developing
+  technology and other solutions to address food insecurity in New Jersey. The program aims to fund 10
+  companies for awards of up to $75,000 each.
 ---
-The program's goal is to support innovation from researchers and entrepreneurs focused on developing technology and other solutions to address food insecurity in New Jersey. The program aims to fund 10 companies for awards of up to $75,000 each.
 
-- - -
+## Eligibility
 
-### Eligibility
-
-* Have a New Jersey tax clearance certificate listing New Jersey Commission on Science, Innovation and Technology
-* Have between 1-50 full-time workers at time of application
-* Have less than or equal to $5,000,000 in prior year sales revenue (excluding grant revenue)
+- Have a New Jersey tax clearance certificate listing New Jersey Commission on Science, Innovation and Technology
+- Have between 1-50 full-time workers at time of application
+- Have less than or equal to $5,000,000 in prior year sales revenue (excluding grant revenue)
 
 > **Benefits**
 >

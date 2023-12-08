@@ -1,5 +1,5 @@
 ---
-filename: New Jersey’s Clean Energy Program – Combined Heat & Power - Fuel Cells
+filename: Clean Energy Program - Combined Heat and Power - Fuel Cells
 name: New Jersey’s Clean Energy Program – Combined Heat & Power - Fuel Cells
 urlSlug: njcep-chpfc
 id: njcep-chpfc
@@ -33,13 +33,14 @@ sector:
   - real-estate
   - other-services
 publishStageArchive: ""
+summaryDescriptionMd: >-
+  The Combined Heat and Power - Fuel Cells (CHP-FC) program aims to enhance energy efficiency through on-site
+  power generation with recovery and productive use of waste heat, and to reduce existing and new demands to
+  the electric power grid. The program plans to do this by providing generous financial incentives for
+  Combined Heat & Power (CHP) and Fuel Cell (FC) installations.
 ---
 
-The Combined Heat and Power - Fuel Cells (CHP-FC) program aims to enhance energy efficiency through on-site power generation with recovery and productive use of waste heat, and to reduce existing and new demands to the electric power grid. The program plans to do this by providing generous financial incentives for Combined Heat & Power (CHP) and Fuel Cell (FC) installations.
-
----
-
-### Eligibility
+## Eligibility
 
 - CHP or Waste Heat to Power projects must achieve an annual system efficiency of at least 60% (Higher Heating Value - HHV), based on total energy input and total utilized energy output
 - FC systems must achieve an annual electric system efficiency of at least 40% (HHV) based on Net Useful Electric Power plus Net Useful Thermal Production (if any) divided by the Total Fuel Input at HHV

@@ -26,13 +26,12 @@ county:
   - All
 sector: []
 publishStageArchive: null
+summaryDescriptionMd: >-
+  The Small Business Improvement Grant offers reimbursement for costs associated with completed building
+  improvements or purchased new furniture, fixtures and equipment made since March 9th, 2020.
 ---
 
-The Small Business Improvement Grant offers reimbursement for costs associated with completed building improvements or purchased new furniture, fixtures and equipment made since March 9th, 2020.
-
----
-
-### Eligibility
+## Eligibility
 
 - Small businesses and nonprofits in the process of making improvements to their business with a minimum expense of $5,000
 

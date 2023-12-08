@@ -20,15 +20,13 @@ webflowId: 5f7729541a08097ccbbb2ecb
 licenseCertificationClassification: LICENSE
 ---
 
----
-
-### Eligibility Criteria
+## Eligibility Criteria
 
 - Be 18 years old at a minimum
 - Be legally able to conduct business and be responsible for all business debt
 - Have the appropriate experience to hold an auto body repair business
 
-### Application Requirements
+## Application Requirements
 
 - A `certificate of occupancy|certificate-occupancy`
 - A written approval by the local clerk or zoning office confirming that the location has been approved

@@ -21,9 +21,7 @@ webflowType: business-license
 webflowId: 5f77299ae10dec7f6a025080
 ---
 
----
-
-### Application Requirements
+## Application Requirements
 
 - A digital copy of Photo ID
 - The name and physical address of your business

@@ -6,6 +6,7 @@ urlSlug: "blocking-task-2-url-slug"
 name: "Blocking Task 2"
 callToActionLink: ""
 callToActionText: ""
+summaryDescriptionMd: "Blocking Task 2 Summary"
 ---
 
 Blocking Task 2 Contents

@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { HorizontalLine } from "@/components/HorizontalLine";
 import { NavBar } from "@/components/navbar/NavBar";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
@@ -36,6 +37,8 @@ export const CertificationElement = (props: { certification: Certification }): R
         <div className="margin-bottom-2">
           <h1>{props.certification.name}</h1>
         </div>
+        <Content>{props.certification.summaryDescriptionMd}</Content>
+        <HorizontalLine />
         <Content>{addNaicsCodeData(props.certification.contentMd)}</Content>
       </div>
       {props.certification.callToActionLink && props.certification.callToActionText && (

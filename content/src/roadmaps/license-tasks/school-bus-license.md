@@ -28,9 +28,7 @@ webflowType: individual-license
 webflowId: 5f772935f278cc9d99b0ce1e
 ---
 
----
-
-### Eligibility Criteria
+## Eligibility Criteria
 
 - 21 years old at minimum
 - Basic New Jersey Driver's License (Class D)
@@ -38,7 +36,7 @@ webflowId: 5f772935f278cc9d99b0ce1e
 - Minimum of 20/40 vision in each eye with or without glasses
 - Ability to recognize red, green, and amber colors
 
-### Application Requirements
+## Application Requirements
 
 - Proof of identity, NJ residency, and Social Security Number (SSN) according to [New Jersey’s ID requirements](https://www.state.nj.us/mvc/pdf/license/Standard_License_Sheet_Engl.pdf)
 - [Medical Examiner's Certificate](https://www.state.nj.us/mvc/pdf/drivertopics/RA_4_1_a.pdf) completed by a healthcare provider

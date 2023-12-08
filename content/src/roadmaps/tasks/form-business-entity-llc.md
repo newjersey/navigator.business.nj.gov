@@ -7,13 +7,11 @@ id: form-business-entity
 callToActionLink: https://www.njportal.com/DOR/BusinessFormation/CompanyInformation/BusinessName
 callToActionText: Form My Business
 agencyId: nj-revenue-enterprise-services
+summaryDescriptionMd: >-
+  You must register your business name and form your `business structure|business-structure-learn-more` with the State.
 ---
 
-You must register your business name and form your `business structure|business-structure-learn-more` with the State.
-
----
-
-### Application Requirements
+## Application Requirements
 
 - Available business name
 - Business structure

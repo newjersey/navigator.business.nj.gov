@@ -26,13 +26,12 @@ sector:
 openDate: ""
 dueDate: ""
 descriptionMd: This program provides low-interest loans to finance the costs of infrastructure needed to achieve or maintain compliance with Safe Drinking Water Act (SDWA) requirements and to protect public health.
+summaryDescriptionMd: >-
+  This program provides low-interest loans to finance the costs of infrastructure needed to achieve or
+  maintain compliance with Safe Drinking Water Act (SDWA) requirements and to protect public health.
 ---
 
-This program provides low-interest loans to finance the costs of infrastructure needed to achieve or maintain compliance with Safe Drinking Water Act (SDWA) requirements and to protect public health.
-
----
-
-### Eligibility
+## Eligibility
 
 Must be a nonprofit, non-community water systems in New Jersey and use the funds for the following construction projects:
 

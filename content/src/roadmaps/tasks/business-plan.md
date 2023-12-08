@@ -6,13 +6,13 @@ name: Write Your Business Plan
 id: business-plan
 callToActionLink: ""
 callToActionText: ""
+summaryDescriptionMd: >-
+  Your business plan guides your business and helps you make decisions around operations, staffing, marketing,
+  and financing. Learn
+  [how to structure your business plan](https://business.nj.gov/pages/create-a-business-plan).
 ---
 
-Your business plan guides your business and helps you make decisions around operations, staffing, marketing, and financing. Learn [how to structure your business plan](https://business.nj.gov/pages/create-a-business-plan).
-
----
-
-### Business Support
+## Business Support
 
 1. The U.S. Small Business Administration's [Business Plan Tool](https://www.sba.gov/business-guide/plan-your-business/write-your-business-plan) provides a step-by-step process to update the status of your business plan
 2. [The New Jersey Small Business Development Center](https://njsbdc.com/) regional offices are in every county and offer one-on-one support

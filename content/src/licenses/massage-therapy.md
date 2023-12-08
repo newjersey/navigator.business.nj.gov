@@ -13,7 +13,7 @@ You will only see the option to renew online 60 days prior to your expiration da
 
 ---
 
-### Application Requirements
+## Application Requirements
 
 - Business name
 - License number

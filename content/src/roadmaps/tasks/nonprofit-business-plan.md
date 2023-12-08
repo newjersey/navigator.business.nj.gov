@@ -7,15 +7,17 @@ id: nonprofit-business-plan
 callToActionLink: ""
 callToActionText: ""
 formName: ""
+summaryDescriptionMd: >-
+  Your business plan guides your business and helps you make decisions around operations, staffing, marketing,
+  and financing. Learn
+  [how to structure your business plan](https://business.nj.gov/pages/create-a-business-plan).
+
+
+  A nonprofit business plan will help you determine if you qualify for tax exemption based on your business
+  mission and operations.
 ---
 
-Your business plan guides your business and helps you make decisions around operations, staffing, marketing, and financing. Learn [how to structure your business plan](https://business.nj.gov/pages/create-a-business-plan).
-
-A nonprofit business plan will help you determine if you qualify for tax exemption based on your business mission and operations.
-
----
-
-### Business Support
+## Business Support
 
 1. The [NJ Center for Nonprofits](https://njnonprofits.org/) provides tools and learning resources for New Jersey’s nonprofit community
 2. [NJ State Library nonprofit resources](https://libguides.njstatelib.org/nonprofits/home) include information on starting a nonprofit in NJ, fundraising, employment and volunteering, and more

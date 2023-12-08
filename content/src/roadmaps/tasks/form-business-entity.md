@@ -7,14 +7,12 @@ id: form-business-entity
 callToActionLink: https://www.njportal.com/DOR/BusinessFormation/CompanyInformation/BusinessName
 callToActionText: Authorize My Business
 agencyId: nj-revenue-enterprise-services
+summaryDescriptionMd: >-
+  To conduct business in New Jersey, you must register your business name and authorize your
+  `business structure|business-structure-learn-more` with the State.
 ---
 
-To conduct business in New Jersey, you must
-register your business name and authorize your `business structure|business-structure-learn-more` with the State.
-
----
-
-### Application Requirements
+## Application Requirements
 
 - Business name (same name as in your home state)
 - Business structure

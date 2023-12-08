@@ -8,13 +8,12 @@ callToActionLink: https://www.nj.gov/treasury/revenue/pdf/2000.pdf
 callToActionText: Authorize My Business
 agencyId: nj-revenue-enterprise-services
 required: true
+summaryDescriptionMd: >-
+  You must register your business name and `authorize|certificate-formation` your
+  `business structure|business-structure-learn-more` with the State.
 ---
 
-You must register your business name and `authorize|certificate-formation` your `business structure|business-structure-learn-more` with the State.
-
----
-
-### Application Requirements
+## Application Requirements
 
 - Business name and _Doing Business As_ name
 

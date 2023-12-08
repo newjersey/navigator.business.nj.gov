@@ -20,7 +20,7 @@ export const searchWebflowLicenses = (licenses: WebflowLicense[], term: string):
     const division = license.agencyAdditionalContext?.toLowerCase();
     const classification = license.licenseCertificationClassification?.toLowerCase();
     const industry = license.webflowIndustry?.toLowerCase();
-    const summary = license.summaryDescriptionMd?.toLowerCase();
+    const summary = license.summaryDescriptionMd.toLowerCase();
     const filename = license.filename.toLowerCase();
     const urlSlug = license.urlSlug?.toLowerCase();
 

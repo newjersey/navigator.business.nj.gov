@@ -21,9 +21,7 @@ id: home-health-aide-license
 webflowId: 641370d2139a73fe804e07b5
 ---
 
----
-
-### Application Requirements
+## Application Requirements
 
 - `Employer Identification Number (EIN)|ein`
 - Copy of health care practitioner supervisor's registered nursing license

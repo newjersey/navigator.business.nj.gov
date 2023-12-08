@@ -9,7 +9,7 @@ Your accounting firm registration will expire every three years.
 
 ---
 
-### Application Requirements
+## Application Requirements
 
 - Business name
 - License number

@@ -16,6 +16,8 @@ export const Authorization = (): ReactElement => {
 
     return (
       <>
+        <Content>{state.dbaContent.Authorize.summaryDescriptionMd}</Content>
+        <HorizontalLine />
         <Content>{beforeIndentation}</Content>
         <div className="margin-left-8 margin-y-2">
           <Content>{indentedSection}</Content>

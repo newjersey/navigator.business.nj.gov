@@ -1,5 +1,5 @@
 ---
-filename: Haul-Waste
+filename: haul-waste
 displayname: haul-waste
 urlSlug: haul-waste
 name: Obtain Your Waste Hauling Decal, if Applicable
@@ -23,9 +23,7 @@ webflowType: business-license
 webflowId: 5f77291fb0544f2f2d366147
 ---
 
----
-
-### Registration Requirements
+## Registration Requirements
 
 - Affidavit or a notarized application
 - Motor vehicle registration indicating that the vehicle is registered as commercial

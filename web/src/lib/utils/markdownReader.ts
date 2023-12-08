@@ -170,6 +170,7 @@ type FilingGrayMatter = {
   filingMethod: TaxFilingMethod | null;
   filingDetails: string;
   agency: TaxAgency | null;
+  summaryDescriptionMd: string;
 };
 
 type LicenseGrayMatter = {
@@ -236,6 +237,7 @@ type FundingGrayMatter = {
   agencyContact: string;
   descriptionMd: string;
   isNonprofitOnly: boolean | undefined | null;
+  summaryDescriptionMd: string;
 };
 
 type CertificationGrayMatter = {
@@ -248,6 +250,7 @@ type CertificationGrayMatter = {
   applicableOwnershipTypes: string[];
   isSbe: boolean;
   descriptionMd: string;
+  summaryDescriptionMd: string;
 };
 
 type WebflowLicenseGrayMatter = {
@@ -262,6 +265,7 @@ type WebflowLicenseGrayMatter = {
   divisionPhone: string;
   licenseCertificationClassification: string;
   industryId?: string;
+  summaryDescriptionMd: string;
 };
 
 type PostOnboardingGrayMatter = {

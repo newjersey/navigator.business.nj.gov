@@ -6,13 +6,12 @@ name: Identify the Right Location for Your Cannabis Business
 id: cannabis-evaluate-location
 callToActionLink: ""
 callToActionText: ""
+summaryDescriptionMd: >-
+  Confirm that your site's local government allows cannabis businesses. You can do this by checking their
+  local ordinances.
 ---
 
-Confirm that your site's local government allows cannabis businesses. You can do this by checking their local ordinances.
-
----
-
-### Other Site Considerations
+## Other Site Considerations
 
 - **Federal Deposit Insurance Corporation-backed (FDIC) Mortgages:** Cannabis is not legal at the federal level. For this reason, properties with federally insured mortgages cannot be used for cannabis businesses
 - **Demographics considerations:** Research where to locate your business to most effectively reach and serve your target customer base. [Explore demographic tools](https://business.nj.gov/pages/select-a-location) to help you with your research

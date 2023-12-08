@@ -6,13 +6,11 @@ name: Get Your Floor Plan Approved
 id: floor-plan-approval-doh
 callToActionLink: ""
 callToActionText: ""
+summaryDescriptionMd: >-
+  Your local department of health may need approve your floor plan and/or kitchen.
 ---
 
-Your local department of health may need approve your floor plan and/or kitchen.
-
----
-
-### Application Requirements
+## Application Requirements
 
 - Your business's floor plan
 

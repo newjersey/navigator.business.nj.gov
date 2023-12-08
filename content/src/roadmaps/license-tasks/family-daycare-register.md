@@ -17,9 +17,7 @@ summaryDescriptionMd: >
   Register your family daycare business with your local Child Care Resource and Referral Agency to ensure you’re in compliance with state rules and regulations and gain more credibility for your business.
 ---
 
----
-
-### Eligibility Criteria
+## Eligibility Criteria
 
 - Five or fewer children under your care
 - Daycare Administrator:
@@ -36,7 +34,7 @@ summaryDescriptionMd: >
 
 - Read the [Family Daycare provider manual](https://www.nj.gov/dcf/providers/licensing/laws/FCCmanual.pdf) for a full list of home inspection requirements
 
-### Application Requirements
+## Application Requirements
 
 - Medical examination and Tuberculin Mantoux test results for all staff
 - Background check for staff and anyone over the age of 14 living in the family daycare

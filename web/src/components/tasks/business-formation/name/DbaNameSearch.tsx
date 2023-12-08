@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { DbaAvailable } from "@/components/tasks/business-formation/name/DbaAvailable";
 import { DbaUnavailable } from "@/components/tasks/business-formation/name/DbaUnavailable";
 import { SearchBusinessNameForm } from "@/components/tasks/search-business-name/SearchBusinessNameForm";
@@ -20,7 +21,10 @@ export const DbaNameSearch = (): ReactElement => {
 
   return (
     <>
-      <Content>{`${Config.nexusNameSearch.dbaNameHeader}\n\n${Config.nexusNameSearch.dbaNameDescription}`}</Content>
+      <Heading level={2} styleVariant="h3">
+        {Config.nexusNameSearch.dbaNameHeader}
+      </Heading>
+      <Content>{Config.nexusNameSearch.dbaNameDescription}</Content>
       <SearchBusinessNameForm
         unavailable={DbaUnavailable}
         available={DbaAvailable}

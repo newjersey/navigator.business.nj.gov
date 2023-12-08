@@ -7,20 +7,21 @@ id: taxi-driver-certification
 callToActionLink: https://www.state.nj.us/mvc/pdf/business/CDL-5.pdf
 callToActionText: Apply to Certify My Drivers
 agencyId: nj-motor-vehicle
+summaryDescriptionMd: >-
+  All drivers (limo, taxi, rental car chauffeur) need to have a letter of certification before they can
+  legally operate company vehicles. It’s the employer’s responsibility to file an application for a driver's
+  certification if the driver doesn't already have one.
+
+  (Only drivers holding a Commercial Driver’s License (CDL) with a Passenger (P) endorsement are exempt from
+  this requirement.)
 ---
 
-All drivers (limo, taxi, rental car chauffeur) need to have a letter of certification before they can legally operate company vehicles. It’s the employer’s responsibility to file an application for a driver's certification if the driver doesn't already have one.
-
-(Only drivers holding a Commercial Driver’s License (CDL) with a Passenger (P) endorsement are exempt from this requirement.)
-
----
-
-### Eligibility Requirements
+## Eligibility Requirements
 
 - Drivers must be at least 21 years old
 - Drivers must pass a criminal background check
 
-### Application Requirements
+## Application Requirements
 
 - Business name
 - Business address

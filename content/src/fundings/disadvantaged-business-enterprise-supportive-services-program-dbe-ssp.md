@@ -39,13 +39,14 @@ sector:
   - utilities
   - other-services
 publishStageArchive: ""
+summaryDescriptionMd: >-
+  The DBE/SS Program provides training and technical assistance to minority, disadvantaged, and women-owned
+  businesses. This program aims to increase opportunities with the New Jersey Department of Transportation's
+  (NJDOT) contracting program and assist them in competing for and performing work on highway and
+  highway-related projects.
 ---
 
-The DBE/SS Program provides training and technical assistance to minority, disadvantaged, and women-owned businesses. This program aims to increase opportunities with the New Jersey Department of Transportation's (NJDOT) contracting program and assist them in competing for and performing work on highway and highway-related projects.
-
----
-
-### Eligibility
+## Eligibility
 
 - Preference is given to New Jersey-based small and disadvantaged businesses certified under the [Federal Disadvantaged Business Enterprise (DBE) Program](https://www.transportation.gov/civil-rights/disadvantaged-business-enterprise)
 - [Emerging Small Business Enterprises (ESBEs) and Small Business Enterprises (SBEs)](https://www.nj.gov/transportation/business/civilrights/dbe.shtm) based in New Jersey and are actively seeking certification as a DBE also qualify

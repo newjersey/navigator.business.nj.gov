@@ -12,6 +12,7 @@ export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
     };
 
     const content = filing.contentMd.toLowerCase();
+    const summary = filing.summaryDescriptionMd.toLowerCase();
     const details = filing.filingDetails?.toLowerCase();
     const rates = filing.taxRates?.toLowerCase();
     const name = filing.name.toLowerCase();
@@ -25,7 +26,7 @@ export const searchTaxFilings = (filings: Filing[], term: string): Match[] => {
     const filename = filing.filename.toLowerCase();
     const urlSlug = filing.urlSlug.toLowerCase();
 
-    const blockTexts = [content];
+    const blockTexts = [summary, content];
     if (details) {
       blockTexts.push(details);
     }

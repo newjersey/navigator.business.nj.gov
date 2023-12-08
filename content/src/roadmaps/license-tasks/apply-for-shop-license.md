@@ -18,12 +18,11 @@ webflowType: business-license
 webflowId: 5f77298fd2749a78af9cf7df
 licenseCertificationClassification: LICENSE
 summaryDescriptionMd: >
-  New shops, relocated shops, or shops that have transferred ownership are required to obtain a license. After your application is submitted and reviewed, your shop will be inspected.
+  New shops, relocated shops, or shops that have transferred ownership are required to obtain a license. After
+  your application is submitted and reviewed, your shop will be inspected.
 ---
 
----
-
-### Application Requirements
+## Application Requirements
 
 - \[]{general-business-address} Business address
 - \[]{cosmo-open-date} Opening date

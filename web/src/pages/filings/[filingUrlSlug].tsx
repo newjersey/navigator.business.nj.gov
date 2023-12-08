@@ -77,6 +77,8 @@ export const FilingElement = (props: {
             </div>
           </div>
         </div>
+        <Content>{props.filing.summaryDescriptionMd}</Content>
+        <HorizontalLine />
         <Content>{props.filing.contentMd}</Content>
         {props.filing.treasuryLink && (
           <div className="padding-top-1" data-testid="treasury-link">

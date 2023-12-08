@@ -16,9 +16,7 @@ licenseCertificationClassification: "undefined"
 summaryDescriptionMd: "If you want to teach cosmetology in New Jersey, you need a cosmetology teacher license."
 ---
 
----
-
-### Eligibility Criteria
+## Eligibility Criteria
 
 - Be at least 18 years old
 - Must not have any diseases that could be transmitted during the course of teaching cosmetology and hairstyling services
@@ -28,7 +26,7 @@ summaryDescriptionMd: "If you want to teach cosmetology in New Jersey, you need 
 - Complete a 30-hour teaching methods course conducted by a college approved by the State Board of Higher Education or a substantially equivalent course
 - Complete six months of employment in a licensed shop within the State
 
-### Application Requirements
+## Application Requirements
 
 - Copy of government-issued photo ID
 - Physician’s Certificate
