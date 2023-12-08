@@ -1,4 +1,4 @@
-FROM cimg/node:18.18.2-browsers
+FROM cimg/node:20.10.0-browsers
 
 USER root
 
@@ -14,16 +14,16 @@ RUN apt-get update && \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null && \
     apt update && \
     apt -y install gh
-   
+
 # Tools/Dependencies needed for Browser
 RUN apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb libu2f-udev
 
 
 # Install Browsers.
 #Chrome
-ARG CHROME_VERSION="110.0.5481.77"
+ARG CHROME_VERSION="120.0.6099.71"
 RUN wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_$CHROME_VERSION-1_amd64.deb && \
-    dpkg -i google-chrome-stable_$CHROME_VERSION-1_amd64.deb || apt-get -f install -y 
+    dpkg -i google-chrome-stable_$CHROME_VERSION-1_amd64.deb || apt-get -f install -y
 
 
 #Edge
@@ -32,11 +32,11 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
     sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list' && \
     rm microsoft.gpg && \
     apt-get update -y && \
-    apt-get install -y microsoft-edge-stable 
+    apt-get install -y microsoft-edge-stable
 
 
 #Firefox
-ARG FIREFOX_VERSION="101.0.1"
+ARG FIREFOX_VERSION="120.0.1"
 RUN apt-get -qqy --no-install-recommends install firefox \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/* \
   && wget --no-verbose -O /tmp/firefox.tar.bz2 https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2 \
@@ -50,5 +50,5 @@ RUN apt-get -qqy --no-install-recommends install firefox \
   && chmod +x /opt/firefox \
   && mv /opt/firefox /opt/firefox-$FIREFOX_VERSION \
   && ln -fs /opt/firefox-$FIREFOX_VERSION/firefox /usr/bin/firefox
-  
+
 USER circleci

@@ -42,7 +42,7 @@ extension.
 
 ### Software requirements
 
-- [Node.js 18.x "Hydrogen" LTS](https://nodejs.org/en/download/) (We recommend using
+- [Node.js 20.x "Iron" LTS](https://nodejs.org/en/download/) (We recommend using
   [nvm](https://github.com/nvm-sh/nvm#readme) for managing Node.js versions. If
   installing via package manager, we suggest installing `corepack` if available
   separately.)
