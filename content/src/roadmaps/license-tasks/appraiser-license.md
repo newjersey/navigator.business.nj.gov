@@ -24,25 +24,24 @@ id: appraiser-license
 webflowType: business-license
 webflowId: 640b8467b7c8237f0cdd1541
 ---
-- - -
 
-### Eligibility Criteria
+## Eligibility Criteria
 
-* Complete 1,000 hours of relevant work experience in no fewer than 6 months
-* Complete 300 classroom hours of appraisal education as specified in the [Required * Core Curriculum](https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx) (see “Licensed Residential Appraiser Forms”: “Licensed Residential Real Property Appraiser Criteria” and “License Residential Core Curriculum Education Worksheet”)
-* Successfully pass the AQB (Appraiser Qualifications Board) approved Licensed Residential Real Property Appraiser Examination
+- Complete 1,000 hours of relevant work experience in no fewer than 6 months
+- Complete 300 classroom hours of appraisal education as specified in the [Required \* Core Curriculum](https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx) (see “Licensed Residential Appraiser Forms”: “Licensed Residential Real Property Appraiser Criteria” and “License Residential Core Curriculum Education Worksheet”)
+- Successfully pass the AQB (Appraiser Qualifications Board) approved Licensed Residential Real Property Appraiser Examination
 
-### Application Requirements
+## Application Requirements
 
-* Social Security number (SSN) or Individual Taxpayer Identification number (ITIN)
-* Name change information (if applicable)
-* Mailing address
-* Child support information
-* A criminal background check
-* Secondary education information
-* Employment record
-* Applicable fees paid
+- Social Security number (SSN) or Individual Taxpayer Identification number (ITIN)
+- Name change information (if applicable)
+- Mailing address
+- Child support information
+- A criminal background check
+- Secondary education information
+- Employment record
+- Applicable fees paid
 
 > **Once completed you will have:**
 >
-> * A 12-digit license number and your residential real property appraiser license
+> - A 12-digit license number and your residential real property appraiser license

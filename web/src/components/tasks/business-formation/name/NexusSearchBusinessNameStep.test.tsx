@@ -7,7 +7,6 @@ import {
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
-import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { dbaInputField } from "@/test/helpers/helpersSearchBusinessName";
 import { currentBusiness, userDataWasNotUpdated } from "@/test/mock/withStatefulUserData";
 import {
@@ -167,7 +166,7 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
     const page = await getPageHelper({});
     page.fillText("Search business name", "My Cool Business");
     await page.searchBusinessName({ status: "UNAVAILABLE" });
-    expect(screen.getByText(markdownToText(Config.nexusNameSearch.dbaNameHeader))).toBeInTheDocument();
+    expect(screen.getByText(Config.nexusNameSearch.dbaNameHeader)).toBeInTheDocument();
     expect(screen.getByText(Config.nexusNameSearch.dbaNameSearchSubmitButton)).toBeInTheDocument();
     expect(
       mockAnalytics.event.business_formation_dba_name_search_field.appears.dba_name_search_field_appears
@@ -182,7 +181,7 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
 
     await page.searchBusinessName({ status: "UNAVAILABLE" });
     await waitFor(() => {
-      expect(screen.getByText(markdownToText(Config.nexusNameSearch.dbaNameHeader))).toBeInTheDocument();
+      expect(screen.getByText(Config.nexusNameSearch.dbaNameHeader)).toBeInTheDocument();
     });
   });
 
@@ -192,7 +191,7 @@ describe("Formation - NexusSearchBusinessNameStep", () => {
       { businessNameAvailability: generateBusinessNameAvailability({ status: "AVAILABLE" }) }
     );
 
-    expect(screen.queryByText(markdownToText(Config.nexusNameSearch.dbaNameHeader))).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.nexusNameSearch.dbaNameHeader)).not.toBeInTheDocument();
   });
 
   it("does not overwrite existing DBA name when doing initial search", async () => {

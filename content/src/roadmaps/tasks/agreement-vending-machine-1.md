@@ -5,15 +5,13 @@ displayname: agreement-vending-machine
 name: Sign a Location Agreement
 id: agreement-vending-machine
 industryId: vending-machine
+summaryDescriptionMd: >-
+  Once you've identified a location for your vending machine, you need to draft and sign a location agreement with the site owner before installing your machine.
+
+  Signing your agreements under your registered business name may protect you from liabilities and associated costs.
 ---
 
-Once you've identified a location for your vending machine, you need to draft and sign a location agreement with the site owner before installing your machine.
-
-Signing your agreements under your registered business name may protect you from liabilities and associated costs.
-
----
-
-### Agreement Considerations
+## Agreement Considerations
 
 - **Payment:** How and how often will the site proprietor be paid
 - **Agreement length:** Determine the ideal length of your agreement by analyzing a few `contract considerations|lease-considerations`

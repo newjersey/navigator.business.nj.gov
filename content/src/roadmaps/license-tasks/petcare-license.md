@@ -10,7 +10,7 @@ summaryDescriptionMd: >-
   on the services you provide.
 
 
-  Check with your local government's department of health for specific license application requirements and to schedule a site inspection prior to your application. 
+  Check with your local government's department of health for specific license application requirements and to schedule a site inspection prior to your application.
 
   To learn more, see the New Jersey Department of Health [Guidelines for Municipal Licensure of Animal Facilities](https://www.nj.gov/health/vph/documents/guidelines_for_municipal_licensure_of_animal_facilities.pdf).
 industryId:
@@ -20,9 +20,7 @@ webflowId: 648b6ec5a42a17d5fc33791d
 licenseCertificationClassification: ""
 ---
 
----
-
-### Common Types of Licenses
+## Common Types of Licenses
 
 - **Kennel:** Board, breed, or sell dogs (partial boarding, such as doggy daycares, are also considered kennels)
 - **Pound:** House dogs captured by animal control

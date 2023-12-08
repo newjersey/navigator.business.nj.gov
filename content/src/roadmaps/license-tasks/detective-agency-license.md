@@ -24,16 +24,14 @@ webflowType: business-license
 webflowId: 5f772960a67e4a21735c0f36
 ---
 
----
-
-### Eligibility Criteria
+## Eligibility Criteria
 
 - At least one of the business owners has five years of full-time work experience as an investigator or a police officer
 - All applicants are at least 25 years old
 - Applicant and business associates are U.S. citizens
 - None of the applicants are active law enforcement officers
 
-### Application Requirements
+## Application Requirements
 
 - The names and addresses of all the business owners
 - Two trade name options for your agency

@@ -20,14 +20,12 @@ summaryDescriptionMd: >
   You need an acupuncturist license to offer services as an acupuncturist.
 ---
 
----
-
-### Eligibility Criteria
+## Eligibility Criteria
 
 - Be at least 21 years old
 - Have a bachelor's degree from an acupuncture program
 
-### Application Requirements
+## Application Requirements
 
 - College transcripts sent directly to the board
 - Passing scores on the English version of the `NCCAOM examination|nccaom`

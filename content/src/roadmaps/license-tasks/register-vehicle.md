@@ -17,9 +17,7 @@ summaryDescriptionMd: >
   Vehicles need to be registered as a passenger vehicle prior to offering transportation services.
 ---
 
----
-
-### Application Requirements
+## Application Requirements
 
 - [An appointment](https://telegov.njportal.com/njmvc/AppointmentWizard) with the New Jersey Motor Vehicle Commission
 - Vehicle Title

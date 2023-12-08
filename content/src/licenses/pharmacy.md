@@ -8,7 +8,7 @@ Your pharmacy permit will expire every year.
 
 ---
 
-### Application Requirements
+## Application Requirements
 
 - Business name
 - Permit number

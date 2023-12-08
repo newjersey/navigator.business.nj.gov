@@ -6,12 +6,12 @@ name: Determine Your Site Requirements
 id: check-site-requirements
 callToActionLink: ""
 callToActionText: ""
+summaryDescriptionMd: >-
+  Speak to your local government to determine specific requirements for your site and business. Prior to
+  opening, your business site will need to be inspected and approved to ensure customer and employee safety.
 ---
-Speak to your local government to determine specific requirements for your site and business. Prior to opening, your business site will need to be inspected and approved to ensure customer and employee safety.
 
-- - -
-
-### Safety Permits
+## Safety Permits
 
 1. **Fire protection permits**: Talk to your fire department to make sure your space is meeting requirements, like working sprinklers, extinguishers, and signage.
 2. **Store signage**: Speak to your local zoning office and building/construction department to make sure the signage you're proposing is permitted.
@@ -21,6 +21,6 @@ Speak to your local government to determine specific requirements for your site 
 
 > **Once completed, you will know:**
 >
-> * The permits and inspections required to open and operate your commercial space
-> * The process for getting those permits and inspections
-> * The time it takes to receive any permits or licenses
+> - The permits and inspections required to open and operate your commercial space
+> - The process for getting those permits and inspections
+> - The time it takes to receive any permits or licenses

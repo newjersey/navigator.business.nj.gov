@@ -37,13 +37,13 @@ sector:
 openDate: ""
 dueDate: ""
 descriptionMd: The Catalyst Research and Development (R&D) Voucher Pilot Program supports New Jersey-based early-stage company efforts to accelerate the development and innovation of technologies from the research stage into commercially viable technologies, leading to industry and investor interest.
+summaryDescriptionMd: >-
+  The Catalyst Research and Development (R&D) Voucher Pilot Program supports New Jersey-based early-stage
+  company efforts to accelerate the development and innovation of technologies from the research stage into
+  commercially viable technologies, leading to industry and investor interest.
 ---
 
-The Catalyst Research and Development (R&D) Voucher Pilot Program supports New Jersey-based early-stage company efforts to accelerate the development and innovation of technologies from the research stage into commercially viable technologies, leading to industry and investor interest.
-
----
-
-### Eligibility
+## Eligibility
 
 - Must be registered to conduct business in New Jersey at the time of application
 - Cannot have more than 25 full-time employees (35hrs per week) at the time of application and throughout the voucher duration

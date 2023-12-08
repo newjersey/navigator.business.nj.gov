@@ -24,13 +24,12 @@ sector: []
 openDate: ""
 dueDate: ""
 descriptionMd: This program provides low-cost financing for the design, construction, and implementation of projects that help protect and improve water quality, and help ensure safe and adequate drinking water.
+summaryDescriptionMd: >-
+  This program provides low-cost financing for the design, construction, and implementation of projects that
+  help protect and improve water quality, and help ensure safe and adequate drinking water.
 ---
 
-This program provides low-cost financing for the design, construction, and implementation of projects that help protect and improve water quality, and help ensure safe and adequate drinking water.
-
----
-
-### Eligibility
+## Eligibility
 
 - Private entities, such as developers, can be eligible as **clean water applicants** through public conduit borrowers
 - **Drinking water applicants** can be public community water systems privately and publicly owned, and nonprofit non-community water systems (as defined by the [National Primary Drinking Water Regulations](https://www.epa.gov/ground-water-and-drinking-water/national-primary-drinking-water-regulations))

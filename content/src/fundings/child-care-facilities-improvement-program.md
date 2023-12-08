@@ -31,15 +31,16 @@ county:
 sector:
   - educational-services
 publishStageArchive: null
+summaryDescriptionMd: >-
+  The Child Care Facilities Improvement Program provides grants for facilities improvement to New Jersey child
+  care providers that provide high quality early childhood learning environments.
+
+
+  Applicants are limited to one application per DCF-licensed child care center location, and two applications
+  per `Entity ID Number (EIN)|ein`.
 ---
 
-The Child Care Facilities Improvement Program provides grants for facilities improvement to New Jersey child care providers that provide high quality early childhood learning environments.
-
-Applicants are limited to one application per DCF-licensed child care center location, and two applications per `Entity ID Number (EIN)|ein` .
-
----
-
-### Eligibility
+## Eligibility
 
 - Child care center licensed by New Jersey Department of Children and Families (NJDCF) as of June 4th, 2021
 - Currently enroll, or have enrolled in the 12 months prior to the date of application, at least one child receiving support through New Jersey Department of Human Services (NJDHS) Child Care Assistance Program

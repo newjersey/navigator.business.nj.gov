@@ -6,6 +6,7 @@ urlSlug: "tea-task-1-url-slug"
 name: "Tea Task 1"
 callToActionLink: "www.tea-task-1.com"
 callToActionText: "Tea Task 1 CTA"
+summaryDescriptionMd: "Tea Task 1 Summary"
 ---
 
 Tea Task 1 Contents

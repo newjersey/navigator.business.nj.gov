@@ -8,22 +8,22 @@ callToActionLink: https://www.pay.gov/public/home
 callToActionText: Apply for Tax-Exempt Status
 agencyAdditionalContext: Internal Revenue Service
 formName: 1023 / 1024-A
+summaryDescriptionMd: >-
+  Your non-profit organization may qualify for tax-exemption status with the IRS.
+
+
+  See the IRS [guide on tax-exempt organizations](https://www.irs.gov/charities-non-profits/applying-for-tax-exempt-status)
+  for the form specific to your organization and more details about the application process.
 ---
 
-Your non-profit organization may qualify for tax-exemption status with the IRS.
-
-See the IRS [guide on tax-exempt organizations](https://www.irs.gov/charities-non-profits/applying-for-tax-exempt-status) for the form specific to your organization and more details about the application process.
-
----
-
-### Common Types of Tax-Exempt Organizations
+## Common Types of Tax-Exempt Organizations
 
 - Charities
 - Churches and religious groups
 - Educational organizations
 - Social welfare organizations
 
-### Application Requirements
+## Application Requirements
 
 - `Certificate of Formation|certificate-formation`
 - `EIN|ein`

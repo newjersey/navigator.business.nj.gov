@@ -6,6 +6,7 @@ urlSlug: "blocking-task-1-url-slug"
 name: "Blocking Task 1 Duplicate"
 callToActionLink: ""
 callToActionText: ""
+summaryDescriptionMd: "Blocking Task 1 Duplicate Summary"
 ---
 
 Blocking Task 1 Duplicate Contents

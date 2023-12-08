@@ -9,7 +9,7 @@ Your cosmetology shop license will expire every two years on the even-numbered y
 
 ---
 
-### Application Requirements
+## Application Requirements
 
 - Business name
 - License number

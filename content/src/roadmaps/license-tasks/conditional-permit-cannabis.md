@@ -16,6 +16,4 @@ summaryDescriptionMd: >
   To start your cannabis application prior to opening a site, you may apply for a conditional license that gives you 120 days to find a location, get municipal approval, and apply for a conversion license (which will give your business approval to operate).
 ---
 
----
-
 This task intentionally left blank. Text here will not be displayed.

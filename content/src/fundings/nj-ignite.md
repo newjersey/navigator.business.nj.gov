@@ -28,13 +28,12 @@ sector:
 openDate: ""
 dueDate: ""
 descriptionMd: NJ Ignite provides rent support for technology startups that are moving to an approved collaborative workspace.
+summaryDescriptionMd: >-
+  NJ Ignite provides rent support for technology startups that are moving to an approved collaborative
+  workspace.
 ---
 
-NJ Ignite provides rent support for technology startups that are moving to an approved collaborative workspace.
-
----
-
-### Eligibility
+## Eligibility
 
 - Renters can be early-stage technology and life science companies in New Jersey with 10 or fewer employees
 - Less than $1M in trailing 12 months of gross sales from the date of application submission

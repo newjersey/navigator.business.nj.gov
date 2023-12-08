@@ -19,9 +19,7 @@ id: car-rental-vehicle-registration
 webflowId: 648b6ec51357186bad913247
 ---
 
----
-
-### Application Requirements
+## Application Requirements
 
 - Vehicle title
 - Driver’s license

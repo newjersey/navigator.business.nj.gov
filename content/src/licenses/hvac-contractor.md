@@ -17,7 +17,9 @@ callToActionText: Renew My HVACR License
 - Applicable fees paid
 
 :::greenBox
+
 **Once completed, you will have**:
 
 - The same HVACR license number
-  :::
+
+:::

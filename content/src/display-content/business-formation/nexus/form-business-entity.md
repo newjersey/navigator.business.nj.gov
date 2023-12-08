@@ -8,13 +8,12 @@ callToActionLink: https://www.njportal.com/DOR/BusinessFormation/CompanyInformat
 callToActionText: Authorize My Business
 required: true
 agencyId: nj-revenue-enterprise-services
+summaryDescriptionMd: >-
+  You must register your business name and authorize your `business structure|business-structure-learn-more`
+  with the State.
 ---
 
-You must register your business name and authorize your `business structure|business-structure-learn-more` with the State.
-
----
-
-### Application Requirements
+## Application Requirements
 
 - Business name (same name as in your home state)
 - Business structure

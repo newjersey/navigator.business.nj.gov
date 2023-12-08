@@ -24,13 +24,12 @@ sector: []
 openDate: ""
 dueDate: ""
 descriptionMd: The Brownfield Assessment Grant Program provides grant money to support site assessment at any eligible brownfield site in NJ.
+summaryDescriptionMd: >-
+  The Brownfield Assessment Grant Program provides grant money to support site assessment at any eligible
+  brownfield site in NJ.
 ---
 
-The Brownfield Assessment Grant Program provides grant money to support site assessment at any eligible brownfield site in NJ.
-
----
-
-### Eligibility
+## Eligibility
 
 - Available for eligible brownfield sites in the state for the purpose of assessing known or suspected site contamination
 

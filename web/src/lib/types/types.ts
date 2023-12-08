@@ -46,6 +46,7 @@ export const createEmptyTaskWithoutLinks = (): TaskWithoutLinks => {
     urlSlug: "",
     callToActionLink: "",
     callToActionText: "",
+    summaryDescriptionMd: "",
     contentMd: "",
     postOnboardingQuestion: "",
     required: undefined,
@@ -152,8 +153,9 @@ export type Funding = {
   urlSlug: string;
   callToActionLink: string;
   callToActionText: string;
-  contentMd: string;
   descriptionMd: string;
+  summaryDescriptionMd: string;
+  contentMd: string;
   fundingType: FundingType;
   agency: string[] | null | undefined;
   publishStageArchive: FundingPublishStatus | null;
@@ -178,6 +180,7 @@ export type Certification = {
   filename: string;
   name: string;
   urlSlug: string;
+  summaryDescriptionMd: string;
   contentMd: string;
   descriptionMd: string;
   callToActionLink: string | undefined;
@@ -324,7 +327,7 @@ export interface Task {
   callToActionLink: string;
   callToActionText: string;
   contentMd: string;
-  summaryDescriptionMd?: string;
+  summaryDescriptionMd: string;
   postOnboardingQuestion?: string;
   unlockedBy: TaskLink[];
   required?: boolean;
@@ -356,7 +359,7 @@ export interface WebflowLicense {
   licenseCertificationClassification?: string;
   webflowIndustry?: string;
   contentMd?: string;
-  summaryDescriptionMd?: string;
+  summaryDescriptionMd: string;
 }
 
 export interface TaskLink {
@@ -395,6 +398,7 @@ export interface Filing {
   callToActionLink?: string;
   callToActionText?: string;
   contentMd: string;
+  summaryDescriptionMd: string;
   treasuryLink?: string;
   additionalInfo?: string;
   frequency?: string;
@@ -530,6 +534,7 @@ export type TaskWithoutLinks = {
   callToActionLink: string;
   callToActionText: string;
   postOnboardingQuestion: string;
+  summaryDescriptionMd: string;
   contentMd: string;
   required?: boolean;
   agencyId?: string;

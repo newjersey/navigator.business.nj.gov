@@ -6,13 +6,13 @@ name: Determine Site Requirements for Your Cosmetology Business
 id: check-site-requirements
 callToActionLink: ""
 callToActionText: ""
+summaryDescriptionMd: >-
+  Cosmetology businesses need to obtain and show a fire prevention permit and a
+  `certificate of occupancy or approval|certificate-occupancy` from your local government prior to applying
+  for a shop license.
 ---
 
-Cosmetology businesses need to obtain and show a fire prevention permit and a `certificate of occupancy or approval|certificate-occupancy` from your local government prior to applying for a shop license.
-
----
-
-### Safety Permits
+## Safety Permits
 
 - **Fire prevention permits:** Talk to your fire department to make sure your space meets requirements, like working sprinklers, extinguishers, and signage. **_This is required by the Division of Consumer Affairs for a shop license._**
 - **Store signage:** Speak to your local zoning office and building/construction department to make sure the signage you're proposing is allowed.

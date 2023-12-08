@@ -29,13 +29,13 @@ county:
   - All
 sector: []
 publishStageArchive: ""
+summaryDescriptionMd: >-
+  The New Jersey Business Action Center's (NJBAC) State Trade Expansion Program (NJSTEP) provides financial
+  awards to domestic small businesses that are new to export and those who currently sell their goods and
+  services to other countries.
 ---
 
-The New Jersey Business Action Center's (NJBAC) State Trade Expansion Program (NJSTEP) provides financial awards to domestic small businesses that are new to export and those who currently sell their goods and services to other countries.
-
----
-
-### Eligibility
+## Eligibility
 
 - Small business as defined by the [Small Business Administration](https://www.sba.gov/size-standards/index.html)
 - In business for at least one year as of the date of the application

@@ -7,22 +7,22 @@ id: trucking-cdl
 callToActionLink: https://telegov.njportal.com/njmvc/AppointmentWizard
 callToActionText: Apply for My CDL
 agencyId: nj-motor-vehicle
+summaryDescriptionMd: >-
+  Any employee driving a truck with a Gross Weight Rating Scale (GWRS) of 26,000lbs or more needs a Commercial
+  Driver's License (CDL).
+
+
+  As the business owner, you only need a CDL if **you** plan to do any load-hauling for your business.
 ---
 
-Any employee driving a truck with a Gross Weight Rating Scale (GWRS) of 26,000lbs or more needs a Commercial Driver's License (CDL).
-
-As the business owner, you only need a CDL if **you** plan to do any load-hauling for your business.
-
----
-
-### Eligibility Criteria
+## Eligibility Criteria
 
 - At least 18 years old
 - Basic New Jersey driver's license (Class D)
 - Minimum of 20/40 vision in each eye with or without glasses
 - Ability to recognize red, green, and amber colors
 
-### Application Requirements
+## Application Requirements
 
 - Proof of identity, NJ residency, and Social Security Number (SSN) according to [New Jersey’s ID requirements](https://www.state.nj.us/mvc/pdf/license/Standard_License_Sheet_Engl.pdf)
 - Completed [Holder Self-Certification](https://www.state.nj.us/mvc/pdf/drivertopics/CDSC-1.pdf)

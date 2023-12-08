@@ -4,6 +4,7 @@ import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { ContextualInfoLink } from "@/components/ContextualInfoLink";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
 import { PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
@@ -36,6 +37,13 @@ export const Content = (props: ContentProps): ReactElement => {
         }
       : ContextualInfoLink,
     a: Link(props.onClick),
+    h2: (props: any): ReactElement => {
+      return (
+        <Heading level={2} styleVariant="h3">
+          {props.children}
+        </Heading>
+      );
+    },
     h5: (props: any): ReactElement => {
       return <div className="h5-styling">{props.children}</div>;
     },

@@ -24,13 +24,13 @@ sector: []
 openDate: ""
 dueDate: ""
 descriptionMd: The Premier Lender Program provides New Jersey-based businesses and not-for-profit organizations loan participation and guarantees that can help them overcome the financial obstacles to grow and expand their business.
+summaryDescriptionMd: >-
+  The Premier Lender Program provides New Jersey-based businesses and not-for-profit organizations loan
+  participation and guarantees that can help them overcome the financial obstacles to grow and expand their
+  business.
 ---
 
-The Premier Lender Program provides New Jersey-based businesses and not-for-profit organizations loan participation and guarantees that can help them overcome the financial obstacles to grow and expand their business.
-
----
-
-### Eligibility
+## Eligibility
 
 - Businesses and nonprofits must commit to create or retain 1 new full-time job for every $65,000. There is an application fee of $1,000
 

@@ -23,15 +23,21 @@ sector: []
 openDate: 10/07/2022
 dueDate: 11/10/2022
 descriptionMd: The mission of the Youth Transitions to Work (YTTW) program is to recruit, screen, and facilitate effective transitions of high school juniors, seniors, and Out of School Youth (ages 16-24) to high-skill, high-wage employment in labor demand occupations.
+summaryDescriptionMd: >-
+  The mission of the Youth Transitions to Work (YTTW) program is to recruit, screen, and facilitate effective
+  transitions of high school juniors, seniors, and Out of School Youth (ages 16-24) to high-skill, high-wage
+  employment in labor demand occupations.
+
+
+  Funded programs are expected to increase the number of high school graduates entering
+  [USDOL Registered Apprenticeship](https://www.nj.gov/labor/career-services/apprenticeship/findaprogram.shtml)
+  programs in New Jersey by establishing YTTW programs in new apprenticeship occupations or industries, link
+  secondary education and higher educational institutions to
+  [existing USDOL apprenticeship programs](https://www.dol.gov/agencies/eta/apprenticeship), and reactivate
+  registered programs not currently in use.
 ---
 
-The mission of the Youth Transitions to Work (YTTW) program is to recruit, screen, and facilitate effective transitions of high school juniors, seniors, and Out of School Youth (ages 16-24) to high-skill, high-wage employment in labor demand occupations.
-
-Funded programs are expected to increase the number of high school graduates entering [USDOL Registered Apprenticeship](https://www.nj.gov/labor/career-services/apprenticeship/findaprogram.shtml) programs in New Jersey by establishing YTTW programs in new apprenticeship occupations or industries, link secondary education and higher educational institutions to [existing USDOL apprenticeship programs](https://www.dol.gov/agencies/eta/apprenticeship), and reactivate registered programs not currently in use.
-
----
-
-### Eligibility
+## Eligibility
 
 - **The funding opportunity is limited to only grantees who received funding in FY21**
 - Eligible businesses must be developing, new, or building upon existing Registered Apprenticeship programs

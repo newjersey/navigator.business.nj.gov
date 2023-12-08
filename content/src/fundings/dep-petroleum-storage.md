@@ -28,13 +28,14 @@ sector:
 openDate: ""
 dueDate: ""
 descriptionMd: The Underground Storage Tank Fund (UST) provides financial assistance in the form of loans and grants to eligible owners and operators for the closure and remediation of discharges from unregulated petroleum underground storage tanks, and for the closure and remediation of State-regulated petroleum underground storage tanks.
+summaryDescriptionMd: >-
+  The Underground Storage Tank Fund (UST) provides financial assistance in the form of loans and grants to
+  eligible owners and operators for the closure and remediation of discharges from unregulated petroleum
+  underground storage tanks, and for the closure and remediation of State-regulated petroleum underground
+  storage tanks.
 ---
 
-The Underground Storage Tank Fund (UST) provides financial assistance in the form of loans and grants to eligible owners and operators for the closure and remediation of discharges from unregulated petroleum underground storage tanks, and for the closure and remediation of State-regulated petroleum underground storage tanks.
-
----
-
-### Eligibility
+## Eligibility
 
 - Businesses must own less than 10 petroleum underground storage tanks in New Jersey
 - **For an interest-free loan:** Businesses must have a net worth of less than $2M and demonstrate they're unable to obtain a commercial loan for all or part of the eligible costs

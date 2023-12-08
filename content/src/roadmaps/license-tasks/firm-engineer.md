@@ -18,13 +18,11 @@ summaryDescriptionMd: >
   You need a certificate of authorization to operate an engineering firm.
 ---
 
----
-
-### Eligibility Criteria
+## Eligibility Criteria
 
 - Must have a licensed engineer as a `responsible charge|responsible-charge`
 
-### Application Requirements
+## Application Requirements
 
 - A certified copy of your `certificate of formation or incorporation|certificate-formation` , if applicable
 - A business name

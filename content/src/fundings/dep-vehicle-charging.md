@@ -24,13 +24,13 @@ sector: []
 openDate: ""
 dueDate: ""
 descriptionMd: This program provides grants to offset the cost of purchasing electric vehicle charging stations. The program expands New Jersey’s growing network of electric vehicle infrastructure, allowing residents, businesses, and government agencies to purchase and drive electric vehicles.
+summaryDescriptionMd: >-
+  This program provides grants to offset the cost of purchasing electric vehicle charging stations. The
+  program expands New Jersey’s growing network of electric vehicle infrastructure, allowing residents,
+  businesses, and government agencies to purchase and drive electric vehicles.
 ---
 
-This program provides grants to offset the cost of purchasing electric vehicle charging stations. The program expands New Jersey’s growing network of electric vehicle infrastructure, allowing residents, businesses, and government agencies to purchase and drive electric vehicles.
-
----
-
-### Eligibility
+## Eligibility
 
 - Public, workplaces, and multi-unit residential dwellings are eligible
 - Charging stations can't be placed in private residential dwellings

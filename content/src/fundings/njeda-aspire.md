@@ -27,13 +27,12 @@ sector:
 openDate: ""
 dueDate: ""
 descriptionMd: Aspire is a gap financing tool to support commercial, mixed-use, and residential real estate development projects. This tool replaces the Economic Redevelopment and Growth Grant (ERG).
+summaryDescriptionMd: >-
+  Aspire is a gap financing tool to support commercial, mixed-use, and residential real estate development
+  projects. This tool replaces the Economic Redevelopment and Growth Grant (ERG).
 ---
 
-Aspire is a gap financing tool to support commercial, mixed-use, and residential real estate development projects. This tool replaces the Economic Redevelopment and Growth Grant (ERG).
-
----
-
-### Eligibility
+## Eligibility
 
 - The project must demonstrate through New Jersey Economic Development Authority analysis that without the incentive award, the redevelopment project is not economically feasible
 - Must demonstrate that a project financing gap exists and/or the redevelopment project will generate a below-market rate of return

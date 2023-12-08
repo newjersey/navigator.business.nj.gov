@@ -6,24 +6,33 @@ name: Register Your Charity, if Applicable
 id: nonprofit-charity-registration
 callToActionLink: https://njconsumeraffairs.state.nj.us/create-user/
 callToActionText: Register My Charity
+summaryDescriptionMd: >-
+  If your business is a charity or non-profit organization in New Jersey that receives $10,000 or more in
+  public funding and/or uses a professional fundraiser to raise money, you need to register as a charity with
+  the State.
+
+
+  The charity registration is a two-part online registration process. In part 1, you create a profile, add
+  basic charity details, such as your charity name and `Employer Identification Number (EIN)|ein`, and request
+  portal access. During part 2, you register your business by submitting more in-depth information about the
+  charity and all the required documentation.
+
+
+  :::infoAlert
+
+  You have 30 days to register as a charity once your business receives $10,000 in public funding.
+
+  :::
 ---
 
-If your business is a charity or non-profit organization in New Jersey that receives $10,000 or more in public funding and/or uses a professional fundraiser to raise money, you need to register as a charity with the State.
-
-The charity registration is a two-part online registration process. In part 1, you create a profile, add basic charity details, such as your charity name and `Employer Identification Number (EIN)|ein`, and request portal access. During part 2, you register your business by submitting more in-depth information about the charity and all the required documentation.
-
-:::infoAlert
-You have 30 days to register as a charity once your business receives $10,000 in public funding.
-:::
-
-### Who Does Not Need to Apply
+## Who Does Not Need to Apply
 
 The following charities are not required to register:
 
 - Religious, charitable, scientific, testing for public safety, literary, or educational organizations may not need this license. [IRS Exempt Organizations](https://www.irs.gov/charities-and-nonprofits) and [IRS 501(c)(3) Exemptions organizations](https://www.irs.gov/charities-non-profits/charitable-organizations/exemption-requirements-501c3-organizations) provides more in-depth information about exemptions.
 - Libraries registered by the State’s Department of Education that meet their prescribed financial reporting requirements
 
-### Application Requirements
+## Application Requirements
 
 - Signed [Certification Form ](https://www.njconsumeraffairs.gov/charities/Documents/CRI-PFR-Certification-Signature-150I-300R-200.pdf)
 - IRS determination letter

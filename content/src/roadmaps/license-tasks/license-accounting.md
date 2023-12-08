@@ -19,9 +19,7 @@ summaryDescriptionMd: >
   New accounting firms must register and obtain certification.
 ---
 
----
-
-### Application Requirements
+## Application Requirements
 
 - A designated Resident Manager-In-Charge. This must be a certified public accountant in the firm
 - Applicable fees paid

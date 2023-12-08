@@ -9,7 +9,7 @@ callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
 
 You need to reinstate your certificate of authorization if you did not renew it or you put it in inactive status.
 
-### Application Requirements
+## Application Requirements
 
 - License number of responsible architect
 - Copy of current annual report filed with the Division of Revenue in the New Jersey Department of Treasury

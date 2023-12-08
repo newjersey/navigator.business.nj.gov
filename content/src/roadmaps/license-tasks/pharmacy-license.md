@@ -22,9 +22,7 @@ webflowType: business-license
 webflowId: 640b8467a1b0444c01a311c3
 ---
 
----
-
-### Application Requirements
+## Application Requirements
 
 - \[]{general-business-name} A pharmacy name (usually your registered businesses name), registered with the county clerk
 - \[]{general-registered-agent-info} The names and address of the registered agent (c corps only)

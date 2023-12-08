@@ -4,13 +4,11 @@ urlSlug: DBA-resolution
 filename: dba-resolution-foreign
 name: Get a Resolution Adopting Your DBA Name
 id: DBA-resolution-foreign
+summaryDescriptionMd: >-
+  To authorize your business in New Jersey, you need a resolution to adopt your Doing Business As (DBA) name.
 ---
 
-To authorize your business in New Jersey, you need a resolution to adopt your Doing Business As (DBA) name.
-
----
-
-### How to Get a Resolution
+## How to Get a Resolution
 
 Your operating agreement or bylaws should tell you how to get a resolution. For LLCs, this might mean creating a statement of intent and having it signed by all members. For corporations, this might mean getting board approval.
 

@@ -23,9 +23,7 @@ webflowType: business-license
 webflowId: 5f7728fa71c49e6e76913b7d
 ---
 
----
-
-### Commonly Needed Permits
+## Commonly Needed Permits
 
 - **Air permitting**: Due to potential chemicals spray paint emits
 - **Hazardous waste**: Related to potential paint solvents and material waste

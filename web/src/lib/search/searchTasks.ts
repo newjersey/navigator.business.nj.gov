@@ -19,7 +19,7 @@ export const searchTasks = (tasks: Task[], term: string): Match[] => {
     const agency = task.agencyId ? LookupTaskAgencyById(task.agencyId).name.toLowerCase() : "";
     const agencyContext = task.agencyAdditionalContext?.toLowerCase();
     const formName = task.formName?.toLowerCase();
-    const summary = task.summaryDescriptionMd?.toLowerCase();
+    const summary = task.summaryDescriptionMd.toLowerCase();
     const filename = task.filename.toLowerCase();
     const urlSlug = task.urlSlug.toLowerCase();
 

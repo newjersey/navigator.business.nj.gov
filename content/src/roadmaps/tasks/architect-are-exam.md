@@ -8,17 +8,16 @@ callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
 callToActionText: Apply for My ARE
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Architects
+summaryDescriptionMd: >-
+  You can only practice as an architect once you pass the Architect’s Registration Exam (ARE) and are approved
+  by the New Jersey Board of Architects.
 ---
 
-You can only practice as an architect once you pass the Architect’s Registration Exam (ARE) and are approved by the New Jersey Board of Architects.
-
----
-
-### Eligibility Criteria
+## Eligibility Criteria
 
 - An approved architect license application
 
-### Application Requirements
+## Application Requirements
 
 - Applicable fees paid
 

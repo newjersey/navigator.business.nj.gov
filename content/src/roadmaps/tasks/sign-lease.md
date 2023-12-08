@@ -6,13 +6,11 @@ name: Sign Your Lease
 id: sign-lease
 callToActionLink: ""
 callToActionText: ""
+summaryDescriptionMd: >-
+  Using your registered business name when signing may protect you from liabilities and costs with your new location. Ensure you understand the lease terms to protect your interests and have an attorney review the terms before signing.
 ---
 
-Using your registered business name when signing may protect you from liabilities and costs with your new location. Ensure you understand the lease terms to protect your interests and have an attorney review the terms before signing.
-
----
-
-### Contract Considerations
+## Contract Considerations
 
 - **Lease duration and renewal:** Determine the length of the lease and whether there are options for renewal. Think about `lease considerations|lease-considerations` that fit your business's long-term goals and ensure the lease duration aligns with your plans.
 - **Security deposit:** Know the amount of the security deposit required and the conditions under which it can be withheld by the landlord. Understand the process for returning the deposit at the end of the lease term.

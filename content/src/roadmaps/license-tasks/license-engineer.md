@@ -20,15 +20,13 @@ summaryDescriptionMd: >
   You or any staff providing engineering services will need an engineer license.
 ---
 
----
-
-### Eligibility
+## Eligibility Criteria
 
 - Bachelor’s or Master’s degree in engineering from a board-approved curriculum, or a Graduate degree from a four-year engineering technology program from a board-approved curriculum
 - Minimum of four years of professional work experience in engineering
 - Passing score on the [National Council of Examiners for Engineering and Surveying (NCEES)](https://ncees.org/engineering/) exam
 
-### Application Requirements
+## Application Requirements
 
 - College transcripts sent directly from the college(s) to the Board
 - Examination records from NCEES

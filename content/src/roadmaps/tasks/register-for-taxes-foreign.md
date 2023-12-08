@@ -8,15 +8,15 @@ callToActionLink: ""
 callToActionText: ""
 agencyId: nj-revenue-enterprise-services
 formName: NJ-Reg
+summaryDescriptionMd: >-
+  Out-of-state businesses doing business in New Jersey must register for State taxes.
+
+
+  You are seeing this task because your business either has a `nexus|nexus-business` in New Jersey,
+  `remote workers|remote-worker` in New Jersey, or is a `remote seller|remote-seller` in New Jersey.
 ---
 
-Out-of-state businesses doing business in New Jersey must register for State taxes.
-
-You are seeing this task because your business either has a `nexus|nexus-business` in New Jersey, `remote workers|remote-worker` in New Jersey, or is a `remote seller|remote-seller` in New Jersey.
-
----
-
-### Application Requirements
+## Application Requirements
 
 - `Entity ID|entity-id` (required only for LLC, Corporations, LLP or LP Nexus businesses)
 - [NAICS code](/tasks/naics-code-determination): ${naicsCode}
@@ -33,7 +33,7 @@ You are seeing this task because your business either has a `nexus|nexus-busines
 
 ---
 
-### Next Steps
+## Next Steps
 
 1. [Register for State Taxes](https://www.njportal.com/DOR/BusinessRegistration)
 2. Save your New Jersey Tax ID (xxx-xxx-xxx/xxx)

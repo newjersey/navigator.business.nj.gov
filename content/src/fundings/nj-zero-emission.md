@@ -24,13 +24,12 @@ sector: []
 openDate: ""
 dueDate: ""
 descriptionMd: NJ ZIP is a pilot program that provides vouchers to businesses and institutions in the greater Newark, Camden, New Brunswick, and Shore areas to support purchases of new, medium-duty zero-emission vehicles.
+summaryDescriptionMd: >-
+  NJ ZIP is a pilot program that provides vouchers to businesses and institutions in the greater Newark,
+  Camden, New Brunswick, and Shore areas to support purchases of new, medium-duty zero-emission vehicles.
 ---
 
-NJ ZIP is a pilot program that provides vouchers to businesses and institutions in the greater Newark, Camden, New Brunswick, and Shore areas to support purchases of new, medium-duty zero-emission vehicles.
-
----
-
-### Eligibility
+## Eligibility
 
 - Businesses and nonprofits in the greater Newark, Camden, New Brunswick, and Shore areas purchasing one or more new zero-emission medium or heavy-duty vehicles
 

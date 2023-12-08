@@ -4,13 +4,12 @@ filename: bank-account
 displayname: bank-account
 name: Open Your Business Bank Account
 id: bank-account
+summaryDescriptionMd: >-
+  A business bank account separates your business finances from your personal expenses. This helps you keep
+  accurate and organized accounting records for tax purposes and business operations.
 ---
 
-A business bank account separates your business finances from your personal expenses. This helps you keep accurate and organized accounting records for tax purposes and business operations.
-
----
-
-### Business Bank Account Possible Requirements
+## Business Bank Account Possible Requirements
 
 Some banks may request other documentation in addition to what is listed below. Compare and confirm document requirements, services, and fees.
 

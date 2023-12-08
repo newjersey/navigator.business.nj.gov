@@ -7,12 +7,14 @@ id: nonprofit-business-bylaws
 callToActionLink: ""
 callToActionText: ""
 formName: ""
----
+summaryDescriptionMd: >-
+  Your nonprofit bylaws define how your business will operate. There's no set rule for how to draft bylaws,
+  but they typically include business structure, `board of trustee|board-trustees` roles and responsibilities,
+  and day-to-day operations, among other things.
 
-Your nonprofit bylaws define how your business will operate. There's no set rule for how to draft bylaws, but they typically include business structure, `board of trustee|board-trustees` roles and responsibilities, and day-to-day operations, among other things.
 
-Check out [resources for writing nonprofit bylaws](https://business.nj.gov/pages/business-support#section-4).
-
+  Check out
+  [resources for writing nonprofit bylaws](https://business.nj.gov/pages/business-support#section-4).
 ---
 
 > **Once completed, you will have:**

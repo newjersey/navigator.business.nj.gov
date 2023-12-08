@@ -18,9 +18,7 @@ id: conversion-license-cannabis
 webflowId: 640b852c9a5e4f6a4de2ae45
 ---
 
----
-
-### Application Requirements
+## Application Requirements
 
 - []{cannabis-updates} Share any updates or changes since the original application
 - []{cannabis-site-plan} A site plan of the proposed location including a floor plan

@@ -39,6 +39,7 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
       - { label: "Filename", name: "filename", widget: "write-once-read-only" }
@@ -1106,12 +1107,7 @@ collections:
               - { label: Available Text, name: availableText, widget: markdown }
               - { label: Unavailable Text, name: unavailableText, widget: markdown }
               - { label: Search Again Button text, name: searchAgainButtonText, widget: string }
-              - {
-                  label: DBA Name Section Header,
-                  name: dbaNameHeader,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
+              - { label: DBA Name Section Header, name: dbaNameHeader, widget: string }
               - { label: DBA Name Description, name: dbaNameDescription, widget: markdown }
               - { label: DBA Name Search Label, name: dbaNameSearchLabel, widget: string }
               - { label: DBA Name Search Submit Button, name: dbaNameSearchSubmitButton, widget: string }
@@ -1158,6 +1154,7 @@ collections:
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Description", name: "descriptionMd", widget: "markdown" }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug / Filename", name: "urlSlug", widget: "write-once-read-only" }
       - { label: "Name", name: "name", widget: "string" }
@@ -1265,7 +1262,7 @@ collections:
           default: "",
           format: "MM/DD/yyyy",
         }
-      - { label: "Description", name: "descriptionMd", widget: "markdown" }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
@@ -1978,6 +1975,7 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
       - { label: "Filename", name: "filename", widget: "write-once-read-only" }
@@ -2126,7 +2124,6 @@ collections:
           label: "Summary Description (Webflow and Navigator)",
           name: "summaryDescriptionMd",
           widget: "markdown",
-          required: false,
         }
       - { label: "Detailed Description (Navigator)", name: "body", widget: "markdown", required: false }
       - label: Licensing Agency (Webflow & Navigator)
@@ -2701,6 +2698,7 @@ collections:
           default: "expiration",
           options: ["expiration", "renewal"],
         }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown", required: true }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
@@ -2720,6 +2718,7 @@ collections:
       - { label: "Url Slug / Filename", name: "urlSlug", widget: "write-once-read-only" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Extension", name: "extension", widget: "boolean", required: false }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Learn More Link", name: "treasuryLink", widget: "string", required: false }
       - { label: "Tax Rates", name: "taxRates", widget: "markdown", required: false }
@@ -4922,6 +4921,7 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Filename", name: "slug", widget: "write-once-read-only" }
       - { label: "Question Copy", name: "radioQuestion", widget: "string", required: false }

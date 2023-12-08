@@ -9,13 +9,15 @@ urlSlug: hic-registration-reinstatement
 callToActionText: Reinstate My HIC Registration
 callToActionLink: https://www.njconsumeraffairs.gov/hic/Pages/applications.aspx
 ---
+
 If your home improvement contractor (HIC) registration has expired, you can apply for reinstatement.
 
-### Application Requirements 
+## Application Requirements
+
 - License number
 - Photocopy of a certificate of insurance with a commercial general liability insurance policy in a minimum amount of $500,000 per occurrence
 - Applicable fees paid
 
->**Once completed, you will have**:
+> **Once completed, you will have**:
 >
 > - The same New Jersey home improvement contractor (NJHIC) number

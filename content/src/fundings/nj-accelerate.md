@@ -26,13 +26,12 @@ sector:
 openDate: ""
 dueDate: ""
 descriptionMd: NJ Accelerate supports accelerator programs and their graduate companies. Incentivizes graduate companies to locate and grow in New Jersey.
+summaryDescriptionMd: >-
+  NJ Accelerate supports accelerator programs and their graduate companies. Incentivizes graduate companies to
+  locate and grow in New Jersey.
 ---
 
-NJ Accelerate supports accelerator programs and their graduate companies. Incentivizes graduate companies to locate and grow in New Jersey.
-
----
-
-### Eligibility
+## Eligibility
 
 - Businesses in accelerator programs and graduates of approved accelerators
 
