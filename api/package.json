@@ -105,11 +105,5 @@
     "webpack": "5.89.0",
     "webpack-node-externals": "3.0.0",
     "wiremock": "3.3.1"
-  },
-  "jest-junit": {
-    "outputDirectory": "../coverage/test_results",
-    "outputName": "api-jest.xml",
-    "uniqueOutputName": "false",
-    "addFileAttribute": "true"
   }
 }

@@ -1,6 +1,6 @@
-import type { Config } from "@jest/types";
+import type { Config } from "jest";
 
-export default async (): Promise<Config.InitialOptions> => {
+export default async (): Promise<Config> => {
   return {
     coverageReporters: ["json-summary", "text"],
     ...require("jest-dynalite/jest-preset"),
@@ -16,6 +16,18 @@ export default async (): Promise<Config.InitialOptions> => {
       "@test/(.*)": "<rootDir>/test/$1",
       "@wiremock/(.*)": "<rootDir>/wiremock/$1",
     },
+    reporters: [
+      "default",
+      [
+        "jest-junit",
+        {
+          outputDirectory: "../coverage/test_results",
+          uniqueOutputName: "false",
+          outputName: "api-jest.xml",
+          addFileAttribute: "true",
+        },
+      ],
+    ],
     verbose: true,
     globalSetup: "<rootDir>/src/setupTests.ts",
     globalTeardown: "<rootDir>/src/teardownTests.ts",

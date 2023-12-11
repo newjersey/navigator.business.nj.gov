@@ -19,8 +19,8 @@
     "start:dev": "yarn workspaces foreach -ptvi run dev",
     "spellcheck": "yarn workspaces foreach -v run spellcheck",
     "sync:deps": "yarnw-sync-deps --fix",
-    "test": "jest --projects api shared web",
-    "test:ci": "jest --ci --reporters=default --reporters=jest-junit --maxWorkers=1 --collectCoverage=true --coverageDirectory=../coverage/ --projects api shared web",
+    "test": "yarn workspaces foreach --from '{@businessnjgovnavigator/api,@businessnjgovnavigator/shared,@businessnjgovnavigator/web}' run test --colors",
+    "test:ci": "yarn workspaces foreach --from '{@businessnjgovnavigator/api,@businessnjgovnavigator/shared,@businessnjgovnavigator/web}' run test --colors --maxWorkers=1 --ci --collectCoverageFrom='../coverage'",
     "typecheck": "yarn workspaces foreach -v run typecheck",
     "verify:node": "check-node-version --node $(cat .nvmrc) --npm 10.2.3"
   },
@@ -250,27 +250,6 @@
       "prettier --write"
     ],
     "*.{css,md,scss,yml}": "prettier --write"
-  },
-  "prettier": {
-    "printWidth": 110,
-    "endOfLine": "auto"
-  },
-  "jest": {
-    "coverageReporters": [
-      "json-summary",
-      "text"
-    ],
-    "reporters": [
-      "default",
-      "jest-junit"
-    ],
-    "verbose": true
-  },
-  "jest-junit": {
-    "outputDirectory": "./coverage/test_results",
-    "uniqueOutputName": "false",
-    "outputName": "all-jest.xml",
-    "addFileAttribute": "true"
   },
   "release": {
     "baseBranch": "main",
