@@ -20,9 +20,7 @@ export const AuthButton = (props?: Props): ReactElement => {
   const loginButton = (): ReactElement => {
     return (
       <UnStyledButton
-        style="default"
         dataTestid="login-button"
-        isRightMarginRemoved
         onClick={(): void => {
           triggerSignIn();
           analytics.event.landing_page_navbar_log_in.click.go_to_myNJ_login();
@@ -36,8 +34,6 @@ export const AuthButton = (props?: Props): ReactElement => {
   const logoutButton = (): ReactElement => {
     return (
       <UnStyledButton
-        style="default"
-        isRightMarginRemoved
         onClick={(): void => {
           onSignOut(router.push, dispatch);
         }}

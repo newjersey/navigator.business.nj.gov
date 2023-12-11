@@ -117,7 +117,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
           </div>
         </div>
         <div className="text-normal font-body-md margin-bottom-105">
-          <UnStyledButton style={"default"} isUnderline onClick={routeToPage}>
+          <UnStyledButton isUnderline onClick={routeToPage}>
             {props.opportunity.name}
           </UnStyledButton>
         </div>

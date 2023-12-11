@@ -84,7 +84,7 @@ export const PrimaryButtonDropdown = (props: Props): ReactElement => {
                   {props.dropdownOptions.map((option, i) => {
                     return (
                       <MenuItem onClick={option.onClick} key={i}>
-                        <UnStyledButton style="default" isTextBold isSmallerText>
+                        <UnStyledButton isTextBold isSmallerText>
                           {option.text}
                         </UnStyledButton>
                       </MenuItem>

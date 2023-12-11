@@ -32,12 +32,7 @@ export const NexusUnavailable = (props: UnavailableProps): ReactElement => {
       <div data-testid="unavailable-text">
         <Alert variant="info">
           <PureMarkdownContent components={inlineParagraphComponent}>{textBeforeButton}</PureMarkdownContent>{" "}
-          <UnStyledButton
-            style="default"
-            onClick={onClick}
-            className="display-inline"
-            dataTestid="search-again"
-          >
+          <UnStyledButton onClick={onClick} className="display-inline" dataTestid="search-again">
             {Config.nexusNameSearch.searchAgainButtonText}
           </UnStyledButton>
           <PureMarkdownContent components={inlineParagraphComponent}>{textAfterButton}</PureMarkdownContent>

@@ -1,34 +1,24 @@
 import React, { forwardRef, ReactElement, useEffect, useRef, useState } from "react";
 
 interface Props {
-  style: "default" | "transparentBgColor" | "footerLink";
   className?: string;
   children: React.ReactNode;
   onClick?: (() => void) | ((event: React.MouseEvent) => Promise<void>) | ((event: React.MouseEvent) => void);
   dataTestid?: string;
-  isRightMarginRemoved?: boolean;
   isUnderline?: boolean;
   isSmallerText?: boolean;
   isTextBold?: boolean;
   isIntercomEnabled?: boolean;
   ariaLabel?: string;
+  isBgTransparent?: boolean;
 }
 
 // eslint-disable-next-line react/display-name
 export const UnStyledButton = forwardRef(
   (props: Props, ref?: React.LegacyRef<HTMLButtonElement>): ReactElement => {
-    let style;
-
-    switch (props.style) {
-      case "default":
-        style = "usa-button usa-button--unstyled width-auto font-weight-inherit font-size-inherit";
-        break;
-      case "footerLink":
-        style = "clear-button";
-        break;
-      default:
-        style = "usa-button bg-transparent";
-    }
+    const style = props.isBgTransparent
+      ? "usa-button bg-transparent"
+      : "usa-button usa-button--unstyled width-auto font-weight-inherit font-size-inherit";
 
     const disabledClass = "usa-button--disabled";
     const widthRef = useRef<HTMLInputElement | null>(null);
@@ -42,14 +32,12 @@ export const UnStyledButton = forwardRef(
       }
     }, [height, width, disabledClass]);
 
-    const noRightMargin =
-      props.isRightMarginRemoved || props.style === "default" ? "margin-right-0" : "margin-right-2";
     const underline = props.isUnderline ? "underline" : "";
     const smallText = props.isSmallerText ? "font-body-2xs" : "";
     const textBold = props.isTextBold ? "text-bold" : "";
     const intercomButton = props.isIntercomEnabled ? "intercom-button" : "";
 
-    const className = [style, props.className, noRightMargin, underline, smallText, textBold, intercomButton]
+    const className = [style, props.className, underline, smallText, textBold, intercomButton]
       .map((i) => {
         return i?.trim();
       })

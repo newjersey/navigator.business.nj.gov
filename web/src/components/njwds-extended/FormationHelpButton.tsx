@@ -10,11 +10,10 @@ export const FormationHelpButton = (): ReactElement => {
   return (
     <div className="flex fac margin-top-3 mobile-lg:margin-top-0 mobile-lg:margin-left-auto mobile-lg:margin-right-3 width-full mobile-lg:width-auto">
       <UnStyledButton
-        style={"transparentBgColor"}
+        isBgTransparent
         className={"text-accent-cool-darker fjc padding-0"}
         isTextBold
         isIntercomEnabled
-        isRightMarginRemoved
         dataTestid={"help-button"}
         onClick={(): void => analytics.event.business_formation_help_button.click.open_live_chat()}
       >

@@ -29,7 +29,6 @@ export const ReviewSection = (props: Props): ReactElement => {
         </div>
         <div className="margin-left-2">
           <UnStyledButton
-            style="default"
             onClick={onClick}
             isUnderline
             dataTestid={props.testId}
