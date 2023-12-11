@@ -1,10 +1,11 @@
 ---
 urlSlug: daycare-location-evaluation
 filename: daycare-location-evaluation
+displayname: daycare-evaluate-location
 name: Evaluate Location for Your Daycare
 id: daycare-evaluate-location
 ---
-Your daycare space has to be inspected to ensure it meets New Jersey's requirements.
+Your daycare space needs to be inspected to ensure it meets New Jersey's requirements. When you look for a location, make sure it can meet the State's requirements below, among your other business considerations.
 
 - - -
 
