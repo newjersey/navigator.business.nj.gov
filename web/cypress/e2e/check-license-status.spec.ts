@@ -56,7 +56,7 @@ describe("check license status [feature] [all] [group1]", () => {
     cy.get('[data-testid="permit-PENDING"]').should("exist");
     cy.contains("Certificate of CGL Insurance").should("exist");
     cy.contains("Business Formation Documents").should("exist");
-    cy.contains("Aculyst").should("exist");
+    cy.contains("Aculyst".toUpperCase()).should("exist");
     cy.contains("111 Business St, 12345 NJ").should("exist");
 
     cy.reload();
