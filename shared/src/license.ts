@@ -9,7 +9,7 @@ export type LicenseStatusResult = {
   checklistItems: LicenseStatusItem[];
 };
 
-export type CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
+export type CheckoffStatus = "ACTIVE" | "PENDING" | "INCOMPLETE" | "SCHEDULED" | "NOT_APPLICABLE";
 
 export type LicenseStatus =
   | "ACTIVE"

@@ -213,13 +213,18 @@
     "reinstatementPendingPermitStatusText": "Reinstatement Pending",
     "permitStatusText": "Permit Status:",
     "submittedStatusText": "Submitted",
+    "applicationChecklistItems": "Application Checklist Items",
     "errorTextSearchFailed": "Sorry, something went wrong. Please try again later.",
     "revokedStatusText": "Revoked",
     "pendingDeficienciesStatusText": "Pending Deficiencies",
     "withdrawnPermitStatusText": "Withdrawn",
     "outOfBusinessPermitStatusText": "Out of Business",
     "pendingReinstatementStatusText": "Pending Reinstatement",
-    "expiredPermitStatusText": "Expired"
+    "expiredPermitStatusText": "Expired",
+    "completedStatusText": "Completed",
+    "incompleteStatusText": "Incomplete",
+    "scheduledStatusText": "Scheduled",
+    "notApplicableStatusText": "N/A"
   },
   "fundingDefaults": {
     "issuingAgencyText": "Issuing Agency"

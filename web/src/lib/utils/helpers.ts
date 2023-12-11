@@ -3,6 +3,7 @@ import { FlowType, OnboardingStatus } from "@/lib/types/types";
 import {
   BusinessPersona,
   FormationLegalType,
+  LookupTaskAgencyById,
   Municipality,
   MunicipalityDetail,
   ProfileData,
@@ -274,4 +275,17 @@ export const removeMarkdownFormatting = (markdownText: string): string => {
       // Remove all remaining line breaks
       .replaceAll(/(\r\n|\n|\r)/gm, "")
   );
+};
+
+export const getTaskAgencyText = (agencyId: string, context: string): string => {
+  const agencyName = LookupTaskAgencyById(agencyId).name;
+  if (agencyName && context) {
+    return `${agencyName}, ${context}`;
+  } else if (agencyName) {
+    return agencyName;
+  } else if (context) {
+    return context;
+  } else {
+    return "";
+  }
 };

@@ -8,8 +8,7 @@ import { fetchPostOnboarding } from "@/lib/async-content-fetchers/fetchPostOnboa
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { postOnboardingCheckboxes } from "@/lib/domain-logic/postOnboardingCheckboxes";
 import { PostOnboarding, Task } from "@/lib/types/types";
-import { rswitch } from "@/lib/utils/helpers";
-import { LookupTaskAgencyById } from "@businessnjgovnavigator/shared/taskAgency";
+import { getTaskAgencyText, rswitch } from "@/lib/utils/helpers";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, ReactNode, useEffect, useState } from "react";
 
@@ -89,18 +88,8 @@ export const TaskElement = (props: Props): ReactElement => {
     }
   }
 
-  const getAgencyText = (): string => {
-    const agency = props.task.agencyId ? LookupTaskAgencyById(props.task.agencyId).name : "";
-    const context = props.task.agencyAdditionalContext ?? "";
-    if (agency && context) {
-      return `${agency}, ${context}`;
-    } else if (agency) {
-      return agency;
-    } else if (context) {
-      return context;
-    }
-    return "";
-  };
+  const agency = props.task.agencyId ?? "";
+  const context = props.task.agencyAdditionalContext ?? "";
 
   return (
     <div id="taskElement" className="flex flex-column space-between minh-38">
@@ -143,7 +132,7 @@ export const TaskElement = (props: Props): ReactElement => {
         {(props.task.agencyId || props.task.agencyAdditionalContext) && (
           <div>
             <span className="h5-styling">{`${Config.taskDefaults.issuingAgencyText}: `}</span>
-            <span className="h6-styling">{getAgencyText()}</span>
+            <span className="h6-styling">{getTaskAgencyText(agency, context)}</span>
           </div>
         )}
         {props.task.formName && (

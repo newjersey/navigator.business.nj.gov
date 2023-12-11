@@ -1,4 +1,5 @@
 import { LicenseTask } from "@/components/tasks/LicenseTask";
+import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -20,6 +21,8 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({ checkLicenseStatus: jest.fn(), getUserData: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;
+
+const Config = getMergedConfig();
 
 describe("<LicenseTask />", () => {
   const task = generateTask({});
@@ -215,11 +218,11 @@ describe("<LicenseTask />", () => {
 
     it("does not display error alert when license status is found", async () => {
       renderTask();
-
       mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
       fireEvent.submit(screen.getByTestId("check-status-submit"));
+
       await waitFor(() => {
-        expect(screen.getByText("Pending")).toBeInTheDocument();
+        expect(screen.getByText(Config.licenseSearchTask.completedStatusText)).toBeInTheDocument();
       });
       expect(screen.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
     });
@@ -242,7 +245,7 @@ describe("<LicenseTask />", () => {
     mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
     fireEvent.submit(screen.getByTestId("check-status-submit"));
     await waitFor(() => {
-      expect(screen.getByText("Pending")).toBeInTheDocument();
+      expect(screen.getByText(Config.licenseSearchTask.pendingPermitStatusText)).toBeInTheDocument();
     });
     expect(screen.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
   });
@@ -265,7 +268,7 @@ describe("<LicenseTask />", () => {
     mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
     fireEvent.submit(screen.getByTestId("check-status-submit"));
     await waitFor(() => {
-      expect(screen.getByText("Pending")).toBeInTheDocument();
+      expect(screen.getByText(Config.licenseSearchTask.completedStatusText)).toBeInTheDocument();
     });
     expect(mockApi.checkLicenseStatus).toHaveBeenCalled();
   });
@@ -351,7 +354,7 @@ describe("<LicenseTask />", () => {
 
       renderTask();
 
-      expect(screen.getByText("My Cool Nail Salon")).toBeInTheDocument();
+      expect(screen.getByText("My Cool Nail Salon".toUpperCase())).toBeInTheDocument();
       expect(screen.getByText("123 Main St Suite 1, 12345 NJ")).toBeInTheDocument();
     });
 
@@ -367,6 +370,74 @@ describe("<LicenseTask />", () => {
       });
       fireEvent.click(screen.getByTestId("edit-button"));
       fillText("business-name", "Some Other Business");
+    });
+
+    it("displays Active when permit status is ACTIVE", async () => {
+      renderTask();
+
+      mockApi.checkLicenseStatus.mockResolvedValue(
+        generateUserDataForBusiness(
+          generateBusiness({
+            licenseData: generateLicenseData({
+              status: "ACTIVE",
+              items: [generateLicenseStatusItem({ title: "application fee", status: "ACTIVE" })],
+            }),
+          })
+        )
+      );
+
+      fireEvent.submit(screen.getByTestId("check-status-submit"));
+      await waitFor(() => {
+        expect(screen.getByText("application fee")).toBeInTheDocument();
+      });
+      expect(screen.getByTestId("item-ACTIVE")).toBeInTheDocument();
+      expect(screen.getByText("Active")).toBeInTheDocument();
+    });
+
+    it("displays Pending when permit status is PENDING", async () => {
+      renderTask();
+
+      mockApi.checkLicenseStatus.mockResolvedValue(
+        generateUserDataForBusiness(
+          generateBusiness({
+            licenseData: generateLicenseData({
+              status: "PENDING",
+              items: [generateLicenseStatusItem({ title: "Application", status: "PENDING" })],
+            }),
+          })
+        )
+      );
+
+      fireEvent.submit(screen.getByTestId("check-status-submit"));
+      await waitFor(() => {
+        expect(screen.getByText("Application")).toBeInTheDocument();
+      });
+      expect(screen.getByTestId("item-PENDING")).toBeInTheDocument();
+
+      const permitStatusElement = screen.getAllByText("Pending")[0] as HTMLElement;
+      expect(permitStatusElement).toHaveTextContent("Pending");
+    });
+
+    it("displays Expired when permit status is EXPIRED", async () => {
+      renderTask();
+
+      mockApi.checkLicenseStatus.mockResolvedValue(
+        generateUserDataForBusiness(
+          generateBusiness({
+            licenseData: generateLicenseData({
+              status: "EXPIRED",
+              items: [generateLicenseStatusItem({ title: "application", status: "ACTIVE" })],
+            }),
+          })
+        )
+      );
+
+      fireEvent.submit(screen.getByTestId("check-status-submit"));
+      await waitFor(() => {
+        expect(screen.getByText("application")).toBeInTheDocument();
+      });
+      expect(screen.getByTestId("item-ACTIVE")).toBeInTheDocument();
+      expect(screen.getByText("Expired")).toBeInTheDocument();
     });
   });
 
