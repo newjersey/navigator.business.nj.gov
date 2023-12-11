@@ -54,9 +54,17 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const DefaultButton = (props: { children: ReactNode; [key: string]: any }): ReactElement => (
-    <UnStyledButton style="default" isTextBold isSmallerText {...props} />
+  const DefaultButton = ({
+    children,
+    ...props
+  }: {
+    children: ReactNode;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any;
+  }): ReactElement => (
+    <UnStyledButton isTextBold isSmallerText {...props}>
+      {children}
+    </UnStyledButton>
   );
 
   const Wrapper = props.wrapper ?? DefaultButton;
@@ -86,7 +94,6 @@ export const CalendarButtonDropdown = (props: Props): ReactElement => {
     <>
       <UnStyledButton
         onClick={toggleDropdown}
-        style="default"
         ref={anchorRef}
         dataTestid={`primary${`-${props.name}`}-dropdown-button`}
       >

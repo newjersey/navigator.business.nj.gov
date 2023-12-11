@@ -103,7 +103,6 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
               {renderCalendarEventItems(remainingEvents)}
               <div className="flex flex-justify-center">
                 <UnStyledButton
-                  style="default"
                   isUnderline
                   onClick={(): void => setShowExpandFilingsButton(!showExpandFilingsButton)}
                 >
@@ -115,7 +114,6 @@ export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
           {remainingEvents.length > 0 && !showExpandFilingsButton && (
             <div className="flex flex-justify-center">
               <UnStyledButton
-                style="default"
                 isUnderline
                 onClick={(): void => setShowExpandFilingsButton(!showExpandFilingsButton)}
               >

@@ -66,7 +66,7 @@ export const AdditionalProvisions = (): ReactElement => {
         </Heading>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
-            <UnStyledButton style="default" onClick={handleAddButtonClick} dataTestid="show-provisions">
+            <UnStyledButton onClick={handleAddButtonClick} dataTestid="show-provisions">
               {Config.formation.fields.additionalProvisions.addButtonText}
             </UnStyledButton>
           )}
@@ -105,7 +105,6 @@ export const AdditionalProvisions = (): ReactElement => {
               </div>
               <div className="grid-col-auto margin-x-2 margin-top-05 display-flex flex-column flex-justify-center">
                 <UnStyledButton
-                  style="default"
                   onClick={(): void => removeProvision(index)}
                   className="display-flex flex-column flex-justify-center"
                 >
@@ -124,12 +123,7 @@ export const AdditionalProvisions = (): ReactElement => {
       {isExpanded &&
         state.formationFormData.additionalProvisions &&
         state.formationFormData.additionalProvisions.length < 10 && (
-          <UnStyledButton
-            onClick={handleAddAnother}
-            className="margin-top-2"
-            style="default"
-            dataTestid="add-new-provision"
-          >
+          <UnStyledButton onClick={handleAddAnother} className="margin-top-2" dataTestid="add-new-provision">
             <Icon>add</Icon>
             {Config.formation.fields.additionalProvisions.addAnotherButtonText}
           </UnStyledButton>

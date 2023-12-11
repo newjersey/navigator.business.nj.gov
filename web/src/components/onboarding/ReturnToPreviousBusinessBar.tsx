@@ -43,7 +43,6 @@ export const ReturnToPreviousBusinessBar = (props: Props): ReactElement | null =
     <div className="display-flex flex-align-center bg-accent-cool-lightest border-accent-cool-light border-1px text-accent-cool-darker font-sans-xs minh-3 margin-auto padding-y-1">
       <div className="grid-container-widescreen desktop:padding-x-7 width-full">
         <UnStyledButton
-          style="default"
           className="fdr fac usa-link-hover-override"
           onClick={onClick}
           dataTestid="return-to-prev-button"

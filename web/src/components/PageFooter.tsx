@@ -1,8 +1,6 @@
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
-import { openInNewTab } from "@/lib/utils/helpers";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
 
@@ -48,17 +46,16 @@ export const PageFooter = (): ReactElement => {
           <hr className="margin-y-2" />
           <div className={`${isLargeScreen ? "" : "flex flex-column flex-align-center"}`}>
             <span className="padding-right-1 text-center">
-              <UnStyledButton
-                onClick={(): void => openInNewTab(Config.footer.officeLink)}
-                className="text-white text-center"
-                ariaLabel="Made with love by the Office of Innovation"
-                style="footerLink"
-                isUnderline={true}
+              <a
+                href={Config.footer.officeLink}
+                className="text-white"
+                target="_blank"
+                rel="noreferrer noopener"
               >
                 {Config.footer.madeWithText}
                 &nbsp;<Icon className="text-accent-hot">favorite</Icon>
                 {Config.footer.byTheOfficeOfInnovationText.replaceAll(" ", "\u00A0")}
-              </UnStyledButton>
+              </a>
             </span>
 
             <div className="padding-left-0 desktop:padding-left-1 tablet:display-inline">

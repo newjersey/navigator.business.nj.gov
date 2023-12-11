@@ -18,7 +18,6 @@ type Story = StoryObj<typeof UnStyledButton>;
 
 export const Link: Story = {
   args: {
-    style: "default",
     children: "Link",
     isUnderline: true,
   },
@@ -26,7 +25,6 @@ export const Link: Story = {
 
 export const MenuLink: Story = {
   args: {
-    style: "default",
     children: "Menu Link",
     isUnderline: false,
   },
@@ -34,7 +32,6 @@ export const MenuLink: Story = {
 
 export const ArrowRightLink: Story = {
   args: {
-    style: "default",
     children: (
       <>
         <span className="margin-right-2">Next Task</span>
@@ -47,7 +44,6 @@ export const ArrowRightLink: Story = {
 
 export const ArrowLeftLink: Story = {
   args: {
-    style: "default",
     children: (
       <>
         <Icon className="usa-icon--size-4">navigate_before</Icon>
@@ -60,7 +56,6 @@ export const ArrowLeftLink: Story = {
 
 export const ArrowBackLink: Story = {
   args: {
-    style: "default",
     children: (
       <>
         <div className="bg-accent-cool-darker circle-3 icon-blue-bg-color-hover">
@@ -78,7 +73,6 @@ export const ArrowBackLink: Story = {
 
 export const ExternalLink: Story = {
   args: {
-    style: "default",
     children: (
       <>
         <>Link</>

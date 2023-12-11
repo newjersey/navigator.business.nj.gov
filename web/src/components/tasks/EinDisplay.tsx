@@ -22,7 +22,6 @@ export const EinDisplay = (props: Props): ReactElement => {
           <Content>{templateEval(Config.ein.successText, { ein: displayAsEin(props.employerId) })}</Content>
         </div>
         <UnStyledButton
-          style="default"
           isUnderline
           onClick={props.onEdit}
           ariaLabel={`${Config.taskDefaults.editText} ${Config.ein.ariaLabelText}`}
@@ -31,7 +30,6 @@ export const EinDisplay = (props: Props): ReactElement => {
         </UnStyledButton>
         <span className="margin-x-105">|</span>
         <UnStyledButton
-          style="default"
           isUnderline
           onClick={props.onRemove}
           ariaLabel={`${Config.taskDefaults.removeText} ${Config.ein.ariaLabelText}`}
