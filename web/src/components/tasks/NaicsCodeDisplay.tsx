@@ -45,7 +45,6 @@ export const NaicsCodeDisplay = (props: Props): ReactElement => {
         ) : (
           <>
             <UnStyledButton
-              style="default"
               isUnderline
               onClick={props.onEdit}
               ariaLabel={`${Config.taskDefaults.editText} ${Config.determineNaicsCode.ariaLabelText}`}
@@ -54,7 +53,6 @@ export const NaicsCodeDisplay = (props: Props): ReactElement => {
             </UnStyledButton>
             <span className="margin-x-105">|</span>
             <UnStyledButton
-              style="default"
               isUnderline
               onClick={props.onRemove}
               ariaLabel={`${Config.taskDefaults.removeText} ${Config.determineNaicsCode.ariaLabelText}`}

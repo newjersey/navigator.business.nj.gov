@@ -41,11 +41,7 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
       <Content
         customComponents={{
           button: (
-            <UnStyledButton
-              style="default"
-              isUnderline
-              onClick={(): void => setShowConfirmResubmitModal(true)}
-            >
+            <UnStyledButton isUnderline onClick={(): void => setShowConfirmResubmitModal(true)}>
               {Config.formation.interimSuccessPage.buttonText}
             </UnStyledButton>
           ),

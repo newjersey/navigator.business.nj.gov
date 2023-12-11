@@ -46,9 +46,7 @@ export const ArrowTooltip = (props: TooltipProps): ReactElement => {
               {...props}
             >
               <div>
-                <UnStyledButton style="default" onClick={(): void => setOpen(true)}>
-                  {props.children}
-                </UnStyledButton>
+                <UnStyledButton onClick={(): void => setOpen(true)}>{props.children}</UnStyledButton>
               </div>
             </Tooltip>
           </div>
