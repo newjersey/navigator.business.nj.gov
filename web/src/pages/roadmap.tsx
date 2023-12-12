@@ -1,7 +1,7 @@
 import { CircularIndicator } from "@/components/CircularIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { PageSkeleton } from "@/components/PageSkeleton";
 import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";

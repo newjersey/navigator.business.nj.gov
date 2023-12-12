@@ -1,4 +1,4 @@
-import { SidebarPageLayout, SidebarPageLayoutProps } from "@/components/njwds-extended/SidebarPageLayout";
+import { SidebarPageLayout, SidebarPageLayoutProps } from "@/components/njwds-layout/SidebarPageLayout";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { Task } from "@/lib/types/types";
 import { ReactElement } from "react";

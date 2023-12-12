@@ -1,6 +1,6 @@
 import { MgmtAuth } from "@/components/auth/MgmtAuth";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { PageSkeleton } from "@/components/PageSkeleton";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { ReactElement, useState } from "react";

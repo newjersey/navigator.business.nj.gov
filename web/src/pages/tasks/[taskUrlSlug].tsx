@@ -1,7 +1,7 @@
 import { NavBar } from "@/components/navbar/NavBar";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Icon } from "@/components/njwds/Icon";
-import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskBody } from "@/components/TaskBody";
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { BusinessStructureTask } from "@/components/tasks/business-structure/BusinessStructureTask";

@@ -1,4 +1,4 @@
-import { PageSkeleton } from "@/components/PageSkeleton";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { render, screen } from "@testing-library/react";
 

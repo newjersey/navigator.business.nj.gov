@@ -1,7 +1,7 @@
 import { MgmtAuth } from "@/components/auth/MgmtAuth";
 import { Heading } from "@/components/njwds-extended/Heading";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { PageSkeleton } from "@/components/PageSkeleton";
 import { findDeadContextualInfo, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
 
 import { GetServerSidePropsResult } from "next";
