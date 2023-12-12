@@ -24,7 +24,12 @@
       "groupName": "cypress"
     },
     {
-      "matchPackageNames": ["@types/jest", "ts-jest", "babel-jest", "@jest/types"],
+      "matchPackageNames": [
+        "@types/jest",
+        "ts-jest",
+        "babel-jest",
+        "@jest/types"
+      ],
       "matchPackagePrefixes": ["jest"],
       "groupName": "jest"
     },
@@ -42,7 +47,11 @@
       "enabled": false
     },
     {
-      "matchPackageNames": ["@types/react", "focus-trap-react", "@types/react-dom"],
+      "matchPackageNames": [
+        "@types/react",
+        "focus-trap-react",
+        "@types/react-dom"
+      ],
       "matchPackagePrefixes": ["react"],
       "groupName": "react"
     },

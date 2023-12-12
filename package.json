@@ -19,8 +19,8 @@
     "start:dev": "yarn workspaces foreach -ptvi run dev",
     "spellcheck": "yarn workspaces foreach -v run spellcheck",
     "sync:deps": "yarnw-sync-deps --fix",
-    "test": "jest --projects api shared web",
-    "test:ci": "jest --ci --reporters=default --reporters=jest-junit --maxWorkers=1 --collectCoverage=true --coverageDirectory=../coverage/ --projects api shared web",
+    "test": "yarn workspaces foreach --from '{@businessnjgovnavigator/api,@businessnjgovnavigator/shared,@businessnjgovnavigator/web}' run test --colors",
+    "test:ci": "yarn workspaces foreach --from '{@businessnjgovnavigator/api,@businessnjgovnavigator/shared,@businessnjgovnavigator/web}' run test --colors --maxWorkers=1 --ci --collectCoverageFrom='../coverage'",
     "typecheck": "yarn workspaces foreach -v run typecheck",
     "verify:node": "check-node-version --node $(cat .nvmrc) --npm 10.2.3"
   },
@@ -148,7 +148,7 @@
     "@types/jsonwebtoken": "9.0.5",
     "@types/lodash": "4.14.202",
     "@types/node": "16.18.68",
-    "@types/react": "18.2.38",
+    "@types/react": "18.2.43",
     "@types/react-dom": "18.2.17",
     "@types/react-slick": "^0.23.10",
     "@types/react-swipeable-views": "0.13.5",
@@ -250,27 +250,6 @@
       "prettier --write"
     ],
     "*.{css,md,scss,yml}": "prettier --write"
-  },
-  "prettier": {
-    "printWidth": 110,
-    "endOfLine": "auto"
-  },
-  "jest": {
-    "coverageReporters": [
-      "json-summary",
-      "text"
-    ],
-    "reporters": [
-      "default",
-      "jest-junit"
-    ],
-    "verbose": true
-  },
-  "jest-junit": {
-    "outputDirectory": "./coverage/test_results",
-    "uniqueOutputName": "false",
-    "outputName": "all-jest.xml",
-    "addFileAttribute": "true"
   },
   "release": {
     "baseBranch": "main",
