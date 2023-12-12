@@ -1,7 +1,7 @@
 {
   "formationDateDeletionModal": {
     "header": "Confirm Your Changes",
-    "description": "If you delete your business `effective date|effective-date`, you won't receive a reminder to submit your annual report when it's due and the reminder won't appear in your calendar.",
+    "description": "If you delete your business `effective date|effective-date` , you won't receive a reminder to submit your annual report when it's due and the reminder won't appear in your calendar.",
     "areYouSureModalBody": "Are you sure you want to continue?",
     "cancelButtonText": "Cancel",
     "deleteButtonText": "Delete Date"
@@ -325,7 +325,7 @@
   },
   "unsupportedNavigatorUserPage": {
     "title": "Chat with a New Jersey Business Representative",
-    "subtitle": "It seems like you might have some unique needs, please use our chat feature to get guidance from a New Jersey-based business advocate. Should something change, you can come back and use this tool again later."
+    "subtitle": "It seems like you might have some unique needs; please use our chat feature to get guidance from a New Jersey-based business advocate. Should something change, you can come back and use this tool again later."
   },
   "autosaveDefaults": {
     "savingText": "Saving",
