@@ -28,9 +28,9 @@ import { FormationDateDeletionModal } from "@/components/FormationDateDeletionMo
 import { NavBar } from "@/components/navbar/NavBar";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
+import { SidebarPageLayout } from "@/components/njwds-layout/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { PageSkeleton } from "@/components/PageSkeleton";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";

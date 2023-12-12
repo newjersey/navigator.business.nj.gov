@@ -5,7 +5,7 @@ import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 
-import { ReverseOrderInMobile } from "@/components/ReverseOrderInMobile";
+import { ReverseOrderInMobile } from "@/components/njwds-layout/ReverseOrderInMobile";
 import { TaskCTA } from "@/components/TaskCTA";
 import { DbaFormationSteps } from "@/components/tasks/business-formation/DbaFormationSteps";
 import { DbaFormationStepsConfiguration } from "@/components/tasks/business-formation/DbaFormationStepsConfiguration";

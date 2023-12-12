@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/filename-case */
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
-import { ReverseOrderInMobile } from "@/components/ReverseOrderInMobile";
+import { ReverseOrderInMobile } from "@/components/njwds-layout/ReverseOrderInMobile";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";

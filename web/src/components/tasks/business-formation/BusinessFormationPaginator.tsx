@@ -5,7 +5,7 @@ import { FormationHelpButton } from "@/components/njwds-extended/FormationHelpBu
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { ReverseOrderInMobile } from "@/components/ReverseOrderInMobile";
+import { ReverseOrderInMobile } from "@/components/njwds-layout/ReverseOrderInMobile";
 import { BusinessFormationSteps } from "@/components/tasks/business-formation/BusinessFormationSteps";
 import {
   BusinessFormationStepsConfiguration,

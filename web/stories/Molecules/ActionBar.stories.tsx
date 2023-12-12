@@ -1,6 +1,6 @@
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { ReverseOrderInMobile } from "@/components/ReverseOrderInMobile";
+import { ReverseOrderInMobile } from "@/components/njwds-layout/ReverseOrderInMobile";
 import { Meta, StoryObj } from "@storybook/react";
 
 const Template = () => {

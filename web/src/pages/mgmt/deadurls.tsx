@@ -1,8 +1,8 @@
 import { MgmtAuth } from "@/components/auth/MgmtAuth";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { PageSkeleton } from "@/components/PageSkeleton";
 import { findDeadLinks } from "@/lib/static/admin/findDeadLinks";
 import { GetServerSidePropsResult } from "next";
 import { NextSeo } from "next-seo";
