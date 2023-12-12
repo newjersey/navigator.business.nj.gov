@@ -1,11 +1,11 @@
 ---
 slug: business-structure-learn-more
 filename: business-structure-learn-more
-displayname: business-structure-learn-more
 header: Business Structures
+displayname: business-structure-learn-more
 ---
 
-Your business' business structure (also known as legal structure) defines your taxes, personal liability, partnerships, and registration requirements. Below is a list of common business structures, it is not an exhaustive list and it does not serve as legal or tax advice.
+Your business's business structure (also known as legal structure) defines your taxes, personal liability, partnerships, and registration requirements. Below is a list of common business structures, it is not an exhaustive list and it does not serve as legal or tax advice.
 
 Some types of business structures are easier to set up than others. For instance, forming a sole proprietorship does not require you to file any formation documents (although a tax registration is still required), while for entities such as corporations and Limited Liability Companies, you need to formally incorporate your company with the State. Click the links for more information about the advantages and drawbacks of each business structure.
 
