@@ -1,3 +1,4 @@
+import { elevatorSafetyRouterFactory } from "@api/elevatorSafetyRouter";
 import { fireSafetyRouterFactory } from "@api/fireSafetyRouter";
 import { formationRouterFactory } from "@api/formationRouter";
 import { housingRouterFactory } from "@api/housingRouter";
@@ -11,6 +12,8 @@ import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
 import { DynamicsAccessTokenClient } from "@client/dynamics/DynamicsAccessTokenClient";
+import { DynamicsElevatorSafetyClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyClient";
+import { DynamicsElevatorSafetyInspectionClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyInspectionClient";
 import { DynamicsFireSafetyClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyClient";
 import { DynamicsFireSafetyInspectionClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyInspectionClient";
 import { DynamicsHousingClient } from "@client/dynamics/housing/DynamicsHousingClient";
@@ -140,6 +143,25 @@ const dynamicsHousingClient = DynamicsHousingClient(logger, {
   housingPropertyInterestClient: dynamicsHousingPropertyInterestClient,
 });
 
+const DYNAMICS_ELEVATOR_SAFETY_URL = process.env.DYNAMICS_ELEVATOR_SAFETY_URL || "";
+
+const dynamicsElevatorSafetyAccessTokenClient = DynamicsAccessTokenClient(logger, {
+  tenantId: process.env.DYNAMICS_ELEVATOR_SAFETY_TENANT_ID || "",
+  orgUrl: DYNAMICS_ELEVATOR_SAFETY_URL,
+  clientId: process.env.DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID || "",
+  clientSecret: process.env.DYNAMICS_ELEVATOR_SAFETY_SECRET || "",
+});
+
+const dynamicsElevatorSafetyInspectionClient = DynamicsElevatorSafetyInspectionClient(
+  logger,
+  DYNAMICS_ELEVATOR_SAFETY_URL
+);
+
+const dynamicsElevatorSafetyClient = DynamicsElevatorSafetyClient(logger, {
+  accessTokenClient: dynamicsElevatorSafetyAccessTokenClient,
+  elevatorSafetyInspectionClient: dynamicsElevatorSafetyInspectionClient,
+});
+
 const BUSINESS_NAME_BASE_URL =
   process.env.BUSINESS_NAME_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
 const businessNameClient = ApiBusinessNameClient(BUSINESS_NAME_BASE_URL, logger);
@@ -255,6 +277,7 @@ app.use(
 );
 app.use("/api/guest", guestRouterFactory(timeStampToBusinessSearch));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus, userDataClient));
+app.use("/api", elevatorSafetyRouterFactory(dynamicsElevatorSafetyClient));
 app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient));
 app.use("/api", housingRouterFactory(dynamicsHousingClient));
 app.use("/api", selfRegRouterFactory(userDataClient, selfRegClient));
