@@ -274,7 +274,8 @@
       "businessSuffix": {
         "label": "Business Designator",
         "labelContextualInfo": "business-designator",
-        "error": "Select a business designator."
+        "error": "Select a business designator.",
+        "optionsUpdatedSnackbarAlert": "Your Business Designator list has been updated. Please make your selection from the dropdown menu."
       },
       "businessTotalStock": {
         "label": "Total Shares of Stock",
@@ -288,6 +289,7 @@
       },
       "willPracticeLaw": {
         "label": "Will you practice law?",
+        "subtitle": "Selecting \"Yes\" will change the Business Designations available for your business.",
         "radioNoText": "No",
         "radioYesText": "Yes",
         "error": "Select 'Yes' or 'No'."
