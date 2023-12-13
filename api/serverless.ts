@@ -68,6 +68,11 @@ const dynamicsHousingClientId = process.env.DYNAMICS_HOUSING_CLIENT_ID || "";
 const dynamicsHousingSecret = process.env.DYNAMICS_HOUSING_SECRET || "";
 const dynamicsHousingTenantId = process.env.DYNAMICS_HOUSING_TENANT_ID || "";
 
+const dynamicsElevatorSafetyURL = process.env.DYNAMICS_ELEVATOR_SAFETY_URL || "";
+const dynamicsElevatorSafetyClientId = process.env.DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID || "";
+const dynamicsElevatorSafetySecret = process.env.DYNAMICS_ELEVATOR_SAFETY_SECRET || "";
+const dynamicsElevatorSafetyTenantId = process.env.DYNAMICS_ELEVATOR_SAFETY_TENANT_ID || "";
+
 const serverlessConfiguration: AWS = {
   useDotenv: true,
   service: "businessnjgov-api",
@@ -203,6 +208,10 @@ const serverlessConfiguration: AWS = {
       DYNAMICS_HOUSING_CLIENT_ID: dynamicsHousingClientId,
       DYNAMICS_HOUSING_SECRET: dynamicsHousingSecret,
       DYNAMICS_HOUSING_TENANT_ID: dynamicsHousingTenantId,
+      DYNAMICS_ELEVATOR_SAFETY_URL: dynamicsElevatorSafetyURL,
+      DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID: dynamicsElevatorSafetyClientId,
+      DYNAMICS_ELEVATOR_SAFETY_SECRET: dynamicsElevatorSafetySecret,
+      DYNAMICS_ELEVATOR_SAFETY_TENANT_ID: dynamicsElevatorSafetyTenantId,
     } as AwsLambdaEnvironment,
     logRetentionInDays: 180,
   },
