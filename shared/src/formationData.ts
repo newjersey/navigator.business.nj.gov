@@ -295,7 +295,7 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     contactPhoneNumber: "",
     foreignDateOfFormation: undefined,
     foreignStateOfFormation: undefined,
-    willPracticeLaw: undefined,
+    willPracticeLaw: false,
     isVeteranNonprofit: undefined,
   };
 };
@@ -349,13 +349,18 @@ export const nonprofitBusinessSuffix = [
   "INC.",
 ] as const;
 
-export const foreignCorpBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
+export const foreignCorpBusinessSuffix = [...corpBusinessSuffix] as const;
+
+export const foreignCorpWillPracticeLawBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
 
 export type CorpBusinessSuffix = (typeof corpBusinessSuffix)[number];
 
 export type NonprofitBusinessSuffix = (typeof nonprofitBusinessSuffix)[number];
 
 export type ForeignCorpBusinessSuffix = (typeof foreignCorpBusinessSuffix)[number];
+
+export type ForeignCorpWillPracticeLawBusinessSuffix =
+  (typeof foreignCorpWillPracticeLawBusinessSuffix)[number];
 
 export type LlpBusinessSuffix = (typeof llpBusinessSuffix)[number];
 
@@ -367,6 +372,7 @@ export const AllBusinessSuffixes = [
   ...lpBusinessSuffix,
   ...corpBusinessSuffix,
   ...foreignCorpBusinessSuffix,
+  ...foreignCorpWillPracticeLawBusinessSuffix,
   ...nonprofitBusinessSuffix,
 ] as const;
 

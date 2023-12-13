@@ -15,6 +15,7 @@ type TrueFalseRadioType = "true" | "false";
 interface Props {
   fieldName: FormationFields;
   title: string;
+  subtitle?: string;
   values: InFormBylawsRadioType[] | TrueFalseRadioType[];
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   errorMessage?: string | undefined;
@@ -46,6 +47,11 @@ export const FormationRadio = (props: Props): ReactElement => {
       <strong>
         <Content>{props.title}</Content>
       </strong>
+      {props.subtitle && (
+        <div className="margin-y-05">
+          <Content>{props.subtitle}</Content>
+        </div>
+      )}
       <FormationField fieldName={props.fieldName}>
         <FormControl error={hasError}>
           <RadioGroup
