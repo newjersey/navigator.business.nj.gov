@@ -292,6 +292,11 @@ collections:
                           display_fields: ["{{displayname}}"],
                         }
                       - { label: "Inline error", name: "error", widget: "string" }
+                      - {
+                          label: "Options Updated Snackbar Message",
+                          name: "optionsUpdatedSnackbarAlert",
+                          widget: "string",
+                        }
                   - label: Business Total Stock
                     name: businessTotalStock
                     collapsed: true
@@ -769,6 +774,7 @@ collections:
                     widget: object
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Subtitle", name: "subtitle", widget: "string" }
                       - { label: "Radio No Text", name: "radioNoText", widget: "string" }
                       - { label: "Radio Yes Text", name: "radioYesText", widget: "string" }
                       - { label: "Error", name: "error", widget: "string" }

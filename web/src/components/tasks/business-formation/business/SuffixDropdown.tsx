@@ -3,9 +3,24 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
-import { BusinessSuffix, BusinessSuffixMap } from "@businessnjgovnavigator/shared/";
+import {
+  BusinessSuffix,
+  BusinessSuffixMap,
+  CorpBusinessSuffix,
+  ForeignCorpBusinessSuffix,
+  foreignCorpWillPracticeLawBusinessSuffix,
+  ForeignCorpWillPracticeLawBusinessSuffix,
+  LlcBusinessSuffix,
+  LlpBusinessSuffix,
+  LpBusinessSuffix,
+  NonprofitBusinessSuffix,
+} from "@businessnjgovnavigator/shared/";
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { ReactElement, ReactNode, useContext } from "react";
+
+interface MySelectDisplayProps extends React.HTMLAttributes<HTMLDivElement> {
+  "data-testid"?: string;
+}
 
 export const SuffixDropdown = (): ReactElement => {
   const FIELD = "businessSuffix";
@@ -20,6 +35,20 @@ export const SuffixDropdown = (): ReactElement => {
         businessSuffix: event.target.value as BusinessSuffix,
       };
     });
+  };
+
+  const getSuffixDropDownOptions = ():
+    | LlpBusinessSuffix[]
+    | LlcBusinessSuffix[]
+    | CorpBusinessSuffix[]
+    | LpBusinessSuffix[]
+    | ForeignCorpWillPracticeLawBusinessSuffix[]
+    | ForeignCorpBusinessSuffix[]
+    | NonprofitBusinessSuffix[] => {
+    if (state.formationFormData.willPracticeLaw === true) {
+      return [...foreignCorpWillPracticeLawBusinessSuffix];
+    }
+    return BusinessSuffixMap[state.formationFormData.legalType];
   };
 
   return (
@@ -40,6 +69,7 @@ export const SuffixDropdown = (): ReactElement => {
           autoComplete="no"
           labelId="business-suffix-label"
           id="business-suffix"
+          SelectDisplayProps={{ "data-testid": "business-suffix-main" } as MySelectDisplayProps}
           displayEmpty
           value={state.formationFormData.businessSuffix || ""}
           onChange={handleChange}
@@ -53,7 +83,7 @@ export const SuffixDropdown = (): ReactElement => {
             return selected;
           }}
         >
-          {BusinessSuffixMap[state.formationFormData.legalType].map((suffix) => {
+          {getSuffixDropDownOptions().map((suffix) => {
             return (
               <MenuItem key={suffix} value={suffix} data-testid={suffix}>
                 {suffix}
