@@ -19,8 +19,9 @@
     "start:dev": "yarn workspaces foreach -ptvi run dev",
     "spellcheck": "yarn workspaces foreach -v run spellcheck",
     "sync:deps": "yarnw-sync-deps --fix",
-    "test": "yarn workspaces foreach --from '{@businessnjgovnavigator/api,@businessnjgovnavigator/shared,@businessnjgovnavigator/web}' run test --colors",
-    "test:ci": "yarn workspaces foreach --from '{@businessnjgovnavigator/api,@businessnjgovnavigator/shared,@businessnjgovnavigator/web}' run test --colors --maxWorkers=1 --ci --collectCoverageFrom='../coverage'",
+    "test": "jest",
+    "test:ci": "jest --colors --runInBand --ci",
+    "test:coverage": "jest --config jest.coverage.ts",
     "typecheck": "yarn workspaces foreach -v run typecheck",
     "verify:node": "check-node-version --node $(cat .nvmrc) --npm 10.2.3"
   },

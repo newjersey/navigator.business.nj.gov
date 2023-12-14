@@ -580,7 +580,7 @@ jobs:
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
-    parallelism: 5
+    parallelism: 8
     steps:
       - set-dev-env-vars
       - attach_workspace:
@@ -589,8 +589,7 @@ jobs:
       - run:
           name: Glob, Split, and Run Unit Tests
           command: |
-            TEST=$(circleci tests glob "./{shared,web,api}/**/*.test.{j,t}{s,sx}" | circleci tests split --split-by=timings)
-            yarn test:ci -- $TEST
+            yarn test:ci --shard=$(expr $CIRCLE_NODE_INDEX + 1)/$CIRCLE_NODE_TOTAL
       - store_test_results:
           path: coverage/test_results
       - store_artifacts:
