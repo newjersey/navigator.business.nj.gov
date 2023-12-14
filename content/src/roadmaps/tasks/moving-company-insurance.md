@@ -13,6 +13,10 @@ To find an insurance broker, speak to your network, local Chamber of Commerce, o
 
 ### Common Types of Commercial Insurance
 
+:::infoAlert 
+ Specific liability insurance may be required for business owners who have physical locations.
+:::
+
 * **Bodily damage liability:** Moving companies are required to carry a minimum of 25,000 in liability insurance for 1 person and 100,000 for more than 1 person
 * **Property damage liability:** Moving companies are required to carry a minimum of 10,000 in liability insurance
 * **Commercial general liability insurance:** Research coverage and pricing options for your industry and business size
