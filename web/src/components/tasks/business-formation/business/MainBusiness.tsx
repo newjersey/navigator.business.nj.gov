@@ -28,6 +28,13 @@ export const MainBusiness = (): ReactElement => {
   return (
     <div>
       <BusinessNameAndLegalStructure />
+      {isForeignCorporation(state.formationFormData.legalType) && (
+        <WithErrorBar hasError={doesFieldHaveError("willPracticeLaw")} type="ALWAYS">
+          <FormationField fieldName="willPracticeLaw">
+            <WillPracticeLaw />
+          </FormationField>
+        </WithErrorBar>
+      )}
       <WithErrorBar
         hasError={doSomeFieldsHaveError(["businessSuffix", "businessStartDate"])}
         type="DESKTOP-ONLY"
@@ -73,19 +80,9 @@ export const MainBusiness = (): ReactElement => {
             </div>
           </WithErrorBar>
 
-          {isForeignCorporation(state.formationFormData.legalType) && (
-            <WithErrorBar hasError={doesFieldHaveError("willPracticeLaw")} type="ALWAYS">
-              <FormationField fieldName="willPracticeLaw">
-                <WillPracticeLaw />
-                <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
-              </FormationField>
-            </WithErrorBar>
-          )}
           {isForeignCorporationOrNonprofit(state.formationFormData.legalType) && (
             <FormationField fieldName="foreignGoodStandingFile">
-              {!isForeignCorporation(state.formationFormData.legalType) && (
-                <hr className="margin-bottom-2 margin-top-3" aria-hidden={true} />
-              )}
+              <hr className="margin-bottom-2 margin-top-3" aria-hidden={true} />
               <ForeignCertificate hasError={doesFieldHaveError("foreignGoodStandingFile")} />
             </FormationField>
           )}
