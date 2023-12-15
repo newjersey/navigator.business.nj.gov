@@ -53,7 +53,7 @@
     "@mui/lab": "5.0.0-alpha.155",
     "@mui/material": "5.14.20",
     "@mui/styles": "5.14.20",
-    "@mui/x-date-pickers": "5.0.20",
+    "@mui/x-date-pickers": "6.18.4",
     "@newjersey/njwds": "0.3.0",
     "@types/mdast": "4.0.3",
     "axios": "1.6.2",
