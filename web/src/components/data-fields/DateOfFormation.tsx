@@ -93,7 +93,7 @@ export const DateOfFormation = (props: Props): ReactElement => {
           name: fieldName,
          // onChange: handleChange,
           onBlur: onValidation,
-          error: isFormFieldInvalid || dateError,
+          error: isFormFieldInvalid,
           helperText: dateError && errorText,
           variant: "outlined",
           // ...fieldOptions,
