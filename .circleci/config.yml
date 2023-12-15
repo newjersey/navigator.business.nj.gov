@@ -771,7 +771,7 @@ jobs:
 
   sync-industries:
     docker:
-      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-18_18_2
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder-20_10_0
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
