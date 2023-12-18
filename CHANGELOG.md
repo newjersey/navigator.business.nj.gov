@@ -1,3 +1,20 @@
+# [5.43.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.42.1...v5.43.0) (2023-12-15)
+
+
+### Bug Fixes
+
+* updating Tasks - All daycare-evaluate-location ([#5665](https://github.com/newjersey/navigator.business.nj.gov/issues/5665)) ([e37c188](https://github.com/newjersey/navigator.business.nj.gov/commit/e37c1888a8f3b7482e6a0271d2017fe485609c14))
+* updating Taxes Filings - All nj-927_927-w ([#4472](https://github.com/newjersey/navigator.business.nj.gov/issues/4472)) ([514e060](https://github.com/newjersey/navigator.business.nj.gov/commit/514e0602cabb123ee20d04383009f90f26070913))
+
+
+### Features
+
+* [[#184606287](https://github.com/newjersey/navigator.business.nj.gov/issues/184606287)] storybook - action bar ([f2f0f23](https://github.com/newjersey/navigator.business.nj.gov/commit/f2f0f23c5862d28a1f8ddb45981790b74fb9391f))
+* [[#185606709](https://github.com/newjersey/navigator.business.nj.gov/issues/185606709)] storybook - quick action ([60fd3ce](https://github.com/newjersey/navigator.business.nj.gov/commit/60fd3ce5bbfba78f29075ef661f08a831c624f38))
+* [[#185698591](https://github.com/newjersey/navigator.business.nj.gov/issues/185698591)] create Webflow industry starter kit dropdown ([406fcfa](https://github.com/newjersey/navigator.business.nj.gov/commit/406fcfa72067c3e6d9d8ca3b8b09ea619b49b916))
+* [[#185698591](https://github.com/newjersey/navigator.business.nj.gov/issues/185698591)] create Webflow industrySync ([ac5aebc](https://github.com/newjersey/navigator.business.nj.gov/commit/ac5aebcd63d2100a1d424fc30f2bcbf2e79d75e4))
+* [[#186203974](https://github.com/newjersey/navigator.business.nj.gov/issues/186203974)] storybook - h2 unbolded ([eafbbec](https://github.com/newjersey/navigator.business.nj.gov/commit/eafbbec71eebad783c4bf4a8abfa849e6d9be428))
+
 ## [5.42.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.42.0...v5.42.1) (2023-12-07)
 
 

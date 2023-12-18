@@ -3773,6 +3773,7 @@ collections:
               - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
               - { label: Found Text, name: foundText, widget: string }
               - { label: Permit Status Label, name: permitStatusText, widget: string }
+              - { label: Application Checklist Items Label, name: applicationChecklistItems, widget: string }
               - { label: Edit Button Text, name: editButtonText, widget: string }
               - { label: Status - Pending, name: pendingPermitStatusText, widget: string }
               - { label: Status - Active, name: activePermitStatusText, widget: string }
@@ -3816,6 +3817,10 @@ collections:
               - { label: Status - Suspended, name: suspendedStatusText, widget: string }
               - { label: Status - Revoked, name: revokedStatusText, widget: string }
               - { label: Tooltip Text, name: tooltipText, widget: text }
+              - { label: Status - Completed, name: completedStatusText, widget: string }
+              - { label: Status - Incomplete, name: incompleteStatusText, widget: string }
+              - { label: Status - Scheduled, name: scheduledStatusText, widget: string }
+              - { label: Status - Not Applicable, name: notApplicableStatusText, widget: text }
           - label: Task Progress
             name: taskProgress
             collapsed: true

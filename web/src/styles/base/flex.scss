@@ -9,6 +9,17 @@
   flex-direction: row;
 }
 
+@media (min-width: 640px) {
+  .tablet-flex-row {
+    display: flex;
+    flex-direction: row;
+  }
+  .tablet-flex-alignItems-end {
+    display: flex;
+    align-items: end;
+  }
+}
+
 .fdc {
   display: flex;
   flex-direction: column;
