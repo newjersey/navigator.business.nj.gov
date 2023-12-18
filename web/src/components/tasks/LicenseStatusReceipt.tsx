@@ -133,7 +133,6 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
     index: number,
     receiptItems: LicenseStatusItem[]
   ): ReactElement => {
-    console.log("ITEM", item);
     return (
       <div key={index} data-testid={`item-${item.status}`}>
         <div className="flex flex-column fac tablet-flex-row width-full pt-1 tpt-0">
@@ -160,7 +159,6 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
           <div>
             <UnStyledButton
               className="tablet:margin-left-1"
-              style="default"
               isUnderline={true}
               dataTestid="edit-button"
               onClick={(): void => {
