@@ -24,7 +24,10 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
       {
         component: (
           <>
-            <BusinessPersonaQuestion<OnboardingErrors> errorTypes={["REQUIRED_EXISTING_BUSINESS"]} />
+            <BusinessPersonaQuestion<OnboardingErrors>
+              errorTypes={["REQUIRED_EXISTING_BUSINESS"]}
+              key="initial-question"
+            />
             <div className="padding-top-3">
               <FieldLabelDescriptionOnly fieldName="sectorId" />
               <Sectors<OnboardingErrors> errorTypes={["REQUIRED_REVIEW_INFO_BELOW"]} />
@@ -37,7 +40,14 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
   STARTING: {
     pages: [
       {
-        component: <BusinessPersonaQuestion<OnboardingErrors> errorTypes={["REQUIRED_EXISTING_BUSINESS"]} />,
+        component: (
+          <>
+            <BusinessPersonaQuestion<OnboardingErrors>
+              errorTypes={["REQUIRED_EXISTING_BUSINESS"]}
+              key="initial-question"
+            />
+          </>
+        ),
       },
       {
         name: "industry-page",
@@ -61,7 +71,14 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
   FOREIGN: {
     pages: [
       {
-        component: <BusinessPersonaQuestion<OnboardingErrors> errorTypes={["REQUIRED_EXISTING_BUSINESS"]} />,
+        component: (
+          <>
+            <BusinessPersonaQuestion<OnboardingErrors>
+              errorTypes={["REQUIRED_EXISTING_BUSINESS"]}
+              key="initial-question"
+            />
+          </>
+        ),
       },
 
       {
