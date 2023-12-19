@@ -55,6 +55,7 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
             style={{ alignItems: "center" }}
             labelPlacement="end"
             data-testid="business-persona-starting"
+            key="business-persona-starting"
             value="STARTING"
             control={<Radio color="primary" />}
             label={contentFromConfig.radioButtonStartingText}
@@ -63,6 +64,7 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
             style={{ alignItems: "center" }}
             labelPlacement="end"
             data-testid="business-persona-owning"
+            key="business-persona-owning"
             value="OWNING"
             control={<Radio color="primary" />}
             label={contentFromConfig.radioButtonOwningText}
@@ -71,6 +73,7 @@ export const BusinessPersonaQuestion = <T,>(props: FormContextFieldProps<T>): Re
             style={{ alignItems: "center" }}
             labelPlacement="end"
             data-testid="business-persona-foreign"
+            key="business-persona-foreign"
             value="FOREIGN"
             control={<Radio color="primary" />}
             label={contentFromConfig.radioButtonForeignText}

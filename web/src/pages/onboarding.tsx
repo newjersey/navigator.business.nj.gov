@@ -1,3 +1,6 @@
+import { BusinessPersonaQuestion } from "@/components/data-fields/BusinessPersonaQuestion";
+import { Sectors } from "@/components/data-fields/Sectors";
+import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
 import { NavBar } from "@/components/navbar/NavBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
@@ -473,7 +476,15 @@ const OnboardingPage = (props: Props): ReactElement => {
                           className={`usa-prose onboarding-form margin-top-2`}
                           data-testid={`page-${index + 1}-form`}
                         >
+                          {/* hmmmmmm */}
                           {onboardingPage.component}
+                          {/* So we are re-rendering this page all the time */}
+                          {/* <BusinessPersonaQuestion<OnboardingErrors> errorTypes={["REQUIRED_EXISTING_BUSINESS"]} />
+                          {currentFlow === "OWNING" && <div className="padding-top-3">
+                            <FieldLabelDescriptionOnly fieldName="sectorId" />
+                            <Sectors<OnboardingErrors> errorTypes={["REQUIRED_REVIEW_INFO_BELOW"]} />
+                          </div>} */}
+
                           <hr className="margin-top-6 margin-bottom-4" aria-hidden={true} />
                           <DevOnlySkipOnboardingButton setPage={setPage} routeToPage={routeToPage} />
                           <OnboardingButtonGroup
