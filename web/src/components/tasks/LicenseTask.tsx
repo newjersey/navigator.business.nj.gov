@@ -184,7 +184,6 @@ export const LicenseTask = (props: Props): ReactElement => {
                   status={licenseStatusResult.status}
                   items={licenseStatusResult.checklistItems}
                   onEdit={onEdit}
-                  agency={props.task.agencyId ?? ""}
                 />
               ) : (
                 <CheckStatus onSubmit={onSubmit} error={error} isLoading={isLoading} />
