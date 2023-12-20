@@ -6,42 +6,43 @@ import { Icon } from "@/components/njwds/Icon";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import { getTaskAgencyText } from "@/lib/utils/helpers";
 import { LicenseStatus, LicenseStatusItem } from "@businessnjgovnavigator/shared/";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   items: LicenseStatusItem[];
   status: LicenseStatus;
-  agency: string;
-  context?: string;
   onEdit: () => void;
 }
 
-type PermitTheme = {
+type PermitColorScheme = {
   bgHdrColor: string;
   bgSubHdrColor: string;
   textAndIconColor: string;
+  icon: string;
 };
 
 const Config = getMergedConfig();
 
-const activePermitTheme: PermitTheme = {
+const activePermit: PermitColorScheme = {
   bgHdrColor: "bg-success-dark",
   bgSubHdrColor: "bg-success-lighter",
   textAndIconColor: "text-primary-darker",
+  icon: "check_circle_outline",
 };
 
-const inactivePermitTheme: PermitTheme = {
-  bgHdrColor: "bg-error",
-  bgSubHdrColor: "bg-error-extra-light",
-  textAndIconColor: "text-error-darker",
-};
-
-const pendingPermitTheme: PermitTheme = {
+const pendingPermit: PermitColorScheme = {
   bgHdrColor: "bg-secondary",
   bgSubHdrColor: "bg-secondary-lighter",
   textAndIconColor: "text-secondary-darker",
+  icon: "schedule",
+};
+
+const inactivePermit: PermitColorScheme = {
+  bgHdrColor: "bg-error",
+  bgSubHdrColor: "bg-error-extra-light",
+  textAndIconColor: "text-error-darker",
+  icon: "highlight_off",
 };
 
 const LicenseStatusLookup: Record<LicenseStatus, string> = {
@@ -92,31 +93,20 @@ const isPending = (licenseStatus: LicenseStatus): boolean => {
 };
 
 export const LicenseStatusReceipt = (props: Props): ReactElement => {
-  const [permitColorScheme, setPermitColorTheme] = useState<PermitTheme>(pendingPermitTheme);
   const { business } = useUserData();
 
-  useEffect(() => {
+  const getPermitColorScheme = (): PermitColorScheme => {
     if (props.status === "ACTIVE") {
-      setPermitColorTheme(activePermitTheme);
+      return activePermit;
     } else if (isPending(props.status)) {
-      setPermitColorTheme(pendingPermitTheme);
+      return pendingPermit;
     } else {
-      setPermitColorTheme(inactivePermitTheme);
+      return inactivePermit;
     }
-  }, [props.status]);
+  };
 
   const getText = (): string => {
     return LicenseStatusLookup[props.status];
-  };
-
-  const getIcon = (status: LicenseStatus): string => {
-    if (status === "ACTIVE") {
-      return "check_circle_outline";
-    } else if (isPending(props.status)) {
-      return "schedule";
-    } else {
-      return "highlight_off";
-    }
   };
 
   const getOneLineAddress = (): string => {
@@ -135,7 +125,7 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
   ): ReactElement => {
     return (
       <div key={index} data-testid={`item-${item.status}`}>
-        <div className="flex flex-column fac tablet-flex-row width-full pt-1 tpt-0">
+        <div className="flex flex-column fac tablet-flex-row width-full">
           <ChecklistTag status={item.status} />
           <span className="margin-left-2 text-left width-full margin-top-1 tablet:margin-top-0">
             {item.title}
@@ -173,20 +163,28 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
 
         <div className="border-2px border-white radius-lg bg-white padding-y-2 padding-x-105 margin-bottom-5 margin-top-205 shadow-3">
           <div
-            className={`margin-1 text-bold fdc fac radius-lg ${permitColorScheme.bgSubHdrColor}`}
+            className={`margin-1 text-bold fdc fac radius-lg ${getPermitColorScheme().bgSubHdrColor}`}
             data-testid={`permit-${props.status}`}
           >
             <div
-              className={`${permitColorScheme.bgHdrColor} text-white width-full radius-top-lg padding-y-1 padding-x-2 margin-0`}
+              className={`${
+                getPermitColorScheme().bgHdrColor
+              } text-white width-full radius-top-lg padding-y-1 padding-x-2 margin-0`}
             >
               {Config.licenseSearchTask.permitStatusText}
             </div>
 
             <div
-              className={`padding-05 fdr fac radius-bottom-lg ${permitColorScheme.textAndIconColor} width-full font-sans-lg text-bold`}
+              className={`padding-05 fdr fac radius-bottom-lg ${
+                getPermitColorScheme().textAndIconColor
+              } width-full font-sans-lg text-bold`}
             >
               <Icon className="display-none tablet:display-block tablet:margin-left-1 usa-icon--size-4">
-                {getIcon(props.status)}
+                {props.status === "ACTIVE"
+                  ? activePermit.icon
+                  : isPending(props.status)
+                  ? pendingPermit.icon
+                  : inactivePermit.icon}
               </Icon>
 
               <p className="tablet:margin-left-1 padding-05 line-height-sans-3">{getText()}</p>
@@ -194,7 +192,7 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
           </div>
           <div className="padding-2">
             <Heading level={1} styleVariant="h4" className="margin-bottom-05-override tablet:padding-top-1">
-              {Config.licenseSearchTask.applicationChecklistItems}
+              {Config.licenseSearchTask.applicationChecklistItemsText}
             </Heading>
 
             <hr className="tablet:margin-bottom-205" />
@@ -204,8 +202,8 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
         </div>
         <HorizontalLine />
         <div>
-          <strong>{Config.taskDefaults.issuingAgencyText}: </strong>
-          {getTaskAgencyText(props.agency, props.context ?? "")}
+          <div className="h5-styling">{Config.taskDefaults.issuingAgencyText}: </div>
+          <div className="h6-styling">{Config.licenseSearchTask.issuingAgencyNameText}</div>
         </div>
       </div>
     </div>
