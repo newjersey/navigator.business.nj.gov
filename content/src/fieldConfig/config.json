@@ -213,7 +213,7 @@
     "reinstatementPendingPermitStatusText": "Reinstatement Pending",
     "permitStatusText": "Permit Status:",
     "submittedStatusText": "Submitted",
-    "applicationChecklistItems": "Application Checklist Items",
+    "applicationChecklistItemsText": "Application Checklist Items",
     "errorTextSearchFailed": "Sorry, something went wrong. Please try again later.",
     "revokedStatusText": "Revoked",
     "pendingDeficienciesStatusText": "Pending Deficiencies",
@@ -224,7 +224,8 @@
     "completedStatusText": "Completed",
     "incompleteStatusText": "Incomplete",
     "scheduledStatusText": "Scheduled",
-    "notApplicableStatusText": "N/A"
+    "notApplicableStatusText": "N/A",
+    "issuingAgencyNameText": "NJ Division of Consumer Affairs"
   },
   "fundingDefaults": {
     "issuingAgencyText": "Issuing Agency"

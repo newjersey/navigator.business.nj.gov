@@ -1,5 +1,4 @@
 import { LicenseTask } from "@/components/tasks/LicenseTask";
-import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -21,8 +20,6 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({ checkLicenseStatus: jest.fn(), getUserData: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;
-
-const Config = getMergedConfig();
 
 describe("<LicenseTask />", () => {
   const task = generateTask({});
@@ -222,7 +219,7 @@ describe("<LicenseTask />", () => {
       fireEvent.submit(screen.getByTestId("check-status-submit"));
 
       await waitFor(() => {
-        expect(screen.getByText(Config.licenseSearchTask.completedStatusText)).toBeInTheDocument();
+        expect(screen.getByText("Pending")).toBeInTheDocument();
       });
       expect(screen.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
     });
@@ -245,7 +242,7 @@ describe("<LicenseTask />", () => {
     mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
     fireEvent.submit(screen.getByTestId("check-status-submit"));
     await waitFor(() => {
-      expect(screen.getByText(Config.licenseSearchTask.pendingPermitStatusText)).toBeInTheDocument();
+      expect(screen.getByText("Pending")).toBeInTheDocument();
     });
     expect(screen.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
   });
@@ -268,7 +265,7 @@ describe("<LicenseTask />", () => {
     mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
     fireEvent.submit(screen.getByTestId("check-status-submit"));
     await waitFor(() => {
-      expect(screen.getByText(Config.licenseSearchTask.completedStatusText)).toBeInTheDocument();
+      expect(screen.getByText("Pending")).toBeInTheDocument();
     });
     expect(mockApi.checkLicenseStatus).toHaveBeenCalled();
   });
