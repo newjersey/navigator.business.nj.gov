@@ -1,13 +1,17 @@
 import { CircularIndicator } from "@/components/CircularIndicator";
 import { Content } from "@/components/Content";
-import { TaskCTA } from "@/components/TaskCTA";
+import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { TaskHeader } from "@/components/TaskHeader";
+import { isBusinessStartDateValid } from "@/components/tasks/business-formation/business/BusinessDateValidators";
+import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { FormationInterimSuccessPage } from "@/components/tasks/business-formation/FormationInterimSuccessPage";
+import { NexusFormationFlow } from "@/components/tasks/business-formation/NexusFormationFlow";
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import * as api from "@/lib/api-client/apiClient";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { allowFormation } from "@/lib/domain-logic/allowFormation";
@@ -16,11 +20,6 @@ import { splitFullName } from "@/lib/domain-logic/splitFullName";
 import { Task, TasksDisplayContent } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
-
-import { isBusinessStartDateValid } from "@/components/tasks/business-formation/business/BusinessDateValidators";
-import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
-import { NexusFormationFlow } from "@/components/tasks/business-formation/NexusFormationFlow";
-import { useConfig } from "@/lib/data-hooks/useConfig";
 import {
   castPublicFilingLegalTypeToFormationType,
   createEmptyFormationFormData,
@@ -196,10 +195,13 @@ export const BusinessFormation = (props: Props): ReactElement => {
           <UnlockedBy task={props.task} />
           <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
         </div>
-        <TaskCTA
-          link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
-          text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}
-        />
+        {getModifiedTaskContent(roadmap, props.task, "callToActionLink") &&
+          getModifiedTaskContent(roadmap, props.task, "callToActionText") && (
+            <SingleCtaLink
+              link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
+              text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}
+            />
+          )}
       </div>
     );
   }

@@ -1,4 +1,4 @@
-import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { AuthContext } from "@/contexts/authContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
@@ -26,9 +26,11 @@ export const DevOnlyResetUserDataButton = (): ReactElement => {
   };
   if (process.env.NODE_ENV === "development") {
     return (
-      <SecondaryButton isColor="primary" onClick={resetUserData}>
-        Reset User Data
-      </SecondaryButton>
+      <div className="margin-top-2">
+        <PrimaryButton isColor="accent-cooler" onClick={resetUserData}>
+          Reset User Data
+        </PrimaryButton>
+      </div>
     );
   } else {
     return <></>;

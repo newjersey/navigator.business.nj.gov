@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { TaskFooterCtas } from "@/components/TaskFooterCtas";
+import { TaskCtaLinks } from "@/components/TaskCtaLinks";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { ReactElement } from "react";
@@ -12,10 +12,9 @@ const PostOnboardingPreview = (props: PreviewProps): ReactElement => {
   return (
     <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
       <Content>{body}</Content>
-      <TaskFooterCtas
+      <TaskCtaLinks
         postOnboardingQuestion={postOnboardingQuestion}
         onboardingKey="constructionRenovationPlan"
-        CMS_ONLY_forceDisplay={true}
       />
     </div>
   );

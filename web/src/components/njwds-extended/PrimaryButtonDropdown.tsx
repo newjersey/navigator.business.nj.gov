@@ -8,6 +8,7 @@ import { KeyboardEvent, ReactElement, ReactNode, SyntheticEvent, useEffect, useR
 interface Props {
   children: ReactNode;
   dropdownOptions: CallToActionHyperlink[];
+  isRightMarginRemoved?: boolean;
 }
 
 export const PrimaryButtonDropdown = (props: Props): ReactElement => {
@@ -52,6 +53,7 @@ export const PrimaryButtonDropdown = (props: Props): ReactElement => {
         isAriaExpanded={open ? true : undefined}
         isAriaHaspopup={true}
         onClick={handleToggle}
+        isRightMarginRemoved={props.isRightMarginRemoved}
       >
         <>
           {props.children}

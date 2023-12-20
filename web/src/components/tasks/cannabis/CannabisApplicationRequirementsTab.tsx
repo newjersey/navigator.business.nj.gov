@@ -1,8 +1,9 @@
 import { Content } from "@/components/Content";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { ReverseOrderInMobile } from "@/components/njwds-layout/ReverseOrderInMobile";
+import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -133,28 +134,20 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
         )}
       </div>
 
-      <div
-        style={{ marginTop: "auto" }}
-        className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 flex-column mobile-lg:flex-row radius-bottom-lg"
-      >
-        <ReverseOrderInMobile>
-          <>
+      <CtaContainer>
+        <ActionBarLayout>
+          <div className="margin-top-2 mobile-lg:margin-top-0">
             <SecondaryButton isColor="primary" dataTestId="backButton" onClick={props.onBack}>
               {Config.cannabisPriorityStatus.backButtonText}
             </SecondaryButton>
-            <a
-              className="mobile-lg:margin-bottom-0 margin-bottom-1"
-              href={props.task.callToActionLink}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <PrimaryButton isColor="primary" dataTestId="certificationButton" isRightMarginRemoved>
-                {props.task.callToActionText}
-              </PrimaryButton>
-            </a>
-          </>
-        </ReverseOrderInMobile>
-      </div>
+          </div>
+          <a href={props.task.callToActionLink} target="_blank" rel="noreferrer noopener">
+            <PrimaryButton isColor="primary" dataTestId="certificationButton" isRightMarginRemoved>
+              {props.task.callToActionText}
+            </PrimaryButton>
+          </a>
+        </ActionBarLayout>
+      </CtaContainer>
     </div>
   );
 };
