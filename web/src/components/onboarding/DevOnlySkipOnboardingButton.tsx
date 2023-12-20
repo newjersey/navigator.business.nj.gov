@@ -1,4 +1,4 @@
-import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, useContext } from "react";
@@ -23,9 +23,11 @@ export const DevOnlySkipOnboardingButton = (props: Props): ReactElement => {
 
   if (state.page === 1 && process.env.NODE_ENV === "development") {
     return (
-      <SecondaryButton isColor="primary" onClick={devOnlySkipOnboarding}>
-        skip
-      </SecondaryButton>
+      <div className="margin-top-2">
+        <PrimaryButton isColor="accent-cooler" onClick={devOnlySkipOnboarding}>
+          skip
+        </PrimaryButton>
+      </div>
     );
   } else {
     return <></>;

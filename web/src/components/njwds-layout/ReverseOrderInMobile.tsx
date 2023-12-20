@@ -1,9 +1,11 @@
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface Props {
-  children: ReactElement;
+  children: ReactNode;
   className?: string;
 }
 export const ReverseOrderInMobile = (props: Props): ReactElement => (
-  <div className={`flex flex-column-reverse mobile-lg:flex-row ${props.className}`}>{props.children}</div>
+  <div className={`display-flex flex-column-reverse mobile-lg:flex-row ${props.className}`}>
+    {props.children}
+  </div>
 );

@@ -2,7 +2,7 @@ import { Content } from "@/components/Content";
 import { DeferredLocationQuestion } from "@/components/DeferredLocationQuestion";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { PostOnboardingRadioQuestion } from "@/components/post-onboarding/PostOnboardingRadioQuestion";
-import { TaskFooterCtas } from "@/components/TaskFooterCtas";
+import { TaskCtaLinks } from "@/components/TaskCtaLinks";
 import { TaskHeader } from "@/components/TaskHeader";
 import { fetchPostOnboarding } from "@/lib/async-content-fetchers/fetchPostOnboarding";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -153,7 +153,7 @@ export const TaskElement = (props: Props): ReactElement => {
           </div>
         )}
       </div>
-      <TaskFooterCtas
+      <TaskCtaLinks
         postOnboardingQuestion={postOnboardingQuestion}
         task={props.task}
         onboardingKey="constructionRenovationPlan"

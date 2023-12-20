@@ -1,12 +1,11 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { FormationHelpButton } from "@/components/njwds-extended/FormationHelpButton";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-
-import { ReverseOrderInMobile } from "@/components/njwds-layout/ReverseOrderInMobile";
-import { TaskCTA } from "@/components/TaskCTA";
+import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { DbaFormationSteps } from "@/components/tasks/business-formation/DbaFormationSteps";
 import { DbaFormationStepsConfiguration } from "@/components/tasks/business-formation/DbaFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -151,18 +150,6 @@ export const DbaFormationPaginator = (): ReactElement => {
     </div>
   );
 
-  const ButtonWrapper = (props: { children: ReactNode }): ReactElement => {
-    return (
-      <div className="margin-top-2 width-100">
-        <div className="bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg">
-          <ReverseOrderInMobile>
-            <>{props.children}</>
-          </ReverseOrderInMobile>
-        </div>
-      </div>
-    );
-  };
-
   const displayButtons = (): ReactNode => {
     const nameIsAvailable = isDba
       ? state.dbaBusinessNameAvailability?.status === "AVAILABLE"
@@ -170,29 +157,51 @@ export const DbaFormationPaginator = (): ReactElement => {
 
     if (state.stepIndex === 0 && nameIsAvailable) {
       return (
-        <ButtonWrapper>
-          <FormationHelpButton />
-          <ForwardButton />
-        </ButtonWrapper>
+        <CtaContainer>
+          <ActionBarLayout>
+            <FormationHelpButton />
+            <ForwardButton />
+          </ActionBarLayout>
+        </CtaContainer>
       );
     } else if (state.stepIndex === 1) {
       return (
-        <ButtonWrapper>
-          <FormationHelpButton />
-          <BackButton />
-          <ForwardButton />
-        </ButtonWrapper>
+        <CtaContainer>
+          <ActionBarLayout>
+            <FormationHelpButton />
+            <div className="margin-top-2 mobile-lg:margin-top-0">
+              <BackButton />
+            </div>
+            <ForwardButton />
+          </ActionBarLayout>
+        </CtaContainer>
       );
     } else if (state.stepIndex === 2) {
       return (
-        <TaskCTA
-          link={state.dbaContent.Authorize.callToActionLink}
-          text={state.dbaContent.Authorize.callToActionText}
-          onClick={(): void => setShowCtaModal(true)}
-        >
-          <FormationHelpButton />
-          <BackButton />
-        </TaskCTA>
+        <CtaContainer>
+          <ActionBarLayout>
+            <FormationHelpButton />
+            <div className="margin-top-2 mobile-lg:margin-top-0">
+              <BackButton />
+            </div>
+            <a href={state.dbaContent.Authorize.callToActionLink} target="_blank" rel="noreferrer noopener">
+              <PrimaryButton
+                isColor="primary"
+                isRightMarginRemoved={true}
+                onClick={(): void => {
+                  analytics.event.task_primary_call_to_action.click.open_external_website(
+                    state.dbaContent.Authorize.callToActionText ||
+                      Config.taskDefaults.defaultCallToActionText,
+                    state.dbaContent.Authorize.callToActionLink as string
+                  );
+                  setShowCtaModal(true);
+                }}
+              >
+                {state.dbaContent.Authorize.callToActionText || Config.taskDefaults.defaultCallToActionText}
+              </PrimaryButton>
+            </a>
+          </ActionBarLayout>
+        </CtaContainer>
       );
     }
   };

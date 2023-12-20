@@ -1,26 +1,25 @@
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
+import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PrimaryButtonDropdown } from "@/components/njwds-extended/PrimaryButtonDropdown";
-import { TaskCTA } from "@/components/TaskCTA";
-import { TaskFooter } from "@/components/TaskFooter";
+import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { CallToActionHyperlink, PostOnboarding, Task } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { ProfileData } from "@businessnjgovnavigator/shared/index";
-import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
 interface Props {
   postOnboardingQuestion: PostOnboarding | undefined;
   task?: Task | undefined;
-  CMS_ONLY_forceDisplay?: boolean | undefined;
   onboardingKey?: keyof ProfileData | undefined;
 }
 
-export const TaskFooterCtas = (props: Props): ReactElement => {
+export const TaskCtaLinks = (props: Props): ReactElement => {
   const ctaButtons: CallToActionHyperlink[] = [];
   const { Config } = useConfig();
   const { business } = useUserData();
-  const router = useRouter();
 
   const taskCtaDestination = props.task?.callToActionLink;
   let taskCtaText = props.task?.callToActionText ?? "";
@@ -38,8 +37,7 @@ export const TaskFooterCtas = (props: Props): ReactElement => {
   const hasPostOnboarding = !!props.postOnboardingQuestion;
 
   const hasAnsweredYesToPostOnboarding =
-    (props.onboardingKey && business?.profileData[props.onboardingKey] === true) ||
-    props.CMS_ONLY_forceDisplay;
+    props.onboardingKey && business?.profileData[props.onboardingKey] === true;
 
   if (hasPostOnboarding && hasAnsweredYesToPostOnboarding) {
     if (link1 && text1) {
@@ -47,11 +45,11 @@ export const TaskFooterCtas = (props: Props): ReactElement => {
         text: text1,
         destination: link1,
         onClick: () => {
-          if (props.CMS_ONLY_forceDisplay) {
-            openInNewTab(link1);
-          } else {
-            router.push(link1);
-          }
+          analytics.event.task_primary_call_to_action.click.open_external_website(
+            text1 || Config.taskDefaults.defaultCallToActionText,
+            link1 as string
+          );
+          openInNewTab(link1);
         },
       });
     }
@@ -60,11 +58,11 @@ export const TaskFooterCtas = (props: Props): ReactElement => {
         text: text2,
         destination: link2,
         onClick: () => {
-          if (props.CMS_ONLY_forceDisplay) {
-            openInNewTab(link2);
-          } else {
-            router.push(link2);
-          }
+          analytics.event.task_primary_call_to_action.click.open_external_website(
+            text2 || Config.taskDefaults.defaultCallToActionText,
+            link2 as string
+          );
+          openInNewTab(link2);
         },
       });
     }
@@ -73,31 +71,29 @@ export const TaskFooterCtas = (props: Props): ReactElement => {
       text: taskCtaText,
       destination: taskCtaDestination,
       onClick: () => {
-        if (props.CMS_ONLY_forceDisplay) {
-          openInNewTab(taskCtaDestination);
-        } else {
-          router.push(taskCtaDestination);
-        }
+        analytics.event.task_primary_call_to_action.click.open_external_website(
+          taskCtaText || Config.taskDefaults.defaultCallToActionText,
+          taskCtaDestination as string
+        );
+        openInNewTab(taskCtaDestination);
       },
     });
   }
 
   if (ctaButtons.length === 1) {
     const [ctaHyperlink] = ctaButtons;
-    return (
-      <div data-testid="cta-area">
-        <TaskCTA link={ctaHyperlink.destination} text={ctaHyperlink.text} />
-      </div>
-    );
+    return <SingleCtaLink link={ctaHyperlink.destination} text={ctaHyperlink.text} />;
   }
 
   if (ctaButtons.length > 1 && props.postOnboardingQuestion?.callToActionYesDropdownText) {
     return (
-      <TaskFooter data-testid="cta-area">
-        <PrimaryButtonDropdown dropdownOptions={ctaButtons}>
-          {props.postOnboardingQuestion.callToActionYesDropdownText}
-        </PrimaryButtonDropdown>
-      </TaskFooter>
+      <CtaContainer>
+        <ActionBarLayout>
+          <PrimaryButtonDropdown dropdownOptions={ctaButtons} isRightMarginRemoved>
+            {props.postOnboardingQuestion.callToActionYesDropdownText}
+          </PrimaryButtonDropdown>
+        </ActionBarLayout>
+      </CtaContainer>
     );
   }
 

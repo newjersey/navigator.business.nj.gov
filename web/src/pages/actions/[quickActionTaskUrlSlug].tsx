@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { NavBar } from "@/components/navbar/NavBar";
+import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { TaskCTA } from "@/components/TaskCTA";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { getMergedConfig } from "@/contexts/configContext";
 import {
@@ -40,7 +40,7 @@ export const QuickActionElement = (props: Props): ReactElement => {
         </>
       )}
       {props.quickActionTask.callToActionLink && props.quickActionTask.callToActionText && (
-        <TaskCTA
+        <SingleCtaLink
           link={props.quickActionTask.callToActionLink}
           text={props.quickActionTask.callToActionText}
         />

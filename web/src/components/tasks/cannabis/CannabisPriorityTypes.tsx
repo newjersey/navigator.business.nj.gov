@@ -1,6 +1,8 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
@@ -142,19 +144,18 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
       )}
 
       {displayNextTabButton && (
-        <div
-          style={{ marginTop: "auto" }}
-          className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg"
-        >
-          <PrimaryButton
-            isColor="primary"
-            isRightMarginRemoved={true}
-            dataTestId="nextTabButton"
-            onClick={props.onNextTab}
-          >
-            {Config.cannabisPriorityStatus.nextButtonText}
-          </PrimaryButton>
-        </div>
+        <CtaContainer>
+          <ActionBarLayout>
+            <PrimaryButton
+              isColor="primary"
+              isRightMarginRemoved={true}
+              dataTestId="nextTabButton"
+              onClick={props.onNextTab}
+            >
+              {Config.cannabisPriorityStatus.nextButtonText}
+            </PrimaryButton>
+          </ActionBarLayout>
+        </CtaContainer>
       )}
     </div>
   );

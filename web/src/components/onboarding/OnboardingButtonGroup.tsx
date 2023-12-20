@@ -1,5 +1,6 @@
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { scrollToTop } from "@/lib/utils/helpers";
@@ -31,15 +32,26 @@ export const OnboardingButtonGroup = (props: Props): ReactElement => {
   };
 
   return (
-    <div className="float-right fdr margin-bottom-8">
-      {(state.page || 1) > 1 && (
-        <SecondaryButton isColor="primary" onClick={back} dataTestId="back">
-          {Config.onboardingDefaults.backButtonText}
-        </SecondaryButton>
-      )}
-      <PrimaryButton isColor="primary" dataTestId="next" isSubmitButton={true} isRightMarginRemoved={true}>
-        {getText()}
-      </PrimaryButton>
+    <div className="margin-bottom-2">
+      <ActionBarLayout>
+        {(state.page || 1) > 1 && (
+          <div className="margin-top-2 mobile-lg:margin-top-0">
+            <SecondaryButton isColor="primary" onClick={back} dataTestId="back">
+              {Config.onboardingDefaults.backButtonText}
+            </SecondaryButton>
+          </div>
+        )}
+        <div className="mobile-lg:display-inline">
+          <PrimaryButton
+            isColor="primary"
+            dataTestId="next"
+            isSubmitButton={true}
+            isRightMarginRemoved={true}
+          >
+            {getText()}
+          </PrimaryButton>
+        </div>
+      </ActionBarLayout>
     </div>
   );
 };

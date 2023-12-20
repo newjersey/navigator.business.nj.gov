@@ -474,12 +474,12 @@ const OnboardingPage = (props: Props): ReactElement => {
                           data-testid={`page-${index + 1}-form`}
                         >
                           {onboardingPage.component}
-                          <hr className="margin-top-6 margin-bottom-4" aria-hidden={true} />
-                          <DevOnlySkipOnboardingButton setPage={setPage} routeToPage={routeToPage} />
+                          <hr className="margin-top-6 margin-bottom-2" />
                           <OnboardingButtonGroup
                             isAdditionalBusiness={isAdditionalBusiness}
                             isFinal={page.current === onboardingFlows[currentFlow].pages.length}
                           />
+                          <DevOnlySkipOnboardingButton setPage={setPage} routeToPage={routeToPage} />
                         </form>
                       </SingleColumnContainer>
                     </CSSTransition>

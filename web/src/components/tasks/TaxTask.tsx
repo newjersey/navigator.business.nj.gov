@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { TaskCTA } from "@/components/TaskCTA";
+import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { TaskHeader } from "@/components/TaskHeader";
 import { TaxInput } from "@/components/tasks/TaxInput";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
@@ -31,7 +31,9 @@ export const TaxTask = (props: Props): ReactElement => {
         <TaxInput task={props.task} />
       </div>
       <Content>{postInputContent}</Content>
-      <TaskCTA link={props.task.callToActionLink} text={props.task.callToActionText} />
+      {props.task.callToActionLink && props.task.callToActionText && (
+        <SingleCtaLink link={props.task.callToActionLink} text={props.task.callToActionText} />
+      )}
     </div>
   );
 };

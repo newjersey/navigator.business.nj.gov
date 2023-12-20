@@ -1,11 +1,12 @@
 import { AutosaveSpinner } from "@/components/AutosaveSpinner";
 import { FieldEntryAlert } from "@/components/FieldEntryAlert";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { FormationHelpButton } from "@/components/njwds-extended/FormationHelpButton";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { ReverseOrderInMobile } from "@/components/njwds-layout/ReverseOrderInMobile";
+import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { BusinessFormationSteps } from "@/components/tasks/business-formation/BusinessFormationSteps";
 import {
   BusinessFormationStepsConfiguration,
@@ -338,50 +339,47 @@ export const BusinessFormationPaginator = (): ReactElement => {
   };
 
   const displayButtons = (): ReactNode => {
-    return (
-      <div className="margin-top-2 ">
-        <div className="bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg">
-          <div className="flex fac margin-bottom-2 mobile-lg:margin-bottom-0">
-            <AutosaveSpinner
-              saveEveryXSeconds={1}
-              secondsBetweenSpinAnimations={60}
-              spinForXSeconds={2.5}
-              hasDataChanged={hasFormDataChanged()}
-              saveDataFunction={(): void => {
-                saveFormData({ shouldFilter: false, newStep: state.stepIndex });
-              }}
-            />
-          </div>
-          <ReverseOrderInMobile>
-            <>
-              <FormationHelpButton />
-              {shouldDisplayPreviousButton() && (
-                <div className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-105">
-                  <SecondaryButton
-                    isColor="primary"
-                    onClick={onPreviousButtonClick}
-                    dataTestId="previous-button"
-                    isRightMarginRemoved={true}
-                  >
-                    {Config.formation.general.previousButtonText}
-                  </SecondaryButton>
-                </div>
-              )}
-              <PrimaryButton
-                isColor="primary"
-                onClick={(): void => {
-                  onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" });
-                }}
-                isRightMarginRemoved={true}
-                isLoading={isLoading}
-                dataTestId="next-button"
-              >
-                {getNextButtonText()}
-              </PrimaryButton>
-            </>
-          </ReverseOrderInMobile>
-        </div>
+    const stackOnLeft = (
+      <div
+        className="display-flex mobile-lg:display-block flex-justify-center
+    "
+      >
+        <AutosaveSpinner
+          saveEveryXSeconds={1}
+          secondsBetweenSpinAnimations={60}
+          spinForXSeconds={2.5}
+          hasDataChanged={hasFormDataChanged()}
+          saveDataFunction={(): void => {
+            saveFormData({ shouldFilter: false, newStep: state.stepIndex });
+          }}
+        />
       </div>
+    );
+
+    return (
+      <CtaContainer>
+        <ActionBarLayout stackOnLeft={stackOnLeft}>
+          <FormationHelpButton />
+          {shouldDisplayPreviousButton() && (
+            <div className="margin-top-2 mobile-lg:margin-top-0">
+              <SecondaryButton isColor="primary" onClick={onPreviousButtonClick} dataTestId="previous-button">
+                {Config.formation.general.previousButtonText}
+              </SecondaryButton>
+            </div>
+          )}
+          <PrimaryButton
+            isColor="primary"
+            onClick={(): void => {
+              onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" });
+            }}
+            isRightMarginRemoved={true}
+            isLoading={isLoading}
+            dataTestId="next-button"
+          >
+            {getNextButtonText()}
+          </PrimaryButton>
+        </ActionBarLayout>
+      </CtaContainer>
     );
   };
 
