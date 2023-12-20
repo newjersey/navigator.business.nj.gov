@@ -321,7 +321,8 @@
     "linkOneText": "Give Us Feedback",
     "gitHubLink": "https://github.com/newjersey",
     "linkTwoText": "Terms & Privacy Policy",
-    "byTheOfficeOfInnovationText": " by the Office of Innovation"
+    "byTheOfficeOfInnovationText": "by the Office of Innovation",
+    "madeWithLoveByTheOfficeOfInnovationAriaLabel": "Made with love by the Office of Innovation"
   },
   "registeredForTaxesModal": {
     "areYouSureTaxTitle": "Didn't Register Yet?",

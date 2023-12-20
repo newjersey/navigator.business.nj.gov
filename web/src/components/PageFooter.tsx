@@ -51,10 +51,11 @@ export const PageFooter = (): ReactElement => {
                 className="text-white"
                 target="_blank"
                 rel="noreferrer noopener"
+                aria-label={Config.footer.madeWithLoveByTheOfficeOfInnovationAriaLabel}
               >
                 {Config.footer.madeWithText}
-                &nbsp;<Icon className="text-accent-hot">favorite</Icon>
-                {Config.footer.byTheOfficeOfInnovationText.replaceAll(" ", "\u00A0")}
+                &nbsp;<Icon className="text-accent-hot">favorite</Icon>&nbsp;
+                {Config.footer.byTheOfficeOfInnovationText}
               </a>
             </span>
 
