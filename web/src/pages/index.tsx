@@ -1,8 +1,8 @@
 import { LegalMessage } from "@/components/LegalMessage";
 import { NavBar } from "@/components/navbar/NavBar";
 import { Heading } from "@/components/njwds-extended/Heading";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Hero } from "@/components/njwds/Hero";
-import { PageSkeleton } from "@/components/PageSkeleton";
 import { SupportExploreSignUpChatCards } from "@/components/SupportExploreSignUpChatCards";
 import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";

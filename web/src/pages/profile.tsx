@@ -28,9 +28,10 @@ import { FormationDateDeletionModal } from "@/components/FormationDateDeletionMo
 import { NavBar } from "@/components/navbar/NavBar";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
+import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
+import { SidebarPageLayout } from "@/components/njwds-layout/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { PageSkeleton } from "@/components/PageSkeleton";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
@@ -727,7 +728,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <PageSkeleton>
             <NavBar showSidebar={true} hideMiniRoadmap={true} />
             <main id="main" data-testid={"main"}>
-              <div className="usa-section padding-top-0 desktop:padding-top-3">
+              <div className="padding-top-0 desktop:padding-top-3">
                 <ProfileEscapeModal
                   isOpen={escapeModal}
                   close={(): void => setEscapeModal(false)}
@@ -769,27 +770,33 @@ const ProfilePage = (props: Props): ReactElement => {
                         <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
                           {getElements()}
                           <div className="margin-top-2">
-                            <DevOnlyResetUserDataButton />
-                            <div className="float-right fdr">
-                              <SecondaryButton
-                                isColor="primary"
-                                onClick={(): Promise<void> => onBack()}
-                                dataTestId="back"
-                              >
-                                {Config.profileDefaults.default.backButtonText}
-                              </SecondaryButton>
-                              <PrimaryButton
-                                isColor="primary"
-                                isSubmitButton={true}
-                                onClick={(): void => {}}
-                                isRightMarginRemoved={true}
-                                dataTestId="save"
-                                isLoading={isLoading}
-                              >
-                                {Config.profileDefaults.default.saveButtonText}
-                              </PrimaryButton>
-                            </div>
+                            <ActionBarLayout>
+                              <div className="margin-top-2 mobile-lg:margin-top-0">
+                                <SecondaryButton
+                                  isColor="primary"
+                                  onClick={(): Promise<void> => onBack()}
+                                  dataTestId="back"
+                                >
+                                  {Config.profileDefaults.default.backButtonText}
+                                </SecondaryButton>
+                              </div>
+                              <div>
+                                <div className="mobile-lg:display-inline">
+                                  <PrimaryButton
+                                    isColor="primary"
+                                    isSubmitButton={true}
+                                    onClick={(): void => {}}
+                                    isRightMarginRemoved={true}
+                                    dataTestId="save"
+                                    isLoading={isLoading}
+                                  >
+                                    {Config.profileDefaults.default.saveButtonText}
+                                  </PrimaryButton>
+                                </div>
+                              </div>
+                            </ActionBarLayout>
                           </div>
+                          <DevOnlyResetUserDataButton />
                         </form>
                       </>
                     )}

@@ -2,11 +2,11 @@ import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content, ExternalLink, GreenBox } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { NavBar } from "@/components/navbar/NavBar";
+import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { Tag } from "@/components/njwds-extended/Tag";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Icon } from "@/components/njwds/Icon";
-import { PageSkeleton } from "@/components/PageSkeleton";
-import { TaskCTA } from "@/components/TaskCTA";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -181,7 +181,7 @@ export const FilingElement = (props: {
         </>
       </div>
       {props.filing.callToActionLink && props.filing.callToActionText && (
-        <TaskCTA link={props.filing.callToActionLink} text={props.filing.callToActionText} />
+        <SingleCtaLink link={props.filing.callToActionLink} text={props.filing.callToActionText} />
       )}
     </>
   );

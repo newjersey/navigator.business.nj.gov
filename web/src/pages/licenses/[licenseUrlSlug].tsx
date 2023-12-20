@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { NavBar } from "@/components/navbar/NavBar";
-import { PageSkeleton } from "@/components/PageSkeleton";
-import { TaskCTA } from "@/components/TaskCTA";
+import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -64,7 +64,7 @@ export const LicenseElement = (props: LicenseElementProps): ReactElement => {
         <Content>{props.license.contentMd}</Content>
       </div>
       {props.license.callToActionLink && props.license.callToActionText && (
-        <TaskCTA link={props.license.callToActionLink} text={props.license.callToActionText} />
+        <SingleCtaLink link={props.license.callToActionLink} text={props.license.callToActionText} />
       )}
     </>
   );

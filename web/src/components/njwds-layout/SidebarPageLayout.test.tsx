@@ -1,4 +1,4 @@
-import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
+import { SidebarPageLayout } from "@/components/njwds-layout/SidebarPageLayout";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData";

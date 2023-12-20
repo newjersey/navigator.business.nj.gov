@@ -1,12 +1,12 @@
 import { NavBar } from "@/components/navbar/NavBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { DevOnlySkipOnboardingButton } from "@/components/onboarding/DevOnlySkipOnboardingButton";
 import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
 import { onboardingFlows as onboardingFlowObject } from "@/components/onboarding/OnboardingFlows";
 import { ReturnToPreviousBusinessBar } from "@/components/onboarding/ReturnToPreviousBusinessBar";
-import { PageSkeleton } from "@/components/PageSkeleton";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AuthContext } from "@/contexts/authContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
@@ -474,12 +474,12 @@ const OnboardingPage = (props: Props): ReactElement => {
                           data-testid={`page-${index + 1}-form`}
                         >
                           {onboardingPage.component}
-                          <hr className="margin-top-6 margin-bottom-4" aria-hidden={true} />
-                          <DevOnlySkipOnboardingButton setPage={setPage} routeToPage={routeToPage} />
+                          <hr className="margin-top-6 margin-bottom-2" />
                           <OnboardingButtonGroup
                             isAdditionalBusiness={isAdditionalBusiness}
                             isFinal={page.current === onboardingFlows[currentFlow].pages.length}
                           />
+                          <DevOnlySkipOnboardingButton setPage={setPage} routeToPage={routeToPage} />
                         </form>
                       </SingleColumnContainer>
                     </CSSTransition>

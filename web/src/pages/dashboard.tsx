@@ -11,7 +11,7 @@ import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelD
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { Header } from "@/components/Header";
 import { NavBar } from "@/components/navbar/NavBar";
-import { PageSkeleton } from "@/components/PageSkeleton";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";

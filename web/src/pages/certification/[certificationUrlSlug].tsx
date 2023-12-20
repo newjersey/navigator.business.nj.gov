@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { NavBar } from "@/components/navbar/NavBar";
-import { PageSkeleton } from "@/components/PageSkeleton";
-import { TaskCTA } from "@/components/TaskCTA";
+import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
+import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -38,7 +38,12 @@ export const CertificationElement = (props: { certification: Certification }): R
         </div>
         <Content>{addNaicsCodeData(props.certification.contentMd)}</Content>
       </div>
-      <TaskCTA link={props.certification.callToActionLink} text={props.certification.callToActionText} />
+      {props.certification.callToActionLink && props.certification.callToActionText && (
+        <SingleCtaLink
+          link={props.certification.callToActionLink}
+          text={props.certification.callToActionText}
+        />
+      )}
     </>
   );
 };
