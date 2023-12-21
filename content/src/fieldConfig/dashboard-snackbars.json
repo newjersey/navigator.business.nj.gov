@@ -8,11 +8,13 @@
     "calendarSnackbarBody": "Find your next reporting due date at the bottom of this page.",
     "hiddenTasksSnackbarBody": "Click \"Show\" next to \"My Registration Tasks\" to show your tasks again.",
     "deferredOnboardingSnackbarHeader": "Your answer was saved",
-    "hiddenTasksSnackbarHeading": "Your tasks are hidden",
+    "hiddenTasksSnackbarHeading": "We marked the “Register for State Taxes and Employer Purposes” task complete and hidden all tasks",
     "calendarSnackbarHeading": "Your annual reporting deadline was added",
     "taxRegistrationSnackbarHeading": "We marked the “Register for State Taxes and Employer Purposes” task complete.",
     "taxRegistrationSnackbarBody": "State certifications can give you new government contracting opportunities. Your certification options now appear in the “For You” section.",
     "additionalBusinessSnackbarHeader": "Additional business added",
-    "additionalBusinessSnackbarBody": "You can switch between your businesses in your account drop down menu."
+    "additionalBusinessSnackbarBody": "You can switch between your businesses in your account drop down menu.",
+    "opportunitiesAndDeadlinesHeading": "Your deadlines and opportunities have been added",
+    "opportunitiesAndDeadlinesBody": "See your next annual reporting deadline at the bottom of this page. \n\nGo to the “For You” section to view certifications and funding programs."
   }
 }

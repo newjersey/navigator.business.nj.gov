@@ -84,7 +84,7 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
       profileData: generateProfileData({
         dateOfFormation: undefined,
         businessPersona: persona as BusinessPersona,
-        operatingPhase: "FORMED_AND_REGISTERED",
+        operatingPhase: "FORMED",
       }),
     });
     expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.TRUE)).toBe(false);

@@ -21,7 +21,6 @@ export interface QUERY_PARAMS_VALUES {
   fromAdditionalBusiness: "true";
   fromFunding: "true";
   fromOnboarding: "true";
-  fromTaxRegistrationCard: "true";
   completeFiling: "true" | "false";
   success: "true";
   additionalBusiness: "true";
@@ -42,7 +41,6 @@ export enum QUERIES {
   fromForming = "fromForming",
   fromFunding = "fromFunding",
   fromOnboarding = "fromOnboarding",
-  fromTaxRegistrationCard = "fromTaxRegistrationCard",
   fromAdditionalBusiness = "fromAdditionalBusiness",
   completeFiling = "completeFiling",
   success = "success",

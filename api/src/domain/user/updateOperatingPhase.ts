@@ -82,11 +82,9 @@ const getNewPhase = ({
   if (hasCompletedBusinessStructure) {
     if (isPublicFiling && !hasCompletedFormation) return "NEEDS_TO_FORM";
 
-    if (!hasCompletedTaxes) return "NEEDS_TO_REGISTER_FOR_TAXES";
+    if (currentPhase !== "UP_AND_RUNNING" || !hasCompletedTaxes) return "FORMED";
 
-    if (hasCompletedTaxes && currentPhase !== "UP_AND_RUNNING") return "FORMED_AND_REGISTERED";
-
-    return currentPhase;
+    return "UP_AND_RUNNING";
   } else {
     return "NEEDS_BUSINESS_STRUCTURE";
   }

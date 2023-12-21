@@ -35,15 +35,6 @@ export const FundingNudge: Story = {
   },
 };
 
-export const RegisteredForTaxes: Story = {
-  args: {
-    card: generateSidebarCardContent({ id: "registered-for-taxes-nudge" }),
-    bodyText: "Registered For Taxes Card Body Text",
-    headerText: "Registered For Taxes",
-    ctaOnClick: () => {},
-  },
-};
-
 export const NotRegistered: Story = {
   args: {
     card: generateSidebarCardContent({ id: "not-registered" }),

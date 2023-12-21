@@ -121,10 +121,7 @@ type OnSiteSection =
 
 type StatusSelected = "selected_not_started" | "selected_in_progress" | "selected_completed";
 
-type Phase =
-  | "progress_to_needs_to_register_phase"
-  | "progress_to_formed_and_registered_phase"
-  | "progress_to_up_and_running_phase";
+type Phase = "progress_to_formed_phase" | "progress_to_up_and_running_phase";
 
 type Action =
   | "show_formation_date_modal"
@@ -636,22 +633,13 @@ export default {
             action: "return_from_myNJ_registration",
           });
         },
-        progress_to_needs_to_register_phase: () => {
+        progress_to_formed_phase: () => {
           eventRunner.track({
             event: "navigator_phase_change",
             legacy_event_action: "arrive",
             legacy_event_category: "roadmap_dashboard",
-            legacy_event_label: "progress_to_needs_to_register_phase",
-            phase: "progress_to_needs_to_register_phase",
-          });
-        },
-        progress_to_formed_and_registered_phase: () => {
-          eventRunner.track({
-            event: "navigator_phase_change",
-            legacy_event_action: "arrive",
-            legacy_event_category: "roadmap_dashboard",
-            legacy_event_label: "progress_to_formed_and_registered_phase",
-            phase: "progress_to_formed_and_registered_phase",
+            legacy_event_label: "progress_to_formed_phase",
+            phase: "progress_to_formed_phase",
           });
         },
         progress_to_up_and_running_phase: () => {

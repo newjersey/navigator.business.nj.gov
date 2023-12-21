@@ -275,11 +275,11 @@ describe("dashboard page", () => {
     expect(screen.getByTestId("certification-alert")).toBeInTheDocument();
   });
 
-  it("renders tax registration snackbar when fromTaxRegistrationCard query parameter is provided", async () => {
-    useMockRouter({ isReady: true, query: { [QUERIES.fromTaxRegistrationCard]: "true" } });
+  it("renders deadlines and opportunities snackbar when fromForming query parameter is provided", () => {
+    useMockRouter({ isReady: true, query: { [QUERIES.fromForming]: "true" } });
 
     renderDashboardPage({});
-    expect(screen.getByTestId("tax-registration-alert")).toBeInTheDocument();
+    expect(screen.getByTestId("deadlines-opportunities-alert")).toBeInTheDocument();
   });
 
   it("renders funding snackbar when fromFunding query parameter is provided", async () => {
@@ -321,7 +321,7 @@ describe("dashboard page", () => {
       dueDate: dueDate.format(defaultDateFormat),
     });
     useMockBusiness({
-      profileData: generateProfileData({ operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES" }),
+      profileData: generateProfileData({ operatingPhase: "FORMED" }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
       onboardingFormProgress: "COMPLETED",
     });

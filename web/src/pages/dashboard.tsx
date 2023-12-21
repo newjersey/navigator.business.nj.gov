@@ -92,13 +92,13 @@ const DashboardPage = (props: Props): ReactElement => {
     dataTestId: "certification-alert",
   });
 
-  const TaxRegistrationAlert = useQueryControlledAlert({
-    queryKey: QUERIES.fromTaxRegistrationCard,
+  const DeadlinesAndOpportunitiesAlert = useQueryControlledAlert({
+    queryKey: QUERIES.fromForming,
     pagePath: ROUTES.dashboard,
-    headerText: Config.dashboardDefaults.taxRegistrationSnackbarHeading,
-    bodyText: Config.dashboardDefaults.taxRegistrationSnackbarBody,
+    headerText: Config.dashboardDefaults.opportunitiesAndDeadlinesHeading,
+    bodyText: Config.dashboardDefaults.opportunitiesAndDeadlinesBody,
     variant: "success",
-    dataTestId: "tax-registration-alert",
+    dataTestId: "deadlines-opportunities-alert",
   });
 
   const FundingAlert = useQueryControlledAlert({
@@ -293,9 +293,9 @@ const DashboardPage = (props: Props): ReactElement => {
             />
           )}
           <>{ProfileUpdatedAlert}</>
+          <>{DeadlinesAndOpportunitiesAlert}</>
           <>{CalendarAlert}</>
           <>{CertificationsAlert}</>
-          <>{TaxRegistrationAlert}</>
           <>{FundingAlert}</>
           <>{HiddenTasksAlert}</>
           <>{DeferredQuestionAnsweredAlert}</>

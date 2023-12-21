@@ -154,10 +154,10 @@ describe("<SidebarCardsContainer />", () => {
   });
 
   describe("certifications", () => {
-    it("shows the certification cards if the business is formed and registered", () => {
+    it("shows the certification cards if the business is formed", () => {
       useMockBusiness({
         profileData: generateProfileData({
-          operatingPhase: "FORMED_AND_REGISTERED",
+          operatingPhase: "FORMED",
           ownershipTypeIds: ["disabled-veteran", "minority-owned"],
         }),
       });
@@ -179,10 +179,10 @@ describe("<SidebarCardsContainer />", () => {
       expect(screen.getByText("Cert 2")).toBeInTheDocument();
     });
 
-    it("doesn't show the certification cards if the business is not formed and registered", () => {
+    it("doesn't show the certification cards if the business is not formed", () => {
       useMockBusiness({
         profileData: generateProfileData({
-          operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
+          operatingPhase: "NEEDS_TO_FORM",
           ownershipTypeIds: ["disabled-veteran", "minority-owned"],
         }),
       });
@@ -207,7 +207,7 @@ describe("<SidebarCardsContainer />", () => {
     it("displays certifications filtered from user data", () => {
       useMockBusiness({
         profileData: generateProfileData({
-          operatingPhase: "FORMED_AND_REGISTERED",
+          operatingPhase: "FORMED",
           ownershipTypeIds: ["disabled-veteran"],
         }),
       });
@@ -275,7 +275,7 @@ describe("<SidebarCardsContainer />", () => {
           municipality: undefined,
           existingEmployees: "1",
           sectorId: "construction",
-          operatingPhase: "FORMED_AND_REGISTERED",
+          operatingPhase: "FORMED",
         }),
       });
 
@@ -313,7 +313,7 @@ describe("<SidebarCardsContainer />", () => {
     it("does not display link to learn more about fundings when user is not UP_AND_RUNNING", () => {
       const business = generateBusiness({
         profileData: generateProfileData({
-          operatingPhase: "FORMED_AND_REGISTERED",
+          operatingPhase: "FORMED",
         }),
       });
       renderWithBusiness(business, { fundings: [] });
@@ -397,7 +397,7 @@ describe("<SidebarCardsContainer />", () => {
     it("only counts hidden certifications before fundings are unlocked", () => {
       const business = generateBusiness({
         profileData: generateProfileData({
-          operatingPhase: "FORMED_AND_REGISTERED",
+          operatingPhase: "FORMED",
         }),
         preferences: generatePreferences({
           hiddenCertificationIds: ["cert1-id"],

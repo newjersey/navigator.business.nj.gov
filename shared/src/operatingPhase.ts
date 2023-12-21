@@ -25,8 +25,7 @@ export type OperatingPhaseId =
   | "GUEST_MODE_OWNING"
   | "NEEDS_BUSINESS_STRUCTURE"
   | "NEEDS_TO_FORM"
-  | "NEEDS_TO_REGISTER_FOR_TAXES"
-  | "FORMED_AND_REGISTERED"
+  | "FORMED"
   | "UP_AND_RUNNING"
   | "UP_AND_RUNNING_OWNING"
   | "REMOTE_SELLER_WORKER"
@@ -121,7 +120,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayQuickActions: true,
   },
   {
-    id: "FORMED_AND_REGISTERED",
+    id: "FORMED",
     displayCompanyDemographicProfileFields: true,
     displayCertifications: true,
     displayFundings: false,
@@ -177,26 +176,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayBusinessStructurePrompt: true,
     displayHomeBasedPrompt: false,
     sectorRequired: false,
-    displayGoToProfileNudge: false,
-    displayQuickActions: false,
-  },
-  {
-    id: "NEEDS_TO_REGISTER_FOR_TAXES",
-    displayCompanyDemographicProfileFields: false,
-    displayCertifications: false,
-    displayFundings: false,
-    displayCalendarType: "LIST",
-    displayTaxAccessButton: false,
-    displayCalendarToggleButton: false,
-    displayRoadmapTasks: true,
-    displayHideableRoadmapTasks: false,
-    displayAltHomeBasedBusinessDescription: true,
-    municipalityRequiredForTradeName: false,
-    municipalityRequiredForPublicFiling: true,
-    displayProfileOpportunityAlert: false,
-    sectorRequired: false,
-    displayBusinessStructurePrompt: false,
-    displayHomeBasedPrompt: true,
     displayGoToProfileNudge: false,
     displayQuickActions: false,
   },

@@ -10,16 +10,10 @@ import {
 import { updateSidebarCards } from "@domain/updateSidebarCards";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { SIDEBAR_CARDS } from "@shared/domain-logic/sidebarCards";
-import { OperatingPhases } from "@shared/index";
+import { OperatingPhaseId, OperatingPhases } from "@shared/index";
 
-const {
-  formationNudge,
-  fundingNudge,
-  goToProfile,
-  notRegistered,
-  notRegisteredExistingAccount,
-  registeredForTaxes,
-} = SIDEBAR_CARDS;
+const { formationNudge, fundingNudge, goToProfile, notRegistered, notRegisteredExistingAccount } =
+  SIDEBAR_CARDS;
 
 describe("updateRoadmapSidebarCards", () => {
   describe("not registered card", () => {
@@ -120,77 +114,43 @@ describe("updateRoadmapSidebarCards", () => {
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(formationNudge);
     });
 
-    it("removes formation-nudge if  operatingPhase is NEEDS_TO_REGISTER_FOR_TAXES", () => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
-          }),
-          preferences: generatePreferences({ visibleSidebarCards: [formationNudge] }),
-        })
-      );
+    const operatingPhasesWithNoFormationNudge = [
+      "GUEST_MODE",
+      "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
+      "GUEST_MODE_OWNING",
+      "NEEDS_BUSINESS_STRUCTURE",
+      "FORMED",
+      "UP_AND_RUNNING",
+      "UP_AND_RUNNING_OWNING",
+      "REMOTE_SELLER_WORKER",
+    ];
 
-      const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        formationNudge
-      );
-    });
+    it.each(operatingPhasesWithNoFormationNudge)(
+      "removes formation-nudge if operatingPhase is %s",
+      (operatingPhase) => {
+        const userData = generateUserDataForBusiness(
+          generateBusiness({
+            profileData: generateProfileData({
+              operatingPhase: operatingPhase as OperatingPhaseId,
+            }),
+            preferences: generatePreferences({ visibleSidebarCards: [formationNudge] }),
+          })
+        );
 
-    it("does not add formation-nudge if operatingPhase is REMOTE_SELLER_WORKER", () => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase: "REMOTE_SELLER_WORKER",
-          }),
-          preferences: generatePreferences({ visibleSidebarCards: [formationNudge] }),
-        })
-      );
-
-      const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        formationNudge
-      );
-    });
-  });
-
-  describe("tax registration nudge", () => {
-    it("adds registered-for-taxes-nudge when operatingPhase is NEEDS_TO_REGISTER_FOR_TAXES", () => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
-          }),
-          preferences: generatePreferences({ visibleSidebarCards: [] }),
-        })
-      );
-      const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(
-        registeredForTaxes
-      );
-    });
-
-    it("removes registered-for-taxes-nudge when operatingPhase is FORMED_AND_REGISTERED", () => {
-      const userData = generateUserDataForBusiness(
-        generateBusiness({
-          profileData: generateProfileData({
-            operatingPhase: "FORMED_AND_REGISTERED",
-          }),
-          preferences: generatePreferences({ visibleSidebarCards: [registeredForTaxes] }),
-        })
-      );
-      const updatedUserData = updateSidebarCards(userData);
-      expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
-        registeredForTaxes
-      );
-    });
+        const updatedUserData = updateSidebarCards(userData);
+        expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).not.toContain(
+          formationNudge
+        );
+      }
+    );
   });
 
   describe("funding nudge", () => {
-    it("adds funding-nudge when operatingPhase is FORMED_AND_REGISTERED", () => {
+    it("adds funding-nudge when operatingPhase is FORMED", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "FORMED_AND_REGISTERED",
+            operatingPhase: "FORMED",
           }),
           preferences: generatePreferences({ visibleSidebarCards: [] }),
         })
@@ -202,11 +162,11 @@ describe("updateRoadmapSidebarCards", () => {
       expect(getCurrentBusiness(updatedUserData).preferences.visibleSidebarCards).toContain(fundingNudge);
     });
 
-    it("removes funding-nudge when operatingPhase is NEEDS_TO_REGISTER_FOR_TAXES", () => {
+    it("removes funding-nudge when operatingPhase is NEEDS_TO_FORM", () => {
       const userData = generateUserDataForBusiness(
         generateBusiness({
           profileData: generateProfileData({
-            operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
+            operatingPhase: "NEEDS_TO_FORM",
           }),
           preferences: generatePreferences({ visibleSidebarCards: [fundingNudge] }),
         })

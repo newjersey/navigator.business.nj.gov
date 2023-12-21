@@ -2809,6 +2809,16 @@ collections:
                   name: additionalBusinessSnackbarBody,
                   widget: text,
                 }
+              - {
+                  label: Opportunities and Deadlines Snackbar Heading,
+                  name: opportunitiesAndDeadlinesHeading,
+                  widget: text,
+                }
+              - {
+                  label: Opportunities and Deadlines Snackbar Body,
+                  name: opportunitiesAndDeadlinesBody,
+                  widget: text,
+                }
       - label: "Dashboard Calendar"
         name: "dashboard-config-calendar"
         file: "content/src/fieldConfig/dashboard-calendar.json"
