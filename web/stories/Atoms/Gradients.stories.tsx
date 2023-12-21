@@ -20,7 +20,6 @@ const Template = () => {
 
   const SecondaryGradient = (
     <div className="flex flex-row margin-bottom-2">
-      {renderGradient("secondary-gradient", "secondary-gradient")}
       {renderGradient("secondary-gradient-reverse", "secondary-gradient-reverse")}
     </div>
   );

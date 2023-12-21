@@ -429,50 +429,44 @@ describe("profile - starting business", () => {
         }
       });
 
-      describe("legalStructure is Trade Name and operating Phase is GUEST_MODE or NEEDS_TO_REGISTER", () => {
+      describe("legalStructure is Trade Name and operating Phase is GUEST_MODE", () => {
         const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map((it) => {
           return it.id;
         });
-        const operatingPhases: OperatingPhaseId[] = ["GUEST_MODE", "NEEDS_TO_REGISTER_FOR_TAXES"];
 
         for (const legalStructure of allTradeNameLegalStructures) {
-          for (const operatingPhase of operatingPhases) {
-            it(`allows saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
-              renderWithLegalStructureAndPhase({
-                legalStructureId: legalStructure,
-                operatingPhase: operatingPhase,
-              });
-              removeLocationAndSave();
-              await expectLocationSavedAsUndefined();
+          it(`allows saving with empty location for ${legalStructure} in GUEST_MODE`, async () => {
+            renderWithLegalStructureAndPhase({
+              legalStructureId: legalStructure,
+              operatingPhase: "GUEST_MODE",
             });
-          }
+            removeLocationAndSave();
+            await expectLocationSavedAsUndefined();
+          });
         }
       });
     });
 
     describe("when location is required", () => {
-      describe("legalStructure is Public Filing and operating Phase is NEEDS_TO_REGISTER_FOR_TAXES or FORMED_AND_REGISTERED", () => {
+      describe("legalStructure is Public Filing and operating Phase is FORMED", () => {
         const allPublicFilingLegalStructures = allLegalStructuresOfType({ type: "publicFiling" }).map(
           (it) => {
             return it.id;
           }
         );
-        const operatingPhases: OperatingPhaseId[] = ["NEEDS_TO_REGISTER_FOR_TAXES", "FORMED_AND_REGISTERED"];
         for (const legalStructure of allPublicFilingLegalStructures) {
-          for (const operatingPhase of operatingPhases) {
-            it(`prevents saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
-              renderWithLegalStructureAndPhase({
-                legalStructureId: legalStructure,
-                operatingPhase: operatingPhase,
-              });
-              removeLocationAndSave();
-              expectLocationNotSavedAndError();
+          it(`prevents saving with empty location for ${legalStructure} in FORMED`, async () => {
+            renderWithLegalStructureAndPhase({
+              legalStructureId: legalStructure,
+              operatingPhase: "FORMED",
             });
-          }
+            removeLocationAndSave();
+            expectLocationNotSavedAndError();
+          });
         }
       });
 
-      describe("legalStructure is Trade Name and operating Phase is FORMED_AND_REGISTERED", () => {
+      describe("legalStructure is Trade Name and operating Phase is FORMED", () => {
         const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map((it) => {
           return it.id;
         });
@@ -480,7 +474,7 @@ describe("profile - starting business", () => {
           it(`prevents saving with empty location for ${legalStructure}`, async () => {
             renderWithLegalStructureAndPhase({
               legalStructureId: legalStructure,
-              operatingPhase: "FORMED_AND_REGISTERED",
+              operatingPhase: "FORMED",
             });
             removeLocationAndSave();
             expectLocationNotSavedAndError();
@@ -763,25 +757,48 @@ describe("profile - starting business", () => {
     });
   });
 
-  describe("tax related profile fields", () => {
-    it("does not render the existing employees field and ownership field when register for taxes task is not complete", () => {
+  describe("existing employees field and ownership field", () => {
+    const operatingPhaseIdsExcludingFormedAndUpAndRunning: OperatingPhaseId[] = [
+      "GUEST_MODE",
+      "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
+      "NEEDS_BUSINESS_STRUCTURE",
+      "NEEDS_TO_FORM",
+    ];
+
+    it.each(operatingPhaseIdsExcludingFormedAndUpAndRunning)(
+      `does not render the existing employees field and ownership field when phase is %s`,
+      (operatingPhase: OperatingPhaseId) => {
+        const initialBusiness = generateBusinessForProfile({
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            operatingPhase: operatingPhase,
+          }),
+        });
+        renderPage({ business: initialBusiness });
+
+        expect(screen.queryByLabelText("Existing employees")).not.toBeInTheDocument();
+        expect(screen.queryByLabelText("Ownership")).not.toBeInTheDocument();
+      }
+    );
+
+    it("renders the existing employees field and ownership field when phase is FORMED", () => {
       const initialBusiness = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
+          operatingPhase: "FORMED",
         }),
       });
       renderPage({ business: initialBusiness });
 
-      expect(screen.queryByLabelText("Existing employees")).not.toBeInTheDocument();
-      expect(screen.queryByLabelText("Ownership")).not.toBeInTheDocument();
+      expect(screen.getByLabelText("Existing employees")).toBeInTheDocument();
+      expect(screen.getByLabelText("Ownership")).toBeInTheDocument();
     });
 
-    it("renders the existing employees field and ownership field when register for taxes task is complete", () => {
+    it("renders the existing employees field and ownership field when phase is UP_AND_RUNNING", () => {
       const initialBusiness = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          operatingPhase: "FORMED_AND_REGISTERED",
+          operatingPhase: "UP_AND_RUNNING",
         }),
       });
       renderPage({ business: initialBusiness });
@@ -794,7 +811,7 @@ describe("profile - starting business", () => {
       const initialBusiness = generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          operatingPhase: "FORMED_AND_REGISTERED",
+          operatingPhase: "UP_AND_RUNNING",
           existingEmployees: "1",
         }),
       });

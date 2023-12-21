@@ -281,53 +281,45 @@ describe("profile-foreign", () => {
           }
         });
 
-        describe("legalStructure is Trade Name and operating Phase is GUEST_MODE or NEEDS_TO_REGISTER", () => {
+        describe("legalStructure is Trade Name and operating Phase is GUEST_MODE", () => {
           const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map((it) => {
             return it.id;
           });
-          const operatingPhases: OperatingPhaseId[] = ["GUEST_MODE", "NEEDS_TO_REGISTER_FOR_TAXES"];
 
           for (const legalStructure of allTradeNameLegalStructures) {
-            for (const operatingPhase of operatingPhases) {
-              it(`allows saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
-                renderWithLegalStructureAndPhase({
-                  legalStructureId: legalStructure,
-                  operatingPhase: operatingPhase,
-                });
-                removeLocationAndSave();
-                await expectLocationSavedAsUndefined();
+            it(`allows saving with empty location for ${legalStructure} in GUEST_MODE`, async () => {
+              renderWithLegalStructureAndPhase({
+                legalStructureId: legalStructure,
+                operatingPhase: "GUEST_MODE",
               });
-            }
+              removeLocationAndSave();
+              await expectLocationSavedAsUndefined();
+            });
           }
         });
       });
 
       describe("when location is required", () => {
-        describe("legalStructure is Public Filing and operating Phase is NEEDS_TO_REGISTER_FOR_TAXES or FORMED_AND_REGISTERED", () => {
+        describe("legalStructure is Public Filing and operating Phase is FORMED", () => {
           const allPublicFilingLegalStructures = allLegalStructuresOfType({ type: "publicFiling" }).map(
             (it) => {
               return it.id;
             }
           );
-          const operatingPhases: OperatingPhaseId[] = [
-            "NEEDS_TO_REGISTER_FOR_TAXES",
-            "FORMED_AND_REGISTERED",
-          ];
+
           for (const legalStructure of allPublicFilingLegalStructures) {
-            for (const operatingPhase of operatingPhases) {
-              it(`prevents saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
-                renderWithLegalStructureAndPhase({
-                  legalStructureId: legalStructure,
-                  operatingPhase: operatingPhase,
-                });
-                removeLocationAndSave();
-                expectLocationNotSavedAndError();
+            it(`prevents saving with empty location for ${legalStructure} in FORMED`, async () => {
+              renderWithLegalStructureAndPhase({
+                legalStructureId: legalStructure,
+                operatingPhase: "FORMED",
               });
-            }
+              removeLocationAndSave();
+              expectLocationNotSavedAndError();
+            });
           }
         });
 
-        describe("legalStructure is Trade Name and operating Phase is FORMED_AND_REGISTERED", () => {
+        describe("legalStructure is Trade Name and operating Phase is FORMED", () => {
           const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map((it) => {
             return it.id;
           });
@@ -335,7 +327,7 @@ describe("profile-foreign", () => {
             it(`prevents saving with empty location for ${legalStructure}`, async () => {
               renderWithLegalStructureAndPhase({
                 legalStructureId: legalStructure,
-                operatingPhase: "FORMED_AND_REGISTERED",
+                operatingPhase: "FORMED",
               });
               removeLocationAndSave();
               expectLocationNotSavedAndError();
