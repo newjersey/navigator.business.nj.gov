@@ -33,7 +33,7 @@ for CI/CD.
 You will need Node.js (with Yarn installed via `npm` or `corepack`) installed
 for primary development. Additionally, for running the server in local
 development mode, you will need a Java runtime (for `serverless-dynamodb`) and
-Python (for the AWS CLI) installed (details below).
+Python (for the AWS CLI and some of our scripts) installed (details below).
 
 We recommend using WSL2 if developing on Windows.
 
@@ -80,10 +80,19 @@ Before you can run locally, you will need to:
   `./web/.env-template` file.
 - create a `./api/.env` that includes all the values laid out in the
   `./api/.env-template` file.
+- create a `.venv` virtual environment and install requirements if working on
+  Python:
+
+```shell
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
 
 ### Run tests
 
-We use Jest for unit tests, in all of our projects. Run all tests with:
+We use Jest for our TypeScript-based unit tests across our projects. Run all
+tests with:
 
 ```shell
 yarn test
@@ -99,6 +108,12 @@ with:
 Some of the Cypress tests only run in the CI environment. When using the
 `local-feature-tests` script, make sure to have a locally running instance of
 the application.
+
+We use Python's `unittest` for our Python tests. Run all Python unit tests with:
+
+```shell
+yarn test:python
+```
 
 ### Running locally
 
@@ -288,7 +303,7 @@ If you want to change the structure of the `UserData` object, here's how:
 
 | service            | local dev & CI feature tests | local feature tests | unit tests |
 | ------------------ | ---------------------------- | ------------------- | ---------- |
-| Nextjs frontend    | 3000                         | 3001                |            |
+| Next.js frontend   | 3000                         | 3001                |            |
 | Serverless backend | 5002                         | 5001                |            |
 | DynamoDB           | 8000                         | 8001                |            |
 | Lambda port        | 5050                         | 5051                |            |

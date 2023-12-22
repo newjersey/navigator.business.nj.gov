@@ -22,6 +22,7 @@
     "test": "jest",
     "test:ci": "jest --colors --runInBand --ci",
     "test:coverage": "jest --config jest.coverage.ts",
+    "test:python": "python -m unittest discover -b -s content/scripts -p \"test_*.py\"",
     "typecheck": "yarn workspaces foreach -v run typecheck",
     "verify:node": "check-node-version --node $(cat .nvmrc) --npm 10.2.3"
   },
