@@ -27,7 +27,6 @@ export const SidebarCardGeneric = (props: Props): ReactElement => {
   const sideBarCardGradientBackground: { [key: string]: string } = {
     "formation-nudge": "primary-gradient",
     "funding-nudge": "primary-gradient-reverse",
-    "registered-for-taxes-nudge": "secondary-gradient",
     "go-to-profile": "secondary-gradient-reverse",
     "not-registered-existing-account": "tertiary-gradient",
     "not-registered": "tertiary-gradient-reverse",

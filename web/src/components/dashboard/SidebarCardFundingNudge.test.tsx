@@ -10,6 +10,7 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { taxTaskId } from "@businessnjgovnavigator/shared";
 import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import {
   generateBusiness,
@@ -46,7 +47,7 @@ describe("<SidebarCardFundingNudge />", () => {
   });
 
   describe("when clicking funding button for non-generic industry", () => {
-    it("updates operating phase to UP_AND_RUNNING", () => {
+    it("updates operating phase to UP_AND_RUNNING and marks tax registration task complete", () => {
       renderWithBusiness({
         profileData: generateProfileData({
           businessPersona: "STARTING",
@@ -57,11 +58,12 @@ describe("<SidebarCardFundingNudge />", () => {
 
       fireEvent.click(screen.getByTestId("cta-funding-nudge"));
       expect(currentBusiness().profileData.operatingPhase).toEqual("UP_AND_RUNNING");
+      expect(currentBusiness().taskProgress[taxTaskId]).toEqual("COMPLETED");
     });
   });
 
   describe("when clicking funding button for generic industry", () => {
-    it("updates with new sector and operating phase to UP_AND_RUNNING after modal success", () => {
+    it("updates with new sector, marks tax registration task complete, and operating phase to UP_AND_RUNNING after modal success", () => {
       renderWithBusiness({
         profileData: generateProfileData({
           businessPersona: "STARTING",
@@ -77,6 +79,7 @@ describe("<SidebarCardFundingNudge />", () => {
       fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalSaveButton));
       expect(currentBusiness().profileData.operatingPhase).toEqual("UP_AND_RUNNING");
       expect(currentBusiness().profileData.sectorId).toEqual("clean-energy");
+      expect(currentBusiness().taskProgress[taxTaskId]).toEqual("COMPLETED");
     });
 
     it("does not update operating phase when user cancels from within modal", () => {

@@ -39,14 +39,7 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
     hideCard(SIDEBAR_CARDS.formationNudge);
   }
 
-  if (operatingPhase === "NEEDS_TO_REGISTER_FOR_TAXES") {
-    showCard(SIDEBAR_CARDS.registeredForTaxes);
-  } else {
-    hideCard(SIDEBAR_CARDS.registeredForTaxes);
-    hideCard(SIDEBAR_CARDS.registeredForTaxes);
-  }
-
-  if (operatingPhase === "FORMED_AND_REGISTERED") {
+  if (operatingPhase === "FORMED") {
     showCard(SIDEBAR_CARDS.fundingNudge);
   } else {
     hideCard(SIDEBAR_CARDS.fundingNudge);

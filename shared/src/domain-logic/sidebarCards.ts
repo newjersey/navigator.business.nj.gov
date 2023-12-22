@@ -4,5 +4,4 @@ export const SIDEBAR_CARDS = {
   goToProfile: "go-to-profile",
   notRegistered: "not-registered",
   notRegisteredExistingAccount: "not-registered-existing-account",
-  registeredForTaxes: "registered-for-taxes-nudge",
 };

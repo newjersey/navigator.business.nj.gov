@@ -63,17 +63,13 @@ export const phaseChangeAnalytics = ({
   if (oldProfileData.operatingPhase === newProfileData.operatingPhase) {
     return;
   } else if (
-    oldProfileData.operatingPhase === "NEEDS_TO_FORM" &&
-    newProfileData.operatingPhase === "NEEDS_TO_REGISTER_FOR_TAXES"
+    (oldProfileData.operatingPhase === "NEEDS_TO_FORM" ||
+      oldProfileData.operatingPhase === "NEEDS_BUSINESS_STRUCTURE") &&
+    newProfileData.operatingPhase === "FORMED"
   ) {
-    analytics.event.roadmap_dashboard.arrive.progress_to_needs_to_register_phase();
+    analytics.event.roadmap_dashboard.arrive.progress_to_formed_phase();
   } else if (
-    oldProfileData.operatingPhase === "NEEDS_TO_REGISTER_FOR_TAXES" &&
-    newProfileData.operatingPhase === "FORMED_AND_REGISTERED"
-  ) {
-    analytics.event.roadmap_dashboard.arrive.progress_to_formed_and_registered_phase();
-  } else if (
-    oldProfileData.operatingPhase === "FORMED_AND_REGISTERED" &&
+    oldProfileData.operatingPhase === "FORMED" &&
     newProfileData.operatingPhase === "UP_AND_RUNNING"
   ) {
     analytics.event.roadmap_dashboard.arrive.progress_to_up_and_running_phase();
@@ -102,10 +98,8 @@ const getPhaseDimension = (phase: OperatingPhaseId): string => {
       return "Guest Mode Up and Running";
     case "NEEDS_TO_FORM":
       return "Needs to Form";
-    case "NEEDS_TO_REGISTER_FOR_TAXES":
-      return "Needs to Register";
-    case "FORMED_AND_REGISTERED":
-      return "Formed and Registered";
+    case "FORMED":
+      return "Formed";
     case "UP_AND_RUNNING":
       return "Up and Running";
     case "UP_AND_RUNNING_OWNING":
