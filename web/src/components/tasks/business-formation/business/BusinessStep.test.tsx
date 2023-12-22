@@ -12,18 +12,18 @@ import { mockPush } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
+  FormationFormData,
+  Municipality,
+  ProfileData,
+  PublicFilingLegalType,
   businessStructureTaskId,
   castPublicFilingLegalTypeToFormationType,
   defaultDateFormat,
-  FormationFormData,
   generateBusiness,
   generateFormationFormData,
   generateMunicipality,
   getCurrentDate,
   getCurrentDateFormatted,
-  Municipality,
-  ProfileData,
-  PublicFilingLegalType,
   randomElementFromArray,
   randomPublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";

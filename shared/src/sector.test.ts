@@ -1,4 +1,4 @@
-import { arrayOfSectors as sectors, LookupSectorTypeById } from "./sector";
+import { LookupSectorTypeById, arrayOfSectors as sectors } from "./sector";
 
 describe("Sector Tests", () => {
   it("has sector records", () => {

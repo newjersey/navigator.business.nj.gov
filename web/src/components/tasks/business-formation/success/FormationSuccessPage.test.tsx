@@ -4,9 +4,9 @@ import { generateFormationProfileData } from "@/test/helpers/helpers-formation";
 import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
 import {
   FormationLegalType,
-  generateBusiness,
   GetFilingResponse,
   ProfileData,
+  generateBusiness,
 } from "@businessnjgovnavigator/shared";
 import { generateFormationData, generateGetFilingResponse } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";

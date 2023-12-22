@@ -26,6 +26,11 @@ import {
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   Business,
+  LookupIndustryById,
+  LookupLegalStructureById,
+  OperatingPhaseId,
+  OperatingPhases,
+  UserData,
   createEmptyBusiness,
   einTaskId,
   emptyIndustrySpecificData,
@@ -33,13 +38,8 @@ import {
   generateGetFilingResponse,
   generateMunicipality,
   generateProfileData,
-  LookupIndustryById,
-  LookupLegalStructureById,
   modifyCurrentBusiness,
   naicsCodeTaskId,
-  OperatingPhaseId,
-  OperatingPhases,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import { generateFormationData, generateTaxFilingData } from "@businessnjgovnavigator/shared/test";
 

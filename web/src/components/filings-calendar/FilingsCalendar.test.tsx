@@ -11,20 +11,20 @@ import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-u
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockProfileData } from "@/test/mock/mockUseUserData";
 import {
+  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
+  LookupIndustryById,
+  OperatingPhases,
+  TaxFilingCalendarEvent,
   defaultDateFormat,
   generateBusiness,
   generateTaxFilingCalendarEvent,
   generateUserDataForBusiness,
-  LookupIndustryById,
-  OperatingPhases,
   randomInt,
-  TaxFilingCalendarEvent,
 } from "@businessnjgovnavigator/shared";
 import * as getCurrentDateModule from "@businessnjgovnavigator/shared/dateHelpers";
 import {
@@ -35,7 +35,7 @@ import {
   randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
-import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
+import { ThemeProvider, createTheme, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import dayjs, { Dayjs } from "dayjs";
 function mockMaterialUI(): typeof materialUi {

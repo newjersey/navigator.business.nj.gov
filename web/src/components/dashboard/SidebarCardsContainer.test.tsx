@@ -12,13 +12,13 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData";
 import {
+  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { Business, generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared";
 import { generatePreferences, generateProfileData } from "@businessnjgovnavigator/shared/test";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));

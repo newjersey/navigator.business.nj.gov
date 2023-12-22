@@ -8,21 +8,21 @@ import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
+  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
   userDataUpdatedNTimes,
-  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  createEmptyFormationFormData,
   FormationData,
   FormationLegalType,
+  OperatingPhases,
+  UserData,
+  createEmptyFormationFormData,
   generateBusiness,
   generateUserDataForBusiness,
   getCurrentDateISOString,
-  OperatingPhases,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
@@ -31,7 +31,7 @@ import {
   generateTaxFilingData,
   randomLegalStructure,
 } from "@businessnjgovnavigator/shared/test";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

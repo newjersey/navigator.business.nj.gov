@@ -10,24 +10,24 @@ import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
 import Onboarding from "@/pages/onboarding";
 import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { currentBusiness, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import { WithStatefulUserData, currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   BusinessPersona,
+  DateObject,
+  Industries,
+  Municipality,
+  UserData,
   businessStructureTaskId,
   createEmptyUser,
   createEmptyUserData,
-  DateObject,
   emptyIndustrySpecificData,
   generateBusiness,
   generateProfileData,
   generateUser,
   generateUserDataForBusiness,
-  Industries,
   industrySpecificDataChoices,
-  Municipality,
-  UserData,
 } from "@businessnjgovnavigator/shared/";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material";
 import {
   act,
   fireEvent,

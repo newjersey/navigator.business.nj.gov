@@ -3,7 +3,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateStep, generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import { WithStatefulUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import {
   generateBusiness,
   generatePreferences,
