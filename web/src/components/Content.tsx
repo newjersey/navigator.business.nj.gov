@@ -39,7 +39,7 @@ export const Content = (props: ContentProps): ReactElement => {
     a: Link(props.onClick),
     h2: (props: any): ReactElement => {
       return (
-        <Heading level={2} styleVariant="h3">
+        <Heading level={2} styleVariant="h3" style={{ marginTop: "1rem" }}>
           {props.children}
         </Heading>
       );
