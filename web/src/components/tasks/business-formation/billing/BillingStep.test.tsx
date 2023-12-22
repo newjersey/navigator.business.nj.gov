@@ -13,10 +13,10 @@ import {
   BusinessUser,
   FormationFormData,
   FormationLegalType,
+  ProfileData,
   generateBusiness,
   generateFormationFormData,
   generateUser,
-  ProfileData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen } from "@testing-library/react";

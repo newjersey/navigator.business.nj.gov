@@ -5,22 +5,22 @@ import { randomPublicFilingLegalType } from "@/test/factories";
 import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import {
+  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  createEmptyFormationFormData,
   FormationData,
   FormationLegalType,
+  OperatingPhases,
+  UserData,
+  createEmptyFormationFormData,
   generateBusiness,
   generateUserDataForBusiness,
   getCurrentBusiness,
   getCurrentDateISOString,
-  OperatingPhases,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,

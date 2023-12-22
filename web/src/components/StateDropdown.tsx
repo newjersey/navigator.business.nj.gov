@@ -1,8 +1,8 @@
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
-import { arrayOfStateObjects as states, StateObject } from "@businessnjgovnavigator/shared/";
-import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
+import { StateObject, arrayOfStateObjects as states } from "@businessnjgovnavigator/shared/";
+import { Autocomplete, TextField, createFilterOptions } from "@mui/material";
 import { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
 
 interface Props {

@@ -11,7 +11,7 @@ import {
   getCurrentDate,
   randomInt,
 } from "@businessnjgovnavigator/shared";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 import dayjs from "dayjs";
 

@@ -6,7 +6,7 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
 import { getModifiedTaskBooleanUndefined, getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
-import { isFormationTask, TaskProgress } from "@businessnjgovnavigator/shared";
+import { TaskProgress, isFormationTask } from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 
 interface Props {

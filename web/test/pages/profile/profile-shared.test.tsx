@@ -13,23 +13,23 @@ import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
+  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
   BusinessPersona,
-  businessPersonas,
-  emptyProfileData,
   ForeignBusinessTypeId,
-  generateBusiness,
-  generateMunicipality,
-  generateProfileData,
   Industry,
   OperatingPhase,
   OperatingPhases,
   ProfileData,
+  businessPersonas,
+  emptyProfileData,
+  generateBusiness,
+  generateMunicipality,
+  generateProfileData,
   randomInt,
 } from "@businessnjgovnavigator/shared";
 import {

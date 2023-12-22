@@ -14,7 +14,7 @@ import {
   renderPage,
   runNonprofitOnboardingTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
-import { generateProfileData, ProfileData } from "@businessnjgovnavigator/shared/";
+import { ProfileData, generateProfileData } from "@businessnjgovnavigator/shared/";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";

@@ -14,7 +14,7 @@ import {
   setRegistrationDimension,
   setUserId,
 } from "@/lib/utils/analytics-helpers";
-import { createEmptyUser, getCurrentBusiness, UserData } from "@businessnjgovnavigator/shared/";
+import { UserData, createEmptyUser, getCurrentBusiness } from "@businessnjgovnavigator/shared/";
 import { Dispatch } from "react";
 import * as session from "./sessionHelper";
 import { triggerSignOut } from "./sessionHelper";

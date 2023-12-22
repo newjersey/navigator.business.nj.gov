@@ -92,4 +92,4 @@ const deleteItem = (item, collectionId, unPublish = false) => {
   });
 };
 
-export { deleteItem, modifyItem, createItem, getAllItems, getCollection, getAllCollections };
+export { createItem, deleteItem, getAllCollections, getAllItems, getCollection, modifyItem };

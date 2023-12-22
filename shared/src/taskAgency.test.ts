@@ -1,4 +1,4 @@
-import { arrayOfTaskAgencies as TaskAgencies, LookupTaskAgencyById } from "./taskAgency";
+import { LookupTaskAgencyById, arrayOfTaskAgencies as TaskAgencies } from "./taskAgency";
 
 describe("TaskAgencies Tests", () => {
   it("has TaskAgencies records", () => {

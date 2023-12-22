@@ -11,9 +11,9 @@ import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
+  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { generateUserData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";

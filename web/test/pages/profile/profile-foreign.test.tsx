@@ -8,16 +8,16 @@ import { useMockRouter } from "@/test/mock/mockRouter";
 import { setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import {
   Business,
-  defaultDateFormat,
-  emptyIndustrySpecificData,
   FormationData,
-  generateMunicipality,
-  generateProfileData,
-  getCurrentDateFormatted,
   LookupLegalStructureById,
   OperatingPhaseId,
   ProfileData,
   TaxFilingData,
+  defaultDateFormat,
+  emptyIndustrySpecificData,
+  generateMunicipality,
+  generateProfileData,
+  getCurrentDateFormatted,
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,

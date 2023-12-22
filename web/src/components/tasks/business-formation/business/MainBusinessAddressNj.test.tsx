@@ -7,9 +7,9 @@ import {
 } from "@/test/helpers/helpers-formation";
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
-  castPublicFilingLegalTypeToFormationType,
   FormationFormData,
   PublicFilingLegalType,
+  castPublicFilingLegalTypeToFormationType,
 } from "@businessnjgovnavigator/shared/formationData";
 import { generateBusiness, generateFormationFormData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";

@@ -24,22 +24,22 @@ import {
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { mockPush } from "@/test/mock/mockRouter";
 import {
+  WithStatefulUserData,
   currentBusiness,
   userDataUpdatedNTimes,
-  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
-  corpLegalStructures,
   DateObject,
-  defaultDateFormat,
   FormationFormData,
   FormationSubmitResponse,
+  ProfileData,
+  corpLegalStructures,
+  defaultDateFormat,
   generateFormationData,
   generateFormationForeignAddress,
   generateFormationUSAddress,
   generateProfileData,
   getCurrentDate,
-  ProfileData,
 } from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,

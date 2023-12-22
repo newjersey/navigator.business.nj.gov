@@ -4,12 +4,12 @@ import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from
 import { defaultDateFormat } from "../defaultConstants";
 import { createBusinessId } from "../domain-logic/createBusinessId";
 import {
-  createEmptyFormationFormData,
   FormationData,
   FormationLegalType,
   FormationSubmitResponse,
   GetFilingResponse,
   PublicFilingLegalType,
+  createEmptyFormationFormData,
   publicFilingLegalTypes,
 } from "../formationData";
 import { Industries, Industry } from "../industry";
@@ -24,7 +24,7 @@ import {
 } from "../license";
 import { MunicipalityDetail } from "../municipality";
 import { IndustrySpecificData, ProfileData } from "../profileData";
-import { arrayOfSectors, SectorType } from "../sector";
+import { SectorType, arrayOfSectors } from "../sector";
 import { TaxFilingCalendarEvent, TaxFilingData, TaxFilingLookUpRequest } from "../taxFiling";
 import { Business, CURRENT_VERSION, Preferences, UserData } from "../userData";
 import { generateFormationFormData, generateMunicipality } from "./formationFactories";

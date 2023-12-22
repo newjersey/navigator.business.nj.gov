@@ -1,5 +1,5 @@
-import { VerticalStepIndicator } from "@/components/njwds-extended/VerticalStepIndicator";
 import { Task } from "@/components/Task";
+import { VerticalStepIndicator } from "@/components/njwds-extended/VerticalStepIndicator";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isStepCompleted } from "@/lib/domain-logic/isStepCompleted";

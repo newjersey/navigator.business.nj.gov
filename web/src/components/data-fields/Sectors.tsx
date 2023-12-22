@@ -7,7 +7,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { FormContextFieldProps } from "@/lib/types/types";
-import { arrayOfSectors as sectors, LookupSectorTypeById, SectorType } from "@businessnjgovnavigator/shared";
+import { LookupSectorTypeById, SectorType, arrayOfSectors as sectors } from "@businessnjgovnavigator/shared";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
 import { Autocomplete, TextField } from "@mui/material";
 import { orderBy } from "lodash";

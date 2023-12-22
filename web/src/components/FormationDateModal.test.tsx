@@ -3,10 +3,10 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { selectDate, selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
 import {
+  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
   triggerQueueUpdate,
-  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,

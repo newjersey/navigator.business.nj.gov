@@ -10,12 +10,12 @@ import { withAuth, withNeedsAccountContext } from "@/test/helpers/helpers-render
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
+  WithStatefulUserData,
   currentUserData,
   setupStatefulUserDataContext,
-  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { createPageHelpers, PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
-import { createEmptyUser, RegistrationStatus } from "@businessnjgovnavigator/shared/businessUser";
+import { PageHelpers, createPageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
+import { RegistrationStatus, createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
 import { generateUser, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";

@@ -6,12 +6,12 @@ import {
 } from "@/test/helpers/helpers-formation";
 import {
   BusinessUser,
-  castPublicFilingLegalTypeToFormationType,
   FormationFormData,
-  generateFormationFormData,
-  generateUser,
   ProfileData,
   PublicFilingLegalType,
+  castPublicFilingLegalTypeToFormationType,
+  generateFormationFormData,
+  generateUser,
 } from "@businessnjgovnavigator/shared";
 
 export const displayContent = {

@@ -5,14 +5,14 @@ import { camelCaseToSnakeCase } from "@/lib/utils/cases-helpers";
 import {
   ABExperience,
   BusinessPersona,
-  determineForeignBusinessType,
   ForeignBusinessType,
-  getCurrentBusiness,
   IndustrySpecificData,
   LookupOperatingPhaseById,
   OperatingPhaseId,
   ProfileData,
   UserData,
+  determineForeignBusinessType,
+  getCurrentBusiness,
 } from "@businessnjgovnavigator/shared";
 
 type RegistrationProgress = "Not Started" | "Began Onboarding" | "Onboarded Guest" | "Fully Registered";

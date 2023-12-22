@@ -4,8 +4,8 @@ import { generateLicenseSearchNameAndAddress } from "@shared/test";
 import { generateLicenseEntity } from "../../test/factories";
 import { LicenseStatusClient, NO_MATCH_ERROR, SearchLicenseStatus } from "../domain/types";
 import {
-  determineLicenseStatus,
   WebserviceLicenseStatusProcessorClient,
+  determineLicenseStatus,
 } from "./WebserviceLicenseStatusProcessorClient";
 
 const entityWithAddress = (address: string): LicenseEntity => {

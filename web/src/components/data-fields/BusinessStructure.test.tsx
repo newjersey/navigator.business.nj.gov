@@ -2,15 +2,15 @@ import { BusinessStructure } from "@/components/data-fields/BusinessStructure";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import { WithStatefulUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import {
   Business,
+  LookupLegalStructureById,
   generateBusiness,
   generateProfileData,
   generateUserDataForBusiness,
-  LookupLegalStructureById,
 } from "@businessnjgovnavigator/shared";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

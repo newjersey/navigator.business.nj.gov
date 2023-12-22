@@ -362,17 +362,17 @@ if (!argsInclude("fundingSync") || process.env.NODE_ENV === "test") {
   process.exit(1);
 }
 export {
+  agencyMap,
+  contentMdToObject,
+  createNewFundings,
+  deleteFundings,
+  getAgencyOptions,
   getCertificationsOptions,
+  getCurrentFundings,
+  getFundingOptions,
+  getFundingTypeOptions,
   getNewFundings,
   getUnUsedFundings,
-  deleteFundings,
-  updateFundings,
-  createNewFundings,
   syncFundings,
-  getCurrentFundings,
-  contentMdToObject,
-  getFundingTypeOptions,
-  getAgencyOptions,
-  getFundingOptions,
-  agencyMap,
+  updateFundings,
 };

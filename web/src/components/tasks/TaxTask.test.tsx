@@ -13,10 +13,10 @@ import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulProfileFormContext } from "@/test/mock/withStatefulProfileData";
 import {
+  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
@@ -26,7 +26,7 @@ import {
   generateUserDataForBusiness,
   randomInt,
 } from "@businessnjgovnavigator/shared";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { ReactElement, ReactNode } from "react";
 
