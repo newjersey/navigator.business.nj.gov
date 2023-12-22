@@ -13,7 +13,7 @@ You need to update your electrical contracting business permit if you are making
 * The licensee of your business, if your business permit is active 
 
 :::infoAlert 
- It is recommended to apply at least 10 days before the next scheduled monthly meeting of the Board of Examiners of Electrical Contractors. Dates are posted on the [Meetings](https://www.njconsumeraffairs.gov/elec/Pages/meetings.aspx) page.
+ It is recommended to apply at least ten days **before** the next scheduled monthly meeting of the Board of Examiners of Electrical Contractors. Dates are posted on the [Meetings](https://www.njconsumeraffairs.gov/elec/Pages/meetings.aspx) page.
 :::
 
 ### Application Requirements
@@ -39,7 +39,7 @@ If the business is a corporation,  in addition to the above, provide the followi
 * Name and address of `registered agent|registered-agent`
 * Name of all officers and stakeholders who own at least 10% of stock
 *  `Certificate of Formation|certificate-of-formation` 
-* Certificate of good standing, if it’s been over a year since the business formed
+* `Certificate of Good Standing|certificate-of-good-standing`, if it’s been over a year since the business formed
 
 > **Once completed, you will have**:
 >
