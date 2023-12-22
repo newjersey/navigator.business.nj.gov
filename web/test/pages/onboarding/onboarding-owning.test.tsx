@@ -5,11 +5,11 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentBusiness, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import { mockEmptyApiSignups, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
 import {
+  ProfileData,
   createEmptyUserData,
   generateMunicipality,
   generateProfileData,
   generateTaxFilingData,
-  ProfileData,
 } from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,

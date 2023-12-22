@@ -13,9 +13,9 @@ import {
   useMockProfileData,
 } from "@/test/mock/mockUseUserData";
 import {
+  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
-  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   generateBusiness,

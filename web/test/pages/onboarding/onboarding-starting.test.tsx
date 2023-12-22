@@ -14,14 +14,14 @@ import {
   runNonprofitOnboardingTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
+  LookupIndustryById,
+  ProfileData,
+  UserData,
   createEmptyUser,
   createEmptyUserData,
   generateMunicipality,
   generateProfileData,
   generateUserData,
-  LookupIndustryById,
-  ProfileData,
-  UserData,
 } from "@businessnjgovnavigator/shared/";
 import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";

@@ -12,7 +12,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { mockSuccessfulApiSignups, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
-import { createEmptyBusiness, UserData } from "@businessnjgovnavigator/shared/userData";
+import { UserData, createEmptyBusiness } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));

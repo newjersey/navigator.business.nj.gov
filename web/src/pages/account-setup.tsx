@@ -16,7 +16,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-import { createProfileFieldErrorMap, OnboardingErrors } from "@/lib/types/types";
+import { OnboardingErrors, createProfileFieldErrorMap } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { BusinessUser, createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";

@@ -5,7 +5,7 @@ import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
-import { unified } from "unified";
+import { unified, type Plugin } from "unified";
 import { visit } from "unist-util-visit";
 
 interface Props {
@@ -29,9 +29,7 @@ export const PureMarkdownContent = (props: Props): ReactElement => {
   return <>{markdown}</>;
 };
 
-function customRemarkPlugin():
-  | void
-  | import("unified").Transformer<import("mdast").Root, import("mdast").Root> {
+const customRemarkPlugin: Plugin = () => {
   return (tree: any) => {
     visit(tree, (node) => {
       if (node.type === "containerDirective") {
@@ -52,4 +50,4 @@ function customRemarkPlugin():
       }
     });
   };
-}
+};

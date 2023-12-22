@@ -5,16 +5,16 @@ import * as roadmapBuilderModule from "@/lib/roadmap/roadmapBuilder";
 import { generateRoadmap, generateTask } from "@/test/factories";
 import { getLastCalledWith } from "@/test/helpers/helpers-utilities";
 import {
+  Industries,
   generateMunicipality,
   generateMunicipalityDetail,
   generateProfileData,
-  Industries,
 } from "@businessnjgovnavigator/shared";
 import * as fetchMunicipalityById from "@businessnjgovnavigator/shared/domain-logic/fetchMunicipalityById";
 import {
+  ProfileData,
   createEmptyProfileData,
   emptyIndustrySpecificData,
-  ProfileData,
 } from "@businessnjgovnavigator/shared/profileData";
 
 jest.mock("@/lib/domain-logic/getNonEssentialQuestionAddOn", () => ({

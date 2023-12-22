@@ -5,7 +5,6 @@ import { getCurrentDateISOString, parseDateWithFormat } from "@shared/dateHelper
 import { defaultDateFormat } from "@shared/defaultConstants";
 import {
   BusinessSuffix,
-  formationApiDateFormat,
   FormationLegalType,
   FormationSubmitError,
   FormationSubmitResponse,
@@ -13,6 +12,7 @@ import {
   InputFile,
   PaymentType,
   SignerTitle,
+  formationApiDateFormat,
 } from "@shared/formationData";
 import { StateNames, StateShortCodes } from "@shared/states";
 import { UserData } from "@shared/userData";

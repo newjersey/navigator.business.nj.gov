@@ -139,18 +139,18 @@ const syncSectors = async () => {
   console.log("Complete Sectors Sync!");
 };
 export {
-  syncSectors,
-  reSortSectors,
+  allIndustryId,
   createNewSectors,
-  updateSectorNames,
   deleteSectors,
+  getCurrentSectors,
+  getNewSectors,
   getSectors,
   getSortedSectors,
-  getUpdatedSectorNames,
   getUnUsedSectors,
-  getNewSectors,
-  getCurrentSectors,
-  allIndustryId,
+  getUpdatedSectorNames,
+  reSortSectors,
+  syncSectors,
+  updateSectorNames,
 };
 // eslint-disable-next-line no-empty
 if (

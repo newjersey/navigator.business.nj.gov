@@ -9,13 +9,13 @@ import {
   randomNonHomeBasedIndustry,
 } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
+import { WithStatefulProfileData, currentProfileData } from "@/test/mock/withStatefulProfileData";
 import { generateProfileData, randomFilteredIndustry, randomIndustry } from "@businessnjgovnavigator/shared";
 import {
+  ProfileData,
   createEmptyProfileData,
   emptyIndustrySpecificData,
   industrySpecificDataChoices,
-  ProfileData,
 } from "@businessnjgovnavigator/shared/profileData";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";

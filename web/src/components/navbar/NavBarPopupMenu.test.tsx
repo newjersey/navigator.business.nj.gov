@@ -12,11 +12,11 @@ import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
   Business,
+  ProfileData,
+  UserData,
   generateBusiness,
   generateProfileData,
   generateUserData,
-  ProfileData,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
 

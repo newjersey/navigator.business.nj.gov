@@ -16,10 +16,10 @@ import {
   CannabisLicenseType,
   Industries,
   Industry,
-  isIndustryIdGeneric,
   LookupIndustryById,
+  isIndustryIdGeneric,
 } from "@businessnjgovnavigator/shared";
-import { Autocomplete, createFilterOptions, FilterOptionsState, TextField } from "@mui/material";
+import { Autocomplete, FilterOptionsState, TextField, createFilterOptions } from "@mui/material";
 import { orderBy } from "lodash";
 import { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
 

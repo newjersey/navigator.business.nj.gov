@@ -1,9 +1,9 @@
 import { isForeignCorporation, isForeignCorporationOrNonprofit } from "@/lib/utils/helpers";
 import {
-  corpLegalStructures,
   FieldsForErrorHandling,
   FormationFields,
   FormationFormData,
+  corpLegalStructures,
   incorporationLegalStructures,
 } from "@businessnjgovnavigator/shared/formationData";
 

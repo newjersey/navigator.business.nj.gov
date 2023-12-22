@@ -7,10 +7,10 @@ import { generateTask, generateTaskLink } from "@/test/factories";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
+  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,

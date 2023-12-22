@@ -10,12 +10,12 @@ import { getLicenseCalendarEvents } from "@/lib/domain-logic/getLicenseCalendarE
 import { OperateReference } from "@/lib/types/types";
 import {
   Business,
+  LicenseCalendarEvent,
+  TaxFilingCalendarEvent,
   defaultDateFormat,
   getCurrentDate,
   getJanOfYear,
-  LicenseCalendarEvent,
   parseDateWithFormat,
-  TaxFilingCalendarEvent,
 } from "@businessnjgovnavigator/shared";
 import { ReactElement, ReactNode, useState } from "react";
 import { UnStyledButton } from "../njwds-extended/UnStyledButton";

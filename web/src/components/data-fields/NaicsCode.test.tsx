@@ -6,13 +6,13 @@ import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
   Business,
+  TaxFilingState,
   generateBusiness,
   generateProfileData,
   generateTaxFilingData,
   generateUserDataForBusiness,
-  TaxFilingState,
 } from "@businessnjgovnavigator/shared";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

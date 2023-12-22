@@ -26,13 +26,14 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setMockUserDataResponse, useMockBusiness, useMockProfileData } from "@/test/mock/mockUseUserData";
 import {
+  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
+  OperatingPhases,
   defaultDateFormat,
   generateBusiness,
   generateProfileData,
@@ -40,12 +41,11 @@ import {
   generateTaxFilingData,
   generateUserDataForBusiness,
   getCurrentDate,
-  OperatingPhases,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhase } from "@businessnjgovnavigator/shared/src/operatingPhase";
 import { generatePreferences } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
-import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
+import { ThemeProvider, createTheme, useMediaQuery } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {

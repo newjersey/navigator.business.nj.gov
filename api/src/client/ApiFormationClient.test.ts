@@ -3,7 +3,7 @@ import { FormationClient } from "@domain/types";
 import { LogWriter, LogWriterType } from "@libs/logWriter";
 import { getCurrentDate, getCurrentDateISOString, parseDate, parseDateWithFormat } from "@shared/dateHelpers";
 import { defaultDateFormat } from "@shared/defaultConstants";
-import { formationApiDateFormat, FormationFormData, FormationLegalType } from "@shared/formationData";
+import { FormationFormData, FormationLegalType, formationApiDateFormat } from "@shared/formationData";
 import { randomInt } from "@shared/intHelpers";
 import {
   generateBusiness,

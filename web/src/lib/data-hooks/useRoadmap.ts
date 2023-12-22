@@ -3,7 +3,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap, Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { sectionNames, SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
+import { SectionType, TaskProgress, sectionNames } from "@businessnjgovnavigator/shared/userData";
 import { useContext, useMemo } from "react";
 
 export type CurrentAndNextSection = { current: SectionType; next: SectionType | undefined };

@@ -15,7 +15,7 @@ import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/date
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { createEmptyFormationFormData } from "@shared/formationData";
 import { modifyCurrentBusiness } from "@shared/test";
-import { createEmptyUserData, UserData } from "@shared/userData";
+import { UserData, createEmptyUserData } from "@shared/userData";
 import { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
 

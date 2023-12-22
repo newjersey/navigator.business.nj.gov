@@ -8,23 +8,23 @@ import { selectDate } from "@/test/helpers/helpers-testing-library-selectors";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
+  WithStatefulUserData,
   currentBusiness,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
   Business,
+  TaskProgress,
   defaultDateFormat,
   formationTaskId,
   generateBusiness,
   generateProfileData,
   generateUserDataForBusiness,
   getCurrentDate,
-  TaskProgress,
   taxTaskId,
 } from "@businessnjgovnavigator/shared";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));

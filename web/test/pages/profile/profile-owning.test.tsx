@@ -13,12 +13,12 @@ import {
   setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
 import {
+  LookupOwnershipTypeById,
+  LookupSectorTypeById,
   defaultDateFormat,
   generateMunicipality,
   generateProfileData,
   getCurrentDate,
-  LookupOwnershipTypeById,
-  LookupSectorTypeById,
   randomInt,
 } from "@businessnjgovnavigator/shared";
 import { generateTaxFilingData, randomLegalStructure } from "@businessnjgovnavigator/shared/test";

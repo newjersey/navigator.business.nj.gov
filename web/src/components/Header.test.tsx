@@ -15,7 +15,7 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();

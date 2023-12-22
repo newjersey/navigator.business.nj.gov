@@ -18,7 +18,7 @@ import {
   randomHomeBasedIndustry,
   randomNonHomeBasedIndustry,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers-select-industries";
-import { arrayOfSectors, Industry, randomElementFromArray, randomInt } from "@businessnjgovnavigator/shared/";
+import { Industry, arrayOfSectors, randomElementFromArray, randomInt } from "@businessnjgovnavigator/shared/";
 
 describe("Profile [feature] [all] [group1]", () => {
   beforeEach(() => {

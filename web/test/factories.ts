@@ -28,14 +28,8 @@ import {
 } from "@/lib/types/types";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import {
-  arrayOfFundingAgencies,
-  arrayOfOwnershipTypes as ownershipTypes,
-  arrayOfStateObjects as states,
-  createEmptyFormationFormData,
   FormationSubmitError,
   FundingAgency,
-  generateProfileData,
-  getCurrentDateISOString,
   Industry,
   InputFile,
   LegalStructure,
@@ -46,10 +40,16 @@ import {
   OwnershipType,
   ProfileData,
   PublicFilingLegalType,
-  publicFilingLegalTypes,
-  randomInt,
   SectionType,
   StateObject,
+  arrayOfFundingAgencies,
+  createEmptyFormationFormData,
+  generateProfileData,
+  getCurrentDateISOString,
+  arrayOfOwnershipTypes as ownershipTypes,
+  publicFilingLegalTypes,
+  randomInt,
+  arrayOfStateObjects as states,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhase } from "@businessnjgovnavigator/shared/";
 import { FormationData } from "@businessnjgovnavigator/shared/formationData";

@@ -7,13 +7,13 @@ import {
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import {
+  FormationLegalType,
+  NameAvailability,
   createEmptyFormationFormData,
   foreignLegalTypePrefix,
-  FormationLegalType,
   generateBusiness,
   generateBusinessNameAvailability,
   generateFormationFormData,
-  NameAvailability,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { screen, within } from "@testing-library/react";

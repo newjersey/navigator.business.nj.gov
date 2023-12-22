@@ -6,11 +6,11 @@ import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpe
 import { currentBusiness } from "@/test/mock/withStatefulUserData";
 import {
   BusinessSignerTypeMap,
-  castPublicFilingLegalTypeToFormationType,
   FormationLegalType,
+  PublicFilingLegalType,
+  castPublicFilingLegalTypeToFormationType,
   generateFormationFormData,
   generateFormationSigner,
-  PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen } from "@testing-library/react";

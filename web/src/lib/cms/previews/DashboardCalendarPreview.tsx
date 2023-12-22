@@ -16,7 +16,7 @@ import {
   generateProfileData,
   generateTaxFilingData,
 } from "@businessnjgovnavigator/shared/test";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material";
 import dayjs from "dayjs";
 import { ReactElement } from "react";
 

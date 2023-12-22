@@ -10,12 +10,12 @@ import {
 import { dbaInputField } from "@/test/helpers/helpersSearchBusinessName";
 import { currentBusiness, userDataWasNotUpdated } from "@/test/mock/withStatefulUserData";
 import {
-  castPublicFilingLegalTypeToFormationType,
   FormationData,
-  generateBusiness,
-  generateFormationFormData,
   ProfileData,
   PublicFilingLegalType,
+  castPublicFilingLegalTypeToFormationType,
+  generateBusiness,
+  generateFormationFormData,
 } from "@businessnjgovnavigator/shared";
 import { generateBusinessNameAvailability } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";

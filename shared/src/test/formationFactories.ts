@@ -4,20 +4,20 @@ import { arrayOfCountriesObjects as countries } from "../countries";
 import { getCurrentDate, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
 import {
-  allFormationLegalTypes,
   BusinessSignerTypeMap,
   BusinessSuffix,
   BusinessSuffixMap,
-  corpLegalStructures,
-  foreignLegalTypePrefix,
   FormationAddress,
   FormationFormData,
   FormationIncorporator,
   FormationLegalType,
   FormationMember,
   FormationSigner,
-  incorporationLegalStructures,
   PublicFilingLegalType,
+  allFormationLegalTypes,
+  corpLegalStructures,
+  foreignLegalTypePrefix,
+  incorporationLegalStructures,
   publicFilingLegalTypes,
 } from "../formationData";
 import { randomInt, randomIntFromInterval } from "../intHelpers";

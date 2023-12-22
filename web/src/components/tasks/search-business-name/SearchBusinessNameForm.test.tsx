@@ -15,11 +15,11 @@ import {
   searchButton,
 } from "@/test/helpers/helpersSearchBusinessName";
 import {
+  ProfileData,
+  PublicFilingLegalType,
   castPublicFilingLegalTypeToFormationType,
   generateBusiness,
   generateFormationFormData,
-  ProfileData,
-  PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";

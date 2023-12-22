@@ -10,19 +10,19 @@ import {
 import { withMarkup } from "@/test/helpers/helpers-testing-library-selectors";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import {
+  FormationFormData,
+  FormationLegalType,
+  LegalStructures,
+  ProfileData,
+  PublicFilingLegalType,
   arrayOfCountriesObjects,
   castPublicFilingLegalTypeToFormationType,
   defaultDateFormat,
-  FormationFormData,
-  FormationLegalType,
   generateFormationFormData,
   generateFormationIncorporator,
   generateFormationMember,
   generateFormationSigner,
   generateMunicipality,
-  LegalStructures,
-  ProfileData,
-  PublicFilingLegalType,
   randomInt,
 } from "@businessnjgovnavigator/shared";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
