@@ -2,12 +2,14 @@ import { ChecklistTag } from "@/components/ChecklistTag";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { Icon } from "@/components/njwds/Icon";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { LicenseStatus, LicenseStatusItem } from "@businessnjgovnavigator/shared/";
-import { ReactElement } from "react";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import DangerousIcon from "@mui/icons-material/Dangerous";
+import WatchLaterIcon from "@mui/icons-material/WatchLater";
+import type { ReactElement } from "react";
 
 interface Props {
   items: LicenseStatusItem[];
@@ -19,30 +21,36 @@ type PermitColorScheme = {
   bgHdrColor: string;
   bgSubHdrColor: string;
   textAndIconColor: string;
-  icon: string;
+  icon: ReactElement;
 };
 
 const Config = getMergedConfig();
 
-const activePermit: PermitColorScheme = {
-  bgHdrColor: "bg-success-dark",
-  bgSubHdrColor: "bg-success-lighter",
-  textAndIconColor: "text-primary-darker",
-  icon: "check_circle_outline",
-};
-
-const pendingPermit: PermitColorScheme = {
-  bgHdrColor: "bg-secondary",
-  bgSubHdrColor: "bg-secondary-lighter",
-  textAndIconColor: "text-secondary-darker",
-  icon: "schedule",
-};
-
-const inactivePermit: PermitColorScheme = {
-  bgHdrColor: "bg-error",
-  bgSubHdrColor: "bg-error-extra-light",
-  textAndIconColor: "text-error-darker",
-  icon: "highlight_off",
+const permitColorScheme: Record<string, PermitColorScheme> = {
+  activePermit: {
+    bgHdrColor: "bg-success-dark",
+    bgSubHdrColor: "bg-success-lighter",
+    textAndIconColor: "text-primary-darker",
+    icon: (
+      <CheckCircleIcon className="display-none tablet:display-block tablet:margin-left-1 tablet:usa-icon--size-4" />
+    ),
+  },
+  pendingPermit: {
+    bgHdrColor: "bg-secondary",
+    bgSubHdrColor: "bg-secondary-lighter",
+    textAndIconColor: "text-secondary-darker",
+    icon: (
+      <WatchLaterIcon className="display-none tablet:display-block tablet:margin-left-1 tablet:usa-icon--size-4" />
+    ),
+  },
+  inactivePermit: {
+    bgHdrColor: "bg-error",
+    bgSubHdrColor: "bg-error-extra-light",
+    textAndIconColor: "text-error-darker",
+    icon: (
+      <DangerousIcon className="display-none tablet:display-block tablet:margin-left-1 tablet:usa-icon--size-4" />
+    ),
+  },
 };
 
 const LicenseStatusLookup: Record<LicenseStatus, string> = {
@@ -97,11 +105,11 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
 
   const getPermitColorScheme = (): PermitColorScheme => {
     if (props.status === "ACTIVE") {
-      return activePermit;
+      return permitColorScheme["activePermit"];
     } else if (isPending(props.status)) {
-      return pendingPermit;
+      return permitColorScheme["pendingPermit"];
     } else {
-      return inactivePermit;
+      return permitColorScheme["inactivePermit"];
     }
   };
 
@@ -118,20 +126,21 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
     return `${nameAndAddress.addressLine1}${secondLineAddress}, ${nameAndAddress.zipCode} NJ`;
   };
 
-  const receiptItem = (
-    item: LicenseStatusItem,
-    index: number,
-    receiptItems: LicenseStatusItem[]
-  ): ReactElement => {
+  const receiptItem = (item: LicenseStatusItem, index: number): ReactElement => {
     return (
       <div key={index} data-testid={`item-${item.status}`}>
-        <div className="flex flex-column fac tablet-flex-row width-full">
+        <div
+          className={`flex flex-column fac tablet-flex-row width-full ${
+            index === 0
+              ? ""
+              : "border-top-1px margin-top-1 tablet:margin-top-0 padding-top-2 tablet:padding-top-05"
+          }  border-base-lightest padding-bottom-05`}
+        >
           <ChecklistTag status={item.status} />
-          <span className="margin-left-2 text-left width-full margin-top-1 tablet:margin-top-0">
+          <span className="tablet:margin-left-2 text-left width-full margin-top-1 tablet:margin-top-0">
             {item.title}
           </span>
         </div>
-        {index === receiptItems.length - 1 ? <></> : <hr className="desktop:margin-bottom-1" />}
       </div>
     );
   };
@@ -161,7 +170,7 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
           </div>
         </div>
 
-        <div className="border-2px border-white radius-lg bg-white padding-y-2 padding-x-105 margin-bottom-5 margin-top-205 shadow-3">
+        <div className="border-2px border-white radius-lg bg-white padding-y-2 padding-x-105 margin-bottom-2 margin-top-205 shadow-3">
           <div
             className={`margin-1 text-bold fdc fac radius-lg ${getPermitColorScheme().bgSubHdrColor}`}
             data-testid={`permit-${props.status}`}
@@ -179,24 +188,21 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
                 getPermitColorScheme().textAndIconColor
               } width-full font-sans-lg text-bold`}
             >
-              <Icon className="display-none tablet:display-block tablet:margin-left-1 usa-icon--size-4">
-                {props.status === "ACTIVE"
-                  ? activePermit.icon
-                  : isPending(props.status)
-                  ? pendingPermit.icon
-                  : inactivePermit.icon}
-              </Icon>
+              {getPermitColorScheme().icon}
 
-              <p className="tablet:margin-left-1 padding-05 line-height-sans-3">{getText()}</p>
+              <p className="tablet:margin-left-1 tablet:padding-05 padding-left-1 line-height-sans-3">
+                {getText()}
+              </p>
             </div>
           </div>
           <div className="padding-2">
-            <Heading level={1} styleVariant="h4" className="margin-bottom-05-override tablet:padding-top-1">
+            <Heading
+              level={2}
+              styleVariant="h4"
+              className="margin-bottom-1 tablet:padding-top-1 border-bottom-2px border-base-lightest padding-bottom-1"
+            >
               {Config.licenseSearchTask.applicationChecklistItemsText}
             </Heading>
-
-            <hr className="tablet:margin-bottom-205" />
-
             {props.items.map(receiptItem)}
           </div>
         </div>

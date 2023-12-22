@@ -4456,6 +4456,7 @@ __metadata:
     "@emotion/styled": 11.11.0
     "@jest/types": 29.6.3
     "@mdx-js/react": 2.3.0
+    "@mui/icons-material": ^5.15.1
     "@mui/lab": 5.0.0-alpha.155
     "@mui/material": 5.14.20
     "@mui/styles": 5.14.20
@@ -4675,6 +4676,7 @@ __metadata:
     "@emotion/styled": 11.11.0
     "@jest/types": 29.6.3
     "@mdx-js/react": 2.3.0
+    "@mui/icons-material": ^5.15.1
     "@mui/lab": 5.0.0-alpha.155
     "@mui/material": 5.14.20
     "@mui/styles": 5.14.20
@@ -7036,6 +7038,22 @@ __metadata:
   version: 5.15.0
   resolution: "@mui/core-downloads-tracker@npm:5.15.0"
   checksum: a7aadd4071ff715e618b8db647137579ca63cab4bf6e3acfe86a7d461f71605fc7ce44eeea5b1e789faae8546617b1f7d14c72a0c00fa3d59951b6eee42a6c5d
+  languageName: node
+  linkType: hard
+
+"@mui/icons-material@npm:^5.15.1":
+  version: 5.15.1
+  resolution: "@mui/icons-material@npm:5.15.1"
+  dependencies:
+    "@babel/runtime": ^7.23.5
+  peerDependencies:
+    "@mui/material": ^5.0.0
+    "@types/react": ^17.0.0 || ^18.0.0
+    react: ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: e769b2f6fecfd92721b182e0d6569a9950fd44d88cc7b3bd6ac5cc77d6085c26316093c9cdb750b456ff6860e47a1b6e6e749e284ecdc6b50fad659c9cb75818
   languageName: node
   linkType: hard
 

@@ -80,6 +80,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "@mui/icons-material/*" },
+    },
+    {
+      from: {},
       to: { path: "@mui/x-date-pickers" },
     },
     {
