@@ -18,10 +18,12 @@ RUN apt-get update && \
 # Tools/Dependencies needed for Browser
 RUN apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb libu2f-udev
 
+# Install Yarn via Corepack
+RUN corepack enable
 
 # Install Browsers.
 #Chrome
-ARG CHROME_VERSION="120.0.6099.71"
+ARG CHROME_VERSION="120.0.6099.129"
 RUN wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_$CHROME_VERSION-1_amd64.deb && \
     dpkg -i google-chrome-stable_$CHROME_VERSION-1_amd64.deb || apt-get -f install -y
 
@@ -36,7 +38,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > mic
 
 
 #Firefox
-ARG FIREFOX_VERSION="120.0.1"
+ARG FIREFOX_VERSION="121.0"
 RUN apt-get -qqy --no-install-recommends install firefox \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/* \
   && wget --no-verbose -O /tmp/firefox.tar.bz2 https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2 \
