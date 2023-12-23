@@ -2819,6 +2819,11 @@ collections:
                   name: opportunitiesAndDeadlinesBody,
                   widget: text,
                 }
+              - {
+                  label: Opportunities and Deadlines Snackbar Time Delay,
+                  name: opportunitiesAndDeadlinesTimeDelay,
+                  widget: text,
+                }
       - label: "Dashboard Calendar"
         name: "dashboard-config-calendar"
         file: "content/src/fieldConfig/dashboard-calendar.json"

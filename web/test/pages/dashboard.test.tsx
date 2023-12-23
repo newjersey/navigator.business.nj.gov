@@ -269,16 +269,16 @@ describe("dashboard page", () => {
     expect(screen.getByTestId("snackbar-alert-calendar")).toBeInTheDocument();
   });
 
-  it("renders certification snackbar when fromTaxRegistration query parameter is provided", () => {
-    useMockRouter({ isReady: true, query: { [QUERIES.fromTaxRegistration]: "true" } });
+  it("renders certifications snackbar when fromForming query parameter is provided", () => {
+    useMockRouter({ isReady: true, query: { [QUERIES.fromForming]: "true" } });
     renderDashboardPage({});
     expect(screen.getByTestId("certification-alert")).toBeInTheDocument();
   });
 
   it("renders deadlines and opportunities snackbar when fromForming query parameter is provided", () => {
     useMockRouter({ isReady: true, query: { [QUERIES.fromForming]: "true" } });
-
     renderDashboardPage({});
+    act(() => jest.runAllTimers());
     expect(screen.getByTestId("deadlines-opportunities-alert")).toBeInTheDocument();
   });
 
