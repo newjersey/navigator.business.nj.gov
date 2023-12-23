@@ -15,6 +15,7 @@
     "additionalBusinessSnackbarHeader": "Additional business added",
     "additionalBusinessSnackbarBody": "You can switch between your businesses in your account drop down menu.",
     "opportunitiesAndDeadlinesHeading": "Your deadlines and opportunities have been added",
-    "opportunitiesAndDeadlinesBody": "See your next annual reporting deadline at the bottom of this page. \n\nGo to the “For You” section to view certifications and funding programs."
+    "opportunitiesAndDeadlinesBody": "See your next annual reporting deadline at the bottom of this page. \n\nGo to the “For You” section to view certifications and funding programs.",
+    "opportunitiesAndDeadlinesTimeDelay": 6000
   }
 }

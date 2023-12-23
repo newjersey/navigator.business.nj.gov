@@ -89,7 +89,7 @@ const DashboardPage = (props: Props): ReactElement => {
   });
 
   const CertificationsAlert = useQueryControlledAlert({
-    queryKey: QUERIES.fromTaxRegistration,
+    queryKey: QUERIES.fromForming,
     pagePath: ROUTES.dashboard,
     headerText: Config.dashboardDefaults.certificationsSnackbarHeading,
     bodyText: Config.dashboardDefaults.certificationsSnackbarBody,
@@ -104,6 +104,7 @@ const DashboardPage = (props: Props): ReactElement => {
     bodyText: Config.dashboardDefaults.opportunitiesAndDeadlinesBody,
     variant: "success",
     dataTestId: "deadlines-opportunities-alert",
+    delayInMilliseconds: Config.dashboardDefaults.opportunitiesAndDeadlinesTimeDelay,
   });
 
   const FundingAlert = useQueryControlledAlert({
@@ -144,6 +145,7 @@ const DashboardPage = (props: Props): ReactElement => {
   });
 
   const operatingPhase = LookupOperatingPhaseById(business?.profileData.operatingPhase);
+  console.log({ operatingPhase });
 
   useMountEffectWhenDefined(() => {
     (async (): Promise<void> => {
