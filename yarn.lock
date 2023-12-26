@@ -4178,8 +4178,8 @@ __metadata:
     "@types/lodash": 4.14.202
     "@types/mdast": 4.0.3
     "@types/node": 16.18.68
-    "@types/react": 18.2.43
-    "@types/react-dom": 18.2.17
+    "@types/react": 18.2.45
+    "@types/react-dom": 18.2.18
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.5
     "@types/react-transition-group": 4.4.10
@@ -4388,8 +4388,8 @@ __metadata:
     "@types/lodash": 4.14.202
     "@types/mdast": 4.0.3
     "@types/node": 16.18.68
-    "@types/react": 18.2.43
-    "@types/react-dom": 18.2.17
+    "@types/react": 18.2.45
+    "@types/react-dom": 18.2.18
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.5
     "@types/react-transition-group": 4.4.10
@@ -11131,16 +11131,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.2.17":
-  version: 18.2.17
-  resolution: "@types/react-dom@npm:18.2.17"
-  dependencies:
-    "@types/react": "*"
-  checksum: 7a4e704ed4be6e0c3ccd8a22ff69386fe548304bf4db090513f42e059ff4c65f7a427790320051524d6578a2e4c9667bb7a80a4c989b72361c019fbe851d9385
-  languageName: node
-  linkType: hard
-
-"@types/react-dom@npm:^18.0.0":
+"@types/react-dom@npm:18.2.18, @types/react-dom@npm:^18.0.0":
   version: 18.2.18
   resolution: "@types/react-dom@npm:18.2.18"
   dependencies:
@@ -11188,7 +11179,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:>=16":
+"@types/react@npm:*, @types/react@npm:18.2.45, @types/react@npm:>=16":
   version: 18.2.45
   resolution: "@types/react@npm:18.2.45"
   dependencies:
@@ -11196,17 +11187,6 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: 40b256bdce67b026348022b4f8616a693afdad88cf493b77f7b4e6c5f4b0e4ba13a6068e690b9b94572920840ff30d501ea3d8518e1f21cc8fb8204d4b140c8a
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:18.2.43":
-  version: 18.2.43
-  resolution: "@types/react@npm:18.2.43"
-  dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: e7e4da18c7b14e4b8b1ea630d1d8224835698f2bb2485766455bfb9dea93b8ee6cc549a9fe1cb10c984e62685db44fcfb61e8fac913b008cd30a92087f25b9df
   languageName: node
   linkType: hard
 
