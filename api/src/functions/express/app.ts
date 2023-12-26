@@ -1,6 +1,7 @@
 import { elevatorSafetyRouterFactory } from "@api/elevatorSafetyRouter";
 import { fireSafetyRouterFactory } from "@api/fireSafetyRouter";
 import { formationRouterFactory } from "@api/formationRouter";
+import { healthCheckRouter } from "@api/healthCheckRouter";
 import { housingRouterFactory } from "@api/housingRouter";
 import { licenseStatusRouterFactory } from "@api/licenseStatusRouter";
 import { selfRegRouterFactory } from "@api/selfRegRouter";
@@ -288,6 +289,8 @@ app.use(
 );
 app.use("/api", taxDecryptionRouterFactory(AWSEncryptionDecryptionClient));
 
+app.use("/health", healthCheckRouter());
+
 app.post("/api/mgmt/auth", (req, res) => {
   if (req.body.password === process.env.ADMIN_PASSWORD) {
     logger.LogInfo(`MgmtAuth - Id:${logger.GetId()} - MATCH`);
@@ -300,10 +303,6 @@ app.post("/api/mgmt/auth", (req, res) => {
     );
     res.status(401).send();
   }
-});
-
-app.get("/health", (_req, res) => {
-  res.status(500).send("Alive");
 });
 
 export const handler = serverless(app);
