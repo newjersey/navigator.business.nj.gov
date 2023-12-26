@@ -1,4 +1,3 @@
-import { ElevatorSafetyHealthCheckInfo } from "@client/dynamics/elevator-safety/types";
 import {
   HealthCheckMethod,
   SuccessfulHealthCheckResponse,
@@ -23,7 +22,7 @@ const selfCheck: HealthCheckMethod = async () => {
   } as SuccessfulHealthCheckResponse;
 };
 
-export const healthCheckRouter = (elevatorSafetyHealthCheckClient: ElevatorSafetyHealthCheckInfo): Router => {
+export const healthCheckRouter = (elevatorSafetyHealthCheckClient: HealthCheckMethod): Router => {
   const router = Router();
   const requestTimestamp = Math.round(Date.now() / 1000);
 
