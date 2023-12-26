@@ -118,6 +118,29 @@ export type ElevatorSafetyInspectionStatus = (
   address: string
 ) => Promise<ElevatorSafetyDeviceInspectionDetails[]>;
 
+export interface SuccessfulHealthCheckResponse {
+  success: true;
+  data: {
+    message: HealthCheckMessage;
+  };
+}
+
+export interface UnsuccessfulHealthCheckResponse {
+  success: false;
+  error: {
+    timeout: boolean;
+    message: HealthCheckMessage;
+    serverResponseCode?: number;
+    serverResponseBody?: string;
+  };
+}
+
+export type HealthCheckResponse = SuccessfulHealthCheckResponse | UnsuccessfulHealthCheckResponse;
+
+export type HealthCheckMethod = () => Promise<HealthCheckResponse>;
+
+export type HealthCheckMessage = "Alive" | "Server Error";
+
 export type UpdateOperatingPhase = (userData: UserData) => UserData;
 export type UpdateSidebarCards = (userData: UserData) => UserData;
 export type GetCertHttpsAgent = () => Promise<https.Agent>;

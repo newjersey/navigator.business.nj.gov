@@ -1,3 +1,9 @@
+import { ElevatorSafetyHealthCheckInfo } from "@client/dynamics/elevator-safety/types";
+import {
+  HealthCheckMethod,
+  SuccessfulHealthCheckResponse,
+  UnsuccessfulHealthCheckResponse,
+} from "@domain/types";
 import { Router } from "express";
 
 /* TODO: Building out this feature:
@@ -8,27 +14,6 @@ import { Router } from "express";
  * - Wire up these functions to the appropriate endpoints.
  */
 
-interface SuccessfulHealthCheckResponse {
-  success: true;
-  data: {
-    message: string;
-  };
-}
-
-interface UnsuccessfulHealthCheckResponse {
-  success: false;
-  error: {
-    timeout: boolean;
-    message: string;
-    serverResponseCode?: number;
-    serverResponseBody?: string;
-  };
-}
-
-type HealthCheckResponse = SuccessfulHealthCheckResponse | UnsuccessfulHealthCheckResponse;
-
-type HealthCheckMethod = () => Promise<HealthCheckResponse>;
-
 const selfCheck: HealthCheckMethod = async () => {
   return {
     success: true,
@@ -38,11 +23,11 @@ const selfCheck: HealthCheckMethod = async () => {
   } as SuccessfulHealthCheckResponse;
 };
 
-export const healthCheckRouter = (): Router => {
+export const healthCheckRouter = (elevatorSafetyHealthCheckClient: ElevatorSafetyHealthCheckInfo): Router => {
   const router = Router();
+  const requestTimestamp = Math.round(Date.now() / 1000);
 
   router.all("/", async (_req, res) => {
-    const requestTimestamp = Math.round(Date.now() / 1000);
     const selfCheckResult = await selfCheck();
 
     if (selfCheckResult.success) {
@@ -54,6 +39,21 @@ export const healthCheckRouter = (): Router => {
       res.status(500).json({
         timestamp: requestTimestamp,
         data: selfCheckResult.error,
+      });
+    }
+  });
+
+  router.get("/dynamics/elevator", async (_req, res) => {
+    const elevatorHealthCheck = await elevatorSafetyHealthCheckClient();
+    if (elevatorHealthCheck.success) {
+      res.status(200).json({
+        timestamp: requestTimestamp,
+        data: elevatorHealthCheck as SuccessfulHealthCheckResponse,
+      });
+    } else {
+      res.status(500).json({
+        timestamp: requestTimestamp,
+        data: elevatorHealthCheck as UnsuccessfulHealthCheckResponse,
       });
     }
   });

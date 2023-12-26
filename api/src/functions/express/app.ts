@@ -14,6 +14,7 @@ import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
 import { DynamicsAccessTokenClient } from "@client/dynamics/DynamicsAccessTokenClient";
 import { DynamicsElevatorSafetyClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyClient";
+import { DynamicsElevatorSafetyHealthCheckClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyHealthCheckClient";
 import { DynamicsElevatorSafetyInspectionClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyInspectionClient";
 import { DynamicsFireSafetyClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyClient";
 import { DynamicsFireSafetyInspectionClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyInspectionClient";
@@ -162,6 +163,10 @@ const dynamicsElevatorSafetyClient = DynamicsElevatorSafetyClient(logger, {
   accessTokenClient: dynamicsElevatorSafetyAccessTokenClient,
   elevatorSafetyInspectionClient: dynamicsElevatorSafetyInspectionClient,
 });
+const dynamicsElevatorSafetyHealthCheckClient = DynamicsElevatorSafetyHealthCheckClient(logger, {
+  accessTokenClient: dynamicsElevatorSafetyAccessTokenClient,
+  elevatorSafetyInspectionClient: dynamicsElevatorSafetyInspectionClient,
+});
 
 const BUSINESS_NAME_BASE_URL =
   process.env.BUSINESS_NAME_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
@@ -289,7 +294,7 @@ app.use(
 );
 app.use("/api", taxDecryptionRouterFactory(AWSEncryptionDecryptionClient));
 
-app.use("/health", healthCheckRouter());
+app.use("/health", healthCheckRouter(dynamicsElevatorSafetyHealthCheckClient));
 
 app.post("/api/mgmt/auth", (req, res) => {
   if (req.body.password === process.env.ADMIN_PASSWORD) {

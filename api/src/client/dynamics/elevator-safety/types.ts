@@ -1,5 +1,8 @@
+import { HealthCheckResponse } from "@domain/types";
+
 export interface ElevatorSafetyInspectionClient {
   getElevatorInspections: (accessToken: string, address: string) => Promise<ElevatorInspection[]>;
+  getAnyElevatorInspections: (accessToken: string) => Promise<HealthCheckResponse>;
 }
 
 export type ElevatorInspection = {
@@ -10,3 +13,4 @@ export type ElevatorInspection = {
 };
 
 export type ElevatorSafetyInspectionInfo = (address: string) => Promise<ElevatorInspection[]>;
+export type ElevatorSafetyHealthCheckInfo = () => Promise<HealthCheckResponse>;

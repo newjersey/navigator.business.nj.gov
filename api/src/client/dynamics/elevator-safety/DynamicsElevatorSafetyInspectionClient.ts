@@ -1,4 +1,5 @@
 import { ElevatorInspection, ElevatorSafetyInspectionClient } from "@client/dynamics/elevator-safety/types";
+import { HealthCheckResponse } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import axios, { AxiosError } from "axios";
 
@@ -38,8 +39,45 @@ export const DynamicsElevatorSafetyInspectionClient = (
       });
   };
 
+  const getAnyElevatorInspections = async (accessToken: string): Promise<HealthCheckResponse> => {
+    const logId = logWriter.GetId();
+    return axios
+      .get(
+        `${orgUrl}/api/data/v9.2/ultra_elsainspections?$select=createdon,statecode,ultra_devicecount,ultra_buildingstreetaddress&$top=1`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then(() => {
+        return {
+          success: true,
+          data: {
+            message: "Alive",
+          },
+        } as HealthCheckResponse;
+      })
+      .catch((error: AxiosError) => {
+        logWriter.LogError(
+          `Dynamics Elevator Safety Inspection Health Check Failed - Id:${logId} - Error:`,
+          error
+        );
+        return {
+          success: false,
+          error: {
+            serverResponseBody: error.message,
+            serverResponseCode: error.status,
+            message: "Server Error",
+            timeout: error.status === 504,
+          },
+        } as HealthCheckResponse;
+      });
+  };
+
   return {
     getElevatorInspections,
+    getAnyElevatorInspections,
   };
 };
 
