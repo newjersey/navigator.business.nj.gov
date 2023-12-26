@@ -80,3 +80,7 @@ shared/lib
 tsconfig.tsbuildinfo
 aws_config_file_path.json
 web/fundings.csv
+
+# Python
+.venv/
+**/__pycache__/
