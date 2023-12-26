@@ -13,4 +13,3 @@ export type ElevatorInspection = {
 };
 
 export type ElevatorSafetyInspectionInfo = (address: string) => Promise<ElevatorInspection[]>;
-export type ElevatorSafetyHealthCheckInfo = () => Promise<HealthCheckResponse>;

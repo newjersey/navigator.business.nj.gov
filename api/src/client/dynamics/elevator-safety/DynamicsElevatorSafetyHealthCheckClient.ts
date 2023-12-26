@@ -1,9 +1,6 @@
-import {
-  ElevatorSafetyHealthCheckInfo,
-  ElevatorSafetyInspectionClient,
-} from "@client/dynamics/elevator-safety/types";
+import { ElevatorSafetyInspectionClient } from "@client/dynamics/elevator-safety/types";
 import { AccessTokenClient } from "@client/dynamics/types";
-import { HealthCheckResponse } from "@domain/types";
+import { HealthCheckMethod, HealthCheckResponse } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 
 type Config = {
@@ -14,7 +11,7 @@ type Config = {
 export const DynamicsElevatorSafetyHealthCheckClient = (
   logWriter: LogWriterType,
   config: Config
-): ElevatorSafetyHealthCheckInfo => {
+): HealthCheckMethod => {
   return async (): Promise<HealthCheckResponse> => {
     const accessToken = await config.accessTokenClient.getAccessToken();
     return await config.elevatorSafetyInspectionClient.getAnyElevatorInspections(accessToken);
