@@ -59,6 +59,30 @@ describe("shouldShowDisclaimerForProfileNotSubmittingData", () => {
     }
   );
 
+  it("returns true for REMOTE_WORKER", () => {
+    const business = generateBusiness({
+      profileData: generateProfileData({
+        businessPersona: "FOREIGN",
+        foreignBusinessTypeIds: ["employeesInNJ"],
+        dateOfFormation: undefined,
+      }),
+    });
+
+    expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.TRUE)).toBe(true);
+  });
+
+  it("returns true for REMOTE_SELLER", () => {
+    const business = generateBusiness({
+      profileData: generateProfileData({
+        businessPersona: "FOREIGN",
+        foreignBusinessTypeIds: ["revenueInNJ", "transactionsInNJ"],
+        dateOfFormation: undefined,
+      }),
+    });
+
+    expect(shouldShowDisclaimerForProfileNotSubmittingData(business, IsAuthenticated.TRUE)).toBe(true);
+  });
+
   it.each(nonOwningPersonas)(
     "returns false if completedFilingPayment is true for %s persona and is not owning or authenticated",
     (persona) => {
