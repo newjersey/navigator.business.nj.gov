@@ -13,7 +13,6 @@ import { ReviewNonprofitProvisions } from "@/components/tasks/business-formation
 import { ReviewPartnership } from "@/components/tasks/business-formation/review/ReviewPartnership";
 import { ReviewRegisteredAgent } from "@/components/tasks/business-formation/review/ReviewRegisteredAgent";
 import { ReviewSignatures } from "@/components/tasks/business-formation/review/ReviewSignatures";
-import { ReviewWillPracticeLaw } from "@/components/tasks/business-formation/review/ReviewWillPracticeLaw";
 import { ReviewSection } from "@/components/tasks/business-formation/review/section/ReviewSection";
 import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { ReviewText } from "@/components/tasks/business-formation/review/section/ReviewText";
@@ -21,7 +20,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { shouldDisplayAddressSection } from "@/lib/utils/formation-helpers";
-import { isForeignCorporation, isForeignCorporationOrNonprofit } from "@/lib/utils/helpers";
+import { isForeignCorporationOrNonprofit } from "@/lib/utils/helpers";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useContext } from "react";
 
@@ -59,9 +58,6 @@ export const ReviewStep = (): ReactElement => {
           {isForeignCorporationOrNonprofit(state.formationFormData.legalType) && (
             <>
               <hr className="margin-y-205" />
-              {isForeignCorporation(state.formationFormData.legalType) && (
-                <ReviewWillPracticeLaw willPracticeLaw={state.formationFormData.willPracticeLaw} />
-              )}
               <ReviewForeignCertificate foreignGoodStandingFile={state.foreignGoodStandingFile} />
             </>
           )}
