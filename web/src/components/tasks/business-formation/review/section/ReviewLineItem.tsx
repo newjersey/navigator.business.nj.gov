@@ -12,6 +12,7 @@ interface Props {
   dataTestId?: string;
   marginOverride?: string;
   formatter?: (value: string) => string;
+  noColonAfterLabel?: boolean;
 }
 
 export const ReviewLineItem = (props: Props): ReactElement => {
@@ -25,7 +26,7 @@ export const ReviewLineItem = (props: Props): ReactElement => {
         {props.labelContextualInfo ? (
           <ContextualInfoButton text={`${props.label}:`} id={props.labelContextualInfo} />
         ) : (
-          `${props.label}:`
+          `${props.label}${props.noColonAfterLabel ? "" : ":"}`
         )}
       </div>
       {props.value ? (
