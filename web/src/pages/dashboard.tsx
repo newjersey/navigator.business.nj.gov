@@ -21,6 +21,7 @@ import { useQueryControlledAlert } from "@/lib/data-hooks/useQueryControlledAler
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isConstructionSector } from "@/lib/domain-logic/isConstructionSector";
+import { isGenericIndustry } from "@/lib/domain-logic/isGenericIndustry";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { isHomeContractorIndustry } from "@/lib/domain-logic/isHomeContractorIndustry";
 import { QUERIES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
@@ -41,7 +42,11 @@ import {
   RoadmapDisplayContent,
 } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { LookupOperatingPhaseById, Municipality } from "@businessnjgovnavigator/shared";
+import {
+  determineForeignBusinessType,
+  LookupOperatingPhaseById,
+  Municipality,
+} from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -171,6 +176,7 @@ const DashboardPage = (props: Props): ReactElement => {
   const renderQuickActions = (): ReactElement => {
     const quickActionsArray = [];
     let renderStateContractingExternalLink;
+    let renderHicStateContractingTask = false;
 
     if (business?.profileData.businessPersona === "OWNING") {
       renderStateContractingExternalLink = !isConstructionSector(business?.profileData.sectorId);
@@ -181,12 +187,43 @@ const DashboardPage = (props: Props): ReactElement => {
         !isConstructionSector(business?.profileData.sectorId) &&
         !isHomeContractorIndustry(business?.profileData.industryId);
     }
+
+    if (
+      business?.profileData.businessPersona === "STARTING" &&
+      (isHomeContractorIndustry(business?.profileData.industryId) ||
+        (isGenericIndustry(business?.profileData.industryId) &&
+          isConstructionSector(business?.profileData.sectorId)))
+    ) {
+      renderHicStateContractingTask = true;
+    }
+
+    if (
+      business?.profileData.businessPersona === "OWNING" &&
+      isConstructionSector(business?.profileData.sectorId)
+    ) {
+      renderHicStateContractingTask = true;
+    }
+
+    if (
+      business?.profileData.foreignBusinessTypeIds &&
+      determineForeignBusinessType(business?.profileData.foreignBusinessTypeIds) === "NEXUS" &&
+      ((isConstructionSector(business?.profileData.sectorId) &&
+        isGenericIndustry(business?.profileData.industryId)) ||
+        isHomeContractorIndustry(business?.profileData.industryId))
+    ) {
+      renderHicStateContractingTask = true;
+    }
+
     const registryUpdateBrcAmendmentQuickAction = props.quickActionTasks.find(
       (e) => e.filename === "registry-update-brc-amendment"
     );
 
     const nonHicStateContractingQuickAction = props.quickActionLinks.find(
       (e) => e.filename === "state-contracting-external-link"
+    );
+
+    const hicStateContractingQuickAction = props.quickActionTasks.find(
+      (e) => e.filename === "government-contracting"
     );
 
     if (registryUpdateBrcAmendmentQuickAction) {
@@ -203,6 +240,15 @@ const DashboardPage = (props: Props): ReactElement => {
         <QuickActionLinkTile
           quickAction={nonHicStateContractingQuickAction}
           key={nonHicStateContractingQuickAction.filename}
+        />
+      );
+    }
+
+    if (hicStateContractingQuickAction && renderHicStateContractingTask) {
+      quickActionsArray.push(
+        <QuickActionTaskTile
+          quickAction={hicStateContractingQuickAction}
+          key={hicStateContractingQuickAction.filename}
         />
       );
     }

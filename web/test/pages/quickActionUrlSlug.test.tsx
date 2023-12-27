@@ -9,6 +9,7 @@ describe("quick action page", () => {
       callToActionText: "Click here",
       contentMd: "Some content description",
       form: "FORM-123",
+      filename: "registry-update-brc-amendment",
     });
 
     render(<QuickActionTaskPage quickActionTask={quickAction} />);
@@ -17,5 +18,19 @@ describe("quick action page", () => {
     expect(screen.getByText("Click here")).toBeInTheDocument();
     expect(screen.getByText("Some content description")).toBeInTheDocument();
     expect(screen.getByText("FORM-123")).toBeInTheDocument();
+  });
+
+  it("shows the quick action details for state contracting", () => {
+    const quickAction = generateQuickActionTask({
+      name: "State contracting task",
+      callToActionText: "Click here",
+      contentMd: "Some content description",
+      form: "FORM-123",
+      filename: "state-contracting-task",
+    });
+
+    render(<QuickActionTaskPage quickActionTask={quickAction} />);
+
+    expect(screen.getByText("State contracting task")).toBeInTheDocument();
   });
 });
