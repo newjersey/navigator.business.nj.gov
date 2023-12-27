@@ -1,11 +1,9 @@
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { isRemoteWorkerOrSeller } from "@/lib/domain-logic/isRemoteWorkerOrSeller";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 
 const isFormedOutsideNavigator = (business: Business): boolean => {
-  if (business.formationData.completedFilingPayment === false && business.profileData.dateOfFormation) {
-    return true;
-  }
-  return false;
+  return !!(!business.formationData.completedFilingPayment && business.profileData.dateOfFormation);
 };
 
 export const shouldShowDisclaimerForProfileNotSubmittingData = (
@@ -14,12 +12,13 @@ export const shouldShowDisclaimerForProfileNotSubmittingData = (
 ): boolean => {
   if (!business || isAuthenticated === IsAuthenticated.UNKNOWN) return true;
 
-  if (
+  const { profileData } = business;
+  const { businessPersona } = profileData;
+
+  return (
     isFormedOutsideNavigator(business) ||
-    business.profileData.businessPersona === "OWNING" ||
-    isAuthenticated === IsAuthenticated.FALSE
-  ) {
-    return true;
-  }
-  return false;
+    businessPersona === "OWNING" ||
+    isAuthenticated === IsAuthenticated.FALSE ||
+    isRemoteWorkerOrSeller(business)
+  );
 };

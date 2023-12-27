@@ -414,7 +414,9 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileErrorAlert fieldErrors={getInvalidFieldIds()} />
         {displayOpportunityAlert && <ProfileOpportunitiesAlert />}
         <ProfileNoteDisclaimerForSubmittingData business={business} isAuthenticated={isAuthenticated} />
-
+        <ProfileField fieldName="businessName">
+          <BusinessName />
+        </ProfileField>
         <ProfileField fieldName="foreignBusinessTypeIds">
           <ForeignBusinessTypeField required />
         </ProfileField>

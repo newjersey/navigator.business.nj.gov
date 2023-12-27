@@ -434,4 +434,32 @@ describe("profile-foreign", () => {
       });
     });
   });
+
+  describe("Remote Worker", () => {
+    const foreignRemoteWorkerProfile = generateBusinessForProfile({
+      profileData: generateProfileData({
+        businessPersona: "FOREIGN",
+        foreignBusinessTypeIds: ["employeesInNJ"],
+      }),
+    });
+
+    it("renders the business name field for remote worker", () => {
+      renderPage({ business: foreignRemoteWorkerProfile });
+      expect(screen.getByTestId("businessName")).toBeInTheDocument();
+    });
+  });
+
+  describe("Remote Seller", () => {
+    const foreignRemoteSellerProfile = generateBusinessForProfile({
+      profileData: generateProfileData({
+        businessPersona: "FOREIGN",
+        foreignBusinessTypeIds: ["revenueInNJ", "transactionsInNJ"],
+      }),
+    });
+
+    it("renders the business name field for remote seller", () => {
+      renderPage({ business: foreignRemoteSellerProfile });
+      expect(screen.getByTestId("businessName")).toBeInTheDocument();
+    });
+  });
 });
