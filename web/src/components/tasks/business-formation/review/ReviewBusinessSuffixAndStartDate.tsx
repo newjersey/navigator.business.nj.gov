@@ -2,6 +2,7 @@ import { ReviewLineItem } from "@/components/tasks/business-formation/review/sec
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { defaultDisplayDateFormat } from "@/lib/types/types";
+import { isForeignCorporation } from "@/lib/utils/helpers";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { ReactElement, useContext } from "react";
@@ -20,6 +21,15 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
       return undefined;
     }
     return `${name} ${suffix}`;
+  };
+
+  const formattLawResponse = (willPracticeLaw: boolean | undefined): string | undefined => {
+    if (willPracticeLaw === true) {
+      return Config.formation.fields.willPracticeLaw.radioNoText;
+    } else if (willPracticeLaw === false) {
+      return Config.formation.fields.willPracticeLaw.radioNoText;
+    }
+    return undefined;
   };
 
   return (
@@ -62,6 +72,14 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
           label={Config.formation.fields.businessTotalStock.label}
           value={state.formationFormData.businessTotalStock}
           dataTestId={"review-total-business-stock"}
+        />
+      )}
+      {isForeignCorporation(state.formationFormData.legalType) && (
+        <ReviewLineItem
+          label={Config.formation.fields.willPracticeLaw.label}
+          value={formattLawResponse(state.formationFormData.willPracticeLaw)}
+          dataTestId={"review-will-practice-law"}
+          noColonAfterLabel={true}
         />
       )}
     </div>
