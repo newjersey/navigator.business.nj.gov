@@ -212,12 +212,11 @@ describe("onboarding - foreign business", () => {
     it("navigates to the unsupported page when the foreign business type is none", async () => {
       const { page } = renderPage({ userData });
       page.checkByLabelText(none);
-
       act(() => {
         return page.clickNext();
       });
       await waitFor(() => {
-        return expect(mockPush).toHaveBeenCalledWith(ROUTES.unsupported);
+        return expect(mockPush).toHaveBeenCalledWith({ pathname: ROUTES.unsupported, query: {} });
       });
     });
   });

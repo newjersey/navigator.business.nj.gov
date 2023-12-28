@@ -334,7 +334,12 @@ const OnboardingPage = (props: Props): ReactElement => {
       setAnalyticsDimensions(newProfileData);
 
       if (determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NONE") {
-        await router.push(ROUTES.unsupported);
+        await router.push({
+          pathname: ROUTES.unsupported,
+          query: isAdditionalBusiness
+            ? { [QUERIES.additionalBusiness]: "true", [QUERIES.previousBusinessId]: previousBusiness?.id }
+            : {},
+        });
       } else if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
         updateQueue
           .queueProfileData(newProfileData)
