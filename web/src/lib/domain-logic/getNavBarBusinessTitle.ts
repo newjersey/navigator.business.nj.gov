@@ -1,11 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import {
-  Business,
-  determineForeignBusinessType,
-  LookupIndustryById,
-  LookupLegalStructureById,
-} from "@businessnjgovnavigator/shared";
+import { isRemoteWorkerOrSeller } from "@/lib/domain-logic/isRemoteWorkerOrSeller";
+import { Business, LookupIndustryById, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
 
 export const getNavBarBusinessTitle = (
   business: Business | undefined,
@@ -24,15 +20,7 @@ export const getNavBarBusinessTitle = (
     businessPersona,
     needsNexusDbaName,
     nexusDbaName,
-    foreignBusinessTypeIds,
   } = business.profileData;
-
-  const isRemoteWorkerOrSeller = (): boolean => {
-    return (
-      determineForeignBusinessType(foreignBusinessTypeIds) === "REMOTE_SELLER" ||
-      determineForeignBusinessType(foreignBusinessTypeIds) === "REMOTE_WORKER"
-    );
-  };
 
   const determineName = (): string => {
     if (needsNexusDbaName) {
@@ -64,7 +52,7 @@ export const getNavBarBusinessTitle = (
     }
   }
 
-  if (businessPersona === "FOREIGN" && isRemoteWorkerOrSeller()) {
+  if (businessPersona === "FOREIGN" && isRemoteWorkerOrSeller(business)) {
     return Config.navigationDefaults.navBarUnnamedForeignRemoteSellerWorkerText;
   }
 
