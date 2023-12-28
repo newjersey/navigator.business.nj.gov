@@ -11,6 +11,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { isRemoteWorkerOrSeller } from "@/lib/domain-logic/isRemoteWorkerOrSeller";
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { isFormationTask, isTaxTask } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
@@ -101,7 +102,8 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
           path: ROUTES.dashboard,
           queries: {
             [QUERIES.fromFormBusinessEntity]: isFormationTask(props.taskId) ? "true" : "false",
-            [QUERIES.fromTaxRegistration]: isTaxTask(props.taskId) ? "true" : "false",
+            [QUERIES.fromTaxRegistration]:
+              isTaxTask(props.taskId) && !isRemoteWorkerOrSeller(business) ? "true" : "false",
           },
         });
       })
