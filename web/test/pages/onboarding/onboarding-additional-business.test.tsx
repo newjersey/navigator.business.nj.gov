@@ -11,9 +11,10 @@ import {
   setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
 import { mockSuccessfulApiSignups, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
+import { generateProfileData } from "@businessnjgovnavigator/shared";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { UserData, createEmptyBusiness } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -26,6 +27,8 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 
 const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();
+const { none: nexusNoneOfTheAboveCheckboxLabel } =
+  Config.profileDefaults.fields.foreignBusinessTypeIds.default.optionContent;
 
 describe("onboarding - additional business", () => {
   beforeEach(() => {
@@ -124,5 +127,36 @@ describe("onboarding - additional business", () => {
     };
 
     expect(currentUserData()).toEqual(expectedUserData);
+  });
+
+  it("navigates to the unsupported page with additionalBusiness param when additional business is being added", async () => {
+    const initialBusiness = generateBusiness({
+      profileData: generateProfileData({
+        businessPersona: "STARTING",
+      }),
+      id: "initial-business-id",
+    });
+    const initialData = generateUserDataForBusiness(initialBusiness);
+
+    useMockRouter({ isReady: true, query: { [QUERIES.additionalBusiness]: "true" } });
+
+    const { page } = renderPage({ userData: initialData });
+
+    await waitFor(() => {
+      page.chooseRadio("business-persona-foreign");
+    });
+    await page.visitStep(2);
+
+    page.checkByLabelText(nexusNoneOfTheAboveCheckboxLabel);
+    act(() => {
+      return page.clickNext();
+    });
+
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalledWith({
+        pathname: ROUTES.unsupported,
+        query: { [QUERIES.additionalBusiness]: "true", [QUERIES.previousBusinessId]: "initial-business-id" },
+      });
+    });
   });
 });

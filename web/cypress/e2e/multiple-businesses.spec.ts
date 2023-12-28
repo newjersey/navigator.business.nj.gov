@@ -55,4 +55,26 @@ describe("Multiple Businesses [feature] [all] [group2]", () => {
     cy.get('[data-testid="business-title-0"]').should("exist");
     cy.get('[data-testid="business-title-1"]').should("not.exist");
   });
+
+  it("exits out of additional business onboarding without saving when new business is unsupported", () => {
+    completeNewBusinessOnboarding({});
+    cy.url().should("contain", "/dashboard");
+
+    onDashboardPage.getDropdown().click();
+    onDashboardPage.getAddBusinessButtonInDropdown().click();
+    cy.url().should("include", "onboarding?page=1");
+
+    onOnboardingPage.selectBusinessPersona("FOREIGN");
+    onOnboardingPage.clickNext();
+
+    onOnboardingPage.checkForeignBusinessType("none");
+    onOnboardingPage.clickNext();
+
+    cy.get('[data-testid="return-to-prev-button"]').click();
+    cy.url().should("contain", "/dashboard");
+
+    onDashboardPage.getDropdown().click();
+    cy.get('[data-testid="business-title-0"]').should("exist");
+    cy.get('[data-testid="business-title-1"]').should("not.exist");
+  });
 });
