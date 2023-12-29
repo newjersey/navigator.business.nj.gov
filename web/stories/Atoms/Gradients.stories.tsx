@@ -2,10 +2,10 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { Meta, StoryObj } from "@storybook/react";
 
 const Template = () => {
-  const renderGradient = (gradientName: string, gradientClass: string) => (
+  const renderGradient = (gradientName: string) => (
     <div className="margin-right-1">
       <div
-        className={`margin-bottom-2 height-10 width-15rem ${gradientClass} text-base-darkest text-bold margin-right-6`}
+        className={`margin-bottom-2 height-10 width-15rem ${gradientName} text-base-darkest text-bold margin-right-6`}
       />
       <div>{gradientName}</div>
     </div>
@@ -13,21 +13,22 @@ const Template = () => {
 
   const PrimaryGradient = (
     <div className="flex flex-row margin-bottom-2">
-      {renderGradient("primary-gradient", "primary-gradient")}
-      {renderGradient("primary-gradient-reverse", "primary-gradient-reverse")}
+      {renderGradient("primary-gradient")}
+      {renderGradient("primary-gradient-reverse")}
     </div>
   );
 
   const SecondaryGradient = (
     <div className="flex flex-row margin-bottom-2">
-      {renderGradient("secondary-gradient-reverse", "secondary-gradient-reverse")}
+      {renderGradient("secondary-gradient")}
+      {renderGradient("secondary-gradient-reverse")}
     </div>
   );
 
   const TertiaryGradient = (
     <div className="flex flex-row margin-bottom-2">
-      {renderGradient("tertiary-gradient", "tertiary-gradient")}
-      {renderGradient("tertiary-gradient-reverse", "tertiary-gradient-reverse")}
+      {renderGradient("tertiary-gradient")}
+      {renderGradient("tertiary-gradient-reverse")}
     </div>
   );
 

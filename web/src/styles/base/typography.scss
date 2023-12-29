@@ -1,3 +1,8 @@
+body,
+button {
+  color: $base-darkest;
+}
+
 .h1-styling-large {
   margin-block-start: 0;
   margin-block-end: 0;
@@ -186,6 +191,10 @@ div {
   font-style: inherit !important;
 }
 
+.font-weight-normal {
+  font-weight: normal !important;
+}
+
 .usa-prose > p,
 p {
   max-width: unset !important;
@@ -225,4 +234,29 @@ li {
 
 .text-underline-hover:hover {
   text-decoration: underline;
+}
+
+.text-no-underline-override {
+  text-decoration: none;
+}
+
+.break-word {
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.usa-prose {
+  p:not(:first-child) {
+    margin-top: 0.25rem !important;
+  }
+}
+
+.usa-prose p + h2,
+.usa-prose p + h3,
+.usa-prose p + h4 {
+  margin-top: 1rem !important;
+}
+
+.no-wrap {
+  white-space: nowrap;
 }

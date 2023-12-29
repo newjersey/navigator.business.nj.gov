@@ -28,7 +28,7 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
           <div
             className={`fdr fac padding-y-1 padding-left-1 padding-right-4 text-semibold-hover text-underline-hover ${
               props.active
-                ? "bg-cool-lighter bg-chevron text-primary-dark text-bold h5-styling"
+                ? "bg-cool-lighter mini-roadmap-bg-shape text-primary-dark text-bold h5-styling"
                 : "h6-styling"
             }`}
             data-task={props.task.id}
