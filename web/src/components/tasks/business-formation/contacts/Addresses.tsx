@@ -8,7 +8,6 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { MediaQueries } from "@/lib/PageSizes";
-import styles from "@/styles/sections/members.module.scss";
 import { FormationFields, FormationIncorporator, FormationMember } from "@businessnjgovnavigator/shared/";
 import { Checkbox, IconButton, useMediaQuery } from "@mui/material";
 import React, { ChangeEvent, Fragment, ReactElement, ReactNode, useState } from "react";
@@ -312,7 +311,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
           {props.displayContent.snackbarBody}
         </SnackbarAlert>
       )}
-      <div className={`margin-bottom-3 ${styles.membersTable}`} data-testid={`addresses-${props.fieldName}`}>
+      <div className="margin-bottom-3 members-table" data-testid={`addresses-${props.fieldName}`}>
         <Heading level={3} style={{ display: "inline" }}>
           {props.displayContent.header}
         </Heading>
