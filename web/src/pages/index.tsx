@@ -184,7 +184,7 @@ const Home = (props: Props): ReactElement => {
                   </div>
                 </div>
                 <div
-                  className={`arrow ${
+                  className={`how-it-works-section-arrow ${
                     isDesktopAndUp ? "right width-15 height-10" : "down height-5 margin-y-3"
                   }`}
                 />
@@ -195,7 +195,7 @@ const Home = (props: Props): ReactElement => {
                   </div>
                 </div>
                 <div
-                  className={`arrow ${
+                  className={`how-it-works-section-arrow ${
                     isDesktopAndUp ? "left width-15 height-10" : "up height-5 margin-y-3"
                   } `}
                 />{" "}

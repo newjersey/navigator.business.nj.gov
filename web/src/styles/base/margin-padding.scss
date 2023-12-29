@@ -1,0 +1,29 @@
+.margin-0-override {
+  margin: 0 !important;
+}
+
+.margin-auto {
+  margin: auto;
+}
+
+.margin-bottom-05-override {
+  margin-bottom: 0.5rem !important;
+}
+
+.margin-y-3-override {
+  margin: 1.5rem 0;
+}
+
+.add-spacing-on-ele-scroll {
+  scroll-margin-top: 100px;
+}
+
+.override-padding {
+  .MuiInputBase-root {
+    padding: 0 !important;
+  }
+}
+
+.mla {
+  margin-left: auto !important;
+}

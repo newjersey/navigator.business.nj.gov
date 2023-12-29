@@ -2,11 +2,6 @@
   box-sizing: border-box;
 }
 
-body,
-button {
-  color: $base-darkest;
-}
-
 [data-slate-editor] {
   -webkit-user-modify: read-write !important;
 }
@@ -15,47 +10,6 @@ li,
 ol {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
-}
-.usa-prose {
-  p:not(:first-child) {
-    margin-top: 0.25rem !important;
-  }
-}
-
-.green-box {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5 {
-    margin-top: 0.75rem;
-    margin-bottom: 0.75rem;
-  }
-
-  ul {
-    padding-inline-start: 1.25rem;
-  }
-}
-
-.mla {
-  margin-left: auto !important;
-}
-
-.width-100 {
-  width: 100% !important;
-}
-
-.width-80 {
-  width: 80%;
-}
-
-.width-auto {
-  width: auto !important;
-}
-
-.bg-chevron {
-  background-image: linear-gradient(-45deg, white 25px, transparent 20px),
-    linear-gradient(-135deg, white 25px, transparent 20px);
 }
 
 .disabled-overlay {
@@ -108,71 +62,6 @@ ol {
   z-index: 300;
 }
 
-.font-weight-normal {
-  font-weight: normal !important;
-}
-
-.operate-bullet:before {
-  border-radius: 99rem;
-  background-color: $primary-darker;
-  content: "";
-  height: 0.5rem;
-  width: 0.5rem;
-  margin-left: 8px;
-  margin-right: 20px;
-  box-sizing: border-box;
-  font-feature-settings: "tnum" 1, "kern" 1;
-  display: inline-block;
-}
-
-.operate-bullet.active:before {
-  background-color: $primary-dark;
-}
-
-.margin-0-override {
-  margin: 0 !important;
-}
-
-.margin-auto {
-  margin: auto;
-}
-
-.min-height-575rem {
-  min-height: 5.75rem;
-}
-
-.width-max-content {
-  width: max-content;
-}
-
-.width-11rem {
-  width: 11rem;
-}
-
-.width-15rem {
-  width: 15rem;
-}
-
-.minh-30 {
-  min-height: 30rem;
-}
-
-.minh-40 {
-  min-height: 40rem;
-}
-
-.minh-38 {
-  min-height: 38rem;
-}
-
-.minw-30 {
-  min-width: 30rem;
-}
-
-.max-width-38rem {
-  max-width: 38rem;
-}
-
 .usa-file-input {
   max-width: unset;
   // .usa-file-input__target.usa-file-input--drag
@@ -185,137 +74,10 @@ ol {
   border-color: #b50909;
 }
 
-.usa-prose p + h2,
-.usa-prose p + h3,
-.usa-prose p + h4 {
-  margin-top: 1rem !important;
-}
-
 @media all and (min-width: $xs) {
   .display-block {
     display: block;
   }
-}
-
-.blueRightGutter {
-  background: linear-gradient(to right, $white 70%, $cool-extra-light 70% 100%);
-}
-
-.arrow {
-  display: inline-block;
-  position: relative;
-
-  &::before {
-    content: "";
-    display: block;
-    width: 20px;
-    height: 20px;
-    top: 50%;
-    left: 50%;
-    border-style: solid;
-    border-color: inherit;
-    border-width: 2px 2px 0 0;
-    position: absolute;
-    transform-origin: 50% 50%;
-  }
-
-  &.left::before {
-    transform: rotate(-135deg);
-    margin: -9px 0 0 -9px;
-    left: 13px;
-  }
-
-  &.up::before {
-    transform: rotate(-45deg);
-    margin: -10px 0 0 -9px;
-    top: 14px;
-  }
-
-  &.down::before {
-    transform: rotate(135deg);
-    margin: -23px 0 0 -9px;
-    top: 100%;
-  }
-
-  &.right::before {
-    transform: rotate(45deg);
-    margin: -9px 0 0 -20px;
-    left: 100%;
-  }
-
-  &::after {
-    content: "";
-    display: block;
-    top: 50%;
-    left: 50%;
-    border-style: solid;
-    border-color: inherit;
-    position: absolute;
-  }
-
-  &.left::after {
-    width: inherit;
-    height: 0;
-    left: 0%;
-    border-width: 2px 0 0 0;
-  }
-
-  &.up::after {
-    width: 0;
-    height: inherit;
-    top: 0%;
-    border-width: 0 2px 0 0;
-  }
-
-  &.down::after {
-    width: 0;
-    height: inherit;
-    top: 0%;
-    border-width: 0 2px 0 0;
-  }
-
-  &.right::after {
-    width: inherit;
-    height: 0;
-    left: 1%;
-
-    border-width: 2px 0 0 0;
-  }
-}
-
-.cms {
-  svg.MuiSvgIcon-root {
-    display: none;
-  }
-
-  .css-zzms1-MuiSnackbar-root {
-    position: relative;
-    top: 0;
-    right: 0;
-    left: 0;
-    transform: unset;
-  }
-}
-
-.override-padding {
-  .MuiInputBase-root {
-    padding: 0 !important;
-  }
-}
-
-.padding-y-11px {
-  padding-top: 11px;
-  padding-bottom: 11px;
-}
-
-.padding-y-14px {
-  padding-top: 14px;
-  padding-bottom: 14px;
-}
-
-.break-word {
-  word-wrap: break-word;
-  word-break: break-word;
 }
 
 .inline-icon {
@@ -326,28 +88,4 @@ ol {
 .page-not-found {
   background: linear-gradient(180deg, rgba(243, 239, 236, 0) 0%, #ecf3ec 100%);
   height: 80vh;
-}
-
-.no-wrap {
-  white-space: nowrap;
-}
-
-.pdfPageWidthInPx {
-  width: 713px;
-}
-
-.margin-bottom-05-override {
-  margin-bottom: 0.5rem !important;
-}
-
-.margin-y-3-override {
-  margin: 1.5rem 0;
-}
-
-.text-no-underline-override {
-  text-decoration: none;
-}
-
-.add-spacing-on-ele-scroll {
-  scroll-margin-top: 100px;
 }
