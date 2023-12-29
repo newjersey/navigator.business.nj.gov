@@ -23,6 +23,7 @@ describe("WebserviceLicenseStatusProcessorClient", () => {
   beforeEach(() => {
     stubLicenseStatusClient = {
       search: jest.fn(),
+      health: jest.fn(),
     };
 
     searchLicenseStatus = WebserviceLicenseStatusProcessorClient(stubLicenseStatusClient);

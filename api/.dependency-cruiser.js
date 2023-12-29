@@ -80,6 +80,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "http-status-codes" },
+    },
+    {
+      from: {},
       to: { path: "crypto" },
     },
     {
