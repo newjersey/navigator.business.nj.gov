@@ -1,7 +1,8 @@
-import { LicenseStatusClient } from "@domain/types";
+import { HealthCheckMetadata, HealthCheckMethod, LicenseStatusClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { LicenseEntity } from "@shared/license";
 import axios, { AxiosError } from "axios";
+import { ReasonPhrases } from "http-status-codes";
 
 export const WebserviceLicenseStatusClient = (
   baseUrl: string,
@@ -33,7 +34,53 @@ export const WebserviceLicenseStatusClient = (
       });
   };
 
+  const health: HealthCheckMethod = () => {
+    const url = `${baseUrl}/ws/simple/queryLicenseStatus`;
+    const logId = logWriter.GetId();
+    const licenseType = "HVACR";
+    const name = "Innovation Test Business";
+    const zipCode = 12345;
+
+    return axios
+      .post(url, {
+        zipCode: zipCode,
+        businessName: name,
+        licenseType: licenseType,
+      })
+      .then(() => {
+        return {
+          success: true,
+          data: {
+            message: ReasonPhrases.OK,
+          },
+        } as HealthCheckMetadata;
+      })
+      .catch((error: AxiosError) => {
+        console.dir({ error });
+        logWriter.LogError(`License Status Search - Id:${logId} - Error:`, error);
+        if (error.response) {
+          return {
+            success: false,
+            error: {
+              serverResponseBody: error.message,
+              serverResponseCode: error.response.status,
+              message: ReasonPhrases.BAD_GATEWAY,
+              timeout: false,
+            },
+          } as HealthCheckMetadata;
+        }
+        return {
+          success: false,
+          error: {
+            message: ReasonPhrases.GATEWAY_TIMEOUT,
+            timeout: true,
+          },
+        } as HealthCheckMetadata;
+      });
+  };
+
   return {
     search,
+    health,
   };
 };

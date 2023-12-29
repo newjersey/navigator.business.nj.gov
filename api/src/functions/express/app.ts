@@ -1,6 +1,7 @@
 import { elevatorSafetyRouterFactory } from "@api/elevatorSafetyRouter";
 import { fireSafetyRouterFactory } from "@api/fireSafetyRouter";
 import { formationRouterFactory } from "@api/formationRouter";
+import { healthCheckRouterFactory } from "@api/healthCheckRouter";
 import { housingRouterFactory } from "@api/housingRouter";
 import { licenseStatusRouterFactory } from "@api/licenseStatusRouter";
 import { selfRegRouterFactory } from "@api/selfRegRouter";
@@ -13,15 +14,19 @@ import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
 import { DynamicsAccessTokenClient } from "@client/dynamics/DynamicsAccessTokenClient";
 import { DynamicsElevatorSafetyClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyClient";
+import { DynamicsElevatorSafetyHealthCheckClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyHealthCheckClient";
 import { DynamicsElevatorSafetyInspectionClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyInspectionClient";
 import { DynamicsFireSafetyClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyClient";
+import { DynamicsFireSafetyHealthCheckClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyHealthCheckClient";
 import { DynamicsFireSafetyInspectionClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyInspectionClient";
 import { DynamicsHousingClient } from "@client/dynamics/housing/DynamicsHousingClient";
+import { DynamicsHousingHealthCheckClient } from "@client/dynamics/housing/DynamicsHousingHealthCheckClient";
 import { DynamicsHousingPropertyInterestClient } from "@client/dynamics/housing/DynamicsHousingPropertyInterestClient";
 import { DynamicsBusinessAddressClient } from "@client/dynamics/license-status/DynamicsBusinessAddressClient";
 import { DynamicsBusinessIdsClient } from "@client/dynamics/license-status/DynamicsBusinessIdsClient";
 import { DynamicsChecklistItemsClient } from "@client/dynamics/license-status/DynamicsChecklistItemsClient";
 import { DynamicsLicenseApplicationIdClient } from "@client/dynamics/license-status/DynamicsLicenseApplicationIdClient";
+import { DynamicsLicenseHealthCheckClient } from "@client/dynamics/license-status/DynamicsLicenseHealthCheckClient";
 import { DynamicsLicenseStatusClient } from "@client/dynamics/license-status/DynamicsLicenseStatusClient";
 import { FakeSelfRegClientFactory } from "@client/fakeSelfRegClient";
 import { GovDeliveryNewsletterClient } from "@client/GovDeliveryNewsletterClient";
@@ -30,6 +35,7 @@ import { WebserviceLicenseStatusClient } from "@client/WebserviceLicenseStatusCl
 import { WebserviceLicenseStatusProcessorClient } from "@client/WebserviceLicenseStatusProcessorClient";
 import { dynamoDbTranslateConfig, DynamoUserDataClient } from "@db/DynamoUserDataClient";
 import { searchLicenseStatusFactory } from "@domain/license-status/searchLicenseStatusFactory";
+import { HealthCheckMethod } from "@domain/types";
 import { updateSidebarCards } from "@domain/updateSidebarCards";
 import { addToUserTestingFactory } from "@domain/user-testing/addToUserTestingFactory";
 import { timeStampBusinessSearch } from "@domain/user/timeStampBusinessSearch";
@@ -81,6 +87,7 @@ const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
 const LICENSE_STATUS_BASE_URL =
   process.env.LICENSE_STATUS_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
 const webServiceLicenseStatusClient = WebserviceLicenseStatusClient(LICENSE_STATUS_BASE_URL, logger);
+const webServiceLicenseStatusHealthCheckClient = webServiceLicenseStatusClient.health;
 const webserviceLicenseStatusProcessorClient = WebserviceLicenseStatusProcessorClient(
   webServiceLicenseStatusClient
 );
@@ -105,6 +112,11 @@ const dynamicsLicenseStatusClient = DynamicsLicenseStatusClient(logger, {
   businessAddressClient: dynamicsAddressClient,
   licenseApplicationIdClient: dynamicsApplicationIdClient,
   checklistItemsClient: dynamicsCheckListItemsClient,
+});
+
+const dynamicsLicenseHealthCheckClient = DynamicsLicenseHealthCheckClient(logger, {
+  accessTokenClient: dynamicsLicenseStatusAccessTokenClient,
+  orgUrl: DYNAMICS_LICENSE_STATUS_URL,
 });
 
 const DYNAMICS_FIRE_SAFETY_URL = process.env.DYNAMICS_FIRE_SAFETY_URL || "";
@@ -160,6 +172,18 @@ const dynamicsElevatorSafetyInspectionClient = DynamicsElevatorSafetyInspectionC
 const dynamicsElevatorSafetyClient = DynamicsElevatorSafetyClient(logger, {
   accessTokenClient: dynamicsElevatorSafetyAccessTokenClient,
   elevatorSafetyInspectionClient: dynamicsElevatorSafetyInspectionClient,
+});
+const dynamicsElevatorSafetyHealthCheckClient = DynamicsElevatorSafetyHealthCheckClient(logger, {
+  accessTokenClient: dynamicsElevatorSafetyAccessTokenClient,
+  orgUrl: DYNAMICS_ELEVATOR_SAFETY_URL,
+});
+const dynamicsFireSafetyHealthCheckClient = DynamicsFireSafetyHealthCheckClient(logger, {
+  accessTokenClient: dynamicsFireSafetyAccessTokenClient,
+  orgUrl: DYNAMICS_FIRE_SAFETY_URL,
+});
+const dynamicsHousingHealthCheckClient = DynamicsHousingHealthCheckClient(logger, {
+  accessTokenClient: dynamicsHousingAccessTokenClient,
+  orgUrl: DYNAMICS_HOUSING_URL,
 });
 
 const BUSINESS_NAME_BASE_URL =
@@ -288,6 +312,19 @@ app.use(
 );
 app.use("/api", taxDecryptionRouterFactory(AWSEncryptionDecryptionClient));
 
+app.use(
+  "/health",
+  healthCheckRouterFactory(
+    new Map<string, HealthCheckMethod>([
+      ["dynamics/elevator", dynamicsElevatorSafetyHealthCheckClient],
+      ["dynamics/fire-safety", dynamicsFireSafetyHealthCheckClient],
+      ["dynamics/housing", dynamicsHousingHealthCheckClient],
+      ["dynamics/license-status", dynamicsLicenseHealthCheckClient],
+      ["webservice/license-status", webServiceLicenseStatusHealthCheckClient],
+    ])
+  )
+);
+
 app.post("/api/mgmt/auth", (req, res) => {
   if (req.body.password === process.env.ADMIN_PASSWORD) {
     logger.LogInfo(`MgmtAuth - Id:${logger.GetId()} - MATCH`);
@@ -300,10 +337,6 @@ app.post("/api/mgmt/auth", (req, res) => {
     );
     res.status(401).send();
   }
-});
-
-app.get("/health", (_req, res) => {
-  res.status(500).send("Alive");
 });
 
 export const handler = serverless(app);

@@ -111,7 +111,7 @@ const serverlessConfiguration: AWS = {
   ],
   provider: {
     name: "aws",
-    runtime: "nodejs16.x",
+    runtime: "nodejs18.x",
     stage: stage,
     region: region,
     iam: {
