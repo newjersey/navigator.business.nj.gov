@@ -1,10 +1,7 @@
-import { FireSafetyInspection } from "@client/dynamics/fire-safety/types";
+import { FireSafetyInspection, FireSafetyInspectionClient } from "@client/dynamics/fire-safety/types";
 import { LogWriterType } from "@libs/logWriter";
 import axios, { AxiosError } from "axios";
 
-export interface FireSafetyInspectionClient {
-  getFireSafetyInspections: (accessToken: string, address: string) => Promise<FireSafetyInspection[]>;
-}
 export const DynamicsFireSafetyInspectionClient = (
   logWriter: LogWriterType,
   orgUrl: string

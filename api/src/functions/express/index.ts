@@ -37,6 +37,13 @@ export default (cognitoArn: string, vpcConfig: FnType["vpc"]): FnType => {
       {
         http: {
           method: "ANY",
+          path: "/health/{proxy+}",
+          cors: false,
+        },
+      },
+      {
+        http: {
+          method: "ANY",
           path: "/{proxy+}",
           authorizer: {
             arn: cognitoArn,

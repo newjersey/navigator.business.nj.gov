@@ -8,6 +8,7 @@ import { LicenseEntity, LicenseSearchNameAndAddress, LicenseStatusResult } from 
 import { ProfileData } from "@shared/profileData";
 import { TaxFilingCalendarEvent, TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
 import { UserData } from "@shared/userData";
+import { ReasonPhrases } from "http-status-codes";
 import * as https from "node:https";
 
 export interface UserDataClient {
@@ -66,6 +67,7 @@ export type AddToUserTesting = (userData: UserData) => Promise<UserData>;
 
 export interface LicenseStatusClient {
   search: (name: string, zipCode: string, licenseType: string) => Promise<LicenseEntity[]>;
+  health: HealthCheckMethod;
 }
 
 export interface UserTestingClient {
@@ -117,6 +119,38 @@ export type HousingPropertyInterestStatus = (address: string) => Promise<Housing
 export type ElevatorSafetyInspectionStatus = (
   address: string
 ) => Promise<ElevatorSafetyDeviceInspectionDetails[]>;
+
+export interface SuccessfulHealthCheckMetadata {
+  success: true;
+  data?: {
+    message: HealthCheckMessage;
+  };
+}
+
+export interface UnsuccessfulHealthCheckMetadata {
+  success: false;
+  error?: {
+    message: HealthCheckMessage;
+    timeout?: boolean;
+    serverResponseCode?: number;
+    serverResponseBody?: string;
+  };
+}
+
+export type HealthCheckMetadata = SuccessfulHealthCheckMetadata | UnsuccessfulHealthCheckMetadata;
+
+export type SuccessfulHealthCheckResponse = {
+  timestamp: number;
+} & SuccessfulHealthCheckMetadata;
+
+export type UnsuccessfulHealthCheckResponse = {
+  timestamp: number;
+} & UnsuccessfulHealthCheckMetadata;
+
+export type HealthCheckResponse = SuccessfulHealthCheckResponse | UnsuccessfulHealthCheckResponse;
+
+export type HealthCheckMethod = () => Promise<HealthCheckMetadata>;
+export type HealthCheckMessage = ReasonPhrases;
 
 export type UpdateOperatingPhase = (userData: UserData) => UserData;
 export type UpdateSidebarCards = (userData: UserData) => UserData;
