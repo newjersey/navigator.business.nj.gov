@@ -21,7 +21,8 @@ callToActionText: ""
 - **`Life Hazard Use|life-hazard-use` or `Non-Life Hazard Use|non-life-hazard-use` registration**: Contact your `Local Enforcing Agency|lea` to see if you need to register as a Life Hazard Use or Non-Life Hazard Use. Your Use Type depends on whether your business poses a significant fire hazard. Once your Use Type is identified, you will need to register and potentially make construction improvements to your site. Once your business is up and running, your Use Type will determine when and how often your routine fire inspections will occur.
 
 
-> **Once completed, you will have:**
+> **Once completed, you will know:**
 >
-> - Fire protection permit(s)
-> - Certificate of Occupancy or Approval
+> - The permits and inspections you need to get a shop license and open your commercial space
+> - The process for meeting requirements from your local government and the Division of Consumer Affairs
+> - The time it takes to receive any permits or licenses
