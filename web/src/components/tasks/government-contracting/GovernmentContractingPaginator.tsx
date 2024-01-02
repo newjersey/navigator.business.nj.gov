@@ -11,7 +11,10 @@ import {
   shouldDisplayPreviousButton,
 } from "@/components/tasks/government-contracting/GovernmentContractingSteps";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { MediaQueries } from "@/lib/PageSizes";
 import { QuickActionTask } from "@/lib/types/types";
+import { scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
+import { useMediaQuery } from "@mui/material";
 import { ReactElement, ReactNode, useEffect, useRef, useState } from "react";
 
 export const GovernmentContractorPaginator = (): ReactElement => {
@@ -19,12 +22,22 @@ export const GovernmentContractorPaginator = (): ReactElement => {
   const [stepIndex, setStepIndex] = useState(0);
   const [quickActionTask, setQuickActionTask] = useState<QuickActionTask>();
   const { Config } = useConfig();
+  const isMounted = useRef(false);
+  const isDesktop = useMediaQuery(MediaQueries.desktopAndUp);
+
+  useMountEffect(() => {
+    isMounted.current = true;
+  });
 
   useEffect(() => {
     getQuickActionTaskObj(stepIndex).then((quickActionTask) => {
       setQuickActionTask(quickActionTask);
     });
-  }, [stepIndex]);
+
+    if (isMounted.current) {
+      scrollToTopOfElement(stepperRef.current, { isDesktop });
+    }
+  }, [stepIndex, isDesktop]);
 
   const onMoveToStep = (stepIndex: number): void => {
     setStepIndex(stepIndex);
