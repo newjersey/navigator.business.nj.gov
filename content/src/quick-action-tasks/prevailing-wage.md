@@ -6,7 +6,7 @@ name: prevailing-wage
 icon: ""
 ---
 
-## **Ensure Your Staff Has Prevailing Wage**
+## Ensure Your Staff Has Prevailing Wage
 
 Per the [NJ State Prevailing Wage Act](https://www.nj.gov/labor/wageandhour/tools-resources/laws/prevailingwageact.shtml), the NJ Department of Labor and Workforce Development (NJ DOL) determines the `prevailing wage|prevailing-wage` on `public works|public-works` projects.
 
