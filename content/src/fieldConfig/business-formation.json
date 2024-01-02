@@ -179,7 +179,7 @@
       },
       "hasNonprofitBoardMembers": {
         "label": "Provisions - Board Members",
-        "body": "Will your Non-Profit have `board members|board-member`?",
+        "body": "Will your Non-Profit have `board members|board-member` ?",
         "reviewLabel": "Board Members",
         "yesReviewText": "**Yes**, my Non-Profit will have board members.",
         "noReviewText": "**No**, my Non-Profit will not have board members."
@@ -219,7 +219,7 @@
         "overrides": {
           "foreign": {
             "header": "Check Availability of Your Business Name",
-            "description": "Your business name must match **exactly** with the business name registered in your state of origin, you can find this on your original `Certificate of Formation|certificate-formation`. **This search tool does not register your name with the State.**\n\nPlease check if your business name is available in New Jersey."
+            "description": "Your business name must match **exactly** with the business name registered in your state of origin, you can find this on your original `Certificate of Formation|certificate-formation` . **This search tool does not register your name with the State.**\n\nPlease check if your business name is available in New Jersey."
           }
         },
         "errorInlineEmpty": "Enter a business name to check availability.",
@@ -263,13 +263,13 @@
         "error": "Enter the agent's full name."
       },
       "businessStartDate": {
-        "label": "Effective Date",
+        "label": "NJ Business Effective Date",
         "labelContextualInfo": "effective-date",
         "labelSecondaryText": "(mm/dd/yyyy)",
-        "errorFuture": "The business formation start date must be today or a future date in format MM/DD/YYYY.",
-        "errorToday": "The business formation start date must be today and in format MM/DD/YYYY.",
-        "error30Days": "The business formation start date must be today or a future date within 30 days in format MM/DD/YYYY.",
-        "error90Days": "The business formation start date must be today or a future date within 90 days in format MM/DD/YYYY."
+        "errorFuture": "The NJ business effective date must be today or a future date in format MM/DD/YYYY.",
+        "errorToday": "The NJ business effective date must be today and in format MM/DD/YYYY.",
+        "error30Days": "The NJ business effective  date must be today or a future date within 30 days in format MM/DD/YYYY.",
+        "error90Days": "The NJ business effective date must be today or a future date within 90 days in format MM/DD/YYYY."
       },
       "businessSuffix": {
         "label": "Business Designator",
@@ -402,7 +402,7 @@
       },
       "isVeteranNonprofit": {
         "label": "Non-Profit Veteran Corporation",
-        "description": "Is your Domestic Non-Profit a `Veteran Corporation|veteran-corporation`?",
+        "description": "Is your Domestic Non-Profit a `Veteran Corporation|veteran-corporation` ?",
         "error": "Select 'Yes' or 'No'.",
         "reviewTextYes": "**Yes**, my Domestic Non-Profit is a Veteran Corporation.",
         "reviewTextNo": "**No**, my Domestic Non-Profit is not a Veteran Corporation."
