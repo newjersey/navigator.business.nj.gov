@@ -57,7 +57,7 @@ export const QuickActionGovernmentContractingElement = (props: Props): ReactElem
   return (
     <div className="minh-38">
       <div className="bg-base-extra-light margin-x-neg-4 margin-top-neg-4 radius-top-lg">
-        <div className="padding-top-1 margin-x-4">
+        <div className="padding-top-4 padding-bottom-4 margin-x-4">
           <h1>{props.quickActionTask.name}</h1>
         </div>
         <div className="flex flex-column minh-38 bg-white">
