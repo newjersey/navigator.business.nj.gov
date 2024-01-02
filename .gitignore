@@ -19,6 +19,7 @@ web/out/
 
 # production
 web/build
+*.pem
 
 # misc
 .DS_Store
