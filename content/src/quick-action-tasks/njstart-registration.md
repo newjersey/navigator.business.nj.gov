@@ -8,7 +8,7 @@ callToActionText: Register My Business with NJSTART
 callToActionLink: https://www.njstart.gov/bso/
 ---
 
-# Register Your Business with NJSTART
+## **Register Your Business with NJSTART**
 
 Businesses interested in working with the State must register with NJ State of the Art Requisition Technology (NJSTART). Registering provides you with the latest information about contracting opportunities and helps you track the status of your contracts.
 
@@ -18,7 +18,7 @@ Register with NJSTART to find bidding opportunities for goods and services throu
 
 ---
 
-## Registration Requirements
+### Registration Requirements
 
 1. Complete your pre-registration by submitting the following information:
 

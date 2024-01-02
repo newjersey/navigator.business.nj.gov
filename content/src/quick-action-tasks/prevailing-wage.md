@@ -6,7 +6,8 @@ name: prevailing-wage
 icon: ""
 ---
 
-# Ensure Your Staff Has Prevailing Wage
+## **Ensure Your Staff Has Prevailing Wage**
+
 Per the [NJ State Prevailing Wage Act](https://www.nj.gov/labor/wageandhour/tools-resources/laws/prevailingwageact.shtml), the NJ Department of Labor and Workforce Development (NJ DOL) determines the `prevailing wage|prevailing-wage` on `public works|public-works` projects.
 
 If you are interested in working on `public works|public-works` contracts, you must register with the Division of Wage and Hour Compliance within the NJ DOL. The Public Works Contractor Registration Act requires registration.
