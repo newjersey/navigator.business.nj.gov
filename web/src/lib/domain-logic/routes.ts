@@ -45,6 +45,7 @@ export enum QUERIES {
   completeFiling = "completeFiling",
   success = "success",
   additionalBusiness = "additionalBusiness",
+  previousBusinessId = "previousBusinessId",
   path = "path",
   signUp = "signUp",
   industry = "industry",
