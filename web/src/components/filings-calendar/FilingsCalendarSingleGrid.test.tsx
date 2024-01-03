@@ -195,7 +195,7 @@ describe("<FilingsCalendarSingleGrid />", () => {
     expect(screen.getByText(expectedTitle)).toBeInTheDocument();
   });
 
-  it("renders both license events (expiration and renewal) in same month (on the 1st and 31st)", () => {
+  it("renders expiration event and renewal event in the same month when expiration is on the 1st of a 31-day month", () => {
     const licenseData = generateLicenseData({
       expirationISO: currentDate.add(1, "year").month(0).date(1).toISOString(),
     });
