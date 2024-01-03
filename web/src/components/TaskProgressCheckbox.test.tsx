@@ -234,6 +234,48 @@ describe("<TaskProgressCheckbox />", () => {
       });
     });
 
+    it("redirects with fromTaxRegistration as false when checking TaskProgressCheckbox as Foreign Remote Seller", async () => {
+      const foreignRemoteSeller = generateProfileData({
+        businessPersona: "FOREIGN",
+        foreignBusinessTypeIds: ["revenueInNJ", "transactionsInNJ"],
+      });
+      renderTaskCheckbox(taxTaskId, generateBusiness({ profileData: foreignRemoteSeller }));
+      await selectCompleted();
+      expect(currentBusiness().taskProgress[taxTaskId]).toEqual("COMPLETED");
+      expect(mockPush).toHaveBeenCalledWith({
+        pathname: ROUTES.dashboard,
+        query: { fromFormBusinessEntity: "false", fromTaxRegistration: "false" },
+      });
+    });
+
+    it("redirects with fromTaxRegistration as false when checking TaskProgressCheckbox as Foreign Remote Worker", async () => {
+      const foreignRemoteWorker = generateProfileData({
+        businessPersona: "FOREIGN",
+        foreignBusinessTypeIds: ["employeesInNJ"],
+      });
+      renderTaskCheckbox(taxTaskId, generateBusiness({ profileData: foreignRemoteWorker }));
+      await selectCompleted();
+      expect(currentBusiness().taskProgress[taxTaskId]).toEqual("COMPLETED");
+      expect(mockPush).toHaveBeenCalledWith({
+        pathname: ROUTES.dashboard,
+        query: { fromFormBusinessEntity: "false", fromTaxRegistration: "false" },
+      });
+    });
+
+    it("redirects with fromTaxRegistration as true when checking TaskProgressCheckbox as dakota nexus", async () => {
+      const foreignNexus = generateProfileData({
+        businessPersona: "FOREIGN",
+        foreignBusinessTypeIds: ["companyOperatedVehiclesInNJ"],
+      });
+      renderTaskCheckbox(taxTaskId, generateBusiness({ profileData: foreignNexus }));
+      await selectCompleted();
+      expect(currentBusiness().taskProgress[taxTaskId]).toEqual("COMPLETED");
+      expect(mockPush).toHaveBeenCalledWith({
+        pathname: ROUTES.dashboard,
+        query: { fromFormBusinessEntity: "false", fromTaxRegistration: "true" },
+      });
+    });
+
     it("shows warning modal and sets dateOfFormation to undefined if user sets back to not completed", async () => {
       renderTaskCheckbox(
         formationTaskId,
