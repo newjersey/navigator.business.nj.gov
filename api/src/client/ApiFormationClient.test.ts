@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { FormationClient } from "@domain/types";
-import { LogWriter, LogWriterType } from "@libs/logWriter";
+import { DummyLogWriter, LogWriter, LogWriterType } from "@libs/logWriter";
 import { getCurrentDate, getCurrentDateISOString, parseDate, parseDateWithFormat } from "@shared/dateHelpers";
 import { defaultDateFormat } from "@shared/defaultConstants";
 import { FormationFormData, FormationLegalType, formationApiDateFormat } from "@shared/formationData";
@@ -33,6 +33,8 @@ import { UserData } from "@shared/userData";
 jest.mock("axios");
 jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
+
+const DEBUG = Boolean(process.env.DEBUG ?? false);
 
 const generateApiResponse = (overrides: Partial<ApiResponse>): ApiResponse => {
   return {
@@ -79,7 +81,7 @@ describe("ApiFormationClient", () => {
     logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
     client = ApiFormationClient(
       { account: "12345", key: "abcdef", baseUrl: "example.com/formation" },
-      logger
+      DEBUG ? logger : DummyLogWriter
     );
   });
 
@@ -235,7 +237,7 @@ describe("ApiFormationClient", () => {
               ContactPhoneNumber: formationFormData.contactPhoneNumber,
             },
           },
-          { headers: { "Content-Type": "application/json" } }
+          { headers: { "Content-Type": "text/plain" } }
         );
       });
 
@@ -366,7 +368,7 @@ describe("ApiFormationClient", () => {
               ContactPhoneNumber: formationFormData.contactPhoneNumber,
             },
           },
-          { headers: { "Content-Type": "application/json" } }
+          { headers: { "Content-Type": "text/plain" } }
         );
       });
     });
@@ -544,7 +546,7 @@ describe("ApiFormationClient", () => {
               ContactPhoneNumber: formationFormData.contactPhoneNumber,
             },
           },
-          { headers: { "Content-Type": "application/json" } }
+          { headers: { "Content-Type": "text/plain" } }
         );
       });
 
@@ -905,7 +907,7 @@ describe("ApiFormationClient", () => {
               ContactPhoneNumber: formationFormData.contactPhoneNumber,
             },
           },
-          { headers: { "Content-Type": "application/json" } }
+          { headers: { "Content-Type": "text/plain" } }
         );
       });
 
@@ -1031,7 +1033,7 @@ describe("ApiFormationClient", () => {
               ContactPhoneNumber: formationFormData.contactPhoneNumber,
             },
           },
-          { headers: { "Content-Type": "application/json" } }
+          { headers: { "Content-Type": "text/plain" } }
         );
       });
     });
@@ -1219,7 +1221,7 @@ describe("ApiFormationClient", () => {
               ContactPhoneNumber: formationFormData.contactPhoneNumber,
             },
           },
-          { headers: { "Content-Type": "application/json" } }
+          { headers: { "Content-Type": "text/plain" } }
         );
       });
     });
@@ -1387,7 +1389,7 @@ describe("ApiFormationClient", () => {
               ContactPhoneNumber: formationFormData.contactPhoneNumber,
             },
           },
-          { headers: { "Content-Type": "application/json" } }
+          { headers: { "Content-Type": "text/plain" } }
         );
       });
 

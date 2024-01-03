@@ -14,6 +14,18 @@ const GetId = (): string => {
   return randomUUID();
 };
 
+export const DummyLogWriter: LogWriterType = {
+  LogError: () => {
+    return;
+  },
+  LogInfo: () => {
+    return;
+  },
+  GetId: () => {
+    return "";
+  },
+};
+
 export const LogWriter = (groupName: string, logStream: string, region?: string): LogWriterType => {
   const logger = winston.add(
     new WinstonCloudWatch({

@@ -43,7 +43,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
     return axios
       .post(`${config.baseUrl}/PrepareFiling`, postBody, {
         headers: {
-          "Content-Type": foreignGoodStandingFile ? "text/plain" : "application/json",
+          "Content-Type": "text/plain",
         },
       })
       .then((response) => {
