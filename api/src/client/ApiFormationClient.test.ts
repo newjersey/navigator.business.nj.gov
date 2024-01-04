@@ -36,6 +36,8 @@ const mockAxios = axios as jest.Mocked<typeof axios>;
 
 const DEBUG = Boolean(process.env.DEBUG ?? false);
 
+process.env.FEATURE_FORMATION_CONTENT_TYPE_PLAIN_ONLY = "true";
+
 const generateApiResponse = (overrides: Partial<ApiResponse>): ApiResponse => {
   return {
     Success: true,
