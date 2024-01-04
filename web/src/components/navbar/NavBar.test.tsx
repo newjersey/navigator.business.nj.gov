@@ -204,6 +204,21 @@ describe("<NavBar />", () => {
         expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
         expect(screen.queryByText(Config.navigationDefaults.registerButton)).not.toBeInTheDocument();
       });
+
+      it("does not render nav menu for an onboarding authenticated user", async () => {
+        setLargeScreen(false);
+        render(
+          withAuth(<NavBar landingPage={false} showSidebar={false} />, {
+            isAuthenticated: IsAuthenticated.TRUE,
+          })
+        );
+
+        useMockRouter({ pathname: ROUTES.onboarding });
+
+        await waitFor(() => {
+          expect(screen.queryByTestId("nav-menu-open")).not.toBeInTheDocument();
+        });
+      });
     });
   });
 
