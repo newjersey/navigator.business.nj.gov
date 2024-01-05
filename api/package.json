@@ -71,7 +71,7 @@
     "@types/lodash": "4.14.202",
     "@types/node": "16.18.68",
     "@types/simple-oauth2": "5.0.7",
-    "@types/supertest": "2.0.16",
+    "@types/supertest": "6.0.2",
     "@types/webpack-node-externals": "3.0.4",
     "@types/xml2js": "0.4.14",
     "@typescript-eslint/eslint-plugin": "6.7.2",
