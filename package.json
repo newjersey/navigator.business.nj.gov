@@ -5,25 +5,25 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "build": "yarn verify:node && yarn workspaces foreach -ptvi run build",
+    "build": "yarn verify:node && yarn workspaces foreach -Aptvi run build",
     "build:clean": "yarn clean && yarn build",
-    "clean": "yarn workspaces foreach -v run clean",
+    "clean": "yarn workspaces foreach -Av run clean",
     "cms:proxy": "yarn dlx netlify-cms-proxy-server",
-    "dependency-check": "yarn workspaces foreach -v run dependency-check",
+    "dependency-check": "yarn workspaces foreach -Av run dependency-check",
     "invokeNewsletter": "yarn workspace @businessnjgovnavigator/api invokeNewsletter",
-    "lint": "yarn workspaces foreach run lint",
-    "lint:fix": "yarn workspaces foreach run lint:fix",
+    "lint": "yarn workspaces foreach -A run lint",
+    "lint:fix": "yarn workspaces foreach -A run lint:fix",
     "lint:staged": "lint-staged",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "prettier --check . --ignore-path=./.eslintignore",
-    "start:dev": "yarn workspaces foreach -ptvi run dev",
-    "spellcheck": "yarn workspaces foreach -v run spellcheck",
+    "start:dev": "yarn workspaces foreach -Aptvi run dev",
+    "spellcheck": "yarn workspaces foreach -Av run spellcheck",
     "sync:deps": "yarnw-sync-deps --fix",
     "test": "jest",
     "test:ci": "jest --colors --runInBand --ci",
     "test:coverage": "jest --config jest.coverage.ts",
     "test:python": "python -m unittest discover -b -s content/scripts -p \"test_*.py\" && python -m unittest discover -b -s scripts -p \"test_*.py\"",
-    "typecheck": "yarn workspaces foreach -v run typecheck",
+    "typecheck": "yarn workspaces foreach -Av run typecheck",
     "verify:node": "check-node-version --node $(cat .nvmrc) --npm 10.2.3"
   },
   "dependencies": {
@@ -286,7 +286,7 @@
       "@semantic-release/git"
     ]
   },
-  "packageManager": "yarn@3.7.0",
+  "packageManager": "yarn@4.0.2",
   "resolutions": {
     "trim@0.0.1": "1.0.1",
     "postcss": "8.4.32",
