@@ -17,7 +17,7 @@
     "endOfLine": "auto"
   },
   "devDependencies": {
-    "@types/node": "16.18.68",
+    "@types/node": "16.18.69",
     "cross-env": "7.0.3",
     "cspell": "8.2.3",
     "prettier": "2.8.8",
