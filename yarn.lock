@@ -4027,7 +4027,7 @@ __metadata:
     "@businessnjgovnavigator/shared": "*"
     "@jest/types": 29.6.3
     "@serverless/typescript": 3.38.0
-    "@smithy/node-http-handler": 2.2.1
+    "@smithy/node-http-handler": 2.2.2
     "@types/cors": 2.8.17
     "@types/dedent": 0.7.2
     "@types/express": 4.17.21
@@ -4144,7 +4144,7 @@ __metadata:
     "@semantic-release/changelog": 6.0.3
     "@semantic-release/git": 10.0.1
     "@serverless/typescript": 3.38.0
-    "@smithy/node-http-handler": 2.2.1
+    "@smithy/node-http-handler": 2.2.2
     "@storybook/addon-a11y": 7.6.7
     "@storybook/addon-actions": 7.6.7
     "@storybook/addon-designs": 7.0.7
@@ -8597,13 +8597,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/abort-controller@npm:^2.0.15":
-  version: 2.0.15
-  resolution: "@smithy/abort-controller@npm:2.0.15"
+"@smithy/abort-controller@npm:^2.0.15, @smithy/abort-controller@npm:^2.0.16":
+  version: 2.0.16
+  resolution: "@smithy/abort-controller@npm:2.0.16"
   dependencies:
-    "@smithy/types": ^2.7.0
+    "@smithy/types": ^2.8.0
     tslib: ^2.5.0
-  checksum: d852b20e3efafe6c48d29a652147c7a5902ef553d59713e21800db0ae306486303a6f474011165758bd704bdf8fa779fdeadc8c4938501adade0664775e0c007
+  checksum: f91824aa8c8c39223b2d52c88fe123b36e5823acf8ce9316ce3b38245202cc6d31e1c172ebfec9fda47466d0b31f1df1add7e64d7161695fd27f96992037b18f
   languageName: node
   linkType: hard
 
@@ -8876,16 +8876,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/node-http-handler@npm:2.2.1, @smithy/node-http-handler@npm:^2.1.3, @smithy/node-http-handler@npm:^2.2.1":
-  version: 2.2.1
-  resolution: "@smithy/node-http-handler@npm:2.2.1"
+"@smithy/node-http-handler@npm:2.2.2, @smithy/node-http-handler@npm:^2.1.3, @smithy/node-http-handler@npm:^2.2.1":
+  version: 2.2.2
+  resolution: "@smithy/node-http-handler@npm:2.2.2"
   dependencies:
-    "@smithy/abort-controller": ^2.0.15
-    "@smithy/protocol-http": ^3.0.11
-    "@smithy/querystring-builder": ^2.0.15
-    "@smithy/types": ^2.7.0
+    "@smithy/abort-controller": ^2.0.16
+    "@smithy/protocol-http": ^3.0.12
+    "@smithy/querystring-builder": ^2.0.16
+    "@smithy/types": ^2.8.0
     tslib: ^2.5.0
-  checksum: d081de68b73afd6ca63a87cc6112266db372a0ff075e488c6a38a868babdd0e44de716b284936b1176e60700d2842d9436db133c151a8e4ffc9ee36d658e03cc
+  checksum: 891532bfb6c1d3f3aed710bf8ed922706270effc8d8d00d4133e6271f58525ed9ccf7d03e16c0baf7a4e8b2768d5e38b92beca23f9b6aac8e02e8bc7c6769a81
   languageName: node
   linkType: hard
 
@@ -8899,24 +8899,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/protocol-http@npm:^3.0.11, @smithy/protocol-http@npm:^3.0.3":
-  version: 3.0.11
-  resolution: "@smithy/protocol-http@npm:3.0.11"
+"@smithy/protocol-http@npm:^3.0.11, @smithy/protocol-http@npm:^3.0.12, @smithy/protocol-http@npm:^3.0.3":
+  version: 3.0.12
+  resolution: "@smithy/protocol-http@npm:3.0.12"
   dependencies:
-    "@smithy/types": ^2.7.0
+    "@smithy/types": ^2.8.0
     tslib: ^2.5.0
-  checksum: 35215c2dd1ba928fcd043ec5e8f54ec29b44ab65774ef5a508be2d963a8dca5daf188448c896dba2e2c1167cbe5d5ac7ff221fd307119af47fb2ccba8bdcf994
+  checksum: 38899820a59ebcdf4784b16d6a02fa630441a76857f204e479bd8c59ec7c578e5107e995fc0b1b9dee444b9610bd9bdf00ccf7e1c806ff463c7e9402660748e1
   languageName: node
   linkType: hard
 
-"@smithy/querystring-builder@npm:^2.0.15, @smithy/querystring-builder@npm:^2.0.7":
-  version: 2.0.15
-  resolution: "@smithy/querystring-builder@npm:2.0.15"
+"@smithy/querystring-builder@npm:^2.0.15, @smithy/querystring-builder@npm:^2.0.16, @smithy/querystring-builder@npm:^2.0.7":
+  version: 2.0.16
+  resolution: "@smithy/querystring-builder@npm:2.0.16"
   dependencies:
-    "@smithy/types": ^2.7.0
+    "@smithy/types": ^2.8.0
     "@smithy/util-uri-escape": ^2.0.0
     tslib: ^2.5.0
-  checksum: 849ab4191913194de120bea443511bdded1af601e61bcf9babdfaa1d1d4ce66381aa641a8e67fd6329cc6ed9ce90c3f31d23bdd032b3cd9b55690d9d210d1012
+  checksum: d88983a2088dd2d00dced8e122ee20c278edf00f80ff79485187efb178d3c1a00e679f5059c605d914d646dac37e35fd458bbc20a56da0e2ac6e168dc2a8f91b
   languageName: node
   linkType: hard
 
@@ -8988,12 +8988,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/types@npm:^2.3.1, @smithy/types@npm:^2.7.0":
-  version: 2.7.0
-  resolution: "@smithy/types@npm:2.7.0"
+"@smithy/types@npm:^2.3.1, @smithy/types@npm:^2.7.0, @smithy/types@npm:^2.8.0":
+  version: 2.8.0
+  resolution: "@smithy/types@npm:2.8.0"
   dependencies:
     tslib: ^2.5.0
-  checksum: f3edb2a281e69a7dc471b62fb34237fec44b37617d1b8f5c1bc4b6c410b03416f76eabc6ead1fb63cb18742890d9115226eaa7da055fd39f0c24754ed2fd56a7
+  checksum: c0c85b1422f982635c8b5c6477f5d2b28a5afeaf21f6e877dc1f96e401673632b5abaf3b49f800f1859119c498151e5a59e0361c8f56945f79642c486ac68af8
   languageName: node
   linkType: hard
 
