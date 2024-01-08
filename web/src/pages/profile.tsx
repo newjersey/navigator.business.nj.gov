@@ -748,26 +748,26 @@ const ProfilePage = (props: Props): ReactElement => {
                   <UserDataErrorAlert />
                 </SingleColumnContainer>
                 <div className="margin-top-6 desktop:margin-top-0">
-                  <SidebarPageLayout
-                    divider={false}
-                    outlineBox={false}
-                    stackNav={true}
-                    navChildren={
-                      <ProfileTabNav
-                        business={business}
-                        businessPersona={businessPersona}
-                        activeTab={profileTab}
-                        setProfileTab={(tab: ProfileTabs): void => {
-                          setProfileTab(tab);
-                        }}
-                      />
-                    }
-                  >
-                    {business === undefined ? (
-                      <div className="padding-top-0 desktop:padding-top-6 padding-bottom-15">
-                        <CircularIndicator />
-                      </div>
-                    ) : (
+                  {business === undefined ? (
+                    <div className="padding-top-0 desktop:padding-top-6 padding-bottom-15">
+                      <CircularIndicator />
+                    </div>
+                  ) : (
+                    <SidebarPageLayout
+                      divider={false}
+                      outlineBox={false}
+                      stackNav={true}
+                      navChildren={
+                        <ProfileTabNav
+                          business={business}
+                          businessPersona={businessPersona}
+                          activeTab={profileTab}
+                          setProfileTab={(tab: ProfileTabs): void => {
+                            setProfileTab(tab);
+                          }}
+                        />
+                      }
+                    >
                       <>
                         <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
                           {getElements()}
@@ -801,8 +801,8 @@ const ProfilePage = (props: Props): ReactElement => {
                           <DevOnlyResetUserDataButton />
                         </form>
                       </>
-                    )}
-                  </SidebarPageLayout>
+                    </SidebarPageLayout>
+                  )}
                 </div>
               </div>
             </main>

@@ -15,7 +15,7 @@ export const ProfileTabHeader = (props: Props): ReactElement => {
       case "info":
         return Config.profileDefaults.default.profileTabInfoTitle;
       case "numbers":
-        return Config.profileDefaults.default.profileTabRefTitle;
+        return Config.profileDefaults.default.profileTabNumbersTitle;
       case "documents":
         return Config.profileDefaults.default.profileTabDocsTitle;
       case "notes":
