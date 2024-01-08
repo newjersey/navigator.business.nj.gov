@@ -84,7 +84,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
 
   const handleSearchBoxChange = (event: ChangeEvent<HTMLInputElement>): void => {
     props.handleChange && props.handleChange();
-    setSearchText(event.target.value);
+    setSearchText(event.target.value.trimEnd());
   };
 
   const handleIndustry = (event: ChangeEvent<unknown>, value: Industry | null): void => {
