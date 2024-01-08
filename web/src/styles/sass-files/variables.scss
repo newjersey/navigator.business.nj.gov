@@ -5,6 +5,13 @@ $sm: 40em; //tablet + up (640px)
 $md: 50em; //big tablet (800px)
 $lg: 64em; //desktop and up (1024px)
 
+$drop-shadow-xs: 0px, 4px, 8px, 0.1;
+$drop-shadow-xs-darker: 4px, 4px, 8px, 0.25;
+$drop-shadow-sm: 0px, 6px, 12px, 0.1;
+$drop-shadow-md: 0px, 8px, 16px, 0.1;
+$drop-shadow-lg: 0px, 10px, 20px, 0.1;
+$drop-shadow-xl: 0px, 12px, 24px, 0.1;
+
 $base-extra-light: #f8f8f8;
 $base-lightest: #f0f0f0;
 $base-lighter: #e6e6e6;
