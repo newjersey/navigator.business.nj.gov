@@ -17,6 +17,6 @@ You need to reactivate your electrical contracting business permit if it has bee
 * Applicable fees paid
 
 
-> O**nce completed, you will have**:
+> **Once completed, you will have**:
 >
 > * An electrical contracting business permit
