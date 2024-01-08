@@ -72,12 +72,14 @@ export const FormationDateModal = (props: Props): ReactElement => {
         <ModalTwoButton
           isOpen={props.isOpen}
           close={props.close}
-          title={Config.formationDateModal.header}
+          title={Config.formationDateModal.header} //Find Your Annual Report Deadline
           primaryButtonText={Config.formationDateModal.saveButtonText}
           primaryButtonOnClick={onSubmit}
           secondaryButtonText={Config.formationDateModal.cancelButtonText}
         >
           <div className="margin-y-3">
+            {/* To see your annual report due date, please provide your Business's
+effective date (the date you formed your business) below. */}
             <Content>{Config.formationDateModal.description}</Content>
           </div>
           <hr className="margin-y-4" />

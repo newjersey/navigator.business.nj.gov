@@ -72,42 +72,44 @@ export const DateOfFormation = (props: Props): ReactElement => {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Picker
-        views={["year", "month"]}
-        inputFormat={"MM/YYYY"}
-        disableMaskedInput={false}
-        mask={"__/____"}
-        disableFuture={!props.futureAllowed}
-        openTo="year"
-        disabled={props.disabled}
-        maxDate={props.futureAllowed ? getCurrentDate().add(100, "years") : getCurrentDate()}
-        value={dateValue}
-        onClose={onValidation}
-        onChange={handleChange}
-        onError={(hasError: string | null): void => {
-          setDateError(!!hasError);
-        }}
-        renderInput={(params: TextFieldProps): ReactElement => {
-          return (
-            <GenericTextField
-              inputWidth={props.inputWidth || "reduced"}
-              fieldName={fieldName}
-              onValidation={onValidation}
-              validationText={errorText}
-              error={isFormFieldInvalid}
-              inputProps={params.InputProps}
-              fieldOptions={{
-                ...params,
-                inputProps: {
-                  ...params.inputProps,
-                },
-                error: isFormFieldInvalid,
-                sx: { svg: { fill: "#4b7600" } },
-              }}
-            />
-          );
-        }}
-      />
+      <div onBlur={onValidation}>
+        <Picker
+          views={["year", "month"]}
+          inputFormat={"MM/YYYY"}
+          disableMaskedInput={false}
+          mask={"__/____"}
+          disableFuture={!props.futureAllowed}
+          openTo="year"
+          disabled={props.disabled}
+          maxDate={props.futureAllowed ? getCurrentDate().add(100, "years") : getCurrentDate()}
+          value={dateValue}
+          onClose={onValidation}
+          onChange={handleChange}
+          onError={(hasError: string | null): void => {
+            setDateError(!!hasError);
+          }}
+          renderInput={(params: TextFieldProps): ReactElement => {
+            return (
+              <GenericTextField
+                inputWidth={props.inputWidth || "reduced"}
+                fieldName={fieldName}
+                onValidation={onValidation}
+                validationText={errorText}
+                error={isFormFieldInvalid}
+                inputProps={params.InputProps}
+                fieldOptions={{
+                  ...params,
+                  inputProps: {
+                    ...params.inputProps,
+                  },
+                  error: isFormFieldInvalid,
+                  sx: { svg: { fill: "#4b7600" } },
+                }}
+              />
+            );
+          }}
+        />
+      </div>
     </LocalizationProvider>
   );
 };
