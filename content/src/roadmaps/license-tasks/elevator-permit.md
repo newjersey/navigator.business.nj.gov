@@ -21,7 +21,7 @@ summaryDescriptionMd: >-
 industryId:
   - generic
 agencyId: nj-community-affairs
-agencyAdditionalContext: Elevator Safety Unit
+agencyAdditionalContext: Elevator Safety Unit or your local Building/Construction Department
 divisionPhone: (609) 984-7833
 webflowType: object-vehicle
 ---
