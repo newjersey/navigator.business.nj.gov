@@ -2309,7 +2309,7 @@ describe("<BusinessFormationPaginator />", () => {
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
     });
 
-    it("defaults to first formation step we go beyond page index allowed", () => {
+    it("defaults to first formation step when we go above 4 for page index", () => {
       const profileData = generateFormationProfileData({});
       const formationData = generateFormationData({
         lastVisitedPageIndex: BusinessFormationStepsConfiguration.length,
@@ -2320,7 +2320,7 @@ describe("<BusinessFormationPaginator />", () => {
       expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
     });
 
-    it("defauts to first formation step when we go below 0 for page index's", () => {
+    it("defaults to first formation step when we go below 0 for page index", () => {
       const profileData = generateFormationProfileData({});
       const formationData = generateFormationData({ lastVisitedPageIndex: -1 });
 

@@ -1,10 +1,11 @@
 import { Content } from "@/components/Content";
-import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { CtaContainer } from "@/components/njwds-extended/cta/CtaContainer";
 import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
+import { BusinessFormationStepsConfiguration } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { DbaFormationPaginator } from "@/components/tasks/business-formation/DbaFormationPaginator";
 import { NexusFormationStepsConfiguration } from "@/components/tasks/business-formation/NexusFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -13,7 +14,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import analytics from "@/lib/utils/analytics";
-import { openInNewTab, templateEval } from "@/lib/utils/helpers";
+import { openInNewTab, templateEval, useMountEffect } from "@/lib/utils/helpers";
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useContext } from "react";
 
@@ -21,6 +22,18 @@ export const NexusFormationFlow = (): ReactElement => {
   const { business } = useUserData();
   const { state, setStepIndex } = useContext(BusinessFormationContext);
   const { Config } = useConfig();
+
+  useMountEffect(() => {
+    if (!business) return;
+    if (
+      business.formationData.lastVisitedPageIndex > BusinessFormationStepsConfiguration.length - 1 ||
+      business.formationData.lastVisitedPageIndex < 0
+    ) {
+      setStepIndex(0);
+    } else {
+      setStepIndex(business.formationData.lastVisitedPageIndex);
+    }
+  });
 
   const addNaicsCodeData = (contentMd: string): string => {
     const naicsCode = business?.profileData.naicsCode || "";
