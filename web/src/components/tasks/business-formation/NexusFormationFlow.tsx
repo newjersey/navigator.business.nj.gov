@@ -25,13 +25,12 @@ export const NexusFormationFlow = (): ReactElement => {
 
   useMountEffect(() => {
     if (!business) return;
-    if (
-      business.formationData.lastVisitedPageIndex > BusinessFormationStepsConfiguration.length - 1 ||
-      business.formationData.lastVisitedPageIndex < 0
-    ) {
+    const { lastVisitedPageIndex } = business.formationData;
+    const largestValidPageIndex = BusinessFormationStepsConfiguration.length - 1;
+    if (lastVisitedPageIndex > largestValidPageIndex || lastVisitedPageIndex < 0) {
       setStepIndex(0);
     } else {
-      setStepIndex(business.formationData.lastVisitedPageIndex);
+      setStepIndex(lastVisitedPageIndex);
     }
   });
 
