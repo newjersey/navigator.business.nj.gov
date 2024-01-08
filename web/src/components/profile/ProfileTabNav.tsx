@@ -37,20 +37,20 @@ export const ProfileTabNav = (props: Props): ReactElement => {
           {Config.profileDefaults.default.pageTitle}
         </Heading>
       </div>
-      <ProfileTab {...props} tab={infoTab}>
-        {Config.profileDefaults.default.profileTabInfoTitle}
-      </ProfileTab>
-      <ProfileTab {...props} tab={numbersTab}>
-        {Config.profileDefaults.default.profileTabNumbersTitle}
-      </ProfileTab>
+      <ProfileTab {...props} tab={infoTab} tabText={Config.profileDefaults.default.profileTabInfoTitle} />
+      <ProfileTab
+        {...props}
+        tab={numbersTab}
+        tabText={Config.profileDefaults.default.profileTabNumbersTitle}
+      />
       {shouldShowDocuments && (
-        <ProfileTab {...props} tab={documentsTab}>
-          {Config.profileDefaults.default.profileTabDocsTitle}
-        </ProfileTab>
+        <ProfileTab
+          {...props}
+          tab={documentsTab}
+          tabText={Config.profileDefaults.default.profileTabDocsTitle}
+        />
       )}
-      <ProfileTab {...props} tab={notesTab}>
-        {Config.profileDefaults.default.profileTabNoteTitle}
-      </ProfileTab>
+      <ProfileTab {...props} tab={notesTab} tabText={Config.profileDefaults.default.profileTabNoteTitle} />
     </div>
   );
 };

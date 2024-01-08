@@ -6,7 +6,7 @@ interface Props {
   tab: ProfileTabs;
   activeTab: ProfileTabs;
   setProfileTab: (profileTab: ProfileTabs) => void;
-  children: string;
+  tabText: string;
 }
 
 export const ProfileTab = (props: Props): ReactElement => {
@@ -17,7 +17,7 @@ export const ProfileTab = (props: Props): ReactElement => {
       data-testid={props.tab}
       onClick={(): void => props.setProfileTab(props.tab)}
     >
-      <div className={`${props.activeTab === props.tab ? "selected" : ""} tal`}>{props.children}</div>
+      <div className={`${props.activeTab === props.tab ? "selected" : ""} tal`}>{props.tabText}</div>
       <Icon className="usa-icon--size-3 margin-x-1">navigate_next</Icon>
     </button>
   );
