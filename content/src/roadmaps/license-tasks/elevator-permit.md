@@ -5,7 +5,7 @@ notesMd: "Draft doc:
 filename: elevator-permit
 displayname: elevator-permit
 urlSlug: elevator-permit
-name: Obtain an Elevator Permit, if Applicable
+name: Obtain an Elevator Permit
 webflowName: Elevator Permit
 summaryDescriptionMd: >-
   Commercial property owners need a permit to install or do work on elevators,
