@@ -4901,7 +4901,7 @@ collections:
                       name: noteForBusinessesFormedOutsideNavigator,
                       widget: string,
                     }
-                  - { label: Reference Numbers Tab Title, name: profileTabRefTitle, widget: string }
+                  - { label: Reference Numbers Tab Title, name: profileTabNumbersTitle, widget: string }
                   - { label: Docs Tab Title, name: profileTabDocsTitle, widget: string }
                   - { label: Notes Tab Title, name: profileTabNoteTitle, widget: string }
                   - { label: Formation Doc Label, name: formationDocFileTitle, widget: string }
