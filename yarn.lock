@@ -4131,7 +4131,6 @@ __metadata:
     "@emotion/react": 11.11.3
     "@emotion/styled": 11.11.0
     "@jest/types": 29.6.3
-    "@mdx-js/react": 2.3.0
     "@mui/icons-material": ^5.15.1
     "@mui/lab": 5.0.0-alpha.159
     "@mui/material": 5.15.3
@@ -4351,7 +4350,6 @@ __metadata:
     "@emotion/react": 11.11.3
     "@emotion/styled": 11.11.0
     "@jest/types": 29.6.3
-    "@mdx-js/react": 2.3.0
     "@mui/icons-material": ^5.15.1
     "@mui/lab": 5.0.0-alpha.159
     "@mui/material": 5.15.3
@@ -6676,7 +6674,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/react@npm:2.3.0, @mdx-js/react@npm:^2.1.5":
+"@mdx-js/react@npm:^2.1.5":
   version: 2.3.0
   resolution: "@mdx-js/react@npm:2.3.0"
   dependencies:
