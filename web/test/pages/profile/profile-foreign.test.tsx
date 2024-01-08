@@ -68,7 +68,9 @@ describe("profile-foreign", () => {
 
   it("does not display the documents tab", () => {
     renderPage({ business: setupBusiness });
-    expect(screen.getAllByText(Config.profileDefaults.default.profileTabRefTitle).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(Config.profileDefaults.default.profileTabNumbersTitle).length).toBeGreaterThan(
+      0
+    );
     expect(screen.getAllByText(Config.profileDefaults.default.profileTabNoteTitle).length).toBeGreaterThan(0);
     expect(screen.getAllByText(Config.profileDefaults.default.profileTabInfoTitle).length).toBeGreaterThan(0);
     expect(screen.queryByText(Config.profileDefaults.default.profileTabDocsTitle)).not.toBeInTheDocument();

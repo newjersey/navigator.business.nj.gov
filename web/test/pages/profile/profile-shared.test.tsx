@@ -129,7 +129,6 @@ describe("profile - shared", () => {
 
     expect(screen.getByText("Loading", { exact: false })).toBeInTheDocument();
     expect(screen.queryByText(Config.profileDefaults.default.pageTitle)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.profileDefaults.default.pageTitle)).not.toBeInTheDocument();
   });
 
   it("shows home-based business question with default description when applicable to industry", () => {
