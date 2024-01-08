@@ -128,7 +128,12 @@
 }
 
 .btn-white {
+  &:hover {
+    @include addDropShadow($drop-shadow-md);
+  }
+
   background-color: $white !important;
+
   &:active {
     background-color: $base-lighter !important;
   }
@@ -194,7 +199,9 @@
   border: 0.125rem solid $secondary-lighter;
   border-radius: 0.625rem;
   cursor: pointer;
-  @extend .hover\:drop-shadow-md;
+  &:hover {
+    @include addDropShadow($drop-shadow-md);
+  }
   &:active {
     background-color: $secondary-lighter;
   }

@@ -33,7 +33,9 @@ export const LandingPageActionTile = (props: Props): ReactElement => {
   return (
     <div className={props.className} ref={props.reference}>
       <button
-        className={`${props.isPrimary ? "landing-page-tile" : "landing-page-secondary-tile"} margin-1`}
+        className={`${
+          props.isPrimary ? "landing-page-tile" : "landing-page-secondary-tile"
+        } margin-1 margin-bottom-3`}
         data-testid={props.dataTestId}
         onClick={props.onClick}
         tabIndex={props.isActive ? undefined : -1}
