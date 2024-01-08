@@ -5,7 +5,7 @@ notesMd: "Draft doc:
 filename: elevator-registration
 displayname: elevator-registration
 urlSlug: elevator-registration
-name: Register Your Elevator, if Applicable
+name: Register Your Elevator
 webflowName: Elevator Registration
 summaryDescriptionMd: Commercial property owners need to register elevators,
   moving walks, dumbwaiters, and lifts with the State and pay a registration
