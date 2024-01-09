@@ -4,7 +4,7 @@ notesMd: "Draft:
   RE/edit"
 filename: hic-registration-reinstatement
 name: Apply to Reinstate Your Home Improvement Contractor Registration
-icon: loop.svg
+icon: update-purple.svg
 urlSlug: hic-registration-reinstatement
 callToActionText: Reinstate My HIC Registration
 callToActionLink: https://www.njconsumeraffairs.gov/hic/Pages/applications.aspx

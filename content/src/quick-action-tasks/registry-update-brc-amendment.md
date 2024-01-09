@@ -4,7 +4,7 @@ notesMd: "Draft:
   ic/edit#heading=h.5wd6u8mmd0hc"
 filename: registry-update-brc-amendment
 name: Update Your Business Registration Certificate and/or Registry Account
-icon: loop.svg
+icon: update-purple.svg
 urlSlug: registry-update-brc-amendment
 ---
 

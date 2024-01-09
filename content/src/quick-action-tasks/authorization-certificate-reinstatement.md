@@ -1,7 +1,7 @@
 ---
 filename: authorization-certificate-reinstatement
 name: Apply to Reinstate Your Application for a Certificate of Authorization
-icon: loop.svg
+icon: update-purple.svg
 urlSlug: authorization-certificate-reinstatement
 callToActionText: " Reinstate My Application for a Certificate of Authorization "
 callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
