@@ -82,8 +82,8 @@ export const PageFooter = (): ReactElement => {
               >
                 <Icon className="footer-social-media-icon margin-top-1">github</Icon>
               </a>
-              <a href={Config.footer.twitterLink} target="_blank" rel="noreferrer" aria-label="Twitter">
-                <Icon className="footer-social-media-icon margin-top-1">twitter</Icon>
+              <a href={Config.footer.facebookLink} target="_blank" rel="noreferrer" aria-label="Facebook">
+                <Icon className="footer-social-media-icon margin-top-1">facebook</Icon>
               </a>
             </div>
           </div>
