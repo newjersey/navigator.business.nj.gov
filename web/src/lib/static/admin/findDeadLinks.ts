@@ -293,7 +293,7 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
               if (
                 result.broken &&
                 !isTemplateLink(result.url.original) &&
-                result.url.original !== "https://twitter.com/i/lists/1148625562895826945"
+                result.url.original !== "https://www.facebook.com/BusinessNJgov"
               ) {
                 deadLinks[page].push(result.url.original);
               }

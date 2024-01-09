@@ -3647,7 +3647,7 @@ collections:
               - { label: Credit Link, name: creditLink, widget: string }
               - { label: Office External Text, name: officeExternalText, widget: string }
               - { label: Github Link, name: gitHubLink, widget: string }
-              - { label: Twitter Link, name: twitterLink, widget: string }
+              - { label: Facebook Link, name: facebookLink, widget: string }
           - label: Report An Issue Bar
             name: reportAnIssueBar
             collapsed: true
