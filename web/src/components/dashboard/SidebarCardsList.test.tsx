@@ -97,6 +97,7 @@ describe("<SidebarCardsList />", () => {
         (foreignBusinessTypeId) => {
           const mockBusiness = generateBusiness({
             profileData: generateProfileData({
+              businessPersona: "FOREIGN",
               operatingPhase: "REMOTE_SELLER_WORKER",
               foreignBusinessTypeIds: [foreignBusinessTypeId],
             }),
@@ -116,6 +117,7 @@ describe("<SidebarCardsList />", () => {
           const mockBusiness = generateBusiness({
             profileData: generateProfileData({
               operatingPhase: "GUEST_MODE",
+              businessPersona: "FOREIGN",
               foreignBusinessTypeIds: [foreignBusinessTypeId],
             }),
           });

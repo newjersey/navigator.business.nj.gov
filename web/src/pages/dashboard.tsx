@@ -1,30 +1,35 @@
 import { CircularIndicator } from "@/components/CircularIndicator";
+import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuestion";
+import { Header } from "@/components/Header";
+import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
+import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { QuickActionTile } from "@/components/dashboard/QuickActionTile";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
 import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout";
 import { HomeBasedBusiness } from "@/components/data-fields/HomeBasedBusiness";
-import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuestion";
 import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
-import { Header } from "@/components/Header";
 import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
-import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
+import { MediaQueries } from "@/lib/PageSizes";
 import { usePageWithNeedsAccountSnackbar } from "@/lib/auth/usePageWithNeedsAccountSnackbar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useQueryControlledAlert } from "@/lib/data-hooks/useQueryControlledAlert";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import {
+  isNexusBusiness,
+  isOwningBusiness,
+  isStartingBusiness,
+} from "@/lib/domain-logic/businessPersonaHelpers";
 import { isConstructionSector } from "@/lib/domain-logic/isConstructionSector";
 import { isGenericIndustry } from "@/lib/domain-logic/isGenericIndustry";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { isHomeContractorIndustry } from "@/lib/domain-logic/isHomeContractorIndustry";
 import { QUERIES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
-import { MediaQueries } from "@/lib/PageSizes";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFundings } from "@/lib/static/loadFundings";
@@ -41,11 +46,7 @@ import {
   RoadmapDisplayContent,
 } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import {
-  determineForeignBusinessType,
-  LookupOperatingPhaseById,
-  Municipality,
-} from "@businessnjgovnavigator/shared";
+import { LookupOperatingPhaseById, Municipality } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -179,18 +180,18 @@ const DashboardPage = (props: Props): ReactElement => {
     let renderStateContractingExternalLink;
     let renderHicStateContractingTask = false;
 
-    if (business?.profileData.businessPersona === "OWNING") {
+    if (isOwningBusiness(business)) {
       renderStateContractingExternalLink = !isConstructionSector(business?.profileData.sectorId);
     }
 
-    if (business?.profileData.businessPersona !== "OWNING") {
+    if (!isOwningBusiness(business)) {
       renderStateContractingExternalLink =
         !isConstructionSector(business?.profileData.sectorId) &&
         !isHomeContractorIndustry(business?.profileData.industryId);
     }
 
     if (
-      business?.profileData.businessPersona === "STARTING" &&
+      isStartingBusiness(business) &&
       (isHomeContractorIndustry(business?.profileData.industryId) ||
         (isGenericIndustry(business?.profileData.industryId) &&
           isConstructionSector(business?.profileData.sectorId)))
@@ -198,16 +199,12 @@ const DashboardPage = (props: Props): ReactElement => {
       renderHicStateContractingTask = true;
     }
 
-    if (
-      business?.profileData.businessPersona === "OWNING" &&
-      isConstructionSector(business?.profileData.sectorId)
-    ) {
+    if (isOwningBusiness(business) && isConstructionSector(business?.profileData.sectorId)) {
       renderHicStateContractingTask = true;
     }
 
     if (
-      business?.profileData.foreignBusinessTypeIds &&
-      determineForeignBusinessType(business?.profileData.foreignBusinessTypeIds) === "NEXUS" &&
+      isNexusBusiness(business) &&
       ((isConstructionSector(business?.profileData.sectorId) &&
         isGenericIndustry(business?.profileData.industryId)) ||
         isHomeContractorIndustry(business?.profileData.industryId))
