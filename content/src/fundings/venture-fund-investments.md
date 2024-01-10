@@ -1,18 +1,23 @@
 ---
 filename: venture-fund-investments
-urlSlug: venture-fund-investments
 name: Venture Fund Investments
+urlSlug: venture-fund-investments
 id: venture-fund-investments
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: The New Jersey Economic Development Authority (NJEDA)
+  invests in venture capital funds active in New Jersey. Venture partners
+  leverage NJEDA investment to increase funds available for emerging innovative
+  companies to grow and create jobs in the State.
 callToActionLink: https://www.njeda.com/venturefunds/
 callToActionText: Learn more
 fundingType: loan
+programFrequency: ongoing
+status: rolling application
 programPurpose: Both
 agency:
   - njeda
 agencyContact: ""
-publishStageArchive: ""
-status: rolling application
-programFrequency: ongoing
 businessStage: operating
 employeesRequired: n/a
 homeBased: yes
@@ -22,12 +27,10 @@ county:
   - All
 sector:
   - technology
-openDate: ""
-dueDate: ""
-descriptionMd: The New Jersey Economic Development Authority (NJEDA) invests in venture capital funds active in New Jersey. Venture partners leverage NJEDA investment to increase funds available for emerging innovative companies to grow and create jobs in the State.
-summaryDescriptionMd: >-
-  The New Jersey Economic Development Authority (NJEDA) invests in venture capital funds active in New Jersey.
-  Venture partners leverage NJEDA investment to increase funds available for emerging innovative companies to
+publishStageArchive: ""
+descriptionMd: The New Jersey Economic Development Authority (NJEDA) invests in
+  venture capital funds active in New Jersey. Venture partners leverage NJEDA
+  investment to increase funds available for emerging innovative companies to
   grow and create jobs in the State.
 ---
 
@@ -35,6 +38,6 @@ summaryDescriptionMd: >-
 
 - Venture funds that are actively investing in New Jersey’s innovative industries
 
-> **Benefits**
+> ### Benefits
 >
 > Businesses receive investment capital commitments up to $10M.
