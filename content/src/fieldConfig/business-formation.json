@@ -186,9 +186,9 @@
       },
       "canGetDistribution": {
         "label": "Partnership Rights - Receive distributions",
-        "body": "Do limited partners have the right to receive distributions from a partner? (This can  include a return of all or any part of their partner's contributions).",
-        "reviewStepYes": "**Yes**, the limited partners have the right to receive distributions from a partner. (This can  include a return of all or any part of their partner's contributions).",
-        "reviewStepNo": "**No**, the limited partners do not have the right to receive distributions from a partner. (This can  include a return of all or any part of their partner's contributions)."
+        "body": "Do limited partners have the right to receive distributions from a partner? (This can include a return of all or any part of their partner's contributions).",
+        "reviewStepYes": "**Yes**, the limited partners have the right to receive distributions from a partner. (This can include a return of all or any part of their partner's contributions).",
+        "reviewStepNo": "**No**, the limited partners do not have the right to receive distributions from a partner. (This can include a return of all or any part of their partner's contributions)."
       },
       "addressLine2": {
         "label": "Address Line 2",
@@ -266,10 +266,10 @@
         "label": "Effective Date",
         "labelContextualInfo": "effective-date",
         "labelSecondaryText": "(mm/dd/yyyy)",
-        "errorFuture": "The business formation start date must be today or a future date in format MM/DD/YYYY.",
-        "errorToday": "The business formation start date must be today and in format MM/DD/YYYY.",
-        "error30Days": "The business formation start date must be today or a future date within 30 days in format MM/DD/YYYY.",
-        "error90Days": "The business formation start date must be today or a future date within 90 days in format MM/DD/YYYY."
+        "errorFuture": "The NJ business effective date must be today or a future date in format MM/DD/YYYY.",
+        "errorToday": "The NJ business effective date must be today and in format MM/DD/YYYY.",
+        "error30Days": "The NJ business effective date must be today or a future date within 30 days in format MM/DD/YYYY.",
+        "error90Days": "The NJ business effective date must be today or a future date within 90 days in format MM/DD/YYYY."
       },
       "businessSuffix": {
         "label": "Business Designator",
