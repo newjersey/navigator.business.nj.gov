@@ -1,18 +1,24 @@
 ---
 filename: dep-vehicle-charging
-urlSlug: vehicle-charging-grant
 name: "It Pays to Plug In: Electric Vehicle Workplace Charging Grant Program"
+urlSlug: vehicle-charging-grant
 id: dep-vehicle-charging
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: This program provides grants to offset the cost of
+  purchasing electric vehicle charging stations. The program expands New
+  Jersey’s growing network of electric vehicle infrastructure, allowing
+  residents, businesses, and government agencies to purchase and drive electric
+  vehicles.
 callToActionLink: https://www.nj.gov/dep/grantandloanprograms/aqes-evcharge.htm
 callToActionText: Learn More
 fundingType: grant
+programFrequency: ongoing
+status: first come, first serve
 programPurpose: In State
 agency:
   - njdep
 agencyContact: ""
-publishStageArchive: ""
-status: first come, first serve
-programFrequency: ongoing
 businessStage: both
 employeesRequired: n/a
 homeBased: yes
@@ -21,13 +27,11 @@ preferenceForOpportunityZone: no
 county:
   - All
 sector: []
-openDate: ""
-dueDate: ""
-descriptionMd: This program provides grants to offset the cost of purchasing electric vehicle charging stations. The program expands New Jersey’s growing network of electric vehicle infrastructure, allowing residents, businesses, and government agencies to purchase and drive electric vehicles.
-summaryDescriptionMd: >-
-  This program provides grants to offset the cost of purchasing electric vehicle charging stations. The
-  program expands New Jersey’s growing network of electric vehicle infrastructure, allowing residents,
-  businesses, and government agencies to purchase and drive electric vehicles.
+publishStageArchive: ""
+descriptionMd: This program provides grants to offset the cost of purchasing
+  electric vehicle charging stations. The program expands New Jersey’s growing
+  network of electric vehicle infrastructure, allowing residents, businesses,
+  and government agencies to purchase and drive electric vehicles.
 ---
 
 ## Eligibility
@@ -35,7 +39,7 @@ summaryDescriptionMd: >-
 - Public, workplaces, and multi-unit residential dwellings are eligible
 - Charging stations can't be placed in private residential dwellings
 
-> **Benefits:**
+> ### Benefits
 >
 > Businesses and others can be reimbursed for 100% of the costs if on government property and 80% of costs if on private property, up to a maximum of:
 >
