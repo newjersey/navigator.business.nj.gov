@@ -1,23 +1,22 @@
 ---
-displayname: zoning-cannabis
+summaryDescriptionMd: >-
+  To obtain a cannabis license, you need zoning approval and a letter of
+  resolution of support from your local government. The resolution of support is
+  proof that your local government approves and is in support of your cannabis
+  business. This letter is a requirement for your cannabis license application,
+  and it's used as evidence that you obtained your local government's approval.
+
+
+  :::infoAlert 
+   To complete this task, you must meet with your local clerk, planner, engineer, and zoning officer.
+  :::
 urlSlug: zoning-cannabis
 filename: zoning-cannabis
+displayname: zoning-cannabis
 name: Obtain Your Zoning Approval and Resolution of Support
 id: zoning-cannabis
 callToActionLink: ""
 callToActionText: ""
-summaryDescriptionMd: >-
-  To obtain a cannabis license, you need zoning approval and a letter of resolution of support from your local
-  government. The resolution of support is proof that your local government approves and is in support of your
-  cannabis business. This letter is a requirement for your cannabis license application, and it's used as
-  evidence that you obtained your local government's approval.
-
-
-  :::infoAlert
-
-  To complete this task you must meet with your local clerk, planner, engineer, and zoning officer.
-
-  :::
 ---
 
 ## Zoning Approval Requirements
