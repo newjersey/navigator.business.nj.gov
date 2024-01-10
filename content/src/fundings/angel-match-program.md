@@ -5,8 +5,8 @@ urlSlug: angel-match
 id: angel-match
 openDate: ""
 dueDate: ""
-descriptionMd: The Angel Match Program provides funding from the State Small
-  Business Credit Initiative (SSBCI) by matching angel investors’ direct
+summaryDescriptionMd: The Angel Match Program provides funding from the State
+  Small Business Credit Initiative (SSBCI) by matching angel investors’ direct
   investment in early-stage, product-based technology companies within targeted
   industries.
 callToActionLink: https://www.njeda.gov/AngelMatch/
@@ -31,9 +31,9 @@ sector:
   - other-services
   - technology
 publishStageArchive: ""
-summaryDescriptionMd: >-
-  The Angel Match Program provides funding from the State Small Business Credit Initiative (SSBCI) by matching
-  angel investors’ direct investment in early-stage, product-based technology companies within targeted
+descriptionMd: The Angel Match Program provides funding from the State Small
+  Business Credit Initiative (SSBCI) by matching angel investors’ direct
+  investment in early-stage, product-based technology companies within targeted
   industries.
 ---
 
@@ -49,6 +49,6 @@ summaryDescriptionMd: >-
 - No more than 100 total employees working for the company
 - Company must be registered in New Jersey and in good standing as certified by a valid NJ Tax Clearance Certificate
 
-> **Benefits**
+> ### Benefits
 >
 > `Convertible note|convertible-note` from $100,000 to $500,000 with 10-year maturity, 3% interest rate, and no payments for the first seven years.
