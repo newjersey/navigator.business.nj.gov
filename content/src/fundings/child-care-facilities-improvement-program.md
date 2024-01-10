@@ -5,13 +5,13 @@ urlSlug: childcare-improvement
 id: childcare-improvement
 openDate: 11/15/2022
 dueDate: ""
-descriptionMd: >
-  The Child Care Facilities Improvement Program provides grants to New Jersey
-  child care providers for facilities improvements that will contribute to high
-  quality early childhood learning environments.
+summaryDescriptionMd: >-
+  The Child Care Facilities Improvement Program provides grants for facilities
+  improvement to New Jersey child care providers that provide high quality early
+  childhood learning environments.
 
 
-  The Child Care Facilities Improvement Program provides grants for facilities improvement to New Jersey child care providers that provide high quality early childhood learning environments.
+  Applicants are limited to one application per DCF-licensed child care center location, and two applications per `Entity ID Number (EIN)|ein`.
 callToActionLink: https://www.njeda.com/child-care-improvement-program/
 callToActionText: Learn more
 fundingType: grant
@@ -31,13 +31,13 @@ county:
 sector:
   - educational-services
 publishStageArchive: null
-summaryDescriptionMd: >-
-  The Child Care Facilities Improvement Program provides grants for facilities improvement to New Jersey child
-  care providers that provide high quality early childhood learning environments.
+descriptionMd: >
+  The Child Care Facilities Improvement Program provides grants to New Jersey
+  child care providers for facilities improvements that will contribute to high
+  quality early childhood learning environments.
 
 
-  Applicants are limited to one application per DCF-licensed child care center location, and two applications
-  per `Entity ID Number (EIN)|ein`.
+  The Child Care Facilities Improvement Program provides grants for facilities improvement to New Jersey child care providers that provide high quality early childhood learning environments.
 ---
 
 ## Eligibility
@@ -54,6 +54,6 @@ summaryDescriptionMd: >-
 - Labor and materials cost for interior and exterior facility improvements to create high quality early childhood learning environments. See the full list of [eligible facility improvement projects](https://www.njeda.com/wp-content/uploads/2022/05/Child-Care-Facilities-Improvement-Eligible-Projects.pdf)
 - Soft costs are capped at up to 20% of total grant and are limited to: architect fees, permit fees, construction management, freight and shipping delivery, environmental assessment
 
-> **Benefits**
+> ### Benefits
 >
 > - Grant between $50,000 to $200,000
