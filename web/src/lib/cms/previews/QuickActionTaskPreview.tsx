@@ -1,4 +1,4 @@
-import { QuickActionTaskTile } from "@/components/dashboard/QuickActionTaskTile";
+import { QuickActionTile } from "@/components/dashboard/QuickActionTile";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
@@ -13,7 +13,7 @@ const QuickActionTaskPreview = (props: PreviewProps): ReactElement => {
   return (
     <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
       <div className="margin-y-10">
-        <QuickActionTaskTile quickAction={quickAction} />
+        <QuickActionTile type="task" quickAction={quickAction} />
       </div>
       <QuickActionElement quickActionTask={quickAction} />
     </div>
