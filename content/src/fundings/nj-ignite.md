@@ -1,18 +1,21 @@
 ---
 filename: nj-ignite
-urlSlug: nj-ignite
 name: NJ Ignite
+urlSlug: nj-ignite
 id: nj-ignite
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: NJ Ignite provides rent support for technology startups
+  that are moving to an approved collaborative workspace.
 callToActionLink: https://www.njeda.com/njignite
 callToActionText: Learn more
 fundingType: grant
+programFrequency: ongoing
+status: rolling application
 programPurpose: In State
 agency:
   - njeda
 agencyContact: ""
-publishStageArchive: ""
-status: rolling application
-programFrequency: ongoing
 businessStage: early-stage
 employeesRequired: yes
 homeBased: yes
@@ -25,12 +28,9 @@ sector:
   - technology
   - life-sciences
   - other-services
-openDate: ""
-dueDate: ""
-descriptionMd: NJ Ignite provides rent support for technology startups that are moving to an approved collaborative workspace.
-summaryDescriptionMd: >-
-  NJ Ignite provides rent support for technology startups that are moving to an approved collaborative
-  workspace.
+publishStageArchive: ""
+descriptionMd: NJ Ignite provides rent support for technology startups that are
+  moving to an approved collaborative workspace.
 ---
 
 ## Eligibility
@@ -40,7 +40,7 @@ summaryDescriptionMd: >-
 - Collaborative workplaces can be entities with a minimum of 5 unique paying tenants over the last 2 years.
 - Renters and collaborative workplaces must apply together
 
-> **Benefits**
+> ### Benefits
 >
 > - Benefits for Renters: Rent support grants
 > - Benefits for Collaborative Workspaces: A tenant attraction tool
