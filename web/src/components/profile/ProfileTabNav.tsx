@@ -1,6 +1,7 @@
 import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileTab } from "@/components/profile/ProfileTab";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { isStartingBusiness } from "@/lib/domain-logic/businessPersonaHelpers";
 import { ProfileTabs } from "@/lib/types/types";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
@@ -24,7 +25,7 @@ export const ProfileTabNav = (props: Props): ReactElement => {
 
   const isSuccessfulFilingResponse = props.business?.formationData.getFilingResponse?.success;
   const shouldDisplayFormationDocuments =
-    props.businessPersona === "STARTING" &&
+    isStartingBusiness(props.business) &&
     LookupLegalStructureById(props.business?.profileData.legalStructureId).elementsToDisplay.has(
       "formationDocuments"
     );

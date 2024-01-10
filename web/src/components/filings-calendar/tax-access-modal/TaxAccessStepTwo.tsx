@@ -15,6 +15,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { isOwningBusiness } from "@/lib/domain-logic/businessPersonaHelpers";
 import { createReducedFieldStates, ProfileFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
@@ -85,7 +86,7 @@ export const TaxAccessStepTwo = (props: Props): ReactElement => {
     taxId: Config.taxAccess.modalTaxFieldErrorName,
   };
 
-  const canMoveToPrevStep = business?.profileData.businessPersona === "OWNING";
+  const canMoveToPrevStep = isOwningBusiness(business);
 
   const displayBusinessName = (): boolean => {
     return LookupLegalStructureById(business?.profileData.legalStructureId).elementsToDisplay.has(

@@ -27,6 +27,7 @@
   "dependencies": {
     "@businessnjgovnavigator/content": "*",
     "dayjs": "1.11.10",
+    "lodash": "4.17.21",
     "uuid": "9.0.1"
   },
   "devDependencies": {
