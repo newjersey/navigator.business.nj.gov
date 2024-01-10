@@ -1,18 +1,22 @@
 ---
 filename: small-business-fund
-urlSlug: small-business-fund
 name: Small Business Fund
+urlSlug: small-business-fund
 id: small-business-fund
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: The Sales and Use Tax Exemption Program allows qualified
+  businesses to receive a sales tax exemption certificate for purchases related
+  to the construction and renovation of a new business location.
 callToActionLink: "https://www.njeda.com/smallbusinessfund/ "
 callToActionText: Learn more
 fundingType: loan
+programFrequency: ongoing
+status: rolling application
 programPurpose: Both
 agency:
   - njeda
 agencyContact: ""
-publishStageArchive: null
-status: rolling application
-programFrequency: ongoing
 businessStage: operating
 employeesRequired: n/a
 homeBased: yes
@@ -23,12 +27,10 @@ preferenceForOpportunityZone: no
 county:
   - All
 sector: []
-openDate: ""
-dueDate: ""
-descriptionMd: The Sales and Use Tax Exemption Program allows qualified businesses to receive a sales tax exemption certificate for purchases related to the construction and renovation of a new business location.
-summaryDescriptionMd: >-
-  The Sales and Use Tax Exemption Program allows qualified businesses to receive a sales tax exemption
-  certificate for purchases related to the construction and renovation of a new business location.
+publishStageArchive: null
+descriptionMd: The Sales and Use Tax Exemption Program allows qualified
+  businesses to receive a sales tax exemption certificate for purchases related
+  to the construction and renovation of a new business location.
 ---
 
 ## Eligibility
@@ -36,6 +38,6 @@ summaryDescriptionMd: >-
 - Small businesses in operation for at least 1 full year and not-for-profits in operation for at least 3 full years
 - The business or nonprofit must not have more than $3M in total revenue
 
-> **Benefits**
+> ### Benefits
 >
 > Businesses receive financing up to $500,000.
