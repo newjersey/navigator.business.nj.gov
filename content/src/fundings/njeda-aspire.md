@@ -1,18 +1,22 @@
 ---
 filename: njeda-aspire
-urlSlug: njeda-aspire
 name: Aspire
+urlSlug: njeda-aspire
 id: njeda-aspire
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: Aspire is a gap financing tool to support commercial,
+  mixed-use, and residential real estate development projects. This tool
+  replaces the Economic Redevelopment and Growth Grant (ERG).
 callToActionLink: https://www.njeda.com/aspire/
 callToActionText: Learn More
 fundingType: tax credit
+programFrequency: one-time
+status: deadline
 programPurpose: Both
 agency:
   - njeda
 agencyContact: ""
-publishStageArchive: ""
-status: deadline
-programFrequency: one-time
 businessStage: both
 employeesRequired: n/a
 homeBased: no
@@ -24,12 +28,10 @@ sector:
   - construction
   - manufacturing
   - real-estate
-openDate: ""
-dueDate: ""
-descriptionMd: Aspire is a gap financing tool to support commercial, mixed-use, and residential real estate development projects. This tool replaces the Economic Redevelopment and Growth Grant (ERG).
-summaryDescriptionMd: >-
-  Aspire is a gap financing tool to support commercial, mixed-use, and residential real estate development
-  projects. This tool replaces the Economic Redevelopment and Growth Grant (ERG).
+publishStageArchive: ""
+descriptionMd: Aspire is a gap financing tool to support commercial, mixed-use,
+  and residential real estate development projects. This tool replaces the
+  Economic Redevelopment and Growth Grant (ERG).
 ---
 
 ## Eligibility
@@ -41,12 +43,12 @@ summaryDescriptionMd: >-
 - The project must in a net positive benefit to the State
 - Must meet specific cost thresholds, depending on where the project is located
 
-> **Benefits:**
+> ### Benefits
 >
 > - Total award cap of $42M, but residential projects also receiving Low-Income Housing Tax Credits (LIHTC), or projects located in certain economically disadvantaged locations may receive up to $60M
 > - Tax credits equal to 45% of project costs up to $42M
 >
-> **Bonuses:**
+> ### Bonuses
 >
 > - Commercial projects in a Government Restricted Municipalities (GRM) (These municipalities include: Atlantic City, Paterson and Trenton) can receive tax credits up to 50% of costs in project support
 > - Newly constructed residential projects that are also utilizing 4% LIHTCs can receive tax credits for up to 60% of project costs
