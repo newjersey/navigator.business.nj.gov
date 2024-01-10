@@ -7,7 +7,7 @@ summaryDescriptionMd: >-
   mercantile license.
 
 
-  :::infoAlert 
+  :::note
 
   This screen guides your next steps. It does not submit your information for registration purposes.
 
