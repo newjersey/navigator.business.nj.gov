@@ -1,16 +1,15 @@
 ---
-displayname: transportation-cpcn
+summaryDescriptionMd: To provide transportation services, you need to file a
+  Certificate of Public Convenience and Necessity.
 urlSlug: transportation-cpcn
 filename: transportation-cpcn
-name: File a Certificate of Public Convenience and Necessity
+displayname: transportation-cpcn
+name: File Your Certificate of Public Convenience and Necessity
 id: transportation-cpcn
 callToActionLink: https://www.nj.gov/mvc/pdf/business/cpcn.pdf
+issuingAgency: New Jersey Motor Vehicle Commission
 callToActionText: File My Certificate
-agencyId: nj-motor-vehicle
-summaryDescriptionMd: >-
-  You need to file a Certificate of Public Convenience and Necessity to register your commercial vehicle.
 ---
-
 ## Application Requirements
 
 - Business name
