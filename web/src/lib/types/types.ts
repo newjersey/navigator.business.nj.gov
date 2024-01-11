@@ -200,10 +200,13 @@ export interface Opportunity {
   status?: string;
 }
 
-export interface QuickActionTask {
+interface QuickAction {
   name: string;
   icon: string;
   filename: string;
+}
+
+export interface QuickActionTask extends QuickAction {
   urlSlug: string;
   contentMd: string;
   callToActionLink: string | undefined;
@@ -211,10 +214,7 @@ export interface QuickActionTask {
   form: string | undefined;
 }
 
-export interface QuickActionLink {
-  name: string;
-  icon: string;
-  filename: string;
+export interface QuickActionLink extends QuickAction {
   externalRoute: string;
 }
 

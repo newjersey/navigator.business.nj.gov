@@ -1,10 +1,10 @@
-import { QuickActionTaskTile } from "@/components/dashboard/QuickActionTaskTile";
+import { QuickActionTile } from "@/components/dashboard/QuickActionTile";
 import { generateQuickActionTask } from "@/test/factories";
 import { Meta, StoryObj } from "@storybook/react";
 
-const meta: Meta<typeof QuickActionTaskTile> = {
+const meta: Meta<typeof QuickActionTile> = {
   title: "Molecules/QuickAction",
-  component: QuickActionTaskTile,
+  component: QuickActionTile,
   decorators: [(Story) => <div className="width-mobile">{Story()}</div>],
   parameters: {
     design: {
@@ -14,10 +14,11 @@ const meta: Meta<typeof QuickActionTaskTile> = {
   },
 };
 export default meta;
-type Story = StoryObj<typeof QuickActionTaskTile>;
+type Story = StoryObj<typeof QuickActionTile>;
 
 export const QuickAction: Story = {
   args: {
+    type: "task",
     quickAction: generateQuickActionTask({ icon: "loop.svg", name: "Some Quick Action Text" }),
   },
 };
