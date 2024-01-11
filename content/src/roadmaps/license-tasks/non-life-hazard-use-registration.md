@@ -15,7 +15,7 @@ summaryDescriptionMd: >-
   to learn if your business is an NLHU.
 
 
-  If your business is an NLHU, you must register with your LEA and pay the associated fee to operate your business.
+  If your business is an NLHU, you may need to register with your LEA and pay the associated fee to operate your business.
 industryId:
   - generic
 agencyId: nj-community-affairs
@@ -28,4 +28,4 @@ licenseCertificationClassification: ""
 ---
 Non-Life Hazard Use (NLHU) is a label assigned to businesses with a commercial or manufacturing space that do not present a higher risk to human life during fires and other emergencies. [Contact your Local Enforcing Agency (LEA)](https://www.nj.gov/dca/divisions/dfs/pdf/fire_code_enforcement_director.pdf) to learn if your business is an NLHU.
 
-If your business is an NLHU, you must register with your LEA and pay the associated fee to operate your business.
+If your business is an NLHU, you may need to register with your LEA and pay the associated fee to operate your business.
