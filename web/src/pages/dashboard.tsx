@@ -1,7 +1,6 @@
 import { CircularIndicator } from "@/components/CircularIndicator";
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
-import { QuickActionLinkTile } from "@/components/dashboard/QuickActionTaskLink";
-import { QuickActionTaskTile } from "@/components/dashboard/QuickActionTaskTile";
+import { QuickActionTile } from "@/components/dashboard/QuickActionTile";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
 import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout";
@@ -230,7 +229,8 @@ const DashboardPage = (props: Props): ReactElement => {
 
     if (registryUpdateBrcAmendmentQuickAction) {
       quickActionsArray.push(
-        <QuickActionTaskTile
+        <QuickActionTile
+          type="task"
           quickAction={registryUpdateBrcAmendmentQuickAction}
           key={registryUpdateBrcAmendmentQuickAction.filename}
         />
@@ -239,7 +239,8 @@ const DashboardPage = (props: Props): ReactElement => {
 
     if (nonHicStateContractingQuickAction && renderStateContractingExternalLink) {
       quickActionsArray.push(
-        <QuickActionLinkTile
+        <QuickActionTile
+          type="link"
           quickAction={nonHicStateContractingQuickAction}
           key={nonHicStateContractingQuickAction.filename}
         />
@@ -248,7 +249,8 @@ const DashboardPage = (props: Props): ReactElement => {
 
     if (hicStateContractingQuickAction && renderHicStateContractingTask) {
       quickActionsArray.push(
-        <QuickActionTaskTile
+        <QuickActionTile
+          type="task"
           quickAction={hicStateContractingQuickAction}
           key={hicStateContractingQuickAction.filename}
         />

@@ -27,7 +27,7 @@ const colors = {
   "accent-cooler": "usa-button btn-accent-cooler",
   info: "usa-button btn-info",
   "success-extra-light": "usa-button btn-success-extra-light",
-  white: "usa-button text-info-darkest btn-white hover:drop-shadow-md",
+  white: "usa-button text-info-darkest btn-white",
   outline: "usa-button usa-button--outline",
 };
 

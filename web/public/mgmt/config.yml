@@ -2997,10 +2997,13 @@ collections:
       - { label: "Name/Title", name: "name", widget: "string" }
       - label: "Icon"
         name: icon
-        widget: "select"
+        widget: "relation"
         multiple: false
         required: true
-        options: ["loop.svg", "capitol.svg"]
+        collection: "mappings"
+        search_fields: ["arrayOfQuickActionIcons.*.name"]
+        value_field: "arrayOfQuickActionIcons.*.filename"
+        display_fields: ["arrayOfQuickActionIcons.*.name"]
       - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "nospace", required: true }
       - { label: "Content", name: "body", widget: "markdown", required: true }
       - { label: "Form", name: "form", widget: "string", required: false }
@@ -3024,10 +3027,13 @@ collections:
       - { label: "Name/Title", name: "name", widget: "string" }
       - label: "Icon"
         name: icon
-        widget: "select"
+        widget: "relation"
         multiple: false
         required: true
-        options: ["loop.svg", "capitol.svg"]
+        collection: "mappings"
+        search_fields: ["arrayOfQuickActionIcons.*.name"]
+        value_field: "arrayOfQuickActionIcons.*.filename"
+        display_fields: ["arrayOfQuickActionIcons.*.name"]
       - { label: "External Link", name: "externalRoute", widget: "nospace", required: true }
 
   - name: "misc-label"
@@ -3060,6 +3066,22 @@ collections:
       preview: false
     delete: false
     files:
+      - label: "Quick Action Icons"
+        name: "arrayOfQuickActionIcons"
+        file: "content/src/mappings/quickActionIcons.json"
+        fields:
+          - label: Quick Action Icons
+            name: arrayOfQuickActionIcons
+            widget: list
+            allow_add: false
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Filename
+                name: filename
+                widget: hidden
       - label: "Funding Agencies"
         name: "arrayOfFundingAgencies"
         file: "content/src/mappings/fundingAgency.json"
@@ -3647,7 +3669,7 @@ collections:
               - { label: Credit Link, name: creditLink, widget: string }
               - { label: Office External Text, name: officeExternalText, widget: string }
               - { label: Github Link, name: gitHubLink, widget: string }
-              - { label: Twitter Link, name: twitterLink, widget: string }
+              - { label: Facebook Link, name: facebookLink, widget: string }
           - label: Report An Issue Bar
             name: reportAnIssueBar
             collapsed: true
@@ -4901,7 +4923,7 @@ collections:
                       name: noteForBusinessesFormedOutsideNavigator,
                       widget: string,
                     }
-                  - { label: Reference Numbers Tab Title, name: profileTabRefTitle, widget: string }
+                  - { label: Reference Numbers Tab Title, name: profileTabNumbersTitle, widget: string }
                   - { label: Docs Tab Title, name: profileTabDocsTitle, widget: string }
                   - { label: Notes Tab Title, name: profileTabNoteTitle, widget: string }
                   - { label: Formation Doc Label, name: formationDocFileTitle, widget: string }

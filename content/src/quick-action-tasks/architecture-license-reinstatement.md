@@ -1,7 +1,7 @@
 ---
 filename: architecture-license-reinstatement
 name: Apply to Reinstate Your Architecture License
-icon: loop.svg
+icon: update-purple.svg
 urlSlug: architecture-license-reinstatement
 callToActionText: Reinstate My Architecture License
 callToActionLink: https://www.njconsumeraffairs.gov/arch/applications/Application-for-Reinstatement-with-Instructions.pdf

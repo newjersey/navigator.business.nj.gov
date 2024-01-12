@@ -22,6 +22,7 @@ import {
   Business,
   defaultDateFormat,
   generateBusiness,
+  generateFormationData,
   generateFormationFormData,
   generateFormationSubmitResponse,
   getCurrentDate,
@@ -310,6 +311,106 @@ describe("<NexusFormationFlow />", () => {
     let page: FormationPageHelpers;
 
     describe("when feature flag is set", () => {
+      describe("remembers formation step", () => {
+        const getNexusBusiness = ({
+          lastVisitedPageIndex,
+          businessName,
+        }: {
+          lastVisitedPageIndex: number;
+          businessName?: string;
+        }): Business => {
+          const legalStructureId = "limited-liability-company";
+          const profileData = generateFormationProfileData({
+            legalStructureId,
+            businessPersona: "FOREIGN",
+            businessName: businessName ?? "",
+            nexusDbaName: "",
+            needsNexusDbaName: false,
+          });
+          const formationData = generateFormationData({ lastVisitedPageIndex });
+          displayContent = {
+            formationDbaContent: generateFormationDbaContent({}),
+          };
+          return (initialBusiness = generateBusiness({ profileData, formationData }));
+        };
+
+        beforeEach(() => {
+          jest.resetAllMocks();
+          useSetupInitialMocks();
+        });
+
+        it("shows the nexus name step with an initial user when lastVisitedPage has index 0 which is by default", async () => {
+          preparePage({ business: getNexusBusiness({ lastVisitedPageIndex: 0 }), displayContent });
+          expect(screen.getByTestId("nexus-name-step")).toBeInTheDocument();
+        });
+
+        it("shows the last formation step when lastVisitedPage has step index 4", () => {
+          preparePage({
+            business: getNexusBusiness({ lastVisitedPageIndex: 4, businessName: "fake-business-name" }),
+            displayContent,
+          });
+          expect(screen.getByTestId("review-step")).toBeInTheDocument();
+        });
+
+        it("lastVisitedPage updates on step change via stepper", async () => {
+          page = preparePage({
+            business: getNexusBusiness({ lastVisitedPageIndex: 4, businessName: "fake-business-name" }),
+            displayContent,
+          });
+          expect(screen.getByTestId("review-step")).toBeInTheDocument();
+
+          await page.stepperClickToBillingStep();
+          await waitFor(() => {
+            expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(3);
+          });
+
+          await page.stepperClickToReviewStep();
+          await waitFor(() => {
+            expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(4);
+          });
+        });
+
+        it("lastVisitedPage updates on step change via the previous and next button steps", async () => {
+          page = preparePage({
+            business: getNexusBusiness({ lastVisitedPageIndex: 4, businessName: "fake-business-name" }),
+            displayContent,
+          });
+
+          await waitFor(() => {
+            expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(4);
+          });
+          expect(screen.getByTestId("review-step")).toBeInTheDocument();
+
+          fireEvent.click(screen.getByTestId("previous-button"));
+          await waitFor(() => {
+            expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(3);
+          });
+          expect(screen.getByTestId("billing-step")).toBeInTheDocument();
+
+          fireEvent.click(screen.getByTestId("next-button"));
+          await waitFor(() => {
+            expect(currentBusiness().formationData.lastVisitedPageIndex).toEqual(4);
+          });
+          expect(screen.getByTestId("review-step")).toBeInTheDocument();
+        });
+
+        it("defaults to first formation step when we go above 4 for page index", () => {
+          page = preparePage({
+            business: getNexusBusiness({ lastVisitedPageIndex: 5, businessName: "fake-business-name" }),
+            displayContent,
+          });
+          expect(screen.getByTestId("nexus-name-step")).toBeInTheDocument();
+        });
+
+        it("defaults to first formation step when we go below 0 for page index", () => {
+          page = preparePage({
+            business: getNexusBusiness({ lastVisitedPageIndex: -1, businessName: "fake-business-name" }),
+            displayContent,
+          });
+          expect(screen.getByTestId("nexus-name-step")).toBeInTheDocument();
+        });
+      });
+
       describe("business name step", () => {
         beforeEach(async () => {
           page = preparePage({ business: initialBusiness, displayContent });
@@ -326,7 +427,7 @@ describe("<NexusFormationFlow />", () => {
           );
         });
 
-        it("saves availablity state when switching back to step", async () => {
+        it("saves availability state when switching back to step", async () => {
           fillText("Pizza Joint");
           await page.searchBusinessName({ status: "AVAILABLE" });
           await screen.findByTestId("available-text");
