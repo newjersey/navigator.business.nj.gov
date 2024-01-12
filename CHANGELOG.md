@@ -1,3 +1,12 @@
+## [2024.0.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.0.0...v2024.0.1) (2024-01-10)
+
+
+### Bug Fixes
+
+* [[#186765441](https://github.com/newjersey/navigator.business.nj.gov/issues/186765441)] prevent feb license renewals appearing in jan ([e35864b](https://github.com/newjersey/navigator.business.nj.gov/commit/e35864bb73a051c3bd4deab730536f4c0a39d202))
+* [[#186818972](https://github.com/newjersey/navigator.business.nj.gov/issues/186818972)] update myNJ account link ([1b1aa6e](https://github.com/newjersey/navigator.business.nj.gov/commit/1b1aa6e39f7372a148e6018b489bd05a2cdda62a))
+* remove occurences of 2 spaces to fix unit tests ([1c1c364](https://github.com/newjersey/navigator.business.nj.gov/commit/1c1c3644c1561d5f6d62c0a338e3a0699635086b))
+
 # [2024.0.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.43.0...v2024.0.0) (2024-01-03)
 
 ### Bug Fixes

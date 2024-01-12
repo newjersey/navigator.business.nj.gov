@@ -686,8 +686,7 @@ jobs:
       - deploy
     environment:
       STAGE: prod
-      MYNJ_PROFILE_LINK: https://my.state.nj.us/portal/Desktop # This needs to change when the production SSO/SLO links no longer redirect
-      # MYNJ_PROFILE_LINK: https://my.nj.gov/portal/Desktop
+      MYNJ_PROFILE_LINK: https://my.nj.gov/portal/Desktop
 
   integration-tests:
     parameters:

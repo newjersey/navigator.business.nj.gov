@@ -19,6 +19,11 @@
 .quick-action-tile {
   background-color: $base-extra-light;
   border: 2px solid $base-lightest;
+  cursor: pointer;
+  height: 100%;
+  line-height: 160%;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .quick-action-tile:hover {
   background-color: $base-lightest;

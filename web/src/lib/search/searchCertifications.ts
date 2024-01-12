@@ -15,7 +15,7 @@ export const searchCertifications = (certifications: Certification[], term: stri
     const content = cert.contentMd.toLowerCase();
     const name = cert.name.toLowerCase();
     const description = cert.descriptionMd.toLowerCase();
-    const summary = cert.summaryDescriptionMd.toLowerCase();
+    const summary = cert.summaryDescriptionMd?.toLowerCase();
     const cta = cert.callToActionText?.toLowerCase();
     const ctaLink = cert.callToActionLink?.toLowerCase();
     const agencyIDs = cert.agency ? cert.agency.map((it) => it.toLowerCase()) : [];

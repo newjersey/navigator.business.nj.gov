@@ -857,7 +857,9 @@ describe("profile - starting business", () => {
       chooseTab("numbers");
       expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
       const header = screen.getByTestId("profile-header");
-      expect(within(header).getByText(Config.profileDefaults.default.profileTabRefTitle)).toBeInTheDocument();
+      expect(
+        within(header).getByText(Config.profileDefaults.default.profileTabNumbersTitle)
+      ).toBeInTheDocument();
       expect(
         within(header).queryByText(Config.profileDefaults.default.profileTabInfoTitle)
       ).not.toBeInTheDocument();
@@ -885,7 +887,7 @@ describe("profile - starting business", () => {
         within(header).getByText(Config.profileDefaults.default.profileTabInfoTitle)
       ).toBeInTheDocument();
       expect(
-        within(header).queryByText(Config.profileDefaults.default.profileTabRefTitle)
+        within(header).queryByText(Config.profileDefaults.default.profileTabNumbersTitle)
       ).not.toBeInTheDocument();
     }
   );
