@@ -45,7 +45,7 @@ export const cmsCollections = [
   },
   {
     label: "🟧 QUICK ACTIONS",
-    children: ["Quick Actions"],
+    children: ["Quick Actions", "Quick Action Tasks", "Quick Action Labels"],
   },
   {
     label: "🟨 MISC",
