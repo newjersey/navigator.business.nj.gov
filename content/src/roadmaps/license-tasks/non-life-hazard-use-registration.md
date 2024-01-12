@@ -10,12 +10,11 @@ webflowName: "Fire Safety Registration: Non-Life Hazard Use (NLHU)"
 summaryDescriptionMd: >-
   Non-Life Hazard Use (NLHU) is a label assigned to businesses with a commercial
   or manufacturing space that do not present a higher risk to human life during
-  fires and other emergencies. [Contact your Local Enforcing Agency
-  (LEA)](https://www.nj.gov/dca/divisions/dfs/pdf/fire_code_enforcement_director.pdf)
-  to learn if your business is an NLHU.
+  fires and other emergencies. If your business is an NLHU, you may need to
+  register with your LEA and pay the associated fee to operate your business.
 
 
-  If your business is an NLHU, you may need to register with your LEA and pay the associated fee to operate your business.
+  [Contact your Local Enforcing Agency (LEA)](https://www.nj.gov/dca/divisions/dfs/pdf/fire_code_enforcement_director.pdf) to learn if your business is an NLHU and how to register, if required.
 industryId:
   - generic
 agencyId: nj-community-affairs
@@ -26,6 +25,6 @@ webflowType: business-license
 webflowId: 65708faf97a47f686cfad039
 licenseCertificationClassification: ""
 ---
-Non-Life Hazard Use (NLHU) is a label assigned to businesses with a commercial or manufacturing space that do not present a higher risk to human life during fires and other emergencies. [Contact your Local Enforcing Agency (LEA)](https://www.nj.gov/dca/divisions/dfs/pdf/fire_code_enforcement_director.pdf) to learn if your business is an NLHU.
+Non-Life Hazard Use (NLHU) is a label assigned to businesses with a commercial or manufacturing space that do not present a higher risk to human life during fires and other emergencies. If your business is an NLHU, you may need to register with your LEA and pay the associated fee to operate your business.
 
-If your business is an NLHU, you may need to register with your LEA and pay the associated fee to operate your business.
+[Contact your Local Enforcing Agency (LEA)](https://www.nj.gov/dca/divisions/dfs/pdf/fire_code_enforcement_director.pdf) to learn if your business is an NLHU and how to register, if required.
