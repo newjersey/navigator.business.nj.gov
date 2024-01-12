@@ -35,7 +35,7 @@ export const QuickActionTile = (props: LinkProps | TaskProps): ReactElement => {
     </>
   );
 
-  const classNames = "quick-action-tile radius-md padding-2 fdr fac text-align-left";
+  const classNames = "quick-action-tile radius-md padding-2 fdr fac text-align-left width-100";
 
   return (
     <div className="quick-action-tile-spacing desktop:grid-col-6 flex fa-stretch">
