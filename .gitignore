@@ -9,6 +9,7 @@ web/node_modules
 
 # scripts
 get-user-location-output.csv
+results.csv
 
 # testing
 /coverage
