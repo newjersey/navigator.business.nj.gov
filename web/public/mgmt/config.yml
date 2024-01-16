@@ -3007,10 +3007,10 @@ collections:
         multiple: true
         required: false
         default: []
-        collection: "mappings"
-        search_fields: ["industries.*.name"]
-        value_field: "industries.*.id"
-        display_fields: ["industries.*.name"]
+        collection: "roadmaps"
+        search_fields: ["{{name}}"]
+        value_field: "{{id}}"
+        display_fields: ["{{name}}"]
       - label: Apply to sectors
         name: sectorIds
         widget: relation
@@ -3063,10 +3063,10 @@ collections:
         multiple: true
         required: false
         default: []
-        collection: "mappings"
-        search_fields: ["industries.*.name"]
-        value_field: "industries.*.id"
-        display_fields: ["industries.*.name"]
+        collection: "roadmaps"
+        search_fields: ["{{name}}"]
+        value_field: "{{id}}"
+        display_fields: ["{{name}}"]
       - label: Apply to sectors
         name: sectorIds
         widget: relation
@@ -3133,22 +3133,6 @@ collections:
                 widget: string
               - label: Filename
                 name: filename
-                widget: hidden
-      - label: "Industries - This Collection Is Hidden"
-        name: "arrayOfIndustries"
-        file: "content/lib/industry.json"
-        fields:
-          - label: Industry
-            name: industries
-            widget: hidden
-            allow_add: false
-            summary: "{{name}}"
-            fields:
-              - label: Name
-                name: name
-                widget: hidden
-              - label: Id
-                name: id
                 widget: hidden
       - label: "Funding Agencies"
         name: "arrayOfFundingAgencies"
