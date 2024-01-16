@@ -4204,7 +4204,7 @@ __metadata:
     cors: 2.8.5
     cross-env: 7.0.3
     cspell: 8.3.2
-    css-loader: 6.8.1
+    css-loader: 6.9.0
     cypress: 13.6.2
     cypress-dotenv: 2.0.0
     cypress-wait-until: 3.0.1
@@ -4404,7 +4404,7 @@ __metadata:
     copy-webpack-plugin: 11.0.0
     cross-env: 7.0.3
     cspell: 8.3.2
-    css-loader: 6.8.1
+    css-loader: 6.9.0
     cypress: 13.6.2
     cypress-dotenv: 2.0.0
     cypress-wait-until: 3.0.1
@@ -15537,21 +15537,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-loader@npm:6.8.1, css-loader@npm:^6.7.1, css-loader@npm:^6.7.3":
-  version: 6.8.1
-  resolution: "css-loader@npm:6.8.1"
+"css-loader@npm:6.9.0, css-loader@npm:^6.7.1, css-loader@npm:^6.7.3":
+  version: 6.9.0
+  resolution: "css-loader@npm:6.9.0"
   dependencies:
     icss-utils: ^5.1.0
-    postcss: ^8.4.21
+    postcss: ^8.4.31
     postcss-modules-extract-imports: ^3.0.0
     postcss-modules-local-by-default: ^4.0.3
-    postcss-modules-scope: ^3.0.0
+    postcss-modules-scope: ^3.1.0
     postcss-modules-values: ^4.0.0
     postcss-value-parser: ^4.2.0
-    semver: ^7.3.8
+    semver: ^7.5.4
   peerDependencies:
     webpack: ^5.0.0
-  checksum: 7c1784247bdbe76dc5c55fb1ac84f1d4177a74c47259942c9cfdb7a8e6baef11967a0bc85ac285f26bd26d5059decb848af8154a03fdb4f4894f41212f45eef3
+  checksum: 71f20ee5eb5a4a9373ab41a5c17df411cb4f6f2de037297a2b0c2150681578f4979f319f4307a61e23c231dd6546e657ae95cba5a0698ad13ca43f91d4d2a0bc
   languageName: node
   linkType: hard
 
@@ -28365,7 +28365,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-modules-scope@npm:^3.0.0":
+"postcss-modules-scope@npm:^3.1.0":
   version: 3.1.0
   resolution: "postcss-modules-scope@npm:3.1.0"
   dependencies:
