@@ -287,6 +287,9 @@ export const generateQuickActionTask = (overrides: Partial<QuickActionTask>): Qu
     callToActionText: `some-cta-text-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
     form: `some-form-${randomInt()}`,
+    industryIds: [`some-industry-id-${randomInt()}`],
+    sectorIds: [`some-sector-id-${randomInt()}`],
+    applyToAllUsers: false,
     ...overrides,
   };
 };
@@ -297,6 +300,9 @@ export const generateQuickActionLink = (overrides: Partial<QuickActionLink>): Qu
     name: `some-name-${randomInt()}`,
     icon: `some-icon-${randomInt()}`,
     externalRoute: `some-external-route-${randomInt()}`,
+    industryIds: [`some-industry-id-${randomInt()}`],
+    sectorIds: [`some-sector-id-${randomInt()}`],
+    applyToAllUsers: false,
     ...overrides,
   };
 };

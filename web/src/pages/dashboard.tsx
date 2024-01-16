@@ -4,7 +4,7 @@ import { Header } from "@/components/Header";
 import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
-import { QuickActionTile } from "@/components/dashboard/QuickActionTile";
+import { QuickActionsContainer } from "@/components/dashboard/QuickActionContainer";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
 import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout";
@@ -20,15 +20,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useQueryControlledAlert } from "@/lib/data-hooks/useQueryControlledAlert";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import {
-  isNexusBusiness,
-  isOwningBusiness,
-  isStartingBusiness,
-} from "@/lib/domain-logic/businessPersonaHelpers";
-import { isConstructionSector } from "@/lib/domain-logic/isConstructionSector";
-import { isGenericIndustry } from "@/lib/domain-logic/isGenericIndustry";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
-import { isHomeContractorIndustry } from "@/lib/domain-logic/isHomeContractorIndustry";
 import { QUERIES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
@@ -145,7 +137,6 @@ const DashboardPage = (props: Props): ReactElement => {
   });
 
   const operatingPhase = LookupOperatingPhaseById(business?.profileData.operatingPhase);
-  console.log({ operatingPhase });
 
   useMountEffectWhenDefined(() => {
     (async (): Promise<void> => {
@@ -175,92 +166,6 @@ const DashboardPage = (props: Props): ReactElement => {
     );
   };
 
-  const renderQuickActions = (): ReactElement => {
-    const quickActionsArray = [];
-    let renderStateContractingExternalLink;
-    let renderHicStateContractingTask = false;
-
-    if (isOwningBusiness(business)) {
-      renderStateContractingExternalLink = !isConstructionSector(business?.profileData.sectorId);
-    }
-
-    if (!isOwningBusiness(business)) {
-      renderStateContractingExternalLink =
-        !isConstructionSector(business?.profileData.sectorId) &&
-        !isHomeContractorIndustry(business?.profileData.industryId);
-    }
-
-    if (
-      isStartingBusiness(business) &&
-      (isHomeContractorIndustry(business?.profileData.industryId) ||
-        (isGenericIndustry(business?.profileData.industryId) &&
-          isConstructionSector(business?.profileData.sectorId)))
-    ) {
-      renderHicStateContractingTask = true;
-    }
-
-    if (isOwningBusiness(business) && isConstructionSector(business?.profileData.sectorId)) {
-      renderHicStateContractingTask = true;
-    }
-
-    if (
-      isNexusBusiness(business) &&
-      ((isConstructionSector(business?.profileData.sectorId) &&
-        isGenericIndustry(business?.profileData.industryId)) ||
-        isHomeContractorIndustry(business?.profileData.industryId))
-    ) {
-      renderHicStateContractingTask = true;
-    }
-
-    const registryUpdateBrcAmendmentQuickAction = props.quickActionTasks.find(
-      (e) => e.filename === "registry-update-brc-amendment"
-    );
-
-    const nonHicStateContractingQuickAction = props.quickActionLinks.find(
-      (e) => e.filename === "state-contracting-external-link"
-    );
-
-    const hicStateContractingQuickAction = props.quickActionTasks.find(
-      (e) => e.filename === "government-contracting"
-    );
-
-    if (registryUpdateBrcAmendmentQuickAction) {
-      quickActionsArray.push(
-        <QuickActionTile
-          type="task"
-          quickAction={registryUpdateBrcAmendmentQuickAction}
-          key={registryUpdateBrcAmendmentQuickAction.filename}
-        />
-      );
-    }
-
-    if (nonHicStateContractingQuickAction && renderStateContractingExternalLink) {
-      quickActionsArray.push(
-        <QuickActionTile
-          type="link"
-          quickAction={nonHicStateContractingQuickAction}
-          key={nonHicStateContractingQuickAction.filename}
-        />
-      );
-    }
-
-    if (hicStateContractingQuickAction && renderHicStateContractingTask) {
-      quickActionsArray.push(
-        <QuickActionTile
-          type="task"
-          quickAction={hicStateContractingQuickAction}
-          key={hicStateContractingQuickAction.filename}
-        />
-      );
-    }
-
-    return (
-      <div className={isDesktopAndUp ? "grid-row grid-gap" : ""} data-testid="quick-actions-section">
-        {quickActionsArray}
-      </div>
-    );
-  };
-
   const renderRoadmap = (
     <div className="margin-top-0 desktop:margin-top-0">
       <UserDataErrorAlert />
@@ -284,7 +189,12 @@ const DashboardPage = (props: Props): ReactElement => {
               </div>
             )}
 
-            {operatingPhase.displayQuickActions && renderQuickActions()}
+            {operatingPhase.displayQuickActions && (
+              <QuickActionsContainer
+                quickActionLinks={props.quickActionLinks}
+                quickActionTasks={props.quickActionTasks}
+              />
+            )}
 
             {operatingPhase.displayRoadmapTasks && (
               <>
