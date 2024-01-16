@@ -1,7 +1,7 @@
 ---
 notesMd: "Draft:
   https://docs.google.com/document/d/1WrduHkRAUP5nvXrz7Q7A0nV5NUXGDJdaWO423D2R7\
-  ic/edit#heading=h.5wd6u8mmd0hc"
+  ic/edit"
 filename: registry-update-brc-amendment
 name: Update Your Business Registration Certificate and/or Registry Account
 icon: update-purple.svg
