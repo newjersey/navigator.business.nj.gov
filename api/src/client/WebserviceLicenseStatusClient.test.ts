@@ -33,4 +33,33 @@ describe("WebserviceLicenseStatusClient", () => {
     mockAxios.post.mockResolvedValue({ data: "" });
     expect(await client.search("name", "11111", "some-type")).toEqual([]);
   });
+
+  it("returns a passing health check if data can be retrieved sucessfully", async () => {
+    mockAxios.post.mockResolvedValue({});
+    expect(await client.health()).toEqual({ success: true, data: { message: "OK" } });
+  });
+
+  it("returns a failing health check if unexpected data is retrieved", async () => {
+    mockAxios.post.mockRejectedValue({ response: { status: 404 }, message: "" });
+    expect(await client.health()).toEqual({
+      success: false,
+      error: {
+        message: "Bad Gateway",
+        serverResponseBody: "",
+        serverResponseCode: 404,
+        timeout: false,
+      },
+    });
+  });
+
+  it("returns a failing health check if axios request times out", async () => {
+    mockAxios.post.mockRejectedValue({});
+    expect(await client.health()).toEqual({
+      success: false,
+      error: {
+        message: "Gateway Timeout",
+        timeout: true,
+      },
+    });
+  });
 });
