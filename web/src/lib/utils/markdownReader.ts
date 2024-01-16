@@ -184,6 +184,9 @@ type QuickActionLinkGrayMatter = {
   name: string;
   icon: string;
   externalRoute: string;
+  industryIds: string[];
+  sectorIds: string[];
+  applyToAllUsers: boolean;
 };
 
 type QuickActionTaskGrayMatter = {
@@ -193,6 +196,9 @@ type QuickActionTaskGrayMatter = {
   callToActionText: string;
   form: string;
   icon: string;
+  industryIds: string[];
+  sectorIds: string[];
+  applyToAllUsers: boolean;
 };
 
 type TaskGrayMatter = {

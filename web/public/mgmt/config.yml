@@ -1568,7 +1568,7 @@ collections:
       - label: Default Sector
         name: defaultSectorId
         widget: relation
-        required: false
+        required: true
         collection: "mappings"
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
@@ -2995,6 +2995,32 @@ collections:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Filename (disabled after file creation)", name: "filename", widget: "write-once-read-only" }
       - { label: "Name/Title", name: "name", widget: "string" }
+      - {
+          label: "Apply to all - overrides industry and sector dropdown",
+          name: "applyToAllUsers",
+          widget: "boolean",
+          required: false,
+        }
+      - label: Apply to industries
+        name: industryIds
+        widget: relation
+        multiple: true
+        required: false
+        default: []
+        collection: "mappings"
+        search_fields: ["industries.*.name"]
+        value_field: "industries.*.id"
+        display_fields: ["industries.*.name"]
+      - label: Apply to sectors
+        name: sectorIds
+        widget: relation
+        multiple: true
+        required: false
+        default: []
+        collection: "mappings"
+        search_fields: ["arrayOfSectors.*.name"]
+        value_field: "arrayOfSectors.*.id"
+        display_fields: ["arrayOfSectors.*.name"]
       - label: "Icon"
         name: icon
         widget: "relation"
@@ -3025,6 +3051,32 @@ collections:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Filename (disabled after file creation)", name: "filename", widget: "write-once-read-only" }
       - { label: "Name/Title", name: "name", widget: "string" }
+      - {
+          label: "Apply to all - overrides industry and sector dropdown",
+          name: "applyToAllUsers",
+          widget: "boolean",
+          required: false,
+        }
+      - label: Apply to industries
+        name: industryIds
+        widget: relation
+        multiple: true
+        required: false
+        default: []
+        collection: "mappings"
+        search_fields: ["industries.*.name"]
+        value_field: "industries.*.id"
+        display_fields: ["industries.*.name"]
+      - label: Apply to sectors
+        name: sectorIds
+        widget: relation
+        multiple: true
+        required: false
+        default: []
+        collection: "mappings"
+        search_fields: ["arrayOfSectors.*.name"]
+        value_field: "arrayOfSectors.*.id"
+        display_fields: ["arrayOfSectors.*.name"]
       - label: "Icon"
         name: icon
         widget: "relation"
@@ -3081,6 +3133,22 @@ collections:
                 widget: string
               - label: Filename
                 name: filename
+                widget: hidden
+      - label: "Industries - This Collection Is Hidden"
+        name: "arrayOfIndustries"
+        file: "content/lib/industry.json"
+        fields:
+          - label: Industry
+            name: industries
+            widget: hidden
+            allow_add: false
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: hidden
+              - label: Id
+                name: id
                 widget: hidden
       - label: "Funding Agencies"
         name: "arrayOfFundingAgencies"

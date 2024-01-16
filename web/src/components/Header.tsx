@@ -3,6 +3,7 @@ import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { isStartingBusiness } from "@/lib/domain-logic/businessPersonaHelpers";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
@@ -24,10 +25,7 @@ export const Header = (): ReactElement => {
   };
 
   const getHeader = (): string => {
-    if (
-      state.isAuthenticated === IsAuthenticated.FALSE &&
-      business?.profileData.businessPersona === "STARTING"
-    ) {
+    if (state.isAuthenticated === IsAuthenticated.FALSE && isStartingBusiness(business)) {
       return business?.profileData.industryId === "generic"
         ? Config.headerDefaults.genericStarterKitText
         : templateEval(Config.headerDefaults.starterKitText, {

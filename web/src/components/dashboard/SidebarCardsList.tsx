@@ -4,14 +4,14 @@ import { SidebarCard } from "@/components/dashboard/SidebarCard";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
+import { MediaQueries } from "@/lib/PageSizes";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { isRemoteWorkerOrSellerBusiness } from "@/lib/domain-logic/businessPersonaHelpers";
 import { getForYouCardCount } from "@/lib/domain-logic/getForYouCardCount";
-import { MediaQueries } from "@/lib/PageSizes";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab, scrollToTopOfElement, templateEval } from "@/lib/utils/helpers";
-import { determineForeignBusinessType } from "@businessnjgovnavigator/shared/index";
 import { Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from "@mui/material";
 import { ReactElement, ReactNode, useRef, useState } from "react";
 
@@ -140,19 +140,11 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
       !props.displayFundings &&
       props.topCards.length + props.bottomCards.length === 0;
 
-    const isRemoteSellerWorker = (): boolean => {
-      if (business) {
-        const foreignBusinessType = determineForeignBusinessType(business.profileData.foreignBusinessTypeIds);
-        return foreignBusinessType === "REMOTE_SELLER" || foreignBusinessType === "REMOTE_WORKER";
-      }
-      return false;
-    };
-
     const showEmptyForYouMessage =
-      showEmptyOpportunitiesMsg || showCompleteRequiredTasksMsg || isRemoteSellerWorker();
+      showEmptyOpportunitiesMsg || showCompleteRequiredTasksMsg || isRemoteWorkerOrSellerBusiness(business);
 
     const getTopText = (): string => {
-      if (isRemoteSellerWorker() || props.isCMSPreview)
+      if (isRemoteWorkerOrSellerBusiness(business) || props.isCMSPreview)
         return Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText;
       if (showCompleteRequiredTasksMsg) return Config.dashboardDefaults.completeRequiredTasksText;
       if (showEmptyOpportunitiesMsg) return Config.dashboardDefaults.emptyOpportunitiesHeader;

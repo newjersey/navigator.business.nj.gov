@@ -1,5 +1,5 @@
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { isRemoteWorkerOrSeller } from "@/lib/domain-logic/isRemoteWorkerOrSeller";
+import { isOwningBusiness, isRemoteWorkerOrSellerBusiness } from "@/lib/domain-logic/businessPersonaHelpers";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 
 const isFormedOutsideNavigator = (business: Business): boolean => {
@@ -12,13 +12,10 @@ export const shouldShowDisclaimerForProfileNotSubmittingData = (
 ): boolean => {
   if (!business || isAuthenticated === IsAuthenticated.UNKNOWN) return true;
 
-  const { profileData } = business;
-  const { businessPersona } = profileData;
-
   return (
     isFormedOutsideNavigator(business) ||
-    businessPersona === "OWNING" ||
+    isOwningBusiness(business) ||
     isAuthenticated === IsAuthenticated.FALSE ||
-    isRemoteWorkerOrSeller(business)
+    isRemoteWorkerOrSellerBusiness(business)
   );
 };

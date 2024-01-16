@@ -1,6 +1,6 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { isRemoteWorkerOrSeller } from "@/lib/domain-logic/isRemoteWorkerOrSeller";
+import { isOwningBusiness, isRemoteWorkerOrSellerBusiness } from "@/lib/domain-logic/businessPersonaHelpers";
 import { Business, LookupIndustryById, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
 
 export const getNavBarBusinessTitle = (
@@ -12,15 +12,8 @@ export const getNavBarBusinessTitle = (
     return Config.navigationDefaults.navBarGuestText;
   }
 
-  const {
-    businessName,
-    tradeName,
-    legalStructureId,
-    industryId,
-    businessPersona,
-    needsNexusDbaName,
-    nexusDbaName,
-  } = business.profileData;
+  const { businessName, tradeName, legalStructureId, industryId, needsNexusDbaName, nexusDbaName } =
+    business.profileData;
 
   const determineName = (): string => {
     if (needsNexusDbaName) {
@@ -42,7 +35,7 @@ export const getNavBarBusinessTitle = (
   const name = determineName();
   if (name) return name;
 
-  if (businessPersona === "OWNING") {
+  if (isOwningBusiness(business)) {
     if (legalStructureId) {
       return `${Config.navigationDefaults.navBarUnnamedOwnedBusinessText} ${
         LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation
@@ -52,7 +45,7 @@ export const getNavBarBusinessTitle = (
     }
   }
 
-  if (businessPersona === "FOREIGN" && isRemoteWorkerOrSeller(business)) {
+  if (isRemoteWorkerOrSellerBusiness(business)) {
     return Config.navigationDefaults.navBarUnnamedForeignRemoteSellerWorkerText;
   }
 

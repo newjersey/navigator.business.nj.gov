@@ -2,16 +2,16 @@ import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
 import { FormationDateModal } from "@/components/FormationDateModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
-import { Icon } from "@/components/njwds/Icon";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { TaskStatusTaxRegistrationSnackbar } from "@/components/TaskStatusTaxRegistrationSnackbar";
+import { Icon } from "@/components/njwds/Icon";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { isRemoteWorkerOrSeller } from "@/lib/domain-logic/isRemoteWorkerOrSeller";
+import { isRemoteWorkerOrSellerBusiness } from "@/lib/domain-logic/businessPersonaHelpers";
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { isFormationTask, isTaxTask } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
@@ -103,7 +103,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
           queries: {
             [QUERIES.fromFormBusinessEntity]: isFormationTask(props.taskId) ? "true" : "false",
             [QUERIES.fromTaxRegistration]:
-              isTaxTask(props.taskId) && !isRemoteWorkerOrSeller(business) ? "true" : "false",
+              isTaxTask(props.taskId) && !isRemoteWorkerOrSellerBusiness(business) ? "true" : "false",
           },
         });
       })
