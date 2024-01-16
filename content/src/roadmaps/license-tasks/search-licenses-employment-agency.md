@@ -1,22 +1,29 @@
 ---
+webflowIndustry: ""
+divisionPhone: (973) 504-6370
+issuingDivision: Regulated Business Unit
+filename: employment-agency-license
 displayname: search-licenses-employment-agency
-filename: search-licenses-employment-agency
-urlSlug: search-licenses
+urlSlug: employment-agency-license
 name: Apply for an Employment Agency License
-id: search-licenses
+webflowName: "Employment Agency: Employment Agency License"
+summaryDescriptionMd: You need to obtain an employment agency license before
+  offering staffing services. Call or email Employment and Personnel Services to
+  find out how to register.
+industryId: employment-agency
 callToActionLink: https://www.njconsumeraffairs.gov/epservices
+industryIntegration: New Jersey Division of Consumer Affairs
+id: search-licenses
+issuingAgency: New Jersey Division of Consumer Affairs Employment and Personnel Services
 callToActionText: Apply for an Employment Agency License
-agencyId: nj-consumer-affairs
-agencyAdditionalContext: Employment and Personnel Services, Regulated Business Unit
-webflowId: "5f77298a71c49e345d913b84"
-webflowName: "Employment Agency"
-divisionPhone: "(973) 504-6370"
-webflowIndustry: "Employment Agency"
-summaryDescriptionMd: >
-  You will need to obtain an employment agency license prior to offering staffing services. To do this, you must speak with a representative from New Jersey's Employment and Personnel Services.
-licenseCertificationClassification: "LICENSE"
+webflowId: 5f77298a71c49e345d913b84
+licenseCertificationClassification: ""
 ---
+## Application Requirements
+* Statement regarding applicant's criminal convictions, if any
+* Character statements from two New Jersey citizens who have known the applicant for at least five years
+* Applicable fees paid
 
 > **Once completed, you will have:**
 >
-> - A license to operate as an employment agency
+> * A license to operate as an employment agency
