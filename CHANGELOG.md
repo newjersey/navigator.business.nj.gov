@@ -1,3 +1,14 @@
+## [2024.1.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.1.0...v2024.1.1) (2024-01-17)
+
+
+### Bug Fixes
+
+* bring health checks to release early ([9d96461](https://github.com/newjersey/navigator.business.nj.gov/commit/9d96461068a7569d591ea17ec90ffbd03d76ea18))
+* updating License Tasks (Navigator with Webflow mappings) search-licenses-employment-agency ([#5462](https://github.com/newjersey/navigator.business.nj.gov/issues/5462)) ([5b9ed38](https://github.com/newjersey/navigator.business.nj.gov/commit/5b9ed38843db814be1f14b7575ab088b42dbec52))
+* updating Tasks - All taxi-authorization-local ([#5743](https://github.com/newjersey/navigator.business.nj.gov/issues/5743)) ([be3f652](https://github.com/newjersey/navigator.business.nj.gov/commit/be3f652973a7512f10f971125820504a696da33a))
+* updating Tasks - All transportation-cpcn ([#5749](https://github.com/newjersey/navigator.business.nj.gov/issues/5749)) ([e08d224](https://github.com/newjersey/navigator.business.nj.gov/commit/e08d22490a2e23c6db0b7269a6ff8ad2f71f54f4))
+* updating Tasks - All transportation-inspection ([#5752](https://github.com/newjersey/navigator.business.nj.gov/issues/5752)) ([fa49cb7](https://github.com/newjersey/navigator.business.nj.gov/commit/fa49cb701263e80876c673e77613e595e61f4331))
+
 # [2024.1.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.0.1...v2024.1.0) (2024-01-17)
 
 
