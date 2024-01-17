@@ -123,6 +123,10 @@ module.exports = {
       to: { path: "lodash" },
     },
     {
+      from: {},
+      to: { path: "lodash" },
+    },
+    {
       from: { path: "src/libs" },
       to: { path: "helmet" },
     },

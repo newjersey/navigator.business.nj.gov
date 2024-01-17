@@ -7,6 +7,7 @@ import { StateDropdown } from "@/components/StateDropdown";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { isStartingBusiness } from "@/lib/domain-logic/businessPersonaHelpers";
 import { templateEval } from "@/lib/utils/helpers";
 import { FormationIncorporator, FormationMember, StateObject } from "@businessnjgovnavigator/shared";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
@@ -35,7 +36,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
   props: Props<T>
 ): ReactElement => {
   const { business } = useUserData();
-  const isStarting = business?.profileData.businessPersona === "STARTING";
+  const isStarting = isStartingBusiness(business);
   const { Config } = useConfig();
   const [useDefaultAddress, setUseDefaultAddress] = useState<boolean>(false);
   const [addressData, setAddressData] = useState<T>(props.createEmptyAddress());

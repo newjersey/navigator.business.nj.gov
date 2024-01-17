@@ -53,6 +53,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { isStartingBusiness } from "@/lib/domain-logic/businessPersonaHelpers";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
@@ -146,7 +147,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const onBack = async (): Promise<void> => {
     if (!business) return;
-    if (businessPersona === "STARTING") {
+    if (isStartingBusiness(business)) {
       analytics.event.profile_back_to_roadmap.click.view_roadmap();
     }
     if (deepEqual(profileData, business.profileData)) {

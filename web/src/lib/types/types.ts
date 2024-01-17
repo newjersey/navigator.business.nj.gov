@@ -212,10 +212,16 @@ export interface QuickActionTask extends QuickAction {
   callToActionLink: string | undefined;
   callToActionText: string | undefined;
   form: string | undefined;
+  industryIds: string[];
+  sectorIds: string[];
+  applyToAllUsers: boolean;
 }
 
 export interface QuickActionLink extends QuickAction {
   externalRoute: string;
+  industryIds: string[];
+  sectorIds: string[];
+  applyToAllUsers: boolean;
 }
 
 export type FundingType =
