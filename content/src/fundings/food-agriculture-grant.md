@@ -5,10 +5,10 @@ urlSlug: food-agriculture-grant
 id: food-agriculture-grant
 openDate: 02/26/2024
 dueDate: ""
-descriptionMd: The program's goal is to support innovation from researchers and
-  entrepreneurs focused on developing technology and other solutions to address
-  food insecurity in New Jersey. The program aims to fund 10 companies for
-  awards of up to $75,000 each.
+summaryDescriptionMd: The program's goal is to support innovation from
+  researchers and entrepreneurs focused on developing technology and other
+  solutions to address food insecurity in New Jersey. The program aims to fund
+  10 companies for awards of up to $75,000 each.
 callToActionLink: https://www.njeda.gov/food-and-agriculture-research-development-pilot-grant-program/
 callToActionText: Learn more
 fundingType: grant
@@ -45,10 +45,10 @@ sector:
   - waste-management-and-Remediation
   - other-services
 publishStageArchive: null
-summaryDescriptionMd: >-
-  The program's goal is to support innovation from researchers and entrepreneurs focused on developing
-  technology and other solutions to address food insecurity in New Jersey. The program aims to fund 10
-  companies for awards of up to $75,000 each.
+descriptionMd: The program's goal is to support innovation from researchers and
+  entrepreneurs focused on developing technology and other solutions to address
+  food insecurity in New Jersey. The program aims to fund 10 companies for
+  awards of up to $75,000 each.
 ---
 
 ## Eligibility
@@ -57,6 +57,6 @@ summaryDescriptionMd: >-
 - Have between 1-50 full-time workers at time of application
 - Have less than or equal to $5,000,000 in prior year sales revenue (excluding grant revenue)
 
-> **Benefits**
+> ### Benefits
 >
 > The award grants up to $75,000 per business to support research and development of their innovation.

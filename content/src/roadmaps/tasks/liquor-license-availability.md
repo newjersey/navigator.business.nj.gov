@@ -1,14 +1,9 @@
 ---
 requiresLocation: true
-urlSlug: liquor-license-availability
-filename: liquor-license-availability
-displayname: liquor-license-availability
-name: Confirm Liquor License Availability
-id: liquor-license-availability
-callToActionLink: ${countyClerkWebsite}
-callToActionText: Visit My County Clerk's Website
 summaryDescriptionMd: >-
-  Every local government has a unique process and cost associated with obtaining a liquor license. Contact your local clerk's office to verify the cost and availability of a liquor license in your area.
+  Every local government has a unique process and cost associated with obtaining
+  a liquor license. Contact your local clerk's office to verify the cost and
+  availability of a liquor license in your area.
 
 
   :::note
@@ -16,9 +11,16 @@ summaryDescriptionMd: >-
   This screen guides your next steps. It does not submit your information for registration purposes.
 
   :::
+urlSlug: liquor-license-availability
+filename: liquor-license-availability
+displayname: liquor-license-availability
+name: Confirm Liquor License Availability
+id: liquor-license-availability
+callToActionLink: ${countyClerkWebsite}
+callToActionText: Visit My County Clerk's Website
 ---
 
-### Actions to Take
+## Actions to Take
 
 ${beginLocationDependentSection}
 

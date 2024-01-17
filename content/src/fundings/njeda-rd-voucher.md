@@ -1,18 +1,23 @@
 ---
 filename: njeda-rd-voucher
-urlSlug: njeda-rd-voucher
 name: Catalyst R&D Voucher Program
+urlSlug: njeda-rd-voucher
 id: njeda-rd-voucher
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: The Catalyst Research and Development (R&D) Voucher Pilot
+  Program supports New Jersey-based early-stage company efforts to accelerate
+  the development and innovation of technologies from the research stage into
+  commercially viable technologies, leading to industry and investor interest.
 callToActionLink: https://www.njeda.com/catalyst-voucher/
 callToActionText: Learn More
 fundingType: grant
+programFrequency: pilot
+status: rolling application
 programPurpose: In State
 agency:
   - njeda
 agencyContact: ""
-publishStageArchive: ""
-status: rolling application
-programFrequency: pilot
 businessStage: early-stage
 employeesRequired: yes
 homeBased: no
@@ -34,12 +39,10 @@ sector:
   - other-services
   - professional-scientific-and-technical-services
   - technology
-openDate: ""
-dueDate: ""
-descriptionMd: The Catalyst Research and Development (R&D) Voucher Pilot Program supports New Jersey-based early-stage company efforts to accelerate the development and innovation of technologies from the research stage into commercially viable technologies, leading to industry and investor interest.
-summaryDescriptionMd: >-
-  The Catalyst Research and Development (R&D) Voucher Pilot Program supports New Jersey-based early-stage
-  company efforts to accelerate the development and innovation of technologies from the research stage into
+publishStageArchive: ""
+descriptionMd: The Catalyst Research and Development (R&D) Voucher Pilot Program
+  supports New Jersey-based early-stage company efforts to accelerate the
+  development and innovation of technologies from the research stage into
   commercially viable technologies, leading to industry and investor interest.
 ---
 
@@ -52,5 +55,5 @@ summaryDescriptionMd: >-
 - 50% or more of the work is conducted in NJ
 - Applicant must obtain a signed approval letter from a participating university/college, Federal lab, or non-profit organization confirming that the facility is capable and willing to provide the services that will be supported by the voucher (current list of [participating facilities](https://www.google.com/maps/d/u/0/viewer?mid=1GcLO30HifmkWSqbI8UEBH7vS0lLOHNq1&ll=40.19013658561744%2C-74.98789639237287&z=17))
 
-> **Benefits:**
+> ### Benefits
 > This program is a $275,000 pilot program. Eligible applicants can apply for vouchers of up to $25,000 to help offset the cost of leveraging R&D resources, facilities, and equipment at the state’s academic universities, colleges, federal, and non-profit laboratories to advance their technology development.

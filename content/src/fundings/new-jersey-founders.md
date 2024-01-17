@@ -1,18 +1,26 @@
 ---
 filename: new-jersey-founders
-urlSlug: new-jersey-founders
 name: New Jersey Founders & Funders
+urlSlug: new-jersey-founders
 id: new-jersey-founders-funders
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: >-
+  Founders & Funders enables early-stage New Jersey technology and life sciences
+  companies to meet potential investors in 10-minute, one-on-one “speed dating”
+  sessions to discuss strategy, business models, and funding opportunities.
+
+
+  To register for this opportunity, contact: [NJFoundersFunders@njeda.com](mailto:NJFoundersFunders@njeda.com).
 callToActionLink: ""
 callToActionText: ""
 fundingType: technical assistance
+programFrequency: reoccuring
+status: rolling application
 programPurpose: In State
 agency:
   - njeda
 agencyContact: ""
-publishStageArchive: Do Not Publish
-status: rolling application
-programFrequency: reoccuring
 businessStage: early-stage
 employeesRequired: n/a
 homeBased: yes
@@ -24,17 +32,11 @@ sector:
   - technology
   - life-sciences
   - other-services
-openDate: ""
-dueDate: ""
-descriptionMd: Founders & Funders enables early-stage New Jersey technology and life sciences companies to meet potential investors in 10-minute, one-on-one “speed dating” sessions to discuss strategy, business models, and funding opportunities.
-summaryDescriptionMd: >-
-  Founders & Funders enables early-stage New Jersey technology and life sciences companies to meet potential
-  investors in 10-minute, one-on-one “speed dating” sessions to discuss strategy, business models, and funding
+publishStageArchive: Do Not Publish
+descriptionMd: Founders & Funders enables early-stage New Jersey technology and
+  life sciences companies to meet potential investors in 10-minute, one-on-one
+  “speed dating” sessions to discuss strategy, business models, and funding
   opportunities.
-
-
-  To register for this opportunity, contact:
-  [NJFoundersFunders@njeda.com](mailto:NJFoundersFunders@njeda.com).
 ---
 
 ## Eligibility
@@ -42,6 +44,6 @@ summaryDescriptionMd: >-
 - Company must be registered to do business in New Jersey and located in New Jersey
 - Company is able to demonstrate some signs of financial or operational traction
 
-> **Benefits**
+> ### Benefits
 >
 > Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities.

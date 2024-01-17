@@ -1,18 +1,23 @@
 ---
 filename: dep-clean-construction
-urlSlug: clean-construction
 name: NJ Clean Construction Program
+urlSlug: clean-construction
 id: dep-clean-construction
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: "New Jersey Clean Construction Program installs pollution
+  control devices or replaces qualifying non-road construction equipment that
+  reduces pollution. Businesses can apply to two grants: Off-Road Diesel
+  Retrofit Grant and Off-Road Diesel Replacement Grant."
 callToActionLink: https://www.nj.gov/dep/grantandloanprograms/aqes-njccp.htm
 callToActionText: Learn More
 fundingType: grant
+programFrequency: reoccuring
+status: first come, first serve
 programPurpose: In State
 agency:
   - njdep
 agencyContact: ""
-publishStageArchive: ""
-status: first come, first serve
-programFrequency: reoccuring
 businessStage: both
 employeesRequired: n/a
 homeBased: unknown
@@ -23,16 +28,11 @@ county:
 sector:
   - construction
   - utilities
-openDate: ""
-dueDate: ""
-descriptionMd: >-
-  New Jersey Clean Construction Program installs pollution control devices or replaces qualifying non-road
-  construction equipment that reduces pollution. Businesses can apply to two grants: Off-Road Diesel Retrofit
-  Grant and Off-Road Diesel Replacement Grant.
-summaryDescriptionMd: >-
-  New Jersey Clean Construction Program installs pollution control devices or replaces qualifying non-road
-  construction equipment that reduces pollution. Businesses can apply to two grants: Off-Road Diesel Retrofit
-  Grant and Off-Road Diesel Replacement Grant.
+publishStageArchive: ""
+descriptionMd: "New Jersey Clean Construction Program installs pollution control
+  devices or replaces qualifying non-road construction equipment that reduces
+  pollution. Businesses can apply to two grants: Off-Road Diesel Retrofit Grant
+  and Off-Road Diesel Replacement Grant."
 ---
 
 ## Eligibility
@@ -42,6 +42,6 @@ summaryDescriptionMd: >-
 - Equipment cannot be planned to go out of use in the next 5 years
 - Priority is given to urban areas, high frequency of use, and older models
 
-> **Benefits**
+> ### Benefits
 >
 > Award of up to $100,000 per piece of equipment purchased or replaced.

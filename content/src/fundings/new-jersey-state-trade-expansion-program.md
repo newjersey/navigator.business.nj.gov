@@ -5,10 +5,10 @@ urlSlug: nj-trade-expansion-program
 id: nj-trade-expansion-program
 openDate: ""
 dueDate: 09/29/2023
-descriptionMd: The New Jersey Business Action Center's (NJBAC) State Trade
-  Expansion Program (NJSTEP) provides financial awards to domestic small
-  businesses that are new to exporting and those who currently sell their goods
-  and services to other countries.
+summaryDescriptionMd: The New Jersey Business Action Center's (NJBAC) State
+  Trade Expansion Program (NJSTEP) provides financial awards to domestic small
+  businesses that are new to export and those who currently sell their goods and
+  services to other countries.
 callToActionLink: https://www.nj.gov/state/bac/njstep.shtml
 callToActionText: Learn more
 fundingType: grant
@@ -29,10 +29,10 @@ county:
   - All
 sector: []
 publishStageArchive: ""
-summaryDescriptionMd: >-
-  The New Jersey Business Action Center's (NJBAC) State Trade Expansion Program (NJSTEP) provides financial
-  awards to domestic small businesses that are new to export and those who currently sell their goods and
-  services to other countries.
+descriptionMd: The New Jersey Business Action Center's (NJBAC) State Trade
+  Expansion Program (NJSTEP) provides financial awards to domestic small
+  businesses that are new to exporting and those who currently sell their goods
+  and services to other countries.
 ---
 
 ## Eligibility
@@ -42,7 +42,7 @@ summaryDescriptionMd: >-
 - Manufacturing goods or producing services that contain at least 51% U.S. content
 - Registered with NJ START and have a [DUNS number](https://www.dnb.com/duns.html)
 
-> **Benefits**
+> ### Benefits
 >
 > - $15,000-$25,000 per company per grant cycle
 > - Website and e-commerce fees to attract international buyers, along with designs for international marketing media

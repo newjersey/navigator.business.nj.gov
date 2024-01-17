@@ -1,18 +1,23 @@
 ---
 filename: upskill-free-incumbent
-urlSlug: upskill-free-incumbent
 name: "Upskill: Free Incumbent Worker Training Programs"
+urlSlug: upskill-free-incumbent
 id: upskill-free-incumbent-worker-training-programs
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: Upskill offers grants to New Jersey businesses of any size
+  grants to improve existing employees’ skills. Training may be provided by
+  employers at their business or by an eligible training provider. These should
+  be group-based trainings, not unique to one employee.
 callToActionLink: https://www.nj.gov/labor/employer-services/business/businessprograms.shtml?open=specialty
 callToActionText: Learn more
 fundingType: grant
+programFrequency: reoccuring
+status: rolling application
 programPurpose: ""
 agency:
   - njdol
 agencyContact: ""
-publishStageArchive: ""
-status: rolling application
-programFrequency: reoccuring
 businessStage: both
 employeesRequired: Yes
 homeBased: no
@@ -31,12 +36,10 @@ sector:
   - digital-and-print-media
   - finance-and-insurance
   - other-services
-openDate: ""
-dueDate: ""
-descriptionMd: Upskill offers grants to New Jersey businesses of any size grants to improve existing employees’ skills. Training may be provided by employers at their business or by an eligible training provider. These should be group-based trainings, not unique to one employee.
-summaryDescriptionMd: >-
-  Upskill offers grants to New Jersey businesses of any size grants to improve existing employees’ skills.
-  Training may be provided by employers at their business or by an eligible training provider. These should be
+publishStageArchive: ""
+descriptionMd: Upskill offers grants to New Jersey businesses of any size grants
+  to improve existing employees’ skills. Training may be provided by employers
+  at their business or by an eligible training provider. These should be
   group-based trainings, not unique to one employee.
 ---
 
@@ -44,6 +47,6 @@ summaryDescriptionMd: >-
 
 - Businesses with existing employees who can be trained in a new skill for current and future workforce demands
 
-> **Benefits**
+> ### Benefits
 >
 > Employers can receive grants of up to $100,000.

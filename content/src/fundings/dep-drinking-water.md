@@ -1,18 +1,22 @@
 ---
 filename: dep-drinking-water
-urlSlug: drinking-water-fund
 name: Drinking Water State Revolving Fund Program
+urlSlug: drinking-water-fund
 id: dep-drinking-water
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: This program provides low-interest loans to finance the
+  costs of infrastructure needed to achieve or maintain compliance with Safe
+  Drinking Water Act (SDWA) requirements and to protect public health.
 callToActionLink: https://www.nj.gov/dep/grantandloanprograms/lu_dwsrf.htm
 callToActionText: Learn More
 fundingType: loan
+programFrequency: ongoing
+status: rolling application
 programPurpose: In State
 agency:
   - njdep
 agencyContact: ""
-publishStageArchive: ""
-status: rolling application
-programFrequency: ongoing
 businessStage: operating
 employeesRequired: n/a
 homeBased: unknown
@@ -23,12 +27,10 @@ county:
 sector:
   - construction
   - utilities
-openDate: ""
-dueDate: ""
-descriptionMd: This program provides low-interest loans to finance the costs of infrastructure needed to achieve or maintain compliance with Safe Drinking Water Act (SDWA) requirements and to protect public health.
-summaryDescriptionMd: >-
-  This program provides low-interest loans to finance the costs of infrastructure needed to achieve or
-  maintain compliance with Safe Drinking Water Act (SDWA) requirements and to protect public health.
+publishStageArchive: ""
+descriptionMd: This program provides low-interest loans to finance the costs of
+  infrastructure needed to achieve or maintain compliance with Safe Drinking
+  Water Act (SDWA) requirements and to protect public health.
 ---
 
 ## Eligibility
@@ -40,6 +42,6 @@ Must be a nonprofit, non-community water systems in New Jersey and use the funds
 - Rehabilitation of existing water treatment facilities, water mains, pump stations, water storage facilities, or new water storage facilities to maintain compliance with the SDWA and wells
 - Allowances for planning and design are also available
 
-> **Benefits**
+> ### Benefits
 >
 > Provides short-term loans at 0.337% Interest to replace and update drinking water infrastructure.

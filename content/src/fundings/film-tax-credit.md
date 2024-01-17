@@ -1,18 +1,22 @@
 ---
 filename: film-tax-credit
-urlSlug: film-tax-credit
 name: Film Tax Credit Program
+urlSlug: film-tax-credit
 id: film-tax-credit-program
+openDate: ""
+dueDate: ""
+summaryDescriptionMd: The Film Tax Credit Program provides a transferable credit
+  against the corporation business tax and the gross income tax to incentivize
+  production companies to film content in New Jersey.
 callToActionLink: https://www.njeda.com/film
 callToActionText: Learn more
 fundingType: tax credit
+programFrequency: reoccuring
+status: first come, first serve
 programPurpose: Both
 agency:
   - njeda
 agencyContact: ""
-publishStageArchive: ""
-status: first come, first serve
-programFrequency: reoccuring
 businessStage: operating
 employeesRequired: n/a
 homeBased: no
@@ -22,12 +26,10 @@ county:
   - All
 sector:
   - arts-entertainment-and-recreation
-openDate: ""
-dueDate: ""
-descriptionMd: The Film Tax Credit Program provides a transferable credit against the corporation business tax and the gross income tax to incentivize production companies to film content in New Jersey.
-summaryDescriptionMd: >-
-  The Film Tax Credit Program provides a transferable credit against the corporation business tax and the
-  gross income tax to incentivize production companies to film content in New Jersey.
+publishStageArchive: ""
+descriptionMd: The Film Tax Credit Program provides a transferable credit
+  against the corporation business tax and the gross income tax to incentivize
+  production companies to film content in New Jersey.
 ---
 
 ## Eligibility
@@ -42,6 +44,6 @@ summaryDescriptionMd: >-
 - Productions that solicit funds
 - Productions primarily for private, industrial, corporate, or institutional purposes
 
-> **Benefits**
+> ### Benefits
 >
 > Tax credits up to 35% of qualified film production expenses.

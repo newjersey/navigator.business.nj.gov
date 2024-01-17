@@ -1,32 +1,29 @@
 ---
-id: "undefined"
-webflowId: "65708fb0a29ec3ec595eaa57"
-urlSlug: "life-hazard-use-registration"
-name: "Complete Your Life Hazard Use Registration"
-webflowName: "Life Hazard Use Registration"
-filename: "life-hazard-use-registration"
-callToActionLink: "https://firesolutions.dca.nj.gov/ultra-fire-home/"
-callToActionText: "Register My Business"
-agencyId: "nj-community-affairs"
-agencyAdditionalContext: "Bureau of Fire Code Enforcement"
-divisionPhone: "609-633-6132"
-industryId: "generic"
-webflowType: "business-license"
-licenseCertificationClassification: "undefined"
+filename: life-hazard-use-registration
+displayname: life-hazard-use-registration
+urlSlug: life-hazard-use-registration
+name: Complete Your Life Hazard Use Registration
+webflowName: "Fire Safety Registration: Life Hazard Use (LHU)"
 summaryDescriptionMd: >-
-  A Life Hazard Use business is one that poses a higher risk to human life
-  during fires and other emergencies. This classification ensures your building
-  or space has the right fire safety measures in place based on how it’s used.
-  There are different types of Life Hazard Uses listed in the Uniform Fire Code.
-  A fire inspector will let you know if your business needs to be registered as
-  a Life Hazard Use with the state Division of Fire Safety and what type of Life
-  Hazard Use your business is. You must register to operate your business.
----
+  Life Hazard Use (LHU) is a label assigned to businesses with a commercial or
+  manufacturing space that present a higher risk to human life during fires and
+  other emergencies. [Contact your Local Enforcing Agency
+  (LEA)](https://www.nj.gov/dca/divisions/dfs/pdf/fire_code_enforcement_director.pdf)
+  to learn if your business is an LHU.
 
-A Life Hazard Use business is one that poses a higher risk to human life during
-fires and other emergencies. This classification ensures your building or space
-has the right fire safety measures in place based on how it’s used. There are
-different types of Life Hazard Uses listed in the Uniform Fire Code. A fire
-inspector will let you know if your business needs to be registered as a Life
-Hazard Use with the state Division of Fire Safety and what type of Life Hazard
-Use your business is. You must register to operate your business.
+
+  If your business is an LHU, you must register with the State and pay the associated fee to operate your business.
+industryId: generic
+callToActionText: Register Life Hazard Use Business
+callToActionLink: https://firesolutions.dca.nj.gov/ultra-fire-home/
+licenseCertificationClassification: undefined
+agencyId: nj-community-affairs
+agencyAdditionalContext: Division of Fire Safety
+divisionPhone: (609) 633-6132
+id: undefined
+webflowType: business-license
+webflowId: 65708fb0a29ec3ec595eaa57
+---
+Life Hazard Use (LHU) is a label assigned to businesses with a commercial or manufacturing space that present a higher risk to human life during fires and other emergencies. [Contact your Local Enforcing Agency (LEA)](https://www.nj.gov/dca/divisions/dfs/pdf/fire_code_enforcement_director.pdf) to learn if your business is an LHU.
+
+If your business is an LHU, you must register with the State and pay the associated fee to operate your business.
