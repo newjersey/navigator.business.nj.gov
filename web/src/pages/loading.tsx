@@ -20,6 +20,7 @@ const LoadingPage = (): ReactElement => {
   const { updateQueue, userData } = useUserData();
   const router = useRouter();
   const { dispatch } = useContext(AuthContext);
+  const accountCard = process.env.FEATURE_LINK_ACCOUNT_CARD === "true" ?? false;
 
   useEffect(() => {
     if (!router.isReady) {
@@ -55,6 +56,17 @@ const LoadingPage = (): ReactElement => {
         .then(() => {
           router.push(pageLink);
         });
+    } else if (accountCard) {
+      console.log("Link Account Card flag hit");
+      console.log("Before Update");
+      console.log(business);
+      updateQueue.update().then(() => {
+        console.log("After Update");
+        console.log(business);
+        setTimeout(() => {
+          router.push(ROUTES.dashboard);
+        }, 10000);
+      });
     } else {
       router.push(ROUTES.dashboard);
     }

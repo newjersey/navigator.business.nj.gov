@@ -284,6 +284,7 @@ const apiFormationClient = ApiFormationClient(
 const shouldSaveDocuments = !(process.env.SKIP_SAVE_DOCUMENTS_TO_S3 === "true");
 
 app.use(bodyParser.json({ strict: false }));
+
 app.use(
   "/api",
   userRouterFactory(
@@ -295,6 +296,7 @@ app.use(
     timeStampToBusinessSearch
   )
 );
+
 app.use(
   "/api/external",
   externalEndpointRouterFactory(userDataClient, addGovDeliveryNewsletter, addToAirtableUserTesting)
