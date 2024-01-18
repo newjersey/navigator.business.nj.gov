@@ -40,6 +40,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
   const { Config } = useConfig();
   const [useDefaultAddress, setUseDefaultAddress] = useState<boolean>(false);
   const [addressData, setAddressData] = useState<T>(props.createEmptyAddress());
+
   type ErrorState = {
     invalid: boolean | undefined;
     label: string;
@@ -92,6 +93,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
 
     switch (fieldName) {
       case "addressLine1":
+        console.log("addressLine1 validation:", data.addressLine1);
         return fieldWithMaxLength({
           required: true,
           maxLen: 35,
@@ -106,6 +108,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           dataField: "addressLine2",
         });
       case "addressCity":
+        console.log("addressCity validation:", data.addressCity);
         return fieldWithMaxLength({
           required: true,
           maxLen: 30,
@@ -120,10 +123,12 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           dataField: "name",
         });
       case "addressState":
+        console.log("addressState validation:", data.addressState);
         return { invalid: !data.addressState, label: Config.formation.addressModal.addressState.error };
       case "addressZipCode":
+        console.log("zipCode validation:", data.addressZipCode);
         return {
-          invalid: !data.addressZipCode || data.addressZipCode.length < 5,
+          invalid: !data.addressZipCode || data.addressZipCode.length !== 5,
           label: Config.formation.addressModal.addressZipCode.error,
         };
       default:
@@ -185,14 +190,25 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
   };
 
   const onValidation = (fieldName: string): void => {
+    console.log("I'm onValidation", onValidation);
+    console.log("Validation triggered for field:", fieldName);
+    console.log("Current addressData:", addressData);
+    console.log("Current addressErrorMap:", addressErrorMap);
+    // debugger;
     setAddressErrorMap({ ...addressErrorMap, [fieldName]: getErrorStateForField(fieldName as ErrorFields) });
+    console.log("I'm onValidation Too", onValidation);
   };
 
-  const onSubmit = (): void => {
+  const onSubmit = async (): Promise<void> => {
+    console.log("Submit button clicked");
+
     const unValidated = Object.values(addressErrorMap).some((i) => {
+      if (i.invalid === undefined) console.log({ i });
       return i.invalid === undefined;
     });
+
     if (unValidated) {
+      console.log("Unvalidated");
       setAddressErrorMap(
         validatedFields.reduce(
           (prev: AddressErrorMap, curr: ErrorFields) => {
@@ -201,6 +217,8 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           { ...addressErrorMap } as AddressErrorMap
         )
       );
+      // if (!unValidated) console.log("!Unvalidated: I am validated");
+      if (unValidated) console.log("Unvalidated II: I am unvalidated");
       return;
     }
 
@@ -209,6 +227,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
     });
 
     if (failedValidation) {
+      console.log("I am failing!");
       return;
     }
 
@@ -221,6 +240,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
     }
     props.handleClose();
     props.onSave();
+    console.log("I found Jeezus!");
   };
 
   return (
@@ -262,9 +282,8 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               inputWidth="full"
               value={addressData.name}
               handleChange={(value: string): void => {
-                setAddressData((prevAddressData) => {
-                  return { ...prevAddressData, name: value };
-                });
+                console.log("addressName", value);
+                setAddressData({ ...addressData, name: value });
               }}
               error={addressErrorMap["addressName"].invalid}
               onValidation={onValidation}

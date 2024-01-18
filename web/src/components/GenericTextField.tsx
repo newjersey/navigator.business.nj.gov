@@ -13,6 +13,7 @@ import {
   ReactElement,
   RefObject,
   useMemo,
+  useState,
 } from "react";
 
 export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFieldProps<T> {
@@ -52,6 +53,8 @@ export const GenericTextField = forwardRef(
     props: GenericTextFieldProps<T>,
     ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined
   ): ReactElement => {
+    const [validatedInput, setValidatedInput] = useState<boolean>(false);
+
     const widthStyling =
       props.inputWidth === "reduced"
         ? "text-field-width-reduced"
@@ -131,22 +134,42 @@ export const GenericTextField = forwardRef(
     RegisterForOnSubmit(() => isFieldValid(value));
 
     const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
-      const isValid = isFieldValid(event.target.value);
-      setIsValid(isValid);
-      props.onValidation && props.onValidation(props.fieldName, !isValid, event.target.value);
-    };
+      console.log("target value", event.target.value);
+      console.log("GTF onValidation triggered for:", props.fieldName);
+      console.log({ validatedInput });
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-      const value = valueFilter ? valueFilter(event.target.value) : event.target.value;
-      props.handleChange && props.handleChange(value);
-      props.onChange && props.onChange(value);
-      if (event && event.nativeEvent.constructor.name === "Event") {
-        //Generic events triggered by autofill
-        onValidation(event as FocusEvent<HTMLInputElement>);
+      console.log("Event type", event.type);
+
+      const isAutofill = event.target.value !== props.value;
+      console.log("Is autofill:", isAutofill);
+      if (validatedInput) {
+        // debugger;
+        const isValid = isFieldValid(event.target.value);
+        console.log("isValid", isValid, props.fieldName);
+        props.onValidation && props.onValidation(props.fieldName, !isValid, event.target.value);
+        setIsValid(isValid);
+        setValidatedInput(true);
       }
     };
 
+    const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+      // console.log("event", event);
+      const value = valueFilter ? valueFilter(event.target.value) : event.target.value;
+      props.handleChange && props.handleChange(value);
+      props.onChange && props.onChange(value);
+
+      if (event && event.nativeEvent.constructor.name === "Event") {
+        // Generic events triggered by autofill
+        console.log("What's the event?", event);
+        console.log("What's the Event?", event.nativeEvent);
+        console.log("I am onValidation!", onValidation);
+        onValidation(event as FocusEvent<HTMLInputElement>);
+      }
+      setValidatedInput(true);
+    };
+
     const error = props.error ?? isFormFieldInvalid;
+
     return (
       <div className={`${widthStyling} ${props.className ?? ""} ${error ? "error" : ""}`}>
         <TextField

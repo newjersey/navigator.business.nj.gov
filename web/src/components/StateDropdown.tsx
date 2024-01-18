@@ -24,27 +24,47 @@ interface Props {
 
 export const StateDropdown = (props: Props): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
+  const [isAutofilled, setIsAutofilled] = useState<boolean>(false);
 
   const handleOnChange = (event: ChangeEvent<unknown>, value: StateObject | null): void => {
     props.onSelect(value || undefined);
   };
 
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
+    console.log("target value in SDD", event.target.value);
+
     const value = event.target.value;
     const invalid = props.required ? !value.trim() || getState(value) === undefined : false;
 
+    console.log("Value in SDD", value);
+
     props.onValidation && props.onValidation(props.fieldName, invalid);
+    if (isAutofilled) {
+      console.log("The state is autofilled");
+      setIsAutofilled(true);
+    }
   };
 
   const handleInputChange = (event: ChangeEvent<unknown>, value: string | null): void => {
+    if (!event) return;
     if (value === null || value === "") {
       props.onSelect(undefined);
     } else {
       const state = getState(value);
       state && props.onSelect(state);
     }
-    if (event && event.nativeEvent.constructor.name === "Event") {
-      //Generic events triggered by autofill
+    // ORIGINAL - but doesn't take state autofill into account
+    // if (event && event.nativeEvent.constructor.name === "Event") {
+    //   //Generic events triggered by autofill
+    //   setIsAutofilled(true);
+    //   onValidation(event as FocusEvent<HTMLInputElement>);
+    // }
+
+    // console.log("State Dropdown event.target.value", event);
+    const isAutofillEvent = event.type === "change" && (event.target as HTMLInputElement).value !== value;
+
+    if (isAutofillEvent) {
+      setIsAutofilled(true);
       onValidation(event as FocusEvent<HTMLInputElement>);
     }
   };
@@ -82,6 +102,7 @@ export const StateDropdown = (props: Props): ReactElement => {
   };
 
   const getState = (value: string | undefined): StateObject | undefined => {
+    console.log("SDD state I", value);
     return filteredStates().find((state: StateObject) => {
       return state.name === value || state.shortCode === value?.toUpperCase();
     });
