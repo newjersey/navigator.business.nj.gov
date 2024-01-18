@@ -96,7 +96,6 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
           selectDate("04/2021");
           selectLocation("Allendale");
           clickModalSaveButton();
-          clickModalSaveButton();
 
           selectHomeBased(false);
 
@@ -249,8 +248,6 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
   };
 
   const goToMercantileTask = (): void => {
-    cy.wait(1000);
-    cy.get('[data-task="check-local-requirements"]').scrollIntoView();
     cy.get('[data-task="check-local-requirements"]').click({ force: true });
   };
 
@@ -281,8 +278,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
   };
 
   const clickModalSaveButton = (): void => {
-    cy.wait(1000);
-    cy.get('[data-testid="modal-button-primary"]').trigger("click");
+    cy.get('[data-testid="modal-button-primary"]').click();
     cy.wait(1000);
   };
 });
