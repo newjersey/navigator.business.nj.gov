@@ -289,8 +289,8 @@ app.use(
   userRouterFactory(
     userDataClient,
     updateLicenseStatus,
-    updateOperatingPhase,
     updateSidebarCards,
+    updateOperatingPhase,
     AWSEncryptionDecryptionClient,
     timeStampToBusinessSearch
   )
