@@ -50,7 +50,7 @@
     "canBeHomeBased": true,
     "canBeReseller": true
   },
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "build, builds, building, buildings, development",
   "id": "commercial construction",
   "description": "Builds or maintains physical structures such as roads, bridges, and buildings"
