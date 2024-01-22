@@ -22,6 +22,7 @@ const LoadingPage = (): ReactElement => {
   const { dispatch } = useContext(AuthContext);
   const accountCard = process.env.FEATURE_LINK_ACCOUNT_CARD === "true" ?? false;
   console.log(process.env.FEATURE_LINK_ACCOUNT_CARD);
+  
   useEffect(() => {
     console.log("1", router);
     if (!router.isReady) {
