@@ -22,7 +22,10 @@ const LoadingPage = (): ReactElement => {
   const { dispatch } = useContext(AuthContext);
   const accountCard = process.env.FEATURE_LINK_ACCOUNT_CARD === "true" ?? false;
 
+  console.log(process.env.FEATURE_LINK_ACCOUNT_CARD);
+
   useEffect(() => {
+    console.log("1", router);
     if (!router.isReady) {
       return;
     }
@@ -46,6 +49,7 @@ const LoadingPage = (): ReactElement => {
   useMountEffectWhenDefined(() => {
     if (!updateQueue) return;
     const business = updateQueue.currentBusiness();
+    console.log("2", business);
     if (!onboardingCompleted(business)) {
       router.push(ROUTES.onboarding);
     } else if (business.preferences.returnToLink) {
