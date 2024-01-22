@@ -49,12 +49,19 @@ function setupMockAnalytics(): typeof analytics {
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 const mockSessionHelper = sessionHelper as jest.Mocked<typeof sessionHelper>;
 const mockSigninHelper = signinHelper as jest.Mocked<typeof signinHelper>;
+let ORIGINAL_FEATURE_LINK_ACCOUNT_CARD: string | undefined;
 
 describe("loading page", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
     mockSessionHelper.triggerSignIn.mockResolvedValue();
+    ORIGINAL_FEATURE_LINK_ACCOUNT_CARD = process.env.FEATURE_LINK_ACCOUNT_CARD;
+    process.env.FEATURE_LINK_ACCOUNT_CARD = "false";
+  });
+
+  afterEach(() => {
+    process.env.FEATURE_LINK_ACCOUNT_CARD = ORIGINAL_FEATURE_LINK_ACCOUNT_CARD;
   });
 
   it("redirects STARTING users to dashboard", () => {
