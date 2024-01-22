@@ -19,11 +19,10 @@ export const QuickActionsContainer = ({ quickActionTasks, quickActionLinks }: Pr
     return <></>;
   }
   const findMatch = (action: QuickActionTask | QuickActionLink): boolean => {
-    let result = false;
-    if (!!action.industryIds && !!industryId && action.industryIds.includes(industryId)) result = true;
-    if (!!action.sectorIds && !!sectorId && action.sectorIds.includes(sectorId)) result = true;
-    if (action.applyToAllUsers) result = true;
-    return result;
+    if (action.applyToAllUsers) return true;
+    if (action.industryIds && industryId && action.industryIds.includes(industryId)) return true;
+    if (action.sectorIds && sectorId && action.sectorIds.includes(sectorId)) return true;
+    return false;
   };
 
   const filteredTasks = quickActionTasks
