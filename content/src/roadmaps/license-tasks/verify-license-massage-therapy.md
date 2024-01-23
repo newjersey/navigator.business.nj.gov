@@ -1,8 +1,10 @@
 ---
-displayname: verify-license-massage-therapy
 notesMd: >-
-  06/28/23: This task needs two CTA links: 1) "Apply for My License" and 2)
-  "Verify My Staff Are Licensed." The CTA button needs to accommodate both.
+  01/22/2024: Leave as one CTA.
+
+  ===
+
+  06/28/23: This task needs two CTA links: 1) "Apply for My License" and 2) "Verify My Staff Are Licensed." The CTA button needs to accommodate both.
 
 
   CTA 1: "Apply for My License"(https://www.njconsumeraffairs.gov/mbt/Pages/individual.aspx)
@@ -12,13 +14,14 @@ notesMd: >-
 
   After adding second CTA, remove the inline link: "verify your employees are licensed."
 filename: verify-license-massage-therapy
+displayname: verify-license-massage-therapy
 urlSlug: verify-license-massage-therapy
 name: Apply for Your License and Ensure Your Staff is Licensed
 webflowName: "Massage Therapy: Massage Therapy Licenses"
-summaryDescriptionMd: >-
-  If you or any of your staff provide massage therapy services, you each need to
-  have massage therapy license. It is the responsibility of the business owner
-  to ensure all staff providing massage therapy services have a current license.
+summaryDescriptionMd: If you or any of your staff provide massage therapy
+  services, you each need to have massage therapy license. It is the
+  responsibility of the business owner to ensure all staff providing massage
+  therapy services have a current license.
 industryId:
   - massage-therapy
 callToActionText: Apply for My License
