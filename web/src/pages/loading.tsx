@@ -20,12 +20,8 @@ const LoadingPage = (): ReactElement => {
   const { updateQueue, userData } = useUserData();
   const router = useRouter();
   const { dispatch } = useContext(AuthContext);
-  const accountCard = process.env.FEATURE_LINK_ACCOUNT_CARD === "true" ?? false;
-
-  console.log(process.env.FEATURE_LINK_ACCOUNT_CARD);
 
   useEffect(() => {
-    console.log("1", router);
     if (!router.isReady) {
       return;
     }
@@ -49,7 +45,6 @@ const LoadingPage = (): ReactElement => {
   useMountEffectWhenDefined(() => {
     if (!updateQueue) return;
     const business = updateQueue.currentBusiness();
-    console.log("2", business);
     if (!onboardingCompleted(business)) {
       router.push(ROUTES.onboarding);
     } else if (business.preferences.returnToLink) {
@@ -60,23 +55,8 @@ const LoadingPage = (): ReactElement => {
         .then(() => {
           router.push(pageLink);
         });
-    } else if (accountCard) {
-      console.log(`routing to ${window.location.hostname + ROUTES.dashboard}`);
-      setTimeout(() => {
-        window.location.assign(ROUTES.dashboard);
-      }, 10000);
-      // console.log("Link Account Card flag hit");
-      // console.log("Before Update");
-      // console.log(business);
-      // updateQueue.update().then(() => {
-      //   console.log("After Update");
-      //   console.log(business);
-      //   setTimeout(() => {
-      //     router.push(ROUTES.dashboard);
-      //   }, 10000);
-      // });
     } else {
-      router.push(ROUTES.dashboard);
+      window.location.replace(ROUTES.dashboard);
     }
   }, userData);
 
