@@ -1,6 +1,10 @@
 ---
 filename: authorization-certificate-reinstatement
 name: Apply to Reinstate Your Application for a Certificate of Authorization
+industryIds:
+  - architecture
+sectorIds:
+  - construction
 icon: update-purple.svg
 urlSlug: authorization-certificate-reinstatement
 callToActionText: " Reinstate My Application for a Certificate of Authorization "
