@@ -63,7 +63,7 @@ const LoadingPage = (): ReactElement => {
     } else if (accountCard) {
       console.log(`routing to ${window.location.hostname + ROUTES.dashboard}`);
       setTimeout(() => {
-        window.location.assign(window.location.hostname + ROUTES.dashboard);
+        window.location.assign(ROUTES.dashboard);
       }, 10000);
       // console.log("Link Account Card flag hit");
       // console.log("Before Update");
