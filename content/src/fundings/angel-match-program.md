@@ -1,6 +1,7 @@
 ---
 filename: Angel Match Program
 name: Angel Match Program
+displayName: Angel Match Program
 urlSlug: angel-match
 id: angel-match
 openDate: ""

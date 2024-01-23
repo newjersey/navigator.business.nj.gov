@@ -2,6 +2,7 @@
 filename: angel-investor-tax
 name: Angel Investor Tax Credit Program
 urlSlug: angel-investor-tax
+displayName: Angel Investor Tax Credit Program
 id: angel-investor-tax-credit-program
 openDate: ""
 dueDate: ""

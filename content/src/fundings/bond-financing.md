@@ -2,6 +2,7 @@
 filename: bond-financing
 name: Bond Financing
 urlSlug: bond-financing
+displayName: Bond Financing
 id: bond-financing
 openDate: ""
 dueDate: ""

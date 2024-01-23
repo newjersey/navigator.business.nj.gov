@@ -1,6 +1,7 @@
 ---
 filename: Clean Energy Program - Large Energy Users
 name: New Jersey’s Clean Energy Program - Large Energy Users
+displayName: New Jersey’s Clean Energy Program - Large Energy Users
 urlSlug: njcep-leu
 id: njcep-leu
 openDate: ""

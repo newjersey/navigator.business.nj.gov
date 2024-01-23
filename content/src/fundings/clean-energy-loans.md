@@ -1,6 +1,7 @@
 ---
 filename: Clean Energy Loans
 name: New Jersey Clean Energy Loans
+displayName: New Jersey Clean Energy Loans
 urlSlug: nj-cels
 id: nj-cels
 openDate: ""

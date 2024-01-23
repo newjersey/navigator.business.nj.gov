@@ -2,6 +2,7 @@
 filename: work-first-nj
 name: Work First NJ (TANF + SNAP) Employment and Training
 urlSlug: work-first-nj
+displayName: Work First NJ (TANF + SNAP) Employment and Training
 id: work-first-nj-tanf-snap-employment-and-training
 openDate: ""
 dueDate: ""

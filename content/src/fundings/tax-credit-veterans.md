@@ -2,6 +2,7 @@
 filename: tax-credit-veterans
 name: Tax Credit for Hiring Veterans and Other Target Groups
 urlSlug: tax-credit-veterans
+displayName: Tax Credit for Hiring Veterans and Other Target Groups
 id: tax-credit-for-hiring-veterans-and-other-target-groups
 openDate: ""
 dueDate: ""

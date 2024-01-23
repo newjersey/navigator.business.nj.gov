@@ -2,6 +2,8 @@
 filename: technology-business-tax
 name: Technology Business Tax Certificate Transfer (NOL) Program [formerly Net
   Operating Loss Program]
+displayName: Technology Business Tax Certificate Transfer (NOL) Program [formerly Net
+  Operating Loss Program]
 urlSlug: technology-business-tax
 id: technology-business-tax-certificate-transfer-nol-program
 openDate: 05/01/2024

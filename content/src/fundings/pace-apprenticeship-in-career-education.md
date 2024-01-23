@@ -1,6 +1,7 @@
 ---
 filename: Pace Apprenticeship in Career Education
 name: Pace Apprenticeship in Career Education
+displayName: Pace Apprenticeship in Career Education
 urlSlug: pace-apprentice
 id: pace
 openDate: ""

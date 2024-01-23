@@ -2,6 +2,7 @@
 filename: film-tax-credit
 name: Film Tax Credit Program
 urlSlug: film-tax-credit
+displayName: Film Tax Credit Program
 id: film-tax-credit-program
 openDate: ""
 dueDate: ""
