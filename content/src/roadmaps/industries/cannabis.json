@@ -1,9 +1,7 @@
 {
-  "displayname": "cannabis",
   "naicsCodes": "111419, 111998, 424590, 459991",
   "defaultSectorId": "cannabis",
   "canHavePermanentLocation": false,
-  "nonEssentialQuestionsIds": [],
   "roadmapSteps": [
     {
       "step": 1,
@@ -83,12 +81,14 @@
     }
   ],
   "name": "Cannabis",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "cannabis",
   "industryOnboardingQuestions": {
     "isCannabisLicenseTypeApplicable": true
   },
   "modifications": [],
   "isEnabled": true,
-  "additionalSearchTerms": "marijuana, ACT, cannabis business, micro license, cultivation, dispensary, grow, retail, pot, weed",
+  "additionalSearchTerms": "marijuana, ACT, cannabis business, micro license, cultivation, cultivator, dispensary, grow, retail, pot, weed, manufacturer, wholesaler, distributor, retailer, delivery",
   "id": "cannabis",
   "description": "A business that manufacturers, delivers, or sells cannabis",
   "webflowId": "656a1362657b7f011c19dc79"
