@@ -61,16 +61,20 @@ const LoadingPage = (): ReactElement => {
           router.push(pageLink);
         });
     } else if (accountCard) {
-      console.log("Link Account Card flag hit");
-      console.log("Before Update");
-      console.log(business);
-      updateQueue.update().then(() => {
-        console.log("After Update");
-        console.log(business);
-        setTimeout(() => {
-          router.push(ROUTES.dashboard);
-        }, 10000);
-      });
+      console.log(`routing to ${window.location.hostname + ROUTES.dashboard}`);
+      setTimeout(() => {
+        window.location.assign(window.location.hostname + ROUTES.dashboard);
+      }, 10000);
+      // console.log("Link Account Card flag hit");
+      // console.log("Before Update");
+      // console.log(business);
+      // updateQueue.update().then(() => {
+      //   console.log("After Update");
+      //   console.log(business);
+      //   setTimeout(() => {
+      //     router.push(ROUTES.dashboard);
+      //   }, 10000);
+      // });
     } else {
       router.push(ROUTES.dashboard);
     }
