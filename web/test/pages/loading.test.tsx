@@ -49,37 +49,33 @@ function setupMockAnalytics(): typeof analytics {
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 const mockSessionHelper = sessionHelper as jest.Mocked<typeof sessionHelper>;
 const mockSigninHelper = signinHelper as jest.Mocked<typeof signinHelper>;
-let ORIGINAL_FEATURE_LINK_ACCOUNT_CARD: string | undefined;
 
 describe("loading page", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
     mockSessionHelper.triggerSignIn.mockResolvedValue();
-    ORIGINAL_FEATURE_LINK_ACCOUNT_CARD = process.env.FEATURE_LINK_ACCOUNT_CARD;
-    process.env.FEATURE_LINK_ACCOUNT_CARD = "false";
-  });
-
-  afterEach(() => {
-    process.env.FEATURE_LINK_ACCOUNT_CARD = ORIGINAL_FEATURE_LINK_ACCOUNT_CARD;
+    Object.defineProperty(window, "location", {
+      value: { replace: jest.fn() },
+    });
   });
 
   it("redirects STARTING users to dashboard", () => {
     useMockProfileData({ businessPersona: "STARTING" });
     render(<LoadingPage />);
-    expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
+    expect(window.location.replace).toHaveBeenCalledWith(ROUTES.dashboard);
   });
 
   it("redirects FOREIGN users to dashboard", () => {
     useMockProfileData({ businessPersona: "FOREIGN" });
     render(<LoadingPage />);
-    expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
+    expect(window.location.replace).toHaveBeenCalledWith(ROUTES.dashboard);
   });
 
-  it("redirects OWNING users to dashbaord", () => {
+  it("redirects OWNING users to dashboard", () => {
     useMockProfileData({ businessPersona: "OWNING" });
     render(<LoadingPage />);
-    expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
+    expect(window.location.replace).toHaveBeenCalledWith(ROUTES.dashboard);
   });
 
   it("redirects to onboarding if user has not yet completed onboarding", () => {
