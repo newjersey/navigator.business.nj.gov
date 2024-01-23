@@ -2,6 +2,7 @@
 filename: digital-media-tax
 name: Digital Media Tax Credit
 urlSlug: digital-media-tax
+displayName: Digital Media Tax Credit
 id: digital-media-tax-credit
 openDate: ""
 dueDate: ""

@@ -2,6 +2,7 @@
 filename: edison-innovation-growth
 name: Edison Innovation Growth Stars Fund
 urlSlug: edison-innovation-growth
+displayName: Edison Innovation Growth Stars Fund
 id: edison-innovation-growth-stars-fund
 openDate: ""
 dueDate: ""

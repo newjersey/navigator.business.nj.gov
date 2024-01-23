@@ -2,6 +2,7 @@
 filename: clean-tech-research
 name: Clean Tech Research & Development (R&D) Voucher Program
 urlSlug: clean-tech-research
+displayName: Clean Tech Research & Development (R&D) Voucher Program
 id: clean-tech-research-development-rd-voucher-program
 openDate: ""
 dueDate: ""

@@ -2,6 +2,7 @@
 filename: offshore-wind-tax
 name: Offshore Wind Tax Credit Program
 urlSlug: offshore-wind-tax
+displayName: Offshore Wind Tax Credit Program
 id: offshore-wind-tax-credit-program
 openDate: ""
 dueDate: 07/01/2025

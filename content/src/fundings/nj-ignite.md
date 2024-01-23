@@ -2,6 +2,7 @@
 filename: nj-ignite
 name: NJ Ignite
 urlSlug: nj-ignite
+displayName: NJ Ignite
 id: nj-ignite
 openDate: ""
 dueDate: ""

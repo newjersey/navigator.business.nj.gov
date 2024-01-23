@@ -1,6 +1,7 @@
 ---
 filename: Clean Energy Program - Residential New Construction
 name: New Jersey’s Clean Energy Program - Residential New Construction
+displayName: New Jersey’s Clean Energy Program - Residential New Construction
 urlSlug: njcep-rnc
 id: njcep-rnc
 openDate: ""

@@ -1,6 +1,7 @@
 ---
 filename: food-agriculture-grant
 name: Food and Agriculture Research & Development Grant Program
+displayName: Food and Agriculture Research & Development Grant Program
 urlSlug: food-agriculture-grant
 id: food-agriculture-grant
 openDate: 02/26/2024

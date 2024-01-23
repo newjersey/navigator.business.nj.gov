@@ -2,6 +2,7 @@
 filename: return-and-earn
 name: "Return and Earn: Employer Grants for Hiring Unemployed"
 urlSlug: return-and-earn
+displayName: "Return and Earn: Employer Grants for Hiring Unemployed"
 id: return-and-earn-employer-grants-for-hiring-unemployed
 openDate: ""
 dueDate: ""

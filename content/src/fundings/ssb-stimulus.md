@@ -2,6 +2,7 @@
 filename: SSB-Stimulus
 name: School and Small Business Energy Efficiency Stimulus Program
 urlSlug: SSB-Stimulus
+displayName: School and Small Business Energy Efficiency Stimulus Program
 id: SSB-Stimulus
 openDate: ""
 dueDate: ""

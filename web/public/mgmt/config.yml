@@ -1233,10 +1233,11 @@ collections:
   - name: "funding-opportunities"
     label: "Fund Opps - Content"
     folder: "content/src/fundings"
-    summary: "/{{urlSlug}} - {{name}}"
+    summary: "[{{agency[0]}}] - {{displayName}}"
     identifier_field: "{{filename}}"
     slug: "{{filename}}"
     delete: true
+    sortable_fields: ["displayName", "agency"]
     create: true
     editor:
       preview: true
@@ -1244,8 +1245,9 @@ collections:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "File Name", name: "filename", widget: "write-once-read-only" }
       - { label: "Name", name: "name", widget: "string" }
+      - { label: "Display Name", name: "displayName", widget: "string" }
       - { label: "Url Slug", name: "urlSlug", widget: "string" }
-      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Id", name: "id", widget: "write-once-read-only" }
       - {
           label: "Open Date",
           name: "openDate",

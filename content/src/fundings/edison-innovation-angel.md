@@ -2,6 +2,7 @@
 filename: edison-innovation-angel
 name: Edison Innovation Angel Growth Fund
 urlSlug: edison-innovation-angel
+displayName: Edison Innovation Angel Growth Fund
 id: edison-innovation-angel-growth-fund
 openDate: ""
 dueDate: ""

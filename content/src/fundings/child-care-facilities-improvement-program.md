@@ -1,6 +1,7 @@
 ---
 filename: Child Care Facilities Improvement Program
 name: Child Care Facilities Improvement Program
+displayName: Child Care Facilities Improvement Program
 urlSlug: childcare-improvement
 id: childcare-improvement
 openDate: 11/15/2022

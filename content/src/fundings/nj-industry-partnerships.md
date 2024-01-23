@@ -1,6 +1,7 @@
 ---
 filename: nj-industry-partnerships
 name: NJ Industry Partnerships
+displayName: NJ Industry Partnerships
 urlSlug: nj-industry-partnerships
 id: nj-industry-partnerships
 openDate: ""

@@ -2,6 +2,7 @@
 filename: premier-lender-program
 name: Premier Lender Program
 urlSlug: premier-lender-program
+displayName: Premier Lender Program
 id: premier-lender-program
 openDate: ""
 dueDate: ""
