@@ -2,6 +2,7 @@
 filename: njeda-aspire
 name: Aspire
 urlSlug: njeda-aspire
+displayName: Aspire
 id: njeda-aspire
 openDate: ""
 dueDate: ""

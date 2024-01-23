@@ -2,6 +2,7 @@
 filename: dep-clean-construction
 name: NJ Clean Construction Program
 urlSlug: clean-construction
+displayName: NJ Clean Construction Program
 id: dep-clean-construction
 openDate: ""
 dueDate: ""

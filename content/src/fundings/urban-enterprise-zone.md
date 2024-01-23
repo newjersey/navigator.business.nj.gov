@@ -2,6 +2,7 @@
 filename: urban-enterprise-zone
 name: Urban Enterprise Zone Manufacturers Energy Sales Tax Exemption
 urlSlug: urban-enterprise-zone
+displayName: Urban Enterprise Zone Manufacturers Energy Sales Tax Exemption
 id: urban-enterprise-zone-manufacturers-energy-sales-tax-exemption
 openDate: ""
 dueDate: ""

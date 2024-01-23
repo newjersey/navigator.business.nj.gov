@@ -2,6 +2,7 @@
 filename: direct-loans
 name: Direct Loans
 urlSlug: direct-loans
+displayName: Direct Loans
 id: direct-loans
 openDate: ""
 dueDate: ""

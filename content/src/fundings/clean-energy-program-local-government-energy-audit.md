@@ -1,6 +1,7 @@
 ---
 filename: Clean Energy Program - Local Government Energy Audit
 name: New Jersey’s Clean Energy Program - Local Government Energy Audit
+displayName: New Jersey’s Clean Energy Program - Local Government Energy Audit
 urlSlug: njcep-lgea
 id: njcep-lgea
 openDate: ""

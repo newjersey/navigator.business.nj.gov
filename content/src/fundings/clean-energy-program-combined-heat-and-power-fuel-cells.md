@@ -1,6 +1,7 @@
 ---
 filename: Clean Energy Program - Combined Heat and Power - Fuel Cells
 name: New Jersey’s Clean Energy Program – Combined Heat & Power - Fuel Cells
+displayName: New Jersey’s Clean Energy Program – Combined Heat & Power - Fuel Cells
 urlSlug: njcep-chpfc
 id: njcep-chpfc
 openDate: ""

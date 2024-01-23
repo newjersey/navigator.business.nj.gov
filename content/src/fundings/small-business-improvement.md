@@ -1,6 +1,7 @@
 ---
 filename: small-business-improvement
 name: Small Business Improvement Grant
+displayName: Small Business Improvement Grant
 urlSlug: small-business-improvement
 id: small-business-improvement-grant
 openDate: ""

@@ -2,6 +2,7 @@
 filename: nj-accelerate
 name: NJ Accelerate
 urlSlug: nj-accelerate
+displayName: NJ Accelerate
 id: nj-accelerate
 openDate: ""
 dueDate: ""

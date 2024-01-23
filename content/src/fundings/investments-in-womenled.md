@@ -2,6 +2,7 @@
 filename: investments-in-women-led
 name: Investments in Women-Led Start-ups
 urlSlug: investments-in-women-led
+displayName: Investments in Women-Led Start-ups
 id: investments-in-women-led-startups
 openDate: ""
 dueDate: ""

@@ -2,6 +2,7 @@
 filename: Youth Transitions to Work
 urlSlug: YTTW
 name: Youth Transitions to Work
+displayName: Youth Transitions to Work
 id: YTTW
 callToActionLink: https://www.nj.gov/labor/research-info/grants.shtml
 callToActionText: Learn more

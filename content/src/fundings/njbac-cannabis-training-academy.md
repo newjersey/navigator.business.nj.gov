@@ -1,6 +1,7 @@
 ---
 filename: NJBAC Cannabis Training Academy
 name: New Jersey Business Action Center Cannabis Training Academy
+displayName: New Jersey Business Action Center Cannabis Training Academy
 urlSlug: cannabis-training
 id: cannabis-training
 openDate: 03/30/2023
