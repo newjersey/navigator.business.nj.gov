@@ -1,8 +1,7 @@
 ---
 filename: authorization-certificate-reinstatement
 name: Apply to Reinstate Your Application for a Certificate of Authorization
-industryIds:
-  - architecture
+industryIds: []
 sectorIds:
   - construction
 icon: update-purple.svg
