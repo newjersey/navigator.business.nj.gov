@@ -1,9 +1,7 @@
 {
-  "displayname": "home-baker",
   "naicsCodes": "311811, 311821 ",
   "defaultSectorId": "accommodation-and-food-services",
   "canHavePermanentLocation": false,
-  "nonEssentialQuestionsIds": [],
   "roadmapSteps": [
     {
       "step": 1,
@@ -52,6 +50,8 @@
     }
   ],
   "name": "Home Baker",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "home-baker",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
     "canBeReseller": true
@@ -59,6 +59,6 @@
   "isEnabled": true,
   "additionalSearchTerms": "cottage foods",
   "id": "home-baker",
-  "description": "Sells baked goods prepared at the baker's home.",
+  "description": "Sells baked goods prepared at the baker's home",
   "webflowId": "656a1363059ec5def0e98fd9"
 }
