@@ -93,7 +93,7 @@
     "rimraf": "5.0.5",
     "serverless": "3.38.0",
     "serverless-dynamodb": "0.2.47",
-    "serverless-offline": "13.3.2",
+    "serverless-offline": "13.3.3",
     "serverless-offline-ssm": "6.2.0",
     "serverless-webpack": "5.13.0",
     "supertest": "6.3.4",
