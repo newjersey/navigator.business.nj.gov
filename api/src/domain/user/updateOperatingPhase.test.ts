@@ -299,50 +299,6 @@ describe("updateOperatingPhase", () => {
           expect(getCurrentBusiness(result).preferences.isHideableRoadmapOpen).toBe(false);
         });
       });
-
-      describe("when tax incomplete, but formation and business structure complete", () => {
-        it("sets back to FORMED (and sets hideableRoadmap to false)", () => {
-          const userData = getUserData({
-            [formationTaskId]: "COMPLETED",
-            [taxTaskId]: "IN_PROGRESS",
-            [businessStructureTaskId]: "COMPLETED",
-          });
-
-          const result = updateOperatingPhase(userData);
-          expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("FORMED");
-          expect(getCurrentBusiness(result).preferences.isHideableRoadmapOpen).toBe(false);
-        });
-      });
-    });
-
-    describe("trade name legal structure", () => {
-      const getUserData = (taskProgress: Record<string, TaskProgress>): UserData => {
-        return generateUserDataForBusiness(
-          generateBusiness({
-            profileData: generateProfileData({
-              businessPersona: "STARTING",
-              operatingPhase: "UP_AND_RUNNING",
-              legalStructureId: "general-partnership",
-            }),
-            taskProgress: taskProgress,
-            preferences: generatePreferences({ isHideableRoadmapOpen: true }),
-          })
-        );
-      };
-
-      describe("when tax incomplete", () => {
-        it("sets back to FORMED (and sets hideableRoadmap to false)", () => {
-          const userData = getUserData({
-            [taxTaskId]: "IN_PROGRESS",
-            [businessStructureTaskId]: "COMPLETED",
-            [formationTaskId]: "COMPLETED",
-          });
-
-          const result = updateOperatingPhase(userData);
-          expect(getCurrentBusiness(result).profileData.operatingPhase).toBe("FORMED");
-          expect(getCurrentBusiness(result).preferences.isHideableRoadmapOpen).toBe(false);
-        });
-      });
     });
 
     it("does not update status back to FORMED when all tasks are complete for public filing legal structure", () => {

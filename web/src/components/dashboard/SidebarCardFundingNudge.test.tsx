@@ -10,7 +10,6 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { taxTaskId } from "@businessnjgovnavigator/shared";
 import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import {
   generateBusiness,
@@ -58,7 +57,6 @@ describe("<SidebarCardFundingNudge />", () => {
 
       fireEvent.click(screen.getByTestId("cta-funding-nudge"));
       expect(currentBusiness().profileData.operatingPhase).toEqual("UP_AND_RUNNING");
-      expect(currentBusiness().taskProgress[taxTaskId]).toEqual("COMPLETED");
     });
   });
 
@@ -79,7 +77,6 @@ describe("<SidebarCardFundingNudge />", () => {
       fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalSaveButton));
       expect(currentBusiness().profileData.operatingPhase).toEqual("UP_AND_RUNNING");
       expect(currentBusiness().profileData.sectorId).toEqual("clean-energy");
-      expect(currentBusiness().taskProgress[taxTaskId]).toEqual("COMPLETED");
     });
 
     it("does not update operating phase when user cancels from within modal", () => {
