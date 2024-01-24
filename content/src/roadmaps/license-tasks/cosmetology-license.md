@@ -2,7 +2,7 @@
 filename: cosmetology-license
 displayname: cosmetology-license
 urlSlug: cosmetology-license
-name: Get Your Individual License and Ensure Your Staff is Licensed
+name: Get Your Individual Cosmetology License and Ensure Your Staff is Licensed
 webflowName: "Cosmetologist: Cosmetology License"
 summaryDescriptionMd: If the business owner of a cosmetology shop does not have
   a cosmetology license, the shop manager must have a license and at least two
