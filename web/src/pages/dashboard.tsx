@@ -62,7 +62,6 @@ const DashboardPage = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
-  console.log("Dashboard", business);
 
   const ProfileUpdatedAlert = useQueryControlledAlert({
     queryKey: QUERIES.success,
