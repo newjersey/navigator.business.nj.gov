@@ -2793,8 +2793,6 @@ collections:
                 }
               - { label: Funding Snackbar Heading, name: fundingSnackbarHeading, widget: string }
               - { label: Funding Snackbar Body, name: fundingSnackbarBody, widget: text }
-              - { label: Hidden Tasks Snackbar Heading, name: hiddenTasksSnackbarHeading, widget: string }
-              - { label: Hidden Tasks Snackbar Body, name: hiddenTasksSnackbarBody, widget: text }
               - {
                   label: Tax Registration Snackbar Heading,
                   name: taxRegistrationSnackbarHeading,

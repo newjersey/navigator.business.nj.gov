@@ -289,17 +289,6 @@ describe("dashboard page", () => {
     expect(screen.getByTestId("funding-alert")).toBeInTheDocument();
   });
 
-  it("renders hiddenTasks snackbar after delay when fromFunding query parameter is provided", () => {
-    jest.useFakeTimers();
-    useMockRouter({ isReady: true, query: { [QUERIES.fromFunding]: "true" } });
-
-    renderDashboardPage({});
-    act(() => {
-      jest.advanceTimersByTime(6000);
-    });
-    expect(screen.getByTestId("hiddenTasks-alert")).toBeInTheDocument();
-  });
-
   it("renders deferred question snackbar when deferredQuestionAnswered query parameter is provided", async () => {
     useMockRouter({ isReady: true, query: { [QUERIES.deferredQuestionAnswered]: "true" } });
 

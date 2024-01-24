@@ -1,7 +1,7 @@
 import { UpdateOperatingPhase } from "@domain/types";
 import { determineForeignBusinessType } from "@shared/domain-logic/determineForeignBusinessType";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
-import { businessStructureTaskId, formationTaskId, taxTaskId } from "@shared/domain-logic/taskIds";
+import { businessStructureTaskId, formationTaskId } from "@shared/domain-logic/taskIds";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { OperatingPhaseId } from "@shared/operatingPhase";
 import { BusinessPersona, ForeignBusinessTypeId } from "@shared/profileData";
@@ -62,7 +62,6 @@ const getNewPhase = ({
   const hasCompletedBusinessStructure =
     taskProgress[businessStructureTaskId] === "COMPLETED" || !!legalStructureId;
   const hasCompletedFormation = taskProgress[formationTaskId] === "COMPLETED";
-  const hasCompletedTaxes = taskProgress[taxTaskId] === "COMPLETED";
   const isRemoteSellerOrWorker =
     determineForeignBusinessType(foreignBusinessTypeIds) === "REMOTE_SELLER" ||
     determineForeignBusinessType(foreignBusinessTypeIds) === "REMOTE_WORKER";
@@ -82,7 +81,7 @@ const getNewPhase = ({
   if (hasCompletedBusinessStructure) {
     if (isPublicFiling && !hasCompletedFormation) return "NEEDS_TO_FORM";
 
-    if (currentPhase !== "UP_AND_RUNNING" || !hasCompletedTaxes) return "FORMED";
+    if (currentPhase !== "UP_AND_RUNNING") return "FORMED";
 
     return "UP_AND_RUNNING";
   } else {

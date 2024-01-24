@@ -63,16 +63,6 @@ const DashboardSnackbarsPreview = (props: PreviewProps): ReactElement => {
         >
           <Content>{config.dashboardDefaults.fundingSnackbarBody}</Content>
         </SnackbarAlert>
-
-        <Heading level={2}>Hidden Tasks Snackbar</Heading>
-        <SnackbarAlert
-          variant="success"
-          isOpen={true}
-          close={(): void => {}}
-          heading={config.dashboardDefaults.hiddenTasksSnackbarHeading}
-        >
-          <Content>{config.dashboardDefaults.hiddenTasksSnackbarBody}</Content>
-        </SnackbarAlert>
       </div>
     </ConfigContext.Provider>
   );

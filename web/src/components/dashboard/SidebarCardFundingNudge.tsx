@@ -3,7 +3,6 @@ import { SidebarCardGeneric } from "@/components/dashboard/SidebarCardGeneric";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { SidebarCardContent } from "@/lib/types/types";
-import { taxTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
 
@@ -21,9 +20,6 @@ export const SidebarCardFundingNudge = (props: Props): ReactElement => {
     await updateQueue
       ?.queueProfileData({
         operatingPhase: "UP_AND_RUNNING",
-      })
-      .queueTaskProgress({
-        [taxTaskId]: "COMPLETED",
       })
       .update();
     routeShallowWithQuery(router, QUERIES.fromFunding, "true");

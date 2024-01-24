@@ -109,16 +109,6 @@ const DashboardPage = (props: Props): ReactElement => {
     dataTestId: "funding-alert",
   });
 
-  const HiddenTasksAlert = useQueryControlledAlert({
-    queryKey: QUERIES.fromFunding,
-    pagePath: ROUTES.dashboard,
-    headerText: Config.dashboardDefaults.hiddenTasksSnackbarHeading,
-    bodyText: Config.dashboardDefaults.hiddenTasksSnackbarBody,
-    variant: "success",
-    dataTestId: "hiddenTasks-alert",
-    delayInMilliseconds: 6000,
-  });
-
   const DeferredQuestionAnsweredAlert = useQueryControlledAlert({
     queryKey: QUERIES.deferredQuestionAnswered,
     pagePath: ROUTES.dashboard,
@@ -255,7 +245,6 @@ const DashboardPage = (props: Props): ReactElement => {
           <>{CalendarAlert}</>
           <>{CertificationsAlert}</>
           <>{FundingAlert}</>
-          <>{HiddenTasksAlert}</>
           <>{DeferredQuestionAnsweredAlert}</>
           <>{AdditionalBusinessAlert}</>
         </main>
