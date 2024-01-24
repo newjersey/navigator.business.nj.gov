@@ -16,6 +16,12 @@ sectorIds:
   - mining-quarrying-and-oil-and-gas-extraction
   - organizational-or-financial-management
   - manufacturing
+  - health-care-and-social-assistance
+  - other-services
+  - professional-scientific-and-technical-services
+  - retail-trade-and-ecommerce
+  - real-estate
+  - technology
 icon: govt-purple.svg
 externalRoute: https://business.nj.gov/pages/government-contracting
 ---
