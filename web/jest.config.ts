@@ -7,6 +7,7 @@ process.env = Object.assign(process.env, {
   FEATURE_FORMATION_CONTENT_TYPE_PLAIN_ONLY: "true",
   FEATURE_EXPORT_PDF: "true",
   WEBFLOW_API_TOKEN: 12345678910,
+  FEATURE_LINK_ACCOUNT_CARD: "true",
 });
 
 /** @type {import('jest').Config} */
