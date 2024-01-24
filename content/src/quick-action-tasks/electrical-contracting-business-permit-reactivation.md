@@ -1,10 +1,8 @@
 ---
 filename: electrical-contracting-business-permit-reactivation
 name: Reactivate Your Electrical Contracting Business Permit
-industryIds:
-  - electrical-contractor
-sectorIds:
-  - other-services
+industryIds: []
+sectorIds: []
 icon: loop.svg
 urlSlug: electrical-contracting-business-permit-reactivation
 callToActionText: " Reactivate My Electrical Contracting Business Permit"
