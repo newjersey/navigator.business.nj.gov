@@ -15,6 +15,7 @@ interface Props {
 export const MiniRoadmapTask = (props: Props): ReactElement => {
   const { business } = useUserData();
   const taskProgress = business?.taskProgress[props.task.id] || "NOT_STARTED";
+  const taskProgressReadable = taskProgress.replace("_", " ");
 
   return (
     <Link href={`/tasks/${props.task.urlSlug}`}>
@@ -39,6 +40,7 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
               <div className={`substep-unchecked margin-right-1 ${props.active ? "active" : ""}`} />
             )}
             <span className="margin-right-05">{props.task.name}</span>
+            <span className="screen-reader-only">{taskProgressReadable}</span>
           </div>
         </UnStyledButton>
       </div>
