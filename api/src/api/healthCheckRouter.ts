@@ -20,7 +20,7 @@ type HealthChecks = Map<HealthCheckEndpoint, HealthCheckMethod>;
 export const healthCheckRouterFactory = (clients: HealthChecks): Router => {
   const router = Router();
 
-  router.get("/", (_req, res) => {
+  router.get("/self", (_req, res) => {
     res.json({
       timestamp: requestTimestamp(),
       success: true,

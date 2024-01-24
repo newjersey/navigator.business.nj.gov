@@ -62,9 +62,9 @@ describe("healthCheckRouter", () => {
     });
   });
 
-  describe("GET /", () => {
+  describe("GET /self", () => {
     it("should return a successful response for the server's self check", async () => {
-      const response = await request(app).get("/");
+      const response = await request(app).get("/self");
       expect(response.status).toBe(StatusCodes.OK);
       expect(response.body.success).toBe(true);
       expect(response.body.data.message).toEqual("OK");
