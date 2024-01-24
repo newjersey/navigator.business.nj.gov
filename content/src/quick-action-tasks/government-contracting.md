@@ -1,7 +1,10 @@
 ---
 notesMd: ""
 filename: government-contracting
-urlSlug: government-contracting
 name: Become a Government Contractor
+sectorIds:
+  - construction
 icon: govt-purple.svg
+urlSlug: government-contracting
 ---
+test

@@ -1,9 +1,12 @@
 ---
 notesMd: ""
 filename: apprenticeship-program-intake
-urlSlug: apprenticeship-program-intake
 name: apprenticeship-program-intake
-icon: ""
+industryIds: []
+sectorIds:
+  - construction
+icon: govt-purple.svg
+urlSlug: apprenticeship-program-intake
 callToActionText: Submit Your Apprenticeship Program Intake Form
 callToActionLink: https://nj.gov/labor/lwdhome/apprenticeship/apprenticeshipOnboarding.html
 ---

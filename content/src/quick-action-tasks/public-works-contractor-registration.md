@@ -1,9 +1,11 @@
 ---
 notesMd: ""
 filename: public-works-contractor-registration
-urlSlug: public-works-contractor-registration
 name: public-works-contractor-registration
-icon: ""
+sectorIds:
+  - construction
+icon: file-purple.svg
+urlSlug: public-works-contractor-registration
 callToActionText: Complete My PW CR Application
 callToActionLink: https://www.njportal.com/lwd/pwcr
 ---

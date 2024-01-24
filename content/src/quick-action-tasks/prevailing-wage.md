@@ -1,9 +1,11 @@
 ---
 notesMd: ""
 filename: prevailing-wage
-urlSlug: prevailing-wage
 name: prevailing-wage
-icon: ""
+sectorIds:
+  - construction
+icon: govt-purple.svg
+urlSlug: prevailing-wage
 ---
 
 ## **Ensure Your Staff Has Prevailing Wage**

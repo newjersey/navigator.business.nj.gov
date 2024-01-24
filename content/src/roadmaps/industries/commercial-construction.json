@@ -1,6 +1,6 @@
 {
-  "naicsCodes": "532111",
-  "defaultSectorId": "other-services",
+  "naicsCodes": "236220, 238160, 238130, 238210, 238220, 238320",
+  "defaultSectorId": "construction",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
@@ -39,32 +39,19 @@
     },
     {
       "step": 3,
-      "weight": 15,
+      "weight": 14,
       "task": "get-insurance"
-    },
-    {
-      "step": 3,
-      "weight": 16,
-      "task": "transportation-entity-id",
-      "required": true
-    },
-    {
-      "step": 3,
-      "weight": 18,
-      "licenseTask": "car-rental-vehicle-registration",
-      "required": true
     }
   ],
-  "name": "Car Rental",
+  "name": "Commercial or Industrial Construction",
   "nonEssentialQuestionsIds": [],
-  "displayname": "car-rental",
+  "displayname": "commercial construction",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": false,
-    "canBeReseller": false
+    "canBeHomeBased": true,
+    "canBeReseller": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "vehicle rental",
-  "id": "car-rental",
-  "description": "Leases vehicles to customers for fewer than 90 days",
-  "webflowId": "656a136212e59f3e1bcf4cc5"
+  "additionalSearchTerms": "build, builds, building, buildings, development",
+  "id": "commercial-construction",
+  "description": "Builds or maintains physical structures such as roads, bridges, and buildings"
 }

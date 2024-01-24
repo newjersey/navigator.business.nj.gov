@@ -1,9 +1,11 @@
 ---
 notesMd: ""
 filename: njstart-registration
-urlSlug: njstart-registration
 name: njstart-registration
-icon: ""
+sectorIds:
+  - construction
+icon: file-purple.svg
+urlSlug: njstart-registration
 callToActionText: Register My Business with NJSTART
 callToActionLink: https://www.njstart.gov/bso/
 ---
