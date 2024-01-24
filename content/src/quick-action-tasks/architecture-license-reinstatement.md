@@ -2,8 +2,7 @@
 filename: architecture-license-reinstatement
 name: Apply to Reinstate Your Architecture License
 industryIds: []
-sectorIds:
-  - construction
+sectorIds: []
 icon: update-purple.svg
 urlSlug: architecture-license-reinstatement
 callToActionText: Reinstate My Architecture License
