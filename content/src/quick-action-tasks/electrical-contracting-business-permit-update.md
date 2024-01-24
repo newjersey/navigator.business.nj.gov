@@ -5,7 +5,7 @@ industryIds:
   - electrical-contractor
 sectorIds:
   - other-services
-icon: loop.svg
+icon: update-purple.svg
 urlSlug: electrical-contracting-business-permit-update
 callToActionText: Update My Electrical Contracting Business Permit
 callToActionLink: https://www.njconsumeraffairs.gov/elec/Pages/applications.aspx
