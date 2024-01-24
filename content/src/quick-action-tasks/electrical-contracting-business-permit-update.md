@@ -3,8 +3,7 @@ filename: electrical-contracting-business-permit-update
 name: " Update Your Electrical Contracting Business Permit"
 industryIds:
   - electrical-contractor
-sectorIds:
-  - other-services
+sectorIds: []
 icon: update-purple.svg
 urlSlug: electrical-contracting-business-permit-update
 callToActionText: Update My Electrical Contracting Business Permit
