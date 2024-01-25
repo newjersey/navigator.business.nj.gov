@@ -1,7 +1,7 @@
 ---
 urlSlug: massage-therapy
 previewType: expiration
-summaryDescriptionMd: ddfsdfdfdsfdfdf
+summaryDescriptionMd: "-"
 callToActionLink: https://newjersey.mylicense.com/eGov/PersonSearchResults.aspx
 callToActionText: Renew My Massage Therapy License
 ---
