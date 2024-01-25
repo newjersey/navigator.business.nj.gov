@@ -29,4 +29,4 @@ Your massage business license will expire every two years. You will receive a re
 
 >**What if don't renew my registration?**
 >
->If you don't renew, your license will be suspended and you won't be able to legally run your business. 
+> - If you don't renew, your license will be suspended and you won't be able to legally run your business. 
