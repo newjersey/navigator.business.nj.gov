@@ -2,7 +2,8 @@
 filename: massage-license-reinstatement
 name: Apply to Reinstate Your Massage and Bodywork Business License
 industryIds: []
-sectorIds: []
+sectorIds:
+  - health-care-and-social-assistance
 icon: update-purple.svg
 urlSlug: massage-license-reinstatement
 callToActionText: Apply to Reinstate My Massage and Bodywork Business License
