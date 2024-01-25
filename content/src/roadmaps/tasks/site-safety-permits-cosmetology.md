@@ -4,7 +4,7 @@ notesMd: "Muni planning doc:
   KU/edit"
 summaryDescriptionMd: Cosmetology businesses need to obtain and show site safety
   permits, such as a fire protection permit and a `Certificate of Occupancy or
-  Approval|certificate-occupancy`, prior to obtaining a shop license.
+  Approval|certificate-occupancy` , prior to obtaining a shop license.
   Cosmetology businesses need to register as a `Non-Life Hazard
   Use|non-life-hazard-use` if their town requires it.
 urlSlug: site-safety-permits
