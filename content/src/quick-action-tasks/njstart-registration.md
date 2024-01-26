@@ -2,8 +2,7 @@
 notesMd: ""
 filename: njstart-registration
 name: njstart-registration
-sectorIds:
-  - construction
+sectorIds: []
 icon: file-purple.svg
 urlSlug: njstart-registration
 callToActionText: Register My Business with NJSTART
