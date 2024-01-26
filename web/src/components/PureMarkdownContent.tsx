@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { ReactElement } from "react";
+import type { ReactElement } from "react";
+import * as prod from "react/jsx-runtime";
 import rehypeReact from "rehype-react";
 import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
@@ -13,6 +14,9 @@ interface Props {
   components?: { [key: string]: { ({ children }: { children: string[] }): ReactElement } };
 }
 
+// @ts-expect-error: the react types are missing.
+const production = { Fragment: prod.Fragment, jsx: prod.jsx, jsxs: prod.jsxs };
+
 export const PureMarkdownContent = (props: Props): ReactElement => {
   const markdown = unified()
     .use(remarkParse)
@@ -20,11 +24,7 @@ export const PureMarkdownContent = (props: Props): ReactElement => {
     .use(remarkDirective)
     .use(customRemarkPlugin)
     .use(remarkRehype)
-    .use(rehypeReact, {
-      createElement: React.createElement,
-      Fragment: React.Fragment,
-      components: props.components,
-    })
+    .use(rehypeReact, production)
     .processSync(props.children).result;
   return <>{markdown}</>;
 };
