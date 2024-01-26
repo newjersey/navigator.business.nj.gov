@@ -1,3 +1,40 @@
+# [2024.2.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.1.1...v2024.2.0) (2024-01-26)
+
+
+### Bug Fixes
+
+* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] link account card bug ([401deff](https://github.com/newjersey/navigator.business.nj.gov/commit/401deff2d194b9773bf8ac93718090f83eb1a648))
+* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] link account card bug ([9174a56](https://github.com/newjersey/navigator.business.nj.gov/commit/9174a56adfeab9043213537cb17555b0a5db9fd5))
+* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] link account card bug ([5481b71](https://github.com/newjersey/navigator.business.nj.gov/commit/5481b711afe8a58f4fb86973a188703d9a81899c))
+* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] link card bug fix ([9e90e87](https://github.com/newjersey/navigator.business.nj.gov/commit/9e90e870bc9a91099dcc1e40236b79015235e233))
+* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] link card bug fix ([e33f600](https://github.com/newjersey/navigator.business.nj.gov/commit/e33f6005b4e3a3560f5f954f6efae19b0fbe2a6b))
+* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] link card bug fix updateQueue ([404d2c8](https://github.com/newjersey/navigator.business.nj.gov/commit/404d2c86de86b2037147bae464fefaafe5f9801c))
+* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] update circle ci config ([80dfd47](https://github.com/newjersey/navigator.business.nj.gov/commit/80dfd47e2b5e036ee224b2aab7d126104b711c71))
+* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] window.location.assign debugging ([792a6f5](https://github.com/newjersey/navigator.business.nj.gov/commit/792a6f5d05bc380ad8bf2f2375d26753d4a7efe0))
+* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] window.location.assign debugging ([2856564](https://github.com/newjersey/navigator.business.nj.gov/commit/2856564ed33418245efe2e120fac0cd1c4771baf))
+* associate MUI form control with html label ([c43ec4e](https://github.com/newjersey/navigator.business.nj.gov/commit/c43ec4e1f249ba70d41ca9f63dc7e4ccda05fd1f))
+* change path for api self-check health check route ([11fffa9](https://github.com/newjersey/navigator.business.nj.gov/commit/11fffa96f2941ac288375c2e28f1edd7ece7caf6))
+* **deps:** update dependency @smithy/node-http-handler to v2.3.1 ([68679b1](https://github.com/newjersey/navigator.business.nj.gov/commit/68679b1dc9de9433352e9db3a8e6aabaf722324e))
+* **deps:** update dependency rehype-rewrite to v4 ([f97efa7](https://github.com/newjersey/navigator.business.nj.gov/commit/f97efa75c8bfe294ce2abdc84aeb614da0a526e7))
+* **deps:** update dependency serverless-offline to v13.3.3 ([5abe72c](https://github.com/newjersey/navigator.business.nj.gov/commit/5abe72cc03670a7879e2ed18d9468022753df5b1))
+* **deps:** update material-ui ([2e4bf30](https://github.com/newjersey/navigator.business.nj.gov/commit/2e4bf30acf548dfa7d32b9b443ed08ac2dbe9ff1))
+* **deps:** update material-ui ([f47990f](https://github.com/newjersey/navigator.business.nj.gov/commit/f47990f5865226d675d47b919e604e2d81895c79))
+
+
+### Features
+
+* [[#186316001](https://github.com/newjersey/navigator.business.nj.gov/issues/186316001)] Add mini roadmap task status for screen readers ([665607c](https://github.com/newjersey/navigator.business.nj.gov/commit/665607c32df304e6cfc07b92bf0283a68e6edc27))
+* [[#186352406](https://github.com/newjersey/navigator.business.nj.gov/issues/186352406)] enable content to map quick actions by industries and sectors ([7672dcc](https://github.com/newjersey/navigator.business.nj.gov/commit/7672dcce696bf5da0e133ab27100e0b69937eb1a))
+* [[#186352406](https://github.com/newjersey/navigator.business.nj.gov/issues/186352406)] quickaction find match refactor ([e864b02](https://github.com/newjersey/navigator.business.nj.gov/commit/e864b02b31c4f4d07a750cacdee61e74b9241174))
+* [[#186620631](https://github.com/newjersey/navigator.business.nj.gov/issues/186620631)] add display name for funding opps ([161df51](https://github.com/newjersey/navigator.business.nj.gov/commit/161df51c76f0ef1b9477f217339a0a2e2eae504f))
+* [[#186657856](https://github.com/newjersey/navigator.business.nj.gov/issues/186657856)] [[#186741011](https://github.com/newjersey/navigator.business.nj.gov/issues/186741011)] health check API routes ([3d1881c](https://github.com/newjersey/navigator.business.nj.gov/commit/3d1881c3b8efd73544ddda2986dd185a7d89eff5))
+
+
+### Reverts
+
+* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] ordering of userFactory api ([6da0269](https://github.com/newjersey/navigator.business.nj.gov/commit/6da02696d0b198664675b72bf92e061f3c97497a))
+* [[#185977080](https://github.com/newjersey/navigator.business.nj.gov/issues/185977080)] revert cypress tests ([fb53ca0](https://github.com/newjersey/navigator.business.nj.gov/commit/fb53ca0d520cec4e9ff54f37feec002934cb4026))
+
 ## [2024.1.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.1.0...v2024.1.1) (2024-01-17)
 
 
