@@ -49,9 +49,9 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
             {!props.funding.dueDate && (
               <>
                 {isLargeScreen ? (
-                  <span className="text-base">{props.funding.status.toUpperCase()}</span>
+                  <span className="text-base">{props.funding?.status?.toUpperCase()}</span>
                 ) : (
-                  <div className="text-base margin-top-1">{props.funding.status.toUpperCase()}</div>
+                  <div className="text-base margin-top-1">{props.funding?.status?.toUpperCase()}</div>
                 )}
               </>
             )}

@@ -66,7 +66,8 @@ export const onEscape = (e: KeyboardEvent, handler: () => void): void => {
 };
 
 export const templateEval = (template: string, args: Record<string, string>): string => {
-  let newTemplate = template;
+  let newTemplate = template || "";
+
   for (const key of Object.keys(args)) {
     const pattern = `\\\${${key}}`;
     newTemplate = newTemplate.replaceAll(new RegExp(pattern, "g"), args[key]);
@@ -75,7 +76,7 @@ export const templateEval = (template: string, args: Record<string, string>): st
 };
 
 export const templateEvalWithExtraSpaceRemoval = (template: string, args: Record<string, string>): string => {
-  let newTemplate = template;
+  let newTemplate = template || "";
   for (const key of Object.keys(args)) {
     const pattern = `\\\${${key}} `;
     newTemplate = newTemplate.replaceAll(new RegExp(pattern, "g"), args[key]);
