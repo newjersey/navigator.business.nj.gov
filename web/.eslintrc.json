@@ -44,6 +44,10 @@
     "@next/next/no-img-element": "off",
     "@next/next/no-html-link-for-pages": "off",
     "eqeqeq": "warn",
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      { "controlComponents": ["Checkbox"], "labelAttributes": ["htmlFor"] }
+    ],
     "prefer-template": "error",
     "react/jsx-uses-react": "off",
     "react/prop-types": "off",
