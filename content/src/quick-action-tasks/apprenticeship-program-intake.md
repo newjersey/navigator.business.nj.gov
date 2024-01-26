@@ -3,8 +3,7 @@ notesMd: ""
 filename: apprenticeship-program-intake
 name: apprenticeship-program-intake
 industryIds: []
-sectorIds:
-  - construction
+sectorIds: []
 icon: govt-purple.svg
 urlSlug: apprenticeship-program-intake
 callToActionText: Submit Your Apprenticeship Program Intake Form
