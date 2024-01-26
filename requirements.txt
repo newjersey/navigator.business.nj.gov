@@ -1,5 +1,5 @@
 cffi==1.16.0
-cryptography==41.0.7
+cryptography==42.0.0
 Markdown==3.5.2
 pycparser==2.21
 PyYAML==6.0.1
