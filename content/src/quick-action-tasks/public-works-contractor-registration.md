@@ -2,8 +2,7 @@
 notesMd: ""
 filename: public-works-contractor-registration
 name: public-works-contractor-registration
-sectorIds:
-  - construction
+sectorIds: []
 icon: file-purple.svg
 urlSlug: public-works-contractor-registration
 callToActionText: Complete My PW CR Application
