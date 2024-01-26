@@ -2,8 +2,7 @@
 notesMd: ""
 filename: prevailing-wage
 name: prevailing-wage
-sectorIds:
-  - construction
+sectorIds: []
 icon: govt-purple.svg
 urlSlug: prevailing-wage
 ---
