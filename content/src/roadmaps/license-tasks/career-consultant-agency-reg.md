@@ -9,24 +9,25 @@ summaryDescriptionMd: You must register as a career consultant agency to provide
   Regulated Business (RGB) Online Registration Portal.
 industryId:
   - employment-agency
+callToActionText: "Register My Career Consultant Agency "
+callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
 ---
+___
 ### Application Requirements
 
-- EIN <insert contextual link>
-- Business structure <insert contextual link>
+- `EIN|ein` 
+- `Business structure|business-structure-learn-more`
 - Business address
-- Registered agent<insert contextual link> information, including address and phone number
+- `Registered agent|registered-agent` information, including address and phone number
 - Name, address, and business telephone number of each officer, director, principal, or representative with an ownership interest
-- Certificate of Formation<insert contextual link>
-- Surety bond<insert contextual link>
+- `Certificate of Formation|certificate-formation`
+- `Surety bond|surety-bond`
 - Applicable fees paid
 - Trade name, if applicable
 - Criminal history of any officers, directors, or principals with at least 10% ownership interest, if applicable
 - Explanation of license suspension, denial, or revocation, if applicable
 - Sample contract(s) that are provided to job seekers, if applicable
 
-
-
-<greenbox> Once completed, you will have:
-
-* A career consultant agency registration
+> **Once completed, you will have**:
+>
+>* A career consultant agency registration
