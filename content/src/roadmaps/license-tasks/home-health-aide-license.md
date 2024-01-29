@@ -1,7 +1,7 @@
 ---
 filename: home-health-aide-license
 displayname: health-care-services-firm-license
-urlSlug: health-care-reg
+urlSlug: health-care-services-firm-license
 name: Apply for Your Health Care Service Firm Registration, if Applicable
 webflowName: "Home Health Aide: Health Care Services Firm License"
 summaryDescriptionMd: >
