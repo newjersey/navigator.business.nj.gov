@@ -59,5 +59,6 @@
     "[x]",
     "TODO-APP"
   ],
+  "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.surveys.enabled": false
 }
