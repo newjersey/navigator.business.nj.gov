@@ -26,7 +26,6 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
   const { Config } = useConfig();
 
   const { business } = useUserData();
-
   const addNaicsCodeData = (contentMd: string): string => {
     const naicsCode = business?.profileData.naicsCode || "";
     const naicsTemplateValue = getNaicsDisplayMd(naicsCode);
@@ -39,14 +38,12 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
         <div className="margin-bottom-2">
           <h1>{props.funding.name}</h1>
           <div>
-            {props.funding.dueDate ? (
+            {props.funding.dueDate && (
               <span className="margin-right-2 border padding-x-1 border-base text-base">
                 DUE: {props.funding.dueDate}{" "}
               </span>
-            ) : (
-              <></>
             )}
-            {!props.funding.dueDate && (
+            {!props.funding.dueDate && props.funding.status && (
               <>
                 {isLargeScreen ? (
                   <span className="text-base">{props.funding.status.toUpperCase()}</span>
@@ -59,7 +56,7 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
         </div>
         <Content>{props.funding.summaryDescriptionMd}</Content>
         <HorizontalLine />
-        <Content>{addNaicsCodeData(props.funding.contentMd)}</Content>
+        {props.funding.contentMd && <Content>{addNaicsCodeData(props.funding.contentMd)}</Content>}
         {props.funding.agency && props.funding.agency.length > 0 ? (
           <>
             <HorizontalLine />
