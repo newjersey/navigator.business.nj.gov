@@ -115,7 +115,9 @@ export type LegacyEventCategory =
   | "for_you_card_unhide_button"
   | "quick_action_button"
   | "skip_to_main_content_button"
-  | "business_formation_help_button";
+  | "business_formation_help_button"
+  | "my_account_link"
+  | "business.nj.gov_link";
 
 export type LegacyEventAction =
   | "click"
@@ -234,4 +236,6 @@ export type LegacyEventLabel =
   | "unhide_card"
   | "unhide_cards"
   | "go_to_quick_action_screen"
-  | "skip_to_main_content";
+  | "skip_to_main_content"
+  | "go_to_dashboard"
+  | "go_to_business.nj.gov";

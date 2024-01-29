@@ -13,6 +13,7 @@ type Props = {
   showSidebar?: boolean;
   hideMiniRoadmap?: boolean;
   logoOnly?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
+  previousBusinessId?: string | undefined;
 };
 
 export const NavBar = (props: Props): ReactElement => {
@@ -40,7 +41,7 @@ export const NavBar = (props: Props): ReactElement => {
   } else if (props.landingPage && isLargeScreen) {
     return <NavBarLandingDesktop />;
   } else if (isLargeScreen) {
-    return <NavBarDesktop />;
+    return <NavBarDesktop previousBusinessId={props.previousBusinessId} />;
   } else {
     return (
       <>
@@ -50,6 +51,7 @@ export const NavBar = (props: Props): ReactElement => {
           showSidebar={props.showSidebar}
           hideMiniRoadmap={props.hideMiniRoadmap}
           isLanding={props.landingPage}
+          previousBusinessId={props.previousBusinessId}
         />
         <div className={scrolled ? "padding-top-6" : ""} />
       </>

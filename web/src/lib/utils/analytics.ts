@@ -2048,5 +2048,33 @@ export default {
         },
       },
     },
+    my_account: {
+      click: {
+        my_account: () => {
+          eventRunner.track({
+            event: "navigation_clicks",
+            legacy_event_action: "click",
+            legacy_event_category: "my_account_link",
+            legacy_event_label: "go_to_dashboard",
+            click_text: "my_account",
+            clicked_to: "dashboard",
+          });
+        },
+      },
+    },
+    business_nj_gov_logo: {
+      click: {
+        business_nj_gov_logo: () => {
+          eventRunner.track({
+            legacy_event_category: "business.nj.gov_link",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_business.nj.gov",
+            event: "navigation_clicks",
+            clicked_to: "business.nj.gov",
+            click_text: "business_nj_gov_logo",
+          });
+        },
+      },
+    },
   },
 };

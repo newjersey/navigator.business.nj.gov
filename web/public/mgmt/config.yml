@@ -3671,6 +3671,10 @@ collections:
               - { label: Needs Account Modal Button, name: needsAccountModalButtonText, widget: string }
               - { label: Needs Account Modal Sub Button text, name: needsAccountModalSubText, widget: string }
               - { label: Add Business Button, name: addBusinessButton, widget: string }
+              - { label: My Account Text, name: navBarMyAccountText, widget: string }
+              - { label: Business.nj.gov Logo Link, name: navBarBusinessNJGovLink, widget: string }
+              - { label: Business.nj.gov Logo Alt Text, name: navBarBusinessNJGovAltText, widget: string }
+              - { label: Business.nj.gov Logo Aria Label, name: navBarBusinessNJGovAriaLabel, widget: string }
           - label: Onboarding Defaults
             name: onboardingDefaults
             collapsed: true
