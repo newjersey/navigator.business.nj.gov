@@ -68,7 +68,11 @@
     "navBarUnnamedBusinessText": "Unnamed",
     "taskPageNavBarHeading": "Business Roadmap",
     "needsAccountSnackbarTitleExistingAccount": "Link Your myNewJersey Account to Save Your Progress",
-    "needsAccountModalBody": "To use this feature, you need to complete your registration with the State of New Jersey's secure login system, MyNewJersey. This will ensure your privacy, and allow you to come back any time."
+    "needsAccountModalBody": "To use this feature, you need to complete your registration with the State of New Jersey's secure login system, MyNewJersey. This will ensure your privacy, and allow you to come back any time.",
+    "navBarMyAccountText": "My Account",
+    "navBarBusinessNJGovLink": "https://business.nj.gov/",
+    "navBarBusinessNJGovAriaLabel": "Business.nj.gov Home",
+    "navBarBusinessNJGovAltText": "Business.nj.gov Logo"
   },
   "landingPage": {
     "section5FirstSupportingText": "Use the following content: Knowing exactly what your business needs to get started can be difficult. Each of our personalized guides are unique to your industry and even includes Cannabis retailers. Find what licenses, forms, and permits you need to start your business in New Jersey. Learn the requirements of each application, find out what you get after submitting your application, and store critical business identification numbers all in one place.",

@@ -1,9 +1,12 @@
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
+import { NavbarBusinessNjGovLogo } from "@/components/navbar/NavbarBusinessNjGovLogo";
+import { NavBarDashboardLink } from "@/components/navbar/NavBarDashboardLink";
 import { MenuConfiguration, NavBarPopupMenu } from "@/components/navbar/NavBarPopupMenu";
-import { NavigatorLogo } from "@/components/navbar/NavigatorLogo";
+import { NavBarVerticalLine } from "@/components/navbar/NavBarVerticalLine";
 import { Icon } from "@/components/njwds/Icon";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { AuthContext } from "@/contexts/authContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { ROUTES } from "@/lib/domain-logic/routes";
@@ -18,6 +21,7 @@ interface Props {
   hideMiniRoadmap?: boolean;
   showSidebar?: boolean;
   isLanding?: boolean;
+  previousBusinessId?: string | undefined;
 }
 
 export const NavBarMobile = (props: Props): ReactElement => {
@@ -25,6 +29,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
   const { state } = useContext(AuthContext);
   const { business } = useUserData();
   const router = useRouter();
+  const { Config } = useConfig();
 
   const open = (): void => {
     setSidebarIsOpen(true);
@@ -75,13 +80,25 @@ export const NavBarMobile = (props: Props): ReactElement => {
         }`}
       >
         <div className={`usa-logo ${props.scrolled ? "bg-white" : ""}`}>
-          {props.showSidebar ? (
-            <div className="text-bold font-body-sm truncate-long-business-names_NavBarMobile">
-              {getNavBarBusinessTitle(business, state.isAuthenticated)}
+          <div className={"display-flex flex-align-center"}>
+            <div className={props.showSidebar ? "width-15" : ""}>
+              <NavbarBusinessNjGovLogo />
             </div>
-          ) : (
-            <NavigatorLogo />
-          )}
+            <div className="margin-x-105">
+              <NavBarVerticalLine />
+            </div>
+            <div>
+              <NavBarDashboardLink
+                className={props.showSidebar ? "truncate-long-business-names_NavBarMobile" : ""}
+                linkText={
+                  props.showSidebar
+                    ? getNavBarBusinessTitle(business, state.isAuthenticated)
+                    : Config.navigationDefaults.navBarMyAccountText
+                }
+                previousBusinessId={props.previousBusinessId}
+              />
+            </div>
+          </div>
         </div>
         {(!currentlyOnboarding() || !isAuthenticated) && (
           <button
