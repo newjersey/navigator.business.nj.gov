@@ -1,3 +1,10 @@
+## [2024.2.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.2.0...v2024.2.1) (2024-01-30)
+
+
+### Bug Fixes
+
+* [[#186915689](https://github.com/newjersey/navigator.business.nj.gov/issues/186915689)] resolved TypeError issue when adding funding opps to CMS ([b7b4233](https://github.com/newjersey/navigator.business.nj.gov/commit/b7b4233fdc882b82a2ebb3b2afd0986058482961))
+
 # [2024.2.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.1.1...v2024.2.0) (2024-01-26)
 
 
