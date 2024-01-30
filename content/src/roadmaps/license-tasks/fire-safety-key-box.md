@@ -13,10 +13,7 @@ displayname: fire-safety-key-box
 urlSlug: fire-safety-key-box
 name: Install a Key Box, If Required for Your Site
 webflowName: Fire Safety Key Box Installation
-summaryDescriptionMd: Your commercial or manufacturing space must have a key box
-  if it’s required by your town. A key box holds building keys for firefighters,
-  police, and other emergency personnel to use when needed. Contact your Local
-  Enforcing Agency (LEA) to see if you need to get a key box and how to get one.
+summaryDescriptionMd: "\n"
 industryId:
   - generic
 callToActionText: Contact Local Enforcing Agency
