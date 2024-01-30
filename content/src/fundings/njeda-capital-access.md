@@ -12,6 +12,7 @@ summaryDescriptionMd: "The NJ Capital Access Fund leverages local and regional
   Institutions (MDIs) to offer working capital loans to New Jersey small
   businesses.  "
 callToActionLink: https://njcapitalaccessfund.com/
+callToActionText: Lean More
 fundingType: loan
 programFrequency: ongoing
 status: rolling application
