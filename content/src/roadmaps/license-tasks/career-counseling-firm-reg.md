@@ -17,6 +17,9 @@ industryId:
   - employment-agency
 callToActionText: Register My Career Counseling Firm
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Employment and Personnel Services
+divisionPhone: (973) 504-6370
 ---
 ___
 ## Application Requirements
