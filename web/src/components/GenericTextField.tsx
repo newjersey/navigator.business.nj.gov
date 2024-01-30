@@ -140,10 +140,6 @@ export const GenericTextField = forwardRef(
       const value = valueFilter ? valueFilter(event.target.value) : event.target.value;
       props.handleChange && props.handleChange(value);
       props.onChange && props.onChange(value);
-      if (event && event.nativeEvent.constructor.name === "Event") {
-        //Generic events triggered by autofill
-        onValidation(event as FocusEvent<HTMLInputElement>);
-      }
     };
 
     const error = props.error ?? isFormFieldInvalid;
