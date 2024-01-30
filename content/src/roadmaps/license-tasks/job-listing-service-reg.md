@@ -4,9 +4,17 @@ displayname: job-listing-service-reg
 urlSlug: job-listing-service-reg
 name: "Register Your Job Listing Service "
 webflowName: "Employment and Personnel Services: Job Listing Service"
-summaryDescriptionMd: You must register as a job listing service to provide job
-  listing services in New Jersey. Submit your application through the Regulated
-  Business (RGB) Online Registration Portal.
+summaryDescriptionMd: >-
+  You must register as a job listing service to provide job listing services in
+  New Jersey. Submit your application through the Regulated Business (RGB)
+  Online Registration Portal.
+
+
+
+
+  :::infoAlert 
+   You must submit applications for both the agency and the agent.
+  :::
 industryId:
   - employment-agency
 callToActionText: " Register My Job Listing Service "
@@ -15,7 +23,7 @@ callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Bu
 ___
 ### Application Requirements
 
-* `EIN|ein`
+* `Employer Identification Number (EIN)|ein`
 * `Business structure|business-structure-learn-more` 
 * Business address
  * `Registered agent|registered-agent` information, including address and phone number
