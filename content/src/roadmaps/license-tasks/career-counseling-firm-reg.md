@@ -4,9 +4,15 @@ displayname: career-counseling-firm-reg
 urlSlug: career-counseling-firm-reg
 name: Register Your Career Counseling Firm
 webflowName: "Employment and Personnel Services: Career Counseling Firm"
-summaryDescriptionMd: You must register as a career counseling firm to provide
-  career counseling services in New Jersey. Submit your application through the
-  Regulated Business (RGB) Online Registration Portal.
+summaryDescriptionMd: >-
+  You must register as a career counseling firm to provide career counseling
+  services in New Jersey. Submit your application through the Regulated Business
+  (RGB) Online Registration Portal.
+
+
+  :::infoAlert 
+   You must submit applications for both the agency and the agent.
+  :::
 industryId:
   - employment-agency
 callToActionText: Register My Career Counseling Firm
@@ -15,7 +21,7 @@ callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Bu
 ___
 ### Application Requirements
 
-- `EIN|ein` 
+- `Employer Identification Number (EIN)|ein` 
 - `Business structure|business-structure-learn-more`
 - Business address
 - `Registered agent|registered-agent` information, including address and phone number
