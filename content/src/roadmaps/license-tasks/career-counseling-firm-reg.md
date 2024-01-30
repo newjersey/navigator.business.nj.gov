@@ -19,7 +19,7 @@ callToActionText: Register My Career Counseling Firm
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
 ---
 ___
-### Application Requirements
+## Application Requirements
 
 - `Employer Identification Number (EIN)|ein` 
 - `Business structure|business-structure-learn-more`
