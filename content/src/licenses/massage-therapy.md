@@ -15,7 +15,6 @@ Your massage business license will expire every two years. You will receive a re
 
 ## Application Requirements
 
-* Business name
 * License number
 * Registration code from your renewal notice
 * Current mailing address
