@@ -7,7 +7,7 @@ webflowName: "Employment and Personnel Service: Temporary Help Service Firm "
 summaryDescriptionMd: You must register as a temporary help service firm to
   place job seekers who are on your payroll with clients for temporary help
   services in New Jersey. Submit your application through the Regulated Business
-  (RGB)Online Registration Portal.
+  (RGB) Online Registration Portal.
 industryId:
   - employment-agency
 callToActionText: Register My Temporary Help Service
@@ -17,7 +17,7 @@ ___
 
 ### Application Requirements
 
-*  `EIN|ein` 
+* `Employer Identification Number (EIN)|ein` 
 *  `Business structure|business-structure-learn-more` 
 * Business address
 *  `Registered agent|registered-agent` information, including address and phone number
