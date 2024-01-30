@@ -20,7 +20,7 @@ callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Bu
 ---
 - - -
 
-### Application Requirements
+## Application Requirements
 
 *  `Employer Identification Number (EIN)|ein` 
 *  `Business structure|business-structure-learn-more` 
