@@ -4,24 +4,28 @@ displayname: entertainment-agency-reg
 urlSlug: entertainment-agency-reg
 name: "Register Your Entertainment Agency "
 webflowName: "Employment and Personnel Services: Entertainment Agency"
-summaryDescriptionMd: You must register as an entertainment agency to provide
-  entertainment booking services in New Jersey. Submit your application through
-  the Regulated Business (RGB) Online Registration Portal.
+summaryDescriptionMd: >-
+  You must register as an entertainment agency to provide entertainment booking
+  services in New Jersey. Submit your application through the Regulated Business
+  (RGB) Online Registration Portal.
+
+
+  :::infoAlert 
+   You must submit applications for both the agency and the agent.
+  :::
 industryId:
   - employment-agency
 callToActionText: "Register My Entertainment Agency "
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
 ---
-___
-
-
+- - -
 
 ### Application Requirements
 
-* `EIN|ein` 
+*  `Employer Identification Number (EIN)|ein` 
 *  `Business structure|business-structure-learn-more` 
 * Business address
-* `Registered agent|registered-agent` information, including address and phone number
+*  `Registered agent|registered-agent` information, including address and phone number
 * Name, address, and business telephone number of each officer, director, principal, or representative with an ownership interest
 *  `Certificate of Formation|certificate-formation` 
 *  `Surety bond|surety-bond` 
@@ -34,5 +38,4 @@ ___
 
 > **Once completed, you will have**:
 >
-> * An entertainment agency registration 
-
+> * An entertainment agency registration
