@@ -8,11 +8,7 @@ urlSlug: fire-safety-smoke-detectors
 name: Obtain a Smoke Detector, Carbon Monoxide Detector, and Fire Extinguisher
   Certificate
 webflowName: Smoke Detector, Carbon Monoxide Detector, and Fire Extinguisher Certificate
-summaryDescriptionMd: Landlords or other businesses that rent out one or
-  two-family homes need to get an inspection and certificate that verifies smoke
-  detectors, carbon monoxide detectors, and fire extinguishers are working
-  properly whenever a new tenant moves in. Contact your Local Enforcing Agency
-  (LEA) to apply for the certificate and schedule an inspection.
+summaryDescriptionMd: "\n"
 industryId:
   - generic
 callToActionText: Contact Local Enforcing Agency
