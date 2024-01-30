@@ -41,10 +41,6 @@ export const CountryDropdown = (props: Props): ReactElement => {
       const state = getCountry(value);
       state && props.onSelect(state);
     }
-    if (event && event.nativeEvent.constructor.name === "Event") {
-      //Generic events triggered by autofill
-      onValidation(event as FocusEvent<HTMLInputElement>);
-    }
   };
 
   const filterOptions = createFilterOptions({
