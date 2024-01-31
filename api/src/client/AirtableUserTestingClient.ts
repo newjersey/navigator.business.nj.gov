@@ -2,7 +2,7 @@ import { UserTestingClient } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { BusinessUser, UserTestingResponse } from "@shared/businessUser";
 import { getCurrentDateFormatted } from "@shared/dateHelpers";
-import { determineForeignBusinessType } from "@shared/domain-logic/determineForeignBusinessType";
+import { determineForeignBusinessType } from "@shared/domain-logic/businessPersonaHelpers";
 import { ProfileData } from "@shared/profileData";
 import Airtable from "airtable";
 

@@ -1,6 +1,6 @@
 import { LookupLegalStructureById } from "../legalStructure";
 import { ProfileData } from "../profileData";
-import { determineForeignBusinessType } from "./determineForeignBusinessType";
+import { determineForeignBusinessType } from "./businessPersonaHelpers";
 
 const OPPORTUNITY_FIELDS: (keyof ProfileData)[] = [
   "existingEmployees",
