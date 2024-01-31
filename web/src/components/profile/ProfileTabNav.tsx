@@ -1,8 +1,8 @@
 import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileTab } from "@/components/profile/ProfileTab";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { isStartingBusiness } from "@/lib/domain-logic/businessPersonaHelpers";
 import { ProfileTabs } from "@/lib/types/types";
+import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import { Business } from "@businessnjgovnavigator/shared/userData";

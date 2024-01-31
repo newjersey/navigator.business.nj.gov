@@ -58,6 +58,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { createEmptyUser } from "@businessnjgovnavigator/shared/businessUser";
+import { isRemoteWorkerOrSellerBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
 import { businessStructureTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
@@ -257,10 +258,10 @@ const OnboardingPage = (props: Props): ReactElement => {
       analytics.event.onboarding_last_step.submit.finish_onboarding();
     }
 
-    const isRemoteSellerWorker =
-      newProfileData.businessPersona === "FOREIGN" &&
-      (determineForeignBusinessType(newProfileData.foreignBusinessTypeIds) === "REMOTE_SELLER" ||
-        determineForeignBusinessType(newProfileData.foreignBusinessTypeIds) === "REMOTE_WORKER");
+    const isRemoteSellerWorker = isRemoteWorkerOrSellerBusiness({
+      ...updateQueue.currentBusiness(),
+      profileData: newProfileData,
+    });
 
     let newUserData: UserData = {
       ...updateQueue.current(),

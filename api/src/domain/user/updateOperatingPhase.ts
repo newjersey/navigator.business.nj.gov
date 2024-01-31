@@ -1,10 +1,10 @@
 import { UpdateOperatingPhase } from "@domain/types";
-import { determineForeignBusinessType } from "@shared/domain-logic/determineForeignBusinessType";
+import { isRemoteWorkerOrSellerBusiness } from "@shared/domain-logic/businessPersonaHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { businessStructureTaskId, formationTaskId } from "@shared/domain-logic/taskIds";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { OperatingPhaseId } from "@shared/operatingPhase";
-import { BusinessPersona, ForeignBusinessTypeId } from "@shared/profileData";
+import { BusinessPersona } from "@shared/profileData";
 import { modifyCurrentBusiness } from "@shared/test";
 import { TaskProgress, UserData } from "@shared/userData";
 
@@ -14,11 +14,12 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): 
   const isPublicFiling = LookupLegalStructureById(
     currentBusiness.profileData.legalStructureId
   ).requiresPublicFiling;
+  const isRemoteSellerOrWorker = isRemoteWorkerOrSellerBusiness(currentBusiness);
   let updatedIsHideableRoadmapOpen: boolean = currentBusiness.preferences.isHideableRoadmapOpen;
 
   const newPhase = getNewPhase({
     businessPersona: currentBusiness.profileData.businessPersona,
-    foreignBusinessTypeIds: currentBusiness.profileData.foreignBusinessTypeIds,
+    isRemoteSellerOrWorker: isRemoteSellerOrWorker,
     taskProgress: currentBusiness.taskProgress,
     isPublicFiling: isPublicFiling,
     currentPhase: originalPhase,
@@ -50,21 +51,18 @@ const getNewPhase = ({
   isPublicFiling,
   taskProgress,
   legalStructureId,
-  foreignBusinessTypeIds,
+  isRemoteSellerOrWorker,
 }: {
   businessPersona: BusinessPersona;
   currentPhase: OperatingPhaseId;
   isPublicFiling: boolean;
   taskProgress: Record<string, TaskProgress>;
   legalStructureId: string | undefined;
-  foreignBusinessTypeIds: ForeignBusinessTypeId[];
+  isRemoteSellerOrWorker: boolean;
 }): OperatingPhaseId => {
   const hasCompletedBusinessStructure =
     taskProgress[businessStructureTaskId] === "COMPLETED" || !!legalStructureId;
   const hasCompletedFormation = taskProgress[formationTaskId] === "COMPLETED";
-  const isRemoteSellerOrWorker =
-    determineForeignBusinessType(foreignBusinessTypeIds) === "REMOTE_SELLER" ||
-    determineForeignBusinessType(foreignBusinessTypeIds) === "REMOTE_WORKER";
 
   if (businessPersona === "OWNING") {
     return "UP_AND_RUNNING_OWNING";

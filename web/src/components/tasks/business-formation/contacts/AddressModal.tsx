@@ -7,9 +7,9 @@ import { StateDropdown } from "@/components/StateDropdown";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { isStartingBusiness } from "@/lib/domain-logic/businessPersonaHelpers";
 import { templateEval } from "@/lib/utils/helpers";
 import { FormationIncorporator, FormationMember, StateObject } from "@businessnjgovnavigator/shared";
+import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
 

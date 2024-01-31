@@ -3,7 +3,7 @@ import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { UserTestingClient } from "@domain/types";
 import { LogWriter, LogWriterType } from "@libs/logWriter";
 import { getCurrentDateFormatted } from "@shared/dateHelpers";
-import { determineForeignBusinessType } from "@shared/domain-logic/determineForeignBusinessType";
+import { determineForeignBusinessType } from "@shared/domain-logic/businessPersonaHelpers";
 import { generateProfileData, generateUser } from "@shared/test";
 import * as Airtable from "airtable";
 

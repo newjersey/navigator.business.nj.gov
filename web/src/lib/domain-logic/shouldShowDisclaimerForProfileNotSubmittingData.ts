@@ -1,5 +1,8 @@
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { isOwningBusiness, isRemoteWorkerOrSellerBusiness } from "@/lib/domain-logic/businessPersonaHelpers";
+import {
+  isOwningBusiness,
+  isRemoteWorkerOrSellerBusiness,
+} from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { Business } from "@businessnjgovnavigator/shared/userData";
 
 const isFormedOutsideNavigator = (business: Business): boolean => {
