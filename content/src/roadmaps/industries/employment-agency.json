@@ -1,14 +1,7 @@
 {
-  "displayname": "employment-agency",
   "naicsCodes": "561311",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "administrative-and-employment-services",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": [],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -59,9 +52,46 @@
       "weight": 10,
       "licenseTask": "search-licenses-employment-agency",
       "required": true
+    },
+    {
+      "licenseTask": "career-consultant-agency-reg",
+      "step": 4,
+      "weight": 9
+    },
+    {
+      "step": 4,
+      "licenseTask": "career-counseling-firm-reg",
+      "weight": 9
+    },
+    {
+      "step": 4,
+      "licenseTask": "consulting-firm-headhunter-reg",
+      "weight": 8
+    },
+    {
+      "step": 4,
+      "licenseTask": "entertainment-agency-reg",
+      "weight": 11
+    },
+    {
+      "step": 4,
+      "weight": 10,
+      "licenseTask": "job-listing-service-reg"
+    },
+    {
+      "step": 4,
+      "weight": 11,
+      "licenseTask": "temporary-help-service-firm-reg"
     }
   ],
   "name": "Employment Agency",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "employment-agency",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true
+  },
+  "isEnabled": true,
   "additionalSearchTerms": "employment office,employment services,temporary agency,employment recruiter,employment center",
   "id": "employment-agency",
   "description": "A business that finds employment for a job seeker and employees for employers",
