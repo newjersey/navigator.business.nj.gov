@@ -11,7 +11,7 @@ summaryDescriptionMd: >
 formName: ""
 industryId:
   - homemaker-home-health-aide
-callToActionText: Register as a Health Care Service Firm
+callToActionText: Register My Health Care Service Firm
 callToActionLink: https://www.njconsumeraffairs.gov/hcservice
 licenseCertificationClassification: ""
 agencyId: nj-consumer-affairs
