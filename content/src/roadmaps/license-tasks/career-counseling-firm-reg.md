@@ -1,30 +1,29 @@
 ---
-filename: career-counseling-firm-reg
-displayname: career-counseling-firm-reg
-urlSlug: career-counseling-firm-reg
-name: Register Your Career Counseling Firm
+id: "undefined"
+webflowId: "65bd67f3ba805962d4de11b5"
+urlSlug: "career-counseling-firm-reg"
+name: "Register Your Career Counseling Firm"
 webflowName: "Employment and Personnel Services: Career Counseling Firm"
-summaryDescriptionMd: >-
-  You must register as a career counseling firm to provide career counseling
-  services in New Jersey. Submit your application through the Regulated Business
-  (RGB) Online Registration Portal.
+filename: "career-counseling-firm-reg"
+callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx"
+callToActionText: "Register My Career Counseling Firm"
+agencyId: "nj-consumer-affairs"
+agencyAdditionalContext: "Employment and Personnel Services"
+divisionPhone: "(973) 504-6370"
+industryId: "employment-agency"
+licenseCertificationClassification: "undefined"
+summaryDescriptionMd: "You must register as a career counseling firm to provide career counseling services in New Jersey. Submit your application through the Regulated Business (RGB) Online Registration Portal.
 
-
-  :::infoAlert 
-   You must submit applications for both the agency and the agent.
-  :::
-industryId:
-  - employment-agency
-callToActionText: Register My Career Counseling Firm
-callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
-agencyId: nj-consumer-affairs
-agencyAdditionalContext: Employment and Personnel Services
-divisionPhone: (973) 504-6370
+:::infoAlert 
+ You must submit applications for both the agency and the agent.
+:::"
 ---
-___
+
+---
+
 ## Application Requirements
 
-- `Employer Identification Number (EIN)|ein` 
+- `Employer Identification Number (EIN)|ein`
 - `Business structure|business-structure-learn-more`
 - Business address
 - `Registered agent|registered-agent` information, including address and phone number
@@ -38,7 +37,6 @@ ___
 - Criminal history of any officers, directors, or principals with at least 10% ownership interest, if applicable
 - Explanation of license suspension, denial, or revocation, if applicable
 
-
 > **Once completed, you will have**:
 >
->* A career counseling firm registration
+> - A career counseling firm registration
