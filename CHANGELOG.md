@@ -1,3 +1,15 @@
+# [2024.3.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.2.1...v2024.3.0) (2024-02-02)
+
+
+### Bug Fixes
+
+* [[#186393520](https://github.com/newjersey/navigator.business.nj.gov/issues/186393520)] error state no longer occurring immediately after autofill ([e26d5e6](https://github.com/newjersey/navigator.business.nj.gov/commit/e26d5e67128d2935d5d4edf261e783523cd90c54))
+
+
+### Features
+
+* [[#186810702](https://github.com/newjersey/navigator.business.nj.gov/issues/186810702)] Tax Registration should not auto-complete from Find Funding Opportunities Card ([35d1181](https://github.com/newjersey/navigator.business.nj.gov/commit/35d118179614dcc3f28e4075c758e9d2e079a087))
+
 ## [2024.2.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.2.0...v2024.2.1) (2024-01-30)
 
 
