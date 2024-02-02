@@ -42,7 +42,7 @@ Register with NJSTART to find bidding opportunities for goods and services throu
 1. Complete your pre-registration by submitting the following information:
 
 - `EIN|ein` or Social Security number (SSN)
-- Business Name
+- Business name
 - Email address 
 
 You will then receive an email with your Vendor ID number and login link.
@@ -50,7 +50,7 @@ You will then receive an email with your Vendor ID number and login link.
 2. Complete your registration by providing the following information:
 
 - `Tax ID|tax-id`
-- Business Name
+- Business name
 - Profile administrator’s information (name, title, address, etc.). The administrator maintains and updates the business profile (also known as “vendor profile”)
 - Primary business function
 - Business formation
