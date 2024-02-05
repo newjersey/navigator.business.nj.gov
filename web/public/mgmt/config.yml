@@ -3136,6 +3136,7 @@ collections:
         value_field: "arrayOfQuickActionIcons.*.filename"
         display_fields: ["arrayOfQuickActionIcons.*.name"]
       - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "nospace", required: true }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown", required: true }
       - { label: "Form", name: "form", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }

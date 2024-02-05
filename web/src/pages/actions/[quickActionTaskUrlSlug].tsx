@@ -33,6 +33,8 @@ export const QuickActionElement = (props: Props): ReactElement => {
           <h1>{props.quickActionTask.name}</h1>
         </div>
       </div>
+      <Content>{props.quickActionTask.summaryDescriptionMd}</Content>
+      <HorizontalLine />
       <Content>{props.quickActionTask.contentMd}</Content>
       {props.quickActionTask.form && (
         <>
