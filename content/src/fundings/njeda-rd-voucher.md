@@ -1,8 +1,8 @@
 ---
 filename: njeda-rd-voucher
 name: Catalyst R&D Voucher Program
+displayName: catalyst-rd
 urlSlug: njeda-rd-voucher
-displayName: Catalyst R&D Voucher Program
 id: njeda-rd-voucher
 openDate: ""
 dueDate: ""
