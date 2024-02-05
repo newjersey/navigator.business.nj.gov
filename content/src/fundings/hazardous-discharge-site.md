@@ -1,8 +1,8 @@
 ---
 filename: hazardous-discharge-site
 name: Hazardous Discharge Site Remediation Fund
+displayName: hazardous-discharge-site
 urlSlug: hazardous-discharge-site
-displayName: Hazardous Discharge Site Remediation Fund
 id: hazardous-discharge-site-remediation-fund
 openDate: ""
 dueDate: ""
