@@ -1,7 +1,7 @@
 ---
 filename: Growing Apprenticeship in Nontraditional Sectors
 name: Growing Apprenticeship in Nontraditional Sectors
-displayName: Growing Apprenticeship in Nontraditional Sectors
+displayName: gains
 urlSlug: gains
 id: gains
 openDate: 09/19/2022
