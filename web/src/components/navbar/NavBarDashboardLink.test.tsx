@@ -67,10 +67,14 @@ describe("<NavBarDashboardLink/>", () => {
     let userData: UserData;
 
     beforeEach(() => {
-      previousBusiness = generateBusiness({ id: "previous-business-id" });
-      newBusiness = generateBusiness({ id: "new-business-id" });
+      previousBusiness = generateBusiness({
+        id: "previous-business-id",
+        onboardingFormProgress: "COMPLETED",
+      });
+      newBusiness = generateBusiness({ id: "new-business-id", onboardingFormProgress: "UNSTARTED" });
       userData = generateUserDataForBusiness(newBusiness, {
         businesses: {
+          "new-business-id": newBusiness,
           "previous-business-id": previousBusiness,
         },
       });
@@ -100,6 +104,13 @@ describe("<NavBarDashboardLink/>", () => {
   });
 
   describe("when previousBusinessId prop is not present", () => {
+    it("navigates to the onboarding if onboarding hasn't been started", async () => {
+      const userData = generateUserDataForBusiness(generateBusiness({ onboardingFormProgress: undefined }));
+      renderComponent({ userData });
+      fireEvent.click(screen.getByText(displayedLinkText));
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
+    });
+
     it("navigates to the dashboard when link is clicked by the user", async () => {
       renderComponent({});
       fireEvent.click(screen.getByText(displayedLinkText));
