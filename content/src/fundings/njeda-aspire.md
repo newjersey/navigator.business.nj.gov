@@ -1,8 +1,8 @@
 ---
 filename: njeda-aspire
 name: Aspire
+displayName: aspire
 urlSlug: njeda-aspire
-displayName: Aspire
 id: njeda-aspire
 openDate: ""
 dueDate: ""
