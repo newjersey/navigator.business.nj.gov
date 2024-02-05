@@ -289,6 +289,7 @@ export const generateQuickActionTask = (overrides: Partial<QuickActionTask>): Qu
     form: `some-form-${randomInt()}`,
     industryIds: [`some-industry-id-${randomInt()}`],
     sectorIds: [`some-sector-id-${randomInt()}`],
+    summaryDescriptionMd: `some-summary-description-md-${randomInt()}`,
     applyToAllUsers: false,
     ...overrides,
   };

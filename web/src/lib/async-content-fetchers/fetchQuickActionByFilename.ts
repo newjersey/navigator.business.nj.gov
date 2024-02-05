@@ -15,6 +15,7 @@ export const fetchQuickActionByFilename = async (id: string): Promise<QuickActio
       filename: "",
       urlSlug: "",
       contentMd: "Content Not Found",
+      summaryDescriptionMd: "Summary Not Found",
       industryIds: [],
       sectorIds: [],
       applyToAllUsers: false,

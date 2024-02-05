@@ -199,6 +199,7 @@ type QuickActionTaskGrayMatter = {
   industryIds: string[];
   sectorIds: string[];
   applyToAllUsers: boolean;
+  summaryDescriptionMd: string;
 };
 
 type TaskGrayMatter = {
