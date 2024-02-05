@@ -1,3 +1,10 @@
+## [2024.3.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.3.0...v2024.3.1) (2024-02-05)
+
+
+### Bug Fixes
+
+* update webflowID for commercial construction industry ([55f6c2a](https://github.com/newjersey/navigator.business.nj.gov/commit/55f6c2a4ce34ac3169bd32f52571c8d07e97b41c))
+
 # [2024.3.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.2.1...v2024.3.0) (2024-02-02)
 
 
