@@ -1,4 +1,5 @@
 name: Close inactive issues
+on: workflow_dispatch
 
 jobs:
   close-issues:
@@ -17,3 +18,4 @@ jobs:
           days-before-pr-stale: -1
           days-before-pr-close: -1
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+          operations-per-run: 30000
