@@ -1,8 +1,8 @@
 ---
 filename: nj-zero-emission
 name: NJ Zero Emission Incentive Program (NJZIP)
+displayName: njzip
 urlSlug: nj-zero-emission
-displayName: NJ Zero Emission Incentive Program (NJZIP)
 id: nj-zero-emission-incentive-program-njzip
 openDate: ""
 dueDate: ""
