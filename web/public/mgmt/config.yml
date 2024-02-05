@@ -1243,11 +1243,36 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "File Name", name: "filename", widget: "write-once-read-only" }
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Display Name", name: "displayName", widget: "string" }
-      - { label: "Url Slug", name: "urlSlug", widget: "string" }
-      - { label: "Id", name: "id", widget: "write-once-read-only" }
+      - {
+          label: "File Name",
+          name: "filename",
+          widget: "write-once-read-only",
+          hint: "This is the name of the file in the code only. Lowercase, no spaces, add hyphens between words",
+        }
+      - {
+          label: "Name",
+          name: "name",
+          widget: "string",
+          hint: "This appears to the user in both My Account and on the static site funding page",
+        }
+      - {
+          label: "Display Name",
+          name: "displayName",
+          widget: "string",
+          hint: "This the name displayed internally in CMS list",
+        }
+      - {
+          label: "Url Slug",
+          name: "urlSlug",
+          widget: "string",
+          hint: "Lowercase, no spaces, add hyphens between words",
+        }
+      - {
+          label: "Id",
+          name: "id",
+          widget: "write-once-read-only",
+          hint: "Lowercase, no spaces, add hyphens between words",
+        }
       - {
           label: "Open Date",
           name: "openDate",
@@ -1264,10 +1289,26 @@ collections:
           default: "",
           format: "MM/DD/yyyy",
         }
-      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
-      - { label: "Content", name: "body", widget: "markdown" }
+      - {
+          label: "Summary Description",
+          name: "summaryDescriptionMd",
+          widget: "markdown",
+          hint: "Summarize the Program Description in 2-4 sentences",
+        }
+      - {
+          label: "Content",
+          name: "body",
+          widget: "markdown",
+          hint: "Eligibility Requirements for Business, Benefit to Participating Businesses",
+        }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - {
+          label: "Call To Action Text",
+          name: "callToActionText",
+          widget: "string",
+          required: false,
+          hint: "If there is a link in the 'Call To Action Link' field above, this field is required",
+        }
       - label: "Funding Type"
         name: "fundingType"
         widget: "select"
@@ -1280,6 +1321,7 @@ collections:
             "hiring and employee training support",
             "tax exemption",
           ]
+        hint: "Incentive Type"
       - label: "Program Frequency"
         name: "programFrequency"
         widget: "select"
@@ -1303,11 +1345,18 @@ collections:
         search_fields: ["arrayOfFundingAgencies.*.name"]
         value_field: "arrayOfFundingAgencies.*.id"
         display_fields: ["arrayOfFundingAgencies.*.name"]
-      - { label: "Agency Contact", name: "agencyContact", widget: "string", required: false }
+      - {
+          label: "Agency Contact",
+          name: "agencyContact",
+          widget: "string",
+          required: false,
+          hint: "Point of Contact Email",
+        }
       - label: "Business Stage"
         name: "businessStage"
         widget: "select"
         options: ["early-stage", "operating", "both"]
+        hint: "Established businesses (open 5+ years) in JotForm = 'operating' - - 'New business (not open yet or less than 5 years)' in JotForm = 'early-stage'"
       - { label: "Employees Required", name: "employeesRequired", widget: "select", options: ["yes", "n/a"] }
       - label: "Home Based"
         name: "homeBased"
@@ -1394,10 +1443,37 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "File Name", name: "filename", widget: "write-once-read-only" }
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Url Slug", name: "urlSlug", widget: "string" }
-      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - {
+          label: "File Name",
+          name: "filename",
+          widget: "write-once-read-only",
+          hint: "This is the name of the file in the code only. Lowercase, no spaces, add hyphens between words",
+        }
+      - {
+          label: "Name",
+          name: "name",
+          widget: "string",
+          hint: "This appears to the user in both My Account and on the static site funding page",
+        }
+      - {
+          label: "Display Name",
+          name: "displayName",
+          widget: "string",
+          hint: "This the name displayed internally in CMS list",
+        }
+      - {
+          label: "Url Slug",
+          name: "urlSlug",
+          widget: "string",
+          hint: "Lowercase, no spaces, add hyphens between words",
+        }
+      - {
+          label: "Id",
+          name: "id",
+          widget: "write-once-read-only",
+          hint: "Lowercase, no spaces, add hyphens between words",
+        }
       - {
           label: "Open Date",
           name: "openDate",
@@ -1414,10 +1490,26 @@ collections:
           default: "",
           format: "MM/DD/yyyy",
         }
-      - { label: "Description", name: "descriptionMd", widget: "markdown" }
-      - { label: "Content", name: "body", widget: "markdown" }
+      - {
+          label: "Summary Description",
+          name: "summaryDescriptionMd",
+          widget: "markdown",
+          hint: "Summarize the Program Description in 2-4 sentences",
+        }
+      - {
+          label: "Content",
+          name: "body",
+          widget: "markdown",
+          hint: "Eligibility Requirements for Business, Benefit to Participating Businesses",
+        }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - {
+          label: "Call To Action Text",
+          name: "callToActionText",
+          widget: "string",
+          required: false,
+          hint: "If there is a link in the 'Call To Action Link' field above, this field is required",
+        }
       - label: "Funding Type"
         name: "fundingType"
         widget: "select"
@@ -1430,6 +1522,7 @@ collections:
             "hiring and employee training support",
             "tax exemption",
           ]
+        hint: "Incentive Type"
       - label: "Program Frequency"
         name: "programFrequency"
         widget: "select"
@@ -1453,22 +1546,34 @@ collections:
         search_fields: ["arrayOfFundingAgencies.*.name"]
         value_field: "arrayOfFundingAgencies.*.id"
         display_fields: ["arrayOfFundingAgencies.*.name"]
-      - { label: "Agency Contact", name: "agencyContact", widget: "string", required: false }
+      - {
+          label: "Agency Contact",
+          name: "agencyContact",
+          widget: "string",
+          required: false,
+          hint: "Point of Contact Email",
+        }
       - label: "Business Stage"
         name: "businessStage"
         widget: "select"
         options: ["early-stage", "operating", "both"]
+        hint: "Established businesses (open 5+ years) in JotForm = 'operating' - - 'New business (not open yet or less than 5 years)' in JotForm = 'early-stage'"
       - { label: "Employees Required", name: "employeesRequired", widget: "select", options: ["yes", "n/a"] }
       - label: "Home Based"
         name: "homeBased"
         widget: "select"
         options: ["yes", "no", "unknown"]
         default: "unknown"
+      - label: "Is nonprofit only"
+        name: "isNonprofitOnly"
+        widget: "boolean"
+        required: false
       - label: "Certification(s)"
         name: "certifications"
         widget: "select"
         multiple: true
         required: false
+        default: []
         options:
           - { label: "Women Owned", value: "woman-owned" }
           - { label: "Minority Owned", value: "minority-owned" }
