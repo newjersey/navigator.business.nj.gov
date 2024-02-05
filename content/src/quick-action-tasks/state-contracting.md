@@ -4,24 +4,28 @@ name: Learn How to Contract with the NJ State Government
 industryIds: []
 sectorIds:
   - accommodation-and-food-services
+  - administrative-and-employment-services
   - agriculture-forestry-fishing-and-hunting
+  - arts-entertainment-and-recreation
   - cannabis
   - clean-energy
-  - administrative-and-employment-services
-  - arts-entertainment-and-recreation
-  - finance-and-insurance
-  - life-sciences
-  - mining-quarrying-and-oil-and-gas-extraction
-  - organizational-or-financial-management
-  - manufacturing
-  - technology
-  - other-services
-  - professional-scientific-and-technical-services
   - digital-and-print-media
   - educational-services
+  - finance-and-insurance
   - health-care-and-social-assistance
-  - retail-trade-and-ecommerce
+  - life-sciences
+  - manufacturing
+  - mining-quarrying-and-oil-and-gas-extraction
+  - organizational-or-financial-management
+  - other-services
+  - professional-scientific-and-technical-services
   - real-estate
+  - retail-trade-and-ecommerce
+  - technology
+  - utilities
+  - transportation-and-warehousing
+  - waste-management-and-Remediation
+  - wholesale-trade
 icon: govt-purple.svg
 urlSlug: state-contracting
 callToActionText: Register My Business with NJSTART
