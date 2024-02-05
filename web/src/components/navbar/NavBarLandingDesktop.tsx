@@ -1,4 +1,7 @@
 import { AuthButton } from "@/components/AuthButton";
+import { NavbarBusinessNjGovLogo } from "@/components/navbar/NavbarBusinessNjGovLogo";
+import { NavBarDashboardLink } from "@/components/navbar/NavBarDashboardLink";
+import { NavBarVerticalLine } from "@/components/navbar/NavBarVerticalLine";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ROUTES } from "@/lib/domain-logic/routes";
@@ -18,11 +21,13 @@ export const NavBarLandingDesktop = (): ReactElement => {
           "grid-container-widescreen desktop:padding-x-7 height-8 flex flex-justify flex-align-center flex-wrap"
         }
       >
-        <img
-          className="height-4 margin-y-2"
-          src="/img/Navigator-logo@2x.png"
-          alt={Config.pagesMetadata.titlePrefix}
-        />
+        <div className="display-flex flex-row flex-align-center">
+          <NavbarBusinessNjGovLogo />
+          <div className="margin-x-105">
+            <NavBarVerticalLine />
+          </div>
+          <NavBarDashboardLink linkText={Config.navigationDefaults.navBarMyAccountText} />
+        </div>
         <div>
           <UnStyledButton
             onClick={(): void => {

@@ -1,6 +1,8 @@
 import { ButtonIcon } from "@/components/ButtonIcon";
+import { NavbarBusinessNjGovLogo } from "@/components/navbar/NavbarBusinessNjGovLogo";
+import { NavBarDashboardLink } from "@/components/navbar/NavBarDashboardLink";
 import { NavBarPopupMenu } from "@/components/navbar/NavBarPopupMenu";
-import { NavigatorLogo } from "@/components/navbar/NavigatorLogo";
+import { NavBarVerticalLine } from "@/components/navbar/NavBarVerticalLine";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthContext } from "@/contexts/authContext";
@@ -16,7 +18,11 @@ import { ClickAwayListener, Grow, Paper, Popper } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect, useMemo, useRef, useState } from "react";
 
-export const NavBarDesktop = (): ReactElement => {
+interface Props {
+  previousBusinessId?: string | undefined;
+}
+
+export const NavBarDesktop = (props: Props): ReactElement => {
   const { business, userData } = useUserData();
   const { state } = useContext(AuthContext);
   const router = useRouter();
@@ -73,7 +79,16 @@ export const NavBarDesktop = (): ReactElement => {
     <div className="position-sticky top-0 z-500 bg-white">
       <nav aria-label="Primary" className="grid-container-widescreen desktop:padding-x-7">
         <div className="display-flex flex-row flex-justify flex-align-center height-8">
-          <NavigatorLogo />
+          <div className="display-flex flex-row flex-align-center">
+            <NavbarBusinessNjGovLogo />
+            <div className="margin-x-105">
+              <NavBarVerticalLine />
+            </div>
+            <NavBarDashboardLink
+              linkText={Config.navigationDefaults.navBarMyAccountText}
+              previousBusinessId={props.previousBusinessId}
+            />
+          </div>
           <div className="flex z-100">
             {!isAuthenticated && (
               <div className="flex fac">

@@ -102,6 +102,7 @@ describe("<NavBar />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
+    useMockUserData({});
   });
 
   it("shows business name when showSidebar is true on mobile", () => {
