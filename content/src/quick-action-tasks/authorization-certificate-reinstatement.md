@@ -7,9 +7,9 @@ icon: update-purple.svg
 urlSlug: authorization-certificate-reinstatement
 callToActionText: " Reinstate My Application for a Certificate of Authorization "
 callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
+summaryDescriptionMd: >-
+  You need to reinstate your certificate of authorization if you did not renew it or you put it in inactive status.
 ---
-
-You need to reinstate your certificate of authorization if you did not renew it or you put it in inactive status.
 
 ## Application Requirements
 

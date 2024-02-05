@@ -6,5 +6,7 @@ sectorIds:
   - construction
 icon: govt-purple.svg
 urlSlug: government-contracting
+summaryDescriptionMd: ""
 ---
+
 test
