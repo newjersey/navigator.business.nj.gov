@@ -19,6 +19,11 @@ export const NavBarDashboardLink = (props: Props): ReactNode => {
     <div>
       <UnStyledButton
         onClick={async (): Promise<void> => {
+          analytics.event.my_account.click.my_account();
+          if (!business?.onboardingFormProgress) {
+            await router.push(ROUTES.onboarding);
+            return;
+          }
           if (props.previousBusinessId) {
             if (!updateQueue || !userData) return;
             await updateQueue
@@ -31,7 +36,6 @@ export const NavBarDashboardLink = (props: Props): ReactNode => {
               )
               .update();
           }
-          analytics.event.my_account.click.my_account();
           await router.push(ROUTES.dashboard);
         }}
         ariaLabel={
