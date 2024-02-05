@@ -1,7 +1,7 @@
 ---
 filename: entrepreneur-support-program
 name: Entrepreneur Support Program
-displayName: Entrepreneur Support Program
+displayName: entrepreneur-support
 urlSlug: entrepreneur-support-program
 id: entrepreneur-support-program
 openDate: ""
