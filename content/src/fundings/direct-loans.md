@@ -1,8 +1,8 @@
 ---
 filename: direct-loans
 name: Direct Loans
+displayName: direct-loans
 urlSlug: direct-loans
-displayName: Direct Loans
 id: direct-loans
 openDate: ""
 dueDate: ""
