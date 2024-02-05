@@ -7,9 +7,10 @@ icon: file-purple.svg
 urlSlug: public-works-contractor-registration
 callToActionText: Complete My PW CR Application
 callToActionLink: https://www.njportal.com/lwd/pwcr
+summaryDescriptionMd: ""
 ---
 
-## **Register Your Business as a Public Works Contractor**
+## Register Your Business as a Public Works Contractor
 
 If you are interested in working on `public works|public-works` contracts, you must register with the Division of Wage and Hour Compliance within the NJ Department of Labor and Workforce Development (NJ DOL). The Public Works Contractor Registration Act (PW CRA) requires registration.
 
