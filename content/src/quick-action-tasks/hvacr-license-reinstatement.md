@@ -14,9 +14,8 @@ ___
 ### Reinstatement Requirements
 
 *  `EIN|EIN` 
-* Reinstatement application
-* Suspended license number
 * Social Security number (SSN)
+* Suspended license number
 * List of licenses or certificates (past and present) 
 * Certification of employment, listing all jobs held during suspension
 * Certificate of completion for continuing education 
