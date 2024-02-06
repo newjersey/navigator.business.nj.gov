@@ -3113,9 +3113,10 @@ collections:
         required: false
         default: []
         collection: "roadmaps"
-        search_fields: ["{{name}}"]
+        search_fields: ["name"]
         value_field: "{{id}}"
         display_fields: ["{{name}}"]
+        options_length: 500
       - label: Apply to sectors
         name: sectorIds
         widget: relation
@@ -3126,6 +3127,7 @@ collections:
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
+        options_length: 500
       - label: "Icon"
         name: icon
         widget: "relation"
@@ -3170,9 +3172,10 @@ collections:
         required: false
         default: []
         collection: "roadmaps"
-        search_fields: ["{{name}}"]
+        search_fields: ["name"]
         value_field: "{{id}}"
         display_fields: ["{{name}}"]
+        options_length: 500
       - label: Apply to sectors
         name: sectorIds
         widget: relation
@@ -3183,6 +3186,7 @@ collections:
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
+        options_length: 500
       - label: "Icon"
         name: icon
         widget: "relation"
