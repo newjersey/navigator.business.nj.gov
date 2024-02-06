@@ -1,15 +1,22 @@
 ---
 filename: Pace Apprenticeship in Career Education
 name: Pace Apprenticeship in Career Education
-displayName: Pace Apprenticeship in Career Education
+displayName: pace
 urlSlug: pace-apprentice
 id: pace
 openDate: ""
 dueDate: ""
-descriptionMd: The Pre-Apprenticeship in Career Education (PACE) program aims to
-  better align secondary, post-secondary, adult education, and occupational
-  training to meet labor demands unique to New Jersey and develop career
-  pathways leading to economically sustainable wages.
+summaryDescriptionMd: >-
+  The Pre-Apprenticeship in Career Education (PACE) program aims to better align
+  secondary, post-secondary, adult education, and occupational training to meet
+  labor demands unique to New Jersey and develop career pathways leading to
+  economically sustainable wages.
+
+
+  Programs funded through PACE provide education and training leading to one of the following outcomes:
+
+
+  1. Admission into a [USDOL Registered Apprenticeship](https://www.nj.gov/labor/career-services/apprenticeship/findaprogram.shtml) program 2. Admission into a post-secondary college, or occupation-specific career training 3. Employment with a starting wage no lower than $15 per hour
 callToActionLink: https://www.nj.gov/labor/research-info/grants.shtml
 callToActionText: Learn more
 fundingType: grant
@@ -28,16 +35,10 @@ county:
   - All
 sector: []
 publishStageArchive: null
-summaryDescriptionMd: >-
-  The Pre-Apprenticeship in Career Education (PACE) program aims to better align secondary, post-secondary, adult education, and occupational training to meet labor demands unique to New Jersey and develop career pathways leading to economically sustainable wages.
-
-
-  Programs funded through PACE provide education and training leading to one of the following outcomes:
-
-
-  1. Admission into a [USDOL Registered Apprenticeship](https://www.nj.gov/labor/career-services/apprenticeship/findaprogram.shtml) program
-  2. Admission into a post-secondary college, or occupation-specific career training
-  3. Employment with a starting wage no lower than $15 per hour
+descriptionMd: The Pre-Apprenticeship in Career Education (PACE) program aims to
+  better align secondary, post-secondary, adult education, and occupational
+  training to meet labor demands unique to New Jersey and develop career
+  pathways leading to economically sustainable wages.
 ---
 
 ## Eligibility
