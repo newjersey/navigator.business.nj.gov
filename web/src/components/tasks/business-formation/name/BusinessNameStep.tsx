@@ -86,6 +86,31 @@ export const BusinessNameStep = (): ReactElement => {
                     onBlurNameField(event.target.value);
                   }}
                 />
+                {state.businessNameAvailability?.status === "UNAVAILABLE" && (
+                  <div className="text-error-dark text-bold margin-y-2" data-testid="unavailable-text">
+                    <p>
+                      {templateEval(Config.formation.fields.businessName.alertUnavailable, {
+                        name: state.formationFormData.businessName,
+                      })}
+                    </p>
+                    {state.businessNameAvailability.similarNames.length > 0 && (
+                      <>
+                        <p className="margin-bottom-1">
+                          {Config.searchBusinessNameTask.similarUnavailableNamesText}
+                        </p>
+                        <ul className="usa-list">
+                          {state.businessNameAvailability.similarNames.map((otherName) => {
+                            return (
+                              <li className="text-uppercase text-bold margin-y-0" key={otherName}>
+                                {otherName}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </>
+                    )}
+                  </div>
+                )}
               </WithErrorBar>
             </div>
             <div className="margin-top-05">
@@ -131,32 +156,6 @@ export const BusinessNameStep = (): ReactElement => {
               word: state.businessNameAvailability.invalidWord ?? "*unknown*",
             })}
           </Content>
-        </Alert>
-      )}
-
-      {state.businessNameAvailability?.status === "UNAVAILABLE" && (
-        <Alert variant="error" dataTestid="unavailable-text">
-          <p className="font-sans-xs">
-            {templateEval(Config.formation.fields.businessName.alertUnavailable, {
-              name: state.formationFormData.businessName,
-            })}
-          </p>
-          {state.businessNameAvailability.similarNames.length > 0 && (
-            <>
-              <p className="font-sans-xs margin-bottom-1">
-                {Config.searchBusinessNameTask.similarUnavailableNamesText}
-              </p>
-              <ul className="usa-list">
-                {state.businessNameAvailability.similarNames.map((otherName) => {
-                  return (
-                    <li className="text-uppercase text-bold margin-y-0 font-sans-xs" key={otherName}>
-                      {otherName}
-                    </li>
-                  );
-                })}
-              </ul>
-            </>
-          )}
         </Alert>
       )}
       {state.businessNameAvailability?.status === "AVAILABLE" && (
