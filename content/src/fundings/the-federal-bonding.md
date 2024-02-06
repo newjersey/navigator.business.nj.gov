@@ -1,8 +1,8 @@
 ---
 filename: the-federal-bonding
 name: "The Federal Bonding Program: Assurance for Hiring Risk Workers"
+displayName: federal-bonding
 urlSlug: the-federal-bonding
-displayName: "The Federal Bonding Program: Assurance for Hiring Risk Workers"
 id: the-federal-bonding-program-assurance-for-hiring-risk-workers
 openDate: ""
 dueDate: ""
