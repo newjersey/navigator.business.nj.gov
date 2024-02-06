@@ -1,7 +1,7 @@
 ---
 filename: Main Street Micro Business Loan
 name: Main Street Micro Business Loan
-displayName: Main Street Micro Business Loan
+displayName: main-street-micro
 urlSlug: main-st-micro
 id: main-st-micro
 openDate: 10/06/2022

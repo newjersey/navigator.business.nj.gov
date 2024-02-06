@@ -1,7 +1,7 @@
 ---
 filename: Electric Vehicle Tourism Program
 name: Electric Vehicle Tourism Program
-displayName: Electric Vehicle Tourism Program
+displayName: electric-vehicle-tourism
 urlSlug: evtp
 id: evtp
 openDate: 07/25/2022

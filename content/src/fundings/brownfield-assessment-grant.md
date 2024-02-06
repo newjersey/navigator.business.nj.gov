@@ -1,8 +1,8 @@
 ---
 filename: brownfield-assessment-grant
 name: Brownfield Assessment Grant
+displayName: brownfield-assessment
 urlSlug: brownfield-assessment-grant
-displayName: Brownfield Assessment Grant
 id: brownfield-assessment-grant
 openDate: ""
 dueDate: ""

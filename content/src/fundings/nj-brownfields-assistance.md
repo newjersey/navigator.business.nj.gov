@@ -1,7 +1,7 @@
 ---
 filename: nj-brownfields-assistance
 name: NJ Brownfields Assistance Center @ NJIT
-displayName: NJ Brownfields Assistance Center @ NJIT
+displayName: brownfields-assistance-center
 urlSlug: nj-brownfields-assistance
 id: nj-brownfields-assistance-center-njit
 openDate: ""
