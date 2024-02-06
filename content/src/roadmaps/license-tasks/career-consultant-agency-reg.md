@@ -1,19 +1,24 @@
 ---
-id: "undefined"
-webflowId: "65bd67f300d13004f77a23d6"
-urlSlug: "career-consultant-agency-reg"
-name: "Register Your Career Consultant Agency"
+filename: career-consultant-agency-reg
+displayname: career-consultant-agency-reg
+urlSlug: career-consultant-agency-reg
+name: Register Your Career Consultant Agency
 webflowName: "Employment and Personnel Services: Career Consultant"
-filename: "career-consultant-agency-reg"
-callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx"
-callToActionText: "Register My Career Consultant Agency "
-industryId: "employment-agency"
-licenseCertificationClassification: "undefined"
-summaryDescriptionMd: "You must register as a career consultant agency to provide career consulting services in New Jersey. Submit your application through the Regulated Business (RGB) Online Registration Portal.
+summaryDescriptionMd: >-
+  You must register as a career consultant agency to provide career consulting
+  services in New Jersey. Submit your application through the Regulated Business
+  (RGB) Online Registration Portal.
 
-:::infoAlert 
- You must submit applications for both the agency and the agent.
-:::"
+
+  :::infoAlert 
+   You must submit applications for both the agency and the agent.
+  :::
+industryId: employment-agency
+callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
+id: undefined
+callToActionText: "Register My Career Consultant Agency "
+webflowId: 65bd67f300d13004f77a23d6
+licenseCertificationClassification: undefined
 ---
 
 ---
