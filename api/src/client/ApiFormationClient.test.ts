@@ -20,13 +20,8 @@ import {
 import { generateFormationUserData, generateInputFile } from "@test/factories";
 import axios from "axios";
 
-import {
-  ApiError,
-  ApiFormationClient,
-  ApiGetFilingResponse,
-  ApiResponse,
-  ApiSubmission,
-} from "@client/ApiFormationClient";
+import { ApiFormationClient } from "@client/ApiFormationClient";
+import { ApiError, ApiGetFilingResponse, ApiResponse, ApiSubmission } from "@client/ApiFormationHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
 import { UserData } from "@shared/userData";
 
@@ -1603,6 +1598,50 @@ describe("ApiFormationClient", () => {
         formationDoc: stubResponse.FormationDoc,
         standingDoc: stubResponse.StandingDoc,
         certifiedDoc: stubResponse.CertifiedDoc,
+      });
+    });
+  });
+
+  describe("health check", () => {
+    it("returns a passing health check if data can be retrieved sucessfully", async () => {
+      const stubResponse = generateApiResponse({});
+      mockAxios.post.mockResolvedValue({ data: stubResponse });
+      expect(await client.health()).toEqual({ success: true, data: { message: "OK" } });
+    });
+
+    it("returns a failing health check if unexpected data is retrieved", async () => {
+      const stubResponse = generateApiResponse({ Success: false });
+      mockAxios.post.mockResolvedValue({ data: stubResponse });
+      expect(await client.health()).toEqual({
+        error: {
+          message: "Not Acceptable",
+          timeout: false,
+        },
+        success: false,
+      });
+    });
+
+    it("returns a failing health check if an unexpected status code is received", async () => {
+      mockAxios.post.mockRejectedValue({ response: { status: 400 }, message: "" });
+      expect(await client.health()).toEqual({
+        success: false,
+        error: {
+          message: "Bad Gateway",
+          serverResponseBody: "",
+          serverResponseCode: 400,
+          timeout: false,
+        },
+      });
+    });
+
+    it("returns a failing health check if axios request times out", async () => {
+      mockAxios.post.mockRejectedValue({});
+      expect(await client.health()).toEqual({
+        success: false,
+        error: {
+          message: "Gateway Timeout",
+          timeout: true,
+        },
       });
     });
   });
