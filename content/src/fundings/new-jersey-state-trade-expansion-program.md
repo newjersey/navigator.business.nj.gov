@@ -1,7 +1,7 @@
 ---
 filename: New Jersey State Trade Expansion Program
 name: New Jersey State Trade Expansion Program (NJSTEP)
-displayName: New Jersey State Trade Expansion Program (NJSTEP)
+displayName: trade-expansion
 urlSlug: nj-trade-expansion-program
 id: nj-trade-expansion-program
 openDate: ""
