@@ -1,7 +1,7 @@
 ---
 filename: the-small-business
 name: The Small Business Bonding Readiness Assistance Program
-displayName: The Small Business Bonding Readiness Assistance Program
+displayName: small-business-bonding
 urlSlug: the-small-business
 id: the-small-business-bonding-readiness-assistance-program
 openDate: ""
