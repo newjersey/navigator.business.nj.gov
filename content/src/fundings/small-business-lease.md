@@ -1,8 +1,8 @@
 ---
 filename: small-business-lease
 name: Small Business Lease Grant
+displayName: small-business-lease
 urlSlug: small-business-lease
-displayName: Small Business Lease Grant
 id: small-business-lease-grant
 openDate: ""
 dueDate: ""
