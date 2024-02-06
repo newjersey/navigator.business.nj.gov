@@ -1,7 +1,7 @@
 ---
 filename: research-with-nj
 name: Research with NJ
-displayName: Research with NJ
+displayName: research-nj
 urlSlug: research-with-nj
 id: research-with-nj
 openDate: ""
