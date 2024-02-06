@@ -1,13 +1,13 @@
 ---
 filename: Clean Energy Program - Residential New Construction
 name: New Jersey’s Clean Energy Program - Residential New Construction
-displayName: New Jersey’s Clean Energy Program - Residential New Construction
+displayName: rnc-clean-energy
 urlSlug: njcep-rnc
 id: njcep-rnc
 openDate: ""
 dueDate: ""
-sidebarCardBodyText: The Residential New Construction (RNC) Program is designed to
-  increase the energy efficiency and environmental performance of residential
+summaryDescriptionMd: The Residential New Construction (RNC) Program is designed
+  to increase the energy efficiency and environmental performance of residential
   new construction buildings (single and multifamily) in New Jersey by offering
   technical support and incentives to builders that comply with these standards.
 callToActionLink: https://www.NJCleanEnergy.com/RNC
@@ -32,10 +32,10 @@ sector:
   - real-estate
   - clean-energy
 publishStageArchive: ""
-summaryDescriptionMd: >-
-  The Residential New Construction (RNC) Program is designed to increase the energy efficiency and
-  environmental performance of residential new construction buildings (single and multifamily) in New Jersey
-  by offering technical support and incentives to builders that comply with these standards.
+descriptionMd: The Residential New Construction (RNC) Program is designed to
+  increase the energy efficiency and environmental performance of residential
+  new construction buildings (single and multifamily) in New Jersey by offering
+  technical support and incentives to builders that comply with these standards.
 ---
 
 ## Eligibility
@@ -44,8 +44,6 @@ summaryDescriptionMd: >-
 - Must be newly constructed single family, multi‐single low‐rise, and high‐rise multifamily buildings
 - Existing homes undergoing `substantial renovation|substantial-renovation` or remodeling that meets the criteria above
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
-
-The program offers builders and raters varying incentives from $500 to $6,000+ per home.
-
-:::
+> ### Benefits
+>
+> The program offers builders and raters varying incentives from $500 to $6,000+ per home.
