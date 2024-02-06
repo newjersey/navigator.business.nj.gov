@@ -1,8 +1,8 @@
 ---
 filename: new-jersey-founders
 name: New Jersey Founders & Funders
+displayName: new-jersey-founders
 urlSlug: new-jersey-founders
-displayName: New Jersey Founders & Funders
 id: new-jersey-founders-funders
 openDate: ""
 dueDate: ""
