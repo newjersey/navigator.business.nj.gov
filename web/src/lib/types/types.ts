@@ -215,6 +215,7 @@ export interface QuickActionTask extends QuickAction {
   callToActionLink: string | undefined;
   callToActionText: string | undefined;
   form: string | undefined;
+  summaryDescriptionMd: string;
 }
 
 export interface QuickActionLink extends QuickAction {

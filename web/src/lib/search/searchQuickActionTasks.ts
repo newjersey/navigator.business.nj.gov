@@ -12,6 +12,7 @@ export const searchQuickActionTasks = (quickActionTasks: QuickActionTask[], term
     };
 
     const content = quickAction.contentMd.toLowerCase();
+    const summary = quickAction.summaryDescriptionMd?.toLowerCase();
     const name = quickAction.name.toLowerCase();
     const cta = quickAction.callToActionText?.toLowerCase();
     const ctaLink = quickAction.callToActionLink?.toLowerCase();
@@ -19,7 +20,7 @@ export const searchQuickActionTasks = (quickActionTasks: QuickActionTask[], term
     const urlSlug = quickAction.urlSlug.toLowerCase();
     const form = quickAction.form?.toLowerCase();
 
-    const blockTexts = [content];
+    const blockTexts = [summary, content];
     const labelledTexts = [
       { content: cta, label: "CTA Text" },
       { content: ctaLink, label: "CTA Link" },

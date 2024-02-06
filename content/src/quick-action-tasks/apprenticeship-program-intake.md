@@ -8,9 +8,10 @@ icon: govt-purple.svg
 urlSlug: apprenticeship-program-intake
 callToActionText: Submit Your Apprenticeship Program Intake Form
 callToActionLink: https://nj.gov/labor/lwdhome/apprenticeship/apprenticeshipOnboarding.html
+summaryDescriptionMd: ""
 ---
 
-## **Submit Your Apprenticeship Program Intake Form**
+## Submit Your Apprenticeship Program Intake Form
 
 You can start a registered apprenticeship program within your business through the U.S. Department of Labor (USDOL). An apprenticeship program combines paid on-the-job training and classroom instruction.
 

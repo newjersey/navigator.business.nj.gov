@@ -7,15 +7,19 @@ icon: update-purple.svg
 urlSlug: architecture-license-reinstatement
 callToActionText: Reinstate My Architecture License
 callToActionLink: https://www.njconsumeraffairs.gov/arch/applications/Application-for-Reinstatement-with-Instructions.pdf
+summaryDescriptionMd: >-
+  You need to submit a reinstatement application if:
+
+
+  - Your architecture license has been expired for five years or less
+
+
+  :::infoAlert
+
+  If your license has been expired for over five years, then you need to re-apply for your architect license.
+
+  :::
 ---
-
-You need to submit a reinstatement application if:
-
-- Your architecture license has been expired for five years or less
-
-:::infoAlert
-If your license has been expired for over five years, then you need to re-apply for your architect license.
-:::
 
 ## Application Requirements
 

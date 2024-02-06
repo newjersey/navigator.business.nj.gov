@@ -7,18 +7,19 @@ icon: loop.svg
 urlSlug: electrical-contracting-business-permit-reactivation
 callToActionText: " Reactivate My Electrical Contracting Business Permit"
 callToActionLink: https://www.njconsumeraffairs.gov/elec/Pages/applications.aspx
+summaryDescriptionMd: >-
+  You need to reactivate your electrical contracting business permit if it has been expired for less than three years with no changes.
 ---
-You need to reactivate your electrical contracting business permit if it has been expired for less than three years with no changes.
 
-### Application Requirements
-* Permit number
-* Expiration date of last renewal
-* Business address
-* `Surety bond|surety-bond` for $1,000
-* Certificate of general liability insurance
-* Applicable fees paid
+## Application Requirements
 
+- Permit number
+- Expiration date of last renewal
+- Business address
+- `Surety bond|surety-bond` for $1,000
+- Certificate of general liability insurance
+- Applicable fees paid
 
 > **Once completed, you will have**:
 >
-> * An electrical contracting business permit
+> - An electrical contracting business permit
