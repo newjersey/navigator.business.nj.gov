@@ -1,8 +1,8 @@
 ---
 filename: small-business-lease
 name: Small Business Lease Grant
+displayName: small-business-lease
 urlSlug: small-business-lease
-displayName: Small Business Lease Grant
 id: small-business-lease-grant
 openDate: ""
 dueDate: ""
@@ -28,7 +28,7 @@ county:
   - All
 sector: []
 publishStageArchive: null
-sidebarCardBodyText: The Small Business Lease Grant supports the growth and success of
+descriptionMd: The Small Business Lease Grant supports the growth and success of
   small businesses and nonprofits by providing grant funding to cover a portion
   of lease payments for businesses and nonprofits leasing new or additional
   space.
@@ -38,8 +38,6 @@ sidebarCardBodyText: The Small Business Lease Grant supports the growth and succ
 
 - Small businesses and nonprofits entering a new market-rate lease, lease amendment, or lease extension for at least a 5-year term that includes at least 250 square feet of street-level space
 
-:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
-
-Two grant awards of 20% of the annual lease payment.
-
-:::
+> ### Benefits
+>
+> Two grant awards of 20% of the annual lease payment.
