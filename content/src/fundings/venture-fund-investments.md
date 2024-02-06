@@ -1,8 +1,8 @@
 ---
 filename: venture-fund-investments
 name: Venture Fund Investments
+displayName: venture-fund-investments
 urlSlug: venture-fund-investments
-displayName: Venture Fund Investments
 id: venture-fund-investments
 openDate: ""
 dueDate: ""
