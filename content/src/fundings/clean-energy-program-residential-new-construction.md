@@ -1,13 +1,13 @@
 ---
 filename: Clean Energy Program - Residential New Construction
 name: New Jersey’s Clean Energy Program - Residential New Construction
-displayName: New Jersey’s Clean Energy Program - Residential New Construction
+displayName: rnc-clean-energy
 urlSlug: njcep-rnc
 id: njcep-rnc
 openDate: ""
 dueDate: ""
-descriptionMd: The Residential New Construction (RNC) Program is designed to
-  increase the energy efficiency and environmental performance of residential
+summaryDescriptionMd: The Residential New Construction (RNC) Program is designed
+  to increase the energy efficiency and environmental performance of residential
   new construction buildings (single and multifamily) in New Jersey by offering
   technical support and incentives to builders that comply with these standards.
 callToActionLink: https://www.NJCleanEnergy.com/RNC
@@ -32,10 +32,10 @@ sector:
   - real-estate
   - clean-energy
 publishStageArchive: ""
-summaryDescriptionMd: >-
-  The Residential New Construction (RNC) Program is designed to increase the energy efficiency and
-  environmental performance of residential new construction buildings (single and multifamily) in New Jersey
-  by offering technical support and incentives to builders that comply with these standards.
+descriptionMd: The Residential New Construction (RNC) Program is designed to
+  increase the energy efficiency and environmental performance of residential
+  new construction buildings (single and multifamily) in New Jersey by offering
+  technical support and incentives to builders that comply with these standards.
 ---
 
 ## Eligibility
