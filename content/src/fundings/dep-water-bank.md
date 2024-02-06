@@ -1,8 +1,8 @@
 ---
 filename: dep-water-bank
 name: New Jersey Water Bank Program
+displayName: water-bank
 urlSlug: water-bank
-displayName: New Jersey Water Bank Program
 id: dep-water-bank
 openDate: ""
 dueDate: ""
