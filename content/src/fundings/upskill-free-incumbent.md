@@ -1,8 +1,8 @@
 ---
 filename: upskill-free-incumbent
 name: "Upskill: Free Incumbent Worker Training Programs"
+displayName: upskill-free-incumbent
 urlSlug: upskill-free-incumbent
-displayName: "Upskill: Free Incumbent Worker Training Programs"
 id: upskill-free-incumbent-worker-training-programs
 openDate: ""
 dueDate: ""
