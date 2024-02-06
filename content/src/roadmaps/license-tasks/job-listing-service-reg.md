@@ -9,13 +9,14 @@ callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-B
 callToActionText: " Register My Job Listing Service "
 industryId: "employment-agency"
 licenseCertificationClassification: "undefined"
-summaryDescriptionMd: "You must register as a job listing service to provide job listing services in New Jersey. Submit your application through the Regulated Business (RGB) Online Registration Portal.
+summaryDescriptionMd:
+  "You must register as a job listing service to provide job listing services in New Jersey. Submit your application through the Regulated Business (RGB) Online Registration Portal.
 
 
 
-:::infoAlert 
- You must submit applications for both the agency and the agent.
-:::"
+  :::infoAlert
+  You must submit applications for both the agency and the agent.
+  :::"
 ---
 
 ---
