@@ -1,8 +1,8 @@
 ---
 filename: dep-petroleum-storage
 name: Petroleum Underground Storage Tank Remediation, Upgrade and Closure Fund
+displayName: petroleum-storage
 urlSlug: petroleum-storage
-displayName: Petroleum Underground Storage Tank Remediation, Upgrade and Closure Fund
 id: dep-petroleum-storage
 openDate: ""
 dueDate: ""
