@@ -451,25 +451,27 @@ export const BusinessFormationPaginator = (): ReactElement => {
         );
       });
 
-      const fieldsWithErrors = dedupedFieldErrors.map((fieldError) => {
-        let configFieldName = fieldError.field as ConfigFormationFields;
+      const fieldsWithErrors = dedupedFieldErrors
+        .filter((fieldError) => fieldError.field !== "businessName")
+        .map((fieldError) => {
+          let configFieldName = fieldError.field as ConfigFormationFields;
 
-        if (fieldError.field === "members") {
-          configFieldName = getConfigFieldByLegalStructure(state.formationFormData.legalType);
-        }
+          if (fieldError.field === "members") {
+            configFieldName = getConfigFieldByLegalStructure(state.formationFormData.legalType);
+          }
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const label = (Config.formation.fields as any)[configFieldName].label;
-        return {
-          name: configFieldName,
-          label,
-          children: getApiErrorMessage(fieldError.field) && (
-            <ul>
-              <li>{getApiErrorMessage(fieldError.field)}</li>
-            </ul>
-          ),
-        };
-      });
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const label = (Config.formation.fields as any)[configFieldName].label;
+          return {
+            name: configFieldName,
+            label,
+            children: getApiErrorMessage(fieldError.field) && (
+              <ul>
+                <li>{getApiErrorMessage(fieldError.field)}</li>
+              </ul>
+            ),
+          };
+        });
 
       return (
         <FieldEntryAlert
