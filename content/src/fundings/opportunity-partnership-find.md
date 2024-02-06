@@ -1,8 +1,8 @@
 ---
 filename: opportunity-partnership-find
 name: "Opportunity Partnership: Find Skilled Employees"
+displayName: opportunity-partnership
 urlSlug: opportunity-partnership-find
-displayName: "Opportunity Partnership: Find Skilled Employees"
 id: opportunity-partnership-find-skilled-employees
 openDate: ""
 dueDate: ""
