@@ -1274,6 +1274,12 @@ collections:
           hint: "Lowercase, no spaces, add hyphens between words",
         }
       - {
+          label: "Description for card in For You",
+          name: "descriptionMd",
+          widget: "string",
+          hint: "This appears only in My Account, in the For You column, max char is 150 including spaces, plain text only",
+        }
+      - {
           label: "Open Date",
           name: "openDate",
           widget: "datetime",
@@ -1473,6 +1479,12 @@ collections:
           name: "id",
           widget: "write-once-read-only",
           hint: "Lowercase, no spaces, add hyphens between words",
+        }
+      - {
+          label: "Description for card in For You",
+          name: "descriptionMd",
+          widget: "string",
+          hint: "This appears only in My Account, in the For You column, max char is 150 including spaces, plain text only",
         }
       - {
           label: "Open Date",
