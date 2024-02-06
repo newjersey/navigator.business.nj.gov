@@ -1,8 +1,8 @@
 ---
 filename: sales-and-use
 name: Sales and Use Tax Exemption Program
+displayName: sales-and-use
 urlSlug: sales-and-use
-displayName: Sales and Use Tax Exemption Program
 id: sales-and-use-tax-exemption-program
 openDate: ""
 dueDate: ""
