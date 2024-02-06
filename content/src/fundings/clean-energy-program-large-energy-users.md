@@ -1,18 +1,18 @@
 ---
 filename: Clean Energy Program - Large Energy Users
 name: New Jersey’s Clean Energy Program - Large Energy Users
-displayName: New Jersey’s Clean Energy Program - Large Energy Users
+displayName: leu-clean-energy
 urlSlug: njcep-leu
 id: njcep-leu
 openDate: ""
 dueDate: ""
-descriptionMd: The Large Energy Users Program (LEUP) encourages large commercial
-  and industrial utility customers that have facilities in New Jersey to to
-  upgrade or install energy conserving measures in existing buildings and to
-  help offset these capital costs. These efficiency upgrades are customized to
-  meet the requirements of the customers’ existing facilities, while advancing
-  the State’s energy efficiency, conservation, and greenhouse gas reduction
-  goals.
+summaryDescriptionMd: The Large Energy Users Program (LEUP) encourages large
+  commercial and industrial utility customers that have facilities in New Jersey
+  to to upgrade or install energy conserving measures in existing buildings and
+  to help offset these capital costs. These efficiency upgrades are customized
+  to meet the requirements of the customers’ existing facilities, while
+  advancing the State’s energy efficiency, conservation, and greenhouse gas
+  reduction goals.
 callToActionLink: https://www.NJCleanEnergy.com/LEUP
 callToActionText: Learn more
 fundingType: grant
@@ -36,12 +36,13 @@ sector:
   - real-estate
   - manufacturing
 publishStageArchive: ""
-summaryDescriptionMd: >-
-  The Large Energy Users Program (LEUP) encourages large commercial and industrial utility customers that have
-  facilities in New Jersey to to upgrade or install energy conserving measures in existing buildings and to
-  help offset these capital costs. These efficiency upgrades are customized to meet the requirements of the
-  customers’ existing facilities, while advancing the State’s energy efficiency, conservation, and greenhouse
-  gas reduction goals.
+descriptionMd: The Large Energy Users Program (LEUP) encourages large commercial
+  and industrial utility customers that have facilities in New Jersey to to
+  upgrade or install energy conserving measures in existing buildings and to
+  help offset these capital costs. These efficiency upgrades are customized to
+  meet the requirements of the customers’ existing facilities, while advancing
+  the State’s energy efficiency, conservation, and greenhouse gas reduction
+  goals.
 ---
 
 ## Eligibility
