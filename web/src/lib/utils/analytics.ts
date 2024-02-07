@@ -149,7 +149,6 @@ type ClickText =
   | "view_requirements"
   | "need_help_with_a_problem?"
   | "share_feedback"
-  | "report_something_that_is_broken"
   | "request_new_capabilities"
   | "go_to_treasury_amendments_page";
 
@@ -1924,20 +1923,6 @@ export default {
             legacy_event_label: "skip_to_main_content",
             click_text: "skip to main content",
             item: "skip_to_main_content",
-          });
-        },
-      },
-    },
-    report_something_that_is_broken: {
-      click: {
-        open_live_chat: () => {
-          eventRunner.track({
-            event: "link_clicks",
-            legacy_event_action: "click",
-            legacy_event_category: "report_something_that_is_broken",
-            legacy_event_label: "open_live_chat",
-            click_text: "report_something_that_is_broken",
-            clicked_to: "live_chat",
           });
         },
       },

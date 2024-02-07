@@ -9,6 +9,7 @@ export const SkipToMainContent = (): ReactElement => {
     <div>
       <a
         className="skip-link"
+        data-testid="skip-main-content"
         href="#main"
         onClick={analytics.event.skip_to_main_content.click.skip_to_main_content}
       >
