@@ -1,5 +1,4 @@
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { useMockBusiness } from "@/test/mock/mockUseUserData";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -9,27 +8,27 @@ describe("<PageSkeleton />", () => {
     jest.resetAllMocks();
   });
 
-  it("does not render report an issues bar if onboarding is not completed", () => {
-    useMockBusiness({ onboardingFormProgress: "UNSTARTED" });
-
+  it("does not render the beta bar, legal message, and skip main content when landingPage prop is true", () => {
     render(
-      <PageSkeleton>
+      <PageSkeleton landingPage={true}>
         <></>
       </PageSkeleton>
     );
 
-    expect(screen.queryByTestId("reportAnIssueBar")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("beta-bar")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("legal-message")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("skip-main-content")).not.toBeInTheDocument();
   });
 
-  it("renders report an issues bar after onboarding is completed", () => {
-    useMockBusiness({ onboardingFormProgress: "COMPLETED" });
-
+  it("renders the beta bar, legal message, and skip main content when landingPage prop is false", () => {
     render(
-      <PageSkeleton>
+      <PageSkeleton landingPage={false}>
         <></>
       </PageSkeleton>
     );
 
-    expect(screen.getByTestId("reportAnIssueBar")).toBeInTheDocument();
+    expect(screen.getByTestId("beta-bar")).toBeInTheDocument();
+    expect(screen.getByTestId("legal-message")).toBeInTheDocument();
+    expect(screen.getByTestId("skip-main-content")).toBeInTheDocument();
   });
 });
