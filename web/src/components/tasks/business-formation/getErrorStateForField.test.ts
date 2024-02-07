@@ -88,7 +88,7 @@ describe("getErrorStateForField", () => {
       ).toEqual(Config.formation.fields.businessName.errorInlineNeedsToSearch);
     });
 
-    it("uses errorInlineUnavailable as label if name availability is UNAVAILABLE", () => {
+    it("sets label to undefined if name availability is UNAVAILABLE", () => {
       const formationFormData = generateFormationFormData({ businessName: "some name" });
       const businessNameAvailability = generateBusinessNameAvailability({ status: "UNAVAILABLE" });
       expect(
@@ -97,10 +97,10 @@ describe("getErrorStateForField", () => {
           formationFormData,
           businessNameAvailability,
         }).label
-      ).toEqual(Config.formation.fields.businessName.errorInlineUnavailable);
+      ).toEqual(undefined);
     });
 
-    it("uses errorInlineUnavailable as label if name availability is error", () => {
+    it("sets label to undefined when name availability is error", () => {
       const formationFormData = generateFormationFormData({ businessName: "some name" });
       const businessNameAvailability = generateBusinessNameAvailability({ status: "DESIGNATOR_ERROR" });
       expect(
@@ -109,7 +109,7 @@ describe("getErrorStateForField", () => {
           formationFormData,
           businessNameAvailability,
         }).label
-      ).toEqual(Config.formation.fields.businessName.errorInlineUnavailable);
+      ).toEqual(undefined);
     });
 
     it("uses field name as label if name availability is AVAILABLE", () => {
