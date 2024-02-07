@@ -33,7 +33,6 @@ export type LegacyEventCategory =
   | "onboarding_last_step_save_additional_business_button"
   | "mandatory_field_error"
   | "roadmap_footer_live_chat_link"
-  | "report_something_that_is_broken"
   | "share_feedback"
   | "share_calendar_feedback"
   | "tax_calendar_banner_button"
