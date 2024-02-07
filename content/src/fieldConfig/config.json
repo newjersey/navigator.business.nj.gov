@@ -309,9 +309,6 @@
     "errorTextUpdateFailed": "Something went wrong with your request. Please try again later.",
     "errorRadioButton": "Make a selection."
   },
-  "reportAnIssueBar": {
-    "reportAnIssueBarText": "Report something that is broken."
-  },
   "footer": {
     "creditLinkText": "Open Source",
     "linkThree": "https://business.nj.gov/newsletter-signup",

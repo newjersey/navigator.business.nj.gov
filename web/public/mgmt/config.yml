@@ -3848,13 +3848,6 @@ collections:
               - { label: Office External Text, name: officeExternalText, widget: string }
               - { label: Github Link, name: gitHubLink, widget: string }
               - { label: Facebook Link, name: facebookLink, widget: string }
-          - label: Report An Issue Bar
-            name: reportAnIssueBar
-            collapsed: true
-            widget: object
-            summary: "{{reportAnIssueBar}}"
-            fields:
-              - { label: Report An Issue Bar Text, name: reportAnIssueBarText, widget: string }
           - label: Section Headers
             name: sectionHeaders
             collapsed: true

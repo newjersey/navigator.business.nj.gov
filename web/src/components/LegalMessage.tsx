@@ -7,7 +7,7 @@ export const LegalMessage = (): ReactElement => {
   const { Config } = useConfig();
 
   return (
-    <div className="bg-base-lightest">
+    <div className="bg-base-lightest" data-testid="legal-message">
       <div className="grid-container-widescreen desktop:padding-x-7">
         <hr className="margin-0" />
         <p className="line-height-body-2 padding-y-2 margin-top-0">
