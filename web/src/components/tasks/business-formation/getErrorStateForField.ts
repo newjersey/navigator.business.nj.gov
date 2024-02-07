@@ -152,13 +152,12 @@ export const getErrorStateForField = (inputParams: {
     const isAvailable = businessNameAvailability?.status === "AVAILABLE";
     const isValid = exists && isAvailable;
     let label = errorState.label;
-
     if (!exists) {
       label = Config.formation.fields.businessName.errorInlineEmpty;
     } else if (businessNameAvailability?.status === undefined) {
       label = Config.formation.fields.businessName.errorInlineNeedsToSearch;
     } else if (businessNameAvailability?.status !== "AVAILABLE") {
-      label = undefined;
+      label = Config.formation.fields.businessName.errorInlineUnavailable;
     }
     return { ...errorState, label, hasError: !isValid };
   }
