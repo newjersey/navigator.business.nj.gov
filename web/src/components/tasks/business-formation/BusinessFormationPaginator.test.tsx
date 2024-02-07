@@ -518,12 +518,15 @@ describe("<BusinessFormationPaginator />", () => {
         expect(screen.getByText(Config.formation.errorBanner.incompleteStepsError)).toBeInTheDocument();
       });
 
-      it("shows error field states for each step with error except for businessName field", async () => {
+      it("shows error field states for each step with error", async () => {
         const page = preparePage({ business, displayContent });
         await page.stepperClickToBillingStep();
         page.completeRequiredBillingFields();
         await page.stepperClickToReviewStep();
         await page.clickSubmit();
+
+        await page.stepperClickToBusinessNameStep();
+        expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
         await page.stepperClickToBusinessStep();
         expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
         await page.stepperClickToContactsStep();
@@ -687,6 +690,70 @@ describe("<BusinessFormationPaginator />", () => {
             await page.clickSubmitAndGetError(filledInBusinessWithApiResponse);
             expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual("ERROR");
             expect(screen.getByText(Config.formation.errorBanner.incompleteStepsError)).toBeInTheDocument();
+          });
+
+          it("shows API error message on step for businessName API error", async () => {
+            const { formationFormData, formationResponse, fieldName } = businessName;
+            filledInBusiness = {
+              ...business,
+              formationData: {
+                ...business.formationData,
+                formationFormData,
+              },
+            };
+
+            const filledInBusinessWithApiResponse = {
+              ...filledInBusiness,
+              formationData: {
+                ...filledInBusiness.formationData,
+                formationResponse,
+              },
+            };
+            const page = preparePage({ business: filledInBusiness, displayContent });
+            await page.fillAndSubmitBusinessNameStep();
+            await page.stepperClickToReviewStep();
+            await page.clickSubmitAndGetError(filledInBusinessWithApiResponse);
+            await page.stepperClickToBusinessNameStep();
+
+            expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.errorBanner.errorOnStep);
+            expect(screen.getByRole("alert")).toHaveTextContent(
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              (Config.formation.fields as any)[fieldName as string].label
+            );
+            expect(screen.getByRole("alert")).toHaveTextContent("very bad input");
+          });
+
+          it("removes businessName API error on blur when user changes text field", async () => {
+            const { formationFormData, formationResponse, formationStepName, fieldLabel, newTextInput } =
+              businessName;
+            filledInBusiness = {
+              ...business,
+              formationData: {
+                ...business.formationData,
+                formationFormData,
+              },
+            };
+            const filledInBusinessWithApiResponse = {
+              ...filledInBusiness,
+              formationData: {
+                ...filledInBusiness.formationData,
+                formationResponse,
+              },
+            };
+            const page = preparePage({ business: filledInBusiness, displayContent });
+            await page.fillAndSubmitBusinessNameStep();
+            await page.stepperClickToReviewStep();
+            await page.clickSubmitAndGetError(filledInBusinessWithApiResponse);
+            await page.stepperClickToBusinessNameStep();
+
+            expect(screen.getByRole("alert")).toBeInTheDocument();
+            page.fillText(fieldLabel as string as string, newTextInput as string);
+            await page.searchBusinessName({ status: "AVAILABLE" });
+            expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+            expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
+            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
+              "COMPLETE-ACTIVE"
+            );
           });
         });
 
