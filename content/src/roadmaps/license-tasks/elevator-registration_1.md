@@ -8,8 +8,9 @@ urlSlug: elevator-registration
 name: Register Your Elevator Device
 webflowName: Elevator Registration
 summaryDescriptionMd: If you own a commercial or manufacturing space with one or
-  more elevator devices, you must register the device(s) with the State before
-  you can get a Certificate of Occupancy or Approval.
+  more `elevator devices|elevator-device`, you must register the device(s) with
+  the State before you can get a `Certificate of Occupancy or
+  Approval|certificate-occupancy`.
 industryId:
   - generic
 callToActionText: Register My Elevator Device
@@ -20,13 +21,13 @@ divisionPhone: (609) 984-7833
 webflowType: object-vehicle
 ---
 :::infoAlert 
-Before applying to register, your elevator device(s) must pass all installation inspections.
+ Before applying to register, your elevator device(s) must pass all installation inspections.
 :::
 
 ## Application Requirements
 
-* Employer Identification Number (EIN) <insert contextual info>, if your business is a Corporation, General Partnership, Limited Liability Partnership (LLP), or Limited Partnership (LP)
-* Entity ID <insert contextual info>, if your business is a Corporation, General Partnership, Limited Liability Partnership (LLP), or Limited Partnership (LP)
+*  `Employer Identification Number (EIN)|ein`, if your business is a Corporation, General Partnership, Limited Liability Partnership (LLP), or Limited Partnership (LP)
+*  `Entity ID|entity-id`, if your business is a Corporation, General Partnership, Limited Liability Partnership (LLP), or Limited Partnership (LP)
 * Building address where the device is located
 * Device information, including type, classification, ID number, manufacturer, model, and installation date
 * Device specifications, such as travel distance, speed, and occupancy load
