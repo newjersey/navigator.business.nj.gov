@@ -17,7 +17,11 @@ export const NavBarLogoOnly = (props: Props): ReactElement => {
   return (
     <div className="position-sticky top-0 z-500 bg-white">
       <nav aria-label="Primary" className="grid-container-widescreen desktop:padding-x-7">
-        <div className={`display-flex flex-row flex-align-center ${useSmall ? "height-6" : "height-8"}`}>
+        <div
+          className={`display-flex flex-row ${
+            useSmall ? "flex-column height-13 padding-y-1" : "height-8 flex-align-center"
+          }`}
+        >
           <div className="display-flex flex-row flex-align-center">
             <NavbarBusinessNjGovLogo />
             <div className="margin-x-105">
@@ -26,7 +30,13 @@ export const NavBarLogoOnly = (props: Props): ReactElement => {
             <NavBarDashboardLink linkText={Config.navigationDefaults.navBarMyAccountText} />
           </div>
           {props.logoType === "NAVIGATOR_MYNJ_LOGO" && (
-            <div className="display-flex flex-row flex-align-center border-base-darkest border-left-2px border-left-solid margin-left-2 padding-left-2">
+            <div
+              className={`display-flex flex-row flex-align-center ${
+                useSmall
+                  ? "padding-top-1"
+                  : "border-base-lighter border-left-2px border-left-solid margin-left-2 padding-left-2"
+              }`}
+            >
               <img
                 className={isMobile ? "height-3" : "height-4"}
                 src="/img/mynj-logo.png"
