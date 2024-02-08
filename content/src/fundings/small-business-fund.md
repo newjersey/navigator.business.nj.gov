@@ -1,8 +1,8 @@
 ---
 filename: small-business-fund
 name: Small Business Fund
+displayName: small-business-fund
 urlSlug: small-business-fund
-displayName: Small Business Fund
 id: small-business-fund
 openDate: ""
 dueDate: ""

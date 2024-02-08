@@ -13,8 +13,7 @@ divisionPhone: "(609) 633-6132 or your Local Enforcing Agency"
 industryId: "generic"
 webflowType: "business-license"
 licenseCertificationClassification: "undefined"
-summaryDescriptionMd: "
-"
+summaryDescriptionMd: ""
 ---
 
 If your business is not home-based, it must be inspected regularly after opening to make sure it stays compliant with State and local fire safety regulations. Contact your Local Enforcing Agency (LEA) to find out how often your property needs to be inspected and the steps to get routine fire inspections.

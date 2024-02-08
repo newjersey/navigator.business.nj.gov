@@ -1,22 +1,27 @@
 ---
-id: "undefined"
-webflowId: "65bd67f3ba805962d4de11b5"
-urlSlug: "career-counseling-firm-reg"
-name: "Register Your Career Counseling Firm"
+filename: career-counseling-firm-reg
+displayname: career-counseling-firm-reg
+urlSlug: career-counseling-firm-reg
+name: Register Your Career Counseling Firm
 webflowName: "Employment and Personnel Services: Career Counseling Firm"
-filename: "career-counseling-firm-reg"
-callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx"
-callToActionText: "Register My Career Counseling Firm"
-agencyId: "nj-consumer-affairs"
-agencyAdditionalContext: "Employment and Personnel Services"
-divisionPhone: "(973) 504-6370"
-industryId: "employment-agency"
-licenseCertificationClassification: "undefined"
-summaryDescriptionMd: "You must register as a career counseling firm to provide career counseling services in New Jersey. Submit your application through the Regulated Business (RGB) Online Registration Portal.
+summaryDescriptionMd: >-
+  You must register as a career counseling firm to provide career counseling
+  services in New Jersey. Submit your application through the Regulated Business
+  (RGB) Online Registration Portal.
 
-:::infoAlert 
- You must submit applications for both the agency and the agent.
-:::"
+
+  :::infoAlert 
+   You must submit applications for both the agency and the agent.
+  :::
+industryId: employment-agency
+callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Employment and Personnel Services
+divisionPhone: (973) 504-6370
+id: undefined
+callToActionText: Register My Career Counseling Firm
+webflowId: 65bd67f3ba805962d4de11b5
+licenseCertificationClassification: undefined
 ---
 
 ---

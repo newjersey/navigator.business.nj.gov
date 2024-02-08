@@ -1,19 +1,24 @@
 ---
-id: "undefined"
-webflowId: "65bd67f34896b6febf1aace9"
-urlSlug: "entertainment-agency-reg"
+filename: entertainment-agency-reg
+displayname: entertainment-agency-reg
+urlSlug: entertainment-agency-reg
 name: "Register Your Entertainment Agency "
 webflowName: "Employment and Personnel Services: Entertainment Agency"
-filename: "entertainment-agency-reg"
-callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx"
-callToActionText: "Register My Entertainment Agency "
-industryId: "employment-agency"
-licenseCertificationClassification: "undefined"
-summaryDescriptionMd: "You must register as an entertainment agency to provide entertainment booking services in New Jersey. Submit your application through the Regulated Business (RGB) Online Registration Portal.
+summaryDescriptionMd: >-
+  You must register as an entertainment agency to provide entertainment booking
+  services in New Jersey. Submit your application through the Regulated Business
+  (RGB) Online Registration Portal.
 
-:::infoAlert 
- You must submit applications for both the agency and the agent.
-:::"
+
+  :::infoAlert 
+   You must submit applications for both the agency and the agent.
+  :::
+industryId: employment-agency
+callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
+id: undefined
+callToActionText: "Register My Entertainment Agency "
+webflowId: 65bd67f34896b6febf1aace9
+licenseCertificationClassification: undefined
 ---
 
 ---

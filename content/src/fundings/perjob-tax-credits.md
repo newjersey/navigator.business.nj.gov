@@ -1,8 +1,8 @@
 ---
 filename: perjob-tax-credits
 name: Per-Job Tax Credits with the Emerge Program
+displayName: perjob-tax-credits
 urlSlug: perjob-tax-credits
-displayName: Per-Job Tax Credits with the Emerge Program
 id: perjob-tax-credits-with-the-emerge-program
 openDate: ""
 dueDate: ""
