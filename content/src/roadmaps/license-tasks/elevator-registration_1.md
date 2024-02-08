@@ -1,7 +1,10 @@
 ---
-notesMd: "Muni planning doc:
-  https://docs.google.com/document/d/1xhIawax94xxdPMIjFlUml6wK01x6KU1ki5T65zPv9\
-  8c/edit?usp=sharing"
+notesMd: >-
+  Muni planning doc:
+  https://docs.google.com/document/d/1xhIawax94xxdPMIjFlUml6wK01x6KU1ki5T65zPv98c/edit?usp=sharing
+
+
+  This is draft content for Sam, not approved final copy
 filename: elevator-registration
 displayname: elevator-registration
 urlSlug: elevator-registration
