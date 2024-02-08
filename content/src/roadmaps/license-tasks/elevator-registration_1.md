@@ -26,8 +26,8 @@ webflowType: object-vehicle
 
 ## Application Requirements
 
-*  `Employer Identification Number (EIN)|ein`, if your business is a Corporation, General Partnership, Limited Liability Partnership (LLP), or Limited Partnership (LP)
-*  `Entity ID|entity-id`, if your business is a Corporation, General Partnership, Limited Liability Partnership (LLP), or Limited Partnership (LP)
+*  `Employer Identification Number (EIN)|ein` , if your business is a Corporation, General Partnership, Limited Liability Partnership (LLP), or Limited Partnership (LP)
+*  `Entity ID|entity-id` , if your business is a Corporation, General Partnership, Limited Liability Partnership (LLP), or Limited Partnership (LP)
 * Building address where the device is located
 * Device information, including type, classification, ID number, manufacturer, model, and installation date
 * Device specifications, such as travel distance, speed, and occupancy load
@@ -37,6 +37,7 @@ webflowType: object-vehicle
 >
 > * An elevator registration number
 >
+
 > **What if I don't register my elevator device?**
 >
 > You will not be able to get a Certificate of Occupancy or Approval for your space. Also, you will not be able to alter or modify the device without a registration.
