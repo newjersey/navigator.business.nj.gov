@@ -37,4 +37,4 @@ publishStageArchive: ""
 > ### Benefits
 >
 > This program helps businesses recruit and retain highly skilled STEM employees in high-growth occupations by offering them up to $8,000 in student loan redemption while only contributing half that amount. 
-HESAA matches each $1,000 contribution from participating employers for up to four years total.
+HESAA matches each $1,000 contribution from participating employers for up to four years.
