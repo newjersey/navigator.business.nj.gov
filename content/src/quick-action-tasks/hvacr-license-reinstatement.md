@@ -5,6 +5,7 @@ industryIds: []
 sectorIds: []
 icon: update-purple.svg
 urlSlug: hvacr-license-reinstatement
+summaryDescriptionMd: "\n"
 callToActionText: " Reinstate My  HVACR License "
 callToActionLink: https://www.njconsumeraffairs.gov/hvacr/Pages/applications.aspx
 ---
@@ -19,7 +20,8 @@ ___
 * List of licenses or certificates (past and present) 
 * Certification of employment, listing all jobs held during suspension
 * Certificate of completion for continuing education 
-*  `Surety bond|surety-bond` in the amount of $3,000 and a minimum of $500,000 in liability insurance
+*  `Surety bond|surety-bond`
+* Liability insurance
 * Notarized affidavit 
 * Applicable fees paid
 
