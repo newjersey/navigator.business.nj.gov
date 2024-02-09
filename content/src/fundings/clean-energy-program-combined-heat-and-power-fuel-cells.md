@@ -1,17 +1,17 @@
 ---
 filename: Clean Energy Program - Combined Heat and Power - Fuel Cells
 name: New Jersey’s Clean Energy Program – Combined Heat & Power - Fuel Cells
-displayName: New Jersey’s Clean Energy Program – Combined Heat & Power - Fuel Cells
+displayName: chp-clean-energy
 urlSlug: njcep-chpfc
 id: njcep-chpfc
 openDate: ""
 dueDate: ""
-descriptionMd: The Combined Heat and Power - Fuel Cells (CHP-FC) program aims to
-  enhance energy efficiency through on-site power generation with recovery and
-  productive use of waste heat, and to reduce existing and new demands to the
-  electric power grid. The program plans to do this by providing generous
-  financial incentives for Combined Heat & Power (CHP) and Fuel Cell (FC)
-  installations.
+summaryDescriptionMd: The Combined Heat and Power - Fuel Cells (CHP-FC) program
+  aims to enhance energy efficiency through on-site power generation with
+  recovery and productive use of waste heat, and to reduce existing and new
+  demands to the electric power grid. The program plans to do this by providing
+  generous financial incentives for Combined Heat & Power (CHP) and Fuel Cell
+  (FC) installations.
 callToActionLink: "https://www.NJCleanEnergy.com/CHP "
 callToActionText: Learn more
 fundingType: grant
@@ -34,11 +34,12 @@ sector:
   - real-estate
   - other-services
 publishStageArchive: ""
-summaryDescriptionMd: >-
-  The Combined Heat and Power - Fuel Cells (CHP-FC) program aims to enhance energy efficiency through on-site
-  power generation with recovery and productive use of waste heat, and to reduce existing and new demands to
-  the electric power grid. The program plans to do this by providing generous financial incentives for
-  Combined Heat & Power (CHP) and Fuel Cell (FC) installations.
+descriptionMd: The Combined Heat and Power - Fuel Cells (CHP-FC) program aims to
+  enhance energy efficiency through on-site power generation with recovery and
+  productive use of waste heat, and to reduce existing and new demands to the
+  electric power grid. The program plans to do this by providing generous
+  financial incentives for Combined Heat & Power (CHP) and Fuel Cell (FC)
+  installations.
 ---
 
 ## Eligibility
