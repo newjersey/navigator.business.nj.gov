@@ -1,3 +1,21 @@
+# [2024.4.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.3.1...v2024.4.0) (2024-02-09)
+
+
+### Bug Fixes
+
+* [[#186444137](https://github.com/newjersey/navigator.business.nj.gov/issues/186444137)] [[#186444230](https://github.com/newjersey/navigator.business.nj.gov/issues/186444230)] navbar link to my new jersey styling and semi bold font-weight ([b4dc32b](https://github.com/newjersey/navigator.business.nj.gov/commit/b4dc32b6109398886efc67a12cd597ac068a8b76))
+* [[#186444137](https://github.com/newjersey/navigator.business.nj.gov/issues/186444137)] [[#186444230](https://github.com/newjersey/navigator.business.nj.gov/issues/186444230)] route to onboarding from landing page ([7f5ff75](https://github.com/newjersey/navigator.business.nj.gov/commit/7f5ff7569a8733292220c8a28aa3d0a9b826a80b))
+* increase operations per run in workflow ([1527181](https://github.com/newjersey/navigator.business.nj.gov/commit/1527181797eaa97f4032865d53d153821fd86350))
+* manually triggerable workflow ([9f0b128](https://github.com/newjersey/navigator.business.nj.gov/commit/9f0b128a846bc78494d59a65acf378f13d752032))
+
+
+### Features
+
+* [[#186444137](https://github.com/newjersey/navigator.business.nj.gov/issues/186444137)] [[#186444230](https://github.com/newjersey/navigator.business.nj.gov/issues/186444230)] navigation bar title updates ([cdffad8](https://github.com/newjersey/navigator.business.nj.gov/commit/cdffad8056a6084b4f1ba70573d427f14cdec9d8))
+* [[#186820573](https://github.com/newjersey/navigator.business.nj.gov/issues/186820573)] summaryDescriptionMd support for quick action tasks ([844d672](https://github.com/newjersey/navigator.business.nj.gov/commit/844d672ed3270034737d9c518b137bed23a32ae4))
+* [#[#184764052](https://github.com/newjersey/navigator.business.nj.gov/issues/184764052)] change business name error from alert to inline ([1cf1ddc](https://github.com/newjersey/navigator.business.nj.gov/commit/1cf1ddc44489a83e65730f90d96b9ded1bd00687))
+* [#[#184764052](https://github.com/newjersey/navigator.business.nj.gov/issues/184764052)] change business name error from alert to inline ([818cdbf](https://github.com/newjersey/navigator.business.nj.gov/commit/818cdbfcaac867fb9854dab5a95758e530a6dfca))
+
 ## [2024.3.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.3.0...v2024.3.1) (2024-02-05)
 
 
