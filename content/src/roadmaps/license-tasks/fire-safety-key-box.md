@@ -11,7 +11,7 @@ summaryDescriptionMd: >
   (LEA) to see if you need to get a key box and how to get one.
 industryId:
   - generic
-callToActionText: Contact Local Enforcing Agency
+callToActionText: Contact My Local Enforcing Agency
 callToActionLink: https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf
 licenseCertificationClassification: undefined
 agencyId: nj-community-affairs
@@ -21,4 +21,4 @@ id: undefined
 webflowType: business-license
 webflowId: 65bd67f390ed542982d25aa3
 ---
- 
+
