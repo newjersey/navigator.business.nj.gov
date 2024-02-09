@@ -26,7 +26,7 @@ ___
 * Applicable fees paid
 
 :::infoAlert 
- You need to pay the $150 reinstatement fee and the $160 renewal fee for one renewal period.
+ You need to pay the reinstatement fee and the renewal fee for one renewal period.
 :::
 
 > **Once completed, you will have:**
