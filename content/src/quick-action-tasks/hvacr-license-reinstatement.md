@@ -1,7 +1,8 @@
 ---
 filename: hvacr-license-reinstatement
 name: Reinstate Your HVACR License
-industryIds: []
+industryIds:
+  - hvac-contractor
 sectorIds: []
 icon: update-purple.svg
 urlSlug: hvacr-license-reinstatement
