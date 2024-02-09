@@ -1,13 +1,13 @@
 ---
 filename: Clean Energy Program - Local Government Energy Audit
 name: New Jersey’s Clean Energy Program - Local Government Energy Audit
-displayName: New Jersey’s Clean Energy Program - Local Government Energy Audit
+displayName: lgea-clean-energy
 urlSlug: njcep-lgea
 id: njcep-lgea
 openDate: ""
 dueDate: ""
-descriptionMd: The Local Government Energy Audit (LGEA) program provides an
-  energy audit at no cost for eligible facilities owned by municipalities,
+summaryDescriptionMd: The Local Government Energy Audit (LGEA) program provides
+  an energy audit at no cost for eligible facilities owned by municipalities,
   school districts, 501(c)(3) non-profits, and other local and state government
   entities (applicants). The goal of the energy audit is to provide applicants
   with information on how their facilities use energy, identify energy
@@ -32,13 +32,14 @@ county:
   - All
 sector: []
 publishStageArchive: Do Not Publish
-summaryDescriptionMd: >-
-  The Local Government Energy Audit (LGEA) program provides an energy audit at no cost for eligible facilities
-  owned by municipalities, school districts, 501(c)(3) non-profits, and other local and state government
-  entities (applicants). The goal of the energy audit is to provide applicants with information on how their
-  facilities use energy, identify energy conservation measures that can reduce energy, put applicants in a
-  position to implement these measures, and guide applicants towards financial incentives offered by utilities
-  and state.
+descriptionMd: The Local Government Energy Audit (LGEA) program provides an
+  energy audit at no cost for eligible facilities owned by municipalities,
+  school districts, 501(c)(3) non-profits, and other local and state government
+  entities (applicants). The goal of the energy audit is to provide applicants
+  with information on how their facilities use energy, identify energy
+  conservation measures that can reduce energy, put applicants in a position to
+  implement these measures, and guide applicants towards financial incentives
+  offered by utilities and state.
 ---
 
 ## Eligibility
