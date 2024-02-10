@@ -4547,8 +4547,8 @@ __metadata:
     "@types/lodash": 4.14.202
     "@types/mdast": 4.0.3
     "@types/node": 16.18.79
-    "@types/react": 18.2.48
-    "@types/react-dom": 18.2.18
+    "@types/react": 18.2.55
+    "@types/react-dom": 18.2.19
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.5
     "@types/react-transition-group": 4.4.10
@@ -4625,7 +4625,7 @@ __metadata:
     react: 18.2.0
     react-clamp-lines: 3.0.3
     react-dom: 18.2.0
-    react-slick: ^0.29.0
+    react-slick: ^0.30.0
     react-transition-group: 4.4.5
     rehype-format: 5.0.0
     rehype-raw: 7.0.0
@@ -4758,8 +4758,8 @@ __metadata:
     "@types/lodash": 4.14.202
     "@types/mdast": 4.0.3
     "@types/node": 16.18.79
-    "@types/react": 18.2.48
-    "@types/react-dom": 18.2.18
+    "@types/react": 18.2.55
+    "@types/react-dom": 18.2.19
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.5
     "@types/react-transition-group": 4.4.10
@@ -4816,7 +4816,7 @@ __metadata:
     react: 18.2.0
     react-clamp-lines: 3.0.3
     react-dom: 18.2.0
-    react-slick: ^0.29.0
+    react-slick: ^0.30.0
     react-transition-group: 4.4.5
     rehype-format: 5.0.0
     rehype-raw: 7.0.0
@@ -10781,7 +10781,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/user-event@npm:14.5.2":
+"@testing-library/user-event@npm:14.5.2, @testing-library/user-event@npm:^14.3.0":
   version: 14.5.2
   resolution: "@testing-library/user-event@npm:14.5.2"
   peerDependencies:
@@ -11448,12 +11448,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.2.18, @types/react-dom@npm:^18.0.0":
-  version: 18.2.18
-  resolution: "@types/react-dom@npm:18.2.18"
+"@types/react-dom@npm:18.2.19, @types/react-dom@npm:^18.0.0":
+  version: 18.2.19
+  resolution: "@types/react-dom@npm:18.2.19"
   dependencies:
     "@types/react": "*"
-  checksum: 8e3da404c980e2b2a76da3852f812ea6d8b9d0e7f5923fbaf3bfbbbfa1d59116ff91c129de8f68e9b7668a67ae34484fe9df74d5a7518cf8591ec07a0c4dad57
+  checksum: 087a19d8e4c1c0900ec4ac5ddb749a811a38274b25683d233c11755d2895cc6e475e8bf9bea3dee36519769298e078d4c2feab9ab4bd13b26bc2a6170716437e
   languageName: node
   linkType: hard
 
@@ -11496,14 +11496,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:18.2.48, @types/react@npm:>=16":
-  version: 18.2.48
-  resolution: "@types/react@npm:18.2.48"
+"@types/react@npm:*, @types/react@npm:18.2.55, @types/react@npm:>=16":
+  version: 18.2.55
+  resolution: "@types/react@npm:18.2.55"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: c9ca43ed2995389b7e09492c24e6f911a8439bb8276dd17cc66a2fbebbf0b42daf7b2ad177043256533607c2ca644d7d928fdfce37a67af1f8646d2bac988900
+  checksum: a8eb4fa77f73831b9112d4f11a7006217dc0740361649b9b0da3fd441d151a9cd415d5d68b91c0af4e430e063424d301c77489e5edaddc9f711c4e46cf9818a5
   languageName: node
   linkType: hard
 
@@ -29952,10 +29952,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-slick@npm:^0.29.0":
-  version: 0.29.0
-  resolution: "react-slick@npm:0.29.0"
+"react-slick@npm:^0.30.0":
+  version: 0.30.1
+  resolution: "react-slick@npm:0.30.1"
   dependencies:
+    "@testing-library/user-event": ^14.3.0
     classnames: ^2.2.5
     enquire.js: ^2.1.6
     json2mq: ^0.2.0
@@ -29964,7 +29965,7 @@ __metadata:
   peerDependencies:
     react: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: 67ce4981914da8a76c6efb4bc8ee7ab69e04c33bd4b3517419ab2165679a3c701dae781556149713fe2c542f84188b7ca101ea58883537be5c05756408f48c8b
+  checksum: 1ecf029e8eeb27122425c3fc477cd74edabcae8ebea6cc1ade3b1598c69df49b8748818346e155b21bff79ab4e1dd209719ab5d50984d2522eaf370d149dd9b4
   languageName: node
   linkType: hard
 
