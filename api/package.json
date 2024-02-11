@@ -92,7 +92,7 @@
     "prettier-plugin-organize-imports": "3.2.4",
     "rimraf": "5.0.5",
     "serverless": "3.38.0",
-    "serverless-dynamodb": "0.2.47",
+    "serverless-dynamodb": "0.2.49",
     "serverless-offline": "13.3.3",
     "serverless-offline-ssm": "6.2.0",
     "serverless-webpack": "5.13.0",
@@ -103,7 +103,7 @@
     "tsconfig-paths": "4.2.0",
     "tsconfig-paths-webpack-plugin": "4.1.0",
     "typescript": "5.3.3",
-    "webpack": "5.89.0",
+    "webpack": "5.90.1",
     "webpack-node-externals": "3.0.0",
     "wiremock": "3.3.1"
   }
