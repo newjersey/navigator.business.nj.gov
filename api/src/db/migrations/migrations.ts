@@ -31,6 +31,7 @@ import { migrate_v124_to_v125 } from "@db/migrations/v125_rename_provisions_to_a
 import { migrate_v125_to_v126 } from "@db/migrations/v126_remove_foreign_business_type";
 import { migrate_v126_to_v127 } from "@db/migrations/v127_create_remote_worker_seller_phase";
 import { migrate_v127_to_v128 } from "@db/migrations/v128_merge_needs_to_register_and_formed_and_registered";
+import { migrate_v128_to_v129 } from "@db/migrations/v129_add_elevator_owning_business_to_profile";
 import { migrate_v11_to_v12 } from "@db/migrations/v12_remove_scorp";
 import { migrate_v12_to_v13 } from "@db/migrations/v13_add_construction_renovation_plan";
 import { migrate_v13_to_v14 } from "@db/migrations/v14_add_cleaning_aid_industry";
@@ -260,4 +261,5 @@ export const Migrations: MigrationFunction[] = [
   migrate_v125_to_v126,
   migrate_v126_to_v127,
   migrate_v127_to_v128,
+  migrate_v128_to_v129,
 ];

@@ -95,6 +95,7 @@ export interface ProfileData extends IndustrySpecificData {
   readonly operatingPhase: OperatingPhaseId;
   readonly isNonprofitOnboardingRadio: boolean;
   readonly nonEssentialRadioAnswers: Record<string, boolean | undefined>;
+  readonly elevatorOwningBusiness: boolean | undefined;
 }
 
 export const emptyProfileData: ProfileData = {
@@ -124,6 +125,7 @@ export const emptyProfileData: ProfileData = {
   operatingPhase: "GUEST_MODE",
   isNonprofitOnboardingRadio: false,
   nonEssentialRadioAnswers: {},
+  elevatorOwningBusiness: undefined,
   ...emptyIndustrySpecificData,
 };
 
