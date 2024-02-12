@@ -5,6 +5,8 @@ name: Food Desert Relief Supermarket Tax Credit Program
 displayName: food-desert-relief
 urlSlug: food-desert-relief
 id: food-desert-relief
+descriptionMd: The Food Desert Relief Supermarket Tax Credit Program provides
+  tax credits for new grocery stores in designated NJ Food Desert Communities.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: The Food Desert Relief Supermarket Tax Credit Program
