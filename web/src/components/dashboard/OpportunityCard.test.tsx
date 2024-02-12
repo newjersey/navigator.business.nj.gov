@@ -1,4 +1,4 @@
-import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
+import { OPPORTUNITY_CARD_MAX_BODY_CHARS, OpportunityCard } from "@/components/dashboard/OpportunityCard";
 import { getMergedConfig } from "@/contexts/configContext";
 import analytics from "@/lib/utils/analytics";
 import { generateOpportunity } from "@/test/factories";
@@ -85,31 +85,39 @@ describe("OpportunityCard", () => {
     expect(screen.getByText("Rolling Application")).toBeInTheDocument();
   });
 
-  it("displays full first 150 characters of description", () => {
-    const characters = Array(151).fill("a").join("");
-    const expectedTextOnPage = `${Array(150).fill("a").join("")}...`;
+  describe("content truncation based on OPPORTUNITY_CARD_MAX_BODY_CHARS", () => {
+    it(`displays ellipsis and first ${
+      OPPORTUNITY_CARD_MAX_BODY_CHARS - 3
+    } characters when character count is over ${OPPORTUNITY_CARD_MAX_BODY_CHARS}`, () => {
+      const characters = Array(OPPORTUNITY_CARD_MAX_BODY_CHARS + 1)
+        .fill("a")
+        .join("");
+      const expectedTextOnPage = `${Array(OPPORTUNITY_CARD_MAX_BODY_CHARS - 3)
+        .fill("a")
+        .join("")}...`;
 
-    const opportunity = generateOpportunity({ descriptionMd: characters });
-    render(<OpportunityCard opportunity={opportunity} urlPath="funding" />);
-    expect(screen.getByText(expectedTextOnPage)).toBeInTheDocument();
-  });
+      const opportunity = generateOpportunity({ sidebarCardBodyText: characters });
+      render(<OpportunityCard opportunity={opportunity} urlPath="funding" />);
+      expect(screen.getByText(expectedTextOnPage)).toBeInTheDocument();
+    });
 
-  it("truncates markdown without showing characters on page for bold", () => {
-    const characters = Array(145).fill("a").join("");
-    const boldContent = `${characters} *a bold text*`;
+    it(`displays the entire content when character count is ${OPPORTUNITY_CARD_MAX_BODY_CHARS}`, () => {
+      const characters = Array(OPPORTUNITY_CARD_MAX_BODY_CHARS).fill("a").join("");
 
-    const opportunity = generateOpportunity({ descriptionMd: boldContent });
-    render(<OpportunityCard opportunity={opportunity} urlPath="funding" />);
-    expect(screen.getByText("a bo")).toBeInTheDocument();
-  });
+      const opportunity = generateOpportunity({ sidebarCardBodyText: characters });
+      render(<OpportunityCard opportunity={opportunity} urlPath="funding" />);
+      expect(screen.getByText(characters)).toBeInTheDocument();
+    });
 
-  it("truncates markdown without showing characters on page for link", () => {
-    const characters = Array(145).fill("a").join("");
-    const linkContent = `${characters} [a link text](www.example.com)`;
+    it(`displays the entire content when character count is less than ${OPPORTUNITY_CARD_MAX_BODY_CHARS}`, () => {
+      const characters = Array(OPPORTUNITY_CARD_MAX_BODY_CHARS - 10)
+        .fill("a")
+        .join("");
 
-    const opportunity = generateOpportunity({ descriptionMd: linkContent });
-    render(<OpportunityCard opportunity={opportunity} urlPath="funding" />);
-    expect(screen.getByText("a li")).toBeInTheDocument();
+      const opportunity = generateOpportunity({ sidebarCardBodyText: characters });
+      render(<OpportunityCard opportunity={opportunity} urlPath="funding" />);
+      expect(screen.getByText(characters)).toBeInTheDocument();
+    });
   });
 
   it("fires hide_card analytics when hide button is clicked", () => {

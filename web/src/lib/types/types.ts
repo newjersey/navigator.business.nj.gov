@@ -153,7 +153,7 @@ export type Funding = {
   urlSlug: string;
   callToActionLink: string;
   callToActionText: string;
-  descriptionMd: string;
+  sidebarCardBodyText: string;
   summaryDescriptionMd: string;
   contentMd: string;
   fundingType: FundingType;
@@ -182,7 +182,7 @@ export type Certification = {
   urlSlug: string;
   summaryDescriptionMd: string;
   contentMd: string;
-  descriptionMd: string;
+  sidebarCardBodyText: string;
   callToActionLink: string | undefined;
   callToActionText: string | undefined;
   agency: string[] | null | undefined;
@@ -195,7 +195,7 @@ export interface Opportunity {
   name: string;
   urlSlug: string;
   contentMd: string;
-  descriptionMd: string;
+  sidebarCardBodyText: string;
   dueDate?: string;
   status?: string;
 }

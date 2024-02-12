@@ -46,7 +46,7 @@ sector:
   - waste-management-and-Remediation
   - other-services
 publishStageArchive: null
-descriptionMd: The program's goal is to support innovation from researchers and
+sidebarCardBodyText: The program's goal is to support innovation from researchers and
   entrepreneurs focused on developing technology and other solutions to address
   food insecurity in New Jersey. The program aims to fund 10 companies for
   awards of up to $75,000 each.

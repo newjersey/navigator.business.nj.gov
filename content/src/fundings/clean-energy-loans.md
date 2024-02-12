@@ -32,7 +32,7 @@ county:
   - All
 sector: []
 publishStageArchive: ""
-descriptionMd: New Jersey Clean Energy Loans (NJ CELs) will unlock capital for
+sidebarCardBodyText: New Jersey Clean Energy Loans (NJ CELs) will unlock capital for
   small businesses, catalyze the deployment of clean energy in New Jersey, and
   support Minority-, Woman-, and Veteran-owned businesses to participate in the
   State’s energy transition.

@@ -6,7 +6,7 @@ urlSlug: njcep-rnc
 id: njcep-rnc
 openDate: ""
 dueDate: ""
-descriptionMd: The Residential New Construction (RNC) Program is designed to
+sidebarCardBodyText: The Residential New Construction (RNC) Program is designed to
   increase the energy efficiency and environmental performance of residential
   new construction buildings (single and multifamily) in New Jersey by offering
   technical support and incentives to builders that comply with these standards.

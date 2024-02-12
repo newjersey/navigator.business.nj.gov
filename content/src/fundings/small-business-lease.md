@@ -28,7 +28,7 @@ county:
   - All
 sector: []
 publishStageArchive: null
-descriptionMd: The Small Business Lease Grant supports the growth and success of
+sidebarCardBodyText: The Small Business Lease Grant supports the growth and success of
   small businesses and nonprofits by providing grant funding to cover a portion
   of lease payments for businesses and nonprofits leasing new or additional
   space.

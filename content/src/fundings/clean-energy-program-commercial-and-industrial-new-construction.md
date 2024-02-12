@@ -33,7 +33,7 @@ sector:
   - other-services
   - manufacturing
 publishStageArchive: ""
-descriptionMd: New Jersey’s Clean Energy Program (NJCEP) encourages energy
+sidebarCardBodyText: New Jersey’s Clean Energy Program (NJCEP) encourages energy
   efficient new construction of commercial and industrial facilities in New
   Jersey by offering various financial incentives to adopt cost-effective,
   energy efficient design choices in qualifying new construction and substantial

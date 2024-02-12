@@ -6,7 +6,7 @@ urlSlug: njcep-lgea
 id: njcep-lgea
 openDate: ""
 dueDate: ""
-descriptionMd: The Local Government Energy Audit (LGEA) program provides an
+sidebarCardBodyText: The Local Government Energy Audit (LGEA) program provides an
   energy audit at no cost for eligible facilities owned by municipalities,
   school districts, 501(c)(3) non-profits, and other local and state government
   entities (applicants). The goal of the energy audit is to provide applicants

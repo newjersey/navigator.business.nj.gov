@@ -27,7 +27,7 @@ county:
   - All
 sector: []
 publishStageArchive: null
-descriptionMd: The Small Business Improvement Grant offers reimbursement for
+sidebarCardBodyText: The Small Business Improvement Grant offers reimbursement for
   costs associated with completed building improvements or purchased new
   furniture, fixtures and equipment made since March 9th, 2020.
 ---
