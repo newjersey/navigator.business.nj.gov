@@ -17,6 +17,7 @@ interface Props {
   isAuthenticated: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   handleClose: () => void;
+  subMenuElement: ReactElement;
 }
 
 export const NavBarDesktopDropDown = (props: Props): ReactElement => {
@@ -76,6 +77,7 @@ return (
                     menuConfiguration={
                       props.isAuthenticated ? "profile-mynj-addbusiness-logout" : "profile"
                     }
+                    subMenuElement={props.subMenuElement}
                   />
                 </div>
               </ClickAwayListener>

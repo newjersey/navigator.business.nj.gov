@@ -3,6 +3,7 @@ import { NavBarDesktopHomeLogo } from "@/components/navbar/desktop/NavBarDesktop
 import { NavBarDesktopWrapper } from "@/components/navbar/desktop/NavBarDesktopWrapper";
 import { NavBarLandingDesktop } from "@/components/navbar/desktop/NavBarLandingDesktop";
 import { NavBarLogoOnly } from "@/components/navbar/NavBarLogoOnly";
+import { AddBusinessItem, LogoutMenuItem, MyNjMenuItem, ProfileMenuItem } from "@/components/navbar/shared-submenu-components";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
@@ -75,8 +76,23 @@ export const NavBarDesktop = (props: Props): ReactElement => {
     }
     else if(props.currentlyOnboarding){ // onboarding
       return (
-      <NavBarDesktopWrapper>
+        <NavBarDesktopWrapper>
         <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId}/>
+        <NavBarDesktopDropDown
+          currentIndex={currentIndex}
+          anchorRef={anchorRef}
+          open={open}
+          setOpen={setOpen}
+          navBarBusinessTitle={navBarBusinessTitle}
+          isAuthenticated={props.isAuthenticated}
+          handleClose={handleClose}
+          textColor={textColor}
+          subMenuElement={
+            <>
+
+            </>
+          }
+        />
       </NavBarDesktopWrapper>
       );
     }
@@ -93,13 +109,38 @@ export const NavBarDesktop = (props: Props): ReactElement => {
             isAuthenticated={props.isAuthenticated}
             handleClose={handleClose}
             textColor={textColor}
+            subMenuElement={
+              <>
+                <ProfileMenuItem handleClose={handleClose} />
+                <AddBusinessItem handleClose={handleClose} />
+                <MyNjMenuItem handleClose={handleClose} />
+                <LogoutMenuItem handleClose={handleClose} />
+              </>
+            }
           />
         </NavBarDesktopWrapper>
         );
     }
     else{ // guest
       return (
-        <>stuff</>
+        <NavBarDesktopWrapper>
+          <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId}/>
+          <NavBarDesktopDropDown
+            currentIndex={currentIndex}
+            anchorRef={anchorRef}
+            open={open}
+            setOpen={setOpen}
+            navBarBusinessTitle={navBarBusinessTitle}
+            isAuthenticated={props.isAuthenticated}
+            handleClose={handleClose}
+            textColor={textColor}
+            subMenuElement={
+              <>
+                <ProfileMenuItem handleClose={handleClose} />
+              </>
+            }
+          />
+        </NavBarDesktopWrapper>
       );
     }
 
