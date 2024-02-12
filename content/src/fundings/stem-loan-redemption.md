@@ -4,9 +4,9 @@ name: New Jersey STEM Loan Redemption Program
 displayName: stem-loan-redemption
 urlSlug: stem-loan-redemption
 id: stem-loan-redemption
-descriptionMd: The New Jersey STEM Loan Redemption Program helps qualifying New
-  Jersey employees in high-growth occupations within science, technology,
-  engineering, and mathematics (STEM) fields pay off their student loans.
+sidebarCardBodyText: The New Jersey STEM Loan Redemption Program helps employees
+  in science, technology, engineering, and mathematics occupations pay their
+  student loans.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: The New Jersey STEM Loan Redemption Program helps
@@ -30,6 +30,9 @@ county:
   - All
 sector: []
 publishStageArchive: ""
+descriptionMd: The New Jersey STEM Loan Redemption Program helps qualifying New
+  Jersey employees in high-growth occupations within science, technology,
+  engineering, and mathematics (STEM) fields pay off their student loans.
 ---
 ## Eligibility
 
