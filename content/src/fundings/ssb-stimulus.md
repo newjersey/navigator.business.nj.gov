@@ -40,7 +40,7 @@ sector:
   - clean-energy
   - construction
 publishStageArchive: ""
-descriptionMd: The School and Small Business Energy Efficiency Stimulus Program
+sidebarCardBodyText: The School and Small Business Energy Efficiency Stimulus Program
   provides grants (via reimbursement) to small businesses and boards of
   education to improve air quality and energy efficiency in school districts
   under the jurisdiction of a board of education and small businesses.

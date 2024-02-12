@@ -1,5 +1,5 @@
 ---
-descriptionMd: While New Jersey state government does not give special
+sidebarCardBodyText: While New Jersey state government does not give special
   consideration to vendors that hold Minority- or Women-Owned Business
   Enterprise (M/WBE) certificates, some State licenses, municipal or federal
   contracts do give special consideration.

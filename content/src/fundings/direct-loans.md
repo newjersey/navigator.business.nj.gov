@@ -27,7 +27,7 @@ county:
   - All
 sector: []
 publishStageArchive: ""
-descriptionMd: New Jersey businesses committed to job creation or retention may
+sidebarCardBodyText: New Jersey businesses committed to job creation or retention may
   be eligible for direct loans through the New Jersey Economic Development
   Authority (NJEDA) when conventional financing is not available.
 ---

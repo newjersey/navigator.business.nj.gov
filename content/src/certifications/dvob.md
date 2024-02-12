@@ -1,9 +1,5 @@
 ---
-notesMd: |-
-  :::infoAlert
-   hello are you?
-  :::
-descriptionMd: A Disabled Veteran-Owned Business (DVOB) certification may
+sidebarCardBodyText: A Disabled Veteran-Owned Business (DVOB) certification may
   provide an advantage for New Jersey State contracts.
 urlSlug: dvob
 name: Get Certified as a Disabled Veteran-Owned Business

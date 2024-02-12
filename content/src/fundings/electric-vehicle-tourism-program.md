@@ -32,7 +32,7 @@ sector:
   - arts-entertainment-and-recreation
   - other-services
 publishStageArchive: ""
-descriptionMd: The Electric Vehicle (EV) Tourism Program is offering incentives
+sidebarCardBodyText: The Electric Vehicle (EV) Tourism Program is offering incentives
   to promote electric vehicle adoption and tourism through investment in EV
   chargers at key New Jersey tourism sites, landmarks, and other Tourism Areas.
 ---

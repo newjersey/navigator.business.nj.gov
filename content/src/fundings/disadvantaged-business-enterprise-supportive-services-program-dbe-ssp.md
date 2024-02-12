@@ -40,7 +40,7 @@ sector:
   - utilities
   - other-services
 publishStageArchive: ""
-descriptionMd: The DBE/SS Program provides training and technical assistance to
+sidebarCardBodyText: The DBE/SS Program provides training and technical assistance to
   minority, disadvantaged, and women-owned businesses. This program aims to
   increase opportunities with the New Jersey Department of Transportation's
   (NJDOT) contracting program and assist them in competing for and performing

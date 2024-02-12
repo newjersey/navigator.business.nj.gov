@@ -32,7 +32,7 @@ sector:
   - other-services
   - waste-management-and-Remediation
 publishStageArchive: ""
-descriptionMd: The Hazardous Discharge Site Remediation Fund (HDSRF) provides
+sidebarCardBodyText: The Hazardous Discharge Site Remediation Fund (HDSRF) provides
   funding for the investigation, remediation, and cleanup of contaminated and
   underutilized sites.
 ---

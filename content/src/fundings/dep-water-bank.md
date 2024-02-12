@@ -27,7 +27,7 @@ county:
   - All
 sector: []
 publishStageArchive: ""
-descriptionMd: This program provides low-cost financing for the design,
+sidebarCardBodyText: This program provides low-cost financing for the design,
   construction, and implementation of projects that help protect and improve
   water quality, and help ensure safe and adequate drinking water.
 ---

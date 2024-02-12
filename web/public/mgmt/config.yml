@@ -1153,7 +1153,12 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "Description", name: "descriptionMd", widget: "markdown" }
+      - {
+          label: "Description for card in For You",
+          name: "sidebarCardBodyText",
+          widget: "string",
+          hint: "This appears only in My Account, in the For You column, max char is 150 including spaces, plain text only",
+        }
       - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug / Filename", name: "urlSlug", widget: "write-once-read-only" }
@@ -1195,7 +1200,12 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "Description", name: "descriptionMd", widget: "markdown" }
+      - {
+          label: "Description for card in For You",
+          name: "sidebarCardBodyText",
+          widget: "string",
+          hint: "This appears only in My Account, in the For You column, max char is 150 including spaces, plain text only",
+        }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug / Filename", name: "urlSlug", widget: "write-once-read-only" }
       - { label: "Name", name: "name", widget: "string" }
@@ -1275,7 +1285,7 @@ collections:
         }
       - {
           label: "Description for card in For You",
-          name: "descriptionMd",
+          name: "sidebarCardBodyText",
           widget: "string",
           hint: "This appears only in My Account, in the For You column, max char is 150 including spaces, plain text only",
         }
@@ -1482,7 +1492,7 @@ collections:
         }
       - {
           label: "Description for card in For You",
-          name: "descriptionMd",
+          name: "sidebarCardBodyText",
           widget: "string",
           hint: "This appears only in My Account, in the For You column, max char is 150 including spaces, plain text only",
         }

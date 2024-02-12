@@ -29,7 +29,7 @@ sector:
   - construction
   - utilities
 publishStageArchive: ""
-descriptionMd: This program provides low-interest loans to finance the costs of
+sidebarCardBodyText: This program provides low-interest loans to finance the costs of
   infrastructure needed to achieve or maintain compliance with Safe Drinking
   Water Act (SDWA) requirements and to protect public health.
 ---
