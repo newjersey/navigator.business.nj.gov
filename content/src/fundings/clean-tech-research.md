@@ -33,7 +33,7 @@ sector:
   - manufacturing
   - other-services
 publishStageArchive: ""
-descriptionMd: The Clean Tech Research & Development (R&D) Voucher Program helps
+sidebarCardBodyText: The Clean Tech Research & Development (R&D) Voucher Program helps
   New Jersey early-stage clean tech and clean energy companies offset the cost
   of accessing equipment at participating New Jersey universities or federal
   labs for R&D.

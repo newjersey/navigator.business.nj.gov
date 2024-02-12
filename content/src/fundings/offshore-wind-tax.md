@@ -32,7 +32,7 @@ sector:
   - manufacturing
   - other-services
 publishStageArchive: ""
-descriptionMd: The Offshore Wind Tax Credit Program is a financial tool that
+sidebarCardBodyText: The Offshore Wind Tax Credit Program is a financial tool that
   spurs private capital investment and employment growth in major, land-based
   offshore wind industry projects.
 ---

@@ -34,7 +34,7 @@ sector:
   - clean-energy
   - other-services
 publishStageArchive: ""
-descriptionMd: The New Jersey Angel Investor Tax Credit Program establishes
+sidebarCardBodyText: The New Jersey Angel Investor Tax Credit Program establishes
   refundable tax credits for qualified investments in New Jersey emerging
   technology businesses to stimulate investment in the innovation economy.
 ---

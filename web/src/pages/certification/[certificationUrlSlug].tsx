@@ -1,9 +1,10 @@
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
+import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { NavBar } from "@/components/navbar/NavBar";
+import { Heading } from "@/components/njwds-extended/Heading";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
@@ -35,11 +36,15 @@ export const CertificationElement = (props: { certification: Certification }): R
     <>
       <div className="minh-38">
         <div className="margin-bottom-2">
-          <h1>{props.certification.name}</h1>
+          {props.certification.name && <Heading level={1}>{props.certification.name}</Heading>}
         </div>
-        <Content>{props.certification.summaryDescriptionMd}</Content>
+        {props.certification.summaryDescriptionMd && (
+          <Content>{props.certification.summaryDescriptionMd}</Content>
+        )}
         <HorizontalLine />
-        <Content>{addNaicsCodeData(props.certification.contentMd)}</Content>
+        {props.certification.contentMd && (
+          <Content>{addNaicsCodeData(props.certification.contentMd)}</Content>
+        )}
       </div>
       {props.certification.callToActionLink && props.certification.callToActionText && (
         <SingleCtaLink
@@ -55,7 +60,9 @@ const CertificationPage = (props: Props): ReactElement => {
   const { Config } = useConfig();
   return (
     <>
-      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${props.certification.name}`} />
+      {props.certification.name && (
+        <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${props.certification.name}`} />
+      )}
       <PageSkeleton>
         <NavBar showSidebar={true} hideMiniRoadmap={true} />
         <TaskSidebarPageLayout hideMiniRoadmap={true}>

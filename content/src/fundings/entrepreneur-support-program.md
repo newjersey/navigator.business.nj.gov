@@ -31,7 +31,7 @@ sector:
   - technology
   - other-services
 publishStageArchive: ""
-descriptionMd: The New Jersey Entrepreneur Support Program provides a $5 million
+sidebarCardBodyText: The New Jersey Entrepreneur Support Program provides a $5 million
   fund to guarantee investor loans for working capital, up to a total of
   $400,000 per business. The loans are meant for entrepreneurial companies to
   support their working capital.

@@ -41,7 +41,7 @@ describe("loadFundings", () => {
         "  - All\n" +
         "sector:\n" +
         "  - cannabis\n" +
-        "descriptionMd: some *cool* description\n" +
+        "sidebarCardBodyText: some *cool* description\n" +
         "---\n" +
         "Some content description 1";
 
@@ -84,7 +84,7 @@ describe("loadFundings", () => {
             preferenceForOpportunityZone: null,
             county: ["All"],
             sector: ["cannabis"],
-            descriptionMd: "some *cool* description",
+            sidebarCardBodyText: "some *cool* description",
           },
           {
             id: "some-id-2",
@@ -94,7 +94,7 @@ describe("loadFundings", () => {
             callToActionLink: "https://www.example.com/2",
             callToActionText: "Click here 2",
             contentMd: "Some content description 2",
-            descriptionMd: "",
+            sidebarCardBodyText: "",
           },
         ])
       );
@@ -175,7 +175,7 @@ describe("loadFundings", () => {
         callToActionLink: "https://www.example.com/2",
         callToActionText: "Click here 2",
         contentMd: "Some content description 2",
-        descriptionMd: "",
+        sidebarCardBodyText: "",
       });
     });
   });

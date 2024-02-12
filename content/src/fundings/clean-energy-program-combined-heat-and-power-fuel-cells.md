@@ -6,7 +6,7 @@ urlSlug: njcep-chpfc
 id: njcep-chpfc
 openDate: ""
 dueDate: ""
-descriptionMd: The Combined Heat and Power - Fuel Cells (CHP-FC) program aims to
+sidebarCardBodyText: The Combined Heat and Power - Fuel Cells (CHP-FC) program aims to
   enhance energy efficiency through on-site power generation with recovery and
   productive use of waste heat, and to reduce existing and new demands to the
   electric power grid. The program plans to do this by providing generous

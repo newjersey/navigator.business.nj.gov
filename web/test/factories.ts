@@ -255,7 +255,7 @@ export const generateFunding = (overrides: Partial<Funding>): Funding => {
     callToActionText: `some-cta-text-${randomInt()}`,
     summaryDescriptionMd: `some-summary-description-md-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
-    descriptionMd: `some-description-${randomInt()}`,
+    sidebarCardBodyText: `some-sidebar-card-body-text-${randomInt()}`,
     fundingType: randomFundingType(),
     agency: [randomElementFromArray(arrayOfFundingAgencies as FundingAgency[]).id],
     publishStageArchive: null,
@@ -318,7 +318,7 @@ export const generateCertification = (overrides: Partial<Certification>): Certif
     callToActionText: `some-cta-text-${randomInt()}`,
     summaryDescriptionMd: `some-summary-description-md-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
-    descriptionMd: `some-description-${randomInt()}`,
+    sidebarCardBodyText: `some-sidebar-card-body-text-${randomInt()}`,
     agency: [randomElementFromArray(arrayOfFundingAgencies as FundingAgency[]).id],
     applicableOwnershipTypes: [randomOwnershipType().id],
     isSbe: false,
@@ -332,7 +332,7 @@ export const generateOpportunity = (overrides: Partial<Opportunity>): Opportunit
     name: `some-name-${randomInt()}`,
     urlSlug: `some-url-slug-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
-    descriptionMd: `some-description-${randomInt()}`,
+    sidebarCardBodyText: `some-sidebar-card-body-text-${randomInt()}`,
     ...overrides,
   };
 };

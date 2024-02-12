@@ -1,5 +1,5 @@
 ---
-descriptionMd: Having a Small Business Enterprise (SBE) certificate may give you
+sidebarCardBodyText: Having a Small Business Enterprise (SBE) certificate may give you
   an advantage with government contracts.
 urlSlug: sbe
 name: Get My Small Business Enterprise Certification

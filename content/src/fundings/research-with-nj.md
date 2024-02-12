@@ -37,7 +37,7 @@ sector:
   - clean-energy
   - transportation-and-warehousing
 publishStageArchive: ""
-descriptionMd: Research with NJ is a free online portal that showcases New
+sidebarCardBodyText: Research with NJ is a free online portal that showcases New
   Jersey’s experts in science, technology, engineering, and mathematics (STEM).
   It provides local, national, and international commercial enterprises, ranging
   from entrepreneurs and start-ups to global businesses, with insight into

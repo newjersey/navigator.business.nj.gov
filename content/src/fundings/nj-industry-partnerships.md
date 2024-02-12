@@ -30,7 +30,7 @@ county:
   - All
 sector: []
 publishStageArchive: ""
-descriptionMd: NJ Industry Partnerships can provide you with access to
+sidebarCardBodyText: NJ Industry Partnerships can provide you with access to
   government resources, professional connections, and potential funding
   opportunities to help your business achieve its goals. The New Jersey
   Department of Labor, acting as a hub, will connect you with other local voices

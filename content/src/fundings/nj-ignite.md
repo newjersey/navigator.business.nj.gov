@@ -30,7 +30,7 @@ sector:
   - life-sciences
   - other-services
 publishStageArchive: ""
-descriptionMd: NJ Ignite provides rent support for technology startups that are
+sidebarCardBodyText: NJ Ignite provides rent support for technology startups that are
   moving to an approved collaborative workspace.
 ---
 

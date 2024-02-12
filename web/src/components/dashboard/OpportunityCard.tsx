@@ -1,4 +1,3 @@
-import { Content } from "@/components/Content";
 import { OpportunityCardStatus } from "@/components/dashboard/OpportunityCardStatus";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Tag } from "@/components/njwds-extended/Tag";
@@ -9,9 +8,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Opportunity } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { capitalizeEachWord } from "@/lib/utils/cases-helpers";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import truncateMarkdown from "markdown-truncate";
+import { truncate } from "lodash";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
@@ -21,7 +18,7 @@ interface Props {
   isLast?: boolean;
 }
 
-const MAX_CONTENT_CHARS = 150;
+export const OPPORTUNITY_CARD_MAX_BODY_CHARS = 150;
 
 export const OpportunityCard = (props: Props): ReactElement => {
   const { updateQueue, business } = useUserData();
@@ -40,11 +37,6 @@ export const OpportunityCard = (props: Props): ReactElement => {
       </Tag>
     ),
   };
-
-  const truncatedMd = truncateMarkdown(props.opportunity.descriptionMd, {
-    limit: MAX_CONTENT_CHARS,
-    ellipsis: true,
-  });
 
   const isHidden = (): boolean => {
     if (!business) {
@@ -123,7 +115,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
         </div>
         <OpportunityCardStatus dueDate={props.opportunity.dueDate} status={props.opportunity.status} />
         <div className="override-p-2xs text-base-dark">
-          <Content>{truncatedMd}</Content>
+          {truncate(props.opportunity.sidebarCardBodyText, { length: OPPORTUNITY_CARD_MAX_BODY_CHARS })}
         </div>
       </div>
     </>

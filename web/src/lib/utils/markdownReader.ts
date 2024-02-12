@@ -116,7 +116,7 @@ export const convertFundingMd = (oppMdContents: string, filename: string): Fundi
     contentMd: matterResult.content,
     filename: filename,
     ...oppGrayMatter,
-    descriptionMd: oppGrayMatter.descriptionMd ?? "",
+    sidebarCardBodyText: oppGrayMatter.sidebarCardBodyText ?? "",
   };
 };
 
@@ -128,7 +128,7 @@ export const convertCertificationMd = (mdContents: string, filename: string): Ce
     contentMd: matterResult.content,
     filename: filename,
     ...grayMatter,
-    descriptionMd: grayMatter.descriptionMd ?? "",
+    sidebarCardBodyText: grayMatter.sidebarCardBodyText ?? "",
   };
 };
 
@@ -242,7 +242,7 @@ type FundingGrayMatter = {
   sector: string[];
   programPurpose: string;
   agencyContact: string;
-  descriptionMd: string;
+  sidebarCardBodyText: string;
   isNonprofitOnly: boolean | undefined | null;
   summaryDescriptionMd: string;
 };
@@ -256,7 +256,7 @@ type CertificationGrayMatter = {
   agency: string[] | null;
   applicableOwnershipTypes: string[];
   isSbe: boolean;
-  descriptionMd: string;
+  sidebarCardBodyText: string;
   summaryDescriptionMd: string;
 };
 

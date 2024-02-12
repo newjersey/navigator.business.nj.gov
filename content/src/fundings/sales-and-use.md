@@ -27,7 +27,7 @@ county:
   - All
 sector: []
 publishStageArchive: ""
-descriptionMd: The Sales and Use Tax Exemption Program allows qualified
+sidebarCardBodyText: The Sales and Use Tax Exemption Program allows qualified
   businesses to receive a sales tax exemption certificate for purchases related
   to the construction and renovation of a new business location.
 ---
