@@ -35,6 +35,7 @@ export interface FormationClient {
     foreignGoodStandingFile?: InputFile
   ) => Promise<FormationSubmitResponse>;
   getCompletedFiling: (formationId: string) => Promise<GetFilingResponse>;
+  health: HealthCheckMethod;
 }
 
 export interface TaxFilingClient {

@@ -55,6 +55,7 @@ describe("formationRouter", () => {
     stubFormationClient = {
       form: jest.fn(),
       getCompletedFiling: jest.fn(),
+      health: jest.fn(),
     };
     stubUserDataClient = {
       get: jest.fn(),
