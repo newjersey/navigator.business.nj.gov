@@ -41,7 +41,7 @@ publishStageArchive: ""
 - Newly constructed or rehabilitated supermarkets or grocery stores in a designated Food Desert Community (limited to two per FDC) 
 - Stores with at least 16,000 square feet where at least 80% of square footage is occupied by food and related products and at least 10% of retail space is devoted to fresh and/or frozen fruits and vegetables
 - Proof that the store would not be economically feasible without the tax credit award, but with the tax credit award, it would operate on a full-time basis for seven years after opening and be economically and commercially viable by the end of that period
-- Be open for business to the public within six months of the receipt of a temporary Certificate of Occupancy or within three years of executing the incentive award agreement corresponding to the project (subject to possible extensions approved by the NJEDA)
+- Be open for business to the public within six months of the receipt of a temporary Certificate of Occupancy or within three years of executing the incentive award agreement corresponding to the project [subject to possible extensions approved by the NJ Economic Development Authority (NJEDA)]
 - Acceptance benefits from federal nutrition assistance programs, including SNAP and WIC, and to holding a public listening session in the FDC at least one a year
 
 > ### Benefits
