@@ -13,14 +13,19 @@ summaryDescriptionMd: The New Jersey STEM Loan Redemption Program helps
   qualifying New Jersey employees in high-growth occupations within science,
   technology, engineering, and mathematics (STEM) fields pay off their student
   loans.
+callToActionLink: https://www.hesaa.org/Pages/NJSTEMLRP.aspx
+callToActionText: Learn more
 fundingType: hiring and employee training support
 programFrequency: ongoing
 status: rolling application
+programPurpose: In State
 agency: []
+agencyContact: LoanRedemption@hesaa.org
 businessStage: both
 employeesRequired: n/a
-homeBased: unknown
+homeBased: yes
 certifications: []
+preferenceForOpportunityZone: no
 county:
   - All
 sector: []
@@ -36,5 +41,5 @@ publishStageArchive: ""
 
 > ### Benefits
 >
-> This program helps businesses recruit and retain highly skilled STEM employees in high-growth occupations by offering them up to $8,000 in student loan redemption while only contributing half that amount. 
+> This program helps businesses recruit and retain highly skilled STEM employees in high-growth occupations by offering them up to $8,000 in student loan redemption while only contributing half that amount.
 HESAA matches each $1,000 contribution from participating employers for up to four years.
