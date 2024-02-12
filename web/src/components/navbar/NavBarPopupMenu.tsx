@@ -1,22 +1,19 @@
-import { ButtonIcon } from "@/components/ButtonIcon";
-import { NavMenuItem } from "@/components/navbar/NavMenuItem";
+import {
+  AddBusinessItem,
+  GetStartedMenuItem,
+  LoginMenuItem,
+  LogoutMenuItem,
+  MyNjMenuItem,
+  ProfileMenuItem,
+  RegisterMenuItem,
+} from "@/components/navbar/shared-submenu-components";
 import { Icon } from "@/components/njwds/Icon";
-import { AuthContext } from "@/contexts/authContext";
-import { NeedsAccountContext } from "@/contexts/needsAccountContext";
-import { triggerSignIn } from "@/lib/auth/sessionHelper";
-import { onSelfRegister, onSignOut } from "@/lib/auth/signinHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getBusinessIconColor } from "@/lib/domain-logic/getBusinessIconColor";
-import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
-import { orderBusinessIdsByDateCreated } from "@/lib/domain-logic/orderBusinessIdsByDateCreated";
-import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
-import { switchCurrentBusiness } from "@/lib/domain-logic/switchCurrentBusiness";
 import analytics from "@/lib/utils/analytics";
-import { getUserNameOrEmail, openInNewTab } from "@/lib/utils/helpers";
+import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import { MenuItem, MenuList } from "@mui/material";
-import { useRouter } from "next/router";
-import { ReactElement, useContext } from "react";
+import { ReactElement } from "react";
 
 export type MenuConfiguration =
   | "profile"
@@ -33,18 +30,13 @@ export interface Props {
 }
 
 export const NavBarPopupMenu = (props: Props): ReactElement => {
-  const { userData, updateQueue } = useUserData();
-  const { state, dispatch } = useContext(AuthContext);
+  const { userData } = useUserData();
   const { Config } = useConfig();
-  const { setRegistrationStatus } = useContext(NeedsAccountContext);
-
-  const router = useRouter();
 
   const guestOrUserName =
     props.menuConfiguration === "login"
-      ? Config.navigationDefaults.navBarGuestText
+      ? Config.navigationDefaults.myNJAccountText
       : getUserNameOrEmail(userData);
-  const isProfileSelected = router.route === ROUTES.profile;
 
   function handleListKeyDown(event: React.KeyboardEvent): void {
     if (event.key === "Tab") {
@@ -53,145 +45,63 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
     }
   }
 
-  const loginMenuItem = (): ReactElement => {
-    return NavMenuItem({
-      onClick: (): void => {
-        analytics.event.landing_page_navbar_log_in.click.go_to_myNJ_login();
-        triggerSignIn();
-      },
-      icon: <ButtonIcon svgFilename="login" sizePx="25px" />,
-      itemText: Config.navigationDefaults.logInButton,
-      key: "loginMenuItem",
-    });
-  };
-
-  const logoutMenuItem = (): ReactElement => {
-    return NavMenuItem({
-      onClick: (): void => {
-        onSignOut(router.push, dispatch);
-        props.handleClose();
-      },
-      icon: <ButtonIcon svgFilename="logout" sizePx="25px" />,
-      itemText: Config.navigationDefaults.logoutButton,
-      key: "logoutMenuItem",
-    });
-  };
-
-  const myNjMenuItem = (): ReactElement => {
-    return NavMenuItem({
-      onClick: (): void => {
-        analytics.event.account_menu_myNJ_account.click.go_to_myNJ_home();
-        openInNewTab(process.env.MYNJ_PROFILE_LINK || "");
-        props.handleClose();
-      },
-      icon: <ButtonIcon svgFilename="profile" sizePx="25px" />,
-      itemText: Config.navigationDefaults.myNJAccountText,
-      key: "myNjMenuItem",
-    });
-  };
-
-  const addBusinessItem = (): ReactElement[] => {
-    return [
-      NavMenuItem({
-        onClick: (): void => {
-          routeWithQuery(router, {
-            path: ROUTES.onboarding,
-            queries: { [QUERIES.additionalBusiness]: "true" },
-          });
-          props.handleClose();
-        },
-        icon: <ButtonIcon svgFilename="add-business-plus" sizePx="25px" />,
-        hoverIcon: <ButtonIcon svgFilename="add-business-plus-hover" sizePx="25px" />,
-        itemText: Config.navigationDefaults.addBusinessButton,
-        key: "addBusinessMenuItem",
-        dataTestid: "addBusinessMenuItem",
-      }),
-      <hr className="margin-0 hr-2px" key={"add-break-1"} />,
-    ];
-  };
-
-  const registerMenuItem = (): ReactElement => {
-    return NavMenuItem({
-      onClick: (): void => {
-        analytics.event.guest_menu.click.go_to_NavigatorAccount_setup();
-        onSelfRegister({ router, updateQueue, userData, setRegistrationStatus });
-      },
-      icon: <ButtonIcon svgFilename="profile" sizePx="25px" />,
-      itemText: Config.navigationDefaults.navBarGuestRegistrationText,
-      key: "registerMenuItem",
-    });
-  };
-
-  const getStartedMenuItem = (): ReactElement => {
-    return NavMenuItem({
-      onClick: (): void => {
-        router.push(ROUTES.onboarding);
-      },
-      itemText: Config.navigationDefaults.registerButton,
-      key: "getStartedMenuItem",
-    });
-  };
-
-  const profileMenuItem = (): ReactElement[] => {
-    if (!userData) return [];
-    return orderBusinessIdsByDateCreated(userData).flatMap((businessId, i) => {
-      const isCurrent = businessId === userData.currentBusinessId;
-
-      const businessMenuItems = [
-        NavMenuItem({
-          onClick: async (): Promise<void> => {
-            if (Object.keys(userData.businesses).length > 1) {
-              await updateQueue?.queue(switchCurrentBusiness(userData, businessId)).update();
-            }
-            props.handleClose();
-            await router.push(ROUTES.dashboard);
-          },
-          selected: !isProfileSelected && isCurrent,
-          icon: <ButtonIcon svgFilename={`business-${getBusinessIconColor(i)}`} sizePx="35px" />,
-          itemText: getNavBarBusinessTitle(userData.businesses[businessId], state.isAuthenticated),
-          dataTestid: `business-title-${i}`,
-          key: `business-title-${businessId}`,
-          className: `profile-menu-item ${isCurrent ? "current" : ""}`,
-        }),
-      ];
-
-      if (isCurrent) {
-        const profileLink = NavMenuItem({
-          onClick: (): void => {
-            analytics.event.account_menu_my_profile.click.go_to_profile_screen();
-            router.push(ROUTES.profile);
-          },
-          selected: isProfileSelected && isCurrent,
-          itemText: Config.navigationDefaults.profileLinkText,
-          key: `profile-title-${businessId}`,
-          dataTestid: `profile-link`,
-          className: `profile-menu-item ${isCurrent ? "current" : ""}`,
-        });
-        businessMenuItems.push(profileLink);
-      }
-
-      businessMenuItems.push(<hr className="margin-0 hr-2px" key={`profile-break-${i}`} />);
-
-      return businessMenuItems;
-    });
-  };
-
-  const renderMenu = (): ReactElement[] | undefined | Array<ReactElement | ReactElement[]> => {
+  const renderMenu = (): ReactElement => {
     if (props.menuConfiguration === "login") {
-      return [loginMenuItem()];
+      return (
+        <>
+          <LoginMenuItem  />
+        </>
+      );
     }
     if (props.menuConfiguration === "profile") {
-      return [profileMenuItem()];
+      return (
+        <>
+          <ProfileMenuItem
+
+            handleClose={props.handleClose}
+          />
+        </>
+      );
     }
     if (props.menuConfiguration === "profile-mynj-addbusiness-logout") {
-      return [profileMenuItem(), addBusinessItem(), myNjMenuItem(), logoutMenuItem()];
+      return (
+        <>
+          <ProfileMenuItem
+            handleClose={props.handleClose}
+          />
+          <AddBusinessItem
+            handleClose={props.handleClose}
+          />
+          <MyNjMenuItem
+            handleClose={props.handleClose}
+          />
+          <LogoutMenuItem
+
+            handleClose={props.handleClose}
+          />
+        </>
+      );
     }
     if (props.menuConfiguration === "profile-register-login") {
-      return [profileMenuItem(), registerMenuItem(), loginMenuItem()];
+      return (
+        <>
+          <ProfileMenuItem
+            handleClose={props.handleClose}
+          />
+          <RegisterMenuItem  />
+          <LoginMenuItem  />
+        </>
+      );
     }
     if (props.menuConfiguration === "login-getstarted") {
-      return [getStartedMenuItem(), loginMenuItem()];
+      return (
+        <>
+          <GetStartedMenuItem  />
+          <LoginMenuItem  />
+        </>
+      );
     }
+    return <></>;
   };
 
   return (
