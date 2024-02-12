@@ -3,6 +3,7 @@ import { CircularIndicator } from "@/components/CircularIndicator";
 import { BusinessName } from "@/components/data-fields/BusinessName";
 import { BusinessStructure } from "@/components/data-fields/BusinessStructure";
 import { DateOfFormation } from "@/components/data-fields/DateOfFormation";
+import { ElevatorOwningBusiness } from "@/components/data-fields/ElevatorOwningBusiness";
 import { EmployerId } from "@/components/data-fields/EmployerId";
 import { EntityId } from "@/components/data-fields/EntityId";
 import { ExistingEmployees } from "@/components/data-fields/ExistingEmployees";
@@ -291,6 +292,12 @@ const ProfilePage = (props: Props): ReactElement => {
     return isHomeBasedBusinessApplicable(profileData.industryId);
   };
 
+  const displayElevatorQuestion = (): boolean => {
+    if (!business) return false;
+    if (process.env.FEATURE_ELEVATOR_OWNING_BUSINESS !== "true") return false;
+    return !profileData.homeBasedBusiness;
+  };
+
   const hasSubmittedTaxData =
     business?.taxFilingData.state === "SUCCESS" || business?.taxFilingData.state === "PENDING";
 
@@ -366,6 +373,16 @@ const ProfilePage = (props: Props): ReactElement => {
           boldAltDescription={true}
         >
           <HomeBasedBusiness />
+        </ProfileField>
+
+        <ProfileField
+          fieldName="elevatorOwningBusiness"
+          displayAltDescription={displayAltHomeBasedBusinessDescription}
+          isVisible={displayElevatorQuestion()}
+          hideHeader={true}
+          boldAltDescription={true}
+        >
+          <ElevatorOwningBusiness />
         </ProfileField>
       </>
     ),
@@ -543,6 +560,16 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <HomeBasedBusiness />
         </ProfileField>
+
+        <ProfileField
+          fieldName="elevatorOwningBusiness"
+          displayAltDescription={displayAltHomeBasedBusinessDescription}
+          isVisible={displayElevatorQuestion()}
+          hideHeader={true}
+          boldAltDescription={true}
+        >
+          <ElevatorOwningBusiness />
+        </ProfileField>
         <ProfileField
           fieldName="ownershipTypeIds"
           isVisible={
@@ -666,6 +693,16 @@ const ProfilePage = (props: Props): ReactElement => {
           boldAltDescription={true}
         >
           <HomeBasedBusiness />
+        </ProfileField>
+
+        <ProfileField
+          fieldName="elevatorOwningBusiness"
+          displayAltDescription={displayAltHomeBasedBusinessDescription}
+          isVisible={displayElevatorQuestion()}
+          hideHeader={true}
+          boldAltDescription={true}
+        >
+          <ElevatorOwningBusiness />
         </ProfileField>
 
         <ProfileField fieldName="ownershipTypeIds">

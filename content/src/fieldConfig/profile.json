@@ -240,6 +240,15 @@
           "altDescription": "Do you plan to be a `home-based business|home-based-business` ?"
         }
       },
+      "elevatorOwningBusiness": {
+        "default": {
+          "header": "Elevator Owning Business",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Do you own a commercial or manufacturing space with an `elevator-device|elevator-device` ?",
+          "altDescription": "Do you plan to own a commercial or manufacturing space with an `elevator-device|elevator-device` ?"
+        }
+      },
       "legalStructureId": {
         "default": {
           "header": "Business Structure",

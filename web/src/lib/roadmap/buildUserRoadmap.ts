@@ -151,6 +151,10 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("logistics-modification");
   }
 
+  if (profileData.elevatorOwningBusiness) {
+    addOns.push("elevator-registration");
+  }
+
   if (getIsApplicableToFunctionByFieldName("isChildcareForSixOrMore")(industryId)) {
     if (profileData.isChildcareForSixOrMore) {
       addOns.push("daycare");

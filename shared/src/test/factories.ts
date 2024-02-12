@@ -271,6 +271,7 @@ export const generateProfileData = (
     operatingPhase: "NEEDS_TO_FORM",
     isNonprofitOnboardingRadio: legalStructure === "nonprofit",
     nonEssentialRadioAnswers: {},
+    elevatorOwningBusiness: undefined,
     ...overrides,
   };
 };
