@@ -14,7 +14,7 @@ summaryDescriptionMd: The New Jersey STEM Loan Redemption Program helps
   technology, engineering, and mathematics (STEM) fields pay off their student
   loans.
 callToActionLink: https://www.hesaa.org/Pages/NJSTEMLRP.aspx
-callToActionText: Learn more
+callToActionText: Learn More
 fundingType: hiring and employee training support
 programFrequency: ongoing
 status: rolling application
