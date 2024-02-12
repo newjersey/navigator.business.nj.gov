@@ -30,7 +30,7 @@ county:
 sector:
   - waste-management-and-Remediation
 publishStageArchive: Do Not Publish
-descriptionMd: This is a pilot program, funded by the federal Environmental
+sidebarCardBodyText: This is a pilot program, funded by the federal Environmental
   Protection Agency's Revolving Loan Fund (USEPA RLF) grant that will provide
   $800,000 in funding for loans to private developers and loans and/or
   sub-grants to public sector and non-profits to carry out cleanups at

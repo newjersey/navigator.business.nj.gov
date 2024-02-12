@@ -14,7 +14,7 @@ export const searchCertifications = (certifications: Certification[], term: stri
 
     const content = cert.contentMd.toLowerCase();
     const name = cert.name.toLowerCase();
-    const description = cert.descriptionMd.toLowerCase();
+    const sidebarCardBodyText = cert.sidebarCardBodyText.toLowerCase();
     const summary = cert.summaryDescriptionMd?.toLowerCase();
     const cta = cert.callToActionText?.toLowerCase();
     const ctaLink = cert.callToActionLink?.toLowerCase();
@@ -25,7 +25,7 @@ export const searchCertifications = (certifications: Certification[], term: stri
     const filename = cert.filename.toLowerCase();
     const urlSlug = cert.urlSlug.toLowerCase();
 
-    const blockTexts = [summary, content, description];
+    const blockTexts = [summary, content, sidebarCardBodyText];
     const labelledTexts = [
       { content: cta, label: "CTA Text" },
       { content: ctaLink, label: "CTA Link" },

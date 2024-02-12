@@ -1,6 +1,6 @@
 ---
 notesMd: Language needs to be reviewed - the first sentence should state a benefit
-descriptionMd: A Veteran-Owned Business (VOB) certification may not provide an
+sidebarCardBodyText: A Veteran-Owned Business (VOB) certification may not provide an
   advantage for New Jersey State contracts.
 urlSlug: veteran-owned-business
 name: Get Certified as a Veteran-Owned Business

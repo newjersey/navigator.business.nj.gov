@@ -35,7 +35,7 @@ sector:
   - professional-scientific-and-technical-services
   - other-services
 publishStageArchive: ""
-descriptionMd: The Net Operating Loss Program enables qualified, unprofitable
+sidebarCardBodyText: The Net Operating Loss Program enables qualified, unprofitable
   New Jersey-based technology or biotechnology businesses to sell a percentage
   of their net operating losses (NOL) and unused research and development (R&D)
   tax credits to unrelated profitable businesses.

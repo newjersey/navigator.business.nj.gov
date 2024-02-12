@@ -144,10 +144,6 @@ module.exports = {
     },
     {
       from: {},
-      to: { path: "markdown-truncate" },
-    },
-    {
-      from: {},
       to: { path: "netlify-cms-app" },
     },
     {

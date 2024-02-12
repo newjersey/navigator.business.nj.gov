@@ -29,7 +29,7 @@ county:
 sector:
   - technology
 publishStageArchive: ""
-descriptionMd: The New Jersey Economic Development Authority (NJEDA) invests in
+sidebarCardBodyText: The New Jersey Economic Development Authority (NJEDA) invests in
   venture capital funds active in New Jersey. Venture partners leverage NJEDA
   investment to increase funds available for emerging innovative companies to
   grow and create jobs in the State.

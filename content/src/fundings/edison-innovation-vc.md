@@ -31,7 +31,7 @@ sector:
   - technology
   - life-sciences
 publishStageArchive: ""
-descriptionMd: Edison Innovation VC Growth Fund provides funding to early-stage,
+sidebarCardBodyText: Edison Innovation VC Growth Fund provides funding to early-stage,
   emerging technology businesses matched with an outside equity investor within
   the last 90 days.
 ---

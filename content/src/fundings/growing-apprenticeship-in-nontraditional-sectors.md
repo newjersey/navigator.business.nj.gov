@@ -32,7 +32,7 @@ county:
   - All
 sector: []
 publishStageArchive: null
-descriptionMd: The Growing Apprenticeship in Nontraditional Sectors (GAINS)
+sidebarCardBodyText: The Growing Apprenticeship in Nontraditional Sectors (GAINS)
   program aims to promote the expansion and development of USDOL-approved
   Registered Apprenticeship programs.
 ---

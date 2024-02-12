@@ -34,7 +34,7 @@ county:
 sector:
   - arts-entertainment-and-recreation
 publishStageArchive: ""
-descriptionMd: The Digital Media Tax Credit Program provides a transferable
+sidebarCardBodyText: The Digital Media Tax Credit Program provides a transferable
   credit against the corporate business tax and the gross income tax to
   incentivize companies to produce content in New Jersey.
 ---

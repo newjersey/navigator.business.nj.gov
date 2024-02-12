@@ -28,7 +28,7 @@ county:
 sector:
   - arts-entertainment-and-recreation
 publishStageArchive: ""
-descriptionMd: The Film Tax Credit Program provides a transferable credit
+sidebarCardBodyText: The Film Tax Credit Program provides a transferable credit
   against the corporation business tax and the gross income tax to incentivize
   production companies to film content in New Jersey.
 ---

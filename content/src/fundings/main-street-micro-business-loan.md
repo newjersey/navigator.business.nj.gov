@@ -41,7 +41,7 @@ county:
   - All
 sector: []
 publishStageArchive: ""
-descriptionMd: Main Street Micro Business Loan will provide financing of up to
+sidebarCardBodyText: Main Street Micro Business Loan will provide financing of up to
   $50,000 to eligible micro businesses in New Jersey with ten or fewer full-time
   employees and no greater than $1M in annual revenues.
 ---

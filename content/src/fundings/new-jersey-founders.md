@@ -34,7 +34,7 @@ sector:
   - life-sciences
   - other-services
 publishStageArchive: Do Not Publish
-descriptionMd: Founders & Funders enables early-stage New Jersey technology and
+sidebarCardBodyText: Founders & Funders enables early-stage New Jersey technology and
   life sciences companies to meet potential investors in 10-minute, one-on-one
   “speed dating” sessions to discuss strategy, business models, and funding
   opportunities.

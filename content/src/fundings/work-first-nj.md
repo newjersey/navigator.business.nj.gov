@@ -32,7 +32,7 @@ county:
   - All
 sector: []
 publishStageArchive: ""
-descriptionMd: Work First NJ provides skills, training, and education
+sidebarCardBodyText: Work First NJ provides skills, training, and education
   opportunities to SNAP and TANF recipients. The focus of this effort is to
   provide skills-based programs with a job-driven approach to prepare recipients
   of SNAP or TANF resources to fill areas of demand for a trained workforce.

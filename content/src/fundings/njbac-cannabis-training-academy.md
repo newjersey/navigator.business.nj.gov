@@ -33,7 +33,7 @@ county:
   - All
 sector: []
 publishStageArchive: Do Not Publish
-descriptionMd: New Jersey Business Action Center's (NJBAC) Cannabis Training
+sidebarCardBodyText: New Jersey Business Action Center's (NJBAC) Cannabis Training
   Academy is a no-cost, virtual technical assistance and training program for
   cannabis license applicants. The program includes live question and answer
   sessions every other week to provide non-legal advice and direction.
