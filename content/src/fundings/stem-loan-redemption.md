@@ -38,6 +38,8 @@ publishStageArchive: ""
 - If approved, the employees must work full-time for an additional one to four years in an approved high-growth STEM occupation at a NJ employer in the program
 - Employers provide a matching $1,000 payment per participating employee for each year (up to four years) the employee works at their business and remains in the program
 - Employers must certify that the participating employees work in an approved occupation each year
+- Only occupations listed in the [HESAAs Eligible high-growth STEM occupations list](https://www.hesaa.org/Documents/LoanRedemptionPrograms/STEMOccupations.pdf) are eligible
+
 
 > ### Benefits
 >
