@@ -3,10 +3,19 @@ import { NavBarMobileAccountSlideOutMenu } from "@/components/navbar/mobile/NavB
 import { NavBarMobileHamburgerSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileHamburgerSlideOutMenu";
 import { NavBarMobileHomeLogo } from "@/components/navbar/mobile/NavBarMobileHomeLogo";
 import { NavBarMobileWrapper } from "@/components/navbar/mobile/NavBarMobileWrapper";
+import {
+  AddBusinessItem,
+  GetStartedMenuItem,
+  LoginMenuItem,
+  LogoutMenuItem,
+  MyNjMenuItem,
+  ProfileMenuItem,
+  RegisterMenuItem,
+} from "@/components/navbar/shared-submenu-components";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { Task } from "@/lib/types/types";
-import { ReactElement, } from "react";
+import { ReactElement, useState } from "react";
 
 interface Props {
   scrolled: boolean;
@@ -24,6 +33,16 @@ export const NavBarMobile = (props: Props): ReactElement => {
   const { business } = useUserData();
 
   const navBarBusinessTitle = getNavBarBusinessTitle(business, props.isAuthenticated);
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const openSidebar = (): void => {
+    setIsSidebarOpen(true);
+  };
+
+  const closeSideBar = (): void => {
+    setIsSidebarOpen(false);
+  };
 
   // logo only / loading/redirect
   if (props.logoOnlyType) {
@@ -43,6 +62,15 @@ export const NavBarMobile = (props: Props): ReactElement => {
           showSidebar={props.showSidebar}
           hideMiniRoadmap={props.hideMiniRoadmap}
           task={props.task}
+          subMenuElement={
+            <>
+              <GetStartedMenuItem />
+              <LoginMenuItem />
+            </>
+          }
+          closeSideBar={closeSideBar}
+          openSideBar={openSidebar}
+          isSideBarOpen={isSidebarOpen}
         />
         <NavBarMobileHamburgerSlideOutMenu />
       </NavBarMobileWrapper>
@@ -62,6 +90,14 @@ export const NavBarMobile = (props: Props): ReactElement => {
           showSidebar={props.showSidebar}
           hideMiniRoadmap={props.hideMiniRoadmap}
           task={props.task}
+          subMenuElement={
+            <>
+              <LoginMenuItem />
+            </>
+          }
+          closeSideBar={closeSideBar}
+          openSideBar={openSidebar}
+          isSideBarOpen={isSidebarOpen}
         />
       </NavBarMobileWrapper>
     );
@@ -80,6 +116,17 @@ export const NavBarMobile = (props: Props): ReactElement => {
           showSidebar={props.showSidebar}
           hideMiniRoadmap={props.hideMiniRoadmap}
           task={props.task}
+          subMenuElement={
+            <>
+              <ProfileMenuItem handleClose={closeSideBar} />
+              <AddBusinessItem handleClose={closeSideBar} />
+              <MyNjMenuItem handleClose={closeSideBar} />
+              <LogoutMenuItem handleClose={closeSideBar} />
+            </>
+          }
+          closeSideBar={closeSideBar}
+          openSideBar={openSidebar}
+          isSideBarOpen={isSidebarOpen}
         />
         <NavBarMobileHamburgerSlideOutMenu />
       </NavBarMobileWrapper>
@@ -99,8 +146,17 @@ export const NavBarMobile = (props: Props): ReactElement => {
           showSidebar={props.showSidebar}
           hideMiniRoadmap={props.hideMiniRoadmap}
           task={props.task}
+          subMenuElement={
+            <>
+              <ProfileMenuItem handleClose={closeSideBar} />
+              <RegisterMenuItem />
+              <LoginMenuItem />
+            </>
+          }
+          closeSideBar={closeSideBar}
+          openSideBar={openSidebar}
+          isSideBarOpen={isSidebarOpen}
         />
-
         <NavBarMobileHamburgerSlideOutMenu />
       </NavBarMobileWrapper>
     );
@@ -119,25 +175,4 @@ export const NavBarMobile = (props: Props): ReactElement => {
   // [business profile stuff, add business, myNJ account, log out, roadmap]
   // Has Hamburger
 
-  return (
-    <>
-      <nav
-        aria-label="Primary"
-        className={`width-100 padding-y-05 usa-navbar ${
-          props.scrolled ? "scrolled scrolled-transition bg-white" : ""
-        }`}
-      >
-        <NavBarMobileAccountSlideOutMenu
-          isLanding={props.isLanding}
-          showSidebar={props.showSidebar}
-          hideMiniRoadmap={props.hideMiniRoadmap}
-          task={props.task}
-        />
-
-        {!props.currentlyOnboarding && <NavBarMobileHamburgerSlideOutMenu />}
-      </nav>
-    </>
-  );
 };
-
-

@@ -1,12 +1,9 @@
-import { ReactElement, useContext, useMemo, useState } from "react";
+import { ReactElement } from "react";
 import analytics from "@/lib/utils/analytics";
 import { Icon } from "@/components/njwds/Icon";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
-import {  MenuConfiguration, NavBarPopupMenu } from "@/components/navbar/NavBarPopupMenu";
+import {  NavBarPopupMenu } from "@/components/navbar/NavBarPopupMenu";
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
-import { useRouter } from "next/router";
-import { AuthContext } from "@/contexts/authContext";
-import { ROUTES } from "@/lib/domain-logic/routes";
 import { Task } from "@/lib/types/types";
 
 interface Props {
@@ -14,50 +11,15 @@ interface Props {
   showSidebar?: boolean;
   hideMiniRoadmap?: boolean;
   task?: Task;
+  subMenuElement: ReactElement;
+  closeSideBar: () => void;
+  openSideBar: () => void;
+  isSideBarOpen: boolean;
 }
 
 
 export const NavBarMobileAccountSlideOutMenu = (props: Props): ReactElement => {
 
-  const { state } = useContext(AuthContext);
-
-
-
-  const isAuthenticated = useMemo(() => {
-    return state.isAuthenticated === "TRUE";
-  }, [state.isAuthenticated]);
-
-  const router = useRouter();
-
-  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-
-  const open = (): void => {
-    setSidebarIsOpen(true);
-  };
-
-  const close = (): void => {
-    setSidebarIsOpen(false);
-  };
-
-  const getMenuConfiguration = (): MenuConfiguration => {
-    if (props.isLanding) {
-      return "login-getstarted";
-    }
-    if (currentlyOnboarding()) {
-      return "login";
-    } else if (isAuthenticated) {
-      return "profile-mynj-addbusiness-logout";
-    } else {
-      return "profile-register-login";
-    }
-  };
-
-  const currentlyOnboarding = (): boolean => {
-    if (!router) {
-      return false;
-    }
-    return router.pathname === ROUTES.onboarding;
-  };
 
   return (
     <>
@@ -67,40 +29,40 @@ export const NavBarMobileAccountSlideOutMenu = (props: Props): ReactElement => {
             aria-label="open menu"
             onClick={(): void => {
               analytics.event.mobile_hamburger_icon.click.open_mobile_menu();
-              open();
+              props.openSideBar();
             }}
           >
             <Icon className="text-accent-cool-darker font-sans-lg">account_circle</Icon>
           </button>
 
 
-          <FocusTrappedSidebar close={close} isOpen={sidebarIsOpen}>
+          <FocusTrappedSidebar close={props.closeSideBar} isOpen={props.isSideBarOpen}>
             <nav
               aria-label="Secondary"
-              className={`right-nav ${sidebarIsOpen ? "is-visible" : "is-hidden"} `}
+              className={`right-nav ${props.isSideBarOpen ? "is-visible" : "is-hidden"} `}
               data-testid="nav-sidebar-menu"
             >
               <NavBarPopupMenu
-                handleClose={close}
+                handleClose={props.closeSideBar}
                 hasCloseButton={true}
-                menuConfiguration={getMenuConfiguration()}
+                subMenuElement={props.subMenuElement}
               />
 
               {props.showSidebar && !props.hideMiniRoadmap && (
                 <div className={"padding-x-1"}>
                   <hr />
-                  <MiniRoadmap activeTaskId={props.task?.id} onTaskClick={close} />
+                  <MiniRoadmap activeTaskId={props.task?.id} onTaskClick={props.closeSideBar} />
                 </div>
               )}
             </nav>
           </FocusTrappedSidebar>
 
           <div
-            className={`right-nav-overlay ${sidebarIsOpen ? "is-visible" : ""}`}
+            className={`right-nav-overlay ${props.isSideBarOpen ? "is-visible" : ""}`}
             aria-hidden="true"
             onClick={(): void => {
               analytics.event.mobile_menu.click_outside.close_mobile_menu();
-              close();
+              props.closeSideBar();
             }}
           />
 

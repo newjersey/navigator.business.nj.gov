@@ -1,12 +1,3 @@
-import {
-  AddBusinessItem,
-  GetStartedMenuItem,
-  LoginMenuItem,
-  LogoutMenuItem,
-  MyNjMenuItem,
-  ProfileMenuItem,
-  RegisterMenuItem,
-} from "@/components/navbar/shared-submenu-components";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -26,7 +17,8 @@ export interface Props {
   handleClose: () => void;
   open?: boolean;
   hasCloseButton?: boolean;
-  menuConfiguration: MenuConfiguration;
+  menuConfiguration?: MenuConfiguration;
+  subMenuElement: ReactElement;
 }
 
 export const NavBarPopupMenu = (props: Props): ReactElement => {
@@ -44,65 +36,6 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
       props.handleClose();
     }
   }
-
-  const renderMenu = (): ReactElement => {
-    if (props.menuConfiguration === "login") {
-      return (
-        <>
-          <LoginMenuItem  />
-        </>
-      );
-    }
-    if (props.menuConfiguration === "profile") {
-      return (
-        <>
-          <ProfileMenuItem
-
-            handleClose={props.handleClose}
-          />
-        </>
-      );
-    }
-    if (props.menuConfiguration === "profile-mynj-addbusiness-logout") {
-      return (
-        <>
-          <ProfileMenuItem
-            handleClose={props.handleClose}
-          />
-          <AddBusinessItem
-            handleClose={props.handleClose}
-          />
-          <MyNjMenuItem
-            handleClose={props.handleClose}
-          />
-          <LogoutMenuItem
-
-            handleClose={props.handleClose}
-          />
-        </>
-      );
-    }
-    if (props.menuConfiguration === "profile-register-login") {
-      return (
-        <>
-          <ProfileMenuItem
-            handleClose={props.handleClose}
-          />
-          <RegisterMenuItem  />
-          <LoginMenuItem  />
-        </>
-      );
-    }
-    if (props.menuConfiguration === "login-getstarted") {
-      return (
-        <>
-          <GetStartedMenuItem  />
-          <LoginMenuItem  />
-        </>
-      );
-    }
-    return <></>;
-  };
 
   return (
     <MenuList
@@ -135,7 +68,7 @@ export const NavBarPopupMenu = (props: Props): ReactElement => {
         </button>
       )}
 
-      {renderMenu()}
+      {props.subMenuElement}
     </MenuList>
   );
 };
