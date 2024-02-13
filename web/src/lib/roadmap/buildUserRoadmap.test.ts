@@ -489,6 +489,21 @@ describe("buildUserRoadmap", () => {
       });
     });
 
+    describe("elevator owning business", () => {
+      it("add elevator-registration task if is an elevator owning business", async () => {
+        await buildUserRoadmap(generateStartingProfile({ elevatorOwningBusiness: true }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("elevator-registration");
+      });
+
+      it("does not add elevator-registration task if not an elevator owning business", async () => {
+        await buildUserRoadmap(generateStartingProfile({ elevatorOwningBusiness: false }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("elevator-registration");
+
+        await buildUserRoadmap(generateStartingProfile({ elevatorOwningBusiness: undefined }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("elevator-registration");
+      });
+    });
+
     describe("non essential questions", () => {
       it("adds addOn if nonEssentialQuestion value is true", async () => {
         mockGetNonEssentialQuestionAddOn.mockReturnValue("non-essential-add-on-1");

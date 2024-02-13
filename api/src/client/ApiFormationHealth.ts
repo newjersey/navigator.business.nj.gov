@@ -104,6 +104,7 @@ export const ApiFormationHealth: UserData = {
         nonEssentialRadioAnswers: {},
         encryptedTaxId: undefined,
         nexusLocationInNewJersey: true,
+        elevatorOwningBusiness: undefined,
       },
       formationData: {
         formationResponse: undefined,
