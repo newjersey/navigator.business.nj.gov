@@ -35,13 +35,20 @@ descriptionMd: The New Jersey STEM Loan Redemption Program helps qualifying New
   engineering, and mathematics (STEM) fields pay off their student loans.
 ---
 ## Eligibility
+For employers:
 
 - Employers must be registered to do business in New Jersey
-- Employees must be residents of NJ and maintain domicile in the State during their participation in the program; earned a degree from an approved STEM degree program from an institution of higher education in NJ; have graduated on or after December 14, 2018; worked full-time in an approved high-growth STEM occupation at a NJ employer for a minimum of four years before applying for the program
-- If approved, the employees must work full-time for an additional one to four years in an approved high-growth STEM occupation at a NJ employer in the program
 - Employers provide a matching $1,000 payment per participating employee for each year (up to four years) the employee works at their business and remains in the program
 - Employers must certify that the participating employees work in an approved occupation each year
-- Eligible occupations are listed in the [Higher Education Student Assistance Authority (HESAA) eligible high-growth STEM occupations list](https://www.hesaa.org/Documents/LoanRedemptionPrograms/STEMOccupations.pdf)
+
+For employees: 
+- Employees are required to be residents of NJ and maintain domicile in the State during their participation in the program
+- Earned a degree from an approved STEM degree program from an institution of higher education in NJ 
+- Have graduated on or after December 14, 2018 
+- Worked full-time in an approved high-growth STEM occupation at a NJ employer for a minimum of four years before applying for the program
+- If approved, the employees must work full-time for an additional one to four years in an approved high-growth STEM occupation at a NJ employer in the program
+
+Eligible occupations are listed in the [Higher Education Student Assistance Authority (HESAA) eligible high-growth STEM occupations list](https://www.hesaa.org/Documents/LoanRedemptionPrograms/STEMOccupations.pdf)
 
 
 > ### Benefits
