@@ -326,7 +326,7 @@ app.use(
       ["dynamics/housing", dynamicsHousingHealthCheckClient],
       ["dynamics/license-status", dynamicsLicenseHealthCheckClient],
       ["webservice/license-status", webServiceLicenseStatusHealthCheckClient],
-      ["formationApi/health", formationAPIHealthCheckClient],
+      ["formation/health", formationAPIHealthCheckClient],
     ])
   )
 );
