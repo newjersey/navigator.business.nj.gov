@@ -7,7 +7,7 @@ summaryDescriptionMd: If you are interested in continuing to employ individuals
   or facility care), you must renew your registration with the Employment and
   Personnel Services within the Division of Consumer Affairs online.
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
-callToActionText: "Renew My Registration "
+callToActionText: "Renew My Health Care Services Firm Registration "
 ---
 
 ## Application Requirements
