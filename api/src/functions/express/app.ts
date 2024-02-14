@@ -282,7 +282,7 @@ const apiFormationClient = ApiFormationClient(
   logger
 );
 
-const apiFormationHealthCheckClient = apiFormationClient.health;
+const webServiceFormationHealthCheckClient = apiFormationClient.health;
 
 const shouldSaveDocuments = !(process.env.SKIP_SAVE_DOCUMENTS_TO_S3 === "true");
 
@@ -326,7 +326,7 @@ app.use(
       ["dynamics/housing", dynamicsHousingHealthCheckClient],
       ["dynamics/license-status", dynamicsLicenseHealthCheckClient],
       ["webservice/license-status", webServiceLicenseStatusHealthCheckClient],
-      ["webservice/apiFormationHealthCheck", apiFormationHealthCheckClient],
+      ["webservice/formation-health", webServiceFormationHealthCheckClient],
     ])
   )
 );
