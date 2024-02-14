@@ -1,4 +1,4 @@
-import { getCurrentDateISOString } from "@shared/dateHelpers";
+import { getCurrentDateISOString, getCurrentDateInNewJerseyISOFormatted } from "@shared/dateHelpers";
 import { CURRENT_VERSION, UserData } from "@shared/userData";
 
 export const ApiFormationHealth: UserData = {
@@ -122,7 +122,7 @@ export const ApiFormationHealth: UserData = {
           legalType: "foreign-limited-liability-company",
           businessName: "some-business-name-72304745",
           businessSuffix: "LLC",
-          businessStartDate: "2024-02-10",
+          businessStartDate: getCurrentDateInNewJerseyISOFormatted(),
           businessTotalStock: "",
           businessPurpose: "some-purpose-15247137",
           additionalProvisions: ["provision1", "provision2"],
@@ -151,7 +151,7 @@ export const ApiFormationHealth: UserData = {
           certifiedCopyOfFormationDocument: true,
           contactFirstName: "some-contact-first-name-15248752",
           contactLastName: "some-contact-last-name-97216646",
-          contactPhoneNumber: "some-contact-phone-number-13256759",
+          contactPhoneNumber: "6092926748",
           withdrawals: "some-withdrawals-text-62080960",
           dissolution: "some-dissolution-text-69760616",
           combinedInvestment: "some-combinedInvestment-text-57158048",

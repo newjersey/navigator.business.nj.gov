@@ -21,6 +21,12 @@ export const getCurrentDateInNewJersey = (): Dayjs => {
   return dayjs().tz("America/New_York");
 };
 
+export const getCurrentDateInNewJerseyISOFormatted = (): string => {
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
+  return dayjs().tz("America/New_York").toISOString();
+};
+
 export const getCurrentDateFormatted = (format: string): string => {
   return dayjs().format(format);
 };
