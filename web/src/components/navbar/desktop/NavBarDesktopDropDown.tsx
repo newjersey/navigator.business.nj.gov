@@ -2,7 +2,7 @@ import { ButtonIcon } from "@/components/ButtonIcon";
 import { NavBarPopupMenu } from "@/components/navbar/NavBarPopupMenu";
 import { getBusinessIconColor } from "@/lib/domain-logic/getBusinessIconColor";
 import analytics from "@/lib/utils/analytics";
-import { Popper, Grow, Paper, ClickAwayListener } from "@mui/material";
+import { Popper, Grow, Paper, ClickAwayListener, MenuItem, MenuList } from "@mui/material";
 import { Icon } from "@/components/njwds/Icon";
 import { ReactElement } from "react";
 
@@ -30,6 +30,20 @@ export const NavBarDesktopDropDown = (props: Props): ReactElement => {
       return !prevOpen;
     });
   };
+
+
+  // fix this
+  const guestOrUserName = "temp guest UN"
+    // props.menuConfiguration === "login"
+    //   ? Config.navigationDefaults.myNJAccountText
+    //   : getUserNameOrEmail(userData);
+
+  function handleListKeyDown(event: React.KeyboardEvent): void {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      props.handleClose();
+    }
+  }
 
 return (
   <>
@@ -71,14 +85,29 @@ return (
             <Paper>
               <ClickAwayListener onClickAway={props.handleClose}>
                 <div>
-                  <NavBarPopupMenu
+                  {/* <NavBarPopupMenu
                     handleClose={(): void => props.setOpen(false)}
                     open={props.open}
-                    menuConfiguration={
-                      props.isAuthenticated ? "profile-mynj-addbusiness-logout" : "profile"
-                    }
                     subMenuElement={props.subMenuElement}
-                  />
+                  /> */}
+
+                  <MenuList
+                    autoFocusItem={props.open}
+                    variant={"selectedMenu"}
+                    id="menu-list-grow"
+                    onKeyDown={handleListKeyDown}
+                    data-testid={"nav-bar-popup-menu"}
+                    className="padding-bottom-0"
+                  >
+                    <MenuItem
+                      className={"display-flex padding-y-1 menu-item-title"}
+                      disabled={true}
+                    >
+                      <div className="text-bold">{guestOrUserName}</div>
+                    </MenuItem>
+                    <hr className="margin-0 hr-2px" key="name-break" />
+                    {props.subMenuElement}
+                  </MenuList>
                 </div>
               </ClickAwayListener>
             </Paper>

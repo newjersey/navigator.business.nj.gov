@@ -20,7 +20,7 @@ export interface Props {
   menuConfiguration?: MenuConfiguration;
   subMenuElement: ReactElement;
 }
-
+// I think we can just inline this and be done with it on both ends. 
 export const NavBarPopupMenu = (props: Props): ReactElement => {
   const { userData } = useUserData();
   const { Config } = useConfig();
