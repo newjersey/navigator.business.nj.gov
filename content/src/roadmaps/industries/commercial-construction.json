@@ -45,7 +45,7 @@
   ],
   "name": "Commercial or Industrial Construction",
   "nonEssentialQuestionsIds": [],
-  "displayname": "commercial construction",
+  "displayname": "commercial-construction",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true
