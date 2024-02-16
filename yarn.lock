@@ -4436,7 +4436,7 @@ __metadata:
     prettier-plugin-organize-imports: 3.2.4
     rimraf: 5.0.5
     serverless: 3.38.0
-    serverless-dynamodb: 0.2.49
+    serverless-dynamodb: 0.2.50
     serverless-http: 3.2.0
     serverless-offline: 13.3.3
     serverless-offline-ssm: 6.2.0
@@ -4642,7 +4642,7 @@ __metadata:
     sass-loader: 14.0.0
     semantic-release: 19.0.5
     serverless: 3.38.0
-    serverless-dynamodb: 0.2.49
+    serverless-dynamodb: 0.2.50
     serverless-http: 3.2.0
     serverless-offline: 13.3.3
     serverless-offline-ssm: 6.2.0
@@ -31658,14 +31658,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-dynamodb@npm:0.2.49":
-  version: 0.2.49
-  resolution: "serverless-dynamodb@npm:0.2.49"
+"serverless-dynamodb@npm:0.2.50":
+  version: 0.2.50
+  resolution: "serverless-dynamodb@npm:0.2.50"
   dependencies:
     "@aws-sdk/client-dynamodb": ^3.428.0
     "@aws-sdk/lib-dynamodb": ^3.428.0
     aws-dynamodb-local: ^0.0.11
-  checksum: d26a55a283c91ad44d3aa577b987d66f0bd903f7bcc4c57082aaf8137d5fcef875e90014d3be70d8210bf43c6bed5268a350f875eef140fca7db61592b511caa
+  checksum: a3674ce222266d9914b7a6c8e420455e08018fa35472402c234c415eb014fb88874c4360284321e40e1772d4b8d9f9eda4d5e5982a687064477ae17ee760a1ab
   languageName: node
   linkType: hard
 

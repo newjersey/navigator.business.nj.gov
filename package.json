@@ -208,7 +208,7 @@
     "sass-loader": "14.0.0",
     "semantic-release": "19.0.5",
     "serverless": "3.38.0",
-    "serverless-dynamodb": "0.2.49",
+    "serverless-dynamodb": "0.2.50",
     "serverless-offline-ssm": "6.2.0",
     "serverless-webpack": "5.13.0",
     "storybook": "7.6.13",
