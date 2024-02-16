@@ -1,3 +1,11 @@
+# [2024.6.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.5.0...v2024.6.0) (2024-02-16)
+
+
+### Features
+
+* [[#186775240](https://github.com/newjersey/navigator.business.nj.gov/issues/186775240)] Add health checks to formation ([76f5c1a](https://github.com/newjersey/navigator.business.nj.gov/commit/76f5c1a9e4167129acec26ab150d097ff4690d69))
+* [[#186775240](https://github.com/newjersey/navigator.business.nj.gov/issues/186775240)] Add health checks to formation ([1275c97](https://github.com/newjersey/navigator.business.nj.gov/commit/1275c97709c4fe3c47548da00d9b3859f27d1a27))
+
 # [2024.5.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.4.0...v2024.5.0) (2024-02-13)
 
 
