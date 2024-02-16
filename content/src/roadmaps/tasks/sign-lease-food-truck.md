@@ -1,9 +1,9 @@
 ---
 displayname: sign-lease-food-truck
 filename: sign-lease-food-truck
-urlSlug: sign-lease
+urlSlug: sign-lease-food-truck
 name: Sign Your Location Contract
-id: sign-lease
+id: sign-lease-food-truck
 callToActionLink: ""
 callToActionText: ""
 summaryDescriptionMd: >-
