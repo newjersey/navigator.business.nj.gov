@@ -6,37 +6,34 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getForYouCardCount } from "@/lib/domain-logic/getForYouCardCount";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab, scrollToTopOfElement, templateEval } from "@/lib/utils/helpers";
-import { isRemoteWorkerOrSellerBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
 import { Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from "@mui/material";
-import { ReactElement, ReactNode, useRef, useState } from "react";
+import { ReactElement, useRef, useState } from "react";
 
 export interface SidebarCardsListProps {
-  topCards: SidebarCardContent[];
-  bottomCards: SidebarCardContent[];
+  sideBarCards: SidebarCardContent[];
   fundings: Funding[];
   hiddenFundings: Funding[];
   certifications: Certification[];
   hiddenCertifications: Certification[];
-  displayFundings: boolean;
-  displayCertifications: boolean;
-  isCMSPreview?: boolean;
+  isRemoteSellerWorker?: boolean;
+  displayFundingCards?: boolean;
+  displayCertificationsCards?: boolean;
+  cardCount: number;
 }
 
 export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => {
   const [hiddenAccordionIsOpen, setHiddenAccordionIsOpen] = useState<boolean>(false);
   const { Config } = useConfig();
-  const { business } = useUserData();
   const accordionRef = useRef(null);
+  const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 
   const hiddenOpportunitiesCount = (): number => {
-    if (props.displayCertifications && props.displayFundings) {
+    if (props.displayCertificationsCards && props.displayFundingCards) {
       return props.hiddenCertifications.length + props.hiddenFundings.length;
-    } else if (props.displayCertifications) {
+    } else if (props.displayCertificationsCards) {
       return props.hiddenCertifications.length;
     } else if (props.hiddenFundings) {
       return props.hiddenFundings.length;
@@ -45,11 +42,86 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
     }
   };
 
-  const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
+  const showEmptyOpportunitiesMsg =
+    props.displayCertificationsCards &&
+    props.displayFundingCards &&
+    props.certifications.length + props.fundings.length === 0;
+  const showCompleteRequiredTasksMsg =
+    !props.displayCertificationsCards && !props.displayFundingCards && props.sideBarCards.length === 0;
+  const getEmptyForYouMessageTopText = (): string => {
+    if (props.isRemoteSellerWorker) return Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText;
+    if (showCompleteRequiredTasksMsg) return Config.dashboardDefaults.completeRequiredTasksText;
+    if (showEmptyOpportunitiesMsg) return Config.dashboardDefaults.emptyOpportunitiesHeader;
+    return "";
+  };
+  const getEmptyForYouMessageBottomText = (): string => {
+    if (showEmptyOpportunitiesMsg) return Config.dashboardDefaults.emptyOpportunitiesText;
+    return "";
+  };
 
-  const hiddenCardsAccordion = (): ReactNode => {
-    if (props.displayCertifications || props.displayFundings) {
-      return (
+  const renderEmptyForYouMessage =
+    showEmptyOpportunitiesMsg || showCompleteRequiredTasksMsg || props.isRemoteSellerWorker;
+  const renderFundingCards = props.displayFundingCards;
+  const renderCertificationsCards = props.displayCertificationsCards;
+  const renderHiddenOpportunitiesAccordian = props.displayCertificationsCards || props.displayFundingCards;
+  const renderFundingsInHiddenOpportunitiesAccordian = props.displayFundingCards;
+  const renderLearnMoreFundingOpportunities = props.displayFundingCards;
+
+  return (
+    <>
+      <div className={"display-none desktop:display-block"}>
+        <Heading level={2} className="margin-top-0 font-weight-normal">
+          {Config.dashboardDefaults.sidebarHeading}
+          <span data-testid="for-you-counter" className="margin-left-05 text-base">
+            ({props.cardCount})
+          </span>
+        </Heading>
+        <hr className="margin-top-2 margin-bottom-3 bg-cool-lighter" aria-hidden={true} />
+      </div>
+
+      {props.sideBarCards.map((card) => {
+        return <SidebarCard card={card} key={card.id} />;
+      })}
+
+      {renderEmptyForYouMessage && (
+        <div className="fdc fac margin-y-3" data-testid="empty-for-you-message">
+          <div className="text-center margin-bottom-3">
+            <Content>{getEmptyForYouMessageTopText()}</Content>
+          </div>
+          <img src={`/img/for-you-section.svg`} aria-hidden="true" alt="" />
+          <p className="text-center">{getEmptyForYouMessageBottomText()}</p>
+        </div>
+      )}
+
+      <div data-testid="visible-opportunities">
+        {renderCertificationsCards &&
+          props.certifications.map((cert) => {
+            return <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />;
+          })}
+
+        {renderFundingCards &&
+          props.fundings.map((funding) => {
+            return <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />;
+          })}
+      </div>
+
+      {renderLearnMoreFundingOpportunities && (
+        <>
+          <hr className="margin-top-3 bg-cool-lighter" aria-hidden={true} />
+          <div className="margin-y-3 weight-unset-override">
+            <PrimaryButton
+              isColor={"accent-cooler"}
+              isRightMarginRemoved={true}
+              isFullWidthOnDesktop={true}
+              onClick={(): void => openInNewTab(Config.dashboardDefaults.learnMoreFundingOpportunitiesLink)}
+            >
+              {Config.dashboardDefaults.learnMoreFundingOpportunitiesText}
+            </PrimaryButton>
+          </div>
+        </>
+      )}
+
+      {renderHiddenOpportunitiesAccordian && (
         <>
           <hr className="margin-top-3 bg-cool-lighter" aria-hidden={true} />
           <div className="desktop:margin-bottom-1">
@@ -96,7 +168,7 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
                 {props.hiddenCertifications.map((cert) => {
                   return <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />;
                 })}
-                {props.displayFundings &&
+                {renderFundingsInHiddenOpportunitiesAccordian &&
                   props.hiddenFundings.map((funding) => {
                     return <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />;
                   })}
@@ -105,109 +177,7 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
           </div>
           <hr className="margin-bottom-3 bg-cool-lighter" aria-hidden={true} />
         </>
-      );
-    } else {
-      return <></>;
-    }
-  };
-
-  const learnMoreAboutFundingsLink = (): ReactNode => {
-    return (
-      <>
-        <hr className="margin-top-3 bg-cool-lighter" aria-hidden={true} />
-        <div className="margin-y-3 weight-unset-override">
-          <PrimaryButton
-            isColor={"accent-cooler"}
-            isRightMarginRemoved={true}
-            isFullWidthOnDesktop={true}
-            onClick={(): void => openInNewTab(Config.dashboardDefaults.learnMoreFundingOpportunitiesLink)}
-          >
-            {Config.dashboardDefaults.learnMoreFundingOpportunitiesText}
-          </PrimaryButton>
-        </div>
-      </>
-    );
-  };
-
-  const emptyForYouMessage = (): ReactNode => {
-    const showEmptyOpportunitiesMsg =
-      props.displayCertifications &&
-      props.displayFundings &&
-      props.certifications.length + props.fundings.length === 0;
-
-    const showCompleteRequiredTasksMsg =
-      !props.displayCertifications &&
-      !props.displayFundings &&
-      props.topCards.length + props.bottomCards.length === 0;
-
-    const showEmptyForYouMessage =
-      showEmptyOpportunitiesMsg || showCompleteRequiredTasksMsg || isRemoteWorkerOrSellerBusiness(business);
-
-    const getTopText = (): string => {
-      if (isRemoteWorkerOrSellerBusiness(business) || props.isCMSPreview)
-        return Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText;
-      if (showCompleteRequiredTasksMsg) return Config.dashboardDefaults.completeRequiredTasksText;
-      if (showEmptyOpportunitiesMsg) return Config.dashboardDefaults.emptyOpportunitiesHeader;
-      return "";
-    };
-
-    const getBottomText = (): string => {
-      if (showEmptyOpportunitiesMsg) return Config.dashboardDefaults.emptyOpportunitiesText;
-      return "";
-    };
-
-    return (
-      showEmptyForYouMessage && (
-        <div className="fdc fac margin-y-3" data-testid="empty-for-you-message">
-          <div className="text-center margin-bottom-3">
-            <Content>{getTopText()}</Content>
-          </div>
-          <img src={`/img/for-you-section.svg`} aria-hidden="true" alt="" />
-          <p className="text-center">{getBottomText()}</p>
-        </div>
-      )
-    );
-  };
-
-  return (
-    <>
-      {isDesktopAndUp && (
-        <>
-          <Heading level={2} className="margin-top-0 font-weight-normal">
-            {Config.dashboardDefaults.sidebarHeading}
-            <span data-testid="for-you-counter" className="margin-left-05 text-base">
-              ({getForYouCardCount(business, props.certifications, props.fundings)})
-            </span>
-          </Heading>
-          <hr className="margin-top-2 margin-bottom-3 bg-cool-lighter" aria-hidden={true} />
-        </>
       )}
-      <div>
-        <div data-testid="top-cards">
-          {props.topCards.map((card) => {
-            return <SidebarCard card={card} key={card.id} />;
-          })}
-        </div>
-        {emptyForYouMessage()}
-        <div data-testid="visible-opportunities">
-          {props.displayCertifications &&
-            props.certifications.map((cert) => {
-              return <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />;
-            })}
-
-          {props.displayFundings &&
-            props.fundings.map((funding) => {
-              return <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />;
-            })}
-        </div>
-        <div data-testid="bottom-cards">
-          {props.bottomCards.map((card) => {
-            return <SidebarCard card={card} key={card.id} />;
-          })}
-        </div>
-      </div>
-      {props.displayFundings && learnMoreAboutFundingsLink()}
-      {hiddenCardsAccordion()}
     </>
   );
 };

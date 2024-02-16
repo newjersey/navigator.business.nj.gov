@@ -70,6 +70,4 @@ type RoadmapCardGrayMatter = {
   ctaText: string;
   hasCloseButton: boolean;
   preBodySpanButtonText: string;
-  weight: number;
-  section: "above-opportunities" | "below-opportunities";
 };

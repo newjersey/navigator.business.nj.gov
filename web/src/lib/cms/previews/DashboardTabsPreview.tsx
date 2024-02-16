@@ -13,49 +13,48 @@ const DashboardTabsPreview = (props: PreviewProps): ReactElement => {
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+        <div className="h3-styling margin-y-2">----- When Certs/Fundings Are Not Displayed -----</div>
         <SidebarCardsList
-          topCards={[]}
-          bottomCards={[]}
+          sideBarCards={[]}
           fundings={[]}
           hiddenFundings={[]}
           certifications={[]}
           hiddenCertifications={[]}
-          displayFundings={false}
-          displayCertifications={false}
+          cardCount={0}
         />
-
+        <div className="h3-styling margin-y-2">----- When Certs/Fundings Are Displayed -----</div>
         <SidebarCardsList
-          topCards={[]}
-          bottomCards={[]}
+          sideBarCards={[]}
           fundings={[]}
           hiddenFundings={[]}
           certifications={[]}
           hiddenCertifications={[]}
-          displayFundings={true}
-          displayCertifications={true}
+          displayCertificationsCards
+          displayFundingCards
+          cardCount={0}
         />
 
+        <div className="h3-styling margin-y-2">----- When Remote Seller / Worker -----</div>
         <SidebarCardsList
-          topCards={[]}
-          bottomCards={[]}
+          sideBarCards={[]}
           fundings={[]}
           hiddenFundings={[]}
           certifications={[]}
           hiddenCertifications={[]}
-          displayFundings={false}
-          displayCertifications={false}
-          isCMSPreview={true}
+          isRemoteSellerWorker={true}
+          cardCount={0}
         />
 
+        <div className="h3-styling margin-y-2">----- When Certs/Fundings Are Displayed -----</div>
         <SidebarCardsList
-          topCards={[]}
-          bottomCards={[]}
+          sideBarCards={[]}
           fundings={[generateFunding({})]}
           hiddenFundings={[generateFunding({})]}
           certifications={[generateCertification({})]}
           hiddenCertifications={[generateCertification({})]}
-          displayFundings={true}
-          displayCertifications={true}
+          displayCertificationsCards
+          displayFundingCards
+          cardCount={5}
         />
       </div>
     </ConfigContext.Provider>

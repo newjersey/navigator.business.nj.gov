@@ -1,10 +1,12 @@
 import { SidebarCardsList, SidebarCardsListProps } from "@/components/dashboard/SidebarCardsList";
 import { getMergedConfig } from "@/contexts/configContext";
+import { getForYouCardCount } from "@/lib/domain-logic/sidebarCardsHelpers";
 import analytics from "@/lib/utils/analytics";
 import * as helpers from "@/lib/utils/helpers";
 import { removeMarkdownFormatting } from "@/lib/utils/helpers";
 import { generateCertification, generateFunding, generateSidebarCardContent } from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
+import { OperatingPhases } from "@businessnjgovnavigator/shared/";
 import { ForeignBusinessTypeId } from "@businessnjgovnavigator/shared/profileData";
 import { generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
@@ -46,6 +48,30 @@ function setupMockAnalytics(): typeof analytics {
 
 const Config = getMergedConfig();
 
+const operatingPhaseWithDisplayFundingAndDisplayCertificationAreTrue = OperatingPhases.find((op): boolean => {
+  return op.displayFundings && op.displayCertifications;
+});
+
+const operatingPhaseWithDisplayCertificationIsTrue = OperatingPhases.find((op): boolean => {
+  return op.displayCertifications;
+});
+
+const operatingPhaseWithDisplayFundingIsTrue = OperatingPhases.find((op): boolean => {
+  return op.displayFundings;
+});
+
+const operatingPhaseWithDisplayCertificationAsTrueAndDisplayFundingAreFalse = OperatingPhases.find(
+  (op): boolean => {
+    return !op.displayFundings && op.displayCertifications;
+  }
+);
+
+const operatingPhaseWithDisplayFundingAndDisplayCertificationAreFalse = OperatingPhases.find(
+  (op): boolean => {
+    return !op.displayFundings && !op.displayCertifications;
+  }
+);
+
 describe("<SidebarCardsList />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
@@ -57,28 +83,42 @@ describe("<SidebarCardsList />", () => {
 
   const renderComponent = (overrides: Partial<SidebarCardsListProps>): void => {
     const sidebarCardsListProps = {
-      topCards: [],
-      bottomCards: [],
+      sideBarCards: [],
       fundings: [generateFunding({})],
       hiddenFundings: [generateFunding({})],
       certifications: [generateCertification({})],
       hiddenCertifications: [generateCertification({})],
-      displayFundings: false,
-      displayCertifications: false,
+      cardCount: 0,
       ...overrides,
     };
+
     render(<SidebarCardsList {...sidebarCardsListProps} />);
   };
 
   it("fires unhide_cards analytics when accordion is opened when displayFundings is true", () => {
-    renderComponent({ displayFundings: true });
+    useMockBusiness({
+      profileData: {
+        ...generateProfileData({
+          operatingPhase: operatingPhaseWithDisplayFundingIsTrue?.id || "",
+        }),
+      },
+    });
+
+    renderComponent({ displayFundingCards: true });
     fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
     fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
     expect(mockAnalytics.event.for_you_card_unhide_button.click.unhide_cards).toHaveBeenCalledTimes(1);
   });
 
   it("fires unhide_cards analytics when accordion is opened when displayCertifications is true", () => {
-    renderComponent({ displayCertifications: true });
+    useMockBusiness({
+      profileData: {
+        ...generateProfileData({
+          operatingPhase: operatingPhaseWithDisplayCertificationIsTrue?.id || "",
+        }),
+      },
+    });
+    renderComponent({ displayCertificationsCards: true });
     fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
     fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
     expect(mockAnalytics.event.for_you_card_unhide_button.click.unhide_cards).toHaveBeenCalledTimes(1);
@@ -104,7 +144,7 @@ describe("<SidebarCardsList />", () => {
           });
           useMockBusiness(mockBusiness);
 
-          renderComponent({});
+          renderComponent({ isRemoteSellerWorker: true });
           expect(
             screen.getByText(Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText)
           ).toBeInTheDocument();
@@ -123,7 +163,7 @@ describe("<SidebarCardsList />", () => {
           });
           useMockBusiness(mockBusiness);
 
-          renderComponent({});
+          renderComponent({ isRemoteSellerWorker: true });
           expect(
             screen.getByText(Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText)
           ).toBeInTheDocument();
@@ -133,11 +173,19 @@ describe("<SidebarCardsList />", () => {
 
     describe("Empty Opportunities Message", () => {
       it("displays when there are no visible fundings or certifications", () => {
+        useMockBusiness({
+          profileData: {
+            ...generateProfileData({
+              operatingPhase: operatingPhaseWithDisplayFundingAndDisplayCertificationAreTrue?.id || "",
+            }),
+          },
+        });
+
         renderComponent({
           fundings: [],
           certifications: [],
-          displayCertifications: true,
-          displayFundings: true,
+          displayCertificationsCards: true,
+          displayFundingCards: true,
         });
 
         const emptyMessage = screen.getByTestId("empty-for-you-message");
@@ -147,22 +195,18 @@ describe("<SidebarCardsList />", () => {
       });
 
       it("does not display when displayCertifications is true and displayFundings is false", () => {
-        renderComponent({
-          fundings: [],
-          certifications: [],
-          displayCertifications: true,
-          displayFundings: false,
+        useMockBusiness({
+          profileData: {
+            ...generateProfileData({
+              operatingPhase: operatingPhaseWithDisplayCertificationAsTrueAndDisplayFundingAreFalse?.id || "",
+            }),
+          },
         });
 
-        expect(screen.queryByTestId("empty-for-you-message")).not.toBeInTheDocument();
-      });
-
-      it("does not display when displayCertifications is false and displayFundings is true", () => {
         renderComponent({
           fundings: [],
           certifications: [],
-          displayCertifications: false,
-          displayFundings: true,
+          displayCertificationsCards: true,
         });
 
         expect(screen.queryByTestId("empty-for-you-message")).not.toBeInTheDocument();
@@ -170,7 +214,15 @@ describe("<SidebarCardsList />", () => {
     });
 
     describe("Complete Required Tasks Message", () => {
-      it("displays when there are no top or bottom cards and display Fundings and Certifications are false", () => {
+      it("displays when there are no sideBar cards and display Fundings and Certifications are false", () => {
+        useMockBusiness({
+          profileData: {
+            ...generateProfileData({
+              operatingPhase: operatingPhaseWithDisplayFundingAndDisplayCertificationAreFalse?.id || "",
+            }),
+          },
+        });
+
         renderComponent({});
         const emptyMessage = screen.getByTestId("empty-for-you-message");
         const sanitizedString = removeMarkdownFormatting(Config.dashboardDefaults.completeRequiredTasksText);
@@ -178,34 +230,36 @@ describe("<SidebarCardsList />", () => {
       });
 
       it("does not display when displayFundings is true", () => {
-        renderComponent({ displayFundings: true });
+        useMockBusiness({
+          profileData: {
+            ...generateProfileData({
+              operatingPhase: operatingPhaseWithDisplayFundingIsTrue?.id || "",
+            }),
+          },
+        });
+        renderComponent({ displayFundingCards: true });
         expect(screen.queryByTestId("empty-for-you-message")).not.toBeInTheDocument();
       });
 
       it("does not display when displayCertifications is true", () => {
-        renderComponent({ displayCertifications: true });
+        useMockBusiness({
+          profileData: {
+            ...generateProfileData({
+              operatingPhase: operatingPhaseWithDisplayCertificationIsTrue?.id || "",
+            }),
+          },
+        });
+        renderComponent({ displayCertificationsCards: true });
         expect(screen.queryByTestId("empty-for-you-message")).not.toBeInTheDocument();
       });
 
-      it("does not display when there are top cards", () => {
-        const topCards = [
+      it("does not display when there are side bar cards", () => {
+        const sideBarCards = [
           generateSidebarCardContent({
             id: "some-fake-top-card",
-            section: "above-opportunities",
           }),
         ];
-        renderComponent({ topCards });
-        expect(screen.queryByTestId("empty-for-you-message")).not.toBeInTheDocument();
-      });
-
-      it("does not display when there are bottom cards", () => {
-        const bottomCards = [
-          generateSidebarCardContent({
-            id: "some-fake-bottom-card",
-            section: "below-opportunities",
-          }),
-        ];
-        renderComponent({ bottomCards });
+        renderComponent({ sideBarCards });
         expect(screen.queryByTestId("empty-for-you-message")).not.toBeInTheDocument();
       });
     });
@@ -221,7 +275,7 @@ describe("<SidebarCardsList />", () => {
 
     const mockBusiness = generateBusiness({
       profileData: generateProfileData({
-        operatingPhase: "GUEST_MODE_OWNING",
+        operatingPhase: operatingPhaseWithDisplayFundingAndDisplayCertificationAreTrue?.id || "",
         municipality: undefined,
         sectorId: undefined,
         existingEmployees: "50",
@@ -234,8 +288,6 @@ describe("<SidebarCardsList />", () => {
       renderComponent({
         fundings: [],
         certifications: [],
-        displayFundings: true,
-        displayCertifications: true,
       });
       const forYouCounter = screen.getByTestId("for-you-counter").textContent;
       expect(forYouCounter).toEqual("(0)");
@@ -247,11 +299,11 @@ describe("<SidebarCardsList />", () => {
         applicableOwnershipTypes: [],
         isSbe: false,
       });
+
       renderComponent({
         fundings: [],
         certifications: [genericCertification],
-        displayFundings: true,
-        displayCertifications: true,
+        cardCount: getForYouCardCount(mockBusiness, [genericCertification], []),
       });
       const forYouCounter = screen.getByTestId("for-you-counter").textContent;
       expect(forYouCounter).toEqual("(1)");
@@ -269,8 +321,7 @@ describe("<SidebarCardsList />", () => {
       renderComponent({
         certifications: [],
         fundings: [genericFunding],
-        displayFundings: true,
-        displayCertifications: true,
+        cardCount: getForYouCardCount(mockBusiness, [], [genericFunding]),
       });
       const forYouCounter = screen.getByTestId("for-you-counter").textContent;
       expect(forYouCounter).toEqual("(1)");
@@ -278,9 +329,21 @@ describe("<SidebarCardsList />", () => {
 
     it("render cards with a two count in the For You header when one funding and one certification are present", () => {
       useMockBusiness(mockBusiness);
+
+      const genericFunding = generateFunding({
+        isNonprofitOnly: false,
+        county: [],
+        sector: [],
+        employeesRequired: undefined,
+      });
+      const genericCertification = generateCertification({
+        applicableOwnershipTypes: [],
+        isSbe: false,
+      });
       renderComponent({
-        displayFundings: true,
-        displayCertifications: true,
+        fundings: [genericFunding],
+        certifications: [genericCertification],
+        cardCount: getForYouCardCount(mockBusiness, [genericCertification], [genericFunding]),
       });
       const forYouCounter = screen.getByTestId("for-you-counter").textContent;
       expect(forYouCounter).toEqual("(2)");
@@ -289,13 +352,29 @@ describe("<SidebarCardsList />", () => {
 
   describe("View Hidden Items Accordion", () => {
     it("calls scrollToTopOfElement when the accordion opens", async () => {
-      renderComponent({ displayFundings: true });
+      useMockBusiness({
+        profileData: {
+          ...generateProfileData({
+            operatingPhase: operatingPhaseWithDisplayFundingIsTrue?.id || "",
+          }),
+        },
+      });
+
+      renderComponent({ displayCertificationsCards: true });
       fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
       expect(mockHelpers.scrollToTopOfElement).toHaveBeenCalledTimes(1);
     });
 
     it("does not call scrollToTopOfElement when the accordion closes", async () => {
-      renderComponent({ displayCertifications: true });
+      useMockBusiness({
+        profileData: {
+          ...generateProfileData({
+            operatingPhase: operatingPhaseWithDisplayCertificationIsTrue?.id || "",
+          }),
+        },
+      });
+
+      renderComponent({ displayCertificationsCards: true });
       fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
       fireEvent.click(screen.getByTestId("hidden-opportunity-header"));
       expect(mockHelpers.scrollToTopOfElement).toHaveBeenCalledTimes(1);

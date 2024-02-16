@@ -3107,14 +3107,7 @@ collections:
       - { label: "Has Close Button", name: "hasCloseButton", widget: "boolean", required: false }
       - { label: "CTA Text", name: "ctaText", widget: "string", required: false }
       - { label: "Pre Body Button Text", name: "preBodySpanButtonText", widget: "string", required: false }
-      - { label: "Weight (lower weights sort first)", name: "weight", widget: "number", required: true }
       - { label: "Content", name: "body", widget: "markdown" }
-      - {
-          label: "Placement in For You Column",
-          name: "section",
-          widget: "select",
-          options: ["above-opportunities", "below-opportunities"],
-        }
 
   - name: "quick-actions-label"
     label: "🟧 QUICK ACTIONS"
