@@ -481,8 +481,6 @@ export type SidebarCardContent = {
   ctaText?: string;
   preBodySpanButtonText?: string;
   hasCloseButton: boolean;
-  weight: number;
-  section: "above-opportunities" | "below-opportunities";
 };
 
 export type NaicsCodeObject = {

@@ -1,7 +1,7 @@
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getForYouCardCount } from "@/lib/domain-logic/getForYouCardCount";
+import { getForYouCardCount } from "@/lib/domain-logic/sidebarCardsHelpers";
 import { Certification, Funding } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { TabContext, TabList, TabPanel } from "@mui/lab/";
