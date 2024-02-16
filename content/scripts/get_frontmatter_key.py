@@ -2,8 +2,8 @@
 
 import yaml
 import re
-import os
-from typing import Any, Optional
+from pathlib import Path
+from typing import Any, Optional, List
 
 
 def extract_yaml_front_matter(markdown_content: str) -> Optional[str]:
@@ -54,7 +54,7 @@ def get_value_from_yaml_key(yaml_content: str, key: str) -> Optional[Any]:
     return yaml_data.get(key)
 
 
-def get_yaml_value_from_markdown_file(file_path: str, key: str) -> Optional[Any]:
+def get_yaml_value_from_markdown_file(file_path: str, key: str) -> Optional[str]:
     """
     Reads a Markdown file, extracts the YAML front matter, and retrieves the value of a specific key.
 
@@ -87,19 +87,17 @@ def get_yaml_value_from_markdown_file(file_path: str, key: str) -> Optional[Any]
         return None
 
 
-def print_names_from_markdown_filenames(filenames: [str]) -> None:
+def print_names_from_markdown_filenames(filenames: List[str]) -> None:
     """
     Given a list of filenames that exist under the content/src directory, print the value
     of the "name" attribute in the YAML front matter.
 
     Args:
-        filenames ([str]): The paths to the Markdown files, excluding content/src.
+        filenames (List[str]): The paths to the Markdown files, excluding content/src.
     """
     for filename in filenames:
         if filename.endswith(".md"):
-            file_path = os.path.join(
-                os.path.dirname(os.path.abspath(__file__)), "../src", filename
-            )
+            file_path = Path(__file__).parent.parent / "src" / filename
 
             # Change this to the key you want to retrieve
             key_to_retrieve = "name"
