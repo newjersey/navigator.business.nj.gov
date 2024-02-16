@@ -16,7 +16,7 @@ import {
   generateFormationFormData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
-import { screen, within } from "@testing-library/react";
+import { fireEvent, screen, within } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -202,6 +202,36 @@ describe("Formation - BusinessNameStep", () => {
     page.fillText("Search business name", "Anything else");
     await page.searchBusinessName({ status: "AVAILABLE", similarNames: [] });
     expect(screen.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
+  });
+
+  describe("after validation - when business name field is focused", () => {
+    it("shows error when business name changes", async () => {
+      const page = getPageHelper();
+      page.fillText("Search business name", "Apple Pies Rocks");
+
+      await page.searchBusinessName({ status: "AVAILABLE" });
+      expect(screen.getByTestId("available-text")).toBeInTheDocument();
+
+      const businessNameField = screen.getByLabelText("Search business name");
+      fireEvent.change(businessNameField, { target: { value: "Apple Pies Rockettes" } });
+
+      expect(
+        screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch)
+      ).toBeInTheDocument();
+    });
+
+    it("shows error when business name is deleted", async () => {
+      const page = getPageHelper();
+      page.fillText("Search business name", "Apple Pies Rocks");
+
+      await page.searchBusinessName({ status: "AVAILABLE" });
+      expect(screen.getByTestId("available-text")).toBeInTheDocument();
+
+      const businessNameField = screen.getByLabelText("Search business name");
+      fireEvent.change(businessNameField, { target: { value: "" } });
+
+      expect(screen.getByText(Config.formation.fields.businessName.errorInlineEmpty)).toBeInTheDocument();
+    });
   });
 
   describe("content", () => {

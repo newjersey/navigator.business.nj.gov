@@ -73,10 +73,10 @@ export const useBusinessNameSearch = ({
     setNameAvailability(emptyNameAvailability);
   };
 
-  const onBlurNameField = (): void => {
+  const onBlurNameField = (value: string): void => {
     setFormationFormData({
       ...state.formationFormData,
-      businessName: currentName,
+      businessName: value,
     });
     setNameAvailability(emptyNameAvailability);
   };

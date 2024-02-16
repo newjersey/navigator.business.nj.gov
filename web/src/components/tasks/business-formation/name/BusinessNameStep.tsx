@@ -1,15 +1,15 @@
 import { Content } from "@/components/Content";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { getErrorStateForField } from "@/components/tasks/business-formation/getErrorStateForField";
-import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { MediaQueries } from "@/lib/PageSizes";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { MediaQueries } from "@/lib/PageSizes";
 import { SearchBusinessNameError } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { TextField, useMediaQuery } from "@mui/material";
@@ -20,8 +20,15 @@ export const BusinessNameStep = (): ReactElement => {
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { business } = useUserData();
-  const { currentName, isLoading, error, updateCurrentName, onBlurNameField, searchBusinessName } =
-    useBusinessNameSearch({ isBusinessFormation: true, isDba: false });
+  const {
+    currentName,
+    isLoading,
+    error,
+    updateCurrentName,
+    onBlurNameField,
+    onChangeNameField,
+    searchBusinessName,
+  } = useBusinessNameSearch({ isBusinessFormation: true, isDba: false });
   const { doesFieldHaveError } = useFormationErrors();
   const mountEffectOccurred = useRef<boolean>(false);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
@@ -66,7 +73,10 @@ export const BusinessNameStep = (): ReactElement => {
                 <TextField
                   autoComplete="no"
                   value={currentName}
-                  onChange={(event): void => updateCurrentName(event.target.value)}
+                  onChange={(event): void => {
+                    onChangeNameField(event.target.value);
+                    setFormationFormData({ ...state.formationFormData, businessName: event.target.value });
+                  }}
                   variant="outlined"
                   inputProps={{
                     "aria-label": "Search business name",
