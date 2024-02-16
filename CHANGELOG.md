@@ -1,3 +1,10 @@
+## [2024.6.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.6.0...v2024.6.1) (2024-02-16)
+
+
+### Bug Fixes
+
+* [[#187064247](https://github.com/newjersey/navigator.business.nj.gov/issues/187064247)] change sign-lease urlSlug so correct task renders for non-food truck industries ([f2a52dd](https://github.com/newjersey/navigator.business.nj.gov/commit/f2a52dde83a9d8f69348772b987c6dff091a3f7f))
+
 # [2024.6.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.5.0...v2024.6.0) (2024-02-16)
 
 
