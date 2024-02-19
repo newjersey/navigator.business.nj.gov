@@ -3,7 +3,7 @@ import {
   defaultDateDelimiter,
   defaultDateFormat,
   FormationLegalType,
-  getCurrentDate,
+  getCurrentDateInNewJersey,
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
 import dayjs from "dayjs";
@@ -26,18 +26,18 @@ export const isBusinessStartDateValid = (
   switch (rule) {
     case "90":
       return (
-        date.isAfter(getCurrentDate().subtract(1, "day"), "day") &&
-        date.isBefore(getCurrentDate().add(90, "day"), "day")
+        date.isAfter(getCurrentDateInNewJersey().subtract(1, "day"), "day") &&
+        date.isBefore(getCurrentDateInNewJersey().add(90, "day"), "day")
       );
     case "30":
       return (
-        date.isAfter(getCurrentDate().subtract(1, "day"), "day") &&
-        date.isBefore(getCurrentDate().add(30, "day"), "day")
+        date.isAfter(getCurrentDateInNewJersey().subtract(1, "day"), "day") &&
+        date.isBefore(getCurrentDateInNewJersey().add(30, "day"), "day")
       );
     case "Future":
-      return date.isAfter(getCurrentDate().subtract(1, "day"), "day");
+      return date.isAfter(getCurrentDateInNewJersey().subtract(1, "day"), "day");
     case "Today":
-      return date.isSame(getCurrentDate(), "day");
+      return date.isSame(getCurrentDateInNewJersey(), "day");
   }
 };
 
@@ -68,13 +68,13 @@ export const getBusinessStartDateMaxDate = (legalType: FormationLegalType): dayj
   const rule = getBusinessStartDateRule(legalType);
   switch (rule) {
     case "90":
-      return getCurrentDate().add(90, "days");
+      return getCurrentDateInNewJersey().add(90, "days");
     case "30":
-      return getCurrentDate().add(30, "days");
+      return getCurrentDateInNewJersey().add(30, "days");
     case "Future":
-      return getCurrentDate().add(100, "years");
+      return getCurrentDateInNewJersey().add(100, "years");
     case "Today":
-      return getCurrentDate();
+      return getCurrentDateInNewJersey();
   }
 };
 

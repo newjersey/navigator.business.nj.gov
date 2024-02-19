@@ -20,6 +20,7 @@ import {
   generateMunicipality,
   getCurrentBusiness,
   getCurrentDate,
+  getCurrentDateInNewJerseyFormatted,
 } from "@businessnjgovnavigator/shared";
 import {
   generateFormationData,
@@ -1191,4 +1192,70 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.nonprofitTrusteesMethodSpecified).toEqual(undefined);
     expect(formationFormData.nonprofitAssetDistributionSpecified).toEqual(undefined);
   }, 60000);
+
+  describe("businessStartDate", () => {
+    afterEach(() => {
+      jest.useRealTimers();
+    });
+
+    it("when user is in US Eastern Timezone, initial value is current date in NJ", async () => {
+      const dateFormat = "MM/DD/YYYY";
+      const expectedDateString = getCurrentDateInNewJerseyFormatted(dateFormat);
+
+      const page = preparePage({
+        business: {
+          profileData: generateProfileData({
+            legalStructureId: "limited-liability-company",
+            businessPersona: "STARTING",
+          }),
+          formationData: generateEmptyFormationData(),
+        },
+        displayContent,
+      });
+      await page.fillAndSubmitBusinessNameStep("Pizza Joint");
+      expect(screen.getByTestId("date-businessStartDate")).toHaveValue(expectedDateString);
+    });
+
+    it("when user is in Phillipine Timezone, initial value is current date in NJ", async () => {
+      const mockDate = new Date("2020-04-13T00:00:00.000+08:00");
+      const expectedDateString = "04/12/2020";
+
+      jest.useFakeTimers();
+      jest.setSystemTime(mockDate);
+
+      const page = preparePage({
+        business: {
+          profileData: generateProfileData({
+            legalStructureId: "limited-liability-company",
+            businessPersona: "STARTING",
+          }),
+          formationData: generateEmptyFormationData(),
+        },
+        displayContent,
+      });
+      await page.fillAndSubmitBusinessNameStep("Pizza Joint");
+      expect(screen.getByTestId("date-businessStartDate")).toHaveValue(expectedDateString);
+    });
+
+    it("when user is in US Pacific Timezone, initial value is current date in NJ", async () => {
+      const mockDate = new Date("2020-04-13T22:00:00.000-08:00");
+      const expectedDateString = "04/14/2020";
+
+      jest.useFakeTimers();
+      jest.setSystemTime(mockDate);
+
+      const page = preparePage({
+        business: {
+          profileData: generateProfileData({
+            legalStructureId: "limited-liability-company",
+            businessPersona: "STARTING",
+          }),
+          formationData: generateEmptyFormationData(),
+        },
+        displayContent,
+      });
+      await page.fillAndSubmitBusinessNameStep("Pizza Joint");
+      expect(screen.getByTestId("date-businessStartDate")).toHaveValue(expectedDateString);
+    });
+  });
 });
