@@ -12,12 +12,13 @@ import {
   DateObject,
   advancedDateLibrary,
   defaultDateFormat,
-  getCurrentDate,
+  getCurrentDateInNewJersey,
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
 import { TextField } from "@mui/material";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 import { ReactElement, useContext, useMemo } from "react";
 
 advancedDateLibrary();
@@ -28,6 +29,7 @@ export const FormationDate = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { doesFieldHaveError } = useFormationErrors();
+  const dateFormat = "MM/DD/YYYY";
 
   const contentProps = useMemo(
     () => ({
@@ -73,15 +75,21 @@ export const FormationDate = (props: Props): ReactElement => {
     });
   };
 
+  const getMinDate = (): dayjs.Dayjs | undefined => {
+    const startDate = dayjs(getCurrentDateInNewJersey().format(dateFormat));
+    return props.fieldName === "businessStartDate" ? startDate : undefined;
+  };
+
   const Picker =
     process.env.NODE_ENV === "test" || process.env.CI === "true" ? DesktopDatePicker : DatePicker;
+
   return (
     <>
       <div className="flex">{contentProps[props.fieldName].label}</div>
       <div className="tablet:display-flex tablet:flex-row tablet:flex-justify">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Picker
-            minDate={props.fieldName === "businessStartDate" ? getCurrentDate() : undefined}
+            minDate={getMinDate()}
             disabled={
               props.fieldName === "businessStartDate" &&
               getBusinessStartDateRule(state.formationFormData.legalType) === "Today"
@@ -89,14 +97,14 @@ export const FormationDate = (props: Props): ReactElement => {
             maxDate={
               props.fieldName === "businessStartDate"
                 ? getBusinessStartDateMaxDate(state.formationFormData.legalType)
-                : getCurrentDate().add(100, "years")
+                : getCurrentDateInNewJersey().add(100, "years")
             }
             value={
               state.formationFormData[props.fieldName]
                 ? parseDateWithFormat(state.formationFormData[props.fieldName] ?? "", defaultDateFormat)
                 : null
             }
-            inputFormat={"MM/DD/YYYY"}
+            inputFormat={dateFormat}
             onChange={(newValue: DateObject | null): void => {
               if (newValue) {
                 handleChange(newValue.format(defaultDateFormat));

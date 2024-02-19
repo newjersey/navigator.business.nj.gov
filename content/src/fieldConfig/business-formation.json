@@ -265,7 +265,7 @@
       "businessStartDate": {
         "label": "NJ Business Effective Date",
         "labelContextualInfo": "effective-date",
-        "labelSecondaryText": "(mm/dd/yyyy)",
+        "labelSecondaryText": "(mm/dd/yyyy) Eastern Time",
         "errorFuture": "The NJ business effective date must be today or a future date in format MM/DD/YYYY.",
         "errorToday": "The NJ business effective date must be today and in format MM/DD/YYYY.",
         "error30Days": "The NJ business effective date must be today or a future date within 30 days in format MM/DD/YYYY.",
