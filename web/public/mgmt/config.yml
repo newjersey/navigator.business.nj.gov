@@ -3872,6 +3872,27 @@ collections:
               - { label: Business.nj.gov Logo Link, name: navBarBusinessNJGovLink, widget: string }
               - { label: Business.nj.gov Logo Alt Text, name: navBarBusinessNJGovAltText, widget: string }
               - { label: Business.nj.gov Logo Aria Label, name: navBarBusinessNJGovAriaLabel, widget: string }
+              - label: Navigation Quick Links
+                name: navigationQuickLinks
+                collapsed: true
+                widget: object
+                summary: "{{navigationQuickLinks}}"
+                fields:
+                  - { label: Mobile Title, name: navBarMobileQuickLinksTitle, widget: string }
+                  - { label: Plan, name: navBarPlanText, widget: string }
+                  - { label: Plan Link, name: navBarPlanLink, widget: nospace }
+                  - { label: Start, name: navBarStartText, widget: string }
+                  - { label: Start Link, name: navBarStartLink, widget: nospace }
+                  - { label: Operate, name: navBarOperateText, widget: string }
+                  - { label: Operate Link, name: navBarOperateLink, widget: nospace }
+                  - { label: Grow, name: navBarGrowText, widget: string }
+                  - { label: Grow Link, name: navBarGrowLink, widget: nospace }
+                  - { label: Updates, name: navBarUpdatesText, widget: string }
+                  - { label: Updates Link, name: navBarUpdatesLink, widget: nospace }
+                  - { label: Search, name: navBarSearchText, widget: string }
+                  - { label: Search Link, name: navBarSearchLink, widget: nospace }
+
+
           - label: Onboarding Defaults
             name: onboardingDefaults
             collapsed: true

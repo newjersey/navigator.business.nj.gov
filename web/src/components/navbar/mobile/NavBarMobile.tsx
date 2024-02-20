@@ -12,6 +12,7 @@ import {
   ProfileMenuItem,
   RegisterMenuItem,
 } from "@/components/navbar/shared-submenu-components";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { Task } from "@/lib/types/types";
@@ -31,6 +32,7 @@ interface Props {
 
 export const NavBarMobile = (props: Props): ReactElement => {
   const { business } = useUserData();
+
 
   const navBarBusinessTitle = getNavBarBusinessTitle(business, props.isAuthenticated);
 
@@ -71,6 +73,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
           closeSideBar={closeSideBar}
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
+          title={""}
         />
         <NavBarMobileHamburgerSlideOutMenu />
       </NavBarMobileWrapper>
@@ -98,6 +101,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
           closeSideBar={closeSideBar}
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
+          title={""}
         />
       </NavBarMobileWrapper>
     );
@@ -127,6 +131,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
           closeSideBar={closeSideBar}
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
+          title={""}
         />
         <NavBarMobileHamburgerSlideOutMenu />
       </NavBarMobileWrapper>
@@ -156,8 +161,9 @@ export const NavBarMobile = (props: Props): ReactElement => {
           closeSideBar={closeSideBar}
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
+          title={""}
         />
-        <NavBarMobileHamburgerSlideOutMenu />
+        <NavBarMobileHamburgerSlideOutMenu  />
       </NavBarMobileWrapper>
     );
   }
@@ -174,5 +180,4 @@ export const NavBarMobile = (props: Props): ReactElement => {
   // authed other
   // [business profile stuff, add business, myNJ account, log out, roadmap]
   // Has Hamburger
-
 };

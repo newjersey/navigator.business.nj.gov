@@ -2,13 +2,9 @@ import { ReactElement } from "react";
 import analytics from "@/lib/utils/analytics";
 import { Icon } from "@/components/njwds/Icon";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
-import {  NavBarPopupMenu } from "@/components/navbar/NavBarPopupMenu";
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 import { Task } from "@/lib/types/types";
 import { MenuList, MenuItem } from "@mui/material";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getUserNameOrEmail } from "@/lib/utils/helpers";
 
 interface Props {
   isLanding?: boolean;
@@ -19,17 +15,14 @@ interface Props {
   closeSideBar: () => void;
   openSideBar: () => void;
   isSideBarOpen: boolean;
+  title: string;
 }
 
 
 export const NavBarMobileAccountSlideOutMenu = (props: Props): ReactElement => {
 
 
-  // fix this
-  const guestOrUserName = "guest or UN"
-    // props.menuConfiguration === "login"
-    //   ? Config.navigationDefaults.myNJAccountText
-    //   : getUserNameOrEmail(userData);
+
 
   return (
     <>
@@ -52,11 +45,6 @@ export const NavBarMobileAccountSlideOutMenu = (props: Props): ReactElement => {
               className={`right-nav ${props.isSideBarOpen ? "is-visible" : "is-hidden"} `}
               data-testid="nav-sidebar-menu"
             >
-              {/* <NavBarPopupMenu
-                handleClose={props.closeSideBar}
-                hasCloseButton={true}
-                subMenuElement={props.subMenuElement}
-              /> */}
               <MenuList
                 autoFocusItem={props.isSideBarOpen}
                 variant={"selectedMenu"}
@@ -68,7 +56,7 @@ export const NavBarMobileAccountSlideOutMenu = (props: Props): ReactElement => {
                   className={"display-flex padding-y-205 menu-item-title"}
                   disabled={true}
                 >
-                  <div className="text-bold">{guestOrUserName}</div>
+                  <div className="text-bold">{props.title}</div>
                 </MenuItem>
                 <hr className="margin-0 hr-2px" key="name-break" />
 

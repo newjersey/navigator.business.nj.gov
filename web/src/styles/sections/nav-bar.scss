@@ -20,6 +20,13 @@ $icon-offset: 45px;
   align-items: center;
 }
 
+.reduced-width {
+  width: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .menu-item-focus:focus {
   z-index: 5;
 }

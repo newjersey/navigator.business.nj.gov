@@ -163,3 +163,65 @@ export const ProfileMenuItem = (props: { handleClose: () => void}): ReactElement
     return businessMenuItems;
   });
 };
+
+
+
+export const Search = (): ReactElement => {
+  const { Config } = useConfig();
+  return NavMenuItem({
+    onClick: () => window.open(Config.navigationDefaults.navigationQuickLinks.navBarSearchLink, '_blank'),
+    itemText: Config.navigationDefaults.navigationQuickLinks.navBarSearchText,
+    key: "searchMenuItem",
+    reducedLeftMargin: true,
+  });
+};
+
+export const Plan = (): ReactElement => {
+  const { Config } = useConfig();
+  return NavMenuItem({
+    onClick: () => window.open(Config.navigationDefaults.navigationQuickLinks.navBarPlanLink, '_blank'),
+    itemText: Config.navigationDefaults.navigationQuickLinks.navBarPlanText,
+    key: "planMenuItem",
+    reducedLeftMargin: true,
+  });
+};
+
+export const Start = (): ReactElement => {
+  const { Config } = useConfig();
+  return NavMenuItem({
+    onClick: () => window.open(Config.navigationDefaults.navigationQuickLinks.navBarStartLink, '_blank'),
+    itemText: Config.navigationDefaults.navigationQuickLinks.navBarStartText,
+    key: "startMenuItem",
+    reducedLeftMargin: true,
+  });
+};
+
+export const Operate = (): ReactElement => {
+  const { Config } = useConfig();
+  return NavMenuItem({
+    onClick: () => window.open(Config.navigationDefaults.navigationQuickLinks.navBarOperateLink, '_blank'),
+    itemText: Config.navigationDefaults.navigationQuickLinks.navBarOperateText,
+    key: "operateMenuItem",
+    reducedLeftMargin: true,
+  });
+};
+
+export const Grow = (): ReactElement => {
+  const { Config } = useConfig();
+  return NavMenuItem({
+    onClick: () => window.open(Config.navigationDefaults.navigationQuickLinks.navBarGrowLink, '_blank'),
+    itemText: Config.navigationDefaults.navigationQuickLinks.navBarGrowText,
+    key: "growMenuItem",
+    reducedLeftMargin: true,
+  });
+};
+
+export const Updates = (): ReactElement => {
+  const { Config } = useConfig();
+  return NavMenuItem({
+    onClick: () => window.open(Config.navigationDefaults.navigationQuickLinks.navBarUpdatesLink, '_blank'),
+    itemText: Config.navigationDefaults.navigationQuickLinks.navBarUpdatesText,
+    key: "updatesMenuItem",
+    reducedLeftMargin: true,
+  });
+};
