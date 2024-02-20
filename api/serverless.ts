@@ -73,6 +73,8 @@ const dynamicsElevatorSafetyClientId = process.env.DYNAMICS_ELEVATOR_SAFETY_CLIE
 const dynamicsElevatorSafetySecret = process.env.DYNAMICS_ELEVATOR_SAFETY_SECRET || "";
 const dynamicsElevatorSafetyTenantId = process.env.DYNAMICS_ELEVATOR_SAFETY_TENANT_ID || "";
 
+const featureFormationContentTypePlainOnly = process.env.FEATURE_FORMATION_CONTENT_TYPE_PLAIN_ONLY || "";
+
 const serverlessConfiguration: AWS = {
   useDotenv: true,
   service: "businessnjgov-api",
@@ -212,6 +214,7 @@ const serverlessConfiguration: AWS = {
       DYNAMICS_ELEVATOR_SAFETY_CLIENT_ID: dynamicsElevatorSafetyClientId,
       DYNAMICS_ELEVATOR_SAFETY_SECRET: dynamicsElevatorSafetySecret,
       DYNAMICS_ELEVATOR_SAFETY_TENANT_ID: dynamicsElevatorSafetyTenantId,
+      FEATURE_FORMATION_CONTENT_TYPE_PLAIN_ONLY: featureFormationContentTypePlainOnly,
     } as AwsLambdaEnvironment,
     logRetentionInDays: 180,
   },
