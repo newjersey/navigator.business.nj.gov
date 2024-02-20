@@ -3816,6 +3816,7 @@ collections:
               - { label: Registration Button, name: registerButton, widget: string }
               - { label: Logout Button, name: logoutButton, widget: string }
               - { label: MyNJ Account Text, name: myNJAccountText, widget: string }
+              - { label: Landing Page Drop Down Title, name: landingPageDropDownTitle, widget: string }
               - { label: Task Page Nav Bar Heading, name: taskPageNavBarHeading, widget: string }
               - { label: Profile Link Text, name: profileLinkText, widget: string }
               - { label: NavBar Guest Profile text, name: navBarGuestText, widget: string }

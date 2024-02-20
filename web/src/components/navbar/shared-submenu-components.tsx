@@ -62,6 +62,21 @@ export const MyNjMenuItem = (props: { handleClose: () => void}): ReactElement =>
   });
 };
 
+// export const LinkWithMyNjMenuItem = (props: { handleClose: () => void}): ReactElement => {
+
+//   const { Config } = useConfig();
+//   return NavMenuItem({
+//     onClick: (): void => {
+//       analytics.event.account_menu_myNJ_account.click.go_to_myNJ_home();
+//       openInNewTab(process.env.MYNJ_PROFILE_LINK || "");
+//       props.handleClose();
+//     },
+//     icon: <ButtonIcon svgFilename="profile" sizePx="25px" />,
+//     itemText: Config.navigationDefaults.myNJAccountText,
+//     key: "myNjMenuItem",
+//   });
+// };
+
 export const AddBusinessItem = (props: { handleClose: () => void}): ReactElement[] => {
   const { Config } = useConfig();
   return [
@@ -104,10 +119,12 @@ export const GetStartedMenuItem = (): ReactElement => {
   const { Config } = useConfig();
   return NavMenuItem({
     onClick: (): void => {
+      analytics.event.landing_page_navbar_register.click.go_to_onboarding();
       router.push(ROUTES.onboarding);
     },
     itemText: Config.navigationDefaults.registerButton,
     key: "getStartedMenuItem",
+    icon: <ButtonIcon svgFilename={"play-with-circle"} sizePx="25px" />,
   });
 };
 
@@ -169,7 +186,7 @@ export const ProfileMenuItem = (props: { handleClose: () => void}): ReactElement
 export const Search = (): ReactElement => {
   const { Config } = useConfig();
   return NavMenuItem({
-    onClick: () => window.open(Config.navigationDefaults.navigationQuickLinks.navBarSearchLink, '_blank'),
+    onClick: () => openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarSearchLink),
     itemText: Config.navigationDefaults.navigationQuickLinks.navBarSearchText,
     key: "searchMenuItem",
     reducedLeftMargin: true,
@@ -179,7 +196,7 @@ export const Search = (): ReactElement => {
 export const Plan = (): ReactElement => {
   const { Config } = useConfig();
   return NavMenuItem({
-    onClick: () => window.open(Config.navigationDefaults.navigationQuickLinks.navBarPlanLink, '_blank'),
+    onClick: () => openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarPlanLink),
     itemText: Config.navigationDefaults.navigationQuickLinks.navBarPlanText,
     key: "planMenuItem",
     reducedLeftMargin: true,
@@ -189,7 +206,7 @@ export const Plan = (): ReactElement => {
 export const Start = (): ReactElement => {
   const { Config } = useConfig();
   return NavMenuItem({
-    onClick: () => window.open(Config.navigationDefaults.navigationQuickLinks.navBarStartLink, '_blank'),
+    onClick: () => openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarStartLink),
     itemText: Config.navigationDefaults.navigationQuickLinks.navBarStartText,
     key: "startMenuItem",
     reducedLeftMargin: true,
@@ -199,7 +216,7 @@ export const Start = (): ReactElement => {
 export const Operate = (): ReactElement => {
   const { Config } = useConfig();
   return NavMenuItem({
-    onClick: () => window.open(Config.navigationDefaults.navigationQuickLinks.navBarOperateLink, '_blank'),
+    onClick: () => openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarOperateLink),
     itemText: Config.navigationDefaults.navigationQuickLinks.navBarOperateText,
     key: "operateMenuItem",
     reducedLeftMargin: true,
@@ -209,7 +226,7 @@ export const Operate = (): ReactElement => {
 export const Grow = (): ReactElement => {
   const { Config } = useConfig();
   return NavMenuItem({
-    onClick: () => window.open(Config.navigationDefaults.navigationQuickLinks.navBarGrowLink, '_blank'),
+    onClick: () => openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarGrowLink),
     itemText: Config.navigationDefaults.navigationQuickLinks.navBarGrowText,
     key: "growMenuItem",
     reducedLeftMargin: true,
@@ -219,9 +236,11 @@ export const Grow = (): ReactElement => {
 export const Updates = (): ReactElement => {
   const { Config } = useConfig();
   return NavMenuItem({
-    onClick: () => window.open(Config.navigationDefaults.navigationQuickLinks.navBarUpdatesLink, '_blank'),
+    onClick: () => openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarUpdatesLink),
     itemText: Config.navigationDefaults.navigationQuickLinks.navBarUpdatesText,
     key: "updatesMenuItem",
     reducedLeftMargin: true,
   });
 };
+
+

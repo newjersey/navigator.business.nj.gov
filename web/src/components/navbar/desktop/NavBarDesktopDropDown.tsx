@@ -1,5 +1,3 @@
-import { ButtonIcon } from "@/components/ButtonIcon";
-import { getBusinessIconColor } from "@/lib/domain-logic/getBusinessIconColor";
 import analytics from "@/lib/utils/analytics";
 import { Popper, Grow, Paper, ClickAwayListener, MenuItem, MenuList } from "@mui/material";
 import { Icon } from "@/components/njwds/Icon";
@@ -8,6 +6,7 @@ import { ReactElement } from "react";
 
 
 interface Props {
+  disabled?: boolean;
   anchorRef: React.MutableRefObject<HTMLButtonElement | null>;
   open: boolean;
   textColor: "primary" | "base";
@@ -16,6 +15,7 @@ interface Props {
   isAuthenticated: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   handleClose: () => void;
+  icon?: ReactElement;
   subMenuElement: ReactElement;
 }
 
@@ -49,13 +49,14 @@ return (
       aria-controls={props.open ? "menu-list-grow" : undefined}
       aria-haspopup="true"
       onClick={toggleDropdown}
+      disabled={props.disabled}
     >
-      <div className={`text-bold text-${props.textColor} flex flex-align-center margin-left-1`}>
-        <ButtonIcon svgFilename={`business-${getBusinessIconColor(props.currentIndex)}`} sizePx="35px" />
+      <div className={`text-bold text-${props.textColor} flex flex-align-center`}>
+        {props.icon}
         <div className="text-base-darkest truncate-long-business-names_NavBarDesktop">
           {props.buttonAndMenuTitle}
         </div>
-        <Icon className="usa-icon--size-3">arrow_drop_down</Icon>
+        {!props.disabled && <Icon className="usa-icon--size-3">arrow_drop_down</Icon>}
       </div>
     </button>
 

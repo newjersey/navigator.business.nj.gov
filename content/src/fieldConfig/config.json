@@ -47,20 +47,21 @@
   "navigationDefaults": {
     "navBarUnnamedDbaBusinessText": "Unnamed DBA",
     "navigationQuickLinks": {
-      "navBarMobileQuickLinksTitle": "Business.NJ.gov",
       "navBarOperateText": "Operate",
+      "navBarSearchText": "Search",
       "navBarPlanText": "Plan",
       "navBarUpdatesText": "Updates",
       "navBarStartLink": "https://business.nj.gov/start",
       "navBarOperateLink": "https://business.nj.gov/operate",
       "navBarGrowText": "Grow",
-      "navBarSearchText": "Search",
       "navBarSearchLink": "https://business.nj.gov/search",
       "navBarPlanLink": "https://business.nj.gov/plan",
       "navBarUpdatesLink": "https://business.nj.gov/recent",
+      "navBarMobileQuickLinksTitle": "Business.NJ.gov",
       "navBarGrowLink": "https://business.nj.gov/grow",
       "navBarStartText": "Start"
     },
+    "landingPageDropDownTitle": "My Account",
     "navBarUnnamedOwnedBusinessText": "Unnamed Business",
     "needsAccountSnackbarTitle": "Link with myNewJersey to Save Your Progress",
     "accountSuccessSnackbarTitleExistingAccount": "Your myNewJersey Account is Linked",

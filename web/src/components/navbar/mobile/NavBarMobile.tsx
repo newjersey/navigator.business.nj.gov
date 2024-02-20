@@ -1,6 +1,6 @@
 import { NavBarLogoOnly } from "@/components/navbar/NavBarLogoOnly";
 import { NavBarMobileAccountSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileAccountSlideOutMenu";
-import { NavBarMobileHamburgerSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileHamburgerSlideOutMenu";
+import { NavBarMobileQuickLinksSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileQuickLinksSlideOutMenu";
 import { NavBarMobileHomeLogo } from "@/components/navbar/mobile/NavBarMobileHomeLogo";
 import { NavBarMobileWrapper } from "@/components/navbar/mobile/NavBarMobileWrapper";
 import {
@@ -12,11 +12,11 @@ import {
   ProfileMenuItem,
   RegisterMenuItem,
 } from "@/components/navbar/shared-submenu-components";
-import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { Task } from "@/lib/types/types";
 import { ReactElement, useState } from "react";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 
 interface Props {
   scrolled: boolean;
@@ -32,6 +32,7 @@ interface Props {
 
 export const NavBarMobile = (props: Props): ReactElement => {
   const { business } = useUserData();
+  const { Config } = useConfig();
 
 
   const navBarBusinessTitle = getNavBarBusinessTitle(business, props.isAuthenticated);
@@ -73,9 +74,9 @@ export const NavBarMobile = (props: Props): ReactElement => {
           closeSideBar={closeSideBar}
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
-          title={""}
+          title={Config.navigationDefaults.landingPageDropDownTitle}
         />
-        <NavBarMobileHamburgerSlideOutMenu />
+        <NavBarMobileQuickLinksSlideOutMenu  />
       </NavBarMobileWrapper>
     );
   } else if (props.currentlyOnboarding) {
@@ -101,7 +102,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
           closeSideBar={closeSideBar}
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
-          title={""}
+          title={Config.navigationDefaults.navBarGuestText}
         />
       </NavBarMobileWrapper>
     );
@@ -131,9 +132,9 @@ export const NavBarMobile = (props: Props): ReactElement => {
           closeSideBar={closeSideBar}
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
-          title={""}
+          title={navBarBusinessTitle}
         />
-        <NavBarMobileHamburgerSlideOutMenu />
+        <NavBarMobileQuickLinksSlideOutMenu />
       </NavBarMobileWrapper>
     );
   } else {
@@ -161,9 +162,9 @@ export const NavBarMobile = (props: Props): ReactElement => {
           closeSideBar={closeSideBar}
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
-          title={""}
+          title={Config.navigationDefaults.navBarGuestText}
         />
-        <NavBarMobileHamburgerSlideOutMenu  />
+        <NavBarMobileQuickLinksSlideOutMenu  />
       </NavBarMobileWrapper>
     );
   }

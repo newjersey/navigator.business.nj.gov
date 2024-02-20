@@ -10,7 +10,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 
 
 
-export const NavBarMobileHamburgerSlideOutMenu = (): ReactElement => {
+export const NavBarMobileQuickLinksSlideOutMenu = (): ReactElement => {
 
 
 
@@ -84,7 +84,7 @@ export const NavBarMobileHamburgerSlideOutMenu = (): ReactElement => {
                   <Updates/>
 
 
-                <hr className="margin-0 hr-2px" key="end-break" />
+                  <hr className="margin-0 hr-2px" key="end-break" />
               </MenuList>
 
 

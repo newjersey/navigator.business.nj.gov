@@ -84,3 +84,21 @@ $icon-offset: 45px;
   margin-right: 15px;
   max-width: 230px;
 }
+
+.search-outline {
+  width: 28px; /* Adjust as needed */
+  height: 28px; /* Adjust as needed */
+  border-radius: 50%; /* Ensures the shape is a circle */
+  background-color: $base-lightest; /* Dark color for the circle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.nav-bar-dropdown-account-icon {
+  font-size: 28px;
+  margin-left: -5px;
+  margin-right: 10px;
+  color: $accent-cool-darker;
+}

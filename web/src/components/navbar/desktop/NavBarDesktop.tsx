@@ -1,19 +1,24 @@
 import { AuthButton } from "@/components/AuthButton";
+import { ButtonIcon } from "@/components/ButtonIcon";
 import { NavBarDesktopDropDown } from "@/components/navbar/desktop/NavBarDesktopDropDown";
 import { NavBarDesktopHomeLogo } from "@/components/navbar/desktop/NavBarDesktopHomeLogo";
+import { NavBarDesktopQuickLinks } from "@/components/navbar/desktop/NavBarDesktopQuickLinks";
 import { NavBarDesktopWrapper } from "@/components/navbar/desktop/NavBarDesktopWrapper";
 import { NavBarLogoOnly } from "@/components/navbar/NavBarLogoOnly";
 import {
   AddBusinessItem,
+  GetStartedMenuItem,
   LogoutMenuItem,
   MyNjMenuItem,
   ProfileMenuItem,
+  RegisterMenuItem,
 } from "@/components/navbar/shared-submenu-components";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getBusinessIconColor } from "@/lib/domain-logic/getBusinessIconColor";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { orderBusinessIdsByDateCreated } from "@/lib/domain-logic/orderBusinessIdsByDateCreated";
 import { ROUTES } from "@/lib/domain-logic/routes";
@@ -69,33 +74,28 @@ export const NavBarDesktop = (props: Props): ReactElement => {
     return (
       <NavBarDesktopWrapper>
         <NavBarDesktopHomeLogo previousBusinessId={undefined} />
-        <div>
-          <UnStyledButton
-            onClick={(): void => {
-              analytics.event.landing_page_navbar_register.click.go_to_onboarding();
-              router.push(ROUTES.onboarding);
-            }}
-          >
-            {Config.navigationDefaults.registerButton}
-          </UnStyledButton>
-          <span className="margin-left-2">
+        <div className={"display-flex flex-row flex-align-center"}>
+          <NavBarDesktopQuickLinks/>
+          <div className="margin-x-1 text-base-lighter">|</div>
+          <span className="margin-left-1 margin-right-105">
             <AuthButton landing />
           </span>
-        <NavBarDesktopDropDown
-          currentIndex={currentIndex}
-          anchorRef={anchorRef}
-          open={open}
-          setOpen={setOpen}
-          buttonAndMenuTitle={navBarBusinessTitle}
-          isAuthenticated={props.isAuthenticated}
-          handleClose={handleClose}
-          textColor={textColor}
-          subMenuElement={
-          <>
-
-          </>
-          }
-        />
+          <NavBarDesktopDropDown
+            currentIndex={currentIndex}
+            anchorRef={anchorRef}
+            open={open}
+            setOpen={setOpen}
+            buttonAndMenuTitle={Config.navigationDefaults.landingPageDropDownTitle}
+            isAuthenticated={props.isAuthenticated}
+            handleClose={handleClose}
+            textColor={textColor}
+            icon={<Icon className="nav-bar-dropdown-account-icon">account_circle</Icon>}
+            subMenuElement={
+            <>
+              <GetStartedMenuItem/>
+            </>
+            }
+          />
         </div>
       </NavBarDesktopWrapper>
     );
@@ -104,7 +104,12 @@ export const NavBarDesktop = (props: Props): ReactElement => {
     return (
       <NavBarDesktopWrapper>
         <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} />
+        <div className={"display-flex flex-row flex-align-center"}>
+        <span className="margin-left-1 margin-right-105">
+          <AuthButton landing />
+        </span>
         <NavBarDesktopDropDown
+          disabled={true}
           currentIndex={currentIndex}
           anchorRef={anchorRef}
           open={open}
@@ -113,8 +118,10 @@ export const NavBarDesktop = (props: Props): ReactElement => {
           isAuthenticated={props.isAuthenticated}
           handleClose={handleClose}
           textColor={textColor}
+          icon={<div className={"margin-left-2px display-flex"}><ButtonIcon svgFilename={`business-${getBusinessIconColor(currentIndex)}`} sizePx="35px" /></div>}
           subMenuElement={<></>}
         />
+        </div>
       </NavBarDesktopWrapper>
     );
   } else if (props.isAuthenticated) {
@@ -122,24 +129,29 @@ export const NavBarDesktop = (props: Props): ReactElement => {
     return (
       <NavBarDesktopWrapper>
         <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} />
-        <NavBarDesktopDropDown
-          currentIndex={currentIndex}
-          anchorRef={anchorRef}
-          open={open}
-          setOpen={setOpen}
-          buttonAndMenuTitle={navBarBusinessTitle}
-          isAuthenticated={props.isAuthenticated}
-          handleClose={handleClose}
-          textColor={textColor}
-          subMenuElement={
-            <>
-              <ProfileMenuItem handleClose={handleClose} />
-              <AddBusinessItem handleClose={handleClose} />
-              <MyNjMenuItem handleClose={handleClose} />
-              <LogoutMenuItem handleClose={handleClose} />
-            </>
-          }
-        />
+        <div className={"display-flex flex-row flex-align-center"}>
+          <NavBarDesktopQuickLinks/>
+          <div className="margin-x-1 text-base-lighter">|</div>
+          <NavBarDesktopDropDown
+            currentIndex={currentIndex}
+            anchorRef={anchorRef}
+            open={open}
+            setOpen={setOpen}
+            buttonAndMenuTitle={navBarBusinessTitle}
+            isAuthenticated={props.isAuthenticated}
+            handleClose={handleClose}
+            textColor={textColor}
+            icon={<div className={"margin-left-2px display-flex"}><ButtonIcon svgFilename={`business-${getBusinessIconColor(currentIndex)}`} sizePx="35px" /></div>}
+            subMenuElement={
+              <>
+                <ProfileMenuItem handleClose={handleClose} />
+                <AddBusinessItem handleClose={handleClose} />
+                <MyNjMenuItem handleClose={handleClose} />
+                <LogoutMenuItem handleClose={handleClose} />
+              </>
+            }
+          />
+        </div>
       </NavBarDesktopWrapper>
     );
   } else {
@@ -147,21 +159,30 @@ export const NavBarDesktop = (props: Props): ReactElement => {
     return (
       <NavBarDesktopWrapper>
         <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} />
-        <NavBarDesktopDropDown
-          currentIndex={currentIndex}
-          anchorRef={anchorRef}
-          open={open}
-          setOpen={setOpen}
-          buttonAndMenuTitle={navBarBusinessTitle}
-          isAuthenticated={props.isAuthenticated}
-          handleClose={handleClose}
-          textColor={textColor}
-          subMenuElement={
-            <>
-              <ProfileMenuItem handleClose={handleClose} />
-            </>
-          }
-        />
+        <div className={"display-flex flex-row flex-align-center"}>
+          <NavBarDesktopQuickLinks/>
+          <div className="margin-x-1 text-base-lighter">|</div>
+          <span className="margin-left-1 margin-right-105">
+            <AuthButton landing />
+          </span>
+          <NavBarDesktopDropDown
+            currentIndex={currentIndex}
+            anchorRef={anchorRef}
+            open={open}
+            setOpen={setOpen}
+            buttonAndMenuTitle={navBarBusinessTitle}
+            isAuthenticated={props.isAuthenticated}
+            handleClose={handleClose}
+            textColor={textColor}
+            icon={<div className={"margin-left-2px display-flex"}><ButtonIcon svgFilename={`business-${getBusinessIconColor(currentIndex)}`} sizePx="35px" /></div>}
+            subMenuElement={
+              <>
+                <ProfileMenuItem handleClose={handleClose} />
+                <RegisterMenuItem/>
+              </>
+            }
+          />
+        </div>
       </NavBarDesktopWrapper>
     );
   }
