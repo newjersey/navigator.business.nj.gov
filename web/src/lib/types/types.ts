@@ -222,6 +222,15 @@ export interface QuickActionLink extends QuickAction {
   externalRoute: string;
 }
 
+export interface QuickActionLicenseReinstatement extends QuickAction {
+  urlSlug: string;
+  contentMd: string;
+  callToActionLink: string | undefined;
+  callToActionText: string | undefined;
+  form: string | undefined;
+  summaryDescriptionMd: string;
+}
+
 export type FundingType =
   | "tax credit"
   | "loan"

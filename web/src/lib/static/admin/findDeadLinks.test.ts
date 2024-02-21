@@ -43,7 +43,9 @@ describe("findDeadLinks", () => {
       // @ts-ignore
       .mockReturnValueOnce(["quickActionLinks.md"])
       // @ts-ignore
-      .mockReturnValueOnce(["quickActionTasks.md"]);
+      .mockReturnValueOnce(["quickActionTasks.md"])
+      // @ts-ignore
+      .mockReturnValueOnce(["quickActionLicenseReinstatements.md"]);
 
     const task1 = "Task 1 contents";
     const task2 = "Task 2 contents with `contextual info|info1` in it";
@@ -66,6 +68,7 @@ describe("findDeadLinks", () => {
     const licenseTasks = "LicenseTask Content";
     const quickActionTasks = "QuickActionTask Content";
     const quickActionLinks = "QuickActionLink Content";
+    const quickActionLicenseReinstatements = "QuickActionLicenseReinstatement Content";
 
     mockedFs.readFileSync
       .mockReturnValueOnce(industry1)
@@ -87,7 +90,8 @@ describe("findDeadLinks", () => {
       .mockReturnValueOnce(licenses)
       .mockReturnValueOnce(licenseTasks)
       .mockReturnValueOnce(quickActionTasks)
-      .mockReturnValueOnce(quickActionLinks);
+      .mockReturnValueOnce(quickActionLinks)
+      .mockReturnValueOnce(quickActionLicenseReinstatements);
   });
 
   describe("findDeadTasks", () => {
@@ -123,6 +127,7 @@ describe("findDeadLinks", () => {
         "/certification/certifications": [],
         "/quick-action-links/quickActionLinks": [],
         "/quick-action-tasks/quickActionTasks": [],
+        "/quick-action-license-reinstatements/quickActionLicenseReinstatements": [],
       });
     });
   });
