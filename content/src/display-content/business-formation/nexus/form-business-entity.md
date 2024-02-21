@@ -1,6 +1,6 @@
 ---
-urlSlug: authorize-business-entity
-name: Authorize Your Business Entity
+urlSlug: form-business-entity
+name: Form Your Business Entity
 filename: form-business-entity
 displayname: form-business-entity
 id: form-business-entity
