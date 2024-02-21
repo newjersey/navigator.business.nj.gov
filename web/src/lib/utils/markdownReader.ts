@@ -7,14 +7,15 @@ import {
   FundingBusinessStage,
   FundingCertifications,
   FundingHomeBased,
-  FundingpreferenceForOpportunityZone,
   FundingProgramFrequency,
   FundingPublishStatus,
   FundingStatus,
   FundingType,
+  FundingpreferenceForOpportunityZone,
   LicenseEvent,
   MarkdownResult,
   PostOnboardingFile,
+  QuickActionLicenseReinstatement,
   QuickActionLink,
   QuickActionTask,
   TaskWithoutLinks,
@@ -79,6 +80,19 @@ export const convertQuickActionTaskMd = (
 ): QuickActionTask => {
   const matterResult = matter(quickActionTaskMdContents);
   const quickActionGrayMatter = matterResult.data as QuickActionTaskGrayMatter;
+  return {
+    contentMd: matterResult.content,
+    filename,
+    ...quickActionGrayMatter,
+  };
+};
+
+export const convertQuickActionLicenseReinstatementMd = (
+  quickActionLicenseReinstatementMdContents: string,
+  filename: string
+): QuickActionLicenseReinstatement => {
+  const matterResult = matter(quickActionLicenseReinstatementMdContents);
+  const quickActionGrayMatter = matterResult.data as QuickActionLicenseReinstatementGrayMatter;
   return {
     contentMd: matterResult.content,
     filename,
@@ -178,6 +192,19 @@ type LicenseGrayMatter = {
   urlSlug: string;
   callToActionLink: string;
   callToActionText: string;
+};
+
+type QuickActionLicenseReinstatementGrayMatter = {
+  name: string;
+  urlSlug: string;
+  callToActionLink: string;
+  callToActionText: string;
+  form: string;
+  icon: string;
+  industryIds: string[];
+  sectorIds: string[];
+  applyToAllUsers: boolean;
+  summaryDescriptionMd: string;
 };
 
 type QuickActionLinkGrayMatter = {

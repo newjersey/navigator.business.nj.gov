@@ -1,5 +1,5 @@
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { QuickActionLink, QuickActionTask } from "@/lib/types/types";
+import { QuickActionLicenseReinstatement, QuickActionLink, QuickActionTask } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useRouter } from "next/router";
 import { ReactElement, ReactNode } from "react";
@@ -14,7 +14,12 @@ interface TaskProps {
   quickAction: QuickActionTask;
 }
 
-export const QuickActionTile = (props: LinkProps | TaskProps): ReactElement => {
+interface LicenseReinstatementProps {
+  type: "license";
+  quickAction: QuickActionLicenseReinstatement;
+}
+
+export const QuickActionTile = (props: LinkProps | LicenseReinstatementProps | TaskProps): ReactElement => {
   const router = useRouter();
 
   const routeToAction = (): void => {
@@ -50,7 +55,7 @@ export const QuickActionTile = (props: LinkProps | TaskProps): ReactElement => {
           {tileContents}
         </a>
       )}
-      {props.type === "task" && (
+      {(props.type === "task" || props.type === "license") && (
         <button className={classNames} onClick={routeToAction}>
           {tileContents}
         </button>
