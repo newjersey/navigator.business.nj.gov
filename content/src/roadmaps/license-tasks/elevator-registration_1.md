@@ -1,13 +1,11 @@
 ---
-notesMd: >-
+notesMd: >+
   Muni planning doc:
   https://docs.google.com/document/d/1xhIawax94xxdPMIjFlUml6wK01x6KU1ki5T65zPv98c/edit?usp=sharing
 
 
   Final copy approved by SMEs: https://docs.google.com/document/d/1fv1oaXnX5oEO2EFiAyL3bl8sAETFSLi-LCCq_mGdrKg/edit?usp=sharing 
 
-
-  This is draft content for Sam, not approved final copy
 filename: elevator-registration
 displayname: elevator-registration
 urlSlug: elevator-registration
