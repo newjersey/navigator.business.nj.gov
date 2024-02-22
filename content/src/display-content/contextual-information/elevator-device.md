@@ -1,7 +1,10 @@
 ---
-notesMd: "[Muni planning
-  doc](https://docs.google.com/document/d/1xhIawax94xxdPMIjFlUml6wK01x6KU1ki5T6\
-  5zPv98c/edit?usp=sharing)"
+notesMd: >-
+  [Muni planning
+  doc](https://docs.google.com/document/d/1xhIawax94xxdPMIjFlUml6wK01x6KU1ki5T65zPv98c/edit?usp=sharing)
+
+
+  Note: Consider adding contextual info for the term "dumbwaiter" - can check with Don if that is something that would need to be explained.
 header: Elevator Device
 slug: elevator-device
 displayname: elevator-device
