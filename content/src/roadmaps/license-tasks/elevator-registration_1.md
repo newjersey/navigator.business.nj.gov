@@ -12,8 +12,8 @@ urlSlug: elevator-registration
 name: Register Your Elevator Device
 webflowName: Elevator Registration
 summaryDescriptionMd: >-
-  If you own a space with a newly-installed `elevator device(s)|elevator-device`
-  or [plan on installing
+  If you own a space and installed an `elevator device(s)|elevator-device` or
+  [plan on installing
   one](https://www.nj.gov/dca/codes/publications/pdf_elevator/elvr_safe_pr_perm_pro.pdf),
   you must register the device(s) with the State before you can operate it. The
   device(s) must pass all installation inspections before you can apply to
