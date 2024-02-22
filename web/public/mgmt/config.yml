@@ -2166,9 +2166,24 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-      - { label: "Filename", name: "filename", widget: "write-once-read-only" }
-      - { label: "Display Name", name: "displayname", widget: "nospace" }
-      - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+      - {
+          label: "Filename",
+          name: "filename",
+          widget: "write-once-read-only",
+          hint: "This is the name of the file in the code only.",
+        }
+      - {
+          label: "Display Name",
+          name: "displayname",
+          widget: "nospace",
+          hint: "This the name displayed internally in CMS list.",
+        }
+      - {
+          label: "Url Slug",
+          name: "urlSlug",
+          widget: "nospace",
+          hint: "Lowercase, no spaces, add hyphens between words.",
+        }
       - { label: "Title (Navigator)", name: "name", widget: "string" }
       - { label: "Title (Webflow)", name: "webflowName", widget: "string" }
       - {
