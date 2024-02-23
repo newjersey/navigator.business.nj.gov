@@ -11,7 +11,8 @@ interface Props {
   open: boolean;
   textColor: "primary" | "base";
   currentIndex: number;
-  buttonAndMenuTitle: string;
+  menuButtonTitle: string;
+  dropDownTitle: string;
   isAuthenticated: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   handleClose: () => void;
@@ -54,7 +55,7 @@ return (
       <div className={`text-bold text-${props.textColor} flex flex-align-center`}>
         {props.icon}
         <div className="text-base-darkest truncate-long-business-names_NavBarDesktop">
-          {props.buttonAndMenuTitle}
+          {props.menuButtonTitle}
         </div>
         {!props.disabled && <Icon className="usa-icon--size-3">arrow_drop_down</Icon>}
       </div>
@@ -92,7 +93,7 @@ return (
                       className={"display-flex padding-y-1 menu-item-title"}
                       disabled={true}
                     >
-                      <div className="text-bold">{props.buttonAndMenuTitle}</div>
+                      <div className="text-bold">{props.dropDownTitle}</div>
                     </MenuItem>
                     <hr className="margin-0 hr-2px" key="name-break" />
                     {props.subMenuElement}

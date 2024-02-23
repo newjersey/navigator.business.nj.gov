@@ -30,7 +30,7 @@ export const NavBarMobileQuickLinksSlideOutMenu = (): ReactElement => {
     <>
           <button
             className="right-nav-menu-button radius-0"
-            data-testid="nav-menu-open"
+            data-testid="nav-menu-mobile-quick-link-open"
             aria-label="open menu"
             onClick={(): void => {
               analytics.event.mobile_hamburger_icon.click.open_mobile_menu();
@@ -76,7 +76,7 @@ export const NavBarMobileQuickLinksSlideOutMenu = (): ReactElement => {
                   </button>
 
                   <Search/>
-                  <hr className="margin-0 margin-x-2 hr-1px" key="end-break" />
+                  <hr className="margin-0 margin-x-2 hr-2px" key="middle-break" />
                   <Plan/>
                   <Start/>
                   <Operate/>
@@ -96,6 +96,7 @@ export const NavBarMobileQuickLinksSlideOutMenu = (): ReactElement => {
 
           <div
             className={`right-nav-overlay ${sidebarIsOpen ? "is-visible" : ""}`}
+            data-testid="nav-menu-mobile-quick-link-close"
             aria-hidden="true"
             onClick={(): void => {
               analytics.event.mobile_menu.click_outside.close_mobile_menu();

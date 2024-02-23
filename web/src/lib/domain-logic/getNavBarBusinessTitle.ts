@@ -11,7 +11,7 @@ export const getNavBarBusinessTitle = (
 ): string => {
   const Config = getMergedConfig();
   if (!business || !isAuthenticated) {
-    return Config.navigationDefaults.navBarGuestText;
+    return Config.navigationDefaults.navBarGuestBusinessText;
   }
 
   const { businessName, tradeName, legalStructureId, industryId, needsNexusDbaName, nexusDbaName } =

@@ -3819,7 +3819,8 @@ collections:
               - { label: Landing Page Drop Down Title, name: landingPageDropDownTitle, widget: string }
               - { label: Task Page Nav Bar Heading, name: taskPageNavBarHeading, widget: string }
               - { label: Profile Link Text, name: profileLinkText, widget: string }
-              - { label: NavBar Guest Profile text, name: navBarGuestText, widget: string }
+              - { label: NavBar Guest Business text, name: navBarGuestBusinessText, widget: string }
+              - { label: NavBar Guest Account text, name: navBarGuestAccountText, widget: string }
               - {
                   label: Navbar Guest dropdown registration text,
                   name: navBarGuestRegistrationText,

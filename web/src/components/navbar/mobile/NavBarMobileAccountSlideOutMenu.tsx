@@ -21,14 +21,11 @@ interface Props {
 
 export const NavBarMobileAccountSlideOutMenu = (props: Props): ReactElement => {
 
-
-
-
   return (
     <>
           <button
             className="right-nav-menu-button radius-0"
-            data-testid="nav-menu-open"
+            data-testid="nav-menu-mobile-account-open"
             aria-label="open menu"
             onClick={(): void => {
               analytics.event.mobile_hamburger_icon.click.open_mobile_menu();

@@ -1,19 +1,20 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { openInNewTab } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 
 export const NavBarDesktopQuickLinks = (): ReactElement => {
   const { Config } = useConfig();
 
-  const sharedMargins = "margin-x-1"
+  const sharedMargins = "margin-right-3"
 
   return (
     <div className={"display-flex flex-row flex-align-center"}>
       <div className={sharedMargins}>
         <UnStyledButton
-          onClick={(): Window | null =>
-            window.open(Config.navigationDefaults.navigationQuickLinks.navBarPlanLink, "_blank")
+          onClick={(): void =>
+            openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarPlanLink)
           }
         >
           {Config.navigationDefaults.navigationQuickLinks.navBarPlanText}
@@ -22,8 +23,8 @@ export const NavBarDesktopQuickLinks = (): ReactElement => {
 
       <div className={sharedMargins}>
         <UnStyledButton
-          onClick={(): Window | null =>
-            window.open(Config.navigationDefaults.navigationQuickLinks.navBarStartLink, "_blank")
+          onClick={(): void =>
+            openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarStartLink)
           }
         >
           {Config.navigationDefaults.navigationQuickLinks.navBarStartText}
@@ -32,8 +33,8 @@ export const NavBarDesktopQuickLinks = (): ReactElement => {
 
       <div className={sharedMargins}>
         <UnStyledButton
-          onClick={(): Window | null =>
-            window.open(Config.navigationDefaults.navigationQuickLinks.navBarOperateLink, "_blank")
+          onClick={(): void =>
+            openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarOperateLink)
           }
         >
           {Config.navigationDefaults.navigationQuickLinks.navBarOperateText}
@@ -42,8 +43,8 @@ export const NavBarDesktopQuickLinks = (): ReactElement => {
 
       <div className={sharedMargins}>
         <UnStyledButton
-          onClick={(): Window | null =>
-            window.open(Config.navigationDefaults.navigationQuickLinks.navBarGrowLink, "_blank")
+          onClick={(): void =>
+            openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarGrowLink)
           }
         >
           {Config.navigationDefaults.navigationQuickLinks.navBarGrowText}
@@ -52,16 +53,24 @@ export const NavBarDesktopQuickLinks = (): ReactElement => {
 
       <div className={sharedMargins}>
         <UnStyledButton
-          onClick={(): Window | null =>
-            window.open(Config.navigationDefaults.navigationQuickLinks.navBarUpdatesLink, "_blank")
+          onClick={(): void =>
+            openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarUpdatesLink)
           }
         >
           {Config.navigationDefaults.navigationQuickLinks.navBarUpdatesText}
         </UnStyledButton>
       </div>
 
-      <div className={`${sharedMargins} search-outline`}>
-        <Icon>search</Icon>
+      <div
+
+      className={`${sharedMargins} search-outline`}
+      >
+        <UnStyledButton onClick={(): void =>
+            openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarSearchLink)
+          }
+          dataTestid={"navbar-search-icon"}>
+          <Icon >search</Icon>
+        </UnStyledButton>
       </div>
     </div>
   );

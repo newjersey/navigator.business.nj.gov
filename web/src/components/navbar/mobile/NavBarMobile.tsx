@@ -102,7 +102,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
           closeSideBar={closeSideBar}
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
-          title={Config.navigationDefaults.navBarGuestText}
+          title={Config.navigationDefaults.navBarGuestBusinessText}
         />
       </NavBarMobileWrapper>
     );
@@ -162,7 +162,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
           closeSideBar={closeSideBar}
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
-          title={Config.navigationDefaults.navBarGuestText}
+          title={Config.navigationDefaults.navBarGuestAccountText}
         />
         <NavBarMobileQuickLinksSlideOutMenu  />
       </NavBarMobileWrapper>
