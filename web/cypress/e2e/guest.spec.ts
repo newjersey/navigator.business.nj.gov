@@ -51,7 +51,7 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     cy.get(`[id="plan-header"]`).click({ force: true });
     cy.get(`[data-step="1"]`).should("exist");
     cy.get(`[data-task="business-plan"]`).should("exist");
-    cy.get(`[data-task="research-insurance-needs"]`).should("exist");
+    cy.get(`[data-task="get-insurance-home-contractor"]`).should("exist");
 
     // step 3
     cy.get(`[id="start-content"]`).should("be.visible");
