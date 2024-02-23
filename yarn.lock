@@ -4450,7 +4450,7 @@ __metadata:
     tsconfig-paths-webpack-plugin: 4.1.0
     typescript: 5.3.3
     uuid: 9.0.1
-    webpack: 5.90.1
+    webpack: 5.90.3
     webpack-node-externals: 3.0.0
     winston: 3.11.0
     winston-cloudwatch: 6.2.0
@@ -4662,7 +4662,7 @@ __metadata:
     unified: 10.1.2
     unist-util-visit: 4.1.2
     uuid: 9.0.1
-    webpack: 5.90.1
+    webpack: 5.90.3
     webpack-node-externals: 3.0.0
     winston: 3.11.0
     winston-cloudwatch: 6.2.0
@@ -4840,7 +4840,7 @@ __metadata:
     typescript: 5.3.3
     unified: 10.1.2
     unist-util-visit: 4.1.2
-    webpack: 5.90.1
+    webpack: 5.90.3
   languageName: unknown
   linkType: soft
 
@@ -35446,9 +35446,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:5, webpack@npm:5.90.1, webpack@npm:^5":
-  version: 5.90.1
-  resolution: "webpack@npm:5.90.1"
+"webpack@npm:5, webpack@npm:5.90.3, webpack@npm:^5":
+  version: 5.90.3
+  resolution: "webpack@npm:5.90.3"
   dependencies:
     "@types/eslint-scope": ^3.7.3
     "@types/estree": ^1.0.5
@@ -35479,7 +35479,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: a7be844d5720a0c6282fec012e6fa34b1137dff953c5d48bf2ef066a6c27c1dbc92a9b9effc05ee61c9fe269499266db9782073f2d82a589d3c5c966ffc56584
+  checksum: de0c824ac220f41cc1153ac33e081d46260b104c4f2fda26f011cdf7a73f74cc091f288cb1fc16f88a36e35bac44e0aa85fc9922fdf3109dfb361f46b20f3fcc
   languageName: node
   linkType: hard
 
