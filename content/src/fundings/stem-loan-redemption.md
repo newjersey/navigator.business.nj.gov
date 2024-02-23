@@ -19,7 +19,8 @@ fundingType: hiring and employee training support
 programFrequency: ongoing
 status: rolling application
 programPurpose: In State
-agency: []
+agency:
+  - njeda
 agencyContact: LoanRedemption@hesaa.org
 businessStage: both
 employeesRequired: n/a
