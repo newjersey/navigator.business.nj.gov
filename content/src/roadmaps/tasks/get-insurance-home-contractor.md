@@ -6,11 +6,11 @@ summaryDescriptionMd: >-
 
 
   To find an insurance broker, speak to your network, Chamber of Commerce, or supplier. Often, the best way to find a broker is through word of mouth.
-urlSlug: insurance-policy
+urlSlug: insurance-policy-home-contractor
 filename: get-insurance-home-contractor
 displayname: insurance-policy-home-contractor
 name: Get an Insurance Policy
-id: research-insurance-needs
+id: get-insurance-home-contractor
 callToActionLink: ""
 callToActionText: ""
 ---
