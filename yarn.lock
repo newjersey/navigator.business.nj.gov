@@ -4547,7 +4547,7 @@ __metadata:
     "@types/lodash": 4.14.202
     "@types/mdast": 4.0.3
     "@types/node": 16.18.82
-    "@types/react": 18.2.55
+    "@types/react": 18.2.57
     "@types/react-dom": 18.2.19
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.5
@@ -4757,7 +4757,7 @@ __metadata:
     "@types/lodash": 4.14.202
     "@types/mdast": 4.0.3
     "@types/node": 16.18.82
-    "@types/react": 18.2.55
+    "@types/react": 18.2.57
     "@types/react-dom": 18.2.19
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.5
@@ -10779,7 +10779,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/user-event@npm:14.5.2, @testing-library/user-event@npm:^14.3.0":
+"@testing-library/user-event@npm:14.5.2":
   version: 14.5.2
   resolution: "@testing-library/user-event@npm:14.5.2"
   peerDependencies:
@@ -11494,14 +11494,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:18.2.55, @types/react@npm:>=16":
-  version: 18.2.55
-  resolution: "@types/react@npm:18.2.55"
+"@types/react@npm:*, @types/react@npm:18.2.57, @types/react@npm:>=16":
+  version: 18.2.57
+  resolution: "@types/react@npm:18.2.57"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: a8eb4fa77f73831b9112d4f11a7006217dc0740361649b9b0da3fd441d151a9cd415d5d68b91c0af4e430e063424d301c77489e5edaddc9f711c4e46cf9818a5
+  checksum: 01e7a3424162468428f3b28acec5e5c6cd1e26775ff605d0f46c883dea2d835924873d36b9ea0b75e40c9593aa78ca56a8ccde66bd58dbf6ecb0dd95af28609d
   languageName: node
   linkType: hard
 
@@ -29944,10 +29944,9 @@ __metadata:
   linkType: hard
 
 "react-slick@npm:^0.30.0":
-  version: 0.30.1
-  resolution: "react-slick@npm:0.30.1"
+  version: 0.30.2
+  resolution: "react-slick@npm:0.30.2"
   dependencies:
-    "@testing-library/user-event": ^14.3.0
     classnames: ^2.2.5
     enquire.js: ^2.1.6
     json2mq: ^0.2.0
@@ -29956,7 +29955,7 @@ __metadata:
   peerDependencies:
     react: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: 1ecf029e8eeb27122425c3fc477cd74edabcae8ebea6cc1ade3b1598c69df49b8748818346e155b21bff79ab4e1dd209719ab5d50984d2522eaf370d149dd9b4
+  checksum: 7d415c745ca7d9d19947a6ce62ab866757310fbaf0941b14479cf2779f8db8951b037ab6a357a2d013518dd50fd41080dac7e7949cb201b4c6431f13c6e8975f
   languageName: node
   linkType: hard
 
