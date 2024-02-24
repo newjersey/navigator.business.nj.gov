@@ -168,8 +168,7 @@ export const expectLocationNotSavedAndError = (): void => {
 export const getForeignNexusProfileFields = (businessPersona: BusinessPersona): Partial<ProfileData> => {
   return businessPersona === "FOREIGN"
     ? {
-        foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
-        nexusLocationInNewJersey: true,
+        foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
       }
     : {};
 };

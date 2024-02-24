@@ -1,7 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
-import { markdownToText } from "@/test/helpers/helpers-utilities";
+import { randomHomeBasedIndustry } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentBusiness,
@@ -14,11 +14,10 @@ import {
   renderPage,
   runNonprofitOnboardingTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
-import { ProfileData, generateProfileData } from "@businessnjgovnavigator/shared/";
-import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
+import { ProfileData, emptyIndustrySpecificData, generateProfileData } from "@businessnjgovnavigator/shared/";
 import { generateBusiness, generateUserDataForBusiness } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { act, screen, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -191,9 +190,7 @@ describe("onboarding - foreign business", () => {
     it("doesn't update user data when none is selected and submitted", async () => {
       const { page } = renderPage({ userData });
       page.checkByLabelText(none);
-      act(() => {
-        return page.clickNext();
-      });
+      page.clickNext();
 
       await waitFor(() => {
         expect(userDataWasNotUpdated()).toBe(true);
@@ -212,9 +209,7 @@ describe("onboarding - foreign business", () => {
     it("navigates to the unsupported page when the foreign business type is none", async () => {
       const { page } = renderPage({ userData });
       page.checkByLabelText(none);
-      act(() => {
-        return page.clickNext();
-      });
+      page.clickNext();
       await waitFor(() => {
         return expect(mockPush).toHaveBeenCalledWith({ pathname: ROUTES.unsupported, query: {} });
       });
@@ -307,18 +302,35 @@ describe("onboarding - foreign business", () => {
     });
 
     it("displays industry question", async () => {
+      renderPage({ userData });
+      expect(screen.getByLabelText("Industry")).toBeInTheDocument();
+    });
+
+    it("sets homeBasedBusiness to false if business is foreign nexus with location in NJ", async () => {
+      const userData = generateTestUserData({
+        ...emptyIndustrySpecificData,
+        businessPersona: "FOREIGN",
+        foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
+        industryId: randomHomeBasedIndustry(),
+        homeBasedBusiness: true,
+      });
+      useMockRouter({ isReady: true, query: { page: "3" } });
       const { page } = renderPage({ userData });
-      page.selectByText("Industry", "All Other Businesses");
-      await page.visitStep(4);
-      expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
+      fireEvent.change(screen.getByLabelText("Industry"), {
+        target: { value: "acupuncture" },
+      });
+      fireEvent.click(screen.getByText("Acupuncture"));
+      page.clickNext();
+      await waitFor(() => {
+        expect(currentBusiness().profileData.homeBasedBusiness).toBe(false);
+      });
     });
 
     it("prevents user from moving past Step 3 if you have not selected an industry", async () => {
       useMockRouter({ isReady: true, query: { page: "3" } });
       const { page } = renderPage({ userData });
-      act(() => {
-        return page.clickNext();
-      });
+      page.clickNext();
+
       expect(screen.getByTestId("step-3")).toBeInTheDocument();
       expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
@@ -335,10 +347,7 @@ describe("onboarding - foreign business", () => {
         });
         useMockRouter({ isReady: true, query: { page: "3" } });
         const { page } = renderPage({ userData });
-
-        act(() => {
-          page.clickNext();
-        });
+        page.clickNext();
         expect(screen.getByTestId("step-3")).toBeInTheDocument();
         expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
         expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
@@ -346,8 +355,8 @@ describe("onboarding - foreign business", () => {
       }
     );
 
-    it.each(industryIdsWithRequiredEssentialQuestion)(
-      "allows user to move past Step 2 when you have selected an industry %s and answered the essential question",
+    it.each([industryIdsWithRequiredEssentialQuestion])(
+      "allows user to move past Step 3 when you have selected an industry %s and answered the essential question",
       async (industryId) => {
         const userData = generateTestUserData({
           businessPersona: "FOREIGN",
@@ -359,9 +368,11 @@ describe("onboarding - foreign business", () => {
         const { page } = renderPage({ userData });
 
         page.chooseEssentialQuestionRadio(industryId, 0);
-        await page.visitStep(4);
+        page.clickNext();
 
-        expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
+        await waitFor(() => {
+          expect(mockPush).toHaveBeenCalledTimes(0);
+        });
       }
     );
 
@@ -376,67 +387,13 @@ describe("onboarding - foreign business", () => {
         });
         useMockRouter({ isReady: true, query: { page: "3" } });
         const { page } = renderPage({ userData });
-
-        act(() => {
-          page.clickNext();
-        });
+        page.clickNext();
         expect(screen.getByTestId("step-3")).toBeInTheDocument();
         expect(screen.getAllByText(Config.siteWideErrorMessages.errorRadioButton)[0]).toBeInTheDocument();
         page.chooseEssentialQuestionRadio(industryId, 0);
         expect(screen.queryByText(Config.siteWideErrorMessages.errorRadioButton)).not.toBeInTheDocument();
       }
     );
-  });
-
-  describe("Nexus - step 4", () => {
-    let userData: UserData;
-
-    beforeEach(() => {
-      userData = generateTestUserData({
-        industryId: "generic",
-        legalStructureId: "limited-liability-company",
-        businessPersona: "FOREIGN",
-        foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
-        municipality: undefined,
-        homeBasedBusiness: undefined,
-      });
-      useMockRouter({ isReady: true, query: { page: "4" } });
-    });
-
-    it("displays Location In New Jersey question", () => {
-      renderPage({ userData });
-      expect(
-        screen.getByText(
-          markdownToText(Config.profileDefaults.fields.nexusLocationInNewJersey.default.header)
-        )
-      ).toBeInTheDocument();
-    });
-
-    it("sets homeBasedBusiness to false when YES is selected for Location In New Jersey", async () => {
-      const { page } = renderPage({ userData });
-      page.chooseRadio("location-in-new-jersey-true");
-      page.clickNext();
-      await waitFor(() => {
-        expect(mockPush).toHaveBeenCalled();
-      });
-      expect(currentBusiness().profileData.homeBasedBusiness).toEqual(false);
-      expect(currentBusiness().profileData.nexusLocationInNewJersey).toEqual(true);
-    });
-
-    it("shows error message banner when Location in New Jersey is not selected", async () => {
-      const { page } = renderPage({ userData });
-      act(() => {
-        return page.clickNext();
-      });
-      expect(screen.getByTestId("step-4")).toBeInTheDocument();
-      expect(screen.queryByTestId("step-5")).not.toBeInTheDocument();
-      expect(screen.getByTestId("banner-alert-REQUIRED_NEXUS_LOCATION_IN_NJ")).toHaveTextContent(
-        Config.profileDefaults.fields.nexusLocationInNewJersey.default.errorTextRequired
-      );
-      expect(screen.getByTestId("location-in-new-jersey")).toHaveTextContent(
-        Config.profileDefaults.fields.nexusLocationInNewJersey.default.errorTextRequired
-      );
-    });
   });
 
   describe("Nexus - final step", () => {
@@ -458,6 +415,6 @@ describe("onboarding - foreign business", () => {
   });
 
   describe("nonprofit onboarding tests", () => {
-    runNonprofitOnboardingTests({ businessPersona: "FOREIGN", industryPage: 3, lastPage: 4 });
+    runNonprofitOnboardingTests({ businessPersona: "FOREIGN", industryPage: 3, lastPage: 3 });
   });
 });

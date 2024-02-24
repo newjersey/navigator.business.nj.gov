@@ -2,6 +2,7 @@ import {
   v128Business,
   v128UserData,
 } from "@db/migrations/v128_merge_needs_to_register_and_formed_and_registered";
+import { randomInt } from "@shared/intHelpers";
 
 interface v129ProfileData extends v129IndustrySpecificData {
   businessPersona: v129BusinessPersona;
@@ -65,7 +66,7 @@ export interface v129UserData {
   lastUpdatedISO: string;
   dateCreatedISO: string;
   versionWhenCreated: number;
-  businesses: Record<string, v128Business>;
+  businesses: Record<string, v129Business>;
   currentBusinessId: string;
 }
 
@@ -471,4 +472,258 @@ type v129GetFilingResponse = {
   formationDoc: string;
   standingDoc: string;
   certifiedDoc: string;
+};
+
+// ---------------- v129 factories ----------------
+export const generateV129UserData = (overrides: Partial<v129UserData>): v129UserData => {
+  return {
+    user: generateV129BusinessUser({}),
+    version: 129,
+    lastUpdatedISO: "",
+    dateCreatedISO: "",
+    versionWhenCreated: -1,
+    businesses: {},
+    currentBusinessId: "",
+    ...overrides,
+  };
+};
+
+export const generateV129BusinessUser = (overrides: Partial<v129BusinessUser>): v129BusinessUser => {
+  return {
+    name: `some-name-${randomInt()}`,
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    receiveNewsletter: false,
+    userTesting: false,
+    externalStatus: {},
+    myNJUserKey: undefined,
+    intercomHash: undefined,
+    abExperience: "ExperienceA",
+    ...overrides,
+  };
+};
+
+export const generateV129Business = (overrides: Partial<v129Business>): v129Business => {
+  const profileData = generateV129ProfileData({});
+  return {
+    id: `some-id-${randomInt()}`,
+    dateCreatedISO: "",
+    lastUpdatedISO: "",
+    profileData: profileData,
+    preferences: generateV129Preferences({}),
+    formationData: generateV129FormationData({}, profileData.legalStructureId ?? ""),
+    onboardingFormProgress: "UNSTARTED",
+    taskProgress: {},
+    taskItemChecklist: {},
+    licenseData: undefined,
+    taxFilingData: generateV129TaxFilingData({}),
+    ...overrides,
+  };
+};
+
+export const generateV129ProfileData = (overrides: Partial<v129ProfileData>): v129ProfileData => {
+  const id = `some-id-${randomInt()}`;
+  const persona = randomInt() % 2 ? "STARTING" : "OWNING";
+  return {
+    ...generateV129IndustrySpecificData({}),
+    businessPersona: persona,
+    businessName: `some-business-name-${randomInt()}`,
+    industryId: "restaurant",
+    legalStructureId: "limited-liability-partnership",
+    dateOfFormation: undefined,
+    entityId: randomInt(10).toString(),
+    employerId: randomInt(9).toString(),
+    taxId: randomInt() % 2 ? randomInt(9).toString() : randomInt(12).toString(),
+    encryptedTaxId: `some-encrypted-value`,
+    notes: `some-notes-${randomInt()}`,
+    existingEmployees: randomInt(7).toString(),
+    naicsCode: randomInt(6).toString(),
+    isNonprofitOnboardingRadio: false,
+    nexusDbaName: "undefined",
+    needsNexusDbaName: true,
+    nexusLocationInNewJersey: undefined,
+    operatingPhase: "NEEDS_TO_FORM",
+    ownershipTypeIds: [],
+    documents: {
+      certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
+      formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
+      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
+    },
+    taxPin: randomInt(4).toString(),
+    sectorId: undefined,
+    foreignBusinessTypeIds: [],
+    municipality: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    responsibleOwnerName: `some-owner-name-${randomInt()}`,
+    tradeName: `some-trade-name-${randomInt()}`,
+    elevatorOwningBusiness: undefined,
+    ...overrides,
+  };
+};
+
+export const generateV129IndustrySpecificData = (
+  overrides: Partial<v129IndustrySpecificData>
+): v129IndustrySpecificData => {
+  return {
+    liquorLicense: false,
+    requiresCpa: false,
+    homeBasedBusiness: false,
+    cannabisLicenseType: undefined,
+    cannabisMicrobusiness: undefined,
+    constructionRenovationPlan: undefined,
+    providesStaffingService: false,
+    certifiedInteriorDesigner: false,
+    realEstateAppraisalManagement: false,
+    carService: undefined,
+    interstateTransport: false,
+    isChildcareForSixOrMore: undefined,
+    willSellPetCareItems: undefined,
+    petCareHousing: undefined,
+    isInterstateLogisticsApplicable: undefined,
+    isInterstateMovingApplicable: undefined,
+    ...overrides,
+  };
+};
+
+export const generateV129Preferences = (overrides: Partial<v129Preferences>): v129Preferences => {
+  return {
+    roadmapOpenSections: ["PLAN", "START"],
+    roadmapOpenSteps: [],
+    hiddenCertificationIds: [],
+    hiddenFundingIds: [],
+    visibleSidebarCards: ["other-card"],
+    returnToLink: "",
+    isCalendarFullView: true,
+    isHideableRoadmapOpen: false,
+    phaseNewlyChanged: false,
+    ...overrides,
+  };
+};
+
+export const generateV129FormationData = (
+  overrides: Partial<v129FormationData>,
+  legalStructureId: string
+): v129FormationData => {
+  return {
+    formationFormData: generateV129FormationFormData({}, legalStructureId),
+    formationResponse: undefined,
+    getFilingResponse: undefined,
+    completedFilingPayment: false,
+    businessNameAvailability: undefined,
+    lastVisitedPageIndex: 0,
+    dbaBusinessNameAvailability: undefined,
+    ...overrides,
+  };
+};
+
+export const generateV129FormationFormData = (
+  overrides: Partial<v129FormationFormData>,
+  legalStructureId: string
+): v129FormationFormData => {
+  const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
+
+  return <v129FormationFormData>{
+    businessName: `some-business-name-${randomInt()}`,
+    businessSuffix: "LLC",
+    businessTotalStock: isCorp ? randomInt().toString() : "",
+    businessStartDate: new Date(Date.now()).toISOString().split("T")[0],
+    businessPurpose: `some-purpose-${randomInt()}`,
+    addressLine1: `some-members-address-1-${randomInt()}`,
+    addressLine2: `some-members-address-2-${randomInt()}`,
+    addressCity: `some-members-address-city-${randomInt()}`,
+    addressState: { shortCode: "123", name: "new-jersey" },
+    addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
+    addressCountry: `some-county`,
+    addressMunicipality: generateV129Municipality({}),
+    addressProvince: "",
+    withdrawals: `some-withdrawals-text-${randomInt()}`,
+    combinedInvestment: `some-combinedInvestment-text-${randomInt()}`,
+    dissolution: `some-dissolution-text-${randomInt()}`,
+    canCreateLimitedPartner: !!(randomInt() % 2),
+    createLimitedPartnerTerms: `some-createLimitedPartnerTerms-text-${randomInt()}`,
+    canGetDistribution: !!(randomInt() % 2),
+    getDistributionTerms: `some-getDistributionTerms-text-${randomInt()}`,
+    canMakeDistribution: !!(randomInt() % 2),
+    makeDistributionTerms: `make-getDistributionTerms-text-${randomInt()}`,
+    hasNonprofitBoardMembers: true,
+    nonprofitBoardMemberQualificationsSpecified: "IN_BYLAWS",
+    nonprofitBoardMemberQualificationsTerms: "",
+    nonprofitBoardMemberRightsSpecified: "IN_BYLAWS",
+    nonprofitBoardMemberRightsTerms: "",
+    nonprofitTrusteesMethodSpecified: "IN_BYLAWS",
+    nonprofitTrusteesMethodTerms: "",
+    nonprofitAssetDistributionSpecified: "IN_BYLAWS",
+    nonprofitAssetDistributionTerms: "",
+    provisions: [`some-provision-${randomInt()}`],
+    agentNumberOrManual: randomInt() % 2 ? "NUMBER" : "MANUAL_ENTRY",
+    agentNumber: `some-agent-number-${randomInt()}`,
+    agentName: `some-agent-name-${randomInt()}`,
+    agentEmail: `some-agent-email-${randomInt()}`,
+    agentOfficeAddressLine1: `some-agent-office-address-1-${randomInt()}`,
+    agentOfficeAddressLine2: `some-agent-office-address-2-${randomInt()}`,
+    agentOfficeAddressCity: `some-agent-office-address-city-${randomInt()}`,
+    agentOfficeAddressZipCode: `some-agent-office-zipcode-${randomInt()}`,
+    agentOfficeAddressMunicipality: generateV129Municipality({}),
+    agentUseAccountInfo: !!(randomInt() % 2),
+    agentUseBusinessAddress: !!(randomInt() % 2),
+    signers: [{ name: "some-name", signature: true, title: "Authorized Representative" }],
+    members: legalStructureId === "limited-liability-partnership" ? [] : [generateV129FormationMember({})],
+    incorporators: undefined,
+    paymentType: randomInt() % 2 ? "ACH" : "CC",
+    annualReportNotification: !!(randomInt() % 2),
+    corpWatchNotification: !!(randomInt() % 2),
+    officialFormationDocument: !!(randomInt() % 2),
+    certificateOfStanding: !!(randomInt() % 2),
+    certifiedCopyOfFormationDocument: !!(randomInt() % 2),
+    contactFirstName: `some-contact-first-name-${randomInt()}`,
+    contactLastName: `some-contact-last-name-${randomInt()}`,
+    contactPhoneNumber: `some-contact-phone-number-${randomInt()}`,
+    foreignStateOfFormation: undefined,
+    foreignDateOfFormation: undefined,
+    foreignGoodStandingFile: undefined,
+    willPracticeLaw: false,
+    isVeteranNonprofit: false,
+    legalType: "",
+    ...overrides,
+  };
+};
+
+export const generateV129Municipality = (overrides: Partial<v129Municipality>): v129Municipality => {
+  return {
+    displayName: `some-display-name-${randomInt()}`,
+    name: `some-name-${randomInt()}`,
+    county: `some-county-${randomInt()}`,
+    id: `some-id-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generateV129FormationMember = (overrides: Partial<v129FormationMember>): v129FormationMember => {
+  return {
+    name: `some-name`,
+    addressLine1: `some-members-address-1-${randomInt()}`,
+    addressLine2: `some-members-address-2-${randomInt()}`,
+    addressCity: `some-members-address-city-${randomInt()}`,
+    addressState: { shortCode: "123", name: "new-jersey" },
+    addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
+    addressCountry: `some-county`,
+    businessLocationType: undefined,
+    ...overrides,
+  };
+};
+
+export const generateV129TaxFilingData = (overrides: Partial<v129TaxFilingData>): v129TaxFilingData => {
+  return {
+    state: undefined,
+    businessName: undefined,
+    errorField: undefined,
+    lastUpdatedISO: undefined,
+    registeredISO: undefined,
+    filings: [],
+    ...overrides,
+  };
 };

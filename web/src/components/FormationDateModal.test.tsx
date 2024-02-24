@@ -110,8 +110,7 @@ describe("<FormationDateModal />", () => {
       generateBusiness({
         profileData: generateProfileData({
           businessPersona: "FOREIGN",
-          foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
-          nexusLocationInNewJersey: true,
+          foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
           municipality: undefined,
         }),
       })
@@ -125,7 +124,6 @@ describe("<FormationDateModal />", () => {
         profileData: generateProfileData({
           businessPersona: "FOREIGN",
           foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
-          nexusLocationInNewJersey: false,
           municipality: undefined,
         }),
       })

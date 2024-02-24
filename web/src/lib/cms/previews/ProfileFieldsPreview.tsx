@@ -6,7 +6,6 @@ import { EntityId } from "@/components/data-fields/EntityId";
 import { ExistingEmployees } from "@/components/data-fields/ExistingEmployees";
 import { ForeignBusinessTypeField } from "@/components/data-fields/ForeignBusinessTypeField";
 import { Industry } from "@/components/data-fields/Industry";
-import { LocationInNewJersey } from "@/components/data-fields/LocationInNewJersey";
 import { MunicipalityField } from "@/components/data-fields/MunicipalityField";
 import { NaicsCode } from "@/components/data-fields/NaicsCode";
 import { NexusBusinessNameField } from "@/components/data-fields/NexusBusinessNameField";
@@ -133,10 +132,6 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
 
           <hr className="margin-y-4" />
 
-          <FieldLabelOnboarding fieldName="nexusLocationInNewJersey" />
-          <LocationInNewJersey />
-
-          <hr className="margin-y-4" />
           <NexusBusinessNameField />
 
           <hr className="margin-y-4" />

@@ -83,9 +83,8 @@ describe("<ProfileOpportunitiesAlert />", () => {
       it("when legal structure is a trade name", () => {
         const profileData = generateProfileData({
           businessPersona: "FOREIGN",
-          foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+          foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
           legalStructureId: "general-partnership",
-          nexusLocationInNewJersey: true,
           dateOfFormation: undefined,
           homeBasedBusiness: undefined,
           ownershipTypeIds: [],
@@ -124,9 +123,8 @@ describe("<ProfileOpportunitiesAlert />", () => {
       it("when legal structure is not a trade name", () => {
         const profileData = generateProfileData({
           businessPersona: "FOREIGN",
-          foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+          foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
           legalStructureId: "limited-partnership",
-          nexusLocationInNewJersey: true,
           dateOfFormation: undefined,
           homeBasedBusiness: undefined,
           ownershipTypeIds: [],
@@ -169,7 +167,6 @@ describe("<ProfileOpportunitiesAlert />", () => {
           businessPersona: "FOREIGN",
           foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
           legalStructureId: "general-partnership",
-          nexusLocationInNewJersey: false,
           dateOfFormation: undefined,
           homeBasedBusiness: undefined,
           ownershipTypeIds: [],
@@ -210,7 +207,6 @@ describe("<ProfileOpportunitiesAlert />", () => {
           businessPersona: "FOREIGN",
           foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
           legalStructureId: "limited-partnership",
-          nexusLocationInNewJersey: false,
           dateOfFormation: undefined,
           homeBasedBusiness: undefined,
           ownershipTypeIds: [],

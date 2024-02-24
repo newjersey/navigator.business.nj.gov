@@ -13,6 +13,7 @@ import {
   LookupLegalStructureById,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
+import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 
 export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadmap> => {
   let industryId = profileData.industryId;
@@ -84,7 +85,7 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
   if (
     industry.canHavePermanentLocation &&
     profileData.homeBasedBusiness === false &&
-    profileData.nexusLocationInNewJersey !== false
+    nexusLocationInNewJersey(profileData) !== false
   ) {
     addOns.push("permanent-location-business");
   }

@@ -19,6 +19,7 @@ import {
   LookupIndustryById,
   isIndustryIdGeneric,
 } from "@businessnjgovnavigator/shared";
+import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 import { Autocomplete, FilterOptionsState, TextField, createFilterOptions } from "@mui/material";
 import { orderBy } from "lodash";
 import { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
@@ -52,12 +53,12 @@ export const IndustryDropdown = (props: Props): ReactElement => {
   });
 
   const onIndustryIdChange = (industryId: string | undefined): void => {
-    let homeBasedBusiness: boolean | undefined = undefined;
     let cannabisLicenseType = undefined;
 
-    if (!isHomeBasedBusinessApplicable(industryId)) {
-      homeBasedBusiness = false;
-    }
+    const homeBasedBusiness: boolean | undefined =
+      !isHomeBasedBusinessApplicable(industryId) || nexusLocationInNewJersey(state.profileData)
+        ? false
+        : undefined;
 
     if (getIsApplicableToFunctionByFieldName("cannabisLicenseType")(industryId)) {
       const wasCannabisPreviouslyApplicable = getIsApplicableToFunctionByFieldName("cannabisLicenseType")(

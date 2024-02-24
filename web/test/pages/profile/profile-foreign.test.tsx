@@ -81,8 +81,7 @@ describe("profile-foreign", () => {
       business: generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "FOREIGN",
-          foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
-          nexusLocationInNewJersey: true,
+          foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
           industryId: randomHomeBasedIndustry(),
         }),
       }),
@@ -234,8 +233,7 @@ describe("profile-foreign", () => {
             legalStructureId: params.legalStructureId,
             operatingPhase: params.operatingPhase,
             businessPersona: "FOREIGN",
-            foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
-            nexusLocationInNewJersey: true,
+            foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
           }),
         });
         renderPage({ municipalities: [newark], business });
@@ -248,8 +246,7 @@ describe("profile-foreign", () => {
               municipality: generateMunicipality({ displayName: "Trenton" }),
               legalStructureId: randomLegalStructure().id,
               businessPersona: "FOREIGN",
-              foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
-              nexusLocationInNewJersey: true,
+              foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
             }),
             taxFilingData: generateTaxFilingData({
               state: "SUCCESS",

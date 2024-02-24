@@ -1,6 +1,7 @@
 import { LookupLegalStructureById } from "../legalStructure";
 import { ProfileData } from "../profileData";
 import { determineForeignBusinessType } from "./businessPersonaHelpers";
+import { nexusLocationInNewJersey } from "./nexusLocationInNewJersey";
 
 const OPPORTUNITY_FIELDS: (keyof ProfileData)[] = [
   "existingEmployees",
@@ -24,7 +25,7 @@ export const getFieldsForProfile = (profileData: ProfileData): (keyof ProfileDat
   const isNexusBusiness = determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NEXUS";
 
   if (profileData.businessPersona === "FOREIGN" && isNexusBusiness) {
-    return profileData.nexusLocationInNewJersey
+    return nexusLocationInNewJersey(profileData)
       ? filterByLegalStructure(ALL_FIELDS_FOR_FOREIGN_NEXUS_NJ_LOCATION, profileData.legalStructureId)
       : filterByLegalStructure(ALL_FIELDS_FOR_FOREIGN_NEXUS_NOT_NJ_LOCATION, profileData.legalStructureId);
   } else {
