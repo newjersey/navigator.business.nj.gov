@@ -157,66 +157,60 @@ describe("buildUserRoadmap", () => {
   });
 
   describe("home-based business", () => {
-    it("adds permanent-location-business add-on if home-based business is false", async () => {
-      await buildUserRoadmap(generateStartingProfile({ industryId: "generic", homeBasedBusiness: false }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("permanent-location-business");
-    });
-
-    it("does not add permanent-location-business add-on if home-based business is true", async () => {
-      await buildUserRoadmap(generateStartingProfile({ industryId: "generic", homeBasedBusiness: true }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
-    });
-
-    it("does not add permanent-location-business add-on if home-based business is undefined", async () => {
-      await buildUserRoadmap(
-        generateStartingProfile({ industryId: "generic", homeBasedBusiness: undefined })
-      );
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
-    });
-
-    it("does not add permanent-location-business add-on if industry does not allow permanent location", async () => {
-      await buildUserRoadmap(generateStartingProfile({ industryId: "food-truck" }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
-    });
-
-    it("does NOT add permanent-location-business add-on if nexusLocationInNewJersey is false", async () => {
-      const profileData = createEmptyNexusProfile({
-        industryId: "generic",
-        homeBasedBusiness: false,
-        nexusLocationInNewJersey: false,
+    describe("starting", () => {
+      it("adds permanent-location-business add-on if home-based business is false", async () => {
+        await buildUserRoadmap(generateStartingProfile({ industryId: "generic", homeBasedBusiness: false }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("permanent-location-business");
       });
-      await buildUserRoadmap(profileData);
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
+
+      it("does not add permanent-location-business add-on if home-based business is true", async () => {
+        await buildUserRoadmap(generateStartingProfile({ industryId: "generic", homeBasedBusiness: true }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
+      });
+
+      it("does not add permanent-location-business add-on if home-based business is undefined", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ industryId: "generic", homeBasedBusiness: undefined })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
+      });
+
+      it("does not add permanent-location-business add-on if industry does not allow permanent location", async () => {
+        await buildUserRoadmap(generateStartingProfile({ industryId: "food-truck" }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
+      });
     });
 
-    it("does NOT add permanent-location-business add-on if homeBasedBusiness: false and nexusLocationInNewJersey: false", async () => {
-      const profileData = createEmptyNexusProfile({
-        industryId: "generic",
-        homeBasedBusiness: false,
-        nexusLocationInNewJersey: false,
+    describe("nexus", () => {
+      it("does NOT add permanent-location-business add-on if foreignBusinessTypeIds doesn't contain officeInNJ", async () => {
+        const profileData = createEmptyNexusProfile({
+          industryId: "generic",
+          homeBasedBusiness: false,
+          foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+        });
+        await buildUserRoadmap(profileData);
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
       });
-      await buildUserRoadmap(profileData);
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
-    });
 
-    it("adds permanent-location-business add-on if homeBasedBusiness: false and nexusLocationInNewJersey: undefined", async () => {
-      const profileData = createEmptyNexusProfile({
-        industryId: "generic",
-        homeBasedBusiness: false,
-        nexusLocationInNewJersey: undefined,
+      it("does NOT add permanent-location-business add-on if homeBasedBusiness is false and foreignBusinessTypeIds doesn't contain officeInNJ", async () => {
+        const profileData = createEmptyNexusProfile({
+          industryId: "generic",
+          homeBasedBusiness: false,
+          foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+        });
+        await buildUserRoadmap(profileData);
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
       });
-      await buildUserRoadmap(profileData);
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("permanent-location-business");
-    });
 
-    it("adds permanent-location-business add-on if homeBasedBusiness: false and nexusLocationInNewJersey: true", async () => {
-      const profileData = createEmptyNexusProfile({
-        industryId: "generic",
-        homeBasedBusiness: false,
-        nexusLocationInNewJersey: true,
+      it("adds permanent-location-business add-on if homeBasedBusiness is false and foreignBusinessTypeIds contains officeInNJ", async () => {
+        const profileData = createEmptyNexusProfile({
+          industryId: "generic",
+          homeBasedBusiness: false,
+          foreignBusinessTypeIds: ["officeInNJ"],
+        });
+        await buildUserRoadmap(profileData);
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("permanent-location-business");
       });
-      await buildUserRoadmap(profileData);
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("permanent-location-business");
     });
   });
 

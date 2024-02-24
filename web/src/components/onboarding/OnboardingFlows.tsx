@@ -1,7 +1,6 @@
 import { BusinessPersonaQuestion } from "@/components/data-fields/BusinessPersonaQuestion";
 import { ForeignBusinessTypeField } from "@/components/data-fields/ForeignBusinessTypeField";
 import { Industry } from "@/components/data-fields/Industry";
-import { LocationInNewJersey } from "@/components/data-fields/LocationInNewJersey";
 import { NonprofitQuestion } from "@/components/data-fields/NonprofitQuestion";
 import { Sectors } from "@/components/data-fields/Sectors";
 import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
@@ -103,15 +102,6 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
                 onboardingFieldLabel
               />
             </div>
-          </>
-        ),
-      },
-      {
-        name: "municipality-page",
-        component: (
-          <>
-            <FieldLabelOnboarding fieldName="nexusLocationInNewJersey" />
-            <LocationInNewJersey<OnboardingErrors> errorTypes={["REQUIRED_NEXUS_LOCATION_IN_NJ"]} />
           </>
         ),
       },

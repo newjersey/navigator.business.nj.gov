@@ -186,10 +186,6 @@ export class OnboardingPage {
     this.getLiquorLicense(radio).check();
   }
 
-  selectLocationInNewJersey(radio: boolean) {
-    this.getLocationInNewJersey(radio).check();
-  }
-
   selectOwnership(arrayOfOwnership: string[]) {
     this.getOwnershipDropdown().parent().click();
 

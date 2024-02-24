@@ -10,7 +10,6 @@ import { ExistingEmployees } from "@/components/data-fields/ExistingEmployees";
 import { ForeignBusinessTypeField } from "@/components/data-fields/ForeignBusinessTypeField";
 import { HomeBasedBusiness } from "@/components/data-fields/HomeBasedBusiness";
 import { Industry } from "@/components/data-fields/Industry";
-import { LocationInNewJersey } from "@/components/data-fields/LocationInNewJersey";
 import { MunicipalityField } from "@/components/data-fields/MunicipalityField";
 import { NaicsCode } from "@/components/data-fields/NaicsCode";
 import { NexusBusinessNameField } from "@/components/data-fields/NexusBusinessNameField";
@@ -76,6 +75,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { hasCompletedFormation } from "@businessnjgovnavigator/shared/";
 import { isStartingBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
+import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 import dayjs from "dayjs";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
@@ -283,10 +283,7 @@ const ProfilePage = (props: Props): ReactElement => {
     if (!profileData.industryId) {
       return true;
     }
-    if (
-      determineForeignBusinessType(profileData.foreignBusinessTypeIds) === "NEXUS" &&
-      profileData.nexusLocationInNewJersey
-    ) {
+    if (nexusLocationInNewJersey(profileData)) {
       return false;
     }
     return isHomeBasedBusinessApplicable(profileData.industryId);
@@ -352,13 +349,9 @@ const ProfilePage = (props: Props): ReactElement => {
           <BusinessStructure />
         </ProfileField>
 
-        <ProfileField fieldName="nexusLocationInNewJersey">
-          <LocationInNewJersey />
-        </ProfileField>
-
         <ProfileField
           fieldName="municipality"
-          isVisible={profileData.nexusLocationInNewJersey}
+          isVisible={nexusLocationInNewJersey(profileData)}
           locked={shouldLockMunicipality()}
         >
           <CannabisLocationAlert industryId={business?.profileData.industryId} />

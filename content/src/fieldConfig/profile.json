@@ -278,15 +278,6 @@
           "description": ""
         }
       },
-      "nexusLocationInNewJersey": {
-        "default": {
-          "header": "Will you own or lease commercial or manufacturing space in New Jersey?",
-          "description": "",
-          "errorTextRequired": "Select a location",
-          "radioButtonYesText": "Yes, I will own or lease space in New Jersey",
-          "radioButtonNoText": "No, I will not own or lease space in New Jersey"
-        }
-      },
       "documents": {
         "default": {
           "header": "",

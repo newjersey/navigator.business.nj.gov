@@ -97,7 +97,6 @@ const OnboardingPage = (props: Props): ReactElement => {
     REQUIRED_ESSENTIAL_QUESTION: Config.profileDefaults.default.essentialQuestionAlertText,
     REQUIRED_EXISTING_BUSINESS: configFields.businessPersona.default.errorTextRequired,
     REQUIRED_FOREIGN_BUSINESS_TYPE: configFields.foreignBusinessTypeIds.default.errorTextRequired,
-    REQUIRED_NEXUS_LOCATION_IN_NJ: configFields.nexusLocationInNewJersey.default.errorTextRequired,
     REQUIRED_REVIEW_INFO_BELOW: Config.profileDefaults.default.errorTextBody,
   };
 

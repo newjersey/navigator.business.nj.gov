@@ -29,7 +29,6 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { ThemeProvider, createTheme } from "@mui/material";
 import {
-  act,
   fireEvent,
   render,
   screen,
@@ -165,9 +164,7 @@ export const createPageHelpers = (): PageHelpers => {
   };
 
   const visitStep = async (step: number): Promise<void> => {
-    act(() => {
-      return clickNext();
-    });
+    clickNext();
     const currentStep = step - 1;
     await waitForElementToBeRemoved(() => {
       return screen.getByTestId(`step-${currentStep}`);
@@ -277,10 +274,10 @@ export const runNonprofitOnboardingTests = ({
         taskProgress: {},
         profileData: generateProfileData({
           businessPersona,
-          foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : [],
+          foreignBusinessTypeIds:
+            businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
           legalStructureId: "nonprofit",
           isNonprofitOnboardingRadio: true,
-          nexusLocationInNewJersey: businessPersona === "FOREIGN" ? true : undefined,
         }),
       })
     );
@@ -301,10 +298,10 @@ export const runNonprofitOnboardingTests = ({
         onboardingFormProgress: "UNSTARTED",
         profileData: generateProfileData({
           businessPersona,
-          foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : [],
+          foreignBusinessTypeIds:
+            businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
           legalStructureId: undefined,
           isNonprofitOnboardingRadio: false,
-          nexusLocationInNewJersey: businessPersona === "FOREIGN" ? true : undefined,
         }),
       })
     );

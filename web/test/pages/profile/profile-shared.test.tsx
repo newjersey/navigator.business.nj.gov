@@ -140,7 +140,6 @@ describe("profile - shared", () => {
       profileData: generateProfileData({
         industryId: randomHomeBasedIndustry(),
         operatingPhase: randomElementFromArray(defaultDescOperatingPhases as OperatingPhase[]).id,
-        nexusLocationInNewJersey: false,
       }),
     });
 
@@ -162,7 +161,6 @@ describe("profile - shared", () => {
       profileData: generateProfileData({
         industryId: randomHomeBasedIndustry(),
         operatingPhase: randomElementFromArray(altDescOperatingPhases as OperatingPhase[]).id,
-        nexusLocationInNewJersey: false,
       }),
     });
 
@@ -242,7 +240,8 @@ describe("profile - shared", () => {
       describe("disclaimer", () => {
         businessPersonas.map((businessPersona) => {
           const foreignBusinessTypeIds: ForeignBusinessTypeId[] = [];
-          if (businessPersona === "FOREIGN") foreignBusinessTypeIds.push("employeeOrContractorInNJ");
+          if (businessPersona === "FOREIGN")
+            foreignBusinessTypeIds.push("employeeOrContractorInNJ", "officeInNJ");
           foreignBusinessTypeIds.map((foreignBusinessTypeId) => {
             it(`shows disclaimer for trade name legal structure for ${businessPersona} ${
               foreignBusinessTypeId ?? ""
@@ -251,7 +250,6 @@ describe("profile - shared", () => {
                 profileData: generateProfileData({
                   legalStructureId: randomTradeNameLegalStructure(),
                   businessPersona: businessPersona,
-                  nexusLocationInNewJersey: true,
                   foreignBusinessTypeIds: [foreignBusinessTypeId],
                 }),
               });
@@ -488,7 +486,6 @@ describe("profile - shared", () => {
       return generateBusiness({
         profileData: generateProfileData({
           ...profileData,
-          nexusLocationInNewJersey: profileData.businessPersona === "FOREIGN" ? false : undefined,
           foreignBusinessTypeIds:
             profileData.businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : [],
         }),
@@ -578,8 +575,8 @@ describe("profile - shared", () => {
           profileData: generateProfileData({
             businessPersona: businessPersona as BusinessPersona,
             industryId: undefined,
-            nexusLocationInNewJersey: businessPersona === "FOREIGN" ? false : undefined,
-            foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ"] : [],
+            foreignBusinessTypeIds:
+              businessPersona === "FOREIGN" ? ["employeeOrContractorInNJ", "officeInNJ"] : [],
           }),
         });
         renderPage({ business });
