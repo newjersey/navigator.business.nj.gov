@@ -152,7 +152,7 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
   }
 
   if (profileData.elevatorOwningBusiness) {
-    addOns.push("elevator-registration");
+    addOns.push("elevator-owning-business");
   }
 
   if (getIsApplicableToFunctionByFieldName("isChildcareForSixOrMore")(industryId)) {

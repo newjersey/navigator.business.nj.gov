@@ -295,7 +295,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const displayElevatorQuestion = (): boolean => {
     if (!business) return false;
     if (process.env.FEATURE_ELEVATOR_OWNING_BUSINESS !== "true") return false;
-    return !profileData.homeBasedBusiness;
+    return profileData.homeBasedBusiness === false;
   };
 
   const hasSubmittedTaxData =
