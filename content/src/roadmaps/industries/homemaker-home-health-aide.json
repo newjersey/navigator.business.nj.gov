@@ -1,14 +1,7 @@
 {
-  "displayname": "homemaker-home-health-aide",
   "naicsCodes": "621610",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "health-care-and-social-assistance",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": [],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -60,9 +53,21 @@
       "weight": 30,
       "task": "individual-staff-licenses-health-aide",
       "required": true
+    },
+    {
+      "step": 4,
+      "weight": 40,
+      "licenseTask": "home-health-aide-license"
     }
   ],
   "name": "Home Health Aide",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "homemaker-home-health-aide",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true
+  },
+  "isEnabled": true,
   "additionalSearchTerms": "caregiver, care services",
   "id": "homemaker-home-health-aide",
   "description": "A business staffing licensed personnel to provide home health care services",
