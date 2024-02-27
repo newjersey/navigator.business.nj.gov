@@ -26,19 +26,19 @@ webflowType: business-license
 - - -
 
 :::infoAlert 
- The builder designee must complete Schedule A of the application. All officers or principals with at least 10% interest in the business must complete Schedule B and C of the application.
+ The `builder designee|builder-designee` must complete Schedule A of the application. All officers or principals with at least 10% interest in the business must complete Schedule B and C of the application.
 :::
 
 ### Application Requirements
 
-* Registered alternate name or trade name, along with a copy of the Alternate or Trade Name Certificate, if applicable
-* Registered agent information, if applicable
-* Business formation documents, such as a Certificate of Formation or Certificate of Authority 
-* Business Entity Status Report, Annual Report, or Long Standing Certificate, if applicable
-* Employer Identification Number (EIN) 
+* Registered alternate name or trade name, along with a copy of the `Alternate or Trade Name Certificate|alternate-trade-name-certificate`, if applicable
+* `Registered agent|registered-agent` information, if applicable
+* Business formation documents, such as a `Certificate of Formation or Certificate of Authority|certificate-formation` 
+* `Business Entity Status Report|business-entity-status-report`, `Annual Report|tax-annual-report`, or `Long Standing Certificate|certificate-of-good-standing`, if applicable
+* `Employer Identification Number (EIN)|ein` 
 * Copy of judgment and discharge documents, if there were court judgments against the business entity
 * Documentation of bankruptcy, business reorganization, financial reorganization, or liquidation, if applicable
-* Private warranty plan name, member enrollment number, and current letter of acceptance, if applicable
+* `Private warranty plan name|new-home-warranty-plan`, member enrollment number, and current letter of acceptance, if applicable
 * Applicable fees paid
 
 **Builder designee and officer/principal information (Schedule A, B, and C of the application)**:
