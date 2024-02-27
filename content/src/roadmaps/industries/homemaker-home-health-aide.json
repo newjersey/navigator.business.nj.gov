@@ -44,12 +44,6 @@
     },
     {
       "step": 4,
-      "weight": 20,
-      "licenseTask": "home-health-aide-license",
-      "required": true
-    },
-    {
-      "step": 4,
       "weight": 30,
       "task": "individual-staff-licenses-health-aide",
       "required": true
