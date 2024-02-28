@@ -11,13 +11,13 @@ industryIds: []
 sectorIds: []
 icon: file-purple.svg
 urlSlug: new-home-warranty-plan
-summaryDescriptionMd: " "
+summaryDescriptionMd: "  "
 callToActionText: Enroll in the State Warranty Plan
 callToActionLink: https://www.nj.gov/dca/divisions/codes/forms/pdf_nhw/COP_App.pdf
 ---
-If you are building new houses in New Jersey, you must enroll each house you build in a warranty plan. The warranty plan can be a State warranty plan or an [approved private warranty plan](https://www.nj.gov/dca/divisions/codes/offices/nhw_war_plans.html).
+If you are building new houses in New Jersey, you must enroll each house you build in a `warranty plan|new-home-warranty-plan`. The warranty plan can be a State warranty plan or an [approved private warranty plan](https://www.nj.gov/dca/divisions/codes/offices/nhw_war_plans.html).
 
-To enroll in a State warranty plan, apply for a Certificate of Participation with the Department of Community Affairs (DCA).
+To enroll in a State warranty plan, apply for a `Certificate of Participation|certificate-participation` with the Department of Community Affairs (DCA).
 
 To enroll in an approved private warranty plan, contact the plan representative.
 
@@ -37,7 +37,7 @@ To enroll in an approved private warranty plan, contact the plan representative.
 **If the first resident of the house will be the home buyer:**
 
 * Name of home buyer
-* Home buyer’s FHA or VA mortgage case number
+* Home buyer’s `FHA or VA mortgage case number|fha-case-number` 
 * Purchase contract
 * Warranty premium payment
 
@@ -49,7 +49,9 @@ To enroll in an approved private warranty plan, contact the plan representative.
 **If the home is in a condominium development:**
 
 * Building and unit layout 
-* Planned Real Estate Development (PRED) registration or exemption number
+*  `Planned Real Estate Development (PRED)|planned-real-estate-development` registration or exemption number
+
+
 
 :::infoAlert 
  Submit all five copies of the completed application at least 10 weeks before the listed warranty coverage start date.
@@ -64,11 +66,10 @@ Four approved copies of the Certificate of Participation for each home you enrol
 * A copy for you to give to the homebuyer at settlement or when they start living there
 * A copy for the mortgage company, if applicable
 * A copy for your records
-:::
+  :::
 
-:::greenBox
-**What if I don't enroll?**
+:::greenBox 
+ **What if I don't enroll?**
 
 If you don’t enroll in a State or approved private warranty plan, you will not be able to get a Certificate of Occupancy. The houses you build cannot be legally occupied.
 :::
-
