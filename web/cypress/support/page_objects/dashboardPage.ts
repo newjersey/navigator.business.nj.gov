@@ -4,7 +4,7 @@ export class DashboardPage {
   };
 
   getDropdown = () => {
-    return cy.get('[data-testid="profile-dropdown"]');
+    return cy.get('[data-testid="nav-bar-desktop-dropdown-button"]');
   };
 
   getProfileLinkInDropdown = () => {

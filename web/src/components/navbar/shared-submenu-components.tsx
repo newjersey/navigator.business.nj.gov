@@ -3,21 +3,18 @@ import { NavMenuItem } from "@/components/navbar/NavMenuItem";
 import { AuthContext } from "@/contexts/authContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
-import { onSignOut, onSelfRegister } from "@/lib/auth/signinHelper";
+import { onSelfRegister, onSignOut } from "@/lib/auth/signinHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getBusinessIconColor } from "@/lib/domain-logic/getBusinessIconColor";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { orderBusinessIdsByDateCreated } from "@/lib/domain-logic/orderBusinessIdsByDateCreated";
-import { routeWithQuery, ROUTES, QUERIES } from "@/lib/domain-logic/routes";
+import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import { switchCurrentBusiness } from "@/lib/domain-logic/switchCurrentBusiness";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
-
-
-
 
 export const LoginMenuItem = (): ReactElement => {
   const { Config } = useConfig();
@@ -32,10 +29,12 @@ export const LoginMenuItem = (): ReactElement => {
   });
 };
 
-export const LogoutMenuItem = (props: { handleClose: () => void}): ReactElement => {
-
+export const LogoutMenuItem = (props: { handleClose: () => void }): ReactElement => {
   const { Config } = useConfig();
   const { dispatch } = useContext(AuthContext);
+
+  const router = useRouter();
+
   return NavMenuItem({
     onClick: (): void => {
       onSignOut(router.push, dispatch);
@@ -47,8 +46,7 @@ export const LogoutMenuItem = (props: { handleClose: () => void}): ReactElement 
   });
 };
 
-export const MyNjMenuItem = (props: { handleClose: () => void}): ReactElement => {
-
+export const MyNjMenuItem = (props: { handleClose: () => void }): ReactElement => {
   const { Config } = useConfig();
   return NavMenuItem({
     onClick: (): void => {
@@ -62,23 +60,10 @@ export const MyNjMenuItem = (props: { handleClose: () => void}): ReactElement =>
   });
 };
 
-// export const LinkWithMyNjMenuItem = (props: { handleClose: () => void}): ReactElement => {
-
-//   const { Config } = useConfig();
-//   return NavMenuItem({
-//     onClick: (): void => {
-//       analytics.event.account_menu_myNJ_account.click.go_to_myNJ_home();
-//       openInNewTab(process.env.MYNJ_PROFILE_LINK || "");
-//       props.handleClose();
-//     },
-//     icon: <ButtonIcon svgFilename="profile" sizePx="25px" />,
-//     itemText: Config.navigationDefaults.myNJAccountText,
-//     key: "myNjMenuItem",
-//   });
-// };
-
-export const AddBusinessItem = (props: { handleClose: () => void}): ReactElement[] => {
+export const AddBusinessItem = (props: { handleClose: () => void }): ReactElement[] => {
   const { Config } = useConfig();
+
+  const router = useRouter();
   return [
     NavMenuItem({
       onClick: (): void => {
@@ -104,6 +89,8 @@ export const RegisterMenuItem = (): ReactElement => {
 
   const { setRegistrationStatus } = useContext(NeedsAccountContext);
 
+  const router = useRouter();
+
   return NavMenuItem({
     onClick: (): void => {
       analytics.event.guest_menu.click.go_to_NavigatorAccount_setup();
@@ -117,6 +104,9 @@ export const RegisterMenuItem = (): ReactElement => {
 
 export const GetStartedMenuItem = (): ReactElement => {
   const { Config } = useConfig();
+
+  const router = useRouter();
+
   return NavMenuItem({
     onClick: (): void => {
       analytics.event.landing_page_navbar_register.click.go_to_onboarding();
@@ -128,21 +118,21 @@ export const GetStartedMenuItem = (): ReactElement => {
   });
 };
 
-export const ProfileMenuItem = (props: { handleClose: () => void}): ReactElement[] => {
-
+export const ProfileMenuItem = (props: {
+  handleClose: () => void;
+  isAuthenticated: boolean;
+}): ReactElement[] => {
   const { Config } = useConfig();
 
-  const { state } = useContext(AuthContext);
-  const isAuthenticated = state.isAuthenticated === "TRUE";
   const { userData, updateQueue } = useUserData();
   const router = useRouter();
   const isProfileSelected = router.route === ROUTES.profile;
 
   if (!userData) return [];
   return orderBusinessIdsByDateCreated(userData).flatMap((businessId, i) => {
-      const isCurrent = businessId === userData.currentBusinessId;
+    const isCurrent = businessId === userData.currentBusinessId;
 
-      const businessMenuItems = [
+    const businessMenuItems = [
       NavMenuItem({
         onClick: async (): Promise<void> => {
           if (Object.keys(userData.businesses).length > 1) {
@@ -153,8 +143,8 @@ export const ProfileMenuItem = (props: { handleClose: () => void}): ReactElement
         },
         selected: !isProfileSelected && isCurrent,
         icon: <ButtonIcon svgFilename={`business-${getBusinessIconColor(i)}`} sizePx="35px" />,
-        itemText: getNavBarBusinessTitle(userData.businesses[businessId], isAuthenticated),
-        dataTestid: `business-title-${i}`,
+        itemText: getNavBarBusinessTitle(userData.businesses[businessId], props.isAuthenticated),
+        dataTestid: `business-title-drop-down`,
         key: `business-title-${businessId}`,
         className: `profile-menu-item ${isCurrent ? "current" : ""}`,
       }),
@@ -180,8 +170,6 @@ export const ProfileMenuItem = (props: { handleClose: () => void}): ReactElement
     return businessMenuItems;
   });
 };
-
-
 
 export const Search = (): ReactElement => {
   const { Config } = useConfig();
@@ -242,5 +230,3 @@ export const Updates = (): ReactElement => {
     reducedLeftMargin: true,
   });
 };
-
-

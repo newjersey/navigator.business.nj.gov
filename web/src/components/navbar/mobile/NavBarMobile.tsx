@@ -1,7 +1,8 @@
+/* eslint-disable react/jsx-key */
 import { NavBarLogoOnly } from "@/components/navbar/NavBarLogoOnly";
 import { NavBarMobileAccountSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileAccountSlideOutMenu";
-import { NavBarMobileQuickLinksSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileQuickLinksSlideOutMenu";
 import { NavBarMobileHomeLogo } from "@/components/navbar/mobile/NavBarMobileHomeLogo";
+import { NavBarMobileQuickLinksSlideOutMenu } from "@/components/navbar/mobile/NavBarMobileQuickLinksSlideOutMenu";
 import { NavBarMobileWrapper } from "@/components/navbar/mobile/NavBarMobileWrapper";
 import {
   AddBusinessItem,
@@ -12,11 +13,11 @@ import {
   ProfileMenuItem,
   RegisterMenuItem,
 } from "@/components/navbar/shared-submenu-components";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { Task } from "@/lib/types/types";
 import { ReactElement, useState } from "react";
-import { useConfig } from "@/lib/data-hooks/useConfig";
 
 interface Props {
   scrolled: boolean;
@@ -33,7 +34,6 @@ interface Props {
 export const NavBarMobile = (props: Props): ReactElement => {
   const { business } = useUserData();
   const { Config } = useConfig();
-
 
   const navBarBusinessTitle = getNavBarBusinessTitle(business, props.isAuthenticated);
 
@@ -66,17 +66,14 @@ export const NavBarMobile = (props: Props): ReactElement => {
           hideMiniRoadmap={props.hideMiniRoadmap}
           task={props.task}
           subMenuElement={
-            <>
-              <GetStartedMenuItem />
-              <LoginMenuItem />
-            </>
+            [<GetStartedMenuItem key={"getStarted"} />, <LoginMenuItem key={"login"} />] // needed so tests will pass (is stupid)
           }
           closeSideBar={closeSideBar}
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
           title={Config.navigationDefaults.landingPageDropDownTitle}
         />
-        <NavBarMobileQuickLinksSlideOutMenu  />
+        <NavBarMobileQuickLinksSlideOutMenu />
       </NavBarMobileWrapper>
     );
   } else if (props.currentlyOnboarding) {
@@ -94,11 +91,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
           showSidebar={props.showSidebar}
           hideMiniRoadmap={props.hideMiniRoadmap}
           task={props.task}
-          subMenuElement={
-            <>
-              <LoginMenuItem />
-            </>
-          }
+          subMenuElement={[<LoginMenuItem key="login" />]}
           closeSideBar={closeSideBar}
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
@@ -121,14 +114,16 @@ export const NavBarMobile = (props: Props): ReactElement => {
           showSidebar={props.showSidebar}
           hideMiniRoadmap={props.hideMiniRoadmap}
           task={props.task}
-          subMenuElement={
-            <>
-              <ProfileMenuItem handleClose={closeSideBar} />
-              <AddBusinessItem handleClose={closeSideBar} />
-              <MyNjMenuItem handleClose={closeSideBar} />
-              <LogoutMenuItem handleClose={closeSideBar} />
-            </>
-          }
+          subMenuElement={[
+            <ProfileMenuItem
+              handleClose={closeSideBar}
+              key="profile"
+              isAuthenticated={props.isAuthenticated}
+            />,
+            <AddBusinessItem handleClose={closeSideBar} key="business" />,
+            <MyNjMenuItem handleClose={closeSideBar} key="MyNJ" />,
+            <LogoutMenuItem handleClose={closeSideBar} key="logout" />,
+          ]}
           closeSideBar={closeSideBar}
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
@@ -152,19 +147,21 @@ export const NavBarMobile = (props: Props): ReactElement => {
           showSidebar={props.showSidebar}
           hideMiniRoadmap={props.hideMiniRoadmap}
           task={props.task}
-          subMenuElement={
-            <>
-              <ProfileMenuItem handleClose={closeSideBar} />
-              <RegisterMenuItem />
-              <LoginMenuItem />
-            </>
-          }
+          subMenuElement={[
+            <ProfileMenuItem
+              handleClose={closeSideBar}
+              isAuthenticated={props.isAuthenticated}
+              key="profile"
+            />,
+            <RegisterMenuItem key="register" />,
+            <LoginMenuItem key="login" />,
+          ]}
           closeSideBar={closeSideBar}
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
           title={Config.navigationDefaults.navBarGuestAccountText}
         />
-        <NavBarMobileQuickLinksSlideOutMenu  />
+        <NavBarMobileQuickLinksSlideOutMenu />
       </NavBarMobileWrapper>
     );
   }
