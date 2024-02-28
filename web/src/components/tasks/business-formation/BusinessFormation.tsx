@@ -29,7 +29,7 @@ import {
   foreignLegalTypePrefix,
   FormationFormData,
   FormationLegalType,
-  getCurrentDateFormatted,
+  getCurrentDateInNewJerseyFormatted,
   InputFile,
   NameAvailability,
   PublicFilingLegalType,
@@ -83,7 +83,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
   const getBusinessStartDate = (date: string | undefined, legalType: FormationLegalType): string => {
     return !date || !isBusinessStartDateValid(date, legalType)
-      ? getCurrentDateFormatted(defaultDateFormat)
+      ? getCurrentDateInNewJerseyFormatted(defaultDateFormat)
       : date;
   };
 
