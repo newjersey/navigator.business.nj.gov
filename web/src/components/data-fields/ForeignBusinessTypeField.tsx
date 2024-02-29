@@ -67,6 +67,7 @@ export const ForeignBusinessTypeField = <T,>(props: Props<T>): ReactElement => {
     setProfileData({
       ...state.profileData,
       industryId: determineForeignBusinessType(ids) === "NEXUS" ? state.profileData.industryId : undefined,
+      homeBasedBusiness: ids.includes("officeInNJ") ? false : state.profileData.homeBasedBusiness,
       foreignBusinessTypeIds: ids,
     });
   };
