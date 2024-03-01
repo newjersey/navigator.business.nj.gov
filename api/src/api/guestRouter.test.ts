@@ -37,7 +37,7 @@ describe("guestRouter", () => {
 
   describe("POST annualFilings", () => {
     it("calculates 3 new annual filing dates and updates them for dateOfFormation", async () => {
-      const formationDate = "2021-03-01";
+      const formationDate = "2021-04-01";
 
       const business = generateBusiness({
         profileData: generateProfileData({

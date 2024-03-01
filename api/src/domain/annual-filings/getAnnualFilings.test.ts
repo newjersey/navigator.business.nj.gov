@@ -13,13 +13,13 @@ import {
 import { generateAnnualFilings } from "@test/helpers";
 
 describe("getAnnualFilings", () => {
-  it("calculates 3 new annual filing datea and updates them for dateOfFormation", async () => {
-    const formationDate = "2021-03-01";
+  it("calculates 3 new annual filing dates and updates them for dateOfFormation", async () => {
+    const formationDate = "2021-04-01";
 
     const postedUserData = generateUserDataForBusiness(
       generateBusiness({
         profileData: generateProfileData({
-          dateOfFormation: "2021-03-01",
+          dateOfFormation: formationDate,
           entityId: undefined,
           legalStructureId: "limited-liability-company",
         }),
@@ -46,7 +46,7 @@ describe("getAnnualFilings", () => {
   });
 
   it("calculates 3 new annual filing dates and overrides existing dates if needed", async () => {
-    const formationDate = "2021-03-01";
+    const formationDate = "2021-04-01";
 
     const postedUserData = generateUserDataForBusiness(
       generateBusiness({
@@ -78,7 +78,7 @@ describe("getAnnualFilings", () => {
   });
 
   it("calculates 3 new annual filing dates and updates them for dateOfFormation when there is no legalStructureId", async () => {
-    const formationDate = "2021-03-01";
+    const formationDate = "2021-04-01";
 
     const postedUserData = generateUserDataForBusiness(
       generateBusiness({
@@ -113,7 +113,7 @@ describe("getAnnualFilings", () => {
     const postedUserData = generateUserDataForBusiness(
       generateBusiness({
         profileData: generateProfileData({
-          dateOfFormation: "2021-03-01",
+          dateOfFormation: "2021-04-01",
           entityId: undefined,
           legalStructureId: "sole-proprietorship",
         }),
