@@ -205,7 +205,7 @@
     "require-from-string": "2.0.2",
     "rimraf": "5.0.5",
     "sass": "1.71.1",
-    "sass-loader": "14.0.0",
+    "sass-loader": "14.1.1",
     "semantic-release": "19.0.5",
     "serverless": "3.38.0",
     "serverless-dynamodb": "0.2.50",
