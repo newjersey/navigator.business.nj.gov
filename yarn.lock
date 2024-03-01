@@ -4639,7 +4639,7 @@ __metadata:
     require-from-string: 2.0.2
     rimraf: 5.0.5
     sass: 1.71.1
-    sass-loader: 14.0.0
+    sass-loader: 14.1.1
     semantic-release: 19.0.5
     serverless: 3.38.0
     serverless-dynamodb: 0.2.50
@@ -4829,7 +4829,7 @@ __metadata:
     require-from-string: 2.0.2
     rimraf: 5.0.5
     sass: 1.71.1
-    sass-loader: 14.0.0
+    sass-loader: 14.1.1
     slick-carousel: ^1.8.1
     storybook: 7.6.17
     style-loader: 3.3.4
@@ -31236,24 +31236,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:14.0.0":
-  version: 14.0.0
-  resolution: "sass-loader@npm:14.0.0"
+"sass-loader@npm:14.1.1":
+  version: 14.1.1
+  resolution: "sass-loader@npm:14.1.1"
   dependencies:
     neo-async: ^2.6.2
   peerDependencies:
+    "@rspack/core": 0.x || 1.x
     node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
     sass: ^1.3.0
     sass-embedded: "*"
     webpack: ^5.0.0
   peerDependenciesMeta:
+    "@rspack/core":
+      optional: true
     node-sass:
       optional: true
     sass:
       optional: true
     sass-embedded:
       optional: true
-  checksum: 3e556f0f6eaba39958511eee0fcf73903a663d43da84f24c59cfa9d0f4d83e57007e040a79579ac5301ddb395fe6a49a3e494a2af1bc14ac69d38caa29221631
+    webpack:
+      optional: true
+  checksum: 56b2d1018d33c91d1c62b195ba62e31a2c03e1e304403ac69e3434413f601400a009e238e3d2d2b705949bd559cd537ba3d165c9ab338950f6e8d83dd92d3d60
   languageName: node
   linkType: hard
 
