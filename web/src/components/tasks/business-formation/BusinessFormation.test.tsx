@@ -4,6 +4,7 @@ import { Task } from "@/lib/types/types";
 import { getDollarValue } from "@/lib/utils/formatters";
 import { generateEmptyFormationData, generateFormationDbaContent, generateTask } from "@/test/factories";
 import {
+  FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
   useSetupInitialMocks,
@@ -1198,62 +1199,72 @@ describe("<BusinessFormation />", () => {
       jest.useRealTimers();
     });
 
-    it("when user is in US Eastern Timezone, initial value is current date in NJ", async () => {
+    const getPage = (): FormationPageHelpers => {
+      return preparePage({
+        business: {
+          profileData: generateProfileData({
+            legalStructureId: "limited-liability-company",
+            businessPersona: "STARTING",
+          }),
+          formationData: generateEmptyFormationData(),
+        },
+        displayContent,
+      });
+    };
+
+    it("when user is in US Eastern Standard Timezone, initial value is current date in NJ", async () => {
       const dateFormat = "MM/DD/YYYY";
       const expectedDateString = getCurrentDateInNewJerseyFormatted(dateFormat);
 
-      const page = preparePage({
-        business: {
-          profileData: generateProfileData({
-            legalStructureId: "limited-liability-company",
-            businessPersona: "STARTING",
-          }),
-          formationData: generateEmptyFormationData(),
-        },
-        displayContent,
-      });
+      const page = getPage();
       await page.fillAndSubmitBusinessNameStep("Pizza Joint");
       expect(screen.getByTestId("date-businessStartDate")).toHaveValue(expectedDateString);
     });
 
-    it("when user is in Phillipine Timezone, initial value is current date in NJ", async () => {
-      const mockDate = new Date("2020-04-13T00:00:00.000+08:00");
-      const expectedDateString = "04/12/2020";
+    it("when user is in Atlantic Standard Timezone, initial value is current date in NJ", async () => {
+      const mockDate = new Date("2024-02-29T00:00:00.000-04:00");
+      const expectedDateString = "02/28/2024";
 
       jest.useFakeTimers();
       jest.setSystemTime(mockDate);
 
-      const page = preparePage({
-        business: {
-          profileData: generateProfileData({
-            legalStructureId: "limited-liability-company",
-            businessPersona: "STARTING",
-          }),
-          formationData: generateEmptyFormationData(),
-        },
-        displayContent,
-      });
+      const page = getPage();
       await page.fillAndSubmitBusinessNameStep("Pizza Joint");
       expect(screen.getByTestId("date-businessStartDate")).toHaveValue(expectedDateString);
     });
 
-    it("when user is in US Pacific Timezone, initial value is current date in NJ", async () => {
-      const mockDate = new Date("2020-04-13T22:00:00.000-08:00");
-      const expectedDateString = "04/14/2020";
+    it("when user is in Central Standard Timezone, initial value is current date in NJ", async () => {
+      const mockDate = new Date("2024-02-27T23:59:59.000-06:00");
+      const expectedDateString = "02/28/2024";
 
       jest.useFakeTimers();
       jest.setSystemTime(mockDate);
 
-      const page = preparePage({
-        business: {
-          profileData: generateProfileData({
-            legalStructureId: "limited-liability-company",
-            businessPersona: "STARTING",
-          }),
-          formationData: generateEmptyFormationData(),
-        },
-        displayContent,
-      });
+      const page = getPage();
+      await page.fillAndSubmitBusinessNameStep("Pizza Joint");
+      expect(screen.getByTestId("date-businessStartDate")).toHaveValue(expectedDateString);
+    });
+
+    it("when user is in Phillipine Standard Timezone, initial value is current date in NJ", async () => {
+      const mockDate = new Date("2024-02-29T00:00:00.000+08:00");
+      const expectedDateString = "02/28/2024";
+
+      jest.useFakeTimers();
+      jest.setSystemTime(mockDate);
+
+      const page = getPage();
+      await page.fillAndSubmitBusinessNameStep("Pizza Joint");
+      expect(screen.getByTestId("date-businessStartDate")).toHaveValue(expectedDateString);
+    });
+
+    it("when user is in Hawaii-Aleutian Timezone, initial value is current date in NJ", async () => {
+      const mockDate = new Date("2024-02-27T20:59:59.000-09:00");
+      const expectedDateString = "02/28/2024";
+
+      jest.useFakeTimers();
+      jest.setSystemTime(mockDate);
+
+      const page = getPage();
       await page.fillAndSubmitBusinessNameStep("Pizza Joint");
       expect(screen.getByTestId("date-businessStartDate")).toHaveValue(expectedDateString);
     });
