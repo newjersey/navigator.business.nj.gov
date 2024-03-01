@@ -2,7 +2,7 @@
   "dashboardDefaults": {
     "fundingSnackbarHeading": "Funding programs added!",
     "certificationsSnackbarBody": "Find certification programs you may be eligible for in the “For You” section on this page.",
-    "deferredOnboardingSnackbarBody": "Update your business profile anytime.",
+    "deferredOnboardingSnackbarBody": "To change your answer, update your business profile any time.",
     "opportunitiesAndDeadlinesTimeDelay": 6000,
     "certificationsSnackbarHeading": "Your certification opportunities were added!",
     "fundingSnackbarBody": "Update your business profile to get personalized funding recommendations in the “For You” section on this page.",
