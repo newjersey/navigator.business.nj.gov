@@ -7,14 +7,15 @@ import {
   FundingBusinessStage,
   FundingCertifications,
   FundingHomeBased,
-  FundingpreferenceForOpportunityZone,
   FundingProgramFrequency,
   FundingPublishStatus,
   FundingStatus,
   FundingType,
+  FundingpreferenceForOpportunityZone,
   LicenseEvent,
   MarkdownResult,
   PostOnboardingFile,
+  QuickActionLicenseReinstatement,
   QuickActionLink,
   QuickActionTask,
   TaskWithoutLinks,
@@ -78,6 +79,19 @@ export const convertQuickActionTaskMd = (
   filename: string
 ): QuickActionTask => {
   const matterResult = matter(quickActionTaskMdContents);
+  const quickActionGrayMatter = matterResult.data as QuickActionTaskGrayMatter;
+  return {
+    contentMd: matterResult.content,
+    filename,
+    ...quickActionGrayMatter,
+  };
+};
+
+export const convertQuickActionLicenseReinstatementMd = (
+  quickActionLicenseReinstatementMdContents: string,
+  filename: string
+): QuickActionLicenseReinstatement => {
+  const matterResult = matter(quickActionLicenseReinstatementMdContents);
   const quickActionGrayMatter = matterResult.data as QuickActionTaskGrayMatter;
   return {
     contentMd: matterResult.content,

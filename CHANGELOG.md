@@ -1,3 +1,25 @@
+## [2024.7.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.7.0...v2024.7.1) (2024-02-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency axios to v1.6.7 ([393c2cd](https://github.com/newjersey/navigator.business.nj.gov/commit/393c2cdf80bb4f4aaae614dd78b95d737137710d))
+* **deps:** update material-ui ([d5924a4](https://github.com/newjersey/navigator.business.nj.gov/commit/d5924a47aa2c440139b52e554af0aed280c8602b))
+* **deps:** update material-ui ([1421665](https://github.com/newjersey/navigator.business.nj.gov/commit/14216656219c842528df735f894db7a248b431c2))
+
+# [2024.7.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.6.1...v2024.7.0) (2024-02-23)
+
+
+### Bug Fixes
+
+* [[#187064247](https://github.com/newjersey/navigator.business.nj.gov/issues/187064247)] change sign-lease urlSlug so correct task renders for non-food truck industries ([1cd0bd3](https://github.com/newjersey/navigator.business.nj.gov/commit/1cd0bd388d7d4d5a0ccf968a78f5d03e80d9ecbe))
+* [[#187080169](https://github.com/newjersey/navigator.business.nj.gov/issues/187080169)] enable feature flag in serverless config ([ac132c5](https://github.com/newjersey/navigator.business.nj.gov/commit/ac132c5d8c2a7e67eb4a782710fc0609dde35f3e))
+
+
+### Features
+
+* [[#186829051](https://github.com/newjersey/navigator.business.nj.gov/issues/186829051)] show error after business name validation when field is focused ([28af20f](https://github.com/newjersey/navigator.business.nj.gov/commit/28af20ffe61ef0f07d21cea34caf12ee89163640))
+
 ## [2024.6.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.6.0...v2024.6.1) (2024-02-16)
 
 

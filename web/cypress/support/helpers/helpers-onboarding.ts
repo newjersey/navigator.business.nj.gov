@@ -9,7 +9,7 @@ import {
 import { Industries, Industry } from "@businessnjgovnavigator/shared/lib/shared/src/industry";
 import { randomInt } from "@businessnjgovnavigator/shared/lib/shared/src/intHelpers";
 import { carServiceOptions } from "@businessnjgovnavigator/shared/lib/shared/src/profileData";
-import { arrayOfSectors, LookupSectorTypeById } from "@businessnjgovnavigator/shared/lib/shared/src/sector";
+import { LookupSectorTypeById, arrayOfSectors } from "@businessnjgovnavigator/shared/lib/shared/src/sector";
 
 export const completeNewBusinessOnboarding = ({
   industry = undefined,
@@ -270,6 +270,10 @@ export const completeForeignNexusBusinessOnboarding = ({
   pageIndex += 1;
   cy.url().should("include", `onboarding?page=${pageIndex}`);
 
+  if (locationInNewJersey === true) {
+    onOnboardingPage.checkForeignBusinessType("officeInNJ");
+  }
+
   onOnboardingPage.checkForeignBusinessType("employeeOrContractorInNJ");
   onOnboardingPage.clickNext();
   cy.url().should("include", `onboarding?page=3`);
@@ -285,10 +289,6 @@ export const completeForeignNexusBusinessOnboarding = ({
     .should("contain", (industry as Industry).name);
 
   onOnboardingPage.clickNext();
-
-  cy.url().should("include", "onboarding?page=4");
-
-  onOnboardingPage.selectLocationInNewJersey(locationInNewJersey);
 
   onOnboardingPage.clickNext();
   cy.url().should("include", `dashboard`);

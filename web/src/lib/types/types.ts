@@ -32,7 +32,6 @@ export type ProfileError =
   | "REQUIRED_ESSENTIAL_QUESTION"
   | "REQUIRED_EXISTING_BUSINESS"
   | "REQUIRED_FOREIGN_BUSINESS_TYPE"
-  | "REQUIRED_NEXUS_LOCATION_IN_NJ"
   | "REQUIRED_REVIEW_INFO_BELOW";
 
 export type OnboardingErrors = ProfileError | "ALERT_BAR";
@@ -221,6 +220,8 @@ export interface QuickActionTask extends QuickAction {
 export interface QuickActionLink extends QuickAction {
   externalRoute: string;
 }
+
+export interface QuickActionLicenseReinstatement extends QuickActionTask {}
 
 export type FundingType =
   | "tax credit"
@@ -481,8 +482,6 @@ export type SidebarCardContent = {
   ctaText?: string;
   preBodySpanButtonText?: string;
   hasCloseButton: boolean;
-  weight: number;
-  section: "above-opportunities" | "below-opportunities";
 };
 
 export type NaicsCodeObject = {

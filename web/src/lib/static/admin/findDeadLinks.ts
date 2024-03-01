@@ -20,6 +20,13 @@ const certificationsDir = path.join(process.cwd(), "..", "content", "src", "cert
 const licensesDir = path.join(process.cwd(), "..", "content", "src", "licenses");
 const quickActionLinksDir = path.join(process.cwd(), "..", "content", "src", "quick-action-links");
 const quickActionTasksDir = path.join(process.cwd(), "..", "content", "src", "quick-action-tasks");
+const quickActionLicenseReinstatementsDir = path.join(
+  process.cwd(),
+  "..",
+  "content",
+  "src",
+  "quick-action-license-reinstatements"
+);
 
 type Filenames = {
   tasks: string[];
@@ -35,6 +42,7 @@ type Filenames = {
   licenseTasks: string[];
   quickActionLinks: string[];
   quickActionTasks: string[];
+  quickActionLicenseReinstatements: string[];
 };
 
 type FileContents = {
@@ -79,6 +87,7 @@ const getFilenames = (): Filenames => {
     licenseTasks: fs.readdirSync(licenseTasksDir),
     quickActionLinks: fs.readdirSync(quickActionLinksDir),
     quickActionTasks: fs.readdirSync(quickActionTasksDir),
+    quickActionLicenseReinstatements: fs.readdirSync(quickActionLicenseReinstatementsDir),
   };
 };
 
@@ -252,6 +261,9 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     }),
     ...filenames.quickActionTasks.map((it) => {
       return `/quick-action-tasks/${it.split(".md")[0]}`;
+    }),
+    ...filenames.quickActionLicenseReinstatements.map((it) => {
+      return `/quick-action-license-reinstatements/${it.split(".md")[0]}`;
     }),
   ];
 

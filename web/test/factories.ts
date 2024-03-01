@@ -188,8 +188,6 @@ export const generateSidebarCardContent = (overrides: Partial<SidebarCardContent
     notStartedHeader: `some-not-started-header-${randomInt()}`,
     completedHeader: `some-completed-header-${randomInt()}`,
     hasCloseButton: !!(randomInt() % 2),
-    weight: randomInt() % 2,
-    section: randomInt() % 2 === 0 ? "above-opportunities" : "below-opportunities",
     ...overrides,
   };
 };

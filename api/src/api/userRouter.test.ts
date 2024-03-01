@@ -604,7 +604,7 @@ describe("userRouter", () => {
 
     it("calculates 3 new annual filing dates and updates them for dateOfFormation", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-      const formationDate = "2021-03-01";
+      const formationDate = "2021-04-01";
 
       const postedUserData = generateUserDataForBusiness(
         generateBusiness({

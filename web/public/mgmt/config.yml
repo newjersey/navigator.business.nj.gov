@@ -3107,14 +3107,7 @@ collections:
       - { label: "Has Close Button", name: "hasCloseButton", widget: "boolean", required: false }
       - { label: "CTA Text", name: "ctaText", widget: "string", required: false }
       - { label: "Pre Body Button Text", name: "preBodySpanButtonText", widget: "string", required: false }
-      - { label: "Weight (lower weights sort first)", name: "weight", widget: "number", required: true }
       - { label: "Content", name: "body", widget: "markdown" }
-      - {
-          label: "Placement in For You Column",
-          name: "section",
-          widget: "select",
-          options: ["above-opportunities", "below-opportunities"],
-        }
 
   - name: "quick-actions-label"
     label: "🟧 QUICK ACTIONS"
@@ -3125,6 +3118,65 @@ collections:
   - name: "quick-action-tasks"
     label: "Quick Action Tasks"
     folder: "content/src/quick-action-tasks"
+    summary: "{{filename}} - {{name}}"
+    identifier_field: "{{filename}}"
+    slug: "{{fields.filename}}"
+    delete: true
+    sortable_fields: ["name", "filename"]
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - { label: "Filename (disabled after file creation)", name: "filename", widget: "write-once-read-only" }
+      - { label: "Name/Title", name: "name", widget: "string" }
+      - {
+          label: "Apply to all - overrides industry and sector dropdown",
+          name: "applyToAllUsers",
+          widget: "boolean",
+          required: false,
+        }
+      - label: Apply to industries
+        name: industryIds
+        widget: relation
+        multiple: true
+        required: false
+        default: []
+        collection: "roadmaps"
+        search_fields: ["name"]
+        value_field: "{{id}}"
+        display_fields: ["{{name}}"]
+        options_length: 500
+      - label: Apply to sectors
+        name: sectorIds
+        widget: relation
+        multiple: true
+        required: false
+        default: []
+        collection: "mappings"
+        search_fields: ["arrayOfSectors.*.name"]
+        value_field: "arrayOfSectors.*.id"
+        display_fields: ["arrayOfSectors.*.name"]
+        options_length: 500
+      - label: "Icon"
+        name: icon
+        widget: "relation"
+        multiple: false
+        required: true
+        collection: "mappings"
+        search_fields: ["arrayOfQuickActionIcons.*.name"]
+        value_field: "arrayOfQuickActionIcons.*.filename"
+        display_fields: ["arrayOfQuickActionIcons.*.name"]
+      - { label: "Url Slug - Internal Routing", name: "urlSlug", widget: "nospace", required: true }
+      - { label: "Summary Description", name: "summaryDescriptionMd", widget: "markdown" }
+      - { label: "Content", name: "body", widget: "markdown", required: true }
+      - { label: "Form", name: "form", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+
+  - name: "quick-action-license-reinstatements"
+    label: "Quick Action License Reinstatements"
+    folder: "content/src/quick-action-license-reinstatements"
     summary: "{{filename}} - {{name}}"
     identifier_field: "{{filename}}"
     slug: "{{fields.filename}}"
@@ -4566,35 +4618,6 @@ collections:
                           - { label: "Remote Seller Alert", name: "REMOTE_SELLER", widget: "markdown" }
                           - { label: "Remote Worker Alert", name: "REMOTE_WORKER", widget: "markdown" }
                           - { label: "Nexus Alert", name: "NEXUS", widget: "markdown" }
-                  - label: (Nexus) Location in New Jersey Question
-                    name: nexusLocationInNewJersey
-                    collapsed: true
-                    widget: object
-                    fields:
-                      - label: Default
-                        name: "default"
-                        collapsed: false
-                        widget: object
-                        fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - {
-                              label: "Contextual Info for Header",
-                              name: "headerContextualInfo",
-                              required: false,
-                              widget: "relation",
-                              collection: "contextual-information",
-                              search_fields: ["{{displayname}}"],
-                              options_length: 500,
-                              value_field: "{{filename}}",
-                              display_fields: ["{{displayname}}"],
-                            }
-                          - {
-                              label: "Error Text (when not selected)",
-                              name: "errorTextRequired",
-                              widget: "string",
-                            }
-                          - { label: "Radio Button - Yes", name: "radioButtonYesText", widget: "string" }
-                          - { label: "Radio Button - No", name: "radioButtonNoText", widget: "string" }
                   - label: Nexus Profile Text
                     name: nexusBusinessName
                     collapsed: true

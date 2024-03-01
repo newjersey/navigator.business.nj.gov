@@ -1,4 +1,4 @@
-import { getCurrentDateISOString, getCurrentDateInNewJerseyISOFormatted } from "@shared/dateHelpers";
+import { getCurrentDateISOString, getCurrentDateInNewJerseyISOString } from "@shared/dateHelpers";
 import { CURRENT_VERSION, UserData } from "@shared/userData";
 
 export const ApiFormationHealth: UserData = {
@@ -96,14 +96,13 @@ export const ApiFormationHealth: UserData = {
         taxPin: "2671",
         sectorId: "administrative-and-employment-services",
         naicsCode: "375127",
-        foreignBusinessTypeIds: [],
+        foreignBusinessTypeIds: ["officeInNJ"],
         nexusDbaName: "",
         needsNexusDbaName: false,
         operatingPhase: "NEEDS_TO_FORM",
         isNonprofitOnboardingRadio: false,
         nonEssentialRadioAnswers: {},
         encryptedTaxId: undefined,
-        nexusLocationInNewJersey: true,
         elevatorOwningBusiness: undefined,
       },
       formationData: {
@@ -122,7 +121,7 @@ export const ApiFormationHealth: UserData = {
           legalType: "foreign-limited-liability-company",
           businessName: "some-business-name-72304745",
           businessSuffix: "LLC",
-          businessStartDate: getCurrentDateInNewJerseyISOFormatted(),
+          businessStartDate: getCurrentDateInNewJerseyISOString(),
           businessTotalStock: "",
           businessPurpose: "some-purpose-15247137",
           additionalProvisions: ["provision1", "provision2"],

@@ -265,7 +265,6 @@ export const generateProfileData = (
     sectorId: randomSector().id,
     naicsCode: randomInt(6).toString(),
     foreignBusinessTypeIds: [],
-    nexusLocationInNewJersey: undefined,
     nexusDbaName: "",
     needsNexusDbaName: false,
     operatingPhase: "NEEDS_TO_FORM",

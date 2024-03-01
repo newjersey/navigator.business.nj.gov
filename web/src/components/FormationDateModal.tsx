@@ -12,6 +12,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { createProfileFieldErrorMap } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared";
+import { nexusLocationInNewJersey } from "@businessnjgovnavigator/shared/domain-logic/nexusLocationInNewJersey";
 import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
@@ -41,7 +42,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
     if (!business) {
       return false;
     }
-    if (business.profileData.nexusLocationInNewJersey === false) {
+    if (nexusLocationInNewJersey(profileData) === false) {
       return false;
     }
     return business.profileData.municipality === undefined;

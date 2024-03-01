@@ -5,7 +5,7 @@ import { allLegalStructuresOfType, randomHomeBasedIndustry } from "@/test/factor
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
-import { setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
+import { currentBusiness, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import {
   Business,
   FormationData,
@@ -81,8 +81,7 @@ describe("profile-foreign", () => {
       business: generateBusinessForProfile({
         profileData: generateProfileData({
           businessPersona: "FOREIGN",
-          foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
-          nexusLocationInNewJersey: true,
+          foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
           industryId: randomHomeBasedIndustry(),
         }),
       }),
@@ -135,6 +134,46 @@ describe("profile-foreign", () => {
         }),
       });
     };
+
+    it("sets homeBasedBusiness value to false when officeInNJ is checked", async () => {
+      renderPage({
+        business: nexusForeignBusinessProfile({
+          profileDataOverrides: {
+            foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
+            homeBasedBusiness: true,
+          },
+        }),
+      });
+      fireEvent.click(
+        screen.getByRole("checkbox", {
+          name: Config.profileDefaults.fields.foreignBusinessTypeIds.default.optionContent.officeInNJ,
+        })
+      );
+      clickSave();
+      await waitFor(() => {
+        expect(currentBusiness().profileData.homeBasedBusiness).toBe(false);
+      });
+    });
+
+    it("doesn't change the homeBasedBusiness value when officeInNJ value is changed", async () => {
+      renderPage({
+        business: nexusForeignBusinessProfile({
+          profileDataOverrides: {
+            foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
+            homeBasedBusiness: false,
+          },
+        }),
+      });
+      fireEvent.click(
+        screen.getByRole("checkbox", {
+          name: Config.profileDefaults.fields.foreignBusinessTypeIds.default.optionContent.officeInNJ,
+        })
+      );
+      clickSave();
+      await waitFor(() => {
+        expect(currentBusiness().profileData.homeBasedBusiness).toBe(false);
+      });
+    });
 
     it("opens the default business information tab when clicked on profile", () => {
       renderPage({ business: nexusForeignBusinessProfile({}) });
@@ -234,8 +273,7 @@ describe("profile-foreign", () => {
             legalStructureId: params.legalStructureId,
             operatingPhase: params.operatingPhase,
             businessPersona: "FOREIGN",
-            foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
-            nexusLocationInNewJersey: true,
+            foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
           }),
         });
         renderPage({ municipalities: [newark], business });
@@ -248,8 +286,7 @@ describe("profile-foreign", () => {
               municipality: generateMunicipality({ displayName: "Trenton" }),
               legalStructureId: randomLegalStructure().id,
               businessPersona: "FOREIGN",
-              foreignBusinessTypeIds: ["employeeOrContractorInNJ"],
-              nexusLocationInNewJersey: true,
+              foreignBusinessTypeIds: ["employeeOrContractorInNJ", "officeInNJ"],
             }),
             taxFilingData: generateTaxFilingData({
               state: "SUCCESS",

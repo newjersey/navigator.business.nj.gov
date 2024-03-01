@@ -1,0 +1,12 @@
+{
+  "displayname": "elevator-owning-business",
+  "filename": "elevator-owning-business",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 1,
+      "task": "elevator-registration",
+      "required": false
+    }
+  ]
+}

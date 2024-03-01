@@ -21,12 +21,12 @@ export const getCurrentDateInNewJersey = (): Dayjs => {
   return dayjs().tz("America/New_York");
 };
 
-export const getCurrentDateInNewJerseyISOFormatted = (): string => {
-  return getCurrentDateInNewJersey().toISOString();
+export const getCurrentDateFormatted = (format: string): string => {
+  return getCurrentDate().format(format);
 };
 
-export const getCurrentDateFormatted = (format: string): string => {
-  return dayjs().format(format);
+export const getCurrentDateInNewJerseyFormatted = (format: string): string => {
+  return getCurrentDateInNewJersey().format(format);
 };
 
 export const getDateInCurrentYear = (date: string): Dayjs => {
@@ -39,6 +39,10 @@ export const isDateAfterCurrentDate = (date: string): boolean => {
 
 export const getCurrentDateISOString = (): string => {
   return dayjs().toISOString();
+};
+
+export const getCurrentDateInNewJerseyISOString = (): string => {
+  return getCurrentDateInNewJersey().toISOString();
 };
 
 export const parseDate = (date: string | number | undefined): Dayjs => {

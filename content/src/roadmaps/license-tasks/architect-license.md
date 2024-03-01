@@ -4,6 +4,8 @@ displayname: architect-license
 urlSlug: architect-license
 name: Apply for Your Architect License
 webflowName: "Architecture: Architect License"
+summaryDescriptionMd: |
+  You or any staff providing architectural services need an architect license.
 industryId:
   - architecture
 callToActionText: Apply for My Architect License
@@ -16,8 +18,6 @@ divisionPhone: (973) 504-6385
 id: architect-license
 webflowType: individual-license
 webflowId: 5f772971b0544fd3d536617b
-summaryDescriptionMd: >
-  You or any staff providing architectural services need an architect license.
 ---
 
 ## Eligibility Criteria (Initial Licensure by Examination)
@@ -28,6 +28,7 @@ summaryDescriptionMd: >
 
 ## Application Requirements (Initial Licensure by Examination)
 
+- Completed [Architecture Practical Experience](https://www.njconsumeraffairs.gov/arch/applications/Architecture-Practical-Experience-Form-Full.pdf) form
 - A 2x2 inches passport photo in color taken within the last six months
 - Registration number
 - Social Security number (SSN)

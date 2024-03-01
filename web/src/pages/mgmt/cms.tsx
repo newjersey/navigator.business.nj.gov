@@ -38,6 +38,7 @@ import { useMountEffect } from "@/lib/utils/helpers";
 
 import AccountSetupPreview from "@/lib/cms/previews/AccountSetupPreview";
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
+import QuickActionLicenseReinstatementPreview from "@/lib/cms/previews/QuickActionLicenseReinstatementPreview";
 import QuickActionLinkPreview from "@/lib/cms/previews/QuickActionLinkPreview";
 import QuickActionTaskPreview from "@/lib/cms/previews/QuickActionTaskPreview";
 import TaxAccessModalPreview from "@/lib/cms/previews/TaxAccessModalPreview";
@@ -95,6 +96,7 @@ const CMS = dynamic(
       // ----- Quick Actions -----
       registerPreview(CMS, "quick-action-tasks", QuickActionTaskPreview);
       registerPreview(CMS, "quick-action-links", QuickActionLinkPreview);
+      registerPreview(CMS, "quick-action-license-reinstatements", QuickActionLicenseReinstatementPreview);
 
       // ----- Roadmap Sidebar Card -----
       registerPreview(CMS, "roadmap-sidebar-card", RoadmapSidebarCardPreview);
