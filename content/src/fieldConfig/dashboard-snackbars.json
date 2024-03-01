@@ -2,18 +2,18 @@
   "dashboardDefaults": {
     "fundingSnackbarHeading": "Funding programs added!",
     "certificationsSnackbarBody": "Find certification programs you may be eligible for in the “For You” section on this page.",
-    "deferredOnboardingSnackbarBody": "Update your [business profile](/profile) anytime.",
+    "deferredOnboardingSnackbarBody": "Update your business profile anytime.",
+    "opportunitiesAndDeadlinesTimeDelay": 6000,
     "certificationsSnackbarHeading": "Your certification opportunities were added!",
-    "fundingSnackbarBody": "Update your [business profile](/profile) to get personalized funding recommendations in the “For You” section on this page.",
+    "fundingSnackbarBody": "Update your business profile to get personalized funding recommendations in the “For You” section on this page.",
     "calendarSnackbarBody": "Find your next reporting due date at the bottom of this page.",
-    "deferredOnboardingSnackbarHeader": "Your answer was saved",
-    "calendarSnackbarHeading": "Your annual reporting deadline was added",
-    "taxRegistrationSnackbarHeading": "We marked the “Register for State Taxes and Employer Purposes” task complete.",
     "taxRegistrationSnackbarBody": "State certifications can give you new government contracting opportunities. Your certification options now appear in the “For You” section.",
-    "additionalBusinessSnackbarHeader": "Additional business added",
-    "additionalBusinessSnackbarBody": "You can switch between your businesses in your account drop down menu.",
+    "deferredOnboardingSnackbarHeader": "Your answer was saved",
     "opportunitiesAndDeadlinesHeading": "Your deadlines and opportunities have been added",
+    "additionalBusinessSnackbarBody": "You can switch between your businesses in your account drop down menu.",
     "opportunitiesAndDeadlinesBody": "See your next annual reporting deadline at the bottom of this page. \n\nGo to the “For You” section to view certifications and funding programs.",
-    "opportunitiesAndDeadlinesTimeDelay": 6000
+    "taxRegistrationSnackbarHeading": "We marked the “Register for State Taxes and Employer Purposes” task complete.",
+    "additionalBusinessSnackbarHeader": "Additional business added",
+    "calendarSnackbarHeading": "Your annual reporting deadline was added"
   }
 }
