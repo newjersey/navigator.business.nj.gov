@@ -4401,7 +4401,7 @@ __metadata:
     "@types/dedent": 0.7.2
     "@types/express": 4.17.21
     "@types/jest": 29.5.12
-    "@types/jsonwebtoken": 9.0.5
+    "@types/jsonwebtoken": 9.0.6
     "@types/lodash": 4.14.202
     "@types/node": 16.18.83
     "@types/simple-oauth2": 5.0.7
@@ -4543,7 +4543,7 @@ __metadata:
     "@types/express": 4.17.21
     "@types/jest": 29.5.12
     "@types/js-yaml": 4.0.9
-    "@types/jsonwebtoken": 9.0.5
+    "@types/jsonwebtoken": 9.0.6
     "@types/lodash": 4.14.202
     "@types/mdast": 4.0.3
     "@types/node": 16.18.83
@@ -11140,12 +11140,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jsonwebtoken@npm:9.0.5":
-  version: 9.0.5
-  resolution: "@types/jsonwebtoken@npm:9.0.5"
+"@types/jsonwebtoken@npm:9.0.6":
+  version: 9.0.6
+  resolution: "@types/jsonwebtoken@npm:9.0.6"
   dependencies:
     "@types/node": "*"
-  checksum: 07ab6fee602e5bd3fb5c6dfe4ec400769dc20f1d7fce901feecb4c3af5f5f08323b03ea55de3e49b1aa41e171a59008f6f4318738a735588c5268a63eba25337
+  checksum: a568e7cb1c703bcb015eff8bf5996e276e748d2b39ddc47edf5ddccd1378f5792179c43302a1c803e47a54b0220f9ecaae445ec444d28bf81b88856f899e85b9
   languageName: node
   linkType: hard
 
