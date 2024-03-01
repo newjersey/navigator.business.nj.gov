@@ -1,3 +1,22 @@
+# [2024.8.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.7.1...v2024.8.0) (2024-03-01)
+
+
+### Bug Fixes
+
+* [[#185761403](https://github.com/newjersey/navigator.business.nj.gov/issues/185761403)] set initial business effective date relative to NJ local date ([2198218](https://github.com/newjersey/navigator.business.nj.gov/commit/2198218c6cbace705d437313a45ce926634ed886))
+* [[#186781958](https://github.com/newjersey/navigator.business.nj.gov/issues/186781958)] change homebasedBusiness value based on officeInNJ ([1bb3e2e](https://github.com/newjersey/navigator.business.nj.gov/commit/1bb3e2e8a0f953b6d1645e90e86e1b2bd5521636))
+* **deps:** update dependency @emotion/react to v11.11.4 ([40d9eba](https://github.com/newjersey/navigator.business.nj.gov/commit/40d9ebaa9f492de3602c46dddd239c6488c14fba))
+* **deps:** update dependency unist-util-visit to v5 ([0245677](https://github.com/newjersey/navigator.business.nj.gov/commit/0245677b956d91a5317e4b3e3aea89ab5abd65c5))
+* **deps:** update material-ui ([ea01bb0](https://github.com/newjersey/navigator.business.nj.gov/commit/ea01bb04c826209d73cd6ee46be4e434f06c497b))
+* update formationDate to account for leap year errors ([f908228](https://github.com/newjersey/navigator.business.nj.gov/commit/f9082286e50deb376d234adcd2468e9d6de6794a))
+
+
+### Features
+
+* [[#186333254](https://github.com/newjersey/navigator.business.nj.gov/issues/186333254)] remove unnecessary props in sidabar cards ([9a470f7](https://github.com/newjersey/navigator.business.nj.gov/commit/9a470f76ac95d01c0663f6e0176dff8bce36a8ab))
+* [[#186781958](https://github.com/newjersey/navigator.business.nj.gov/issues/186781958)] remove step 4 from dakota nexus onboarding ([1949497](https://github.com/newjersey/navigator.business.nj.gov/commit/19494977f733a54a8c7152d448984b4163277c89))
+* [[#187010596](https://github.com/newjersey/navigator.business.nj.gov/issues/187010596)] Create License Reinstatement Quick Action CMS Content Collection ([5d7e5ad](https://github.com/newjersey/navigator.business.nj.gov/commit/5d7e5adddf4343adf6479e3ffa4ec7af7da8c082))
+
 ## [2024.7.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.7.0...v2024.7.1) (2024-02-27)
 
 
