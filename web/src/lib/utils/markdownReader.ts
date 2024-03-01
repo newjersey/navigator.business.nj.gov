@@ -92,7 +92,7 @@ export const convertQuickActionLicenseReinstatementMd = (
   filename: string
 ): QuickActionLicenseReinstatement => {
   const matterResult = matter(quickActionLicenseReinstatementMdContents);
-  const quickActionGrayMatter = matterResult.data as QuickActionLicenseReinstatementGrayMatter;
+  const quickActionGrayMatter = matterResult.data as QuickActionTaskGrayMatter;
   return {
     contentMd: matterResult.content,
     filename,
@@ -192,19 +192,6 @@ type LicenseGrayMatter = {
   urlSlug: string;
   callToActionLink: string;
   callToActionText: string;
-};
-
-type QuickActionLicenseReinstatementGrayMatter = {
-  name: string;
-  urlSlug: string;
-  callToActionLink: string;
-  callToActionText: string;
-  form: string;
-  icon: string;
-  industryIds: string[];
-  sectorIds: string[];
-  applyToAllUsers: boolean;
-  summaryDescriptionMd: string;
 };
 
 type QuickActionLinkGrayMatter = {
