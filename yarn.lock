@@ -4418,7 +4418,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.10
     dedent: 1.5.1
-    dependency-cruiser: 16.2.1
+    dependency-cruiser: 16.2.2
     eslint: 8.57.0
     eslint-config-prettier: 9.1.0
     eslint-plugin-jest: 27.9.0
@@ -4580,7 +4580,7 @@ __metadata:
     cypress-wait-until: 3.0.1
     dayjs: 1.11.10
     dedent: 1.5.1
-    dependency-cruiser: 16.2.1
+    dependency-cruiser: 16.2.2
     dotenv: 16.4.5
     eslint: 8.57.0
     eslint-config-next: 14.1.0
@@ -4780,7 +4780,7 @@ __metadata:
     cypress-dotenv: 2.0.0
     cypress-wait-until: 3.0.1
     dayjs: 1.11.10
-    dependency-cruiser: 16.2.1
+    dependency-cruiser: 16.2.2
     dotenv: 16.4.5
     eslint: 8.57.0
     eslint-config-next: 14.1.0
@@ -16482,9 +16482,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:16.2.1":
-  version: 16.2.1
-  resolution: "dependency-cruiser@npm:16.2.1"
+"dependency-cruiser@npm:16.2.2":
+  version: 16.2.2
+  resolution: "dependency-cruiser@npm:16.2.2"
   dependencies:
     acorn: 8.11.3
     acorn-jsx: 5.3.2
@@ -16494,7 +16494,7 @@ __metadata:
     ajv: 8.12.0
     chalk: 5.3.0
     commander: 12.0.0
-    enhanced-resolve: 5.15.0
+    enhanced-resolve: 5.15.1
     figures: 6.0.1
     ignore: 5.3.1
     indent-string: 5.0.0
@@ -16510,7 +16510,7 @@ __metadata:
     semver-try-require: 6.2.3
     teamcity-service-messages: 0.1.14
     tsconfig-paths-webpack-plugin: 4.1.0
-    watskeburt: 2.0.5
+    watskeburt: 4.0.0
     wrap-ansi: 9.0.0
   bin:
     depcruise: bin/dependency-cruise.mjs
@@ -16519,7 +16519,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.mjs
     dependency-cruise: bin/dependency-cruise.mjs
     dependency-cruiser: bin/dependency-cruise.mjs
-  checksum: 182a49d6dd4040c5dca994a62617b74afbf4ac79143559108f5a1e56db6079495baf16fedaec590f2bf2246f5804afe2ccf78258a1a6369e4c924c4760336f22
+  checksum: f634fac7d5cd4809856b1cf0a107f97eb6110e7718679bced4bfac288256e9a0e30f5a1232fb3f01041f547440926e0e0cfc924d1e6ab04650e8a243c198564b
   languageName: node
   linkType: hard
 
@@ -17168,13 +17168,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"enhanced-resolve@npm:5.15.0, enhanced-resolve@npm:^5.0.0, enhanced-resolve@npm:^5.12.0, enhanced-resolve@npm:^5.15.0, enhanced-resolve@npm:^5.7.0":
-  version: 5.15.0
-  resolution: "enhanced-resolve@npm:5.15.0"
+"enhanced-resolve@npm:5.15.1, enhanced-resolve@npm:^5.0.0, enhanced-resolve@npm:^5.12.0, enhanced-resolve@npm:^5.15.0, enhanced-resolve@npm:^5.7.0":
+  version: 5.15.1
+  resolution: "enhanced-resolve@npm:5.15.1"
   dependencies:
     graceful-fs: ^4.2.4
     tapable: ^2.2.0
-  checksum: fbd8cdc9263be71cc737aa8a7d6c57b43d6aa38f6cc75dde6fcd3598a130cc465f979d2f4d01bb3bf475acb43817749c79f8eef9be048683602ca91ab52e4f11
+  checksum: 360f646c794323f2984b1ac751a878dd02ef30b565e106640b3d881a13ad16ce9c66e7c593cc34133f251ba3708cf6ae461e071b0f53ee65ff6650a779ed25a1
   languageName: node
   linkType: hard
 
@@ -35208,12 +35208,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"watskeburt@npm:2.0.5":
-  version: 2.0.5
-  resolution: "watskeburt@npm:2.0.5"
+"watskeburt@npm:4.0.0":
+  version: 4.0.0
+  resolution: "watskeburt@npm:4.0.0"
   bin:
     watskeburt: dist/run-cli.js
-  checksum: 8ec388d4bef887dfdba57ab9b4d4f4b6da0fd4d9f8f6ab12d09e86ce27427dbd731b3457fe0a3a7a880f8e1fd2069cf8915e4c2fcb613e46f0ebcfc34d572272
+  checksum: c30512e90ffc4d5f626fd37b20b17549f48fa36103418877b54ebc773c6dacb341100e7cc7da8ac06f3d772c2f91869ff153dd9369287f589b8c46eaffbe1c6f
   languageName: node
   linkType: hard
 
