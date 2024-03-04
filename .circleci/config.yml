@@ -396,7 +396,7 @@ commands:
     steps:
       - configure-and-build
       - setup_remote_docker:
-          version: 20.10.14
+          version: edge
           docker_layer_caching: true
       - package-webapp-docker:
           image-name: bfs-navigator-content
@@ -408,7 +408,7 @@ commands:
     steps:
       - configure-and-build
       - setup_remote_docker:
-          version: 20.10.14
+          version: edge
           docker_layer_caching: true
       - package-webapp-docker:
           image-name: bfs-navigator-testing
@@ -420,7 +420,7 @@ commands:
     steps:
       - configure-and-build
       - setup_remote_docker:
-          version: 20.10.14
+          version: edge
           docker_layer_caching: true
       - package-webapp-docker:
           image-name: bfs-navigator
@@ -523,7 +523,7 @@ commands:
     steps:
       - install-awscli
       - setup_remote_docker:
-          version: 20.10.14
+          version: edge
           docker_layer_caching: true
       - checkout
       - build-and-push-custom-node-image:
