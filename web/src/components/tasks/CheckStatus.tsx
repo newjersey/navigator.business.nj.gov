@@ -50,6 +50,16 @@ export const CheckStatus = (props: Props): ReactElement => {
 
     if (business.licenseData) {
       setFormValues(business.licenseData.nameAndAddress);
+    } else if (business.formationData.formationResponse?.success) {
+      setFormValues((prevValues) => {
+        return {
+          ...prevValues,
+          name: business.formationData.formationFormData.businessName,
+          addressLine1: business.formationData.formationFormData.addressLine1,
+          addressLine2: business.formationData.formationFormData.addressLine2 || "",
+          zipCode: business.formationData.formationFormData.addressZipCode,
+        };
+      });
     } else {
       setFormValues((prevValues) => {
         return {
