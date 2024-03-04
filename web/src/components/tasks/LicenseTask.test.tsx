@@ -12,7 +12,13 @@ import {
   generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared";
-import { generateLicenseStatusItem, generateUserData } from "@businessnjgovnavigator/shared/test";
+import {
+  generateFormationData,
+  generateFormationFormData,
+  generateFormationSubmitResponse,
+  generateLicenseStatusItem,
+  generateUserData,
+} from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 
@@ -84,7 +90,7 @@ describe("<LicenseTask />", () => {
     expect(screen.queryByTestId("COMPLETED")).not.toBeInTheDocument();
   });
 
-  describe("starting tab", () => {
+  describe("start application tab", () => {
     it("shows content on first tab", () => {
       useMockBusiness({ licenseData: undefined });
       renderTask();
@@ -132,7 +138,7 @@ describe("<LicenseTask />", () => {
     });
   });
 
-  describe("form tab", () => {
+  describe("check status tab", () => {
     it("fills form values from user data if applicable", async () => {
       useMockBusiness({
         licenseData: generateLicenseData({
@@ -222,6 +228,32 @@ describe("<LicenseTask />", () => {
         expect(screen.getByText("Pending")).toBeInTheDocument();
       });
       expect(screen.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
+    });
+
+    it("pre-populates form values from formation data when no licenseData and formation is successful", async () => {
+      useMockBusiness({
+        licenseData: undefined,
+        formationData: generateFormationData({
+          formationResponse: generateFormationSubmitResponse({
+            success: true,
+          }),
+          formationFormData: generateFormationFormData({
+            businessName: "Apple Pies Rock",
+            addressLine1: "327 Bakery Lane",
+            addressLine2: "Suite E",
+            addressZipCode: "12345",
+          }),
+        }),
+      });
+      renderTask();
+      fireEvent.click(screen.getByTestId("cta-secondary"));
+
+      await waitFor(() => {
+        expect(getValue("business-name")).toEqual("Apple Pies Rock");
+      });
+      expect(getValue("address-1")).toEqual("327 Bakery Lane");
+      expect(getValue("address-2")).toEqual("Suite E");
+      expect(getValue("zipcode")).toEqual("12345");
     });
   });
 
