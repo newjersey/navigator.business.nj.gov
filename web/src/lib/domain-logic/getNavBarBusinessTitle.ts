@@ -1,5 +1,4 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { Business, LookupIndustryById, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
 import {
   isOwningBusiness,
@@ -8,11 +7,11 @@ import {
 
 export const getNavBarBusinessTitle = (
   business: Business | undefined,
-  isAuthenticated: IsAuthenticated
+  isAuthenticated: boolean,
 ): string => {
   const Config = getMergedConfig();
-  if (!business || isAuthenticated === IsAuthenticated.FALSE) {
-    return Config.navigationDefaults.navBarGuestText;
+  if (!business || !isAuthenticated) {
+    return Config.navigationDefaults.navBarGuestBusinessText;
   }
 
   const { businessName, tradeName, legalStructureId, industryId, needsNexusDbaName, nexusDbaName } =
