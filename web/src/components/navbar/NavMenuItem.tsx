@@ -10,6 +10,7 @@ interface Props {
   itemText: string;
   key: string;
   dataTestid?: string;
+  reducedLeftMargin?: boolean;
 }
 
 export const NavMenuItem = (props: Props): ReactElement => {
@@ -27,7 +28,7 @@ export const NavMenuItem = (props: Props): ReactElement => {
       selected={props.selected}
       key={props.key}
     >
-      <div className="icon-width">{icon}</div>
+      <div className={`${props.reducedLeftMargin ? "nav-bar-menu-reduced-width" : "icon-width"}`}>{icon}</div>
       <div className={`text-wrap truncate-long-business-names_NavBarDesktop`} data-testid={props.dataTestid}>
         {props.itemText}
       </div>

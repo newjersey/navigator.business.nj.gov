@@ -20,6 +20,13 @@ $icon-offset: 45px;
   align-items: center;
 }
 
+.nav-bar-menu-reduced-width {
+  width: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .menu-item-focus:focus {
   z-index: 5;
 }
@@ -76,4 +83,21 @@ $icon-offset: 45px;
   text-overflow: ellipsis;
   margin-right: 15px;
   max-width: 230px;
+}
+
+.nav-bar-icon-search-outline {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: $base-lightest;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-bar-dropdown-account-icon {
+  font-size: 28px;
+  margin-left: -5px;
+  margin-right: 10px;
+  color: $accent-cool-darker;
 }

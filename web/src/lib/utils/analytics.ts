@@ -193,6 +193,7 @@ type Item =
   | "mobile_hamburger_icon"
   | "mobile_menu_close_button"
   | "mobile_menu"
+  | "mobile_hamburger_icon_quick_links"
   | "profile_back_to_roadmap"
   | "task_back_to_roadmap"
   | "task_mini_roadmap_step"
@@ -1073,6 +1074,128 @@ export default {
         },
       },
     },
+    mobile_hamburger_icon_quick_links: {
+      click: {
+        open_mobile_menu: () => {
+          eventRunner.track({
+            event: "navigation_clicks",
+            item: "mobile_hamburger_icon_quick_links",
+            legacy_event_action: "click",
+            legacy_event_category: "mobile_hamburger_icon_quick_links",
+            legacy_event_label: "open_mobile_menu",
+            clicked: "open_mobile_menu",
+          });
+        },
+      },
+    },
+    mobile_menu_close_button_quick_links: {
+      click: {
+        close_mobile_menu: () => {
+          eventRunner.track({
+            event: "navigation_clicks",
+            item: "mobile_hamburger_icon_quick_links",
+            legacy_event_action: "click",
+            legacy_event_category: "mobile_menu_close_button_quick_links",
+            legacy_event_label: "close_mobile_menu",
+            clicked: "close_mobile_menu",
+          });
+        },
+      },
+    },
+    mobile_menu_quick_links: {
+      click_outside: {
+        close_mobile_menu: () => {
+          eventRunner.track({
+            event: "navigation_clicks",
+            item: "mobile_hamburger_icon_quick_links",
+            legacy_event_action: "click_outside",
+            legacy_event_category: "mobile_menu_quick_links",
+            legacy_event_label: "close_mobile_menu",
+            clicked: "close_mobile_menu",
+          });
+        },
+      },
+    },
+    mobile_hamburger_quick_links_plan: {
+      click: {
+        plan_page: () => {
+          eventRunner.track({
+            legacy_event_category: "mobile_hamburger_quick_links_plan",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_plan_page",
+            event: "navigation_clicks",
+            clicked_to: "plan_page",
+          });
+        },
+      },
+    },
+    mobile_hamburger_quick_links_start: {
+      click: {
+        start_page: () => {
+          eventRunner.track({
+            legacy_event_category: "mobile_hamburger_quick_links_start",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_start_page",
+            event: "navigation_clicks",
+            clicked_to: "start_page",
+          });
+        },
+      },
+    },
+    mobile_hamburger_quick_links_grow: {
+      click: {
+        grow_page: () => {
+          eventRunner.track({
+            legacy_event_category: "mobile_hamburger_quick_links_grow",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_grow_page",
+            event: "navigation_clicks",
+            clicked_to: "grow_page",
+          });
+        },
+      },
+    },
+    mobile_hamburger_quick_links_updates: {
+      click: {
+        updates_page: () => {
+          eventRunner.track({
+            legacy_event_category: "mobile_hamburger_quick_links_updates",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_update_page",
+            event: "navigation_clicks",
+            clicked_to: "update_page",
+          });
+        },
+      },
+    },
+
+    mobile_hamburger_quick_links_search: {
+      click: {
+        search_page: () => {
+          eventRunner.track({
+            legacy_event_category: "mobile_hamburger_quick_links_search",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_search_page",
+            event: "navigation_clicks",
+            clicked_to: "update_search",
+          });
+        },
+      },
+    },
+    mobile_hamburger_quick_links_operate: {
+      click: {
+        operate_page: () => {
+          eventRunner.track({
+            legacy_event_category: "mobile_hamburger_quick_links_operate",
+            legacy_event_action: "click",
+            legacy_event_label: "go_to_operate_page",
+            event: "navigation_clicks",
+            clicked_to: "update_operate",
+          });
+        },
+      },
+    },
+
     task_business_name_check_availability: {
       submit: {
         view_business_name_availability: () => {

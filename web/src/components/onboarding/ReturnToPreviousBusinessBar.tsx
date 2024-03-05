@@ -1,6 +1,7 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthContext } from "@/contexts/authContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
@@ -20,7 +21,10 @@ export const ReturnToPreviousBusinessBar = (props: Props): ReactElement | null =
   const { updateQueue, userData } = useUserData();
   const { state } = useContext(AuthContext);
   const router = useRouter();
-  const businessName = getNavBarBusinessTitle(props.previousBusiness, state.isAuthenticated);
+  const businessName = getNavBarBusinessTitle(
+    props.previousBusiness,
+    state.isAuthenticated === IsAuthenticated.TRUE
+  );
 
   if (!props.previousBusiness) return null;
 
