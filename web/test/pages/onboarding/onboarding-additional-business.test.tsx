@@ -59,7 +59,7 @@ describe("onboarding - additional business", () => {
       expect(mockPush).toHaveBeenCalledWith({ query: { page: 1 } }, undefined, { shallow: true });
     });
 
-    const previousBusinessName = getNavBarBusinessTitle(initialBusiness, IsAuthenticated.TRUE);
+    const previousBusinessName = getNavBarBusinessTitle(initialBusiness, IsAuthenticated.TRUE === "TRUE");
     const expectedText = templateEval(Config.onboardingDefaults.returnToPreviousBusiness, {
       previousBusiness: previousBusinessName,
     });

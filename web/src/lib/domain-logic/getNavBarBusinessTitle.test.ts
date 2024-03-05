@@ -1,5 +1,4 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import {
   BusinessPersona,
@@ -32,8 +31,8 @@ const tradeNameProfile = (): Partial<ProfileData> => {
 describe("getNavBarBusinessTitle", () => {
   describe("when not authenticated", () => {
     it("shows Guest text", () => {
-      const navBarBusinessTitle = getNavBarBusinessTitle(generateBusiness({}), IsAuthenticated.FALSE);
-      expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarGuestText);
+      const navBarBusinessTitle = getNavBarBusinessTitle(generateBusiness({}), false);
+      expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarGuestBusinessText);
     });
   });
 
@@ -48,7 +47,7 @@ describe("getNavBarBusinessTitle", () => {
             legalStructureId: undefined,
           }),
         });
-        const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
         expect(navBarBusinessTitle).toEqual(name);
       });
 
@@ -61,7 +60,7 @@ describe("getNavBarBusinessTitle", () => {
             legalStructureId: undefined,
           }),
         });
-        const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
         expect(navBarBusinessTitle).toEqual(name);
       });
 
@@ -76,7 +75,7 @@ describe("getNavBarBusinessTitle", () => {
               legalStructureId: undefined,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
           expect(navBarBusinessTitle).toEqual(name);
         }
       );
@@ -92,7 +91,7 @@ describe("getNavBarBusinessTitle", () => {
               businessName: name,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
           expect(navBarBusinessTitle).toEqual(name);
         });
       });
@@ -106,7 +105,7 @@ describe("getNavBarBusinessTitle", () => {
               businessName: name,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
           expect(navBarBusinessTitle).toEqual(name);
         });
       });
@@ -122,7 +121,7 @@ describe("getNavBarBusinessTitle", () => {
               tradeName: name,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
           expect(navBarBusinessTitle).toEqual(name);
         });
       });
@@ -136,7 +135,7 @@ describe("getNavBarBusinessTitle", () => {
               tradeName: name,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
           expect(navBarBusinessTitle).toEqual(name);
         });
       });
@@ -153,7 +152,7 @@ describe("getNavBarBusinessTitle", () => {
             nexusDbaName: "",
           }),
         });
-        const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
         expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedDbaBusinessText);
       });
 
@@ -169,7 +168,7 @@ describe("getNavBarBusinessTitle", () => {
             nexusDbaName: dbaName,
           }),
         });
-        const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
         expect(navBarBusinessTitle).toEqual(dbaName);
       });
     });
@@ -187,7 +186,7 @@ describe("getNavBarBusinessTitle", () => {
               businessName: undefined,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
           expect(navBarBusinessTitle).toEqual(
             `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
               LookupIndustryById(business?.profileData?.industryId).name
@@ -204,7 +203,7 @@ describe("getNavBarBusinessTitle", () => {
               businessName: undefined,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
           expect(navBarBusinessTitle).toEqual(
             `${Config.navigationDefaults.navBarUnnamedOwnedBusinessText} ${
               LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation
@@ -222,7 +221,7 @@ describe("getNavBarBusinessTitle", () => {
               businessName: undefined,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
           expect(navBarBusinessTitle).toEqual(
             `${Config.navigationDefaults.navBarUnnamedOwnedBusinessText} ${
               LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation
@@ -242,7 +241,7 @@ describe("getNavBarBusinessTitle", () => {
               tradeName: undefined,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
           expect(navBarBusinessTitle).toEqual(
             `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
               LookupIndustryById(business?.profileData?.industryId).name
@@ -260,7 +259,7 @@ describe("getNavBarBusinessTitle", () => {
               tradeName: undefined,
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
           expect(navBarBusinessTitle).toEqual(
             `${Config.navigationDefaults.navBarUnnamedOwnedBusinessText} ${
               LookupLegalStructureById(business?.profileData?.legalStructureId).abbreviation
@@ -284,7 +283,7 @@ describe("getNavBarBusinessTitle", () => {
             businessName: undefined,
           }),
         });
-        const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
         expect(navBarBusinessTitle).toEqual(
           `${Config.navigationDefaults.navBarUnnamedBusinessText} ${
             LookupIndustryById(business?.profileData?.industryId).name
@@ -303,7 +302,7 @@ describe("getNavBarBusinessTitle", () => {
             businessName: undefined,
           }),
         });
-        const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
         expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedOwnedBusinessText);
       });
     });
@@ -319,7 +318,7 @@ describe("getNavBarBusinessTitle", () => {
             businessName: undefined,
           }),
         });
-        const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+        const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
         expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedOwnedBusinessText);
       });
     });
@@ -336,7 +335,7 @@ describe("getNavBarBusinessTitle", () => {
           industryId: undefined,
         }),
       });
-      const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+      const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
       expect(navBarBusinessTitle).toEqual(Config.navigationDefaults.navBarUnnamedOwnedBusinessText);
     });
 
@@ -353,7 +352,7 @@ describe("getNavBarBusinessTitle", () => {
               foreignBusinessTypeIds: [foreignBusinessTypeId] as ForeignBusinessTypeId[],
             }),
           });
-          const navBarBusinessTitle = getNavBarBusinessTitle(business, IsAuthenticated.TRUE);
+          const navBarBusinessTitle = getNavBarBusinessTitle(business, true);
           expect(navBarBusinessTitle).toEqual(
             Config.navigationDefaults.navBarUnnamedForeignRemoteSellerWorkerText
           );

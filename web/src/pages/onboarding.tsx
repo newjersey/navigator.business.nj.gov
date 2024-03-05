@@ -428,7 +428,10 @@ const OnboardingPage = (props: Props): ReactElement => {
             title={`${Config.pagesMetadata.titlePrefix} - ${pageTitle} ${evalHeaderStepsTemplate(page)}`}
           />
           <PageSkeleton>
-            <NavBar previousBusinessId={previousBusiness?.id} />
+            <NavBar
+              previousBusinessId={previousBusiness?.id}
+              logoOnly={previousBusiness ? "NAVIGATOR_LOGO" : undefined}
+            />
             <ReturnToPreviousBusinessBar previousBusiness={previousBusiness} />
             <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
               <SingleColumnContainer isSmallerWidth>

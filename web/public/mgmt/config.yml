@@ -3813,12 +3813,14 @@ collections:
             summary: "{{navigationDefaults}}"
             fields:
               - { label: Login Button, name: logInButton, widget: string }
-              - { label: Registration Button, name: registerButton, widget: string }
+              - { label: Registration Button, name: getStartedText, widget: string }
               - { label: Logout Button, name: logoutButton, widget: string }
               - { label: MyNJ Account Text, name: myNJAccountText, widget: string }
+              - { label: Landing Page Drop Down Title, name: landingPageDropDownTitle, widget: string }
               - { label: Task Page Nav Bar Heading, name: taskPageNavBarHeading, widget: string }
               - { label: Profile Link Text, name: profileLinkText, widget: string }
-              - { label: NavBar Guest Profile text, name: navBarGuestText, widget: string }
+              - { label: NavBar Guest Business text, name: navBarGuestBusinessText, widget: string }
+              - { label: NavBar Guest Account text, name: navBarGuestAccountText, widget: string }
               - {
                   label: Navbar Guest dropdown registration text,
                   name: navBarGuestRegistrationText,
@@ -3872,6 +3874,26 @@ collections:
               - { label: Business.nj.gov Logo Link, name: navBarBusinessNJGovLink, widget: string }
               - { label: Business.nj.gov Logo Alt Text, name: navBarBusinessNJGovAltText, widget: string }
               - { label: Business.nj.gov Logo Aria Label, name: navBarBusinessNJGovAriaLabel, widget: string }
+              - label: Navigation Quick Links
+                name: navigationQuickLinks
+                collapsed: true
+                widget: object
+                summary: "{{navigationQuickLinks}}"
+                fields:
+                  - { label: Mobile Title, name: navBarMobileQuickLinksTitle, widget: string }
+                  - { label: Plan, name: navBarPlanText, widget: string }
+                  - { label: Plan Link, name: navBarPlanLink, widget: nospace }
+                  - { label: Start, name: navBarStartText, widget: string }
+                  - { label: Start Link, name: navBarStartLink, widget: nospace }
+                  - { label: Operate, name: navBarOperateText, widget: string }
+                  - { label: Operate Link, name: navBarOperateLink, widget: nospace }
+                  - { label: Grow, name: navBarGrowText, widget: string }
+                  - { label: Grow Link, name: navBarGrowLink, widget: nospace }
+                  - { label: Updates, name: navBarUpdatesText, widget: string }
+                  - { label: Updates Link, name: navBarUpdatesLink, widget: nospace }
+                  - { label: Search, name: navBarSearchText, widget: string }
+                  - { label: Search Link, name: navBarSearchLink, widget: nospace }
+
           - label: Onboarding Defaults
             name: onboardingDefaults
             collapsed: true
