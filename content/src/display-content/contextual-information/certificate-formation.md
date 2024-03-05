@@ -1,7 +1,7 @@
 ---
 slug: certificate-formation
 filename: certificate-formation
-header: Certificate of Formation / Certificate if Incorporation/Certificate of
+header: Certificate of Formation / Certificate of Incorporation / Certificate of
   Authority
 displayname: certificate-formation
 ---
