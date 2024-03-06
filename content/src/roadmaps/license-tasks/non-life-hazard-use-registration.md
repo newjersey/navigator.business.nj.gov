@@ -20,7 +20,7 @@ industryId:
 agencyId: nj-community-affairs
 agencyAdditionalContext: Division of Fire Safety or Local Enforcing Agency
 divisionPhone: (609) 633-6132 or your Local Enforcing Agency
-id: undefined
+id: non-life-hazard-use-registration
 webflowType: business-license
 webflowId: 65708faf97a47f686cfad039
 licenseCertificationClassification: ""

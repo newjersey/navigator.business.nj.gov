@@ -1,6 +1,6 @@
 ---
 displayname: cosmetology-school-license
-id: "undefined"
+id: "cosmetology-school-license"
 webflowId: "64ca743a83dad99752b4e0df"
 urlSlug: "cosmetology-school-license"
 name: "Get Your Cosmetology School License"

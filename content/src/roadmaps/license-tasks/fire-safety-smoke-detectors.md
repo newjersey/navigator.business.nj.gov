@@ -19,8 +19,7 @@ licenseCertificationClassification: undefined
 agencyId: nj-community-affairs
 agencyAdditionalContext: Division of Fire Safety or Local Enforcing Agency
 divisionPhone: (609) 633-6132 or your Local Enforcing Agency
-id: undefined
+id: fire-safety-smoke-detectors
 webflowType: object-vehicle
 webflowId: 65bd67f31de3409a62b43e80
 ---
-
