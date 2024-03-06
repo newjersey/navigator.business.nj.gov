@@ -10,7 +10,7 @@ summaryDescriptionMd: >-
   (RGB) Online Registration Portal.
 
 
-  :::infoAlert 
+  :::infoAlert
    You must submit applications for both the agency and the agent.
   :::
 industryId: employment-agency
@@ -18,7 +18,7 @@ callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Bu
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Employment and Personnel Services
 divisionPhone: (973) 504-6370
-id: undefined
+id: career-counseling-firm-reg
 callToActionText: Register My Career Counseling Firm
 webflowId: 65bd67f3ba805962d4de11b5
 licenseCertificationClassification: undefined

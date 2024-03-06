@@ -16,7 +16,7 @@ licenseCertificationClassification: undefined
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: " Board of Cosmetology and Hairstyling"
 divisionPhone: (973) 504-6400
-id: undefined
+id: cosmetology-license
 webflowId: 64ca743a7c4e7f4f3a3c50f2
 ---
 

@@ -1,6 +1,6 @@
 ---
 displayname: cosmetology-teacher-license
-id: "undefined"
+id: "cosmetology-teacher-license"
 webflowId: "64ca743aafbb5a2c98163f9a"
 urlSlug: "cosmetology-teacher-license"
 name: "Get Your Cosmetology Teacher License"
