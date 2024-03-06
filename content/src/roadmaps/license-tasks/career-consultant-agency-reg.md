@@ -10,12 +10,12 @@ summaryDescriptionMd: >-
   (RGB) Online Registration Portal.
 
 
-  :::infoAlert 
+  :::infoAlert
    You must submit applications for both the agency and the agent.
   :::
 industryId: employment-agency
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
-id: undefined
+id: career-consultant-agency-reg
 callToActionText: "Register My Career Consultant Agency "
 webflowId: 65bd67f300d13004f77a23d6
 licenseCertificationClassification: undefined

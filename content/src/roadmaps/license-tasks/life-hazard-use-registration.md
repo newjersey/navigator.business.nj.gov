@@ -20,10 +20,11 @@ licenseCertificationClassification: undefined
 agencyId: nj-community-affairs
 agencyAdditionalContext: Division of Fire Safety
 divisionPhone: (609) 633-6132
-id: undefined
+id: life-hazard-use-registration
 webflowType: business-license
 webflowId: 65708fb0a29ec3ec595eaa57
 ---
+
 Life Hazard Use (LHU) is a label assigned to businesses with a commercial or manufacturing space that present a higher risk to human life during fires and other emergencies. [Contact your Local Enforcing Agency (LEA)](https://www.nj.gov/dca/divisions/dfs/pdf/fire_code_enforcement_director.pdf) to learn if your business is an LHU.
 
 If your business is an LHU, you must register with the State and pay the associated fee to operate your business.
