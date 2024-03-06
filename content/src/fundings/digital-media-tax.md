@@ -4,6 +4,9 @@ name: Digital Media Tax Credit
 displayName: digital-media
 urlSlug: digital-media-tax
 id: digital-media-tax-credit
+sidebarCardBodyText: The Digital Media Tax Credit Program provides a
+  transferable credit against the corporate business tax and the gross income
+  tax to incentivize companies to produce content in New Jersey.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: The Digital Media Tax Credit Program provides a
@@ -34,16 +37,13 @@ county:
 sector:
   - arts-entertainment-and-recreation
 publishStageArchive: ""
-sidebarCardBodyText: The Digital Media Tax Credit Program provides a transferable
-  credit against the corporate business tax and the gross income tax to
-  incentivize companies to produce content in New Jersey.
 ---
-
 ## Eligibility
 
-- Companies must produce content in New Jersey
+* Companies must produce content in New Jersey
+* Incurred for services performed and tangible personal property purchased through vendors whose primary place of business is located in Atlantic, Burlington, Camden, Cape May, Cumberland, Gloucester, Mercer or Salem County
 
 > ### Benefits
 >
-> - A tax credit equal to 20% of qualified digital media production expenses, or
-> - 25% of qualified digital media production expenses for services performed and tangible personal property purchased through vendors located in specific New Jersey counties
+> * A tax credit equal to 20% of qualified digital media production expenses, or
+> * 25% of qualified digital media production expenses for services performed and tangible personal property purchased through vendors located in specific New Jersey counties
