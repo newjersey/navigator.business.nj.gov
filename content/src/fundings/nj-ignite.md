@@ -1,13 +1,15 @@
 ---
 filename: nj-ignite
 name: NJ Ignite
+displayName: ignite
 urlSlug: nj-ignite
-displayName: NJ Ignite
 id: nj-ignite
+sidebarCardBodyText: NJ Ignite provides rent support for technology and life
+  sciences startups that are moving to an approved collaborative workspace.
 openDate: ""
 dueDate: ""
-summaryDescriptionMd: NJ Ignite provides rent support for technology startups
-  that are moving to an approved collaborative workspace.
+summaryDescriptionMd: NJ Ignite provides rent support for technology and life
+  sciences startups that are moving to an approved collaborative workspace.
 callToActionLink: https://www.njeda.com/njignite
 callToActionText: Learn more
 fundingType: grant
@@ -30,7 +32,7 @@ sector:
   - life-sciences
   - other-services
 publishStageArchive: ""
-sidebarCardBodyText: NJ Ignite provides rent support for technology startups that are
+descriptionMd: NJ Ignite provides rent support for technology startups that are
   moving to an approved collaborative workspace.
 ---
 
