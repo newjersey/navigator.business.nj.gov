@@ -4,9 +4,8 @@ name: NJ Zero Emission Incentive Program (NJZIP)
 displayName: njzip
 urlSlug: nj-zero-emission
 id: nj-zero-emission-incentive-program-njzip
-sidebarCardBodyText: NJ ZIP is a pilot program that provides vouchers to
-  commercial, industrial, and institutional businesses and institutions to
-  support purchases of new, medium and heavy duty zero-emission vehicles.
+sidebarCardBodyText: NJ ZIP offers vouchers for zero-emission vehicles to
+  commercial, industrial, and institutional businesses.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: NJ ZIP is a pilot program that provides vouchers to
