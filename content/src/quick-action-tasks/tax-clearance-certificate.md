@@ -28,7 +28,6 @@ You can request your tax clearance certificate through the [Premier Business Ser
 ## Requirements for Requesting a Tax Clearance Certificate
 
 * Business Name
-*  `Business Structure|business-structure-learn-more` /type
 *  `Employer Identification Number (EIN)|ein` plus State suffix
 * [4-digit PIN](https://www.nj.gov/treasury/assets/contact/taxation/contact-pin.shtml) provided by the State of New Jersey
 * Name of agency from which you will be applying for assistance
@@ -36,6 +35,7 @@ You can request your tax clearance certificate through the [Premier Business Ser
   \-or-
 * Business Name
 *  `Business Structure|business-structure-learn-more` /type
+* `Employer Identification Number (EIN)|ein` plus State suffix
 * Year business operations began in New Jersey
 * Zip code where you receive tax forms
 * Name of agency from which you will be applying for assistance
