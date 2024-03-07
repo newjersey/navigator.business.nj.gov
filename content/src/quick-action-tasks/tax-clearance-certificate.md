@@ -1,13 +1,8 @@
 ---
-notesMd: >-
+notesMd: >+
   ADO ticket:
   https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/4216
 
-
-
-  Employer Identification Number (EIN)|ein`  plus State suffix 
-
-  4-digit PIN provided by the State of New Jersey
 filename: tax-clearance-certificate
 name: tax-clearance-certificate
 applyToAllUsers: true
