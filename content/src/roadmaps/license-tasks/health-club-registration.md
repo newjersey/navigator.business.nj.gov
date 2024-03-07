@@ -29,7 +29,7 @@ divisionPhone: (973) 504-6370
 - `Registered agent|registered-agent` information, including address and phone number
 - All other names under which you do business (DBA or “doing business as” names)
 - Name, address, and business telephone number of each officer, director, principal, or representative with an ownership interest
-- Information on other New Jersey locations or franchise
+- Information on other New Jersey locations or franchises
 - Estimated date of opening for the facility
 - Public solicitation or advertising start date
 - Pre-sale start date and duration
