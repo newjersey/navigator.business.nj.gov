@@ -1,7 +1,13 @@
 ---
-notesMd: "ADO ticket:
-  https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/42\
-  16"
+notesMd: >-
+  ADO ticket:
+  https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/4216
+
+
+
+  Employer Identification Number (EIN)|ein`  plus State suffix 
+
+  4-digit PIN provided by the State of New Jersey
 filename: tax-clearance-certificate
 name: tax-clearance-certificate
 applyToAllUsers: true
@@ -24,16 +30,17 @@ You can request your tax clearance certificate through the Premier Business Serv
 * Business Name
 * `Employer Identification Number (EIN)|ein`  plus State suffix 
 * 4-digit PIN provided by the State of New Jersey
+* Name of agency from which you will be applying for assistance
 
   -or-
 
+* Business Name
 * `Business Structure|business-structure-learn-more`/type
 * Year business operations began in New Jersey
 * Zip code where you receive tax forms
-
-  -and-
-
 * Name of agency from which you will be applying for assistance
+
+
 
 :::greenBox
 **Once completed, you will have:**
