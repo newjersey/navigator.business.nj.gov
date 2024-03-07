@@ -28,19 +28,16 @@ You can request your tax clearance certificate through the Premier Business Serv
 ## Requirements for Requesting a Tax Clearance Certificate
 
 * Business Name
-* `Employer Identification Number (EIN)|ein`  plus State suffix 
-* 4-digit PIN provided by the State of New Jersey
+*  `Employer Identification Number (EIN)|ein` plus State suffix
+* [4-digit PIN](https://www.nj.gov/treasury/assets/contact/taxation/contact-pin.shtml) provided by the State of New Jersey
 * Name of agency from which you will be applying for assistance
 
-  -or-
-
+  \-or-
 * Business Name
-* `Business Structure|business-structure-learn-more`/type
+*  `Business Structure|business-structure-learn-more` /type
 * Year business operations began in New Jersey
 * Zip code where you receive tax forms
 * Name of agency from which you will be applying for assistance
-
-
 
 :::greenBox
 **Once completed, you will have:**
@@ -49,6 +46,6 @@ A PDF copy of your tax clearance certificate that can be saved or printed
   :::
 
 :::infoAlert 
-**What happens if I’m not in good standing with my taxes?**
+ **What happens if I’m not in good standing with my taxes?**
 If you have not filed or paid all required tax obligations, the Division of Taxation will not issue you a tax clearance certificate. However, you will receive instructions on what needs to be resolved to receive your tax clearance certificate.
 :::
