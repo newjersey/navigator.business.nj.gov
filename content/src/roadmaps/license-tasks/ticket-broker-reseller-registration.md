@@ -5,7 +5,7 @@ notesMd: "ADO ticket:
 filename: ticket-broker-reseller-registration
 displayname: ticket-broker-reseller-registration
 urlSlug: ticket-broker-reseller-registration
-name: Register as a Ticket Broker (Ticket Reseller)
+name: Register Your Business as a Ticket Broker (Ticket Reseller)
 webflowName: Ticket Broker (Ticket Reseller)
 summaryDescriptionMd: >
   You need to register as a ticket broker if you resell admission tickets to
@@ -13,7 +13,7 @@ summaryDescriptionMd: >
   taxes printed on the tickets.
 industryId:
   - retail
-callToActionText: Register as a Ticket Broker/Ticket Reseller
+callToActionText: Register Your Business as a Ticket Broker/Ticket Reseller
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Regulated Business Section
