@@ -2110,7 +2110,13 @@ collections:
       - { label: "Filename", name: "filename", widget: "write-once-read-only" }
       - { label: "Display Name", name: "displayname", widget: "nospace" }
       - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "write-once-read-only" }
+      - {
+          label: "Id",
+          name: "id",
+          widget: "write-once-read-only",
+          required: true,
+          hint: "This is should be the same as the filename.",
+        }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - {
@@ -2166,6 +2172,13 @@ collections:
       preview: true
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - {
+          label: "Id",
+          name: "id",
+          widget: "write-once-read-only",
+          required: true,
+          hint: "This is should be the same as the filename.",
+        }
       - {
           label: "Filename",
           name: "filename",
