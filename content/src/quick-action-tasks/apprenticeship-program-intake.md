@@ -6,14 +6,14 @@ industryIds: []
 sectorIds: []
 icon: govt-purple.svg
 urlSlug: apprenticeship-program-intake
+summaryDescriptionMd: You can start a registered apprenticeship program within
+  your business through the U.S. Department of Labor (USDOL). An apprenticeship
+  program combines paid on-the-job training and classroom instruction.
 callToActionText: Submit Your Apprenticeship Program Intake Form
 callToActionLink: https://nj.gov/labor/lwdhome/apprenticeship/apprenticeshipOnboarding.html
-summaryDescriptionMd: ""
 ---
 
 ## Submit Your Apprenticeship Program Intake Form
-
-You can start a registered apprenticeship program within your business through the U.S. Department of Labor (USDOL). An apprenticeship program combines paid on-the-job training and classroom instruction.
 
 You can develop the training to align with your business needs. That way, you are helping to develop skilled employees while ensuring they are completing work that meets business needs.
 
@@ -30,7 +30,7 @@ You will need to have an approved apprenticeship program to register as a public
 ### Intake Form Requirements
 
 - Business name
-- Business structure
+- `Business Structure|business-structure-learn-more`
 - Primary contact information
 - List of occupations to be developed in the program
 
