@@ -4,6 +4,10 @@ name: Per-Job Tax Credits with the Emerge Program
 displayName: perjob-tax-credits
 urlSlug: perjob-tax-credits
 id: perjob-tax-credits-with-the-emerge-program
+sidebarCardBodyText: The Emerge Program provides per-job tax credits to projects
+  in targeted communities that invest private capital into New Jersey and create
+  new full-time jobs or retain a significant number of jobs in Governor Phil
+  Murphy’s priority sectors versus an out-of-state alternative location.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: The Emerge Program provides per-job tax credits to
@@ -39,20 +43,16 @@ sector:
   - digital-and-print-media
   - other-services
 publishStageArchive: ""
-sidebarCardBodyText: The Emerge Program provides per-job tax credits to projects in
-  targeted communities that invest private capital into New Jersey and create
-  new full-time jobs or retain a significant number of jobs in Governor Phil
-  Murphy’s priority sectors versus an out-of-state alternative location.
 ---
-
 ## Eligibility
 
-- Companies that meet the program minimums for new job creation or retained jobs
-- Must be located in an eligible incentive location
-- Can demonstrate the award of tax credits is a “material factor” in their decision to locate in New Jersey versus an out-of-state alternative location
+* Companies that meet the program minimums for new job creation or retained jobs
+* Must be located in an eligible incentive location
+* Can demonstrate the award of tax credits is a “material factor” in their decision to locate in New Jersey versus an out-of-state alternative location
+* Create at least 35 new, full-time jobs (requirement may be lower if business is primarily engaged in a targeted industry or meets the definition of a "small business")
 
 > ### Benefits
 >
-> - Annual base per-new job tax credits from $500,000 - $8,000 per job per year depending on project location and other aspects of the project
-> - Bonuses are also available on project location, industry, and alignment with other policy objectives
-> - Jobs that are covered by a labor harmony agreement are eligible for an additional $1,000 bonus over the capped amounts
+> * Annual base per-new job tax credits from $500,000 - $8,000 per job per year depending on project location and other aspects of the project
+> * Bonuses are also available on project location, industry, and alignment with other policy objectives
+> * Jobs that are covered by a labor harmony agreement are eligible for an additional $1,000 bonus over the capped amounts
