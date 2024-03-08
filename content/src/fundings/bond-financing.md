@@ -4,11 +4,14 @@ name: Bond Financing
 displayName: bond-financing
 urlSlug: bond-financing
 id: bond-financing
+sidebarCardBodyText: The Bond Financing program provides bond financing to
+  qualified manufacturing companies, 501(c)(3) nonprofit organizations, and
+  exempt other facilities in New Jersey.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: The Bond Financing program provides bond financing to
   qualified manufacturing companies, 501(c)(3) nonprofit organizations, and
-  other facilities in New Jersey.
+  exempt other facilities in New Jersey.
 callToActionLink: https://www.njeda.com/bondfinancing/
 callToActionText: Learn more
 fundingType: loan
@@ -27,9 +30,6 @@ county:
   - All
 sector: []
 publishStageArchive: ""
-sidebarCardBodyText: The Bond Financing program provides bond financing to qualified
-  manufacturing companies, 501(c)(3) nonprofit organizations, and other
-  facilities in New Jersey.
 ---
 
 ## Eligibility

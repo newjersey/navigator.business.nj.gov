@@ -4,11 +4,13 @@ name: NJ Zero Emission Incentive Program (NJZIP)
 displayName: njzip
 urlSlug: nj-zero-emission
 id: nj-zero-emission-incentive-program-njzip
+sidebarCardBodyText: NJ ZIP offers vouchers for zero-emission vehicles to
+  commercial, industrial, and institutional businesses.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: NJ ZIP is a pilot program that provides vouchers to
-  businesses and institutions in the greater Newark, Camden, New Brunswick, and
-  Shore areas to support purchases of new, medium-duty zero-emission vehicles.
+  commercial, industrial, and institutional businesses and institutions to
+  support purchases of new, medium and heavy duty zero-emission vehicles.
 callToActionLink: https://www.njeda.com/njzip.
 callToActionText: Learn more
 fundingType: grant
@@ -27,14 +29,12 @@ county:
   - All
 sector: []
 publishStageArchive: ""
-sidebarCardBodyText: NJ ZIP is a pilot program that provides vouchers to businesses
-  and institutions in the greater Newark, Camden, New Brunswick, and Shore areas
-  to support purchases of new, medium-duty zero-emission vehicles.
 ---
-
 ## Eligibility
 
-- Businesses and nonprofits in the greater Newark, Camden, New Brunswick, and Shore areas purchasing one or more new zero-emission medium or heavy-duty vehicles
+* Must operate 75% of vehicle miles in NJ and register a vehicle in NJ
+* Purchase and register a new zero-emission class 2b- class 8 vehicle for commercial, industrial, or institutional use within 12 months of voucher reservation
+* Be in good standing with the NJ Department of Labor and NJ Department of Environmental Protection
 
 > ### Benefits
 >
