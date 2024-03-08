@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { ReactElement } from "react";
-import rehypeReact from "rehype-react";
+import type { Jsx, JsxDev } from "hast-util-to-jsx-runtime";
+import { ReactElement } from "react";
+import { Fragment, jsx, jsxs } from "react/jsx-runtime";
+import rehypeReact, { type Options } from "rehype-react";
 import remarkDirective from "remark-directive";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
@@ -14,18 +16,24 @@ interface Props {
 }
 
 export const PureMarkdownContent = (props: Props): ReactElement => {
+  const rehypeReactOptions: Options = {
+    Fragment: Fragment,
+    components: props.components,
+    development: process.env.NODE_ENV === "development",
+    jsx: jsx as Jsx,
+    jsxs: jsxs as Jsx,
+    jsxDEV: jsxs as JsxDev,
+  };
+
   const markdown = unified()
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkDirective)
     .use(customRemarkPlugin)
     .use(remarkRehype)
-    .use(rehypeReact, {
-      createElement: React.createElement,
-      Fragment: React.Fragment,
-      components: props.components,
-    })
+    .use(rehypeReact, rehypeReactOptions)
     .processSync(props.children).result;
+
   return <>{markdown}</>;
 };
 

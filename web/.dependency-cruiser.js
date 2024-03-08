@@ -354,6 +354,10 @@ module.exports = {
       from: {},
       to: { path: "@aws-amplify/auth" },
     },
+    {
+      from: {},
+      to: { path: "hast-util-to-jsx-runtime" },
+    },
   ],
   forbidden: [
     /* rules from the 'recommended' preset: */
