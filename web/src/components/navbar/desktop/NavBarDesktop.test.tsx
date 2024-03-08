@@ -38,40 +38,20 @@ describe("<NavBarDesktop />", () => {
   });
 
   const quickLinksExist = (): void => {
-    expect(
-      screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarPlanText)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarStartText)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarOperateText)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarGrowText)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarUpdatesText)
-    ).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationQuickLinks.navBarPlanText)).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationQuickLinks.navBarStartText)).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationQuickLinks.navBarOperateText)).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationQuickLinks.navBarGrowText)).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationQuickLinks.navBarUpdatesText)).toBeInTheDocument();
     expect(screen.getByTestId("navbar-search-icon")).toBeInTheDocument();
   };
 
   const quickLinksDoNotExist = (): void => {
-    expect(
-      screen.queryByText(Config.navigationDefaults.navigationQuickLinks.navBarPlanText)
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByText(Config.navigationDefaults.navigationQuickLinks.navBarStartText)
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByText(Config.navigationDefaults.navigationQuickLinks.navBarOperateText)
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByText(Config.navigationDefaults.navigationQuickLinks.navBarGrowText)
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByText(Config.navigationDefaults.navigationQuickLinks.navBarUpdatesText)
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.navigationQuickLinks.navBarPlanText)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.navigationQuickLinks.navBarStartText)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.navigationQuickLinks.navBarOperateText)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.navigationQuickLinks.navBarGrowText)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.navigationQuickLinks.navBarUpdatesText)).not.toBeInTheDocument();
     expect(screen.queryByTestId("navbar-search-icon")).not.toBeInTheDocument();
   };
 

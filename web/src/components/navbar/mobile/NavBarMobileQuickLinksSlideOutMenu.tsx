@@ -48,9 +48,7 @@ export const NavBarMobileQuickLinksSlideOutMenu = (): ReactElement => {
             className="padding-bottom-0"
           >
             <MenuItem className={"display-flex padding-y-205 menu-item-title"} disabled={true}>
-              <div className="text-bold">
-                {Config.navigationDefaults.navigationQuickLinks.navBarMobileQuickLinksTitle}
-              </div>
+              <div className="text-bold">{Config.navigationQuickLinks.navBarMobileQuickLinksTitle}</div>
             </MenuItem>
             <hr className="margin-0 hr-2px" key="name-break" />
 

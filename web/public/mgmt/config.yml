@@ -3819,93 +3819,6 @@ collections:
               - { label: Line 1, name: legalMessageTextOne, widget: text }
               - { label: Chat Label, name: legalMessageLegalChat, widget: string }
               - { label: Line 2, name: legalMessageTextTwo, widget: string }
-          - label: Navigation Defaults
-            name: navigationDefaults
-            collapsed: true
-            widget: object
-            summary: "{{navigationDefaults}}"
-            fields:
-              - { label: Login Button, name: logInButton, widget: string }
-              - { label: Registration Button, name: getStartedText, widget: string }
-              - { label: Logout Button, name: logoutButton, widget: string }
-              - { label: MyNJ Account Text, name: myNJAccountText, widget: string }
-              - { label: Landing Page Drop Down Title, name: landingPageDropDownTitle, widget: string }
-              - { label: Task Page Nav Bar Heading, name: taskPageNavBarHeading, widget: string }
-              - { label: Profile Link Text, name: profileLinkText, widget: string }
-              - { label: NavBar Guest Business text, name: navBarGuestBusinessText, widget: string }
-              - { label: NavBar Guest Account text, name: navBarGuestAccountText, widget: string }
-              - {
-                  label: Navbar Guest dropdown registration text,
-                  name: navBarGuestRegistrationText,
-                  widget: string,
-                }
-              - {
-                  label: Navbar Unnamed Business STARTING text,
-                  name: navBarUnnamedBusinessText,
-                  widget: string,
-                }
-              - {
-                  label: Navbar Unnamed Business OWNING text,
-                  name: navBarUnnamedOwnedBusinessText,
-                  widget: string,
-                }
-              - {
-                  label: Navbar Unnamed Business FOREIGN REMOTE_SELLER/REMOTE_WORKER text,
-                  name: navBarUnnamedForeignRemoteSellerWorkerText,
-                  widget: string,
-                }
-              - {
-                  label: Navbar Unnamed Business FOREIGN DBA unnamed text,
-                  name: navBarUnnamedDbaBusinessText,
-                  widget: string,
-                }
-              - { label: Needs Account Snackbar Title, name: needsAccountSnackbarTitle, widget: string }
-              - { label: Needs Account Snackbar Body, name: needsAccountSnackbarBody, widget: text }
-              - {
-                  label: Needs Account Snackbar Title - Existing myNJ Account,
-                  name: needsAccountSnackbarTitleExistingAccount,
-                  widget: string,
-                }
-              - {
-                  label: Needs Account Snackbar Body - Existing myNJ Account,
-                  name: needsAccountSnackbarBodyExistingAccount,
-                  widget: text,
-                }
-              - { label: Account Success Snackbar Title, name: accountSuccessSnackbarTitle, widget: string }
-              - { label: Account Success Snackbar Body, name: accountSuccessSnackbarBody, widget: string }
-              - {
-                  label: Existing Account Success Snackbar Title,
-                  name: accountSuccessSnackbarTitleExistingAccount,
-                  widget: string,
-                }
-              - { label: Needs Account Modal Title, name: needsAccountModalTitle, widget: string }
-              - { label: Needs Account Modal Body, name: needsAccountModalBody, widget: text }
-              - { label: Needs Account Modal Button, name: needsAccountModalButtonText, widget: string }
-              - { label: Needs Account Modal Sub Button text, name: needsAccountModalSubText, widget: string }
-              - { label: Add Business Button, name: addBusinessButton, widget: string }
-              - { label: My Account Text, name: navBarMyAccountText, widget: string }
-              - { label: Business.nj.gov Logo Link, name: navBarBusinessNJGovLink, widget: string }
-              - { label: Business.nj.gov Logo Alt Text, name: navBarBusinessNJGovAltText, widget: string }
-              - { label: Business.nj.gov Logo Aria Label, name: navBarBusinessNJGovAriaLabel, widget: string }
-              - label: Navigation Quick Links
-                name: navigationQuickLinks
-                collapsed: true
-                widget: object
-                summary: "{{navigationQuickLinks}}"
-                fields:
-                  - { label: Mobile Title, name: navBarMobileQuickLinksTitle, widget: string }
-                  - { label: Plan, name: navBarPlanText, widget: string }
-                  - { label: Plan Link, name: navBarPlanLink, widget: nospace }
-                  - { label: Start, name: navBarStartText, widget: string }
-                  - { label: Start Link, name: navBarStartLink, widget: nospace }
-                  - { label: Operate, name: navBarOperateText, widget: string }
-                  - { label: Operate Link, name: navBarOperateLink, widget: nospace }
-                  - { label: Grow, name: navBarGrowText, widget: string }
-                  - { label: Grow Link, name: navBarGrowLink, widget: nospace }
-                  - { label: Updates, name: navBarUpdatesText, widget: string }
-                  - { label: Updates Link, name: navBarUpdatesLink, widget: nospace }
-                  - { label: Search, name: navBarSearchText, widget: string }
-                  - { label: Search Link, name: navBarSearchLink, widget: nospace }
 
           - label: Onboarding Defaults
             name: onboardingDefaults
@@ -5281,3 +5194,103 @@ collections:
               - { label: "Error Description 1", name: "errorDescriptionPt1", widget: "markdown" }
               - { label: "Error Description 2", name: "errorDescriptionPt2", widget: "markdown" }
               - { label: "Chat with Expert", name: "errorChatWithExpert", widget: "markdown" }
+
+  - name: "navigation-config"
+    label: "Navigation Config"
+    summary: "{{filename}}"
+    delete: false
+    create: false
+    files:
+      - label: "Navigation Defaults"
+        name: "navigation-defaults"
+        summary: "{{filename}}"
+        file: "content/src/fieldConfig/navigation-defaults.json"
+        editor:
+          preview: true
+        fields:
+          - label: "Navigation Defaults"
+            name: "navigationDefaults"
+            summary: "{{filename}}"
+            widget: object
+            fields:
+              - { label: Login Button, name: logInButton, widget: string }
+              - { label: Registration Button, name: getStartedText, widget: string }
+              - { label: Logout Button, name: logoutButton, widget: string }
+              - { label: MyNJ Account Text, name: myNJAccountText, widget: string }
+              - { label: Landing Page Drop Down Title, name: landingPageDropDownTitle, widget: string }
+              - { label: Task Page Nav Bar Heading, name: taskPageNavBarHeading, widget: string }
+              - { label: Profile Link Text, name: profileLinkText, widget: string }
+              - { label: NavBar Guest Business text, name: navBarGuestBusinessText, widget: string }
+              - { label: NavBar Guest Account text, name: navBarGuestAccountText, widget: string }
+              - {
+                  label: Navbar Guest dropdown registration text,
+                  name: navBarGuestRegistrationText,
+                  widget: string,
+                }
+              - {
+                  label: Navbar Unnamed Business STARTING text,
+                  name: navBarUnnamedBusinessText,
+                  widget: string,
+                }
+              - {
+                  label: Navbar Unnamed Business OWNING text,
+                  name: navBarUnnamedOwnedBusinessText,
+                  widget: string,
+                }
+              - {
+                  label: Navbar Unnamed Business FOREIGN REMOTE_SELLER/REMOTE_WORKER text,
+                  name: navBarUnnamedForeignRemoteSellerWorkerText,
+                  widget: string,
+                }
+              - {
+                  label: Navbar Unnamed Business FOREIGN DBA unnamed text,
+                  name: navBarUnnamedDbaBusinessText,
+                  widget: string,
+                }
+              - { label: Needs Account Snackbar Title, name: needsAccountSnackbarTitle, widget: string }
+              - { label: Needs Account Snackbar Body, name: needsAccountSnackbarBody, widget: text }
+              - {
+                  label: Needs Account Snackbar Title - Existing myNJ Account,
+                  name: needsAccountSnackbarTitleExistingAccount,
+                  widget: string,
+                }
+              - {
+                  label: Needs Account Snackbar Body - Existing myNJ Account,
+                  name: needsAccountSnackbarBodyExistingAccount,
+                  widget: text,
+                }
+              - { label: Account Success Snackbar Title, name: accountSuccessSnackbarTitle, widget: string }
+              - { label: Account Success Snackbar Body, name: accountSuccessSnackbarBody, widget: string }
+              - {
+                  label: Existing Account Success Snackbar Title,
+                  name: accountSuccessSnackbarTitleExistingAccount,
+                  widget: string,
+                }
+              - { label: Needs Account Modal Title, name: needsAccountModalTitle, widget: string }
+              - { label: Needs Account Modal Body, name: needsAccountModalBody, widget: text }
+              - { label: Needs Account Modal Button, name: needsAccountModalButtonText, widget: string }
+              - { label: Needs Account Modal Sub Button text, name: needsAccountModalSubText, widget: string }
+              - { label: Add Business Button, name: addBusinessButton, widget: string }
+              - { label: My Account Text, name: navBarMyAccountText, widget: string }
+              - { label: Business.nj.gov Logo Link, name: navBarBusinessNJGovLink, widget: string }
+              - { label: Business.nj.gov Logo Alt Text, name: navBarBusinessNJGovAltText, widget: string }
+              - { label: Business.nj.gov Logo Aria Label, name: navBarBusinessNJGovAriaLabel, widget: string }
+
+          - label: "Navigation Quick Links"
+            name: "navigationQuickLinks"
+            widget: object
+            summary: "{{filename}}"
+            fields:
+              - { label: Mobile Title, name: navBarMobileQuickLinksTitle, widget: string }
+              - { label: Plan, name: navBarPlanText, widget: string }
+              - { label: Plan Link, name: navBarPlanLink, widget: nospace }
+              - { label: Start, name: navBarStartText, widget: string }
+              - { label: Start Link, name: navBarStartLink, widget: nospace }
+              - { label: Operate, name: navBarOperateText, widget: string }
+              - { label: Operate Link, name: navBarOperateLink, widget: nospace }
+              - { label: Grow, name: navBarGrowText, widget: string }
+              - { label: Grow Link, name: navBarGrowLink, widget: nospace }
+              - { label: Updates, name: navBarUpdatesText, widget: string }
+              - { label: Updates Link, name: navBarUpdatesLink, widget: nospace }
+              - { label: Search, name: navBarSearchText, widget: string }
+              - { label: Search Link, name: navBarSearchLink, widget: nospace }
