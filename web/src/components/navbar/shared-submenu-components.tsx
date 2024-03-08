@@ -176,9 +176,9 @@ export const Search = (): ReactElement => {
   return NavMenuItem({
     onClick: (): void => {
       analytics.event.mobile_hamburger_quick_links_search.click.search_page();
-      openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarSearchLink);
+      openInNewTab(Config.navigationQuickLinks.navBarSearchLink);
     },
-    itemText: Config.navigationDefaults.navigationQuickLinks.navBarSearchText,
+    itemText: Config.navigationQuickLinks.navBarSearchText,
     key: "searchMenuItem",
     reducedLeftMargin: true,
   });
@@ -189,9 +189,9 @@ export const Plan = (): ReactElement => {
   return NavMenuItem({
     onClick: (): void => {
       analytics.event.mobile_hamburger_quick_links_plan.click.plan_page();
-      openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarPlanLink);
+      openInNewTab(Config.navigationQuickLinks.navBarPlanLink);
     },
-    itemText: Config.navigationDefaults.navigationQuickLinks.navBarPlanText,
+    itemText: Config.navigationQuickLinks.navBarPlanText,
     key: "planMenuItem",
     reducedLeftMargin: true,
   });
@@ -202,9 +202,9 @@ export const Start = (): ReactElement => {
   return NavMenuItem({
     onClick: (): void => {
       analytics.event.mobile_hamburger_quick_links_start.click.start_page();
-      openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarStartLink);
+      openInNewTab(Config.navigationQuickLinks.navBarStartLink);
     },
-    itemText: Config.navigationDefaults.navigationQuickLinks.navBarStartText,
+    itemText: Config.navigationQuickLinks.navBarStartText,
     key: "startMenuItem",
     reducedLeftMargin: true,
   });
@@ -215,9 +215,9 @@ export const Operate = (): ReactElement => {
   return NavMenuItem({
     onClick: (): void => {
       analytics.event.mobile_hamburger_quick_links_operate.click.operate_page();
-      openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarOperateLink);
+      openInNewTab(Config.navigationQuickLinks.navBarOperateLink);
     },
-    itemText: Config.navigationDefaults.navigationQuickLinks.navBarOperateText,
+    itemText: Config.navigationQuickLinks.navBarOperateText,
     key: "operateMenuItem",
     reducedLeftMargin: true,
   });
@@ -228,9 +228,9 @@ export const Grow = (): ReactElement => {
   return NavMenuItem({
     onClick: (): void => {
       analytics.event.mobile_hamburger_quick_links_grow.click.grow_page();
-      openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarGrowLink);
+      openInNewTab(Config.navigationQuickLinks.navBarGrowLink);
     },
-    itemText: Config.navigationDefaults.navigationQuickLinks.navBarGrowText,
+    itemText: Config.navigationQuickLinks.navBarGrowText,
     key: "growMenuItem",
     reducedLeftMargin: true,
   });
@@ -241,9 +241,9 @@ export const Updates = (): ReactElement => {
   return NavMenuItem({
     onClick: (): void => {
       analytics.event.mobile_hamburger_quick_links_updates.click.updates_page();
-      openInNewTab(Config.navigationDefaults.navigationQuickLinks.navBarUpdatesLink);
+      openInNewTab(Config.navigationQuickLinks.navBarUpdatesLink);
     },
-    itemText: Config.navigationDefaults.navigationQuickLinks.navBarUpdatesText,
+    itemText: Config.navigationQuickLinks.navBarUpdatesText,
     key: "updatesMenuItem",
     reducedLeftMargin: true,
   });
