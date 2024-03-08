@@ -6,7 +6,9 @@ header: "Alternate Name Certificate / Trade Name Certificate "
 slug: alt-name-trade-name
 displayname: alt-name-trade-name
 ---
-Both an **Alternate Name Certificate** and a **Trade Name Certificate** confirm that a business can legally operate under a different name.
+Both an **Alternate Name Certificate** and a **Trade Name Certificate** confirm that a business can legally operate under a different name. 
+###
+
 
 The following businesses can register an alternate name with the [Division of Revenue and Enterprise Services](https://www.njportal.com/DOR/businessrecords/EntityDocs/BusinessStatCopies.aspx):
 
