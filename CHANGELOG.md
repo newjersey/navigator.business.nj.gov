@@ -1,3 +1,10 @@
+# [2024.9.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.8.0...v2024.9.0) (2024-03-08)
+
+
+### Features
+
+* [[#186896489](https://github.com/newjersey/navigator.business.nj.gov/issues/186896489)] pre-populate license task check status business info ([0fbea9b](https://github.com/newjersey/navigator.business.nj.gov/commit/0fbea9b4b48288f379ec3323ca50fe2885f20882))
+
 # [2024.8.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.7.1...v2024.8.0) (2024-03-01)
 
 
