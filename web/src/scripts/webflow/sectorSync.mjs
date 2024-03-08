@@ -24,8 +24,8 @@ const allIndustryId = "61c48e1b3257cc374781ee12";
 const getOverlappingSectorsFunc = (currentSectors) => {
   return currentSectors.filter((item) => {
     return new Set(
-      getSectors().map((_item) => {
-        return _item.id;
+      getSectors().map((item) => {
+        return item.id;
       })
     ).has(item.slug);
   });
@@ -37,8 +37,8 @@ const getOverlappingSectors = async () => {
 
 const getUpdatedSectors = async () => {
   const sectorNames = new Set(
-    getSectors().map((_item) => {
-      return _item.name;
+    getSectors().map((item) => {
+      return item.name;
     })
   );
   return [...(await getOverlappingSectors())].filter((item) => {
@@ -66,7 +66,7 @@ const getUnUsedSectors = async () => {
   const current = await getCurrentSectors();
   const overLap = getOverlappingSectorsFunc(current);
   return current.filter((item) => {
-    return !(overLap.includes(item) || item._id == allIndustryId);
+    return !(overLap.includes(item) || item.id == allIndustryId);
   });
 };
 const getUpdatedSectorNames = async () => {
@@ -84,7 +84,7 @@ const getUpdatedSectorNames = async () => {
 const getSortedSectors = async () => {
   const current = await getCurrentSectors();
   const allIndustryItem = current.find((item) => {
-    return item._id == allIndustryId;
+    return item.id == allIndustryId;
   });
   return [allIndustryItem, ...orderBy(getOverlappingSectorsFunc(current), ["name"], "asc")].map((e, i) => {
     return {
@@ -96,13 +96,13 @@ const getSortedSectors = async () => {
 
 const deleteSectors = async () => {
   return [...(await getUnUsedSectors())].map((item) => {
-    return deleteItem(item, sectorCollectionId);
+    return deleteItem(item.id, sectorCollectionId);
   });
 };
 
 const updateSectorNames = async () => {
   return [...(await getUpdatedSectorNames())].map((item) => {
-    return modifyItem(item._id, sectorCollectionId, { name: item.name });
+    return modifyItem(item.id, sectorCollectionId, { name: item.name });
   });
 };
 
@@ -114,7 +114,7 @@ const createNewSectors = async () => {
 
 const reSortSectors = async () => {
   return [...(await getSortedSectors())].map((item) => {
-    return modifyItem(item._id, sectorCollectionId, { rank: item.rank });
+    return modifyItem(item.id, sectorCollectionId, { rank: item.rank });
   });
 };
 

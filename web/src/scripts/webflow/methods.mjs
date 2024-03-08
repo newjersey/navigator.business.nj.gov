@@ -6,7 +6,7 @@ if (typeof process != "undefined") {
 }
 
 // eslint-disable-next-line no-undef
-if (process.env.WEBFLOW_API_TOKEN == undefined) {
+if (process.env.WEBFLOW_API_TOKEN === undefined) {
   throw new Error("No Webflow API Token in Env");
 }
 
@@ -15,7 +15,7 @@ const siteId = "5e31b06cb76b830809358a75";
 // eslint-disable-next-line no-undef
 const headers = { Authorization: `Bearer ${process.env.WEBFLOW_API_TOKEN}` };
 
-const getAllItems = async (id) => {
+const getAllItems = async (collectionId) => {
   let responseItems = [];
   let totalToFetch = 1;
 
@@ -23,7 +23,7 @@ const getAllItems = async (id) => {
     const data = (
       await axios({
         method: "get",
-        url: `https://api.webflow.com/collections/${id}/items?offset=${responseItems.length}`,
+        url: `https://api.webflow.com/v2/collections/${collectionId}/items?offset=${responseItems.length}`,
         headers,
         responseType: "json",
       })
@@ -35,10 +35,10 @@ const getAllItems = async (id) => {
   return responseItems;
 };
 
-const getCollection = async (id) => {
+const getCollection = async (collectionId) => {
   return axios({
     method: "get",
-    url: `https://api.webflow.com/collections/${id}`,
+    url: `https://api.webflow.com/v2/collections/${collectionId}`,
     headers,
     responseType: "json",
   });
@@ -47,7 +47,7 @@ const getCollection = async (id) => {
 const getAllCollections = async () => {
   return axios({
     method: "get",
-    url: `https://api.webflow.com/sites/${siteId}/collections`,
+    url: `https://api.webflow.com/v2/sites/${siteId}/collections`,
     headers,
     responseType: "json",
   });
@@ -56,38 +56,33 @@ const getAllCollections = async () => {
 const createItem = (item, collectionId, draft = true) => {
   return axios({
     method: "post",
-    url: `https://api.webflow.com/collections/${collectionId}/items`,
+    url: `https://api.webflow.com/v2/collections/${collectionId}/items`,
     headers: { ...headers, "content-type": "application/json" },
     data: {
-      fields: {
-        _archived: false,
-        _draft: draft,
-        ...item,
-      },
+      isArchived: false,
+      isDraft: draft,
+      ...item,
     },
     responseType: "json",
   });
 };
 
-const modifyItem = (id, collectionId, body, method = "patch") => {
+const modifyItem = (itemId, collectionId, body, method = "patch") => {
   return axios({
     method: method,
-    url: `https://api.webflow.com/collections/${collectionId}/items/${id}`,
+    url: `https://api.webflow.com/v2/collections/${collectionId}/items/${itemId}`,
     headers,
     data: {
-      fields: {
-        ...body,
-      },
+      ...body,
     },
     responseType: "json",
   });
 };
 
-const deleteItem = (item, collectionId, unPublish = false) => {
+const deleteItem = (itemId, collectionId) => {
   return axios({
     method: "delete",
-    url: `https://api.webflow.com/collections/${collectionId}/items/${item._id}`,
-    params: { live: unPublish },
+    url: `https://api.webflow.com/v2/collections/${collectionId}/items/${itemId}`,
     headers,
   });
 };

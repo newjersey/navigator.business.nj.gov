@@ -76,7 +76,7 @@ const getLicenseFromMd = (licenseMd) => {
   };
 
   return {
-    _id: licenseMd.webflowId,
+    id: licenseMd.webflowId,
     name: name,
     slug: licenseMd.urlSlug,
     website: removeValueWithSpecialChars(licenseMd.callToActionLink),
@@ -104,7 +104,7 @@ const getAllLicensesFromWebflow = async () => {
 
 //  returns list of License MD loaded from navigator license-tasks folder
 const getLicensesAlreadyInWebflow = async () => {
-  const currentLicensesInWebflowIds = (await getAllLicensesFromWebflow()).map((it) => it._id);
+  const currentLicensesInWebflowIds = (await getAllLicensesFromWebflow()).map((it) => it.id);
   const currentLicensesInNavigator = loadAllNavigatorLicenses();
 
   return currentLicensesInNavigator.filter(
@@ -114,7 +114,7 @@ const getLicensesAlreadyInWebflow = async () => {
 
 //  returns list of License MD loaded from navigator webflow-licenses folder
 const getWebflowLicensesAlreadyInWebflow = async () => {
-  const currentLicensesInWebflowIds = (await getAllLicensesFromWebflow()).map((it) => it._id);
+  const currentLicensesInWebflowIds = (await getAllLicensesFromWebflow()).map((it) => it.id);
   const currentWebflowLicensesInNavigator = loadAllNavigatorWebflowLicenses();
 
   return currentWebflowLicensesInNavigator.filter(
@@ -125,7 +125,7 @@ const getWebflowLicensesAlreadyInWebflow = async () => {
 // returns a list of license MD objects that don't yet exist in webflow
 const getNewLicenses = async () => {
   const currentLicensesInNavigator = loadAllLicenses();
-  const currentLicensesInWebflowIds = (await getAllLicensesFromWebflow()).map((it) => it._id);
+  const currentLicensesInWebflowIds = (await getAllLicensesFromWebflow()).map((it) => it.id);
 
   // right now only syncs license-tasks, not yet webflow-licenses also
   return currentLicensesInNavigator.filter(
@@ -138,7 +138,7 @@ const updateLicenses = async (licenseMarkdowns) => {
     console.info(`Attempting to modify ${licenseMd.urlSlug}`);
     try {
       const webflowItem = getLicenseFromMd(licenseMd);
-      return await modifyItem(webflowItem._id, licenseCollectionId, webflowItem);
+      return await modifyItem(webflowItem.id, licenseCollectionId, webflowItem);
     } catch (error) {
       console.error(error.response);
       throw error;
@@ -188,7 +188,7 @@ const createNewLicenses = async () => {
 
     if (licenseMd.webflowId === undefined) {
       const filename = licenseMd.filename;
-      const webflowId = result.data._id;
+      const webflowId = result.data.id;
       updateLicenseWithWebflowId(webflowId, filename);
     }
     return Promise.resolve();

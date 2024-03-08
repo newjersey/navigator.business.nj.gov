@@ -31,7 +31,7 @@ const fundingTypeMap = [
 
 const getCertificationsOptions = async () => {
   const itemResponse = await getAllItems(certificationCollectionId);
-  return itemResponse.map(({ name, slug, _id: id, ...item }) => ({ name, slug, id }));
+  return itemResponse.map(({ name, slug, id: id, ...item }) => ({ name, slug, id }));
 };
 
 const fundingCertificationsMap = [
@@ -165,7 +165,7 @@ const getFundingFromMd = (i, sectors) => {
   const industryReferenceArray = i.sector.map((i) => {
     return sectors.find((v) => {
       return v.slug === i;
-    })?._id;
+    })?.id;
   });
   if (
     industryReferenceArray.some((i) => {
@@ -259,7 +259,7 @@ const deleteFundings = async () => {
   const deleteFunding = async (funding) => {
     console.info(`Attempting to delete ${funding.slug}`);
     try {
-      return await deleteItem(funding, fundingCollectionId);
+      return await deleteItem(funding.id, fundingCollectionId);
     } catch (error) {
       console.error(error.response.data);
       throw error;
@@ -286,7 +286,7 @@ const updateFundings = async () => {
     );
     console.info(`Attempting to modify ${funding.slug}`);
     try {
-      return await modifyItem(item._id, fundingCollectionId, funding);
+      return await modifyItem(item.id, fundingCollectionId, funding);
     } catch (error) {
       console.error(error);
       throw error;
