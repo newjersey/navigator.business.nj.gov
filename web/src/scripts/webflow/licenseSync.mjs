@@ -16,8 +16,7 @@ import {
 import { argsInclude, contentToStrings, getHtml, wait } from "./helpers.mjs";
 import { LicenseClassificationLookup } from "./licenseClassifications.mjs";
 import { createItem, getAllItems, modifyItem } from "./methods.mjs";
-
-const licenseCollectionId = "5e31b06cb76b830c0c358aa8";
+import { licenseCollectionId } from "./webflowIds.mjs";
 
 export const LookupTaskAgencyById = (id) => {
   return (
@@ -75,27 +74,29 @@ const getLicenseFromMd = (licenseMd) => {
     return value;
   };
 
-  return {
-    _id: licenseMd.webflowId,
-    name: name,
-    slug: licenseMd.urlSlug,
-    website: removeValueWithSpecialChars(licenseMd.callToActionLink),
-    "call-to-action-text": licenseMd.callToActionText,
-    "department-3": LookupTaskAgencyById(licenseMd.agencyId).name,
-    division: licenseMd.agencyAdditionalContext,
-    "department-phone-2": licenseMd.divisionPhone,
-    "license-certification-classification": licenseMd.licenseCertificationClassification,
-    "form-name": licenseMd.formName,
-    "primary-industry": licenseMd.industryId
-      ? LookupIndustryById(licenseMd.industryId).name
-      : licenseMd.webflowIndustry,
-    content: getHtml(contentToStrings(licenseMd.contentMd)),
-    "last-updated": new Date(Date.now()).toISOString(),
-    "license-classification": licenseMd.webflowType
-      ? LicenseClassificationLookup[licenseMd.webflowType]
-      : undefined,
-    "summary-description": getHtml(contentToStrings(licenseMd.summaryDescriptionMd)),
-  };
+  return [
+    licenseMd.webflowId,
+    {
+      name: name,
+      slug: licenseMd.urlSlug,
+      website: removeValueWithSpecialChars(licenseMd.callToActionLink),
+      "call-to-action-text": licenseMd.callToActionText,
+      "department-3": LookupTaskAgencyById(licenseMd.agencyId).name,
+      division: licenseMd.agencyAdditionalContext,
+      "department-phone-2": licenseMd.divisionPhone,
+      "license-certification-classification": licenseMd.licenseCertificationClassification,
+      "form-name": licenseMd.formName,
+      "primary-industry": licenseMd.industryId
+        ? LookupIndustryById(licenseMd.industryId).name
+        : licenseMd.webflowIndustry,
+      content: getHtml(contentToStrings(licenseMd.contentMd)),
+      "last-updated": new Date(Date.now()).toISOString(),
+      "license-classification": licenseMd.webflowType
+        ? LicenseClassificationLookup[licenseMd.webflowType]
+        : undefined,
+      "summary-description": getHtml(contentToStrings(licenseMd.summaryDescriptionMd)),
+    },
+  ];
 };
 
 const getAllLicensesFromWebflow = async () => {
@@ -104,32 +105,34 @@ const getAllLicensesFromWebflow = async () => {
 
 //  returns list of License MD loaded from navigator license-tasks folder
 const getLicensesAlreadyInWebflow = async () => {
-  const currentLicensesInWebflowIds = (await getAllLicensesFromWebflow()).map((it) => it._id);
+  const currentLicensesInWebflowIds = new Set((await getAllLicensesFromWebflow()).map((it) => it.id));
   const currentLicensesInNavigator = loadAllNavigatorLicenses();
 
   return currentLicensesInNavigator.filter(
-    (it) => it.webflowId !== undefined && currentLicensesInWebflowIds.includes(it.webflowId)
+    (it) => it.webflowId !== undefined && currentLicensesInWebflowIds.has(it.webflowId)
   );
 };
 
 //  returns list of License MD loaded from navigator webflow-licenses folder
 const getWebflowLicensesAlreadyInWebflow = async () => {
-  const currentLicensesInWebflowIds = (await getAllLicensesFromWebflow()).map((it) => it._id);
+  const currentLicensesInWebflowIds = new Set((await getAllLicensesFromWebflow()).map((it) => it.id));
   const currentWebflowLicensesInNavigator = loadAllNavigatorWebflowLicenses();
 
   return currentWebflowLicensesInNavigator.filter(
-    (it) => it.webflowId !== undefined && currentLicensesInWebflowIds.includes(it.webflowId)
+    (it) => it.webflowId !== undefined && currentLicensesInWebflowIds.has(it.webflowId)
   );
 };
 
+//CAN WE REMOVE THE COMMENT BELOW? IS THIS STILL TRUE?
 // returns a list of license MD objects that don't yet exist in webflow
 const getNewLicenses = async () => {
   const currentLicensesInNavigator = loadAllLicenses();
-  const currentLicensesInWebflowIds = (await getAllLicensesFromWebflow()).map((it) => it._id);
+  const currentLicensesInWebflowIds = new Set((await getAllLicensesFromWebflow()).map((it) => it.id));
 
+  //CAN WE REMOVE THE COMMENT BELOW? IS THIS STILL TRUE?
   // right now only syncs license-tasks, not yet webflow-licenses also
   return currentLicensesInNavigator.filter(
-    (it) => it.webflowId === undefined || !currentLicensesInWebflowIds.includes(it.webflowId)
+    (it) => it.webflowId === undefined || !currentLicensesInWebflowIds.has(it.webflowId)
   );
 };
 
@@ -137,8 +140,8 @@ const updateLicenses = async (licenseMarkdowns) => {
   const modify = async (licenseMd) => {
     console.info(`Attempting to modify ${licenseMd.urlSlug}`);
     try {
-      const webflowItem = getLicenseFromMd(licenseMd);
-      return await modifyItem(webflowItem._id, licenseCollectionId, webflowItem);
+      const [webflowItemId, webflowItem] = getLicenseFromMd(licenseMd);
+      return await modifyItem(webflowItemId, licenseCollectionId, webflowItem);
     } catch (error) {
       console.error(error.response);
       throw error;
@@ -179,7 +182,7 @@ const createNewLicenses = async () => {
     console.info(`Attempting to create ${licenseMd.urlSlug}`);
     let result;
     try {
-      const webflowItem = getLicenseFromMd(licenseMd);
+      const [webflowItemId, webflowItem] = getLicenseFromMd(licenseMd);
       result = await createItem(webflowItem, licenseCollectionId, false);
     } catch (error) {
       console.error(error.response);
@@ -188,10 +191,10 @@ const createNewLicenses = async () => {
 
     if (licenseMd.webflowId === undefined) {
       const filename = licenseMd.filename;
-      const webflowId = result.data._id;
+      const webflowId = result.data.id;
       updateLicenseWithWebflowId(webflowId, filename);
     }
-    return Promise.resolve();
+    return;
   };
 
   await Promise.all(
@@ -227,6 +230,7 @@ if (process.env.NODE_ENV === "test") {
 } else if (argsInclude("--ci-sync")) {
   await (async () => {
     await syncLicenses({ create: false });
+    await wait(60000); // Wait 1 minute to avoid exceeding rate limit
     process.exit(0);
   })();
 } else if (argsInclude("--legacy-sync")) {

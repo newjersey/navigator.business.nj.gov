@@ -30,6 +30,8 @@
     "typecheck": "tsc --noemit",
     "typecheck:cypress": "tsc --noemit --project cypress/tsconfig.json",
     "webflow:fundings-sync": "node ./src/scripts/webflow/fundingSync.mjs --sync",
+    "webflow:fundings-sync-full": "node ./src/scripts/webflow/fundingSync.mjs --full",
+    "webflow:fundings-ci-sync-full": "node ./src/scripts/webflow/industrySync.mjs --ci-sync --full",
     "webflow:industries-sync": "node ./src/scripts/webflow/industrySync.mjs --sync",
     "webflow:industries-ci-sync": "node ./src/scripts/webflow/industrySync.mjs --ci-sync",
     "webflow:licenses-sync": "node ./src/scripts/webflow/licenseSync.mjs --sync",
