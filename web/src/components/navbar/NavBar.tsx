@@ -71,6 +71,7 @@ export const NavBar = (props: Props): ReactElement => {
           logoOnlyType={props.logoOnly}
           currentlyOnboarding={currentlyOnboarding()}
           isAuthenticated={isAuthenticated}
+          userData={userData}
         />
         <div className={scrolled ? "padding-top-6" : ""} />
       </div>
