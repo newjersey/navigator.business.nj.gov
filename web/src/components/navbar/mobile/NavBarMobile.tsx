@@ -16,7 +16,7 @@ import {
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { Task } from "@/lib/types/types";
-import { Business } from "@businessnjgovnavigator/shared/userData";
+import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useState } from "react";
 
 interface Props {
@@ -30,6 +30,8 @@ interface Props {
   currentlyOnboarding: boolean;
   isAuthenticated: boolean;
   business?: Business;
+  userData?: UserData;
+  CMS_PREVIEW_ONLY_SHOW_MENU?: boolean;
 }
 
 export const NavBarMobile = (props: Props): ReactElement => {
@@ -37,7 +39,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
 
   const navBarBusinessTitle = getNavBarBusinessTitle(props.business, props.isAuthenticated);
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(props.CMS_PREVIEW_ONLY_SHOW_MENU ? true : false);
 
   const openSidebar = (): void => {
     setIsSidebarOpen(true);
@@ -70,6 +72,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
           title={Config.navigationDefaults.landingPageDropDownTitle}
+          CMS_PREVIEW_ONLY_SHOW_MENU={props.CMS_PREVIEW_ONLY_SHOW_MENU}
         />
         <NavBarMobileQuickLinksSlideOutMenu />
       </NavBarMobileWrapper>
@@ -94,6 +97,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
           title={Config.navigationDefaults.navBarGuestAccountText}
+          CMS_PREVIEW_ONLY_SHOW_MENU={props.CMS_PREVIEW_ONLY_SHOW_MENU}
         />
       </NavBarMobileWrapper>
     );
@@ -114,6 +118,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
           task={props.task}
           subMenuElement={[
             <ProfileMenuItem
+              userData={props.userData}
               handleClose={closeSideBar}
               key="profile"
               isAuthenticated={props.isAuthenticated}
@@ -126,6 +131,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
           title={navBarBusinessTitle}
+          CMS_PREVIEW_ONLY_SHOW_MENU={props.CMS_PREVIEW_ONLY_SHOW_MENU}
         />
         <NavBarMobileQuickLinksSlideOutMenu />
       </NavBarMobileWrapper>
@@ -148,6 +154,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
           subMenuElement={[
             <ProfileMenuItem
               handleClose={closeSideBar}
+              userData={props.userData}
               isAuthenticated={props.isAuthenticated}
               key="profile"
             />,
@@ -158,6 +165,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
           title={Config.navigationDefaults.navBarGuestAccountText}
+          CMS_PREVIEW_ONLY_SHOW_MENU={props.CMS_PREVIEW_ONLY_SHOW_MENU}
         />
         <NavBarMobileQuickLinksSlideOutMenu />
       </NavBarMobileWrapper>

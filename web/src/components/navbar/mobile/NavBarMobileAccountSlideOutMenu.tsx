@@ -16,6 +16,7 @@ interface Props {
   openSideBar: () => void;
   isSideBarOpen: boolean;
   title: string;
+  CMS_PREVIEW_ONLY_SHOW_MENU?: boolean;
 }
 
 export const NavBarMobileAccountSlideOutMenu = (props: Props): ReactElement => {
@@ -36,7 +37,9 @@ export const NavBarMobileAccountSlideOutMenu = (props: Props): ReactElement => {
       <FocusTrappedSidebar close={props.closeSideBar} isOpen={props.isSideBarOpen}>
         <nav
           aria-label="Secondary"
-          className={`right-nav ${props.isSideBarOpen ? "is-visible" : "is-hidden"} `}
+          className={`right-nav ${props.isSideBarOpen ? "is-visible" : "is-hidden"} ${
+            props.CMS_PREVIEW_ONLY_SHOW_MENU ? "cms-only-mobile-menu-preview" : ""
+          }`}
           data-testid="nav-sidebar-menu"
         >
           <MenuList

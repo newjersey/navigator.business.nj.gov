@@ -55,6 +55,10 @@
       -webkit-animation: slideout-right 0.3s forwards;
       animation: slideout-right 0.3s forwards;
     }
+
+    &.cms-only-mobile-menu-preview {
+      position: relative;
+    }
   }
 
   .right-nav-close {

@@ -13,6 +13,7 @@ import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import { switchCurrentBusiness } from "@/lib/domain-logic/switchCurrentBusiness";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 
@@ -121,13 +122,15 @@ export const GetStartedMenuItem = (): ReactElement => {
 export const ProfileMenuItem = (props: {
   handleClose: () => void;
   isAuthenticated: boolean;
+  userData?: UserData;
 }): ReactElement[] => {
   const { Config } = useConfig();
 
-  const { userData, updateQueue } = useUserData();
+  const { updateQueue } = useUserData();
   const router = useRouter();
-  const isProfileSelected = router.route === ROUTES.profile;
+  const isProfileSelected = router?.route === ROUTES.profile;
 
+  const userData = props.userData;
   if (!userData) return [];
   return orderBusinessIdsByDateCreated(userData).flatMap((businessId, i) => {
     const isCurrent = businessId === userData.currentBusinessId;

@@ -29,13 +29,14 @@ interface Props {
   currentlyOnboarding: boolean | undefined;
   isAuthenticated: boolean;
   userData?: UserData;
+  CMS_PREVIEW_ONLY_SHOW_MENU?: boolean;
 }
 
 export const NavBarDesktop = (props: Props): ReactElement => {
   const business = props.userData ? getCurrentBusiness(props.userData) : undefined;
   const { Config } = useConfig();
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(props.CMS_PREVIEW_ONLY_SHOW_MENU ? true : false);
   const anchorRef = useRef<HTMLButtonElement | null>(null);
 
   const handleClose = (
@@ -136,6 +137,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
             }
             subMenuElement={[
               <ProfileMenuItem
+                userData={props.userData}
                 handleClose={handleClose}
                 isAuthenticated={props.isAuthenticated}
                 key="profile"
@@ -172,6 +174,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
             }
             subMenuElement={[
               <ProfileMenuItem
+                userData={props.userData}
                 handleClose={handleClose}
                 isAuthenticated={props.isAuthenticated}
                 key="profile"
