@@ -5,8 +5,7 @@ displayName: small-business-improvement
 urlSlug: small-business-improvement
 id: small-business-improvement-grant
 sidebarCardBodyText: The Small Business Improvement Grant offers reimbursement
-  for costs associated with completed building improvements or purchased new
-  furniture, fixtures and equipment made since March 9th, 2020.
+  for costs associated with certain building improvements.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: The Small Business Improvement Grant offers reimbursement
