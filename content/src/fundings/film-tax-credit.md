@@ -31,18 +31,19 @@ sector:
   - arts-entertainment-and-recreation
 publishStageArchive: ""
 ---
+
 ## Eligibility
 
-* Feature films, television series, or television shows of 22 minutes or more in length, intended for a national or regional audience filmed and produced at a cultural venue receiving State funding
-* 60% of the total film production expenses must be incurred for services and goods purchased through vendors authorized to do business in New Jersey, or
-* Qualified film production expenses (expenses incurred in New Jersey for the production of a film) must exceed $1 million per production
-* Qualified film production epxenses incurred for services for use at a sound stage or other location that's located within a 30-mile radius of the intersection of Eighth Ave./Central Park West, Broadway, and West 59th Street/Central Park South, New York, NY eligible for 30%
+- Feature films, television series, or television shows of 22 minutes or more in length, intended for a national or regional audience filmed and produced at a cultural venue receiving State funding
+- 60% of the total film production expenses must be incurred for services and goods purchased through vendors authorized to do business in New Jersey, or
+- Qualified film production expenses (expenses incurred in New Jersey for the production of a film) must exceed $1 million per production
+- Qualified film production expenses incurred for services for use at a sound stage or other location that's located within a 30-mile radius of the intersection of Eighth Ave./Central Park West, Broadway, and West 59th Street/Central Park South, New York, NY eligible for 30%
 
 ## Not Eligible
 
-* Productions featuring news, current events, weather, and market reports or public programming, talk show, sports event, or reality show
-* Productions that solicit funds
-* Productions primarily for private, industrial, corporate, or institutional purposes
+- Productions featuring news, current events, weather, and market reports or public programming, talk show, sports event, or reality show
+- Productions that solicit funds
+- Productions primarily for private, industrial, corporate, or institutional purposes
 
 > ### Benefits
 >
