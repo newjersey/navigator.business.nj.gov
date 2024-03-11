@@ -4254,7 +4254,7 @@ __metadata:
     dependency-cruiser: 16.2.2
     dotenv: 16.4.5
     eslint: 8.57.0
-    eslint-config-next: 14.1.2
+    eslint-config-next: 14.1.3
     eslint-config-prettier: 9.1.0
     eslint-plugin-cypress: 2.15.1
     eslint-plugin-jest: 27.9.0
@@ -4454,7 +4454,7 @@ __metadata:
     dependency-cruiser: 16.2.2
     dotenv: 16.4.5
     eslint: 8.57.0
-    eslint-config-next: 14.1.2
+    eslint-config-next: 14.1.3
     eslint-config-prettier: 9.1.0
     eslint-plugin-cypress: 2.15.1
     eslint-plugin-jest: 27.9.0
@@ -7044,12 +7044,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:14.1.2":
-  version: 14.1.2
-  resolution: "@next/eslint-plugin-next@npm:14.1.2"
+"@next/eslint-plugin-next@npm:14.1.3":
+  version: 14.1.3
+  resolution: "@next/eslint-plugin-next@npm:14.1.3"
   dependencies:
     glob: 10.3.10
-  checksum: abb81492c99dca1aeb9fc3438733ed506de1401d959817e50b831e9296f250220a09d084c631da4736dab6e7c66b3f2db5499c449af086965b7ce61d8feeed0b
+  checksum: 9da2d1266cd44a0912e7d9ba40d534b96237d01479917afa1e341c8ed90f97def87072cb15af41edaf19850733847c1c0db6d9a249d3f3e57bfdb968cb4ce81b
   languageName: node
   linkType: hard
 
@@ -17544,11 +17544,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-next@npm:14.1.2":
-  version: 14.1.2
-  resolution: "eslint-config-next@npm:14.1.2"
+"eslint-config-next@npm:14.1.3":
+  version: 14.1.3
+  resolution: "eslint-config-next@npm:14.1.3"
   dependencies:
-    "@next/eslint-plugin-next": 14.1.2
+    "@next/eslint-plugin-next": 14.1.3
     "@rushstack/eslint-patch": ^1.3.3
     "@typescript-eslint/parser": ^5.4.2 || ^6.0.0
     eslint-import-resolver-node: ^0.3.6
@@ -17563,7 +17563,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 8b18ae027fa652c90944cdd701d19d04b8b531f6686a6178ddaf07d55a1bc1eddade22ca8502955645e7c369aada361787ceaba730e8d7e6ab1dfc0fc1af57b7
+  checksum: 46ae06cf567c273121301e7dd2e6efe3107b9af140f7893e20f79779bb5cf354fce98fcd1201f295455f2e04bddc68d6ffaf0864ce3586db98f67bd5a7c1da24
   languageName: node
   linkType: hard
 
