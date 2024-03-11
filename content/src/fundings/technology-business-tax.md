@@ -5,10 +5,9 @@ name: Technology Business Tax Certificate Transfer (NOL) Program [formerly Net
 displayName: technology-business-tax
 urlSlug: technology-business-tax
 id: technology-business-tax-certificate-transfer-nol-program
-sidebarCardBodyText: The Technology Business Tax Certificate Program enables
+sidebarCardBodyText: The Technology Business Tax Certificate Program supports
   qualified, unprofitable New Jersey-based technology or biotechnology
-  businesses to sell a percentage of their net operating losses (NOL) and unused
-  research and development (R&D) tax credits to unrelated profitable businesses.
+  businesses.
 openDate: 05/01/2024
 dueDate: 06/30/2024
 summaryDescriptionMd: The Technology Business Tax Certificate Program enables
