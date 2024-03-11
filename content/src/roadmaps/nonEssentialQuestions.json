@@ -1,5 +1,5 @@
 {
-  "nonEssentialQuestionsArray":  [
+  "nonEssentialQuestionsArray": [
     {
       "id": "sell-milk",
       "questionText": "Will you sell milk?",
@@ -9,6 +9,11 @@
       "id": "pierce-ears",
       "questionText": "Will you pierce ears?",
       "addOn": "pierce-ears"
+    },
+    {
+      "id": "ticket-broker-resell",
+      "questionText": "Do you plan to resell admission tickets to places of entertainment and charge more than the original price?",
+      "addOn": "ticket-broker-reseller"
     }
   ]
 }
