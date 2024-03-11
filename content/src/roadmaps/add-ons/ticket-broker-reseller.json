@@ -1,0 +1,11 @@
+{
+  "id": "ticket-broker-reseller",
+  "displayname": "ticket-broker-reseller",
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 1,
+      "task": "ticket-broker-reseller-registration"
+    }
+  ]
+}
