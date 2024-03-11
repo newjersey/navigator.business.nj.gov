@@ -5,8 +5,8 @@ displayName: digital-media
 urlSlug: digital-media-tax
 id: digital-media-tax-credit
 sidebarCardBodyText: The Digital Media Tax Credit Program provides a
-  transferable credit against the corporate business tax and the gross income
-  tax to incentivize companies to produce content in New Jersey.
+  transferable tax credit to incentivize companies to produce content in New
+  Jersey.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: The Digital Media Tax Credit Program provides a
