@@ -6,7 +6,7 @@ header: Certificate of Formation / Certificate of Incorporation / Certificate of
 displayname: certificate-formation
 ---
 
-A **Certificate of Formation** confirms the formation of your business as one of the following:
+A **Certificate of Formation** confirms the `formation of your business|business-structure-learn-more` as one of the following:
 * Corporation
 * Limited Liability Company (LLC)
 * Limited Partnership (LP)
