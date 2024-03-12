@@ -4,7 +4,7 @@ notesMd: >+
   https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/4216
 
 filename: tax-clearance-certificate
-name: tax-clearance-certificate
+name: Tax Clearance Certificate
 applyToAllUsers: true
 industryIds: []
 sectorIds: []
