@@ -60,6 +60,16 @@ export const NavBarDesktopDropDown = (props: Props): ReactElement => {
         transition
         disablePortal={true}
         placement="bottom-end"
+        modifiers={[
+          {
+            name: "flip",
+            enabled: false,
+          },
+          {
+            name: "preventOverflow",
+            enabled: false,
+          },
+        ]}
       >
         {({ TransitionProps, placement }): JSX.Element => {
           return (

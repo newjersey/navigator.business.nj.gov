@@ -13,30 +13,20 @@ describe("<NavBarDesktopQuickLinks />", () => {
 
   it("renders the quick links as expected", () => {
     render(<NavBarDesktopQuickLinks />);
-    expect(
-      screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarPlanText)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarStartText)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarOperateText)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarGrowText)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarUpdatesText)
-    ).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationQuickLinks.navBarPlanText)).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationQuickLinks.navBarStartText)).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationQuickLinks.navBarOperateText)).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationQuickLinks.navBarGrowText)).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationQuickLinks.navBarUpdatesText)).toBeInTheDocument();
     expect(screen.getByTestId("navbar-search-icon")).toBeInTheDocument();
   });
 
   it("renders the plan quick link and redirects correctly", async () => {
     render(<NavBarDesktopQuickLinks />);
-    fireEvent.click(screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarPlanText));
+    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarPlanText));
 
     expect(window.open).toHaveBeenCalledWith(
-      Config.navigationDefaults.navigationQuickLinks.navBarPlanLink,
+      Config.navigationQuickLinks.navBarPlanLink,
       "_blank",
       "noopener noreferrer"
     );
@@ -44,10 +34,10 @@ describe("<NavBarDesktopQuickLinks />", () => {
 
   it("renders the operate quick link and redirects correctly", async () => {
     render(<NavBarDesktopQuickLinks />);
-    fireEvent.click(screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarOperateText));
+    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarOperateText));
 
     expect(window.open).toHaveBeenCalledWith(
-      Config.navigationDefaults.navigationQuickLinks.navBarOperateLink,
+      Config.navigationQuickLinks.navBarOperateLink,
       "_blank",
       "noopener noreferrer"
     );
@@ -55,10 +45,10 @@ describe("<NavBarDesktopQuickLinks />", () => {
 
   it("renders the grow quick link and redirects correctly", async () => {
     render(<NavBarDesktopQuickLinks />);
-    fireEvent.click(screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarGrowText));
+    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarGrowText));
 
     expect(window.open).toHaveBeenCalledWith(
-      Config.navigationDefaults.navigationQuickLinks.navBarGrowLink,
+      Config.navigationQuickLinks.navBarGrowLink,
       "_blank",
       "noopener noreferrer"
     );
@@ -66,10 +56,10 @@ describe("<NavBarDesktopQuickLinks />", () => {
 
   it("renders the updates quick link and redirects correctly", async () => {
     render(<NavBarDesktopQuickLinks />);
-    fireEvent.click(screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarUpdatesText));
+    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarUpdatesText));
 
     expect(window.open).toHaveBeenCalledWith(
-      Config.navigationDefaults.navigationQuickLinks.navBarUpdatesLink,
+      Config.navigationQuickLinks.navBarUpdatesLink,
       "_blank",
       "noopener noreferrer"
     );
@@ -80,7 +70,7 @@ describe("<NavBarDesktopQuickLinks />", () => {
     fireEvent.click(screen.getByTestId("navbar-search-icon"));
 
     expect(window.open).toHaveBeenCalledWith(
-      Config.navigationDefaults.navigationQuickLinks.navBarSearchLink,
+      Config.navigationQuickLinks.navBarSearchLink,
       "_blank",
       "noopener noreferrer"
     );

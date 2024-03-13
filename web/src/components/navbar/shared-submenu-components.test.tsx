@@ -21,7 +21,6 @@ import analytics from "@/lib/utils/analytics";
 import { randomPublicFilingLegalStructure } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { generateBusiness, generateProfileData, generateUserData } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { ReactNode } from "react";
@@ -158,14 +157,16 @@ describe("shared-submenu-components", () => {
 
   describe("ProfileMenuItem", () => {
     it("renders ProfileMenuItem and navigates to dashbaord correclty onClick", () => {
-      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={false} />);
+      const userData = generateUserData({});
+      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />);
       expect(screen.getByText(Config.navigationDefaults.navBarGuestBusinessText)).toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestBusinessText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
     });
 
     it("renders ProfileMenuItem and navigates correclty onClick", () => {
-      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={false} />);
+      const userData = generateUserData({});
+      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={false} userData={userData} />);
       expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.navigationDefaults.profileLinkText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
@@ -192,12 +193,7 @@ describe("shared-submenu-components", () => {
         },
       });
 
-      useMockUserData(userData);
-      render(
-        <WithStatefulUserData initialUserData={userData}>
-          <ProfileMenuItem handleClose={() => null} isAuthenticated={true} />
-        </WithStatefulUserData>
-      );
+      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={true} userData={userData} />);
 
       expect(screen.getByText("first-biz")).toBeInTheDocument();
       expect(screen.getByText("second-biz")).toBeInTheDocument();
@@ -217,13 +213,7 @@ describe("shared-submenu-components", () => {
           [secondBusiness.id]: secondBusiness,
         },
       });
-
-      useMockUserData(userData);
-      render(
-        <WithStatefulUserData initialUserData={userData}>
-          <ProfileMenuItem handleClose={() => null} isAuthenticated={true} />
-        </WithStatefulUserData>
-      );
+      render(<ProfileMenuItem handleClose={() => null} isAuthenticated={true} userData={userData} />);
 
       expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
     });
@@ -231,10 +221,10 @@ describe("shared-submenu-components", () => {
 
   it("renders the Plan MenuItem redirects", async () => {
     render(<Plan />);
-    fireEvent.click(screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarPlanText));
+    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarPlanText));
 
     expect(window.open).toHaveBeenCalledWith(
-      Config.navigationDefaults.navigationQuickLinks.navBarPlanLink,
+      Config.navigationQuickLinks.navBarPlanLink,
       "_blank",
       "noopener noreferrer"
     );
@@ -246,10 +236,10 @@ describe("shared-submenu-components", () => {
 
   it("renders the Operate MenuItem redirects", async () => {
     render(<Operate />);
-    fireEvent.click(screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarOperateText));
+    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarOperateText));
 
     expect(window.open).toHaveBeenCalledWith(
-      Config.navigationDefaults.navigationQuickLinks.navBarOperateLink,
+      Config.navigationQuickLinks.navBarOperateLink,
       "_blank",
       "noopener noreferrer"
     );
@@ -261,10 +251,10 @@ describe("shared-submenu-components", () => {
 
   it("renders the Grow MenuItem redirects", async () => {
     render(<Grow />);
-    fireEvent.click(screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarGrowText));
+    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarGrowText));
 
     expect(window.open).toHaveBeenCalledWith(
-      Config.navigationDefaults.navigationQuickLinks.navBarGrowLink,
+      Config.navigationQuickLinks.navBarGrowLink,
       "_blank",
       "noopener noreferrer"
     );
@@ -276,10 +266,10 @@ describe("shared-submenu-components", () => {
 
   it("renders the Updates MenuItem redirects", async () => {
     render(<Updates />);
-    fireEvent.click(screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarUpdatesText));
+    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarUpdatesText));
 
     expect(window.open).toHaveBeenCalledWith(
-      Config.navigationDefaults.navigationQuickLinks.navBarUpdatesLink,
+      Config.navigationQuickLinks.navBarUpdatesLink,
       "_blank",
       "noopener noreferrer"
     );
@@ -291,10 +281,10 @@ describe("shared-submenu-components", () => {
 
   it("renders the Search MenuItem redirects", async () => {
     render(<Search />);
-    fireEvent.click(screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarSearchText));
+    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarSearchText));
 
     expect(window.open).toHaveBeenCalledWith(
-      Config.navigationDefaults.navigationQuickLinks.navBarSearchLink,
+      Config.navigationQuickLinks.navBarSearchLink,
       "_blank",
       "noopener noreferrer"
     );
@@ -305,10 +295,10 @@ describe("shared-submenu-components", () => {
 
   it("renders the Start MenuItem redirects", async () => {
     render(<Start />);
-    fireEvent.click(screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarStartText));
+    fireEvent.click(screen.getByText(Config.navigationQuickLinks.navBarStartText));
 
     expect(window.open).toHaveBeenCalledWith(
-      Config.navigationDefaults.navigationQuickLinks.navBarStartLink,
+      Config.navigationQuickLinks.navBarStartLink,
       "_blank",
       "noopener noreferrer"
     );

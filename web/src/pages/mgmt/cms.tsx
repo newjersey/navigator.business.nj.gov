@@ -38,6 +38,7 @@ import { useMountEffect } from "@/lib/utils/helpers";
 
 import AccountSetupPreview from "@/lib/cms/previews/AccountSetupPreview";
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
+import NavBarPreview from "@/lib/cms/previews/NavBarPreview";
 import QuickActionLicenseReinstatementPreview from "@/lib/cms/previews/QuickActionLicenseReinstatementPreview";
 import QuickActionLinkPreview from "@/lib/cms/previews/QuickActionLinkPreview";
 import QuickActionTaskPreview from "@/lib/cms/previews/QuickActionTaskPreview";
@@ -142,6 +143,7 @@ const CMS = dynamic(
       registerPreview(CMS, "deferred-location-config", DeferredLocationPreview);
 
       registerPreview(CMS, "tax-access-modal", TaxAccessModalPreview);
+      registerPreview(CMS, "navigation-defaults", NavBarPreview);
     });
   },
   { ssr: false, loading: Loading }

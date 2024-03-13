@@ -3,7 +3,6 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { randomPublicFilingLegalStructure } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { generateBusiness, generateProfileData, generateUserData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -38,40 +37,20 @@ describe("<NavBarDesktop />", () => {
   });
 
   const quickLinksExist = (): void => {
-    expect(
-      screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarPlanText)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarStartText)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarOperateText)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarGrowText)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(Config.navigationDefaults.navigationQuickLinks.navBarUpdatesText)
-    ).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationQuickLinks.navBarPlanText)).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationQuickLinks.navBarStartText)).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationQuickLinks.navBarOperateText)).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationQuickLinks.navBarGrowText)).toBeInTheDocument();
+    expect(screen.getByText(Config.navigationQuickLinks.navBarUpdatesText)).toBeInTheDocument();
     expect(screen.getByTestId("navbar-search-icon")).toBeInTheDocument();
   };
 
   const quickLinksDoNotExist = (): void => {
-    expect(
-      screen.queryByText(Config.navigationDefaults.navigationQuickLinks.navBarPlanText)
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByText(Config.navigationDefaults.navigationQuickLinks.navBarStartText)
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByText(Config.navigationDefaults.navigationQuickLinks.navBarOperateText)
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByText(Config.navigationDefaults.navigationQuickLinks.navBarGrowText)
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByText(Config.navigationDefaults.navigationQuickLinks.navBarUpdatesText)
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.navigationQuickLinks.navBarPlanText)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.navigationQuickLinks.navBarStartText)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.navigationQuickLinks.navBarOperateText)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.navigationQuickLinks.navBarGrowText)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.navigationQuickLinks.navBarUpdatesText)).not.toBeInTheDocument();
     expect(screen.queryByTestId("navbar-search-icon")).not.toBeInTheDocument();
   };
 
@@ -122,11 +101,13 @@ describe("<NavBarDesktop />", () => {
           [firstBusiness.id]: firstBusiness,
         },
       });
-      useMockUserData(userData);
       render(
-        <WithStatefulUserData initialUserData={userData}>
-          <NavBarDesktop isLanding={false} currentlyOnboarding={false} isAuthenticated={true} />
-        </WithStatefulUserData>
+        <NavBarDesktop
+          isLanding={false}
+          currentlyOnboarding={false}
+          isAuthenticated={true}
+          userData={userData}
+        />
       );
 
       expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
@@ -152,7 +133,15 @@ describe("<NavBarDesktop />", () => {
     });
 
     it("shows profile and regsiter in dropdown", () => {
-      render(<NavBarDesktop isLanding={false} currentlyOnboarding={false} isAuthenticated={false} />);
+      const userData = generateUserData({});
+      render(
+        <NavBarDesktop
+          isLanding={false}
+          currentlyOnboarding={false}
+          isAuthenticated={false}
+          userData={userData}
+        />
+      );
 
       expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
       expect(screen.getByText(Config.navigationDefaults.navBarGuestBusinessText)).toBeInTheDocument();

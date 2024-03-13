@@ -4,7 +4,12 @@ import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockBusiness, useMockUserData } from "@/test/mock/mockUseUserData";
-import { Business, generateBusiness, generateProfileData } from "@businessnjgovnavigator/shared";
+import {
+  Business,
+  generateBusiness,
+  generateProfileData,
+  generateUserData,
+} from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
@@ -160,6 +165,7 @@ describe("<NavBarMobile />", () => {
     });
 
     it("renders profile, add business, myNj and logout in account menu", () => {
+      const userData = generateUserData({});
       render(
         <NavBarMobile
           currentlyOnboarding={false}
@@ -170,6 +176,7 @@ describe("<NavBarMobile />", () => {
           hideMiniRoadmap={true}
           showSidebar={false}
           previousBusinessId={undefined}
+          userData={userData}
         />
       );
       expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
@@ -206,6 +213,7 @@ describe("<NavBarMobile />", () => {
     });
 
     it("renders profile, register and login in the account menu", () => {
+      const userData = generateUserData({});
       render(
         <NavBarMobile
           currentlyOnboarding={false}
@@ -216,6 +224,7 @@ describe("<NavBarMobile />", () => {
           hideMiniRoadmap={true}
           showSidebar={false}
           previousBusinessId={undefined}
+          userData={userData}
         />
       );
       expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();

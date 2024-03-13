@@ -19,6 +19,7 @@ import * as ExportPdf from "@businessnjgovnavigator/content/fieldConfig/export-p
 import * as FormationInterimSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-interim-success-page.json";
 import * as FormationSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-success-page.json";
 import * as NaicsCode from "@businessnjgovnavigator/content/fieldConfig/naics-code.json";
+import * as NavigationDefaults from "@businessnjgovnavigator/content/fieldConfig/navigation-defaults.json";
 import * as NexusDbaFormation from "@businessnjgovnavigator/content/fieldConfig/nexus-dba-formation.json";
 import * as NexusNameSearch from "@businessnjgovnavigator/content/fieldConfig/nexus-name-search.json";
 import * as PageNotFoundError from "@businessnjgovnavigator/content/fieldConfig/page-not-found-error.json";
@@ -58,7 +59,8 @@ const merged = JSON.parse(
       BusinessStructureTask,
       BusinessStructurePrompt,
       AccountSetup,
-      ExportPdf
+      ExportPdf,
+      NavigationDefaults
     )
   )
 );
@@ -89,7 +91,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof DashboardSnackbars &
   typeof BusinessStructurePrompt &
   typeof AccountSetup &
-  typeof ExportPdf;
+  typeof ExportPdf &
+  typeof NavigationDefaults;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -118,7 +121,8 @@ export const getMergedConfig = (): ConfigType => {
     TaxAccess,
     AccountSetup,
     BusinessStructureTask,
-    ExportPdf
+    ExportPdf,
+    NavigationDefaults
   );
 };
 
