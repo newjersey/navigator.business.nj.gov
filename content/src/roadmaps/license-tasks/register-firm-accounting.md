@@ -1,14 +1,15 @@
 ---
-displayname: certified-accountant-license
+id: register-firm-accounting
 filename: register-firm-accounting
-urlSlug: CPA-license
+displayname: public-accountant-license
+urlSlug: public-accountant-license
 name: Apply for a Certified Public Accountant License
 webflowName: "Accountant: Certified Public Accountant License"
 summaryDescriptionMd: >
-  You or any staff conducting financial audits in accordance with the Statements
-  on Auditing Standards (SAS), the Statements on Standards for Attestation
-  Engagements (SSAE), or the Public Company Accounting Oversight Board (PCAOB)
-  must obtain a certified public accountant license.
+  You need a Certified Public Accountant (CPA) license if you want to represent
+  clients before the Internal Revenue Service (IRS) during a tax audit, prepare
+  an audited financial statement, review financial statements, and file reports
+  with the Securities and Exchange Committee (SEC).
 industryId:
   - certified-public-accountant
 callToActionText: Apply for My License
@@ -18,22 +19,33 @@ licenseCertificationClassification: ""
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Board of Accountancy
 divisionPhone: (973) 504-6380
-id: register-firm-accounting
 webflowType: individual-license
 webflowId: 5f77296ee10dec7593024f1c
 ---
 
 ## Eligibility Criteria
 
-- A bachelor's degree or higher from an accredited school
-- At least 150 credit hours (24 semester credits in accounting courses and 24 semester credits in business courses)
-- 1 year of full-time public accounting experience under the supervision of an active CPA
-- A passing score on the Uniform CPA Exam
+- Be at least 18 years old
+- A bachelor's degree or higher from an accredited school or university. At least 150 credit hours (24 semester credits in accounting courses and 24 semester credits in business courses)
+- Official transcript copies sent from your school to the Board at New Jersey State Board of Accountancy
+One year of full-time public accounting experience under the supervision of an active Certified Public Accountant (CPA)
+- Passed all four parts of the National CPA Examination in New Jersey
+- Passing scores on the Uniform CPA Exam New Jersey’s ethics, laws, and regulations exam
 
 ## Application Requirements
 
-- CPA Statement of Experience detailing your required one year of experience working under the supervision of an active CPA
-- Criminal background check
+- Social Security number (SSN) or Taxpayer Identification number (ITIN)
+- Social Security number (SSN) or Taxpayer Identification number (ITIN)
+- Personal information, including address, birth date, and place of birth
+- Citizenship/immigration status
+- Name change information, if applicable
+- Child support information, if applicable
+History of drug use, if applicable
+- A criminal background check
+- List of licenses or certifications, past and present, if applicable
+- History of disciplinary actions, suspended licenses, if applicable
+- Name and address of the college or university where you earned your undergraduate degree
+- List of your acquired experience
 - Applicable fees paid
 
 > **Once completed, you will have:**
