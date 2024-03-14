@@ -1,39 +1,39 @@
 /* eslint-disable @next/next/next-script-for-ga */
 // organize-imports-ignore
-import "@newjersey/njwds/dist/css/styles.css";
-import "../styles/main.scss";
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
+import { IntercomScript } from "@/components/IntercomScript";
+import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
+import { NeedsAccountSnackbar } from "@/components/auth/NeedsAccountSnackbar";
+import { RegistrationStatusSnackbar } from "@/components/auth/RegistrationStatusSnackbar";
+import { AuthContext, initialState } from "@/contexts/authContext";
+import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
+import { IntercomContext } from "@/contexts/intercomContext";
+import { NeedsAccountContext } from "@/contexts/needsAccountContext";
+import { RoadmapContext } from "@/contexts/roadmapContext";
+import { UpdateQueueContext } from "@/contexts/updateQueueContext";
+import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { AuthReducer, authReducer } from "@/lib/auth/AuthContext";
 import { getActiveUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import MuiTheme from "@/lib/muiTheme";
+import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import { Roadmap, UpdateQueue, UserDataError } from "@/lib/types/types";
-import analytics from "@/lib/utils/analytics";
-import { GTM_ID } from "@/lib/utils/analytics";
+import analytics, { GTM_ID } from "@/lib/utils/analytics";
+import { setOnLoadDimensions } from "@/lib/utils/analytics-helpers";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Hub, HubCapsule } from "@aws-amplify/core";
+import { BusinessPersona, OperatingPhaseId, RegistrationStatus } from "@businessnjgovnavigator/shared";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material";
+import "@newjersey/njwds/dist/css/styles.css";
 import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
-import { BusinessPersona, OperatingPhaseId, RegistrationStatus } from "@businessnjgovnavigator/shared";
-import { NeedsAccountSnackbar } from "@/components/auth/NeedsAccountSnackbar";
-import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
-import { RegistrationStatusSnackbar } from "@/components/auth/RegistrationStatusSnackbar";
-import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
-import { RoadmapContext } from "@/contexts/roadmapContext";
-import { NeedsAccountContext } from "@/contexts/needsAccountContext";
-import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
-import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
-import { AuthContext, initialState } from "@/contexts/authContext";
-import MuiTheme from "@/lib/muiTheme";
-import { UpdateQueueContext } from "@/contexts/updateQueueContext";
-import { IntercomContext } from "@/contexts/intercomContext";
-import { IntercomScript } from "@/components/IntercomScript";
-import { setOnLoadDimensions } from "@/lib/utils/analytics-helpers";
-import { useConfig } from "@/lib/data-hooks/useConfig";
+import "../styles/main.scss";
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
 NeedsAccountContext.displayName = "Needs Account";
@@ -124,6 +124,9 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
   return (
     <>
+      <Head>
+        <meta name="viewport" content="width=360, initial-scale=1" />
+      </Head>
       {showGtm && (
         <Script id="google-tag-manager">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -135,7 +138,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       )}
       <script
         dangerouslySetInnerHTML={{
-          __html: `window.dataLayer = window.dataLayer || []; 
+          __html: `window.dataLayer = window.dataLayer || [];
           function gtm(layer){window.dataLayer.push(layer);};      `,
         }}
       />

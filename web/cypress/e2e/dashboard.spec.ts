@@ -13,7 +13,11 @@ import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { onProfilePage } from "cypress/support/page_objects/profilePage";
 
-const sizes = ["iphone-5", [1024, 768]];
+const sizes = [
+  [375, 667],
+  [1024, 768],
+];
+
 describe("Dashboard [feature] [all] [group2]", () => {
   for (const size of sizes) {
     beforeEach(() => {
