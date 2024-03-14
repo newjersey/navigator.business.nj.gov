@@ -25,7 +25,7 @@ describe("Performance and Accessability - Landing Page [all] [group2]", () => {
 
   describe("Mobile", () => {
     it("should pass the audits", () => {
-      cy.viewport("iphone-5");
+      cy.viewport(375, 667);
       cy.visit("/");
       cy.wait(1000); // wait for onboarding animation
 
