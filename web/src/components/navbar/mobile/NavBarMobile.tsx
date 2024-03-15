@@ -16,7 +16,8 @@ import {
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { Task } from "@/lib/types/types";
-import { Business, UserData } from "@businessnjgovnavigator/shared/userData";
+import { getCurrentBusiness } from "@businessnjgovnavigator/shared/index";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useState } from "react";
 
 interface Props {
@@ -29,7 +30,6 @@ interface Props {
   logoOnlyType?: "NAVIGATOR_LOGO" | "NAVIGATOR_MYNJ_LOGO" | undefined;
   currentlyOnboarding: boolean;
   isAuthenticated: boolean;
-  business?: Business;
   userData?: UserData;
   CMS_PREVIEW_ONLY_SHOW_MENU?: boolean;
 }
@@ -37,7 +37,12 @@ interface Props {
 export const NavBarMobile = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
-  const navBarBusinessTitle = getNavBarBusinessTitle(props.business, props.isAuthenticated);
+  let currentBusiness = undefined;
+  if (props.userData) {
+    currentBusiness = getCurrentBusiness(props.userData);
+  }
+
+  const navBarBusinessTitle = getNavBarBusinessTitle(currentBusiness, props.isAuthenticated);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(props.CMS_PREVIEW_ONLY_SHOW_MENU ? true : false);
 
