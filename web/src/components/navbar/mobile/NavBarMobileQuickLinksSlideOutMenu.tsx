@@ -25,7 +25,7 @@ export const NavBarMobileQuickLinksSlideOutMenu = (): ReactElement => {
       <button
         className="right-nav-menu-button radius-0"
         data-testid="nav-menu-mobile-quick-link-open"
-        aria-label="open menu"
+        aria-label="site menu"
         onClick={(): void => {
           analytics.event.mobile_hamburger_icon_quick_links.click.open_mobile_menu();
           open();
