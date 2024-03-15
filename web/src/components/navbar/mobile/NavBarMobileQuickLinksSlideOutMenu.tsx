@@ -31,7 +31,7 @@ export const NavBarMobileQuickLinksSlideOutMenu = (): ReactElement => {
           open();
         }}
       >
-        <Icon className="text-accent-cool-darker font-sans-lg">menu</Icon>
+        <Icon className="text-accent-cool-more-dark font-sans-lg">menu</Icon>
       </button>
 
       <FocusTrappedSidebar close={close} isOpen={sidebarIsOpen}>
