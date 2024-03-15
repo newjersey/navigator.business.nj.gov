@@ -160,22 +160,26 @@ const fundings = [
   {
     isArchived: false,
     isDraft: false,
-    "learn-more-url": "https://www.nj.gov/dep/grantandloanprograms/aqes-njccp.htm",
-    "feature-on-recents": false,
-    agency: "e5191b387dca9f56520a9fb24ad56f74",
-    "certifications-2": ["63efba3124109fa20ee2a419"],
-    "funding-type": "e84141a8393db92e7fbb14aad810be6d",
-    "program-overview":
-      "<p>New Jersey Clean Construction Program installs pollution control devices or replaces qualifying non-road construction equipment that reduces pollution. Businesses can apply to two grants: Off-Road Diesel Retrofit Grant and Off-Road Diesel Replacement Grant.</p>",
-    eligibility:
-      "<ul> <li>Businesses or non-profits must own the non-road construction equipment</li> <li>Equipment must be used a minimum of 50% of the time in New Jersey for a current or future construction project in New Jersey</li> <li>Equipment cannot be planned to go out of use in the next 5 years</li> <li>Priority is given to urban areas, high frequency of use, and older models</li> </ul>",
-    benefit: "<p>Award of up to $100,000 per piece of equipment purchased or replaced</p>",
-    name: "NJ Clean Construction Program",
-    slug: "dep-clean-construction",
-    "industry-reference": ["61c48e1c25e5672fad13ed46", "61c48e23def87f031aed93aa"],
-    "funding-status": "c44fb3cfdfb8a5b52d694a578d0338c1",
-    cid: "6112e6b88aa567fdbc725ffc",
+    fieldData: {
+      "learn-more-url": "https://www.nj.gov/dep/grantandloanprograms/aqes-njccp.htm",
+      "feature-on-recents": false,
+      agency: "e5191b387dca9f56520a9fb24ad56f74",
+      "certifications-2": ["63efba3124109fa20ee2a419"],
+      "funding-type": "e84141a8393db92e7fbb14aad810be6d",
+      "program-overview":
+        "<p>New Jersey Clean Construction Program installs pollution control devices or replaces qualifying non-road construction equipment that reduces pollution. Businesses can apply to two grants: Off-Road Diesel Retrofit Grant and Off-Road Diesel Replacement Grant.</p>",
+      eligibility:
+        "<ul> <li>Businesses or non-profits must own the non-road construction equipment</li> <li>Equipment must be used a minimum of 50% of the time in New Jersey for a current or future construction project in New Jersey</li> <li>Equipment cannot be planned to go out of use in the next 5 years</li> <li>Priority is given to urban areas, high frequency of use, and older models</li> </ul>",
+      benefit: "<p>Award of up to $100,000 per piece of equipment purchased or replaced</p>",
+      name: "NJ Clean Construction Program",
+      slug: "dep-clean-construction",
+      "industry-reference": ["61c48e1c25e5672fad13ed46", "61c48e23def87f031aed93aa"],
+      "funding-status": "c44fb3cfdfb8a5b52d694a578d0338c1",
+      cid: "6112e6b88aa567fdbc725ffc",
+    },
     id: "62c5bc16a8f618275698c979",
+    // name: "NJ Clean Construction Program",
+    // slug: "dep-clean-construction",
   },
   {
     isArchived: false,
@@ -196,6 +200,10 @@ const fundings = [
     "industry-reference": ["61c48e1b3257cc374781ee12"],
     "funding-status": "d9e4ad4201a1644abbcad6666bace0bc",
     id: "62c5bc1639c27700c64f4a70",
+    fieldData: {
+      name: "NJ Accelerate",
+      slug: "nj-accelerate",
+    },
   },
   {
     isArchived: false,
@@ -220,9 +228,14 @@ const fundings = [
     ],
     "funding-status": "c44fb3cfdfb8a5b52d694a578d0338c1",
     id: "62c5bc16d0a8cf081867afa2",
+    fieldData: {
+      name: "Clean Tech Research & Development (R&D) Voucher Program",
+      slug: "clean-tech-research-development-rd-voucher-program",
+    },
   },
 ];
 
+console.log("Fundings", fundings);
 const webflowSectors = [
   {
     name: "All Industries",
@@ -267,7 +280,7 @@ describe("webflow syncing", () => {
       if (request.url.includes("6112e6b88aa567fdbc725ffc") && request.method === "get") {
         return { data: { items: fundings } };
       } else {
-        console.log(request);
+        console.log("Request", request);
       }
     });
   });
@@ -629,7 +642,7 @@ describe("webflow syncing", () => {
       const { isArchived, isDraft, id, ...rest } = fundings.find((item) => {
         return item.slug === "nj-accelerate";
       });
-      console.log(newFundings[0]);
+      console.log("First New Funding", newFundings[0]);
       delete rest["feature-on-recents"];
       expect(newFundings).toMatchObject([rest]);
     });
@@ -643,6 +656,8 @@ describe("webflow syncing", () => {
           return {
             data: {
               items: fundings.filter((item) => {
+                console.log("Funding Array to Filter", fundings);
+                console.log("Item From Fundings Array", item);
                 return item.slug !== "nj-accelerate";
               }),
             },
@@ -650,7 +665,7 @@ describe("webflow syncing", () => {
         }
       });
 
-      const { id, ...rest } = fundings.find((item) => {
+      const { id, fieldData, ...rest } = fundings.find((item) => {
         return item.slug === "nj-accelerate";
       });
       delete rest["feature-on-recents"];
@@ -664,6 +679,10 @@ describe("webflow syncing", () => {
           "application-close-date": null,
           "start-date": null,
           "last-updated": currentDate.toISOString(),
+          fieldData: {
+            name: item.fieldData.name,
+            slug: item.fieldData.slug,
+          },
           ...rest,
         },
         responseType: "json",

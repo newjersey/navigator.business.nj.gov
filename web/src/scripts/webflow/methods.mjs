@@ -54,6 +54,7 @@ const getAllCollections = async () => {
 };
 
 const createItem = (item, collectionId, draft = true) => {
+  console.log("Item in createItem func", item);
   return axios({
     method: "post",
     url: `https://api.webflow.com/v2/collections/${collectionId}/items`,
@@ -61,19 +62,28 @@ const createItem = (item, collectionId, draft = true) => {
     data: {
       isArchived: false,
       isDraft: draft,
-      ...item,
+      fieldData: {
+        ...item,
+        name: item.name,
+        slug: item.slug,
+      },
     },
     responseType: "json",
   });
 };
 
 const modifyItem = (itemId, collectionId, body, method = "patch") => {
+  console.log("Body", body);
   return axios({
     method: method,
     url: `https://api.webflow.com/v2/collections/${collectionId}/items/${itemId}`,
     headers,
     data: {
-      ...body,
+      fieldData: {
+        ...body,
+        name: body.name,
+        slug: body.slug,
+      },
     },
     responseType: "json",
   });
