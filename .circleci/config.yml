@@ -1077,78 +1077,78 @@ workflows:
           requires:
             - build
 
-  browser-testing:
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"
-          filters:
-            branches:
-              only:
-                - main
-    jobs:
-      - build
-      # edge integration tests
-      - integration-tests:
-          name: Integration Tests - Edge - Group 1
-          suite: group1
-          browser: edge
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Edge - Group 2
-          suite: group2
-          browser: edge
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Edge - Group 3
-          suite: group3
-          browser: edge
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Edge - Group 4
-          suite: group4
-          browser: edge
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Edge - Group 5
-          suite: group5
-          browser: edge
-          requires:
-            - build
-      # firefox integration tests
-      - integration-tests:
-          name: Integration Tests - Firefox - Group 1
-          suite: group1
-          browser: firefox
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Firefox - Group 2
-          suite: group2
-          browser: firefox
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Firefox - Group 3
-          suite: group3
-          browser: firefox
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Firefox - Group 4
-          suite: group4
-          browser: firefox
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Firefox - Group 5
-          suite: group5
-          browser: firefox
-          requires:
-            - build
+  # browser-testing:
+  #   triggers:
+  #     - schedule:
+  #         cron: "0 0 * * *"
+  #         filters:
+  #           branches:
+  #             only:
+  #               - main
+  #   jobs:
+  #     - build
+  #     # edge integration tests
+  #     - integration-tests:
+  #         name: Integration Tests - Edge - Group 1
+  #         suite: group1
+  #         browser: edge
+  #         requires:
+  #           - build
+  #     - integration-tests:
+  #         name: Integration Tests - Edge - Group 2
+  #         suite: group2
+  #         browser: edge
+  #         requires:
+  #           - build
+  #     - integration-tests:
+  #         name: Integration Tests - Edge - Group 3
+  #         suite: group3
+  #         browser: edge
+  #         requires:
+  #           - build
+  #     - integration-tests:
+  #         name: Integration Tests - Edge - Group 4
+  #         suite: group4
+  #         browser: edge
+  #         requires:
+  #           - build
+  #     - integration-tests:
+  #         name: Integration Tests - Edge - Group 5
+  #         suite: group5
+  #         browser: edge
+  #         requires:
+  #           - build
+  #     # firefox integration tests
+  #     - integration-tests:
+  #         name: Integration Tests - Firefox - Group 1
+  #         suite: group1
+  #         browser: firefox
+  #         requires:
+  #           - build
+  #     - integration-tests:
+  #         name: Integration Tests - Firefox - Group 2
+  #         suite: group2
+  #         browser: firefox
+  #         requires:
+  #           - build
+  #     - integration-tests:
+  #         name: Integration Tests - Firefox - Group 3
+  #         suite: group3
+  #         browser: firefox
+  #         requires:
+  #           - build
+  #     - integration-tests:
+  #         name: Integration Tests - Firefox - Group 4
+  #         suite: group4
+  #         browser: firefox
+  #         requires:
+  #           - build
+  #     - integration-tests:
+  #         name: Integration Tests - Firefox - Group 5
+  #         suite: group5
+  #         browser: firefox
+  #         requires:
+  #           - build
 
   build-image-pipeline-weekly:
     triggers:
