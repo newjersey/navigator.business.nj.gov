@@ -6,6 +6,8 @@ import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateUserData } from "@businessnjgovnavigator/shared/test";
 import { ReactElement, useState } from "react";
+import { create, InsertionPoint } from "jss";
+import { jssPreset, StylesProvider } from "@mui/styles";
 
 const NavBarPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
@@ -14,10 +16,30 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [userData, setUserData] = useState(generateUserData({}));
 
+
+  const iframe = document.querySelector('#nc-root iframe');
+  const iframeHeadElem = iframe && iframe.ownerDocument.head;
+
+  if (!iframeHeadElem) {
+    return <></>;
+  }
+  if(!iframeHeadElem.firstChild){
+    return <></>;
+  }
+
+  const jss = create({
+    plugins: [...jssPreset().plugins],
+    insertionPoint: iframeHeadElem.firstChild as InsertionPoint, // a bit sketchy
+  });
+
+
   return (
+    <>
+    <StylesProvider jss={jss}>
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         <hr className="padding-y-10" />
+
 
         <div>Landing</div>
         <NavBarDesktop
@@ -81,7 +103,7 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
           userData={userData}
           CMS_PREVIEW_ONLY_SHOW_MENU={true}
         />
-        <div className="padding-y-10" />
+        <div className="padding-y-15" />
 
         <div>Authed</div>
         <NavBarMobile
@@ -94,6 +116,8 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
         <div className="padding-y-15" />
       </div>
     </ConfigContext.Provider>
+    </StylesProvider>
+    </>
   );
 };
 
