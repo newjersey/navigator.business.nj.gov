@@ -165,7 +165,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       let currentUserData = updateQueue?.current();
 
       if (state.isAuthenticated === IsAuthenticated.TRUE && currentUserData === undefined) {
-        router.push(ROUTES.loading);
+        router.push(ROUTES.landing);
       }
 
       if (currentUserData) {
