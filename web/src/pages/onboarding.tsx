@@ -166,6 +166,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
       if (state.isAuthenticated === IsAuthenticated.TRUE && currentUserData === undefined) {
         router.push(ROUTES.landing);
+        return;
       }
 
       if (currentUserData) {
