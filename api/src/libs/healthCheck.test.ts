@@ -8,7 +8,7 @@ const mockAxios = axios as jest.Mocked<typeof axios>;
 describe("healthCheck", () => {
   const logger = LogWriter(`HealthCheckWebService`, "ApiLogs");
 
-  it("pass", async () => {
+  it("returns an object with pass statuses if success is true", async () => {
     mockAxios.get.mockResolvedValue({ data: { success: true } });
     expect(await runHealthChecks(logger)).toStrictEqual({
       self: "PASS",
@@ -21,7 +21,7 @@ describe("healthCheck", () => {
     });
   });
 
-  it("fail", async () => {
+  it("returns an object with fail statuses if success is false", async () => {
     mockAxios.get.mockResolvedValue({ data: { success: false } });
     expect(await runHealthChecks(logger)).toStrictEqual({
       self: "FAIL",
@@ -34,7 +34,7 @@ describe("healthCheck", () => {
     });
   });
 
-  it("error", async () => {
+  it("returns an object with error statuses if request fails/errors out", async () => {
     mockAxios.get.mockRejectedValue({});
     expect(await runHealthChecks(logger)).toStrictEqual({
       self: "ERROR",
