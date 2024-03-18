@@ -62,10 +62,12 @@ const createItem = (item, collectionId, draft = true) => {
     data: {
       isArchived: false,
       isDraft: draft,
-      fieldData: {
-        ...item,
-        name: item.name,
-        slug: item.slug,
+      value: {
+        fieldData: {
+          // ...item,
+          name: item.name,
+          // slug: item.slug,
+        },
       },
     },
     responseType: "json",
@@ -74,15 +76,15 @@ const createItem = (item, collectionId, draft = true) => {
 
 const modifyItem = (itemId, collectionId, body, method = "patch") => {
   console.log("Body", body);
+  console.log("Funding", body);
   return axios({
     method: method,
     url: `https://api.webflow.com/v2/collections/${collectionId}/items/${itemId}`,
     headers,
     data: {
       fieldData: {
-        ...body,
+        // ...body,
         name: body.name,
-        slug: body.slug,
       },
     },
     responseType: "json",

@@ -178,8 +178,6 @@ const fundings = [
       cid: "6112e6b88aa567fdbc725ffc",
     },
     id: "62c5bc16a8f618275698c979",
-    // name: "NJ Clean Construction Program",
-    // slug: "dep-clean-construction",
   },
   {
     isArchived: false,

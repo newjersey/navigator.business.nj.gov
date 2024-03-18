@@ -75,27 +75,29 @@ const getLicenseFromMd = (licenseMd) => {
     return value;
   };
 
-  return {
-    id: licenseMd.webflowId,
-    name: name,
-    slug: licenseMd.urlSlug,
-    website: removeValueWithSpecialChars(licenseMd.callToActionLink),
-    "call-to-action-text": licenseMd.callToActionText,
-    "department-3": LookupTaskAgencyById(licenseMd.agencyId).name,
-    division: licenseMd.agencyAdditionalContext,
-    "department-phone-2": licenseMd.divisionPhone,
-    "license-certification-classification": licenseMd.licenseCertificationClassification,
-    "form-name": licenseMd.formName,
-    "primary-industry": licenseMd.industryId
-      ? LookupIndustryById(licenseMd.industryId).name
-      : licenseMd.webflowIndustry,
-    content: getHtml(contentToStrings(licenseMd.contentMd)),
-    "last-updated": new Date(Date.now()).toISOString(),
-    "license-classification": licenseMd.webflowType
-      ? LicenseClassificationLookup[licenseMd.webflowType]
-      : undefined,
-    "summary-description": getHtml(contentToStrings(licenseMd.summaryDescriptionMd)),
-  };
+  return [
+    licenseMd.webflowId,
+    {
+      name: name,
+      slug: licenseMd.urlSlug,
+      website: removeValueWithSpecialChars(licenseMd.callToActionLink),
+      "call-to-action-text": licenseMd.callToActionText,
+      "department-3": LookupTaskAgencyById(licenseMd.agencyId).name,
+      division: licenseMd.agencyAdditionalContext,
+      "department-phone-2": licenseMd.divisionPhone,
+      "license-certification-classification": licenseMd.licenseCertificationClassification,
+      "form-name": licenseMd.formName,
+      "primary-industry": licenseMd.industryId
+        ? LookupIndustryById(licenseMd.industryId).name
+        : licenseMd.webflowIndustry,
+      content: getHtml(contentToStrings(licenseMd.contentMd)),
+      "last-updated": new Date(Date.now()).toISOString(),
+      "license-classification": licenseMd.webflowType
+        ? LicenseClassificationLookup[licenseMd.webflowType]
+        : undefined,
+      "summary-description": getHtml(contentToStrings(licenseMd.summaryDescriptionMd)),
+    },
+  ];
 };
 
 const getAllLicensesFromWebflow = async () => {
@@ -137,8 +139,8 @@ const updateLicenses = async (licenseMarkdowns) => {
   const modify = async (licenseMd) => {
     console.info(`Attempting to modify ${licenseMd.urlSlug}`);
     try {
-      const webflowItem = getLicenseFromMd(licenseMd);
-      return await modifyItem(webflowItem.id, licenseCollectionId, webflowItem);
+      const [webflowItemId, webflowItem] = getLicenseFromMd(licenseMd);
+      return await modifyItem(webflowItemId, licenseCollectionId, webflowItem);
     } catch (error) {
       console.error(error.response);
       throw error;
