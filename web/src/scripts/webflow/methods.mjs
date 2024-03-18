@@ -1,7 +1,7 @@
 import axios from "axios";
 import adapter from "axios/lib/adapters/http.js";
 
-if (typeof process != "undefined") {
+if (typeof process !== "undefined") {
   axios.defaults.adapter = adapter;
 }
 
@@ -20,14 +20,12 @@ const getAllItems = async (id) => {
   let totalToFetch = 1;
 
   while (responseItems.length < totalToFetch) {
-    const data = (
-      await axios({
-        method: "get",
-        url: `https://api.webflow.com/collections/${id}/items?offset=${responseItems.length}`,
-        headers,
-        responseType: "json",
-      })
-    ).data;
+    const { data } = await axios({
+      method: "get",
+      url: `https://api.webflow.com/collections/${id}/items?offset=${responseItems.length}`,
+      headers,
+      responseType: "json",
+    });
     responseItems = [...responseItems, ...data.items];
     totalToFetch = data.total;
   }

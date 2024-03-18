@@ -163,6 +163,11 @@ const OnboardingPage = (props: Props): ReactElement => {
       let localUpdateQueue = updateQueue;
 
       let currentUserData = updateQueue?.current();
+
+      if (state.isAuthenticated === IsAuthenticated.TRUE && currentUserData === undefined) {
+        router.push(ROUTES.loading);
+      }
+
       if (currentUserData) {
         const queryAdditionalBusiness = router.query[QUERIES.additionalBusiness] as string;
         if (queryAdditionalBusiness === "true") {
