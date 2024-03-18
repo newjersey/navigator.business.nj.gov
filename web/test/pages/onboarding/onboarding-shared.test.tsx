@@ -38,6 +38,11 @@ describe("onboarding - shared", () => {
     jest.useFakeTimers();
   });
 
+  it("routes to the dashboard when the user is authenticated and userData is undefined", async () => {
+    renderPage({ userData: null });
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
+  });
+
   it("routes to the first onboarding question when they have not answered the first question", async () => {
     useMockRouter({ isReady: true, query: { page: "3" } });
     renderPage({});

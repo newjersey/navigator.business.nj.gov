@@ -147,6 +147,14 @@ const OnboardingPage = (props: Props): ReactElement => {
     setCurrentFlow(getFlow(profileData));
   }, [profileData]);
 
+  const protectUpdateQueueAgainstRaceCondition = (currentUserData: UserData | undefined): boolean => {
+    /*
+    A user cannot be authenticated and have empty userData. In order to preserve any data that may
+    have not yet returned, redirect the user to the landing page and out of the onboarding flow.
+    */
+    return state.isAuthenticated === IsAuthenticated.TRUE && currentUserData === undefined;
+  };
+
   useEffect(() => {
     (async (): Promise<void> => {
       if (
@@ -163,6 +171,12 @@ const OnboardingPage = (props: Props): ReactElement => {
       let localUpdateQueue = updateQueue;
 
       let currentUserData = updateQueue?.current();
+
+      if (protectUpdateQueueAgainstRaceCondition(currentUserData)) {
+        router.push(ROUTES.dashboard);
+        return;
+      }
+
       if (currentUserData) {
         const queryAdditionalBusiness = router.query[QUERIES.additionalBusiness] as string;
         if (queryAdditionalBusiness === "true") {
