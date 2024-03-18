@@ -5,8 +5,10 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateUserData } from "@businessnjgovnavigator/shared/test";
-import { StylesProvider, jssPreset } from "@mui/styles";
-import { InsertionPoint, create } from "jss";
+// import { StylesProvider, jssPreset } from "@mui/styles";
+// import { InsertionPoint, create } from "jss";
+import createCache from "@emotion/cache";
+import { CacheProvider } from "@emotion/react";
 import { ReactElement, useState } from "react";
 
 const NavBarPreview = (props: PreviewProps): ReactElement => {
@@ -26,19 +28,26 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
     return <></>;
   }
 
-  const jss = create({
-    plugins: [...jssPreset().plugins],
-    insertionPoint: iframeHeadElem.firstChild as InsertionPoint, // a bit sketchy
+  // const jss = create({
+  //   plugins: [...jssPreset().plugins],
+  //   insertionPoint: iframeHeadElem.firstChild as InsertionPoint, // a bit sketchy
+  // });
+
+  const cache = createCache({
+    key: "css",
+    container: iframeHeadElem,
+    prepend: true,
   });
 
   return (
     <>
-      <StylesProvider jss={jss}>
+      <CacheProvider value={cache}>
+        {/* <StylesProvider jss={jss}> */}
         <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
           <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
             <hr className="padding-y-10" />
 
-            <div>Landing</div>
+            <div>Landing - V</div>
             <NavBarDesktop
               isLanding={true}
               currentlyOnboarding={undefined}
@@ -113,7 +122,8 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
             <div className="padding-y-15" />
           </div>
         </ConfigContext.Provider>
-      </StylesProvider>
+        {/* </StylesProvider> */}
+      </CacheProvider>
     </>
   );
 };
