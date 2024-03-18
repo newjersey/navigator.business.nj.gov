@@ -53,7 +53,7 @@ const getAllCollections = async () => {
   });
 };
 
-const createItem = (item, collectionId, draft = true) => {
+const createItem = (item, collectionId, isDraft = true) => {
   console.log("Item in createItem func", item);
   return axios({
     method: "post",
@@ -61,13 +61,11 @@ const createItem = (item, collectionId, draft = true) => {
     headers: { ...headers, "content-type": "application/json" },
     data: {
       isArchived: false,
-      isDraft: draft,
-      value: {
-        fieldData: {
-          // ...item,
-          name: item.name,
-          // slug: item.slug,
-        },
+      isDraft: isDraft,
+      fieldData: {
+        // ...item,
+        name: item[1].name,
+        slug: item[1].slug,
       },
     },
     responseType: "json",
@@ -83,7 +81,6 @@ const modifyItem = (itemId, collectionId, body, method = "patch") => {
     headers,
     data: {
       fieldData: {
-        // ...body,
         name: body.name,
       },
     },

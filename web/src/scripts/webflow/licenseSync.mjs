@@ -124,11 +124,13 @@ const getWebflowLicensesAlreadyInWebflow = async () => {
   );
 };
 
+//CAN WE REMOVE THE COMMENT BELOW? IS THIS STILL TRUE?
 // returns a list of license MD objects that don't yet exist in webflow
 const getNewLicenses = async () => {
   const currentLicensesInNavigator = loadAllLicenses();
   const currentLicensesInWebflowIds = (await getAllLicensesFromWebflow()).map((it) => it.id);
 
+  //CAN WE REMOVE THE COMMENT BELOW? IS THIS STILL TRUE?
   // right now only syncs license-tasks, not yet webflow-licenses also
   return currentLicensesInNavigator.filter(
     (it) => it.webflowId === undefined || !currentLicensesInWebflowIds.includes(it.webflowId)
