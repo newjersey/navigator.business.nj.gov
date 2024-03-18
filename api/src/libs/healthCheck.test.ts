@@ -6,7 +6,7 @@ jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
 describe("healthCheck", () => {
-  const logger = LogWriter(`HealthCheckWebService`, "ApiLogs");
+  const logger = LogWriter(`HealthCheckService`, "ApiLogs");
 
   it("returns an object with pass statuses if success is true", async () => {
     mockAxios.get.mockResolvedValue({ data: { success: true } });

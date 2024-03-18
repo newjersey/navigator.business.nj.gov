@@ -14,16 +14,21 @@ const healthCheckEndPoints: Record<string, string> = {
   "webservice-formation": "webservice/formation",
 };
 
+let url = "https://dev.api.navigator.business.nj.gov";
+
+if (process.env.STAGE === "prod") {
+  url = "https://api.navigator.business.nj.gov";
+}
+
 const checkHealthCheck = async (type: string, logger: LogWriterType): Promise<Status> => {
   return axios
-    .get(`https://dev.api.navigator.business.nj.gov/health/${type}`)
+    .get(`${url}/health/${type}`)
     .then((response: AxiosResponse) => {
       if (response.data.success === true) {
         logger.LogInfo(`Health Check Status - Endpoint: ${type}: PASS`);
         return "PASS";
       } else {
         logger.LogError(`Health Check Status - Endpoint: ${type}: FAIL`, response.data);
-        logger.LogInfo(response.data);
         return "FAIL";
       }
     })
