@@ -2,6 +2,7 @@ import { LogWriterType } from "@libs/logWriter";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
 type Status = "PASS" | "FAIL" | "ERROR";
+type StatusResult = Record<string, Status>;
 
 const healthCheckEndPoints: Record<string, string> = {
   self: "self",
@@ -22,6 +23,7 @@ const checkHealthCheck = async (type: string, logger: LogWriterType): Promise<St
         return "PASS";
       } else {
         logger.LogError(`Health Check Status - Endpoint: ${type}: FAIL`, response.data);
+        logger.LogInfo(response.data);
         return "FAIL";
       }
     })
@@ -31,8 +33,10 @@ const checkHealthCheck = async (type: string, logger: LogWriterType): Promise<St
     });
 };
 
-export const runHealthChecks = async (logger: LogWriterType): Promise<void> => {
+export const runHealthChecks = async (logger: LogWriterType): Promise<StatusResult> => {
+  const results: Record<string, Status> = {};
   for (const type in healthCheckEndPoints) {
-    await checkHealthCheck(healthCheckEndPoints[type] ?? "", logger);
+    results[type] = await checkHealthCheck(healthCheckEndPoints[type] ?? "", logger);
   }
+  return results;
 };
