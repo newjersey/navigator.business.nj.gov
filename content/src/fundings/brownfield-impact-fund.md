@@ -4,11 +4,9 @@ name: Brownfield Impact Fund (USEPA RLF)
 displayName: brownfield-impact
 urlSlug: brownfield-impact-fund
 id: brownfield-impact-fund-usepa-rlf
-sidebarCardBodyText: This is a pilot program, funded by the federal
-  Environmental Protection Agency's Revolving Loan Fund (USEPA RLF) that
-  provides low-interest (1-2%) loans of up to $350,000 to for-profit and
-  non-profit developers, as well as public sector entities to carry out cleanups
-  at brownfield sites.
+sidebarCardBodyText: This is a pilot program by the federal Environmental
+  Protection Agency's Revolving Loan Fund to support cleanups at brownfield
+  sites.
 openDate: ""
 dueDate: ""
 summaryDescriptionMd: This is a pilot program funded by the federal
