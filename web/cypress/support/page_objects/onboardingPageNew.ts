@@ -1,10 +1,20 @@
-import { CarServiceType, LookupIndustryById } from "@businessnjgovnavigator/shared";
+import { CarServiceType, LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared";
 
-export class OnboardingPageStartingBusiness {
+class OnboardingSharedElements {
   getBusinessPersonaRadio(radio: string) {
     return cy.get(`input[name="business-persona"][value="${radio}"]`);
   }
 
+  selectBusinessPersonaRadio(radio: string) {
+    this.getBusinessPersonaRadio(radio).check();
+  }
+
+  clickShowMyGuide() {
+    cy.get('[data-testid="next"]').first().click({ force: true });
+  }
+}
+
+class OnboardingPageStartingBusiness extends OnboardingSharedElements {
   getCarServiceRadio(radio?: CarServiceType) {
     return cy.get(`input[name="car-service"]${`[value="${radio}"]`}`);
   }
@@ -23,10 +33,6 @@ export class OnboardingPageStartingBusiness {
 
   getWillSellPetcareItemsRadio(radio?: boolean) {
     return cy.get(`input[name="will-sell-pet-care-items"]${`[value="${radio}"]`}`);
-  }
-
-  selectBusinessPersonaRadio(radio: string) {
-    this.getBusinessPersonaRadio(radio).check();
   }
 
   selectCarServiceRadio(radio: CarServiceType) {
@@ -56,4 +62,17 @@ export class OnboardingPageStartingBusiness {
   }
 }
 
+class OnboardingPageExistingBusiness extends OnboardingSharedElements {
+  getIndustrySectorDropdown() {
+    return cy.get('[data-testid="sectorId"]');
+  }
+
+  selectIndustrySector(sectorId: string) {
+    const sectorValue = LookupSectorTypeById(sectorId).name;
+    this.getIndustrySectorDropdown().click();
+    cy.get('[role="listbox"]').contains(sectorValue).click();
+  }
+}
+
 export const onOnboardingPageStartingBusiness = new OnboardingPageStartingBusiness();
+export const onOnboardingPageExistingBusiness = new OnboardingPageExistingBusiness();
