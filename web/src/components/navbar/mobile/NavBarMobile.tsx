@@ -16,6 +16,7 @@ import {
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { Task } from "@/lib/types/types";
+import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/index";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useState } from "react";
@@ -135,7 +136,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
           closeSideBar={closeSideBar}
           openSideBar={openSidebar}
           isSideBarOpen={isSidebarOpen}
-          title={navBarBusinessTitle}
+          title={getUserNameOrEmail(props.userData)}
           CMS_PREVIEW_ONLY_SHOW_MENU={props.CMS_PREVIEW_ONLY_SHOW_MENU}
         />
         <NavBarMobileQuickLinksSlideOutMenu />
