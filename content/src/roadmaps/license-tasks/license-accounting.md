@@ -23,7 +23,7 @@ webflowId: 5f7729d28aa6e3de76f1e60c
 ## Eligibility Criteria
 
 - `Business Registration Certificate|business-reg-certificate` 
-- The firm has an office in this State
+- The firm has an office in New Jersey
 - One firm owner must be a Certified Public Accountant (CPA) in good standing and licensed to practice public accountancy in this State
 
 
