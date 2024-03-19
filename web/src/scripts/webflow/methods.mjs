@@ -1,7 +1,7 @@
 import axios from "axios";
 import adapter from "axios/lib/adapters/http.js";
 
-if (typeof process != "undefined") {
+if (typeof process !== "undefined") {
   axios.defaults.adapter = adapter;
 }
 
@@ -20,16 +20,14 @@ const getAllItems = async (collectionId) => {
   let totalToFetch = 1;
 
   while (responseItems.length < totalToFetch) {
-    const data = (
-      await axios({
-        method: "get",
-        url: `https://api.webflow.com/v2/collections/${collectionId}/items?offset=${responseItems.length}`,
-        headers,
-        responseType: "json",
-      })
-    ).data;
+    const { data } = await axios({
+      method: "get",
+      url: `https://api.webflow.com/v2/collections/${collectionId}/items?offset=${responseItems.length}`,
+      headers,
+      responseType: "json",
+    });
     responseItems = [...responseItems, ...data.items];
-    totalToFetch = data.total;
+    totalToFetch = data.pagination.total;
   }
 
   return responseItems;
@@ -54,7 +52,6 @@ const getAllCollections = async () => {
 };
 
 const createItem = (item, collectionId, isDraft = true) => {
-  console.log("Item in createItem func", item);
   return axios({
     method: "post",
     url: `https://api.webflow.com/v2/collections/${collectionId}/items`,
@@ -63,9 +60,7 @@ const createItem = (item, collectionId, isDraft = true) => {
       isArchived: false,
       isDraft: isDraft,
       fieldData: {
-        // ...item,
-        name: item[1].name,
-        slug: item[1].slug,
+        ...item,
       },
     },
     responseType: "json",
@@ -73,8 +68,6 @@ const createItem = (item, collectionId, isDraft = true) => {
 };
 
 const modifyItem = (itemId, collectionId, body, method = "patch") => {
-  console.log("Body", body);
-  console.log("Funding", body);
   return axios({
     method: method,
     url: `https://api.webflow.com/v2/collections/${collectionId}/items/${itemId}`,
