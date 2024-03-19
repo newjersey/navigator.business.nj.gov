@@ -1,3 +1,31 @@
+# [2024.10.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.9.0...v2024.10.0) (2024-03-19)
+
+
+### Bug Fixes
+
+* [[#187004657](https://github.com/newjersey/navigator.business.nj.gov/issues/187004657)] Employment Agency Tasks are not rendering correctly ([07e2446](https://github.com/newjersey/navigator.business.nj.gov/commit/07e2446640c38bf7f6da8207200394e6ed08d889))
+* **deps:** update dependency @smithy/node-http-handler to v2.4.1 ([f293d4d](https://github.com/newjersey/navigator.business.nj.gov/commit/f293d4d5f64af2d795e36135a922d97ae4305827))
+* **deps:** update dependency @smithy/node-http-handler to v2.4.2 ([be2a665](https://github.com/newjersey/navigator.business.nj.gov/commit/be2a6656e38cb8a785cab84223c32b0aa67e7c00))
+* **deps:** update dependency @smithy/node-http-handler to v2.4.3 ([f62153a](https://github.com/newjersey/navigator.business.nj.gov/commit/f62153a772390628000484c973e9ef5c05c3a541))
+* **deps:** update dependency express to v4.18.3 ([d840e80](https://github.com/newjersey/navigator.business.nj.gov/commit/d840e807a2b85d26de19099e369c2b2e3082fbee))
+* **deps:** update dependency next-seo to v6.5.0 ([5056cbd](https://github.com/newjersey/navigator.business.nj.gov/commit/5056cbd6bf3834fbdd4e70922fa2155437727a78))
+* **deps:** update dependency winston to v3.12.0 ([e4c8a5d](https://github.com/newjersey/navigator.business.nj.gov/commit/e4c8a5d6205418015db2abbedb150f89edb74bf2))
+* **deps:** update material-ui ([c82762a](https://github.com/newjersey/navigator.business.nj.gov/commit/c82762a849282be50f8ef8b00e5878f853fab6a9))
+* **deps:** update material-ui ([859e4e9](https://github.com/newjersey/navigator.business.nj.gov/commit/859e4e97ece44fd3798c58dd1d5e41959543c72e))
+* **deps:** update material-ui ([c54d621](https://github.com/newjersey/navigator.business.nj.gov/commit/c54d621366e403762b284bfc7660366363190c32))
+
+
+### Features
+
+* [[#185158954](https://github.com/newjersey/navigator.business.nj.gov/issues/185158954)] Navigation CMS content moved from general Config ([fe70f28](https://github.com/newjersey/navigator.business.nj.gov/commit/fe70f28d81ecf99aeef4f1fdde218a8fd3c13b1f))
+* [[#186811252](https://github.com/newjersey/navigator.business.nj.gov/issues/186811252)] consistent navigation ([7b9e27a](https://github.com/newjersey/navigator.business.nj.gov/commit/7b9e27aaa58d1d75781a4a952fed047aff50ab91))
+* [[#186811252](https://github.com/newjersey/navigator.business.nj.gov/issues/186811252)] mobile nav menu title fix and mobile title bar fix ([46d7331](https://github.com/newjersey/navigator.business.nj.gov/commit/46d7331da93a832fca9653130d61576f46b69cb6))
+* [[#186811252](https://github.com/newjersey/navigator.business.nj.gov/issues/186811252)] userName as drop down / mobile title ([636b570](https://github.com/newjersey/navigator.business.nj.gov/commit/636b570e928340f1182513dd9f750b58a1c38468))
+* [[#187202751](https://github.com/newjersey/navigator.business.nj.gov/issues/187202751)] Nav bar preview ([be83d02](https://github.com/newjersey/navigator.business.nj.gov/commit/be83d02545313d28180d91ebdde252ee58728932))
+* [[#187234200](https://github.com/newjersey/navigator.business.nj.gov/issues/187234200)] mobile aria labels for menus updated ([e2ba8fa](https://github.com/newjersey/navigator.business.nj.gov/commit/e2ba8fa17f751ed9a396b179be8b4b513eebc4f2))
+* [[#187234224](https://github.com/newjersey/navigator.business.nj.gov/issues/187234224)] navbar hamburger color updated ([143b105](https://github.com/newjersey/navigator.business.nj.gov/commit/143b105db84824824ef2ee3d756900e9687eff88))
+* [[#187239241](https://github.com/newjersey/navigator.business.nj.gov/issues/187239241)] set minimum viewport size to 360px ([5fbca42](https://github.com/newjersey/navigator.business.nj.gov/commit/5fbca42c321a64183a35f5a74d5e6e3dadb94e0b))
+
 # [2024.9.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.8.0...v2024.9.0) (2024-03-08)
 
 
