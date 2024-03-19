@@ -19,6 +19,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getBusinessIconColor } from "@/lib/domain-logic/getBusinessIconColor";
 import { getNavBarBusinessTitle } from "@/lib/domain-logic/getNavBarBusinessTitle";
 import { orderBusinessIdsByDateCreated } from "@/lib/domain-logic/orderBusinessIdsByDateCreated";
+import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import { UserData, getCurrentBusiness } from "@businessnjgovnavigator/shared/index";
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 
@@ -127,7 +128,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
             open={open}
             setOpen={setOpen}
             menuButtonTitle={navBarBusinessTitle}
-            dropDownTitle={navBarBusinessTitle}
+            dropDownTitle={getUserNameOrEmail(props.userData)}
             handleClose={handleClose}
             textColor={textColor}
             icon={
