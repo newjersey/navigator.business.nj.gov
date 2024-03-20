@@ -164,14 +164,10 @@ const getFilteredFundings = () => {
 const getFundingFromMd = (i, sectors) => {
   const industryReferenceArray = i.sector.map((i) => {
     return sectors.find((v) => {
-      return v.slug === i;
+      return v.fieldData.slug === i;
     })?.id;
   });
-  if (
-    industryReferenceArray.some((i) => {
-      return i === undefined;
-    })
-  ) {
+  if (industryReferenceArray.includes(undefined)) {
     throw new Error("Sectors must be synced first");
   }
   const fundingType = fundingTypeMap.find((v) => {
@@ -216,12 +212,9 @@ const getFundingFromMd = (i, sectors) => {
 };
 
 const getOverlappingFundingsFunc = (currentFundings) => {
+  const filteredFundings = new Set(getFilteredFundings().map((i) => i.id));
   return currentFundings.filter((item) => {
-    return new Set(
-      getFilteredFundings().map((i) => {
-        return i.id;
-      })
-    ).has(item.slug);
+    return filteredFundings.has(item.fieldData.slug);
   });
 };
 
@@ -234,7 +227,7 @@ const getNewFundings = async () => {
   const sectors = await getCurrentSectors();
   const currentIdArray = new Set(
     current.map((sec) => {
-      return sec.slug;
+      return sec.fieldData.slug;
     })
   );
   return getFilteredFundings()
@@ -280,7 +273,7 @@ const updateFundings = async () => {
   const modify = async (item) => {
     const funding = getFundingFromMd(
       fundings.find((i) => {
-        return i.id === item.slug;
+        return i.id === item.fieldData.slug;
       }),
       sectors
     );

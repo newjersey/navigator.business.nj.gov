@@ -58,7 +58,7 @@ const createItem = (item, collectionId, isDraft = true) => {
     headers: { ...headers, "content-type": "application/json" },
     data: {
       isArchived: false,
-      isDraft: isDraft,
+      isDraft,
       fieldData: {
         ...item,
       },
@@ -74,7 +74,7 @@ const modifyItem = (itemId, collectionId, body, method = "patch") => {
     headers,
     data: {
       fieldData: {
-        name: body.name,
+        ...body,
       },
     },
     responseType: "json",
