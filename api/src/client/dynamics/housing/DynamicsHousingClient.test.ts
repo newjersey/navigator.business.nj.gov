@@ -20,7 +20,7 @@ describe("DynamicsHousingClient", () => {
     };
 
     stubHousingPropertyInterestClient = {
-      getPropertyInterests: jest.fn(),
+      getPropertyInterest: jest.fn(),
     };
 
     client = DynamicsHousingClient(logger, {
@@ -30,49 +30,31 @@ describe("DynamicsHousingClient", () => {
   });
 
   it("returns property interest data from subclient", async () => {
-    stubHousingPropertyInterestClient.getPropertyInterests.mockResolvedValue([
-      {
-        createdOn: "2024-05-31T10:31:51Z",
-        isFireSafety: true,
-        isBHIRegistered: true,
-        address: "address-1",
-        BHINextInspectionDueDate: "01-01-2028",
-        stateCode: 0,
-      },
-      {
-        createdOn: "2023-06-01T10:31:51Z",
-        isFireSafety: true,
-        isBHIRegistered: false,
-        address: "address-1",
-        BHINextInspectionDueDate: "01-01-2028",
-        stateCode: 1,
-      },
-    ]);
+    stubHousingPropertyInterestClient.getPropertyInterest.mockResolvedValue({
+      createdOn: "2024-05-31T10:31:51Z",
+      isFireSafety: true,
+      isBHIRegistered: true,
+      address: "address-1",
+      BHINextInspectionDueDate: "01-01-2028",
+      stateCode: 0,
+      id: "12345",
+    });
 
     const result = await client("address-1");
 
-    expect(result).toEqual([
-      {
-        createdOn: "2024-05-31T10:31:51Z",
-        isFireSafety: true,
-        isBHIRegistered: true,
-        address: "address-1",
-        BHINextInspectionDueDate: "01-01-2028",
-        stateCode: 0,
-      },
-      {
-        createdOn: "2023-06-01T10:31:51Z",
-        isFireSafety: true,
-        isBHIRegistered: false,
-        address: "address-1",
-        BHINextInspectionDueDate: "01-01-2028",
-        stateCode: 1,
-      },
-    ]);
+    expect(result).toEqual({
+      createdOn: "2024-05-31T10:31:51Z",
+      isFireSafety: true,
+      isBHIRegistered: true,
+      address: "address-1",
+      BHINextInspectionDueDate: "01-01-2028",
+      stateCode: 0,
+      id: "12345",
+    });
   });
 
   it("throws a 400 error when a sub client client throws a 400", async () => {
-    stubHousingPropertyInterestClient.getPropertyInterests.mockRejectedValue(new Error("400"));
+    stubHousingPropertyInterestClient.getPropertyInterest.mockRejectedValue(new Error("400"));
     await expect(client("address-2")).rejects.toThrow("400");
   });
 });

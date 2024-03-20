@@ -1,4 +1,8 @@
-import { HousingPropertyInterest, HousingPropertyInterestClient } from "@client/dynamics/housing/types";
+import {
+  HousingPropertyInterest,
+  HousingPropertyInterestClient,
+  HousingPropertyInterestResponse,
+} from "@client/dynamics/housing/types";
 import { LogWriterType } from "@libs/logWriter";
 import axios, { AxiosError } from "axios";
 
@@ -6,16 +10,21 @@ export const DynamicsHousingPropertyInterestClient = (
   logWriter: LogWriterType,
   orgUrl: string
 ): HousingPropertyInterestClient => {
-  const getPropertyInterests = async (
+  const getPropertyInterest = async (
     accessToken: string,
-    address: string
-  ): Promise<HousingPropertyInterest[]> => {
+    address: string,
+    zipCode?: string
+  ): Promise<HousingPropertyInterestResponse> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Dynamics Housing Property Interest Client - Id:${logId}`);
 
+    const filters = zipCode
+      ? `$filter=(ultra_streetaddress eq '${address}' and ultra_zipcode eq '${zipCode}')`
+      : `$filter=(ultra_streetaddress eq '${address}')`;
+
     return axios
       .get(
-        `${orgUrl}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode&$filter=(ultra_streetaddress eq '${address}')&$top=10`,
+        `${orgUrl}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode&${filters}&$top=1`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -28,9 +37,11 @@ export const DynamicsHousingPropertyInterestClient = (
             response.data
           )}`
         );
-        return response.data.value.map((element: DynamicsHousingPropertyInterestResponse) =>
-          processDynamicsPropertyInterestResponse(element)
-        );
+        const value = response.data.value as Array<DynamicsHousingPropertyInterestResponse>;
+        if (value.length === 0) {
+          return;
+        }
+        return processDynamicsPropertyInterestResponse(value[0]);
       })
       .catch((error: AxiosError) => {
         logWriter.LogError(`Dynamics Housing Property Interest - Id:${logId} - Error:`, error);
@@ -39,7 +50,7 @@ export const DynamicsHousingPropertyInterestClient = (
   };
 
   return {
-    getPropertyInterests,
+    getPropertyInterest: getPropertyInterest,
   };
 };
 
@@ -53,6 +64,7 @@ function processDynamicsPropertyInterestResponse(
     address: response.ultra_streetaddress,
     BHINextInspectionDueDate: response.ultra_bhinextinspectiondue_date,
     stateCode: response.statecode,
+    id: response.ultra_propertyinterestid,
   };
 }
 
@@ -64,4 +76,5 @@ type DynamicsHousingPropertyInterestResponse = {
   ultra_zipcode: string;
   ultra_bhinextinspectiondue_date: string;
   statecode: number;
+  ultra_propertyinterestid: string;
 };

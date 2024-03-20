@@ -11,7 +11,7 @@ type Config = {
   elevatorSafetyInspectionClient: ElevatorSafetyInspectionClient;
 };
 
-export const DynamicsElevatorSafetyClient = (
+export const DynamicsElevatorSafetyInspectionStatusClient = (
   logWriter: LogWriterType,
   config: Config
 ): ElevatorSafetyInspectionInfo => {

@@ -1,7 +1,7 @@
 import {
-  HousingPropertyInterest,
   HousingPropertyInterestClient,
   HousingPropertyInterestInfo,
+  HousingPropertyInterestResponse,
 } from "@client/dynamics/housing/types";
 import { AccessTokenClient } from "@client/dynamics/types";
 import { LogWriterType } from "@libs/logWriter";
@@ -15,9 +15,9 @@ export const DynamicsHousingClient = (
   logWriter: LogWriterType,
   config: Config
 ): HousingPropertyInterestInfo => {
-  return async (address: string): Promise<HousingPropertyInterest[]> => {
+  return async (address: string): Promise<HousingPropertyInterestResponse> => {
     const accessToken = await config.accessTokenClient.getAccessToken();
 
-    return await config.housingPropertyInterestClient.getPropertyInterests(accessToken, address);
+    return await config.housingPropertyInterestClient.getPropertyInterest(accessToken, address);
   };
 };

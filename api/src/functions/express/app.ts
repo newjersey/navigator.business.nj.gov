@@ -13,9 +13,11 @@ import { AirtableUserTestingClient } from "@client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "@client/ApiBusinessNameClient";
 import { ApiFormationClient } from "@client/ApiFormationClient";
 import { DynamicsAccessTokenClient } from "@client/dynamics/DynamicsAccessTokenClient";
-import { DynamicsElevatorSafetyClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyClient";
 import { DynamicsElevatorSafetyHealthCheckClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyHealthCheckClient";
 import { DynamicsElevatorSafetyInspectionClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyInspectionClient";
+import { DynamicsElevatorSafetyInspectionStatusClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyInspectionStatusClient";
+import { DynamicsElevatorSafetyRegistrationClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyRegistrationClient";
+import { DynamicsElevatorSafetyRegistrationStatusClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyRegistrationStatusClient";
 import { DynamicsFireSafetyClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyClient";
 import { DynamicsFireSafetyHealthCheckClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyHealthCheckClient";
 import { DynamicsFireSafetyInspectionClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyInspectionClient";
@@ -168,11 +170,24 @@ const dynamicsElevatorSafetyInspectionClient = DynamicsElevatorSafetyInspectionC
   logger,
   DYNAMICS_ELEVATOR_SAFETY_URL
 );
+const dynamicsElevatorSafetyRegistrationClient = DynamicsElevatorSafetyRegistrationClient(
+  logger,
+  DYNAMICS_ELEVATOR_SAFETY_URL
+);
 
-const dynamicsElevatorSafetyClient = DynamicsElevatorSafetyClient(logger, {
+const dynamicsElevatorSafetyInspectionStatusClient = DynamicsElevatorSafetyInspectionStatusClient(logger, {
   accessTokenClient: dynamicsElevatorSafetyAccessTokenClient,
   elevatorSafetyInspectionClient: dynamicsElevatorSafetyInspectionClient,
 });
+const dynamicsElevatorSafetyRegistrationStatusClient = DynamicsElevatorSafetyRegistrationStatusClient(
+  logger,
+  {
+    accessTokenClient: dynamicsElevatorSafetyAccessTokenClient,
+    elevatorRegistrationClient: dynamicsElevatorSafetyRegistrationClient,
+    housingAccessTokenClient: dynamicsHousingAccessTokenClient,
+    housingPropertyInterestClient: dynamicsHousingPropertyInterestClient,
+  }
+);
 const dynamicsElevatorSafetyHealthCheckClient = DynamicsElevatorSafetyHealthCheckClient(logger, {
   accessTokenClient: dynamicsElevatorSafetyAccessTokenClient,
   orgUrl: DYNAMICS_ELEVATOR_SAFETY_URL,
@@ -306,7 +321,13 @@ app.use(
 );
 app.use("/api/guest", guestRouterFactory(timeStampToBusinessSearch));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus, userDataClient));
-app.use("/api", elevatorSafetyRouterFactory(dynamicsElevatorSafetyClient));
+app.use(
+  "/api",
+  elevatorSafetyRouterFactory(
+    dynamicsElevatorSafetyInspectionStatusClient,
+    dynamicsElevatorSafetyRegistrationStatusClient
+  )
+);
 app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient));
 app.use("/api", housingRouterFactory(dynamicsHousingClient));
 app.use("/api", selfRegRouterFactory(userDataClient, selfRegClient));

@@ -8,7 +8,7 @@ export const housingRouterFactory = (housingPropertyInterest: HousingPropertyInt
   router.get("/housing/:address", async (req, res) => {
     const address = req.params.address;
     housingPropertyInterest(address)
-      .then(async (propertyInterestDetails: HousingPropertyInterestDetails[]) => {
+      .then(async (propertyInterestDetails?: HousingPropertyInterestDetails) => {
         return res.json(propertyInterestDetails);
       })
       .catch((error) => {
