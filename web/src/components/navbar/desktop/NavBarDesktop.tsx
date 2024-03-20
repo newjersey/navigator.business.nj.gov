@@ -43,6 +43,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
   const handleClose = (
     event?: MouseEvent | TouchEvent | React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>
   ): void => {
+    if (props.CMS_PREVIEW_ONLY_SHOW_MENU) return;
     if (event && anchorRef.current && anchorRef.current.contains(event.target as Node)) {
       return;
     }
@@ -69,7 +70,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
   } else if (props.isLanding) {
     // landing
     return (
-      <NavBarDesktopWrapper>
+      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
         <NavBarDesktopHomeLogo previousBusinessId={undefined} />
         <div className={"display-flex flex-row flex-align-center"}>
           <NavBarDesktopQuickLinks />
@@ -92,7 +93,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
   } else if (props.currentlyOnboarding) {
     // onboarding
     return (
-      <NavBarDesktopWrapper>
+      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
         <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} />
         <div className={"display-flex flex-row flex-align-center"}>
           <DesktopLoginButton />
@@ -118,7 +119,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
   } else if (props.isAuthenticated) {
     // authed
     return (
-      <NavBarDesktopWrapper>
+      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
         <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} />
         <div className={"display-flex flex-row flex-align-center"}>
           <NavBarDesktopQuickLinks />
@@ -154,7 +155,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
   } else {
     // guest
     return (
-      <NavBarDesktopWrapper>
+      <NavBarDesktopWrapper CMS_ONLY_disableSticky={props.CMS_PREVIEW_ONLY_SHOW_MENU}>
         <NavBarDesktopHomeLogo previousBusinessId={props.previousBusinessId} />
         <div className={"display-flex flex-row flex-align-center"}>
           <NavBarDesktopQuickLinks />
