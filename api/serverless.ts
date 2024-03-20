@@ -5,6 +5,7 @@ import dynamoDbSchema from "./dynamodb-schema.json";
 import encryptTaxId from "./src/functions/encryptTaxId";
 import express from "./src/functions/express";
 import githubOauth2 from "./src/functions/githubOauth2";
+import healthCheck from "./src/functions/healthCheck";
 import updateExternalStatus from "./src/functions/updateExternalStatus";
 
 const isDocker = process.env.IS_DOCKER === "true" || false; // set in docker-compose
@@ -256,6 +257,17 @@ serverlessConfiguration.functions = {
   ),
 
   encryptTaxId: encryptTaxId(
+    env.CI
+      ? {
+          securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
+          subnetIds: [
+            "${self:custom.config.infrastructure.SUBNET_01}",
+            "${self:custom.config.infrastructure.SUBNET_02}",
+          ],
+        }
+      : undefined
+  ),
+  healthCheck: healthCheck(
     env.CI
       ? {
           securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
