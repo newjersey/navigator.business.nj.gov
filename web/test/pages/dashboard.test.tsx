@@ -46,7 +46,7 @@ import { OperatingPhase } from "@businessnjgovnavigator/shared/src/operatingPhas
 import { generatePreferences } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { ThemeProvider, createTheme, useMediaQuery } from "@mui/material";
-import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -149,13 +149,6 @@ describe("dashboard page", () => {
     useMockBusiness({ onboardingFormProgress: "UNSTARTED" });
     renderDashboardPage({});
     expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
-  });
-
-  it("shows snackbar alert when success query is true", () => {
-    useMockProfileData({});
-    useMockRouter({ isReady: true, query: { success: "true" } });
-    renderDashboardPage({});
-    expect(screen.getByText(Config.profileDefaults.default.successTextHeader)).toBeInTheDocument();
   });
 
   it("shows steps and tasks from roadmap", () => {
@@ -263,44 +256,10 @@ describe("dashboard page", () => {
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
   });
 
-  it("renders calendar snackbar when fromFormBusinessEntity query parameter is provided", () => {
+  it("renders the DashboardAlert element", () => {
     useMockRouter({ isReady: true, query: { [QUERIES.fromFormBusinessEntity]: "true" } });
     renderDashboardPage({});
-    expect(screen.getByTestId("snackbar-alert-calendar")).toBeInTheDocument();
-  });
-
-  it("renders certifications snackbar when fromForming query parameter is provided", () => {
-    useMockRouter({ isReady: true, query: { [QUERIES.fromForming]: "true" } });
-    renderDashboardPage({});
-    expect(screen.getByTestId("certification-alert")).toBeInTheDocument();
-  });
-
-  it("renders deadlines and opportunities snackbar when fromForming query parameter is provided", () => {
-    useMockRouter({ isReady: true, query: { [QUERIES.fromForming]: "true" } });
-    renderDashboardPage({});
-    act(() => jest.runAllTimers());
-    expect(screen.getByTestId("deadlines-opportunities-alert")).toBeInTheDocument();
-  });
-
-  it("renders funding snackbar when fromFunding query parameter is provided", async () => {
-    useMockRouter({ isReady: true, query: { [QUERIES.fromFunding]: "true" } });
-
-    renderDashboardPage({});
-    expect(screen.getByTestId("funding-alert")).toBeInTheDocument();
-  });
-
-  it("renders deferred question snackbar when deferredQuestionAnswered query parameter is provided", async () => {
-    useMockRouter({ isReady: true, query: { [QUERIES.deferredQuestionAnswered]: "true" } });
-
-    renderDashboardPage({});
-    expect(screen.getByTestId("deferredQuestionAnswered-alert")).toBeInTheDocument();
-  });
-
-  it("renders additional business snackbar when from query parameter is provided", async () => {
-    useMockRouter({ isReady: true, query: { [QUERIES.fromAdditionalBusiness]: "true" } });
-
-    renderDashboardPage({});
-    expect(screen.getByTestId("fromAdditionalBusiness-alert")).toBeInTheDocument();
+    expect(screen.getByTestId("dashboard-alerts")).toBeInTheDocument();
   });
 
   it("displays filings calendar as list when taxfiling is populated and operatingPhase has ListCalendar", () => {
