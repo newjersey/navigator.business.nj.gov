@@ -4,8 +4,8 @@ notesMd: "ADO ticket:
   88"
 summaryDescriptionMd: >
   You need to register as a ticket broker if you resell admission tickets to
-  places of entertainment and charge a premium in addition to the price plus the
-  taxes printed on the tickets.
+  places of entertainment and charge a premium, in addition to the price plus
+  the taxes printed on the tickets.
 urlSlug: ticket-broker-reseller-registration
 filename: ticket-broker-reseller-registration
 displayname: ticket-broker-reseller-registration
