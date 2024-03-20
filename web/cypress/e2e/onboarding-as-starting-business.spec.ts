@@ -1,5 +1,5 @@
 import { randomElementFromArray } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
-import { onOnboardingPageStartingBusiness } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageWhenStarting";
+import { onOnboardingPageStartingBusiness } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
 import { carServiceOptions, Industries, Industry, randomInt } from "@businessnjgovnavigator/shared/";
 
 const enabledIndustries = Industries.filter((element: Industry) => {
@@ -79,7 +79,7 @@ describe("Onboarding for all industries when starting a business [feature] [all]
             .should("not.be.checked");
         }
 
-        onOnboardingPageStartingBusiness.clickNext();
+        onOnboardingPageStartingBusiness.clickShowMyGuide();
         cy.url().should("include", "dashboard?fromOnboarding=true");
         cy.get('[data-testid="header-link-to-profile"]');
       });
