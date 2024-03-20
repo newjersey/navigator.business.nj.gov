@@ -3,6 +3,7 @@ import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuest
 import { Header } from "@/components/Header";
 import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import { DashboardAlerts } from "@/components/dashboard/DashboardAlerts";
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { QuickActionsContainer } from "@/components/dashboard/QuickActionContainer";
 import { Roadmap } from "@/components/dashboard/Roadmap";
@@ -17,7 +18,6 @@ import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { MediaQueries } from "@/lib/PageSizes";
 import { usePageWithNeedsAccountSnackbar } from "@/lib/auth/usePageWithNeedsAccountSnackbar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useQueryControlledAlert } from "@/lib/data-hooks/useQueryControlledAlert";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
@@ -62,69 +62,6 @@ const DashboardPage = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
-
-  const ProfileUpdatedAlert = useQueryControlledAlert({
-    queryKey: QUERIES.success,
-    pagePath: ROUTES.dashboard,
-    headerText: Config.profileDefaults.default.successTextHeader,
-    bodyText: Config.profileDefaults.default.successTextBody,
-    variant: "success",
-  });
-
-  const CalendarAlert = useQueryControlledAlert({
-    queryKey: QUERIES.fromFormBusinessEntity,
-    pagePath: ROUTES.dashboard,
-    headerText: Config.dashboardDefaults.calendarSnackbarHeading,
-    bodyText: Config.dashboardDefaults.calendarSnackbarBody,
-    variant: "success",
-    dataTestId: "snackbar-alert-calendar",
-  });
-
-  const CertificationsAlert = useQueryControlledAlert({
-    queryKey: QUERIES.fromForming,
-    pagePath: ROUTES.dashboard,
-    headerText: Config.dashboardDefaults.certificationsSnackbarHeading,
-    bodyText: Config.dashboardDefaults.certificationsSnackbarBody,
-    variant: "success",
-    dataTestId: "certification-alert",
-  });
-
-  const DeadlinesAndOpportunitiesAlert = useQueryControlledAlert({
-    queryKey: QUERIES.fromForming,
-    pagePath: ROUTES.dashboard,
-    headerText: Config.dashboardDefaults.opportunitiesAndDeadlinesHeading,
-    bodyText: Config.dashboardDefaults.opportunitiesAndDeadlinesBody,
-    variant: "success",
-    dataTestId: "deadlines-opportunities-alert",
-    delayInMilliseconds: Config.dashboardDefaults.opportunitiesAndDeadlinesTimeDelay,
-  });
-
-  const FundingAlert = useQueryControlledAlert({
-    queryKey: QUERIES.fromFunding,
-    pagePath: ROUTES.dashboard,
-    headerText: Config.dashboardDefaults.fundingSnackbarHeading,
-    bodyText: Config.dashboardDefaults.fundingSnackbarBody,
-    variant: "success",
-    dataTestId: "funding-alert",
-  });
-
-  const DeferredQuestionAnsweredAlert = useQueryControlledAlert({
-    queryKey: QUERIES.deferredQuestionAnswered,
-    pagePath: ROUTES.dashboard,
-    headerText: Config.dashboardDefaults.deferredOnboardingSnackbarHeader,
-    bodyText: Config.dashboardDefaults.deferredOnboardingSnackbarBody,
-    variant: "success",
-    dataTestId: "deferredQuestionAnswered-alert",
-  });
-
-  const AdditionalBusinessAlert = useQueryControlledAlert({
-    queryKey: QUERIES.fromAdditionalBusiness,
-    pagePath: ROUTES.dashboard,
-    headerText: Config.dashboardDefaults.additionalBusinessSnackbarHeader,
-    bodyText: Config.dashboardDefaults.additionalBusinessSnackbarBody,
-    variant: "success",
-    dataTestId: "fromAdditionalBusiness-alert",
-  });
 
   const operatingPhase = LookupOperatingPhaseById(business?.profileData.operatingPhase);
 
@@ -210,6 +147,7 @@ const DashboardPage = (props: Props): ReactElement => {
       <PageSkeleton>
         <NavBar />
         <main id="main">
+          <DashboardAlerts />
           {!business || business?.onboardingFormProgress !== "COMPLETED" ? (
             <div className="margin-top-3 desktop:margin-top-0 padding-top-0 desktop:padding-top-6 padding-bottom-15">
               <CircularIndicator />
@@ -239,13 +177,6 @@ const DashboardPage = (props: Props): ReactElement => {
               fundings={props.fundings}
             />
           )}
-          <>{ProfileUpdatedAlert}</>
-          <>{DeadlinesAndOpportunitiesAlert}</>
-          <>{CalendarAlert}</>
-          <>{CertificationsAlert}</>
-          <>{FundingAlert}</>
-          <>{DeferredQuestionAnsweredAlert}</>
-          <>{AdditionalBusinessAlert}</>
         </main>
       </PageSkeleton>
     </MunicipalitiesContext.Provider>
