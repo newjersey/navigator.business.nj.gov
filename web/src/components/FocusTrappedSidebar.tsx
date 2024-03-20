@@ -7,9 +7,16 @@ interface Props {
   close: () => void;
   isOpen: boolean;
   delayTime?: number;
+  CMS_ONLY_disable_focus_trap?: boolean;
 }
 
-export const FocusTrappedSidebar = ({ children, close, isOpen, delayTime = 300 }: Props): ReactElement => {
+export const FocusTrappedSidebar = ({
+  children,
+  close,
+  isOpen,
+  delayTime = 300,
+  CMS_ONLY_disable_focus_trap,
+}: Props): ReactElement => {
   const [showDiv, setShowDiv] = useState(false);
 
   useEffect(() => {
@@ -36,6 +43,8 @@ export const FocusTrappedSidebar = ({ children, close, isOpen, delayTime = 300 }
       window.removeEventListener("keydown", handleKeydown);
     };
   });
+
+  if (CMS_ONLY_disable_focus_trap) return <>{children}</>;
 
   return showDiv ? (
     <FocusTrap focusTrapOptions={{ allowOutsideClick: true, tabbableOptions: { displayCheck: "none" } }}>
