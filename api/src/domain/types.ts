@@ -1,6 +1,9 @@
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
-import { ElevatorSafetyDeviceInspectionDetails } from "@shared/elevatorSafety";
+import {
+  ElevatorSafetyDeviceInspectionDetails,
+  ElevatorSafetyRegistrationSummary,
+} from "@shared/elevatorSafety";
 import { FireSafetyInspectionResult } from "@shared/fireSafety";
 import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
 import { HousingPropertyInterestDetails } from "@shared/housing";
@@ -115,11 +118,18 @@ export type UpdateLicenseStatus = (
 
 export type FireSafetyInspectionStatus = (address: string) => Promise<FireSafetyInspectionResult[]>;
 
-export type HousingPropertyInterestStatus = (address: string) => Promise<HousingPropertyInterestDetails[]>;
+export type HousingPropertyInterestStatus = (
+  address: string
+) => Promise<HousingPropertyInterestDetails | undefined>;
 
 export type ElevatorSafetyInspectionStatus = (
   address: string
 ) => Promise<ElevatorSafetyDeviceInspectionDetails[]>;
+
+export type ElevatorSafetyRegistrationStatus = (
+  address: string,
+  zipCode: string
+) => Promise<ElevatorSafetyRegistrationSummary>;
 
 export interface SuccessfulHealthCheckMetadata {
   success: true;

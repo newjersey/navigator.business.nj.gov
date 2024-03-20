@@ -1,5 +1,9 @@
 export interface HousingPropertyInterestClient {
-  getPropertyInterests: (accessToken: string, address: string) => Promise<HousingPropertyInterest[]>;
+  getPropertyInterest: (
+    accessToken: string,
+    address: string,
+    zipCode?: string
+  ) => Promise<HousingPropertyInterestResponse>;
 }
 
 export type HousingPropertyInterest = {
@@ -9,6 +13,9 @@ export type HousingPropertyInterest = {
   address: string;
   BHINextInspectionDueDate: string;
   stateCode: number;
+  id: string;
 };
 
-export type HousingPropertyInterestInfo = (address: string) => Promise<HousingPropertyInterest[]>;
+export type HousingPropertyInterestResponse = HousingPropertyInterest | undefined;
+
+export type HousingPropertyInterestInfo = (address: string) => Promise<HousingPropertyInterestResponse>;
