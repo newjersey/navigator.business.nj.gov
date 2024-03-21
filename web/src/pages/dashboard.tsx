@@ -14,12 +14,13 @@ import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelD
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
+import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { MediaQueries } from "@/lib/PageSizes";
 import { usePageWithNeedsAccountSnackbar } from "@/lib/auth/usePageWithNeedsAccountSnackbar";
-import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { QUERIES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
@@ -63,8 +64,8 @@ const DashboardPage = (props: Props): ReactElement => {
   const { business, updateQueue } = useUserData();
   const router = useRouter();
   const { roadmap } = useRoadmap();
-  const { Config } = useConfig();
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
+  const config = getMergedConfig();
 
   const operatingPhase = LookupOperatingPhaseById(business?.profileData.operatingPhase);
 
@@ -147,7 +148,7 @@ const DashboardPage = (props: Props): ReactElement => {
 
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
-      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${Config.pagesMetadata.dashboard.title}`} />
+      <NextSeo title={getNextSeoTitle(config.pagesMetadata.dashboardTitle)} />
       <PageSkeleton>
         <NavBar />
         <main id="main">

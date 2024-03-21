@@ -5,6 +5,7 @@ import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { MatchCollection } from "@/components/search/MatchCollection";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { searchCertifications } from "@/lib/search/searchCertifications";
 import { searchConfig } from "@/lib/search/searchConfig";
 import { searchContextualInfo } from "@/lib/search/searchContextualInfo";
@@ -30,6 +31,7 @@ import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayConten
 import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllLicenses } from "@/lib/static/loadLicenses";
+import { loadAllPageMetadata } from "@/lib/static/loadPageMetadata";
 import { loadAllPostOnboarding } from "@/lib/static/loadPostOnboarding";
 import { loadAllQuickActionLicenseReinstatements } from "@/lib/static/loadQuickActionLicenseReinstatements";
 import { loadAllQuickActionLinks } from "@/lib/static/loadQuickActionLinks";
@@ -43,6 +45,7 @@ import {
   Funding,
   LicenseEvent,
   NonEssentialQuestion,
+  PageMetadata,
   PostOnboardingFile,
   QuickActionLicenseReinstatement,
   QuickActionLink,
@@ -80,6 +83,7 @@ interface Props {
   quickActionTasks: QuickActionTask[];
   quickActionLinks: QuickActionLink[];
   quickActionLicenseReinstatements: QuickActionLicenseReinstatement[];
+  pageMetaData: PageMetadata[];
   cmsConfig: any;
 }
 
@@ -262,12 +266,16 @@ const SearchContentPage = (props: Props): ReactElement => {
         matchedCollections={quickActionCollection}
         groupedConfigMatches={groupedConfigMatches}
       />
+      <MatchCollection
+        matchedCollections={{ "Page Metadata": [] }}
+        groupedConfigMatches={groupedConfigMatches}
+      />
     </div>
   );
 
   return (
     <PageSkeleton>
-      <NextSeo noindex={true} />
+      <NextSeo title={getNextSeoTitle("Search")} noindex={true} />
       <main>
         <SingleColumnContainer>
           <div className="margin-y-3">
@@ -303,6 +311,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       quickActionTasks: loadAllQuickActionTasks(),
       quickActionLinks: loadAllQuickActionLinks(),
       quickActionLicenseReinstatements: loadAllQuickActionLicenseReinstatements(),
+      pageMetaData: loadAllPageMetadata(),
       cmsConfig: loadCmsConfig(),
     },
   };
