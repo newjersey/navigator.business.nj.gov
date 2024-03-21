@@ -26,6 +26,7 @@ import * as PageNotFoundError from "@businessnjgovnavigator/content/fieldConfig/
 import * as Profile from "@businessnjgovnavigator/content/fieldConfig/profile.json";
 import * as TaxAccess from "@businessnjgovnavigator/content/fieldConfig/tax-access-modal.json";
 import * as Tax from "@businessnjgovnavigator/content/fieldConfig/tax.json";
+import * as PageMetadata from "@businessnjgovnavigator/content/page-metadata/page-metadata.json";
 
 import { merge } from "lodash";
 import { createContext } from "react";
@@ -60,7 +61,8 @@ const merged = JSON.parse(
       BusinessStructurePrompt,
       AccountSetup,
       ExportPdf,
-      NavigationDefaults
+      NavigationDefaults,
+      PageMetadata
     )
   )
 );
@@ -92,7 +94,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof BusinessStructurePrompt &
   typeof AccountSetup &
   typeof ExportPdf &
-  typeof NavigationDefaults;
+  typeof NavigationDefaults &
+  typeof PageMetadata;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -122,7 +125,8 @@ export const getMergedConfig = (): ConfigType => {
     AccountSetup,
     BusinessStructureTask,
     ExportPdf,
-    NavigationDefaults
+    NavigationDefaults,
+    PageMetadata
   );
 };
 
