@@ -44,7 +44,7 @@ export const cmsCollections = [
     children: ["Dashboard - Config", "Sidebar Cards Content"],
   },
   {
-    label: "🟧 QUICK ACTIONS",
+    label: "🟨 QUICK ACTIONS",
     children: [
       "Quick Actions",
       "Quick Action Tasks",
@@ -53,7 +53,11 @@ export const cmsCollections = [
     ],
   },
   {
-    label: "🟨 MISC",
+    label: "🟩 PAGE METADATA",
+    children: ["Page Metadata"],
+  },
+  {
+    label: "🟦 MISC",
     children: [
       "Export Pdf Config",
       "Dropdown Mappings",
