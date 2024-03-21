@@ -123,14 +123,14 @@ export const BusinessFormation = (props: Props): ReactElement => {
   }, userData);
 
   useEffect(() => {
-    if (!router.isReady) {
+    if (!router?.isReady) {
       return;
     }
     if (checkQueryValue(router, QUERIES.completeFiling, "false")) {
       setStepIndex(LookupStepIndexByName("Review"));
       router.replace({ pathname: `/tasks/${props.task?.urlSlug}` }, undefined, { shallow: true });
     }
-  }, [router, router.isReady, props.task?.urlSlug]);
+  }, [router, router?.isReady, props.task?.urlSlug]);
 
   useEffect(() => {
     const shouldFetchCompletedFiling = (): boolean => {
@@ -144,7 +144,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     };
 
     (async function fetchCompletedFiling(): Promise<void> {
-      if (!router.isReady || !business || !updateQueue) {
+      if (!router?.isReady || !business || !updateQueue) {
         return;
       }
       if (shouldFetchCompletedFiling()) {
@@ -168,7 +168,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
           });
       }
     })();
-  }, [router.isReady, updateQueue, router, props.task?.urlSlug, business]);
+  }, [router?.isReady, updateQueue, router, props.task?.urlSlug, business]);
 
   if (!props.task) return <></>;
 

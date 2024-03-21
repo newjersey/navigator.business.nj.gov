@@ -58,6 +58,7 @@ const dynamicsLicenseStatusURL = process.env.DYNAMICS_LICENSE_STATUS_URL || "";
 const dynamicsLicenseStatusClientId = process.env.DYNAMICS_LICENSE_STATUS_CLIENT_ID || "";
 const dynamicsLicenseStatusSecret = process.env.DYNAMICS_LICENSE_STATUS_SECRET || "";
 const featureDynamicsPublicMovers = process.env.FEATURE_DYNAMICS_PUBLIC_MOVERS || "";
+const featureDynamicsHealthCareServices = process.env.FEATURE_DYNAMICS_HEALTH_CARE_SERVICES || "";
 
 const dynamicsFireSafetyURL = process.env.DYNAMICS_FIRE_SAFETY_URL || "";
 const dynamicsFireSafetyClientId = process.env.DYNAMICS_FIRE_SAFETY_CLIENT_ID || "";
@@ -203,6 +204,7 @@ const serverlessConfiguration: AWS = {
       DYNAMICS_LICENSE_STATUS_CLIENT_ID: dynamicsLicenseStatusClientId,
       DYNAMICS_LICENSE_STATUS_SECRET: dynamicsLicenseStatusSecret,
       FEATURE_DYNAMICS_PUBLIC_MOVERS: featureDynamicsPublicMovers,
+      FEATURE_DYNAMICS_HEALTH_CARE_SERVICES: featureDynamicsHealthCareServices,
       DYNAMICS_FIRE_SAFETY_URL: dynamicsFireSafetyURL,
       DYNAMICS_FIRE_SAFETY_CLIENT_ID: dynamicsFireSafetyClientId,
       DYNAMICS_FIRE_SAFETY_SECRET: dynamicsFireSafetySecret,
