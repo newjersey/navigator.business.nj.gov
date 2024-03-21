@@ -29,69 +29,81 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
         <hr className="padding-y-10" />
 
         <div>Onboarding</div>
-        <NavBarDesktop isLanding={undefined} currentlyOnboarding={true} isAuthenticated={false} />
-        <hr className="padding-y-10" />
-
-        <div>Guest</div>
         <NavBarDesktop
           isLanding={undefined}
-          currentlyOnboarding={undefined}
-          isAuthenticated={false}
-          CMS_PREVIEW_ONLY_SHOW_MENU={true}
-          userData={userData}
-        />
-        <hr className="padding-y-10" />
-
-        <div>Authed</div>
-        <NavBarDesktop
-          isLanding={undefined}
-          currentlyOnboarding={undefined}
-          isAuthenticated={true}
-          CMS_PREVIEW_ONLY_SHOW_MENU={true}
-          userData={userData}
-        />
-        <div className="padding-y-10" />
-
-        <div className="padding-y-10">Break</div>
-
-        <div>Landing</div>
-        <NavBarMobile
-          scrolled={false}
-          currentlyOnboarding={false}
-          isAuthenticated={false}
-          isLanding={true}
-          CMS_PREVIEW_ONLY_SHOW_MENU={true}
-        />
-        <div className="padding-y-15" />
-
-        <div>Onboarding</div>
-        <NavBarMobile
-          scrolled={false}
           currentlyOnboarding={true}
           isAuthenticated={false}
           CMS_PREVIEW_ONLY_SHOW_MENU={true}
         />
-        <div className="padding-y-15" />
+        <hr className="padding-y-10" />
 
         <div>Guest</div>
-        <NavBarMobile
-          scrolled={false}
-          currentlyOnboarding={false}
+        <NavBarDesktop
+          isLanding={undefined}
+          currentlyOnboarding={undefined}
           isAuthenticated={false}
-          userData={userData}
           CMS_PREVIEW_ONLY_SHOW_MENU={true}
+          userData={userData}
         />
-        <div className="padding-y-10" />
+        <hr className="padding-y-10" />
 
         <div>Authed</div>
-        <NavBarMobile
-          scrolled={false}
-          currentlyOnboarding={false}
+        <NavBarDesktop
+          isLanding={undefined}
+          currentlyOnboarding={undefined}
           isAuthenticated={true}
-          userData={userData}
           CMS_PREVIEW_ONLY_SHOW_MENU={true}
+          userData={userData}
         />
-        <div className="padding-y-15" />
+        <div className="padding-y-10" />
+        <div className="padding-y-10" />
+
+        <div className="width-mobile-lg">
+          <div>Landing</div>
+          <NavBarMobile
+            scrolled={false}
+            currentlyOnboarding={false}
+            isAuthenticated={false}
+            isLanding={true}
+            CMS_PREVIEW_ONLY_SHOW_MENU={true}
+          />
+          <div className="padding-y-10" />
+        </div>
+
+        <div className="width-mobile-lg">
+          <div>Onboarding</div>
+          <NavBarMobile
+            scrolled={false}
+            currentlyOnboarding={true}
+            isAuthenticated={false}
+            CMS_PREVIEW_ONLY_SHOW_MENU={true}
+          />
+          <div className="padding-y-10" />
+        </div>
+
+        <div className="width-mobile-lg">
+          <div>Guest</div>
+          <NavBarMobile
+            scrolled={false}
+            currentlyOnboarding={false}
+            isAuthenticated={false}
+            userData={userData}
+            CMS_PREVIEW_ONLY_SHOW_MENU={true}
+          />
+          <div className="padding-y-10" />
+        </div>
+
+        <div className="width-mobile-lg">
+          <div>Authed</div>
+          <NavBarMobile
+            scrolled={false}
+            currentlyOnboarding={false}
+            isAuthenticated={true}
+            userData={userData}
+            CMS_PREVIEW_ONLY_SHOW_MENU={true}
+          />
+          <div className="padding-y-10" />
+        </div>
       </div>
     </ConfigContext.Provider>
   );
