@@ -2,7 +2,7 @@
 notesMd: "[Muni planning
   doc](https://docs.google.com/document/d/1m7-VF_dH-0HwPEETY8JumOOcfuP2LrHJXT8I\
   7RGaOSo/edit?usp=sharing)"
-header: Multiple dwelling
+header: Multiple Dwelling
 slug: multiple-dwelling
 displayname: multiple-dwelling
 ---
