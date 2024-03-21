@@ -48,7 +48,6 @@ export const NavBarMobile = (props: Props): ReactElement => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(props.CMS_PREVIEW_ONLY_SHOW_MENU ? true : false);
 
   const openSidebar = (): void => {
-    if (props.CMS_PREVIEW_ONLY_SHOW_MENU) return;
     setIsSidebarOpen(true);
   };
 
@@ -62,7 +61,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
   } else if (props.isLanding) {
     // landing
     return (
-      <NavBarMobileWrapper scrolled={!props.CMS_PREVIEW_ONLY_SHOW_MENU || props.scrolled}>
+      <NavBarMobileWrapper scrolled={props.scrolled}>
         <NavBarMobileHomeLogo
           scrolled={props.scrolled}
           showSidebar={props.showSidebar}
@@ -87,7 +86,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
   } else if (props.currentlyOnboarding) {
     // onboarding
     return (
-      <NavBarMobileWrapper scrolled={!props.CMS_PREVIEW_ONLY_SHOW_MENU || props.scrolled}>
+      <NavBarMobileWrapper scrolled={props.scrolled}>
         <NavBarMobileHomeLogo
           scrolled={props.scrolled}
           showSidebar={props.showSidebar}
@@ -111,7 +110,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
   } else if (props.isAuthenticated) {
     // authed
     return (
-      <NavBarMobileWrapper scrolled={!props.CMS_PREVIEW_ONLY_SHOW_MENU || props.scrolled}>
+      <NavBarMobileWrapper scrolled={props.scrolled}>
         <NavBarMobileHomeLogo
           scrolled={props.scrolled}
           showSidebar={props.showSidebar}
@@ -146,7 +145,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
   } else {
     // guest
     return (
-      <NavBarMobileWrapper scrolled={!props.CMS_PREVIEW_ONLY_SHOW_MENU || props.scrolled}>
+      <NavBarMobileWrapper scrolled={props.scrolled}>
         <NavBarMobileHomeLogo
           scrolled={props.scrolled}
           showSidebar={props.showSidebar}

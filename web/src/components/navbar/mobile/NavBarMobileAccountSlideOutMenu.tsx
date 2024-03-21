@@ -34,11 +34,7 @@ export const NavBarMobileAccountSlideOutMenu = (props: Props): ReactElement => {
         <Icon className="text-accent-cool-darker font-sans-lg">account_circle</Icon>
       </button>
 
-      <FocusTrappedSidebar
-        close={props.closeSideBar}
-        isOpen={props.isSideBarOpen}
-        CMS_ONLY_disable_focus_trap={props.CMS_PREVIEW_ONLY_SHOW_MENU}
-      >
+      <FocusTrappedSidebar close={props.closeSideBar} isOpen={props.isSideBarOpen}>
         <nav
           aria-label="Secondary"
           className={`right-nav ${props.isSideBarOpen ? "is-visible" : "is-hidden"} ${
