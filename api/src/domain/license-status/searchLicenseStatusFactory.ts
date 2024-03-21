@@ -1,18 +1,22 @@
 import { SearchLicenseStatus } from "@domain/types";
 
 export const searchLicenseStatusFactory = (
-  legacySearchLicenseStatus: SearchLicenseStatus,
-  newSearchLicenseStatus: SearchLicenseStatus
+  webservice: SearchLicenseStatus,
+  dynamics: SearchLicenseStatus
 ) => {
   return (licenseType: string): SearchLicenseStatus => {
-    const useNewSearchLicenseStatus = (): boolean =>
-      licenseType === "Public Movers and Warehousemen" &&
-      process.env.FEATURE_DYNAMICS_PUBLIC_MOVERS === "true";
+    const featureFlags: Record<string, boolean> = {
+      publicMovers: process.env.FEATURE_DYNAMICS_PUBLIC_MOVERS === "true",
+      healthCareServices: process.env.FEATURE_DYNAMICS_HEALTH_CARE_SERVICES === "true",
+    };
 
-    if (useNewSearchLicenseStatus()) {
-      return newSearchLicenseStatus;
-    }
+    const licenseTypesUsingDynamicsSearch: Record<string, boolean> = {
+      "Public Movers and Warehousemen": featureFlags.publicMovers,
+      "Health Care Services": featureFlags.healthCareServices,
+    };
 
-    return legacySearchLicenseStatus;
+    const shouldUseDynamicsSearch = licenseTypesUsingDynamicsSearch[licenseType] || false;
+
+    return shouldUseDynamicsSearch ? dynamics : webservice;
   };
 };

@@ -1,8 +1,9 @@
-import { TaskElement } from "@/components/TaskElement";
+import { TaskPageSwitchComponent } from "@/components/TaskPageSwitchComponent";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { Task } from "@/lib/types/types";
+import { createEmptyTaskDisplayContent, Task } from "@/lib/types/types";
+import { generateRoadmap } from "@/test/factories";
 import {
   generateBusiness,
   generateMunicipality,
@@ -21,9 +22,18 @@ const TaskPreview = (props: PreviewProps): ReactElement => {
     }),
   });
 
+  const displayContent = createEmptyTaskDisplayContent();
+  const roadmap = generateRoadmap({});
+
   return (
     <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-      <TaskElement task={task} CMS_ONLY_fakeBusiness={fakeBusinessWithMunicipality} />
+      <TaskPageSwitchComponent
+        task={task}
+        business={fakeBusinessWithMunicipality}
+        displayContent={displayContent}
+        roadmap={roadmap}
+        CMS_ONLY_disable_overlay
+      />
     </div>
   );
 };

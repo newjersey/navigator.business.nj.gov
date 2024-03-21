@@ -12,7 +12,7 @@ import {
   randomPublicFilingLegalType,
 } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
+import { setMockRoadmapResponse, useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
   currentBusiness,
   setupStatefulUserDataContext,
@@ -120,6 +120,33 @@ describe("task page", () => {
     expect(screen.getByText("Start Application")).toBeInTheDocument();
   });
 
+  it("shows loading state when business is undefined", () => {
+    render(
+      <WithStatefulUserData initialUserData={undefined}>
+        <TaskPage
+          task={generateTask({})}
+          displayContent={createEmptyTaskDisplayContent()}
+          municipalities={[]}
+        />
+      </WithStatefulUserData>
+    );
+    expect(screen.getByTestId("loading")).toBeInTheDocument();
+  });
+
+  it("shows loading state when roadmap is undefined", () => {
+    setMockRoadmapResponse({ roadmap: undefined });
+    render(
+      <WithStatefulUserData initialUserData={generateUserDataForBusiness(generateBusiness({}))}>
+        <TaskPage
+          task={generateTask({})}
+          displayContent={createEmptyTaskDisplayContent()}
+          municipalities={[]}
+        />
+      </WithStatefulUserData>
+    );
+    expect(screen.getByTestId("loading")).toBeInTheDocument();
+  });
+
   it("shows updated content if different from static content", () => {
     const task = generateTask({
       id: "123",
@@ -191,6 +218,14 @@ describe("task page", () => {
 
   it("loads License task screen for apply-for-shop-license", () => {
     renderPage(generateTask({ id: "apply-for-shop-license" }), generateBusiness({ licenseData: undefined }));
+    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
+  });
+
+  it("loads License task screen for home-health-aide-license", () => {
+    renderPage(
+      generateTask({ id: "home-health-aide-license" }),
+      generateBusiness({ licenseData: undefined })
+    );
     expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
