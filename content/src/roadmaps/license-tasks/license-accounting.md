@@ -6,7 +6,7 @@ urlSlug: register-accounting-firm
 name: Register Your Accounting Firm
 webflowName: "Accountant: Public Accounting Firm"
 summaryDescriptionMd: >
-  New accounting firms must register with the New Jersey State Board of
+  You need to register your accounting firm with the New Jersey State Board of
   Accountancy Law and obtain certification.
 industryId:
   - certified-public-accountant
@@ -40,4 +40,4 @@ webflowId: 5f7729d28aa6e3de76f1e60c
 
 > **Once completed, you will have:**
 >
-> - A certificate with a license number indicating your firm has been successfully registered
+> - A certificate indicating your firm has been successfully registered
