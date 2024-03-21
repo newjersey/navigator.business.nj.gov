@@ -5,9 +5,9 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import {
   CertificationUrlSlugParam,
   loadAllCertificationUrlSlugs,
@@ -57,12 +57,9 @@ export const CertificationElement = (props: { certification: Certification }): R
 };
 
 const CertificationPage = (props: Props): ReactElement => {
-  const { Config } = useConfig();
   return (
     <>
-      {props.certification.name && (
-        <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${props.certification.name}`} />
-      )}
+      {props.certification.name && <NextSeo title={getNextSeoTitle(props.certification.name)} />}
       <PageSkeleton>
         <NavBar showSidebar={true} hideMiniRoadmap={true} />
         <TaskSidebarPageLayout hideMiniRoadmap={true}>

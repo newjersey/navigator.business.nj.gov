@@ -53,7 +53,11 @@ export const cmsCollections = [
     ],
   },
   {
-    label: "🟨 MISC",
+    label: "🟨 PAGE METADATA",
+    children: ["Page Metadata"],
+  },
+  {
+    label: "🟩 MISC",
     children: [
       "Export Pdf Config",
       "Dropdown Mappings",

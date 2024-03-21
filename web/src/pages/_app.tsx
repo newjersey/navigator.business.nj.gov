@@ -15,7 +15,6 @@ import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { AuthReducer, authReducer } from "@/lib/auth/AuthContext";
 import { getActiveUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
-import { useConfig } from "@/lib/data-hooks/useConfig";
 import MuiTheme from "@/lib/muiTheme";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import { Roadmap, UpdateQueue, UserDataError } from "@/lib/types/types";
@@ -34,6 +33,7 @@ import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
 import "../styles/main.scss";
+import { getMergedConfig } from "@/contexts/configContext";
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
 NeedsAccountContext.displayName = "Needs Account";
@@ -47,8 +47,6 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [registrationStatus, setRegistrationStatus] = useState<RegistrationStatus | undefined>(
     UserDataStorageFactory().getRegistrationStatus()
   );
-
-  const { Config } = useConfig();
 
   const setRegistrationStatusInStateAndStorage = (value: RegistrationStatus | undefined): void => {
     setRegistrationStatus(value);
@@ -68,7 +66,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [legalStructureId, setLegalStructureId] = useState<string | undefined>(undefined);
   const [industryId, setIndustryId] = useState<string | undefined>(undefined);
   const [businessPersona, setBusinessPersona] = useState<BusinessPersona | undefined>(undefined);
-
+  const config = getMergedConfig();
   const showGtm = !(process.env.DISABLE_GTM === "true");
 
   useEffect(() => {
@@ -153,8 +151,8 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         businessPersona={businessPersona}
       />
       <DefaultSeo
-        title={Config.pagesMetadata.titlePrefix}
-        description={Config.pagesMetadata.siteDescription}
+        title={config.pagesMetadata.titlePostfix}
+        description={config.pagesMetadata.siteDescription}
       />
       <IntercomContext.Provider
         value={{ setOperatingPhaseId, setLegalStructureId, setIndustryId, setBusinessPersona }}

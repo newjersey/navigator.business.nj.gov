@@ -10,6 +10,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { allowFormation } from "@/lib/domain-logic/allowFormation";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
@@ -91,7 +92,7 @@ const TaskPage = (props: Props): ReactElement => {
 
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
-      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${props.task.name}`} />
+      <NextSeo title={getNextSeoTitle(props.task.name)} />
       <PageSkeleton>
         <NavBar task={props.task} showSidebar={true} />
         <TaskSidebarPageLayout task={props.task} belowBoxComponent={renderNextAndPreviousButtons()}>

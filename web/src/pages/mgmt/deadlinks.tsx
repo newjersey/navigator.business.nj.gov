@@ -4,6 +4,8 @@ import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { findDeadContextualInfo, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
 
+import { getMergedConfig } from "@/contexts/configContext";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { GetServerSidePropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { ReactElement, useState } from "react";
@@ -17,6 +19,7 @@ interface Props {
 const DeadLinksPage = (props: Props): ReactElement => {
   const [isAuthed, setIsAuthed] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
+  const config = getMergedConfig();
 
   const authedView = (
     <>
@@ -40,7 +43,7 @@ const DeadLinksPage = (props: Props): ReactElement => {
 
   return (
     <PageSkeleton>
-      <NextSeo noindex={true} />
+      <NextSeo title={getNextSeoTitle(config.pagesMetadata.deadLinksTitle)} noindex={true} />
       <main>
         <SingleColumnContainer>
           {isAuthed ? (

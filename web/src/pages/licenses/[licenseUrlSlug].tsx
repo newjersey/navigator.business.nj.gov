@@ -1,17 +1,18 @@
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
+import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { NavBar } from "@/components/navbar/NavBar";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { LicenseUrlSlugParam, loadAllLicenseUrlSlugs, loadLicenseByUrlSlug } from "@/lib/static/loadLicenses";
 import { LicenseEvent } from "@/lib/types/types";
 import {
-  defaultDateFormat,
   LicenseEventSubtype,
   LookupIndustryById,
+  defaultDateFormat,
   parseDate,
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared";
@@ -82,13 +83,11 @@ const LicensePage = (props: Props): ReactElement => {
     date = date.add(30, "days");
   }
 
-  const licenseName = LookupIndustryById(business?.profileData.industryId).licenseType;
-
-  const { Config } = useConfig();
+  const licenseName = LookupIndustryById(business?.profileData.industryId).licenseType!;
 
   return (
     <>
-      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${licenseName}`} />
+      <NextSeo title={getNextSeoTitle(licenseName)} />
       <PageSkeleton>
         <NavBar showSidebar={true} hideMiniRoadmap={true} />
         <TaskSidebarPageLayout>

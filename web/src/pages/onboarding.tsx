@@ -20,6 +20,7 @@ import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { addAdditionalBusiness } from "@/lib/domain-logic/addAdditionalBusiness";
 import { hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { modifyContent } from "@/lib/domain-logic/modifyContent";
 import { QUERIES, QUERY_PARAMS_VALUES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
@@ -438,9 +439,7 @@ const OnboardingPage = (props: Props): ReactElement => {
             onBack,
           }}
         >
-          <NextSeo
-            title={`${Config.pagesMetadata.titlePrefix} - ${pageTitle} ${evalHeaderStepsTemplate(page)}`}
-          />
+          <NextSeo title={getNextSeoTitle(`${pageTitle} ${evalHeaderStepsTemplate(page)}`)} />
           <PageSkeleton>
             <NavBar
               previousBusinessId={previousBusiness?.id}
