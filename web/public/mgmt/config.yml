@@ -3300,33 +3300,8 @@ collections:
         display_fields: ["arrayOfQuickActionIcons.*.name"]
       - { label: "External Link", name: "externalRoute", widget: "nospace", required: true }
 
-  - name: "page-metadata"
-    label: "🟨 PAGE METADATA"
-    folder: "content/src"
-    fields:
-      - { name: "" }
-
-  - name: "page-metadata-page"
-    label: "Page Metadata"
-    files:
-      - label: "Page Metadata"
-        name: "page-metadata"
-        file: "content/src/page-metadata/page-metadata.json"
-        editor:
-          preview: true
-          delete: false
-          create: false
-        fields:
-          - { label: "Filename", name: "filename", widget: "hidden" }
-          - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
-          - { label: "Title Prefix", name: "titlePrefix", widget: "string", required: true }
-          - { label: "Site Description", name: "siteDescription", widget: "string", required: true }
-          - { label: "Home Page Title", name: "homeTitle", widget: "string", required: true }
-          - { label: "Dashboard Page Title", name: "dashboardTitle", widget: "string", required: true }
-          - { label: "Account Page Title", name: "profileTitle", widget: "string", required: true }
-
   - name: "misc-label"
-    label: "🟦 MISC"
+    label: "🟨 MISC"
     folder: "content/src"
     fields:
       - { name: "" }
@@ -3456,6 +3431,35 @@ collections:
             fields:
               - { label: Beta Main Text, name: betaMainText, widget: string }
               - { label: Beta Modal Button Text, name: betaModalButtonText, widget: string }
+          - label: Pages Metadata
+            name: pagesMetadata
+            collapsed: true
+            widget: object
+            summary: "{{pagesMetadata}}"
+            fields:
+              - label: Home
+                name: home
+                collapsed: true
+                widget: object
+                summary: "{{home}}"
+                fields:
+                  - { label: Title, name: title, widget: string }
+              - label: Dashboard
+                name: dashboard
+                collapsed: true
+                widget: object
+                summary: "{{dashboard}}"
+                fields:
+                  - { label: Title, name: title, widget: string }
+              - label: Profile
+                name: profile
+                collapsed: true
+                widget: object
+                summary: "{{profile}}"
+                fields:
+                  - { label: Title, name: title, widget: string }
+              - { label: Title Prefix, name: titlePrefix, widget: string }
+              - { label: Site Description, name: siteDescription, widget: string }
           - label: Tax Calendar Defaults
             name: taxCalendar
             collapsed: true

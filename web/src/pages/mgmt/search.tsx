@@ -12,7 +12,6 @@ import { searchFundings } from "@/lib/search/searchFundings";
 import { searchIndustries } from "@/lib/search/searchIndustries";
 import { searchLicenseEvents } from "@/lib/search/searchLicenseEvents";
 import { searchNonEssentialQuestions } from "@/lib/search/searchNonEssentialQuestions";
-import { searchPageMetadata } from "@/lib/search/searchPageMetadata";
 import { searchPostOnboarding } from "@/lib/search/searchPostOnboarding";
 import { searchQuickActionLicenseReinstatements } from "@/lib/search/searchQuickActionLicenseReinstatement";
 import { searchQuickActionLinks } from "@/lib/search/searchQuickActionLinks";
@@ -31,7 +30,6 @@ import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayConten
 import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllLicenses } from "@/lib/static/loadLicenses";
-import { loadAllPageMetadata } from "@/lib/static/loadPageMetadata";
 import { loadAllPostOnboarding } from "@/lib/static/loadPostOnboarding";
 import { loadAllQuickActionLicenseReinstatements } from "@/lib/static/loadQuickActionLicenseReinstatements";
 import { loadAllQuickActionLinks } from "@/lib/static/loadQuickActionLinks";
@@ -45,7 +43,6 @@ import {
   Funding,
   LicenseEvent,
   NonEssentialQuestion,
-  PageMetadata,
   PostOnboardingFile,
   QuickActionLicenseReinstatement,
   QuickActionLink,
@@ -80,7 +77,6 @@ interface Props {
   archivedContextualInfo: ContextualInfoFile[];
   postOnboarding: PostOnboardingFile[];
   licenseEvents: LicenseEvent[];
-  pageMetaData: PageMetadata[];
   quickActionTasks: QuickActionTask[];
   quickActionLinks: QuickActionLink[];
   quickActionLicenseReinstatements: QuickActionLicenseReinstatement[];
@@ -103,7 +99,6 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [webflowLicenseMatches, setWebflowLicenseMatches] = useState<Match[]>([]);
   const [filingMatches, setFilingMatches] = useState<Match[]>([]);
   const [quickActionTaskMatches, setQuickActionTaskMatches] = useState<Match[]>([]);
-  const [pageMetadataMatches, setPageMetadataMatches] = useState<Match[]>([]);
   const [quickActionLicenseReinstatementMatches, setQuickActionLicenseReinstatementMatches] = useState<
     Match[]
   >([]);
@@ -140,7 +135,6 @@ const SearchContentPage = (props: Props): ReactElement => {
     setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
     setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
     setIndustryMatches(searchIndustries(Industries, lowercaseTerm));
-    setPageMetadataMatches(searchPageMetadata(props.pageMetaData, lowercaseTerm));
     setQuickActionLinkMatches(searchQuickActionLinks(props.quickActionLinks, lowercaseTerm));
     setQuickActionTaskMatches(searchQuickActionTasks(props.quickActionTasks, lowercaseTerm));
     setQuickActionLicenseReinstatementMatches(
@@ -189,7 +183,6 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...archivedContextualInfoMatches,
         ...contextualInfoMatches,
         ...groupedConfigMatches,
-        ...pageMetadataMatches,
         ...quickActionTaskMatches,
         ...quickActionLinkMatches,
         ...quickActionLicenseReinstatementMatches,
@@ -231,10 +224,6 @@ const SearchContentPage = (props: Props): ReactElement => {
     "Post Onboarding Content": postOnboardingMatches,
   };
 
-  const pageMetadataCollection = {
-    "Page Metadata": pageMetadataMatches,
-  };
-
   const quickActionCollection = {
     "Quick Action Tasks": quickActionTaskMatches,
     "Quick Action Links": quickActionLinkMatches,
@@ -271,10 +260,6 @@ const SearchContentPage = (props: Props): ReactElement => {
       <MatchCollection matchedCollections={miscCollection} groupedConfigMatches={groupedConfigMatches} />
       <MatchCollection
         matchedCollections={quickActionCollection}
-        groupedConfigMatches={groupedConfigMatches}
-      />
-      <MatchCollection
-        matchedCollections={pageMetadataCollection}
         groupedConfigMatches={groupedConfigMatches}
       />
     </div>
@@ -315,7 +300,6 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       archivedContextualInfo: loadAllArchivedContextualInfo(),
       postOnboarding: loadAllPostOnboarding(),
       licenseEvents: loadAllLicenses(),
-      pageMetaData: loadAllPageMetadata(),
       quickActionTasks: loadAllQuickActionTasks(),
       quickActionLinks: loadAllQuickActionLinks(),
       quickActionLicenseReinstatements: loadAllQuickActionLicenseReinstatements(),

@@ -14,7 +14,6 @@ import {
   FundingpreferenceForOpportunityZone,
   LicenseEvent,
   MarkdownResult,
-  PageMetadata,
   PostOnboardingFile,
   QuickActionLicenseReinstatement,
   QuickActionLink,
@@ -155,15 +154,6 @@ export const convertWebflowLicenseMd = (mdContents: string, filename: string): W
     contentMd: matterResult.content,
     filename: filename,
     ...grayMatter,
-  };
-};
-
-export const convertPageMetadataMd = (pageMetadataMdContents: string, filename: string): PageMetadata => {
-  const matterResult = matter(pageMetadataMdContents);
-  const pageMetadataGrayMatter = matterResult.data as PageMetadataGrayMatter;
-  return {
-    filename: filename,
-    ...pageMetadataGrayMatter,
   };
 };
 
@@ -309,8 +299,4 @@ type PostOnboardingGrayMatter = {
   callToActionYesText2: string;
   callToActionYesLink2: string;
   callToActionYesDropdownText: string;
-};
-
-type PageMetadataGrayMatter = {
-  title: string;
 };

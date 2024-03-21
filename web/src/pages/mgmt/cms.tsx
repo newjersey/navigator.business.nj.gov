@@ -20,7 +20,6 @@ import DeferredLocationPreview from "@/lib/cms/previews/DeferredLocationPreview"
 import EinInputPreview from "@/lib/cms/previews/EinInputPreview";
 import FilingsPreview from "@/lib/cms/previews/FilingsPreview";
 import LicensesPreview from "@/lib/cms/previews/LicenseEventPreview";
-import PageMetaDataPreview from "@/lib/cms/previews/PageMetadataPreview";
 import PostOnboardingPreview from "@/lib/cms/previews/PostOnboardingPreview";
 
 import FormationInterimSuccessPreview from "@/lib/cms/previews/FormationInterimSuccessPreview";
@@ -102,9 +101,6 @@ const CMS = dynamic(
 
       // ----- Roadmap Sidebar Card -----
       registerPreview(CMS, "roadmap-sidebar-card", RoadmapSidebarCardPreview);
-
-      // ----- Page Metadata -----
-      registerPreview(CMS, "page-metadata", PageMetaDataPreview);
 
       // ----- Profile -----
       registerPreview(CMS, "profile-fields", ProfileFieldsPreview);

@@ -574,17 +574,3 @@ export interface NonEssentialQuestion {
   questionText: string;
   addOn: string;
 }
-
-export interface PageDescription {
-  titlePrefix: string;
-  siteDescription: string;
-}
-
-export interface PageMetadata {
-  filename: string;
-  titlePrefix: string;
-  siteDescription: string;
-  homeTitle: string;
-  dashboardTitle: string;
-  profileTitle: string;
-}
