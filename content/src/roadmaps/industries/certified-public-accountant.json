@@ -24,7 +24,7 @@
       "step": 2,
       "weight": 30,
       "task": "register-for-ein",
-      "required": false,
+      "required": true,
       "licenseTask": "register-firm-accounting"
     },
     {
