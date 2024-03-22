@@ -115,7 +115,7 @@ export const GetStartedMenuItem = (): ReactElement => {
     },
     itemText: Config.navigationDefaults.getStartedText,
     key: "getStartedMenuItem",
-    icon: <ButtonIcon svgFilename={"play-with-circle"} sizePx="25px" />,
+    icon: <ButtonIcon svgFilename={"play-with-circle"} sizePx="22px" />,
   });
 };
 
