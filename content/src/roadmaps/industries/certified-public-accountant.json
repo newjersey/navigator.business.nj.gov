@@ -32,7 +32,7 @@
       "weight": 31,
       "task": "register-for-taxes",
       "required": false,
-      "licenseTask": "register-firm-accounting"
+      "licenseTask": ""
     },
     {
       "step": 3,
@@ -43,8 +43,19 @@
       "step": 3,
       "weight": 8,
       "task": "get-insurance",
-      "licenseTask": "license-accounting",
+      "licenseTask": "",
       "required": true
+    },
+    {
+      "step": 3,
+      "weight": 9,
+      "licenseTask": "register-firm-accounting"
+    },
+    {
+      "step": 4,
+      "licenseTask": "license-accounting",
+      "required": true,
+      "weight": 9
     }
   ],
   "name": "Accounting, Bookkeeping, and Tax Preparation",
