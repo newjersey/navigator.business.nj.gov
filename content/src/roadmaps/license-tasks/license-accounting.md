@@ -1,29 +1,43 @@
 ---
-displayname: accounting-license
+id: license-accounting
 filename: license-accounting
-urlSlug: accounting-license
+displayname: register-accounting-firm
+urlSlug: register-accounting-firm
 name: Register Your Accounting Firm
 webflowName: "Accountant: Public Accounting Firm"
-agencyId: nj-consumer-affairs
-agencyAdditionalContext: Board of Accountancy
+summaryDescriptionMd: >
+  You need to register your accounting firm with the New Jersey State Board of
+  Accountancy Law and obtain certification.
 industryId:
   - certified-public-accountant
 callToActionText: Register My Firm
 callToActionLink: https://www.njconsumeraffairs.gov/acc/Pages/applications.aspx
 webflowIndustry: ""
 licenseCertificationClassification: ""
+agencyId: nj-consumer-affairs
+agencyAdditionalContext: Board of Accountancy
 divisionPhone: (973) 504-6380
-id: license-accounting
 webflowId: 5f7729d28aa6e3de76f1e60c
-summaryDescriptionMd: >
-  New accounting firms must register and obtain certification.
 ---
 
-## Application Requirements
+## Eligibility Criteria
 
-- A designated Resident Manager-In-Charge. This must be a certified public accountant in the firm
+- `Business Registration Certificate|business-reg-certificate` 
+- The firm has an office in New Jersey
+- One firm owner must be a Certified Public Accountant (CPA) in good standing and licensed to practice public accountancy in this State
+
+
+## Application Requirements
+- A CPA in the firm has the ultimate responsibility for each attest engagement
+- A copy of the `Business Registration Certificate|business-reg-certificate`
+- CPA license number and information of the resident manager-in-charge
+- A copy of the firm’s letterhead 
 - Applicable fees paid
+
+> **You must:**
+>
+> - Sign and date the application in the presence of a notary
 
 > **Once completed, you will have:**
 >
-> - A certificate with a license number indicating your firm has been successfully registered
+> - A certificate indicating your firm has been successfully registered
