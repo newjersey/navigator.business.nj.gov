@@ -1,15 +1,17 @@
 import { CircularIndicator } from "@/components/CircularIndicator";
+import { TaskBody } from "@/components/TaskBody";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
-import { TaskBody } from "@/components/TaskBody";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { exportComponentsAsPDF } from "@/lib/roadmap/exportRoadmapAsPdf";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect, useState } from "react";
 
 const ExportPage = (): ReactElement => {
+  const { business } = useUserData();
   const { roadmap } = useRoadmap();
   const [downloadIndicator, setDownloadIndicator] = useState(false);
   const router = useRouter();
@@ -20,7 +22,7 @@ const ExportPage = (): ReactElement => {
     if (!FEATURE_EXPORT_PDF) router.push(ROUTES.dashboard);
   }, [router, FEATURE_EXPORT_PDF]);
 
-  if (!FEATURE_EXPORT_PDF || !roadmap) return <CircularIndicator />;
+  if (!FEATURE_EXPORT_PDF || !roadmap || !business) return <CircularIndicator />;
 
   return (
     <div className={downloadIndicator ? "" : ""}>
@@ -47,7 +49,7 @@ const ExportPage = (): ReactElement => {
         </div>
         {roadmap.tasks.map((task) => (
           <div id={task.id} key={task.id} data-testid={task.id} className={"padding-4"}>
-            <TaskBody task={task} />
+            <TaskBody task={task} roadmap={roadmap} business={business} />
           </div>
         ))}
       </div>

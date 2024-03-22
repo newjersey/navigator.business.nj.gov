@@ -4,11 +4,13 @@ import ExportPage from "@/pages/export";
 import { generateStep, generateTask } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/roadmap/exportRoadmapAsPdf", () => ({ exportComponentsAsPDF: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
 const mockExportComponentsAsPDF = exportComponentsAsPDF as jest.Mocked<typeof exportComponentsAsPDF>;
 
@@ -32,6 +34,7 @@ describe("Export page", () => {
         generateTask({ stepNumber: 2, id: "four" }),
       ],
     });
+    useMockUserData({});
   });
 
   it("renders download button", () => {

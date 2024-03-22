@@ -19,6 +19,7 @@ import React, { ReactElement, useState } from "react";
 
 interface Props {
   task: Task;
+  CMS_ONLY_disable_overlay?: boolean;
 }
 
 const APPLICATION_TAB_INDEX = 0;
@@ -111,7 +112,7 @@ export const LicenseTask = (props: Props): ReactElement => {
   };
 
   return (
-    <NeedsAccountModalWrapper>
+    <NeedsAccountModalWrapper CMS_ONLY_disable_overlay={props.CMS_ONLY_disable_overlay}>
       <div className="flex flex-column">
         <TaskHeader
           task={props.task}

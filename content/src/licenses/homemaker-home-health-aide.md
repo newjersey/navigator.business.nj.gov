@@ -3,8 +3,8 @@ notesMd: >-
   https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/4227
 
 
-  Renew My Health Care Services Firm Registration 
-urlSlug: healthcare
+  Renew My Health Care Services Firm Registration
+urlSlug: homemaker-home-health-aide
 previewType: renewal
 summaryDescriptionMd: If you are interested in continuing to employ individuals
   to provide health care, personal care, or companion services (either in-home
