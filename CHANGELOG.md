@@ -1,3 +1,20 @@
+# [2024.11.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.10.0...v2024.11.0) (2024-03-22)
+
+
+### Bug Fixes
+
+* [[#187133827](https://github.com/newjersey/navigator.business.nj.gov/issues/187133827)] add check to reroute user to the landing page if userData has not populated ([7f060b1](https://github.com/newjersey/navigator.business.nj.gov/commit/7f060b1d5fc2c0b87963a1db7ff5396d9880345a))
+
+
+### Features
+
+* [[#187166174](https://github.com/newjersey/navigator.business.nj.gov/issues/187166174)] Update Cypress Tests for Oscar Onboarding ([6c8892a](https://github.com/newjersey/navigator.business.nj.gov/commit/6c8892a112b1869125a21059c0a16d36620c7740))
+
+
+### Reverts
+
+* Revert "feat: [#187097677] Consistent title tags" ([4197c20](https://github.com/newjersey/navigator.business.nj.gov/commit/4197c2081d9ac424dbafd484d382813e78b37573)), closes [#187097677](https://github.com/newjersey/navigator.business.nj.gov/issues/187097677)
+
 # [2024.10.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.9.0...v2024.10.0) (2024-03-19)
 
 
