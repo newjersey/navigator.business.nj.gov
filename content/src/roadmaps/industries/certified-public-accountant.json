@@ -1,14 +1,7 @@
 {
-  "displayname": "certified-public-accountant",
   "naicsCodes": "541211",
-  "canHavePermanentLocation": true,
   "defaultSectorId": "finance-and-insurance",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "isCpaRequiredApplicable": true
-  },
-  "isEnabled": true,
-  "nonEssentialQuestionsIds": [],
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -31,13 +24,15 @@
       "step": 2,
       "weight": 30,
       "task": "register-for-ein",
-      "required": true
+      "required": false,
+      "licenseTask": ""
     },
     {
       "step": 2,
       "weight": 31,
       "task": "register-for-taxes",
-      "required": true
+      "required": false,
+      "licenseTask": "register-firm-accounting"
     },
     {
       "step": 3,
@@ -46,12 +41,21 @@
     },
     {
       "step": 3,
-      "weight": 40,
-      "task": "get-insurance"
+      "weight": 8,
+      "task": "get-insurance",
+      "licenseTask": "license-accounting",
+      "required": true
     }
   ],
   "name": "Accounting, Bookkeeping, and Tax Preparation",
+  "nonEssentialQuestionsIds": [],
+  "displayname": "certified-public-accountant",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "isCpaRequiredApplicable": true
+  },
   "modifications": [],
+  "isEnabled": true,
   "additionalSearchTerms": "CPA, accountant, accounting, bookkeeping, certified public accountant, tax preparation, accounting firm, wealth management, ",
   "id": "certified-public-accountant",
   "licenseType": "Accountancy",
