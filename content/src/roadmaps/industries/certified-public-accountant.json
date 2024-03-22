@@ -24,7 +24,7 @@
       "step": 2,
       "weight": 30,
       "task": "register-for-ein",
-      "required": true,
+      "required": false,
       "licenseTask": "register-firm-accounting"
     },
     {
@@ -40,9 +40,10 @@
     },
     {
       "step": 3,
-      "weight": 40,
+      "weight": 8,
       "task": "get-insurance",
-      "licenseTask": "license-accounting"
+      "licenseTask": "license-accounting",
+      "required": true
     }
   ],
   "name": "Accounting, Bookkeeping, and Tax Preparation",
