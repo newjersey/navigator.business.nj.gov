@@ -4,6 +4,7 @@ import fs from "fs";
 import orderBy from "lodash";
 import path from "path";
 import { fileURLToPath } from "url";
+import { wait } from "./helpers.mjs";
 import { createItem, deleteItem, getAllItems, modifyItem } from "./methods.mjs";
 
 const sectorDir = path.resolve(
@@ -27,7 +28,7 @@ const getOverlappingSectorsFunc = (currentSectors) => {
       getSectors().map((item) => {
         return item.id;
       })
-    ).has(item.slug);
+    ).has(item.fieldData.slug);
   });
 };
 
@@ -41,18 +42,16 @@ const getUpdatedSectors = async () => {
       return item.name;
     })
   );
-  return [...(await getOverlappingSectors())].filter((item) => {
-    return !sectorNames.has(item.name);
+  const overlappingSectors = await getOverlappingSectors();
+
+  return overlappingSectors.filter((item) => {
+    return !sectorNames.has(item.fieldData.name);
   });
 };
 
 const getNewSectors = async () => {
   const current = await getCurrentSectors();
-  const currentIdArray = new Set(
-    current.map((sec) => {
-      return sec.slug;
-    })
-  );
+  const currentIdArray = new Set(current.map((sec) => sec.fieldData.slug));
   return getSectors()
     .filter((i) => {
       return !currentIdArray.has(i.id);
@@ -66,27 +65,32 @@ const getUnUsedSectors = async () => {
   const current = await getCurrentSectors();
   const overLap = getOverlappingSectorsFunc(current);
   return current.filter((item) => {
-    return !(overLap.includes(item) || item.id == allIndustryId);
+    return !(overLap.includes(item) || item.id === allIndustryId);
   });
 };
+
 const getUpdatedSectorNames = async () => {
   const sectors = getSectors();
-  return [...(await getUpdatedSectors())].map((item) => {
+  const updatedSectors = await getUpdatedSectors();
+  return updatedSectors.map((item) => {
     return {
       ...item,
-      name: sectors.find((sector) => {
-        return sector.id == item.slug;
-      }).name,
+      fieldData: {
+        ...item.fieldData,
+        name: sectors.find((sector) => sector.id === item.fieldData.slug).name,
+      },
     };
   });
 };
 
 const getSortedSectors = async () => {
   const current = await getCurrentSectors();
-  const allIndustryItem = current.find((item) => {
-    return item.id == allIndustryId;
-  });
-  return [allIndustryItem, ...orderBy(getOverlappingSectorsFunc(current), ["name"], "asc")].map((e, i) => {
+  const allIndustryItem = current.find((item) => item.id === allIndustryId);
+  const overlappingSectorsOrdered = [
+    ...orderBy(getOverlappingSectorsFunc(current), ["fieldData.name"], "asc"),
+  ];
+
+  return [allIndustryItem, ...overlappingSectorsOrdered].map((e, i) => {
     return {
       ...e,
       rank: i + 1,
@@ -95,32 +99,34 @@ const getSortedSectors = async () => {
 };
 
 const deleteSectors = async () => {
-  return [...(await getUnUsedSectors())].map((item) => {
+  const unUsedSectors = await getUnUsedSectors();
+  return unUsedSectors.map((item) => {
+    console.info(`Attempting to delete ${item.fieldData.name}`);
     return deleteItem(item.id, sectorCollectionId);
   });
 };
 
 const updateSectorNames = async () => {
-  return [...(await getUpdatedSectorNames())].map((item) => {
+  const updatedSectorNames = await getUpdatedSectorNames();
+  return updatedSectorNames.map((item) => {
+    console.info(`Attempting to modify ${item.fieldData.name}`);
     return modifyItem(item.id, sectorCollectionId, { name: item.name });
   });
 };
 
 const createNewSectors = async () => {
-  return [...(await getNewSectors())].map((item) => {
+  const newSectors = await getNewSectors();
+  return newSectors.map((item) => {
+    console.info(`Attempting to create ${item.name}`);
     return createItem(item, sectorCollectionId, false);
   });
 };
 
 const reSortSectors = async () => {
-  return [...(await getSortedSectors())].map((item) => {
+  const sortedSectors = await getSortedSectors();
+  return sortedSectors.map((item) => {
+    console.info(`Attempting to sort ${item.fieldData.name}`);
     return modifyItem(item.id, sectorCollectionId, { rank: item.rank });
-  });
-};
-
-const wait = (milliseconds = 10000) => {
-  return new Promise((resolve) => {
-    return setTimeout(resolve, milliseconds);
   });
 };
 
@@ -157,8 +163,9 @@ if (
   !process.argv.some((i) => {
     return i.includes("sectorSync");
   }) ||
-  process.env.NODE_ENV == "test"
+  process.env.NODE_ENV === "test"
 ) {
+  // intentionally empty
 } else if (
   process.argv.some((i) => {
     return i.includes("--sync");
