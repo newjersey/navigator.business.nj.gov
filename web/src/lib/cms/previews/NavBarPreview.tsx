@@ -90,7 +90,7 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
             userData={userData}
             CMS_PREVIEW_ONLY_SHOW_MENU={true}
           />
-          <div className="padding-y-10" />
+          <div className="height-card" />
         </div>
 
         <div className="width-mobile-lg">
