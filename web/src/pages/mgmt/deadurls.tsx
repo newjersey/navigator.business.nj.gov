@@ -3,6 +3,8 @@ import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
+import { getMergedConfig } from "@/contexts/configContext";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { findDeadLinks } from "@/lib/static/admin/findDeadLinks";
 import { GetServerSidePropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -16,6 +18,7 @@ interface Props {
 const DeadUrlsPage = (props: Props): ReactElement => {
   const [isAuthed, setIsAuthed] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
+  const config = getMergedConfig();
 
   const generateContent = (): string => {
     let deadLinkFileOutput = "Possibly Blocked Or Deadlinks \n\n";
@@ -83,7 +86,7 @@ const DeadUrlsPage = (props: Props): ReactElement => {
 
   return (
     <PageSkeleton>
-      <NextSeo noindex={true} />
+      <NextSeo title={getNextSeoTitle(config.pagesMetadata.deadUrlsTitle)} noindex={true} />
       <main>
         <SingleColumnContainer>
           {isAuthed ? (

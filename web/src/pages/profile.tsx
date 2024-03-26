@@ -44,6 +44,7 @@ import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
 import { ProfileTabNav } from "@/components/profile/ProfileTabNav";
 import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -53,6 +54,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
@@ -98,7 +100,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [shouldLockFormationFields, setShouldLockFormationFields] = useState<boolean>(false);
   const [isFormationDateDeletionModalOpen, setFormationDateDeletionModalOpen] = useState<boolean>(false);
-
+  const config = getMergedConfig();
   const userDataFromHook = useUserData();
   const updateQueue = userDataFromHook.updateQueue;
   const business = props.CMS_ONLY_fakeBusiness ?? userDataFromHook.business;
@@ -757,7 +759,7 @@ const ProfilePage = (props: Props): ReactElement => {
             onBack,
           }}
         >
-          <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${Config.pagesMetadata.profile.title}`} />
+          <NextSeo title={getNextSeoTitle(config.pagesMetadata.profileTitle)} />
           <PageSkeleton>
             <NavBar showSidebar={true} hideMiniRoadmap={true} />
             <main id="main" data-testid={"main"}>

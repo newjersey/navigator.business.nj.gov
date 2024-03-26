@@ -7,6 +7,7 @@ import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { GovernmentContractorPaginator } from "@/components/tasks/government-contracting/GovernmentContractingPaginator";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { getMergedConfig } from "@/contexts/configContext";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import {
   loadAllQuickActionTaskUrlSlugs,
   loadQuickActionTaskByUrlSlug,
@@ -83,7 +84,7 @@ export const QuickActionGovernmentContractingElement = (props: Props): ReactElem
 const QuickActionPage = (props: Props): ReactElement => {
   return (
     <>
-      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${props.quickActionTask.name}`} />
+      <NextSeo title={getNextSeoTitle(props.quickActionTask.name)} />
       <PageSkeleton>
         <NavBar showSidebar={true} hideMiniRoadmap={true} />
         <TaskSidebarPageLayout hideMiniRoadmap={true}>
