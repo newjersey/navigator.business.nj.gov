@@ -10,6 +10,7 @@ import * as CannabisPriorityStatusTab1 from "@businessnjgovnavigator/content/fie
 import * as CannabisPriorityStatusTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab2.json";
 import * as ConfigOriginal from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import * as DashboardCalendar from "@businessnjgovnavigator/content/fieldConfig/dashboard-calendar.json";
+import * as DashboardDefaults from "@businessnjgovnavigator/content/fieldConfig/dashboard-defaults.json";
 import * as DashboardModals from "@businessnjgovnavigator/content/fieldConfig/dashboard-modals.json";
 import * as DashboardSnackbars from "@businessnjgovnavigator/content/fieldConfig/dashboard-snackbars.json";
 import * as DashboardTabs from "@businessnjgovnavigator/content/fieldConfig/dashboard-tabs.json";
@@ -60,7 +61,8 @@ const merged = JSON.parse(
       BusinessStructurePrompt,
       AccountSetup,
       ExportPdf,
-      NavigationDefaults
+      NavigationDefaults,
+      DashboardDefaults
     )
   )
 );
@@ -92,7 +94,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof BusinessStructurePrompt &
   typeof AccountSetup &
   typeof ExportPdf &
-  typeof NavigationDefaults;
+  typeof NavigationDefaults &
+  typeof DashboardDefaults;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -122,7 +125,8 @@ export const getMergedConfig = (): ConfigType => {
     AccountSetup,
     BusinessStructureTask,
     ExportPdf,
-    NavigationDefaults
+    NavigationDefaults,
+    DashboardDefaults
   );
 };
 

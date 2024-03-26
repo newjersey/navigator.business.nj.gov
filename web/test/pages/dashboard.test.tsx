@@ -173,13 +173,15 @@ describe("dashboard page", () => {
 
     renderDashboardPage({});
 
-    expect(screen.getByText("step1", { exact: false })).toBeInTheDocument();
-    expect(screen.getByText("(1-2 weeks)")).toBeInTheDocument();
-    expect(screen.getByText("task1")).toBeInTheDocument();
-    expect(screen.getByText("task2")).toBeInTheDocument();
+    const desktop = within(screen.getByTestId("desktop"));
 
-    expect(screen.getByText("step2", { exact: false })).toBeInTheDocument();
-    expect(screen.getByText("task3")).toBeInTheDocument();
+    expect(desktop.getByText("step1", { exact: false })).toBeInTheDocument();
+    expect(desktop.getByText("(1-2 weeks)")).toBeInTheDocument();
+    expect(desktop.getByText("task1")).toBeInTheDocument();
+    expect(desktop.getByText("task2")).toBeInTheDocument();
+
+    expect(desktop.getByText("step2", { exact: false })).toBeInTheDocument();
+    expect(desktop.getByText("task3")).toBeInTheDocument();
   });
 
   it("shows task progress tag", () => {

@@ -12,6 +12,7 @@ import { ReactElement, ReactNode, useEffect } from "react";
 interface Props {
   firstTab: ReactElement;
   secondTab: ReactElement;
+  aboveTab?: ReactElement;
   certifications: Certification[];
   fundings: Funding[];
 }
@@ -80,8 +81,9 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
   return (
     <div data-testid="two-tab-Layout" className={tabIndex === 1 ? "bg-cool-extra-light" : ""}>
       <SingleColumnContainer>
+        {!!props.aboveTab && props.aboveTab}
         <TabContext value={tabIndex.toString()}>
-          <div className="border radius-lg border-base-lighter bg-base-extra-light margin-y-4 padding-1">
+          <div className="border radius-lg border-base-lighter bg-base-extra-light margin-top-3 padding-1">
             <TabList onChange={handleChange} aria-label="Dashboard Tabs" variant="fullWidth" sx={tabStyling}>
               <Tab
                 label={Config.dashboardDefaults.mobileFirstTabText}

@@ -2917,6 +2917,34 @@ collections:
     delete: false
     create: false
     files:
+      - label: "Defaults"
+        name: dashboardDefaults
+        file: "content/src/fieldConfig/dashboard-defaults.json"
+        editor:
+          preview: true
+        fields:
+          - label: Dashboard Defaults
+            name: dashboardHeaderDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Header - No User Name, name: noUserNameHeaderText, widget: string }
+              - { label: Header - with User Name, name: defaultHeaderText, widget: string }
+              - { label: Starter Kit Header - Generic Industry, name: genericStarterKitText, widget: string }
+              - { label: Starter Kit Header - Other Industries, name: starterKitText, widget: string }
+              - { label: NJ Date Text, name: newJerseyDateBodyText, widget: string }
+              - {
+                  label: Guest Mode - To Profile Button Text,
+                  name: guestModeToProfileButtonText,
+                  widget: string,
+                }
+              - { label: Generic - To Profile Button Text, name: genericToProfileButtonText, widget: string }
+          - label: Dashboard Roadmap Defaults
+            name: dashboardRoadmapHeaderDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Roadmap Tasks Header Text, name: RoadmapTasksHeaderText, widget: string }
       - label: "Snackbars"
         name: "dashboard-config-snackbars"
         file: "content/src/fieldConfig/dashboard-snackbars.json"
@@ -3916,23 +3944,6 @@ collections:
               - { label: Error - Generic, name: errorTextGeneric, widget: string }
               - { label: Newsletter Label, name: newsletterCheckboxLabel, widget: string }
               - { label: User Testing Label, name: userTestingCheckboxLabel, widget: string }
-          - label: Shared Header Defaults
-            name: headerDefaults
-            collapsed: true
-            widget: object
-            summary: "{{headerDefaults}}"
-            fields:
-              - { label: Header - No User Name, name: noUserNameHeaderText, widget: string }
-              - { label: Header - with User Name, name: defaultHeaderText, widget: string }
-              - { label: Starter Kit Header - Generic Industry, name: genericStarterKitText, widget: string }
-              - { label: Starter Kit Header - Other Industries, name: starterKitText, widget: string }
-              - { label: NJ Date Text, name: newJerseyDateBodyText, widget: string }
-              - {
-                  label: Guest Mode - To Profile Button Text,
-                  name: guestModeToProfileButtonText,
-                  widget: string,
-                }
-              - { label: Generic - To Profile Button Text, name: genericToProfileButtonText, widget: string }
           - label: Site Wide Error Messages
             name: siteWideErrorMessages
             collapsed: true
