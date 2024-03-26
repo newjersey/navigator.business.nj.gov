@@ -2,6 +2,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import {
   OperateReference,
+  QuickActionLicenseReinstatement,
   QuickActionLink,
   QuickActionTask,
   RoadmapDisplayContent,
@@ -92,11 +93,13 @@ describe("dashboard page", () => {
     operateReferences,
     quickActionLinks,
     quickActionTask,
+    quickActionLicenseReinstatements,
   }: {
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     operateReferences?: Record<string, OperateReference>;
     quickActionLinks?: QuickActionLink[] | undefined;
     quickActionTask?: QuickActionTask[] | undefined;
+    quickActionLicenseReinstatements?: QuickActionLicenseReinstatement[] | undefined;
   }): void => {
     render(
       <ThemeProvider theme={createTheme()}>
@@ -108,6 +111,7 @@ describe("dashboard page", () => {
           municipalities={[]}
           quickActionLinks={quickActionLinks ?? []}
           quickActionTasks={quickActionTask ?? []}
+          quickActionLicenseReinstatements={quickActionLicenseReinstatements ?? []}
         />
       </ThemeProvider>
     );
@@ -127,6 +131,7 @@ describe("dashboard page", () => {
             municipalities={[]}
             quickActionLinks={[]}
             quickActionTasks={[]}
+            quickActionLicenseReinstatements={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>

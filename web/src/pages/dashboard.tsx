@@ -4,10 +4,10 @@ import { Header } from "@/components/Header";
 import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
-import { QuickActionsContainer } from "@/components/dashboard/QuickActionContainer";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
 import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout";
+import { QuickActionsContainer } from "@/components/dashboard/quick-actions/QuickActionContainer";
 import { HomeBasedBusiness } from "@/components/data-fields/HomeBasedBusiness";
 import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
 import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
@@ -27,12 +27,14 @@ import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayConten
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
+import { loadAllQuickActionLicenseReinstatements } from "@/lib/static/loadQuickActionLicenseReinstatements";
 import { loadAllQuickActionLinks } from "@/lib/static/loadQuickActionLinks";
 import { loadAllQuickActionTasks } from "@/lib/static/loadQuickActionTasks";
 import {
   Certification,
   Funding,
   OperateReference,
+  QuickActionLicenseReinstatement,
   QuickActionLink,
   QuickActionTask,
   RoadmapDisplayContent,
@@ -53,6 +55,7 @@ interface Props {
   municipalities: Municipality[];
   quickActionTasks: QuickActionTask[];
   quickActionLinks: QuickActionLink[];
+  quickActionLicenseReinstatements: QuickActionLicenseReinstatement[];
 }
 
 const DashboardPage = (props: Props): ReactElement => {
@@ -183,6 +186,7 @@ const DashboardPage = (props: Props): ReactElement => {
               <QuickActionsContainer
                 quickActionLinks={props.quickActionLinks}
                 quickActionTasks={props.quickActionTasks}
+                quickActionLicenseReinstatements={props.quickActionLicenseReinstatements}
               />
             )}
 
@@ -262,6 +266,7 @@ export const getStaticProps = (): GetStaticPropsResult<Props> => {
       municipalities: loadAllMunicipalities(),
       quickActionTasks: loadAllQuickActionTasks(),
       quickActionLinks: loadAllQuickActionLinks(),
+      quickActionLicenseReinstatements: loadAllQuickActionLicenseReinstatements(),
     },
   };
 };

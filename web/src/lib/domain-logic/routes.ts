@@ -8,6 +8,7 @@ export const ROUTES = {
   onboarding: "/onboarding",
   unsupported: "/unsupported",
   quickActions: "/actions",
+  licenseReinstatement: "/license-reinstatement",
   welcome: "/welcome",
   accountSetup: "/account-setup",
 };

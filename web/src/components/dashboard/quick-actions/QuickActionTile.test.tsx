@@ -1,4 +1,4 @@
-import { QuickActionTile } from "@/components/dashboard/QuickActionTile";
+import { QuickActionTile } from "@/components/dashboard/quick-actions/QuickActionTile";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { QuickActionLink } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
