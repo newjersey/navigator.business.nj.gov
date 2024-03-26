@@ -17,6 +17,7 @@ import {
   Opportunity,
   OutageConfig,
   PostOnboarding,
+  QuickActionLicenseReinstatement,
   QuickActionLink,
   QuickActionTask,
   Roadmap,
@@ -276,6 +277,26 @@ export const generateFunding = (overrides: Partial<Funding>): Funding => {
 };
 
 export const generateQuickActionTask = (overrides: Partial<QuickActionTask>): QuickActionTask => {
+  return {
+    filename: `some-filename-${randomInt()}`,
+    name: `some-name-${randomInt()}`,
+    urlSlug: `some-url-slug-${randomInt()}`,
+    icon: `some-icon-${randomInt()}`,
+    callToActionLink: `some-cta-link-${randomInt()}`,
+    callToActionText: `some-cta-text-${randomInt()}`,
+    contentMd: `some-content-${randomInt()}`,
+    form: `some-form-${randomInt()}`,
+    industryIds: [`some-industry-id-${randomInt()}`],
+    sectorIds: [`some-sector-id-${randomInt()}`],
+    summaryDescriptionMd: `some-summary-description-md-${randomInt()}`,
+    applyToAllUsers: false,
+    ...overrides,
+  };
+};
+
+export const generateQuickActionLicenseReinstatement = (
+  overrides: Partial<QuickActionLicenseReinstatement>
+): QuickActionLicenseReinstatement => {
   return {
     filename: `some-filename-${randomInt()}`,
     name: `some-name-${randomInt()}`,

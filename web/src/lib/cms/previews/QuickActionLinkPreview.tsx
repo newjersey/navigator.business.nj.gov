@@ -1,4 +1,4 @@
-import { QuickActionTile } from "@/components/dashboard/QuickActionTile";
+import { QuickActionTile } from "@/components/dashboard/quick-actions/QuickActionTile";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";

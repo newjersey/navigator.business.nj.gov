@@ -27,6 +27,9 @@ export const QuickActionTile = (props: LinkProps | LicenseReinstatementProps | T
     if (props.type === "task") {
       router.push(`${ROUTES.quickActions}/${props.quickAction.urlSlug}`);
     }
+    if (props.type === "license") {
+      router.push(`${ROUTES.licenseReinstatement}/${props.quickAction.urlSlug}`);
+    }
   };
 
   const tileContents: ReactNode = (
