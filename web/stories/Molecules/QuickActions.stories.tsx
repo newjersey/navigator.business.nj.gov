@@ -1,4 +1,4 @@
-import { QuickActionTile } from "@/components/dashboard/QuickActionTile";
+import { QuickActionTile } from "@/components/dashboard/quick-actions/QuickActionTile";
 import { generateQuickActionTask } from "@/test/factories";
 import { Meta, StoryObj } from "@storybook/react";
 

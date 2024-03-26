@@ -1,8 +1,12 @@
-import { QuickActionsContainer } from "@/components/dashboard/QuickActionContainer";
-import { QuickActionLink, QuickActionTask } from "@/lib/types/types";
-import { generateQuickActionLink, generateQuickActionTask } from "@/test/factories";
+import { QuickActionsContainer } from "@/components/dashboard/quick-actions/QuickActionContainer";
+import { QuickActionLicenseReinstatement, QuickActionLink, QuickActionTask } from "@/lib/types/types";
+import {
+  generateQuickActionLicenseReinstatement,
+  generateQuickActionLink,
+  generateQuickActionTask,
+} from "@/test/factories";
 import { useMockBusiness } from "@/test/mock/mockUseUserData";
-import { generateProfileData } from "@businessnjgovnavigator/shared/test";
+import { generateLicenseData, generateProfileData } from "@businessnjgovnavigator/shared/test";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -10,11 +14,19 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 const renderQuickActions = ({
   tasks,
   links,
+  licenses,
 }: {
   tasks?: QuickActionTask[];
   links?: QuickActionLink[];
+  licenses?: QuickActionLicenseReinstatement[];
 }): void => {
-  render(<QuickActionsContainer quickActionTasks={tasks || []} quickActionLinks={links || []} />);
+  render(
+    <QuickActionsContainer
+      quickActionTasks={tasks || []}
+      quickActionLinks={links || []}
+      quickActionLicenseReinstatements={licenses || []}
+    />
+  );
 };
 
 describe("<QuickActionContainer />", () => {
@@ -168,5 +180,69 @@ describe("<QuickActionContainer />", () => {
     expect(screen.getByTestId("quick-actions-section")).toHaveTextContent("task - industry match");
     expect(screen.getByTestId("quick-actions-section")).toHaveTextContent("link - sector match");
     expect(screen.getByTestId("quick-actions-section")).toHaveTextContent("link - industry match");
+  });
+
+  it("renders license reinstatment quick action when industry matches, and license is expired", () => {
+    useMockBusiness({
+      profileData: generateProfileData({
+        industryId: "hvac-contractor",
+      }),
+      licenseData: generateLicenseData({
+        status: "EXPIRED",
+      }),
+    });
+    const licenses = [
+      generateQuickActionLicenseReinstatement({
+        industryIds: ["hvac-contractor"],
+        applyToAllUsers: false,
+        name: "license - hvac-reinstatment",
+      }),
+    ];
+    renderQuickActions({ licenses });
+    expect(screen.getByTestId("quick-actions-section")).toHaveTextContent("license - hvac-reinstatment");
+  });
+
+  it("does NOT renders license reinstatment quick action when industry matches, and license is NOT expired", () => {
+    useMockBusiness({
+      profileData: generateProfileData({
+        industryId: "hvac-contractor",
+      }),
+      licenseData: generateLicenseData({
+        status: "PENDING_RENEWAL",
+      }),
+    });
+    const licenses = [
+      generateQuickActionLicenseReinstatement({
+        industryIds: ["hvac-contractor"],
+        applyToAllUsers: false,
+        name: "license - hvac-reinstatment",
+      }),
+    ];
+    renderQuickActions({ licenses });
+    expect(screen.queryByTestId("quick-actions-section")).not.toHaveTextContent(
+      "license - hvac-reinstatment"
+    );
+  });
+
+  it("does NOT renders license reinstatment quick action when industry does NOT matches, and license is expired", () => {
+    useMockBusiness({
+      profileData: generateProfileData({
+        industryId: "accounting",
+      }),
+      licenseData: generateLicenseData({
+        status: "EXPIRED",
+      }),
+    });
+    const licenses = [
+      generateQuickActionLicenseReinstatement({
+        industryIds: ["hvac-contractor"],
+        applyToAllUsers: false,
+        name: "license - hvac-reinstatment",
+      }),
+    ];
+    renderQuickActions({ licenses });
+    expect(screen.queryByTestId("quick-actions-section")).not.toHaveTextContent(
+      "license - hvac-reinstatment"
+    );
   });
 });

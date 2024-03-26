@@ -1,9 +1,9 @@
-import { QuickActionTile } from "@/components/dashboard/QuickActionTile";
+import { QuickActionElement } from "@/components/dashboard/quick-actions/QuickActionPage";
+import { QuickActionTile } from "@/components/dashboard/quick-actions/QuickActionTile";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { QuickActionLicenseReinstatement } from "@/lib/types/types";
-import { QuickActionElement } from "@/pages/actions/[quickActionTaskUrlSlug]";
 import { ReactElement } from "react";
 
 const QuickActionLicenseReinstatementPreview = (props: PreviewProps): ReactElement => {
@@ -15,7 +15,7 @@ const QuickActionLicenseReinstatementPreview = (props: PreviewProps): ReactEleme
       <div className="margin-y-10">
         <QuickActionTile type="license" quickAction={quickAction} />
       </div>
-      <QuickActionElement quickActionTask={quickAction} />
+      <QuickActionElement quickAction={quickAction} />
     </div>
   );
 };
