@@ -158,28 +158,30 @@ const fundingMd = [
 
 const fundings = [
   {
-    _archived: false,
-    _draft: false,
-    "learn-more-url": "https://www.nj.gov/dep/grantandloanprograms/aqes-njccp.htm",
-    "feature-on-recents": false,
-    agency: "e5191b387dca9f56520a9fb24ad56f74",
-    "certifications-2": ["63efba3124109fa20ee2a419"],
-    "funding-type": "e84141a8393db92e7fbb14aad810be6d",
-    "program-overview":
-      "<p>New Jersey Clean Construction Program installs pollution control devices or replaces qualifying non-road construction equipment that reduces pollution. Businesses can apply to two grants: Off-Road Diesel Retrofit Grant and Off-Road Diesel Replacement Grant.</p>",
-    eligibility:
-      "<ul> <li>Businesses or non-profits must own the non-road construction equipment</li> <li>Equipment must be used a minimum of 50% of the time in New Jersey for a current or future construction project in New Jersey</li> <li>Equipment cannot be planned to go out of use in the next 5 years</li> <li>Priority is given to urban areas, high frequency of use, and older models</li> </ul>",
-    benefit: "<p>Award of up to $100,000 per piece of equipment purchased or replaced</p>",
-    name: "NJ Clean Construction Program",
-    slug: "dep-clean-construction",
-    "industry-reference": ["61c48e1c25e5672fad13ed46", "61c48e23def87f031aed93aa"],
-    "funding-status": "c44fb3cfdfb8a5b52d694a578d0338c1",
-    _cid: "6112e6b88aa567fdbc725ffc",
-    _id: "62c5bc16a8f618275698c979",
+    isArchived: false,
+    isDraft: false,
+    fieldData: {
+      "learn-more-url": "https://www.nj.gov/dep/grantandloanprograms/aqes-njccp.htm",
+      "feature-on-recents": false,
+      agency: "e5191b387dca9f56520a9fb24ad56f74",
+      "certifications-2": ["63efba3124109fa20ee2a419"],
+      "funding-type": "e84141a8393db92e7fbb14aad810be6d",
+      "program-overview":
+        "<p>New Jersey Clean Construction Program installs pollution control devices or replaces qualifying non-road construction equipment that reduces pollution. Businesses can apply to two grants: Off-Road Diesel Retrofit Grant and Off-Road Diesel Replacement Grant.</p>",
+      eligibility:
+        "<ul> <li>Businesses or non-profits must own the non-road construction equipment</li> <li>Equipment must be used a minimum of 50% of the time in New Jersey for a current or future construction project in New Jersey</li> <li>Equipment cannot be planned to go out of use in the next 5 years</li> <li>Priority is given to urban areas, high frequency of use, and older models</li> </ul>",
+      benefit: "<p>Award of up to $100,000 per piece of equipment purchased or replaced</p>",
+      name: "NJ Clean Construction Program",
+      slug: "dep-clean-construction",
+      "industry-reference": ["61c48e1c25e5672fad13ed46", "61c48e23def87f031aed93aa"],
+      "funding-status": "c44fb3cfdfb8a5b52d694a578d0338c1",
+      cid: "6112e6b88aa567fdbc725ffc",
+    },
+    id: "62c5bc16a8f618275698c979",
   },
   {
-    _archived: false,
-    _draft: false,
+    isArchived: false,
+    isDraft: false,
     "learn-more-url": "https://www.njeda.com/njaccelerate/",
     "feature-on-recents": false,
     agency: "af647a925b907472a8ad9f5fe07ba6ed",
@@ -195,11 +197,15 @@ const fundings = [
     slug: "nj-accelerate",
     "industry-reference": ["61c48e1b3257cc374781ee12"],
     "funding-status": "d9e4ad4201a1644abbcad6666bace0bc",
-    _id: "62c5bc1639c27700c64f4a70",
+    id: "62c5bc1639c27700c64f4a70",
+    fieldData: {
+      name: "NJ Accelerate",
+      slug: "nj-accelerate",
+    },
   },
   {
-    _archived: false,
-    _draft: false,
+    isArchived: false,
+    isDraft: false,
     "learn-more-url": "https://www.njeda.com/cleantechvoucher/",
     agency: "af647a925b907472a8ad9f5fe07ba6ed",
     "certifications-2": [],
@@ -219,18 +225,23 @@ const fundings = [
       "62c54ce61497b56914905141",
     ],
     "funding-status": "c44fb3cfdfb8a5b52d694a578d0338c1",
-    _id: "62c5bc16d0a8cf081867afa2",
+    id: "62c5bc16d0a8cf081867afa2",
+    fieldData: {
+      name: "Clean Tech Research & Development (R&D) Voucher Program",
+      slug: "clean-tech-research-development-rd-voucher-program",
+    },
   },
 ];
 
+console.log("Fundings", fundings);
 const webflowSectors = [
   {
     name: "All Industries",
     slug: "all-industries",
-    _id: allIndustryId,
+    id: allIndustryId,
   },
   ...arrayOfSectors.map((i) => {
-    return { _id: randomInt(10), name: i.name, slug: i.id };
+    return { id: randomInt(10), name: i.name, slug: i.id };
   }),
 ];
 
@@ -267,7 +278,7 @@ describe("webflow syncing", () => {
       if (request.url.includes("6112e6b88aa567fdbc725ffc") && request.method === "get") {
         return { data: { items: fundings } };
       } else {
-        console.log(request);
+        console.log("Request", request);
       }
     });
   });
@@ -320,14 +331,12 @@ describe("webflow syncing", () => {
 
       expect(axios).toHaveBeenLastCalledWith({
         method: "post",
-        url: `https://api.webflow.com/collections/61c21253f7640b5f5ce829a4/items`,
+        url: `https://api.webflow.com/v2/collections/61c21253f7640b5f5ce829a4/items`,
         data: {
-          fields: {
-            _archived: false,
-            _draft: false,
-            name: "Utilities",
-            slug: "utilities",
-          },
+          isArchived: false,
+          isDraft: false,
+          name: "Utilities",
+          slug: "utilities",
         },
         responseType: "json",
         headers: {
@@ -366,12 +375,12 @@ describe("webflow syncing", () => {
       await updateSectorNames();
       expect(axios).toHaveBeenLastCalledWith({
         method: "patch",
-        url: `https://api.webflow.com/collections/61c21253f7640b5f5ce829a4/items/${
+        url: `https://api.webflow.com/v2/collections/61c21253f7640b5f5ce829a4/items/${
           webflowSectors.find((item) => {
             return item.slug === "utilities";
-          })._id
+          }).id
         }`,
-        data: { fields: { name: "Electric, Gas, and Oil suppliers" } },
+        data: { name: "Electric, Gas, and Oil suppliers" },
         responseType: "json",
         headers: { Authorization: "Bearer 12345678910" },
       });
@@ -413,8 +422,7 @@ describe("webflow syncing", () => {
       await deleteSectors();
       expect(axios).toHaveBeenLastCalledWith({
         method: "delete",
-        url: `https://api.webflow.com/collections/61c21253f7640b5f5ce829a4/items/${utilitiesSector._id}`,
-        params: { live: false },
+        url: `https://api.webflow.com/v2/collections/61c21253f7640b5f5ce829a4/items/${utilitiesSector.id}`,
         headers: { Authorization: "Bearer 12345678910" },
       });
     });
@@ -423,7 +431,7 @@ describe("webflow syncing", () => {
       axios.mockImplementation((request) => {
         if (request.url.includes("61c21253f7640b5f5ce829a4") && request.method === "get") {
           return {
-            data: { items: [...webflowSectors, { name: "Zzzzzzz", slug: "zzzzzz", _id: randomInt(10) }] },
+            data: { items: [...webflowSectors, { name: "Zzzzzzz", slug: "zzzzzz", id: randomInt(10) }] },
           };
         }
       });
@@ -629,10 +637,10 @@ describe("webflow syncing", () => {
         }
       });
       const newFundings = await getNewFundings();
-      const { _archived, _draft, _id, ...rest } = fundings.find((item) => {
+      const { isArchived, isDraft, id, ...rest } = fundings.find((item) => {
         return item.slug === "nj-accelerate";
       });
-      console.log(newFundings[0]);
+      console.log("First New Funding", newFundings[0]);
       delete rest["feature-on-recents"];
       expect(newFundings).toMatchObject([rest]);
     });
@@ -646,6 +654,8 @@ describe("webflow syncing", () => {
           return {
             data: {
               items: fundings.filter((item) => {
+                console.log("Funding Array to Filter", fundings);
+                console.log("Item From Fundings Array", item);
                 return item.slug !== "nj-accelerate";
               }),
             },
@@ -653,23 +663,25 @@ describe("webflow syncing", () => {
         }
       });
 
-      const { _id, ...rest } = fundings.find((item) => {
+      const { id, fieldData, ...rest } = fundings.find((item) => {
         return item.slug === "nj-accelerate";
       });
       delete rest["feature-on-recents"];
       await createNewFundings();
       expect(axios).toHaveBeenLastCalledWith({
         method: "post",
-        url: `https://api.webflow.com/collections/6112e6b88aa567fdbc725ffc/items`,
+        url: `https://api.webflow.com/v2/collections/6112e6b88aa567fdbc725ffc/items`,
         data: {
-          fields: {
-            _archived: false,
-            _draft: false,
-            "application-close-date": null,
-            "start-date": null,
-            "last-updated": currentDate.toISOString(),
-            ...rest,
+          isArchived: false,
+          isDraft: false,
+          "application-close-date": null,
+          "start-date": null,
+          "last-updated": currentDate.toISOString(),
+          fieldData: {
+            name: item.fieldData.name,
+            slug: item.fieldData.slug,
           },
+          ...rest,
         },
         responseType: "json",
         headers: {
@@ -724,24 +736,26 @@ describe("webflow syncing", () => {
     it("deletes fundings", async () => {
       loadAllFundings.mockReturnValue(
         fundingMd.filter((i) => {
-          return i.id !== "nj-accelerate";
+          // console.log("Funding MDs", i);
+          return i.id !== "nj-accelerate"; //boolean
         })
       );
+      console.log("fundings before delete", fundings);
       await deleteFundings();
+      console.log("fundings after delete", fundings);
+
+      const matchingFunding = fundings.find((i) => {
+        return i.slug === "nj-accelerate";
+      });
+
       expect(axios).toHaveBeenLastCalledWith({
         method: "delete",
-        url: `https://api.webflow.com/collections/6112e6b88aa567fdbc725ffc/items/${
-          fundings.find((i) => {
-            return i.slug === "nj-accelerate";
-          })._id
-        }`,
-        params: {
-          live: false,
-        },
+        url: `https://api.webflow.com/v2/collections/6112e6b88aa567fdbc725ffc/items/${matchingFunding.id}`,
         headers: {
           Authorization: "Bearer 12345678910",
         },
       });
+      console.log("fundings after expect", fundings);
     });
 
     it("updates fundings", async () => {
@@ -773,26 +787,24 @@ describe("webflow syncing", () => {
         },
       ]);
       await updateFundings();
-      const { _archived, _draft, _id, ...rest } = fundings.find((item) => {
+      const { isArchived, isDraft, id, ...rest } = fundings.find((item) => {
         return item.slug === "nj-accelerate";
       });
       delete rest["feature-on-recents"];
       console.log(rest);
       expect(axios).toHaveBeenLastCalledWith({
         method: "patch",
-        url: `https://api.webflow.com/collections/6112e6b88aa567fdbc725ffc/items/${
+        url: `https://api.webflow.com/v2/collections/6112e6b88aa567fdbc725ffc/items/${
           fundings.find((i) => {
             return i.slug === "nj-accelerate";
-          })._id
+          }).id
         }`,
         data: {
-          fields: {
-            ...rest,
-            "last-updated": currentDate.toISOString(),
-            "application-close-date": null,
-            "start-date": null,
-            agency: agencyMap["njdep"].id,
-          },
+          ...rest,
+          "last-updated": currentDate.toISOString(),
+          "application-close-date": null,
+          "start-date": null,
+          agency: agencyMap["njdep"].id,
         },
         responseType: "json",
         headers: {

@@ -19,7 +19,7 @@ const getAllIndustryNamesFromWebflow = async () => {
 };
 
 const getIndustryNamesAlreadyInWebflow = async () => {
-  const currentIndustryNamesInWebflowIds = (await getAllIndustryNamesFromWebflow()).map((it) => it._id);
+  const currentIndustryNamesInWebflowIds = (await getAllIndustryNamesFromWebflow()).map((it) => it.id);
   const currentIndustriesInNavigator = industryJson["industries"];
 
   if (currentIndustryNamesInWebflowIds.length > currentIndustriesInNavigator.length) {
@@ -45,7 +45,7 @@ const getIndustryNamesAlreadyInWebflow = async () => {
 
 const getNewIndustries = async () => {
   const currentIndustriesInNavigator = industryJson["industries"];
-  const currentIndustryNamesInWebflowIds = (await getAllIndustryNamesFromWebflow()).map((it) => it._id);
+  const currentIndustryNamesInWebflowIds = (await getAllIndustryNamesFromWebflow()).map((it) => it.id);
 
   return currentIndustriesInNavigator.filter(
     (it) => it.webflowId === undefined || !currentIndustryNamesInWebflowIds.includes(it.webflowId)
@@ -121,7 +121,7 @@ const createNewWebflowIndustryNames = async () => {
 
     if (industry.webflowId === undefined) {
       const filename = industry.id;
-      const webflowId = result.data._id;
+      const webflowId = result.data.id;
       updateIndustryWithWebflowId(webflowId, filename);
     }
     return Promise.resolve();
