@@ -45,7 +45,9 @@ export const NavBarMobile = (props: Props): ReactElement => {
 
   const navBarBusinessTitle = getNavBarBusinessTitle(currentBusiness, props.isAuthenticated);
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(props.CMS_PREVIEW_ONLY_SHOW_MENU ? true : false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const scrolled = props.CMS_PREVIEW_ONLY_SHOW_MENU ? false : props.scrolled;
 
   const openSidebar = (): void => {
     if (props.CMS_PREVIEW_ONLY_SHOW_MENU) return;
@@ -62,7 +64,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
   } else if (props.isLanding) {
     // landing
     return (
-      <NavBarMobileWrapper scrolled={!props.CMS_PREVIEW_ONLY_SHOW_MENU || props.scrolled}>
+      <NavBarMobileWrapper scrolled={scrolled}>
         <NavBarMobileHomeLogo
           scrolled={props.scrolled}
           showSidebar={props.showSidebar}
@@ -87,7 +89,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
   } else if (props.currentlyOnboarding) {
     // onboarding
     return (
-      <NavBarMobileWrapper scrolled={!props.CMS_PREVIEW_ONLY_SHOW_MENU || props.scrolled}>
+      <NavBarMobileWrapper scrolled={scrolled}>
         <NavBarMobileHomeLogo
           scrolled={props.scrolled}
           showSidebar={props.showSidebar}
@@ -111,7 +113,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
   } else if (props.isAuthenticated) {
     // authed
     return (
-      <NavBarMobileWrapper scrolled={!props.CMS_PREVIEW_ONLY_SHOW_MENU || props.scrolled}>
+      <NavBarMobileWrapper scrolled={scrolled}>
         <NavBarMobileHomeLogo
           scrolled={props.scrolled}
           showSidebar={props.showSidebar}
@@ -146,7 +148,7 @@ export const NavBarMobile = (props: Props): ReactElement => {
   } else {
     // guest
     return (
-      <NavBarMobileWrapper scrolled={!props.CMS_PREVIEW_ONLY_SHOW_MENU || props.scrolled}>
+      <NavBarMobileWrapper scrolled={scrolled}>
         <NavBarMobileHomeLogo
           scrolled={props.scrolled}
           showSidebar={props.showSidebar}
