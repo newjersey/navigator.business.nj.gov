@@ -1,12 +1,9 @@
 ---
-notesMd: >-
-  [Muni planning
-  doc](https://docs.google.com/document/d/1pZBqY3yS9y8Y3MMSHqwvTFtdlYvuxhWKK70fUqsXRSY/edit)
-
-
-  2.28.24: Copy pending approval
+notesMd: "[Muni planning
+  doc](https://docs.google.com/document/d/1pZBqY3yS9y8Y3MMSHqwvTFtdlYvuxhWKK70f\
+  UqsXRSY/edit)"
 header: Planned Real Estate Development (PRED)
 slug: planned-real-estate-development
 displayname: planned-real-estate-development
 ---
-A Planned Real Estate Development (PRED) refers to land developed for common-interest communities. In these communities, people own their own unit or lot, but share ownership of common areas, such as a pool or tennis court. Examples include condominiums and co-op housing.
+A Planned Real Estate Development (PRED) refers to land developed for common-interest communities. In these communities, people own their own unit or lot, but share ownership of common areas, such as a pool or tennis court. Examples include condominiums, homeowner associations (HOA), cooperative (Co-Op) housing, and retirement communities.
