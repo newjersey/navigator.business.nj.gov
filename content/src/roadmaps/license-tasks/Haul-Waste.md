@@ -1,4 +1,6 @@
 ---
+notesMd: rst
+id: haul-waste-hic
 filename: haul-waste
 displayname: haul-waste
 urlSlug: haul-waste
@@ -18,7 +20,6 @@ licenseCertificationClassification: LICENSE
 agencyId: njdep
 agencyAdditionalContext: Environmental Enforcement
 divisionPhone: (609) 633-1418
-id: haul-waste-hic
 webflowType: business-license
 webflowId: 5f77291fb0544f2f2d366147
 ---
