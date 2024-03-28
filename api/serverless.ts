@@ -45,6 +45,9 @@ const myNJServiceUrl = process.env.MYNJ_SERVICE_URL || "";
 const useFakeSelfReg = process.env.USE_FAKE_SELF_REG || "";
 const intercomHashSecret = process.env.INTERCOM_HASH_SECRET || "";
 
+const healthCheckLambda = `businessnjgov-api-${stage}-healthCheck`;
+const healthCheckEventRule = `health_check_lambda_event_rule`;
+
 const documentS3Bucket = `nj-bfs-user-documents-${stage}`;
 const skipSaveDocumentsToS3 = process.env.SKIP_SAVE_DOCUMENTS_TO_S3 || "";
 
@@ -122,6 +125,20 @@ const serverlessConfiguration: AWS = {
       role: {
         managedPolicies: ["arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"],
         statements: [
+          {
+            Effect: "Allow",
+            Action: "lambda:InvokeFunction",
+            Resource: `arn:aws:lambda:${region}:*:function:${healthCheckLambda}`,
+            Principal: {
+              Service: "events.amazonaws.com",
+            },
+            Condition: {
+              ArnLike: {
+                "AWS:SourceArn": `arn:aws:events:${region}:*:rule/${healthCheckEventRule}`,
+              },
+            },
+            Sid: "InvokeLambdaFunction",
+          },
           {
             Effect: "Allow",
             Action: [
@@ -221,6 +238,7 @@ const serverlessConfiguration: AWS = {
     } as AwsLambdaEnvironment,
     logRetentionInDays: 180,
   },
+
   functions: {},
 };
 
