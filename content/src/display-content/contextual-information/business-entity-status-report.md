@@ -1,10 +1,7 @@
 ---
-notesMd: >-
-  [Muni planning/draft
-  doc](https://docs.google.com/document/d/1GKtYlOLZQNeCHWQ4SvyIzEqNmYDECEUSLahp8_yC4T4/edit?usp=sharing)
-
-
-  2.27.24: Content has not been approved by SMEs
+notesMd: "[Muni planning/draft
+  doc](https://docs.google.com/document/d/1GKtYlOLZQNeCHWQ4SvyIzEqNmYDECEUSLahp\
+  8_yC4T4/edit?usp=sharing)"
 header: Business Entity Status Report
 slug: business-entity-status-report
 displayname: business-entity-status-report
