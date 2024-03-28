@@ -98,7 +98,7 @@ describe("<NeedsAccountSnackbar />", () => {
   it("shows Needs Account snackbar when user is in guest mode", () => {
     renderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
     expect(
-      screen.getByText(markdownToText(Config.navigationDefaults.needsAccountSnackbarTitle))
+      screen.getByText(markdownToText(Config.selfRegistration.needsAccountSnackbarTitle))
     ).toBeInTheDocument();
   });
 
@@ -111,7 +111,7 @@ describe("<NeedsAccountSnackbar />", () => {
   it("does not show Needs Account Snackbar when showNeedsAccountSnackbar is false", () => {
     renderWithAuth({ isAuthenticated: IsAuthenticated.FALSE, showNeedsAccountSnackbar: false });
     expect(
-      screen.queryByText(markdownToText(Config.navigationDefaults.needsAccountSnackbarTitle))
+      screen.queryByText(markdownToText(Config.selfRegistration.needsAccountSnackbarTitle))
     ).not.toBeInTheDocument();
   });
 
@@ -158,16 +158,16 @@ describe("<NeedsAccountSnackbar />", () => {
     });
     useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
     expect(screen.getByTestId("self-reg-snackbar")).toContainHTML(
-      renderToStaticMarkup(Content({ children: Config.navigationDefaults.needsAccountSnackbarBody }))
+      renderToStaticMarkup(Content({ children: Config.selfRegistration.needsAccountSnackbarBody }))
     );
     expect(screen.getByTestId("self-reg-snackbar")).not.toContainHTML(
       renderToStaticMarkup(
-        Content({ children: Config.navigationDefaults.needsAccountSnackbarBodyExistingAccount })
+        Content({ children: Config.selfRegistration.needsAccountSnackbarBodyExistingAccount })
       )
     );
-    expect(screen.getByText(Config.navigationDefaults.needsAccountSnackbarTitle)).toBeInTheDocument();
+    expect(screen.getByText(Config.selfRegistration.needsAccountSnackbarTitle)).toBeInTheDocument();
     expect(
-      screen.queryByText(Config.navigationDefaults.needsAccountSnackbarTitleExistingAccount)
+      screen.queryByText(Config.selfRegistration.needsAccountSnackbarTitleExistingAccount)
     ).not.toBeInTheDocument();
   });
 
@@ -179,15 +179,15 @@ describe("<NeedsAccountSnackbar />", () => {
     useMockBusiness(generateBusiness({})); // necessary for renderToStaticMarkup for Content
     expect(screen.getByTestId("self-reg-snackbar")).toContainHTML(
       renderToStaticMarkup(
-        Content({ children: Config.navigationDefaults.needsAccountSnackbarBodyExistingAccount })
+        Content({ children: Config.selfRegistration.needsAccountSnackbarBodyExistingAccount })
       )
     );
     expect(screen.getByTestId("self-reg-snackbar")).not.toContainHTML(
-      renderToStaticMarkup(Content({ children: Config.navigationDefaults.needsAccountSnackbarBody }))
+      renderToStaticMarkup(Content({ children: Config.selfRegistration.needsAccountSnackbarBody }))
     );
     expect(
-      screen.getByText(Config.navigationDefaults.needsAccountSnackbarTitleExistingAccount)
+      screen.getByText(Config.selfRegistration.needsAccountSnackbarTitleExistingAccount)
     ).toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationDefaults.needsAccountSnackbarTitle)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.selfRegistration.needsAccountSnackbarTitle)).not.toBeInTheDocument();
   });
 });

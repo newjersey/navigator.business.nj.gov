@@ -32,15 +32,15 @@ export const RegistrationStatusSnackbar = (): ReactElement => {
   };
 
   const contentMap: Record<AlertStatus, string> = {
-    SUCCESS: Config.navigationDefaults.accountSuccessSnackbarBody,
+    SUCCESS: Config.selfRegistration.accountSuccessSnackbarBody,
     DUPLICATE_ERROR: Config.selfRegistration.errorTextDuplicateSignUp,
     RESPONSE_ERROR: Config.selfRegistration.errorTextGeneric,
   };
 
   const getSuccessTitle = (): string => {
     return state.activeUser?.encounteredMyNjLinkingError
-      ? Config.navigationDefaults.accountSuccessSnackbarTitleExistingAccount
-      : Config.navigationDefaults.accountSuccessSnackbarTitle;
+      ? Config.selfRegistration.accountSuccessSnackbarTitleExistingAccount
+      : Config.selfRegistration.accountSuccessSnackbarTitle;
   };
 
   if (!registrationStatus || registrationStatus === "IN_PROGRESS") {

@@ -33,14 +33,14 @@ export const NeedsAccountSnackbar = (): ReactElement => {
 
   const getTitle = (): string => {
     return state.activeUser?.encounteredMyNjLinkingError
-      ? Config.navigationDefaults.needsAccountSnackbarTitleExistingAccount
-      : Config.navigationDefaults.needsAccountSnackbarTitle;
+      ? Config.selfRegistration.needsAccountSnackbarTitleExistingAccount
+      : Config.selfRegistration.needsAccountSnackbarTitle;
   };
 
   const getBody = (): string => {
     return state.activeUser?.encounteredMyNjLinkingError
-      ? Config.navigationDefaults.needsAccountSnackbarBodyExistingAccount
-      : Config.navigationDefaults.needsAccountSnackbarBody;
+      ? Config.selfRegistration.needsAccountSnackbarBodyExistingAccount
+      : Config.selfRegistration.needsAccountSnackbarBody;
   };
 
   return (

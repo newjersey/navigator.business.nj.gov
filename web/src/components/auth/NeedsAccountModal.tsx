@@ -50,7 +50,7 @@ export const NeedsAccountModal = (): ReactElement => {
     >
       <DialogTitle sx={{ p: 5, paddingRight: 10 }}>
         <Heading level={0} styleVariant="h3">
-          {Config.navigationDefaults.needsAccountModalTitle}
+          {Config.selfRegistration.needsAccountModalTitle}
         </Heading>
         <IconButton
           aria-label="close"
@@ -67,12 +67,12 @@ export const NeedsAccountModal = (): ReactElement => {
       </DialogTitle>
 
       <DialogContent dividers={false} sx={{ paddingX: 5, paddingBottom: 3 }}>
-        <Content>{Config.navigationDefaults.needsAccountModalBody}</Content>
+        <Content>{Config.selfRegistration.needsAccountModalBody}</Content>
       </DialogContent>
       <DialogContent dividers={false} sx={{ paddingX: 5 }}>
         <Box>
           <PrimaryButton isColor="primary" isFullWidthOnDesktop onClick={linkToAccountSetup}>
-            {Config.navigationDefaults.needsAccountModalButtonText}
+            {Config.selfRegistration.needsAccountModalButtonText}
           </PrimaryButton>
         </Box>
       </DialogContent>
@@ -93,7 +93,7 @@ export const NeedsAccountModal = (): ReactElement => {
               triggerSignIn();
             }}
           >
-            {Config.navigationDefaults.needsAccountModalSubText}
+            {Config.selfRegistration.needsAccountModalSubText}
           </Content>
         </Box>
       </DialogContent>
