@@ -1,25 +1,20 @@
 ---
-notesMd: >-
-  [Muni planning
-  doc](https://docs.google.com/document/d/1pZBqY3yS9y8Y3MMSHqwvTFtdlYvuxhWKK70fUqsXRSY/edit?usp=sharing)
-
-
-  2.28.24: Copy needs to be approved by SMEs
+notesMd: "[Muni planning
+  doc](https://docs.google.com/document/d/1pZBqY3yS9y8Y3MMSHqwvTFtdlYvuxhWKK70f\
+  UqsXRSY/edit?usp=sharing)"
 filename: new-home-warranty-plan
 name: Enroll New Houses You Build in a Warranty Plan
 industryIds: []
 sectorIds: []
 icon: file-purple.svg
 urlSlug: new-home-warranty-plan
-summaryDescriptionMd: "  "
+summaryDescriptionMd: " "
 callToActionText: Enroll in the State Warranty Plan
 callToActionLink: https://www.nj.gov/dca/divisions/codes/forms/pdf_nhw/COP_App.pdf
 ---
-If you are building new houses in New Jersey, you must enroll each house you build in a `warranty plan|new-home-warranty-plan`. The warranty plan can be a State warranty plan or an [approved private warranty plan](https://www.nj.gov/dca/divisions/codes/offices/nhw_war_plans.html).
+If you are a registered new home builder who builds or sells new homes in New Jersey, or both, you must enroll each home in a `warranty plan|new-home-warranty-plan`. To enroll in and provide the warranty, you must be the person(s) or entity that owns the new home and sells it to the initial purchasers. New homes include single-family houses, duplexes, townhouses, cooperatives, condominiums, factory-built, and modular residences. The warranty plan can be the State warranty plan or an [approved private warranty plan](https://www.nj.gov/dca/divisions/codes/offices/nhw_war_plans.html).
 
-To enroll in a State warranty plan, apply for a `Certificate of Participation|certificate-participation` with the Department of Community Affairs (DCA).
-
-To enroll in an approved private warranty plan, contact the plan representative.
+To enroll a new home in a State warranty plan, complete the requirements below. To enroll in an approved private warranty plan, contact the plan representative.
 
 - - -
 
@@ -50,8 +45,6 @@ To enroll in an approved private warranty plan, contact the plan representative.
 
 * Building and unit layout 
 *  `Planned Real Estate Development (PRED)|planned-real-estate-development` registration or exemption number
-
-
 
 :::infoAlert 
  Submit all five copies of the completed application at least 10 weeks before the listed warranty coverage start date.
