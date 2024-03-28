@@ -66,10 +66,10 @@ describe("<RegistrationStatusSnackbar />", () => {
   it("shows registration success snackbar when user is authenticated and had completed the registration process", () => {
     setupHookWithAuth({ isAuthenticated: IsAuthenticated.TRUE, registrationStatus: "SUCCESS" });
     expect(
-      screen.getByText(markdownToText(Config.navigationDefaults.accountSuccessSnackbarBody))
+      screen.getByText(markdownToText(Config.selfRegistration.accountSuccessSnackbarBody))
     ).toBeInTheDocument();
     expect(
-      screen.getByText(markdownToText(Config.navigationDefaults.accountSuccessSnackbarTitle))
+      screen.getByText(markdownToText(Config.selfRegistration.accountSuccessSnackbarTitle))
     ).toBeInTheDocument();
     expect(screen.getByTestId("congratulations-logo")).toBeInTheDocument();
     expect(screen.getByTestId("reg-snackbar")).toBeInTheDocument();
@@ -86,7 +86,7 @@ describe("<RegistrationStatusSnackbar />", () => {
       screen.getByText(markdownToText(Config.selfRegistration.errorTextDuplicateSignUp))
     ).toBeInTheDocument();
     expect(
-      screen.queryByText(markdownToText(Config.navigationDefaults.accountSuccessSnackbarTitle))
+      screen.queryByText(markdownToText(Config.selfRegistration.accountSuccessSnackbarTitle))
     ).not.toBeInTheDocument();
     expect(screen.queryByTestId("congratulations-logo")).not.toBeInTheDocument();
   });
@@ -95,7 +95,7 @@ describe("<RegistrationStatusSnackbar />", () => {
     setupHookWithAuth({ isAuthenticated: IsAuthenticated.FALSE, registrationStatus: "RESPONSE_ERROR" });
     expect(screen.getByText(markdownToText(Config.selfRegistration.errorTextGeneric))).toBeInTheDocument();
     expect(
-      screen.queryByText(markdownToText(Config.navigationDefaults.accountSuccessSnackbarTitle))
+      screen.queryByText(markdownToText(Config.selfRegistration.accountSuccessSnackbarTitle))
     ).not.toBeInTheDocument();
     expect(screen.queryByTestId("congratulations-logo")).not.toBeInTheDocument();
   });
@@ -105,9 +105,9 @@ describe("<RegistrationStatusSnackbar />", () => {
       activeUser: generateActiveUser({ encounteredMyNjLinkingError: false }),
       isAuthenticated: IsAuthenticated.TRUE,
     });
-    expect(screen.getByText(Config.navigationDefaults.accountSuccessSnackbarTitle)).toBeInTheDocument();
+    expect(screen.getByText(Config.selfRegistration.accountSuccessSnackbarTitle)).toBeInTheDocument();
     expect(
-      screen.queryByText(Config.navigationDefaults.accountSuccessSnackbarTitleExistingAccount)
+      screen.queryByText(Config.selfRegistration.accountSuccessSnackbarTitleExistingAccount)
     ).not.toBeInTheDocument();
   });
 
@@ -117,8 +117,8 @@ describe("<RegistrationStatusSnackbar />", () => {
       isAuthenticated: IsAuthenticated.TRUE,
     });
     expect(
-      screen.getByText(Config.navigationDefaults.accountSuccessSnackbarTitleExistingAccount)
+      screen.getByText(Config.selfRegistration.accountSuccessSnackbarTitleExistingAccount)
     ).toBeInTheDocument();
-    expect(screen.queryByText(Config.navigationDefaults.accountSuccessSnackbarTitle)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.selfRegistration.accountSuccessSnackbarTitle)).not.toBeInTheDocument();
   });
 });
