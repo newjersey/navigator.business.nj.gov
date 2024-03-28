@@ -129,9 +129,6 @@ const serverlessConfiguration: AWS = {
             Effect: "Allow",
             Action: "lambda:InvokeFunction",
             Resource: `arn:aws:lambda:${region}:*:function:${healthCheckLambda}`,
-            Principal: {
-              Service: "events.amazonaws.com",
-            },
             Condition: {
               ArnLike: {
                 "AWS:SourceArn": `arn:aws:events:${region}:*:rule/${healthCheckEventRule}`,
