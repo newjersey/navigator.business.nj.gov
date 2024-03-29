@@ -13,7 +13,7 @@ displayname: retreat-lodging-registration
 name: Register Your Overnight Retreat or Conference Center
 id: retreat-lodging-registration
 callToActionLink: https://njdcaportal.dynamics365portals.us/ultra-bhi-home/
-callToActionText: Register My Retreat Lodging Facility
+callToActionText: Register My Overnight Retreat or Conference Center
 industryId: ""
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of Housing Inspection
