@@ -5,9 +5,11 @@ import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Hero } from "@/components/njwds/Hero";
 import { SupportExploreSignUpChatCards } from "@/components/SupportExploreSignUpChatCards";
 import { AuthContext } from "@/contexts/authContext";
+import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
@@ -37,6 +39,7 @@ const Home = (props: Props): ReactElement => {
   const [fireAnalyticsForSectionLookingForSupport, setFireAnalyticsForSectionLookingForSupport] =
     useState(true);
   const sectionLookingForSupportInViewport = useIntersectionOnElement(sectionLookingForSupport, "-150px");
+  const config = getMergedConfig();
 
   if (sectionHowItWorksInViewport && fireAnalyticsForSectionHowItWorks) {
     analytics.event.landing_page_how_it_works.scroll.how_it_works_seen();
@@ -158,7 +161,7 @@ const Home = (props: Props): ReactElement => {
 
   return (
     <>
-      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${Config.pagesMetadata.home.title}`} />
+      <NextSeo title={getNextSeoTitle(config.pagesMetadata.homeTitle)} />
       <PageSkeleton landingPage={true}>
         <NavBar landingPage={true} />
         <main data-testid="main">

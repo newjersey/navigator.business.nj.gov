@@ -1,22 +1,23 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content, ExternalLink, GreenBox } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
+import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { NavBar } from "@/components/navbar/NavBar";
-import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { Tag } from "@/components/njwds-extended/Tag";
+import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Icon } from "@/components/njwds/Icon";
-import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { sortCalendarEventsEarliestToLatest } from "@/lib/domain-logic/filterCalendarEvents";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { FilingUrlSlugParam, loadAllFilingUrlSlugs, loadFilingByUrlSlug } from "@/lib/static/loadFilings";
 import { Filing, TaxFilingMethod } from "@/lib/types/types";
 import {
+  TaxFilingCalendarEvent,
   defaultDateFormat,
   parseDateWithFormat,
-  TaxFilingCalendarEvent,
 } from "@businessnjgovnavigator/shared";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
@@ -197,7 +198,7 @@ const FilingPage = (props: Props): ReactElement => {
 
   return (
     <>
-      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${props.filing.name}`} />
+      <NextSeo title={getNextSeoTitle(props.filing.name)} />
       <PageSkeleton>
         <NavBar showSidebar={true} hideMiniRoadmap={true} />
         <TaskSidebarPageLayout hideMiniRoadmap={true}>

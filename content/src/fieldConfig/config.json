@@ -231,19 +231,6 @@
     "section5FirstHeaderText": "Starter Kit",
     "heroCallOutFirstLineText": "Succeed"
   },
-  "pagesMetadata": {
-    "home": {
-      "title": "Home"
-    },
-    "dashboard": {
-      "title": "Dashboard"
-    },
-    "profile": {
-      "title": "Business Profile"
-    },
-    "titlePrefix": "Business.NJ.gov My Account",
-    "siteDescription": "Business.NJ.gov My Account is a tool for starting and managing a business in the State of New Jersey"
-  },
   "taskDefaults": {
     "requiredLabelText": "Required",
     "continueButtonText": "Continue",

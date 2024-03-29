@@ -20,6 +20,7 @@ import DeferredLocationPreview from "@/lib/cms/previews/DeferredLocationPreview"
 import EinInputPreview from "@/lib/cms/previews/EinInputPreview";
 import FilingsPreview from "@/lib/cms/previews/FilingsPreview";
 import LicensesPreview from "@/lib/cms/previews/LicenseEventPreview";
+import PageMetaDataPreview from "@/lib/cms/previews/PageMetadataPreview";
 import PostOnboardingPreview from "@/lib/cms/previews/PostOnboardingPreview";
 
 import FormationInterimSuccessPreview from "@/lib/cms/previews/FormationInterimSuccessPreview";
@@ -102,6 +103,9 @@ const CMS = dynamic(
       // ----- Roadmap Sidebar Card -----
       registerPreview(CMS, "roadmap-sidebar-card", RoadmapSidebarCardPreview);
 
+      // ----- Page Metadata -----
+      registerPreview(CMS, "page-metadata", PageMetaDataPreview);
+
       // ----- Profile -----
       registerPreview(CMS, "profile-fields", ProfileFieldsPreview);
       registerPreview(CMS, "profile-misc", ProfilePreviewMisc);
@@ -175,19 +179,15 @@ const registerPreview = (
 
 const Admin = (): ReactElement => {
   useMountEffect(() => {
-    return setInterval(() => {
+    setInterval(() => {
       window.location.reload();
     }, 3600000);
-  });
 
-  useMountEffect(() => {
-    return setInterval(() => {
+    setInterval(() => {
       printFieldWithErrorToConsole();
     }, 1000 * 30);
-  });
 
-  useMountEffect(() => {
-    return setInterval(() => {
+    setInterval(() => {
       updateRequiredFieldErrorMessage();
     }, 1000 * 2);
   });

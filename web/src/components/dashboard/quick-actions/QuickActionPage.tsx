@@ -1,12 +1,13 @@
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
+import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { NavBar } from "@/components/navbar/NavBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { GovernmentContractorPaginator } from "@/components/tasks/government-contracting/GovernmentContractingPaginator";
-import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { getMergedConfig } from "@/contexts/configContext";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { QuickActionLicenseReinstatement, QuickActionTask } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
 import { NextSeo } from "next-seo";
@@ -74,7 +75,7 @@ export const QuickActionGovernmentContractingElement = (props: Props): ReactElem
 export const QuickActionPage = (props: Props): ReactElement => {
   return (
     <>
-      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${props.quickAction.name}`} />
+      <NextSeo title={getNextSeoTitle(props.quickAction.name)} />
       <PageSkeleton>
         <NavBar showSidebar={true} hideMiniRoadmap={true} />
         <TaskSidebarPageLayout hideMiniRoadmap={true}>

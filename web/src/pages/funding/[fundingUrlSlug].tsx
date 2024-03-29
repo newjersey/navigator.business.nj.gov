@@ -1,13 +1,14 @@
 import { Content } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
+import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { NavBar } from "@/components/navbar/NavBar";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
+import { MediaQueries } from "@/lib/PageSizes";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
-import { MediaQueries } from "@/lib/PageSizes";
+import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { FundingUrlSlugParam, loadAllFundingUrlSlugs, loadFundingByUrlSlug } from "@/lib/static/loadFundings";
 import { Funding } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
@@ -83,10 +84,9 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
 };
 
 const FundingPage = (props: Props): ReactElement => {
-  const { Config } = useConfig();
   return (
     <>
-      <NextSeo title={`${Config.pagesMetadata.titlePrefix} - ${props.funding.name}`} />
+      <NextSeo title={getNextSeoTitle(props.funding.name)} />
       <PageSkeleton>
         <NavBar showSidebar={true} hideMiniRoadmap={true} />
         <TaskSidebarPageLayout hideMiniRoadmap={true}>
