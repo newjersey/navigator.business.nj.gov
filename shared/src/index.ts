@@ -14,6 +14,7 @@ export * from "./domain-logic/onboarding";
 export * from "./domain-logic/opportunityFields";
 export * from "./domain-logic/sidebarCards";
 export * from "./domain-logic/taskIds";
+export * from "./elevatorSafety";
 export * from "./formationData";
 export * from "./fundingAgency";
 export * from "./industry";

@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export type ElevatorSafetyDeviceInspectionDetails = {
   address: string;
   deviceCount: number;
@@ -15,3 +17,30 @@ export type ElevatorSafetyRegistrationSummary = {
   registrations: ElevatorSafetyRegistration[];
   lookupStatus: string;
 };
+
+export type ElevatorSafetyAddress = {
+  address1: string;
+  address2?: string;
+  zipCode?: string;
+};
+
+export function generateElevatorSafetyRegistrationSummary(
+  overrides?: Partial<ElevatorSafetyRegistrationSummary>
+): ElevatorSafetyRegistrationSummary {
+  return {
+    lookupStatus: "SUCCESSFUL",
+    registrations: [generateElevatorSafetyRegistration()],
+    ...overrides,
+  };
+}
+
+export function generateElevatorSafetyRegistration(
+  overrides?: Partial<ElevatorSafetyRegistration>
+): ElevatorSafetyRegistration {
+  return {
+    dateStarted: dayjs().toString(),
+    deviceCount: 1,
+    status: "APPROVED",
+    ...overrides,
+  };
+}

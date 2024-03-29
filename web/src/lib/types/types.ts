@@ -496,6 +496,12 @@ export type NaicsCodeObject = {
 
 export type LicenseSearchError = "NOT_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
 
+export type ElevatorRegistrationSearchError =
+  | "NO_PROPERTY_INTEREST_FOUND"
+  | "NO_ELEVATOR_REGISTRATIONS_FOUND"
+  | "FIELDS_REQUIRED"
+  | "SEARCH_FAILED";
+
 export type FeedbackRequestModalNames =
   | "Select Feedback"
   | "Feature Request"

@@ -33,12 +33,12 @@ export type ElevatorRegistrationLookupStatus =
   | "NO PROPERTY INTERESTS FOUND";
 
 export type ElevatorRegistrationStatus =
-  | "APPROVED"
-  | "INCOMPLETE"
-  | "RETURNED"
-  | "REJECTED"
-  | "IN REVIEW"
-  | "CANCELLED"
+  | "Approved"
+  | "Incomplete"
+  | "Returned"
+  | "Rejected"
+  | "In Review"
+  | "Cancelled"
   | "UNRECOGNIZED STATUS";
 
 export type ElevatorSafetyInspectionInfo = (address: string) => Promise<ElevatorInspection[]>;
