@@ -5,11 +5,6 @@ notesMd: >-
 
 
   Note: no industry for this yet; added a placeholder
-
-
-
-
-  a
 id: hotel-registration
 filename: hotel-registration
 displayname: hotel-registration
