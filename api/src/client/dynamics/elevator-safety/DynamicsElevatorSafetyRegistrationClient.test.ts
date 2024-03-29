@@ -29,7 +29,7 @@ describe("DynamicsElevatorSafetyRegistrationClient", () => {
         {
           ultra_buildingaddressline1: "address-1",
           _ultra_propertyinterest_value: propertyInterestId,
-          ultra_requestdate: "2021-06-14T04:00:29Z",
+          createdon: "2021-06-14T14:00:29Z",
           ultra_elevatorregistrationrequestid: "request-id-1",
           statuscode: "1",
         },
@@ -42,9 +42,9 @@ describe("DynamicsElevatorSafetyRegistrationClient", () => {
     mockAxios.get.mockResolvedValueOnce({ data: elevatorDevicesMockResponse });
     expect(await client.getElevatorRegistrationsForBuilding(mockAccessToken, propertyInterestId)).toEqual([
       {
-        dateStarted: "2021-06-14T04:00:29Z",
+        dateStarted: "06/14/2021",
         deviceCount: 2,
-        status: "IN REVIEW",
+        status: "In Review",
       },
     ]);
     expect(mockAxios.get).toHaveBeenCalledWith(
@@ -71,14 +71,14 @@ describe("DynamicsElevatorSafetyRegistrationClient", () => {
         {
           ultra_buildingaddressline1: "address-1",
           _ultra_propertyinterest_value: propertyInterestId,
-          ultra_requestdate: "2021-06-14T04:00:29Z",
+          createdon: "2021-06-14T14:00:29Z",
           ultra_elevatorregistrationrequestid: "request-id-1",
           statuscode: "240000001",
         },
         {
           ultra_buildingaddressline1: "address-1",
           _ultra_propertyinterest_value: propertyInterestId,
-          ultra_requestdate: "2023-06-14T04:00:29Z",
+          createdon: "2023-06-14T14:00:29Z",
           ultra_elevatorregistrationrequestid: "request-id-2",
           statuscode: "240000002",
         },
@@ -93,15 +93,15 @@ describe("DynamicsElevatorSafetyRegistrationClient", () => {
     mockAxios.get.mockResolvedValueOnce({ data: elevatorDevicesMockResponse2 });
     expect(await client.getElevatorRegistrationsForBuilding(mockAccessToken, propertyInterestId)).toEqual([
       {
-        dateStarted: "2021-06-14T04:00:29Z",
+        dateStarted: "06/14/2021",
         deviceCount: 2,
-        status: "APPROVED",
+        status: "Approved",
       },
 
       {
-        dateStarted: "2023-06-14T04:00:29Z",
+        dateStarted: "06/14/2023",
         deviceCount: 3,
-        status: "REJECTED",
+        status: "Rejected",
       },
     ]);
     expect(mockAxios.get).toHaveBeenCalledWith(
@@ -136,42 +136,42 @@ describe("DynamicsElevatorSafetyRegistrationClient", () => {
         {
           ultra_buildingaddressline1: "address-1",
           _ultra_propertyinterest_value: propertyInterestId,
-          ultra_requestdate: "2021-06-14T04:00:29Z",
+          createdon: "2021-06-14T14:00:29Z",
           ultra_elevatorregistrationrequestid: "request-id-1",
           statuscode: "1",
         },
         {
           ultra_buildingaddressline1: "address-1",
           _ultra_propertyinterest_value: propertyInterestId,
-          ultra_requestdate: "2023-06-14T04:00:29Z",
+          createdon: "2023-06-14T14:00:29Z",
           ultra_elevatorregistrationrequestid: "request-id-2",
           statuscode: "2",
         },
         {
           ultra_buildingaddressline1: "address-1",
           _ultra_propertyinterest_value: propertyInterestId,
-          ultra_requestdate: "2023-07-14T04:00:29Z",
+          createdon: "2023-07-14T14:00:29Z",
           ultra_elevatorregistrationrequestid: "request-id-2",
           statuscode: "240000000",
         },
         {
           ultra_buildingaddressline1: "address-1",
           _ultra_propertyinterest_value: propertyInterestId,
-          ultra_requestdate: "2024-07-14T04:00:29Z",
+          createdon: "2024-07-14T14:00:29Z",
           ultra_elevatorregistrationrequestid: "request-id-2",
           statuscode: "240000001",
         },
         {
           ultra_buildingaddressline1: "address-1",
           _ultra_propertyinterest_value: propertyInterestId,
-          ultra_requestdate: "2024-01-14T04:00:29Z",
+          createdon: "2024-01-14T14:00:29Z",
           ultra_elevatorregistrationrequestid: "request-id-2",
           statuscode: "240000002",
         },
         {
           ultra_buildingaddressline1: "address-1",
           _ultra_propertyinterest_value: propertyInterestId,
-          ultra_requestdate: "2025-01-14T04:00:29Z",
+          createdon: "2025-01-14T14:00:29Z",
           ultra_elevatorregistrationrequestid: "request-id-2",
           statuscode: "240000003",
         },
@@ -190,34 +190,34 @@ describe("DynamicsElevatorSafetyRegistrationClient", () => {
     mockAxios.get.mockResolvedValueOnce({ data: elevatorDevicesMockResponse2 });
     expect(await client.getElevatorRegistrationsForBuilding(mockAccessToken, propertyInterestId)).toEqual([
       {
-        dateStarted: "2021-06-14T04:00:29Z",
+        dateStarted: "06/14/2021",
         deviceCount: 2,
-        status: "IN REVIEW",
+        status: "In Review",
       },
       {
-        dateStarted: "2023-06-14T04:00:29Z",
+        dateStarted: "06/14/2023",
         deviceCount: 3,
-        status: "CANCELLED",
+        status: "Cancelled",
       },
       {
-        dateStarted: "2023-07-14T04:00:29Z",
+        dateStarted: "07/14/2023",
         deviceCount: 2,
-        status: "RETURNED",
+        status: "Returned",
       },
       {
-        dateStarted: "2024-07-14T04:00:29Z",
+        dateStarted: "07/14/2024",
         deviceCount: 3,
-        status: "APPROVED",
+        status: "Approved",
       },
       {
-        dateStarted: "2024-01-14T04:00:29Z",
+        dateStarted: "01/14/2024",
         deviceCount: 2,
-        status: "REJECTED",
+        status: "Rejected",
       },
       {
-        dateStarted: "2025-01-14T04:00:29Z",
+        dateStarted: "01/14/2025",
         deviceCount: 3,
-        status: "INCOMPLETE",
+        status: "Incomplete",
       },
     ]);
   });

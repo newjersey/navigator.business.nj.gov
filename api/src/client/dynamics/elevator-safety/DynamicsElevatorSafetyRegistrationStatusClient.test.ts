@@ -11,7 +11,7 @@ jest.mock("winston");
 describe("DynamicsElevatorSafetyRegistrationStatusClient", () => {
   let client: ElevatorSafetyRegistrationStatus;
   let stubAccessTokenClient: jest.Mocked<AccessTokenClient>;
-  let stubHousingAcessTokenClient: jest.Mocked<AccessTokenClient>;
+  let stubHousingAccessTokenClient: jest.Mocked<AccessTokenClient>;
   let stubHousingClient: jest.Mocked<HousingPropertyInterestClient>;
   let stubElevatorRegistrationClient: jest.Mocked<ElevatorSafetyRegistrationClient>;
   let logger: LogWriterType;
@@ -24,7 +24,7 @@ describe("DynamicsElevatorSafetyRegistrationStatusClient", () => {
       getPropertyInterest: jest.fn(),
     };
 
-    stubHousingAcessTokenClient = {
+    stubHousingAccessTokenClient = {
       getAccessToken: jest.fn(),
     };
 
@@ -40,7 +40,7 @@ describe("DynamicsElevatorSafetyRegistrationStatusClient", () => {
       accessTokenClient: stubAccessTokenClient,
       housingPropertyInterestClient: stubHousingClient,
       elevatorRegistrationClient: stubElevatorRegistrationClient,
-      housingAccessTokenClient: stubHousingAcessTokenClient,
+      housingAccessTokenClient: stubHousingAccessTokenClient,
     });
   });
 
@@ -86,12 +86,12 @@ describe("DynamicsElevatorSafetyRegistrationStatusClient", () => {
       {
         dateStarted: "2022-07-14T04:00:29Z",
         deviceCount: 2,
-        status: "IN REVIEW",
+        status: "In Review",
       },
       {
         dateStarted: "2021-06-14T04:00:29Z",
         deviceCount: 3,
-        status: "APPROVED",
+        status: "Approved",
       },
     ]);
 
@@ -101,12 +101,12 @@ describe("DynamicsElevatorSafetyRegistrationStatusClient", () => {
         {
           dateStarted: "2022-07-14T04:00:29Z",
           deviceCount: 2,
-          status: "IN REVIEW",
+          status: "In Review",
         },
         {
           dateStarted: "2021-06-14T04:00:29Z",
           deviceCount: 3,
-          status: "APPROVED",
+          status: "Approved",
         },
       ],
     });
@@ -126,12 +126,12 @@ describe("DynamicsElevatorSafetyRegistrationStatusClient", () => {
       {
         dateStarted: "2022-07-14T04:00:29Z",
         deviceCount: 2,
-        status: "IN REVIEW",
+        status: "In Review",
       },
       {
         dateStarted: "2021-06-14T04:00:29Z",
         deviceCount: 1,
-        status: "IN REVIEW",
+        status: "In Review",
       },
     ]);
 
@@ -141,12 +141,12 @@ describe("DynamicsElevatorSafetyRegistrationStatusClient", () => {
         {
           dateStarted: "2022-07-14T04:00:29Z",
           deviceCount: 2,
-          status: "IN REVIEW",
+          status: "In Review",
         },
         {
           dateStarted: "2021-06-14T04:00:29Z",
           deviceCount: 1,
-          status: "IN REVIEW",
+          status: "In Review",
         },
       ],
     });

@@ -8,6 +8,7 @@ import {
   NameAvailability,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { ElevatorSafetyRegistrationSummary } from "@businessnjgovnavigator/shared/elevatorSafety";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
@@ -28,6 +29,13 @@ export const postUserData = async (userData: UserData): Promise<UserData> => {
 
 export const checkLicenseStatus = (nameAndAddress: LicenseSearchNameAndAddress): Promise<UserData> => {
   return post(`/license-status`, nameAndAddress);
+};
+
+export const checkElevatorRegistrationStatus = (
+  address: string,
+  zipCode?: string
+): Promise<ElevatorSafetyRegistrationSummary> => {
+  return post(`/elevator-safety/registration`, { address, zipCode });
 };
 
 export const postBusinessFormation = (
