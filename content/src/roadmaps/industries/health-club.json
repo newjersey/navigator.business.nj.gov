@@ -41,15 +41,21 @@
       "step": 3,
       "weight": 10,
       "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 15,
+      "licenseTask": "health-club-registration"
     }
   ],
   "name": "Health Club",
   "nonEssentialQuestionsIds": [],
   "displayname": "health-club",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true
+    "canBeHomeBased": false,
+    "canBeReseller": true
   },
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "health spa, strength training and conditioning, athletic club, boxing club, fitness center, gym, swim club, sports club, exercise",
   "id": "health-club",
   "description": "A gym, spa, or similar business providing services or facilities for physical fitness or physical well-being"
