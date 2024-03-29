@@ -248,7 +248,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
   };
 
   const goToMercantileTask = (): void => {
-    cy.get('[data-task="check-local-requirements"]').click({ force: true });
+    cy.get('[data-task="check-local-requirements"]').first().click({ force: true });
   };
 
   const selectLocation = (townDisplayName: string): void => {
@@ -266,11 +266,11 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
   };
 
   const navigateBackToDashboard = (): void => {
-    cy.get(`[data-testid="back-to-dashboard"]`).click();
+    cy.get(`[data-testid="back-to-dashboard"]`).first().click();
   };
 
   const openFormationDateModal = (): void => {
-    cy.get('[data-testid="cta-formation-nudge"]').click();
+    cy.get('[data-testid="cta-formation-nudge"]').first().click();
   };
 
   const selectDate = (monthYear: string): void => {
@@ -278,7 +278,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
   };
 
   const clickModalSaveButton = (): void => {
-    cy.get('[data-testid="modal-button-primary"]').click();
+    cy.get('[data-testid="modal-button-primary"]').first().click();
     cy.wait(1000);
   };
 });

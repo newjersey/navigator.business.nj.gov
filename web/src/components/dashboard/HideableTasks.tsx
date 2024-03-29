@@ -39,7 +39,7 @@ export const HideableTasks = (): ReactElement => {
     <div className="margin-top-7" data-testid="hideableTasks">
       <div className={`${isTabletAndUp ? "flex flex-align-center" : ""} margin-bottom-205`}>
         <Heading level={2} className="margin-bottom-0 text-medium">
-          {Config.dashboardDefaults.upAndRunningTaskHeader}
+          {Config.dashboardRoadmapHeaderDefaults.RoadmapTasksHeaderText}
         </Heading>
         <div className={`mla ${isTabletAndUp ? "" : "margin-top-2"}`}>
           <SecondaryButton size={"small"} isColor={"border-base-light"} onClick={handleToggleClick}>

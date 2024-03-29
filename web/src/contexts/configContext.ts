@@ -11,6 +11,7 @@ import * as CannabisPriorityStatusTab1 from "@businessnjgovnavigator/content/fie
 import * as CannabisPriorityStatusTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab2.json";
 import * as ConfigOriginal from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import * as DashboardCalendar from "@businessnjgovnavigator/content/fieldConfig/dashboard-calendar.json";
+import * as DashboardDefaults from "@businessnjgovnavigator/content/fieldConfig/dashboard-defaults.json";
 import * as DashboardModals from "@businessnjgovnavigator/content/fieldConfig/dashboard-modals.json";
 import * as DashboardSnackbars from "@businessnjgovnavigator/content/fieldConfig/dashboard-snackbars.json";
 import * as DashboardTabs from "@businessnjgovnavigator/content/fieldConfig/dashboard-tabs.json";
@@ -65,6 +66,9 @@ const merged = JSON.parse(
       ExportPdf,
       NavigationDefaults,
       PageMetadata,
+      NavigationDefaults,
+      DashboardDefaults,
+      PageMetadata,
       CalloutDefaults,
       ElevatorRegistration
     )
@@ -101,7 +105,10 @@ export type ConfigType = typeof ConfigOriginal &
   typeof NavigationDefaults &
   typeof PageMetadata &
   typeof CalloutDefaults &
-  typeof ElevatorRegistration;
+  typeof ElevatorRegistration &
+  typeof CalloutDefaults &
+  typeof DashboardDefaults &
+  typeof PageMetadata;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -132,6 +139,8 @@ export const getMergedConfig = (): ConfigType => {
     BusinessStructureTask,
     ExportPdf,
     NavigationDefaults,
+    PageMetadata,
+    DashboardDefaults,
     PageMetadata,
     CalloutDefaults,
     ElevatorRegistration

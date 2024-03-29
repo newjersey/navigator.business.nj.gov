@@ -22,20 +22,20 @@ describe("check license status [feature] [all] [group1]", () => {
     onDashboardPage.getEditProfileLink().should("exist");
 
     // application tab
-    cy.get('[data-task="register-consumer-affairs"]').click();
-    cy.get('button[data-testid="cta-secondary"]').click();
+    cy.get('[data-task="register-consumer-affairs"]').first().click();
+    cy.get('button[data-testid="cta-secondary"]').first().click();
     cy.intercept(`${Cypress.env("API_BASE_URL")}/api/users/*`).as("userAPI");
     // check status tab, error messages
     cy.get('input[data-testid="business-name"]').type(businessName);
     cy.get('input[data-testid="business-name"]').should("have.value", businessName);
 
     cy.get('input[data-testid="zipcode"]').type("12345");
-    cy.get('button[data-testid="check-status-submit"]').click();
+    cy.get('button[data-testid="check-status-submit"]').first().click();
 
     cy.get('[data-testid="error-alert-FIELDS_REQUIRED"]').should("exist");
 
     cy.get('input[data-testid="address-1"]').type("123 Main Street");
-    cy.get('button[data-testid="check-status-submit"]').click();
+    cy.get('button[data-testid="check-status-submit"]').first().click();
 
     cy.get('[data-testid="error-alert-NOT_FOUND"]').should("exist");
     // eslint-disable-next-line testing-library/await-async-utils
@@ -50,7 +50,7 @@ describe("check license status [feature] [all] [group1]", () => {
     // enter real address
     cy.get('input[data-testid="address-1"]').clear();
     cy.get('input[data-testid="address-1"]').type("111 Business St");
-    cy.get('button[data-testid="check-status-submit"]').click();
+    cy.get('button[data-testid="check-status-submit"]').first().click();
 
     // receipt screen, pending
     cy.get('[data-testid="permit-PENDING"]').should("exist");
@@ -63,10 +63,10 @@ describe("check license status [feature] [all] [group1]", () => {
     cy.get('[data-testid="permit-PENDING"]').should("exist");
 
     // different address
-    cy.get('button[data-testid="edit-button"]').click();
+    cy.get('button[data-testid="edit-button"]').first().click();
     cy.get('input[data-testid="address-1"]').clear();
     cy.get('input[data-testid="address-1"]').type("222 License St");
-    cy.get('button[data-testid="check-status-submit"]').click();
+    cy.get('button[data-testid="check-status-submit"]').first().click();
 
     // receipt screen, active
     cy.get('[data-testid="permit-ACTIVE"]').should("exist");

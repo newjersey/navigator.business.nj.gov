@@ -1,5 +1,4 @@
 import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
-import { CircularIndicator } from "@/components/CircularIndicator";
 import { BusinessName } from "@/components/data-fields/BusinessName";
 import { BusinessStructure } from "@/components/data-fields/BusinessStructure";
 import { DateOfFormation } from "@/components/data-fields/DateOfFormation";
@@ -32,6 +31,7 @@ import { ActionBarLayout } from "@/components/njwds-layout/ActionBarLayout";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { SidebarPageLayout } from "@/components/njwds-layout/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
+import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
@@ -782,9 +782,7 @@ const ProfilePage = (props: Props): ReactElement => {
                 </SingleColumnContainer>
                 <div className="margin-top-6 desktop:margin-top-0">
                   {business === undefined ? (
-                    <div className="padding-top-0 desktop:padding-top-6 padding-bottom-15">
-                      <CircularIndicator />
-                    </div>
+                    <PageCircularIndicator />
                   ) : (
                     <SidebarPageLayout
                       divider={false}
