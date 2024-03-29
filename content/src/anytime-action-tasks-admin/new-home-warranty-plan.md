@@ -79,5 +79,5 @@ Four approved copies of the `Certificate of Participation|certificate-participat
 :::greenBox 
  **What if I don't enroll?**
 
-If you don’t enroll in a State or approved private warranty plan, you will not be able to get a Certificate of Occupancy or a temporary Certificate of Occupancy. The houses you build cannot be legally occupied.
+If you don’t enroll the new homes in a State or approved private warranty plan, you will not be able to get a Certificate of Occupancy or a temporary Certificate of Occupancy. The homes you build cannot be legally occupied.
 :::
