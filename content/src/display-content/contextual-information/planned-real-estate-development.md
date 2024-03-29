@@ -1,7 +1,7 @@
 ---
 notesMd: "[Muni planning
   doc](https://docs.google.com/document/d/1pZBqY3yS9y8Y3MMSHqwvTFtdlYvuxhWKK70f\
-  UqsXRSY/edit)"
+  UqsXRSY/edit) "
 header: Planned Real Estate Development (PRED)
 slug: planned-real-estate-development
 displayname: planned-real-estate-development
