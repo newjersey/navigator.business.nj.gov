@@ -5,6 +5,11 @@ notesMd: >-
 
 
   Note: no industry for this yet; added a placeholder
+
+
+
+
+  a
 id: hotel-registration
 filename: hotel-registration
 displayname: hotel-registration
@@ -44,18 +49,16 @@ divisionPhone: (609) 633-6216
 * Name and address of your fuel oil supplier and the grade of fuel oil used, if your building(s) is heated by fuel oil
 * Applicable fees paid
 
-**If your business is a `Corporation, Limited Liability Company (LLC), Limited Partnership (LP), or Limited Liability Partnership (LLP)|business-structure-learn-more`, you also need the:**
+**If your business is a `Corporation, Limited Liability Company (LLC), Limited Partnership (LP), or Limited Liability Partnership (LLP)|business-structure-learn-more` , you also need the:**
 
-* Name and address of your `registered agent|registered-agent` 
+* Name and address of your `registered agent|registered-agent` 
 * Name and address of each officer or partner
-* `Certificate of Formation or Authority|certificate-formation`
+*  `Certificate of Formation or Authority|certificate-formation` 
 
 > **Once registered, you will have:**
 >
 > A Certificate of Registration with a 10-digit registration number, which you need to recertify your registration every year.
-
+>
 > **What if I don't register?**
 >
-> If you don’t register your hotel, motel, or guesthouse, you may be subject to fines. Also, if the property is a new construction, you will not be able to obtain a Uniform Construction Code `Certificate of Occupancy|certificate-occupancy`.
-
-
+> If you don’t register your hotel, motel, or guesthouse, you may be subject to fines. Also, if the property is a new construction, you will not be able to obtain a Uniform Construction Code `Certificate of Occupancy|certificate-occupancy` .
