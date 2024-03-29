@@ -5,7 +5,7 @@ type Status = "PASS" | "FAIL" | "ERROR";
 type StatusResult = Record<string, Status>;
 
 const healthCheckEndPoints: Record<string, string> = {
-  self: "self",
+  self: "self2",
   elevator: "dynamics/elevator",
   fireSafety: "dynamics/fire-safety",
   housing: "dynamics/housing",
