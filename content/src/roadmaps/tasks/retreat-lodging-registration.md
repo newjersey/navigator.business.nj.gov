@@ -2,14 +2,15 @@
 notesMd: "[Muni planning
   doc](https://docs.google.com/document/d/1wqFrL2aR2ZI9MvCsp4orFJE2A6sn_oa5YOFQ\
   oW2uKYE/edit?usp=sharing)"
-summaryDescriptionMd: If your nonprofit organization owns a new `retreat center
-  or lodging facility|retreat-lodging-facility`, you must register your property
-  with the State. If you are the new owner of an existing property, update the
-  registration to transfer the ownership to your organization.
+summaryDescriptionMd: If your nonprofit organization owns a new `retreat or
+  conference center|retreat-lodging-facility` with overnight rooms, you must
+  register the property with the State. If you are the new owner of an existing
+  property, update the registration to transfer the ownership to your
+  organization.
 urlSlug: retreat-lodging-registration
 filename: retreat-lodging-registration
 displayname: retreat-lodging-registration
-name: Register Your Retreat Lodging Facility
+name: Register Your Overnight Retreat or Conference Center
 id: retreat-lodging-registration
 callToActionLink: https://njdcaportal.dynamics365portals.us/ultra-bhi-home/
 callToActionText: Register My Retreat Lodging Facility
