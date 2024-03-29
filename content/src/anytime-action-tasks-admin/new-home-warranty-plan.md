@@ -3,20 +3,25 @@ notesMd: "[Muni planning
   doc](https://docs.google.com/document/d/1pZBqY3yS9y8Y3MMSHqwvTFtdlYvuxhWKK70f\
   UqsXRSY/edit?usp=sharing)"
 filename: new-home-warranty-plan
-name: Enroll New Houses You Build in a Warranty Plan
+name: Enroll New Homes You Build in a Warranty Plan
 industryIds: []
 sectorIds: []
 icon: file-purple.svg
 urlSlug: new-home-warranty-plan
 summaryDescriptionMd: " "
-callToActionText: Enroll in the State Warranty Plan
+callToActionText: Enroll Your Home in the State Warranty Plan
 callToActionLink: https://www.nj.gov/dca/divisions/codes/forms/pdf_nhw/COP_App.pdf
 ---
-If you are a registered new home builder who builds or sells new homes in New Jersey, or both, you must enroll each home in a `warranty plan|new-home-warranty-plan`. To enroll in and provide the warranty, you must be the person(s) or entity that owns the new home and sells it to the initial purchasers. New homes include single-family houses, duplexes, townhouses, cooperatives, condominiums, factory-built, and modular residences. The warranty plan can be the State warranty plan or an [approved private warranty plan](https://www.nj.gov/dca/divisions/codes/offices/nhw_war_plans.html).
+If you build and/or sell new homes in New Jersey, such as single-family houses, duplexes, or condominiums, you must enroll each home in a `warranty plan|new-home-warranty-plan`. The warranty plan can be the State warranty plan or an [approved private warranty plan](https://www.nj.gov/dca/divisions/codes/offices/nhw_war_plans.html).
 
 To enroll a new home in a State warranty plan, complete the application below. To enroll in an approved private warranty plan, contact the plan representative.
 
 - - -
+
+### Eligibility Criteria
+
+* Must be a registered new home builder
+* Must be the title holder of the new home who will sell it to the initial buyers
 
 ### State Warranty Plan Application Requirements
 
@@ -66,7 +71,7 @@ Print all five copies of the completed application on U.S. legal size paper (8.5
 Four approved copies of the `Certificate of Participation|certificate-participation` for each home you enrolled in the State warranty plan:
 
 * A municipal copy for you to give to the local construction official when you apply for a `Certificate of Occupancy|certificate-occupancy` 
-* An owner copy for you to give to the homebuyer at settlement or when they start living there
+* An owner copy for you to give to the home buyer at settlement or when they start living there
 * A mortgage copy for the mortgage company, if applicable
 * A builder copy for your records
   :::
