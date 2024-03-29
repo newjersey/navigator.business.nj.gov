@@ -33,7 +33,7 @@ const healthCheck = async (type: string, logger: LogWriterType): Promise<Status>
       }
     })
     .catch((error: AxiosError) => {
-      logger.LogError(`Health Check Status - Endpoint: ${type}: ERROR`, error);
+      logger.LogError(`Health Check Status - Endpoint: ${type}: FAIL ERROR`, error);
       process.exitCode = -2;
       return "ERROR";
     });
