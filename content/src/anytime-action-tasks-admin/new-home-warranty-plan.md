@@ -15,6 +15,7 @@ callToActionLink: https://www.nj.gov/dca/divisions/codes/forms/pdf_nhw/COP_App.p
 If you build and/or sell new homes in New Jersey, such as single-family houses, duplexes, or condominiums, you must enroll each home in a `warranty plan|new-home-warranty-plan`. The warranty plan can be the State warranty plan or an [approved private warranty plan](https://www.nj.gov/dca/divisions/codes/offices/nhw_war_plans.html).
 
 To enroll a new home in a State warranty plan, complete the application below. 
+
 To enroll in an approved private warranty plan, contact the plan representative.
 
 - - -
