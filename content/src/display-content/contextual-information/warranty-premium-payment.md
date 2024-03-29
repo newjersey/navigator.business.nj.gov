@@ -1,7 +1,7 @@
 ---
 notesMd: "[Muni planning
   doc](https://docs.google.com/document/d/1pZBqY3yS9y8Y3MMSHqwvTFtdlYvuxhWKK70f\
-  UqsXRSY/edit?usp=sharing)a"
+  UqsXRSY/edit?usp=sharing)"
 header: Warranty Premium Payment
 slug: warranty-premium-payment
 displayname: warranty-premium-payment
