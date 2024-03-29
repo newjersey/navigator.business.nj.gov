@@ -4,7 +4,12 @@ import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { generateUserData } from "@businessnjgovnavigator/shared/test";
+import {
+  generateBusiness,
+  generateProfileData,
+  generateUserData,
+  generateUserDataForBusiness,
+} from "@businessnjgovnavigator/shared/test";
 import { ReactElement, useState } from "react";
 
 const NavBarPreview = (props: PreviewProps): ReactElement => {
@@ -13,6 +18,45 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [userData, setUserData] = useState(generateUserData({}));
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [userDataOwningNoName, setUserDataOwningNoName] = useState(
+    generateUserDataForBusiness(
+      generateBusiness({
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          businessName: "",
+          tradeName: "",
+        }),
+      })
+    )
+  );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [userDataRemoteSellerWorkerNoName, setUserDataNexusNoName] = useState(
+    generateUserDataForBusiness(
+      generateBusiness({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          businessName: "",
+          tradeName: "",
+          foreignBusinessTypeIds: ["employeesInNJ"],
+        }),
+      })
+    )
+  );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [userDataDBANoName, setUserDataDBAsNoName] = useState(
+    generateUserDataForBusiness(
+      generateBusiness({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          businessName: "",
+          tradeName: "",
+          needsNexusDbaName: true,
+          nexusDbaName: "",
+        }),
+      })
+    )
+  );
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
@@ -33,7 +77,7 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
           isLanding={undefined}
           currentlyOnboarding={true}
           isAuthenticated={false}
-          CMS_PREVIEW_ONLY_SHOW_MENU={true}
+          CMS_PREVIEW_ONLY_SHOW_MENU={false}
         />
         <hr className="padding-y-10" />
 
@@ -47,13 +91,46 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
         />
         <hr className="padding-y-10" />
 
-        <div>Authed</div>
+        <div>Authed with business name</div>
         <NavBarDesktop
           isLanding={undefined}
           currentlyOnboarding={undefined}
           isAuthenticated={true}
           CMS_PREVIEW_ONLY_SHOW_MENU={true}
           userData={userData}
+        />
+        <div className="padding-y-10" />
+        <div className="padding-y-10" />
+
+        <div>Authed with nexus no business name</div>
+        <NavBarDesktop
+          isLanding={undefined}
+          currentlyOnboarding={undefined}
+          isAuthenticated={true}
+          CMS_PREVIEW_ONLY_SHOW_MENU={true}
+          userData={userDataRemoteSellerWorkerNoName}
+        />
+        <div className="padding-y-10" />
+        <div className="padding-y-10" />
+
+        <div>Authed with owning no business name</div>
+        <NavBarDesktop
+          isLanding={undefined}
+          currentlyOnboarding={undefined}
+          isAuthenticated={true}
+          CMS_PREVIEW_ONLY_SHOW_MENU={true}
+          userData={userDataOwningNoName}
+        />
+        <div className="padding-y-10" />
+        <div className="padding-y-10" />
+
+        <div>Authed with DBA no business name</div>
+        <NavBarDesktop
+          isLanding={undefined}
+          currentlyOnboarding={undefined}
+          isAuthenticated={true}
+          CMS_PREVIEW_ONLY_SHOW_MENU={true}
+          userData={userDataDBANoName}
         />
         <div className="padding-y-10" />
         <div className="padding-y-10" />
@@ -94,12 +171,45 @@ const NavBarPreview = (props: PreviewProps): ReactElement => {
         </div>
 
         <div className="width-mobile-lg">
-          <div>Authed</div>
+          <div>Authed with business name</div>
           <NavBarMobile
             scrolled={false}
             currentlyOnboarding={false}
             isAuthenticated={true}
             userData={userData}
+            CMS_PREVIEW_ONLY_SHOW_MENU={true}
+          />
+          <div className="padding-y-10" />
+        </div>
+        <div className="width-mobile-lg">
+          <div>Authed with nexus no business name</div>
+          <NavBarMobile
+            scrolled={false}
+            currentlyOnboarding={false}
+            isAuthenticated={true}
+            userData={userDataRemoteSellerWorkerNoName}
+            CMS_PREVIEW_ONLY_SHOW_MENU={true}
+          />
+          <div className="padding-y-10" />
+        </div>
+        <div className="width-mobile-lg">
+          <div>Authed with business name</div>
+          <NavBarMobile
+            scrolled={false}
+            currentlyOnboarding={false}
+            isAuthenticated={true}
+            userData={userData}
+            CMS_PREVIEW_ONLY_SHOW_MENU={true}
+          />
+          <div className="padding-y-10" />
+        </div>
+        <div className="width-mobile-lg">
+          <div>Authed with owning no business name</div>
+          <NavBarMobile
+            scrolled={false}
+            currentlyOnboarding={false}
+            isAuthenticated={true}
+            userData={userDataOwningNoName}
             CMS_PREVIEW_ONLY_SHOW_MENU={true}
           />
           <div className="padding-y-10" />

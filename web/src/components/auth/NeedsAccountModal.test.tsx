@@ -38,12 +38,12 @@ describe("<NeedsAccount Modal />", () => {
 
   it("shows Needs Account modal when user is in guest mode", () => {
     setupHookWithAuth(IsAuthenticated.FALSE);
-    expect(screen.getByText(Config.navigationDefaults.needsAccountModalBody)).toBeInTheDocument();
+    expect(screen.getByText(Config.selfRegistration.needsAccountModalBody)).toBeInTheDocument();
   });
 
   it("does not show Needs Account modal when user is in guest mode and it's disabled", () => {
     setupHookWithAuth(IsAuthenticated.FALSE, false);
-    expect(screen.queryByText(Config.navigationDefaults.needsAccountModalBody)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.selfRegistration.needsAccountModalBody)).not.toBeInTheDocument();
   });
 
   it("returns user to previous page when modal is closed", () => {
@@ -54,24 +54,24 @@ describe("<NeedsAccount Modal />", () => {
 
   it("does not show Needs Account snackbar when user is authenticated", () => {
     setupHookWithAuth(IsAuthenticated.TRUE);
-    expect(screen.queryByText(Config.navigationDefaults.needsAccountModalBody)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.selfRegistration.needsAccountModalBody)).not.toBeInTheDocument();
   });
 
   it("routes to account setup when link is clicked", async () => {
     setupHookWithAuth(IsAuthenticated.FALSE);
-    fireEvent.click(screen.getByText(Config.navigationDefaults.needsAccountModalButtonText));
+    fireEvent.click(screen.getByText(Config.selfRegistration.needsAccountModalButtonText));
     expect(mockPush).toHaveBeenCalledWith(ROUTES.accountSetup);
   });
 
   it("closes modal when link to account setup is clicked", () => {
     setupHookWithAuth(IsAuthenticated.FALSE);
-    fireEvent.click(screen.getByText(Config.navigationDefaults.needsAccountModalButtonText));
+    fireEvent.click(screen.getByText(Config.selfRegistration.needsAccountModalButtonText));
     expect(setShowNeedsAccountModal).toHaveBeenCalledWith(false);
   });
 
   it("goes to myNJ when Log-in link is clicked", () => {
     setupHookWithAuth(IsAuthenticated.FALSE);
-    fireEvent.click(screen.getByText(markdownToText(Config.navigationDefaults.needsAccountModalSubText)));
+    fireEvent.click(screen.getByText(markdownToText(Config.selfRegistration.needsAccountModalSubText)));
     expect(mockSession.triggerSignIn).toHaveBeenCalled();
   });
 });
