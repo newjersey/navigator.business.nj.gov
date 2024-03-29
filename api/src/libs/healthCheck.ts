@@ -5,7 +5,7 @@ type Status = "PASS" | "FAIL" | "ERROR";
 type StatusResult = Record<string, Status>;
 
 const healthCheckEndPoints: Record<string, string> = {
-  self: "self",
+  self: "self2",
   elevator: "dynamics/elevator",
   fireSafety: "dynamics/fire-safety",
   housing: "dynamics/housing",
@@ -28,11 +28,13 @@ const healthCheck = async (type: string, logger: LogWriterType): Promise<Status>
         return "PASS";
       } else {
         logger.LogError(`Health Check Status - Endpoint: ${type}: FAIL`, response.data);
+        process.exitCode = -1;
         return "FAIL";
       }
     })
     .catch((error: AxiosError) => {
       logger.LogError(`Health Check Status - Endpoint: ${type}: ERROR`, error);
+      process.exitCode = -2;
       return "ERROR";
     });
 };
