@@ -6,13 +6,13 @@ id: health-club-registration
 filename: health-club-registration
 displayname: health-club-registration
 urlSlug: health-club-registration
-name: Register as a Health Club
+name: Register Your Business as a Health Club, Spa, Fitness Club, or Gym
 webflowName: Health Club
 summaryDescriptionMd: You need to register as a health club in New Jersey if you
   have a health spa, fitness club, or gym.
 industryId:
   - generic
-callToActionText: Register as a Health Club
+callToActionText: Register My Business as a Health Club
 callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Regulated Business Section
