@@ -8,10 +8,11 @@ displayname: new-home-builder-license
 urlSlug: new-home-builder-license
 name: Register as a New Home Builder
 webflowName: "Construction: New Home Builder License"
-summaryDescriptionMd: >
-  If you plan to build new houses in New Jersey, you must register as a new home
-  builder with the State first. You must also renew your builder registration
-  every two years, starting from the date your registration was approved.
+summaryDescriptionMd: You must register as a new home builder with the State if
+  you will build and sell new homes, such as single-family houses, duplexes, or
+  condominiums. To register, you must be the person(s) or entity that owns the
+  new home and will sell it to initial purchasers. You must also renew your new
+  home builder registration every two years.
 industryId:
   - commercial-construction
 callToActionText: Register as a New Home Builder
@@ -24,19 +25,20 @@ webflowType: business-license
 - - -
 
 :::infoAlert 
- The `builder designee|builder-designee` must complete Schedule A of the application. All officers or principals with at least 10% interest in the business must complete Schedule B and C of the application.
+ Your `builder designee|builder-designee` must complete Schedule A of the application. All officers or principals with at least 10% interest in the business must complete Schedule B and C of the application.
 :::
 
 ### Application Requirements
 
-* Registered alternate name or trade name, along with a copy of the `Alternate or Trade Name Certificate|alternate-trade-name-certificate` , if applicable
-*  `Registered agent|registered-agent` information, if applicable
+* Business name
 * Business formation documents, such as a `Certificate of Formation or Certificate of Authority|certificate-formation` 
-* `Business Entity Status Report|business-entity-status-report` , `Annual Report|tax-annual-report` , or `Long Standing Certificate|certificate-of-good-standing` , if applicable
 *  `Employer Identification Number (EIN)|ein` 
+* Registered alternate name or trade name, along with a copy of the `Alternate or Trade Name Certificate|alternate-trade-name-certificate`, if applicable
+*  `Registered agent|registered-agent` information, if applicable
+* `Business Entity Status Report|business-entity-status-report`, `Annual Report|tax-annual-report`, or `Long Standing Certificate|certificate-of-good-standing`, if applicable
 * Copy of judgment and discharge documents, if there were court judgments against the business entity
 * Documentation of bankruptcy, business reorganization, financial reorganization, or liquidation, if applicable
-*  `Private warranty plan name|new-home-warranty-plan` , member enrollment number, and current letter of acceptance, if applicable
+*  `Private warranty plan name|new-home-warranty-plan`, member enrollment number, and current letter of acceptance, if applicable
 * Applicable fees paid
 
 **Builder designee and officer/principal information (Schedule A, B, and C of the application)**:
@@ -50,8 +52,9 @@ webflowType: business-license
 
 > **Once approved, you will have:**
 >
-> * A builder registration card and number, which must be shown to your local Construction Official when you apply for a construction permit to build a new house
+> A builder registration card and number, which must be shown to your local Construction Official when you apply for a construction permit to build a new house
 >
+
 > **What if I don't register?**
 >
-> If you don't register as a new home builder with the State, you will not be able to get a construction permit to build new homes. Also, you may be subject to fines.
+> If you don't register as a new home builder with the State, you will not be able to get a construction permit to build new homes. Also, you will not be able to apply for and get a required new home warranty for those homes. You may also be subject to fines. 
