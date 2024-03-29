@@ -31,7 +31,7 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     onDashboardPage.getEditProfileLink().should("exist");
 
     cy.get('[data-testid="self-reg-snackbar"]').should("be.visible");
-    cy.get('[aria-label="close"]').click({ force: true });
+    cy.get('[aria-label="close"]').first().click({ force: true });
     cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
 
     completeBusinessStructureTask({ legalStructureId });
@@ -46,23 +46,23 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
 
     // step 1
     cy.get(`[id="plan-content"]`).should("be.visible");
-    cy.get(`[id="plan-header"]`).click({ force: true });
+    cy.get(`[id="plan-header"]`).first().click({ force: true });
     cy.get(`[id="plan-content"]`).should("not.be.visible");
-    cy.get(`[id="plan-header"]`).click({ force: true });
+    cy.get(`[id="plan-header"]`).first().click({ force: true });
     cy.get(`[data-step="1"]`).should("exist");
     cy.get(`[data-task="business-plan"]`).should("exist");
     cy.get(`[data-task="get-insurance-home-contractor"]`).should("exist");
 
     // step 3
     cy.get(`[id="start-content"]`).should("be.visible");
-    cy.get(`[id="start-header"]`).click({ force: true });
+    cy.get(`[id="start-header"]`).first().click({ force: true });
     cy.get(`[id="start-content"]`).should("not.be.visible");
-    cy.get(`[id="start-header"]`).click({ force: true });
+    cy.get(`[id="start-header"]`).first().click({ force: true });
     cy.get(`[data-step="2"]`).should("exist");
     cy.get(`[data-step="3"]`).should("exist");
 
     // go to regular task
-    cy.get('[data-task="check-local-requirements"]').click({ force: true });
+    cy.get('[data-task="check-local-requirements"]').first().click({ force: true });
     cy.get(`[data-industry='${industry.id}']`).should("not.exist");
     cy.get('[data-task-id="check-local-requirements"]').should("exist");
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
@@ -70,18 +70,18 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
 
     // go back to dashboard
     cy.log("go back to dashboard");
-    cy.get(`[data-testid="back-to-dashboard"]`).click({ force: true });
+    cy.get(`[data-testid="back-to-dashboard"]`).first().click({ force: true });
     cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
 
     // go to auth blocked task
-    cy.get('[data-task="register-consumer-affairs"]').click({ force: true });
+    cy.get('[data-task="register-consumer-affairs"]').first().click({ force: true });
     cy.get('[data-task-id="register-consumer-affairs"]').should("exist");
     cy.get('[data-testid="self-reg-modal"]').should("be.visible");
-    cy.get('[aria-label="close"]').click({ force: true });
+    cy.get('[aria-label="close"]').first().click({ force: true });
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
 
     // go back to dashboard
-    cy.get(`[data-testid="back-to-dashboard"]`).click({ force: true });
+    cy.get(`[data-testid="back-to-dashboard"]`).first().click({ force: true });
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
     cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
 
@@ -92,12 +92,12 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     cy.get('input[aria-label="Business name"]').type("Applebee's");
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
 
-    cy.get(`[data-testid="numbers"]`).click({ force: true });
+    cy.get(`[data-testid="numbers"]`).first().click({ force: true });
     cy.get('input[aria-label="Employer id"]').clear();
     cy.get('input[aria-label="Employer id"]').type("123456789");
     cy.get('[data-testid="self-reg-modal"]').should("be.visible");
 
-    cy.get('[aria-label="close"]').click({ force: true });
+    cy.get('[aria-label="close"]').first().click({ force: true });
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
   });
 });

@@ -34,7 +34,7 @@ export const randomElementFromArray = (array: any[]) => {
 };
 
 export const completeBusinessStructureTask = ({ legalStructureId }: { legalStructureId: string }): void => {
-  cy.get('[data-task="business-structure"]').click();
+  cy.get('[data-task="business-structure"]').first().click();
   cy.get('[data-testid="business-structure-task"]');
 
   onBusinessStructurePage.selectLegalStructure(legalStructureId as string);
@@ -58,5 +58,5 @@ export const randomTradeNameLegalStructure = (): string => {
 };
 
 export const clickDeferredSaveButton = () => {
-  return cy.get(`button[data-testid="deferred-question-save"]`).click();
+  return cy.get(`button[data-testid="deferred-question-save"]`).first().click();
 };

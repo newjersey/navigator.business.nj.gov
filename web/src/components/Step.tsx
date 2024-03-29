@@ -31,7 +31,7 @@ export const Step = (props: Props): ReactElement => {
           <div className="margin-left-6 margin-top-neg-2px tablet:margin-left-205 font-body-md margin-bottom-105">
             <span
               role="heading"
-              aria-level={3}
+              aria-level={4}
               className="text-bold margin-right-1 tablet:margin-left-4"
               data-step={props.step.stepNumber}
             >
