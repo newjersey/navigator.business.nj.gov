@@ -1,5 +1,5 @@
 ---
-notesMd: asdf
+notesMd: ""
 header: Combined Group
 slug: combined-group
 displayname: combined-group
