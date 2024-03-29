@@ -36,8 +36,8 @@ agencyAdditionalContext: Bureau of Housing Inspection
 * Number of rooms or units in each building
 * Number of stories in each building
 * Name, address, and phone number of your `authorized agent|authorized-agent` 
-* Name and address of your `mortgagee|mortgagee` , if applicable
-* Name and address of your `net lessee|net-lessee` , if applicable
+* Name and address of your `mortgagee|mortgagee`, if applicable
+* Name and address of your `net lessee|net-lessee`, if applicable
 * Name and address of your maintenance service provider
 * Name, address, and phone number of your `emergency repair expenditure authorizer|emergency-repair-authorizer` 
 * Name and address of your fuel oil supplier and the grade of fuel oil used, if your building(s) is heated by fuel oil
@@ -50,4 +50,4 @@ agencyAdditionalContext: Bureau of Housing Inspection
 
 > **What if I don't register?**
 >
-> If you don’t register your retreat center or lodging facility, you may be subject to fines. Also, if the property is a new construction, you will not be able to obtain a Uniform Construction Code `Certificate of Occupancy|certificate-occupancy` .
+> If you don’t register your retreat center or lodging facility, you may be subject to fines. Also, if the property is a new construction, you will not be able to obtain a Uniform Construction Code `Certificate of Occupancy|certificate-occupancy`.
