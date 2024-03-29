@@ -8,11 +8,17 @@ displayname: new-home-builder-license
 urlSlug: new-home-builder-license
 name: Register as a New Home Builder
 webflowName: "Construction: New Home Builder License"
-summaryDescriptionMd: You must register as a new home builder with the State if
-  you will build and/or sell new homes, such as single-family houses, duplexes,
-  or condominiums. If you plan to sell the new home to initial buyers, you or
-  your business must be the title holder of the home. You must also renew your
-  new home builder registration every two years.
+summaryDescriptionMd: >-
+  You must register as a new home builder with the State if you will build
+  and/or sell new homes, such as single-family houses, duplexes, or
+  condominiums. If you plan to sell the new home to initial buyers, you or your
+  business must be the title holder of the home. You must also renew your new
+  home builder registration every two years.
+
+
+  :::infoAlert 
+   Your `builder designee|builder-designee` must complete Schedule A of the application. All officers or principals with at least 10% interest in the business must complete Schedule B and C of the application.
+  :::
 industryId:
   - commercial-construction
 callToActionText: Register as a New Home Builder
@@ -22,11 +28,8 @@ agencyAdditionalContext: Bureau of Homeowner Protection
 divisionPhone: (609) 984-7905
 webflowType: business-license
 ---
-- - -
 
-:::infoAlert 
- Your `builder designee|builder-designee` must complete Schedule A of the application. All officers or principals with at least 10% interest in the business must complete Schedule B and C of the application.
-:::
+---
 
 ### Application Requirements
 
