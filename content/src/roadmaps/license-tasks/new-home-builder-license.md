@@ -33,7 +33,7 @@ webflowType: business-license
 * Business name
 * Business formation documents, such as a `Certificate of Formation or Certificate of Authority|certificate-formation` 
 *  `Employer Identification Number (EIN)|ein` 
-* Registered alternate name or trade name, along with a copy of the `Alternate or Trade Name Certificate|alternate-trade-name-certificate`, if applicable
+* Registered alternate name or trade name, along with a copy of the `Alternate or Trade Name Certificate|alt-name-trade-name`, if applicable
 *  `Registered agent|registered-agent` information, if applicable
 * `Business Entity Status Report|business-entity-status-report`, `Annual Report|tax-annual-report`, or `Long Standing Certificate|certificate-of-good-standing`, if applicable
 * Copy of judgment and discharge documents, if there were court judgments against the business entity
@@ -54,7 +54,6 @@ webflowType: business-license
 >
 > A builder registration card and number, which must be shown to your local Construction Official when you apply for a construction permit to build a new house
 >
-
 > **What if I don't register?**
 >
-> If you don't register as a new home builder with the State, you will not be able to get a construction permit to build new homes. Also, you will not be able to apply for and get a required new home warranty for those homes. You may also be subject to fines. 
+> If you don't register as a new home builder with the State, you will not be able to get a construction permit to build new homes. Also, you will not be able to apply for and get a required new home warranty for those homes. You may also be subject to fines.
