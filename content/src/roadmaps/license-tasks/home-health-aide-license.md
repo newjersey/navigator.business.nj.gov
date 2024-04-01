@@ -1,4 +1,5 @@
 ---
+id: home-health-aide-license
 filename: home-health-aide-license
 displayname: health-care-services-firm-license
 urlSlug: health-care-services-firm-license
@@ -6,8 +7,8 @@ name: Apply for Your Health Care Service Firm Registration, if Applicable
 webflowName: "Home Health Aide: Health Care Services Firm License"
 summaryDescriptionMd: >
   You need to register as a health care service firm if you are employing
-  individuals to provide health care, personal care, or companion services. This
-  applies to both in-home and facility care.
+  individuals to provide health care, personal care, or companion services in
+  the personal residence of a person with a disability or is age 60 or older.
 formName: ""
 industryId:
   - homemaker-home-health-aide
@@ -17,7 +18,6 @@ licenseCertificationClassification: ""
 agencyId: nj-consumer-affairs
 agencyAdditionalContext: Employment and Personnel Services
 divisionPhone: (973) 504-6370
-id: home-health-aide-license
 webflowId: 641370d2139a73fe804e07b5
 ---
 ## Application Requirements
@@ -36,7 +36,7 @@ webflowId: 641370d2139a73fe804e07b5
 
 > **What if I don't get this license?**
 >
-> You may be subject to fines.
+> You may be subject to legal enforcement action, including penalties and fines.
 
 > **Once completed, you will have**:
 >
