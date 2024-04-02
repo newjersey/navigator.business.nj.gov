@@ -4,6 +4,7 @@ import {
   ElevatorSafetyRegistrationClient,
 } from "@client/dynamics/elevator-safety/types";
 import { LogWriterType } from "@libs/logWriter";
+import { parseDate } from "@shared/dateHelpers";
 import axios, { AxiosError } from "axios";
 
 export const DynamicsElevatorSafetyRegistrationClient = (
@@ -70,7 +71,7 @@ function processDynamicsElevatorSafetyRegistrationResponse(
 ): ElevatorRegistration {
   return {
     deviceCount: deviceCount,
-    dateStarted: response.ultra_requestdate,
+    dateStarted: parseDate(response.createdon).format("MM/DD/YYYY").toString(),
     status: getStatusFromStatusCode(response.statuscode),
   };
 }
@@ -78,17 +79,17 @@ function processDynamicsElevatorSafetyRegistrationResponse(
 function getStatusFromStatusCode(statusCode: string): ElevatorRegistrationStatus {
   switch (String(statusCode)) {
     case "1":
-      return "IN REVIEW";
+      return "In Review";
     case "2":
-      return "CANCELLED";
+      return "Cancelled";
     case "240000000":
-      return "RETURNED";
+      return "Returned";
     case "240000001":
-      return "APPROVED";
+      return "Approved";
     case "240000002":
-      return "REJECTED";
+      return "Rejected";
     case "240000003":
-      return "INCOMPLETE";
+      return "Incomplete";
     default:
       return "UNRECOGNIZED STATUS";
   }
@@ -97,7 +98,7 @@ function getStatusFromStatusCode(statusCode: string): ElevatorRegistrationStatus
 type DynamicsElevatorSafetyRegistrationResponse = {
   ultra_buildingaddressline1: string;
   _ultra_propertyinterest_value: string;
-  ultra_requestdate: string;
+  createdon: string;
   ultra_elevatorregistrationrequestid: string;
   statuscode: string;
 };
