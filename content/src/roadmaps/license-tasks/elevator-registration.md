@@ -2,7 +2,7 @@
 id: "elevator-registration"
 webflowId: "65d91b5ef6f946f6f6e0fbb2"
 urlSlug: "elevator-registration"
-name: "Register Your Elevator Device"
+name: "Register Your Elevators, Lifts, and Related Devices"
 webflowName: "Elevator Registration"
 filename: "elevator-registration"
 callToActionLink: "https://njdcaportal.dynamics365portals.us/"

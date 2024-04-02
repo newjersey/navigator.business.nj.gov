@@ -245,8 +245,8 @@
           "header": "Elevator Owning Business",
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
-          "description": "Do you own or plan to own a space with a new or existing `elevator-device|elevator-device`, such as an elevator, escalator, or lift?",
-          "altDescription": "Do you plan to own a space now or in the future with a new or existing `elevator-device|elevator-device`, such as an elevator, escalator, or lift? "
+          "description": "Do you own or plan to own a space with a new or existing `elevator device|elevator-device`, such as an elevator, escalator, or lift?",
+          "altDescription": "Do you plan to own a space now or in the future with a new or existing `elevator device|elevator-device`, such as an elevator, escalator, or lift? "
         }
       },
       "legalStructureId": {
