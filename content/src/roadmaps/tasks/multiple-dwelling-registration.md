@@ -10,7 +10,7 @@ summaryDescriptionMd: If you own a new `multiple dwelling|multiple-dwelling`,
 urlSlug: multiple-dwelling-registration
 filename: multiple-dwelling-registration
 displayname: multiple-dwelling-registration
-name: Register Your Multiple Dwelling, such as an Apartment or Condominium Complex
+name: Register Your Multiple Dwelling, Such as an Apartment or Condominium Complex
 id: multiple-dwelling-registration
 callToActionLink: https://njdcaportal.dynamics365portals.us/ultra-bhi-home/
 callToActionText: Register My Multiple Dwelling
