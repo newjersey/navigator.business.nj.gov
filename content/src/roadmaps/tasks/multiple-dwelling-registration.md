@@ -47,7 +47,7 @@ If your business is a `Corporation, Limited Liability Company (LLC), Limited Par
 * Name and address of each officer or partner
 * `Certificate of Formation or Authority|certificate-formation`
 
-If the multiple dwelling was built before 1978, you also need the following:
+If your multiple dwelling was built before 1978, you also need the following:
 
 * List of units certified to be free of lead-based paint or have a lead-free interior and a copy of the certification from a certified lead testing firm
 * List of seasonal rental units rented for less than six months each year
