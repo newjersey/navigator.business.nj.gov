@@ -1,13 +1,7 @@
 {
-  "displayname": "real-estate-investor",
   "naicsCodes": "531390, 523999",
   "defaultSectorId": "real-estate",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": true
-  },
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": [],
   "roadmapSteps": [
     {
       "step": 1,
@@ -50,6 +44,14 @@
     }
   ],
   "name": "Real Estate Investing",
+  "nonEssentialQuestionsIds": [
+    "multiple-dwelling-register"
+  ],
+  "displayname": "real-estate-investor",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true
+  },
   "isEnabled": true,
   "additionalSearchTerms": "investor, property investor",
   "id": "real-estate-investor",
