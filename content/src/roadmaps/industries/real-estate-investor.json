@@ -1,13 +1,7 @@
 {
-  "displayname": "real-estate-investor",
   "naicsCodes": "531390, 523999",
   "defaultSectorId": "real-estate",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": true
-  },
   "canHavePermanentLocation": true,
-  "nonEssentialQuestionsIds": [],
   "roadmapSteps": [
     {
       "step": 1,
@@ -50,8 +44,16 @@
     }
   ],
   "name": "Real Estate Investing",
+  "nonEssentialQuestionsIds": [
+    "multiple-dwelling-register"
+  ],
+  "displayname": "real-estate-investor",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true
+  },
   "isEnabled": true,
-  "additionalSearchTerms": "investor, property investor",
+  "additionalSearchTerms": "investor, property investor, landlord, rental property, apartment, residential ",
   "id": "real-estate-investor",
   "description": "Buys properties to rent or re-sell",
   "webflowId": "656a1362a0fc64e8e4c8e30d"
