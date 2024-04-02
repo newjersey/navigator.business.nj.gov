@@ -1,7 +1,10 @@
 ---
-notesMd: "[Muni planning
-  doc](https://docs.google.com/document/d/1wqFrL2aR2ZI9MvCsp4orFJE2A6sn_oa5YOFQ\
-  oW2uKYE/edit?usp=sharing)"
+notesMd: >
+  [Muni planning
+  doc](https://docs.google.com/document/d/1wqFrL2aR2ZI9MvCsp4orFJE2A6sn_oa5YOFQoW2uKYE/edit?usp=sharing)
+
+
+  -spell out ein
 summaryDescriptionMd: If you own a new `multiple dwelling|multiple-dwelling`,
   such as an apartment, condominium, or townhouse development, you must register
   your property with the State. If you are the new owner of an existing
@@ -41,13 +44,13 @@ agencyAdditionalContext: Bureau of Housing Inspection
 * Name and address of your fuel oil supplier and the grade of fuel oil used, if your building(s) is heated by fuel oil
 * Applicable fees paid
 
-**If your business is a `Corporation, Limited Liability Company (LLC), Limited Partnership (LP), or Limited Liability Partnership (LLP)|business-structure-learn-more`, you also need the:**
+If your business is a `Corporation, Limited Liability Company (LLC), Limited Partnership (LP), or Limited Liability Partnership (LLP)|business-structure-learn-more`, you also need the:
 
 * Name and address of your `registered agent|registered-agent` 
 * Name and address of each officer or partner
 * `Certificate of Formation or Authority|certificate-formation`
 
-**If the multiple dwelling was built before 1978, you also need the:**
+If the multiple dwelling was built before 1978, you also need the following:
 
 * List of units certified to be free of lead-based paint or have a lead-free interior and a copy of the certification from a certified lead testing firm
 * List of seasonal rental units rented for less than six months each year
