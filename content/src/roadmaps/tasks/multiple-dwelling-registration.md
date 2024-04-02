@@ -2,9 +2,6 @@
 notesMd: >
   [Muni planning
   doc](https://docs.google.com/document/d/1wqFrL2aR2ZI9MvCsp4orFJE2A6sn_oa5YOFQoW2uKYE/edit?usp=sharing)
-
-
-  -spell out ein
 summaryDescriptionMd: If you own a new `multiple dwelling|multiple-dwelling`,
   such as an apartment, condominium, or townhouse development, you must register
   your property with the State. If you are the new owner of an existing
@@ -13,7 +10,7 @@ summaryDescriptionMd: If you own a new `multiple dwelling|multiple-dwelling`,
 urlSlug: multiple-dwelling-registration
 filename: multiple-dwelling-registration
 displayname: multiple-dwelling-registration
-name: Register Your Multiple Dwelling
+name: Register Your Multiple Dwelling, such as an Apartment or Condominium Complex
 id: multiple-dwelling-registration
 callToActionLink: https://njdcaportal.dynamics365portals.us/ultra-bhi-home/
 callToActionText: Register My Multiple Dwelling
@@ -26,7 +23,7 @@ agencyAdditionalContext: Bureau of Housing Inspection
 ## Application Requirements
 
 * Business name
-*  `EIN|ein` 
+*  `Employer Identification Number (EIN)|ein` 
 *  `Entity ID|entity-id` or NJ corporate registration number
 *  `Form of property ownership|property-ownership` 
 * Property name and address
