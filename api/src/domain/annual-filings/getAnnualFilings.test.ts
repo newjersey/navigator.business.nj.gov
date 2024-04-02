@@ -11,11 +11,12 @@ import {
   modifyCurrentBusiness,
 } from "@shared/test";
 import { generateAnnualFilings } from "@test/helpers";
+import dayjs from "dayjs";
+
+const formationDate = dayjs().subtract(3, "year").add(1, "month").day(1).format("YYYY-MM-DD");
 
 describe("getAnnualFilings", () => {
   it("calculates 3 new annual filing dates and updates them for dateOfFormation", async () => {
-    const formationDate = "2021-04-01";
-
     const postedUserData = generateUserDataForBusiness(
       generateBusiness({
         profileData: generateProfileData({
@@ -46,8 +47,6 @@ describe("getAnnualFilings", () => {
   });
 
   it("calculates 3 new annual filing dates and overrides existing dates if needed", async () => {
-    const formationDate = "2021-04-01";
-
     const postedUserData = generateUserDataForBusiness(
       generateBusiness({
         profileData: generateProfileData({
@@ -78,8 +77,6 @@ describe("getAnnualFilings", () => {
   });
 
   it("calculates 3 new annual filing dates and updates them for dateOfFormation when there is no legalStructureId", async () => {
-    const formationDate = "2021-04-01";
-
     const postedUserData = generateUserDataForBusiness(
       generateBusiness({
         profileData: generateProfileData({
@@ -113,7 +110,7 @@ describe("getAnnualFilings", () => {
     const postedUserData = generateUserDataForBusiness(
       generateBusiness({
         profileData: generateProfileData({
-          dateOfFormation: "2021-04-01",
+          dateOfFormation: formationDate,
           entityId: undefined,
           legalStructureId: "sole-proprietorship",
         }),
