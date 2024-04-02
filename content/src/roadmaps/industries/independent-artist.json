@@ -59,8 +59,8 @@
     "isProvidesStaffingServicesApplicable": false
   },
   "isEnabled": true,
-  "additionalSearchTerms": "independent artist, writer, performer, content creators, multi media, media streaming, social networks, band, singer, carnival, amusement park, circus, family entertainment,",
+  "additionalSearchTerms": "independent artist, writer, performer, content creators, multi media, media streaming, social networks, band, singer, carnival, amusement park, circus, family entertainment",
   "id": "independent-artist",
-  "description": "Independent artists such as musicians, performers, and other creators",
+  "description": "Independent artists, such as musicians and other creators, and family entertainment venues",
   "webflowId": "656a1363b58e709cb5828632"
 }
