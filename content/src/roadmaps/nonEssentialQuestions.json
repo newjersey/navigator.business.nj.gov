@@ -4,6 +4,11 @@
       "id": "ticket-broker-resell",
       "questionText": "Do you plan to resell admission tickets to places of entertainment and charge more than the original price?",
       "addOn": "ticket-broker-reseller"
+    },
+    {
+      "id": "multiple-dwelling-register",
+      "questionText": "Do you plan to own a multiple dwelling, such as an apartment or condominium complex?",
+      "addOn": "multiple-dwelling-registration"
     }
   ]
 }
