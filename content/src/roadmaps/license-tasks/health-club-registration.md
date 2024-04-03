@@ -1,22 +1,18 @@
 ---
-notesMd: "ADO ticket:
-  https://dev.azure.com/NJInnovation/Business%20First%20Stop/_workitems/edit/40\
-  68"
-id: health-club-registration
-filename: health-club-registration
-displayname: health-club-registration
-urlSlug: health-club-registration
-name: Register Your Business as a Health Club, Spa, Fitness Club, or Gym
-webflowName: Health Club
-summaryDescriptionMd: You need to register as a health club in New Jersey if you
-  have a health spa, fitness club, or gym.
-industryId:
-  - generic
-callToActionText: Register My Business as a Health Club
-callToActionLink: https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx
-agencyId: nj-consumer-affairs
-agencyAdditionalContext: Regulated Business Section
-divisionPhone: (973) 504-6370
+id: "health-club-registration"
+webflowId: "660d6c3c02bbcb79ea0cc60a"
+urlSlug: "health-club-registration"
+name: "Register Your Business as a Health Club, Spa, Fitness Club, or Gym"
+webflowName: "Health Club"
+filename: "health-club-registration"
+callToActionLink: "https://www.njconsumeraffairs.gov/regulated/Pages/Regulated-Business-Online-Registration.aspx"
+callToActionText: "Register My Business as a Health Club"
+agencyId: "nj-consumer-affairs"
+agencyAdditionalContext: "Regulated Business Section"
+divisionPhone: "(973) 504-6370"
+industryId: "generic"
+licenseCertificationClassification: "undefined"
+summaryDescriptionMd: "You need to register as a health club in New Jersey if you have a health spa, fitness club, or gym."
 ---
 
 ---
