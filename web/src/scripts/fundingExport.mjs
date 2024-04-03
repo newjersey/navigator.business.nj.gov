@@ -13,7 +13,7 @@ const convertFundingMd = (oppMdContents, filename) => {
 
   return {
     contentMd: matterResult.content,
-    filename: filename,
+    filename,
     ...oppGrayMatter,
   };
 };

@@ -4,6 +4,7 @@ import { loadAllFundings } from "../fundingExport.mjs";
 import { argsInclude, contentToStrings, getHtml, wait } from "./helpers.mjs";
 import { createItem, deleteItem, getAllItems, getCollection, modifyItem } from "./methods.mjs";
 import { allIndustryId, getCurrentSectors, syncSectors } from "./sectorSync.mjs";
+import { certificationCollectionId, fundingCollectionId } from "./webflowIds.mjs";
 
 const getFundingTypeOptions = async () => {
   const itemResponse = await getCollection(fundingCollectionId);
@@ -31,7 +32,7 @@ const fundingTypeMap = [
 
 const getCertificationsOptions = async () => {
   const itemResponse = await getAllItems(certificationCollectionId);
-  return itemResponse.map(({ name, slug, _id: id, ...item }) => ({ name, slug, id }));
+  return itemResponse.map(({ name, slug, id: id, ...item }) => ({ name, slug, id }));
 };
 
 const fundingCertificationsMap = [
@@ -108,10 +109,6 @@ const fundingStatusMap = [
   { name: "Closed", slug: "closed", id: "d81ba489e3c255947bb4f67cb7012f6f" },
 ];
 
-const fundingCollectionId = "6112e6b88aa567fdbc725ffc";
-
-const certificationCollectionId = "63efba2368f2ae1b10abe579";
-
 const getCurrentFundings = async () => {
   return await getAllItems(fundingCollectionId);
 };
@@ -164,14 +161,10 @@ const getFilteredFundings = () => {
 const getFundingFromMd = (i, sectors) => {
   const industryReferenceArray = i.sector.map((i) => {
     return sectors.find((v) => {
-      return v.slug === i;
-    })?._id;
+      return v.fieldData.slug === i;
+    })?.id;
   });
-  if (
-    industryReferenceArray.some((i) => {
-      return i === undefined;
-    })
-  ) {
+  if (industryReferenceArray.includes(undefined)) {
     throw new Error("Sectors must be synced first");
   }
   const fundingType = fundingTypeMap.find((v) => {
@@ -216,12 +209,9 @@ const getFundingFromMd = (i, sectors) => {
 };
 
 const getOverlappingFundingsFunc = (currentFundings) => {
+  const filteredFundings = new Set(getFilteredFundings().map((i) => i.id));
   return currentFundings.filter((item) => {
-    return new Set(
-      getFilteredFundings().map((i) => {
-        return i.id;
-      })
-    ).has(item.slug);
+    return filteredFundings.has(item.fieldData.slug);
   });
 };
 
@@ -234,7 +224,7 @@ const getNewFundings = async () => {
   const sectors = await getCurrentSectors();
   const currentIdArray = new Set(
     current.map((sec) => {
-      return sec.slug;
+      return sec.fieldData.slug;
     })
   );
   return getFilteredFundings()
@@ -259,7 +249,7 @@ const deleteFundings = async () => {
   const deleteFunding = async (funding) => {
     console.info(`Attempting to delete ${funding.slug}`);
     try {
-      return await deleteItem(funding, fundingCollectionId);
+      return await deleteItem(funding.id, fundingCollectionId);
     } catch (error) {
       console.error(error.response.data);
       throw error;
@@ -280,13 +270,13 @@ const updateFundings = async () => {
   const modify = async (item) => {
     const funding = getFundingFromMd(
       fundings.find((i) => {
-        return i.id === item.slug;
+        return i.id === item.fieldData.slug;
       }),
       sectors
     );
     console.info(`Attempting to modify ${funding.slug}`);
     try {
-      return await modifyItem(item._id, fundingCollectionId, funding);
+      return await modifyItem(item.id, fundingCollectionId, funding);
     } catch (error) {
       console.error(error);
       throw error;
@@ -350,7 +340,9 @@ if (!argsInclude("fundingSync") || process.env.NODE_ENV === "test") {
 } else if (argsInclude("--full")) {
   await (async () => {
     await syncSectors();
+    if (argsInclude("--ci-sync")) await wait(60000); // Wait 1 minute to avoid exceeding rate limit
     await syncFundings();
+    if (argsInclude("--ci-sync")) await wait(60000); // Wait 1 minute to avoid exceeding rate limit
     process.exit(0);
   })();
 } else {
