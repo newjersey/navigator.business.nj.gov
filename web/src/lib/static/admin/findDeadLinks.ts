@@ -296,6 +296,8 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     const startIndex = j * 5;
     const batch = pages.slice(startIndex, startIndex + 5);
 
+    console.debug("batch:", batch);
+
     for (const page of batch) {
       const promise = new Promise((resolve) => {
         const htmlUrlChecker = new HtmlUrlChecker(
