@@ -6,6 +6,7 @@ import {
   Municipality,
   MunicipalityDetail,
   ProfileData,
+  TaskProgress,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { getCurrentBusiness } from "@businessnjgovnavigator/shared/domain-logic/getCurrentBusiness";
@@ -56,6 +57,21 @@ export const useScrollToPathAnchor = (): void => {
       }
     }
   });
+};
+
+export const getTaskStatusUpdatedMessage = (taskStatus: TaskProgress): string => {
+  const Config = getMergedConfig();
+
+  const taskUpdatedMessagePrefix = Config.taskDefaults.taskProgressSnackbarPrefix;
+
+  switch (taskStatus) {
+    case "NOT_STARTED":
+      return `${taskUpdatedMessagePrefix} "${Config.taskProgress.NOT_STARTED}"`;
+    case "IN_PROGRESS":
+      return `${taskUpdatedMessagePrefix} "${Config.taskProgress.IN_PROGRESS}"`;
+    case "COMPLETED":
+      return `${taskUpdatedMessagePrefix} "${Config.taskProgress.COMPLETED}"`;
+  }
 };
 
 export const onEscape = (e: KeyboardEvent, handler: () => void): void => {

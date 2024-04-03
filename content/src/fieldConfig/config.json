@@ -273,7 +273,7 @@
     "removeText": "Remove",
     "nextTaskButtonText": "Next Task",
     "editText": "Edit",
-    "taskProgressSuccessSnackbarBody": "Your task status has been updated.",
+    "taskProgressSnackbarPrefix": "Your task status has been updated to",
     "previousTaskButtonText": "Previous Task",
     "formNameText": "Form",
     "defaultCallToActionText": "Start Application",

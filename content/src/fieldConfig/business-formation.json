@@ -28,7 +28,9 @@
       "viewMoreButtonText": "Read more",
       "amendmentInfo": "#### Review your information before submitting to the New Jersey Division of Revenue and Enterprise Services.\n If you need to make a change after submitting, you must file an [amendment online.](https://www.njportal.com/dor/businessamendments)",
       "viewLessButtonText": "Read less",
-      "genericErrorText": "This field requires information."
+      "genericErrorText": "This field requires information.",
+      "ariaContextWillNeedToProvideBusinessDate": "Provide your business effective date to update the task status",
+      "ariaContextWillLooseCalendarAndCertificationAccess": "You need to confirm your information to update your task status"
     },
     "intro": {
       "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.\n\nInterested in `reserving your business name temporarily|name-reservation` before registering?",
