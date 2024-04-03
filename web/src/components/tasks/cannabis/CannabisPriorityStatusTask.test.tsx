@@ -5,7 +5,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { Task } from "@/lib/types/types";
-import { templateEval } from "@/lib/utils/helpers";
+import { getTaskStatusUpdatedMessage, templateEval } from "@/lib/utils/helpers";
 import { generateTask, generateTaskLink } from "@/test/factories";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
@@ -156,7 +156,7 @@ describe("<CannabisPriorityStatusTask />", () => {
     await waitFor(() => {
       expect(within(screen.getByTestId("taskProgress")).getByTestId("IN_PROGRESS")).toBeInTheDocument();
     });
-    expect(screen.getByText(Config.taskDefaults.taskProgressSuccessSnackbarBody)).toBeInTheDocument();
+    expect(screen.getByText(getTaskStatusUpdatedMessage("IN_PROGRESS"))).toBeInTheDocument();
   });
 
   it("navigates to and from second tab", async () => {
@@ -204,7 +204,7 @@ describe("<CannabisPriorityStatusTask />", () => {
     await waitFor(() => {
       expect(within(screen.getByTestId("taskProgress")).getByTestId("COMPLETED")).toBeInTheDocument();
     });
-    expect(screen.getByText(Config.taskDefaults.taskProgressSuccessSnackbarBody)).toBeInTheDocument();
+    expect(screen.getByText(getTaskStatusUpdatedMessage("COMPLETED"))).toBeInTheDocument();
   });
 
   describe("1 priority status only", () => {

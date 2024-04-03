@@ -1,9 +1,8 @@
-import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { TaskHeader } from "@/components/TaskHeader";
 import { CannabisPriorityRequirements } from "@/components/tasks/cannabis/CannabisPriorityRequirements";
 import { CannabisPriorityTypes } from "@/components/tasks/cannabis/CannabisPriorityTypes";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
-import { useConfig } from "@/lib/data-hooks/useConfig";
+import { TaskStatusChangeSnackbar } from "@/components/TaskStatusChangeSnackbar";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
@@ -19,7 +18,6 @@ export const CannabisPriorityStatusTask = (props: Props): ReactElement => {
   const { business, updateQueue } = useUserData();
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState(false);
   const [displayFirstTab, setDisplayFirstTab] = useState(true);
-  const { Config } = useConfig();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
 
   useMountEffect(() => {
@@ -59,13 +57,11 @@ export const CannabisPriorityStatusTask = (props: Props): ReactElement => {
 
   return (
     <div className="flex flex-column minh-38">
-      <SnackbarAlert
-        variant="success"
+      <TaskStatusChangeSnackbar
         isOpen={successSnackbarIsOpen}
         close={(): void => setSuccessSnackbarIsOpen(false)}
-      >
-        {Config.taskDefaults.taskProgressSuccessSnackbarBody}
-      </SnackbarAlert>
+        status={business?.taskProgress[props.task.id] ?? "NOT_STARTED"}
+      />
       <TaskHeader task={props.task} />
       <UnlockedBy task={props.task} />
       {displayFirstTab ? (
