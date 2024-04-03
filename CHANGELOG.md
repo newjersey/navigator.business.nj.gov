@@ -1,3 +1,27 @@
+# [2024.12.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.11.0...v2024.12.0) (2024-04-03)
+
+
+### Bug Fixes
+
+* [[#186665645](https://github.com/newjersey/navigator.business.nj.gov/issues/186665645)] aws healthcheck lambda policy ([e7ac693](https://github.com/newjersey/navigator.business.nj.gov/commit/e7ac69377358e6e2869fe84699ac699f7823d0b6))
+* [[#187315826](https://github.com/newjersey/navigator.business.nj.gov/issues/187315826)] fix duplicate acct tasks ([6f48494](https://github.com/newjersey/navigator.business.nj.gov/commit/6f48494e81d5050d10e5425b2705d30647afb36e))
+* [[#187357115](https://github.com/newjersey/navigator.business.nj.gov/issues/187357115)] update elevator copy ([7acdb64](https://github.com/newjersey/navigator.business.nj.gov/commit/7acdb647cc8cfe8650af368d4551c52c82947104))
+* **deps:** update dependency express to v4.19.2 [security] ([6642ece](https://github.com/newjersey/navigator.business.nj.gov/commit/6642ece428f2df11a27aa2173f642b0bb6ba8c84))
+
+
+### Features
+
+* [[#186827948](https://github.com/newjersey/navigator.business.nj.gov/issues/186827948)] home health aid license search ([c0b03a4](https://github.com/newjersey/navigator.business.nj.gov/commit/c0b03a4df00ea529554df8aeec5b3f3e91d1024b))
+* [[#186880077](https://github.com/newjersey/navigator.business.nj.gov/issues/186880077)] Expired Consumer Affairs (MLO) license reinstatement quick action ([a93e1b6](https://github.com/newjersey/navigator.business.nj.gov/commit/a93e1b67aadfa90f3a4b49eded9a034cc4579e3a))
+* [[#187097677](https://github.com/newjersey/navigator.business.nj.gov/issues/187097677)] Consistent title tags ([186050a](https://github.com/newjersey/navigator.business.nj.gov/commit/186050a224c03f7c655a58d7be25f137e86a5a79))
+* [[#187202751](https://github.com/newjersey/navigator.business.nj.gov/issues/187202751)] nav bar preview revisions ([c220b22](https://github.com/newjersey/navigator.business.nj.gov/commit/c220b22205866486f0260b383d893d058f851e36))
+* [[#187234214](https://github.com/newjersey/navigator.business.nj.gov/issues/187234214)] get started icon, color and size ([5dfac00](https://github.com/newjersey/navigator.business.nj.gov/commit/5dfac009409742e7d98f395c5b72a41f563914ec))
+
+
+### Reverts
+
+* Revert "chore: updating Roadmaps - Industries certified-public-accountant (#7…" ([cb0b763](https://github.com/newjersey/navigator.business.nj.gov/commit/cb0b7630f88635d85e94c33dce81c7b60ad33722)), closes [#7](https://github.com/newjersey/navigator.business.nj.gov/issues/7)
+
 # [2024.11.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.10.0...v2024.11.0) (2024-03-22)
 
 
