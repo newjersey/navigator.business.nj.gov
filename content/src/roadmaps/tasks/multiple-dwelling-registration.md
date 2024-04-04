@@ -41,7 +41,7 @@ agencyAdditionalContext: Bureau of Housing Inspection
 * Name and address of your fuel oil supplier and the grade of fuel oil used, if your building(s) is heated by fuel oil
 * Applicable fees paid
 
-If your business is a `Corporation, Limited Liability Company (LLC), Limited Partnership (LP), or Limited Liability Partnership (LLP)|business-structure-learn-more`, you also need the:
+If your business is a `Corporation, Limited Liability Company (LLC), Limited Partnership (LP),|business-structure-learn-more` `or Limited Liability Partnership (LLP)|business-structure-learn-more`, you also need the:
 
 * Name and address of your `registered agent|registered-agent` 
 * Name and address of each officer or partner
