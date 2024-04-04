@@ -60,3 +60,8 @@ export const randomTradeNameLegalStructure = (): string => {
 export const clickDeferredSaveButton = () => {
   return cy.get(`button[data-testid="deferred-question-save"]`).first().click();
 };
+
+//Cypress Mobile Viewport
+export const setMobileViewport = () => {
+  cy.viewport(375, 667);
+};
