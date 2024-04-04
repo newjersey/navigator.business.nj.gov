@@ -1,6 +1,6 @@
+import Callout from "@/lib/cms/editors/callout";
 import CannabisLocationAlert from "@/lib/cms/editors/cannabisLocationAlert";
 import ContextEditor from "@/lib/cms/editors/context-info";
-import GreenBox from "@/lib/cms/editors/greenBox";
 import IconWidgetEditor from "@/lib/cms/editors/icon";
 import AlertEditor from "@/lib/cms/editors/infoAlert";
 import Note from "@/lib/cms/editors/note";
@@ -39,6 +39,7 @@ import { useMountEffect } from "@/lib/utils/helpers";
 
 import AccountSetupPreview from "@/lib/cms/previews/AccountSetupPreview";
 import BusinessStructurePreview from "@/lib/cms/previews/BusinessStructurePreview";
+import CalloutPreview from "@/lib/cms/previews/CalloutPreview";
 import NavBarPreview from "@/lib/cms/previews/NavBarPreview";
 import QuickActionLicenseReinstatementPreview from "@/lib/cms/previews/QuickActionLicenseReinstatementPreview";
 import QuickActionLinkPreview from "@/lib/cms/previews/QuickActionLinkPreview";
@@ -76,7 +77,7 @@ const CMS = dynamic(
       // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(CannabisLocationAlert);
       // @ts-expect-error: No type definition available
-      CMS.registerEditorComponent(GreenBox);
+      CMS.registerEditorComponent(Callout);
       // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(IconWidgetEditor);
 
@@ -148,6 +149,8 @@ const CMS = dynamic(
 
       registerPreview(CMS, "tax-access-modal", TaxAccessModalPreview);
       registerPreview(CMS, "navigation-defaults", NavBarPreview);
+
+      registerPreview(CMS, "calloutDefaults", CalloutPreview);
     });
   },
   { ssr: false, loading: Loading }

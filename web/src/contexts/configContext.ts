@@ -2,6 +2,7 @@ import * as AccountSetup from "@businessnjgovnavigator/content/fieldConfig/accou
 import * as BusinessFormation from "@businessnjgovnavigator/content/fieldConfig/business-formation.json";
 import * as BusinessStructurePrompt from "@businessnjgovnavigator/content/fieldConfig/business-structure-prompt.json";
 import * as BusinessStructureTask from "@businessnjgovnavigator/content/fieldConfig/business-structure-task.json";
+import * as CalloutDefaults from "@businessnjgovnavigator/content/fieldConfig/callout-defaults.json";
 import * as CannabisLicenseAnnualTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-license-annual-tab2.json";
 import * as CannabisLicenseConditionalTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-license-conditional-tab2.json";
 import * as CannabisLicenseEligibilityModal from "@businessnjgovnavigator/content/fieldConfig/cannabis-license-eligibility-modal.json";
@@ -62,7 +63,8 @@ const merged = JSON.parse(
       AccountSetup,
       ExportPdf,
       NavigationDefaults,
-      PageMetadata
+      PageMetadata,
+      CalloutDefaults
     )
   )
 );
@@ -95,7 +97,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof AccountSetup &
   typeof ExportPdf &
   typeof NavigationDefaults &
-  typeof PageMetadata;
+  typeof PageMetadata &
+  typeof CalloutDefaults;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -126,7 +129,8 @@ export const getMergedConfig = (): ConfigType => {
     BusinessStructureTask,
     ExportPdf,
     NavigationDefaults,
-    PageMetadata
+    PageMetadata,
+    CalloutDefaults
   );
 };
 

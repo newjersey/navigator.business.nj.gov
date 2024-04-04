@@ -44,17 +44,19 @@ describe("<Content />", () => {
     });
   });
 
-  it("renders greenBox content", () => {
-    const mdString = ":::greenBox\n" + "body text\n" + ":::";
-
-    render(<Content>{mdString}</Content>);
-    expect(screen.getByText("body text")).toBeInTheDocument();
-  });
-
   it("renders note content", () => {
     const mdString = ":::note \n" + "body text\n" + ":::";
 
     render(<Content>{mdString}</Content>);
     expect(screen.getByText("body text")).toBeInTheDocument();
+  });
+
+  it("renders callout content", () => {
+    const mdString = `:::callout{ header="header" icon="true" calloutType="conditional" } \n body text\n:::`;
+
+    render(<Content>{mdString}</Content>);
+    expect(screen.getByText("header")).toBeInTheDocument();
+    expect(screen.getByText("body text")).toBeInTheDocument();
+    expect(screen.getByTestId("callout-conditional-icon")).toBeInTheDocument();
   });
 });
