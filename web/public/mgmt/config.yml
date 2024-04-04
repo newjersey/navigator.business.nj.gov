@@ -3355,6 +3355,48 @@ collections:
     fields:
       - { name: "" }
 
+  - name: "callout-defaults"
+    label: "Callout Defaults"
+    files:
+      - label: "Callout Defaults"
+        file: "content/src/fieldConfig/callout-defaults.json"
+        name: "calloutDefaults"
+        editor:
+          preview: true
+          delete: false
+          create: false
+        fields:
+          - label: "Callout Defaults"
+            name: calloutDefaults
+            collapsed: false
+            widget: object
+            summary: "{{calloutDefaults}}"
+            fields:
+              - {
+                  label: "Informational Heading Default Text",
+                  name: "informationalHeadingDefaultText",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Conditional Heading Default Text",
+                  name: "conditionalHeadingDefaultText",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Warning Heading Default Text",
+                  name: "warningHeadingDefaultText",
+                  widget: "string",
+                  required: true,
+                }
+              - {
+                  label: "Note Heading Default Text",
+                  name: "noteHeadingDefaultText",
+                  widget: "string",
+                  required: true,
+                }
+
   - name: "export-pdf-config"
     label: "Export Pdf Config"
     delete: false

@@ -5,10 +5,10 @@ industryIds: []
 sectorIds: []
 icon: update-purple.svg
 urlSlug: authorization-certificate-reinstatement
+summaryDescriptionMd: You need to reinstate your certificate of authorization if
+  you did not renew it or you put it in inactive status.
 callToActionText: " Reinstate My Application for a Certificate of Authorization "
 callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
-summaryDescriptionMd: >-
-  You need to reinstate your certificate of authorization if you did not renew it or you put it in inactive status.
 ---
 
 ## Application Requirements
@@ -18,10 +18,7 @@ summaryDescriptionMd: >-
 - Applicable fees paid
 - Ownership details, such as name and address of each officer, director, manager, and principal stakeholder, if there have been changes in the structure of the company since the last submission
 
-:::greenBox
-
-**Once completed, you will have**:
+:::callout{ header="" icon="true" calloutType="conditional" }
 
 - A reinstated certificate of authorization
-
-:::
+  :::

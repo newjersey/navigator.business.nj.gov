@@ -1,0 +1,8 @@
+{
+  "calloutDefaults": {
+    "informationalHeadingDefaultText": "Keep in mind:",
+    "conditionalHeadingDefaultText": "Once completed, you will have...",
+    "warningHeadingDefaultText": "Be advised:",
+    "noteHeadingDefaultText": "Note:"
+  }
+}

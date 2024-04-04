@@ -28,17 +28,19 @@ sectorIds:
   - wholesale-trade
 icon: govt-purple.svg
 urlSlug: state-contracting
+summaryDescriptionMd: >-
+  ## **Register Your Business with NJSTART**
+
+
+  Businesses interested in working with the State must register with NJ State of the Art Requisition Technology (NJSTART). Registering provides you with the latest information about contracting opportunities and helps you track the status of your contracts.
+
+
+  The Division of Purchase and Property (DPP), within the Department of the Treasury, serves as the State's central procurement agency for goods and services contracts. These goods and services can include office supplies, electronic equipment, vehicles, etc.
+
+
+  Register with NJSTART to find bidding opportunities for goods and services through the DPP.
 callToActionText: Register My Business with NJSTART
 callToActionLink: https://www.njstart.gov/bso/
----
-## **Register Your Business with NJSTART**
-
-Businesses interested in working with the State must register with NJ State of the Art Requisition Technology (NJSTART). Registering provides you with the latest information about contracting opportunities and helps you track the status of your contracts.
-
-The Division of Purchase and Property (DPP), within the Department of the Treasury, serves as the State's central procurement agency for goods and services contracts. These goods and services can include office supplies, electronic equipment, vehicles, etc.
-
-Register with NJSTART to find bidding opportunities for goods and services through the DPP.
-
 ---
 
 ### Registration Requirements
@@ -47,7 +49,7 @@ Register with NJSTART to find bidding opportunities for goods and services throu
 
 - `EIN|ein` or Social Security number (SSN)
 - Business name
-- Email address 
+- Email address
 
 You will then receive an email with your Vendor ID number and login link.
 
@@ -62,8 +64,7 @@ You will then receive an email with your Vendor ID number and login link.
 - Tax ID certification statement
 - `NIGP commodity code|nigp-commodity-code`
 
-:::greenBox
-**Once completed, you will have:**
+:::callout{ header="" icon="true" calloutType="conditional" }
 
 - A confirmation email
   :::

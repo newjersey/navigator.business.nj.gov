@@ -37,9 +37,15 @@ const customRemarkPlugin: Plugin = () => {
         data.hName = node.name;
         switch (node.name) {
           case "cannabisLocationAlert":
-          case "greenBox":
           case "note":
             data.hProperties = { header: node.attributes.header };
+            break;
+          case "callout":
+            data.hProperties = {
+              header: node.attributes.header.length > 0 ? node.attributes.header : undefined,
+              icon: node.attributes.icon === "true",
+              calloutType: node.attributes.calloutType,
+            };
             break;
           case "icon":
             data.hProperties = { type: node.attributes.type };

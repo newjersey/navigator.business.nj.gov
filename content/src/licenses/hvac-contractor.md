@@ -16,10 +16,7 @@ callToActionText: Renew My HVACR License
 - Surety bond
 - Applicable fees paid
 
-:::greenBox
-
-**Once completed, you will have**:
+:::callout{ header="" icon="true" calloutType="conditional" }
 
 - The same HVACR license number
-
-:::
+  :::
