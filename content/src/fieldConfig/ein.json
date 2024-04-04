@@ -1,6 +1,6 @@
 {
   "ein": {
-    "descriptionText": "Once you get your 9-digit EIN, save it below for future use.",
+    "descriptionText": "Once you get your 9-digit EIN, save it below for future use. SAMSEARCH",
     "saveButtonText": "Save",
     "successText": "EIN \"${ein}\" has been saved.",
     "ariaLabelText": "your EIN"
