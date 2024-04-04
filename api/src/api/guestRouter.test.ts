@@ -16,6 +16,7 @@ import {
   modifyCurrentBusiness,
 } from "@shared/test";
 import { generateAnnualFilings } from "@test/helpers";
+import dayjs from "dayjs";
 import { Express } from "express";
 import request from "supertest";
 
@@ -37,7 +38,7 @@ describe("guestRouter", () => {
 
   describe("POST annualFilings", () => {
     it("calculates 3 new annual filing dates and updates them for dateOfFormation", async () => {
-      const formationDate = "2021-04-01";
+      const formationDate = dayjs().subtract(3, "year").add(1, "month").day(1).format("YYYY-MM-DD");
 
       const business = generateBusiness({
         profileData: generateProfileData({
