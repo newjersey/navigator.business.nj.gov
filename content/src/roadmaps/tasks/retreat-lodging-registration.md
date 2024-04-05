@@ -23,7 +23,7 @@ agencyAdditionalContext: Bureau of Housing Inspection
 ## Application Requirements
 
 * Business name
-*  `EIN|ein` 
+*  `Employee Identification Number|ein` 
 *  `Entity ID|entity-id` or NJ corporate registration number
 *  `Form of property ownership|property-ownership` 
 * Name and address of each officer
