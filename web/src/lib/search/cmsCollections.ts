@@ -59,6 +59,7 @@ export const cmsCollections = [
   {
     label: "🟩 MISC",
     children: [
+      "Callout Defaults",
       "Export Pdf Config",
       "Dropdown Mappings",
       "General Config",

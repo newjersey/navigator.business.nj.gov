@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { Callout } from "@/components/Callout";
 import { CannabisLocationAlert } from "@/components/CannabisLocationAlert";
 import { ContextualInfoLink } from "@/components/ContextualInfoLink";
 import { HorizontalLine } from "@/components/HorizontalLine";
+import { PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { Icon } from "@/components/njwds/Icon";
-import { PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import { InlineIconType } from "@/lib/cms/types";
 import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifiedByUserData";
@@ -54,12 +55,17 @@ export const Content = (props: ContentProps): ReactElement => {
       return <HorizontalLine />;
     },
     blockquote: GreenBox,
-    greenBox: (props: any): ReactElement => {
-      return <GreenBox>{props.children}</GreenBox>;
-    },
     note: (props: any): ReactElement => {
       return <Alert variant="note">{props.children}</Alert>;
     },
+    callout: (props: any): ReactElement => {
+      return (
+        <Callout header={props.header} icon={props.icon} calloutType={props.calloutType}>
+          {props.children}
+        </Callout>
+      );
+    },
+
     infoAlert: (props: any): ReactElement => {
       return <Alert variant="info">{props.children}</Alert>;
     },

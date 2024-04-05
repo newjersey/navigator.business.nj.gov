@@ -34,8 +34,7 @@ You will need to have an approved apprenticeship program to register as a public
 - Primary contact information
 - List of occupations to be developed in the program
 
-:::greenBox
-**Once completed, you will have:**
+:::callout{ header="" icon="true" calloutType="conditional" }
 
 - An email invite to schedule a virtual meeting for a needs assessment with the Office of Apprenticeship
   :::
