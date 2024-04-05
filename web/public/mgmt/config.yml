@@ -1008,6 +1008,16 @@ collections:
                   - { label: "Read less button text", name: "viewLessButtonText", widget: "string" }
                   - { label: "Radio no text", name: "radioNoText", widget: "string" }
                   - { label: "Radio yes text", name: "radioYesText", widget: "string" }
+                  - {
+                      label: "Aria Context - Will Need to Provide Business date for checking formation task",
+                      name: "ariaContextWillNeedToProvideBusinessDate",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Aria Context - Will Need to lose calendar / certifications access but un-starting formation",
+                      name: "ariaContextWillLooseCalendarAndCertificationAccess",
+                      widget: "string",
+                    }
               - label: Nonprofit Provisions
                 name: nonprofitProvisions
                 collapsed: true
@@ -3985,11 +3995,7 @@ collections:
               - { label: Page Title, name: pageTitle, widget: string }
               - { label: Back Button Text, name: backToRoadmapText, widget: string }
               - { label: Default Call to Action Test, name: defaultCallToActionText, widget: string }
-              - {
-                  label: Task Progress - Success Snackbar,
-                  name: taskProgressSuccessSnackbarBody,
-                  widget: string,
-                }
+              - { label: Task Progress - Prefix, name: taskProgressSnackbarPrefix, widget: string }
               - { label: Next Task Button Text, name: nextTaskButtonText, widget: string }
               - { label: Previous Task Button Text, name: previousTaskButtonText, widget: string }
               - { label: Unlocked By - Singular, name: unlockedBySingular, widget: string }

@@ -204,6 +204,7 @@ export const BusinessStructureTask = (props: Props): ReactElement => {
       <TaskStatusChangeSnackbar
         isOpen={successSnackbarIsOpen}
         close={(): void => setSuccessSnackbarIsOpen(false)}
+        status={"COMPLETED"}
       />
     </div>
   );

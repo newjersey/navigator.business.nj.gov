@@ -3,6 +3,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import { getTaskStatusUpdatedMessage } from "@/lib/utils/helpers";
 import { withNeedsAccountContext } from "@/test/helpers/helpers-renderers";
 import { selectDate } from "@/test/helpers/helpers-testing-library-selectors";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -112,10 +113,10 @@ describe("<TaskProgressCheckbox />", () => {
 
   it("shows a success snackbar when an option is selected", async () => {
     renderTaskCheckbox("123", generateBusiness({}));
-    expect(screen.queryByText(Config.taskDefaults.taskProgressSuccessSnackbarBody)).not.toBeInTheDocument();
+    expect(screen.queryByText(getTaskStatusUpdatedMessage("IN_PROGRESS"))).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
-    await screen.findByText(Config.taskDefaults.taskProgressSuccessSnackbarBody);
+    await screen.findByText(getTaskStatusUpdatedMessage("IN_PROGRESS"));
   });
 
   it("opens Needs Account modal for guest mode user when checkbox is clicked", async () => {

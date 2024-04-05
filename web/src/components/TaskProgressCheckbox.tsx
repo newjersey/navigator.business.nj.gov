@@ -188,12 +188,24 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
     }
   };
 
+  const getAdditionalAriaContext = (): string => {
+    if (isFormationTask(props.taskId)) {
+      if (getNextStatus() === "COMPLETED") {
+        return Config.formation.general.ariaContextWillNeedToProvideBusinessDate;
+      }
+      if (currentTaskProgress === "COMPLETED") {
+        return Config.formation.general.ariaContextWillLooseCalendarAndCertificationAccess;
+      }
+    }
+    return "";
+  };
+
   const Checkbox = (): ReactNode => {
     const styles = getStyles();
     return (
       <button
         data-testid="change-task-progress-checkbox"
-        aria-label="update task status"
+        aria-label={`update task status. ${getAdditionalAriaContext()}`}
         onClick={isDisabled ? undefined : (): void => setToNextStatus()}
         className={`cursor-pointer margin-neg-105 padding-105 usa-button--unstyled task-checkbox-base ${styles.hover}`}
         {...(isDisabled ? { disabled: true } : {})}
@@ -233,6 +245,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
       <TaskStatusChangeSnackbar
         isOpen={successSnackbarIsOpen}
         close={(): void => setSuccessSnackbarIsOpen(false)}
+        status={currentTaskProgress}
       />
 
       <TaskStatusTaxRegistrationSnackbar

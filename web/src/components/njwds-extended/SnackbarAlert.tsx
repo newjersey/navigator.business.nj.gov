@@ -26,6 +26,8 @@ export const SnackbarAlert = (props: Props): ReactElement => {
       autoHideDuration={props.autoHideDuration === null ? null : 5000}
       disableWindowBlurListener={true}
       ClickAwayListenerProps={{ mouseEvent: false, touchEvent: false }}
+      role="alert"
+      aria-live="polite"
       {...props.snackBarProps}
     >
       <div>
