@@ -71,7 +71,7 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
       {Config.elevatorRegistrationSearchTask.registrationSearchPrompt}
       <form onSubmit={onSubmit} className={"padding-top-1"}>
         <div className="margin-bottom-2">
-          <label htmlFor="address-1">{Config.licenseSearchTask.address1Label}</label>
+          <label htmlFor="address-1">{Config.elevatorRegistrationSearchTask.address1Label}</label>
           <TextField
             value={formValues.address1}
             onChange={handleChangeForKey("address1")}
@@ -83,7 +83,7 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
           />
         </div>
         <div className="margin-bottom-2">
-          <label htmlFor="address-2">{Config.licenseSearchTask.address2Label}</label>
+          <label htmlFor="address-2">{Config.elevatorRegistrationSearchTask.address2Label}</label>
           <TextField
             value={formValues.address2}
             onChange={handleChangeForKey("address2")}
@@ -96,7 +96,7 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
         </div>
         <div className="fdr flex-half">
           <div className="flex-half padding-right-1">
-            <label htmlFor="city">{Config.licenseSearchTask.zipCodeLabel}</label>
+            <label htmlFor="city">{Config.elevatorRegistrationSearchTask.zipCodeLabel}</label>
             <TextField
               value={formValues.zipCode}
               onChange={handleChangeForKey("zipCode")}
@@ -110,7 +110,7 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
             />
           </div>
           <div className="flex-half padding-left-1">
-            <label htmlFor="state">{Config.licenseSearchTask.stateLabel}</label>
+            <label htmlFor="state">{Config.elevatorRegistrationSearchTask.stateLabel}</label>
             <TextField
               value={"New Jersey"}
               onChange={(): void => {}}
@@ -136,7 +136,7 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
               isLoading={props.isLoading}
               dataTestId="check-status-submit"
             >
-              {Config.licenseSearchTask.submitText}
+              {Config.elevatorRegistrationSearchTask.submitText}
             </SecondaryButton>
           </div>
         </div>

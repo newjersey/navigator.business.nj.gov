@@ -66,6 +66,7 @@ describe("loadTasks", () => {
 
       mockReadDirReturnOnce({ value: ["task1.md"], mockedFs });
       mockReadDirReturnOnce({ value: ["license1.md", "license2.md"], mockedFs });
+      mockReadDirReturnOnce({ value: [], mockedFs });
 
       mockedFs.readFileSync
         .mockReturnValueOnce(licenseMd1)
@@ -124,6 +125,7 @@ describe("loadTasks", () => {
 
       mockReadDirReturnOnce({ value: ["task1.md", "task2.md"], mockedFs });
       mockReadDirReturnOnce({ value: ["license1.md"], mockedFs });
+      mockReadDirReturnOnce({ value: [], mockedFs });
 
       const allTaskUrlSlugs = loadAllTaskUrlSlugs();
       expect(allTaskUrlSlugs).toHaveLength(3);
