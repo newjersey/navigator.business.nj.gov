@@ -2169,6 +2169,10 @@ collections:
                 }
               - { label: Error - Missing Required Fields, name: errorTextFieldsRequired, widget: string }
               - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
+              - { label: Informational Message - In Review, name: informationalInReview, widget: string }
+              - { label: Informational Message - Returned, name: informationalReturned, widget: string }
+              - { label: Informational Message - Rejected, name: informationalRejected, widget: string }
+              - { label: Informational Message - Incomplete, name: informationalIncomplete, widget: string }
 
   - name: "tasks"
     label: "Tasks - All"
