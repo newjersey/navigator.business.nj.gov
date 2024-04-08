@@ -1,8 +1,8 @@
-import { CircularIndicator } from "@/components/CircularIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { Icon } from "@/components/njwds/Icon";
+import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { TaskPageSwitchComponent } from "@/components/TaskPageSwitchComponent";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
@@ -96,11 +96,7 @@ const TaskPage = (props: Props): ReactElement => {
       <PageSkeleton>
         <NavBar task={props.task} showSidebar={true} />
         <TaskSidebarPageLayout task={props.task} belowBoxComponent={renderNextAndPreviousButtons()}>
-          {renderLoadingState && (
-            <div className="margin-top-3 desktop:margin-top-0 padding-top-0 desktop:padding-top-6 padding-bottom-15">
-              <CircularIndicator />
-            </div>
-          )}
+          {renderLoadingState && <PageCircularIndicator />}
           {!renderLoadingState && (
             <TaskPageSwitchComponent
               task={props.task}

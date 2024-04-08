@@ -1,6 +1,6 @@
-import { CircularIndicator } from "@/components/CircularIndicator";
 import { Content } from "@/components/Content";
 import { SingleCtaLink } from "@/components/njwds-extended/cta/SingleCtaLink";
+import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { TaskHeader } from "@/components/TaskHeader";
 import { isBusinessStartDateValid } from "@/components/tasks/business-formation/business/BusinessDateValidators";
 import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
@@ -225,9 +225,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     return (
       <div className="flex flex-column minh-38">
         <TaskHeader task={props.task} />
-        <div className="margin-top-6">
-          <CircularIndicator />
-        </div>
+        <PageCircularIndicator />
       </div>
     );
   }

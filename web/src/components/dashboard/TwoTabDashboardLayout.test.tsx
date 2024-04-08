@@ -32,6 +32,7 @@ describe("<TwoTabDashboardLayout />", () => {
   }): void => {
     render(
       <TwoTabDashboardLayout
+        aboveTabs={<div>Above Tabs Content</div>}
         firstTab={<div>First Tab Content</div>}
         secondTab={<div>Second Tab Content</div>}
         certifications={certificationsArray ?? certs}

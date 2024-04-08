@@ -1,28 +1,17 @@
-import { CircularIndicator } from "@/components/CircularIndicator";
-import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuestion";
-import { Header } from "@/components/Header";
-import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
-import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { DashboardAlerts } from "@/components/dashboard/DashboardAlerts";
-import { HideableTasks } from "@/components/dashboard/HideableTasks";
-import { Roadmap } from "@/components/dashboard/Roadmap";
-import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
-import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout";
-import { QuickActionsContainer } from "@/components/dashboard/quick-actions/QuickActionContainer";
-import { HomeBasedBusiness } from "@/components/data-fields/HomeBasedBusiness";
-import { FieldLabelDescriptionOnly } from "@/components/field-labels/FieldLabelDescriptionOnly";
-import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
+import { DashboardOnDesktop } from "@/components/dashboard/DashboardOnDesktop";
+import { DashboardOnMobile } from "@/components/dashboard/DashboardOnMobile";
 import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
-import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { MediaQueries } from "@/lib/PageSizes";
 import { usePageWithNeedsAccountSnackbar } from "@/lib/auth/usePageWithNeedsAccountSnackbar";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
-import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
-import { QUERIES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFundings } from "@/lib/static/loadFundings";
@@ -41,7 +30,7 @@ import {
   RoadmapDisplayContent,
 } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { LookupOperatingPhaseById, Municipality } from "@businessnjgovnavigator/shared";
+import { Municipality } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -64,21 +53,16 @@ const DashboardPage = (props: Props): ReactElement => {
   const { business, updateQueue } = useUserData();
   const router = useRouter();
   const { roadmap } = useRoadmap();
+  const { Config } = useConfig();
+  const isLoading = !business || business?.onboardingFormProgress !== "COMPLETED" || !roadmap;
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
-  const config = getMergedConfig();
-
-  const operatingPhase = LookupOperatingPhaseById(business?.profileData.operatingPhase);
 
   useMountEffectWhenDefined(() => {
     (async (): Promise<void> => {
       if (business?.onboardingFormProgress !== "COMPLETED") {
         await router.replace(ROUTES.onboarding);
       }
-    })();
-  }, business);
 
-  useMountEffectWhenDefined(() => {
-    (async (): Promise<void> => {
       if (isDesktopAndUp && business?.preferences.phaseNewlyChanged) {
         if (!updateQueue || business?.onboardingFormProgress !== "COMPLETED") {
           return;
@@ -86,101 +70,37 @@ const DashboardPage = (props: Props): ReactElement => {
         await updateQueue.queuePreferences({ phaseNewlyChanged: false }).update();
       }
     })();
-  }, updateQueue);
-
-  const displayHomedBaseBusinessQuestion = (): boolean => {
-    if (!business) return false;
-    return (
-      isHomeBasedBusinessApplicable(business.profileData.industryId) &&
-      business.profileData.homeBasedBusiness === undefined &&
-      operatingPhase.displayHomeBasedPrompt
-    );
-  };
-
-  const renderRoadmap = (
-    <div className="margin-top-0 desktop:margin-top-0">
-      <UserDataErrorAlert />
-      <Header />
-      <div className="margin-top-3">
-        {roadmap ? (
-          <>
-            {displayHomedBaseBusinessQuestion() && (
-              <div className="margin-bottom-4">
-                <DeferredOnboardingQuestion
-                  label={
-                    <FieldLabelDescriptionOnly
-                      fieldName="homeBasedBusiness"
-                      isAltDescriptionDisplayed={operatingPhase.displayAltHomeBasedBusinessDescription}
-                    />
-                  }
-                  onSave={(): void => routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true")}
-                >
-                  <HomeBasedBusiness />
-                </DeferredOnboardingQuestion>
-              </div>
-            )}
-
-            {operatingPhase.displayQuickActions && (
-              <QuickActionsContainer
-                quickActionLinks={props.quickActionLinks}
-                quickActionTasks={props.quickActionTasks}
-                quickActionLicenseReinstatements={props.quickActionLicenseReinstatements}
-              />
-            )}
-
-            {operatingPhase.displayRoadmapTasks && (
-              <>
-                <hr className="margin-bottom-3" />
-                <Roadmap />
-              </>
-            )}
-            {operatingPhase.displayCalendarType !== "NONE" && (
-              <FilingsCalendar operateReferences={props.operateReferences} />
-            )}
-            {operatingPhase.displayHideableRoadmapTasks && <HideableTasks />}
-          </>
-        ) : (
-          <CircularIndicator />
-        )}
-      </div>
-    </div>
-  );
+  }, [business, updateQueue]);
 
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
-      <NextSeo title={getNextSeoTitle(config.pagesMetadata.dashboardTitle)} />
+      <NextSeo title={getNextSeoTitle(Config.pagesMetadata.dashboardTitle)} />
       <PageSkeleton>
         <NavBar />
         <main id="main">
           <DashboardAlerts />
-          {!business || business?.onboardingFormProgress !== "COMPLETED" ? (
-            <div className="margin-top-3 desktop:margin-top-0 padding-top-0 desktop:padding-top-6 padding-bottom-15">
-              <CircularIndicator />
-            </div>
-          ) : isDesktopAndUp ? (
-            <RightSidebarPageLayout
-              mainContent={renderRoadmap}
-              sidebarContent={
-                <SidebarCardsContainer
-                  sidebarDisplayContent={props.displayContent.sidebarDisplayContent}
-                  certifications={props.certifications}
-                  fundings={props.fundings}
-                />
-              }
-            />
-          ) : (
-            <TwoTabDashboardLayout
-              firstTab={renderRoadmap}
-              secondTab={
-                <SidebarCardsContainer
-                  sidebarDisplayContent={props.displayContent.sidebarDisplayContent}
-                  certifications={props.certifications}
-                  fundings={props.fundings}
-                />
-              }
-              certifications={props.certifications}
-              fundings={props.fundings}
-            />
+          {isLoading && <PageCircularIndicator />}
+          {!isLoading && (
+            <>
+              <DashboardOnDesktop
+                certifications={props.certifications}
+                displayContent={props.displayContent}
+                fundings={props.fundings}
+                operateReferences={props.operateReferences}
+                quickActionLicenseReinstatements={props.quickActionLicenseReinstatements}
+                quickActionLinks={props.quickActionLinks}
+                quickActionTasks={props.quickActionTasks}
+              />
+              <DashboardOnMobile
+                certifications={props.certifications}
+                displayContent={props.displayContent}
+                fundings={props.fundings}
+                operateReferences={props.operateReferences}
+                quickActionLicenseReinstatements={props.quickActionLicenseReinstatements}
+                quickActionLinks={props.quickActionLinks}
+                quickActionTasks={props.quickActionTasks}
+              />
+            </>
           )}
         </main>
       </PageSkeleton>

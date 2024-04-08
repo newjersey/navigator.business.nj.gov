@@ -69,6 +69,18 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
 
   return (
     <>
+      {!renderEmptyForYouMessage && (
+        <div className="desktop:display-none">
+          <Heading level={2}>
+            {Config.dashboardDefaults.sidebarHeading}
+            {props.cardCount > 0 && (
+              <span data-testid="for-you-counter" className="margin-left-05 text-base">
+                ({props.cardCount})
+              </span>
+            )}
+          </Heading>
+        </div>
+      )}
       <div className={"display-none desktop:display-block"}>
         <Heading level={2} className="margin-top-0 font-weight-normal">
           {Config.dashboardDefaults.sidebarHeading}
@@ -82,17 +94,22 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
       {props.sideBarCards.map((card) => {
         return <SidebarCard card={card} key={card.id} />;
       })}
-
       {renderEmptyForYouMessage && (
         <div className="fdc fac margin-y-3" data-testid="empty-for-you-message">
           <div className="text-center margin-bottom-3">
-            <Content>{getEmptyForYouMessageTopText()}</Content>
+            <div className="desktop:display-none">
+              <Content>{getEmptyForYouMessageTopText()}</Content>
+            </div>
+            <div className="display-none desktop:display-block">
+              <Heading level={3}>
+                <Content>{getEmptyForYouMessageTopText()}</Content>
+              </Heading>
+            </div>
           </div>
           <img src={`/img/for-you-section.svg`} aria-hidden="true" alt="" />
           <p className="text-center">{getEmptyForYouMessageBottomText()}</p>
         </div>
       )}
-
       <div data-testid="visible-opportunities">
         {renderCertificationsCards &&
           props.certifications.map((cert) => {
@@ -104,7 +121,6 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
             return <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />;
           })}
       </div>
-
       {renderLearnMoreFundingOpportunities && (
         <>
           <hr className="margin-top-3 bg-cool-lighter" aria-hidden={true} />
@@ -120,7 +136,6 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
           </div>
         </>
       )}
-
       {renderHiddenOpportunitiesAccordian && (
         <>
           <hr className="margin-top-3 bg-cool-lighter" aria-hidden={true} />

@@ -146,7 +146,7 @@ describe("<SidebarCardsList />", () => {
 
           renderComponent({ isRemoteSellerWorker: true });
           expect(
-            screen.getByText(Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText)
+            screen.getAllByText(Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText)[0]
           ).toBeInTheDocument();
         }
       );
@@ -165,7 +165,7 @@ describe("<SidebarCardsList />", () => {
 
           renderComponent({ isRemoteSellerWorker: true });
           expect(
-            screen.getByText(Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText)
+            screen.getAllByText(Config.dashboardDefaults.emptyOpportunitiesRemoteSellerWorkerText)[0]
           ).toBeInTheDocument();
         }
       );
