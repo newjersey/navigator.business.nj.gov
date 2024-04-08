@@ -11,6 +11,10 @@ const navigatorLicenseDir = path.resolve(
   `${path.dirname(fileURLToPath(import.meta.url))}/../../../content/src/roadmaps/license-tasks`
 );
 
+const municipalDir = path.resolve(
+  `${path.dirname(fileURLToPath(import.meta.url))}/../../../content/src/roadmaps/municipal-tasks`
+);
+
 const convertLicenseMd = (mdContents, filename) => {
   const matterResult = matter(mdContents);
   const oppGrayMatter = matterResult.data;
@@ -41,10 +45,18 @@ export const loadAllNavigatorWebflowLicenses = () => {
 export const loadAllNavigatorLicenses = () => {
   const navigatorFileNames = fs.readdirSync(navigatorLicenseDir);
 
-  return navigatorFileNames.map((fileName) => {
+  const navigatorLicenses = navigatorFileNames.map((fileName) => {
     const fullPath = path.join(navigatorLicenseDir, `${fileName}`);
     return loadLicenseByPath(fileName, fullPath);
   });
+
+  const municipalFileNames = fs.readdirSync(municipalDir);
+  const municipalLicenses = municipalFileNames.map((fileName) => {
+    const fullPath = path.join(municipalDir, `${fileName}`);
+    return loadLicenseByPath(fileName, fullPath);
+  });
+
+  return navigatorLicenses.concat(municipalLicenses);
 };
 
 const loadLicenseByPath = (fileName, fullPath) => {
@@ -54,10 +66,19 @@ const loadLicenseByPath = (fileName, fullPath) => {
 };
 
 export const loadNavigatorLicense = (fileName) => {
-  const fullPath = path.join(navigatorLicenseDir, `${fileName}`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  const fileNameWithoutMd = fileName.split(".md")[0];
-  return convertLicenseMd(fileContents, fileNameWithoutMd);
+  try {
+    const fullPath = path.join(navigatorLicenseDir, `${fileName}`);
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const fileNameWithoutMd = fileName.split(".md")[0];
+    const markdown = convertLicenseMd(fileContents, fileNameWithoutMd);
+    return [markdown, navigatorLicenseDir];
+  } catch {
+    const fullPath = path.join(municipalDir, `${fileName}`);
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const fileNameWithoutMd = fileName.split(".md")[0];
+    const markdown = convertLicenseMd(fileContents, fileNameWithoutMd);
+    return [markdown, municipalDir];
+  }
 };
 
 export const writeMarkdownString = (license) => {

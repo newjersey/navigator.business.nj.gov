@@ -93,6 +93,7 @@ const CMS = dynamic(
       registerPreview(CMS, "contextual-information", ContextInfoPreview);
       registerPreview(CMS, "filings", FilingsPreview);
       registerPreview(CMS, "license-calendar-events", LicensesPreview);
+      registerPreview(CMS, "municipal-tasks", TaskPreview);
 
       registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);
 

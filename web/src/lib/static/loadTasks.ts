@@ -12,10 +12,12 @@ export type TaskUrlSlugParam = {
 const roadmapsDir = path.join(process.cwd(), "..", "content", "src", "roadmaps");
 const tasksDirectory = path.join(roadmapsDir, "tasks");
 const licenseDirectory = path.join(roadmapsDir, "license-tasks");
+const municipalDirectory = path.join(roadmapsDir, "municipal-tasks");
 
 export const loadAllTaskUrlSlugs = (): PathParams<TaskUrlSlugParam>[] => {
   const taskFileNames = fs.readdirSync(tasksDirectory);
   const licenseFileNames = fs.readdirSync(licenseDirectory);
+  const municipalFileNames = fs.readdirSync(municipalDirectory);
 
   return [
     ...taskFileNames.map((fileName) => ({
@@ -28,21 +30,34 @@ export const loadAllTaskUrlSlugs = (): PathParams<TaskUrlSlugParam>[] => {
         taskUrlSlug: loadUrlSlugByFilename(fileName, licenseDirectory),
       },
     })),
+    ...municipalFileNames.map((fileName) => ({
+      params: {
+        taskUrlSlug: loadUrlSlugByFilename(fileName, municipalDirectory),
+      },
+    })),
   ];
 };
 
 export const loadAllTasks = (): Task[] => {
   const taskFileNames = fs.readdirSync(tasksDirectory);
   const licenseFileNames = fs.readdirSync(licenseDirectory);
+  const municipalFileNames = fs.readdirSync(municipalDirectory);
+
   return [
     ...taskFileNames.map((fileName) => loadTaskByFileName(fileName, tasksDirectory)),
     ...licenseFileNames.map((fileName) => loadTaskByFileName(fileName, licenseDirectory)),
+    ...municipalFileNames.map((fileName) => loadTaskByFileName(fileName, municipalDirectory)),
   ];
 };
 
 export const loadAllLicenseTasks = (): Task[] => {
   const licenseFileNames = fs.readdirSync(licenseDirectory);
   return licenseFileNames.map((fileName) => loadTaskByFileName(fileName, licenseDirectory));
+};
+
+export const loadAllMunicipalTasks = (): Task[] => {
+  const municipalFileNames = fs.readdirSync(municipalDirectory);
+  return municipalFileNames.map((fileName) => loadTaskByFileName(fileName, municipalDirectory));
 };
 
 export const loadAllTasksOnly = (): Task[] => {
@@ -55,8 +70,13 @@ export const loadTaskByUrlSlug = (urlSlug: string): Task => {
     const fileAsTask = getFileNameByUrlSlug(tasksDirectory, urlSlug);
     return loadTaskByFileName(fileAsTask, tasksDirectory);
   } catch {
-    const fileAsLicense = getFileNameByUrlSlug(licenseDirectory, urlSlug);
-    return loadTaskByFileName(fileAsLicense, licenseDirectory);
+    try {
+      const fileAsLicense = getFileNameByUrlSlug(licenseDirectory, urlSlug);
+      return loadTaskByFileName(fileAsLicense, licenseDirectory);
+    } catch {
+      const fileAsMunicipal = getFileNameByUrlSlug(municipalDirectory, urlSlug);
+      return loadTaskByFileName(fileAsMunicipal, municipalDirectory);
+    }
   }
 };
 
@@ -92,7 +112,11 @@ const loadTaskLinkByFilename = (fileName: string): TaskLink => {
   try {
     fileContents = fs.readFileSync(path.join(tasksDirectory, `${fileName}.md`), "utf8");
   } catch {
-    fileContents = fs.readFileSync(path.join(licenseDirectory, `${fileName}.md`), "utf8");
+    try {
+      fileContents = fs.readFileSync(path.join(licenseDirectory, `${fileName}.md`), "utf8");
+    } catch {
+      fileContents = fs.readFileSync(path.join(municipalDirectory, `${fileName}.md`), "utf8");
+    }
   }
 
   const taskWithoutLinks = convertTaskMd(fileContents) as TaskWithoutLinks;

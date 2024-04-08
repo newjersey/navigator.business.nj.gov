@@ -36,7 +36,7 @@ import { loadAllPostOnboarding } from "@/lib/static/loadPostOnboarding";
 import { loadAllQuickActionLicenseReinstatements } from "@/lib/static/loadQuickActionLicenseReinstatements";
 import { loadAllQuickActionLinks } from "@/lib/static/loadQuickActionLinks";
 import { loadAllQuickActionTasks } from "@/lib/static/loadQuickActionTasks";
-import { loadAllLicenseTasks, loadAllTasksOnly } from "@/lib/static/loadTasks";
+import { loadAllLicenseTasks, loadAllMunicipalTasks, loadAllTasksOnly } from "@/lib/static/loadTasks";
 import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
 import {
   Certification,
@@ -70,6 +70,7 @@ interface Props {
   noAuth: boolean;
   tasks: Task[];
   licenseTasks: Task[];
+  municipalTasks: Task[];
   certifications: Certification[];
   archivedCertifications: Certification[];
   fundings: Funding[];
@@ -94,6 +95,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [taskMatches, setTaskMatches] = useState<Match[]>([]);
   const [licenseTaskMatches, setLicenseTaskMatches] = useState<Match[]>([]);
+  const [municipalTaskMatches, setMunicipalTaskMatches] = useState<Match[]>([]);
   const [certMatches, setCertMatches] = useState<Match[]>([]);
   const [certArchiveMatches, setCertArchiveMatches] = useState<Match[]>([]);
   const [fundingMatches, setFundingMatches] = useState<Match[]>([]);
@@ -135,6 +137,7 @@ const SearchContentPage = (props: Props): ReactElement => {
 
     setTaskMatches(searchTasks(props.tasks, lowercaseTerm));
     setLicenseTaskMatches(searchTasks(props.licenseTasks, lowercaseTerm));
+    setMunicipalTaskMatches(searchTasks(props.municipalTasks, lowercaseTerm));
     setCertMatches(searchCertifications(props.certifications, lowercaseTerm));
     setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
     setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
@@ -174,6 +177,7 @@ const SearchContentPage = (props: Props): ReactElement => {
       [
         ...taskMatches,
         ...licenseTaskMatches,
+        ...municipalTaskMatches,
         ...certMatches,
         ...certArchiveMatches,
         ...fundingMatches,
@@ -197,6 +201,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const taskCollection = {
     "Tasks - All": taskMatches,
     "License Tasks (Navigator with Webflow mappings)": licenseTaskMatches,
+    "Tasks - Municipal": municipalTaskMatches,
     "Webflow Licenses": webflowLicenseMatches,
   };
 
@@ -244,7 +249,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         type="text"
         value={searchTerm}
         onChange={handleSearchInput}
-        onKeyPress={(event): void => handleKeyPress(event, onSearchSubmit)}
+        onKeyDown={(event): void => handleKeyPress(event, onSearchSubmit)}
         inputProps={{ id: "search" }}
       />
       <button onClick={onSearchSubmit} className="usa-button margin-top-2 margin-bottom-4">
@@ -298,6 +303,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       noAuth: true,
       tasks: loadAllTasksOnly(),
       licenseTasks: loadAllLicenseTasks(),
+      municipalTasks: loadAllMunicipalTasks(),
       certifications: loadAllCertifications(),
       archivedCertifications: loadAllArchivedCertifications(),
       fundings: loadAllFundings(),
