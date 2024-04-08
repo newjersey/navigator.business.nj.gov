@@ -212,25 +212,6 @@
     "pendingReinstatementStatusText": "Pending Reinstatement",
     "expiredPermitStatusText": "Expired"
   },
-  "elevatorRegistrationSearchTask": {
-    "errorTextFieldsRequired": "Please fill in all non-optional fields.",
-    "errorTextNoPropertyInterestFound": "We cannot find your registration. Make sure the building address you entered matches what is in your application.",
-    "errorTextNoElevatorRegistrations": "We cannot find your registration. Make sure you submit a registration application for your elevator device(s).",
-    "errorTextSearchFailed": "Sorry, something went wrong. Please try again later.",
-    "registrationRequestDateText": "Application requested: ",
-    "registrationStatusText": "Status: ",
-    "registrationDeviceCountText": "Total devices in this application: ",
-    "registrationApplicationFoundText": "Great, we've found your application(s)! Please check the details below.",
-    "registrationFoundInReviewText": "Check back later to make sure your elevator device(s) has been successfully registered",
-    "registrationFoundIncompleteReturnedText": "Review your incomplete or returned application(s) for any errors or missing information. If your application was returned, you can resubmit it using the same application link in the DCA Service Portal.",
-    "registrationCallToActionPrimaryText": "Register or Update My Elevator Device Registration",
-    "registrationCallToActionSecondaryText": "Check My Registration Application Status",
-    "registrationTab1Text": "Start Application",
-    "registrationTab2Text": "Check Status",
-    "registrationInReviewMessage": "Check back later to make sure your elevator device(s) have been successfully registered",
-    "registrationRejectedOrReturnedMessage": "Review your incomplete or returned application(s) for any errors or missing information. If your application was returned, you can resubmit it using the same application link in the DCA Service Portal.",
-    "registrationSearchPrompt": "Enter your building address exactly as it appears on your application to get automatic updates about the registration status of your elevator device(s) below."
-  },
   "fundingDefaults": {
     "issuingAgencyText": "Issuing Agency"
   },

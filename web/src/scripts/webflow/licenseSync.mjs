@@ -158,16 +158,14 @@ const updateLicenses = async (licenseMarkdowns) => {
 };
 
 const updateLicenseWithWebflowId = (webflowId, filename) => {
-  const mdObject = loadNavigatorLicense(`${filename}.md`);
+  const [mdObject, filepath] = loadNavigatorLicense(`${filename}.md`);
   const updatedMdObject = {
     ...mdObject,
     webflowId: webflowId,
   };
   const stringifiedFile = writeMarkdownString(updatedMdObject);
 
-  const outDir = `${path.dirname(
-    fileURLToPath(import.meta.url)
-  )}/../../../../content/src/roadmaps/license-tasks`;
+  const outDir = `${path.dirname(fileURLToPath(import.meta.url))}/..${filepath}`;
   fs.writeFileSync(`${outDir}/${filename}.md`, stringifiedFile, (err) => {
     if (err) {
       throw err;
