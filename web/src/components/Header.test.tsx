@@ -1,4 +1,4 @@
-import { Header } from "@/components/Header";
+import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
@@ -33,7 +33,7 @@ describe("<Header />", () => {
   const renderHeader = (): void => {
     render(
       <ThemeProvider theme={createTheme()}>
-        <Header />
+        <DashboardHeader />
       </ThemeProvider>
     );
   };
@@ -42,7 +42,7 @@ describe("<Header />", () => {
     render(
       withAuth(
         <ThemeProvider theme={createTheme()}>
-          <Header />
+          <DashboardHeader />
         </ThemeProvider>,
         {
           isAuthenticated: isAuthenticated,
@@ -56,19 +56,21 @@ describe("<Header />", () => {
       it("displays industry name with starter kit text", () => {
         useMockProfileData({ industryId: "e-commerce", businessPersona: "STARTING" });
         renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
-        const expectedHeaderText = templateEval(Config.headerDefaults.starterKitText, {
+        const expectedHeaderText = templateEval(Config.dashboardHeaderDefaults.starterKitText, {
           industry: LookupIndustryById("e-commerce").name,
         });
         expect(screen.getByText(expectedHeaderText)).toBeInTheDocument();
-        expect(screen.queryByText(Config.headerDefaults.genericStarterKitText)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.dashboardHeaderDefaults.genericStarterKitText)
+        ).not.toBeInTheDocument();
       });
 
       it("displays generic starter kit text when industry is generic", () => {
         useMockProfileData({ industryId: "generic", businessPersona: "STARTING" });
         renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
-        expect(screen.getByText(Config.headerDefaults.genericStarterKitText)).toBeInTheDocument();
+        expect(screen.getByText(Config.dashboardHeaderDefaults.genericStarterKitText)).toBeInTheDocument();
 
-        const templatedHeaderText = templateEval(Config.headerDefaults.starterKitText, {
+        const templatedHeaderText = templateEval(Config.dashboardHeaderDefaults.starterKitText, {
           industry: LookupIndustryById("generic").name,
         });
         expect(screen.queryByText(templatedHeaderText)).not.toBeInTheDocument();
@@ -85,12 +87,14 @@ describe("<Header />", () => {
         const userData = generateUserDataForBusiness(business, { user: generateUser({ name: undefined }) });
         useMockUserData(userData);
         renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
-        const templatedHeaderText = templateEval(Config.headerDefaults.starterKitText, {
+        const templatedHeaderText = templateEval(Config.dashboardHeaderDefaults.starterKitText, {
           industry: LookupIndustryById("generic").name,
         });
-        expect(screen.queryByText(Config.headerDefaults.genericStarterKitText)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.dashboardHeaderDefaults.genericStarterKitText)
+        ).not.toBeInTheDocument();
         expect(screen.queryByText(templatedHeaderText)).not.toBeInTheDocument();
-        expect(screen.getByText(Config.headerDefaults.noUserNameHeaderText)).toBeInTheDocument();
+        expect(screen.getByText(Config.dashboardHeaderDefaults.noUserNameHeaderText)).toBeInTheDocument();
       });
     });
 
@@ -98,13 +102,13 @@ describe("<Header />", () => {
       it("greets user when name is undefined", () => {
         useMockUserData({ user: generateUser({ name: undefined }) });
         renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
-        expect(screen.getByText(Config.headerDefaults.noUserNameHeaderText)).toBeInTheDocument();
+        expect(screen.getByText(Config.dashboardHeaderDefaults.noUserNameHeaderText)).toBeInTheDocument();
       });
 
       it("includes user full name in header", () => {
         useMockUserData({ user: generateUser({ name: "Ada Lovelace" }) });
         renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
-        const expectedHeaderText = templateEval(Config.headerDefaults.defaultHeaderText, {
+        const expectedHeaderText = templateEval(Config.dashboardHeaderDefaults.defaultHeaderText, {
           name: "Ada Lovelace",
         });
         expect(screen.getByText(expectedHeaderText)).toBeInTheDocument();
@@ -129,28 +133,28 @@ describe("<Header />", () => {
         legalStructureId: randomPublicFilingLegalStructure(),
       });
       renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
-      fireEvent.click(screen.getByText(Config.headerDefaults.guestModeToProfileButtonText));
+      fireEvent.click(screen.getByText(Config.dashboardHeaderDefaults.guestModeToProfileButtonText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
     });
 
     it("displays generic content when business name is not an empty string and user is authenticated then routes to profile page on button click", () => {
       useMockProfileData({ businessName: "", legalStructureId: randomPublicFilingLegalStructure() });
       renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
-      fireEvent.click(screen.getByText(Config.headerDefaults.genericToProfileButtonText));
+      fireEvent.click(screen.getByText(Config.dashboardHeaderDefaults.genericToProfileButtonText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
     });
 
     it("displays generic content when trade name is undefined and user is authenticated then routes to profile page on button click", () => {
       useMockProfileData({ tradeName: undefined, legalStructureId: randomTradeNameLegalStructure() });
       renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
-      fireEvent.click(screen.getByText(Config.headerDefaults.genericToProfileButtonText));
+      fireEvent.click(screen.getByText(Config.dashboardHeaderDefaults.genericToProfileButtonText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
     });
 
     it("displays generic content when business name is undefined and user is authenticated then routes to profile page on button click", () => {
       useMockProfileData({ businessName: undefined, legalStructureId: randomPublicFilingLegalStructure() });
       renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
-      fireEvent.click(screen.getByText(Config.headerDefaults.genericToProfileButtonText));
+      fireEvent.click(screen.getByText(Config.dashboardHeaderDefaults.genericToProfileButtonText));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
     });
 

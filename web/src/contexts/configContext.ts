@@ -11,11 +11,13 @@ import * as CannabisPriorityStatusTab1 from "@businessnjgovnavigator/content/fie
 import * as CannabisPriorityStatusTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab2.json";
 import * as ConfigOriginal from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import * as DashboardCalendar from "@businessnjgovnavigator/content/fieldConfig/dashboard-calendar.json";
+import * as DashboardDefaults from "@businessnjgovnavigator/content/fieldConfig/dashboard-defaults.json";
 import * as DashboardModals from "@businessnjgovnavigator/content/fieldConfig/dashboard-modals.json";
 import * as DashboardSnackbars from "@businessnjgovnavigator/content/fieldConfig/dashboard-snackbars.json";
 import * as DashboardTabs from "@businessnjgovnavigator/content/fieldConfig/dashboard-tabs.json";
 import * as DeferredLocation from "@businessnjgovnavigator/content/fieldConfig/deferred-location.json";
 import * as Ein from "@businessnjgovnavigator/content/fieldConfig/ein.json";
+import * as ElevatorRegistration from "@businessnjgovnavigator/content/fieldConfig/elevator-registration.json";
 import * as ExportPdf from "@businessnjgovnavigator/content/fieldConfig/export-pdf.json";
 import * as FormationInterimSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-interim-success-page.json";
 import * as FormationSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-success-page.json";
@@ -64,7 +66,11 @@ const merged = JSON.parse(
       ExportPdf,
       NavigationDefaults,
       PageMetadata,
-      CalloutDefaults
+      NavigationDefaults,
+      DashboardDefaults,
+      PageMetadata,
+      CalloutDefaults,
+      ElevatorRegistration
     )
   )
 );
@@ -98,7 +104,11 @@ export type ConfigType = typeof ConfigOriginal &
   typeof ExportPdf &
   typeof NavigationDefaults &
   typeof PageMetadata &
-  typeof CalloutDefaults;
+  typeof CalloutDefaults &
+  typeof ElevatorRegistration &
+  typeof CalloutDefaults &
+  typeof DashboardDefaults &
+  typeof PageMetadata;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -130,7 +140,10 @@ export const getMergedConfig = (): ConfigType => {
     ExportPdf,
     NavigationDefaults,
     PageMetadata,
-    CalloutDefaults
+    DashboardDefaults,
+    PageMetadata,
+    CalloutDefaults,
+    ElevatorRegistration
   );
 };
 

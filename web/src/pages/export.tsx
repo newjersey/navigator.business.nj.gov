@@ -1,4 +1,4 @@
-import { CircularIndicator } from "@/components/CircularIndicator";
+import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { TaskBody } from "@/components/TaskBody";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
@@ -22,11 +22,11 @@ const ExportPage = (): ReactElement => {
     if (!FEATURE_EXPORT_PDF) router.push(ROUTES.dashboard);
   }, [router, FEATURE_EXPORT_PDF]);
 
-  if (!FEATURE_EXPORT_PDF || !roadmap || !business) return <CircularIndicator />;
+  if (!FEATURE_EXPORT_PDF || !roadmap || !business) return <PageCircularIndicator />;
 
   return (
     <div className={downloadIndicator ? "" : ""}>
-      {downloadIndicator ? <CircularIndicator displayText={"Downloading..."} /> : <></>}
+      {downloadIndicator && <PageCircularIndicator displayText={"Downloading..."} />}
       <div className={"margin-top-8 margin-left-8"}>
         <PrimaryButton
           isColor="primary"

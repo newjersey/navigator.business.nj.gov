@@ -21,15 +21,15 @@ describe("search business name [feature] [all] [group2]", () => {
 
     completeBusinessStructureTask({ legalStructureId });
     // search name
-    cy.get('[data-task="form-business-entity"]').click();
+    cy.get('[data-task="form-business-entity"]').first().click();
     cy.get('input[aria-label="Search business name"]').type(businessName);
-    cy.get('button[data-testid="search-availability"]').click();
+    cy.get('button[data-testid="search-availability"]').first().click();
 
     // unavailable
     cy.get('[data-testid="unavailable-text"]').should("exist");
     cy.get('[data-testid="available-text"]').should("not.exist");
 
-    cy.get('[data-testid="search-again"]').click();
+    cy.get('[data-testid="search-again"]').first().click();
     cy.get('[data-testid="unavailable-text"]').should("not.exist");
 
     // For some reason there's a race condition that's only happening in cypress when you try to type into the Search business name field again
@@ -37,17 +37,17 @@ describe("search business name [feature] [all] [group2]", () => {
     // try a new name
     // eslint-disable-next-line testing-library/await-async-utils
     // cy.wait(2000)
-    // cy.get('input[aria-label="Search business name"]').click().type("My Cool Business");
+    // cy.get('input[aria-label="Search business name"]').first().click().type("My Cool Business");
 
-    // cy.get('button[data-testid="search-availability"]').click();
+    // cy.get('button[data-testid="search-availability"]').first().click();
 
     // // available
     // cy.get('[data-testid="available-text"]').should("exist");
     // cy.get('[data-testid="unavailable-text"]').should("not.exist");
 
     // // update name
-    // cy.get('[data-testid="update-name"]').click();
-    // cy.get('[data-testid="back-to-dashboard"]').click();
+    // cy.get('[data-testid="update-name"]').first().click();
+    // cy.get('[data-testid="back-to-dashboard"]').first().click();
     // onDashboardPage.getEditProfileLink().should("exist");
   });
 });

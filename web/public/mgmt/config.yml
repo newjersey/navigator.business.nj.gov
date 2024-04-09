@@ -2100,6 +2100,39 @@ collections:
                   name: deferredOnboardingSaveButtonText,
                   widget: string,
                 }
+      - label: "Elevator Registration"
+        name: "elevator-registration-config"
+        file: "content/src/fieldConfig/elevator-registration.json"
+        editor:
+          preview: false
+        fields:
+          - label: Elevator Registration
+            name: elevatorRegistrationSearchTask
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Registration Request Date Text, name: registrationRequestDateText, widget: string }
+              - { label: Registration Status Text, name: registrationStatusText, widget: string }
+              - { label: Registration Device Count Text, name: registrationDeviceCountText, widget: string }
+              - { label: Registration Application Found Text, name: registrationApplicationFoundText, widget: string }
+              - { label: Registration Found In Review Text, name: registrationFoundInReviewText, widget: string }
+              - { label: Registration Found Incomplete/Returned Ext, name: registrationFoundIncompleteReturnedText, widget: string }
+              - { label: Registration Call to Action Primary, name: registrationCallToActionPrimaryText, widget: string }
+              - { label: Registration Call to Action Secondary, name: registrationCallToActionSecondaryText, widget: string }
+              - { label: Registration Tab 1 Text, name: registrationTab1Text, widget: string }
+              - { label: Registration Tab 2 Text, name: registrationTab2Text, widget: string }
+              - { label: Registration In Review Message Text, name: registrationInReviewMessage, widget: string }
+              - { label: Registration Rejected or Returned Message, name: registrationRejectedOrReturnedMessage, widget: string }
+              - { label: Registration Search Prompt Text, name: registrationSearchPrompt, widget: string }
+              - { label: Address 1 Label, name: address1Label, widget: string }
+              - { label: Address 2 Label, name: address2Label, widget: string }
+              - { label: ZIP code label, name: zipCodeLabel, widget: string }
+              - { label: State label, name: stateLabel, widget: string }
+              - { label: Submit Text, name: submitText, widget: string }
+              - { label: Error - No Property Interest Found, name: errorTextNoPropertyInterestFound, widget: string }
+              - { label: Error - No Elevator Registrations Found, name: errorTextNoElevatorRegistrations, widget: string }
+              - { label: Error - Missing Required Fields, name: errorTextFieldsRequired, widget: string }
+              - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
 
   - name: "tasks"
     label: "Tasks - All"
@@ -2632,6 +2665,31 @@ collections:
               - { label: Hide Button Text Mobile, name: hideButtonTextMobile, widget: string }
               - { label: Locked Pre-TaxId Text, name: lockedPostText, widget: string }
               - { label: Locked Post-TaxId Text, name: lockedPreText, widget: string }
+  - name: "municipal-tasks"
+    label: "Tasks - Municipal"
+    folder: "content/src/roadmaps/municipal-tasks"
+    delete: false
+    create: false
+    summary: "{{filename}} - {{name}}"
+    identifier_field: "{{filename}}"
+    slug: "{{fields.filename}}"
+    fields:
+      - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
+      - { label: "Name", name: "name", widget: "string", required: false }
+      - { label: "ID", name: "id", widget: "write-once-read-only"}
+      - { label: "Webflow Name", name: "webflowName", widget: "string", required: false }
+      - { label: "File name", name: "filename", widget: "write-once-read-only" }
+      - { label: "Call to Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call to Action Text", name: "callToActionText", widget: "string", required: false }
+      - { label: "Agency ID", name: "agencyId", widget: "string", required: false }
+      - { label: "Agency Additional Context", name: "agencyAdditionalContext", widget: "string", required: false }
+      - { label: "Division Phone", name: "divisionPhone", widget: "string", required: false }
+      - { label: "industry ID", name: "industryId", widget: "string", required: false }
+      - { label: "WebflowType", name: "webflowType", widget: "string", required: false }
+      - { label: "License Certification Classification", name: "licenseCertificationClassification", widget: "string", required: false }
+      - { label: "Summary Description MD", name: "summaryDescriptionMd", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
+
 
   - name: "naics-code"
     label: "Tasks - NAICS Code"
@@ -2927,6 +2985,34 @@ collections:
     delete: false
     create: false
     files:
+      - label: "Defaults"
+        name: dashboardDefaults
+        file: "content/src/fieldConfig/dashboard-defaults.json"
+        editor:
+          preview: true
+        fields:
+          - label: Dashboard Defaults
+            name: dashboardHeaderDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Header - No User Name, name: noUserNameHeaderText, widget: string }
+              - { label: Header - with User Name, name: defaultHeaderText, widget: string }
+              - { label: Starter Kit Header - Generic Industry, name: genericStarterKitText, widget: string }
+              - { label: Starter Kit Header - Other Industries, name: starterKitText, widget: string }
+              - { label: NJ Date Text, name: newJerseyDateBodyText, widget: string }
+              - {
+                  label: Guest Mode - To Profile Button Text,
+                  name: guestModeToProfileButtonText,
+                  widget: string,
+                }
+              - { label: Generic - To Profile Button Text, name: genericToProfileButtonText, widget: string }
+          - label: Dashboard Roadmap Defaults
+            name: dashboardRoadmapHeaderDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Roadmap Tasks Header Text, name: RoadmapTasksHeaderText, widget: string }
       - label: "Snackbars"
         name: "dashboard-config-snackbars"
         file: "content/src/fieldConfig/dashboard-snackbars.json"
@@ -3007,7 +3093,6 @@ collections:
               - { label: Calendar Grid View Button, name: calendarGridViewButton, widget: string }
               - { label: Calendar Filing Due Date Label, name: calendarFilingDueDateLabel, widget: string }
               - { label: Calendar Tooltip, name: calendarTooltip, widget: text }
-              - { label: Below Calendar Task Header Text, name: upAndRunningTaskHeader, widget: string }
               - { label: Show Task Button Text, name: showTaskText, widget: string }
               - { label: Hide Task Button Text, name: hideTaskText, widget: string }
               - { label: Number of Hidden Tasks Text, name: hiddenTasksText, widget: string }
@@ -4995,6 +5080,32 @@ collections:
                               value_field: "{{filename}}",
                               display_fields: ["{{displayname}}"],
                             }
+                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                          - { label: "Alt Description", name: "altDescription", widget: "markdown" }
+                  - label: Elevator Owning Business
+                    name: elevatorOwningBusiness
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - {
+                            label: "Contextual Info for Header",
+                            name: "headerContextualInfo",
+                            required: false,
+                            widget: "relation",
+                            collection: "contextual-information",
+                            search_fields: [ "{{displayname}}" ],
+                            options_length: 500,
+                            value_field: "{{filename}}",
+                            display_fields: [ "{{displayname}}" ],
+                          }
                           - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
                           - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown", required: false }

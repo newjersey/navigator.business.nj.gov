@@ -1,6 +1,9 @@
-import { randomElementFromArray } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
+import {
+  randomElementFromArray,
+  setMobileViewport,
+} from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import { onOnboardingPageStartingBusiness } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
-import { carServiceOptions, Industries, Industry, randomInt } from "@businessnjgovnavigator/shared/";
+import { Industries, Industry, carServiceOptions, randomInt } from "@businessnjgovnavigator/shared/";
 
 const enabledIndustries = Industries.filter((element: Industry) => {
   return element.isEnabled;
@@ -88,7 +91,7 @@ describe("Onboarding for all industries when starting a business [feature] [all]
 
   describe("Mobile", () => {
     beforeEach(() => {
-      cy.viewport(375, 667);
+      setMobileViewport();
       cy.loginByCognitoApi();
     });
 

@@ -56,18 +56,18 @@ describe("Dashboard [feature] [all] [group2]", () => {
 
         // step 1
         cy.get('[id="plan-content"]').should("be.visible");
-        cy.get('[id="plan-header"]').click({ force: true });
+        cy.get('[id="plan-header"]').first().click({ force: true });
         cy.get('[id="plan-content"]').should("not.be.visible");
-        cy.get('[id="plan-header"]').click({ force: true });
+        cy.get('[id="plan-header"]').first().click({ force: true });
         cy.get('[data-step="1"]').should("exist");
         cy.get('[data-task="business-plan"]').should("exist");
         cy.get('[data-task="research-insurance-needs"]').should("exist");
 
         // step 3
         cy.get('[id="start-content"]').should("be.visible");
-        cy.get('[id="start-header"]').click({ force: true });
+        cy.get('[id="start-header"]').first().click({ force: true });
         cy.get('[id="start-content"]').should("not.be.visible");
-        cy.get('[id="start-header"]').click({ force: true });
+        cy.get('[id="start-header"]').first().click({ force: true });
         cy.get('[data-step="2"]').should("exist");
         cy.get('[data-task="register-trade-name"]').should("exist");
 
@@ -102,18 +102,18 @@ describe("Dashboard [feature] [all] [group2]", () => {
         cy.wait(1000);
 
         // tasks screen
-        cy.get('[data-task="register-trade-name"]').click({ force: true });
+        cy.get('[data-task="register-trade-name"]').first().click({ force: true });
         cy.wait(1000);
         cy.get('[data-legal-structure="general-partnership"]').should("not.exist");
         cy.get('[data-task-id="register-trade-name"]').should("exist");
 
         // tasks mini-nav
-        cy.get('[data-step="4"]').click({ force: true });
-        cy.get('[data-task="check-local-requirements"]').click({ force: true });
+        cy.get('[data-step="4"]').first().click({ force: true });
+        cy.get('[data-task="check-local-requirements"]').first().click({ force: true });
         cy.get('[data-task-id="register-trade-name"]').should("not.exist");
         cy.get('[data-task-id="check-local-requirements"]').should("exist");
 
-        cy.get('[data-testid="back-to-dashboard"]').click({ force: true });
+        cy.get('[data-testid="back-to-dashboard"]').first().click({ force: true });
       });
 
       it("update the industry and verifies the dashboard tasks are updated", () => {
@@ -130,10 +130,10 @@ describe("Dashboard [feature] [all] [group2]", () => {
         onDashboardPage.clickEditProfileLink();
         cy.url().should("contain", "/profile");
 
-        cy.get('[aria-label="Industry"]').click({ force: true });
-        cy.contains("Restaurant").click({ force: true });
-        cy.get('[aria-label="Location"]').click({ force: true });
-        cy.contains("Allendale").click({ force: true });
+        cy.get('[aria-label="Industry"]').first().click({ force: true });
+        cy.contains("Restaurant").first().click({ force: true });
+        cy.get('[aria-label="Location"]').first().click({ force: true });
+        cy.contains("Allendale").first().click({ force: true });
 
         onProfilePage.clickSaveButton();
         cy.url().should("contain", "/dashboard");
@@ -156,12 +156,12 @@ describe("Dashboard [feature] [all] [group2]", () => {
         completeBusinessStructureTask({ legalStructureId });
 
         // dashboard
-        cy.get('[data-task="register-for-ein"]').click({ force: true });
+        cy.get('[data-task="register-for-ein"]').first().click({ force: true });
         cy.get('[data-testid="ein"]').should("exist");
-        cy.get('[data-testid="ein"]').click({ force: true });
+        cy.get('[data-testid="ein"]').first().click({ force: true });
 
         cy.get('[data-testid="info-panel"]').should("exist");
-        cy.get('[aria-label="close panel"]').click({ force: true });
+        cy.get('[aria-label="close panel"]').first().click({ force: true });
         cy.get('[data-testid="info-panel"]').should("not.exist");
       });
     });

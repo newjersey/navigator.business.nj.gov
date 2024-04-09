@@ -33,6 +33,7 @@ export const cmsCollections = [
       "Tasks - Tax ID",
       "Tasks - NAICS Code",
       "Tasks - Business Structure",
+      "Tasks - Municipal",
     ],
   },
   {
