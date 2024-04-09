@@ -466,7 +466,9 @@ describe("<BusinessFormation />", () => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });
     expect(formationFormData.businessSuffix).toEqual("LLC");
-    expect(formationFormData.businessStartDate).toEqual(getCurrentDate().format(defaultDateFormat));
+    expect(formationFormData.businessStartDate).toEqual(
+      getCurrentDateInNewJerseyFormatted(defaultDateFormat)
+    );
     expect(formationFormData.foreignDateOfFormation).toEqual(threeDaysFromNow.format(defaultDateFormat));
     expect(formationFormData.addressLine1).toEqual("1234 main street");
     expect(formationFormData.addressLine2).toEqual("Suite 304");
