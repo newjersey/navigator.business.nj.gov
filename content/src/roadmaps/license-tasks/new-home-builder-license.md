@@ -6,7 +6,7 @@ id: new-home-builder-license
 filename: new-home-builder-license
 displayname: new-home-builder-license
 urlSlug: new-home-builder-license
-name: Register as a New Home Builder
+name: Register Your Business as a New Home Builder
 webflowName: "Construction: New Home Builder License"
 summaryDescriptionMd: >-
   You must register as a new home builder with the State if you will build
@@ -21,7 +21,7 @@ summaryDescriptionMd: >-
   :::
 industryId:
   - commercial-construction
-callToActionText: Register as a New Home Builder
+callToActionText: Register My Business as a New Home Builder
 callToActionLink: https://www.nj.gov/dca/divisions/codes/forms/pdf_nhw/nhwprenew.pdf
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of Homeowner Protection
@@ -57,6 +57,7 @@ webflowType: business-license
 >
 > A builder registration card and number, which must be shown to your local Construction Official when you apply for a construction permit to build a new house
 >
+
 > **What if I don't register?**
 >
 > If you don't register as a new home builder with the State, you will not be able to get a construction permit to build new homes. Also, you will not be able to apply for and get a required new home warranty for those homes. You may also be subject to fines.
