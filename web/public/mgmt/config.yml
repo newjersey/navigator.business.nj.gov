@@ -2114,23 +2114,59 @@ collections:
               - { label: Registration Request Date Text, name: registrationRequestDateText, widget: string }
               - { label: Registration Status Text, name: registrationStatusText, widget: string }
               - { label: Registration Device Count Text, name: registrationDeviceCountText, widget: string }
-              - { label: Registration Application Found Text, name: registrationApplicationFoundText, widget: string }
-              - { label: Registration Found In Review Text, name: registrationFoundInReviewText, widget: string }
-              - { label: Registration Found Incomplete/Returned Ext, name: registrationFoundIncompleteReturnedText, widget: string }
-              - { label: Registration Call to Action Primary, name: registrationCallToActionPrimaryText, widget: string }
-              - { label: Registration Call to Action Secondary, name: registrationCallToActionSecondaryText, widget: string }
+              - {
+                  label: Registration Application Found Text,
+                  name: registrationApplicationFoundText,
+                  widget: string,
+                }
+              - {
+                  label: Registration Found In Review Text,
+                  name: registrationFoundInReviewText,
+                  widget: string,
+                }
+              - {
+                  label: Registration Found Incomplete/Returned Ext,
+                  name: registrationFoundIncompleteReturnedText,
+                  widget: string,
+                }
+              - {
+                  label: Registration Call to Action Primary,
+                  name: registrationCallToActionPrimaryText,
+                  widget: string,
+                }
+              - {
+                  label: Registration Call to Action Secondary,
+                  name: registrationCallToActionSecondaryText,
+                  widget: string,
+                }
               - { label: Registration Tab 1 Text, name: registrationTab1Text, widget: string }
               - { label: Registration Tab 2 Text, name: registrationTab2Text, widget: string }
-              - { label: Registration In Review Message Text, name: registrationInReviewMessage, widget: string }
-              - { label: Registration Rejected or Returned Message, name: registrationRejectedOrReturnedMessage, widget: string }
+              - {
+                  label: Registration In Review Message Text,
+                  name: registrationInReviewMessage,
+                  widget: string,
+                }
+              - {
+                  label: Registration Rejected or Returned Message,
+                  name: registrationRejectedOrReturnedMessage,
+                  widget: string,
+                }
               - { label: Registration Search Prompt Text, name: registrationSearchPrompt, widget: string }
               - { label: Address 1 Label, name: address1Label, widget: string }
               - { label: Address 2 Label, name: address2Label, widget: string }
               - { label: ZIP code label, name: zipCodeLabel, widget: string }
               - { label: State label, name: stateLabel, widget: string }
               - { label: Submit Text, name: submitText, widget: string }
-              - { label: Error - No Property Interest Found, name: errorTextNoPropertyInterestFound, widget: string }
-              - { label: Error - No Elevator Registrations Found, name: errorTextNoElevatorRegistrations, widget: string }
+              - {
+                  label: Error - No Property Interest Found,
+                  name: errorTextNoPropertyInterestFound,
+                  widget: string,
+                }
+              - {
+                  label: Error - No Elevator Registrations Found,
+                  name: errorTextNoElevatorRegistrations,
+                  widget: string,
+                }
               - { label: Error - Missing Required Fields, name: errorTextFieldsRequired, widget: string }
               - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
 
@@ -2676,20 +2712,29 @@ collections:
     fields:
       - { label: "Internal Notes", name: "notesMd", widget: "markdown", required: false }
       - { label: "Name", name: "name", widget: "string", required: false }
-      - { label: "ID", name: "id", widget: "write-once-read-only"}
+      - { label: "ID", name: "id", widget: "write-once-read-only" }
       - { label: "Webflow Name", name: "webflowName", widget: "string", required: false }
       - { label: "File name", name: "filename", widget: "write-once-read-only" }
       - { label: "Call to Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call to Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Agency ID", name: "agencyId", widget: "string", required: false }
-      - { label: "Agency Additional Context", name: "agencyAdditionalContext", widget: "string", required: false }
+      - {
+          label: "Agency Additional Context",
+          name: "agencyAdditionalContext",
+          widget: "string",
+          required: false,
+        }
       - { label: "Division Phone", name: "divisionPhone", widget: "string", required: false }
       - { label: "industry ID", name: "industryId", widget: "string", required: false }
       - { label: "WebflowType", name: "webflowType", widget: "string", required: false }
-      - { label: "License Certification Classification", name: "licenseCertificationClassification", widget: "string", required: false }
+      - {
+          label: "License Certification Classification",
+          name: "licenseCertificationClassification",
+          widget: "string",
+          required: false,
+        }
       - { label: "Summary Description MD", name: "summaryDescriptionMd", widget: "string", required: false }
       - { label: "Body", name: "body", widget: "markdown", required: false }
-
 
   - name: "naics-code"
     label: "Tasks - NAICS Code"
@@ -3754,18 +3799,15 @@ collections:
               - { label: Section 5 - Third Header Text, name: section5ThirdHeaderText, widget: string }
               - { label: Section 5 - Third Supporting Text, name: section5ThirdSupportingText, widget: text }
               - { label: Section 6 - Header Text, name: section6Header, widget: string }
-              - { label: Card 1 - Header Line 1, name: card1HeaderLine1, widget: string }
-              - { label: Card 1 - Header Line 2, name: card1HeaderLine2, widget: string }
+              - { label: Card 1 - Header Line 1, name: card1Header, widget: string }
               - { label: Card 1 - Supporting Text, name: card1SupportingText, widget: string }
               - { label: Card 1 - Button Text, name: card1Button, widget: string }
               - { label: Card 1 - Button Link, name: card1ButtonLink, widget: string }
-              - { label: Card 2 - Header Line 2, name: card2HeaderLine1, widget: string }
-              - { label: Card 2 - Header Line 2, name: card2HeaderLine2, widget: string }
+              - { label: Card 2 - Header Line 2, name: card2Header, widget: string }
               - { label: Card 2 - Supporting Text, name: card2SupportingText, widget: text }
               - { label: Card 2 - Button Text, name: card2Button, widget: string }
               - { label: Card 2 - Button Link, name: card2ButtonLink, widget: string }
-              - { label: Card 3 - Header Line 3, name: card3HeaderLine1, widget: string }
-              - { label: Card 3 - Header Line 3, name: card3HeaderLine2, widget: string }
+              - { label: Card 3 - Header Line 3, name: card3Header, widget: string }
               - { label: Card 3 - Supporting Text, name: card3SupportingText, widget: text }
               - { label: Card 3 - Button Text, name: card3Button, widget: string }
               - {
@@ -5096,16 +5138,16 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - {
-                            label: "Contextual Info for Header",
-                            name: "headerContextualInfo",
-                            required: false,
-                            widget: "relation",
-                            collection: "contextual-information",
-                            search_fields: [ "{{displayname}}" ],
-                            options_length: 500,
-                            value_field: "{{filename}}",
-                            display_fields: [ "{{displayname}}" ],
-                          }
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{displayname}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{displayname}}"],
+                            }
                           - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
                           - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown", required: false }

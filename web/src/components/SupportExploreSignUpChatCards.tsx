@@ -13,8 +13,7 @@ export const SupportExploreSignUpChatCards = (): ReactElement => {
     <div className={`${isDesktopAndUp ? "flex flex-justify" : ""}`}>
       <UserSupportActionCard
         borderColor={"primary"}
-        headerLine1={cardConfig.card1HeaderLine1}
-        headerLine2={cardConfig.card1HeaderLine2}
+        header={`${cardConfig.card1Header}`}
         supportingText={cardConfig.card1SupportingText}
         buttonLink={cardConfig.card1ButtonLink}
         buttonText={cardConfig.card1Button}
@@ -22,8 +21,7 @@ export const SupportExploreSignUpChatCards = (): ReactElement => {
       />
       <UserSupportActionCard
         borderColor={"accent-cooler"}
-        headerLine1={cardConfig.card2HeaderLine1}
-        headerLine2={cardConfig.card2HeaderLine2}
+        header={`${cardConfig.card2Header}`}
         supportingText={cardConfig.card2SupportingText}
         buttonLink={cardConfig.card2ButtonLink}
         buttonText={cardConfig.card2Button}
@@ -31,8 +29,7 @@ export const SupportExploreSignUpChatCards = (): ReactElement => {
       />
       <UserSupportActionCard
         borderColor={"info-dark"}
-        headerLine1={cardConfig.card3HeaderLine1}
-        headerLine2={cardConfig.card3HeaderLine2}
+        header={`${cardConfig.card3Header}`}
         supportingText={cardConfig.card3SupportingText}
         buttonLink=""
         buttonText={cardConfig.card3Button}
