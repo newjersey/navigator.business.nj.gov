@@ -7,8 +7,7 @@ import { ReactElement } from "react";
 
 interface Props {
   borderColor: string;
-  headerLine1: string;
-  headerLine2: string;
+  header: string;
   supportingText: string;
   buttonLink: string;
   buttonText: string;
@@ -27,12 +26,9 @@ export const UserSupportActionCard = (props: Props): ReactElement => {
       } ${!isDesktopAndUp && !props.isLast ? "margin-bottom-2" : ""}`}
     >
       <div className="flex flex-column fac space-between padding-x-2 padding-y-6 height-full">
-        <div className="text-center">
-          <Heading level={3} className="margin-0">
-            {props.headerLine1}
-          </Heading>
-          <Heading level={3} className="margin-bottom-3">
-            {props.headerLine2}
+        <div className="text-center flex flex-column fac">
+          <Heading level={3} className={"margin-0 width-card-lg support-action-card"}>
+            {props.header}
           </Heading>
           <div>{props.supportingText}</div>
         </div>
