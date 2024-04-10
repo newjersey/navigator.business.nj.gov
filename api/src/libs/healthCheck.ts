@@ -5,13 +5,13 @@ type Status = "PASS" | "FAIL" | "ERROR";
 type StatusResult = Record<string, Status>;
 
 const healthCheckEndPoints: Record<string, string> = {
-  self: "self2",
-  elevator: "dynamics/elevator",
-  fireSafety: "dynamics/fire-safety",
-  housing: "dynamics/housing",
-  dynamicsLicenseStatus: "dynamics/license-status",
-  webserviceLicenseStatus: "webservice/license-status",
-  webserviceFormation: "webservice/formation",
+  self: "selfError",
+  elevator: "dynamics/elevatorError",
+  fireSafety: "dynamics/fire-safetyError",
+  housing: "dynamics/housingError",
+  dynamicsLicenseStatus: "dynamics/license-statusError",
+  webserviceLicenseStatus: "webservice/license-statusError",
+  webserviceFormation: "webservice/formationError",
 };
 
 const url =
