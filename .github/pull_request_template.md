@@ -31,5 +31,5 @@
 - [ ] I have pruned any instances of unused code
 - [ ] I have not added any markdown to labels, titles and button text in config
 - [ ] If I added/updated any values in `userData` (including `profileData`, `formationData` etc), then I added a new migration file
-- [ ] If I added any new collections to the CMS config, then I updated the search tool and `cmsCollections.ts`
+- [ ] If I added any new collections to the CMS config, then I updated the search tool and `cmsCollections.ts` (see [CMS Additions in Engineering Reference/FAQ](https://docs.google.com/document/d/1X4iWSGmBZdHYZ0jGqkwTR3_yyyqI_TiiJptfc8pi9Po/edit#heading=h.fu5jdsrcqxbh))
 - [ ] I have updated relevant `.env` values in both `.env-template` and in Bitwarden
