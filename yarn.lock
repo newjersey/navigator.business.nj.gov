@@ -4254,6 +4254,7 @@ __metadata:
     dedent: 1.5.1
     dependency-cruiser: 16.2.3
     dotenv: 16.4.5
+    dynamodb-admin: ^4.6.1
     eslint: 8.57.0
     eslint-config-next: 14.1.3
     eslint-config-prettier: 9.1.0
@@ -11864,7 +11865,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accepts@npm:~1.3.5, accepts@npm:~1.3.8":
+"accepts@npm:~1.3.5, accepts@npm:~1.3.7, accepts@npm:~1.3.8":
   version: 1.3.8
   resolution: "accepts@npm:1.3.8"
   dependencies:
@@ -12884,6 +12885,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"aws-sdk@npm:^2.1225.0":
+  version: 2.1597.0
+  resolution: "aws-sdk@npm:2.1597.0"
+  dependencies:
+    buffer: 4.9.2
+    events: 1.1.1
+    ieee754: 1.1.13
+    jmespath: 0.16.0
+    querystring: 0.2.0
+    sax: 1.2.1
+    url: 0.10.3
+    util: ^0.12.4
+    uuid: 8.0.0
+    xml2js: 0.6.2
+  checksum: 4aa05944bbf14473812807684c5ba0e4b217ff53ed0717bd0014b1ec2dfa2fdcb621c255a91d81b01faf5e87a3dbc79b6e0c2b6a1113c97b9e7145c05dde87d3
+  languageName: node
+  linkType: hard
+
 "aws-sdk@npm:^2.1404.0":
   version: 2.1574.0
   resolution: "aws-sdk@npm:2.1574.0"
@@ -13393,7 +13412,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"body-parser@npm:1.20.2":
+"body-parser@npm:1.20.2, body-parser@npm:^1.20.0":
   version: 1.20.2
   resolution: "body-parser@npm:1.20.2"
   dependencies:
@@ -14427,7 +14446,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cli-color@npm:^2.0.1, cli-color@npm:^2.0.4":
+"cli-color@npm:^2.0.1, cli-color@npm:^2.0.3, cli-color@npm:^2.0.4":
   version: 2.0.4
   resolution: "cli-color@npm:2.0.4"
   dependencies:
@@ -15166,10 +15185,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cookie-parser@npm:^1.4.6":
+  version: 1.4.6
+  resolution: "cookie-parser@npm:1.4.6"
+  dependencies:
+    cookie: 0.4.1
+    cookie-signature: 1.0.6
+  checksum: 1e5a63aa82e8eb4e02d2977c6902983dee87b02e87ec5ec43ac3cb1e72da354003716570cd5190c0ad9e8a454c9d3237f4ad6e2f16d0902205a96a1c72b77ba5
+  languageName: node
+  linkType: hard
+
 "cookie-signature@npm:1.0.6":
   version: 1.0.6
   resolution: "cookie-signature@npm:1.0.6"
   checksum: f4e1b0a98a27a0e6e66fd7ea4e4e9d8e038f624058371bf4499cfcd8f3980be9a121486995202ba3fca74fbed93a407d6d54d43a43f96fd28d0bd7a06761591a
+  languageName: node
+  linkType: hard
+
+"cookie@npm:0.4.1":
+  version: 0.4.1
+  resolution: "cookie@npm:0.4.1"
+  checksum: bd7c47f5d94ab70ccdfe8210cde7d725880d2fcda06d8e375afbdd82de0c8d3b73541996e9ce57d35f67f672c4ee6d60208adec06b3c5fc94cebb85196084cf8
   languageName: node
   linkType: hard
 
@@ -16861,6 +16897,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dynamodb-admin@npm:^4.6.1":
+  version: 4.6.1
+  resolution: "dynamodb-admin@npm:4.6.1"
+  dependencies:
+    argparse: ^2.0.1
+    aws-sdk: ^2.1225.0
+    body-parser: ^1.20.0
+    cli-color: ^2.0.3
+    cookie-parser: ^1.4.6
+    ejs: ^3.1.8
+    errorhandler: ^1.5.1
+    express: ^4.18.1
+    lodash.pickby: ^4.6.0
+    open: ^8.4.0
+  bin:
+    dynamodb-admin: bin/dynamodb-admin.js
+  checksum: 9d834eaea55146daeb0e5caf67ae10e2086d449cca6556a5e036a576a929a8f80285b9ce8f3830711a1263762589e279dbfa467620dd747fed4d30e0b55fa6d1
+  languageName: node
+  linkType: hard
+
 "eastasianwidth@npm:^0.2.0":
   version: 0.2.0
   resolution: "eastasianwidth@npm:0.2.0"
@@ -17151,6 +17207,16 @@ __metadata:
   dependencies:
     stackframe: ^1.3.4
   checksum: 3b916d2d14c6682f287c8bfa28e14672f47eafe832701080e420e7cdbaebb2c50293868256a95706ac2330fe078cf5664713158b49bc30d7a5f2ac229ded0e18
+  languageName: node
+  linkType: hard
+
+"errorhandler@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "errorhandler@npm:1.5.1"
+  dependencies:
+    accepts: ~1.3.7
+    escape-html: ~1.0.3
+  checksum: 73b7abb08fb751107e9bebecc33c40c0641a54be8bda8e4a045f3f5cb7b805041927fef5629ea39b1737799eb52fe2499ca531f11ac51b0294ccc4667d72cb91
   languageName: node
   linkType: hard
 
@@ -18147,7 +18213,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express@npm:4.19.2, express@npm:^4.17.3":
+"express@npm:4.19.2, express@npm:^4.17.3, express@npm:^4.18.1":
   version: 4.19.2
   resolution: "express@npm:4.19.2"
   dependencies:
@@ -24000,6 +24066,13 @@ __metadata:
   version: 4.1.1
   resolution: "lodash.once@npm:4.1.1"
   checksum: d768fa9f9b4e1dc6453be99b753906f58990e0c45e7b2ca5a3b40a33111e5d17f6edf2f768786e2716af90a8e78f8f91431ab8435f761fef00f9b0c256f6d245
+  languageName: node
+  linkType: hard
+
+"lodash.pickby@npm:^4.6.0":
+  version: 4.6.0
+  resolution: "lodash.pickby@npm:4.6.0"
+  checksum: a554d898c15bcd3218e4005b95b5146210bd862010c7d242d17106ee36aed9b9209a858ce974136ab1faadd86a82297761c206fda7f1886278bac827145c5536
   languageName: node
   linkType: hard
 
