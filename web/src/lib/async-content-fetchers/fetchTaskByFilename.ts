@@ -48,7 +48,11 @@ const fetchTaskFile = async (filename: string): Promise<string> => {
     try {
       file = await import(`@businessnjgovnavigator/content/roadmaps/tasks/${filename}.md`);
     } catch {
-      file = await import(`@businessnjgovnavigator/content/roadmaps/license-tasks/${filename}.md`);
+      try {
+        file = await import(`@businessnjgovnavigator/content/roadmaps/license-tasks/${filename}.md`);
+      } catch {
+        file = await import(`@businessnjgovnavigator/content/roadmaps/municipal-tasks/${filename}.md`);
+      }
     }
   }
   return file.default;

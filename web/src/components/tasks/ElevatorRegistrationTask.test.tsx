@@ -121,6 +121,81 @@ describe("<ElevatorRegistrationTask />", () => {
       expect(screen.getByTestId("registration-2")).toBeInTheDocument();
       expect(screen.queryByTestId("registration-3")).not.toBeInTheDocument();
     });
+
+    it("shows informational message for incomplete status", async () => {
+      renderTask();
+      getToSearchTab();
+      const incompleteResponse = generateElevatorSafetyRegistration({ status: "Incomplete" });
+      const response = generateElevatorSafetyRegistrationSummary({
+        registrations: [incompleteResponse],
+      });
+      mockApi.checkElevatorRegistrationStatus.mockResolvedValue(response);
+      fireEvent.submit(screen.getByTestId("check-status-submit"));
+      await waitFor(() => {
+        expect(screen.getByTestId("registration-0")).toBeInTheDocument();
+      });
+      expect(screen.getByTestId("registration-0-informational-message")).toBeInTheDocument();
+    });
+
+    it("shows informational message for in review status", async () => {
+      renderTask();
+      getToSearchTab();
+      const inReviewResponse = generateElevatorSafetyRegistration({ status: "In Review" });
+      const response = generateElevatorSafetyRegistrationSummary({
+        registrations: [inReviewResponse],
+      });
+      mockApi.checkElevatorRegistrationStatus.mockResolvedValue(response);
+      fireEvent.submit(screen.getByTestId("check-status-submit"));
+      await waitFor(() => {
+        expect(screen.getByTestId("registration-0")).toBeInTheDocument();
+      });
+      expect(screen.getByTestId("registration-0-informational-message")).toBeInTheDocument();
+    });
+
+    it("shows informational message for rejected status", async () => {
+      renderTask();
+      getToSearchTab();
+      const rejectedResponse = generateElevatorSafetyRegistration({ status: "Rejected" });
+      const response = generateElevatorSafetyRegistrationSummary({
+        registrations: [rejectedResponse],
+      });
+      mockApi.checkElevatorRegistrationStatus.mockResolvedValue(response);
+      fireEvent.submit(screen.getByTestId("check-status-submit"));
+      await waitFor(() => {
+        expect(screen.getByTestId("registration-0")).toBeInTheDocument();
+      });
+      expect(screen.getByTestId("registration-0-informational-message")).toBeInTheDocument();
+    });
+
+    it("shows informational message for returned status", async () => {
+      renderTask();
+      getToSearchTab();
+      const returnedResponse = generateElevatorSafetyRegistration({ status: "Returned" });
+      const response = generateElevatorSafetyRegistrationSummary({
+        registrations: [returnedResponse],
+      });
+      mockApi.checkElevatorRegistrationStatus.mockResolvedValue(response);
+      fireEvent.submit(screen.getByTestId("check-status-submit"));
+      await waitFor(() => {
+        expect(screen.getByTestId("registration-0")).toBeInTheDocument();
+      });
+      expect(screen.getByTestId("registration-0-informational-message")).toBeInTheDocument();
+    });
+
+    it("does not show informational message for approved status", async () => {
+      renderTask();
+      getToSearchTab();
+      const approvedResponse = generateElevatorSafetyRegistration();
+      const response = generateElevatorSafetyRegistrationSummary({
+        registrations: [approvedResponse],
+      });
+      mockApi.checkElevatorRegistrationStatus.mockResolvedValue(response);
+      fireEvent.submit(screen.getByTestId("check-status-submit"));
+      await waitFor(() => {
+        expect(screen.getByTestId("registration-0")).toBeInTheDocument();
+      });
+      expect(screen.queryByTestId("registration-0-informational-message")).not.toBeInTheDocument();
+    });
   });
 
   const fillText = (testid: string, value: string): void => {

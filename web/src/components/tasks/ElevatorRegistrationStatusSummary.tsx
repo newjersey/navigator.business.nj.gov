@@ -1,9 +1,11 @@
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
+import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
+import { parseDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import {
   ElevatorSafetyAddress,
   ElevatorSafetyRegistrationSummary,
@@ -18,54 +20,115 @@ interface Props {
   onEdit: () => void;
 }
 
+type CardDisplayDetails = {
+  headerColor: string;
+  bodyColor: string;
+  icon: string;
+  iconTextColor: string;
+};
+
 export const ElevatorRegistrationStatusSummary = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const { business } = useUserData();
 
-  const getInformationalMessageText = (): string => {
-    const statuses: string[] = [];
-    for (const reg of props.summary.registrations) {
-      statuses.push(reg.status);
+  const getDetailsForRegistrationCard = (status: string): CardDisplayDetails => {
+    switch (status) {
+      case "Approved":
+        return {
+          headerColor: "bg-success-darker",
+          bodyColor: "bg-success-lighter",
+          icon: "check_circle",
+          iconTextColor: "text-success-darker",
+        };
+      case "Rejected":
+      case "Returned":
+      case "Incomplete":
+        return {
+          headerColor: "bg-error",
+          bodyColor: "bg-error-extra-light",
+          icon: "cancel",
+          iconTextColor: "text-error-darker",
+        };
+      default:
+        return {
+          headerColor: "bg-info-dark",
+          bodyColor: "bg-info-extra-light",
+          icon: "",
+          iconTextColor: "",
+        };
     }
-
-    if (
-      statuses.includes("Incomplete") ||
-      statuses.includes("Cancelled") ||
-      statuses.includes("Returned") ||
-      statuses.includes("Rejected")
-    ) {
-      return Config.elevatorRegistrationSearchTask.registrationFoundIncompleteReturnedText;
-    } else if (statuses.includes("In Review")) {
-      return Config.elevatorRegistrationSearchTask.registrationInReviewMessage;
-    }
-    return "";
   };
 
-  getInformationalMessageText();
+  const getInformationalMessageText = (status: string): string => {
+    switch (status) {
+      case "In Review":
+        return Config.elevatorRegistrationSearchTask.informationalInReview;
+      case "Incomplete":
+        return Config.elevatorRegistrationSearchTask.informationalIncomplete;
+      case "Rejected":
+        return Config.elevatorRegistrationSearchTask.informationalRejected;
+      case "Returned":
+        return Config.elevatorRegistrationSearchTask.informationalReturned;
+      default:
+        return "";
+    }
+  };
 
-  const elevatorRegistrationStatus = (
+  const elevatorRegistrationStatusCard = (
     date: string,
     deviceCount: number,
     status: string,
     index: number
   ): ReactElement => {
+    const details = getDetailsForRegistrationCard(status);
+    const formattedDate = parseDate(date).format("MMMM d, YYYY");
+    const informationalMessage = getInformationalMessageText(status);
+
+    const getIconForRegistrationCard = (): ReactElement => {
+      switch (status) {
+        case "In Review":
+          return <img src={`/img/access_time_filled.svg`} alt="" style={{ width: "17px", height: "17px" }} />;
+        default:
+          return (
+            <>
+              <Icon className={`inline-icon ${details.iconTextColor}`}>{details.icon}</Icon>
+            </>
+          );
+      }
+    };
+
     return (
-      <div data-testid={`registration-${index}`} key={index} className={"padding-bottom-2"}>
-        <span>{Config.elevatorRegistrationSearchTask.registrationRequestDateText}</span>
-        <span data-testid={`registration-${index}-date`} className={"text-bold"}>
-          {date}
+      <div
+        data-testid={`registration-${index}`}
+        key={index}
+        className={"bg-white margin-y-4 padding-x-4 padding-y-4 radius-lg drop-shadow-xs"}
+      >
+        <span className={"text-bold"}>
+          <span>{Config.elevatorRegistrationSearchTask.registrationRequestDateText}</span>
+          <span data-testid={`registration-${index}-date`}>{formattedDate}</span>
         </span>
-        <ul>
-          <li data-testid={`registration-${index}-device-count`}>
-            {Config.elevatorRegistrationSearchTask.registrationDeviceCountText}
-            <span className={"text-bold"}>{deviceCount}</span>
-          </li>
-          <li data-testid={`registration-${index}-status`}>
-            {Config.elevatorRegistrationSearchTask.registrationStatusText}
-            <span className={"text-bold"}>{status}</span>
-          </li>
-        </ul>
+
+        <HorizontalLine />
+        <span data-testid={`registration-${index}-device-count`}>
+          {Config.elevatorRegistrationSearchTask.registrationDeviceCountText}
+          <span className={"text-bold"}>{deviceCount}</span>
+        </span>
+        <Box className={`${details.headerColor} fdc fg1 radius-lg margin-top-2 drop-shadow-xs`}>
+          <span className={"padding-left-2 padding-y-1 text-white"}>Application Status:</span>
+          <Box className={`${details.bodyColor} radius-bottom-lg padding-left-2 padding-y-2 `}>
+            {getIconForRegistrationCard()}
+            <span
+              data-testid={`registration-${index}-status`}
+              className={`padding-left-2 text-bold ${details.iconTextColor}`}
+            >
+              {status}
+            </span>
+            {informationalMessage && (
+              <div data-testid={`registration-${index}-informational-message`}>{informationalMessage}</div>
+            )}
+          </Box>
+        </Box>
       </div>
     );
   };
@@ -97,18 +160,15 @@ export const ElevatorRegistrationStatusSummary = (props: Props): ReactElement =>
             </span>
           )}
 
-          <div
-            className={`bg-white margin-y-4 padding-x-4 padding-bottom-2 padding-top-2 radius-lg drop-shadow-xs`}
-          >
+          <div>
             {props.summary.registrations.map((registration, index) => {
-              return elevatorRegistrationStatus(
+              return elevatorRegistrationStatusCard(
                 registration.dateStarted,
                 registration.deviceCount,
                 registration.status,
                 index
               );
             })}
-            {getInformationalMessageText()}
           </div>
 
           <HorizontalLine />
