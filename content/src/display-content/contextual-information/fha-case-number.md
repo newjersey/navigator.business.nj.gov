@@ -2,8 +2,7 @@
 notesMd: "[Muni planning
   doc](https://docs.google.com/document/d/1pZBqY3yS9y8Y3MMSHqwvTFtdlYvuxhWKK70f\
   UqsXRSY/edit)"
-header: Federal Housing Administration (FHA) or Veterans Administration (VA)
-  Case Number
+header: Federal Housing Administration (FHA) or Veterans Affairs (VA) Case Number
 slug: fha-case-number
 displayname: fha-case-number
 ---
