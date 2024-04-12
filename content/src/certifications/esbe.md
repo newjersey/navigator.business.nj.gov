@@ -3,9 +3,9 @@ sidebarCardBodyText: Emerging Small Business Enterprise (ESBE) certification
   facilitates competition by small businesses for New Jersey Department of
   Transportation's (NJDOT) contracts.
 summaryDescriptionMd: >-
-  Emerging Small Business Enterprise (ESBE) certification **provides small
-  businesses access to NJDOT contract opportunities that would otherwise be
-  difficult to secure.**
+  Emerging Small Business Enterprise (ESBE) certification may **provide an
+  advantage for the New Jersey Department of Transportation's (NJDOT)
+  contracts**.
 
 
   *Learn more about [government contracts](https://business.nj.gov/pages/government-contracting).*
