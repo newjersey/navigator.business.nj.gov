@@ -2,21 +2,22 @@
 sidebarCardBodyText: Emerging Small Business Enterprise (ESBE) certification
   facilitates competition by small businesses for New Jersey Department of
   Transportation's (NJDOT) contracts.
+summaryDescriptionMd: >-
+  Emerging Small Business Enterprise (ESBE) certification **provides small
+  businesses access to NJDOT contract opportunities that would otherwise be
+  difficult to secure.**
+
+
+  *Learn more about [government contracts](https://business.nj.gov/pages/government-contracting).*
 urlSlug: esbe
-name: Get a Emerging Small Business Enterprise (ESBE) Certification
+name: Get an Emerging Small Business Enterprise (ESBE) Certification
 id: esbe
 callToActionLink: https://www.state.nj.us/transportation/business/civilrights/dbe.shtm#policy
 callToActionText: Apply for My ESBE
 agency:
   - njdot
 isSbe: false
-summaryDescriptionMd: >-
-  Emerging Small Business Enterprise (ESBE) certification **facilitates competition by small businesses for New Jersey Department of Transportation's (NJDOT) contracts.**
-
-
-  _Learn more about [government contracts](https://business.nj.gov/pages/government-contracting)._
 ---
-
 ## Eligibility Criteria
 
 1. Must be a small business, according to [SBA size standards](https://www.sba.gov/size-standards/index.html)
@@ -26,10 +27,10 @@ summaryDescriptionMd: >-
 
 ## Application Needs
 
-- Preferences are given to businesses whose principal place of business is in New Jersey but will accept applications from out-of-state businesses
-- Requires submission of documents to support personal net worth (PNW) and economic disadvantaged status.
-- Applicant(s) must participate in the on-site interview proceedings.
+* Preferences are given to businesses whose principal place of business is in New Jersey but will accept applications from out-of-state businesses
+* Requires submission of documents to support personal net worth (PNW) and economic disadvantaged status.
+* Applicant(s) must participate in the on-site interview proceedings.
 
 > **After you complete this, you will have:**
 >
-> - An Emerging Small Business Enterprise certificate
+> * An Emerging Small Business Enterprise certificate
