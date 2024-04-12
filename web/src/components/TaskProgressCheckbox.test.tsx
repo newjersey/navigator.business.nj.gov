@@ -26,7 +26,7 @@ import {
   taxTaskId,
 } from "@businessnjgovnavigator/shared";
 import { ThemeProvider, createTheme } from "@mui/material";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -218,13 +218,26 @@ describe("<TaskProgressCheckbox />", () => {
     });
 
     it("updates status and date of formation, and redirects user on save", async () => {
+      jest.useFakeTimers();
       const id = formationTaskId;
       const startingPersonaForRoadmapUrl = generateProfileData({ businessPersona: "STARTING" });
       renderTaskCheckbox(formationTaskId, generateBusiness({ profileData: startingPersonaForRoadmapUrl }));
       await selectCompleted();
+
+      expect(screen.getByText(getTaskStatusUpdatedMessage("IN_PROGRESS"))).toBeInTheDocument();
+      act(() => {
+        jest.advanceTimersByTime(7000);
+      });
+      await waitFor(() => {
+        return expect(screen.queryByText(getTaskStatusUpdatedMessage("IN_PROGRESS"))).not.toBeInTheDocument();
+      });
+
       const date = getCurrentDate().subtract(1, "month").date(1);
       selectDate(date);
       fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
+      await waitFor(() => {
+        expect(screen.queryByText(getTaskStatusUpdatedMessage("COMPLETED"))).not.toBeInTheDocument();
+      });
       await waitFor(() => {
         return expect(currentBusiness().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
       });
