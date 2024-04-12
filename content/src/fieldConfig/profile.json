@@ -59,7 +59,7 @@
       },
       "taxId": {
         "default": {
-          "header": "What is your New Jersey Tax ID?",
+          "header": "New Jersey Tax ID",
           "headerContextualInfo": "tax-id",
           "description": "",
           "errorTextRequired": "Enter a 12-digit Tax ID",
@@ -115,6 +115,15 @@
           "headerContextualInfo": "tax-pin",
           "description": "",
           "errorTextRequired": "Tax PIN must be 4 digits."
+        }
+      },
+      "elevatorOwningBusiness": {
+        "default": {
+          "header": "Elevator Owning Business",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Do you own or plan to own a space with a new or existing `elevator device|elevator-device` , such as an elevator, escalator, or lift?",
+          "altDescription": "Do you plan to own a space now or in the future with a new or existing `elevator device|elevator-device` , such as an elevator, escalator, or lift?"
         }
       },
       "businessName": {
@@ -238,15 +247,6 @@
           "radioButtonFalseText": "No",
           "description": "Are you a `home-based business|home-based-business` ?",
           "altDescription": "Do you plan to be a `home-based business|home-based-business` ?"
-        }
-      },
-      "elevatorOwningBusiness": {
-        "default": {
-          "header": "Elevator Owning Business",
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Do you own or plan to own a space with a new or existing `elevator device|elevator-device`, such as an elevator, escalator, or lift?",
-          "altDescription": "Do you plan to own a space now or in the future with a new or existing `elevator device|elevator-device`, such as an elevator, escalator, or lift? "
         }
       },
       "legalStructureId": {
@@ -376,13 +376,13 @@
       "standingDocFileTitle": "Certificate of Good Standing",
       "profileErrorAlertOneField": "the field",
       "profileTabDocsTitle": "Reference Documents",
-      "profileTabNumbersTitle": "Reference Numbers",
       "successTextBody": "Based on your answers, you may see updates to your Business.NJ.gov account experience.",
       "essentialQuestionAlertText": "Complete all required fields.",
       "formationDocFileTitle": "Official Formation Document",
       "profileCompletionAlert": "Complete the information below to customize your certifications, funding opportunities, and annual report deadline:",
       "errorTextBody": "Review your information in the fields marked below.",
       "escapeModalHeader": "Are you sure you want to continue?",
+      "profileTabNumbersTitle": "Reference Numbers",
       "profileTabNoteTitle": "Notes",
       "noteForBusinessesFormedOutsideNavigator": "Your profile helps us recommend requirements and opportunities unique to your business. It does not submit your information for registration purposes.",
       "saveButtonText": "Save",
