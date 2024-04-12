@@ -10,7 +10,7 @@ summaryDescriptionMd: If you own a new `multiple dwelling|multiple-dwelling`,
 urlSlug: multiple-dwelling-registration
 filename: multiple-dwelling-registration
 displayname: multiple-dwelling-registration
-name: Register Your Multiple Dwelling, such as an Apartment or Condominium Complex
+name: Register Your Multiple Dwelling, Such as an Apartment or Condominium Complex
 id: multiple-dwelling-registration
 callToActionLink: https://njdcaportal.dynamics365portals.us/ultra-bhi-home/
 callToActionText: Register My Multiple Dwelling
@@ -41,7 +41,7 @@ agencyAdditionalContext: Bureau of Housing Inspection
 * Name and address of your fuel oil supplier and the grade of fuel oil used, if your building(s) is heated by fuel oil
 * Applicable fees paid
 
-If your business is a `Corporation, Limited Liability Company (LLC), Limited Partnership (LP), or Limited Liability Partnership (LLP)|business-structure-learn-more`, you also need the:
+If your business is a `Corporation, Limited Liability Company (LLC), Limited Partnership (LP),|business-structure-learn-more` `or Limited Liability Partnership (LLP)|business-structure-learn-more`, you also need the:
 
 * Name and address of your `registered agent|registered-agent` 
 * Name and address of each officer or partner
