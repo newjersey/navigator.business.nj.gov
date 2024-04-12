@@ -1,3 +1,27 @@
+# [2024.13.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.12.0...v2024.13.0) (2024-04-12)
+
+
+### Bug Fixes
+
+* [[#187354337](https://github.com/newjersey/navigator.business.nj.gov/issues/187354337)] add reference to CMS additions documentation in PR template ([0674ed1](https://github.com/newjersey/navigator.business.nj.gov/commit/0674ed101b82d725dbfb4261510a24293989dba7))
+* [[#187354337](https://github.com/newjersey/navigator.business.nj.gov/issues/187354337)] match content from elevator registration task ([f8bd3a8](https://github.com/newjersey/navigator.business.nj.gov/commit/f8bd3a8cdbc338d7f4026d45a95f06ea37a0fe35))
+* [[#187380461](https://github.com/newjersey/navigator.business.nj.gov/issues/187380461)] restore elevator registration task to cms ([c3d9a38](https://github.com/newjersey/navigator.business.nj.gov/commit/c3d9a3834f0f5081c6597e6f34269703ce8b96f3))
+* change formation test to reference current date in NJ ([f16711a](https://github.com/newjersey/navigator.business.nj.gov/commit/f16711ad64debf910433250942dc97abebb44827))
+* downgrading testing library ([8193b89](https://github.com/newjersey/navigator.business.nj.gov/commit/8193b89dd5c6d0650cc5befd7dabd6d838a0c7ae))
+* failing unit tests related to hardcoded formationDate ([f405b2c](https://github.com/newjersey/navigator.business.nj.gov/commit/f405b2c56c750da1b8f59c8fa4146344b94b77c5))
+* remove process.exit from healthCheck.ts ([045b080](https://github.com/newjersey/navigator.business.nj.gov/commit/045b0806726a00985bb9d31434604a804aa993cb))
+
+
+### Features
+
+* [[#186003964](https://github.com/newjersey/navigator.business.nj.gov/issues/186003964)] fixed scss selectors selecting all h3's isntead of just particualr ones ([ffb3c53](https://github.com/newjersey/navigator.business.nj.gov/commit/ffb3c53cdd76e8f9e0167fb4a8365954e6f026f0))
+* [[#186003964](https://github.com/newjersey/navigator.business.nj.gov/issues/186003964)] home page support card headers are 1 header line ([92550ac](https://github.com/newjersey/navigator.business.nj.gov/commit/92550acc0eddc48c045144a52d8b5bab97efc253))
+* [[#186004286](https://github.com/newjersey/navigator.business.nj.gov/issues/186004286)] update heading structure on dashboard ([38aa18d](https://github.com/newjersey/navigator.business.nj.gov/commit/38aa18d734211e78481bb5051a911ac75af99194))
+* [[#186316063](https://github.com/newjersey/navigator.business.nj.gov/issues/186316063)] Task Status Checkbox Alert Announcement ([c430c69](https://github.com/newjersey/navigator.business.nj.gov/commit/c430c69e4971ecddd629128d8bd13ff09467c2ab))
+* [[#187166173](https://github.com/newjersey/navigator.business.nj.gov/issues/187166173)] Cypress Existing Business Mobile Tests ([9e500a8](https://github.com/newjersey/navigator.business.nj.gov/commit/9e500a8489c2408a334575ff4743db4c8b8336b8))
+* [[#187200130](https://github.com/newjersey/navigator.business.nj.gov/issues/187200130)] [[#187200069](https://github.com/newjersey/navigator.business.nj.gov/issues/187200069)] [[#187200176](https://github.com/newjersey/navigator.business.nj.gov/issues/187200176)] [[#187200152](https://github.com/newjersey/navigator.business.nj.gov/issues/187200152)] add callout widget ([bf780b6](https://github.com/newjersey/navigator.business.nj.gov/commit/bf780b6e66188707a947b88875a7ccfd42421b2f))
+* [[#187354337](https://github.com/newjersey/navigator.business.nj.gov/issues/187354337)] use cards for elevator registration task ([2a4a960](https://github.com/newjersey/navigator.business.nj.gov/commit/2a4a960fd66dedc6026c0772019142027228b28f))
+
 # [2024.12.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.11.0...v2024.12.0) (2024-04-03)
 
 
