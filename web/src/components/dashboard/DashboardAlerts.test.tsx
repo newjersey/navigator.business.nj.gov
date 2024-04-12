@@ -56,6 +56,13 @@ describe("<DashboardAlerts />", () => {
     expect(screen.getByTestId("snackbar-alert-calendar")).toBeInTheDocument();
   });
 
+  it("renders task status updated snackbar when fromFormBusinessEntity query parameter is provided", () => {
+    useMockRouter({ isReady: true, query: { [QUERIES.fromFormBusinessEntity]: "true" } });
+    renderStatefulPage();
+    act(() => jest.runAllTimers());
+    expect(screen.getByTestId("checkbox-status-updated-snackbar-alert")).toBeInTheDocument();
+  });
+
   it("renders certifications snackbar when fromForming query parameter is provided", () => {
     useMockRouter({ isReady: true, query: { [QUERIES.fromForming]: "true" } });
     renderStatefulPage();
