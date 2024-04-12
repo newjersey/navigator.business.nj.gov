@@ -94,7 +94,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
     updateQueue
       .update()
       .then(() => {
-        setSuccessSnackbarIsOpen(true);
+        if (!(isFormationTask(props.taskId) && nextStatus === "COMPLETED")) setSuccessSnackbarIsOpen(true);
         if (!redirectOnSuccess) {
           return;
         }

@@ -3120,8 +3120,8 @@ collections:
                   widget: text,
                 }
               - {
-                  label: Opportunities and Deadlines Snackbar Time Delay,
-                  name: opportunitiesAndDeadlinesTimeDelay,
+                  label: Time Delay Between Multiple Snackbars (Time In Milliseconds),
+                  name: timeDelayBetweenMultipleSnackbars,
                   widget: text,
                 }
       - label: "Dashboard Calendar"
@@ -4168,7 +4168,8 @@ collections:
               - { label: Page Title, name: pageTitle, widget: string }
               - { label: Back Button Text, name: backToRoadmapText, widget: string }
               - { label: Default Call to Action Test, name: defaultCallToActionText, widget: string }
-              - { label: Task Progress - Prefix, name: taskProgressSnackbarPrefix, widget: string }
+              - { label: Task Progress Alert - Body Prefix, name: taskProgressSnackbarPrefix, widget: string }
+              - { label: Task Progress Alert - Heading, name: taskProgressSnackbarHeading, widget: string }
               - { label: Next Task Button Text, name: nextTaskButtonText, widget: string }
               - { label: Previous Task Button Text, name: previousTaskButtonText, widget: string }
               - { label: Unlocked By - Singular, name: unlockedBySingular, widget: string }

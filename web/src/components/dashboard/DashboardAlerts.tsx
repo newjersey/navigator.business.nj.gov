@@ -1,10 +1,13 @@
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useQueryControlledAlert } from "@/lib/data-hooks/useQueryControlledAlert";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import { getTaskStatusUpdatedMessage } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 
 export const DashboardAlerts = (): ReactElement => {
   const { Config } = useConfig();
+
+  const secondSnackbarTimeDelay = Config.dashboardDefaults.timeDelayBetweenMultipleSnackbars;
 
   const ProfileUpdatedAlert = useQueryControlledAlert({
     queryKey: QUERIES.success,
@@ -23,6 +26,16 @@ export const DashboardAlerts = (): ReactElement => {
     dataTestId: "snackbar-alert-calendar",
   });
 
+  const CheckboxStatusUpdated = useQueryControlledAlert({
+    queryKey: QUERIES.fromFormBusinessEntity,
+    pagePath: ROUTES.dashboard,
+    headerText: Config.taskDefaults.taskProgressSnackbarHeading,
+    bodyText: getTaskStatusUpdatedMessage("COMPLETED"),
+    variant: "success",
+    dataTestId: "checkbox-status-updated-snackbar-alert",
+    delayInMilliseconds: secondSnackbarTimeDelay,
+  });
+
   const CertificationsAlert = useQueryControlledAlert({
     queryKey: QUERIES.fromForming,
     pagePath: ROUTES.dashboard,
@@ -39,7 +52,7 @@ export const DashboardAlerts = (): ReactElement => {
     bodyText: Config.dashboardDefaults.opportunitiesAndDeadlinesBody,
     variant: "success",
     dataTestId: "deadlines-opportunities-alert",
-    delayInMilliseconds: Config.dashboardDefaults.opportunitiesAndDeadlinesTimeDelay,
+    delayInMilliseconds: secondSnackbarTimeDelay,
   });
 
   const FundingAlert = useQueryControlledAlert({
@@ -74,6 +87,7 @@ export const DashboardAlerts = (): ReactElement => {
       <>{ProfileUpdatedAlert}</>
       <>{DeadlinesAndOpportunitiesAlert}</>
       <>{CalendarAlert}</>
+      <>{CheckboxStatusUpdated}</>
       <>{CertificationsAlert}</>
       <>{FundingAlert}</>
       <>{DeferredQuestionAnsweredAlert}</>
