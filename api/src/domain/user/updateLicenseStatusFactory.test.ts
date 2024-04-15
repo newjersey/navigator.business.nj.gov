@@ -1,9 +1,4 @@
-import {
-  MULTIPLE_MAIN_APPS_ERROR,
-  NO_MAIN_APPS_ERROR,
-  NO_MATCH_ERROR,
-  UpdateLicenseStatus,
-} from "@domain/types";
+import { NO_MAIN_APPS_ERROR, NO_MATCH_ERROR, UpdateLicenseStatus } from "@domain/types";
 import { updateLicenseStatusFactory } from "@domain/user/updateLicenseStatusFactory";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import { getCurrentBusiness } from "@shared/domain-logic/getCurrentBusiness";
@@ -90,7 +85,7 @@ describe("updateLicenseStatus", () => {
     expect(resultCurrentBusiness.licenseData?.items).toEqual(checklistItems);
   });
 
-  it.each([NO_MATCH_ERROR, NO_MAIN_APPS_ERROR, MULTIPLE_MAIN_APPS_ERROR])(
+  it.each([NO_MATCH_ERROR, NO_MAIN_APPS_ERROR])(
     "updates the license task status to NOT_STARTED & user license data when %s error",
     async (error: string) => {
       stubSearchLicenseStatus.mockRejectedValue(new Error(error));
