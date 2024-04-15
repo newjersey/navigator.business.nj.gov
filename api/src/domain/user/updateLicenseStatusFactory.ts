@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { convertIndustryToLicenseType } from "@domain/license-status/convertIndustryToLicenseType";
 import {
-  MULTIPLE_MAIN_APPS_ERROR,
   NO_MAIN_APPS_ERROR,
   NO_MATCH_ERROR,
   SearchLicenseStatusFactory,
@@ -70,11 +69,7 @@ export const updateLicenseStatusFactory = (
         });
       })
       .catch(async (error: Error) => {
-        if (
-          error.message === NO_MATCH_ERROR ||
-          error.message === NO_MAIN_APPS_ERROR ||
-          error.message === MULTIPLE_MAIN_APPS_ERROR
-        ) {
+        if (error.message === NO_MATCH_ERROR || error.message === NO_MAIN_APPS_ERROR) {
           return update(userData, {
             nameAndAddress: nameAndAddress,
             taskStatus: "NOT_STARTED",

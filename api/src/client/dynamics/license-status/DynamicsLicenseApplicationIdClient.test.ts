@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/no-null */
-import { MULTIPLE_MAIN_APPS_ERROR, NO_MAIN_APPS_ERROR } from "@domain/types";
+import { NO_MAIN_APPS_ERROR } from "@domain/types";
 import { LogWriter, LogWriterType } from "@libs/logWriter";
 import axios from "axios";
 import { DynamicsLicenseApplicationIdClient } from "./DynamicsLicenseApplicationIdClient";
@@ -234,7 +234,7 @@ describe("DynamicsLicenseApplicationIdClient", () => {
     ).rejects.toEqual(new Error(NO_MAIN_APPS_ERROR));
   });
 
-  it("throws MULTIPLE_MAIN_APPS error when there are multiple matching apps whose rgb_number ends with 00", async () => {
+  it("returns the first application when there are multiple matching apps whose rgb_number ends with 00", async () => {
     const mockResponseWithMultipleMainApplications = {
       value: [
         {
@@ -272,9 +272,16 @@ describe("DynamicsLicenseApplicationIdClient", () => {
         },
       ],
     };
+
+    const expected = {
+      applicationId: "1abb2efc-b705-ee11-a81c-001dd80648b3",
+      expirationDate: "2023-09-30T00:00:00Z",
+      licenseStatus: "ACTIVE",
+    };
+
     mockAxios.get.mockResolvedValue({ data: mockResponseWithMultipleMainApplications });
-    await expect(
-      client.getLicenseApplicationId(mockAccessToken, mockBusinessId, "Public Movers and Warehousemen")
-    ).rejects.toEqual(new Error(MULTIPLE_MAIN_APPS_ERROR));
+    expect(
+      await client.getLicenseApplicationId(mockAccessToken, mockBusinessId, "Public Movers and Warehousemen")
+    ).toEqual(expected);
   });
 });
