@@ -1,10 +1,5 @@
 import { AccessTokenClient } from "@client/dynamics/types";
-import {
-  MULTIPLE_MAIN_APPS_ERROR,
-  NO_MAIN_APPS_ERROR,
-  NO_MATCH_ERROR,
-  SearchLicenseStatus,
-} from "@domain/types";
+import { NO_MAIN_APPS_ERROR, NO_MATCH_ERROR, SearchLicenseStatus } from "@domain/types";
 import { LogWriter, LogWriterType } from "@libs/logWriter";
 import { DynamicsLicenseStatusClient } from "./DynamicsLicenseStatusClient";
 import {
@@ -113,7 +108,7 @@ describe("DynamicsLicenseStatusClient", () => {
     await expect(client(nameAndAddress, "Public Movers and Warehousemen")).rejects.toThrow(NO_MATCH_ERROR);
   });
 
-  it.each([{ errorCode: NO_MAIN_APPS_ERROR }, { errorCode: MULTIPLE_MAIN_APPS_ERROR }])(
+  it.each([{ errorCode: NO_MAIN_APPS_ERROR }])(
     "throws a $errorCode error when a sub client client throws a $errorCode error",
     async ({ errorCode }) => {
       stubBusinessAddressClient.getBusinessIdsAndLicenseSearchAddresses.mockResolvedValue([

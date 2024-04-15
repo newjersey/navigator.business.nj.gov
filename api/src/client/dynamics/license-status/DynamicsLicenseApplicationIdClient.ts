@@ -1,4 +1,4 @@
-import { MULTIPLE_MAIN_APPS_ERROR, NO_MAIN_APPS_ERROR } from "@domain/types";
+import { NO_MAIN_APPS_ERROR } from "@domain/types";
 import { LogWriterType } from "@libs/logWriter";
 import { LicenseStatus } from "@shared/license";
 import axios, { AxiosError } from "axios";
@@ -49,15 +49,11 @@ export const DynamicsLicenseApplicationIdClient = (
           throw new Error(NO_MAIN_APPS_ERROR);
         }
 
-        if (mainActiveApplications.length > 1) {
-          throw new Error(MULTIPLE_MAIN_APPS_ERROR);
-        }
-
         return processApplicationDetails(mainActiveApplications[0]);
       })
       .catch((error: AxiosError) => {
         logWriter.LogError(`Dynamics License Application Id Client - Id:${logId} - Error:`, error);
-        if (error.message === NO_MAIN_APPS_ERROR || error.message === MULTIPLE_MAIN_APPS_ERROR) throw error;
+        if (error.message === NO_MAIN_APPS_ERROR) throw error;
         throw error.response?.status;
       });
   };

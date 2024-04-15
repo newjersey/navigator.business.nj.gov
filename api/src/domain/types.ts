@@ -169,4 +169,3 @@ export type GetCertHttpsAgent = () => Promise<https.Agent>;
 
 export const NO_MATCH_ERROR = "NO_MATCH";
 export const NO_MAIN_APPS_ERROR = "NO_MAIN_APPS";
-export const MULTIPLE_MAIN_APPS_ERROR = "MULTIPLE_MAIN_APPS";
