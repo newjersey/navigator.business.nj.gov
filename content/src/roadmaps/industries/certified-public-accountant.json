@@ -49,7 +49,7 @@
     {
       "step": 4,
       "licenseTask": "license-accounting",
-      "required": true,
+      "required": false,
       "weight": 9
     }
   ],
