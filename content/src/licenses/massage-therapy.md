@@ -21,7 +21,3 @@ Your massage business license will expire every two years.
 > **Once completed, you will have:**
 >
 > * The same massage and bodywork business license number
-
->**What if don't renew my registration?**
->
-> - If you don't renew, your license will be suspended and you won't be able to legally run your business. 
