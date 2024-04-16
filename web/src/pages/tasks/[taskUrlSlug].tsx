@@ -5,6 +5,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { TaskPageSwitchComponent } from "@/components/TaskPageSwitchComponent";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
+import { HousingMunicipalitiesContext } from "@/contexts/housingMunicipalitiesContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
@@ -12,6 +13,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
+import { loadAllHousingMunicipalities } from "@/lib/static/loadHousingMunicipalities";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
 import { Task, TasksDisplayContent } from "@/lib/types/types";
@@ -22,6 +24,7 @@ import {
   hasCompletedBusinessStructure,
   Municipality,
 } from "@businessnjgovnavigator/shared/";
+import { HousingMunicipality } from "@businessnjgovnavigator/shared/housing";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
@@ -31,6 +34,7 @@ interface Props {
   task: Task;
   displayContent: TasksDisplayContent;
   municipalities: Municipality[];
+  housingMunicipalities: HousingMunicipality[];
 }
 
 const TaskPage = (props: Props): ReactElement => {
@@ -92,21 +96,23 @@ const TaskPage = (props: Props): ReactElement => {
 
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
-      <NextSeo title={getNextSeoTitle(props.task.name)} />
-      <PageSkeleton>
-        <NavBar task={props.task} showSidebar={true} />
-        <TaskSidebarPageLayout task={props.task} belowBoxComponent={renderNextAndPreviousButtons()}>
-          {renderLoadingState && <PageCircularIndicator />}
-          {!renderLoadingState && (
-            <TaskPageSwitchComponent
-              task={props.task}
-              business={business}
-              displayContent={props.displayContent}
-              roadmap={roadmap}
-            />
-          )}
-        </TaskSidebarPageLayout>
-      </PageSkeleton>
+      <HousingMunicipalitiesContext.Provider value={{ municipalities: props.housingMunicipalities }}>
+        <NextSeo title={getNextSeoTitle(props.task.name)} />
+        <PageSkeleton>
+          <NavBar task={props.task} showSidebar={true} />
+          <TaskSidebarPageLayout task={props.task} belowBoxComponent={renderNextAndPreviousButtons()}>
+            {renderLoadingState && <PageCircularIndicator />}
+            {!renderLoadingState && (
+              <TaskPageSwitchComponent
+                task={props.task}
+                business={business}
+                displayContent={props.displayContent}
+                roadmap={roadmap}
+              />
+            )}
+          </TaskSidebarPageLayout>
+        </PageSkeleton>
+      </HousingMunicipalitiesContext.Provider>
     </MunicipalitiesContext.Provider>
   );
 };
@@ -125,6 +131,7 @@ export const getStaticProps = ({ params }: { params: TaskUrlSlugParam }): GetSta
       task: loadTaskByUrlSlug(params.taskUrlSlug),
       displayContent: loadTasksDisplayContent(),
       municipalities: loadAllMunicipalities(),
+      housingMunicipalities: loadAllHousingMunicipalities(),
     },
   };
 };

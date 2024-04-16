@@ -13,18 +13,14 @@ export const DynamicsHousingPropertyInterestClient = (
   const getPropertyInterest = async (
     accessToken: string,
     address: string,
-    zipCode?: string
+    municipalityId: string
   ): Promise<HousingPropertyInterestResponse> => {
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Dynamics Housing Property Interest Client - Id:${logId}`);
 
-    const filters = zipCode
-      ? `$filter=(ultra_streetaddress eq '${address}' and ultra_zipcode eq '${zipCode}')`
-      : `$filter=(ultra_streetaddress eq '${address}')`;
-
     return axios
       .get(
-        `${orgUrl}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode&${filters}&$top=1`,
+        `${orgUrl}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode&$filter=(ultra_streetaddress eq '${address}' and _ultra_municipality_value eq '${municipalityId}')&$top=1`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

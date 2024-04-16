@@ -4,6 +4,7 @@ import { NeedsAccountModalWrapper } from "@/components/auth/NeedsAccountModalWra
 import { CheckElevatorRegistrationStatus } from "@/components/tasks/CheckElevatorRegistrationStatus";
 import { ElevatorRegistrationStatusSummary } from "@/components/tasks/ElevatorRegistrationStatusSummary";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
+import { HousingMunicipalitiesContext } from "@/contexts/housingMunicipalitiesContext";
 import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
@@ -15,7 +16,7 @@ import {
 } from "@businessnjgovnavigator/shared/elevatorSafety";
 import { TabContext, TabList, TabPanel } from "@mui/lab/";
 import { Box, Tab } from "@mui/material";
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useContext, useState } from "react";
 
 interface Props {
   task: Task;
@@ -37,6 +38,7 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
     undefined
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { municipalities } = useContext(HousingMunicipalitiesContext);
   const { Config } = useConfig();
 
   const onSelectTab = (event: React.SyntheticEvent, newValue: string): void => {
@@ -49,11 +51,15 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
     setElevatorSafetyAddress(undefined);
   };
 
+  if (municipalities.length === 0) {
+    setError("SEARCH_FAILED");
+  }
+
   const onSubmit = (address: ElevatorSafetyAddress): void => {
-    if (address?.address1) {
+    if (address?.address1 && address?.municipalityExternalId) {
       setIsLoading(true);
       api
-        .checkElevatorRegistrationStatus(address?.address1, address?.zipCode)
+        .checkElevatorRegistrationStatus(address.address1, address.municipalityExternalId)
         .then((result: ElevatorSafetyRegistrationSummary) => {
           if (result.lookupStatus === "NO PROPERTY INTERESTS FOUND") {
             setError("NO_PROPERTY_INTEREST_FOUND");
@@ -150,7 +156,12 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
                   address={elevatorSafetyAddress}
                 />
               ) : (
-                <CheckElevatorRegistrationStatus onSubmit={onSubmit} error={error} isLoading={isLoading} />
+                <CheckElevatorRegistrationStatus
+                  onSubmit={onSubmit}
+                  error={error}
+                  isLoading={isLoading}
+                  municipalities={municipalities}
+                />
               )}
             </TabPanel>
           </TabContext>

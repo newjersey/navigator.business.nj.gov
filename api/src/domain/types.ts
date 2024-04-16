@@ -119,7 +119,8 @@ export type UpdateLicenseStatus = (
 export type FireSafetyInspectionStatus = (address: string) => Promise<FireSafetyInspectionResult[]>;
 
 export type HousingPropertyInterestStatus = (
-  address: string
+  address: string,
+  municipalityId: string
 ) => Promise<HousingPropertyInterestDetails | undefined>;
 
 export type ElevatorSafetyInspectionStatus = (
@@ -128,7 +129,7 @@ export type ElevatorSafetyInspectionStatus = (
 
 export type ElevatorSafetyRegistrationStatus = (
   address: string,
-  zipCode: string
+  municipalityId: string
 ) => Promise<ElevatorSafetyRegistrationSummary>;
 
 export interface SuccessfulHealthCheckMetadata {

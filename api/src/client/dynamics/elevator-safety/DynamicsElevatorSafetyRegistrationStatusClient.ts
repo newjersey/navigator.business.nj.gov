@@ -18,14 +18,14 @@ export const DynamicsElevatorSafetyRegistrationStatusClient = (
   logWriter: LogWriterType,
   config: Config
 ): ElevatorSafetyRegistrationStatus => {
-  return async (address: string, zipCode: string): Promise<ElevatorRegistrationSummary> => {
+  return async (address: string, municipalityId: string): Promise<ElevatorRegistrationSummary> => {
     const accessToken = await config.accessTokenClient.getAccessToken();
     const housingAccessToken = await config.housingAccessTokenClient.getAccessToken();
 
     const propertyInterest = await config.housingPropertyInterestClient.getPropertyInterest(
       housingAccessToken,
       address,
-      zipCode
+      municipalityId
     );
 
     if (!propertyInterest?.id) {

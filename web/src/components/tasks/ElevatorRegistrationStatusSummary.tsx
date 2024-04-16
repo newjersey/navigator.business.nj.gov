@@ -5,6 +5,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
+import { toProperCase } from "@businessnjgovnavigator/shared";
 import { parseDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import {
   ElevatorSafetyAddress,
@@ -148,7 +149,7 @@ export const ElevatorRegistrationStatusSummary = (props: Props): ReactElement =>
           <br />
           {props.address && (
             <span>
-              {props.address.address1}, {props.address.zipCode} NJ
+              {props.address.address1}, {toProperCase(props.address.municipalityName)} NJ
               <UnStyledButton
                 dataTestid={"address-edit"}
                 isUnderline

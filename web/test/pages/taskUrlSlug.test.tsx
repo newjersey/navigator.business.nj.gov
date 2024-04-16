@@ -60,7 +60,12 @@ const renderPage = (task: Task, initialBusiness?: Business): void => {
       <WithStatefulUserData
         initialUserData={generateUserDataForBusiness(initialBusiness ?? generateBusiness({}))}
       >
-        <TaskPage task={task} displayContent={createEmptyTaskDisplayContent()} municipalities={[]} />
+        <TaskPage
+          task={task}
+          displayContent={createEmptyTaskDisplayContent()}
+          municipalities={[]}
+          housingMunicipalities={[]}
+        />
       </WithStatefulUserData>
     </materialUi.ThemeProvider>
   );
@@ -127,6 +132,7 @@ describe("task page", () => {
           task={generateTask({})}
           displayContent={createEmptyTaskDisplayContent()}
           municipalities={[]}
+          housingMunicipalities={[]}
         />
       </WithStatefulUserData>
     );
@@ -141,6 +147,7 @@ describe("task page", () => {
           task={generateTask({})}
           displayContent={createEmptyTaskDisplayContent()}
           municipalities={[]}
+          housingMunicipalities={[]}
         />
       </WithStatefulUserData>
     );
