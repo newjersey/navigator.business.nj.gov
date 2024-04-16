@@ -2154,7 +2154,7 @@ collections:
               - { label: Registration Search Prompt Text, name: registrationSearchPrompt, widget: string }
               - { label: Address 1 Label, name: address1Label, widget: string }
               - { label: Address 2 Label, name: address2Label, widget: string }
-              - { label: ZIP code label, name: zipCodeLabel, widget: string }
+              - { label: Municipality Label, name: municipalityLabel, widget: string }
               - { label: State label, name: stateLabel, widget: string }
               - { label: Submit Text, name: submitText, widget: string }
               - {

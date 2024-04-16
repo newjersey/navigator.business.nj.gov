@@ -33,9 +33,9 @@ export const checkLicenseStatus = (nameAndAddress: LicenseSearchNameAndAddress):
 
 export const checkElevatorRegistrationStatus = (
   address: string,
-  zipCode?: string
+  municipalityId: string
 ): Promise<ElevatorSafetyRegistrationSummary> => {
-  return post(`/elevator-safety/registration`, { address, zipCode });
+  return post(`/elevator-safety/registration`, { address, municipalityId });
 };
 
 export const postBusinessFormation = (

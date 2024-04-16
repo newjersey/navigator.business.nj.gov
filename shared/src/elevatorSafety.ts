@@ -21,7 +21,8 @@ export type ElevatorSafetyRegistrationSummary = {
 export type ElevatorSafetyAddress = {
   address1: string;
   address2?: string;
-  zipCode?: string;
+  municipalityExternalId?: string;
+  municipalityName?: string;
 };
 
 export function generateElevatorSafetyRegistrationSummary(

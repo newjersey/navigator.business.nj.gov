@@ -6,3 +6,9 @@ export type HousingPropertyInterestDetails = {
   BHINextInspectionDueDate: string;
   stateCode: number;
 };
+
+export type HousingMunicipality = {
+  name: string;
+  id: string;
+  county: string;
+};

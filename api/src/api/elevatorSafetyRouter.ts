@@ -23,8 +23,8 @@ export const elevatorSafetyRouterFactory = (
   });
 
   router.post("/elevator-safety/registration/", async (req, res) => {
-    const { address, zipCode } = req.body;
-    elevatorSafetyRegistration(address, zipCode)
+    const { address, municipalityId } = req.body;
+    elevatorSafetyRegistration(address, municipalityId)
       .then(async (elevatorRegistrations: ElevatorSafetyRegistrationSummary) => {
         return res.json(elevatorRegistrations);
       })

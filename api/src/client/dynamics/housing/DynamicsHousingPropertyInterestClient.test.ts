@@ -22,6 +22,7 @@ describe("DynamicsHousingPropertyInterestClient", () => {
 
   const mockAccessToken = "access-granted";
   const searchAddress = "address-1";
+  const searchMunicipalityID = "123-456-789";
 
   it("makes a successful get request and returns inspection data", async () => {
     const housingPropertyInterestMockResponse = {
@@ -40,7 +41,7 @@ describe("DynamicsHousingPropertyInterestClient", () => {
     };
 
     mockAxios.get.mockResolvedValue({ data: housingPropertyInterestMockResponse });
-    expect(await client.getPropertyInterest(mockAccessToken, searchAddress)).toEqual({
+    expect(await client.getPropertyInterest(mockAccessToken, searchAddress, searchMunicipalityID)).toEqual({
       createdOn: "2023-05-31T10:31:51Z",
       isFireSafety: true,
       isBHIRegistered: false,
@@ -50,44 +51,7 @@ describe("DynamicsHousingPropertyInterestClient", () => {
       id: "12345",
     });
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `${ORG_URL}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode&$filter=(ultra_streetaddress eq '${searchAddress}')&$top=1`,
-      {
-        headers: {
-          Authorization: `Bearer ${mockAccessToken}`,
-        },
-      }
-    );
-  });
-
-  it("adds zip code as a filter if provided", async () => {
-    const housingPropertyInterestMockResponse = {
-      value: [
-        {
-          createdon: "2023-05-31T10:31:51Z",
-          ultra_isfiresafetyproperty: true,
-          ultra_isbhiregisteredproperty: false,
-          ultra_zipcode: "12345",
-          ultra_bhinextinspectiondue_date: "01/01/2028",
-          statecode: 0,
-          ultra_streetaddress: searchAddress,
-          ultra_propertyinterestid: "123456",
-        },
-      ],
-    };
-
-    const zipCode = "12345";
-    mockAxios.get.mockResolvedValue({ data: housingPropertyInterestMockResponse });
-    expect(await client.getPropertyInterest(mockAccessToken, searchAddress, zipCode)).toEqual({
-      createdOn: "2023-05-31T10:31:51Z",
-      isFireSafety: true,
-      isBHIRegistered: false,
-      address: searchAddress,
-      BHINextInspectionDueDate: "01/01/2028",
-      stateCode: 0,
-      id: "123456",
-    });
-    expect(mockAxios.get).toHaveBeenCalledWith(
-      `${ORG_URL}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode&$filter=(ultra_streetaddress eq '${searchAddress}' and ultra_zipcode eq '${zipCode}')&$top=1`,
+      `${ORG_URL}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode&$filter=(ultra_streetaddress eq '${searchAddress}' and _ultra_municipality_value eq '${searchMunicipalityID}')&$top=1`,
       {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
@@ -102,9 +66,11 @@ describe("DynamicsHousingPropertyInterestClient", () => {
     };
 
     mockAxios.get.mockResolvedValue({ data: housingInspectionMockResponse });
-    expect(await client.getPropertyInterest(mockAccessToken, searchAddress)).toEqual(undefined);
+    expect(await client.getPropertyInterest(mockAccessToken, searchAddress, searchMunicipalityID)).toEqual(
+      undefined
+    );
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `${ORG_URL}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode&$filter=(ultra_streetaddress eq '${searchAddress}')&$top=1`,
+      `${ORG_URL}/api/data/v9.2/ultra_propertyinterests?$select=createdon,ultra_isfiresafetyproperty,ultra_isbhiregisteredproperty,ultra_streetaddress,ultra_zipcode,ultra_bhinextinspectiondue_date,ultra_bhinextreinspectiondue_state,statecode&$filter=(ultra_streetaddress eq '${searchAddress}' and _ultra_municipality_value eq '${searchMunicipalityID}')&$top=1`,
       {
         headers: {
           Authorization: `Bearer ${mockAccessToken}`,
