@@ -106,7 +106,7 @@ describe("updateLicenseStatus", () => {
       expect(resultCurrentBusiness.taskProgress["apply-for-shop-license"]).toEqual("NOT_STARTED");
       expect(resultCurrentBusiness.taskProgress["register-consumer-affairs"]).toEqual("NOT_STARTED");
       expect(resultCurrentBusiness.taskProgress["pharmacy-license"]).toEqual("NOT_STARTED");
-      expect(resultCurrentBusiness.taskProgress["license-accounting"]).toEqual("NOT_STARTED");
+      expect(resultCurrentBusiness.taskProgress["register-accounting-firm"]).toEqual("NOT_STARTED");
       expect(resultCurrentBusiness.taskProgress["license-massage-therapy"]).toEqual("NOT_STARTED");
       expect(resultCurrentBusiness.taskProgress["moving-company-license"]).toEqual("NOT_STARTED");
       expect(resultCurrentBusiness.taskProgress["architect-license"]).toEqual("NOT_STARTED");
@@ -132,7 +132,7 @@ describe("updateLicenseStatus", () => {
     expect(resultCurrentBusiness.taskProgress["apply-for-shop-license"]).toEqual("IN_PROGRESS");
     expect(resultCurrentBusiness.taskProgress["register-consumer-affairs"]).toEqual("IN_PROGRESS");
     expect(resultCurrentBusiness.taskProgress["pharmacy-license"]).toEqual("IN_PROGRESS");
-    expect(resultCurrentBusiness.taskProgress["license-accounting"]).toEqual("IN_PROGRESS");
+    expect(resultCurrentBusiness.taskProgress["register-accounting-firm"]).toEqual("IN_PROGRESS");
     expect(resultCurrentBusiness.taskProgress["license-massage-therapy"]).toEqual("IN_PROGRESS");
     expect(resultCurrentBusiness.taskProgress["moving-company-license"]).toEqual("IN_PROGRESS");
     expect(resultCurrentBusiness.taskProgress["architect-license"]).toEqual("IN_PROGRESS");
@@ -152,7 +152,7 @@ describe("updateLicenseStatus", () => {
     expect(resultCurrentBusiness.taskProgress["apply-for-shop-license"]).toEqual("COMPLETED");
     expect(resultCurrentBusiness.taskProgress["register-consumer-affairs"]).toEqual("COMPLETED");
     expect(resultCurrentBusiness.taskProgress["pharmacy-license"]).toEqual("COMPLETED");
-    expect(resultCurrentBusiness.taskProgress["license-accounting"]).toEqual("COMPLETED");
+    expect(resultCurrentBusiness.taskProgress["register-accounting-firm"]).toEqual("COMPLETED");
     expect(resultCurrentBusiness.taskProgress["license-massage-therapy"]).toEqual("COMPLETED");
     expect(resultCurrentBusiness.taskProgress["moving-company-license"]).toEqual("COMPLETED");
     expect(resultCurrentBusiness.taskProgress["architect-license"]).toEqual("COMPLETED");

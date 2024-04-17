@@ -1,6 +1,6 @@
 ---
-id: register-firm-accounting
-filename: register-firm-accounting
+id: public-accountant-license
+filename: public-accountant-license
 displayname: public-accountant-license
 urlSlug: public-accountant-license
 name: Apply for a Certified Public Accountant License
