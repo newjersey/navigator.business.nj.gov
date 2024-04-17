@@ -1,4 +1,3 @@
-import { Heading } from "@/components/njwds-extended/Heading";
 import { ProfileTab } from "@/components/profile/ProfileTab";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileTabs } from "@/lib/types/types";
@@ -32,13 +31,13 @@ export const ProfileTabNav = (props: Props): ReactElement => {
   const shouldShowDocuments = isSuccessfulFilingResponse || shouldDisplayFormationDocuments;
 
   return (
-    <div className="width-100 font-body-md">
-      <div className="bg-base-lightest padding-y-2 padding-x-3 border-2px border-base-lighter">
-        <Heading level={3} className="margin-0-override">
-          {Config.profileDefaults.default.pageTitle}
-        </Heading>
-      </div>
-      <ProfileTab {...props} tab={infoTab} tabText={Config.profileDefaults.default.profileTabInfoTitle} />
+    <div className="width-100 font-body-md desktop:padding-top-2 padding-top-2">
+      <ProfileTab
+        {...props}
+        tab={infoTab}
+        tabText={Config.profileDefaults.default.profileTabInfoTitle}
+        hasTopBorder={true}
+      />
       <ProfileTab
         {...props}
         tab={numbersTab}

@@ -37,6 +37,7 @@ import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
 import { ProfileField } from "@/components/profile/ProfileField";
+import { ProfileHeader } from "@/components/profile/ProfileHeader";
 import { ProfileNoteDisclaimerForSubmittingData } from "@/components/profile/ProfileNoteForBusinessesFormedOutsideNavigator";
 import { ProfileOpportunitiesAlert } from "@/components/profile/ProfileOpportunitiesAlert";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
@@ -780,7 +781,7 @@ const ProfilePage = (props: Props): ReactElement => {
                   {alert && <ProfileSnackbarAlert alert={alert} close={(): void => setAlert(undefined)} />}
                   <UserDataErrorAlert />
                 </SingleColumnContainer>
-                <div className="margin-top-6 desktop:margin-top-0">
+                <div className="margin-top-1 desktop:margin-top-0">
                   {business === undefined ? (
                     <PageCircularIndicator />
                   ) : (
@@ -788,6 +789,9 @@ const ProfilePage = (props: Props): ReactElement => {
                       divider={false}
                       outlineBox={false}
                       stackNav={true}
+                      titleOverColumns={
+                        <ProfileHeader business={business} isAuthenticated={isAuthenticated === "TRUE"} />
+                      }
                       navChildren={
                         <ProfileTabNav
                           business={business}

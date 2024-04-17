@@ -244,6 +244,7 @@
     "continueButtonText": "Continue",
     "backButtonText": "Back",
     "backToRoadmapText": "Go Back",
+    "secondaryNavigationAriaLabel": "Previous Page Navigation",
     "issuingAgencyText": "Issuing Agency",
     "pageTitle": "Business Roadmap",
     "loadingTaskDependencies": "Loading…",
