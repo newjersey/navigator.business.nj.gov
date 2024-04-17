@@ -93,7 +93,7 @@
         "default": {
           "header": "Out-of-State Businesses",
           "description": "Which of the following are **true** about your business? **Select all that apply.**",
-          "errorTextRequired": "Please make a selection",
+          "errorTextRequired": "Please make a selection.",
           "optionContent": {
             "employeeOrContractorInNJ": "I have an employee or independent contractor acting as a sales or manufacturing representative in New Jersey",
             "officeInNJ": "I currently own/lease or plan to own/lease space in New Jersey",
