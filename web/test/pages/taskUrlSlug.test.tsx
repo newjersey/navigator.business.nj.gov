@@ -242,8 +242,11 @@ describe("task page", () => {
     expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
-  it("loads License task screen for license-accounting", () => {
-    renderPage(generateTask({ id: "license-accounting" }), generateBusiness({ licenseData: undefined }));
+  it("loads License task screen for register-accounting-firm", () => {
+    renderPage(
+      generateTask({ id: "register-accounting-firm" }),
+      generateBusiness({ licenseData: undefined })
+    );
     expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 

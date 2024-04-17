@@ -48,7 +48,7 @@
     },
     {
       "step": 4,
-      "licenseTask": "license-accounting",
+      "licenseTask": "register-accounting-firm",
       "required": true,
       "weight": 9
     }
