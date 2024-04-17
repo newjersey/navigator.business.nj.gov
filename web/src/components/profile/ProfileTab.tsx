@@ -7,13 +7,14 @@ interface Props {
   activeTab: ProfileTabs;
   setProfileTab: (profileTab: ProfileTabs) => void;
   tabText: string;
+  hasTopBorder?: boolean;
 }
 
 export const ProfileTab = (props: Props): ReactElement => {
   return (
     <button
       className="cursor-pointer width-100 bg-base-lightest flex fjb fac padding-y-1 padding-right-2 padding-left-3 border-2px border-base-lighter btn-profile-hoverstate line-height-120"
-      style={{ borderStyle: "none solid solid solid" }}
+      style={{ borderStyle: props.hasTopBorder ? "solid" : "none solid solid solid" }}
       data-testid={props.tab}
       onClick={(): void => props.setProfileTab(props.tab)}
     >
