@@ -1,5 +1,5 @@
 {
-  "naicsCodes": "236220, 238160, 238130, 238210, 238220, 238320",
+  "naicsCodes": "236220, 238160, 238130, 238210, 238220, 238320, 236118, 236115, 236116, 236117",
   "defaultSectorId": "construction",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -43,7 +43,7 @@
       "task": "get-insurance"
     }
   ],
-  "name": "Commercial or Industrial Construction",
+  "name": "Construction",
   "nonEssentialQuestionsIds": [],
   "displayname": "commercial-construction",
   "industryOnboardingQuestions": {
@@ -51,8 +51,8 @@
     "canBeReseller": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "build, builds, building, buildings, development",
+  "additionalSearchTerms": "build, builds, building, buildings, development, home builder, commercial, industrial, renovation, remodeling, developer, mixed use, subdivision, multiple dwelling, planned real estate",
   "id": "commercial-construction",
-  "description": "Builds or maintains physical structures such as roads, bridges, and buildings",
+  "description": "Builds or maintains physical structures, such as buildings, houses, and roads",
   "webflowId": "65b41d2d3d0fa463cd97855a"
 }
