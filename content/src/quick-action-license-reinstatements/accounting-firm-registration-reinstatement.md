@@ -1,6 +1,6 @@
 ---
 filename: accounting-firm-registration-reinstatement
-name: Apply to Reinstate Your Accountancy Firm Registration
+name: Apply to Reinstate Your Accounting Firm Registration
 industryIds:
   - certified-public-accountant
 sectorIds: []
