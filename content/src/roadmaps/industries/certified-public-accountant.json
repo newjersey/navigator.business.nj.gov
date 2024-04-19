@@ -49,7 +49,7 @@
     {
       "step": 4,
       "licenseTask": "register-accounting-firm",
-      "required": true,
+      "required": false,
       "weight": 9
     }
   ],

@@ -1,6 +1,6 @@
 {
-  "naicsCodes": "236220, 238160, 238130, 238210, 238220, 238320, 236118, 236115, 236116, 236117",
-  "defaultSectorId": "construction",
+  "naicsCodes": "721110, 721191, 721199",
+  "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
@@ -43,16 +43,14 @@
       "task": "get-insurance"
     }
   ],
-  "name": "Construction",
+  "name": "Lodging",
   "nonEssentialQuestionsIds": [],
-  "displayname": "commercial-construction",
+  "displayname": "lodging",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
     "canBeReseller": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "build, builds, building, buildings, development, home builder, commercial, industrial, renovation, remodeling, developer, mixed use, subdivision, multiple dwelling, planned real estate",
-  "id": "commercial-construction",
-  "description": "Builds or maintains physical structures, such as buildings, houses, and roads",
-  "webflowId": "65b41d2d3d0fa463cd97855a"
+  "additionalSearchTerms": "bed and breakfast, hotel, motel, guesthouse, lodge, inn",
+  "id": "lodging",
+  "description": "Provides overnight accommodations to guests and travelers"
 }

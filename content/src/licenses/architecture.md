@@ -4,6 +4,7 @@ notesMd: "Draft:
   yY/edit"
 urlSlug: architecture
 previewType: renewal
+summaryDescriptionMd: You can renew your architecture license online.
 callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
 callToActionText: Renew My Architect License
 ---
@@ -19,7 +20,3 @@ callToActionText: Renew My Architect License
 > **Once completed, you will have**:
 >
 > - The same architecture license number
-
-> **What if I don't renew my registration?**
->
-> If you don’t renew your license within 30 days after your expiration date, your license will be moved to “expired” status and you won't be able to legally operate your business. You need to contact your licensing board for reinstatement procedures and associated fees.
