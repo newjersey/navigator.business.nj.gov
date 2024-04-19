@@ -314,9 +314,7 @@ describe("<LicenseTask />", () => {
     expect(screen.queryByTestId("loading-spinner")).not.toBeInTheDocument();
 
     fireEvent.submit(screen.getByTestId("check-status-submit"));
-    await waitFor(() => {
-      expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
-    });
+    expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
 
     await waitFor(() => {
       expect(screen.queryByTestId("loading-spinner")).not.toBeInTheDocument();
