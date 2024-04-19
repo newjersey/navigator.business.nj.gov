@@ -4219,7 +4219,7 @@ __metadata:
     "@types/lodash": 4.17.0
     "@types/mdast": 4.0.3
     "@types/node": 20.12.7
-    "@types/react": 18.2.77
+    "@types/react": 18.2.79
     "@types/react-dom": 18.2.25
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.5
@@ -4430,7 +4430,7 @@ __metadata:
     "@types/lodash": 4.17.0
     "@types/mdast": 4.0.3
     "@types/node": 20.12.7
-    "@types/react": 18.2.77
+    "@types/react": 18.2.79
     "@types/react-dom": 18.2.25
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.5
@@ -11072,13 +11072,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:18.2.77, @types/react@npm:>=16":
-  version: 18.2.77
-  resolution: "@types/react@npm:18.2.77"
+"@types/react@npm:*, @types/react@npm:18.2.79, @types/react@npm:>=16":
+  version: 18.2.79
+  resolution: "@types/react@npm:18.2.79"
   dependencies:
     "@types/prop-types": "*"
     csstype: ^3.0.2
-  checksum: 7014b06565228ffb24740e3b2cad168a52c1befa78f52f421c7eb61f86dcf599b494b8220c7bfc77882e19cb52440a1ed713d4a483dc8941c4ce824bd9729755
+  checksum: 85aa96e0e88725c84d8fc5f04f10a4da6a1f507dde33557ac9cc211414756867721264bfefd9e02bae1288ce2905351d949b652b931e734ea24519ee5c625138
   languageName: node
   linkType: hard
 
