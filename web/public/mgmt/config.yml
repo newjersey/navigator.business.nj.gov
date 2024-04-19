@@ -5303,6 +5303,36 @@ collections:
                           - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
                           - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Construction Type
+                    name: constructionType
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - { label: "Radio Button Residential Text", name: "radioButtonResidentialText", widget: "string" }
+                          - { label: "Radio Button Commercial or Industrial Text", name: "radioButtonCommercialOrIndustrialText", widget: "string" }
+                          - { label: "Radio Button Both Text", name: "radioButtonBothText", widget: "string" }
+                          - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Residential Construction Type
+                    name: residentialConstructionType
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - { label: "Radio Button New Home Construction Text", name: "radioButtonNewHomeConstructionText", widget: "string" }
+                          - { label: "Radio Button Home Renovations Text", name: "radioButtonHomeRenovationsText", widget: "string" }
+                          - { label: "Radio Button Both Text", name: "radioButtonBothText", widget: "string" }
+                          - { label: "Description", name: "description", widget: "markdown" }
               - label: Profile / Onboarding Defaults
                 name: default
                 collapsed: false
