@@ -140,6 +140,24 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     }
   }
 
+  if (getIsApplicableToFunctionByFieldName("residentialConstructionType")(industryId)) {
+    switch (profileData.residentialConstructionType) {
+      case "HOME_RENOVATIONS": {
+        addOns.push("construction-home-renovation");
+        break;
+      }
+      case "NEW_HOME_CONSTRUCTION": {
+        addOns.push("construction-new-home-construction");
+        break;
+      }
+      case "BOTH": {
+        addOns.push("construction-new-home-construction");
+        addOns.push("construction-home-renovation");
+        break;
+      }
+    }
+  }
+
   if (isInterstateLogisticsApplicable(industryId) && profileData.interstateLogistics) {
     addOns.push("interstate-logistics");
   }

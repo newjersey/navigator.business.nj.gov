@@ -48,7 +48,8 @@
   "displayname": "commercial-construction",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": true,
+    "isConstructionTypeApplicable": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "build, builds, building, buildings, development, home builder, commercial, industrial, renovation, remodeling, developer, mixed use, subdivision, multiple dwelling, planned real estate",

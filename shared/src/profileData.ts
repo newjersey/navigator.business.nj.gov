@@ -10,6 +10,8 @@ export interface ProfileDocuments {
 const booleanChoice = [true, false];
 export const cannabisLicenseOptions = ["CONDITIONAL", "ANNUAL"] as const;
 export const carServiceOptions = ["STANDARD", "HIGH_CAPACITY", "BOTH"] as const;
+export const constructionOptions = ["RESIDENTIAL", "COMMERCIAL_OR_INDUSTRIAL", "BOTH"] as const;
+export const residentialConstructionOptions = ["NEW_HOME_CONSTRUCTION", "HOME_RENOVATIONS", "BOTH"] as const;
 export interface IndustrySpecificData {
   readonly liquorLicense: boolean;
   readonly requiresCpa: boolean;
@@ -26,6 +28,8 @@ export interface IndustrySpecificData {
   readonly isChildcareForSixOrMore: boolean | undefined;
   readonly petCareHousing: boolean | undefined;
   readonly willSellPetCareItems: boolean | undefined;
+  readonly constructionType: ConstructionType;
+  readonly residentialConstructionType: ResidentialConstructionType;
 }
 
 type IndustrySpecificDataChoices = {
@@ -48,6 +52,8 @@ export const industrySpecificDataChoices: IndustrySpecificDataChoices = {
   isChildcareForSixOrMore: booleanChoice,
   petCareHousing: booleanChoice,
   willSellPetCareItems: booleanChoice,
+  constructionType: [...constructionOptions],
+  residentialConstructionType: [...residentialConstructionOptions],
 };
 
 export const emptyIndustrySpecificData: IndustrySpecificData = {
@@ -66,6 +72,8 @@ export const emptyIndustrySpecificData: IndustrySpecificData = {
   isChildcareForSixOrMore: undefined,
   petCareHousing: undefined,
   willSellPetCareItems: undefined,
+  constructionType: undefined,
+  residentialConstructionType: undefined,
 };
 
 export interface ProfileData extends IndustrySpecificData {
@@ -133,6 +141,8 @@ export const createEmptyProfileData = (): ProfileData => {
 
 export type CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 export type CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
+export type ConstructionType = "RESIDENTIAL" | "COMMERCIAL_OR_INDUSTRIAL" | "BOTH" | undefined;
+export type ResidentialConstructionType = "NEW_HOME_CONSTRUCTION" | "HOME_RENOVATIONS" | "BOTH" | undefined;
 export const businessPersonas = ["STARTING", "OWNING", "FOREIGN"] as const;
 export type BusinessPersona = (typeof businessPersonas)[number] | undefined;
 

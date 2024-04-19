@@ -90,7 +90,10 @@ describe("<Industry />", () => {
     });
 
     const businessPersonas = ["STARTING", "FOREIGN"];
-    EssentialQuestions.map((el) => {
+    const nonConditionalEssentialQuestions = EssentialQuestions.filter((eq) => {
+      return eq.fieldName !== "residentialConstructionType";
+    });
+    nonConditionalEssentialQuestions.map((el) => {
       const validIndustryId = randomFilteredIndustry(el.isQuestionApplicableToIndustry, { isEnabled: true });
       const nonValidIndustryId = randomNegativeFilteredIndustry(el.isQuestionApplicableToIndustry);
 
@@ -179,6 +182,58 @@ describe("<Industry />", () => {
           );
           expect(screen.getAllByTestId("FieldLabelOnboarding")[0]).toBeInTheDocument();
         });
+      });
+    });
+
+    describe("conditional essential questions", () => {
+      it("shows residentialConstructionType question if constructionType `residential` was selected", () => {
+        renderComponent();
+        selectIndustry("commercial-construction");
+        expect(currentProfileData().constructionType).toEqual(undefined);
+        expect(
+          screen.getByTestId("industry-specific-commercial-construction-constructionType")
+        ).toBeInTheDocument();
+        expect(
+          screen.queryByTestId("industry-specific-commercial-construction-residentialConstructionType")
+        ).not.toBeInTheDocument();
+
+        fireEvent.click(screen.getByLabelText("Residential"));
+        expect(
+          screen.getByTestId("industry-specific-commercial-construction-constructionType")
+        ).toBeInTheDocument();
+        expect(
+          screen.getByTestId("industry-specific-commercial-construction-residentialConstructionType")
+        ).toBeInTheDocument();
+
+        fireEvent.click(screen.getByLabelText("Commercial or Industrial"));
+        expect(
+          screen.getByTestId("industry-specific-commercial-construction-constructionType")
+        ).toBeInTheDocument();
+        expect(
+          screen.queryByTestId("industry-specific-commercial-construction-residentialConstructionType")
+        ).not.toBeInTheDocument();
+      });
+
+      it("resets constructionType and residentialConstructionType if industry changes", () => {
+        renderComponent();
+        selectIndustry("commercial-construction");
+        expect(currentProfileData().constructionType).toEqual(undefined);
+        expect(currentProfileData().residentialConstructionType).toEqual(undefined);
+        expect(
+          screen.getByTestId("industry-specific-commercial-construction-constructionType")
+        ).toBeInTheDocument();
+        expect(
+          screen.queryByTestId("industry-specific-commercial-construction-residentialConstructionType")
+        ).not.toBeInTheDocument();
+
+        fireEvent.click(screen.getByLabelText("Residential"));
+        fireEvent.click(screen.getByLabelText("New home construction"));
+        expect(currentProfileData().constructionType).toEqual("RESIDENTIAL");
+        expect(currentProfileData().residentialConstructionType).toEqual("NEW_HOME_CONSTRUCTION");
+
+        selectIndustry("petcare");
+        expect(currentProfileData().constructionType).toEqual(undefined);
+        expect(currentProfileData().residentialConstructionType).toEqual(undefined);
       });
     });
   });

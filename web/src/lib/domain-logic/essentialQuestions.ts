@@ -151,4 +151,18 @@ export const EssentialQuestions: EssentialQuestion[] = [
     },
     fieldName: "realEstateAppraisalManagement",
   }),
+  new EssentialQuestion({
+    shouldBeResetWhenIndustryChanges: true,
+    isQuestionApplicableToIndustry: (industry): boolean => {
+      return !!industry.industryOnboardingQuestions.isConstructionTypeApplicable;
+    },
+    fieldName: "constructionType",
+  }),
+  new EssentialQuestion({
+    shouldBeResetWhenIndustryChanges: true,
+    isQuestionApplicableToIndustry: (industry): boolean => {
+      return !!industry.industryOnboardingQuestions.isConstructionTypeApplicable;
+    },
+    fieldName: "residentialConstructionType",
+  }),
 ];
