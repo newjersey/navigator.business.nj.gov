@@ -51,7 +51,7 @@ callToActionLink: https://www.njstart.gov/bso/
 - Business name
 - Email address
 
-You will then receive an email with your Vendor ID number and login link.
+  You will then receive an email with your Vendor ID number and login link.
 
 2. Complete your registration by providing the following information:
 
