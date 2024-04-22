@@ -86,4 +86,10 @@ describe("<DashboardAlerts />", () => {
     renderStatefulPage();
     expect(screen.getByTestId("fromAdditionalBusiness-alert")).toBeInTheDocument();
   });
+
+  it("renders needs account snackbar when fromOnboarding query parameter is provided", async () => {
+    useMockRouter({ isReady: true, query: { [QUERIES.fromOnboarding]: "true" } });
+    renderStatefulPage();
+    expect(screen.getByTestId("needs-account-alert")).toBeInTheDocument();
+  });
 });

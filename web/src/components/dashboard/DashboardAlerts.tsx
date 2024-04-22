@@ -69,6 +69,15 @@ export const DashboardAlerts = (): ReactElement => {
     dataTestId: "fromAdditionalBusiness-alert",
   });
 
+  const NeedsAccountAlert = useQueryControlledAlert({
+    queryKey: QUERIES.fromOnboarding,
+    pagePath: ROUTES.dashboard,
+    headerText: Config.dashboardDefaults.needsAccountSnackbarTitle,
+    bodyText: Config.dashboardDefaults.needsAccountSnackbarBody,
+    variant: "success",
+    dataTestId: "needs-account-alert",
+  });
+
   return (
     <div data-testid="dashboard-alerts">
       <>{ProfileUpdatedAlert}</>
@@ -78,6 +87,7 @@ export const DashboardAlerts = (): ReactElement => {
       <>{FundingAlert}</>
       <>{DeferredQuestionAnsweredAlert}</>
       <>{AdditionalBusinessAlert}</>
+      <>{NeedsAccountAlert}</>
     </div>
   );
 };

@@ -11,9 +11,11 @@ import {
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
+import { SIDEBAR_CARDS } from "@businessnjgovnavigator/shared/domain-logic/sidebarCards";
 import {
   generateBusiness,
   generatePreferences,
+  generateProfileData,
   generateUserDataForBusiness,
 } from "@businessnjgovnavigator/shared/test";
 import { Business } from "@businessnjgovnavigator/shared/userData";
@@ -116,6 +118,51 @@ describe("dashboard page", () => {
     useMockRouter({ isReady: true, query: { [QUERIES.fromFormBusinessEntity]: "true" } });
     renderDashboardPage();
     expect(screen.getByTestId("dashboard-alerts")).toBeInTheDocument();
+  });
+
+  it("renders not-registered card when operatingPhase is GUEST_MODE and businessPersona is STARTING", () => {
+    const business = generateBusiness({
+      profileData: generateProfileData({
+        businessPersona: "STARTING",
+        operatingPhase: "GUEST_MODE",
+      }),
+      preferences: generatePreferences({
+        visibleSidebarCards: [],
+      }),
+    });
+    renderStatefulDashboardComponent(business);
+    expect(currentBusiness().preferences.visibleSidebarCards).toContain(SIDEBAR_CARDS.notRegistered);
+  });
+
+  it("renders not-registered card when operatingPhase is GUEST_MODE and businessPersona is FOREIGN", () => {
+    const business = generateBusiness({
+      profileData: generateProfileData({
+        businessPersona: "FOREIGN",
+        operatingPhase: "GUEST_MODE",
+      }),
+      preferences: generatePreferences({
+        visibleSidebarCards: [],
+      }),
+    });
+    renderStatefulDashboardComponent(business);
+
+    expect(currentBusiness().preferences.visibleSidebarCards).toContain(SIDEBAR_CARDS.notRegistered);
+  });
+
+  it("renders not-registered-existing-account card when operatingPhase is GUEST_MODE_OWNING and businessPersona is OWNING", () => {
+    const business = generateBusiness({
+      profileData: generateProfileData({
+        businessPersona: "OWNING",
+        operatingPhase: "GUEST_MODE_OWNING",
+      }),
+      preferences: generatePreferences({
+        visibleSidebarCards: [],
+      }),
+    });
+    renderStatefulDashboardComponent(business);
+    expect(currentBusiness().preferences.visibleSidebarCards).toContain(
+      SIDEBAR_CARDS.notRegisteredExistingAccount
+    );
   });
 
   describe("phase newly changed indicator", () => {

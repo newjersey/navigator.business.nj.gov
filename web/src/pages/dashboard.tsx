@@ -59,6 +59,32 @@ const DashboardPage = (props: Props): ReactElement => {
 
   useMountEffectWhenDefined(() => {
     (async (): Promise<void> => {
+      if (
+        business?.profileData.operatingPhase === "GUEST_MODE" &&
+        (business?.profileData.businessPersona === "STARTING" ||
+          business?.profileData.businessPersona === "FOREIGN")
+      ) {
+        await updateQueue
+          ?.queuePreferences({
+            visibleSidebarCards: [...business.preferences.visibleSidebarCards, "not-registered"],
+          })
+          .update();
+      }
+
+      if (
+        business?.profileData.operatingPhase === "GUEST_MODE_OWNING" &&
+        business?.profileData.businessPersona === "OWNING"
+      ) {
+        await updateQueue
+          ?.queuePreferences({
+            visibleSidebarCards: [
+              ...business.preferences.visibleSidebarCards,
+              "not-registered-existing-account",
+            ],
+          })
+          .update();
+      }
+
       if (business?.onboardingFormProgress !== "COMPLETED") {
         await router.replace(ROUTES.onboarding);
       }
