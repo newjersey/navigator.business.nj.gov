@@ -9,23 +9,12 @@ import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
-interface Props {
-  isWelcomePage?: boolean;
-}
-
-export const LandingPageTiles = (props: Props): ReactElement => {
+export const LandingPageTiles = (): ReactElement => {
   const router = useRouter();
   const istabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { Config } = useConfig();
 
-  let landingPageConfig = Config.landingPage;
-
-  if (props.isWelcomePage) {
-    landingPageConfig = {
-      ...landingPageConfig,
-      ...Config.landingPageExperienceWelcome,
-    };
-  }
+  const landingPageConfig = Config.landingPage;
 
   const routeToOnboarding = (): void => {
     router.push(ROUTES.onboarding);
@@ -86,18 +75,9 @@ export const LandingPageTiles = (props: Props): ReactElement => {
     },
   ];
 
-  const filterActionTiles = (actionTiles: ActionTile[]): ActionTile[] =>
-    actionTiles.filter((actionTile): boolean => {
-      if (props.isWelcomePage) {
-        const welcomePageTiles = ["get-started-tile", "pay-taxes-tile"];
-        return welcomePageTiles.includes(actionTile.dataTestId);
-      }
-      return true;
-    });
-
   return (
     <>
-      {istabletAndUp && !props.isWelcomePage ? (
+      {istabletAndUp ? (
         <div className="desktop:grid-container-widescreen desktop:width-100">
           <div>
             <LandingPageSlider actionTiles={actionTiles} />
@@ -109,7 +89,7 @@ export const LandingPageTiles = (props: Props): ReactElement => {
             istabletAndUp ? "fdr padding-x-2" : "fdc"
           }`}
         >
-          {filterActionTiles(actionTiles).map((actionTile, index) => {
+          {actionTiles.map((actionTile, index) => {
             const actionTileObj = {
               ...actionTile,
               key: `landing-page-tiles-key-${index}`,

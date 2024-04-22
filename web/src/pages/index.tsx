@@ -22,11 +22,7 @@ import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
-interface Props {
-  isWelcomePage?: boolean;
-}
-
-const Home = (props: Props): ReactElement => {
+const Home = (): ReactElement => {
   const { business, userData, error } = useUserData();
   const { state } = useContext(AuthContext);
   const { Config } = useConfig();
@@ -73,12 +69,6 @@ const Home = (props: Props): ReactElement => {
       };
     }
   }
-  if (props.isWelcomePage) {
-    landingPageConfig = {
-      ...landingPageConfig,
-      ...Config.landingPageExperienceWelcome,
-    };
-  }
   useEffect(() => {
     if (state.isAuthenticated === IsAuthenticated.TRUE) {
       if (business?.onboardingFormProgress === "COMPLETED") {
@@ -89,7 +79,7 @@ const Home = (props: Props): ReactElement => {
         router.replace(`${ROUTES.dashboard}?error=true`);
       }
     }
-  }, [business, userData, error, router, state.isAuthenticated, props.isWelcomePage]);
+  }, [business, userData, error, router, state.isAuthenticated]);
 
   useEffect(() => {
     if (!router.isReady || !router.query[QUERIES.signUp]) {
@@ -165,7 +155,7 @@ const Home = (props: Props): ReactElement => {
       <PageSkeleton landingPage={true}>
         <NavBar landingPage={true} />
         <main data-testid="main">
-          <Hero isWelcomePage={props.isWelcomePage} />
+          <Hero />
           <section ref={sectionHowItWorks} aria-label={landingPageConfig.section4HeaderText}>
             <div className="minh-mobile margin-top-2 desktop:margin-top-neg-205  padding-bottom-6 text-center bg-base-extra-light">
               <Heading
