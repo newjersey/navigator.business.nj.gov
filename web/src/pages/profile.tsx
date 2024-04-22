@@ -789,6 +789,7 @@ const ProfilePage = (props: Props): ReactElement => {
                       divider={false}
                       outlineBox={false}
                       stackNav={true}
+                      nonWrappingLeftColumn={true}
                       titleOverColumns={
                         <ProfileHeader business={business} isAuthenticated={isAuthenticated === "TRUE"} />
                       }
