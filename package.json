@@ -25,7 +25,7 @@
     "test:coverage": "jest --config jest.coverage.ts",
     "test:python": "python -m unittest discover -b -s content/scripts -p \"test_*.py\" && python -m unittest discover -b -s scripts -p \"test_*.py\"",
     "typecheck": "yarn workspaces foreach -v run typecheck",
-    "verify:node": "check-node-version --node $(cat .nvmrc) --npm 10.2.4"
+    "verify:node": "check-node-version --node $(cat .nvmrc) --npm 10.5.0"
   },
   "dependencies": {
     "@aws-amplify/auth": "5.6.1",
@@ -236,7 +236,7 @@
     ]
   },
   "engines": {
-    "node": ">=20.11.1"
+    "node": ">=20.12.2"
   },
   "repository": {
     "type": "git",
