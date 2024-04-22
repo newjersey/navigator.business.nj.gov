@@ -40,7 +40,7 @@ describe("DynamicsHousingClient", () => {
       id: "12345",
     });
 
-    const result = await client("address-1");
+    const result = await client("address-1", "12345");
 
     expect(result).toEqual({
       createdOn: "2024-05-31T10:31:51Z",
@@ -55,6 +55,6 @@ describe("DynamicsHousingClient", () => {
 
   it("throws a 400 error when a sub client client throws a 400", async () => {
     stubHousingPropertyInterestClient.getPropertyInterest.mockRejectedValue(new Error("400"));
-    await expect(client("address-2")).rejects.toThrow("400");
+    await expect(client("address-2", "12345")).rejects.toThrow("400");
   });
 });

@@ -1,4 +1,5 @@
 import { ElevatorRegistrationTask } from "@/components/tasks/ElevatorRegistrationTask";
+import { HousingMunicipalitiesContext } from "@/contexts/housingMunicipalitiesContext";
 import * as api from "@/lib/api-client/apiClient";
 import { generateTask } from "@/test/factories";
 import {
@@ -8,17 +9,22 @@ import {
 import { ThemeProvider, createTheme } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/api-client/apiClient", () => ({ checkElevatorRegistrationStatus: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  checkElevatorRegistrationStatus: jest.fn(),
+}));
 const mockApi = api as jest.Mocked<typeof api>;
 
 describe("<ElevatorRegistrationTask />", () => {
   const task = generateTask({});
+  const municipality = { name: "Town Name", id: "12345", county: "County" };
 
   const renderTask = (): void => {
     render(
-      <ThemeProvider theme={createTheme()}>
-        <ElevatorRegistrationTask task={task} />
-      </ThemeProvider>
+      <HousingMunicipalitiesContext.Provider value={{ municipalities: [municipality] }}>
+        <ThemeProvider theme={createTheme()}>
+          <ElevatorRegistrationTask task={task} />
+        </ThemeProvider>
+      </HousingMunicipalitiesContext.Provider>
     );
   };
 
@@ -47,8 +53,9 @@ describe("<ElevatorRegistrationTask />", () => {
 
     it("displays error alert when no property interests are found for address", async () => {
       renderTask();
-      fireEvent.click(screen.getByTestId("cta-secondary"));
-      fillText("address-1", "123 street");
+      await getToSearchTab();
+      fillOutSearchTab("123 street", "Town Name");
+
       expect(screen.queryByTestId("error-alert-NO_PROPERTY_INTEREST_FOUND")).not.toBeInTheDocument();
       const noPropertyInterestResponse = generateElevatorSafetyRegistrationSummary({
         lookupStatus: "NO PROPERTY INTERESTS FOUND",
@@ -62,8 +69,9 @@ describe("<ElevatorRegistrationTask />", () => {
 
     it("displays error alert when no registrations are found for address", async () => {
       renderTask();
-      fireEvent.click(screen.getByTestId("cta-secondary"));
-      fillText("address-1", "123 street");
+      await getToSearchTab();
+      fillOutSearchTab("123 street", "Town Name");
+
       expect(screen.queryByTestId("error-alert-NO_ELEVATOR_REGISTRATIONS_FOUND")).not.toBeInTheDocument();
       const noRegistrationResponse = generateElevatorSafetyRegistrationSummary({
         lookupStatus: "NO REGISTRATIONS FOUND",
@@ -79,7 +87,9 @@ describe("<ElevatorRegistrationTask />", () => {
   describe("summary screen", () => {
     it("returns to lookup screen if edit is pressed", async () => {
       renderTask();
-      getToSearchTab();
+      await getToSearchTab();
+      fillOutSearchTab("123 street", "Town Name");
+
       const response = generateElevatorSafetyRegistrationSummary();
       mockApi.checkElevatorRegistrationStatus.mockResolvedValue(response);
       fireEvent.submit(screen.getByTestId("check-status-submit"));
@@ -92,7 +102,9 @@ describe("<ElevatorRegistrationTask />", () => {
 
     it("shows the correct information for registration", async () => {
       renderTask();
-      getToSearchTab();
+      await getToSearchTab();
+      fillOutSearchTab("123 street", "Town Name");
+
       const response = generateElevatorSafetyRegistrationSummary();
       mockApi.checkElevatorRegistrationStatus.mockResolvedValue(response);
       fireEvent.submit(screen.getByTestId("check-status-submit"));
@@ -107,7 +119,9 @@ describe("<ElevatorRegistrationTask />", () => {
 
     it("shows the correct number of registrations received", async () => {
       renderTask();
-      getToSearchTab();
+      await getToSearchTab();
+      fillOutSearchTab("123 street", "Town Name");
+
       const approvedResponse = generateElevatorSafetyRegistration();
       const response = generateElevatorSafetyRegistrationSummary({
         registrations: [approvedResponse, approvedResponse, approvedResponse],
@@ -124,7 +138,9 @@ describe("<ElevatorRegistrationTask />", () => {
 
     it("shows informational message for incomplete status", async () => {
       renderTask();
-      getToSearchTab();
+      await getToSearchTab();
+      fillOutSearchTab("123 street", "Town Name");
+
       const incompleteResponse = generateElevatorSafetyRegistration({ status: "Incomplete" });
       const response = generateElevatorSafetyRegistrationSummary({
         registrations: [incompleteResponse],
@@ -139,7 +155,9 @@ describe("<ElevatorRegistrationTask />", () => {
 
     it("shows informational message for in review status", async () => {
       renderTask();
-      getToSearchTab();
+      await getToSearchTab();
+      fillOutSearchTab("123 street", "Town Name");
+
       const inReviewResponse = generateElevatorSafetyRegistration({ status: "In Review" });
       const response = generateElevatorSafetyRegistrationSummary({
         registrations: [inReviewResponse],
@@ -154,7 +172,9 @@ describe("<ElevatorRegistrationTask />", () => {
 
     it("shows informational message for rejected status", async () => {
       renderTask();
-      getToSearchTab();
+      await getToSearchTab();
+      fillOutSearchTab("123 street", "Town Name");
+
       const rejectedResponse = generateElevatorSafetyRegistration({ status: "Rejected" });
       const response = generateElevatorSafetyRegistrationSummary({
         registrations: [rejectedResponse],
@@ -169,7 +189,9 @@ describe("<ElevatorRegistrationTask />", () => {
 
     it("shows informational message for returned status", async () => {
       renderTask();
-      getToSearchTab();
+      await getToSearchTab();
+      fillOutSearchTab("123 street", "Town Name");
+
       const returnedResponse = generateElevatorSafetyRegistration({ status: "Returned" });
       const response = generateElevatorSafetyRegistrationSummary({
         registrations: [returnedResponse],
@@ -184,7 +206,9 @@ describe("<ElevatorRegistrationTask />", () => {
 
     it("does not show informational message for approved status", async () => {
       renderTask();
-      getToSearchTab();
+      await getToSearchTab();
+      fillOutSearchTab("123 street", "Town Name");
+
       const approvedResponse = generateElevatorSafetyRegistration();
       const response = generateElevatorSafetyRegistrationSummary({
         registrations: [approvedResponse],
@@ -202,9 +226,20 @@ describe("<ElevatorRegistrationTask />", () => {
     fireEvent.change(screen.getByTestId(testid), { target: { value: value } });
   };
 
-  const getToSearchTab = (): void => {
+  const getToSearchTab = async (): Promise<void> => {
     fireEvent.click(screen.getByTestId("cta-secondary"));
-    fillText("address-1", "123 street");
+    await waitFor(() => {
+      expect(screen.getByTestId("municipalities")).toBeInTheDocument();
+    });
     expect(screen.getByTestId("address-1")).toBeInTheDocument();
+  };
+
+  const fillOutSearchTab = (address: string, municipality: string): void => {
+    fillText("address-1", address);
+    const input = screen.getByTestId("municipalities");
+    fillText("municipalities", municipality);
+    fireEvent.keyDown(input, { key: "ArrowDown" });
+    fireEvent.keyDown(input, { key: "Enter" });
+    expect(screen.getByTestId("municipalities")).toBeInTheDocument();
   };
 });

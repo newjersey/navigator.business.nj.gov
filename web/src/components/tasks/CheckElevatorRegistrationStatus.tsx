@@ -1,28 +1,20 @@
+import { MunicipalityDropdown } from "@/components/data-fields/MunicipalityDropdown";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { getMergedConfig } from "@/contexts/configContext";
 import { ElevatorRegistrationSearchError } from "@/lib/types/types";
+import { toProperCase } from "@businessnjgovnavigator/shared";
 import { ElevatorSafetyAddress } from "@businessnjgovnavigator/shared/elevatorSafety";
+import { HousingMunicipality } from "@businessnjgovnavigator/shared/housing";
+import { Municipality } from "@businessnjgovnavigator/shared/municipality";
 import { TextField } from "@mui/material";
-import createStyles from "@mui/styles/createStyles";
-import makeStyles from "@mui/styles/makeStyles";
 import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
-
-const useStyles = makeStyles(() => {
-  return createStyles({
-    zipCodeField: {
-      "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
-        {
-          display: "none",
-        },
-    },
-  });
-});
 
 interface Props {
   onSubmit: (address: ElevatorSafetyAddress) => void;
   error: ElevatorRegistrationSearchError | undefined;
   isLoading: boolean;
+  municipalities: HousingMunicipality[];
 }
 
 const Config = getMergedConfig();
@@ -34,11 +26,25 @@ const ElevatorSearchErrorLookup: Record<ElevatorRegistrationSearchError, string>
 };
 
 export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
-  const classes = useStyles();
   const [formValues, setFormValues] = useState<ElevatorSafetyAddress>({ address1: "" });
+  const [selectedMunicipality, setSelectedMunicipality] = useState<Municipality | undefined>(undefined);
+
+  const formattedMunicipalities = props.municipalities.map((municipality) => {
+    return {
+      id: municipality.id,
+      name: municipality.name,
+      displayName: toProperCase(municipality.name),
+      county: municipality.county,
+    } as Municipality;
+  });
+
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    props.onSubmit(formValues);
+    props.onSubmit({
+      address1: formValues.address1,
+      municipalityExternalId: selectedMunicipality?.id || "",
+      municipalityName: selectedMunicipality?.name || "",
+    });
   };
 
   const handleChangeForKey = (
@@ -96,17 +102,16 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
         </div>
         <div className="fdr flex-half">
           <div className="flex-half padding-right-1">
-            <label htmlFor="city">{Config.elevatorRegistrationSearchTask.zipCodeLabel}</label>
-            <TextField
-              value={formValues.zipCode}
-              onChange={handleChangeForKey("zipCode")}
-              variant="outlined"
-              inputProps={{
-                id: "zipcode",
-                "data-testid": "zipcode",
-                type: "number",
+            <label htmlFor="municipality">{Config.elevatorRegistrationSearchTask.municipalityLabel}</label>
+            <MunicipalityDropdown
+              fieldName={"municipalities"}
+              municipalities={formattedMunicipalities}
+              helperText={""}
+              onSelect={(value) => {
+                setSelectedMunicipality(value);
               }}
-              className={`${classes.zipCodeField}`}
+              value={selectedMunicipality}
+              onValidation={() => {}}
             />
           </div>
           <div className="flex-half padding-left-1">

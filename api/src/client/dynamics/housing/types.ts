@@ -2,7 +2,7 @@ export interface HousingPropertyInterestClient {
   getPropertyInterest: (
     accessToken: string,
     address: string,
-    zipCode?: string
+    municipalityId: string
   ) => Promise<HousingPropertyInterestResponse>;
 }
 
@@ -18,4 +18,7 @@ export type HousingPropertyInterest = {
 
 export type HousingPropertyInterestResponse = HousingPropertyInterest | undefined;
 
-export type HousingPropertyInterestInfo = (address: string) => Promise<HousingPropertyInterestResponse>;
+export type HousingPropertyInterestInfo = (
+  address: string,
+  municipalityId: string
+) => Promise<HousingPropertyInterestResponse>;
