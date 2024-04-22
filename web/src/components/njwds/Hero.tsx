@@ -10,11 +10,7 @@ import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
-interface Props {
-  isWelcomePage?: boolean;
-}
-
-export const Hero = (props: Props): ReactElement => {
+export const Hero = (): ReactElement => {
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const router = useRouter();
@@ -27,14 +23,6 @@ export const Hero = (props: Props): ReactElement => {
       ...Config.landingPageExperienceB,
     };
   }
-
-  if (props.isWelcomePage) {
-    landingPageConfig = {
-      ...landingPageConfig,
-      ...Config.landingPageExperienceWelcome,
-    };
-  }
-
   const section2CTAOnClick = (): void => {
     router.push(ROUTES.onboarding);
     analytics.event.landing_page_second_get_started.click.go_to_onboarding();
@@ -71,7 +59,7 @@ export const Hero = (props: Props): ReactElement => {
             </div>
           </div>
         </div>
-        <LandingPageTiles isWelcomePage={props.isWelcomePage} />
+        <LandingPageTiles />
       </div>
       <div className={`${isDesktopAndUp ? "hero-gradient-bg-bottom" : "bg-primary-extra-light"}`}>
         <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100">
