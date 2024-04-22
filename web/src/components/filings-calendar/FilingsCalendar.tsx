@@ -134,7 +134,11 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             <Heading level={2} className="margin-bottom-0 text-medium">
               {Config.dashboardDefaults.calendarHeader}
             </Heading>
-            <div className="margin-top-05 margin-left-1 margin-bottom-05">
+            <div
+              className={`margin-top-05 margin-left-1 margin-bottom-05 ${
+                isLargeScreen ? "padding-bottom-2" : "padding-bottom-1"
+              }`}
+            >
               <ArrowTooltip title={Config.dashboardDefaults.calendarTooltip}>
                 <div className="fdr fac font-body-lg text-green" data-testid="calendar-tooltip">
                   <Icon>help_outline</Icon>
