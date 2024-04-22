@@ -3124,6 +3124,8 @@ collections:
                   name: timeDelayBetweenMultipleSnackbars,
                   widget: text,
                 }
+              - { label: Needs Account Snackbar Title, name: needsAccountSnackbarTitle, widget: text }
+              - { label: Needs Account Snackbar Body, name: needsAccountSnackbarBody, widget: text }
       - label: "Dashboard Calendar"
         name: "dashboard-config-calendar"
         file: "content/src/fieldConfig/dashboard-calendar.json"
@@ -3952,18 +3954,7 @@ collections:
               - { label: Error - Generic, name: errorTextGeneric, widget: string }
               - { label: Newsletter Label, name: newsletterCheckboxLabel, widget: string }
               - { label: User Testing Label, name: userTestingCheckboxLabel, widget: string }
-              - { label: Needs Account Snackbar Title, name: needsAccountSnackbarTitle, widget: string }
-              - { label: Needs Account Snackbar Body, name: needsAccountSnackbarBody, widget: text }
-              - {
-                  label: Needs Account Snackbar Title - Existing myNJ Account,
-                  name: needsAccountSnackbarTitleExistingAccount,
-                  widget: string,
-                }
-              - {
-                  label: Needs Account Snackbar Body - Existing myNJ Account,
-                  name: needsAccountSnackbarBodyExistingAccount,
-                  widget: text,
-                }
+
               - { label: Account Success Snackbar Title, name: accountSuccessSnackbarTitle, widget: string }
               - { label: Account Success Snackbar Body, name: accountSuccessSnackbarBody, widget: string }
               - {

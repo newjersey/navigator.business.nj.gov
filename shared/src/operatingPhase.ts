@@ -17,6 +17,7 @@ export interface OperatingPhase {
   readonly displayHomeBasedPrompt: boolean;
   readonly displayGoToProfileNudge: boolean;
   readonly displayQuickActions: boolean;
+  readonly displaySidebarCardNotRegistered: boolean;
 }
 
 export type OperatingPhaseId =
@@ -54,6 +55,7 @@ export const LookupOperatingPhaseById = (id: OperatingPhaseId | undefined): Oper
       displayHomeBasedPrompt: false,
       displayGoToProfileNudge: false,
       displayQuickActions: false,
+      displaySidebarCardNotRegistered: false,
     }
   );
 };
@@ -78,6 +80,7 @@ export const OperatingPhases: OperatingPhase[] = [
     sectorRequired: false,
     displayGoToProfileNudge: false,
     displayQuickActions: false,
+    displaySidebarCardNotRegistered: true,
   },
   {
     id: "GUEST_MODE_WITH_BUSINESS_STRUCTURE",
@@ -98,6 +101,7 @@ export const OperatingPhases: OperatingPhase[] = [
     sectorRequired: false,
     displayGoToProfileNudge: false,
     displayQuickActions: false,
+    displaySidebarCardNotRegistered: true,
   },
   {
     id: "GUEST_MODE_OWNING",
@@ -118,6 +122,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayHomeBasedPrompt: false,
     displayGoToProfileNudge: true,
     displayQuickActions: true,
+    displaySidebarCardNotRegistered: true,
   },
   {
     id: "FORMED",
@@ -138,6 +143,7 @@ export const OperatingPhases: OperatingPhase[] = [
     sectorRequired: false,
     displayGoToProfileNudge: false,
     displayQuickActions: false,
+    displaySidebarCardNotRegistered: false,
   },
   {
     id: "NEEDS_TO_FORM",
@@ -158,6 +164,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayHomeBasedPrompt: true,
     displayGoToProfileNudge: false,
     displayQuickActions: false,
+    displaySidebarCardNotRegistered: false,
   },
   {
     id: "NEEDS_BUSINESS_STRUCTURE",
@@ -178,6 +185,7 @@ export const OperatingPhases: OperatingPhase[] = [
     sectorRequired: false,
     displayGoToProfileNudge: false,
     displayQuickActions: false,
+    displaySidebarCardNotRegistered: false,
   },
   {
     id: "UP_AND_RUNNING",
@@ -198,6 +206,7 @@ export const OperatingPhases: OperatingPhase[] = [
     sectorRequired: true,
     displayGoToProfileNudge: true,
     displayQuickActions: true,
+    displaySidebarCardNotRegistered: false,
   },
   {
     id: "UP_AND_RUNNING_OWNING",
@@ -218,6 +227,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayHomeBasedPrompt: false,
     displayGoToProfileNudge: true,
     displayQuickActions: true,
+    displaySidebarCardNotRegistered: false,
   },
   {
     id: "REMOTE_SELLER_WORKER",
@@ -238,5 +248,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayHomeBasedPrompt: false,
     displayGoToProfileNudge: false,
     displayQuickActions: false,
+    displaySidebarCardNotRegistered: false,
   },
 ];
