@@ -15,7 +15,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { createProfileFieldErrorMap, Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import { ReactElement, ReactNode, useContext, useEffect, useState } from "react";
 
 interface Props {
@@ -136,32 +136,30 @@ export const TaxInput = (props: Props): ReactElement => {
         }}
       >
         <div className={isTabletAndUp ? "flex flex-row" : ""}>
-          <ThemeProvider theme={createTheme()}>
-            {shouldLockTaxId ? (
-              <Alert variant="success" className="width-100">
-                <DisabledTaxId template={DisabledElement} />
-              </Alert>
-            ) : (
-              <>
-                <TaxId
-                  required={isAuthenticated === IsAuthenticated.TRUE}
-                  handleChangeOverride={getNeedsAccountModalFunction()}
-                />
-                <div className="tablet:margin-top-05 tablet:margin-left-2">
-                  <SecondaryButton
-                    isColor="primary"
-                    onClick={onSave}
-                    isLoading={isLoading}
-                    isSubmitButton={true}
-                    isRightMarginRemoved={true}
-                    isFullWidthOnDesktop={!isTabletAndUp}
-                  >
-                    {saveButtonText}
-                  </SecondaryButton>
-                </div>
-              </>
-            )}
-          </ThemeProvider>
+          {shouldLockTaxId ? (
+            <Alert variant="success" className="width-100">
+              <DisabledTaxId template={DisabledElement} />
+            </Alert>
+          ) : (
+            <>
+              <TaxId
+                required={isAuthenticated === IsAuthenticated.TRUE}
+                handleChangeOverride={getNeedsAccountModalFunction()}
+              />
+              <div className="tablet:margin-top-05 tablet:margin-left-2">
+                <SecondaryButton
+                  isColor="primary"
+                  onClick={onSave}
+                  isLoading={isLoading}
+                  isSubmitButton={true}
+                  isRightMarginRemoved={true}
+                  isFullWidthOnDesktop={!isTabletAndUp}
+                >
+                  {saveButtonText}
+                </SecondaryButton>
+              </div>
+            </>
+          )}
         </div>
       </ProfileDataContext.Provider>
     </ProfileFormContext.Provider>
