@@ -128,6 +128,7 @@ export const TaxId = (props: Props): ReactElement => {
         getShowHideToggleButton={getShowHideToggleButton}
         taxIdDisplayStatus={taxIdDisplayStatus}
         additionalValidationIsValid={additionalValidationIsValid}
+        validationText={Config.profileDefaults.fields.taxId.default.errorTextRequired}
         {...props}
       />
     );
