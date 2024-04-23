@@ -1170,3 +1170,15 @@ workflows:
     when: << pipeline.parameters.run_workflow_builder >>
     jobs:
       - docker-build-builder-image
+
+  build-accessibility-testing-weekly:
+    triggers:
+      - schedule:
+          # Every Saturday, at Noon.
+          cron: "0 12 * * 6"
+          filters:
+            branches:
+              only:
+                - accessibility-testing-repo
+    jobs:
+      - deploy-accessibility-testing
