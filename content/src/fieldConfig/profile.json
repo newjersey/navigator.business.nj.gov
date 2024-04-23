@@ -168,6 +168,24 @@
           "description": "Will you house animals?"
         }
       },
+      "constructionType": {
+        "default": {
+          "header": "Construction Type",
+          "radioButtonResidentialText": "Residential",
+          "radioButtonCommercialOrIndustrialText": "Commercial or Industrial",
+          "radioButtonBothText": "Both",
+          "description": "Which type of construction do you plan to do?"
+        }
+      },
+      "residentialConstructionType": {
+        "default": {
+          "header": "",
+          "radioButtonNewHomeConstructionText": "New home construction",
+          "radioButtonHomeRenovationsText": "Home renovations",
+          "radioButtonBothText": "Both",
+          "description": "Which type of residential construction do you plan to do?"
+        }
+      },
       "tradeName": {
         "default": {
           "header": "Trade Name",

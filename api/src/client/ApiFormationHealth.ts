@@ -69,6 +69,8 @@ export const ApiFormationHealth: UserData = {
         isChildcareForSixOrMore: true,
         petCareHousing: false,
         willSellPetCareItems: false,
+        constructionType: undefined,
+        residentialConstructionType: undefined,
         businessPersona: "FOREIGN",
         businessName: "some-business-name-17681628",
         responsibleOwnerName: "some-responsible-owner-name-69779144",

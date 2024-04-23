@@ -7,7 +7,7 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { ProfileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
-import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
+import { EssentialQuestion, EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { FormContextFieldProps } from "@/lib/types/types";
 import { ReactElement, ReactNode, useContext } from "react";
@@ -39,9 +39,23 @@ export const Industry = <T,>(props: Props<T>): ReactElement => {
 
   RegisterForOnSubmit(() => isValid(state.profileData.industryId));
 
+  const shouldEssentialQuestionAppearBasedOnProfileData = (essentialQuestion: EssentialQuestion): boolean => {
+    switch (essentialQuestion.fieldName) {
+      case "residentialConstructionType":
+        return (
+          state.profileData.constructionType === "BOTH" ||
+          state.profileData.constructionType === "RESIDENTIAL"
+        );
+      default:
+        return true;
+    }
+  };
+
   const getEssentialQuestions = (industryId: string | undefined): ReactNode[] => {
     return EssentialQuestions.filter((i) => {
-      return i.isQuestionApplicableToIndustryId(industryId);
+      return (
+        i.isQuestionApplicableToIndustryId(industryId) && shouldEssentialQuestionAppearBasedOnProfileData(i)
+      );
     }).map((obj) => (
       <EssentialQuestionField<T>
         essentialQuestion={obj}

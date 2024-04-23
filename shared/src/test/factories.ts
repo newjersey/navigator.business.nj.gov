@@ -226,6 +226,12 @@ export const generateIndustrySpecificData = (
     isChildcareForSixOrMore: !(randomInt() % 2),
     petCareHousing: !(randomInt() % 2),
     willSellPetCareItems: !(randomInt() % 2),
+    constructionType: randomElementFromArray(["RESIDENTIAL", "COMMERCIAL_OR_INDUSTRIAL", "BOTH"]),
+    residentialConstructionType: randomElementFromArray([
+      "NEW_HOME_CONSTRUCTION",
+      "HOME_RENOVATIONS",
+      "BOTH",
+    ]),
     ...overrides,
   };
 };
