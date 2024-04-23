@@ -12,6 +12,7 @@ export interface SidebarPageLayoutProps {
   outlineBox?: boolean;
   belowBoxComponent?: React.ReactNode;
   titleOverColumns?: React.ReactNode;
+  nonWrappingLeftColumn?: boolean;
 }
 
 export const SidebarPageLayout = ({
@@ -22,6 +23,7 @@ export const SidebarPageLayout = ({
   stackNav,
   belowBoxComponent,
   titleOverColumns,
+  nonWrappingLeftColumn,
 }: SidebarPageLayoutProps): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const { Config } = useConfig();
@@ -34,7 +36,7 @@ export const SidebarPageLayout = ({
 
           {isLargeScreen && titleOverColumns}
           <div className="grid-row grid-gap">
-            <div className="desktop:grid-col-9">
+            <div className={`${nonWrappingLeftColumn ? "fg10" : "desktop:grid-col-9"} `}>
               {!isLargeScreen && (
                 <div>
                   <BackButtonForLayout backButtonText={Config.taskDefaults.backToRoadmapText} />
@@ -53,14 +55,16 @@ export const SidebarPageLayout = ({
               </div>
               {belowBoxComponent}
             </div>
-            <div className="desktop:grid-col-3 order-first">
-              {isLargeScreen && (
-                <nav aria-label="Secondary">
-                  {divider && <hr className="margin-bottom-1 margin-top-0" aria-hidden={true} />}
-                  {navChildren}
-                </nav>
-              )}
-            </div>
+
+            {isLargeScreen && (
+              <nav
+                aria-label="Secondary"
+                className={`${nonWrappingLeftColumn ? "fs0 fg1" : "desktop:grid-col-3"}  order-first`}
+              >
+                {divider && <hr className="margin-bottom-1 margin-top-0" aria-hidden={true} />}
+                {navChildren}
+              </nav>
+            )}
           </div>
         </div>
       </div>
