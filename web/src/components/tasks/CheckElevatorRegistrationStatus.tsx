@@ -2,13 +2,14 @@ import { MunicipalityDropdown } from "@/components/data-fields/MunicipalityDropd
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { getMergedConfig } from "@/contexts/configContext";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ElevatorRegistrationSearchError } from "@/lib/types/types";
 import { toProperCase } from "@businessnjgovnavigator/shared";
 import { ElevatorSafetyAddress } from "@businessnjgovnavigator/shared/elevatorSafety";
 import { HousingMunicipality } from "@businessnjgovnavigator/shared/housing";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
 import { TextField } from "@mui/material";
-import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
+import { ChangeEvent, FormEvent, ReactElement, useEffect, useState } from "react";
 
 interface Props {
   onSubmit: (address: ElevatorSafetyAddress) => void;
@@ -28,6 +29,7 @@ const ElevatorSearchErrorLookup: Record<ElevatorRegistrationSearchError, string>
 export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
   const [formValues, setFormValues] = useState<ElevatorSafetyAddress>({ address1: "" });
   const [selectedMunicipality, setSelectedMunicipality] = useState<Municipality | undefined>(undefined);
+  const { business, updateQueue } = useUserData();
 
   const formattedMunicipalities = props.municipalities.map((municipality) => {
     return {
@@ -38,8 +40,53 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
     } as Municipality;
   });
 
+  useEffect(() => {
+    const communityAffairsAddress = business?.profileData.communityAffairsAddress;
+
+    if (communityAffairsAddress) {
+      if (communityAffairsAddress.streetAddress1) {
+        setFormValues((prevValues) => {
+          return {
+            ...prevValues,
+            address1: communityAffairsAddress.streetAddress1,
+          };
+        });
+      }
+      if (communityAffairsAddress.streetAddress2) {
+        setFormValues((prevValues) => {
+          return {
+            ...prevValues,
+            address2: communityAffairsAddress.streetAddress2,
+          };
+        });
+      }
+      if (communityAffairsAddress.municipality) {
+        setSelectedMunicipality(communityAffairsAddress.municipality);
+      }
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+
+    if (business?.profileData && formValues.address1 && selectedMunicipality) {
+      const profileData = {
+        ...business?.profileData,
+        communityAffairsAddress: {
+          streetAddress1: formValues.address1,
+          streetAddress2: formValues.address2,
+          municipality: {
+            id: selectedMunicipality?.id,
+            name: selectedMunicipality?.name,
+            displayName: selectedMunicipality?.name,
+            county: selectedMunicipality?.county,
+          },
+        },
+      };
+      updateQueue?.queueProfileData(profileData).update();
+    }
     props.onSubmit({
       address1: formValues.address1,
       municipalityExternalId: selectedMunicipality?.id || "",

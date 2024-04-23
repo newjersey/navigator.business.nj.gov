@@ -1,3 +1,5 @@
+import { Municipality } from "./municipality";
+
 export type HousingPropertyInterestDetails = {
   createdOn: string;
   isFireSafety: boolean;
@@ -11,4 +13,10 @@ export type HousingMunicipality = {
   name: string;
   id: string;
   county: string;
+};
+
+export type CommunityAffairsAddress = {
+  streetAddress1: string;
+  streetAddress2?: string;
+  municipality: Municipality;
 };
