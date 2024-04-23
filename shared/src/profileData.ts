@@ -1,3 +1,4 @@
+import { CommunityAffairsAddress } from "./housing";
 import { Municipality } from "./municipality";
 import { OperatingPhaseId } from "./operatingPhase";
 
@@ -103,6 +104,7 @@ export interface ProfileData extends IndustrySpecificData {
   readonly isNonprofitOnboardingRadio: boolean;
   readonly nonEssentialRadioAnswers: Record<string, boolean | undefined>;
   readonly elevatorOwningBusiness: boolean | undefined;
+  readonly communityAffairsAddress?: CommunityAffairsAddress;
 }
 
 export const emptyProfileData: ProfileData = {
@@ -132,6 +134,7 @@ export const emptyProfileData: ProfileData = {
   isNonprofitOnboardingRadio: false,
   nonEssentialRadioAnswers: {},
   elevatorOwningBusiness: undefined,
+  communityAffairsAddress: undefined,
   ...emptyIndustrySpecificData,
 };
 
