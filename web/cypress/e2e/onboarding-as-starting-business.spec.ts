@@ -3,7 +3,13 @@ import {
   setMobileViewport,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
 import { onOnboardingPageStartingBusiness } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
-import { Industries, Industry, carServiceOptions, randomInt } from "@businessnjgovnavigator/shared/";
+import {
+  Industries,
+  Industry,
+  ResidentialConstructionType,
+  carServiceOptions,
+  randomInt,
+} from "@businessnjgovnavigator/shared/";
 
 const enabledIndustries = Industries.filter((element: Industry) => {
   return element.isEnabled;
@@ -80,6 +86,42 @@ describe("Onboarding for all industries when starting a business [feature] [all]
           onOnboardingPageStartingBusiness
             .getWillSellPetcareItemsRadio(!willSellPetCareItems)
             .should("not.be.checked");
+        }
+
+        const residentialConstructionTypeApplicable = industry.industryOnboardingQuestions
+          .isConstructionTypeApplicable
+          ? Boolean(randomInt() % 2)
+          : undefined;
+
+        if (residentialConstructionTypeApplicable === undefined) {
+          onOnboardingPageStartingBusiness.getConstructionTypeItemsRadio().should("not.exist");
+        } else {
+          const constructionType = residentialConstructionTypeApplicable
+            ? "RESIDENTIAL"
+            : "COMMERCIAL_OR_INDUSTRIAL";
+          onOnboardingPageStartingBusiness.selectConstructionTypeRadio(constructionType);
+          onOnboardingPageStartingBusiness
+            .getConstructionTypeItemsRadio(constructionType)
+            .should("be.checked");
+          if (residentialConstructionTypeApplicable) {
+            onOnboardingPageStartingBusiness.getResidentialConstructionTypeRadio().should("exist");
+            const residentialConstructionChoices = [
+              "NEW_HOME_CONSTRUCTION",
+              "HOME_RENOVATIONS",
+              "BOTH",
+            ] as ResidentialConstructionType[];
+            const randomAnswerIndex = Math.floor(Math.random() * 3);
+            const residentialConstructionTypeOption = residentialConstructionChoices[randomAnswerIndex];
+
+            onOnboardingPageStartingBusiness.selectResidentialConstructionTypeRadio(
+              residentialConstructionTypeOption
+            );
+            onOnboardingPageStartingBusiness
+              .getResidentialConstructionTypeItemsRadio(residentialConstructionTypeOption)
+              .should("be.checked");
+          } else {
+            onOnboardingPageStartingBusiness.getResidentialConstructionTypeRadio().should("not.exist");
+          }
         }
 
         onOnboardingPageStartingBusiness.clickShowMyGuide();
