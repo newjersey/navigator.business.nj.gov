@@ -1,4 +1,9 @@
-import { CarServiceType, LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared";
+import {
+  CarServiceType,
+  ConstructionType,
+  LookupIndustryById,
+  LookupSectorTypeById, ResidentialConstructionType
+} from "@businessnjgovnavigator/shared";
 
 class OnboardingSharedElements {
   getBusinessPersonaRadio(radio: string) {
@@ -35,6 +40,19 @@ class OnboardingPageStartingBusiness extends OnboardingSharedElements {
     return cy.get(`input[name="will-sell-pet-care-items"]${`[value="${radio}"]`}`);
   }
 
+
+  getConstructionTypeItemsRadio(value?: ConstructionType) {
+    return cy.get(`input[name="construction-type"]${`[value="${value}"]`}`);
+  }
+
+  getResidentialConstructionTypeRadio() {
+    return cy.get(`input[name="residential-construction-type"]`);
+  }
+
+  getResidentialConstructionTypeItemsRadio(value?: ResidentialConstructionType) {
+    return cy.get(`input[name="residential-construction-type"]${`[value="${value}"]`}`);
+  }
+
   selectCarServiceRadio(radio: CarServiceType) {
     this.getCarServiceRadio(radio).check();
   }
@@ -55,6 +73,14 @@ class OnboardingPageStartingBusiness extends OnboardingSharedElements {
 
   selectWillSellPetcareItemsRadio(radio: boolean) {
     this.getWillSellPetcareItemsRadio(radio).check();
+  }
+
+  selectConstructionTypeRadio(value: ConstructionType) {
+    this.getConstructionTypeItemsRadio(value).check();
+  }
+
+  selectResidentialConstructionTypeRadio(value: ResidentialConstructionType) {
+    this.getResidentialConstructionTypeItemsRadio(value).check();
   }
 
   clickNext() {
