@@ -6,7 +6,7 @@ industryIds:
 sectorIds: []
 icon: update-purple.svg
 urlSlug: accountant-license-reinstatement
-summaryDescriptionMd: You need to reinstate your license as an accountant if it
+summaryDescriptionMd: Your accountant license needs to be reinstated because it
   is expired or inactive.
 form: Application for Reinstatement/Reactivation of Licensure as an Accountant
 callToActionText: Reinstate My Accountant License
