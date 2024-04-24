@@ -62,7 +62,7 @@
     "canBeReseller": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "caregiver, care services",
+  "additionalSearchTerms": "caregiver, care services, health care service firm, health care service",
   "id": "homemaker-home-health-aide",
   "licenseType": "Health Care Services",
   "description": "A business staffing licensed personnel to provide home health care services",
