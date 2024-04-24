@@ -13,7 +13,7 @@ interface Props {
 export const ProfileTab = (props: Props): ReactElement => {
   return (
     <button
-      className="cursor-pointer width-100 bg-base-lightest flex fjb fac padding-y-1 padding-right-2 padding-left-3 border-2px border-base-lighter btn-profile-hoverstate line-height-120"
+      className="cursor-pointer profile-tab-nav-button bg-base-lightest flex fjb fac padding-y-1 padding-right-2 padding-left-3 border-2px border-base-lighter btn-profile-hoverstate line-height-120"
       style={{ borderStyle: props.hasTopBorder ? "solid" : "none solid solid solid" }}
       data-testid={props.tab}
       onClick={(): void => props.setProfileTab(props.tab)}
