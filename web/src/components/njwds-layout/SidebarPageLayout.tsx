@@ -35,8 +35,8 @@ export const SidebarPageLayout = ({
           {isLargeScreen && <BackButtonForLayout backButtonText={Config.taskDefaults.backToRoadmapText} />}
 
           {isLargeScreen && titleOverColumns}
-          <div className="grid-row grid-gap">
-            <div className={`${nonWrappingLeftColumn ? "fg10" : "desktop:grid-col-9"} `}>
+          <div className="grid-row grid-gap flex-no-wrap">
+            <div className={nonWrappingLeftColumn ? "fg1" : "desktop:grid-col-9"}>
               {!isLargeScreen && (
                 <div>
                   <BackButtonForLayout backButtonText={Config.taskDefaults.backToRoadmapText} />
@@ -59,7 +59,7 @@ export const SidebarPageLayout = ({
             {isLargeScreen && (
               <nav
                 aria-label="Secondary"
-                className={`${nonWrappingLeftColumn ? "fs0 fg1" : "desktop:grid-col-3"}  order-first`}
+                className={`${nonWrappingLeftColumn ? "" : "desktop:grid-col-3"}  order-first`}
               >
                 {divider && <hr className="margin-bottom-1 margin-top-0" aria-hidden={true} />}
                 {navChildren}
