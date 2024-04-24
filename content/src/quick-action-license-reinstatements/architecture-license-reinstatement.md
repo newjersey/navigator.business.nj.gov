@@ -1,4 +1,5 @@
 ---
+notesMd: Need to check with engineering team what the system is returning -- is it definitely showing licenses that have been expired for five years or less?
 filename: architecture-license-reinstatement
 name: Apply to Reinstate Your Architecture License
 industryIds:
@@ -37,7 +38,7 @@ callToActionLink: https://www.njconsumeraffairs.gov/arch/applications/Applicatio
 - A criminal background check, if applicable
 - List of licenses or certificates, past and present, if applicable
 
-:::callout{ header="" icon="true" calloutType="conditional" }
+:::callout{ header="" icon="false" calloutType="conditional" }
 
 - The same license number
   :::

@@ -13,11 +13,13 @@
       "paymentDisclaimer": "You will be brought to a secure payment platform operated by New Jersey's partner NICUSA Inc. to process your payment.",
       "partialAddressErrorText": "Address must be complete.",
       "notEntered": "Not Entered",
+      "ariaContextWillNeedToProvideBusinessDate": "Provide your business effective date to update the task status",
       "backButtonText": "Cancel",
       "initialNextNexusButtonText": "Continue Authorizing My Business",
       "editButtonText": "Edit",
       "radioNoText": "No",
       "charactersLabel": "characters",
+      "ariaContextWillLooseCalendarAndCertificationAccess": "You need to confirm your information to update your task status",
       "maximumLengthErrorText": "${field} must be ${maxLen} characters or fewer.",
       "nextButtonText": "Save & Continue",
       "optionalLabel": "(Optional)",
@@ -28,12 +30,10 @@
       "viewMoreButtonText": "Read more",
       "amendmentInfo": "#### Review your information before submitting to the New Jersey Division of Revenue and Enterprise Services.\n If you need to make a change after submitting, you must file an [amendment online.](https://www.njportal.com/dor/businessamendments)",
       "viewLessButtonText": "Read less",
-      "genericErrorText": "This field requires information.",
-      "ariaContextWillNeedToProvideBusinessDate": "Provide your business effective date to update the task status",
-      "ariaContextWillLooseCalendarAndCertificationAccess": "You need to confirm your information to update your task status"
+      "genericErrorText": "This field requires information."
     },
     "intro": {
-      "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.\n\nInterested in `reserving your business name temporarily|name-reservation` before registering?",
+      "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.\n\nYou will need to fill out a [paper application](https://www.nj.gov/treasury/revenue/pdf/2000.pdf) to register if you choose to `reserve your business name.|name-reservation` Business name reservations only last six months.",
       "foreign": "You must register your business name and form your business with the State. To do this, you first need to see if your business name is available."
     },
     "sections": {
