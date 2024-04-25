@@ -30,9 +30,9 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     // check dashboard
     onDashboardPage.getEditProfileLink().should("exist");
 
-    cy.get('[data-testid="self-reg-snackbar"]').should("be.visible");
-    cy.get('[aria-label="close"]').first().click({ force: true });
-    cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
+    cy.get('[data-testid="needs-account-alert"]').should("be.visible");
+    cy.wait(7000);
+    cy.get('[data-testid="needs-account-alert"]').should("not.exist");
 
     completeBusinessStructureTask({ legalStructureId });
 
@@ -66,12 +66,12 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     cy.get(`[data-industry='${industry.id}']`).should("not.exist");
     cy.get('[data-task-id="check-local-requirements"]').should("exist");
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
-    cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
+    cy.get('[data-testid="needs-account-alert"]').should("not.exist");
 
     // go back to dashboard
     cy.log("go back to dashboard");
     cy.get(`[data-testid="back-to-dashboard"]`).first().click({ force: true });
-    cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
+    cy.get('[data-testid="needs-account-alert"]').should("not.exist");
 
     // go to auth blocked task
     cy.get('[data-task="register-consumer-affairs"]').first().click({ force: true });
@@ -83,7 +83,7 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     // go back to dashboard
     cy.get(`[data-testid="back-to-dashboard"]`).first().click({ force: true });
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
-    cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
+    cy.get('[data-testid="needs-account-alert"]').should("not.exist");
 
     // try editing data in the Profile page
     onDashboardPage.clickEditProfileLink();

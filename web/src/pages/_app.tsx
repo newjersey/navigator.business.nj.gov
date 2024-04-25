@@ -3,9 +3,10 @@
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 import { IntercomScript } from "@/components/IntercomScript";
 import { NeedsAccountModal } from "@/components/auth/NeedsAccountModal";
-import { NeedsAccountSnackbar } from "@/components/auth/NeedsAccountSnackbar";
+
 import { RegistrationStatusSnackbar } from "@/components/auth/RegistrationStatusSnackbar";
 import { AuthContext, initialState } from "@/contexts/authContext";
+import { getMergedConfig } from "@/contexts/configContext";
 import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { IntercomContext } from "@/contexts/intercomContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
@@ -33,7 +34,6 @@ import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import { SWRConfig } from "swr";
 import "../styles/main.scss";
-import { getMergedConfig } from "@/contexts/configContext";
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
 NeedsAccountContext.displayName = "Needs Account";
@@ -178,7 +178,6 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                         >
                           <ContextualInfoPanel />
                           <Component {...pageProps} />
-                          <NeedsAccountSnackbar />
                           <NeedsAccountModal />
                           <RegistrationStatusSnackbar />
                         </NeedsAccountContext.Provider>
