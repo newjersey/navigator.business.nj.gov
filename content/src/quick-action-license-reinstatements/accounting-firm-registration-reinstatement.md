@@ -14,13 +14,12 @@ callToActionLink: https://www.njconsumeraffairs.gov/accold/Applications/Reinstat
 ---
 ## Application Requirements
 
-* Fill out the application completely and notarize it
+* Fill out the application completely
 * Copy of your most recent peer review acceptance letter
 * Copy of your New Jersey `Business Registration Certificate|business-reg-certificate` 
 * Copy of the firm’s letterhead
 * Appropriate Peer Review Form found on the Board’s website
 * The firm's resident manager information and license number
-* A criminal background check, if applicable
 * Applicable fees paid
 
 :::callout{ header="" icon="false" calloutType="conditional" } 
