@@ -1,3 +1,30 @@
+# [2024.14.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.13.0...v2024.14.0) (2024-04-25)
+
+
+### Bug Fixes
+
+* [[#186665645](https://github.com/newjersey/navigator.business.nj.gov/issues/186665645)] revert health apis to normal ([a1b96f6](https://github.com/newjersey/navigator.business.nj.gov/commit/a1b96f61fc58642e782d3a6d65d70df64cd89cb5))
+* [[#187450950](https://github.com/newjersey/navigator.business.nj.gov/issues/187450950)] align calendar icon ([83d5f35](https://github.com/newjersey/navigator.business.nj.gov/commit/83d5f3549e5f2430f573ffe794ca28830391294a))
+* [[#187464224](https://github.com/newjersey/navigator.business.nj.gov/issues/187464224)] fix construction onboarding ([57fd21c](https://github.com/newjersey/navigator.business.nj.gov/commit/57fd21c0993db0281147fb37e43d12f58c4a7727))
+* **deps:** update dependency axios to v1.6.8 ([8337757](https://github.com/newjersey/navigator.business.nj.gov/commit/83377577cbc8ce4f2fdd56c66e030b1fe94a197d))
+* **deps:** update dependency dedent to v1.5.3 ([2dcaf22](https://github.com/newjersey/navigator.business.nj.gov/commit/2dcaf2269976ed23a0f0b85e125bb7ebb708c63e))
+* **deps:** update material-ui ([888f8a4](https://github.com/newjersey/navigator.business.nj.gov/commit/888f8a4ed95e0ed2cc3a2a7660812a092af698ae))
+
+
+### Features
+
+* [[#186001930](https://github.com/newjersey/navigator.business.nj.gov/issues/186001930)] fix profile page structure ([ebc2b09](https://github.com/newjersey/navigator.business.nj.gov/commit/ebc2b09f36b9771b9cc7a8834b9d7741fa9a46d9))
+* [[#186316063](https://github.com/newjersey/navigator.business.nj.gov/issues/186316063)] revisions to account for the csae where we want a snackbar after page redirect ([6c36523](https://github.com/newjersey/navigator.business.nj.gov/commit/6c3652318eb3aa28f8e9e32782c52d618d942928))
+* [[#187287420](https://github.com/newjersey/navigator.business.nj.gov/issues/187287420)] Unpublished the navigator/welcome page ([30b8a3c](https://github.com/newjersey/navigator.business.nj.gov/commit/30b8a3c4330dc59b36e76ca35816bac4261de455))
+* [[#187315911](https://github.com/newjersey/navigator.business.nj.gov/issues/187315911)] updated filenames / ID's of the public-accountant-license / license-accounting ([6a2bb01](https://github.com/newjersey/navigator.business.nj.gov/commit/6a2bb017fe4e58890e6353964452ef78878d4bb4))
+* [[#187423161](https://github.com/newjersey/navigator.business.nj.gov/issues/187423161)] return first matching license from Dynamics API ([dd77cd9](https://github.com/newjersey/navigator.business.nj.gov/commit/dd77cd9ac2b0260253468aca8053615b40acf4ee))
+* [[#187440151](https://github.com/newjersey/navigator.business.nj.gov/issues/187440151)] update elevator registration task to use municipality in search ([8d9c6ed](https://github.com/newjersey/navigator.business.nj.gov/commit/8d9c6ed53bc0d517534947c6c443b1305df8d93e))
+* [[#187458827](https://github.com/newjersey/navigator.business.nj.gov/issues/187458827)] update save NJ Tax ID error state ([2d651a6](https://github.com/newjersey/navigator.business.nj.gov/commit/2d651a6bb9ce28e960945c141c328c3825a59630))
+* [[#187464224](https://github.com/newjersey/navigator.business.nj.gov/issues/187464224)] add essential questions for construction onboarding ([68bfeca](https://github.com/newjersey/navigator.business.nj.gov/commit/68bfeca1b1b1c8c22f0b85a2141b45aeab8547dc))
+* [[#187476824](https://github.com/newjersey/navigator.business.nj.gov/issues/187476824)] profile side navigation doesn't shrink to wrap ([b41e689](https://github.com/newjersey/navigator.business.nj.gov/commit/b41e6897d15d190848dd96a22704dbd4b43a7747))
+* [[#187476824](https://github.com/newjersey/navigator.business.nj.gov/issues/187476824)] profile side navigation doesn't shrink when wrapped around ([f2a00ce](https://github.com/newjersey/navigator.business.nj.gov/commit/f2a00ce1458278589483eb7baada7df425713eb9))
+* [[#187476824](https://github.com/newjersey/navigator.business.nj.gov/issues/187476824)] profile side navigation wraps when bolded ([6c05edd](https://github.com/newjersey/navigator.business.nj.gov/commit/6c05edddf1c4bacf81759fd88c8d8b78094250ff))
+
 # [2024.13.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.12.0...v2024.13.0) (2024-04-12)
 
 
