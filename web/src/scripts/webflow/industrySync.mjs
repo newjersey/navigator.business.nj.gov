@@ -4,7 +4,6 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import industryJson from "../../../../content/lib/industry.json" assert { type: "json" };
 import { argsInclude } from "./helpers.mjs";
 import { createItem, getAllItems, modifyItem } from "./methods.mjs";
 import { industryNameCollectionId } from "./webflowIds.mjs";
@@ -17,13 +16,22 @@ const getAllIndustryNamesFromWebflow = async () => {
   return await getAllItems(industryNameCollectionId);
 };
 
+const industriesObject = (() => {
+  const industryFileNames = fs.readdirSync(navigatorIndustryDir);
+  const industries = industryFileNames.map((industryFileName) => {
+    const fullPath = path.join(navigatorIndustryDir, industryFileName);
+    return JSON.parse(fs.readFileSync(fullPath));
+  });
+
+  return industries;
+})();
+
 const getIndustryNamesAlreadyInWebflow = async () => {
   const currentIndustryNamesInWebflowIds = (await getAllIndustryNamesFromWebflow()).map((it) => it.id);
-  const currentIndustriesInNavigator = industryJson["industries"];
 
-  if (currentIndustryNamesInWebflowIds.length > currentIndustriesInNavigator.length) {
+  if (currentIndustryNamesInWebflowIds.length > industriesObject.length) {
     const webflowIdsNotInNavigator = currentIndustryNamesInWebflowIds.filter((id) => {
-      for (const industry in currentIndustriesInNavigator) {
+      for (const industry in industriesObject) {
         if (industry.webflowId !== undefined && industry.webflowId === id) {
           return false;
         }
@@ -37,18 +45,17 @@ const getIndustryNamesAlreadyInWebflow = async () => {
     process.exit(1);
   }
 
-  return currentIndustriesInNavigator.filter(
+  return industriesObject.filter(
     (it) => it.webflowId !== undefined && currentIndustryNamesInWebflowIds.includes(it.webflowId)
   );
 };
 
 const getNewIndustries = async () => {
-  const currentIndustriesInNavigator = industryJson["industries"];
   const currentIndustryNamesInWebflowIds = new Set(
     (await getAllIndustryNamesFromWebflow()).map((it) => it.id)
   );
 
-  return currentIndustriesInNavigator.filter(
+  return industriesObject.filter(
     (it) => it.webflowId === undefined || !currentIndustryNamesInWebflowIds.has(it.webflowId)
   );
 };
