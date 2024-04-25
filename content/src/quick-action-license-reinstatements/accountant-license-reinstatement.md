@@ -15,7 +15,7 @@ callToActionLink: https://www.njconsumeraffairs.gov/accold/Applications/Applicat
 ## Application Requirements
 
 * Continuing Professional Education (CPE) credits summary sheet
-* Satisfactory Proof of CPE credits no older than 3 years from the day of application
+* Satisfactory proof to include certificates for all 120 CPE credits that are no older than 3 years from the day of application
 * Social Security number (SSN)
 * Citizenship/immigration status
 * Child support information, if applicable
