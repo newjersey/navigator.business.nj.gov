@@ -27,10 +27,10 @@ webflowId: 5f77296ee10dec7593024f1c
 
 - Be at least 18 years old
 - A bachelor's degree or higher from an accredited school or university. At least 150 credit hours (24 semester credits in accounting courses and 24 semester credits in business courses)
-- Official transcript copies sent from your school to the Board at New Jersey State Board of Accountancy
+- Educational credential evaluation to be completed by the National Association of State Board of Accountancy (NASBA)
 - One year of full-time public accounting experience under the supervision of an active Certified Public Accountant (CPA)
 - Passed all four parts of the National CPA Examination in New Jersey
-- Passing scores on the Uniform CPA Exam New Jersey’s ethics, laws, and regulations exam
+- Successful completion of a Board sponsor approved NJ Law and Ethics course
 
 ## Application Requirements
 
