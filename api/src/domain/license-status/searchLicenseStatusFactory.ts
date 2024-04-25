@@ -7,12 +7,11 @@ export const searchLicenseStatusFactory = (
   return (licenseType: string): SearchLicenseStatus => {
     const featureFlags: Record<string, boolean> = {
       publicMovers: process.env.FEATURE_DYNAMICS_PUBLIC_MOVERS === "true",
-      healthCareServices: process.env.FEATURE_DYNAMICS_HEALTH_CARE_SERVICES === "true",
     };
 
     const licenseTypesUsingDynamicsSearch: Record<string, boolean> = {
       "Public Movers and Warehousemen": featureFlags.publicMovers,
-      "Health Care Services": featureFlags.healthCareServices,
+      "Health Care Services": true,
     };
 
     const shouldUseDynamicsSearch = licenseTypesUsingDynamicsSearch[licenseType] || false;
