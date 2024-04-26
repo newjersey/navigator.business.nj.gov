@@ -11,8 +11,8 @@ webflowName: "Hospitality: Hotel/Motel Registration"
 summaryDescriptionMd: If you own a new hotel, motel, or guesthouse, you must
   register your property with the State. Your property must have at least 10
   rooms for 25 people or more for permanent or temporary stays. If you are the
-  new owner of an existing property, you can also follow the requirements below
-  to update the existing registration and transfer the ownership to you.
+  new owner of an existing property, update the existing registration to
+  transfer the ownership to you.
 industryId:
   - lodging
 callToActionText: Register My Hotel, Motel, or Guesthouse
