@@ -62,7 +62,8 @@ const DashboardPage = (props: Props): ReactElement => {
       if (
         business?.profileData.operatingPhase === "GUEST_MODE" &&
         (business?.profileData.businessPersona === "STARTING" ||
-          business?.profileData.businessPersona === "FOREIGN")
+          business?.profileData.businessPersona === "FOREIGN") &&
+        !business.preferences.visibleSidebarCards.includes("not-registered")
       ) {
         await updateQueue
           ?.queuePreferences({
@@ -73,7 +74,8 @@ const DashboardPage = (props: Props): ReactElement => {
 
       if (
         business?.profileData.operatingPhase === "GUEST_MODE_OWNING" &&
-        business?.profileData.businessPersona === "OWNING"
+        business?.profileData.businessPersona === "OWNING" &&
+        !business.preferences.visibleSidebarCards.includes("not-registered-existing-account")
       ) {
         await updateQueue
           ?.queuePreferences({
