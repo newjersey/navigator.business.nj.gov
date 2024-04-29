@@ -1,6 +1,5 @@
 ---
-notesMd: This is a draft/dummy content for Dev to be able to complete
-  https://www.pivotaltracker.com/story/show/186827948
+notesMd: ""
 urlSlug: homemaker-home-health-aide
 previewType: renewal
 summaryDescriptionMd: If you are interested in continuing to employ individuals
@@ -12,7 +11,7 @@ If you are interested in continuing to employ, place, arrange for the placement 
 
 ### Renewal Requirements
 
-* New `surety bond|surety-bond`/proof of bond continuation or certified financial report if the business has a net worth of $100,000 or more
+* New `surety bond|surety-bond` /proof of bond continuation or certified financial report if the business has a net worth of $100,000 or more
 * Criminal record of any officers, directors, principals, or people with an ownership interest of 10 percent or more
 * General liability insurance certificate
 * NJ License of a Health Care Practitioner Supervisor, Registered Nurse, or Licensed Physician
