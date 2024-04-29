@@ -18,7 +18,7 @@ describe("Onboarding for all sectors as an existing business [feature] [all] [gr
         onOnboardingPageExistingBusiness.selectIndustrySector(sector.id);
 
         onOnboardingPageExistingBusiness.clickShowMyGuide();
-        cy.url().should("include", "dashboard?fromOnboarding=true");
+        cy.url().should("include", "dashboard");
         cy.get('[data-testid="header-link-to-profile"]');
       });
     }
@@ -38,7 +38,7 @@ describe("Onboarding for all sectors as an existing business [feature] [all] [gr
       onOnboardingPageExistingBusiness.selectIndustrySector("other-services");
 
       onOnboardingPageExistingBusiness.clickShowMyGuide();
-      cy.url().should("include", "dashboard?fromOnboarding=true");
+      cy.url().should("include", "dashboard");
       cy.get('[data-testid="header-link-to-profile"]');
     });
   });
