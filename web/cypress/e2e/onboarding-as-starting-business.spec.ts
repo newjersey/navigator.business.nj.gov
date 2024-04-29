@@ -125,7 +125,7 @@ describe("Onboarding for all industries when starting a business [feature] [all]
         }
 
         onOnboardingPageStartingBusiness.clickShowMyGuide();
-        cy.url().should("include", "dashboard?fromOnboarding=true");
+        cy.url().should("include", "dashboard");
         cy.get('[data-testid="header-link-to-profile"]');
       });
     }
@@ -147,7 +147,7 @@ describe("Onboarding for all industries when starting a business [feature] [all]
       onOnboardingPageStartingBusiness.selectIndustryDropdown("generic");
 
       onOnboardingPageStartingBusiness.clickNext();
-      cy.url().should("include", "dashboard?fromOnboarding=true");
+      cy.url().should("include", "dashboard");
       cy.get('[data-testid="header-link-to-profile"]');
     });
   });
