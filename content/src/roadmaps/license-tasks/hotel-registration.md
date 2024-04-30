@@ -26,7 +26,7 @@ divisionPhone: (609) 633-6216
 *  `Employee Identification Number (EIN)|ein` 
 *  `Entity ID|entity-id` or NJ corporate registration number
 *  `Form of property ownership|property-ownership` 
-* Property name and address
+* `Property name and address|property-address`
 * Date when you acquired the property and building(s) on it, if you are the new owner
 * Building names and addresses if there is more than one building on the property
 * The year, or approximate year, the building(s) was built
@@ -50,7 +50,6 @@ divisionPhone: (609) 633-6216
 >
 > A Certificate of Registration with a 10-digit registration number, which you need to recertify your registration every year.
 >
-
 > **What if I don't register?**
 >
 > If you don’t register your hotel, motel, or guesthouse, you may be subject to fines. Also, if the property is a new construction, you will not be able to obtain a Uniform Construction Code `Certificate of Occupancy|certificate-occupancy`.
