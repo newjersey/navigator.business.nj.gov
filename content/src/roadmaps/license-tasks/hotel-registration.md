@@ -8,11 +8,10 @@ displayname: hotel-registration
 urlSlug: hotel-registration
 name: Register Your Hotel, Motel, or Guesthouse
 webflowName: "Hospitality: Hotel/Motel Registration"
-summaryDescriptionMd: If you own a new hotel, motel, or guesthouse, you must
-  register your property with the State. Your property must have at least 10
-  rooms for 25 people or more for permanent or temporary stays. If you are the
-  new owner of an existing property, update the existing registration to
-  transfer the ownership to you.
+summaryDescriptionMd: >
+  If you own a newly built hotel, motel, or guesthouse with ten rooms or more,
+  you must register it with the State. If you are the new owner of an existing
+  building, you must update the current registration.
 industryId:
   - lodging
 callToActionText: Register My Hotel, Motel, or Guesthouse
@@ -28,7 +27,7 @@ divisionPhone: (609) 633-6216
 *  `Entity ID|entity-id` or NJ corporate registration number
 *  `Form of property ownership|property-ownership` 
 * Property name and address
-* Date when you acquired the property, if you are the new owner of an existing property
+* Date when you acquired the property and building(s) on it, if you are the new owner
 * Building names and addresses if there is more than one building on the property
 * The year, or approximate year, the building(s) was built
 * Number of rooms or units in each building
