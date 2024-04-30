@@ -41,7 +41,7 @@ divisionPhone: (609) 633-6216
 * Name and address of your `mortgagee|mortgagee`, if applicable
 * Name and address of your `net lessee|net-lessee`, if applicable
 
-**If your business is a `Corporation, Limited Liability Company (LLC), Limited Partnership (LP), or Limited Liability Partnership (LLP)|business-structure-learn-more`, you also need the:**
+**If your business is a `Corporation, Limited Liability Company (LLC),|business-structure-learn-more` `Limited Partnership (LP), or Limited Liability Partnership (LLP)|business-structure-learn-more`, you also need the:**
 
 * Name and address of your `registered agent|registered-agent` 
 * Name and address of each officer or partner
