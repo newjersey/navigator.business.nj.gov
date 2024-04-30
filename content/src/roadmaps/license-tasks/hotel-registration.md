@@ -34,12 +34,12 @@ divisionPhone: (609) 633-6216
 * Number of rooms or units in each building
 * Number of stories in each building
 * Name, address, and phone number of your `authorized agent|authorized-agent` 
-* Name and address of your `mortgagee|mortgagee`, if applicable
-* Name and address of your `net lessee|net-lessee`, if applicable
 * Name and address of your maintenance service provider
 * Name, address, and phone number of your `emergency repair expenditure authorizer|emergency-repair-authorizer` 
 * Name and address of your fuel oil supplier and the grade of fuel oil used, if your building(s) is heated by fuel oil
 * Applicable fees paid
+* Name and address of your `mortgagee|mortgagee`, if applicable
+* Name and address of your `net lessee|net-lessee`, if applicable
 
 **If your business is a `Corporation, Limited Liability Company (LLC), Limited Partnership (LP), or Limited Liability Partnership (LLP)|business-structure-learn-more`, you also need the:**
 
@@ -54,4 +54,4 @@ divisionPhone: (609) 633-6216
 
 > **What if I don't register?**
 >
-> If you don’t register your hotel, motel, or guesthouse, you may be subject to fines. Also, if the property is a new construction, you will not be able to obtain a Uniform Construction Code `Certificate of Occupancy|certificate-occupancy` .
+> If you don’t register your hotel, motel, or guesthouse, you may be subject to fines. Also, if the property is a new construction, you will not be able to obtain a Uniform Construction Code `Certificate of Occupancy|certificate-occupancy`.
