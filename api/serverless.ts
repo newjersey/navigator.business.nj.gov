@@ -1,3 +1,5 @@
+import bizContentExpress from "@functions/bizContentExpress";
+import bizTestingExpress from "@functions/bizTestingExpress";
 import type { AWS, AwsLambdaEnvironment } from "@serverless/typescript";
 import "dotenv/config";
 import { env } from "node:process";
@@ -299,6 +301,28 @@ if (stage === "dev") {
   serverlessConfiguration.functions = {
     ...serverlessConfiguration.functions,
     githubOauth2: githubOauth2(
+      env.CI
+        ? {
+            securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
+            subnetIds: [
+              "${self:custom.config.infrastructure.SUBNET_01}",
+              "${self:custom.config.infrastructure.SUBNET_02}",
+            ],
+          }
+        : undefined
+    ),
+    bizContentExpress: bizContentExpress(
+      env.CI
+        ? {
+            securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
+            subnetIds: [
+              "${self:custom.config.infrastructure.SUBNET_01}",
+              "${self:custom.config.infrastructure.SUBNET_02}",
+            ],
+          }
+        : undefined
+    ),
+    bizTestingExpress: bizTestingExpress(
       env.CI
         ? {
             securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
