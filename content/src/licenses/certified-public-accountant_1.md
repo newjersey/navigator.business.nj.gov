@@ -18,4 +18,4 @@ Your accountant license expire every three years.
 
 > **Once completed, you will have:**
 >
-> - An updated copy of the renewed accounting firm registration, valid for three years, which will be mailed to your mailing address on file
+> - An updated copy of the renewed accountant license, valid for three years, which will be mailed to your mailing address on file
