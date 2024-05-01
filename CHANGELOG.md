@@ -1,3 +1,19 @@
+# [2024.15.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.14.0...v2024.15.0) (2024-05-01)
+
+
+### Bug Fixes
+
+* [[#187263740](https://github.com/newjersey/navigator.business.nj.gov/issues/187263740)] display one notRegistered/notRegisteredExisting card in for you section ([8cec9a2](https://github.com/newjersey/navigator.business.nj.gov/commit/8cec9a28083b9d730b79691db39a6ac9efad3b86))
+* [[#187263740](https://github.com/newjersey/navigator.business.nj.gov/issues/187263740)] update dashboard URL in onboarding-as Cypress tests ([fb92a43](https://github.com/newjersey/navigator.business.nj.gov/commit/fb92a43518f3432186152166b9580e02f100bfac))
+* [[#187432057](https://github.com/newjersey/navigator.business.nj.gov/issues/187432057)] manually build industry sync industries and fix license sync filepath ([2ea0cf6](https://github.com/newjersey/navigator.business.nj.gov/commit/2ea0cf6311f87452098f18d223c5df2230061976))
+* [[#187532028](https://github.com/newjersey/navigator.business.nj.gov/issues/187532028)] restore new-home-builder-license to CMS ([76c8046](https://github.com/newjersey/navigator.business.nj.gov/commit/76c80461fdaef69d0e9c276a54e022ed4674041b))
+
+
+### Features
+
+* [[#187263740](https://github.com/newjersey/navigator.business.nj.gov/issues/187263740)] save-your-progress-snackbar-link-update ([832728f](https://github.com/newjersey/navigator.business.nj.gov/commit/832728f3d6ed3943a3bf15fabc0c29ec32613894))
+* [[#187485886](https://github.com/newjersey/navigator.business.nj.gov/issues/187485886)] save and retrieve community affairs address on elevator registration task ([d47b47e](https://github.com/newjersey/navigator.business.nj.gov/commit/d47b47ef392e7e2a7b8ca50e59f817b9f3005eef))
+
 # [2024.14.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.13.0...v2024.14.0) (2024-04-25)
 
 
