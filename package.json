@@ -17,15 +17,16 @@
     "lint:staged": "lint-staged",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "prettier --check . --ignore-path=./.eslintignore",
-    "start:dev": "yarn workspaces foreach -ptvi run dev",
     "spellcheck": "yarn workspaces foreach -v run spellcheck",
+    "start:dev": "yarn workspaces foreach -ptvi run dev",
     "sync:deps": "yarnw-sync-deps --fix",
     "test": "jest",
     "test:ci": "jest --colors --runInBand --ci",
     "test:coverage": "jest --config jest.coverage.ts",
     "test:python": "python -m unittest discover -b -s content/scripts -p \"test_*.py\" && python -m unittest discover -b -s scripts -p \"test_*.py\"",
     "typecheck": "yarn workspaces foreach -v run typecheck",
-    "verify:node": "check-node-version --node $(cat .nvmrc) --npm 10.5.0"
+    "verify:node": "check-node-version --node $(cat .nvmrc) --npm 10.5.0",
+    "wipit": "git add -A && git commit -m 'wip [skip ci]' --no-verify"
   },
   "dependencies": {
     "@aws-amplify/auth": "5.6.1",
