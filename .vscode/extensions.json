@@ -32,6 +32,7 @@
     "tlahmann.alex-linter",
     "tyriar.sort-lines",
     "unifiedjs.vscode-mdx",
-    "usernamehw.errorlens"
+    "usernamehw.errorlens",
+    "vivaxy.vscode-conventional-commits"
   ]
 }

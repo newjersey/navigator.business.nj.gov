@@ -3,6 +3,9 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[plaintext]": {
+    "files.insertFinalNewline": false
+  },
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnPaste": false,
@@ -10,6 +13,9 @@
     "editor.formatOnSaveMode": "file",
     "editor.tabSize": 4
   },
+  "circleci.persistedProjectSelection": [
+    "gh/newjersey/navigator.business.nj.gov"
+  ],
   "cSpell.enabled": false,
   "cSpell.words": ["businessnjgovnavigator"],
   "editor.codeActionsOnSave": [
@@ -33,11 +39,19 @@
   "files.exclude": {
     "**/.next": true
   },
+  "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
+  "git.pullBeforeCheckout": true,
+  "git.mergeEditor": true,
   "indentRainbow.indicatorStyle": "light",
   "jest.autoRun": "off",
   "terminal.integrated.scrollback": 10000,
-  "todo-tree.filtering.excludeGlobs": ["**/dist", "**/.next", "**/compiled"],
+  "todo-tree.filtering.excludeGlobs": [
+    "**/node_modules",
+    "**/dist",
+    "**/.next",
+    "**/compiled"
+  ],
   "todo-tree.general.tags": [
     "BUG",
     "HACK",
