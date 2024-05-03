@@ -181,6 +181,7 @@ commands:
             echo 'export FORMATION_API_ACCOUNT=$FORMATION_API_ACCOUNT_DEV' >> $BASH_ENV
             echo 'export GOV2GO_REGISTRATION_API_KEY=$GOV2GO_REGISTRATION_API_KEY_DEV' >> $BASH_ENV
             echo 'export GOV2GO_REGISTRATION_BASE_URL=$GOV2GO_REGISTRATION_BASE_URL_DEV' >> $BASH_ENV
+            echo 'export MYNJ_PROFILE_LINK=$MYNJ_PROFILE_LINK_DEV' >> $BASH_ENV
             echo 'export MYNJ_ROLE_NAME=$MYNJ_ROLE_NAME_DEV' >> $BASH_ENV
             echo 'export MYNJ_SERVICE_TOKEN=$MYNJ_SERVICE_TOKEN_DEV' >> $BASH_ENV
             echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_DEV' >> $BASH_ENV
@@ -281,6 +282,7 @@ commands:
             echo 'export FORMATION_API_ACCOUNT=$FORMATION_API_ACCOUNT_STAGING' >> $BASH_ENV
             echo 'export GOV2GO_REGISTRATION_API_KEY=$GOV2GO_REGISTRATION_API_KEY_STAGING' >> $BASH_ENV
             echo 'export GOV2GO_REGISTRATION_BASE_URL=$GOV2GO_REGISTRATION_BASE_URL_STAGING' >> $BASH_ENV
+            echo 'export MYNJ_PROFILE_LINK=$MYNJ_PROFILE_LINK_STAGING' >> $BASH_ENV
             echo 'export MYNJ_ROLE_NAME=$MYNJ_ROLE_NAME_STAGING' >> $BASH_ENV
             echo 'export MYNJ_SERVICE_TOKEN=$MYNJ_SERVICE_TOKEN_STAGING' >> $BASH_ENV
             echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_STAGING' >> $BASH_ENV
@@ -339,6 +341,7 @@ commands:
             echo 'export FORMATION_API_ACCOUNT=$FORMATION_API_ACCOUNT_PROD' >> $BASH_ENV
             echo 'export GOV2GO_REGISTRATION_API_KEY=$GOV2GO_REGISTRATION_API_KEY_PROD' >> $BASH_ENV
             echo 'export GOV2GO_REGISTRATION_BASE_URL=$GOV2GO_REGISTRATION_BASE_URL_PROD' >> $BASH_ENV
+            echo 'export MYNJ_PROFILE_LINK=$MYNJ_PROFILE_LINK_PROD' >> $BASH_ENV
             echo 'export MYNJ_ROLE_NAME=$MYNJ_ROLE_NAME_PROD' >> $BASH_ENV
             echo 'export MYNJ_SERVICE_TOKEN=$MYNJ_SERVICE_TOKEN_PROD' >> $BASH_ENV
             echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_PROD' >> $BASH_ENV
@@ -625,7 +628,6 @@ jobs:
       - deploy-content
     environment:
       STAGE: content
-      MYNJ_PROFILE_LINK: https://myt1.nj.gov/portal/Desktop
 
   deploy-accessibility-testing:
     docker:
@@ -641,7 +643,6 @@ jobs:
       - deploy-accessibility-testing
     environment:
       STAGE: testing
-      MYNJ_PROFILE_LINK: https://myt1.nj.gov/portal/Desktop
 
   deploy-dev:
     docker:
@@ -658,7 +659,6 @@ jobs:
       - store-deploy-cache
     environment:
       STAGE: dev
-      MYNJ_PROFILE_LINK: https://myt1.nj.gov/portal/Desktop
 
   deploy-staging:
     docker:
@@ -671,7 +671,6 @@ jobs:
       - deploy
     environment:
       STAGE: staging
-      MYNJ_PROFILE_LINK: https://myt1.nj.gov/portal/Desktop
 
   deploy-production:
     docker:
@@ -684,7 +683,6 @@ jobs:
       - deploy
     environment:
       STAGE: prod
-      MYNJ_PROFILE_LINK: https://my.nj.gov/portal/Desktop
 
   integration-tests:
     parameters:
