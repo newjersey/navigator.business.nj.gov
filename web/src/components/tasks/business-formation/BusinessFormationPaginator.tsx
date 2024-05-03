@@ -24,12 +24,10 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { MediaQueries } from "@/lib/PageSizes";
 import { FormationStepNames, StepperStep } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getConfigFieldByLegalStructure, scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
 import { Business, FormationFormData, getCurrentBusiness } from "@businessnjgovnavigator/shared";
-import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
@@ -47,16 +45,15 @@ export const BusinessFormationPaginator = (): ReactElement => {
   const stepperRef = useRef<HTMLDivElement>(null);
   const errorAlertRef = useRef<HTMLDivElement>(null);
   const isMounted = useRef(false);
-  const isDesktop = useMediaQuery(MediaQueries.desktopAndUp);
 
   type ConfigFormationFields = keyof typeof Config.formation.fields;
 
   useEffect(() => {
     if (isMounted.current) {
       const element = state.hasBeenSubmitted ? errorAlertRef.current : stepperRef.current;
-      scrollToTopOfElement(element, { isDesktop });
+      scrollToTopOfElement(element, {});
     }
-  }, [state.stepIndex, isDesktop, state.hasBeenSubmitted]);
+  }, [state.stepIndex, state.hasBeenSubmitted]);
 
   useMountEffect(() => {
     if (!business) return;
@@ -72,7 +69,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
 
   useMountEffect(() => {
     isMounted.current = true;
-    scrollToTopOfElement(stepperRef.current, { isDesktop });
+    scrollToTopOfElement(stepperRef.current, {});
     analytics.event.business_formation_name_step.arrive.arrive_on_business_formation_name_step();
   });
 
@@ -122,7 +119,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
       setHasBeenSubmitted(true);
       const { stepsWithErrors } = determineStepsWithErrors({ hasSubmitted: true });
       if (stepsWithErrors.length > 0) {
-        scrollToTopOfElement(errorAlertRef.current, { isDesktop });
+        scrollToTopOfElement(errorAlertRef.current, {});
         return;
       }
       submitToApi();

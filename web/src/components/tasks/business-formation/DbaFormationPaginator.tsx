@@ -13,11 +13,9 @@ import { NeedsAccountContext } from "@/contexts/needsAccountContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab, scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
-import { useMediaQuery } from "@mui/material";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
 export const DbaFormationPaginator = (): ReactElement => {
@@ -28,7 +26,6 @@ export const DbaFormationPaginator = (): ReactElement => {
 
   const stepperRef = useRef<HTMLDivElement>(null);
   const isMounted = useRef(false);
-  const isDesktop = useMediaQuery(MediaQueries.desktopAndUp);
   const [showCtaModal, setShowCtaModal] = useState<boolean>(false);
 
   const [stepperState, setStepperState] = useState(
@@ -47,9 +44,9 @@ export const DbaFormationPaginator = (): ReactElement => {
 
   useEffect(() => {
     if (isMounted.current) {
-      scrollToTopOfElement(stepperRef.current, { isDesktop });
+      scrollToTopOfElement(stepperRef.current, {});
     }
-  }, [state.stepIndex, isDesktop]);
+  }, [state.stepIndex]);
 
   const moveToStep = (stepIndex: number): void => {
     setStepIndex(stepIndex);
