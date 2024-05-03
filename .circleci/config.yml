@@ -1162,11 +1162,6 @@ workflows:
     jobs:
       - docker-build-builder-image
 
-  build-image-pipeline-manual:
-    when: << pipeline.parameters.run_workflow_builder >>
-    jobs:
-      - docker-build-builder-image
-
   build-accessibility-testing-weekly:
     triggers:
       - schedule:
