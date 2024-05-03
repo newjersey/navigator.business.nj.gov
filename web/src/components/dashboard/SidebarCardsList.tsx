@@ -4,12 +4,11 @@ import { SidebarCard } from "@/components/dashboard/SidebarCard";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
-import { MediaQueries } from "@/lib/PageSizes";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { openInNewTab, scrollToTopOfElement, templateEval } from "@/lib/utils/helpers";
-import { Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, useRef, useState } from "react";
 
 export interface SidebarCardsListProps {
@@ -28,7 +27,6 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
   const [hiddenAccordionIsOpen, setHiddenAccordionIsOpen] = useState<boolean>(false);
   const { Config } = useConfig();
   const accordionRef = useRef(null);
-  const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 
   const hiddenOpportunitiesCount = (): number => {
     if (props.displayCertificationsCards && props.displayFundingCards) {
@@ -150,7 +148,6 @@ export const SidebarCardsList = (props: SidebarCardsListProps): ReactElement => 
                   if (element) {
                     const timeForAccordionToOpen = 200;
                     scrollToTopOfElement(element.parentElement as HTMLDivElement, {
-                      isDesktop: isDesktopAndUp,
                       waitTime: timeForAccordionToOpen,
                     });
                   }
