@@ -1,3 +1,11 @@
+## [2024.15.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.15.0...v2024.15.1) (2024-05-06)
+
+
+### Bug Fixes
+
+* [[#187554142](https://github.com/newjersey/navigator.business.nj.gov/issues/187554142)] extra close-bolding in json markdown ([220d515](https://github.com/newjersey/navigator.business.nj.gov/commit/220d5159cc4ec1732fff3b2b5c5210eb333d0d8f))
+* **deps:** update dependency @emotion/styled to v11.11.5 ([3cc73a2](https://github.com/newjersey/navigator.business.nj.gov/commit/3cc73a2c5761e8f4e314b9cebbe8e77bac75c64f))
+
 # [2024.15.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2024.14.0...v2024.15.0) (2024-05-01)
 
 
