@@ -15,6 +15,7 @@
     "lint": "yarn workspaces foreach run lint",
     "lint:fix": "yarn workspaces foreach run lint:fix",
     "lint:staged": "lint-staged",
+    "prepare": "husky",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "prettier --check . --ignore-path=./.eslintignore",
     "spellcheck": "yarn workspaces foreach -v run spellcheck",
