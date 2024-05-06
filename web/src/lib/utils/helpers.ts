@@ -111,22 +111,41 @@ export const scrollToTop = (props?: { smooth?: boolean }): void => {
     : window.scrollTo(0, 0);
 };
 
-export const scrollToTopOfElement = (
-  element: HTMLDivElement | null,
-  { isDesktop, waitTime = 100 }: { isDesktop: boolean; waitTime?: number }
-): void => {
-  let y = 0;
-  if (element) {
-    y = window.scrollY + element.getBoundingClientRect().top;
-    if (isDesktop) {
-      const desktopNavBarHeight = 63;
-      y -= desktopNavBarHeight;
-    }
-    if (!isDesktop) {
-      const mobileNavBarHeight = 47;
-      y -= mobileNavBarHeight;
+export const NAVBAR_WRAPPER_MOBILE_ID = "NAVBAR_WRAPPER_MOBILE_ID";
+export const NAVBAR_WRAPPER_DESKTOP_ID = "NAVBAR_WRAPPER_DESKTOP_ID";
+
+const getNavBarHeight = (): number | undefined => {
+  const navbarMobile = document.querySelector(`#${NAVBAR_WRAPPER_MOBILE_ID}`);
+  const navbarDesktop = document.querySelector(`#${NAVBAR_WRAPPER_DESKTOP_ID}`);
+
+  if (navbarDesktop && navbarMobile) {
+    const heightDesktop = Number.parseInt(getComputedStyle(navbarDesktop).height);
+    const heightMobile = Number.parseInt(getComputedStyle(navbarMobile).height);
+    if (!Number.isNaN(heightDesktop)) {
+      return heightDesktop;
+    } else if (!Number.isNaN(heightMobile)) {
+      return heightMobile;
     }
   }
+  return undefined;
+};
+
+export const scrollToTopOfElement = (
+  element: HTMLDivElement | null,
+  { waitTime = 100 }: { waitTime?: number }
+): void => {
+  let y = 0;
+
+  if (element) {
+    y = window.scrollY + element.getBoundingClientRect().top;
+    const navBarHeight = getNavBarHeight();
+    if (navBarHeight) {
+      y -= navBarHeight;
+    } else {
+      return;
+    }
+  }
+
   setTimeout(() => {
     return window.scrollTo({ top: y, behavior: "smooth" });
   }, waitTime);
