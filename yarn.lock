@@ -4599,7 +4599,7 @@ __metadata:
     "@swc/core": 1.4.16
     "@swc/jest": 0.2.36
     "@testing-library/dom": 9.3.4
-    "@testing-library/jest-dom": 6.4.3
+    "@testing-library/jest-dom": 6.4.5
     "@testing-library/react": 14.3.1
     "@testing-library/user-event": 14.5.2
     "@types/broken-link-checker": 0.7.3
@@ -4814,7 +4814,7 @@ __metadata:
     "@swc/core": 1.4.16
     "@swc/jest": 0.2.36
     "@testing-library/dom": 9.3.4
-    "@testing-library/jest-dom": 6.4.3
+    "@testing-library/jest-dom": 6.4.5
     "@testing-library/react": 14.3.1
     "@testing-library/user-event": 14.5.2
     "@types/broken-link-checker": 0.7.3
@@ -10731,9 +10731,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:6.4.3":
-  version: 6.4.3
-  resolution: "@testing-library/jest-dom@npm:6.4.3"
+"@testing-library/jest-dom@npm:6.4.5":
+  version: 6.4.5
+  resolution: "@testing-library/jest-dom@npm:6.4.5"
   dependencies:
     "@adobe/css-tools": ^4.3.2
     "@babel/runtime": ^7.9.2
@@ -10760,7 +10760,7 @@ __metadata:
       optional: true
     vitest:
       optional: true
-  checksum: fa967bf7f735ccbc05fa3ebc55c1fc8db7b53321c37775607aa0dc1d06b915923a46374897dca5685a2593ac8191c1b3f011a2cf528b22ad120321e931f8481f
+  checksum: 95bd94f1f4ba2110eaaa15174207f74d46481f0f168a4d58c30f92a9285f797f9949c166aa8401bcb46e16edbf14a097013204d65801e9d1361892757e525bd6
   languageName: node
   linkType: hard
 
