@@ -4502,9 +4502,9 @@ __metadata:
     prettier-plugin-organize-imports: 3.2.4
     rimraf: 5.0.5
     serverless: 3.38.0
-    serverless-dynamodb: 0.2.51
+    serverless-dynamodb: 0.2.53
     serverless-http: 3.2.0
-    serverless-offline: 13.3.4
+    serverless-offline: 13.5.0
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.13.0
     simple-oauth2: 5.0.0
@@ -4709,9 +4709,9 @@ __metadata:
     sass-loader: 14.1.1
     semantic-release: 19.0.5
     serverless: 3.38.0
-    serverless-dynamodb: 0.2.51
+    serverless-dynamodb: 0.2.53
     serverless-http: 3.2.0
-    serverless-offline: 13.3.4
+    serverless-offline: 13.5.0
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.13.0
     simple-oauth2: 5.0.0
@@ -11646,13 +11646,6 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: 6ac4b35723429b11b117e813c7acc42c3af8b5554caaf1fc750404c1ae59f9b7376bc69b9e9e194a5a97357a597c2228b7173d317320f0360d617b6425212f58
-  languageName: node
-  linkType: hard
-
-"@types/retry@npm:0.12.2":
-  version: 0.12.2
-  resolution: "@types/retry@npm:0.12.2"
-  checksum: e5675035717b39ce4f42f339657cae9637cf0c0051cf54314a6a2c44d38d91f6544be9ddc0280587789b6afd056be5d99dbe3e9f4df68c286c36321579b1bf4a
   languageName: node
   linkType: hard
 
@@ -22101,13 +22094,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-network-error@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "is-network-error@npm:1.0.1"
-  checksum: 165d61500c4186c62db5a3a693d6bfa14ca40fe9b471ef4cd4f27b20ef6760880faf5386dc01ca9867531631782941fedaa94521d09959edf71f046e393c7b91
-  languageName: node
-  linkType: hard
-
 "is-number-object@npm:^1.0.4":
   version: 1.0.7
   resolution: "is-number-object@npm:1.0.7"
@@ -28416,17 +28402,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"p-retry@npm:^6.2.0":
-  version: 6.2.0
-  resolution: "p-retry@npm:6.2.0"
-  dependencies:
-    "@types/retry": 0.12.2
-    is-network-error: ^1.0.0
-    retry: ^0.13.1
-  checksum: 6003573c559ee812329c9c3ede7ba12a783fdc8dd70602116646e850c920b4597dc502fe001c3f9526fca4e93275045db7a27341c458e51db179c1374a01ac44
-  languageName: node
-  linkType: hard
-
 "p-timeout@npm:^3.1.0":
   version: 3.2.0
   resolution: "p-timeout@npm:3.2.0"
@@ -31510,13 +31485,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"retry@npm:^0.13.1":
-  version: 0.13.1
-  resolution: "retry@npm:0.13.1"
-  checksum: 47c4d5be674f7c13eee4cfe927345023972197dbbdfba5d3af7e461d13b44de1bfd663bfc80d2f601f8ef3fc8164c16dd99655a221921954a65d044a2fc1233b
-  languageName: node
-  linkType: hard
-
 "reusify@npm:^1.0.4":
   version: 1.0.4
   resolution: "reusify@npm:1.0.4"
@@ -32075,14 +32043,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-dynamodb@npm:0.2.51":
-  version: 0.2.51
-  resolution: "serverless-dynamodb@npm:0.2.51"
+"serverless-dynamodb@npm:0.2.53":
+  version: 0.2.53
+  resolution: "serverless-dynamodb@npm:0.2.53"
   dependencies:
     "@aws-sdk/client-dynamodb": ^3.428.0
     "@aws-sdk/lib-dynamodb": ^3.428.0
     aws-dynamodb-local: ^0.0.11
-  checksum: 9ac326f12a9f4a15b0b80307a194f41b91b9e1a5a38009ca30cd88dda844e9c3f8c993dc4b8018990b23dc79d77b380993e23ae2ea4d330813810c0d6c0a5298
+  checksum: caf7c8bdbdbcac2c0ffc9195429f39aef03e862953fd04a8d99b15081a79e0912095d268afc88a1662f18e294bf9a12f89a3de49a2afd24dd3e9e7e99080663e
   languageName: node
   linkType: hard
 
@@ -32100,9 +32068,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-offline@npm:13.3.4":
-  version: 13.3.4
-  resolution: "serverless-offline@npm:13.3.4"
+"serverless-offline@npm:13.5.0":
+  version: 13.5.0
+  resolution: "serverless-offline@npm:13.5.0"
   dependencies:
     "@aws-sdk/client-lambda": ^3.509.0
     "@hapi/boom": ^10.0.1
@@ -32125,12 +32093,11 @@ __metadata:
     luxon: ^3.4.4
     node-schedule: ^2.1.1
     p-memoize: ^7.1.1
-    p-retry: ^6.2.0
     velocityjs: ^2.0.6
     ws: ^8.16.0
   peerDependencies:
     serverless: ^3.2.0
-  checksum: d9070aa1cb28977a43d38186ad6f2e3aa479078d416ddfc8b7b5fb8e9475cc2b4a891968de2f094ffce7ceeec540563224cc4507c88e95e9d64fa4def2c639f1
+  checksum: d6751c1ae66cd97c79c4662cd25a1118cabdc9a1de7aa9868cdddf1700cd41db79b7dd6c03fbb8590293f51f96bc027110c531bc38d73600029172adc57321e8
   languageName: node
   linkType: hard
 
