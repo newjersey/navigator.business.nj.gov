@@ -4599,8 +4599,8 @@ __metadata:
     "@swc/core": 1.4.16
     "@swc/jest": 0.2.36
     "@testing-library/dom": 9.3.4
-    "@testing-library/jest-dom": 6.4.2
-    "@testing-library/react": 14.2.2
+    "@testing-library/jest-dom": 6.4.3
+    "@testing-library/react": 14.3.1
     "@testing-library/user-event": 14.5.2
     "@types/broken-link-checker": 0.7.3
     "@types/cors": 2.8.17
@@ -4814,8 +4814,8 @@ __metadata:
     "@swc/core": 1.4.16
     "@swc/jest": 0.2.36
     "@testing-library/dom": 9.3.4
-    "@testing-library/jest-dom": 6.4.2
-    "@testing-library/react": 14.2.2
+    "@testing-library/jest-dom": 6.4.3
+    "@testing-library/react": 14.3.1
     "@testing-library/user-event": 14.5.2
     "@types/broken-link-checker": 0.7.3
     "@types/cypress-dotenv": 2.0.3
@@ -10731,9 +10731,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:6.4.2":
-  version: 6.4.2
-  resolution: "@testing-library/jest-dom@npm:6.4.2"
+"@testing-library/jest-dom@npm:6.4.3":
+  version: 6.4.3
+  resolution: "@testing-library/jest-dom@npm:6.4.3"
   dependencies:
     "@adobe/css-tools": ^4.3.2
     "@babel/runtime": ^7.9.2
@@ -10741,7 +10741,7 @@ __metadata:
     chalk: ^3.0.0
     css.escape: ^1.5.1
     dom-accessibility-api: ^0.6.3
-    lodash: ^4.17.15
+    lodash: ^4.17.21
     redent: ^3.0.0
   peerDependencies:
     "@jest/globals": ">= 28"
@@ -10760,13 +10760,13 @@ __metadata:
       optional: true
     vitest:
       optional: true
-  checksum: 631aeadbf4e738080ae095242cf1a29a0b4ee2f09c8bdd0d3f00a923707da64c1617e088ba9a961d098481afabdc1d19149fb7ef98edf15132348eb222f345ae
+  checksum: fa967bf7f735ccbc05fa3ebc55c1fc8db7b53321c37775607aa0dc1d06b915923a46374897dca5685a2593ac8191c1b3f011a2cf528b22ad120321e931f8481f
   languageName: node
   linkType: hard
 
-"@testing-library/react@npm:14.2.2":
-  version: 14.2.2
-  resolution: "@testing-library/react@npm:14.2.2"
+"@testing-library/react@npm:14.3.1":
+  version: 14.3.1
+  resolution: "@testing-library/react@npm:14.3.1"
   dependencies:
     "@babel/runtime": ^7.12.5
     "@testing-library/dom": ^9.0.0
@@ -10774,7 +10774,7 @@ __metadata:
   peerDependencies:
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: cb73df588592d9101429f057eaa6f320fc12524d5eb2acc8a16002c1ee2d9422a49e44841003bba42974c9ae1ced6b134f0d647826eca42ab8f19e4592971b16
+  checksum: b057d4c9db5a523acfc24d7bc4665a924ab8d6f252c7f51eecf7dd30f1239413e1134925fd5cc9cbdef80496af64c04e6719b2081f89fe05ba87e8c6305bcc16
   languageName: node
   linkType: hard
 
