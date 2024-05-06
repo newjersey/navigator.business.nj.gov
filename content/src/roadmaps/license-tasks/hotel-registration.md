@@ -2,6 +2,7 @@
 notesMd: "[Muni planning
   doc](https://docs.google.com/document/d/1wqFrL2aR2ZI9MvCsp4orFJE2A6sn_oa5YOFQ\
   oW2uKYE/edit?usp=sharing)"
+webflowId: "66392fd83f59a87b56020961"
 id: hotel-registration
 filename: hotel-registration
 displayname: hotel-registration
@@ -23,18 +24,18 @@ divisionPhone: (609) 633-6216
 ## Application Requirements
 
 * Business name
-*  `Employee Identification Number (EIN)|ein` 
+*  `Employee Identification Number (EIN)|ein`
 *  `Entity ID|entity-id` or NJ corporate registration number
-*  `Form of property ownership|property-ownership` 
-*  `Property name and address|property-address` 
+*  `Form of property ownership|property-ownership`
+*  `Property name and address|property-address`
 * Date when you acquired the property and building(s) on it, if you are the new owner
 * Building names and addresses, if there is more than one building on the property
 * The year, or approximate year, the building(s) was built
 * Number of rooms or units in each building
 * Number of stories in each building
-* Name, address, and phone number of your `authorized agent|authorized-agent` 
+* Name, address, and phone number of your `authorized agent|authorized-agent`
 * Name and address of your maintenance service provider
-* Name, address, and phone number of your `emergency repair expenditure authorizer|emergency-repair-authorizer` 
+* Name, address, and phone number of your `emergency repair expenditure authorizer|emergency-repair-authorizer`
 * Name and address of your fuel oil supplier and the grade of fuel oil used, if your building(s) is heated by fuel oil
 * Applicable fees paid
 * Name and address of your `mortgagee|mortgagee`, if applicable
@@ -42,9 +43,9 @@ divisionPhone: (609) 633-6216
 
 If your business is a `Corporation, Limited Liability Company (LLC),|business-structure-learn-more` `Limited Partnership (LP), or Limited Liability Partnership (LLP)|business-structure-learn-more`, you also need the following:
 
-* Name and address of your `registered agent|registered-agent` 
+* Name and address of your `registered agent|registered-agent`
 * Name and address of each officer or partner
-*  `Certificate of Formation or Authority|certificate-formation` 
+*  `Certificate of Formation or Authority|certificate-formation`
 
 > **Once registered, you will have:**
 >
