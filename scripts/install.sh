@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 corepack enable
-yarn 
-yarn husky install
+yarn
+
+# for husky:
+yarn run prepare
+
 yarn workspace @businessnjgovnavigator/api install-dynamo-local
