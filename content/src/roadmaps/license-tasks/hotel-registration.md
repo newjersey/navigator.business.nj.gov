@@ -50,6 +50,7 @@ divisionPhone: (609) 633-6216
 >
 > A Certificate of Registration with a 10-digit registration number, which you need to recertify your registration every year.
 >
+
 > **What if I don't register?**
 >
 > If you don’t register your hotel, motel, or guesthouse, you may be subject to fines. Also, if the property is a new construction, you will not be able to obtain a Uniform Construction Code `Certificate of Occupancy|certificate-occupancy`.
