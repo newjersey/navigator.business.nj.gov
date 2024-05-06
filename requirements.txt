@@ -6,6 +6,6 @@ Markdown==3.5.2
 mypy-extensions==1.0.0
 packaging==24.0
 pathspec==0.12.1
-platformdirs==4.2.0
+platformdirs==4.2.1
 pycparser==2.21
 PyYAML==6.0.1
