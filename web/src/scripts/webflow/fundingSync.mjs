@@ -1,7 +1,14 @@
 /* eslint-disable unicorn/no-process-exit */
 /* eslint-disable no-undef */
 import { loadAllFundings } from "../fundingExport.mjs";
-import { argsInclude, contentToStrings, getHtml, wait } from "./helpers.mjs";
+import {
+  argsInclude,
+  catchRateLimitErrorAndRetry,
+  contentToStrings,
+  getHtml,
+  resolveApiPromises,
+} from "./helpers.mjs";
+import { wait } from "./helpers2.mjs";
 import { createItem, deleteItem, getAllItems, getCollection, modifyItem } from "./methods.mjs";
 import { allIndustryId, getCurrentSectors, syncSectors } from "./sectorSync.mjs";
 import { certificationCollectionId, fundingCollectionId } from "./webflowIds.mjs";
@@ -251,15 +258,14 @@ const deleteFundings = async () => {
     try {
       return await deleteItem(funding.id, fundingCollectionId);
     } catch (error) {
-      console.error(error.response.data);
-      throw error;
+      await catchRateLimitErrorAndRetry(error, deleteItem, funding.id, fundingCollectionId);
     }
   };
-  await Promise.all(
-    fundings.map(async (item) => {
-      return await deleteFunding(item);
-    })
-  );
+
+  const fundingPromises = fundings.map((item) => {
+    return () => deleteFunding(item);
+  });
+  await resolveApiPromises(fundingPromises);
 };
 
 const updateFundings = async () => {
@@ -278,16 +284,15 @@ const updateFundings = async () => {
     try {
       return await modifyItem(item.id, fundingCollectionId, funding);
     } catch (error) {
-      console.error(error);
-      throw error;
+      await catchRateLimitErrorAndRetry(error, modifyItem, item.id, fundingCollectionId, funding);
     }
   };
 
-  return Promise.all(
-    overlappingFundings.map(async (item) => {
-      return await modify(item);
-    })
-  );
+  const fundingsPromises = overlappingFundings.map((item) => {
+    return () => modify(item);
+  });
+
+  await resolveApiPromises(fundingsPromises);
 };
 const createNewFundings = async () => {
   const newFundings = await getNewFundings();
@@ -296,25 +301,23 @@ const createNewFundings = async () => {
     try {
       return await createItem(funding, fundingCollectionId, false);
     } catch (error) {
-      console.error(error.response.data);
-      throw error;
+      await catchRateLimitErrorAndRetry(error, createItem, funding, fundingCollectionId, false);
     }
   };
-  return await Promise.all(
-    newFundings.map(async (item) => {
-      return await create(item);
-    })
-  );
+
+  const fundingPromises = newFundings.map((item) => {
+    return () => create(item);
+  });
+
+  await resolveApiPromises(fundingPromises);
 };
 
 const syncFundings = async () => {
   console.log("deleting unused fundings");
   await deleteFundings();
   console.log("updating fundings");
-  await wait();
   await updateFundings();
   console.log("creating new fundings");
-  await wait();
   await createNewFundings();
   console.log("Complete Funding Sync!");
 };

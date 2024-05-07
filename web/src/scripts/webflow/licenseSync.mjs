@@ -11,7 +11,14 @@ import {
   loadNavigatorLicense,
   writeMarkdownString,
 } from "../licenseLoader.mjs";
-import { argsInclude, contentToStrings, getHtml, wait } from "./helpers.mjs";
+import {
+  argsInclude,
+  catchRateLimitErrorAndRetry,
+  contentToStrings,
+  getHtml,
+  resolveApiPromises,
+} from "./helpers.mjs";
+import { wait } from "./helpers2.mjs";
 import { LicenseClassificationLookup } from "./licenseClassifications.mjs";
 import { createItem, getAllItems, modifyItem } from "./methods.mjs";
 import { licenseCollectionId } from "./webflowIds.mjs";
@@ -137,20 +144,19 @@ const getNewLicenses = async () => {
 const updateLicenses = async (licenseMarkdowns) => {
   const modify = async (licenseMd) => {
     console.info(`Attempting to modify ${licenseMd.urlSlug}`);
+    const [webflowItemId, webflowItem] = getLicenseFromMd(licenseMd);
     try {
-      const [webflowItemId, webflowItem] = getLicenseFromMd(licenseMd);
       return await modifyItem(webflowItemId, licenseCollectionId, webflowItem);
     } catch (error) {
-      console.error(error.response);
-      throw error;
+      await catchRateLimitErrorAndRetry(error, modifyItem, webflowItemId, licenseCollectionId, webflowItem);
     }
   };
 
-  await Promise.all(
-    licenseMarkdowns.map(async (item) => {
-      return await modify(item);
-    })
-  );
+  const licensePromises = licenseMarkdowns.map((item) => {
+    return () => modify(item);
+  });
+
+  await resolveApiPromises(licensePromises);
 
   console.info(`Modified a total of ${licenseMarkdowns.length} licenses`);
 };
@@ -175,12 +181,11 @@ const createNewLicenses = async () => {
   const create = async (licenseMd) => {
     console.info(`Attempting to create ${licenseMd.urlSlug}`);
     let result;
+    const [webflowItemId, webflowItem] = getLicenseFromMd(licenseMd);
     try {
-      const [webflowItemId, webflowItem] = getLicenseFromMd(licenseMd);
       result = await createItem(webflowItem, licenseCollectionId, false);
     } catch (error) {
-      console.error(error.response);
-      throw error;
+      await catchRateLimitErrorAndRetry(error, createItem, webflowItem, licenseCollectionId, false);
     }
 
     if (licenseMd.webflowId === undefined) {
@@ -191,11 +196,11 @@ const createNewLicenses = async () => {
     return;
   };
 
-  await Promise.all(
-    newLicenses.map(async (item) => {
-      return await create(item);
-    })
-  );
+  const licensePromises = newLicenses.map((item) => {
+    return () => create(item);
+  });
+
+  await resolveApiPromises(licensePromises);
 
   console.info(`Created a total of ${newLicenses.length} licenses`);
 };
@@ -224,7 +229,6 @@ if (process.env.NODE_ENV === "test") {
 } else if (argsInclude("--ci-sync")) {
   await (async () => {
     await syncLicenses({ create: false });
-    await wait(60000); // Wait 1 minute to avoid exceeding rate limit
     process.exit(0);
   })();
 } else if (argsInclude("--legacy-sync")) {
