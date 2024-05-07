@@ -4569,8 +4569,8 @@ __metadata:
     "@jest/types": 29.6.3
     "@mui/icons-material": ^5.15.1
     "@mui/lab": 5.0.0-alpha.170
-    "@mui/material": 5.15.15
-    "@mui/styles": 5.15.15
+    "@mui/material": 5.15.16
+    "@mui/styles": 5.15.16
     "@mui/system": 5.15.15
     "@mui/x-date-pickers": 5.0.20
     "@newjersey/njwds": 0.3.0
@@ -4790,8 +4790,8 @@ __metadata:
     "@jest/types": 29.6.3
     "@mui/icons-material": ^5.15.1
     "@mui/lab": 5.0.0-alpha.170
-    "@mui/material": 5.15.15
-    "@mui/styles": 5.15.15
+    "@mui/material": 5.15.16
+    "@mui/styles": 5.15.16
     "@mui/system": 5.15.15
     "@mui/x-date-pickers": 5.0.20
     "@newjersey/njwds": 0.3.0
@@ -7164,16 +7164,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/core-downloads-tracker@npm:^5.15.15":
-  version: 5.15.15
-  resolution: "@mui/core-downloads-tracker@npm:5.15.15"
-  checksum: 3e99a04e03f66d5fa5f0c23cdce0f9fa2331ba08c99a75dc2347ccaa1c6ed520153e04aaeb0d613c9dca099a3e6242558a6284c33d93f95cc65e3243b17860bc
+"@mui/core-downloads-tracker@npm:^5.15.16":
+  version: 5.15.16
+  resolution: "@mui/core-downloads-tracker@npm:5.15.16"
+  checksum: 161ef72ea930bc5831d1b7699e048644da397cc585cde33535296037b0e9a09093c50585ee7e5913e62b7f15a6cc13400f97e443ee85ea242cb087c55f7d88e3
   languageName: node
   linkType: hard
 
 "@mui/icons-material@npm:^5.15.1":
-  version: 5.15.15
-  resolution: "@mui/icons-material@npm:5.15.15"
+  version: 5.15.16
+  resolution: "@mui/icons-material@npm:5.15.16"
   dependencies:
     "@babel/runtime": ^7.23.9
   peerDependencies:
@@ -7183,7 +7183,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 42d62fc94be25a361034a8974b1860608e866c155ff2eea7dc18f10a4acc71dbe2f48af3f0309a345ff6fb16be30c6fbc1d8a0a447c828aa1380a49e176a8803
+  checksum: 5342889e358d3acb22c1ca5d5500a1b2226068bf641caaa82f44dc32465cf12964cce8ce174c5eb8a3fa81e11eeb8a5c379835534ed8d444feb75ff1d8eb75fc
   languageName: node
   linkType: hard
 
@@ -7216,13 +7216,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/material@npm:5.15.15":
-  version: 5.15.15
-  resolution: "@mui/material@npm:5.15.15"
+"@mui/material@npm:5.15.16":
+  version: 5.15.16
+  resolution: "@mui/material@npm:5.15.16"
   dependencies:
     "@babel/runtime": ^7.23.9
     "@mui/base": 5.0.0-beta.40
-    "@mui/core-downloads-tracker": ^5.15.15
+    "@mui/core-downloads-tracker": ^5.15.16
     "@mui/system": ^5.15.15
     "@mui/types": ^7.2.14
     "@mui/utils": ^5.15.14
@@ -7245,7 +7245,7 @@ __metadata:
       optional: true
     "@types/react":
       optional: true
-  checksum: ee0dc22fc4d617f7cf69f2451b6d5139978e6c5319e3056e7719159aff786ee3b80abd07691e230371811d9b5b574aef4559d7855bfe2f8493d596d960a91ab7
+  checksum: 360c8f5701df72617c4cec716eabfb1ff63fa2a5ad13745908feeac1474797d331436a2fe1d0fce8eb5af69edee9158d2081f0459f41798034ff7be97359b5f0
   languageName: node
   linkType: hard
 
@@ -7287,9 +7287,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/styles@npm:5.15.15":
-  version: 5.15.15
-  resolution: "@mui/styles@npm:5.15.15"
+"@mui/styles@npm:5.15.16":
+  version: 5.15.16
+  resolution: "@mui/styles@npm:5.15.16"
   dependencies:
     "@babel/runtime": ^7.23.9
     "@emotion/hash": ^0.9.1
@@ -7314,7 +7314,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 5e436a8a22ae9a2e6fcb63ead3a6eff2092cc9731fce0b22d04ab9c67639a173a0e27fb617628e7720592862118a32248be458bedfabaf1de5448543a97b0307
+  checksum: 757b29fcd2226d48586182ada0af8e1e30e10689af734b710d22428e5dc72c095ecbfa9d2a6983795c5d9ea5f07b87151aa625bfe98e8ee6f460fc0c3149044b
   languageName: node
   linkType: hard
 
