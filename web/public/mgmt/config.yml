@@ -175,8 +175,8 @@ collections:
                     widget: object
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
-                  - label: Agent Office Municipality
-                    name: agentOfficeAddressMunicipality
+                  - label: Agent Office City
+                    name: agentOfficeAddressCity
                     collapsed: true
                     widget: object
                     fields:
@@ -5157,8 +5157,16 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Radio Button Residential Text", name: "radioButtonResidentialText", widget: "string" }
-                          - { label: "Radio Button Commercial or Industrial Text", name: "radioButtonCommercialOrIndustrialText", widget: "string" }
+                          - {
+                              label: "Radio Button Residential Text",
+                              name: "radioButtonResidentialText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button Commercial or Industrial Text",
+                              name: "radioButtonCommercialOrIndustrialText",
+                              widget: "string",
+                            }
                           - { label: "Radio Button Both Text", name: "radioButtonBothText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                   - label: Residential Construction Type
@@ -5172,8 +5180,16 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Radio Button New Home Construction Text", name: "radioButtonNewHomeConstructionText", widget: "string" }
-                          - { label: "Radio Button Home Renovations Text", name: "radioButtonHomeRenovationsText", widget: "string" }
+                          - {
+                              label: "Radio Button New Home Construction Text",
+                              name: "radioButtonNewHomeConstructionText",
+                              widget: "string",
+                            }
+                          - {
+                              label: "Radio Button Home Renovations Text",
+                              name: "radioButtonHomeRenovationsText",
+                              widget: "string",
+                            }
                           - { label: "Radio Button Both Text", name: "radioButtonBothText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
               - label: Profile / Onboarding Defaults

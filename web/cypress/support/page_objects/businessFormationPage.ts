@@ -56,8 +56,8 @@ class BusinessFormationPage {
   getRegisteredAgentAddressLine2() {
     return cy.get('input[name="agentOfficeAddressLine2"]');
   }
-  getRegisteredAgentMunicipality() {
-    return cy.get('[id="agentOfficeAddressMunicipality"]');
+  getRegisteredAgentCity() {
+    return cy.get('[id="agentOfficeAddressCity"]');
   }
   getRegisteredAgentZipCode() {
     return cy.get('input[name="agentOfficeAddressZipCode"]');
@@ -161,9 +161,9 @@ class BusinessFormationPage {
   typeRegisteredAgentAddressLine2(address: string) {
     this.getRegisteredAgentAddressLine2().clear().type(address).blur();
   }
-  selectRegisteredAgentMunicipality(city: string) {
-    this.getRegisteredAgentMunicipality().click();
-    cy.get('[role="listbox"]').contains(city).click();
+
+  typeRegisteredAgentCity(city: string) {
+    this.getRegisteredAgentCity().clear().type(city).blur;
   }
   typeRegisteredAgentZipCode(zipCode: string) {
     this.getRegisteredAgentZipCode().clear().type(zipCode).blur();

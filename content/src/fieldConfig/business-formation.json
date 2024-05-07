@@ -248,9 +248,9 @@
         "label": "Registered Agent ID Number",
         "error": "Enter the 4 to 7 digit Registered Agent ID number."
       },
-      "agentOfficeAddressMunicipality": {
+      "agentOfficeAddressCity": {
         "label": "Office City",
-        "error": "Select a city."
+        "error": "Enter the agent's city."
       },
       "corpWatchNotification": {
         "checkboxText": "I want to sign up for CorpWatch Alerts to notify me when any charter document filing is performed for my business."
@@ -400,7 +400,7 @@
       },
       "agentOfficeAddressZipCode": {
         "label": "Office Zip Code",
-        "error": "Enter a NJ Zip Code."
+        "error": "Enter the agent’s zip code."
       },
       "isVeteranNonprofit": {
         "label": "Non-Profit Veteran Corporation",

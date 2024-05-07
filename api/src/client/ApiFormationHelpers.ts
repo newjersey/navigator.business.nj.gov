@@ -237,7 +237,7 @@ export const makePostBody = (
               Address1: formationFormData.agentOfficeAddressLine1,
               Address2: formationFormData.agentOfficeAddressLine2,
               // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              City: formationFormData.agentOfficeAddressMunicipality!.name,
+              City: formationFormData.agentOfficeAddressCity,
               State: "New Jersey",
               Zipcode: formationFormData.agentOfficeAddressZipCode,
               Country: "US",

@@ -12,7 +12,7 @@ const fieldToApiFieldMapping: Record<string, string> = {
   contactPhoneNumber: "Contact Phone Number",
   agentOfficeAddressLine1: "Registered Agent - Street Address - Address1",
   agentOfficeAddressLine2: "Registered Agent - Street Address - Address2",
-  agentOfficeAddressMunicipality: "Registered Agent - Street Address - City",
+  agentOfficeAddressCity: "Registered Agent - Street Address - City",
   agentOfficeAddressZipCode: "Registered Agent - Street Address - Zipcode",
   paymentType: "Select Payment Type",
   businessSuffix: "Business Information - Business Designator",

@@ -308,7 +308,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Agent email", "name@example.com");
     page.fillText("Agent office address line1", "400 Pennsylvania Ave");
     page.fillText("Agent office address line2", "Suite 101");
-    page.selectByText("Agent office address municipality", "Newark");
+    page.fillText("Agent office address city", "Newark");
     page.fillText("Agent office address zip code", "08002");
 
     const member: FormationMember = {
@@ -361,7 +361,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.agentEmail).toEqual("name@example.com");
     expect(formationFormData.agentOfficeAddressLine1).toEqual("400 Pennsylvania Ave");
     expect(formationFormData.agentOfficeAddressLine2).toEqual("Suite 101");
-    expect(formationFormData.agentOfficeAddressMunicipality?.displayName).toEqual("Newark");
+    expect(formationFormData.agentOfficeAddressCity).toEqual("Newark");
     expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
     expect(formationFormData.businessPurpose).toEqual("to take over the world");
     expect(formationFormData.members).toEqual([
@@ -433,7 +433,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Agent email", "name@example.com");
     page.fillText("Agent office address line1", "400 Pennsylvania Ave");
     page.fillText("Agent office address line2", "Suite 101");
-    page.selectByText("Agent office address municipality", "Newark");
+    page.fillText("Agent office address city", "Newark");
     page.fillText("Agent office address zip code", "08002");
 
     expect(screen.queryByText(Config.formation.fields.members.placeholder)).not.toBeInTheDocument();
@@ -480,7 +480,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.agentEmail).toEqual("name@example.com");
     expect(formationFormData.agentOfficeAddressLine1).toEqual("400 Pennsylvania Ave");
     expect(formationFormData.agentOfficeAddressLine2).toEqual("Suite 101");
-    expect(formationFormData.agentOfficeAddressMunicipality?.displayName).toEqual("Newark");
+    expect(formationFormData.agentOfficeAddressCity).toEqual("Newark");
     expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
     expect(formationFormData.businessPurpose).toEqual("to take over the world");
     expect(formationFormData.members).toEqual(undefined);
@@ -532,7 +532,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Agent email", "name@example.com");
     page.fillText("Agent office address line1", "400 Pennsylvania Ave");
     page.fillText("Agent office address line2", "Suite 101");
-    page.selectByText("Agent office address municipality", "Newark");
+    page.fillText("Agent office address city", "Newark");
     page.fillText("Agent office address zip code", "08002");
 
     expect(screen.queryByText(Config.formation.fields.members.placeholder)).not.toBeInTheDocument();
@@ -579,7 +579,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.agentEmail).toEqual("name@example.com");
     expect(formationFormData.agentOfficeAddressLine1).toEqual("400 Pennsylvania Ave");
     expect(formationFormData.agentOfficeAddressLine2).toEqual("Suite 101");
-    expect(formationFormData.agentOfficeAddressMunicipality?.name).toEqual("Newark");
+    expect(formationFormData.agentOfficeAddressCity).toEqual("Newark");
     expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
     expect(formationFormData.businessPurpose).toEqual("to take over the world");
     expect(formationFormData.signers).toEqual([
@@ -644,7 +644,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Agent email", "name@example.com");
     page.fillText("Agent office address line1", "400 Pennsylvania Ave");
     page.fillText("Agent office address line2", "Suite 101");
-    page.selectByText("Agent office address municipality", "Newark");
+    page.fillText("Agent office address city", "Newark");
     page.fillText("Agent office address zip code", "08002");
 
     expect(screen.queryByText(Config.formation.fields.members.placeholder)).not.toBeInTheDocument();
@@ -694,7 +694,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.agentEmail).toEqual("name@example.com");
     expect(formationFormData.agentOfficeAddressLine1).toEqual("400 Pennsylvania Ave");
     expect(formationFormData.agentOfficeAddressLine2).toEqual("Suite 101");
-    expect(formationFormData.agentOfficeAddressMunicipality?.name).toEqual("Newark");
+    expect(formationFormData.agentOfficeAddressCity).toEqual("Newark");
     expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
     expect(formationFormData.businessPurpose).toEqual("to take over the world");
     expect(formationFormData.members).toEqual(undefined);
@@ -759,7 +759,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Agent email", "name@example.com");
     page.fillText("Agent office address line1", "400 Pennsylvania Ave");
     page.fillText("Agent office address line2", "Suite 101");
-    page.selectByText("Agent office address municipality", "Newark");
+    page.fillText("Agent office address city", "Newark");
     page.fillText("Agent office address zip code", "08002");
 
     expect(screen.queryByText(Config.formation.fields.members.placeholder)).not.toBeInTheDocument();
@@ -816,7 +816,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.agentEmail).toEqual("name@example.com");
     expect(formationFormData.agentOfficeAddressLine1).toEqual("400 Pennsylvania Ave");
     expect(formationFormData.agentOfficeAddressLine2).toEqual("Suite 101");
-    expect(formationFormData.agentOfficeAddressMunicipality?.name).toEqual("Newark");
+    expect(formationFormData.agentOfficeAddressCity).toEqual("Newark");
     expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
     expect(formationFormData.businessPurpose).toEqual("to take over the world");
     expect(formationFormData.incorporators).toEqual([
@@ -886,7 +886,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Agent email", "name@example.com");
     page.fillText("Agent office address line1", "400 Pennsylvania Ave");
     page.fillText("Agent office address line2", "Suite 101");
-    page.selectByText("Agent office address municipality", "Newark");
+    page.fillText("Agent office address city", "Newark");
     page.fillText("Agent office address zip code", "08002");
 
     expect(screen.getByText(Config.formation.fields.directors.placeholder)).toBeInTheDocument();
@@ -934,7 +934,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.agentEmail).toEqual("name@example.com");
     expect(formationFormData.agentOfficeAddressLine1).toEqual("400 Pennsylvania Ave");
     expect(formationFormData.agentOfficeAddressLine2).toEqual("Suite 101");
-    expect(formationFormData.agentOfficeAddressMunicipality?.name).toEqual("Newark");
+    expect(formationFormData.agentOfficeAddressCity).toEqual("Newark");
     expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
     expect(formationFormData.businessPurpose).toEqual("to take over the world");
     expect(formationFormData.members).toEqual([member]);
@@ -1006,7 +1006,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Agent email", "name@example.com");
     page.fillText("Agent office address line1", "400 Pennsylvania Ave");
     page.fillText("Agent office address line2", "Suite 101");
-    page.selectByText("Agent office address municipality", "Newark");
+    page.fillText("Agent office address city", "Newark");
     page.fillText("Agent office address zip code", "08002");
 
     expect(screen.getByText(Config.formation.fields.trustees.placeholder)).toBeInTheDocument();
@@ -1053,7 +1053,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.agentEmail).toEqual("name@example.com");
     expect(formationFormData.agentOfficeAddressLine1).toEqual("400 Pennsylvania Ave");
     expect(formationFormData.agentOfficeAddressLine2).toEqual("Suite 101");
-    expect(formationFormData.agentOfficeAddressMunicipality?.name).toEqual("Newark");
+    expect(formationFormData.agentOfficeAddressCity).toEqual("Newark");
     expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
     expect(formationFormData.businessPurpose).toEqual("to take over the world");
     expect(formationFormData.members).toEqual([trustee]);
@@ -1122,7 +1122,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Agent email", "name@example.com");
     page.fillText("Agent office address line1", "400 Pennsylvania Ave");
     page.fillText("Agent office address line2", "Suite 101");
-    page.selectByText("Agent office address municipality", "Newark");
+    page.fillText("Agent office address city", "Newark");
     page.fillText("Agent office address zip code", "08002");
 
     page.fillText("Signer 0", "Elrond");
@@ -1167,7 +1167,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.agentEmail).toEqual("name@example.com");
     expect(formationFormData.agentOfficeAddressLine1).toEqual("400 Pennsylvania Ave");
     expect(formationFormData.agentOfficeAddressLine2).toEqual("Suite 101");
-    expect(formationFormData.agentOfficeAddressMunicipality?.name).toEqual("Newark");
+    expect(formationFormData.agentOfficeAddressCity).toEqual("Newark");
     expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
     expect(formationFormData.businessPurpose).toEqual("to take over the world");
     expect(formationFormData.signers).toEqual([

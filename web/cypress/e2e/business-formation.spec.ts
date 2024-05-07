@@ -42,7 +42,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
     const getRegisteredAgentSameAsBusinessAddressCheckbox = false;
     const agentOfficeAddressLine1 = "123 Agent Main St.";
     const agentOfficeAddressLine2 = "Apt Agent 321";
-    const agentOfficeAddressMunicipality = generateMunicipality({ displayName: "Allendale" });
+    const agentOfficeAddressCity = "agent-city-123";
     const agentOfficeAddressZipCode = "07666";
     const members: FormationFormData["members"] = [
       generateFormationMember({ addressZipCode: "07333" }),
@@ -89,7 +89,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
       getRegisteredAgentSameAsBusinessAddressCheckbox,
       agentOfficeAddressLine1,
       agentOfficeAddressLine2,
-      agentOfficeAddressMunicipality,
+      agentOfficeAddressCity,
       agentOfficeAddressZipCode,
     });
 
@@ -198,7 +198,7 @@ const selectAndTypeRegisteredAgent = ({
   getRegisteredAgentSameAsBusinessAddressCheckbox,
   agentOfficeAddressLine1,
   agentOfficeAddressLine2,
-  agentOfficeAddressMunicipality,
+  agentOfficeAddressCity,
   agentOfficeAddressZipCode,
 }: Partial<AdditionalFormation>): void => {
   if (agentNumberOrManual === "NUMBER") {
@@ -236,7 +236,7 @@ const selectAndTypeRegisteredAgent = ({
       onBusinessFormationPage.getRegisteredAgentManualRadio().should("be.checked");
       onBusinessFormationPage.getRegisteredAgentAddressLine1().should("be.disabled");
       onBusinessFormationPage.getRegisteredAgentAddressLine2().should("be.disabled");
-      onBusinessFormationPage.getRegisteredAgentMunicipality().should("be.disabled");
+      onBusinessFormationPage.getRegisteredAgentCity().should("be.disabled");
       onBusinessFormationPage.getRegisteredAgentZipCode().should("be.disabled");
     }
     if (agentOfficeAddressLine1) {
@@ -254,12 +254,12 @@ const selectAndTypeRegisteredAgent = ({
         .should("contain", agentOfficeAddressLine2);
     }
 
-    if (agentOfficeAddressMunicipality) {
-      onBusinessFormationPage.selectRegisteredAgentMunicipality(agentOfficeAddressMunicipality.displayName);
+    if (agentOfficeAddressCity) {
+      onBusinessFormationPage.typeRegisteredAgentCity(agentOfficeAddressCity);
       onBusinessFormationPage
-        .getRegisteredAgentMunicipality()
+        .getRegisteredAgentCity()
         .invoke("prop", "value")
-        .should("contain", agentOfficeAddressMunicipality.displayName);
+        .should("contain", agentOfficeAddressCity);
     }
     if (agentOfficeAddressZipCode) {
       onBusinessFormationPage.typeRegisteredAgentZipCode(agentOfficeAddressZipCode);
