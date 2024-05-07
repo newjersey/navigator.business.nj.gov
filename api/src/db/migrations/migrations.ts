@@ -36,6 +36,7 @@ import { migrate_v11_to_v12 } from "@db/migrations/v12_remove_scorp";
 import { migrate_v129_to_v130 } from "@db/migrations/v130_remove_nexus_location_in_new_jersey";
 import { migrate_v130_to_v131 } from "@db/migrations/v131_add_construction_type_essential_question";
 import { migrate_v131_to_v132 } from "@db/migrations/v132_add_community_affairs_address";
+import { migrate_v132_to_v133 } from "@db/migrations/v133_change_agent_office_address_city_field";
 import { migrate_v12_to_v13 } from "@db/migrations/v13_add_construction_renovation_plan";
 import { migrate_v13_to_v14 } from "@db/migrations/v14_add_cleaning_aid_industry";
 import { migrate_v14_to_v15 } from "@db/migrations/v15_add_retail_industry";
@@ -268,4 +269,5 @@ export const Migrations: MigrationFunction[] = [
   migrate_v129_to_v130,
   migrate_v130_to_v131,
   migrate_v131_to_v132,
+  migrate_v132_to_v133,
 ];

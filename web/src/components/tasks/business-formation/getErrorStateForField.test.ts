@@ -1,13 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { getErrorStateForField } from "@/components/tasks/business-formation/getErrorStateForField";
+import {
+  getErrorStateForField,
+  onlyHasErrorIfEmpty,
+  onlyHasErrorIfUndefined,
+} from "@/components/tasks/business-formation/getErrorStateForField";
 import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateInputFile } from "@/test/factories";
 import {
-  defaultDateFormat,
   FormationFields,
   FormationLegalType,
+  defaultDateFormat,
   generateBusinessNameAvailability,
   generateFormationFormData,
   generateFormationIncorporator,
@@ -23,6 +27,39 @@ import {
 const Config = getMergedConfig();
 
 describe("getErrorStateForField", () => {
+  const onlyHasErrorIfUndefinedTest: FormationFields[] = [
+    "canCreateLimitedPartner",
+    "canGetDistribution",
+    "canMakeDistribution",
+    "addressCountry",
+    "addressState",
+    "willPracticeLaw",
+    "isVeteranNonprofit",
+    "hasNonprofitBoardMembers",
+    "nonprofitBoardMemberQualificationsSpecified",
+    "nonprofitBoardMemberRightsSpecified",
+    "nonprofitTrusteesMethodSpecified",
+    "nonprofitAssetDistributionSpecified",
+    "paymentType",
+    "businessSuffix",
+  ];
+
+  const onlyHasErrorIfEmptyTest: FormationFields[] = [
+    "contactPhoneNumber",
+    "agentNumber",
+    "businessTotalStock",
+    "withdrawals",
+    "combinedInvestment",
+    "dissolution",
+    "createLimitedPartnerTerms",
+    "getDistributionTerms",
+    "makeDistributionTerms",
+    "nonprofitBoardMemberQualificationsTerms",
+    "nonprofitBoardMemberRightsTerms",
+    "nonprofitTrusteesMethodTerms",
+    "nonprofitAssetDistributionTerms",
+  ];
+
   describe("businessName", () => {
     it("has error if empty", () => {
       const formationFormData = generateFormationFormData({ businessName: "" });
@@ -561,21 +598,21 @@ describe("getErrorStateForField", () => {
     });
   });
 
-  describe("agentOfficeAddressMunicipality", () => {
+  describe("agentOfficeAddressCity", () => {
     it("has error if undefined", () => {
-      const formationFormData = generateFormationFormData({ agentOfficeAddressMunicipality: undefined });
-      expect(
-        getErrorStateForField({ field: "agentOfficeAddressMunicipality", formationFormData }).hasError
-      ).toEqual(true);
+      const formationFormData = generateFormationFormData({ agentOfficeAddressCity: undefined });
+      expect(getErrorStateForField({ field: "agentOfficeAddressCity", formationFormData }).hasError).toEqual(
+        true
+      );
     });
 
     it("inserts label from config", () => {
       const formationFormData = generateFormationFormData({
-        agentOfficeAddressMunicipality: generateMunicipality({}),
+        agentOfficeAddressCity: `agent-city-123`,
       });
-      expect(
-        getErrorStateForField({ field: "agentOfficeAddressMunicipality", formationFormData }).label
-      ).toEqual(Config.formation.fields.agentOfficeAddressMunicipality.label);
+      expect(getErrorStateForField({ field: "agentOfficeAddressCity", formationFormData }).label).toEqual(
+        Config.formation.fields.agentOfficeAddressCity.label
+      );
     });
   });
 
@@ -1028,6 +1065,15 @@ describe("getErrorStateForField", () => {
           maxLen: "35",
         }),
       },
+      {
+        field: "agentOfficeAddressCity",
+        maxLen: 30,
+        labelWhenMissing: Config.formation.fields.agentOfficeAddressCity.error,
+        labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
+          field: Config.formation.fields.agentOfficeAddressCity.label,
+          maxLen: "30",
+        }),
+      },
     ];
 
     for (const data of fieldData) {
@@ -1119,23 +1165,8 @@ describe("getErrorStateForField", () => {
   });
 
   describe("fields that have error when undefined", () => {
-    const hasErrorIfUndefined: FormationFields[] = [
-      "canCreateLimitedPartner",
-      "canGetDistribution",
-      "canMakeDistribution",
-      "addressCountry",
-      "addressState",
-      "willPracticeLaw",
-      "isVeteranNonprofit",
-      "hasNonprofitBoardMembers",
-      "nonprofitBoardMemberQualificationsSpecified",
-      "nonprofitBoardMemberRightsSpecified",
-      "nonprofitTrusteesMethodSpecified",
-      "nonprofitAssetDistributionSpecified",
-    ];
-
-    const runTests = (hasErrorIfUndefined: FormationFields[], expectedLabel?: string): void => {
-      for (const field of hasErrorIfUndefined) {
+    const runTests = (onlyHasErrorIfUndefinedTest: FormationFields[], expectedLabel?: string): void => {
+      for (const field of onlyHasErrorIfUndefinedTest) {
         describe(`${field}`, () => {
           it("has error if undefined", () => {
             const formationFormData = generateFormationFormData({ [field]: undefined });
@@ -1164,7 +1195,7 @@ describe("getErrorStateForField", () => {
       }
     };
 
-    runTests(hasErrorIfUndefined);
+    runTests(onlyHasErrorIfUndefinedTest);
 
     runTests(["foreignStateOfFormation"], Config.formation.fields.foreignStateOfFormation.error);
     runTests(["foreignStateOfFormation"], Config.formation.fields.foreignStateOfFormation.error);
@@ -1203,28 +1234,8 @@ describe("getErrorStateForField", () => {
   });
 
   describe("fields that have error when empty or false", () => {
-    const hasErrorIfEmpty: FormationFields[] = [
-      "businessSuffix",
-      "contactPhoneNumber",
-      "agentNumber",
-      "agentOfficeAddressMunicipality",
-      "businessTotalStock",
-      "withdrawals",
-      "combinedInvestment",
-      "dissolution",
-      "createLimitedPartnerTerms",
-      "getDistributionTerms",
-      "makeDistributionTerms",
-      "paymentType",
-      "addressProvince",
-      "nonprofitBoardMemberQualificationsTerms",
-      "nonprofitBoardMemberRightsTerms",
-      "nonprofitTrusteesMethodTerms",
-      "nonprofitAssetDistributionTerms",
-    ];
-
-    const runTests = (hasErrorIfEmpty: FormationFields[]): void => {
-      for (const field of hasErrorIfEmpty) {
+    const runTests = (onlyHasErrorIfEmptyTest: FormationFields[]): void => {
+      for (const field of onlyHasErrorIfEmptyTest) {
         describe(`${field}`, () => {
           it("has error if empty", () => {
             const formationFormData = generateFormationFormData({ [field]: "" });
@@ -1253,6 +1264,16 @@ describe("getErrorStateForField", () => {
       }
     };
 
-    runTests(hasErrorIfEmpty);
+    runTests(onlyHasErrorIfEmptyTest);
+  });
+
+  describe("confirm field names in test and getErrorStateForField component match", () => {
+    it("onlyHasErrorIfEmpty", () => {
+      expect(onlyHasErrorIfEmpty).toEqual(onlyHasErrorIfEmptyTest);
+    });
+
+    it("onlyHasErrorIfUndefined", () => {
+      expect(onlyHasErrorIfUndefined).toEqual(onlyHasErrorIfUndefinedTest);
+    });
   });
 });

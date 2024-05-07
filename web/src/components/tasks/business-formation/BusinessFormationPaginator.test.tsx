@@ -40,6 +40,7 @@ import {
   generateFormationUSAddress,
   generateProfileData,
   getCurrentDate,
+  randomInt,
 } from "@businessnjgovnavigator/shared/";
 import {
   generateBusiness,
@@ -879,13 +880,13 @@ describe("<BusinessFormationPaginator />", () => {
               newTextInput: "22222222",
             },
           ];
-          const agentOfficeAddressMunicipality: MockApiErrorJestArray = [
-            "agentOfficeAddressMunicipality",
+          const agentOfficeAddressCity: MockApiErrorJestArray = [
+            "agentOfficeAddressCity",
             {
               formationFormData: generateFormationFormData(
                 {
                   agentNumberOrManual: "MANUAL_ENTRY",
-                  agentOfficeAddressMunicipality: generateMunicipality({ displayName: "Newark" }),
+                  agentOfficeAddressCity: `agent-city-${randomInt()}`,
                 },
                 { legalStructureId: "limited-liability-company" }
               ),
@@ -900,8 +901,8 @@ describe("<BusinessFormationPaginator />", () => {
                 ],
               }),
               formationStepName: "Contacts",
-              fieldName: "agentOfficeAddressMunicipality",
-              fieldLabel: "Agent office address municipality",
+              fieldName: "agentOfficeAddressCity",
+              fieldLabel: "Agent office address city",
               newTextInput: "22222222",
             },
           ];
@@ -1262,7 +1263,7 @@ describe("<BusinessFormationPaginator />", () => {
             agentEmail,
             agentOfficeAddressLine1,
             agentOfficeAddressLine2,
-            agentOfficeAddressMunicipality,
+            agentOfficeAddressCity,
             agentOfficeAddressZipCode,
             contactFirstName,
             contactLastName,
@@ -1309,7 +1310,7 @@ describe("<BusinessFormationPaginator />", () => {
             agentEmail,
             agentOfficeAddressLine1,
             agentOfficeAddressLine2,
-            agentOfficeAddressMunicipality,
+            agentOfficeAddressCity,
             agentOfficeAddressZipCode,
             contactFirstName,
             contactLastName,
@@ -1355,7 +1356,7 @@ describe("<BusinessFormationPaginator />", () => {
             agentEmail,
             agentOfficeAddressLine1,
             agentOfficeAddressLine2,
-            agentOfficeAddressMunicipality,
+            agentOfficeAddressCity,
             agentOfficeAddressZipCode,
             contactFirstName,
             contactLastName,

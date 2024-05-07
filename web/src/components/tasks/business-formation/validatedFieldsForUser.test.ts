@@ -62,7 +62,7 @@ describe("validatedFieldsForUser", () => {
         "agentEmail",
         "agentOfficeAddressLine1",
         "agentOfficeAddressLine2",
-        "agentOfficeAddressMunicipality",
+        "agentOfficeAddressCity",
         "agentOfficeAddressZipCode",
       ];
 
