@@ -4560,7 +4560,7 @@ __metadata:
     "@babel/core": 7.24.5
     "@businessnjgovnavigator/content": "*"
     "@businessnjgovnavigator/shared": "*"
-    "@commitlint/cli": 19.2.2
+    "@commitlint/cli": 19.3.0
     "@commitlint/config-conventional": 19.2.2
     "@cypress-audit/lighthouse": 1.4.2
     "@cypress-audit/pa11y": 1.4.2
@@ -4925,11 +4925,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/cli@npm:19.2.2":
-  version: 19.2.2
-  resolution: "@commitlint/cli@npm:19.2.2"
+"@commitlint/cli@npm:19.3.0":
+  version: 19.3.0
+  resolution: "@commitlint/cli@npm:19.3.0"
   dependencies:
-    "@commitlint/format": ^19.0.3
+    "@commitlint/format": ^19.3.0
     "@commitlint/lint": ^19.2.2
     "@commitlint/load": ^19.2.0
     "@commitlint/read": ^19.2.1
@@ -4938,7 +4938,7 @@ __metadata:
     yargs: ^17.0.0
   bin:
     commitlint: cli.js
-  checksum: 0cd8e0e003d32d1720ccee55352f2a2a7939d67b2e018a588f09a8f98c58688bd5d51a10dae0ab550dba7fd49f256b396431b927058d5e17f076edcffe434c8e
+  checksum: 2329756f6e3313948aafac378b2cf2fe3b436c8dd0260e517b68dd7e7c52e944d280e562f93c91308c13d60461af469641c031bae09131aa34a953e2f7074c29
   languageName: node
   linkType: hard
 
@@ -4983,13 +4983,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/format@npm:^19.0.3":
-  version: 19.0.3
-  resolution: "@commitlint/format@npm:19.0.3"
+"@commitlint/format@npm:^19.3.0":
+  version: 19.3.0
+  resolution: "@commitlint/format@npm:19.3.0"
   dependencies:
     "@commitlint/types": ^19.0.3
     chalk: ^5.3.0
-  checksum: ccd71c669e43272fc7d55aba38b149ebc1fab40364ddb4182d4067210592981d42e51d2295a5c0476a34a7a296f14eaee54cc3aa246e3e5d477ed2ae5917a532
+  checksum: cc0e1e0e6d5eea76b856ad1be879de166c3d1385e1ae0e1bb78c575f9b78b53d92a56cd4719427cdba9cbb9a10235768da29144da9892596525c923d126951dd
   languageName: node
   linkType: hard
 
