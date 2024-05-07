@@ -18,6 +18,11 @@ export type ElevatorSafetyRegistrationSummary = {
   lookupStatus: string;
 };
 
+export type ElevatorSafetyViolation = {
+  citationDate: string;
+  isOpen: boolean;
+};
+
 export type ElevatorSafetyAddress = {
   address1: string;
   address2?: string;

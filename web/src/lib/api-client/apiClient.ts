@@ -38,6 +38,10 @@ export const checkElevatorRegistrationStatus = (
   return post(`/elevator-safety/registration`, { address, municipalityId });
 };
 
+export const checkElevatorViolations = (address: string, municipalityId: string): Promise<boolean> => {
+  return post(`/elevator-safety/violations`, { address, municipalityId });
+};
+
 export const postBusinessFormation = (
   userData: UserData,
   returnUrl: string,

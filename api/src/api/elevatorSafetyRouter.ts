@@ -1,4 +1,8 @@
-import { ElevatorSafetyInspectionStatus, ElevatorSafetyRegistrationStatus } from "@domain/types";
+import {
+  ElevatorSafetyInspectionStatus,
+  ElevatorSafetyRegistrationStatus,
+  ElevatorSafetyViolationsStatus,
+} from "@domain/types";
 import {
   ElevatorSafetyDeviceInspectionDetails,
   ElevatorSafetyRegistrationSummary,
@@ -7,7 +11,8 @@ import { Router } from "express";
 
 export const elevatorSafetyRouterFactory = (
   elevatorSafetyInspection: ElevatorSafetyInspectionStatus,
-  elevatorSafetyRegistration: ElevatorSafetyRegistrationStatus
+  elevatorSafetyRegistration: ElevatorSafetyRegistrationStatus,
+  elevatorSafetyViolation: ElevatorSafetyViolationsStatus
 ): Router => {
   const router = Router();
 
@@ -16,6 +21,17 @@ export const elevatorSafetyRouterFactory = (
     elevatorSafetyInspection(address)
       .then(async (elevatorInspections: ElevatorSafetyDeviceInspectionDetails[]) => {
         return res.json(elevatorInspections);
+      })
+      .catch((error) => {
+        res.status(500).json({ error });
+      });
+  });
+
+  router.post("/elevator-safety/violations/", async (req, res) => {
+    const { address, municipalityId } = req.body;
+    elevatorSafetyViolation(address, municipalityId)
+      .then(async (violations: boolean) => {
+        return res.json(violations);
       })
       .catch((error) => {
         res.status(500).json({ error });

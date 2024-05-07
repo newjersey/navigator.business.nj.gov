@@ -18,6 +18,8 @@ import { DynamicsElevatorSafetyInspectionClient } from "@client/dynamics/elevato
 import { DynamicsElevatorSafetyInspectionStatusClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyInspectionStatusClient";
 import { DynamicsElevatorSafetyRegistrationClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyRegistrationClient";
 import { DynamicsElevatorSafetyRegistrationStatusClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyRegistrationStatusClient";
+import { DynamicsElevatorSafetyViolationsClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyViolationsClient";
+import { DynamicsElevatorSafetyViolationsStatusClient } from "@client/dynamics/elevator-safety/DynamicsElevatorSafetyViolationsStatusClient";
 import { DynamicsFireSafetyClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyClient";
 import { DynamicsFireSafetyHealthCheckClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyHealthCheckClient";
 import { DynamicsFireSafetyInspectionClient } from "@client/dynamics/fire-safety/DynamicsFireSafetyInspectionClient";
@@ -175,6 +177,11 @@ const dynamicsElevatorSafetyRegistrationClient = DynamicsElevatorSafetyRegistrat
   DYNAMICS_ELEVATOR_SAFETY_URL
 );
 
+const dynamicsElevatorSafetyViolationsClient = DynamicsElevatorSafetyViolationsClient(
+  logger,
+  DYNAMICS_ELEVATOR_SAFETY_URL
+);
+
 const dynamicsElevatorSafetyInspectionStatusClient = DynamicsElevatorSafetyInspectionStatusClient(logger, {
   accessTokenClient: dynamicsElevatorSafetyAccessTokenClient,
   elevatorSafetyInspectionClient: dynamicsElevatorSafetyInspectionClient,
@@ -188,6 +195,10 @@ const dynamicsElevatorSafetyRegistrationStatusClient = DynamicsElevatorSafetyReg
     housingPropertyInterestClient: dynamicsHousingPropertyInterestClient,
   }
 );
+const dynamicsElevatorSafetyViolationsStatusClient = DynamicsElevatorSafetyViolationsStatusClient({
+  accessTokenClient: dynamicsElevatorSafetyAccessTokenClient,
+  elevatorSafetyViolationsClient: dynamicsElevatorSafetyViolationsClient,
+});
 const dynamicsElevatorSafetyHealthCheckClient = DynamicsElevatorSafetyHealthCheckClient(logger, {
   accessTokenClient: dynamicsElevatorSafetyAccessTokenClient,
   orgUrl: DYNAMICS_ELEVATOR_SAFETY_URL,
@@ -325,7 +336,8 @@ app.use(
   "/api",
   elevatorSafetyRouterFactory(
     dynamicsElevatorSafetyInspectionStatusClient,
-    dynamicsElevatorSafetyRegistrationStatusClient
+    dynamicsElevatorSafetyRegistrationStatusClient,
+    dynamicsElevatorSafetyViolationsStatusClient
   )
 );
 app.use("/api", fireSafetyRouterFactory(dynamicsFireSafetyClient));
