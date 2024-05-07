@@ -2,11 +2,10 @@
 notesMd: >
   [Muni planning
   doc](https://docs.google.com/document/d/1wqFrL2aR2ZI9MvCsp4orFJE2A6sn_oa5YOFQoW2uKYE/edit?usp=sharing)
-summaryDescriptionMd: If you own a new `multiple dwelling|multiple-dwelling`,
-  such as an apartment, condominium, or townhouse development, you must register
-  your property with the State. If you are the new owner of an existing
-  property, you can also follow the requirements below to update the existing
-  registration and transfer the ownership to you.
+summaryDescriptionMd: If you own a newly built `multiple
+  dwelling|multiple-dwelling`, such as an apartment, condominium, or townhouse
+  development, you must register it with the State. If you are the new owner of
+  an existing property, you must update the current registration.
 urlSlug: multiple-dwelling-registration
 filename: multiple-dwelling-registration
 displayname: multiple-dwelling-registration
