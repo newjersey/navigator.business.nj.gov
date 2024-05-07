@@ -1,7 +1,7 @@
 black==24.4.2
 cffi==1.16.0
 click==8.1.7
-cryptography==42.0.5
+cryptography==42.0.6
 Markdown==3.5.2
 mypy-extensions==1.0.0
 packaging==24.0
