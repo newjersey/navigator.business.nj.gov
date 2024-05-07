@@ -9,6 +9,14 @@ export interface ElevatorSafetyRegistrationClient {
   ) => Promise<ElevatorRegistration[]>;
 }
 
+export interface ElevatorSafetyViolationsClient {
+  getViolationsForPropertyInterest: (
+    accessToken: string,
+    address: string,
+    municipalityId: string
+  ) => Promise<boolean>;
+}
+
 export type ElevatorInspection = {
   address: string;
   deviceCount: number;
