@@ -44,7 +44,9 @@
     }
   ],
   "name": "Lodging",
-  "nonEssentialQuestionsIds": [],
+  "nonEssentialQuestionsIds": [
+    "hotel-register"
+  ],
   "displayname": "lodging",
   "industryOnboardingQuestions": {
     "canBeReseller": true
