@@ -1,5 +1,6 @@
 import axios from "axios";
 import adapter from "axios/lib/adapters/http.js";
+import { checkRateLimitAndWait } from "./helpers.mjs";
 import { siteId } from "./webflowIds.mjs";
 
 if (typeof process !== "undefined") {
@@ -19,14 +20,15 @@ const getAllItems = async (collectionId) => {
   let totalToFetch = 1;
 
   while (responseItems.length < totalToFetch) {
-    const { data } = await axios({
+    const response = await axios({
       method: "get",
       url: `https://api.webflow.com/v2/collections/${collectionId}/items?offset=${responseItems.length}`,
       headers,
       responseType: "json",
     });
-    responseItems = [...responseItems, ...data.items];
-    totalToFetch = data.pagination.total;
+    responseItems = [...responseItems, ...response.data.items];
+    totalToFetch = response.data.pagination.total;
+    await checkRateLimitAndWait(response);
   }
 
   return responseItems;

@@ -4,7 +4,7 @@ import fs from "fs";
 import orderBy from "lodash";
 import path from "path";
 import { fileURLToPath } from "url";
-import { wait } from "./helpers.mjs";
+import { wait } from "./helpers2.mjs";
 import { createItem, deleteItem, getAllItems, modifyItem } from "./methods.mjs";
 import { allIndustryId, sectorCollectionId } from "./webflowIds.mjs";
 

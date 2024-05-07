@@ -12,6 +12,8 @@ import {
   getUnUsedFundings,
   updateFundings,
 } from "./fundingSync.mjs";
+import { catchRateLimitErrorAndRetry } from "./helpers.mjs";
+import { wait } from "./helpers2.mjs";
 import {
   allIndustryId,
   createNewSectors,
@@ -258,6 +260,12 @@ jest.mock("fs", () => {
   return {
     ...original,
     readFileSync: jest.fn(),
+  };
+});
+
+jest.mock("./helpers2.mjs", () => {
+  return {
+    wait: jest.fn(),
   };
 });
 
@@ -771,6 +779,34 @@ describe("webflow syncing", () => {
         headers: {
           Authorization: "Bearer 12345678910",
         },
+      });
+    });
+
+    describe("helpers", () => {
+      describe("catchRateLimitErrorAndRetry", () => {
+        let mockRetryFunc;
+
+        beforeEach(() => {
+          mockRetryFunc = jest.fn();
+        });
+
+        it("should retry function after waiting if rate limit error occurs", async () => {
+          const error = { response: { status: 429 } };
+
+          await catchRateLimitErrorAndRetry(error, mockRetryFunc, "arg1", "arg2");
+
+          expect(mockRetryFunc).toHaveBeenCalledWith("arg1", "arg2");
+          expect(wait).toHaveBeenCalledWith(65000);
+        });
+
+        it("should throw error if non-rate limit error occurs", async () => {
+          const error = { response: { status: 500 } };
+
+          await expect(catchRateLimitErrorAndRetry(error, mockRetryFunc, "arg1", "arg2")).rejects.toEqual(
+            error
+          );
+          expect(mockRetryFunc).not.toHaveBeenCalled();
+        });
       });
     });
   });
