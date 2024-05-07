@@ -4,7 +4,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { argsInclude } from "./helpers.mjs";
+import { argsInclude, catchRateLimitErrorAndRetry, resolveApiPromises } from "./helpers.mjs";
 import { createItem, getAllItems, modifyItem } from "./methods.mjs";
 import { industryNameCollectionId } from "./webflowIds.mjs";
 
@@ -73,20 +73,25 @@ const convertIndustryToWebflowIndustryName = (industry) => {
 const updateWebflowIndustryNames = async (industries) => {
   const modify = async (industry) => {
     console.info(`Attempting to modify ${industry.name}`);
+    const webflowIndustryName = convertIndustryToWebflowIndustryName(industry);
     try {
-      const webflowIndustryName = convertIndustryToWebflowIndustryName(industry);
       return await modifyItem(industry.webflowId, industryNameCollectionId, webflowIndustryName);
     } catch (error) {
-      console.error(error.response);
-      throw error;
+      await catchRateLimitErrorAndRetry(
+        error,
+        modifyItem,
+        industry.webflowId,
+        industryNameCollectionId,
+        webflowIndustryName
+      );
     }
   };
 
-  await Promise.all(
-    industries.map(async (industry) => {
-      return await modify(industry);
-    })
-  );
+  const industryPromises = industries.map((industry) => {
+    return () => modify(industry);
+  });
+
+  await resolveApiPromises(industryPromises);
 
   console.info(`Modified a total of ${industries.length} Webflow Industry Names`);
 };
@@ -119,12 +124,17 @@ const createNewWebflowIndustryNames = async () => {
   const create = async (industry) => {
     console.info(`Attempting to create ${industry.name}`);
     let result;
+    const webflowIndustryName = convertIndustryToWebflowIndustryName(industry);
     try {
-      const webflowIndustryName = convertIndustryToWebflowIndustryName(industry);
       result = await createItem(webflowIndustryName, industryNameCollectionId, false);
     } catch (error) {
-      console.error(error.response);
-      throw error;
+      await catchRateLimitErrorAndRetry(
+        error,
+        createItem,
+        webflowIndustryName,
+        industryNameCollectionId,
+        false
+      );
     }
 
     if (industry.webflowId === undefined) {
@@ -135,11 +145,11 @@ const createNewWebflowIndustryNames = async () => {
     return;
   };
 
-  await Promise.all(
-    newIndustries.map(async (industry) => {
-      return await create(industry);
-    })
-  );
+  const industryPromises = newIndustries.map((industry) => {
+    return () => create(industry);
+  });
+
+  await resolveApiPromises(industryPromises);
 
   console.info(`Created a total of ${newIndustries.length} Webflow Industry Names`);
 };

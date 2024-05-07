@@ -6,17 +6,51 @@ import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
+import { wait } from "./helpers2.mjs";
 
-export const wait = (milliseconds = 10000) => {
-  return new Promise((resolve) => {
-    return setTimeout(resolve, milliseconds);
-  });
-};
+const RATE_LIMIT_WAIT_SECONDS = 20;
 
 export const argsInclude = (query) => {
   return process.argv.some((i) => {
     return i.includes(query);
   });
+};
+
+export const checkRateLimitAndWait = async (response) => {
+  if (
+    response &&
+    response.headers &&
+    response.headers["x-ratelimit-remaining"] &&
+    response.headers["x-ratelimit-remaining"] <= 5
+  ) {
+    console.debug(`Rate limit close; waiting ${RATE_LIMIT_WAIT_SECONDS} seconds...`);
+    await wait(RATE_LIMIT_WAIT_SECONDS * 1000);
+  }
+};
+
+export const resolveApiPromises = async (promiseArray) => {
+  for (const promise of promiseArray) {
+    const response = await promise();
+    await checkRateLimitAndWait(response);
+  }
+};
+
+export const catchRateLimitErrorAndRetry = async (error, retryFunc, ...params) => {
+  console.debug("in Catch Rate and retry");
+  if (error.response.status === 429) {
+    console.debug("Catching rate limit error hit");
+    await wait(65000);
+    // eslint-disable-next-line no-useless-catch
+    try {
+      return await retryFunc(...params);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  } else {
+    console.error(error);
+    throw error;
+  }
 };
 
 /*
