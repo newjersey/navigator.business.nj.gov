@@ -6,9 +6,7 @@ displayname: family-leave-insurance
 ---
 New Jersey Family Leave Insurance (FLI) provides partial wage replacement to employees who need time off to bond with a child or care for a family member. Employers don't pay into the program. Employees fund the program through payroll deductions. 
 
-FLI allows leave for the care of:
-
-*  A newly born or adopted child, as long as the leave starts within a year of the child's birth or placement with the employee 
+FLI allows leave for the care of a newly born or adopted child, as long as the leave starts within a year of the child's birth or placement with the employee.
 
 FLI also allows leave for the care of the following family members if they have a serious health condition requiring in-patient care, continuing medical treatment, require medical supervision, or are coping with domestic or sexual violence:
 
