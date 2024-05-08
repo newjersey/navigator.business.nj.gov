@@ -52,7 +52,7 @@
     "canBeReseller": true
   },
   "isEnabled": true,
-  "additionalSearchTerms": "bed and breakfast, hotel, motel, guesthouse, lodge, inn, airbnb",
+  "additionalSearchTerms": "bed and breakfast, hotel, motel, guesthouse, lodge, inn, airbnb host",
   "id": "lodging",
   "description": "Provides overnight accommodations to guests and travelers",
   "webflowId": "662a86cad07b4acada82449d"
