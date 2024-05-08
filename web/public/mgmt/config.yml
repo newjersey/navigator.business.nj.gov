@@ -2100,7 +2100,7 @@ collections:
                   name: deferredOnboardingSaveButtonText,
                   widget: string,
                 }
-      - label: "Elevator Registration"
+      - label: "Elevator Safety"
         name: "elevator-registration-config"
         file: "content/src/fieldConfig/elevator-registration.json"
         editor:
@@ -2173,6 +2173,15 @@ collections:
               - { label: Informational Message - Returned, name: informationalReturned, widget: string }
               - { label: Informational Message - Rejected, name: informationalRejected, widget: string }
               - { label: Informational Message - Incomplete, name: informationalIncomplete, widget: string }
+          - label: Elevator Violations Card
+            name: elevatorViolationsCard
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Violation Notice Message Text, name: violationNoticeMessage, widget: string }
+              - { label: Violation Notice CTA Text, name: violationNoticeCTA, widget: string }
+              - { label: Violation Notice CTA Link, name: violationNoticeCTALink, widget: nospace }
+
 
   - name: "tasks"
     label: "Tasks - All"

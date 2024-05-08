@@ -1,6 +1,7 @@
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { DeferredHomeBasedQuestion } from "@/components/dashboard/DeferredHomeBasedQuestion";
+import { ElevatorViolationsCard } from "@/components/dashboard/ElevatorViolationsCard";
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
@@ -32,6 +33,7 @@ interface Props {
   operateReferences: Record<string, OperateReference>;
   fundings: Funding[];
   certifications: Certification[];
+  elevatorViolations?: boolean;
 }
 
 export const DashboardOnDesktop = (props: Props): ReactElement => {
@@ -62,6 +64,8 @@ export const DashboardOnDesktop = (props: Props): ReactElement => {
                     onSave={deferredHomeBasedOnSaveButtonClick}
                   />
                 )}
+
+                {props.elevatorViolations && <ElevatorViolationsCard />}
 
                 {operatingPhase.displayQuickActions && (
                   <QuickActionsContainer

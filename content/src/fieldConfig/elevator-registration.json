@@ -26,5 +26,10 @@
     "informationalReturned": "Review your returned application for any errors or missing information. You can resubmit it using the same application link in the DCA Service Portal.",
     "informationalRejected": "Review your rejected application for any errors or missing information. You can resubmit it using the same application link in the DCA Service Portal.",
     "informationalIncomplete": "Review your incomplete application. Make sure you complete all sections and submit it."
+  },
+  "elevatorViolationsCard": {
+    "violationNoticeMessage": "Your building has one or more elevator device violations you must fix by your next inspection.",
+    "violationNoticeCTA": "View My Violation Notice",
+    "violationNoticeCTALink": "https://njdcaportal.dynamics365portals.us/"
   }
 }

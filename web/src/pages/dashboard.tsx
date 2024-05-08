@@ -6,6 +6,7 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/njwds-layout/PageSkeleton";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { MediaQueries } from "@/lib/PageSizes";
+import * as api from "@/lib/api-client/apiClient";
 import { usePageWithNeedsAccountSnackbar } from "@/lib/auth/usePageWithNeedsAccountSnackbar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
@@ -35,7 +36,7 @@ import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
@@ -56,6 +57,7 @@ const DashboardPage = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const isLoading = !business || business?.onboardingFormProgress !== "COMPLETED" || !roadmap;
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
+  const [hasElevatorViolations, setHasElevatorViolations] = useState(false);
 
   useMountEffectWhenDefined(() => {
     (async (): Promise<void> => {
@@ -97,6 +99,17 @@ const DashboardPage = (props: Props): ReactElement => {
         }
         await updateQueue.queuePreferences({ phaseNewlyChanged: false }).update();
       }
+
+      if (
+        business?.profileData.communityAffairsAddress &&
+        business?.profileData.operatingPhase === "UP_AND_RUNNING"
+      ) {
+        const hasViolations = await api.checkElevatorViolations(
+          business.profileData.communityAffairsAddress.streetAddress1,
+          business.profileData.communityAffairsAddress.municipality.id
+        );
+        setHasElevatorViolations(hasViolations);
+      }
     })();
   }, [business, updateQueue]);
 
@@ -118,6 +131,7 @@ const DashboardPage = (props: Props): ReactElement => {
                 quickActionLicenseReinstatements={props.quickActionLicenseReinstatements}
                 quickActionLinks={props.quickActionLinks}
                 quickActionTasks={props.quickActionTasks}
+                elevatorViolations={hasElevatorViolations}
               />
               <DashboardOnMobile
                 certifications={props.certifications}
@@ -127,6 +141,7 @@ const DashboardPage = (props: Props): ReactElement => {
                 quickActionLicenseReinstatements={props.quickActionLicenseReinstatements}
                 quickActionLinks={props.quickActionLinks}
                 quickActionTasks={props.quickActionTasks}
+                elevatorViolations={hasElevatorViolations}
               />
             </>
           )}
