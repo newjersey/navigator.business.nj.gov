@@ -6,7 +6,7 @@ callToActionLink: https://newjersey.mylicense.com/eGov/Login
 callToActionText: Renew My Accountant License
 ---
 
-Your accountant license expire every three years.
+All accountant licenses expire on December 31st of the last triennial year. A renewed license is valid for the full three years.
 - - -
 ## Application Requirements
 
