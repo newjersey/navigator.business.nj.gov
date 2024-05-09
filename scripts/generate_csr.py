@@ -2,12 +2,23 @@
 
 from cryptography import x509
 from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.asymmetric import ec
+from cryptography.hazmat.primitives.asymmetric import ec, rsa
 from cryptography.hazmat.primitives import serialization
 from cryptography.x509.oid import NameOID
 from datetime import datetime
 
 import argparse
+
+
+def generate_rsa_private_key(key_size: int = 2048) -> rsa.RSAPrivateKey:
+    """
+    Generate an RSA private key using the provided key size.
+
+    :param key_size: Size of the key to be generated (default is 2048).
+    :return: RSA private key.
+    """
+    private_key = rsa.generate_private_key(public_exponent=65537, key_size=key_size)
+    return private_key
 
 
 def generate_ecc_private_key(curve: ec.EllipticCurve) -> ec.EllipticCurvePrivateKey:
@@ -22,7 +33,8 @@ def generate_ecc_private_key(curve: ec.EllipticCurve) -> ec.EllipticCurvePrivate
 
 
 def generate_csr(
-    private_key: ec.EllipticCurvePrivateKey,
+    private_key: rsa.RSAPrivateKey,
+    # private_key: ec.EllipticCurvePrivateKey,
     country: str,
     state: str,
     locality: str,
@@ -143,8 +155,11 @@ def main():
 
     print(args)
 
-    # Generate the ECC private key
-    private_key = generate_ecc_private_key(ec.SECP384R1())
+    # Generate the ECC private key (RSA 2048)
+    private_key = generate_rsa_private_key(2048)
+
+    # Choose this option for ECDSA 384:
+    # private_key = generate_ecc_private_key(ec.SECP384R1())
 
     # Generate the CSR
     csr = generate_csr(
