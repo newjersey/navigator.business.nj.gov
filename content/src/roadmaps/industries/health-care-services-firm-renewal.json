@@ -56,14 +56,14 @@
   ],
   "name": "Home Health Aide",
   "nonEssentialQuestionsIds": [],
-  "displayname": "homemaker-home-health-aide",
+  "displayname": "health-care-services-firm-renewal",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "caregiver, care services, health care service firm, health care service",
-  "id": "homemaker-home-health-aide",
+  "id": "health-care-services-firm-renewal",
   "licenseType": "Health Care Services",
   "description": "A business staffing licensed personnel to provide home health care services",
   "webflowId": "656a13624020a38de9cbd8eb"
