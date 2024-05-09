@@ -5,6 +5,10 @@ summaryDescriptionMd: xxx
 callToActionLink: https://newjersey.mylicense.com/eGov/Login
 callToActionText: Renew My Accountant License
 ---
+:::infoAlert
+If you renew your license within the 30-day late renewal period, you will have to pay a late renewal fee charge.
+:::
+
 Your accountant license will expire every two years.
 
 - - -
