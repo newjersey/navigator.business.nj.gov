@@ -6,8 +6,6 @@ callToActionLink: https://newjersey.mylicense.com/eGov/Login
 callToActionText: Renew My Accountant License
 ---
 
-All accountant licenses expire on December 31st of the last triennial year. A renewed license is valid for the full three years.
-- - -
 ## Application Requirements
 
 - Satisfactory proof of 120 credits (120 hours) of Continuing Professional Education (CPE). A minimum of 20 credits (20 hours) in each year of the triennial period
