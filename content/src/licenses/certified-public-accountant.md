@@ -6,6 +6,9 @@ callToActionLink: https://newjersey.mylicense.com/eGov/Login
 callToActionText: Renew My Registration
 ---
 Your accounting firm registration will expire every three years.
+:::infoAlert
+If you renew your license within the 30-day late renewal period. You will have to pay a late renewal fee charge.
+:::
 
 - - - 
 ## Application Requirements
