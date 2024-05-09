@@ -18,10 +18,32 @@ fi
 REGION="$AWS_REGION"
 TABLE_NAME="$DYNAMODB_TABLE"
 OUTPUT_FILE="results.csv" # This filename is included in .gitignore to prevent accidental commits
+DEBUG="false"
 
 COUNTER=0
 MAX_ITEMS=1000
 LAST_EVALUATED_KEY=""
+
+JQ="jq"
+
+# Check if jaq or gojq is available, otherwise fall back to jq
+if command -v jaq &> /dev/null; then
+    JQ="jaq"
+    if [ "$DEBUG" = "true" ]; then
+        echo "Using jaq for parsing."
+    fi
+elif command -v gojq &> /dev/null; then
+    JQ="gojq"
+    if [ "$DEBUG" = "true" ]; then
+        echo "Using gojq for parsing."
+    fi
+elif command -v jq &> /dev/null; then
+    JQ="jq"
+    echo "Consider installing jaq or gojq for faster parsing."
+else
+    echo "You must have one of: jaq, gojq, or jq installed."
+    exit 1
+fi
 
 while true; do
     if [ -z "$LAST_EVALUATED_KEY" ]; then
@@ -31,9 +53,9 @@ while true; do
     fi
 
     echo "$RESULT" | \
-    jq -r '.Items[] | select(.data.M.businesses and .data.M.businesses.M) | select(.data.M.businesses.M | to_entries[] | .value.M.profileData and .value.M.profileData.M.businessPersona.S == "FOREIGN" and .value.M.profileData.M.industryId.S == "cannabis") | [.userId.S, (to_entries | .[].key)] | @csv' >> $OUTPUT_FILE
+    $JQ -r '.Items[] | select(.data.M.businesses and .data.M.businesses.M) | select(.data.M.businesses.M | to_entries[] | .value.M.profileData and .value.M.profileData.M.businessPersona.S == "FOREIGN" and .value.M.profileData.M.industryId.S == "cannabis") | [.userId.S, (to_entries | .[].key)] | @csv' >> $OUTPUT_FILE
 
-    LAST_EVALUATED_KEY=$(echo "$RESULT" | jq -r '.NextToken | tostring')
+    LAST_EVALUATED_KEY=$(echo "$RESULT" | $JQ -r '.NextToken | tostring')
     echo "Last Evaluated Key: $LAST_EVALUATED_KEY"
 
     COUNTER=$((COUNTER + MAX_ITEMS))

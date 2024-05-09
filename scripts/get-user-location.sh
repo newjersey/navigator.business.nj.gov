@@ -20,9 +20,30 @@ output_file="get-user-location-output.csv" # This filename is included in .gitig
 max_items=1000
 last_evaluated_key=""
 counter=0
+DEBUG="false"
 
 region="$AWS_REGION"
 table_name="$DYNAMODB_TABLE"
+JQ="jq"
+
+# Check if jaq or gojq is available, otherwise fall back to jq
+if command -v jaq &> /dev/null; then
+    JQ="jaq"
+    if [ "$DEBUG" = "true" ]; then
+        echo "Using jaq for parsing."
+    fi
+elif command -v gojq &> /dev/null; then
+    JQ="gojq"
+    if [ "$DEBUG" = "true" ]; then
+        echo "Using gojq for parsing."
+    fi
+elif command -v jq &> /dev/null; then
+    JQ="jq"
+    echo "Consider installing jaq or gojq for faster parsing."
+else
+    echo "You must have one of: jaq, gojq, or jq installed."
+    exit 1
+fi
 
 while true; do
 
@@ -47,7 +68,7 @@ while true; do
         exit 0
     fi
 
-    csv_data=$(echo "$scan_results" | jq -r '.Items[] | {
+    csv_data=$(echo "$scan_results" | $JQ -r '.Items[] | {
         email: .email.S,
         addressLine1: .data.M.formationData.M.formationFormData.M.addressLine1.S,
         addressLine2: .data.M.formationData.M.formationFormData.M.addressLine2.S,
@@ -57,7 +78,7 @@ while true; do
 
     echo "$csv_data" >> "$output_file"
 
-    last_evaluated_key=$(echo "$scan_results" | jq -r '.NextToken | tostring')
+    last_evaluated_key=$(echo "$scan_results" | $JQ -r '.NextToken | tostring')
     counter=$((counter + max_items))
     echo "Retrieved $counter items..."
 
