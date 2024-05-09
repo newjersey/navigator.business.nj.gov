@@ -7,7 +7,7 @@ callToActionText: Renew My Registration
 ---
 Your accounting firm registration will expire every three years.
 :::infoAlert
-If you renew your license within the 30-day late renewal period, you must pay a late renewal fee charge.
+If you renew your license within the 30-day late renewal period, you will have to pay a late renewal fee charge.
 :::
 
 - - - 
