@@ -752,7 +752,7 @@ jobs:
       - run:
           name: Node Funding Sync
           command: |
-            echo 'export WEBFLOW_API_TOKEN=$WEBFLOW_API_TOKEN_V2' >> $BASH_ENV
+            echo 'export WEBFLOW_API_TOKEN=$WEBFLOW_API_TOKEN' >> $BASH_ENV
             yarn workspace @businessnjgovnavigator/web webflow:fundings-ci-sync-full
 
   sync-licenses:
@@ -766,7 +766,7 @@ jobs:
       - run:
           name: Node License Sync
           command: |
-            echo 'export WEBFLOW_API_TOKEN=$WEBFLOW_API_TOKEN_V2' >> $BASH_ENV
+            echo 'export WEBFLOW_API_TOKEN=$WEBFLOW_API_TOKEN' >> $BASH_ENV
             yarn workspace @businessnjgovnavigator/content build
             yarn workspace @businessnjgovnavigator/web webflow:licenses-ci-sync
 
@@ -781,7 +781,7 @@ jobs:
       - run:
           name: Node Industry Sync
           command: |
-            echo 'export WEBFLOW_API_TOKEN=$WEBFLOW_API_TOKEN_V2' >> $BASH_ENV
+            echo 'export WEBFLOW_API_TOKEN=$WEBFLOW_API_TOKEN' >> $BASH_ENV
             yarn workspace @businessnjgovnavigator/content build
             yarn workspace @businessnjgovnavigator/web webflow:industries-ci-sync
 
@@ -821,6 +821,23 @@ workflows:
           name: webflow-fundings-sync
           requires:
             - production-deploy
+      - sync-licenses:
+          name: webflow-licenses-sync
+          requires:
+            - webflow-fundings-sync
+      - sync-industries:
+          name: webflow-industries-sync
+          requires:
+            - webflow-licenses-sync
+
+  webflow-sync:
+    jobs:
+      - sync-fundings:
+          name: webflow-fundings-sync
+          filters:
+            branches:
+              only:
+                - /^webflow-sync-.*/
       - sync-licenses:
           name: webflow-licenses-sync
           requires:
@@ -874,10 +891,11 @@ workflows:
                 - /^release-.*/
                 - /^staging-.*/
                 - /^cms/.*/
+                - /^new-docker-image$/
                 - /^webflow-fundings-sync-.*/
                 - /^webflow-licenses-sync-.*/
                 - /^webflow-industries-sync-.*/
-                - /^new-docker-image$/
+                - /^webflow-sync-.*/
       - lint:
           name: Lint
           filters:
