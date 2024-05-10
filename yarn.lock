@@ -4520,7 +4520,7 @@ __metadata:
     webpack-node-externals: 3.0.0
     winston: 3.12.0
     winston-cloudwatch: 6.2.0
-    wiremock: 3.4.2
+    wiremock: 3.5.4
     xml2js: 0.6.2
   languageName: unknown
   linkType: soft
@@ -4706,7 +4706,7 @@ __metadata:
     require-from-string: 2.0.2
     rimraf: 5.0.5
     sass: 1.77.0
-    sass-loader: 14.1.1
+    sass-loader: 14.2.1
     semantic-release: 19.0.5
     serverless: 3.38.0
     serverless-dynamodb: 0.2.53
@@ -4733,7 +4733,7 @@ __metadata:
     webpack-node-externals: 3.0.0
     winston: 3.12.0
     winston-cloudwatch: 6.2.0
-    wiremock: 3.4.2
+    wiremock: 3.5.4
     xml2js: 0.6.2
     yarn-workspace-sync-deps: 0.3.3
   languageName: unknown
@@ -4896,7 +4896,7 @@ __metadata:
     require-from-string: 2.0.2
     rimraf: 5.0.5
     sass: 1.77.0
-    sass-loader: 14.1.1
+    sass-loader: 14.2.1
     slick-carousel: ^1.8.1
     storybook: 7.6.19
     style-loader: 3.3.4
@@ -31676,9 +31676,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:14.1.1":
-  version: 14.1.1
-  resolution: "sass-loader@npm:14.1.1"
+"sass-loader@npm:14.2.1":
+  version: 14.2.1
+  resolution: "sass-loader@npm:14.2.1"
   dependencies:
     neo-async: ^2.6.2
   peerDependencies:
@@ -31698,7 +31698,7 @@ __metadata:
       optional: true
     webpack:
       optional: true
-  checksum: 56b2d1018d33c91d1c62b195ba62e31a2c03e1e304403ac69e3434413f601400a009e238e3d2d2b705949bd559cd537ba3d165c9ab338950f6e8d83dd92d3d60
+  checksum: f0c4710587d4cae56cad56eb46fe32c4a71c61a508951660dfb5a4cf873a3f221ec97658f364700fb4e3271376f7280656d4db9344754f7aab77d22bca70e22d
   languageName: node
   linkType: hard
 
@@ -36067,14 +36067,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wiremock@npm:3.4.2":
-  version: 3.4.2
-  resolution: "wiremock@npm:3.4.2"
+"wiremock@npm:3.5.4":
+  version: 3.5.4
+  resolution: "wiremock@npm:3.5.4"
   dependencies:
     npm-java-runner: ^1.0.2
   bin:
     wiremock: index.js
-  checksum: 7a701055eba1d7dc4d8ae68bf366fdf914efa886ced437646a72eab7c5eca688e8cb4ec8892b854ae0bf35382b82a5d35d6caa4ef81d571649f5a2f73abbee0c
+  checksum: cd1a975ea1d3f78ca93565d2f3d15fd83d8fcfaa04d2a158e41c354a80090d82efd26ece16f4ea476418af5bf506f79238c0ba53aca2c52e17e19eb2960b24f3
   languageName: node
   linkType: hard
 

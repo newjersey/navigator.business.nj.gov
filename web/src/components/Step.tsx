@@ -29,15 +29,17 @@ export const Step = (props: Props): ReactElement => {
           />
 
           <div className="margin-left-6 margin-top-neg-2px tablet:margin-left-205 font-body-md margin-bottom-105">
-            <span
-              role="heading"
-              aria-level={4}
-              className="text-bold margin-right-1 tablet:margin-left-4"
-              data-step={props.step.stepNumber}
-            >
-              <ModifiedContent>{props.step.name}</ModifiedContent>
-            </span>
-            <span className="text-base">({props.step.timeEstimate})</span>
+            <div className="tablet:margin-left-4">
+              <span
+                role="heading"
+                aria-level={4}
+                className="text-bold margin-right-1"
+                data-step={props.step.stepNumber}
+              >
+                <ModifiedContent>{props.step.name}</ModifiedContent>
+              </span>
+              <span className="text-base">({props.step.timeEstimate})</span>
+            </div>
           </div>
         </div>
 
