@@ -1,6 +1,6 @@
 import { SidebarCardsList, SidebarCardsListProps } from "@/components/dashboard/SidebarCardsList";
 import { getMergedConfig } from "@/contexts/configContext";
-import { getForYouCardCount } from "@/lib/domain-logic/sidebarCardsHelpers";
+import { sidebarCardsHelpers } from "@/lib/domain-logic/sidebarCardsHelpers";
 import analytics from "@/lib/utils/analytics";
 import * as helpers from "@/lib/utils/helpers";
 import { removeMarkdownFormatting } from "@/lib/utils/helpers";
@@ -94,6 +94,8 @@ describe("<SidebarCardsList />", () => {
 
     render(<SidebarCardsList {...sidebarCardsListProps} />);
   };
+
+  const { getForYouCardCount } = sidebarCardsHelpers;
 
   it("fires unhide_cards analytics when accordion is opened when displayFundings is true", () => {
     useMockBusiness({

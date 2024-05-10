@@ -1,15 +1,4 @@
-import {
-  filterCertifications,
-  filterFundings,
-  getForYouCardCount,
-  getHiddenCertifications,
-  getHiddenFundings,
-  getVisibleCertifications,
-  getVisibleFundings,
-  getVisibleSideBarCards,
-  sortCertifications,
-  sortFundings,
-} from "@/lib/domain-logic/sidebarCardsHelpers";
+import { sidebarCardsHelpers } from "@/lib/domain-logic/sidebarCardsHelpers";
 import { SMALL_BUSINESS_MAX_EMPLOYEE_COUNT } from "@/lib/domain-logic/smallBusinessEnterprise";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import {
@@ -28,6 +17,19 @@ import {
 } from "@businessnjgovnavigator/shared/test";
 
 describe("sidebarCard Helpers", () => {
+  const {
+    getVisibleSideBarCards,
+    getVisibleFundings,
+    sortFundings,
+    filterFundings,
+    getHiddenFundings,
+    getVisibleCertifications,
+    filterCertifications,
+    sortCertifications,
+    getHiddenCertifications,
+    getForYouCardCount,
+  } = sidebarCardsHelpers;
+
   describe("getHiddenCertifications", () => {
     it("returns an empty array when business is undefined", () => {
       const certifications = [generateCertification({})];

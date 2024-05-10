@@ -1,17 +1,6 @@
 import { SidebarCardsList } from "@/components/dashboard/SidebarCardsList";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import {
-  filterCertifications,
-  filterFundings,
-  getForYouCardCount,
-  getHiddenCertifications,
-  getHiddenFundings,
-  getVisibleCertifications,
-  getVisibleFundings,
-  getVisibleSideBarCards,
-  sortCertifications,
-  sortFundings,
-} from "@/lib/domain-logic/sidebarCardsHelpers";
+import { sidebarCardsHelpers } from "@/lib/domain-logic/sidebarCardsHelpers";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
 import { isRemoteWorkerOrSellerBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
@@ -25,6 +14,19 @@ interface Props {
 
 export const SidebarCardsContainer = (props: Props): ReactElement => {
   const { business } = useUserData();
+
+  const {
+    getVisibleSideBarCards,
+    getVisibleFundings,
+    sortFundings,
+    filterFundings,
+    getHiddenFundings,
+    getVisibleCertifications,
+    filterCertifications,
+    sortCertifications,
+    getHiddenCertifications,
+    getForYouCardCount,
+  } = sidebarCardsHelpers;
 
   const visibleSidebarCards = getVisibleSideBarCards(business, props.sidebarDisplayContent);
   const visibleSortedFundings = getVisibleFundings(
