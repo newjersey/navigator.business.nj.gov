@@ -1,6 +1,6 @@
 import { SidebarCardsList, SidebarCardsListProps } from "@/components/dashboard/SidebarCardsList";
 import { getMergedConfig } from "@/contexts/configContext";
-import { getForYouCardCount } from "@/lib/domain-logic/sidebarCardsHelpers";
+import SidebarCardsHelpers from "@/lib/domain-logic/sidebarCardsHelpers";
 import analytics from "@/lib/utils/analytics";
 import * as helpers from "@/lib/utils/helpers";
 import { removeMarkdownFormatting } from "@/lib/utils/helpers";
@@ -71,6 +71,8 @@ const operatingPhaseWithDisplayFundingAndDisplayCertificationAreFalse = Operatin
     return !op.displayFundings && !op.displayCertifications;
   }
 );
+
+const sidebarCardsHelpers = new SidebarCardsHelpers();
 
 describe("<SidebarCardsList />", () => {
   beforeEach(() => {
@@ -303,7 +305,7 @@ describe("<SidebarCardsList />", () => {
       renderComponent({
         fundings: [],
         certifications: [genericCertification],
-        cardCount: getForYouCardCount(mockBusiness, [genericCertification], []),
+        cardCount: sidebarCardsHelpers.getForYouCardCount(mockBusiness, [genericCertification], []),
       });
       const forYouCounter = screen.getByTestId("for-you-counter").textContent;
       expect(forYouCounter).toEqual("(1)");
@@ -321,7 +323,7 @@ describe("<SidebarCardsList />", () => {
       renderComponent({
         certifications: [],
         fundings: [genericFunding],
-        cardCount: getForYouCardCount(mockBusiness, [], [genericFunding]),
+        cardCount: sidebarCardsHelpers.getForYouCardCount(mockBusiness, [], [genericFunding]),
       });
       const forYouCounter = screen.getByTestId("for-you-counter").textContent;
       expect(forYouCounter).toEqual("(1)");
@@ -343,7 +345,11 @@ describe("<SidebarCardsList />", () => {
       renderComponent({
         fundings: [genericFunding],
         certifications: [genericCertification],
-        cardCount: getForYouCardCount(mockBusiness, [genericCertification], [genericFunding]),
+        cardCount: sidebarCardsHelpers.getForYouCardCount(
+          mockBusiness,
+          [genericCertification],
+          [genericFunding]
+        ),
       });
       const forYouCounter = screen.getByTestId("for-you-counter").textContent;
       expect(forYouCounter).toEqual("(2)");

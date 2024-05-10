@@ -1,17 +1,6 @@
 import { SidebarCardsList } from "@/components/dashboard/SidebarCardsList";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import {
-  filterCertifications,
-  filterFundings,
-  getForYouCardCount,
-  getHiddenCertifications,
-  getHiddenFundings,
-  getVisibleCertifications,
-  getVisibleFundings,
-  getVisibleSideBarCards,
-  sortCertifications,
-  sortFundings,
-} from "@/lib/domain-logic/sidebarCardsHelpers";
+import SidebarCardsHelpers from "@/lib/domain-logic/sidebarCardsHelpers";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
 import { isRemoteWorkerOrSellerBusiness } from "@businessnjgovnavigator/shared/domain-logic/businessPersonaHelpers";
@@ -25,19 +14,29 @@ interface Props {
 
 export const SidebarCardsContainer = (props: Props): ReactElement => {
   const { business } = useUserData();
+  const sidebarCardsHelpers = new SidebarCardsHelpers();
 
-  const visibleSidebarCards = getVisibleSideBarCards(business, props.sidebarDisplayContent);
-  const visibleSortedFundings = getVisibleFundings(
-    sortFundings(filterFundings({ fundings: props.fundings, business: business })),
+  const visibleSidebarCards = sidebarCardsHelpers.getVisibleSideBarCards(
+    business,
+    props.sidebarDisplayContent
+  );
+  const visibleSortedFundings = sidebarCardsHelpers.getVisibleFundings(
+    sidebarCardsHelpers.sortFundings(
+      sidebarCardsHelpers.filterFundings({ fundings: props.fundings, business: business })
+    ),
     business
   );
-  const hiddenSortedFundings = sortFundings(getHiddenFundings(business, props.fundings));
-  const visibleSortedCertifications = getVisibleCertifications(
-    sortCertifications(filterCertifications({ certifications: props.certifications, business: business })),
+  const hiddenSortedFundings = sidebarCardsHelpers.sortFundings(
+    sidebarCardsHelpers.getHiddenFundings(business, props.fundings)
+  );
+  const visibleSortedCertifications = sidebarCardsHelpers.getVisibleCertifications(
+    sidebarCardsHelpers.sortCertifications(
+      sidebarCardsHelpers.filterCertifications({ certifications: props.certifications, business: business })
+    ),
     business
   );
-  const hiddenSortedCertifications = sortCertifications(
-    getHiddenCertifications(business, props.certifications)
+  const hiddenSortedCertifications = sidebarCardsHelpers.sortCertifications(
+    sidebarCardsHelpers.getHiddenCertifications(business, props.certifications)
   );
 
   const remoteSellerWorker = isRemoteWorkerOrSellerBusiness(business);
@@ -54,7 +53,7 @@ export const SidebarCardsContainer = (props: Props): ReactElement => {
       displayCertificationsCards={
         LookupOperatingPhaseById(business?.profileData.operatingPhase).displayCertifications
       }
-      cardCount={getForYouCardCount(business, props.certifications, props.fundings)}
+      cardCount={sidebarCardsHelpers.getForYouCardCount(business, props.certifications, props.fundings)}
     />
   );
 };

@@ -1,15 +1,4 @@
-import {
-  filterCertifications,
-  filterFundings,
-  getForYouCardCount,
-  getHiddenCertifications,
-  getHiddenFundings,
-  getVisibleCertifications,
-  getVisibleFundings,
-  getVisibleSideBarCards,
-  sortCertifications,
-  sortFundings,
-} from "@/lib/domain-logic/sidebarCardsHelpers";
+import SidebarCardsHelpers from "@/lib/domain-logic/sidebarCardsHelpers";
 import { SMALL_BUSINESS_MAX_EMPLOYEE_COUNT } from "@/lib/domain-logic/smallBusinessEnterprise";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import {
@@ -27,11 +16,13 @@ import {
   generateProfileData,
 } from "@businessnjgovnavigator/shared/test";
 
+const sidebarCardsHelpers = new SidebarCardsHelpers();
+
 describe("sidebarCard Helpers", () => {
   describe("getHiddenCertifications", () => {
     it("returns an empty array when business is undefined", () => {
       const certifications = [generateCertification({})];
-      expect(getHiddenCertifications(undefined, certifications).length).toEqual(0);
+      expect(sidebarCardsHelpers.getHiddenCertifications(undefined, certifications).length).toEqual(0);
     });
 
     it("returns hidden certifications when there is a match", () => {
@@ -39,8 +30,8 @@ describe("sidebarCard Helpers", () => {
         preferences: generatePreferences({ hiddenCertificationIds: ["three"] }),
       });
       const certification = generateCertification({ id: "three" });
-      expect(getHiddenCertifications(business, [certification]).length).toEqual(1);
-      expect(getHiddenCertifications(business, [certification])).toEqual([certification]);
+      expect(sidebarCardsHelpers.getHiddenCertifications(business, [certification]).length).toEqual(1);
+      expect(sidebarCardsHelpers.getHiddenCertifications(business, [certification])).toEqual([certification]);
     });
   });
 
@@ -52,7 +43,7 @@ describe("sidebarCard Helpers", () => {
       const cert4 = generateCertification({ name: "acb" });
       const certs = [cert1, cert2, cert3, cert4];
 
-      const result = sortCertifications(certs);
+      const result = sidebarCardsHelpers.sortCertifications(certs);
       expect(result.length).toEqual(4);
       expect(result).toEqual([cert2, cert4, cert1, cert3]);
     });
@@ -62,7 +53,7 @@ describe("sidebarCard Helpers", () => {
       const cert2 = generateCertification({ name: "bca", isSbe: false });
       const certs = [cert1, cert2];
 
-      const result = sortCertifications(certs);
+      const result = sidebarCardsHelpers.sortCertifications(certs);
       expect(result.length).toEqual(2);
       expect(result).toEqual([cert1, cert2]);
     });
@@ -71,7 +62,7 @@ describe("sidebarCard Helpers", () => {
   describe("getVisibleCertifications", () => {
     it("returns an empty array when business is undefined", () => {
       const certifications = [generateCertification({})];
-      expect(getVisibleCertifications(certifications, undefined).length).toEqual(0);
+      expect(sidebarCardsHelpers.getVisibleCertifications(certifications, undefined).length).toEqual(0);
     });
 
     it("returns an array of all certifications when there is no matching id in hiddenCertificationIds", () => {
@@ -80,7 +71,7 @@ describe("sidebarCard Helpers", () => {
       });
       const certifications = [generateCertification({ id: "one" }), generateCertification({ id: "two" })];
 
-      expect(getVisibleCertifications(certifications, business)).toEqual(certifications);
+      expect(sidebarCardsHelpers.getVisibleCertifications(certifications, business)).toEqual(certifications);
     });
 
     it("returns an array of filtered certifications when there is a matching id in hiddenCertificationIds", () => {
@@ -91,7 +82,7 @@ describe("sidebarCard Helpers", () => {
       const cert1 = generateCertification({ id: "one" });
       const cert2 = generateCertification({ id: "two" });
 
-      expect(getVisibleCertifications([cert1, cert2], business)).toEqual([cert1]);
+      expect(sidebarCardsHelpers.getVisibleCertifications([cert1, cert2], business)).toEqual([cert1]);
     });
   });
 
@@ -104,7 +95,7 @@ describe("sidebarCard Helpers", () => {
       const funding5 = generateFunding({ name: "bca", status: "rolling application" });
       const fundings = [funding5, funding2, funding3, funding1, funding4];
 
-      const result = sortFundings(fundings);
+      const result = sidebarCardsHelpers.sortFundings(fundings);
       expect(result.length).toEqual(5);
       expect(result).toEqual([funding2, funding1, funding3, funding4, funding5]);
     });
@@ -122,7 +113,7 @@ describe("sidebarCard Helpers", () => {
       });
       const fundings = [funding1, funding2];
 
-      const result = sortFundings(fundings);
+      const result = sidebarCardsHelpers.sortFundings(fundings);
       expect(result.length).toEqual(2);
       expect(result).toEqual([funding1, funding2]);
     });
@@ -131,7 +122,7 @@ describe("sidebarCard Helpers", () => {
   describe("getVisibleSideBarCards", () => {
     it("should return an empty array if business is undefined", () => {
       const sidebarDisplayContent: Record<string, SidebarCardContent> = {};
-      const result = getVisibleSideBarCards(undefined, sidebarDisplayContent);
+      const result = sidebarCardsHelpers.getVisibleSideBarCards(undefined, sidebarDisplayContent);
       expect(result).toEqual([]);
     });
 
@@ -139,7 +130,7 @@ describe("sidebarCard Helpers", () => {
       const business = generateBusiness({
         preferences: generatePreferences({ visibleSidebarCards: ["some-id"] }),
       });
-      const result = getVisibleSideBarCards(business, undefined);
+      const result = sidebarCardsHelpers.getVisibleSideBarCards(business, undefined);
       expect(result).toEqual([]);
     });
 
@@ -151,7 +142,7 @@ describe("sidebarCard Helpers", () => {
         id: "some-id",
       });
 
-      const result = getVisibleSideBarCards(business, {
+      const result = sidebarCardsHelpers.getVisibleSideBarCards(business, {
         "some-id": sidebarCardContent,
       });
       expect(result).toEqual([sidebarCardContent]);
@@ -161,7 +152,7 @@ describe("sidebarCard Helpers", () => {
   describe("getVisibleFundings", () => {
     it("returns an empty array when business is undefined", () => {
       const fundings = [generateFunding({})];
-      expect(getVisibleFundings(fundings, undefined).length).toEqual(0);
+      expect(sidebarCardsHelpers.getVisibleFundings(fundings, undefined).length).toEqual(0);
     });
 
     it("returns an array of all fundings when there is no matching id in hiddenFundingIds", () => {
@@ -170,7 +161,7 @@ describe("sidebarCard Helpers", () => {
       });
       const fundings = [generateFunding({ id: "one" }), generateFunding({ id: "two" })];
 
-      expect(getVisibleFundings(fundings, business)).toEqual(fundings);
+      expect(sidebarCardsHelpers.getVisibleFundings(fundings, business)).toEqual(fundings);
     });
 
     it("returns an array of filtered fundings when there is a matching id in hiddenFundingIds", () => {
@@ -180,14 +171,14 @@ describe("sidebarCard Helpers", () => {
       const funding1 = generateFunding({ id: "one" });
       const funding2 = generateFunding({ id: "two" });
 
-      expect(getVisibleFundings([funding1, funding2], business)).toEqual([funding1]);
+      expect(sidebarCardsHelpers.getVisibleFundings([funding1, funding2], business)).toEqual([funding1]);
     });
   });
 
   describe("getHiddenFundings", () => {
     it("returns an empty array when business is undefined", () => {
       const fundings = [generateFunding({})];
-      expect(getHiddenFundings(undefined, fundings).length).toEqual(0);
+      expect(sidebarCardsHelpers.getHiddenFundings(undefined, fundings).length).toEqual(0);
     });
 
     it("returns hidden fundings when there is a match", () => {
@@ -195,8 +186,8 @@ describe("sidebarCard Helpers", () => {
         preferences: generatePreferences({ hiddenFundingIds: ["three"] }),
       });
       const funding = generateFunding({ id: "three" });
-      expect(getHiddenFundings(business, [funding]).length).toEqual(1);
-      expect(getHiddenFundings(business, [funding])).toEqual([funding]);
+      expect(sidebarCardsHelpers.getHiddenFundings(business, [funding]).length).toEqual(1);
+      expect(sidebarCardsHelpers.getHiddenFundings(business, [funding])).toEqual([funding]);
     });
   });
 
@@ -213,19 +204,19 @@ describe("sidebarCard Helpers", () => {
     it("returns a zero count when business is undefined", () => {
       const certification: Certification[] = [];
       const funding: Funding[] = [];
-      expect(getForYouCardCount(undefined, certification, funding)).toEqual(0);
+      expect(sidebarCardsHelpers.getForYouCardCount(undefined, certification, funding)).toEqual(0);
     });
 
     it("returns a count of zero when only business is defined", () => {
       const certification: Certification[] = [];
       const funding: Funding[] = [];
-      expect(getForYouCardCount(business, certification, funding)).toEqual(0);
+      expect(sidebarCardsHelpers.getForYouCardCount(business, certification, funding)).toEqual(0);
     });
 
     it("returns a count of one when business is defined and it has one certification", () => {
       const certification: Certification[] = [generateCertification({})];
       const funding: Funding[] = [];
-      expect(getForYouCardCount(business, certification, funding)).toEqual(1);
+      expect(sidebarCardsHelpers.getForYouCardCount(business, certification, funding)).toEqual(1);
     });
 
     it("returns a count of two when business is defined and it has one certification and one funding", () => {
@@ -241,20 +232,20 @@ describe("sidebarCard Helpers", () => {
           employeesRequired: ">200",
         }),
       ];
-      expect(getForYouCardCount(business, certification, funding)).toEqual(2);
+      expect(sidebarCardsHelpers.getForYouCardCount(business, certification, funding)).toEqual(2);
     });
   });
 
   describe("filterFundings", () => {
     it("returns an empty array when business is undefined", () => {
       const funding = generateFunding({});
-      const result = filterFundings({ fundings: [funding] });
+      const result = sidebarCardsHelpers.filterFundings({ fundings: [funding] });
       expect(result.length).toEqual(0);
     });
 
     it("returns an empty array when funding is undefined", () => {
       const business = generateBusiness({});
-      const result = filterFundings({ business });
+      const result = sidebarCardsHelpers.filterFundings({ business });
       expect(result.length).toEqual(0);
     });
 
@@ -293,7 +284,7 @@ describe("sidebarCard Helpers", () => {
         publishStageArchive: "Do Not Publish",
       });
       const fundings = [funding1, funding2, funding3, funding4, funding5];
-      const result = filterFundings({ fundings, business });
+      const result = sidebarCardsHelpers.filterFundings({ fundings, business });
       expect(result.length).toEqual(2);
       expect(result).toEqual(expect.arrayContaining([funding1, funding3]));
     });
@@ -334,7 +325,7 @@ describe("sidebarCard Helpers", () => {
       });
       const fundings = [funding1, funding2, funding3, funding4, funding5];
 
-      const result = filterFundings({ fundings, business });
+      const result = sidebarCardsHelpers.filterFundings({ fundings, business });
       expect(result.length).toEqual(3);
       expect(result).toEqual(expect.arrayContaining([funding1, funding2, funding3]));
     });
@@ -363,7 +354,7 @@ describe("sidebarCard Helpers", () => {
         });
         const fundings = [funding1, funding2, funding3, funding4, funding5, funding6, funding7];
 
-        const result = filterFundings({ fundings, business });
+        const result = sidebarCardsHelpers.filterFundings({ fundings, business });
         expect(result.length).toEqual(5);
         expect(result).toEqual(expect.arrayContaining([funding1, funding2, funding3, funding5, funding6]));
       });
@@ -391,7 +382,7 @@ describe("sidebarCard Helpers", () => {
         });
         const fundings = [funding1, funding2, funding3, funding4, funding5, funding6, funding7];
 
-        const result = filterFundings({ fundings, business });
+        const result = sidebarCardsHelpers.filterFundings({ fundings, business });
         expect(result.length).toEqual(6);
         expect(result).toEqual(
           expect.arrayContaining([funding1, funding2, funding3, funding4, funding5, funding6])
@@ -420,7 +411,7 @@ describe("sidebarCard Helpers", () => {
 
       const fundings = [funding1, funding2];
 
-      const result = filterFundings({ fundings, business });
+      const result = sidebarCardsHelpers.filterFundings({ fundings, business });
       expect(result.length).toEqual(1);
       expect(result).toEqual(expect.arrayContaining([funding2]));
     });
@@ -447,7 +438,7 @@ describe("sidebarCard Helpers", () => {
 
       const fundings = [funding1, funding2];
 
-      const result = filterFundings({ fundings, business });
+      const result = sidebarCardsHelpers.filterFundings({ fundings, business });
       expect(result.length).toEqual(2);
       expect(result).toEqual(expect.arrayContaining([funding1, funding2]));
     });
@@ -478,7 +469,7 @@ describe("sidebarCard Helpers", () => {
       });
       const fundings = [funding1, funding2, funding3];
 
-      const result = filterFundings({ fundings, business });
+      const result = sidebarCardsHelpers.filterFundings({ fundings, business });
       expect(result.length).toEqual(1);
       expect(result).toEqual(expect.arrayContaining([funding2]));
     });
@@ -502,7 +493,7 @@ describe("sidebarCard Helpers", () => {
         });
         const fundings = [funding1, funding2, funding3];
 
-        const result = filterFundings({ fundings, business });
+        const result = sidebarCardsHelpers.filterFundings({ fundings, business });
         expect(result.length).toEqual(1);
         expect(result).toEqual(expect.arrayContaining([funding1]));
       });
@@ -525,7 +516,7 @@ describe("sidebarCard Helpers", () => {
         });
         const fundings = [funding1, funding2, funding3];
 
-        const result = filterFundings({ fundings, business });
+        const result = sidebarCardsHelpers.filterFundings({ fundings, business });
         expect(result.length).toEqual(2);
         expect(result).toEqual(expect.arrayContaining([funding1, funding3]));
       });
@@ -551,7 +542,7 @@ describe("sidebarCard Helpers", () => {
         });
         const fundings = [funding1, funding2];
 
-        const result = filterFundings({ fundings, business });
+        const result = sidebarCardsHelpers.filterFundings({ fundings, business });
         expect(result.length).toEqual(2);
         expect(result).toEqual(expect.arrayContaining([funding1, funding2]));
       });
@@ -569,7 +560,7 @@ describe("sidebarCard Helpers", () => {
         const funding2 = generateFunding({ employeesRequired: "yes", status: "rolling application" });
         const fundings = [funding1, funding2];
 
-        const result = filterFundings({ fundings, business });
+        const result = sidebarCardsHelpers.filterFundings({ fundings, business });
         expect(result.length).toEqual(2);
         expect(result).toEqual(expect.arrayContaining([funding1, funding2]));
       });
@@ -598,7 +589,7 @@ describe("sidebarCard Helpers", () => {
       const funding5 = generateFunding({ sector: ["Construction"], status: "rolling application" });
       const fundings = [funding1, funding2, funding3, funding4, funding5];
 
-      const result = filterFundings({ fundings, business });
+      const result = sidebarCardsHelpers.filterFundings({ fundings, business });
       expect(result.length).toEqual(4);
       expect(result).toEqual(expect.arrayContaining([funding1, funding2, funding3]));
     });
@@ -628,7 +619,7 @@ describe("sidebarCard Helpers", () => {
           }),
         });
 
-        const result = filterFundings({ fundings: [funding8], business });
+        const result = sidebarCardsHelpers.filterFundings({ fundings: [funding8], business });
         expect(result.length).toEqual(1);
         expect(result).toEqual(expect.arrayContaining([funding8]));
       });
@@ -644,7 +635,7 @@ describe("sidebarCard Helpers", () => {
           }),
         });
 
-        const result = filterFundings({ fundings: listOfFundingTypes, business });
+        const result = sidebarCardsHelpers.filterFundings({ fundings: listOfFundingTypes, business });
         expect(result.length).toEqual(5);
         expect(result).toEqual(expect.arrayContaining([funding1, funding3, funding5, funding6, funding7]));
       });
@@ -660,7 +651,7 @@ describe("sidebarCard Helpers", () => {
           }),
         });
 
-        const result = filterFundings({ fundings: listOfFundingTypes, business });
+        const result = sidebarCardsHelpers.filterFundings({ fundings: listOfFundingTypes, business });
         expect(result.length).toEqual(6);
         expect(result).toEqual(
           expect.arrayContaining([funding1, funding2, funding3, funding4, funding6, funding7])
@@ -678,7 +669,7 @@ describe("sidebarCard Helpers", () => {
           }),
         });
 
-        const result = filterFundings({ fundings: listOfFundingTypes, business });
+        const result = sidebarCardsHelpers.filterFundings({ fundings: listOfFundingTypes, business });
         expect(result.length).toEqual(7);
         expect(result).toEqual(
           expect.arrayContaining([funding1, funding2, funding3, funding4, funding5, funding6, funding7])
@@ -700,7 +691,7 @@ describe("sidebarCard Helpers", () => {
           }),
         });
 
-        const result = filterFundings({ fundings: [funding], business });
+        const result = sidebarCardsHelpers.filterFundings({ fundings: [funding], business });
         expect(result.length).toEqual(1);
         expect(result).toEqual(expect.arrayContaining([funding]));
       });
@@ -718,7 +709,7 @@ describe("sidebarCard Helpers", () => {
           }),
         });
 
-        const result = filterFundings({ fundings: [funding], business });
+        const result = sidebarCardsHelpers.filterFundings({ fundings: [funding], business });
         expect(result.length).toEqual(1);
         expect(result).toEqual(expect.arrayContaining([funding]));
       });
@@ -736,7 +727,7 @@ describe("sidebarCard Helpers", () => {
           }),
         });
 
-        const result = filterFundings({ fundings: [funding], business });
+        const result = sidebarCardsHelpers.filterFundings({ fundings: [funding], business });
         expect(result.length).toEqual(0);
         expect(result).toEqual(expect.arrayContaining([]));
       });
@@ -755,7 +746,7 @@ describe("sidebarCard Helpers", () => {
         }),
       });
 
-      const result = filterFundings({ fundings: [funding], business });
+      const result = sidebarCardsHelpers.filterFundings({ fundings: [funding], business });
       expect(result.length).toEqual(1);
       expect(result).toEqual(expect.arrayContaining([funding]));
     });
@@ -773,13 +764,13 @@ describe("sidebarCard Helpers", () => {
         }),
       });
 
-      const result = filterFundings({ fundings: [funding], business });
+      const result = sidebarCardsHelpers.filterFundings({ fundings: [funding], business });
       expect(result.length).toEqual(1);
       expect(result).toEqual(expect.arrayContaining([funding]));
     });
   });
 
-  describe("filterCertifications", () => {
+  describe("sidebarCardsHelpers.filterCertifications", () => {
     const businessWithDefaultProfileData = (overrides: Partial<ProfileData>): Business => {
       return generateBusiness({
         profileData: generateProfileData({
@@ -792,13 +783,13 @@ describe("sidebarCard Helpers", () => {
 
     it("returns an empty array when business is undefined", () => {
       const cert1 = generateCertification({});
-      const results = filterCertifications({ certifications: [cert1] });
+      const results = sidebarCardsHelpers.filterCertifications({ certifications: [cert1] });
       expect(results.length).toEqual(0);
     });
 
     it("returns an empty array when certifications is undefined", () => {
       const business = businessWithDefaultProfileData({});
-      const results = filterCertifications({ business });
+      const results = sidebarCardsHelpers.filterCertifications({ business });
       expect(results.length).toEqual(0);
     });
 
@@ -812,7 +803,10 @@ describe("sidebarCard Helpers", () => {
         applicableOwnershipTypes: ["disabled-veteran", "veteran-owned"],
       });
       const cert5 = generateCertification({ applicableOwnershipTypes: [] });
-      const results = filterCertifications({ certifications: [cert1, cert2, cert3, cert4, cert5], business });
+      const results = sidebarCardsHelpers.filterCertifications({
+        certifications: [cert1, cert2, cert3, cert4, cert5],
+        business,
+      });
       expect(results.length).toEqual(3);
       expect(results).toEqual(expect.arrayContaining([cert1, cert4, cert5]));
     });
@@ -828,7 +822,10 @@ describe("sidebarCard Helpers", () => {
       });
       const cert5 = generateCertification({ applicableOwnershipTypes: [] });
 
-      const results = filterCertifications({ certifications: [cert1, cert2, cert3, cert4, cert5], business });
+      const results = sidebarCardsHelpers.filterCertifications({
+        certifications: [cert1, cert2, cert3, cert4, cert5],
+        business,
+      });
       expect(results.length).toEqual(3);
       expect(results).toEqual(expect.arrayContaining([cert3, cert4, cert5]));
     });
@@ -847,7 +844,7 @@ describe("sidebarCard Helpers", () => {
       const cert5 = generateCertification({ applicableOwnershipTypes: ["minority-owned", "veteran-owned"] });
       const cert6 = generateCertification({ applicableOwnershipTypes: [] });
 
-      const results = filterCertifications({
+      const results = sidebarCardsHelpers.filterCertifications({
         certifications: [cert1, cert2, cert3, cert4, cert5, cert6],
         business,
       });
@@ -866,7 +863,7 @@ describe("sidebarCard Helpers", () => {
       });
       const cert5 = generateCertification({ applicableOwnershipTypes: [] });
 
-      const results = filterCertifications({
+      const results = sidebarCardsHelpers.filterCertifications({
         certifications: [cert1, cert2, cert3, cert4, cert5],
         business,
       });
@@ -885,7 +882,7 @@ describe("sidebarCard Helpers", () => {
       });
       const cert5 = generateCertification({ applicableOwnershipTypes: [] });
 
-      const results = filterCertifications({
+      const results = sidebarCardsHelpers.filterCertifications({
         certifications: [cert1, cert2, cert3, cert4, cert5],
         business,
       });
@@ -899,7 +896,7 @@ describe("sidebarCard Helpers", () => {
       });
 
       const cert1 = generateCertification({ isSbe: true, applicableOwnershipTypes: [] });
-      const results = filterCertifications({
+      const results = sidebarCardsHelpers.filterCertifications({
         certifications: [cert1],
         business,
       });
@@ -911,7 +908,7 @@ describe("sidebarCard Helpers", () => {
       const business = businessWithDefaultProfileData({ existingEmployees: undefined });
 
       const cert1 = generateCertification({ isSbe: true, applicableOwnershipTypes: [] });
-      const results = filterCertifications({
+      const results = sidebarCardsHelpers.filterCertifications({
         certifications: [cert1],
         business,
       });
@@ -923,7 +920,7 @@ describe("sidebarCard Helpers", () => {
       const business = businessWithDefaultProfileData({});
 
       const cert1 = generateCertification({ isSbe: true });
-      const results = filterCertifications({
+      const results = sidebarCardsHelpers.filterCertifications({
         certifications: [cert1],
         business,
       });
@@ -955,7 +952,7 @@ describe("sidebarCard Helpers", () => {
       });
       const cert9 = generateCertification({ applicableOwnershipTypes: [] });
 
-      const results = filterCertifications({
+      const results = sidebarCardsHelpers.filterCertifications({
         certifications: [cert1, cert2, cert3, cert4, cert5, cert6, cert7, cert8, cert9],
         business,
       });

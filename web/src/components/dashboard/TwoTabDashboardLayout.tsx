@@ -1,7 +1,7 @@
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getForYouCardCount } from "@/lib/domain-logic/sidebarCardsHelpers";
+import SidebarCardsHelpers from "@/lib/domain-logic/sidebarCardsHelpers";
 import { Certification, Funding } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { TabContext, TabList, TabPanel } from "@mui/lab/";
@@ -24,6 +24,7 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
   const { business, updateQueue } = useUserData();
   const [tabIndex, setTabIndex] = React.useState(DASHBOARD_TAB);
   const { Config } = useConfig();
+  const sidebarCardsHelpers = new SidebarCardsHelpers();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number): void => {
     setTabIndex(Number(newValue));
@@ -98,7 +99,9 @@ export default function TwoTabDashboardLayout(props: Props): ReactElement {
                 label={
                   <div className="fdr fjc">
                     {templateEval(Config.dashboardDefaults.mobileSecondTabText, {
-                      count: getForYouCardCount(business, props.certifications, props.fundings).toString(),
+                      count: sidebarCardsHelpers
+                        .getForYouCardCount(business, props.certifications, props.fundings)
+                        .toString(),
                     })}
                     {getIndicator()}
                   </div>
