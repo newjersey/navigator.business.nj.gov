@@ -4469,7 +4469,7 @@ __metadata:
     "@types/jest": 29.5.12
     "@types/jsonwebtoken": 9.0.6
     "@types/lodash": 4.17.1
-    "@types/node": 20.12.8
+    "@types/node": 20.12.10
     "@types/simple-oauth2": 5.0.7
     "@types/supertest": 6.0.2
     "@types/webpack-node-externals": 3.0.4
@@ -4529,7 +4529,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
-    "@types/node": 20.12.8
+    "@types/node": 20.12.10
     cross-env: 7.0.3
     cspell: 8.8.0
     prettier: 2.8.8
@@ -4612,7 +4612,7 @@ __metadata:
     "@types/jsonwebtoken": 9.0.6
     "@types/lodash": 4.17.1
     "@types/mdast": 4.0.3
-    "@types/node": 20.12.8
+    "@types/node": 20.12.10
     "@types/react": 18.2.79
     "@types/react-dom": 18.2.25
     "@types/react-slick": ^0.23.10
@@ -4641,7 +4641,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 8.8.0
     css-loader: 6.11.0
-    cypress: 13.7.3
+    cypress: 13.8.1
     cypress-dotenv: 2.0.0
     cypress-wait-until: 3.0.1
     dayjs: 1.11.11
@@ -4746,7 +4746,7 @@ __metadata:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 29.6.3
     "@types/jest": 29.5.12
-    "@types/node": 20.12.8
+    "@types/node": 20.12.10
     "@types/uuid": 9.0.8
     "@typescript-eslint/eslint-plugin": 7.2.0
     "@typescript-eslint/parser": 7.2.0
@@ -4823,7 +4823,7 @@ __metadata:
     "@types/js-yaml": 4.0.9
     "@types/lodash": 4.17.1
     "@types/mdast": 4.0.3
-    "@types/node": 20.12.8
+    "@types/node": 20.12.10
     "@types/react": 18.2.79
     "@types/react-dom": 18.2.25
     "@types/react-slick": ^0.23.10
@@ -4843,7 +4843,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 8.8.0
     css-loader: 6.11.0
-    cypress: 13.7.3
+    cypress: 13.8.1
     cypress-dotenv: 2.0.0
     cypress-wait-until: 3.0.1
     dayjs: 1.11.11
@@ -11491,12 +11491,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:20.12.8, @types/node@npm:>=6":
-  version: 20.12.8
-  resolution: "@types/node@npm:20.12.8"
+"@types/node@npm:*, @types/node@npm:20.12.10, @types/node@npm:>=6":
+  version: 20.12.10
+  resolution: "@types/node@npm:20.12.10"
   dependencies:
     undici-types: ~5.26.4
-  checksum: 84d4876d95792a9567d2cc5a2c48db7028c397820e842cd65e2f848c23dd4b868b7131bda8eb66a1729d4944289070153d6180048de5bd155b35de421283c433
+  checksum: 8c35a349f494846c1f1db4e4f8b21e7fc7f6ee14d99a0998f38699f941652be0e2a236b11f13fe404a6fec9b9a82e0e39b80ca71dafc38c742b160cc498b56c3
   languageName: node
   linkType: hard
 
@@ -16375,9 +16375,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:13.7.3":
-  version: 13.7.3
-  resolution: "cypress@npm:13.7.3"
+"cypress@npm:13.8.1":
+  version: 13.8.1
+  resolution: "cypress@npm:13.8.1"
   dependencies:
     "@cypress/request": ^3.0.0
     "@cypress/xvfb": ^1.2.4
@@ -16423,7 +16423,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: 618db0839893d7633771437a0109225251fc4d3c1fcf54f35e727acc1422ec811907edab2721fa3d8bbc3017df5eb974e2b96cf78d70e40eb92465b3772fa5ca
+  checksum: 7abaf952d58485b4178bb044a2520ca029521b68dc002dce44d30ce1144df739f15178354e6386096e197ea0868a0b6ffab2f16777b65caf72216df8f4276b95
   languageName: node
   linkType: hard
 
