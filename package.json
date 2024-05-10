@@ -226,7 +226,7 @@
     "typescript": "5.4.5",
     "webpack": "5.91.0",
     "webpack-node-externals": "3.0.0",
-    "wiremock": "3.4.2",
+    "wiremock": "3.5.4",
     "yarn-workspace-sync-deps": "0.3.3"
   },
   "workspaces": {
