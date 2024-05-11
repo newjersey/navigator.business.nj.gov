@@ -4574,8 +4574,8 @@ __metadata:
     "@mui/system": 5.15.15
     "@mui/x-date-pickers": 5.0.20
     "@newjersey/njwds": 0.3.0
-    "@next/bundle-analyzer": 12.1.6
-    "@next/eslint-plugin-next": 12.1.6
+    "@next/bundle-analyzer": 12.3.4
+    "@next/eslint-plugin-next": 12.3.4
     "@semantic-release/changelog": 6.0.3
     "@semantic-release/git": 10.0.1
     "@serverless/typescript": 3.38.0
@@ -4795,8 +4795,8 @@ __metadata:
     "@mui/system": 5.15.15
     "@mui/x-date-pickers": 5.0.20
     "@newjersey/njwds": 0.3.0
-    "@next/bundle-analyzer": 12.1.6
-    "@next/eslint-plugin-next": 12.1.6
+    "@next/bundle-analyzer": 12.3.4
+    "@next/eslint-plugin-next": 12.3.4
     "@storybook/addon-actions": 7.6.19
     "@storybook/addon-designs": 7.0.9
     "@storybook/addon-docs": 7.6.19
@@ -7440,12 +7440,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:12.1.6":
-  version: 12.1.6
-  resolution: "@next/bundle-analyzer@npm:12.1.6"
+"@next/bundle-analyzer@npm:12.3.4":
+  version: 12.3.4
+  resolution: "@next/bundle-analyzer@npm:12.3.4"
   dependencies:
     webpack-bundle-analyzer: 4.3.0
-  checksum: cf37be49d45d706aea95df489656341bec64783e567067d15036b25330d7a69204987b2c402277f201b9bf943de588323b120fd8096bb3d6846a054bbb2cdc7e
+  checksum: 611cc07194a5cdd4aa0d1db5bae2de807cb2388d2c623f8d7ab8d581f8d01ec1510bd73ae3977334f7957278540ec0e2b2ebd48f9476235bd7b65055c560dc44
   languageName: node
   linkType: hard
 
@@ -7456,12 +7456,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:12.1.6":
-  version: 12.1.6
-  resolution: "@next/eslint-plugin-next@npm:12.1.6"
+"@next/eslint-plugin-next@npm:12.3.4":
+  version: 12.3.4
+  resolution: "@next/eslint-plugin-next@npm:12.3.4"
   dependencies:
     glob: 7.1.7
-  checksum: 33dcaf71f299d3c8a0744cad512369f92d7a355f3c0d57f2496e888e4242080c49226ec2c59ba2efac04b3a1df51c36019b853b4177df082ca4621a1713a2229
+  checksum: e4ae97062f3efe8f70904cf0da296ab501a2924423273352d01b18d8ffff1eb2e9a65c47dd6f9cfa0d696eada272486a3f519b2786918d0a9ab735b93f5ce4b3
   languageName: node
   linkType: hard
 
