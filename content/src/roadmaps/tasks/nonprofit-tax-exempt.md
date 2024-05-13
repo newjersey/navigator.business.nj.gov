@@ -32,6 +32,8 @@ Charitable, religious, and educational organizations that qualify for tax exempt
 
 Social welfare organizations that qualify for tax exemption under section 501(c)(4) of the IRS code should complete [tax exemption application Form 1024-A](https://www.irs.gov/forms-pubs/about-form-1024-a).
 
-> **Once completed, you will have:**
->
-> - A tax exemption confirmation letter from the IRS
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A tax exemption confirmation letter from the IRS
+
+:::

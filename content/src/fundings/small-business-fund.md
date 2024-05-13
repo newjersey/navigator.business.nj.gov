@@ -39,6 +39,8 @@ sidebarCardBodyText: The Sales and Use Tax Exemption Program allows qualified
 - Small businesses in operation for at least 1 full year and not-for-profits in operation for at least 3 full years
 - The business or nonprofit must not have more than $3M in total revenue
 
-> ### Benefits
->
-> Businesses receive financing up to $500,000.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Businesses receive financing up to $500,000.
+
+:::

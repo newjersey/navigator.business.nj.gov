@@ -41,9 +41,13 @@ webflowId: 5f772960a67e4a21735c0f36
 - Applicable fees paid
 
 :::infoAlert
+
 The application must be notarized. Once it's approved you'll be required to send in your certificate of formation.
+
 :::
 
-> **Once completed, you will have:**
->
-> - A private detective agency license
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A private detective agency license
+
+:::

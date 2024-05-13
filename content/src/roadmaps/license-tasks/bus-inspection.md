@@ -35,7 +35,9 @@ licenseCertificationClassification: ""
 - Form SS-14 Authorization to Issue School Bus License Plates (received upon successful vehicle inspection)
 - Copy of the commercial vehicle insurance policy for your vehicle
 
-> **Once completed, you will have:**
->
-> - Vehicle registration
-> - License plates
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- Vehicle registration
+- License plates
+
+:::

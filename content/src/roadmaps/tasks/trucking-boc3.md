@@ -33,7 +33,9 @@ summaryDescriptionMd: >-
 - Name, title, phone number, and signature of the person authorized to sign the form
 - Name and address of the processing agent for each state where you do business
 
-> **Once completed, you will have:**
->
-> - A designated process agent for your company
-> - A filed BOC-3 with the FMCSA
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A designated process agent for your company
+- A filed BOC-3 with the FMCSA
+
+:::

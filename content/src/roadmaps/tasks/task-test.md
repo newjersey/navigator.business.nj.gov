@@ -27,13 +27,19 @@ summaryDescriptionMd: >-
 - End this list with: "pay any associated fees"
 
 :::infoAlert
+
 this is how any "notes" are displayed.
+
 :::
 
-> **Once completed, you will have:**
->
-> - List the specific thing they will receive upon completion (permit, license, certificate, registration number, etc.)
->
-> **What if I don't complete this task?**
->
-> - Sometimes there are clear repercussions (fines, delays, penalties, etc.) Add them here.
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- List the specific thing they will receive upon completion (permit, license, certificate, registration number, etc.)
+
+:::
+
+:::callout{ showHeader="true" headerText="What if I don't complete this task?" showIcon="false" calloutType="conditional" }
+
+- Sometimes there are clear repercussions (fines, delays, penalties, etc.) Add them here.
+
+:::

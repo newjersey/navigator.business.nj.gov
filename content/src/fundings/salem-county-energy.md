@@ -33,13 +33,16 @@ sector:
   - clean-energy
 publishStageArchive: ""
 ---
+
 ## Eligibility
 
-* Manufacturing businesses in Salem County with at least 50 employees
-* At least 50% of employees must be involved in the manufacturing process
-* The energy and utility services must be consumed exclusively at the facility
-* Must not be in default with any other state program
+- Manufacturing businesses in Salem County with at least 50 employees
+- At least 50% of employees must be involved in the manufacturing process
+- The energy and utility services must be consumed exclusively at the facility
+- Must not be in default with any other state program
 
-> ### Benefits
->
-> Sales tax exemption for the purchase of electricity and natural gas for use at the manufacturing facility.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Sales tax exemption for the purchase of electricity and natural gas for use at the manufacturing facility.
+
+:::

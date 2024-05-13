@@ -61,10 +61,14 @@ webflowId: 640b84670945bdf4cfd63f2c
 - Warehouse insurance (Warehousemen Legal Liability Insurance)
 - Warehouse section in tariff
 
-> **Once completed, you will have**:
->
-> - A public movers license and/or a warehousemen license
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A public movers license and/or a warehousemen license
+
+:::
 
 :::infoAlert
+
 Your license must always be displayed at your business location.
+
 :::

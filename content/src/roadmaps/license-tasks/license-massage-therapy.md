@@ -29,6 +29,8 @@ webflowId: 5f77299ae10dec7f6a025080
 - Professional liability insurance in a minimum amount of $1M per occurrence and $3M aggregate per policy year
 - Applicable fees paid
 
-> **Once completed, you will have:**
->
-> - A massage therapy employer license number
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A massage therapy employer license number
+
+:::

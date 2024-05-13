@@ -40,9 +40,13 @@ A completed application by the management company’s `compliance officer|compli
 - Applicable fees paid
 
 :::infoAlert
+
 The application must be signed and notarized.
+
 :::
 
-> **Once completed you will have:**
->
-> - A 12-digit appraisal management company registration number
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A 12-digit appraisal management company registration number
+
+:::

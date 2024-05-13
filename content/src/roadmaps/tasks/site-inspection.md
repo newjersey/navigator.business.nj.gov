@@ -14,6 +14,8 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-> **Once you complete this task, you will have:**
->
-> - A cosmetology shop license
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A cosmetology shop license
+
+:::

@@ -42,10 +42,14 @@ The following charities are not required to register:
 - Any IRS correspondence received during the reported fiscal year
 - Applicable fees paid
 
-> **Once completed, you will have:**
->
-> - A charity registration number
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
 
-> **What if I don’t register my business as a charity?**
->
-> Your business will be considered an unregistered practice and unable to legally conduct fundraising activities.
+- A charity registration number
+
+:::
+
+:::callout{ showHeader="true" headerText="What if I don’t register my business as a charity?" showIcon="false" calloutType="conditional" }
+
+Your business will be considered an unregistered practice and unable to legally conduct fundraising activities.
+
+:::

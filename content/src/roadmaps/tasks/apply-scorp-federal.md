@@ -20,6 +20,8 @@ formName: "2553"
 - `Registered agent|registered-agent`
 - Shareholder information (name, address, social security number, signature, number of shares, and date acquired)
 
-> **Once completed, you will have:**
->
-> - A letter confirming your business's election to file taxes as an S Corp
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A letter confirming your business's election to file taxes as an S Corp
+
+:::

@@ -14,6 +14,8 @@ summaryDescriptionMd: >-
 - Accept payment directly from your customer
 - Bill `Medicaid|Medicaid` through contractor work with `Logisticare|logisticare` or a medical care facility, like a nursing home
 
-> **Once completed, you will know:**
->
-> - The best payment structure for your business. (If you plan to apply for Logisticare, we have instructions for this after you register and form your business)
+:::callout{ showHeader="true" headerText="Once completed, you will know:" showIcon="false" calloutType="conditional" }
+
+- The best payment structure for your business. (If you plan to apply for Logisticare, we have instructions for this after you register and form your business)
+
+:::

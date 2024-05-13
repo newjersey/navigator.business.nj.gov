@@ -45,6 +45,8 @@ summaryDescriptionMd: >-
 
 The program is open to all local governments, New Jersey state colleges or state universities, county colleges, public schools, and non-profit agencies exempt from federal taxation under section 501(c)(3) of the Internal Revenue Code that are located within the service territory of at least one of the state's regulated investor-owned utilities.
 
-> ### Benefit
->
-> The LGEA Program provides audits up to a value of $150,000 per program year, per applicant. For larger applicants, if the audit cost exceeds or is expected to exceed $150,000, there is a potential larger cost cap for applicants pursuing the Energy Savings Improvement Program and eligible healthcare entities, not to exceed $300,000.
+:::callout{ showHeader="true" headerText="Benefit" showIcon="false" calloutType="conditional" }
+
+The LGEA Program provides audits up to a value of $150,000 per program year, per applicant. For larger applicants, if the audit cost exceeds or is expected to exceed $150,000, there is a potential larger cost cap for applicants pursuing the Energy Savings Improvement Program and eligible healthcare entities, not to exceed $300,000.
+
+:::

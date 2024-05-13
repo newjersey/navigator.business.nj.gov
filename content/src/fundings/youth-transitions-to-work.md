@@ -43,6 +43,8 @@ sidebarCardBodyText: The mission of the Youth Transitions to Work (YTTW) program
 - Eligible businesses must be developing, new, or building upon existing Registered Apprenticeship programs
 - Any employer, trade associations, labor organization, or others with programs supporting the industries in which they work
 
-> ### Benefits
->
-> Eligible applicants can apply for funding up to $8,500 per participant for personnel expenses, costs associated with the pre-apprenticeship training, and other expenses such as development of marketing/promotional materials, costs to prepare articulation agreements with higher education institutions, curriculum development, support services, and aptitude testing.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Eligible applicants can apply for funding up to $8,500 per participant for personnel expenses, costs associated with the pre-apprenticeship training, and other expenses such as development of marketing/promotional materials, costs to prepare articulation agreements with higher education institutions, curriculum development, support services, and aptitude testing.
+
+:::

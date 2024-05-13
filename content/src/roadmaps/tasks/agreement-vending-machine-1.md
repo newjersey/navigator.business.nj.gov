@@ -17,6 +17,8 @@ summaryDescriptionMd: >-
 - **Agreement length:** Determine the ideal length of your agreement by analyzing a few `contract considerations|lease-considerations`
 - **Liability:** Determine who will be the responsible party for damages to the vending machine and under what circumstances
 
-> **Once completed, you will have:**
->
-> - A signed location agreement
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A signed location agreement
+
+:::

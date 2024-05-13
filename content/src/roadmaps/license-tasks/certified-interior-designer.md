@@ -40,6 +40,8 @@ In addition, you must be at least one of the following:
 - Supporting documentation (like police records) if you answered "Yes” to any questions of criminal history or moral character
 - Applicable fees paid
 
-> **Once completed, you will have:**
->
-> - Interior designer certification
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- Interior designer certification
+
+:::

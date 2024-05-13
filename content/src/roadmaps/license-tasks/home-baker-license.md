@@ -34,9 +34,13 @@ summaryDescriptionMd: >
 - Applicable fees paid
 
 :::infoAlert
+
 T﻿he application works best when completed online in the original PDF format.
+
 :::
 
-> **Once completed you will have:**
->
-> - A cottage food operator permit
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A cottage food operator permit
+
+:::

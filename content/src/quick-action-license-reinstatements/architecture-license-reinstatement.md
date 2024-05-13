@@ -38,7 +38,8 @@ callToActionLink: https://www.njconsumeraffairs.gov/arch/applications/Applicatio
 - A criminal background check, if applicable
 - List of licenses or certificates, past and present, if applicable
 
-:::callout{ header="" icon="false" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
 
 - The same license number
-  :::
+
+:::

@@ -44,6 +44,8 @@ sidebarCardBodyText: The Work Opportunity tax credit program is a Federal tax cr
 
 - The business must be registered in New Jersey
 
-> ### Benefits
->
-> The tax credit ranges from $2,400 to up to $9,600 per employee hired.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+The tax credit ranges from $2,400 to up to $9,600 per employee hired.
+
+:::

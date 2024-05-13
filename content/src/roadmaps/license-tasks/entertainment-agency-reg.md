@@ -39,6 +39,8 @@ licenseCertificationClassification: undefined
 - Criminal history of any officers, directors, or principals with at least 10% ownership interest, if applicable
 - Explanation of license suspension, denial, or revocation, if applicable
 
-> **Once completed, you will have**:
->
-> - An entertainment agency registration
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- An entertainment agency registration
+
+:::

@@ -37,7 +37,9 @@ sidebarCardBodyText: NJ Accelerate supports accelerator programs and their gradu
 
 - Businesses in accelerator programs and graduates of approved accelerators
 
-> ### Benefits
->
-> - 1:1 matching event sponsorship up to $100,000 for accelerator programs
-> - 1:1 matching loan funding up to $250,000 and rent support for up to 6 months for graduate companies
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+- 1:1 matching event sponsorship up to $100,000 for accelerator programs
+- 1:1 matching loan funding up to $250,000 and rent support for up to 6 months for graduate companies
+
+:::

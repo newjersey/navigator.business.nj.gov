@@ -25,6 +25,8 @@ summaryDescriptionMd: >-
 - Service area
 - Service hours
 
-> **Once completed, you will have:**
->
-> - Logisticare billing information for your transportation business
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- Logisticare billing information for your transportation business
+
+:::

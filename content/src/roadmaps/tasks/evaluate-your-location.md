@@ -26,6 +26,8 @@ summaryDescriptionMd: >-
 
 Remember that the process of acquiring commercial real estate can be complex, and regulations may vary depending on the location and property type. It's crucial to seek guidance from experienced professionals throughout the entire process to ensure a successful acquisition.
 
-> **Once completed, you will have:**
->
-> - A viable shop location and can start to plan for site renovations
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A viable shop location and can start to plan for site renovations
+
+:::

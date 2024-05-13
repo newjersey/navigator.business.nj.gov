@@ -52,8 +52,10 @@ sidebarCardBodyText: The DBE/SS Program provides training and technical assistan
 - Preference is given to New Jersey-based small and disadvantaged businesses certified under the [Federal Disadvantaged Business Enterprise (DBE) Program](https://www.transportation.gov/civil-rights/disadvantaged-business-enterprise)
 - [Emerging Small Business Enterprises (ESBEs) and Small Business Enterprises (SBEs)](https://www.nj.gov/transportation/business/civilrights/dbe.shtm) based in New Jersey and are actively seeking certification as a DBE also qualify
 
-> ### Benefits
->
-> - Intensive, instructor-led instruction in a number of business and technical topics
-> - Participating businesses complete a needs assessment and receive customized, one-on-one coaching and technical assistance tailored to their business needs
-> - Provided opportunities to expand professional networks and establish relationships with NJDOT's prime contractors through various programs and events
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+- Intensive, instructor-led instruction in a number of business and technical topics
+- Participating businesses complete a needs assessment and receive customized, one-on-one coaching and technical assistance tailored to their business needs
+- Provided opportunities to expand professional networks and establish relationships with NJDOT's prime contractors through various programs and events
+
+:::

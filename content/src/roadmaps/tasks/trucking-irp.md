@@ -20,6 +20,8 @@ summaryDescriptionMd: >-
 - Truck information, such as the Vehicle Identification Number (VIN#), fuel type, number of axles, and more
 - Mileage traveled in each state for the past year
 
-> **Once completed, you will have:**
->
-> - Registration credentials for each vehicle registered with the IRP
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- Registration credentials for each vehicle registered with the IRP
+
+:::

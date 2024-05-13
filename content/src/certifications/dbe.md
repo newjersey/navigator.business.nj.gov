@@ -36,6 +36,8 @@ A DBE must meet all of the following:
 - Requires submission of documents to support personal net worth (PNW) and DBE statutory cap
 - Applicant must participate in the on-site interview proceedings
 
-> **After you complete this, you will have:**
->
-> - A Disadvantaged Business Enterprise certificate
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A Disadvantaged Business Enterprise certificate
+
+:::

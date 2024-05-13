@@ -21,10 +21,14 @@ summaryDescriptionMd: >-
 5. [The Latin American Economic Development Association of Southern New Jersey](http://www.laeda.com/) offers support to all entrepreneurs
 6. [UCEDC](https://ucedc.com/) provides low cost or free classes and paid business mentoring services
 
-> **Once completed, you will have:**
->
-> - A business plan
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
 
-> **What if I don't make a business plan?**
->
-> Data shows that businesses with a plan are more successful. In addition, some state licenses may require you to have a business plan.
+- A business plan
+
+:::
+
+:::callout{ showHeader="true" headerText="What if I don't make a business plan?" showIcon="false" calloutType="conditional" }
+
+Data shows that businesses with a plan are more successful. In addition, some state licenses may require you to have a business plan.
+
+:::

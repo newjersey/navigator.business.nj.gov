@@ -40,6 +40,8 @@ summaryDescriptionMd: >
 - You will receive a notice via email to request forms from the State of New Jersey for criminal background checks and Child Abuse Record Information (CARI) checks for all staff and business representatives
 - You will be contacted by a representative from the Office of Licensing to arrange for an official site inspection
 
-> **Once completed, you will have:**
->
-> - A child care center license
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A child care center license
+
+:::

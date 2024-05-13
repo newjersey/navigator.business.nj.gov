@@ -42,7 +42,9 @@ sidebarCardBodyText: NJ Industry Partnerships can provide you with access to
 
 - Please speak to the regional coordinator listed on your industry's page by using the link in the title
 
-> ### Benefits
->
-> - Businesses can get help filling positions with skilled workers, developing career pathways to ensure a pipeline of future workers, creating ongoing training feedback loops with education, workforce, and economic development partners
-> - The program also gives businesses a powerful industry voice to impact policy
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+- Businesses can get help filling positions with skilled workers, developing career pathways to ensure a pipeline of future workers, creating ongoing training feedback loops with education, workforce, and economic development partners
+- The program also gives businesses a powerful industry voice to impact policy
+
+:::

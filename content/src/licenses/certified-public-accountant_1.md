@@ -5,13 +5,15 @@ summaryDescriptionMd: xxx
 callToActionLink: https://newjersey.mylicense.com/eGov/Login
 callToActionText: Renew My Accountant License
 ---
+
 :::infoAlert
 If you renew your license within the 30-day late renewal period, you will have to pay a late renewal fee charge.
 :::
 
 Your accountant license will expire every two years.
 
-- - -
+---
+
 ## Application Requirements
 
 - Satisfactory proof of 120 credits (120 hours) of Continuing Professional Education (CPE). A minimum of 20 credits (20 hours) in each year of the triennial period
@@ -20,6 +22,8 @@ Your accountant license will expire every two years.
 - Current mailing address
 - Applicable fees paid
 
-> **Once completed, you will have:**
->
-> - An updated copy of the renewed accountant license, valid for three years, which will be mailed to your mailing address on file
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- An updated copy of the renewed accountant license, valid for three years, which will be mailed to your mailing address on file
+
+:::

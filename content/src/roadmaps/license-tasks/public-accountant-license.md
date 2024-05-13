@@ -47,6 +47,8 @@ webflowId: 5f77296ee10dec7593024f1c
 - List of your acquired experience
 - Applicable fees paid
 
-> **Once completed, you will have:**
->
-> - A 12-digit CPA license number
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A 12-digit CPA license number
+
+:::

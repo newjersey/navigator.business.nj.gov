@@ -36,7 +36,9 @@ ${einInputComponent}
 
 ---
 
-> **Once completed, you will have:**
->
-> - An EIN
-> - An EIN Certificate (the document indicating your EIN)
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- An EIN
+- An EIN Certificate (the document indicating your EIN)
+
+:::

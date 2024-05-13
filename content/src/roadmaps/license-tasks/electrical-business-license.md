@@ -33,9 +33,13 @@ summaryDescriptionMd: >
 - List of all the names of business officers and anyone who owns 10% or more of stock in the business
 
 :::infoAlert
+
 The application needs to be notarized.
+
 :::
 
-> **Once completed, you will have:**
->
-> - An electrical contracting business permit
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- An electrical contracting business permit
+
+:::

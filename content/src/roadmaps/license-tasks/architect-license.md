@@ -69,6 +69,8 @@ If you are applying through NCARB, in addition to the above, you need to submit:
 
 - NCARB record
 
-> **Once completed, you will have:**
->
-> - An architect license
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- An architect license
+
+:::

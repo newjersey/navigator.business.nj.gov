@@ -19,6 +19,8 @@ Your pharmacy permit will expire every year.
 - Current business address
 - Pay the associated fees
 
-> **Once completed, you will have:**
->
-> - A renewed pharmacy permit valid for one year. It will be mailed to your business mailing address on file
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A renewed pharmacy permit valid for one year. It will be mailed to your business mailing address on file
+
+:::

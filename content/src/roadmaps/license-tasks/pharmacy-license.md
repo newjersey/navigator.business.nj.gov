@@ -39,7 +39,9 @@ webflowId: 640b8467a1b0444c01a311c3
 - \[]{pharmacist-signage} A picture of any exterior signage (if available at the time of your application)
 - \[]{pharmacist-inspection} A site inspection date
 
-> **Once completed, you will have:**
->
-> - A pharmacy permit
-> - A permit number
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A pharmacy permit
+- A permit number
+
+:::

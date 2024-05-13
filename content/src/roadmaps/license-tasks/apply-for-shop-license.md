@@ -31,6 +31,8 @@ summaryDescriptionMd: >
 - \[]{general-cert-occupancy} Certificate of occupancy or approval
 - \[]{cosmo-floor-plan} Floor plan
 
-> **Once completed, you will have:**
->
-> - A cosmetology license
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A cosmetology license
+
+:::

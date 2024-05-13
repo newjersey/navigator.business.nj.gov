@@ -29,9 +29,13 @@ If your Heating, Ventilating, Air Conditioning, and Refrigeration (HVACR) licens
 - Applicable fees paid
 
 :::infoAlert
+
 You need to pay the reinstatement fee and the renewal fee for one renewal period.
+
 :::
 
-> **Once completed, you will have:**
->
-> - The same license number
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- The same license number
+
+:::

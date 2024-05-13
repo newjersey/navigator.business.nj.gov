@@ -38,6 +38,8 @@ licenseCertificationClassification: undefined
 - Explanation of license suspension, denial, or revocation, if applicable
 - Sample contract(s) that are provided to job seekers, if applicable
 
-> **Once completed, you will have**:
->
-> - A career consultant agency registration
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A career consultant agency registration
+
+:::

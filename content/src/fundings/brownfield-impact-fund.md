@@ -39,6 +39,8 @@ publishStageArchive: Do Not Publish
 
 - Funds must be allocated to environmental cleanup (not assessment or investigation)
 
-> ### Benefits
->
-> Addresses funding gaps to make the remediation phase of a project financially viable for remedial actions and other eligible activities.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Addresses funding gaps to make the remediation phase of a project financially viable for remedial actions and other eligible activities.
+
+:::

@@ -30,12 +30,15 @@ county:
 sector: []
 publishStageArchive: null
 ---
+
 ## Eligibility
 
-* Small businesses and nonprofits in the process of making improvements to their business with a minimum expense of $5,000
-* Rent or own and operate from a facility
-* Meet SBA definition of a small business
+- Small businesses and nonprofits in the process of making improvements to their business with a minimum expense of $5,000
+- Rent or own and operate from a facility
+- Meet SBA definition of a small business
 
-> ### Benefits
->
-> Grants are equal to 50% of eligible total project costs up to $50,000.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Grants are equal to 50% of eligible total project costs up to $50,000.
+
+:::

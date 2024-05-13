@@ -16,34 +16,37 @@ callToActionLink: https://www.njconsumeraffairs.gov/OWM/Applications/Registratio
 callToActionText: Register My Commercial Weighing and Measuring Device
 industryId: ""
 ---
-- - -
+
+---
 
 ## Application Requirements
 
-* City and county of business
-* Business name
-* Representative name, address, and phone number for device location; completion of a separate application for each business location
-* Mailing address, if applicable
+- City and county of business
+- Business name
+- Representative name, address, and phone number for device location; completion of a separate application for each business location
+- Mailing address, if applicable
 
 Provide the following Information about the device:
 
-* Type*
-* ID number*
-* Model number
-* Serial number
-* Manufacturer/brand
-* Capacity, if applicable
-* Number of hoses (metering devices), if applicable
-* Amount due*
+- Type\*
+- ID number\*
+- Model number
+- Serial number
+- Manufacturer/brand
+- Capacity, if applicable
+- Number of hoses (metering devices), if applicable
+- Amount due\*
 
 \*See page 4 of the [Registration Application for Commercial Weighing and Measuring Devices](https://www.njconsumeraffairs.gov/OWM/Applications/Registration-Application-for-Commercial-Weighing-and-Measuring-Devices.pdf) to help you find this information.
 
+:::callout{ showHeader="true" headerText="What if I don't register my device?" showIcon="false" calloutType="conditional" }
 
+You may be subject to fines.
 
-:::callout{ header="What if I don't register my device?" icon="false" calloutType="conditional" } 
- You may be subject to fines.
 :::
 
-:::callout{ header="" icon="false" calloutType="conditional" } 
- A certificate of registration
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+A certificate of registration
+
 :::

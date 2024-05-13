@@ -50,6 +50,8 @@ sidebarCardBodyText: The Angel Match Program provides funding from the State Sma
 - No more than 100 total employees working for the company
 - Company must be registered in New Jersey and in good standing as certified by a valid NJ Tax Clearance Certificate
 
-> ### Benefits
->
-> `Convertible note|convertible-note` from $100,000 to $500,000 with 10-year maturity, 3% interest rate, and no payments for the first seven years.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+`Convertible note|convertible-note` from $100,000 to $500,000 with 10-year maturity, 3% interest rate, and no payments for the first seven years.
+
+:::

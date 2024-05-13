@@ -20,10 +20,14 @@ summaryDescriptionMd: >-
   Check out [resources for appointing trustees](https://business.nj.gov/pages/business-support#section-4).
 ---
 
-> **Once completed, you will have:**
->
-> - A board of trustees to govern and lead your nonprofit organization
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
 
-> **What if I don't write bylaws?**
->
-> A board of trustees is a legal requirement for nonprofits and is needed to apply for tax exempt status with the IRS.
+- A board of trustees to govern and lead your nonprofit organization
+
+:::
+
+:::callout{ showHeader="true" headerText="What if I don't write bylaws?" showIcon="false" calloutType="conditional" }
+
+A board of trustees is a legal requirement for nonprofits and is needed to apply for tax exempt status with the IRS.
+
+:::

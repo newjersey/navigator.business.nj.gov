@@ -35,6 +35,8 @@ summaryDescriptionMd: >
 - A criminal background check, and pass
 - Applicable fees paid
 
-> **Once approved, you will have:**
->
-> - A real estate broker license
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A real estate broker license
+
+:::

@@ -30,12 +30,15 @@ county:
 sector: []
 publishStageArchive: ""
 ---
+
 ## Eligibility
 
-* Must operate 75% of vehicle miles in NJ and register a vehicle in NJ
-* Purchase and register a new zero-emission class 2b- class 8 vehicle for commercial, industrial, or institutional use within 12 months of voucher reservation
-* Be in good standing with the NJ Department of Labor and NJ Department of Environmental Protection
+- Must operate 75% of vehicle miles in NJ and register a vehicle in NJ
+- Purchase and register a new zero-emission class 2b- class 8 vehicle for commercial, industrial, or institutional use within 12 months of voucher reservation
+- Be in good standing with the NJ Department of Labor and NJ Department of Environmental Protection
 
-> ### Benefits
->
-> Businesses can receive vouchers up to $100,000 plus bonuses.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Businesses can receive vouchers up to $100,000 plus bonuses.
+
+:::

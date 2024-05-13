@@ -21,9 +21,13 @@ summaryDescriptionMd: >-
 - A `process agent|process-agent` , already filed with Federal Motor Carrier Safety Administration (FMCSA)
 
 :::infoAlert
+
 The form can only be signed by an authorized official, like the owner, a partner, or an authorized representative.
+
 :::
 
-> **Once completed, you will have:**
->
-> - A USDoT number
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A USDoT number
+
+:::

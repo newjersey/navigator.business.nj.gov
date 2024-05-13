@@ -25,8 +25,10 @@ summaryDescriptionMd: >-
 
 You can schedule a free preliminary inspection with DCF's Office of Licensing at 1-877-667-9845.
 
-> **Once completed, you will have:**
->
-> - A Certificate of Occupancy
-> - A Life Hazard Use registration certificate
-> - Any permits your local government requires
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A Certificate of Occupancy
+- A Life Hazard Use registration certificate
+- Any permits your local government requires
+
+:::

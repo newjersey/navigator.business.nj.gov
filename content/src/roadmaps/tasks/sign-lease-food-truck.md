@@ -21,6 +21,8 @@ summaryDescriptionMd: >-
 - **Start date:** Identify a start date on your location that considers industry licenses, or other activities that are out of your control
 - **Contract length:** Determine your ideal lease length by analyzing a few `contract considerations|lease-considerations`
 
-> **Once completed, you will have:**
->
-> - A signed contract with the property owner
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A signed contract with the property owner
+
+:::

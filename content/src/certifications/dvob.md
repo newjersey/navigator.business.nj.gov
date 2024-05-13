@@ -28,6 +28,8 @@ A DVOB must either:
 - Federal Service-Disabled Veteran-Owned Business Determination Letter, Disability Award Letter, or Federal Service-Disabled Veteran Letter for Majority owner(s)
 - Proof of New Jersey residency for Majority owner(s)
 
-> **After you complete this, you will have:**
->
-> - A Disabled Veteran-Owned Business certificate
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A Disabled Veteran-Owned Business certificate
+
+:::

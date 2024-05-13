@@ -36,7 +36,9 @@ sidebarCardBodyText: The NJ Brownfields Assistance Center provides free guidance
 
 - The NJ Brownfield Assistance Center @ NJIT provides the tools and resources necessary to reclaim and redevelop brownfield sites
 
-> ### Benefits
->
-> - Free focused assistance to New Jersey county and local governments and nonprofits to develop brownfield redevelopment solutions
-> - Assistance to educate and engage communities in an effort to build capacity and a knowledge base on brownfield redevelopment
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+- Free focused assistance to New Jersey county and local governments and nonprofits to develop brownfield redevelopment solutions
+- Assistance to educate and engage communities in an effort to build capacity and a knowledge base on brownfield redevelopment
+
+:::

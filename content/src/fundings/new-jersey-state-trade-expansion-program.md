@@ -43,9 +43,11 @@ sidebarCardBodyText: The New Jersey Business Action Center's (NJBAC) State Trade
 - Manufacturing goods or producing services that contain at least 51% U.S. content
 - Registered with NJ START and have a [DUNS number](https://www.dnb.com/duns.html)
 
-> ### Benefits
->
-> - $15,000-$25,000 per company per grant cycle
-> - Website and e-commerce fees to attract international buyers, along with designs for international marketing media
-> - Participation in international trade missions, international and U.S. trade events, and Department of Commerce organized trade missions
-> - Fees for services provided by the U.S. Commercial Service (USCS)
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+- $15,000-$25,000 per company per grant cycle
+- Website and e-commerce fees to attract international buyers, along with designs for international marketing media
+- Participation in international trade missions, international and U.S. trade events, and Department of Commerce organized trade missions
+- Fees for services provided by the U.S. Commercial Service (USCS)
+
+:::

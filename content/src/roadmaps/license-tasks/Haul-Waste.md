@@ -32,7 +32,9 @@ webflowId: 5f77291fb0544f2f2d366147
 - Home improvement contractor official registration document (also known as a registration card)
 - Copy of your certificate of liability insurance
 
-> **Once completed, you will have:**
->
-> - A New Jersey Department of Environmental Protection (DEP) account number (if this is your first time working with DEP)
-> - A decal for all necessary vehicles (this is your vehicle's proof of registration and needs to be attached to your vehicle)
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A New Jersey Department of Environmental Protection (DEP) account number (if this is your first time working with DEP)
+- A decal for all necessary vehicles (this is your vehicle's proof of registration and needs to be attached to your vehicle)
+
+:::

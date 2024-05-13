@@ -42,6 +42,8 @@ sidebarCardBodyText: Edison Innovation VC Growth Fund provides funding to early-
 - This revenue amount must exceed the amount of the potential Edison Innovation Fund investment amount
 - The company must employ 75% of its W-2 employees in New Jersey or commit to growing 10 high-paying jobs over two years
 
-> ### Benefits
->
-> Up to $1M in growth capital matched with outside investors on a 1 to 1 basis.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Up to $1M in growth capital matched with outside investors on a 1 to 1 basis.
+
+:::

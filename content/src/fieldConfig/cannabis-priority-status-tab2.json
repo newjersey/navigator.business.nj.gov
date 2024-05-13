@@ -1,6 +1,7 @@
 {
   "cannabisPriorityStatus": {
     "noPriorityStatusText": "Based on your answers, you are not eligible for any priority status. You can mark this task as completed.",
+    "greenBoxHeadingText": "",
     "greenBoxVeteranText": "A Disabled Veteran-Owned Business certificate",
     "certificationButtonLink": "https://www.njportal.com/DOR/SBERegistry/",
     "backButtonText": "Back",
@@ -12,7 +13,6 @@
     "socialEquityHeaderText": "Social Equity Business (SEB)",
     "socialEquityButtonText": "Get My SEB Form",
     "veteranHeaderText": "Diversely-Owned Business: DVOB Certification",
-    "greenBoxBoldedText": "Once completed, you will have:",
     "certificationButtonText": "Apply for My Certification",
     "secondTabHeaderText": "Application Needs",
     "minorityOrWomenHeaderText": "Diversely-Owned Business: M/WBE Certification",

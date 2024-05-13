@@ -34,6 +34,8 @@ sidebarCardBodyText: The Brownfield Assessment Grant Program provides grant mone
 
 - Available for eligible brownfield sites in the state for the purpose of assessing known or suspected site contamination
 
-> ### Benefits
->
-> Free environmental site assessment to evaluate contamination at brownfield sites
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Free environmental site assessment to evaluate contamination at brownfield sites
+
+:::

@@ -10,13 +10,19 @@ export default {
       options: ["conditional", "informational", "warning", "note"],
     },
     {
-      name: "icon",
+      name: "showIcon",
       label: "Header Icon",
       widget: "boolean",
       default: false,
     },
     {
-      name: "header",
+      name: "showHeader",
+      label: "Show Header?",
+      widget: "boolean",
+      default: false,
+    },
+    {
+      name: "headerText",
       label: "Header Text",
       default: "",
       widget: "string",
@@ -33,20 +39,29 @@ export default {
   pattern: /:::callout[^:]+:::/g,
   collapsed: false,
   summary: "{{fields.title}}",
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  fromBlock: (match: any): { header: string; body: string; calloutType: string; icon: boolean } => {
+  fromBlock: (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    match: any
+  ): { showHeader: boolean; headerText: string; body: string; calloutType: string; showIcon: boolean } => {
     const string = match[0];
     const closedCurlyIndex = string.indexOf("}");
 
+    const showHeaderValue = string
+      .slice(string.indexOf("showHeader="), string.indexOf("headerText="))
+      .trim()
+      .split("=")[1]
+      .slice(1, -1)
+      .trim();
+
     const headerValue = string
-      .slice(string.indexOf("header="), string.indexOf("icon="))
+      .slice(string.indexOf("headerText="), string.indexOf("showIcon="))
       .trim()
       .split("=")[1]
       .slice(1, -1)
       .trim();
 
     const iconValue = string
-      .slice(string.indexOf("icon="), string.indexOf("calloutType="))
+      .slice(string.indexOf("showIcon="), string.indexOf("calloutType="))
       .trim()
       .split("=")[1]
       .slice(1, -1)
@@ -65,17 +80,30 @@ export default {
 
     return {
       calloutType: calloutTypeValue,
-      icon: iconValue,
-      header: headerValue,
+      showHeader: showHeaderValue,
+      showIcon: iconValue,
+      headerText: headerValue,
       body: bodyValue,
     };
   },
 
   // Function to create a text block from an instance of this component
-  toBlock: (obj: { header: string; body: string; calloutType: string; icon: boolean }): string => {
-    return `:::callout{ header="${obj.header}" icon="${obj.icon}" calloutType="${obj.calloutType}" } \n ${obj.body}\n:::`;
+  toBlock: (obj: {
+    showHeader: boolean;
+    headerText: string;
+    body: string;
+    calloutType: string;
+    showIcon: boolean;
+  }): string => {
+    return `:::callout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" showIcon="${obj.showIcon}" calloutType="${obj.calloutType}" } \n ${obj.body}\n:::`;
   },
-  toPreview: (obj: { header: string; body: string; calloutType: string; icon: boolean }): string => {
-    return `:::callout{ header="${obj.header}" icon="${obj.icon}" calloutType="${obj.calloutType}" } \n ${obj.body}\n:::`;
+  toPreview: (obj: {
+    showHeader: boolean;
+    headerText: string;
+    body: string;
+    calloutType: string;
+    showIcon: boolean;
+  }): string => {
+    return `:::callout{ showHeader="${obj.showHeader}" headerText="${obj.headerText}" showIcon="${obj.showIcon}" calloutType="${obj.calloutType}" } \n ${obj.body}\n:::`;
   },
 };
