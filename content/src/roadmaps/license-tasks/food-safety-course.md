@@ -18,6 +18,8 @@ webflowId: 648b6ec5ff1d0d38af2f5a2d
 licenseCertificationClassification: ""
 ---
 
-> **One completed, you will have:**
->
-> - A food safety management certificate
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A food safety management certificate
+
+:::

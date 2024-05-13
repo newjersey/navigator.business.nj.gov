@@ -55,9 +55,11 @@ Nonprofit, for profit, and home-based micro businesses interested in applying fo
 - Must have no more than 10 full-time employees (All employees must work in New Jersey as evidenced by WR-30 filings. There is no minimum employee number and sole proprietors are eligible.)
 - Must be formed at least six months prior to the date of application, as evidenced by the date of formation/incorporation
 
-> ### Benefits
->
-> - Future operating expenses, including working capital to fund future operating expenses (for example, payroll, rent, mortgage, utilities, taxes, and inventory)
-> - Future purchases of equipment as long as installation and construction costs do not exceed $1,999.99
->
-> _Home-based businesses cannot use loan proceeds for any residential costs (i.e. home mortgage/lease payments)._
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+- Future operating expenses, including working capital to fund future operating expenses (for example, payroll, rent, mortgage, utilities, taxes, and inventory)
+- Future purchases of equipment as long as installation and construction costs do not exceed $1,999.99
+
+_Home-based businesses cannot use loan proceeds for any residential costs (i.e. home mortgage/lease payments)._
+
+:::

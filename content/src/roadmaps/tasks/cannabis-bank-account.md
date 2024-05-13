@@ -21,6 +21,8 @@ summaryDescriptionMd: >-
 
 - `Business Registration Certificate|business-reg-certificate`
 
-> **After you complete this task, you will have:**
->
-> - A business bank account
+:::callout{ showHeader="true" headerText="After you complete this task, you will have:" showIcon="false" calloutType="conditional" }
+
+- A business bank account
+
+:::

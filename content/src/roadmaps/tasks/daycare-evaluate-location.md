@@ -14,6 +14,8 @@ summaryDescriptionMd: >-
 - **Demographics considerations:** Research where to locate your business to most effectively reach and serve your target customer base. Explore demographic tools to help you with your research
 - **Tenant improvements:** Identify any repairs, renovations, or construction the site may need. Make sure to consider federal requirements for `ADA compliance.|ada` Learn about other [site considerations](https://business.nj.gov/pages/leasing-tips) before signing your lease
 
-> **Once completed, you will have:**
->
-> - A viable location for your daycare
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A viable location for your daycare
+
+:::

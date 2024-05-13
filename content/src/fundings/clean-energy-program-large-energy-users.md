@@ -50,7 +50,9 @@ sidebarCardBodyText: The Large Energy Users Program (LEUP) encourages large comm
 - To qualify, eligible entities must have incurred at least $5M in total annual energy costs (on a pre-sales tax basis, aggregate of all buildings/sites) between July 1st, 2021 and June 30th, 2022 as billed by NJ investor-owned utilities and any applicable third-party suppliers associated with those accounts
 - Applicant accounts must be commercially-billed and pay the [Societal Benefits Charge (SBC)](https://www.njcleanenergy.com/files/file/FAQs_pdf_4.pdf)
 
-> ### Benefits
->
-> - There is an entity cap of $4M per fiscal year, and available funding vary by technology
-> - Eligible annual costs include standard costs associated with electric and/or gas delivery and supply (for example, generation, transmission, distribution, SBC, etc.) and not those that are unique to the customer (e.g., energy management charges)
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+- There is an entity cap of $4M per fiscal year, and available funding vary by technology
+- Eligible annual costs include standard costs associated with electric and/or gas delivery and supply (for example, generation, transmission, distribution, SBC, etc.) and not those that are unique to the customer (e.g., energy management charges)
+
+:::

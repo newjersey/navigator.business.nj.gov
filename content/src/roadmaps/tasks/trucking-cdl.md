@@ -31,7 +31,9 @@ agencyId: nj-motor-vehicle
 - Complete Entry-level Driver Training (ELDT), also known as Hazardous Materials Training, from an approved provider
 - Applicable fees paid
 
-> **Once completed, you will have:**
->
-> - Commercial Learner’s Permit (CLP) after passing the knowledge portion of the test
-> - CDL after passing the driving exam
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- Commercial Learner’s Permit (CLP) after passing the knowledge portion of the test
+- CDL after passing the driving exam
+
+:::

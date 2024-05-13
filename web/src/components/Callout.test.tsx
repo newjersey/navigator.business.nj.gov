@@ -16,13 +16,26 @@ const getHeaderText = (calloutType: CalloutTypes): string => {
 
 describe.each(calloutTypes)("<Callout />", (calloutType) => {
   it(`renders default header text for ${calloutType} callout`, () => {
-    render(<Callout calloutType={calloutType}>Some Body Text</Callout>);
+    render(
+      <Callout calloutType={calloutType} headerText="">
+        Some Body Text
+      </Callout>
+    );
     expect(screen.getByText(getHeaderText(calloutType))).toBeInTheDocument();
+  });
+
+  it(`does not render header text for ${calloutType} callout when showHeader is false`, () => {
+    render(
+      <Callout calloutType={calloutType} showHeader={false} headerText="">
+        Some Body Text
+      </Callout>
+    );
+    expect(screen.queryByText(getHeaderText(calloutType))).not.toBeInTheDocument();
   });
 
   it(`does not render default header text for ${calloutType} callout`, () => {
     render(
-      <Callout calloutType={calloutType} header="header text">
+      <Callout calloutType={calloutType} headerText="header text">
         Some Body Text
       </Callout>
     );
@@ -32,7 +45,7 @@ describe.each(calloutTypes)("<Callout />", (calloutType) => {
 
   it(`renders header icon for ${calloutType} callout`, () => {
     render(
-      <Callout calloutType={calloutType} icon>
+      <Callout calloutType={calloutType} showIcon={true}>
         Some Body Text
       </Callout>
     );
@@ -41,7 +54,7 @@ describe.each(calloutTypes)("<Callout />", (calloutType) => {
 
   it(`does not render header icon for ${calloutType} callout`, () => {
     render(
-      <Callout calloutType={calloutType} icon={false}>
+      <Callout calloutType={calloutType} showIcon={false}>
         Some Body Text
       </Callout>
     );

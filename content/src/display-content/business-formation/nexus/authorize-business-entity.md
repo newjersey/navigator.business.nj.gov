@@ -46,9 +46,11 @@ summaryDescriptionMd: >-
 - Business address (this may be a home address if you are a home-based business)
 - `Registered agent|registered-agent`
 
-> **Once completed, you will have:**
->
-> - `Entity ID|entity-id`
-> - `Certificate of Authorization|certificate-formation` ,
-> - `Certified copy|certified-copy` of Certificate of Authorization (optional with additional fee)
-> - `Certificate of Good Standing|good-standing` (optional with additional fee)
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- `Entity ID|entity-id`
+- `Certificate of Authorization|certificate-formation` ,
+- `Certified copy|certified-copy` of Certificate of Authorization (optional with additional fee)
+- `Certificate of Good Standing|good-standing` (optional with additional fee)
+
+:::

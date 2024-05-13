@@ -17,6 +17,8 @@ callToActionText: Renew My Architect License
 - Social Security number (SSN)
 - Applicable fees paid
 
-> **Once completed, you will have**:
->
-> - The same architecture license number
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- The same architecture license number
+
+:::

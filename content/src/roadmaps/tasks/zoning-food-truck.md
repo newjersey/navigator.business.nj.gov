@@ -15,6 +15,8 @@ summaryDescriptionMd: >-
   Zoning Office._**
 ---
 
-> **Once completed, you will have:**
->
-> - Zoning approval
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- Zoning approval
+
+:::

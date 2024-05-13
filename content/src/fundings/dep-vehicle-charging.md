@@ -40,9 +40,11 @@ sidebarCardBodyText: This program provides grants to offset the cost of purchasi
 - Public, workplaces, and multi-unit residential dwellings are eligible
 - Charging stations can't be placed in private residential dwellings
 
-> ### Benefits
->
-> Businesses and others can be reimbursed for 100% of the costs if on government property and 80% of costs if on private property, up to a maximum of:
->
-> - $750 per Level 1 charging port (provides 120 VAC up to 12 A)
-> - $4,000 per Level 2 charging port (provides 240 VAC from 12 A to 80 A)
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Businesses and others can be reimbursed for 100% of the costs if on government property and 80% of costs if on private property, up to a maximum of:
+
+- $750 per Level 1 charging port (provides 120 VAC up to 12 A)
+- $4,000 per Level 2 charging port (provides 240 VAC from 12 A to 80 A)
+
+:::

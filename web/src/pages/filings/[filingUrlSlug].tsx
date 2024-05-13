@@ -1,5 +1,6 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
-import { Content, ExternalLink, GreenBox } from "@/components/Content";
+import { Callout } from "@/components/Callout";
+import { Content, ExternalLink } from "@/components/Content";
 import { HorizontalLine } from "@/components/HorizontalLine";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { NavBar } from "@/components/navbar/NavBar";
@@ -92,7 +93,7 @@ export const FilingElement = (props: {
           props.filing.filingMethod ||
           props.filing.frequency ||
           props.filing.agency === "New Jersey Division of Taxation") && (
-          <GreenBox>
+          <Callout calloutType="conditional" showHeader={false}>
             {props.filing.taxRates && (
               <>
                 <span className="flex" data-testid="tax-rates">
@@ -138,7 +139,7 @@ export const FilingElement = (props: {
                 <Content className="margin-top-1">{`**${Config.filingDefaults.lateFilingsTitle}** &nbsp;&nbsp;${Config.filingDefaults.lateFilingsMarkdown}`}</Content>
               </span>
             )}
-          </GreenBox>
+          </Callout>
         )}
 
         {props.filing.additionalInfo ? (

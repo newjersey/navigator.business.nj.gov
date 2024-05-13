@@ -45,6 +45,8 @@ sidebarCardBodyText: Founders & Funders enables early-stage New Jersey technolog
 - Company must be registered to do business in New Jersey and located in New Jersey
 - Company is able to demonstrate some signs of financial or operational traction
 
-> ### Benefits
->
-> Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities.
+
+:::

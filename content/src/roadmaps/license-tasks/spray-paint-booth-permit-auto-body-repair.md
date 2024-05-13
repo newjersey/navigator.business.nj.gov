@@ -31,6 +31,8 @@ webflowId: 5f7728fa71c49e6e76913b7d
 - **Wetlands, existing flood hazard areas**: Related to potential disturbances caused by your business
 - **Right to know**: Due to hazardous material which may be stored on the site
 
-> **Once completed, you will have:**
->
-> - The permits required to operate a spray paint booth
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- The permits required to operate a spray paint booth
+
+:::

@@ -31,7 +31,9 @@ ${endLocationDependentSection}
 
 ---
 
-> **Once completed, you will have:**
->
-> - A liquor license
-> - A mercantile license
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A liquor license
+- A mercantile license
+
+:::

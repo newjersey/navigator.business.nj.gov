@@ -22,9 +22,11 @@ summaryDescriptionMd: >-
 - `Registered agent|registered-agent`
 - Credit card or E-check payment
 
-> **Once completed, you will have:**
->
-> - `Entity ID|entity-id`
-> - `Certificate of Formation,|certificate-formation` Incorporation, or Authorization as applicable
-> - `Certified copy|certified-copy` of Certificate of Formation, Incorporation, or Authorization (optional with additional fee)
-> - `Certificate of Good Standing|good-standing` (optional with additional fee)
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- `Entity ID|entity-id`
+- `Certificate of Formation,|certificate-formation` Incorporation, or Authorization as applicable
+- `Certified copy|certified-copy` of Certificate of Formation, Incorporation, or Authorization (optional with additional fee)
+- `Certificate of Good Standing|good-standing` (optional with additional fee)
+
+:::

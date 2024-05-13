@@ -42,6 +42,8 @@ sidebarCardBodyText: Work First NJ provides skills, training, and education
 
 - The business must be registered in New Jersey
 
-> ### Benefits
->
-> Businesses receive help finding employees by providing guidance on job matching or occupation-specific training programs.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Businesses receive help finding employees by providing guidance on job matching or occupation-specific training programs.
+
+:::

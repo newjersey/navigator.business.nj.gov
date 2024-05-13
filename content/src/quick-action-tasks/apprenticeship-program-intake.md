@@ -22,7 +22,9 @@ Connecting with the New Jersey DOL Office of Apprenticeship is the **first** ste
 You will then work with a representative from USDOL to develop and register your program.
 
 :::infoAlert
+
 You will need to have an approved apprenticeship program to register as a public works contractor.
+
 :::
 
 ---
@@ -34,7 +36,8 @@ You will need to have an approved apprenticeship program to register as a public
 - Primary contact information
 - List of occupations to be developed in the program
 
-:::callout{ header="" icon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
 
 - An email invite to schedule a virtual meeting for a needs assessment with the Office of Apprenticeship
-  :::
+
+:::

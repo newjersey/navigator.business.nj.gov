@@ -19,6 +19,8 @@ summaryDescriptionMd: >-
 - **Placement terms:** Determine if your business will offer a one-time placement or temporary placement services
 - **Fees:** Determine the party responsible for the cost of the placement fee
 
-> **Once completed, you will have:**
->
-> - Determined the requirements for your employment agency
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- Determined the requirements for your employment agency
+
+:::

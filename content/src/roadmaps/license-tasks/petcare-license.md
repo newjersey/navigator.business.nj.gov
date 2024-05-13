@@ -27,6 +27,8 @@ licenseCertificationClassification: ""
 - **Shelter:** House animals surrendered by their owners
 - **Pet Shop:** Display animals for sale but are not part of a kennel
 
-> **Once completed, you will have:**
->
-> - A license from your local government for every type of service provided by your business
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A license from your local government for every type of service provided by your business
+
+:::

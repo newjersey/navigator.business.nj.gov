@@ -17,7 +17,9 @@ summaryDescriptionMd: >-
 - **Zoning permits/approval:** Obtain zoning approval from your local zoning office
 - **Sign permits:** Obtain signage approvals from your local building/ construction department or zoning office
 
-> **Once completed, you will have:**
->
-> - Zoning approval
-> - Sign permits
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- Zoning approval
+- Sign permits
+
+:::

@@ -27,6 +27,8 @@ summaryDescriptionMd: "You must register as a consulting firm to match job seeke
 - Criminal history of any officers, directors, or principals with at least 10% ownership interest, if applicable
 - Explanation of license suspension, denial, or revocation, if applicable
 
-> **Once completed, you will have**:
->
-> - A consulting firm (headhunter) registration
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A consulting firm (headhunter) registration
+
+:::

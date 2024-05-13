@@ -14,6 +14,8 @@ summaryDescriptionMd: >-
   submit your formation application.
 ---
 
-> **What if I don’t submit this document?**
->
-> Your application will be expunged and your filing fees forfeited.
+:::callout{ showHeader="true" headerText="What if I don’t submit this document?" showIcon="false" calloutType="conditional" }
+
+Your application will be expunged and your filing fees forfeited.
+
+:::

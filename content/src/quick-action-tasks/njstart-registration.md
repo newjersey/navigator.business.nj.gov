@@ -39,11 +39,14 @@ callToActionLink: https://www.njstart.gov/bso/
 - Tax ID certification statement
 - `NIGP commodity code|nigp-commodity-code`
 
-:::callout{ header="" icon="true" calloutType="conditional" }
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
 
 - A confirmation email
-  :::
+
+:::
 
 :::infoAlert
+
 On the [Vendor](https://www.nj.gov/treasury/purchase/vendor.shtml) page, click on the Vendors Quick Reference Guides tab. Next,  click on the Registration Guide for more information about registering.
+
 :::

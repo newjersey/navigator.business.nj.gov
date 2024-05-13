@@ -42,6 +42,8 @@ sidebarCardBodyText: The Electric Vehicle (EV) Tourism Program is offering incen
 - Eligible applicant include, but are not limited to those situated in locations which offer amusement, arts, culture, attractions, dining, entertainment, history, outdoor recreation, overnight lodging, and shopping
 - The scoring rubric used by the program can be found on the [New Jersey Clean Energy Program website](https://njcleanenergy.com/ev)
 
-> ### Benefits
->
-> Awardees will receive up to $5,000 for an eligible L2 charger, up to the cost of the charger; and up to $50,000 for a Direct Current Fast Charger, up to the cost of the charger.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Awardees will receive up to $5,000 for an eligible L2 charger, up to the cost of the charger; and up to $50,000 for a Direct Current Fast Charger, up to the cost of the charger.
+
+:::

@@ -41,6 +41,8 @@ sidebarCardBodyText: This program is for businesses considering hiring employees
 
 - The business must be registered in New Jersey
 
-> ### Benefits
->
-> Up to $25,000 federal bond insuring employers against theft, forgery, larceny, or embezzlement for a term of 6 months.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Up to $25,000 federal bond insuring employers against theft, forgery, larceny, or embezzlement for a term of 6 months.
+
+:::

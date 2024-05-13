@@ -42,6 +42,8 @@ licenseCertificationClassification: undefined
 - Criminal history of any officers, directors, or principals with at least 10% ownership interest, if applicable
 - Explanation of license suspension, denial, or revocation, if applicable
 
-> **Once completed, you will have**:
->
-> - A career counseling firm registration
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A career counseling firm registration
+
+:::

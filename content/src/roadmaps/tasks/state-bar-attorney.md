@@ -29,6 +29,8 @@ summaryDescriptionMd: >-
 - Certificate of Good Standing from any states where you’ve been admitted to practice law, if applicable
 - Applicable fees paid
 
-> **Once approved, you will have:**
->
-> - The State Bar will notify you via email with instructions on when to attend the ceremony to swear the Oath of Admission and sign the attorney’s roll.
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- The State Bar will notify you via email with instructions on when to attend the ceremony to swear the Oath of Admission and sign the attorney’s roll.
+
+:::

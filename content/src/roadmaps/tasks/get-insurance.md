@@ -21,6 +21,8 @@ summaryDescriptionMd: >-
 - **Professional liability insurance:** Protect your business from liability if you offer professional advice or medical services
 - **Motor vehicle insurance:** If your company will own or use any vehicles, consider purchasing motor vehicle insurance
 
-> **Once completed, you will have:**
->
-> - A Certificate of Insurance
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A Certificate of Insurance
+
+:::

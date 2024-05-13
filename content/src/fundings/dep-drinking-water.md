@@ -43,6 +43,8 @@ Must be a nonprofit, non-community water systems in New Jersey and use the funds
 - Rehabilitation of existing water treatment facilities, water mains, pump stations, water storage facilities, or new water storage facilities to maintain compliance with the SDWA and wells
 - Allowances for planning and design are also available
 
-> ### Benefits
->
-> Provides short-term loans at 0.337% Interest to replace and update drinking water infrastructure.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Provides short-term loans at 0.337% Interest to replace and update drinking water infrastructure.
+
+:::

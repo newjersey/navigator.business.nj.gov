@@ -23,6 +23,8 @@ Now that you have employees, you must comply with New Jersey's labor laws, inclu
 - Required workplace notices
 - Child labor
 
-> **What if I don't follow New Jersey labor laws?**
->
-> There may be civil or criminal penalties.
+:::callout{ showHeader="true" headerText="What if I don't follow New Jersey labor laws?" showIcon="false" calloutType="conditional" }
+
+There may be civil or criminal penalties.
+
+:::

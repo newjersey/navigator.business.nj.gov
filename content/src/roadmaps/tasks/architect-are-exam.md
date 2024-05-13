@@ -21,8 +21,10 @@ summaryDescriptionMd: >-
 
 - Applicable fees paid
 
-> **Once completed, you will have:**
->
-> - A license approval letter
-> - A registration wall certificate
-> - A seal press form
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A license approval letter
+- A registration wall certificate
+- A seal press form
+
+:::

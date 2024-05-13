@@ -28,6 +28,8 @@ summaryDescriptionMd: "You must register as a temporary help service firm to pla
 - Criminal history of any officers, directors, or principals with at least 10% ownership interest, if applicable
 - Explanation of license suspension, denial, or revocation, if applicable
 
-> **Once completed, you will have**:
->
-> - A temporary help service registration
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A temporary help service registration
+
+:::

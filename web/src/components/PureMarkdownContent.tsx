@@ -42,8 +42,9 @@ const customRemarkPlugin: Plugin = () => {
             break;
           case "callout":
             data.hProperties = {
-              header: node.attributes.header.length > 0 ? node.attributes.header : undefined,
-              icon: node.attributes.icon === "true",
+              headerText: node.attributes.headerText?.length > 0 ? node.attributes.headerText : undefined,
+              showHeader: node.attributes.showHeader === "true",
+              showIcon: node.attributes.showIcon === "true",
               calloutType: node.attributes.calloutType,
             };
             break;

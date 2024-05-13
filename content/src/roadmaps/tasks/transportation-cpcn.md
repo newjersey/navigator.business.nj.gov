@@ -10,6 +10,7 @@ callToActionLink: https://www.nj.gov/mvc/pdf/business/cpcn.pdf
 issuingAgency: New Jersey Motor Vehicle Commission
 callToActionText: File My Certificate
 ---
+
 ## Application Requirements
 
 - Business name
@@ -18,6 +19,8 @@ callToActionText: File My Certificate
 - `Registered agent|registered-agent` name and contact information
 - Vehicle information (year, make, model, etc.)
 
-> **Once completed, you will have:**
->
-> - A Certificate of Public Convenience and Necessity mailed to you
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A Certificate of Public Convenience and Necessity mailed to you
+
+:::

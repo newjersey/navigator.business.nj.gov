@@ -35,25 +35,28 @@ descriptionMd: The New Jersey STEM Loan Redemption Program helps qualifying New
   Jersey employees in high-growth occupations within science, technology,
   engineering, and mathematics (STEM) fields pay off their student loans.
 ---
+
 ## Eligibility
 
 Employers:
 
-* Be registered to do business in New Jersey
-* Provide a matching $1,000 payment per participating employee for each year (up to four years) the employee works at their business and remains in the program
-* Certify that the participating employees work in an approved occupation each year
+- Be registered to do business in New Jersey
+- Provide a matching $1,000 payment per participating employee for each year (up to four years) the employee works at their business and remains in the program
+- Certify that the participating employees work in an approved occupation each year
 
-Employees: 
+Employees:
 
-* Be residents of NJ and maintain domicile in the State during their participation in the program
-* Have earned a degree from an approved STEM degree program from an institution of higher education in NJ
-* Have graduated on or after December 14, 2018 
-* Have worked full-time in an approved high-growth STEM occupation at a NJ employer for a minimum of four years before applying for the program
-* If approved, must work full-time for an additional one to four years in an approved high-growth STEM occupation at a NJ employer in the program
+- Be residents of NJ and maintain domicile in the State during their participation in the program
+- Have earned a degree from an approved STEM degree program from an institution of higher education in NJ
+- Have graduated on or after December 14, 2018
+- Have worked full-time in an approved high-growth STEM occupation at a NJ employer for a minimum of four years before applying for the program
+- If approved, must work full-time for an additional one to four years in an approved high-growth STEM occupation at a NJ employer in the program
 
 Eligible occupations are listed in the [Higher Education Student Assistance Authority (HESAA) eligible high-growth STEM occupations list](https://www.hesaa.org/Documents/LoanRedemptionPrograms/STEMOccupations.pdf)
 
-> ### Benefits
->
-> * Up to $8,000 in student loan redemption while only contributing half that amount
-> * HESAA matches each $1,000 contribution from participating employers for up to four years
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+- Up to $8,000 in student loan redemption while only contributing half that amount
+- HESAA matches each $1,000 contribution from participating employers for up to four years
+
+:::

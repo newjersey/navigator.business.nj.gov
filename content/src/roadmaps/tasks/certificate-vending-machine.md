@@ -12,6 +12,8 @@ summaryDescriptionMd: >-
   sell fresh food, such as a salad, those are more likely to have a requirement.
 ---
 
-> **Once completed, you will have:**
->
-> - A health certificate from your local department of health (if needed)
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A health certificate from your local department of health (if needed)
+
+:::

@@ -46,6 +46,8 @@ sidebarCardBodyText: The New Jersey Angel Investor Tax Credit Program establishe
 - Fewer than 225 full-time employees, 75% of whom must work in NJ
 - Commercializes one or more of the following eligible technologies in the State: Advanced Computing, Advanced Materials, Biotechnology, Electronic Devices, Information Technology, Life Sciences, Medical Devices, Mobile Communications, Renewable Energy Technology, and Carbon Footprint Reduction Technology
 
-> ### Benefits
->
-> Tax credits equal to 20% of a qualified investment with a potential 5% bonus.
+:::callout{ showHeader="true" headerText="Benefits" showIcon="false" calloutType="conditional" }
+
+Tax credits equal to 20% of a qualified investment with a potential 5% bonus.
+
+:::

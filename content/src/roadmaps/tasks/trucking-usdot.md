@@ -30,7 +30,9 @@ The form can only be signed by an authorized official, like the owner, a partner
 
 :::
 
-> **Once approved, you will have:**
->
-> - A USDoT registration number
-> - Authority to Operate (known as an MC number)
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
+
+- A USDoT registration number
+- Authority to Operate (known as an MC number)
+
+:::

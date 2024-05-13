@@ -19,10 +19,14 @@ summaryDescriptionMd: >-
 - An existing S corp designation with the IRS
 - `Entity ID|entity-id`
 
-> **Once completed, you will have**
->
-> - A letter confirming your S corp status with the State of New Jersey
+:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
 
-> **What if I don't complete this form?**
->
-> If you do not file for an S corp designation with the State but choose to pay taxes under this structure, you could be liable for fees associated with improperly filing taxes.
+- A letter confirming your S corp status with the State of New Jersey
+
+:::
+
+:::callout{ showHeader="true" headerText="What if I don't complete this form?" showIcon="false" calloutType="conditional" }
+
+If you do not file for an S corp designation with the State but choose to pay taxes under this structure, you could be liable for fees associated with improperly filing taxes.
+
+:::

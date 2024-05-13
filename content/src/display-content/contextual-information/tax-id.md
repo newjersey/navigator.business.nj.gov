@@ -10,7 +10,9 @@ Your NJ Tax ID number will be a 12-digit number, the first 9-digits are often th
 If you completed the NJ-Reg form online, you will find your NJ Tax ID number on the registration confirmation after registering for state taxes and employer purposes.
 
 :::infoAlert
+
 The New Jersey Treasury Department has updated its terminology. You may find "NJ Taxpayer ID" instead of Filer ID in your documentation.
+
 :::
 
 ![](/img/tax-id-email.jpg)
