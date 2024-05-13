@@ -42,8 +42,8 @@ export const ReviewRegisteredAgent = (): ReactElement => {
             />
           )}
           <ReviewLineItem
-            label={Config.formation.fields.agentOfficeAddressMunicipality.label}
-            value={state.formationFormData.agentOfficeAddressMunicipality?.name}
+            label={Config.formation.fields.agentOfficeAddressCity.label}
+            value={state.formationFormData.agentOfficeAddressCity}
           />
           <ReviewLineItem label={Config.formation.fields.agentOfficeAddressState.label} value={"NJ"} />
           <ReviewLineItem

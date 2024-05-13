@@ -53,7 +53,7 @@ describe("Formation - Registered Agent Field", () => {
         agentEmail: "agent@email.com",
         agentOfficeAddressLine1: "123 agent address",
         agentOfficeAddressLine2: "agent suite 201",
-        agentOfficeAddressMunicipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
+        agentOfficeAddressCity: "Newark",
         agentOfficeAddressZipCode: "99887",
       }
     );
@@ -64,7 +64,7 @@ describe("Formation - Registered Agent Field", () => {
     expect(page.getInputElementByLabel("Agent email").value).toEqual("agent@email.com");
     expect(page.getInputElementByLabel("Agent office address line1").value).toEqual("123 agent address");
     expect(page.getInputElementByLabel("Agent office address line2").value).toEqual("agent suite 201");
-    expect(page.getInputElementByLabel("Agent office address municipality").value).toEqual("Newark");
+    expect(page.getInputElementByLabel("Agent office address city").value).toEqual("Newark");
     expect(page.getInputElementByLabel("Agent office address zip code").value).toEqual("99887");
   });
 
@@ -151,10 +151,8 @@ describe("Formation - Registered Agent Field", () => {
         agentNumberOrManual: "MANUAL_ENTRY",
         agentOfficeAddressLine1: "Old Add 123",
         agentOfficeAddressLine2: "Old Add 456",
-        agentOfficeAddressMunicipality: generateMunicipality({
-          name: "Old Test City",
-          displayName: "Old Test City",
-        }),
+        agentOfficeAddressCity: "Newark",
+
         agentOfficeAddressZipCode: "07001",
         addressLine1: "New Add 123",
         addressLine2: "New Add 456",
@@ -167,22 +165,22 @@ describe("Formation - Registered Agent Field", () => {
 
     expect(page.getInputElementByLabel("Agent office address line1").value).toEqual("Old Add 123");
     expect(page.getInputElementByLabel("Agent office address line2").value).toEqual("Old Add 456");
-    expect(page.getInputElementByLabel("Agent office address municipality").value).toEqual("Old Test City");
+    expect(page.getInputElementByLabel("Agent office address city").value).toEqual("Newark");
     expect(page.getInputElementByLabel("Agent office address zip code").value).toEqual("07001");
     expect(page.getInputElementByLabel("Agent office address line1").disabled).toEqual(false);
     expect(page.getInputElementByLabel("Agent office address line2").disabled).toEqual(false);
-    expect(page.getInputElementByLabel("Agent office address municipality").disabled).toEqual(false);
+    expect(page.getInputElementByLabel("Agent office address city").disabled).toEqual(false);
     expect(page.getInputElementByLabel("Agent office address zip code").disabled).toEqual(false);
 
     page.selectCheckbox(Config.formation.registeredAgent.sameAddressCheckbox);
 
     expect(page.getInputElementByLabel("Agent office address line1").value).toEqual("New Add 123");
     expect(page.getInputElementByLabel("Agent office address line2").value).toEqual("New Add 456");
-    expect(page.getInputElementByLabel("Agent office address municipality").value).toEqual("New Test City");
+    expect(page.getInputElementByLabel("Agent office address city").value).toEqual("New Test City");
     expect(page.getInputElementByLabel("Agent office address zip code").value).toEqual("07002");
     expect(page.getInputElementByLabel("Agent office address line1").disabled).toEqual(true);
     expect(page.getInputElementByLabel("Agent office address line2").disabled).toEqual(true);
-    expect(page.getInputElementByLabel("Agent office address municipality").disabled).toEqual(true);
+    expect(page.getInputElementByLabel("Agent office address city").disabled).toEqual(true);
     expect(page.getInputElementByLabel("Agent office address zip code").disabled).toEqual(true);
   });
 
@@ -207,7 +205,7 @@ describe("Formation - Registered Agent Field", () => {
     expect(page.getInputElementByLabel("Agent office address zip code").value).toEqual("");
     expect(page.getInputElementByLabel("Agent office address line1").disabled).toEqual(true);
     expect(page.getInputElementByLabel("Agent office address line2").disabled).toEqual(true);
-    expect(page.getInputElementByLabel("Agent office address municipality").disabled).toEqual(true);
+    expect(page.getInputElementByLabel("Agent office address city").disabled).toEqual(true);
     expect(page.getInputElementByLabel("Agent office address zip code").disabled).toEqual(false);
   });
 
@@ -247,7 +245,7 @@ describe("Formation - Registered Agent Field", () => {
     );
     expect(page.getInputElementByLabel("Agent office address line1").disabled).toEqual(false);
     expect(page.getInputElementByLabel("Agent office address line2").disabled).toEqual(false);
-    expect(page.getInputElementByLabel("Agent office address municipality").disabled).toEqual(false);
+    expect(page.getInputElementByLabel("Agent office address city").disabled).toEqual(false);
     expect(page.getInputElementByLabel("Agent office address zip code").disabled).toEqual(false);
   });
 
@@ -273,11 +271,11 @@ describe("Formation - Registered Agent Field", () => {
     );
     expect(page.getInputElementByLabel("Agent office address line1").value).toEqual("New Add 123");
     expect(page.getInputElementByLabel("Agent office address line2").value).toEqual("New Add 456");
-    expect(page.getInputElementByLabel("Agent office address municipality").value).toEqual("New Test City");
+    expect(page.getInputElementByLabel("Agent office address city").value).toEqual("New Test City");
     expect(page.getInputElementByLabel("Agent office address zip code").value).toEqual("07002");
     expect(page.getInputElementByLabel("Agent office address line1").disabled).toEqual(false);
     expect(page.getInputElementByLabel("Agent office address line2").disabled).toEqual(false);
-    expect(page.getInputElementByLabel("Agent office address municipality").disabled).toEqual(false);
+    expect(page.getInputElementByLabel("Agent office address city").disabled).toEqual(false);
     expect(page.getInputElementByLabel("Agent office address zip code").disabled).toEqual(false);
   });
 
@@ -398,17 +396,17 @@ describe("Formation - Registered Agent Field", () => {
       );
     });
 
-    it("Agent office address municipality", async () => {
+    it("Agent office address city", async () => {
       const page = await getPageHelper(
         {},
         {
-          agentOfficeAddressMunicipality: undefined,
+          agentOfficeAddressCity: "",
           agentNumberOrManual: "MANUAL_ENTRY",
         }
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.agentOfficeAddressMunicipality.label
+        Config.formation.fields.agentOfficeAddressCity.label
       );
     });
 

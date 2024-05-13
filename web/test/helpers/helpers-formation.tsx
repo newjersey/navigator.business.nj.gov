@@ -113,10 +113,6 @@ export const preparePage = ({
   ];
   initialBusiness.formationData.formationFormData.addressMunicipality &&
     internalMunicipalities.push(initialBusiness.formationData.formationFormData.addressMunicipality);
-  initialBusiness.formationData.formationFormData.agentOfficeAddressMunicipality &&
-    internalMunicipalities.push(
-      initialBusiness.formationData.formationFormData.agentOfficeAddressMunicipality
-    );
 
   const userData = generateUserData({
     user: generateUser(user ?? {}),

@@ -1,5 +1,4 @@
 import { Content } from "@/components/Content";
-import { MunicipalityDropdown } from "@/components/data-fields/MunicipalityDropdown";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { Heading } from "@/components/njwds-extended/Heading";
 import { StateDropdown } from "@/components/StateDropdown";
@@ -7,11 +6,9 @@ import { BusinessFormationTextField } from "@/components/tasks/business-formatio
 import { FormationField } from "@/components/tasks/business-formation/FormationField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Municipality } from "@businessnjgovnavigator/shared";
 import { FormationFields } from "@businessnjgovnavigator/shared/formationData";
 import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext, useEffect } from "react";
@@ -19,7 +16,6 @@ import React, { ReactElement, useContext, useEffect } from "react";
 export const RegisteredAgent = (): ReactElement => {
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
-  const { municipalities } = useContext(MunicipalitiesContext);
   const { userData } = useUserData();
   const { doesFieldHaveError, getFieldErrorLabel, doSomeFieldsHaveError } = useFormationErrors();
   useEffect(
@@ -29,7 +25,7 @@ export const RegisteredAgent = (): ReactElement => {
         agentOfficeAddressLine1,
         agentOfficeAddressLine2,
         agentOfficeAddressZipCode,
-        agentOfficeAddressMunicipality,
+        agentOfficeAddressCity,
         addressLine1,
         addressLine2,
         addressMunicipality,
@@ -40,7 +36,7 @@ export const RegisteredAgent = (): ReactElement => {
         agentUseBusinessAddress &&
         (agentOfficeAddressLine1 !== addressLine1 ||
           agentOfficeAddressLine2 !== addressLine2 ||
-          agentOfficeAddressMunicipality?.name !== addressMunicipality?.name ||
+          agentOfficeAddressCity !== addressMunicipality?.displayName ||
           agentOfficeAddressZipCode !== addressZipCode)
       ) {
         setFormationFormData({
@@ -61,7 +57,7 @@ export const RegisteredAgent = (): ReactElement => {
         "agentEmail",
         "agentOfficeAddressLine1",
         "agentOfficeAddressLine2",
-        "agentOfficeAddressMunicipality",
+        "agentOfficeAddressCity",
         "agentOfficeAddressZipCode",
       ],
       { setToUninteracted: true }
@@ -113,14 +109,14 @@ export const RegisteredAgent = (): ReactElement => {
         ...state.formationFormData,
         agentOfficeAddressLine1: state.formationFormData.addressLine1,
         agentOfficeAddressLine2: state.formationFormData.addressLine2,
-        agentOfficeAddressMunicipality: state.formationFormData.addressMunicipality,
+        agentOfficeAddressCity: state.formationFormData.addressMunicipality?.displayName || "",
         agentOfficeAddressZipCode: state.formationFormData.addressZipCode,
         agentUseBusinessAddress: checked,
       });
       setFieldsInteracted([
         "agentOfficeAddressLine1",
         "agentOfficeAddressLine2",
-        "agentOfficeAddressMunicipality",
+        "agentOfficeAddressCity",
         "agentOfficeAddressZipCode",
       ]);
     } else {
@@ -255,38 +251,19 @@ export const RegisteredAgent = (): ReactElement => {
               </FormationField>
               <WithErrorBar
                 type="DESKTOP-ONLY"
-                hasError={doSomeFieldsHaveError([
-                  "agentOfficeAddressMunicipality",
-                  "agentOfficeAddressZipCode",
-                ])}
+                hasError={doSomeFieldsHaveError(["agentOfficeAddressCity", "agentOfficeAddressZipCode"])}
               >
                 <div className="grid-row grid-gap-1 margin-top-2">
                   <div className="grid-col-12 tablet:grid-col-6">
-                    <WithErrorBar
-                      hasError={doesFieldHaveError("agentOfficeAddressMunicipality")}
-                      type="MOBILE-ONLY"
-                    >
-                      <strong>
-                        <ModifiedContent>
-                          {Config.formation.fields.agentOfficeAddressMunicipality.label}
-                        </ModifiedContent>
-                      </strong>
-                      <FormationField fieldName="agentOfficeAddressMunicipality">
-                        <MunicipalityDropdown
-                          municipalities={municipalities}
-                          fieldName="agentOfficeAddressMunicipality"
-                          error={doesFieldHaveError("agentOfficeAddressMunicipality")}
-                          disabled={shouldBeDisabled("agentOfficeAddressMunicipality", "ADDRESS")}
-                          validationLabel="Error"
-                          value={state.formationFormData.agentOfficeAddressMunicipality}
-                          onSelect={(value: Municipality | undefined): void => {
-                            setFormationFormData({
-                              ...state.formationFormData,
-                              agentOfficeAddressMunicipality: value,
-                            });
-                          }}
-                          onValidation={(): void => setFieldsInteracted(["agentOfficeAddressMunicipality"])}
-                          helperText={Config.formation.fields.agentOfficeAddressMunicipality.error}
+                    <WithErrorBar hasError={doesFieldHaveError("agentOfficeAddressCity")} type="MOBILE-ONLY">
+                      <FormationField fieldName="agentOfficeAddressCity">
+                        <BusinessFormationTextField
+                          label={Config.formation.fields.agentOfficeAddressCity.label}
+                          fieldName="agentOfficeAddressCity"
+                          required={true}
+                          validationText={getFieldErrorLabel("agentOfficeAddressCity")}
+                          disabled={shouldBeDisabled("agentOfficeAddressCity", "ADDRESS")}
+                          errorBarType="NEVER"
                         />
                       </FormationField>
                     </WithErrorBar>

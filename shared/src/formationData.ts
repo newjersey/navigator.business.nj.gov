@@ -139,8 +139,7 @@ export interface FormationFormData extends FormationAddress {
   readonly agentEmail: string;
   readonly agentOfficeAddressLine1: string;
   readonly agentOfficeAddressLine2: string;
-  readonly agentOfficeAddressMunicipality: Municipality | undefined;
-  readonly agentOfficeAddressCity: string | undefined;
+  readonly agentOfficeAddressCity: string;
   readonly agentOfficeAddressZipCode: string;
   readonly agentUseAccountInfo: boolean;
   readonly agentUseBusinessAddress: boolean;
@@ -186,7 +185,6 @@ export type FormationTextField = Exclude<
   | "incorporators"
   | "agentUseAccountInfo"
   | "agentUseBusinessAddress"
-  | "agentOfficeAddressMunicipality"
   | "additionalProvisions"
   | "businessName"
   | "canCreateLimitedPartner"
@@ -276,8 +274,7 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     agentEmail: "",
     agentOfficeAddressLine1: "",
     agentOfficeAddressLine2: "",
-    agentOfficeAddressMunicipality: undefined,
-    agentOfficeAddressCity: undefined,
+    agentOfficeAddressCity: "",
     agentOfficeAddressZipCode: "",
     agentUseAccountInfo: false,
     agentUseBusinessAddress: false,

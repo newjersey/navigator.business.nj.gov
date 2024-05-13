@@ -18,6 +18,39 @@ import {
   NameAvailability,
 } from "@businessnjgovnavigator/shared";
 
+export const onlyHasErrorIfEmpty: FormationFields[] = [
+  "contactPhoneNumber",
+  "agentNumber",
+  "businessTotalStock",
+  "withdrawals",
+  "combinedInvestment",
+  "dissolution",
+  "createLimitedPartnerTerms",
+  "getDistributionTerms",
+  "makeDistributionTerms",
+  "nonprofitBoardMemberQualificationsTerms",
+  "nonprofitBoardMemberRightsTerms",
+  "nonprofitTrusteesMethodTerms",
+  "nonprofitAssetDistributionTerms",
+];
+
+export const onlyHasErrorIfUndefined: FormationFields[] = [
+  "canCreateLimitedPartner",
+  "canGetDistribution",
+  "canMakeDistribution",
+  "addressCountry",
+  "addressState",
+  "willPracticeLaw",
+  "isVeteranNonprofit",
+  "hasNonprofitBoardMembers",
+  "nonprofitBoardMemberQualificationsSpecified",
+  "nonprofitBoardMemberRightsSpecified",
+  "nonprofitTrusteesMethodSpecified",
+  "nonprofitAssetDistributionSpecified",
+  "paymentType",
+  "businessSuffix",
+];
+
 export const getErrorStateForField = (inputParams: {
   field: FieldsForErrorHandling;
   formationFormData: FormationFormData;
@@ -96,41 +129,6 @@ export const getErrorStateForField = (inputParams: {
     return formationFormData.businessLocationType !== "NJ";
   };
 
-  const hasErrorIfEmpty: FormationFields[] = [
-    "businessSuffix",
-    "contactPhoneNumber",
-    "agentNumber",
-    "agentOfficeAddressMunicipality",
-    "businessTotalStock",
-    "withdrawals",
-    "combinedInvestment",
-    "dissolution",
-    "createLimitedPartnerTerms",
-    "getDistributionTerms",
-    "makeDistributionTerms",
-    "paymentType",
-    "nonprofitBoardMemberQualificationsTerms",
-    "nonprofitBoardMemberRightsTerms",
-    "nonprofitTrusteesMethodTerms",
-    "nonprofitAssetDistributionTerms",
-  ];
-
-  const hasErrorIfUndefined: FormationFields[] = [
-    "canCreateLimitedPartner",
-    "canGetDistribution",
-    "canMakeDistribution",
-    "addressState",
-    "addressCountry",
-    "foreignStateOfFormation",
-    "willPracticeLaw",
-    "isVeteranNonprofit",
-    "hasNonprofitBoardMembers",
-    "nonprofitBoardMemberQualificationsSpecified",
-    "nonprofitBoardMemberRightsSpecified",
-    "nonprofitTrusteesMethodSpecified",
-    "nonprofitAssetDistributionSpecified",
-  ];
-
   if (field === "foreignStateOfFormation") {
     return {
       ...errorState,
@@ -139,11 +137,11 @@ export const getErrorStateForField = (inputParams: {
     };
   }
 
-  if (hasErrorIfEmpty.includes(field)) {
+  if (onlyHasErrorIfEmpty.includes(field)) {
     return { ...errorState, hasError: !formationFormData[field] };
   }
 
-  if (hasErrorIfUndefined.includes(field)) {
+  if (onlyHasErrorIfUndefined.includes(field)) {
     return { ...errorState, hasError: formationFormData[field] === undefined };
   }
 
@@ -358,6 +356,10 @@ export const getErrorStateForField = (inputParams: {
       };
     }
     return fieldWithMaxLength({ required: true, maxLen: 50 });
+  }
+
+  if (field === "agentOfficeAddressCity") {
+    return fieldWithMaxLength({ required: true, maxLen: 30 });
   }
 
   return { ...errorState, hasError: false };

@@ -47,7 +47,7 @@ export const getStepForField = (field: FieldsForErrorHandling): FormationStepNam
     case "agentEmail":
     case "agentOfficeAddressLine1":
     case "agentOfficeAddressLine2":
-    case "agentOfficeAddressMunicipality":
+    case "agentOfficeAddressCity":
     case "agentOfficeAddressZipCode":
     case "members":
     case "signers":
