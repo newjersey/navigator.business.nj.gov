@@ -8,4 +8,4 @@ displayname: type-certification
 ---
 A Type Certification confirms the State has approved a ride model or type. The certification ensures the ride meets safety and design standards and is valid for three years. Manufacturers need this certification to sell a new ride to an operator in the state.
 
-If you own or operate a specific ride model or type, it's likely type-certified.If your ride is not type-certified, this usually means the manufacturer did not renew the certification or no longer supports the ride. In that case, you'll need an Individual Approval.
+If you own or operate a specific ride model or type, it's likely type-certified. If your ride is not type-certified, this usually means the manufacturer did not renew the certification or no longer supports the ride. In that case, you'll need an Individual Approval.
