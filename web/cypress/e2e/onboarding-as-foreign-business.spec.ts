@@ -2,7 +2,10 @@ import {
   randomElementFromArray,
   setMobileViewport,
 } from "@businessnjgovnavigator/cypress/support/helpers/helpers";
-import { onOnboardingPageNexusBusiness } from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
+import {
+  onOnboardingPageNexusBusiness,
+  onOnboardingPageRemoteWorkerBusiness,
+} from "@businessnjgovnavigator/cypress/support/page_objects/onboardingPageNew";
 import {
   CarServiceType,
   Industries,
@@ -156,6 +159,51 @@ describe("Onboarding for all industries when out of state nexus business [featur
       onOnboardingPageNexusBusiness.clickNext();
       cy.url().should("include", "dashboard");
       cy.get('[data-testid="header-link-to-profile"]');
+    });
+  });
+
+  describe("Onboarding for out of state remote worker business [feature] [all] [group4]", () => {
+    describe("Desktop", () => {
+      beforeEach(() => {
+        cy.loginByCognitoApi();
+      });
+
+      it("Onboarding for Out of State Remote Worker", () => {
+        cy.url().should("include", "onboarding?page=1");
+        onOnboardingPageRemoteWorkerBusiness.selectBusinessPersonaRadio("FOREIGN");
+        onOnboardingPageRemoteWorkerBusiness.getBusinessPersonaRadio("FOREIGN").should("be.checked");
+        onOnboardingPageRemoteWorkerBusiness.clickNext();
+
+        cy.url().should("include", "onboarding?page=2");
+        onOnboardingPageRemoteWorkerBusiness.selectEmployeesInNJCheckBox();
+        onOnboardingPageRemoteWorkerBusiness.getEmployeesInNJCheckbox().should("be.checked");
+        onOnboardingPageRemoteWorkerBusiness.clickShowMyGuide();
+
+        cy.url().should("include", "dashboard");
+        cy.get('[data-testid="header-link-to-profile"]');
+      });
+    });
+
+    describe("Mobile", () => {
+      beforeEach(() => {
+        setMobileViewport();
+        cy.loginByCognitoApi();
+      });
+
+      it("Onboarding for Out of State Remote Worker", () => {
+        cy.url().should("include", "onboarding?page=1");
+        onOnboardingPageRemoteWorkerBusiness.selectBusinessPersonaRadio("FOREIGN");
+        onOnboardingPageRemoteWorkerBusiness.getBusinessPersonaRadio("FOREIGN").should("be.checked");
+        onOnboardingPageRemoteWorkerBusiness.clickNext();
+
+        cy.url().should("include", "onboarding?page=2");
+        onOnboardingPageRemoteWorkerBusiness.selectEmployeesInNJCheckBox();
+        onOnboardingPageRemoteWorkerBusiness.getEmployeesInNJCheckbox().should("be.checked");
+        onOnboardingPageRemoteWorkerBusiness.clickShowMyGuide();
+
+        cy.url().should("include", "dashboard");
+        cy.get('[data-testid="header-link-to-profile"]');
+      });
     });
   });
 });
