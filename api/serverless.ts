@@ -237,13 +237,22 @@ const serverlessConfiguration: AWS = {
   functions: {},
 };
 
-serverlessConfiguration.custom = {
-  ...serverlessConfiguration.custom,
-  config: {
-    application: "${ssm:/${self:provider.stage}/config/application}",
-    infrastructure: "${ssm:/${self:provider.stage}/config/infrastructure}",
-  },
-};
+serverlessConfiguration.custom =
+  stage === "local"
+    ? {
+        ...serverlessConfiguration.custom,
+        config: {
+          application: "${ssm:/config/application}",
+          infrastructure: "${ssm:/config/infrastructure}",
+        },
+      }
+    : {
+        ...serverlessConfiguration.custom,
+        config: {
+          application: "${ssm:/${self:provider.stage}/config/application}",
+          infrastructure: "${ssm:/config/infrastructure}",
+        },
+      };
 
 serverlessConfiguration.functions = {
   ...serverlessConfiguration.functions,

@@ -22,8 +22,6 @@ Your accountant license will expire every two years.
 - Current mailing address
 - Applicable fees paid
 
-:::callout{ showHeader="true" headerText="" showIcon="true" calloutType="conditional" }
-
-- An updated copy of the renewed accountant license, valid for three years, which will be mailed to your mailing address on file
-
-:::
+> **Once completed, you will have:**
+>
+> - An updated copy of the renewed accountant license, valid for three years, which will be mailed to your mailing address on file
