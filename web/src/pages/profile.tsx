@@ -34,6 +34,7 @@ import { SidebarPageLayout } from "@/components/njwds-layout/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageCircularIndicator } from "@/components/PageCircularIndicator";
 import { DevOnlyResetUserDataButton } from "@/components/profile/DevOnlyResetUserDataButton";
+import { ProfileAddressField } from "@/components/profile/ProfileAddressField";
 import { ProfileDocuments } from "@/components/profile/ProfileDocuments";
 import { ProfileErrorAlert } from "@/components/profile/ProfileErrorAlert";
 import { ProfileEscapeModal } from "@/components/profile/ProfileEscapeModal";
@@ -46,6 +47,7 @@ import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
 import { ProfileTabNav } from "@/components/profile/ProfileTabNav";
 import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
@@ -60,22 +62,38 @@ import { getNextSeoTitle } from "@/lib/domain-logic/getNextSeoTitle";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import { createProfileFieldErrorMap, OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
+import {
+  createEmptyDbaDisplayContent,
+  createProfileFieldErrorMap,
+  OnboardingStatus,
+  profileTabs,
+  ProfileTabs,
+} from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getFlow, useMountEffectWhenDefined, useScrollToPathAnchor } from "@/lib/utils/helpers";
 import {
   Business,
   BusinessPersona,
+  castPublicFilingLegalTypeToFormationType,
+  createEmptyFormationFormData,
   createEmptyProfileData,
+  defaultFormationLegalType,
   determineForeignBusinessType,
   einTaskId,
+  FieldsForErrorHandling,
   ForeignBusinessType,
+  foreignLegalTypePrefix,
+  FormationFormData,
+  FormationLegalType,
   formationTaskId,
+  InputFile,
   LookupLegalStructureById,
   LookupOperatingPhaseById,
   Municipality,
   naicsCodeTaskId,
+  NameAvailability,
   ProfileData,
+  PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
 import { hasCompletedFormation } from "@businessnjgovnavigator/shared/";
 import {
@@ -88,8 +106,7 @@ import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
-import { ReactElement, ReactNode, useContext, useState } from "react";
-
+import { ReactElement, ReactNode, useContext, useMemo, useState } from "react";
 interface Props {
   municipalities: Municipality[];
   CMS_ONLY_businessPersona?: BusinessPersona; // for CMS only
@@ -132,12 +149,62 @@ const ProfilePage = (props: Props): ReactElement => {
 
   useScrollToPathAnchor();
 
+  const [stepIndex, setStepIndex] = useState(0);
+  const [interactedFields, setInteractedFields] = useState<FieldsForErrorHandling[]>([]);
+  const [showResponseAlert, setShowResponseAlert] = useState<boolean>(false);
+  const [hasBeenSubmitted, setHasBeenSubmitted] = useState<boolean>(false);
+  const [businessNameAvailability, setBusinessNameAvailability] = useState<NameAvailability | undefined>(
+    undefined
+  );
+  const [dbaBusinessNameAvailability, setDbaBusinessNameAvailability] = useState<
+    NameAvailability | undefined
+  >(undefined);
+  const [foreignGoodStandingFile, setForeignGoodStandingFile] = useState<InputFile | undefined>(undefined);
+  const [formationFormData, setFormationFormData] = useState<FormationFormData>(
+    createEmptyFormationFormData()
+  );
+  const legalStructureId: FormationLegalType = useMemo(() => {
+    return castPublicFilingLegalTypeToFormationType(
+      (business?.profileData.legalStructureId ?? defaultFormationLegalType) as PublicFilingLegalType,
+      business?.profileData.businessPersona
+    );
+  }, [business?.profileData.businessPersona, business?.profileData.legalStructureId]);
+  const isForeign = useMemo(() => legalStructureId.includes(foreignLegalTypePrefix), [legalStructureId]);
+
   useMountEffectWhenDefined(() => {
+    //console.log("businessType", business?.formationData.formationFormData.businessLocationType);
     if (business) {
       setProfileData(business.profileData);
       setShouldLockFormationFields(hasCompletedFormation(business));
+      setFormationFormData({
+        ...business.formationData.formationFormData,
+        businessLocationType: isForeign
+          ? business.formationData.formationFormData.businessLocationType ?? "US"
+          : "NJ",
+      });
+
+      if (business.formationData.businessNameAvailability) {
+        setBusinessNameAvailability({
+          ...business.formationData.businessNameAvailability,
+        });
+      }
+      if (business.formationData.dbaBusinessNameAvailability) {
+        setDbaBusinessNameAvailability({
+          ...business.formationData.dbaBusinessNameAvailability,
+        });
+      }
     }
   }, business);
+
+  const setFieldsInteracted = (fields: FieldsForErrorHandling[]): void => {
+    setInteractedFields((prevState) => {
+      const prevStateFieldRemoved = prevState.filter((it) => {
+        return !fields.includes(it);
+      });
+
+      return [...prevStateFieldRemoved, ...fields];
+    });
+  };
 
   const formatDate = (date: string): string => {
     if (!date) {
@@ -180,6 +247,8 @@ const ProfilePage = (props: Props): ReactElement => {
         return;
       }
 
+      console.log(JSON.stringify(formationFormData));
+
       const dateOfFormationHasBeenDeleted =
         business.profileData.dateOfFormation !== profileData.dateOfFormation &&
         profileData.dateOfFormation === undefined;
@@ -215,6 +284,8 @@ const ProfilePage = (props: Props): ReactElement => {
       }
 
       updateQueue.queueProfileData(profileData);
+
+      updateQueue.queueFormationFormData(formationFormData);
 
       (async (): Promise<void> => {
         updateQueue
@@ -678,6 +749,8 @@ const ProfilePage = (props: Props): ReactElement => {
           <BusinessName />
         </ProfileField>
 
+        <ProfileAddressField />
+
         <ProfileField
           fieldName="responsibleOwnerName"
           isVisible={shouldShowTradeNameElements()}
@@ -776,7 +849,6 @@ const ProfilePage = (props: Props): ReactElement => {
       </>
     ),
   };
-
   return (
     <ProfileFormContext.Provider value={formContextState}>
       <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
@@ -790,89 +862,114 @@ const ProfilePage = (props: Props): ReactElement => {
             onBack,
           }}
         >
-          <NextSeo title={getNextSeoTitle(config.pagesMetadata.profileTitle)} />
-          <PageSkeleton>
-            <NavBar showSidebar={true} hideMiniRoadmap={true} />
-            <main id="main" data-testid={"main"}>
-              <div className="padding-top-0 desktop:padding-top-3">
-                <ProfileEscapeModal
-                  isOpen={escapeModal}
-                  close={(): void => setEscapeModal(false)}
-                  primaryButtonOnClick={(): void => {
-                    redirect();
-                  }}
-                />
-                <FormationDateDeletionModal
-                  isOpen={isFormationDateDeletionModalOpen}
-                  handleCancel={(): void => setFormationDateDeletionModalOpen(false)}
-                  handleDelete={onSubmit}
-                />
-                <SingleColumnContainer>
-                  {alert && <ProfileSnackbarAlert alert={alert} close={(): void => setAlert(undefined)} />}
-                  <UserDataErrorAlert />
-                </SingleColumnContainer>
-                <div className="margin-top-1 desktop:margin-top-0">
-                  {business === undefined ? (
-                    <PageCircularIndicator />
-                  ) : (
-                    <SidebarPageLayout
-                      divider={false}
-                      outlineBox={false}
-                      stackNav={true}
-                      nonWrappingLeftColumn={true}
-                      titleOverColumns={
-                        <ProfileHeader business={business} isAuthenticated={isAuthenticated === "TRUE"} />
-                      }
-                      navChildren={
-                        <ProfileTabNav
-                          business={business}
-                          businessPersona={businessPersona}
-                          activeTab={profileTab}
-                          setProfileTab={(tab: ProfileTabs): void => {
-                            setProfileTab(tab);
-                          }}
-                        />
-                      }
-                    >
-                      <>
-                        <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
-                          {getElements()}
-                          <div className="margin-top-2">
-                            <ActionBarLayout>
-                              <div className="margin-top-2 mobile-lg:margin-top-0">
-                                <SecondaryButton
-                                  isColor="primary"
-                                  onClick={(): Promise<void> => onBack()}
-                                  dataTestId="back"
-                                >
-                                  {Config.profileDefaults.default.backButtonText}
-                                </SecondaryButton>
-                              </div>
-                              <div>
-                                <div className="mobile-lg:display-inline">
-                                  <PrimaryButton
+          <BusinessFormationContext.Provider
+            value={{
+              state: {
+                stepIndex,
+                formationFormData,
+                businessNameAvailability,
+                dbaBusinessNameAvailability,
+                dbaContent: createEmptyDbaDisplayContent(),
+                showResponseAlert,
+                interactedFields,
+                hasBeenSubmitted,
+                foreignGoodStandingFile,
+                hasSetStateFirstTime: false,
+              },
+              setFormationFormData,
+              setBusinessNameAvailability,
+              setDbaBusinessNameAvailability,
+              setStepIndex,
+              setShowResponseAlert,
+              setFieldsInteracted,
+              setHasBeenSubmitted,
+              setForeignGoodStandingFile,
+            }}
+          >
+            <NextSeo title={getNextSeoTitle(config.pagesMetadata.profileTitle)} />
+            <PageSkeleton>
+              <NavBar showSidebar={true} hideMiniRoadmap={true} />
+              <main id="main" data-testid={"main"}>
+                <div className="padding-top-0 desktop:padding-top-3">
+                  <ProfileEscapeModal
+                    isOpen={escapeModal}
+                    close={(): void => setEscapeModal(false)}
+                    primaryButtonOnClick={(): void => {
+                      redirect();
+                    }}
+                  />
+                  <FormationDateDeletionModal
+                    isOpen={isFormationDateDeletionModalOpen}
+                    handleCancel={(): void => setFormationDateDeletionModalOpen(false)}
+                    handleDelete={onSubmit}
+                  />
+                  <SingleColumnContainer>
+                    {alert && <ProfileSnackbarAlert alert={alert} close={(): void => setAlert(undefined)} />}
+                    <UserDataErrorAlert />
+                  </SingleColumnContainer>
+                  <div className="margin-top-1 desktop:margin-top-0">
+                    {business === undefined ? (
+                      <PageCircularIndicator />
+                    ) : (
+                      <SidebarPageLayout
+                        divider={false}
+                        outlineBox={false}
+                        stackNav={true}
+                        nonWrappingLeftColumn={true}
+                        titleOverColumns={
+                          <ProfileHeader business={business} isAuthenticated={isAuthenticated === "TRUE"} />
+                        }
+                        navChildren={
+                          <ProfileTabNav
+                            business={business}
+                            businessPersona={businessPersona}
+                            activeTab={profileTab}
+                            setProfileTab={(tab: ProfileTabs): void => {
+                              setProfileTab(tab);
+                            }}
+                          />
+                        }
+                      >
+                        <>
+                          <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
+                            {getElements()}
+                            <div className="margin-top-2">
+                              <ActionBarLayout>
+                                <div className="margin-top-2 mobile-lg:margin-top-0">
+                                  <SecondaryButton
                                     isColor="primary"
-                                    isSubmitButton={true}
-                                    onClick={(): void => {}}
-                                    isRightMarginRemoved={true}
-                                    dataTestId="save"
-                                    isLoading={isLoading}
+                                    onClick={(): Promise<void> => onBack()}
+                                    dataTestId="back"
                                   >
-                                    {Config.profileDefaults.default.saveButtonText}
-                                  </PrimaryButton>
+                                    {Config.profileDefaults.default.backButtonText}
+                                  </SecondaryButton>
                                 </div>
-                              </div>
-                            </ActionBarLayout>
-                          </div>
-                          <DevOnlyResetUserDataButton />
-                        </form>
-                      </>
-                    </SidebarPageLayout>
-                  )}
+                                <div>
+                                  <div className="mobile-lg:display-inline">
+                                    <PrimaryButton
+                                      isColor="primary"
+                                      isSubmitButton={true}
+                                      onClick={(): void => {}}
+                                      isRightMarginRemoved={true}
+                                      dataTestId="save"
+                                      isLoading={isLoading}
+                                    >
+                                      {Config.profileDefaults.default.saveButtonText}
+                                    </PrimaryButton>
+                                  </div>
+                                </div>
+                              </ActionBarLayout>
+                            </div>
+                            <DevOnlyResetUserDataButton />
+                          </form>
+                        </>
+                      </SidebarPageLayout>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </main>
-          </PageSkeleton>
+              </main>
+            </PageSkeleton>
+          </BusinessFormationContext.Provider>
         </ProfileDataContext.Provider>
       </MunicipalitiesContext.Provider>
     </ProfileFormContext.Provider>

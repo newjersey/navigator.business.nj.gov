@@ -81,6 +81,48 @@
           "description": "Enter your Last Name, First Name and Middle Initial. The name must match exactly the name listed on your tax confirmation email."
         }
       },
+      "addressLine1": {
+        "default": {
+          "header": "Address Line 1",
+          "errorTextRequired": "Enter your street name and number",
+          "description": ""
+        }
+      },
+      "addressLine2": {
+        "default": {
+          "header": "Address Line 2 (Optional)",
+          "errorTextRequired": "",
+          "description": ""
+        }
+      },
+      "municipality": {
+        "default": {
+          "header": "City",
+          "errorTextRequired": "Enter a City",
+          "description": ""
+        }
+      },
+      "addressState": {
+        "default": {
+          "header": "State",
+          "errorTextRequired": "",
+          "description": ""
+        }
+      },
+      "addressMunicipality": {
+        "default": {
+          "header": "City",
+          "errorTextRequired": "Enter a City",
+          "description": ""
+        }
+      },
+       "zipCode": {
+        "default": {
+          "header": "Zip Code",
+          "errorTextRequired": "Enter a Zip Code",
+          "description": ""
+        }
+      },
       "nexusBusinessName": {
         "default": {
           "editButton": "Edit",

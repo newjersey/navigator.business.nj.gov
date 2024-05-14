@@ -27,6 +27,7 @@ export const BusinessFormationTextField = ({ className, ...props }: Props): Reac
   };
 
   const hasError = doesFieldHaveError(props.fieldName);
+
   return (
     <WithErrorBar className={className ?? ""} hasError={hasError} type={props.errorBarType}>
       {props.label && (
