@@ -1,8 +1,11 @@
 import { BusinessUser } from "./businessUser";
+import { CountriesShortCodes } from "./countries";
 import { createBusinessId } from "./domain-logic/createBusinessId";
 import { createEmptyFormationFormData, FormationData } from "./formationData";
 import { LicenseData } from "./license";
+import { Municipality } from "./municipality";
 import { createEmptyProfileData, ProfileData } from "./profileData";
+import { StateObject } from "./states";
 import { TaxFilingData } from "./taxFiling";
 
 export interface UserData {
@@ -27,6 +30,34 @@ export interface Business {
   readonly preferences: Preferences;
   readonly taxFilingData: TaxFilingData;
   readonly formationData: FormationData;
+  readonly businessAddress: Address;
+}
+
+export interface Address {
+  readonly addressLine1: string;
+  readonly addressLine2: string;
+  readonly addressCity?: string;
+  readonly addressState?: StateObject;
+  readonly addressMunicipality?: Municipality;
+  readonly addressProvince?: string;
+  readonly addressZipCode: string;
+  readonly addressCountry: CountriesShortCodes | undefined;
+  readonly businessLocationType: string|undefined,
+}
+
+export interface AddressTextFields{
+  readonly addressLine1: string;
+  readonly addressLine2: string;
+  readonly addressCity?: string;
+  readonly addressProvince?: string;
+  readonly addressZipCode: string;
+}
+
+export interface AddressValidFields{
+  readonly addressLine1: string;
+  readonly addressLine2: string;
+  readonly addressCity?: string;
+  readonly addressZipCode: string;
 }
 
 export const CURRENT_VERSION = 135;
@@ -68,6 +99,20 @@ export const createEmptyBusiness = (id?: string): Business => {
       dbaBusinessNameAvailability: undefined,
       lastVisitedPageIndex: 0,
     },
+    businessAddress: createEmptyAddress(),
+  };
+};
+
+export const createEmptyAddress = (): Address => {
+  return {
+    addressLine1:"",
+    addressLine2: "",
+    addressCity: "",
+    addressMunicipality: undefined,
+    addressState: undefined,
+    addressZipCode: "",
+    addressCountry: undefined,
+    businessLocationType: undefined
   };
 };
 
@@ -85,6 +130,10 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
     },
   };
 };
+
+export type AddressTextField = keyof AddressTextFields;
+export type AddressFields = keyof Address;
+export type FieldsForAddressErrorHandling = keyof Address;
 
 export const sectionNames = ["PLAN", "START"] as const;
 export type SectionType = (typeof sectionNames)[number];

@@ -1,21 +1,21 @@
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { StateDropdown } from "@/components/StateDropdown";
-import { FormationMunicipality } from "@/components/tasks/business-formation/business/FormationMunicipality";
-import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { AddressContext } from "@/contexts/addressContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { ReactElement, useContext } from "react";
+import {ProfileAddressTextField} from "@/components/tasks/business-formation/ProfileAddressTextField";
+import {useAddressErrors} from "@/lib/data-hooks/useAddressErrors";
+import { ProfileMunicipality } from "@/components/tasks/business-formation/business/ProfileMunicipality";
 
 export const ProfileAddressField = (): ReactElement => {
   const { Config } = useConfig();
-  const { setFormationFormData } = useContext(BusinessFormationContext);
-  const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useFormationErrors();
+  const { setAddressData } = useContext(AddressContext);
+  const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useAddressErrors();
 
   useMountEffect(() => {
-    setFormationFormData((previousState) => {
+    setAddressData((previousState) => {
       return {
         ...previousState,
         addressState: { name: "New Jersey", shortCode: "NJ" },
@@ -28,20 +28,20 @@ export const ProfileAddressField = (): ReactElement => {
     <>
       <>
         <div id={`question-addressLine1`} className="text-field-width-default add-spacing-on-ele-scroll">
-          <BusinessFormationTextField
-            label={Config.formation.fields.addressLine1.label}
+          <ProfileAddressTextField
+            label={Config.profileDefaults.fields.addressLine1.label}
             fieldName="addressLine1"
             required={true}
+            validationText={getFieldErrorLabel("addressLine1")}
             className={"margin-bottom-2"}
             errorBarType="ALWAYS"
-            validationText={getFieldErrorLabel("addressLine1")}
           />
         </div>
 
         <div id={`question-addressLine2`} className="text-field-width-default add-spacing-on-ele-scroll">
-          <BusinessFormationTextField
-            label={Config.formation.fields.addressLine2.label}
-            secondaryLabel={Config.formation.general.optionalLabel}
+          <ProfileAddressTextField
+            label={Config.profileDefaults.fields.addressLine2.label}
+            secondaryLabel={Config.profileDefaults.general.optionalLabel}
             errorBarType="ALWAYS"
             fieldName="addressLine2"
             validationText={getFieldErrorLabel("addressLine2")}
@@ -55,19 +55,19 @@ export const ProfileAddressField = (): ReactElement => {
           <div className="grid-row grid-gap-1">
             <div className="grid-col-12 tablet:grid-col-6">
               <WithErrorBar hasError={doesFieldHaveError("addressMunicipality")} type="MOBILE-ONLY">
-                <span className="text-bold">{Config.formation.fields.addressMunicipality.label}</span>
-                <FormationMunicipality />
+                <span className="text-bold">{Config.profileDefaults.fields.addressMunicipality.label}</span>
+                <ProfileMunicipality />
               </WithErrorBar>
             </div>
             <div className="grid-col-12 tablet:grid-col-5 margin-top-2 tablet:margin-top-0">
               <WithErrorBar
-                hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
+               hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
                 type="MOBILE-ONLY"
               >
                 <div className="grid-row grid-gap-1">
                   <div className="grid-col-2">
                     <strong>
-                      <ModifiedContent>{Config.formation.fields.addressState.label}</ModifiedContent>
+                      <ModifiedContent>{Config.profileDefaults.fields.addressState.label}</ModifiedContent>
                     </strong>
                     <div
                       id={`question-addressState`}
@@ -76,7 +76,7 @@ export const ProfileAddressField = (): ReactElement => {
                       <StateDropdown
                         fieldName="addressState"
                         value={"New Jersey"}
-                        validationText={Config.formation.fields.addressState.error}
+                        validationText={Config.profileDefaults.fields.addressState.error}
                         disabled={true}
                         onSelect={(): void => {}}
                       />
@@ -87,13 +87,12 @@ export const ProfileAddressField = (): ReactElement => {
                       id={`question-addressZipCode`}
                       className="text-field-width-default add-spacing-on-ele-scroll"
                     >
-                      <BusinessFormationTextField
-                        label={Config.formation.fields.addressZipCode.label}
+                      <ProfileAddressTextField
+                        label={Config.profileDefaults.fields.addressZipCode.label}
                         numericProps={{ maxLength: 5 }}
                         required={true}
                         errorBarType="NEVER"
                         fieldName={"addressZipCode"}
-                        validationText={getFieldErrorLabel("addressZipCode")}
                       />
                     </div>
                   </div>

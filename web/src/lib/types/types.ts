@@ -20,7 +20,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { LicenseEventSubtype } from "@businessnjgovnavigator/shared/taxFiling";
-import { Business } from "@businessnjgovnavigator/shared/userData";
+import {Business, FieldsForAddressErrorHandling} from "@businessnjgovnavigator/shared/userData";
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types
@@ -77,6 +77,12 @@ export type DbaStepNames = "Business Name" | "DBA Resolution" | "Authorize Busin
 
 export type FormationFieldErrorState = {
   field: FieldsForErrorHandling;
+  hasError: boolean;
+  label: string;
+};
+
+export type AddressFieldErrorState = {
+  field: FieldsForAddressErrorHandling;
   hasError: boolean;
   label: string;
 };

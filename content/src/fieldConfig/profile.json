@@ -82,46 +82,43 @@
         }
       },
       "addressLine1": {
-        "default": {
-          "header": "Address Line 1",
-          "errorTextRequired": "Enter your street name and number",
-          "description": ""
-        }
+        "label": "Address Line 1",
+        "error": "Enter your business's street name and number."
       },
       "addressLine2": {
-        "default": {
-          "header": "Address Line 2 (Optional)",
-          "errorTextRequired": "",
-          "description": ""
-        }
+        "label": "Address Line 2",
+        "error": ""
       },
-      "municipality": {
-        "default": {
-          "header": "City",
-          "errorTextRequired": "Enter a City",
-          "description": ""
+      "addressCity": {
+        "label": "City",
+        "error": "Enter a city."
+      },
+      "addressProvince": {
+        "label": "Province",
+        "error": "Enter a Province."
+      },
+      "addressZipCode": {
+        "label": "Zip Code",
+        "error": "Enter a NJ Zip Code.",
+        "foreign": {
+          "label": "Postal Code",
+          "errorUS": "Enter a 5 digit Zip Code.",
+          "errorIntl": "Enter a 1 to 11 digit Postal Code."
         }
       },
       "addressState": {
-        "default": {
-          "header": "State",
-          "errorTextRequired": "",
-          "description": ""
-        }
+        "label": "State",
+        "error": "Enter a state."
       },
       "addressMunicipality": {
-        "default": {
-          "header": "City",
-          "errorTextRequired": "Enter a City",
-          "description": ""
-        }
+        "label": "City",
+        "error": "Select a city.",
+        "infoAlert": "**Can't find your city?** Unincorporated places are not listed here. Search for [your official jurisdiction](https://www.nj.gov/nj/gov/county/localities.html) (type in your community's name into the local name field)."
       },
-       "zipCode": {
-        "default": {
-          "header": "Zip Code",
-          "errorTextRequired": "Enter a Zip Code",
-          "description": ""
-        }
+      "general": {
+        "optionalLabel": "(Optional)",
+        "partialAddressErrorText": "Address must be complete.",
+        "maximumLengthErrorText": "${field} must be ${maxLen} characters or fewer."
       },
       "nexusBusinessName": {
         "default": {
@@ -433,6 +430,10 @@
           "description": "Are you looking to start an appraisal management company?"
         }
       }
+    },
+    "general": {
+     "partialAddressErrorText": "Address must be complete.",
+      "maximumLengthErrorText": "${field} must be ${maxLen} characters or fewer."
     },
     "default": {
       "lockedFieldTooltipText": "This information cannot be changed because it was submitted to the NJ Department of Treasury.",

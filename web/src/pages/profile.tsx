@@ -47,7 +47,7 @@ import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
 import { ProfileTabNav } from "@/components/profile/ProfileTabNav";
 import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { AddressContext } from "@/contexts/addressContext";
 import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { NeedsAccountContext } from "@/contexts/needsAccountContext";
@@ -63,7 +63,6 @@ import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBus
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import {
-  createEmptyDbaDisplayContent,
   createProfileFieldErrorMap,
   OnboardingStatus,
   profileTabs,
@@ -72,26 +71,24 @@ import {
 import analytics from "@/lib/utils/analytics";
 import { getFlow, useMountEffectWhenDefined, useScrollToPathAnchor } from "@/lib/utils/helpers";
 import {
+  Address,
   Business,
   BusinessPersona,
-  castPublicFilingLegalTypeToFormationType,
+  castPublicFilingLegalTypeToFormationType, createEmptyAddress,
   createEmptyFormationFormData,
   createEmptyProfileData,
   defaultFormationLegalType,
   determineForeignBusinessType,
-  einTaskId,
-  FieldsForErrorHandling,
+  einTaskId, FieldsForAddressErrorHandling,
   ForeignBusinessType,
   foreignLegalTypePrefix,
   FormationFormData,
   FormationLegalType,
   formationTaskId,
-  InputFile,
   LookupLegalStructureById,
   LookupOperatingPhaseById,
   Municipality,
   naicsCodeTaskId,
-  NameAvailability,
   ProfileData,
   PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
@@ -122,6 +119,10 @@ const ProfilePage = (props: Props): ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [shouldLockFormationFields, setShouldLockFormationFields] = useState<boolean>(false);
   const [isFormationDateDeletionModalOpen, setFormationDateDeletionModalOpen] = useState<boolean>(false);
+
+  const [addressData, setAddressData] = useState<Address>(createEmptyAddress());
+  const [interactedFields, setInteractedFields] = useState<FieldsForAddressErrorHandling[]>([]);
+
   const config = getMergedConfig();
   const userDataFromHook = useUserData();
   const updateQueue = userDataFromHook.updateQueue;
@@ -141,6 +142,21 @@ const ProfilePage = (props: Props): ReactElement => {
     getInvalidFieldIds,
   } = useFormContextHelper(createProfileFieldErrorMap(), props.CMS_ONLY_tab ?? profileTabs[0]);
 
+  const setFieldsInteracted = (
+    fields: FieldsForAddressErrorHandling[],
+    config?: { setToUninteracted: boolean }
+  ): void => {
+    setInteractedFields((prevState) => {
+      const prevStateFieldRemoved = prevState.filter((it) => {
+        return !fields.includes(it);
+      });
+      if (config?.setToUninteracted) {
+        return [...prevStateFieldRemoved];
+      }
+      return [...prevStateFieldRemoved, ...fields];
+    });
+  };
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const redirect = (params?: { [key: string]: any }, routerType = router.push): Promise<boolean> => {
     const urlParams = params ? `?${new URLSearchParams(params).toString()}` : "";
@@ -149,17 +165,6 @@ const ProfilePage = (props: Props): ReactElement => {
 
   useScrollToPathAnchor();
 
-  const [stepIndex, setStepIndex] = useState(0);
-  const [interactedFields, setInteractedFields] = useState<FieldsForErrorHandling[]>([]);
-  const [showResponseAlert, setShowResponseAlert] = useState<boolean>(false);
-  const [hasBeenSubmitted, setHasBeenSubmitted] = useState<boolean>(false);
-  const [businessNameAvailability, setBusinessNameAvailability] = useState<NameAvailability | undefined>(
-    undefined
-  );
-  const [dbaBusinessNameAvailability, setDbaBusinessNameAvailability] = useState<
-    NameAvailability | undefined
-  >(undefined);
-  const [foreignGoodStandingFile, setForeignGoodStandingFile] = useState<InputFile | undefined>(undefined);
   const [formationFormData, setFormationFormData] = useState<FormationFormData>(
     createEmptyFormationFormData()
   );
@@ -179,32 +184,20 @@ const ProfilePage = (props: Props): ReactElement => {
       setFormationFormData({
         ...business.formationData.formationFormData,
         businessLocationType: isForeign
-          ? business.formationData.formationFormData.businessLocationType ?? "US"
+          ? addressData.businessLocationType ?? "US"
           : "NJ",
+        addressLine1: addressData.addressLine1,
+        addressLine2: addressData.addressLine2,
+        addressCity: addressData.addressCity,
+        addressMunicipality: addressData.addressMunicipality,
+        addressState: addressData.addressState,
+        addressZipCode: addressData.addressZipCode,
+        addressCountry: addressData.addressCountry,
+        addressProvince: addressData.addressProvince
       });
-
-      if (business.formationData.businessNameAvailability) {
-        setBusinessNameAvailability({
-          ...business.formationData.businessNameAvailability,
-        });
-      }
-      if (business.formationData.dbaBusinessNameAvailability) {
-        setDbaBusinessNameAvailability({
-          ...business.formationData.dbaBusinessNameAvailability,
-        });
-      }
     }
   }, business);
 
-  const setFieldsInteracted = (fields: FieldsForErrorHandling[]): void => {
-    setInteractedFields((prevState) => {
-      const prevStateFieldRemoved = prevState.filter((it) => {
-        return !fields.includes(it);
-      });
-
-      return [...prevStateFieldRemoved, ...fields];
-    });
-  };
 
   const formatDate = (date: string): string => {
     if (!date) {
@@ -862,28 +855,14 @@ const ProfilePage = (props: Props): ReactElement => {
             onBack,
           }}
         >
-          <BusinessFormationContext.Provider
+          <AddressContext.Provider
             value={{
               state: {
-                stepIndex,
-                formationFormData,
-                businessNameAvailability,
-                dbaBusinessNameAvailability,
-                dbaContent: createEmptyDbaDisplayContent(),
-                showResponseAlert,
-                interactedFields,
-                hasBeenSubmitted,
-                foreignGoodStandingFile,
-                hasSetStateFirstTime: false,
+                addressData: addressData,
+                interactedFields:interactedFields
               },
-              setFormationFormData,
-              setBusinessNameAvailability,
-              setDbaBusinessNameAvailability,
-              setStepIndex,
-              setShowResponseAlert,
+              setAddressData,
               setFieldsInteracted,
-              setHasBeenSubmitted,
-              setForeignGoodStandingFile,
             }}
           >
             <NextSeo title={getNextSeoTitle(config.pagesMetadata.profileTitle)} />
@@ -969,7 +948,7 @@ const ProfilePage = (props: Props): ReactElement => {
                 </div>
               </main>
             </PageSkeleton>
-          </BusinessFormationContext.Provider>
+          </AddressContext.Provider>
         </ProfileDataContext.Provider>
       </MunicipalitiesContext.Provider>
     </ProfileFormContext.Provider>
