@@ -6,7 +6,7 @@ header: Carnival or Amusement Ride
 slug: carnival-amusement-ride
 displayname: carnival-amusement-ride
 ---
-A carnival or amusement ride is any mechanical device or structure designed to thrill and excite passengers. This type of ride carries or conveys passengers along a fixed or restricted route. The ride can be passenger-propelled or gravity-propelled. The ride usually operates in an amusement park or water park.
+A carnival or amusement ride is any mechanical device or structure designed to thrill and excite passengers. This type of ride transports passengers along a set route. The ride can be passenger-propelled or gravity-propelled. The ride usually operates in an amusement park or water park.
 
 Types of carnival or amusement rides include:
 
