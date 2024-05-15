@@ -28,7 +28,6 @@ module.exports = withBundleAnalyzer({
     SHOW_DISABLED_INDUSTRIES: process.env.SHOW_DISABLED_INDUSTRIES ?? "false",
     DISABLE_GTM: process.env.DISABLE_GTM,
     OUTAGE_ALERT_CONFIG_URL: process.env.OUTAGE_ALERT_CONFIG_URL,
-    FEATURE_ELEVATOR_OWNING_BUSINESS: process.env.FEATURE_ELEVATOR_OWNING_BUSINESS ?? "false",
   },
   staticPageGenerationTimeout: 120,
   webpack: (config) => {
