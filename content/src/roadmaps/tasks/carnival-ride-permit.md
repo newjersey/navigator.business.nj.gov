@@ -18,6 +18,8 @@ webflowType: object-vehicle
 ---
 Apply for a ride permit at least 30 days from your first day of operation. The permit application process includes a ride inspection.
 
+---
+
 ## New Permit Application Requirements
 
 * Business name
