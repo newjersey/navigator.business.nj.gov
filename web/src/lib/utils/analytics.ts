@@ -1210,6 +1210,54 @@ export default {
         },
       },
     },
+    task_elevator_registration: {
+      click: {
+        elevator_registration_button_click_register: () => {
+          eventRunner.track({
+            event: "outbound_link_clicks",
+            legacy_event_category: "elevator_registration_button_click_register",
+            legacy_event_action: "click",
+          });
+        },
+        elevator_registration_button_click_update: () => {
+          eventRunner.track({
+            event: "task_tab_continue_button_clicks",
+            legacy_event_category: "elevator_registration_button_click_update",
+            legacy_event_action: "click",
+          });
+        },
+        check_my_elevator_application_status_tab_click: () => {
+          eventRunner.track({
+            event: "task_tab_clicked",
+            legacy_event_category: "check_my_elevator_application_status_tab_click",
+            legacy_event_action: "click",
+          });
+        },
+        view_my_violation_note_button_click: () => {
+          eventRunner.track({
+            event: "outbound_link_clicks",
+            legacy_event_category: "view_my_violation_note_button_click",
+            legacy_event_action: "click",
+          });
+        },
+      },
+      submit: {
+        elevator_registration_form_submission: () => {
+          eventRunner.track({
+            event: "form_submits",
+            legacy_event_category: "elevator_registration_form_submission",
+            legacy_event_action: "submit",
+          });
+        },
+        elevator_registration_form_submission_failed: () => {
+          eventRunner.track({
+            event: "form_submits",
+            legacy_event_category: "elevator_registration_form_submission_failed",
+            legacy_event_action: "submit",
+          });
+        },
+      },
+    },
     account_menu_my_profile: {
       click: {
         go_to_profile_screen: () => {
