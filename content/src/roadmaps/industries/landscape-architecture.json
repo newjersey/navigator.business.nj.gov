@@ -45,7 +45,9 @@
     {
       "step": 4,
       "weight": 1,
-      "task": "search-licenses"
+      "task": "search-licenses",
+      "licenseTask": "landscape-architect-license",
+      "required": true
     }
   ],
   "name": "Landscape Architecture",
