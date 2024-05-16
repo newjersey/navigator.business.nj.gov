@@ -20,7 +20,7 @@ webflowType: individual-license
 ---
 ## Eligibility Criteria
 - Be at least 18 years old
-- A professional degree in landscape architecture from a college or university with a program accredited by the Landscape Architectural - --Accreditation Board (LAAB)
+- A professional degree in landscape architecture from a college or university with a program accredited by the Landscape Architectural Accreditation Board (LAAB)
 - Four years of practical landscape architectural work experience (after completing the educational requirement), with at least two years of full-time supervised work under a certified or licensed professional
 
 In addition, you will need to contact the Council of Landscape Architectural Registration Boards (CLARB) to have the Council Record forwarded to the New Jersey State Board of Architects. If you don’t have a CLARB Council Record, send your college transcripts, five references, and verification of License with UNE/LARE Exam grades to the Board of Architects.
