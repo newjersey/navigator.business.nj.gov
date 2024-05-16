@@ -125,7 +125,13 @@ export type LegacyEventCategory =
   | "skip_to_main_content_button"
   | "business_formation_help_button"
   | "my_account_link"
-  | "business.nj.gov_link";
+  | "business.nj.gov_link"
+  | "elevator_registration_button_click_register"
+  | "elevator_registration_button_click_update"
+  | "check_my_elevator_application_status_tab_click"
+  | "elevator_registration_form_submission"
+  | "elevator_registration_form_submission_failed"
+  | "view_my_violation_note_button_click";
 
 export type LegacyEventAction =
   | "click"

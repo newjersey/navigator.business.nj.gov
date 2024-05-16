@@ -1,5 +1,6 @@
 import { Icon } from "@/components/njwds/Icon";
 import { getMergedConfig } from "@/contexts/configContext";
+import analytics from "@/lib/utils/analytics";
 import { openInNewTab } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 
@@ -12,6 +13,7 @@ export const ElevatorViolationsCard = (): ReactElement => {
         <button
           className={"bg-error-dark radius-md usa-button padding-x-2"}
           onClick={() => {
+            analytics.event.task_elevator_registration.click.view_my_violation_note_button_click();
             openInNewTab(config.elevatorViolationsCard.violationNoticeCTALink);
           }}
         >

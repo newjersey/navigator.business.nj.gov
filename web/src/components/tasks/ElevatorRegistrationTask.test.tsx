@@ -1,6 +1,7 @@
 import { ElevatorRegistrationTask } from "@/components/tasks/ElevatorRegistrationTask";
 import { HousingMunicipalitiesContext } from "@/contexts/housingMunicipalitiesContext";
 import * as api from "@/lib/api-client/apiClient";
+import analyticsBase from "@/lib/utils/analytics-base";
 import { generateTask } from "@/test/factories";
 import {
   generateElevatorSafetyRegistration,
@@ -13,6 +14,14 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   checkElevatorRegistrationStatus: jest.fn(),
 }));
 const mockApi = api as jest.Mocked<typeof api>;
+
+jest.mock("@/lib/utils/analytics-base", () => ({
+  sendEvent: jest.fn(),
+  userUpdate: jest.fn(),
+  context: { calendar_view: undefined },
+}));
+
+const mockAnalyticsBase = analyticsBase as jest.Mocked<typeof analyticsBase>;
 
 describe("<ElevatorRegistrationTask />", () => {
   const task = generateTask({});
@@ -38,6 +47,51 @@ describe("<ElevatorRegistrationTask />", () => {
       renderTask();
       expect(screen.getByText(task.contentMd)).toBeInTheDocument();
     });
+
+    it("has CTA that can be clicked", () => {
+      renderTask();
+      fireEvent.click(screen.getByTestId("cta-primary"));
+
+      expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          event: "outbound_link_clicks",
+          legacy_event_category: "elevator_registration_button_click_register",
+          legacy_event_action: "click",
+        })
+      );
+    });
+
+    it("can get to second tab by clicking tab", () => {
+      renderTask();
+      expect(screen.queryByTestId("address-1")).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId("check-status-tab"));
+      expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          event: "task_tab_clicked",
+          legacy_event_category: "check_my_elevator_application_status_tab_click",
+          legacy_event_action: "click",
+        })
+      );
+
+      expect(screen.getByTestId("address-1")).toBeInTheDocument();
+    });
+
+    it("can get to second tab by clicking secondary button", () => {
+      renderTask();
+      expect(screen.queryByTestId("address-1")).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId("cta-secondary"));
+      expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          event: "task_tab_continue_button_clicks",
+          legacy_event_category: "elevator_registration_button_click_update",
+          legacy_event_action: "click",
+        })
+      );
+
+      expect(screen.getByTestId("address-1")).toBeInTheDocument();
+    });
   });
 
   describe("check status tab", () => {
@@ -46,6 +100,22 @@ describe("<ElevatorRegistrationTask />", () => {
       fireEvent.click(screen.getByTestId("cta-secondary"));
       expect(screen.queryByTestId("error-alert-FIELDS_REQUIRED")).not.toBeInTheDocument();
       fireEvent.submit(screen.getByTestId("check-status-submit"));
+
+      expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          event: "form_submits",
+          legacy_event_category: "elevator_registration_form_submission",
+          legacy_event_action: "submit",
+        })
+      );
+      expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          event: "form_submits",
+          legacy_event_category: "elevator_registration_form_submission_failed",
+          legacy_event_action: "submit",
+        })
+      );
+
       await waitFor(() => {
         expect(screen.getByTestId("error-alert-FIELDS_REQUIRED")).toBeInTheDocument();
       });
@@ -62,6 +132,15 @@ describe("<ElevatorRegistrationTask />", () => {
       });
       mockApi.checkElevatorRegistrationStatus.mockResolvedValue(noPropertyInterestResponse);
       fireEvent.submit(screen.getByTestId("check-status-submit"));
+
+      expect(mockAnalyticsBase.sendEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          event: "form_submits",
+          legacy_event_category: "elevator_registration_form_submission",
+          legacy_event_action: "submit",
+        })
+      );
+
       await waitFor(() => {
         expect(screen.getByTestId("error-alert-NO_PROPERTY_INTEREST_FOUND")).toBeInTheDocument();
       });

@@ -9,6 +9,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { ElevatorRegistrationSearchError, Task } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 import {
   ElevatorSafetyAddress,
@@ -42,6 +43,7 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const onSelectTab = (event: React.SyntheticEvent, newValue: string): void => {
+    analytics.event.task_elevator_registration.click.check_my_elevator_application_status_tab_click();
     const index = Number.parseInt(newValue);
     setTabIndex(index);
   };
@@ -78,6 +80,7 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
           setIsLoading(false);
         });
     } else {
+      analytics.event.task_elevator_registration.submit.elevator_registration_form_submission_failed();
       setError("FIELDS_REQUIRED");
       return;
     }
@@ -108,11 +111,13 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
                   value="0"
                   sx={tabStyle}
                   label={Config.elevatorRegistrationSearchTask.registrationTab1Text}
+                  data-testid={"start-application-tab"}
                 />
                 <Tab
                   value="1"
                   sx={tabStyle}
                   label={Config.elevatorRegistrationSearchTask.registrationTab2Text}
+                  data-testid={"check-status-tab"}
                 />
               </TabList>
             </Box>
@@ -125,7 +130,9 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
               <div className="flex flex-column margin-top-4 margin-bottom-1">
                 <a href={callToActionLink} target="_blank" rel="noreferrer noopener">
                   <button
-                    onClick={(): void => {}}
+                    onClick={(): void => {
+                      analytics.event.task_elevator_registration.click.elevator_registration_button_click_register();
+                    }}
                     className="usa-button width-100 margin-bottom-2"
                     data-testid="cta-primary"
                   >
@@ -136,6 +143,7 @@ export const ElevatorRegistrationTask = (props: Props): ReactElement => {
                 </a>
                 <button
                   onClick={(): void => {
+                    analytics.event.task_elevator_registration.click.elevator_registration_button_click_update();
                     setTabIndex(STATUS_TAB_INDEX);
                   }}
                   className="usa-button usa-button--outline width-100"
