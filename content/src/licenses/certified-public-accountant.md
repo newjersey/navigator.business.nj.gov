@@ -5,8 +5,12 @@ summaryDescriptionMd: Your accounting firm registration will expire every three 
 callToActionLink: https://newjersey.mylicense.com/eGov/Login
 callToActionText: Renew My Registration
 ---
+:::infoAlert
+If you renew your accounting firm registration within the 30-day late renewal period, you will have to pay a late renewal fee charge.
+:::
 Your accounting firm registration will expire every three years.
-- - -
+
+- - - 
 ## Application Requirements
 
 - Business name

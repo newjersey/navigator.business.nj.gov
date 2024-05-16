@@ -9,6 +9,11 @@
       "id": "multiple-dwelling-register",
       "questionText": "Do you plan to own a multiple dwelling, such as an apartment or condominium complex?",
       "addOn": "multiple-dwelling-registration"
+    },
+    {
+      "id": "hotel-register",
+      "questionText": "Do you plan to own a hotel, motel, or guesthouse with 10 rooms or more? ",
+      "addOn": "lodging-hotel-registration"
     }
   ]
 }

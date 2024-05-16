@@ -2,24 +2,20 @@
 notesMd: "[Muni planning
   doc](https://docs.google.com/document/d/1wqFrL2aR2ZI9MvCsp4orFJE2A6sn_oa5YOFQ\
   oW2uKYE/edit?usp=sharing)"
-webflowId: "66392fd83f59a87b56020961"
-id: hotel-registration
-filename: hotel-registration
-displayname: hotel-registration
-urlSlug: hotel-registration
-name: Register Your Hotel, Motel, or Guesthouse
-webflowName: "Hospitality: Hotel/Motel Registration"
 summaryDescriptionMd: >
   If you own a newly built hotel, motel, or guesthouse with ten rooms or more,
   you must register it with the State. If you are the new owner of an existing
   building, you must update the current registration.
-industryId:
-  - lodging
-callToActionText: Register My Hotel, Motel, or Guesthouse
+urlSlug: hotel-motel-registration
+filename: hotel-motel-registration
+displayname: hotel-motel-registration
+name: Register Your Hotel, Motel, or Guesthouse
+id: hotel-motel-registration
 callToActionLink: https://njdcaportal.dynamics365portals.us/ultra-bhi-home/
+callToActionText: Register My Hotel, Motel, or Guesthouse
+industryId: lodging
 agencyId: nj-community-affairs
 agencyAdditionalContext: Bureau of Housing Inspection
-divisionPhone: (609) 633-6216
 ---
 ## Application Requirements
 
