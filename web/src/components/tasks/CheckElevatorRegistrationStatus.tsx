@@ -4,6 +4,7 @@ import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ElevatorRegistrationSearchError } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { toProperCase } from "@businessnjgovnavigator/shared";
 import { ElevatorSafetyAddress } from "@businessnjgovnavigator/shared/elevatorSafety";
 import { HousingMunicipality } from "@businessnjgovnavigator/shared/housing";
@@ -87,6 +88,7 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
       };
       updateQueue?.queueProfileData(profileData).update();
     }
+    analytics.event.task_elevator_registration.submit.elevator_registration_form_submission();
     props.onSubmit({
       address1: formValues.address1,
       municipalityExternalId: selectedMunicipality?.id || "",
@@ -111,6 +113,7 @@ export const CheckElevatorRegistrationStatus = (props: Props): ReactElement => {
     if (!props.error) {
       return <></>;
     }
+
     return (
       <Alert dataTestid={`error-alert-${props.error}`} variant="error">
         {ElevatorSearchErrorLookup[props.error]}
