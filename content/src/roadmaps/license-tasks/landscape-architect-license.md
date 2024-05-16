@@ -10,7 +10,7 @@ summaryDescriptionMd: "You need a landscape architect license to practice
   state. "
 formName: Initial Application for Licensure as a Landscape Architect
 industryId:
-  - architecture
+  - landscape-architecture
 callToActionText: Apply for My Landscape Architect License
 callToActionLink: https://www.njconsumeraffairs.gov/land/Pages/applications.aspx
 agencyId: nj-consumer-affairs
